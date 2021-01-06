@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card } from './Atoms/Card';
+import { Card } from './Card';
 export default {
-  title: 'Example/Card',
+  title: 'Card',
   component: Card,
 };
 const Template = (args) => <Card {...args} />;
