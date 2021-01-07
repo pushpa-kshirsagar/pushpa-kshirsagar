@@ -1,6 +1,6 @@
 import logo from './logo.svg';
-import './App.css';
-import Card from './Atoms/Card/Card'
+import HeaderCard from './Atoms/HeaderCard/HeaderCard';
+import Card from './Atoms/Card/Card';
 function App() {
   return (
     <div className="App">
@@ -17,6 +17,20 @@ function App() {
           Learn React
         </a>
       </header> */}
+      <HeaderCard
+        headertype={'midddle'}
+        label={'dashboard'}
+        primaryheaderbadge={'distinct'}
+        secondaryheaderbadge={'active'}
+        thirdheaderbadge={'suspended'}
+      />
+      <HeaderCard
+        headertype={'left'}
+        label={'dashboard'}
+        primaryheaderbadge={'distinct'}
+        secondaryheaderbadge={'active'}
+        thirdheaderbadge={'suspended'}
+      />
       <Card/>
     </div>
   );
