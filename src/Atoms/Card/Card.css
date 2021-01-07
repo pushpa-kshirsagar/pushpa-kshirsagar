@@ -1,0 +1,41 @@
+.userCardHeaderContainer {
+  flex: 11
+}
+.iconBox{
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content: center;
+  /* "& button":{
+    height:'50px'
+  } */
+}
+.iconBox button{
+  height:50px
+}
+.assesseesContainer{
+  display: flex;
+  padding: 5px 5px 5px 5px;
+  align-items: center;
+  background-color: #00AFFF !important;
+  height:50px;
+  border-radius:0;
+}
+
+.leftPanel{
+  flex: 6;
+  margin: 0 1px;
+  width:100%;
+  }
+ .iconsBarDefault{
+    color: #FFFFFF;
+    font-size: 2rem;
+    cursor:pointer;
+}
+.content{
+  width: 100%;
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  margin-top: 74px;
+}
