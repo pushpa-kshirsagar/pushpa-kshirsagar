@@ -7,8 +7,7 @@ import Button from '@material-ui/core/Button';
 import Person from '@material-ui/icons/Person';
 
 import './Card.css';
-const Card = (props) => {
-  console.log(props);
+const PlaneCard = (props) => {
   const { firstName = 'abxs' } = props;
   const { otherNames = 'abxs' } = props;
   const { lastName = 'abxs' } = props;
@@ -31,4 +30,4 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+export default PlaneCard;

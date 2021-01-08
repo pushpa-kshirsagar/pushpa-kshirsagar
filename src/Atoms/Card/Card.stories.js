@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
 export default {
-  title: 'Card',
+  title: 'Design System/Atoms/Card',
   component: Card,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -9,9 +9,12 @@ export default {
 };
 const Template = (args) => <Card {...args} />;
 
-export const AssesseeCard = Template.bind({});
-AssesseeCard.args = {
+export const OtherCard = Template.bind({});
+OtherCard.args = {
   primary: true,
-  label: 'dashboard',
 };
 
+export const PlaneCard = Template.bind({});
+PlaneCard.args = {
+  primary: true,
+};
