@@ -1,17 +1,21 @@
 import React from 'react';
-import Card from '../Card/Card';
+import { Label } from './Labels';
+
 export default {
   title: 'Design System/Atoms/Lables',
-  component: Card,
+  component: Label,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    color: { control: 'color' },
   },
 };
-const Template = (args) => <Card {...args} />;
+const Template = (args) => <Label {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  label: 'dashboard',
+export const Labels = Template.bind({});
+Labels.args = {
+  alignment: 'left',
+  className: '',
+  size: 'md',
+  innerText: 'Demo Text',
+  color: '#000000',
+  isBatch: false
 };
-
