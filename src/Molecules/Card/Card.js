@@ -30,9 +30,7 @@ const PlaneCard = (props) => {
             </Badge>
           </div>
           <div className={'iguru-iconbox'}>
-          <IconButton>
-                <Notifications />
-              </IconButton>
+          
           </div>
         </div>
       </Paper>
