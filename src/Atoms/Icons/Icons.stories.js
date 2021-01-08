@@ -1,16 +1,16 @@
 import React from 'react';
-import Card from '../Card/Card';
+import Icons from './Icons';
 export default {
   title: 'Design System/Atoms/Icons',
-  component: Card,
+  component: Icons,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
 };
-const Template = (args) => <Card {...args} />;
+const Template = (args) => <Icons {...args} />;
 
-export const Icons = Template.bind({});
-Icons.args = {
+export const AllIcons = Template.bind({});
+AllIcons.args = {
   primary: true,
   label: 'dashboard',
 };
