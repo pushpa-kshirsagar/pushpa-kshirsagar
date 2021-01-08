@@ -9,8 +9,8 @@ export default {
 };
 const Template = (args) => <Card {...args} />;
 
-export const Lables = Template.bind({});
-Lables.args = {
+export const Primary = Template.bind({});
+Primary.args = {
   primary: true,
   label: 'dashboard',
 };
