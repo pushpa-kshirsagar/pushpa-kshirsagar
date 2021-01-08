@@ -1,0 +1,15 @@
+.iguru-icons{
+  padding: 2rem;
+  text-align: center;
+}
+.iguru-icons-wid-hei{
+  width: 3rem !important;
+  height: 3rem !important;
+  color:#0000008a
+}
+.iguru-icon-lbfnt{
+  font-size: 1rem;
+}
+.iguru-icon-opacity{
+  opacity:0.5;
+}

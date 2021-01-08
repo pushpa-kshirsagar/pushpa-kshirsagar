@@ -1,10 +1,9 @@
 import logo from './logo.svg';
-import './App.css';
-
+import Card from './Molecules/Card/Card';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -16,7 +15,22 @@ function App() {
           rel="noopener noreferrer">
           Learn React
         </a>
-      </header>
+      </header> */}
+      {/* <HeaderCard
+        headertype={'midddle'}
+        label={'dashboard'}
+        primaryheaderbadge={'distinct'}
+        secondaryheaderbadge={'active'}
+        thirdheaderbadge={'suspended'}
+      />
+      <HeaderCard
+        headertype={'left'}
+        label={'dashboard'}
+        primaryheaderbadge={'distinct'}
+        secondaryheaderbadge={'active'}
+        thirdheaderbadge={'suspended'}
+      /> */}
+      <Card/>
     </div>
   );
 }
