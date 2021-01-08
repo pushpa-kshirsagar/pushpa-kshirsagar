@@ -8,14 +8,14 @@ export const Label = (props) => {
     size = 'md',
     innerText = 'Demo Text',
     color = '#000000',
-    isBatch = false,
+    isBadge = false,
   } = props;
   const style = {
     color: color,
   };
 
   return (
-    <div style={style} className={isBatch ? 'batch-container' : 'text-container'}>
+    <div style={style} className={isBadge ? 'batch-container' : 'text-container'}>
       <p style={style} className={`${className} text-style text-size-${size}`}>
         {innerText}
       </p>
@@ -28,7 +28,7 @@ Label.propTypes = {
   className: PropTypes.string,
   innerText: PropTypes.string,
   color: PropTypes.string,
-  isBatch: PropTypes.bool,
+  isBadge: PropTypes.bool,
 };
 
 Label.defaultProps = {
@@ -36,5 +36,5 @@ Label.defaultProps = {
   size: 'md',
   innerText: 'Demo Text',
   color: '#000000',
-  isBatch: false,
+  isBadge: false,
 };

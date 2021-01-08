@@ -17,5 +17,5 @@ Labels.args = {
   size: 'md',
   innerText: 'Demo Text',
   color: '#000000',
-  isBatch: false
+  isBadge: false
 };
