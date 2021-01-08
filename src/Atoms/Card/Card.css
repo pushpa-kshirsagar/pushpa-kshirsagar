@@ -1,0 +1,129 @@
+.iguru-dashboardCardTop{
+  background-color: #fff;
+  display:flex;
+  cursor: pointer;
+  color:#808080;
+  height: 50px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  
+}
+.iguru-dashboardCardTop :hover{
+  background-color:#F2F2F2
+}
+.iguru-cardContentMidPanel{
+  display:inline-block;
+  flex: 4;
+  text-align: left;
+  height:50px;
+  font-size: 1.6rem;
+  overflow:hidden;
+}
+.iguru-heightInherit{
+  height:inherit;
+}
+.midPaneInformation{
+  color: rgba(0, 0, 0, 0.87);
+    width: inherit;
+    border: 0;
+    margin: 0;
+    height: 30px !important;
+    padding: 7px 0 6px;
+    display: flex;
+    font-size: 1.6rem;
+    min-width: 0;
+    flex-grow: 1;
+    background: none;
+    align-items: center;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+  }
+  .midphgt{
+    height:50px !important;
+  }
+  .imageNA{
+    font-size:4rem;
+    background-color:#E5E5E5 !important;
+    color:#fff;
+}
+  .midPaneInformation span{
+    width: inherit;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: normal;
+    text-overflow: ellipsis;
+  }
+  .assesseTitleEllipsis{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inherit;
+}
+.aliasmiddle{
+  height: 50px;
+  display: flex !important;
+}
+.midPaneLabel{
+  color: rgba(0, 0, 0, 0.54);
+    width: calc(100% - 6px);
+    padding: 0;
+    overflow: hidden;
+    font-size: 1.2rem;
+    transform: translate(0, 0.5px) scale(1);
+    line-height: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.unitFlex{
+  flex: 1;
+  display:flex;
+  justify-content:center;
+}
+.notificationIcon button{
+      font-size:2.4rem;
+      color:#0000008a;
+}
+.notificationIcon svg{
+  width:20px;
+  height:20px;
+  color:#0000008a;
+}
+.badgeBox span{
+      top:-3;
+      font-size:1rem;
+      color:rgba(0, 0, 0, 0.87);
+      right:6;
+}
+.dashboardImage{
+  display: flex;
+  flex: 1;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+button: {
+  'min-width': 0,
+  'font-size': '1.6rem'
+}
+.iconsFooterDefault{
+  color: rgba(0, 0, 0, 0.87);
+  background-color: transparent;
+  box-sizing:border-box;
+}
+.unAvailable{
+  background:#fff !important;
+  color:#d1bfbf8a;
+  box-shadow:0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important;
+  
+}
+.unAvailable label{
+  color:#d1bfbf8a;
+  }
+  .unAvailable hover{
+    background:#fff;
+  color:#d1bfbf8a;
+  }
+
+  .svgRootSize{
+    font-size:unset;
+    color:#fff;
+}
