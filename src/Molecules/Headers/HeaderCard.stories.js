@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderCard from './HeaderCard';
 export default {
-  title: 'HeaderCard',
+  title: 'Design System/Molecules/Headers',
   component: HeaderCard,
   argTypes: {
     backgroundColor: { control: 'color' },
