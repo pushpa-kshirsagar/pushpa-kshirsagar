@@ -10,19 +10,20 @@ import Clear from '@material-ui/icons/Clear';
 
 import './HeaderCard.css';
 const HeaderCard = (props) => {
-  const { label = 'dashboard' } = props;
-  const { primaryheaderbadge = '' } = props;
-  const { labelBadgeBasic= '' } = props;
-  const { thirdheaderbadge = '' } = props;
-  const { forthheaderbadge = '' } = props;
-  const { headertype = '' } = props;
+  const {
+    label = 'dashboard',
+    lableBadgeCore = '',
+    lableBadgePrimary = '',
+    lableBadgeSecondary = '',
+  } = props;
+  const { lableBadgeTertiary = '', displayPane = '', scanCount = 0 } = props;
   console.log(props);
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
         <Paper
           className={
-            headertype == 'left'
+            displayPane == 'left'
               ? [`iguru-assesseescontainer`, `iguru-assesseescontainerblue`]
               : [`iguru-assesseescontainer`, `iguru-assesseescontainergreen`]
           }
@@ -31,27 +32,27 @@ const HeaderCard = (props) => {
             <div className={'iguru-moretextpanelheader'}>
               <div>
                 <span>{label}</span>&nbsp;
-                {primaryheaderbadge != '' ? (
+                {lableBadgeCore != '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{primaryheaderbadge}</span>
+                    <span className={'iguru-header-badge1_0'}>{lableBadgeCore}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {labelBadgeBasic != '' ? (
+                {lableBadgePrimary != '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{labelBadgeBasic}</span>
+                    <span className={'iguru-header-badge1_0'}>{lableBadgePrimary}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {thirdheaderbadge != '' ? (
+                {lableBadgeSecondary != '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{thirdheaderbadge}</span>
+                    <span className={'iguru-header-badge1_0'}>{lableBadgeSecondary}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {forthheaderbadge != '' ? (
+                {lableBadgeTertiary != '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{forthheaderbadge}</span>
+                    <span className={'iguru-header-badge1_0'}>{lableBadgeTertiary}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
@@ -59,12 +60,12 @@ const HeaderCard = (props) => {
             </div>
             <div className={'iguru-iconbox'}>
               <IconButton>
-                {headertype == 'middle' ? (
+                {displayPane == 'middle' ? (
                   <Fragment>
                     <SearchIcon className={'iguru-iconbardefault'} />
-                    <span className={'iguru-headerbadge'}>{10}</span>
+                    <span className={'iguru-headerbadge'}>{scanCount}</span>
                   </Fragment>
-                ) : headertype == 'left' ? (
+                ) : displayPane == 'left' ? (
                   <NextIcon className={'iguru-iconbardefault'} />
                 ) : (
                   <Clear className={'iguru-iconbardefault'} />
