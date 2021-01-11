@@ -1,7 +1,5 @@
 import logo from './logo.svg';
-import HeaderCard from './Atoms/HeaderCard/HeaderCard';
-import Card from './Atoms/Card/Card';
-import Icons from './Atoms/Icons/Icons';
+import Card from './Molecules/Card/Card';
 function App() {
   return (
     <div className="App">
@@ -31,9 +29,8 @@ function App() {
         primaryheaderbadge={'distinct'}
         secondaryheaderbadge={'active'}
         thirdheaderbadge={'suspended'}
-      />*/}
-      <Card/> 
-      {/* <Icons/> */}
+      /> */}
+      <Card/>
     </div>
   );
 }
