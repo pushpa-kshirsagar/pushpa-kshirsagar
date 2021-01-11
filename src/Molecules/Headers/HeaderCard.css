@@ -2,19 +2,7 @@
   flex: 11;
 }
 
-.iguru-iconbox {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  /* "& button":{
-    height:'50px'
-  } */
-}
 
-.iguru-iconbox button {
-  height: 50px
-}
 
 .iguru-assesseescontainer {
   display: flex;

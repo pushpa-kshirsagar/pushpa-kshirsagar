@@ -36,14 +36,23 @@
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
   }
-  .midphgt{
-    height:50px !important;
+  .iguru-leftarrowicon{
+    flex: 1;
+    color: #808080;
+    width: 2rem;
+    bottom: 0;
+    height: 2rem;
+    position: relative;
+    text-align: center;
+    margin-right: 0px;
+    justify-content: center;
   }
-  .imageNA{
-    font-size:4rem;
-    background-color:#E5E5E5 !important;
-    color:#fff;
+  .aliasmiddle{
+    height: 50px !important;
+    padding: 0 !important;
+    display: flex !important;
 }
+
   .midPaneInformation span{
     width: inherit;
     overflow: hidden;
@@ -81,7 +90,7 @@
   height:20px;
   color:#0000008a;
 }
-.badgeBox span{
+.badgeBox{
       top:-3;
       font-size:1rem;
       color:rgba(0, 0, 0, 0.87);
@@ -118,6 +127,6 @@ button: {
   }
 
   .svgRootSize{
-    font-size:unset;
+    font-size:4rem !important;
     color:#fff;
 }

@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Label.css';
 
-export const Label = (props) => {
+const Label = (props) => {
   const {
     className = '',
-    size = 'md',
-    innerText = 'Demo Text',
-    color = '#000000',
+    size = 'medium',
+    innerText = 'Sample Text',
+    colour = '#000000',
     isBadge = false,
   } = props;
   const style = {
-    color: color,
+    color: colour,
   };
 
   return (
@@ -24,17 +24,18 @@ export const Label = (props) => {
 };
 
 Label.propTypes = {
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['extraSmall', 'small', 'medium', 'large']),
   className: PropTypes.string,
   innerText: PropTypes.string,
-  color: PropTypes.string,
+  colour: PropTypes.string,
   isBadge: PropTypes.bool,
 };
 
 Label.defaultProps = {
   className: '',
-  size: 'md',
-  innerText: 'Demo Text',
-  color: '#000000',
+  size: 'medium',
+  innerText: 'Sample Text',
+  colour: '#000000',
   isBadge: false,
 };
+export default Label;

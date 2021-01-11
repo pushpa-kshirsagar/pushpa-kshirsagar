@@ -1,16 +1,16 @@
 import React from 'react';
-import Icons from './Icons';
+import AllIcons from './Icons';
 export default {
   title: 'Design System/Atoms/Icons',
-  component: Icons,
+  component: AllIcons,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
 };
-const Template = (args) => <Icons {...args} />;
+const Template = (args) => <AllIcons {...args} />;
 
-export const AllIcons = Template.bind({});
-AllIcons.args = {
+export const Icons = Template.bind({});
+Icons.args = {
   primary: true,
   label: 'dashboard',
 };

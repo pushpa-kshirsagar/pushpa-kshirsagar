@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './IconButton.css';
-import { Button, InputLabel } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import { Keyboard } from '@material-ui/icons';
 
 /**
  * Primary UI component for user interaction
  */
-export const IconButton = ( props ) => {
+const IconButton = ( props ) => {
   console.log(props);
-  const { primary, label, Icon } = props;
-  const mode = primary ? 'icon-button-primary' : 'icon-button-secondary';
+  const { label, Icon, mode,className} = props;
+  // const mode = primary ? 'icon-button-primary' : 'icon-button-secondary';
   return (
     <div>
       <button
         variant="fab"
-        className={`icon-button ${mode}`}
+        className={[`icon-button`,`icon-button-${mode}`,className].join(' ')}
         onClick={()=>{}}
       >
         <Icon />
@@ -26,15 +26,16 @@ export const IconButton = ( props ) => {
 };
 
 IconButton.propTypes = {
-  primary: PropTypes.bool,
   // size: PropTypes.oneOf(['small', 'medium', 'large']),
   label: PropTypes.string.isRequired,
   Icon: Keyboard,
   onClick: PropTypes.func,
+  className:null
 };
 
 IconButton.defaultProps = {
-  primary: false,
   // size: 'medium',
   onClick: undefined,
+  className:null
 };
+export default IconButton;
