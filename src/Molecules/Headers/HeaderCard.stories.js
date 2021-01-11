@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderCard from './HeaderCard';
 export default {
-  title: 'HeaderCard',
+  title: 'Design System/Molecules/Headers',
   component: HeaderCard,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -20,7 +20,7 @@ MiddleHeader.args = {
   headertype:'middle',
   primary: true,
   label: 'assessees',
-  primaryheaderbadge: 'disinct',
+  lableBadgeCore: 'disinct',
   secondaryheaderbadge: 'active',
   thirdheaderbadge: 'suspended',
 };
@@ -29,6 +29,6 @@ RightHeader.args = {
   headertype:'right',
   primary: true,
   label: 'assessee',
-  primaryheaderbadge: 'information',
+  lableBadgeCore: 'information',
   secondaryheaderbadge: 'all',
 };
