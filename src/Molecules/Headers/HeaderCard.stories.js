@@ -19,16 +19,16 @@ export const MiddleHeader = Template.bind({});
 MiddleHeader.args = {
   headertype:'middle',
   primary: true,
-  label: 'assessees',
-  primaryheaderbadge: 'disinct',
-  secondaryheaderbadge: 'active',
-  thirdheaderbadge: 'suspended',
+  label: 'associate',
+  labelBadgeBasic: 'node',
+  secondaryheaderbadge: 'distinct',
+  thirdheaderbadge: 'active',
 };
 export const RightHeader = Template.bind({});
 RightHeader.args = {
   headertype:'right',
   primary: true,
   label: 'assessee',
-  primaryheaderbadge: 'information',
+  labelBadgePrimary: 'information',
   secondaryheaderbadge: 'all',
 };

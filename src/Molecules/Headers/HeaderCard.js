@@ -12,7 +12,7 @@ import './HeaderCard.css';
 const HeaderCard = (props) => {
   const { label = 'dashboard' } = props;
   const { primaryheaderbadge = '' } = props;
-  const { secondaryheaderbadge = '' } = props;
+  const { labelBadgeBasic= '' } = props;
   const { thirdheaderbadge = '' } = props;
   const { forthheaderbadge = '' } = props;
   const { headertype = '' } = props;
@@ -37,9 +37,9 @@ const HeaderCard = (props) => {
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {secondaryheaderbadge != '' ? (
+                {labelBadgeBasic != '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{secondaryheaderbadge}</span>
+                    <span className={'iguru-header-badge1_0'}>{labelBadgeBasic}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
