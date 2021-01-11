@@ -20,7 +20,7 @@ MiddleHeader.args = {
   headertype:'middle',
   primary: true,
   label: 'assessees',
-  primaryheaderbadge: 'disinct',
+  lableBadgeCore: 'disinct',
   secondaryheaderbadge: 'active',
   thirdheaderbadge: 'suspended',
 };
@@ -29,6 +29,6 @@ RightHeader.args = {
   headertype:'right',
   primary: true,
   label: 'assessee',
-  primaryheaderbadge: 'information',
+  lableBadgeCore: 'information',
   secondaryheaderbadge: 'all',
 };

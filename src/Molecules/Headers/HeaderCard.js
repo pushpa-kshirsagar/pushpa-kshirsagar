@@ -11,7 +11,7 @@ import Clear from '@material-ui/icons/Clear';
 import './HeaderCard.css';
 const HeaderCard = (props) => {
   const { label = 'dashboard' } = props;
-  const { primaryheaderbadge = '' } = props;
+  const { lableBadgeCore = '' } = props;
   const { secondaryheaderbadge = '' } = props;
   const { thirdheaderbadge = '' } = props;
   const { forthheaderbadge = '' } = props;
@@ -31,9 +31,9 @@ const HeaderCard = (props) => {
             <div className={'iguru-moretextpanelheader'}>
               <div>
                 <span>{label}</span>&nbsp;
-                {primaryheaderbadge != '' ? (
+                {lableBadgeCore != '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{primaryheaderbadge}</span>
+                    <span className={'iguru-header-badge1_0'}>{lableBadgeCore}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
