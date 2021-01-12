@@ -7,9 +7,9 @@ export default {
 };
 const Template = (args) => <SelectField {...args} />;
 
-export const InputFields = Template.bind({});
-InputFields.args = {
-  selectId: 'select1',
-  selectLabel: 'Demo',
-  selectOption: ['a', 'b', 'c'],
+export const SelectFields = Template.bind({});
+SelectFields.args = {
+  id: 'select1',
+  label: 'Demo',
+  options: ['a', 'b', 'c'],
 };

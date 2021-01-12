@@ -4,7 +4,7 @@ import './SelectField.css';
 import { Divider, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 export const SelectField = (props) => {
-  const { selectId, selectLabel, selectOption = [] } = props;
+  const { id, label, options = [] } = props;
   const [selectedOption, setSelectedOption] = useState('');
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -15,21 +15,21 @@ export const SelectField = (props) => {
       <FormControl style={{ width: '100%' }}>
         <InputLabel
           htmlFor="ig-select-prefix"
-          style={{ marginBottom: 0 }}
+          style={{ marginBottom: 0, fontSize: '1.6rem' }}
         >
-          {selectLabel}
+          {label}
         </InputLabel>
         <Select
-          id={selectId}
+          id={id}
           value={selectedOption}
           onChange={handleChange}
           style={{ fontSize: 'unset' }}
         >
-          {selectOption.map((option, index) =>
+          {options.map((option, index) =>
             option === 'divider' ? (
               <Divider light />
             ) : (
-              <MenuItem key={`${selectId}-${index}`} value={option} style={{ fontSize: '1.6rem' }}>
+              <MenuItem key={`${id}-${index}`} value={option} style={{ fontSize: '1.6rem' }}>
                 {option}
               </MenuItem>
             )
@@ -41,9 +41,9 @@ export const SelectField = (props) => {
 };
 
 SelectField.propTypes = {
-  selectId: PropTypes.string,
-  selectLabel: PropTypes.string,
-  selectOption: PropTypes.array,
+  id: PropTypes.string,
+  label: PropTypes.string,
+  options: PropTypes.array,
 };
 
 export default SelectField;
