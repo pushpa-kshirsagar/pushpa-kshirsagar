@@ -1,33 +1,33 @@
 import React from 'react';
 import HeaderCard from './HeaderCard';
 export default {
-  title: 'Design System/Molecules/Headers',
+  title: 'Design System/Molecules/Display Panes',
   component: HeaderCard,
  
 };
 const Template = (args) => <HeaderCard {...args} />;
 
-export const HeaderLeft = Template.bind({});
-HeaderLeft.args = {
-  backgroundColor:'blue',
+export const DisplayPaneLeft = Template.bind({});
+DisplayPaneLeft.args = {
   displayPane: 'left',
+  headerColour:'blue',
   headerLabel: 'dashboard',
   
 };
-export const HeaderCentre = Template.bind({});
-HeaderCentre.args = {
-  backgroundColor:'green',
+export const DisplayPaneCentre = Template.bind({});
+DisplayPaneCentre.args = {
   displayPane: 'centre',
+  headerColour:'green',
   headerLabel: 'associate',
   headerLabelCore: 'nodes',
   headerLabelPrimary: 'distinct',
   headerLabelSecondary: 'active',
   headerScanCount:34,
 };
-export const HeaderRight = Template.bind({});
-HeaderRight.args = {
-  backgroundColor:'green',
+export const DisplayPaneRight = Template.bind({});
+DisplayPaneRight.args = {
   displayPane: 'right',
+  headerColour:'green',
   headerLabel: 'associate',
   headerLabelCore: 'node',
   headerLabelPrimary: 'information',

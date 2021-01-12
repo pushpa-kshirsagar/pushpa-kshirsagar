@@ -18,14 +18,14 @@ const HeaderCard = (props) => {
     headerLabelTertiary = '',
     displayPane = '',
     headerScanCount = 0,
-    backgroundColor
+    headerColour
   } = props;
   console.log(props);
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
         <Paper
-          className={[`iguru-assesseescontainer`, `iguru-assesseescontainer${backgroundColor}`].join(' ')} >
+          className={[`iguru-assesseescontainer`, `iguru-assesseescontainer${headerColour}`].join(' ')} >
           <div className={'iguru-componentinnerdiv'}>
             <div className={'iguru-moretextpanelheader'}>
               <div>
