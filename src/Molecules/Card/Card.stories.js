@@ -5,7 +5,7 @@ import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 
 export default {
-  title: 'Design System/Molecules/Card',
+  title: 'Design System/Molecules/Cards',
   component: Card,
   
 };
@@ -13,31 +13,34 @@ const Template = (args) => <Card {...args} />;
 
 export const CardSimple = Template.bind({});
 CardSimple.args = {
-  name: 'name',
+  className:'iguru-leftarrowicon',
   description: 'description',
-  ImgIcon: ArrowRight,
-  isImage:false,
+  name: 'name',
+  Icon: ArrowRight,
+  isIcon:true,
   isNotification:false,
-  className:'iguru-leftarrowicon'
+  isPicure:false,
 };
 
-export const CardAssessee = Template.bind({});
-CardAssessee.args = {
-  name: 'assesseeName',
+export const AssesseeSelf = Template.bind({});
+AssesseeSelf.args = {
+  className:'',
   description: 'alias',
-  ImgIcon: PersonIcon,
-  isImage:true,
+  name: 'assesseeName',
+  Picture: PersonIcon,
+  isIcon:false,
   isNotification:true,
-  className:'',
+  isPicure:true,
 
 };
 
-export const CardAssociate = Template.bind({});
-CardAssociate.args = {
-  name: 'associateName',
-  ImgIcon: AssociateIcon,
-  isImage:true,
-  isNotification:true,
+export const AssociateSelf = Template.bind({});
+AssociateSelf.args = {
   className:'',
+  name: 'associateName',
+  Picture: AssociateIcon,
+  isIcon:false,
+  isNotification:true,
+  isPicure:false,
 };
 

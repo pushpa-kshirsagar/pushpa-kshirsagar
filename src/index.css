@@ -88,11 +88,11 @@ body {
   white-space: nowrap !important;
   text-overflow: ellipsis !important;
 }
-/* .aliasmiddle{
-    height: 50px !important;
-    padding: 0 !important;
-    display: flex !important;
-} */
+.aliasmiddle {
+  height: 50px !important;
+  padding: 0 !important;
+  display: flex !important;
+}
 
 .aliasmiddle {
   height: 50px;
