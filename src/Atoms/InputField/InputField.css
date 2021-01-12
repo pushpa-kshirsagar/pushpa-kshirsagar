@@ -1,0 +1,11 @@
+.popup-form-box {
+  margin: 5px 5px;
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+.popup-form-box > .label {
+  font-size: 1.6rem;
+}
