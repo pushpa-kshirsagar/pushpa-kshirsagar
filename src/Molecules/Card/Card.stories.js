@@ -5,14 +5,14 @@ import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 
 export default {
-  title: 'Design System/Molecules/Cards',
+  title: 'Design System/Molecules/Segments',
   component: Card,
   
 };
 const Template = (args) => <Card {...args} />;
 
-export const CardSimple = Template.bind({});
-CardSimple.args = {
+export const SegmentCore = Template.bind({});
+SegmentCore.args = {
   className:'iguru-leftarrowicon',
   description: 'description',
   name: 'name',

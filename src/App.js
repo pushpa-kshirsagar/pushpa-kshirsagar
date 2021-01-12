@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Card name={'asdas'} Picture={PersonIcon} isPicure={true}/>
-      <List/>
+      <List name={"name"} description={"dscription"} status={'suspended'}/>
     </div>
   );
 }
