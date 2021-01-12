@@ -14,17 +14,16 @@
   font-weight: 400;
   padding: 0;
   margin: 0;
-  font-family: 'Roboto, sans-serif';
 }
-.text-size-xs {
+.text-size-extraSmall {
   font-size: 0.86rem;
 }
-.text-size-sm {
+.text-size-small {
   font-size: 1rem;
 }
-.text-size-md {
+.text-size-medium {
   font-size: 1.2rem;
 }
-.text-size-lg {
+.text-size-large {
   font-size: 1.6rem;
 }

@@ -1,0 +1,78 @@
+.tabsContainer{
+  font-size: 1.6rem;
+}
+.middleTabLabel{
+  display: flex;
+  padding: 0 5px;
+}
+.middleTabItem{
+  flex:1;
+  display:flex;
+  height:50px;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  width:20%;
+}
+.middleTabItem button{
+      font-size:1.6rem;
+      border-radius:15px;
+      padding:2px 5px;
+      color:rgba(0, 0, 0, 0.87);
+      font-weight:400;
+      cursor:pointer;
+      margin:auto;
+      min-width:initial;
+      min-height:initial;
+      width:20px;
+      height:20px;
+      position:absolute;
+      left:auto;
+      right:auto;
+      top:50%;
+      transform: translateY(-50%);
+      bottom:auto;
+      background-color:#fff;
+      box--sizing:border-box;
+      text-align:center;
+      border:none;
+      transition:background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.middleTabItem :hover{
+  background-color:#e0e0e0;
+}
+.middleTabItem :focus{
+  outline:'none'
+}
+    
+  
+  .middleTabItem div:nth-child(2n+1) {
+      content: '""';
+      height: 4px;
+      width: 100%;
+      top: 50%;
+      background-color: #F2F2F2;
+      left: 0;
+      border-radius:2px;
+      margin-top:-2px;
+      box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  }
+
+.activeTabItem button{
+      color:rgba(0, 0, 0, 0.87);
+      border-color:#BFBFBF;
+      background-color:#F2F2F2;
+
+}
+.activeTabItem :hover{
+  background-color:'#e0e0e0'
+}
+.activeTabItem button{
+      color:rgba(0, 0, 0, 0.87);
+      border-color:#BFBFBF;
+      background-color:#F2F2F2;
+}
+.activeTabItem :hover{
+          background-color:#e0e0e0;
+}

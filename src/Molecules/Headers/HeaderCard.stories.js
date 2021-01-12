@@ -3,32 +3,33 @@ import HeaderCard from './HeaderCard';
 export default {
   title: 'Design System/Molecules/Headers',
   component: HeaderCard,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+ 
 };
 const Template = (args) => <HeaderCard {...args} />;
 
-export const LeftHeader = Template.bind({});
-LeftHeader.args = {
-  headertype:'left',
-  primary: true,
-  label: 'dashboard',
+export const HeaderLeft = Template.bind({});
+HeaderLeft.args = {
+  backgroundColor:'blue',
+  displayPane: 'left',
+  headerLabel: 'dashboard',
+  
 };
-export const MiddleHeader = Template.bind({});
-MiddleHeader.args = {
-  headertype:'middle',
-  primary: true,
-  label: 'assessees',
-  lableBadgeCore: 'disinct',
-  secondaryheaderbadge: 'active',
-  thirdheaderbadge: 'suspended',
+export const HeaderCentre = Template.bind({});
+HeaderCentre.args = {
+  backgroundColor:'green',
+  displayPane: 'centre',
+  headerLabel: 'associate',
+  headerLabelCore: 'nodes',
+  headerLabelPrimary: 'distinct',
+  headerLabelSecondary: 'active',
+  headerScanCount:34,
 };
-export const RightHeader = Template.bind({});
-RightHeader.args = {
-  headertype:'right',
-  primary: true,
-  label: 'assessee',
-  lableBadgeCore: 'information',
-  secondaryheaderbadge: 'all',
+export const HeaderRight = Template.bind({});
+HeaderRight.args = {
+  backgroundColor:'green',
+  displayPane: 'right',
+  headerLabel: 'associate',
+  headerLabelCore: 'node',
+  headerLabelPrimary: 'information',
+  headerLabelSecondary: 'all',
 };

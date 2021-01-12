@@ -1,11 +1,11 @@
 import React from 'react';
-import { Label } from './Labels';
+import { Label } from './Label';
 
 export default {
-  title: 'Design System/Atoms/Lables',
+  title: 'Design System/Atoms/Labels',
   component: Label,
   argTypes: {
-    color: { control: 'color' },
+    colour: { control: 'color' },
   },
 };
 const Template = (args) => <Label {...args} />;
@@ -14,8 +14,8 @@ export const Labels = Template.bind({});
 Labels.args = {
   alignment: 'left',
   className: '',
-  size: 'md',
-  innerText: 'Demo Text',
-  color: '#000000',
+  size: 'medium',
+  innerText: 'Sample Text',
+  colour: '#000000',
   isBadge: false
 };
