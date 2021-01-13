@@ -2,13 +2,13 @@ import React from 'react';
 import { InputField } from './InputField';
 
 export default {
-  title: 'Design System/Atoms/InputField',
+  title: 'Design System/Atoms/Input Fields',
   component: InputField,
 };
-const Template = (args) => <InputField {...args} />;
+const Template1 = (args) => <InputField {...args} />;
 
-export const InputFields = Template.bind({});
-InputFields.args = {
-  inputLabel: 'Demo',
-  inputType: 'text',
+export const ManualInput = Template1.bind({});
+ManualInput.args = {
+  inputFieldLabel: 'Demo',
+  inputFieldType: 'text'
 };
