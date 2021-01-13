@@ -5,8 +5,8 @@ export default {
   title: 'Design System/Atoms/Labels',
   component: Label,
   argTypes: {
-    colour: { control: 'color' },
-  },
+    colour: { control: 'color' }
+  }
 };
 const Template = (args) => <Label {...args} />;
 

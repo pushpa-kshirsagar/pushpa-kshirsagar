@@ -4,9 +4,9 @@ import './Section.css';
 const SectionButton = (props) => {
   const { isSelected } = props;
   return (
-        <div className={['middleTabItem', isSelected ? 'activeTabItem' : null].join(' ')}>
-          <Button> </Button>
-        </div>
+    <div className={['middleTabItem', isSelected ? 'activeTabItem' : null].join(' ')}>
+      <Button> </Button>
+    </div>
   );
 };
 

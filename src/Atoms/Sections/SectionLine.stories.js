@@ -9,6 +9,4 @@ export default {
 const Template = (args) => <SectionLine {...args} />;
 
 export const Line = Template.bind({});
-Line.args = {
-  
-};
+Line.args = {};

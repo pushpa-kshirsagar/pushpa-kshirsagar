@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './IconButton.css';
-import { InputLabel, Button } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import { Keyboard } from '@material-ui/icons';
 
 /**
@@ -24,9 +24,9 @@ const IconButton = (props) => {
 };
 
 IconButton.propTypes = {
-  displayPane:PropTypes.oneOf(['centre','default', 'left', 'right']),
+  displayPane: PropTypes.oneOf(['centre', 'default', 'left', 'right']),
   label: PropTypes.string,
-  Icon: Keyboard,
+  Icon: Keyboard
   // onClick: PropTypes.func,
   // className: null,
 };

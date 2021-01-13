@@ -1,6 +1,5 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import { InputLabel, ListItem } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import Notifications from '@material-ui/icons/NotificationsActive';
 import IconButton from '@material-ui/core/IconButton';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -10,6 +9,7 @@ import './List.css';
 const List = (props) => {
   const { description = '', name, status, isNotification, isFlaged, isSelected } = props;
   const listarr = ['01', '02', '03'];
+
   return (
     <div>
       {listarr.map((item) => (
@@ -24,7 +24,7 @@ const List = (props) => {
                 <div
                   className={[
                     'midPaneInformation',
-                    description == null || description == '' ? 'aliasmiddle' : null,
+                    description == null || description === '' ? 'aliasmiddle' : null
                   ].join(' ')}
                 >
                   {name}
@@ -34,7 +34,7 @@ const List = (props) => {
               <div className={'unitFlex'}>
                 <span
                   className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(
-                    ' ',
+                    ' '
                   )}
                   style={{ textAlign: 'center' }}
                 >
@@ -58,7 +58,12 @@ const List = (props) => {
                 ) : null}
                 {isSelected ? (
                   <div className={'unitFlex'}>
-                    <div className={['unitFlex',isFlaged?'iconsBarDefaultFlag': 'selectedOption'].join(' ')}>
+                    <div
+                      className={[
+                        'unitFlex',
+                        isFlaged ? 'iconsBarDefaultFlag' : 'selectedOption'
+                      ].join(' ')}
+                    >
                       <Checkbox
                         id={'id'}
                         className={'assesseeListCheckBoxSelctedOut'}

@@ -3,7 +3,7 @@ import { SelectField } from './SelectField';
 
 export default {
   title: 'Design System/Atoms/Input Fields',
-  component: SelectField,
+  component: SelectField
 };
 const Template = (args) => <SelectField {...args} />;
 

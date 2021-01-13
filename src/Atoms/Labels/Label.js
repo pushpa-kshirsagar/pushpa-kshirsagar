@@ -8,10 +8,10 @@ const Label = (props) => {
     size = 'medium',
     innerText = 'Sample Text',
     colour = '#000000',
-    isBadge = false,
+    isBadge = false
   } = props;
   const style = {
-    color: colour,
+    color: colour
   };
 
   return (
@@ -28,7 +28,7 @@ Label.propTypes = {
   className: PropTypes.string,
   innerText: PropTypes.string,
   colour: PropTypes.string,
-  isBadge: PropTypes.bool,
+  isBadge: PropTypes.bool
 };
 
 Label.defaultProps = {
@@ -36,6 +36,6 @@ Label.defaultProps = {
   size: 'medium',
   innerText: 'Sample Text',
   colour: '#000000',
-  isBadge: false,
+  isBadge: false
 };
 export default Label;

@@ -6,46 +6,42 @@ import ArrowRight from '@material-ui/icons/ChevronRight';
 import CrossIcon from '@material-ui/icons/Clear';
 export default {
   title: 'Design System/Molecules/Segments',
-  component: Card,
-  
+  component: Card
 };
 const Template = (args) => <Card {...args} />;
 
-
-
 export const AssesseeSelf = Template.bind({});
 AssesseeSelf.args = {
-  className:'',
+  className: '',
   description: 'alias',
   name: 'assesseeName',
   Picture: PersonIcon,
-  isIcon:false,
-  isNotification:true,
-  isPicture:true,
-  isRelated:false,
-
+  isIcon: false,
+  isNotification: true,
+  isPicture: true,
+  isRelated: false
 };
 
 export const AssociateSelf = Template.bind({});
 AssociateSelf.args = {
-  className:'',
+  className: '',
   name: 'associateName',
   Picture: AssociateIcon,
-  isIcon:false,
-  isNotification:true,
-  isPicture:false,
-  isRelated:false,
+  isIcon: false,
+  isNotification: true,
+  isPicture: false,
+  isRelated: false
 };
 export const SegmentCore = Template.bind({});
 SegmentCore.args = {
-  className:'iguru-rightarrowicon',
+  className: 'iguru-rightarrowicon',
   description: 'description',
   name: 'name',
   Icon: ArrowRight,
-  isIcon:true,
-  isNotification:false,
-  isPicture:false,
-  isRelated:false,
+  isIcon: true,
+  isNotification: false,
+  isPicture: false,
+  isRelated: false
 };
 export const SegmentRelated = Template.bind({});
 SegmentRelated.args = {
@@ -53,9 +49,8 @@ SegmentRelated.args = {
   description: 'description',
   name: 'name',
   Icon: CrossIcon,
-  isIcon:true,
-  isNotification:false,
-  isPicture:false,
-  isRelated:true,
+  isIcon: true,
+  isNotification: false,
+  isPicture: false,
+  isRelated: true
 };
-

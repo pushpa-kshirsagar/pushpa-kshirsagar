@@ -1,15 +1,14 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Clear from '@material-ui/icons/Clear';
 import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
+
 const Popup = (isopen, close, parentDialogue, children, badge, headerColor, secondpopup = true) => {
   return (
     <div>
@@ -22,7 +21,7 @@ const Popup = (isopen, close, parentDialogue, children, badge, headerColor, seco
         // className={parentDialogue}
       >
         <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
-          <Paper className={['popupMainHeader','titleSolidGreen'].join(' ')}>
+          <Paper className={['popupMainHeader', 'titleSolidGreen'].join(' ')}>
             <div className={['componentInnerDiv', 'popupMainHeader'].join(' ')}>
               <div className={'titleBox'}>
                 <span>assessee</span>&nbsp;

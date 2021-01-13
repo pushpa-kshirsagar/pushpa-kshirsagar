@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from './IconButton';
-import { Keyboard, BusinessCenter } from '@material-ui/icons';
+import { Keyboard } from '@material-ui/icons';
 
 export default {
   title: 'Design System/Molecules/Button',
@@ -12,11 +12,10 @@ const Template = (args) => <Button {...args} />;
 
 export const ButtonIcon = Template.bind({});
 ButtonIcon.args = {
-  className:null,
+  className: null,
   Icon: Keyboard,
   label: 'calculator',
-  displayPane:'left',
- 
+  displayPane: 'left'
 };
 
 // export const toolkit = Template.bind({});

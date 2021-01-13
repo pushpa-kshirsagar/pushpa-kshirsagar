@@ -164,42 +164,48 @@ const Icons = (props) => {
         <Grid item xs={3} className={'iguru-icons'}>
           <img
             className={['iguru-icons-wid-hei', 'iguru-icon-opacity'].join(' ')}
-            alt="Anonymous" src={TelephoneVerified}
+            alt="Anonymous"
+            src={TelephoneVerified}
           />
           <div className={'iguru-icon-lbfnt'}>Telephone Verified</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <img
             className={['iguru-icons-wid-hei', 'iguru-icon-opacity'].join(' ')}
-            alt="Anonymous" src={TelephoneUnverified}
+            alt="Anonymous"
+            src={TelephoneUnverified}
           />
           <div className={'iguru-icon-lbfnt'}>Telephone Unverified</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <img
             className={['iguru-icons-wid-hei', 'iguru-icon-opacity'].join(' ')}
-            alt="Anonymous" src={MobileVerified}
+            alt="Anonymous"
+            src={MobileVerified}
           />
           <div className={'iguru-icon-lbfnt'}>Mobile Verified</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <img
             className={['iguru-icons-wid-hei', 'iguru-icon-opacity'].join(' ')}
-            alt="Anonymous" src={MobileUnverified}
+            alt="Anonymous"
+            src={MobileUnverified}
           />
           <div className={'iguru-icon-lbfnt'}>Mobile Unverified</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <img
-            className={['iguru-icons-wid-hei','iguru-icon-opacity'].join(' ')}
-            alt="Anonymous" src={HierarchyIcon}
+            className={['iguru-icons-wid-hei', 'iguru-icon-opacity'].join(' ')}
+            alt="Anonymous"
+            src={HierarchyIcon}
           />
           <div className={'iguru-icon-lbfnt'}>Hierarchy</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <img
             className={['iguru-icons-wid-hei', 'iguru-icon-opacity'].join(' ')}
-            alt="Anonymous" src={ListIcon}
+            alt="Anonymous"
+            src={ListIcon}
           />
           <div className={'iguru-icon-lbfnt'}>List</div>
         </Grid>

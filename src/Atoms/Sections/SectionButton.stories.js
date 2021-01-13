@@ -10,6 +10,5 @@ const Template = (args) => <SectionButton {...args} />;
 
 export const Button = Template.bind({});
 Button.args = {
-  isSelected: true,
-  
+  isSelected: true
 };

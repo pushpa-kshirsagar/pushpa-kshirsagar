@@ -3,7 +3,7 @@ import { InputField } from './InputField';
 
 export default {
   title: 'Design System/Atoms/Input Fields',
-  component: InputField,
+  component: InputField
 };
 const Template1 = (args) => <InputField {...args} />;
 
