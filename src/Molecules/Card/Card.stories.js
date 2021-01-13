@@ -3,7 +3,7 @@ import Card from './Card';
 import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
-
+import CrossIcon from '@material-ui/icons/Clear';
 export default {
   title: 'Design System/Molecules/Segments',
   component: Card,
@@ -11,16 +11,7 @@ export default {
 };
 const Template = (args) => <Card {...args} />;
 
-export const SegmentCore = Template.bind({});
-SegmentCore.args = {
-  className:'iguru-leftarrowicon',
-  description: 'description',
-  name: 'name',
-  Icon: ArrowRight,
-  isIcon:true,
-  isNotification:false,
-  isPicure:false,
-};
+
 
 export const AssesseeSelf = Template.bind({});
 AssesseeSelf.args = {
@@ -30,7 +21,8 @@ AssesseeSelf.args = {
   Picture: PersonIcon,
   isIcon:false,
   isNotification:true,
-  isPicure:true,
+  isPicture:true,
+  isRelated:false,
 
 };
 
@@ -41,6 +33,29 @@ AssociateSelf.args = {
   Picture: AssociateIcon,
   isIcon:false,
   isNotification:true,
-  isPicure:false,
+  isPicture:false,
+  isRelated:false,
+};
+export const SegmentCore = Template.bind({});
+SegmentCore.args = {
+  className:'iguru-rightarrowicon',
+  description: 'description',
+  name: 'name',
+  Icon: ArrowRight,
+  isIcon:true,
+  isNotification:false,
+  isPicture:false,
+  isRelated:false,
+};
+export const SegmentRelated = Template.bind({});
+SegmentRelated.args = {
+  // className:'iguru-background',
+  description: 'description',
+  name: 'name',
+  Icon: CrossIcon,
+  isIcon:true,
+  isNotification:false,
+  isPicture:false,
+  isRelated:true,
 };
 

@@ -17,8 +17,8 @@ List.args = {
   description:'description',
   status:'active',
   isNotification:true,
-  isFlaged:false,
-  isSelected:false,
+  isFlaged:true,
+  isSelected:true,
 };
 
 

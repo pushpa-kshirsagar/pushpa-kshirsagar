@@ -4,6 +4,7 @@ import { InputLabel, ListItem } from '@material-ui/core';
 import Notifications from '@material-ui/icons/NotificationsActive';
 import IconButton from '@material-ui/core/IconButton';
 import Checkbox from '@material-ui/core/Checkbox';
+import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import './List.css';
 
 const List = (props) => {
@@ -37,9 +38,7 @@ const List = (props) => {
                   )}
                   style={{ textAlign: 'center' }}
                 >
-                  {isNotification?
-                  <Notifications className={'selectionIcon'} />
-                  :null}
+                  {isNotification ? <Notifications className={'selectionIcon'} /> : null}
                   <InputLabel
                     className={['iconsFooterLabelDefault', 'AssesseeNotifyStatusLabel'].join(' ')}
                   >
@@ -47,28 +46,29 @@ const List = (props) => {
                   </InputLabel>
                 </span>
               </div>
-             
+
               <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-              {isFlaged?
-                <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
-                  <IconButton className={'assesseeListiconSize'}>
-                    <i className="far fa-flag" id={'flagid'}></i>
-                  </IconButton>
-                </div>
-             :null }
-             {isSelected?
-                <div className={'unitFlex'}>
-                  <div className={['unitFlex', 'selectedOption'].join(' ')}>
-                    <Checkbox
-                      id={'id'}
-                      className={'assesseeListCheckBoxSelctedOut'}
-                      color="default"
-                      disableRipple={true}
-                      disableFocusRipple={true}
-                    />
+                {isFlaged ? (
+                  <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
+                    <IconButton className={'assesseeListiconSize'}>
+                      <FlagOutlinedIcon className={'flagiconmargin'} />
+                      {/* <i className="far fa-flag" id={'flagid'}></i> */}
+                    </IconButton>
                   </div>
-                </div>
-                :null}
+                ) : null}
+                {isSelected ? (
+                  <div className={'unitFlex'}>
+                    <div className={['unitFlex',isFlaged?'iconsBarDefaultFlag': 'selectedOption'].join(' ')}>
+                      <Checkbox
+                        id={'id'}
+                        className={'assesseeListCheckBoxSelctedOut'}
+                        color="default"
+                        disableRipple={true}
+                        disableFocusRipple={true}
+                      />
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
