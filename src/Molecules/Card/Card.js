@@ -14,15 +14,16 @@ const Card = (props) => {
     Icon,
     isIcon,
     Picture,
-    isPicure,
+    isPicture,
     isNotification,
     className,
+    isRelated,
   } = props;
 
   return (
     <div className={'iguru-leftpanel'}>
       <Paper className={[`iguru-iconbox-dashboardcardtop`].join(' ')}>
-        <div className={'iguru-componentinnerdiv'}>
+        <div className={['iguru-componentinnerdiv','iguru-background'].join(' ')}>
           <div className={'iguru-cardContentMidPanel'}>
             <div
               className={['midPaneInformation', description != '' ? null : 'aliasmiddle'].join(' ')}
@@ -33,12 +34,16 @@ const Card = (props) => {
             <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{description}</div>
           </div>
           <div className={'iguru-iconbox'}>
-            <Badge className={['badgeBox', 'notificationIcon'].join(' ')}>
+            {isRelated?
+          <span className={['unitFlex','assessmenetStatusText'].join(' ')}>
+              lable
+          </span>
+          : <Badge className={['badgeBox', 'notificationIcon'].join(' ')}>
               <IconsButton>{isNotification ? <Notifications /> : null}</IconsButton>
-            </Badge>
+            </Badge> }
           </div>
           <div className={'iguru-iconbox'}>
-            {isPicure ? (
+            {isPicture ? (
               <Avatar
                 alt=""
                 className={'svgRootSize'}

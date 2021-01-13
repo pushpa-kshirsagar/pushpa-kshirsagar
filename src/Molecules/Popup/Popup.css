@@ -1,0 +1,102 @@
+.tickOption{
+  position:relative;
+  color:rgba(0, 0, 0, 0.87);
+}
+.optionPrimary{
+  text-align: center;
+  height:30px;
+  padding:2.5px 0px !important;
+  min-height:inherit;
+  cursor: pointer !important;
+  font-size: 1.6rem !important;
+  text-transform: lowercase !important;
+  line-height:1 !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+  width: 100% !important;
+  font-weight:400 !important; 
+
+}
+.optionPrimary :hover{
+  background: #00000014;
+}
+.optionPrimary :focus{
+  background: #00000014;
+
+}
+.optionPrimary :active{
+  background:#00000091;
+}
+.popupContent{
+  padding: 2.5px 0px !important;
+  text-align: center;
+  /* width: 300px; */
+  overflow:auto;
+ 
+}
+.popupHeaderTitle{
+  padding: 0 !important;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.87);
+  font-size:1.6rem;
+}
+.popupHeaderTitle div{
+  border-radius: 0;
+}
+.popupMainHeader{
+  width:300px;
+  align-items:center;
+  padding:5px;
+  display:flex
+}
+.titleSolidGreen{
+  display: flex;
+  height: 50px;
+  background-color:#7DC832 !important;
+  color:rgba(0, 0, 0, 0.87) !important;
+}
+.titleSolidBlue{
+  display: flex;
+  height: 50px;
+  background-color:#00AFFF;
+}
+.titleLightGreen{
+  display: flex;
+  height: 50px;
+  background-color:#B1DE84;
+  color:rgba(0, 0, 0, 0.87);
+}
+.titleBox{
+  text-align:left;
+  flex:3;
+  font-size:1.6rem;
+  color:#ffffff;
+  font-weight:bold;
+  max-width:180px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  line-height:1.6 !important;
+}
+.backArrow{
+  flex:1;
+  height:50px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+}
+.backArrow button{
+  width:48px;
+  height:48px;
+}
+.popupClose{
+  color:#ffffff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+@media (max-width: 360px){
+  .popupContent{
+    width:calc( 100vw - 64px );
+
+  }
+}

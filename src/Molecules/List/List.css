@@ -16,3 +16,111 @@
   line-height: normal;
   text-overflow: ellipsis;
 }
+.selectionIcon{
+  font-size:1.2rem;
+  position:relative;
+  right:0px;
+  color:#0000008a;
+}
+
+.iconsBarDefaultFlag{
+  display:flex;
+  height:25px;
+  flex:1;
+  align-items:center;
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+}
+  .iconsBarDefaultFlag button{
+      color:#0000008a;
+      width:4rem;
+      height:4rem;
+  }
+  .iconsBarDefaultFlag .selectedIconColor{
+          color:#0000008a;
+  
+}
+.assesseeListiconSize
+{
+     font-size: 1.2rem !important;
+}
+.selectedOption button{
+      color:#0000008a;
+      height:50px;
+      font-size:2rem;
+
+}
+.selectedOption{
+  margin: auto;
+
+}
+.selectedOption .selectedIconColor{
+  color:#0000008a
+}
+.assesseeListCheckBoxSelctedOut
+{
+    height: 0.6em;
+   
+}
+.flagiconmargin{
+  margin-top: -5px;
+}
+.assesseeListCheckBoxSelctedOut svg
+{
+    height:1.6rem;
+    
+}
+.unitFlexTop{
+  flex-direction:column;
+  align-items:center;
+  height:50px;
+}
+.unitFlexTop button{
+  height:20px;
+}
+.cardButtonwithouttextTransform{
+  display:block;
+  text-align:left;
+  align-items:flex-start;
+  text-transform:none;
+  font-weight:400;
+  color:#808080;
+  font-size:1.6rem;
+  width:100%;
+  padding:0px;
+  height:50;
+  border-radius:2px;
+  position:relative;
+  border-bottom:1px solid #BFBFBF;
+ 
+}
+.cardButtonwithouttextTransform :hover{
+  background-color: #F2F2F2;
+}
+.measureBox{
+  display: flex;
+  text-align:center;
+  align-items: center;
+  height:50px;
+  padding: 0px 0px;
+  cursor: pointer;
+}
+.verifiedUser{
+  align-items:flex-start;
+  padding-top:2px;
+ 
+},
+.verifiedUser button{
+  margin:0 0 0 0;
+  height:20px;
+  align-items:flex-start;
+
+}
+.verifiedUserTop{
+  padding:0;
+}
+.verifiedUserTop{
+  align-items:center
+}

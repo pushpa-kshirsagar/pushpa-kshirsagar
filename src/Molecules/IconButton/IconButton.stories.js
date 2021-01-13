@@ -1,27 +1,28 @@
 import React from 'react';
 
-import IconButton from './IconButton';
+import Button from './IconButton';
 import { Keyboard, BusinessCenter } from '@material-ui/icons';
 
 export default {
-  title: 'Design System/Molecules/IconButton',
-  component: IconButton
+  title: 'Design System/Molecules/Button',
+  component: Button
 };
 
-const Template = (args) => <IconButton {...args} />;
+const Template = (args) => <Button {...args} />;
 
-export const calculator = Template.bind({});
-calculator.args = {
-  label: 'calculator',
+export const ButtonIcon = Template.bind({});
+ButtonIcon.args = {
+  className:null,
   Icon: Keyboard,
-  mode:'primary',
-  className:null
+  label: 'calculator',
+  displayPane:'left',
+ 
 };
 
-export const toolkit = Template.bind({});
-toolkit.args = {
-  label: 'toolkit',
-  Icon: BusinessCenter,
-  mode:'secondary',
-  className:null
-};
+// export const toolkit = Template.bind({});
+// toolkit.args = {
+//   label: 'toolkit',
+//   Icon: BusinessCenter,
+//   mode:'secondary',
+//   className:null
+// };
