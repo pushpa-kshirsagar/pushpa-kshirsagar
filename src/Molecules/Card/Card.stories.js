@@ -5,13 +5,13 @@ import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import CrossIcon from '@material-ui/icons/Clear';
 export default {
-  title: 'Design System/Molecules/Segments',
+  title: 'Design System/Molecules/Display Card',
   component: Card
 };
 const Template = (args) => <Card {...args} />;
 
-export const AssesseeSelf = Template.bind({});
-AssesseeSelf.args = {
+export const DisplayCard1 = Template.bind({});
+DisplayCard1.args = {
   className: '',
   description: 'alias',
   name: 'assesseeName',
@@ -21,19 +21,8 @@ AssesseeSelf.args = {
   isPicture: true,
   isRelated: false
 };
-
-export const AssociateSelf = Template.bind({});
-AssociateSelf.args = {
-  className: '',
-  name: 'associateName',
-  Picture: AssociateIcon,
-  isIcon: false,
-  isNotification: true,
-  isPicture: false,
-  isRelated: false
-};
-export const SegmentCore = Template.bind({});
-SegmentCore.args = {
+export const DisplayCard2 = Template.bind({});
+DisplayCard2.args = {
   className: 'iguru-rightarrowicon',
   description: 'description',
   name: 'name',
@@ -43,8 +32,8 @@ SegmentCore.args = {
   isPicture: false,
   isRelated: false
 };
-export const SegmentRelated = Template.bind({});
-SegmentRelated.args = {
+export const DisplayCard3 = Template.bind({});
+DisplayCard3.args = {
   // className:'iguru-background',
   description: 'description',
   name: 'name',

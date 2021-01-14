@@ -1,7 +1,7 @@
 import React from 'react';
 import AllIcons from './Icons';
 export default {
-  title: 'Design System/Atoms/Icons',
+  title: 'Design System/Atoms/Icon',
   component: AllIcons,
   argTypes: {
     backgroundColor: { control: 'color' }

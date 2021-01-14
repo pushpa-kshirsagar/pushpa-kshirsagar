@@ -16,9 +16,9 @@
   font-weight:400 !important; 
 
 }
-.optionPrimary :hover{
+/* .optionPrimary :hover{
   background: #00000014;
-}
+} */
 .optionPrimary :focus{
   background: #00000014;
 
@@ -48,16 +48,28 @@
   padding:5px;
   display:flex
 }
-.titleSolidGreen{
+.titleSolid-left{
   display: flex;
   height: 50px;
   background-color:#7DC832 !important;
   color:rgba(0, 0, 0, 0.87) !important;
 }
-.titleSolidBlue{
+.titleSolid-right{
   display: flex;
   height: 50px;
-  background-color:#00AFFF;
+  background-color:#00AFFF !important;
+}
+.titleSolid-core{
+  display: flex;
+  height: 50px;
+  background-color:#00AFFF !important;
+  background-image: linear-gradient(to bottom right, #00AFFF, #7DC832);
+
+}
+.titleSolid-centre{
+  display: flex;
+  height: 50px;
+  background-color:#00AFFF !important;
 }
 .titleLightGreen{
   display: flex;
@@ -91,7 +103,7 @@
 }
 .popupClose{
   color:#ffffff;
-  font-size: 2rem;
+  font-size: 2rem !important;
   cursor: pointer;
 }
 @media (max-width: 360px){

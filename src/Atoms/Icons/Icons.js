@@ -26,6 +26,7 @@ import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import NavigatorIcon from '@material-ui/icons/OpenWith';
 import SiftIcon from '@material-ui/icons/FilterList';
 import FirstPage from '@material-ui/icons/FirstPage';
+import Check from '@material-ui/icons/Check';
 import Add from '@material-ui/icons/Add';
 import LastPage from '@material-ui/icons/LastPage';
 import Unverified from '../../images/unverified.svg';
@@ -60,6 +61,10 @@ const Icons = (props) => {
         <Grid item xs={3} className={'iguru-icons'}>
           <SearchIcon className={'iguru-icons-wid-hei'} />
           <div className={'iguru-icon-lbfnt'}>SearchIcon</div>
+        </Grid>
+        <Grid item xs={3} className={'iguru-icons'}>
+          <Check className={'iguru-icons-wid-hei'} />
+          <div className={'iguru-icon-lbfnt'}>Check</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <AssociateIcon className={'iguru-icons-wid-hei'} />

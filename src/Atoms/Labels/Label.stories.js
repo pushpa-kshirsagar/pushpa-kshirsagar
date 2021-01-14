@@ -1,17 +1,17 @@
 import React from 'react';
-import Label from './Label';
+import LabelComp from './Label';
 
 export default {
-  title: 'Design System/Atoms/Labels',
-  component: Label,
+  title: 'Design System/Atoms',
+  component: LabelComp,
   argTypes: {
     colour: { control: 'color' }
   }
 };
-const Template = (args) => <Label {...args} />;
+const Template = (args) => <LabelComp {...args} />;
 
-export const Labels = Template.bind({});
-Labels.args = {
+export const Label = Template.bind({});
+Label.args = {
   alignment: 'left',
   className: '',
   size: 'medium',
