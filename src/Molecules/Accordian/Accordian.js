@@ -12,16 +12,16 @@ import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import List from '../List/List';
 import './Accordian.css';
 const Accordian = (props) => {
-  const { isExpanded, mode = 'revise', header,label, labelBadgeOne, isList, labelBadgeTwo,isListOpen, IconOne, IconTwo } = props;
+  const { isDisplayCardExpanded, mode = 'revise', headerLabel,textOneLabel, textOneLabelBadgeOne, isTextList, textOneLabelBadgeTwo,isTextListExpanded, IconOne, IconTwo,textOne } = props;
   return (
     <div className={'containerPadding'} >
-      <ExpansionPanel expanded={isExpanded} className={'dossierContainerTop'}>
+      <ExpansionPanel expanded={isDisplayCardExpanded} className={'dossierContainerTop'}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMore className={'inputText'} />}
-          className={['dossierBg', 'expansionHeader', isExpanded ? 'expandedPanel' : ''].join(' ')}
+          className={['dossierBg', 'expansionHeader', isDisplayCardExpanded ? 'expandedPanel' : ''].join(' ')}
         >
           <div className={'accordianLabelPadding'}>
-            <div>{header}</div>
+            <div>{headerLabel}</div>
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={'accordionDetails'}>
@@ -31,41 +31,41 @@ const Accordian = (props) => {
                 <FormControl className={['formControlReviewName', 'formControlRight'].join(' ')}>
                   <InputLabel
                     htmlFor="name-input"
-                    className={['textForLabel', 'textForLabelRight', 'careerLabelRight',isList?'careerLabelRighttransform':null].join(' ')}
+                    className={['textForLabel', 'textForLabelRight', 'careerLabelRight',isTextList?'careerLabelRighttransform':null].join(' ')}
                   >
-                    <span className={mode == 'revise' ? 'linkText' : ''}>{label}</span>
-                    {labelBadgeOne?<sup>{labelBadgeOne}</sup>:null}
-                    {labelBadgeTwo?<sup>{labelBadgeTwo}</sup>:null}
+                    <span className={mode == 'revise' ? 'linkText' : ''}>{textOneLabel}</span>
+                    {textOneLabelBadgeOne?<sup>{textOneLabelBadgeOne}</sup>:null}
+                    {textOneLabelBadgeTwo?<sup>{textOneLabelBadgeTwo}</sup>:null}
                   </InputLabel>
-                  {isList?null:
+                  {isTextList?null:
                   <Input className={'inputText'}
                   id="name-dn-input"
-                  value={'sdaasdsa'}
+                  value={textOne}
                   disableUnderline={true}
                   readOnly/>}
                 </FormControl>
                 <div className={'unitFlex'}></div>
-                {isList?
+                {isTextList?
                 <div className={['unitFlex', 'careerLabelRight', 'showLessMoreList'].join(' ')}>
-                  {isListOpen?<ExpandLess className={'showLessMoreListIcon'}/>:<ExpandMore className={'showLessMoreListIcon'} />}
+                  {isTextListExpanded?<ExpandLess className={'showLessMoreListIcon'}/>:<ExpandMore className={'showLessMoreListIcon'} />}
                 </div>
                 :
                 <div className={['unitFlex','unitFlexTop'].join(' ')}>
                 <div className={['unitFlex', 'verifiedUser','verifiedUserTop'].join(' ')}>
                   <IconButton>
-                       <img alt={'img'}src={IconOne}/>
+                       <IconOne/>
                   </IconButton>
                 </div>
                 <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')} >
                 <IconButton>
-                <img alt={'img'}src={IconTwo}/>
+                   <IconTwo/>
                 </IconButton>
                 </div>
             </div>
                 }
               </div>
             </div>
-            {isListOpen?
+            {isTextList && isTextListExpanded?
             <List name={'name'}/>
             :null}
           </div>

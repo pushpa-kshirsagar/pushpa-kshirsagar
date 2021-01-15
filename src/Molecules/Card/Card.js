@@ -9,12 +9,12 @@ import Avatar from '@material-ui/core/Avatar';
 import './Card.css';
 const Card = (props) => {
   const {
-    name = '',
-    description = '',
+    textOneLabel = '',
+    textTwoLabel = '',
     Icon,
     isIcon,
-    Picture,
-    isPicture,
+    Image,
+    isImage,
     isNotification,
     className,
     isRelated
@@ -26,14 +26,14 @@ const Card = (props) => {
         <div className={['iguru-componentinnerdiv', 'iguru-background'].join(' ')}>
           <div className={'iguru-cardContentMidPanel'}>
             <div
-              className={['midPaneInformation', description !== '' ? null : 'aliasmiddle'].join(
+              className={['midPaneInformation', textTwoLabel !== '' ? null : 'aliasmiddle'].join(
                 ' '
               )}
             >
               {/* {name} */}
-              <Label labelText={name} labelSize={'1.6rem'} />
+              <Label labelText={textOneLabel} labelSize={'1.6rem'} />
             </div>
-            <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{description}</div>
+            <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwoLabel}</div>
           </div>
           <div className={'iguru-iconbox'}>
             {isRelated ? (
@@ -45,7 +45,7 @@ const Card = (props) => {
             )}
           </div>
           <div className={'iguru-iconbox'}>
-            {isPicture ? (
+            {isImage ? (
               <Avatar
                 alt=""
                 className={'svgRootSize'}
@@ -54,7 +54,7 @@ const Card = (props) => {
             ) : isIcon ? (
               <Icon className={className} />
             ) : (
-              <IconButton Icon={Picture} mode={'default'} className={'imageNA'} />
+              <IconButton Icon={Image} mode={'default'} className={'imageNA'} />
             )}
           </div>
         </div>

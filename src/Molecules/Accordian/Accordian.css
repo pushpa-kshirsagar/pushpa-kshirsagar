@@ -24,8 +24,8 @@
   margin:0;
 }
 .expansionHeader div:last-child{
-  /* width: calc( 16.667% - 2px ); */
-  right: 5px;
+  width: calc( 16.667% - 2px );
+  /* right: 5px; */
 }
 .expansionHeader div:last-child svg{
   width:2rem;
@@ -156,7 +156,7 @@
 .verifiedUserTop button{
   align-items:center;
   margin-top: -5px;
-  margin-right: -23px;
+  margin-right: 15px;
 
 
 }
