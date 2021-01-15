@@ -17,9 +17,9 @@ DisplayPane2.args = {
   displayPane: 'centre',
   headerColour: 'green',
   headerLabel: 'associate',
-  headerLabelCore: 'nodes',
-  headerLabelPrimary: 'distinct',
-  headerLabelSecondary: 'active',
+  headerBadgeOne: 'nodes',
+  headerBadgeTwo: 'distinct',
+  headerBadgeThree: 'active',
   headerScanCount: 34
 };
 export const DisplayPane3 = Template.bind({});
@@ -27,7 +27,7 @@ DisplayPane3.args = {
   displayPane: 'right',
   headerColour: 'green',
   headerLabel: 'associate',
-  headerLabelCore: 'node',
-  headerLabelPrimary: 'information',
-  headerLabelSecondary: 'all'
+  headerBadgeOne: 'node',
+  headerBadgeTwo: 'information',
+  headerBadgeThree: 'all'
 };

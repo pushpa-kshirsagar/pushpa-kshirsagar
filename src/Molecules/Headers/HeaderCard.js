@@ -11,10 +11,10 @@ import './HeaderCard.css';
 const HeaderCard = (props) => {
   const {
     headerLabel = 'dashboard',
-    headerLabelCore = '',
-    headerLabelPrimary = '',
-    headerLabelSecondary = '',
-    headerLabelTertiary = '',
+    headerBadgeOne = '',
+    headerBadgeTwo = '',
+    headerBadgeThree = '',
+    headerBadgeFour = '',
     displayPane = '',
     headerScanCount = 0,
     headerColour
@@ -32,27 +32,27 @@ const HeaderCard = (props) => {
             <div className={'iguru-moretextpanelheader'}>
               <div>
                 <span>{headerLabel}</span>&nbsp;
-                {headerLabelCore !== '' ? (
+                {headerBadgeOne !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerLabelCore}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerBadgeOne}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {headerLabelPrimary !== '' ? (
+                {headerBadgeTwo !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerLabelPrimary}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerBadgeTwo}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {headerLabelSecondary !== '' ? (
+                {headerBadgeThree !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerLabelSecondary}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerBadgeThree}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {headerLabelTertiary !== '' ? (
+                {headerBadgeFour !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerLabelTertiary}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerBadgeFour}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}

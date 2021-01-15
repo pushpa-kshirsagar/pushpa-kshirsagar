@@ -1,4 +1,4 @@
-import React,{Fragment} from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -12,11 +12,19 @@ import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
 
 const Popup = (props) => {
-  const {isopen, headerLabel, headerLabelCore, headerLabelPrimary, headerLabelSecondary, close, displayPane}=props;
+  const {
+    isOpen,
+    headerLabel,
+    headerBadgeOne,
+    headerBadgeTwo,
+    headerBadgeThree,
+    close,
+    displayPane
+  } = props;
   return (
     <div>
       <Dialog
-        open={isopen}
+        open={isOpen}
         disableEscapeKeyDown={true}
         onClose={close}
         aria-labelledby="dialog-title"
@@ -24,32 +32,36 @@ const Popup = (props) => {
         // className={parentDialogue}
       >
         <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
-          <Paper className={['popupMainHeader',`titleSolid-${displayPane}`].join(' ')}>
+          <Paper className={['popupMainHeader', `titleSolid-${displayPane}`].join(' ')}>
             <div className={['componentInnerDiv', 'popupMainHeader'].join(' ')}>
               <div className={'titleBox'}>
                 <span>{headerLabel}</span>&nbsp;
-                {headerLabelCore !== '' ? (
+                {headerBadgeOne !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerLabelCore}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerBadgeOne}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                 {headerLabelPrimary !== '' ? (
+                {headerBadgeTwo !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerLabelPrimary}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerBadgeTwo}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {headerLabelSecondary !== '' ? (
+                {headerBadgeThree !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerLabelSecondary}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerBadgeThree}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
               </div>
               <div className={'backArrow'}>
                 <IconButton className="MuiIconButton-root-1602">
-                 {displayPane=='core'?<Check className={'popupClose'} />: <Previous className={'popupClose'} />}
+                  {displayPane == 'core' ? (
+                    <Check className={'popupClose'} />
+                  ) : (
+                    <Previous className={'popupClose'} />
+                  )}
                 </IconButton>
               </div>
               <div className={'backArrow'}>
@@ -88,6 +100,6 @@ Popup.propTypes = {
   displayPane: PropTypes.oneOf(['centre', 'core', 'left', 'right']),
   headerLabel: PropTypes.string,
   className: null,
-  isopen:PropTypes.bool
+  isOpen: PropTypes.bool
 };
 export default Popup;
