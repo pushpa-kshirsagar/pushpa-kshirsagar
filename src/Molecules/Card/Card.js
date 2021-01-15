@@ -31,7 +31,7 @@ const Card = (props) => {
               )}
             >
               {/* {name} */}
-              <Label innerText={name} size={'large'} />
+              <Label labelText={name} labelSize={'1.6rem'} />
             </div>
             <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{description}</div>
           </div>

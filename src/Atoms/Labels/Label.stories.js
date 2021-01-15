@@ -5,17 +5,16 @@ export default {
   title: 'Design System/Atoms',
   component: LabelComp,
   argTypes: {
-    colour: { control: 'color' }
+    labelColour: { control: 'color' }
   }
 };
 const Template = (args) => <LabelComp {...args} />;
 
 export const Label = Template.bind({});
 Label.args = {
-  alignment: 'left',
   className: '',
-  size: 'medium',
-  innerText: 'Sample Text',
-  colour: '#000000',
+  labelSize: '1.2rem',
+  labelText: 'Sample Text',
+  labelColour: '#000000',
   isBadge: false
 };

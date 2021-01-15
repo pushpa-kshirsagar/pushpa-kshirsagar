@@ -8,4 +8,8 @@ export default {
 const Template = (args) => <BasicCard {...args} />;
 
 export const BasicCards = Template.bind({});
-BasicCards.args = {};
+BasicCards.args = {
+  name: 'Shivam Sharma',
+  description: 'No Information',
+  isPicure: false
+};
