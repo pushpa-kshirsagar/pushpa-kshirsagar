@@ -72,14 +72,7 @@
     height:1.6rem;
     
 }
-.unitFlexTop{
-  flex-direction:column;
-  align-items:center;
-  height:50px;
-}
-.unitFlexTop button{
-  height:20px;
-}
+
 .cardButtonwithouttextTransform{
   display:block;
   text-align:left;
