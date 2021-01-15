@@ -1,13 +1,21 @@
-import { Avatar, Grid } from '@material-ui/core';
-import { Notifications } from '@material-ui/icons';
+import { Avatar, Grid, IconButton } from '@material-ui/core';
+import { CheckBoxOutlineBlank, Notifications } from '@material-ui/icons';
+import PropTypes from 'prop-types';
 import PersonIcon from '@material-ui/icons/Person';
 import React from 'react';
 import Label from '../../Atoms/Labels/Label';
-import IconButton from '../IconButton/IconButton';
+import IconsButton from '../IconButton/IconButton';
 import './BasicCard.css';
 
 const BasicCard = (props) => {
-  const { isPicure = false } = props;
+  const {
+    name = 'Shivam Sharma',
+    description = 'No Information',
+    isPicure = false,
+    isNameVerified = false,
+    isPictureVerified = false,
+    flag = false
+  } = props;
 
   return (
     <Grid className="basic-card-container">
@@ -15,15 +23,15 @@ const BasicCard = (props) => {
         <div className="label-container">
           <Label
             className="basic-card-label"
-            innerText="name"
-            size="medium"
-            colour="rgba(0, 0, 0, 0.54)"
+            labelText="name"
+            labelSize="1.2rem"
+            labelColour="rgba(0, 0, 0, 0.54)"
           />
           <Label
             className="padding-top-bottom"
-            innerText="Shivam Sharma"
-            size="large"
-            colour="rgba(0, 0, 0, 0.87)"
+            labelText={name}
+            labelSize="1.6rem"
+            labelColour="rgba(0, 0, 0, 0.87)"
           />
         </div>
         <div className="notifications-icon-container">
@@ -37,7 +45,7 @@ const BasicCard = (props) => {
               src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
             />
           ) : (
-            <IconButton Icon={PersonIcon} mode={'default'} className={'imageNA'} />
+            <IconsButton Icon={PersonIcon} mode={'default'} className={'imageNA'} />
           )}
         </div>
       </div>
@@ -45,20 +53,72 @@ const BasicCard = (props) => {
         <div className="label-container">
           <Label
             className="basic-card-label"
-            innerText="alias"
-            size="medium"
-            colour="rgba(0, 0, 0, 0.54)"
+            labelText="alias"
+            labelSize="1.6rem"
+            labelColour="rgba(0, 0, 0, 0.54)"
           />
           <Label
             className="padding-top-bottom"
-            innerText="No Information"
-            size="large"
-            colour="rgba(0, 0, 0, 0.87)"
+            labelText={description}
+            labelSize="1.1.6rem"
+            labelColour="rgba(0, 0, 0, 0.87)"
           />
+        </div>
+        <div className={"classNames(classes.unitFlex, classes.unitFlexTop)"}>
+          <div className={"classNames(classes.unitFlex, classes.iconsBarDefaultFlag)"}>
+            <IconButton>
+              {flag ? <i className="fa fa-flag"></i> : <i className="far fa-flag"></i>}
+            </IconButton>
+          </div>
+          <div className={"classes.unitFlex"} style={{ alignItems: 'flex-start' }}>
+            <div className={"classNames(classes.unitFlex, classes.selectedOption)"}>
+              <IconButton>
+                <CheckBoxOutlineBlank style={{ height: '0.82em' }} />
+              </IconButton>
+            </div>
+          </div>
+        </div>
+
+        <div className={"classNames(classes.unitFlex, classes.unitFlexTop)"}>
+          <div
+            className={"classNames(classes.unitFlex, classes.verifiedUser, classes.verifiedUserTop)"}
+            style={{ alignItems: 'flex-start' }}
+          >
+            <IconButton>
+              <img
+                alt="Anonymous"
+                src={isNameVerified ? '../../images/verified.svg' : '../../images/unverified.svg'}
+                className={"classes.verifiedImage"}
+              />
+            </IconButton>
+          </div>
+          <div
+            className={"classNames(classes.unitFlex, classes.verifiedUser, classes.verifiedUserTop)"}
+          >
+            <IconButton>
+              <img
+                alt="Anonymous"
+                src={isPictureVerified ? '../../images/verified.svg' : '../../images/unverified.svg'}
+                className={"classes.verifiedImage"}
+              />
+            </IconButton>
+          </div>
         </div>
       </div>
     </Grid>
   );
+};
+
+BasicCard.propTypes = {
+  name: PropTypes.string,
+  description: PropTypes.string,
+  isPicure: PropTypes.bool
+};
+
+BasicCard.defaultProps = {
+  name: 'Sample Text',
+  description: 'No Information',
+  isPicure: false
 };
 
 export default BasicCard;
