@@ -13,11 +13,11 @@ export const Popup = Template.bind({});
 Popup.args = {
   className: null,
   headerLabel: 'assessees',
-  headerBadgeOne:'',
-  headerBadgeTwo:'',
-  headerBadgeThree:'',
-  displayPane: 'left',
-  isOpen:true
+  headerLabelBadgeOne: '',
+  headerLabelBadgeTwo: '',
+  headerLabelBadgeThree: '',
+  headerColour: 'displayPaneLeft',
+  isDisplayed: true
 };
 
 // export const toolkit = Template.bind({});

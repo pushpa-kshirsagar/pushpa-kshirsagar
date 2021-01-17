@@ -7,23 +7,23 @@
   border-radius: 50%;
   border-width: 0;
 }
-.icon-button-left {
+.icon-button-displayPaneLeft {
   /* color: hsl(90, 58%, 90%); */
   color: #ffffff;
   background-color: #7dc832;
 }
-.icon-button-left:hover {
+.icon-button-displayPaneLeft:hover {
   background: #b1de84;
 }
-.icon-button-right {
+.icon-button-displayPaneRight {
   color: #ffffff;
   background-color: #00afff;
 }
-.icon-button-centre {
+.icon-button-displayPaneCentre {
   color: #ffffff;
   background-color: #00afff;
 }
-.icon-button-default {
+.icon-button-generic {
   color: rgba(0, 0, 0, 0.87);
   box-sizing: border-box;
   background-color: transparent;

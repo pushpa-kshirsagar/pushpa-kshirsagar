@@ -9,10 +9,11 @@ const Template = (args) => <Lists {...args} />;
 
 export const List = Template.bind({});
 List.args = {
-  name: 'name',
-  description: 'description',
+  className: '',
+  textOne: 'name',
+  textTwo: 'description',
   status: 'active',
-  isNotification: true,
-  isFlaged: true,
+  isAlert: true,
+  isFlagged: true,
   isSelected: true
 };

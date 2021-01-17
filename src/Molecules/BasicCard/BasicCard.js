@@ -64,14 +64,14 @@ const BasicCard = (props) => {
             labelColour="rgba(0, 0, 0, 0.87)"
           />
         </div>
-        <div className={"classNames(classes.unitFlex, classes.unitFlexTop)"}>
-          <div className={"classNames(classes.unitFlex, classes.iconsBarDefaultFlag)"}>
+        <div className={'unitFlex, unitFlexTop'}>
+          <div className={'unitFlex, iconsBarDefaultFlag'}>
             <IconButton>
               {flag ? <i className="fa fa-flag"></i> : <i className="far fa-flag"></i>}
             </IconButton>
           </div>
-          <div className={"classes.unitFlex"} style={{ alignItems: 'flex-start' }}>
-            <div className={"classNames(classes.unitFlex, classes.selectedOption)"}>
+          <div className={'unitFlex'} style={{ alignItems: 'flex-start' }}>
+            <div className={'unitFlex, selectedOption'}>
               <IconButton>
                 <CheckBoxOutlineBlank style={{ height: '0.82em' }} />
               </IconButton>
@@ -79,27 +79,27 @@ const BasicCard = (props) => {
           </div>
         </div>
 
-        <div className={"classNames(classes.unitFlex, classes.unitFlexTop)"}>
+        <div className={'unitFlex, unitFlexTop'}>
           <div
-            className={"classNames(classes.unitFlex, classes.verifiedUser, classes.verifiedUserTop)"}
+            className={'unitFlex, verifiedUser, verifiedUserTop'}
             style={{ alignItems: 'flex-start' }}
           >
             <IconButton>
               <img
                 alt="Anonymous"
                 src={isNameVerified ? '../../images/verified.svg' : '../../images/unverified.svg'}
-                className={"classes.verifiedImage"}
+                className={'verifiedImage'}
               />
             </IconButton>
           </div>
-          <div
-            className={"classNames(classes.unitFlex, classes.verifiedUser, classes.verifiedUserTop)"}
-          >
+          <div className={'unitFlex, verifiedUser, verifiedUserTop'}>
             <IconButton>
               <img
                 alt="Anonymous"
-                src={isPictureVerified ? '../../images/verified.svg' : '../../images/unverified.svg'}
-                className={"classes.verifiedImage"}
+                src={
+                  isPictureVerified ? '../../images/verified.svg' : '../../images/unverified.svg'
+                }
+                className={'verifiedImage'}
               />
             </IconButton>
           </div>
