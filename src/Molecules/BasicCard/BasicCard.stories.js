@@ -12,9 +12,9 @@ DisplayCard4.args = {
   className: '',
   textOne: 'Sample Text',
   textTwo: 'No Information',
+  isAlertActive: false,
+  isFlagActive: false,
   isImage: false,
   isVerifiedActiveName: false,
-  isVerifiedActivePicture: false,
-  isFlagActive: false,
-  isAlertActive: false
+  isVerifiedActivePicture: false
 };
