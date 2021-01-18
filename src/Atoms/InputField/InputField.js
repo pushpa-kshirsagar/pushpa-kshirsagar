@@ -4,7 +4,7 @@ import './InputField.css';
 import { FormControl, Input, InputLabel } from '@material-ui/core';
 
 export const InputField = (props) => {
-  const { inputFieldLabel, inputFieldType = 'text' } = props;
+  const { id, label, type = 'text' } = props;
   const [name, setName] = useState('');
   const handleChange = (event) => {
     setName(event.target.value);
@@ -14,17 +14,18 @@ export const InputField = (props) => {
     <div className="popup-form-box">
       <FormControl style={{ width: '100%' }}>
         <InputLabel htmlFor="component-simple" style={{ fontSize: '1.6rem' }}>
-          {inputFieldLabel}
+          {label}
         </InputLabel>
-        <Input type={inputFieldType} id={inputFieldLabel} value={name} onChange={handleChange} />
+        <Input type={type} id={id} value={name} onChange={handleChange} />
       </FormControl>
     </div>
   );
 };
 
 InputField.propTypes = {
-  inputFieldLabel: PropTypes.string,
-  inputFieldType: PropTypes.oneOf(['text', 'password'])
+  className: PropTypes.string,
+  label: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'password'])
 };
 
 export default InputField;

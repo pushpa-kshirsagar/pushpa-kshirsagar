@@ -8,13 +8,13 @@ import { Keyboard } from '@material-ui/icons';
  * Primary UI component for user interaction
  */
 const IconButton = (props) => {
-  console.log(props);
-  const { label, Icon, displayPane, className } = props;
+  const { label, Icon, colour, className } = props;
   // const displayPane = primary ? 'icon-button-primary' : 'icon-button-secondary';
+
   return (
     <div>
       <div className={'iconBoxFooter'}>
-        <button className={[`icon-button`, `icon-button-${displayPane}`, className].join(' ')}>
+        <button className={[`icon-button`, `icon-button-${colour}`, className].join(' ')}>
           <Icon />
         </button>
         <InputLabel className={'iconsFooterLabelDefault'}>{label}</InputLabel>
@@ -24,7 +24,8 @@ const IconButton = (props) => {
 };
 
 IconButton.propTypes = {
-  displayPane: PropTypes.oneOf(['centre', 'default', 'left', 'right']),
+  colour: PropTypes.oneOf(['displayPaneLeft', 'displayPaneCentre', 'displayPaneRight', 'generic']), //new changes
+  //displayPane: PropTypes.oneOf(['centre', 'default', 'left', 'right']),  //old
   label: PropTypes.string,
   Icon: Keyboard
   // onClick: PropTypes.func,

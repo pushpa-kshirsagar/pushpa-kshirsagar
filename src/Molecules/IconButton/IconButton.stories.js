@@ -15,7 +15,7 @@ ButtonIcon.args = {
   className: null,
   Icon: Keyboard,
   label: 'calculator',
-  displayPane: 'left'
+  colour: 'displayPaneLeft'
 };
 
 // export const toolkit = Template.bind({});

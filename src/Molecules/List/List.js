@@ -7,7 +7,7 @@ import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import './List.css';
 
 const List = (props) => {
-  const { description = '', name, status, isNotification, isFlaged, isSelected } = props;
+  const { textTwo = '', textOne, status, isAlert, isFlagged, isSelected } = props;
   const listarr = ['01', '02', '03'];
 
   return (
@@ -24,12 +24,12 @@ const List = (props) => {
                 <div
                   className={[
                     'midPaneInformation',
-                    description == null || description === '' ? 'aliasmiddle' : null
+                    textTwo == null || textTwo === '' ? 'aliasmiddle' : null
                   ].join(' ')}
                 >
-                  {name}
+                  {textOne}
                 </div>
-                {description != null ? <div className={'midPaneLabel'}>{description}</div> : null}
+                {textTwo != null ? <div className={'midPaneLabel'}>{textTwo}</div> : null}
               </div>
               <div className={'unitFlex'}>
                 <span
@@ -38,7 +38,7 @@ const List = (props) => {
                   )}
                   style={{ textAlign: 'center' }}
                 >
-                  {isNotification ? <Notifications className={'selectionIcon'} /> : null}
+                  {isAlert ? <Notifications className={'selectionIcon'} /> : null}
                   <InputLabel
                     className={['iconsFooterLabelDefault', 'AssesseeNotifyStatusLabel'].join(' ')}
                   >
@@ -48,7 +48,7 @@ const List = (props) => {
               </div>
 
               <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                {isFlaged ? (
+                {isFlagged ? (
                   <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
                     <IconButton className={'assesseeListiconSize'}>
                       <FlagOutlinedIcon className={'flagiconmargin'} />
@@ -61,7 +61,7 @@ const List = (props) => {
                     <div
                       className={[
                         'unitFlex',
-                        isFlaged ? 'iconsBarDefaultFlag' : 'selectedOption'
+                        isFlagged ? 'iconsBarDefaultFlag' : 'selectedOption'
                       ].join(' ')}
                     >
                       <Checkbox
