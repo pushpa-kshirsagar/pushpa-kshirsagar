@@ -2,9 +2,9 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import './Section.css';
 const SectionButton = (props) => {
-  const { isSelected, className = '' } = props;
+  const { isSelectActive, className = '' } = props;
   return (
-    <div className={['middleTabItem', isSelected ? 'activeTabItem' : null].join(' ')}>
+    <div className={['middleTabItem', isSelectActive ? 'activeTabItem' : null].join(' ')}>
       <Button className={className}> </Button>
     </div>
   );

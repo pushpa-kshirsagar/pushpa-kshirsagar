@@ -11,5 +11,5 @@ const Template = (args) => <SectionButton {...args} />;
 export const Button = Template.bind({});
 Button.args = {
   className: '',
-  isSelected: true
+  isSelectActive: true
 };

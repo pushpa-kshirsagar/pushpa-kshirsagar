@@ -10,49 +10,50 @@ import Clear from '@material-ui/icons/Clear';
 import './HeaderCard.css';
 const HeaderCard = (props) => {
   const {
-    headerLabel = 'dashboard',
-    headerBadgeOne = '',
-    headerBadgeTwo = '',
-    headerBadgeThree = '',
-    headerBadgeFour = '',
+    headerOne = 'dashboard',
+    headerOneBadgeOne = '',
+    headerOneBadgeTwo = '',
+    headerOneBadgeThree = '',
+    headerOneBadgeFour = '',
     displayPane = '',
-    headerScanCount = 0,
-    headerColour
+    scanCount = 0,
+    headerPanelColour
   } = props;
-  console.log(props);
+
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
         <Paper
-          className={[`iguru-assesseescontainer`, `iguru-assesseescontainer${headerColour}`].join(
-            ' '
-          )}
+          className={[
+            `iguru-assesseescontainer`,
+            `iguru-assesseescontainer${headerPanelColour}`
+          ].join(' ')}
         >
           <div className={'iguru-componentinnerdiv'}>
             <div className={'iguru-moretextpanelheader'}>
               <div>
-                <span>{headerLabel}</span>&nbsp;
-                {headerBadgeOne !== '' ? (
+                <span>{headerOne}</span>&nbsp;
+                {headerOneBadgeOne !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerBadgeOne}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerOneBadgeOne}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {headerBadgeTwo !== '' ? (
+                {headerOneBadgeTwo !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerBadgeTwo}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerOneBadgeTwo}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {headerBadgeThree !== '' ? (
+                {headerOneBadgeThree !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerBadgeThree}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerOneBadgeThree}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
-                {headerBadgeFour !== '' ? (
+                {headerOneBadgeFour !== '' ? (
                   <Fragment>
-                    <span className={'iguru-header-badge1_0'}>{headerBadgeFour}</span>
+                    <span className={'iguru-header-badge1_0'}>{headerOneBadgeFour}</span>
                     &nbsp;
                   </Fragment>
                 ) : null}
@@ -63,7 +64,7 @@ const HeaderCard = (props) => {
                 {displayPane === 'centre' ? (
                   <Fragment>
                     <SearchIcon className={'iguru-iconbardefault'} />
-                    <span className={'iguru-headerbadge'}>{headerScanCount}</span>
+                    <span className={'iguru-headerbadge'}>{scanCount}</span>
                   </Fragment>
                 ) : displayPane === 'left' ? (
                   <NextIcon className={'iguru-iconbardefault'} />

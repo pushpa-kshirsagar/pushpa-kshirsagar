@@ -9,15 +9,15 @@ import Avatar from '@material-ui/core/Avatar';
 import './Card.css';
 const Card = (props) => {
   const {
-    name = '',
-    description = '',
-    Icon,
+    textOne = '',
+    textTwo = '',
+    IconOne,
     isIcon,
-    Picture,
-    isPicture,
-    isNotification,
+    ImageOne,
+    isImage,
+    isAlertActive,
     className,
-    isRelated
+    isAlliance
   } = props;
 
   return (
@@ -26,35 +26,33 @@ const Card = (props) => {
         <div className={['iguru-componentinnerdiv', 'iguru-background'].join(' ')}>
           <div className={'iguru-cardContentMidPanel'}>
             <div
-              className={['midPaneInformation', description !== '' ? null : 'aliasmiddle'].join(
-                ' '
-              )}
+              className={['midPaneInformation', textTwo !== '' ? null : 'aliasmiddle'].join(' ')}
             >
               {/* {name} */}
-              <Label labelText={name} labelSize={'1.6rem'} />
+              <Label labelText={textOne} labelSize={'1.6rem'} />
             </div>
-            <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{description}</div>
+            <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwo}</div>
           </div>
           <div className={'iguru-iconbox'}>
-            {isRelated ? (
+            {isAlliance ? (
               <span className={['unitFlex', 'assessmenetStatusText'].join(' ')}>lable</span>
             ) : (
               <Badge className={['badgeBox', 'notificationIcon'].join(' ')}>
-                <IconsButton>{isNotification ? <Notifications /> : null}</IconsButton>
+                <IconsButton>{isAlertActive ? <Notifications /> : null}</IconsButton>
               </Badge>
             )}
           </div>
           <div className={'iguru-iconbox'}>
-            {isPicture ? (
+            {isImage ? (
               <Avatar
                 alt=""
                 className={'svgRootSize'}
                 src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
               />
             ) : isIcon ? (
-              <Icon className={className} />
+              <IconOne className={className} />
             ) : (
-              <IconButton Icon={Picture} mode={'default'} className={'imageNA'} />
+              <IconButton Icon={ImageOne} mode={'default'} className={'imageNA'} />
             )}
           </div>
         </div>

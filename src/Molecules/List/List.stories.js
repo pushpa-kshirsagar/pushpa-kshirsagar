@@ -13,7 +13,7 @@ List.args = {
   textOne: 'name',
   textTwo: 'description',
   status: 'active',
-  isAlert: true,
-  isFlagged: true,
-  isSelected: true
+  isAlertActive: true,
+  isFlagActive: true,
+  isSelectActive: true
 };

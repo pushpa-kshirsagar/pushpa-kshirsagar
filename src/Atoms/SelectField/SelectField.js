@@ -4,7 +4,7 @@ import './SelectField.css';
 import { Divider, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 export const SelectField = (props) => {
-  const { tag, label, textList = [] } = props;
+  const { tag, label, listSelect = [] } = props;
   const [selectedOption, setSelectedOption] = useState('');
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -22,7 +22,7 @@ export const SelectField = (props) => {
           onChange={handleChange}
           style={{ fontSize: 'unset' }}
         >
-          {textList.map((option, index) =>
+          {listSelect.map((option, index) =>
             option === 'divider' ? (
               <Divider light />
             ) : (
@@ -40,7 +40,7 @@ export const SelectField = (props) => {
 SelectField.propTypes = {
   tag: PropTypes.string,
   label: PropTypes.string,
-  textList: PropTypes.array
+  listSelect: PropTypes.array
 };
 
 export default SelectField;
