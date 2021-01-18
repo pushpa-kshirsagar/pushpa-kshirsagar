@@ -3,12 +3,12 @@ import SectionButton from '../../Atoms/Sections/SectionButton';
 import SectionLine from '../../Atoms/Sections/SectionLine';
 import '../../Atoms/Sections/Section.css';
 const Sections = (props) => {
-  const { isSelected } = props;
+  const { isSelectActive } = props;
   return (
     <div className={['tabsContainer', 'iguru-leftpanel'].join(' ')}>
       <div className={'middleTabLabel'}>
         <SectionLine />
-        <SectionButton isSelected={isSelected} />
+        <SectionButton isSelected={isSelectActive} />
         <SectionLine />
       </div>
     </div>

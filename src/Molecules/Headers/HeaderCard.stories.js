@@ -8,26 +8,30 @@ const Template = (args) => <HeaderCard {...args} />;
 
 export const DisplayPane1 = Template.bind({});
 DisplayPane1.args = {
+  className: '',
   displayPane: 'left',
-  headerColour: 'blue',
-  headerLabel: 'dashboard'
+  headerPanelColour: 'blue',
+  headerOne: 'dashboard'
 };
 export const DisplayPane2 = Template.bind({});
 DisplayPane2.args = {
+  className: '',
   displayPane: 'centre',
-  headerColour: 'green',
-  headerLabel: 'associate',
-  headerBadgeOne: 'nodes',
-  headerBadgeTwo: 'distinct',
-  headerBadgeThree: 'active',
-  headerScanCount: 34
+  headerPanelColour: 'green',
+  headerOne: 'associate',
+  headerOneBadgeOne: 'nodes',
+  headerOneBadgeTwo: 'distinct',
+  headerOneBadgeThree: 'active',
+  headerOneBadgeFour: '',
+  scanCount: 34
 };
 export const DisplayPane3 = Template.bind({});
 DisplayPane3.args = {
+  className: '',
   displayPane: 'right',
-  headerColour: 'green',
-  headerLabel: 'associate',
-  headerBadgeOne: 'node',
-  headerBadgeTwo: 'information',
-  headerBadgeThree: 'all'
+  headerPanelColour: 'green',
+  headerOne: 'associate',
+  headerOneBadgeOne: 'node',
+  headerOneBadgeTwo: 'information',
+  headerOneBadgeThree: 'all'
 };

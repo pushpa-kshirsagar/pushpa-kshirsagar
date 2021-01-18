@@ -7,7 +7,14 @@ import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import './List.css';
 
 const List = (props) => {
-  const { textTwo = '', textOne, status, isAlert, isFlagged, isSelected } = props;
+  const {
+    textTwo = '',
+    textOne,
+    status,
+    isAlertActive = true,
+    isFlagActive = true,
+    isSelectActive = true
+  } = props;
   const listarr = ['01', '02', '03'];
 
   return (
@@ -38,7 +45,7 @@ const List = (props) => {
                   )}
                   style={{ textAlign: 'center' }}
                 >
-                  {isAlert ? <Notifications className={'selectionIcon'} /> : null}
+                  {isAlertActive ? <Notifications className={'selectionIcon'} /> : null}
                   <InputLabel
                     className={['iconsFooterLabelDefault', 'AssesseeNotifyStatusLabel'].join(' ')}
                   >
@@ -48,7 +55,7 @@ const List = (props) => {
               </div>
 
               <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                {isFlagged ? (
+                {isFlagActive ? (
                   <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
                     <IconButton className={'assesseeListiconSize'}>
                       <FlagOutlinedIcon className={'flagiconmargin'} />
@@ -56,12 +63,12 @@ const List = (props) => {
                     </IconButton>
                   </div>
                 ) : null}
-                {isSelected ? (
+                {isSelectActive ? (
                   <div className={'unitFlex'}>
                     <div
                       className={[
                         'unitFlex',
-                        isFlagged ? 'iconsBarDefaultFlag' : 'selectedOption'
+                        isFlagActive ? 'iconsBarDefaultFlag' : 'selectedOption'
                       ].join(' ')}
                     >
                       <Checkbox

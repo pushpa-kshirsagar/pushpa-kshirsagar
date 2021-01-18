@@ -11,5 +11,5 @@ export const InputField2 = Template.bind({});
 InputField2.args = {
   tag: 'select1',
   label: 'Demo',
-  textList: ['a', 'b', 'c']
+  listSelect: ['a', 'b', 'c'],
 };

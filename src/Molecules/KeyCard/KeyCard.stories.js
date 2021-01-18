@@ -1,30 +1,26 @@
 import React from 'react';
 
-import Accordian from './Accordian';
+import KeyCard from './KeyCard';
 import { Keyboard } from '@material-ui/icons';
 import TelephoneVerified from '@material-ui/icons/Call';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 export default {
   title: 'Design System/Molecules/Display Card',
-  component: Accordian
+  component: KeyCard
 };
 
-const Template = (args) => <Accordian {...args} />;
+const Template = (args) => <KeyCard {...args} />;
 
-export const DisplayCard5 = Template.bind({});
-DisplayCard5.args = {
+export const DisplayCard6 = Template.bind({});
+DisplayCard6.args = {
   className: null,
-  headerOne: 'allocation',
   labelTextOne: 'group',
   labelTextOneBadgeOne: 'primary',
   labelTextOneBadgeTwo: 'secondary',
   textOne: 'sample@gmail.com',
   IconOne: TelephoneVerified,
   IconTwo: VerifiedUserIcon,
-  isDisplayCardExpanded: true,
   isListSelect: true,
-  // isListSelectExpanded: false,
-  
   // allData:[{
   //   headerOne: 'allocation',
   //   isDisplayCardExpanded: true,
@@ -46,11 +42,3 @@ DisplayCard5.args = {
   //   ]
   // }]
 };
-
-// export const toolkit = Template.bind({});
-// toolkit.args = {
-//   label: 'toolkit',
-//   Icon: BusinessCenter,
-//   mode:'secondary',
-//   className:null
-// };

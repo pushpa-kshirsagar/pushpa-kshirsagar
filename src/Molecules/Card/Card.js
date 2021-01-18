@@ -9,15 +9,15 @@ import Avatar from '@material-ui/core/Avatar';
 import './Card.css';
 const Card = (props) => {
   const {
-    textOneLabel = '',
-    textTwoLabel = '',
-    Icon,
+    textOne = '',
+    textTwo = '',
+    IconOne,
     isIcon,
-    Image,
+    ImageOne,
     isImage,
-    isNotification,
+    isAlertActive,
     className,
-    isRelated
+    isAlliance
   } = props;
 
   return (
@@ -26,21 +26,19 @@ const Card = (props) => {
         <div className={['iguru-componentinnerdiv', 'iguru-background'].join(' ')}>
           <div className={'iguru-cardContentMidPanel'}>
             <div
-              className={['midPaneInformation', textTwoLabel !== '' ? null : 'aliasmiddle'].join(
-                ' '
-              )}
+              className={['midPaneInformation', textTwo !== '' ? null : 'aliasmiddle'].join(' ')}
             >
               {/* {name} */}
-              <Label labelText={textOneLabel} labelSize={'1.6rem'} />
+              <Label labelText={textOne} labelSize={'1.6rem'} />
             </div>
-            <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwoLabel}</div>
+            <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwo}</div>
           </div>
           <div className={'iguru-iconbox'}>
-            {isRelated ? (
+            {isAlliance ? (
               <span className={['unitFlex', 'assessmenetStatusText'].join(' ')}>lable</span>
             ) : (
               <Badge className={['badgeBox', 'notificationIcon'].join(' ')}>
-                <IconsButton>{isNotification ? <Notifications /> : null}</IconsButton>
+                <IconsButton>{isAlertActive ? <Notifications /> : null}</IconsButton>
               </Badge>
             )}
           </div>
@@ -52,9 +50,9 @@ const Card = (props) => {
                 src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
               />
             ) : isIcon ? (
-              <Icon className={className} />
+              <IconOne className={className} />
             ) : (
-              <IconButton Icon={Image} mode={'default'} className={'imageNA'} />
+              <IconButton Icon={ImageOne} mode={'default'} className={'imageNA'} />
             )}
           </div>
         </div>
