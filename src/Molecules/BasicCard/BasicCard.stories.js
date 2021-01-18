@@ -2,14 +2,19 @@ import React from 'react';
 import BasicCard from './BasicCard';
 
 export default {
-  title: 'Design System/Molecules/BasicCard',
+  title: 'Design System/Molecules/Display Card',
   component: BasicCard
 };
 const Template = (args) => <BasicCard {...args} />;
 
-export const BasicCards = Template.bind({});
-BasicCards.args = {
-  name: 'Shivam Sharma',
-  description: 'No Information',
-  isPicure: false
+export const DisplayCard4 = Template.bind({});
+DisplayCard4.args = {
+  className: '',
+  textOne: 'Sample Text',
+  textTwo: 'No Information',
+  isImage: false,
+  isVerifiedActiveName: false,
+  isVerifiedActivePicture: false,
+  isFlagActive: false,
+  isAlertActive: false
 };

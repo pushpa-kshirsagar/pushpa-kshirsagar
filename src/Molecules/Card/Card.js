@@ -23,7 +23,7 @@ const Card = (props) => {
   return (
     <div className={'iguru-leftpanel'}>
       <Paper className={[`iguru-iconbox-dashboardcardtop`].join(' ')}>
-        <div className={['iguru-componentinnerdiv', 'iguru-background'].join(' ')}>
+        <div className={['iguru-componentinnerdiv', isAlliance && 'iguru-background'].join(' ')}>
           <div className={'iguru-cardContentMidPanel'}>
             <div
               className={['midPaneInformation', textTwo !== '' ? null : 'aliasmiddle'].join(' ')}

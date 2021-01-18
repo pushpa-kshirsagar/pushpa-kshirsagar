@@ -2,13 +2,13 @@ import React from 'react';
 import Lists from './List';
 
 export default {
-  title: 'Design System/Molecules/List',
+  title: 'Design System/Molecules/Display List',
   component: Lists
 };
 const Template = (args) => <Lists {...args} />;
 
-export const List = Template.bind({});
-List.args = {
+export const DisplayList = Template.bind({});
+DisplayList.args = {
   className: '',
   textOne: 'name',
   textTwo: 'description',

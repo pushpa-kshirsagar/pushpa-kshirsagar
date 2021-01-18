@@ -13,9 +13,9 @@ const Template = (args) => <Button {...args} />;
 export const ButtonIcon = Template.bind({});
 ButtonIcon.args = {
   className: null,
+  colour: 'displayPaneLeft',
   Icon: Keyboard,
-  label: 'calculator',
-  colour: 'displayPaneLeft'
+  label: 'calculator'
 };
 
 // export const toolkit = Template.bind({});

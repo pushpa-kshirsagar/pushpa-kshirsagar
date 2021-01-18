@@ -24,7 +24,7 @@ const Label = (props) => {
 };
 // text-size-${labelSize}
 Label.propTypes = {
-  fontSize: PropTypes.oneOf(['0.875rem', '1rem', '1.2rem', '1.6rem']), // 'extraSmall', 'small', 'medium', 'large'
+  fontSize: PropTypes.oneOf(['0.875rem', '1.0rem', '1.2rem', '1.6rem']), // 'extraSmall', 'small', 'medium', 'large'
   className: PropTypes.string,
   text: PropTypes.string,
   colour: PropTypes.string,
@@ -33,7 +33,7 @@ Label.propTypes = {
 
 Label.defaultProps = {
   className: '',
-  fontSize: '1.2 rem',
+  fontSize: '1.2rem',
   text: 'Sample Text',
   colour: '#000000',
   isBadge: false

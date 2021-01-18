@@ -23,6 +23,11 @@
   flex-direction: column;
   width: 70%;
 }
+.icon-container {
+  padding: 0;
+  height: 20px;
+  width: 45px;
+}
 .notifications-icon-container {
   width: 48px;
   color: rgba(0, 0, 0, 0.54);
@@ -40,6 +45,10 @@
 .notifications-icon-container:hover {
   background: rgba(0, 0, 0, 0.08);
   cursor: pointer;
+}
+.iguru-icons-wid-hei {
+  height: 20px !important;
+  width: 20px !important;
 }
 .notificaton-icon {
   width: 20px !important;

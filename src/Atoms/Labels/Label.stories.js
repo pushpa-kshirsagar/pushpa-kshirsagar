@@ -13,8 +13,8 @@ const Template = (args) => <LabelComp {...args} />;
 export const Label = Template.bind({});
 Label.args = {
   className: '',
+  colour: '#000000',
   fontSize: '1.2rem',
   text: 'Sample Text',
-  colour: '#000000',
   isBadge: false
 };

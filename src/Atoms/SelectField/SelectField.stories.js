@@ -9,7 +9,8 @@ const Template = (args) => <SelectField {...args} />;
 
 export const InputField2 = Template.bind({});
 InputField2.args = {
-  tag: 'select1',
+  className: '',
   label: 'Demo',
-  listSelect: ['a', 'b', 'c']
+  listSelect: ['a', 'b', 'c'],
+  tag: 'select1'
 };

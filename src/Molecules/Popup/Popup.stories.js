@@ -12,11 +12,11 @@ const Template = (args) => <PopupComponent {...args} />;
 export const Popup = Template.bind({});
 Popup.args = {
   className: null,
+  headerPanelColour: 'displayPaneLeft',
   headerOne: 'assessees',
   headerOneBadgeOne: '',
   headerOneBadgeTwo: '',
   headerOneBadgeThree: '',
-  headerPanelColour: 'displayPaneLeft',
   isActive: true
 };
 
