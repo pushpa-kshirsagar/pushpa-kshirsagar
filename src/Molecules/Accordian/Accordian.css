@@ -24,8 +24,8 @@
   margin:0;
 }
 .expansionHeader div:last-child{
-  /* width: calc( 16.667% - 2px ); */
-  right: 5px;
+  width: calc( 16.667% - 2px );
+  margin-right: -20px;;
 }
 .expansionHeader div:last-child svg{
   width:2rem;
@@ -134,7 +134,7 @@
 .showLessMoreList svg{
     width:20px;
     height:20px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 .verifiedUser{
   align-items:flex-start;
@@ -155,8 +155,10 @@
 }
 .verifiedUserTop button{
   align-items:center;
-  margin-top: -5px;
-  margin-right: -23px;
+  padding-top:2px;
 
 
+}
+.keyCardBottomMargin{
+  margin-bottom:5px !important;
 }
