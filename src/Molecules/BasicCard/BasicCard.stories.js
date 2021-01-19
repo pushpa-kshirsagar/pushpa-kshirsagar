@@ -10,8 +10,10 @@ const Template = (args) => <BasicCard {...args} />;
 export const DisplayCard4 = Template.bind({});
 DisplayCard4.args = {
   className: '',
-  textOne: 'Sample Text',
-  textTwo: 'No Information',
+  labelTextOneOne: 'name',
+  textOneOne: 'Sample Text',
+  labelTextOneTwo: 'alias',
+  textOneTwo: 'No Information',
   isAlertActive: false,
   isFlagActive: false,
   isImage: false,

@@ -35,7 +35,7 @@ const Card = (props) => {
           </div>
           <div className={'iguru-iconbox'}>
             {isAlliance ? (
-              <span className={['unitFlex', 'assessmenetStatusText'].join(' ')}>lable</span>
+              <span className={['unitFlex', 'assessmenetStatusText'].join(' ')}>label</span>
             ) : (
               <Badge className={['badgeBox', 'notificationIcon'].join(' ')}>
                 <IconsButton>{isAlertActive ? <Notifications /> : null}</IconsButton>

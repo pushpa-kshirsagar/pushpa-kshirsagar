@@ -29,8 +29,10 @@ import FirstPage from '@material-ui/icons/FirstPage';
 import Check from '@material-ui/icons/Check';
 import Add from '@material-ui/icons/Add';
 import LastPage from '@material-ui/icons/LastPage';
+import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
+import FlagIcon from '@material-ui/icons/Flag';
 import Unverified from '../../images/unverified.svg';
-import Verified from '../../images/verified.svg';
+import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
 import TelephoneVerified from '../../images/telephone_verified.svg';
 import TelephoneUnverified from '../../images/telephone_unverified.svg';
 import MobileVerified from '../../images/mobile_verified.svg';
@@ -143,6 +145,14 @@ const Icons = (props) => {
           <div className={'iguru-icon-lbfnt'}>Navigator</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
+          <FlagOutlinedIcon className={'iguru-icons-wid-hei'} />
+          <div className={'iguru-icon-lbfnt'}>FlagOutlinedIcon</div>
+        </Grid>
+        <Grid item xs={3} className={'iguru-icons'}>
+          <FlagIcon className={'iguru-icons-wid-hei'} />
+          <div className={'iguru-icon-lbfnt'}>FlagIcon</div>
+        </Grid>
+        <Grid item xs={3} className={'iguru-icons'}>
           <SiftIcon className={'iguru-icons-wid-hei'} />
           <div className={'iguru-icon-lbfnt'}>Sift</div>
         </Grid>
@@ -163,7 +173,7 @@ const Icons = (props) => {
           <div className={'iguru-icon-lbfnt'}>Unverified</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
-          <img className={'iguru-icons-wid-hei'} src={Verified} alt="Anonymous" />
+          <VerifiedUserOutlinedIcon className={'iguru-icons-wid-hei'} />
           <div className={'iguru-icon-lbfnt'}>Verified</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>

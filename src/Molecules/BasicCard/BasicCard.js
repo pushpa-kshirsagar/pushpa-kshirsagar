@@ -1,11 +1,12 @@
 import { Avatar, Grid, IconButton } from '@material-ui/core';
-import { CheckBoxOutlineBlank, Notifications } from '@material-ui/icons';
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import Notifications from '@material-ui/icons/NotificationsActive';
 import PropTypes from 'prop-types';
 import PersonIcon from '@material-ui/icons/Person';
 import React from 'react';
 import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
 import Unverified from '../../images/unverified.svg';
-import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
+// import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import FlagIcon from '@material-ui/icons/Flag';
 import Label from '../../Atoms/Labels/Label';
 import IconsButton from '../IconButton/IconButton';
@@ -13,8 +14,10 @@ import './BasicCard.css';
 
 const BasicCard = (props) => {
   const {
-    textOne = 'Sample Text',
-    textTwo = 'No Information',
+    textOneOne = 'Sample Text',
+    labelTextOneOne = 'name',
+    textOneTwo = 'No Information',
+    labelTextOneTwo = 'alias',
     isImage = false,
     isVerifiedActiveName = false,
     isVerifiedActivePicture = false,
@@ -28,13 +31,13 @@ const BasicCard = (props) => {
         <div className="label-container">
           <Label
             className="basic-card-label"
-            text="name"
+            text={labelTextOneOne}
             fontSize="1.2rem"
             colour="rgba(0, 0, 0, 0.54)"
           />
           <Label
             className="padding-top-bottom"
-            text={textOne}
+            text={textOneOne}
             fontSize="1.6rem"
             colour="rgba(0, 0, 0, 0.87)"
           />
@@ -50,7 +53,7 @@ const BasicCard = (props) => {
               src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
             />
           ) : (
-            <IconsButton Icon={PersonIcon} mode={'default'} className={'imageNA'} />
+            <IconsButton Icon={PersonIcon} className={'imageNA'} />
           )}
         </div>
       </div>
@@ -58,21 +61,21 @@ const BasicCard = (props) => {
         <div className="label-container">
           <Label
             className="basic-card-label"
-            text="alias"
+            text={labelTextOneTwo}
             fontSize="1.2rem"
             colour="rgba(0, 0, 0, 0.54)"
           />
           <Label
             className="padding-top-bottom"
-            text={textTwo}
+            text={textOneTwo}
             fontSize="1.6rem"
             colour="rgba(0, 0, 0, 0.87)"
           />
         </div>
-        <div style={{ margin: "0 11% 0 0" }}>
+        <div style={{ margin: '0 11% 0 0' }}>
           <div>
             <IconButton className="icon-container">
-              {isFlagActive ? <FlagIcon  className="iguru-icons-wid-hei" /> : <FlagOutlinedIcon  className="iguru-icons-wid-hei" />}
+              {isFlagActive && <FlagIcon className="iguru-icons-wid-hei" />}
             </IconButton>
           </div>
           <div>
@@ -111,8 +114,10 @@ const BasicCard = (props) => {
 };
 
 BasicCard.propTypes = {
-  textOne: PropTypes.string,
-  textTwo: PropTypes.string,
+  labelTextOneOne: PropTypes.string,
+  textOneOne: PropTypes.string,
+  labelTextOneTwo: PropTypes.string,
+  textOneTwo: PropTypes.string,
   isImage: PropTypes.bool,
   isAlertActive: PropTypes.bool,
   isVerifiedActiveName: PropTypes.bool,
