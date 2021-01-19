@@ -18,7 +18,7 @@ const BasicCard = (props) => {
     labelTextOneOne = 'name',
     textOneTwo = 'No Information',
     labelTextOneTwo = 'alias',
-    isImage = false,
+    isImageActive = false,
     isVerifiedActiveName = false,
     isVerifiedActivePicture = false,
     isFlagActive = false,
@@ -46,7 +46,7 @@ const BasicCard = (props) => {
           {isAlertActive && <Notifications className="notificaton-icon" />}
         </div>
         <div className={'iguru-iconbox'}>
-          {isImage ? (
+          {isImageActive ? (
             <Avatar
               alt=""
               className={'svgRootSize'}
@@ -118,7 +118,7 @@ BasicCard.propTypes = {
   textOneOne: PropTypes.string,
   labelTextOneTwo: PropTypes.string,
   textOneTwo: PropTypes.string,
-  isImage: PropTypes.bool,
+  isImageActive: PropTypes.bool,
   isAlertActive: PropTypes.bool,
   isVerifiedActiveName: PropTypes.bool,
   isVerifiedActivePicture: PropTypes.bool,

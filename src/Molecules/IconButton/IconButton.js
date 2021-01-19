@@ -24,7 +24,12 @@ const IconButton = (props) => {
 };
 
 IconButton.propTypes = {
-  colour: PropTypes.oneOf(['displayPaneLeft', 'displayPaneCentre', 'displayPaneRight', 'genericOne']), //new changes
+  colour: PropTypes.oneOf([
+    'displayPaneLeft',
+    'displayPaneCentre',
+    'displayPaneRight',
+    'genericOne'
+  ]), //new changes
   //displayPane: PropTypes.oneOf(['centre', 'default', 'left', 'right']),  //old
   label: PropTypes.string,
   Icon: Keyboard

@@ -16,7 +16,7 @@ DisplayCard4.args = {
   textOneTwo: 'No Information',
   isAlertActive: false,
   isFlagActive: false,
-  isImage: false,
+  isImageActive: false,
   isVerifiedActiveName: false,
   isVerifiedActivePicture: false
 };
