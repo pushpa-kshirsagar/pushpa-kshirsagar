@@ -8,7 +8,13 @@ import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
 const PopupHeader = (props) => {
-  const { headerPanelColour , headerOne, headerOneBadgeOne, headerOneBadgeTwo,headerOneBadgeThree } = props;
+  const {
+    headerPanelColour,
+    headerOne,
+    headerOneBadgeOne,
+    headerOneBadgeTwo,
+    headerOneBadgeThree
+  } = props;
   return (
     <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
       <Paper className={['popupMainHeader', `titleSolid-${headerPanelColour}`].join(' ')}>
@@ -21,7 +27,7 @@ const PopupHeader = (props) => {
                 &nbsp;
               </Fragment>
             ) : null}
-            {headerOneBadgeTwo? (
+            {headerOneBadgeTwo ? (
               <Fragment>
                 <span className={'iguru-header-badge1_0'}>{headerOneBadgeTwo}</span>
                 &nbsp;
@@ -53,4 +59,4 @@ const PopupHeader = (props) => {
     </DialogTitle>
   );
 };
-export default PopupHeader
+export default PopupHeader;

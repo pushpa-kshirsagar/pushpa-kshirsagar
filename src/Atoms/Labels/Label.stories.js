@@ -3,7 +3,7 @@ import LabelComp from './Label';
 
 export default {
   title: 'Design System/Atoms',
-  component: LabelComp,
+  component: LabelComp
 };
 const Template = (args) => <LabelComp {...args} />;
 

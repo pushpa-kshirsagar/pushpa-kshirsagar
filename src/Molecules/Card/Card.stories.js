@@ -17,7 +17,7 @@ DisplayCard1.args = {
   textTwoOne: 'alias',
   ImageOne: PersonIcon,
   isAlertActive: true,
-  isImageActive: true,
+  isImageActive: true
 };
 export const DisplayCard2 = Template.bind({});
 DisplayCard2.args = {
@@ -25,11 +25,11 @@ DisplayCard2.args = {
   textOneOne: 'name',
   textTwoOne: 'description',
   IconOne: ArrowRight,
-  isIcon: true,
+  isIcon: true
 };
 export const DisplayCard3 = Template.bind({});
 DisplayCard3.args = {
-  className:'',
+  className: '',
   textOneOne: 'name',
   textTwoOne: 'description',
   IconOne: CrossIcon,

@@ -51,9 +51,9 @@ const Card = (props) => {
               />
             ) : isIcon ? (
               <IconOne className={className} />
-            ) : (
-             ImageOne? <IconButton Icon={ImageOne} mode={'default'} className={'imageNA'} />:null
-            )}
+            ) : ImageOne ? (
+              <IconButton Icon={ImageOne} mode={'default'} className={'imageNA'} />
+            ) : null}
           </div>
         </div>
       </Paper>

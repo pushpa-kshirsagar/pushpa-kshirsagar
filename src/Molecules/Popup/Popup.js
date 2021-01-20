@@ -12,11 +12,7 @@ import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
 
 const Popup = (props) => {
-  const {
-    isActive,
-    close,
-    children
-  } = props;
+  const { isActive, close, children } = props;
 
   return (
     <div>

@@ -29,8 +29,7 @@ const Accordian = (props) => {
     allData
   } = props;
   return (
-    
-    <div className={'containerPadding'}>     
+    <div className={'containerPadding'}>
       <ExpansionPanel expanded={isDisplayCardExpanded} className={'dossierContainerTop'}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMore className={'inputText'} />}
@@ -108,7 +107,6 @@ const Accordian = (props) => {
 };
 
 export default Accordian;
-
 
 // {allData.map((item) => (
 //   <ExpansionPanel expanded={isDisplayCardExpanded} className={'dossierContainerTop'}>

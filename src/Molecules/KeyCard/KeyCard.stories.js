@@ -22,7 +22,7 @@ DisplayCard6.args = {
   textOneOne: 'sample@gmail.com',
   IconOne: TelephoneVerified,
   IconTwo: VerifiedUserIcon,
-  isListSelect: true,
+  isListSelect: true
   // allData:[{
   //   headerOne: 'allocation',
   //   isDisplayCardExpanded: true,

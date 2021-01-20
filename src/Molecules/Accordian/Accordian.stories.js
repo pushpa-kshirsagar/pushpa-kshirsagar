@@ -18,15 +18,15 @@ DisplayCard5.args = {
   labelTextOneOne: 'group',
   labelTextOneOneBadgeOne: 'primary',
   labelTextOneOneBadgeTwo: 'secondary',
-  labelTextOneOneBadgeThree:'',
-  labelTextOneOneBadgeFour:'',
+  labelTextOneOneBadgeThree: '',
+  labelTextOneOneBadgeFour: '',
   textOneOne: 'sample@gmail.com',
   IconOne: TelephoneVerified,
   IconTwo: VerifiedUserIcon,
   isDisplayCardExpanded: true,
-  isListSelect: true,
+  isListSelect: true
   // isListSelectExpanded: false,
-  
+
   // allData:[{
   //   headerOne: 'allocation',
   //   isDisplayCardExpanded: true,
