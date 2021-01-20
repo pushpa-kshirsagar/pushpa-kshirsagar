@@ -18,12 +18,12 @@
 /* .optionPrimary :hover{
   background: #00000014;
 } */
-.optionPrimary :focus {
+/* .optionPrimary :focus {
   background: #00000014;
-}
-.optionPrimary :active {
+} */
+/* .optionPrimary :active {
   background: #00000091;
-}
+} */
 .popupContent {
   padding: 2.5px 0px !important;
   text-align: center;

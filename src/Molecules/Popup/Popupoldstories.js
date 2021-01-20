@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PopupComponent from './Popup';
+import PopupComponent from './PopupContent';
 
 export default {
   title: 'Design System/Molecules',

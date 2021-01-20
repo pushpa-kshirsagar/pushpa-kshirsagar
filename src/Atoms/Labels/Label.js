@@ -24,8 +24,8 @@ const Label = (props) => {
 };
 // text-size-${labelSize}
 Label.propTypes = {
-  fontSize: PropTypes.oneOf(['0.875rem', '1.0rem', '1.2rem', '1.6rem']), // 'extraSmall', 'small', 'medium', 'large'
   className: PropTypes.string,
+  fontSize: PropTypes.oneOf(['0.875rem', '1.0rem', '1.2rem', '1.6rem']), // 'extraSmall', 'small', 'medium', 'large'
   text: PropTypes.string,
   colour: PropTypes.string,
   isBadge: PropTypes.bool

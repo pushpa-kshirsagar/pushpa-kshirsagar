@@ -13,33 +13,26 @@ const Template = (args) => <Card {...args} />;
 export const DisplayCard1 = Template.bind({});
 DisplayCard1.args = {
   className: '',
-  textOne: 'assesseeName',
-  textTwo: 'alias',
+  textOneOne: 'assesseeName',
+  textTwoOne: 'alias',
   ImageOne: PersonIcon,
-  isIcon: false,
   isAlertActive: true,
-  isImage: true,
-  isAlliance: false
+  isImageActive: true,
 };
 export const DisplayCard2 = Template.bind({});
 DisplayCard2.args = {
   className: 'iguru-rightarrowicon',
-  textOne: 'name',
-  textTwo: 'description',
+  textOneOne: 'name',
+  textTwoOne: 'description',
   IconOne: ArrowRight,
   isIcon: true,
-  isAlertActive: false,
-  isImage: false,
-  isAlliance: false
 };
 export const DisplayCard3 = Template.bind({});
 DisplayCard3.args = {
-  // className:'iguru-background',
-  textOne: 'name',
-  textTwo: 'description',
+  className:'',
+  textOneOne: 'name',
+  textTwoOne: 'description',
   IconOne: CrossIcon,
   isIcon: true,
-  isAlertActive: false,
-  isImage: false,
   isAlliance: true
 };

@@ -4,28 +4,45 @@ import { Paper, FormControl, InputLabel, Input } from '@material-ui/core';
 import { ExpansionPanel, IconButton } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 const KeyCard = (props) => {
-  const {isListSelect, textOne, IconOne, IconTwo,labelTextOneBadgeOne,labelTextOneBadgeTwo,labelTextOne}=props;
+  const {
+    isListSelect,
+    textOneOne,
+    IconOne,
+    IconTwo,
+    labelTextOneOneBadgeOne,
+    labelTextOneOneBadgeTwo,
+    labelTextOneOne,
+    labelTextOneOneBadgeThree,
+    labelTextOneOneBadgeFour
+  } = props;
   return (
     <div>
       <div className={'containerPadding'}>
         <Paper className={'dossierContainerTop'}>
           <div>
-          <div className={'detsailsPadding'}>
+            <div className={'detsailsPadding'}>
               <div className={['FormBox', 'detailsHeight'].join(' ')}>
                 <FormControl className={['formControlReviewName', 'formControlRight'].join(' ')}>
                   <InputLabel
                     htmlFor="name-input"
-                    className={['textForLabel', 'textForLabelRight', 'careerLabelRight', isListSelect ? 'careerLabelRighttransform' : null].join(' ')}
+                    className={[
+                      'textForLabel',
+                      'textForLabelRight',
+                      'careerLabelRight',
+                      isListSelect ? 'careerLabelRighttransform' : null
+                    ].join(' ')}
                   >
-                    <span>{labelTextOne}</span>
-                    <sup>{labelTextOneBadgeOne}</sup>
-                    <sup>{labelTextOneBadgeTwo}</sup>
+                    <span>{labelTextOneOne}</span>
+                    {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
+                    {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
+                    {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}
+                    {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null}
                   </InputLabel>
                   {isListSelect ? null : (
                     <Input
                       className={'inputText'}
                       id="name-dn-input"
-                      value={textOne}
+                      value={textOneOne}
                       disableUnderline={true}
                       readOnly
                     />
