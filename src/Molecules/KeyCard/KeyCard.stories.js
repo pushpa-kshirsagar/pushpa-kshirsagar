@@ -1,7 +1,7 @@
 import React from 'react';
 
 import KeyCard from './KeyCard';
-import { Keyboard } from '@material-ui/icons';
+// import { Keyboard } from '@material-ui/icons';
 import TelephoneVerified from '@material-ui/icons/Call';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 export default {

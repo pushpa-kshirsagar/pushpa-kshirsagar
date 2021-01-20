@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
 import PersonIcon from '@material-ui/icons/Person';
-import AssociateIcon from '@material-ui/icons/Camera';
+// import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import CrossIcon from '@material-ui/icons/Clear';
 export default {
