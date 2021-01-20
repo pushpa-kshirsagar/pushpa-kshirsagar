@@ -16,19 +16,20 @@ const Accordian = (props) => {
     isDisplayCardExpanded,
     mode = 'revise',
     headerOne,
-    labelTextOne,
-    labelTextOneBadgeOne,
+    labelTextOneOne,
+    labelTextOneOneBadgeOne,
     isListSelect,
-    labelTextOneBadgeTwo,
+    labelTextOneOneBadgeTwo,
     isListSelectExpanded,
+    labelTextOneOneBadgeThree,
+    labelTextOneOneBadgeFour,
     IconOne,
     IconTwo,
-    textOne,
+    textOneOne,
     allData
   } = props;
   return (
-    
-    <div className={'containerPadding'}>     
+    <div className={'containerPadding'}>
       <ExpansionPanel expanded={isDisplayCardExpanded} className={'dossierContainerTop'}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMore className={'inputText'} />}
@@ -56,15 +57,17 @@ const Accordian = (props) => {
                       isListSelect ? 'careerLabelRighttransform' : null
                     ].join(' ')}
                   >
-                    <span className={mode == 'revise' ? 'linkText' : ''}>{labelTextOne}</span>
-                    {labelTextOneBadgeOne ? <sup>{labelTextOneBadgeOne}</sup> : null}
-                    {labelTextOneBadgeTwo ? <sup>{labelTextOneBadgeTwo}</sup> : null}
+                    <span className={mode == 'revise' ? 'linkText' : ''}>{labelTextOneOne}</span>
+                    {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
+                    {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
+                    {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}
+                    {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null}
                   </InputLabel>
                   {isListSelect ? null : (
                     <Input
                       className={'inputText'}
                       id="name-dn-input"
-                      value={textOne}
+                      value={textOneOne}
                       disableUnderline={true}
                       readOnly
                     />
@@ -104,7 +107,6 @@ const Accordian = (props) => {
 };
 
 export default Accordian;
-
 
 // {allData.map((item) => (
 //   <ExpansionPanel expanded={isDisplayCardExpanded} className={'dossierContainerTop'}>

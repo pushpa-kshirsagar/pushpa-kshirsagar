@@ -15,16 +15,18 @@ export const DisplayCard5 = Template.bind({});
 DisplayCard5.args = {
   className: null,
   headerOne: 'allocation',
-  labelTextOne: 'group',
-  labelTextOneBadgeOne: 'primary',
-  labelTextOneBadgeTwo: 'secondary',
-  textOne: 'sample@gmail.com',
+  labelTextOneOne: 'group',
+  labelTextOneOneBadgeOne: 'primary',
+  labelTextOneOneBadgeTwo: 'secondary',
+  labelTextOneOneBadgeThree: '',
+  labelTextOneOneBadgeFour: '',
+  textOneOne: 'sample@gmail.com',
   IconOne: TelephoneVerified,
   IconTwo: VerifiedUserIcon,
   isDisplayCardExpanded: true,
-  isListSelect: true,
+  isListSelect: true
   // isListSelectExpanded: false,
-  
+
   // allData:[{
   //   headerOne: 'allocation',
   //   isDisplayCardExpanded: true,

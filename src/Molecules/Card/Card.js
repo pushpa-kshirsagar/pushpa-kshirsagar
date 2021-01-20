@@ -9,12 +9,12 @@ import Avatar from '@material-ui/core/Avatar';
 import './Card.css';
 const Card = (props) => {
   const {
-    textOne = '',
-    textTwo = '',
+    textOneOne = '',
+    textTwoOne = '',
     IconOne,
     isIcon,
     ImageOne,
-    isImage,
+    isImageActive,
     isAlertActive,
     className,
     isAlliance
@@ -26,12 +26,12 @@ const Card = (props) => {
         <div className={['iguru-componentinnerdiv', isAlliance && 'iguru-background'].join(' ')}>
           <div className={'iguru-cardContentMidPanel'}>
             <div
-              className={['midPaneInformation', textTwo !== '' ? null : 'aliasmiddle'].join(' ')}
+              className={['midPaneInformation', textTwoOne !== '' ? null : 'aliasmiddle'].join(' ')}
             >
               {/* {name} */}
-              <Label labelText={textOne} labelSize={'1.6rem'} />
+              <Label labelText={textOneOne} labelSize={'1.6rem'} />
             </div>
-            <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwo}</div>
+            <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwoOne}</div>
           </div>
           <div className={'iguru-iconbox'}>
             {isAlliance ? (
@@ -43,7 +43,7 @@ const Card = (props) => {
             )}
           </div>
           <div className={'iguru-iconbox'}>
-            {isImage ? (
+            {isImageActive ? (
               <Avatar
                 alt=""
                 className={'svgRootSize'}
@@ -51,9 +51,9 @@ const Card = (props) => {
               />
             ) : isIcon ? (
               <IconOne className={className} />
-            ) : (
+            ) : ImageOne ? (
               <IconButton Icon={ImageOne} mode={'default'} className={'imageNA'} />
-            )}
+            ) : null}
           </div>
         </div>
       </Paper>

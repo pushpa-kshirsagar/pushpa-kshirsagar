@@ -14,13 +14,15 @@ const Template = (args) => <KeyCard {...args} />;
 export const DisplayCard6 = Template.bind({});
 DisplayCard6.args = {
   className: null,
-  labelTextOne: 'group',
-  labelTextOneBadgeOne: 'primary',
-  labelTextOneBadgeTwo: 'secondary',
-  textOne: 'sample@gmail.com',
+  labelTextOneOne: 'group',
+  labelTextOneOneBadgeOne: 'primary',
+  labelTextOneOneBadgeTwo: 'secondary',
+  labelTextOneOneBadgeThree: '',
+  labelTextOneOneBadgeFour: '',
+  textOneOne: 'sample@gmail.com',
   IconOne: TelephoneVerified,
   IconTwo: VerifiedUserIcon,
-  isListSelect: true,
+  isListSelect: true
   // allData:[{
   //   headerOne: 'allocation',
   //   isDisplayCardExpanded: true,

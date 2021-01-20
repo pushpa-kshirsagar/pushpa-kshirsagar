@@ -11,8 +11,16 @@ import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
 
-const Popup = (props) => {
-  const { isActive, close, children } = props;
+const popupContent = (props) => {
+  const {
+    isActive,
+    close,
+    headerPanelColour = 'green',
+    headerOne,
+    headerOneBadgeOne,
+    headerOneBadgeTwo,
+    headerOneBadgeThree
+  } = props;
 
   return (
     <div>
@@ -24,7 +32,7 @@ const Popup = (props) => {
         aria-describedby="dialog-description"
         // className={parentDialogue}
       >
-        {/* <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
+        <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
           <Paper className={['popupMainHeader', `titleSolid-${headerPanelColour}`].join(' ')}>
             <div className={['componentInnerDiv', 'popupMainHeader'].join(' ')}>
               <div className={'titleBox'}>
@@ -64,9 +72,9 @@ const Popup = (props) => {
               </div>
             </div>
           </Paper>
-        </DialogTitle> */}
-        {children}
-        {/* <DialogContent className={'popupContent'}>
+        </DialogTitle>
+        {/* {children} */}
+        <DialogContent className={'popupContent'}>
           <div id="dialog-description">
             <div className="true">
               <div className={'tickOption'}>
@@ -83,13 +91,13 @@ const Popup = (props) => {
               </div>
             </div>
           </div>
-        </DialogContent> */}
+        </DialogContent>
       </Dialog>
     </div>
   );
 };
 
-Popup.propTypes = {
+popupContent.propTypes = {
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
     'displayPaneCentre',
@@ -101,4 +109,4 @@ Popup.propTypes = {
   className: null,
   isActive: PropTypes.bool
 };
-export default Popup;
+export default popupContent;
