@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import DashboardPage from './Pages/DashboardPage/DashboardPage';
-import LogInPage from './Pages/LogInPage/LogInPage';
+import SignInPage from './Pages/SignInPage/SignInPage';
 // import Card from './Molecules/Card/Card';
 // import PersonIcon from '@material-ui/icons/Person';
 // import Accordian from './Molecules/KeyCard/KeyCard';
@@ -15,8 +15,8 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
-          <Route path="/signIn" component={LogInPage} exact={true} />
+          <Route exact path="/" render={() => <Redirect to="/signIn" />} />
+          <Route path="/signIn" component={SignInPage} exact={true} />
           <Route path="/dashboard" component={DashboardPage} exact={true} />
         </Switch>
       </div>
