@@ -1,11 +1,13 @@
 import React from 'react';
+import IguruTopHeader from '../../Molecules/IguruTopHeader/IguruTopHeader';
 import './DashboardPage.css';
 
 const DashboardPage = () => {
   return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
+    <>
+      <IguruTopHeader />
+      <div>DashboardPage</div>
+    </>
   );
 };
 

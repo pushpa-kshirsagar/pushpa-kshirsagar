@@ -39,6 +39,7 @@ import MobileVerified from '../../images/mobile_verified.svg';
 import MobileUnverified from '../../images/mobile_unverified.svg';
 import HierarchyIcon from '../../images/account_tree.svg';
 import ListIcon from '../../images/view_list.svg';
+import insights from '../../images/insights-black-18dp.svg';
 import './Icons.css';
 const Icons = (props) => {
   return (
@@ -169,8 +170,12 @@ const Icons = (props) => {
           <div className={'iguru-icon-lbfnt'}>Add</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
-          <img className={'iguru-icons-wid-hei'} src={Unverified} />
+          <img className={'iguru-icons-wid-hei'} src={Unverified} alt="Unverified" />
           <div className={'iguru-icon-lbfnt'}>Unverified</div>
+        </Grid>
+        <Grid item xs={3} className={'iguru-icons'}>
+          <img className={'iguru-icons-wid-hei'} src={insights} alt="insights" />
+          <div className={'iguru-icon-lbfnt'}>insights</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <VerifiedUserOutlinedIcon className={'iguru-icons-wid-hei'} />

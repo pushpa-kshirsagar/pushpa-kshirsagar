@@ -16,7 +16,7 @@ const Label = (props) => {
 
   return (
     <div style={style} className={isBadge ? 'batch-container' : 'text-container'}>
-      <p style={{...style, fontSize: fontSize}} className={`${className} text-style`}>
+      <p style={{ ...style, fontSize: fontSize }} className={`${className} text-style`}>
         {text}
       </p>
     </div>
