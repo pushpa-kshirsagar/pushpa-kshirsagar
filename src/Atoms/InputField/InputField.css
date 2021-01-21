@@ -1,6 +1,6 @@
 .popup-form-box {
   margin: 5px 5px;
-  min-height: 65px;
+  min-height: 50px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -8,4 +8,24 @@
 }
 .popup-form-box > .label {
   font-size: 1.6rem;
+}
+
+.inputFields {
+  width: 100%;
+}
+.inputFields div {
+  margin: 0px;
+}
+.inputFields div label div {
+  padding: 1px 0px 1px 0px;
+  line-height: 1.6;
+}
+.inputFields input {
+  font-size: 1.6rem;
+}
+.inputFields textarea {
+  font-size: 1.6rem;
+}
+.popup-form-box label{
+  /* margin-left: 5px; */
 }
