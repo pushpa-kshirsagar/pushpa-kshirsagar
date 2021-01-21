@@ -30,6 +30,7 @@ import Check from '@material-ui/icons/Check';
 import Add from '@material-ui/icons/Add';
 import LastPage from '@material-ui/icons/LastPage';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
+import SendIcon from '@material-ui/icons/Send';
 import FlagIcon from '@material-ui/icons/Flag';
 import Unverified from '../../images/unverified.svg';
 import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
@@ -180,6 +181,10 @@ const Icons = (props) => {
         <Grid item xs={3} className={'iguru-icons'}>
           <VerifiedUserOutlinedIcon className={'iguru-icons-wid-hei'} />
           <div className={'iguru-icon-lbfnt'}>Verified</div>
+        </Grid>
+        <Grid item xs={3} className={'iguru-icons'}>
+          <SendIcon className={'iguru-icons-wid-hei'} />
+          <div className={'iguru-icon-lbfnt'}>SendIcon</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <img
