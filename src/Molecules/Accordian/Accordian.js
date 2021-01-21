@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {
   ExpansionPanelDetails,
   ExpansionPanelSummary,
@@ -9,8 +9,9 @@ import {
 } from '@material-ui/core';
 import { ExpansionPanel, IconButton } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
-import List from '../List/List';
+// import List from '../List/List';
 import './Accordian.css';
+
 const Accordian = (props) => {
   const {
     isDisplayCardExpanded,
@@ -25,8 +26,8 @@ const Accordian = (props) => {
     labelTextOneOneBadgeFour,
     IconOne,
     IconTwo,
-    textOneOne,
-    allData
+    textOneOne
+    // allData
   } = props;
   return (
     <div className={'containerPadding'}>
@@ -57,7 +58,7 @@ const Accordian = (props) => {
                       isListSelect ? 'careerLabelRighttransform' : null
                     ].join(' ')}
                   >
-                    <span className={mode == 'revise' ? 'linkText' : ''}>{labelTextOneOne}</span>
+                    <span className={mode === 'revise' ? 'linkText' : ''}>{labelTextOneOne}</span>
                     {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
                     {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
                     {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}
