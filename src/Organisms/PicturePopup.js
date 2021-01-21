@@ -3,23 +3,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-// import Paper from '@material-ui/core/Paper';
-// import IconButton from '@material-ui/core/IconButton';
-// import Clear from '@material-ui/icons/Clear';
-// import Check from '@material-ui/icons/Check';
-// import Previous from '@material-ui/icons/ArrowBack';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
+import InputLabel from '@material-ui/core/InputLabel';
+import Person from '@material-ui/icons/Person';
+import '../Molecules/Popup/Popup.css';
 const PicturePopup = (props) => {
-  // const {
-  //   isActive,
-  //   headerOne,
-  //   headerOneBadgeOne,
-  //   headerOneBadgeTwo,
-  //   headerOneBadgeThree,
-  //   close,
-  //   headerPanelColour = 'green',
-  //   children
-  // } = props;
+  const {} = props;
 
   return (
     <div>
@@ -29,7 +19,52 @@ const PicturePopup = (props) => {
           headerOne={'assessees'}
           headerOneBadgeOne={'information'}
         />
-        <DialogContent className={'popupContent'}>
+        <DialogContent
+          className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
+        >
+          <div className={'fitContent'}>
+            <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
+              <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                picture &nbsp;
+              </InputLabel>
+            </div>
+
+            <div className={['dashboardImage', 'popupMargin'].join(' ')}>
+              <Button
+                variant="fab"
+                disabled={true}
+                mini
+                className={[
+                  'button',
+                  'uploadImageWidthHeight',
+                  'iconsFooterDefault',
+                  'unAvailable',
+                  'imageNA'
+                ].join(' ')}
+              >
+                <Person className={['svgRootSize', 'uploadImageWidthHeight'].join(' ')} />
+              </Button>
+            </div>
+          </div>
+          <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}></FormHelperText>
+
+          <div className={'fitContent'}>
+            <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
+              <div className={'contFlex'}>
+                <div className={'f4'}>verification</div>
+                <div className={'checkedFontNew'}>
+                  <Checkbox
+                    className={''}
+                    color="default"
+                    disableRipple={true}
+                    disableFocusRipple={true}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+        {/* <DialogContent className={'popupContent'}>
           <div id="dialog-description">
             <div className="true">
               <div className={'tickOption'}>
@@ -46,7 +81,7 @@ const PicturePopup = (props) => {
               </div>
             </div>
           </div>
-        </DialogContent>
+        </DialogContent> */}
       </Popup>
     </div>
   );

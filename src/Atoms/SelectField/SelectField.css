@@ -1,0 +1,17 @@
+.selectFormText {
+  margin: 5px 5px !important;
+  min-height: 50px;
+  display: flex !important;
+}
+.selectFontAlign {
+  font-size: unset !important;
+  text-align: left !important;
+}
+.selectFontAlign svg{
+  font-size: 24px;
+}
+.selectMenu{
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-size: 1.6rem !important;
+}

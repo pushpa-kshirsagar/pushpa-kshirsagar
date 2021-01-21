@@ -1,39 +1,49 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import './SelectField.css';
-import { Divider, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import {
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  FormHelperText
+} from '@material-ui/core';
 
 export const SelectField = (props) => {
-  const { tag, label, listSelect = [] } = props;
+  const { tag, label, listSelect = [], errorMsg } = props;
   const [selectedOption, setSelectedOption] = useState('');
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
   return (
-    <div>
-      <FormControl style={{ width: '100%' }}>
-        <InputLabel htmlFor="ig-select-prefix" style={{ marginBottom: 0, fontSize: '1.6rem' }}>
+    <Fragment>
+      <FormControl className={'selectFormText'}>
+        <InputLabel htmlFor={tag} style={{ marginBottom: 0, fontSize: '1.6rem' }}>
           {label}
         </InputLabel>
         <Select
           id={tag}
           value={selectedOption}
           onChange={handleChange}
-          style={{ fontSize: 'unset' }}
+          className={'selectFontAlign'}
         >
           {listSelect.map((option, index) =>
             option === 'divider' ? (
               <Divider light />
             ) : (
-              <MenuItem key={`${tag}-${index}`} value={option} style={{ fontSize: '1.6rem' }}>
+              <MenuItem key={`${tag}-${index}`} value={option} className={'selectMenu'}>
                 {option}
               </MenuItem>
             )
           )}
         </Select>
       </FormControl>
-    </div>
+      <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
+        {errorMsg}
+      </FormHelperText>
+    </Fragment>
   );
 };
 

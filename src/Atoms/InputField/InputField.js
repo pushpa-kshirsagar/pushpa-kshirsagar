@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './InputField.css';
-import { FormControl, Input, InputLabel } from '@material-ui/core';
+import { Input, InputLabel, FormControl, FormHelperText } from '@material-ui/core';
 
 export const InputField = (props) => {
-  const { id, label, type = 'text' } = props;
+  const { id, label, type = 'text', errorMsg = '' } = props;
   const [name, setName] = useState('');
   const handleChange = (event) => {
     setName(event.target.value);
@@ -13,11 +13,21 @@ export const InputField = (props) => {
   return (
     <div className="popup-form-box">
       <FormControl style={{ width: '100%' }}>
-        <InputLabel htmlFor="component-simple" style={{ fontSize: '1.6rem' }}>
+        <InputLabel htmlFor={id} style={{ fontSize: '1.6rem' }}>
           {label}
         </InputLabel>
-        <Input type={type} id={id} value={name} onChange={handleChange} />
+        <Input
+          type={type}
+          id={id}
+          value={name}
+          onChange={handleChange}
+          autoComplete="off"
+          className={'inputFields'}
+        />
       </FormControl>
+      <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
+        <span>{errorMsg}</span>
+      </FormHelperText>
     </div>
   );
 };
