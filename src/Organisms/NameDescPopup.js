@@ -28,7 +28,7 @@ const NameDescPopup = (props) => {
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
           <FormControl style={{ width: '100%' }}>
-            <InputFeild id={'name'} label={'name'} />
+            <InputFeild id={'description'} label={'description'} />
 
             <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
               <span>{errorMsg}</span>

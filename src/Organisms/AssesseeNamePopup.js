@@ -2,8 +2,7 @@ import React, { Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import { FormControl, InputLabel } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/Popup/Popup.css';
 import InputFeild from '../Atoms/InputField/InputField';
@@ -42,7 +41,7 @@ const AssesseeNamePopup = (props) => {
             tag={'prefix'}
             label={'prefix'}
             listSelect={[
-              '',
+              ' ',
               'Dr.',
               'Dr. (Mrs.)',
               'Mr',
@@ -55,9 +54,15 @@ const AssesseeNamePopup = (props) => {
             ]}
             errorMsg={errorMsg}
           />
-          <InputFeild id={'name'} label={'name'} errorMsg={errorMsg} />
-          <InputFeild id={'lastname'} label={'lastname'} errorMsg={errorMsg} />
-
+          <InputFeild id={'first name'} label={'first name'} errorMsg={errorMsg} />
+          <InputFeild id={'other name'} label={'other name'} errorMsg={errorMsg} />
+          <InputFeild id={'last name'} label={'last name'} errorMsg={errorMsg} />
+          <SelectField
+            tag={'suffix'}
+            label={'suffix'}
+            listSelect={[' ', 'Jr.', 'Sr. ']}
+            errorMsg={errorMsg}
+          />
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')}>
               <div className={'contFlex'}>
