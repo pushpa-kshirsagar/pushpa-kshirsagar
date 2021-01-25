@@ -7,6 +7,8 @@ import Clear from '@material-ui/icons/Clear';
 import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
+import { useDispatch } from 'react-redux';
+import { POPUP_CLOSE } from '../../actionType';
 const PopupHeader = (props) => {
   const {
     headerPanelColour,
@@ -15,6 +17,8 @@ const PopupHeader = (props) => {
     headerOneBadgeTwo,
     headerOneBadgeThree
   } = props;
+  const dispatch = useDispatch();
+
   return (
     <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
       <Paper className={['popupMainHeader', `titleSolid-${headerPanelColour}`].join(' ')}>
@@ -50,7 +54,12 @@ const PopupHeader = (props) => {
             </IconButton>
           </div>
           <div className={'backArrow'}>
-            <IconButton className="MuiIconButton-root-1602">
+            <IconButton
+              onClick={() => {
+                dispatch({ type: POPUP_CLOSE });
+              }}
+              className="MuiIconButton-root-1602"
+            >
               <Clear className={'popupClose'} />
             </IconButton>
           </div>

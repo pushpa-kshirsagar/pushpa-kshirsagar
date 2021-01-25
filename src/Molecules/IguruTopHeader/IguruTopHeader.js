@@ -1,18 +1,29 @@
 import { Avatar } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Label from '../../Atoms/Labels/Label';
 import IconsButton from '../IconButton/IconButton';
 import iGuruLogo from '../../images/iglogo1.png';
 import './IguruTopHeader.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { GET_USER_SAGA } from '../../actionType';
 
 export const IguruTopHeader = (props) => {
+  const user = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  console.log('IN HEADER+++', user);
   const {
     userName = 'Joachim Carvalho',
     userEmail = 'joachim.carvalho@insightguru.com',
     isImageActive = false
   } = props;
+
+  useEffect(() => {
+    console.log('IN useEffect ====>');
+    dispatch({ type: GET_USER_SAGA });
+  }, [dispatch]);
+
   return (
     <div className="header-container">
       <div className="inner-container">
