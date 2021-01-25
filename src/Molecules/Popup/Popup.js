@@ -31,7 +31,7 @@ Popup.propTypes = {
   ]), //new changes
   // displayPane: PropTypes.oneOf(['centre', 'core', 'left', 'right']), //old
   headerOne: PropTypes.string,
-  className: null,
+  className: PropTypes.string,
   isActive: PropTypes.bool
 };
 export default Popup;

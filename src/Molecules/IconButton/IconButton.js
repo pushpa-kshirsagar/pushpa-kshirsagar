@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './IconButton.css';
 import { InputLabel } from '@material-ui/core';
-import { Keyboard } from '@material-ui/icons';
+// import { Keyboard } from '@material-ui/icons';
 
 /**
  * Primary UI component for user interaction
@@ -31,8 +31,7 @@ IconButton.propTypes = {
     'genericOne'
   ]), //new changes
   //displayPane: PropTypes.oneOf(['centre', 'default', 'left', 'right']),  //old
-  label: PropTypes.string,
-  Icon: Keyboard
+  label: PropTypes.string
   // onClick: PropTypes.func,
   // className: null,
 };

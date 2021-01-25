@@ -15,7 +15,8 @@ const PopupHeader = (props) => {
     headerOne,
     headerOneBadgeOne,
     headerOneBadgeTwo,
-    headerOneBadgeThree
+    headerOneBadgeThree,
+    onClick
   } = props;
   const dispatch = useDispatch();
 
@@ -47,7 +48,7 @@ const PopupHeader = (props) => {
           <div className={'backArrow'}>
             <IconButton className="MuiIconButton-root-1602">
               {headerPanelColour === 'genericOne' ? (
-                <Check className={'popupClose'} />
+                <Check className={'popupClose'} onClick={onClick} />
               ) : (
                 <Previous className={'popupClose'} />
               )}

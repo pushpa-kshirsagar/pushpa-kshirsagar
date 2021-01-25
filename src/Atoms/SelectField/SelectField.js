@@ -11,11 +11,11 @@ import {
 } from '@material-ui/core';
 
 export const SelectField = (props) => {
-  const { tag, label, listSelect = [], errorMsg } = props;
-  const [selectedOption, setSelectedOption] = useState('');
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+  const { tag, label, listSelect = [], errorMsg, onChange, value } = props;
+  // const [selectedOption, setSelectedOption] = useState('');
+  // const handleChange = (event) => {
+  //   setSelectedOption(event.target.value);
+  // };
 
   return (
     <Fragment>
@@ -25,8 +25,9 @@ export const SelectField = (props) => {
         </InputLabel>
         <Select
           id={tag}
-          value={selectedOption}
-          onChange={handleChange}
+          name={tag}
+          value={value}
+          onChange={onChange}
           className={'selectFontAlign'}
         >
           {listSelect.map((option, index) =>

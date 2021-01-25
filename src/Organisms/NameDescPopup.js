@@ -7,32 +7,38 @@ import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/Popup/Popup.css';
 import InputFeild from '../Atoms/InputField/InputField';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_NEXT_POPUP } from '../actionType';
 
 const NameDescPopup = (props) => {
+  const { popupMode, isPopUpValue } = useSelector((state) => state.popUpReducer);
+  const dispatch = useDispatch();
   const {
     headerPanelColour = 'genericOne',
     errorMsg = '',
     headerOne = 'assessees',
-    headerOneBadgeOne = 'information'
+    headerOneBadgeOne = 'information',
+    isOpen = false
   } = props;
-
+  const handleClick = () => {
+    if (popupMode === 'SIGNON') {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'PICTUREPOPUP' } });
+    }
+  };
   return (
     <div>
-      <Popup isActive={true}>
+      <Popup isActive={isOpen}>
         <PopupHeader
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
+          onClick={handleClick}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
           <FormControl style={{ width: '100%' }}>
             <InputFeild id={'description'} label={'description'} />
-
-            <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
-              <span>{errorMsg}</span>
-            </FormHelperText>
           </FormControl>
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
