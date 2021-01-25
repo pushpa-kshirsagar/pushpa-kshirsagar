@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { GET_USER_SAGA, SET_USER } from '../../actionType';
+import { GET_USER_URL } from '../../endpoints';
 
-const GET_USER_URL = 'https://run.mocky.io/v3/a8daa4c8-e6e5-4062-8d88-05f3ffdc324d';
 function getUserApi(data) {
   return axios.get(GET_USER_URL);
 }

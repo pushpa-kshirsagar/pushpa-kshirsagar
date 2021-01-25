@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_USER_SAGA, POPUP_OPEN } from '../../actionType';
 import IguruTopHeader from '../../Molecules/IguruTopHeader/IguruTopHeader';
-import PicturePopup from '../../Organisms/PicturePopup';
+import ErrorMessagePopUp from '../../Organisms/ErrorMessagePopUp';
 import './DashboardPage.css';
 
 const DashboardPage = () => {
@@ -19,7 +19,7 @@ const DashboardPage = () => {
   return (
     <>
       {userData && <IguruTopHeader userName={userData.name} userEmail={userData.email} />}
-      <PicturePopup isOpen={isPopUpOpen} />
+      <ErrorMessagePopUp isOpen={isPopUpOpen}/>
       <div
         onClick={() => {
           dispatch({ type: POPUP_OPEN, payload: 'ASSEESSES' });
