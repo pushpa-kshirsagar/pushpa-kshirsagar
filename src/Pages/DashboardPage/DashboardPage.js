@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GET_USER_SAGA, POPUP_OPEN, SIGN_ON_POPUP_FLOW, SIGNON } from '../../actionType';
+import { GET_USER_SAGA, SIGNON } from '../../actionType';
 import IguruTopHeader from '../../Molecules/IguruTopHeader/IguruTopHeader';
 import PicturePopup from '../../Organisms/PicturePopup';
 import AssesseeNamePopup from '../../Organisms/AssesseeNamePopup';
