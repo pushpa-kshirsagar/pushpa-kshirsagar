@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { POPUP_OPEN } from '../../actionType';
+import { GET_USER_SAGA, POPUP_OPEN } from '../../actionType';
 import IguruTopHeader from '../../Molecules/IguruTopHeader/IguruTopHeader';
 import PicturePopup from '../../Organisms/PicturePopup';
 import './DashboardPage.css';
 
 const DashboardPage = () => {
+  const { userData = null } = useSelector((state) => state.userReducer);
   const { isPopUpOpen, isPopUpValue } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   console.log('IN DASH=', isPopUpValue, isPopUpOpen);
 
+  useEffect(() => {
+    console.log('IN useEffect ====>');
+    dispatch({ type: GET_USER_SAGA });
+  }, [dispatch]);
+
   return (
     <>
-      <IguruTopHeader />
+      {userData && <IguruTopHeader userName={userData.name} userEmail={userData.email} />}
       <PicturePopup isOpen={isPopUpOpen} />
       <div
         onClick={() => {

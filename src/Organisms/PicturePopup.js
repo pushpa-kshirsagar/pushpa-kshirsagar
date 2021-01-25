@@ -9,7 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Person from '@material-ui/icons/Person';
 import '../Molecules/Popup/Popup.css';
 const PicturePopup = (props) => {
-  const {isOpen = false} = props;
+  const { isOpen = false } = props;
 
   return (
     <div>
