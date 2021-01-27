@@ -2,9 +2,11 @@ import { Avatar } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import Label from '../../Atoms/Labels/Label';
 import IconsButton from '../IconButton/IconButton';
 import iGuruLogo from '../../images/iglogo1.png';
+import insightGURULogo from '../../images/insightGURULogo.png';
 import './IguruTopHeader.css';
 
 export const IguruTopHeader = (props) => {
@@ -13,6 +15,7 @@ export const IguruTopHeader = (props) => {
     userEmail = 'joachim.carvalho@insightguru.com',
     isImageActive = false
   } = props;
+  // const { userData = null } = useSelector((state) => state.userReducer);
 
   return (
     <div className="header-container">
