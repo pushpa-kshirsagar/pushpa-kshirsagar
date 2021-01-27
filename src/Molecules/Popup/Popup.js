@@ -27,7 +27,8 @@ Popup.propTypes = {
     'displayPaneLeft',
     'displayPaneCentre',
     'displayPaneRight',
-    'genericOne'
+    'genericOne',
+    'genericTwo'
   ]), //new changes
   // displayPane: PropTypes.oneOf(['centre', 'core', 'left', 'right']), //old
   headerOne: PropTypes.string,

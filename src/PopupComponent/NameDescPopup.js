@@ -4,11 +4,12 @@ import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import InputFeild from '../Atoms/InputField/InputField';
 import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/Popup/Popup.css';
-import InputFeild from '../Atoms/InputField/InputField';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
+import PropTypes from 'prop-types';
 
 const NameDescPopup = (props) => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.popUpReducer);
@@ -18,16 +19,17 @@ const NameDescPopup = (props) => {
     errorMsg = '',
     headerOne = 'assessees',
     headerOneBadgeOne = 'information',
-    isOpen = false
+    isActive = false
   } = props;
   const handleClick = () => {
+    //according to creation mode popup sequence will change
     if (popupMode === 'SIGNON') {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'PICTUREPOPUP' } });
     }
   };
   return (
     <div>
-      <Popup isActive={isOpen}>
+      <Popup isActive={isActive}>
         <PopupHeader
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
@@ -61,4 +63,19 @@ const NameDescPopup = (props) => {
   );
 };
 
+NameDescPopup.propTypes = {
+  className: PropTypes.string,
+  headerPanelColour: PropTypes.oneOf([
+    'displayPaneLeft',
+    'displayPaneCentre',
+    'displayPaneRight',
+    'genericOne',
+    'genericTwo'
+  ]),
+  headerOne: PropTypes.string,
+  headerOneBadgeOne: PropTypes.string,
+  headerOneBadgeTwo: '',
+  headerOneBadgeThree: '',
+  isActive:true
+};
 export default NameDescPopup;

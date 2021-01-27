@@ -9,6 +9,7 @@ import '../Molecules/Popup/Popup.css';
 import InputFeild from '../Atoms/InputField/InputField';
 import SelectField from '../Atoms/SelectField/SelectField';
 import { SET_NEXT_POPUP } from '../actionType';
+import PropTypes from 'prop-types';
 
 const AssesseeNamePopup = (props) => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.popUpReducer);
@@ -30,13 +31,16 @@ const AssesseeNamePopup = (props) => {
     errorMsg = '',
     headerOne = 'assessees',
     headerOneBadgeOne = 'information',
-    isOpen = false
+    isActive = false
   } = props;
 
+  // handling checkbox event for disable or enable
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
     setState((prevState) => ({ ...prevState, [name]: checked }));
   };
+  //handling the onchange event
+
   const handleChange = (event) => {
     console.log(event.target);
     const { name, value } = event.target;
@@ -47,6 +51,7 @@ const AssesseeNamePopup = (props) => {
       userNameverifyDisable: false
     }));
   };
+  //this function for validation
   const validate = () => {
     let isValidate = true;
     if (state.firstName === '') {
@@ -59,8 +64,12 @@ const AssesseeNamePopup = (props) => {
     }
     return isValidate;
   };
+
+  //end 
+
   const handleClick = () => {
     if (validate()) {
+      //according to creation mode popup sequence will change
       if (popupMode === 'SIGNON') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ALIASPOPUP' } });
       }
@@ -68,7 +77,7 @@ const AssesseeNamePopup = (props) => {
   };
   return (
     <div>
-      <Popup isActive={isOpen}>
+      <Popup isActive={isActive}>
         <PopupHeader
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
@@ -164,6 +173,22 @@ const AssesseeNamePopup = (props) => {
       </Popup>
     </div>
   );
+};
+
+AssesseeNamePopup.propTypes = {
+  className: PropTypes.string,
+  headerPanelColour: PropTypes.oneOf([
+    'displayPaneLeft',
+    'displayPaneCentre',
+    'displayPaneRight',
+    'genericOne',
+    'genericTwo'
+  ]),
+  headerOne: PropTypes.string,
+  headerOneBadgeOne: PropTypes.string,
+  headerOneBadgeTwo: '',
+  headerOneBadgeThree: '',
+  isActive: PropTypes.bool
 };
 
 export default AssesseeNamePopup;

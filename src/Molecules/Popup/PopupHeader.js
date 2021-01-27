@@ -49,7 +49,7 @@ const PopupHeader = (props) => {
             <IconButton className="MuiIconButton-root-1602">
               {headerPanelColour === 'genericOne' ? (
                 <Check className={'popupClose'} onClick={onClick} />
-              ) : (
+              ) : headerPanelColour === 'genericTwo' ? null : (
                 <Previous className={'popupClose'} />
               )}
             </IconButton>
