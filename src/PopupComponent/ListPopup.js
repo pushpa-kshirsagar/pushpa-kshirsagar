@@ -33,7 +33,7 @@ const ListPopup = (props) => {
               <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
                 <Fragment>
                   {inputHeader}&nbsp;
-                  <span className={'headerBadge'}>{primaryheader}</span>
+                  {primaryheader ? <span className={'headerBadge'}>{primaryheader}</span> : null}
                 </Fragment>
                 <div className={'infoSymbol'}></div>
               </InputLabel>

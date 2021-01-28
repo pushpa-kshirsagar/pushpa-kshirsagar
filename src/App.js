@@ -7,7 +7,7 @@ import store from './store';
 
 function App() {
   return (
-    <Provider store={store}>
+    // <Provider store={store}>
       <Router>
         <div className="App">
           <Switch>
@@ -17,7 +17,7 @@ function App() {
           </Switch>
         </div>
       </Router>
-    </Provider>
+    // </Provider>
   );
 }
 

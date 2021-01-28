@@ -29,3 +29,12 @@
 .popup-form-box label{
   /* margin-left: 5px; */
 }
+.labelheaderBadge{
+  display: inline-block;
+  border-radius: 16px;
+  border: 1px solid;
+  padding: 0 5px;
+  position: relative;
+  font-size: 1rem;
+  top:-2px;
+}

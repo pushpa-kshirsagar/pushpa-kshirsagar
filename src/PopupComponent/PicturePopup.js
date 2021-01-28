@@ -8,16 +8,33 @@ import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
 import Person from '@material-ui/icons/Person';
 import '../Molecules/Popup/Popup.css';
-const PicturePopup = (props) => {
-  const { isOpen = false } = props;
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_NEXT_POPUP } from '../actionType';
 
+
+
+
+const PicturePopup = (props) => {
+  const { popupMode, isPopUpValue } = useSelector((state) => state.popUpReducer);
+  const dispatch = useDispatch();
+  const { isActive = false } = props;
+
+  const handleClick = () => {
+    //according to creation mode popup sequence will change
+    if (popupMode === 'SIGNON') {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
+    }
+  };
+  
   return (
     <div>
-      <Popup isActive={isOpen}>
+      <Popup isActive={isActive}>
         <PopupHeader
           headerPanelColour={'genericOne'}
           headerOne={'assessees'}
           headerOneBadgeOne={'information'}
+          onClick={handleClick}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
@@ -86,5 +103,19 @@ const PicturePopup = (props) => {
     </div>
   );
 };
-
+PicturePopup.propTypes = {
+  className: PropTypes.string,
+  headerPanelColour: PropTypes.oneOf([
+    'displayPaneLeft',
+    'displayPaneCentre',
+    'displayPaneRight',
+    'genericOne',
+    'genericTwo'
+  ]),
+  headerOne: PropTypes.string,
+  headerOneBadgeOne: PropTypes.string,
+  headerOneBadgeTwo: '',
+  headerOneBadgeThree: '',
+  isActive:PropTypes.bool
+};
 export default PicturePopup;
