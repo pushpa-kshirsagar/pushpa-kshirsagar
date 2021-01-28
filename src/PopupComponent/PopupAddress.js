@@ -8,7 +8,7 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP,UPDATE_ASSESSEE_INFO } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 
 const PopupAddress = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
@@ -23,10 +23,9 @@ const PopupAddress = (props) => {
     headerOneBadgeOne = 'information'
   } = props;
   const handleChange = (event) => {
-    console.log(event.target)
+    console.log(event.target);
     const { name, value } = event.target;
     dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
-    
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
@@ -58,27 +57,25 @@ const PopupAddress = (props) => {
             </div>
           </div>
           <FormControl style={{ width: '100%' }}>
-          <SelectField
+            <SelectField
               tag={'countryCode'}
               label={'country / region'}
-              listSelect={['India','USA']}
+              listSelect={['India', 'USA']}
               errorMsg={''}
               onChange={handleChange}
               value={basicInfo.countryCode}
               isRequired={false}
-
             />
             <SelectField
               tag={'stateCode'}
               label={'province / state'}
-              listSelect={['Maharashtra','Karnataka']}
+              listSelect={['Maharashtra', 'Karnataka']}
               errorMsg={''}
               onChange={handleChange}
               value={basicInfo.stateCode}
               isRequired={false}
-
             />
-            
+
             <InputFeild
               id={'postcode'}
               label={'postcode / zip'}
@@ -86,12 +83,11 @@ const PopupAddress = (props) => {
               errorMsg={''}
               onClick={handleChange}
               isRequired={false}
-
             />
-             <SelectField
+            <SelectField
               tag={'cityCode'}
               label={'province / state'}
-              listSelect={['Mumbai','Pune']}
+              listSelect={['Mumbai', 'Pune']}
               errorMsg={''}
               onChange={handleChange}
               value={basicInfo.cityCode}
@@ -104,34 +100,27 @@ const PopupAddress = (props) => {
               errorMsg={''}
               onClick={handleChange}
               isRequired={false}
-
             />
-             <div className={'fitContent'}>
-            <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
-              <div className={'contFlex'}>
-                <div className={'f4'}>communication</div>
-                <div className={'checkedFontNew'}>
-                  <Checkbox
-                    className={''}
-                    color="default"
-                  />
+            <div className={'fitContent'}>
+              <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
+                <div className={'contFlex'}>
+                  <div className={'f4'}>communication</div>
+                  <div className={'checkedFontNew'}>
+                    <Checkbox className={''} color="default" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className={'fitContent'}>
-            <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
-              <div className={'contFlex'}>
-                <div className={'f4'}>verification</div>
-                <div className={'checkedFontNew'}>
-                  <Checkbox
-                    className={''}
-                    color="default"
-                  />
+            <div className={'fitContent'}>
+              <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
+                <div className={'contFlex'}>
+                  <div className={'f4'}>verification</div>
+                  <div className={'checkedFontNew'}>
+                    <Checkbox className={''} color="default" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </FormControl>
         </DialogContent>
       </Popup>

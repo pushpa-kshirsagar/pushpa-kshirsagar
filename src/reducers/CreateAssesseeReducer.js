@@ -8,12 +8,11 @@ const initialState = {
   nameSuffix: '',
   isNameVerified: false,
   email: '',
-  postcode:'',
-  address:'',
-  countryCode:'',
-  stateCode:'',
-  cityCode:'',
-  
+  postcode: '',
+  address: '',
+  countryCode: '',
+  stateCode: '',
+  cityCode: ''
 };
 
 const CreateAssesseeReducer = (istate = initialState, action) => {

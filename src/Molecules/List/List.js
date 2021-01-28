@@ -27,7 +27,9 @@ const List = (props) => {
           className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
           id={id}
         >
-          <div className={['measureBox', 'heightInherit', 'iguru-componentinnerdiv-margin'].join(' ')}>
+          <div
+            className={['measureBox', 'heightInherit', 'iguru-componentinnerdiv-margin'].join(' ')}
+          >
             <div className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}>
               <div
                 className={[

@@ -51,7 +51,7 @@ const PopupEmail = (props) => {
     } else if (exp.test(emailStr)) {
       isValid = true;
       return isValid;
-      } else {
+    } else {
       setState((prevState) => ({
         ...prevState,
         emailErr: 'this information is incorrect'
@@ -97,10 +97,7 @@ const PopupEmail = (props) => {
               <div className={'contFlex'}>
                 <div className={'f4'}>communication</div>
                 <div className={'checkedFontNew'}>
-                  <Checkbox
-                    className={''}
-                    color="default"
-                  />
+                  <Checkbox className={''} color="default" />
                 </div>
               </div>
             </div>
@@ -110,10 +107,7 @@ const PopupEmail = (props) => {
               <div className={'contFlex'}>
                 <div className={'f4'}>sign-in</div>
                 <div className={'checkedFontNew'}>
-                  <Checkbox
-                    className={''}
-                    color="default"
-                  />
+                  <Checkbox className={''} color="default" />
                 </div>
               </div>
             </div>
@@ -123,10 +117,7 @@ const PopupEmail = (props) => {
               <div className={'contFlex'}>
                 <div className={'f4'}>verification</div>
                 <div className={'checkedFontNew'}>
-                  <Checkbox
-                    className={''}
-                    color="default"
-                  />
+                  <Checkbox className={''} color="default" />
                 </div>
               </div>
             </div>
