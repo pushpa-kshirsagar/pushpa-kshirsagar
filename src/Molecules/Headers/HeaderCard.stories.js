@@ -4,7 +4,13 @@ export default {
   title: 'Design System/Molecules/Display Pane',
   component: HeaderCard
 };
-const Template = (args) => <HeaderCard {...args} />;
+const Template = (args) => {
+  return (
+    <div style={{ maxWidth: '33.33%' }}>
+      <HeaderCard {...args} />
+    </div>
+  );
+};
 
 export const DisplayPane1 = Template.bind({});
 DisplayPane1.args = {

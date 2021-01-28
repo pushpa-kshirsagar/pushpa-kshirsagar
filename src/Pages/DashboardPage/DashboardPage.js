@@ -10,6 +10,9 @@ import PopupSingleDropDown from '../../PopupComponent/PopupSingleDropDown';
 import PopupList from '../../PopupComponent/PopupList';
 import PopupAddress from '../../PopupComponent/PopupAddress';
 import './DashboardPage.css';
+import DisplayPaneLeft from '../../Organism/DisplayPaneLeft/DisplayPaneLeft';
+import DisplayPaneRight from '../../Organism/DisplayPaneRight/DisplayPaneRight';
+import DisplayPaneCenter from '../../Organism/DisplayPaneCenter/DisplayPaneCenter';
 
 const DashboardPage = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
@@ -25,6 +28,18 @@ const DashboardPage = () => {
   return (
     <>
       {userData && <IguruTopHeader userName={userData.name} userEmail={userData.email} />}
+      <div className="main-container">
+        <div className="display-pane-container">
+          <DisplayPaneLeft />
+        </div>
+        <div className="display-pane-container">
+          <DisplayPaneCenter />
+        </div>
+        <div className="display-pane-container">
+          <DisplayPaneRight />
+        </div>
+      </div>
+
       <PopupPicture isActive={isPopUpValue === 'PICTUREPOPUP'} />
       <PopupAssesseeName isActive={isPopUpValue === 'NAMEPOPUP'} />
       <PopupNameDesc isActive={isPopUpValue === 'ALIASPOPUP'} label={'alias'} />
