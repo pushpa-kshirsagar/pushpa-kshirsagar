@@ -22,14 +22,20 @@ const Card = (props) => {
 
   return (
     <div className={'iguru-leftpanel'}>
-      <Paper className={[`iguru-iconbox-dashboardcardtop`].join(' ')}>
+      <Paper
+        style={{
+          boxShadow:
+            '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)'
+        }}
+        className={[`iguru-iconbox-dashboardcardtop`].join(' ')}
+      >
         <div className={['iguru-componentinnerdiv', isAlliance && 'iguru-background'].join(' ')}>
           <div className={'iguru-cardContentMidPanel'}>
             <div
               className={['midPaneInformation', textTwoOne !== '' ? null : 'aliasmiddle'].join(' ')}
             >
               {/* {name} */}
-              <Label labelText={textOneOne} labelSize={'1.6rem'} />
+              <Label text={textOneOne} fontSize={'1.6rem'} />
             </div>
             <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwoOne}</div>
           </div>
@@ -52,7 +58,7 @@ const Card = (props) => {
             ) : isIcon ? (
               <IconOne className={className} />
             ) : ImageOne ? (
-              <IconButton Icon={ImageOne} mode={'default'} className={'imageNA'} />
+              <IconButton Icon={ImageOne} className={'imageNA'} />
             ) : null}
           </div>
         </div>

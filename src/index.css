@@ -19,7 +19,6 @@ body {
 .iguru-leftpanel {
   flex: 6;
   margin: 0 1px;
-  max-width: 33.33%;
 }
 .iguru-iconbox {
   display: flex;
@@ -56,7 +55,7 @@ body {
 .imageNA svg {
   height: 4rem;
   width: 4rem;
-  border-radius:50%
+  border-radius: 50%;
 }
 .containerPadding {
   padding: 2.5px !important;
@@ -143,30 +142,30 @@ body {
   align-items: center;
   justify-content: center;
 }
-.iconBoxFooter1{
-  display:flex;
+.iconBoxFooter1 {
+  display: flex;
   flex: 1;
   padding-top: 0;
   align-items: center;
   justify-content: center;
-  flex-direction:column;
+  flex-direction: column;
 }
-.iconBoxFooter{
+.iconBoxFooter {
   display: flex;
   flex: 1;
   padding-top: 4;
   align-items: center;
   justify-content: center;
-  flex-direction:column;
+  flex-direction: column;
 }
 
-.unitFlexTop{
-  flex-direction:column;
-  align-items:center;
-  height:50px;
+.unitFlexTop {
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
 }
-.unitFlexTop button{
-  height:20px;
+.unitFlexTop button {
+  height: 20px;
 }
 .iguru-header-badge1_0 {
   display: inline-block;
@@ -174,7 +173,7 @@ body {
   border: 1px solid;
   padding: 1px 5px;
   position: relative;
-  font-size: 1.0rem;
+  font-size: 1rem;
   font-weight: bold;
   bottom: 1px;
 }
@@ -188,33 +187,33 @@ body {
   background-color: transparent;
   box-sizing: border-box;
 }
-.checkedFontNew{
-  font-size:1.2rem;
-  flex:1;
-  text-align:right;
-   right:-9px;
-   height:25px;
+.checkedFontNew {
+  font-size: 1.2rem;
+  flex: 1;
+  text-align: right;
+  right: -9px;
+  height: 25px;
 }
-.checkedFontNew span:hover{
-  background-color:#fff !important;
-      /* font-size:1.2rem;
+.checkedFontNew span:hover {
+  background-color: #fff !important;
+  /* font-size:1.2rem;
       color:rgba(0, 0, 0, 0.87);
       height: 25px;
       line-height:30px;
           width: auto;
           position: relative;
           right:2.8px; */
-  }
-.checkedFontNew svg{
-      font-size:1.2rem;
-      color:rgba(0, 0, 0, 0.87);
-  }
-  .helperText{
-    font-size:1.2rem !important;
-    color:#f44336 !important;
-    width:100%;
-    height:12px;
-  }
+}
+.checkedFontNew svg {
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.87);
+}
+.helperText {
+  font-size: 1.2rem !important;
+  color: #f44336 !important;
+  width: 100%;
+  height: 12px;
+}
 /* below css for scroll */
 ::-webkit-scrollbar {
   width: 4px;
@@ -222,17 +221,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-track {
-  opacity:0;
+  opacity: 0;
   /*background-color: #b46868;*/
 } /* the new scrollbar will have a flat appearance with the set background color */
 
