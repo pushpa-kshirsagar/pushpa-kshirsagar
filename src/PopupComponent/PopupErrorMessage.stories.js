@@ -1,23 +1,23 @@
 import React from 'react';
-import AssesseeNamePopup from './AssesseeNamePopup';
+import PopupErrorMessage from './PopupErrorMessage';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
   title: 'Design System/Molecules/Pop Up',
-  component: AssesseeNamePopup,
+  component: PopupErrorMessage,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <AssesseeNamePopup {...args} />;
+const Template = (args) => <PopupErrorMessage {...args} />;
 
-export const PopUp2 = Template.bind({});
-PopUp2.args = {
+export const PopUp5 = Template.bind({});
+PopUp5.args = {
   className: null,
-  headerPanelColour: 'genericOne',
+  headerPanelColour: 'genericTwo',
   headerOne: 'assessees',
   headerOneBadgeOne: 'information',
   headerOneBadgeTwo: '',
   headerOneBadgeThree: '',
-  isActive:true
+  isActive: true
 };

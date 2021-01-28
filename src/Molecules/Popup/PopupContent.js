@@ -11,7 +11,7 @@ import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
 
-const popupContent = (props) => {
+const PopupContent = (props) => {
   const {
     isActive,
     close,
@@ -25,7 +25,7 @@ const popupContent = (props) => {
   return (
     <div>
       <Dialog
-        open={isActive} 
+        open={isActive}
         disableEscapeKeyDown={true}
         onClose={close}
         aria-labelledby="dialog-title"
@@ -97,7 +97,7 @@ const popupContent = (props) => {
   );
 };
 
-popupContent.propTypes = {
+PopupContent.propTypes = {
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
     'displayPaneCentre',
@@ -110,4 +110,4 @@ popupContent.propTypes = {
   className: null,
   isActive: PropTypes.bool
 };
-export default popupContent;
+export default PopupContent;

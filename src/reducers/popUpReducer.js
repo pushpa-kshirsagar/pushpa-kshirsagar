@@ -17,7 +17,8 @@ const popUpReducer = (istate = initialState, action) => {
       };
     case POPUP_CLOSE:
       return {
-        isPopUpOpen: false
+        isPopUpOpen: false,
+        isPopUpValue: ''
       };
     case SIGNON:
       return {
@@ -27,9 +28,9 @@ const popUpReducer = (istate = initialState, action) => {
     case SET_NEXT_POPUP:
       return {
         ...istate,
-        isPopUpValue:action.payload.isPopUpValue
-      }
-    
+        isPopUpValue: action.payload.isPopUpValue
+      };
+
     default:
       return istate;
   }

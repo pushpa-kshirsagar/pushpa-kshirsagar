@@ -12,3 +12,5 @@ export const SIGN_ON_POPUP_FLOW = [
 ];
 export const SIGNON = 'SIGNON';
 export const SET_NEXT_POPUP = 'SET_NEXT_POPUP';
+export const UPDATE_ASSESSEE_INFO = 'UPDATE_ASSESSEE_INFO';
+export const CLEAR_ASSESSEE_INFO = 'CLEAR_ASSESSEE_INFO';

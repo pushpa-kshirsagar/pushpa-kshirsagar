@@ -1,15 +1,15 @@
 import React from 'react';
-import SingleDropDownPopup from './SingleDropDownPopup';
+import PopupSingleDropDown from './PopupSingleDropDown';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
   title: 'Design System/Molecules/Pop Up',
-  component: SingleDropDownPopup,
+  component: PopupSingleDropDown,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <SingleDropDownPopup {...args} />;
+const Template = (args) => <PopupSingleDropDown {...args} />;
 
 export const PopUp7 = Template.bind({});
 PopUp7.args = {
@@ -19,7 +19,7 @@ PopUp7.args = {
   headerOneBadgeOne: 'information',
   headerOneBadgeTwo: '',
   headerOneBadgeThree: '',
-  tag:'gender',
-  listSelect:[' ', 'Female', 'Male', 'Unlisted'],
-  isActive:true
+  tag: 'gender',
+  listSelect: [' ', 'Female', 'Male', 'Unlisted'],
+  isActive: true
 };

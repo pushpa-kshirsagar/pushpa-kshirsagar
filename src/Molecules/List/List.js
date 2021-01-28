@@ -13,19 +13,21 @@ const List = (props) => {
     status,
     isAlertActive = true,
     isFlagActive = true,
-    isSelectActive = true
+    isSelectActive = true,
+    id
   } = props;
 
   return (
     <div>
       {/* {listarr.map((item) => ( */}
-      <div className={'containerPadding'}>
+      <div className={'containerPadding'} key={id}>
         <div
           disableFocusRipple={true}
           disableRipple={true}
           className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
+          id={id}
         >
-          <div className={['measureBox', 'heightInherit', 'iguru-componentinnerdiv'].join(' ')}>
+          <div className={['measureBox', 'heightInherit', 'iguru-componentinnerdiv-margin'].join(' ')}>
             <div className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}>
               <div
                 className={[

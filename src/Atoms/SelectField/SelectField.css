@@ -1,5 +1,7 @@
 .selectFormText {
-  margin: 5px 5px !important;
+  /* margin: 5px 5px !important; */
+  margin-left: 5px !important;
+  margin-right: 5px !important;
   min-height: 50px;
   display: flex !important;
 }

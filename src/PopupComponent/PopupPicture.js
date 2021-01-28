@@ -12,21 +12,18 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
-
-
-
-const PicturePopup = (props) => {
-  const { popupMode, isPopUpValue } = useSelector((state) => state.popUpReducer);
+const PopupPicture = (props) => {
+  const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   const { isActive = false } = props;
 
   const handleClick = () => {
     //according to creation mode popup sequence will change
     if (popupMode === 'SIGNON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'LISTPOPUP' } });
     }
   };
-  
+
   return (
     <div>
       <Popup isActive={isActive}>
@@ -103,7 +100,7 @@ const PicturePopup = (props) => {
     </div>
   );
 };
-PicturePopup.propTypes = {
+PopupPicture.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -114,8 +111,8 @@ PicturePopup.propTypes = {
   ]),
   headerOne: PropTypes.string,
   headerOneBadgeOne: PropTypes.string,
-  headerOneBadgeTwo: '',
-  headerOneBadgeThree: '',
-  isActive:PropTypes.bool
+  headerOneBadgeTwo: PropTypes.string,
+  headerOneBadgeThree: PropTypes.string,
+  isActive: PropTypes.bool
 };
-export default PicturePopup;
+export default PopupPicture;

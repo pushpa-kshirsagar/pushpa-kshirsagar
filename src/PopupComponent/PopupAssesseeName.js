@@ -8,20 +8,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/Popup/Popup.css';
 import InputFeild from '../Atoms/InputField/InputField';
 import SelectField from '../Atoms/SelectField/SelectField';
-import { SET_NEXT_POPUP } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 import PropTypes from 'prop-types';
 
-const AssesseeNamePopup = (props) => {
-  const { popupMode, isPopUpValue } = useSelector((state) => state.popUpReducer);
+const PopupAssesseeName = (props) => {
+  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const [state, setState] = useState({
-    prefix: '',
-    firstName: '',
-    otherName: '',
-    lastName: '',
-    suffix: '',
-    firstNameErr: '',
-    lastNameErr: '',
-    isVerification: false,
+    nameFirstErr: '',
+    nameLastErr: '',
     userNameverifyDisable: true
   });
   const dispatch = useDispatch();
@@ -34,42 +29,39 @@ const AssesseeNamePopup = (props) => {
     isActive = false
   } = props;
 
-  // handling checkbox event for disable or enable
+  /* handling checkbox event for disable or enable*/
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
     setState((prevState) => ({ ...prevState, [name]: checked }));
   };
-  //handling the onchange event
+  /*handling the onchange event*/
 
   const handleChange = (event) => {
-    console.log(event.target);
     const { name, value } = event.target;
+    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
     setState((prevState) => ({
       ...prevState,
-      [name]: value,
       [name + 'Err']: '',
       userNameverifyDisable: false
     }));
   };
-  //this function for validation
+  /*this function for validation*/
   const validate = () => {
     let isValidate = true;
-    if (state.firstName === '') {
-      setState((prevState) => ({ ...prevState, firstNameErr: 'this information is required' }));
+    if (basicInfo.nameFirst === '') {
+      setState((prevState) => ({ ...prevState, nameFirstErr: 'this information is required' }));
       isValidate = false;
     }
-    if (state.lastName === '') {
-      setState((prevState) => ({ ...prevState, lastNameErr: 'this information is required' }));
+    if (basicInfo.nameLast === '') {
+      setState((prevState) => ({ ...prevState, nameLastErr: 'this information is required' }));
       isValidate = false;
     }
     return isValidate;
   };
 
-  //end 
-
   const handleClick = () => {
     if (validate()) {
-      //according to creation mode popup sequence will change
+      /*according to creation mode popup sequence will change*/
       if (popupMode === 'SIGNON') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ALIASPOPUP' } });
       }
@@ -97,7 +89,7 @@ const AssesseeNamePopup = (props) => {
           </div>
 
           <SelectField
-            tag={'prefix'}
+            tag={'namePrefix'}
             label={'prefix'}
             listSelect={[
               ' ',
@@ -116,25 +108,25 @@ const AssesseeNamePopup = (props) => {
             value={state.prefix}
           />
           <InputFeild
-            id={'firstName'}
+            id={'nameFirst'}
             label={'first name'}
-            errorMsg={state.firstNameErr}
+            errorMsg={state.nameFirstErr}
             onClick={handleChange}
-            value={state.firstName}
+            value={basicInfo.nameFirst}
           />
           <InputFeild
-            id={'otherName'}
+            id={'nameOther'}
             label={'other name'}
             errorMsg={errorMsg}
             onClick={handleChange}
-            value={state.otherName}
+            value={state.nameOther}
           />
           <InputFeild
-            id={'lastName'}
+            id={'nameLast'}
             label={'last name'}
-            errorMsg={state.lastNameErr}
+            errorMsg={state.nameLastErr}
             onClick={handleChange}
-            value={state.lastName}
+            value={basicInfo.nameLast}
           />
           <SelectField
             tag={'suffix'}
@@ -158,8 +150,8 @@ const AssesseeNamePopup = (props) => {
                   <Checkbox
                     className={''}
                     color="default"
-                    name={'isVerification'}
-                    checked={state.isVerification}
+                    name={'isNameVerified'}
+                    checked={state.isNameVerified}
                     disableRipple={true}
                     onChange={handleCheckbox}
                     disableFocusRipple={true}
@@ -175,7 +167,7 @@ const AssesseeNamePopup = (props) => {
   );
 };
 
-AssesseeNamePopup.propTypes = {
+PopupAssesseeName.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -186,9 +178,9 @@ AssesseeNamePopup.propTypes = {
   ]),
   headerOne: PropTypes.string,
   headerOneBadgeOne: PropTypes.string,
-  headerOneBadgeTwo: '',
-  headerOneBadgeThree: '',
+  headerOneBadgeTwo: PropTypes.string,
+  headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
 
-export default AssesseeNamePopup;
+export default PopupAssesseeName;

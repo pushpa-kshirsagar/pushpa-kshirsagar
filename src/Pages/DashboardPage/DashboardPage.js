@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_USER_SAGA, SIGNON } from '../../actionType';
 import IguruTopHeader from '../../Molecules/IguruTopHeader/IguruTopHeader';
-import PicturePopup from '../../PopupComponent/PicturePopup';
-import AssesseeNamePopup from '../../PopupComponent/AssesseeNamePopup';
-import NameDescPopup from '../../PopupComponent/NameDescPopup';
-import EmailPopup from '../../PopupComponent/EmailPopup';
-import SingleDropDownPopup from '../../PopupComponent/SingleDropDownPopup';
+import PopupPicture from '../../PopupComponent/PopupPicture';
+import PopupAssesseeName from '../../PopupComponent/PopupAssesseeName';
+import PopupNameDesc from '../../PopupComponent/PopupNameDesc';
+import PopupEmail from '../../PopupComponent/PopupEmail';
+import PopupSingleDropDown from '../../PopupComponent/PopupSingleDropDown';
+import PopupList from '../../PopupComponent/PopupList';
+import PopupAddress from '../../PopupComponent/PopupAddress';
 import './DashboardPage.css';
 
 const DashboardPage = () => {
@@ -23,11 +25,13 @@ const DashboardPage = () => {
   return (
     <>
       {userData && <IguruTopHeader userName={userData.name} userEmail={userData.email} />}
-      <PicturePopup isActive={isPopUpValue === 'PICTUREPOPUP'} />
-      <AssesseeNamePopup isActive={isPopUpValue === 'NAMEPOPUP'} />
-      <NameDescPopup isActive={isPopUpValue === 'ALIASPOPUP'} />
-      <EmailPopup isActive={isPopUpValue === 'EMAILPOPUP'} />
-      <SingleDropDownPopup
+      <PopupPicture isActive={isPopUpValue === 'PICTUREPOPUP'} />
+      <PopupAssesseeName isActive={isPopUpValue === 'NAMEPOPUP'} />
+      <PopupNameDesc isActive={isPopUpValue === 'ALIASPOPUP'} label={'alias'} />
+      <PopupEmail isActive={isPopUpValue === 'EMAILPOPUP'} />
+      <PopupList isActive={isPopUpValue === 'LISTPOPUP'} />
+      <PopupAddress isActive={isPopUpValue === 'ADDRESSPOPUP'} />
+      <PopupSingleDropDown
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
         tag={'gender'}
         listSelect={[' ', 'Female', 'Male', 'Unlisted']}

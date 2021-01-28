@@ -1,23 +1,23 @@
 import React from 'react';
-import ErrorMessagePopUp from './ErrorMessagePopUp';
+import PopupAddress from './PopupAddress';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
   title: 'Design System/Molecules/Pop Up',
-  component: ErrorMessagePopUp,
+  component: PopupAddress,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <ErrorMessagePopUp {...args} />;
+const Template = (args) => <PopupAddress {...args} />;
 
-export const PopUp5 = Template.bind({});
-PopUp5.args = {
+export const PopUp9 = Template.bind({});
+PopUp9.args = {
   className: null,
-  headerPanelColour: 'genericTwo',
+  headerPanelColour: 'genericOne',
   headerOne: 'assessees',
   headerOneBadgeOne: 'information',
   headerOneBadgeTwo: '',
   headerOneBadgeThree: '',
-  isActive:true
+  isActive: true
 };

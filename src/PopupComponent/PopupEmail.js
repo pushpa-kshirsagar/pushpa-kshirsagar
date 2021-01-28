@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
-import InputLabel from '@material-ui/core/InputLabel';
-import Person from '@material-ui/icons/Person';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 
-const EmailPopup = (props) => {
-  const { popupMode, isPopUpValue } = useSelector((state) => state.popUpReducer);
+const PopupEmail = (props) => {
+  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const dispatch = useDispatch();
-  //props
+  /*props*/
   const {
     isActive = false,
     headerPanelColour = 'genericOne',
@@ -25,42 +22,47 @@ const EmailPopup = (props) => {
     headerOneBadgeOne = 'information'
   } = props;
 
-  //states
   const [state, setState] = useState({
-    email: '',
+    // email: '',
     emailErr: ''
   });
-// handling the onchange event
+  /*handling the onchange event*/
   const handleChange = (event) => {
     const { name, value } = event.target;
+    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
     setState((prevState) => ({
       ...prevState,
-      [name]: value,
       [name + 'Err']: ''
     }));
   };
-  //this function for validate email address
+  /*this function for validate email address*/
   const validate = () => {
     let isValid = true;
-    let emailStr = state.email;
+    let emailStr = basicInfo.email;
     let exp = new RegExp(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
-    if (exp.test(emailStr) === false) {
+    if (emailStr === '') {
       isValid = false;
+      setState((prevState) => ({
+        ...prevState,
+        emailErr: 'this information is required'
+      }));
+    } else if (exp.test(emailStr)) {
+      isValid = true;
+      return isValid;
+      } else {
       setState((prevState) => ({
         ...prevState,
         emailErr: 'this information is incorrect'
       }));
     }
-
-    return isValid;
   };
   //end
 
   const handleClick = () => {
     if (validate()) {
-      //according to creation mode popup sequence will change
+      /*according to creation mode popup sequence will change*/
       if (popupMode === 'SIGNON') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'SINGLEDROPDOWNPOPUP' } });
       }
@@ -84,7 +86,7 @@ const EmailPopup = (props) => {
               id={'email'}
               label={'email address'}
               labelBadgeOne={'primary'}
-              value={state.email}
+              value={basicInfo.email}
               errorMsg={state.emailErr}
               onClick={handleChange}
             />
@@ -98,8 +100,6 @@ const EmailPopup = (props) => {
                   <Checkbox
                     className={''}
                     color="default"
-                    disableRipple={true}
-                    disableFocusRipple={true}
                   />
                 </div>
               </div>
@@ -113,8 +113,6 @@ const EmailPopup = (props) => {
                   <Checkbox
                     className={''}
                     color="default"
-                    disableRipple={true}
-                    disableFocusRipple={true}
                   />
                 </div>
               </div>
@@ -128,8 +126,6 @@ const EmailPopup = (props) => {
                   <Checkbox
                     className={''}
                     color="default"
-                    disableRipple={true}
-                    disableFocusRipple={true}
                   />
                 </div>
               </div>
@@ -140,7 +136,7 @@ const EmailPopup = (props) => {
     </div>
   );
 };
-EmailPopup.propTypes = {
+PopupEmail.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -151,8 +147,8 @@ EmailPopup.propTypes = {
   ]),
   headerOne: PropTypes.string,
   headerOneBadgeOne: PropTypes.string,
-  headerOneBadgeTwo: '',
-  headerOneBadgeThree: '',
+  headerOneBadgeTwo: PropTypes.string,
+  headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default EmailPopup;
+export default PopupEmail;

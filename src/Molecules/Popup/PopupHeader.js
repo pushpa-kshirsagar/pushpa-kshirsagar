@@ -8,7 +8,7 @@ import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
 import { useDispatch } from 'react-redux';
-import { POPUP_CLOSE } from '../../actionType';
+import { POPUP_CLOSE, CLEAR_ASSESSEE_INFO } from '../../actionType';
 const PopupHeader = (props) => {
   const {
     headerPanelColour,
@@ -57,6 +57,7 @@ const PopupHeader = (props) => {
           <div className={'backArrow'}>
             <IconButton
               onClick={() => {
+                dispatch({ type: CLEAR_ASSESSEE_INFO });
                 dispatch({ type: POPUP_CLOSE });
               }}
               className="MuiIconButton-root-1602"

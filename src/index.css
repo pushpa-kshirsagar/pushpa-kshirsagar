@@ -11,7 +11,13 @@ body {
 }
 .iguru-componentinnerdiv {
   padding: 0px 5px !important;
-  width: 100%;
+  /* width: 100%; */
+  display: flex !important;
+  height: 50px;
+}
+.iguru-componentinnerdiv-margin {
+  /* margin: 0px 5px !important; */
+  /* width: 100%; */
   display: flex !important;
   height: 50px;
 }
