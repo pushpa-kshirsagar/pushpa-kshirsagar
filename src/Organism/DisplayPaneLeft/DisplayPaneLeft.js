@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
@@ -6,6 +6,7 @@ import Card from '../../Molecules/Card/Card';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneLeft';
 import Sections from '../../Molecules/Sections/Section';
+import LaftPaneFooter from '../../Molecules/LaftPaneFooter/LaftPaneFooter';
 
 const temp1 = () => {
   return (
@@ -81,24 +82,33 @@ const temp4 = () => {
 };
 
 export const DisplayPaneLeft = () => {
-  const numberOfSection = [
+  const leftPaneSections = [
     {
       id: 'section1',
-      sectionComponent: temp1
+      sectionComponent: temp1,
+      displayPaneLeftHeaderText: 'dashboard',
+      displayPaneLeftBadgeText: ''
     },
     {
       id: 'section2',
-      sectionComponent: temp2
+      sectionComponent: temp2,
+      displayPaneLeftHeaderText: 'iGuru',
+      displayPaneLeftBadgeText: 'analytics'
     },
     {
       id: 'section3',
-      sectionComponent: temp3
+      sectionComponent: temp3,
+      displayPaneLeftHeaderText: 'iGuru',
+      displayPaneLeftBadgeText: 'marketplace'
     },
     {
       id: 'section4',
-      sectionComponent: temp4
+      sectionComponent: temp4,
+      displayPaneLeftHeaderText: 'iGuru',
+      displayPaneLeftBadgeText: 'mine'
     }
   ];
+  const [selectedSection, setSelectedSection] = useState(leftPaneSections[0]);
 
   return (
     <>
@@ -106,7 +116,8 @@ export const DisplayPaneLeft = () => {
         <HeaderCard
           className=""
           displayPane="left"
-          headerOne="dashboard"
+          headerOne={selectedSection.displayPaneLeftHeaderText}
+          headerOneBadgeOne={selectedSection.displayPaneLeftBadgeText}
           headerPanelColour="blue"
         />
       </div>
@@ -117,7 +128,12 @@ export const DisplayPaneLeft = () => {
         <div>
           <Card ImageOne={AssociateIcon} textOneOne="Boppo Technologies" />
         </div>
-        <Sections sectionList={numberOfSection} />
+        <Sections
+          listSections={leftPaneSections}
+          selectedSection={selectedSection}
+          setSelectedSection={setSelectedSection}
+        />
+        <LaftPaneFooter />
       </div>
     </>
   );

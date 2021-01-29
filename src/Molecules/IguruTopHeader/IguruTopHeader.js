@@ -17,7 +17,7 @@ export const IguruTopHeader = (props) => {
     userEmail = 'joachim.carvalho@insightguru.com',
     isImageActive = false
   } = props;
-  const isBespoke = false;
+  const isBespoke = true;
 
   return (
     <div className="header-container">

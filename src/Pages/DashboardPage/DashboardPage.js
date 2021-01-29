@@ -13,6 +13,7 @@ import './DashboardPage.css';
 import DisplayPaneLeft from '../../Organism/DisplayPaneLeft/DisplayPaneLeft';
 import DisplayPaneRight from '../../Organism/DisplayPaneRight/DisplayPaneRight';
 import DisplayPaneCenter from '../../Organism/DisplayPaneCenter/DisplayPaneCenter';
+import GridUI from '../../Molecules/GridUI/GridUI';
 
 const DashboardPage = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
@@ -28,6 +29,7 @@ const DashboardPage = () => {
   return (
     <>
       {userData && <IguruTopHeader userName={userData.name} userEmail={userData.email} />}
+      <GridUI />
       <div className="main-container">
         <div className="display-pane-container">
           <DisplayPaneLeft />
