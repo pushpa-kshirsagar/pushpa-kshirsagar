@@ -10,7 +10,7 @@ import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 
-const PopupEmail = (props) => {
+const PopUpEmail = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const dispatch = useDispatch();
@@ -127,7 +127,7 @@ const PopupEmail = (props) => {
     </div>
   );
 };
-PopupEmail.propTypes = {
+PopUpEmail.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -142,4 +142,4 @@ PopupEmail.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopupEmail;
+export default PopUpEmail;

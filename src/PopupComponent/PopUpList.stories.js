@@ -1,25 +1,23 @@
 import React from 'react';
-import PopupSingleDropDown from './PopupSingleDropDown';
+import PopUpList from './PopUpList';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
   title: 'Design System/Molecules/Pop Up',
-  component: PopupSingleDropDown,
+  component: PopUpList,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopupSingleDropDown {...args} />;
+const Template = (args) => <PopUpList {...args} />;
 
-export const PopUp7 = Template.bind({});
-PopUp7.args = {
+export const PopUp8 = Template.bind({});
+PopUp8.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',
   headerOneBadgeOne: 'information',
   headerOneBadgeTwo: '',
   headerOneBadgeThree: '',
-  tag: 'gender',
-  listSelect: [' ', 'Female', 'Male', 'Unlisted'],
   isActive: true
 };

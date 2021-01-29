@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
-const PopupList = (props) => {
+const PopUpList = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
 
@@ -78,7 +78,7 @@ const PopupList = (props) => {
   );
 };
 
-PopupList.propTypes = {
+PopUpList.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -94,4 +94,4 @@ PopupList.propTypes = {
   isActive: PropTypes.bool
 };
 
-export default PopupList;
+export default PopUpList;

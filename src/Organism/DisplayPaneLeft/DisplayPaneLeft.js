@@ -117,7 +117,7 @@ export const DisplayPaneLeft = () => {
         <div>
           <Card ImageOne={AssociateIcon} textOneOne="Boppo Technologies" />
         </div>
-        <Sections sectionList={numberOfSection} />
+        <Sections listSection={numberOfSection} />
       </div>
     </>
   );

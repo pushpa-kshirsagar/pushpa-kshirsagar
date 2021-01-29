@@ -2,13 +2,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_USER_SAGA, SIGNON } from '../../actionType';
 import IguruTopHeader from '../../Molecules/IguruTopHeader/IguruTopHeader';
-import PopupPicture from '../../PopupComponent/PopupPicture';
-import PopupAssesseeName from '../../PopupComponent/PopupAssesseeName';
-import PopupNameDesc from '../../PopupComponent/PopupNameDesc';
-import PopupEmail from '../../PopupComponent/PopupEmail';
-import PopupSingleDropDown from '../../PopupComponent/PopupSingleDropDown';
-import PopupList from '../../PopupComponent/PopupList';
-import PopupAddress from '../../PopupComponent/PopupAddress';
+import PopUpPicture from '../../PopupComponent/PopUpPicture';
+import PopUpAssesseeName from '../../PopupComponent/PopUpAssesseeName';
+import PopUpNameDesc from '../../PopupComponent/PopUpNameDesc';
+import PopUpEmail from '../../PopupComponent/PopUpEmail';
+import PopUpSingleDropDown from '../../PopupComponent/PopUpSingleDropDown';
+import PopUpSingleInput from '../../PopupComponent/PopUpSingleInput';
+import PopUpList from '../../PopupComponent/PopUpList';
+import PopUpAddress from '../../PopupComponent/PopUpAddress';
+import PopUpDatePicker from '../../PopupComponent/PopUpDatePicker';
+import PopUpTagSecondary from '../../PopupComponent/PopUpTagSecondary';
+import PopUpMobileTelephone from '../../PopupComponent/PopUpMobileTelephone';
 import './DashboardPage.css';
 import DisplayPaneLeft from '../../Organism/DisplayPaneLeft/DisplayPaneLeft';
 import DisplayPaneRight from '../../Organism/DisplayPaneRight/DisplayPaneRight';
@@ -40,13 +44,17 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <PopupPicture isActive={isPopUpValue === 'PICTUREPOPUP'} />
-      <PopupAssesseeName isActive={isPopUpValue === 'NAMEPOPUP'} />
-      <PopupNameDesc isActive={isPopUpValue === 'ALIASPOPUP'} label={'alias'} />
-      <PopupEmail isActive={isPopUpValue === 'EMAILPOPUP'} />
-      <PopupList isActive={isPopUpValue === 'LISTPOPUP'} />
-      <PopupAddress isActive={isPopUpValue === 'ADDRESSPOPUP'} />
-      <PopupSingleDropDown
+      <PopUpPicture isActive={isPopUpValue === 'PICTUREPOPUP'} />
+      <PopUpAssesseeName isActive={isPopUpValue === 'NAMEPOPUP'} />
+      <PopUpNameDesc isActive={isPopUpValue === 'ALIASPOPUP'} label={'alias'} />
+      <PopUpEmail isActive={isPopUpValue === 'EMAILPOPUP'} />
+      <PopUpList isActive={isPopUpValue === 'LISTPOPUP'} />
+      <PopUpAddress isActive={isPopUpValue === 'ADDRESSPOPUP'} />
+      <PopUpSingleInput isActive={isPopUpValue === 'SINGLEINPUTPOPUP'} />
+      <PopUpDatePicker isActive={isPopUpValue === 'DatePicker'} />
+      <PopUpTagSecondary isActive={isPopUpValue === 'TagSecondary'} />
+      <PopUpMobileTelephone isActive={isPopUpValue === 'MobileTelephone'} />
+      <PopUpSingleDropDown
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
         tag={'gender'}
         listSelect={[' ', 'Female', 'Male', 'Unlisted']}

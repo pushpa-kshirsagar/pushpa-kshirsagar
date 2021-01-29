@@ -3,15 +3,15 @@ import SectionButton from '../../Atoms/Sections/SectionButton';
 import SectionLine from '../../Atoms/Sections/SectionLine';
 import '../../Atoms/Sections/Section.css';
 const Sections = (props) => {
-  const { sectionList } = props;
-  const [selectedSection, setSelectedSection] = useState(sectionList[0]);
+  const { listSection } = props;
+  const [selectedSection, setSelectedSection] = useState(listSection[0]);
 
   return (
     <>
       <div className={['tabsContainer', 'iguru-leftpanel'].join(' ')}>
         <div className={'middleTabLabel'}>
           <SectionLine />
-          {sectionList.map((section) => {
+          {listSection.map((section) => {
             return (
               <>
                 <SectionButton

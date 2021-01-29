@@ -32,5 +32,5 @@ const numberOfSection = [
 ];
 export const Section = Template.bind({});
 Section.args = {
-  sectionList: numberOfSection
+  listSection: numberOfSection
 };

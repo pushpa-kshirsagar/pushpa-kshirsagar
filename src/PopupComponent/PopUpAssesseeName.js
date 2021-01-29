@@ -11,7 +11,7 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 import PropTypes from 'prop-types';
 
-const PopupAssesseeName = (props) => {
+const PopUpAssesseeName = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const [state, setState] = useState({
@@ -167,7 +167,7 @@ const PopupAssesseeName = (props) => {
   );
 };
 
-PopupAssesseeName.propTypes = {
+PopUpAssesseeName.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -183,4 +183,4 @@ PopupAssesseeName.propTypes = {
   isActive: PropTypes.bool
 };
 
-export default PopupAssesseeName;
+export default PopUpAssesseeName;

@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
-const PopupPicture = (props) => {
+const PopUpPicture = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   const { isActive = false } = props;
@@ -100,7 +100,7 @@ const PopupPicture = (props) => {
     </div>
   );
 };
-PopupPicture.propTypes = {
+PopUpPicture.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -115,4 +115,4 @@ PopupPicture.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopupPicture;
+export default PopUpPicture;

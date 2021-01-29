@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 
-const PopupAddress = (props) => {
+const PopUpAddress = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
@@ -64,7 +64,6 @@ const PopupAddress = (props) => {
               errorMsg={''}
               onChange={handleChange}
               value={basicInfo.countryCode}
-              isRequired={false}
             />
             <SelectField
               tag={'stateCode'}
@@ -73,7 +72,6 @@ const PopupAddress = (props) => {
               errorMsg={''}
               onChange={handleChange}
               value={basicInfo.stateCode}
-              isRequired={false}
             />
 
             <InputFeild
@@ -82,7 +80,6 @@ const PopupAddress = (props) => {
               value={basicInfo.postcode}
               errorMsg={''}
               onClick={handleChange}
-              isRequired={false}
             />
             <SelectField
               tag={'cityCode'}
@@ -91,7 +88,6 @@ const PopupAddress = (props) => {
               errorMsg={''}
               onChange={handleChange}
               value={basicInfo.cityCode}
-              isRequired={false}
             />
             <InputFeild
               id={'address'}
@@ -99,7 +95,6 @@ const PopupAddress = (props) => {
               value={basicInfo.address}
               errorMsg={''}
               onClick={handleChange}
-              isRequired={false}
             />
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
@@ -128,7 +123,7 @@ const PopupAddress = (props) => {
   );
 };
 
-PopupAddress.propTypes = {
+PopUpAddress.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -142,6 +137,6 @@ PopupAddress.propTypes = {
   headerOneBadgeTwo: PropTypes.string,
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
-};
+};  
 
-export default PopupAddress;
+export default PopUpAddress;

@@ -6,6 +6,8 @@
   font-size: 24px;
   border-radius: 50%;
   border-width: 0;
+  cursor: pointer !important;
+
 }
 .icon-button-displayPaneLeft {
   /* color: hsl(90, 58%, 90%); */

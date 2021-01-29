@@ -4,7 +4,7 @@ import './InputField.css';
 import { Input, InputLabel, FormControl, FormHelperText } from '@material-ui/core';
 
 export const InputField = (props) => {
-  const { id, label, type = 'text', errorMsg = '', onClick, value, labelBadgeOne } = props;
+  const { id, label, type = 'text', errorMsg = '', onClick, value, labelBadgeOne,isRequired=true } = props;
   return (
     <div className="popup-form-box">
       <FormControl style={{ width: '100%' }}>
@@ -22,9 +22,9 @@ export const InputField = (props) => {
           className={'inputFields'}
         />
       </FormControl>
-      <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
+      {isRequired && <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
         <span>{errorMsg}</span>
-      </FormHelperText>
+      </FormHelperText>}
     </div>
   );
 };
