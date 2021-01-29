@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SectionButton from '../../Atoms/Sections/SectionButton';
 import SectionLine from '../../Atoms/Sections/SectionLine';
 import '../../Atoms/Sections/Section.css';
 const Sections = (props) => {
-  const { listSection } = props;
-  const [selectedSection, setSelectedSection] = useState(listSection[0]);
+  const { listSections, selectedSection, setSelectedSection } = props;
+  // const [selectedSection, setSelectedSection] = useState(listSections[0]);
 
   return (
     <>
       <div className={['tabsContainer', 'iguru-leftpanel'].join(' ')}>
         <div className={'middleTabLabel'}>
           <SectionLine />
-          {listSection.map((section) => {
+          {listSections.map((section) => {
             return (
               <>
                 <SectionButton

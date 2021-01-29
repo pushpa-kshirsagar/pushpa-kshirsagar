@@ -9,6 +9,9 @@
   cursor: pointer !important;
 
 }
+.icon-button:focus {
+  outline: none;
+}
 .icon-button-displayPaneLeft {
   /* color: hsl(90, 58%, 90%); */
   color: #ffffff;

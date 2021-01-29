@@ -28,16 +28,13 @@ const SignOnPage = () => {
             <div className="true">
               <div className={'footerPopupIcons'}>
                 <div className={'mbPager'}>
-                  {/* <div className={'iconBoxFooter'}> */}
                     <IconButton colour={'displayPaneLeft'}
                     Icon={PersonIcon}
                     label={'assessee'}/>
-                  {/* </div> */}
-                  {/* <div className={'iconBoxFooter'}> */}
+                  
                   <IconButton colour={'displayPaneLeft'}
                     Icon={AssociateIcon}
                     label={'associate'}/>
-                  {/* </div> */}
                   </div>
                 </div>
             </div>
