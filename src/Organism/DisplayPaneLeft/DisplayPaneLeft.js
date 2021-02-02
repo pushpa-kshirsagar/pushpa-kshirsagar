@@ -8,7 +8,7 @@ import './DisplayPaneLeft';
 import Sections from '../../Molecules/Sections/Section';
 import LaftPaneFooter from '../../Molecules/LaftPaneFooter/LaftPaneFooter';
 
-const temp1 = () => {
+const displayPaneLeftSection1 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
@@ -26,7 +26,7 @@ const temp1 = () => {
     </>
   );
 };
-const temp2 = () => {
+const displayPaneLeftSection2 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
@@ -44,7 +44,7 @@ const temp2 = () => {
     </>
   );
 };
-const temp3 = () => {
+const displayPaneLeftSection3 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
@@ -62,7 +62,7 @@ const temp3 = () => {
     </>
   );
 };
-const temp4 = () => {
+const displayPaneLeftSection4 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
@@ -85,25 +85,25 @@ export const DisplayPaneLeft = () => {
   const leftPaneSections = [
     {
       id: 'section1',
-      sectionComponent: temp1,
+      sectionComponent: displayPaneLeftSection1,
       displayPaneLeftHeaderText: 'dashboard',
       displayPaneLeftBadgeText: ''
     },
     {
       id: 'section2',
-      sectionComponent: temp2,
+      sectionComponent: displayPaneLeftSection2,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'analytics'
     },
     {
       id: 'section3',
-      sectionComponent: temp3,
+      sectionComponent: displayPaneLeftSection3,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'marketplace'
     },
     {
       id: 'section4',
-      sectionComponent: temp4,
+      sectionComponent: displayPaneLeftSection4,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'mine'
     }
@@ -133,8 +133,8 @@ export const DisplayPaneLeft = () => {
           selectedSection={selectedSection}
           setSelectedSection={setSelectedSection}
         />
-        <LaftPaneFooter />
       </div>
+      <LaftPaneFooter />
     </>
   );
 };
