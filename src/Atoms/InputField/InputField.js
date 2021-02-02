@@ -43,7 +43,7 @@ export const InputField = (props) => {
 InputField.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
-  type: PropTypes.oneOf(['text', 'password'])
+  type: PropTypes.oneOf(['text', 'password', 'datetime-local'])
 };
 
 export default InputField;

@@ -15,12 +15,23 @@ import { SET_NEXT_POPUP } from '../actionType';
 const PopUpPicture = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
-  const { isActive = false } = props;
+  const {
+    isActive = false,
+    headerPanelColour = 'genericOne',
+    headerOne = 'assessee',
+    headerOneBadgeOne = 'information'
+  } = props;
 
   const handleClick = () => {
     //according to creation mode popup sequence will change
-    if (popupMode === 'SIGNON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'LISTPOPUP' } });
+    if (popupMode === 'ASSESSEE_SIGN_ON') {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
+    }
+    if (popupMode === 'ASSOCIATE_SIGN_ON') {
+      dispatch({
+        type: SET_NEXT_POPUP,
+        payload: { isPopUpValue: 'ROLEPOPUP' }
+      });
     }
   };
 
@@ -28,9 +39,9 @@ const PopUpPicture = (props) => {
     <div>
       <Popup isActive={isActive}>
         <PopupHeader
-          headerPanelColour={'genericOne'}
-          headerOne={'assessees'}
-          headerOneBadgeOne={'information'}
+          headerPanelColour={headerPanelColour}
+          headerOne={headerOne}
+          headerOneBadgeOne={headerOneBadgeOne}
           onClick={handleClick}
         />
         <DialogContent

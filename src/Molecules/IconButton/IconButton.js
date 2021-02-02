@@ -8,16 +8,22 @@ import { InputLabel } from '@material-ui/core';
  * Primary UI component for user interaction
  */
 const IconButton = (props) => {
-  const { label = '', Icon, colour, className } = props;
+  const { label = '', Icon, colour, className, labelTwo, onClick } = props;
   // const displayPane = primary ? 'icon-button-primary' : 'icon-button-secondary';
 
   return (
     <div>
       <div className={'iconBoxFooter'}>
-        <button className={[`icon-button`, `icon-button-${colour}`, className].join(' ')}>
+        <button
+          className={[`icon-button`, `icon-button-${colour}`, className].join(' ')}
+          onClick={onClick}
+        >
           <Icon />
         </button>
         {label !== '' && <InputLabel className={'iconsFooterLabelDefault'}>{label}</InputLabel>}
+        {labelTwo !== '' && (
+          <InputLabel className={'iconsFooterLabelDefault'}>{labelTwo}</InputLabel>
+        )}
       </div>
     </div>
   );

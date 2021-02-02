@@ -1,4 +1,10 @@
-import { POPUP_CLOSE, POPUP_OPEN, SIGNON, SET_NEXT_POPUP } from '../actionType';
+import {
+  POPUP_CLOSE,
+  POPUP_OPEN,
+  ASSESSEE_SIGN_ON,
+  ASSOCIATE_SIGN_ON,
+  SET_NEXT_POPUP
+} from '../actionType';
 
 const initialState = {
   isPopUpOpen: false,
@@ -18,10 +24,18 @@ const popUpReducer = (istate = initialState, action) => {
     case POPUP_CLOSE:
       return {
         isPopUpOpen: false,
-        isPopUpValue: ''
+        isPopUpValue: '',
+        popupMode: ''
       };
-    case SIGNON:
+    case ASSESSEE_SIGN_ON:
       return {
+        isPopUpOpen: true,
+        isPopUpValue: action.payload.isPopUpValue,
+        popupMode: action.payload.popupMode
+      };
+    case ASSOCIATE_SIGN_ON:
+      return {
+        isPopUpOpen: true,
         isPopUpValue: action.payload.isPopUpValue,
         popupMode: action.payload.popupMode
       };

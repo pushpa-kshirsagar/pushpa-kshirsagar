@@ -31,8 +31,11 @@ const PopUpList = (props) => {
 
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'SIGNON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
+    if (popupMode === 'ASSOCIATE_SIGN_ON') {
+      dispatch({
+        type: SET_NEXT_POPUP,
+        payload: { isPopUpValue: 'WORKADDRESSPOPUP' }
+      });
     }
   };
   return (

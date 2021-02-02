@@ -29,6 +29,7 @@ const initialState = {
   cityCode: '',
   tagprimary: '',
   tagsecondary: '',
+  gender: '',
   tenurestart: getLocalTime(),
   tenureend: '1970-00-00T00:00',
   birthdate: ''

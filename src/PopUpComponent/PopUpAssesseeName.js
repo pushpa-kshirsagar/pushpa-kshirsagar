@@ -21,11 +21,11 @@ const PopUpAssesseeName = (props) => {
   });
   const dispatch = useDispatch();
   const {
-    inputHeader = 'name',
-    headerPanelColour = 'genericOne',
+    inputHeader = '',
+    headerPanelColour = '',
     errorMsg = '',
-    headerOne = 'assessees',
-    headerOneBadgeOne = 'information',
+    headerOne = '',
+    headerOneBadgeOne = '',
     isActive = false
   } = props;
 
@@ -34,6 +34,7 @@ const PopUpAssesseeName = (props) => {
     const { name, checked } = e.target;
     setState((prevState) => ({ ...prevState, [name]: checked }));
   };
+
   /*handling the onchange event*/
 
   const handleChange = (event) => {
@@ -62,7 +63,7 @@ const PopUpAssesseeName = (props) => {
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
-      if (popupMode === 'SIGNON') {
+      if (popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ALIASPOPUP' } });
       }
     }

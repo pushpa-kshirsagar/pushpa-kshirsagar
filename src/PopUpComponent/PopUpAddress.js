@@ -16,11 +16,11 @@ const PopUpAddress = (props) => {
   const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const {
     isActive,
-    primaryheader = 'primary',
-    inputHeader = 'home address',
-    headerPanelColour = 'genericOne',
-    headerOne = 'assessees',
-    headerOneBadgeOne = 'information'
+    primaryheader,
+    inputHeader,
+    headerPanelColour,
+    headerOne,
+    headerOneBadgeOne
   } = props;
   const handleChange = (event) => {
     console.log(event.target);
@@ -29,8 +29,8 @@ const PopUpAddress = (props) => {
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'SIGNON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
+    if (popupMode === 'ASSOCIATE_SIGN_ON') {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'WORKTELEPHONE' } });
     }
   };
   return (

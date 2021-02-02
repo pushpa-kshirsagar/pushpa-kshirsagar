@@ -5,45 +5,55 @@ import PopupHeader from '../Molecules/Popup/PopupHeader';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import SelectField from '../Atoms/SelectField/SelectField';
 
 const PopUpSingleDropDown = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
+  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const dispatch = useDispatch();
   //props
   const {
     isActive = false,
-    headerPanelColour = 'genericOne',
-    headerOne = 'assessees',
-    headerOneBadgeOne = 'information',
+    headerPanelColour,
+    headerOne,
+    headerOneBadgeOne,
     listSelect,
+    isRequired = false,
     tag
   } = props;
 
   //states
-  const [state, setState] = useState({});
+  const [state, setState] = useState({ isError: '' });
   // handling the onchange event
   const handleChange = (event) => {
     const { name, value } = event.target;
     setState((prevState) => ({
       ...prevState,
-      [name + 'Err']: ''
+      [name]: value,
+      isError: ''
     }));
+    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
   };
-  //this function for validate email address
+  //this function for validate
   const validate = () => {
-    let isValid = true;
-    return isValid;
+    let isValidate = true;
+    if (isRequired) {
+      if (basicInfo[tag] === '') {
+        setState((prevState) => ({ ...prevState, isError: 'this information is required' }));
+        isValidate = false;
+      }
+    }
+    return isValidate;
   };
   //end
 
   const handleClick = () => {
     if (validate()) {
       //according to creation mode popup sequence will change
-      if (popupMode === 'SIGNON') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ADDRESSPOPUP' } });
+      if (popupMode === 'ASSESSEE_SIGN_ON') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
       }
     }
   };
@@ -67,9 +77,9 @@ const PopUpSingleDropDown = (props) => {
               tag={tag}
               label={tag}
               listSelect={listSelect}
-              errorMsg={state.valueErr}
+              errorMsg={state.isError}
               onChange={handleChange}
-              value={state.value}
+              value={basicInfo[tag]}
             />
           </FormControl>
         </DialogContent>

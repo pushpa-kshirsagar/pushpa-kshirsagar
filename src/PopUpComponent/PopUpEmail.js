@@ -17,9 +17,11 @@ const PopUpEmail = (props) => {
   /*props*/
   const {
     isActive = false,
-    headerPanelColour = 'genericOne',
-    headerOne = 'assessees',
-    headerOneBadgeOne = 'information'
+    headerPanelColour = '',
+    headerOne = '',
+    headerOneBadgeOne = '',
+    primaryLabel = '',
+    inputHeader = ''
   } = props;
 
   const [state, setState] = useState({
@@ -63,8 +65,8 @@ const PopUpEmail = (props) => {
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
-      if (popupMode === 'SIGNON') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'SINGLEDROPDOWNPOPUP' } });
+      if (popupMode === 'ASSESSEE_SIGN_ON') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MobileTelephone' } });
       }
     }
   };
@@ -84,7 +86,7 @@ const PopUpEmail = (props) => {
           <FormControl style={{ width: '100%' }}>
             <InputFeild
               id={'email'}
-              label={'email address'}
+              label={primaryLabel}
               labelBadgeOne={'primary'}
               value={basicInfo.email}
               errorMsg={state.emailErr}

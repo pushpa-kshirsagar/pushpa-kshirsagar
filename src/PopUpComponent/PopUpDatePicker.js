@@ -36,7 +36,7 @@ const PopUpDatePicker = (props) => {
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'SIGNON') {
+    if (popupMode === 'ASSESSEE_SIGN_ON') {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
     }
   };
