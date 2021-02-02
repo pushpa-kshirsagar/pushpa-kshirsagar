@@ -1,14 +1,12 @@
 import { DialogContent } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
 import '../Molecules/Popup/Popup.css';
 
 export const PopupErrorMessage = (props) => {
   const { isActive, errorMessage = 'Error Message' } = props;
-  const dispatch = useDispatch();
   return (
     <div>
       <Popup isActive={isActive}>

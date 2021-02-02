@@ -2,16 +2,14 @@ import React, { Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
-import { InputLabel, FormControl, Checkbox } from '@material-ui/core';
+import { InputLabel, FormControl } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
 import '../Molecules/Popup/Popup.css';
-import '../Atoms/InputField/InputField.css';
-
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 
-const PopUpDatePicker = (props) => {
+const PopUpSingleInput = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
@@ -19,18 +17,14 @@ const PopUpDatePicker = (props) => {
   console.log('basicInfo');
   const {
     isActive,
-    primaryheader = 'start',
-    inputHeader = 'tenure',
+    primaryheader = 'primary',
+    inputHeader = 'tag',
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
     headerOneBadgeOne = 'information',
-    valueState = 'tenure' + 'start',
-    isVerification = false
+    valueState = 'tag' + 'primary'
   } = props;
-
   const handleChange = (event) => {
-    console.log(event);
-    console.log(event.target);
     const { name, value } = event.target;
     dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
   };
@@ -52,30 +46,25 @@ const PopUpDatePicker = (props) => {
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
+          <div className={'fitContent'}>
+            <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
+              <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                <Fragment>
+                  {inputHeader}&nbsp;
+                  {primaryheader ? <span className={'headerBadge'}>{primaryheader}</span> : null}
+                </Fragment>
+                <div className={'infoSymbol'}></div>
+              </InputLabel>
+            </div>
+          </div>
           <FormControl style={{ width: '100%' }}>
             <InputFeild
-              type={'datetime-local'}
               id={inputHeader + primaryheader}
               label={inputHeader + ' ' + primaryheader}
               value={basicInfo[valueState]}
               errorMsg={''}
               onClick={handleChange}
             />
-            {isVerification && (
-              <div className={'fitContent'}>
-                <div
-                  className={['PopupFormBox', 'popupMinHei0'].join(' ')}
-                  style={{ minHeight: 0 }}
-                >
-                  <div className={'contFlex'}>
-                    <div className={'f4'}>verification</div>
-                    <div className={'checkedFontNew'}>
-                      <Checkbox className={''} color="default" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </FormControl>
         </DialogContent>
       </Popup>
@@ -83,7 +72,7 @@ const PopUpDatePicker = (props) => {
   );
 };
 
-PopUpDatePicker.propTypes = {
+PopUpSingleInput.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf(['genericOne']),
   headerOne: PropTypes.string,
@@ -93,4 +82,4 @@ PopUpDatePicker.propTypes = {
   isActive: PropTypes.bool
 };
 
-export default PopUpDatePicker;
+export default PopUpSingleInput;
