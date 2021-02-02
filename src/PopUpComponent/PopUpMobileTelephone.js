@@ -24,9 +24,7 @@ const PopUpMobileTelephone = (props) => {
     inputHeader = 'mobile telephone',
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
-    headerOneBadgeOne = 'information',
-    valueState = 'mobiletelephone' + 'primary',
-    isVerification = false
+    headerOneBadgeOne = 'information'
   } = props;
 
   const handleChange = (event) => {
@@ -53,7 +51,7 @@ const PopUpMobileTelephone = (props) => {
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
-           <div className={'fitContent'}>
+          <div className={'fitContent'}>
             <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
               <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
                 <Fragment>
@@ -65,7 +63,7 @@ const PopUpMobileTelephone = (props) => {
             </div>
           </div>
           <FormControl style={{ width: '100%' }}>
-          <SelectField
+            <SelectField
               tag={'countryCode'}
               label={'country / region'}
               listSelect={['India', 'USA']}
@@ -81,33 +79,26 @@ const PopUpMobileTelephone = (props) => {
               errorMsg={''}
               onClick={handleChange}
             />
-              <div className={'fitContent'}>
-                <div
-                  className={['PopupFormBox', 'popupMinHei0'].join(' ')}
-                  style={{ minHeight: 0 }}
-                >
-                  <div className={'contFlex'}>
-                    <div className={'f4'}>communication </div>
-                    <div className={'checkedFontNew'}>
-                      <Checkbox className={''} color="default" />
-                    </div>
+            <div className={'fitContent'}>
+              <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
+                <div className={'contFlex'}>
+                  <div className={'f4'}>communication </div>
+                  <div className={'checkedFontNew'}>
+                    <Checkbox className={''} color="default" />
                   </div>
                 </div>
               </div>
-              <div className={'fitContent'}>
-                <div
-                  className={['PopupFormBox', 'popupMinHei0'].join(' ')}
-                  style={{ minHeight: 0 }}
-                >
-                  <div className={'contFlex'}>
-                    <div className={'f4'}>verification</div>
-                    <div className={'checkedFontNew'}>
-                      <Checkbox className={''} color="default" />
-                    </div>
+            </div>
+            <div className={'fitContent'}>
+              <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
+                <div className={'contFlex'}>
+                  <div className={'f4'}>verification</div>
+                  <div className={'checkedFontNew'}>
+                    <Checkbox className={''} color="default" />
                   </div>
                 </div>
               </div>
-            
+            </div>
           </FormControl>
         </DialogContent>
       </Popup>

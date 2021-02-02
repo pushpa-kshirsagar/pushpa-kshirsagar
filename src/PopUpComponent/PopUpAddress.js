@@ -137,6 +137,6 @@ PopUpAddress.propTypes = {
   headerOneBadgeTwo: PropTypes.string,
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
-};  
+};
 
 export default PopUpAddress;

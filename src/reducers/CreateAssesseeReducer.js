@@ -31,7 +31,7 @@ const initialState = {
   tagsecondary: '',
   tenurestart: getLocalTime(),
   tenureend: '1970-00-00T00:00',
-  birthdate:'',
+  birthdate: ''
 };
 
 const CreateAssesseeReducer = (istate = initialState, action) => {
