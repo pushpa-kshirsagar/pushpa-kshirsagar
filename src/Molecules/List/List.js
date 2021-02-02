@@ -11,9 +11,9 @@ const List = (props) => {
     textTwo = '',
     textOne,
     status,
-    isAlertActive = true,
-    isFlagActive = true,
-    isSelectActive = true,
+    isAlertActive = false,
+    isFlagActive = false,
+    isSelectActive = false,
     id
   } = props;
 

@@ -1,119 +1,109 @@
-.noTextTranform{
-  text-transform:none !important;
+.noTextTranform {
+  text-transform: none !important;
 }
-.leftNavButton{
-  display:flex;
-  height:50px;
-  padding:0px;
-  font-size:1.6rem;
-  font-weight:400;
-  color:#808080;
+.leftNavButton {
+  display: flex;
+  height: 50px;
+  padding: 0px;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #808080;
 }
-.midPaneInformation span{
+.midPaneInformation span {
   width: inherit;
   overflow: hidden;
   white-space: nowrap;
   line-height: normal;
   text-overflow: ellipsis;
 }
-.selectionIcon{
-  font-size:1.2rem;
-  position:relative;
-  right:0px;
-  color:#0000008a;
+.selectionIcon {
+  font-size: 1.2rem;
+  position: relative;
+  right: 0px;
+  color: #0000008a;
 }
 
-.iconsBarDefaultFlag{
-  display:flex;
-  height:25px;
-  flex:1;
-  align-items:center;
-      flex:1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+.iconsBarDefaultFlag {
+  display: flex;
+  height: 25px;
+  flex: 1;
+  align-items: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-  .iconsBarDefaultFlag button{
-      color:#0000008a;
-      width:4rem;
-      height:4rem;
-  }
-  .iconsBarDefaultFlag .selectedIconColor{
-          color:#0000008a;
-  
+.iconsBarDefaultFlag button {
+  color: #0000008a;
+  width: 4rem;
+  height: 4rem;
 }
-.assesseeListiconSize
-{
-     font-size: 1.2rem !important;
+.iconsBarDefaultFlag .selectedIconColor {
+  color: #0000008a;
 }
-.selectedOption button{
-      color:#0000008a;
-      height:50px;
-      font-size:2rem;
-
+.assesseeListiconSize {
+  font-size: 1.2rem !important;
 }
-.selectedOption{
+.selectedOption button {
+  color: #0000008a;
+  height: 50px;
+  font-size: 2rem;
+}
+.selectedOption {
   margin: auto;
-
 }
-.selectedOption .selectedIconColor{
-  color:#0000008a
+.selectedOption .selectedIconColor {
+  color: #0000008a;
 }
-.assesseeListCheckBoxSelctedOut
-{
-    height: 0.6em;
-   
+.assesseeListCheckBoxSelctedOut {
+  height: 0.6em;
 }
-.flagiconmargin{
+.flagiconmargin {
   margin-top: -5px;
 }
-.assesseeListCheckBoxSelctedOut svg
-{
-    height:1.6rem;
-    
+.assesseeListCheckBoxSelctedOut svg {
+  height: 1.6rem;
 }
 
-.cardButtonwithouttextTransform{
-  display:block;
-  text-align:left;
-  align-items:flex-start;
-  text-transform:none;
-  font-weight:400;
-  color:#808080;
-  font-size:1.6rem;
-  width:100%;
-  padding:0px;
-  height:50;
-  border-radius:2px;
-  position:relative;
-  border-bottom:1px solid #BFBFBF;
- 
+.cardButtonwithouttextTransform {
+  display: block;
+  text-align: left;
+  align-items: flex-start;
+  text-transform: none;
+  font-weight: 400;
+  color: #808080;
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 0px;
+  height: 49px !important;
+  border-radius: 2px;
+  position: relative;
+  border-bottom: 1px solid #bfbfbf;
 }
-.cardButtonwithouttextTransform :hover{
-  background-color: #F2F2F2;
+.cardButtonwithouttextTransform :hover {
+  background-color: #f2f2f2;
 }
-.measureBox{
+.measureBox {
   display: flex;
-  text-align:center;
+  text-align: center;
   align-items: center;
-  height:50px;
+  height: 50px;
   padding: 0px 0px;
   cursor: pointer;
 }
-.verifiedUser{
-  align-items:flex-start;
-  padding-top:2px;
- 
-},
-.verifiedUser button{
-  margin:0 0 0 0;
-  height:20px;
-  align-items:flex-start;
-
+.verifiedUser {
+  align-items: flex-start;
+  padding-top: 2px;
 }
-.verifiedUserTop{
-  padding:0;
+,
+.verifiedUser button {
+  margin: 0 0 0 0;
+  height: 20px;
+  align-items: flex-start;
 }
-.verifiedUserTop{
-  align-items:center
+.verifiedUserTop {
+  padding: 0;
+}
+.verifiedUserTop {
+  align-items: center;
 }

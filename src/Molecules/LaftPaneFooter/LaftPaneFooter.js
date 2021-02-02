@@ -9,9 +9,10 @@ export const LaftPaneFooter = () => {
       style={{
         display: 'flex',
         position: 'absolute',
-        bottom: '0',
-        width: '100%',
-        padding: '0 5px'
+        width: '33.33%',
+        bottom: '10px',
+        padding: '0px 10px',
+        boxSizing: 'border-box'
       }}
     >
       <div style={{ flex: 1, textAlign: 'center' }}></div>
