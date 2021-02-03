@@ -91,7 +91,7 @@ export const DisplayPaneRight = () => {
       </div>
       <div
         style={{
-          padding: '5px',
+          padding: '2.5px',
           height: 'calc(100vh - 207px)',
           overflow: 'overlay',
           marginBottom: '10px'
