@@ -14,16 +14,39 @@ const PopUpNameDesc = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   const {
-    headerPanelColour = 'genericOne',
-    headerOne = 'assessees',
-    headerOneBadgeOne = 'information',
+    headerPanelColour = '',
+    headerOne = '',
+    headerOneBadgeOne = '',
     isActive = false,
+    isRequired = false,
     label = ''
   } = props;
+  const validateFun = () => {
+    let isValidate = true;
+    if (isRequired) {
+      isValidate = true;
+    }
+    return isValidate;
+  };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'SIGNON') {
+    if (validateFun()) {
+    }
+    if (popupMode === 'ASSESSEE_SIGN_ON') {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'PICTUREPOPUP' } });
+    }
+    if (popupMode === 'ASSOCIATE_SIGN_ON') {
+      dispatch({
+        type: SET_NEXT_POPUP,
+        payload: {
+          isPopUpValue:
+            label === 'name'
+              ? 'DESCRIPTIONPOPUP'
+              : label === 'description'
+              ? 'ASSOCIATEPICTUREPOPUP'
+              : 'PICTUREPOPUP'
+        }
+      });
     }
   };
   return (
@@ -43,7 +66,7 @@ const PopUpNameDesc = (props) => {
           <FormControl style={{ width: '100%' }}>
             <InputFeild id={label} label={label} />
           </FormControl>
-          {label === 'description' && (
+          {label === 'name' && (
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>

@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
-import Clear from '@material-ui/icons/Clear';
+import { Clear, KeyboardTab } from '@material-ui/icons';
 import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
@@ -16,7 +16,8 @@ const PopupHeader = (props) => {
     headerOneBadgeOne,
     headerOneBadgeTwo,
     headerOneBadgeThree,
-    onClick
+    onClick,
+    mode = 'core'
   } = props;
   const dispatch = useDispatch();
 
@@ -47,11 +48,21 @@ const PopupHeader = (props) => {
           </div>
           <div className={'backArrow'}>
             <IconButton className="MuiIconButton-root-1602">
-              {headerPanelColour === 'genericOne' ? (
+              {mode === 'core' ? (
+                <Check className={'popupClose'} onClick={onClick} />
+              ) : mode === 'confirm' ? (
+                <KeyboardTab
+                  className={['popupClose', 'previousToLast'].join(' ')}
+                  onClick={onClick}
+                />
+              ) : mode === 'error' ? null : (
+                <Previous className={'popupClose'} />
+              )}
+              {/* {headerPanelColour === 'genericOne' ? (
                 <Check className={'popupClose'} onClick={onClick} />
               ) : headerPanelColour === 'genericTwo' ? null : (
                 <Previous className={'popupClose'} />
-              )}
+              )} */}
             </IconButton>
           </div>
           <div className={'backArrow'}>

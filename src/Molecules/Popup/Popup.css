@@ -63,6 +63,11 @@
   background-color: #00afff !important;
   background-image: linear-gradient(to bottom right, #00afff, #7dc832);
 }
+.previousToLast{
+  transform:rotate(-180deg);
+  width:24px;
+  height:24px;
+}
 .titleSolid-displayPaneCentre {
   display: flex;
   height: 50px;

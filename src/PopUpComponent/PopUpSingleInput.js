@@ -7,10 +7,9 @@ import InputFeild from '../Atoms/InputField/InputField';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
+import { UPDATE_ASSESSEE_INFO } from '../actionType';
 
 const PopUpSingleInput = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   console.log(basicInfo);
@@ -30,9 +29,6 @@ const PopUpSingleInput = (props) => {
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'SIGNON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
-    }
   };
   return (
     <div>

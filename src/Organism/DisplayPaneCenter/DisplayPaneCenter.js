@@ -313,7 +313,7 @@ export const DisplayPaneCenter = () => {
         <HeaderCard
           className=""
           displayPane="centre"
-          headerOne="associate"
+          headerOne="associates"
           headerOneBadgeOne=""
           headerOneBadgeTwo="distinct"
           headerOneBadgeThree="active"

@@ -2,15 +2,14 @@ import React, { Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
-import { InputLabel, FormControl, TextField } from '@material-ui/core';
+import { InputLabel, FormControl } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
+import { UPDATE_ASSESSEE_INFO } from '../actionType';
 
 const PopUpTagSecondary = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   console.log(basicInfo);
@@ -21,8 +20,7 @@ const PopUpTagSecondary = (props) => {
     inputHeader = 'tag',
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
-    headerOneBadgeOne = 'information',
-    valueState = 'tag' + 'secondary'
+    headerOneBadgeOne = 'information'
   } = props;
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,9 +28,6 @@ const PopUpTagSecondary = (props) => {
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'SIGNON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
-    }
   };
   return (
     <div>

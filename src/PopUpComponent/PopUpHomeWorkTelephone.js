@@ -24,9 +24,7 @@ const PopUpHomeWorkTelephone = (props) => {
     inputHeader = 'mobile telephone',
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
-    headerOneBadgeOne = 'information',
-    valueState = 'mobiletelephone' + 'primary',
-    isVerification = false
+    headerOneBadgeOne = 'information'
   } = props;
 
   const handleChange = (event) => {
@@ -37,8 +35,11 @@ const PopUpHomeWorkTelephone = (props) => {
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'SIGNON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
+    if (popupMode === 'ASSOCIATE_SIGN_ON') {
+      dispatch({
+        type: SET_NEXT_POPUP,
+        payload: { isPopUpValue: 'ASSOCIATECONFIRMATIONPOPUP' }
+      });
     }
   };
   return (

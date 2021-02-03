@@ -1,8 +1,7 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
-import { Grid, Button, InputLabel } from '@material-ui/core';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import CalculatorIcon from '@material-ui/icons/Keyboard';
@@ -24,24 +23,6 @@ const PopUpIcon = (props) => {
     { lable: 'financial', Icon: CalculatorAdvancedIcon },
     { lable: 'scientific', Icon: CalculatorAdvancedIcon }
   ];
-
-  const noofrows = Math.round(Object.keys(arr).length / 2);
-  const list = [];
-  for (let i = 0; i < noofrows; i++) {
-    list.push(
-      <div className={'mbPager'}>
-        <div className={'iconBoxFooter'}></div>
-        <div className={'mbPager'}>
-          <IconButton label={arr[i].lable} Icon={CalculatorIcon} colour={'genericOne'} />
-        </div>
-        <div className={'iconBoxFooter'}></div>
-        <div className={'mbPager'}>
-          <IconButton label={'fsdfs'} Icon={CalculatorIcon} colour={'genericOne'} />
-        </div>
-        <div className={'iconBoxFooter'}></div>
-      </div>
-    );
-  }
   return (
     <div>
       <Popup isActive={isActive}>
@@ -56,26 +37,131 @@ const PopUpIcon = (props) => {
         >
           <div id="dialog-description">
             <div className="true">
-              {/* {list} */}
-              {
-              
-                arr.map((item,index) =>{
-                 return(<div className={'mbPager'}>
-                  <IconButton label={item.lable} Icon={CalculatorIcon} colour={'genericOne'} />
+              {arr.length === 1 ? (
+                <div className={'mbPager'}>
+                  <IconButton label={arr[0].lable} Icon={arr[0].Icon} colour={'genericOne'} />
                 </div>
-                )})
-              }
-              {/* <div className={'mbPager'}>
+              ) : arr.length === 2 ? (
+                <div className={'mbPager'}>
+                  <div className={'iconBoxFooter'}></div>
+                  <div className={'mbPager'}>
+                    <IconButton label={arr[0].lable} Icon={arr[0].Icon} colour={'genericOne'} />
+                  </div>
+                  <div className={'iconBoxFooter'}></div>
+                  <div className={'mbPager'}>
+                    <IconButton label={arr[1].lable} Icon={arr[1].Icon} colour={'genericOne'} />
+                  </div>
+                  <div className={'iconBoxFooter'}></div>
+                </div>
+              ) : arr.length === 4 ? (
+                <Fragment>
+                  <div className={'mbPager'}>
                     <div className={'iconBoxFooter'}></div>
                     <div className={'mbPager'}>
-                      <IconButton label={'fsdfs'} Icon={CalculatorIcon} colour={'genericOne'} />
+                      <IconButton label={arr[0].lable} Icon={arr[0].Icon} colour={'genericOne'} />
                     </div>
                     <div className={'iconBoxFooter'}></div>
                     <div className={'mbPager'}>
-                      <IconButton label={'fsdfs'} Icon={CalculatorIcon} colour={'genericOne'} />
+                      <IconButton label={arr[1].lable} Icon={arr[1].Icon} colour={'genericOne'} />
                     </div>
                     <div className={'iconBoxFooter'}></div>
-                    </div> */}
+                  </div>
+                  <div className={'mbPager'}>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[2].lable} Icon={arr[2].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[3].lable} Icon={arr[3].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                  </div>
+                </Fragment>
+              ) : arr.length === 6 ? (
+                <Fragment>
+                  <div className={'mbPager'}>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[0].lable} Icon={arr[0].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[1].lable} Icon={arr[1].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                  </div>
+                  <div className={'mbPager'}>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[2].lable} Icon={arr[2].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[3].lable} Icon={arr[3].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                  </div>
+                  <div className={'mbPager'}>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[4].lable} Icon={arr[4].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[5].lable} Icon={arr[5].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                  </div>
+                </Fragment>
+              ) : arr.length === 8 ? (
+                <Fragment>
+                  <div className={'mbPager'}>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[0].lable} Icon={arr[0].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[1].lable} Icon={arr[1].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                  </div>
+                  <div className={'mbPager'}>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[2].lable} Icon={arr[2].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[3].lable} Icon={arr[3].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                  </div>
+                  <div className={'mbPager'}>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[4].lable} Icon={arr[4].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[5].lable} Icon={arr[5].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                  </div>
+                  <div className={'mbPager'}>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[6].lable} Icon={arr[6].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                    <div className={'mbPager'}>
+                      <IconButton label={arr[7].lable} Icon={arr[7].Icon} colour={'genericOne'} />
+                    </div>
+                    <div className={'iconBoxFooter'}></div>
+                  </div>
+                </Fragment>
+              ) : null}
             </div>
           </div>
         </DialogContent>
@@ -85,7 +171,7 @@ const PopUpIcon = (props) => {
 };
 PopUpIcon.propTypes = {
   className: PropTypes.string,
-  headerPanelColour: PropTypes.oneOf(['genericOne']),
+  headerPanelColour: PropTypes.oneOf(['displayPaneLeft']),
   headerOne: PropTypes.string,
   headerOneBadgeOne: PropTypes.string,
   headerOneBadgeTwo: PropTypes.string,
