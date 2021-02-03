@@ -5,7 +5,13 @@ export default {
   title: 'Design System/Molecules/Display Card',
   component: BasicCard
 };
-const Template = (args) => <BasicCard {...args} />;
+const Template = (args) => {
+  return (
+    <div style={{ maxWidth: '33.33%' }}>
+      <BasicCard {...args} />
+    </div>
+  );
+};
 
 export const DisplayCard4 = Template.bind({});
 DisplayCard4.args = {

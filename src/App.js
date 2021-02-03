@@ -1,14 +1,11 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import DashboardPage from './Pages/DashboardPage/DashboardPage';
 import SignOnPage from './Pages/SignOnPages/SignOnPage';
 import SignInPage from './Pages/SignInPage/SignInPage';
-import store from './store';
 
 function App() {
   return (
-    // <Provider store={store}>
     <Router>
       <div className="App">
         <Switch>
@@ -19,7 +16,6 @@ function App() {
         </Switch>
       </div>
     </Router>
-    // </Provider>
   );
 }
 
