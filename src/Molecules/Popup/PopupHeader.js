@@ -7,8 +7,8 @@ import { Clear, KeyboardTab } from '@material-ui/icons';
 import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './Popup.css';
-import { useDispatch } from 'react-redux';
-import { POPUP_CLOSE, CLEAR_ASSESSEE_INFO } from '../../actionType';
+import { useDispatch, useSelector } from 'react-redux';
+import { POPUP_CLOSE, SET_NEXT_POPUP, CLEAR_ASSESSEE_INFO, PREVIOUS_POPUP } from '../../actionType';
 const PopupHeader = (props) => {
   const {
     headerPanelColour,
@@ -20,6 +20,17 @@ const PopupHeader = (props) => {
     mode = 'core'
   } = props;
   const dispatch = useDispatch();
+  const { isPopUpValue } = useSelector((state) => state.popUpReducer);
+
+  const onClose = () => {
+    if (mode === 'cancel' || mode === 'core' || mode === 'confirm') {
+      dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CANCELPOPUP' } });
+    } else {
+      dispatch({ type: CLEAR_ASSESSEE_INFO });
+      dispatch({ type: POPUP_CLOSE });
+    }
+  };
 
   return (
     <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
@@ -55,7 +66,7 @@ const PopupHeader = (props) => {
                   className={['popupClose', 'previousToLast'].join(' ')}
                   onClick={onClick}
                 />
-              ) : mode === 'error' ? null : (
+              ) : mode === 'error' || mode === 'cancel' ? null : (
                 <Previous className={'popupClose'} />
               )}
               {/* {headerPanelColour === 'genericOne' ? (
@@ -66,14 +77,8 @@ const PopupHeader = (props) => {
             </IconButton>
           </div>
           <div className={'backArrow'}>
-            <IconButton
-              onClick={() => {
-                dispatch({ type: CLEAR_ASSESSEE_INFO });
-                dispatch({ type: POPUP_CLOSE });
-              }}
-              className="MuiIconButton-root-1602"
-            >
-              <Clear className={'popupClose'} />
+            <IconButton onClick={onClose} className="MuiIconButton-root-1602">
+             {mode !== 'cancel' && <Clear className={'popupClose'} />}
             </IconButton>
           </div>
         </div>

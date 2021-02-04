@@ -11,7 +11,8 @@ import {
 } from '@material-ui/core';
 
 export const SelectField = (props) => {
-  const { tag, label, listSelect = [], errorMsg, onChange, value } = props;
+  const { tag, label, listSelect = [], errorMsg, onChange, value, mappingValue } = props;
+  console.log(props)
   return (
     <Fragment>
       <FormControl className={'selectFormText'}>
@@ -23,8 +24,8 @@ export const SelectField = (props) => {
             option === 'divider' ? (
               <Divider light />
             ) : (
-              <MenuItem key={`${tag}-${index}`} value={option} className={'selectMenu'}>
-                {option}
+              <MenuItem key={`${tag}-${index}`}  value={option[mappingValue]} className={'selectMenu'}>
+                {option.name}
               </MenuItem>
             )
           )}

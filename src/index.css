@@ -204,6 +204,9 @@ body {
 .form-inputs-cantainer {
   padding: 20px 10px 10px 10px;
 }
+.form-inputs-signoncantainer {
+  padding: 10px 10px 10px 10px;
+}
 .footerPopupIcons div{
       display:flex;
 }

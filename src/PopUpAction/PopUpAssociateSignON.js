@@ -10,10 +10,16 @@ import PopUpEmail from '../PopUpComponent/PopUpEmail';
 import PopUpMobileTelephone from '../PopUpComponent/PopUpMobileTelephone';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
 import PopUpSingleDropDown from '../PopUpComponent/PopUpSingleDropDown';
-import { SET_NEXT_POPUP } from '../actionType';
+import { SET_NEXT_POPUP, CLEAR_ASSESSEE_INFO, POPUP_CLOSE } from '../actionType';
 const PopUpAssociateSignON = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
+
+  const onClickCancelYes = () => {
+    dispatch({ type: CLEAR_ASSESSEE_INFO });
+    dispatch({ type: POPUP_CLOSE });
+  };
+  
   const onClickYes = () => {
     if (popupMode === 'ASSOCIATE_SIGN_ON') {
       dispatch({
@@ -69,6 +75,14 @@ const PopUpAssociateSignON = () => {
         headerOneBadgeOne={'information'}
         inputHeader={'work telephone'}
         primaryheader={'primary'}
+      />
+      <PopUpConfirmation
+        isActive={isPopUpValue === 'CANCELPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'cancel'}
+        headerOneBadgeOne={''}
+        mode={'cancel'}
+        onClickYes={onClickCancelYes}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'ASSOCIATECONFIRMATIONPOPUP'}

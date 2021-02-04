@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
@@ -10,33 +10,51 @@ import '../Atoms/InputField/InputField.css';
 
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_MOBILE_INFO } from '../actionType';
 
 const PopUpMobileTelephone = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
-  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
-  console.log(basicInfo);
-  console.log('basicInfo');
+
   const {
     isActive,
     primaryheader = '',
     inputHeader = '',
     headerPanelColour = '',
     headerOne = '',
-    headerOneBadgeOne = ''
+    headerOneBadgeOne = '',
+    nextPopUpValue,
+    basicInfo
   } = props;
 
+  const [state, setState] = useState({
+    error: ''
+  });
+  const validate = () => {
+    let isValidate = true;
+    let regex = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
+    let mobilestr = basicInfo.mobileNumber;
+    if (regex.test(mobilestr) === false && mobilestr !=='') {
+      setState((prevState) => ({
+        ...prevState,
+        error: 'this information is incorrect'
+      }));
+      isValidate=false
+    }
+    return isValidate;
+  };
   const handleChange = (event) => {
-    console.log(event);
-    console.log(event.target);
     const { name, value } = event.target;
-    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
+    setState((prevState) => ({
+      ...prevState,
+      error: ''
+    }));
+    dispatch({ type: UPDATE_ASSESSEE_MOBILE_INFO, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
-    /*according to creation mode popup sequence will change*/
-    if (popupMode === 'ASSESSEE_SIGN_ON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'SINGLEDROPDOWNPOPUP' } });
+    if (validate()) {
+      /*according to creation mode popup sequence will change*/
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
   };
   return (
@@ -66,17 +84,21 @@ const PopUpMobileTelephone = (props) => {
             <SelectField
               tag={'countryCode'}
               label={'country / region'}
-              listSelect={['India', 'USA']}
+              listSelect={[
+                { countryCode: '91', name: 'India' },
+                { countryCode: '22', name: 'USA' }
+              ]}
+              mappingValue={'countryCode'}
               errorMsg={''}
               onChange={handleChange}
               value={basicInfo.countryCode}
             />
             <InputFeild
               type={'text'}
-              id={'mobiletelephone'}
+              id={'mobileNumber'}
               label={'mobile number'}
-              value={basicInfo.mobiletelephone}
-              errorMsg={''}
+              value={basicInfo.mobileNumber}
+              errorMsg={state.error}
               onClick={handleChange}
             />
             <div className={'fitContent'}>

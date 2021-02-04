@@ -17,7 +17,7 @@ export const IguruTopHeader = (props) => {
     userEmail = 'joachim.carvalho@insightguru.com',
     isImageActive = false
   } = props;
-  const isBespoke = true;
+  const isBespoke = false;
 
   return (
     <div className="header-container">
@@ -34,6 +34,7 @@ export const IguruTopHeader = (props) => {
               <img
                 className="logo-img"
                 src={isBespoke ? './Image/PrafultaLogoName.jpg' : iGuruLogo}
+                // src={iGuruLogo}
                 alt="iGuru logo"
               />
             </div>
@@ -49,15 +50,12 @@ export const IguruTopHeader = (props) => {
           >
             {isBespoke && (
               <div>
-                {true ? (
-                  <Avatar
-                    alt=""
-                    className="iguru-icon-container"
-                    src={'./Image/insightGURULogo.png'}
-                  />
-                ) : (
-                  <IconsButton Icon={PersonIcon} className="imageNA iguru-icon-container" />
-                )}
+                <Avatar
+                  alt=""
+                  className="iguru-icon-container"
+                  style={{ borderRadius: '0' }}
+                  src={'./Image/logo-03.jpeg'}
+                />
               </div>
             )}
           </div>

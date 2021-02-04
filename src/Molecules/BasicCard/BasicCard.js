@@ -72,7 +72,7 @@ const BasicCard = (props) => {
             colour="rgba(0, 0, 0, 0.87)"
           />
         </div>
-        <div style={{ margin: '0 11% 0 0' }}>
+        <div className="flex-one-align-center">
           <div>
             <IconButton className="icon-container">
               {isFlagActive && <FlagIcon className="iguru-icons-wid-hei" />}
@@ -85,7 +85,7 @@ const BasicCard = (props) => {
           </div>
         </div>
 
-        <div>
+        <div className="flex-one-align-center">
           <div
             className={'unitFlex, verifiedUser, verifiedUserTop'}
             style={{ alignItems: 'flex-start' }}
