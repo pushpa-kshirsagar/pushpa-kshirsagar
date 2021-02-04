@@ -324,20 +324,22 @@ export const DisplayPaneCenter = () => {
       </div>
       <div
         style={{
-          padding: '5px',
           height: 'calc(100vh - 207px)',
-          overflow: 'overlay',
-          marginBottom: '10px'
+          overflow: 'overlay'
         }}
+        className="containerPadding"
       >
         {tempAssociateList.map((associate) => {
           return (
-            <List
-              className=""
-              status={associate.status}
-              textOne={associate.textOne}
-              textTwo={associate.textTwo}
-            />
+            <div className="containerPadding">
+              <List
+                className=""
+                id={associate.id}
+                status={associate.status}
+                textOne={associate.textOne}
+                textTwo={associate.textTwo}
+              />
+            </div>
           );
         })}
       </div>

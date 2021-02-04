@@ -121,11 +121,11 @@ export const DisplayPaneLeft = () => {
           headerPanelColour="blue"
         />
       </div>
-      <div style={{ padding: '5px' }}>
-        <div style={{ margin: '0 0 5px 0' }}>
+      <div className="containerPadding">
+        <div className="containerPadding">
           <Card ImageOne={PersonIcon} textOneOne="assesseeName" />
         </div>
-        <div>
+        <div className="containerPadding">
           <Card ImageOne={AssociateIcon} textOneOne="Boppo Technologies" />
         </div>
         <Sections

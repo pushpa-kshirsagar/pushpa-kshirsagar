@@ -8,7 +8,7 @@ import { InputLabel } from '@material-ui/core';
  * Primary UI component for user interaction
  */
 const IconButton = (props) => {
-  const { label = '', Icon, colour, className, labelTwo, onClick } = props;
+  const { label = '', Icon, colour, className, labelTwo = '', onClick } = props;
   // const displayPane = primary ? 'icon-button-primary' : 'icon-button-secondary';
 
   return (

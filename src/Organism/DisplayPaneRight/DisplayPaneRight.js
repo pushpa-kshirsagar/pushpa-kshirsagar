@@ -13,8 +13,8 @@ const displayPaneRightSection1 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
-        {/* <Card isIcon IconOne={ArrowRight} textOneOne="alliance" /> */}
-        <Accordian
+        <Card isIcon IconOne={ArrowRight} textOneOne="alliance" />
+        {/* <Accordian
           IconOne={TelephoneVerified}
           IconTwo={VerifiedUserIcon}
           className={null}
@@ -26,7 +26,7 @@ const displayPaneRightSection1 = () => {
           labelTextOneOneBadgeThree=""
           labelTextOneOneBadgeTwo="secondary"
           textOneOne="sample@gmail.com"
-        />
+        /> */}
       </div>
       <div style={{ padding: '2.5px' }}>
         <Card isIcon IconOne={ArrowRight} textOneOne="allocation" />

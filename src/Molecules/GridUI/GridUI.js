@@ -9,14 +9,16 @@ export const GridUI = () => {
       {listPane.map((pane) => {
         return (
           <div key={`${pane}-pane`} className="grid-pane-container">
-            <div className="grid-inner-container">
-              {list.map((label) => {
-                return (
-                  <div key={label} className={label % 2 === 0 ? 'mb1g' : 'mb1b'}>
-                    <p style={{ margin: '5px' }}>{label}</p>
-                  </div>
-                );
-              })}
+            <div style={{ padding: '2.5px' }}>
+              <div className="grid-inner-container">
+                {list.map((label) => {
+                  return (
+                    <div key={label} className={label % 2 === 0 ? 'mb1g' : 'mb1b'}>
+                      <p style={{ margin: '5px' }}>{label}</p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );

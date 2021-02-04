@@ -4,13 +4,14 @@
 }
 .grid-pane-container {
   flex: 6;
+  padding: 2.5px;
   border: 1px dashed black;
 }
 .grid-inner-container {
   color: rgba(0, 0, 0, 0.54);
   cursor: pointer;
   display: flex;
-  padding: 10px;
+  padding: 0 5px;
   text-align: center;
   align-items: center;
 }
