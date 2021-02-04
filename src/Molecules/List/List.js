@@ -18,75 +18,71 @@ const List = (props) => {
   } = props;
 
   return (
-    <div>
-      {/* {listarr.map((item) => ( */}
-      <div className={'containerPadding'} key={id}>
+    <div style={{ padding: '0 5px'}} key={id}>
+      <div
+        disableFocusRipple={true}
+        disableRipple={true}
+        className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
+        id={id}
+      >
         <div
-          disableFocusRipple={true}
-          disableRipple={true}
-          className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
-          id={id}
+          className={['measureBox', 'heightInherit', 'iguru-componentinnerdiv-margin'].join(' ')}
         >
-          <div
-            className={['measureBox', 'heightInherit', 'iguru-componentinnerdiv-margin'].join(' ')}
-          >
-            <div className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}>
-              <div
-                className={[
-                  'midPaneInformation',
-                  textTwo == null || textTwo === '' ? 'aliasmiddle' : null
-                ].join(' ')}
-              >
-                {textOne}
-              </div>
-              {textTwo != null ? <div className={'midPaneLabel'}>{textTwo}</div> : null}
+          <div className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}>
+            <div
+              className={[
+                'midPaneInformation',
+                textTwo == null || textTwo === '' ? 'aliasmiddle' : null
+              ].join(' ')}
+            >
+              {textOne}
             </div>
-            <div className={'unitFlex'}>
-              <span
-                className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(' ')}
-                style={{ textAlign: 'center' }}
+            {textTwo != null ? <div className={'midPaneLabel'}>{textTwo}</div> : null}
+          </div>
+          <div className={'unitFlex'}>
+            <span
+              className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(' ')}
+              style={{ textAlign: 'center' }}
+            >
+              {isAlertActive ? <Notifications className={'selectionIcon'} /> : null}
+              <InputLabel
+                className={['iconsFooterLabelDefault', 'AssesseeNotifyStatusLabel'].join(' ')}
               >
-                {isAlertActive ? <Notifications className={'selectionIcon'} /> : null}
-                <InputLabel
-                  className={['iconsFooterLabelDefault', 'AssesseeNotifyStatusLabel'].join(' ')}
-                >
-                  {status}
-                </InputLabel>
-              </span>
-            </div>
+                {status}
+              </InputLabel>
+            </span>
+          </div>
 
-            <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-              {isFlagActive ? (
-                <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
-                  <IconButton className={'assesseeListiconSize'}>
-                    <FlagOutlinedIcon className={'flagiconmargin'} />
-                    {/* <i className="far fa-flag" id={'flagid'}></i> */}
-                  </IconButton>
+          <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+            {isFlagActive ? (
+              <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
+                <IconButton className={'assesseeListiconSize'}>
+                  <FlagOutlinedIcon className={'flagiconmargin'} />
+                  {/* <i className="far fa-flag" id={'flagid'}></i> */}
+                </IconButton>
+              </div>
+            ) : null}
+            {isSelectActive ? (
+              <div className={'unitFlex'}>
+                <div
+                  className={[
+                    'unitFlex',
+                    isFlagActive ? 'iconsBarDefaultFlag' : 'selectedOption'
+                  ].join(' ')}
+                >
+                  <Checkbox
+                    id={'id'}
+                    className={'assesseeListCheckBoxSelctedOut'}
+                    color="default"
+                    disableRipple={true}
+                    disableFocusRipple={true}
+                  />
                 </div>
-              ) : null}
-              {isSelectActive ? (
-                <div className={'unitFlex'}>
-                  <div
-                    className={[
-                      'unitFlex',
-                      isFlagActive ? 'iconsBarDefaultFlag' : 'selectedOption'
-                    ].join(' ')}
-                  >
-                    <Checkbox
-                      id={'id'}
-                      className={'assesseeListCheckBoxSelctedOut'}
-                      color="default"
-                      disableRipple={true}
-                      disableFocusRipple={true}
-                    />
-                  </div>
-                </div>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
-      {/* ))} */}
     </div>
   );
 };
