@@ -15,32 +15,28 @@ import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 const PopUpHomeWorkTelephone = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
-  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
-  console.log(basicInfo);
-  console.log('basicInfo');
   const {
     isActive,
     primaryheader = 'primary',
     inputHeader = 'mobile telephone',
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
-    headerOneBadgeOne = 'information'
+    headerOneBadgeOne = 'information',
+    typeOfSetObject,
+    nextPopUpValue,
+    basicInfo
   } = props;
 
   const handleChange = (event) => {
-    console.log(event);
-    console.log(event.target);
     const { name, value } = event.target;
-    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'ASSOCIATE_SIGN_ON') {
       dispatch({
         type: SET_NEXT_POPUP,
-        payload: { isPopUpValue: 'ASSOCIATECONFIRMATIONPOPUP' }
+        payload: { isPopUpValue: nextPopUpValue }
       });
-    }
   };
   return (
     <div>
@@ -69,41 +65,58 @@ const PopUpHomeWorkTelephone = (props) => {
             <SelectField
               tag={'countryCode'}
               label={'country / region'}
-              listSelect={['India', 'USA']}
+              listSelect={[
+                { countryCode: '91', name: 'India' },
+                { countryCode: '22', name: 'USA' }
+              ]}
               errorMsg={''}
+              mappingValue={'countryCode'}
               onChange={handleChange}
-              value={basicInfo.countryCode}
+              value={basicInfo && basicInfo.countryCode}
             />
             <SelectField
-              tag={'countryCode'}
+              tag={'cityCode'}
               label={'area / city'}
-              listSelect={['Mumbai', 'Pune']}
+              listSelect={[
+                { cityCode: '345', name: 'Mumbai' },
+                { cityCode: '345', name: 'Pune' }
+              ]}
+              mappingValue={'cityCode'}
               errorMsg={''}
               onChange={handleChange}
-              value={basicInfo.countryCode}
+              value={basicInfo && basicInfo.cityCode}
             />
             <InputFeild
               type={'text'}
-              id={'mobiletelephone'}
+              id={'telephoneNumber'}
               label={'telephone number'}
-              value={basicInfo.mobiletelephone}
+              value={basicInfo && basicInfo.telephoneNumber}
               errorMsg={''}
               onClick={handleChange}
             />
             <InputFeild
               type={'text'}
-              id={'mobiletelephone'}
+              id={'extensionNumber'}
               label={'extension number'}
-              value={basicInfo.mobiletelephone}
+              value={basicInfo && basicInfo.extensionNumber}
               errorMsg={''}
               onClick={handleChange}
             />
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>
-                  <div className={'f4'}>communication </div>
+                  <div
+                    className={'f4'}
+                    style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
+                  >
+                    communication{' '}
+                  </div>
                   <div className={'checkedFontNew'}>
-                    <Checkbox className={''} color="default" />
+                    <Checkbox
+                      className={''}
+                      color="default"
+                      disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
+                    />
                   </div>
                 </div>
               </div>
@@ -111,9 +124,18 @@ const PopUpHomeWorkTelephone = (props) => {
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>
-                  <div className={'f4'}>verification</div>
+                  <div
+                    className={'f4'}
+                    style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
+                  >
+                    verification
+                  </div>
                   <div className={'checkedFontNew'}>
-                    <Checkbox className={''} color="default" />
+                    <Checkbox
+                      className={''}
+                      color="default"
+                      disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
+                    />
                   </div>
                 </div>
               </div>

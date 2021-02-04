@@ -26,17 +26,13 @@ const PopUpList = (props) => {
       { name: 'Simple Sample 01', description: '01' },
       { name: 'Simple Sample 02', description: '02' },
       { name: 'Simple Sample 03', description: '03' }
-    ]
+    ],
+    nextPopUpValue
   } = props;
 
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'ASSOCIATE_SIGN_ON') {
-      dispatch({
-        type: SET_NEXT_POPUP,
-        payload: { isPopUpValue: 'WORKADDRESSPOPUP' }
-      });
-    }
+    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
   };
   return (
     <div>

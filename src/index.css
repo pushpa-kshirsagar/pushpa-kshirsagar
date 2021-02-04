@@ -63,6 +63,19 @@ body {
   width: 4rem;
   border-radius: 50%;
 }
+.imageNASelected {
+  font-size: 4rem;
+  background-color: #B2B2B2 !important;
+  color: #fff;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important;
+}
+.imageNASelected svg {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+}
+
 .containerPadding {
   padding: 2.5px !important;
 }
@@ -202,8 +215,11 @@ body {
 .form-inputs-cantainer {
   padding: 20px 10px 10px 10px;
 }
-.footerPopupIcons div {
-  display: flex;
+.form-inputs-signoncantainer {
+  padding: 10px 10px 10px 10px;
+}
+.footerPopupIcons div{
+      display:flex;
 }
 .footerPopupIcons div {
   flex: 1;

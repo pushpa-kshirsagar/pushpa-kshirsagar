@@ -6,13 +6,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
+import { SET_NEXT_POPUP } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 
 const PopUpEmail = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
-  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const dispatch = useDispatch();
   /*props*/
   const {
@@ -20,8 +19,13 @@ const PopUpEmail = (props) => {
     headerPanelColour = '',
     headerOne = '',
     headerOneBadgeOne = '',
-    primaryLabel = '',
-    inputHeader = ''
+    primaryLabel = 'email address',
+    primaryLabelBadge = 'primary',
+    tag,
+    basicInfo,
+    nextPopUpValue,
+    typeOfSetObject,
+    checkboxValue = primaryLabel + ' (' + primaryLabelBadge + ')'
   } = props;
 
   const [state, setState] = useState({
@@ -31,16 +35,34 @@ const PopUpEmail = (props) => {
   /*handling the onchange event*/
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
+    let communication = checkboxValue;
+    let signIn = checkboxValue;
+    if (value === '') {
+      communication = '';
+      signIn = '';
+    }
+    dispatch({
+      type: typeOfSetObject,
+      payload: { ...basicInfo, [name]: value, communication: communication, signIn: signIn }
+    });
     setState((prevState) => ({
       ...prevState,
-      [name + 'Err']: ''
+      emailErr: ''
     }));
   };
+
+  const handleCheckbox = (e) => {
+    const { name, checked, value } = e.target;
+    dispatch({
+      type: typeOfSetObject,
+      payload: { ...basicInfo, [name]: checked ? value : '' }
+    });
+  };
+
   /*this function for validate email address*/
   const validate = () => {
     let isValid = true;
-    let emailStr = basicInfo.email;
+    let emailStr = basicInfo[tag];
     let exp = new RegExp(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
@@ -65,9 +87,7 @@ const PopUpEmail = (props) => {
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
-      if (popupMode === 'ASSESSEE_SIGN_ON') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MobileTelephone' } });
-      }
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
   };
 
@@ -85,10 +105,10 @@ const PopUpEmail = (props) => {
         >
           <FormControl style={{ width: '100%' }}>
             <InputFeild
-              id={'email'}
+              id={tag}
               label={primaryLabel}
-              labelBadgeOne={'primary'}
-              value={basicInfo.email}
+              labelBadgeOne={primaryLabelBadge}
+              value={basicInfo && basicInfo[tag]}
               errorMsg={state.emailErr}
               onClick={handleChange}
             />
@@ -97,9 +117,30 @@ const PopUpEmail = (props) => {
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>
-                <div className={'f4'}>communication</div>
+                <div
+                  className={'f4'}
+                  style={{
+                    color: basicInfo && basicInfo.communication !== checkboxValue && 'dimgray'
+                  }}
+                >
+                  communication
+                </div>
                 <div className={'checkedFontNew'}>
-                  <Checkbox className={''} color="default" />
+                  <Checkbox
+                    className={''}
+                    color="default"
+                    name={'communication'}
+                    value={checkboxValue}
+                    checked={
+                      basicInfo ? (basicInfo.communication === checkboxValue ? true : false) : false
+                    }
+                    onChange={
+                      popupMode !== 'ASSESSEE_SIGN_ON' &&
+                      popupMode !== 'ASSOCIATE_SIGN_ON' &&
+                      handleCheckbox
+                    }
+                    disabled={basicInfo && basicInfo.communication !== checkboxValue}
+                  />
                 </div>
               </div>
             </div>
@@ -107,9 +148,30 @@ const PopUpEmail = (props) => {
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>
-                <div className={'f4'}>sign-in</div>
+                <div
+                  className={'f4'}
+                  style={{
+                    color: basicInfo && basicInfo.communication !== checkboxValue && 'dimgray'
+                  }}
+                >
+                  sign-in
+                </div>
                 <div className={'checkedFontNew'}>
-                  <Checkbox className={''} color="default" />
+                  <Checkbox
+                    className={''}
+                    color="default"
+                    name={'signIn'}
+                    value={checkboxValue}
+                    checked={
+                      basicInfo ? (basicInfo.signIn === checkboxValue ? true : false) : false
+                    }
+                    onChange={
+                      popupMode !== 'ASSESSEE_SIGN_ON' &&
+                      popupMode !== 'ASSOCIATE_SIGN_ON' &&
+                      handleCheckbox
+                    }
+                    disabled={basicInfo && basicInfo.signIn !== checkboxValue}
+                  />
                 </div>
               </div>
             </div>
@@ -117,9 +179,11 @@ const PopUpEmail = (props) => {
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>
-                <div className={'f4'}>verification</div>
+                <div className={'f4'} style={{ color: 'dimgray' }}>
+                  verification
+                </div>
                 <div className={'checkedFontNew'}>
-                  <Checkbox className={''} color="default" />
+                  <Checkbox className={''} color="default" disabled={true} />
                 </div>
               </div>
             </div>

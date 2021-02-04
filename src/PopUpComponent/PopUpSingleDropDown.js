@@ -5,13 +5,11 @@ import PopupHeader from '../Molecules/Popup/PopupHeader';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_PERSONAL_INFO } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import SelectField from '../Atoms/SelectField/SelectField';
 
 const PopUpSingleDropDown = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
-  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const dispatch = useDispatch();
   //props
   const {
@@ -21,7 +19,11 @@ const PopUpSingleDropDown = (props) => {
     headerOneBadgeOne,
     listSelect,
     isRequired = false,
-    tag
+    basicInfo,
+    tag,
+    typeOfSetObject,
+    nextPopUpValue,
+    mappingValue
   } = props;
 
   //states
@@ -34,7 +36,7 @@ const PopUpSingleDropDown = (props) => {
       [name]: value,
       isError: ''
     }));
-    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   //this function for validate
   const validate = () => {
@@ -44,17 +46,17 @@ const PopUpSingleDropDown = (props) => {
         setState((prevState) => ({ ...prevState, isError: 'this information is required' }));
         isValidate = false;
       }
+      return isValidate;
+    } else {
+      return isValidate;
     }
-    return isValidate;
   };
-  //end
+    //end
 
   const handleClick = () => {
     if (validate()) {
       //according to creation mode popup sequence will change
-      if (popupMode === 'ASSESSEE_SIGN_ON') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
-      }
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
   };
 
@@ -79,7 +81,8 @@ const PopUpSingleDropDown = (props) => {
               listSelect={listSelect}
               errorMsg={state.isError}
               onChange={handleChange}
-              value={basicInfo[tag]}
+              value={basicInfo && basicInfo[tag]}
+              mappingValue={mappingValue}
             />
           </FormControl>
         </DialogContent>

@@ -6,16 +6,33 @@ import { Button } from '@material-ui/core';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { POPUP_CLOSE, CLEAR_ASSESSEE_INFO, SET_NEXT_POPUP } from '../actionType';
+import { POPUP_CLOSE, CLEAR_ASSESSEE_INFO, SET_NEXT_POPUP, PREVIOUS_POPUP } from '../actionType';
 import '../Molecules/Popup/Popup.css';
 
 const PopUpConfirmation = (props) => {
-  const { isActive, headerPanelColour, headerOne, headerOneBadgeOne, onClickYes = null } = props;
+  const {
+    isActive,
+    headerPanelColour,
+    headerOne,
+    headerOneBadgeOne,
+    onClickYes = null,
+    mode = 'confirm'
+  } = props;
   const dispatch = useDispatch();
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode, isPopUpValue, prevPopUpValue } = useSelector((state) => state.popUpReducer);
+
+  const onClickNo = () => {
+    if (mode === 'cancel') {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: prevPopUpValue } });
+    } else {
+      dispatch({ type: CLEAR_ASSESSEE_INFO });
+      dispatch({ type: POPUP_CLOSE });
+    }
+  };
   const handleBack = () => {
     /*according manage back state*/
     if (popupMode === 'ASSESSEE_SIGN_ON') {
+      dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
     }
     if (popupMode === 'ASSOCIATE_SIGN_ON') {
@@ -34,7 +51,7 @@ const PopUpConfirmation = (props) => {
           headerOneBadgeOne={headerOneBadgeOne}
           headerOneBadgeTwo={''}
           headerOneBadgeThree={''}
-          mode={'confirm'}
+          mode={mode}
           onClick={handleBack}
         />
         <DialogContent
@@ -44,14 +61,7 @@ const PopUpConfirmation = (props) => {
             <div className="true">
               <div className={'tickOption'}>
                 <div>
-                  <Button
-                    className={'optionPrimary'}
-                    data-value="no"
-                    onClick={() => {
-                      dispatch({ type: CLEAR_ASSESSEE_INFO });
-                      dispatch({ type: POPUP_CLOSE });
-                    }}
-                  >
+                  <Button className={'optionPrimary'} data-value="no" onClick={onClickNo}>
                     no
                   </Button>
                 </div>

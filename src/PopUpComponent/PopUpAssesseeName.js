@@ -1,5 +1,4 @@
-import React, { Fragment, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
@@ -8,64 +7,61 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/Popup/Popup.css';
 import InputFeild from '../Atoms/InputField/InputField';
 import SelectField from '../Atoms/SelectField/SelectField';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 import PropTypes from 'prop-types';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_BASIC_INFO } from '../actionType';
 const PopUpAssesseeName = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
-  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
-  const [state, setState] = useState({
-    nameFirstErr: '',
-    nameLastErr: '',
-    userNameverifyDisable: true
-  });
-  const dispatch = useDispatch();
   const {
     inputHeader = '',
     headerPanelColour = '',
     errorMsg = '',
     headerOne = '',
     headerOneBadgeOne = '',
-    isActive = false
+    isActive = false,
+    basicInfo,
+    nextPopUpValue = '',
+    typeOfSetObject
   } = props;
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
+    nameFirstErr: '',
+    nameLastErr: '',
+    userNameverifyDisable: true
+  });
+  const { popupMode } = useSelector((state) => state.popUpReducer);
 
-  /* handling checkbox event for disable or enable*/
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: checked }));
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: checked } });
   };
-
-  /*handling the onchange event*/
+  const validate = () => {
+    let isValidate = true;
+    if (basicInfo) {
+      if (basicInfo.nameFirst === '') {
+        setState((prevState) => ({ ...prevState, nameFirstErr: 'this information is required' }));
+        isValidate = false;
+      }
+      if (basicInfo.nameLast === '') {
+        setState((prevState) => ({ ...prevState, nameLastErr: 'this information is required' }));
+        isValidate = false;
+      }
+      return isValidate;
+    } else return false;
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
     setState((prevState) => ({
       ...prevState,
       [name + 'Err']: '',
       userNameverifyDisable: false
     }));
   };
-  /*this function for validation*/
-  const validate = () => {
-    let isValidate = true;
-    if (basicInfo.nameFirst === '') {
-      setState((prevState) => ({ ...prevState, nameFirstErr: 'this information is required' }));
-      isValidate = false;
-    }
-    if (basicInfo.nameLast === '') {
-      setState((prevState) => ({ ...prevState, nameLastErr: 'this information is required' }));
-      isValidate = false;
-    }
-    return isValidate;
-  };
-
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
-      if (popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ALIASPOPUP' } });
-      }
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
   };
   return (
@@ -106,44 +102,48 @@ const PopUpAssesseeName = (props) => {
             ]}
             errorMsg={errorMsg}
             onChange={handleChange}
-            value={state.prefix}
+            value={basicInfo && basicInfo.namePrefix}
           />
           <InputFeild
             id={'nameFirst'}
             label={'first name'}
             errorMsg={state.nameFirstErr}
             onClick={handleChange}
-            value={basicInfo.nameFirst}
+            value={basicInfo && basicInfo.nameFirst}
           />
           <InputFeild
             id={'nameOther'}
             label={'other name'}
             errorMsg={errorMsg}
             onClick={handleChange}
-            value={state.nameOther}
+            value={basicInfo && basicInfo.nameOther}
           />
           <InputFeild
             id={'nameLast'}
             label={'last name'}
             errorMsg={state.nameLastErr}
             onClick={handleChange}
-            value={basicInfo.nameLast}
+            value={basicInfo && basicInfo.nameLast}
           />
           <SelectField
-            tag={'suffix'}
-            name={'suffix'}
+            tag={'nameSuffix'}
             label={'suffix'}
             listSelect={[' ', 'Jr.', 'Sr.']}
             errorMsg={errorMsg}
             onChange={handleChange}
-            value={state.suffix}
+            value={basicInfo && basicInfo.suffix}
           />
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')}>
               <div className={'contFlex'}>
                 <div
                   className={'f4'}
-                  style={{ color: state.userNameverifyDisable ? 'dimgray' : '' }}
+                  style={{
+                    color:
+                      popupMode === 'ASSESSEE_SIGN_ON' || state.userNameverifyDisable
+                        ? 'dimgray'
+                        : ''
+                  }}
                 >
                   verification
                 </div>
@@ -152,11 +152,11 @@ const PopUpAssesseeName = (props) => {
                     className={''}
                     color="default"
                     name={'isNameVerified'}
-                    checked={state.isNameVerified}
+                    checked={basicInfo && basicInfo.isNameVerified}
                     disableRipple={true}
                     onChange={handleCheckbox}
                     disableFocusRipple={true}
-                    disabled={state.userNameverifyDisable}
+                    disabled={popupMode === 'ASSESSEE_SIGN_ON' ? true : state.userNameverifyDisable}
                   />
                 </div>
               </div>

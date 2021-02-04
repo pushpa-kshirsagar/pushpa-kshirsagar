@@ -3,18 +3,20 @@ import {
   POPUP_OPEN,
   ASSESSEE_SIGN_ON,
   ASSOCIATE_SIGN_ON,
-  SET_NEXT_POPUP
+  SET_NEXT_POPUP,
+  PREVIOUS_POPUP
 } from '../actionType';
 
 const initialState = {
   isPopUpOpen: false,
   isPopUpValue: '',
+  prevPopUpValue:'',
   popupMode: ''
 };
 
 const popUpReducer = (istate = initialState, action) => {
   console.log(action.payload);
-  switch (action.type) {
+   switch (action.type) {
     case POPUP_OPEN:
       return {
         ...istate,
@@ -35,6 +37,7 @@ const popUpReducer = (istate = initialState, action) => {
       };
     case ASSOCIATE_SIGN_ON:
       return {
+        ...istate,
         isPopUpOpen: true,
         isPopUpValue: action.payload.isPopUpValue,
         popupMode: action.payload.popupMode
@@ -43,6 +46,11 @@ const popUpReducer = (istate = initialState, action) => {
       return {
         ...istate,
         isPopUpValue: action.payload.isPopUpValue
+      };
+    case PREVIOUS_POPUP:
+      return {
+        ...istate,
+        prevPopUpValue: action.payload.prevPopUpValue
       };
 
     default:

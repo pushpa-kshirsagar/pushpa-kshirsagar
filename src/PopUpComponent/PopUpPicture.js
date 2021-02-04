@@ -19,20 +19,13 @@ const PopUpPicture = (props) => {
     isActive = false,
     headerPanelColour = 'genericOne',
     headerOne = 'assessee',
-    headerOneBadgeOne = 'information'
+    headerOneBadgeOne = 'information',
+    nextPopUpValue
   } = props;
 
   const handleClick = () => {
     //according to creation mode popup sequence will change
-    if (popupMode === 'ASSESSEE_SIGN_ON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
-    }
-    if (popupMode === 'ASSOCIATE_SIGN_ON') {
-      dispatch({
-        type: SET_NEXT_POPUP,
-        payload: { isPopUpValue: 'ROLEPOPUP' }
-      });
-    }
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
   };
 
   return (
@@ -76,37 +69,29 @@ const PopUpPicture = (props) => {
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>
-                <div className={'f4'}>verification</div>
+                <div className={'f4'}  style={{
+                    color:
+                    popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                        ? 'dimgray'
+                        : ''
+                  }}>verification</div>
                 <div className={'checkedFontNew'}>
                   <Checkbox
                     className={''}
                     color="default"
                     disableRipple={true}
                     disableFocusRipple={true}
+                    disabled={
+                      popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                        ? true
+                        : false
+                    }
                   />
                 </div>
               </div>
             </div>
           </div>
         </DialogContent>
-        {/* <DialogContent className={'popupContent'}>
-          <div id="dialog-description">
-            <div className="true">
-              <div className={'tickOption'}>
-                <div>
-                  <Button className={'optionPrimary'} data-value="create">
-                    create
-                  </Button>
-                </div>
-                <div>
-                  <Button className={'optionPrimary'} data-value="review">
-                    review
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </DialogContent> */}
       </Popup>
     </div>
   );
