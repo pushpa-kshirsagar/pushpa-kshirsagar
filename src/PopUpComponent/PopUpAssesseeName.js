@@ -8,7 +8,7 @@ import '../Molecules/Popup/Popup.css';
 import InputFeild from '../Atoms/InputField/InputField';
 import SelectField from '../Atoms/SelectField/SelectField';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP, UPDATE_ASSESSEE_BASIC_INFO } from '../actionType';
 const PopUpAssesseeName = (props) => {
   const {
@@ -19,7 +19,8 @@ const PopUpAssesseeName = (props) => {
     headerOneBadgeOne = '',
     isActive = false,
     basicInfo,
-    nextPopUpValue = ''
+    nextPopUpValue = '',
+    typeOfSetObject
   } = props;
   const dispatch = useDispatch();
   const [state, setState] = useState({
@@ -27,26 +28,30 @@ const PopUpAssesseeName = (props) => {
     nameLastErr: '',
     userNameverifyDisable: true
   });
+  const { popupMode } = useSelector((state) => state.popUpReducer);
+
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
-    dispatch({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: { ...basicInfo, [name]: checked } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: checked } });
   };
   const validate = () => {
     let isValidate = true;
-    if (basicInfo.nameFirst === '') {
-      setState((prevState) => ({ ...prevState, nameFirstErr: 'this information is required' }));
-      isValidate = false;
-    }
-    if (basicInfo.nameLast === '') {
-      setState((prevState) => ({ ...prevState, nameLastErr: 'this information is required' }));
-      isValidate = false;
-    }
-    return isValidate;
+    if (basicInfo) {
+      if (basicInfo.nameFirst === '') {
+        setState((prevState) => ({ ...prevState, nameFirstErr: 'this information is required' }));
+        isValidate = false;
+      }
+      if (basicInfo.nameLast === '') {
+        setState((prevState) => ({ ...prevState, nameLastErr: 'this information is required' }));
+        isValidate = false;
+      }
+      return isValidate;
+    } else return false;
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: { ...basicInfo, [name]: value } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
     setState((prevState) => ({
       ...prevState,
       [name + 'Err']: '',
@@ -133,7 +138,12 @@ const PopUpAssesseeName = (props) => {
               <div className={'contFlex'}>
                 <div
                   className={'f4'}
-                  style={{ color: state.userNameverifyDisable ? 'dimgray' : '' }}
+                  style={{
+                    color:
+                      popupMode === 'ASSESSEE_SIGN_ON' || state.userNameverifyDisable
+                        ? 'dimgray'
+                        : ''
+                  }}
                 >
                   verification
                 </div>
@@ -146,7 +156,7 @@ const PopUpAssesseeName = (props) => {
                     disableRipple={true}
                     onChange={handleCheckbox}
                     disableFocusRipple={true}
-                    disabled={state.userNameverifyDisable}
+                    disabled={popupMode === 'ASSESSEE_SIGN_ON' ? true : state.userNameverifyDisable}
                   />
                 </div>
               </div>

@@ -12,7 +12,6 @@ import {
 
 export const SelectField = (props) => {
   const { tag, label, listSelect = [], errorMsg, onChange, value, mappingValue } = props;
-  console.log(props)
   return (
     <Fragment>
       <FormControl className={'selectFormText'}>

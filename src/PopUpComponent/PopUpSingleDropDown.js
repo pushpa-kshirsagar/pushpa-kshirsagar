@@ -36,7 +36,7 @@ const PopUpSingleDropDown = (props) => {
       [name]: value,
       isError: ''
     }));
-    dispatch({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: { ...basicInfo, [name]: value } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   //this function for validate
   const validate = () => {
@@ -81,7 +81,7 @@ const PopUpSingleDropDown = (props) => {
               listSelect={listSelect}
               errorMsg={state.isError}
               onChange={handleChange}
-              value={basicInfo[tag]}
+              value={basicInfo && basicInfo[tag]}
               mappingValue={mappingValue}
             />
           </FormControl>

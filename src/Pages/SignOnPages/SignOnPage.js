@@ -58,26 +58,26 @@ const SignOnPage = () => {
               <div className="true">
                 <div className={'footerPopupIcons'}>
                   <div className={'mbPager'}>
-                    <div style={{ backgroundColor: selected === 'assessee' && '#F2F2F2' }}>
+                    <div>
                       <IconButtonUI
                         colour={'displayPaneLeft'}
                         Icon={PersonIcon}
                         label={'assessee'}
                         labelTwo={'sign-on'}
-                        className={'imageNA'}
+                        className={selected === 'assessee' ? 'imageNASelected' : 'imageNA'}
                         onClick={() => {
                           setSelected('assessee');
                         }}
                       />
                     </div>
 
-                    <div style={{ backgroundColor: selected === 'associate' && '#F2F2F2' }}>
+                    <div>
                       <IconButtonUI
                         colour={'displayPaneLeft'}
                         Icon={AssociateIcon}
                         label={'associate'}
                         labelTwo={'sign-on'}
-                        className={'imageNA'}
+                        className={selected === 'associate' ? 'imageNASelected' : 'imageNA'}
                         onClick={() => {
                           setSelected('associate');
                         }}

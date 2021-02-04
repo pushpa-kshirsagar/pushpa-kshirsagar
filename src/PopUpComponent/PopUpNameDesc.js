@@ -7,11 +7,12 @@ import InputFeild from '../Atoms/InputField/InputField';
 import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/Popup/Popup.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_BASIC_INFO } from '../actionType';
+import { SET_NEXT_POPUP } from '../actionType';
 import PropTypes from 'prop-types';
 
 const PopUpNameDesc = (props) => {
   const dispatch = useDispatch();
+  const { popupMode } = useSelector((state) => state.popUpReducer);
   const {
     headerPanelColour = '',
     headerOne = '',
@@ -20,7 +21,8 @@ const PopUpNameDesc = (props) => {
     isRequired = false,
     label = '',
     nextPopUpValue = '',
-    basicInfo
+    basicInfo,
+    typeOfSetObject
   } = props;
 
   const [state, setState] = useState({
@@ -31,13 +33,19 @@ const PopUpNameDesc = (props) => {
   const validateFun = () => {
     let isValidate = true;
     if (isRequired) {
-      isValidate = true;
+      if(basicInfo){
+        if(basicInfo[label]==''){
+          setState((prevState) => ({ ...prevState, error: 'this information is required' }));
+          return false;
+        }
+      }
+     
     }
     return isValidate;
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: { ...basicInfo, [name]: value } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
     setState((prevState) => ({
       ...prevState,
       error: '',
@@ -77,13 +85,19 @@ const PopUpNameDesc = (props) => {
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>
-                  <div className={'f4'}>verification</div>
+                  <div
+                    className={'f4'}
+                    style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
+                  >
+                    verification
+                  </div>
                   <div className={'checkedFontNew'}>
                     <Checkbox
                       className={''}
                       color="default"
                       disableRipple={true}
                       disableFocusRipple={true}
+                      disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
                     />
                   </div>
                 </div>

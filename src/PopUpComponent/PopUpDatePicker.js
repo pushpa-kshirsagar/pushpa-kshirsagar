@@ -15,8 +15,6 @@ const PopUpDatePicker = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
   const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
-  console.log(basicInfo);
-  console.log('basicInfo');
   const {
     isActive,
     primaryheader = 'start',
@@ -29,8 +27,6 @@ const PopUpDatePicker = (props) => {
   } = props;
 
   const handleChange = (event) => {
-    console.log(event);
-    console.log(event.target);
     const { name, value } = event.target;
     dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
   };

@@ -7,7 +7,14 @@ import PopUpEmail from '../PopUpComponent/PopUpEmail';
 import PopUpSingleDropDown from '../PopUpComponent/PopUpSingleDropDown';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
 import PopUpMobileTelephone from '../PopUpComponent/PopUpMobileTelephone';
-import { CLEAR_ASSESSEE_INFO, POPUP_CLOSE, UPDATE_ASSESSEE_PERSONAL_INFO } from '../actionType';
+import {
+  CLEAR_ASSESSEE_INFO,
+  POPUP_CLOSE,
+  UPDATE_ASSESSEE_PERSONAL_INFO,
+  UPDATE_ASSESSEE_BASIC_INFO,
+  UPDATE_ASSESSEE_INFO,
+  UPDATE_ASSESSEE_MOBILE_INFO
+} from '../actionType';
 
 const PopUpAssesseeSignON = () => {
   const { isPopUpValue } = useSelector((state) => state.popUpReducer);
@@ -31,6 +38,7 @@ const PopUpAssesseeSignON = () => {
         headerOneBadgeOne={'information'}
         basicInfo={assesseeInfo.basicInfo}
         nextPopUpValue={'ALIASPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
       <PopUpNameDesc
         isActive={isPopUpValue === 'ALIASPOPUP'}
@@ -40,6 +48,8 @@ const PopUpAssesseeSignON = () => {
         headerOneBadgeOne={'information'}
         basicInfo={assesseeInfo.basicInfo}
         nextPopUpValue={'PICTUREPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
+
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -58,6 +68,7 @@ const PopUpAssesseeSignON = () => {
         tag={'emailAddressPrimary'}
         basicInfo={assesseeInfo}
         nextPopUpValue={'MOBILETELEPHONEPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_INFO}
       />
       <PopUpMobileTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONEPOPUP'}
@@ -68,6 +79,7 @@ const PopUpAssesseeSignON = () => {
         primaryheader={'primary'}
         basicInfo={assesseeInfo.mobileTelephone}
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
       />
       <PopUpSingleDropDown
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}

@@ -8,30 +8,29 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
+import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpAddress = (props) => {
   const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
-  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
   const {
     isActive,
     primaryheader,
     inputHeader,
     headerPanelColour,
     headerOne,
-    headerOneBadgeOne
+    headerOneBadgeOne,
+    nextPopUpValue,
+    typeOfSetObject,
+    basicInfo
   } = props;
   const handleChange = (event) => {
-    console.log(event.target);
     const { name, value } = event.target;
-    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'ASSOCIATE_SIGN_ON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'WORKTELEPHONE' } });
-    }
+    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
   };
   return (
     <div>
@@ -60,48 +59,69 @@ const PopUpAddress = (props) => {
             <SelectField
               tag={'countryCode'}
               label={'country / region'}
-              listSelect={['India', 'USA']}
+              listSelect={[
+                { countryCode: '91', name: 'India' },
+                { countryCode: '22', name: 'USA' }
+              ]}
               errorMsg={''}
               onChange={handleChange}
-              value={basicInfo.countryCode}
+              value={basicInfo && basicInfo.countryCode}
+              mappingValue={'countryCode'}
             />
             <SelectField
               tag={'stateCode'}
               label={'province / state'}
-              listSelect={['Maharashtra', 'Karnataka']}
+              listSelect={[
+                { stateCode: '211', name: 'Maharashtra' },
+                { stateCode: '234', name: 'Karnataka' }
+              ]}
               errorMsg={''}
               onChange={handleChange}
-              value={basicInfo.stateCode}
+              mappingValue={'stateCode'}
+              value={basicInfo && basicInfo.stateCode}
             />
 
             <InputFeild
-              id={'postcode'}
+              id={'postCode'}
               label={'postcode / zip'}
-              value={basicInfo.postcode}
+              value={basicInfo && basicInfo.postCode}
               errorMsg={''}
               onClick={handleChange}
             />
             <SelectField
               tag={'cityCode'}
-              label={'province / state'}
-              listSelect={['Mumbai', 'Pune']}
+              label={'city'}
+              listSelect={[
+                { cityCode: '345', name: 'Mumbai' },
+                { cityCode: '345', name: 'Pune' }
+              ]}
+              mappingValue={'cityCode'}
               errorMsg={''}
               onChange={handleChange}
-              value={basicInfo.cityCode}
+              value={basicInfo && basicInfo.cityCode}
             />
             <InputFeild
               id={'address'}
               label={'address'}
-              value={basicInfo.address}
+              value={basicInfo && basicInfo.address}
               errorMsg={''}
               onClick={handleChange}
             />
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>
-                  <div className={'f4'}>communication</div>
+                  <div
+                    className={'f4'}
+                    style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
+                  >
+                    communication
+                  </div>
                   <div className={'checkedFontNew'}>
-                    <Checkbox className={''} color="default" />
+                    <Checkbox
+                      className={''}
+                      color="default"
+                      disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
+                    />
                   </div>
                 </div>
               </div>
@@ -109,9 +129,18 @@ const PopUpAddress = (props) => {
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>
-                  <div className={'f4'}>verification</div>
+                  <div
+                    className={'f4'}
+                    style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
+                  >
+                    verification
+                  </div>
                   <div className={'checkedFontNew'}>
-                    <Checkbox className={''} color="default" />
+                    <Checkbox
+                      className={''}
+                      color="default"
+                      disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
+                    />
                   </div>
                 </div>
               </div>
