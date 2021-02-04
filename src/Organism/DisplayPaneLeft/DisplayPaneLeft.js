@@ -8,7 +8,7 @@ import './DisplayPaneLeft';
 import Sections from '../../Molecules/Sections/Section';
 import LaftPaneFooter from '../../Molecules/LaftPaneFooter/LaftPaneFooter';
 
-const displayPaneLeftSection1 = () => {
+const DisplayPaneLeftSection1 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
@@ -26,7 +26,7 @@ const displayPaneLeftSection1 = () => {
     </>
   );
 };
-const displayPaneLeftSection2 = () => {
+const DisplayPaneLeftSection2 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
@@ -44,7 +44,7 @@ const displayPaneLeftSection2 = () => {
     </>
   );
 };
-const displayPaneLeftSection3 = () => {
+const DisplayPaneLeftSection3 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
@@ -62,7 +62,7 @@ const displayPaneLeftSection3 = () => {
     </>
   );
 };
-const displayPaneLeftSection4 = () => {
+const DisplayPaneLeftSection4 = () => {
   return (
     <>
       <div style={{ padding: '2.5px' }}>
@@ -85,25 +85,25 @@ export const DisplayPaneLeft = () => {
   const leftPaneSections = [
     {
       id: 'section1',
-      sectionComponent: displayPaneLeftSection1,
+      sectionComponent: DisplayPaneLeftSection1,
       displayPaneLeftHeaderText: 'dashboard',
       displayPaneLeftBadgeText: ''
     },
     {
       id: 'section2',
-      sectionComponent: displayPaneLeftSection2,
+      sectionComponent: DisplayPaneLeftSection2,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'analytics'
     },
     {
       id: 'section3',
-      sectionComponent: displayPaneLeftSection3,
+      sectionComponent: DisplayPaneLeftSection3,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'marketplace'
     },
     {
       id: 'section4',
-      sectionComponent: displayPaneLeftSection4,
+      sectionComponent: DisplayPaneLeftSection4,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'mine'
     }
