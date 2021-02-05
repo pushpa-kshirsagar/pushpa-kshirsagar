@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import SectionButton from '../../Atoms/Sections/SectionButton';
 import SectionLine from '../../Atoms/Sections/SectionLine';
 import '../../Atoms/Sections/Section.css';
@@ -11,9 +11,9 @@ const Sections = (props) => {
       <div className={['tabsContainer', 'iguru-leftpanel'].join(' ')}>
         <div className={'middleTabLabel'}>
           <SectionLine />
-          {listSections.map((section) => {
+          {listSections.map((section,index) => {
             return (
-              <>
+              <Fragment key={index}>
                 <SectionButton
                   sectionClick={() => {
                     setSelectedSection(section);
@@ -21,7 +21,7 @@ const Sections = (props) => {
                   isSelectActive={selectedSection.id === section.id}
                 />
                 <SectionLine />
-              </>
+              </Fragment>
             );
           })}
         </div>

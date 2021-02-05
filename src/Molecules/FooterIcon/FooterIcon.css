@@ -1,0 +1,30 @@
+.middleFooterD {
+  display: flex;
+  position: absolute;
+  width: 33.33%;
+  bottom: 10px;
+  padding:2.5px;
+  box-sizing: border-box;
+}
+.footerInner {
+  flex: 1;
+  padding: 0 5px;
+}
+.footerInner div {
+  padding: 0px;
+}
+.MuiBottomNavigationCustom {
+  height: 60px;
+  background: transparent;
+  background-color: initial !important;
+}
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+  .middleFooterD {
+    display: flex;
+    position: absolute;
+    width:100%;
+    bottom: 10px;
+    padding:2.5px;
+    box-sizing: border-box;
+  }
+}

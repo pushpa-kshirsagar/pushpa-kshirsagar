@@ -1,9 +1,10 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 import './GridUI.css';
 
 export const GridUI = () => {
   const list = [1, 2, 3, 4, 5, 6];
-  const listPane = [1, 2, 3];
+  const listPane = isMobile ? [1] : [1, 2, 3];
   return (
     <div className="grid-container">
       {listPane.map((pane) => {

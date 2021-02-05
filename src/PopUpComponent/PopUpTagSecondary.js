@@ -11,7 +11,7 @@ import { UPDATE_ASSESSEE_INFO } from '../actionType';
 
 const PopUpTagSecondary = (props) => {
   const dispatch = useDispatch();
-  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
+  const basicInfo = useSelector((state) => state.AssesseeCreateReducer);
   const {
     isActive,
     primaryheader = 'secondary',

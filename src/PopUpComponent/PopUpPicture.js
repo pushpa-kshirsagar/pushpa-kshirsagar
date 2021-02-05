@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpPicture = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   const {
     isActive = false,
@@ -25,7 +25,7 @@ const PopUpPicture = (props) => {
 
   const handleClick = () => {
     //according to creation mode popup sequence will change
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
   };
 
   return (
@@ -69,18 +69,22 @@ const PopUpPicture = (props) => {
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>
-                <div className={'f4'}  style={{
+                <div
+                  className={'f4'}
+                  style={{
                     color:
-                    popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                      popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
                         ? 'dimgray'
                         : ''
-                  }}>verification</div>
+                  }}
+                >
+                  verification
+                </div>
                 <div className={'checkedFontNew'}>
                   <Checkbox
                     className={''}
                     color="default"
                     disableRipple={true}
-                    disableFocusRipple={true}
                     disabled={
                       popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
                         ? true

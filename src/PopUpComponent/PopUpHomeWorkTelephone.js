@@ -10,10 +10,10 @@ import '../Atoms/InputField/InputField.css';
 
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
+import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpHomeWorkTelephone = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   const {
     isActive,
@@ -33,10 +33,10 @@ const PopUpHomeWorkTelephone = (props) => {
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-      dispatch({
-        type: SET_NEXT_POPUP,
-        payload: { isPopUpValue: nextPopUpValue }
-      });
+    dispatch({
+      type: SET_NEXT_POPUP,
+      payload: { isPopUpValue: nextPopUpValue }
+    });
   };
   return (
     <div>

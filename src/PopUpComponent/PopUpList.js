@@ -7,11 +7,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import '../Molecules/Popup/Popup.css';
 import List from '../Molecules/List/List';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpList = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
   const dispatch = useDispatch();
 
   const {

@@ -19,7 +19,7 @@ const PopUpConfirmation = (props) => {
     mode = 'confirm'
   } = props;
   const dispatch = useDispatch();
-  const { popupMode, isPopUpValue, prevPopUpValue } = useSelector((state) => state.popUpReducer);
+  const { popupMode, isPopUpValue, prevPopUpValue } = useSelector((state) => state.PopUpReducer);
 
   const onClickNo = () => {
     if (mode === 'cancel') {

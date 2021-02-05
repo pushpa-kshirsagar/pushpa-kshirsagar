@@ -37,7 +37,7 @@ const SignOnPage = () => {
       });
     }
   };
-  const { isPopUpOpen, popupMode } = useSelector((state) => state.popUpReducer);
+  const { isPopUpOpen, popupMode } = useSelector((state) => state.PopUpReducer);
 
   return (
     <div style={style} className="signin-container">

@@ -1,9 +1,13 @@
 import React from 'react';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
+import { useSelector, useDispatch } from 'react-redux';
 import './DisplayPaneCenter';
 import List from '../../Molecules/List/List';
-
+import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
+import { FILTERMODE } from '../../actionType';
+import { FilterList } from '@material-ui/icons';
 export const DisplayPaneCenter = () => {
+  const { FilterModeEnable, FilterMode } = useSelector((state) => state.PopUpReducer);
   const tempAssociateList = [
     {
       id: 'associate1',
@@ -306,9 +310,22 @@ export const DisplayPaneCenter = () => {
       status: 'active'
     }
   ];
-
+  const dispatch = useDispatch();
+  const onClickFooter = (e) => {
+    dispatch({ type: FILTERMODE });
+    // if(e.currentTarget.getAttribute('data-value') === 'sift'){
+    //   dispatch({ type: FILTERMODE});
+    // }
+  };
+  /* for middle pane */
+  const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
+  const secondaryIcon = [
+    { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unverified', onClick: onClickFooter, Icon: FilterList }
+  ];
   return (
-    <>
+    <div>
       <div>
         <HeaderCard
           className=""
@@ -329,9 +346,9 @@ export const DisplayPaneCenter = () => {
         }}
         className="containerPadding"
       >
-        {tempAssociateList.map((associate) => {
+        {tempAssociateList.map((associate,index) => {
           return (
-            <div className="containerPadding">
+        <div className="containerPadding" key={index}>
               <List
                 className=""
                 id={associate.id}
@@ -342,8 +359,18 @@ export const DisplayPaneCenter = () => {
             </div>
           );
         })}
+        <div className={'containerPadding'} style={{ height: '55px' }}>
+          {' '}
+        </div>
       </div>
-    </>
+      <FooterIcon
+        FilterModeEnable={FilterModeEnable}
+        FilterMode={FilterMode}
+        onClick={onClickFooter}
+        primaryIcon={primaryIcon}
+        secondaryIcon={secondaryIcon}
+      />
+    </div>
   );
 };
 

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpAddress = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   const {
     isActive,

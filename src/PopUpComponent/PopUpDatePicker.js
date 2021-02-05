@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 
 const PopUpDatePicker = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
-  const basicInfo = useSelector((state) => state.CreateAssesseeReducer);
+  const basicInfo = useSelector((state) => state.AssesseeCreateReducer);
   const {
     isActive,
     primaryheader = 'start',
