@@ -4,19 +4,22 @@ import {
   ASSESSEE_SIGN_ON,
   ASSOCIATE_SIGN_ON,
   SET_NEXT_POPUP,
-  PREVIOUS_POPUP
+  PREVIOUS_POPUP,
+  FILTERMODE
 } from '../actionType';
 
 const initialState = {
   isPopUpOpen: false,
   isPopUpValue: '',
-  prevPopUpValue:'',
-  popupMode: ''
+  prevPopUpValue: '',
+  popupMode: '',
+  FilterModeEnable: true,
+  FilterMode: ''
 };
 
-const popUpReducer = (istate = initialState, action) => {
+const PopUpReducer = (istate = initialState, action) => {
   console.log(action.payload);
-   switch (action.type) {
+  switch (action.type) {
     case POPUP_OPEN:
       return {
         ...istate,
@@ -52,10 +55,15 @@ const popUpReducer = (istate = initialState, action) => {
         ...istate,
         prevPopUpValue: action.payload.prevPopUpValue
       };
+    case FILTERMODE:
+      return {
+        ...istate,
+        FilterModeEnable: !istate.FilterModeEnable
+      };
 
     default:
       return istate;
   }
 };
 
-export default popUpReducer;
+export default PopUpReducer;

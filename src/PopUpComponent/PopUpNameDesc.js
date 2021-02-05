@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 
 const PopUpNameDesc = (props) => {
   const dispatch = useDispatch();
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const {
     headerPanelColour = '',
     headerOne = '',
@@ -33,13 +33,12 @@ const PopUpNameDesc = (props) => {
   const validateFun = () => {
     let isValidate = true;
     if (isRequired) {
-      if(basicInfo){
-        if(basicInfo[label]==''){
+      if (basicInfo) {
+        if (basicInfo[label] === '') {
           setState((prevState) => ({ ...prevState, error: 'this information is required' }));
           return false;
         }
       }
-     
     }
     return isValidate;
   };
@@ -96,7 +95,6 @@ const PopUpNameDesc = (props) => {
                       className={''}
                       color="default"
                       disableRipple={true}
-                      disableFocusRipple={true}
                       disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
                     />
                   </div>

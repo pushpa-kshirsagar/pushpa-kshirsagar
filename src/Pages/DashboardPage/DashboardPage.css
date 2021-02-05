@@ -8,3 +8,8 @@
 .display-pane-container {
   width: 33.33%;
 }
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+  .display-pane-container {
+    width: 100%;
+  }
+}

@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 
 const PopUpEmail = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   /*props*/
   const {

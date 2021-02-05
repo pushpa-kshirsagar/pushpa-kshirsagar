@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpMobileTelephone = (props) => {
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
 
   const {

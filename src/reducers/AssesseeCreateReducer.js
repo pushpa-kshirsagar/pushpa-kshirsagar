@@ -36,16 +36,16 @@ const initialState = {
   emailAddressSecondary: '',
   communication: '',
   signIn: '',
-  mobileTelephone:{
-    mobileNumber:'',
-    countryCode:'',
-    communication:false,
-    verification:false
+  mobileTelephone: {
+    mobileNumber: '',
+    countryCode: '',
+    communication: false,
+    verification: false
   },
-  personalInfo:{
+  personalInfo: {
     gender: '',
     birthDate: '',
-    birthPlace: '',
+    birthPlace: ''
   },
   postcode: '',
   address: '',
@@ -54,10 +54,10 @@ const initialState = {
   tagprimary: '',
   tagsecondary: '',
   tenurestart: getLocalTime(),
-  tenureend: '1970-00-00T00:00',
+  tenureend: '1970-00-00T00:00'
 };
 
-const CreateAssesseeReducer = (istate = initialState, action) => {
+const AssesseeCreateReducer = (istate = initialState, action) => {
   console.log('IN assessee create REDUCER====>', action.payload);
   switch (action.type) {
     case UPDATE_ASSESSEE_BASIC_INFO:
@@ -65,12 +65,12 @@ const CreateAssesseeReducer = (istate = initialState, action) => {
         ...istate,
         basicInfo: action.payload
       };
-      case UPDATE_ASSESSEE_MOBILE_INFO:
+    case UPDATE_ASSESSEE_MOBILE_INFO:
       return {
         ...istate,
         mobileTelephone: action.payload
       };
-      case UPDATE_ASSESSEE_PERSONAL_INFO:
+    case UPDATE_ASSESSEE_PERSONAL_INFO:
       return {
         ...istate,
         personalInfo: action.payload
@@ -94,16 +94,16 @@ const CreateAssesseeReducer = (istate = initialState, action) => {
         emailAddressSecondary: '',
         communication: '',
         signIn: '',
-        mobileTelephone:{
-          mobileNumber:'',
-          countryCode:'',
-          communication:false,
-          verification:false
+        mobileTelephone: {
+          mobileNumber: '',
+          countryCode: '',
+          communication: false,
+          verification: false
         },
-        personalInfo:{
+        personalInfo: {
           gender: '',
           birthDate: '',
-          birthPlace: '',
+          birthPlace: ''
         },
         email: '',
         postcode: '',
@@ -113,11 +113,11 @@ const CreateAssesseeReducer = (istate = initialState, action) => {
         tagprimary: '',
         tagsecondary: '',
         tenurestart: getLocalTime(),
-        tenureend: '1970-00-00T00:00',
+        tenureend: '1970-00-00T00:00'
       };
     default:
       return istate;
   }
 };
 
-export default CreateAssesseeReducer;
+export default AssesseeCreateReducer;

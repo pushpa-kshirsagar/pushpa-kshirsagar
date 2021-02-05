@@ -14,9 +14,9 @@ const initialState = {
     name: '',
     description: '',
     picture: '',
-    isPictureValidate: false,
+    isPictureValidate: false
   },
-  otherInfo:{
+  otherInfo: {
     roleArr: []
   },
   workAddressInfo: {
@@ -60,10 +60,10 @@ const initialState = {
   },
   emailAddressPrimary: '',
   communication: '',
-  signIn: '',
+  signIn: ''
 };
 
-const CreateAssociateReducer = (istate = initialState, action) => {
+const AssociateCreateReducer = (istate = initialState, action) => {
   switch (action.type) {
     case UPDATE_ASSOCIATE_INFO:
       return {
@@ -73,12 +73,12 @@ const CreateAssociateReducer = (istate = initialState, action) => {
     case UPDATE_ASSOCIATE_WORKADDRESS_INFO:
       return {
         ...istate,
-        workAddressInfo:action.payload
+        workAddressInfo: action.payload
       };
     case UPDATE_ASSOCIATE_WORKTELEPHONE_INFO:
       return {
         ...istate,
-        workTeleponeInfo:action.payload
+        workTeleponeInfo: action.payload
       };
     case UPDATE_ASSOCIATE_ADMIN_BASIC_INFO:
       return {
@@ -98,7 +98,7 @@ const CreateAssociateReducer = (istate = initialState, action) => {
     case UPDATE_ASSOCIATE_BASIC_INFO:
       return {
         ...istate,
-        basicInfo:action.payload
+        basicInfo: action.payload
       };
     case CLEAR_ASSOCIATE_INFO:
       return {
@@ -126,11 +126,11 @@ const CreateAssociateReducer = (istate = initialState, action) => {
         },
         emailAddressPrimary: '',
         communication: '',
-        signIn: '',
+        signIn: ''
       };
     default:
       return istate;
   }
 };
 
-export default CreateAssociateReducer;
+export default AssociateCreateReducer;

@@ -4,8 +4,8 @@ import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
 import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_PERSONAL_INFO } from '../actionType';
+import { useDispatch } from 'react-redux';
+import { SET_NEXT_POPUP } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import SelectField from '../Atoms/SelectField/SelectField';
 
@@ -51,7 +51,7 @@ const PopUpSingleDropDown = (props) => {
       return isValidate;
     }
   };
-    //end
+  //end
 
   const handleClick = () => {
     if (validate()) {

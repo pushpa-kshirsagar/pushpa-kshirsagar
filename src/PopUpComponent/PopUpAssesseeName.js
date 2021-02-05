@@ -9,7 +9,7 @@ import InputFeild from '../Atoms/InputField/InputField';
 import SelectField from '../Atoms/SelectField/SelectField';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_BASIC_INFO } from '../actionType';
+import { SET_NEXT_POPUP } from '../actionType';
 const PopUpAssesseeName = (props) => {
   const {
     inputHeader = '',
@@ -28,7 +28,7 @@ const PopUpAssesseeName = (props) => {
     nameLastErr: '',
     userNameverifyDisable: true
   });
-  const { popupMode } = useSelector((state) => state.popUpReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
 
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
@@ -155,7 +155,6 @@ const PopUpAssesseeName = (props) => {
                     checked={basicInfo && basicInfo.isNameVerified}
                     disableRipple={true}
                     onChange={handleCheckbox}
-                    disableFocusRipple={true}
                     disabled={popupMode === 'ASSESSEE_SIGN_ON' ? true : state.userNameverifyDisable}
                   />
                 </div>

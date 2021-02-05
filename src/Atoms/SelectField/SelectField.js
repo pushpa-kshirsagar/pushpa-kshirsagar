@@ -23,7 +23,11 @@ export const SelectField = (props) => {
             option === 'divider' ? (
               <Divider light />
             ) : (
-              <MenuItem key={`${tag}-${index}`}  value={option[mappingValue]} className={'selectMenu'}>
+              <MenuItem
+                key={`${tag}-${index}`}
+                value={option[mappingValue]}
+                className={'selectMenu'}
+              >
                 {option.name}
               </MenuItem>
             )

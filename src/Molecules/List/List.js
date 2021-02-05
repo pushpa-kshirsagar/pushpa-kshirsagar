@@ -18,10 +18,8 @@ const List = (props) => {
   } = props;
 
   return (
-    <div style={{ padding: '0 5px'}} key={id}>
+    <div style={{ padding: '0 5px' }} key={id}>
       <div
-        disableFocusRipple={true}
-        disableRipple={true}
         className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
         id={id}
       >
@@ -74,8 +72,6 @@ const List = (props) => {
                     id={'id'}
                     className={'assesseeListCheckBoxSelctedOut'}
                     color="default"
-                    disableRipple={true}
-                    disableFocusRipple={true}
                   />
                 </div>
               </div>

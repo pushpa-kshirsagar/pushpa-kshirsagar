@@ -17,8 +17,8 @@ import {
 } from '../actionType';
 
 const PopUpAssesseeSignON = () => {
-  const { isPopUpValue } = useSelector((state) => state.popUpReducer);
-  const assesseeInfo = useSelector((state) => state.CreateAssesseeReducer);
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   console.log(assesseeInfo);
   console.log('==================');
   const dispatch = useDispatch();
@@ -49,7 +49,6 @@ const PopUpAssesseeSignON = () => {
         basicInfo={assesseeInfo.basicInfo}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
-
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}

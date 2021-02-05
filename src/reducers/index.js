@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import popUpReducer from './popUpReducer';
+import PopUpReducer from './PopUpReducer';
 import userReducer from './userReducer';
-import CreateAssesseeReducer from './CreateAssesseeReducer';
-import CreateAssociateReducer from './CreateAssociateReducer';
+import AssesseeCreateReducer from './AssesseeCreateReducer';
+import AssociateCreateReducer from './AssociateCreateReducer';
 
 export default combineReducers({
-  popUpReducer,
+  PopUpReducer,
   userReducer,
-  CreateAssesseeReducer,
-  CreateAssociateReducer
+  AssesseeCreateReducer,
+  AssociateCreateReducer
 });

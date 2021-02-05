@@ -1,20 +1,11 @@
 import React from 'react';
 import { Keyboard, Description, InsertDriveFile, BusinessCenter } from '@material-ui/icons';
 import IconButton from '../IconButton/IconButton';
-import './LaftPaneFooter.css';
+import '../FooterIcon/FooterIcon.css';
 
 export const LaftPaneFooter = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        position: 'absolute',
-        width: '33.33%',
-        bottom: '10px',
-        padding: '0px 10px',
-        boxSizing: 'border-box'
-      }}
-    >
+    <div className={'middleFooterD'}>
       <div style={{ flex: 1, textAlign: 'center' }}></div>
       <div style={{ flex: 1, textAlign: 'center' }}>
         <IconButton Icon={Keyboard} className="" colour="displayPaneLeft" label="calculator" />

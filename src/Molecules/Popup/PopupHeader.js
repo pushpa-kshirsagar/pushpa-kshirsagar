@@ -20,7 +20,7 @@ const PopupHeader = (props) => {
     mode = 'core'
   } = props;
   const dispatch = useDispatch();
-  const { isPopUpValue } = useSelector((state) => state.popUpReducer);
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
 
   const onClose = () => {
     if (mode === 'cancel' || mode === 'core' || mode === 'confirm') {
@@ -78,7 +78,7 @@ const PopupHeader = (props) => {
           </div>
           <div className={'backArrow'}>
             <IconButton onClick={onClose} className="MuiIconButton-root-1602">
-             {mode !== 'cancel' && <Clear className={'popupClose'} />}
+              {mode !== 'cancel' && <Clear className={'popupClose'} />}
             </IconButton>
           </div>
         </div>
