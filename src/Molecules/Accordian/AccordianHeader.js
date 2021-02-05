@@ -5,7 +5,7 @@ import { ExpandMore } from '@material-ui/icons';
 import './Accordian.css';
 
 export const AccordianHeader = (props) => {
-  const { isDisplayCardExpanded, headerOne, children } = props;
+  const { isDisplayCardExpanded, headerOne, children, setListExpand } = props;
 
   return (
     <ExpansionPanel
@@ -13,7 +13,18 @@ export const AccordianHeader = (props) => {
       style={{ padding: '0', width: '100%', boxSizing: 'border-box' }}
       className={'dossierContainerTop'}
     >
-      <div className="hover-bg-color">
+      <div
+        onClick={() => {
+          setListExpand((state) => {
+            if (headerOne === state) {
+              return '';
+            } else {
+              return headerOne;
+            }
+          });
+        }}
+        className="hover-bg-color"
+      >
         <ExpansionPanelSummary
           expandIcon={<ExpandMore style={{ margin: '0' }} className={'inputText'} />}
           className={[

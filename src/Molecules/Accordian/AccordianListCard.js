@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import {
-  ExpansionPanelDetails,
-  FormControl,
-  InputLabel,
-  Input,
-  IconButton
-} from '@material-ui/core';
+import List from '../List/List';
+import { FormControl, InputLabel } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
 
 const AccordianListCard = (props) => {
+  const { accordianObject } = props;
   const {
-    mode = '',
     labelTextOneOne = '',
     labelTextOneOneBadgeOne = '',
     labelTextOneOneBadgeTwo = '',
     labelTextOneOneBadgeThree = '',
-    labelTextOneOneBadgeFour = ''
-  } = props;
+    labelTextOneOneBadgeFour = '',
+    innerAssociateList = [],
+    innerInfo = 'No Information'
+  } = accordianObject;
+  const mode = '';
 
   const [isListSelectExpanded, setIsListSelectExpanded] = useState(false);
 
   return (
-    <div className={'containerPadding'}>
+    <>
       <div className={'detailsContactContainer'}>
         <div className={'detsailsPadding'}>
           <div className={['FormBox', 'detailsHeight'].join(' ')}>
@@ -56,8 +54,40 @@ const AccordianListCard = (props) => {
             </div>
           </div>
         </div>
+        {isListSelectExpanded && (
+          <div>
+            {innerAssociateList.length > 0 ? (
+              <>
+                {innerAssociateList.map((associate) => {
+                  return (
+                    <div style={{ padding: '2.5px 0' }}>
+                      <List
+                        className=""
+                        id={associate.id}
+                        status={associate.status}
+                        textOne={associate.textOne}
+                        textTwo={associate.textTwo}
+                      />
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              <div
+                style={{
+                  height: '50px',
+                  padding: '2.5px 5px',
+                  alignItems: 'center',
+                  display: 'flex'
+                }}
+              >
+                {innerInfo}
+              </div>
+            )}
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
