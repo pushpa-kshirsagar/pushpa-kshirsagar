@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import TelephoneVerified from '@material-ui/icons/Call';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
@@ -14,7 +15,10 @@ import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import Sections from '../../Molecules/Sections/Section';
 import './DisplayPaneRight';
 import AllocationAccordian from '../../Molecules/Accordian/AllocationAccordian';
-import { FormatClearSharp } from '@material-ui/icons';
+import { FilterList } from '@material-ui/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { FILTERMODE } from '../../actionType';
+import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
 
 const DisplayPaneRightSection1 = () => {
   const [listExpand, setListExpand] = useState('');
@@ -336,6 +340,11 @@ const DisplayPaneRightSection1 = () => {
           list={list4}
         />
       </div>
+      {isMobile && (
+        <div className={'containerPadding'} style={{ height: '55px' }}>
+          {' '}
+        </div>
+      )}
     </div>
   );
 };
@@ -576,6 +585,11 @@ const DisplayPaneRightSection2 = () => {
           list={list4}
         />
       </div>
+      {isMobile && (
+        <div className={'containerPadding'} style={{ height: '55px' }}>
+          {' '}
+        </div>
+      )}
     </div>
   );
 };
@@ -596,6 +610,22 @@ export const DisplayPaneRight = () => {
     }
   ];
   const [selectedSection, setSelectedSection] = useState(rightPaneSections[0]);
+  const dispatch = useDispatch();
+  const { FilterModeEnable, FilterMode } = useSelector((state) => state.PopUpReducer);
+  const onClickFooter = (e) => {
+    dispatch({ type: FILTERMODE });
+    // if(e.currentTarget.getAttribute('data-value') === 'sift'){
+    //   dispatch({ type: FILTERMODE});
+    // }
+  };
+  /* for middle pane */
+  const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
+  const secondaryIcon = [
+    { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unverified', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unverified', onClick: onClickFooter, Icon: FilterList }
+  ];
 
   return (
     <>
@@ -626,6 +656,13 @@ export const DisplayPaneRight = () => {
           setSelectedSection={setSelectedSection}
         />
       </div>
+      <FooterIcon
+        FilterModeEnable={FilterModeEnable}
+        FilterMode={FilterMode}
+        onClick={onClickFooter}
+        primaryIcon={primaryIcon}
+        secondaryIcon={secondaryIcon}
+      />
     </>
   );
 };
