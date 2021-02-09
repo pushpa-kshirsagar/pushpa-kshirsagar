@@ -1,10 +1,33 @@
 import React from 'react';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import CrossIcon from '@material-ui/icons/Clear';
+import NavigatorIcon from '@material-ui/icons/OpenWith';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import ArrowRight from '@material-ui/icons/ChevronRight';
+import ArrowLeft from '@material-ui/icons/ChevronLeft';
 import './DisplayPaneFour.css';
 import Card from '../../Molecules/Card/Card';
+import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
+import { NAVIGATOR_MODE } from '../../actionType';
+import { useDispatch, useSelector } from 'react-redux';
+// import LaftPaneFooter from '../../Molecules/LaftPaneFooter/LaftPaneFooter';
+import DisplayPaneFourFooter from './DisplayPaneFourFooter';
 
 export const DisplayPaneFour = () => {
+  const dispatch = useDispatch();
+  const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
+  const onClickFooter = (e) => {
+    dispatch({ type: NAVIGATOR_MODE });
+  };
+
+  const primaryIcon = [];
+  const secondaryIcon = [
+    { label: 'first', onClick: onClickFooter, Icon: FirstPage },
+    { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft },
+    { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
+    { label: 'last', onClick: onClickFooter, Icon: LastPage }
+  ];
   return (
     <>
       <div>
@@ -29,6 +52,14 @@ export const DisplayPaneFour = () => {
             }}
           ></div>
         </div>
+        <DisplayPaneFourFooter />
+        {/* <FooterIcon
+          FilterModeEnable={false}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryIcon}
+        /> */}
       </div>
     </>
   );

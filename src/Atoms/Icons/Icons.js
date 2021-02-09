@@ -32,6 +32,8 @@ import LastPage from '@material-ui/icons/LastPage';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import SendIcon from '@material-ui/icons/Send';
 import FlagIcon from '@material-ui/icons/Flag';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import Unverified from '../../images/unverified.svg';
 import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
 import TelephoneVerified from '../../images/telephone_verified.svg';
@@ -109,6 +111,14 @@ const Icons = (props) => {
         <Grid item xs={3} className={'iguru-icons'}>
           <TemplateIcon className={'iguru-icons-wid-hei'} />
           <div className={'iguru-icon-lbfnt'}>Template</div>
+        </Grid>
+        <Grid item xs={3} className={'iguru-icons'}>
+          <AssessmentIcon className={'iguru-icons-wid-hei'} />
+          <div className={'iguru-icon-lbfnt'}>trial</div>
+        </Grid>
+        <Grid item xs={3} className={'iguru-icons'}>
+          <RefreshIcon className={'iguru-icons-wid-hei'} />
+          <div className={'iguru-icon-lbfnt'}>Refresh</div>
         </Grid>
         <Grid item xs={3} className={'iguru-icons'}>
           <CalculatorAdvancedIcon className={'iguru-icons-wid-hei'} />

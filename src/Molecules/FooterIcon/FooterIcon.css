@@ -3,9 +3,14 @@
   position: absolute;
   width: 33.33%;
   bottom: 10px;
-  padding:2.5px;
+  padding: 2.5px;
   box-sizing: border-box;
 }
+
+.widthDisplayPaneFive {
+  width: 66.5%;
+}
+
 .footerInner {
   flex: 1;
   padding: 0 5px;
@@ -18,13 +23,14 @@
   background: transparent;
   background-color: initial !important;
 }
-@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+@media only screen and (max-width: 480px),
+  only screen and (max-device-width: 480px) {
   .middleFooterD {
     display: flex;
     position: absolute;
-    width:100%;
+    width: 100%;
     bottom: 10px;
-    padding:2.5px;
+    padding: 2.5px;
     box-sizing: border-box;
   }
 }
