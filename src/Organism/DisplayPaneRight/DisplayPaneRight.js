@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import ArrowRight from '@material-ui/icons/ChevronRight';
 import TelephoneVerified from '@material-ui/icons/Call';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import NavigatorIcon from '@material-ui/icons/OpenWith';
 import Manuscript from '@material-ui/icons/Description';
 import MailOutline from '@material-ui/icons/MailOutline';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import ArrowRight from '@material-ui/icons/ChevronRight';
+import ArrowLeft from '@material-ui/icons/ChevronLeft';
 import Unverified from '../../images/unverified.svg';
 import EditIcon from '@material-ui/icons/Edit';
 import Fingerprint from '@material-ui/icons/Fingerprint';
-// import TelephoneVerified from '../../images/telephone_verified.svg';
 import BasicCard from '../../Molecules/BasicCard/BasicCard';
-import Card from '../../Molecules/Card/Card';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import Sections from '../../Molecules/Sections/Section';
-import './DisplayPaneRight';
 import AllocationAccordian from '../../Molecules/Accordian/AllocationAccordian';
-import { FilterList } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { FILTERMODE } from '../../actionType';
+import { NAVIGATOR_MODE } from '../../actionType';
 import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
+import './DisplayPaneRight';
 
 const DisplayPaneRightSection1 = () => {
   const [listExpand, setListExpand] = useState('');
@@ -595,6 +595,7 @@ const DisplayPaneRightSection2 = () => {
 };
 
 export const DisplayPaneRight = () => {
+  const dispatch = useDispatch();
   const rightPaneSections = [
     {
       id: 'section1',
@@ -610,21 +611,17 @@ export const DisplayPaneRight = () => {
     }
   ];
   const [selectedSection, setSelectedSection] = useState(rightPaneSections[0]);
-  const dispatch = useDispatch();
-  const { FilterModeEnable, FilterMode } = useSelector((state) => state.PopUpReducer);
+  const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
   const onClickFooter = (e) => {
-    dispatch({ type: FILTERMODE });
-    // if(e.currentTarget.getAttribute('data-value') === 'sift'){
-    //   dispatch({ type: FILTERMODE});
-    // }
+    dispatch({ type: NAVIGATOR_MODE });
   };
-  /* for middle pane */
-  const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
+
+  const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
-    { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unverified', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unverified', onClick: onClickFooter, Icon: FilterList }
+    { label: 'first', onClick: onClickFooter, Icon: FirstPage },
+    { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft },
+    { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
+    { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
 
   return (
@@ -657,7 +654,7 @@ export const DisplayPaneRight = () => {
         />
       </div>
       <FooterIcon
-        FilterModeEnable={FilterModeEnable}
+        FilterModeEnable={navigatorIcon}
         FilterMode={FilterMode}
         onClick={onClickFooter}
         primaryIcon={primaryIcon}

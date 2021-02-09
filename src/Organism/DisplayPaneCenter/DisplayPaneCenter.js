@@ -7,7 +7,7 @@ import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
 import { FILTERMODE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
 export const DisplayPaneCenter = () => {
-  const { FilterModeEnable, FilterMode } = useSelector((state) => state.PopUpReducer);
+  const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const tempAssociateList = [
     {
       id: 'associate1',

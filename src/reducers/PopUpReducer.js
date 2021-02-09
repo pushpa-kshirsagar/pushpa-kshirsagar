@@ -4,8 +4,7 @@ import {
   ASSESSEE_SIGN_ON,
   ASSOCIATE_SIGN_ON,
   SET_NEXT_POPUP,
-  PREVIOUS_POPUP,
-  FILTERMODE
+  PREVIOUS_POPUP
 } from '../actionType';
 
 const initialState = {
@@ -14,7 +13,6 @@ const initialState = {
   prevPopUpValue: '',
   popupMode: '',
   FilterModeEnable: true,
-  FilterMode: ''
 };
 
 const PopUpReducer = (istate = initialState, action) => {
@@ -54,11 +52,6 @@ const PopUpReducer = (istate = initialState, action) => {
       return {
         ...istate,
         prevPopUpValue: action.payload.prevPopUpValue
-      };
-    case FILTERMODE:
-      return {
-        ...istate,
-        FilterModeEnable: !istate.FilterModeEnable
       };
 
     default:

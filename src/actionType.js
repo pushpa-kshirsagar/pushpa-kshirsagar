@@ -41,3 +41,4 @@ export const WORKTELEPHONE = 'WORKTELEPHONE';
 export const ROLEPOPUP = 'ROLEPOPUP';
 //for footer icon in middle pane
 export const FILTERMODE = 'FILTERMODE';
+export const NAVIGATOR_MODE = 'NAVIGATOR_MODE';
