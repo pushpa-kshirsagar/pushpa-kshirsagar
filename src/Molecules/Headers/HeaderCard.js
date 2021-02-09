@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Grid from '@material-ui/core/Grid';
+import OpenWithIcon from '@material-ui/icons/OpenWith';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import NextIcon from '@material-ui/icons/ArrowForward';
@@ -60,23 +61,35 @@ const HeaderCard = (props) => {
               </div>
             </div>
             <div className={'iguru-iconbox'}>
-              <IconButton>
-                {displayPane === 'centre' ? (
-                  <Fragment>
-                    <SearchIcon className={'iguru-iconbardefault'} />
-                    <span className={'iguru-headerbadge'}>{scanCount}</span>
-                  </Fragment>
-                ) : displayPane === 'left' ? (
-                  <NextIcon className={'iguru-iconbardefault'} />
-                ) : (
-                  <Clear className={'iguru-iconbardefault'} />
-                )}
-              </IconButton>
+              {displayPane === 'five' ? (
+                <div>
+                  <span style={{ color: '#fff', fontWeight: 'bold' }}>00:19:26</span>
+                </div>
+              ) : (
+                <IconButton>
+                  {displayPane === 'centre' ? (
+                    <Fragment>
+                      <SearchIcon className={'iguru-iconbardefault'} />
+                      <span className={'iguru-headerbadge'}>{scanCount}</span>
+                    </Fragment>
+                  ) : displayPane === 'left' ? (
+                    <NextIcon className={'iguru-iconbardefault'} />
+                  ) : (
+                    <Clear className={'iguru-iconbardefault'} />
+                  )}
+                </IconButton>
+              )}
             </div>
             <div className={'iguru-iconbox'}>
-              <IconButton>
-                <MoreVert className={'iguru-iconbardefault'} />
-              </IconButton>
+              {displayPane === 'five' ? (
+                <IconButton>
+                  <OpenWithIcon className={'iguru-iconbardefault'} />
+                </IconButton>
+              ) : (
+                <IconButton>
+                  <MoreVert className={'iguru-iconbardefault'} />
+                </IconButton>
+              )}
             </div>
           </div>
         </Paper>

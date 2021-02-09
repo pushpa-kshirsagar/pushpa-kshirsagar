@@ -24,33 +24,33 @@ const AccordianInfoCard = (props) => {
           style={{ height: multiline ? '105px' : '50px' }}
           className={['FormBox', 'detailsHeight'].join(' ')}
         >
-          <FormControl className={['formControlReviewName', 'formControlRight'].join(' ')}>
-            <InputLabel
-              htmlFor="name-input"
-              className={['textForLabel', 'textForLabelRight', 'careerLabelRight'].join(' ')}
-            >
-              <span style={{ fontSize: '1.6rem' }} className={mode === 'revise' ? 'linkText' : ''}>
-                {labelTextOneOne}
-              </span>
-              {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
-              {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
-              {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}
-              {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null}
-            </InputLabel>
-            {textOneOne && (
-              <Input
-                multiline={multiline}
-                // row={multiline ? 2 : 1}
-                row={2}
-                rowsMax={multiline ? 4 : 1}
-                className={'inputText'}
-                id="name-dn-input"
-                value={textOneOne}
-                disableUnderline={true}
-                readOnly
-              />
-            )}
-          </FormControl>
+          <div className={['formControlReviewName', 'formControlRight'].join(' ')}>
+            <div style={{ width: '100%' }}>
+              <InputLabel
+                htmlFor="name-input"
+                className={['textForLabel', 'textForLabelRight', 'careerLabelRight'].join(' ')}
+              >
+                <span className={mode === 'revise' ? 'linkText' : ''}>{labelTextOneOne}</span>
+                {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
+                {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
+                {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}
+                {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null}
+              </InputLabel>
+              {textOneOne && (
+                <Input
+                  multiline={multiline}
+                  // row={multiline ? 2 : 1}
+                  row={2}
+                  rowsMax={multiline ? 4 : 1}
+                  className={'inputText'}
+                  id="name-dn-input"
+                  value={textOneOne}
+                  disableUnderline={true}
+                  readOnly
+                />
+              )}
+            </div>
+          </div>
           <div className={'unitFlex'}></div>
           <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
             {IconOne && (

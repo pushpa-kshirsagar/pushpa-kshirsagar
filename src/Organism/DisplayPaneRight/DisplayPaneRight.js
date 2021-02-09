@@ -237,18 +237,18 @@ const DisplayPaneRightSection1 = () => {
     }
   ];
   const list3 = [
-    // {
-    //   id: 'a1',
-    //   labelTextOneOne: 'log',
-    //   labelTextOneOneBadgeOne: 'all',
-    //   labelTextOneOneBadgeTwo: 'key',
-    //   labelTextOneOneBadgeThree: '',
-    //   labelTextOneOneBadgeFour: '',
-    //   innerAssociateList: [],
-    //   innerInfo: 'assessees',
-    //   isListCard: false,
-    //   IconOne: Manuscript
-    // },
+    {
+      id: 'a1',
+      labelTextOneOne: 'log',
+      labelTextOneOneBadgeOne: 'all',
+      labelTextOneOneBadgeTwo: 'key',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: Manuscript
+    },
     {
       id: 'a2',
       textOneOne: 'Active',
@@ -536,8 +536,8 @@ const DisplayPaneRightSection2 = () => {
       id: 'a4',
       labelTextOneOne: 'gender',
       textOneOne: 'Male',
-      labelTextOneOneBadgeOne: 'social',
-      labelTextOneOneBadgeTwo: 'spiritual',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
       innerAssociateList: [],

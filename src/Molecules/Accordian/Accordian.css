@@ -71,13 +71,16 @@
   flex: 4;
 }
 .formControlReviewName div div {
-  margin-top: 16px;
+  /* margin-top: 16px; */
   margin-bottom: 0px;
   width: 100%;
 }
 .formControlRight {
   padding: 2px 0 0 0;
   transform: none !important;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 .formControlRight label {
   color: rgba(0, 0, 0, 0.54) !important;

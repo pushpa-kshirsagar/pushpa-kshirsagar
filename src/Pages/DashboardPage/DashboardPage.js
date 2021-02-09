@@ -8,6 +8,8 @@ import DisplayPaneLeft from '../../Organism/DisplayPaneLeft/DisplayPaneLeft';
 import DisplayPaneRight from '../../Organism/DisplayPaneRight/DisplayPaneRight';
 import DisplayPaneCenter from '../../Organism/DisplayPaneCenter/DisplayPaneCenter';
 import GridUI from '../../Molecules/GridUI/GridUI';
+import DisplayPaneFour from '../../Organism/DisplayPaneFour/DisplayPaneFour';
+import DisplayPaneFive from '../../Organism/DisplayPaneFive/DisplayPaneFive';
 
 const DashboardPage = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
@@ -32,15 +34,23 @@ const DashboardPage = () => {
             {mobilePanestate === 'rightPane' && <DisplayPaneRight />}
           </div>
         ) : (
+          // <React.Fragment>
+          //   <div className="display-pane-container">
+          //     <DisplayPaneLeft />
+          //   </div>
+          //   <div className="display-pane-container">
+          //     <DisplayPaneCenter />
+          //   </div>
+          //   <div className="display-pane-container">
+          //     <DisplayPaneRight />
+          //   </div>
+          // </React.Fragment>
           <React.Fragment>
             <div className="display-pane-container">
-              <DisplayPaneLeft />
+              <DisplayPaneFour />
             </div>
-            <div className="display-pane-container">
-              <DisplayPaneCenter />
-            </div>
-            <div className="display-pane-container">
-              <DisplayPaneRight />
+            <div style={{ width: '66.66%'}}>
+              <DisplayPaneFive />
             </div>
           </React.Fragment>
         )}
