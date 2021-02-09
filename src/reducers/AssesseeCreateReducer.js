@@ -3,6 +3,7 @@ import {
   UPDATE_ASSESSEE_BASIC_INFO,
   CLEAR_ASSESSEE_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
+  UPDATE_ASSESSEE_HOMEADDRESS_INFO,
   UPDATE_ASSESSEE_PERSONAL_INFO
 } from '../actionType';
 
@@ -47,10 +48,15 @@ const initialState = {
     birthDate: '',
     birthPlace: ''
   },
-  postcode: '',
-  address: '',
-  stateCode: '',
-  cityCode: '',
+  homeAddressInfo: {
+    countryCode: '',
+    stateCode: '',
+    postCode: '',
+    cityCode: '',
+    address: '',
+    isCommunication: false,
+    isVerification: false
+  },
   tagprimary: '',
   tagsecondary: '',
   tenurestart: getLocalTime(),
@@ -74,6 +80,11 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         personalInfo: action.payload
+      };
+    case UPDATE_ASSESSEE_HOMEADDRESS_INFO:
+      return {
+        ...istate,
+        homeAddressInfo: action.payload
       };
     case UPDATE_ASSESSEE_INFO:
       return {
@@ -105,11 +116,15 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           birthDate: '',
           birthPlace: ''
         },
-        email: '',
-        postcode: '',
-        address: '',
-        stateCode: '',
-        cityCode: '',
+        homeAddressInfo: {
+          countryCode: '',
+          stateCode: '',
+          postCode: '',
+          cityCode: '',
+          address: '',
+          isCommunication: false,
+          isVerification: false
+        },
         tagprimary: '',
         tagsecondary: '',
         tenurestart: getLocalTime(),

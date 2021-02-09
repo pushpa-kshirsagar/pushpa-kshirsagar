@@ -123,7 +123,7 @@ export const DisplayPaneLeft = () => {
       </div>
       <div className="containerPadding">
         <div className="containerPadding">
-          <Card ImageOne={PersonIcon} textOneOne="assesseeName" />
+          <Card ImageOne={PersonIcon} textOneOne="assesseeName"/>
         </div>
         <div className="containerPadding">
           <Card ImageOne={AssociateIcon} textOneOne="Boppo Technologies" />

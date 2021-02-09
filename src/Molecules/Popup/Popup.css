@@ -42,6 +42,7 @@
 }
 .popupMainHeader {
   width: 300px;
+  height: 40px;
   align-items: center;
   padding: 5px;
   display: flex;
@@ -86,7 +87,7 @@
 }
 .titleBox {
   text-align: left;
-  flex: 3;
+  flex: 4;
   font-size: 1.6rem;
   color: #ffffff;
   font-weight: bold;

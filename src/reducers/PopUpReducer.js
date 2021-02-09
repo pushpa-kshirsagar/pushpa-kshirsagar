@@ -6,13 +6,13 @@ import {
   SET_NEXT_POPUP,
   PREVIOUS_POPUP
 } from '../actionType';
+import PopupHeader from '../Molecules/Popup/PopupHeader';
 
 const initialState = {
   isPopUpOpen: false,
   isPopUpValue: '',
   prevPopUpValue: '',
-  popupMode: '',
-  FilterModeEnable: true,
+  popupMode: ''
 };
 
 const PopUpReducer = (istate = initialState, action) => {
