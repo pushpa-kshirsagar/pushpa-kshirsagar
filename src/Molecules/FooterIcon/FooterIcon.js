@@ -179,11 +179,11 @@ const IconFiveWithFlexFiveColumn = (props) => {
   );
 };
 const FooterIcon = (props) => {
-  const { FilterModeEnable, primaryIcon, secondaryIcon } = props;
+  const { FilterModeEnable, primaryIcon, secondaryIcon, className = '' } = props;
   console.log(primaryIcon);
   console.log('primaryIcon');
   return (
-    <div className={'middleFooterD'}>
+    <div className={`middleFooterD  ${className}`}>
       <div className={'footerInner'}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <BottomNavigation className={'MuiBottomNavigationCustom'}>

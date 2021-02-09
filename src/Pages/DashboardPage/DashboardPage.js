@@ -15,7 +15,8 @@ const DashboardPage = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
-  const mobilePanestate = isMobile && 'centerPane';
+  const mobilePanestate = isMobile && 'displayPaneFive';
+  const isExamMode = true;
   console.log('IN DASH=', isPopUpValue, popupMode);
   useEffect(() => {
     console.log('IN useEffect ====>');
@@ -25,34 +26,41 @@ const DashboardPage = () => {
   return (
     <>
       {userData && <IguruTopHeader userName={userData.name} userEmail={userData.email} />}
-      <GridUI />
+      <GridUI isExamMode={isExamMode} />
       <div className="main-container">
         {isMobile ? (
           <div className="display-pane-container">
             {mobilePanestate === 'leftPane' && <DisplayPaneLeft />}
             {mobilePanestate === 'centerPane' && <DisplayPaneCenter />}
             {mobilePanestate === 'rightPane' && <DisplayPaneRight />}
+            {mobilePanestate === 'displayPaneFour' && <DisplayPaneFour />}
+            {mobilePanestate === 'displayPaneFive' && <DisplayPaneFive />}
           </div>
         ) : (
-          // <React.Fragment>
-          //   <div className="display-pane-container">
-          //     <DisplayPaneLeft />
-          //   </div>
-          //   <div className="display-pane-container">
-          //     <DisplayPaneCenter />
-          //   </div>
-          //   <div className="display-pane-container">
-          //     <DisplayPaneRight />
-          //   </div>
-          // </React.Fragment>
-          <React.Fragment>
-            <div className="display-pane-container">
-              <DisplayPaneFour />
-            </div>
-            <div style={{ width: '66.66%'}}>
-              <DisplayPaneFive />
-            </div>
-          </React.Fragment>
+          <>
+            {isExamMode ? (
+              <>
+                <div className="display-pane-container">
+                  <DisplayPaneFour />
+                </div>
+                <div style={{ width: '66.66%' }}>
+                  <DisplayPaneFive />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="display-pane-container">
+                  <DisplayPaneLeft />
+                </div>
+                <div className="display-pane-container">
+                  <DisplayPaneCenter />
+                </div>
+                <div className="display-pane-container">
+                  <DisplayPaneRight />
+                </div>
+              </>
+            )}
+          </>
         )}
       </div>
 
