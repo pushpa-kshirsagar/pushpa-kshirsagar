@@ -9,6 +9,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Clear from '@material-ui/icons/Clear';
 
 import './HeaderCard.css';
+import { POPUP_OPEN } from '../../actionType';
+import { useDispatch } from 'react-redux';
 const HeaderCard = (props) => {
   const {
     headerOne = 'dashboard',
@@ -20,6 +22,7 @@ const HeaderCard = (props) => {
     scanCount = 0,
     headerPanelColour
   } = props;
+  const dispatch = useDispatch();
 
   return (
     <div className={'iguru-leftpanel'}>
@@ -82,7 +85,11 @@ const HeaderCard = (props) => {
             </div>
             <div className={'iguru-iconbox'}>
               {displayPane === 'five' ? (
-                <IconButton>
+                <IconButton
+                  onClick={() => {
+                    dispatch({ type: POPUP_OPEN, payload: '' });
+                  }}
+                >
                   <OpenWithIcon className={'iguru-iconbardefault'} />
                 </IconButton>
               ) : (

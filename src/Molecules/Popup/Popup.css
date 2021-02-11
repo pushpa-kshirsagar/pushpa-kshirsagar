@@ -15,6 +15,21 @@
   width: 100% !important;
   font-weight: 400 !important;
 }
+.tick {
+  position: absolute;
+  font-size: '2rem';
+  right: 17;
+  color: #0000008a;
+  top: 0;
+  bottom: 0;
+  z-index: 99;
+  height: 30px;
+  line-height: 30px;
+}
+.tick button {
+  height: 100%;
+  color: #0000008a;
+}
 /* .optionPrimary :hover{
   background: #00000014;
 } */
@@ -64,10 +79,10 @@
   background-color: #00afff !important;
   background-image: linear-gradient(to bottom right, #00afff, #7dc832);
 }
-.previousToLast{
-  transform:rotate(-180deg);
-  width:24px;
-  height:24px;
+.previousToLast {
+  transform: rotate(-180deg);
+  width: 24px;
+  height: 24px;
 }
 .titleSolid-displayPaneCentre {
   display: flex;
@@ -238,7 +253,7 @@
   align-items: center;
   justify-content: center;
 }
-.checkedFontNew span{
+.checkedFontNew span {
   margin-right: -2px !important;
 }
 

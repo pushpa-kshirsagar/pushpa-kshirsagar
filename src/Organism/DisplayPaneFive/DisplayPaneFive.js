@@ -9,6 +9,7 @@ import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneFive.css';
 import { useSelector } from 'react-redux';
 import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
+import PopUpAssessmentNavigator from '../../PopUpComponent/PopUpAssessmentNavigator';
 
 export const DisplayPaneFive = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);
@@ -17,6 +18,7 @@ export const DisplayPaneFive = () => {
   };
   // const dispatch = useDispatch();
   const { FilterMode } = useSelector((state) => state.FilterReducer);
+  const { isPopUpOpen } = useSelector((state) => state.PopUpReducer);
   const onClickFooter = (e) => {
     // dispatch({ type: NAVIGATOR_MODE });
   };
@@ -83,6 +85,7 @@ export const DisplayPaneFive = () => {
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
         />
+        <PopUpAssessmentNavigator isActive={isPopUpOpen} />
       </div>
     </>
   );

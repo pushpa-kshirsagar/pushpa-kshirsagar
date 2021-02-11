@@ -1,8 +1,11 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import HeaderCard from './HeaderCard';
+import store from '../../store';
 export default {
   title: 'Design System/Molecules/Display Pane',
-  component: HeaderCard
+  component: HeaderCard,
+  decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 const Template = (args) => {
   return (
