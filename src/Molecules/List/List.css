@@ -106,3 +106,27 @@
 .verifiedUserTop {
   align-items: center;
 }
+.tooltip-container {
+  position: absolute;
+  top: 28;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  border: 1px solid;
+  padding: 5px;
+  background-color: #616161;
+  color: #fff;
+  font-size: 1.2rem;
+  width: 230px;
+  white-space: break-spaces;
+  text-align: center;
+}
+.tooltip-container:hover {
+  background-color: #616161;
+}
+.tooltip-text {
+  margin: 0;
+}
+.tooltip-text:hover {
+  background-color: #616161;
+}

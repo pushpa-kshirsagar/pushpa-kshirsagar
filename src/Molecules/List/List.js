@@ -1,5 +1,5 @@
-import React from 'react';
-import { InputLabel } from '@material-ui/core';
+import React, { useState } from 'react';
+import { ClickAwayListener, InputLabel, Tooltip, Typography } from '@material-ui/core';
 import Notifications from '@material-ui/icons/NotificationsActive';
 import IconButton from '@material-ui/core/IconButton';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -14,15 +14,14 @@ const List = (props) => {
     isAlertActive = false,
     isFlagActive = false,
     isSelectActive = false,
+    isTooltipActive = true,
     id
   } = props;
+  const [isShowTooltip, setIsShowTooltip] = useState(false);
 
   return (
-    <div style={{ padding: '0 5px' }} key={id}>
-      <div
-        className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
-        id={id}
-      >
+    <div style={{ padding: '0 5px', position: 'relative' }} key={id}>
+      <div className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')} id={id}>
         <div
           className={['measureBox', 'heightInherit', 'iguru-componentinnerdiv-margin'].join(' ')}
         >
@@ -33,7 +32,38 @@ const List = (props) => {
                 textTwo == null || textTwo === '' ? 'aliasmiddle' : null
               ].join(' ')}
             >
-              {textOne}
+              {isTooltipActive ? (
+                <ClickAwayListener
+                  onClickAway={(event) => {
+                    event.stopPropagation();
+                    setIsShowTooltip(false);
+                    // this.props.cls.setTemplateValue('culturetooltipstate', '');
+                  }}
+                >
+                  <div>
+                    <span
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setIsShowTooltip((state) => !state);
+                        // this.props.cls.setTemplateValue('culturetooltipstate', textOne);
+                      }}
+                      className="midPaneInformation"
+                    >
+                      {textOne}
+                    </span>
+                    {isShowTooltip ? (
+                      <div className="tooltip-container">
+                        <p className="tooltip-text" style={{ margin: '0' }}>
+                          Click me, I will stay visible until you click outside.
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
+                </ClickAwayListener>
+              ) : (
+                <span>{textOne}</span>
+              )}
+              {/* {textOne} */}
             </div>
             {textTwo != null ? <div className={'midPaneLabel'}>{textTwo}</div> : null}
           </div>
