@@ -18,7 +18,7 @@ import AllocationAccordian from '../../Molecules/Accordian/AllocationAccordian';
 import { useDispatch, useSelector } from 'react-redux';
 import { NAVIGATOR_MODE } from '../../actionType';
 import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
-import './DisplayPaneRight';
+import './DisplayPaneThree.css';
 
 const DisplayPaneRightSection1 = () => {
   const [listExpand, setListExpand] = useState('');
@@ -594,7 +594,7 @@ const DisplayPaneRightSection2 = () => {
   );
 };
 
-export const DisplayPaneRight = () => {
+export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
   const rightPaneSections = [
     {
@@ -664,4 +664,4 @@ export const DisplayPaneRight = () => {
   );
 };
 
-export default DisplayPaneRight;
+export default DisplayPaneThree;

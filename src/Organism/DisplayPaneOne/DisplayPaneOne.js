@@ -4,7 +4,7 @@ import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import Card from '../../Molecules/Card/Card';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
-import './DisplayPaneLeft';
+import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Sections/Section';
 import LaftPaneFooter from '../../Molecules/LaftPaneFooter/LaftPaneFooter';
 import PopUpForCommonOnClick from '../../PopUpAction/PopUpForCommonOnClick';
@@ -88,7 +88,7 @@ const DisplayPaneLeftSection4 = () => {
   );
 };
 
-export const DisplayPaneLeft = () => {
+export const DisplayPaneOne = () => {
   const leftPaneSections = [
     {
       id: 'section1',
@@ -181,4 +181,4 @@ export const DisplayPaneLeft = () => {
   );
 };
 
-export default DisplayPaneLeft;
+export default DisplayPaneOne;

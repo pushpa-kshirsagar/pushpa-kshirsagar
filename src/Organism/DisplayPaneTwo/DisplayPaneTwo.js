@@ -1,12 +1,13 @@
 import React from 'react';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import { useSelector, useDispatch } from 'react-redux';
-import './DisplayPaneCenter';
+import './DisplayPaneTwo.css';
 import List from '../../Molecules/List/List';
 import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
 import { FILTERMODE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
-export const DisplayPaneCenter = () => {
+
+export const DisplayPaneTwo = () => {
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const tempAssociateList = [
     {
@@ -425,4 +426,4 @@ export const DisplayPaneCenter = () => {
   );
 };
 
-export default DisplayPaneCenter;
+export default DisplayPaneTwo;
