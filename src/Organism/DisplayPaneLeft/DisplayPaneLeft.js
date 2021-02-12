@@ -7,6 +7,13 @@ import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneLeft';
 import Sections from '../../Molecules/Sections/Section';
 import LaftPaneFooter from '../../Molecules/LaftPaneFooter/LaftPaneFooter';
+import PopUpForCommonOnClick from '../../PopUpAction/PopUpForCommonOnClick';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  SET_POPUP_STATE,
+  ASSESSEE_CARD_POPUP_OPTIONS,
+  ASSOCIATE_CARD_POPUP_OPTION
+} from '../../actionType';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -109,7 +116,31 @@ export const DisplayPaneLeft = () => {
     }
   ];
   const [selectedSection, setSelectedSection] = useState(leftPaneSections[0]);
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
 
+  const dispatch = useDispatch();
+
+  const openAssesseeCardPopup = (e) => {
+    let popupContentArrValue = [];
+    let popupHeaderOne = '';
+    if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
+      popupHeaderOne = 'associate';
+      popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
+    }
+    if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
+      popupHeaderOne = 'associate';
+      popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
+    }
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        popupHeaderOne: popupHeaderOne,
+        popupHeaderOneBadgeOne: '',
+        isPopUpValue: 'CARD_POPUP',
+        popupContentArrValue: popupContentArrValue
+      }
+    });
+  };
   return (
     <>
       <div>
@@ -123,10 +154,20 @@ export const DisplayPaneLeft = () => {
       </div>
       <div className="containerPadding">
         <div className="containerPadding">
-          <Card ImageOne={PersonIcon} textOneOne="assesseeName"/>
+          <Card
+            ImageOne={PersonIcon}
+            textOneOne="assesseeName"
+            onClick={openAssesseeCardPopup}
+            tag={'assessee_card'}
+          />
         </div>
         <div className="containerPadding">
-          <Card ImageOne={AssociateIcon} textOneOne="Boppo Technologies" />
+          <Card
+            ImageOne={AssociateIcon}
+            textOneOne="Boppo Technologies"
+            onClick={openAssesseeCardPopup}
+            tag={'associate_card'}
+          />
         </div>
         <Sections
           listSections={leftPaneSections}
@@ -135,6 +176,7 @@ export const DisplayPaneLeft = () => {
         />
       </div>
       <LaftPaneFooter />
+      <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
     </>
   );
 };
