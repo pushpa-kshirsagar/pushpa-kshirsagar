@@ -35,11 +35,11 @@ body {
     height:'50px'
   } */
 }
-
+/* 
 .iguru-iconbox button {
   height: 50px;
   width: 50px;
-}
+} */
 .iguru-iconbox-dashboardcardtop {
   background-color: #fff;
   display: flex;
@@ -100,7 +100,7 @@ body {
   height: 17px !important;
   padding: 7px 0 6px;
   display: flex;
-  font-size: 1.6rem !important;
+  font-size: 1.6rem;
   min-width: 0;
   flex-grow: 1;
   background: none;
