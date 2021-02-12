@@ -4,15 +4,18 @@ import {
   ASSESSEE_SIGN_ON,
   ASSOCIATE_SIGN_ON,
   SET_NEXT_POPUP,
-  PREVIOUS_POPUP
+  PREVIOUS_POPUP,
+  SET_POPUP_STATE
 } from '../actionType';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
 
 const initialState = {
   isPopUpOpen: false,
   isPopUpValue: '',
   prevPopUpValue: '',
-  popupMode: ''
+  popupMode: '',
+  popupHeaderOne: '',
+  popupHeaderOneBadgeOne: '',
+  popupContentArrValue: ''
 };
 
 const PopUpReducer = (istate = initialState, action) => {
@@ -52,6 +55,15 @@ const PopUpReducer = (istate = initialState, action) => {
       return {
         ...istate,
         prevPopUpValue: action.payload.prevPopUpValue
+      };
+    case SET_POPUP_STATE:
+      return {
+        ...istate,
+        isPopUpValue: action.payload.isPopUpValue,
+        popupContentArrValue: action.payload.popupContentArrValue,
+        popupHeaderOne: action.payload.popupHeaderOne,
+        popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne
+
       };
 
     default:

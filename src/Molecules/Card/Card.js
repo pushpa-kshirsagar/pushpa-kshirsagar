@@ -17,7 +17,9 @@ const Card = (props) => {
     isImageActive,
     isAlertActive,
     className,
-    isAlliance
+    isAlliance,
+    onClick = null,
+    tag=''
   } = props;
 
   return (
@@ -30,7 +32,7 @@ const Card = (props) => {
         className={[`iguru-iconbox-dashboardcardtop`].join(' ')}
       >
         <div className={['iguru-componentinnerdiv', isAlliance && 'iguru-background'].join(' ')}>
-          <div className={'iguru-cardContentMidPanel'}>
+          <div className={'iguru-cardContentMidPanel'} onClick={onClick} data-value={tag}>
             <div
               className={['midPaneInformation', textTwoOne !== '' ? null : 'aliasmiddle'].join(' ')}
             >
