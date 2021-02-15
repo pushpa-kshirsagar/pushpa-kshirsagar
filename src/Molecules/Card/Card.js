@@ -19,7 +19,7 @@ const Card = (props) => {
     className,
     isAlliance,
     onClick = null,
-    tag=''
+    tag = ''
   } = props;
 
   return (

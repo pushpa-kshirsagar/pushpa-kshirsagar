@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/Popup/Popup';
 import PopupHeader from '../Molecules/Popup/PopupHeader';
@@ -12,31 +12,54 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
-const PopUpHomeWorkTelephone = (props) => {
+const PopUpTelephone = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
+
   const {
     isActive,
     primaryheader = 'primary',
     inputHeader = 'mobile telephone',
-    headerPanelColour = 'genericOne',
-    headerOne = 'assessees',
-    headerOneBadgeOne = 'information',
-    typeOfSetObject,
+    headerPanelColour = '',
+    headerOne = '',
+    headerOneBadgeOne = '',
     nextPopUpValue,
-    basicInfo
+    basicInfo,
+    typeOfSetObject,
+    isMobileState = true
   } = props;
 
+  const [state, setState] = useState({
+    error: ''
+  });
+
+  const validate = () => {
+    let isValidate = true;
+    /* validation of moile number but still its not required
+   let regex = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
+    let mobilestr = basicInfo.mobileNumber;
+    if (regex.test(mobilestr) === false && mobilestr !=='') {
+      setState((prevState) => ({
+        ...prevState,
+        error: 'this information is incorrect'
+      }));
+      isValidate=false
+    }*/
+    return isValidate;
+  };
   const handleChange = (event) => {
     const { name, value } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      error: ''
+    }));
     dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
-    /*according to creation mode popup sequence will change*/
-    dispatch({
-      type: SET_NEXT_POPUP,
-      payload: { isPopUpValue: nextPopUpValue }
-    });
+    if (validate()) {
+      /*according to creation mode popup sequence will change*/
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    }
   };
   return (
     <div>
@@ -69,37 +92,47 @@ const PopUpHomeWorkTelephone = (props) => {
                 { countryCode: '91', name: 'India' },
                 { countryCode: '22', name: 'USA' }
               ]}
-              errorMsg={''}
               mappingValue={'countryCode'}
+              errorMsg={''}
               onChange={handleChange}
               value={basicInfo && basicInfo.countryCode}
             />
-            <SelectField
-              tag={'cityCode'}
-              label={'area / city'}
-              listSelect={[
-                { cityCode: '345', name: 'Mumbai' },
-                { cityCode: '345', name: 'Pune' }
-              ]}
-              mappingValue={'cityCode'}
-              errorMsg={''}
-              onChange={handleChange}
-              value={basicInfo && basicInfo.cityCode}
-            />
+
+            {isMobileState === false ? (
+              <Fragment>
+                <SelectField
+                  tag={'cityCode'}
+                  label={'area / city'}
+                  listSelect={[
+                    { cityCode: '345', name: 'Mumbai' },
+                    { cityCode: '345', name: 'Pune' }
+                  ]}
+                  mappingValue={'cityCode'}
+                  errorMsg={''}
+                  onChange={handleChange}
+                  value={basicInfo && basicInfo.cityCode}
+                />
+                <InputFeild
+                  type={'text'}
+                  id={'telephoneNumber'}
+                  label={'telephone number'}
+                  value={basicInfo && basicInfo.telephoneNumber}
+                  errorMsg={''}
+                  onClick={handleChange}
+                />
+              </Fragment>
+            ) : null}
+
             <InputFeild
               type={'text'}
-              id={'telephoneNumber'}
-              label={'telephone number'}
-              value={basicInfo && basicInfo.telephoneNumber}
-              errorMsg={''}
-              onClick={handleChange}
-            />
-            <InputFeild
-              type={'text'}
-              id={'extensionNumber'}
-              label={'extension number'}
-              value={basicInfo && basicInfo.extensionNumber}
-              errorMsg={''}
+              id={isMobileState ? 'mobileNumber' : 'extensionNumber'}
+              label={isMobileState ? 'mobile number' : 'extension number'}
+              value={
+                basicInfo && isMobileState
+                  ? basicInfo && basicInfo.mobileNumber
+                  : basicInfo && basicInfo.extensionNumber
+              }
+              errorMsg={state.error}
               onClick={handleChange}
             />
             <div className={'fitContent'}>
@@ -107,15 +140,37 @@ const PopUpHomeWorkTelephone = (props) => {
                 <div className={'contFlex'}>
                   <div
                     className={'f4'}
-                    style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
+                    style={{
+                      color:
+                        (basicInfo &&
+                          basicInfo.countryCode === '' &&
+                          basicInfo.mobileNumber === '') ||
+                        popupMode === 'ASSOCIATE_SIGN_ON' ||
+                        popupMode === 'ASSESSEE_SIGN_ON'
+                          ? 'dimgray'
+                          : ''
+                    }}
                   >
-                    communication{' '}
+                    communication
                   </div>
                   <div className={'checkedFontNew'}>
                     <Checkbox
                       className={''}
                       color="default"
-                      disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
+                      disabled={
+                        popupMode === 'ASSESSEE_SIGN_ON' ||
+                        popupMode === 'ASSOCIATE_SIGN_ON' ||
+                        (basicInfo && basicInfo.countryCode === '' && basicInfo.mobileNumber === '')
+                          ? true
+                          : false
+                      }
+                      checked={
+                        basicInfo
+                          ? basicInfo.countryCode !== '' && basicInfo.mobileNumber !== ''
+                            ? true
+                            : false
+                          : false
+                      }
                     />
                   </div>
                 </div>
@@ -126,7 +181,12 @@ const PopUpHomeWorkTelephone = (props) => {
                 <div className={'contFlex'}>
                   <div
                     className={'f4'}
-                    style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
+                    style={{
+                      color:
+                        popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                          ? 'dimgray'
+                          : ''
+                    }}
                   >
                     verification
                   </div>
@@ -134,7 +194,11 @@ const PopUpHomeWorkTelephone = (props) => {
                     <Checkbox
                       className={''}
                       color="default"
-                      disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
+                      disabled={
+                        popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                          ? true
+                          : false
+                      }
                     />
                   </div>
                 </div>
@@ -147,7 +211,7 @@ const PopUpHomeWorkTelephone = (props) => {
   );
 };
 
-PopUpHomeWorkTelephone.propTypes = {
+PopUpTelephone.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf(['genericOne']),
   headerOne: PropTypes.string,
@@ -157,4 +221,4 @@ PopUpHomeWorkTelephone.propTypes = {
   isActive: PropTypes.bool
 };
 
-export default PopUpHomeWorkTelephone;
+export default PopUpTelephone;

@@ -1,4 +1,4 @@
-import React,{Fragment} from 'react';
+import React, { Fragment } from 'react';
 import SectionButton from '../../Atoms/Sections/SectionButton';
 import SectionLine from '../../Atoms/Sections/SectionLine';
 import '../../Atoms/Sections/Section.css';
@@ -11,7 +11,7 @@ const Sections = (props) => {
       <div className={['tabsContainer', 'iguru-leftpanel'].join(' ')}>
         <div className={'middleTabLabel'}>
           <SectionLine />
-          {listSections.map((section,index) => {
+          {listSections.map((section, index) => {
             return (
               <Fragment key={index}>
                 <SectionButton

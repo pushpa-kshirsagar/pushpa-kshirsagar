@@ -6,7 +6,7 @@ import PopUpNameDesc from '../PopUpComponent/PopUpNameDesc';
 import PopUpEmail from '../PopUpComponent/PopUpEmail';
 import PopUpSingleDropDown from '../PopUpComponent/PopUpSingleDropDown';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
-import PopUpMobileTelephone from '../PopUpComponent/PopUpMobileTelephone';
+import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
 import PopUpAddress from '../PopUpComponent/PopUpAddress';
 import {
   CLEAR_ASSESSEE_INFO,
@@ -72,18 +72,18 @@ const PopUpAssesseeSignON = () => {
         typeOfSetObject={UPDATE_ASSESSEE_INFO}
       />
       <PopUpAddress
-      isActive={isPopUpValue === 'HOMEADDRESSPOPUP'}
-      headerPanelColour={'genericOne'}
-      headerOne={'assessee'}
-      headerOneBadgeOne={'information'}
-      inputHeader={'home address'}
-      primaryheader={'primary'}
-      tag={'emailAddressPrimary'}
-      basicInfo={assesseeInfo.homeAddressInfo}
-      nextPopUpValue={'MOBILETELEPHONEPOPUP'}
-      typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
+        isActive={isPopUpValue === 'HOMEADDRESSPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'home address'}
+        primaryheader={'primary'}
+        tag={'emailAddressPrimary'}
+        basicInfo={assesseeInfo.homeAddressInfo}
+        nextPopUpValue={'MOBILETELEPHONEPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
       />
-      <PopUpMobileTelephone
+      <PopUpTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
