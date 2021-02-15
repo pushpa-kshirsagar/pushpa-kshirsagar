@@ -124,7 +124,7 @@ export const DisplayPaneOne = () => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
     if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
-      popupHeaderOne = 'associate';
+      popupHeaderOne = 'assessee';
       popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
     }
     if (e.currentTarget.getAttribute('data-value') === 'associate_card') {

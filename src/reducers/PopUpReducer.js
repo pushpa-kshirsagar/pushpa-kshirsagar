@@ -63,7 +63,6 @@ const PopUpReducer = (istate = initialState, action) => {
         popupContentArrValue: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne
-
       };
 
     default:

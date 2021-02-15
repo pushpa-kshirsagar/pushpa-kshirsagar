@@ -12,20 +12,21 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
-const PopUpMobileTelephone = (props) => {
+const PopUpTelephone = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
 
   const {
     isActive,
-    primaryheader = '',
-    inputHeader = '',
+    primaryheader = 'primary',
+    inputHeader = 'mobile telephone',
     headerPanelColour = '',
     headerOne = '',
     headerOneBadgeOne = '',
     nextPopUpValue,
     basicInfo,
-    typeOfSetObject
+    typeOfSetObject,
+    isMobileState = true
   } = props;
 
   const [state, setState] = useState({
@@ -96,11 +97,41 @@ const PopUpMobileTelephone = (props) => {
               onChange={handleChange}
               value={basicInfo && basicInfo.countryCode}
             />
+
+            {isMobileState === false ? (
+              <Fragment>
+                <SelectField
+                  tag={'cityCode'}
+                  label={'area / city'}
+                  listSelect={[
+                    { cityCode: '345', name: 'Mumbai' },
+                    { cityCode: '345', name: 'Pune' }
+                  ]}
+                  mappingValue={'cityCode'}
+                  errorMsg={''}
+                  onChange={handleChange}
+                  value={basicInfo && basicInfo.cityCode}
+                />
+                <InputFeild
+                  type={'text'}
+                  id={'telephoneNumber'}
+                  label={'telephone number'}
+                  value={basicInfo && basicInfo.telephoneNumber}
+                  errorMsg={''}
+                  onClick={handleChange}
+                />
+              </Fragment>
+            ) : null}
+
             <InputFeild
               type={'text'}
-              id={'mobileNumber'}
-              label={'mobile number'}
-              value={basicInfo && basicInfo.mobileNumber}
+              id={isMobileState ? 'mobileNumber' : 'extensionNumber'}
+              label={isMobileState ? 'mobile number' : 'extension number'}
+              value={
+                basicInfo && isMobileState
+                  ? basicInfo && basicInfo.mobileNumber
+                  : basicInfo && basicInfo.extensionNumber
+              }
               errorMsg={state.error}
               onClick={handleChange}
             />
@@ -134,7 +165,11 @@ const PopUpMobileTelephone = (props) => {
                           : false
                       }
                       checked={
-                        basicInfo.countryCode !== '' && basicInfo.mobileNumber !== '' ? true : false
+                        basicInfo
+                          ? basicInfo.countryCode !== '' && basicInfo.mobileNumber !== ''
+                            ? true
+                            : false
+                          : false
                       }
                     />
                   </div>
@@ -176,7 +211,7 @@ const PopUpMobileTelephone = (props) => {
   );
 };
 
-PopUpMobileTelephone.propTypes = {
+PopUpTelephone.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf(['genericOne']),
   headerOne: PropTypes.string,
@@ -186,4 +221,4 @@ PopUpMobileTelephone.propTypes = {
   isActive: PropTypes.bool
 };
 
-export default PopUpMobileTelephone;
+export default PopUpTelephone;

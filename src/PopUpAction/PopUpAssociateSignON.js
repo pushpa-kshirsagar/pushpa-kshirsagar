@@ -2,12 +2,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PopUpPicture from '../PopUpComponent/PopUpPicture';
 import PopUpNameDesc from '../PopUpComponent/PopUpNameDesc';
-import PopUpHomeWorkTelephone from '../PopUpComponent/PopUpHomeWorkTelephone';
+import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
 import PopUpAddress from '../PopUpComponent/PopUpAddress';
 import PopUpList from '../PopUpComponent/PopUpList';
 import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
 import PopUpEmail from '../PopUpComponent/PopUpEmail';
-import PopUpMobileTelephone from '../PopUpComponent/PopUpMobileTelephone';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
 import PopUpSingleDropDown from '../PopUpComponent/PopUpSingleDropDown';
 import {
@@ -98,7 +97,7 @@ const PopUpAssociateSignON = () => {
         basicInfo={associateInfo.workAddressInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKADDRESS_INFO}
       />
-      <PopUpHomeWorkTelephone
+      <PopUpTelephone
         isActive={isPopUpValue === 'WORKTELEPHONE'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
@@ -106,6 +105,7 @@ const PopUpAssociateSignON = () => {
         inputHeader={'work telephone'}
         primaryheader={'primary'}
         basicInfo={associateInfo.workTeleponeInfo}
+        isMobileState={false}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_INFO}
         nextPopUpValue={'ASSOCIATECONFIRMATIONPOPUP'}
       />
@@ -157,7 +157,7 @@ const PopUpAssociateSignON = () => {
         basicInfo={associateInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_INFO}
       />
-      <PopUpMobileTelephone
+      <PopUpTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'administrator'}
@@ -166,6 +166,7 @@ const PopUpAssociateSignON = () => {
         primaryheader={'primary'}
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         basicInfo={associateInfo.AdminMobileTelephone}
+        isMobileState={false}
         typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_MOBILE_INFO}
       />
       <PopUpSingleDropDown
