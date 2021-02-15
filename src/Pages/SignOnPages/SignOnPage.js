@@ -7,8 +7,8 @@ import IconButtonUI from '../../Molecules/IconButton/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
 import { ASSESSEE_SIGN_ON, ASSOCIATE_SIGN_ON } from '../../actionType';
-import PopUpAssesseeSignON from '../../PopUpAction/PopUpAssesseeSignON';
-import PopUpAssociateSignON from '../../PopUpAction/PopUpAssociateSignON';
+import PopUpAssesseeSignON from '../../PopUpOption/PopUpAssesseeSignON';
+import PopUpAssociateSignON from '../../PopUpOption/PopUpAssociateSignON';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
 const SignOnPage = () => {

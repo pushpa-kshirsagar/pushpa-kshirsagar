@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 
-const PopUpList = (props) => {
+const PopUpReviewList = (props) => {
   const dispatch = useDispatch();
 
   const {
@@ -76,7 +76,7 @@ const PopUpList = (props) => {
   );
 };
 
-PopUpList.propTypes = {
+PopUpReviewList.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -92,4 +92,4 @@ PopUpList.propTypes = {
   isActive: PropTypes.bool
 };
 
-export default PopUpList;
+export default PopUpReviewList;

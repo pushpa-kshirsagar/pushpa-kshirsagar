@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpComponent/PopUpPicture';
 import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
 import PopUpNameDesc from '../PopUpComponent/PopUpNameDesc';
-import PopUpEmail from '../PopUpComponent/PopUpEmail';
+import PopUpAddressEmail from '../PopUpComponent/PopUpAddressEmail';
 import PopUpSingleDropDown from '../PopUpComponent/PopUpSingleDropDown';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
 import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
@@ -59,7 +59,7 @@ const PopUpAssesseeSignON = () => {
         headerOneBadgeOne={'information'}
         nextPopUpValue={'EMAILPOPUP'}
       />
-      <PopUpEmail
+      <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}

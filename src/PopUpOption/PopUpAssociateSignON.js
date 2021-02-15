@@ -4,9 +4,9 @@ import PopUpPicture from '../PopUpComponent/PopUpPicture';
 import PopUpNameDesc from '../PopUpComponent/PopUpNameDesc';
 import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
 import PopUpAddress from '../PopUpComponent/PopUpAddress';
-import PopUpList from '../PopUpComponent/PopUpList';
+import PopUpReviewList from '../PopUpComponent/PopUpReviewList';
 import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
-import PopUpEmail from '../PopUpComponent/PopUpEmail';
+import PopUpAddressEmail from '../PopUpComponent/PopUpAddressEmail';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
 import PopUpSingleDropDown from '../PopUpComponent/PopUpSingleDropDown';
 import {
@@ -77,7 +77,7 @@ const PopUpAssociateSignON = () => {
         basicInfo={associateInfo.basicInfo}
         nextPopUpValue={'ROLEPOPUP'}
       />
-      <PopUpList
+      <PopUpReviewList
         isActive={isPopUpValue === 'ROLEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
@@ -146,7 +146,7 @@ const PopUpAssociateSignON = () => {
         basicInfo={associateInfo.adminBasicInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_BASIC_INFO}
       />
-      <PopUpEmail
+      <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'administrator'}
