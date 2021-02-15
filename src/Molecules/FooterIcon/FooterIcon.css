@@ -10,6 +10,9 @@
 .widthDisplayPaneFive {
   width: 66.5%;
 }
+.fullWidth {
+  width: 95%;
+}
 
 .footerInner {
   flex: 1;

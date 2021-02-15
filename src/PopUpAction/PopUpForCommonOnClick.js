@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
-import Popup from '../Molecules/Popup/Popup';
+import PopupHeader from '../Molecules/PopUp/PopUpHeader';
+import Popup from '../Molecules/PopUp/PopUp';
 import { DialogContent, Button, Divider } from '@material-ui/core';
 
 import { SET_NEXT_POPUP } from '../actionType';

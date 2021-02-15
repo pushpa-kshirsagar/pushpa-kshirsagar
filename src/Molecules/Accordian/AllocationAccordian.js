@@ -15,13 +15,13 @@ export const AllocationAccordian = (props) => {
     >
       {list.map((ob) => {
         return (
-          <>
+          <div key={ob.id}>
             {ob.isListCard ? (
               <AccordianListCard className="" accordianObject={ob} />
             ) : (
               <AccordianInfoCard accordianObject={ob} />
             )}
-          </>
+          </div>
         );
       })}
     </AccordianHeader>

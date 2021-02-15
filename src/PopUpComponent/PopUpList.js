@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import Popup from '../Molecules/Popup/Popup';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
+import PopUp from '../Molecules/PopUp/PopUp';
+import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
-import '../Molecules/Popup/Popup.css';
-import List from '../Molecules/List/List';
+import '../Molecules/PopUp/PopUp.css';
+import ReviewList from '../Molecules/ReviewList/ReviewList';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
@@ -35,7 +35,7 @@ const PopUpList = (props) => {
   };
   return (
     <div>
-      <Popup isActive={isActive}>
+      <PopUp isActive={isActive}>
         <PopupHeader
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
@@ -57,7 +57,7 @@ const PopUpList = (props) => {
             </div>
           </div>
           {ListData.map((index, option) => (
-            <List
+            <ReviewList
               textOne={index.name}
               id={index}
               isAlertActive={false}
@@ -71,7 +71,7 @@ const PopUpList = (props) => {
             <span>{errorMsg}</span>
           </FormHelperText>
         </DialogContent>
-      </Popup>
+      </PopUp>
     </div>
   );
 };

@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Clear from '@material-ui/icons/Clear';
 import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
-import './Popup.css';
+import './PopUp.css';
 
 const PopupContent = (props) => {
   const {

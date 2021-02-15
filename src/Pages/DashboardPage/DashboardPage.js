@@ -14,6 +14,7 @@ import DisplayPaneFive from '../../Organism/DisplayPaneFive/DisplayPaneFive';
 const DashboardPage = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const dispatch = useDispatch();
   const mobilePanestate = isMobile && 'displayPaneTwo';
   const isExamMode = false;
@@ -40,10 +41,10 @@ const DashboardPage = () => {
           <>
             {isExamMode ? (
               <>
-                <div className="display-pane-container">
+                <div style={{ width: isDisplayPaneFourShow ? '33.33%' : '4%' }}>
                   <DisplayPaneFour />
                 </div>
-                <div style={{ width: '66.66%' }}>
+                <div style={{ width: isDisplayPaneFourShow ? '66.66%' : '95.5%' }}>
                   <DisplayPaneFive />
                 </div>
               </>

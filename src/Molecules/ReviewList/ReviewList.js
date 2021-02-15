@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { ClickAwayListener, InputLabel, Tooltip, Typography } from '@material-ui/core';
+import { ClickAwayListener, InputLabel } from '@material-ui/core';
 import Notifications from '@material-ui/icons/NotificationsActive';
 import IconButton from '@material-ui/core/IconButton';
 import Checkbox from '@material-ui/core/Checkbox';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
-import './List.css';
+import './ReviewList.css';
 
-const List = (props) => {
+const ReviewList = (props) => {
   const {
     textTwo = '',
     textOne,
@@ -113,4 +113,4 @@ const List = (props) => {
   );
 };
 
-export default List;
+export default ReviewList;

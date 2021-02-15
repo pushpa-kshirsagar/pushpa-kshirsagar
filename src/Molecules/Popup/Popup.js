@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
-import './Popup.css';
+import './PopUp.css';
 
-const Popup = (props) => {
+const PopUp = (props) => {
   const { isActive, close, children } = props;
 
   return (
@@ -22,7 +22,7 @@ const Popup = (props) => {
   );
 };
 
-Popup.propTypes = {
+PopUp.propTypes = {
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
     'displayPaneCentre',
@@ -35,4 +35,4 @@ Popup.propTypes = {
   className: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default Popup;
+export default PopUp;

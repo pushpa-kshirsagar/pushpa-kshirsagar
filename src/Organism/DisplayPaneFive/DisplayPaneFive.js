@@ -13,6 +13,7 @@ import PopUpAssessmentNavigator from '../../PopUpComponent/PopUpAssessmentNaviga
 
 export const DisplayPaneFive = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);
+  const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const flagQuestion = () => {
     setIsQuestionFlaged((state) => !state);
   };
@@ -78,7 +79,7 @@ export const DisplayPaneFive = () => {
           />
         </div>
         <FooterIcon
-          className="widthDisplayPaneFive"
+          className={isDisplayPaneFourShow ? 'widthDisplayPaneFive' : 'fullWidth'}
           FilterModeEnable={false}
           FilterMode={FilterMode}
           onClick={onClickFooter}

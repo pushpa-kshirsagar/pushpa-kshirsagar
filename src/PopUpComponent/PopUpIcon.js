@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import Popup from '../Molecules/Popup/Popup';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
-import '../Molecules/Popup/Popup.css';
+import Popup from '../Molecules/PopUp/PopUp';
+import PopupHeader from '../Molecules/PopUp/PopUpHeader';
+import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import CalculatorIcon from '@material-ui/icons/Keyboard';
 import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';

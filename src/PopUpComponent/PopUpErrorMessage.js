@@ -1,9 +1,9 @@
 import { DialogContent } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Popup from '../Molecules/Popup/Popup';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
-import '../Molecules/Popup/Popup.css';
+import Popup from '../Molecules/PopUp/PopUp';
+import PopupHeader from '../Molecules/PopUp/PopUpHeader';
+import '../Molecules/PopUp/PopUp.css';
 
 export const PopupErrorMessage = (props) => {
   const { isActive, errorMessage = 'Error Message' } = props;

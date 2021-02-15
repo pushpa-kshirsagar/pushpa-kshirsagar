@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import { useSelector, useDispatch } from 'react-redux';
 import './DisplayPaneTwo.css';
-import List from '../../Molecules/List/List';
+import ReviewList from '../../Molecules/ReviewList/ReviewList';
 import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
 import { FILTERMODE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
@@ -400,7 +400,7 @@ export const DisplayPaneTwo = () => {
         {tempAssociateList.map((associate, index) => {
           return (
             <div className="containerPadding" key={index}>
-              <List
+              <ReviewList
                 className=""
                 id={associate.id}
                 status={associate.status}

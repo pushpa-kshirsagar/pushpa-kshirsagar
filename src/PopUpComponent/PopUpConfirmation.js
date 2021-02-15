@@ -1,13 +1,12 @@
 import React from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import Popup from '../Molecules/Popup/Popup';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
+import Popup from '../Molecules/PopUp/PopUp';
+import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import { Button } from '@material-ui/core';
-import '../Molecules/Popup/Popup.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, CLEAR_ASSESSEE_INFO, SET_NEXT_POPUP, PREVIOUS_POPUP } from '../actionType';
-import '../Molecules/Popup/Popup.css';
+import '../Molecules/PopUp/PopUp.css';
 
 const PopUpConfirmation = (props) => {
   const {

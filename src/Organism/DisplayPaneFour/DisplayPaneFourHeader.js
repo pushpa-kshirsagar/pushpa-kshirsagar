@@ -6,6 +6,8 @@ import NextIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVert from '@material-ui/icons/MoreVert';
 import '../../Molecules/Headers/HeaderCard.css';
+import { SET_DISPLAY_PANE_FOUR_SHOW } from '../../actionType';
+import { useDispatch, useSelector } from 'react-redux';
 
 const DisplayPaneFourHeader = (props) => {
   const {
@@ -14,14 +16,14 @@ const DisplayPaneFourHeader = (props) => {
     headerOneBadgeTwo = '',
     headerOneBadgeThree = '',
     headerOneBadgeFour = '',
-    isDisplayPaneShow,
-    setIsDisplayPaneShow,
     headerPanelColour
   } = props;
+  const dispatch = useDispatch();
+  const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
 
   return (
     <>
-      {isDisplayPaneShow ? (
+      {isDisplayPaneFourShow ? (
         <div className={'iguru-leftpanel'}>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
             <Paper
@@ -63,7 +65,8 @@ const DisplayPaneFourHeader = (props) => {
                 <div className={'iguru-iconbox'}>
                   <IconButton
                     onClick={() => {
-                      setIsDisplayPaneShow(false);
+                      // setIsDisplayPaneShow(false);
+                      dispatch({ type: SET_DISPLAY_PANE_FOUR_SHOW, payload: false });
                     }}
                   >
                     {/* <NextIcon className={'iguru-iconbardefault'} /> */}
@@ -102,7 +105,8 @@ const DisplayPaneFourHeader = (props) => {
                 <div className={'iguru-iconbox'}>
                   <IconButton
                     onClick={() => {
-                      setIsDisplayPaneShow(true);
+                      // setIsDisplayPaneShow(true);
+                      dispatch({ type: SET_DISPLAY_PANE_FOUR_SHOW, payload: true });
                     }}
                     style={{ width: '100%' }}
                   >

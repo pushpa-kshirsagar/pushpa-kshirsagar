@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import Popup from '../Molecules/Popup/Popup';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
+import Popup from '../Molecules/PopUp/PopUp';
+import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Checkbox from '@material-ui/core/Checkbox';
-import '../Molecules/Popup/Popup.css';
+import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 
 const PopUpForceToSelect = (props) => {

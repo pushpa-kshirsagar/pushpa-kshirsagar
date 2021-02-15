@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import List from '../List/List';
+import ReviewList from '../ReviewList/ReviewList';
 import { FormControl, InputLabel } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
@@ -61,7 +61,7 @@ const AccordianListCard = (props) => {
                 {innerAssociateList.map((associate) => {
                   return (
                     <div style={{ padding: '2.5px 0' }}>
-                      <List
+                      <ReviewList
                         className=""
                         id={associate.id}
                         status={associate.status}

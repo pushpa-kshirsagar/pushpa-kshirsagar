@@ -1,9 +1,9 @@
 import React from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import Popup from '../Molecules/Popup/Popup';
+import Popup from '../Molecules/PopUp/PopUp';
 import CircleIcon from '../Molecules/IconButton/IconButton';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
-import '../Molecules/Popup/Popup.css';
+import PopupHeader from '../Molecules/PopUp/PopUpHeader';
+import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { Button, Divider, IconButton, InputLabel } from '@material-ui/core';
 import { Check, Dashboard } from '@material-ui/icons';

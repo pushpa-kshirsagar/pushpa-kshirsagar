@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import Popup from '../Molecules/Popup/Popup';
-import PopupHeader from '../Molecules/Popup/PopupHeader';
+import Popup from '../Molecules/PopUp/PopUp';
+import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 import Checkbox from '@material-ui/core/Checkbox';
-import '../Molecules/Popup/Popup.css';
+import '../Molecules/PopUp/PopUp.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 import PropTypes from 'prop-types';

@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Clear, KeyboardTab } from '@material-ui/icons';
 import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
-import './Popup.css';
+import './PopUp.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP, CLEAR_ASSESSEE_INFO, PREVIOUS_POPUP } from '../../actionType';
 const PopupHeader = (props) => {

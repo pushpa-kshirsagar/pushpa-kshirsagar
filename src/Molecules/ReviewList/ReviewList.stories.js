@@ -1,5 +1,5 @@
 import React from 'react';
-import Lists from './List';
+import Lists from './ReviewList';
 
 export default {
   title: 'Design System/Molecules/Review List',

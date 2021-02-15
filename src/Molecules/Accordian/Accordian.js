@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core';
 import { ExpansionPanel, IconButton } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
-// import List from '../List/List';
 import './Accordian.css';
 
 const Accordian = (props) => {
@@ -99,7 +98,6 @@ const Accordian = (props) => {
                 )}
               </div>
             </div>
-            {/* {isListSelect && isListSelectExpanded ? <List name={'name'} /> : null} */}
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>

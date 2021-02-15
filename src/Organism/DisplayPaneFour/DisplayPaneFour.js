@@ -4,10 +4,11 @@ import './DisplayPaneFour.css';
 import Card from '../../Molecules/Card/Card';
 import DisplayPaneFourFooter from './DisplayPaneFourFooter';
 import DisplayPaneFourHeader from './DisplayPaneFourHeader';
+import { useSelector } from 'react-redux';
 
 export const DisplayPaneFour = () => {
-  const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
-
+  // const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
+  const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   return (
     <>
       <div>
@@ -16,12 +17,10 @@ export const DisplayPaneFour = () => {
           headerOne="dashboard"
           headerOneBadgeOne=""
           headerPanelColour="blue"
-          isDisplayPaneShow={isDisplayPaneShow}
-          setIsDisplayPaneShow={setIsDisplayPaneShow}
         />
       </div>
       <div className="containerPadding">
-        {isDisplayPaneShow && (
+        {isDisplayPaneFourShow && (
           <>
             <div className="containerPadding">
               <Card IconOne={CrossIcon} className="" isIcon textOneOne="--" textTwoOne="" />
