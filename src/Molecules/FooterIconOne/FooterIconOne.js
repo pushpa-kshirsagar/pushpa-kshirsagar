@@ -1,9 +1,10 @@
 import React from 'react';
 import { Keyboard, Description, InsertDriveFile, BusinessCenter } from '@material-ui/icons';
 import IconButton from '../IconButton/IconButton';
-import '../FooterIcon/FooterIcon.css';
+import '../FooterIconTwo/FooterIconTwo.css';
 
-export const LaftPaneFooter = () => {
+export const FooterIconOne = (props) => {
+  const { onClickEvent } = props;
   return (
     <div className={'middleFooterD'}>
       <div style={{ flex: 1, textAlign: 'center' }}></div>
@@ -22,6 +23,8 @@ export const LaftPaneFooter = () => {
           className=""
           colour="displayPaneLeft"
           label="worksheet"
+          dataValue="worksheet"
+          onClick={onClickEvent}
         />
       </div>
       <div style={{ flex: 1, textAlign: 'center' }}></div>
@@ -29,4 +32,4 @@ export const LaftPaneFooter = () => {
   );
 };
 
-export default LaftPaneFooter;
+export default FooterIconOne;

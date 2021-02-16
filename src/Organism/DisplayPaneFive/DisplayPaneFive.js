@@ -8,7 +8,7 @@ import ArrowLeft from '@material-ui/icons/ChevronLeft';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneFive.css';
 import { useSelector } from 'react-redux';
-import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
+import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import PopUpAssessmentNavigator from '../../PopUpComponent/PopUpAssessmentNavigator';
 
 export const DisplayPaneFive = () => {
@@ -78,7 +78,7 @@ export const DisplayPaneFive = () => {
             }}
           />
         </div>
-        <FooterIcon
+        <FooterIconTwo
           className={isDisplayPaneFourShow ? 'widthDisplayPaneFive' : 'fullWidth'}
           FilterModeEnable={false}
           FilterMode={FilterMode}

@@ -6,7 +6,7 @@ import Card from '../../Molecules/Card/Card';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Sections/Section';
-import LaftPaneFooter from '../../Molecules/LaftPaneFooter/LaftPaneFooter';
+import FooterIconOne from '../../Molecules/FooterIconOne/FooterIconOne';
 import PopUpForCommonOnClick from '../../PopUpOption/PopUpForCommonOnClick';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -141,6 +141,9 @@ export const DisplayPaneOne = () => {
       }
     });
   };
+  const openFooterIconPopup = (e) =>{
+    console.log(e.currentTarget.getAttribute('data-value'))
+  }
   return (
     <>
       <div>
@@ -175,7 +178,7 @@ export const DisplayPaneOne = () => {
           setSelectedSection={setSelectedSection}
         />
       </div>
-      <LaftPaneFooter />
+      <FooterIconOne onClickEvent={openFooterIconPopup} />
       <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
     </>
   );

@@ -17,7 +17,7 @@ import Sections from '../../Molecules/Sections/Section';
 import AllocationAccordian from '../../Molecules/Accordian/AllocationAccordian';
 import { useDispatch, useSelector } from 'react-redux';
 import { NAVIGATOR_MODE } from '../../actionType';
-import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
+import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import './DisplayPaneThree.css';
 
 const DisplayPaneRightSection1 = () => {
@@ -653,7 +653,7 @@ export const DisplayPaneThree = () => {
           setSelectedSection={setSelectedSection}
         />
       </div>
-      <FooterIcon
+      <FooterIconTwo
         FilterModeEnable={navigatorIcon}
         FilterMode={FilterMode}
         onClick={onClickFooter}

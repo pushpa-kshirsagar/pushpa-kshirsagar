@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, BottomNavigation } from '@material-ui/core';
 import CircleIcon from '../IconButton/IconButton';
-import './FooterIcon.css';
+import './FooterIconTwo.css';
 const SingleIconWithFlex = (props) => {
   const data = props.data;
   return (
@@ -178,7 +178,7 @@ const IconFiveWithFlexFiveColumn = (props) => {
     </React.Fragment>
   );
 };
-const FooterIcon = (props) => {
+const FooterIconTwo = (props) => {
   const { FilterModeEnable, primaryIcon, secondaryIcon, className = '' } = props;
   console.log(primaryIcon);
   console.log('primaryIcon');
@@ -210,4 +210,4 @@ const FooterIcon = (props) => {
     </div>
   );
 };
-export default FooterIcon;
+export default FooterIconTwo;
