@@ -3,7 +3,8 @@ import { Keyboard, Description, InsertDriveFile, BusinessCenter } from '@materia
 import IconButton from '../IconButton/IconButton';
 import '../FooterIconTwo/FooterIconTwo.css';
 
-export const FooterIconOne = () => {
+export const FooterIconOne = (props) => {
+  const { onClickEvent } = props;
   return (
     <div className={'middleFooterD'}>
       <div style={{ flex: 1, textAlign: 'center' }}></div>
@@ -22,6 +23,8 @@ export const FooterIconOne = () => {
           className=""
           colour="displayPaneLeft"
           label="worksheet"
+          dataValue="worksheet"
+          onClick={onClickEvent}
         />
       </div>
       <div style={{ flex: 1, textAlign: 'center' }}></div>

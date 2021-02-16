@@ -141,6 +141,9 @@ export const DisplayPaneOne = () => {
       }
     });
   };
+  const openFooterIconPopup = (e) =>{
+    console.log(e.currentTarget.getAttribute('data-value'))
+  }
   return (
     <>
       <div>
@@ -175,7 +178,7 @@ export const DisplayPaneOne = () => {
           setSelectedSection={setSelectedSection}
         />
       </div>
-      <FooterIconOne />
+      <FooterIconOne onClickEvent={openFooterIconPopup} />
       <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
     </>
   );
