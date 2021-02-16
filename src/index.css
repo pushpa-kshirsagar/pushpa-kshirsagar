@@ -170,6 +170,15 @@ body {
   justify-content: center;
   flex-direction: column;
 }
+.iconBoxFooterPopup {
+  display: flex;
+  flex: 1;
+  padding: 2.5px 0px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer !important;
+}
 .iconBoxFooter {
   display: flex;
   flex: 1;
@@ -264,6 +273,13 @@ body {
   justify-content: center;
   align-items: center;
   padding: 0 5px 7px;
+}
+.popup-icon-mbPager {
+  display: flex;
+  flex: 1;
+  padding: 2.5px 5px;
+  text-align: center;
+  justify-content: center;
 }
 .mbPager {
   display: flex;

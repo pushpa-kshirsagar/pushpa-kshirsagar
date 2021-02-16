@@ -11,8 +11,8 @@ export default {
 
 const Template = (args) => <PopUpSingleInput {...args} />;
 
-export const PopUp10 = Template.bind({});
-PopUp10.args = {
+export const PopUp3 = Template.bind({});
+PopUp3.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',
