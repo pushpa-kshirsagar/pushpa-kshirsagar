@@ -8,7 +8,7 @@ import PopUpReviewList from '../PopUpComponent/PopUpReviewList';
 import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
 import PopUpAddressEmail from '../PopUpComponent/PopUpAddressEmail';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
-import PopUpSingleDropDown from '../PopUpComponent/PopUpSingleDropDown';
+import PopUpDropList from '../PopUpComponent/PopUpDropList';
 import {
   SET_NEXT_POPUP,
   CLEAR_ASSOCIATE_INFO,
@@ -169,7 +169,7 @@ const PopUpAssociateSignON = () => {
         isMobileState={false}
         typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_MOBILE_INFO}
       />
-      <PopUpSingleDropDown
+      <PopUpDropList
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
         tag={'gender'}
         listSelect={[
