@@ -5,13 +5,13 @@ import PersonIcon from '@material-ui/icons/Person';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import CrossIcon from '@material-ui/icons/Clear';
 export default {
-  title: 'Design System/Molecules/Display Card',
+  title: 'Design System/Molecules/Display Panel',
   component: Card
 };
 const Template = (args) => <Card {...args} />;
 
-export const DisplayCard1 = Template.bind({});
-DisplayCard1.args = {
+export const DisplayPanel1 = Template.bind({});
+DisplayPanel1.args = {
   className: '',
   textOneOne: 'assesseeName',
   textTwoOne: 'alias',
@@ -19,16 +19,16 @@ DisplayCard1.args = {
   isAlertActive: true,
   isImageActive: true
 };
-export const DisplayCard2 = Template.bind({});
-DisplayCard2.args = {
+export const DisplayPanel2 = Template.bind({});
+DisplayPanel2.args = {
   className: 'iguru-rightarrowicon',
   textOneOne: 'name',
   textTwoOne: 'description',
   IconOne: ArrowRight,
   isIcon: true
 };
-export const DisplayCard3 = Template.bind({});
-DisplayCard3.args = {
+export const DisplayPanel3 = Template.bind({});
+DisplayPanel3.args = {
   className: '',
   textOneOne: 'name',
   textTwoOne: 'description',

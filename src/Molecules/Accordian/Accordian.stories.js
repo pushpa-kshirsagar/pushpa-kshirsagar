@@ -5,14 +5,14 @@ import Accordian from './Accordian';
 import TelephoneVerified from '@material-ui/icons/Call';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 export default {
-  title: 'Design System/Molecules/Display Card',
+  title: 'Design System/Molecules/Display Panel',
   component: Accordian
 };
 
 const Template = (args) => <Accordian {...args} />;
 
-export const DisplayCard5 = Template.bind({});
-DisplayCard5.args = {
+export const DisplayPanel5 = Template.bind({});
+DisplayPanel5.args = {
   className: null,
   headerOne: 'allocation',
   labelTextOneOne: 'group',

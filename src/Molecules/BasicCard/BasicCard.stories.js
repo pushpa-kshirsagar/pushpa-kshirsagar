@@ -2,7 +2,7 @@ import React from 'react';
 import BasicCard from './BasicCard';
 
 export default {
-  title: 'Design System/Molecules/Display Card',
+  title: 'Design System/Molecules/Display Panel',
   component: BasicCard
 };
 const Template = (args) => {
@@ -13,8 +13,8 @@ const Template = (args) => {
   );
 };
 
-export const DisplayCard4 = Template.bind({});
-DisplayCard4.args = {
+export const DisplayPanel4 = Template.bind({});
+DisplayPanel4.args = {
   className: '',
   labelTextOneOne: 'name',
   textOneOne: 'Sample Text',

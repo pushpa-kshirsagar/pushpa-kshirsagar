@@ -5,14 +5,14 @@ import KeyCard from './KeyCard';
 import TelephoneVerified from '@material-ui/icons/Call';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 export default {
-  title: 'Design System/Molecules/Display Card',
+  title: 'Design System/Molecules/Display Panel',
   component: KeyCard
 };
 
 const Template = (args) => <KeyCard {...args} />;
 
-export const DisplayCard6 = Template.bind({});
-DisplayCard6.args = {
+export const DisplayPanel6 = Template.bind({});
+DisplayPanel6.args = {
   className: null,
   labelTextOneOne: 'group',
   labelTextOneOneBadgeOne: 'primary',
