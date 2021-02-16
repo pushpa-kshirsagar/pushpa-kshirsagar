@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 
-const PopUpForceToSelect = (props) => {
+const PopUpCheckbox = (props) => {
   /*props*/
   const {
     isActive = false,
@@ -100,7 +100,7 @@ const PopUpForceToSelect = (props) => {
     </div>
   );
 };
-PopUpForceToSelect.propTypes = {
+PopUpCheckbox.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -115,4 +115,4 @@ PopUpForceToSelect.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopUpForceToSelect;
+export default PopUpCheckbox;

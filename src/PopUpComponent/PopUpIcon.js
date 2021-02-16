@@ -4,8 +4,8 @@ import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
-import CalculatorIcon from '@material-ui/icons/Keyboard';
-import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
+// import CalculatorIcon from '@material-ui/icons/Keyboard';
+// import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
 import IconButton from '../Molecules/IconButton/IconButton';
 const PopUpIcon = (props) => {
   /*props*/
@@ -14,7 +14,7 @@ const PopUpIcon = (props) => {
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
     headerOneBadgeOne = '',
-    dataArr=[]
+    dataArr = []
   } = props;
 
   const handleClick = () => {};
@@ -40,17 +40,29 @@ const PopUpIcon = (props) => {
             <div className="true">
               {dataArr.length === 1 ? (
                 <div className={'popup-icon-mbPager'}>
-                  <IconButton label={dataArr[0].lable} Icon={dataArr[0].Icon} colour={'genericOne'} />
+                  <IconButton
+                    label={dataArr[0].lable}
+                    Icon={dataArr[0].Icon}
+                    colour={'genericOne'}
+                  />
                 </div>
               ) : dataArr.length === 2 ? (
                 <div className={'popup-icon-mbPager'}>
                   <div className={'iconBoxFooterPopup'}></div>
                   <div className={'popup-icon-mbPager'}>
-                    <IconButton label={dataArr[0].lable} Icon={dataArr[0].Icon} colour={'genericOne'} />
+                    <IconButton
+                      label={dataArr[0].lable}
+                      Icon={dataArr[0].Icon}
+                      colour={'genericOne'}
+                    />
                   </div>
                   <div className={'iconBoxFooterPopup'}></div>
                   <div className={'popup-icon-mbPager'}>
-                    <IconButton label={dataArr[1].lable} Icon={dataArr[1].Icon} colour={'genericOne'} />
+                    <IconButton
+                      label={dataArr[1].lable}
+                      Icon={dataArr[1].Icon}
+                      colour={'genericOne'}
+                    />
                   </div>
                   <div className={'iconBoxFooterPopup'}></div>
                 </div>
@@ -59,22 +71,38 @@ const PopUpIcon = (props) => {
                   <div className={'popup-icon-mbPager'}>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[0].lable} Icon={dataArr[0].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[0].lable}
+                        Icon={dataArr[0].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[1].lable} Icon={dataArr[1].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[1].lable}
+                        Icon={dataArr[1].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                   </div>
                   <div className={'popup-icon-mbPager'}>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[2].lable} Icon={dataArr[2].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[2].lable}
+                        Icon={dataArr[2].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[3].lable} Icon={dataArr[3].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[3].lable}
+                        Icon={dataArr[3].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                   </div>
@@ -84,33 +112,57 @@ const PopUpIcon = (props) => {
                   <div className={'popup-icon-mbPager'}>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[0].lable} Icon={dataArr[0].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[0].lable}
+                        Icon={dataArr[0].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[1].lable} Icon={dataArr[1].Icon} colour={'genericOne'} />
-                    </div>
-                    <div className={'iconBoxFooterPopup'}></div>
-                  </div>
-                  <div className={'popup-icon-mbPager'}>
-                    <div className={'iconBoxFooterPopup'}></div>
-                    <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[2].lable} Icon={dataArr[2].Icon} colour={'genericOne'} />
-                    </div>
-                    <div className={'iconBoxFooterPopup'}></div>
-                    <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[3].lable} Icon={dataArr[3].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[1].lable}
+                        Icon={dataArr[1].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                   </div>
                   <div className={'popup-icon-mbPager'}>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[4].lable} Icon={dataArr[4].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[2].lable}
+                        Icon={dataArr[2].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[5].lable} Icon={dataArr[5].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[3].lable}
+                        Icon={dataArr[3].Icon}
+                        colour={'genericOne'}
+                      />
+                    </div>
+                    <div className={'iconBoxFooterPopup'}></div>
+                  </div>
+                  <div className={'popup-icon-mbPager'}>
+                    <div className={'iconBoxFooterPopup'}></div>
+                    <div className={'popup-icon-mbPager'}>
+                      <IconButton
+                        label={dataArr[4].lable}
+                        Icon={dataArr[4].Icon}
+                        colour={'genericOne'}
+                      />
+                    </div>
+                    <div className={'iconBoxFooterPopup'}></div>
+                    <div className={'popup-icon-mbPager'}>
+                      <IconButton
+                        label={dataArr[5].lable}
+                        Icon={dataArr[5].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                   </div>
@@ -120,44 +172,76 @@ const PopUpIcon = (props) => {
                   <div className={'popup-icon-mbPager'}>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[0].lable} Icon={dataArr[0].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[0].lable}
+                        Icon={dataArr[0].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[1].lable} Icon={dataArr[1].Icon} colour={'genericOne'} />
-                    </div>
-                    <div className={'iconBoxFooterPopup'}></div>
-                  </div>
-                  <div className={'popup-icon-mbPager'}>
-                    <div className={'iconBoxFooterPopup'}></div>
-                    <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[2].lable} Icon={dataArr[2].Icon} colour={'genericOne'} />
-                    </div>
-                    <div className={'iconBoxFooterPopup'}></div>
-                    <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[3].lable} Icon={dataArr[3].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[1].lable}
+                        Icon={dataArr[1].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                   </div>
                   <div className={'popup-icon-mbPager'}>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[4].lable} Icon={dataArr[4].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[2].lable}
+                        Icon={dataArr[2].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[5].lable} Icon={dataArr[5].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[3].lable}
+                        Icon={dataArr[3].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                   </div>
                   <div className={'popup-icon-mbPager'}>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[6].lable} Icon={dataArr[6].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[4].lable}
+                        Icon={dataArr[4].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                     <div className={'popup-icon-mbPager'}>
-                      <IconButton label={dataArr[7].lable} Icon={dataArr[7].Icon} colour={'genericOne'} />
+                      <IconButton
+                        label={dataArr[5].lable}
+                        Icon={dataArr[5].Icon}
+                        colour={'genericOne'}
+                      />
+                    </div>
+                    <div className={'iconBoxFooterPopup'}></div>
+                  </div>
+                  <div className={'popup-icon-mbPager'}>
+                    <div className={'iconBoxFooterPopup'}></div>
+                    <div className={'popup-icon-mbPager'}>
+                      <IconButton
+                        label={dataArr[6].lable}
+                        Icon={dataArr[6].Icon}
+                        colour={'genericOne'}
+                      />
+                    </div>
+                    <div className={'iconBoxFooterPopup'}></div>
+                    <div className={'popup-icon-mbPager'}>
+                      <IconButton
+                        label={dataArr[7].lable}
+                        Icon={dataArr[7].Icon}
+                        colour={'genericOne'}
+                      />
                     </div>
                     <div className={'iconBoxFooterPopup'}></div>
                   </div>

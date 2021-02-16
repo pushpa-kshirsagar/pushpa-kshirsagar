@@ -1,20 +1,20 @@
 import React from 'react';
-import PopUpForceToSelect from './PopUpForceToSelect';
+import PopUpMessageError from './PopUpMessageError';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
   title: 'Design System/Molecules/Pop Up',
-  component: PopUpForceToSelect,
+  component: PopUpMessageError,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopUpForceToSelect {...args} />;
+const Template = (args) => <PopUpMessageError {...args} />;
 
-export const PopUp15 = Template.bind({});
-PopUp15.args = {
+export const PopUp5 = Template.bind({});
+PopUp5.args = {
   className: null,
-  headerPanelColour: 'genericOne',
+  headerPanelColour: 'genericTwo',
   headerOne: 'assessees',
   headerOneBadgeOne: 'information',
   headerOneBadgeTwo: '',

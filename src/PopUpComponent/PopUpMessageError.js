@@ -5,7 +5,7 @@ import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import '../Molecules/PopUp/PopUp.css';
 
-export const PopupErrorMessage = (props) => {
+export const PopUpMessageError = (props) => {
   const { isActive, errorMessage = 'Error Message' } = props;
   return (
     <div>
@@ -42,7 +42,7 @@ export const PopupErrorMessage = (props) => {
     </div>
   );
 };
-PopupErrorMessage.propTypes = {
+PopUpMessageError.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -58,4 +58,4 @@ PopupErrorMessage.propTypes = {
   isActive: PropTypes.bool
 };
 
-export default PopupErrorMessage;
+export default PopUpMessageError;
