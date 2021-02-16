@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isMobile } from 'react-device-detect';
 import { GET_USER_SAGA } from '../../actionType';
 import IguruTopHeader from '../../Molecules/IguruTopHeader/IguruTopHeader';
-import './DashboardPage.css';
+import './DisplayPageOne.css';
 import DisplayPaneOne from '../../Organism/DisplayPaneOne/DisplayPaneOne';
 import DisplayPaneThree from '../../Organism/DisplayPaneThree/DisplayPaneThree';
 import DisplayPaneTwo from '../../Organism/DisplayPaneTwo/DisplayPaneTwo';
@@ -11,7 +11,7 @@ import GridUI from '../../Molecules/GridUI/GridUI';
 import DisplayPaneFour from '../../Organism/DisplayPaneFour/DisplayPaneFour';
 import DisplayPaneFive from '../../Organism/DisplayPaneFive/DisplayPaneFive';
 
-const DashboardPage = () => {
+const DisplayPageOne = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
@@ -70,10 +70,10 @@ const DashboardPage = () => {
           dispatch({ type: SIGNON, payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SIGNON' } });
         }}
       >
-        DashboardPage
+        DisplayPageOne
       </div> */}
     </>
   );
 };
 
-export default DashboardPage;
+export default DisplayPageOne;

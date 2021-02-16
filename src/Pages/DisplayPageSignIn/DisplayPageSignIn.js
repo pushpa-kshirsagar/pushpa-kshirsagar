@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import SendIcon from '@material-ui/icons/Send';
 import iGuruLogo from '../../images/iglogo1.png';
-import './SignInPage.css';
+import './DisplayPageSignIn.css';
 import { IconButton } from '@material-ui/core';
 import InputField from '../../Atoms/InputField/InputField';
 import bgImg from '../../images/bg.jpeg';
 import Label from '../../Atoms/Labels/Label';
 // import Clear from 'material-ui-icons/Clear';
 
-const SignInPage = () => {
+const DisplayPageSignIn = () => {
   const style = {
     backgroundPosition: '50% 50%',
     backgroundImage: `url(${bgImg})`,
@@ -64,4 +64,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default DisplayPageSignIn;

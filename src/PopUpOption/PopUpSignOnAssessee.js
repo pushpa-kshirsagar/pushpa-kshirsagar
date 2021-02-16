@@ -18,7 +18,7 @@ import {
   UPDATE_ASSESSEE_HOMEADDRESS_INFO
 } from '../actionType';
 
-const PopUpAssesseeSignON = () => {
+const PopUpSignOnAssessee = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   console.log(assesseeInfo);
@@ -130,4 +130,4 @@ const PopUpAssesseeSignON = () => {
   );
 };
 
-export default PopUpAssesseeSignON;
+export default PopUpSignOnAssessee;

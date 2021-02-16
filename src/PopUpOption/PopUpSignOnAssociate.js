@@ -21,7 +21,7 @@ import {
   UPDATE_ASSOCIATE_ADMIN_MOBILE_INFO,
   UPDATE_ASSOCIATE_ADMIN_PERSONAL_INFO
 } from '../actionType';
-const PopUpAssociateSignON = () => {
+const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   console.log(associateInfo);
@@ -205,4 +205,4 @@ const PopUpAssociateSignON = () => {
   );
 };
 
-export default PopUpAssociateSignON;
+export default PopUpSignOnAssociate;

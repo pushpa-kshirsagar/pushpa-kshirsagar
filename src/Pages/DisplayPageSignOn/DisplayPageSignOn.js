@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import iGuruLogo from '../../images/iglogo1.png';
 import { useDispatch, useSelector } from 'react-redux';
-import '../SignInPage/SignInPage.css';
+import '../DisplayPageSignIn/DisplayPageSignIn.css';
 import bgImg from '../../images/bg.jpeg';
 import IconButtonUI from '../../Molecules/IconButton/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
 import { ASSESSEE_SIGN_ON, ASSOCIATE_SIGN_ON } from '../../actionType';
-import PopUpAssesseeSignON from '../../PopUpOption/PopUpAssesseeSignON';
-import PopUpAssociateSignON from '../../PopUpOption/PopUpAssociateSignON';
+import PopUpSignOnAssessee from '../../PopUpOption/PopUpSignOnAssessee';
+import PopUpSignOnAssociate from '../../PopUpOption/PopUpSignOnAssociate';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
-const SignOnPage = () => {
+const DisplayPageSignOn = () => {
   const style = {
     backgroundPosition: '50% 50%',
     backgroundImage: `url(${bgImg})`,
@@ -90,9 +90,9 @@ const SignOnPage = () => {
           </div>
         )}
       </div>
-      {popupMode === 'ASSESSEE_SIGN_ON' && <PopUpAssesseeSignON />}
-      {popupMode === 'ASSOCIATE_SIGN_ON' && <PopUpAssociateSignON />}
+      {popupMode === 'ASSESSEE_SIGN_ON' && <PopUpSignOnAssessee />}
+      {popupMode === 'ASSOCIATE_SIGN_ON' && <PopUpSignOnAssociate />}
     </div>
   );
 };
-export default SignOnPage;
+export default DisplayPageSignOn;

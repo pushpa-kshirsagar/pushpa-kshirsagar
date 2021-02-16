@@ -44,3 +44,13 @@ DisplayPane3.args = {
   headerOneBadgeTwo: 'information',
   headerOneBadgeThree: 'all'
 };
+export const DisplayPane5 = Template.bind({});
+DisplayPane5.args = {
+  className: '',
+  displayPane: 'five',
+  headerPanelColour: 'green',
+  headerOne: 'Career Search',
+  headerOneBadgeOne: '',
+  headerOneBadgeTwo: '',
+  headerOneBadgeThree: ''
+};
