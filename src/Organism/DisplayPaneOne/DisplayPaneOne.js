@@ -3,6 +3,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import Card from '../../Molecules/Card/Card';
+import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
+import CalculatorIcon from '@material-ui/icons/Keyboard';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Sections/Section';
@@ -12,8 +14,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   SET_POPUP_STATE,
   ASSESSEE_CARD_POPUP_OPTIONS,
-  ASSOCIATE_CARD_POPUP_OPTION
+  ASSOCIATE_CARD_POPUP_OPTION,
+  POPUP_OPEN
 } from '../../actionType';
+import PopUpIcon from '../../PopUpComponent/PopUpIcon';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -117,7 +121,7 @@ export const DisplayPaneOne = () => {
   ];
   const [selectedSection, setSelectedSection] = useState(leftPaneSections[0]);
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-
+  const {popupArr,setPopupArr}=useState([]);
   const dispatch = useDispatch();
 
   const openAssesseeCardPopup = (e) => {
@@ -141,9 +145,20 @@ export const DisplayPaneOne = () => {
       }
     });
   };
-  const openFooterIconPopup = (e) =>{
-    console.log(e.currentTarget.getAttribute('data-value'))
-  }
+  const openFooterIconPopup = (e) => {
+    console.log(e.currentTarget.getAttribute('data-value'));
+    let popupValueArray = [
+      { lable: 'basic', Icon: CalculatorIcon },
+      { lable: 'buisness', Icon: CalculatorIcon },
+      { lable: 'financial', Icon: CalculatorAdvancedIcon },
+      { lable: 'scientific', Icon: CalculatorAdvancedIcon }
+    ];
+    dispatch({
+      type: POPUP_OPEN,
+      payload: 'WORKSHEET'
+    });
+    setPopupArr(popupValueArray)
+  };
   return (
     <>
       <div>
@@ -179,6 +194,12 @@ export const DisplayPaneOne = () => {
         />
       </div>
       <FooterIconOne onClickEvent={openFooterIconPopup} />
+      <PopUpIcon
+        isActive={isPopUpValue === 'WORKSHEET'}
+        headerPanelColour="displayPaneLeft"
+        headerOne={'worksheet'}
+        dataArr = {popupArr}
+      />
       <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
     </>
   );
