@@ -17,7 +17,7 @@ const DashboardPage = () => {
   const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const dispatch = useDispatch();
   const mobilePanestate = isMobile && 'displayPaneTwo';
-  const isExamMode = false;
+  const isExamMode = true;
   console.log('IN DASH=', isPopUpValue, popupMode);
   useEffect(() => {
     console.log('IN useEffect ====>');

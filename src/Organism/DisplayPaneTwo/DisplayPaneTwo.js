@@ -3,7 +3,7 @@ import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import { useSelector, useDispatch } from 'react-redux';
 import './DisplayPaneTwo.css';
 import ReviewList from '../../Molecules/ReviewList/ReviewList';
-import FooterIcon from '../../Molecules/FooterIcon/FooterIcon';
+import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import { FILTERMODE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
 
@@ -415,7 +415,7 @@ export const DisplayPaneTwo = () => {
           {' '}
         </div>
       </div>
-      <FooterIcon
+      <FooterIconTwo
         FilterModeEnable={FilterModeEnable}
         FilterMode={FilterMode}
         onClick={onClickFooter}
