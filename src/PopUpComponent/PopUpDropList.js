@@ -9,7 +9,7 @@ import { SET_NEXT_POPUP } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import SelectField from '../Atoms/SelectField/SelectField';
 
-const PopUpSingleDropDown = (props) => {
+const PopUpDropList = (props) => {
   const dispatch = useDispatch();
   //props
   const {
@@ -90,7 +90,7 @@ const PopUpSingleDropDown = (props) => {
     </div>
   );
 };
-PopUpSingleDropDown.propTypes = {
+PopUpDropList.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -105,4 +105,4 @@ PopUpSingleDropDown.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopUpSingleDropDown;
+export default PopUpDropList;

@@ -4,7 +4,7 @@ import PopUpPicture from '../PopUpComponent/PopUpPicture';
 import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
 import PopUpNameDesc from '../PopUpComponent/PopUpNameDesc';
 import PopUpAddressEmail from '../PopUpComponent/PopUpAddressEmail';
-import PopUpSingleDropDown from '../PopUpComponent/PopUpSingleDropDown';
+import PopUpDropList from '../PopUpComponent/PopUpDropList';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
 import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
 import PopUpAddress from '../PopUpComponent/PopUpAddress';
@@ -94,7 +94,7 @@ const PopUpAssesseeSignON = () => {
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
       />
-      <PopUpSingleDropDown
+      <PopUpDropList
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
         tag={'gender'}
         listSelect={[
