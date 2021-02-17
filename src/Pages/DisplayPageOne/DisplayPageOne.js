@@ -13,12 +13,14 @@ import DisplayPaneFive from '../../Organism/DisplayPaneFive/DisplayPaneFive';
 
 const DisplayPageOne = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
-  const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { popupMode, isPopUpValue, gridColumnCountValue } = useSelector(
+    (state) => state.PopUpReducer
+  );
   const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const dispatch = useDispatch();
   const mobilePanestate = isMobile && 'displayPaneTwo';
   const isExamMode = false;
-  console.log('IN DASH=', isPopUpValue, popupMode);
+  // console.log('IN DASH=', gridColumnCountValue);
   useEffect(() => {
     console.log('IN useEffect ====>');
     dispatch({ type: GET_USER_SAGA });
@@ -27,7 +29,9 @@ const DisplayPageOne = () => {
   return (
     <>
       {userData && <IguruTopHeader userName={userData.name} userEmail={userData.email} />}
-      <GridUI isExamMode={isExamMode} />
+      {gridColumnCountValue !== 0 && (
+        <GridUI isExamMode={isExamMode} columnCount={gridColumnCountValue} />
+      )}
       <div className="main-container">
         {isMobile ? (
           <div className="display-pane-container">
@@ -64,14 +68,6 @@ const DisplayPageOne = () => {
           </>
         )}
       </div>
-
-      {/* <div
-        onClick={() => {
-          dispatch({ type: SIGNON, payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SIGNON' } });
-        }}
-      >
-        DisplayPageOne
-      </div> */}
     </>
   );
 };

@@ -180,8 +180,8 @@ const IconFiveWithFlexFiveColumn = (props) => {
 };
 const FooterIconTwo = (props) => {
   const { FilterModeEnable, primaryIcon, secondaryIcon, className = '' } = props;
-  console.log(primaryIcon);
-  console.log('primaryIcon');
+  // console.log(primaryIcon);
+  // console.log('primaryIcon');
   return (
     <div className={`middleFooterD  ${className}`}>
       <div className={'footerInner'}>

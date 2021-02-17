@@ -9,13 +9,34 @@ export const FooterIconOne = (props) => {
     <div className={'middleFooterD'}>
       <div style={{ flex: 1, textAlign: 'center' }}></div>
       <div style={{ flex: 1, textAlign: 'center' }}>
-        <IconButton Icon={Keyboard} className="" colour="displayPaneLeft" label="calculator" />
+        <IconButton
+          Icon={Keyboard}
+          className=""
+          colour="displayPaneLeft"
+          label="calculator"
+          dataValue="calculator"
+          onClick={onClickEvent}
+        />
       </div>
       <div style={{ flex: 1, textAlign: 'center' }}>
-        <IconButton Icon={Description} className="" colour="displayPaneLeft" label="manuscript" />
+        <IconButton
+          Icon={Description}
+          className=""
+          colour="displayPaneLeft"
+          label="manuscript"
+          dataValue="manuscript"
+          onClick={onClickEvent}
+        />
       </div>
       <div style={{ flex: 1, textAlign: 'center' }}>
-        <IconButton Icon={BusinessCenter} className="" colour="displayPaneLeft" label="toolkit" />
+        <IconButton
+          Icon={BusinessCenter}
+          className=""
+          colour="displayPaneLeft"
+          label="toolkit"
+          dataValue="toolkit"
+          onClick={onClickEvent}
+        />
       </div>
       <div style={{ flex: 1, textAlign: 'center' }}>
         <IconButton
