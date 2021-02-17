@@ -15,9 +15,7 @@ const initialState = {
   prevPopUpValue: '',
   popupMode: '',
   popupHeaderOne: '',
-  popupHeaderOneDuplicate: '',
   popupHeaderOneBadgeOne: '',
-  popupHeaderOneBadgeOneDuplicate: '',
   popupContentArrValue: '',
   isSecondaryPopup: false,
   gridColumnCountValue: 0
@@ -70,7 +68,6 @@ const PopUpReducer = (istate = initialState, action) => {
         isSecondaryPopup: action.payload.isSecondaryPopup,
         popupContentArrValue: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
-        popupHeaderOneDuplicate: action.payload.popupHeaderOneDuplicate,
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne
       };
     case SET_GRID_COLUMN_COUNT_VALUE:

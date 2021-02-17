@@ -388,12 +388,11 @@ const PopUpIcon = (props) => {
     popupHeaderOne,
     isSecondaryPopup,
     popupHeaderOneBadgeOne,
-    popupContentArrValue,
-    popupHeaderOneDuplicate
+    popupContentArrValue
   } = useSelector((state) => state.PopUpReducer);
   /*props*/
   const dispatch = useDispatch();
-  const { isActive = false, headerPanelColour = 'genericOne',BackHandlerEvent } = props;
+  const { isActive = false, headerPanelColour = 'genericOne', BackHandlerEvent } = props;
 
   const handleClick = () => {
     if (!isSecondaryPopup) {
