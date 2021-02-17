@@ -2,8 +2,11 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 import './GridUI.css';
 
-export const GridUI = ({ isExamMode = false }) => {
-  const list = [1, 2, 3, 4, 5, 6];
+export const GridUI = ({ isExamMode = false, columnCount }) => {
+  const list = [];
+  for (let i = 1; i <= columnCount; i++) {
+    list.push(i);
+  }
   const listPane = isMobile ? [1] : [1, 2, 3];
 
   return (

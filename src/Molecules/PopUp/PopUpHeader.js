@@ -67,7 +67,7 @@ const PopupHeader = (props) => {
                   onClick={onClick}
                 />
               ) : mode === 'error' || mode === 'cancel' ? null : (
-                <Previous className={'popupClose'} />
+                  <Previous className={'popupClose'} onClick={onClick} />
               )}
               {/* {headerPanelColour === 'genericOne' ? (
                 <Check className={'popupClose'} onClick={onClick} />

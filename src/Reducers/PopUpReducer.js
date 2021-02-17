@@ -5,7 +5,8 @@ import {
   ASSOCIATE_SIGN_ON,
   SET_NEXT_POPUP,
   PREVIOUS_POPUP,
-  SET_POPUP_STATE
+  SET_POPUP_STATE,
+  SET_GRID_COLUMN_COUNT_VALUE
 } from '../actionType';
 
 const initialState = {
@@ -14,8 +15,12 @@ const initialState = {
   prevPopUpValue: '',
   popupMode: '',
   popupHeaderOne: '',
+  popupHeaderOneDuplicate: '',
   popupHeaderOneBadgeOne: '',
-  popupContentArrValue: ''
+  popupHeaderOneBadgeOneDuplicate: '',
+  popupContentArrValue: '',
+  isSecondaryPopup: false,
+  gridColumnCountValue: 0
 };
 
 const PopUpReducer = (istate = initialState, action) => {
@@ -29,9 +34,11 @@ const PopUpReducer = (istate = initialState, action) => {
       };
     case POPUP_CLOSE:
       return {
+        ...istate,
         isPopUpOpen: false,
         isPopUpValue: '',
-        popupMode: ''
+        popupMode: '',
+        popupContentArrValue: ''
       };
     case ASSESSEE_SIGN_ON:
       return {
@@ -60,9 +67,16 @@ const PopUpReducer = (istate = initialState, action) => {
       return {
         ...istate,
         isPopUpValue: action.payload.isPopUpValue,
+        isSecondaryPopup: action.payload.isSecondaryPopup,
         popupContentArrValue: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
+        popupHeaderOneDuplicate: action.payload.popupHeaderOneDuplicate,
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne
+      };
+    case SET_GRID_COLUMN_COUNT_VALUE:
+      return {
+        ...istate,
+        gridColumnCountValue: action.payload
       };
 
     default:
