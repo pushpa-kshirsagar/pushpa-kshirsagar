@@ -24,6 +24,7 @@ import {
 } from '../../actionType';
 import PopUpIcon from '../../PopUpComponent/PopUpIcon';
 import TemplateIcon from '@material-ui/icons/BorderClear';
+import PopUpTextSheet from '../../PopUpComponent/PopUpTextSheet';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -404,6 +405,7 @@ export const DisplayPaneOne = () => {
         BackHandlerEvent={BackHandlerEvent}
       />
       <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
+      <PopUpTextSheet />
     </>
   );
 };
