@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isMobile } from 'react-device-detect';
 import { GET_USER_SAGA } from '../../actionType';
-import IguruTopHeader from '../../Molecules/IguruTopHeader/IguruTopHeader';
+import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
-import DisplayPaneOne from '../../Organism/DisplayPaneOne/DisplayPaneOne';
-import DisplayPaneThree from '../../Organism/DisplayPaneThree/DisplayPaneThree';
-import DisplayPaneTwo from '../../Organism/DisplayPaneTwo/DisplayPaneTwo';
-import GridUI from '../../Molecules/GridUI/GridUI';
-import DisplayPaneFour from '../../Organism/DisplayPaneFour/DisplayPaneFour';
-import DisplayPaneFive from '../../Organism/DisplayPaneFive/DisplayPaneFive';
+import DisplayPaneOne from '../../Organisms/DisplayPaneOne/DisplayPaneOne';
+import DisplayPaneThree from '../../Organisms/DisplayPaneThree/DisplayPaneThree';
+import DisplayPaneTwo from '../../Organisms/DisplayPaneTwo/DisplayPaneTwo';
+import GridColumn from '../../Molecules/GridColumn/GridColumn';
+import DisplayPaneFour from '../../Organisms/DisplayPaneFour/DisplayPaneFour';
+import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 
 const DisplayPageOne = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
@@ -28,9 +28,9 @@ const DisplayPageOne = () => {
 
   return (
     <>
-      {userData && <IguruTopHeader userName={userData.name} userEmail={userData.email} />}
+      {userData && <HeaderZero userName={userData.name} userEmail={userData.email} />}
       {gridColumnCountValue !== 0 && (
-        <GridUI isExamMode={isExamMode} columnCount={gridColumnCountValue} />
+        <GridColumn isExamMode={isExamMode} columnCount={gridColumnCountValue} />
       )}
       <div className="main-container">
         {isMobile ? (

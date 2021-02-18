@@ -8,9 +8,9 @@ import IconsButton from '../IconButton/IconButton';
 import iGuruLogo from '../../images/iglogo1.png';
 // import prafulta from '../../images/prafulta.jpg';
 // import insightGURULogo from '../../images/prafulta.jpg';
-import './IguruTopHeader.css';
+import './HeaderZero.css';
 
-export const IguruTopHeader = (props) => {
+export const HeaderZero = (props) => {
   // const insightGURULogo = require('../../images/prafulta.jpg');
   const {
     userName = 'Joachim Carvalho',
@@ -165,10 +165,10 @@ export const IguruTopHeader = (props) => {
   );
 };
 
-IguruTopHeader.propTypes = {
+HeaderZero.propTypes = {
   userName: PropTypes.string,
   userEmail: PropTypes.string,
   isImageActive: PropTypes.bool
 };
 
-export default IguruTopHeader;
+export default HeaderZero;

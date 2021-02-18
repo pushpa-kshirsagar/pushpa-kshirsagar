@@ -5,7 +5,7 @@ import ArrowRight from '@material-ui/icons/ChevronRight';
 import Card from '../../Molecules/Card/Card';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneOne.css';
-import Sections from '../../Molecules/Sections/Section';
+import Sections from '../../Molecules/Section/Section';
 import FooterIconOne from '../../Molecules/FooterIconOne/FooterIconOne';
 import PopUpForCommonOnClick from '../../PopUpOption/PopUpForCommonOnClick';
 import { useDispatch, useSelector } from 'react-redux';

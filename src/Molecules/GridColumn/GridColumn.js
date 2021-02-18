@@ -1,8 +1,8 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
-import './GridUI.css';
+import './GridColumn.css';
 
-export const GridUI = ({ isExamMode = false, columnCount }) => {
+export const GridColumn = ({ isExamMode = false, columnCount }) => {
   const list = [];
   for (let i = 1; i <= columnCount; i++) {
     list.push(i);
@@ -67,4 +67,4 @@ export const GridUI = ({ isExamMode = false, columnCount }) => {
   );
 };
 
-export default GridUI;
+export default GridColumn;

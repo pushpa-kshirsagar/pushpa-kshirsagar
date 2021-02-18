@@ -13,7 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Fingerprint from '@material-ui/icons/Fingerprint';
 import BasicCard from '../../Molecules/BasicCard/BasicCard';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
-import Sections from '../../Molecules/Sections/Section';
+import Sections from '../../Molecules/Section/Section';
 import AllocationAccordian from '../../Molecules/Accordian/AllocationAccordian';
 import { useDispatch, useSelector } from 'react-redux';
 import { NAVIGATOR_MODE } from '../../actionType';
