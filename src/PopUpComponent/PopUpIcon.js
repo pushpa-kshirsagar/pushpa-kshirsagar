@@ -9,10 +9,10 @@ import PropTypes from 'prop-types';
 import IconButton from '../Molecules/IconButton/IconButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { Clear } from '@material-ui/icons';
-import { POPUP_CLOSE, SET_GRID_COLUMN_COUNT_VALUE, SET_POPUP_STATE } from '../actionType';
+import { POPUP_CLOSE, SET_GRID_COLUMN_COUNT_VALUE } from '../actionType';
 
 const PopUpIconLengthOne = (props) => {
-  const { popupContentArrValue } = props;
+  const { popupContentArrValue, onClickEvent } = props;
   return (
     <div className={'popup-icon-mbPager'}>
       <IconButton
@@ -20,14 +20,14 @@ const PopUpIconLengthOne = (props) => {
         labelTwo={popupContentArrValue[0].labelTwo && popupContentArrValue[0].labelTwo}
         Icon={popupContentArrValue[0].Icon}
         dataValue={popupContentArrValue[0].dataValue}
-        onClick={popupContentArrValue[0].onClickEvent && popupContentArrValue[0].onClickEvent}
+        onClick={onClickEvent && onClickEvent}
         colour={'genericOne'}
       />
     </div>
   );
 };
 const PopUpIconLengthTwo = (props) => {
-  const { popupContentArrValue } = props;
+  const { popupContentArrValue, onClickEvent } = props;
   return (
     <div className={'popup-icon-mbPager'}>
       <div className={'iconBoxFooterPopup'}></div>
@@ -37,7 +37,7 @@ const PopUpIconLengthTwo = (props) => {
           labelTwo={popupContentArrValue[0].labelTwo && popupContentArrValue[0].labelTwo}
           Icon={popupContentArrValue[0].Icon}
           dataValue={popupContentArrValue[0].dataValue}
-          onClick={popupContentArrValue[0].onClickEvent && popupContentArrValue[0].onClickEvent}
+          onClick={onClickEvent && onClickEvent}
           colour={'genericOne'}
         />
       </div>
@@ -48,7 +48,7 @@ const PopUpIconLengthTwo = (props) => {
           labelTwo={popupContentArrValue[1].labelTwo && popupContentArrValue[1].labelTwo}
           Icon={popupContentArrValue[1].Icon}
           dataValue={popupContentArrValue[1].dataValue}
-          onClick={popupContentArrValue[1].onClickEvent && popupContentArrValue[1].onClickEvent}
+          onClick={onClickEvent && onClickEvent}
           colour={'genericOne'}
         />
       </div>
@@ -58,7 +58,7 @@ const PopUpIconLengthTwo = (props) => {
 };
 
 const PopUpIconLengthFour = (props) => {
-  const { popupContentArrValue } = props;
+  const { popupContentArrValue, onClickEvent } = props;
   return (
     <Fragment>
       <div className={'popup-icon-mbPager'}>
@@ -69,7 +69,7 @@ const PopUpIconLengthFour = (props) => {
             labelTwo={popupContentArrValue[0].labelTwo && popupContentArrValue[0].labelTwo}
             Icon={popupContentArrValue[0].Icon}
             dataValue={popupContentArrValue[0].dataValue}
-            onClick={popupContentArrValue[0].onClickEvent && popupContentArrValue[0].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -80,7 +80,7 @@ const PopUpIconLengthFour = (props) => {
             labelTwo={popupContentArrValue[1].labelTwo && popupContentArrValue[1].labelTwo}
             Icon={popupContentArrValue[1].Icon}
             dataValue={popupContentArrValue[1].dataValue}
-            onClick={popupContentArrValue[1].onClickEvent && popupContentArrValue[1].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -94,7 +94,7 @@ const PopUpIconLengthFour = (props) => {
             labelTwo={popupContentArrValue[2].labelTwo && popupContentArrValue[2].labelTwo}
             Icon={popupContentArrValue[2].Icon}
             dataValue={popupContentArrValue[2].dataValue}
-            onClick={popupContentArrValue[2].onClickEvent && popupContentArrValue[2].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -105,7 +105,7 @@ const PopUpIconLengthFour = (props) => {
             labelTwo={popupContentArrValue[3].labelTwo && popupContentArrValue[3].labelTwo}
             Icon={popupContentArrValue[3].Icon}
             dataValue={popupContentArrValue[3].dataValue}
-            onClick={popupContentArrValue[3].onClickEvent && popupContentArrValue[3].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -115,7 +115,7 @@ const PopUpIconLengthFour = (props) => {
   );
 };
 const PopUpIconLengthSix = (props) => {
-  const { popupContentArrValue } = props;
+  const { popupContentArrValue, onClickEvent } = props;
   const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   return (
@@ -140,7 +140,7 @@ const PopUpIconLengthSix = (props) => {
                       payload: 0
                     });
                   }
-                : popupContentArrValue[0].onClickEvent
+                : onClickEvent
             }
             colour={'genericOne'}
           />
@@ -164,7 +164,7 @@ const PopUpIconLengthSix = (props) => {
                       payload: 0
                     });
                   }
-                : popupContentArrValue[1].onClickEvent
+                : onClickEvent
             }
             colour={'genericOne'}
           />
@@ -191,7 +191,7 @@ const PopUpIconLengthSix = (props) => {
                       payload: 0
                     });
                   }
-                : popupContentArrValue[2].onClickEvent
+                : onClickEvent
             }
             colour={'genericOne'}
           />
@@ -215,7 +215,7 @@ const PopUpIconLengthSix = (props) => {
                       payload: 0
                     });
                   }
-                : popupContentArrValue[3].onClickEvent
+                : onClickEvent
             }
             colour={'genericOne'}
           />
@@ -242,7 +242,7 @@ const PopUpIconLengthSix = (props) => {
                       payload: 0
                     });
                   }
-                : popupContentArrValue[4].onClickEvent
+                : onClickEvent
             }
             colour={'genericOne'}
           />
@@ -266,7 +266,7 @@ const PopUpIconLengthSix = (props) => {
                       payload: 0
                     });
                   }
-                : popupContentArrValue[5].onClickEvent
+                : onClickEvent
             }
             colour={'genericOne'}
           />
@@ -277,7 +277,7 @@ const PopUpIconLengthSix = (props) => {
   );
 };
 const PopUpIconLengthEight = (props) => {
-  const { popupContentArrValue } = props;
+  const { popupContentArrValue, onClickEvent } = props;
   return (
     <Fragment>
       <div className={'popup-icon-mbPager'}>
@@ -288,7 +288,7 @@ const PopUpIconLengthEight = (props) => {
             labelTwo={popupContentArrValue[0].labelTwo && popupContentArrValue[0].labelTwo}
             Icon={popupContentArrValue[0].Icon}
             dataValue={popupContentArrValue[0].dataValue}
-            onClick={popupContentArrValue[0].onClickEvent && popupContentArrValue[0].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -299,7 +299,7 @@ const PopUpIconLengthEight = (props) => {
             labelTwo={popupContentArrValue[1].labelTwo && popupContentArrValue[1].labelTwo}
             Icon={popupContentArrValue[1].Icon}
             dataValue={popupContentArrValue[1].dataValue}
-            onClick={popupContentArrValue[1].onClickEvent && popupContentArrValue[1].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -313,7 +313,7 @@ const PopUpIconLengthEight = (props) => {
             labelTwo={popupContentArrValue[2].labelTwo && popupContentArrValue[2].labelTwo}
             Icon={popupContentArrValue[2].Icon}
             dataValue={popupContentArrValue[2].dataValue}
-            onClick={popupContentArrValue[2].onClickEvent && popupContentArrValue[2].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -324,7 +324,7 @@ const PopUpIconLengthEight = (props) => {
             labelTwo={popupContentArrValue[3].labelTwo && popupContentArrValue[3].labelTwo}
             Icon={popupContentArrValue[3].Icon}
             dataValue={popupContentArrValue[3].dataValue}
-            onClick={popupContentArrValue[3].onClickEvent && popupContentArrValue[3].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -338,7 +338,7 @@ const PopUpIconLengthEight = (props) => {
             labelTwo={popupContentArrValue[4].labelTwo && popupContentArrValue[4].labelTwo}
             Icon={popupContentArrValue[4].Icon}
             dataValue={popupContentArrValue[4].dataValue}
-            onClick={popupContentArrValue[4].onClickEvent && popupContentArrValue[4].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -349,7 +349,7 @@ const PopUpIconLengthEight = (props) => {
             labelTwo={popupContentArrValue[5].labelTwo && popupContentArrValue[5].labelTwo}
             Icon={popupContentArrValue[5].Icon}
             dataValue={popupContentArrValue[5].dataValue}
-            onClick={popupContentArrValue[5].onClickEvent && popupContentArrValue[5].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -363,7 +363,7 @@ const PopUpIconLengthEight = (props) => {
             labelTwo={popupContentArrValue[6].labelTwo && popupContentArrValue[6].labelTwo}
             Icon={popupContentArrValue[6].Icon}
             dataValue={popupContentArrValue[6].dataValue}
-            onClick={popupContentArrValue[6].onClickEvent && popupContentArrValue[6].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -374,7 +374,7 @@ const PopUpIconLengthEight = (props) => {
             labelTwo={popupContentArrValue[7].labelTwo && popupContentArrValue[7].labelTwo}
             Icon={popupContentArrValue[7].Icon}
             dataValue={popupContentArrValue[7].dataValue}
-            onClick={popupContentArrValue[7].onClickEvent && popupContentArrValue[7].onClickEvent}
+            onClick={onClickEvent && onClickEvent}
             colour={'genericOne'}
           />
         </div>
@@ -386,17 +386,21 @@ const PopUpIconLengthEight = (props) => {
 const PopUpIcon = (props) => {
   const {
     popupHeaderOne,
-    isSecondaryPopup,
+    popupOpenType,
     popupHeaderOneBadgeOne,
-    popupContentArrValue,
-    popupHeaderOneDuplicate
+    popupContentArrValue
   } = useSelector((state) => state.PopUpReducer);
   /*props*/
   const dispatch = useDispatch();
-  const { isActive = false, headerPanelColour = 'genericOne',BackHandlerEvent } = props;
+  const {
+    isActive = false,
+    headerPanelColour = 'genericOne',
+    BackHandlerEvent,
+    onClickEvent
+  } = props;
 
   const handleClick = () => {
-    if (!isSecondaryPopup) {
+    if (popupOpenType === 'primary') {
       dispatch({ type: POPUP_CLOSE });
     } else {
       BackHandlerEvent();
@@ -406,7 +410,7 @@ const PopUpIcon = (props) => {
     <div>
       <Popup isActive={isActive}>
         <PopupHeader
-          headerPanelColour={isSecondaryPopup ? headerPanelColour + 'Secondary' : headerPanelColour}
+          headerPanelColour={headerPanelColour + popupOpenType}
           headerOne={popupHeaderOne}
           headerOneBadgeOne={popupHeaderOneBadgeOne}
           onClick={handleClick}
@@ -418,15 +422,30 @@ const PopUpIcon = (props) => {
           <div id="dialog-description">
             <div className="true">
               {popupContentArrValue && popupContentArrValue.length === 1 ? (
-                <PopUpIconLengthOne popupContentArrValue={popupContentArrValue} />
+                <PopUpIconLengthOne
+                  popupContentArrValue={popupContentArrValue}
+                  onClickEvent={onClickEvent}
+                />
               ) : popupContentArrValue && popupContentArrValue.length === 2 ? (
-                <PopUpIconLengthTwo popupContentArrValue={popupContentArrValue} />
+                <PopUpIconLengthTwo
+                  popupContentArrValue={popupContentArrValue}
+                  onClickEvent={onClickEvent}
+                />
               ) : popupContentArrValue && popupContentArrValue.length === 4 ? (
-                <PopUpIconLengthFour popupContentArrValue={popupContentArrValue} />
+                <PopUpIconLengthFour
+                  popupContentArrValue={popupContentArrValue}
+                  onClickEvent={onClickEvent}
+                />
               ) : popupContentArrValue && popupContentArrValue.length === 6 ? (
-                <PopUpIconLengthSix popupContentArrValue={popupContentArrValue} />
+                <PopUpIconLengthSix
+                  popupContentArrValue={popupContentArrValue}
+                  onClickEvent={onClickEvent}
+                />
               ) : popupContentArrValue && popupContentArrValue.length === 8 ? (
-                <PopUpIconLengthEight popupContentArrValue={popupContentArrValue} />
+                <PopUpIconLengthEight
+                  popupContentArrValue={popupContentArrValue}
+                  onClickEvent={onClickEvent}
+                />
               ) : null}
             </div>
           </div>
