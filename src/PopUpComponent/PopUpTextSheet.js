@@ -6,17 +6,19 @@ import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { Check, Clear } from '@material-ui/icons';
 import { DialogTitle, IconButton, Paper } from '@material-ui/core';
+import { CLEAR_ASSESSEE_INFO, POPUP_CLOSE } from '../actionType';
+import { useDispatch } from 'react-redux';
 
 const PopUpTextSheet = (props) => {
   // const { popupMode } = useSelector((state) => state.PopUpReducer);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const {
-    // isActive = false,
+    isActive = false,
     headerPanelColour = 'displayPaneLeft',
     headerOne = 'textsheet'
   } = props;
 
-  const [isPopUpOpen, setIsPopUpOpen] = useState(true);
+  // const [isPopUpOpen, setIsPopUpOpen] = useState(true);
   const [innerContent, setInnerContent] = useState('');
   const onChangeTextSheet = (evt) => {
     setInnerContent(evt.editor.getData());
@@ -25,7 +27,7 @@ const PopUpTextSheet = (props) => {
 
   return (
     <div>
-      <PopUp isActive={isPopUpOpen}>
+      <PopUp isActive={isActive}>
         <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
           <Paper
             style={{
@@ -61,7 +63,8 @@ const PopUpTextSheet = (props) => {
                 <IconButton
                   onClick={() => {
                     console.log('ON CLOSE');
-                    setIsPopUpOpen(false);
+                    dispatch({ type: CLEAR_ASSESSEE_INFO });
+                    dispatch({ type: POPUP_CLOSE });
                   }}
                   className="MuiIconButton-root-1602"
                 >

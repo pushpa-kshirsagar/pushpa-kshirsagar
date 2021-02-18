@@ -176,7 +176,7 @@ export const DisplayPaneOne = () => {
       <FooterIconOne />
 
       <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
-      <PopUpTextSheet />
+      <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
     </>
   );
 };

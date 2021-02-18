@@ -123,6 +123,19 @@ export const FooterIconOne = (props) => {
         }
       });
     }
+    if (clickedValue === 'textsheet') {
+      console.log("IN SIDE TEXT SHEET++++++++++++++");
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'textsheet',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'TEXTSHEET_POPUP',
+          popupOpenType: 'secondary',
+          popupContentArrValue: []
+        }
+      });
+    }
     if (
       clickedValue === 'oneColumn' ||
       clickedValue === 'twoColumn' ||
