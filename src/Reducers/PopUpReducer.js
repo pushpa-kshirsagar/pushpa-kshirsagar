@@ -6,7 +6,8 @@ import {
   SET_NEXT_POPUP,
   PREVIOUS_POPUP,
   SET_POPUP_STATE,
-  SET_GRID_COLUMN_COUNT_VALUE
+  SET_GRID_COLUMN_COUNT_VALUE,
+  SET_SECONDARY_OPTION_VALUE
 } from '../actionType';
 
 const initialState = {
@@ -17,8 +18,9 @@ const initialState = {
   popupHeaderOne: '',
   popupHeaderOneBadgeOne: '',
   popupContentArrValue: '',
-  isSecondaryPopup: false,
-  gridColumnCountValue: 0
+  popupOpenType: '',
+  gridColumnCountValue: 0,
+  secondaryOptionCheckValue: ''
 };
 
 const PopUpReducer = (istate = initialState, action) => {
@@ -65,15 +67,21 @@ const PopUpReducer = (istate = initialState, action) => {
       return {
         ...istate,
         isPopUpValue: action.payload.isPopUpValue,
-        isSecondaryPopup: action.payload.isSecondaryPopup,
+        popupOpenType: action.payload.popupOpenType,
         popupContentArrValue: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
-        popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne
+        popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne,
+        secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
       return {
         ...istate,
         gridColumnCountValue: action.payload
+      };
+    case SET_SECONDARY_OPTION_VALUE:
+      return {
+        ...istate,
+        secondaryOptionCheckValue: action.payload
       };
 
     default:

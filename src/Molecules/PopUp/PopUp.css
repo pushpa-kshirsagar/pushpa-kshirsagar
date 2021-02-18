@@ -78,18 +78,51 @@
   padding: 5px;
   display: flex;
 }
-.titleSolid-displayPaneLeftSecondary {
+.titleSolid-displayPaneLefttertiary {
+  display: flex;
+  height: 40px;
+  background-color: #E5F4D6 !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+.titleSolid-displayPaneLeftsecondary {
   display: flex;
   height: 40px;
   background-color: #B1DE84 !important;
   color: rgba(0, 0, 0, 0.87) !important;
 }
-.titleSolid-displayPaneLeft {
+.titleSolid-displayPaneLeftprimary {
+  display: flex;
+  height: 40px;
+  background-color: #7dc832 !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}.titleSolid-displayPaneLeft {
   display: flex;
   height: 40px;
   background-color: #7dc832 !important;
   color: rgba(0, 0, 0, 0.87) !important;
 }
+.tick{
+  position:absolute !important;
+  font-size:2rem;
+  right:17px;
+  color:#0000008a !important;
+  top:0;
+  bottom:0;
+  z-index:99;
+  height:30px;
+  line-height:30px;
+}
+.tick button{
+  height:100%;
+  color:#0000008a;
+}
+.selectionIcon{
+  font-size:1.2rem !important;
+  position:relative;
+  right:-2px;
+  color:#0000008a;
+}
+
 .titleSolid-displayPaneRight {
   display: flex;
   height: 40px;

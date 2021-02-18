@@ -3,27 +3,14 @@ import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import Card from '../../Molecules/Card/Card';
-import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
-import CalculatorIcon from '@material-ui/icons/Keyboard';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Sections/Section';
 import FooterIconOne from '../../Molecules/FooterIconOne/FooterIconOne';
 import PopUpForCommonOnClick from '../../PopUpOption/PopUpForCommonOnClick';
 import { useDispatch, useSelector } from 'react-redux';
-import Worksheet from '@material-ui/icons/InsertDriveFile';
-import GaugeIcon from '@material-ui/icons/Dashboard';
-import ManuscriptIcon from '@material-ui/icons/Description';
-
-import {
-  SET_POPUP_STATE,
-  ASSESSEE_CARD_POPUP_OPTIONS,
-  ASSOCIATE_CARD_POPUP_OPTION,
-  POPUP_OPEN,
-  SET_GRID_COLUMN_COUNT_VALUE
-} from '../../actionType';
-import PopUpIcon from '../../PopUpComponent/PopUpIcon';
-import TemplateIcon from '@material-ui/icons/BorderClear';
+import { SET_POPUP_STATE } from '../../actionType';
+import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -145,6 +132,7 @@ export const DisplayPaneOne = () => {
         popupHeaderOne: popupHeaderOne,
         popupHeaderOneBadgeOne: '',
         isPopUpValue: 'CARD_POPUP',
+        popupOpenType: 'primary',
         popupContentArrValue: popupContentArrValue
       }
     });
