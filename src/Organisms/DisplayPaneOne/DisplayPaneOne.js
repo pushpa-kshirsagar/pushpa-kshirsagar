@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpComponent/PopUpTextSheet';
+import PopUpPasswordRevise from '../../PopUpComponent/PopUpPasswordRevise';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -177,6 +178,7 @@ export const DisplayPaneOne = () => {
 
       <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
       <PopUpTextSheet />
+      <PopUpPasswordRevise isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
     </>
   );
 };

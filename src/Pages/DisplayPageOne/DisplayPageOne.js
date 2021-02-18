@@ -13,9 +13,7 @@ import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 
 const DisplayPageOne = () => {
   const { userData = null } = useSelector((state) => state.userReducer);
-  const { popupMode, isPopUpValue, gridColumnCountValue } = useSelector(
-    (state) => state.PopUpReducer
-  );
+  const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
   const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const dispatch = useDispatch();
   const mobilePanestate = isMobile && 'displayPaneTwo';

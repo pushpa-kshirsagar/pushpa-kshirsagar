@@ -354,3 +354,15 @@ export const ALIGNMENT_POPUP_ARR = [
     Icon: TemplateIcon
   }
 ];
+//review information popup option
+
+export const REVIEW_REVISE_POPUP = [
+  { data: 'information', dataValue: 'information', optionClass: 'optionPrimary', divider: 'dark' },
+  { data: 'all', dataValue: 'all', optionClass: 'optionSecondary' },
+  { data: 'key', dataValue: 'key', optionClass: 'optionSecondary' }
+];
+//
+export const SIGN_OUT_POPUP = [
+  { data: 'no', dataValue: 'no', optionClass: 'optionPrimary' },
+  { data: 'yes', dataValue: 'yes', optionClass: 'optionPrimary' }
+];
