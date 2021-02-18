@@ -61,7 +61,7 @@ const PopUpTextSheet = (props) => {
                 <IconButton
                   onClick={() => {
                     console.log('ON CLOSE');
-                    setIsPopUpOpen(false)
+                    setIsPopUpOpen(false);
                   }}
                   className="MuiIconButton-root-1602"
                 >
@@ -71,9 +71,7 @@ const PopUpTextSheet = (props) => {
             </div>
           </Paper>
         </DialogTitle>
-        <DialogContent
-          className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
-        >
+        <DialogContent className={['textsheetPopupContent', 'fixed10PadDim'].join(' ')}>
           <ReactCKEditor
             activeClass="editor"
             content={innerContent}

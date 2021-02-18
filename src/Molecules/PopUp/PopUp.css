@@ -62,6 +62,13 @@
   overflow: overlay;
   overflow: auto;
 }
+.textsheetPopupContent {
+  padding: 0px 0px !important;
+  text-align: center;
+  max-height: 450px;
+  overflow: overlay;
+  overflow: auto;
+}
 .popupHeaderTitle {
   padding: 0 !important;
   text-align: right;
@@ -329,6 +336,9 @@
 
 @media (max-width: 360px) {
   .popupContent {
+    width: calc(100vw - 64px);
+  }
+   .textsheetPopupContent {
     width: calc(100vw - 64px);
   }
 }
