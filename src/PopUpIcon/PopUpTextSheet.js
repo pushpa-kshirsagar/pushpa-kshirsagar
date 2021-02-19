@@ -23,7 +23,6 @@ const PopUpTextSheet = (props) => {
   const onChangeTextSheet = (evt) => {
     setInnerContent(evt.editor.getData());
   };
-  console.log('TEXT SHEET+++++', innerContent);
 
   return (
     <div>

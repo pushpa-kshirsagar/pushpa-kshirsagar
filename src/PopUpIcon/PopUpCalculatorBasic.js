@@ -1,40 +1,22 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
-import { InputLabel, FormControl, Checkbox } from '@material-ui/core';
-import InputFeild from '../Atoms/InputField/InputField';
-import SelectField from '../Atoms/SelectField/SelectField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpCalculatorBasic = (props) => {
-  const { popupMode } = useSelector((state) => state.PopUpReducer);
-  const dispatch = useDispatch();
   const {
     isActive,
-    primaryheader,
-    inputHeader,
     headerPanelColour,
     headerOne = 'calculator',
-    headerOneBadgeOne = 'basic',
-    nextPopUpValue,
-    typeOfSetObject,
-    basicInfo
+    headerOneBadgeOne = 'basic'
   } = props;
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
-  };
-  const handleClick = () => {
-    /*according to creation mode popup sequence will change*/
-    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
-  };
+
+  const handleClick = () => {};
   return (
     <div>
-      <Popup isActive={true}>
+      <Popup isActive={isActive}>
         <PopupHeader
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}

@@ -9,6 +9,8 @@ import {
   SET_GRID_COLUMN_COUNT_VALUE,
   SET_SECONDARY_OPTION_VALUE
 } from '../actionType';
+import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
+import CalculatorIcon from '@material-ui/icons/Keyboard';
 
 const initialState = {
   isPopUpOpen: false,
@@ -17,7 +19,13 @@ const initialState = {
   popupMode: '',
   popupHeaderOne: '',
   popupHeaderOneBadgeOne: '',
-  popupContentArrValue: '',
+  popupHeaderOneBadgeTwo: '',
+  popupContentArrValue: [
+    { lable: 'basic', dataValue: 'basic', Icon: CalculatorIcon },
+    { lable: 'buisness', dataValue: 'buisness', Icon: CalculatorIcon },
+    { lable: 'financial', dataValue: 'financial', Icon: CalculatorAdvancedIcon },
+    { lable: 'scientific', dataValue: 'scientific', Icon: CalculatorAdvancedIcon }
+  ],
   popupOpenType: '',
   gridColumnCountValue: 0,
   secondaryOptionCheckValue: ''
@@ -71,6 +79,7 @@ const PopUpReducer = (istate = initialState, action) => {
         popupContentArrValue: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne,
+        popupHeaderOneBadgeTwo: action.payload.popupHeaderOneBadgeTwo,
         secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue
       };
     case SET_GRID_COLUMN_COUNT_VALUE:

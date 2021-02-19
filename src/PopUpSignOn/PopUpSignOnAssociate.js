@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PopUpPicture from '../PopUpComponent/PopUpPicture';
-import PopUpInputText from '../PopUpComponent/PopUpInputText';
-import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
-import PopUpAddress from '../PopUpComponent/PopUpAddress';
-import PopUpReviewList from '../PopUpComponent/PopUpReviewList';
-import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
-import PopUpAddressEmail from '../PopUpComponent/PopUpAddressEmail';
-import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
-import PopUpDropList from '../PopUpComponent/PopUpDropList';
+import PopUpPicture from '../PopUpInformation/PopUpPicture';
+import PopUpTextField from '../PopUpInformation/PopUpTextField';
+import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
+import PopUpAddress from '../PopUpInformation/PopUpAddress';
+import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
+import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
+import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
+import PopUpConfirmation from '../PopUpInformation/PopUpConfirmation';
+import PopUpDropList from '../PopUpInformation/PopUpDropList';
 import {
   SET_NEXT_POPUP,
   CLEAR_ASSOCIATE_INFO,
@@ -47,7 +47,7 @@ const PopUpSignOnAssociate = () => {
   };
   return (
     <div>
-      <PopUpInputText
+      <PopUpTextField
         isActive={isPopUpValue === 'NAMEALIASPOPUP'}
         label={'name'}
         headerPanelColour={'genericOne'}
@@ -58,7 +58,7 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.basicInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
       />
-      <PopUpInputText
+      <PopUpTextField
         isActive={isPopUpValue === 'DESCRIPTIONPOPUP'}
         label={'description'}
         headerPanelColour={'genericOne'}
@@ -127,7 +127,7 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.adminBasicInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_BASIC_INFO}
       />
-      <PopUpInputText
+      <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'alias'}
         headerPanelColour={'genericOne'}

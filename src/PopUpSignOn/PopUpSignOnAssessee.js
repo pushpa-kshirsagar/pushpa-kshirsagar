@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PopUpPicture from '../PopUpComponent/PopUpPicture';
-import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
-import PopUpInputText from '../PopUpComponent/PopUpInputText';
-import PopUpAddressEmail from '../PopUpComponent/PopUpAddressEmail';
-import PopUpDropList from '../PopUpComponent/PopUpDropList';
-import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
-import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
-import PopUpAddress from '../PopUpComponent/PopUpAddress';
+import PopUpPicture from '../PopUpInformation/PopUpPicture';
+import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
+import PopUpTextField from '../PopUpInformation/PopUpTextField';
+import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
+import PopUpDropList from '../PopUpInformation/PopUpDropList';
+import PopUpConfirmation from '../PopUpInformation/PopUpConfirmation';
+import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
+import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import {
   CLEAR_ASSESSEE_INFO,
   POPUP_CLOSE,
@@ -42,7 +42,7 @@ const PopUpSignOnAssessee = () => {
         nextPopUpValue={'ALIASPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
-      <PopUpInputText
+      <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'alias'}
         headerPanelColour={'genericOne'}

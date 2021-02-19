@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 import PropTypes from 'prop-types';
 
-const PopUpInputText = (props) => {
+const PopUpTextField = (props) => {
   const dispatch = useDispatch();
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const {
@@ -108,7 +108,7 @@ const PopUpInputText = (props) => {
   );
 };
 
-PopUpInputText.propTypes = {
+PopUpTextField.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -123,4 +123,4 @@ PopUpInputText.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopUpInputText;
+export default PopUpTextField;

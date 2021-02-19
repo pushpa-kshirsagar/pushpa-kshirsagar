@@ -123,7 +123,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
     optionClass: 'optionPrimary'
   }
 ];
-export const POPUP_OPTIONS = [
+export const REVIEW_POPUP_OPTIONS = [
   {
     data: 'distinct',
     dataValue: 'distinct',
@@ -243,12 +243,12 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
   },
   {
     data: 'review',
-    dataValue: 'review',
+    dataValue: 'associatereview',
     optionClass: 'optionPrimary'
   },
   {
     data: 'revise',
-    dataValue: 'revise',
+    dataValue: 'associaterevise',
     optionClass: 'optionPrimary',
     divider: 'dark'
   },
@@ -365,4 +365,40 @@ export const REVIEW_REVISE_POPUP = [
 export const SIGN_OUT_POPUP = [
   { data: 'no', dataValue: 'no', optionClass: 'optionPrimary' },
   { data: 'yes', dataValue: 'yes', optionClass: 'optionPrimary' }
+];
+export const MODULE_POPUP_OPTION = [
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary' },
+  { data: 'review', dataValue: 'review', optionClass: 'optionPrimary', divider: 'dark' },
+  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
+  { data: 'reports', dataValue: 'reports', optionClass: 'optionPrimary' }
+];
+export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary' },
+  { data: 'review', dataValue: 'review', optionClass: 'optionPrimary', divider: 'dark' },
+  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
+  { data: 'reports', dataValue: 'reports', optionClass: 'optionPrimary', divider: 'dark' },
+  { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary' },
+  { data: 'assessments', dataValue: 'assessments', optionClass: 'optionSecondary' },
+  { data: 'assignments', dataValue: 'assignments', optionClass: 'optionSecondary' },
+  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary' }
+];
+export const EXCHANGE_POPUP_OPTION = [
+  { data: 'download', dataValue: 'download', optionClass: 'optionPrimary' },
+  { data: 'upload', dataValue: 'upload', optionClass: 'optionPrimary', divider: 'dark' },
+  { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary' },
+  { data: 'assessments', dataValue: 'assessments', optionClass: 'optionSecondary' },
+  { data: 'assignments', dataValue: 'assignments', optionClass: 'optionSecondary' },
+  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary' }
+];
+export const MARKETPLACE_POPUP_OPTION = [
+  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
+  { data: 'reports', dataValue: 'reports', optionClass: 'optionPrimary', divider: 'dark' },
+  { data: 'review', dataValue: 'marketplacereview', optionClass: 'optionPrimary' }
+];
+export const REVIEW_DISTINCT_POPUP_OPTION = [
+  { data: 'distinct', dataValue: 'distinct', optionClass: 'optionPrimary', divider: 'dark'  },
+  { data: 'active', dataValue: 'active', optionClass: 'optionSecondary' },
+  { data: 'inactive', dataValue: 'inactive', optionClass: 'optionSecondary', divider: 'light' },
+  { data: 'all', dataValue: 'all', optionClass: 'optionSecondary', divider: 'loght' },
+  { data: 'archived', dataValue: 'archived', optionClass: 'optionSecondary' }
 ];

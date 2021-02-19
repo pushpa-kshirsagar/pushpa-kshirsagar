@@ -396,6 +396,7 @@ const PopUpIcon = (props) => {
     isActive = false,
     headerPanelColour = 'genericOne',
     BackHandlerEvent,
+    headerOne,
     onClickEvent
   } = props;
 
@@ -411,7 +412,7 @@ const PopUpIcon = (props) => {
       <Popup isActive={isActive}>
         <PopupHeader
           headerPanelColour={headerPanelColour + popupOpenType}
-          headerOne={popupHeaderOne}
+          headerOne={popupHeaderOne || headerOne}
           headerOneBadgeOne={popupHeaderOneBadgeOne}
           onClick={handleClick}
           mode={''}

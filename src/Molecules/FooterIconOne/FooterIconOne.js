@@ -5,7 +5,7 @@ import '../FooterIconTwo/FooterIconTwo.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SET_POPUP_STATE, SET_GRID_COLUMN_COUNT_VALUE } from '../../actionType';
-import PopUpIcon from '../../PopUpComponent/PopUpIcon';
+import PopUpIcon from '../../PopUpIcon/PopUpIcon';
 import {
   CALCULATOR_POPUP_ARR,
   MANUSCRIPT_POPUP_ARR,
@@ -124,13 +124,24 @@ export const FooterIconOne = (props) => {
       });
     }
     if (clickedValue === 'textsheet') {
-      console.log("IN SIDE TEXT SHEET++++++++++++++");
       dispatch({
         type: SET_POPUP_STATE,
         payload: {
           popupHeaderOne: 'textsheet',
           popupHeaderOneBadgeOne: '',
           isPopUpValue: 'TEXTSHEET_POPUP',
+          popupOpenType: 'secondary',
+          popupContentArrValue: []
+        }
+      });
+    }
+    if (clickedValue === 'spreadsheet') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'spreadsheet',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'SPREADSHEET_POPUP',
           popupOpenType: 'secondary',
           popupContentArrValue: []
         }
