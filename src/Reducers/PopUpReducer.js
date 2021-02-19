@@ -19,6 +19,7 @@ const initialState = {
   popupMode: '',
   popupHeaderOne: '',
   popupHeaderOneBadgeOne: '',
+  popupHeaderOneBadgeTwo: '',
   popupContentArrValue: [
     { lable: 'basic', dataValue: 'basic', Icon: CalculatorIcon },
     { lable: 'buisness', dataValue: 'buisness', Icon: CalculatorIcon },
@@ -78,6 +79,7 @@ const PopUpReducer = (istate = initialState, action) => {
         popupContentArrValue: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne,
+        popupHeaderOneBadgeTwo: action.payload.popupHeaderOneBadgeTwo,
         secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue
       };
     case SET_GRID_COLUMN_COUNT_VALUE:

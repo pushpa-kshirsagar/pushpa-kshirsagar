@@ -7,13 +7,14 @@ import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Section/Section';
 import FooterIconOne from '../../Molecules/FooterIconOne/FooterIconOne';
-import PopUpForCommonOnClick from '../../PopUpSignOn/PopUpForCommonOnClick';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpSpreadSheet from '../../PopUpIcon/PopUpSpreadSheet';
 import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword';
+import PopUpDisplayPanelAssessee from '../../PopUpDisplayPanel/PopUpDisplayPanelAssessee';
+import PopUpDisplayPanelAssociate from '../../PopUpDisplayPanel/PopUpDisplayPanelAssociate';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -121,20 +122,23 @@ export const DisplayPaneOne = () => {
   const openAssesseeCardPopup = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
+    let value = '';
     if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
       popupHeaderOne = 'assessee';
       popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
+      value = 'ASSESSEE_CARD_POPUP';
     }
     if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
       popupHeaderOne = 'associate';
       popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
+      value = 'ASSOCIATE_CARD_POPUP';
     }
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: popupHeaderOne,
         popupHeaderOneBadgeOne: '',
-        isPopUpValue: 'CARD_POPUP',
+        isPopUpValue: value,
         popupOpenType: 'primary',
         popupContentArrValue: popupContentArrValue
       }
@@ -177,7 +181,8 @@ export const DisplayPaneOne = () => {
       </div>
       <FooterIconOne />
 
-      <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
+      <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
+      <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
       <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
