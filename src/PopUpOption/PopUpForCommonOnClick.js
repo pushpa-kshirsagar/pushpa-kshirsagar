@@ -3,22 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
-import { DialogContent, Button, Divider, IconButton } from '@material-ui/core';
-import Check from '@material-ui/icons/Check';
+import { DialogContent } from '@material-ui/core';
 import { SET_POPUP_STATE, SET_SECONDARY_OPTION_VALUE } from '../actionType';
 import {
   ASSIGNMENT_DISTINCT_POPUP,
   ASSESSEE_CARD_POPUP_OPTIONS,
-  NOTIFICATION_REPORT_POPUP
+  NOTIFICATION_REPORT_POPUP,
+  REVIEW_REVISE_POPUP,
+  SIGN_OUT_POPUP
 } from '../PopUpConfig';
+import JsonRenderComponent from '../Actions/JsonRenderComponent';
 const PopUpForCommonOnClick = (props) => {
-  const {
-    popupHeaderOne,
-    popupHeaderOneBadgeOne,
-    popupContentArrValue,
-    popupOpenType,
-    secondaryOptionCheckValue
-  } = useSelector((state) => state.PopUpReducer);
+  const { popupHeaderOne, popupHeaderOneBadgeOne, popupOpenType } = useSelector(
+    (state) => state.PopUpReducer
+  );
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
@@ -54,6 +52,30 @@ const PopUpForCommonOnClick = (props) => {
       valueArr = NOTIFICATION_REPORT_POPUP;
       reviseSecondaryOptionCheckValue = 'unread';
     }
+    if (clickValue === 'review' || clickValue === 'revise') {
+      revisePopupHeaderOne = 'assessee';
+      revisepopupHeaderOneBadgeOne = clickValue;
+      reviseisPopUpValue = 'CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = REVIEW_REVISE_POPUP;
+      reviseSecondaryOptionCheckValue = 'all';
+    }
+    if (clickValue === 'sign-out') {
+      revisePopupHeaderOne = 'assessee';
+      revisepopupHeaderOneBadgeOne = clickValue;
+      reviseisPopUpValue = 'CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = SIGN_OUT_POPUP;
+      reviseSecondaryOptionCheckValue = 'all';
+    }
+    if (clickValue === 'password') {
+      revisePopupHeaderOne = 'assessee';
+      revisepopupHeaderOneBadgeOne = clickValue;
+      reviseisPopUpValue = 'REVISE_PASSWORD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = SIGN_OUT_POPUP;
+      reviseSecondaryOptionCheckValue = 'all';
+    }
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -67,37 +89,15 @@ const PopUpForCommonOnClick = (props) => {
     });
   };
   const BackHandlerEvent = (e) => {
-    let revisePopupHeaderOne = '';
-    let revisepopupHeaderOneBadgeOne = '';
-    let reviseisPopUpValue = '';
-    let revisePopupType = '';
-    let reviseSecondaryOptionCheckValue = '';
-    let valueArr = [];
-    if (popupHeaderOne === 'assignments') {
-      revisePopupHeaderOne = 'assessee';
-      revisepopupHeaderOneBadgeOne = '';
-      reviseisPopUpValue = 'CARD_POPUP';
-      revisePopupType = 'primary';
-      valueArr = ASSESSEE_CARD_POPUP_OPTIONS;
-      reviseSecondaryOptionCheckValue = '';
-    }
-    if (popupHeaderOne === 'notifications' || popupHeaderOne === 'reports') {
-      revisePopupHeaderOne = 'assessee';
-      revisepopupHeaderOneBadgeOne = '';
-      reviseisPopUpValue = 'CARD_POPUP';
-      revisePopupType = 'primary';
-      valueArr = ASSESSEE_CARD_POPUP_OPTIONS;
-      reviseSecondaryOptionCheckValue = '';
-    }
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: revisePopupHeaderOne,
-        popupHeaderOneBadgeOne: revisepopupHeaderOneBadgeOne,
-        isPopUpValue: reviseisPopUpValue,
-        popupOpenType: revisePopupType,
-        secondaryOptionCheckValue: reviseSecondaryOptionCheckValue,
-        popupContentArrValue: valueArr
+        popupHeaderOne: 'assessee',
+        popupHeaderOneBadgeOne: '',
+        isPopUpValue: 'CARD_POPUP',
+        popupOpenType: 'primary',
+        secondaryOptionCheckValue: '',
+        popupContentArrValue: ASSESSEE_CARD_POPUP_OPTIONS
       }
     });
   };
@@ -112,37 +112,10 @@ const PopUpForCommonOnClick = (props) => {
           mode={''}
         />
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
-          <div id="dialog-description">
-            <div className="true">
-              <div className={'tickOption'}>
-                {popupContentArrValue &&
-                  popupContentArrValue.map((item, index) => {
-                    return (
-                      <div key={index}>
-                        <Button
-                          className={item.optionClass}
-                          data-value={item.dataValue}
-                          onClick={
-                            item.optionClass === 'optionSecondary'
-                              ? setSecondaryOptionValue
-                              : ChangeOptionPopup
-                          }
-                        >
-                          {item.data}
-                          {item.optionClass === 'optionSecondary' &&
-                          secondaryOptionCheckValue === item.dataValue ? (
-                            <IconButton className={'tick'}>
-                              <Check className={'selectionIcon'} />
-                            </IconButton>
-                          ) : null}
-                        </Button>
-                        {item.divider && <Divider {...item.divider} key={index} />}
-                      </div>
-                    );
-                  })}
-              </div>
-            </div>
-          </div>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeOptionPopup}
+          />
         </DialogContent>
       </Popup>
     </div>
