@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpComponent/PopUpPicture';
 import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
-import PopUpInputText from '../PopUpComponent/PopUpInputText';
+import PopUpTextField from '../PopUpComponent/PopUpTextField';
 import PopUpAddressEmail from '../PopUpComponent/PopUpAddressEmail';
 import PopUpDropList from '../PopUpComponent/PopUpDropList';
 import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
@@ -42,7 +42,7 @@ const PopUpSignOnAssessee = () => {
         nextPopUpValue={'ALIASPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
-      <PopUpInputText
+      <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'alias'}
         headerPanelColour={'genericOne'}

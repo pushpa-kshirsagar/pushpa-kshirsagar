@@ -7,7 +7,7 @@ import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Section/Section';
 import FooterIconOne from '../../Molecules/FooterIconOne/FooterIconOne';
-import PopUpForCommonOnClick from '../../PopUpOption/PopUpForCommonOnClick';
+import PopUpForCommonOnClick from '../../PopUpSignOn/PopUpForCommonOnClick';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';

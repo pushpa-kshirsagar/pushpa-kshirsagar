@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PopUpPicture from '../PopUpComponent/PopUpPicture';
-import PopUpInputText from '../PopUpComponent/PopUpInputText';
+import PopUpTextField from '../PopUpComponent/PopUpTextField';
 import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
 import PopUpAddress from '../PopUpComponent/PopUpAddress';
 import PopUpReviewList from '../PopUpComponent/PopUpReviewList';
@@ -47,7 +47,7 @@ const PopUpSignOnAssociate = () => {
   };
   return (
     <div>
-      <PopUpInputText
+      <PopUpTextField
         isActive={isPopUpValue === 'NAMEALIASPOPUP'}
         label={'name'}
         headerPanelColour={'genericOne'}
@@ -58,7 +58,7 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.basicInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
       />
-      <PopUpInputText
+      <PopUpTextField
         isActive={isPopUpValue === 'DESCRIPTIONPOPUP'}
         label={'description'}
         headerPanelColour={'genericOne'}
@@ -127,7 +127,7 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.adminBasicInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_BASIC_INFO}
       />
-      <PopUpInputText
+      <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'alias'}
         headerPanelColour={'genericOne'}

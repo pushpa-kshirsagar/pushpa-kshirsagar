@@ -1,18 +1,18 @@
 import React from 'react';
-import PopUpInputText from './PopUpInputText';
+import PopUpTextFieldComponent from './PopUpTextField';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
   title: 'Design System/Molecules/Pop Up',
-  component: PopUpInputText,
+  component: PopUpTextFieldComponent,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopUpInputText {...args} />;
+const Template = (args) => <PopUpTextFieldComponent {...args} />;
 
-export const PopUp3 = Template.bind({});
-PopUp3.args = {
+export const PopUpTextField = Template.bind({});
+PopUpTextField.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',
