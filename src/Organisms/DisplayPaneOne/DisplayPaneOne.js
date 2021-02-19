@@ -11,8 +11,8 @@ import PopUpForCommonOnClick from '../../PopUpSignOn/PopUpForCommonOnClick';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
-import PopUpTextSheet from '../../PopUpInformation/PopUpTextSheet';
-import PopUpSpreadSheet from '../../PopUpInformation/PopUpSpreadSheet';
+import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
+import PopUpSpreadSheet from '../../PopUpIcon/PopUpSpreadSheet';
 import PopUpPasswordRevise from '../../PopUpInformation/PopUpPasswordRevise';
 
 const DisplayPaneLeftSection1 = () => {

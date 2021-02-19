@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Spreadsheet from 'react-spreadsheet';
 // import Spreadsheet from 'react-spreadsheet-component';
@@ -24,26 +24,26 @@ const PopUpSpreadSheet = (props) => {
   // const onChangeTextSheet = (evt) => {
   //   setInnerContent(evt.editor.getData());
   // };
-  const RangeView = ({ cell, getValue }) => (
-    <input
-      type="text"
-      value={getValue({ data: cell })}
-      disabled
-      style={{ pointerEvents: 'none' }}
-    />
-  );
+  // const RangeView = ({ cell, getValue }) => (
+  //   <input
+  //     type="text"
+  //     value={getValue({ data: cell })}
+  //     disabled
+  //     style={{ pointerEvents: 'none' }}
+  //   />
+  // );
 
-  const RangeEdit = ({ getValue, cell, onChange }) => (
-    <input
-      type="text"
-      onChange={(e) => {
-        console.log('IN ON CHANGE CELL======');
-        onChange({ ...cell, value: e.target.value });
-      }}
-      value={getValue({ data: cell }) || 0}
-      autoFocus
-    />
-  );
+  // const RangeEdit = ({ getValue, cell, onChange }) => (
+  //   <input
+  //     type="text"
+  //     onChange={(e) => {
+  //       console.log('IN ON CHANGE CELL======');
+  //       onChange({ ...cell, value: e.target.value });
+  //     }}
+  //     value={getValue({ data: cell }) || 0}
+  //     autoFocus
+  //   />
+  // );
 
   const data = [
     [
