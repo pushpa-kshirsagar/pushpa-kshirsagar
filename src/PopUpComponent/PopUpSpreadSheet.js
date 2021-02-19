@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import ReactCKEditor from 'react-ckeditor-component';
+import Spreadsheet from 'react-spreadsheet';
+// import Spreadsheet from 'react-spreadsheet-component';
 import PopUp from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
@@ -9,20 +10,115 @@ import { DialogTitle, IconButton, Paper } from '@material-ui/core';
 import { CLEAR_ASSESSEE_INFO, POPUP_CLOSE } from '../actionType';
 import { useDispatch } from 'react-redux';
 
-const PopUpTextSheet = (props) => {
+const PopUpSpreadSheet = (props) => {
   // const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   const {
     isActive = false,
     headerPanelColour = 'displayPaneLeft',
-    headerOne = 'textsheet'
+    headerOne = 'spreadsheet '
   } = props;
 
   // const [isPopUpOpen, setIsPopUpOpen] = useState(true);
-  const [innerContent, setInnerContent] = useState('');
-  const onChangeTextSheet = (evt) => {
-    setInnerContent(evt.editor.getData());
-  };
+  // const [innerContent, setInnerContent] = useState('');
+  // const onChangeTextSheet = (evt) => {
+  //   setInnerContent(evt.editor.getData());
+  // };
+  const RangeView = ({ cell, getValue }) => (
+    <input
+      type="text"
+      value={getValue({ data: cell })}
+      disabled
+      style={{ pointerEvents: 'none' }}
+    />
+  );
+
+  const RangeEdit = ({ getValue, cell, onChange }) => (
+    <input
+      type="text"
+      onChange={(e) => {
+        console.log('IN ON CHANGE CELL======');
+        onChange({ ...cell, value: e.target.value });
+      }}
+      value={getValue({ data: cell }) || 0}
+      autoFocus
+    />
+  );
+
+  const data = [
+    [
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ],
+    [
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ],
+    [
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ],
+    [
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ],
+    [
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ],
+    [
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ],
+    [
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ],
+    [
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ]
+  ];
 
   return (
     <div>
@@ -53,7 +149,7 @@ const PopUpTextSheet = (props) => {
                   <Check
                     className={'popupClose'}
                     onClick={() => {
-                      console.log('ON SAVE');
+                      console.log('IN SHEET+++++', data);
                     }}
                   />
                 </IconButton>
@@ -62,6 +158,7 @@ const PopUpTextSheet = (props) => {
                 <IconButton
                   onClick={() => {
                     console.log('ON CLOSE');
+                    // setIsPopUpOpen(false);
                     dispatch({ type: CLEAR_ASSESSEE_INFO });
                     dispatch({ type: POPUP_CLOSE });
                   }}
@@ -74,31 +171,19 @@ const PopUpTextSheet = (props) => {
           </Paper>
         </DialogTitle>
         <DialogContent className={['textsheetPopupContent', 'fixed10PadDim'].join(' ')}>
-          <ReactCKEditor
-            activeClass="editor"
-            content={innerContent}
-            // onInit={(editor) => {
-            //   editor.ui.view.editable.element.parentElement.insertBefore(
-            //     editor.ui.view.toolbar.element,
-            //     editor.ui.view.editable.element
-            //   );
-            // }}
-            events={{
-              // blur: this.onBlur,
-              // afterPaste: this.afterPaste,
-              change: onChangeTextSheet
+          {/* <Spreadsheet initialData={data} config={config} spreadsheetId="1" /> */}
+          <Spreadsheet
+            onChange={() => {
+              console.log('IN CHANGE++++++');
             }}
-            contentEditable="true"
-            config={{
-              isReadOnly: true
-            }}
+            data={data}
           />
         </DialogContent>
       </PopUp>
     </div>
   );
 };
-PopUpTextSheet.propTypes = {
+PopUpSpreadSheet.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -113,4 +198,4 @@ PopUpTextSheet.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopUpTextSheet;
+export default PopUpSpreadSheet;

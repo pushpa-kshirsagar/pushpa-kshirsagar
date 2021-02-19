@@ -1,20 +1,20 @@
 import React from 'react';
-import PopUpTextSheets from './PopUpTextSheet';
+import PopUpSpreadSheets from './PopUpSpreadSheet';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
   title: 'Design System/Molecules/Pop Up',
-  component: PopUpTextSheets,
+  component: PopUpSpreadSheets,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopUpTextSheets {...args} />;
+const Template = (args) => <PopUpSpreadSheets {...args} />;
 
-export const PopUpTextSheet = Template.bind({});
-PopUpTextSheet.args = {
+export const PopUpSpreadSheet = Template.bind({});
+PopUpSpreadSheet.args = {
   className: null,
   headerPanelColour: 'displayPaneLeft',
-  headerOne: 'textsheet',
+  headerOne: 'spreadsheet',
   isActive: true
 };

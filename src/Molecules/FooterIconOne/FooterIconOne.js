@@ -124,13 +124,24 @@ export const FooterIconOne = (props) => {
       });
     }
     if (clickedValue === 'textsheet') {
-      console.log("IN SIDE TEXT SHEET++++++++++++++");
       dispatch({
         type: SET_POPUP_STATE,
         payload: {
           popupHeaderOne: 'textsheet',
           popupHeaderOneBadgeOne: '',
           isPopUpValue: 'TEXTSHEET_POPUP',
+          popupOpenType: 'secondary',
+          popupContentArrValue: []
+        }
+      });
+    }
+    if (clickedValue === 'spreadsheet') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'spreadsheet',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'SPREADSHEET_POPUP',
           popupOpenType: 'secondary',
           popupContentArrValue: []
         }

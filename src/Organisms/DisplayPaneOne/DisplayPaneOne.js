@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpComponent/PopUpTextSheet';
+import PopUpSpreadSheet from '../../PopUpComponent/PopUpSpreadSheet';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -177,6 +178,7 @@ export const DisplayPaneOne = () => {
 
       <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
+      <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
     </>
   );
 };
