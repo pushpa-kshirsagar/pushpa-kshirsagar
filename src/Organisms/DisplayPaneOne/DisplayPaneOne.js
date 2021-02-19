@@ -13,7 +13,7 @@ import { SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpSpreadSheet from '../../PopUpIcon/PopUpSpreadSheet';
-import PopUpPasswordRevise from '../../PopUpInformation/PopUpPasswordRevise';
+import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -180,7 +180,7 @@ export const DisplayPaneOne = () => {
       <PopUpForCommonOnClick isActive={isPopUpValue === 'CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
       <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
-      <PopUpPasswordRevise isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
+      <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
     </>
   );
 };

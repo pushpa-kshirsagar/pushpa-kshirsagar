@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
-  title: 'Design System/Molecules/Pop Up',
+  title: 'Design System/Molecules/PopUpInformation',
   component: PopUpTextFieldComponent,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };

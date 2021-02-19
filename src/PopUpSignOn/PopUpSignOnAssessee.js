@@ -5,7 +5,7 @@ import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
 import PopUpTextField from '../PopUpInformation/PopUpTextField';
 import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
 import PopUpDropList from '../PopUpInformation/PopUpDropList';
-import PopUpConfirmation from '../PopUpInformation/PopUpConfirmation';
+import PopUpConfirmation from '../PopUpGeneric/PopUpConfirmation';
 import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
 import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import {

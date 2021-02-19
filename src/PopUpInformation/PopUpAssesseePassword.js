@@ -9,7 +9,7 @@ import { POPUP_CLOSE } from '../actionType';
 import { FormControl } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
 
-const PopUpPasswordRevise = (props) => {
+const PopUpAssesseePassword = (props) => {
   const dispatch = useDispatch();
   const {
     isActive = false,
@@ -45,7 +45,7 @@ const PopUpPasswordRevise = (props) => {
     </div>
   );
 };
-PopUpPasswordRevise.propTypes = {
+PopUpAssesseePassword.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -60,4 +60,4 @@ PopUpPasswordRevise.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopUpPasswordRevise;
+export default PopUpAssesseePassword;

@@ -7,7 +7,7 @@ import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
 import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
 import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
-import PopUpConfirmation from '../PopUpInformation/PopUpConfirmation';
+import PopUpConfirmation from '../PopUpGeneric/PopUpConfirmation';
 import PopUpDropList from '../PopUpInformation/PopUpDropList';
 import {
   SET_NEXT_POPUP,

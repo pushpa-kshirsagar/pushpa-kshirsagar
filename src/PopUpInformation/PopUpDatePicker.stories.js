@@ -1,18 +1,18 @@
 import React from 'react';
-import PopUpDatePicker from './PopUpDatePicker';
+import PopUpDatePickerComponent from './PopUpDatePicker';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
-  title: 'Design System/Molecules/Pop Up',
-  component: PopUpDatePicker,
+  title: 'Design System/Molecules/PopUpInformation',
+  component: PopUpDatePickerComponent,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopUpDatePicker {...args} />;
+const Template = (args) => <PopUpDatePickerComponent {...args} />;
 
-export const PopUp11 = Template.bind({});
-PopUp11.args = {
+export const PopUpDatePicker = Template.bind({});
+PopUpDatePicker.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',

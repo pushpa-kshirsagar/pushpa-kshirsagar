@@ -1,18 +1,18 @@
 import React from 'react';
-import PopUpDropList from './PopUpDropList';
+import PopUpDropListComponent from './PopUpDropList';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
-  title: 'Design System/Molecules/Pop Up',
-  component: PopUpDropList,
+  title: 'Design System/Molecules/PopUpInformation',
+  component: PopUpDropListComponent,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopUpDropList {...args} />;
+const Template = (args) => <PopUpDropListComponent {...args} />;
 
-export const PopUp7 = Template.bind({});
-PopUp7.args = {
+export const PopUpDropList = Template.bind({});
+PopUpDropList.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',

@@ -1,22 +1,22 @@
 import React from 'react';
-import PopUpCheckboxComponent from './PopUpCheckbox';
+import PopUpAssesseePasswordComponent from './PopUpAssesseePassword';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
   title: 'Design System/Molecules/PopUpInformation',
-  component: PopUpCheckboxComponent,
+  component: PopUpAssesseePasswordComponent,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopUpCheckboxComponent {...args} />;
+const Template = (args) => <PopUpAssesseePasswordComponent {...args} />;
 
-export const PopUpCheckbox = Template.bind({});
-PopUpCheckbox.args = {
+export const PopUpAssesseePassword = Template.bind({});
+PopUpAssesseePassword.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',
-  headerOneBadgeOne: 'information',
+  headerOneBadgeOne: 'password',
   headerOneBadgeTwo: '',
   headerOneBadgeThree: '',
   isActive: true

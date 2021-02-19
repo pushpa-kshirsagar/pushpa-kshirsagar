@@ -1,18 +1,18 @@
 import React from 'react';
-import PopUpAssesseeName from './PopUpAssesseeName';
+import PopUpAssesseeNameComponent from './PopUpAssesseeName';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
-  title: 'Design System/Molecules/Pop Up',
-  component: PopUpAssesseeName,
+  title: 'Design System/Molecules/PopUpInformation',
+  component: PopUpAssesseeNameComponent,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopUpAssesseeName {...args} />;
+const Template = (args) => <PopUpAssesseeNameComponent {...args} />;
 
-export const PopUp2 = Template.bind({});
-PopUp2.args = {
+export const PopUpAssesseeName = Template.bind({});
+PopUpAssesseeName.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',

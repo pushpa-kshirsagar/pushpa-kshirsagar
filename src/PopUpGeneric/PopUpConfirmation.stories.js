@@ -1,18 +1,18 @@
 import React from 'react';
-import PopUpConfirmation from './PopUpConfirmation';
+import PopUpConfirmationComponent from './PopUpConfirmation';
 import { Provider } from 'react-redux';
 import store from '../store';
 
 export default {
-  title: 'Design System/Molecules/Pop Up',
-  component: PopUpConfirmation,
+  title: 'Design System/Molecules/PopUpGeneric',
+  component: PopUpConfirmationComponent,
   decorators: [(story) => <Provider store={store}>{story()}</Provider>]
 };
 
-const Template = (args) => <PopUpConfirmation {...args} />;
+const Template = (args) => <PopUpConfirmationComponent {...args} />;
 
-export const PopUp17 = Template.bind({});
-PopUp17.args = {
+export const PopUpConfirmation = Template.bind({});
+PopUpConfirmation.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',
