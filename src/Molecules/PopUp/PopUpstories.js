@@ -9,8 +9,8 @@ export default {
 
 const Template = (args) => <PopupComponent {...args} />;
 
-export const PopUp1 = Template.bind({});
-PopUp1.args = {
+export const PopUp = Template.bind({});
+PopUp.args = {
   className: null,
   headerPanelColour: 'displayPaneLeft',
   headerOne: 'assessees',
