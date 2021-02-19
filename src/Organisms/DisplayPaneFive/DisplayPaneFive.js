@@ -9,7 +9,7 @@ import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneFive.css';
 import { useSelector } from 'react-redux';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
-import PopUpAssessmentNavigator from '../../PopUpComponent/PopUpAssessmentNavigator';
+import PopUpAssessmentNavigator from '../../PopUpInformation/PopUpAssessmentNavigator';
 
 export const DisplayPaneFive = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);

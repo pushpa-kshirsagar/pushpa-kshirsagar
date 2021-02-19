@@ -5,7 +5,7 @@ import '../FooterIconTwo/FooterIconTwo.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SET_POPUP_STATE, SET_GRID_COLUMN_COUNT_VALUE } from '../../actionType';
-import PopUpIcon from '../../PopUpComponent/PopUpIcon';
+import PopUpIcon from '../../PopUpInformation/PopUpIcon';
 import {
   CALCULATOR_POPUP_ARR,
   MANUSCRIPT_POPUP_ARR,

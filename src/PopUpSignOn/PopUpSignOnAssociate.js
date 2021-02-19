@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PopUpPicture from '../PopUpComponent/PopUpPicture';
-import PopUpTextField from '../PopUpComponent/PopUpTextField';
-import PopUpTelephone from '../PopUpComponent/PopUpTelephone';
-import PopUpAddress from '../PopUpComponent/PopUpAddress';
-import PopUpReviewList from '../PopUpComponent/PopUpReviewList';
-import PopUpAssesseeName from '../PopUpComponent/PopUpAssesseeName';
-import PopUpAddressEmail from '../PopUpComponent/PopUpAddressEmail';
-import PopUpConfirmation from '../PopUpComponent/PopUpConfirmation';
-import PopUpDropList from '../PopUpComponent/PopUpDropList';
+import PopUpPicture from '../PopUpInformation/PopUpPicture';
+import PopUpTextField from '../PopUpInformation/PopUpTextField';
+import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
+import PopUpAddress from '../PopUpInformation/PopUpAddress';
+import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
+import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
+import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
+import PopUpConfirmation from '../PopUpInformation/PopUpConfirmation';
+import PopUpDropList from '../PopUpInformation/PopUpDropList';
 import {
   SET_NEXT_POPUP,
   CLEAR_ASSOCIATE_INFO,
