@@ -28,7 +28,8 @@ const initialState = {
   ],
   popupOpenType: '',
   gridColumnCountValue: 0,
-  secondaryOptionCheckValue: ''
+  secondaryOptionCheckValue: '',
+  whichReviewList:''
 };
 
 const PopUpReducer = (istate = initialState, action) => {

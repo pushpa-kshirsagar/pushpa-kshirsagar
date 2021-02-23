@@ -333,7 +333,15 @@
 .checkedFontNew span {
   margin-right: -2px !important;
 }
-
+.MuiBackdrop-root{
+  top: 74px !important;
+}
+.MuiDialog-paperScrollPaper {
+  display: flex;
+  position: fixed !important;;
+  max-height: calc(100% - 64px);
+  flex-direction: column;
+}
 @media (max-width: 360px) {
   .popupContent {
     width: calc(100vw - 64px);

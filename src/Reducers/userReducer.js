@@ -1,7 +1,7 @@
 import { SET_USER } from '../actionType';
 
 const initialState = {
-  userData: null
+  userData: null,
 };
 
 const userReducer = (istate = initialState, action) => {
@@ -9,7 +9,8 @@ const userReducer = (istate = initialState, action) => {
   switch (action.type) {
     case SET_USER:
       return {
-        userData: action.payload
+        ...istate,
+        userData: action.payload,
       };
     default:
       return istate;

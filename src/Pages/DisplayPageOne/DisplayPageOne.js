@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isMobile } from 'react-device-detect';
-import { GET_USER_SAGA } from '../../actionType';
+import { GET_USER_SAGA, SET_SELECTED_ASSOCIATE } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
 import DisplayPaneOne from '../../Organisms/DisplayPaneOne/DisplayPaneOne';
@@ -18,15 +18,21 @@ const DisplayPageOne = () => {
   const dispatch = useDispatch();
   const mobilePanestate = isMobile && 'displayPaneTwo';
   const isExamMode = false;
-  // console.log('IN DASH=', gridColumnCountValue);
-  useEffect(() => {
-    console.log('IN useEffect ====>');
-    dispatch({ type: GET_USER_SAGA });
-  }, [dispatch]);
-
+  // useEffect(() => {
+  //   console.log('IN useEffect ====>', userData);
+  //   dispatch({ type: GET_USER_SAGA });
+  // }, [dispatch]);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneReducer);
+  const userName =
+    selectedAssociateInfo &&
+    selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
+      ' ' +
+      selectedAssociateInfo.assesseeInformation.assesseeNameLast;
+  const userEmail =
+    selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
   return (
     <>
-      {userData && <HeaderZero userName={userData.name} userEmail={userData.email} />}
+      <HeaderZero userName={userName} userEmail={userEmail} />
       {gridColumnCountValue !== 0 && (
         <GridColumn isExamMode={isExamMode} columnCount={gridColumnCountValue} />
       )}

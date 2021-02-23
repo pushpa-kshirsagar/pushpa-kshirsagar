@@ -13,14 +13,15 @@ import { POPUP_OPEN } from '../../actionType';
 import { useDispatch } from 'react-redux';
 const HeaderCard = (props) => {
   const {
-    headerOne = 'dashboard',
+    headerOne = '',
     headerOneBadgeOne = '',
     headerOneBadgeTwo = '',
     headerOneBadgeThree = '',
     headerOneBadgeFour = '',
     displayPane = '',
-    scanCount = 0,
-    headerPanelColour
+    scanCount,
+    headerPanelColour,
+    isAssociateSelected
   } = props;
   const dispatch = useDispatch();
 
@@ -63,41 +64,46 @@ const HeaderCard = (props) => {
                 ) : null}
               </div>
             </div>
-            <div className={'iguru-iconbox'}>
-              {displayPane === 'five' ? (
-                <div>
-                  <span style={{ color: '#fff', fontWeight: 'bold' }}>00:19:26</span>
-                </div>
-              ) : (
-                <IconButton>
-                  {displayPane === 'centre' ? (
-                    <Fragment>
-                      <SearchIcon className={'iguru-iconbardefault'} />
-                      <span className={'iguru-headerbadge'}>{scanCount}</span>
-                    </Fragment>
-                  ) : displayPane === 'left' ? (
-                    <NextIcon className={'iguru-iconbardefault'} />
-                  ) : (
-                    <Clear className={'iguru-iconbardefault'} />
-                  )}
-                </IconButton>
-              )}
-            </div>
-            <div className={'iguru-iconbox'}>
-              {displayPane === 'five' ? (
-                <IconButton
-                  onClick={() => {
-                    dispatch({ type: POPUP_OPEN, payload: '' });
-                  }}
-                >
-                  <OpenWithIcon className={'iguru-iconbardefault'} />
-                </IconButton>
-              ) : (
-                <IconButton>
-                  <MoreVert className={'iguru-iconbardefault'} />
-                </IconButton>
-              )}
-            </div>
+
+            <Fragment>
+              <div className={'iguru-iconbox'}>
+                {displayPane === 'five' ? (
+                  <div>
+                    <span style={{ color: '#fff', fontWeight: 'bold' }}>00:19:26</span>
+                  </div>
+                ) : (
+                  <IconButton>
+                    {displayPane === 'centre' ? (
+                      scanCount && (
+                        <Fragment>
+                          <SearchIcon className={'iguru-iconbardefault'} />
+                          <span className={'iguru-headerbadge'}>{scanCount}</span>
+                        </Fragment>
+                      )
+                    ) : displayPane === 'left' ? (
+                      <NextIcon className={'iguru-iconbardefault'} />
+                    ) : displayPane === 'right' ? (
+                      <Clear className={'iguru-iconbardefault'} />
+                    ):null}
+                  </IconButton>
+                )}
+              </div>
+              <div className={'iguru-iconbox'}>
+                {displayPane === 'five' ? (
+                  <IconButton
+                    onClick={() => {
+                      dispatch({ type: POPUP_OPEN, payload: '' });
+                    }}
+                  >
+                    <OpenWithIcon className={'iguru-iconbardefault'} />
+                  </IconButton>
+                ) : (
+                  <IconButton>
+                    <MoreVert className={'iguru-iconbardefault'} />
+                  </IconButton>
+                )}
+              </div>
+            </Fragment>
           </div>
         </Paper>
       </Grid>

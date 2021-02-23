@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NAVIGATOR_MODE } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import './DisplayPaneThree.css';
+import { Fragment } from 'react';
 
 const DisplayPaneRightSection1 = () => {
   const [listExpand, setListExpand] = useState('');
@@ -623,6 +624,13 @@ export const DisplayPaneThree = () => {
     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
+  const {
+    isReviewRevise = false,
+    rightPaneHeader,
+    rightPaneHeaderBadgeOne,
+    rightPaneHeaderBadgeTwo,
+    rightPaneHeaderBadgeThree
+  } = useSelector((state) => state.DisplayPaneReducer);
 
   return (
     <>
@@ -630,36 +638,40 @@ export const DisplayPaneThree = () => {
         <HeaderCard
           className=""
           displayPane="right"
-          headerOne="associate"
-          headerOneBadgeOne="information"
-          headerOneBadgeTwo="all"
-          headerOneBadgeThree=""
+          headerOne={rightPaneHeader}
+          headerOneBadgeOne={rightPaneHeaderBadgeOne}
+          headerOneBadgeTwo={rightPaneHeaderBadgeTwo}
+          headerOneBadgeThree={rightPaneHeaderBadgeThree}
           headerPanelColour="green"
         />
       </div>
-      <div style={{ padding: '0 2.5px' }}>
-        <BasicCard
-          isAlertActive
-          isFlagActive
-          className=""
-          labelTextOneOne="name"
-          labelTextOneTwo="alias"
-          textOneOne="Sample Text"
-          textOneTwo="No Information"
-        />
-        <Sections
-          listSections={rightPaneSections}
-          selectedSection={selectedSection}
-          setSelectedSection={setSelectedSection}
-        />
-      </div>
-      <FooterIconTwo
-        FilterModeEnable={navigatorIcon}
-        FilterMode={FilterMode}
-        onClick={onClickFooter}
-        primaryIcon={primaryIcon}
-        secondaryIcon={secondaryIcon}
-      />
+      {isReviewRevise && (
+        <Fragment>
+          <div style={{ padding: '0 2.5px' }}>
+            <BasicCard
+              isAlertActive
+              isFlagActive
+              className=""
+              labelTextOneOne="name"
+              labelTextOneTwo="alias"
+              textOneOne="Sample Text"
+              textOneTwo="No Information"
+            />
+            <Sections
+              listSections={rightPaneSections}
+              selectedSection={selectedSection}
+              setSelectedSection={setSelectedSection}
+            />
+          </div>
+          <FooterIconTwo
+            FilterModeEnable={navigatorIcon}
+            FilterMode={FilterMode}
+            onClick={onClickFooter}
+            primaryIcon={primaryIcon}
+            secondaryIcon={secondaryIcon}
+          />
+        </Fragment>
+      )}
     </>
   );
 };

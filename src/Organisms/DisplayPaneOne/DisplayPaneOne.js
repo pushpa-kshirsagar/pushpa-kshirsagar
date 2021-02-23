@@ -8,13 +8,14 @@ import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Section/Section';
 import FooterIconOne from '../../Molecules/FooterIconOne/FooterIconOne';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_POPUP_STATE } from '../../actionType';
+import { SET_MIDDLEPANE_STATE, SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpSpreadSheet from '../../PopUpIcon/PopUpSpreadSheet';
 import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword';
 import PopUpDisplayPanelAssessee from '../../PopUpDisplayPanel/PopUpDisplayPanelAssessee';
 import PopUpDisplayPanelAssociate from '../../PopUpDisplayPanel/PopUpDisplayPanelAssociate';
+import { Fragment } from 'react';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -119,30 +120,58 @@ export const DisplayPaneOne = () => {
   const [selectedSection, setSelectedSection] = useState(leftPaneSections[0]);
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const openAssesseeCardPopup = (e) => {
+  const { userData } = useSelector((state) => state.userReducer);
+
+  const { isAssociateSelected, selectedAssociateInfo } = useSelector(
+    (state) => state.DisplayPaneReducer
+  );
+  const associateName = selectedAssociateInfo
+    ? selectedAssociateInfo.associateInformation.associateName
+    : 'associates';
+  const associateDescription = selectedAssociateInfo && selectedAssociateInfo.associateInformation.associateDescription;
+  const assesseeAlias = selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeAlias;
+  const assesseeName = selectedAssociateInfo ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst + ' ' +
+    selectedAssociateInfo.assesseeInformation.assesseeNameLast
+  : 'sample@gmail.com ';
+  const openCardPopup = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
     let value = '';
-    if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
-      popupHeaderOne = 'assessee';
-      popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
-      value = 'ASSESSEE_CARD_POPUP';
-    }
-    if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
-      popupHeaderOne = 'associate';
-      popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
-      value = 'ASSOCIATE_CARD_POPUP';
-    }
-    dispatch({
-      type: SET_POPUP_STATE,
-      payload: {
-        popupHeaderOne: popupHeaderOne,
-        popupHeaderOneBadgeOne: '',
-        isPopUpValue: value,
-        popupOpenType: 'primary',
-        popupContentArrValue: popupContentArrValue
+    if (e.currentTarget.getAttribute('data-value') !== '') {
+      if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
+        popupHeaderOne = 'assessee';
+        popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
+        value = 'ASSESSEE_CARD_POPUP';
       }
-    });
+      if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
+        popupHeaderOne = 'associate';
+        popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
+        value = 'ASSOCIATE_CARD_POPUP';
+      }
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: popupHeaderOne,
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: value,
+          popupOpenType: 'primary',
+          popupContentArrValue: popupContentArrValue
+        }
+      });
+    } else {
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'associate',
+          middlePaneHeaderBadgeOne: 'active',
+          middlePaneHeaderBadgeTwo: '',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assesseeRelatedAssociate',
+          scanCount: userData && userData.length
+        }
+      });
+    }
   };
 
   return (
@@ -159,27 +188,40 @@ export const DisplayPaneOne = () => {
       <div className="containerPadding">
         <div className="containerPadding">
           <Card
-            ImageOne={PersonIcon}
-            textOneOne="assesseeName"
-            onClick={openAssesseeCardPopup}
+            ImageOne={selectedAssociateInfo ? PersonIcon : null}
+            textOneOne={assesseeName}
+            textTwoOne={assesseeAlias}
+            onClick={
+              selectedAssociateInfo && selectedAssociateInfo.assesseeInformation ? openCardPopup : null
+            }
             tag={'assessee_card'}
           />
         </div>
         <div className="containerPadding">
-          <Card
-            ImageOne={AssociateIcon}
-            textOneOne="Boppo Technologies"
-            onClick={openAssesseeCardPopup}
-            tag={'associate_card'}
-          />
+          {selectedAssociateInfo ? (
+            <Card
+              ImageOne={AssociateIcon}
+              textOneOne={associateName}
+              textTwoOne={associateDescription}
+              onClick={openCardPopup}
+              tag={'associate_card'}
+            />
+          ) : (
+            <Card isIcon IconOne={ArrowRight} textOneOne="associates" onClick={openCardPopup} />
+          )}
         </div>
-        <Sections
-          listSections={leftPaneSections}
-          selectedSection={selectedSection}
-          setSelectedSection={setSelectedSection}
-        />
       </div>
-      <FooterIconOne />
+      {isAssociateSelected && (
+        <Fragment>
+          <Sections
+            listSections={leftPaneSections}
+            selectedSection={selectedSection}
+            setSelectedSection={setSelectedSection}
+          />
+
+          <FooterIconOne />
+        </Fragment>
+      )}
 
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
       <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
