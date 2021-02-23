@@ -14,7 +14,7 @@ const PopUp = (props) => {
         onClose={close}
         aria-labelledby="dialog-title"
         aria-describedby="dialog-description"
-        // className={parentDialogue}
+        className={'parentDialogue'}
       >
         {children}
       </Dialog>

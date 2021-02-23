@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import SendIcon from '@material-ui/icons/Send';
 import iGuruLogo from '../../images/iglogo1.png';
 import './DisplayPageSignIn.css';
@@ -6,6 +7,8 @@ import { IconButton } from '@material-ui/core';
 import InputField from '../../Atoms/InputField/InputField';
 import bgImg from '../../images/bg.jpeg';
 import Label from '../../Atoms/Labels/Label';
+import { useDispatch } from 'react-redux';
+import { GET_USER_SAGA } from '../../actionType';
 // import Clear from 'material-ui-icons/Clear';
 
 const DisplayPageSignIn = () => {
@@ -14,7 +17,15 @@ const DisplayPageSignIn = () => {
     backgroundImage: `url(${bgImg})`,
     backgroundSize: 'cover'
   };
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [isforgotPassword, setIsForgotPassword] = useState(false);
+  const onClickEvent = () => {
+    console.log('log In api');
+    dispatch({ type: GET_USER_SAGA });
+    let path = `/dashboard`; 
+    history.push(path);
+  };
   console.log('SIgn In ===', isforgotPassword);
   return (
     <div style={style} className="signin-container">
@@ -35,7 +46,7 @@ const DisplayPageSignIn = () => {
               </IconButton>
             )}
             <IconButton className="form-icon-style">
-              <SendIcon style={{ height: 20, width: 20 }} />
+              <SendIcon style={{ height: 20, width: 20 }} onClick={onClickEvent} />
             </IconButton>
           </div>
         </div>

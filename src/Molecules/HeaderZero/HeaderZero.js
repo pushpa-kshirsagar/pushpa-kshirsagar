@@ -12,11 +12,7 @@ import './HeaderZero.css';
 
 export const HeaderZero = (props) => {
   // const insightGURULogo = require('../../images/prafulta.jpg');
-  const {
-    userName = 'Joachim Carvalho',
-    userEmail = 'joachim.carvalho@insightguru.com',
-    isImageActive = false
-  } = props;
+  const { userName = '', userEmail = '', isImageActive = false } = props;
   const isBespoke = true;
   const iguruBrandLogo = './Image/logo-04.jpeg'; //'./Image/logo-03.jpeg'
   // const iguruMainLogo = isBespoke ? './Image/client-logo.jpeg' : './Image/main-logo.jpeg';

@@ -6,6 +6,7 @@ import ReviewList from '../../Molecules/ReviewList/ReviewList';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import { FILTERMODE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
+import AssesseeRelatedAssociateReviewList from '../../ReviewListComponent/AssesseeRelatedAssociateReviewList';
 
 export const DisplayPaneTwo = () => {
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
@@ -370,6 +371,17 @@ export const DisplayPaneTwo = () => {
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
+  const {
+    isAssociateSelected,
+    middlePaneHeader,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree,
+    middlePaneHeaderBadgeFour,
+    typeOfMiddlePaneList,
+    scanCount
+  } = useSelector((state) => state.DisplayPaneReducer);
+
   const secondaryIcon = [
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
@@ -381,13 +393,14 @@ export const DisplayPaneTwo = () => {
         <HeaderCard
           className=""
           displayPane="centre"
-          headerOne="associates"
-          headerOneBadgeOne=""
-          headerOneBadgeTwo="distinct"
-          headerOneBadgeThree="active"
+          headerOne={middlePaneHeader}
+          headerOneBadgeOne={middlePaneHeaderBadgeOne}
+          headerOneBadgeTwo={middlePaneHeaderBadgeTwo}
+          headerOneBadgeThree={middlePaneHeaderBadgeThree}
+          headerOneBadgeFour={middlePaneHeaderBadgeFour}
           headerPanelColour="green"
-          headerOneBadgeFour=""
-          scanCount={tempAssociateList.length}
+          scanCount={scanCount}
+          isAssociateSelected={isAssociateSelected}
         />
       </div>
       <div
@@ -397,31 +410,38 @@ export const DisplayPaneTwo = () => {
         }}
         className="containerPadding"
       >
-        {tempAssociateList.map((associate, index) => {
-          return (
-            <div className="containerPadding" key={index}>
-              <ReviewList
-                className=""
-                id={associate.id}
-                status={associate.status}
-                textOne={associate.textOne}
-                textTwo={associate.textTwo}
-                isTooltipActive={associate.isTooltipActive}
-              />
-            </div>
-          );
-        })}
+        {typeOfMiddlePaneList === 'assesseeRelatedAssociate' && (
+          <AssesseeRelatedAssociateReviewList />
+        )}
+        {typeOfMiddlePaneList !== '' &&
+          typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
+          tempAssociateList.map((associate, index) => {
+            return (
+              <div className="containerPadding" key={index}>
+                <ReviewList
+                  className=""
+                  id={associate.id}
+                  status={associate.status}
+                  textOne={associate.textOne}
+                  textTwo={associate.textTwo}
+                  isTooltipActive={associate.isTooltipActive}
+                />
+              </div>
+            );
+          })}
         <div className={'containerPadding'} style={{ height: '55px' }}>
           {' '}
         </div>
       </div>
-      <FooterIconTwo
-        FilterModeEnable={FilterModeEnable}
-        FilterMode={FilterMode}
-        onClick={onClickFooter}
-        primaryIcon={primaryIcon}
-        secondaryIcon={secondaryIcon}
-      />
+      {FilterMode !== '' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryIcon}
+        />
+      )}
     </div>
   );
 };

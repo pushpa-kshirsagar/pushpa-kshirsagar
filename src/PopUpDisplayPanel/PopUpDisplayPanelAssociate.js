@@ -4,7 +4,7 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
-import { SET_POPUP_STATE, SET_SECONDARY_OPTION_VALUE } from '../actionType';
+import { SET_MIDDLEPANE_STATE, SET_POPUP_STATE, SET_SECONDARY_OPTION_VALUE } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
   ASSOCIATE_CARD_POPUP_OPTION,
@@ -24,6 +24,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOneBadgeTwo,
     popupOpenType
   } = useSelector((state) => state.PopUpReducer);
+  const { userData } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
@@ -131,6 +132,20 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisePopupType = 'secondary';
       valueArr = MARKETPLACE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'unread';
+    }
+    if (clickValue === 'switch') {
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'associate',
+          middlePaneHeaderBadgeOne: 'active',
+          middlePaneHeaderBadgeTwo: '',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assesseeRelatedAssociate',
+          scanCount: userData.length
+        }
+      });
     }
     dispatch({
       type: SET_POPUP_STATE,
