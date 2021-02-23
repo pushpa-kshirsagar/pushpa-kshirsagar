@@ -21,9 +21,25 @@ import {
 const PopUpSignOnAssessee = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
-  console.log(assesseeInfo);
-  console.log('==================');
   const dispatch = useDispatch();
+  const onClickYes = async () => {
+    console.log('ONCLICK YES', assesseeInfo);
+    const {
+      basicInfo,
+      communication,
+      emailAddressPrimary,
+      emailAddressSecondary,
+      homeAddressInfo,
+      mobileTelephone,
+      personalInfo,
+      signIn,
+      tagprimary,
+      tagsecondary,
+      tenureend,
+      tenurestart
+    } = assesseeInfo;
+   //TODO SIGN UP
+  };
 
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_ASSESSEE_INFO });
@@ -125,6 +141,7 @@ const PopUpSignOnAssessee = () => {
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'create'}
+        onClickYes={onClickYes}
       />
     </div>
   );

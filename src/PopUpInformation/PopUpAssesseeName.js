@@ -10,6 +10,7 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
+
 const PopUpAssesseeName = (props) => {
   const {
     inputHeader = '',
@@ -89,17 +90,18 @@ const PopUpAssesseeName = (props) => {
             tag={'namePrefix'}
             label={'prefix'}
             listSelect={[
-              ' ',
-              'Dr.',
-              'Dr. (Mrs.)',
-              'Mr',
-              'Mrs.',
-              'Ms.',
-              'Prof.',
-              'Prof (Mrs.)',
-              'Rev. Jr.',
-              'Rev. Sr.'
+              { name: ' ' },
+              { name: 'Dr.' },
+              { name: 'Dr. (Mrs.)' },
+              { name: 'Mr' },
+              { name: 'Mrs.' },
+              { name: 'Ms.' },
+              { name: 'Prof.' },
+              { name: 'Prof (Mrs.)' },
+              { name: 'Rev. Jr.' },
+              { name: 'Rev. Sr.' }
             ]}
+            mappingValue={'name'}
             errorMsg={errorMsg}
             onChange={handleChange}
             value={basicInfo && basicInfo.namePrefix}
@@ -128,7 +130,8 @@ const PopUpAssesseeName = (props) => {
           <SelectField
             tag={'nameSuffix'}
             label={'suffix'}
-            listSelect={[' ', 'Jr.', 'Sr.']}
+            listSelect={[{ name: ' ' }, { name: 'Jr.' }, { name: 'Sr.' }]}
+            mappingValue={'name'}
             errorMsg={errorMsg}
             onChange={handleChange}
             value={basicInfo && basicInfo.suffix}
