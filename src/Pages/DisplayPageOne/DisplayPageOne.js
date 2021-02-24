@@ -18,10 +18,11 @@ const DisplayPageOne = () => {
   const dispatch = useDispatch();
   const mobilePanestate = isMobile && 'displayPaneTwo';
   const isExamMode = false;
-  // useEffect(() => {
-  //   console.log('IN useEffect ====>', userData);
-  //   dispatch({ type: GET_USER_SAGA });
-  // }, [dispatch]);
+
+  useEffect(() => {
+    dispatch({ type: GET_USER_SAGA });
+  }, [dispatch]);
+
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneReducer);
   const userName =
     selectedAssociateInfo &&
