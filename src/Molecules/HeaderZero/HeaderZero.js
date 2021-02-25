@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { isMobile } from 'react-device-detect';
 import Label from '../../Atoms/Labels/Label';
 import IconsButton from '../IconButton/IconButton';
-import iGuruLogo from '../../images/iglogo1.png';
+// import iGuruLogo from '../../images/iglogo1.png';  
 // import prafulta from '../../images/prafulta.jpg';
 // import insightGURULogo from '../../images/prafulta.jpg';
 import './HeaderZero.css';

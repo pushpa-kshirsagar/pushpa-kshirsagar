@@ -5,7 +5,7 @@ import iGuruLogo from '../../images/iglogo1.png';
 import './DisplayPageSignIn.css';
 import { IconButton } from '@material-ui/core';
 import InputField from '../../Atoms/InputField/InputField';
-import bgImg from '../../images/bg.jpeg';
+// import bgImg from '../../images/bg.jpeg'; // old background Image
 import Label from '../../Atoms/Labels/Label';
 // import { useDispatch } from 'react-redux';
 // import { GET_USER_SAGA } from '../../actionType';
@@ -14,6 +14,7 @@ import userPool from '../../UserPool';
 // import Clear from 'material-ui-icons/Clear';
 
 const DisplayPageSignIn = () => {
+  const bgImg = './Image/bg-image.jpg';
   const style = {
     backgroundPosition: '50% 50%',
     backgroundImage: `url(${bgImg})`,
@@ -57,10 +58,10 @@ const DisplayPageSignIn = () => {
           let path = `/dashboard`;
           history.push(path);
           //TODO set AccessToken in localStorage
-          //TODO: send AccessToken to backend 
+          //TODO: send AccessToken to backend
         },
         onFailure: (err) => {
-          setIsCredentialsInValid('invalid credentials');
+          setIsCredentialsInValid('incorrect credentials');
           console.log('onFailure===>', err);
         },
         newPasswordRequired: (data) => {
@@ -88,7 +89,6 @@ const DisplayPageSignIn = () => {
       } else {
         setIsPasswordValid('');
       }
-      // setIsCredentialsInValid(true);
     }
   };
 
@@ -128,6 +128,8 @@ const DisplayPageSignIn = () => {
                 type="text"
                 errorMsg={isUserNameValid}
                 onClick={(e) => {
+                  setIsUserNameValid('');
+                  setIsCredentialsInValid('');
                   setUserName(e.target.value);
                 }}
               />
@@ -137,11 +139,18 @@ const DisplayPageSignIn = () => {
                 type="password"
                 errorMsg={isPasswordValid}
                 onClick={(e) => {
+                  setIsPasswordValid('');
+                  setIsCredentialsInValid('');
                   setPassword(e.target.value);
                 }}
               />
               <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  margin: '0 5px'
+                }}
               >
                 <div
                   style={{ cursor: 'pointer', width: 'fit-content' }}
