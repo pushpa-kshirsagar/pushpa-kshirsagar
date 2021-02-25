@@ -87,40 +87,61 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
     data: 'assignments',
     dataValue: 'assesseeselfassignments',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assignment',
+    permission: 'review'
   },
   {
     data: 'notifications',
     dataValue: 'notifications',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'reports',
     dataValue: 'reports',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'password',
     dataValue: 'password',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'review',
     dataValue: 'review',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'revise',
     dataValue: 'revise',
     optionClass: 'optionPrimary',
-    divider: 'light'
+    divider: 'light',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'revise'
   },
   {
     data: 'sign-out',
     dataValue: 'sign-out',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   }
 ];
 export const REVIEW_POPUP_OPTIONS = [
@@ -128,61 +149,72 @@ export const REVIEW_POPUP_OPTIONS = [
     data: 'distinct',
     dataValue: 'distinct',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false
   },
   {
     data: 'groups',
     dataValue: 'groups',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false
   },
   {
     data: 'managers',
     dataValue: 'managers',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false
   },
   {
     data: 'nodes',
     dataValue: 'nodes',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false
   },
   {
     data: 'roles',
     dataValue: 'roles',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false
   },
   {
     data: 'types',
     dataValue: 'types',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false
   },
   {
     data: 'marketplace',
     dataValue: 'marketplace',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false
   },
   {
     data: 'active',
     dataValue: 'active',
-    optionClass: 'optionSecondary'
+    optionClass: 'optionSecondary',
+    disabled: false
   },
   {
     data: 'inactive',
     dataValue: 'inactive',
     optionClass: 'optionSecondary',
-    divider: 'light'
+    divider: 'light',
+    disabled: false
   },
   {
     data: 'all',
     dataValue: 'all',
     optionClass: 'optionSecondary',
-    divider: 'light'
+    divider: 'light',
+    disabled: false
   },
   {
     data: 'archived',
     dataValue: 'archived',
-    optionClass: 'optionSecondary'
+    optionClass: 'optionSecondary',
+    disabled: false
   }
 ];
 export const ASSOCIATE_CARD_POPUP_OPTION = [
@@ -190,72 +222,109 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
     data: 'administrators',
     dataValue: 'administrators',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'groups',
     dataValue: 'groups',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'managers',
     dataValue: 'managers',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'nodes',
     dataValue: 'nodes',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'roles',
     dataValue: 'roles',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'types',
     dataValue: 'types',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'marketplace',
     dataValue: 'marketplace',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'associateHierarchy',
+    permission: 'review'
   },
   {
     data: 'exchange',
     dataValue: 'exchange',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'associateHierarchy',
+    permission: 'review'
   },
   {
     data: 'notifications',
     dataValue: 'notifications',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'reports',
     dataValue: 'reports',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
   },
   {
     data: 'review',
     dataValue: 'associatereview',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'associate',
+    permission: 'review'
   },
   {
     data: 'revise',
     dataValue: 'associaterevise',
     optionClass: 'optionPrimary',
-    divider: 'dark'
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'associate',
+    permission: 'review'
   },
   {
     data: 'switch',
     dataValue: 'switch',
-    optionClass: 'optionPrimary'
+    optionClass: 'optionPrimary',
+    disabled: 'no'
   }
 ];
 export const ASSESSEE_PERMISSION = {
@@ -357,48 +426,150 @@ export const ALIGNMENT_POPUP_ARR = [
 //review information popup option
 
 export const REVIEW_REVISE_POPUP = [
-  { data: 'information', dataValue: 'information', optionClass: 'optionPrimary', divider: 'dark' },
+  {
+    data: 'information',
+    dataValue: 'information',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
   { data: 'all', dataValue: 'all', optionClass: 'optionSecondary' },
   { data: 'key', dataValue: 'key', optionClass: 'optionSecondary' }
 ];
 //
 export const SIGN_OUT_POPUP = [
-  { data: 'no', dataValue: 'no', optionClass: 'optionPrimary' },
-  { data: 'yes', dataValue: 'yes', optionClass: 'optionPrimary' }
+  { data: 'no', dataValue: 'no', optionClass: 'optionPrimary', disabled: false },
+  { data: 'yes', dataValue: 'yes', optionClass: 'optionPrimary', disabled: false }
 ];
 export const MODULE_POPUP_OPTION = [
-  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary' },
-  { data: 'review', dataValue: 'review', optionClass: 'optionPrimary', divider: 'dark' },
-  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
-  { data: 'reports', dataValue: 'reports', optionClass: 'optionPrimary' }
+  {
+    data: 'create',
+    dataValue: 'create',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'create'
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  }
 ];
 export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
-  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary' },
-  { data: 'review', dataValue: 'review', optionClass: 'optionPrimary', divider: 'dark' },
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: false },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
   { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
-  { data: 'reports', dataValue: 'reports', optionClass: 'optionPrimary', divider: 'dark' },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
   { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary' },
-  { data: 'assessments', dataValue: 'assessments', optionClass: 'optionSecondary' },
-  { data: 'assignments', dataValue: 'assignments', optionClass: 'optionSecondary' },
-  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary' }
+  {
+    data: 'assessments',
+    dataValue: 'assessments',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
 ];
 export const EXCHANGE_POPUP_OPTION = [
-  { data: 'download', dataValue: 'download', optionClass: 'optionPrimary' },
-  { data: 'upload', dataValue: 'upload', optionClass: 'optionPrimary', divider: 'dark' },
-  { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary' },
-  { data: 'assessments', dataValue: 'assessments', optionClass: 'optionSecondary' },
-  { data: 'assignments', dataValue: 'assignments', optionClass: 'optionSecondary' },
-  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary' }
+  { data: 'download', dataValue: 'download', optionClass: 'optionPrimary', disabled: false },
+  {
+    data: 'upload',
+    dataValue: 'upload',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary', disabled: false },
+  {
+    data: 'assessments',
+    dataValue: 'assessments',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
 ];
 export const MARKETPLACE_POPUP_OPTION = [
-  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
-  { data: 'reports', dataValue: 'reports', optionClass: 'optionPrimary', divider: 'dark' },
-  { data: 'review', dataValue: 'marketplacereview', optionClass: 'optionPrimary' }
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'review', dataValue: 'marketplacereview', optionClass: 'optionPrimary', disabled: false }
 ];
 export const REVIEW_DISTINCT_POPUP_OPTION = [
-  { data: 'distinct', dataValue: 'distinct', optionClass: 'optionPrimary', divider: 'dark'  },
+  {
+    data: 'distinct',
+    dataValue: 'distinct',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
   { data: 'active', dataValue: 'active', optionClass: 'optionSecondary' },
-  { data: 'inactive', dataValue: 'inactive', optionClass: 'optionSecondary', divider: 'light' },
-  { data: 'all', dataValue: 'all', optionClass: 'optionSecondary', divider: 'loght' },
-  { data: 'archived', dataValue: 'archived', optionClass: 'optionSecondary' }
+  {
+    data: 'inactive',
+    dataValue: 'inactive',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'all',
+    dataValue: 'all',
+    optionClass: 'optionSecondary',
+    divider: 'loght',
+    disabled: false
+  },
+  { data: 'archived', dataValue: 'archived', optionClass: 'optionSecondary', disabled: false }
 ];

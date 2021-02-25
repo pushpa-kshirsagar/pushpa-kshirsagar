@@ -27,7 +27,7 @@
   font-size: 1.6rem !important;
   text-transform: lowercase !important;
   line-height: 1 !important;
-  color: rgba(0, 0, 0, 0.87) !important;
+  color: rgba(0, 0, 0, 0.87);
   width: 100% !important;
   font-weight: 400 !important;
 }

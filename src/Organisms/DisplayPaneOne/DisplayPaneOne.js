@@ -16,6 +16,10 @@ import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword'
 import PopUpDisplayPanelAssessee from '../../PopUpDisplayPanel/PopUpDisplayPanelAssessee';
 import PopUpDisplayPanelAssociate from '../../PopUpDisplayPanel/PopUpDisplayPanelAssociate';
 import { Fragment } from 'react';
+import {
+  setAssesseeCardPermissionInJson,
+  setAssociateCardPermissionInJson
+} from '../../Actions/GenericActions';
 
 const DisplayPaneLeftSection1 = () => {
   return (
@@ -120,19 +124,22 @@ export const DisplayPaneOne = () => {
   const [selectedSection, setSelectedSection] = useState(leftPaneSections[0]);
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { userData } = useSelector((state) => state.userReducer);
-
+  const { userData, assesseePermission = null } = useSelector((state) => state.userReducer);
   const { isAssociateSelected, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneReducer
   );
   const associateName = selectedAssociateInfo
     ? selectedAssociateInfo.associateInformation.associateName
     : 'associates';
-  const associateDescription = selectedAssociateInfo && selectedAssociateInfo.associateInformation.associateDescription;
-  const assesseeAlias = selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeAlias;
-  const assesseeName = selectedAssociateInfo ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst + ' ' +
-    selectedAssociateInfo.assesseeInformation.assesseeNameLast
-  : 'sample@gmail.com ';
+  const associateDescription =
+    selectedAssociateInfo && selectedAssociateInfo.associateInformation.associateDescription;
+  const assesseeAlias =
+    selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeAlias;
+  const assesseeName = selectedAssociateInfo
+    ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
+      ' ' +
+      selectedAssociateInfo.assesseeInformation.assesseeNameLast
+    : 'sample@gmail.com ';
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
@@ -140,12 +147,20 @@ export const DisplayPaneOne = () => {
     if (e.currentTarget.getAttribute('data-value') !== '') {
       if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
         popupHeaderOne = 'assessee';
-        popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
+        popupContentArrValue = setAssesseeCardPermissionInJson(
+          ASSESSEE_CARD_POPUP_OPTIONS,
+          assesseePermission
+        );
         value = 'ASSESSEE_CARD_POPUP';
       }
       if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
         popupHeaderOne = 'associate';
-        popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
+        // popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
+        popupContentArrValue = setAssociateCardPermissionInJson(
+          ASSOCIATE_CARD_POPUP_OPTION,
+          assesseePermission
+        );
+
         value = 'ASSOCIATE_CARD_POPUP';
       }
       dispatch({
@@ -192,7 +207,9 @@ export const DisplayPaneOne = () => {
             textOneOne={assesseeName}
             textTwoOne={assesseeAlias}
             onClick={
-              selectedAssociateInfo && selectedAssociateInfo.assesseeInformation ? openCardPopup : null
+              selectedAssociateInfo && selectedAssociateInfo.assesseeInformation
+                ? openCardPopup
+                : null
             }
             tag={'assessee_card'}
           />
@@ -211,7 +228,7 @@ export const DisplayPaneOne = () => {
           )}
         </div>
       </div>
-      {isAssociateSelected && (
+      {assesseePermission && assesseePermission.associateHierarchy.includes('review') && (
         <Fragment>
           <Sections
             listSections={leftPaneSections}

@@ -1,7 +1,8 @@
-import { SET_USER } from '../actionType';
+import { SET_ASSESSEE_PERMISSION, SET_USER } from '../actionType';
 
 const initialState = {
   userData: null,
+  assesseePermission: ''
 };
 
 const userReducer = (istate = initialState, action) => {
@@ -10,7 +11,12 @@ const userReducer = (istate = initialState, action) => {
     case SET_USER:
       return {
         ...istate,
-        userData: action.payload,
+        userData: action.payload
+      };
+    case SET_ASSESSEE_PERMISSION:
+      return {
+        ...istate,
+        assesseePermission: action.payload
       };
     default:
       return istate;

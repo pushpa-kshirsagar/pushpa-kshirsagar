@@ -4,7 +4,7 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
-import { SET_MIDDLEPANE_STATE, SET_POPUP_STATE, SET_SECONDARY_OPTION_VALUE } from '../actionType';
+import { POPUP_CLOSE, SET_MIDDLEPANE_STATE, SET_POPUP_STATE, SET_SECONDARY_OPTION_VALUE } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
   ASSOCIATE_CARD_POPUP_OPTION,
@@ -17,6 +17,7 @@ import {
   REVIEW_DISTINCT_POPUP_OPTION
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
+import { setAssociateCardPermissionInJson } from '../Actions/GenericActions';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -24,7 +25,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOneBadgeTwo,
     popupOpenType
   } = useSelector((state) => state.PopUpReducer);
-  const { userData } = useSelector((state) => state.userReducer);
+  const { userData,assesseePermission } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
@@ -51,7 +52,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = MODULE_POPUP_OPTION;
+      valueArr = setAssociateCardPermissionInJson(MODULE_POPUP_OPTION,assesseePermission);
       reviseSecondaryOptionCheckValue = 'all';
     }
     if (clickValue === 'notifications' || clickValue === 'reports') {
@@ -167,29 +168,36 @@ const PopUpDisplayPanelAssociate = (props) => {
     let reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
     let revisePopupType = 'primary';
     let reviseSecondaryOptionCheckValue = '';
-    let valueArr = ASSOCIATE_CARD_POPUP_OPTION;
-    if (
-      (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
-      popupHeaderOneBadgeOne === 'review'
-    ) {
-      revisePopupHeaderOne = popupHeaderOne;
-      revisepopupHeaderOneBadgeOne = '';
-      valueArr = MODULE_POPUP_OPTION;
-      revisePopupType = 'secondary';
+    let valueArr = setAssociateCardPermissionInJson(ASSOCIATE_CARD_POPUP_OPTION,assesseePermission);
+    if (popupOpenType === 'primary') {
+      dispatch({ type: POPUP_CLOSE });
     }
-
-    dispatch({
-      type: SET_POPUP_STATE,
-      payload: {
-        popupHeaderOne: revisePopupHeaderOne,
-        popupHeaderOneBadgeOne: revisepopupHeaderOneBadgeOne,
-        popupHeaderOneBadgeTwo: revisepopupHeaderOneBadgeTwo,
-        isPopUpValue: reviseisPopUpValue,
-        popupOpenType: revisePopupType,
-        secondaryOptionCheckValue: '',
-        popupContentArrValue: valueArr
+    else{
+      if (
+        (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
+        popupHeaderOneBadgeOne === 'review'
+      ) {
+        revisePopupHeaderOne = popupHeaderOne;
+        revisepopupHeaderOneBadgeOne = '';
+        valueArr = valueArr = setAssociateCardPermissionInJson(MODULE_POPUP_OPTION,assesseePermission);;
+        revisePopupType = 'secondary';
       }
-    });
+  
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: revisePopupHeaderOne,
+          popupHeaderOneBadgeOne: revisepopupHeaderOneBadgeOne,
+          popupHeaderOneBadgeTwo: revisepopupHeaderOneBadgeTwo,
+          isPopUpValue: reviseisPopUpValue,
+          popupOpenType: revisePopupType,
+          secondaryOptionCheckValue: '',
+          popupContentArrValue: valueArr
+        }
+      });
+    }
+   
+    
   };
   return (
     <div>
