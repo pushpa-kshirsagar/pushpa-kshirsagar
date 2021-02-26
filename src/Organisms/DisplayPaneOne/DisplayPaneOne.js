@@ -19,6 +19,10 @@ import DisplayPaneOneSectionOne from '../../Molecules/DisplayPaneOneSectionOne/D
 import DisplayPaneOneSectionTwo from '../../Molecules/DisplayPaneOneSectionTwo/DisplayPaneOneSectionTwo';
 import DisplayPaneOneSectionThree from '../../Molecules/DisplayPaneOneSectionThree/DisplayPaneOneSectionThree';
 import DisplayPaneOneSectionFour from '../../Molecules/DisplayPaneOneSectionFour/DisplayPaneOneSectionFour';
+import {
+  setAssesseeCardPermissionInJson,
+  setAssociateCardPermissionInJson
+} from '../../Actions/GenericActions';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
