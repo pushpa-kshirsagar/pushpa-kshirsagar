@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import iGuruLogo from '../../images/iglogo1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import '../DisplayPageSignIn/DisplayPageSignIn.css';
-import bgImg from '../../images/bg.jpeg';
+// import bgImg from '../../images/bg.jpeg'; // old background Image
 import IconButtonUI from '../../Molecules/IconButton/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
@@ -12,6 +12,7 @@ import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
 const DisplayPageSignOn = () => {
+  const bgImg = './Image/bg-image.jpg';
   const style = {
     backgroundPosition: '50% 50%',
     backgroundImage: `url(${bgImg})`,

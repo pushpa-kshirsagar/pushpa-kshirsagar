@@ -223,7 +223,7 @@ body {
   flex-wrap: wrap;
 }
 .form-inputs-cantainer {
-  padding: 20px 10px 10px 10px;
+  padding: 20px 5px 10px 5px;
 }
 .form-inputs-signoncantainer {
   padding: 10px 10px 10px 10px;
@@ -293,6 +293,9 @@ body {
   color: #f44336 !important;
   width: 100%;
   height: 12px;
+}
+.paddingCard {
+  padding: 2.5px;
 }
 /* below css for scroll */
 ::-webkit-scrollbar {

@@ -6,5 +6,3 @@ export const GET_USER_URL = 'https://run.mocky.io/v3/d5c8b175-f59d-44e0-ae31-84b
 // export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/d6144b23-0a0d-48b9-b58d-14fbfba95890';// for assessee role
 // export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/c0f46922-44b6-44fc-a8d6-ff2c5ec48a81';// for assessee manager (primary) role
 export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/b4ff8c35-0445-4f0c-899b-68d8281b2bd8';// for assessee manager (secondary) role
-
-

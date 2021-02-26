@@ -18,6 +18,7 @@ const initialState = {
   prevPopUpValue: '',
   popupMode: '',
   popupHeaderOne: '',
+  previousPopupHeaderOne: '',
   popupHeaderOneBadgeOne: '',
   popupHeaderOneBadgeTwo: '',
   popupContentArrValue: [
@@ -82,6 +83,7 @@ const PopUpReducer = (istate = initialState, action) => {
         popupOpenType: action.payload.popupOpenType,
         popupContentArrValue: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
+        previousPopupHeaderOne: action.payload.previousPopupHeaderOne || '',
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne,
         popupHeaderOneBadgeTwo: action.payload.popupHeaderOneBadgeTwo,
         secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue

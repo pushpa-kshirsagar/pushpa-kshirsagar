@@ -15,108 +15,40 @@ import PopUpSpreadSheet from '../../PopUpIcon/PopUpSpreadSheet';
 import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword';
 import PopUpDisplayPanelAssessee from '../../PopUpDisplayPanel/PopUpDisplayPanelAssessee';
 import PopUpDisplayPanelAssociate from '../../PopUpDisplayPanel/PopUpDisplayPanelAssociate';
-import { Fragment } from 'react';
+import DisplayPaneOneSectionOne from '../../Molecules/DisplayPaneOneSectionOne/DisplayPaneOneSectionOne';
+import DisplayPaneOneSectionTwo from '../../Molecules/DisplayPaneOneSectionTwo/DisplayPaneOneSectionTwo';
+import DisplayPaneOneSectionThree from '../../Molecules/DisplayPaneOneSectionThree/DisplayPaneOneSectionThree';
+import DisplayPaneOneSectionFour from '../../Molecules/DisplayPaneOneSectionFour/DisplayPaneOneSectionFour';
 import {
   setAssesseeCardPermissionInJson,
   setAssociateCardPermissionInJson
 } from '../../Actions/GenericActions';
-
-const DisplayPaneLeftSection1 = () => {
-  return (
-    <>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="assessees" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="assessments" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="assignments" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="associates" />
-      </div>
-    </>
-  );
-};
-const DisplayPaneLeftSection2 = () => {
-  return (
-    <>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGauge" textTwoOne="career" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGauge" textTwoOne="education" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGauge" textTwoOne="occupation" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGauge" textTwoOne="pulse" />
-      </div>
-    </>
-  );
-};
-const DisplayPaneLeftSection3 = () => {
-  return (
-    <>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGuru" textTwoOne="career" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGuru" textTwoOne="education" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGuru" textTwoOne="occupation" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGuru" textTwoOne="pulse" />
-      </div>
-    </>
-  );
-};
-const DisplayPaneLeftSection4 = () => {
-  return (
-    <>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGem" textTwoOne="assessees" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGem" textTwoOne="assessments" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGem" textTwoOne="assignments" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGem" textTwoOne="associates" />
-      </div>
-    </>
-  );
-};
+import PopUpDisplayPaneOneSectionOne from '../../PopUpDisplayPanel/PopUpDisplayPaneOneSectionOne';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
     {
       id: 'section1',
-      sectionComponent: DisplayPaneLeftSection1,
+      sectionComponent: DisplayPaneOneSectionOne,
       displayPaneLeftHeaderText: 'dashboard',
       displayPaneLeftBadgeText: ''
     },
     {
       id: 'section2',
-      sectionComponent: DisplayPaneLeftSection2,
+      sectionComponent: DisplayPaneOneSectionTwo,
+
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'analytics'
     },
     {
       id: 'section3',
-      sectionComponent: DisplayPaneLeftSection3,
+      sectionComponent: DisplayPaneOneSectionThree,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'marketplace'
     },
     {
       id: 'section4',
-      sectionComponent: DisplayPaneLeftSection4,
+      sectionComponent: DisplayPaneOneSectionFour,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'mine'
     }
@@ -229,7 +161,7 @@ export const DisplayPaneOne = () => {
         </div>
       </div>
       {assesseePermission && assesseePermission.associateHierarchy.includes('review') && (
-        <Fragment>
+        <>
           <Sections
             listSections={leftPaneSections}
             selectedSection={selectedSection}
@@ -237,9 +169,11 @@ export const DisplayPaneOne = () => {
           />
 
           <FooterIconOne />
-        </Fragment>
+        </>
       )}
-
+      <PopUpDisplayPaneOneSectionOne
+        isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_ONE_POPUP'}
+      />
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
       <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />

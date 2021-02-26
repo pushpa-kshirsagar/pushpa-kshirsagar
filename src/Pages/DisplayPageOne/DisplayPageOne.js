@@ -12,7 +12,7 @@ import DisplayPaneFour from '../../Organisms/DisplayPaneFour/DisplayPaneFour';
 import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 
 const DisplayPageOne = () => {
-  const { userData = null } = useSelector((state) => state.userReducer);
+  // const { userData = null } = useSelector((state) => state.userReducer);
   const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
   const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const dispatch = useDispatch();
@@ -30,6 +30,7 @@ const DisplayPageOne = () => {
       selectedAssociateInfo.assesseeInformation.assesseeNameLast;
   const userEmail =
     selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
+
   return (
     <>
       <HeaderZero userName={userName} userEmail={userEmail} />
