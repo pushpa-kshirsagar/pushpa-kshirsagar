@@ -294,6 +294,9 @@ body {
   width: 100%;
   height: 12px;
 }
+.paddingCard {
+  padding: 2.5px;
+}
 /* below css for scroll */
 ::-webkit-scrollbar {
   width: 4px;

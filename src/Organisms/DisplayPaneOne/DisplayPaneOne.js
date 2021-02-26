@@ -15,104 +15,35 @@ import PopUpSpreadSheet from '../../PopUpIcon/PopUpSpreadSheet';
 import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword';
 import PopUpDisplayPanelAssessee from '../../PopUpDisplayPanel/PopUpDisplayPanelAssessee';
 import PopUpDisplayPanelAssociate from '../../PopUpDisplayPanel/PopUpDisplayPanelAssociate';
-import { Fragment } from 'react';
-
-const DisplayPaneLeftSection1 = () => {
-  return (
-    <>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="assessees" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="assessments" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="assignments" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="associates" />
-      </div>
-    </>
-  );
-};
-const DisplayPaneLeftSection2 = () => {
-  return (
-    <>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGauge" textTwoOne="career" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGauge" textTwoOne="education" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGauge" textTwoOne="occupation" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGauge" textTwoOne="pulse" />
-      </div>
-    </>
-  );
-};
-const DisplayPaneLeftSection3 = () => {
-  return (
-    <>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGuru" textTwoOne="career" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGuru" textTwoOne="education" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGuru" textTwoOne="occupation" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGuru" textTwoOne="pulse" />
-      </div>
-    </>
-  );
-};
-const DisplayPaneLeftSection4 = () => {
-  return (
-    <>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGem" textTwoOne="assessees" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGem" textTwoOne="assessments" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGem" textTwoOne="assignments" />
-      </div>
-      <div style={{ padding: '2.5px' }}>
-        <Card isIcon IconOne={ArrowRight} textOneOne="iGem" textTwoOne="associates" />
-      </div>
-    </>
-  );
-};
+import DisplayPaneOneSectionOne from '../../Molecules/DisplayPaneOneSectionOne/DisplayPaneOneSectionOne';
+import DisplayPaneOneSectionTwo from '../../Molecules/DisplayPaneOneSectionTwo/DisplayPaneOneSectionTwo';
+import DisplayPaneOneSectionThree from '../../Molecules/DisplayPaneOneSectionThree/DisplayPaneOneSectionThree';
+import DisplayPaneOneSectionFour from '../../Molecules/DisplayPaneOneSectionFour/DisplayPaneOneSectionFour';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
     {
       id: 'section1',
-      sectionComponent: DisplayPaneLeftSection1,
+      sectionComponent: DisplayPaneOneSectionOne,
       displayPaneLeftHeaderText: 'dashboard',
       displayPaneLeftBadgeText: ''
     },
     {
       id: 'section2',
-      sectionComponent: DisplayPaneLeftSection2,
+      sectionComponent: DisplayPaneOneSectionTwo,
+
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'analytics'
     },
     {
       id: 'section3',
-      sectionComponent: DisplayPaneLeftSection3,
+      sectionComponent: DisplayPaneOneSectionThree,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'marketplace'
     },
     {
       id: 'section4',
-      sectionComponent: DisplayPaneLeftSection4,
+      sectionComponent: DisplayPaneOneSectionFour,
       displayPaneLeftHeaderText: 'iGuru',
       displayPaneLeftBadgeText: 'mine'
     }
@@ -128,11 +59,15 @@ export const DisplayPaneOne = () => {
   const associateName = selectedAssociateInfo
     ? selectedAssociateInfo.associateInformation.associateName
     : 'associates';
-  const associateDescription = selectedAssociateInfo && selectedAssociateInfo.associateInformation.associateDescription;
-  const assesseeAlias = selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeAlias;
-  const assesseeName = selectedAssociateInfo ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst + ' ' +
-    selectedAssociateInfo.assesseeInformation.assesseeNameLast
-  : 'sample@gmail.com ';
+  const associateDescription =
+    selectedAssociateInfo && selectedAssociateInfo.associateInformation.associateDescription;
+  const assesseeAlias =
+    selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeAlias;
+  const assesseeName = selectedAssociateInfo
+    ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
+      ' ' +
+      selectedAssociateInfo.assesseeInformation.assesseeNameLast
+    : 'sample@gmail.com ';
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
@@ -192,7 +127,9 @@ export const DisplayPaneOne = () => {
             textOneOne={assesseeName}
             textTwoOne={assesseeAlias}
             onClick={
-              selectedAssociateInfo && selectedAssociateInfo.assesseeInformation ? openCardPopup : null
+              selectedAssociateInfo && selectedAssociateInfo.assesseeInformation
+                ? openCardPopup
+                : null
             }
             tag={'assessee_card'}
           />
@@ -212,7 +149,7 @@ export const DisplayPaneOne = () => {
         </div>
       </div>
       {isAssociateSelected && (
-        <Fragment>
+        <>
           <Sections
             listSections={leftPaneSections}
             selectedSection={selectedSection}
@@ -220,7 +157,7 @@ export const DisplayPaneOne = () => {
           />
 
           <FooterIconOne />
-        </Fragment>
+        </>
       )}
 
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
