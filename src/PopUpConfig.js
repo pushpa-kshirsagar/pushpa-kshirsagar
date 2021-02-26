@@ -476,7 +476,76 @@ export const MODULE_POPUP_OPTION = [
     permission: 'review'
   }
 ];
-export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
+export const NODE_POPUP_OPTION = [
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: false },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'associate', dataValue: 'associate', optionClass: 'optionSecondary', disabled: false }
+];
+export const TYPE_POPUP_OPTION = [
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: false },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'assessments',
+    dataValue: 'assessments',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionSecondary',
+    disabled: false
+  }
+];
+export const ROLE_POPUP_OPTION = [
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: false },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary' },
+  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
+];
+export const GROUP_POPUP_OPTION = [
   { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: false },
   {
     data: 'review',
