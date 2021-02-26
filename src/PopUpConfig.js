@@ -436,6 +436,19 @@ export const REVIEW_REVISE_POPUP = [
   { data: 'all', dataValue: 'all', optionClass: 'optionSecondary' },
   { data: 'key', dataValue: 'key', optionClass: 'optionSecondary' }
 ];
+export const ASSESSEE_REVIEW_REVISE_POPUP = [
+  {
+    data: 'information',
+    dataValue: 'information',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'all', dataValue: 'all', optionClass: 'optionSecondary' },
+  { data: 'key', dataValue: 'key', optionClass: 'optionSecondary',divider: 'dark' },
+  { data: 'anonymous', dataValue: 'anonymous', optionClass: 'optionSecondary' },
+  { data: 'blank', dataValue: 'blank', optionClass: 'optionSecondary' }
+];
 //
 export const SIGN_OUT_POPUP = [
   { data: 'no', dataValue: 'no', optionClass: 'optionPrimary', disabled: false },
