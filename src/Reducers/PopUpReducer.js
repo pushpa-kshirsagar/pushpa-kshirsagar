@@ -44,10 +44,13 @@ const PopUpReducer = (istate = initialState, action) => {
     case POPUP_CLOSE:
       return {
         ...istate,
-        isPopUpOpen: false,
         isPopUpValue: '',
+        isPopUpOpen: false,
         popupMode: '',
-        popupContentArrValue: ''
+        popupContentArrValue: '',
+        popupHeaderOne: '',
+        popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeTwo: '',
       };
     case ASSESSEE_SIGN_ON:
       return {

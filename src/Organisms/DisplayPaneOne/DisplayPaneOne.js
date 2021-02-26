@@ -51,8 +51,7 @@ export const DisplayPaneOne = () => {
   const [selectedSection, setSelectedSection] = useState(leftPaneSections[0]);
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { userData } = useSelector((state) => state.userReducer);
-
+  const { userData, assesseePermission = null } = useSelector((state) => state.userReducer);
   const { isAssociateSelected, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneReducer
   );
@@ -75,12 +74,20 @@ export const DisplayPaneOne = () => {
     if (e.currentTarget.getAttribute('data-value') !== '') {
       if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
         popupHeaderOne = 'assessee';
-        popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
+        popupContentArrValue = setAssesseeCardPermissionInJson(
+          ASSESSEE_CARD_POPUP_OPTIONS,
+          assesseePermission
+        );
         value = 'ASSESSEE_CARD_POPUP';
       }
       if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
         popupHeaderOne = 'associate';
-        popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
+        // popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
+        popupContentArrValue = setAssociateCardPermissionInJson(
+          ASSOCIATE_CARD_POPUP_OPTION,
+          assesseePermission
+        );
+
         value = 'ASSOCIATE_CARD_POPUP';
       }
       dispatch({
@@ -148,7 +155,7 @@ export const DisplayPaneOne = () => {
           )}
         </div>
       </div>
-      {isAssociateSelected && (
+      {assesseePermission && assesseePermission.associateHierarchy.includes('review') && (
         <>
           <Sections
             listSections={leftPaneSections}

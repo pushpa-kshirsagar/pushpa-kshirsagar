@@ -13,10 +13,12 @@ import {
   SIGN_OUT_POPUP
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
+import { setAssesseeCardPermissionInJson } from '../Actions/GenericActions';
 const PopUpDisplayPanelAssessee = (props) => {
   const { popupHeaderOne, popupHeaderOneBadgeOne, popupOpenType } = useSelector(
     (state) => state.PopUpReducer
   );
+  const { assesseePermission } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
@@ -91,17 +93,25 @@ const PopUpDisplayPanelAssessee = (props) => {
     });
   };
   const BackHandlerEvent = (e) => {
-    dispatch({
-      type: SET_POPUP_STATE,
-      payload: {
-        popupHeaderOne: 'assessee',
-        popupHeaderOneBadgeOne: '',
-        isPopUpValue: 'ASSESSEE_CARD_POPUP',
-        popupOpenType: 'primary',
-        secondaryOptionCheckValue: '',
-        popupContentArrValue: ASSESSEE_CARD_POPUP_OPTIONS
-      }
-    });
+    if (popupOpenType === 'primary') {
+      dispatch({ type: POPUP_CLOSE });
+    } else {
+      let popupContentArrValue = setAssesseeCardPermissionInJson(
+        ASSESSEE_CARD_POPUP_OPTIONS,
+        assesseePermission
+      );
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'assessee',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'ASSESSEE_CARD_POPUP',
+          popupOpenType: 'primary',
+          secondaryOptionCheckValue: '',
+          popupContentArrValue: popupContentArrValue
+        }
+      });
+    }
   };
   return (
     <div>

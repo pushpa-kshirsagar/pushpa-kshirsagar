@@ -8,7 +8,6 @@ import InputField from '../../Atoms/InputField/InputField';
 // import bgImg from '../../images/bg.jpeg'; // old background Image
 import Label from '../../Atoms/Labels/Label';
 // import { useDispatch } from 'react-redux';
-// import { GET_USER_SAGA } from '../../actionType';
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import userPool from '../../UserPool';
 // import Clear from 'material-ui-icons/Clear';
@@ -35,6 +34,7 @@ const DisplayPageSignIn = () => {
   //   let path = `/dashboard`;
   //   history.push(path);
   // };
+  
 
   const onClickSignIn = () => {
     setIsCredentialsInValid('in progress');

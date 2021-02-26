@@ -22,7 +22,6 @@ const DisplayPageOne = () => {
   useEffect(() => {
     dispatch({ type: GET_USER_SAGA });
   }, [dispatch]);
-
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneReducer);
   const userName =
     selectedAssociateInfo &&
