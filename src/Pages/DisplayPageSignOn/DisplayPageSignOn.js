@@ -12,7 +12,7 @@ import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
 const DisplayPageSignOn = () => {
-  const bgImg = './Image/bg-image.jpg';
+  const bgImg = './Image/bg.jpg';
   const style = {
     backgroundPosition: '50% 50%',
     backgroundImage: `url(${bgImg})`,
