@@ -4,17 +4,18 @@ import { Button, Divider, IconButton } from '@material-ui/core';
 import Check from '@material-ui/icons/Check';
 
 const JsonRenderComponent = (props) => {
-  const { setSecondaryOptionValue, ChangeOptionPopup } = props;
+  const { setSecondaryOptionValue, ChangeOptionPopup, currentPopUpOption=[] } = props;
   const { popupContentArrValue, secondaryOptionCheckValue } = useSelector(
     (state) => state.PopUpReducer
   );
+  let popUpOption = currentPopUpOption.length > 0 ? currentPopUpOption : popupContentArrValue;
   return (
     <>
       <div id="dialog-description">
         <div className="true">
           <div className={'tickOption'}>
-            {popupContentArrValue &&
-              popupContentArrValue.map((item, index) => {
+            {popUpOption &&
+              popUpOption.map((item, index) => {
                 return (
                   <div key={index}>
                     <Button
@@ -25,7 +26,7 @@ const JsonRenderComponent = (props) => {
                           ? setSecondaryOptionValue
                           : ChangeOptionPopup
                       }
-                      disabled={item.data==='switch'? false:item.disabled}
+                      disabled={item.data === 'switch' ? false : item.disabled}
                     >
                       {item.data}
                       {item.optionClass === 'optionSecondary' &&

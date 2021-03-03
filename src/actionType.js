@@ -52,3 +52,10 @@ export const ROLEPOPUP = 'ROLEPOPUP';
 //for footer icon in middle pane
 export const FILTERMODE = 'FILTERMODE';
 export const NAVIGATOR_MODE = 'NAVIGATOR_MODE';
+
+
+// Assessees Module 
+export const ASSESSEE_POPUP_OPEN = 'ASSESSEE_POPUP_OPEN';
+export const ASSESSEE_POPUP_CLOSE = 'ASSESSEE_POPUP_CLOSE';
+export const SET_ASSESSEE_NEXT_POPUP = 'SET_ASSESSEE_NEXT_POPUP';
+export const SET_ASSESSEE_PREVIOUS_POPUP = 'SET_ASSESSEE_PREVIOUS_POPUP';

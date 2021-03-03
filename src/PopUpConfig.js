@@ -445,7 +445,7 @@ export const ASSESSEE_REVIEW_REVISE_POPUP = [
     disabled: false
   },
   { data: 'all', dataValue: 'all', optionClass: 'optionSecondary' },
-  { data: 'key', dataValue: 'key', optionClass: 'optionSecondary',divider: 'dark' },
+  { data: 'key', dataValue: 'key', optionClass: 'optionSecondary', divider: 'dark' },
   { data: 'anonymous', dataValue: 'anonymous', optionClass: 'optionSecondary' },
   { data: 'blank', dataValue: 'blank', optionClass: 'optionSecondary' }
 ];

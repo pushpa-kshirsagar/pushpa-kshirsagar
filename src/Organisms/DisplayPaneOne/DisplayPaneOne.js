@@ -24,6 +24,8 @@ import {
   setAssociateCardPermissionInJson
 } from '../../Actions/GenericActions';
 import PopUpDisplayPaneOneSectionOne from '../../PopUpDisplayPanel/PopUpDisplayPaneOneSectionOne';
+import PopUpDisplayPaneOneSectionTwo from '../../PopUpDisplayPanel/PopUpDisplayPaneOneSectionTwo';
+import PopUpAssesseesModule from '../../PopUpDisplayPanel/PopUpAssesseesModule';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -174,6 +176,10 @@ export const DisplayPaneOne = () => {
       <PopUpDisplayPaneOneSectionOne
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_ONE_POPUP'}
       />
+      <PopUpDisplayPaneOneSectionTwo
+        isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}
+      />
+      <PopUpAssesseesModule />
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
       <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />

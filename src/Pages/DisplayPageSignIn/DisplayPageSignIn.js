@@ -13,7 +13,7 @@ import userPool from '../../UserPool';
 // import Clear from 'material-ui-icons/Clear';
 
 const DisplayPageSignIn = () => {
-  const bgImg = './Image/bg-image.jpg';
+  const bgImg = './Image/bg.jpg';
   const style = {
     backgroundPosition: '50% 50%',
     backgroundImage: `url(${bgImg})`,
