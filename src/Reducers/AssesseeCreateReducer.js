@@ -4,8 +4,18 @@ import {
   CLEAR_ASSESSEE_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
   UPDATE_ASSESSEE_HOMEADDRESS_INFO,
-  UPDATE_ASSESSEE_PERSONAL_INFO
+  UPDATE_ASSESSEE_PERSONAL_INFO,
+  ASSESSEE_POPUP_OPEN,
+  ASSESSEE_POPUP_CLOSE,
+  SET_ASSESSEE_NEXT_POPUP,
+  SET_ASSESSEE_PREVIOUS_POPUP
 } from '../actionType';
+import {
+  ASSESSEE_REVIEW_REVISE_POPUP,
+  MODULE_POPUP_OPTION,
+  NOTIFICATION_REPORT_POPUP,
+  REVIEW_POPUP_OPTIONS
+} from '../PopUpConfig';
 
 const getLocalTime = () => {
   let date = new Date();
@@ -22,6 +32,18 @@ const getLocalTime = () => {
   return finalDate;
 };
 const initialState = {
+  assesseesPopUpActive: false,
+  assesseesPopUpType: '',
+  assesseesHeaderOne: '',
+  assesseesHeaderOneBadgeOne: '',
+  primaryPopUpOptions: MODULE_POPUP_OPTION,
+  currentPopUpOption: [],
+  secondaryPopUpOptions: {
+    create: ASSESSEE_REVIEW_REVISE_POPUP,
+    review: REVIEW_POPUP_OPTIONS,
+    notifications: NOTIFICATION_REPORT_POPUP,
+    reports: NOTIFICATION_REPORT_POPUP
+  },
   basicInfo: {
     namePrefix: '',
     nameFirst: '',
@@ -64,8 +86,63 @@ const initialState = {
 };
 
 const AssesseeCreateReducer = (istate = initialState, action) => {
-  console.log('IN assessee create REDUCER====>', action.payload);
   switch (action.type) {
+    case ASSESSEE_POPUP_OPEN:
+      return {
+        ...istate,
+        assesseesHeaderOne: 'assessees',
+        assesseesPopUpType: 'primary',
+        currentPopUpOption: istate.primaryPopUpOptions,
+        assesseesPopUpActive: true
+      };
+    case ASSESSEE_POPUP_CLOSE:
+      return {
+        ...istate,
+        assesseesHeaderOne: '',
+        assesseesHeaderOneBadgeOne: '',
+        assesseesPopUpActive: false
+      };
+    case SET_ASSESSEE_NEXT_POPUP:
+      if (istate.assesseesPopUpType === 'primary') {
+        if (action.payload === 'notifications' || action.payload === 'reports') {
+          return {
+            ...istate,
+            assesseesHeaderOne: action.payload,
+            assesseesHeaderOneBadgeOne: 'review',
+            assesseesPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload]
+          };
+        } else {
+          return {
+            ...istate,
+            assesseesHeaderOne: 'assessees',
+            assesseesHeaderOneBadgeOne: action.payload,
+            assesseesPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload]
+          };
+        }
+      } else {
+        return istate;
+      }
+    case SET_ASSESSEE_PREVIOUS_POPUP:
+      if (istate.assesseesPopUpType === 'primary') {
+        return {
+          ...istate,
+          currentPopUpOption: [],
+          assesseesPopUpActive: false,
+          assesseesPopUpType: ''
+        };
+      } else if (istate.assesseesPopUpType === 'secondary') {
+        return {
+          ...istate,
+          currentPopUpOption: istate.primaryPopUpOptions,
+          assesseesHeaderOne: 'assessees',
+          assesseesHeaderOneBadgeOne: '',
+          assesseesPopUpType: 'primary'
+        };
+      } else {
+        return istate;
+      }
     case UPDATE_ASSESSEE_BASIC_INFO:
       return {
         ...istate,
@@ -92,44 +169,7 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         ...action.payload
       };
     case CLEAR_ASSESSEE_INFO:
-      return {
-        basicInfo: {
-          namePrefix: '',
-          nameFirst: '',
-          nameOther: '',
-          nameLast: '',
-          nameSuffix: '',
-          isNameVerified: false
-        },
-        emailAddressPrimary: '',
-        emailAddressSecondary: '',
-        communication: '',
-        signIn: '',
-        mobileTelephone: {
-          mobileNumber: '',
-          countryCode: '',
-          communication: false,
-          verification: false
-        },
-        personalInfo: {
-          gender: '',
-          birthDate: '',
-          birthPlace: ''
-        },
-        homeAddressInfo: {
-          countryCode: '',
-          stateCode: '',
-          postCode: '',
-          cityCode: '',
-          address: '',
-          isCommunication: false,
-          isVerification: false
-        },
-        tagprimary: '',
-        tagsecondary: '',
-        tenurestart: getLocalTime(),
-        tenureend: '1970-00-00T00:00'
-      };
+      return initialState;
     default:
       return istate;
   }
