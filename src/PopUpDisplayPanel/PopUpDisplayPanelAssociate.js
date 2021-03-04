@@ -13,16 +13,13 @@ import {
 import {
   NOTIFICATION_REPORT_POPUP,
   ASSOCIATE_CARD_POPUP_OPTION,
-  GROUP_POPUP_OPTION,
-  NODE_POPUP_OPTION,
-  ROLE_POPUP_OPTION,
-  TYPE_POPUP_OPTION,
   MODULE_POPUP_OPTION,
   REVIEW_REVISE_POPUP,
   EXCHANGE_POPUP_OPTION,
   REVIEW_POPUP_OPTIONS,
   MARKETPLACE_POPUP_OPTION,
-  REVIEW_DISTINCT_POPUP_OPTION
+  REVIEW_DISTINCT_POPUP_OPTION,
+  GROUP_NODE_ROLE_TYPE_POPUP_OPTION
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { setAssociateCardPermissionInJson } from '../Actions/GenericActions';
@@ -110,7 +107,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = NODE_POPUP_OPTION;
+      valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'associate';
     }
     if (clickValue === 'groups') {
@@ -118,7 +115,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = GROUP_POPUP_OPTION;
+      valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'assessees';
     }
     if (clickValue === 'roles') {
@@ -126,7 +123,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = ROLE_POPUP_OPTION;
+      valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'assessees';
     }
     if (clickValue === 'types') {
@@ -134,7 +131,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = TYPE_POPUP_OPTION;
+      valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'assessments';
     }
     if (clickValue === 'exchange') {

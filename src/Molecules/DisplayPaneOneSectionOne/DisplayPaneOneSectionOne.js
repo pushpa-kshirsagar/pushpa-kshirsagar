@@ -4,7 +4,7 @@ import Card from '../Card/Card';
 import { MODULE_POPUP_OPTION } from '../../PopUpConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAssesseeCardPermissionInJson } from '../../Actions/GenericActions';
-import { ASSESSEE_POPUP_OPEN, SET_POPUP_STATE } from '../../actionType';
+import { ASSESSEE_POPUP_OPEN, ASSESSMENT_POPUP_OPEN, SET_POPUP_STATE } from '../../actionType';
 
 const DisplayPaneOneSectionOne = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,9 @@ const DisplayPaneOneSectionOne = () => {
   const openAssesseesPopUp = () => {
     dispatch({ type: ASSESSEE_POPUP_OPEN });
   };
-
+  const openAssessmentPopUp = () => {
+    dispatch({ type: ASSESSMENT_POPUP_OPEN });
+  };
   const openDisplayPaneOneSectionOnePopUp = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
@@ -71,11 +73,7 @@ const DisplayPaneOneSectionOne = () => {
       <div className="paddingCard" onClick={openAssesseesPopUp} data-value={'assessees'}>
         <Card isIcon IconOne={ArrowRight} textOneOne="assessees" />
       </div>
-      <div
-        className="paddingCard"
-        onClick={openDisplayPaneOneSectionOnePopUp}
-        data-value={'assessments'}
-      >
+      <div className="paddingCard" onClick={openAssessmentPopUp} data-value={'assessments'}>
         <Card isIcon IconOne={ArrowRight} textOneOne="assessments" />
       </div>
       <div

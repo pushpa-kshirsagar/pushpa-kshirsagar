@@ -4,10 +4,13 @@ import { Button, Divider, IconButton } from '@material-ui/core';
 import Check from '@material-ui/icons/Check';
 
 const JsonRenderComponent = (props) => {
-  const { setSecondaryOptionValue, ChangeOptionPopup, currentPopUpOption=[] } = props;
-  const { popupContentArrValue, secondaryOptionCheckValue } = useSelector(
-    (state) => state.PopUpReducer
-  );
+  const {
+    setSecondaryOptionValue,
+    ChangeOptionPopup,
+    currentPopUpOption = [],
+    secondaryOptionCheckValue
+  } = props;
+  const { popupContentArrValue } = useSelector((state) => state.PopUpReducer);
   let popUpOption = currentPopUpOption.length > 0 ? currentPopUpOption : popupContentArrValue;
   return (
     <>

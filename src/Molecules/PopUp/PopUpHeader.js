@@ -8,7 +8,7 @@ import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './PopUp.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { POPUP_CLOSE, SET_NEXT_POPUP, CLEAR_ASSESSEE_INFO, PREVIOUS_POPUP } from '../../actionType';
+import { POPUP_CLOSE, SET_NEXT_POPUP, CLEAR_ASSESSEE_INFO, PREVIOUS_POPUP, CLEAR_ASSESSMENT_INFO } from '../../actionType';
 const PopupHeader = (props) => {
   const {
     headerPanelColour,
@@ -28,6 +28,7 @@ const PopupHeader = (props) => {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CANCELPOPUP' } });
     } else {
       dispatch({ type: CLEAR_ASSESSEE_INFO });
+      dispatch({ type: CLEAR_ASSESSMENT_INFO });
       dispatch({ type: POPUP_CLOSE });
     }
   };
