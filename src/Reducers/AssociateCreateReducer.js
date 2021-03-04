@@ -32,6 +32,50 @@ const initialState = {
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP
   },
+  informationBasic: {
+    associateName: '',
+    associateNameVerification: false,
+    associateDescription: '',
+    associatePicture: '',
+    associatePictureVerification: false
+  },
+  informationAllocation: {
+    associateGroup: {
+      associateGroupPrimary: [],
+      associateGroupSecondary: []
+    },
+    associateManager: {
+      associateManagerPrimary: [],
+      associateManagerSecondary: []
+    },
+    associateNode: {
+      associateNodePrimary: [],
+      associateNodeSecondary: []
+    },
+    associateRole: {
+      associateRolePrimary: [],
+      associateRoleSecondary: []
+    }
+  },
+  informationContact: {
+    associateAddressWorkPrimary: {
+      associateAddressCountryRegion: '',
+      associateAddressProvinceState: '',
+      associateAddressPostcode: '',
+      associateAddressCity: '',
+      associateAddress: '',
+      associateAddressCommunication: '',
+      associateAddressVerification: ''
+    },
+    associateTelephoneWorkPrimary: {
+      associateTelephoneCountryRegion: '',
+      associateTelephoneAreaCity: '',
+      associateTelephoneNumber: '',
+      associateTelephoneExtension: '',
+      associateTelephoneCommunication: '',
+      associateTelephoneVerification: ''
+    }
+  },
   basicInfo: {
     name: '',
     description: '',
@@ -151,12 +195,20 @@ const AssociateCreateReducer = (istate = initialState, action) => {
     case UPDATE_ASSOCIATE_WORKADDRESS_INFO:
       return {
         ...istate,
-        workAddressInfo: action.payload
+        informationContact: {
+          ...istate.informationContact,
+          associateAddressWorkPrimary: action.payload
+        }
+        // workAddressInfo: action.payload
       };
     case UPDATE_ASSOCIATE_WORKTELEPHONE_INFO:
       return {
         ...istate,
-        workTeleponeInfo: action.payload
+        informationContact: {
+          ...istate.informationContact,
+          associateTelephoneWorkPrimary: action.payload
+        }
+        // workTeleponeInfo: action.payload
       };
     case UPDATE_ASSOCIATE_ADMIN_BASIC_INFO:
       return {
@@ -176,7 +228,7 @@ const AssociateCreateReducer = (istate = initialState, action) => {
     case UPDATE_ASSOCIATE_BASIC_INFO:
       return {
         ...istate,
-        basicInfo: action.payload
+        informationBasic: action.payload
       };
     case CLEAR_ASSOCIATE_INFO:
       return initialState;

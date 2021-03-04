@@ -11,6 +11,7 @@ import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
+import { Fragment } from 'react';
 const DisplayPageSignOn = () => {
   const bgImg = './Image/bg.jpg';
   const style = {
@@ -43,16 +44,21 @@ const DisplayPageSignOn = () => {
   return (
     <div style={style} className="signin-container">
       <div className="form-box">
-        <div className="form-header">
-          <div className="form-header-logo-container">
-            <img className="form-header-logo-img" src={iGuruLogo} alt="iGuru logo" />
-          </div>
-          <div>
-            <IconButton className="form-icon-style" onClick={handleClick}>
-              <SendIcon style={{ height: 20, width: 20 }} />
-            </IconButton>
-          </div>
-        </div>
+        {isPopUpOpen === false && (
+          <Fragment>
+            {' '}
+            <div className="form-header">
+              <div className="form-header-logo-container">
+                <img className="form-header-logo-img" src={iGuruLogo} alt="iGuru logo" />
+              </div>
+              <div>
+                <IconButton className="form-icon-style" onClick={handleClick}>
+                  <SendIcon style={{ height: 20, width: 20 }} />
+                </IconButton>
+              </div>
+            </div>
+          </Fragment>
+        )}
         {isPopUpOpen === false && (
           <div className="form-inputs-signoncantainer">
             <div id="dialog-description">

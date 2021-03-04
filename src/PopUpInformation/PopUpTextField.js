@@ -22,7 +22,8 @@ const PopUpTextField = (props) => {
     label = '',
     nextPopUpValue = '',
     basicInfo,
-    typeOfSetObject
+    typeOfSetObject,
+    actualLableValue
   } = props;
 
   const [state, setState] = useState({
@@ -34,7 +35,7 @@ const PopUpTextField = (props) => {
     let isValidate = true;
     if (isRequired) {
       if (basicInfo) {
-        if (basicInfo[label] === '') {
+        if (basicInfo[actualLableValue] === '') {
           setState((prevState) => ({ ...prevState, error: 'this information is required' }));
           return false;
         }
@@ -73,9 +74,9 @@ const PopUpTextField = (props) => {
         >
           <FormControl style={{ width: '100%' }}>
             <InputFeild
-              id={label}
+              id={actualLableValue}
               label={label}
-              value={basicInfo && basicInfo[label]}
+              value={basicInfo && basicInfo[actualLableValue]}
               onClick={handleChange}
               errorMsg={state.error}
             />

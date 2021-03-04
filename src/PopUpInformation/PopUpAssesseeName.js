@@ -38,11 +38,11 @@ const PopUpAssesseeName = (props) => {
   const validate = () => {
     let isValidate = true;
     if (basicInfo) {
-      if (basicInfo.nameFirst === '') {
+      if (basicInfo.assesseeNameFirst === '') {
         setState((prevState) => ({ ...prevState, nameFirstErr: 'this information is required' }));
         isValidate = false;
       }
-      if (basicInfo.nameLast === '') {
+      if (basicInfo.assesseeNameLast === '') {
         setState((prevState) => ({ ...prevState, nameLastErr: 'this information is required' }));
         isValidate = false;
       }
@@ -87,7 +87,7 @@ const PopUpAssesseeName = (props) => {
           </div>
 
           <SelectField
-            tag={'namePrefix'}
+            tag={'assesseeNamePrefix'}
             label={'prefix'}
             listSelect={[
               { name: ' ' },
@@ -104,37 +104,37 @@ const PopUpAssesseeName = (props) => {
             mappingValue={'name'}
             errorMsg={errorMsg}
             onChange={handleChange}
-            value={basicInfo && basicInfo.namePrefix}
+            value={basicInfo && basicInfo.assesseeNamePrefix}
           />
           <InputFeild
-            id={'nameFirst'}
+            id={'assesseeNameFirst'}
             label={'first name'}
             errorMsg={state.nameFirstErr}
             onClick={handleChange}
-            value={basicInfo && basicInfo.nameFirst}
+            value={basicInfo && basicInfo.assesseeNameFirst}
           />
           <InputFeild
-            id={'nameOther'}
+            id={'assesseeNameOther'}
             label={'other name'}
             errorMsg={errorMsg}
             onClick={handleChange}
-            value={basicInfo && basicInfo.nameOther}
+            value={basicInfo && basicInfo.assesseeNameOther}
           />
           <InputFeild
-            id={'nameLast'}
+            id={'assesseeNameLast'}
             label={'last name'}
             errorMsg={state.nameLastErr}
             onClick={handleChange}
-            value={basicInfo && basicInfo.nameLast}
+            value={basicInfo && basicInfo.assesseeNameLast}
           />
           <SelectField
-            tag={'nameSuffix'}
+            tag={'assesseeNameSuffix'}
             label={'suffix'}
             listSelect={[{ name: ' ' }, { name: 'Jr.' }, { name: 'Sr.' }]}
             mappingValue={'name'}
             errorMsg={errorMsg}
             onChange={handleChange}
-            value={basicInfo && basicInfo.suffix}
+            value={basicInfo && basicInfo.assesseeNameSuffix}
           />
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')}>
@@ -154,8 +154,8 @@ const PopUpAssesseeName = (props) => {
                   <Checkbox
                     className={''}
                     color="default"
-                    name={'isNameVerified'}
-                    checked={basicInfo && basicInfo.isNameVerified}
+                    name={'assesseeNameVerification'}
+                    checked={basicInfo && basicInfo.assesseeNameVerification}
                     disableRipple={true}
                     onChange={handleCheckbox}
                     disabled={popupMode === 'ASSESSEE_SIGN_ON' ? true : state.userNameverifyDisable}

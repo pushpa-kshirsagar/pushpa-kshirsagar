@@ -24,6 +24,7 @@ const PopUpAddress = (props) => {
     typeOfSetObject,
     basicInfo
   } = props;
+  const objectKeys = Object.keys(basicInfo);
   const handleChange = (event) => {
     const { name, value } = event.target;
     dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
@@ -57,7 +58,7 @@ const PopUpAddress = (props) => {
           </div>
           <FormControl style={{ width: '100%' }}>
             <SelectField
-              tag={'countryCode'}
+              tag={objectKeys[0]}
               label={'country / region'}
               listSelect={[
                 { countryCode: '91', name: 'India' },
@@ -65,11 +66,11 @@ const PopUpAddress = (props) => {
               ]}
               errorMsg={''}
               onChange={handleChange}
-              value={basicInfo && basicInfo.countryCode}
+              value={basicInfo && basicInfo[objectKeys[0]]}
               mappingValue={'countryCode'}
             />
             <SelectField
-              tag={'stateCode'}
+              tag={objectKeys[1]}
               label={'province / state'}
               listSelect={[
                 { stateCode: '211', name: 'Maharashtra' },
@@ -78,18 +79,18 @@ const PopUpAddress = (props) => {
               errorMsg={''}
               onChange={handleChange}
               mappingValue={'stateCode'}
-              value={basicInfo && basicInfo.stateCode}
+              value={basicInfo && basicInfo[objectKeys[1]]}
             />
 
             <InputFeild
-              id={'postCode'}
+              id={objectKeys[2]}
               label={'postcode / zip'}
-              value={basicInfo && basicInfo.postCode}
+              value={basicInfo && basicInfo[objectKeys[2]]}
               errorMsg={''}
               onClick={handleChange}
             />
             <SelectField
-              tag={'cityCode'}
+              tag={objectKeys[3]}
               label={'city'}
               listSelect={[
                 { cityCode: '345', name: 'Mumbai' },
@@ -98,12 +99,12 @@ const PopUpAddress = (props) => {
               mappingValue={'cityCode'}
               errorMsg={''}
               onChange={handleChange}
-              value={basicInfo && basicInfo.cityCode}
+              value={basicInfo && basicInfo[objectKeys[3]]}
             />
             <InputFeild
-              id={'address'}
+              id={objectKeys[4]}
               label={'address'}
-              value={basicInfo && basicInfo.address}
+              value={basicInfo && basicInfo[objectKeys[4]]}
               errorMsg={''}
               onClick={handleChange}
             />

@@ -32,6 +32,7 @@ const PopUpTelephone = (props) => {
   const [state, setState] = useState({
     error: ''
   });
+  const objectKeys = Object.keys(basicInfo);
 
   const validate = () => {
     let isValidate = true;
@@ -86,7 +87,7 @@ const PopUpTelephone = (props) => {
           </div>
           <FormControl style={{ width: '100%' }}>
             <SelectField
-              tag={'countryCode'}
+              tag={objectKeys[0]}
               label={'country / region'}
               listSelect={[
                 { countryCode: '91', name: 'India' },
@@ -95,13 +96,13 @@ const PopUpTelephone = (props) => {
               mappingValue={'countryCode'}
               errorMsg={''}
               onChange={handleChange}
-              value={basicInfo && basicInfo.countryCode}
+              value={basicInfo && basicInfo[objectKeys[0]]}
             />
 
             {isMobileState === false ? (
               <Fragment>
                 <SelectField
-                  tag={'cityCode'}
+                  tag={objectKeys[1]}
                   label={'area / city'}
                   listSelect={[
                     { cityCode: '345', name: 'Mumbai' },
@@ -110,13 +111,13 @@ const PopUpTelephone = (props) => {
                   mappingValue={'cityCode'}
                   errorMsg={''}
                   onChange={handleChange}
-                  value={basicInfo && basicInfo.cityCode}
+                  value={basicInfo && basicInfo[objectKeys[1]]}
                 />
                 <InputFeild
                   type={'text'}
-                  id={'telephoneNumber'}
+                  id={objectKeys[2]}
                   label={'telephone number'}
-                  value={basicInfo && basicInfo.telephoneNumber}
+                  value={basicInfo && basicInfo[2]}
                   errorMsg={''}
                   onClick={handleChange}
                 />
@@ -125,13 +126,9 @@ const PopUpTelephone = (props) => {
 
             <InputFeild
               type={'text'}
-              id={isMobileState ? 'mobileNumber' : 'extensionNumber'}
+              id={isMobileState ? objectKeys[1] : objectKeys[3]}
               label={isMobileState ? 'mobile number' : 'extension number'}
-              value={
-                basicInfo && isMobileState
-                  ? basicInfo && basicInfo.mobileNumber
-                  : basicInfo && basicInfo.extensionNumber
-              }
+              value={basicInfo && isMobileState ? basicInfo[objectKeys[1]] : basicInfo[objectKeys[3]]}
               errorMsg={state.error}
               onClick={handleChange}
             />
@@ -141,37 +138,13 @@ const PopUpTelephone = (props) => {
                   <div
                     className={'f4'}
                     style={{
-                      color:
-                        (basicInfo &&
-                          basicInfo.countryCode === '' &&
-                          basicInfo.mobileNumber === '') ||
-                        popupMode === 'ASSOCIATE_SIGN_ON' ||
-                        popupMode === 'ASSESSEE_SIGN_ON'
-                          ? 'dimgray'
-                          : ''
+                      color: 'dimgray'
                     }}
                   >
                     communication
                   </div>
                   <div className={'checkedFontNew'}>
-                    <Checkbox
-                      className={''}
-                      color="default"
-                      disabled={
-                        popupMode === 'ASSESSEE_SIGN_ON' ||
-                        popupMode === 'ASSOCIATE_SIGN_ON' ||
-                        (basicInfo && basicInfo.countryCode === '' && basicInfo.mobileNumber === '')
-                          ? true
-                          : false
-                      }
-                      checked={
-                        basicInfo
-                          ? basicInfo.countryCode !== '' && basicInfo.mobileNumber !== ''
-                            ? true
-                            : false
-                          : false
-                      }
-                    />
+                    <Checkbox className={''} color="default" disabled={true} checked={false} />
                   </div>
                 </div>
               </div>
@@ -182,24 +155,13 @@ const PopUpTelephone = (props) => {
                   <div
                     className={'f4'}
                     style={{
-                      color:
-                        popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
-                          ? 'dimgray'
-                          : ''
+                      color: 'dimgray'
                     }}
                   >
                     verification
                   </div>
                   <div className={'checkedFontNew'}>
-                    <Checkbox
-                      className={''}
-                      color="default"
-                      disabled={
-                        popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
-                          ? true
-                          : false
-                      }
-                    />
+                    <Checkbox className={''} color="default" disabled={false} />
                   </div>
                 </div>
               </div>
