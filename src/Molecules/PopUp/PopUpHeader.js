@@ -13,8 +13,10 @@ import {
   SET_NEXT_POPUP,
   CLEAR_ASSESSEE_INFO,
   PREVIOUS_POPUP,
-  CLEAR_ASSOCIATE_INFO
+  CLEAR_ASSOCIATE_INFO,
+  CLEAR_ASSESSMENT_INFO
 } from '../../actionType';
+
 const PopupHeader = (props) => {
   const {
     headerPanelColour,
@@ -34,6 +36,7 @@ const PopupHeader = (props) => {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CANCELPOPUP' } });
     } else {
       dispatch({ type: CLEAR_ASSESSEE_INFO });
+      dispatch({ type: CLEAR_ASSESSMENT_INFO });
       dispatch({ type: POPUP_CLOSE });
       dispatch({ type: CLEAR_ASSOCIATE_INFO });
     }
