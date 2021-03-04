@@ -10,7 +10,8 @@ import {
   ASSOCIATE_POPUP_OPEN,
   ASSOCIATE_POPUP_CLOSE,
   SET_ASSOCIATE_NEXT_POPUP,
-  SET_ASSOCIATE_PREVIOUS_POPUP
+  SET_ASSOCIATE_PREVIOUS_POPUP,
+  SET_ASSOCIATE_SECONDARY_OPTION_VALUE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -32,6 +33,7 @@ const initialState = {
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP
   },
+  secondaryOptionCheckValue: '',
   basicInfo: {
     name: '',
     description: '',
@@ -110,7 +112,8 @@ const AssociateCreateReducer = (istate = initialState, action) => {
             associatesHeaderOne: action.payload,
             associatesHeaderOneBadgeOne: 'review',
             associatesPopUpType: 'secondary',
-            currentPopUpOption: istate.secondaryPopUpOptions[action.payload]
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'unread'
           };
         } else {
           return {
@@ -118,7 +121,8 @@ const AssociateCreateReducer = (istate = initialState, action) => {
             associatesHeaderOne: 'associates',
             associatesHeaderOneBadgeOne: action.payload,
             associatesPopUpType: 'secondary',
-            currentPopUpOption: istate.secondaryPopUpOptions[action.payload]
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'active'
           };
         }
       } else {
@@ -143,6 +147,11 @@ const AssociateCreateReducer = (istate = initialState, action) => {
       } else {
         return istate;
       }
+    case SET_ASSOCIATE_SECONDARY_OPTION_VALUE:
+      return {
+        ...istate,
+        secondaryOptionCheckValue: action.payload
+      };
     case UPDATE_ASSOCIATE_INFO:
       return {
         ...istate,

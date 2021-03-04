@@ -8,7 +8,8 @@ import {
   ASSESSEE_POPUP_OPEN,
   ASSESSEE_POPUP_CLOSE,
   SET_ASSESSEE_NEXT_POPUP,
-  SET_ASSESSEE_PREVIOUS_POPUP
+  SET_ASSESSEE_PREVIOUS_POPUP,
+  SET_ASSESSEE_SECONDARY_OPTION_VALUE
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -44,6 +45,7 @@ const initialState = {
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP
   },
+  secondaryOptionCheckValue: '',
   basicInfo: {
     namePrefix: '',
     nameFirst: '',
@@ -110,7 +112,8 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
             assesseesHeaderOne: action.payload,
             assesseesHeaderOneBadgeOne: 'review',
             assesseesPopUpType: 'secondary',
-            currentPopUpOption: istate.secondaryPopUpOptions[action.payload]
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'unread'
           };
         } else {
           return {
@@ -118,7 +121,8 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
             assesseesHeaderOne: 'assessees',
             assesseesHeaderOneBadgeOne: action.payload,
             assesseesPopUpType: 'secondary',
-            currentPopUpOption: istate.secondaryPopUpOptions[action.payload]
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'active'
           };
         }
       } else {
@@ -143,6 +147,11 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
       } else {
         return istate;
       }
+    case SET_ASSESSEE_SECONDARY_OPTION_VALUE:
+      return {
+        ...istate,
+        secondaryOptionCheckValue: action.payload
+      };
     case UPDATE_ASSESSEE_BASIC_INFO:
       return {
         ...istate,
