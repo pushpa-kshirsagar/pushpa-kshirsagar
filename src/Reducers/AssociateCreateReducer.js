@@ -6,10 +6,32 @@ import {
   UPDATE_ASSOCIATE_ADMIN_MOBILE_INFO,
   UPDATE_ASSOCIATE_ADMIN_PERSONAL_INFO,
   CLEAR_ASSOCIATE_INFO,
-  UPDATE_ASSOCIATE_INFO
+  UPDATE_ASSOCIATE_INFO,
+  ASSOCIATE_POPUP_OPEN,
+  ASSOCIATE_POPUP_CLOSE,
+  SET_ASSOCIATE_NEXT_POPUP,
+  SET_ASSOCIATE_PREVIOUS_POPUP
 } from '../actionType';
+import {
+  MODULE_POPUP_OPTION,
+  NOTIFICATION_REPORT_POPUP,
+  REVIEW_POPUP_OPTIONS,
+  REVIEW_REVISE_POPUP
+} from '../PopUpConfig';
 
 const initialState = {
+  associatesPopUpActive: false,
+  associatesPopUpType: '',
+  associatesHeaderOne: '',
+  associatesHeaderOneBadgeOne: '',
+  primaryPopUpOptions: MODULE_POPUP_OPTION,
+  currentPopUpOption: [],
+  secondaryPopUpOptions: {
+    create: REVIEW_REVISE_POPUP,
+    review: REVIEW_POPUP_OPTIONS,
+    notifications: NOTIFICATION_REPORT_POPUP,
+    reports: NOTIFICATION_REPORT_POPUP
+  },
   basicInfo: {
     name: '',
     description: '',
@@ -65,6 +87,62 @@ const initialState = {
 
 const AssociateCreateReducer = (istate = initialState, action) => {
   switch (action.type) {
+    case ASSOCIATE_POPUP_OPEN:
+      return {
+        ...istate,
+        associatesHeaderOne: 'associates',
+        associatesPopUpType: 'primary',
+        currentPopUpOption: istate.primaryPopUpOptions,
+        associatesPopUpActive: true
+      };
+    case ASSOCIATE_POPUP_CLOSE:
+      return {
+        ...istate,
+        associatesHeaderOne: '',
+        associatesHeaderOneBadgeOne: '',
+        associatesPopUpActive: false
+      };
+    case SET_ASSOCIATE_NEXT_POPUP:
+      if (istate.associatesPopUpType === 'primary') {
+        if (action.payload === 'notifications' || action.payload === 'reports') {
+          return {
+            ...istate,
+            associatesHeaderOne: action.payload,
+            associatesHeaderOneBadgeOne: 'review',
+            associatesPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload]
+          };
+        } else {
+          return {
+            ...istate,
+            associatesHeaderOne: 'associates',
+            associatesHeaderOneBadgeOne: action.payload,
+            associatesPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload]
+          };
+        }
+      } else {
+        return istate;
+      }
+    case SET_ASSOCIATE_PREVIOUS_POPUP:
+      if (istate.associatesPopUpType === 'primary') {
+        return {
+          ...istate,
+          currentPopUpOption: [],
+          associatesPopUpActive: false,
+          associatesPopUpType: ''
+        };
+      } else if (istate.associatesPopUpType === 'secondary') {
+        return {
+          ...istate,
+          currentPopUpOption: istate.primaryPopUpOptions,
+          associatesHeaderOne: 'associates',
+          associatesHeaderOneBadgeOne: '',
+          associatesPopUpType: 'primary'
+        };
+      } else {
+        return istate;
+      }
     case UPDATE_ASSOCIATE_INFO:
       return {
         ...istate,
@@ -101,33 +179,7 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         basicInfo: action.payload
       };
     case CLEAR_ASSOCIATE_INFO:
-      return {
-        adminBasicInfo: {
-          namePrefix: '',
-          nameFirst: '',
-          nameOther: '',
-          nameLast: '',
-          nameSuffix: '',
-          isNameVerified: false,
-          alias: '',
-          picture: '',
-          isPicture: false
-        },
-        AdminMobileTelephone: {
-          mobileNumber: '',
-          countryCode: '',
-          communication: false,
-          verification: false
-        },
-        AdminPersonalInfo: {
-          gender: '',
-          birthDate: '',
-          birthPlace: ''
-        },
-        emailAddressPrimary: '',
-        communication: '',
-        signIn: ''
-      };
+      return initialState;
     default:
       return istate;
   }

@@ -5,8 +5,7 @@ const initialState = {
   assesseePermission: ''
 };
 
-const userReducer = (istate = initialState, action) => {
-  console.log('IN USER REDUCER====>', action);
+const UserReducer = (istate = initialState, action) => {
   switch (action.type) {
     case SET_USER:
       return {
@@ -23,4 +22,4 @@ const userReducer = (istate = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default UserReducer;

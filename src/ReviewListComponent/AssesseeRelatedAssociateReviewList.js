@@ -5,7 +5,7 @@ import { GET_SIGNED_ASSESSEE_PERMISSION_SAGA } from '../actionType';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 
 const AssesseeRelatedAssociateReviewList = (props) => {
-  const { userData } = useSelector((state) => state.userReducer);
+  const { userData } = useSelector((state) => state.UserReducer);
   const dispatch = useDispatch();
   const onClickReviewList = (e) => {
     dispatch({

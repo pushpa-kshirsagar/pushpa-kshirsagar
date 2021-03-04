@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const DisplayPaneOneSectionTwo = () => {
   const dispatch = useDispatch();
-  const { assesseePermission = null } = useSelector((state) => state.userReducer);
+  const { assesseePermission = null } = useSelector((state) => state.UserReducer);
   const openDisplayPaneOneSectionTwoPopUp = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';

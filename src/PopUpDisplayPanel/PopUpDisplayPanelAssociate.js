@@ -25,7 +25,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOneBadgeTwo,
     popupOpenType
   } = useSelector((state) => state.PopUpReducer);
-  const { userData,assesseePermission } = useSelector((state) => state.userReducer);
+  const { userData,assesseePermission } = useSelector((state) => state.UserReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import PopUpReducer from './PopUpReducer';
-import userReducer from './userReducer';
+import UserReducer from './UserReducer';
 import AssesseeCreateReducer from './AssesseeCreateReducer';
 import AssociateCreateReducer from './AssociateCreateReducer';
 import FilterReducer from './FilterReducer';
@@ -9,7 +9,7 @@ import DisplayPaneReducer from './DisplayPaneReducer';
 
 export default combineReducers({
   PopUpReducer,
-  userReducer,
+  UserReducer,
   AssesseeCreateReducer,
   AssociateCreateReducer,
   FilterReducer,

@@ -4,14 +4,17 @@ import Card from '../Card/Card';
 import { MODULE_POPUP_OPTION } from '../../PopUpConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAssesseeCardPermissionInJson } from '../../Actions/GenericActions';
-import { ASSESSEE_POPUP_OPEN, SET_POPUP_STATE } from '../../actionType';
+import { ASSESSEE_POPUP_OPEN, ASSOCIATE_POPUP_OPEN, SET_POPUP_STATE } from '../../actionType';
 
 const DisplayPaneOneSectionOne = () => {
   const dispatch = useDispatch();
-  const { assesseePermission = null } = useSelector((state) => state.userReducer);
+  const { assesseePermission = null } = useSelector((state) => state.UserReducer);
 
   const openAssesseesPopUp = () => {
     dispatch({ type: ASSESSEE_POPUP_OPEN });
+  };
+  const openAssociatesPopUp = () => {
+    dispatch({ type: ASSOCIATE_POPUP_OPEN });
   };
 
   const openDisplayPaneOneSectionOnePopUp = (e) => {
@@ -85,11 +88,7 @@ const DisplayPaneOneSectionOne = () => {
       >
         <Card isIcon IconOne={ArrowRight} textOneOne="assignments" />
       </div>
-      <div
-        className="paddingCard"
-        onClick={openDisplayPaneOneSectionOnePopUp}
-        data-value={'associates'}
-      >
+      <div className="paddingCard" onClick={openAssociatesPopUp} data-value={'associates'}>
         <Card isIcon IconOne={ArrowRight} textOneOne="associates" />
       </div>
     </>
