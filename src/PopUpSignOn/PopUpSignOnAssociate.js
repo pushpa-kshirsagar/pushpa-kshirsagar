@@ -19,23 +19,49 @@ import {
   UPDATE_ASSOCIATE_WORKTELEPHONE_INFO,
   UPDATE_ASSOCIATE_ADMIN_BASIC_INFO,
   UPDATE_ASSOCIATE_ADMIN_MOBILE_INFO,
-  UPDATE_ASSOCIATE_ADMIN_PERSONAL_INFO
+  UPDATE_ASSOCIATE_ADMIN_PERSONAL_INFO,
+  UPDATE_ASSESSEE_BASIC_INFO,
+  UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
+  UPDATE_ASSESSEE_MOBILE_INFO,
+  UPDATE_ASSESSEE_PERSONAL_INFO
 } from '../actionType';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
+  const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   console.log(associateInfo);
   console.log('==================');
   const dispatch = useDispatch();
 
+  const CreateApi = () => {
+    const {
+      informationBasic,
+      informationAllocation,
+      informationContact,
+      informationPersonal,
+      informationSetup
+    } = assesseeInfo;
+
+    let requestObect = {
+      associate: {
+        informationBasic: associateInfo.informationBasic,
+        informationAllocation: associateInfo.informationAllocation,
+        informationContact: associateInfo.informationContact
+      },
+      assessee: {
+        informationBasic: informationBasic,
+        informationAllocation: informationAllocation,
+        informationContact: informationContact,
+        informationPersonal: informationPersonal,
+        informationSetup: informationSetup
+      }
+    };
+    console.log('ONCLICK YES', requestObect);
+  };
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_ASSOCIATE_INFO });
     dispatch({ type: POPUP_CLOSE });
   };
-
-  console.log('basicInfo');
-  console.log(isPopUpValue);
-  console.log('isPopUpValue');
 
   const onClickYes = () => {
     if (popupMode === 'ASSOCIATE_SIGN_ON') {
@@ -45,6 +71,7 @@ const PopUpSignOnAssociate = () => {
       });
     }
   };
+
   return (
     <div>
       <PopUpTextField
@@ -55,7 +82,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={'DESCRIPTIONPOPUP'}
-        basicInfo={associateInfo.basicInfo}
+        actualLableValue={'associateName'}
+        basicInfo={associateInfo.informationBasic}
         typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
       />
       <PopUpTextField
@@ -65,7 +93,8 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
         isRequired={false}
-        basicInfo={associateInfo.basicInfo}
+        actualLableValue={'associateDescription'}
+        basicInfo={associateInfo.informationBasic}
         typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
       />
@@ -94,7 +123,8 @@ const PopUpSignOnAssociate = () => {
         inputHeader={'work address'}
         primaryheader={'primary'}
         nextPopUpValue={'WORKTELEPHONE'}
-        basicInfo={associateInfo.workAddressInfo}
+        basicInfo={associateInfo.informationContact.associateAddressWorkPrimary}
+        countryCode={'associateTelephoneCountryRegion'}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKADDRESS_INFO}
       />
       <PopUpTelephone
@@ -104,7 +134,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         inputHeader={'work telephone'}
         primaryheader={'primary'}
-        basicInfo={associateInfo.workTeleponeInfo}
+        basicInfo={associateInfo.informationContact.associateTelephoneWorkPrimary}
         isMobileState={false}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_INFO}
         nextPopUpValue={'ASSOCIATECONFIRMATIONPOPUP'}
@@ -124,18 +154,19 @@ const PopUpSignOnAssociate = () => {
         headerOne={'administrator'}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={associateInfo.adminBasicInfo}
-        typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_BASIC_INFO}
+        basicInfo={assesseeInfo.informationBasic}
+        typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'alias'}
+        actualLableValue={'assesseeAlias'}
         headerPanelColour={'genericOne'}
         headerOne={'administrator'}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'PICTUREPOPUP'}
-        basicInfo={associateInfo.adminBasicInfo}
-        typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_BASIC_INFO}
+        basicInfo={assesseeInfo.informationBasic}
+        typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -153,9 +184,9 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         primaryLabel={'email address'}
         nextPopUpValue={'MOBILETELEPHONEPOPUP'}
-        tag={'emailAddressPrimary'}
-        basicInfo={associateInfo}
-        typeOfSetObject={UPDATE_ASSOCIATE_INFO}
+        tag={'assesseeAddressEmail'}
+        basicInfo={assesseeInfo.informationContact.assesseeAddressEmailPrimary}
+        typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONEPOPUP'}
@@ -165,13 +196,15 @@ const PopUpSignOnAssociate = () => {
         inputHeader={'mobile telephone'}
         primaryheader={'primary'}
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
-        basicInfo={associateInfo.AdminMobileTelephone}
-        isMobileState={false}
-        typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_MOBILE_INFO}
+        basicInfo={assesseeInfo.informationContact.assesseeTelephoneMobilePrimary}
+        isMobileState={true}
+        signInSetup={assesseeInfo.informationSetup}
+        typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
-        tag={'gender'}
+        tag={'assesseeGender'}
+        label={'gender'}
         listSelect={[
           { id: 'Female', name: 'Female' },
           { id: 'Male', name: 'Male' },
@@ -184,14 +217,15 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
-        basicInfo={associateInfo.AdminPersonalInfo}
-        typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_PERSONAL_INFO}
+        basicInfo={assesseeInfo.informationPersonal}
+        typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'administrator'}
         headerOneBadgeOne={'create'}
+        onClickYes={CreateApi}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}

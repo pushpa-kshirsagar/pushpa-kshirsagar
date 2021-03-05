@@ -9,7 +9,9 @@ import {
   ASSESSEE_POPUP_CLOSE,
   SET_ASSESSEE_NEXT_POPUP,
   SET_ASSESSEE_PREVIOUS_POPUP,
-  SET_ASSESSEE_SECONDARY_OPTION_VALUE
+  SET_ASSESSEE_SECONDARY_OPTION_VALUE,
+  UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
+  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -18,20 +20,20 @@ import {
   REVIEW_POPUP_OPTIONS
 } from '../PopUpConfig';
 
-const getLocalTime = () => {
-  let date = new Date();
-  var finalDate =
-    date.getFullYear() +
-    '-' +
-    ('0' + (date.getMonth() + 1)).slice(-2) +
-    '-' +
-    ('0' + date.getDate()).slice(-2) +
-    'T' +
-    new Date().getHours() +
-    ':' +
-    new Date().getMinutes();
-  return finalDate;
-};
+// const getLocalTime = () => {
+//   let date = new Date();
+//   var finalDate =
+//     date.getFullYear() +
+//     '-' +
+//     ('0' + (date.getMonth() + 1)).slice(-2) +
+//     '-' +
+//     ('0' + date.getDate()).slice(-2) +
+//     'T' +
+//     new Date().getHours() +
+//     ':' +
+//     new Date().getMinutes();
+//   return finalDate;
+// };
 const initialState = {
   assesseesPopUpActive: false,
   assesseesPopUpType: '',
@@ -46,45 +48,41 @@ const initialState = {
     reports: NOTIFICATION_REPORT_POPUP
   },
   secondaryOptionCheckValue: '',
-  basicInfo: {
-    namePrefix: '',
-    nameFirst: '',
-    nameOther: '',
-    nameLast: '',
-    nameSuffix: '',
-    isNameVerified: false,
-    alias: '',
-    picture: '',
-    isPicture: false
+  informationBasic: {
+    assesseeNamePrefix: '',
+    assesseeNameFirst: '',
+    assesseeNameOther: '',
+    assesseeNameLast: '',
+    assesseeNameSuffix: '',
+    assesseeNameVerification: false,
+    assesseeAlias: '',
+    assesseePicture: '',
+    assesseePictureVerification: false
   },
-  emailAddressPrimary: '',
-  emailAddressSecondary: '',
-  communication: '',
-  signIn: '',
-  mobileTelephone: {
-    mobileNumber: '',
-    countryCode: '',
-    communication: false,
-    verification: false
+  informationContact: {
+    assesseeAddressEmailPrimary: {
+      assesseeAddressEmail: '',
+      assesseeAddressEmailCommunication: false,
+      assesseeAddressEmailVerification: false
+    },
+    assesseeAddressEmailSecondary: {
+      assesseeAddressEmail: '',
+      assesseeAddressEmailCommunication: false,
+      assesseeAddressEmailVerification: false
+    },
+    assesseeTelephoneMobilePrimary: {
+      assesseeTelephoneCountryRegion: '',
+      assesseeTelephoneNumber: '',
+      assesseeTelephoneCommunication: false,
+      assesseeTelephoneVerification: false
+    }
   },
-  personalInfo: {
-    gender: '',
-    birthDate: '',
-    birthPlace: ''
+  informationSetup: {
+    assesseeSignIn: ''
   },
-  homeAddressInfo: {
-    countryCode: '',
-    stateCode: '',
-    postCode: '',
-    cityCode: '',
-    address: '',
-    isCommunication: false,
-    isVerification: false
-  },
-  tagprimary: '',
-  tagsecondary: '',
-  tenurestart: getLocalTime(),
-  tenureend: '1970-00-00T00:00'
+  informationPersonal: {
+    assesseeGender: ''
+  }
 };
 
 const AssesseeCreateReducer = (istate = initialState, action) => {
@@ -155,17 +153,21 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
     case UPDATE_ASSESSEE_BASIC_INFO:
       return {
         ...istate,
-        basicInfo: action.payload
+        informationBasic: action.payload
       };
     case UPDATE_ASSESSEE_MOBILE_INFO:
       return {
         ...istate,
-        mobileTelephone: action.payload
+        informationContact: {
+          ...istate.informationContact,
+          assesseeTelephoneMobilePrimary: action.payload
+        }
+        // mobileTelephone: action.payload
       };
     case UPDATE_ASSESSEE_PERSONAL_INFO:
       return {
         ...istate,
-        personalInfo: action.payload
+        informationPersonal: action.payload
       };
     case UPDATE_ASSESSEE_HOMEADDRESS_INFO:
       return {
@@ -176,6 +178,20 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         ...action.payload
+      };
+    case UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeAddressEmailPrimary: action.payload
+        }
+      };
+
+    case UPDATE_ASSESSEE_SETUP_PRIMARY_INFO:
+      return {
+        ...istate,
+        informationSetup: action.payload
       };
     case CLEAR_ASSESSEE_INFO:
       return initialState;

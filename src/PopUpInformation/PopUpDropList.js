@@ -21,6 +21,7 @@ const PopUpDropList = (props) => {
     isRequired = false,
     basicInfo,
     tag,
+    label,
     typeOfSetObject,
     nextPopUpValue,
     mappingValue
@@ -77,7 +78,7 @@ const PopUpDropList = (props) => {
           <FormControl style={{ width: '100%' }}>
             <SelectField
               tag={tag}
-              label={tag}
+              label={label}
               listSelect={listSelect}
               errorMsg={state.isError}
               onChange={handleChange}

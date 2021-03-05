@@ -6,10 +6,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
-
 const PopUpAddressEmail = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
@@ -25,6 +24,7 @@ const PopUpAddressEmail = (props) => {
     basicInfo,
     nextPopUpValue,
     typeOfSetObject,
+    signInSetup,
     checkboxValue = primaryLabel + ' (' + primaryLabelBadge + ')'
   } = props;
 
@@ -35,15 +35,23 @@ const PopUpAddressEmail = (props) => {
   /*handling the onchange event*/
   const handleChange = (event) => {
     const { name, value } = event.target;
-    let communication = checkboxValue;
-    let signIn = checkboxValue;
+    let communication = true;
+    let signIn = true;
     if (value === '') {
-      communication = '';
-      signIn = '';
+      communication = false;
+      signIn = false;
     }
     dispatch({
       type: typeOfSetObject,
-      payload: { ...basicInfo, [name]: value, communication: communication, signIn: signIn }
+      payload: {
+        ...basicInfo,
+        [name]: value,
+        assesseeAddressEmailCommunication: communication
+      }
+    });
+    dispatch({
+      type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+      payload: { assesseeSignIn: checkboxValue }
     });
     setState((prevState) => ({
       ...prevState,
@@ -120,7 +128,7 @@ const PopUpAddressEmail = (props) => {
                 <div
                   className={'f4'}
                   style={{
-                    color: basicInfo && basicInfo.communication !== checkboxValue && 'dimgray'
+                    color: basicInfo && basicInfo.assesseeAddressEmailCommunication ? '' : 'dimgray'
                   }}
                 >
                   communication
@@ -132,14 +140,18 @@ const PopUpAddressEmail = (props) => {
                     name={'communication'}
                     value={checkboxValue}
                     checked={
-                      basicInfo ? (basicInfo.communication === checkboxValue ? true : false) : false
+                      basicInfo
+                        ? basicInfo.assesseeAddressEmailCommunication === true
+                          ? true
+                          : false
+                        : false
                     }
                     onChange={
                       popupMode !== 'ASSESSEE_SIGN_ON' &&
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
                       handleCheckbox
                     }
-                    disabled={basicInfo && basicInfo.communication !== checkboxValue}
+                    disabled={basicInfo && basicInfo.communication !== true}
                   />
                 </div>
               </div>
@@ -151,7 +163,7 @@ const PopUpAddressEmail = (props) => {
                 <div
                   className={'f4'}
                   style={{
-                    color: basicInfo && basicInfo.communication !== checkboxValue && 'dimgray'
+                    color: signInSetup && signInSetup.assesseeSignIn !== checkboxValue && 'dimgray'
                   }}
                 >
                   sign-in
@@ -160,17 +172,21 @@ const PopUpAddressEmail = (props) => {
                   <Checkbox
                     className={''}
                     color="default"
-                    name={'signIn'}
+                    name={'assesseeSignIn'}
                     value={checkboxValue}
                     checked={
-                      basicInfo ? (basicInfo.signIn === checkboxValue ? true : false) : false
+                      signInSetup
+                        ? signInSetup.assesseeSignIn === checkboxValue
+                          ? true
+                          : false
+                        : false
                     }
                     onChange={
                       popupMode !== 'ASSESSEE_SIGN_ON' &&
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
                       handleCheckbox
                     }
-                    disabled={basicInfo && basicInfo.signIn !== checkboxValue}
+                    disabled={signInSetup && signInSetup.assesseeSignIn !== checkboxValue}
                   />
                 </div>
               </div>

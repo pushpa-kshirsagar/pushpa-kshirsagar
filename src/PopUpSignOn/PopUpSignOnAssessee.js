@@ -15,30 +15,33 @@ import {
   UPDATE_ASSESSEE_BASIC_INFO,
   UPDATE_ASSESSEE_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
-  UPDATE_ASSESSEE_HOMEADDRESS_INFO
+  UPDATE_ASSESSEE_HOMEADDRESS_INFO,
+  UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO
 } from '../actionType';
 
 const PopUpSignOnAssessee = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
+  const informationContact = assesseeInfo.informationContact;
   const dispatch = useDispatch();
   const onClickYes = async () => {
-    console.log('ONCLICK YES', assesseeInfo);
     const {
-      basicInfo,
-      communication,
-      emailAddressPrimary,
-      emailAddressSecondary,
-      homeAddressInfo,
-      mobileTelephone,
-      personalInfo,
-      signIn,
-      tagprimary,
-      tagsecondary,
-      tenureend,
-      tenurestart
+      informationBasic,
+      informationAllocation,
+      informationContact,
+      informationPersonal,
+      informationSetup
     } = assesseeInfo;
-   //TODO SIGN UP
+    let requestObect = {
+      informationBasic: informationBasic,
+      informationAllocation: informationAllocation,
+      informationContact: informationContact,
+      informationPersonal: informationPersonal,
+      informationSetup: informationSetup
+    };
+    console.log('ONCLICK YES', requestObect);
+
+    //TODO SIGN UP
   };
 
   const onClickCancelYes = () => {
@@ -54,17 +57,18 @@ const PopUpSignOnAssessee = () => {
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'information'}
-        basicInfo={assesseeInfo.basicInfo}
+        basicInfo={assesseeInfo.informationBasic}
         nextPopUpValue={'ALIASPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'alias'}
+        actualLableValue={'assesseeAlias'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'information'}
-        basicInfo={assesseeInfo.basicInfo}
+        basicInfo={assesseeInfo.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
@@ -82,10 +86,11 @@ const PopUpSignOnAssessee = () => {
         headerOneBadgeOne={'information'}
         primaryLabel={'email address'}
         primaryLabelBadge={'primary'}
-        tag={'emailAddressPrimary'}
-        basicInfo={assesseeInfo}
+        tag={'assesseeAddressEmail'}
+        basicInfo={informationContact.assesseeAddressEmailPrimary}
+        signInSetup={assesseeInfo.informationSetup}
         nextPopUpValue={'MOBILETELEPHONEPOPUP'}
-        typeOfSetObject={UPDATE_ASSESSEE_INFO}
+        typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
       />
       <PopUpAddress
         isActive={isPopUpValue === 'HOMEADDRESSPOPUP'}
@@ -106,25 +111,25 @@ const PopUpSignOnAssessee = () => {
         headerOneBadgeOne={'information'}
         inputHeader={'mobile telephone'}
         primaryheader={'primary'}
-        basicInfo={assesseeInfo.mobileTelephone}
+        basicInfo={informationContact.assesseeTelephoneMobilePrimary}
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
-        tag={'gender'}
+        tag={'assesseeGender'}
+        label={'gender'}
         listSelect={[
           { id: 'Female', name: 'Female' },
           { id: 'Male', name: 'Male' },
           { id: 'Unlisted', name: 'Unlisted' }
         ]}
         mappingValue={'id'}
-        labelval={'gender'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'information'}
         isRequired={true}
-        basicInfo={assesseeInfo.personalInfo}
+        basicInfo={assesseeInfo.informationPersonal}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
       />
