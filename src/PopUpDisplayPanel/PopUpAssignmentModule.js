@@ -5,47 +5,47 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
-  SET_ASSESSEE_NEXT_POPUP,
-  SET_ASSESSEE_PREVIOUS_POPUP,
-  SET_ASSESSEE_SECONDARY_OPTION_VALUE
+  SET_ASSIGNMENT_NEXT_POPUP,
+  SET_ASSIGNMENT_PREVIOUS_POPUP,
+  SET_ASSIGNMENT_SECONDARY_OPTION_VALUE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 
-const PopUpAssesseesModule = (props) => {
+const PopUpAssignmentModule = (props) => {
   const {
-    assesseesPopUpActive,
+    assignmentsPopUpActive,
     currentPopUpOption,
-    assesseesPopUpType,
-    assesseesHeaderOne,
-    assesseesHeaderOneBadgeOne,
+    assignmentsPopUpType,
+    assignmentsHeaderOne,
+    assignmentsHeaderOneBadgeOne,
     secondaryOptionCheckValue
-  } = useSelector((state) => state.AssesseeCreateReducer);
+  } = useSelector((state) => state.AssignmentReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
 
   const setSecondaryOptionValue = (e) => {
     dispatch({
-      type: SET_ASSESSEE_SECONDARY_OPTION_VALUE,
+      type: SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
       payload: e.currentTarget.getAttribute('data-value')
     });
   };
   const ChangeOptionPopup = (e) => {
     dispatch({
-      type: SET_ASSESSEE_NEXT_POPUP,
+      type: SET_ASSIGNMENT_NEXT_POPUP,
       payload: e.currentTarget.getAttribute('data-value')
     });
   };
   const BackHandlerEvent = (e) => {
-    dispatch({ type: SET_ASSESSEE_PREVIOUS_POPUP });
+    dispatch({ type: SET_ASSIGNMENT_PREVIOUS_POPUP });
   };
   return (
     <div>
-      <Popup isActive={assesseesPopUpActive}>
+      <Popup isActive={assignmentsPopUpActive}>
         <PopupHeader
-          headerPanelColour={headerPanelColour + assesseesPopUpType}
-          headerOne={assesseesHeaderOne}
-          headerOneBadgeOne={assesseesHeaderOneBadgeOne}
+          headerPanelColour={headerPanelColour + assignmentsPopUpType}
+          headerOne={assignmentsHeaderOne}
+          headerOneBadgeOne={assignmentsHeaderOneBadgeOne}
           onClick={BackHandlerEvent}
           mode={''}
         />
@@ -62,4 +62,4 @@ const PopUpAssesseesModule = (props) => {
   );
 };
 
-export default PopUpAssesseesModule;
+export default PopUpAssignmentModule;

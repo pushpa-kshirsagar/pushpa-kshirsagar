@@ -4,7 +4,11 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
-import { SET_ASSOCIATE_NEXT_POPUP, SET_ASSOCIATE_PREVIOUS_POPUP } from '../actionType';
+import {
+  SET_ASSOCIATE_NEXT_POPUP,
+  SET_ASSOCIATE_PREVIOUS_POPUP,
+  SET_ASSOCIATE_SECONDARY_OPTION_VALUE
+} from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 
 const PopUpAssociatesModule = (props) => {
@@ -13,18 +17,18 @@ const PopUpAssociatesModule = (props) => {
     currentPopUpOption,
     associatesPopUpType,
     associatesHeaderOne,
-    associatesHeaderOneBadgeOne
+    associatesHeaderOneBadgeOne,
+    secondaryOptionCheckValue
   } = useSelector((state) => state.AssociateCreateReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
 
   const setSecondaryOptionValue = (e) => {
-    //TODO: set secondary option in AssesseeCreateReducer
-    // dispatch({
-    //   type: SET_SECONDARY_OPTION_VALUE,
-    //   payload: e.currentTarget.getAttribute('data-value')
-    // });
+    dispatch({
+      type: SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
+      payload: e.currentTarget.getAttribute('data-value')
+    });
   };
   const ChangeOptionPopup = (e) => {
     dispatch({
@@ -50,6 +54,7 @@ const PopUpAssociatesModule = (props) => {
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeOptionPopup}
             currentPopUpOption={currentPopUpOption}
+            secondaryOptionCheckValue={secondaryOptionCheckValue}
           />
         </DialogContent>
       </Popup>
