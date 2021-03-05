@@ -7,7 +7,8 @@ import {
   PREVIOUS_POPUP,
   SET_POPUP_STATE,
   SET_GRID_COLUMN_COUNT_VALUE,
-  SET_SECONDARY_OPTION_VALUE
+  SET_SECONDARY_OPTION_VALUE,
+  ASSESSEE_CREATE
 } from '../actionType';
 import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
 import CalculatorIcon from '@material-ui/icons/Keyboard';
@@ -34,7 +35,7 @@ const initialState = {
 };
 
 const PopUpReducer = (istate = initialState, action) => {
-  console.log(action.payload);
+  // console.log(action.payload);
   switch (action.type) {
     case POPUP_OPEN:
       return {
@@ -58,7 +59,7 @@ const PopUpReducer = (istate = initialState, action) => {
         isPopUpOpen: true,
         isPopUpValue: action.payload.isPopUpValue,
         popupMode: action.payload.popupMode
-      };
+      }
     case ASSOCIATE_SIGN_ON:
       return {
         ...istate,

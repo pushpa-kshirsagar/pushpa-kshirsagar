@@ -30,7 +30,7 @@ const PopUpConfirmation = (props) => {
   };
   const handleBack = () => {
     /*according manage back state*/
-    if (popupMode === 'ASSESSEE_SIGN_ON') {
+    if (popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSESSEE_CREATE' ) {
       dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
     }

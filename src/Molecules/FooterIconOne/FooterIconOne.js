@@ -19,7 +19,6 @@ import {
 export const FooterIconOne = (props) => {
   const {
     isPopUpValue,
-    gridColumnCountValue,
     popupHeaderOne,
     popupHeaderOneBadgeOne
   } = useSelector((state) => state.PopUpReducer);
@@ -166,7 +165,6 @@ export const FooterIconOne = (props) => {
         type: SET_GRID_COLUMN_COUNT_VALUE,
         payload: countval
       });
-      console.log(gridColumnCountValue + '*****');
     }
   };
 

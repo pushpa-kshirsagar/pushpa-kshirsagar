@@ -34,9 +34,8 @@ const DisplayPageOne = () => {
   return (
     <>
       <HeaderZero userName={userName} userEmail={userEmail} />
-      {gridColumnCountValue !== 0 && (
-        <GridColumn isExamMode={isExamMode} columnCount={gridColumnCountValue} />
-      )}
+      {gridColumnCountValue !== 0 ? <GridColumn isExamMode={isExamMode} columnCount={gridColumnCountValue} />
+      :null}
       <div className="main-container">
         {isMobile ? (
           <div className="display-pane-container">

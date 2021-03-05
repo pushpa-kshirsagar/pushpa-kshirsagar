@@ -29,6 +29,7 @@ import PopUpAssesseesModule from '../../PopUpDisplayPanel/PopUpAssesseesModule';
 import PopUpAssociatesModule from '../../PopUpDisplayPanel/PopUpAssociatesModule';
 import PopupAssessmentsModule from '../../PopUpDisplayPanel/PopupAssessmentsModule';
 import PopUpAssignmentModule from '../../PopUpDisplayPanel/PopUpAssignmentModule';
+import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -60,8 +61,9 @@ export const DisplayPaneOne = () => {
   ];
   const [selectedSection, setSelectedSection] = useState(leftPaneSections[0]);
   const dispatch = useDispatch();
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission = null } = useSelector((state) => state.UserReducer);
+  const { assesseesPopUpActive } = useSelector((state) => state.AssesseeCreateReducer);
   const { isAssociateSelected, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneReducer
   );
@@ -183,9 +185,10 @@ export const DisplayPaneOne = () => {
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}
       />
       <PopUpAssignmentModule />
-      <PopUpAssesseesModule />
+      <PopUpAssesseesModule isActive={assesseesPopUpActive === 'ASSESSEES'} />
       <PopUpAssociatesModule />
       <PopupAssessmentsModule />
+      <PopUpSignOnAssessee isActive={assesseesPopUpActive === 'ASSESSEES_CREATE'} />
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
       <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />

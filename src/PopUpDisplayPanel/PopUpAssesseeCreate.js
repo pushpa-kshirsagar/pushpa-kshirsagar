@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
 import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
@@ -7,7 +7,7 @@ import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
 import PopUpDropList from '../PopUpInformation/PopUpDropList';
 import PopUpConfirmation from '../PopUpGeneric/PopUpConfirmation';
 import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
-import PopUpCheckbox from '../PopUpInformation/PopUpCheckbox';
+import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import {
   CLEAR_ASSESSEE_INFO,
   POPUP_CLOSE,
@@ -16,18 +16,14 @@ import {
   UPDATE_ASSESSEE_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
   UPDATE_ASSESSEE_HOMEADDRESS_INFO,
-  UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
-  UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO,
-  SET_NEXT_POPUP
+  UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO
 } from '../actionType';
 
-const PopUpSignOnAssessee = () => {
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+const PopUpAssesseeCreate = () => {
+  const { nextPopupValue } = useSelector((state) => state.AssesseeCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const informationContact = assesseeInfo.informationContact;
   const dispatch = useDispatch();
-  const [nextPopUpValue, setNextPopUpValue] = useState('');
-
   const onClickYes = async () => {
     const {
       informationBasic,
@@ -52,33 +48,11 @@ const PopUpSignOnAssessee = () => {
     dispatch({ type: CLEAR_ASSESSEE_INFO });
     dispatch({ type: POPUP_CLOSE });
   };
-  const handleNextPopupValue = () => {
-    // alert(isPopUpValue);
-    let primaryCommunication =
-      informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication;
-    let secondCommunication =
-      informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication;
-    if (isPopUpValue === 'EMAILPOPUP') {
-      if (primaryCommunication === false || assesseeInfo.informationSetup.assesseeSignIn === '') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
-      } 
-      else{
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
-      }
-    }
-    else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
-      if (primaryCommunication === false && secondCommunication === false) {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTCOMMUNICATION' } });
-      } 
-      else{
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
-      }
-    }
-  };
+
   return (
     <div>
       <PopUpAssesseeName
-        isActive={isPopUpValue === 'NAMEPOPUP'}
+        isActive={nextPopupValue === 'NAMEPOPUP'}
         inputHeader={'name'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
@@ -88,7 +62,7 @@ const PopUpSignOnAssessee = () => {
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
       <PopUpTextField
-        isActive={isPopUpValue === 'ALIASPOPUP'}
+        isActive={nextPopupValue === 'ALIASPOPUP'}
         label={'alias'}
         actualLableValue={'assesseeAlias'}
         headerPanelColour={'genericOne'}
@@ -99,14 +73,14 @@ const PopUpSignOnAssessee = () => {
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
       />
       <PopUpPicture
-        isActive={isPopUpValue === 'PICTUREPOPUP'}
+        isActive={nextPopupValue === 'PICTUREPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'EMAILPOPUP'}
       />
       <PopUpAddressEmail
-        isActive={isPopUpValue === 'EMAILPOPUP'}
+        isActive={nextPopupValue === 'EMAILPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'information'}
@@ -115,14 +89,11 @@ const PopUpSignOnAssessee = () => {
         tag={'assesseeAddressEmail'}
         basicInfo={informationContact.assesseeAddressEmailPrimary}
         signInSetup={assesseeInfo.informationSetup}
-        // nextPopUpValue={'MOBILETELEPHONEPOPUP'}
+        nextPopUpValue={'MOBILETELEPHONEPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
-        handleNextPopupValue={handleNextPopupValue}
-        isAllreadyCommunication = {informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication || informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication}
-        
       />
       <PopUpAddressEmail
-        isActive={isPopUpValue === 'EMAILSECONDARYPOPUP'}
+        isActive={nextPopupValue === 'EMAILSECONDARYPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'information'}
@@ -131,27 +102,11 @@ const PopUpSignOnAssessee = () => {
         tag={'assesseeAddressEmail'}
         basicInfo={informationContact.assesseeAddressEmailSecondary}
         signInSetup={assesseeInfo.informationSetup}
-        // nextPopUpValue={'MOBILETELEPHONEPOPUP'}
-        typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO}
-        handleNextPopupValue={handleNextPopupValue}
-        isAllreadyCommunication = {informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication || informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication}
-
-      />
-      <PopUpCheckbox
-        isActive={isPopUpValue === 'FORCETOSELECTCOMMUNICATION'}
-        headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
-        headerOneBadgeOne={'information'}
-        valueArr ={['email address (primary)', 'email address (secondary)']}
-        basicInfo={informationContact.assesseeTelephoneMobilePrimary}
         nextPopUpValue={'MOBILETELEPHONEPOPUP'}
-        typeOfPrimarySetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
-        typeOfSecondaSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO}
-        EmailPrimaryCommunication={informationContact.assesseeAddressEmailPrimary}
-        EmailSecondaCommunication={informationContact.assesseeAddressEmailSecondary}
+        typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO}
       />
       <PopUpTelephone
-        isActive={isPopUpValue === 'MOBILETELEPHONEPOPUP'}
+        isActive={nextPopupValue === 'MOBILETELEPHONEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'information'}
@@ -162,7 +117,7 @@ const PopUpSignOnAssessee = () => {
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
       />
       <PopUpDropList
-        isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
+        isActive={nextPopupValue === 'SINGLEDROPDOWNPOPUP'}
         tag={'assesseeGender'}
         label={'gender'}
         listSelect={[
@@ -180,7 +135,7 @@ const PopUpSignOnAssessee = () => {
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
       />
       <PopUpConfirmation
-        isActive={isPopUpValue === 'CANCELPOPUP'}
+        isActive={nextPopupValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}
         headerOneBadgeOne={''}
@@ -188,7 +143,7 @@ const PopUpSignOnAssessee = () => {
         onClickYes={onClickCancelYes}
       />
       <PopUpConfirmation
-        isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
+        isActive={nextPopupValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'create'}
@@ -198,4 +153,4 @@ const PopUpSignOnAssessee = () => {
   );
 };
 
-export default PopUpSignOnAssessee;
+export default PopUpAssesseeCreate;

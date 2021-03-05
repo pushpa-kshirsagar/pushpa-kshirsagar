@@ -5,21 +5,32 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpCheckbox = (props) => {
   /*props*/
   const {
-    isActive = false,
+    isActive,
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
-    headerOneBadgeOne = 'information'
+    headerOneBadgeOne = 'information',
+    valueArr,
+    EmailPrimaryCommunication,
+    EmailSecondaCommunication,
+    typeOfPrimarySetObject,
+    typeOfSecondaSetObject,
+    nextPopUpValue
   } = props;
 
   const [state, setState] = useState({
-    isChecked: false
+    isChecked: 'email address (primary)'
   });
+  const dispatch = useDispatch();
   /*handling the onchange event*/
   const handleChange = (event) => {
+    console.log(event.target.checked);
+    let checked = event.target.checked;
     setState({ isChecked: event.target.value });
   };
 
@@ -63,8 +74,27 @@ const PopUpCheckbox = (props) => {
 
     return arr;
   };
-  const handleClick = () => {};
-  const arr = ['email address (primary)', 'email address (secondary)'];
+  const handleClick = () => {
+    if (state.isChecked === 'email address (primary)') {
+      dispatch({
+        type: typeOfPrimarySetObject,
+        payload: {
+          ...EmailPrimaryCommunication,
+          assesseeAddressEmailCommunication: true
+        }
+      });
+    } else {
+      dispatch({
+        type: typeOfSecondaSetObject,
+        payload: {
+          ...EmailSecondaCommunication,
+          assesseeAddressEmailCommunication: true
+        }
+      });
+    }
+    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+  };
+  // const valueArr = ['email address (primary)', 'email address (secondary)'];
   return (
     <div>
       <Popup isActive={isActive}>
@@ -77,7 +107,7 @@ const PopUpCheckbox = (props) => {
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
-          {arr.map((item) => (
+          {valueArr.map((item) => (
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>
