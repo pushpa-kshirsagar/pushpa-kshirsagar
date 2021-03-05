@@ -7,17 +7,16 @@ import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
 import PopUpDropList from '../PopUpInformation/PopUpDropList';
 import PopUpConfirmation from '../PopUpGeneric/PopUpConfirmation';
 import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
-import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import {
   CLEAR_ASSESSEE_INFO,
   POPUP_CLOSE,
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_BASIC_INFO,
-  UPDATE_ASSESSEE_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
-  UPDATE_ASSESSEE_HOMEADDRESS_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO
 } from '../actionType';
+import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import userPool from '../UserPool';
 
 const PopUpSignOnAssessee = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -40,8 +39,24 @@ const PopUpSignOnAssessee = () => {
       informationSetup: informationSetup
     };
     console.log('ONCLICK YES', requestObect);
-
-    //TODO SIGN UP
+    let attributeList = [];
+    const dataEmail = {
+      Name: 'email',
+      Value: 'pushpa.k@boppotechnologies.com' //'shivam.s@boppotechnologies.com'
+    };
+    const attributeEmail = new CognitoUserAttribute(dataEmail);
+    attributeList.push(attributeEmail);
+    //TODO: Cognito SIGN-UP
+    userPool.signUp(
+      'pushpa-boppo', //username
+      'Admin@123', //password
+      attributeList, // required attribute list
+      null,
+      (error, data) => {
+        console.log('SIGN-ON DATA===>', data);
+        console.log('SIGN-ON ERROR===>', error);
+      }
+    );
   };
 
   const onClickCancelYes = () => {
@@ -91,18 +106,6 @@ const PopUpSignOnAssessee = () => {
         signInSetup={assesseeInfo.informationSetup}
         nextPopUpValue={'MOBILETELEPHONEPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
-      />
-      <PopUpAddress
-        isActive={isPopUpValue === 'HOMEADDRESSPOPUP'}
-        headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
-        headerOneBadgeOne={'information'}
-        inputHeader={'home address'}
-        primaryheader={'primary'}
-        tag={'emailAddressPrimary'}
-        basicInfo={assesseeInfo.homeAddressInfo}
-        nextPopUpValue={'MOBILETELEPHONEPOPUP'}
-        typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONEPOPUP'}

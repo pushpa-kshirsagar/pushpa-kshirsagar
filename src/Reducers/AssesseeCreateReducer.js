@@ -9,9 +9,9 @@ import {
   ASSESSEE_POPUP_CLOSE,
   SET_ASSESSEE_NEXT_POPUP,
   SET_ASSESSEE_PREVIOUS_POPUP,
-  SET_ASSESSEE_SECONDARY_OPTION_VALUE,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
-  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO
+  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+  SET_ASSESSEE_SECONDARY_OPTION_VALUE
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -40,6 +40,7 @@ const initialState = {
   assesseesHeaderOne: '',
   assesseesHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
+  secondaryOptionCheckValue: '',
   currentPopUpOption: [],
   secondaryPopUpOptions: {
     create: ASSESSEE_REVIEW_REVISE_POPUP,
@@ -47,7 +48,6 @@ const initialState = {
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP
   },
-  secondaryOptionCheckValue: '',
   informationBasic: {
     assesseeNamePrefix: '',
     assesseeNameFirst: '',
