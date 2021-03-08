@@ -5,6 +5,10 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
+  ASSESSEE_CREATE,
+  ASSESSEE_INFO_CREATE,
+  ASSESSEE_SIGN_ON,
+  CLEAR_ASSESSEE_INFO,
   SET_ASSESSEE_NEXT_POPUP,
   SET_ASSESSEE_PREVIOUS_POPUP,
   SET_ASSESSEE_SECONDARY_OPTION_VALUE
@@ -31,17 +35,25 @@ const PopUpAssesseesModule = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    dispatch({
-      type: SET_ASSESSEE_NEXT_POPUP,
-      payload: e.currentTarget.getAttribute('data-value')
-    });
+    if (e.currentTarget.getAttribute('data-value') === 'information') {
+      dispatch({ type: ASSESSEE_INFO_CREATE });
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    } else {
+      dispatch({
+        type: SET_ASSESSEE_NEXT_POPUP,
+        payload: e.currentTarget.getAttribute('data-value')
+      });
+    }
   };
   const BackHandlerEvent = (e) => {
     dispatch({ type: SET_ASSESSEE_PREVIOUS_POPUP });
   };
   return (
     <div>
-      <Popup isActive={assesseesPopUpActive}>
+      <Popup isActive={props.isActive}>
         <PopupHeader
           headerPanelColour={headerPanelColour + assesseesPopUpType}
           headerOne={assesseesHeaderOne}

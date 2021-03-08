@@ -25,7 +25,9 @@ const PopUpAddressEmail = (props) => {
     nextPopUpValue,
     typeOfSetObject,
     signInSetup,
-    checkboxValue = primaryLabel + ' (' + primaryLabelBadge + ')'
+    checkboxValue = primaryLabel + ' (' + primaryLabelBadge + ')',
+    handleNextPopupValue,
+    isAllreadyCommunication
   } = props;
 
   const [state, setState] = useState({
@@ -41,18 +43,34 @@ const PopUpAddressEmail = (props) => {
       communication = false;
       signIn = false;
     }
-    dispatch({
-      type: typeOfSetObject,
-      payload: {
-        ...basicInfo,
-        [name]: value,
-        assesseeAddressEmailCommunication: communication
-      }
-    });
-    dispatch({
-      type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-      payload: { assesseeSignIn: checkboxValue }
-    });
+    if(isAllreadyCommunication){
+      dispatch({
+        type: typeOfSetObject,
+        payload: {
+          ...basicInfo,
+          [name]: value
+        }
+      });
+    }
+    else{
+      dispatch({
+        type: typeOfSetObject,
+        payload: {
+          ...basicInfo,
+          [name]: value,
+          assesseeAddressEmailCommunication: communication
+
+        }
+      });
+    }
+   
+    if(signInSetup && signInSetup.assesseeSignIn ==''){
+      dispatch({
+        type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+        payload: { assesseeSignIn: checkboxValue }
+      });
+    }
+   
     setState((prevState) => ({
       ...prevState,
       emailErr: ''
@@ -61,10 +79,25 @@ const PopUpAddressEmail = (props) => {
 
   const handleCheckbox = (e) => {
     const { name, checked, value } = e.target;
-    dispatch({
-      type: typeOfSetObject,
-      payload: { ...basicInfo, [name]: checked ? value : '' }
-    });
+    if(name === 'assesseeAddressEmailCommunication'){
+      dispatch({
+        type: typeOfSetObject,
+        payload: {
+          ...basicInfo,
+          [name]: value,
+          assesseeAddressEmailCommunication: checked
+        }
+      });
+    }
+    else{
+      dispatch({
+        // type: typeOfSetObject,
+        // payload: { ...basicInfo, [name]: checked ? value : '' }
+        type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+        payload: { assesseeSignIn: '' }
+      });
+    }
+   
   };
 
   /*this function for validate email address*/
@@ -95,7 +128,8 @@ const PopUpAddressEmail = (props) => {
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      handleNextPopupValue();
     }
   };
 
@@ -137,7 +171,7 @@ const PopUpAddressEmail = (props) => {
                   <Checkbox
                     className={''}
                     color="default"
-                    name={'communication'}
+                    name={'assesseeAddressEmailCommunication'}
                     value={checkboxValue}
                     checked={
                       basicInfo
@@ -151,7 +185,7 @@ const PopUpAddressEmail = (props) => {
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
                       handleCheckbox
                     }
-                    disabled={basicInfo && basicInfo.communication !== true}
+                    disabled={popupMode === 'ASSESSEE_SIGN_ON' && popupMode === 'ASSOCIATE_SIGN_ON'?true:false}
                   />
                 </div>
               </div>

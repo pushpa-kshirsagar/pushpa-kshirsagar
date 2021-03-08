@@ -11,7 +11,9 @@ import {
   SET_ASSESSEE_PREVIOUS_POPUP,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-  SET_ASSESSEE_SECONDARY_OPTION_VALUE
+  SET_ASSESSEE_SECONDARY_OPTION_VALUE,
+  ASSESSEE_INFO_CREATE,
+  UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -35,12 +37,14 @@ import {
 //   return finalDate;
 // };
 const initialState = {
-  assesseesPopUpActive: false,
+  assesseesPopUpActive: '',
   assesseesPopUpType: '',
   assesseesHeaderOne: '',
   assesseesHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
   secondaryOptionCheckValue: '',
+  nextPopupValue:'',
+  assesseeCreateInfo:'',
   currentPopUpOption: [],
   secondaryPopUpOptions: {
     create: ASSESSEE_REVIEW_REVISE_POPUP,
@@ -86,6 +90,9 @@ const initialState = {
 };
 
 const AssesseeCreateReducer = (istate = initialState, action) => {
+  console.log(action.payload);
+  console.log('AssesseeCreateReducer');
+
   switch (action.type) {
     case ASSESSEE_POPUP_OPEN:
       return {
@@ -93,14 +100,14 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         assesseesHeaderOne: 'assessees',
         assesseesPopUpType: 'primary',
         currentPopUpOption: istate.primaryPopUpOptions,
-        assesseesPopUpActive: true
+        assesseesPopUpActive: 'ASSESSEES'
       };
     case ASSESSEE_POPUP_CLOSE:
       return {
         ...istate,
         assesseesHeaderOne: '',
         assesseesHeaderOneBadgeOne: '',
-        assesseesPopUpActive: false
+        assesseesPopUpActive: ''
       };
     case SET_ASSESSEE_NEXT_POPUP:
       if (istate.assesseesPopUpType === 'primary') {
@@ -120,7 +127,7 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
             assesseesHeaderOneBadgeOne: action.payload,
             assesseesPopUpType: 'secondary',
             currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
-            secondaryOptionCheckValue: 'active'
+            secondaryOptionCheckValue: action.payload === 'create' ? 'all' : 'active'
           };
         }
       } else {
@@ -131,7 +138,7 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         return {
           ...istate,
           currentPopUpOption: [],
-          assesseesPopUpActive: false,
+          assesseesPopUpActive: '',
           assesseesPopUpType: ''
         };
       } else if (istate.assesseesPopUpType === 'secondary') {
@@ -187,11 +194,23 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           assesseeAddressEmailPrimary: action.payload
         }
       };
-
+    case UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeAddressEmailSecondary: action.payload
+        }
+      };
     case UPDATE_ASSESSEE_SETUP_PRIMARY_INFO:
       return {
         ...istate,
         informationSetup: action.payload
+      };
+    case ASSESSEE_INFO_CREATE:
+      return {
+        ...istate,
+        assesseesPopUpActive: ''
       };
     case CLEAR_ASSESSEE_INFO:
       return initialState;

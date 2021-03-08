@@ -21,12 +21,13 @@ const PopUpAssesseeName = (props) => {
     isActive = false,
     basicInfo,
     nextPopUpValue = '',
-    typeOfSetObject
+    typeOfSetObject,
+    handleNextPopupValue
   } = props;
   const dispatch = useDispatch();
   const [state, setState] = useState({
-    nameFirstErr: '',
-    nameLastErr: '',
+    assesseeNameFirstErr: '',
+    assesseeNameLastErr: '',
     userNameverifyDisable: true
   });
   const { popupMode } = useSelector((state) => state.PopUpReducer);
@@ -37,13 +38,14 @@ const PopUpAssesseeName = (props) => {
   };
   const validate = () => {
     let isValidate = true;
+   
     if (basicInfo) {
       if (basicInfo.assesseeNameFirst === '') {
-        setState((prevState) => ({ ...prevState, nameFirstErr: 'this information is required' }));
+        setState((prevState) => ({ ...prevState, assesseeNameFirstErr: 'this information is required' }));
         isValidate = false;
       }
       if (basicInfo.assesseeNameLast === '') {
-        setState((prevState) => ({ ...prevState, nameLastErr: 'this information is required' }));
+        setState((prevState) => ({ ...prevState, assesseeNameLastErr: 'this information is required' }));
         isValidate = false;
       }
       return isValidate;
@@ -109,7 +111,7 @@ const PopUpAssesseeName = (props) => {
           <InputFeild
             id={'assesseeNameFirst'}
             label={'first name'}
-            errorMsg={state.nameFirstErr}
+            errorMsg={state.assesseeNameFirstErr}
             onClick={handleChange}
             value={basicInfo && basicInfo.assesseeNameFirst}
           />
@@ -123,7 +125,7 @@ const PopUpAssesseeName = (props) => {
           <InputFeild
             id={'assesseeNameLast'}
             label={'last name'}
-            errorMsg={state.nameLastErr}
+            errorMsg={state.assesseeNameLastErr}
             onClick={handleChange}
             value={basicInfo && basicInfo.assesseeNameLast}
           />
