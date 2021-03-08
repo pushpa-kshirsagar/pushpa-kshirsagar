@@ -176,9 +176,6 @@ export const DisplayPaneOne = () => {
           <FooterIconOne />
         </>
       )}
-      <PopUpDisplayPaneOneSectionOne
-        isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_ONE_POPUP'}
-      />
       <PopUpDisplayPaneOneSectionTwo
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}
       />

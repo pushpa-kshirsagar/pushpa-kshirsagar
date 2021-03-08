@@ -42,13 +42,13 @@ const PopUpSignOnAssessee = () => {
     let attributeList = [];
     const dataEmail = {
       Name: 'email',
-      Value: 'pushpa.k@boppotechnologies.com' //'shivam.s@boppotechnologies.com'
+      Value: 'shivamsharma.sss11@gmail.com' // 'shivam.s@boppotechnologies.com' //'pushpa.k@boppotechnologies.com'
     };
     const attributeEmail = new CognitoUserAttribute(dataEmail);
     attributeList.push(attributeEmail);
     //TODO: Cognito SIGN-UP
     userPool.signUp(
-      'pushpa-boppo', //username
+      'test-admin', //username
       'Admin@123', //password
       attributeList, // required attribute list
       null,
