@@ -15,7 +15,8 @@ import {
   PREVIOUS_POPUP,
   CLEAR_ASSOCIATE_INFO,
   CLEAR_ASSESSMENT_INFO,
-  CLEAR_ASSIGNMENT_INFO
+  CLEAR_ASSIGNMENT_INFO,
+  CLEAR_IGAUGE_REDUCER
 } from '../../actionType';
 
 const PopupHeader = (props) => {
@@ -41,6 +42,7 @@ const PopupHeader = (props) => {
       dispatch({ type: POPUP_CLOSE });
       dispatch({ type: CLEAR_ASSOCIATE_INFO });
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+      dispatch({ type: CLEAR_IGAUGE_REDUCER });
     }
   };
 

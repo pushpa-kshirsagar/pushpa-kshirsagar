@@ -7,6 +7,7 @@ import FilterReducer from './FilterReducer';
 import assessmentReducer from './assessmentReducer';
 import DisplayPaneReducer from './DisplayPaneReducer';
 import AssignmentReducer from './AssignmentReducer';
+import IgaugeReducer from './IgaugeReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   FilterReducer,
   assessmentReducer,
   DisplayPaneReducer,
-  AssignmentReducer
+  AssignmentReducer,
+  IgaugeReducer
 });

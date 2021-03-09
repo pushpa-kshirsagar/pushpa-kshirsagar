@@ -5,9 +5,11 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
+  CLEAR_ASSOCIATE_INFO,
   SET_ASSOCIATE_NEXT_POPUP,
   SET_ASSOCIATE_PREVIOUS_POPUP,
-  SET_ASSOCIATE_SECONDARY_OPTION_VALUE
+  SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
+  SET_PREVIOUS_SECTION_POPUP
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 
@@ -18,7 +20,8 @@ const PopUpAssociatesModule = (props) => {
     associatesPopUpType,
     associatesHeaderOne,
     associatesHeaderOneBadgeOne,
-    secondaryOptionCheckValue
+    secondaryOptionCheckValue,
+    isBackToSectionPopUp
   } = useSelector((state) => state.AssociateCreateReducer);
 
   const dispatch = useDispatch();
@@ -37,7 +40,12 @@ const PopUpAssociatesModule = (props) => {
     });
   };
   const BackHandlerEvent = (e) => {
-    dispatch({ type: SET_ASSOCIATE_PREVIOUS_POPUP });
+    if (isBackToSectionPopUp) {
+      dispatch({ type: CLEAR_ASSOCIATE_INFO });
+      dispatch({ type: SET_PREVIOUS_SECTION_POPUP });
+    } else {
+      dispatch({ type: SET_ASSOCIATE_PREVIOUS_POPUP });
+    }
   };
   return (
     <div>

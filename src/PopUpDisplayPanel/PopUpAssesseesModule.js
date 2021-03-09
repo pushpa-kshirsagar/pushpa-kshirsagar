@@ -5,24 +5,24 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
-  ASSESSEE_CREATE,
   ASSESSEE_INFO_CREATE,
   ASSESSEE_SIGN_ON,
   CLEAR_ASSESSEE_INFO,
   SET_ASSESSEE_NEXT_POPUP,
   SET_ASSESSEE_PREVIOUS_POPUP,
-  SET_ASSESSEE_SECONDARY_OPTION_VALUE
+  SET_ASSESSEE_SECONDARY_OPTION_VALUE,
+  SET_PREVIOUS_SECTION_POPUP
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 
 const PopUpAssesseesModule = (props) => {
   const {
-    assesseesPopUpActive,
     currentPopUpOption,
     assesseesPopUpType,
     assesseesHeaderOne,
     assesseesHeaderOneBadgeOne,
-    secondaryOptionCheckValue
+    secondaryOptionCheckValue,
+    isBackToSectionPopUp
   } = useSelector((state) => state.AssesseeCreateReducer);
 
   const dispatch = useDispatch();
@@ -49,7 +49,12 @@ const PopUpAssesseesModule = (props) => {
     }
   };
   const BackHandlerEvent = (e) => {
-    dispatch({ type: SET_ASSESSEE_PREVIOUS_POPUP });
+    if (isBackToSectionPopUp) {
+      dispatch({ type: CLEAR_ASSESSEE_INFO });
+      dispatch({ type: SET_PREVIOUS_SECTION_POPUP });
+    } else {
+      dispatch({ type: SET_ASSESSEE_PREVIOUS_POPUP });
+    }
   };
   return (
     <div>

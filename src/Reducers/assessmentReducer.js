@@ -4,24 +4,26 @@ import {
   SET_ASSESSMENT_NEXT_POPUP,
   SET_ASSESSMENT_PREVIOUS_POPUP,
   SET_ASSESSMENT_SECONDARY_OPTION_VALUE,
-  SET_DISPLAY_PANE_FOUR_SHOW
+  SET_DISPLAY_PANE_FOUR_SHOW,
+  SET_ASSESSMENT_SECONDARY_POPUP
 } from '../actionType';
 import {
-  ASSESSEE_REVIEW_REVISE_POPUP,
   MODULE_POPUP_OPTION,
   NOTIFICATION_REPORT_POPUP,
-  REVIEW_POPUP_OPTIONS
+  REVIEW_POPUP_OPTIONS,
+  REVIEW_REVISE_POPUP
 } from '../PopUpConfig';
 
 const initialState = {
   isDisplayPaneFourShow: true,
   assessmentsHeaderOne: '',
-  assessmentsPopUpType: '',
+  assessmentsPopUpType: 'primary',
   currentPopUpOption: '',
   assessmentsPopUpActive: false,
+  isBackToSectionPopUp: false,
   primaryPopUpOptions: MODULE_POPUP_OPTION,
   secondaryPopUpOptions: {
-    create: ASSESSEE_REVIEW_REVISE_POPUP,
+    create: REVIEW_REVISE_POPUP,
     review: REVIEW_POPUP_OPTIONS,
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP
@@ -45,6 +47,7 @@ const assessmentReducer = (istate = initialState, action) => {
         if (action.payload === 'notifications' || action.payload === 'reports') {
           return {
             ...istate,
+            assessmentsPopUpActive: true,
             assessmentsHeaderOne: action.payload,
             assessmentsHeaderOneBadgeOne: 'review',
             assessmentsPopUpType: 'secondary',
@@ -54,6 +57,7 @@ const assessmentReducer = (istate = initialState, action) => {
         } else {
           return {
             ...istate,
+            assessmentsPopUpActive: true,
             assessmentsHeaderOne: 'assessments',
             assessmentsHeaderOneBadgeOne: action.payload,
             assessmentsPopUpType: 'secondary',
@@ -64,13 +68,40 @@ const assessmentReducer = (istate = initialState, action) => {
       } else {
         return istate;
       }
+    case SET_ASSESSMENT_SECONDARY_POPUP:
+      if (istate.assessmentsPopUpType === 'primary') {
+        if (action.payload === 'notifications' || action.payload === 'reports') {
+          return {
+            ...istate,
+            assessmentsPopUpActive: true,
+            assessmentsHeaderOne: action.payload,
+            assessmentsHeaderOneBadgeOne: 'review',
+            assessmentsPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'unread',
+            isBackToSectionPopUp: true
+          };
+        } else {
+          return {
+            ...istate,
+            assessmentsPopUpActive: true,
+            assessmentsHeaderOne: 'assessments',
+            assessmentsHeaderOneBadgeOne: action.payload,
+            assessmentsPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'active',
+            isBackToSectionPopUp: true
+          };
+        }
+      } else {
+        return istate;
+      }
     case SET_ASSESSMENT_PREVIOUS_POPUP:
       if (istate.assessmentsPopUpType === 'primary') {
         return {
           ...istate,
           currentPopUpOption: [],
-          assessmentsPopUpActive: false,
-          assessmentsPopUpType: ''
+          assessmentsPopUpActive: false
         };
       } else if (istate.assessmentsPopUpType === 'secondary') {
         return {

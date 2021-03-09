@@ -11,7 +11,8 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   SET_ASSOCIATE_NEXT_POPUP,
   SET_ASSOCIATE_PREVIOUS_POPUP,
-  SET_ASSOCIATE_SECONDARY_OPTION_VALUE
+  SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
+  SET_ASSOCIATE_SECONDARY_POPUP
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -22,7 +23,8 @@ import {
 
 const initialState = {
   associatesPopUpActive: false,
-  associatesPopUpType: '',
+  associatesPopUpType: 'primary',
+  isBackToSectionPopUp: false,
   associatesHeaderOne: '',
   associatesHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
@@ -153,6 +155,7 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         if (action.payload === 'notifications' || action.payload === 'reports') {
           return {
             ...istate,
+            associatesPopUpActive: true,
             associatesHeaderOne: action.payload,
             associatesHeaderOneBadgeOne: 'review',
             associatesPopUpType: 'secondary',
@@ -162,6 +165,7 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         } else {
           return {
             ...istate,
+            associatesPopUpActive: true,
             associatesHeaderOne: 'associates',
             associatesHeaderOneBadgeOne: action.payload,
             associatesPopUpType: 'secondary',
@@ -172,13 +176,40 @@ const AssociateCreateReducer = (istate = initialState, action) => {
       } else {
         return istate;
       }
+    case SET_ASSOCIATE_SECONDARY_POPUP:
+      if (istate.associatesPopUpType === 'primary') {
+        if (action.payload === 'notifications' || action.payload === 'reports') {
+          return {
+            ...istate,
+            associatesPopUpActive: true,
+            associatesHeaderOne: action.payload,
+            associatesHeaderOneBadgeOne: 'review',
+            associatesPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'unread',
+            isBackToSectionPopUp: true
+          };
+        } else {
+          return {
+            ...istate,
+            associatesPopUpActive: true,
+            associatesHeaderOne: 'associates',
+            associatesHeaderOneBadgeOne: action.payload,
+            associatesPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'active',
+            isBackToSectionPopUp: true
+          };
+        }
+      } else {
+        return istate;
+      }
     case SET_ASSOCIATE_PREVIOUS_POPUP:
       if (istate.associatesPopUpType === 'primary') {
         return {
           ...istate,
           currentPopUpOption: [],
-          associatesPopUpActive: false,
-          associatesPopUpType: ''
+          associatesPopUpActive: false
         };
       } else if (istate.associatesPopUpType === 'secondary') {
         return {
