@@ -6,6 +6,8 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
   CLEAR_ASSOCIATE_INFO,
+  ASSOCIATE_CREATE_INFO,
+  ASSOCIATE_SIGN_ON,
   SET_ASSOCIATE_NEXT_POPUP,
   SET_ASSOCIATE_PREVIOUS_POPUP,
   SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
@@ -34,10 +36,18 @@ const PopUpAssociatesModule = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    dispatch({
-      type: SET_ASSOCIATE_NEXT_POPUP,
-      payload: e.currentTarget.getAttribute('data-value')
-    });
+    if (e.currentTarget.getAttribute('data-value') === 'information') {
+      dispatch({ type: ASSOCIATE_CREATE_INFO });
+      // dispatch({
+      //   type: ASSOCIATE_SIGN_ON,
+      //   payload: { isPopUpValue: 'NAMEALIASPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      // });
+    } else {
+      dispatch({
+        type: SET_ASSOCIATE_NEXT_POPUP,
+        payload: e.currentTarget.getAttribute('data-value')
+      });
+    }
   };
   const BackHandlerEvent = (e) => {
     if (isBackToSectionPopUp) {

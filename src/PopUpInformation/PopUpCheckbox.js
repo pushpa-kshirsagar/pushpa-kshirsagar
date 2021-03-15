@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_ENGAGEMENT_INFO, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 
 const PopUpCheckbox = (props) => {
   /*props*/
@@ -20,7 +20,8 @@ const PopUpCheckbox = (props) => {
     EmailSecondaCommunication,
     typeOfPrimarySetObject,
     typeOfSecondaSetObject,
-    nextPopUpValue
+    nextPopUpValue,
+    forceToSelect = ''
   } = props;
 
   const [state, setState] = useState({
@@ -75,24 +76,33 @@ const PopUpCheckbox = (props) => {
     return arr;
   };
   const handleClick = () => {
-    if (state.isChecked === 'email address (primary)') {
+    if (forceToSelect === 'signIn') {
       dispatch({
-        type: typeOfPrimarySetObject,
-        payload: {
-          ...EmailPrimaryCommunication,
-          assesseeAddressEmailCommunication: true
-        }
+        type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+        payload: { assesseeSignIn: state.isChecked }
       });
-    } else {
-      dispatch({
-        type: typeOfSecondaSetObject,
-        payload: {
-          ...EmailSecondaCommunication,
-          assesseeAddressEmailCommunication: true
-        }
-      });
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
+    } 
+    else {
+      if (state.isChecked === 'email address (primary)') {
+        dispatch({
+          type: typeOfPrimarySetObject,
+          payload: {
+            ...EmailPrimaryCommunication,
+            assesseeAddressEmailCommunication: true
+          }
+        });
+      } else {
+        dispatch({
+          type: typeOfSecondaSetObject,
+          payload: {
+            ...EmailSecondaCommunication,
+            assesseeAddressEmailCommunication: true
+          }
+        });
+      }
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
-    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
   };
   // const valueArr = ['email address (primary)', 'email address (secondary)'];
   return (

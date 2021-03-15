@@ -12,7 +12,8 @@ import {
   SET_ASSOCIATE_NEXT_POPUP,
   SET_ASSOCIATE_PREVIOUS_POPUP,
   SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
-  SET_ASSOCIATE_SECONDARY_POPUP
+  SET_ASSOCIATE_SECONDARY_POPUP,
+  ASSOCIATE_CREATE_INFO
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -148,6 +149,11 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         ...istate,
         associatesHeaderOne: '',
         associatesHeaderOneBadgeOne: '',
+        associatesPopUpActive: false
+      };
+    case ASSOCIATE_CREATE_INFO:
+      return {
+        ...istate,
         associatesPopUpActive: false
       };
     case SET_ASSOCIATE_NEXT_POPUP:

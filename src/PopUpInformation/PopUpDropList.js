@@ -4,13 +4,14 @@ import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import SelectField from '../Atoms/SelectField/SelectField';
 
 const PopUpDropList = (props) => {
   const dispatch = useDispatch();
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   //props
   const {
     isActive = false,
@@ -24,7 +25,8 @@ const PopUpDropList = (props) => {
     label,
     typeOfSetObject,
     nextPopUpValue,
-    mappingValue
+    mappingValue,
+    handleNextPopupValue
   } = props;
 
   //states
@@ -57,7 +59,11 @@ const PopUpDropList = (props) => {
   const handleClick = () => {
     if (validate()) {
       //according to creation mode popup sequence will change
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      if (popupMode == 'ASSESSEE_CREATE') {
+        handleNextPopupValue();
+      } else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      }
     }
   };
 

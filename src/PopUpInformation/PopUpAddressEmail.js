@@ -6,7 +6,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
+import {
+  SET_NEXT_POPUP,
+  UPDATE_ASSESSEE_COMMUNICATION,
+  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO
+} from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 const PopUpAddressEmail = (props) => {
@@ -27,7 +31,7 @@ const PopUpAddressEmail = (props) => {
     signInSetup,
     checkboxValue = primaryLabel + ' (' + primaryLabelBadge + ')',
     handleNextPopupValue,
-    isAllreadyCommunication
+    tempCommunication
   } = props;
 
   const [state, setState] = useState({
@@ -37,40 +41,39 @@ const PopUpAddressEmail = (props) => {
   /*handling the onchange event*/
   const handleChange = (event) => {
     const { name, value } = event.target;
-    let communication = true;
-    let signIn = true;
     if (value === '') {
-      communication = false;
-      signIn = false;
-    }
-    if(isAllreadyCommunication){
       dispatch({
-        type: typeOfSetObject,
-        payload: {
-          ...basicInfo,
-          [name]: value
-        }
+        type: UPDATE_ASSESSEE_COMMUNICATION,
+        payload: ''
       });
-    }
-    else{
-      dispatch({
-        type: typeOfSetObject,
-        payload: {
-          ...basicInfo,
-          [name]: value,
-          assesseeAddressEmailCommunication: communication
-
-        }
-      });
-    }
-   
-    if(signInSetup && signInSetup.assesseeSignIn ==''){
       dispatch({
         type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-        payload: { assesseeSignIn: checkboxValue }
+        payload: { assesseeSignIn: '' }
       });
+    } else {
+      if (tempCommunication === '') {
+        dispatch({
+          type: UPDATE_ASSESSEE_COMMUNICATION,
+          payload: checkboxValue
+        });
+      }
+      if (signInSetup && signInSetup.assesseeSignIn === '') {
+        dispatch({
+          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+          payload: { assesseeSignIn: checkboxValue }
+        });
+      }
     }
-   
+
+    dispatch({
+      type: typeOfSetObject,
+      payload: {
+        ...basicInfo,
+        [name]: value
+        // assesseeAddressEmailCommunication: communication
+      }
+    });
+
     setState((prevState) => ({
       ...prevState,
       emailErr: ''
@@ -79,25 +82,17 @@ const PopUpAddressEmail = (props) => {
 
   const handleCheckbox = (e) => {
     const { name, checked, value } = e.target;
-    if(name === 'assesseeAddressEmailCommunication'){
+    if (name === 'assesseeAddressEmailCommunication') {
       dispatch({
-        type: typeOfSetObject,
-        payload: {
-          ...basicInfo,
-          [name]: value,
-          assesseeAddressEmailCommunication: checked
-        }
+        type: UPDATE_ASSESSEE_COMMUNICATION,
+        payload: checked ? checkboxValue : ''
       });
-    }
-    else{
+    } else {
       dispatch({
-        // type: typeOfSetObject,
-        // payload: { ...basicInfo, [name]: checked ? value : '' }
         type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-        payload: { assesseeSignIn: '' }
+        payload: { assesseeSignIn: checked ? checkboxValue : '' }
       });
     }
-   
   };
 
   /*this function for validate email address*/
@@ -162,7 +157,11 @@ const PopUpAddressEmail = (props) => {
                 <div
                   className={'f4'}
                   style={{
-                    color: basicInfo && basicInfo.assesseeAddressEmailCommunication ? '' : 'dimgray'
+                    color:
+                      (basicInfo && basicInfo[tag] !== '') ||
+                      (signInSetup && signInSetup.assesseeSignIn !== '')
+                        ? ''
+                        : 'dimgray'
                   }}
                 >
                   communication
@@ -173,19 +172,17 @@ const PopUpAddressEmail = (props) => {
                     color="default"
                     name={'assesseeAddressEmailCommunication'}
                     value={checkboxValue}
-                    checked={
-                      basicInfo
-                        ? basicInfo.assesseeAddressEmailCommunication === true
-                          ? true
-                          : false
-                        : false
-                    }
+                    checked={tempCommunication === checkboxValue ? true : false}
                     onChange={
                       popupMode !== 'ASSESSEE_SIGN_ON' &&
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
                       handleCheckbox
                     }
-                    disabled={popupMode === 'ASSESSEE_SIGN_ON' && popupMode === 'ASSOCIATE_SIGN_ON'?true:false}
+                    disabled={
+                      popupMode === 'ASSESSEE_SIGN_ON' && popupMode === 'ASSOCIATE_SIGN_ON'
+                        ? true
+                        : false
+                    }
                   />
                 </div>
               </div>
@@ -197,7 +194,11 @@ const PopUpAddressEmail = (props) => {
                 <div
                   className={'f4'}
                   style={{
-                    color: signInSetup && signInSetup.assesseeSignIn !== checkboxValue && 'dimgray'
+                    color:
+                      (basicInfo && basicInfo[tag] !== '') ||
+                      (signInSetup && signInSetup.assesseeSignIn !== '')
+                        ? ''
+                        : 'dimgray'
                   }}
                 >
                   sign-in
@@ -220,7 +221,11 @@ const PopUpAddressEmail = (props) => {
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
                       handleCheckbox
                     }
-                    disabled={signInSetup && signInSetup.assesseeSignIn !== checkboxValue}
+                    disabled={
+                      popupMode === 'ASSESSEE_SIGN_ON' && popupMode === 'ASSOCIATE_SIGN_ON'
+                        ? true
+                        : false
+                    }
                   />
                 </div>
               </div>

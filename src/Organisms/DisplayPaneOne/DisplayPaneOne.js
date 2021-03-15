@@ -31,6 +31,7 @@ import PopupAssessmentsModule from '../../PopUpDisplayPanel/PopupAssessmentsModu
 import PopUpAssignmentModule from '../../PopUpDisplayPanel/PopUpAssignmentModule';
 import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
+import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -188,6 +189,7 @@ export const DisplayPaneOne = () => {
       <PopUpAssociatesModule />
       <PopupAssessmentsModule />
       <PopUpSignOnAssessee isActive={assesseesPopUpActive === 'ASSESSEES_CREATE'} />
+      {/* <PopUpSignOnAssociate isActive={assesseesPopUpActive === 'ASSOCIATE_CREATE'} /> */}
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
       <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
