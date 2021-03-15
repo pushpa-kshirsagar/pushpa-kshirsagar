@@ -8,8 +8,8 @@ import InputField from '../../Atoms/InputField/InputField';
 // import bgImg from '../../images/bg.jpeg'; // old background Image
 import Label from '../../Atoms/Labels/Label';
 // import { useDispatch } from 'react-redux';
-import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
-import userPool from '../../UserPool';
+// import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
+// import userPool from '../../UserPool';
 import { AccountContext } from '../../Account';
 // import Clear from 'material-ui-icons/Clear';
 
@@ -112,7 +112,7 @@ const DisplayPageSignIn = () => {
             <>
               <InputField
                 className=""
-                label="sign-in"
+                label="credential"
                 type="text"
                 errorMsg={isUserNameValid}
                 onClick={(e) => {
@@ -146,7 +146,7 @@ const DisplayPageSignIn = () => {
                     setIsForgotPassword(true);
                   }}
                 >
-                  <Label text="forgot credentials" fontSize="1.2rem" colour="#0000008a" />
+                  <Label text="forgot information" fontSize="1.2rem" colour="#0000008a" />
                 </div>
                 <div>
                   {isCredentialsInValid && (
