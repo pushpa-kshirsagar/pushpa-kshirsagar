@@ -7,57 +7,33 @@ import InputFeild from '../Atoms/InputField/InputField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  SET_NEXT_POPUP,
-  UPDATE_ASSESSEE_INFO,
-  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO
-} from '../actionType';
+import { UPDATE_ASSESSEE_INFO, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 
-const PopUpTagSecondary = (props) => {
+const PopUpTagPrimary = (props) => {
   const dispatch = useDispatch();
   const basicInfo = useSelector((state) => state.AssesseeCreateReducer);
   const {
     isActive,
-    primaryheader = 'secondary',
+    primaryheader = 'primary',
     inputHeader = 'tag',
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
     headerOneBadgeOne = 'information',
-    tagSecondary,
-    checkboxValue = 'tag (secondary)',
-    typeOfSetObject,
-    signInSetup
+    signInSetup,
+    checkboxValue = 'tag (primary)',
+    handleNextPopupValue
   } = props;
   const { popupMode } = useSelector((state) => state.PopUpReducer);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    console.log(event.target);
-    let tagsec = '';
-    if (value === '') {
-      tagsec = '';
-    } else {
-      tagsec = 'tag (secondary)';
-    }
-    dispatch({
-      type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-      payload: { assesseeSignIn: tagsec }
-    });
-    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
-  };
   const handleCheckbox = (event) => {
     dispatch({
       type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-      payload: { assesseeSignIn: event.target.checked ? 'tag (secondary)' : '' }
+      payload: { assesseeSignIn: event.target.checked ? 'tag (primary)' : '' }
     });
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (signInSetup.assesseeSignIn === '') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTSIGNIN' } });
-    } else {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
-    }
+    handleNextPopupValue();
   };
   return (
     <div>
@@ -82,33 +58,16 @@ const PopUpTagSecondary = (props) => {
               </InputLabel>
             </div>
           </div>
-          <FormControl
-            style={{ width: '100%', flexDirection: 'row' }}
-            className={['inputFields', 'tagInputs'].join(' ')}
-          >
-            <Fragment>
-              <InputFeild
-                id="date"
-                name="date"
-                type="text"
-                value={'xxxxxx'}
-                InputProps={{
-                  readOnly: true,
-                  maxLength: 6
-                }}
-              />
-              <span>-</span>
-              <div style={{ width: 'min-content' }}>
-                <InputFeild
-                  id="assesseeTagSecondary"
-                  label={''}
-                  type="text"
-                  value={tagSecondary.assesseeTagSecondary}
-                  onClick={handleChange}
-                />
+          <div style={{ height: 'fit-content' }}>
+            <div className={'PopupFormBox'} style={{ minHeight: 0 }}>
+              <div className={'contFlex'}>
+                <div className={'f9'} style={{ fontSize: '1.6rem !important' }}>
+                  tag&nbsp;
+                  <span className={'headerBadge'}>primary</span>
+                </div>
               </div>
-            </Fragment>
-          </FormControl>
+            </div>
+          </div>
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>
@@ -128,8 +87,7 @@ const PopUpTagSecondary = (props) => {
                     value={checkboxValue}
                     checked={
                       signInSetup
-                        ? signInSetup.assesseeSignIn === checkboxValue &&
-                          tagSecondary.assesseeTagSecondary != ''
+                        ? signInSetup.assesseeSignIn === checkboxValue
                           ? true
                           : false
                         : false
@@ -139,11 +97,8 @@ const PopUpTagSecondary = (props) => {
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
                       handleCheckbox
                     }
-                    disabled={
-                      popupMode !== 'ASSESSEE_SIGN_ON' && popupMode !== 'ASSOCIATE_SIGN_ON'
-                        ? false
-                        : true
-                    }
+                    disabled={ popupMode !== 'ASSESSEE_SIGN_ON' &&
+                    popupMode !== 'ASSOCIATE_SIGN_ON' ? false:true}
                   />
                 </div>
               </div>
@@ -155,7 +110,7 @@ const PopUpTagSecondary = (props) => {
   );
 };
 
-PopUpTagSecondary.propTypes = {
+PopUpTagPrimary.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf(['genericOne']),
   headerOne: PropTypes.string,
@@ -165,4 +120,4 @@ PopUpTagSecondary.propTypes = {
   isActive: PropTypes.bool
 };
 
-export default PopUpTagSecondary;
+export default PopUpTagPrimary;

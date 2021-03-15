@@ -12,8 +12,10 @@ import {
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
   SET_ASSESSEE_SECONDARY_OPTION_VALUE,
-  ASSESSEE_INFO_CREATE,
-  UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO
+  UPDATE_ASSESSEE_COMMUNICATION,
+  UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO,
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
+  ASSESSEE_INFO_CREATE
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -43,9 +45,10 @@ const initialState = {
   assesseesHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
   secondaryOptionCheckValue: '',
-  nextPopupValue:'',
-  assesseeCreateInfo:'',
+  nextPopupValue: '',
+  assesseeCreateInfo: '',
   currentPopUpOption: [],
+  tempCommunication: '',
   secondaryPopUpOptions: {
     create: ASSESSEE_REVIEW_REVISE_POPUP,
     review: REVIEW_POPUP_OPTIONS,
@@ -62,6 +65,9 @@ const initialState = {
     assesseeAlias: '',
     assesseePicture: '',
     assesseePictureVerification: false
+  },
+  informationEngagement: {
+    assesseeTagSecondary: ''
   },
   informationContact: {
     assesseeAddressEmailPrimary: {
@@ -202,6 +208,11 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           assesseeAddressEmailSecondary: action.payload
         }
       };
+    case UPDATE_ASSESSEE_ENGAGEMENT_INFO:
+      return {
+        ...istate,
+        informationEngagement: action.payload
+      };
     case UPDATE_ASSESSEE_SETUP_PRIMARY_INFO:
       return {
         ...istate,
@@ -211,6 +222,11 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         assesseesPopUpActive: ''
+      };
+    case UPDATE_ASSESSEE_COMMUNICATION:
+      return {
+        ...istate,
+        tempCommunication: action.payload
       };
     case CLEAR_ASSESSEE_INFO:
       return initialState;

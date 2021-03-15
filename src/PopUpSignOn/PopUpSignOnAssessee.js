@@ -17,10 +17,14 @@ import {
   UPDATE_ASSESSEE_HOMEADDRESS_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO,
+  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_NEXT_POPUP
 } from '../actionType';
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import userPool from '../UserPool';
+import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
+import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 
 const PopUpSignOnAssessee = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -71,21 +75,57 @@ const PopUpSignOnAssessee = () => {
   };
   const handleNextPopupValue = () => {
     // alert(isPopUpValue);
-    let primaryCommunication =
-      informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication;
-    let secondCommunication =
-      informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication;
+    let signIn = assesseeInfo.informationSetup.assesseeSignIn;
+    alert(signIn)
+    let tempCommunication = assesseeInfo.tempCommunication;
+    let primaryemail = informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail;
+    let secondemail = informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail;
     if (isPopUpValue === 'EMAILPOPUP') {
-      if (primaryCommunication === false || assesseeInfo.informationSetup.assesseeSignIn === '') {
+      if (tempCommunication === '' || signIn === '') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
+      } else if (secondemail !== '') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
+      } else if (signIn === '') {
+        dispatch({
+          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+          payload: { assesseeSignIn: 'email address (secondary)' }
+        });
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
     } else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
-      if (primaryCommunication === false && secondCommunication === false) {
+      if (tempCommunication === '' && tempCommunication === '') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTCOMMUNICATION' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
+      }
+    } else if (isPopUpValue === 'SINGLEDROPDOWNPOPUP') {
+      if (signIn === '') {
+        dispatch({
+          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+          payload: { assesseeSignIn: 'tag (primary)' }
+        });
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGPRIMARYPOPUP' } });
+      } 
+      else if (signIn === 'tag (primary)') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGPRIMARYPOPUP' } });
+      }
+       else if (signIn === 'tag (secondary)') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGSECONDARYPOPUP' } });
+      } 
+      else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
+      }
+    } else if (isPopUpValue === 'TAGPRIMARYPOPUP') {
+      if (signIn === '') {
+        dispatch({
+          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
+          payload: { assesseeSignIn: 'tag (secondary)' }
+        });
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGSECONDARYPOPUP' } });
+      } else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
       }
     }
   };
@@ -130,12 +170,9 @@ const PopUpSignOnAssessee = () => {
         basicInfo={informationContact.assesseeAddressEmailPrimary}
         signInSetup={assesseeInfo.informationSetup}
         // nextPopUpValue={'MOBILETELEPHONEPOPUP'}
+        tempCommunication={assesseeInfo.tempCommunication}
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
         handleNextPopupValue={handleNextPopupValue}
-        isAllreadyCommunication={
-          informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication ||
-          informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication
-        }
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILSECONDARYPOPUP'}
@@ -150,10 +187,7 @@ const PopUpSignOnAssessee = () => {
         // nextPopUpValue={'MOBILETELEPHONEPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO}
         handleNextPopupValue={handleNextPopupValue}
-        isAllreadyCommunication={
-          informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication ||
-          informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication
-        }
+        tempCommunication={assesseeInfo.tempCommunication}
       />
       <PopUpCheckbox
         isActive={isPopUpValue === 'FORCETOSELECTCOMMUNICATION'}
@@ -196,6 +230,41 @@ const PopUpSignOnAssessee = () => {
         basicInfo={assesseeInfo.informationPersonal}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
+        handleNextPopupValue={handleNextPopupValue}
+      />
+      <PopUpTagPrimary
+        isActive={isPopUpValue === 'TAGPRIMARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        signInSetup={assesseeInfo.informationSetup}
+        // nextPopUpValue={'CONFIRMATIONPOPUP'}
+        handleNextPopupValue={handleNextPopupValue}
+        typeOfSetObject={UPDATE_ASSESSEE_SETUP_PRIMARY_INFO}
+      />
+      <PopUpTagSecondary
+        isActive={isPopUpValue === 'TAGSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        tagSecondary={assesseeInfo.informationEngagement}
+        signInSetup={assesseeInfo.informationSetup}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_ENGAGEMENT_INFO}
+      />
+      <PopUpCheckbox
+        isActive={isPopUpValue === 'FORCETOSELECTSIGNIN'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        valueArr={[
+          'email address (primary)',
+          'email address (secondary)',
+          'tag (primary)',
+          'tag (secondary)'
+        ]}
+        forceToSelect="signIn"
+        typeOfSetObject={UPDATE_ASSESSEE_SETUP_PRIMARY_INFO}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}
