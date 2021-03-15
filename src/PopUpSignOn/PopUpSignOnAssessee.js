@@ -48,13 +48,19 @@ const PopUpSignOnAssessee = () => {
     let attributeList = [];
     const dataEmail = {
       Name: 'email',
-      Value: 'shivamsharma.sss11@gmail.com' // 'shivam.s@boppotechnologies.com' //'pushpa.k@boppotechnologies.com'
+      Value: 'pushpa.k@boppotechnologies.com' // 'shivam.s@boppotechnologies.com' //'pushpa.k@boppotechnologies.com'
     };
     const attributeEmail = new CognitoUserAttribute(dataEmail);
     attributeList.push(attributeEmail);
+    // const preferredUsername = {
+    //   Name: 'preferred_username',
+    //   Value: 'pushpa.k@boppotechnologies.com'
+    // };
+    // const attributePreferredUsername = new CognitoUserAttribute(preferredUsername);
+    // attributeList.push(attributePreferredUsername);
     //TODO: Cognito SIGN-UP
     userPool.signUp(
-      'test-admin', //username
+      'pushpa.k@boppotechnologies.com', //username//shivam-sharma //pushpa-boppo //pushpa-admin
       'Admin@123', //password
       attributeList, // required attribute list
       null,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
@@ -14,6 +14,8 @@ import {
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { setAssesseeCardPermissionInJson } from '../Actions/GenericActions';
+import { AccountContext } from '../Account';
+import { useHistory } from 'react-router-dom';
 const PopUpDisplayPanelAssessee = (props) => {
   const { popupHeaderOne, popupHeaderOneBadgeOne, popupOpenType } = useSelector(
     (state) => state.PopUpReducer
@@ -22,7 +24,8 @@ const PopUpDisplayPanelAssessee = (props) => {
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
-
+  const { signOut } = useContext(AccountContext);
+  const history = useHistory();
   const setSecondaryOptionValue = (e) => {
     dispatch({
       type: SET_SECONDARY_OPTION_VALUE,
@@ -78,6 +81,12 @@ const PopUpDisplayPanelAssessee = (props) => {
       revisePopupType = 'secondary';
       valueArr = SIGN_OUT_POPUP;
       reviseSecondaryOptionCheckValue = 'all';
+    }
+    if (clickValue === 'yes') {
+      //sign out
+      let path = `/signIn`;
+      history.push(path);
+      signOut();
     }
     dispatch({
       type: SET_POPUP_STATE,

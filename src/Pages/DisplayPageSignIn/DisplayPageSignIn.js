@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import SendIcon from '@material-ui/icons/Send';
 import iGuruLogo from '../../images/iglogo1.png';
@@ -10,6 +10,7 @@ import Label from '../../Atoms/Labels/Label';
 // import { useDispatch } from 'react-redux';
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import userPool from '../../UserPool';
+import { AccountContext } from '../../Account';
 // import Clear from 'material-ui-icons/Clear';
 
 const DisplayPageSignIn = () => {
@@ -19,6 +20,7 @@ const DisplayPageSignIn = () => {
     backgroundImage: `url(${bgImg})`,
     backgroundSize: 'cover'
   };
+  const { authenticate } = useContext(AccountContext);
   // const dispatch = useDispatch();
   const history = useHistory();
   const [isforgotPassword, setIsForgotPassword] = useState(false);
@@ -34,7 +36,6 @@ const DisplayPageSignIn = () => {
   //   let path = `/dashboard`;
   //   history.push(path);
   // };
-  
 
   const onClickSignIn = () => {
     setIsCredentialsInValid('in progress');
@@ -42,34 +43,21 @@ const DisplayPageSignIn = () => {
     if (userName && password) {
       setIsPasswordValid('');
       setIsUserNameValid('');
-      const user = new CognitoUser({
-        Username: userName, //'shivam.s@boppotechnologies.com',
-        Pool: userPool
-      });
-      const authDetails = new AuthenticationDetails({
-        Username: userName, //'shivam.s@boppotechnologies.com',
-        Password: password //'BoppoTech@123'
-      });
-
-      user.authenticateUser(authDetails, {
-        onSuccess: (data) => {
+      authenticate(userName, password)
+        .then((data) => {
           setIsCredentialsInValid('');
           console.log('OnSuccess===>', data);
           let path = `/dashboard`;
           history.push(path);
           //TODO set AccessToken in localStorage
           //TODO: send AccessToken to backend
-        },
-        onFailure: (err) => {
+        })
+        .catch((err) => {
           setIsCredentialsInValid('incorrect credentials');
           console.log('onFailure===>', err);
-        },
-        newPasswordRequired: (data) => {
-          console.log('newPasswordRequired===>', data);
-        }
-      });
+        });
       // ? Confirming a registered, unauthenticated user using a confirmation code received via mail id.
-      // user.confirmRegistration('430048', true, function(err, result) {
+      // user.confirmRegistration('545566', true, function(err, result) {
       //   if (err) {
       //     alert(err.message || JSON.stringify(err));
       //     return;

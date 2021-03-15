@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isMobile } from 'react-device-detect';
-import { GET_USER_SAGA, SET_SELECTED_ASSOCIATE } from '../../actionType';
+import { GET_USER_SAGA } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
 import DisplayPaneOne from '../../Organisms/DisplayPaneOne/DisplayPaneOne';
@@ -10,6 +10,9 @@ import DisplayPaneTwo from '../../Organisms/DisplayPaneTwo/DisplayPaneTwo';
 import GridColumn from '../../Molecules/GridColumn/GridColumn';
 import DisplayPaneFour from '../../Organisms/DisplayPaneFour/DisplayPaneFour';
 import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
+// import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+// import { AccountContext } from '../../Account';
+// import { useHistory } from 'react-router-dom';
 
 const DisplayPageOne = () => {
   // const { userData = null } = useSelector((state) => state.userReducer);
@@ -18,6 +21,30 @@ const DisplayPageOne = () => {
   const dispatch = useDispatch();
   const mobilePanestate = isMobile && 'displayPaneTwo';
   const isExamMode = false;
+  // const { getSession } = useContext(AccountContext);
+ //* code for change username and any attribute
+  // const changeUserName = () => {
+  //   getSession()
+  //     .then(({ user }) => {
+  //       let attributeList = [];
+  //       const attributeOb = {
+  //         Name: 'preferred_username',
+  //         Value: '8006777221' //'shivam.s@boppotechnologies.com'
+  //       };
+  //       const attribute = new CognitoUserAttribute(attributeOb);
+  //       attributeList.push(attribute);
+  //       user.updateAttributes(attributeList, function (err, result) {
+  //         if (err) {
+  //           console.log('IN ERROR ON CHANGE USERNAME', err);
+  //           return;
+  //         }
+  //         console.log('call result: ' + result);
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log('SESSION ERR=====', err);
+  //     });
+  // };
 
   useEffect(() => {
     dispatch({ type: GET_USER_SAGA });
@@ -34,8 +61,9 @@ const DisplayPageOne = () => {
   return (
     <>
       <HeaderZero userName={userName} userEmail={userEmail} />
-      {gridColumnCountValue !== 0 ? <GridColumn isExamMode={isExamMode} columnCount={gridColumnCountValue} />
-      :null}
+      {gridColumnCountValue !== 0 ? (
+        <GridColumn isExamMode={isExamMode} columnCount={gridColumnCountValue} />
+      ) : null}
       <div className="main-container">
         {isMobile ? (
           <div className="display-pane-container">
@@ -60,6 +88,7 @@ const DisplayPageOne = () => {
               <>
                 <div className="display-pane-container">
                   <DisplayPaneOne />
+                  {/* <button onClick={changeUserName}>Change Username</button> */}
                 </div>
                 <div className="display-pane-container">
                   <DisplayPaneTwo />
