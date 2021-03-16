@@ -9,6 +9,7 @@ import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
+import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 
 const PopUpAddress = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
@@ -52,8 +53,11 @@ const PopUpAddress = (props) => {
                   {inputHeader}&nbsp;
                   {primaryheader ? <span className={'headerBadge'}>{primaryheader}</span> : null}
                 </Fragment>
-                <div className={'infoSymbol'}></div>
               </InputLabel>
+              <div className={'infoSymbol'}></div>
+              <div className={'infoSymbol'}>
+                <InfoToolTip message="Click me, I will stay visible until you click outside." />
+              </div>
             </div>
           </div>
           <FormControl style={{ width: '100%' }}>

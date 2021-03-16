@@ -10,6 +10,7 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
+import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 
 const PopUpAssesseeName = (props) => {
   const {
@@ -38,14 +39,20 @@ const PopUpAssesseeName = (props) => {
   };
   const validate = () => {
     let isValidate = true;
-   
+
     if (basicInfo) {
       if (basicInfo.assesseeNameFirst === '') {
-        setState((prevState) => ({ ...prevState, assesseeNameFirstErr: 'this information is required' }));
+        setState((prevState) => ({
+          ...prevState,
+          assesseeNameFirstErr: 'this information is required'
+        }));
         isValidate = false;
       }
       if (basicInfo.assesseeNameLast === '') {
-        setState((prevState) => ({ ...prevState, assesseeNameLastErr: 'this information is required' }));
+        setState((prevState) => ({
+          ...prevState,
+          assesseeNameLastErr: 'this information is required'
+        }));
         isValidate = false;
       }
       return isValidate;
@@ -82,9 +89,12 @@ const PopUpAssesseeName = (props) => {
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
               <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
-                <Fragment>{inputHeader}&nbsp;</Fragment>
-                <div className={'infoSymbol'}></div>
+                <span>{inputHeader}&nbsp;</span>
               </InputLabel>
+              <div className={'infoSymbol'}></div>
+              <div className={'infoSymbol'}>
+                <InfoToolTip message="Click me, I will stay visible until you click outside." />
+              </div>
             </div>
           </div>
 
