@@ -5,9 +5,11 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
+  CLEAR_ASSESSMENT_INFO,
   SET_ASSESSMENT_NEXT_POPUP,
   SET_ASSESSMENT_PREVIOUS_POPUP,
   SET_ASSESSMENT_SECONDARY_OPTION_VALUE,
+  SET_PREVIOUS_SECTION_POPUP,
   SET_SECONDARY_OPTION_VALUE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
@@ -19,7 +21,8 @@ const PopupAssessmentsModule = (props) => {
     assessmentsPopUpType,
     assessmentsHeaderOne,
     assessmentsHeaderOneBadgeOne,
-    secondaryOptionCheckValue
+    secondaryOptionCheckValue,
+    isBackToSectionPopUp
   } = useSelector((state) => state.assessmentReducer);
 
   const dispatch = useDispatch();
@@ -39,7 +42,12 @@ const PopupAssessmentsModule = (props) => {
     });
   };
   const BackHandlerEvent = (e) => {
-    dispatch({ type: SET_ASSESSMENT_PREVIOUS_POPUP });
+    if (isBackToSectionPopUp) {
+      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+      dispatch({ type: SET_PREVIOUS_SECTION_POPUP });
+    } else {
+      dispatch({ type: SET_ASSESSMENT_PREVIOUS_POPUP });
+    }
   };
   return (
     <div>

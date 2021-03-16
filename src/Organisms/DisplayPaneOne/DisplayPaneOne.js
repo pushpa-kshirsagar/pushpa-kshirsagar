@@ -30,6 +30,7 @@ import PopUpAssociatesModule from '../../PopUpDisplayPanel/PopUpAssociatesModule
 import PopupAssessmentsModule from '../../PopUpDisplayPanel/PopupAssessmentsModule';
 import PopUpAssignmentModule from '../../PopUpDisplayPanel/PopUpAssignmentModule';
 import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
+import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 
 export const DisplayPaneOne = () => {
@@ -182,6 +183,7 @@ export const DisplayPaneOne = () => {
       <PopUpDisplayPaneOneSectionTwo
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}
       />
+      <PopUpIgaugeModule />
       <PopUpAssignmentModule />
       <PopUpAssesseesModule isActive={assesseesPopUpActive === 'ASSESSEES'} />
       <PopUpAssociatesModule />

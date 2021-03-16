@@ -3,7 +3,8 @@ import {
   CLEAR_ASSIGNMENT_INFO,
   SET_ASSIGNMENT_NEXT_POPUP,
   SET_ASSIGNMENT_PREVIOUS_POPUP,
-  SET_ASSIGNMENT_SECONDARY_OPTION_VALUE
+  SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
+  SET_ASSIGNMENT_SECONDARY_POPUP
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -14,9 +15,10 @@ import {
 
 const initialState = {
   assignmentsHeaderOne: '',
-  assignmentsPopUpType: '',
+  assignmentsPopUpType: 'primary',
   currentPopUpOption: '',
   assignmentsPopUpActive: false,
+  isBackToSectionPopUp: false,
   assignmentsHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
   secondaryPopUpOptions: {
@@ -43,6 +45,7 @@ const AssignmentReducer = (istate = initialState, action) => {
         if (action.payload === 'notifications' || action.payload === 'reports') {
           return {
             ...istate,
+            assignmentsPopUpActive: true,
             assignmentsHeaderOne: action.payload,
             assignmentsHeaderOneBadgeOne: 'review',
             assignmentsPopUpType: 'secondary',
@@ -52,6 +55,35 @@ const AssignmentReducer = (istate = initialState, action) => {
         } else {
           return {
             ...istate,
+            assignmentsPopUpActive: true,
+            assignmentsHeaderOne: 'assignments',
+            assignmentsHeaderOneBadgeOne: action.payload,
+            assignmentsPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'active'
+          };
+        }
+      } else {
+        return istate;
+      }
+    case SET_ASSIGNMENT_SECONDARY_POPUP:
+      if (istate.assignmentsPopUpType === 'primary') {
+        if (action.payload === 'notifications' || action.payload === 'reports') {
+          return {
+            ...istate,
+            assignmentsPopUpActive: true,
+            isBackToSectionPopUp: true,
+            assignmentsHeaderOne: action.payload,
+            assignmentsHeaderOneBadgeOne: 'review',
+            assignmentsPopUpType: 'secondary',
+            currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'unread'
+          };
+        } else {
+          return {
+            ...istate,
+            assignmentsPopUpActive: true,
+            isBackToSectionPopUp: true,
             assignmentsHeaderOne: 'assignments',
             assignmentsHeaderOneBadgeOne: action.payload,
             assignmentsPopUpType: 'secondary',
@@ -67,8 +99,7 @@ const AssignmentReducer = (istate = initialState, action) => {
         return {
           ...istate,
           currentPopUpOption: [],
-          assignmentsPopUpActive: false,
-          assignmentsPopUpType: ''
+          assignmentsPopUpActive: false
         };
       } else if (istate.assignmentsPopUpType === 'secondary') {
         return {

@@ -93,6 +93,32 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
     permission: 'review'
   },
   {
+    data: 'interviews',
+    dataValue: 'interviews',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'link',
+    dataValue: 'link',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'password',
+    dataValue: 'password',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
     data: 'notifications',
     dataValue: 'notifications',
     optionClass: 'optionPrimary',
@@ -103,15 +129,6 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'reports',
     dataValue: 'reports',
-    optionClass: 'optionPrimary',
-    divider: 'dark',
-    disabled: false,
-    permissionArr: 'assessee',
-    permission: 'review'
-  },
-  {
-    data: 'password',
-    dataValue: 'password',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -130,7 +147,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
     data: 'revise',
     dataValue: 'revise',
     optionClass: 'optionPrimary',
-    divider: 'light',
+    divider: 'dark',
     disabled: false,
     permissionArr: 'assessee',
     permission: 'revise'
@@ -490,21 +507,26 @@ export const MODULE_POPUP_OPTION = [
   }
 ];
 export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
-  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: false },
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: true },
   {
     data: 'review',
     dataValue: 'review',
     optionClass: 'optionPrimary',
     divider: 'dark',
-    disabled: false
+    disabled: true
   },
-  { data: 'notifications', dataValue: 'notifications', optionClass: 'optionPrimary' },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
   {
     data: 'reports',
     dataValue: 'reports',
     optionClass: 'optionPrimary',
     divider: 'dark',
-    disabled: false
+    disabled: true
   },
   { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary' },
   {
