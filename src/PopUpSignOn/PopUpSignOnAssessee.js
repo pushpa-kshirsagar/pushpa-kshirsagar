@@ -74,59 +74,24 @@ const PopUpSignOnAssessee = () => {
     dispatch({ type: POPUP_CLOSE });
   };
   const handleNextPopupValue = () => {
-    // alert(isPopUpValue);
-    let signIn = assesseeInfo.informationSetup.assesseeSignIn;
-    alert(signIn)
     let tempCommunication = assesseeInfo.tempCommunication;
     let primaryemail = informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail;
     let secondemail = informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail;
-    if (isPopUpValue === 'EMAILPOPUP') {
-      if (tempCommunication === '' || signIn === '') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
-      } else if (secondemail !== '') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
-      } else if (signIn === '') {
-        dispatch({
-          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-          payload: { assesseeSignIn: 'email address (secondary)' }
-        });
+    if (isPopUpValue === 'EMAILPOPUP' || secondemail !== '') {
+      if (tempCommunication === '') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
     } else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
-      if (tempCommunication === '' && tempCommunication === '') {
+      if (tempCommunication === '') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTCOMMUNICATION' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    } else if (isPopUpValue === 'SINGLEDROPDOWNPOPUP') {
-      if (signIn === '') {
-        dispatch({
-          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-          payload: { assesseeSignIn: 'tag (primary)' }
-        });
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGPRIMARYPOPUP' } });
-      } 
-      else if (signIn === 'tag (primary)') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGPRIMARYPOPUP' } });
-      }
-       else if (signIn === 'tag (secondary)') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGSECONDARYPOPUP' } });
-      } 
-      else {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
-      }
-    } else if (isPopUpValue === 'TAGPRIMARYPOPUP') {
-      if (signIn === '') {
-        dispatch({
-          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-          payload: { assesseeSignIn: 'tag (secondary)' }
-        });
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGSECONDARYPOPUP' } });
-      } else {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
-      }
+    } 
+    else {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
   };
   return (
@@ -169,7 +134,7 @@ const PopUpSignOnAssessee = () => {
         tag={'assesseeAddressEmail'}
         basicInfo={informationContact.assesseeAddressEmailPrimary}
         signInSetup={assesseeInfo.informationSetup}
-        // nextPopUpValue={'MOBILETELEPHONEPOPUP'}
+        nextPopUpValue={'MOBILETELEPHONEPOPUP'}
         tempCommunication={assesseeInfo.tempCommunication}
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
         handleNextPopupValue={handleNextPopupValue}

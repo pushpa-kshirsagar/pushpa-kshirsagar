@@ -188,7 +188,7 @@ const PopUpAddressEmail = (props) => {
               </div>
             </div>
           </div>
-          <div className={'fitContent'}>
+         {/* <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>
                 <div
@@ -230,7 +230,7 @@ const PopUpAddressEmail = (props) => {
                 </div>
               </div>
             </div>
-          </div>
+                  </div>*/}
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>

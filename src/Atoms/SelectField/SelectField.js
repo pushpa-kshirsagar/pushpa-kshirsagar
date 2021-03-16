@@ -11,14 +11,30 @@ import {
 } from '@material-ui/core';
 
 export const SelectField = (props) => {
-  const { tag, label, listSelect = [], errorMsg, onChange, value, mappingValue } = props;
+  const {
+    tag,
+    label,
+    listSelect = [],
+    errorMsg,
+    onChange,
+    value,
+    mappingValue,
+    dataValue = ''
+  } = props;
   return (
     <Fragment>
       <FormControl className={'selectFormText'}>
         <InputLabel htmlFor={tag} style={{ marginBottom: 0, fontSize: '1.6rem' }}>
           {label}
         </InputLabel>
-        <Select id={tag} name={tag} value={value} onChange={onChange} className={'selectFontAlign'}>
+        <Select
+          id={tag}
+          name={tag}
+          value={value}
+          onChange={onChange}
+          data-value={dataValue}
+          className={'selectFontAlign'}
+        >
           {listSelect.map((option, index) =>
             option === 'divider' ? (
               <Divider light />
