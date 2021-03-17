@@ -53,7 +53,7 @@ const DisplayPageSignIn = () => {
           //TODO: send AccessToken to backend
         })
         .catch((err) => {
-          setIsCredentialsInValid('incorrect credentials');
+          setIsCredentialsInValid('incorrect information');
           console.log('onFailure===>', err);
         });
       // ? Confirming a registered, unauthenticated user using a confirmation code received via mail id.
@@ -110,6 +110,9 @@ const DisplayPageSignIn = () => {
             </>
           ) : (
             <>
+              <div style={{ padding: '0 5px' }}>
+                <Label text="sign-in" fontSize="1.6rem" colour="#0000008a" />
+              </div>
               <InputField
                 className=""
                 label="credential"
