@@ -21,7 +21,8 @@ import {
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
   UPDATE_ASSESSEE_PERSONAL_INFO,
-  CREATE_ASSOCIATE_SAGA
+  CREATE_ASSOCIATE_SAGA,
+  CREATE_ASSESSEE_SAGA
 } from '../actionType';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -43,21 +44,30 @@ const PopUpSignOnAssociate = () => {
     } = assesseeInfo;
 
     let requestObect = {
+      assesseeId: '0123456',
+      associateId: '605091f81edc573048fb467a',
       associate: {
         informationBasic: associateInfo.informationBasic,
         informationAllocation: associateInfo.informationAllocation,
         informationContact: associateInfo.informationContact
-      },
-      assessee: {
-        informationBasic: informationBasic,
-        informationAllocation: informationAllocation,
-        informationContact: informationContact,
-        informationPersonal: informationPersonal,
-        informationSetup: informationSetup
       }
     };
     console.log('ONCLICK YES', requestObect);
-    dispatch({ type: CREATE_ASSOCIATE_SAGA ,payload:requestObect});
+    dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
+    if (associateInfo.associateInfomationData !== '') {
+      let assesseerequestObect = {
+        assesseeId: '0123456',
+        associateId: associateInfo.associateInfomationData.id,
+        assessee: {
+          informationBasic: informationBasic,
+          informationAllocation: informationAllocation,
+          informationContact: informationContact,
+          informationPersonal: informationPersonal,
+          informationSetup: informationSetup
+        }
+      };
+      dispatch({ type: CREATE_ASSESSEE_SAGA, payload: assesseerequestObect });
+    }
   };
   const handleNextPopupValue = () => {
     // alert(isPopUpValue);
@@ -76,8 +86,7 @@ const PopUpSignOnAssociate = () => {
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    }
-    else{
+    } else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
   };
