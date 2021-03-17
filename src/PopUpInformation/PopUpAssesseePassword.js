@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { POPUP_CLOSE } from '../actionType';
 import { FormControl } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
+import { useHistory } from 'react-router-dom';
+import { AccountContext } from '../Account';
 
 const PopUpAssesseePassword = (props) => {
   const dispatch = useDispatch();
@@ -23,6 +25,8 @@ const PopUpAssesseePassword = (props) => {
   const [revisedPasswordError, setRevisedPasswordError] = useState('');
   const [confirmRevisedPassword, setConfirmRevisedPassword] = useState('');
   const [confirmRevisedPasswordError, setConfirmRevisedPasswordError] = useState('');
+  const { getSession, signOut } = useContext(AccountContext);
+  const history = useHistory();
 
   const handleClick = () => {
     //according to creation mode popup sequence will change
@@ -41,6 +45,28 @@ const PopUpAssesseePassword = (props) => {
         setRevisedPasswordError('');
         setConfirmRevisedPasswordError('');
         // TODO: call change password method in aws cognito
+        getSession()
+          .then(({ user }) => {
+            if (user) {
+              user.changePassword(currentPassword, revisedPassword, (err, result) => {
+                if (err) {
+                  alert(err.message || JSON.stringify(err));
+                  //TODO: Show error
+                  return;
+                }
+                signOut(); // sign-out current user
+                //TODO: display success message and redirect to signIn page
+                let path = `/signIn`;
+                history.push(path);
+                console.log('call result: ' + result);
+              });
+            } else {
+              console.log('USER NOT SIGN IN PLEASE SIGN IN');
+            }
+          })
+          .catch((err) => {
+            console.log('SESSION ERR=====', err);
+          });
         console.log('========', currentPassword, revisedPassword, confirmRevisedPassword);
       } else {
         setRevisedPasswordError('this information is mismatched');
