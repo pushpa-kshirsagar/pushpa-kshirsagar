@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -17,10 +17,48 @@ const PopUpAssesseePassword = (props) => {
     headerOne = 'assessee',
     headerOneBadgeOne = 'password'
   } = props;
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [currentPasswordError, setCurrentPasswordError] = useState('');
+  const [revisedPassword, setRevisedPassword] = useState('');
+  const [revisedPasswordError, setRevisedPasswordError] = useState('');
+  const [confirmRevisedPassword, setConfirmRevisedPassword] = useState('');
+  const [confirmRevisedPasswordError, setConfirmRevisedPasswordError] = useState('');
 
   const handleClick = () => {
     //according to creation mode popup sequence will change
-    dispatch({ type: POPUP_CLOSE });
+    setConfirmRevisedPasswordError('');
+    setRevisedPasswordError('');
+    setCurrentPasswordError('');
+    const passwordRegExp = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+    );
+    if (currentPassword !== '' && revisedPassword !== '' && confirmRevisedPassword !== '') {
+      if (!passwordRegExp.test(revisedPassword)) {
+        setRevisedPasswordError('revised password invalid');
+        return;
+      }
+      if (revisedPassword === confirmRevisedPassword) {
+        setRevisedPasswordError('');
+        setConfirmRevisedPasswordError('');
+        // TODO: call change password method in aws cognito
+        console.log('========', currentPassword, revisedPassword, confirmRevisedPassword);
+      } else {
+        setRevisedPasswordError('this information is mismatched');
+        setConfirmRevisedPasswordError('this information is mismatched');
+      }
+    } else {
+      if (currentPassword === '') {
+        setCurrentPasswordError('this information is required');
+      }
+      if (revisedPassword === '') {
+        setRevisedPasswordError('this information is required');
+      }
+      if (confirmRevisedPassword === '') {
+        setConfirmRevisedPasswordError('this information is required');
+      }
+      console.log('ALL Field requred');
+    }
+    // dispatch({ type: POPUP_CLOSE });
   };
 
   return (
@@ -36,9 +74,36 @@ const PopUpAssesseePassword = (props) => {
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
           <FormControl style={{ width: '100%' }}>
-            <InputFeild id={'current password'} label={'current password'} onClick={null} />
-            <InputFeild id={'revised password'} label={'revised password'} onClick={null} />
-            <InputFeild id={'revised password'} label={'revised password'} onClick={null} />
+            <InputFeild
+              id={'current password'}
+              value={currentPassword}
+              label={'current password'}
+              type="password"
+              errorMsg={currentPasswordError}
+              onClick={(e) => {
+                setCurrentPassword(e.target.value);
+              }}
+            />
+            <InputFeild
+              id={'revised password'}
+              value={revisedPassword}
+              type="password"
+              label={'revised password'}
+              errorMsg={revisedPasswordError}
+              onClick={(e) => {
+                setRevisedPassword(e.target.value);
+              }}
+            />
+            <InputFeild
+              id={'revised password'}
+              value={confirmRevisedPassword}
+              type="password"
+              label={'revised password'}
+              errorMsg={confirmRevisedPasswordError}
+              onClick={(e) => {
+                setConfirmRevisedPassword(e.target.value);
+              }}
+            />
           </FormControl>
         </DialogContent>
       </Popup>

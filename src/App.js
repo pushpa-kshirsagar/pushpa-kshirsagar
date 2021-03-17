@@ -5,6 +5,7 @@ import DisplayPageSignOn from './Pages/DisplayPageSignOn/DisplayPageSignOn';
 import DisplayPageSignIn from './Pages/DisplayPageSignIn/DisplayPageSignIn';
 import userPool from './UserPool';
 import { AccountContext } from './Account';
+import DisplayPageConfirmUser from './Pages/DisplayPageConfirmUser/DisplayPageConfirmUser';
 
 // Aimplify.configure({
 //   Auth: {
@@ -21,10 +22,10 @@ function App() {
     console.log(userPool);
     getSession()
       .then((session) => {
-        console.log("USER THEN SESSION=====>", session);
+        console.log('USER THEN SESSION=====>', session);
       })
       .catch((err) => {
-        console.log("USER THEN SESSION=====>", err);
+        console.log('USER THEN SESSION=====>', err);
       });
     //for SIGNUP
     // userPool.signUp('shivam.s@boppotechnologies.com', 'BoppoTech@123', [], null, (error, data) => {
@@ -39,6 +40,7 @@ function App() {
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/signIn" />} />
           <Route path="/signIn" component={DisplayPageSignIn} exact={true} />
+          <Route path="/confirm/:id" component={DisplayPageConfirmUser} exact={true} />
           <Route path="/dashboard" component={DisplayPageOne} exact={true} />
           <Route path="/signOn" component={DisplayPageSignOn} exact={true} />
         </Switch>
