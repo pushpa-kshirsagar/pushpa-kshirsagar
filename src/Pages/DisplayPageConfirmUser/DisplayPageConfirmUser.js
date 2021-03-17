@@ -6,7 +6,7 @@ import './DisplayPageConfirmUser.css';
 import { IconButton } from '@material-ui/core';
 import InputField from '../../Atoms/InputField/InputField';
 import Label from '../../Atoms/Labels/Label';
-import { AccountContext } from '../../Account';
+// import { AccountContext } from '../../Account';
 
 const DisplayPageConfirmUser = () => {
   const bgImg = '/Image/bg.jpg';
@@ -17,8 +17,8 @@ const DisplayPageConfirmUser = () => {
     backgroundSize: 'cover'
   };
   // const dispatch = useDispatch();
-  const history = useHistory();
-  const [isforgotPassword, setIsForgotPassword] = useState(false);
+  // const history = useHistory();
+  // const [isforgotPassword, setIsForgotPassword] = useState(false);
   const [isCredentialsInValid, setIsCredentialsInValid] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState('');
   const [password, setPassword] = useState('');
@@ -54,68 +54,47 @@ const DisplayPageConfirmUser = () => {
             <img className="form-header-logo-img" src={iGuruLogo} alt="iGuru logo" />
           </div>
           <div>
-            {isforgotPassword && (
-              <IconButton
-                onClick={() => {
-                  setIsForgotPassword(false);
-                }}
-                className="form-icon-style"
-              >
-                <SendIcon style={{ height: 20, width: 20 }} />
-              </IconButton>
-            )}
             <IconButton className="form-icon-style">
               <SendIcon style={{ height: 20, width: 20 }} onClick={onClickSignIn} />
             </IconButton>
           </div>
         </div>
         <div className="form-inputs-cantainer">
-          {isforgotPassword ? (
-            <>
-              <InputField className="" label="email address" type="text" />
-            </>
-          ) : (
-            <>
-              <InputField className="" label="credential" type="text" value={id} />
-              <InputField
-                className=""
-                label="password"
-                type="password"
-                errorMsg={isPasswordValid}
-                onClick={(e) => {
-                  setIsPasswordValid('');
-                  setIsCredentialsInValid('');
-                  setPassword(e.target.value);
-                }}
-              />
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  margin: '0 5px'
-                }}
-              >
-                <div
-                  style={{ cursor: 'pointer', width: 'fit-content' }}
-                  onClick={() => {
-                    setIsForgotPassword(true);
-                  }}
-                >
-                  <Label text="forgot information" fontSize="1.2rem" colour="#0000008a" />
-                </div>
-                <div>
-                  {isCredentialsInValid && (
-                    <Label
-                      text={isCredentialsInValid}
-                      fontSize="1.2rem"
-                      colour={isCredentialsInValid === 'in progress' ? 'green' : 'rgb(244, 67, 54)'}
-                    />
-                  )}
-                </div>
+          <>
+            <InputField className="" label="credential" type="text" value={id} />
+            <InputField
+              className=""
+              label="password"
+              type="password"
+              errorMsg={isPasswordValid}
+              onClick={(e) => {
+                setIsPasswordValid('');
+                setIsCredentialsInValid('');
+                setPassword(e.target.value);
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                margin: '0 5px'
+              }}
+            >
+              <div style={{ cursor: 'pointer', width: 'fit-content' }} onClick={() => {}}>
+                <Label text="forgot information" fontSize="1.2rem" colour="#0000008a" />
               </div>
-            </>
-          )}
+              <div>
+                {isCredentialsInValid && (
+                  <Label
+                    text={isCredentialsInValid}
+                    fontSize="1.2rem"
+                    colour={isCredentialsInValid === 'in progress' ? 'green' : 'rgb(244, 67, 54)'}
+                  />
+                )}
+              </div>
+            </div>
+          </>
         </div>
       </div>
     </div>
