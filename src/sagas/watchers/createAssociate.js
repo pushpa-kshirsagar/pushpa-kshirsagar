@@ -9,7 +9,7 @@ import {
   SET_ASSOCIATE_INFORMATION,
   CREATE_ASSESSEE_SAGA
 } from '../../actionType';
-import { GET_USER_URL } from '../../endpoints';
+import { ASSESSEE_CREATE_URL, ASSOCIATE_CREATE_URL, GET_USER_URL } from '../../endpoints';
 import UserPool from '../../UserPool';
 
 const headers = {
@@ -18,8 +18,7 @@ const headers = {
 };
 const createAssesseeApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL =
-    'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insightguru/api/assesseeDistinct/create';
+  let URL = ASSESSEE_CREATE_URL;
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
@@ -31,8 +30,7 @@ const createAssesseeApi = async (requestObj) => {
 
 const createAssociateApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL =
-    'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insightguru/api/associateDistinct/create';
+  let URL = ASSOCIATE_CREATE_URL;
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
@@ -130,34 +128,14 @@ function* workerCreateAssociateSaga(data) {
       ...data.payload,
       associateId: userResponse.responseObject.id
     };
-    console.log('obj', obj);
-    // yield put({ type: CREATE_ASSESSEE_SAGA, payload: obj });
     const assesseeRes = yield call(createAssesseeApi, { data: obj });
     if (assesseeRes.responseCode === '000') {
       signUpForAwsCognito(
-        'pushpa.k@boppotechnologies.com',
+        assesseeRes.responseObject[0].informationContact.assesseeAddressEmailPrimary
+          .assesseeAddressEmail,
         assesseeRes.responseObject[0].informationSetup.assesseeSignInCredential,
-        assesseeRes.informationSetup.assesseeSignInPassword
+        assesseeRes.responseObject[0].informationSetup.assesseeSignInPassword
       );
-      // let attributeList = [];
-      // const dataEmail = {
-      //   Name: 'email',
-      //   Value: 'pushpa.k@boppotechnologies.com' // 'shivam.s@boppotechnologies.com' //'pushpa.k@boppotechnologies.com'
-      // };
-      // const attributeEmail = new CognitoUserAttribute(dataEmail);
-      // attributeList.push(attributeEmail);
-      // console.log(assesseeRes.responseObject[0].informationSetup.assesseeSignInCredential)
-      // console.log("AWSCall")
-      // UserPool.signUp(
-      //   assesseeRes.responseObject[0].informationSetup.assesseeSignInCredential, //username//shivam-sharma //pushpa-boppo //pushpa-admin
-      //   'Admin@123', //password   assesseeInformationData.informationSetup.assesseeSignInPassword
-      //   attributeList, // required attribute list
-      //   null,
-      //   (error, data) => {
-      //     console.log('SIGN-ON DATA===>', data);
-      //     console.log('SIGN-ON ERROR===>', error);
-      //   }
-      // );
     }
   } catch (e) {
     console.log('ERROR==', e);
