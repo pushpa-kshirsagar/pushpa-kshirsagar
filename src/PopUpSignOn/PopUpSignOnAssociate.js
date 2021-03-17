@@ -40,7 +40,8 @@ const PopUpSignOnAssociate = () => {
       informationAllocation,
       informationContact,
       informationPersonal,
-      informationSetup
+      informationSetup,
+      informationEngagement
     } = assesseeInfo;
 
     let requestObect = {
@@ -50,24 +51,33 @@ const PopUpSignOnAssociate = () => {
         informationBasic: associateInfo.informationBasic,
         informationAllocation: associateInfo.informationAllocation,
         informationContact: associateInfo.informationContact
+      },
+      assessee: {
+        informationBasic: informationBasic,
+        informationAllocation: informationAllocation,
+        informationContact: informationContact,
+        informationEngagement: informationEngagement,
+        informationPersonal: informationPersonal,
+        informationSetup: informationSetup
       }
     };
     console.log('ONCLICK YES', requestObect);
     dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
-    if (associateInfo.associateInfomationData !== '') {
-      let assesseerequestObect = {
-        assesseeId: '0123456',
-        associateId: associateInfo.associateInfomationData.id,
-        assessee: {
-          informationBasic: informationBasic,
-          informationAllocation: informationAllocation,
-          informationContact: informationContact,
-          informationPersonal: informationPersonal,
-          informationSetup: informationSetup
-        }
-      };
-      dispatch({ type: CREATE_ASSESSEE_SAGA, payload: assesseerequestObect });
-    }
+    // if (associateInfo.associateInfomationData !== '') {
+    //   let assesseerequestObect = {
+    //     assesseeId: '0123456',
+    //     associateId: associateInfo.associateInfomationData.id,
+    //     assessee: {
+    //       informationBasic: informationBasic,
+    //       informationAllocation: informationAllocation,
+    //       informationContact: informationContact,
+    //       informationEngagement: informationEngagement,
+    //       informationPersonal: informationPersonal,
+    //       informationSetup: informationSetup
+    //     }
+    //   };
+    //   dispatch({ type: CREATE_ASSESSEE_SAGA, payload: assesseerequestObect });
+    // }
   };
   const handleNextPopupValue = () => {
     // alert(isPopUpValue);

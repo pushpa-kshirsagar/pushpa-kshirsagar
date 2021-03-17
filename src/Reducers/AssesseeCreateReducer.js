@@ -16,7 +16,8 @@ import {
   UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO,
   SET_ASSESSEE_SECONDARY_POPUP,
   UPDATE_ASSESSEE_COMMUNICATION,
-  UPDATE_ASSESSEE_ENGAGEMENT_INFO
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
+  SET_ASSESSEE_INFORMATION
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -51,6 +52,7 @@ const initialState = {
   assesseeCreateInfo: '',
   currentPopUpOption: [],
   tempCommunication: '',
+  assesseeInformationData: '',
   secondaryPopUpOptions: {
     create: ASSESSEE_REVIEW_REVISE_POPUP,
     review: REVIEW_POPUP_OPTIONS,
@@ -67,6 +69,12 @@ const initialState = {
     assesseeAlias: '',
     assesseePicture: '',
     assesseePictureVerification: false
+  },
+  informationAllocation: {
+    assesseeRole: {
+      assesseeRolePrimary: ['sdasdd'],
+      assesseeRoleSecondary: []
+    }
   },
   informationEngagement: {
     assesseeTagSecondary: ''
@@ -90,7 +98,7 @@ const initialState = {
     }
   },
   informationSetup: {
-    assesseeSignIn: ''
+    assesseeSignInCredential: ''
   },
   informationPersonal: {
     assesseeGender: ''
@@ -258,6 +266,11 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         tempCommunication: action.payload
+      };
+    case SET_ASSESSEE_INFORMATION:
+      return {
+        ...istate,
+        assesseeInformationData: action.payload
       };
     case CLEAR_ASSESSEE_INFO:
       return initialState;
