@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../PopUpInformation/PopUpTextField';
@@ -21,15 +22,14 @@ import {
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
   UPDATE_ASSESSEE_PERSONAL_INFO,
-  CREATE_ASSOCIATE_SAGA,
-  CREATE_ASSESSEE_SAGA
+  CREATE_ASSOCIATE_SAGA
 } from '../actionType';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const informationContact = assesseeInfo.informationContact;
-
+  const history = useHistory();
   console.log(associateInfo);
   console.log('==================');
   const dispatch = useDispatch();
@@ -41,9 +41,17 @@ const PopUpSignOnAssociate = () => {
       informationContact,
       informationPersonal,
       informationSetup,
-      informationEngagement
+      informationEngagement,
+      tempCommunication
     } = assesseeInfo;
-
+    let assesseeContactObj = informationContact;
+     
+    if(tempCommunication === "email address (primary)"){
+      assesseeContactObj.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication=true
+    }
+    if(tempCommunication === "email address (secondary)"){
+      assesseeContactObj.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication=true
+    }
     let requestObect = {
       assesseeId: '0123456',
       associateId: '605091f81edc573048fb467a',
@@ -63,21 +71,8 @@ const PopUpSignOnAssociate = () => {
     };
     console.log('ONCLICK YES', requestObect);
     dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
-    // if (associateInfo.associateInfomationData !== '') {
-    //   let assesseerequestObect = {
-    //     assesseeId: '0123456',
-    //     associateId: associateInfo.associateInfomationData.id,
-    //     assessee: {
-    //       informationBasic: informationBasic,
-    //       informationAllocation: informationAllocation,
-    //       informationContact: informationContact,
-    //       informationEngagement: informationEngagement,
-    //       informationPersonal: informationPersonal,
-    //       informationSetup: informationSetup
-    //     }
-    //   };
-    //   dispatch({ type: CREATE_ASSESSEE_SAGA, payload: assesseerequestObect });
-    // }
+    let path = `/signIn`;
+    history.push(path);
   };
   const handleNextPopupValue = () => {
     // alert(isPopUpValue);

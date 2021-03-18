@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
 import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
@@ -14,12 +15,12 @@ import {
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_BASIC_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
-  UPDATE_ASSESSEE_HOMEADDRESS_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO,
   UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  SET_NEXT_POPUP
+  SET_NEXT_POPUP,
+  CREATE_ASSESSEE_SAGA
 } from '../actionType';
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import userPool from '../UserPool';
@@ -32,24 +33,33 @@ const PopUpSignOnAssessee = () => {
   const informationContact = assesseeInfo.informationContact;
   const dispatch = useDispatch();
   const [nextPopUpValue, setNextPopUpValue] = useState('');
-
+  const history = useHistory();
   const onClickYes = async () => {
     const {
       informationBasic,
       informationAllocation,
       informationContact,
       informationPersonal,
-      informationSetup
+      informationSetup,
+      informationEngagement
     } = assesseeInfo;
     let requestObect = {
-      informationBasic: informationBasic,
-      informationAllocation: informationAllocation,
-      informationContact: informationContact,
-      informationPersonal: informationPersonal,
-      informationSetup: informationSetup
+      assesseeId: '0123456',
+      associateId: '60520a349d66236bb84f8b1b',
+      assessee:{
+        informationBasic: informationBasic,
+        informationAllocation: informationAllocation,
+        informationContact: informationContact,
+        informationPersonal: informationPersonal,
+        informationEngagement: informationEngagement,
+        informationSetup: informationSetup
+      }  
     };
-    console.log('ONCLICK YES', requestObect);
-    let attributeList = [];
+    console.log('ONCLICK assessee Create Yes', requestObect);
+    dispatch({ type: CREATE_ASSESSEE_SAGA, payload: requestObect });
+    let path = `/signIn`;
+    history.push(path);
+   /* let attributeList = [];
     const dataEmail = {
       Name: 'email',
       Value: 'pushpa.k@boppotechnologies.com' // 'shivam.s@boppotechnologies.com' //'pushpa.k@boppotechnologies.com'
@@ -72,7 +82,7 @@ const PopUpSignOnAssessee = () => {
         console.log('SIGN-ON DATA===>', data);
         console.log('SIGN-ON ERROR===>', error);
       }
-    );
+    );*/
   };
 
   const onClickCancelYes = () => {

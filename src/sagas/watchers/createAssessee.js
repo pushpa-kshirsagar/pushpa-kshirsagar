@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
+import { signUpForAwsCognito } from '../../Actions/GenericActions';
 import { CREATE_ASSESSEE_SAGA, SET_ASSESSEE_INFORMATION } from '../../actionType';
 
 const createAssesseeApi = async (requestObj) => {
@@ -22,6 +23,12 @@ function* workerCreateAssesseeSaga(data) {
     console.log('IN WORKER ====>', JSON.stringify(userResponse));
     if (userResponse.responseCode === '000')
       yield put({ type: SET_ASSESSEE_INFORMATION, payload: userResponse.responseObject });
+    signUpForAwsCognito(
+      userResponse.responseObject[0].informationContact.assesseeAddressEmailPrimary
+        .assesseeAddressEmail,
+      userResponse.responseObject[0].informationSetup.assesseeSignInCredential,
+      userResponse.responseObject[0].informationSetup.assesseeSignInPassword
+    );
   } catch (e) {
     console.log('ERROR==', e);
   }

@@ -140,7 +140,7 @@ const PopUpTelephone = (props) => {
                   label={'area / city'}
                   listSelect={[
                     { cityCode: '345', name: 'Mumbai' },
-                    { cityCode: '345', name: 'Pune' }
+                    { cityCode: '385', name: 'Pune' }
                   ]}
                   mappingValue={'cityCode'}
                   errorMsg={oneErr}

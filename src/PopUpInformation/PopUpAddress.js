@@ -155,7 +155,7 @@ const PopUpAddress = (props) => {
               label={'city'}
               listSelect={[
                 { cityCode: '345', name: 'Mumbai' },
-                { cityCode: '345', name: 'Pune' }
+                { cityCode: '356', name: 'Pune' }
               ]}
               mappingValue={'cityCode'}
               errorMsg={cityErr}
