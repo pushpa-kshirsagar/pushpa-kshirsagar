@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isMobile } from 'react-device-detect';
 import { GET_USER_SAGA } from '../../actionType';
@@ -10,8 +10,8 @@ import DisplayPaneTwo from '../../Organisms/DisplayPaneTwo/DisplayPaneTwo';
 import GridColumn from '../../Molecules/GridColumn/GridColumn';
 import DisplayPaneFour from '../../Organisms/DisplayPaneFour/DisplayPaneFour';
 import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
-// import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
-// import { AccountContext } from '../../Account';
+import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import { AccountContext } from '../../Account';
 // import { useHistory } from 'react-router-dom';
 
 const DisplayPageOne = () => {
@@ -21,30 +21,30 @@ const DisplayPageOne = () => {
   const dispatch = useDispatch();
   const mobilePanestate = isMobile && 'displayPaneTwo';
   const isExamMode = false;
-  // const { getSession } = useContext(AccountContext);
+  const { getSession } = useContext(AccountContext);
  //* code for change username and any attribute
-  // const changeUserName = () => {
-  //   getSession()
-  //     .then(({ user }) => {
-  //       let attributeList = [];
-  //       const attributeOb = {
-  //         Name: 'preferred_username',
-  //         Value: '8006777221' //'shivam.s@boppotechnologies.com'
-  //       };
-  //       const attribute = new CognitoUserAttribute(attributeOb);
-  //       attributeList.push(attribute);
-  //       user.updateAttributes(attributeList, function (err, result) {
-  //         if (err) {
-  //           console.log('IN ERROR ON CHANGE USERNAME', err);
-  //           return;
-  //         }
-  //         console.log('call result: ' + result);
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log('SESSION ERR=====', err);
-  //     });
-  // };
+  const changeUserName = () => {
+    getSession()
+      .then(({ user }) => {
+        let attributeList = [];
+        const attributeOb = {
+          Name: 'preferred_username',
+          Value: '8868916398' //'shivam.s@boppotechnologies.com'
+        };
+        const attribute = new CognitoUserAttribute(attributeOb);
+        attributeList.push(attribute);
+        user.updateAttributes(attributeList, function (err, result) {
+          if (err) {
+            console.log('IN ERROR ON CHANGE USERNAME', err);
+            return;
+          }
+          console.log('call result: ' + result);
+        });
+      })
+      .catch((err) => {
+        console.log('SESSION ERR=====', err);
+      });
+  };
 
   useEffect(() => {
     dispatch({ type: GET_USER_SAGA });

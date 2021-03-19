@@ -3,15 +3,12 @@ import { useHistory } from 'react-router-dom';
 import SendIcon from '@material-ui/icons/Send';
 import iGuruLogo from '../../images/iglogo1.png';
 import './DisplayPageSignIn.css';
-import { IconButton } from '@material-ui/core';
+import { FormControl, IconButton, InputLabel } from '@material-ui/core';
 import InputField from '../../Atoms/InputField/InputField';
-// import bgImg from '../../images/bg.jpeg'; // old background Image
 import Label from '../../Atoms/Labels/Label';
-// import { useDispatch } from 'react-redux';
-// import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
-// import userPool from '../../UserPool';
+import { CognitoUser } from 'amazon-cognito-identity-js';
+import Pool from '../../UserPool';
 import { AccountContext } from '../../Account';
-// import Clear from 'material-ui-icons/Clear';
 
 const DisplayPageSignIn = () => {
   const bgImg = './Image/bg.jpg';
@@ -21,25 +18,24 @@ const DisplayPageSignIn = () => {
     backgroundSize: 'cover'
   };
   const { authenticate } = useContext(AccountContext);
-  // const dispatch = useDispatch();
   const history = useHistory();
-  const [isforgotPassword, setIsForgotPassword] = useState(false);
+  const [stage, setStage] = useState('signIn'); // 'forgotPassword' 'confirmPassword'
   const [isCredentialsInValid, setIsCredentialsInValid] = useState('');
   const [isUserNameValid, setIsUserNameValid] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-
-  // const onClickEvent = () => {
-  //   console.log('log In api');
-  //   dispatch({ type: GET_USER_SAGA });
-  //   let path = `/dashboard`;
-  //   history.push(path);
-  // };
+  const [forgotCredential, setForgotCredential] = useState('');
+  const [forgotCredentialError, setForgotCredentialError] = useState('');
+  const [code, setCode] = useState('');
+  const [codeError, setCodeError] = useState('');
+  const [revisedPassword, setRevisedPassword] = useState('');
+  const [revisedPasswordError, setRevisedPasswordError] = useState('');
+  const [confirmRevisedPassword, setConfirmRevisedPassword] = useState('');
+  const [confirmRevisedPasswordError, setConfirmRevisedPasswordError] = useState('');
 
   const onClickSignIn = () => {
     setIsCredentialsInValid('in progress');
-    // get UserName and Password from inputs
     if (userName && password) {
       setIsPasswordValid('');
       setIsUserNameValid('');
@@ -49,23 +45,12 @@ const DisplayPageSignIn = () => {
           console.log('OnSuccess===>', data);
           let path = `/dashboard`;
           history.push(path);
-          //TODO set AccessToken in localStorage
-          //TODO: send AccessToken to backend
         })
         .catch((err) => {
           setIsCredentialsInValid('incorrect information');
           console.log('onFailure===>', err);
         });
-      // ? Confirming a registered, unauthenticated user using a confirmation code received via mail id.
-      // user.confirmRegistration('545566', true, function(err, result) {
-      //   if (err) {
-      //     alert(err.message || JSON.stringify(err));
-      //     return;
-      //   }
-      //   console.log('call result: ' + result);
-      // });
     } else {
-      // validation set validation message if any
       setIsCredentialsInValid('');
       if (userName === '') {
         setIsUserNameValid('this information is required');
@@ -80,6 +65,70 @@ const DisplayPageSignIn = () => {
     }
   };
 
+  const getUser = (Username) => {
+    return new CognitoUser({ Username, Pool });
+  };
+  const sendCode = () => {
+    console.log('sendCode+++++++');
+    if (forgotCredential === '') {
+      setForgotCredentialError('this information is required');
+      return;
+    }
+    getUser(forgotCredential).forgotPassword({
+      onSuccess: (data) => {
+        console.log('onSuccess IN FORGOT PASSWORD', data);
+      },
+      onFailure: (err) => {
+        console.log('onFailure IN FORGOT PASSWORD', err);
+      },
+      inputVerificationCode: (data) => {
+        console.log('inputVerificationCode IN FORGOT PASSWORD', data);
+        setStage('confirmPassword');
+      }
+    });
+  };
+
+  const resetPassword = () => {
+    console.log('resetPassword+++++++');
+    const passwordRegExp = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+    );
+    if (code !== '' && revisedPassword !== '' && confirmRevisedPassword !== '') {
+      if (!passwordRegExp.test(revisedPassword)) {
+        setRevisedPasswordError('revised password invalid');
+        return;
+      }
+      if (revisedPassword === confirmRevisedPassword) {
+        setRevisedPasswordError('');
+        setConfirmRevisedPasswordError('');
+        getUser(forgotCredential).confirmPassword(code, revisedPassword, {
+          onSuccess: (data) => {
+            console.log('onSuccess IN Confirm PASSWORD', data);
+            setStage('signIn');
+          },
+          onFailure: (err) => {
+            console.log('onFailure IN Confirm PASSWORD', err);
+          }
+        });
+        console.log('========', code, revisedPassword, confirmRevisedPassword);
+      } else {
+        setRevisedPasswordError('this information is mismatched');
+        setConfirmRevisedPasswordError('this information is mismatched');
+      }
+    } else {
+      if (code === '') {
+        setCodeError('this information is required');
+      }
+      if (revisedPassword === '') {
+        setRevisedPasswordError('this information is required');
+      }
+      if (confirmRevisedPassword === '') {
+        setConfirmRevisedPasswordError('this information is required');
+      }
+      console.log('ALL Field requred');
+    }
+  };
+
   return (
     <div style={style} className="signin-container">
       <div className="form-box">
@@ -88,30 +137,56 @@ const DisplayPageSignIn = () => {
             <img className="form-header-logo-img" src={iGuruLogo} alt="iGuru logo" />
           </div>
           <div>
-            {isforgotPassword && (
-              <IconButton
-                onClick={() => {
-                  setIsForgotPassword(false);
-                }}
-                className="form-icon-style"
-              >
-                <SendIcon style={{ height: 20, width: 20 }} />
+            {stage === 'signIn' && (
+              <IconButton className="form-icon-style">
+                <SendIcon style={{ height: 20, width: 20 }} onClick={onClickSignIn} />
               </IconButton>
             )}
-            <IconButton className="form-icon-style">
-              <SendIcon style={{ height: 20, width: 20 }} onClick={onClickSignIn} />
-            </IconButton>
+            {stage === 'forgotPassword' && (
+              <>
+                <IconButton
+                  onClick={() => {
+                    setStage('signIn');
+                  }}
+                  className="form-icon-style rotate-icon"
+                >
+                  <SendIcon style={{ height: 20, width: 20 }} />
+                </IconButton>
+                <IconButton className="form-icon-style">
+                  <SendIcon style={{ height: 20, width: 20 }} onClick={sendCode} />
+                </IconButton>
+              </>
+            )}
+            {stage === 'confirmPassword' && (
+              <>
+                <IconButton
+                  onClick={() => {
+                    setStage('forgotPassword');
+                  }}
+                  className="form-icon-style rotate-icon"
+                >
+                  <SendIcon style={{ height: 20, width: 20 }} />
+                </IconButton>
+                <IconButton className="form-icon-style">
+                  <SendIcon style={{ height: 20, width: 20 }} onClick={resetPassword} />
+                </IconButton>
+              </>
+            )}
           </div>
         </div>
-        <div className="form-inputs-cantainer">
-          {isforgotPassword ? (
+        <div className="sign-in-form-inputs-cantainer">
+          {stage === 'signIn' && (
             <>
-              <InputField className="" label="email address" type="text" />
-            </>
-          ) : (
-            <>
-              <div style={{ padding: '0 5px' }}>
-                <Label text="sign-in" fontSize="1.6rem" colour="#0000008a" />
+              <div className={'fitContent'}>
+                <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
+                  <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                    <span>{'sign-in'}&nbsp;</span>
+                  </InputLabel>
+                  {/* <div className={'infoSymbol'}></div>
+              <div className={'infoSymbol'}>
+                <InfoToolTip message="Click me, I will stay visible until you click outside." />
+              </div> */}
+                </div>
               </div>
               <InputField
                 className=""
@@ -146,7 +221,8 @@ const DisplayPageSignIn = () => {
                 <div
                   style={{ cursor: 'pointer', width: 'fit-content' }}
                   onClick={() => {
-                    setIsForgotPassword(true);
+                    // setIsForgotPassword(true);
+                    setStage('forgotPassword');
                   }}
                 >
                   <Label text="forgot information" fontSize="1.2rem" colour="#0000008a" />
@@ -162,6 +238,66 @@ const DisplayPageSignIn = () => {
                 </div>
               </div>
             </>
+          )}
+          {stage === 'forgotPassword' && (
+            <>
+              <div className={'fitContent'}>
+                <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
+                  <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                    <span>{'sign-in'}&nbsp;</span>
+                  </InputLabel>
+                  {/* <div className={'infoSymbol'}></div>
+              <div className={'infoSymbol'}>
+                <InfoToolTip message="Click me, I will stay visible until you click outside." />
+              </div> */}
+                </div>
+              </div>
+              <InputField
+                id={'forgotCredential'}
+                value={forgotCredential}
+                label={'credential'}
+                type="text"
+                errorMsg={forgotCredentialError}
+                onClick={(e) => {
+                  setForgotCredentialError('');
+                  setForgotCredential(e.target.value);
+                }}
+              />
+            </>
+          )}
+          {stage === 'confirmPassword' && (
+            <FormControl style={{ width: '100%' }}>
+              <InputField
+                id={'code'}
+                value={code}
+                label={'authentication code'}
+                type="text"
+                errorMsg={codeError}
+                onClick={(e) => {
+                  setCode(e.target.value);
+                }}
+              />
+              <InputField
+                id={'revised password'}
+                value={revisedPassword}
+                type="password"
+                label={'revised password'}
+                errorMsg={revisedPasswordError}
+                onClick={(e) => {
+                  setRevisedPassword(e.target.value);
+                }}
+              />
+              <InputField
+                id={'revised password'}
+                value={confirmRevisedPassword}
+                type="password"
+                label={'revised password'}
+                errorMsg={confirmRevisedPasswordError}
+                onClick={(e) => {
+                  setConfirmRevisedPassword(e.target.value);
+                }}
+              />
+            </FormControl>
           )}
         </div>
       </div>

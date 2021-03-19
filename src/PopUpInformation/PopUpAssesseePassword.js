@@ -58,6 +58,7 @@ const PopUpAssesseePassword = (props) => {
                 //TODO: display success message and redirect to signIn page
                 let path = `/signIn`;
                 history.push(path);
+                dispatch({ type: POPUP_CLOSE });
                 console.log('call result: ' + result);
               });
             } else {
