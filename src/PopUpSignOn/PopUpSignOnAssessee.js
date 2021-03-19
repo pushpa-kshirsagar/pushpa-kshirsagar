@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
 import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
@@ -14,12 +15,15 @@ import {
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_BASIC_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
-  UPDATE_ASSESSEE_HOMEADDRESS_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO,
   UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  SET_NEXT_POPUP
+  SET_NEXT_POPUP,
+  CREATE_ASSESSEE_SAGA,
+  ASSESSEE_POPUP_CLOSE,
+  LOADER_START,
+  ASSESSEE_INFO_CREATE
 } from '../actionType';
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import userPool from '../UserPool';
@@ -27,29 +31,99 @@ import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 
 const PopUpSignOnAssessee = () => {
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const informationContact = assesseeInfo.informationContact;
   const dispatch = useDispatch();
   const [nextPopUpValue, setNextPopUpValue] = useState('');
-
+  const history = useHistory();
+  useEffect(() => {
+    console.log(popupMode)
+    console.log(assesseeInfo.assesseeInformationData)
+    console.log("assesseeInformationData")
+    if (assesseeInfo.assesseeInformationData) {
+      if (popupMode === 'ASSESSEE_SIGN_ON') {
+        let path = `/signIn`;
+        history.push(path);
+      } else {
+        console.log('show right pane');
+        onClickCancelYes();
+        dispatch({ type: ASSESSEE_INFO_CREATE });
+      }
+    }
+  }, [assesseeInfo.assesseeInformationData, history]);
   const onClickYes = async () => {
     const {
       informationBasic,
       informationAllocation,
       informationContact,
       informationPersonal,
-      informationSetup
+      informationSetup,
+      informationEngagement,
+      tempCommunication
     } = assesseeInfo;
+    if (tempCommunication === 'email address (primary)') {
+      informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication = true;
+    }
+    if (tempCommunication === 'email address (secondary)') {
+      informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
+    }
     let requestObect = {
-      informationBasic: informationBasic,
-      informationAllocation: informationAllocation,
-      informationContact: informationContact,
-      informationPersonal: informationPersonal,
-      informationSetup: informationSetup
+      assesseeId: '0123456',
+      associateId: '60520a349d66236bb84f8b1b',
+      associateName:"Boppo Technologies",
+      assessee: {
+        informationBasic: informationBasic,
+        informationAllocation: informationAllocation,
+        informationContact: informationContact,
+        informationPersonal: informationPersonal,
+        informationEngagement: informationEngagement,
+        informationSetup: informationSetup
+      },
+      associate: {
+        id: "60520a349d66236bb84f8b1b",
+        informationBasic: {
+          associateName: "dsada",
+          associateNameVerification: false,
+          associateDescription: "asd",
+          associatePicture: "",
+          associatePictureVerification: false,
+          associateFlag: null
+        },
+        informationSetup: null,
+        informationContact: {
+          associateAddressWebsite: null,
+          associateAddressWebsiteVerification: false,
+          associateAddressWorkPrimary: {
+            associateAddressCountryRegion: "91",
+            associateAddressProvinceState: "211",
+            associateAddressPostcode: "dasas",
+            associateAddressCity: "345",
+            associateAddress: "dasd",
+            associateAddressCommunication: false,
+            associateAddressVerification: false
+          },
+          associateAddressWorkSecondary: null,
+          associateTelephoneWorkPrimary: {
+            associateTelephoneCountryRegion: "91",
+            associateTelephoneAreaCity: "345",
+            associateTelephoneNumber: "ssad",
+            associateTelephoneExtension: "sad",
+            associateTelephoneCommunication: false,
+            associateTelephoneVerification: false
+          },
+          associateTelephoneWorkSecondary: null
+        },
+        informationCredential: null,
+        informationFramework: null,
+        parentId: "605091f81edc573048fb467a"
+      }
     };
-    console.log('ONCLICK YES', requestObect);
-    let attributeList = [];
+    console.log('ONCLICK assessee Create Yes', requestObect);
+    console.log('loading start');
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSESSEE_SAGA, payload: requestObect });
+    /* let attributeList = [];
     const dataEmail = {
       Name: 'email',
       Value: 'pushpa.k@boppotechnologies.com' // 'shivam.s@boppotechnologies.com' //'pushpa.k@boppotechnologies.com'
@@ -72,7 +146,7 @@ const PopUpSignOnAssessee = () => {
         console.log('SIGN-ON DATA===>', data);
         console.log('SIGN-ON ERROR===>', error);
       }
-    );
+    );*/
   };
 
   const onClickCancelYes = () => {
@@ -80,65 +154,28 @@ const PopUpSignOnAssessee = () => {
     dispatch({ type: POPUP_CLOSE });
   };
   const handleNextPopupValue = () => {
-    // alert(isPopUpValue);
-    let signIn = assesseeInfo.informationSetup.assesseeSignIn;
-    alert(signIn)
     let tempCommunication = assesseeInfo.tempCommunication;
-    let primaryemail = informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail;
     let secondemail = informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail;
     if (isPopUpValue === 'EMAILPOPUP') {
-      if (tempCommunication === '' || signIn === '') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
-      } else if (secondemail !== '') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
-      } else if (signIn === '') {
-        dispatch({
-          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-          payload: { assesseeSignIn: 'email address (secondary)' }
-        });
+      if (tempCommunication === '' || secondemail !== '') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
     } else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
-      if (tempCommunication === '' && tempCommunication === '') {
+      if (tempCommunication === '') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTCOMMUNICATION' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    } else if (isPopUpValue === 'SINGLEDROPDOWNPOPUP') {
-      if (signIn === '') {
-        dispatch({
-          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-          payload: { assesseeSignIn: 'tag (primary)' }
-        });
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGPRIMARYPOPUP' } });
-      } 
-      else if (signIn === 'tag (primary)') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGPRIMARYPOPUP' } });
-      }
-       else if (signIn === 'tag (secondary)') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGSECONDARYPOPUP' } });
-      } 
-      else {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
-      }
-    } else if (isPopUpValue === 'TAGPRIMARYPOPUP') {
-      if (signIn === '') {
-        dispatch({
-          type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-          payload: { assesseeSignIn: 'tag (secondary)' }
-        });
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'TAGSECONDARYPOPUP' } });
-      } else {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
-      }
+    } else {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
   };
   return (
     <div>
       <PopUpAssesseeName
-        isActive={isPopUpValue === 'NAMEPOPUP'}
+        isActive={isPopUpValue === 'ASSESSEENAMEPOPUP'}
         inputHeader={'name'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
@@ -175,7 +212,7 @@ const PopUpSignOnAssessee = () => {
         tag={'assesseeAddressEmail'}
         basicInfo={informationContact.assesseeAddressEmailPrimary}
         signInSetup={assesseeInfo.informationSetup}
-        // nextPopUpValue={'MOBILETELEPHONEPOPUP'}
+        nextPopUpValue={'MOBILETELEPHONEPOPUP'}
         tempCommunication={assesseeInfo.tempCommunication}
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
         handleNextPopupValue={handleNextPopupValue}

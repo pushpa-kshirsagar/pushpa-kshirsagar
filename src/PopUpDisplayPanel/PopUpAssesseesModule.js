@@ -7,13 +7,17 @@ import { DialogContent } from '@material-ui/core';
 import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_SIGN_ON,
+  ASSOCIATE_SIGN_ON,
   CLEAR_ASSESSEE_INFO,
   SET_ASSESSEE_NEXT_POPUP,
   SET_ASSESSEE_PREVIOUS_POPUP,
   SET_ASSESSEE_SECONDARY_OPTION_VALUE,
-  SET_PREVIOUS_SECTION_POPUP
+  SET_PREVIOUS_SECTION_POPUP,
+  ASSESSEE_REVIEW_DISTINCT_SAGA,
+  LOADER_START
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
+import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 
 const PopUpAssesseesModule = (props) => {
   const {
@@ -22,7 +26,8 @@ const PopUpAssesseesModule = (props) => {
     assesseesHeaderOne,
     assesseesHeaderOneBadgeOne,
     secondaryOptionCheckValue,
-    isBackToSectionPopUp
+    isBackToSectionPopUp,
+    assesseesPopUpActive
   } = useSelector((state) => state.AssesseeCreateReducer);
 
   const dispatch = useDispatch();
@@ -35,16 +40,24 @@ const PopUpAssesseesModule = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    if (e.currentTarget.getAttribute('data-value') === 'information') {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'information') {
       dispatch({ type: ASSESSEE_INFO_CREATE });
       dispatch({
         type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
+    }
+    else if (targetValue === 'distinct') {
+      let requestObect = makeAssesseeReviewListRequestObject(secondaryOptionCheckValue);
+      dispatch({ type: LOADER_START });
+      dispatch({ type: ASSESSEE_REVIEW_DISTINCT_SAGA, payload: requestObect });
+      dispatch({ type: ASSESSEE_INFO_CREATE });
+
     } else {
       dispatch({
         type: SET_ASSESSEE_NEXT_POPUP,
-        payload: e.currentTarget.getAttribute('data-value')
+        payload: targetValue
       });
     }
   };
@@ -58,7 +71,7 @@ const PopUpAssesseesModule = (props) => {
   };
   return (
     <div>
-      <Popup isActive={props.isActive}>
+      <Popup isActive={assesseesPopUpActive}>
         <PopupHeader
           headerPanelColour={headerPanelColour + assesseesPopUpType}
           headerOne={assesseesHeaderOne}

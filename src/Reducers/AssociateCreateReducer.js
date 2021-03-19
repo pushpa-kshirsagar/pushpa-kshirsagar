@@ -13,7 +13,8 @@ import {
   SET_ASSOCIATE_PREVIOUS_POPUP,
   SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
   SET_ASSOCIATE_SECONDARY_POPUP,
-  ASSOCIATE_CREATE_INFO
+  ASSOCIATE_CREATE_INFO,
+  SET_ASSOCIATE_INFORMATION
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -29,6 +30,7 @@ const initialState = {
   associatesHeaderOne: '',
   associatesHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
+  associateInfomationData:'',
   currentPopUpOption: [],
   secondaryPopUpOptions: {
     create: REVIEW_REVISE_POPUP,
@@ -58,7 +60,7 @@ const initialState = {
       associateNodeSecondary: []
     },
     associateRole: {
-      associateRolePrimary: [],
+      associateRolePrimary: ["3432342"],
       associateRoleSecondary: []
     }
   },
@@ -275,6 +277,11 @@ const AssociateCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         informationBasic: action.payload
+      };
+    case SET_ASSOCIATE_INFORMATION:
+      return {
+        ...istate,
+        associateInfomationData: action.payload
       };
     case CLEAR_ASSOCIATE_INFO:
       return initialState;

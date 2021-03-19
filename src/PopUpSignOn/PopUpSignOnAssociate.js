@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../PopUpInformation/PopUpTextField';
@@ -14,35 +15,62 @@ import {
   CLEAR_ASSOCIATE_INFO,
   POPUP_CLOSE,
   UPDATE_ASSOCIATE_BASIC_INFO,
-  UPDATE_ASSOCIATE_INFO,
   UPDATE_ASSOCIATE_WORKADDRESS_INFO,
   UPDATE_ASSOCIATE_WORKTELEPHONE_INFO,
   UPDATE_ASSOCIATE_ADMIN_BASIC_INFO,
-  UPDATE_ASSOCIATE_ADMIN_MOBILE_INFO,
-  UPDATE_ASSOCIATE_ADMIN_PERSONAL_INFO,
   UPDATE_ASSESSEE_BASIC_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
-  UPDATE_ASSESSEE_PERSONAL_INFO
+  UPDATE_ASSESSEE_PERSONAL_INFO,
+  CREATE_ASSOCIATE_SAGA,
+  LOADER_START,
+  CLEAR_ASSESSEE_INFO
 } from '../actionType';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
+  const informationContact = assesseeInfo.informationContact;
+  const history = useHistory();
   console.log(associateInfo);
   console.log('==================');
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (assesseeInfo.assesseeInformationData) {
+      console.log(popupMode)
+      if(popupMode === 'ASSOCIATE_SIGN_ON'){
+        let path = `/signIn`;
+        history.push(path);
+      }
+      else{
+        dispatch({ type: CLEAR_ASSOCIATE_INFO });
+        dispatch({ type: CLEAR_ASSESSEE_INFO });
+        dispatch({ type: POPUP_CLOSE });
+      }
+    }
+    
+  }, [assesseeInfo.assesseeInformationData, history]);
   const CreateApi = () => {
     const {
       informationBasic,
       informationAllocation,
       informationContact,
       informationPersonal,
-      informationSetup
+      informationSetup,
+      informationEngagement,
+      tempCommunication
     } = assesseeInfo;
+    let assesseeContactObj = informationContact;
 
+    if (tempCommunication === 'email address (primary)') {
+      assesseeContactObj.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication = true;
+    }
+    if (tempCommunication === 'email address (secondary)') {
+      assesseeContactObj.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
+    }
     let requestObect = {
+      assesseeId: '0123456',
+      associateId: '605091f81edc573048fb467a',
       associate: {
         informationBasic: associateInfo.informationBasic,
         informationAllocation: associateInfo.informationAllocation,
@@ -52,11 +80,36 @@ const PopUpSignOnAssociate = () => {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,
         informationContact: informationContact,
+        informationEngagement: informationEngagement,
         informationPersonal: informationPersonal,
         informationSetup: informationSetup
       }
     };
     console.log('ONCLICK YES', requestObect);
+    console.log('loading start');
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
+  };
+  const handleNextPopupValue = () => {
+    // alert(isPopUpValue);
+    let tempCommunication = assesseeInfo.tempCommunication;
+    let secondemail = informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail;
+    if (isPopUpValue === 'EMAILPOPUP') {
+      if (tempCommunication === '' || secondemail !== '') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
+      } else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
+      }
+    }
+    else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
+      if (tempCommunication === '') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTCOMMUNICATION' } });
+      } else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
+      }
+    } else {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
+    }
   };
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_ASSOCIATE_INFO });
@@ -64,7 +117,7 @@ const PopUpSignOnAssociate = () => {
   };
 
   const onClickYes = () => {
-    if (popupMode === 'ASSOCIATE_SIGN_ON') {
+    if (popupMode === 'ASSOCIATE_SIGN_ON' || popupMode === 'ASSOCIATE_CREATE') {
       dispatch({
         type: SET_NEXT_POPUP,
         payload: { isPopUpValue: 'NAMEPOPUP' }
@@ -123,6 +176,7 @@ const PopUpSignOnAssociate = () => {
         inputHeader={'work address'}
         primaryheader={'primary'}
         nextPopUpValue={'WORKTELEPHONE'}
+        isRequired={true}
         basicInfo={associateInfo.informationContact.associateAddressWorkPrimary}
         countryCode={'associateTelephoneCountryRegion'}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKADDRESS_INFO}
@@ -138,6 +192,7 @@ const PopUpSignOnAssociate = () => {
         isMobileState={false}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_INFO}
         nextPopUpValue={'ASSOCIATECONFIRMATIONPOPUP'}
+        isRequired={true}
       />
 
       <PopUpConfirmation
@@ -183,10 +238,12 @@ const PopUpSignOnAssociate = () => {
         headerOne={'administrator'}
         headerOneBadgeOne={'information'}
         primaryLabel={'email address'}
-        nextPopUpValue={'MOBILETELEPHONEPOPUP'}
+        // nextPopUpValue={'MOBILETELEPHONEPOPUP'}
         tag={'assesseeAddressEmail'}
         basicInfo={assesseeInfo.informationContact.assesseeAddressEmailPrimary}
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
+        tempCommunication={assesseeInfo.tempCommunication}
+        handleNextPopupValue={handleNextPopupValue}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONEPOPUP'}
@@ -200,6 +257,7 @@ const PopUpSignOnAssociate = () => {
         isMobileState={true}
         signInSetup={assesseeInfo.informationSetup}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
+        // handleNextPopupValue={handleNextPopupValue}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}

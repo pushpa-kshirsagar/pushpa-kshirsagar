@@ -38,10 +38,10 @@ const PopUpAssociatesModule = (props) => {
   const ChangeOptionPopup = (e) => {
     if (e.currentTarget.getAttribute('data-value') === 'information') {
       dispatch({ type: ASSOCIATE_CREATE_INFO });
-      // dispatch({
-      //   type: ASSOCIATE_SIGN_ON,
-      //   payload: { isPopUpValue: 'NAMEALIASPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      // });
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'NAMEALIASPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
     } else {
       dispatch({
         type: SET_ASSOCIATE_NEXT_POPUP,

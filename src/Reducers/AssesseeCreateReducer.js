@@ -16,7 +16,9 @@ import {
   UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO,
   SET_ASSESSEE_SECONDARY_POPUP,
   UPDATE_ASSESSEE_COMMUNICATION,
-  UPDATE_ASSESSEE_ENGAGEMENT_INFO
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
+  SET_ASSESSEE_INFORMATION_DATA,
+  ASSESSEE_REVIEW_DISTINCT_DATA
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -40,7 +42,7 @@ import {
 //   return finalDate;
 // };
 const initialState = {
-  assesseesPopUpActive: '',
+  assesseesPopUpActive: false,
   isBackToSectionPopUp: false,
   assesseesPopUpType: 'primary',
   assesseesHeaderOne: '',
@@ -51,6 +53,8 @@ const initialState = {
   assesseeCreateInfo: '',
   currentPopUpOption: [],
   tempCommunication: '',
+  assesseeInformationData: null,
+  assesseeReviewListDistinctData: null,
   secondaryPopUpOptions: {
     create: ASSESSEE_REVIEW_REVISE_POPUP,
     review: REVIEW_POPUP_OPTIONS,
@@ -67,6 +71,12 @@ const initialState = {
     assesseeAlias: '',
     assesseePicture: '',
     assesseePictureVerification: false
+  },
+  informationAllocation: {
+    assesseeRole: {
+      assesseeRolePrimary: ['sdasdd'],
+      assesseeRoleSecondary: []
+    }
   },
   informationEngagement: {
     assesseeTagSecondary: ''
@@ -90,7 +100,7 @@ const initialState = {
     }
   },
   informationSetup: {
-    assesseeSignIn: ''
+    assesseeSignInCredential: ''
   },
   informationPersonal: {
     assesseeGender: ''
@@ -108,21 +118,21 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         assesseesHeaderOne: 'assessees',
         assesseesPopUpType: 'primary',
         currentPopUpOption: istate.primaryPopUpOptions,
-        assesseesPopUpActive: 'ASSESSEES'
+        assesseesPopUpActive: true
       };
     case ASSESSEE_POPUP_CLOSE:
       return {
         ...istate,
         assesseesHeaderOne: '',
         assesseesHeaderOneBadgeOne: '',
-        assesseesPopUpActive: ''
+        assesseesPopUpActive: false
       };
     case SET_ASSESSEE_NEXT_POPUP:
       if (istate.assesseesPopUpType === 'primary') {
         if (action.payload === 'notifications' || action.payload === 'reports') {
           return {
             ...istate,
-            assesseesPopUpActive: 'ASSESSEES',
+            assesseesPopUpActive: true,
             assesseesHeaderOne: action.payload,
             assesseesHeaderOneBadgeOne: 'review',
             assesseesPopUpType: 'secondary',
@@ -133,7 +143,7 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           return {
             ...istate,
             assesseesHeaderOne: 'assessees',
-            assesseesPopUpActive: 'ASSESSEES',
+            assesseesPopUpActive: true,
             assesseesHeaderOneBadgeOne: action.payload,
             assesseesPopUpType: 'secondary',
             currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
@@ -160,7 +170,7 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           return {
             ...istate,
             assesseesHeaderOne: 'assessees',
-            assesseesPopUpActive: 'ASSESSEES',
+            assesseesPopUpActive: true,
             assesseesHeaderOneBadgeOne: action.payload,
             assesseesPopUpType: 'secondary',
             currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
@@ -176,7 +186,7 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         return {
           ...istate,
           currentPopUpOption: [],
-          assesseesPopUpActive: ''
+          assesseesPopUpActive: false
         };
       } else if (istate.assesseesPopUpType === 'secondary') {
         return {
@@ -252,12 +262,22 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
     case ASSESSEE_INFO_CREATE:
       return {
         ...istate,
-        assesseesPopUpActive: ''
+        assesseesPopUpActive: false
       };
     case UPDATE_ASSESSEE_COMMUNICATION:
       return {
         ...istate,
         tempCommunication: action.payload
+      };
+    case SET_ASSESSEE_INFORMATION_DATA:
+      return {
+        ...istate,
+        assesseeInformationData: action.payload
+      };
+    case ASSESSEE_REVIEW_DISTINCT_DATA:
+      return {
+        ...istate,
+        assesseeReviewListDistinctData: action.payload
       };
     case CLEAR_ASSESSEE_INFO:
       return initialState;

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -23,16 +23,72 @@ const PopUpAddress = (props) => {
     headerOneBadgeOne,
     nextPopUpValue,
     typeOfSetObject,
-    basicInfo
+    basicInfo,
+    isRequired = false
   } = props;
   const objectKeys = Object.keys(basicInfo);
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+
+  const [countryErr, setCountryErr] = useState('');
+  const [stateErr, setStateErr] = useState('');
+  const [zipcodeErr, setZipcodeErr] = useState('');
+  const [cityErr, setCityErr] = useState('');
+  const [addressErr, setAddressErr] = useState('');
+
+  const validateFun = () => {
+    let isValidate = true;
+    if (basicInfo && basicInfo[objectKeys[4]] === '') {
+      setAddressErr('this information is required');
+      isValidate = false;
+    }
+    if (basicInfo && basicInfo[objectKeys[3]] === '') {
+      setCityErr('this information is required');
+      isValidate = false;
+    }
+    if (basicInfo && basicInfo[objectKeys[0]] === '') {
+      setCountryErr('this information is required');
+      isValidate = false;
+    }
+    if (basicInfo && basicInfo[objectKeys[2]] === '') {
+      setZipcodeErr('this information is required');
+      isValidate = false;
+    }
+    if (basicInfo && basicInfo[objectKeys[1]] === '') {
+      setStateErr('this information is required');
+      isValidate = false;
+    }
+    return isValidate;
+  };
+  const handleChange = (e) => {
+    console.log(e);
+    console.log(objectKeys.indexOf(e.target.name));
+    console.log(e.currentTarget.getAttribute('data-value'));
+    const { name, value } = e.target;
+    if (objectKeys.indexOf(e.target.name) === 0) {
+      setCountryErr('');
+    }
+    if (objectKeys.indexOf(e.target.name) === 1) {
+      setStateErr('');
+    }
+    if (objectKeys.indexOf(e.target.name) === 2) {
+      setZipcodeErr('');
+    }
+    if (objectKeys.indexOf(e.target.name) === 3) {
+      setCityErr('');
+    }
+    if (objectKeys.indexOf(e.target.name) === 4) {
+      setAddressErr('');
+    }
     dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
-    /*according to creation mode popup sequence will change*/
-    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    if (isRequired) {
+      if (validateFun()) {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      }
+    } else {
+      /*according to creation mode popup sequence will change*/
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    }
   };
   return (
     <div>
@@ -64,11 +120,12 @@ const PopUpAddress = (props) => {
             <SelectField
               tag={objectKeys[0]}
               label={'country / region'}
+              dataValue={'country'}
               listSelect={[
                 { countryCode: '91', name: 'India' },
                 { countryCode: '22', name: 'USA' }
               ]}
-              errorMsg={''}
+              errorMsg={countryErr}
               onChange={handleChange}
               value={basicInfo && basicInfo[objectKeys[0]]}
               mappingValue={'countryCode'}
@@ -80,7 +137,7 @@ const PopUpAddress = (props) => {
                 { stateCode: '211', name: 'Maharashtra' },
                 { stateCode: '234', name: 'Karnataka' }
               ]}
-              errorMsg={''}
+              errorMsg={stateErr}
               onChange={handleChange}
               mappingValue={'stateCode'}
               value={basicInfo && basicInfo[objectKeys[1]]}
@@ -90,7 +147,7 @@ const PopUpAddress = (props) => {
               id={objectKeys[2]}
               label={'postcode / zip'}
               value={basicInfo && basicInfo[objectKeys[2]]}
-              errorMsg={''}
+              errorMsg={zipcodeErr}
               onClick={handleChange}
             />
             <SelectField
@@ -98,10 +155,10 @@ const PopUpAddress = (props) => {
               label={'city'}
               listSelect={[
                 { cityCode: '345', name: 'Mumbai' },
-                { cityCode: '345', name: 'Pune' }
+                { cityCode: '356', name: 'Pune' }
               ]}
               mappingValue={'cityCode'}
-              errorMsg={''}
+              errorMsg={cityErr}
               onChange={handleChange}
               value={basicInfo && basicInfo[objectKeys[3]]}
             />
@@ -109,7 +166,7 @@ const PopUpAddress = (props) => {
               id={objectKeys[4]}
               label={'address'}
               value={basicInfo && basicInfo[objectKeys[4]]}
-              errorMsg={''}
+              errorMsg={addressErr}
               onClick={handleChange}
             />
             <div className={'fitContent'}>

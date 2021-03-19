@@ -26,16 +26,36 @@ const PopUpTelephone = (props) => {
     nextPopUpValue,
     basicInfo,
     typeOfSetObject,
-    isMobileState = true
+    isMobileState = true,
+    isRequired=false
   } = props;
 
   const [state, setState] = useState({
     error: ''
   });
   const objectKeys = Object.keys(basicInfo);
-
+  const [ziroErr, setziroErr] = useState('');
+  const [oneErr, setoneErr] = useState('');
+  const [twoErr, settwoErr] = useState('');
+  const [threeErr, setthreeErr] = useState('');
   const validate = () => {
     let isValidate = true;
+    if(basicInfo && basicInfo[objectKeys[0]] === ''){
+      setziroErr('this information is required');
+      isValidate=false;
+    }
+    if(basicInfo && basicInfo[objectKeys[1]] === ''){
+      setoneErr('this information is required');
+      isValidate=false;
+    }
+    if(basicInfo && basicInfo[objectKeys[2]] === ''){
+      settwoErr('this information is required');
+      isValidate=false;
+    }
+    if(basicInfo && basicInfo[objectKeys[3]] === ''){
+      setthreeErr('this information is required');
+      isValidate=false
+    }
     /* validation of moile number but still its not required
    let regex = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
     let mobilestr = basicInfo.mobileNumber;
@@ -50,17 +70,31 @@ const PopUpTelephone = (props) => {
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setState((prevState) => ({
-      ...prevState,
-      error: ''
-    }));
+    if (objectKeys.indexOf(event.target.name) === 0) {
+      setziroErr('');
+    }
+    if (objectKeys.indexOf(event.target.name) === 1) {
+      setoneErr('');
+    }
+    if (objectKeys.indexOf(event.target.name) === 2) {
+      settwoErr('');
+    }
+    if (objectKeys.indexOf(event.target.name) === 3) {
+      setthreeErr('');
+    }
     dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
-    if (validate()) {
-      /*according to creation mode popup sequence will change*/
+    if(isRequired){
+      if (validate()) {
+        /*according to creation mode popup sequence will change*/
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      }
+    }
+    else{
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
+    
   };
   return (
     <div>
@@ -94,7 +128,7 @@ const PopUpTelephone = (props) => {
                 { countryCode: '22', name: 'USA' }
               ]}
               mappingValue={'countryCode'}
-              errorMsg={''}
+              errorMsg={ziroErr}
               onChange={handleChange}
               value={basicInfo && basicInfo[objectKeys[0]]}
             />
@@ -106,10 +140,10 @@ const PopUpTelephone = (props) => {
                   label={'area / city'}
                   listSelect={[
                     { cityCode: '345', name: 'Mumbai' },
-                    { cityCode: '345', name: 'Pune' }
+                    { cityCode: '385', name: 'Pune' }
                   ]}
                   mappingValue={'cityCode'}
-                  errorMsg={''}
+                  errorMsg={oneErr}
                   onChange={handleChange}
                   value={basicInfo && basicInfo[objectKeys[1]]}
                 />
@@ -118,7 +152,7 @@ const PopUpTelephone = (props) => {
                   id={objectKeys[2]}
                   label={'telephone number'}
                   value={basicInfo && basicInfo[2]}
-                  errorMsg={''}
+                  errorMsg={twoErr}
                   onClick={handleChange}
                 />
               </Fragment>
@@ -129,7 +163,7 @@ const PopUpTelephone = (props) => {
               id={isMobileState ? objectKeys[1] : objectKeys[3]}
               label={isMobileState ? 'mobile number' : 'extension number'}
               value={basicInfo && isMobileState ? basicInfo[objectKeys[1]] : basicInfo[objectKeys[3]]}
-              errorMsg={state.error}
+              errorMsg={isMobileState ? oneErr : threeErr}
               onClick={handleChange}
             />
             <div className={'fitContent'}>
