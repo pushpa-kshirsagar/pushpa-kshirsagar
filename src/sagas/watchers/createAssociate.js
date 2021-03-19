@@ -7,7 +7,8 @@ import {
   SET_USER,
   CREATE_ASSOCIATE_SAGA,
   SET_ASSOCIATE_INFORMATION,
-  CREATE_ASSESSEE_SAGA
+  SET_ASSESSEE_INFORMATION_DATA,
+  LOADER_STOP
 } from '../../actionType';
 import { ASSESSEE_CREATE_URL, ASSOCIATE_CREATE_URL, GET_USER_URL } from '../../endpoints';
 import UserPool from '../../UserPool';
@@ -120,25 +121,42 @@ function* workerCreateAssociateSaga(data) {
     //   }
     // };
     const userResponse = yield call(createAssociateApi, { data: data.payload });
-    console.log('IN WORKER ====>', userResponse);
-    console.log('IN WORKER ====>', JSON.stringify(userResponse));
     if (userResponse.responseCode === '000')
       yield put({ type: SET_ASSOCIATE_INFORMATION, payload: userResponse.responseObject });
     let obj = {
       ...data.payload,
-      associateId: userResponse.responseObject.id
+      associateName: 'Boppo Technologies',
+      associateId: userResponse.responseObject.id,
+      associate: userResponse.responseObject
     };
+
     const assesseeRes = yield call(createAssesseeApi, { data: obj });
     if (assesseeRes.responseCode === '000') {
-      signUpForAwsCognito(
+      let validEmail =
         assesseeRes.responseObject[0].informationContact.assesseeAddressEmailPrimary
-          .assesseeAddressEmail,
+          .assesseeAddressEmail;
+      if (
+        assesseeRes.responseObject[0].informationContact.assesseeAddressEmailSecondary
+          .assesseeAddressEmailCommunication
+      ) {
+        validEmail =
+          assesseeRes.responseObject[0].informationContact.assesseeAddressEmailSecondary
+            .assesseeAddressEmail;
+      }
+      signUpForAwsCognito(
+        validEmail,
         assesseeRes.responseObject[0].informationSetup.assesseeSignInCredential,
         assesseeRes.responseObject[0].informationSetup.assesseeSignInPassword
       );
+
+      yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject }); //set asessee data
     }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
@@ -20,7 +20,10 @@ import {
   UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_NEXT_POPUP,
-  CREATE_ASSESSEE_SAGA
+  CREATE_ASSESSEE_SAGA,
+  ASSESSEE_POPUP_CLOSE,
+  LOADER_START,
+  ASSESSEE_INFO_CREATE
 } from '../actionType';
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import userPool from '../UserPool';
@@ -28,12 +31,27 @@ import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 
 const PopUpSignOnAssessee = () => {
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const informationContact = assesseeInfo.informationContact;
   const dispatch = useDispatch();
   const [nextPopUpValue, setNextPopUpValue] = useState('');
   const history = useHistory();
+  useEffect(() => {
+    console.log(popupMode)
+    console.log(assesseeInfo.assesseeInformationData)
+    console.log("assesseeInformationData")
+    if (assesseeInfo.assesseeInformationData) {
+      if (popupMode === 'ASSESSEE_SIGN_ON') {
+        let path = `/signIn`;
+        history.push(path);
+      } else {
+        console.log('show right pane');
+        onClickCancelYes();
+        dispatch({ type: ASSESSEE_INFO_CREATE });
+      }
+    }
+  }, [assesseeInfo.assesseeInformationData, history]);
   const onClickYes = async () => {
     const {
       informationBasic,
@@ -41,25 +59,71 @@ const PopUpSignOnAssessee = () => {
       informationContact,
       informationPersonal,
       informationSetup,
-      informationEngagement
+      informationEngagement,
+      tempCommunication
     } = assesseeInfo;
+    if (tempCommunication === 'email address (primary)') {
+      informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication = true;
+    }
+    if (tempCommunication === 'email address (secondary)') {
+      informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
+    }
     let requestObect = {
       assesseeId: '0123456',
       associateId: '60520a349d66236bb84f8b1b',
-      assessee:{
+      associateName:"Boppo Technologies",
+      assessee: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,
         informationContact: informationContact,
         informationPersonal: informationPersonal,
         informationEngagement: informationEngagement,
         informationSetup: informationSetup
-      }  
+      },
+      associate: {
+        id: "60520a349d66236bb84f8b1b",
+        informationBasic: {
+          associateName: "dsada",
+          associateNameVerification: false,
+          associateDescription: "asd",
+          associatePicture: "",
+          associatePictureVerification: false,
+          associateFlag: null
+        },
+        informationSetup: null,
+        informationContact: {
+          associateAddressWebsite: null,
+          associateAddressWebsiteVerification: false,
+          associateAddressWorkPrimary: {
+            associateAddressCountryRegion: "91",
+            associateAddressProvinceState: "211",
+            associateAddressPostcode: "dasas",
+            associateAddressCity: "345",
+            associateAddress: "dasd",
+            associateAddressCommunication: false,
+            associateAddressVerification: false
+          },
+          associateAddressWorkSecondary: null,
+          associateTelephoneWorkPrimary: {
+            associateTelephoneCountryRegion: "91",
+            associateTelephoneAreaCity: "345",
+            associateTelephoneNumber: "ssad",
+            associateTelephoneExtension: "sad",
+            associateTelephoneCommunication: false,
+            associateTelephoneVerification: false
+          },
+          associateTelephoneWorkSecondary: null
+        },
+        informationCredential: null,
+        informationFramework: null,
+        parentId: "605091f81edc573048fb467a"
+      }
     };
     console.log('ONCLICK assessee Create Yes', requestObect);
+    console.log('loading start');
+    dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSEE_SAGA, payload: requestObect });
-    let path = `/signIn`;
-    history.push(path);
-   /* let attributeList = [];
+    /* let attributeList = [];
     const dataEmail = {
       Name: 'email',
       Value: 'pushpa.k@boppotechnologies.com' // 'shivam.s@boppotechnologies.com' //'pushpa.k@boppotechnologies.com'
@@ -91,10 +155,9 @@ const PopUpSignOnAssessee = () => {
   };
   const handleNextPopupValue = () => {
     let tempCommunication = assesseeInfo.tempCommunication;
-    let primaryemail = informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail;
     let secondemail = informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail;
-    if (isPopUpValue === 'EMAILPOPUP' || secondemail !== '') {
-      if (tempCommunication === '') {
+    if (isPopUpValue === 'EMAILPOPUP') {
+      if (tempCommunication === '' || secondemail !== '') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILSECONDARYPOPUP' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
@@ -105,15 +168,14 @@ const PopUpSignOnAssessee = () => {
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    } 
-    else {
+    } else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
   };
   return (
     <div>
       <PopUpAssesseeName
-        isActive={isPopUpValue === 'NAMEPOPUP'}
+        isActive={isPopUpValue === 'ASSESSEENAMEPOPUP'}
         inputHeader={'name'}
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}

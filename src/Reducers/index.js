@@ -8,6 +8,7 @@ import assessmentReducer from './assessmentReducer';
 import DisplayPaneReducer from './DisplayPaneReducer';
 import AssignmentReducer from './AssignmentReducer';
 import IgaugeReducer from './IgaugeReducer';
+import LoaderReducer from './LoaderReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   assessmentReducer,
   DisplayPaneReducer,
   AssignmentReducer,
-  IgaugeReducer
+  IgaugeReducer,
+  LoaderReducer
 });

@@ -185,16 +185,16 @@ export const DisplayPaneOne = () => {
       />
       <PopUpIgaugeModule />
       <PopUpAssignmentModule />
-      <PopUpAssesseesModule isActive={assesseesPopUpActive === 'ASSESSEES'} />
+      <PopUpAssesseesModule />
       <PopUpAssociatesModule />
       <PopupAssessmentsModule />
-      <PopUpSignOnAssessee isActive={assesseesPopUpActive === 'ASSESSEES_CREATE'} />
-      {/* <PopUpSignOnAssociate isActive={assesseesPopUpActive === 'ASSOCIATE_CREATE'} /> */}
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
       <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
       <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
+      {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
+      {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
     </>
   );
 };

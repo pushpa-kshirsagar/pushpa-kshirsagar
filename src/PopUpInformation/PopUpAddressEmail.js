@@ -157,11 +157,7 @@ const PopUpAddressEmail = (props) => {
                 <div
                   className={'f4'}
                   style={{
-                    color:
-                      (basicInfo && basicInfo[tag] !== '') ||
-                      (signInSetup && signInSetup.assesseeSignIn !== '')
-                        ? ''
-                        : 'dimgray'
+                    color: basicInfo && basicInfo[tag] !== '' ? '' : 'dimgray'
                   }}
                 >
                   communication
@@ -188,7 +184,7 @@ const PopUpAddressEmail = (props) => {
               </div>
             </div>
           </div>
-         {/* <div className={'fitContent'}>
+          {/* <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
               <div className={'contFlex'}>
                 <div

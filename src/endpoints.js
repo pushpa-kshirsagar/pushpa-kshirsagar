@@ -10,5 +10,6 @@ export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/84117b40-376
 
 //assessee, manager, admin create
 
-export const ASSESSEE_CREATE_URL = 'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insightguru/api/assesseeDistinct/create';
-export const ASSOCIATE_CREATE_URL = 'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insightguru/api/associateDistinct/create';
+export const ASSESSEE_CREATE_URL = 'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/create';
+export const ASSOCIATE_CREATE_URL = 'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insightguru/api/associate-distinct/create';
+export const ASSESSEE_REVIEW_LIST_URL = 'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/review-list';

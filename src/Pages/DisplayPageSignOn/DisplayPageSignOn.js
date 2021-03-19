@@ -12,6 +12,7 @@ import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
 import { Fragment } from 'react';
+import LoadingComponent from '../../PopUpInformation/LoadingComponent';
 const DisplayPageSignOn = () => {
   const bgImg = './Image/bg.jpg';
   const style = {
@@ -26,7 +27,7 @@ const DisplayPageSignOn = () => {
     if (type === 'assessee') {
       dispatch({
         type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSEE_SIGN_ON' }
+        payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_SIGN_ON' }
       });
     }
     if (type === 'associate') {
@@ -40,6 +41,7 @@ const DisplayPageSignOn = () => {
     }
   };
   const { isPopUpOpen, popupMode } = useSelector((state) => state.PopUpReducer);
+  const { isLoading } = useSelector((state) => state.LoaderReducer);
 
   return (
     <div style={style} className="signin-container">
@@ -99,6 +101,7 @@ const DisplayPageSignOn = () => {
       </div>
       {popupMode === 'ASSESSEE_SIGN_ON' && <PopUpSignOnAssessee />}
       {popupMode === 'ASSOCIATE_SIGN_ON' && <PopUpSignOnAssociate />}
+      <LoadingComponent isActive={isLoading} />
     </div>
   );
 };

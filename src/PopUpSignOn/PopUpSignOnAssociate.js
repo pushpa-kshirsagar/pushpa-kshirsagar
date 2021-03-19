@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
@@ -22,7 +22,9 @@ import {
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
   UPDATE_ASSESSEE_PERSONAL_INFO,
-  CREATE_ASSOCIATE_SAGA
+  CREATE_ASSOCIATE_SAGA,
+  LOADER_START,
+  CLEAR_ASSESSEE_INFO
 } from '../actionType';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -33,7 +35,21 @@ const PopUpSignOnAssociate = () => {
   console.log(associateInfo);
   console.log('==================');
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if (assesseeInfo.assesseeInformationData) {
+      console.log(popupMode)
+      if(popupMode === 'ASSOCIATE_SIGN_ON'){
+        let path = `/signIn`;
+        history.push(path);
+      }
+      else{
+        dispatch({ type: CLEAR_ASSOCIATE_INFO });
+        dispatch({ type: CLEAR_ASSESSEE_INFO });
+        dispatch({ type: POPUP_CLOSE });
+      }
+    }
+    
+  }, [assesseeInfo.assesseeInformationData, history]);
   const CreateApi = () => {
     const {
       informationBasic,
@@ -45,12 +61,12 @@ const PopUpSignOnAssociate = () => {
       tempCommunication
     } = assesseeInfo;
     let assesseeContactObj = informationContact;
-     
-    if(tempCommunication === "email address (primary)"){
-      assesseeContactObj.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication=true
+
+    if (tempCommunication === 'email address (primary)') {
+      assesseeContactObj.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication = true;
     }
-    if(tempCommunication === "email address (secondary)"){
-      assesseeContactObj.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication=true
+    if (tempCommunication === 'email address (secondary)') {
+      assesseeContactObj.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
     let requestObect = {
       assesseeId: '0123456',
@@ -70,14 +86,13 @@ const PopUpSignOnAssociate = () => {
       }
     };
     console.log('ONCLICK YES', requestObect);
+    console.log('loading start');
+    dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
-    let path = `/signIn`;
-    history.push(path);
   };
   const handleNextPopupValue = () => {
     // alert(isPopUpValue);
     let tempCommunication = assesseeInfo.tempCommunication;
-    let primaryemail = informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail;
     let secondemail = informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail;
     if (isPopUpValue === 'EMAILPOPUP') {
       if (tempCommunication === '' || secondemail !== '') {
@@ -85,8 +100,9 @@ const PopUpSignOnAssociate = () => {
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    } else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
-      if (tempCommunication === '' && tempCommunication === '') {
+    }
+    else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
+      if (tempCommunication === '') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTCOMMUNICATION' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
@@ -101,7 +117,7 @@ const PopUpSignOnAssociate = () => {
   };
 
   const onClickYes = () => {
-    if (popupMode === 'ASSOCIATE_SIGN_ON') {
+    if (popupMode === 'ASSOCIATE_SIGN_ON' || popupMode === 'ASSOCIATE_CREATE') {
       dispatch({
         type: SET_NEXT_POPUP,
         payload: { isPopUpValue: 'NAMEPOPUP' }

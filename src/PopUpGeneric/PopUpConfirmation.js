@@ -34,7 +34,7 @@ const PopUpConfirmation = (props) => {
       dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
     }
-    if (popupMode === 'ASSOCIATE_SIGN_ON') {
+    if (popupMode === 'ASSOCIATE_SIGN_ON'|| popupMode === 'ASSOCIATE_CREATE') {
       dispatch({
         type: SET_NEXT_POPUP,
         payload: { isPopUpValue: 'NAMEALIASPOPUP' }

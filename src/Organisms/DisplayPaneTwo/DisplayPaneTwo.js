@@ -7,6 +7,7 @@ import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import { FILTERMODE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
 import AssesseeRelatedAssociateReviewList from '../../ReviewListComponent/AssesseeRelatedAssociateReviewList';
+import AssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReviewList';
 
 export const DisplayPaneTwo = () => {
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
@@ -412,6 +413,9 @@ export const DisplayPaneTwo = () => {
       >
         {typeOfMiddlePaneList === 'assesseeRelatedAssociate' && (
           <AssesseeRelatedAssociateReviewList />
+        )}
+        {typeOfMiddlePaneList === 'assesseeDistinctReviewList' && (
+          <AssesseeDistinctReviewList tempAssociateList={tempAssociateList} />
         )}
         {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&

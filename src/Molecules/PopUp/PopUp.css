@@ -336,6 +336,14 @@
 .MuiBackdrop-root{
   top: 74px !important;
 }
+.loaderimg div div{
+  box-shadow: none;
+  background-color:#3f3f3f00;
+  /* "& > div:nth-child(2)":{
+      boxShadow: 'none',
+      backgroundColor:'#3f3f3f00'
+  } */
+},
 .MuiDialog-paperScrollPaper {
   display: flex;
   position: fixed !important;;
