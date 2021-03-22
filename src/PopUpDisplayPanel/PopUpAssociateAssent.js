@@ -22,12 +22,20 @@ const PopUpAssociateAssent = (props) => {
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
-          <div style={{ maxWidth: '300px', textAlign: 'left' }} id="dialog-description">
+          <div
+            style={{
+              maxWidth: '297px',
+              textAlign: 'left',
+              padding: '5px',
+              boxSizing: 'border-box'
+            }}
+            id="dialog-description"
+          >
             <Label
               text="Terms of Use"
               fontSize="1.6rem"
               colour="rgba(0, 0, 0, 0.87)"
-              className="margin-bottom-10"
+              className="margin-bottom-10 font-weight-bold"
             />
             <br />
             <Label
@@ -50,7 +58,7 @@ const PopUpAssociateAssent = (props) => {
               text="Acceptance of the Terms"
               fontSize="1.6rem"
               colour="rgba(0, 0, 0, 0.87)"
-              className="margin-bottom-10"
+              className="margin-bottom-10 font-weight-bold"
             />
             <br />
             <Label
@@ -109,7 +117,7 @@ const PopUpAssociateAssent = (props) => {
               text="Pricing and Payments"
               fontSize="1.6rem"
               colour="rgba(0, 0, 0, 0.87)"
-              className="margin-bottom-10"
+              className="margin-bottom-10 font-weight-bold"
             />
             <br />
             <Label
@@ -130,7 +138,7 @@ const PopUpAssociateAssent = (props) => {
               text="Cancellation and Termination"
               fontSize="1.6rem"
               colour="rgba(0, 0, 0, 0.87)"
-              className="margin-bottom-10"
+              className="margin-bottom-10 font-weight-bold"
             />
             <br />
             <Label
@@ -177,7 +185,7 @@ const PopUpAssociateAssent = (props) => {
               text="User Content: Third party content and data"
               fontSize="1.6rem"
               colour="rgba(0, 0, 0, 0.87)"
-              className="margin-bottom-10"
+              className="margin-bottom-10 font-weight-bold"
             />
             <br />
             <Label
@@ -191,7 +199,7 @@ const PopUpAssociateAssent = (props) => {
               text="Disclaimer and Limitation of Liability"
               fontSize="1.6rem"
               colour="rgba(0, 0, 0, 0.87)"
-              className="margin-bottom-10"
+              className="margin-bottom-10 font-weight-bold"
             />
             <br />
             <Label
@@ -211,7 +219,7 @@ const PopUpAssociateAssent = (props) => {
               text="Grievance Resolution Process"
               fontSize="1.6rem"
               colour="rgba(0, 0, 0, 0.87)"
-              className="margin-bottom-10"
+              className="margin-bottom-10 font-weight-bold"
             />
             <br />
             <Label

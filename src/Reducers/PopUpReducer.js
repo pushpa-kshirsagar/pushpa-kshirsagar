@@ -87,7 +87,8 @@ const PopUpReducer = (istate = initialState, action) => {
         previousPopupHeaderOne: action.payload.previousPopupHeaderOne || '',
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne,
         popupHeaderOneBadgeTwo: action.payload.popupHeaderOneBadgeTwo,
-        secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue
+        secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue,
+        popupMode: action.payload.popupMode
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
       return {

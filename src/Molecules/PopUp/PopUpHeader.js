@@ -49,7 +49,10 @@ const PopupHeader = (props) => {
   return (
     <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
       <Paper className={['popupMainHeader', `titleSolid-${headerPanelColour}`].join(' ')}>
-        <div className={['componentInnerDiv', 'popupMainHeader'].join(' ')}>
+        <div
+          style={{ padding: '0, 5px' }}
+          className={['componentInnerDiv', 'popupMainHeader'].join(' ')}
+        >
           <div className={'titleBox'}>
             <span>{headerOne}</span>&nbsp;
             {headerOneBadgeOne ? (
