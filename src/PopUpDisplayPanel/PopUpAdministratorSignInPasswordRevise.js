@@ -3,8 +3,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import PopUpWhiteHeader from '../Molecules/PopUp/PopUpWhiteHeader';
-import { FormControl } from '@material-ui/core';
+import { FormControl, InputLabel } from '@material-ui/core';
 import InputField from '../Atoms/InputField/InputField';
+import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 
 const PopUpAdministratorSignInPasswordRevise = (props) => {
   const {
@@ -39,6 +40,17 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
+          <div className={'fitContent'}>
+            <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
+              <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                {/* <span>{inputHeader}&nbsp;</span> */}
+              </InputLabel>
+              <div className={'infoSymbol'}></div>
+              <div className={'infoSymbol'}>
+                <InfoToolTip message="Click me, I will stay visible until you click outside." />
+              </div>
+            </div>
+          </div>
           <FormControl style={{ width: '100%' }}>
             <InputField
               id={'current password'}

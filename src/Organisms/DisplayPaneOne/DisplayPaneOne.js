@@ -33,6 +33,7 @@ import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import PopUpScan from '../../PopUpInformation/PopUpScan';
+import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -194,6 +195,7 @@ export const DisplayPaneOne = () => {
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
       <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
+      <PopUpAssociateLink />
       {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
       {popupMode === 'SCAN_POPUP_FUN' && <PopUpScan />}

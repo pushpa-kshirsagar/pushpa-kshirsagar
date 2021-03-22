@@ -20,7 +20,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  box-sizing: border-box;
+  padding: 5px !important;
+}
+
+.inner-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  box-sizing: border-box;
+  width: 100%;
 }
 .rotate-icon {
   -ms-transform: rotate(180deg); /* IE 9 */

@@ -7,14 +7,15 @@ import { FormControl, InputLabel } from '@material-ui/core';
 import SelectField from '../Atoms/SelectField/SelectField';
 
 const PopUpAdministratorSignInCredentialRevise = (props) => {
-  const { isActive, headerPanelColour, headerOne, headerOneBadgeOne, onClick, onClose } = props;
-  const signInOptions = [
-    { name: 'Dajw3h8736582hsYfjdyst&' },
-    { name: 'shivam.s@boppotechologies.com' },
-    { name: 'simple.sample@gmail.com' },
-    { name: '8006777221' },
-    { name: '8877665698' }
-  ];
+  const {
+    isActive,
+    headerPanelColour,
+    headerOne,
+    headerOneBadgeOne,
+    signInOptions = [],
+    onClick,
+    onClose
+  } = props;
   const [signIn, setSignIn] = useState(signInOptions[0].name);
   const handleChange = (event) => {
     const { value } = event.target;

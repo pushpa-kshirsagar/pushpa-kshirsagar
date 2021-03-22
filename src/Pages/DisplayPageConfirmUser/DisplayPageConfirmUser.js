@@ -16,7 +16,14 @@ import PopUpAdministratorSignInCredentialRevise from '../../PopUpDisplayPanel/Po
 import PopUpAdministratorSignInPasswordRevise from '../../PopUpDisplayPanel/PopUpAdministratorSignInPasswordRevise';
 // import Label from '../../Atoms/Labels/Label';
 // import { AccountContext } from '../../Account';
-
+const signInOptions = [
+  { name: 'Dajw3h8736582hsYfjdyst&' },
+  { name: 'DSjysf-asdahje' },
+  { name: 'shivam.s@boppotechologies.com' },
+  { name: 'simple.sample@gmail.com' },
+  { name: '8006777221' },
+  { name: '8877665698' }
+];
 const DisplayPageConfirmUser = () => {
   const bgImg = '/Image/bg.jpg';
   const { id } = useParams();
@@ -133,13 +140,15 @@ const DisplayPageConfirmUser = () => {
     <div style={style} className="signin-container">
       <div className="form-box">
         <div className="form-header">
-          <div className="form-header-logo-container">
-            <img className="form-header-logo-img" src={iGuruLogo} alt="iGuru logo" />
-          </div>
-          <div>
-            <IconButton className="form-icon-style">
-              <SendIcon style={{ height: 20, width: 20 }} onClick={onClickSignIn} />
-            </IconButton>
+          <div className="inner-form-header">
+            <div className="form-header-logo-container">
+              <img className="form-header-logo-img" src={iGuruLogo} alt="iGuru logo" />
+            </div>
+            <div>
+              <IconButton className="form-icon-style">
+                <SendIcon style={{ height: 20, width: 20 }} onClick={onClickSignIn} />
+              </IconButton>
+            </div>
           </div>
         </div>
         <div style={{ padding: '5px' }}>
@@ -177,7 +186,7 @@ const DisplayPageConfirmUser = () => {
       <PopUpAdministratorAssent
         isActive={stage === 1 && !cancelConfirm}
         headerPanelColour={''}
-        headerOne={'administrator'}
+        headerOne={'assessee'}
         headerOneBadgeOne={'assent'}
         onClick={() => {
           setStage(2);
@@ -189,7 +198,7 @@ const DisplayPageConfirmUser = () => {
       <PopUpAssentConfirmation
         isActive={stage === 2 && !cancelConfirm}
         headerPanelColour={''}
-        headerOne={'administrator'}
+        headerOne={'assessee'}
         headerOneBadgeOne={'assent'}
         mode={'cancel'}
         onClickYes={() => {
@@ -241,8 +250,9 @@ const DisplayPageConfirmUser = () => {
       <PopUpAdministratorSignInCredentialRevise
         isActive={stage === 5 && !cancelConfirm}
         headerPanelColour={''}
-        headerOne={'administrator'}
-        headerOneBadgeOne={'primary'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={''}
+        signInOptions={signInOptions}
         onClick={() => {
           setStage(6);
         }}
@@ -253,8 +263,8 @@ const DisplayPageConfirmUser = () => {
       <PopUpAdministratorSignInPasswordRevise
         isActive={stage === 6 && !cancelConfirm}
         headerPanelColour={''}
-        headerOne={'administrator'}
-        headerOneBadgeOne={'primary'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'password'}
         currentPassword={currentPassword}
         currentPasswordError={currentPasswordError}
         setCurrentPassword={setCurrentPassword}

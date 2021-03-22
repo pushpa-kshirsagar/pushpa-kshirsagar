@@ -133,45 +133,47 @@ const DisplayPageSignIn = () => {
     <div style={style} className="signin-container">
       <div className="form-box">
         <div className="form-header">
-          <div className="form-header-logo-container">
-            <img className="form-header-logo-img" src={iGuruLogo} alt="iGuru logo" />
-          </div>
-          <div>
-            {stage === 'signIn' && (
-              <IconButton className="form-icon-style">
-                <SendIcon style={{ height: 20, width: 20 }} onClick={onClickSignIn} />
-              </IconButton>
-            )}
-            {stage === 'forgotPassword' && (
-              <>
-                <IconButton
-                  onClick={() => {
-                    setStage('signIn');
-                  }}
-                  className="form-icon-style rotate-icon"
-                >
-                  <SendIcon style={{ height: 20, width: 20 }} />
-                </IconButton>
+          <div className="inner-form-header">
+            <div className="form-header-logo-container">
+              <img className="form-header-logo-img" src={iGuruLogo} alt="iGuru logo" />
+            </div>
+            <div>
+              {stage === 'signIn' && (
                 <IconButton className="form-icon-style">
-                  <SendIcon style={{ height: 20, width: 20 }} onClick={sendCode} />
+                  <SendIcon style={{ height: 20, width: 20 }} onClick={onClickSignIn} />
                 </IconButton>
-              </>
-            )}
-            {stage === 'confirmPassword' && (
-              <>
-                <IconButton
-                  onClick={() => {
-                    setStage('forgotPassword');
-                  }}
-                  className="form-icon-style rotate-icon"
-                >
-                  <SendIcon style={{ height: 20, width: 20 }} />
-                </IconButton>
-                <IconButton className="form-icon-style">
-                  <SendIcon style={{ height: 20, width: 20 }} onClick={resetPassword} />
-                </IconButton>
-              </>
-            )}
+              )}
+              {stage === 'forgotPassword' && (
+                <>
+                  <IconButton
+                    onClick={() => {
+                      setStage('signIn');
+                    }}
+                    className="form-icon-style rotate-icon"
+                  >
+                    <SendIcon style={{ height: 20, width: 20 }} />
+                  </IconButton>
+                  <IconButton className="form-icon-style">
+                    <SendIcon style={{ height: 20, width: 20 }} onClick={sendCode} />
+                  </IconButton>
+                </>
+              )}
+              {stage === 'confirmPassword' && (
+                <>
+                  <IconButton
+                    onClick={() => {
+                      setStage('forgotPassword');
+                    }}
+                    className="form-icon-style rotate-icon"
+                  >
+                    <SendIcon style={{ height: 20, width: 20 }} />
+                  </IconButton>
+                  <IconButton className="form-icon-style">
+                    <SendIcon style={{ height: 20, width: 20 }} onClick={resetPassword} />
+                  </IconButton>
+                </>
+              )}
+            </div>
           </div>
         </div>
         <div className="sign-in-form-inputs-cantainer">

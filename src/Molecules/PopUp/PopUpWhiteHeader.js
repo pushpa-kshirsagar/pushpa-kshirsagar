@@ -22,8 +22,14 @@ const PopUpWhiteHeader = (props) => {
   return (
     <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
       <Paper className={['popupMainHeader', `titleSolid-${headerPanelColour}`].join(' ')}>
-        <div className={['componentInnerDiv', 'popupMainHeader'].join(' ')}>
-          <div style={{ color: 'rgba(0, 0, 0, 0.87)' }} className={'titleBox'}>
+        <div
+          style={{ padding: '0 5px' }}
+          className={['componentInnerDiv', 'popupMainHeader'].join(' ')}
+        >
+          <div
+            style={{ color: headerPanelColour === '' ? 'rgba(0, 0, 0, 0.87)' : '#ffffff' }}
+            className={'titleBox'}
+          >
             <span>{headerOne}</span>&nbsp;
             {headerOneBadgeOne ? (
               <Fragment>
@@ -47,14 +53,22 @@ const PopUpWhiteHeader = (props) => {
           <div className={'backArrow'}>
             <IconButton className="MuiIconButton-root-1602">
               {mode === 'core' ? (
-                <Check className={'popupClose'} style={{ color: 'rgba(0, 0, 0, 0.87)' }} onClick={onClick} />
+                <Check
+                  className={'popupClose'}
+                  style={{ color: headerPanelColour === '' ? 'rgba(0, 0, 0, 0.87)' : '#ffffff' }}
+                  onClick={onClick}
+                />
               ) : mode === 'confirm' ? (
                 <KeyboardTab
                   className={['popupClose', 'previousToLast'].join(' ')}
                   onClick={onClick}
                 />
               ) : mode === 'error' || mode === 'cancel' ? null : (
-                <Previous style={{ color: 'rgba(0, 0, 0, 0.87)' }} className={'popupClose'} onClick={onClick} />
+                <Previous
+                  style={{ color: headerPanelColour === '' ? 'rgba(0, 0, 0, 0.87)' : '#ffffff' }}
+                  className={'popupClose'}
+                  onClick={onClick}
+                />
               )}
               {/* {headerPanelColour === 'genericOne' ? (
                 <Check className={'popupClose'} onClick={onClick} />
@@ -65,7 +79,12 @@ const PopUpWhiteHeader = (props) => {
           </div>
           <div className={'backArrow'}>
             <IconButton onClick={onClose} className="MuiIconButton-root-1602">
-              {mode !== 'cancel' && <Clear style={{ color: 'rgba(0, 0, 0, 0.87)' }} className={'popupClose'} />}
+              {mode !== 'cancel' && (
+                <Clear
+                  style={{ color: headerPanelColour === '' ? 'rgba(0, 0, 0, 0.87)' : '#ffffff' }}
+                  className={'popupClose'}
+                />
+              )}
             </IconButton>
           </div>
         </div>

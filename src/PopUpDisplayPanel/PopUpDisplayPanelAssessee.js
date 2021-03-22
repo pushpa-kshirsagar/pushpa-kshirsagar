@@ -42,6 +42,7 @@ const PopUpDisplayPanelAssessee = (props) => {
     let revisePopupType = '';
     let reviseSecondaryOptionCheckValue = '';
     let valueArr = [];
+    let revisePopupMode = '';
     if (clickValue === 'assesseeselfassignments') {
       revisePopupHeaderOne = 'assignments';
       revisepopupHeaderOneBadgeOne = 'review';
@@ -82,6 +83,15 @@ const PopUpDisplayPanelAssessee = (props) => {
       valueArr = SIGN_OUT_POPUP;
       reviseSecondaryOptionCheckValue = 'all';
     }
+    if (clickValue === 'link') {
+      revisePopupHeaderOne = 'associate';
+      revisepopupHeaderOneBadgeOne = clickValue;
+      reviseisPopUpValue = 'REVISE_CREDENTIAL_SIGNIN_POPUP';
+      revisePopupType = 'secondary';
+      revisePopupMode = 'ASSOCIATE_LINK';
+      valueArr = [];
+      reviseSecondaryOptionCheckValue = '';
+    }
     if (clickValue === 'yes') {
       //sign out
       let path = `/signIn`;
@@ -97,7 +107,8 @@ const PopUpDisplayPanelAssessee = (props) => {
         isPopUpValue: reviseisPopUpValue,
         popupOpenType: revisePopupType,
         secondaryOptionCheckValue: reviseSecondaryOptionCheckValue,
-        popupContentArrValue: valueArr
+        popupContentArrValue: valueArr,
+        popupMode: revisePopupMode
       }
     });
   };
