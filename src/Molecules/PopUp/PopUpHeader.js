@@ -73,7 +73,7 @@ const PopupHeader = (props) => {
           </div>
           <div className={'backArrow'}>
             <IconButton className="MuiIconButton-root-1602">
-              {mode === 'core' ? (
+              {mode === 'core' || mode==='search' ? (
                 <Check className={'popupClose'} onClick={onClick} />
               ) : mode === 'confirm' ? (
                 <KeyboardTab

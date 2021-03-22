@@ -23,6 +23,10 @@
 .inputFields input {
   font-size: 1.6rem;
 }
+.scanInputFields input {
+  font-size: 1.6rem;
+  color: #808080 !important;
+}
 .inputFields textarea {
   font-size: 1.6rem;
 }

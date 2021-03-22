@@ -148,19 +148,58 @@
 }
 .titleSolid-displayPaneCentre {
   display: flex;
-  height: 50px;
+  /* height: 50px; */
   background-color: #00afff !important;
 }
 .titleSolid-genericTwo {
   display: flex;
-  height: 50px;
+  /* height: 50px; */
   background-color: rgb(255, 100, 100) !important;
 }
 .titleLightGreen {
   display: flex;
-  height: 50px;
+  /* height: 50px; */
   background-color: #b1de84;
   color: rgba(0, 0, 0, 0.87);
+}
+.aliasName{
+  font-size:1.2rem  !important;
+  color:#2b21218a !important;
+}
+.SMainContainer{
+  display: flex;
+  margin: 0 0 0px;
+  padding: 0 10px 10px;
+  border: 1px solid;
+  border-color:transparent;
+  border-top:0;
+}
+.SMainContainer label{
+  font-size: 1.6rem;
+  color: #808080;
+}
+.formControlReviewName {
+  font-size: 1.6rem;
+  width: 100%;
+  flex: 4;
+}
+.formControlReviewName div div {
+  /* margin-top: 16px; */
+  margin-bottom: 0px;
+  width: 100%;
+}
+.formControlRight {
+  padding: 2px 0 0 0;
+  transform: none !important;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.formControlRight label {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+.topLabelFont {
+  font-size: 1.4rem;
 }
 .titleBox {
   text-align: left;

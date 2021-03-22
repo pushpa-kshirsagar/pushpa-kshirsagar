@@ -32,6 +32,7 @@ import PopUpAssignmentModule from '../../PopUpDisplayPanel/PopUpAssignmentModule
 import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
+import PopUpScan from '../../PopUpInformation/PopUpScan';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -195,6 +196,7 @@ export const DisplayPaneOne = () => {
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
       {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
+      {popupMode === 'SCAN_POPUP_FUN' && <PopUpScan />}
     </>
   );
 };

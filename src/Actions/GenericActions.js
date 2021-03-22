@@ -55,7 +55,7 @@ export const signUpForAwsCognito = (emailId, userName, password) => {
     }
   );
 };
-export const makeAssesseeReviewListRequestObject = (filterKey) => {
+export const makeAssesseeReviewListRequestObject = (filterKey,numberPage,countPage) => {
   let serachObjet = {};
   if (filterKey === 'all' || filterKey === 'active' || filterKey === 'inactive') {
     let serachObjet = {
@@ -77,8 +77,8 @@ export const makeAssesseeReviewListRequestObject = (filterKey) => {
   let regObj = {
     assesseeId: '0123456',
     associateId: '0654321',//'60520a349d66236bb84f8b1b',
-    countPage: 25,
-    numberPage: 0,
+    countPage: countPage,
+    numberPage: numberPage,
     filter: 'true',
     orderBy: {
       columnName:

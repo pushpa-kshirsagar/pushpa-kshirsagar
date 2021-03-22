@@ -410,14 +410,13 @@ export const DisplayPaneTwo = () => {
           overflow: 'overlay'
         }}
         className="containerPadding"
+        id={'middleComponentId'}
       >
         {typeOfMiddlePaneList === 'assesseeRelatedAssociate' && (
           <AssesseeRelatedAssociateReviewList />
         )}
-        {typeOfMiddlePaneList === 'assesseeDistinctReviewList' && (
-          <AssesseeDistinctReviewList tempAssociateList={tempAssociateList} />
-        )}
-        {typeOfMiddlePaneList !== '' &&
+        {typeOfMiddlePaneList === 'assesseeDistinctReviewList' && <AssesseeDistinctReviewList />}
+        {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
           tempAssociateList.map((associate, index) => {
             return (
@@ -432,7 +431,7 @@ export const DisplayPaneTwo = () => {
                 />
               </div>
             );
-          })}
+          })} */}
         <div className={'containerPadding'} style={{ height: '55px' }}>
           {' '}
         </div>
