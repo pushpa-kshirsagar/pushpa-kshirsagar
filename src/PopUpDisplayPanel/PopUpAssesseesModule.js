@@ -14,7 +14,9 @@ import {
   SET_ASSESSEE_SECONDARY_OPTION_VALUE,
   SET_PREVIOUS_SECTION_POPUP,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
-  LOADER_START
+  LOADER_START,
+  SET_REQUEST_OBJECT,
+  SET_PAGE_COUNT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
@@ -29,6 +31,7 @@ const PopUpAssesseesModule = (props) => {
     isBackToSectionPopUp,
     assesseesPopUpActive
   } = useSelector((state) => state.AssesseeCreateReducer);
+  const {countPage} = useSelector((state)=>state.DisplayPaneReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
@@ -47,12 +50,14 @@ const PopUpAssesseesModule = (props) => {
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
-    }
-    else if (targetValue === 'distinct') {
-      let requestObect = makeAssesseeReviewListRequestObject(secondaryOptionCheckValue);
+    } else if (targetValue === 'distinct') {
+      let requestObect = makeAssesseeReviewListRequestObject(secondaryOptionCheckValue,0,countPage);
+      dispatch({ type: SET_PAGE_COUNT, payload:1 });
       dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
       dispatch({ type: ASSESSEE_REVIEW_DISTINCT_SAGA, payload: requestObect });
       dispatch({ type: ASSESSEE_INFO_CREATE });
+      document.getElementById('middleComponentId').scrollTop = '0px';
 
     } else {
       dispatch({

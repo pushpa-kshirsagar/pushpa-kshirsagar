@@ -33,6 +33,7 @@ import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
+import PopUpScan from '../../PopUpInformation/PopUpScan';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -197,6 +198,7 @@ export const DisplayPaneOne = () => {
       <PopUpAssociateLink />
       {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
+      {popupMode === 'SCAN_POPUP_FUN' && <PopUpScan />}
     </>
   );
 };

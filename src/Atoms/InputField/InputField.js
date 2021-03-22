@@ -12,7 +12,8 @@ export const InputField = (props) => {
     onClick,
     value,
     labelBadgeOne,
-    isRequired = true
+    isRequired = true,
+    classNames=''
   } = props;
   return (
     <div className="popup-form-box">
@@ -28,7 +29,7 @@ export const InputField = (props) => {
           value={value}
           onChange={onClick}
           autoComplete="off"
-          className={'inputFields'}
+          className={['inputFields',classNames].join(' ')}
         />
       </FormControl>
       {isRequired && (

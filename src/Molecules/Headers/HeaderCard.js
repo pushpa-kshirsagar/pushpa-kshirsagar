@@ -9,8 +9,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Clear from '@material-ui/icons/Clear';
 
 import './HeaderCard.css';
-import { POPUP_OPEN } from '../../actionType';
-import { useDispatch } from 'react-redux';
+import { POPUP_OPEN, ASSESSEE_SIGN_ON } from '../../actionType';
+import { useDispatch, useSelector } from 'react-redux';
 const HeaderCard = (props) => {
   const {
     headerOne = '',
@@ -20,11 +20,17 @@ const HeaderCard = (props) => {
     headerOneBadgeFour = '',
     displayPane = '',
     scanCount,
-    headerPanelColour,
-    isAssociateSelected
+    headerPanelColour
   } = props;
   const dispatch = useDispatch();
-
+  const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneReducer);
+  const onClickScan = () => {
+    console.log('scan');
+    dispatch({
+      type: ASSESSEE_SIGN_ON,
+      payload: { isPopUpValue: typeOfMiddlePaneList, popupMode: 'SCAN_POPUP_FUN' }
+    });
+  };
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
@@ -71,22 +77,24 @@ const HeaderCard = (props) => {
                   <div>
                     <span style={{ color: '#fff', fontWeight: 'bold' }}>00:19:26</span>
                   </div>
-                ) : (
+                ) : displayPane === 'centre' ? (
+                  scanCount && (
+                    <IconButton onClick={onClickScan}>
+                      <Fragment>
+                        <SearchIcon className={'iguru-iconbardefault'} />
+                        <span className={'iguru-headerbadge'}>{scanCount}</span>
+                      </Fragment>
+                    </IconButton>
+                  )
+                ) : displayPane === 'left' ? (
                   <IconButton>
-                    {displayPane === 'centre' ? (
-                      scanCount && (
-                        <Fragment>
-                          <SearchIcon className={'iguru-iconbardefault'} />
-                          <span className={'iguru-headerbadge'}>{scanCount}</span>
-                        </Fragment>
-                      )
-                    ) : displayPane === 'left' ? (
-                      <NextIcon className={'iguru-iconbardefault'} />
-                    ) : displayPane === 'right' ? (
-                      <Clear className={'iguru-iconbardefault'} />
-                    ):null}
+                    <NextIcon className={'iguru-iconbardefault'} />
                   </IconButton>
-                )}
+                ) : displayPane === 'right' ? (
+                  <IconButton>
+                    <Clear className={'iguru-iconbardefault'} />
+                  </IconButton>
+                ) : null}
               </div>
               <div className={'iguru-iconbox'}>
                 {displayPane === 'five' ? (
