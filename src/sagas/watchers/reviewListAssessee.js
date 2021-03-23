@@ -22,20 +22,21 @@ const assesseesReviewListDistinctApi = async (requestObj) => {
 
 function* workerReviewListAssesseeSaga(data) {
   try {
-    const userResponse = yield call(assesseesReviewListDistinctApi, { data: data.payload });
+    const userResponse = yield call(assesseesReviewListDistinctApi, { data: data.payload.request });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000')
       yield put({ type: ASSESSEE_REVIEW_DISTINCT_DATA, payload: userResponse.responseObject });
     yield put({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'assessee',
-        middlePaneHeaderBadgeOne: 'distinct',
-        middlePaneHeaderBadgeTwo: 'active',
+        middlePaneHeader: 'assessees',
+        middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+        middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
         typeOfMiddlePaneList: 'assesseeDistinctReviewList',
-        scanCount: userResponse && userResponse.countTotal
+        scanCount: userResponse && userResponse.countTotal,
+        showMiddlePaneState: true
       }
     });
     console.log('loading end');
@@ -48,6 +49,5 @@ function* workerReviewListAssesseeSaga(data) {
 }
 
 export default function* watchReviewListAssesseeSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(ASSESSEE_REVIEW_DISTINCT_SAGA, workerReviewListAssesseeSaga);
 }

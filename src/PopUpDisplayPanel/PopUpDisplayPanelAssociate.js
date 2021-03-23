@@ -168,7 +168,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assesseeRelatedAssociate',
-          scanCount: userData.length
+          scanCount: userData.length,
+          showMiddlePaneState:true
         }
       });
     }

@@ -126,7 +126,8 @@ export const DisplayPaneOne = () => {
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assesseeRelatedAssociate',
-          scanCount: userData && userData.length
+          scanCount: userData && userData.length,
+          showMiddlePaneState: true
         }
       });
     }

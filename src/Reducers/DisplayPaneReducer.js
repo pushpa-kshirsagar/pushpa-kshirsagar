@@ -1,4 +1,4 @@
-import { SET_MIDDLEPANE_STATE, SET_SELECTED_ASSOCIATE, INCREMENT_PAGE, SET_PAGE_COUNT } from '../actionType';
+import { SET_MIDDLEPANE_STATE, SET_SELECTED_ASSOCIATE, SET_SCAN_POPUP_STATE, SET_PAGE_COUNT } from '../actionType';
 
 const initialState = {
   assesseeSignInUse: 'simplesample@gmail.com',
@@ -11,9 +11,13 @@ const initialState = {
   middlePaneHeaderBadgeThree: '',
   middlePaneHeaderBadgeFour: '',
   typeOfMiddlePaneList: '',
+  scanHeader:'',
+  scanHeaderBadgeOne:'',
+  scanHeaderBadgeTwo:'',
   numberPage:1,
   countPage:20,
-  scanCount: null
+  scanCount: null,
+  showMiddlePaneState:false
 };
 
 const DisplayPaneReducer = (istate = initialState, action) => {
@@ -28,17 +32,20 @@ const DisplayPaneReducer = (istate = initialState, action) => {
         middlePaneHeaderBadgeThree: action.payload.middlePaneHeaderBadgeThree,
         middlePaneHeaderBadgeFour: action.payload.middlePaneHeaderBadgeFour,
         typeOfMiddlePaneList: action.payload.typeOfMiddlePaneList,
-        scanCount: action.payload.scanCount
+        scanCount: action.payload.scanCount,
+        showMiddlePaneState: action.payload.showMiddlePaneState
+      };
+    case SET_SCAN_POPUP_STATE:
+      return {
+        ...istate,
+        scanHeader: action.payload.scanHeader,
+        scanHeaderBadgeOne: action.payload.scanHeaderBadgeOne,
+        scanHeaderBadgeTwo: action.payload.scanHeaderBadgeTwo,
       };
     case SET_PAGE_COUNT:
       return {
         ...istate,
         numberPage: action.payload
-      };
-    case INCREMENT_PAGE:
-      return {
-        ...istate,
-        numberPage: istate.numberPage+1
       };
     case SET_SELECTED_ASSOCIATE:
       return {

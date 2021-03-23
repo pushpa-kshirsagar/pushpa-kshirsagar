@@ -22,7 +22,8 @@ const AssesseeRelatedAssociateReviewList = (props) => {
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
         typeOfMiddlePaneList: '',
-        scanCount: null
+        scanCount: null,
+        showMiddlePaneState: false
       }
     });
   };

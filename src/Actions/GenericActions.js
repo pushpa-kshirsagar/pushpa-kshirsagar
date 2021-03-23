@@ -55,28 +55,34 @@ export const signUpForAwsCognito = (emailId, userName, password) => {
     }
   );
 };
-export const makeAssesseeReviewListRequestObject = (filterKey,numberPage,countPage) => {
-  let serachObjet = {};
-  if (filterKey === 'all' || filterKey === 'active' || filterKey === 'inactive') {
-    let serachObjet = {
-      condition: 'or',
-      searchBy: [
-        {
-          dataType: 'string',
-          conditionColumn: 'informationEngagement.assesseeStatus',
-          conditionValue: {
-            condition: 'in',
-            value: {
-              from: ['UNCONFIRMED', 'CONFIRMED']
-            }
+export const makeAssesseeReviewListRequestObject = (filterKey, numberPage, countPage) => {
+  let searchObj = {
+    dataType: 'string',
+    conditionColumn: 'informationEngagement.assesseeStatus',
+    conditionValue: {
+      condition: 'eq',
+      value: {
+        from: filterKey.toUpperCase()
+      }
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        dataType: 'string',
+        conditionColumn: 'informationEngagement.assesseeStatus',
+        conditionValue: {
+          condition: 'in',
+          value: {
+            in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
           }
         }
-      ]
-    };
+      };
+    }
   }
   let regObj = {
     assesseeId: '0123456',
-    associateId: '0654321',//'60520a349d66236bb84f8b1b',
+    associateId: '0654321', //'60520a349d66236bb84f8b1b',
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -86,20 +92,59 @@ export const makeAssesseeReviewListRequestObject = (filterKey,numberPage,countPa
       order: 'asc'
     },
     search: {
-      condition: "or",
+      condition: 'or',
+      searchBy: [searchObj]
+    }
+  };
+
+  return regObj;
+};
+export const makeAssesseeScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+  let regObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    countPage: 20,
+    numberPage: 0,
+    filter: 'true',
+    orderBy: {
+      columnName:
+        'informationBasic.assesseeNameFirst, informationBasic.assesseeNameOther,  informationBasic.assesseeNameLast, informationBasic.assesseeNameSuffix',
+      order: 'asc'
+    },
+    search: {
+      condition: 'or',
       searchBy: [
         {
-          dataType: "string",
-          conditionColumn: "informationEngagement.assesseeStatus",
+          dataType: 'string',
+          conditionColumn: 'informationBasic.assesseeNameFirst',
           conditionValue: {
-            condition: "eq",
+            condition: 'ct',
             value: {
-              from: "INACTIVE"
+              from: searchStr
+            }
+          }
+        },
+        {
+          dataType: 'string',
+          conditionColumn: 'informationBasic.assesseeNameOther',
+          conditionValue: {
+            condition: 'ct',
+            value: {
+              from: searchStr
+            }
+          }
+        },
+        {
+          dataType: 'string',
+          conditionColumn: 'informationBasic.assesseeNameLast',
+          conditionValue: {
+            condition: 'ct',
+            value: {
+              from: searchStr
             }
           }
         }
       ]
-  
     }
   };
 
