@@ -91,7 +91,7 @@ const HeaderCard = (props) => {
                   <IconButton>
                     <NextIcon className={'iguru-iconbardefault'} />
                   </IconButton>
-                ) : displayPane === 'right' ? (
+                ) : displayPane === 'right' && headerOne !== '' ? (
                   <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>
