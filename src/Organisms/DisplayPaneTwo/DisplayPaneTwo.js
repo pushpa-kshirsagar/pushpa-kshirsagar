@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './DisplayPaneTwo.css';
 import ReviewList from '../../Molecules/ReviewList/ReviewList';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
-import { FILTERMODE } from '../../actionType';
+import { FILTERMODE, FILTERMODE_ENABLE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
 import AssesseeRelatedAssociateReviewList from '../../ReviewListComponent/AssesseeRelatedAssociateReviewList';
 import AssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReviewList';
@@ -365,13 +365,18 @@ export const DisplayPaneTwo = () => {
   ];
   const dispatch = useDispatch();
   const onClickFooter = (e) => {
-    dispatch({ type: FILTERMODE });
+    dispatch({ type: FILTERMODE_ENABLE });
     // if(e.currentTarget.getAttribute('data-value') === 'sift'){
     //   dispatch({ type: FILTERMODE});
     // }
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
+  const secondaryIcon = [
+    { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unverified', onClick: onClickFooter, Icon: FilterList }
+  ];
   const {
     isAssociateSelected,
     middlePaneHeader,
@@ -380,14 +385,11 @@ export const DisplayPaneTwo = () => {
     middlePaneHeaderBadgeThree,
     middlePaneHeaderBadgeFour,
     typeOfMiddlePaneList,
-    scanCount
+    scanCount,
+    showMiddlePaneState
   } = useSelector((state) => state.DisplayPaneReducer);
 
-  const secondaryIcon = [
-    { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unverified', onClick: onClickFooter, Icon: FilterList }
-  ];
+ 
   return (
     <div>
       <div>
@@ -402,6 +404,7 @@ export const DisplayPaneTwo = () => {
           headerPanelColour="green"
           scanCount={scanCount}
           isAssociateSelected={isAssociateSelected}
+          showMiddlePaneState={showMiddlePaneState}
         />
       </div>
       <div
@@ -436,15 +439,7 @@ export const DisplayPaneTwo = () => {
           {' '}
         </div>
       </div>
-      {FilterMode !== '' && (
-        <FooterIconTwo
-          FilterModeEnable={FilterModeEnable}
-          FilterMode={FilterMode}
-          onClick={onClickFooter}
-          primaryIcon={primaryIcon}
-          secondaryIcon={secondaryIcon}
-        />
-      )}
+     
     </div>
   );
 };

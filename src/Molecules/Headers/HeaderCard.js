@@ -21,12 +21,33 @@ const HeaderCard = (props) => {
     displayPane = '',
     scanCount,
     headerPanelColour,
-    onClickClearInfo = null
+    onClickClearInfo = null,
+    showMiddlePaneState
   } = props;
   const dispatch = useDispatch();
   const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneReducer);
   const onClickScan = () => {
     console.log('scan');
+    if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
+      dispatch({
+        type: 'SET_SCAN_POPUP_STATE',
+        payload: {
+          scanHeader: 'assessee',
+          scanHeaderBadgeOne: 'scan',
+          scanHeaderBadgeTwo: ''
+        }
+      });
+    }
+    if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
+      dispatch({
+        type: 'SET_SCAN_POPUP_STATE',
+        payload: {
+          scanHeader: 'associate',
+          scanHeaderBadgeOne: 'scan',
+          scanHeaderBadgeTwo: ''
+        }
+      });
+    }
     dispatch({
       type: ASSESSEE_SIGN_ON,
       payload: { isPopUpValue: typeOfMiddlePaneList, popupMode: 'SCAN_POPUP_FUN' }
@@ -78,15 +99,13 @@ const HeaderCard = (props) => {
                   <div>
                     <span style={{ color: '#fff', fontWeight: 'bold' }}>00:19:26</span>
                   </div>
-                ) : displayPane === 'centre' ? (
-                  scanCount && (
-                    <IconButton onClick={onClickScan}>
-                      <Fragment>
-                        <SearchIcon className={'iguru-iconbardefault'} />
-                        <span className={'iguru-headerbadge'}>{scanCount}</span>
-                      </Fragment>
-                    </IconButton>
-                  )
+                ) : displayPane === 'centre' && showMiddlePaneState ? (
+                  <IconButton onClick={onClickScan}>
+                    <Fragment>
+                      <SearchIcon className={'iguru-iconbardefault'} />
+                      <span className={'iguru-headerbadge'}>{scanCount}</span>
+                    </Fragment>
+                  </IconButton>
                 ) : displayPane === 'left' ? (
                   <IconButton>
                     <NextIcon className={'iguru-iconbardefault'} />
@@ -106,11 +125,15 @@ const HeaderCard = (props) => {
                   >
                     <OpenWithIcon className={'iguru-iconbardefault'} />
                   </IconButton>
-                ) : (
+                ) : displayPane === 'centre' && showMiddlePaneState ? (
                   <IconButton>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
-                )}
+                ):displayPane === 'right' ?
+                <IconButton>
+                    <MoreVert className={'iguru-iconbardefault'} />
+                  </IconButton>:null
+              }
               </div>
             </Fragment>
           </div>

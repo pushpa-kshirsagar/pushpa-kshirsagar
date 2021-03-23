@@ -285,7 +285,8 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
     case SET_REQUEST_OBJECT:
       return {
         ...istate,
-        assesseeReviewListReqObj: action.payload
+        assesseeReviewListReqObj: action.payload,
+        assesseeReviewListDistinctData:[]
       };
     case CLEAR_ASSESSEE_INFO:
       return initialState;

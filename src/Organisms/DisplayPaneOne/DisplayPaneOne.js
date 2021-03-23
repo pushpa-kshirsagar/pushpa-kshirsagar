@@ -32,8 +32,8 @@ import PopUpAssignmentModule from '../../PopUpDisplayPanel/PopUpAssignmentModule
 import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
-import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
 import PopUpScan from '../../PopUpInformation/PopUpScan';
+import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -126,7 +126,8 @@ export const DisplayPaneOne = () => {
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assesseeRelatedAssociate',
-          scanCount: userData && userData.length
+          scanCount: userData && userData.length,
+          showMiddlePaneState: true
         }
       });
     }

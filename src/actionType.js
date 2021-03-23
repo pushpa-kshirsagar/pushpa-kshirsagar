@@ -19,9 +19,9 @@ export const SET_MIDDLEPANE_STATE = 'SET_MIDDLEPANE_STATE';
 export const SET_SELECTED_ASSOCIATE = 'SET_SELECTED_ASSOCIATE';
 export const LOADER_START = 'LOADER_START';
 export const LOADER_STOP = 'LOADER_STOP';
-export const INCREMENT_PAGE = 'INCREMENT_PAGE';
 export const SET_PAGE_COUNT = 'SET_PAGE_COUNT';
 export const SET_POPUP_VALUE = 'SET_POPUP_VALUE';
+export const SET_SCAN_POPUP_STATE = 'SET_SCAN_POPUP_STATE';
 // for assessee information
 export const ASSESSEE_INFO_CREATE = 'ASSESSEE_INFO_CREATE';
 export const ASSESSEE_CREATE = 'ASSESSEE_CREATE';
@@ -74,6 +74,7 @@ export const ROLEPOPUP = 'ROLEPOPUP';
 //for footer icon in middle pane
 export const FILTERMODE = 'FILTERMODE';
 export const NAVIGATOR_MODE = 'NAVIGATOR_MODE';
+export const FILTERMODE_ENABLE = 'FILTERMODE_ENABLE';
 
 // Assessees Module
 export const ASSESSEE_POPUP_OPEN = 'ASSESSEE_POPUP_OPEN';

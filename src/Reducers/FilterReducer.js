@@ -1,4 +1,4 @@
-import { FILTERMODE, NAVIGATOR_MODE } from '../actionType';
+import { FILTERMODE, NAVIGATOR_MODE,FILTERMODE_ENABLE } from '../actionType';
 
 const initialState = {
   FilterModeEnable: true,
@@ -12,8 +12,13 @@ const FilterReducer = (istate = initialState, action) => {
     case FILTERMODE:
       return {
         ...istate,
-        FilterModeEnable: !istate.FilterModeEnable
+        FilterMode: action.payload.FilterMode,
       };
+      case FILTERMODE_ENABLE:
+        return {
+          ...istate,
+          FilterModeEnable: !istate.FilterModeEnable
+        };
     case NAVIGATOR_MODE:
       return {
         ...istate,
