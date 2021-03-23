@@ -16,7 +16,7 @@ import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import Sections from '../../Molecules/Section/Section';
 import AllocationAccordian from '../../Molecules/Accordian/AllocationAccordian';
 import { useDispatch, useSelector } from 'react-redux';
-import { NAVIGATOR_MODE } from '../../actionType';
+import { CLEAR_DISPLAY_PANE_THREE, NAVIGATOR_MODE } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import './DisplayPaneThree.css';
 import { Fragment } from 'react';
@@ -626,11 +626,18 @@ export const DisplayPaneThree = () => {
   ];
   const {
     isReviewRevise = false,
-    rightPaneHeader,
-    rightPaneHeaderBadgeOne,
-    rightPaneHeaderBadgeTwo,
-    rightPaneHeaderBadgeThree
-  } = useSelector((state) => state.DisplayPaneReducer);
+    headerOne,
+    headerOneBadgeOne,
+    headerOneBadgeTwo,
+    headerOneBadgeThree,
+    responseObject
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { informationBasic } = responseObject;
+
+  const onClickClearInfo = () => {
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  };
+  console.log('DISPLAY PANE THREE++++++>', responseObject);
 
   return (
     <>
@@ -638,25 +645,30 @@ export const DisplayPaneThree = () => {
         <HeaderCard
           className=""
           displayPane="right"
-          headerOne={rightPaneHeader}
-          headerOneBadgeOne={rightPaneHeaderBadgeOne}
-          headerOneBadgeTwo={rightPaneHeaderBadgeTwo}
-          headerOneBadgeThree={rightPaneHeaderBadgeThree}
+          headerOne={headerOne}
+          headerOneBadgeOne={headerOneBadgeOne}
+          headerOneBadgeTwo={headerOneBadgeTwo}
+          headerOneBadgeThree={headerOneBadgeThree}
           headerPanelColour="green"
+          onClickClearInfo={onClickClearInfo}
         />
       </div>
-      {isReviewRevise && (
+      {isReviewRevise && responseObject && informationBasic && (
         <Fragment>
-          <div style={{ padding: '0 2.5px' }}>
-            <BasicCard
-              isAlertActive
-              isFlagActive
-              className=""
-              labelTextOneOne="name"
-              labelTextOneTwo="alias"
-              textOneOne="Sample Text"
-              textOneTwo="No Information"
-            />
+          <div style={{ padding: '2.5px' }}>
+            <div style={{ padding: '2.5px' }}>
+              <BasicCard
+                isAlertActive
+                isFlagActive
+                className=""
+                labelTextOneOne="name"
+                labelTextOneTwo="alias"
+                textOneOne={`${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`}
+                textOneTwo={informationBasic.assesseeAlias || 'No Information'}
+                isVerifiedActiveName={false}
+                isVerifiedActivePicture={false}
+              />
+            </div>
             <Sections
               listSections={rightPaneSections}
               selectedSection={selectedSection}

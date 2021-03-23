@@ -14,10 +14,10 @@ import './BasicCard.css';
 
 const BasicCard = (props) => {
   const {
-    textOneOne = 'Sample Text',
-    labelTextOneOne = 'name',
-    textOneTwo = 'No Information',
-    labelTextOneTwo = 'alias',
+    textOneOne = '',
+    labelTextOneOne = '',
+    textOneTwo = '',
+    labelTextOneTwo = '',
     isImageActive = false,
     isVerifiedActiveName = false,
     isVerifiedActivePicture = false,
@@ -42,8 +42,10 @@ const BasicCard = (props) => {
             colour="rgba(0, 0, 0, 0.87)"
           />
         </div>
-        <div className="notifications-icon-container">
-          {isAlertActive && <Notifications className="notificaton-icon" />}
+        <div className="flex-one-align-center">
+          <div className="notifications-icon-container">
+            {isAlertActive && <Notifications className="notificaton-icon" />}
+          </div>
         </div>
         <div className={'iguru-iconbox'}>
           {isImageActive ? (

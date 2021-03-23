@@ -4,7 +4,14 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
-import { POPUP_CLOSE, SET_POPUP_STATE, SET_SECONDARY_OPTION_VALUE } from '../actionType';
+import {
+  GET_ASSESSEE_INFO_SAGA,
+  LOADER_START,
+  POPUP_CLOSE,
+  SET_DISPLAY_PANE_THREE_STATE,
+  SET_POPUP_STATE,
+  SET_SECONDARY_OPTION_VALUE
+} from '../actionType';
 import {
   ASSIGNMENT_DISTINCT_POPUP,
   ASSESSEE_CARD_POPUP_OPTIONS,
@@ -91,6 +98,32 @@ const PopUpDisplayPanelAssessee = (props) => {
       revisePopupMode = 'ASSOCIATE_LINK';
       valueArr = [];
       reviseSecondaryOptionCheckValue = '';
+    }
+    if (clickValue === 'information' && popupHeaderOne === 'assessee') {
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ASSESSEE_INFO_SAGA,
+        payload: {
+          assesseeId: '0123456',
+          associateId: '0654321',
+          filter: 'true',
+          search: {
+            condition: 'and',
+            searchBy: [
+              {
+                dataType: 'string',
+                conditionColumn: 'id',
+                conditionValue: {
+                  condition: 'eq',
+                  value: {
+                    from: '6059e3407563fa25f48a3ec5' //'6059d8a32840824c559c40df' //'6051bec0b86b9a68e042cfeb' //'6054a4d6cb14fb2075aeec87'
+                  }
+                }
+              }
+            ]
+          }
+        }
+      });
     }
     if (clickValue === 'yes') {
       //sign out
