@@ -11,6 +11,7 @@ import '../Atoms/InputField/InputField.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
+import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpTelephone = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
@@ -27,7 +28,7 @@ const PopUpTelephone = (props) => {
     basicInfo,
     typeOfSetObject,
     isMobileState = true,
-    isRequired=false
+    isRequired = false
   } = props;
 
   const [state, setState] = useState({
@@ -40,21 +41,21 @@ const PopUpTelephone = (props) => {
   const [threeErr, setthreeErr] = useState('');
   const validate = () => {
     let isValidate = true;
-    if(basicInfo && basicInfo[objectKeys[0]] === ''){
-      setziroErr('this information is required');
-      isValidate=false;
+    if (basicInfo && basicInfo[objectKeys[0]] === '') {
+      setziroErr(REQUIRED_ERROR_MESSAGE);
+      isValidate = false;
     }
-    if(basicInfo && basicInfo[objectKeys[1]] === ''){
-      setoneErr('this information is required');
-      isValidate=false;
+    if (basicInfo && basicInfo[objectKeys[1]] === '') {
+      setoneErr(REQUIRED_ERROR_MESSAGE);
+      isValidate = false;
     }
-    if(basicInfo && basicInfo[objectKeys[2]] === ''){
-      settwoErr('this information is required');
-      isValidate=false;
+    if (basicInfo && basicInfo[objectKeys[2]] === '') {
+      settwoErr(REQUIRED_ERROR_MESSAGE);
+      isValidate = false;
     }
-    if(basicInfo && basicInfo[objectKeys[3]] === ''){
-      setthreeErr('this information is required');
-      isValidate=false
+    if (basicInfo && basicInfo[objectKeys[3]] === '') {
+      setthreeErr(REQUIRED_ERROR_MESSAGE);
+      isValidate = false;
     }
     /* validation of moile number but still its not required
    let regex = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
@@ -85,16 +86,14 @@ const PopUpTelephone = (props) => {
     dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
-    if(isRequired){
+    if (isRequired) {
       if (validate()) {
         /*according to creation mode popup sequence will change*/
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
       }
-    }
-    else{
+    } else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
-    
   };
   return (
     <div>
@@ -162,7 +161,9 @@ const PopUpTelephone = (props) => {
               type={'text'}
               id={isMobileState ? objectKeys[1] : objectKeys[3]}
               label={isMobileState ? 'mobile number' : 'extension number'}
-              value={basicInfo && isMobileState ? basicInfo[objectKeys[1]] : basicInfo[objectKeys[3]]}
+              value={
+                basicInfo && isMobileState ? basicInfo[objectKeys[1]] : basicInfo[objectKeys[3]]
+              }
               errorMsg={isMobileState ? oneErr : threeErr}
               onClick={handleChange}
             />

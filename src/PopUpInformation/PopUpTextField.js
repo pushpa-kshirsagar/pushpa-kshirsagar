@@ -9,6 +9,7 @@ import '../Molecules/PopUp/PopUp.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 import PropTypes from 'prop-types';
+import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpTextField = (props) => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const PopUpTextField = (props) => {
     if (isRequired) {
       if (basicInfo) {
         if (basicInfo[actualLableValue] === '') {
-          setState((prevState) => ({ ...prevState, error: 'this information is required' }));
+          setState((prevState) => ({ ...prevState, error: REQUIRED_ERROR_MESSAGE }));
           return false;
         }
       }

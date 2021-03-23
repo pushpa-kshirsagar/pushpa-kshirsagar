@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
+import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpAssesseeName = (props) => {
   const {
@@ -44,14 +45,14 @@ const PopUpAssesseeName = (props) => {
       if (basicInfo.assesseeNameFirst === '') {
         setState((prevState) => ({
           ...prevState,
-          assesseeNameFirstErr: 'this information is required'
+          assesseeNameFirstErr: REQUIRED_ERROR_MESSAGE
         }));
         isValidate = false;
       }
       if (basicInfo.assesseeNameLast === '') {
         setState((prevState) => ({
           ...prevState,
-          assesseeNameLastErr: 'this information is required'
+          assesseeNameLastErr: REQUIRED_ERROR_MESSAGE
         }));
         isValidate = false;
       }

@@ -9,6 +9,11 @@ import Label from '../../Atoms/Labels/Label';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import Pool from '../../UserPool';
 import { AccountContext } from '../../Account';
+import {
+  INCORRECT_INFORMATION_ERROR_MESSAGE,
+  INFORMATION_MISMATCHED_ERROR_MESSAGE,
+  REQUIRED_ERROR_MESSAGE
+} from '../../errorMessage';
 
 const DisplayPageSignIn = () => {
   const bgImg = './Image/bg.jpg';
@@ -47,18 +52,18 @@ const DisplayPageSignIn = () => {
           history.push(path);
         })
         .catch((err) => {
-          setIsCredentialsInValid('incorrect information');
+          setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
           console.log('onFailure===>', err);
         });
     } else {
       setIsCredentialsInValid('');
       if (userName === '') {
-        setIsUserNameValid('this information is required');
+        setIsUserNameValid(REQUIRED_ERROR_MESSAGE);
       } else {
         setIsUserNameValid('');
       }
       if (password === '') {
-        setIsPasswordValid('this information is required');
+        setIsPasswordValid(REQUIRED_ERROR_MESSAGE);
       } else {
         setIsPasswordValid('');
       }
@@ -71,7 +76,7 @@ const DisplayPageSignIn = () => {
   const sendCode = () => {
     console.log('sendCode+++++++');
     if (forgotCredential === '') {
-      setForgotCredentialError('this information is required');
+      setForgotCredentialError(REQUIRED_ERROR_MESSAGE);
       return;
     }
     getUser(forgotCredential).forgotPassword({
@@ -112,18 +117,18 @@ const DisplayPageSignIn = () => {
         });
         console.log('========', code, revisedPassword, confirmRevisedPassword);
       } else {
-        setRevisedPasswordError('this information is mismatched');
-        setConfirmRevisedPasswordError('this information is mismatched');
+        setRevisedPasswordError(INFORMATION_MISMATCHED_ERROR_MESSAGE);
+        setConfirmRevisedPasswordError(INFORMATION_MISMATCHED_ERROR_MESSAGE);
       }
     } else {
       if (code === '') {
-        setCodeError('this information is required');
+        setCodeError(REQUIRED_ERROR_MESSAGE);
       }
       if (revisedPassword === '') {
-        setRevisedPasswordError('this information is required');
+        setRevisedPasswordError(REQUIRED_ERROR_MESSAGE);
       }
       if (confirmRevisedPassword === '') {
-        setConfirmRevisedPasswordError('this information is required');
+        setConfirmRevisedPasswordError(REQUIRED_ERROR_MESSAGE);
       }
       console.log('ALL Field requred');
     }

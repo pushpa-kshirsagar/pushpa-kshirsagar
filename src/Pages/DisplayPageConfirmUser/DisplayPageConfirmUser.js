@@ -1,19 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import SendIcon from '@material-ui/icons/Send';
 import iGuruLogo from '../../images/iglogo1.png';
 import './DisplayPageConfirmUser.css';
-import { Button, InputLabel } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import InputField from '../../Atoms/InputField/InputField';
-import Label from '../../Atoms/Labels/Label';
-import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
 import PopUpAdministratorAssent from '../../PopUpDisplayPanel/PopUpAdministratorAssent';
-import { signInButton } from '@aws-amplify/ui';
 import PopUpAssociateAssent from '../../PopUpDisplayPanel/PopUpAssociateAssent';
 import PopUpAssentConfirmation from '../../PopUpDisplayPanel/PopUpAssentConfirmation';
 import PopUpAdministratorSignInCredentialRevise from '../../PopUpDisplayPanel/PopUpAdministratorSignInCredentialRevise';
 import PopUpAdministratorSignInPasswordRevise from '../../PopUpDisplayPanel/PopUpAdministratorSignInPasswordRevise';
+import { INFORMATION_MISMATCHED_ERROR_MESSAGE, REQUIRED_ERROR_MESSAGE } from '../../errorMessage';
 // import Label from '../../Atoms/Labels/Label';
 // import { AccountContext } from '../../Account';
 const signInOptions = [
@@ -55,7 +53,7 @@ const DisplayPageConfirmUser = () => {
       // validation set validation message if any
       // setIsCredentialsInValid('');
       if (password === '') {
-        setIsPasswordValid('this information is required');
+        setIsPasswordValid(REQUIRED_ERROR_MESSAGE);
       } else {
         setIsPasswordValid('');
       }
@@ -105,18 +103,18 @@ const DisplayPageConfirmUser = () => {
         //   });
         console.log('========', currentPassword, revisedPassword, confirmRevisedPassword);
       } else {
-        setRevisedPasswordError('this information is mismatched');
-        setConfirmRevisedPasswordError('this information is mismatched');
+        setRevisedPasswordError(INFORMATION_MISMATCHED_ERROR_MESSAGE);
+        setConfirmRevisedPasswordError(INFORMATION_MISMATCHED_ERROR_MESSAGE);
       }
     } else {
       if (currentPassword === '') {
-        setCurrentPasswordError('this information is required');
+        setCurrentPasswordError(REQUIRED_ERROR_MESSAGE);
       }
       if (revisedPassword === '') {
-        setRevisedPasswordError('this information is required');
+        setRevisedPasswordError(REQUIRED_ERROR_MESSAGE);
       }
       if (confirmRevisedPassword === '') {
-        setConfirmRevisedPasswordError('this information is required');
+        setConfirmRevisedPasswordError(REQUIRED_ERROR_MESSAGE);
       }
       console.log('ALL Field requred');
     }

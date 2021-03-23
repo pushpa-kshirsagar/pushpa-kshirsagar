@@ -13,6 +13,7 @@ import {
 } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
+import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 const PopUpAddressEmail = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
@@ -106,7 +107,7 @@ const PopUpAddressEmail = (props) => {
       isValid = false;
       setState((prevState) => ({
         ...prevState,
-        emailErr: 'this information is required'
+        emailErr: REQUIRED_ERROR_MESSAGE
       }));
     } else if (exp.test(emailStr)) {
       isValid = true;
@@ -114,7 +115,7 @@ const PopUpAddressEmail = (props) => {
     } else {
       setState((prevState) => ({
         ...prevState,
-        emailErr: 'this information is incorrect'
+        emailErr: REQUIRED_ERROR_MESSAGE
       }));
     }
   };

@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
+import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpAddress = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
@@ -37,23 +38,23 @@ const PopUpAddress = (props) => {
   const validateFun = () => {
     let isValidate = true;
     if (basicInfo && basicInfo[objectKeys[4]] === '') {
-      setAddressErr('this information is required');
+      setAddressErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
     if (basicInfo && basicInfo[objectKeys[3]] === '') {
-      setCityErr('this information is required');
+      setCityErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
     if (basicInfo && basicInfo[objectKeys[0]] === '') {
-      setCountryErr('this information is required');
+      setCountryErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
     if (basicInfo && basicInfo[objectKeys[2]] === '') {
-      setZipcodeErr('this information is required');
+      setZipcodeErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
     if (basicInfo && basicInfo[objectKeys[1]] === '') {
-      setStateErr('this information is required');
+      setStateErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
     return isValidate;

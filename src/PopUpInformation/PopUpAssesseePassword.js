@@ -10,6 +10,7 @@ import { FormControl } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
 import { useHistory } from 'react-router-dom';
 import { AccountContext } from '../Account';
+import { INFORMATION_MISMATCHED_ERROR_MESSAGE, REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpAssesseePassword = (props) => {
   const dispatch = useDispatch();
@@ -70,18 +71,18 @@ const PopUpAssesseePassword = (props) => {
           });
         console.log('========', currentPassword, revisedPassword, confirmRevisedPassword);
       } else {
-        setRevisedPasswordError('this information is mismatched');
-        setConfirmRevisedPasswordError('this information is mismatched');
+        setRevisedPasswordError(INFORMATION_MISMATCHED_ERROR_MESSAGE);
+        setConfirmRevisedPasswordError(INFORMATION_MISMATCHED_ERROR_MESSAGE);
       }
     } else {
       if (currentPassword === '') {
-        setCurrentPasswordError('this information is required');
+        setCurrentPasswordError(REQUIRED_ERROR_MESSAGE);
       }
       if (revisedPassword === '') {
-        setRevisedPasswordError('this information is required');
+        setRevisedPasswordError(REQUIRED_ERROR_MESSAGE);
       }
       if (confirmRevisedPassword === '') {
-        setConfirmRevisedPasswordError('this information is required');
+        setConfirmRevisedPasswordError(REQUIRED_ERROR_MESSAGE);
       }
       console.log('ALL Field requred');
     }

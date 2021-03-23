@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import SelectField from '../Atoms/SelectField/SelectField';
+import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpDropList = (props) => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const PopUpDropList = (props) => {
     let isValidate = true;
     if (isRequired) {
       if (basicInfo[tag] === '') {
-        setState((prevState) => ({ ...prevState, isError: 'this information is required' }));
+        setState((prevState) => ({ ...prevState, isError: REQUIRED_ERROR_MESSAGE }));
         isValidate = false;
       }
       return isValidate;
