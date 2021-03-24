@@ -28,7 +28,8 @@ const PopUpScan = (props) => {
     scanHeaderBadgeOne,
     scanHeaderBadgeTwo,
     typeOfMiddlePaneList,
-    countPage
+    countPage,
+    middlePaneHeaderBadgeTwo
   } = useSelector((state) => state.DisplayPaneReducer);
   const { isActive = true } = props;
   const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
@@ -47,7 +48,7 @@ const PopUpScan = (props) => {
     if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
       console.log(typeOfMiddlePaneList);
       let requestObect = makeAssesseeScanRequestObject(
-        secondaryOptionCheckValue,
+        middlePaneHeaderBadgeTwo,
         0,
         countPage,
         state.scanValue
@@ -60,7 +61,7 @@ const PopUpScan = (props) => {
         payload: {
           request: requestObect,
           BadgeOne: 'distinct',
-          BadgeTwo: secondaryOptionCheckValue
+          BadgeTwo: middlePaneHeaderBadgeTwo
         }
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });

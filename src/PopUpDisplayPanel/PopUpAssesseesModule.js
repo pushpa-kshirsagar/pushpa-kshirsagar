@@ -17,7 +17,8 @@ import {
   LOADER_START,
   SET_REQUEST_OBJECT,
   SET_PAGE_COUNT,
-  FILTERMODE
+  FILTERMODE,
+  SET_MOBILE_PANE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
@@ -62,6 +63,7 @@ const PopUpAssesseesModule = (props) => {
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeDistinct' + secondaryOptionCheckValue }
       });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
       dispatch({
@@ -73,7 +75,7 @@ const PopUpAssesseesModule = (props) => {
         }
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
-      document.getElementById('middleComponentId').scrollTop = '0px';
+      // document.getElementById('middleComponentId').scrollTop = '0px';
     } else {
       dispatch({
         type: SET_ASSESSEE_NEXT_POPUP,
