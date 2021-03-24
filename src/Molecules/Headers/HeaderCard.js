@@ -58,6 +58,7 @@ const HeaderCard = (props) => {
         <Paper
           className={[
             `iguru-assesseescontainer`,
+            'iguru-box-shadow',
             `iguru-assesseescontainer${headerPanelColour}`
           ].join(' ')}
         >

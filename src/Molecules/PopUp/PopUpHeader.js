@@ -48,7 +48,11 @@ const PopupHeader = (props) => {
 
   return (
     <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
-      <Paper className={['popupMainHeader', `titleSolid-${headerPanelColour}`].join(' ')}>
+      <Paper
+        className={['popupMainHeader', 'iguru-box-shadow', `titleSolid-${headerPanelColour}`].join(
+          ' '
+        )}
+      >
         <div
           style={{ padding: '0, 5px' }}
           className={['componentInnerDiv', 'popupMainHeader'].join(' ')}
@@ -76,7 +80,7 @@ const PopupHeader = (props) => {
           </div>
           <div className={'backArrow'}>
             <IconButton className="MuiIconButton-root-1602">
-              {mode === 'core' || mode==='search' ? (
+              {mode === 'core' || mode === 'search' ? (
                 <Check className={'popupClose'} onClick={onClick} />
               ) : mode === 'confirm' ? (
                 <KeyboardTab
