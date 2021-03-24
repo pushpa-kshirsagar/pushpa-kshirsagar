@@ -227,10 +227,16 @@ const DisplayPaneThreeSectionOne = () => {
     {
       id: 'a1',
       labelTextOneOne: 'log',
-      labelTextOneOneBadgeOne: 'all',
-      labelTextOneOneBadgeTwo: 'key',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'all',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'key',
+          textOne: ''
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
@@ -240,10 +246,6 @@ const DisplayPaneThreeSectionOne = () => {
       id: 'a2',
       textOneOne: informationEngagement.assesseeStatus || 'No Information',
       labelTextOneOne: 'status',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
       innerAssociateList: [],
       innerInfo: 'No Information',
       isListCard: false
@@ -251,11 +253,16 @@ const DisplayPaneThreeSectionOne = () => {
     {
       id: 'a3',
       labelTextOneOne: 'tag',
-      textOneOne: informationEngagement.assesseeTag.assesseeTagPrimary || 'No Information',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne: informationEngagement.assesseeTag.assesseeTagPrimary || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne: informationEngagement.assesseeTag.assesseeTagSecondary || 'No Information'
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'No Information',
       isListCard: false
@@ -263,12 +270,18 @@ const DisplayPaneThreeSectionOne = () => {
     {
       id: 'a4',
       labelTextOneOne: 'tenure',
-      textOneOne:
-        informationEngagement.assesseeTenure.assesseeTenureDateTimeStart || 'No Information',
-      labelTextOneOneBadgeOne: 'start',
-      labelTextOneOneBadgeTwo: 'end',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'start',
+          textOne:
+            informationEngagement.assesseeTenure.assesseeTenureDateTimeStart || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'end',
+          textOne:
+            informationEngagement.assesseeTenure.assesseeTenureDateTimeEnd || 'No Information'
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'Assessee',
       isListCard: false

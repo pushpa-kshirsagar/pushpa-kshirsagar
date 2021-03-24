@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 const DisplayPaneThreeSectionTwo = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationContact } = responseObject;
+  const { informationContact, informationPersonal } = responseObject;
   const list1 = [
     {
       id: 'a1',
@@ -32,13 +32,19 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a1',
       labelTextOneOne: 'email address',
-      textOneOne:
-        informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail ||
-        'joachim.carvalho@insightguru.com',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne:
+            informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne:
+            informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail ||
+            'No Information'
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
@@ -51,10 +57,16 @@ const DisplayPaneThreeSectionTwo = () => {
       id: 'a2',
       labelTextOneOne: 'home address',
       multiline: true,
-      textOneOne:
-        '602 Silver Beliza, 48 St. Francis Avenue, SantaCruz West,  Mumbai, Maharashtra 400054, India602 Silver Beliza, 48 St. Francis Avenue, SantaCruz West,  Mumbai, Maharashtra 400054, India',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne: informationContact.assesseeAddressHomePrimary || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne: informationContact.assesseeAddressHomeSecondary || 'No Information'
+        }
+      ],
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
       innerAssociateList: [],
@@ -67,12 +79,17 @@ const DisplayPaneThreeSectionTwo = () => {
     },
     {
       id: 'a3',
-      labelTextOneOne: 'home address',
-      textOneOne: 'No Information',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      labelTextOneOne: 'home telephone',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne: informationContact.assesseeTelephoneHomePrimary || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne: informationContact.assesseeTelephoneHomeSecondary || 'No Information'
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
@@ -84,15 +101,45 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a4',
       labelTextOneOne: 'mobile telephone',
-      textOneOne: 'No Information',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne:
+            informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneNumber ||
+            'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne: informationContact.assesseeTelephoneMobileSecondary || 'No Information'
+        }
+      ],
       labelTextOneOneBadgeFour: '',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: TelephoneVerified,
+      IconTwo: () => {
+        return <img src={Unverified} alt="Unverified" />;
+      }
+    },
+    {
+      id: 'a5',
+      labelTextOneOne: 'work address',
+      multiline: true,
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne: informationContact.assesseeAddressWorkPrimary || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne: informationContact.assesseeAddressWorkSecondary || 'No Information'
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: MailOutline,
       IconTwo: () => {
         return <img src={Unverified} alt="Unverified" />;
       }
@@ -102,11 +149,16 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a1',
       labelTextOneOne: 'fingerprint',
-      textOneOne: '',
-      labelTextOneOneBadgeOne: 'left hand',
-      labelTextOneOneBadgeTwo: 'right hand',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'left hand',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'right hand',
+          textOne: ''
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
@@ -116,10 +168,6 @@ const DisplayPaneThreeSectionTwo = () => {
       id: 'a2',
       labelTextOneOne: 'signature',
       textOneOne: '',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
@@ -131,9 +179,13 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a4',
       labelTextOneOne: 'tag',
-      textOneOne: 'No Information',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne: 'No Information'
+        }
+      ],
+      labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
       innerAssociateList: [],
@@ -148,11 +200,7 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a1',
       labelTextOneOne: 'birthdate',
-      textOneOne: '03/07/1966',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      textOneOne: informationPersonal.assesseeBirthdate || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
@@ -163,11 +211,7 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a2',
       labelTextOneOne: 'birthmark',
-      textOneOne: 'No Information',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      textOneOne: informationPersonal.assesseeBirthmark || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -175,11 +219,7 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a3',
       labelTextOneOne: 'birthplace',
-      textOneOne: 'Mumbai, Maharashtra, India',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      textOneOne: informationPersonal.assesseeBirthplaceCity || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -187,11 +227,16 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a4',
       labelTextOneOne: 'community',
-      textOneOne: 'No Information',
-      labelTextOneOneBadgeOne: 'social',
-      labelTextOneOneBadgeTwo: 'spiritual',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'social',
+          textOne: informationPersonal.assesseeCommunitySocial || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'spiritual',
+          textOne: informationPersonal.assesseeCommunitySpiritual || 'No Information'
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -199,11 +244,7 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a4',
       labelTextOneOne: 'gender',
-      textOneOne: 'Male',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      textOneOne: informationPersonal.assesseeGender || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false

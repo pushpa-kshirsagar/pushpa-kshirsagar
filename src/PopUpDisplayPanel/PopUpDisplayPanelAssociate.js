@@ -5,6 +5,8 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
+  GET_ASSOCIATE_INFO_SAGA,
+  LOADER_START,
   POPUP_CLOSE,
   SET_MIDDLEPANE_STATE,
   SET_POPUP_STATE,
@@ -30,7 +32,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOneBadgeTwo,
     popupOpenType
   } = useSelector((state) => state.PopUpReducer);
-  const { userData,assesseePermission } = useSelector((state) => state.UserReducer);
+  const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
@@ -158,6 +160,35 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = MARKETPLACE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'unread';
     }
+    if (clickValue === 'information' && popupHeaderOne === 'associate') {
+      console.log('+++++++++++++++++++++++++++++++++++++++++++++++++')
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ASSOCIATE_INFO_SAGA,
+        payload: {
+          assesseeId: '0123456',
+          associateId: '0654321',
+          filter: 'true',
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'id',
+                  conditionColumn: 'id',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: '88sd9s824s234'
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      });
+    }
     if (clickValue === 'switch') {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
@@ -169,7 +200,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assesseeRelatedAssociate',
           scanCount: userData.length,
-          showMiddlePaneState:true
+          showMiddlePaneState: true
         }
       });
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormControl, InputLabel, Input } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import './Accordian.css';
@@ -7,6 +7,7 @@ const AccordianInfoCard = (props) => {
   const { mode = '', accordianObject } = props;
   const {
     labelTextOneOne = '',
+    labelTextOneOneBadges = [],
     labelTextOneOneBadgeOne = '',
     labelTextOneOneBadgeTwo = '',
     labelTextOneOneBadgeThree,
@@ -16,12 +17,18 @@ const AccordianInfoCard = (props) => {
     textOneOne = '',
     multiline = false
   } = accordianObject;
+  const [selectedBadge, setSelectedBadge] = useState(labelTextOneOneBadges[0]);
 
   return (
     <div className={'detailsContactContainer'}>
       <div className={'detsailsPadding'}>
         <div
-          style={{ height: multiline ? '105px' : '50px' }}
+          style={{
+            height:
+              multiline && selectedBadge && selectedBadge.textOne !== 'No Information'
+                ? '105px'
+                : '50px'
+          }}
           className={['FormBox', 'detailsHeight'].join(' ')}
         >
           <div className={['formControlReviewName', 'formControlRight'].join(' ')}>
@@ -30,25 +37,53 @@ const AccordianInfoCard = (props) => {
                 htmlFor="name-input"
                 className={['textForLabel', 'textForLabelRight', 'careerLabelRight'].join(' ')}
               >
-                <span className={mode === 'revise' ? 'linkText' : ''}>{labelTextOneOne}</span>
-                {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
+                <span
+                  style={{
+                    marginBottom: labelTextOneOneBadges.length > 0 ? '0' : '5px',
+                    display: 'inline-block'
+                  }}
+                  className={mode === 'revise' ? 'linkText' : ''}
+                >
+                  {labelTextOneOne}
+                </span>
+                {labelTextOneOneBadges.map((ob, key) => {
+                  return (
+                    <sup
+                      key={`badge-${key}`}
+                      style={{
+                        backgroundColor:
+                          selectedBadge &&
+                          selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
+                            ? '#F2F2F2'
+                            : '#ffffff'
+                      }}
+                      onClick={() => {
+                        setSelectedBadge(ob);
+                      }}
+                    >
+                      {ob.labelTextOneOneBadge}
+                    </sup>
+                  );
+                })}
+                {/* {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
                 {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
                 {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}
-                {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null}
+                {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null} */}
               </InputLabel>
-              {textOneOne && (
-                <Input
-                  multiline={multiline}
-                  // row={multiline ? 2 : 1}
-                  row={2}
-                  rowsMax={multiline ? 4 : 1}
-                  className={'inputText'}
-                  id="name-dn-input"
-                  value={textOneOne}
-                  disableUnderline={true}
-                  readOnly
-                />
-              )}
+              {textOneOne ||
+                (selectedBadge && selectedBadge.textOne && (
+                  <Input
+                    multiline={multiline && selectedBadge.textOne !== 'No Information'}
+                    // row={multiline ? 2 : 1}
+                    row={2}
+                    rowsMax={multiline && selectedBadge.textOne !== 'No Information' ? 4 : 1}
+                    className={'inputText'}
+                    id="name-dn-input"
+                    value={(selectedBadge && selectedBadge.textOne) || textOneOne}
+                    disableUnderline={true}
+                    readOnly
+                  />
+                ))}
             </div>
           </div>
           <div className={'unitFlex'}></div>
