@@ -21,7 +21,6 @@ const HeaderCard = (props) => {
     displayPane = '',
     scanCount,
     headerPanelColour,
-    onClickClearInfo = null,
     showMiddlePaneState
   } = props;
   const dispatch = useDispatch();
@@ -110,8 +109,8 @@ const HeaderCard = (props) => {
                   <IconButton>
                     <NextIcon className={'iguru-iconbardefault'} />
                   </IconButton>
-                ) : displayPane === 'right' && headerOne !== '' ? (
-                  <IconButton onClick={onClickClearInfo}>
+                ) : displayPane === 'right' ? (
+                  <IconButton>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : null}
@@ -129,11 +128,11 @@ const HeaderCard = (props) => {
                   <IconButton>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
-                ):displayPane === 'right' ?
-                <IconButton>
+                ) : displayPane === 'right' ? (
+                  <IconButton>
                     <MoreVert className={'iguru-iconbardefault'} />
-                  </IconButton>:null
-              }
+                  </IconButton>
+                ) : null}
               </div>
             </Fragment>
           </div>

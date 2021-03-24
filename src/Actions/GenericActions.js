@@ -91,10 +91,13 @@ export const makeAssesseeReviewListRequestObject = (filterKey, numberPage, count
         'informationBasic.assesseeNameFirst, informationBasic.assesseeNameOther,  informationBasic.assesseeNameLast, informationBasic.assesseeNameSuffix',
       order: 'asc'
     },
-    search: {
-      condition: 'or',
-      searchBy: [searchObj]
-    }
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [searchObj]
+      }
+    ]
   };
 
   return regObj;
@@ -103,49 +106,77 @@ export const makeAssesseeScanRequestObject = (filterKey, numberPage, countPage, 
   let regObj = {
     assesseeId: '0123456',
     associateId: '0654321',
-    countPage: 20,
-    numberPage: 0,
+    countPage: countPage,
+    numberPage: numberPage,
     filter: 'true',
     orderBy: {
       columnName:
         'informationBasic.assesseeNameFirst, informationBasic.assesseeNameOther,  informationBasic.assesseeNameLast, informationBasic.assesseeNameSuffix',
       order: 'asc'
     },
-    search: {
-      condition: 'or',
-      searchBy: [
-        {
-          dataType: 'string',
-          conditionColumn: 'informationBasic.assesseeNameFirst',
-          conditionValue: {
-            condition: 'ct',
-            value: {
-              from: searchStr
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameFirst',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameOther',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameLast',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameAlias',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
             }
           }
-        },
-        {
-          dataType: 'string',
-          conditionColumn: 'informationBasic.assesseeNameOther',
-          conditionValue: {
-            condition: 'ct',
-            value: {
-              from: searchStr
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: filterKey.toUpperCase()
+              }
             }
           }
-        },
-        {
-          dataType: 'string',
-          conditionColumn: 'informationBasic.assesseeNameLast',
-          conditionValue: {
-            condition: 'ct',
-            value: {
-              from: searchStr
-            }
-          }
-        }
-      ]
-    }
+        ]
+      }
+    ]
   };
 
   return regObj;

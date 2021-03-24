@@ -5,7 +5,9 @@ import {
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
   LOADER_START,
+  POPUP_OPEN,
   SET_PAGE_COUNT,
+  SET_POPUP_STATE,
   SET_REQUEST_OBJECT
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
@@ -13,6 +15,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
+import { ASSOCIATE_CARD_POPUP_OPTION } from '../PopUpConfig';
 const AssesseeDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const {
@@ -105,6 +108,20 @@ const AssesseeDistinctReviewList = (props) => {
     { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
   ];
+  const openAssesseeListPopup = (e) =>{
+    console.log(e.currentTarget.getAttribute('tag'))
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        popupHeaderOne: "assessee",
+        popupHeaderOneBadgeOne: '',
+        isPopUpValue: "",
+        popupOpenType: 'primary',
+        popupContentArrValue: ASSOCIATE_CARD_POPUP_OPTION
+      }
+    });
+    dispatch({type:POPUP_OPEN,payload:'middlePaneListPopup'})
+  }
   return (
     <div>
       {assesseeReviewListDistinctData &&
@@ -134,7 +151,7 @@ const AssesseeDistinctReviewList = (props) => {
                 }
                 textTwo={item.informationBasic.assesseeAlias}
                 isTooltipActive={false}
-                onClickEvent={null}
+                onClickEvent={openAssesseeListPopup}
               />
             </div>
           );

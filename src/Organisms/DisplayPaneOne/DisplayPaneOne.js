@@ -8,7 +8,7 @@ import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Section/Section';
 import FooterIconOne from '../../Molecules/FooterIconOne/FooterIconOne';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_MIDDLEPANE_STATE, SET_POPUP_STATE } from '../../actionType';
+import { SET_MIDDLEPANE_STATE, SET_MOBILE_PANE_STATE, SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpSpreadSheet from '../../PopUpIcon/PopUpSpreadSheet';
@@ -34,6 +34,7 @@ import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import PopUpScan from '../../PopUpInformation/PopUpScan';
 import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
+import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -117,6 +118,7 @@ export const DisplayPaneOne = () => {
         }
       });
     } else {
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
@@ -196,6 +198,7 @@ export const DisplayPaneOne = () => {
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
       <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
+      <PopUpMiddlePaneList isActive={isPopUpValue === 'middlePaneListPopup'} />
       <PopUpAssociateLink />
       {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}

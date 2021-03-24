@@ -1,4 +1,4 @@
-import { SET_MIDDLEPANE_STATE, SET_SELECTED_ASSOCIATE, SET_SCAN_POPUP_STATE, SET_PAGE_COUNT } from '../actionType';
+import { SET_MIDDLEPANE_STATE, SET_SELECTED_ASSOCIATE, SET_SCAN_POPUP_STATE, SET_PAGE_COUNT, SET_MOBILE_PANE_STATE } from '../actionType';
 
 const initialState = {
   assesseeSignInUse: 'simplesample@gmail.com',
@@ -17,7 +17,8 @@ const initialState = {
   numberPage:1,
   countPage:20,
   scanCount: null,
-  showMiddlePaneState:false
+  showMiddlePaneState:false,
+  mobilePanestate:'displayPaneOne'
 };
 
 const DisplayPaneReducer = (istate = initialState, action) => {
@@ -51,6 +52,11 @@ const DisplayPaneReducer = (istate = initialState, action) => {
       return {
         ...istate,
         selectedAssociateInfo: action.payload
+      };
+    case SET_MOBILE_PANE_STATE:
+      return {
+        ...istate,
+        mobilePanestate: action.payload
       };
     default:
       return istate;

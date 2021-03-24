@@ -21,9 +21,9 @@ const DisplayPageOne = () => {
   const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
   const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
+  const { mobilePanestate } = useSelector((state) => state.DisplayPaneReducer);
 
   const dispatch = useDispatch();
-  const mobilePanestate = isMobile && 'displayPaneTwo';
   const isExamMode = false;
   const { getSession } = useContext(AccountContext);
  //* code for change username and any attribute
