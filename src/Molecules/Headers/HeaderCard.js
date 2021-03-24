@@ -9,8 +9,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import Clear from '@material-ui/icons/Clear';
 
 import './HeaderCard.css';
-import { POPUP_OPEN, ASSESSEE_SIGN_ON } from '../../actionType';
+import { POPUP_OPEN, ASSESSEE_SIGN_ON, SET_POPUP_STATE } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
+import { TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
 const HeaderCard = (props) => {
   const {
     headerOne = '',
@@ -24,7 +25,7 @@ const HeaderCard = (props) => {
     showMiddlePaneState
   } = props;
   const dispatch = useDispatch();
-  const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneReducer);
+  const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneTwoReducer);
   const onClickScan = () => {
     console.log('scan');
     if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
@@ -52,6 +53,19 @@ const HeaderCard = (props) => {
       payload: { isPopUpValue: typeOfMiddlePaneList, popupMode: 'SCAN_POPUP_FUN' }
     });
   };
+  const openMiddlePaneTripleDotPopup = () =>{
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        popupHeaderOne: 'assessees',
+        popupHeaderOneBadgeOne: '',
+        isPopUpValue: '',
+        popupOpenType: 'primary',
+        popupContentArrValue: TRIPPLE_DOT_POPUP_OPTION
+      }
+    });
+    dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+  }
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
@@ -126,7 +140,7 @@ const HeaderCard = (props) => {
                   </IconButton>
                 ) : displayPane === 'centre' && showMiddlePaneState ? (
                   <IconButton>
-                    <MoreVert className={'iguru-iconbardefault'} />
+                    <MoreVert className={'iguru-iconbardefault'}  onClick={openMiddlePaneTripleDotPopup}/>
                   </IconButton>
                 ) : displayPane === 'right' ? (
                   <IconButton>

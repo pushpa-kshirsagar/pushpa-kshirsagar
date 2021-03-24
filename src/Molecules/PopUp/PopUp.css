@@ -152,6 +152,16 @@
   /* height: 50px; */
   background-color: #00afff !important;
 }
+.titleSolid-displayPaneCentreprimary {
+  display: flex;
+  /* height: 50px; */
+  background-color: #00afff !important;
+}
+.titleSolid-displayPaneCentresecondary {
+  display: flex;
+  /* height: 50px; */
+  background-color: #66CFFF !important;
+}
 .titleSolid-genericTwo {
   display: flex;
   /* height: 50px; */
@@ -384,7 +394,9 @@
       backgroundColor:'#3f3f3f00'
   } */
 }
-,
+.MuiDialog-paperScrollPaper > div {
+  top: 74px;
+}
 .MuiDialog-paperScrollPaper {
   display: flex;
   position: fixed !important;

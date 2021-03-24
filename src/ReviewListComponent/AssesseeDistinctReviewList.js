@@ -15,18 +15,19 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
-import { ASSOCIATE_CARD_POPUP_OPTION } from '../PopUpConfig';
+import { REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 const AssesseeDistinctReviewList = (props) => {
   const dispatch = useDispatch();
-  const {
-    assesseeReviewListReqObj,
-    assesseeReviewListDistinctData,
-    secondaryOptionCheckValue,
-    countPage
-  } = useSelector((state) => state.AssesseeCreateReducer);
-  const { numberPage, scanCount, middlePaneHeaderBadgeOne } = useSelector(
-    (state) => state.DisplayPaneReducer
+  const { secondaryOptionCheckValue, countPage } = useSelector(
+    (state) => state.AssesseeCreateReducer
   );
+  const {
+    numberPage,
+    scanCount,
+    middlePaneHeaderBadgeOne,
+    reviewListDistinctData,
+    reviewListReqObj
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
 
   const onClickReviewList = (e) => {};
@@ -45,9 +46,9 @@ const AssesseeDistinctReviewList = (props) => {
     console.log(isFetching);
   };
   const fetchData = async () => {
-    if (assesseeReviewListDistinctData.length < scanCount) {
+    if (reviewListDistinctData.length < scanCount) {
       let obj = {
-        ...assesseeReviewListReqObj,
+        ...reviewListReqObj,
         numberPage: numberPage
       };
       dispatch({
@@ -62,7 +63,7 @@ const AssesseeDistinctReviewList = (props) => {
     }
   };
   useEffect(() => {
-    console.log(assesseeReviewListDistinctData);
+    console.log(reviewListDistinctData);
     if (!isFetching) return;
     fetchMoreListItems();
   }, [isFetching]);
@@ -108,24 +109,24 @@ const AssesseeDistinctReviewList = (props) => {
     { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
   ];
-  const openAssesseeListPopup = (e) =>{
-    console.log(e.currentTarget.getAttribute('tag'))
+  const openAssesseeListPopup = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: "assessee",
+        popupHeaderOne: 'assessee',
         popupHeaderOneBadgeOne: '',
-        isPopUpValue: "",
+        isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_CARD_POPUP_OPTION
+        popupContentArrValue: REVIEW_LIST_POPUP_OPTION
       }
     });
-    dispatch({type:POPUP_OPEN,payload:'middlePaneListPopup'})
-  }
+    dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+  };
   return (
     <div>
-      {assesseeReviewListDistinctData &&
-        assesseeReviewListDistinctData.map((item, index) => {
+      {reviewListDistinctData &&
+        reviewListDistinctData.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList

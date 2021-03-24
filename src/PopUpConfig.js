@@ -608,3 +608,351 @@ export const REVIEW_DISTINCT_POPUP_OPTION = [
   },
   { data: 'archived', dataValue: 'archived', optionClass: 'optionSecondary', disabled: false }
 ];
+
+export const REVIEW_LIST_POPUP_OPTION = [
+  {
+    data: 'allocate',
+    dataValue: 'allocate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'archive',
+    dataValue: 'archive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'delete',
+    dataValue: 'delete',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reset',
+    dataValue: 'reset',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'revise',
+    dataValue: 'revise',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'select',
+    dataValue: 'select',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'share',
+    dataValue: 'share',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'suspend',
+    dataValue: 'suspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'terminate',
+    dataValue: 'terminate',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+
+];
+
+export const ALLOCATE_POPUP =[
+  {
+    data: 'assessees',
+    dataValue: 'assessees',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'assessments',
+    dataValue: 'assessments',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'associates',
+    dataValue: 'associates',
+    optionClass: 'optionPrimary',
+    divider:'dark',
+    disabled: false
+  },
+  {
+    data: 'groups',
+    dataValue: 'groups',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'managers',
+    dataValue: 'managers',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'nodes',
+    dataValue: 'nodes',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'roles',
+    dataValue: 'roles',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'types',
+    dataValue: 'types',
+    optionClass: 'optionPrimary',
+    divider:'dark',
+    disabled: false
+  },
+  {
+    data: 'marketplace',
+    dataValue: 'marketplace',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const ARCHIVE_POPUP = [
+  {
+    data: 'archive',
+    dataValue: 'archive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unarchive',
+    dataValue: 'unarchive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const DELETE_POPUP = [
+  {
+    data: 'no',
+    dataValue: 'no',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'yes',
+    dataValue: 'yes',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const FLAG_PUPUP =[
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unflag',
+    dataValue: 'unflag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const SELECT_PUPUP =[
+  {
+    data: 'select',
+    dataValue: 'select',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unselect',
+    dataValue: 'unselect',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const SELECT_OPTION_PUPUP =[
+  {
+    data: 'select',
+    dataValue: 'select',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unselect',
+    dataValue: 'unselect',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  { data: 'all', dataValue: 'all', optionClass: 'optionSecondary', divider:'light', disabled: false },
+  { data: 'flaged', dataValue: 'flaged', optionClass: 'optionSecondary', disabled: false },
+  { data: 'multiple', dataValue: 'multiple', optionClass: 'optionSecondary', divider:'light', disabled: false },
+  { data: 'hide', dataValue: 'hide', optionClass: 'optionSecondary', disabled: false },
+  { data: 'unhide', dataValue: 'unhide', optionClass: 'optionSecondary', disabled: false },
+
+];
+export const SUSPEND_PUPUP =[
+  {
+    data: 'suspend',
+    dataValue: 'suspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unsuspend',
+    dataValue: 'unsuspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const TERMINATE_PUPUP =[
+  {
+    data: 'terminate',
+    dataValue: 'terminate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unterminate',
+    dataValue: 'unterminate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const TRIPPLE_DOT_POPUP_OPTION = [
+  {
+    data: 'allocate',
+    dataValue: 'allocate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'archive',
+    dataValue: 'archive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'create',
+    dataValue: 'create',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'delete',
+    dataValue: 'delete',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reset',
+    dataValue: 'reset',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'review',
+    dataValue: 'reviewDistinct',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'select',
+    dataValue: 'selection',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'share',
+    dataValue: 'share',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'suspend',
+    dataValue: 'suspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'terminate',
+    dataValue: 'terminate',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+
+];

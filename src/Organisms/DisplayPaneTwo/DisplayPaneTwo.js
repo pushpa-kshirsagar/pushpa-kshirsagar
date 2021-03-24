@@ -8,9 +8,12 @@ import { FILTERMODE, FILTERMODE_ENABLE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
 import AssesseeRelatedAssociateReviewList from '../../ReviewListComponent/AssesseeRelatedAssociateReviewList';
 import AssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReviewList';
+import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
 
 export const DisplayPaneTwo = () => {
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
+
   const tempAssociateList = [
     {
       id: 'associate1',
@@ -387,8 +390,7 @@ export const DisplayPaneTwo = () => {
     typeOfMiddlePaneList,
     scanCount,
     showMiddlePaneState
-  } = useSelector((state) => state.DisplayPaneReducer);
-
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
  
   return (
     <div>
@@ -435,11 +437,14 @@ export const DisplayPaneTwo = () => {
               </div>
             );
           })} */}
-        <div className={'containerPadding'} style={{ height: '55px' }}>
+        {/* <div className={'containerPadding'} style={{ height: '55px' }}>
           {' '}
-        </div>
+        </div> */}
+        
+        {/* for middle pane review list popup */}
+
+        <PopUpMiddlePaneList isActive={isPopUpValue === 'middlePaneListPopup'} />
       </div>
-     
     </div>
   );
 };

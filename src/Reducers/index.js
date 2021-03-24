@@ -5,7 +5,7 @@ import AssesseeCreateReducer from './AssesseeCreateReducer';
 import AssociateCreateReducer from './AssociateCreateReducer';
 import FilterReducer from './FilterReducer';
 import assessmentReducer from './assessmentReducer';
-import DisplayPaneReducer from './DisplayPaneReducer';
+import DisplayPaneTwoReducer from './DisplayPaneTwoReducer';
 import AssignmentReducer from './AssignmentReducer';
 import IgaugeReducer from './IgaugeReducer';
 import LoaderReducer from './LoaderReducer';
@@ -18,7 +18,7 @@ export default combineReducers({
   AssociateCreateReducer,
   FilterReducer,
   assessmentReducer,
-  DisplayPaneReducer,
+  DisplayPaneTwoReducer,
   AssignmentReducer,
   IgaugeReducer,
   LoaderReducer,

@@ -21,7 +21,7 @@ const DisplayPageOne = () => {
   const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
   const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
-  const { mobilePanestate } = useSelector((state) => state.DisplayPaneReducer);
+  const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const isExamMode = false;
@@ -53,7 +53,7 @@ const DisplayPageOne = () => {
   useEffect(() => {
     dispatch({ type: GET_USER_SAGA });
   }, [dispatch]);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const userName =
     selectedAssociateInfo &&
     selectedAssociateInfo.assesseeInformation.assesseeNameFirst +

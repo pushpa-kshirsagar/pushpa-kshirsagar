@@ -34,7 +34,6 @@ import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import PopUpScan from '../../PopUpInformation/PopUpScan';
 import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
-import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -70,7 +69,7 @@ export const DisplayPaneOne = () => {
   const { userData, assesseePermission = null } = useSelector((state) => state.UserReducer);
   const { assesseesPopUpActive } = useSelector((state) => state.AssesseeCreateReducer);
   const { isAssociateSelected, selectedAssociateInfo } = useSelector(
-    (state) => state.DisplayPaneReducer
+    (state) => state.DisplayPaneTwoReducer
   );
   const associateName = selectedAssociateInfo
     ? selectedAssociateInfo.associateInformation.associateName
@@ -198,7 +197,6 @@ export const DisplayPaneOne = () => {
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
       <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
-      <PopUpMiddlePaneList isActive={isPopUpValue === 'middlePaneListPopup'} />
       <PopUpAssociateLink />
       {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}

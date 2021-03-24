@@ -2,7 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   CREATE_ASSESSEE_SAGA,
   LOADER_STOP,
-  ASSESSEE_REVIEW_DISTINCT_DATA,
+  REVIEWLIST_DISTINCT_DATA,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   SET_MIDDLEPANE_STATE
 } from '../../actionType';
@@ -25,7 +25,7 @@ function* workerReviewListAssesseeSaga(data) {
     const userResponse = yield call(assesseesReviewListDistinctApi, { data: data.payload.request });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000')
-      yield put({ type: ASSESSEE_REVIEW_DISTINCT_DATA, payload: userResponse.responseObject });
+      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
     yield put({
       type: SET_MIDDLEPANE_STATE,
       payload: {
