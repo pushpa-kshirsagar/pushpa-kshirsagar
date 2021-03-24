@@ -239,7 +239,9 @@ const DisplayPageSignIn = () => {
                     <Label
                       text={isCredentialsInValid}
                       fontSize="1.2rem"
-                      colour={isCredentialsInValid === 'in progress' ? 'green' : 'rgb(244, 67, 54)'}
+                      colour={
+                        isCredentialsInValid === 'in progress' ? '#7DC832' : 'rgb(244, 67, 54)'
+                      }
                     />
                   )}
                 </div>

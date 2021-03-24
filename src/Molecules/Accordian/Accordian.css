@@ -143,7 +143,7 @@
   /* margin-left: 20px; */
 }
 .verifiedUser {
-  align-items: flex-start;
+  align-items: center;
 }
 .verifiedUser img {
   width: 20px;
@@ -159,7 +159,7 @@
   padding: 0;
 }
 .verifiedUserTop button {
-  align-items: center;
+  /* align-items: center; */
   padding-top: 2px;
 }
 .keyCardBottomMargin {

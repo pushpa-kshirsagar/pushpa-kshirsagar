@@ -107,21 +107,24 @@ const PopUpDisplayPanelAssessee = (props) => {
           assesseeId: '0123456',
           associateId: '0654321',
           filter: 'true',
-          search: {
-            condition: 'and',
-            searchBy: [
-              {
-                dataType: 'string',
-                conditionColumn: 'id',
-                conditionValue: {
-                  condition: 'eq',
-                  value: {
-                    from: '6051bec0b86b9a68e042cfeb' //'6059d8a32840824c559c40df' //'6051bec0b86b9a68e042cfeb' //'6054a4d6cb14fb2075aeec87'
+          searchCondition: 'AND',
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'id',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: '6054a4d6cb14fb2075aeec87'
+                    }
                   }
                 }
-              }
-            ]
-          }
+              ]
+            }
+          ]
         }
       });
     }
