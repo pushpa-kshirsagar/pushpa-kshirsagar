@@ -8,7 +8,10 @@ const DisplayPaneThreeSectionOne = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { informationEngagement, informationSetup } = responseObject;
-
+  function capitalizeFirstLetter(string) {
+    if (!string) return '';
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
   const list1 = [
     {
       id: 'a1',
@@ -244,7 +247,7 @@ const DisplayPaneThreeSectionOne = () => {
     },
     {
       id: 'a2',
-      textOneOne: informationEngagement.assesseeStatus || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement.assesseeStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
