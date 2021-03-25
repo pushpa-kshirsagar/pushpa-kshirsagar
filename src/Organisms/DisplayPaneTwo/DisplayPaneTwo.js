@@ -8,9 +8,12 @@ import { FILTERMODE, FILTERMODE_ENABLE } from '../../actionType';
 import { FilterList } from '@material-ui/icons';
 import AssesseeRelatedAssociateReviewList from '../../ReviewListComponent/AssesseeRelatedAssociateReviewList';
 import AssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReviewList';
+import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
 
-export const DisplayPaneTwo = () => {
+export const DisplayPaneTwo = (props) => {
+  const {popupAllClose} = props;
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const tempAssociateList = [
     {
       id: 'associate1',
@@ -364,19 +367,6 @@ export const DisplayPaneTwo = () => {
     }
   ];
   const dispatch = useDispatch();
-  const onClickFooter = (e) => {
-    dispatch({ type: FILTERMODE_ENABLE });
-    // if(e.currentTarget.getAttribute('data-value') === 'sift'){
-    //   dispatch({ type: FILTERMODE});
-    // }
-  };
-  /* for middle pane */
-  const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
-  const secondaryIcon = [
-    { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unverified', onClick: onClickFooter, Icon: FilterList }
-  ];
   const {
     isAssociateSelected,
     middlePaneHeader,
@@ -387,8 +377,7 @@ export const DisplayPaneTwo = () => {
     typeOfMiddlePaneList,
     scanCount,
     showMiddlePaneState
-  } = useSelector((state) => state.DisplayPaneReducer);
-
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
  
   return (
     <div>
@@ -418,7 +407,7 @@ export const DisplayPaneTwo = () => {
         {typeOfMiddlePaneList === 'assesseeRelatedAssociate' && (
           <AssesseeRelatedAssociateReviewList />
         )}
-        {typeOfMiddlePaneList === 'assesseeDistinctReviewList' && <AssesseeDistinctReviewList />}
+        {typeOfMiddlePaneList === 'assesseeDistinctReviewList' && <AssesseeDistinctReviewList popupAllClose={popupAllClose}/>}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
           tempAssociateList.map((associate, index) => {
@@ -435,11 +424,14 @@ export const DisplayPaneTwo = () => {
               </div>
             );
           })} */}
-        <div className={'containerPadding'} style={{ height: '55px' }}>
+        {/* <div className={'containerPadding'} style={{ height: '55px' }}>
           {' '}
-        </div>
+        </div> */}
+        
+        {/* for middle pane review list popup */}
+
+        {/* <PopUpMiddlePaneList isActive={isPopUpValue === 'middlePaneListPopup'} /> */}
       </div>
-     
     </div>
   );
 };

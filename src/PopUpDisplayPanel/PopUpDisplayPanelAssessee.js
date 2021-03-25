@@ -9,6 +9,7 @@ import {
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
   SET_SECONDARY_OPTION_VALUE
 } from '../actionType';
@@ -128,6 +129,8 @@ const PopUpDisplayPanelAssessee = (props) => {
         }
       });
     }
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+
     if (clickValue === 'yes') {
       //sign out
       let path = `/signIn`;

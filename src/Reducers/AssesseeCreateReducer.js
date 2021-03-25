@@ -17,9 +17,7 @@ import {
   SET_ASSESSEE_SECONDARY_POPUP,
   UPDATE_ASSESSEE_COMMUNICATION,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  SET_ASSESSEE_INFORMATION_DATA,
-  ASSESSEE_REVIEW_DISTINCT_DATA,
-  SET_REQUEST_OBJECT
+  SET_ASSESSEE_INFORMATION_DATA
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -56,7 +54,6 @@ const initialState = {
   tempCommunication: '',
   assesseeInformationData: null,
   assesseeReviewListDistinctData: [],
-  assesseeReviewListReqObj: null,
   secondaryPopUpOptions: {
     create: ASSESSEE_REVIEW_REVISE_POPUP,
     review: REVIEW_POPUP_OPTIONS,
@@ -275,18 +272,6 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         assesseeInformationData: action.payload
-      };
-    case ASSESSEE_REVIEW_DISTINCT_DATA:
-      return {
-        ...istate,
-        assesseeReviewListDistinctData: [...istate.assesseeReviewListDistinctData, ...action.payload]
-        // assesseeReviewListDistinctData: action.payload
-      };
-    case SET_REQUEST_OBJECT:
-      return {
-        ...istate,
-        assesseeReviewListReqObj: action.payload,
-        assesseeReviewListDistinctData:[]
       };
     case CLEAR_ASSESSEE_INFO:
       return initialState;

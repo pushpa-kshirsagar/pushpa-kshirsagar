@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isMobile } from 'react-device-detect';
-import { GET_USER_SAGA } from '../../actionType';
+import { CLEAR_ASSESSEE_INFO, CLEAR_ASSESSMENT_INFO, CLEAR_ASSIGNMENT_INFO, CLEAR_ASSOCIATE_INFO, CLEAR_IGAUGE_REDUCER, GET_USER_SAGA, POPUP_CLOSE } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
 import DisplayPaneOne from '../../Organisms/DisplayPaneOne/DisplayPaneOne';
@@ -21,7 +21,7 @@ const DisplayPageOne = () => {
   const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
   const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
-  const { mobilePanestate } = useSelector((state) => state.DisplayPaneReducer);
+  const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const isExamMode = false;
@@ -53,7 +53,7 @@ const DisplayPageOne = () => {
   useEffect(() => {
     dispatch({ type: GET_USER_SAGA });
   }, [dispatch]);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const userName =
     selectedAssociateInfo &&
     selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
@@ -61,7 +61,14 @@ const DisplayPageOne = () => {
       selectedAssociateInfo.assesseeInformation.assesseeNameLast;
   const userEmail =
     selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
-
+  const popupAllClose = () =>{
+    dispatch({ type: CLEAR_ASSESSEE_INFO });
+    dispatch({ type: CLEAR_ASSESSMENT_INFO });
+    dispatch({ type: POPUP_CLOSE });
+    dispatch({ type: CLEAR_ASSOCIATE_INFO });
+    dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+    dispatch({ type: CLEAR_IGAUGE_REDUCER });
+  }
   return (
     <>
       <HeaderZero userName={userName} userEmail={userEmail} />
@@ -73,7 +80,7 @@ const DisplayPageOne = () => {
         {isMobile ? (
           <div className="display-pane-container">
             {mobilePanestate === 'displayPaneOne' && <DisplayPaneOne />}
-            {mobilePanestate === 'displayPaneTwo' && <DisplayPaneTwo />}
+            {mobilePanestate === 'displayPaneTwo' && <DisplayPaneTwo popupAllClose={popupAllClose} />}
             {mobilePanestate === 'displayPaneThree' && <DisplayPaneThree />}
             {mobilePanestate === 'displayPaneFour' && <DisplayPaneFour />}
             {mobilePanestate === 'displayPaneFive' && <DisplayPaneFive />}
@@ -96,7 +103,7 @@ const DisplayPageOne = () => {
                   {/* <button onClick={changeUserName}>Change Username</button> */}
                 </div>
                 <div className="display-pane-container">
-                  <DisplayPaneTwo />
+                  <DisplayPaneTwo popupAllClose={popupAllClose} />
                 </div>
                 <div className="display-pane-container">
                   <DisplayPaneThree />

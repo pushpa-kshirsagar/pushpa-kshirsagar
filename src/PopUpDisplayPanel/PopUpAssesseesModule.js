@@ -33,7 +33,7 @@ const PopUpAssesseesModule = (props) => {
     isBackToSectionPopUp,
     assesseesPopUpActive
   } = useSelector((state) => state.AssesseeCreateReducer);
-  const { countPage } = useSelector((state) => state.DisplayPaneReducer);
+  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;

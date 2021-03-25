@@ -1,4 +1,4 @@
-import { SET_MIDDLEPANE_STATE, SET_SELECTED_ASSOCIATE, SET_SCAN_POPUP_STATE, SET_PAGE_COUNT, SET_MOBILE_PANE_STATE } from '../actionType';
+import { SET_MIDDLEPANE_STATE, SET_SELECTED_ASSOCIATE, SET_SCAN_POPUP_STATE, SET_PAGE_COUNT, SET_MOBILE_PANE_STATE, REVIEWLIST_DISTINCT_DATA, SET_REQUEST_OBJECT } from '../actionType';
 
 const initialState = {
   assesseeSignInUse: 'simplesample@gmail.com',
@@ -18,10 +18,12 @@ const initialState = {
   countPage:20,
   scanCount: null,
   showMiddlePaneState:false,
-  mobilePanestate:'displayPaneOne'
+  mobilePanestate:'displayPaneOne',
+  reviewListDistinctData:[],
+  reviewListReqObj:null
 };
 
-const DisplayPaneReducer = (istate = initialState, action) => {
+const DisplayPaneTwoReducer = (istate = initialState, action) => {
   console.log('IN USER REDUCER====>', action);
   switch (action.type) {
     case SET_MIDDLEPANE_STATE:
@@ -58,9 +60,20 @@ const DisplayPaneReducer = (istate = initialState, action) => {
         ...istate,
         mobilePanestate: action.payload
       };
+      case REVIEWLIST_DISTINCT_DATA:
+        return {
+          ...istate,
+          reviewListDistinctData: [...istate.reviewListDistinctData, ...action.payload]
+        };
+      case SET_REQUEST_OBJECT:
+        return {
+          ...istate,
+          reviewListReqObj: action.payload,
+          reviewListDistinctData:[]
+        };
     default:
       return istate;
   }
 };
 
-export default DisplayPaneReducer;
+export default DisplayPaneTwoReducer;

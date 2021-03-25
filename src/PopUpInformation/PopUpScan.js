@@ -30,7 +30,7 @@ const PopUpScan = (props) => {
     typeOfMiddlePaneList,
     countPage,
     middlePaneHeaderBadgeTwo
-  } = useSelector((state) => state.DisplayPaneReducer);
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isActive = true } = props;
   const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
   const [state, setState] = useState({
@@ -45,31 +45,33 @@ const PopUpScan = (props) => {
   };
   const handleClick = () => {
     /*according to seacrh will change*/
-    if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
-      console.log(typeOfMiddlePaneList);
-      let requestObect = makeAssesseeScanRequestObject(
-        middlePaneHeaderBadgeTwo,
-        0,
-        countPage,
-        state.scanValue
-      );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-      dispatch({
-        type: ASSESSEE_REVIEW_DISTINCT_SAGA,
-        payload: {
-          request: requestObect,
-          BadgeOne: 'distinct',
-          BadgeTwo: middlePaneHeaderBadgeTwo
-        }
-      });
-      dispatch({ type: ASSESSEE_INFO_CREATE });
-      document.getElementById('middleComponentId').scrollTop = '0px';
+    if(state.scanValue !== ''){
+      if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
+        let requestObect = makeAssesseeScanRequestObject(
+          middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: 'distinct',
+            BadgeTwo: middlePaneHeaderBadgeTwo
+          }
+        });
+        dispatch({ type: ASSESSEE_INFO_CREATE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
+        console.log(typeOfMiddlePaneList);
+      }
     }
-    if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
-      console.log(typeOfMiddlePaneList);
-    }
+   
     dispatch({ type: POPUP_CLOSE });
   };
   return (

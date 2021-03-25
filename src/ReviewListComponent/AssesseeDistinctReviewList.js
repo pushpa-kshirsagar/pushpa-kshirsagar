@@ -4,8 +4,10 @@ import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
+  GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_OPEN,
+  SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT
@@ -15,22 +17,27 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
-import { ASSOCIATE_CARD_POPUP_OPTION } from '../PopUpConfig';
+import { REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
 const AssesseeDistinctReviewList = (props) => {
+  const {popupAllClose} = props;
   const dispatch = useDispatch();
-  const {
-    assesseeReviewListReqObj,
-    assesseeReviewListDistinctData,
-    secondaryOptionCheckValue,
-    countPage
-  } = useSelector((state) => state.AssesseeCreateReducer);
-  const { numberPage, scanCount, middlePaneHeaderBadgeOne } = useSelector(
-    (state) => state.DisplayPaneReducer
+  const { secondaryOptionCheckValue, countPage } = useSelector(
+    (state) => state.AssesseeCreateReducer
   );
+  const {
+    numberPage,
+    scanCount,
+    middlePaneHeaderBadgeOne,
+    reviewListDistinctData,
+    reviewListReqObj
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
+  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
 
   const onClickReviewList = (e) => {};
   const [isFetching, setIsFetching] = useState(false);
+  const [assesseeTag, setAssesseeTag] = useState('');
   useEffect(() => {
     document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
   }, []);
@@ -45,9 +52,9 @@ const AssesseeDistinctReviewList = (props) => {
     console.log(isFetching);
   };
   const fetchData = async () => {
-    if (assesseeReviewListDistinctData.length < scanCount) {
+    if (reviewListDistinctData.length < scanCount) {
       let obj = {
-        ...assesseeReviewListReqObj,
+        ...reviewListReqObj,
         numberPage: numberPage
       };
       dispatch({
@@ -62,7 +69,7 @@ const AssesseeDistinctReviewList = (props) => {
     }
   };
   useEffect(() => {
-    console.log(assesseeReviewListDistinctData);
+    console.log(reviewListDistinctData);
     if (!isFetching) return;
     fetchMoreListItems();
   }, [isFetching]);
@@ -108,24 +115,57 @@ const AssesseeDistinctReviewList = (props) => {
     { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
   ];
-  const openAssesseeListPopup = (e) =>{
-    console.log(e.currentTarget.getAttribute('tag'))
+  const openAssesseeListPopup = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: "assessee",
+        popupHeaderOne: 'assessee',
         popupHeaderOneBadgeOne: '',
-        isPopUpValue: "",
+        isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_CARD_POPUP_OPTION
+        popupContentArrValue: REVIEW_LIST_POPUP_OPTION,
+        selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });
-    dispatch({type:POPUP_OPEN,payload:'middlePaneListPopup'})
-  }
+    dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+  };
+  const openAssesseeRightPaneInformation = () => {
+    console.log(selectedTagValue)
+    dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ASSESSEE_INFO_SAGA,
+        payload: {
+          assesseeId: '0123456',
+          associateId: '0654321',
+          filter: 'true',
+          searchCondition: 'AND',
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'id',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: selectedTagValue?selectedTagValue:"6054a4d6cb14fb2075aeec87"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+      popupAllClose();
+    }
   return (
     <div>
-      {assesseeReviewListDistinctData &&
-        assesseeReviewListDistinctData.map((item, index) => {
+      {reviewListDistinctData &&
+        reviewListDistinctData.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -165,6 +205,10 @@ const AssesseeDistinctReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
+      <PopUpMiddlePaneList
+        isActive={isPopUpValue === 'middlePaneListPopup'}
+        onClickInformation={openAssesseeRightPaneInformation}
+      />
     </div>
   );
 };

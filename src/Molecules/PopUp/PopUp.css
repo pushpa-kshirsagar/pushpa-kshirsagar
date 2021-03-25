@@ -152,6 +152,16 @@
   /* height: 50px; */
   background-color: #00afff !important;
 }
+.titleSolid-displayPaneCentreprimary {
+  display: flex;
+  /* height: 50px; */
+  background-color: #00afff !important;
+}
+.titleSolid-displayPaneCentresecondary {
+  display: flex;
+  /* height: 50px; */
+  background-color: #66CFFF !important;
+}
 .titleSolid-genericTwo {
   display: flex;
   /* height: 50px; */
@@ -384,12 +394,16 @@
       backgroundColor:'#3f3f3f00'
   } */
 }
-,
+.MuiDialog-paperScrollPaper > div {
+  top: 74px;
+}
 .MuiDialog-paperScrollPaper {
   display: flex;
-  position: fixed !important;
+  /* position: fixed !important; */
   max-height: calc(100% - 64px);
   flex-direction: column;
+  /* margin: 0px !important; */
+
 }
 @media (max-width: 360px) {
   .popupContent {
@@ -397,5 +411,8 @@
   }
   .textsheetPopupContent {
     width: calc(100vw - 64px);
+  }
+  .MuiDialog-paper{
+    margin: 0px !important;
   }
 }
