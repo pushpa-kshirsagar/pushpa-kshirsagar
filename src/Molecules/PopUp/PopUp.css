@@ -163,19 +163,19 @@
   background-color: #b1de84;
   color: rgba(0, 0, 0, 0.87);
 }
-.aliasName{
-  font-size:1.2rem  !important;
-  color:#2b21218a !important;
+.aliasName {
+  font-size: 1.2rem !important;
+  color: #2b21218a !important;
 }
-.SMainContainer{
+.SMainContainer {
   display: flex;
   margin: 0 0 0px;
   padding: 0 10px 10px;
   border: 1px solid;
-  border-color:transparent;
-  border-top:0;
+  border-color: transparent;
+  border-top: 0;
 }
-.SMainContainer label{
+.SMainContainer label {
   font-size: 1.6rem;
   color: #808080;
 }
@@ -313,7 +313,7 @@
 }
 .helptextmargin {
   margin-top: 5.5px !important;
-  margin-left: 5px !important;
+  /* margin-left: 5px !important; */
   margin-bottom: 5px !important;
 }
 .contFlex {

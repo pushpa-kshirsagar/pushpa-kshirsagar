@@ -181,7 +181,7 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOne: 'tag',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'secondary',
+          labelTextOneOneBadge: 'statutory',
           textOne: 'No Information'
         }
       ],
