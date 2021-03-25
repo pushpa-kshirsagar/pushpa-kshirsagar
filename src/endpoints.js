@@ -19,9 +19,7 @@ export const ASSESSEE_REVIEW_LIST_URL =
 export const ASSESSEE_REVIEW_INFO_URL =
   'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/review';
 export const ASSOCIATE_REVIEW_INFO_URL =
-  'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-distinct/review';
-export const ASSOCIATE_REVIEW_LIST_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-distinct/review-list';
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-distinct/review';
 export const ASSESSEE_ROLE_REVIEW_LIST_URL =
   'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role-distinct/review-list';
 export const ASSOCIATE_REVIEWDISTINCT_LIST_URL =
