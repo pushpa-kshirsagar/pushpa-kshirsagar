@@ -161,25 +161,25 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseSecondaryOptionCheckValue = 'unread';
     }
     if (clickValue === 'information' && popupHeaderOne === 'associate') {
-      console.log('+++++++++++++++++++++++++++++++++++++++++++++++++')
+      console.log('+++++++++++++++++++++++++++++++++++++++++++++++++');
       dispatch({ type: LOADER_START });
       dispatch({
         type: GET_ASSOCIATE_INFO_SAGA,
         payload: {
           assesseeId: '0123456',
-          associateId: '0654321',
-          filter: 'true',
+          associateId: '605255729d3c823d3964e0ec',
+          filter: true,
           search: [
             {
               condition: 'and',
               searchBy: [
                 {
-                  dataType: 'id',
+                  dataType: 'String',
                   conditionColumn: 'id',
                   conditionValue: {
                     condition: 'eq',
                     value: {
-                      from: '88sd9s824s234'
+                      from: '605255729d3c823d3964e0ec'
                     }
                   }
                 }

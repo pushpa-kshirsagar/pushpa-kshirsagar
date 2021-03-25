@@ -64,7 +64,7 @@ const HeaderCard = (props) => {
           ].join(' ')}
         >
           <div className={'iguru-componentinnerdiv'}>
-            {showMiddlePaneState &&  <div className={'iguru-moretextpanelheader'}>
+           <div className={'iguru-moretextpanelheader'}>
               <div>
                 <span>{headerOne}</span>&nbsp;
                 {headerOneBadgeOne !== '' ? (
@@ -92,7 +92,7 @@ const HeaderCard = (props) => {
                   </Fragment>
                 ) : null}
               </div>
-            </div>}
+            </div>
 
             <Fragment>
               <div className={'iguru-iconbox'}>

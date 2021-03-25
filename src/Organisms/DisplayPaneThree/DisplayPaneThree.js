@@ -13,24 +13,43 @@ import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import './DisplayPaneThree.css';
 import DisplayPaneThreeSectionOne from '../../Molecules/DisplayPaneThreeSectionOne/DisplayPaneThreeSectionOne';
 import DisplayPaneThreeSectionTwo from '../../Molecules/DisplayPaneThreeSectionTwo/DisplayPaneThreeSectionTwo';
+import DisplayPaneThreeSectionOneAssociate from '../../Molecules/DisplayPaneThreeSectionOneAssociate/DisplayPaneThreeSectionOneAssociate';
+import DisplayPaneThreeSectionTwoAssociate from '../../Molecules/DisplayPaneThreeSectionTwoAssociate/DisplayPaneThreeSectionTwoAssociate';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
-  const rightPaneSections = [
+  const rightPaneSectionsAssessee = [
     {
       id: 'section1',
       sectionComponent: DisplayPaneThreeSectionOne,
-      displayPaneLeftHeaderText: 'dashboard',
+      displayPaneLeftHeaderText: '',
       displayPaneLeftBadgeText: ''
     },
     {
       id: 'section2',
       sectionComponent: DisplayPaneThreeSectionTwo,
-      displayPaneLeftHeaderText: 'iGuru',
-      displayPaneLeftBadgeText: 'analytics'
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
     }
   ];
-  const [selectedSection, setSelectedSection] = useState(rightPaneSections[0]);
+  const rightPaneSectionsAssociate = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssociate,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssociate,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
+  const [selectedSection, setSelectedSection] = useState(rightPaneSectionsAssessee[0]);
+  const [selectedSectionAssociate, setSelectedSectionAssociate] = useState(
+    rightPaneSectionsAssociate[0]
+  );
   const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
   const onClickFooter = (e) => {
     dispatch({ type: NAVIGATOR_MODE });
@@ -72,7 +91,7 @@ export const DisplayPaneThree = () => {
           onClickClearInfo={onClickClearInfo}
         />
       </div>
-      {isReviewRevise && responseObject && informationBasic && (
+      {isReviewRevise && responseObject && headerOne === 'assessee' && (
         <>
           <div style={{ padding: '2.5px' }}>
             <div style={{ padding: '2.5px' }}>
@@ -89,7 +108,7 @@ export const DisplayPaneThree = () => {
               />
             </div>
             <Sections
-              listSections={rightPaneSections}
+              listSections={rightPaneSectionsAssessee}
               selectedSection={selectedSection}
               setSelectedSection={setSelectedSection}
             />
@@ -101,6 +120,37 @@ export const DisplayPaneThree = () => {
             primaryIcon={primaryIcon}
             secondaryIcon={secondaryIcon}
           />
+        </>
+      )}
+      {isReviewRevise && responseObject && headerOne === 'associate' && (
+        <>
+          <div style={{ padding: '2.5px' }}>
+            <div style={{ padding: '2.5px' }}>
+              <BasicCard
+                isAlertActive
+                isFlagActive
+                className=""
+                labelTextOneOne="name"
+                labelTextOneTwo="description"
+                textOneOne={informationBasic.associateName || 'No Information'}
+                textOneTwo={informationBasic.associateDescription || 'No Information'}
+                isVerifiedActiveName={false}
+                isVerifiedActivePicture={false}
+              />
+            </div>
+            <Sections
+              listSections={rightPaneSectionsAssociate}
+              selectedSection={selectedSectionAssociate}
+              setSelectedSection={setSelectedSectionAssociate}
+            />
+          </div>
+          {/* <FooterIconTwo
+            FilterModeEnable={navigatorIcon}
+            FilterMode={FilterMode}
+            onClick={onClickFooter}
+            primaryIcon={primaryIcon}
+            secondaryIcon={secondaryIcon}
+          /> */}
         </>
       )}
     </>
