@@ -181,3 +181,49 @@ export const makeAssesseeScanRequestObject = (filterKey, numberPage, countPage, 
 
   return regObj;
 };
+
+export const makeAssociateReviewListRequestObject = (filterKey, numberPage, countPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
+        }
+      };
+    }
+  }
+  let regObj = {
+    assesseeId: '0123456',
+    associateId: '605091f81edc573048fb467a',
+    countPage: countPage,
+    numberPage: numberPage,
+    filter: 'true',
+    orderBy: {
+      columnName:
+        'informationBasic.associateName',
+      order: 'asc'
+    },
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+
+  return regObj;
+};

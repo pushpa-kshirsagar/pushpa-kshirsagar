@@ -51,6 +51,7 @@ const initialState = {
   gridColumnCountValue: 0,
   secondaryOptionCheckValue: '',
   whichReviewList: '',
+  selectedTagValue:'',
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
     archive: ARCHIVE_POPUP,
@@ -131,7 +132,9 @@ const PopUpReducer = (istate = initialState, action) => {
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne,
         popupHeaderOneBadgeTwo: action.payload.popupHeaderOneBadgeTwo,
         secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue,
-        popupMode: action.payload.popupMode
+        popupMode: action.payload.popupMode,
+        selectedTagValue: action.payload.selectedTagValue
+        
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
       return {

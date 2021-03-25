@@ -12,7 +12,7 @@ const PopUpMiddlePaneList = (props) => {
   );
 
   const dispatch = useDispatch();
-  const { headerPanelColour = 'displayPaneCentre', isActive } = props;
+  const { headerPanelColour = 'displayPaneCentre', isActive, onClickInformation=null } = props;
   const setSecondaryOptionValue = (e) => {
     
   };
@@ -20,7 +20,7 @@ const PopUpMiddlePaneList = (props) => {
     console.log(e.currentTarget.getAttribute('data-value'));
     let clickVal = e.currentTarget.getAttribute('data-value');
     if(clickVal === 'information'){
-      
+      onClickInformation();
     }
     dispatch({
       type: SET_MIDDLEPANE_SECONDARY_OPTION,

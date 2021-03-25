@@ -4,8 +4,10 @@ import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
+  GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_OPEN,
+  SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT
@@ -16,7 +18,9 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
 import { REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
 const AssesseeDistinctReviewList = (props) => {
+  const {popupAllClose} = props;
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
@@ -29,9 +33,11 @@ const AssesseeDistinctReviewList = (props) => {
     reviewListReqObj
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
+  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
 
   const onClickReviewList = (e) => {};
   const [isFetching, setIsFetching] = useState(false);
+  const [assesseeTag, setAssesseeTag] = useState('');
   useEffect(() => {
     document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
   }, []);
@@ -118,11 +124,44 @@ const AssesseeDistinctReviewList = (props) => {
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: REVIEW_LIST_POPUP_OPTION
+        popupContentArrValue: REVIEW_LIST_POPUP_OPTION,
+        selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  const openAssesseeRightPaneInformation = () => {
+    console.log(selectedTagValue)
+    dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ASSESSEE_INFO_SAGA,
+        payload: {
+          assesseeId: '0123456',
+          associateId: '0654321',
+          filter: 'true',
+          searchCondition: 'AND',
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'id',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: selectedTagValue?selectedTagValue:"6054a4d6cb14fb2075aeec87"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+      popupAllClose();
+    }
   return (
     <div>
       {reviewListDistinctData &&
@@ -166,6 +205,10 @@ const AssesseeDistinctReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
+      <PopUpMiddlePaneList
+        isActive={isPopUpValue === 'middlePaneListPopup'}
+        onClickInformation={openAssesseeRightPaneInformation}
+      />
     </div>
   );
 };

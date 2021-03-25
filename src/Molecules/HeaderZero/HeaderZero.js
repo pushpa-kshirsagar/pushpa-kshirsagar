@@ -9,15 +9,20 @@ import IconsButton from '../IconButton/IconButton';
 // import prafulta from '../../images/prafulta.jpg';
 // import insightGURULogo from '../../images/prafulta.jpg';
 import './HeaderZero.css';
+import { useDispatch } from 'react-redux';
+import { SET_MOBILE_PANE_STATE } from '../../actionType';
 
 export const HeaderZero = (props) => {
   // const insightGURULogo = require('../../images/prafulta.jpg');
   const { userName = '', userEmail = '', isImageActive = false } = props;
   const isBespoke = true;
+  const dispatch = useDispatch();
   const iguruBrandLogo = './Image/logo-04.jpeg'; //'./Image/logo-03.jpeg'
   // const iguruMainLogo = isBespoke ? './Image/client-logo.jpeg' : './Image/main-logo.jpeg';
   const iguruMainLogo = './Image/main-logo.jpeg';
-
+  const onClickLogo = () =>{
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
+  }
   return (
     <div className="header-container">
       {!isMobile ? (
@@ -117,7 +122,7 @@ export const HeaderZero = (props) => {
               style={{ padding: '0 5px', width: '100%', boxSizing: 'border-box', display: 'flex' }}
             >
               <div style={{ flex: '4' }}>
-                <div className="logo-container">
+                <div className="logo-container" onClick={onClickLogo}>
                   <img className="logo-img" src={iguruMainLogo} alt="iGuru logo" />
                 </div>
               </div>

@@ -399,9 +399,11 @@
 }
 .MuiDialog-paperScrollPaper {
   display: flex;
-  position: fixed !important;
+  /* position: fixed !important; */
   max-height: calc(100% - 64px);
   flex-direction: column;
+  /* margin: 0px !important; */
+
 }
 @media (max-width: 360px) {
   .popupContent {
@@ -409,5 +411,8 @@
   }
   .textsheetPopupContent {
     width: calc(100vw - 64px);
+  }
+  .MuiDialog-paper{
+    margin: 0px !important;
   }
 }
