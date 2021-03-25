@@ -259,11 +259,11 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationEngagement.assesseeTag.assesseeTagPrimary || 'No Information'
+          textOne: informationEngagement?.assesseeTag?.assesseeTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationEngagement.assesseeTag.assesseeTagSecondary || 'No Information'
+          textOne: informationEngagement?.assesseeTag?.assesseeTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -277,12 +277,12 @@ const DisplayPaneThreeSectionOne = () => {
         {
           labelTextOneOneBadge: 'start',
           textOne:
-            informationEngagement.assesseeTenure.assesseeTenureDateTimeStart || 'No Information'
+            informationEngagement?.assesseeTenure?.assesseeTenureDateTimeStart || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
           textOne:
-            informationEngagement.assesseeTenure.assesseeTenureDateTimeEnd || 'No Information'
+            informationEngagement?.assesseeTenure?.assesseeTenureDateTimeEnd || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -294,7 +294,7 @@ const DisplayPaneThreeSectionOne = () => {
     {
       id: 'a1',
       labelTextOneOne: 'sign-in',
-      textOneOne: informationSetup.assesseeSignInCredential || 'No Information',
+      textOneOne: informationSetup?.assesseeSignInCredential || 'No Information',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
