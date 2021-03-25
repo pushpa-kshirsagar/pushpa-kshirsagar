@@ -17,11 +17,12 @@ const PopUpReviewList = (props) => {
   const {
     isActive,
     errorMsg = '',
-    primaryheader = 'primary',
+    inputHeaderBadge = 'primary',
     inputHeader = 'node',
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
     headerOneBadgeOne = 'information',
+    infoMsg='select one or more',
     ListData = [
       { name: 'Simple Sample 01', description: '01' },
       { name: 'Simple Sample 02', description: '02' },
@@ -51,12 +52,12 @@ const PopUpReviewList = (props) => {
               <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
                 <Fragment>
                   {inputHeader}&nbsp;
-                  {primaryheader ? <span className={'headerBadge'}>{primaryheader}</span> : null}
+                  {inputHeaderBadge ? <span className={'headerBadge'}>{inputHeaderBadge}</span> : null}
                 </Fragment>
               </InputLabel>
               <div className={'infoSymbol'}></div>
               <div className={'infoSymbol'}>
-                <InfoToolTip message="Click me, I will stay visible until you click outside." />
+                <InfoToolTip message={infoMsg} />
               </div>
             </div>
           </div>

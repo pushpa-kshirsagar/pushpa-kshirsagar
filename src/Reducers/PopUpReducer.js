@@ -38,6 +38,7 @@ const initialState = {
   prevPopUpValue: '',
   popupMode: '',
   popupHeaderOne: '',
+  primaryArrOprion:[],
   previousPopupHeaderOne: '',
   popupHeaderOneBadgeOne: '',
   popupHeaderOneBadgeTwo: '',
@@ -127,6 +128,7 @@ const PopUpReducer = (istate = initialState, action) => {
         isPopUpValue: action.payload.isPopUpValue,
         popupOpenType: action.payload.popupOpenType,
         popupContentArrValue: action.payload.popupContentArrValue,
+        primaryArrOprion: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
         previousPopupHeaderOne: action.payload.previousPopupHeaderOne || '',
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne,
@@ -161,7 +163,7 @@ const PopUpReducer = (istate = initialState, action) => {
         } else {
           return {
             ...istate,
-            popupHeaderOne: 'assessees',
+            popupHeaderOne: istate.popupHeaderOne,
             isPopUpOpen: true,
             popupHeaderOneBadgeOne: action.payload,
             popupOpenType: 'secondary',
@@ -183,7 +185,7 @@ const PopUpReducer = (istate = initialState, action) => {
       } else if (istate.popupOpenType === 'secondary') {
         return {
           ...istate,
-          popupContentArrValue: istate.popupHeaderOne==='assessee' ?REVIEW_LIST_POPUP_OPTION :TRIPPLE_DOT_POPUP_OPTION,
+          popupContentArrValue: istate.primaryArrOprion,
           popupHeaderOneBadgeOne: '',
           popupOpenType: 'primary'
         };

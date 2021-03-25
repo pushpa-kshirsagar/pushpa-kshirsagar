@@ -13,6 +13,7 @@ const FilterReducer = (istate = initialState, action) => {
       return {
         ...istate,
         FilterMode: action.payload.FilterMode,
+        FilterModeEnable:true
       };
       case FILTERMODE_ENABLE:
         return {

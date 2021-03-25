@@ -9,6 +9,7 @@ import { FilterList } from '@material-ui/icons';
 import AssesseeRelatedAssociateReviewList from '../../ReviewListComponent/AssesseeRelatedAssociateReviewList';
 import AssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReviewList';
 import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
+import AssociateDistinctReviewList from '../../ReviewListComponent/AssociateDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const {popupAllClose} = props;
@@ -378,7 +379,7 @@ export const DisplayPaneTwo = (props) => {
     scanCount,
     showMiddlePaneState
   } = useSelector((state) => state.DisplayPaneTwoReducer);
- 
+  
   return (
     <div>
       <div>
@@ -408,6 +409,7 @@ export const DisplayPaneTwo = (props) => {
           <AssesseeRelatedAssociateReviewList />
         )}
         {typeOfMiddlePaneList === 'assesseeDistinctReviewList' && <AssesseeDistinctReviewList popupAllClose={popupAllClose}/>}
+        {typeOfMiddlePaneList === 'associateDistinctReviewList' && <AssociateDistinctReviewList popupAllClose={popupAllClose}/>}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
           tempAssociateList.map((associate, index) => {

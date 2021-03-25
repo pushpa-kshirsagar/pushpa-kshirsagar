@@ -5,21 +5,24 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { SET_MIDDLEPANE_PREVIOUS_POPUP, SET_MIDDLEPANE_SECONDARY_OPTION, SET_SECONDARY_OPTION_VALUE } from '../actionType';
+import {
+  SET_MIDDLEPANE_PREVIOUS_POPUP,
+  SET_MIDDLEPANE_SECONDARY_OPTION,
+  SET_SECONDARY_OPTION_VALUE
+} from '../actionType';
 const PopUpMiddlePaneList = (props) => {
+  
   const { popupHeaderOne, popupHeaderOneBadgeOne, popupOpenType } = useSelector(
     (state) => state.PopUpReducer
   );
 
   const dispatch = useDispatch();
-  const { headerPanelColour = 'displayPaneCentre', isActive, onClickInformation=null } = props;
-  const setSecondaryOptionValue = (e) => {
-    
-  };
+  const { headerPanelColour = 'displayPaneCentre', isActive, onClickInformation = null } = props;
+  const setSecondaryOptionValue = (e) => {};
   const ChangeOptionPopup = (e) => {
     console.log(e.currentTarget.getAttribute('data-value'));
     let clickVal = e.currentTarget.getAttribute('data-value');
-    if(clickVal === 'information'){
+    if (clickVal === 'information') {
       onClickInformation();
     }
     dispatch({
@@ -29,7 +32,6 @@ const PopUpMiddlePaneList = (props) => {
   };
   const BackHandlerEvent = (e) => {
     dispatch({ type: SET_MIDDLEPANE_PREVIOUS_POPUP });
-    
   };
   return (
     <div>

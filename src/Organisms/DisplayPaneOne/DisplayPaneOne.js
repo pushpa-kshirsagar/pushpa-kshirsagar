@@ -137,7 +137,7 @@ export const DisplayPaneOne = () => {
   return (
     <>
       <div>
-        <HeaderCard
+        <HeaderCard 
           className=""
           displayPane="left"
           headerOne={selectedSection.displayPaneLeftHeaderText}

@@ -7,11 +7,11 @@ import {
   SET_MIDDLEPANE_STATE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA
 } from '../../actionType';
-import { ASSOCIATE_REVIEW_LIST_URL } from '../../endpoints';
+import { ASSOCIATE_REVIEWDISTINCT_LIST_URL } from '../../endpoints';
 
 const associatesReviewListDistinctApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSOCIATE_REVIEW_LIST_URL;
+  let URL = ASSOCIATE_REVIEWDISTINCT_LIST_URL;
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
@@ -30,12 +30,12 @@ function* workerReviewListAssociateSaga(data) {
     yield put({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'assessees',
+        middlePaneHeader: 'associates',
         middlePaneHeaderBadgeOne: data.payload.BadgeOne,
         middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assesseeDistinctReviewList',
+        typeOfMiddlePaneList: 'associateDistinctReviewList',
         scanCount: userResponse && userResponse.countTotal,
         showMiddlePaneState: true
       }

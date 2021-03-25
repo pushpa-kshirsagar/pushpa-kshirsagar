@@ -189,6 +189,22 @@ export const makeAssociateReviewListRequestObject = (filterKey, numberPage, coun
       from: filterKey.toUpperCase()
     }
   };
+  if(filterKey === 'active'){
+    searchObj ={
+      condition: 'eq',
+    value: {
+      from: 'CONFIRMED'
+    }
+    }
+  }
+  if(filterKey === 'inactive'){
+    searchObj ={
+      condition: 'in',
+    value: {
+      in: ['DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
+    }
+    }
+  }
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -227,3 +243,122 @@ export const makeAssociateReviewListRequestObject = (filterKey, numberPage, coun
 
   return regObj;
 };
+
+export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage, searchStr) =>{
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if(filterKey === 'active'){
+    searchObj ={
+      condition: 'eq',
+    value: {
+      from: 'CONFIRMED'
+    }
+    }
+  }
+  if(filterKey === 'inactive'){
+    searchObj ={
+      condition: 'in',
+    value: {
+      in: ['DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
+    }
+    }
+  }
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
+        }
+      };
+    }
+  }
+  let regObj = {
+    assesseeId: '0123456',
+    associateId: '605091f81edc573048fb467a',
+    countPage: countPage,
+    numberPage: numberPage,
+    filter: 'true',
+    orderBy: {
+      columnName:
+        'informationBasic.associateName',
+      order: 'asc'
+    },
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      },
+    ]
+  };
+
+  return regObj;
+}
+export const makeAssesseeRoleObj = () =>{
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeRole',
+      order: 'asc'
+    },
+    numberPage: 0,
+    countPage: 25,
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: 'ACTIVE'
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+}
