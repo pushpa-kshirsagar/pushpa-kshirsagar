@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
+  ASSOCIATE_POPUP_CLOSE,
+  ASSOCIATE_REVIEW_DISTINCT_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_NEXT_POPUP,
@@ -18,7 +20,7 @@ import {
 } from '../actionType';
 import PropTypes from 'prop-types';
 import { FormHelperText, Input, InputLabel } from '@material-ui/core';
-import { makeAssesseeScanRequestObject } from '../Actions/GenericActions';
+import { makeAssesseeScanRequestObject, makeAssociateScanRequestObject } from '../Actions/GenericActions';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
@@ -45,7 +47,7 @@ const PopUpScan = (props) => {
   };
   const handleClick = () => {
     /*according to seacrh will change*/
-    if(state.scanValue !== ''){
+    if (state.scanValue !== '') {
       if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
         let requestObect = makeAssesseeScanRequestObject(
           middlePaneHeaderBadgeTwo,
@@ -67,11 +69,32 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSESSEE_INFO_CREATE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
+      if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
+        let requestObect = makeAssociateScanRequestObject(
+          middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: 'distinct',
+            BadgeTwo: middlePaneHeaderBadgeTwo
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
       if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
         console.log(typeOfMiddlePaneList);
       }
     }
-   
+
     dispatch({ type: POPUP_CLOSE });
   };
   return (
@@ -104,9 +127,10 @@ const PopUpScan = (props) => {
               {isPopUpValue === 'assesseeDistinctReviewList' && (
                 <span>name, alias, email address, mobile telephone, tag.</span>
               )}
-              {isPopUpValue === 'assesseeRelatedAssociate' && (
-                <span>name, description, website address, tag.</span>
-              )}
+              {isPopUpValue === 'assesseeRelatedAssociate' ||
+                (isPopUpValue === 'associateDistinctReviewList' && (
+                  <span>name, description, website address, tag.</span>
+                ))}
             </FormHelperText>
           </FormControl>
         </DialogContent>

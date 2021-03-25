@@ -37,18 +37,16 @@ const PopUpSignOnAssociate = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (assesseeInfo.assesseeInformationData) {
-      console.log(popupMode)
-      if(popupMode === 'ASSOCIATE_SIGN_ON'){
+      console.log(popupMode);
+      if (popupMode === 'ASSOCIATE_SIGN_ON') {
         let path = `/signIn`;
         history.push(path);
-      }
-      else{
+      } else {
         dispatch({ type: CLEAR_ASSOCIATE_INFO });
         dispatch({ type: CLEAR_ASSESSEE_INFO });
         dispatch({ type: POPUP_CLOSE });
       }
     }
-    
   }, [assesseeInfo.assesseeInformationData, history]);
   const CreateApi = () => {
     const {
@@ -100,14 +98,21 @@ const PopUpSignOnAssociate = () => {
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    }
-    else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
+    } else if (isPopUpValue === 'EMAILSECONDARYPOPUP') {
       if (tempCommunication === '') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTCOMMUNICATION' } });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    } else {
+    } else if(isPopUpValue === 'PICTUREPOPUP') {
+      if(popupMode === 'ASSOCIATE_SIGN_ON'){
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
+      }
+      else{
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ASSESSEEROLELISTPOPUP' } });
+      }
+    }
+    else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
   };
@@ -165,7 +170,7 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
         inputHeader={'role'}
-        primaryheader={'primary'}
+        inputHeaderBadge={'primary'}
         nextPopUpValue={'WORKADDRESSPOPUP'}
       />
       <PopUpAddress
@@ -231,6 +236,17 @@ const PopUpSignOnAssociate = () => {
         nextPopUpValue={'EMAILPOPUP'}
         basicInfo={associateInfo.adminBasicInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_BASIC_INFO}
+        handleNextPopupValue={handleNextPopupValue}
+
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ASSESSEEROLELISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'administrator'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'role'}
+        inputHeaderBadge={'primary'}
+        nextPopUpValue={'EMAILPOPUP'}
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}

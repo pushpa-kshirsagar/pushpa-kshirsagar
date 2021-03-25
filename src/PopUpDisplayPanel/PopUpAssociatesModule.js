@@ -64,7 +64,7 @@ const PopUpAssociatesModule = (props) => {
         payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      // dispatch({ type: LOADER_START });
+      dispatch({ type: LOADER_START });
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
       dispatch({
         type: ASSOCIATE_REVIEW_DISTINCT_SAGA,

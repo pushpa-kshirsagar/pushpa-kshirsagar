@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Clear from '@material-ui/icons/Clear';
 
 import './HeaderCard.css';
-import { POPUP_OPEN, ASSESSEE_SIGN_ON, SET_POPUP_STATE } from '../../actionType';
+import { POPUP_OPEN, ASSESSEE_SIGN_ON, SET_POPUP_STATE, SET_SCAN_POPUP_STATE } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
 import { TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
 const HeaderCard = (props) => {
@@ -25,29 +25,16 @@ const HeaderCard = (props) => {
     showMiddlePaneState
   } = props;
   const dispatch = useDispatch();
-  const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { typeOfMiddlePaneList, middlePaneHeader } = useSelector((state) => state.DisplayPaneTwoReducer);
   const onClickScan = () => {
-    console.log('scan');
-    if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
-      dispatch({
-        type: 'SET_SCAN_POPUP_STATE',
-        payload: {
-          scanHeader: 'assessee',
-          scanHeaderBadgeOne: 'scan',
-          scanHeaderBadgeTwo: ''
-        }
-      });
-    }
-    if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
-      dispatch({
-        type: 'SET_SCAN_POPUP_STATE',
-        payload: {
-          scanHeader: 'associate',
-          scanHeaderBadgeOne: 'scan',
-          scanHeaderBadgeTwo: ''
-        }
-      });
-    }
+    dispatch({
+      type: SET_SCAN_POPUP_STATE,
+      payload: {
+        scanHeader: middlePaneHeader,
+        scanHeaderBadgeOne: 'scan',
+        scanHeaderBadgeTwo: ''
+      }
+    });
     dispatch({
       type: ASSESSEE_SIGN_ON,
       payload: { isPopUpValue: typeOfMiddlePaneList, popupMode: 'SCAN_POPUP_FUN' }
@@ -57,7 +44,7 @@ const HeaderCard = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessees',
+        popupHeaderOne: middlePaneHeader,
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -77,7 +64,7 @@ const HeaderCard = (props) => {
           ].join(' ')}
         >
           <div className={'iguru-componentinnerdiv'}>
-            <div className={'iguru-moretextpanelheader'}>
+            {showMiddlePaneState &&  <div className={'iguru-moretextpanelheader'}>
               <div>
                 <span>{headerOne}</span>&nbsp;
                 {headerOneBadgeOne !== '' ? (
@@ -105,7 +92,7 @@ const HeaderCard = (props) => {
                   </Fragment>
                 ) : null}
               </div>
-            </div>
+            </div>}
 
             <Fragment>
               <div className={'iguru-iconbox'}>

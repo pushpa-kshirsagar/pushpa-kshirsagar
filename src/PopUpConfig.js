@@ -698,6 +698,82 @@ export const REVIEW_LIST_POPUP_OPTION = [
   },
 
 ];
+export const ASSOCIATE_REVIEW_LIST_POPUP_OPTION = [
+  {
+    data: 'allocate',
+    dataValue: 'allocate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'archive',
+    dataValue: 'archive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'delete',
+    dataValue: 'delete',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'revise',
+    dataValue: 'revise',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'select',
+    dataValue: 'select',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'share',
+    dataValue: 'share',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'suspend',
+    dataValue: 'suspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'terminate',
+    dataValue: 'terminate',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+
+];
 
 export const ALLOCATE_POPUP =[
   {
@@ -899,12 +975,6 @@ export const TRIPPLE_DOT_POPUP_OPTION = [
     disabled: false
   },
   {
-    data: 'reset',
-    dataValue: 'reset',
-    optionClass: 'optionPrimary',
-    disabled: true
-  },
-  {
     data: 'review',
     dataValue: 'reviewDistinct',
     optionClass: 'optionPrimary',
@@ -931,13 +1001,6 @@ export const TRIPPLE_DOT_POPUP_OPTION = [
   {
     data: 'terminate',
     dataValue: 'terminate',
-    optionClass: 'optionPrimary',
-    divider: 'dark',
-    disabled: false
-  },
-  {
-    data: 'assignments',
-    dataValue: 'assignments',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false

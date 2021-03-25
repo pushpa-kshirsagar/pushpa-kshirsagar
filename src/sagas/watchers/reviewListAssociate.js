@@ -30,12 +30,12 @@ function* workerReviewListAssociateSaga(data) {
     yield put({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'assessees',
+        middlePaneHeader: 'associates',
         middlePaneHeaderBadgeOne: data.payload.BadgeOne,
         middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assesseeDistinctReviewList',
+        typeOfMiddlePaneList: 'associateDistinctReviewList',
         scanCount: userResponse && userResponse.countTotal,
         showMiddlePaneState: true
       }

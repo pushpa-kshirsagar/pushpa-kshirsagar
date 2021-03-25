@@ -29,6 +29,7 @@ import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import userPool from '../UserPool';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
+import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
 
 const PopUpSignOnAssessee = () => {
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
@@ -38,9 +39,9 @@ const PopUpSignOnAssessee = () => {
   const [nextPopUpValue, setNextPopUpValue] = useState('');
   const history = useHistory();
   useEffect(() => {
-    console.log(popupMode)
-    console.log(assesseeInfo.assesseeInformationData)
-    console.log("assesseeInformationData")
+    console.log(popupMode);
+    console.log(assesseeInfo.assesseeInformationData);
+    console.log('assesseeInformationData');
     if (assesseeInfo.assesseeInformationData) {
       if (popupMode === 'ASSESSEE_SIGN_ON') {
         let path = `/signIn`;
@@ -71,7 +72,7 @@ const PopUpSignOnAssessee = () => {
     let requestObect = {
       assesseeId: '0123456',
       associateId: '60520a349d66236bb84f8b1b',
-      associateName:"Boppo Technologies",
+      associateName: 'Boppo Technologies',
       assessee: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,
@@ -81,12 +82,12 @@ const PopUpSignOnAssessee = () => {
         informationSetup: informationSetup
       },
       associate: {
-        id: "60520a349d66236bb84f8b1b",
+        id: '60520a349d66236bb84f8b1b',
         informationBasic: {
-          associateName: "dsada",
+          associateName: 'dsada',
           associateNameVerification: false,
-          associateDescription: "asd",
-          associatePicture: "",
+          associateDescription: 'asd',
+          associatePicture: '',
           associatePictureVerification: false,
           associateFlag: null
         },
@@ -95,20 +96,20 @@ const PopUpSignOnAssessee = () => {
           associateAddressWebsite: null,
           associateAddressWebsiteVerification: false,
           associateAddressWorkPrimary: {
-            associateAddressCountryRegion: "91",
-            associateAddressProvinceState: "211",
-            associateAddressPostcode: "dasas",
-            associateAddressCity: "345",
-            associateAddress: "dasd",
+            associateAddressCountryRegion: '91',
+            associateAddressProvinceState: '211',
+            associateAddressPostcode: 'dasas',
+            associateAddressCity: '345',
+            associateAddress: 'dasd',
             associateAddressCommunication: false,
             associateAddressVerification: false
           },
           associateAddressWorkSecondary: null,
           associateTelephoneWorkPrimary: {
-            associateTelephoneCountryRegion: "91",
-            associateTelephoneAreaCity: "345",
-            associateTelephoneNumber: "ssad",
-            associateTelephoneExtension: "sad",
+            associateTelephoneCountryRegion: '91',
+            associateTelephoneAreaCity: '345',
+            associateTelephoneNumber: 'ssad',
+            associateTelephoneExtension: 'sad',
             associateTelephoneCommunication: false,
             associateTelephoneVerification: false
           },
@@ -116,7 +117,7 @@ const PopUpSignOnAssessee = () => {
         },
         informationCredential: null,
         informationFramework: null,
-        parentId: "605091f81edc573048fb467a"
+        parentId: '605091f81edc573048fb467a'
       }
     };
     console.log('ONCLICK assessee Create Yes', requestObect);
@@ -168,7 +169,15 @@ const PopUpSignOnAssessee = () => {
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    } else {
+    } else if(isPopUpValue === 'PICTUREPOPUP') {
+      if(popupMode === 'ASSESSEE_SIGN_ON'){
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
+      }
+      else{
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ROLELISTPOPUP' } });
+      }
+    }
+    else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
   };
@@ -200,7 +209,20 @@ const PopUpSignOnAssessee = () => {
         headerPanelColour={'genericOne'}
         headerOne={'assessee'}
         headerOneBadgeOne={'information'}
+        // nextPopUpValue={popupMode === 'ASSESSEE_SIGN_ON' ? 'EMAILPOPUP' :'ROLELISTPOPUP'}
+        handleNextPopupValue={handleNextPopupValue}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ROLELISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
         nextPopUpValue={'EMAILPOPUP'}
+        inputHeader={'role'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a role'}
+
+
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}

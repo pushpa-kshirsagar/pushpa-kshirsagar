@@ -10,7 +10,7 @@ import Person from '@material-ui/icons/Person';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { SET_NEXT_POPUP, GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA } from '../actionType';
 
 const PopUpPicture = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
@@ -20,12 +20,18 @@ const PopUpPicture = (props) => {
     headerPanelColour = 'genericOne',
     headerOne = 'assessee',
     headerOneBadgeOne = 'information',
-    nextPopUpValue
+    nextPopUpValue,
+    handleNextPopupValue
   } = props;
 
-  const handleClick = () => {
+  const handleClick = async () => {
     //according to creation mode popup sequence will change
-    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    if (handleNextPopupValue) {
+      handleNextPopupValue();
+    } else {
+      // await dispatch({ type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA, payload: { request: requestObj } });
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    }
   };
 
   return (
