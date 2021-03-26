@@ -263,6 +263,7 @@ const DisplayPageConfirmUser = () => {
         headerPanelColour={''}
         headerOne={'assessee'}
         headerOneBadgeOne={'password'}
+        headerOneBadgeTwo={'revise'}
         currentPassword={currentPassword}
         currentPasswordError={currentPasswordError}
         setCurrentPassword={setCurrentPassword}

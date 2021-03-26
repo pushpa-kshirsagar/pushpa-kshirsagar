@@ -19,6 +19,12 @@
   border-bottom: 1px solid #f2f2f2;
   box-sizing: border-box;
 }
+/* .expansionHeader div.Mui-expanded {
+  padding: 12px 12px 12px 6px !important; */
+/* } */
+.expansionHeader div.MuiIconButton-root {
+  padding: 12px 6px 12px 6px !important;
+}
 .expansionHeader div:first-child {
   flex: 5;
   margin: 0;

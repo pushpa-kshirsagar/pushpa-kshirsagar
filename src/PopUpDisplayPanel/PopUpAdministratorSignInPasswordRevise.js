@@ -12,7 +12,8 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
     isActive,
     headerPanelColour,
     headerOne,
-    headerOneBadgeOne,
+    headerOneBadgeOne = '',
+    headerOneBadgeTwo = '',
     onClick,
     onClose,
     currentPassword,
@@ -33,6 +34,7 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           mode={'core'}
           onClick={onClick}
           onClose={onClose}

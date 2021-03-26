@@ -247,7 +247,7 @@ const DisplayPaneThreeSectionOne = () => {
     },
     {
       id: 'a2',
-      textOneOne: capitalizeFirstLetter(informationEngagement.assesseeStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement?.assesseeStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -312,7 +312,7 @@ const DisplayPaneThreeSectionOne = () => {
         overflow: 'overlay'
       }}
     >
-      <div style={{ padding: '5px 5px 2.5px 5px' }}>
+      <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
         <AllocationAccordian
           headerOne="alliance"
           isDisplayCardExpanded={listExpand === 'alliance'}
