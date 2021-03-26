@@ -53,7 +53,7 @@ const HeaderCard = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: middlePaneHeader,
-        popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeOne: middlePaneHeaderBadgeOne === 'distinct' ? '' : middlePaneHeaderBadgeOne,
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: TRIPPLE_DOT_POPUP_OPTION
