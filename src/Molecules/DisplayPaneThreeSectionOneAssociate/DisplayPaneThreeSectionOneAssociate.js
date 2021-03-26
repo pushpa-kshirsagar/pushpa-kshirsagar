@@ -339,7 +339,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         overflow: 'overlay'
       }}
     >
-      <div style={{ padding: '5px 5px 2.5px 5px' }}>
+      <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
         <AllocationAccordian
           headerOne="alliance"
           isDisplayCardExpanded={listExpand === 'alliance'}

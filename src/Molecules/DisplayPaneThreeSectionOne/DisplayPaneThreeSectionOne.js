@@ -3,10 +3,15 @@ import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
 import { useSelector } from 'react-redux';
+import AccordianListCard from '../Accordian/AccordianListCard';
+import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import { Paper } from '@material-ui/core';
 
 const DisplayPaneThreeSectionOne = () => {
   const [listExpand, setListExpand] = useState('');
-  const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { responseObject, headerOneBadgeTwo } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const { informationEngagement, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -247,7 +252,7 @@ const DisplayPaneThreeSectionOne = () => {
     },
     {
       id: 'a2',
-      textOneOne: capitalizeFirstLetter(informationEngagement.assesseeStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement?.assesseeStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -312,38 +317,90 @@ const DisplayPaneThreeSectionOne = () => {
         overflow: 'overlay'
       }}
     >
-      <div style={{ padding: '5px 5px 2.5px 5px' }}>
-        <AllocationAccordian
-          headerOne="alliance"
-          isDisplayCardExpanded={listExpand === 'alliance'}
-          setListExpand={setListExpand}
-          list={list1}
-        />
-      </div>
-      <div className="containerPadding">
-        <AllocationAccordian
-          headerOne="allocation"
-          isDisplayCardExpanded={listExpand === 'allocation'}
-          setListExpand={setListExpand}
-          list={list2}
-        />
-      </div>
-      <div className="containerPadding">
-        <AllocationAccordian
-          headerOne="engagement"
-          isDisplayCardExpanded={listExpand === 'engagement'}
-          setListExpand={setListExpand}
-          list={list3}
-        />
-      </div>
-      <div className="containerPadding">
-        <AllocationAccordian
-          headerOne="setup"
-          isDisplayCardExpanded={listExpand === 'setup'}
-          setListExpand={setListExpand}
-          list={list4}
-        />
-      </div>
+      {headerOneBadgeTwo === 'all' ? (
+        <>
+          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+            <AllocationAccordian
+              headerOne="alliance"
+              isDisplayCardExpanded={listExpand === 'alliance'}
+              setListExpand={setListExpand}
+              list={list1}
+            />
+          </div>
+          <div className="containerPadding">
+            <AllocationAccordian
+              headerOne="allocation"
+              isDisplayCardExpanded={listExpand === 'allocation'}
+              setListExpand={setListExpand}
+              list={list2}
+            />
+          </div>
+          <div className="containerPadding">
+            <AllocationAccordian
+              headerOne="engagement"
+              isDisplayCardExpanded={listExpand === 'engagement'}
+              setListExpand={setListExpand}
+              list={list3}
+            />
+          </div>
+          <div className="containerPadding">
+            <AllocationAccordian
+              headerOne="setup"
+              isDisplayCardExpanded={listExpand === 'setup'}
+              setListExpand={setListExpand}
+              list={list4}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+            <Paper className={'dossierContainerTop'}>
+              {list2.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
+          <div className="containerPadding">
+            <Paper className={'dossierContainerTop'}>
+              {list3.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
+          <div className="containerPadding">
+            <Paper className={'dossierContainerTop'}>
+              {list4.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
+        </>
+      )}
       {isMobile && (
         <div className={'containerPadding'} style={{ height: '55px' }}>
           {' '}

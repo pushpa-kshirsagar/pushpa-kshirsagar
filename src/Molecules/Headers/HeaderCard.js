@@ -27,14 +27,14 @@ const HeaderCard = (props) => {
     displayPane = '',
     scanCount,
     headerPanelColour,
-    showMiddlePaneState
+    showMiddlePaneState,
+    onClickClearInfo = null
   } = props;
   const dispatch = useDispatch();
   const { typeOfMiddlePaneList, middlePaneHeader, middlePaneHeaderBadgeOne } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
   const onClickScan = () => {
-    alert(typeOfMiddlePaneList)
     dispatch({
       type: SET_SCAN_POPUP_STATE,
       payload: {
@@ -120,7 +120,7 @@ const HeaderCard = (props) => {
                     <NextIcon className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : displayPane === 'right' ? (
-                  <IconButton>
+                  <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : null}

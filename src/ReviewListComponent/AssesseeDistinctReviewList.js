@@ -129,33 +129,36 @@ const AssesseeDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  const openAssesseeRightPaneInformation = () => {
+  const openAssesseeRightPaneInformation = (secondaryOptionCheckValue) => {
     console.log(selectedTagValue);
     dispatch({ type: LOADER_START });
     dispatch({
       type: GET_ASSESSEE_INFO_SAGA,
       payload: {
-        assesseeId: '0123456',
-        associateId: '0654321',
-        filter: 'true',
-        searchCondition: 'AND',
-        search: [
-          {
-            condition: 'and',
-            searchBy: [
-              {
-                dataType: 'string',
-                conditionColumn: 'id',
-                conditionValue: {
-                  condition: 'eq',
-                  value: {
-                    from: selectedTagValue ? selectedTagValue : '6054a4d6cb14fb2075aeec87'
+        secondaryOptionCheckValue,
+        reqBody: {
+          assesseeId: '0123456',
+          associateId: '0654321',
+          filter: 'true',
+          searchCondition: 'AND',
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'id',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: selectedTagValue ? selectedTagValue : '6054a4d6cb14fb2075aeec87'
+                    }
                   }
                 }
-              }
-            ]
-          }
-        ]
+              ]
+            }
+          ]
+        }
       }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });

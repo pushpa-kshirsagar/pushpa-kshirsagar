@@ -8,10 +8,15 @@ import Manuscript from '@material-ui/icons/Description';
 import MailOutline from '@material-ui/icons/MailOutline';
 import TelephoneVerified from '@material-ui/icons/Call';
 import { useSelector } from 'react-redux';
+import AccordianListCard from '../Accordian/AccordianListCard';
+import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import { Paper } from '@material-ui/core';
 
 const DisplayPaneThreeSectionTwo = () => {
   const [listExpand, setListExpand] = useState('');
-  const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { responseObject, headerOneBadgeTwo } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const { informationContact, informationPersonal } = responseObject;
   const list1 = [
     {
@@ -250,6 +255,67 @@ const DisplayPaneThreeSectionTwo = () => {
       isListCard: false
     }
   ];
+  const list5 = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'email address',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne:
+            informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne:
+            informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail ||
+            'No Information'
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: MailOutline,
+      IconTwo: () => {
+        return <img src={Unverified} alt="Unverified" />;
+      }
+    },
+    {
+      id: 'a4',
+      labelTextOneOne: 'mobile telephone',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne:
+            informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneNumber ||
+            'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne: informationContact.assesseeTelephoneMobileSecondary || 'No Information'
+        }
+      ],
+      labelTextOneOneBadgeFour: '',
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: TelephoneVerified,
+      IconTwo: () => {
+        return <img src={Unverified} alt="Unverified" />;
+      }
+    }
+  ];
+
+  const list6 = [
+    {
+      id: 'a4',
+      labelTextOneOne: 'gender',
+      textOneOne: informationPersonal.assesseeGender || 'No Information',
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false
+    }
+  ];
 
   return (
     <div
@@ -258,38 +324,75 @@ const DisplayPaneThreeSectionTwo = () => {
         overflow: 'overlay'
       }}
     >
-      <div style={{ padding: '5px 5px 2.5px 5px' }}>
-        <AllocationAccordian
-          headerOne="career"
-          isDisplayCardExpanded={listExpand === 'career'}
-          setListExpand={setListExpand}
-          list={list1}
-        />
-      </div>
-      <div className="containerPadding">
-        <AllocationAccordian
-          headerOne="contact"
-          isDisplayCardExpanded={listExpand === 'contact'}
-          setListExpand={setListExpand}
-          list={list2}
-        />
-      </div>
-      <div className="containerPadding">
-        <AllocationAccordian
-          headerOne="credential"
-          isDisplayCardExpanded={listExpand === 'credential'}
-          setListExpand={setListExpand}
-          list={list3}
-        />
-      </div>
-      <div className="containerPadding">
-        <AllocationAccordian
-          headerOne="personal"
-          isDisplayCardExpanded={listExpand === 'personal'}
-          setListExpand={setListExpand}
-          list={list4}
-        />
-      </div>
+      {headerOneBadgeTwo === 'all' ? (
+        <>
+          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+            <AllocationAccordian
+              headerOne="career"
+              isDisplayCardExpanded={listExpand === 'career'}
+              setListExpand={setListExpand}
+              list={list1}
+            />
+          </div>
+          <div className="containerPadding">
+            <AllocationAccordian
+              headerOne="contact"
+              isDisplayCardExpanded={listExpand === 'contact'}
+              setListExpand={setListExpand}
+              list={list2}
+            />
+          </div>
+          <div className="containerPadding">
+            <AllocationAccordian
+              headerOne="credential"
+              isDisplayCardExpanded={listExpand === 'credential'}
+              setListExpand={setListExpand}
+              list={list3}
+            />
+          </div>
+          <div className="containerPadding">
+            <AllocationAccordian
+              headerOne="personal"
+              isDisplayCardExpanded={listExpand === 'personal'}
+              setListExpand={setListExpand}
+              list={list4}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+            <Paper className={'dossierContainerTop'}>
+              {list5.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
+          <div className="containerPadding">
+            <Paper className={'dossierContainerTop'}>
+              {list6.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
+        </>
+      )}
       {isMobile && (
         <div className={'containerPadding'} style={{ height: '55px' }}>
           {' '}

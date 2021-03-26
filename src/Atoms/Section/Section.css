@@ -63,17 +63,17 @@
 
 .activeTabItem button {
   color: rgba(0, 0, 0, 0.87);
-  border-color: #bfbfbf;
-  background-color: #f2f2f2;
+  border-color: #bfbfbf !important;
+  background-color: #f2f2f2 !important;
 }
 .activeTabItem :hover {
   background-color: '#e0e0e0';
 }
 .activeTabItem button {
   color: rgba(0, 0, 0, 0.87);
-  border-color: #bfbfbf;
-  background-color: #f2f2f2;
+  border-color: #bfbfbf !important;
+  background-color: #f2f2f2 !important;
 }
 .activeTabItem :hover {
-  background-color: #e0e0e0;
+  background-color: #e0e0e0 !important;
 }

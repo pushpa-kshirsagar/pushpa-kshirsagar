@@ -24,9 +24,12 @@ import { setAssesseeCardPermissionInJson } from '../Actions/GenericActions';
 import { AccountContext } from '../Account';
 import { useHistory } from 'react-router-dom';
 const PopUpDisplayPanelAssessee = (props) => {
-  const { popupHeaderOne, popupHeaderOneBadgeOne, popupOpenType } = useSelector(
-    (state) => state.PopUpReducer
-  );
+  const {
+    popupHeaderOne,
+    popupHeaderOneBadgeOne,
+    popupOpenType,
+    secondaryOptionCheckValue
+  } = useSelector((state) => state.PopUpReducer);
   const { assesseePermission } = useSelector((state) => state.UserReducer);
 
   const dispatch = useDispatch();
@@ -104,27 +107,30 @@ const PopUpDisplayPanelAssessee = (props) => {
       dispatch({
         type: GET_ASSESSEE_INFO_SAGA,
         payload: {
-          assesseeId: '0123456',
-          associateId: '0654321',
-          filter: 'true',
-          searchCondition: 'AND',
-          search: [
-            {
-              condition: 'and',
-              searchBy: [
-                {
-                  dataType: 'string',
-                  conditionColumn: 'id',
-                  conditionValue: {
-                    condition: 'eq',
-                    value: {
-                      from: '6054a4d6cb14fb2075aeec87'
+          secondaryOptionCheckValue,
+          reqBody: {
+            assesseeId: '0123456',
+            associateId: '0654321',
+            filter: 'true',
+            searchCondition: 'AND',
+            search: [
+              {
+                condition: 'and',
+                searchBy: [
+                  {
+                    dataType: 'string',
+                    conditionColumn: 'id',
+                    conditionValue: {
+                      condition: 'eq',
+                      value: {
+                        from: '6054a4d6cb14fb2075aeec87'
+                      }
                     }
                   }
-                }
-              ]
-            }
-          ]
+                ]
+              }
+            ]
+          }
         }
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
@@ -189,6 +195,7 @@ const PopUpDisplayPanelAssessee = (props) => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeOptionPopup}
+            secondaryOptionCheckValue={secondaryOptionCheckValue}
           />
         </DialogContent>
       </Popup>
