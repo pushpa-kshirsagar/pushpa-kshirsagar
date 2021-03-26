@@ -189,22 +189,22 @@ export const makeAssociateReviewListRequestObject = (filterKey, numberPage, coun
       from: filterKey.toUpperCase()
     }
   };
-  if(filterKey === 'active'){
-    searchObj ={
-      condition: 'eq',
-    value: {
-      from: 'CONFIRMED'
-    }
-    }
-  }
-  if(filterKey === 'inactive'){
-    searchObj ={
-      condition: 'in',
-    value: {
-      in: ['DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
-    }
-    }
-  }
+  // if(filterKey === 'active'){
+  //   searchObj ={
+  //     condition: 'eq',
+  //   value: {
+  //     from: 'CONFIRMED'
+  //   }
+  //   }
+  // }
+  // if(filterKey === 'inactive'){
+  //   searchObj ={
+  //     condition: 'in',
+  //   value: {
+  //     in: ['DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
+  //   }
+  //   }
+  // }
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -251,22 +251,22 @@ export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage,
       from: filterKey.toUpperCase()
     }
   };
-  if(filterKey === 'active'){
-    searchObj ={
-      condition: 'eq',
-    value: {
-      from: 'CONFIRMED'
-    }
-    }
-  }
-  if(filterKey === 'inactive'){
-    searchObj ={
-      condition: 'in',
-    value: {
-      in: ['DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
-    }
-    }
-  }
+  // if(filterKey === 'active'){
+  //   searchObj ={
+  //     condition: 'eq',
+  //   value: {
+  //     from: 'CONFIRMED'
+  //   }
+  //   }
+  // }
+  // if(filterKey === 'inactive'){
+  //   searchObj ={
+  //     condition: 'in',
+  //   value: {
+  //     in: ['DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
+  //   }
+  //   }
+  // }
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -333,32 +333,32 @@ export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage,
 export const makeAssesseeRoleObj = () =>{
   let requestObj = {
     assesseeId: '0123456',
-    associateId: '0654321',
-    filter: 'true',
-    orderBy: {
-      columnName: 'informationBasic.assesseeRole',
-      order: 'asc'
-    },
-    numberPage: 0,
-    countPage: 25,
-    searchCondition: 'AND',
-    search: [
-      {
-        condition: 'or',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationEngagement.assesseeStatus',
-            conditionValue: {
-              condition: 'eq',
-              value: {
-                from: 'ACTIVE'
-              }
-            }
-          }
-        ]
-      }
-    ]
+    associateId: '0654321'
+    // filter: 'true',
+    // orderBy: {
+    //   columnName: 'informationBasic.assesseeRole',
+    //   order: 'asc'
+    // },
+    // numberPage: 0,
+    // countPage: 25,
+    // searchCondition: 'AND',
+    // search: [
+    //   {
+    //     condition: 'or',
+    //     searchBy: [
+    //       {
+    //         dataType: 'string',
+    //         conditionColumn: 'informationEngagement.assesseeStatus',
+    //         conditionValue: {
+    //           condition: 'eq',
+    //           value: {
+    //             from: 'ACTIVE'
+    //           }
+    //         }
+    //       }
+    //     ]
+    //   }
+    // ]
   };
   return requestObj;
 }

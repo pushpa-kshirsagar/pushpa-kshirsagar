@@ -4,7 +4,6 @@ import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
-import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -14,13 +13,15 @@ import {
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   LOADER_START,
   POPUP_CLOSE,
-  SET_NEXT_POPUP,
   SET_PAGE_COUNT,
   SET_REQUEST_OBJECT
 } from '../actionType';
 import PropTypes from 'prop-types';
-import { FormHelperText, Input, InputLabel } from '@material-ui/core';
-import { makeAssesseeScanRequestObject, makeAssociateScanRequestObject } from '../Actions/GenericActions';
+import { FormHelperText } from '@material-ui/core';
+import {
+  makeAssesseeScanRequestObject,
+  makeAssociateScanRequestObject
+} from '../Actions/GenericActions';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
@@ -34,7 +35,6 @@ const PopUpScan = (props) => {
     middlePaneHeaderBadgeTwo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isActive = true } = props;
-  const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
   const [state, setState] = useState({
     scanValue: ''
   });
@@ -124,6 +124,7 @@ const PopUpScan = (props) => {
               onClick={handleChange}
             />
             <FormHelperText className={['aliasName', 'helptextmargin'].join(' ')}>
+              {isPopUpValue === 'assesseeRoleDistinctReviewList' && <span>name, description.</span>}
               {isPopUpValue === 'assesseeDistinctReviewList' && (
                 <span>name, alias, email address, mobile telephone, tag.</span>
               )}

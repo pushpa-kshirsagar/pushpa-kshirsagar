@@ -6,11 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  SET_NEXT_POPUP,
-  UPDATE_ASSESSEE_COMMUNICATION,
-  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO
-} from '../actionType';
+import { UPDATE_ASSESSEE_COMMUNICATION, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
@@ -27,7 +23,6 @@ const PopUpAddressEmail = (props) => {
     primaryLabelBadge = 'primary',
     tag,
     basicInfo,
-    nextPopUpValue,
     typeOfSetObject,
     signInSetup,
     checkboxValue = primaryLabel + ' (' + primaryLabelBadge + ')',
@@ -82,7 +77,7 @@ const PopUpAddressEmail = (props) => {
   };
 
   const handleCheckbox = (e) => {
-    const { name, checked, value } = e.target;
+    const { name, checked } = e.target;
     if (name === 'assesseeAddressEmailCommunication') {
       dispatch({
         type: UPDATE_ASSESSEE_COMMUNICATION,

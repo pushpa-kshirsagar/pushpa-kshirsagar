@@ -1,22 +1,12 @@
-import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
-import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { signUpForAwsCognito } from '../../Actions/GenericActions';
 import {
-  SET_SELECTED_ASSOCIATE,
-  SET_USER,
   CREATE_ASSOCIATE_SAGA,
   SET_ASSOCIATE_INFORMATION,
   SET_ASSESSEE_INFORMATION_DATA,
   LOADER_STOP
 } from '../../actionType';
-import { ASSESSEE_CREATE_URL, ASSOCIATE_CREATE_URL, GET_USER_URL } from '../../endpoints';
-import UserPool from '../../UserPool';
-
-const headers = {
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*'
-};
+import { ASSESSEE_CREATE_URL, ASSOCIATE_CREATE_URL } from '../../endpoints';
 const createAssesseeApi = async (requestObj) => {
   console.log(requestObj.data);
   let URL = ASSESSEE_CREATE_URL;
@@ -31,12 +21,11 @@ const createAssesseeApi = async (requestObj) => {
 
 const createAssociateApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSOCIATE_CREATE_URL;
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(URL, requestOptions);
+  const response = await fetch(ASSOCIATE_CREATE_URL, requestOptions);
   const json = await response.json();
   // console.log(json, '&&&&&&&&')
   // if(json.responseCode === '000'){

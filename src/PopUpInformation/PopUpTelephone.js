@@ -9,12 +9,11 @@ import '../Molecules/PopUp/PopUp.css';
 import '../Atoms/InputField/InputField.css';
 
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SET_NEXT_POPUP } from '../actionType';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpTelephone = (props) => {
-  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
 
   const {
@@ -31,9 +30,6 @@ const PopUpTelephone = (props) => {
     isRequired = false
   } = props;
 
-  const [state, setState] = useState({
-    error: ''
-  });
   const objectKeys = Object.keys(basicInfo);
   const [ziroErr, setziroErr] = useState('');
   const [oneErr, setoneErr] = useState('');

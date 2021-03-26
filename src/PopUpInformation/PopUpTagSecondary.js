@@ -7,11 +7,7 @@ import InputFeild from '../Atoms/InputField/InputField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  SET_NEXT_POPUP,
-  UPDATE_ASSESSEE_INFO,
-  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO
-} from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 
 const PopUpTagSecondary = (props) => {
   const dispatch = useDispatch();
@@ -129,7 +125,7 @@ const PopUpTagSecondary = (props) => {
                     checked={
                       signInSetup
                         ? signInSetup.assesseeSignIn === checkboxValue &&
-                          tagSecondary.assesseeTagSecondary != ''
+                          tagSecondary.assesseeTagSecondary !== ''
                           ? true
                           : false
                         : false

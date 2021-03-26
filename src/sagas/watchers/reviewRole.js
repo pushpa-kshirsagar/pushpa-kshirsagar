@@ -1,8 +1,10 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-    LOADER_STOP,
-  SET_CORE_REVIEW_LIST_REQ_DATA
+  LOADER_STOP,
+  REVIEWLIST_DISTINCT_DATA,
+  SET_CORE_REVIEW_LIST_REQ_DATA,
+  SET_MIDDLEPANE_STATE
 } from '../../actionType';
 import { ASSESSEE_ROLE_REVIEW_LIST_URL } from '../../endpoints';
 
@@ -20,10 +22,34 @@ const assesseeRoleReviewListDistinctApi = async (requestObj) => {
 
 function* workerReviewAssesseeRoleListSaga(data) {
   try {
-    const userResponse = yield call(assesseeRoleReviewListDistinctApi, { data: data.payload.request });
+    const userResponse = yield call(assesseeRoleReviewListDistinctApi, {
+      data: data.payload.request
+    });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000')
-      yield put({ type: SET_CORE_REVIEW_LIST_REQ_DATA, payload: userResponse.responseObject });
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_REVIEW_LIST_REQ_DATA,
+        payload: userResponse.responseObject
+      });
+
+    if (data.payload.isMiddlePaneList) {
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'assessees',
+          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assesseeRoleDistinctReviewList',
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true
+        }
+      });
+    }
+
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {

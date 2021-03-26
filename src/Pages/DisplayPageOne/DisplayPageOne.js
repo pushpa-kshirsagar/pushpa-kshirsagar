@@ -1,7 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isMobile } from 'react-device-detect';
-import { CLEAR_ASSESSEE_INFO, CLEAR_ASSESSMENT_INFO, CLEAR_ASSIGNMENT_INFO, CLEAR_ASSOCIATE_INFO, CLEAR_IGAUGE_REDUCER, GET_USER_SAGA, POPUP_CLOSE } from '../../actionType';
+import {
+  CLEAR_ASSESSEE_INFO,
+  CLEAR_ASSESSMENT_INFO,
+  CLEAR_ASSIGNMENT_INFO,
+  CLEAR_ASSOCIATE_INFO,
+  CLEAR_IGAUGE_REDUCER,
+  GET_USER_SAGA,
+  POPUP_CLOSE
+} from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
 import DisplayPaneOne from '../../Organisms/DisplayPaneOne/DisplayPaneOne';
@@ -10,8 +18,8 @@ import DisplayPaneTwo from '../../Organisms/DisplayPaneTwo/DisplayPaneTwo';
 import GridColumn from '../../Molecules/GridColumn/GridColumn';
 import DisplayPaneFour from '../../Organisms/DisplayPaneFour/DisplayPaneFour';
 import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
-import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
-import { AccountContext } from '../../Account';
+// import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+// import { AccountContext } from '../../Account';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
 
 // import { useHistory } from 'react-router-dom';
@@ -25,30 +33,30 @@ const DisplayPageOne = () => {
 
   const dispatch = useDispatch();
   const isExamMode = false;
-  const { getSession } = useContext(AccountContext);
- //* code for change username and any attribute
-  const changeUserName = () => {
-    getSession()
-      .then(({ user }) => {
-        let attributeList = [];
-        const attributeOb = {
-          Name: 'preferred_username',
-          Value: '8868916398' //'shivam.s@boppotechnologies.com'
-        };
-        const attribute = new CognitoUserAttribute(attributeOb);
-        attributeList.push(attribute);
-        user.updateAttributes(attributeList, function (err, result) {
-          if (err) {
-            console.log('IN ERROR ON CHANGE USERNAME', err);
-            return;
-          }
-          console.log('call result: ' + result);
-        });
-      })
-      .catch((err) => {
-        console.log('SESSION ERR=====', err);
-      });
-  };
+  // const { getSession } = useContext(AccountContext);
+  //* code for change username and any attribute
+  // const changeUserName = () => {
+  //   getSession()
+  //     .then(({ user }) => {
+  //       let attributeList = [];
+  //       const attributeOb = {
+  //         Name: 'preferred_username',
+  //         Value: '8868916398' //'shivam.s@boppotechnologies.com'
+  //       };
+  //       const attribute = new CognitoUserAttribute(attributeOb);
+  //       attributeList.push(attribute);
+  //       user.updateAttributes(attributeList, function (err, result) {
+  //         if (err) {
+  //           console.log('IN ERROR ON CHANGE USERNAME', err);
+  //           return;
+  //         }
+  //         console.log('call result: ' + result);
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log('SESSION ERR=====', err);
+  //     });
+  // };
 
   useEffect(() => {
     dispatch({ type: GET_USER_SAGA });
@@ -61,14 +69,14 @@ const DisplayPageOne = () => {
       selectedAssociateInfo.assesseeInformation.assesseeNameLast;
   const userEmail =
     selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
-  const popupAllClose = () =>{
+  const popupAllClose = () => {
     dispatch({ type: CLEAR_ASSESSEE_INFO });
     dispatch({ type: CLEAR_ASSESSMENT_INFO });
     dispatch({ type: POPUP_CLOSE });
     dispatch({ type: CLEAR_ASSOCIATE_INFO });
     dispatch({ type: CLEAR_ASSIGNMENT_INFO });
     dispatch({ type: CLEAR_IGAUGE_REDUCER });
-  }
+  };
   return (
     <>
       <HeaderZero userName={userName} userEmail={userEmail} />
@@ -80,7 +88,9 @@ const DisplayPageOne = () => {
         {isMobile ? (
           <div className="display-pane-container">
             {mobilePanestate === 'displayPaneOne' && <DisplayPaneOne />}
-            {mobilePanestate === 'displayPaneTwo' && <DisplayPaneTwo popupAllClose={popupAllClose} />}
+            {mobilePanestate === 'displayPaneTwo' && (
+              <DisplayPaneTwo popupAllClose={popupAllClose} />
+            )}
             {mobilePanestate === 'displayPaneThree' && <DisplayPaneThree />}
             {mobilePanestate === 'displayPaneFour' && <DisplayPaneFour />}
             {mobilePanestate === 'displayPaneFive' && <DisplayPaneFive />}

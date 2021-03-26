@@ -8,8 +8,6 @@ import {
   GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_CLOSE,
-  SET_DISPLAY_PANE_THREE_STATE,
-  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
   SET_SECONDARY_OPTION_VALUE
@@ -129,12 +127,12 @@ const PopUpDisplayPanelAssessee = (props) => {
           ]
         }
       });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
     // dispatch({
     //   type: SET_DISPLAY_TWO_SINGLE_STATE,
     //   payload: { stateName: 'showMiddlePaneState', value: false }
     // });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
 
     if (clickValue === 'yes') {
       //sign out

@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_ENGAGEMENT_INFO, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
+import { SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 
 const PopUpCheckbox = (props) => {
   /*props*/
@@ -31,7 +31,6 @@ const PopUpCheckbox = (props) => {
   /*handling the onchange event*/
   const handleChange = (event) => {
     console.log(event.target.checked);
-    let checked = event.target.checked;
     setState({ isChecked: event.target.value });
   };
 
@@ -82,8 +81,7 @@ const PopUpCheckbox = (props) => {
         payload: { assesseeSignIn: state.isChecked }
       });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
-    } 
-    else {
+    } else {
       if (state.isChecked === 'email address (primary)') {
         dispatch({
           type: typeOfPrimarySetObject,

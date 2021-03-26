@@ -1,9 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  CREATE_ASSESSEE_SAGA,
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
-  ASSESSEE_REVIEW_DISTINCT_SAGA,
   SET_MIDDLEPANE_STATE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA
 } from '../../actionType';
@@ -23,7 +21,9 @@ const associatesReviewListDistinctApi = async (requestObj) => {
 
 function* workerReviewListAssociateSaga(data) {
   try {
-    const userResponse = yield call(associatesReviewListDistinctApi, { data: data.payload.request });
+    const userResponse = yield call(associatesReviewListDistinctApi, {
+      data: data.payload.request
+    });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000')
       yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });

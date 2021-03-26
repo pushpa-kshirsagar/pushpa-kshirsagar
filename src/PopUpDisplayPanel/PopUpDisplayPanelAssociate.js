@@ -9,6 +9,7 @@ import {
   LOADER_START,
   POPUP_CLOSE,
   SET_MIDDLEPANE_STATE,
+  SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
   SET_SECONDARY_OPTION_VALUE
 } from '../actionType';
@@ -188,6 +189,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           ]
         }
       });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
     if (clickValue === 'switch') {
       dispatch({
@@ -223,7 +225,6 @@ const PopUpDisplayPanelAssociate = (props) => {
     let revisepopupHeaderOneBadgeTwo = '';
     let reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
     let revisePopupType = 'primary';
-    let reviseSecondaryOptionCheckValue = '';
     let valueArr = setAssociateCardPermissionInJson(
       ASSOCIATE_CARD_POPUP_OPTION,
       assesseePermission

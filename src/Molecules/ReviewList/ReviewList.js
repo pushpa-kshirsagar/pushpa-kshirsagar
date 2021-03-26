@@ -14,16 +14,24 @@ const ReviewList = (props) => {
     isAlertActive = false,
     isFlagActive = false,
     isSelectActive = false,
-    isTooltipActive = true,
-    onClickEvent=null,
-    tag='',
+    isTooltipActive = false,
+    isSelectedReviewList = false,
+    onClickEvent = null,
+    tag = '',
     id
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
   return (
     <div style={{ padding: '0 5px', position: 'relative' }} key={id}>
-      <div className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')} tag={tag} id={id} data-value={id} onClick={onClickEvent}>
+      <div
+        className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
+        tag={tag}
+        id={id}
+        data-value={id}
+        onClick={onClickEvent}
+        style={{ backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '' }}
+      >
         <div
           className={['measureBox', 'heightInherit', 'iguru-componentinnerdiv-margin'].join(' ')}
         >

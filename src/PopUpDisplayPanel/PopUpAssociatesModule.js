@@ -44,15 +44,14 @@ const PopUpAssociatesModule = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    let targetValue =e.currentTarget.getAttribute('data-value');
+    let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
       dispatch({ type: ASSOCIATE_CREATE_INFO });
       dispatch({
         type: ASSOCIATE_SIGN_ON,
         payload: { isPopUpValue: 'NAMEALIASPOPUP', popupMode: 'ASSOCIATE_CREATE' }
       });
-    } 
-    else if (targetValue === 'distinct') {
+    } else if (targetValue === 'distinct') {
       let requestObect = makeAssociateReviewListRequestObject(
         secondaryOptionCheckValue,
         0,
@@ -76,8 +75,7 @@ const PopUpAssociatesModule = (props) => {
       });
       dispatch({ type: ASSOCIATE_POPUP_CLOSE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
-    }
-    else {
+    } else {
       dispatch({
         type: SET_ASSOCIATE_NEXT_POPUP,
         payload: e.currentTarget.getAttribute('data-value')

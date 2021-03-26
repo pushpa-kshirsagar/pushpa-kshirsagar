@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { isMobile } from 'react-device-detect';
 import Label from '../../Atoms/Labels/Label';
 import IconsButton from '../IconButton/IconButton';
-// import iGuruLogo from '../../images/iglogo1.png';  
+// import iGuruLogo from '../../images/iglogo1.png';
 // import prafulta from '../../images/prafulta.jpg';
 // import insightGURULogo from '../../images/prafulta.jpg';
 import './HeaderZero.css';
@@ -20,9 +20,9 @@ export const HeaderZero = (props) => {
   const iguruBrandLogo = './Image/logo-04.jpeg'; //'./Image/logo-03.jpeg'
   // const iguruMainLogo = isBespoke ? './Image/client-logo.jpeg' : './Image/main-logo.jpeg';
   const iguruMainLogo = './Image/main-logo.jpeg';
-  const onClickLogo = () =>{
+  const onClickLogo = () => {
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
-  }
+  };
   return (
     <div className="header-container">
       {!isMobile ? (

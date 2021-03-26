@@ -30,11 +30,11 @@ const PopUpConfirmation = (props) => {
   };
   const handleBack = () => {
     /*according manage back state*/
-    if (popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSESSEE_CREATE' ) {
+    if (popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSESSEE_CREATE') {
       dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
     }
-    if (popupMode === 'ASSOCIATE_SIGN_ON'|| popupMode === 'ASSOCIATE_CREATE') {
+    if (popupMode === 'ASSOCIATE_SIGN_ON' || popupMode === 'ASSOCIATE_CREATE') {
       dispatch({
         type: SET_NEXT_POPUP,
         payload: { isPopUpValue: 'NAMEALIASPOPUP' }

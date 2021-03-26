@@ -10,7 +10,7 @@ import Person from '@material-ui/icons/Person';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA } from '../actionType';
+import { SET_NEXT_POPUP } from '../actionType';
 
 const PopUpPicture = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);

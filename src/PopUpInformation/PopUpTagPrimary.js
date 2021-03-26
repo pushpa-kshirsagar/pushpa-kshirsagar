@@ -2,16 +2,14 @@ import React, { Fragment } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
-import { InputLabel, FormControl, Checkbox } from '@material-ui/core';
-import InputFeild from '../Atoms/InputField/InputField';
+import { InputLabel, Checkbox } from '@material-ui/core';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPDATE_ASSESSEE_INFO, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
+import { UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 
 const PopUpTagPrimary = (props) => {
   const dispatch = useDispatch();
-  const basicInfo = useSelector((state) => state.AssesseeCreateReducer);
   const {
     isActive,
     primaryheader = 'primary',
@@ -97,8 +95,11 @@ const PopUpTagPrimary = (props) => {
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
                       handleCheckbox
                     }
-                    disabled={ popupMode !== 'ASSESSEE_SIGN_ON' &&
-                    popupMode !== 'ASSOCIATE_SIGN_ON' ? false:true}
+                    disabled={
+                      popupMode !== 'ASSESSEE_SIGN_ON' && popupMode !== 'ASSOCIATE_SIGN_ON'
+                        ? false
+                        : true
+                    }
                   />
                 </div>
               </div>

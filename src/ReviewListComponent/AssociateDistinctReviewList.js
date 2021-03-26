@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
-  ASSOCIATE_POPUP_OPEN,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
-  GET_ASSESSEE_INFO_SAGA,
+  GET_ASSOCIATE_INFO_SAGA,
   LOADER_START,
   POPUP_OPEN,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
@@ -33,11 +32,11 @@ const AssociateDistinctReviewList = (props) => {
     scanCount,
     middlePaneHeaderBadgeOne,
     reviewListDistinctData,
-    reviewListReqObj
+    reviewListReqObj,
+    middlePaneSelectedValue
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
-
   const [isFetching, setIsFetching] = useState(false);
   useEffect(() => {
     document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
@@ -131,27 +130,26 @@ const AssociateDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  const openAssesseeRightPaneInformation = () => {
+  const openAssociateRightPaneInformation = () => {
     console.log(selectedTagValue);
     dispatch({ type: LOADER_START });
     dispatch({
-      type: GET_ASSESSEE_INFO_SAGA,
+      type: GET_ASSOCIATE_INFO_SAGA,
       payload: {
         assesseeId: '0123456',
-        associateId: '0654321',
-        filter: 'true',
-        searchCondition: 'AND',
+        associateId: '605255729d3c823d3964e0ec',
+        filter: true,
         search: [
           {
             condition: 'and',
             searchBy: [
               {
-                dataType: 'string',
+                dataType: 'String',
                 conditionColumn: 'id',
                 conditionValue: {
                   condition: 'eq',
                   value: {
-                    from: selectedTagValue ? selectedTagValue : '6054a4d6cb14fb2075aeec87'
+                    from: selectedTagValue
                   }
                 }
               }
@@ -159,6 +157,10 @@ const AssociateDistinctReviewList = (props) => {
           }
         ]
       }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     popupAllClose();
@@ -176,6 +178,12 @@ const AssociateDistinctReviewList = (props) => {
                   item.informationEngagement.associateTag
                     ? item.informationEngagement.associateTag.associateTagPrimary
                     : item
+                }
+                isSelectedReviewList={
+                  middlePaneSelectedValue ===
+                  item.informationEngagement.associateTag?.associateTagPrimary
+                    ? true
+                    : false
                 }
                 status={assesseeStatus(
                   middlePaneHeaderBadgeOne,
@@ -200,7 +208,7 @@ const AssociateDistinctReviewList = (props) => {
       )}
       <PopUpMiddlePaneList
         isActive={isPopUpValue === 'middlePaneListPopup'}
-        onClickInformation={openAssesseeRightPaneInformation}
+        onClickInformation={openAssociateRightPaneInformation}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
@@ -21,23 +21,37 @@ import {
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_NEXT_POPUP,
   CREATE_ASSESSEE_SAGA,
-  ASSESSEE_POPUP_CLOSE,
   LOADER_START,
-  ASSESSEE_INFO_CREATE
+  ASSESSEE_INFO_CREATE,
+  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
-import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
-import userPool from '../UserPool';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
+import { makeAssesseeRoleObj } from '../Actions/GenericActions';
 
 const PopUpSignOnAssessee = () => {
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
+  const { coreReviewListReqObj } = useSelector((state) => state.DisplayPaneTwoReducer);
   const informationContact = assesseeInfo.informationContact;
+
   const dispatch = useDispatch();
-  const [nextPopUpValue, setNextPopUpValue] = useState('');
   const history = useHistory();
+  // let reviseRoleArr = [];
+  useEffect(() => {
+    let requestObj = makeAssesseeRoleObj();
+    dispatch({
+      type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+      payload: {
+        request: requestObj,
+        BadgeOne: '',
+        BadgeTwo: '',
+        isMiddlePaneList: false
+      }
+    });
+  }, []);
   useEffect(() => {
     console.log(popupMode);
     console.log(assesseeInfo.assesseeInformationData);
@@ -169,17 +183,37 @@ const PopUpSignOnAssessee = () => {
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    } else if(isPopUpValue === 'PICTUREPOPUP') {
-      if(popupMode === 'ASSESSEE_SIGN_ON'){
+    } else if (isPopUpValue === 'PICTUREPOPUP') {
+      if (popupMode === 'ASSESSEE_SIGN_ON') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
-      }
-      else{
+      } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ROLELISTPOPUP' } });
       }
-    }
-    else {
+    } else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
+  };
+
+  const updateRoleIdObject = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
+    console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary);
+    let roleid = e.currentTarget.getAttribute('tag');
+    let roleArr = assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary;
+    console.log(roleArr.includes(roleid));
+
+    if (roleArr.includes(roleid)) {
+      document.getElementById(roleid).style.backgroundColor = 'white';
+      roleArr = roleArr.filter(function (number) {
+        return number !== roleid;
+      });
+    } else {
+      roleArr.push(roleid);
+      document.getElementById(roleid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+      payload: { stateName: 'assesseeRole', actualStateName: 'assesseeRolePrimary', value: roleArr }
+    });
   };
   return (
     <div>
@@ -221,8 +255,10 @@ const PopUpSignOnAssessee = () => {
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a role'}
-
-
+        ListData={coreReviewListReqObj}
+        textOne={'assesseeRoleName'}
+        textTwo={'assesseeRoleDescription'}
+        onClickEvent={updateRoleIdObject}
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}

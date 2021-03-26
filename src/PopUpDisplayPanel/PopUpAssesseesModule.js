@@ -7,7 +7,6 @@ import { DialogContent } from '@material-ui/core';
 import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_SIGN_ON,
-  ASSOCIATE_SIGN_ON,
   CLEAR_ASSESSEE_INFO,
   SET_ASSESSEE_NEXT_POPUP,
   SET_ASSESSEE_PREVIOUS_POPUP,
@@ -18,10 +17,11 @@ import {
   SET_REQUEST_OBJECT,
   SET_PAGE_COUNT,
   FILTERMODE,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
+import { makeAssesseeReviewListRequestObject, makeAssesseeRoleObj } from '../Actions/GenericActions';
 
 const PopUpAssesseesModule = (props) => {
   const {
@@ -76,6 +76,26 @@ const PopUpAssesseesModule = (props) => {
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
+    } else if (targetValue === 'roles') {
+      let requestObj = makeAssesseeRoleObj();
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeRoleDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          isMiddlePaneList: true
+        }
+      });
+      dispatch({ type: ASSESSEE_INFO_CREATE });
     } else {
       dispatch({
         type: SET_ASSESSEE_NEXT_POPUP,

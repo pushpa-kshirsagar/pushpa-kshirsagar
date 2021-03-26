@@ -6,7 +6,7 @@ import PopUpAssociateLinkSignIn from './PopUpAssociateLinkSignIn';
 
 const PopUpAssociateLink = () => {
   const dispatch = useDispatch();
-  const { isPopUpValue, popupMode, popupHeaderOne, popupHeaderOneBadgeOne } = useSelector(
+  const { isPopUpValue, popupHeaderOne, popupHeaderOneBadgeOne } = useSelector(
     (state) => state.PopUpReducer
   );
   const signInOptions = [

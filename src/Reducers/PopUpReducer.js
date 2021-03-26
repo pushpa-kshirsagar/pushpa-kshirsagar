@@ -21,14 +21,12 @@ import {
   DELETE_POPUP,
   FLAG_PUPUP,
   NOTIFICATION_REPORT_POPUP,
-  REVIEW_LIST_POPUP_OPTION,
   REVIEW_POPUP_OPTIONS,
   REVIEW_REVISE_POPUP,
   SELECT_PUPUP,
   SUSPEND_PUPUP,
   TERMINATE_PUPUP,
   SELECT_OPTION_PUPUP,
-  TRIPPLE_DOT_POPUP_OPTION,
   ASSESSEE_REVIEW_REVISE_POPUP
 } from '../PopUpConfig';
 
@@ -38,7 +36,7 @@ const initialState = {
   prevPopUpValue: '',
   popupMode: '',
   popupHeaderOne: '',
-  primaryArrOprion:[],
+  primaryArrOprion: [],
   previousPopupHeaderOne: '',
   popupHeaderOneBadgeOne: '',
   popupHeaderOneBadgeTwo: '',
@@ -52,7 +50,7 @@ const initialState = {
   gridColumnCountValue: 0,
   secondaryOptionCheckValue: '',
   whichReviewList: '',
-  selectedTagValue:'',
+  selectedTagValue: '',
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
     archive: ARCHIVE_POPUP,
@@ -136,7 +134,6 @@ const PopUpReducer = (istate = initialState, action) => {
         secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue,
         popupMode: action.payload.popupMode,
         selectedTagValue: action.payload.selectedTagValue
-        
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
       return {

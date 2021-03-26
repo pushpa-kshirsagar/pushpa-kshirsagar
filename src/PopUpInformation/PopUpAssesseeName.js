@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -23,8 +23,7 @@ const PopUpAssesseeName = (props) => {
     isActive = false,
     basicInfo,
     nextPopUpValue = '',
-    typeOfSetObject,
-    handleNextPopupValue
+    typeOfSetObject
   } = props;
   const dispatch = useDispatch();
   const [state, setState] = useState({

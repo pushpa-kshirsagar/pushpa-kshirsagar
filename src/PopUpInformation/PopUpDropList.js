@@ -60,7 +60,7 @@ const PopUpDropList = (props) => {
   const handleClick = () => {
     if (validate()) {
       //according to creation mode popup sequence will change
-      if (popupMode == 'ASSESSEE_CREATE') {
+      if (popupMode === 'ASSESSEE_CREATE') {
         handleNextPopupValue();
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });

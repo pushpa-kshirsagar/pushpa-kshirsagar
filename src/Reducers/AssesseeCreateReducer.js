@@ -17,7 +17,8 @@ import {
   SET_ASSESSEE_SECONDARY_POPUP,
   UPDATE_ASSESSEE_COMMUNICATION,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  SET_ASSESSEE_INFORMATION_DATA
+  SET_ASSESSEE_INFORMATION_DATA,
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -216,6 +217,17 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           assesseeTelephoneMobilePrimary: action.payload
         }
         // mobileTelephone: action.payload
+      };
+    case SET_ASSESSEE_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        informationAllocation: {
+          ...istate.informationAllocation,
+          [action.payload.stateName]: {
+            ...istate.informationAllocation[action.payload.stateName],
+            [action.payload.actualStateName]: action.payload.value
+          }
+        }
       };
     case UPDATE_ASSESSEE_PERSONAL_INFO:
       return {

@@ -5,13 +5,8 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import {
-  SET_MIDDLEPANE_PREVIOUS_POPUP,
-  SET_MIDDLEPANE_SECONDARY_OPTION,
-  SET_SECONDARY_OPTION_VALUE
-} from '../actionType';
+import { SET_MIDDLEPANE_PREVIOUS_POPUP, SET_MIDDLEPANE_SECONDARY_OPTION } from '../actionType';
 const PopUpMiddlePaneList = (props) => {
-  
   const { popupHeaderOne, popupHeaderOneBadgeOne, popupOpenType } = useSelector(
     (state) => state.PopUpReducer
   );

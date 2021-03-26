@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
+  ASSOCIATE_POPUP_CLOSE,
+  ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
-  GET_ASSESSEE_INFO_SAGA,
+  GET_ASSOCIATE_INFO_SAGA,
   LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -16,11 +17,11 @@ import {
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
+import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
-import { REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
-const AssesseeDistinctReviewList = (props) => {
+const AssesseeRoleDistinctReviewList = (props) => {
   const { popupAllClose } = props;
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -78,78 +79,68 @@ const AssesseeDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssesseeReviewListRequestObject(siftKey, 0, countPage);
+    let requestObect = makeAssociateReviewListRequestObject(siftKey, 0, countPage);
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({
-      type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+      type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
       payload: {
         request: requestObect,
         BadgeOne: 'distinct',
         BadgeTwo: siftKey
       }
     });
-    dispatch({ type: ASSESSEE_INFO_CREATE });
+    dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (
-      siftValue === 'suspended' ||
-      siftValue === 'terminated' ||
-      siftValue === 'disapproved' ||
-      siftValue === 'unapproved' ||
-      siftValue === 'unconfirmed'
-    )
-      siftApiCall(siftValue);
+    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const secondaryIcon = [
-    { label: 'disapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
-  const openAssesseeListPopup = (e) => {
+  const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessee',
+        popupHeaderOne: 'assessees',
         popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeTwo: 'role',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  const openAssesseeRightPaneInformation = () => {
+  const openAssesseeRoleRightPaneInformation = () => {
     console.log(selectedTagValue);
     dispatch({ type: LOADER_START });
     dispatch({
-      type: GET_ASSESSEE_INFO_SAGA,
+      type: GET_ASSOCIATE_INFO_SAGA,
       payload: {
         assesseeId: '0123456',
-        associateId: '0654321',
-        filter: 'true',
-        searchCondition: 'AND',
+        associateId: '605255729d3c823d3964e0ec',
+        filter: true,
         search: [
           {
             condition: 'and',
             searchBy: [
               {
-                dataType: 'string',
+                dataType: 'String',
                 conditionColumn: 'id',
                 conditionValue: {
                   condition: 'eq',
                   value: {
-                    from: selectedTagValue ? selectedTagValue : '6054a4d6cb14fb2075aeec87'
+                    from: selectedTagValue
                   }
                 }
               }
@@ -158,11 +149,11 @@ const AssesseeDistinctReviewList = (props) => {
         ]
       }
     });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
     });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     popupAllClose();
   };
   return (
@@ -174,38 +165,18 @@ const AssesseeDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={
-                  item.informationEngagement.assesseeTag
-                    ? item.informationEngagement.assesseeTag.assesseeTagPrimary
-                    : item
-                }
-                status={assesseeStatus(
-                  middlePaneHeaderBadgeOne,
-                  item.informationEngagement.assesseeStatus
-                )}
-                isSelectedReviewList={
-                  middlePaneSelectedValue ===
-                  item.informationEngagement.assesseeTag?.assesseeTagPrimary
-                    ? true
-                    : false
-                }
-                textOne={
-                  item.informationBasic.assesseeNameFirst +
-                  ' ' +
-                  item.informationBasic.assesseeNameOther +
-                  ' ' +
-                  item.informationBasic.assesseeNameLast +
-                  ' ' +
-                  item.informationBasic.assesseeNameSuffix
-                }
-                textTwo={item.informationBasic.assesseeAlias}
+                tag={item}
+                isSelectedReviewList={false}
+                status={item.informationEngagement.assesseeRoleStatus}
+                textOne={item.informationBasic.assesseeRoleName}
+                textTwo={item.informationBasic.assesseeRoleDescription}
                 isTooltipActive={false}
-                onClickEvent={openAssesseeListPopup}
+                onClickEvent={openListPopup}
               />
             </div>
           );
         })}
-      {FilterMode === 'assesseeDistinctinactive' && (
+      {FilterMode === 'assesseeRoleDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -216,9 +187,9 @@ const AssesseeDistinctReviewList = (props) => {
       )}
       <PopUpMiddlePaneList
         isActive={isPopUpValue === 'middlePaneListPopup'}
-        onClickInformation={openAssesseeRightPaneInformation}
+        onClickInformation={openAssesseeRoleRightPaneInformation}
       />
     </div>
   );
 };
-export default AssesseeDistinctReviewList;
+export default AssesseeRoleDistinctReviewList;

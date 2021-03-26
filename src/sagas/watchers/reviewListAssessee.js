@@ -1,6 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  CREATE_ASSESSEE_SAGA,
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
   ASSESSEE_REVIEW_DISTINCT_SAGA,

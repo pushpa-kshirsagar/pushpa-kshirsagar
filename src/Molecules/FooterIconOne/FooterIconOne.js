@@ -17,11 +17,9 @@ import {
   ALIGNMENT_POPUP_ARR
 } from '../../PopUpConfig';
 export const FooterIconOne = (props) => {
-  const {
-    isPopUpValue,
-    popupHeaderOne,
-    popupHeaderOneBadgeOne
-  } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, popupHeaderOne, popupHeaderOneBadgeOne } = useSelector(
+    (state) => state.PopUpReducer
+  );
   const dispatch = useDispatch();
   const openFooterIconPopup = (e) => {
     console.log(e.currentTarget.getAttribute('data-value'));

@@ -27,9 +27,9 @@ function* getAssesseePermission() {
   try {
     const response = yield call(getAssesseePermissionApi);
     console.log('IN WORKER ====>', response.data);
-    if (response.data.status === 'success'){
+    if (response.data.status === 'success') {
       yield put({ type: SET_ASSESSEE_PERMISSION, payload: response?.data.responseObject });
-     }
+    }
   } catch (e) {
     console.log('ERROR==', e);
   }

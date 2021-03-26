@@ -22,13 +22,15 @@ const PopUpReviewList = (props) => {
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
     headerOneBadgeOne = 'information',
-    infoMsg='select one or more',
+    infoMsg = 'select one or more',
     ListData = [
-      { name: 'Simple Sample 01', description: '01' },
-      { name: 'Simple Sample 02', description: '02' },
-      { name: 'Simple Sample 03', description: '03' }
+      { id: '01', informationBasic: { name: 'Simple Sample 01', description: '01' } },
+      { id: '02', informationBasic: { name: 'Simple Sample 03', description: '03' } }
     ],
-    nextPopUpValue
+    textOne = 'name',
+    textTwo = 'description',
+    nextPopUpValue,
+    onClickEvent = null
   } = props;
 
   const handleClick = () => {
@@ -52,7 +54,9 @@ const PopUpReviewList = (props) => {
               <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
                 <Fragment>
                   {inputHeader}&nbsp;
-                  {inputHeaderBadge ? <span className={'headerBadge'}>{inputHeaderBadge}</span> : null}
+                  {inputHeaderBadge ? (
+                    <span className={'headerBadge'}>{inputHeaderBadge}</span>
+                  ) : null}
                 </Fragment>
               </InputLabel>
               <div className={'infoSymbol'}></div>
@@ -61,16 +65,21 @@ const PopUpReviewList = (props) => {
               </div>
             </div>
           </div>
-          {ListData.map((index, option) => (
-            <ReviewList
-              textOne={index.name}
-              id={index}
-              isAlertActive={false}
-              isFlagActive={false}
-              isSelectActive={false}
-              key={index}
-            />
-          ))}
+          {ListData &&
+            ListData.map((index, option) => (
+              <ReviewList
+                textOne={index.informationBasic[textOne]}
+                textTwo={index.informationBasic[textTwo]}
+                id={index.id}
+                tag={index.id}
+                isAlertActive={false}
+                isFlagActive={false}
+                isSelectActive={false}
+                key={index}
+                onClickEvent={onClickEvent}
+                // isSelectedReviewList={selectedIdsArr.includes(index.id)}
+              />
+            ))}
 
           <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
             <span>{errorMsg}</span>

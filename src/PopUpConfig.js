@@ -695,8 +695,7 @@ export const REVIEW_LIST_POPUP_OPTION = [
     dataValue: 'reports',
     optionClass: 'optionPrimary',
     disabled: false
-  },
-
+  }
 ];
 export const ASSOCIATE_REVIEW_LIST_POPUP_OPTION = [
   {
@@ -771,11 +770,10 @@ export const ASSOCIATE_REVIEW_LIST_POPUP_OPTION = [
     dataValue: 'reports',
     optionClass: 'optionPrimary',
     disabled: false
-  },
-
+  }
 ];
 
-export const ALLOCATE_POPUP =[
+export const ALLOCATE_POPUP = [
   {
     data: 'assessees',
     dataValue: 'assessees',
@@ -798,7 +796,7 @@ export const ALLOCATE_POPUP =[
     data: 'associates',
     dataValue: 'associates',
     optionClass: 'optionPrimary',
-    divider:'dark',
+    divider: 'dark',
     disabled: false
   },
   {
@@ -829,7 +827,7 @@ export const ALLOCATE_POPUP =[
     data: 'types',
     dataValue: 'types',
     optionClass: 'optionPrimary',
-    divider:'dark',
+    divider: 'dark',
     disabled: false
   },
   {
@@ -867,7 +865,7 @@ export const DELETE_POPUP = [
     disabled: false
   }
 ];
-export const FLAG_PUPUP =[
+export const FLAG_PUPUP = [
   {
     data: 'flag',
     dataValue: 'flag',
@@ -881,7 +879,7 @@ export const FLAG_PUPUP =[
     disabled: false
   }
 ];
-export const SELECT_PUPUP =[
+export const SELECT_PUPUP = [
   {
     data: 'select',
     dataValue: 'select',
@@ -895,7 +893,7 @@ export const SELECT_PUPUP =[
     disabled: false
   }
 ];
-export const SELECT_OPTION_PUPUP =[
+export const SELECT_OPTION_PUPUP = [
   {
     data: 'select',
     dataValue: 'select',
@@ -908,14 +906,25 @@ export const SELECT_OPTION_PUPUP =[
     optionClass: 'optionPrimary',
     disabled: false
   },
-  { data: 'all', dataValue: 'all', optionClass: 'optionSecondary', divider:'light', disabled: false },
+  {
+    data: 'all',
+    dataValue: 'all',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
   { data: 'flaged', dataValue: 'flaged', optionClass: 'optionSecondary', disabled: false },
-  { data: 'multiple', dataValue: 'multiple', optionClass: 'optionSecondary', divider:'light', disabled: false },
+  {
+    data: 'multiple',
+    dataValue: 'multiple',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
   { data: 'hide', dataValue: 'hide', optionClass: 'optionSecondary', disabled: false },
-  { data: 'unhide', dataValue: 'unhide', optionClass: 'optionSecondary', disabled: false },
-
+  { data: 'unhide', dataValue: 'unhide', optionClass: 'optionSecondary', disabled: false }
 ];
-export const SUSPEND_PUPUP =[
+export const SUSPEND_PUPUP = [
   {
     data: 'suspend',
     dataValue: 'suspend',
@@ -929,7 +938,7 @@ export const SUSPEND_PUPUP =[
     disabled: false
   }
 ];
-export const TERMINATE_PUPUP =[
+export const TERMINATE_PUPUP = [
   {
     data: 'terminate',
     dataValue: 'terminate',
@@ -1017,5 +1026,4 @@ export const TRIPPLE_DOT_POPUP_OPTION = [
     optionClass: 'optionPrimary',
     disabled: false
   }
-
 ];

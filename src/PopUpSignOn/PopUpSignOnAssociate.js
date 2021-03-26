@@ -104,15 +104,13 @@ const PopUpSignOnAssociate = () => {
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
-    } else if(isPopUpValue === 'PICTUREPOPUP') {
-      if(popupMode === 'ASSOCIATE_SIGN_ON'){
+    } else if (isPopUpValue === 'PICTUREPOPUP') {
+      if (popupMode === 'ASSOCIATE_SIGN_ON') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
-      }
-      else{
+      } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ASSESSEEROLELISTPOPUP' } });
       }
-    }
-    else {
+    } else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
   };
@@ -237,7 +235,6 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.adminBasicInfo}
         typeOfSetObject={UPDATE_ASSOCIATE_ADMIN_BASIC_INFO}
         handleNextPopupValue={handleNextPopupValue}
-
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'ASSESSEEROLELISTPOPUP'}

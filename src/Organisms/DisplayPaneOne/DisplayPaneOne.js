@@ -23,7 +23,6 @@ import {
   setAssesseeCardPermissionInJson,
   setAssociateCardPermissionInJson
 } from '../../Actions/GenericActions';
-import PopUpDisplayPaneOneSectionOne from '../../PopUpDisplayPanel/PopUpDisplayPaneOneSectionOne';
 import PopUpDisplayPaneOneSectionTwo from '../../PopUpDisplayPanel/PopUpDisplayPaneOneSectionTwo';
 import PopUpAssesseesModule from '../../PopUpDisplayPanel/PopUpAssesseesModule';
 import PopUpAssociatesModule from '../../PopUpDisplayPanel/PopUpAssociatesModule';
@@ -67,10 +66,7 @@ export const DisplayPaneOne = () => {
   const dispatch = useDispatch();
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission = null } = useSelector((state) => state.UserReducer);
-  const { assesseesPopUpActive } = useSelector((state) => state.AssesseeCreateReducer);
-  const { isAssociateSelected, selectedAssociateInfo } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const associateName = selectedAssociateInfo
     ? selectedAssociateInfo.associateInformation.associateName
     : 'associates';
@@ -137,7 +133,7 @@ export const DisplayPaneOne = () => {
   return (
     <>
       <div>
-        <HeaderCard 
+        <HeaderCard
           className=""
           displayPane="left"
           headerOne={selectedSection.displayPaneLeftHeaderText}

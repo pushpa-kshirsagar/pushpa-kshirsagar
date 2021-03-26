@@ -33,7 +33,8 @@ const initialState = {
   reviewListDistinctData: [],
   coreReviewListData: [],
   coreReviewListReqObj: null,
-  reviewListReqObj: null
+  reviewListReqObj: null,
+  middlePaneSelectedValue: ''
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {
@@ -54,7 +55,8 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         middlePaneHeaderBadgeFour: action.payload.middlePaneHeaderBadgeFour,
         typeOfMiddlePaneList: action.payload.typeOfMiddlePaneList,
         scanCount: action.payload.scanCount,
-        showMiddlePaneState: action.payload.showMiddlePaneState
+        showMiddlePaneState: action.payload.showMiddlePaneState,
+        middlePaneSelectedValue: 'tag'
       };
     case SET_SCAN_POPUP_STATE:
       return {

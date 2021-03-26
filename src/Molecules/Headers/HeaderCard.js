@@ -9,7 +9,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import Clear from '@material-ui/icons/Clear';
 
 import './HeaderCard.css';
-import { POPUP_OPEN, ASSESSEE_SIGN_ON, SET_POPUP_STATE, SET_SCAN_POPUP_STATE } from '../../actionType';
+import {
+  POPUP_OPEN,
+  ASSESSEE_SIGN_ON,
+  SET_POPUP_STATE,
+  SET_SCAN_POPUP_STATE
+} from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
 import { TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
 const HeaderCard = (props) => {
@@ -25,14 +30,17 @@ const HeaderCard = (props) => {
     showMiddlePaneState
   } = props;
   const dispatch = useDispatch();
-  const { typeOfMiddlePaneList, middlePaneHeader } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { typeOfMiddlePaneList, middlePaneHeader, middlePaneHeaderBadgeOne } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const onClickScan = () => {
+    alert(typeOfMiddlePaneList)
     dispatch({
       type: SET_SCAN_POPUP_STATE,
       payload: {
         scanHeader: middlePaneHeader,
-        scanHeaderBadgeOne: 'scan',
-        scanHeaderBadgeTwo: ''
+        scanHeaderBadgeOne: middlePaneHeaderBadgeOne === 'distinct' ? '' : middlePaneHeaderBadgeOne,
+        scanHeaderBadgeTwo: 'scan'
       }
     });
     dispatch({
@@ -40,7 +48,7 @@ const HeaderCard = (props) => {
       payload: { isPopUpValue: typeOfMiddlePaneList, popupMode: 'SCAN_POPUP_FUN' }
     });
   };
-  const openMiddlePaneTripleDotPopup = () =>{
+  const openMiddlePaneTripleDotPopup = () => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -52,7 +60,7 @@ const HeaderCard = (props) => {
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
-  }
+  };
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
@@ -64,7 +72,7 @@ const HeaderCard = (props) => {
           ].join(' ')}
         >
           <div className={'iguru-componentinnerdiv'}>
-           <div className={'iguru-moretextpanelheader'}>
+            <div className={'iguru-moretextpanelheader'}>
               <div>
                 <span>{headerOne}</span>&nbsp;
                 {headerOneBadgeOne !== '' ? (
@@ -128,7 +136,10 @@ const HeaderCard = (props) => {
                   </IconButton>
                 ) : displayPane === 'centre' && showMiddlePaneState ? (
                   <IconButton>
-                    <MoreVert className={'iguru-iconbardefault'}  onClick={openMiddlePaneTripleDotPopup}/>
+                    <MoreVert
+                      className={'iguru-iconbardefault'}
+                      onClick={openMiddlePaneTripleDotPopup}
+                    />
                   </IconButton>
                 ) : displayPane === 'right' ? (
                   <IconButton>

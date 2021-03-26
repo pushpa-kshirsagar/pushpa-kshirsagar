@@ -30,7 +30,7 @@ const initialState = {
   associatesHeaderOne: '',
   associatesHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
-  associateInfomationData:'',
+  associateInfomationData: '',
   currentPopUpOption: [],
   secondaryPopUpOptions: {
     create: REVIEW_REVISE_POPUP,
@@ -60,7 +60,7 @@ const initialState = {
       associateNodeSecondary: []
     },
     associateRole: {
-      associateRolePrimary: ["3432342"],
+      associateRolePrimary: ['3432342'],
       associateRoleSecondary: []
     }
   },
