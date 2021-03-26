@@ -8,7 +8,7 @@ import BasicCard from '../../Molecules/BasicCard/BasicCard';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import Sections from '../../Molecules/Section/Section';
 import { useDispatch, useSelector } from 'react-redux';
-import { CLEAR_DISPLAY_PANE_THREE, NAVIGATOR_MODE } from '../../actionType';
+import { CLEAR_DISPLAY_PANE_THREE, NAVIGATOR_MODE, SET_MOBILE_PANE_STATE } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import './DisplayPaneThree.css';
 import DisplayPaneThreeSectionOne from '../../Molecules/DisplayPaneThreeSectionOne/DisplayPaneThreeSectionOne';
@@ -70,10 +70,14 @@ export const DisplayPaneThree = () => {
     headerOneBadgeThree,
     responseObject
   } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const {
+    showMiddlePaneState
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationBasic } = responseObject;
 
   const onClickClearInfo = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: showMiddlePaneState ?'displayPaneTwo' : 'displayPaneOne' });
   };
   console.log('DISPLAY PANE THREE++++++>', responseObject);
 

@@ -22,7 +22,8 @@ const HeaderCard = (props) => {
     displayPane = '',
     scanCount,
     headerPanelColour,
-    showMiddlePaneState
+    showMiddlePaneState,
+    onClickClearInfo = null
   } = props;
   const dispatch = useDispatch();
   const { typeOfMiddlePaneList, middlePaneHeader } = useSelector((state) => state.DisplayPaneTwoReducer);
@@ -112,7 +113,7 @@ const HeaderCard = (props) => {
                     <NextIcon className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : displayPane === 'right' ? (
-                  <IconButton>
+                  <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : null}

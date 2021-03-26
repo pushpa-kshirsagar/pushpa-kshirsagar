@@ -5,9 +5,10 @@ import {
   GET_ASSESSEE_INFO_SAGA
 } from '../../actionType';
 import { ASSESSEE_REVIEW_INFO_URL } from '../../endpoints';
+import store from '../../store';
 
 const assesseesReviewInfoApi = async (requestObj) => {
-  console.log(requestObj.data);
+  console.log("]]]]]]]]]]]]]]",requestObj.data);
   let URL = ASSESSEE_REVIEW_INFO_URL;
   const requestOptions = {
     method: 'POST',
@@ -20,7 +21,7 @@ const assesseesReviewInfoApi = async (requestObj) => {
 
 function* workerReviewInfoAssesseeSaga(data) {
   try {
-    const userResponse = yield call(assesseesReviewInfoApi, { data: data.payload });
+    const userResponse = yield call(assesseesReviewInfoApi, { data: data.payload.reqBody });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       console.log('ASSESSEE_REVIEW_INFO=======>', userResponse);
@@ -29,7 +30,7 @@ function* workerReviewInfoAssesseeSaga(data) {
         payload: {
           headerOne: 'assessee',
           headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: 'all',
+          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
           responseObject: userResponse.responseObject[0]
         }
       });
