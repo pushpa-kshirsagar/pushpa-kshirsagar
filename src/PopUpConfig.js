@@ -583,6 +583,21 @@ export const MARKETPLACE_POPUP_OPTION = [
   },
   { data: 'review', dataValue: 'marketplacereview', optionClass: 'optionPrimary', disabled: false }
 ];
+export const CREATE_INFORMATION_POPUP = [
+  {
+    data: 'information',
+    dataValue: 'information',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'key',
+    dataValue: 'key',
+    optionClass: 'optionSecondary',
+    disabled: false
+  }
+];
 export const REVIEW_DISTINCT_POPUP_OPTION = [
   {
     data: 'distinct',

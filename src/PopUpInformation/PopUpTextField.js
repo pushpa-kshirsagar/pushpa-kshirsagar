@@ -18,6 +18,7 @@ const PopUpTextField = (props) => {
     headerPanelColour = '',
     headerOne = '',
     headerOneBadgeOne = '',
+    headerOneBadgeTwo = '',
     isActive = false,
     isRequired = false,
     label = '',
@@ -66,7 +67,7 @@ const PopUpTextField = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
-          headerOneBadgeTwo={''}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           headerOneBadgeThree={''}
           onClick={handleClick}
         />

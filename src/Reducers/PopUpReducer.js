@@ -10,7 +10,9 @@ import {
   SET_SECONDARY_OPTION_VALUE,
   SET_POPUP_VALUE,
   SET_MIDDLEPANE_SECONDARY_OPTION,
-  SET_MIDDLEPANE_PREVIOUS_POPUP
+  SET_MIDDLEPANE_PREVIOUS_POPUP,
+  CLEAR_POPUP_INFO,
+  SET_POPUP_SINGLE_STATE
 } from '../actionType';
 import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
 import CalculatorIcon from '@material-ui/icons/Keyboard';
@@ -27,7 +29,8 @@ import {
   SUSPEND_PUPUP,
   TERMINATE_PUPUP,
   SELECT_OPTION_PUPUP,
-  ASSESSEE_REVIEW_REVISE_POPUP
+  ASSESSEE_REVIEW_REVISE_POPUP,
+  GROUP_NODE_ROLE_TYPE_POPUP_OPTION
 } from '../PopUpConfig';
 
 const initialState = {
@@ -51,6 +54,7 @@ const initialState = {
   secondaryOptionCheckValue: '',
   whichReviewList: '',
   selectedTagValue: '',
+  currentPopUpOption:[],
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
     archive: ARCHIVE_POPUP,
@@ -133,7 +137,8 @@ const PopUpReducer = (istate = initialState, action) => {
         popupHeaderOneBadgeTwo: action.payload.popupHeaderOneBadgeTwo,
         secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue,
         popupMode: action.payload.popupMode,
-        selectedTagValue: action.payload.selectedTagValue
+        selectedTagValue: action.payload.selectedTagValue,
+        currentPopUpOption: action.payload.currentPopUpOption
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
       return {
@@ -141,10 +146,27 @@ const PopUpReducer = (istate = initialState, action) => {
         gridColumnCountValue: action.payload
       };
     case SET_SECONDARY_OPTION_VALUE:
-      return {
-        ...istate,
-        secondaryOptionCheckValue: action.payload
-      };
+      // return {
+      //   ...istate,
+      //   secondaryOptionCheckValue: action.payload
+      // };
+      if (action.payload === '') {
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload,
+          currentPopUpOption: GROUP_NODE_ROLE_TYPE_POPUP_OPTION
+        };
+      } else {
+        let tempArr = [];
+        GROUP_NODE_ROLE_TYPE_POPUP_OPTION.forEach((element) => {
+          tempArr.push({ ...element, disabled: false });
+        });
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload,
+          currentPopUpOption: tempArr
+        };
+      }
     case SET_MIDDLEPANE_SECONDARY_OPTION: {
       if (istate.popupOpenType === 'primary') {
         if (action.payload === 'notifications' || action.payload === 'reports') {
@@ -189,7 +211,13 @@ const PopUpReducer = (istate = initialState, action) => {
       } else {
         return istate;
       }
-
+    case SET_POPUP_SINGLE_STATE:
+      return {
+        ...istate,
+        [action.payload.stateName]: action.payload.value
+      };
+    case CLEAR_POPUP_INFO:
+      return istate;
     default:
       return istate;
   }

@@ -108,7 +108,7 @@ const PopUpSignOnAssociate = () => {
       if (popupMode === 'ASSOCIATE_SIGN_ON') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
       } else {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ASSESSEEROLELISTPOPUP' } });
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ASSESSEEGROUPLISTPOPUP' } });
       }
     } else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
@@ -160,16 +160,79 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
         basicInfo={associateInfo.basicInfo}
+        nextPopUpValue={'GROUPPOPUP'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'MANAGERPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a group'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'NODEPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a manager'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'NODEPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
         nextPopUpValue={'ROLEPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a node'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'ROLEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
+        nextPopUpValue={'WORKADDRESSPOPUP'}
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
-        nextPopUpValue={'WORKADDRESSPOPUP'}
+        infoMsg={'select a role'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
       />
       <PopUpAddress
         isActive={isPopUpValue === 'WORKADDRESSPOPUP'}
@@ -237,13 +300,76 @@ const PopUpSignOnAssociate = () => {
         handleNextPopupValue={handleNextPopupValue}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'ASSESSEEGROUPLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'administrator'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'ASSESSEEMANAGERLISTPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a group'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ASSESSEEMANAGERLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'administrator'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'ASSESSEENODELISTPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a role'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ASSESSEENODELISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'administrator'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'ASSESSEEROLELISTPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a node'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'ASSESSEEROLELISTPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'administrator'}
         headerOneBadgeOne={'information'}
+        nextPopUpValue={'EMAILPOPUP'}
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
-        nextPopUpValue={'EMAILPOPUP'}
+        infoMsg={'select a role'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}

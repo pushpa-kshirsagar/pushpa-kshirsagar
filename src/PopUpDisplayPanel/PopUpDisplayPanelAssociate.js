@@ -5,11 +5,13 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
+  SET_POPUP_VALUE,
   GET_ASSOCIATE_INFO_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_POPUP_SINGLE_STATE,
   SET_POPUP_STATE,
   SET_SECONDARY_OPTION_VALUE
 } from '../actionType';
@@ -22,16 +24,23 @@ import {
   REVIEW_POPUP_OPTIONS,
   MARKETPLACE_POPUP_OPTION,
   REVIEW_DISTINCT_POPUP_OPTION,
-  GROUP_NODE_ROLE_TYPE_POPUP_OPTION
+  GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
+  CREATE_INFORMATION_POPUP
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { setAssociateCardPermissionInJson } from '../Actions/GenericActions';
+import {
+  setAssociateCardPermissionInJson,
+  setAssociateCardEnableInJson
+} from '../Actions/GenericActions';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
     popupHeaderOneBadgeTwo,
-    popupOpenType
+    popupOpenType,
+    secondaryOptionCheckValue,
+    isPopUpValue,
+    currentPopUpOption
   } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
 
@@ -39,10 +48,24 @@ const PopUpDisplayPanelAssociate = (props) => {
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
 
   const setSecondaryOptionValue = (e) => {
-    dispatch({
-      type: SET_SECONDARY_OPTION_VALUE,
-      payload: e.currentTarget.getAttribute('data-value')
-    });
+    if (popupHeaderOne === 'roles') {
+      if (
+        e.currentTarget.getAttribute('data-value') === 'assessees' ||
+        e.currentTarget.getAttribute('data-value') === 'associates'
+      ) {
+        dispatch({
+          type: SET_SECONDARY_OPTION_VALUE,
+          payload: e.currentTarget.getAttribute('data-value')
+        });
+      }
+    } else {
+      dispatch({
+        type: SET_SECONDARY_OPTION_VALUE,
+        payload: e.currentTarget.getAttribute('data-value')
+      });
+    }
+
+    // dispatch({type:SET_POPUP_SINGLE_STATE,payload:{stateName:'popupContentArrValue',value:''}})
   };
   const ChangeOptionPopup = (e) => {
     console.log(e.currentTarget.getAttribute('data-value'));
@@ -127,7 +150,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
-      reviseSecondaryOptionCheckValue = 'assessees';
+      reviseSecondaryOptionCheckValue = '';
     }
     if (clickValue === 'types') {
       revisePopupHeaderOne = clickValue;
@@ -206,18 +229,35 @@ const PopUpDisplayPanelAssociate = (props) => {
         }
       });
     }
-    dispatch({
-      type: SET_POPUP_STATE,
-      payload: {
-        popupHeaderOne: revisePopupHeaderOne,
-        popupHeaderOneBadgeOne: revisepopupHeaderOneBadgeOne,
-        popupHeaderOneBadgeTwo: revisepopupHeaderOneBadgeTwo,
-        isPopUpValue: reviseisPopUpValue,
-        popupOpenType: revisePopupType,
-        secondaryOptionCheckValue: reviseSecondaryOptionCheckValue,
-        popupContentArrValue: valueArr
-      }
-    });
+    if (clickValue === 'create') {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisepopupHeaderOneBadgeOne = 'role';
+      revisepopupHeaderOneBadgeTwo = 'create';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = CREATE_INFORMATION_POPUP;
+      reviseSecondaryOptionCheckValue = 'key';
+    }
+    if (clickValue === 'information' && (popupHeaderOne==='assessees' || popupHeaderOne==='associates' )) {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne+'ROLECREATE' }
+      });
+    } else {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: revisePopupHeaderOne,
+          popupHeaderOneBadgeOne: revisepopupHeaderOneBadgeOne,
+          popupHeaderOneBadgeTwo: revisepopupHeaderOneBadgeTwo,
+          isPopUpValue: reviseisPopUpValue,
+          popupOpenType: revisePopupType,
+          secondaryOptionCheckValue: reviseSecondaryOptionCheckValue,
+          popupContentArrValue: valueArr,
+          currentPopUpOption: []
+        }
+      });
+    }
   };
   const BackHandlerEvent = (e) => {
     let revisePopupHeaderOne = 'associate';
@@ -253,7 +293,6 @@ const PopUpDisplayPanelAssociate = (props) => {
         valueArr = EXCHANGE_POPUP_OPTION;
         revisePopupType = 'secondary';
       }
-
       dispatch({
         type: SET_POPUP_STATE,
         payload: {
@@ -283,6 +322,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeOptionPopup}
+            secondaryOptionCheckValue={secondaryOptionCheckValue}
+            currentPopUpOption={currentPopUpOption}
           />
         </DialogContent>
       </Popup>

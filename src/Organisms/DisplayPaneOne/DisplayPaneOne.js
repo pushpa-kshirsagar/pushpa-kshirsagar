@@ -33,6 +33,8 @@ import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import PopUpScan from '../../PopUpInformation/PopUpScan';
 import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
+import AssesseeRoleCreatePopUp from '../../Molecules/PopUpCreate/AssesseeRoleCreatePopUp';
+import AssociateRoleCreatePopup from '../../Molecules/PopUpCreate/AssociateRoleCreatePopup';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -94,11 +96,11 @@ export const DisplayPaneOne = () => {
       }
       if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
         popupHeaderOne = 'associate';
-        // popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
-        popupContentArrValue = setAssociateCardPermissionInJson(
-          ASSOCIATE_CARD_POPUP_OPTION,
-          assesseePermission
-        );
+        popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
+        // popupContentArrValue = setAssociateCardPermissionInJson(
+        //   ASSOCIATE_CARD_POPUP_OPTION,
+        //   assesseePermission
+        // );
 
         value = 'ASSOCIATE_CARD_POPUP';
       }
@@ -109,7 +111,8 @@ export const DisplayPaneOne = () => {
           popupHeaderOneBadgeOne: '',
           isPopUpValue: value,
           popupOpenType: 'primary',
-          popupContentArrValue: popupContentArrValue
+          popupContentArrValue: popupContentArrValue,
+          currentPopUpOption:[]
         }
       });
     } else {
@@ -196,6 +199,8 @@ export const DisplayPaneOne = () => {
       <PopUpAssociateLink />
       {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
+      {popupMode === 'assesseesROLECREATE' && <AssesseeRoleCreatePopUp />}
+      {popupMode === 'associatesROLECREATE' && <AssociateRoleCreatePopup />}
       {popupMode === 'SCAN_POPUP_FUN' && <PopUpScan />}
     </>
   );

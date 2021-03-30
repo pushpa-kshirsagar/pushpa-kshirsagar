@@ -16,7 +16,9 @@ import {
   CLEAR_ASSOCIATE_INFO,
   CLEAR_ASSESSMENT_INFO,
   CLEAR_ASSIGNMENT_INFO,
-  CLEAR_IGAUGE_REDUCER
+  CLEAR_IGAUGE_REDUCER,
+  CLEAR_POPUP_INFO,
+  CLEAR_ROLE_REDUCER_STATE
 } from '../../actionType';
 
 const PopupHeader = (props) => {
@@ -37,9 +39,11 @@ const PopupHeader = (props) => {
       dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CANCELPOPUP' } });
     } else {
+      dispatch({ type: CLEAR_POPUP_INFO });
       dispatch({ type: CLEAR_ASSESSEE_INFO });
       dispatch({ type: CLEAR_ASSESSMENT_INFO });
       dispatch({ type: POPUP_CLOSE });
+      dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
       dispatch({ type: CLEAR_ASSOCIATE_INFO });
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
       dispatch({ type: CLEAR_IGAUGE_REDUCER });
