@@ -20,7 +20,7 @@ const associateReviewInfoApi = async (requestObj) => {
 
 function* workerReviewInfoAssociateSaga(data) {
   try {
-    const userResponse = yield call(associateReviewInfoApi, { data: data.payload });
+    const userResponse = yield call(associateReviewInfoApi, { data: data.payload.reqBody });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       console.log('ASSESSEE_REVIEW_INFO=======>', userResponse);
@@ -29,7 +29,7 @@ function* workerReviewInfoAssociateSaga(data) {
         payload: {
           headerOne: 'associate',
           headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: 'all',
+          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
           responseObject: userResponse.responseObject[0]
         }
       });

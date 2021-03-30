@@ -70,16 +70,17 @@ export const DisplayPaneThree = () => {
     headerOneBadgeThree,
     responseObject
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const {
-    showMiddlePaneState
-  } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { showMiddlePaneState } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationBasic } = responseObject;
 
   const onClickClearInfo = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: showMiddlePaneState ?'displayPaneTwo' : 'displayPaneOne' });
+    dispatch({
+      type: SET_MOBILE_PANE_STATE,
+      payload: showMiddlePaneState ? 'displayPaneTwo' : 'displayPaneOne'
+    });
   };
-  console.log('DISPLAY PANE THREE++++++>', responseObject);
+  console.log('DISPLAY PANE THREE++++++>', responseObject, headerOneBadgeThree);
 
   return (
     <>
@@ -124,6 +125,30 @@ export const DisplayPaneThree = () => {
             primaryIcon={primaryIcon}
             secondaryIcon={secondaryIcon}
           />
+        </>
+      )}
+      {isReviewRevise && responseObject && headerOneBadgeOne === 'role' && (
+        <>
+          <div style={{ padding: '2.5px' }}>
+            <div style={{ padding: '2.5px' }}>
+              <BasicCard
+                isAlertActive
+                isFlagActive
+                className=""
+                labelTextOneOne="name"
+                labelTextOneTwo="alias"
+                textOneOne={informationBasic.assesseeRoleName || 'No Information'}
+                textOneTwo={informationBasic.assesseeRoleDescription || 'No Information'}
+                isVerifiedActiveName={false}
+                isVerifiedActivePicture={false}
+              />
+            </div>
+            {/* <Sections
+              listSections={rightPaneSectionsAssessee}
+              selectedSection={selectedSection}
+              setSelectedSection={setSelectedSection}
+            /> */}
+          </div>
         </>
       )}
       {isReviewRevise && responseObject && headerOne === 'associate' && (

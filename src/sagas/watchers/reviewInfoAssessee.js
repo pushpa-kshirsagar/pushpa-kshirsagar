@@ -8,7 +8,6 @@ import { ASSESSEE_REVIEW_INFO_URL } from '../../endpoints';
 import store from '../../store';
 
 const assesseesReviewInfoApi = async (requestObj) => {
-  console.log("]]]]]]]]]]]]]]",requestObj.data);
   let URL = ASSESSEE_REVIEW_INFO_URL;
   const requestOptions = {
     method: 'POST',

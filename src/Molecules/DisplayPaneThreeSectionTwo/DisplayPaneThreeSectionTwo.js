@@ -61,7 +61,10 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a2',
       labelTextOneOne: 'home address',
-      multiline: true,
+      multiline:
+        informationContact &&
+        informationContact.assesseeAddressHomePrimary &&
+        informationContact.assesseeAddressHomePrimary.length > 40,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
@@ -130,7 +133,10 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a5',
       labelTextOneOne: 'work address',
-      multiline: true,
+      multiline:
+        informationContact &&
+        informationContact.assesseeAddressWorkPrimary &&
+        informationContact.assesseeAddressWorkPrimary.length > 40,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',

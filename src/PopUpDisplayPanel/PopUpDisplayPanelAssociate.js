@@ -31,7 +31,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
     popupHeaderOneBadgeTwo,
-    popupOpenType
+    popupOpenType,
+    secondaryOptionCheckValue
   } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
 
@@ -167,26 +168,29 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({
         type: GET_ASSOCIATE_INFO_SAGA,
         payload: {
-          assesseeId: '0123456',
-          associateId: '605255729d3c823d3964e0ec',
-          filter: true,
-          search: [
-            {
-              condition: 'and',
-              searchBy: [
-                {
-                  dataType: 'String',
-                  conditionColumn: 'id',
-                  conditionValue: {
-                    condition: 'eq',
-                    value: {
-                      from: '605255729d3c823d3964e0ec'
+          secondaryOptionCheckValue,
+          reqBody: {
+            assesseeId: '0123456',
+            associateId: '605255729d3c823d3964e0ec',
+            filter: true,
+            search: [
+              {
+                condition: 'and',
+                searchBy: [
+                  {
+                    dataType: 'String',
+                    conditionColumn: 'id',
+                    conditionValue: {
+                      condition: 'eq',
+                      value: {
+                        from: '605255729d3c823d3964e0ec'
+                      }
                     }
                   }
-                }
-              ]
-            }
-          ]
+                ]
+              }
+            ]
+          }
         }
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
@@ -283,6 +287,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeOptionPopup}
+            secondaryOptionCheckValue={secondaryOptionCheckValue}
           />
         </DialogContent>
       </Popup>

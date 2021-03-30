@@ -299,8 +299,13 @@ const DisplayPaneThreeSectionOne = () => {
     {
       id: 'a1',
       labelTextOneOne: 'sign-in',
-      textOneOne: informationSetup?.assesseeSignInCredential || 'No Information',
-      labelTextOneOneBadgeOne: '',
+      textOneOne: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'credential',
+          textOne: informationSetup?.assesseeSignInCredential || 'No Information'
+        }
+      ],
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
