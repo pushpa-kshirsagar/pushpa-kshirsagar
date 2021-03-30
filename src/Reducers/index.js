@@ -10,6 +10,7 @@ import AssignmentReducer from './AssignmentReducer';
 import IgaugeReducer from './IgaugeReducer';
 import LoaderReducer from './LoaderReducer';
 import DisplayPaneThreeReducer from './DisplayPaneThreeReducer';
+import RoleCreateReducer from './RoleCreateReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   AssignmentReducer,
   IgaugeReducer,
   LoaderReducer,
-  DisplayPaneThreeReducer
+  DisplayPaneThreeReducer,
+  RoleCreateReducer
 });

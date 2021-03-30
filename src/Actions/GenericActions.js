@@ -14,6 +14,19 @@ export const setAssesseeCardPermissionInJson = (popupValuArr, assesseePermission
   return popupContentArrValue;
 };
 
+export const setAssociateCardEnableInJson = (popupValuArr) => {
+  var isDisabled = true;
+  let popupContentArrValue = popupValuArr.map(function (el) {
+    var o = Object.assign({}, el);
+    o.disabled = isDisabled;
+    return o;
+  });
+  console.log(popupContentArrValue)
+
+  return popupContentArrValue;
+};
+
+
 export const setAssociateCardPermissionInJson = (popupValuArr, assesseePermission) => {
   var isDisabled = true;
   console.log(assesseePermission);
@@ -331,6 +344,38 @@ export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage,
   return regObj;
 }
 export const makeAssesseeRoleObj = () =>{
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321'
+    // filter: 'true',
+    // orderBy: {
+    //   columnName: 'informationBasic.assesseeRole',
+    //   order: 'asc'
+    // },
+    // numberPage: 0,
+    // countPage: 25,
+    // searchCondition: 'AND',
+    // search: [
+    //   {
+    //     condition: 'or',
+    //     searchBy: [
+    //       {
+    //         dataType: 'string',
+    //         conditionColumn: 'informationEngagement.assesseeStatus',
+    //         conditionValue: {
+    //           condition: 'eq',
+    //           value: {
+    //             from: 'ACTIVE'
+    //           }
+    //         }
+    //       }
+    //     ]
+    //   }
+    // ]
+  };
+  return requestObj;
+}
+export const makeAssesseeRoleScanRequestObject = (filterKey, numberPage, countPage, searchStr) =>{
   let requestObj = {
     assesseeId: '0123456',
     associateId: '0654321'

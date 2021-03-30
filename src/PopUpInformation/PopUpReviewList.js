@@ -25,7 +25,8 @@ const PopUpReviewList = (props) => {
     infoMsg = 'select one or more',
     ListData = [
       { id: '01', informationBasic: { name: 'Simple Sample 01', description: '01' } },
-      { id: '02', informationBasic: { name: 'Simple Sample 03', description: '03' } }
+      { id: '02', informationBasic: { name: 'Simple Sample 02', description: '02' } },
+      { id: '03', informationBasic: { name: 'Simple Sample 03', description: '03' } }
     ],
     textOne = 'name',
     textTwo = 'description',

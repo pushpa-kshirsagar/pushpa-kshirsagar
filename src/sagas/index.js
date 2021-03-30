@@ -10,6 +10,8 @@ import watchReviewListAssociateSaga from './watchers/reviewListAssociate';
 import watchReviewAssesseeRoleListSaga from './watchers/reviewRole';
 import watchReviewAssesseeRoleInfoSaga from './watchers/reviewInfoAssesseeRole';
 
+import watchcreateAssesseeRoleSaga from './watchers/createAssesseeRole';
+import watchcreateAssociateRoleSaga from './watchers/createAssociateRole';
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
   yield all([
@@ -21,6 +23,8 @@ export default function* root() {
     fork(watchReviewInfoAssociateSaga),
     fork(watchReviewListAssociateSaga),
     fork(watchReviewAssesseeRoleListSaga),
-    fork(watchReviewAssesseeRoleInfoSaga)
+    fork(watchReviewAssesseeRoleInfoSaga),
+    fork(watchcreateAssesseeRoleSaga),
+    fork(watchcreateAssociateRoleSaga)
   ]);
 }

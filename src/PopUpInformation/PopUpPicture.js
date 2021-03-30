@@ -19,7 +19,8 @@ const PopUpPicture = (props) => {
     isActive = false,
     headerPanelColour = 'genericOne',
     headerOne = 'assessee',
-    headerOneBadgeOne = 'information',
+    headerOneBadgeOne = '',
+    headerOneBadgeTwo = '',
     nextPopUpValue,
     handleNextPopupValue
   } = props;
@@ -41,6 +42,7 @@ const PopUpPicture = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           onClick={handleClick}
         />
         <DialogContent

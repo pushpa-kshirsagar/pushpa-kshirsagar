@@ -14,6 +14,7 @@ const PopUpConfirmation = (props) => {
     headerPanelColour,
     headerOne,
     headerOneBadgeOne,
+    headerOneBadgeTwo,
     onClickYes = null,
     mode = 'confirm'
   } = props;
@@ -40,6 +41,12 @@ const PopUpConfirmation = (props) => {
         payload: { isPopUpValue: 'NAMEALIASPOPUP' }
       });
     }
+    if (popupMode === 'assesseesROLECREATE' || popupMode === 'associatesROLECREATE') {
+      dispatch({
+        type: SET_NEXT_POPUP,
+        payload: { isPopUpValue: 'NAMEPOPUP' }
+      });
+    }
   };
   return (
     <div>
@@ -48,7 +55,7 @@ const PopUpConfirmation = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
-          headerOneBadgeTwo={''}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           headerOneBadgeThree={''}
           mode={mode}
           onClick={handleBack}

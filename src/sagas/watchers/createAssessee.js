@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { signUpForAwsCognito } from '../../Actions/GenericActions';
-import { CREATE_ASSESSEE_SAGA, LOADER_STOP, SET_ASSESSEE_INFORMATION_DATA } from '../../actionType';
+import { CREATE_ASSESSEE_SAGA, LOADER_STOP, SET_ASSESSEE_INFORMATION_DATA, SET_DISPLAY_PANE_THREE_STATE } from '../../actionType';
 import { ASSESSEE_CREATE_URL } from '../../endpoints';
 
 const createAssesseeApi = async (requestObj) => {
@@ -39,6 +39,15 @@ function* workerCreateAssesseeSaga(data) {
       userResponse.responseObject[0].informationSetup.assesseeSignInPassword
     );
     console.log('loading end');
+    yield put({
+      type: SET_DISPLAY_PANE_THREE_STATE,
+      payload: {
+        headerOne: 'assessee',
+        headerOneBadgeOne: 'information',
+        headerOneBadgeTwo: 'all',
+        responseObject: userResponse.responseObject[0]
+      }
+    });
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);

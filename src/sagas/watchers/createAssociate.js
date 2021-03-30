@@ -4,7 +4,8 @@ import {
   CREATE_ASSOCIATE_SAGA,
   SET_ASSOCIATE_INFORMATION,
   SET_ASSESSEE_INFORMATION_DATA,
-  LOADER_STOP
+  LOADER_STOP,
+  SET_DISPLAY_PANE_THREE_STATE
 } from '../../actionType';
 import { ASSESSEE_CREATE_URL, ASSOCIATE_CREATE_URL } from '../../endpoints';
 const createAssesseeApi = async (requestObj) => {
@@ -141,6 +142,15 @@ function* workerCreateAssociateSaga(data) {
       yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject }); //set asessee data
     }
     console.log('loading end');
+    yield put({
+      type: SET_DISPLAY_PANE_THREE_STATE,
+      payload: {
+        headerOne: 'associate',
+        headerOneBadgeOne: 'information',
+        headerOneBadgeTwo: 'all',
+        responseObject: userResponse.responseObject
+      }
+    });
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);

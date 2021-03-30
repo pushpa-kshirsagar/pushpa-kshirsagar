@@ -19,6 +19,7 @@ import {
 import PropTypes from 'prop-types';
 import { FormHelperText } from '@material-ui/core';
 import {
+  makeAssesseeRoleScanRequestObject,
   makeAssesseeScanRequestObject,
   makeAssociateScanRequestObject
 } from '../Actions/GenericActions';
@@ -68,6 +69,27 @@ const PopUpScan = (props) => {
         });
         dispatch({ type: ASSESSEE_INFO_CREATE });
         document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
+        // let requestObect = makeAssesseeRoleScanRequestObject(
+        //   middlePaneHeaderBadgeTwo,
+        //   0,
+        //   countPage,
+        //   state.scanValue
+        // );
+        // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        // dispatch({ type: LOADER_START });
+        // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        // dispatch({
+        //   type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+        //   payload: {
+        //     request: requestObect,
+        //     BadgeOne: 'distinct',
+        //     BadgeTwo: middlePaneHeaderBadgeTwo
+        //   }
+        // });
+        // dispatch({ type: ASSESSEE_INFO_CREATE });
+        // document.getElementById('middleComponentId').scrollTop = '0px';
       }
       if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
         let requestObect = makeAssociateScanRequestObject(
