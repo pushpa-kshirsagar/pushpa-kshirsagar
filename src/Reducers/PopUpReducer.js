@@ -8,6 +8,7 @@ import {
   SET_POPUP_STATE,
   SET_GRID_COLUMN_COUNT_VALUE,
   SET_SECONDARY_OPTION_VALUE,
+  SET_SECONDARY_CREATE_OPTION_VALUE,
   SET_POPUP_VALUE,
   SET_MIDDLEPANE_SECONDARY_OPTION,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
@@ -30,7 +31,8 @@ import {
   TERMINATE_PUPUP,
   SELECT_OPTION_PUPUP,
   ASSESSEE_REVIEW_REVISE_POPUP,
-  GROUP_NODE_ROLE_TYPE_POPUP_OPTION
+  GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
+  REVIEW_DISTINCT_POPUP_OPTION
 } from '../PopUpConfig';
 
 const initialState = {
@@ -54,7 +56,7 @@ const initialState = {
   secondaryOptionCheckValue: '',
   whichReviewList: '',
   selectedTagValue: '',
-  currentPopUpOption:[],
+  currentPopUpOption: [],
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
     archive: ARCHIVE_POPUP,
@@ -145,16 +147,26 @@ const PopUpReducer = (istate = initialState, action) => {
         ...istate,
         gridColumnCountValue: action.payload
       };
+    case SET_SECONDARY_CREATE_OPTION_VALUE:
+      return {
+        ...istate,
+        secondaryOptionCheckValue: action.payload
+      };
     case SET_SECONDARY_OPTION_VALUE:
       // return {
       //   ...istate,
       //   secondaryOptionCheckValue: action.payload
       // };
-      if (action.payload === '') {
+      if (
+        action.payload !== 'assessees' &&
+        action.payload !== 'assessments' &&
+        action.payload !== 'assignments' &&
+        action.payload !== 'associates'
+      ) {
         return {
           ...istate,
           secondaryOptionCheckValue: action.payload,
-          currentPopUpOption: GROUP_NODE_ROLE_TYPE_POPUP_OPTION
+          currentPopUpOption: REVIEW_DISTINCT_POPUP_OPTION
         };
       } else {
         let tempArr = [];
@@ -186,7 +198,8 @@ const PopUpReducer = (istate = initialState, action) => {
             isPopUpOpen: true,
             popupHeaderOneBadgeOne: action.payload,
             popupOpenType: 'secondary',
-            popupContentArrValue: istate.secondaryPopUpOptions[action.payload]
+            popupContentArrValue: istate.secondaryPopUpOptions[action.payload],
+            secondaryOptionCheckValue: 'all'
           };
         }
       } else {

@@ -6,9 +6,12 @@ import AssesseeRelatedAssociateReviewList from '../../ReviewListComponent/Assess
 import AssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReviewList';
 import AssociateDistinctReviewList from '../../ReviewListComponent/AssociateDistinctReviewList';
 import AssesseeRoleDistinctReviewList from '../../ReviewListComponent/AssesseeRoleDistinctReviewList';
+import AssociateRoleDistinctReviewList from '../../ReviewListComponent/AssociateRoleDistinctReviewList';
+import PopUpScan from '../../PopUpInformation/PopUpScan';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const {
     isAssociateSelected,
     middlePaneHeader,
@@ -38,6 +41,7 @@ export const DisplayPaneTwo = (props) => {
           showMiddlePaneState={showMiddlePaneState}
         />
       </div>
+      {popupMode === 'SCAN_POPUP_FUN' && <PopUpScan />}
       <div
         style={{
           height: 'calc(100vh - 207px)',
@@ -57,6 +61,9 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList' && (
           <AssesseeRoleDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'associateRoleDistinctReviewList' && (
+          <AssociateRoleDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&

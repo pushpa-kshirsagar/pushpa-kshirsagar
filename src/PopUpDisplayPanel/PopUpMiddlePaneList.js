@@ -8,7 +8,7 @@ import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
-  SET_SECONDARY_OPTION_VALUE
+  SET_SECONDARY_CREATE_OPTION_VALUE,
 } from '../actionType';
 const PopUpMiddlePaneList = (props) => {
   const {
@@ -22,20 +22,24 @@ const PopUpMiddlePaneList = (props) => {
   const { headerPanelColour = 'displayPaneCentre', isActive, onClickInformation = null } = props;
   const setSecondaryOptionValue = (e) => {
     dispatch({
-      type: SET_SECONDARY_OPTION_VALUE,
+      type: SET_SECONDARY_CREATE_OPTION_VALUE,
       payload: e.currentTarget.getAttribute('data-value')
     });
   };
   const ChangeOptionPopup = (e) => {
     console.log(e.currentTarget.getAttribute('data-value'));
+    console.log('ChangeOptionPopup');
     let clickVal = e.currentTarget.getAttribute('data-value');
     if (clickVal === 'information') {
       onClickInformation(secondaryOptionCheckValue);
     }
-    dispatch({
-      type: SET_MIDDLEPANE_SECONDARY_OPTION,
-      payload: clickVal
-    });
+    else{
+      dispatch({
+        type: SET_MIDDLEPANE_SECONDARY_OPTION,
+        payload: clickVal
+      });
+    }
+   
   };
   const BackHandlerEvent = (e) => {
     dispatch({ type: SET_MIDDLEPANE_PREVIOUS_POPUP });

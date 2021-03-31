@@ -34,7 +34,9 @@ const initialState = {
   coreReviewListData: [],
   coreReviewListReqObj: null,
   reviewListReqObj: null,
-  middlePaneSelectedValue: ''
+  middlePaneSelectedValue: '',
+  selectedInformationAllorKey: '',
+  typeOfAssesseeCreate: ''
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

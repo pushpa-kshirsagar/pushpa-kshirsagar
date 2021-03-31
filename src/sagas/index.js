@@ -7,7 +7,7 @@ import watchReviewListAssesseeSaga from './watchers/reviewListAssessee';
 import watchReviewInfoAssesseeSaga from './watchers/reviewInfoAssessee';
 import watchReviewInfoAssociateSaga from './watchers/reviewInfoAssociate';
 import watchReviewListAssociateSaga from './watchers/reviewListAssociate';
-import watchReviewAssesseeRoleListSaga from './watchers/reviewRole';
+import watchReviewRolesListSaga from './watchers/reviewRole';
 import watchcreateAssesseeRoleSaga from './watchers/createAssesseeRole';
 import watchcreateAssociateRoleSaga from './watchers/createAssociateRole';
 export default function* root() {
@@ -20,7 +20,7 @@ export default function* root() {
     fork(watchReviewInfoAssesseeSaga),
     fork(watchReviewInfoAssociateSaga),
     fork(watchReviewListAssociateSaga),
-    fork(watchReviewAssesseeRoleListSaga),
+    fork(watchReviewRolesListSaga),
     fork(watchcreateAssesseeRoleSaga),
     fork(watchcreateAssociateRoleSaga)
   ]);

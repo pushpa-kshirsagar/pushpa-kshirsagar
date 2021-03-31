@@ -18,10 +18,14 @@ import {
   SET_PAGE_COUNT,
   FILTERMODE,
   SET_MOBILE_PANE_STATE,
-  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA
+  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { makeAssesseeReviewListRequestObject, makeAssesseeRoleObj } from '../Actions/GenericActions';
+import {
+  makeAssesseeReviewListRequestObject,
+  makeAssesseeRoleObj
+} from '../Actions/GenericActions';
 
 const PopUpAssesseesModule = (props) => {
   const {
@@ -52,6 +56,17 @@ const PopUpAssesseesModule = (props) => {
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'typeOfAssesseeCreate',
+          value: 'assessee'
+        }
+      });
     } else if (targetValue === 'distinct') {
       let requestObect = makeAssesseeReviewListRequestObject(
         secondaryOptionCheckValue,
@@ -77,7 +92,7 @@ const PopUpAssesseesModule = (props) => {
       dispatch({ type: ASSESSEE_INFO_CREATE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
-      let requestObj = makeAssesseeRoleObj();
+      let requestObj = makeAssesseeRoleObj(secondaryOptionCheckValue);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
@@ -92,6 +107,7 @@ const PopUpAssesseesModule = (props) => {
           request: requestObj,
           BadgeOne: targetValue,
           BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree:'',
           isMiddlePaneList: true
         }
       });

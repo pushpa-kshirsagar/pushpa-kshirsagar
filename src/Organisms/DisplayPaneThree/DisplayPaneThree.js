@@ -95,7 +95,7 @@ export const DisplayPaneThree = () => {
           onClickClearInfo={onClickClearInfo}
         />
       </div>
-      {isReviewRevise && responseObject && headerOne === 'assessee' && (
+      {isReviewRevise && responseObject && (headerOne === 'assessee' || headerOne === 'manager' || headerOne === 'administrator') && (
         <>
           <div style={{ padding: '2.5px' }}>
             <div style={{ padding: '2.5px' }}>

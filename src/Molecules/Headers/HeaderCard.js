@@ -11,7 +11,7 @@ import Clear from '@material-ui/icons/Clear';
 import './HeaderCard.css';
 import {
   POPUP_OPEN,
-  ASSESSEE_SIGN_ON,
+  SET_POPUP_VALUE,
   SET_POPUP_STATE,
   SET_SCAN_POPUP_STATE
 } from '../../actionType';
@@ -44,7 +44,7 @@ const HeaderCard = (props) => {
       }
     });
     dispatch({
-      type: ASSESSEE_SIGN_ON,
+      type: SET_POPUP_VALUE,
       payload: { isPopUpValue: typeOfMiddlePaneList, popupMode: 'SCAN_POPUP_FUN' }
     });
   };

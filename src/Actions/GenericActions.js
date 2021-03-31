@@ -21,11 +21,10 @@ export const setAssociateCardEnableInJson = (popupValuArr) => {
     o.disabled = isDisabled;
     return o;
   });
-  console.log(popupContentArrValue)
+  console.log(popupContentArrValue);
 
   return popupContentArrValue;
 };
-
 
 export const setAssociateCardPermissionInJson = (popupValuArr, assesseePermission) => {
   var isDisabled = true;
@@ -235,8 +234,7 @@ export const makeAssociateReviewListRequestObject = (filterKey, numberPage, coun
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName:
-        'informationBasic.associateName',
+      columnName: 'informationBasic.associateName',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -257,7 +255,7 @@ export const makeAssociateReviewListRequestObject = (filterKey, numberPage, coun
   return regObj;
 };
 
-export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage, searchStr) =>{
+export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -297,8 +295,7 @@ export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage,
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName:
-        'informationBasic.associateName',
+      columnName: 'informationBasic.associateName',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -337,73 +334,228 @@ export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage,
             }
           }
         ]
-      },
+      }
     ]
   };
 
   return regObj;
-}
-export const makeAssesseeRoleObj = () =>{
+};
+export const makeAssesseeRoleObj = (filterKey) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED','ACTIVE']
+        }
+      };
+    }
+  }
   let requestObj = {
     assesseeId: '0123456',
-    associateId: '0654321'
-    // filter: 'true',
-    // orderBy: {
-    //   columnName: 'informationBasic.assesseeRole',
-    //   order: 'asc'
-    // },
-    // numberPage: 0,
-    // countPage: 25,
-    // searchCondition: 'AND',
-    // search: [
-    //   {
-    //     condition: 'or',
-    //     searchBy: [
-    //       {
-    //         dataType: 'string',
-    //         conditionColumn: 'informationEngagement.assesseeStatus',
-    //         conditionValue: {
-    //           condition: 'eq',
-    //           value: {
-    //             from: 'ACTIVE'
-    //           }
-    //         }
-    //       }
-    //     ]
-    //   }
-    // ]
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeRoleName',
+      order: 'asc'
+    },
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeRoleStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
   };
   return requestObj;
-}
-export const makeAssesseeRoleScanRequestObject = (filterKey, numberPage, countPage, searchStr) =>{
+};
+export const makeAssociateRoleObj = (filterKey) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED','ACTIVE']
+        }
+      };
+    }
+  }
   let requestObj = {
     assesseeId: '0123456',
-    associateId: '0654321'
-    // filter: 'true',
-    // orderBy: {
-    //   columnName: 'informationBasic.assesseeRole',
-    //   order: 'asc'
-    // },
-    // numberPage: 0,
-    // countPage: 25,
-    // searchCondition: 'AND',
-    // search: [
-    //   {
-    //     condition: 'or',
-    //     searchBy: [
-    //       {
-    //         dataType: 'string',
-    //         conditionColumn: 'informationEngagement.assesseeStatus',
-    //         conditionValue: {
-    //           condition: 'eq',
-    //           value: {
-    //             from: 'ACTIVE'
-    //           }
-    //         }
-    //       }
-    //     ]
-    //   }
-    // ]
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.associateRoleName',
+      order: 'asc'
+    },
+    numberPage: 0,
+    countPage: 25,
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateRoleStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
   };
   return requestObj;
-}
+};
+export const makeAssociateRoleScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED','ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.associateRoleName',
+      order: 'asc'
+    },
+    numberPage: 0,
+    countPage: 25,
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateRoleStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateRoleName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateRoleDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAssesseeRoleScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED','ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeRoleName',
+      order: 'asc'
+    },
+    numberPage: 0,
+    countPage: 25,
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeRoleStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeRoleName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeRoleDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};

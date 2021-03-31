@@ -31,7 +31,8 @@ import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
 import { makeAssesseeRoleObj } from '../Actions/GenericActions';
 
-const PopUpSignOnAssessee = () => {
+const PopUpSignOnAssessee = (props) => {
+  const { headerOne = 'assessee' } = props;
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const { coreReviewListReqObj } = useSelector((state) => state.DisplayPaneTwoReducer);
@@ -222,7 +223,7 @@ const PopUpSignOnAssessee = () => {
         isActive={isPopUpValue === 'ASSESSEENAMEPOPUP'}
         inputHeader={'name'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         basicInfo={assesseeInfo.informationBasic}
         nextPopUpValue={'ALIASPOPUP'}
@@ -233,7 +234,7 @@ const PopUpSignOnAssessee = () => {
         label={'alias'}
         actualLableValue={'assesseeAlias'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         basicInfo={assesseeInfo.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
@@ -242,7 +243,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         // nextPopUpValue={popupMode === 'ASSESSEE_SIGN_ON' ? 'EMAILPOPUP' :'ROLELISTPOPUP'}
         handleNextPopupValue={handleNextPopupValue}
@@ -250,7 +251,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPLISTPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'MANAGERLISTPOPUP'}
         inputHeader={'group'}
@@ -268,7 +269,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERLISTPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'NODELISTPOPUP'}
         inputHeader={'manager'}
@@ -286,7 +287,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpReviewList
         isActive={isPopUpValue === 'NODELISTPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'ROLELISTPOPUP'}
         inputHeader={'node'}
@@ -304,7 +305,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpReviewList
         isActive={isPopUpValue === 'ROLELISTPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'EMAILPOPUP'}
         inputHeader={'role'}
@@ -318,7 +319,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         primaryLabel={'email address'}
         primaryLabelBadge={'primary'}
@@ -333,7 +334,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILSECONDARYPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         primaryLabel={'email address'}
         primaryLabelBadge={'secondary'}
@@ -348,7 +349,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpCheckbox
         isActive={isPopUpValue === 'FORCETOSELECTCOMMUNICATION'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         valueArr={['email address (primary)', 'email address (secondary)']}
         basicInfo={informationContact.assesseeTelephoneMobilePrimary}
@@ -361,7 +362,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONEPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         inputHeader={'mobile telephone'}
         primaryheader={'primary'}
@@ -380,7 +381,7 @@ const PopUpSignOnAssessee = () => {
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         isRequired={true}
         basicInfo={assesseeInfo.informationPersonal}
@@ -391,7 +392,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpTagPrimary
         isActive={isPopUpValue === 'TAGPRIMARYPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         signInSetup={assesseeInfo.informationSetup}
         // nextPopUpValue={'CONFIRMATIONPOPUP'}
@@ -401,7 +402,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpTagSecondary
         isActive={isPopUpValue === 'TAGSECONDARYPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         tagSecondary={assesseeInfo.informationEngagement}
         signInSetup={assesseeInfo.informationSetup}
@@ -411,7 +412,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpCheckbox
         isActive={isPopUpValue === 'FORCETOSELECTSIGNIN'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'information'}
         valueArr={[
           'email address (primary)',
@@ -433,7 +434,7 @@ const PopUpSignOnAssessee = () => {
       <PopUpConfirmation
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={headerOne}
         headerOneBadgeOne={'create'}
         onClickYes={onClickYes}
       />

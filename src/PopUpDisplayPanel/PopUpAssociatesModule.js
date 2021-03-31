@@ -18,10 +18,14 @@ import {
   LOADER_START,
   SET_REQUEST_OBJECT,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
-  ASSOCIATE_POPUP_CLOSE
+  ASSOCIATE_POPUP_CLOSE,
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
+import {
+  makeAssociateReviewListRequestObject,
+  makeAssociateRoleObj
+} from '../Actions/GenericActions';
 
 const PopUpAssociatesModule = (props) => {
   const {
@@ -75,6 +79,27 @@ const PopUpAssociatesModule = (props) => {
       });
       dispatch({ type: ASSOCIATE_POPUP_CLOSE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
+    } else if (targetValue === 'roles') {
+      let requestObj = makeAssociateRoleObj(secondaryOptionCheckValue);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'associateRoleDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
+      dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     } else {
       dispatch({
         type: SET_ASSOCIATE_NEXT_POPUP,

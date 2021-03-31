@@ -27,8 +27,8 @@ const AssociateRoleCreatePopup = () => {
     };
 
     console.log('CREATE Role api', requestObj);
-    // dispatch({ type: LOADER_START });
-    // dispatch({ type: CREATE_ASSOCIATE_ROLE_SAGA, payload: requestObj });
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSOCIATE_ROLE_SAGA, payload: requestObj });
   };
 
   return (
