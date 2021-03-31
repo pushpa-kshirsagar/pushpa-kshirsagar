@@ -73,51 +73,51 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSESSEE_INFO_CREATE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
-      if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
-        let requestObect = makeAssesseeRoleScanRequestObject(
-          middlePaneHeaderBadgeTwo,
-          0,
-          countPage,
-          state.scanValue
-        );
-        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-        dispatch({ type: LOADER_START });
-        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-        dispatch({
-          type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-          payload: {
-            request: requestObect,
-            BadgeOne: 'distinct',
-            BadgeTwo: middlePaneHeaderBadgeTwo,
-            isMiddlePaneList: true
-          }
-        });
-        dispatch({ type: ASSESSEE_INFO_CREATE });
-        document.getElementById('middleComponentId').scrollTop = '0px';
-      }
-      if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
-        let requestObect = makeAssociateRoleScanRequestObject(
-          middlePaneHeaderBadgeTwo,
-          0,
-          countPage,
-          state.scanValue
-        );
-        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-        dispatch({ type: LOADER_START });
-        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-        dispatch({
-          type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
-          payload: {
-            request: requestObect,
-            BadgeOne: 'distinct',
-            BadgeTwo: middlePaneHeaderBadgeTwo,
-            isMiddlePaneList: true
+      // if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
+      //   let requestObect = makeAssesseeRoleScanRequestObject(
+      //     middlePaneHeaderBadgeTwo,
+      //     0,
+      //     countPage,
+      //     state.scanValue
+      //   );
+      //   dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      //   dispatch({ type: LOADER_START });
+      //   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      //   dispatch({
+      //     type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+      //     payload: {
+      //       request: requestObect,
+      //       BadgeOne: 'distinct',
+      //       BadgeTwo: middlePaneHeaderBadgeTwo,
+      //       isMiddlePaneList: true
+      //     }
+      //   });
+      //   dispatch({ type: ASSESSEE_INFO_CREATE });
+      //   document.getElementById('middleComponentId').scrollTop = '0px';
+      // }
+      // if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
+      //   let requestObect = makeAssociateRoleScanRequestObject(
+      //     middlePaneHeaderBadgeTwo,
+      //     0,
+      //     countPage,
+      //     state.scanValue
+      //   );
+      //   dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      //   dispatch({ type: LOADER_START });
+      //   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      //   dispatch({
+      //     type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+      //     payload: {
+      //       request: requestObect,
+      //       BadgeOne: 'distinct',
+      //       BadgeTwo: middlePaneHeaderBadgeTwo,
+      //       isMiddlePaneList: true
 
-          }
-        });
-        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
-        document.getElementById('middleComponentId').scrollTop = '0px';
-      }
+      //     }
+      //   });
+      //   dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+      //   document.getElementById('middleComponentId').scrollTop = '0px';
+      // }
       if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
         let requestObect = makeAssociateScanRequestObject(
           middlePaneHeaderBadgeTwo,
