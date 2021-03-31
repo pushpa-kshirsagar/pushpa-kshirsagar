@@ -31,6 +31,7 @@ const PopUpMiddlePaneList = (props) => {
     console.log('ChangeOptionPopup');
     let clickVal = e.currentTarget.getAttribute('data-value');
     if (clickVal === 'information') {
+      
       onClickInformation(secondaryOptionCheckValue);
     }
     else{

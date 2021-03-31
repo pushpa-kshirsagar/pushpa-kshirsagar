@@ -17,6 +17,7 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
         headerOne: action.payload.headerOne,
         headerOneBadgeOne: action.payload.headerOneBadgeOne,
         headerOneBadgeTwo: action.payload.headerOneBadgeTwo,
+        headerOneBadgeThree: action.payload.headerOneBadgeThree,
         responseObject: action.payload.responseObject
       };
     case CLEAR_DISPLAY_PANE_THREE:

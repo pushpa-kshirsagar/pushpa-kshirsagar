@@ -5,6 +5,7 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
+  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_INFO_SAGA,
   LOADER_START,
   POPUP_OPEN,
@@ -125,28 +126,32 @@ const AssesseeRoleDistinctReviewList = (props) => {
     console.log(selectedTagValue);
     dispatch({ type: LOADER_START });
     dispatch({
-      type: GET_ASSOCIATE_INFO_SAGA,
+      type: GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
       payload: {
-        assesseeId: '0123456',
-        associateId: '605255729d3c823d3964e0ec',
-        filter: true,
-        search: [
-          {
-            condition: 'and',
-            searchBy: [
-              {
-                dataType: 'String',
-                conditionColumn: 'id',
-                conditionValue: {
-                  condition: 'eq',
-                  value: {
-                    from: selectedTagValue
+        secondaryOptionCheckValue,
+        reqBody: {
+          assesseeId: '0123456',
+          associateId: '0654321',
+          filter: 'true',
+          searchCondition: 'AND',
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'id',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: '6051f88ce14be515f635ca13'
+                    }
                   }
                 }
-              }
-            ]
-          }
-        ]
+              ]
+            }
+          ]
+        }
       }
     });
     dispatch({
