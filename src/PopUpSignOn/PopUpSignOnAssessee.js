@@ -42,7 +42,7 @@ const PopUpSignOnAssessee = (props) => {
   const history = useHistory();
   // let reviseRoleArr = [];
   useEffect(() => {
-    let requestObj = makeAssesseeRoleObj();
+    let requestObj = makeAssesseeRoleObj('active');
     dispatch({
       type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
       payload: {
