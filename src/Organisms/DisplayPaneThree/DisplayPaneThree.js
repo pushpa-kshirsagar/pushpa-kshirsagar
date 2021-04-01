@@ -17,6 +17,8 @@ import DisplayPaneThreeSectionOneAssociate from '../../Molecules/DisplayPaneThre
 import DisplayPaneThreeSectionTwoAssociate from '../../Molecules/DisplayPaneThreeSectionTwoAssociate/DisplayPaneThreeSectionTwoAssociate';
 import DisplayPaneThreeSectionOneAssesseeRole from '../../Molecules/DisplayPaneThreeSectionOneAssesseeRole/DisplayPaneThreeSectionOneAssesseeRole';
 import DisplayPaneThreeSectionTwoAssesseeRole from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeRole/DisplayPaneThreeSectionTwoAssesseeRole';
+import DisplayPaneThreeSectionOneAssociateRole from '../../Molecules/DisplayPaneThreeSectionOneAssociateRole/DisplayPaneThreeSectionOneAssociateRole';
+import DisplayPaneThreeSectionTwoAssociateRole from '../../Molecules/DisplayPaneThreeSectionTwoAssociateRole/DisplayPaneThreeSectionTwoAssociateRole';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -48,6 +50,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssociateRole = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssociateRole,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssociateRole,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssociate = [
     {
       id: 'section1',
@@ -63,7 +79,12 @@ export const DisplayPaneThree = () => {
     }
   ];
   const [selectedSection, setSelectedSection] = useState(rightPaneSectionsAssessee[0]);
-  const [selectedSectionAssesseeRole, setSelectedSectionAssesseeRole] = useState(rightPaneSectionsAssesseeRole[0]);
+  const [selectedSectionAssesseeRole, setSelectedSectionAssesseeRole] = useState(
+    rightPaneSectionsAssesseeRole[0]
+  );
+  const [selectedSectionAssociateRole, setSelectedSectionAssociateRole] = useState(
+    rightPaneSectionsAssociateRole[0]
+  );
   const [selectedSectionAssociate, setSelectedSectionAssociate] = useState(
     rightPaneSectionsAssociate[0]
   );
@@ -113,61 +134,93 @@ export const DisplayPaneThree = () => {
           onClickClearInfo={onClickClearInfo}
         />
       </div>
-      {isReviewRevise && responseObject && headerOne === 'assessee' && (
-        <>
-          <div style={{ padding: '2.5px' }}>
+      {isReviewRevise &&
+        responseObject &&
+        (headerOne === 'assessees' || headerOne === 'administrator' || headerOne === 'manager') && (
+          <>
             <div style={{ padding: '2.5px' }}>
-              <BasicCard
-                isAlertActive
-                isFlagActive
-                className=""
-                labelTextOneOne="name"
-                labelTextOneTwo="alias"
-                textOneOne={`${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`}
-                textOneTwo={informationBasic.assesseeAlias || 'No Information'}
-                isVerifiedActiveName={false}
-                isVerifiedActivePicture={false}
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="alias"
+                  textOneOne={`${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`}
+                  textOneTwo={informationBasic.assesseeAlias || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssessee}
+                selectedSection={selectedSection}
+                setSelectedSection={setSelectedSection}
               />
             </div>
-            <Sections
-              listSections={rightPaneSectionsAssessee}
-              selectedSection={selectedSection}
-              setSelectedSection={setSelectedSection}
+            <FooterIconTwo
+              FilterModeEnable={navigatorIcon}
+              FilterMode={FilterMode}
+              onClick={onClickFooter}
+              primaryIcon={primaryIcon}
+              secondaryIcon={secondaryIcon}
             />
-          </div>
-          <FooterIconTwo
-            FilterModeEnable={navigatorIcon}
-            FilterMode={FilterMode}
-            onClick={onClickFooter}
-            primaryIcon={primaryIcon}
-            secondaryIcon={secondaryIcon}
-          />
-        </>
-      )}
-      {isReviewRevise && responseObject && headerOneBadgeOne === 'role' && (
-        <>
-          <div style={{ padding: '2.5px' }}>
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assessees' &&
+        headerOneBadgeOne === 'role' && (
+          <>
             <div style={{ padding: '2.5px' }}>
-              <BasicCard
-                isAlertActive
-                isFlagActive
-                className=""
-                labelTextOneOne="name"
-                labelTextOneTwo="alias"
-                textOneOne={informationBasic.assesseeRoleName || 'No Information'}
-                textOneTwo={informationBasic.assesseeRoleDescription || 'No Information'}
-                isVerifiedActiveName={false}
-                isVerifiedActivePicture={false}
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.assesseeRoleName || 'No Information'}
+                  textOneTwo={informationBasic.assesseeRoleDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssesseeRole}
+                selectedSection={selectedSectionAssesseeRole}
+                setSelectedSection={setSelectedSectionAssesseeRole}
               />
             </div>
-            <Sections
-              listSections={rightPaneSectionsAssesseeRole}
-              selectedSection={selectedSectionAssesseeRole}
-              setSelectedSection={setSelectedSectionAssesseeRole}
-            />
-          </div>
-        </>
-      )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'associates' &&
+        headerOneBadgeOne === 'role' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.associateRoleName || 'No Information'}
+                  textOneTwo={informationBasic.associateRoleDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssociateRole}
+                selectedSection={selectedSectionAssociateRole}
+                setSelectedSection={setSelectedSectionAssociateRole}
+              />
+            </div>
+          </>
+        )}
       {isReviewRevise && responseObject && headerOne === 'associate' && (
         <>
           <div style={{ padding: '2.5px' }}>

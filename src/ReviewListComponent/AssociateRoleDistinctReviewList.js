@@ -6,6 +6,7 @@ import {
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
   GET_ASSOCIATE_INFO_SAGA,
+  GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -122,6 +123,37 @@ const AssociateRoleDistinctReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   const openAssociateRoleRightPaneInformation = () => {
+    dispatch({ type: LOADER_START });
+    dispatch({
+      type: GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
+      payload: {
+        secondaryOptionCheckValue,
+        reqBody: {
+          assesseeId: '0123456',
+          associateId: '0654321',
+          filter: 'true',
+          searchCondition: 'AND',
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'id',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: '60643749df161555755c1470'
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     popupAllClose();
   };
   return (

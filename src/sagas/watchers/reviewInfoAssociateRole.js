@@ -1,14 +1,14 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
+  GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_STOP,
   SET_DISPLAY_PANE_THREE_STATE
 } from '../../actionType';
-import { ASSESSEE_REVIEW_ROLE_URL } from '../../endpoints';
+import { ASSOCIATE_REVIEW_ROLE_URL } from '../../endpoints';
 
 const assesseeRoleReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSESSEE_REVIEW_ROLE_URL;
+  let URL = ASSOCIATE_REVIEW_ROLE_URL;
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
@@ -18,17 +18,17 @@ const assesseeRoleReviewInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviewAssesseeRoleInfoSaga(data) {
+function* workerReviewAssociateRoleInfoSaga(data) {
   try {
     const userResponse = yield call(assesseeRoleReviewInfoApi, {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      console.log('IN ROLE REVIEW+++++', userResponse);
+      console.log('IN ASSOCIATE ROLE Review', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessees',
+          headerOne: 'associates',
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
@@ -46,6 +46,6 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
   }
 }
 
-export default function* watchReviewAssesseeRoleInfoSaga() {
-  yield takeLatest(GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA, workerReviewAssesseeRoleInfoSaga);
+export default function* watchReviewAssociateRoleInfoSaga() {
+  yield takeLatest(GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA, workerReviewAssociateRoleInfoSaga);
 }
