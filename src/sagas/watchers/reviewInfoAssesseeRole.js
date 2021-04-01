@@ -1,5 +1,9 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA, LOADER_STOP, SET_DISPLAY_PANE_THREE_STATE } from '../../actionType';
+import {
+  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
+  LOADER_STOP,
+  SET_DISPLAY_PANE_THREE_STATE
+} from '../../actionType';
 import { ASSESSEE_REVIEW_ROLE_URL } from '../../endpoints';
 
 const assesseeRoleReviewInfoApi = async (requestObj) => {
@@ -15,12 +19,13 @@ const assesseeRoleReviewInfoApi = async (requestObj) => {
 };
 
 function* workerReviewAssesseeRoleInfoSaga(data) {
+  console.log("IN WORKER =======================");
   try {
     const userResponse = yield call(assesseeRoleReviewInfoApi, {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      console.log("IN ROLE REVIEW+++++", userResponse);
+      console.log('IN ROLE REVIEW+++++', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {

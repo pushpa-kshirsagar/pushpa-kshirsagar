@@ -15,6 +15,8 @@ import DisplayPaneThreeSectionOne from '../../Molecules/DisplayPaneThreeSectionO
 import DisplayPaneThreeSectionTwo from '../../Molecules/DisplayPaneThreeSectionTwo/DisplayPaneThreeSectionTwo';
 import DisplayPaneThreeSectionOneAssociate from '../../Molecules/DisplayPaneThreeSectionOneAssociate/DisplayPaneThreeSectionOneAssociate';
 import DisplayPaneThreeSectionTwoAssociate from '../../Molecules/DisplayPaneThreeSectionTwoAssociate/DisplayPaneThreeSectionTwoAssociate';
+import DisplayPaneThreeSectionOneAssesseeRole from '../../Molecules/DisplayPaneThreeSectionOneAssesseeRole/DisplayPaneThreeSectionOneAssesseeRole';
+import DisplayPaneThreeSectionTwoAssesseeRole from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeRole/DisplayPaneThreeSectionTwoAssesseeRole';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,20 @@ export const DisplayPaneThree = () => {
     {
       id: 'section2',
       sectionComponent: DisplayPaneThreeSectionTwo,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
+  const rightPaneSectionsAssesseeRole = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssesseeRole,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssesseeRole,
       displayPaneLeftHeaderText: '',
       displayPaneLeftBadgeText: ''
     }
@@ -47,6 +63,7 @@ export const DisplayPaneThree = () => {
     }
   ];
   const [selectedSection, setSelectedSection] = useState(rightPaneSectionsAssessee[0]);
+  const [selectedSectionAssesseeRole, setSelectedSectionAssesseeRole] = useState(rightPaneSectionsAssesseeRole[0]);
   const [selectedSectionAssociate, setSelectedSectionAssociate] = useState(
     rightPaneSectionsAssociate[0]
   );
@@ -96,7 +113,7 @@ export const DisplayPaneThree = () => {
           onClickClearInfo={onClickClearInfo}
         />
       </div>
-      {isReviewRevise && responseObject && (headerOne === 'assessee') && (
+      {isReviewRevise && responseObject && headerOne === 'assessee' && (
         <>
           <div style={{ padding: '2.5px' }}>
             <div style={{ padding: '2.5px' }}>
@@ -143,11 +160,11 @@ export const DisplayPaneThree = () => {
                 isVerifiedActivePicture={false}
               />
             </div>
-            {/* <Sections
-              listSections={rightPaneSectionsAssessee}
-              selectedSection={selectedSection}
-              setSelectedSection={setSelectedSection}
-            /> */}
+            <Sections
+              listSections={rightPaneSectionsAssesseeRole}
+              selectedSection={selectedSectionAssesseeRole}
+              setSelectedSection={setSelectedSectionAssesseeRole}
+            />
           </div>
         </>
       )}
