@@ -136,7 +136,9 @@ export const DisplayPaneThree = () => {
       </div>
       {isReviewRevise &&
         responseObject &&
-        ((headerOne === 'assessees' && headerOneBadgeOne !== 'role')  || headerOne === 'administrator' || headerOne === 'manager') && (
+        ((headerOne === 'assessees' && headerOneBadgeOne !== 'role') ||
+          headerOne === 'administrator' ||
+          headerOne === 'manager') && (
           <>
             <div style={{ padding: '2.5px' }}>
               <div style={{ padding: '2.5px' }}>

@@ -22,23 +22,21 @@ const createAssociateRoleApi = async (requestObj) => {
 function* workerCreateAssociateRoleSaga(data) {
   try {
     const userResponse = yield call(createAssociateRoleApi, { data: data.payload });
-    console.log('IN WORKER ====>', userResponse);
-    console.log('IN WORKER ====>', JSON.stringify(userResponse));
     if (userResponse.responseCode === '000') {
       console.log('loading end');
-      // yield put({
-      //   type: SET_DISPLAY_PANE_THREE_STATE,
-      //   payload: {
-      //     headerOne: 'associates',
-      //     headerOneBadgeOne: 'role',
-      //     headerOneBadgeTwo: 'information',
-      //     headerOneBadgeThree: 'all',
-      //     responseObject: userResponse.responseObject
-      //   }
-      // });
+      yield put({
+        type: SET_DISPLAY_PANE_THREE_STATE,
+        payload: {
+          headerOne: 'associates',
+          headerOneBadgeOne: 'role',
+          headerOneBadgeTwo: 'information',
+          headerOneBadgeThree: 'key',
+          responseObject: userResponse.responseObject[0]
+        }
+      });
     }
     yield put({ type: LOADER_STOP });
-    // yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+    yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     yield put({ type: POPUP_CLOSE });
   } catch (e) {
     console.log('ERROR==', e);

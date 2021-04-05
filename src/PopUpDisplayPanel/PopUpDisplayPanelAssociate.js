@@ -38,7 +38,6 @@ import {
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
   setAssociateCardPermissionInJson,
-  setAssociateCardEnableInJson,
   makeAssesseeRoleObj,
   makeAssociateRoleObj
 } from '../Actions/GenericActions';
@@ -49,7 +48,6 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOneBadgeTwo,
     popupOpenType,
     secondaryOptionCheckValue,
-    isPopUpValue,
     currentPopUpOption
   } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
@@ -282,10 +280,11 @@ const PopUpDisplayPanelAssociate = (props) => {
       clickValue === 'information' &&
       (popupHeaderOne === 'assessees' || popupHeaderOne === 'associates')
     ) {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
-      });
+      // console.log('*************IN ASSESSEE _*************');
+      // dispatch({
+      //   type: SET_POPUP_VALUE,
+      //   payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
+      // });
     }
     if (
       clickValue === 'distinct' &&
@@ -355,6 +354,15 @@ const PopUpDisplayPanelAssociate = (props) => {
           stateName: 'typeOfAssesseeCreate',
           value: popupHeaderOne === 'administrators' ? 'administrator' : 'manager'
         }
+      });
+    } else if (
+      clickValue === 'information' &&
+      (popupHeaderOne === 'assessees' || popupHeaderOne === 'associates')
+    ) {
+      console.log('*************IN ASSESSEE _*************');
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
       });
     } else {
       dispatch({

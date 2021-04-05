@@ -30,5 +30,11 @@ export const ASSOCIATE_REVIEW_ROLE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/review';
 export const ASSESSEE_ROLE_CREATE_URL =
   'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role/create';
-export const ASSOCIATE_ROLE_CREATE_URL ='https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associatehttps://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/create';
-export const ASSOCIATE_ROLE_REVIEW_LIST_URL ='https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/review-list';
+export const ASSOCIATE_ROLE_CREATE_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/create';
+export const ASSOCIATE_ROLE_REVIEW_LIST_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/review-list';
+export const ASSESSEE_REVIEW_GROUP_URL =
+  'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/review';
+export const ASSOCIATE_REVIEW_GROUP_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/review';

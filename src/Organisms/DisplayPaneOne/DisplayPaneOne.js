@@ -19,10 +19,7 @@ import DisplayPaneOneSectionOne from '../../Molecules/DisplayPaneOneSectionOne/D
 import DisplayPaneOneSectionTwo from '../../Molecules/DisplayPaneOneSectionTwo/DisplayPaneOneSectionTwo';
 import DisplayPaneOneSectionThree from '../../Molecules/DisplayPaneOneSectionThree/DisplayPaneOneSectionThree';
 import DisplayPaneOneSectionFour from '../../Molecules/DisplayPaneOneSectionFour/DisplayPaneOneSectionFour';
-import {
-  setAssesseeCardPermissionInJson,
-  setAssociateCardPermissionInJson
-} from '../../Actions/GenericActions';
+import { setAssesseeCardPermissionInJson } from '../../Actions/GenericActions';
 import PopUpDisplayPaneOneSectionTwo from '../../PopUpDisplayPanel/PopUpDisplayPaneOneSectionTwo';
 import PopUpAssesseesModule from '../../PopUpDisplayPanel/PopUpAssesseesModule';
 import PopUpAssociatesModule from '../../PopUpDisplayPanel/PopUpAssociatesModule';
@@ -31,7 +28,7 @@ import PopUpAssignmentModule from '../../PopUpDisplayPanel/PopUpAssignmentModule
 import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
-import PopUpScan from '../../PopUpInformation/PopUpScan';
+// import PopUpScan from '../../PopUpInformation/PopUpScan';
 import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
 import AssesseeRoleCreatePopUp from '../../Molecules/PopUpCreate/AssesseeRoleCreatePopUp';
 import AssociateRoleCreatePopup from '../../Molecules/PopUpCreate/AssociateRoleCreatePopup';
@@ -112,7 +109,7 @@ export const DisplayPaneOne = () => {
           isPopUpValue: value,
           popupOpenType: 'primary',
           popupContentArrValue: popupContentArrValue,
-          currentPopUpOption:[]
+          currentPopUpOption: []
         }
       });
     } else {
@@ -197,7 +194,7 @@ export const DisplayPaneOne = () => {
       <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
       <PopUpAssociateLink />
-      {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee  />}
+      {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
       {popupMode === 'ADMINISTRATOR_CREATE' && <PopUpSignOnAssessee headerOne={'administrator'} />}
       {popupMode === 'MANAGER_CREATE' && <PopUpSignOnAssessee headerOne={'manager'} />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
