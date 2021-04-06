@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.20b8e7b5.chunk.css",
-    "main.js": "/static/js/main.a33c0951.chunk.js",
-    "main.js.map": "/static/js/main.a33c0951.chunk.js.map",
+    "main.css": "/static/css/main.fdb75489.chunk.css",
+    "main.js": "/static/js/main.c1e95029.chunk.js",
+    "main.js.map": "/static/js/main.c1e95029.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.3091a9fe.js",
     "runtime-main.js.map": "/static/js/runtime-main.3091a9fe.js.map",
-    "static/js/2.7fd0fec4.chunk.js": "/static/js/2.7fd0fec4.chunk.js",
-    "static/js/2.7fd0fec4.chunk.js.map": "/static/js/2.7fd0fec4.chunk.js.map",
+    "static/js/2.8f3b8fd8.chunk.js": "/static/js/2.8f3b8fd8.chunk.js",
+    "static/js/2.8f3b8fd8.chunk.js.map": "/static/js/2.8f3b8fd8.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.20b8e7b5.chunk.css.map": "/static/css/main.20b8e7b5.chunk.css.map",
-    "static/js/2.7fd0fec4.chunk.js.LICENSE.txt": "/static/js/2.7fd0fec4.chunk.js.LICENSE.txt",
+    "static/css/main.fdb75489.chunk.css.map": "/static/css/main.fdb75489.chunk.css.map",
+    "static/js/2.8f3b8fd8.chunk.js.LICENSE.txt": "/static/js/2.8f3b8fd8.chunk.js.LICENSE.txt",
     "static/media/iglogo1.84212b34.png": "/static/media/iglogo1.84212b34.png",
     "static/media/unverified.6994dd92.svg": "/static/media/unverified.6994dd92.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.3091a9fe.js",
-    "static/js/2.7fd0fec4.chunk.js",
-    "static/css/main.20b8e7b5.chunk.css",
-    "static/js/main.a33c0951.chunk.js"
+    "static/js/2.8f3b8fd8.chunk.js",
+    "static/css/main.fdb75489.chunk.css",
+    "static/js/main.c1e95029.chunk.js"
   ]
 }
