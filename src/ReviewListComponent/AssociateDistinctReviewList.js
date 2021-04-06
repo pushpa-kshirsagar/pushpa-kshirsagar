@@ -24,19 +24,22 @@ import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
 const AssociateDistinctReviewList = (props) => {
   const { popupAllClose } = props;
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue, countPage } = useSelector(
-    (state) => state.AssesseeCreateReducer
-  );
+  const { secondaryOptionCheckValue } = useSelector((state) => state.AssociateCreateReducer);
   const {
     numberPage,
     scanCount,
+    countPage,
     middlePaneHeaderBadgeOne,
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
-  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
+  const {
+    isPopUpValue,
+    selectedTagValue,
+    secondaryOptionCheckValue: popUpSecondaryOptionCheckValue
+  } = useSelector((state) => state.PopUpReducer);
   const [isFetching, setIsFetching] = useState(false);
   useEffect(() => {
     document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
@@ -58,7 +61,7 @@ const AssociateDistinctReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+        type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',
@@ -136,26 +139,29 @@ const AssociateDistinctReviewList = (props) => {
     dispatch({
       type: GET_ASSOCIATE_INFO_SAGA,
       payload: {
-        assesseeId: '0123456',
-        associateId: '605255729d3c823d3964e0ec',
-        filter: true,
-        search: [
-          {
-            condition: 'and',
-            searchBy: [
-              {
-                dataType: 'String',
-                conditionColumn: 'id',
-                conditionValue: {
-                  condition: 'eq',
-                  value: {
-                    from: selectedTagValue
+        secondaryOptionCheckValue: popUpSecondaryOptionCheckValue,
+        reqBody: {
+          assesseeId: '0123456',
+          associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+          filter: true,
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'String',
+                  conditionColumn: 'id',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: selectedTagValue
+                    }
                   }
                 }
-              }
-            ]
-          }
-        ]
+              ]
+            }
+          ]
+        }
       }
     });
     dispatch({

@@ -5,7 +5,7 @@ import './Accordian.css';
 import AccordianInfoCard from './AccordianInfoCard';
 
 export const AllocationAccordian = (props) => {
-  const { isDisplayCardExpanded, headerOne, setListExpand, list = [] } = props;
+  const { isDisplayCardExpanded, headerOne, setListExpand, list = [], mode = '' } = props;
 
   return (
     <AccordianHeader
@@ -17,9 +17,9 @@ export const AllocationAccordian = (props) => {
         return (
           <div key={ob.id}>
             {ob.isListCard ? (
-              <AccordianListCard className="" accordianObject={ob} />
+              <AccordianListCard className="" accordianObject={ob} mode={mode} />
             ) : (
-              <AccordianInfoCard accordianObject={ob} />
+              <AccordianInfoCard accordianObject={ob} mode={mode} />
             )}
           </div>
         );

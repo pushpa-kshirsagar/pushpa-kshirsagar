@@ -5,7 +5,6 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
-  GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_CLOSE,
@@ -105,37 +104,8 @@ const PopUpDisplayPanelAssessee = (props) => {
     }
     if (clickValue === 'information' && popupHeaderOne === 'assessee') {
       dispatch({ type: LOADER_START });
-      // dispatch({
-      //   type: GET_ASSESSEE_INFO_SAGA,
-      //   payload: {
-      //     secondaryOptionCheckValue,
-      //     reqBody: {
-      //       assesseeId: '0123456',
-      //       associateId: '0654321',
-      //       filter: 'true',
-      //       searchCondition: 'AND',
-      //       search: [
-      //         {
-      //           condition: 'and',
-      //           searchBy: [
-      //             {
-      //               dataType: 'string',
-      //               conditionColumn: 'id',
-      //               conditionValue: {
-      //                 condition: 'eq',
-      //                 value: {
-      //                   from: '6054a4d6cb14fb2075aeec87'
-      //                 }
-      //               }
-      //             }
-      //           ]
-      //         }
-      //       ]
-      //     }
-      //   }
-      // });
       dispatch({
-        type: GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
+        type: GET_ASSESSEE_INFO_SAGA,
         payload: {
           secondaryOptionCheckValue,
           reqBody: {
@@ -153,7 +123,7 @@ const PopUpDisplayPanelAssessee = (props) => {
                     conditionValue: {
                       condition: 'eq',
                       value: {
-                        from: '606aeeb4812d7118559f3154'
+                        from: '6054a4d6cb14fb2075aeec87'
                       }
                     }
                   }

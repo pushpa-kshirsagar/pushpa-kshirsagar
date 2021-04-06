@@ -5,7 +5,7 @@ import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
 
 const AccordianListCard = (props) => {
-  const { accordianObject } = props;
+  const { accordianObject, mode='' } = props;
   const {
     labelTextOneOne = '',
     labelTextOneOneBadgeOne = '',
@@ -15,7 +15,6 @@ const AccordianListCard = (props) => {
     innerAssociateList = [],
     innerInfo = 'No Information'
   } = accordianObject;
-  const mode = '';
 
   const [isListSelectExpanded, setIsListSelectExpanded] = useState(false);
 

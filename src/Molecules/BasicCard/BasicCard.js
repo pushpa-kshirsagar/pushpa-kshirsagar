@@ -22,7 +22,8 @@ const BasicCard = (props) => {
     isVerifiedActiveName = false,
     isVerifiedActivePicture = false,
     isFlagActive = false,
-    isAlertActive = false
+    isAlertActive = false,
+    mode = ''
   } = props;
 
   return (
@@ -30,10 +31,10 @@ const BasicCard = (props) => {
       <div className="basic-card-row">
         <div className="label-container">
           <Label
-            className="basic-card-label"
+            className={mode === 'revise' ? ' basic-card-label-revise' : 'basic-card-label'}
             text={labelTextOneOne}
             fontSize="1.2rem"
-            colour="rgba(0, 0, 0, 0.54)"
+            colour={mode === 'revise' ? '#00AFFF' : 'rgba(0, 0, 0, 0.54)'}
           />
           <Label
             className="padding-top-bottom"
@@ -62,10 +63,10 @@ const BasicCard = (props) => {
       <div className="basic-card-row">
         <div className="label-container">
           <Label
-            className="basic-card-label"
+            className={mode === 'revise' ? ' basic-card-label-revise' : 'basic-card-label'}
             text={labelTextOneTwo}
             fontSize="1.2rem"
-            colour="rgba(0, 0, 0, 0.54)"
+            colour={mode === 'revise' ? '#00AFFF' : 'rgba(0, 0, 0, 0.54)'}
           />
           <Label
             className="padding-top-bottom"
