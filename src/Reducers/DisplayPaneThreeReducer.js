@@ -6,7 +6,8 @@ const initialState = {
   headerOneBadgeOne: '',
   headerOneBadgeTwo: '',
   HeaderBadgeThree: '',
-  responseObject: {}
+  responseObject: {},
+  reviewMode: 'review'
 };
 
 const DisplayPaneThreeReducer = (istate = initialState, action) => {
@@ -18,7 +19,8 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
         headerOneBadgeOne: action.payload.headerOneBadgeOne,
         headerOneBadgeTwo: action.payload.headerOneBadgeTwo,
         headerOneBadgeThree: action.payload.headerOneBadgeThree,
-        responseObject: action.payload.responseObject
+        responseObject: action.payload.responseObject,
+        reviewMode: action.payload.reviewMode || 'review'
       };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;

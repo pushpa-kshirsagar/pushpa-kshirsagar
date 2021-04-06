@@ -9,6 +9,10 @@
 .basic-card-label {
   display: block;
 }
+.basic-card-label-revise {
+  display: block;
+  cursor: pointer;
+}
 .basic-card-row {
   padding: 0 5px;
   display: flex;

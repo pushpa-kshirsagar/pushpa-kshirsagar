@@ -23,12 +23,11 @@ import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
 const AssesseeDistinctReviewList = (props) => {
   const { popupAllClose } = props;
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue, countPage } = useSelector(
-    (state) => state.AssesseeCreateReducer
-  );
+  const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
   const {
     numberPage,
     scanCount,
+    countPage,
     middlePaneHeaderBadgeOne,
     reviewListDistinctData,
     reviewListReqObj,
