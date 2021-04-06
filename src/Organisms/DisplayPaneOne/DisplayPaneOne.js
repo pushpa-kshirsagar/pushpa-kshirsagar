@@ -32,6 +32,7 @@ import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
 import AssesseeRoleCreatePopUp from '../../Molecules/PopUpCreate/AssesseeRoleCreatePopUp';
 import AssociateRoleCreatePopup from '../../Molecules/PopUpCreate/AssociateRoleCreatePopup';
+import AllGroupCreatePopup from '../../Molecules/PopUpCreate/AllGroupCreatePopup';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -200,6 +201,10 @@ export const DisplayPaneOne = () => {
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
       {popupMode === 'assesseesROLECREATE' && <AssesseeRoleCreatePopUp />}
       {popupMode === 'associatesROLECREATE' && <AssociateRoleCreatePopup />}
+      {popupMode === 'assesseesGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessees'} />}
+      {popupMode === 'assessmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessments'} />}
+      {popupMode === 'assignmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assignments'} />}
+      {popupMode === 'associatesGROUPCREATE' && <AllGroupCreatePopup headerOne={'associates'} />}
     </>
   );
 };

@@ -7,6 +7,7 @@ import {
   FILTERMODE_ENABLE,
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -59,7 +60,7 @@ const AssociateRoleDistinctReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+        type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',

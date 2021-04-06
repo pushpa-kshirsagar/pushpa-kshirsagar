@@ -41,7 +41,14 @@ const PopUpConfirmation = (props) => {
         payload: { isPopUpValue: 'NAMEALIASPOPUP' }
       });
     }
-    if (popupMode === 'assesseesROLECREATE' || popupMode === 'associatesROLECREATE') {
+    if (
+      popupMode === 'assesseesROLECREATE' ||
+      popupMode === 'associatesROLECREATE' ||
+      popupMode === 'assesseesGROUPCREATE' ||
+      popupMode === 'associatesGROUPCREATE' ||
+      popupMode === 'assignmentsGROUPCREATE' ||
+      popupMode === 'assessmentsGROUPCREATE'
+    ) {
       dispatch({
         type: SET_NEXT_POPUP,
         payload: { isPopUpValue: 'NAMEPOPUP' }

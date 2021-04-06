@@ -264,6 +264,15 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = CREATE_INFORMATION_POPUP;
       reviseSecondaryOptionCheckValue = 'key';
     }
+    if (clickValue === 'create' && popupHeaderOne === 'groups') {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisepopupHeaderOneBadgeOne = 'group';
+      revisepopupHeaderOneBadgeTwo = 'create';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = CREATE_INFORMATION_POPUP;
+      reviseSecondaryOptionCheckValue = 'key';
+    }
     if (
       clickValue === 'create' &&
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
@@ -291,7 +300,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'assessees' &&
       popupHeaderOneBadgeOne === 'roles'
     ) {
-      let requestObj = makeAssesseeRoleObj();
+      let requestObj = makeAssesseeRoleObj(secondaryOptionCheckValue);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
@@ -356,13 +365,17 @@ const PopUpDisplayPanelAssociate = (props) => {
         }
       });
     } else if (
-      clickValue === 'information' &&
+      clickValue === 'information' && popupHeaderOneBadgeOne === 'role' &&
       (popupHeaderOne === 'assessees' || popupHeaderOne === 'associates')
     ) {
-      console.log('*************IN ASSESSEE _*************');
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
+      });
+    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'group') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }
       });
     } else {
       dispatch({

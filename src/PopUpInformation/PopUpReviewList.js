@@ -17,6 +17,7 @@ const PopUpReviewList = (props) => {
   const {
     isActive,
     errorMsg = '',
+    headerOneBadgeTwo='',
     inputHeaderBadge = 'primary',
     inputHeader = 'node',
     headerPanelColour = 'genericOne',
@@ -45,6 +46,7 @@ const PopUpReviewList = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           onClick={handleClick}
         />
         <DialogContent
