@@ -6,20 +6,36 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
+  GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
+  GET_ASSESSEE_INFO_SAGA,
+  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
+  GET_ASSOCIATE_INFO_SAGA,
+  GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
+  LOADER_START,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
-  SET_SECONDARY_CREATE_OPTION_VALUE,
+  SET_MOBILE_PANE_STATE,
+  SET_SECONDARY_CREATE_OPTION_VALUE
 } from '../actionType';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
     popupOpenType,
-    secondaryOptionCheckValue
+    secondaryOptionCheckValue,
+    selectedTagValue,
+    popUpSecondaryOptionCheckValue
   } = useSelector((state) => state.PopUpReducer);
 
   const dispatch = useDispatch();
-  const { headerPanelColour = 'displayPaneCentre', isActive, onClickInformation = null } = props;
+  const {
+    headerPanelColour = 'displayPaneCentre',
+    isActive,
+    onClickInformation = null,
+    popupAllClose,
+    typeOfMiddlePaneList
+  } = props;
   const setSecondaryOptionValue = (e) => {
     dispatch({
       type: SET_SECONDARY_CREATE_OPTION_VALUE,
@@ -31,16 +47,175 @@ const PopUpMiddlePaneList = (props) => {
     console.log('ChangeOptionPopup');
     let clickVal = e.currentTarget.getAttribute('data-value');
     if (clickVal === 'information') {
-      
-      onClickInformation(secondaryOptionCheckValue);
-    }
-    else{
+      console.log(selectedTagValue);
+      dispatch({ type: LOADER_START });
+      if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
+        dispatch({
+          type: GET_ASSESSEE_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue,
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '0654321',
+              filter: 'true',
+              searchCondition: 'AND',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue ? selectedTagValue : '6054a4d6cb14fb2075aeec87'
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
+        dispatch({
+          type: GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue,
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '0654321',
+              filter: 'true',
+              searchCondition: 'AND',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
+        dispatch({
+          type: GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue,
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '0654321',
+              filter: 'true',
+              searchCondition: 'AND',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
+        dispatch({
+          type: GET_ASSOCIATE_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: popUpSecondaryOptionCheckValue,
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+              filter: true,
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'assesseeGroupDistinctReviewList') {
+        dispatch({
+          type: GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+              filter: true,
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      // if(typeOfMiddlePaneList === ''){}
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
+      });
+      popupAllClose();
+      // onClickInformation(secondaryOptionCheckValue);
+    } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: clickVal
       });
     }
-   
   };
   const BackHandlerEvent = (e) => {
     dispatch({ type: SET_MIDDLEPANE_PREVIOUS_POPUP });

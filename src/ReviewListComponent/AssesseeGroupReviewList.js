@@ -123,15 +123,6 @@ const AssesseeGroupReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  const openAssesseeGroupRightPaneInformation = () => {
-    console.log(selectedTagValue);
-    // dispatch({
-    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //   payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
-    // });
-    // dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    // popupAllClose();
-  };
   return (
     <div>
       {reviewListDistinctData &&
@@ -141,8 +132,8 @@ const AssesseeGroupReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item}
-                isSelectedReviewList={false}
+                tag={item.id}
+                isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.assesseeGroupStatus}
                 textOne={item.informationBasic.assesseeGroupName}
                 textTwo={item.informationBasic.assesseeGroupDescription}
@@ -161,10 +152,6 @@ const AssesseeGroupReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-      <PopUpMiddlePaneList
-        isActive={isPopUpValue === 'middlePaneListPopup'}
-        onClickInformation={openAssesseeGroupRightPaneInformation}
-      />
     </div>
   );
 };

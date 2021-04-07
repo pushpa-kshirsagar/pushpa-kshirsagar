@@ -21,6 +21,7 @@ import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 // import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 // import { AccountContext } from '../../Account';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
+import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -62,6 +63,8 @@ const DisplayPageOne = () => {
     dispatch({ type: GET_USER_SAGA });
   }, [dispatch]);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+
   const userName =
     selectedAssociateInfo &&
     selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
@@ -77,6 +80,7 @@ const DisplayPageOne = () => {
     dispatch({ type: CLEAR_ASSIGNMENT_INFO });
     dispatch({ type: CLEAR_IGAUGE_REDUCER });
   };
+  const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneTwoReducer);
   return (
     <>
       <HeaderZero userName={userName} userEmail={userEmail} />
@@ -118,6 +122,11 @@ const DisplayPageOne = () => {
                 <div className="display-pane-container">
                   <DisplayPaneThree />
                 </div>
+                <PopUpMiddlePaneList
+                  isActive={isPopUpValue === 'middlePaneListPopup'}
+                  typeOfMiddlePaneList={typeOfMiddlePaneList}
+                  popupAllClose={popupAllClose}
+                />
               </>
             )}
           </>

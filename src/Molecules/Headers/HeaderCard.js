@@ -16,7 +16,11 @@ import {
   SET_SCAN_POPUP_STATE
 } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
-import { REVIEW_LIST_POPUP_OPTION, TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
+import {
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+  REVIEW_LIST_POPUP_OPTION,
+  TRIPPLE_DOT_POPUP_OPTION
+} from '../../PopUpConfig';
 const HeaderCard = (props) => {
   const {
     headerOne = '',
@@ -31,13 +35,16 @@ const HeaderCard = (props) => {
     onClickClearInfo = null
   } = props;
   const dispatch = useDispatch();
-  const { typeOfMiddlePaneList, middlePaneHeader, middlePaneHeaderBadgeOne, middlePaneSelectedValue } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    typeOfMiddlePaneList,
+    middlePaneHeader,
+    middlePaneHeaderBadgeOne,
+    middlePaneSelectedValue
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     headerOne: rightPaneHeaderOne,
     headerOneBadgeOne: rightPaneBadgeOne,
-    reviewMode,
+    reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
 
   const onClickScan = () => {
@@ -76,11 +83,11 @@ const HeaderCard = (props) => {
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: middlePaneSelectedValue
       }
     });
-    dispatch({ type: POPUP_OPEN, payload: 'rightPaneTripleDotPopup' });
+    dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   return (
     <div className={'iguru-leftpanel'}>
@@ -156,11 +163,8 @@ const HeaderCard = (props) => {
                     <OpenWithIcon className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : displayPane === 'centre' && showMiddlePaneState ? (
-                  <IconButton>
-                    <MoreVert
-                      className={'iguru-iconbardefault'}
-                      onClick={openMiddlePaneTripleDotPopup}
-                    />
+                  <IconButton onClick={openMiddlePaneTripleDotPopup}>
+                    <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : displayPane === 'right' ? (
                   <IconButton onClick={openRightPaneTripleDotPopup}>

@@ -202,7 +202,7 @@ export const DisplayPaneThree = () => {
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { showMiddlePaneState } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationBasic } = responseObject;
-  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
 
   const onClickClearInfo = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -408,11 +408,9 @@ export const DisplayPaneThree = () => {
               selectedSection={selectedSectionAssociate}
               setSelectedSection={setSelectedSectionAssociate}
             />
+
           </div>
-          <PopUpMiddlePaneList
-            isActive={isPopUpValue === 'rightPaneTripleDotPopup'}
-            onClickInformation={() => {}}
-          />
+
           {/* <FooterIconTwo
             FilterModeEnable={navigatorIcon}
             FilterMode={FilterMode}

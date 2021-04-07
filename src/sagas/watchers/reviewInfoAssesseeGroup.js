@@ -25,16 +25,16 @@ function* workerReviewAssesseeGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      // yield put({
-      //   type: SET_DISPLAY_PANE_THREE_STATE,
-      //   payload: {
-      //     headerOne: 'assessees',
-      //     headerOneBadgeOne: 'role',
-      //     headerOneBadgeTwo: 'information',
-      //     headerOneBadgeThree: 'key',
-      //     responseObject: userResponse.responseObject[0]
-      //   }
-      // });
+      yield put({
+        type: SET_DISPLAY_PANE_THREE_STATE,
+        payload: {
+          headerOne: 'assessees',
+          headerOneBadgeOne: 'group',
+          headerOneBadgeTwo: 'information',
+          headerOneBadgeThree: 'key',
+          responseObject: userResponse.responseObject[0]
+        }
+      });
     }
 
     console.log('loading end');
