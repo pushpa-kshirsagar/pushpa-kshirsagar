@@ -55,7 +55,8 @@ function* workerCreateAssesseeSaga(data) {
         headerOneBadgeOne: 'information',
         headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
         responseObject: userResponse.responseObject[0],
-        reviewMode: 'revise'
+        reviewMode: 'revise',
+        createMode: 'assessee'
       }
     });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });

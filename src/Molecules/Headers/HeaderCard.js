@@ -16,7 +16,7 @@ import {
   SET_SCAN_POPUP_STATE
 } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
-import { TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
+import { REVIEW_LIST_POPUP_OPTION, TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
 const HeaderCard = (props) => {
   const {
     headerOne = '',
@@ -31,9 +31,15 @@ const HeaderCard = (props) => {
     onClickClearInfo = null
   } = props;
   const dispatch = useDispatch();
-  const { typeOfMiddlePaneList, middlePaneHeader, middlePaneHeaderBadgeOne } = useSelector(
+  const { typeOfMiddlePaneList, middlePaneHeader, middlePaneHeaderBadgeOne, middlePaneSelectedValue } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
+  const {
+    headerOne: rightPaneHeaderOne,
+    headerOneBadgeOne: rightPaneBadgeOne,
+    reviewMode,
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
+
   const onClickScan = () => {
     dispatch({
       type: SET_SCAN_POPUP_STATE,
@@ -53,13 +59,28 @@ const HeaderCard = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: middlePaneHeader,
-        popupHeaderOneBadgeOne: middlePaneHeaderBadgeOne === 'distinct' ? '' : middlePaneHeaderBadgeOne,
+        popupHeaderOneBadgeOne:
+          middlePaneHeaderBadgeOne === 'distinct' ? '' : middlePaneHeaderBadgeOne,
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: TRIPPLE_DOT_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+  };
+  const openRightPaneTripleDotPopup = () => {
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        popupHeaderOne: rightPaneHeaderOne,
+        popupHeaderOneBadgeOne: '',
+        isPopUpValue: '',
+        popupOpenType: 'primary',
+        popupContentArrValue: REVIEW_LIST_POPUP_OPTION,
+        selectedTagValue: middlePaneSelectedValue
+      }
+    });
+    dispatch({ type: POPUP_OPEN, payload: 'rightPaneTripleDotPopup' });
   };
   return (
     <div className={'iguru-leftpanel'}>
@@ -119,7 +140,7 @@ const HeaderCard = (props) => {
                   <IconButton>
                     <NextIcon className={'iguru-iconbardefault'} />
                   </IconButton>
-                ) : displayPane === 'right' ? (
+                ) : displayPane === 'right' && reviewMode !== 'revise' ? (
                   <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>
@@ -142,7 +163,7 @@ const HeaderCard = (props) => {
                     />
                   </IconButton>
                 ) : displayPane === 'right' ? (
-                  <IconButton>
+                  <IconButton onClick={openRightPaneTripleDotPopup}>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : null}

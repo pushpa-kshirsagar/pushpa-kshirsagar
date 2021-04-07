@@ -9,7 +9,7 @@ import { Paper } from '@material-ui/core';
 
 const DisplayPaneThreeSectionOneAssociateRole = () => {
   // const [listExpand, setListExpand] = useState('');
-  const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { informationEngagement } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -100,9 +100,9 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} />
+                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} />
+                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                   )}
                 </div>
               );

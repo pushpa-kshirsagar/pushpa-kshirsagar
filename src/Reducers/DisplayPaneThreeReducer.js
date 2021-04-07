@@ -1,4 +1,8 @@
-import { SET_DISPLAY_PANE_THREE_STATE, CLEAR_DISPLAY_PANE_THREE } from '../actionType';
+import {
+  SET_DISPLAY_PANE_THREE_STATE,
+  CLEAR_DISPLAY_PANE_THREE,
+  SET_DISPLAY_PANE_THREE_REVIEW_MODE
+} from '../actionType';
 
 const initialState = {
   isReviewRevise: false,
@@ -7,7 +11,8 @@ const initialState = {
   headerOneBadgeTwo: '',
   HeaderBadgeThree: '',
   responseObject: {},
-  reviewMode: 'review'
+  reviewMode: 'review',
+  createMode: ''
 };
 
 const DisplayPaneThreeReducer = (istate = initialState, action) => {
@@ -20,7 +25,13 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
         headerOneBadgeTwo: action.payload.headerOneBadgeTwo,
         headerOneBadgeThree: action.payload.headerOneBadgeThree,
         responseObject: action.payload.responseObject,
-        reviewMode: action.payload.reviewMode || 'review'
+        reviewMode: action.payload.reviewMode || 'review',
+        createMode: action.payload.createMode || ''
+      };
+    case SET_DISPLAY_PANE_THREE_REVIEW_MODE:
+      return {
+        ...istate,
+        reviewMode: action.payload
       };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;

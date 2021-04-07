@@ -9,7 +9,7 @@ import { Paper } from '@material-ui/core';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
-  const { responseObject, headerOneBadgeTwo } = useSelector(
+  const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
   const { informationEngagement } = responseObject;
@@ -474,6 +474,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               isDisplayCardExpanded={listExpand === 'alliance'}
               setListExpand={setListExpand}
               list={list1}
+              mode={reviewMode}
             />
           </div>
           <div className="containerPadding">
@@ -482,6 +483,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               isDisplayCardExpanded={listExpand === 'allocation'}
               setListExpand={setListExpand}
               list={list2}
+              mode={reviewMode}
             />
           </div>
           <div className="containerPadding">
@@ -490,6 +492,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               isDisplayCardExpanded={listExpand === 'engagement'}
               setListExpand={setListExpand}
               list={list3}
+              mode={reviewMode}
             />
           </div>
           <div className="containerPadding">
@@ -498,6 +501,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               isDisplayCardExpanded={listExpand === 'setup'}
               setListExpand={setListExpand}
               list={list4}
+              mode={reviewMode}
             />
           </div>
         </>
@@ -509,9 +513,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} />
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} />
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );
@@ -524,9 +528,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} />
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} />
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );
@@ -539,9 +543,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} />
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} />
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );
@@ -554,9 +558,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} />
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} />
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );

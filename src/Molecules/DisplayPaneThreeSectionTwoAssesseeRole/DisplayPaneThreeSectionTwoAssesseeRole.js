@@ -2,16 +2,14 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 // import Manuscript from '@material-ui/icons/Description';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 
 const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   // const [listExpand, setListExpand] = useState('');
-  // const { responseObject, headerOneBadgeTwo } = useSelector(
-  //   (state) => state.DisplayPaneThreeReducer
-  // );
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   // const { informationEngagement, informationSetup } = responseObject;
   // function capitalizeFirstLetter(string) {
   //   if (!string) return '';
@@ -95,9 +93,9 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} />
+                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} />
+                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                   )}
                 </div>
               );

@@ -7,16 +7,16 @@ import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 
-const DisplayPaneThreeSectionTwoAssociateRole = () => {
+const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  // const { informationEngagement } = responseObject;
+  // const { informationEngagement, informationSetup } = responseObject;
   // function capitalizeFirstLetter(string) {
   //   if (!string) return '';
   //   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   // }
 
-  const list3 = [
+  const list2 = [
     {
       id: 'a1',
       labelTextOneOne: 'associate',
@@ -28,23 +28,23 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
         {
           id: 'associate1',
           textOne: 'Simple Sample 01',
-          textTwo: 'Associate',
+          textTwo: 'associate',
           status: ''
         },
         {
           id: 'associate2',
           textOne: 'Simple Sample 02',
-          textTwo: 'Associate',
+          textTwo: 'associate',
           status: ''
         },
         {
           id: 'associate3',
           textOne: 'Simple Sample 03',
-          textTwo: 'Associate',
+          textTwo: 'associate',
           status: ''
         }
       ],
-      innerInfo: 'assessees',
+      innerInfo: 'associate',
       isListCard: true
     }
   ];
@@ -59,7 +59,7 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
       <>
         <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
           <Paper className={'dossierContainerTop'}>
-            {list3.map((ob) => {
+            {list2.map((ob) => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
@@ -82,4 +82,4 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
   );
 };
 
-export default DisplayPaneThreeSectionTwoAssociateRole;
+export default DisplayPaneThreeSectionTwoAssesseeGroup;

@@ -9,7 +9,7 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 
 const DisplayPaneThreeSectionTwoAssociate = () => {
   const [listExpand, setListExpand] = useState('');
-  const { responseObject, headerOneBadgeTwo } = useSelector(
+  const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
   const { informationContact, informationCredential } = responseObject;
@@ -146,6 +146,7 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
               isDisplayCardExpanded={listExpand === 'contact'}
               setListExpand={setListExpand}
               list={list1}
+              mode={reviewMode}
             />
           </div>
           <div className="containerPadding">
@@ -154,6 +155,7 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
               isDisplayCardExpanded={listExpand === 'credential'}
               setListExpand={setListExpand}
               list={list2}
+              mode={reviewMode}
             />
           </div>
           <div className="containerPadding">
@@ -162,20 +164,21 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
               isDisplayCardExpanded={listExpand === 'framework'}
               setListExpand={setListExpand}
               list={list3}
+              mode={reviewMode}
             />
           </div>
         </>
       ) : (
         <>
           <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
-          <Paper className={'dossierContainerTop'}>
+            <Paper className={'dossierContainerTop'}>
               {list1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} />
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} />
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );
@@ -183,14 +186,14 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
             </Paper>
           </div>
           <div className="containerPadding">
-          <Paper className={'dossierContainerTop'}>
+            <Paper className={'dossierContainerTop'}>
               {list2.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} />
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} />
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );
@@ -198,14 +201,14 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
             </Paper>
           </div>
           <div className="containerPadding">
-          <Paper className={'dossierContainerTop'}>
+            <Paper className={'dossierContainerTop'}>
               {list3.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} />
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} />
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );
