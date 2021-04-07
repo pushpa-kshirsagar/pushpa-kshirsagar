@@ -300,6 +300,15 @@ export const DisplayPaneThree = () => {
                 setSelectedSection={setSelectedSectionAssesseeRole}
               />
             </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
           </>
         )}
       {isReviewRevise &&
@@ -328,6 +337,15 @@ export const DisplayPaneThree = () => {
                 setSelectedSection={setSelectedSectionAssesseeGroup}
               />
             </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
           </>
         )}
       {isReviewRevise &&
@@ -356,6 +374,15 @@ export const DisplayPaneThree = () => {
                 setSelectedSection={setSelectedSectionAssociateGroup}
               />
             </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
           </>
         )}
       {isReviewRevise &&
@@ -384,6 +411,15 @@ export const DisplayPaneThree = () => {
                 setSelectedSection={setSelectedSectionAssociateRole}
               />
             </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
           </>
         )}
       {isReviewRevise && responseObject && headerOne === 'associate' && (

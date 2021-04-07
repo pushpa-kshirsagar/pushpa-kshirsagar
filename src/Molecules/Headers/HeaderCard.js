@@ -31,13 +31,16 @@ const HeaderCard = (props) => {
     onClickClearInfo = null
   } = props;
   const dispatch = useDispatch();
-  const { typeOfMiddlePaneList, middlePaneHeader, middlePaneHeaderBadgeOne, middlePaneSelectedValue } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    typeOfMiddlePaneList,
+    middlePaneHeader,
+    middlePaneHeaderBadgeOne,
+    middlePaneSelectedValue
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     headerOne: rightPaneHeaderOne,
     headerOneBadgeOne: rightPaneBadgeOne,
-    reviewMode,
+    reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
 
   const onClickScan = () => {
