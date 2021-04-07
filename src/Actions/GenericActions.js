@@ -352,7 +352,7 @@ export const makeAssesseeRoleObj = (filterKey) => {
       searchObj = {
         condition: 'in',
         value: {
-          in: ['SUSPENDED', 'TERMINATED','ACTIVE']
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
         }
       };
     }
@@ -392,7 +392,7 @@ export const makeAssociateRoleObj = (filterKey) => {
       searchObj = {
         condition: 'in',
         value: {
-          in: ['SUSPENDED', 'TERMINATED','ACTIVE']
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
         }
       };
     }
@@ -435,7 +435,7 @@ export const makeAssociateRoleScanRequestObject = (filterKey, numberPage, countP
       searchObj = {
         condition: 'in',
         value: {
-          in: ['SUSPENDED', 'TERMINATED','ACTIVE']
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
         }
       };
     }
@@ -503,7 +503,7 @@ export const makeAssesseeRoleScanRequestObject = (filterKey, numberPage, countPa
       searchObj = {
         condition: 'in',
         value: {
-          in: ['SUSPENDED', 'TERMINATED','ACTIVE']
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
         }
       };
     }
@@ -546,6 +546,115 @@ export const makeAssesseeRoleScanRequestObject = (filterKey, numberPage, countPa
           {
             dataType: 'string',
             conditionColumn: 'informationBasic.assesseeRoleDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAssesseeGroupObj = (filterKey,countPage,numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAssesseeGroupScanRequestObject = (filterKey,countPage,numberPage,searchStr) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeGroupName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeGroupDescription',
             conditionValue: {
               condition: 'ct',
               value: {

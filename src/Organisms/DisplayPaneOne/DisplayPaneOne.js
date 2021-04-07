@@ -169,18 +169,19 @@ export const DisplayPaneOne = () => {
             <Card isIcon IconOne={ArrowRight} textOneOne="associates" onClick={openCardPopup} />
           )}
         </div>
-      </div>
-      {assesseePermission && assesseePermission.associateHierarchy.includes('review') && (
-        <>
-          <Sections
-            listSections={leftPaneSections}
-            selectedSection={selectedSection}
-            setSelectedSection={setSelectedSection}
-          />
 
-          <FooterIconOne />
-        </>
-      )}
+        {assesseePermission && assesseePermission.associateHierarchy.includes('review') && (
+          <>
+            <Sections
+              listSections={leftPaneSections}
+              selectedSection={selectedSection}
+              setSelectedSection={setSelectedSection}
+            />
+
+            <FooterIconOne />
+          </>
+        )}
+      </div>
       <PopUpDisplayPaneOneSectionTwo
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}
       />

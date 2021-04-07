@@ -80,6 +80,33 @@ const AllGroupCreatePopup = (props) => {
         }
       };
     }
+    if (headerOne === 'assessments') {
+      reqBody = {
+        assesseeId: '0123456',
+        associateId: '0654321',
+        whichGroupCreate: 'assessments',
+        assessmentGroup: {
+          informationBasic: {
+            assessmentGroupName: groupInformation.informationBasic.groupName,
+            assessmentGroupNameVerification: false,
+            assessmentGroupDescription: groupInformation.informationBasic.groupDescription,
+            assessmentGroupPicture: '',
+            assessmentGroupPictureVerification: false
+          },
+          informationAllocation: {
+            assessmentGroupManager: {
+              assessmentGroupManagerPrimary: ['fdfsdf']
+            },
+            assessmentGroupNode: {
+              assessmentGroupNodeSecondary: []
+            },
+            assessmentGroupType: {
+              assessmentGroupTypePrimary: []
+            }
+          }
+        }
+      };
+    }
     //console.log('CREATE group api', reqBody);
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_GROUP_SAGA, payload: reqBody });

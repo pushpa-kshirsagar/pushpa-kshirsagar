@@ -12,8 +12,10 @@ export const GET_ASSESSEE_PERMISSION_URL =
 
 export const ASSESSEE_CREATE_URL =
   'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/create';
+// export const ASSOCIATE_CREATE_URL =
+//   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insightguru/api/associate-distinct/create';
 export const ASSOCIATE_CREATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insightguru/api/associate-distinct/create';
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-sign-on';
 export const ASSESSEE_REVIEW_LIST_URL =
   'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/review-list';
 export const ASSESSEE_REVIEW_INFO_URL =
@@ -38,7 +40,12 @@ export const ASSESSEE_REVIEW_GROUP_URL =
   'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/review';
 export const ASSOCIATE_REVIEW_GROUP_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/review';
-export const ASSESSEE_GROUP_CREATE_URL = 'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/create';
-export const ASSESSMENT_GROUP_CREATE_URL = '';
+export const ASSESSEE_GROUP_CREATE_URL =
+  'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/create';
+export const ASSESSMENT_GROUP_CREATE_URL =
+  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-group/create';
 export const ASSIGNMENT_GROUP_CREATE_URL = '';
-export const ASSOCIATE_GROUP_CREATE_URL = 'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/create';
+export const ASSOCIATE_GROUP_CREATE_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/create';
+export const ASSESSEE_GROUP_REVIEWLIST_URL =
+  'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group-distinct/review-list';

@@ -78,9 +78,9 @@ const PopUpSignOnAssociate = () => {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,
         informationContact: informationContact,
-        informationEngagement: informationEngagement,
+        // informationEngagement: informationEngagement,
         informationPersonal: informationPersonal,
-        informationSetup: informationSetup
+        // informationSetup: informationSetup
       }
     };
     console.log('ONCLICK YES', requestObect);

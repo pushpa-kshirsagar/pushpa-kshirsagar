@@ -20,6 +20,7 @@ import {
   FILTERMODE,
   SET_REQUEST_OBJECT,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
@@ -39,7 +40,8 @@ import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
   setAssociateCardPermissionInJson,
   makeAssesseeRoleObj,
-  makeAssociateRoleObj
+  makeAssociateRoleObj,
+  makeAssesseeGroupObj
 } from '../Actions/GenericActions';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
@@ -51,6 +53,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     currentPopUpOption
   } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
+  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
@@ -220,7 +223,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           secondaryOptionCheckValue,
           reqBody: {
             assesseeId: '0123456',
-            associateId: '605091f81edc573048fb467a',
+            associateId: '605255729d3c823d3964e0ec',
             filter: true,
             search: [
               {
@@ -350,6 +353,31 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
     }
     if (
+      clickValue === 'distinct' &&
+      popupHeaderOne === 'assessees' &&
+      popupHeaderOneBadgeOne === 'groups'
+    ) {
+      let requestObj = makeAssesseeGroupObj(secondaryOptionCheckValue, 0, countPage);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeGroupDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: 'groups',
+          BadgeTwo: 'distinct',
+          BadgeThree: secondaryOptionCheckValue,
+          isMiddlePaneList: true
+        }
+      });
+    }
+    if (
       clickValue === 'information' &&
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
     ) {
@@ -433,7 +461,18 @@ const PopUpDisplayPanelAssociate = (props) => {
         valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
         revisePopupType = 'secondary';
       }
-
+      if (
+        (popupHeaderOne === 'assessees' ||
+          popupHeaderOne === 'assessments' ||
+          popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'associates') &&
+        (popupHeaderOneBadgeOne === 'groups' || popupHeaderOneBadgeOne === 'group')
+      ) {
+        revisePopupHeaderOne = 'groups';
+        revisepopupHeaderOneBadgeOne = '';
+        valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+        revisePopupType = 'secondary';
+      }
       if (
         popupHeaderOne === 'assessee' &&
         (popupHeaderOneBadgeOne === 'upload' || popupHeaderOneBadgeOne === 'download')

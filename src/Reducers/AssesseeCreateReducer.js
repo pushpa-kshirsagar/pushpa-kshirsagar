@@ -73,6 +73,18 @@ const initialState = {
     assesseePictureVerification: false
   },
   informationAllocation: {
+    assesseeGroup: {
+      assesseeGroupPrimary: [],
+      assesseeGroupSecondary: []
+    },
+     assesseeManager: {
+      assesseeManagerPrimary: [],
+      assesseeManagerSecondary: []
+    },
+     assesseeNode: {
+      assesseeNodePrimary: [],
+      assesseeNodeSecondary: []
+    },
     assesseeRole: {
       assesseeRolePrimary: ['sdasdd'],
       assesseeRoleSecondary: []
