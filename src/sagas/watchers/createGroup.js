@@ -1,13 +1,17 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-    CLEAR_GROUP_REDUCER_STATE,
+  CLEAR_GROUP_REDUCER_STATE,
   CREATE_GROUP_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE
 } from '../../actionType';
-import { ASSESSEE_GROUP_CREATE_URL, ASSOCIATE_GROUP_CREATE_URL } from '../../endpoints';
+import {
+  ASSESSEE_GROUP_CREATE_URL,
+  ASSESSMENT_GROUP_CREATE_URL,
+  ASSOCIATE_GROUP_CREATE_URL
+} from '../../endpoints';
 
 const createGroupApi = async (requestObj) => {
   const requestOptions = {
@@ -17,6 +21,9 @@ const createGroupApi = async (requestObj) => {
   let URL = '';
   if (requestObj.data.whichGroupCreate === 'assessees') {
     URL = ASSESSEE_GROUP_CREATE_URL;
+  }
+  if (requestObj.data.whichGroupCreate === 'assessments') {
+    URL = ASSESSMENT_GROUP_CREATE_URL;
   }
   if (requestObj.data.whichGroupCreate === 'associates') {
     URL = ASSOCIATE_GROUP_CREATE_URL;
@@ -30,7 +37,7 @@ function* workerCreateGroupSaga(data) {
   try {
     const userResponse = yield call(createGroupApi, { data: data.payload });
     if (userResponse.responseCode === '000') {
-      console.log('loading end',data.payload.whichGroupCreate);
+      console.log('loading end', data.payload.whichGroupCreate);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {

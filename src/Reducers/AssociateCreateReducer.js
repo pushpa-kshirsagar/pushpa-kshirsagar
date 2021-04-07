@@ -71,16 +71,16 @@ const initialState = {
       associateAddressPostcode: '',
       associateAddressCity: '',
       associateAddress: '',
-      associateAddressCommunication: '',
-      associateAddressVerification: ''
+      associateAddressCommunication: false,
+      associateAddressVerification: false
     },
     associateTelephoneWorkPrimary: {
       associateTelephoneCountryRegion: '',
       associateTelephoneAreaCity: '',
       associateTelephoneNumber: '',
       associateTelephoneExtension: '',
-      associateTelephoneCommunication: '',
-      associateTelephoneVerification: ''
+      associateTelephoneCommunication: false,
+      associateTelephoneVerification: false
     }
   },
   basicInfo: {

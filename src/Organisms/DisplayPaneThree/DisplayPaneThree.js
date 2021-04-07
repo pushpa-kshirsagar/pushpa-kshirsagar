@@ -106,7 +106,8 @@ export const DisplayPaneThree = () => {
     headerOneBadgeOne,
     headerOneBadgeTwo,
     headerOneBadgeThree,
-    responseObject
+    responseObject,
+    reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { showMiddlePaneState } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationBasic } = responseObject;
@@ -136,7 +137,7 @@ export const DisplayPaneThree = () => {
       </div>
       {isReviewRevise &&
         responseObject &&
-        ((headerOne === 'assessees' && headerOneBadgeOne !== 'role') ||
+        ((headerOne === 'assessee' && headerOneBadgeOne !== 'role') ||
           headerOne === 'administrator' ||
           headerOne === 'manager') && (
           <>
@@ -152,6 +153,7 @@ export const DisplayPaneThree = () => {
                   textOneTwo={informationBasic.assesseeAlias || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
+                  mode={reviewMode}
                 />
               </div>
               <Sections
@@ -186,6 +188,7 @@ export const DisplayPaneThree = () => {
                   textOneTwo={informationBasic.assesseeRoleDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
+                  mode={reviewMode}
                 />
               </div>
               <Sections
@@ -213,6 +216,7 @@ export const DisplayPaneThree = () => {
                   textOneTwo={informationBasic.associateRoleDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
+                  mode={reviewMode}
                 />
               </div>
               <Sections
@@ -237,6 +241,7 @@ export const DisplayPaneThree = () => {
                 textOneTwo={informationBasic.associateDescription || 'No Information'}
                 isVerifiedActiveName={false}
                 isVerifiedActivePicture={false}
+                mode={reviewMode}
               />
             </div>
             <Sections

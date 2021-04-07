@@ -11,6 +11,7 @@ import {
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
+  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   LOADER_START,
@@ -21,6 +22,7 @@ import {
 import PropTypes from 'prop-types';
 import { FormHelperText } from '@material-ui/core';
 import {
+  makeAssesseeGroupScanRequestObject,
   makeAssesseeRoleScanRequestObject,
   makeAssesseeScanRequestObject,
   makeAssociateRoleScanRequestObject,
@@ -36,7 +38,9 @@ const PopUpScan = (props) => {
     scanHeaderBadgeTwo,
     typeOfMiddlePaneList,
     countPage,
-    middlePaneHeaderBadgeTwo
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isActive = true } = props;
   const [state, setState] = useState({
@@ -75,7 +79,9 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
         let requestObect = makeAssesseeRoleScanRequestObject(
-          middlePaneHeaderBadgeTwo,
+          middlePaneHeaderBadgeTwo === 'distinct'
+            ? middlePaneHeaderBadgeThree
+            : middlePaneHeaderBadgeTwo,
           0,
           countPage,
           state.scanValue
@@ -87,8 +93,9 @@ const PopUpScan = (props) => {
           type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
           payload: {
             request: requestObect,
-            BadgeOne: 'distinct',
+            BadgeOne: middlePaneHeaderBadgeOne,
             BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
             isMiddlePaneList: true
           }
         });
@@ -97,7 +104,9 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
         let requestObect = makeAssociateRoleScanRequestObject(
-          middlePaneHeaderBadgeTwo,
+           middlePaneHeaderBadgeTwo === 'distinct'
+            ? middlePaneHeaderBadgeThree
+            : middlePaneHeaderBadgeTwo,
           0,
           countPage,
           state.scanValue
@@ -109,10 +118,10 @@ const PopUpScan = (props) => {
           type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
           payload: {
             request: requestObect,
-            BadgeOne: 'distinct',
+            BadgeOne: middlePaneHeaderBadgeOne,
             BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
             isMiddlePaneList: true
-
           }
         });
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
@@ -132,8 +141,34 @@ const PopUpScan = (props) => {
           type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
           payload: {
             request: requestObect,
-            BadgeOne: 'distinct',
+            BadgeOne: middlePaneHeaderBadgeOne,
             BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'assesseeGroupDistinctReviewList') {
+        let requestObect = makeAssesseeGroupScanRequestObject(
+          middlePaneHeaderBadgeTwo === 'distinct'
+          ? middlePaneHeaderBadgeThree
+          : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
             isMiddlePaneList: true
           }
         });
@@ -173,8 +208,15 @@ const PopUpScan = (props) => {
               classNames={'scanInputFields'}
               onClick={handleChange}
             />
-            <FormHelperText className={['aliasName', 'helptextmargin'].join(' ')} style={{paddingLeft:'5px'}}>
-              {(isPopUpValue === 'assesseeRoleDistinctReviewList' || isPopUpValue === 'associateRoleDistinctReviewList') && <span>name, description.</span>}
+            <FormHelperText
+              className={['aliasName', 'helptextmargin'].join(' ')}
+              style={{ paddingLeft: '5px' }}
+            >
+              {(isPopUpValue === 'assesseeRoleDistinctReviewList' ||
+                isPopUpValue === 'assesseeGroupDistinctReviewList' ||
+                isPopUpValue === 'associateRoleDistinctReviewList') && (
+                <span>name, description.</span>
+              )}
               {isPopUpValue === 'assesseeDistinctReviewList' && (
                 <span>name, alias, email address, mobile telephone, tag.</span>
               )}

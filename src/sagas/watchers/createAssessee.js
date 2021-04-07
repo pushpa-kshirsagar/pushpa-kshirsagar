@@ -54,7 +54,8 @@ function* workerCreateAssesseeSaga(data) {
         headerOne: Store.getState().DisplayPaneTwoReducer.typeOfAssesseeCreate,
         headerOneBadgeOne: 'information',
         headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
-        responseObject: userResponse.responseObject[0]
+        responseObject: userResponse.responseObject[0],
+        reviewMode: 'revise'
       }
     });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
