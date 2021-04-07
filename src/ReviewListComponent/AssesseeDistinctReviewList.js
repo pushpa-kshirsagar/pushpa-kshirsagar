@@ -128,45 +128,7 @@ const AssesseeDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  const openAssesseeRightPaneInformation = (secondaryOptionCheckValue) => {
-    console.log(selectedTagValue);
-    dispatch({ type: LOADER_START });
-    dispatch({
-      type: GET_ASSESSEE_INFO_SAGA,
-      payload: {
-        secondaryOptionCheckValue,
-        reqBody: {
-          assesseeId: '0123456',
-          associateId: '0654321',
-          filter: 'true',
-          searchCondition: 'AND',
-          search: [
-            {
-              condition: 'and',
-              searchBy: [
-                {
-                  dataType: 'string',
-                  conditionColumn: 'id',
-                  conditionValue: {
-                    condition: 'eq',
-                    value: {
-                      from: selectedTagValue ? selectedTagValue : '6054a4d6cb14fb2075aeec87'
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      }
-    });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
-    });
-    popupAllClose();
-  };
+
   return (
     <div>
       {reviewListDistinctData &&
@@ -216,10 +178,10 @@ const AssesseeDistinctReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-      <PopUpMiddlePaneList
+      {/* <PopUpMiddlePaneList
         isActive={isPopUpValue === 'middlePaneListPopup'}
         onClickInformation={openAssesseeRightPaneInformation}
-      />
+      /> */}
     </div>
   );
 };

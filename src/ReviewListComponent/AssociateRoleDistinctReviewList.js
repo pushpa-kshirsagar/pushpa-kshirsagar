@@ -123,40 +123,7 @@ const AssociateRoleDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  const openAssociateRoleRightPaneInformation = () => {
-    dispatch({ type: LOADER_START });
-    dispatch({
-      type: GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
-      payload: {
-        secondaryOptionCheckValue,
-        reqBody: {
-          assesseeId: '0123456',
-          associateId: '0654321',
-          filter: 'true',
-          searchCondition: 'AND',
-          search: [
-            {
-              condition: 'and',
-              searchBy: [
-                {
-                  dataType: 'string',
-                  conditionColumn: 'id',
-                  conditionValue: {
-                    condition: 'eq',
-                    value: {
-                      from: '60643749df161555755c1470'
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      }
-    });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    popupAllClose();
-  };
+
   return (
     <div>
       {reviewListDistinctData &&
@@ -166,8 +133,8 @@ const AssociateRoleDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item}
-                isSelectedReviewList={false}
+                tag={item.informationEngagement.associateRoleTag}
+                isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.associateRoleStatus}
                 textOne={item.informationBasic.associateRoleName}
                 textTwo={item.informationBasic.associateRoleDescription}
@@ -186,10 +153,7 @@ const AssociateRoleDistinctReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-      <PopUpMiddlePaneList
-        isActive={isPopUpValue === 'middlePaneListPopup'}
-        onClickInformation={openAssociateRoleRightPaneInformation}
-      />
+     
     </div>
   );
 };
