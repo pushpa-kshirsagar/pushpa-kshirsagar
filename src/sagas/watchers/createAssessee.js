@@ -6,6 +6,7 @@ import {
   LOADER_STOP,
   SET_ASSESSEE_INFORMATION_DATA,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE
 } from '../../actionType';
 import { ASSESSEE_CREATE_URL } from '../../endpoints';
@@ -57,6 +58,19 @@ function* workerCreateAssesseeSaga(data) {
         responseObject: userResponse.responseObject[0],
         reviewMode: 'revise',
         createMode: 'assessee'
+      }
+    });
+    yield put({
+      type: SET_MIDDLEPANE_STATE,
+      payload: {
+        middlePaneHeader: '',
+        middlePaneHeaderBadgeOne: '',
+        middlePaneHeaderBadgeTwo: '',
+        middlePaneHeaderBadgeThree: '',
+        middlePaneHeaderBadgeFour: '',
+        typeOfMiddlePaneList: '',
+        scanCount: null,
+        showMiddlePaneState: false
       }
     });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
