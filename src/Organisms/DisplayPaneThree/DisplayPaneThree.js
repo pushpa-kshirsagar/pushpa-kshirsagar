@@ -39,6 +39,8 @@ import DisplayPaneThreeSectionOneAssociateGroup from '../../Molecules/DisplayPan
 import DisplayPaneThreeSectionTwoAssociateGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssociateGroup/DisplayPaneThreeSectionTwoAssociateGroup';
 import DisplayPaneThreeSectionOneAssessmentGroup from '../../Molecules/DisplayPaneThreeSectionOneAssessmentGroup/DisplayPaneThreeSectionOneAssessmentGroup';
 import DisplayPaneThreeSectionTwoAssessmentGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentGroup/DisplayPaneThreeSectionTwoAssessmentGroup';
+import DisplayPaneThreeSectionOneAssignmentGroup from '../../Molecules/DisplayPaneThreeSectionOneAssignmentGroup/DisplayPaneThreeSectionOneAssignmentGroup';
+import DisplayPaneThreeSectionTwoAssignmentGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssignmentGroup/DisplayPaneThreeSectionTwoAssignmentGroup';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -126,6 +128,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssignmentGroup = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssignmentGroup,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssignmentGroup,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssociate = [
     {
       id: 'section1',
@@ -152,6 +168,9 @@ export const DisplayPaneThree = () => {
   );
   const [selectedSectionAssessmentGroup, setSelectedSectionAssessmentGroup] = useState(
     rightPaneSectionsAssessmentGroup[0]
+  );
+  const [selectedSectionAssignmentGroup, setSelectedSectionAssignmentGroup] = useState(
+    rightPaneSectionsAssignmentGroup[0]
   );
   const [selectedSectionAssociateRole, setSelectedSectionAssociateRole] = useState(
     rightPaneSectionsAssociateRole[0]
@@ -226,6 +245,13 @@ export const DisplayPaneThree = () => {
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assessmentsGROUPCREATE' }
     });
   };
+  const onClickCreateAssignmentGroup = () => {
+    console.log('ON CLICK CREATE ASSIGNMENT GROUP');
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+    });
+  };
 
   const onClickCreateAssesseeRole = () => {
     console.log('ON CLICK CREATE ASSESSEE ROLE');
@@ -255,6 +281,9 @@ export const DisplayPaneThree = () => {
   ];
   const createAssessmentGroupPrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessmentGroup, Icon: AddIcon }
+  ];
+  const createAssignmentGroupPrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssignmentGroup, Icon: AddIcon }
   ];
 
   const createAssesseeRolePrimaryIcon = [
@@ -532,6 +561,52 @@ export const DisplayPaneThree = () => {
                 FilterMode={FilterMode}
                 onClick={onClickCreateAssessmentGroup}
                 primaryIcon={createAssessmentGroupPrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assignments' &&
+        headerOneBadgeOne === 'group' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.assignmentGroupName || 'No Information'}
+                  textOneTwo={informationBasic.assignmentGroupDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssignmentGroup}
+                selectedSection={selectedSectionAssignmentGroup}
+                setSelectedSection={setSelectedSectionAssignmentGroup}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assignmentsGroup' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssignmentGroup}
+                primaryIcon={createAssignmentGroupPrimaryIcon}
                 secondaryIcon={[]}
               />
             )}

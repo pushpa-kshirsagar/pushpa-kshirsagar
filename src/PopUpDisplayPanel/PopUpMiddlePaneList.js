@@ -210,7 +210,7 @@ const PopUpMiddlePaneList = (props) => {
         payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
       });
       popupAllClose();
-      dispatch({ type: LOADER_STOP });
+      // dispatch({ type: LOADER_STOP });
 
       // onClickInformation(secondaryOptionCheckValue);
     } else {
