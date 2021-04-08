@@ -32,7 +32,8 @@ function* workerCreateAssociateRoleSaga(data) {
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0],
-          reviewMode: 'revise'
+          reviewMode: 'revise',
+          createMode: 'associatesRole'
         }
       });
     }
