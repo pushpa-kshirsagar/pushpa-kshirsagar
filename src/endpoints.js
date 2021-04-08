@@ -44,8 +44,15 @@ export const ASSESSEE_GROUP_CREATE_URL =
   'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/create';
 export const ASSESSMENT_GROUP_CREATE_URL =
   'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-group/create';
-export const ASSIGNMENT_GROUP_CREATE_URL = '';
+export const ASSIGNMENT_GROUP_CREATE_URL =
+  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-group/create';
 export const ASSOCIATE_GROUP_CREATE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/create';
 export const ASSESSEE_GROUP_REVIEWLIST_URL =
   'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group-distinct/review-list';
+export const ASSOCIATE_GROUP_REVIEWLIST_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/review-list';
+
+export const ASSESSMENT_GROUP_REVIEWLIST_URL =
+  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-group/review-list';
+export const ASSIGNMENT_GROUP_REVIEWLIST_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-group/review-list';

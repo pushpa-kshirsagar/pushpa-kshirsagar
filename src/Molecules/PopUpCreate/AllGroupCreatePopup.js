@@ -16,6 +16,8 @@ const AllGroupCreatePopup = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { groupInformation } = useSelector((state) => state.GroupCreateReducer);
+  console.log(groupInformation)
+  console.log("groupInformation")
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
@@ -102,6 +104,33 @@ const AllGroupCreatePopup = (props) => {
             },
             assessmentGroupType: {
               assessmentGroupTypePrimary: []
+            }
+          }
+        }
+      };
+    }
+    if (headerOne === 'assignments') {
+      reqBody = {
+        assesseeId: '0123456',
+        associateId: '0654321',
+        whichGroupCreate: 'assignments',
+        assignmentGroup: {
+          informationBasic: {
+            assignmentGroupName: groupInformation.informationBasic.groupName,
+            assignmentGroupNameVerification: false,
+            assignmentGroupDescription: groupInformation.informationBasic.groupDescription,
+            assignmentGroupPicture: '',
+            assignmentGroupPictureVerification: false
+          },
+          informationAllocation: {
+            assignmentGroupManager: {
+              assignmentGroupManagerPrimary: ['fdfsdf']
+            },
+            assignmentGroupNode: {
+              assignmentGroupNodeSecondary: []
+            },
+            assignmentGroupType: {
+              assignmentGroupTypePrimary: []
             }
           }
         }

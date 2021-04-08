@@ -12,6 +12,7 @@ import {
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_START,
+  LOADER_STOP,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
@@ -172,7 +173,7 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'assesseeGroupDistinctReviewList') {
+      if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
         dispatch({
           type: GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
           payload: {
@@ -209,6 +210,8 @@ const PopUpMiddlePaneList = (props) => {
         payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
       });
       popupAllClose();
+      dispatch({ type: LOADER_STOP });
+
       // onClickInformation(secondaryOptionCheckValue);
     } else {
       dispatch({

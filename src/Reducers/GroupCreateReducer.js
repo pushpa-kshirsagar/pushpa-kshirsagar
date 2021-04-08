@@ -13,6 +13,7 @@ const initialState = {
 };
 
 const GroupCreateReducer = (istate = initialState, action) => {
+  console.log(action.type);
   switch (action.type) {
     case SET_GROUP_REDUCER_STATE:
       return {
@@ -23,7 +24,17 @@ const GroupCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_GROUP_REDUCER_STATE:
-      return istate;
+      return {
+        groupInformation: {
+          informationBasic: {
+            groupName: '',
+            groupNameVerification: false,
+            groupDescription: '',
+            groupPicture: '',
+            groupPictureVerification: false
+          }
+        }
+      };
     default:
       return istate;
   }

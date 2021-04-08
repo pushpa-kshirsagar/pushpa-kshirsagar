@@ -21,7 +21,10 @@ import {
   SET_REQUEST_OBJECT,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -41,7 +44,10 @@ import {
   setAssociateCardPermissionInJson,
   makeAssesseeRoleObj,
   makeAssociateRoleObj,
-  makeAssesseeGroupObj
+  makeAssesseeGroupObj,
+  makeAssociateGroupObj,
+  makeAssessmentGroupObj,
+  makeAssignmentGroupObj
 } from '../Actions/GenericActions';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
@@ -215,7 +221,6 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseSecondaryOptionCheckValue = 'unread';
     }
     if (clickValue === 'information' && popupHeaderOne === 'associate') {
-      console.log('+++++++++++++++++++++++++++++++++++++++++++++++++');
       dispatch({ type: LOADER_START });
       dispatch({
         type: GET_ASSOCIATE_INFO_SAGA,
@@ -354,27 +359,69 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'distinct' &&
-      popupHeaderOne === 'assessees' &&
+      (popupHeaderOne === 'assessees' || popupHeaderOne === 'assignments'|| popupHeaderOne === 'associates' || popupHeaderOne === 'assessments') &&
       popupHeaderOneBadgeOne === 'groups'
     ) {
-      let requestObj = makeAssesseeGroupObj(secondaryOptionCheckValue, 0, countPage);
+      let requestObj = {};
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assesseeGroupDistinct' + secondaryOptionCheckValue }
-      });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
+      if (popupHeaderOne === 'assessees') {
+        requestObj = makeAssesseeGroupObj(secondaryOptionCheckValue, 0, countPage);
+        dispatch({
+          type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: 'groups',
+            BadgeTwo: 'distinct',
+            BadgeThree: secondaryOptionCheckValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
+      if (popupHeaderOne === 'associates') {
+        requestObj = makeAssociateGroupObj(secondaryOptionCheckValue, 0, countPage);
+        dispatch({
+          type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: 'groups',
+            BadgeTwo: 'distinct',
+            BadgeThree: secondaryOptionCheckValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
+      if (popupHeaderOne === 'assessments') {
+        requestObj = makeAssessmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+        dispatch({
+          type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: 'groups',
+            BadgeTwo: 'distinct',
+            BadgeThree: secondaryOptionCheckValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
+      if (popupHeaderOne === 'assignments') {
+        requestObj = makeAssignmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+        dispatch({
+          type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: 'groups',
+            BadgeTwo: 'distinct',
+            BadgeThree: secondaryOptionCheckValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
       dispatch({
-        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: 'groups',
-          BadgeTwo: 'distinct',
-          BadgeThree: secondaryOptionCheckValue,
-          isMiddlePaneList: true
-        }
+        type: FILTERMODE,
+        payload: { FilterMode: popupHeaderOne + 'GroupDistinct' + secondaryOptionCheckValue }
       });
     }
     if (

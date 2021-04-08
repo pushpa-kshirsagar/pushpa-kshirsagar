@@ -13,6 +13,9 @@ import {
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_CLOSE,
@@ -22,11 +25,14 @@ import {
 import PropTypes from 'prop-types';
 import { FormHelperText } from '@material-ui/core';
 import {
-  makeAssesseeGroupScanRequestObject,
   makeAssesseeRoleScanRequestObject,
   makeAssesseeScanRequestObject,
   makeAssociateRoleScanRequestObject,
-  makeAssociateScanRequestObject
+  makeAssociateScanRequestObject,
+  makeAssesseeGroupScanRequestObject,
+  makeAssessmentGroupScanRequestObject,
+  makeAssignmentGroupScanRequestObject,
+  makeAssociateGroupScanRequestObject
 } from '../Actions/GenericActions';
 
 const PopUpScan = (props) => {
@@ -175,6 +181,81 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
+      if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
+        let requestObect = makeAssessmentGroupScanRequestObject(
+          middlePaneHeaderBadgeTwo === 'distinct'
+          ? middlePaneHeaderBadgeThree
+          : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
+        let requestObect = makeAssignmentGroupScanRequestObject(
+          middlePaneHeaderBadgeTwo === 'distinct'
+          ? middlePaneHeaderBadgeThree
+          : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
+        let requestObect = makeAssociateGroupScanRequestObject(
+          middlePaneHeaderBadgeTwo === 'distinct'
+          ? middlePaneHeaderBadgeThree
+          : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
       if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
         console.log(typeOfMiddlePaneList);
       }
@@ -214,6 +295,9 @@ const PopUpScan = (props) => {
             >
               {(isPopUpValue === 'assesseeRoleDistinctReviewList' ||
                 isPopUpValue === 'assesseeGroupDistinctReviewList' ||
+                isPopUpValue === 'assessmentsGroupDistinctReviewList' ||
+                isPopUpValue === 'assignmentsGroupDistinctReviewList' ||
+                isPopUpValue === 'associatesGroupDistinctReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

@@ -10,6 +10,7 @@ import {
 import {
   ASSESSEE_GROUP_CREATE_URL,
   ASSESSMENT_GROUP_CREATE_URL,
+  ASSIGNMENT_GROUP_CREATE_URL,
   ASSOCIATE_GROUP_CREATE_URL
 } from '../../endpoints';
 
@@ -24,6 +25,9 @@ const createGroupApi = async (requestObj) => {
   }
   if (requestObj.data.whichGroupCreate === 'assessments') {
     URL = ASSESSMENT_GROUP_CREATE_URL;
+  }
+  if (requestObj.data.whichGroupCreate === 'assignments') {
+    URL = ASSIGNMENT_GROUP_CREATE_URL;
   }
   if (requestObj.data.whichGroupCreate === 'associates') {
     URL = ASSOCIATE_GROUP_CREATE_URL;

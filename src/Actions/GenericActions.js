@@ -668,3 +668,331 @@ export const makeAssesseeGroupScanRequestObject = (filterKey,countPage,numberPag
   };
   return requestObj;
 };
+export const makeAssociateGroupObj = (filterKey,countPage,numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.associateGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+
+export const makeAssociateGroupScanRequestObject = (filterKey,countPage,numberPage,searchStr) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.associateGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateGroupName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateGroupDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAssessmentGroupObj = (filterKey,countPage,numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assessmentGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assessmentGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAssessmentGroupScanRequestObject = (filterKey,countPage,numberPage,searchStr) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assessmentGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assessmentGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assessmentGroupName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assessmentGroupDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAssignmentGroupObj = (filterKey,countPage,numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assignmentGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assignmentGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAssignmentGroupScanRequestObject = (filterKey,countPage,numberPage,searchStr) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assignmentGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assignmentGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assignmentGroupName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assignmentGroupDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};

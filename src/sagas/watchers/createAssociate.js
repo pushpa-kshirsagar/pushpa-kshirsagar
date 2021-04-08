@@ -5,7 +5,10 @@ import {
   SET_ASSOCIATE_INFORMATION,
   SET_ASSESSEE_INFORMATION_DATA,
   LOADER_STOP,
-  SET_DISPLAY_PANE_THREE_STATE
+  SET_DISPLAY_PANE_THREE_STATE,
+  CLEAR_ASSOCIATE_INFO,
+  POPUP_CLOSE,
+  SET_MOBILE_PANE_STATE
 } from '../../actionType';
 import { ASSESSEE_CREATE_URL, ASSOCIATE_CREATE_URL } from '../../endpoints';
 const createAssesseeApi = async (requestObj) => {
@@ -111,36 +114,38 @@ function* workerCreateAssociateSaga(data) {
     //   }
     // };
     const userResponse = yield call(createAssociateApi, { data: data.payload });
+    console.log(userResponse);
+    console.log("userResponse");
     if (userResponse.responseCode === '000')
-      yield put({ type: SET_ASSOCIATE_INFORMATION, payload: userResponse.responseObject });
-    let obj = {
-      ...data.payload,
-      associateName: 'Boppo Technologies',
-      associateId: userResponse.responseObject.id,
-      associate: userResponse.responseObject
-    };
+      yield put({ type: SET_ASSOCIATE_INFORMATION, payload: userResponse.associate });
+    // let obj = {
+    //   ...data.payload,
+    //   associateName: 'Boppo Technologies',
+    //   associateId: userResponse.responseObject.id,
+    //   associate: userResponse.responseObject
+    // };
 
-    const assesseeRes = yield call(createAssesseeApi, { data: obj });
-    if (assesseeRes.responseCode === '000') {
-      let validEmail =
-        assesseeRes.responseObject[0].informationContact.assesseeAddressEmailPrimary
+    // const assesseeRes = yield call(createAssesseeApi, { data: obj });
+    // if (assesseeRes.responseCode === '000') {
+    let validEmail =
+      userResponse.assessee.informationContact.assesseeAddressEmailPrimary
+        .assesseeAddressEmail;
+    if (
+      userResponse.assessee.informationContact.assesseeAddressEmailSecondary
+        .assesseeAddressEmailCommunication
+    ) {
+      validEmail =
+        userResponse.assessee.informationContact.assesseeAddressEmailSecondary
           .assesseeAddressEmail;
-      if (
-        assesseeRes.responseObject[0].informationContact.assesseeAddressEmailSecondary
-          .assesseeAddressEmailCommunication
-      ) {
-        validEmail =
-          assesseeRes.responseObject[0].informationContact.assesseeAddressEmailSecondary
-            .assesseeAddressEmail;
-      }
-      signUpForAwsCognito(
-        validEmail,
-        assesseeRes.responseObject[0].informationSetup.assesseeSignInCredential,
-        assesseeRes.responseObject[0].informationSetup.assesseeSignInPassword
-      );
-
-      yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject }); //set asessee data
     }
+    signUpForAwsCognito(
+      validEmail,
+      userResponse.assessee.informationSetup.assesseeSignInCredential,
+      userResponse.assessee.informationSetup.assesseeSignInPassword
+    );
+
+    //   yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject }); //set asessee data
+    // }
     console.log('loading end');
     yield put({
       type: SET_DISPLAY_PANE_THREE_STATE,
@@ -148,10 +153,14 @@ function* workerCreateAssociateSaga(data) {
         headerOne: 'associate',
         headerOneBadgeOne: 'information',
         headerOneBadgeTwo: 'all',
-        responseObject: userResponse.responseObject
+        responseObject: userResponse.associate
       }
     });
     yield put({ type: LOADER_STOP });
+    yield put({ type: CLEAR_ASSOCIATE_INFO });
+    yield put({ type: POPUP_CLOSE });
+    yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
