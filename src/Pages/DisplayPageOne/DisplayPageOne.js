@@ -22,6 +22,11 @@ import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 // import { AccountContext } from '../../Account';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
 import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
+import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
+import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
+import AssesseeRoleCreatePopUp from '../../Molecules/PopUpCreate/AssesseeRoleCreatePopUp';
+import AssociateRoleCreatePopup from '../../Molecules/PopUpCreate/AssociateRoleCreatePopup';
+import AllGroupCreatePopup from '../../Molecules/PopUpCreate/AllGroupCreatePopup';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -63,7 +68,7 @@ const DisplayPageOne = () => {
     dispatch({ type: GET_USER_SAGA });
   }, [dispatch]);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
 
   const userName =
     selectedAssociateInfo &&
@@ -132,6 +137,16 @@ const DisplayPageOne = () => {
           </>
         )}
       </div>
+      {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
+      {popupMode === 'ADMINISTRATOR_CREATE' && <PopUpSignOnAssessee headerOne={'administrator'} />}
+      {popupMode === 'MANAGER_CREATE' && <PopUpSignOnAssessee headerOne={'manager'} />}
+      {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
+      {popupMode === 'assesseesROLECREATE' && <AssesseeRoleCreatePopUp />}
+      {popupMode === 'associatesROLECREATE' && <AssociateRoleCreatePopup />}
+      {popupMode === 'assesseesGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessees'} />}
+      {popupMode === 'assessmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessments'} />}
+      {popupMode === 'assignmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assignments'} />}
+      {popupMode === 'associatesGROUPCREATE' && <AllGroupCreatePopup headerOne={'associates'} />}
     </>
   );
 };

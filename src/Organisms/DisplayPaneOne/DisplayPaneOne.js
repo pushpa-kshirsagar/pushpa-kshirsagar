@@ -196,16 +196,6 @@ export const DisplayPaneOne = () => {
       <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
       <PopUpAssociateLink />
-      {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
-      {popupMode === 'ADMINISTRATOR_CREATE' && <PopUpSignOnAssessee headerOne={'administrator'} />}
-      {popupMode === 'MANAGER_CREATE' && <PopUpSignOnAssessee headerOne={'manager'} />}
-      {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
-      {popupMode === 'assesseesROLECREATE' && <AssesseeRoleCreatePopUp />}
-      {popupMode === 'associatesROLECREATE' && <AssociateRoleCreatePopup />}
-      {popupMode === 'assesseesGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessees'} />}
-      {popupMode === 'assessmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessments'} />}
-      {popupMode === 'assignmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assignments'} />}
-      {popupMode === 'associatesGROUPCREATE' && <AllGroupCreatePopup headerOne={'associates'} />}
     </>
   );
 };

@@ -15,7 +15,8 @@ import {
   NAVIGATOR_MODE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -36,6 +37,8 @@ import DisplayPaneThreeSectionOneAssesseeGroup from '../../Molecules/DisplayPane
 import DisplayPaneThreeSectionTwoAssesseeGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeGroup/DisplayPaneThreeSectionTwoAssesseeGroup';
 import DisplayPaneThreeSectionOneAssociateGroup from '../../Molecules/DisplayPaneThreeSectionOneAssociateGroup/DisplayPaneThreeSectionOneAssociateGroup';
 import DisplayPaneThreeSectionTwoAssociateGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssociateGroup/DisplayPaneThreeSectionTwoAssociateGroup';
+import DisplayPaneThreeSectionOneAssessmentGroup from '../../Molecules/DisplayPaneThreeSectionOneAssessmentGroup/DisplayPaneThreeSectionOneAssessmentGroup';
+import DisplayPaneThreeSectionTwoAssessmentGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentGroup/DisplayPaneThreeSectionTwoAssessmentGroup';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -109,6 +112,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssessmentGroup = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentGroup,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssessmentGroup,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssociate = [
     {
       id: 'section1',
@@ -133,6 +150,9 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssociateGroup, setSelectedSectionAssociateGroup] = useState(
     rightPaneSectionsAssociateGroup[0]
   );
+  const [selectedSectionAssessmentGroup, setSelectedSectionAssessmentGroup] = useState(
+    rightPaneSectionsAssessmentGroup[0]
+  );
   const [selectedSectionAssociateRole, setSelectedSectionAssociateRole] = useState(
     rightPaneSectionsAssociateRole[0]
   );
@@ -144,6 +164,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: NAVIGATOR_MODE });
   };
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
+
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
     { label: 'first', onClick: onClickFooter, Icon: FirstPage },
@@ -184,8 +205,66 @@ export const DisplayPaneThree = () => {
       }
     });
   };
+  const onClickCreateAssesseeGroup = () => {
+    console.log('ON CLICK CREATE ASSESSEE GROUP');
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesGROUPCREATE' }
+    });
+  };
+  const onClickCreateAssociateGroup = () => {
+    console.log('ON CLICK CREATE ASSOCIATE GROUP');
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesGROUPCREATE' }
+    });
+  };
+  const onClickCreateAssessmentGroup = () => {
+    console.log('ON CLICK CREATE ASSESSMENT GROUP');
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+    });
+  };
+
+  const onClickCreateAssesseeRole = () => {
+    console.log('ON CLICK CREATE ASSESSEE ROLE');
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesROLECREATE' }
+    });
+  };
+  const onClickCreateAssociateRole = () => {
+    console.log('ON CLICK CREATE ASSOCIATE ROLE');
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesROLECREATE' }
+    });
+  };
+
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
-  const createPrimaryIcon = [{ label: 'create', onClick: onClickCreateAssessee, Icon: AddIcon }];
+  const createAssesseePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssessee, Icon: AddIcon }
+  ];
+
+  const createAssesseeGroupPrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssesseeGroup, Icon: AddIcon }
+  ];
+  const createAssociateGroupPrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssociateGroup, Icon: AddIcon }
+  ];
+  const createAssessmentGroupPrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssessmentGroup, Icon: AddIcon }
+  ];
+
+  const createAssesseeRolePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssesseeRole, Icon: AddIcon }
+  ];
+  const createAssociateRolePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssociateRole, Icon: AddIcon }
+  ];
+
+
   const reviseSecondaryIcons = [
     { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
     { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
@@ -268,7 +347,7 @@ export const DisplayPaneThree = () => {
                 FilterModeEnable={true}
                 FilterMode={FilterMode}
                 onClick={onClickCreateAssessee}
-                primaryIcon={createPrimaryIcon}
+                primaryIcon={createAssesseePrimaryIcon}
                 secondaryIcon={[]}
               />
             )}
@@ -309,6 +388,15 @@ export const DisplayPaneThree = () => {
                 secondaryIcon={reviseSecondaryIcons}
               />
             )}
+            {createMode === 'assesseesRole' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssesseeRole}
+                primaryIcon={createAssesseeRolePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
           </>
         )}
       {isReviewRevise &&
@@ -344,6 +432,15 @@ export const DisplayPaneThree = () => {
                 onClick={onClickRevise}
                 primaryIcon={revisePrimaryIcon}
                 secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assesseesGroup' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssesseeGroup}
+                primaryIcon={createAssesseeGroupPrimaryIcon}
+                secondaryIcon={[]}
               />
             )}
           </>
@@ -383,6 +480,61 @@ export const DisplayPaneThree = () => {
                 secondaryIcon={reviseSecondaryIcons}
               />
             )}
+            {createMode === 'associatesGroup' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssociateGroup}
+                primaryIcon={createAssociateGroupPrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assessments' &&
+        headerOneBadgeOne === 'group' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.assessmentGroupName || 'No Information'}
+                  textOneTwo={informationBasic.assessmentGroupDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssessmentGroup}
+                selectedSection={selectedSectionAssessmentGroup}
+                setSelectedSection={setSelectedSectionAssessmentGroup}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assessmentsGroup' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssessmentGroup}
+                primaryIcon={createAssessmentGroupPrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
           </>
         )}
       {isReviewRevise &&
@@ -420,6 +572,15 @@ export const DisplayPaneThree = () => {
                 secondaryIcon={reviseSecondaryIcons}
               />
             )}
+            {createMode === 'associatesRole' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssociateRole}
+                primaryIcon={createAssociateRolePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
           </>
         )}
       {isReviewRevise && responseObject && headerOne === 'associate' && (
@@ -444,7 +605,6 @@ export const DisplayPaneThree = () => {
               selectedSection={selectedSectionAssociate}
               setSelectedSection={setSelectedSectionAssociate}
             />
-
           </div>
 
           {/* <FooterIconTwo
