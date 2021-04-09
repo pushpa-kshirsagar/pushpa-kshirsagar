@@ -78,7 +78,7 @@ export const DisplayPaneOne = () => {
     ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
       ' ' +
       selectedAssociateInfo.assesseeInformation.assesseeNameLast
-    : 'sample@gmail.com ';
+    : 'simple.sample.junior.primary@insightguru.com';
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
@@ -153,7 +153,7 @@ export const DisplayPaneOne = () => {
                 ? openCardPopup
                 : null
             }
-            tag={'assessee_card'}
+            tag={selectedAssociateInfo ? 'assessee_card' : ''}
           />
         </div>
         <div className="containerPadding">

@@ -6,12 +6,19 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
   CLEAR_ASSIGNMENT_INFO,
+  FILTERMODE,
+  GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+  LOADER_START,
   SET_ASSIGNMENT_NEXT_POPUP,
   SET_ASSIGNMENT_PREVIOUS_POPUP,
   SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
-  SET_PREVIOUS_SECTION_POPUP
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT,
+  SET_PREVIOUS_SECTION_POPUP,
+  SET_REQUEST_OBJECT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
+import { makeAssignmentGroupObj } from '../Actions/GenericActions';
 
 const PopUpAssignmentModule = (props) => {
   const {
@@ -26,7 +33,7 @@ const PopUpAssignmentModule = (props) => {
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
-
+  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
   const setSecondaryOptionValue = (e) => {
     dispatch({
       type: SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
@@ -34,10 +41,34 @@ const PopUpAssignmentModule = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    dispatch({
-      type: SET_ASSIGNMENT_NEXT_POPUP,
-      payload: e.currentTarget.getAttribute('data-value')
-    });
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'groups') {
+      let requestObj = makeAssignmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentGroupDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
+      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+    } else {
+      dispatch({
+        type: SET_ASSIGNMENT_NEXT_POPUP,
+        payload: e.currentTarget.getAttribute('data-value')
+      });
+    }
   };
   const BackHandlerEvent = (e) => {
     if (isBackToSectionPopUp) {
