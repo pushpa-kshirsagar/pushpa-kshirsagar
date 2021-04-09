@@ -27,8 +27,7 @@ const PopUpMiddlePaneList = (props) => {
     popupHeaderOneBadgeOne,
     popupOpenType,
     secondaryOptionCheckValue,
-    selectedTagValue,
-    popUpSecondaryOptionCheckValue
+    selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
 
   const dispatch = useDispatch();
@@ -149,7 +148,7 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({
           type: GET_ASSOCIATE_INFO_SAGA,
           payload: {
-            secondaryOptionCheckValue: popUpSecondaryOptionCheckValue,
+            secondaryOptionCheckValue,
             reqBody: {
               assesseeId: '0123456',
               associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
