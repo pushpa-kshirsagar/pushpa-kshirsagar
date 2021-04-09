@@ -55,4 +55,7 @@ export const ASSOCIATE_GROUP_REVIEWLIST_URL =
 
 export const ASSESSMENT_GROUP_REVIEWLIST_URL =
   'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-group/review-list';
-export const ASSIGNMENT_GROUP_REVIEWLIST_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-group/review-list';
+export const ASSIGNMENT_GROUP_REVIEWLIST_URL =
+  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-group/review-list';
+export const ASSESSMENT_REVIEW_GROUP_URL =
+  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-group/review';

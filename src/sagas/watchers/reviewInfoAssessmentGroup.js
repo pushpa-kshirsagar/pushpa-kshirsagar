@@ -1,14 +1,14 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
+  GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
   LOADER_STOP,
   SET_DISPLAY_PANE_THREE_STATE
 } from '../../actionType';
-import { ASSOCIATE_REVIEW_GROUP_URL } from '../../endpoints';
+import { ASSESSMENT_REVIEW_GROUP_URL } from '../../endpoints';
 
-const associateGroupReviewInfoApi = async (requestObj) => {
+const assessmentGroupReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSOCIATE_REVIEW_GROUP_URL;
+  let URL = ASSESSMENT_REVIEW_GROUP_URL;
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
@@ -18,9 +18,9 @@ const associateGroupReviewInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviewAssociateGroupInfoSaga(data) {
+function* workerReviewAssessmentGroupInfoSaga(data) {
   try {
-    const userResponse = yield call(associateGroupReviewInfoApi, {
+    const userResponse = yield call(assessmentGroupReviewInfoApi, {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
@@ -28,7 +28,7 @@ function* workerReviewAssociateGroupInfoSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'associates',
+          headerOne: 'assessments',
           headerOneBadgeOne: 'group',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
@@ -46,6 +46,6 @@ function* workerReviewAssociateGroupInfoSaga(data) {
   }
 }
 
-export default function* watchReviewAssociateGroupInfoSaga() {
-  yield takeLatest(GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA, workerReviewAssociateGroupInfoSaga);
+export default function* watchReviewAssessmentGroupInfoSaga() {
+  yield takeLatest(GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA, workerReviewAssessmentGroupInfoSaga);
 }

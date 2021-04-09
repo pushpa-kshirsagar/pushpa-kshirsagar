@@ -9,6 +9,8 @@ import {
   GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSESSEE_INFO_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
+  GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
+  GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_START,
@@ -188,6 +190,66 @@ const PopUpMiddlePaneList = (props) => {
                   searchBy: [
                     {
                       dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
+        dispatch({
+          type: GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '0654321', //605255729d3c823d3964e0ec
+              filter: true,
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
+        dispatch({
+          type: GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '0654321',
+              filter: 'true',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
                       conditionColumn: 'id',
                       conditionValue: {
                         condition: 'eq',
