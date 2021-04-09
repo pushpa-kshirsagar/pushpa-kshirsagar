@@ -6,6 +6,7 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
   CLEAR_ASSESSMENT_INFO,
+  CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
   GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
@@ -46,6 +47,7 @@ const PopupAssessmentsModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'groups') {
       let requestObj = makeAssessmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,

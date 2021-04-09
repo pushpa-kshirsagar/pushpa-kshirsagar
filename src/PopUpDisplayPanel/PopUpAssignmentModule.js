@@ -6,6 +6,7 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
   CLEAR_ASSIGNMENT_INFO,
+  CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
   GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
@@ -45,6 +46,7 @@ const PopUpAssignmentModule = (props) => {
     if (targetValue === 'groups') {
       let requestObj = makeAssignmentGroupObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assignmentGroupDistinct' + secondaryOptionCheckValue }

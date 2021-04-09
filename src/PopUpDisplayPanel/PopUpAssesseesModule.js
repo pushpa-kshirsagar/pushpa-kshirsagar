@@ -20,7 +20,8 @@ import {
   SET_MOBILE_PANE_STATE,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA
+  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+  CLEAR_DISPLAY_PANE_THREE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -75,6 +76,7 @@ const PopUpAssesseesModule = (props) => {
         0,
         countPage
       );
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
@@ -96,6 +98,7 @@ const PopUpAssesseesModule = (props) => {
     } else if (targetValue === 'roles') {
       let requestObj = makeAssesseeRoleObj(secondaryOptionCheckValue);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeRoleDistinct' + secondaryOptionCheckValue }
@@ -109,15 +112,15 @@ const PopUpAssesseesModule = (props) => {
           request: requestObj,
           BadgeOne: targetValue,
           BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree:'',
+          BadgeThree: '',
           isMiddlePaneList: true
         }
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
-    }
-    else if (targetValue === 'groups') {
-      let requestObj = makeAssesseeGroupObj(secondaryOptionCheckValue, 0, countPage)
+    } else if (targetValue === 'groups') {
+      let requestObj = makeAssesseeGroupObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeGroupDistinct' + secondaryOptionCheckValue }
@@ -131,13 +134,12 @@ const PopUpAssesseesModule = (props) => {
           request: requestObj,
           BadgeOne: targetValue,
           BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree:'',
+          BadgeThree: '',
           isMiddlePaneList: true
         }
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
-    }
-     else {
+    } else {
       dispatch({
         type: SET_ASSESSEE_NEXT_POPUP,
         payload: targetValue

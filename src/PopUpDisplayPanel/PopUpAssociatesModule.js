@@ -20,7 +20,8 @@ import {
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
-  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+  CLEAR_DISPLAY_PANE_THREE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -64,6 +65,7 @@ const PopUpAssociatesModule = (props) => {
         countPage
       );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
@@ -83,6 +85,7 @@ const PopUpAssociatesModule = (props) => {
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
       let requestObj = makeAssociateRoleObj(secondaryOptionCheckValue);
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
@@ -105,6 +108,7 @@ const PopUpAssociatesModule = (props) => {
     } else if (targetValue === 'groups') {
       let requestObj = makeAssociateGroupObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'associateGroupDistinct' + secondaryOptionCheckValue }

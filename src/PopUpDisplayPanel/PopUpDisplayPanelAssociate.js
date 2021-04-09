@@ -24,7 +24,8 @@ import {
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
-  GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA
+  GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+  CLEAR_DISPLAY_PANE_THREE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -359,13 +360,17 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'distinct' &&
-      (popupHeaderOne === 'assessees' || popupHeaderOne === 'assignments'|| popupHeaderOne === 'associates' || popupHeaderOne === 'assessments') &&
+      (popupHeaderOne === 'assessees' ||
+        popupHeaderOne === 'assignments' ||
+        popupHeaderOne === 'associates' ||
+        popupHeaderOne === 'assessments') &&
       popupHeaderOneBadgeOne === 'groups'
     ) {
       let requestObj = {};
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       if (popupHeaderOne === 'assessees') {
         requestObj = makeAssesseeGroupObj(secondaryOptionCheckValue, 0, countPage);
         dispatch({
