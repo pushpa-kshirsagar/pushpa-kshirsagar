@@ -6,12 +6,19 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
   CLEAR_ASSESSMENT_INFO,
+  FILTERMODE,
+  GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+  LOADER_START,
   SET_ASSESSMENT_NEXT_POPUP,
   SET_ASSESSMENT_PREVIOUS_POPUP,
   SET_ASSESSMENT_SECONDARY_OPTION_VALUE,
-  SET_PREVIOUS_SECTION_POPUP
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT,
+  SET_PREVIOUS_SECTION_POPUP,
+  SET_REQUEST_OBJECT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
+import { makeAssessmentGroupObj } from '../Actions/GenericActions';
 
 const PopupAssessmentsModule = (props) => {
   const {
@@ -26,6 +33,7 @@ const PopupAssessmentsModule = (props) => {
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
+  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const setSecondaryOptionValue = (e) => {
     //TODO: set secondary option in assessments
@@ -35,10 +43,34 @@ const PopupAssessmentsModule = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    dispatch({
-      type: SET_ASSESSMENT_NEXT_POPUP,
-      payload: e.currentTarget.getAttribute('data-value')
-    });
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'groups') {
+      let requestObj = makeAssessmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assessmentGroupDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
+      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+    } else {
+      dispatch({
+        type: SET_ASSESSMENT_NEXT_POPUP,
+        payload: e.currentTarget.getAttribute('data-value')
+      });
+    }
   };
   const BackHandlerEvent = (e) => {
     if (isBackToSectionPopUp) {

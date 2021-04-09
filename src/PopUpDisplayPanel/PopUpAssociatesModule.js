@@ -19,10 +19,12 @@ import {
   SET_REQUEST_OBJECT,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
-  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
+  makeAssociateGroupObj,
   makeAssociateReviewListRequestObject,
   makeAssociateRoleObj
 } from '../Actions/GenericActions';
@@ -91,6 +93,27 @@ const PopUpAssociatesModule = (props) => {
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
+      dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+    } else if (targetValue === 'groups') {
+      let requestObj = makeAssociateGroupObj(secondaryOptionCheckValue, 0, countPage);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'associateGroupDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
         payload: {
           request: requestObj,
           BadgeOne: targetValue,

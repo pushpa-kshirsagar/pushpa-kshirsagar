@@ -32,7 +32,12 @@ const Card = (props) => {
         className={[`iguru-iconbox-dashboardcardtop`].join(' ')}
       >
         <div className={['iguru-componentinnerdiv', isAlliance && 'iguru-background'].join(' ')}>
-          <div className={'iguru-cardContentMidPanel'} onClick={onClick} data-value={tag}>
+          <div
+            className={'iguru-cardContentMidPanel'}
+            onClick={onClick}
+            data-value={tag}
+            style={{ flex: tag === '' ? 'auto' : '4' }}
+          >
             <div
               className={['midPaneInformation', textTwoOne !== '' ? null : 'aliasmiddle'].join(' ')}
             >
