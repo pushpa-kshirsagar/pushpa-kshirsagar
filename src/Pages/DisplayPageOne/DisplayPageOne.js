@@ -133,6 +133,12 @@ const DisplayPageOne = () => {
                   typeOfMiddlePaneList={typeOfMiddlePaneList}
                   popupAllClose={popupAllClose}
                 />
+                <PopUpMiddlePaneList
+                  isActive={isPopUpValue === 'leftPaneTrippleDotPopup'}
+                  typeOfMiddlePaneList={typeOfMiddlePaneList}
+                  popupAllClose={popupAllClose}
+                  headerPanelColour={'displayPaneLeft'}
+                />
               </>
             )}
           </>

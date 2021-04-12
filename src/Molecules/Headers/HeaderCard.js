@@ -87,7 +87,7 @@ const HeaderCard = (props) => {
         popupContentArrValue: LEFT_TRIPPLE_DOT_POPUP_OPTION
       }
     });
-    dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+    dispatch({ type: POPUP_OPEN, payload: 'leftPaneTrippleDotPopup' });
   };
   const openRightPaneTripleDotPopup = () => {
     dispatch({
@@ -179,7 +179,7 @@ const HeaderCard = (props) => {
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : displayPane === 'left' ? (
-                  <IconButton onClick={null}>
+                  <IconButton onClick={openLeftPaneTripleDotPopup}>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : displayPane === 'right' ? (
