@@ -27,6 +27,7 @@ import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import AssesseeRoleCreatePopUp from '../../Molecules/PopUpCreate/AssesseeRoleCreatePopUp';
 import AssociateRoleCreatePopup from '../../Molecules/PopUpCreate/AssociateRoleCreatePopup';
 import AllGroupCreatePopup from '../../Molecules/PopUpCreate/AllGroupCreatePopup';
+import TypeCreatePopup from '../../Molecules/PopUpCreate/TypeCreatePopup';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -147,6 +148,8 @@ const DisplayPageOne = () => {
       {popupMode === 'assessmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessments'} />}
       {popupMode === 'assignmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assignments'} />}
       {popupMode === 'associatesGROUPCREATE' && <AllGroupCreatePopup headerOne={'associates'} />}
+      {popupMode === 'assessmentsTYPECREATE' && <TypeCreatePopup headerOne={'assessments'} />}
+      {popupMode === 'assignmentsTYPECREATE' && <TypeCreatePopup headerOne={'assignments'} />}
     </>
   );
 };

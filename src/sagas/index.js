@@ -19,6 +19,7 @@ import watchReviewGroupsListSaga from './watchers/reviewListGroups';
 import watchReviewAssessmentGroupInfoSaga from './watchers/reviewInfoAssessmentGroup';
 import watchReviewInfoAssessmentSaga from './watchers/reviewInfoAssessment';
 import watchReviewAssignmentGroupInfoSaga from './watchers/reviewInfoAssignmentGroup';
+import watchcreateTypeSaga from './watchers/createType';
 
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
@@ -41,6 +42,7 @@ export default function* root() {
     fork(watchReviewGroupsListSaga),
     fork(watchReviewAssessmentGroupInfoSaga),
     fork(watchReviewInfoAssessmentSaga),
-    fork(watchReviewAssignmentGroupInfoSaga)
+    fork(watchReviewAssignmentGroupInfoSaga),
+    fork(watchcreateTypeSaga)
   ]);
 }

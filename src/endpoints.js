@@ -64,3 +64,12 @@ export const ASSESSMENT_REVIEW_INFO_URL =
   'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-distinct/review';
 export const ASSIGNMENT_REVIEW_GROUP_URL =
   'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-group/review';
+export const ASSESSMENT_TYPE_CREATE_URL =
+  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-type/create';
+export const ASSIGNMENT_TYPE_CREATE_URL =
+  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-type/create';
+export const ASSESSMENT_TYPE_REVIEWLIST_URL =
+  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-type/review-list';
+export const ASSIGNMENT_TYPE_REVIEWLIST_URL =
+  ' https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-type/review-list';
+// export const URL = '';

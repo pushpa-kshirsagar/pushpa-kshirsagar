@@ -36,7 +36,7 @@ const Card = (props) => {
             className={'iguru-cardContentMidPanel'}
             onClick={onClick}
             data-value={tag}
-            style={{ flex: tag === '' ? 'auto' : '4' }}
+            style={{ flex: tag === 'assessee' ? 'auto' : '4' }}
           >
             <div
               className={['midPaneInformation', textTwoOne !== '' ? null : 'aliasmiddle'].join(' ')}

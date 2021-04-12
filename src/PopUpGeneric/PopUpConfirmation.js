@@ -47,7 +47,9 @@ const PopUpConfirmation = (props) => {
       popupMode === 'assesseesGROUPCREATE' ||
       popupMode === 'associatesGROUPCREATE' ||
       popupMode === 'assignmentsGROUPCREATE' ||
-      popupMode === 'assessmentsGROUPCREATE'
+      popupMode === 'assessmentsGROUPCREATE' ||
+      popupMode === 'assignmentsTYPECREATE' ||
+      popupMode === 'assessmentsTYPECREATE'
     ) {
       dispatch({
         type: SET_NEXT_POPUP,

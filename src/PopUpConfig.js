@@ -1042,3 +1042,37 @@ export const TRIPPLE_DOT_POPUP_OPTION = [
     disabled: false
   }
 ];
+export const LEFT_TRIPPLE_DOT_POPUP_OPTION = [
+  {
+    data: 'assent',
+    dataValue: 'assent',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'assistance',
+    dataValue: 'assistance',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'assumption',
+    dataValue: 'assumption',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'assurance',
+    dataValue: 'assurance',
+    optionClass: 'optionPrimary',
+    disabled: true,
+    divider:'dark'
+  },
+  {
+    data: 'switch',
+    dataValue: 'switched',
+    optionClass: 'optionPrimary',
+    disabled: true
+  }
+
+];

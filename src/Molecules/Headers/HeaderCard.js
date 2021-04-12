@@ -19,7 +19,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
   REVIEW_LIST_POPUP_OPTION,
-  TRIPPLE_DOT_POPUP_OPTION
+  TRIPPLE_DOT_POPUP_OPTION,
+  LEFT_TRIPPLE_DOT_POPUP_OPTION
 } from '../../PopUpConfig';
 const HeaderCard = (props) => {
   const {
@@ -71,6 +72,19 @@ const HeaderCard = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: TRIPPLE_DOT_POPUP_OPTION
+      }
+    });
+    dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+  };
+  const openLeftPaneTripleDotPopup = () => {
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        popupHeaderOne: 'dashboard',
+        popupHeaderOneBadgeOne: '',
+        isPopUpValue: '',
+        popupOpenType: 'primary',
+        popupContentArrValue: LEFT_TRIPPLE_DOT_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -144,9 +158,7 @@ const HeaderCard = (props) => {
                     </Fragment>
                   </IconButton>
                 ) : displayPane === 'left' ? (
-                  <IconButton>
-                    <NextIcon className={'iguru-iconbardefault'} />
-                  </IconButton>
+                  <IconButton>{/* <NextIcon className={'iguru-iconbardefault'} /> */}</IconButton>
                 ) : displayPane === 'right' && reviewMode !== 'revise' ? (
                   <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
@@ -164,6 +176,10 @@ const HeaderCard = (props) => {
                   </IconButton>
                 ) : displayPane === 'centre' && showMiddlePaneState ? (
                   <IconButton onClick={openMiddlePaneTripleDotPopup}>
+                    <MoreVert className={'iguru-iconbardefault'} />
+                  </IconButton>
+                ) : displayPane === 'left' ? (
+                  <IconButton onClick={null}>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : displayPane === 'right' ? (
