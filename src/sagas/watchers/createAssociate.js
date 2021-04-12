@@ -153,7 +153,9 @@ function* workerCreateAssociateSaga(data) {
         headerOne: 'associate',
         headerOneBadgeOne: 'information',
         headerOneBadgeTwo: 'all',
-        responseObject: userResponse.associate
+        responseObject: userResponse.associate,
+        createMode: 'associate',
+        reviewMode: 'revise'
       }
     });
     yield put({ type: LOADER_STOP });
