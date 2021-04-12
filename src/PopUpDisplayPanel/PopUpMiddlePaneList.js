@@ -266,7 +266,7 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
-        alert(selectedTagValue);
+        // alert(selectedTagValue);
         dispatch({
           type: GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
           payload: {
