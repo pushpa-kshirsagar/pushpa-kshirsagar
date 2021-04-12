@@ -64,7 +64,9 @@
 .assesseeListCheckBoxSelctedOut svg {
   height: 1.6rem;
 }
-
+.reviewListBorder{
+  height: 50px !important;
+}
 .cardButtonwithouttextTransform {
   display: block;
   text-align: left;
@@ -75,13 +77,19 @@
   font-size: 1.6rem;
   width: 100%;
   padding: 0px;
-  height: 49px !important;
+  /* height: 49px !important; */
   border-radius: 2px;
   position: relative;
   border-bottom: 1px solid #bfbfbf;
+
 }
 .cardButtonwithouttextTransform :hover {
   background-color: #f2f2f2;
+}
+.componentinnerdiv-iguru{
+  padding:0px 5px !important;
+  display:flex !important;
+  height:50px;
 }
 .measureBox {
   display: flex;

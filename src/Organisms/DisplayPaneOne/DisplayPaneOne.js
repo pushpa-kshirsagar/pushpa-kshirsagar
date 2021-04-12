@@ -153,7 +153,7 @@ export const DisplayPaneOne = () => {
                 ? openCardPopup
                 : null
             }
-            tag={selectedAssociateInfo ? 'assessee_card' : ''}
+            tag={selectedAssociateInfo ? 'assessee_card' : 'assessee'}
           />
         </div>
         <div className="containerPadding">

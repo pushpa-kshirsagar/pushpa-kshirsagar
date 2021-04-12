@@ -286,6 +286,15 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = CREATE_INFORMATION_POPUP;
       reviseSecondaryOptionCheckValue = 'key';
     }
+    if (clickValue === 'create' && popupHeaderOne === 'types') {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisepopupHeaderOneBadgeOne = 'type';
+      revisepopupHeaderOneBadgeTwo = 'create';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = CREATE_INFORMATION_POPUP;
+      reviseSecondaryOptionCheckValue = 'key';
+    }
     if (
       clickValue === 'create' &&
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
@@ -462,6 +471,11 @@ const PopUpDisplayPanelAssociate = (props) => {
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }
       });
+    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'type') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'TYPECREATE' }
+      });
     } else {
       dispatch({
         type: SET_POPUP_STATE,
@@ -506,10 +520,15 @@ const PopUpDisplayPanelAssociate = (props) => {
       ) {
         revisePopupHeaderOne = 'roles';
         revisepopupHeaderOneBadgeOne = '';
-        // valueArr = setAssociateCardPermissionInJson(
-        //   GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
-        //   assesseePermission
-        // );
+        valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+        revisePopupType = 'secondary';
+      }
+      if (
+        (popupHeaderOne === 'assessments' || popupHeaderOne === 'assignments') &&
+        (popupHeaderOneBadgeOne === 'types' || popupHeaderOneBadgeOne === 'type')
+      ) {
+        revisePopupHeaderOne = 'types';
+        revisepopupHeaderOneBadgeOne = '';
         valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
         revisePopupType = 'secondary';
       }

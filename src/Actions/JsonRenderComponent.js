@@ -31,7 +31,7 @@ const JsonRenderComponent = (props) => {
                           ? setSecondaryOptionValue
                           : ChangeOptionPopup
                       }
-                      disabled={item.data === 'switch' ? false : item.disabled}
+                      disabled={item.dataValue === 'switch' ? false : item.disabled}
                     >
                       {item.data}
                       {item.optionClass === 'optionSecondary' &&

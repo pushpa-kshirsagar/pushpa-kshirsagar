@@ -12,6 +12,7 @@ import LoaderReducer from './LoaderReducer';
 import DisplayPaneThreeReducer from './DisplayPaneThreeReducer';
 import RoleCreateReducer from './RoleCreateReducer';
 import GroupCreateReducer from './GroupCreateReducer';
+import TypeCreateReducer from './TypeCreateReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -26,5 +27,6 @@ export default combineReducers({
   LoaderReducer,
   DisplayPaneThreeReducer,
   RoleCreateReducer,
-  GroupCreateReducer
+  GroupCreateReducer,
+  TypeCreateReducer
 });
