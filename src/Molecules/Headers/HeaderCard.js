@@ -158,7 +158,9 @@ const HeaderCard = (props) => {
                     </Fragment>
                   </IconButton>
                 ) : displayPane === 'left' ? (
-                  <IconButton>{/* <NextIcon className={'iguru-iconbardefault'} /> */}</IconButton>
+                  <IconButton>
+                    <NextIcon className={'iguru-iconbardefault'} />
+                  </IconButton>
                 ) : displayPane === 'right' && reviewMode !== 'revise' ? (
                   <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
