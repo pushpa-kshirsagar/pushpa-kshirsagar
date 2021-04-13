@@ -95,7 +95,7 @@ const HeaderCard = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: rightPaneHeaderOne,
-        popupHeaderOneBadgeOne: rightPaneBadgeOne === 'information' ? '' : middlePaneHeaderBadgeOne,
+        popupHeaderOneBadgeOne: rightPaneBadgeOne === 'information' ? '' : rightPaneBadgeOne,
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: primaryArrOprion,
