@@ -5,10 +5,12 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
+  ASSESSMENT_REVIEW_DISTINCT_SAGA,
   CLEAR_ASSESSMENT_INFO,
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
   GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
   LOADER_START,
   SET_ASSESSMENT_NEXT_POPUP,
   SET_ASSESSMENT_PREVIOUS_POPUP,
@@ -19,7 +21,7 @@ import {
   SET_REQUEST_OBJECT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { makeAssessmentGroupObj } from '../Actions/GenericActions';
+import { makeAssessmentGroupObj, makeAssessmentReviewListRequestObject, makeAssessmentTypeObj } from '../Actions/GenericActions';
 
 const PopupAssessmentsModule = (props) => {
   const {
@@ -45,6 +47,32 @@ const PopupAssessmentsModule = (props) => {
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'distinctss') {
+      let requestObect = makeAssessmentReviewListRequestObject(
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assessmentsDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
+        payload: {
+          request: requestObect,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue
+        }
+      });
+      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+
+    }
     if (targetValue === 'groups') {
       let requestObj = makeAssessmentGroupObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -58,6 +86,29 @@ const PopupAssessmentsModule = (props) => {
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
+      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+    }
+    if (targetValue === 'types') {
+      let requestObj = makeAssessmentTypeObj(secondaryOptionCheckValue, 0, countPage);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentsTypeDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
         payload: {
           request: requestObj,
           BadgeOne: targetValue,

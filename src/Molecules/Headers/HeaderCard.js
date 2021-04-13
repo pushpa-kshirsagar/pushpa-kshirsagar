@@ -7,7 +7,7 @@ import NextIcon from '@material-ui/icons/ArrowForward';
 import MoreVert from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 import Clear from '@material-ui/icons/Clear';
-
+import { isMobile } from 'react-device-detect';
 import './HeaderCard.css';
 import {
   POPUP_OPEN,
@@ -47,6 +47,7 @@ const HeaderCard = (props) => {
     headerOneBadgeOne: rightPaneBadgeOne,
     reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { primaryArrOprion } = useSelector((state) => state.PopUpReducer);
 
   const onClickScan = () => {
     dispatch({
@@ -94,10 +95,10 @@ const HeaderCard = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: rightPaneHeaderOne,
-        popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeOne: rightPaneBadgeOne === 'information' ? '' : middlePaneHeaderBadgeOne,
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: primaryArrOprion,
         selectedTagValue: middlePaneSelectedValue
       }
     });
@@ -159,7 +160,7 @@ const HeaderCard = (props) => {
                   </IconButton>
                 ) : displayPane === 'left' ? (
                   <IconButton>
-                    <NextIcon className={'iguru-iconbardefault'} />
+                    {!isMobile && <NextIcon className={'iguru-iconbardefault'} />}
                   </IconButton>
                 ) : displayPane === 'right' && reviewMode !== 'revise' ? (
                   <IconButton onClick={onClickClearInfo}>

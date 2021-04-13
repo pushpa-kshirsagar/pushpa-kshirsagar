@@ -25,6 +25,8 @@ import {
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+  GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   CLEAR_DISPLAY_PANE_THREE
 } from '../actionType';
 import {
@@ -48,7 +50,9 @@ import {
   makeAssesseeGroupObj,
   makeAssociateGroupObj,
   makeAssessmentGroupObj,
-  makeAssignmentGroupObj
+  makeAssignmentGroupObj,
+  makeAssessmentTypeObj,
+  makeAssignmentTypeObj
 } from '../Actions/GenericActions';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
@@ -439,6 +443,48 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
     }
     if (
+      clickValue === 'distinct' &&
+      (popupHeaderOne === 'assignments' || popupHeaderOne === 'assessments') &&
+      popupHeaderOneBadgeOne === 'types'
+    ) {
+      let requestObj = {};
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      if (popupHeaderOne === 'assessments') {
+        requestObj = makeAssessmentTypeObj(secondaryOptionCheckValue, 0, countPage);
+        dispatch({
+          type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: 'types',
+            BadgeTwo: 'distinct',
+            BadgeThree: secondaryOptionCheckValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
+      if (popupHeaderOne === 'assignments') {
+        requestObj = makeAssignmentTypeObj(secondaryOptionCheckValue, 0, countPage);
+        dispatch({
+          type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: 'groups',
+            BadgeTwo: 'distinct',
+            BadgeThree: secondaryOptionCheckValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: popupHeaderOne + 'TypeDistinct' + secondaryOptionCheckValue }
+      });
+    }
+    if (
       clickValue === 'information' &&
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
     ) {
@@ -457,11 +503,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           value: popupHeaderOne === 'administrators' ? 'administrator' : 'manager'
         }
       });
-    } else if (
-      clickValue === 'information' &&
-      popupHeaderOneBadgeOne === 'role' &&
-      (popupHeaderOne === 'assessees' || popupHeaderOne === 'associates')
-    ) {
+    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }

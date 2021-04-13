@@ -128,22 +128,22 @@ const DisplayPageOne = () => {
                 <div className="display-pane-container">
                   <DisplayPaneThree />
                 </div>
-                <PopUpMiddlePaneList
-                  isActive={isPopUpValue === 'middlePaneListPopup'}
-                  typeOfMiddlePaneList={typeOfMiddlePaneList}
-                  popupAllClose={popupAllClose}
-                />
-                <PopUpMiddlePaneList
-                  isActive={isPopUpValue === 'leftPaneTrippleDotPopup'}
-                  typeOfMiddlePaneList={typeOfMiddlePaneList}
-                  popupAllClose={popupAllClose}
-                  headerPanelColour={'displayPaneLeft'}
-                />
               </>
             )}
           </>
         )}
       </div>
+      <PopUpMiddlePaneList
+        isActive={isPopUpValue === 'middlePaneListPopup'}
+        typeOfMiddlePaneList={typeOfMiddlePaneList}
+        popupAllClose={popupAllClose}
+      />
+      <PopUpMiddlePaneList
+        isActive={isPopUpValue === 'leftPaneTrippleDotPopup'}
+        typeOfMiddlePaneList={typeOfMiddlePaneList}
+        popupAllClose={popupAllClose}
+        headerPanelColour={'displayPaneLeft'}
+      />
       {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
       {popupMode === 'ADMINISTRATOR_CREATE' && <PopUpSignOnAssessee headerOne={'administrator'} />}
       {popupMode === 'MANAGER_CREATE' && <PopUpSignOnAssessee headerOne={'manager'} />}

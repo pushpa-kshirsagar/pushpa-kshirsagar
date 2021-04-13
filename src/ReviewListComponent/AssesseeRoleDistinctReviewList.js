@@ -21,7 +21,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
-import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
 const AssesseeRoleDistinctReviewList = (props) => {
   const { popupAllClose } = props;
@@ -113,11 +113,11 @@ const AssesseeRoleDistinctReviewList = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: 'assessees',
-        popupHeaderOneBadgeOne: '',
-        popupHeaderOneBadgeTwo: 'role',
+        popupHeaderOneBadgeOne: 'role',
+        popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });

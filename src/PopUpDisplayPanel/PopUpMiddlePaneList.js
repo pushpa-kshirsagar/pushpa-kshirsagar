@@ -26,6 +26,7 @@ const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
+    popupHeaderOneBadgeTwo,
     popupOpenType,
     secondaryOptionCheckValue,
     selectedTagValue
@@ -46,10 +47,9 @@ const PopUpMiddlePaneList = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    console.log(e.currentTarget.getAttribute('data-value'));
-    console.log('ChangeOptionPopup');
-    let clickVal = e.currentTarget.getAttribute('data-value');
-    if (clickVal === 'information') {
+    let keyVal = e.currentTarget.getAttribute('data-key');
+    let dataVal = e.currentTarget.getAttribute('data-value');
+    if (dataVal === 'information') {
       console.log(selectedTagValue);
       dispatch({ type: LOADER_START });
       if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
@@ -306,10 +306,11 @@ const PopUpMiddlePaneList = (props) => {
       // dispatch({ type: LOADER_STOP });
 
       // onClickInformation(secondaryOptionCheckValue);
-    } else {
+    }
+     else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
-        payload: clickVal
+        payload: { badgeValue: dataVal, keyValue: keyVal }
       });
     }
   };
@@ -323,6 +324,7 @@ const PopUpMiddlePaneList = (props) => {
           headerPanelColour={headerPanelColour + popupOpenType}
           headerOne={popupHeaderOne}
           headerOneBadgeOne={popupHeaderOneBadgeOne}
+          headerOneBadgeTwo={popupHeaderOneBadgeTwo}
           onClick={BackHandlerEvent}
           mode={''}
         />
