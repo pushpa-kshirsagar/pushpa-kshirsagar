@@ -15,7 +15,6 @@ import {
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_START,
-  LOADER_STOP,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
@@ -35,7 +34,6 @@ const PopUpMiddlePaneList = (props) => {
   const {
     headerPanelColour = 'displayPaneCentre',
     isActive,
-    onClickInformation = null,
     popupAllClose,
     typeOfMiddlePaneList
   } = props;

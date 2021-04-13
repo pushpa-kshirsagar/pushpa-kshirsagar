@@ -43,6 +43,10 @@ import DisplayPaneThreeSectionOneAssignmentGroup from '../../Molecules/DisplayPa
 import DisplayPaneThreeSectionTwoAssignmentGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssignmentGroup/DisplayPaneThreeSectionTwoAssignmentGroup';
 import DisplayPaneThreeSectionOneAssessment from '../../Molecules/DisplayPaneThreeSectionOneAssessment/DisplayPaneThreeSectionOneAssessment';
 import DisplayPaneThreeSectionTwoAssessment from '../../Molecules/DisplayPaneThreeSectionTwoAssessment/DisplayPaneThreeSectionTwoAssessment';
+import DisplayPaneThreeSectionOneAssignmentType from '../../Molecules/DisplayPaneThreeSectionOneAssignmentType/DisplayPaneThreeSectionOneAssignmentType';
+import DisplayPaneThreeSectionTwoAssignmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssignmentType/DisplayPaneThreeSectionTwoAssignmentType';
+import DisplayPaneThreeSectionOneAssessmentType from '../../Molecules/DisplayPaneThreeSectionOneAssessmentType/DisplayPaneThreeSectionOneAssessmentType';
+import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentType/DisplayPaneThreeSectionTwoAssessmentType';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -144,6 +148,34 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssignmentType = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssignmentType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssignmentType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
+  const rightPaneSectionsAssessmentType = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssessmentType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssociate = [
     {
       id: 'section1',
@@ -187,6 +219,12 @@ export const DisplayPaneThree = () => {
   );
   const [selectedSectionAssignmentGroup, setSelectedSectionAssignmentGroup] = useState(
     rightPaneSectionsAssignmentGroup[0]
+  );
+  const [selectedSectionAssignmentType, setSelectedSectionAssignmentType] = useState(
+    rightPaneSectionsAssignmentType[0]
+  );
+  const [selectedSectionAssessmentType, setSelectedSectionAssessmentType] = useState(
+    rightPaneSectionsAssessmentType[0]
   );
   const [selectedSectionAssessment, setSelectedSectionAssessment] = useState(
     rightPaneSectionsAssessment[0]
@@ -271,6 +309,20 @@ export const DisplayPaneThree = () => {
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assignmentsGROUPCREATE' }
     });
   };
+  const onClickCreateAssignmentType = () => {
+    console.log('ON CLICK CREATE ASSIGNMENT TYPE');
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assignmentsTYPECREATE' }
+    });
+  };
+  const onClickCreateAssessmentType = () => {
+    console.log('ON CLICK CREATE ASSESSMENT TYPE');
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assessmentsTYPECREATE' }
+    });
+  };
 
   const onClickCreateAssesseeRole = () => {
     console.log('ON CLICK CREATE ASSESSEE ROLE');
@@ -303,6 +355,12 @@ export const DisplayPaneThree = () => {
   ];
   const createAssignmentGroupPrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssignmentGroup, Icon: AddIcon }
+  ];
+  const createAssignmentTypePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssignmentType, Icon: AddIcon }
+  ];
+  const createAssessmentTypePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssessmentType, Icon: AddIcon }
   ];
 
   const createAssesseeRolePrimaryIcon = [
@@ -653,6 +711,98 @@ export const DisplayPaneThree = () => {
                 FilterMode={FilterMode}
                 onClick={onClickCreateAssignmentGroup}
                 primaryIcon={createAssignmentGroupPrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assignments' &&
+        headerOneBadgeOne === 'type' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.assignmentTypeName || 'No Information'}
+                  textOneTwo={informationBasic.assignmentTypeDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssignmentType}
+                selectedSection={selectedSectionAssignmentType}
+                setSelectedSection={setSelectedSectionAssignmentType}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assignmentsType' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssignmentType}
+                primaryIcon={createAssignmentTypePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assessments' &&
+        headerOneBadgeOne === 'type' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.assessmentTypeName || 'No Information'}
+                  textOneTwo={informationBasic.assessmentTypeDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssessmentType}
+                selectedSection={selectedSectionAssessmentType}
+                setSelectedSection={setSelectedSectionAssessmentType}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assessmentsType' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssessmentType}
+                primaryIcon={createAssessmentTypePrimaryIcon}
                 secondaryIcon={[]}
               />
             )}
