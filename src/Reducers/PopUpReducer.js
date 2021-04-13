@@ -32,7 +32,8 @@ import {
   SELECT_OPTION_PUPUP,
   ASSESSEE_REVIEW_REVISE_POPUP,
   GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
-  REVIEW_DISTINCT_POPUP_OPTION
+  REVIEW_DISTINCT_POPUP_OPTION,
+  CREATE_INFORMATION_POPUP
 } from '../PopUpConfig';
 
 const initialState = {
@@ -42,7 +43,8 @@ const initialState = {
   popupMode: '',
   popupHeaderOne: '',
   primaryArrOprion: [],
-  previousPopupHeaderOne: '',
+  duplicateBadgeOne: '',
+  duplicateHeaderOne: '',
   popupHeaderOneBadgeOne: '',
   popupHeaderOneBadgeTwo: '',
   popupContentArrValue: [
@@ -66,13 +68,18 @@ const initialState = {
     suspend: SUSPEND_PUPUP,
     terminate: TERMINATE_PUPUP,
     review: REVIEW_REVISE_POPUP,
+    reviewKey: CREATE_INFORMATION_POPUP,
+    reviseKey: CREATE_INFORMATION_POPUP,
     revise: REVIEW_REVISE_POPUP,
-    assignments: ASSIGNMENT_DISTINCT_POPUP,
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP,
     reviewDistinct: REVIEW_POPUP_OPTIONS,
     selection: SELECT_OPTION_PUPUP,
-    create: ASSESSEE_REVIEW_REVISE_POPUP
+    create: ASSESSEE_REVIEW_REVISE_POPUP,
+    assessees: REVIEW_DISTINCT_POPUP_OPTION,
+    assessments: REVIEW_DISTINCT_POPUP_OPTION,
+    assignments: ASSIGNMENT_DISTINCT_POPUP,
+    associates: REVIEW_DISTINCT_POPUP_OPTION
   }
 };
 
@@ -134,8 +141,9 @@ const PopUpReducer = (istate = initialState, action) => {
         popupContentArrValue: action.payload.popupContentArrValue,
         primaryArrOprion: action.payload.popupContentArrValue,
         popupHeaderOne: action.payload.popupHeaderOne,
-        previousPopupHeaderOne: action.payload.previousPopupHeaderOne || '',
+        duplicateHeaderOne: action.payload.popupHeaderOne,
         popupHeaderOneBadgeOne: action.payload.popupHeaderOneBadgeOne,
+        duplicateBadgeOne: action.payload.popupHeaderOneBadgeOne,
         popupHeaderOneBadgeTwo: action.payload.popupHeaderOneBadgeTwo,
         secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue,
         popupMode: action.payload.popupMode,
@@ -181,25 +189,41 @@ const PopUpReducer = (istate = initialState, action) => {
       }
     case SET_MIDDLEPANE_SECONDARY_OPTION: {
       if (istate.popupOpenType === 'primary') {
-        if (action.payload === 'notifications' || action.payload === 'reports') {
+        if (
+          action.payload.badgeValue === 'notifications' ||
+          action.payload.badgeValue === 'assessees' ||
+          action.payload.badgeValue === 'assessments' ||
+          action.payload.badgeValue === 'assignments' ||
+          action.payload.badgeValue === 'associates' ||
+          action.payload.badgeValue === 'reports'
+        ) {
           return {
             ...istate,
             isPopUpOpen: true,
-            popupHeaderOne: action.payload,
-            popupHeaderOneBadgeOne: 'review',
+            popupHeaderOne: action.payload.badgeValue,
+            popupHeaderOneBadgeOne: action.payload.keyValue,
+            popupHeaderOneBadgeTwo: '',
             popupOpenType: 'secondary',
-            popupContentArrValue: istate.secondaryPopUpOptions[action.payload],
-            secondaryOptionCheckValue: 'unread'
+            popupContentArrValue: istate.secondaryPopUpOptions[action.payload.badgeValue],
+            secondaryOptionCheckValue:
+              action.payload.badgeValue === 'notifications' ||
+              action.payload.badgeValue === 'reports'
+                ? 'unread'
+                : 'active'
           };
         } else {
           return {
             ...istate,
             popupHeaderOne: istate.popupHeaderOne,
             isPopUpOpen: true,
-            popupHeaderOneBadgeOne: action.payload,
+            popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,
+            popupHeaderOneBadgeTwo: action.payload.badgeValue,
             popupOpenType: 'secondary',
-            popupContentArrValue: istate.secondaryPopUpOptions[action.payload],
-            secondaryOptionCheckValue: 'all'
+            popupContentArrValue: istate.secondaryPopUpOptions[action.payload.keyValue],
+            secondaryOptionCheckValue:
+              action.payload.keyValue === 'reviseKey' || action.payload.keyValue === 'reviewKey'
+                ? 'key'
+                : 'all'
           };
         }
       } else {
@@ -218,7 +242,9 @@ const PopUpReducer = (istate = initialState, action) => {
         return {
           ...istate,
           popupContentArrValue: istate.primaryArrOprion,
-          popupHeaderOneBadgeOne: '',
+          popupHeaderOne: istate.duplicateHeaderOne,
+          popupHeaderOneBadgeOne: istate.duplicateBadgeOne,
+          popupHeaderOneBadgeTwo: '',
           popupOpenType: 'primary'
         };
       } else {

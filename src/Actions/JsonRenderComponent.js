@@ -26,6 +26,7 @@ const JsonRenderComponent = (props) => {
                     <Button
                       className={item.optionClass}
                       data-value={item.dataValue}
+                      data-key={item.dataKey?item.dataKey:item.dataValue}
                       onClick={
                         item.optionClass === 'optionSecondary'
                           ? setSecondaryOptionValue

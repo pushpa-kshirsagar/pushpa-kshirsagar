@@ -18,7 +18,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
-import { REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSESSEE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
 const AssesseeDistinctReviewList = (props) => {
   const { popupAllClose } = props;
@@ -122,7 +122,7 @@ const AssesseeDistinctReviewList = (props) => {
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: ASSESSEE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });

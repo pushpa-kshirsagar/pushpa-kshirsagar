@@ -18,6 +18,9 @@ const DisplayPaneThreeSectionTwo = () => {
     (state) => state.DisplayPaneThreeReducer
   );
   const { informationContact, informationPersonal } = responseObject;
+
+  // const longAddressForTest =
+  //   '602 Silver Beliza, 48 St. Francis Avenue, SantaCruz West,  Mumbai, Maharashtra 400054, India';
   const list1 = [
     {
       id: 'a1',
@@ -64,11 +67,11 @@ const DisplayPaneThreeSectionTwo = () => {
       multiline:
         informationContact &&
         informationContact.assesseeAddressHomePrimary &&
-        informationContact.assesseeAddressHomePrimary.length > 40,
+        informationContact.assesseeAddressHomePrimary.length > 40, //longAddressForTest.length > 40,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationContact.assesseeAddressHomePrimary || 'No Information'
+          textOne: informationContact.assesseeAddressHomePrimary || 'No Information' //longAddressForTest
         },
         {
           labelTextOneOneBadge: 'secondary',

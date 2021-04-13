@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  ASSESSEE_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
-  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-  GET_ASSOCIATE_INFO_SAGA,
   LOADER_START,
   POPUP_OPEN,
-  SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT
@@ -20,9 +15,7 @@ import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
-import { assesseeStatus } from '../Actions/StatusAction';
-import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
+import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION, ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 const AssesseeGroupReviewList = (props) => {
   const { popupAllClose } = props;
   const dispatch = useDispatch();
@@ -32,7 +25,6 @@ const AssesseeGroupReviewList = (props) => {
   const {
     numberPage,
     scanCount,
-    middlePaneHeaderBadgeOne,
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue
@@ -113,11 +105,11 @@ const AssesseeGroupReviewList = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: 'assessees',
-        popupHeaderOneBadgeOne: '',
-        popupHeaderOneBadgeTwo: 'group',
+        popupHeaderOneBadgeOne: 'group',
+        popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });

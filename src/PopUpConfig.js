@@ -9,35 +9,41 @@ export const ASSIGNMENT_DISTINCT_POPUP = [
   {
     data: 'distinct',
     dataValue: 'distinct',
+    dataKey: 'distinct',
     optionClass: 'optionPrimary',
     divider: 'dark'
   },
   {
     data: 'active',
     dataValue: 'active',
+    dataKey: 'active',
     optionClass: 'optionSecondary'
   },
   {
     data: 'inactive',
     dataValue: 'inactive',
+    dataKey: 'inactive',
     optionClass: 'optionSecondary',
     divider: 'light'
   },
   {
     data: 'all',
     dataValue: 'all',
+    dataKey: 'all',
     optionClass: 'optionSecondary',
     divider: 'light'
   },
   {
     data: 'archived',
     dataValue: 'archived',
+    dataKey: 'archived',
     optionClass: 'optionSecondary',
     divider: 'light'
   },
   {
     data: 'upcoming',
     dataValue: 'upcoming',
+    dataKey: 'upcoming',
     optionClass: 'optionSecondary'
   }
 ];
@@ -45,40 +51,47 @@ export const NOTIFICATION_REPORT_POPUP = [
   {
     data: 'distinct',
     dataValue: 'distinct',
+    dataKey: 'distinct',
     optionClass: 'optionPrimary',
     divider: 'dark'
   },
   {
     data: 'all',
     dataValue: 'all',
+    dataKey: 'all',
     optionClass: 'optionSecondary',
     divider: 'light'
   },
   {
     data: 'archived',
     dataValue: 'archived',
+    dataKey: 'archived',
     optionClass: 'optionSecondary',
     divider: 'light'
   },
   {
     data: 'flagged',
     dataValue: 'flagged',
+    dataKey: 'flagged',
     optionClass: 'optionSecondary'
   },
   {
     data: 'unflagged',
     dataValue: 'unflagged',
+    dataKey: 'unflagged',
     optionClass: 'optionSecondary',
     divider: 'light'
   },
   {
     data: 'read',
     dataValue: 'read',
+    dataKey: 'read',
     optionClass: 'optionSecondary'
   },
   {
     data: 'unread',
     dataValue: 'unread',
+    dataKey: 'unread',
     optionClass: 'optionSecondary'
   }
 ];
@@ -86,6 +99,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'assignments',
     dataValue: 'assesseeselfassignments',
+    dataKey: 'assesseeselfassignments',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -95,6 +109,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'interviews',
     dataValue: 'interviews',
+    dataKey: 'interviews',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -104,6 +119,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'link',
     dataValue: 'link',
+    dataKey: 'link',
     optionClass: 'optionPrimary',
     disabled: false,
     permissionArr: 'assessee',
@@ -112,6 +128,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'password',
     dataValue: 'password',
+    dataKey: 'password',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -121,6 +138,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'notifications',
     dataValue: 'notifications',
+    dataKey: 'notifications',
     optionClass: 'optionPrimary',
     disabled: false,
     permissionArr: 'assessee',
@@ -129,6 +147,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'reports',
     dataValue: 'reports',
+    dataKey: 'reports',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -138,6 +157,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'review',
     dataValue: 'review',
+    dataKey: 'review',
     optionClass: 'optionPrimary',
     disabled: false,
     permissionArr: 'assessee',
@@ -146,6 +166,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'revise',
     dataValue: 'revise',
+    dataKey: 'revise',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -155,6 +176,7 @@ export const ASSESSEE_CARD_POPUP_OPTIONS = [
   {
     data: 'sign-out',
     dataValue: 'sign-out',
+    dataKey: 'sign-out',
     optionClass: 'optionPrimary',
     disabled: false,
     permissionArr: 'assessee',
@@ -165,6 +187,7 @@ export const REVIEW_POPUP_OPTIONS = [
   {
     data: 'distinct',
     dataValue: 'distinct',
+    dataKey: 'distinct',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false
@@ -172,30 +195,35 @@ export const REVIEW_POPUP_OPTIONS = [
   {
     data: 'groups',
     dataValue: 'groups',
+    dataKey: 'groups',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'managers',
     dataValue: 'managers',
+    dataKey: 'managers',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'nodes',
     dataValue: 'nodes',
+    dataKey: 'nodes',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'roles',
     dataValue: 'roles',
+    dataKey: 'roles',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'types',
     dataValue: 'types',
+    dataKey: 'types',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false
@@ -203,6 +231,7 @@ export const REVIEW_POPUP_OPTIONS = [
   {
     data: 'marketplace',
     dataValue: 'marketplace',
+    dataKey: 'marketplace',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false
@@ -210,12 +239,14 @@ export const REVIEW_POPUP_OPTIONS = [
   {
     data: 'active',
     dataValue: 'active',
+    dataKey: 'active',
     optionClass: 'optionSecondary',
     disabled: false
   },
   {
     data: 'inactive',
     dataValue: 'inactive',
+    dataKey: 'inactive',
     optionClass: 'optionSecondary',
     divider: 'light',
     disabled: false
@@ -223,6 +254,7 @@ export const REVIEW_POPUP_OPTIONS = [
   {
     data: 'all',
     dataValue: 'all',
+    dataKey: 'all',
     optionClass: 'optionSecondary',
     divider: 'light',
     disabled: false
@@ -230,6 +262,7 @@ export const REVIEW_POPUP_OPTIONS = [
   {
     data: 'archived',
     dataValue: 'archived',
+    dataKey: 'archived',
     optionClass: 'optionSecondary',
     disabled: false
   }
@@ -238,6 +271,7 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
   {
     data: 'administrators',
     dataValue: 'administrators',
+    dataKey: 'administrators',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -247,6 +281,7 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
   {
     data: 'groups',
     dataValue: 'groups',
+    dataKey: 'groups',
     optionClass: 'optionPrimary',
     disabled: false,
     permissionArr: 'assessee',
@@ -624,7 +659,7 @@ export const REVIEW_DISTINCT_POPUP_OPTION = [
   { data: 'archived', dataValue: 'archived', optionClass: 'optionSecondary', disabled: false }
 ];
 
-export const REVIEW_LIST_POPUP_OPTION = [
+export const ASSESSEE_REVIEW_LIST_POPUP_OPTION = [
   {
     data: 'allocate',
     dataValue: 'allocate',
@@ -648,12 +683,6 @@ export const REVIEW_LIST_POPUP_OPTION = [
     dataValue: 'flag',
     optionClass: 'optionPrimary',
     disabled: false
-  },
-  {
-    data: 'reset',
-    dataValue: 'reset',
-    optionClass: 'optionPrimary',
-    disabled: true
   },
   {
     data: 'review',
@@ -695,6 +724,7 @@ export const REVIEW_LIST_POPUP_OPTION = [
   {
     data: 'assignments',
     dataValue: 'assignments',
+    dataKey: 'review',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false
@@ -702,12 +732,14 @@ export const REVIEW_LIST_POPUP_OPTION = [
   {
     data: 'notifications',
     dataValue: 'notifications',
+    dataKey: 'review',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'reports',
     dataValue: 'reports',
+    dataKey: 'review',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -777,17 +809,398 @@ export const ASSOCIATE_REVIEW_LIST_POPUP_OPTION = [
   {
     data: 'notifications',
     dataValue: 'notifications',
+    dataKey: 'review',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'reports',
     dataValue: 'reports',
+    dataKey: 'review',
     optionClass: 'optionPrimary',
     disabled: false
   }
 ];
-
+export const ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION = [
+  {
+    data: 'allocate',
+    dataValue: 'allocate',
+    dataKey: 'allocate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'archive',
+    dataValue: 'archive',
+    dataKey: 'archive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'delete',
+    dataValue: 'delete',
+    dataKey: 'delete',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    dataKey: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    dataKey: 'reviewKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'revise',
+    dataValue: 'revise',
+    dataKey: 'reviseKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'select',
+    dataValue: 'select',
+    dataKey: 'select',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'share',
+    dataValue: 'share',
+    dataKey: 'share',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'suspend',
+    dataValue: 'suspend',
+    dataKey: 'suspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'terminate',
+    dataValue: 'terminate',
+    dataKey: 'terminate',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'assessees',
+    dataValue: 'assessees',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION = [
+  {
+    data: 'allocate',
+    dataValue: 'allocate',
+    dataKey: 'allocate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'archive',
+    dataValue: 'archive',
+    dataKey: 'archive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'delete',
+    dataValue: 'delete',
+    dataKey: 'delete',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    dataKey: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    dataKey: 'reviewKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'revise',
+    dataValue: 'revise',
+    dataKey: 'reviseKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'select',
+    dataValue: 'select',
+    dataKey: 'select',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'share',
+    dataValue: 'share',
+    dataKey: 'share',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'suspend',
+    dataValue: 'suspend',
+    dataKey: 'suspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'terminate',
+    dataValue: 'terminate',
+    dataKey: 'terminate',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'assessments',
+    dataValue: 'assessments',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION = [
+  {
+    data: 'allocate',
+    dataValue: 'allocate',
+    dataKey: 'allocate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'archive',
+    dataValue: 'archive',
+    dataKey: 'archive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'delete',
+    dataValue: 'delete',
+    dataKey: 'delete',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    dataKey: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    dataKey: 'reviewKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'revise',
+    dataValue: 'revise',
+    dataKey: 'reviseKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'select',
+    dataValue: 'select',
+    dataKey: 'select',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'share',
+    dataValue: 'share',
+    dataKey: 'share',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'suspend',
+    dataValue: 'suspend',
+    dataKey: 'suspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'terminate',
+    dataValue: 'terminate',
+    dataKey: 'terminate',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION = [
+  {
+    data: 'allocate',
+    dataValue: 'allocate',
+    dataKey: 'allocate',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'archive',
+    dataValue: 'archive',
+    dataKey: 'archive',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'delete',
+    dataValue: 'delete',
+    dataKey: 'delete',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    dataKey: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    dataKey: 'reviewKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'revise',
+    dataValue: 'revise',
+    dataKey: 'reviseKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'select',
+    dataValue: 'select',
+    dataKey: 'select',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'share',
+    dataValue: 'share',
+    dataKey: 'share',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'suspend',
+    dataValue: 'suspend',
+    dataKey: 'suspend',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'terminate',
+    dataValue: 'terminate',
+    dataKey: 'terminate',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'associates',
+    dataValue: 'associates',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
 export const ALLOCATE_POPUP = [
   {
     data: 'assessees',
@@ -1065,14 +1478,6 @@ export const LEFT_TRIPPLE_DOT_POPUP_OPTION = [
     data: 'assurance',
     dataValue: 'assurance',
     optionClass: 'optionPrimary',
-    disabled: true,
-    divider:'dark'
-  },
-  {
-    data: 'switch',
-    dataValue: 'switched',
-    optionClass: 'optionPrimary',
     disabled: true
   }
-
 ];

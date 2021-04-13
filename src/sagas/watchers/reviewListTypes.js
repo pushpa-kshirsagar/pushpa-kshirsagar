@@ -100,7 +100,7 @@ function* workerReviewAssignmentTypeListSaga(data) {
   }
 }
 
-export default function* watchReviewGroupsListSaga() {
+export default function* watchReviewTypesListSaga() {
   yield takeLatest(GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA, workerReviewAssessmentTypeListSaga);
   yield takeLatest(GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA, workerReviewAssignmentTypeListSaga);
 }

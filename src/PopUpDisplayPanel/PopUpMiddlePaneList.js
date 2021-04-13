@@ -10,11 +10,11 @@ import {
   GET_ASSESSEE_INFO_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
   GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
+  GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_START,
-  LOADER_STOP,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
@@ -25,6 +25,7 @@ const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
+    popupHeaderOneBadgeTwo,
     popupOpenType,
     secondaryOptionCheckValue,
     selectedTagValue
@@ -34,7 +35,6 @@ const PopUpMiddlePaneList = (props) => {
   const {
     headerPanelColour = 'displayPaneCentre',
     isActive,
-    onClickInformation = null,
     popupAllClose,
     typeOfMiddlePaneList
   } = props;
@@ -45,10 +45,9 @@ const PopUpMiddlePaneList = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    console.log(e.currentTarget.getAttribute('data-value'));
-    console.log('ChangeOptionPopup');
-    let clickVal = e.currentTarget.getAttribute('data-value');
-    if (clickVal === 'information') {
+    let keyVal = e.currentTarget.getAttribute('data-key');
+    let dataVal = e.currentTarget.getAttribute('data-value');
+    if (dataVal === 'information') {
       console.log(selectedTagValue);
       dispatch({ type: LOADER_START });
       if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
@@ -264,6 +263,37 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
+      if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
+        // alert(selectedTagValue);
+        dispatch({
+          type: GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '0654321',
+              filter: 'true',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
       // if(typeOfMiddlePaneList === ''){}
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
       dispatch({
@@ -274,10 +304,11 @@ const PopUpMiddlePaneList = (props) => {
       // dispatch({ type: LOADER_STOP });
 
       // onClickInformation(secondaryOptionCheckValue);
-    } else {
+    }
+     else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
-        payload: clickVal
+        payload: { badgeValue: dataVal, keyValue: keyVal }
       });
     }
   };
@@ -291,6 +322,7 @@ const PopUpMiddlePaneList = (props) => {
           headerPanelColour={headerPanelColour + popupOpenType}
           headerOne={popupHeaderOne}
           headerOneBadgeOne={popupHeaderOneBadgeOne}
+          headerOneBadgeTwo={popupHeaderOneBadgeTwo}
           onClick={BackHandlerEvent}
           mode={''}
         />

@@ -5,10 +5,12 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
+  ASSIGNMENT_REVIEW_DISTINCT_SAGA,
   CLEAR_ASSIGNMENT_INFO,
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
   GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   LOADER_START,
   SET_ASSIGNMENT_NEXT_POPUP,
   SET_ASSIGNMENT_PREVIOUS_POPUP,
@@ -19,7 +21,11 @@ import {
   SET_REQUEST_OBJECT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { makeAssignmentGroupObj } from '../Actions/GenericActions';
+import {
+  makeAssignmentGroupObj,
+  makeAssignmentTypeObj,
+  makeAssignmentReviewListRequestObject
+} from '../Actions/GenericActions';
 
 const PopUpAssignmentModule = (props) => {
   const {
@@ -43,6 +49,31 @@ const PopUpAssignmentModule = (props) => {
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'distinctss') {
+      let requestObect = makeAssignmentReviewListRequestObject(
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentsDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
+        payload: {
+          request: requestObect,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue
+        }
+      });
+      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+    }
     if (targetValue === 'groups') {
       let requestObj = makeAssignmentGroupObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
@@ -56,6 +87,29 @@ const PopUpAssignmentModule = (props) => {
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
+      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+    }
+    if (targetValue === 'types') {
+      let requestObj = makeAssignmentTypeObj(secondaryOptionCheckValue, 0, countPage);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentsTypeDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
         payload: {
           request: requestObj,
           BadgeOne: targetValue,
