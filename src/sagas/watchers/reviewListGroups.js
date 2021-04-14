@@ -1,5 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
+  CLEAR_ASSESSMENT_INFO,
+  CLEAR_ASSIGNMENT_INFO,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
@@ -139,6 +141,7 @@ function* workerReviewAssessmentGroupListSaga(data) {
 
     console.log('loading end');
     yield put({ type: LOADER_STOP });
+    yield put({ type: CLEAR_ASSESSMENT_INFO });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -178,6 +181,8 @@ function* workerReviewAssignmentGroupListSaga(data) {
 
     console.log('loading end');
     yield put({ type: LOADER_STOP });
+    yield put({ type: CLEAR_ASSIGNMENT_INFO });
+
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

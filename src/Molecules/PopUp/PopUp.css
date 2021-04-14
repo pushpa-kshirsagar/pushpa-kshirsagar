@@ -403,6 +403,8 @@
   max-height: calc(100% - 64px);
   flex-direction: column;
   /* margin: 0px !important; */
+  top: 55px;
+
 }
 @media (max-width: 360px) {
   .popupContent {

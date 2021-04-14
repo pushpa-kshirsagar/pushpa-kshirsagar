@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSOCIATE_POPUP_CLOSE,
-  ASSOCIATE_REVIEW_DISTINCT_SAGA,
+  GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
   FILTERMODE_ENABLE,
   LOADER_START,
   POPUP_OPEN,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
-  SET_REQUEST_OBJECT,
-  GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA
+  SET_REQUEST_OBJECT
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
+import { makeAssessmentGroupObj, makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 const AssessmentGroupReviewList = (props) => {
   const dispatch = useDispatch();
@@ -71,12 +70,12 @@ const AssessmentGroupReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssociateReviewListRequestObject(siftKey, 0, countPage);
+    let requestObect = makeAssessmentGroupObj(siftKey, 0, countPage);
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({
-      type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
+      type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
       payload: {
         request: requestObect,
         BadgeOne: 'distinct',
@@ -133,7 +132,7 @@ const AssessmentGroupReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assessmentsGroupDistinctinactive' && (
+      {FilterMode === 'assessmentGroupDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

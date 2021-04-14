@@ -33,7 +33,8 @@ import {
   ASSESSEE_REVIEW_REVISE_POPUP,
   GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
   REVIEW_DISTINCT_POPUP_OPTION,
-  CREATE_INFORMATION_POPUP
+  CREATE_INFORMATION_POPUP,
+  PUBLISH_PUPUP
 } from '../PopUpConfig';
 
 const initialState = {
@@ -64,6 +65,7 @@ const initialState = {
     archive: ARCHIVE_POPUP,
     delete: DELETE_POPUP,
     flag: FLAG_PUPUP,
+    publish: PUBLISH_PUPUP,
     select: SELECT_PUPUP,
     suspend: SUSPEND_PUPUP,
     terminate: TERMINATE_PUPUP,

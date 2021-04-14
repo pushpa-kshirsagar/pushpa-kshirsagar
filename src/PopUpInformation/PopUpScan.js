@@ -10,6 +10,7 @@ import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   ASSESSMENT_REVIEW_DISTINCT_SAGA,
+  ASSIGNMENT_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
@@ -37,7 +38,9 @@ import {
   makeAssignmentGroupScanRequestObject,
   makeAssociateGroupScanRequestObject,
   makeAssignmentTypeScanRequestObject,
-  makeAssessmentTypeScanRequestObject
+  makeAssessmentTypeScanRequestObject,
+  makeAssignmentScanRequestObject,
+  makeAssessmentScanRequestObject
 } from '../Actions/GenericActions';
 
 const PopUpScan = (props) => {
@@ -311,6 +314,52 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
+      if (typeOfMiddlePaneList === 'assignmentDistinctReviewList') {
+        let requestObect = makeAssignmentScanRequestObject(
+          middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'assessmentDistinctReviewList') {
+        let requestObect = makeAssessmentScanRequestObject(
+          middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
       if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
         console.log(typeOfMiddlePaneList);
       }
@@ -358,6 +407,10 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}
+              {isPopUpValue === 'assignmentDistinctReviewList' ||
+                (isPopUpValue === 'assessmentDistinctReviewList' && (
+                  <span>name, description, tag.</span>
+                ))}
               {isPopUpValue === 'assesseeDistinctReviewList' && (
                 <span>name, alias, email address, mobile telephone, tag.</span>
               )}

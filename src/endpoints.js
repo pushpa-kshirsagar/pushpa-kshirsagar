@@ -75,4 +75,8 @@ export const ASSIGNMENT_REVIEW_LIST_URL =
   'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-distinct/review-list';
 export const ASSESSMENT_REVIEW_LIST_URL =
   'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-distinct/review-list';
+export const ASSESSMENT_CREATE_URL =
+  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-distinct/create';
+export const ASSIGNMENT_CREATE_URL =
+  ' https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-distinct/create';
 // export const URL = '';

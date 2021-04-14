@@ -24,17 +24,7 @@ const TypeCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_TYPE_REDUCER_STATE:
-      return {
-        typeInformation: {
-          informationBasic: {
-            groupName: '',
-            groupNameVerification: false,
-            groupDescription: '',
-            groupPicture: '',
-            groupPictureVerification: false
-          }
-        }
-      };
+      return initialState;
     default:
       return istate;
   }

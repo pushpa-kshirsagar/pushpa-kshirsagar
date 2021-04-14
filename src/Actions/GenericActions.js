@@ -1159,7 +1159,7 @@ export const makeAssessmentReviewListRequestObject = (filterKey, countPage, numb
     associateId: '0654321',
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assignmentName',
+      columnName: 'informationBasic.assessmentName',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1170,7 +1170,7 @@ export const makeAssessmentReviewListRequestObject = (filterKey, countPage, numb
         searchBy: [
           {
             dataType: 'string',
-            conditionColumn: 'informationEngagement.assignmentStatus',
+            conditionColumn: 'informationEngagement.assessmentStatus',
             conditionValue: searchObj
           }
         ]
@@ -1322,4 +1322,142 @@ export const makeAssessmentTypeScanRequestObject = (
     ]
   };
   return requestObj;
+};
+export const makeAssignmentScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let regObj = {
+    assesseeId: '0123456',
+    associateId: '605091f81edc573048fb467a',
+    countPage: countPage,
+    numberPage: numberPage,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assignmentName',
+      order: 'asc'
+    },
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assignmentStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assignmentName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assignmentDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+
+  return regObj;
+};
+export const makeAssessmentScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let regObj = {
+    assesseeId: '0123456',
+    associateId: '0654321',
+    countPage: countPage,
+    numberPage: numberPage,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assessmentName',
+      order: 'asc'
+    },
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assessmentStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assessmentName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assessmentDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+
+  return regObj;
 };

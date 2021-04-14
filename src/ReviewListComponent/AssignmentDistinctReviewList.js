@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  ASSIGNMENT_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
   FILTERMODE_ENABLE,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
@@ -13,9 +14,9 @@ import {
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssesseeGroupObj } from '../Actions/GenericActions';
-import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-const AssesseeGroupReviewList = (props) => {
+import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
+import { ASSIGNMENT_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+const AssignmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
@@ -70,12 +71,12 @@ const AssesseeGroupReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssesseeGroupObj(siftKey, 0, countPage);
+    let requestObect = makeAssociateReviewListRequestObject(siftKey, 0, countPage);
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({
-      type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+      type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
       payload: {
         request: requestObect,
         BadgeOne: 'distinct',
@@ -87,26 +88,28 @@ const AssesseeGroupReviewList = (props) => {
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (siftValue === 'suspended' || siftValue === 'terminated' || siftValue === 'unpublished')
+      siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const secondaryIcon = [
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unpublished', onClick: onClickFooter, Icon: FilterList }
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessees',
-        popupHeaderOneBadgeOne: 'group',
+        popupHeaderOne: 'assignment',
+        popupHeaderOneBadgeOne: '',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: ASSIGNMENT_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });
@@ -123,16 +126,16 @@ const AssesseeGroupReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.assesseeGroupStatus}
-                textOne={item.informationBasic.assesseeGroupName}
-                textTwo={item.informationBasic.assesseeGroupDescription}
+                status={item.informationEngagement.assignmentStatus}
+                textOne={item.informationBasic.assignmentName}
+                textTwo={item.informationBasic.assignmentDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
               />
             </div>
           );
         })}
-      {FilterMode === 'assesseeGroupDistinctinactive' && (
+      {FilterMode === 'assignmentsDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -144,4 +147,4 @@ const AssesseeGroupReviewList = (props) => {
     </div>
   );
 };
-export default AssesseeGroupReviewList;
+export default AssignmentDistinctReviewList;

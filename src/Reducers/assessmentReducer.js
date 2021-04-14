@@ -62,7 +62,7 @@ const assessmentReducer = (istate = initialState, action) => {
             assessmentsHeaderOneBadgeOne: action.payload,
             assessmentsPopUpType: 'secondary',
             currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
-            secondaryOptionCheckValue: 'active'
+            secondaryOptionCheckValue: action.payload === 'create' ? 'all' : 'active'
           };
         }
       } else {

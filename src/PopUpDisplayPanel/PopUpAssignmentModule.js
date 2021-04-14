@@ -49,7 +49,8 @@ const PopUpAssignmentModule = (props) => {
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    if (targetValue === 'distinctss') {
+    if (targetValue === 'distinct') {
+      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
       let requestObect = makeAssignmentReviewListRequestObject(
         secondaryOptionCheckValue,
         0,
@@ -72,9 +73,7 @@ const PopUpAssignmentModule = (props) => {
           BadgeTwo: secondaryOptionCheckValue
         }
       });
-      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
-    }
-    if (targetValue === 'groups') {
+    } else if (targetValue === 'groups') {
       let requestObj = makeAssignmentGroupObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -96,8 +95,7 @@ const PopUpAssignmentModule = (props) => {
         }
       });
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
-    }
-    if (targetValue === 'types') {
+    } else if (targetValue === 'types') {
       let requestObj = makeAssignmentTypeObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });

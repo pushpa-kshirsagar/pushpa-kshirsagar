@@ -119,7 +119,22 @@ const AssignmentReducer = (istate = initialState, action) => {
         secondaryOptionCheckValue: action.payload
       };
     case CLEAR_ASSIGNMENT_INFO:
-      return initialState;
+      return {
+        assignmentsHeaderOne: '',
+        assignmentsPopUpType: 'primary',
+        currentPopUpOption: '',
+        assignmentsPopUpActive: false,
+        isBackToSectionPopUp: false,
+        assignmentsHeaderOneBadgeOne: '',
+        primaryPopUpOptions: MODULE_POPUP_OPTION,
+        secondaryPopUpOptions: {
+          create: REVIEW_REVISE_POPUP,
+          review: REVIEW_POPUP_OPTIONS,
+          notifications: NOTIFICATION_REPORT_POPUP,
+          reports: NOTIFICATION_REPORT_POPUP
+        },
+        secondaryOptionCheckValue: ''
+      };
     default:
       return istate;
   }

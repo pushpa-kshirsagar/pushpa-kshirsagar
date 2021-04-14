@@ -89,8 +89,10 @@ const AssesseeRoleDistinctReviewList = (props) => {
       type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
       payload: {
         request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: siftKey,
+        BadgeThree: '',
+        isMiddlePaneList:true
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });

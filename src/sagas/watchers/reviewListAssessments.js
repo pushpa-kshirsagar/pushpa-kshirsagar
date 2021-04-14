@@ -3,7 +3,8 @@ import {
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
   ASSESSMENT_REVIEW_DISTINCT_SAGA,
-  SET_MIDDLEPANE_STATE
+  SET_MIDDLEPANE_STATE,
+  CLEAR_ASSESSMENT_INFO
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_LIST_URL } from '../../endpoints';
 
@@ -42,6 +43,7 @@ function* workerReviewListAssessmentSaga(data) {
     });
     console.log('loading end');
     yield put({ type: LOADER_STOP });
+    yield put({ type: CLEAR_ASSESSMENT_INFO });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

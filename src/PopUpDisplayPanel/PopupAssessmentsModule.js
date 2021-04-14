@@ -17,11 +17,16 @@ import {
   SET_ASSESSMENT_SECONDARY_OPTION_VALUE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
+  SET_POPUP_VALUE,
   SET_PREVIOUS_SECTION_POPUP,
   SET_REQUEST_OBJECT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { makeAssessmentGroupObj, makeAssessmentReviewListRequestObject, makeAssessmentTypeObj } from '../Actions/GenericActions';
+import {
+  makeAssessmentGroupObj,
+  makeAssessmentReviewListRequestObject,
+  makeAssessmentTypeObj
+} from '../Actions/GenericActions';
 
 const PopupAssessmentsModule = (props) => {
   const {
@@ -47,7 +52,13 @@ const PopupAssessmentsModule = (props) => {
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    if (targetValue === 'distinctss') {
+    if (targetValue === 'information') {
+      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    } else if (targetValue === 'distinct') {
       let requestObect = makeAssessmentReviewListRequestObject(
         secondaryOptionCheckValue,
         0,
@@ -71,9 +82,7 @@ const PopupAssessmentsModule = (props) => {
         }
       });
       dispatch({ type: CLEAR_ASSESSMENT_INFO });
-
-    }
-    if (targetValue === 'groups') {
+    } else if (targetValue === 'groups') {
       let requestObj = makeAssessmentGroupObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
@@ -95,8 +104,7 @@ const PopupAssessmentsModule = (props) => {
         }
       });
       dispatch({ type: CLEAR_ASSESSMENT_INFO });
-    }
-    if (targetValue === 'types') {
+    } else if (targetValue === 'types') {
       let requestObj = makeAssessmentTypeObj(secondaryOptionCheckValue, 0, countPage);
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
