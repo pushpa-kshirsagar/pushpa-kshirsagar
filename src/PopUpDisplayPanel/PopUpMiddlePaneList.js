@@ -10,7 +10,9 @@ import {
   GET_ASSESSEE_INFO_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
   GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
+  GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA,
   GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
+  GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
@@ -294,6 +296,66 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
+      if (typeOfMiddlePaneList === 'assessmentsTypeDistinctReviewList') {
+        dispatch({
+          type: GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '0654321',
+              filter: 'true',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
+        dispatch({
+          type: GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '0654321',
+              filter: 'true',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
       // if(typeOfMiddlePaneList === ''){}
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
       dispatch({
@@ -304,8 +366,7 @@ const PopUpMiddlePaneList = (props) => {
       // dispatch({ type: LOADER_STOP });
 
       // onClickInformation(secondaryOptionCheckValue);
-    }
-     else {
+    } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: { badgeValue: dataVal, keyValue: keyVal }

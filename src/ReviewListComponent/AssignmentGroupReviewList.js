@@ -122,11 +122,8 @@ const AssignmentGroupReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item?.informationEngagement?.assignmentGroupTag?.assignmentGroupTagPrimary}
-                isSelectedReviewList={
-                  middlePaneSelectedValue ===
-                  item?.informationEngagement?.assignmentGroupTag?.assignmentGroupTagPrimary
-                }
+                tag={item?.id}
+                isSelectedReviewList={middlePaneSelectedValue === item?.id}
                 status={item.informationEngagement.assignmentGroupStatus}
                 textOne={item.informationBasic.assignmentGroupName}
                 textTwo={item.informationBasic.assignmentGroupDescription}

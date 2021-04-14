@@ -31,7 +31,7 @@
   .middleFooterD {
     display: flex;
     position: absolute;
-    width: 100%;
+    width: 99%;
     bottom: 10px;
     padding: 2.5px;
     box-sizing: border-box;
