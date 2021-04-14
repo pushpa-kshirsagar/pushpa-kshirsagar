@@ -471,7 +471,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
           payload: {
             request: requestObj,
-            BadgeOne: 'groups',
+            BadgeOne: 'types',
             BadgeTwo: 'distinct',
             BadgeThree: secondaryOptionCheckValue,
             isMiddlePaneList: true

@@ -24,6 +24,9 @@ import watchReviewTypesListSaga from './watchers/reviewListTypes';
 import watchReviewListAssignmentSaga from './watchers/reviewListAssignment';
 import watchReviewListAssessmentSaga from './watchers/reviewListAssessments';
 import watchCreateAssessmentSaga from './watchers/createAssessment';
+import watchReviewAssessmentTypeInfoSaga from './watchers/reviewInfoAssessmentType';
+import watchReviewAssignmentTypeInfoSaga from './watchers/reviewInfoAssignmentType';
+
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
   yield all([
@@ -50,6 +53,8 @@ export default function* root() {
     fork(watchReviewTypesListSaga),
     fork(watchReviewListAssignmentSaga),
     fork(watchReviewListAssessmentSaga),
-    fork(watchCreateAssessmentSaga)
+    fork(watchCreateAssessmentSaga),
+    fork(watchReviewAssessmentTypeInfoSaga),
+    fork(watchReviewAssignmentTypeInfoSaga)
   ]);
 }
