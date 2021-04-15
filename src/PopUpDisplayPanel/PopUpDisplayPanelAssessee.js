@@ -108,6 +108,7 @@ const PopUpDisplayPanelAssessee = (props) => {
         type: GET_ASSESSEE_INFO_SAGA,
         payload: {
           secondaryOptionCheckValue,
+          headerOne: 'assessee',
           reqBody: {
             assesseeId: '0123456',
             associateId: '0654321',

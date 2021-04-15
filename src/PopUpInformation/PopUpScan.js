@@ -52,6 +52,7 @@ const PopUpScan = (props) => {
     scanHeaderBadgeTwo,
     typeOfMiddlePaneList,
     countPage,
+    middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
     middlePaneHeaderBadgeThree
@@ -70,7 +71,11 @@ const PopUpScan = (props) => {
   const handleClick = () => {
     /*according to seacrh will change*/
     if (state.scanValue !== '') {
-      if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
+      if (
+        typeOfMiddlePaneList === 'assesseesDistinctReviewList' ||
+        typeOfMiddlePaneList === 'administratorsDistinctReviewList' ||
+        typeOfMiddlePaneList === 'managersDistinctReviewList'
+      ) {
         let requestObect = makeAssesseeScanRequestObject(
           middlePaneHeaderBadgeTwo,
           0,
@@ -84,6 +89,7 @@ const PopUpScan = (props) => {
           type: ASSESSEE_REVIEW_DISTINCT_SAGA,
           payload: {
             request: requestObect,
+            HeaderOne: middlePaneHeader,
             BadgeOne: 'distinct',
             BadgeTwo: middlePaneHeaderBadgeTwo
           }
@@ -411,7 +417,9 @@ const PopUpScan = (props) => {
                 (isPopUpValue === 'assessmentDistinctReviewList' && (
                   <span>name, description, tag.</span>
                 ))}
-              {isPopUpValue === 'assesseeDistinctReviewList' && (
+              {(isPopUpValue === 'assesseesDistinctReviewList' ||
+                isPopUpValue === 'administratorsDistinctReviewList' ||
+                isPopUpValue === 'managersDistinctReviewList') && (
                 <span>name, alias, email address, mobile telephone, tag.</span>
               )}
               {isPopUpValue === 'assesseeRelatedAssociate' ||

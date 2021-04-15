@@ -7,7 +7,8 @@ import {
   POPUP_CLOSE,
   SET_ASSIGNMENT_BASIC_REDUCER_STATE,
   CLEAR_ASSIGNMENT_INFO,
-  CREATE_ASSIGNMENT_SAGA
+  CREATE_ASSIGNMENT_SAGA,
+  LOADER_START
 } from '../../actionType';
 
 const AssignmentCreatePopup = (props) => {
@@ -32,7 +33,7 @@ const AssignmentCreatePopup = (props) => {
     };
 
     console.log('CREATE assignment api', reqBody);
-    // dispatch({ type: LOADER_START });
+    dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSIGNMENT_SAGA, payload: reqBody });
   };
 

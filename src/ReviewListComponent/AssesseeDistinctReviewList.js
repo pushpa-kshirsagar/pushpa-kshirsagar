@@ -4,11 +4,8 @@ import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
-  GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_OPEN,
-  SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT
@@ -19,7 +16,6 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
 import { ASSESSEE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
 const AssesseeDistinctReviewList = (props) => {
   const { popupAllClose } = props;
   const dispatch = useDispatch();
@@ -28,10 +24,12 @@ const AssesseeDistinctReviewList = (props) => {
     numberPage,
     scanCount,
     countPage,
+    middlePaneHeader,
     middlePaneHeaderBadgeOne,
     reviewListDistinctData,
     reviewListReqObj,
-    middlePaneSelectedValue
+    middlePaneSelectedValue,
+    typeOfMiddlePaneList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -59,6 +57,7 @@ const AssesseeDistinctReviewList = (props) => {
         type: ASSESSEE_REVIEW_DISTINCT_SAGA,
         payload: {
           request: obj,
+          HeaderOne: middlePaneHeader,
           BadgeOne: 'distinct',
           BadgeTwo: secondaryOptionCheckValue
         }
@@ -67,7 +66,6 @@ const AssesseeDistinctReviewList = (props) => {
     }
   };
   useEffect(() => {
-    console.log(reviewListDistinctData);
     if (!isFetching) return;
     fetchMoreListItems();
   }, [isFetching]);
@@ -85,6 +83,7 @@ const AssesseeDistinctReviewList = (props) => {
       type: ASSESSEE_REVIEW_DISTINCT_SAGA,
       payload: {
         request: requestObect,
+        HeaderOne: middlePaneHeader,
         BadgeOne: 'distinct',
         BadgeTwo: siftKey
       }
@@ -115,10 +114,16 @@ const AssesseeDistinctReviewList = (props) => {
   ];
   const openAssesseeListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let popupHeaderOne =
+      typeOfMiddlePaneList === 'administratorsDistinctReviewList'
+        ? 'administrator'
+        : typeOfMiddlePaneList === 'managersDistinctReviewList'
+        ? 'manager'
+        : 'assessee';
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessee',
+        popupHeaderOne: popupHeaderOne,
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
