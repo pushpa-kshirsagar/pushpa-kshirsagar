@@ -13,6 +13,7 @@ import {
   GET_ASSESSMENT_INFO_SAGA,
   GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA,
   GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
+  GET_ASSIGNMENT_INFO_SAGA,
   GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_INFO_SAGA,
@@ -179,6 +180,36 @@ const PopUpMiddlePaneList = (props) => {
       if (typeOfMiddlePaneList === 'assessmentDistinctReviewList') {
         dispatch({
           type: GET_ASSESSMENT_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue,
+            reqBody: {
+              assesseeId: '0123456',
+              associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+              filter: true,
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'assignmentDistinctReviewList') {
+        dispatch({
+          type: GET_ASSIGNMENT_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
             reqBody: {

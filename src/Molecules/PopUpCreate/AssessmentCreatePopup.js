@@ -7,7 +7,8 @@ import {
   POPUP_CLOSE,
   SET_ASSESSMENT_BASIC_REDUCER_STATE,
   CLEAR_ASSESSMENT_INFO,
-  CREATE_ASSESSMENT_SAGA
+  CREATE_ASSESSMENT_SAGA,
+  LOADER_START
 } from '../../actionType';
 
 const AssessmentCreatePopup = (props) => {
@@ -32,7 +33,7 @@ const AssessmentCreatePopup = (props) => {
     };
 
     console.log('CREATE assessment api', reqBody);
-    // dispatch({ type: LOADER_START });
+    dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSMENT_SAGA, payload: reqBody });
   };
 
