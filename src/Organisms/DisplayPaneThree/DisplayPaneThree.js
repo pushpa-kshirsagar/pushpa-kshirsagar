@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_SIGN_ON,
+  CLEAR_ASSESSMENT_INFO,
   CLEAR_DISPLAY_PANE_THREE,
   NAVIGATOR_MODE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -50,6 +51,19 @@ import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPan
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
+  const {
+    isReviewRevise = false,
+    headerOne,
+    headerOneBadgeOne,
+    headerOneBadgeTwo,
+    headerOneBadgeThree,
+    responseObject,
+    reviewMode,
+    createMode
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { showMiddlePaneState } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { informationBasic } = responseObject;
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const rightPaneSectionsAssessee = [
     {
       id: 'section1',
@@ -281,6 +295,19 @@ export const DisplayPaneThree = () => {
       }
     });
   };
+  const onClickCreateAssessment = () => {
+    console.log('ON CLICK CREATE ASSESSMENT');
+    dispatch({ type: CLEAR_ASSESSMENT_INFO });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedInformationAllorKey', value: headerOneBadgeTwo }
+    });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+    });
+  };
+  
   const onClickCreateAssesseeGroup = () => {
     console.log('ON CLICK CREATE ASSESSEE GROUP');
     dispatch({
@@ -343,6 +370,9 @@ export const DisplayPaneThree = () => {
   const createAssesseePrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessee, Icon: AddIcon }
   ];
+  const createAssessmentPrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssessment, Icon: AddIcon }
+  ];
 
   const createAssesseeGroupPrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssesseeGroup, Icon: AddIcon }
@@ -374,19 +404,7 @@ export const DisplayPaneThree = () => {
     { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
     { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
   ];
-  const {
-    isReviewRevise = false,
-    headerOne,
-    headerOneBadgeOne,
-    headerOneBadgeTwo,
-    headerOneBadgeThree,
-    responseObject,
-    reviewMode,
-    createMode
-  } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { showMiddlePaneState } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationBasic } = responseObject;
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+
 
   const onClickClearInfo = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -668,6 +686,24 @@ export const DisplayPaneThree = () => {
                 setSelectedSection={setSelectedSectionAssessment}
               />
             </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assessment' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssessment}
+                primaryIcon={createAssessmentPrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
           </>
         )}
       {isReviewRevise &&

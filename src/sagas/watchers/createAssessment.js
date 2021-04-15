@@ -30,8 +30,7 @@ function* workerCreateAssessmentSaga(data) {
         payload: {
           headerOne: 'assessment',
           headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: '',
-          headerOneBadgeThree: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
+          headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
           responseObject: apiResponse.responseObject[0],
           reviewMode: 'revise',
           createMode: 'assessment'
