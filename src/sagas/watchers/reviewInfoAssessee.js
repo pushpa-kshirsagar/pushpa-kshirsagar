@@ -27,7 +27,7 @@ function* workerReviewInfoAssesseeSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessee',
+          headerOne: data.payload.headerOne,
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
           responseObject: userResponse.responseObject[0]

@@ -27,7 +27,8 @@ import {
   GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
-  CLEAR_DISPLAY_PANE_THREE
+  CLEAR_DISPLAY_PANE_THREE,
+  ASSESSEE_REVIEW_DISTINCT_SAGA
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -52,7 +53,9 @@ import {
   makeAssessmentGroupObj,
   makeAssignmentGroupObj,
   makeAssessmentTypeObj,
-  makeAssignmentTypeObj
+  makeAssignmentTypeObj,
+  makeAdministratorsReviewListRequestObject,
+  makeManagersReviewListRequestObject
 } from '../Actions/GenericActions';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
@@ -320,6 +323,39 @@ const PopUpDisplayPanelAssociate = (props) => {
       //   type: SET_POPUP_VALUE,
       //   payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
       // });
+    }
+    if (
+      clickValue === 'distinct' &&
+      (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      let requestObj = makeAdministratorsReviewListRequestObject(
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
+      if (popupHeaderOne === 'managers') {
+        requestObj = makeManagersReviewListRequestObject(secondaryOptionCheckValue, 0, countPage);
+      }
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: popupHeaderOne + 'Distinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+        payload: {
+          request: requestObj,
+          HeaderOne: popupHeaderOne,
+          BadgeOne: 'distinct',
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
     }
     if (
       clickValue === 'distinct' &&

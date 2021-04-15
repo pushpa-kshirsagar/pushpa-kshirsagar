@@ -28,12 +28,12 @@ function* workerReviewListAssesseeSaga(data) {
     yield put({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'assessees',
+        middlePaneHeader: data.payload.HeaderOne,
         middlePaneHeaderBadgeOne: data.payload.BadgeOne,
         middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assesseeDistinctReviewList',
+        typeOfMiddlePaneList: data.payload.HeaderOne + 'DistinctReviewList',
         scanCount: userResponse && userResponse.countTotal,
         showMiddlePaneState: true
       }

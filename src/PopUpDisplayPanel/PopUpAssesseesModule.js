@@ -88,6 +88,7 @@ const PopUpAssesseesModule = (props) => {
       dispatch({
         type: ASSESSEE_REVIEW_DISTINCT_SAGA,
         payload: {
+          HeaderOne: 'assessees',
           request: requestObect,
           BadgeOne: targetValue,
           BadgeTwo: secondaryOptionCheckValue

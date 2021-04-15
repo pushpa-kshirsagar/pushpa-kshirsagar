@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  ASSESSEE_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,

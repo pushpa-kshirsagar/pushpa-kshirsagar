@@ -54,11 +54,21 @@ const PopUpMiddlePaneList = (props) => {
     if (dataVal === 'information') {
       console.log(selectedTagValue);
       dispatch({ type: LOADER_START });
-      if (typeOfMiddlePaneList === 'assesseeDistinctReviewList') {
+      if (
+        typeOfMiddlePaneList === 'assesseesDistinctReviewList' ||
+        typeOfMiddlePaneList === 'administratorsDistinctReviewList' ||
+        typeOfMiddlePaneList === 'managersDistinctReviewList'
+      ) {
         dispatch({
           type: GET_ASSESSEE_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            headerOne:
+              typeOfMiddlePaneList === 'administratorsDistinctReviewList'
+                ? 'administrator'
+                : typeOfMiddlePaneList === 'managersDistinctReviewList'
+                ? 'manager'
+                : 'assessee',
             reqBody: {
               assesseeId: '0123456',
               associateId: '0654321',
@@ -74,7 +84,7 @@ const PopUpMiddlePaneList = (props) => {
                       conditionValue: {
                         condition: 'eq',
                         value: {
-                          from: selectedTagValue ? selectedTagValue : '6054a4d6cb14fb2075aeec87'
+                          from: selectedTagValue
                         }
                       }
                     }
