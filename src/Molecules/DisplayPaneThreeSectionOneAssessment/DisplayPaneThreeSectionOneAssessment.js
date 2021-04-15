@@ -21,37 +21,35 @@ const DisplayPaneThreeSectionOneAssessment = () => {
   const list1 = [
     {
       id: 'a1',
-      labelTextOneOne: 'family',
-      labelTextOneOneBadgeOne: 'ascendant',
-      labelTextOneOneBadgeTwo: 'descendant',
-      labelTextOneOneBadgeThree: 'sibling',
-      labelTextOneOneBadgeFour: 'spouse',
+      labelTextOneOne: 'author',
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: 'secondary',
       isListCard: true,
       innerAssociateList: [
         {
           id: 'associate1',
           textOne: 'Simple Sample 01',
-          textTwo: 'family',
+          textTwo: 'author',
           status: ''
         },
         {
           id: 'associate2',
           textOne: 'Simple Sample 02',
-          textTwo: 'family',
+          textTwo: 'author',
           status: ''
         },
         {
           id: 'associate3',
           textOne: 'Simple Sample 03',
-          textTwo: 'family',
+          textTwo: 'author',
           status: ''
         }
       ],
-      innerInfo: 'assessees'
+      innerInfo: 'assessment'
     },
     {
       id: 'a2',
-      labelTextOneOne: 'guardian',
+      labelTextOneOne: 'collaborator',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
@@ -60,50 +58,20 @@ const DisplayPaneThreeSectionOneAssessment = () => {
         {
           id: 'associate1',
           textOne: 'Simple Sample 01',
-          textTwo: 'guardian',
+          textTwo: 'collaborator',
           status: 'active'
         },
         {
           id: 'associate2',
           textOne: 'Simple Sample 02',
-          textTwo: 'guardian',
+          textTwo: 'collaborator',
           status: 'active'
         },
         {
           id: 'associate3',
           textOne: 'Simple Sample 03',
-          textTwo: 'guardian',
+          textTwo: 'collaborator',
           status: 'active'
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    },
-    {
-      id: 'a3',
-      labelTextOneOne: 'mentor',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'mentor',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'mentor',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'mentor',
-          status: ''
         }
       ],
       innerInfo: 'No Information',
@@ -253,7 +221,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
     },
     {
       id: 'a2',
-      textOneOne: capitalizeFirstLetter(informationEngagement.associateStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement.assessmentStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -265,11 +233,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationEngagement.associateTag.associateTagPrimary || 'No Information'
+          textOne: informationEngagement.assessmentTag.assessmentTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationEngagement.associateTag.associateTagSecondary || 'No Information'
+          textOne: informationEngagement.assessmentTag.assessmentTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -282,11 +250,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement.associateTenureDate || 'No Information'
+          textOne: informationEngagement.assessmentTenureDate || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement.associateTenureDate || 'No Information'
+          textOne: informationEngagement.assessmentTenureDate || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -294,112 +262,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       isListCard: false
     }
   ];
-  const list4 = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'date',
-      textOneOne: 'dd/mm/yyyy',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
-    },
-    {
-      id: 'a2',
-      labelTextOneOne: 'dictionary',
-      textOneOne: 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
-    },
-    {
-      id: 'a3',
-      labelTextOneOne: 'language',
-      textOneOne: 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
-    },
-    {
-      id: 'a4',
-      labelTextOneOne: 'people',
-      textOneOne: 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
-    },
-    {
-      id: 'a5',
-      labelTextOneOne: 'time',
-      textOneOne: 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
-    }
-  ];
-  const list5 = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'administrator',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      isListCard: true,
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'family',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'family',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'family',
-          status: ''
-        }
-      ],
-      innerInfo: 'assessees'
-    },
-    {
-      id: 'a2',
-      labelTextOneOne: 'owner',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'guardian',
-          status: 'active'
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'guardian',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'guardian',
-          status: 'active'
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    }
-  ];
+  const list4 = [];
   const list6 = [
     {
       id: 'a2',
-      textOneOne: capitalizeFirstLetter(informationEngagement.associateStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement.assessmentStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -411,11 +278,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationEngagement.associateTag.associateTagPrimary || 'No Information'
+          textOne: informationEngagement.assessmentTag.assessmentTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationEngagement.associateTag.associateTagSecondary || 'No Information'
+          textOne: informationEngagement.assessmentTag.assessmentTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -428,33 +295,15 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement.associateTenureDate || 'No Information'
+          textOne: informationEngagement.assessmentTenureDate || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement.associateTenureDate || 'No Information'
+          textOne: informationEngagement.assessmentTenureDate || 'No Information'
         }
       ],
       innerAssociateList: [],
       innerInfo: 'Assessee',
-      isListCard: false
-    }
-  ];
-  const list7 = [
-    {
-      id: 'a2',
-      labelTextOneOne: 'dictionary',
-      textOneOne: 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
-    },
-    {
-      id: 'a3',
-      labelTextOneOne: 'language',
-      textOneOne: 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
       isListCard: false
     }
   ];
@@ -509,7 +358,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
         <>
           <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
             <Paper className={'dossierContainerTop'}>
-              {list5.map((ob) => {
+              {list1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -540,21 +389,6 @@ const DisplayPaneThreeSectionOneAssessment = () => {
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
               {list6.map((ob) => {
-                return (
-                  <div key={ob.id}>
-                    {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
-                    ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
-                    )}
-                  </div>
-                );
-              })}
-            </Paper>
-          </div>
-          <div className="containerPadding">
-            <Paper className={'dossierContainerTop'}>
-              {list7.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (

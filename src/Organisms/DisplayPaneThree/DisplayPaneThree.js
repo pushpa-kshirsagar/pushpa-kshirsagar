@@ -644,7 +644,7 @@ export const DisplayPaneThree = () => {
         )}
       {isReviewRevise &&
         responseObject &&
-        headerOne === 'assessments' &&
+        headerOne === 'assessment' &&
         headerOneBadgeOne === 'information' && (
           <>
             <div style={{ padding: '2.5px' }}>
