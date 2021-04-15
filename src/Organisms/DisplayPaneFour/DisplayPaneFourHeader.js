@@ -19,7 +19,7 @@ const DisplayPaneFourHeader = (props) => {
     headerPanelColour
   } = props;
   const dispatch = useDispatch();
-  const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
+  const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
 
   return (
     <>

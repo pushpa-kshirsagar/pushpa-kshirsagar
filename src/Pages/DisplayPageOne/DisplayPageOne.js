@@ -36,7 +36,7 @@ import AssessmentCreatePopup from '../../Molecules/PopUpCreate/AssessmentCreateP
 const DisplayPageOne = () => {
   // const { userData = null } = useSelector((state) => state.userReducer);
   const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
-  const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
+  const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
 

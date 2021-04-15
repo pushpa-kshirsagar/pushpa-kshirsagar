@@ -4,7 +4,7 @@ import UserReducer from './UserReducer';
 import AssesseeCreateReducer from './AssesseeCreateReducer';
 import AssociateCreateReducer from './AssociateCreateReducer';
 import FilterReducer from './FilterReducer';
-import assessmentReducer from './assessmentReducer';
+import AssessmentReducer from './AssessmentReducer';
 import DisplayPaneTwoReducer from './DisplayPaneTwoReducer';
 import AssignmentReducer from './AssignmentReducer';
 import IgaugeReducer from './IgaugeReducer';
@@ -13,7 +13,6 @@ import DisplayPaneThreeReducer from './DisplayPaneThreeReducer';
 import RoleCreateReducer from './RoleCreateReducer';
 import GroupCreateReducer from './GroupCreateReducer';
 import TypeCreateReducer from './TypeCreateReducer';
-import AssessmentCreateReducer from './AssessmentCreateReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -21,7 +20,7 @@ export default combineReducers({
   AssesseeCreateReducer,
   AssociateCreateReducer,
   FilterReducer,
-  assessmentReducer,
+  AssessmentReducer,
   DisplayPaneTwoReducer,
   AssignmentReducer,
   IgaugeReducer,
@@ -29,6 +28,5 @@ export default combineReducers({
   DisplayPaneThreeReducer,
   RoleCreateReducer,
   GroupCreateReducer,
-  TypeCreateReducer,
-  AssessmentCreateReducer
+  TypeCreateReducer
 });

@@ -5,61 +5,35 @@ import PopUpTextField from '../../PopUpInformation/PopUpTextField';
 import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
 import {
   POPUP_CLOSE,
-  CREATE_TYPE_SAGA,
-  SET_TYPE_REDUCER_STATE,
-  LOADER_START,
-  CLEAR_TYPE_REDUCER_STATE
+  SET_ASSIGNMENT_BASIC_REDUCER_STATE,
+  CLEAR_ASSIGNMENT_INFO,
+  CREATE_ASSIGNMENT_SAGA
 } from '../../actionType';
 
 const AssignmentCreatePopup = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { typeInformation } = useSelector((state) => state.TypeCreateReducer);
+  const { informationBasic, informationAllocation } = useSelector(
+    (state) => state.AssignmentReducer
+  );
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
-    dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
+    dispatch({ type: CLEAR_ASSIGNMENT_INFO });
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
     let reqBody = {
       assesseeId: '0123456',
-      associateId: '0654321'
+      associateId: '0654321',
+      assignment: {
+        informationBasic: informationBasic,
+        informationAllocation: informationAllocation
+      }
     };
-    if (headerOne === 'assessments') {
-      reqBody = {
-        assesseeId: '0123456',
-        associateId: '0654321',
-        whichTypeCreate: 'assessments',
-        assessmentType: {
-          informationBasic: {
-            assessmentTypeName: typeInformation.informationBasic.typeName,
-            assessmentTypeNameVerification: false,
-            assessmentTypeDescription: typeInformation.informationBasic.typeDescription,
-            assessmentTypePicture: '',
-            assessmentTypePictureVerification: false
-          }
-        }
-      };
-    }
-    if (headerOne === 'assignments') {
-      reqBody = {
-        assesseeId: '0123456',
-        associateId: '0654321',
-        whichTypeCreate: 'assignments',
-        assignmentType: {
-          informationBasic: {
-            assignmentTypeName: typeInformation.informationBasic.typeName,
-            assignmentTypeNameVerification: false,
-            assignmentTypeDescription: typeInformation.informationBasic.typeDescription,
-            assignmentTypePicture: '',
-            assignmentTypePictureVerification: false
-          }
-        }
-      };
-    }
-    //console.log('CREATE group api', reqBody);
-    dispatch({ type: LOADER_START });
-    dispatch({ type: CREATE_TYPE_SAGA, payload: reqBody });
+
+    console.log('CREATE assignment api', reqBody);
+    // dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSIGNMENT_SAGA, payload: reqBody });
   };
 
   return (
@@ -67,27 +41,27 @@ const AssignmentCreatePopup = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'NAMEPOPUP'}
         label={'name'}
-        actualLableValue={'typeName'}
+        actualLableValue={'assignmentName'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={''}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={typeInformation.informationBasic}
-        typeOfSetObject={SET_TYPE_REDUCER_STATE}
+        basicInfo={informationBasic}
+        typeOfSetObject={SET_ASSIGNMENT_BASIC_REDUCER_STATE}
         isRequired={true}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'description'}
-        actualLableValue={'typeDescription'}
+        actualLableValue={'assignmentDescription'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={''}
-        basicInfo={typeInformation.informationBasic}
+        basicInfo={informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
-        typeOfSetObject={SET_TYPE_REDUCER_STATE}
+        typeOfSetObject={SET_ASSIGNMENT_BASIC_REDUCER_STATE}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -97,7 +71,7 @@ const AssignmentCreatePopup = (props) => {
         headerOneBadgeTwo={''}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
       />
-       <PopUpConfirmation
+      <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}

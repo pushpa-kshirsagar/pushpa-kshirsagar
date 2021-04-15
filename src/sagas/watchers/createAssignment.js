@@ -1,46 +1,46 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import Store from '../../store';
 import {
-  CLEAR_ASSESSMENT_INFO,
-  CREATE_ASSESSMENT_SAGA,
+  CLEAR_ASSIGNMENT_INFO,
+  CREATE_ASSIGNMENT_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE
 } from '../../actionType';
-import { ASSESSMENT_CREATE_URL } from '../../endpoints';
+import { ASSIGNMENT_CREATE_URL } from '../../endpoints';
 
-const createAssessmentApi = async (requestObj) => {
+const createAssignmentApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(ASSESSMENT_CREATE_URL, requestOptions);
+  const response = await fetch(ASSIGNMENT_CREATE_URL, requestOptions);
   const json = await response.json();
   return json;
 };
 
-function* workerCreateAssessmentSaga(data) {
+function* workerCreateAssignmentSaga(data) {
   try {
-    const apiResponse = yield call(createAssessmentApi, { data: data.payload });
+    const apiResponse = yield call(createAssignmentApi, { data: data.payload });
     if (apiResponse.responseCode === '000') {
       console.log('loading end', data.payload.whichTypeCreate);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessment',
+          headerOne: 'assignment',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: '',
           headerOneBadgeThree: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
-          responseObject: apiResponse.responseObject[0],
+          responseObject: apiResponse.responseObject,
           reviewMode: 'revise',
-          createMode: 'assessment'
+          createMode: 'assignment'
         }
       });
     }
     yield put({ type: LOADER_STOP });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    yield put({ type: CLEAR_ASSESSMENT_INFO });
+    yield put({ type: CLEAR_ASSIGNMENT_INFO });
     yield put({ type: POPUP_CLOSE });
   } catch (e) {
     console.log('ERROR==', e);
@@ -49,7 +49,7 @@ function* workerCreateAssessmentSaga(data) {
   }
 }
 
-export default function* watchCreateAssessmentSaga() {
+export default function* watchCreateAssignmentSaga() {
   console.log('IN WATCH ====>');
-  yield takeLatest(CREATE_ASSESSMENT_SAGA, workerCreateAssessmentSaga);
+  yield takeLatest(CREATE_ASSIGNMENT_SAGA, workerCreateAssignmentSaga);
 }

@@ -5,7 +5,8 @@ import {
   SET_ASSESSMENT_PREVIOUS_POPUP,
   SET_ASSESSMENT_SECONDARY_OPTION_VALUE,
   SET_DISPLAY_PANE_FOUR_SHOW,
-  SET_ASSESSMENT_SECONDARY_POPUP
+  SET_ASSESSMENT_SECONDARY_POPUP,
+  SET_ASSESSMENT_BASIC_REDUCER_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -28,10 +29,42 @@ const initialState = {
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP
   },
-  secondaryOptionCheckValue: ''
+  secondaryOptionCheckValue: '',
+  informationBasic: {
+    assessmentName: '',
+    assessmentNameVerification: false,
+    assessmentDescription: '',
+    assessmentPicture: '',
+    assessmentPictureVerification: false,
+    assessmentFlag: false
+  },
+  informationAlliance: {
+    assessmentAuthor: {
+      assessmentAuthorPrimary: [],
+      assessmentAuthorSecondary: []
+    }
+  },
+  informationAllocation: {
+    assessmentGroup: {
+      assessmentGroupPrimary: [],
+      assessmentGroupSecondary: []
+    },
+    assessmentManager: {
+      assessmentManagerPrimary: [],
+      assessmentManagerSecondary: []
+    },
+    assessmentNode: {
+      assessmentNodePrimary: [],
+      assessmentNodeSecondary: []
+    },
+    assessmentType: {
+      assessmentTypePrimary: [],
+      assessmentTypeSecondary: []
+    }
+  }
 };
 
-const assessmentReducer = (istate = initialState, action) => {
+const AssessmentReducer = (istate = initialState, action) => {
   console.log(action.type);
   switch (action.type) {
     case ASSESSMENT_POPUP_OPEN:
@@ -96,6 +129,11 @@ const assessmentReducer = (istate = initialState, action) => {
       } else {
         return istate;
       }
+    case SET_ASSESSMENT_BASIC_REDUCER_STATE:
+      return {
+        ...istate,
+        informationBasic: action.payload
+      };
     case SET_ASSESSMENT_PREVIOUS_POPUP:
       if (istate.assessmentsPopUpType === 'primary') {
         return {
@@ -131,4 +169,4 @@ const assessmentReducer = (istate = initialState, action) => {
   }
 };
 
-export default assessmentReducer;
+export default AssessmentReducer;
