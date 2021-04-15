@@ -1,6 +1,7 @@
 import {
   ASSIGNMENT_POPUP_OPEN,
   CLEAR_ASSIGNMENT_INFO,
+  SET_ASSIGNMENT_BASIC_REDUCER_STATE,
   SET_ASSIGNMENT_NEXT_POPUP,
   SET_ASSIGNMENT_PREVIOUS_POPUP,
   SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
@@ -27,7 +28,39 @@ const initialState = {
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP
   },
-  secondaryOptionCheckValue: ''
+  secondaryOptionCheckValue: '',
+  informationBasic: {
+    assignmentName: '',
+    assignmentNameVerification: false,
+    assignmentDescription: '',
+    assignmentPicture: '',
+    assignmentPictureVerification: false,
+    assignmentFlag: false
+  },
+  informationAlliance: {
+    assignmentCollaborator: {
+      assignmentCollaboratorPrimary: [],
+      assignmentCollaboratorSecondary: []
+    }
+  },
+  informationAllocation: {
+    assignmentGroup: {
+      assignmentGroupPrimary: [],
+      assignmentGroupSecondary: []
+    },
+    assignmentManager: {
+      assignmentManagerPrimary: [],
+      assignmentManagerSecondary: []
+    },
+    assignmentNode: {
+      assignmentNodePrimary: [],
+      assignmentNodeSecondary: []
+    },
+    assignmentType: {
+      assignmentTypePrimary: [],
+      assignmentTypeSecondary: []
+    }
+  }
 };
 
 const AssignmentReducer = (istate = initialState, action) => {
@@ -60,7 +93,7 @@ const AssignmentReducer = (istate = initialState, action) => {
             assignmentsHeaderOneBadgeOne: action.payload,
             assignmentsPopUpType: 'secondary',
             currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
-            secondaryOptionCheckValue: 'active'
+            secondaryOptionCheckValue: action.payload === 'create' ? 'all' : 'active'
           };
         }
       } else {
@@ -118,23 +151,13 @@ const AssignmentReducer = (istate = initialState, action) => {
         ...istate,
         secondaryOptionCheckValue: action.payload
       };
-    case CLEAR_ASSIGNMENT_INFO:
+    case SET_ASSIGNMENT_BASIC_REDUCER_STATE:
       return {
-        assignmentsHeaderOne: '',
-        assignmentsPopUpType: 'primary',
-        currentPopUpOption: '',
-        assignmentsPopUpActive: false,
-        isBackToSectionPopUp: false,
-        assignmentsHeaderOneBadgeOne: '',
-        primaryPopUpOptions: MODULE_POPUP_OPTION,
-        secondaryPopUpOptions: {
-          create: REVIEW_REVISE_POPUP,
-          review: REVIEW_POPUP_OPTIONS,
-          notifications: NOTIFICATION_REPORT_POPUP,
-          reports: NOTIFICATION_REPORT_POPUP
-        },
-        secondaryOptionCheckValue: ''
+        ...istate,
+        informationBasic: action.payload
       };
+    case CLEAR_ASSIGNMENT_INFO:
+      return initialState;
     default:
       return istate;
   }

@@ -46,8 +46,6 @@ function* workerCreateAssesseeSaga(data) {
       userResponse.responseObject[0].informationSetup.assesseeSignInPassword
     );
     console.log('loading end');
-    console.log(Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey);
-    console.log(Store.getState().DisplayPaneTwoReducer.typeOfAssesseeCreate);
     yield put({
       type: SET_DISPLAY_PANE_THREE_STATE,
       payload: {

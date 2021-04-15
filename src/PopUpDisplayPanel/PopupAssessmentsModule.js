@@ -15,6 +15,7 @@ import {
   SET_ASSESSMENT_NEXT_POPUP,
   SET_ASSESSMENT_PREVIOUS_POPUP,
   SET_ASSESSMENT_SECONDARY_OPTION_VALUE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_VALUE,
@@ -37,7 +38,7 @@ const PopupAssessmentsModule = (props) => {
     assessmentsHeaderOneBadgeOne,
     secondaryOptionCheckValue,
     isBackToSectionPopUp
-  } = useSelector((state) => state.assessmentReducer);
+  } = useSelector((state) => state.AssessmentReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
@@ -54,6 +55,10 @@ const PopupAssessmentsModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
       dispatch({ type: CLEAR_ASSESSMENT_INFO });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
+      });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }

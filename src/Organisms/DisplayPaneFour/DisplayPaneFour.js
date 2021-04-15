@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 export const DisplayPaneFour = () => {
   // const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
-  const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
+  const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
   return (
     <>
       <div>

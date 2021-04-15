@@ -13,7 +13,7 @@ import PopUpAssessmentNavigator from '../../PopUpInformation/PopUpAssessmentNavi
 
 export const DisplayPaneFive = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);
-  const { isDisplayPaneFourShow } = useSelector((state) => state.assessmentReducer);
+  const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
   const flagQuestion = () => {
     setIsQuestionFlaged((state) => !state);
   };

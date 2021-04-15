@@ -6,7 +6,7 @@ import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
 import {
   POPUP_CLOSE,
   SET_ASSESSMENT_BASIC_REDUCER_STATE,
-  CLEAR_ASSESSMENT_REDUCER_STATE,
+  CLEAR_ASSESSMENT_INFO,
   CREATE_ASSESSMENT_SAGA
 } from '../../actionType';
 
@@ -14,11 +14,11 @@ const AssessmentCreatePopup = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { informationBasic, informationAllocation } = useSelector(
-    (state) => state.AssessmentCreateReducer
+    (state) => state.AssessmentReducer
   );
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
-    dispatch({ type: CLEAR_ASSESSMENT_REDUCER_STATE });
+    dispatch({ type: CLEAR_ASSESSMENT_INFO });
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {

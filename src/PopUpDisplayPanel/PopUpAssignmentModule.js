@@ -15,8 +15,10 @@ import {
   SET_ASSIGNMENT_NEXT_POPUP,
   SET_ASSIGNMENT_PREVIOUS_POPUP,
   SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
+  SET_POPUP_VALUE,
   SET_PREVIOUS_SECTION_POPUP,
   SET_REQUEST_OBJECT
 } from '../actionType';
@@ -49,7 +51,17 @@ const PopUpAssignmentModule = (props) => {
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    if (targetValue === 'distinct') {
+    if (targetValue === 'information') {
+      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    } else if (targetValue === 'distinct') {
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
       let requestObect = makeAssignmentReviewListRequestObject(
         secondaryOptionCheckValue,
