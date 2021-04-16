@@ -30,8 +30,7 @@ function* workerCreateAssignmentSaga(data) {
         payload: {
           headerOne: 'assignment',
           headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: '',
-          headerOneBadgeThree: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
+          headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
           responseObject: apiResponse.responseObject,
           reviewMode: 'revise',
           createMode: 'assignment'

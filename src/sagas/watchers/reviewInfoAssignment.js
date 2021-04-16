@@ -2,13 +2,13 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
-  GET_ASSIGNMENT_INFO_SAGA
+  GET_ASSESSMENT_INFO_SAGA
 } from '../../actionType';
-import { ASSIGNMENT_REVIEW_INFO_URL } from '../../endpoints';
+import { ASSESSMENT_REVIEW_INFO_URL } from '../../endpoints';
 
-const assignmentReviewInfoApi = async (requestObj) => {
+const assessmentReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSIGNMENT_REVIEW_INFO_URL;
+  let URL = ASSESSMENT_REVIEW_INFO_URL;
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
@@ -18,19 +18,19 @@ const assignmentReviewInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviewInfoAssignmentSaga(data) {
+function* workerReviewInfoAssessmentSaga(data) {
   try {
-    const userResponse = yield call(assignmentReviewInfoApi, { data: data.payload.reqBody });
+    const userResponse = yield call(assessmentReviewInfoApi, { data: data.payload.reqBody });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      console.log('ASSIGNMENT_REVIEW_INFO=======>', userResponse);
+      console.log('ASSESSMENT_REVIEW_INFO=======>', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assignment',
+          headerOne: 'assessment',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject
+          responseObject: userResponse.responseObject[0]
         }
       });
     }
@@ -43,7 +43,6 @@ function* workerReviewInfoAssignmentSaga(data) {
   }
 }
 
-export default function* watchReviewInfoAssignmentSaga() {
-  console.log('IN WATCH ====>');
-  yield takeLatest(GET_ASSIGNMENT_INFO_SAGA, workerReviewInfoAssignmentSaga);
+export default function* watchReviewInfoAssessmentSaga() {
+  yield takeLatest(GET_ASSESSMENT_INFO_SAGA, workerReviewInfoAssessmentSaga);
 }

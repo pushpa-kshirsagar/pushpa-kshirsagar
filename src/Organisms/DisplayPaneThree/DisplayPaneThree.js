@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_SIGN_ON,
+  CLEAR_ASSESSMENT_INFO,
+  CLEAR_ASSIGNMENT_INFO,
   CLEAR_DISPLAY_PANE_THREE,
   NAVIGATOR_MODE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -47,9 +49,24 @@ import DisplayPaneThreeSectionOneAssignmentType from '../../Molecules/DisplayPan
 import DisplayPaneThreeSectionTwoAssignmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssignmentType/DisplayPaneThreeSectionTwoAssignmentType';
 import DisplayPaneThreeSectionOneAssessmentType from '../../Molecules/DisplayPaneThreeSectionOneAssessmentType/DisplayPaneThreeSectionOneAssessmentType';
 import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentType/DisplayPaneThreeSectionTwoAssessmentType';
+import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThreeSectionOneAssignment/DisplayPaneThreeSectionOneAssignment';
+import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThreeSectionTwoAssignment/DisplayPaneThreeSectionTwoAssignment';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
+  const {
+    isReviewRevise = false,
+    headerOne,
+    headerOneBadgeOne,
+    headerOneBadgeTwo,
+    headerOneBadgeThree,
+    responseObject,
+    reviewMode,
+    createMode
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { showMiddlePaneState } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { informationBasic } = responseObject;
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const rightPaneSectionsAssessee = [
     {
       id: 'section1',
@@ -204,6 +221,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssignment = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssignment,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssignment,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const [selectedSection, setSelectedSection] = useState(rightPaneSectionsAssessee[0]);
   const [selectedSectionAssesseeRole, setSelectedSectionAssesseeRole] = useState(
     rightPaneSectionsAssesseeRole[0]
@@ -228,6 +259,9 @@ export const DisplayPaneThree = () => {
   );
   const [selectedSectionAssessment, setSelectedSectionAssessment] = useState(
     rightPaneSectionsAssessment[0]
+  );
+  const [selectedSectionAssignment, setSelectedSectionAssignment] = useState(
+    rightPaneSectionsAssignment[0]
   );
   const [selectedSectionAssociateRole, setSelectedSectionAssociateRole] = useState(
     rightPaneSectionsAssociateRole[0]
@@ -281,6 +315,32 @@ export const DisplayPaneThree = () => {
       }
     });
   };
+  const onClickCreateAssessment = () => {
+    console.log('ON CLICK CREATE ASSESSMENT');
+    dispatch({ type: CLEAR_ASSESSMENT_INFO });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedInformationAllorKey', value: headerOneBadgeTwo }
+    });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+    });
+  };
+
+  const onClickCreateAssignment = () => {
+    console.log('ON CLICK CREATE ASSIGNMENT');
+    dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedInformationAllorKey', value: headerOneBadgeTwo }
+    });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+    });
+  };
+
   const onClickCreateAssesseeGroup = () => {
     console.log('ON CLICK CREATE ASSESSEE GROUP');
     dispatch({
@@ -343,6 +403,12 @@ export const DisplayPaneThree = () => {
   const createAssesseePrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessee, Icon: AddIcon }
   ];
+  const createAssessmentPrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssessment, Icon: AddIcon }
+  ];
+  const createAssignmentPrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssignment, Icon: AddIcon }
+  ];
 
   const createAssesseeGroupPrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssesseeGroup, Icon: AddIcon }
@@ -374,19 +440,6 @@ export const DisplayPaneThree = () => {
     { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
     { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
   ];
-  const {
-    isReviewRevise = false,
-    headerOne,
-    headerOneBadgeOne,
-    headerOneBadgeTwo,
-    headerOneBadgeThree,
-    responseObject,
-    reviewMode,
-    createMode
-  } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { showMiddlePaneState } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationBasic } = responseObject;
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
 
   const onClickClearInfo = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -644,7 +697,7 @@ export const DisplayPaneThree = () => {
         )}
       {isReviewRevise &&
         responseObject &&
-        headerOne === 'assessments' &&
+        headerOne === 'assessment' &&
         headerOneBadgeOne === 'information' && (
           <>
             <div style={{ padding: '2.5px' }}>
@@ -668,6 +721,70 @@ export const DisplayPaneThree = () => {
                 setSelectedSection={setSelectedSectionAssessment}
               />
             </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assessment' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssessment}
+                primaryIcon={createAssessmentPrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assignment' &&
+        headerOneBadgeOne === 'information' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.assignmentName || 'No Information'}
+                  textOneTwo={informationBasic.assignmentDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssignment}
+                selectedSection={selectedSectionAssignment}
+                setSelectedSection={setSelectedSectionAssignment}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assignment' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssignment}
+                primaryIcon={createAssignmentPrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
           </>
         )}
       {isReviewRevise &&

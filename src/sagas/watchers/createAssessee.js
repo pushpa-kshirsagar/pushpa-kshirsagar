@@ -57,7 +57,7 @@ function* workerCreateAssesseeSaga(data) {
         createMode: 'assessee'
       }
     });
-    
+
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     yield put({ type: LOADER_STOP });
   } catch (e) {

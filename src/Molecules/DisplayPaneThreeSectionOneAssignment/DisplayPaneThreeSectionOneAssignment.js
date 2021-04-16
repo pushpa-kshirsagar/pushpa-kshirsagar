@@ -7,7 +7,7 @@ import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 
-const DisplayPaneThreeSectionOneAssessment = () => {
+const DisplayPaneThreeSectionOneAssignment = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
@@ -19,34 +19,6 @@ const DisplayPaneThreeSectionOneAssessment = () => {
   }
 
   const list1 = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'author',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      isListCard: true,
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'author',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'author',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'author',
-          status: ''
-        }
-      ],
-      innerInfo: 'assessment'
-    },
     {
       id: 'a2',
       labelTextOneOne: 'collaborator',
@@ -221,7 +193,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
     },
     {
       id: 'a2',
-      textOneOne: capitalizeFirstLetter(informationEngagement.assessmentStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement.assignmentStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -233,11 +205,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationEngagement.assessmentTag.assessmentTagPrimary || 'No Information'
+          textOne: informationEngagement.assignmentTag.assignmentTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationEngagement.assessmentTag.assessmentTagSecondary || 'No Information'
+          textOne: informationEngagement.assignmentTag.assignmentTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -250,11 +222,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement.assignmentTenureDate || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement.assignmentTenureDate || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -266,7 +238,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
   const list6 = [
     {
       id: 'a2',
-      textOneOne: capitalizeFirstLetter(informationEngagement.assessmentStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement.assignmentStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -278,11 +250,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationEngagement.assessmentTag.assessmentTagPrimary || 'No Information'
+          textOne: informationEngagement.assignmentTag.assignmentTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationEngagement.assessmentTag.assessmentTagSecondary || 'No Information'
+          textOne: informationEngagement.assignmentTag.assignmentTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -295,11 +267,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement.assignmentTenureDate || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement.assignmentTenureDate || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -412,4 +384,4 @@ const DisplayPaneThreeSectionOneAssessment = () => {
   );
 };
 
-export default DisplayPaneThreeSectionOneAssessment;
+export default DisplayPaneThreeSectionOneAssignment;
