@@ -6,6 +6,7 @@ import {
   FILTERMODE_ENABLE,
   LOADER_START,
   POPUP_OPEN,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT
@@ -132,6 +133,10 @@ const AssesseeDistinctReviewList = (props) => {
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneListPopupOptions', value: ASSESSEE_REVIEW_LIST_POPUP_OPTION }
+    });
   };
 
   return (

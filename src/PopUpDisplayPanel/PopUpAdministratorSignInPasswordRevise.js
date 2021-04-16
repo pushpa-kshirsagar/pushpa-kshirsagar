@@ -16,12 +16,12 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
     headerOneBadgeTwo = '',
     onClick,
     onClose,
-    currentPassword,
-    currentPasswordError,
-    setCurrentPassword,
-    revisedPassword,
-    revisedPasswordError,
-    setRevisedPassword,
+    oldPassword,
+    oldPasswordError,
+    setOldPassword,
+    newPassword,
+    newPasswordError,
+    setNewPassword,
     confirmRevisedPassword,
     confirmRevisedPasswordError,
     setConfirmRevisedPassword
@@ -56,22 +56,22 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
           <FormControl style={{ width: '100%' }}>
             <InputField
               id={'current password'}
-              value={currentPassword}
+              value={oldPassword}
               label={'current password'}
               type="password"
-              errorMsg={currentPasswordError}
+              errorMsg={oldPasswordError}
               onClick={(e) => {
-                setCurrentPassword(e.target.value);
+                setOldPassword(e.target.value);
               }}
             />
             <InputField
               id={'revised password'}
-              value={revisedPassword}
+              value={newPassword}
               type="password"
               label={'revised password'}
-              errorMsg={revisedPasswordError}
+              errorMsg={newPasswordError}
               onClick={(e) => {
-                setRevisedPassword(e.target.value);
+                setNewPassword(e.target.value);
               }}
             />
             <InputField

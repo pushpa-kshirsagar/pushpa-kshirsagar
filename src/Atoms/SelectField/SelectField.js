@@ -35,19 +35,25 @@ export const SelectField = (props) => {
           data-value={dataValue}
           className={'selectFontAlign'}
         >
-          {listSelect.map((option, index) =>
-            option === 'divider' ? (
-              <Divider light />
-            ) : (
-              <MenuItem
-                key={`${tag}-${index}`}
-                value={option[mappingValue]}
-                className={'selectMenu'}
-              >
-                {option.name}
-              </MenuItem>
-            )
-          )}
+          {mappingValue
+            ? listSelect.map((option, index) =>
+                option === 'divider' ? (
+                  <Divider light />
+                ) : (
+                  <MenuItem
+                    key={`${tag}-${index}`}
+                    value={option[mappingValue]}
+                    className={'selectMenu'}
+                  >
+                    {option.name}
+                  </MenuItem>
+                )
+              )
+            : listSelect.map((option, index) => (
+                <MenuItem key={`${tag}-${index}`} value={option} className={'selectMenu'}>
+                  {option}
+                </MenuItem>
+              ))}
         </Select>
       </FormControl>
       <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>

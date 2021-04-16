@@ -8,13 +8,14 @@ import {
   POPUP_OPEN,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
-  SET_REQUEST_OBJECT
+  SET_REQUEST_OBJECT,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssignmentGroupObj } from '../Actions/GenericActions';
-import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 const AssignmentGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -106,8 +107,15 @@ const AssignmentGroupReviewList = (props) => {
         popupHeaderOneBadgeTwo: 'group',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
+      }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: {
+        stateName: 'middlePaneListPopupOptions',
+        value: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

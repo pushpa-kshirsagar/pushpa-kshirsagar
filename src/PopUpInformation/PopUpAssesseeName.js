@@ -105,7 +105,7 @@ const PopUpAssesseeName = (props) => {
               { name: ' ' },
               { name: 'Dr.' },
               { name: 'Dr. (Mrs.)' },
-              { name: 'Mr' },
+              { name: 'Mr.' },
               { name: 'Mrs.' },
               { name: 'Ms.' },
               { name: 'Prof.' },

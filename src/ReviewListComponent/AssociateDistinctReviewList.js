@@ -130,6 +130,13 @@ const AssociateDistinctReviewList = (props) => {
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: {
+        stateName: 'middlePaneListPopupOptions',
+        value: ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+      }
+    });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   const openAssociateRightPaneInformation = () => {

@@ -7,6 +7,7 @@ import {
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_OPEN,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT
@@ -110,6 +111,13 @@ const AssignmentTypeReviewList = (props) => {
         popupOpenType: 'primary',
         popupContentArrValue: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
+      }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: {
+        stateName: 'middlePaneListPopupOptions',
+        value: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

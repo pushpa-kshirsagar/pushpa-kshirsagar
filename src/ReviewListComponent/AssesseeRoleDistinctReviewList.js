@@ -7,6 +7,7 @@ import {
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_OPEN,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT
@@ -83,7 +84,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
         BadgeOne: middlePaneHeaderBadgeOne,
         BadgeTwo: siftKey,
         BadgeThree: '',
-        isMiddlePaneList:true
+        isMiddlePaneList: true
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
@@ -112,6 +113,13 @@ const AssesseeRoleDistinctReviewList = (props) => {
         popupOpenType: 'primary',
         popupContentArrValue: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
+      }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: {
+        stateName: 'middlePaneListPopupOptions',
+        value: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

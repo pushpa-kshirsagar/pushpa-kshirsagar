@@ -6,7 +6,15 @@ import PopUpWhiteHeader from '../Molecules/PopUp/PopUpWhiteHeader';
 import Label from '../Atoms/Labels/Label';
 
 const PopUpAssociateAssent = (props) => {
-  const { isActive, headerPanelColour, headerOne, headerOneBadgeOne, onClick, onClose } = props;
+  const {
+    isActive,
+    headerPanelColour,
+    headerOne,
+    headerOneBadgeOne,
+    onClick,
+    onClose,
+    associateText = ''
+  } = props;
 
   return (
     <div>
@@ -30,8 +38,9 @@ const PopUpAssociateAssent = (props) => {
               boxSizing: 'border-box'
             }}
             id="dialog-description"
+            dangerouslySetInnerHTML={{ __html: associateText }}
           >
-            <Label
+            {/*<Label
               text="Terms of Use"
               fontSize="1.6rem"
               colour="rgba(0, 0, 0, 0.87)"
@@ -244,7 +253,7 @@ const PopUpAssociateAssent = (props) => {
             <Label text="Mumbai 400054 | India" fontSize="1.2rem" colour="rgba(0, 0, 0, 0.87)" />
             <br />
             <Label text="P: +91.9821056706" fontSize="1.2rem" colour="rgba(0, 0, 0, 0.87)" />
-            <br />
+            <br />*/}
           </div>
         </DialogContent>
       </Popup>

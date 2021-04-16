@@ -16,7 +16,7 @@ import {
   SET_SCAN_POPUP_STATE
 } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
-import { TRIPPLE_DOT_POPUP_OPTION, LEFT_TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
+import { ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION, LEFT_TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
 const HeaderCard = (props) => {
   const {
     headerOne = '',
@@ -35,7 +35,8 @@ const HeaderCard = (props) => {
     typeOfMiddlePaneList,
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
-    middlePaneSelectedValue
+    middlePaneSelectedValue,
+    middlePaneListPopupOptions
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     headerOne: rightPaneHeaderOne,
@@ -59,6 +60,7 @@ const HeaderCard = (props) => {
     });
   };
   const openMiddlePaneTripleDotPopup = () => {
+    let optArr = ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION;
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -67,7 +69,7 @@ const HeaderCard = (props) => {
           middlePaneHeaderBadgeOne === 'distinct' ? '' : middlePaneHeaderBadgeOne,
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: TRIPPLE_DOT_POPUP_OPTION
+        popupContentArrValue: optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -93,7 +95,7 @@ const HeaderCard = (props) => {
         popupHeaderOneBadgeOne: rightPaneBadgeOne === 'information' ? '' : rightPaneBadgeOne,
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: primaryArrOprion,
+        popupContentArrValue: middlePaneListPopupOptions,
         selectedTagValue: middlePaneSelectedValue
       }
     });

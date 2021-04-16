@@ -115,7 +115,7 @@ function* workerCreateAssociateSaga(data) {
     // };
     const userResponse = yield call(createAssociateApi, { data: data.payload });
     console.log(userResponse);
-    console.log("userResponse");
+    console.log('userResponse');
     if (userResponse.responseCode === '000')
       yield put({ type: SET_ASSOCIATE_INFORMATION, payload: userResponse.associate });
     // let obj = {
@@ -127,22 +127,22 @@ function* workerCreateAssociateSaga(data) {
 
     // const assesseeRes = yield call(createAssesseeApi, { data: obj });
     // if (assesseeRes.responseCode === '000') {
-    let validEmail =
-      userResponse.assessee.informationContact.assesseeAddressEmailPrimary
-        .assesseeAddressEmail;
-    if (
-      userResponse.assessee.informationContact.assesseeAddressEmailSecondary
-        .assesseeAddressEmailCommunication
-    ) {
-      validEmail =
-        userResponse.assessee.informationContact.assesseeAddressEmailSecondary
-          .assesseeAddressEmail;
-    }
-    signUpForAwsCognito(
-      validEmail,
-      userResponse.assessee.informationSetup.assesseeSignInCredential,
-      userResponse.assessee.informationSetup.assesseeSignInPassword
-    );
+    // let validEmail =
+    //   userResponse.assessee.informationContact.assesseeAddressEmailPrimary
+    //     .assesseeAddressEmail;
+    // if (
+    //   userResponse.assessee.informationContact.assesseeAddressEmailSecondary
+    //     .assesseeAddressEmailCommunication
+    // ) {
+    //   validEmail =
+    //     userResponse.assessee.informationContact.assesseeAddressEmailSecondary
+    //       .assesseeAddressEmail;
+    // }
+    // signUpForAwsCognito(
+    //   validEmail,
+    //   userResponse.assessee.informationSetup.assesseeSignInCredential,
+    //   userResponse.assessee.informationSetup.assesseeSignInPassword
+    // );
 
     //   yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject }); //set asessee data
     // }
@@ -162,7 +162,6 @@ function* workerCreateAssociateSaga(data) {
     yield put({ type: CLEAR_ASSOCIATE_INFO });
     yield put({ type: POPUP_CLOSE });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
