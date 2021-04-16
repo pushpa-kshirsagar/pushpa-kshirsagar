@@ -132,7 +132,7 @@ const AssessmentGroupReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assessmentGroupDistinctinactive' && (
+      {FilterMode === 'assessmentsGroupDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

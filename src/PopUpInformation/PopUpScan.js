@@ -170,7 +170,7 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
-      if (typeOfMiddlePaneList === 'assesseeGroupDistinctReviewList') {
+      if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
         let requestObect = makeAssesseeGroupScanRequestObject(
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
@@ -404,7 +404,7 @@ const PopUpScan = (props) => {
               style={{ paddingLeft: '5px' }}
             >
               {(isPopUpValue === 'assesseeRoleDistinctReviewList' ||
-                isPopUpValue === 'assesseeGroupDistinctReviewList' ||
+                isPopUpValue === 'assesseesGroupDistinctReviewList' ||
                 isPopUpValue === 'assessmentsGroupDistinctReviewList' ||
                 isPopUpValue === 'assignmentsGroupDistinctReviewList' ||
                 isPopUpValue === 'associatesGroupDistinctReviewList' ||

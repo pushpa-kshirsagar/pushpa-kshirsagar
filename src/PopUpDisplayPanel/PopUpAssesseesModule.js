@@ -124,7 +124,7 @@ const PopUpAssesseesModule = (props) => {
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,
-        payload: { FilterMode: 'assesseeGroupDistinct' + secondaryOptionCheckValue }
+        payload: { FilterMode: 'assesseesGroupDistinct' + secondaryOptionCheckValue }
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
