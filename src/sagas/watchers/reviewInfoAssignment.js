@@ -44,6 +44,5 @@ function* workerReviewInfoAssessmentSaga(data) {
 }
 
 export default function* watchReviewInfoAssessmentSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(GET_ASSESSMENT_INFO_SAGA, workerReviewInfoAssessmentSaga);
 }
