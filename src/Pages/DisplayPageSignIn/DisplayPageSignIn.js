@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import SendIcon from '@material-ui/icons/Send';
 import iGuruLogo from '../../images/iglogo1.png';
@@ -14,6 +14,8 @@ import {
   INFORMATION_MISMATCHED_ERROR_MESSAGE,
   REQUIRED_ERROR_MESSAGE
 } from '../../errorMessage';
+import { useDispatch, useSelector } from 'react-redux';
+import { ASSESSEE_SIGN_IN_SAGA, SET_SIGN_IN_STATUS } from '../../actionType';
 
 const DisplayPageSignIn = () => {
   const bgImg = './Image/bg.jpg';
@@ -38,23 +40,44 @@ const DisplayPageSignIn = () => {
   const [revisedPasswordError, setRevisedPasswordError] = useState('');
   const [confirmRevisedPassword, setConfirmRevisedPassword] = useState('');
   const [confirmRevisedPasswordError, setConfirmRevisedPasswordError] = useState('');
+  const dispatch = useDispatch();
+  const { assesseeSignInStatus } = useSelector((state) => state.UserReducer);
+
+  useEffect(() => {
+    if (assesseeSignInStatus === 'success') {
+      setIsCredentialsInValid('');
+      let path = `/dashboard`;
+      history.push(path);
+      dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
+    }
+    if (assesseeSignInStatus === 'error') {
+      setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
+    }
+  }, [assesseeSignInStatus, history]);
 
   const onClickSignIn = () => {
     setIsCredentialsInValid('in progress');
     if (userName && password) {
       setIsPasswordValid('');
       setIsUserNameValid('');
-      authenticate(userName, password)
-        .then((data) => {
-          setIsCredentialsInValid('');
-          console.log('OnSuccess===>', data);
-          let path = `/dashboard`;
-          history.push(path);
-        })
-        .catch((err) => {
-          setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
-          console.log('onFailure===>', err);
-        });
+      dispatch({
+        type: ASSESSEE_SIGN_IN_SAGA,
+        payload: {
+          credential: userName, // "607888f3226fc201a533a924",
+          password: password //"NG36#:dqMO"
+        }
+      });
+      // authenticate(userName, password)
+      //   .then((data) => {
+      //     setIsCredentialsInValid('');
+      //     console.log('OnSuccess===>', data);
+      //     let path = `/dashboard`;
+      //     history.push(path);
+      //   })
+      //   .catch((err) => {
+      //     setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
+      //     console.log('onFailure===>', err);
+      //   });
     } else {
       setIsCredentialsInValid('');
       if (userName === '') {

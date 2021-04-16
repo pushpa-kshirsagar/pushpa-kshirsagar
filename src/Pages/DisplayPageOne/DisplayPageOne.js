@@ -67,19 +67,21 @@ const DisplayPageOne = () => {
   //     });
   // };
 
-  useEffect(() => {
-    dispatch({ type: GET_USER_SAGA });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch({ type: GET_USER_SAGA });
+  // }, [dispatch]);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
 
-  const userName =
-    selectedAssociateInfo &&
-    selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
-      ' ' +
-      selectedAssociateInfo.assesseeInformation.assesseeNameLast;
-  const userEmail =
-    selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
+  // const userName =
+  //   selectedAssociateInfo &&
+  //   selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
+  //     ' ' +
+  //     selectedAssociateInfo.assesseeInformation.assesseeNameLast;
+  // const userEmail =
+    // selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
+  const userName = 'Simple Sample';
+  const userEmail = 'simple.sample.junior.primary@insightguru.com';
   const popupAllClose = () => {
     dispatch({ type: CLEAR_ASSESSEE_INFO });
     dispatch({ type: CLEAR_ASSESSMENT_INFO });
