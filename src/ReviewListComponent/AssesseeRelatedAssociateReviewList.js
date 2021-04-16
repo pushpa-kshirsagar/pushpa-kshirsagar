@@ -7,6 +7,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 const AssesseeRelatedAssociateReviewList = (props) => {
   const { userData } = useSelector((state) => state.UserReducer);
   const dispatch = useDispatch();
+  console.log('IN USER DATA++++++>', userData);
   const onClickReviewList = (e) => {
     dispatch({
       type: SET_SELECTED_ASSOCIATE,
@@ -37,12 +38,10 @@ const AssesseeRelatedAssociateReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item.associateInformation.associateTag.associateTagPrimary}
-                status={
-                  item.associateInformation.associateStatus === 'VERIFIED' ? 'active' : 'inactive'
-                }
-                textOne={item.associateInformation.associateName}
-                textTwo={item.associateInformation.associateDescription}
+                tag={item.associate.informationEngagement.associateTag.associateTagPrimary}
+                status={item.associate.informationEngagement.associateStatus}
+                textOne={item.associate.informationBasic.associateName}
+                textTwo={item.associate.informationBasic.associateDescription}
                 isTooltipActive={false}
                 onClickEvent={onClickReviewList}
               />

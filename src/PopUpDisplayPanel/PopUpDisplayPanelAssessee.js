@@ -145,7 +145,9 @@ const PopUpDisplayPanelAssessee = (props) => {
       //sign out
       let path = `/signIn`;
       history.push(path);
-      signOut();
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      // signOut();
     }
     dispatch({
       type: SET_POPUP_STATE,

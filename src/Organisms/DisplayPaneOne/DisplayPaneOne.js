@@ -67,17 +67,23 @@ export const DisplayPaneOne = () => {
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission = null } = useSelector((state) => state.UserReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const associateName = selectedAssociateInfo
-    ? selectedAssociateInfo.associateInformation.associateName
-    : 'associates';
-  const associateDescription =
-    selectedAssociateInfo && selectedAssociateInfo.associateInformation.associateDescription;
-  const assesseeAlias =
-    selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeAlias;
+  // const associateName = selectedAssociateInfo
+  //   ? selectedAssociateInfo.associate.associateName.informationBasic
+  //   : 'associates';
+  // const associateDescription =
+  //   selectedAssociateInfo && selectedAssociateInfo.associate.informationBasic.associateDescription;
+  const associateName = selectedAssociateInfo ? 'updatedAssociate' : 'associates';
+  const associateDescription = 'associate';
+  // const assesseeAlias =
+  //   selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeAlias;
+  // const assesseeName = selectedAssociateInfo
+  //   ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
+  //     ' ' +
+  //     selectedAssociateInfo.assesseeInformation.assesseeNameLast
+  //   : 'simple.sample.junior.primary@insightguru.com';
+  const assesseeAlias = '';
   const assesseeName = selectedAssociateInfo
-    ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
-      ' ' +
-      selectedAssociateInfo.assesseeInformation.assesseeNameLast
+    ? 'Simple Sample'
     : 'simple.sample.junior.primary@insightguru.com';
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
@@ -148,11 +154,7 @@ export const DisplayPaneOne = () => {
             ImageOne={selectedAssociateInfo ? PersonIcon : null}
             textOneOne={assesseeName}
             textTwoOne={assesseeAlias}
-            onClick={
-              selectedAssociateInfo && selectedAssociateInfo.assesseeInformation
-                ? openCardPopup
-                : null
-            }
+            onClick={selectedAssociateInfo && selectedAssociateInfo ? openCardPopup : null}
             tag={selectedAssociateInfo ? 'assessee_card' : 'assessee'}
           />
         </div>

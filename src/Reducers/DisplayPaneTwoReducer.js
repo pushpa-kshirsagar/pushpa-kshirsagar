@@ -37,7 +37,8 @@ const initialState = {
   middlePaneSelectedValue: '',
   selectedInformationAllorKey: '',
   typeOfAssesseeCreate: '',
-  middlePaneListPopupOptions: []
+  middlePaneListPopupOptions: [],
+  signInRes: ''
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {
