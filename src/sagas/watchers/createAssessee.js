@@ -24,27 +24,10 @@ const createAssesseeApi = async (requestObj) => {
 function* workerCreateAssesseeSaga(data) {
   try {
     const userResponse = yield call(createAssesseeApi, { data: data.payload });
-    let validEmail = '';
     console.log('IN WORKER ====>', userResponse);
     console.log('IN WORKER ====>', JSON.stringify(userResponse));
     if (userResponse.responseCode === '000')
       yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject[0] });
-    // validEmail =
-    //   userResponse.responseObject[0].informationContact.assesseeAddressEmailPrimary
-    //     .assesseeAddressEmail;
-    // if (
-    //   userResponse.responseObject[0].informationContact.assesseeAddressEmailSecondary
-    //     .assesseeAddressEmailCommunication
-    // ) {
-    //   validEmail =
-    //     userResponse.responseObject[0].informationContact.assesseeAddressEmailSecondary
-    //       .assesseeAddressEmail;
-    // }
-    // signUpForAwsCognito(
-    //   validEmail,
-    //   userResponse.responseObject[0].informationSetup.assesseeSignInCredential,
-    //   userResponse.responseObject[0].informationSetup.assesseeSignInPassword
-    // );
     console.log('loading end');
     yield put({
       type: SET_DISPLAY_PANE_THREE_STATE,

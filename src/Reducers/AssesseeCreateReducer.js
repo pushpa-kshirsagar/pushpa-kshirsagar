@@ -120,9 +120,6 @@ const initialState = {
 };
 
 const AssesseeCreateReducer = (istate = initialState, action) => {
-  console.log(action.payload);
-  console.log('AssesseeCreateReducer');
-
   switch (action.type) {
     case ASSESSEE_POPUP_OPEN:
       return {

@@ -24,7 +24,10 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
     setNewPassword,
     confirmRevisedPassword,
     confirmRevisedPasswordError,
-    setConfirmRevisedPassword
+    setConfirmRevisedPassword,
+    setConfirmRevisedPasswordError,
+    setNewPasswordError,
+    setOldPasswordError
   } = props;
 
   return (
@@ -61,7 +64,8 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
               type="password"
               errorMsg={oldPasswordError}
               onClick={(e) => {
-                setOldPassword(e.target.value);
+                setOldPassword(e.target.value)
+                setOldPasswordError('');
               }}
             />
             <InputField
@@ -71,7 +75,8 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
               label={'revised password'}
               errorMsg={newPasswordError}
               onClick={(e) => {
-                setNewPassword(e.target.value);
+                setNewPassword(e.target.value)
+                setNewPasswordError('');
               }}
             />
             <InputField
@@ -81,7 +86,8 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
               label={'revised password'}
               errorMsg={confirmRevisedPasswordError}
               onClick={(e) => {
-                setConfirmRevisedPassword(e.target.value);
+                setConfirmRevisedPassword(e.target.value)
+                setConfirmRevisedPasswordError('');
               }}
             />
           </FormControl>

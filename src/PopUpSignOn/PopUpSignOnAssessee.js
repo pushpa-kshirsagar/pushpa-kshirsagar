@@ -86,7 +86,7 @@ const PopUpSignOnAssessee = (props) => {
     }
     let requestObect = {
       assesseeId: '0123456',
-      associateId: '0654321',
+      associateId: '6079adeed537e0158ebc9551',
       associateName: 'Boppo Technologies',
       assessee: {
         informationBasic: informationBasic,

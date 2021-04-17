@@ -52,6 +52,7 @@ const DisplayPageSignIn = () => {
     }
     if (assesseeSignInStatus === 'error') {
       setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
+      dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
     }
   }, [assesseeSignInStatus, history]);
 

@@ -87,4 +87,5 @@ export const ASSESSMENT_REVIEW_TYPE_URL =
   'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-type/review';
 export const ASSESSEE_SIGN_IN_URL =
   'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/cognito-sign-in';
+export const CONFIRM_ASSESSEE_URL = 'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/update-sign-in-info';
 // export const URL = '';

@@ -25,14 +25,9 @@ import PopUpAssesseesModule from '../../PopUpDisplayPanel/PopUpAssesseesModule';
 import PopUpAssociatesModule from '../../PopUpDisplayPanel/PopUpAssociatesModule';
 import PopupAssessmentsModule from '../../PopUpDisplayPanel/PopupAssessmentsModule';
 import PopUpAssignmentModule from '../../PopUpDisplayPanel/PopUpAssignmentModule';
-import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
-import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 // import PopUpScan from '../../PopUpInformation/PopUpScan';
 import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
-import AssesseeRoleCreatePopUp from '../../Molecules/PopUpCreate/AssesseeRoleCreatePopUp';
-import AssociateRoleCreatePopup from '../../Molecules/PopUpCreate/AssociateRoleCreatePopup';
-import AllGroupCreatePopup from '../../Molecules/PopUpCreate/AllGroupCreatePopup';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -64,27 +59,25 @@ export const DisplayPaneOne = () => {
   ];
   const [selectedSection, setSelectedSection] = useState(leftPaneSections[0]);
   const dispatch = useDispatch();
-  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
-  const { userData, assesseePermission = null } = useSelector((state) => state.UserReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  // const associateName = selectedAssociateInfo
-  //   ? selectedAssociateInfo.associate.associateName.informationBasic
-  //   : 'associates';
-  // const associateDescription =
-  //   selectedAssociateInfo && selectedAssociateInfo.associate.informationBasic.associateDescription;
-  const associateName = selectedAssociateInfo ? 'updatedAssociate' : 'associates';
-  const associateDescription = 'associate';
-  // const assesseeAlias =
-  //   selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeAlias;
-  // const assesseeName = selectedAssociateInfo
-  //   ? selectedAssociateInfo.assesseeInformation.assesseeNameFirst +
-  //     ' ' +
-  //     selectedAssociateInfo.assesseeInformation.assesseeNameLast
-  //   : 'simple.sample.junior.primary@insightguru.com';
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { userData, assesseePermission = null, loginUserName } = useSelector(
+    (state) => state.UserReducer
+  );
+  const { selectedAssociateInfo, leftPaneAssesseeInfo } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
+  const associateName = selectedAssociateInfo
+    ? selectedAssociateInfo?.associate.informationBasic.associateName
+    : 'associates';
+  const associateDescription = selectedAssociateInfo
+    ? selectedAssociateInfo?.associate.informationBasic.associateDescription
+    : '';
   const assesseeAlias = '';
-  const assesseeName = selectedAssociateInfo
-    ? 'Simple Sample'
-    : 'simple.sample.junior.primary@insightguru.com';
+  const assesseeName = leftPaneAssesseeInfo
+    ? leftPaneAssesseeInfo.informationBasic.assesseeNameFirst +
+      ' ' +
+      leftPaneAssesseeInfo.informationBasic.assesseeNameLast
+    : loginUserName;
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';

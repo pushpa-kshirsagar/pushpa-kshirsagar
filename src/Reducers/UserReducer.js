@@ -1,9 +1,16 @@
-import { SET_ASSESSEE_PERMISSION, SET_USER, SET_SIGN_IN_STATUS } from '../actionType';
+import {
+  SET_ASSESSEE_PERMISSION,
+  SET_USER,
+  SET_SIGN_IN_STATUS,
+  SET_USER_STATE
+} from '../actionType';
 
 const initialState = {
   userData: null,
   assesseeSignInStatus: '',
-  assesseePermission: ''
+  assesseeConfirmStatus: '',
+  assesseePermission: '',
+  loginUserName: ''
 };
 
 const UserReducer = (istate = initialState, action) => {
@@ -17,6 +24,11 @@ const UserReducer = (istate = initialState, action) => {
       return {
         ...istate,
         assesseeSignInStatus: action.payload || ''
+      };
+    case SET_USER_STATE:
+      return {
+        ...istate,
+        [action.payload.stateName]: action.payload.value || ''
       };
     case SET_ASSESSEE_PERMISSION:
       return {

@@ -34,7 +34,7 @@ import AssessmentCreatePopup from '../../Molecules/PopUpCreate/AssessmentCreateP
 // import { useHistory } from 'react-router-dom';
 
 const DisplayPageOne = () => {
-  // const { userData = null } = useSelector((state) => state.userReducer);
+  const { loginUserName } = useSelector((state) => state.UserReducer);
   const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
   const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
@@ -70,7 +70,7 @@ const DisplayPageOne = () => {
   // useEffect(() => {
   //   dispatch({ type: GET_USER_SAGA });
   // }, [dispatch]);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo,leftPaneAssesseeInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
 
   // const userName =
@@ -80,8 +80,8 @@ const DisplayPageOne = () => {
   //     selectedAssociateInfo.assesseeInformation.assesseeNameLast;
   // const userEmail =
     // selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
-  const userName = 'Simple Sample';
-  const userEmail = 'simple.sample.junior.primary@insightguru.com';
+  const userName = leftPaneAssesseeInfo?leftPaneAssesseeInfo.informationBasic.assesseeNameFirst+' '+leftPaneAssesseeInfo.informationBasic.assesseeNameLast:'';
+  const userEmail = loginUserName?loginUserName:'' ;
   const popupAllClose = () => {
     dispatch({ type: CLEAR_ASSESSEE_INFO });
     dispatch({ type: CLEAR_ASSESSMENT_INFO });

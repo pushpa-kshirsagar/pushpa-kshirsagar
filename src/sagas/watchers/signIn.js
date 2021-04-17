@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { LOADER_STOP, ASSESSEE_SIGN_IN_SAGA, SET_SIGN_IN_STATUS, SET_SELECTED_ASSOCIATE, SET_ASSESSEE_PERMISSION, SET_USER, SET_DISPLAY_TWO_SINGLE_STATE } from '../../actionType';
+import { LOADER_STOP, ASSESSEE_SIGN_IN_SAGA, SET_SIGN_IN_STATUS, SET_SELECTED_ASSOCIATE, SET_ASSESSEE_PERMISSION, SET_USER, SET_DISPLAY_TWO_SINGLE_STATE, SET_USER_STATE, SET_MIDDLEPANE_STATE, CLEAR_DISPLAY_PANE_THREE } from '../../actionType';
 import { ASSESSEE_SIGN_IN_URL } from '../../endpoints';
 
 const assesseeSignInApi = async (requestObj) => {
@@ -27,12 +27,30 @@ function* workerSignInAssesseeSaga(data) {
       );
       yield put({ type: SET_USER, payload: userResponse?.responseObject?.signInResponse });
       yield put({
+        type: SET_USER_STATE,
+        payload: { stateName: 'loginUserName', value: data.payload.credential }
+      });
+      yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: {
           stateName: 'signInRes',
           value: userResponse?.responseObject
         }
       });
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: '',
+          middlePaneHeaderBadgeOne: '',
+          middlePaneHeaderBadgeTwo: '',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: '',
+          scanCount: null,
+          showMiddlePaneState: false
+        }
+      });
+      yield put({ type: CLEAR_DISPLAY_PANE_THREE });
       yield put({
         type: SET_SELECTED_ASSOCIATE,
         payload: ''
@@ -42,7 +60,8 @@ function* workerSignInAssesseeSaga(data) {
         payload: ''
       });
       yield put({ type: SET_SIGN_IN_STATUS, payload: 'success' });
-    } else {
+    }
+    else {
       yield put({ type: SET_SIGN_IN_STATUS, payload: 'error' });
     }
   } catch (e) {
