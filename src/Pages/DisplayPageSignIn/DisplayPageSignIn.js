@@ -50,6 +50,12 @@ const DisplayPageSignIn = () => {
       history.push(path);
       dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
     }
+    if (assesseeSignInStatus === 'confirmUSer') {
+      setIsCredentialsInValid('');
+      let path = '/confirm/'+userName;
+      history.push(path);
+      dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
+    }
     if (assesseeSignInStatus === 'error') {
       setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
       dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
