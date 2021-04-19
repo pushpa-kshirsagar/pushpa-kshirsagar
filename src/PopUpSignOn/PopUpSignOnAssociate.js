@@ -31,6 +31,8 @@ const PopUpSignOnAssociate = () => {
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const informationContact = assesseeInfo.informationContact;
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+
   const history = useHistory();
   console.log(associateInfo);
   console.log('==================');
@@ -67,8 +69,10 @@ const PopUpSignOnAssociate = () => {
       assesseeContactObj.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
     let requestObect = {
-      assesseeId: '0123456',
-      associateId: '605091f81edc573048fb467a',
+      assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
+        '605091f81edc573048fb467a',
       associate: {
         informationBasic: associateInfo.informationBasic,
         informationAllocation: associateInfo.informationAllocation,
@@ -79,7 +83,7 @@ const PopUpSignOnAssociate = () => {
         informationAllocation: informationAllocation,
         informationContact: informationContact,
         // informationEngagement: informationEngagement,
-        informationPersonal: informationPersonal,
+        informationPersonal: informationPersonal
         // informationSetup: informationSetup
       }
     };

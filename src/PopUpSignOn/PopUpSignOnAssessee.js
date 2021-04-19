@@ -23,36 +23,23 @@ import {
   CREATE_ASSESSEE_SAGA,
   LOADER_START,
   ASSESSEE_INFO_CREATE,
-  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   SET_ASSESSEE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
-import { makeAssesseeRoleObj } from '../Actions/GenericActions';
 
 const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
-  const { coreReviewListReqObj } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { coreGroupReviewListData, selectedAssociateInfo } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const informationContact = assesseeInfo.informationContact;
 
   const dispatch = useDispatch();
   const history = useHistory();
-  // let reviseRoleArr = [];
-  useEffect(() => {
-    let requestObj = makeAssesseeRoleObj('active');
-    dispatch({
-      type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-      payload: {
-        request: requestObj,
-        BadgeOne: '',
-        BadgeTwo: '',
-        isMiddlePaneList: false
-      }
-    });
-  }, []);
   useEffect(() => {
     console.log(popupMode);
     console.log(assesseeInfo.assesseeInformationData);
@@ -84,10 +71,26 @@ const PopUpSignOnAssessee = (props) => {
     if (tempCommunication === 'email address (secondary)') {
       informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
+    let dummyassoInfo = {
+      id:  selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
+        '60781fb0eba001142b091eeb',
+      associateAssent: true,
+      informationBasic: {
+        associateName: 'Sample Assocaite',
+        associateNameVerification: false,
+        associateDescription: '',
+        associatePicture: '',
+        associatePictureVerification: false,
+        associateFlag: false
+      },
+      informationSetup: null
+    };
     let requestObect = {
-      assesseeId: '0123456',
-      associateId: '6079adeed537e0158ebc9551',
-      associateName: 'Boppo Technologies',
+      assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
+        '60781fb0eba001142b091eeb',
+      associateName: selectedAssociateInfo?.associate?.informationBasic.associateName,
       assessee: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,
@@ -96,44 +99,7 @@ const PopUpSignOnAssessee = (props) => {
         informationEngagement: informationEngagement,
         informationSetup: informationSetup
       },
-      associate: {
-        id: '0654321',
-        informationBasic: {
-          associateName: 'dsada',
-          associateNameVerification: false,
-          associateDescription: 'asd',
-          associatePicture: '',
-          associatePictureVerification: false,
-          associateFlag: null
-        },
-        informationSetup: null,
-        informationContact: {
-          associateAddressWebsite: null,
-          associateAddressWebsiteVerification: false,
-          associateAddressWorkPrimary: {
-            associateAddressCountryRegion: '91',
-            associateAddressProvinceState: '211',
-            associateAddressPostcode: 'dasas',
-            associateAddressCity: '345',
-            associateAddress: 'dasd',
-            associateAddressCommunication: false,
-            associateAddressVerification: false
-          },
-          associateAddressWorkSecondary: null,
-          associateTelephoneWorkPrimary: {
-            associateTelephoneCountryRegion: '91',
-            associateTelephoneAreaCity: '345',
-            associateTelephoneNumber: 'ssad',
-            associateTelephoneExtension: 'sad',
-            associateTelephoneCommunication: false,
-            associateTelephoneVerification: false
-          },
-          associateTelephoneWorkSecondary: null
-        },
-        informationCredential: null,
-        informationFramework: null,
-        parentId: '605091f81edc573048fb467a'
-      }
+      associate: dummyassoInfo
     };
     console.log('ONCLICK assessee Create Yes', requestObect);
     console.log('loading start');
@@ -217,6 +183,31 @@ const PopUpSignOnAssessee = (props) => {
       payload: { stateName: 'assesseeRole', actualStateName: 'assesseeRolePrimary', value: roleArr }
     });
   };
+  const updateAssesseeGroups = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
+    console.log(assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupPrimary);
+    let groupid = e.currentTarget.getAttribute('tag');
+    let roleArr = assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupPrimary;
+    console.log(roleArr.includes(groupid));
+
+    if (roleArr.includes(groupid)) {
+      document.getElementById(groupid).style.backgroundColor = 'white';
+      roleArr = roleArr.filter(function (number) {
+        return number !== groupid;
+      });
+    } else {
+      roleArr.push(groupid);
+      document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assesseeGroup',
+        actualStateName: 'assesseeGroupPrimary',
+        value: roleArr
+      }
+    });
+  };
   return (
     <div>
       <PopUpAssesseeName
@@ -257,14 +248,10 @@ const PopUpSignOnAssessee = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreGroupReviewListData}
+        textOne={'assesseeGroupName'}
+        textTwo={'assesseeGroupDescription'}
+        onClickEvent={updateAssesseeGroups}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERLISTPOPUP'}
@@ -311,10 +298,17 @@ const PopUpSignOnAssessee = (props) => {
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a role'}
-        ListData={coreReviewListReqObj}
-        textOne={'assesseeRoleName'}
-        textTwo={'assesseeRoleDescription'}
-        onClickEvent={updateRoleIdObject}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        // ListData={coreRoleReviewListData}
+        // textOne={'assesseeRoleName'}
+        // textTwo={'assesseeRoleDescription'}
+        // onClickEvent={updateRoleIdObject}
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}

@@ -55,7 +55,8 @@ const PopUpScan = (props) => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeThree
+    middlePaneHeaderBadgeThree,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isActive = true } = props;
   const [state, setState] = useState({
@@ -77,6 +78,7 @@ const PopUpScan = (props) => {
         typeOfMiddlePaneList === 'managersDistinctReviewList'
       ) {
         let requestObect = makeAssesseeScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo,
           0,
           countPage,
@@ -99,6 +101,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
         let requestObect = makeAssesseeRoleScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
             : middlePaneHeaderBadgeTwo,
@@ -124,6 +127,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
         let requestObect = makeAssociateRoleScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
             : middlePaneHeaderBadgeTwo,
@@ -149,6 +153,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
         let requestObect = makeAssociateScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo,
           0,
           countPage,
@@ -172,6 +177,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
         let requestObect = makeAssesseeGroupScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
             : middlePaneHeaderBadgeTwo,
@@ -197,6 +203,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
         let requestObect = makeAssessmentGroupScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
             : middlePaneHeaderBadgeTwo,
@@ -222,6 +229,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
         let requestObect = makeAssignmentGroupScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
             : middlePaneHeaderBadgeTwo,
@@ -247,6 +255,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
         let requestObect = makeAssignmentTypeScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
             : middlePaneHeaderBadgeTwo,
@@ -272,6 +281,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assessmentsTypeDistinctReviewList') {
         let requestObect = makeAssessmentTypeScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
             : middlePaneHeaderBadgeTwo,
@@ -297,6 +307,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
         let requestObect = makeAssociateGroupScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo === 'distinct'
             ? middlePaneHeaderBadgeThree
             : middlePaneHeaderBadgeTwo,
@@ -322,6 +333,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assignmentDistinctReviewList') {
         let requestObect = makeAssignmentScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo,
           0,
           countPage,
@@ -345,6 +357,7 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assessmentDistinctReviewList') {
         let requestObect = makeAssessmentScanRequestObject(
+          selectedAssociateInfo,
           middlePaneHeaderBadgeTwo,
           0,
           countPage,

@@ -15,7 +15,7 @@ import {
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
+import { makeAssessmentTypeObj } from '../Actions/GenericActions';
 import { ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 const AssessmentTypeReviewList = (props) => {
   const dispatch = useDispatch();
@@ -27,7 +27,8 @@ const AssessmentTypeReviewList = (props) => {
     scanCount,
     reviewListDistinctData,
     reviewListReqObj,
-    middlePaneSelectedValue
+    middlePaneSelectedValue,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -73,7 +74,7 @@ const AssessmentTypeReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssociateReviewListRequestObject(siftKey, 0, countPage);
+    let requestObect = makeAssessmentTypeObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });

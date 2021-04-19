@@ -320,7 +320,7 @@ const DisplayPageConfirmUser = () => {
                 value: true
               }
             });
-            signInRes?.associateAssent ? setStage(5) : setStage(3);
+            signInRes?.signInResponse.isAssociateAssent ? setStage(5) : setStage(3);
           }}
           onClickNo={() => {
             setStage(0);

@@ -40,7 +40,7 @@ const PopUpAssociatesModule = (props) => {
     secondaryOptionCheckValue,
     isBackToSectionPopUp
   } = useSelector((state) => state.AssociateCreateReducer);
-  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
 
@@ -60,6 +60,7 @@ const PopUpAssociatesModule = (props) => {
       });
     } else if (targetValue === 'distinct') {
       let requestObect = makeAssociateReviewListRequestObject(
+        selectedAssociateInfo,
         secondaryOptionCheckValue,
         0,
         countPage
@@ -106,7 +107,12 @@ const PopUpAssociatesModule = (props) => {
       });
       dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     } else if (targetValue === 'groups') {
-      let requestObj = makeAssociateGroupObj(secondaryOptionCheckValue, 0, countPage);
+      let requestObj = makeAssociateGroupObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({

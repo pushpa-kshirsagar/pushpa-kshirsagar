@@ -31,7 +31,8 @@ const AssociateDistinctReviewList = (props) => {
     middlePaneHeaderBadgeOne,
     reviewListDistinctData,
     reviewListReqObj,
-    middlePaneSelectedValue
+    middlePaneSelectedValue,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const {
@@ -81,7 +82,12 @@ const AssociateDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssociateReviewListRequestObject(siftKey, 0, countPage);
+    let requestObect = makeAssociateReviewListRequestObject(
+      selectedAssociateInfo,
+      siftKey,
+      0,
+      countPage
+    );
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
@@ -147,8 +153,10 @@ const AssociateDistinctReviewList = (props) => {
       payload: {
         secondaryOptionCheckValue: popUpSecondaryOptionCheckValue,
         reqBody: {
-          assesseeId: '0123456',
-          associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary, //605255729d3c823d3964e0ec
           filter: true,
           search: [
             {

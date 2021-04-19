@@ -16,8 +16,9 @@ const AllGroupCreatePopup = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { groupInformation } = useSelector((state) => state.GroupCreateReducer);
-  console.log(groupInformation)
-  console.log("groupInformation")
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  console.log(groupInformation);
+  console.log('groupInformation');
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
@@ -25,13 +26,15 @@ const AllGroupCreatePopup = (props) => {
   };
   const onClickYes = () => {
     let reqBody = {
-      assesseeId: '0123456',
-      associateId: '0654321'
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
     };
     if (headerOne === 'assessees') {
       reqBody = {
-        assesseeId: '0123456',
-        associateId: '0654321',
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         whichGroupCreate: 'assessees',
         assesseeGroup: {
           informationBasic: {
@@ -57,8 +60,9 @@ const AllGroupCreatePopup = (props) => {
     }
     if (headerOne === 'associates') {
       reqBody = {
-        assesseeId: '0123456',
-        associateId: '0654321',
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         whichGroupCreate: 'associates',
         associateGroup: {
           informationBasic: {
@@ -84,8 +88,9 @@ const AllGroupCreatePopup = (props) => {
     }
     if (headerOne === 'assessments') {
       reqBody = {
-        assesseeId: '0123456',
-        associateId: '0654321',
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         whichGroupCreate: 'assessments',
         assessmentGroup: {
           informationBasic: {
@@ -111,8 +116,9 @@ const AllGroupCreatePopup = (props) => {
     }
     if (headerOne === 'assignments') {
       reqBody = {
-        assesseeId: '0123456',
-        associateId: '0654321',
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         whichGroupCreate: 'assignments',
         assignmentGroup: {
           informationBasic: {

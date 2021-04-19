@@ -27,7 +27,8 @@ const AssociateRoleDistinctReviewList = (props) => {
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
-    middlePaneHeaderBadgeOne
+    middlePaneHeaderBadgeOne,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -71,7 +72,7 @@ const AssociateRoleDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssociateRoleObj(siftKey, 0, countPage);
+    let requestObect = makeAssociateRoleObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
@@ -82,10 +83,10 @@ const AssociateRoleDistinctReviewList = (props) => {
         BadgeOne: middlePaneHeaderBadgeOne,
         BadgeTwo: siftKey,
         BadgeThree: '',
-        isMiddlePaneList:true
+        isMiddlePaneList: true
       }
     });
-    alert("sdasdasdas")
+    alert('sdasdasdas');
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
@@ -153,7 +154,6 @@ const AssociateRoleDistinctReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-     
     </div>
   );
 };

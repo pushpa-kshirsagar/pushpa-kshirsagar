@@ -7,8 +7,11 @@ import {
   REVIEWLIST_DISTINCT_DATA,
   SET_REQUEST_OBJECT,
   SET_CORE_REVIEW_LIST_DATA,
-  SET_CORE_REVIEW_LIST_REQ_DATA,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_DATA,
+  SET_CORE_ROLE_REVIEW_LIST_DATA,
+  SET_CORE_GROUP_REVIEW_LIST_DATA
 } from '../actionType';
 
 const initialState = {
@@ -31,15 +34,16 @@ const initialState = {
   showMiddlePaneState: false,
   mobilePanestate: 'displayPaneOne',
   reviewListDistinctData: [],
-  coreReviewListData: [],
-  coreReviewListReqObj: null,
+  coreGroupReviewListData: [],
+  coreGroupReviewListReqObj: null,
+  coreRoleReviewListReqObj: null,
   reviewListReqObj: null,
   middlePaneSelectedValue: '',
   selectedInformationAllorKey: '',
   typeOfAssesseeCreate: '',
   middlePaneListPopupOptions: [],
   signInRes: '',
-  leftPaneAssesseeInfo:''
+  leftPaneAssesseeInfo: ''
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {
@@ -90,16 +94,28 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         ...istate,
         reviewListDistinctData: [...istate.reviewListDistinctData, ...action.payload]
       };
-    case SET_CORE_REVIEW_LIST_DATA:
+    case SET_CORE_GROUP_REVIEW_LIST_DATA:
       return {
         ...istate,
-        coreReviewListData: [...istate.coreReviewListData, ...action.payload]
+        coreGroupReviewListData: [...istate.coreGroupReviewListData, ...action.payload]
       };
-    case SET_CORE_REVIEW_LIST_REQ_DATA:
+    case SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT:
       return {
         ...istate,
-        coreReviewListReqObj: action.payload,
-        coreReviewListData: []
+        coreGroupReviewListReqObj: action.payload,
+        coreGroupReviewListData: []
+      };
+    case SET_CORE_ROLE_REVIEW_LIST_DATA:
+      return {
+        ...istate,
+        coreRoleReviewListData: [...istate.coreRoleReviewListData, ...action.payload]
+      };
+
+    case SET_CORE_ROLE_REVIEW_LIST_REQ_DATA:
+      return {
+        ...istate,
+        coreRoleReviewListReqObj: action.payload,
+        coreRoleReviewListData: []
       };
     case SET_REQUEST_OBJECT:
       return {

@@ -21,7 +21,8 @@ import {
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-  CLEAR_DISPLAY_PANE_THREE
+  CLEAR_DISPLAY_PANE_THREE,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -40,7 +41,7 @@ const PopUpAssesseesModule = (props) => {
     isBackToSectionPopUp,
     assesseesPopUpActive
   } = useSelector((state) => state.AssesseeCreateReducer);
-  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
@@ -55,6 +56,20 @@ const PopUpAssesseesModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
       dispatch({ type: ASSESSEE_INFO_CREATE });
+      dispatch({ type: LOADER_START });
+      let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
@@ -72,6 +87,7 @@ const PopUpAssesseesModule = (props) => {
       });
     } else if (targetValue === 'distinct') {
       let requestObect = makeAssesseeReviewListRequestObject(
+        selectedAssociateInfo,
         secondaryOptionCheckValue,
         0,
         countPage
@@ -97,7 +113,12 @@ const PopUpAssesseesModule = (props) => {
       dispatch({ type: ASSESSEE_INFO_CREATE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
-      let requestObj = makeAssesseeRoleObj(secondaryOptionCheckValue);
+      let requestObj = makeAssesseeRoleObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
@@ -119,7 +140,12 @@ const PopUpAssesseesModule = (props) => {
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
     } else if (targetValue === 'groups') {
-      let requestObj = makeAssesseeGroupObj(secondaryOptionCheckValue, 0, countPage);
+      let requestObj = makeAssesseeGroupObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({

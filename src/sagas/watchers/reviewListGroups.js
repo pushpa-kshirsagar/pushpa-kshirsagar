@@ -8,7 +8,7 @@ import {
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
-  SET_CORE_REVIEW_LIST_REQ_DATA,
+  SET_CORE_GROUP_REVIEW_LIST_DATA,
   SET_MIDDLEPANE_STATE
 } from '../../actionType';
 import {
@@ -41,7 +41,7 @@ function* workerReviewGroupListSaga(data) {
       yield put({
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_REVIEW_LIST_REQ_DATA,
+          : SET_CORE_GROUP_REVIEW_LIST_DATA,
         payload: userResponse.responseObject
       });
 
@@ -80,7 +80,7 @@ function* workerReviewAssociateGroupListSaga(data) {
       yield put({
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_REVIEW_LIST_REQ_DATA,
+          : SET_CORE_GROUP_REVIEW_LIST_DATA,
         payload: userResponse.responseObject
       });
 
@@ -119,7 +119,7 @@ function* workerReviewAssessmentGroupListSaga(data) {
       yield put({
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_REVIEW_LIST_REQ_DATA,
+          : SET_CORE_GROUP_REVIEW_LIST_DATA,
         payload: userResponse.responseObject
       });
 
@@ -159,7 +159,7 @@ function* workerReviewAssignmentGroupListSaga(data) {
       yield put({
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_REVIEW_LIST_REQ_DATA,
+          : SET_CORE_GROUP_REVIEW_LIST_DATA,
         payload: userResponse.responseObject
       });
 

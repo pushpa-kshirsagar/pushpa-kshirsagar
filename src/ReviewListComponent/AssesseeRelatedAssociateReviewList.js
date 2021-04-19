@@ -30,7 +30,7 @@ const AssesseeRelatedAssociateReviewList = (props) => {
         headerOne: '',
         setLeftPaneAssessee: true,
         reqBody: {
-          assesseeId: '0123456',
+          assesseeId: selectedAsso?.assesseeId,
           associateId:
             selectedAsso.associate.informationEngagement.associateTag.associateTagPrimary,
           filter: 'true',
