@@ -14,6 +14,7 @@ import {
 const AssociateRoleCreatePopup = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { associateRole } = useSelector((state) => state.RoleCreateReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
@@ -21,8 +22,9 @@ const AssociateRoleCreatePopup = () => {
   };
   const onClickYes = () => {
     var requestObj = {
-      assesseeId: '0123456',
-      associateId: '0654321',
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       associateRole: { informationBasic: associateRole.informationBasic }
     };
 

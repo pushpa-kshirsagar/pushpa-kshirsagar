@@ -4,7 +4,7 @@ import {
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
-  SET_CORE_REVIEW_LIST_REQ_DATA,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_DATA,
   SET_MIDDLEPANE_STATE
 } from '../../actionType';
 import { ASSESSMENT_TYPE_REVIEWLIST_URL, ASSIGNMENT_TYPE_REVIEWLIST_URL } from '../../endpoints';
@@ -32,7 +32,7 @@ function* workerReviewAssessmentTypeListSaga(data) {
       yield put({
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_REVIEW_LIST_REQ_DATA,
+          : SET_CORE_TYPE_REVIEW_LIST_REQ_DATA,
         payload: userResponse.responseObject
       });
 
@@ -71,7 +71,7 @@ function* workerReviewAssignmentTypeListSaga(data) {
       yield put({
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_REVIEW_LIST_REQ_DATA,
+          : SET_CORE_TYPE_REVIEW_LIST_REQ_DATA,
         payload: userResponse.responseObject
       });
 

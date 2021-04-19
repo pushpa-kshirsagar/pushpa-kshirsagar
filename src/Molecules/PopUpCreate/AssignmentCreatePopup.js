@@ -17,6 +17,7 @@ const AssignmentCreatePopup = (props) => {
   const { informationBasic, informationAllocation } = useSelector(
     (state) => state.AssignmentReducer
   );
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_ASSIGNMENT_INFO });
@@ -24,8 +25,9 @@ const AssignmentCreatePopup = (props) => {
   };
   const onClickYes = () => {
     let reqBody = {
-      assesseeId: '0123456',
-      associateId: '0654321',
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       assignment: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation

@@ -66,8 +66,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     secondaryOptionCheckValue,
     currentPopUpOption
   } = useSelector((state) => state.PopUpReducer);
-  const { userData = [], assesseePermission } = useSelector((state) => state.UserReducer);
-  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
@@ -235,8 +235,10 @@ const PopUpDisplayPanelAssociate = (props) => {
         payload: {
           secondaryOptionCheckValue,
           reqBody: {
-            assesseeId: '0123456',
-            associateId: '605255729d3c823d3964e0ec',
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary,
             filter: true,
             search: [
               {
@@ -330,12 +332,18 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOneBadgeOne === 'review'
     ) {
       let requestObj = makeAdministratorsReviewListRequestObject(
+        selectedAssociateInfo,
         secondaryOptionCheckValue,
         0,
         countPage
       );
       if (popupHeaderOne === 'managers') {
-        requestObj = makeManagersReviewListRequestObject(secondaryOptionCheckValue, 0, countPage);
+        requestObj = makeManagersReviewListRequestObject(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
       }
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
@@ -362,7 +370,12 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'assessees' &&
       popupHeaderOneBadgeOne === 'roles'
     ) {
-      let requestObj = makeAssesseeRoleObj(secondaryOptionCheckValue);
+      let requestObj = makeAssesseeRoleObj(
+        secondaryOptionCheckValue,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
@@ -387,7 +400,12 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'associates' &&
       popupHeaderOneBadgeOne === 'roles'
     ) {
-      let requestObj = makeAssociateRoleObj(secondaryOptionCheckValue);
+      let requestObj = makeAssociateRoleObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
@@ -421,7 +439,12 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       if (popupHeaderOne === 'assessees') {
-        requestObj = makeAssesseeGroupObj(secondaryOptionCheckValue, 0, countPage);
+        requestObj = makeAssesseeGroupObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -434,7 +457,12 @@ const PopUpDisplayPanelAssociate = (props) => {
         });
       }
       if (popupHeaderOne === 'associates') {
-        requestObj = makeAssociateGroupObj(secondaryOptionCheckValue, 0, countPage);
+        requestObj = makeAssociateGroupObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -447,7 +475,12 @@ const PopUpDisplayPanelAssociate = (props) => {
         });
       }
       if (popupHeaderOne === 'assessments') {
-        requestObj = makeAssessmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+        requestObj = makeAssessmentGroupObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -460,7 +493,12 @@ const PopUpDisplayPanelAssociate = (props) => {
         });
       }
       if (popupHeaderOne === 'assignments') {
-        requestObj = makeAssignmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+        requestObj = makeAssignmentGroupObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -489,7 +527,12 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       if (popupHeaderOne === 'assessments') {
-        requestObj = makeAssessmentTypeObj(secondaryOptionCheckValue, 0, countPage);
+        requestObj = makeAssessmentTypeObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
           payload: {
@@ -502,7 +545,12 @@ const PopUpDisplayPanelAssociate = (props) => {
         });
       }
       if (popupHeaderOne === 'assignments') {
-        requestObj = makeAssignmentTypeObj(secondaryOptionCheckValue, 0, countPage);
+        requestObj = makeAssignmentTypeObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
           payload: {

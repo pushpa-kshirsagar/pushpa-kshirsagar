@@ -31,7 +31,7 @@ const PopUpDisplayPanelAssessee = (props) => {
     secondaryOptionCheckValue
   } = useSelector((state) => state.PopUpReducer);
   const { assesseePermission } = useSelector((state) => state.UserReducer);
-
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
   const { signOut } = useContext(AccountContext);
@@ -110,8 +110,9 @@ const PopUpDisplayPanelAssessee = (props) => {
           secondaryOptionCheckValue,
           headerOne: 'assessee',
           reqBody: {
-            assesseeId: '0123456',
-            associateId: '0654321',
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
             filter: 'true',
             searchCondition: 'AND',
             search: [

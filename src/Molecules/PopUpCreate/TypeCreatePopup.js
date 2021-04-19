@@ -15,6 +15,7 @@ const TypeCreatePopup = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { typeInformation } = useSelector((state) => state.TypeCreateReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
@@ -22,13 +23,15 @@ const TypeCreatePopup = (props) => {
   };
   const onClickYes = () => {
     let reqBody = {
-      assesseeId: '0123456',
-      associateId: '0654321'
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     };
     if (headerOne === 'assessments') {
       reqBody = {
-        assesseeId: '0123456',
-        associateId: '0654321',
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         whichTypeCreate: 'assessments',
         assessmentType: {
           informationBasic: {
@@ -43,8 +46,9 @@ const TypeCreatePopup = (props) => {
     }
     if (headerOne === 'assignments') {
       reqBody = {
-        assesseeId: '0123456',
-        associateId: '0654321',
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         whichTypeCreate: 'assignments',
         assignmentType: {
           informationBasic: {

@@ -34,6 +34,7 @@ const PopUpMiddlePaneList = (props) => {
     secondaryOptionCheckValue,
     selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const {
@@ -70,8 +71,10 @@ const PopUpMiddlePaneList = (props) => {
                 ? 'manager'
                 : 'assessee',
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '0654321',
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
               filter: 'true',
               searchCondition: 'AND',
               search: [
@@ -101,8 +104,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue,
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '0654321',
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
               filter: 'true',
               searchCondition: 'AND',
               search: [
@@ -132,8 +137,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue,
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '0654321',
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
               filter: 'true',
               searchCondition: 'AND',
               search: [
@@ -163,8 +170,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue,
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
               filter: true,
               search: [
                 {
@@ -193,8 +202,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue,
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
               filter: true,
               search: [
                 {
@@ -223,8 +234,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue,
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
               filter: true,
               search: [
                 {
@@ -253,8 +266,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue: 'key',
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '605091f81edc573048fb467a', //605255729d3c823d3964e0ec
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
               filter: true,
               search: [
                 {
@@ -283,8 +298,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue: 'key',
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '0654321', //605255729d3c823d3964e0ec
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
               filter: true,
               search: [
                 {
@@ -313,8 +330,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue: 'key',
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '0654321',
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
               filter: 'true',
               search: [
                 {
@@ -344,8 +363,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue: 'key',
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '0654321',
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
               filter: 'true',
               search: [
                 {
@@ -374,8 +395,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue: 'key',
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '0654321',
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
               filter: 'true',
               search: [
                 {
@@ -404,8 +427,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue: 'key',
             reqBody: {
-              assesseeId: '0123456',
-              associateId: '0654321',
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
               filter: 'true',
               search: [
                 {

@@ -27,7 +27,8 @@ const AssessmentDistinctReviewList = (props) => {
     scanCount,
     reviewListDistinctData,
     reviewListReqObj,
-    middlePaneSelectedValue
+    middlePaneSelectedValue,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -72,7 +73,12 @@ const AssessmentDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssessmentReviewListRequestObject(siftKey, 0, countPage);
+    let requestObect = makeAssessmentReviewListRequestObject(
+      selectedAssociateInfo,
+      siftKey,
+      0,
+      countPage
+    );
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });

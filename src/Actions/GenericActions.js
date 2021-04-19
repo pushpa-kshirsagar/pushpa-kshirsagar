@@ -67,7 +67,12 @@ export const signUpForAwsCognito = (emailId, userName, password) => {
     }
   );
 };
-export const makeAssesseeReviewListRequestObject = (filterKey, numberPage, countPage) => {
+export const makeAssesseeReviewListRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage
+) => {
   let searchObj = {
     dataType: 'string',
     conditionColumn: 'informationEngagement.assesseeStatus',
@@ -93,8 +98,9 @@ export const makeAssesseeReviewListRequestObject = (filterKey, numberPage, count
     }
   }
   let regObj = {
-    assesseeId: '0123456',
-    associateId: '0654321', //'60520a349d66236bb84f8b1b',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary, //'60520a349d66236bb84f8b1b',
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -114,7 +120,12 @@ export const makeAssesseeReviewListRequestObject = (filterKey, numberPage, count
 
   return regObj;
 };
-export const makeAdministratorsReviewListRequestObject = (filterKey, numberPage, countPage) => {
+export const makeAdministratorsReviewListRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage
+) => {
   let searchObj = {
     dataType: 'string',
     conditionColumn: 'informationEngagement.assesseeStatus',
@@ -140,8 +151,9 @@ export const makeAdministratorsReviewListRequestObject = (filterKey, numberPage,
     }
   }
   let regObj = {
-    assesseeId: '0123456',
-    associateId: '0654321', //'60520a349d66236bb84f8b1b',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary, //'60520a349d66236bb84f8b1b',
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -161,7 +173,12 @@ export const makeAdministratorsReviewListRequestObject = (filterKey, numberPage,
 
   return regObj;
 };
-export const makeManagersReviewListRequestObject = (filterKey, numberPage, countPage) => {
+export const makeManagersReviewListRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage
+) => {
   let searchObj = {
     dataType: 'string',
     conditionColumn: 'informationEngagement.assesseeStatus',
@@ -187,8 +204,9 @@ export const makeManagersReviewListRequestObject = (filterKey, numberPage, count
     }
   }
   let regObj = {
-    assesseeId: '0123456',
-    associateId: '0654321', //'60520a349d66236bb84f8b1b',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary, //'60520a349d66236bb84f8b1b',
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -208,10 +226,17 @@ export const makeManagersReviewListRequestObject = (filterKey, numberPage, count
 
   return regObj;
 };
-export const makeAssesseeScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+export const makeAssesseeScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
   let regObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -288,7 +313,12 @@ export const makeAssesseeScanRequestObject = (filterKey, numberPage, countPage, 
   return regObj;
 };
 
-export const makeAssociateReviewListRequestObject = (filterKey, numberPage, countPage) => {
+export const makeAssociateReviewListRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -322,8 +352,9 @@ export const makeAssociateReviewListRequestObject = (filterKey, numberPage, coun
     }
   }
   let regObj = {
-    assesseeId: '0123456',
-    associateId: '605091f81edc573048fb467a',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -349,7 +380,13 @@ export const makeAssociateReviewListRequestObject = (filterKey, numberPage, coun
   return regObj;
 };
 
-export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+export const makeAssociateScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -383,8 +420,9 @@ export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage,
     }
   }
   let regObj = {
-    assesseeId: '0123456',
-    associateId: '605091f81edc573048fb467a',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -434,7 +472,7 @@ export const makeAssociateScanRequestObject = (filterKey, numberPage, countPage,
 
   return regObj;
 };
-export const makeAssesseeRoleObj = (filterKey) => {
+export const makeAssesseeRoleObj = (selectedAssociateInfo, filterKey, numberPage, countPage) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -452,8 +490,11 @@ export const makeAssesseeRoleObj = (filterKey) => {
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assesseeRoleName',
@@ -474,7 +515,7 @@ export const makeAssesseeRoleObj = (filterKey) => {
   };
   return requestObj;
 };
-export const makeAssociateRoleObj = (filterKey) => {
+export const makeAssociateRoleObj = (selectedAssociateInfo, filterKey, numberPage, countPage) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -492,8 +533,9 @@ export const makeAssociateRoleObj = (filterKey) => {
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.associateRoleName',
@@ -517,7 +559,13 @@ export const makeAssociateRoleObj = (filterKey) => {
   };
   return requestObj;
 };
-export const makeAssociateRoleScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+export const makeAssociateRoleScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -535,8 +583,9 @@ export const makeAssociateRoleScanRequestObject = (filterKey, numberPage, countP
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.associateRoleName',
@@ -585,7 +634,13 @@ export const makeAssociateRoleScanRequestObject = (filterKey, numberPage, countP
   };
   return requestObj;
 };
-export const makeAssesseeRoleScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+export const makeAssesseeRoleScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -603,8 +658,9 @@ export const makeAssesseeRoleScanRequestObject = (filterKey, numberPage, countPa
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assesseeRoleName',
@@ -653,7 +709,7 @@ export const makeAssesseeRoleScanRequestObject = (filterKey, numberPage, countPa
   };
   return requestObj;
 };
-export const makeAssesseeGroupObj = (filterKey, countPage, numberPage) => {
+export const makeAssesseeGroupObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -671,8 +727,9 @@ export const makeAssesseeGroupObj = (filterKey, countPage, numberPage) => {
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assesseeGroupName',
@@ -695,7 +752,13 @@ export const makeAssesseeGroupObj = (filterKey, countPage, numberPage) => {
   };
   return requestObj;
 };
-export const makeAssesseeGroupScanRequestObject = (filterKey, countPage, numberPage, searchStr) => {
+export const makeAssesseeGroupScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -713,8 +776,9 @@ export const makeAssesseeGroupScanRequestObject = (filterKey, countPage, numberP
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assesseeGroupName',
@@ -762,7 +826,7 @@ export const makeAssesseeGroupScanRequestObject = (filterKey, countPage, numberP
   };
   return requestObj;
 };
-export const makeAssociateGroupObj = (filterKey, countPage, numberPage) => {
+export const makeAssociateGroupObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -780,8 +844,9 @@ export const makeAssociateGroupObj = (filterKey, countPage, numberPage) => {
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.associateGroupName',
@@ -806,6 +871,7 @@ export const makeAssociateGroupObj = (filterKey, countPage, numberPage) => {
 };
 
 export const makeAssociateGroupScanRequestObject = (
+  selectedAssociateInfo,
   filterKey,
   countPage,
   numberPage,
@@ -828,8 +894,9 @@ export const makeAssociateGroupScanRequestObject = (
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.associateGroupName',
@@ -877,7 +944,7 @@ export const makeAssociateGroupScanRequestObject = (
   };
   return requestObj;
 };
-export const makeAssessmentGroupObj = (filterKey, countPage, numberPage) => {
+export const makeAssessmentGroupObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -895,8 +962,9 @@ export const makeAssessmentGroupObj = (filterKey, countPage, numberPage) => {
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assessmentGroupName',
@@ -920,6 +988,7 @@ export const makeAssessmentGroupObj = (filterKey, countPage, numberPage) => {
   return requestObj;
 };
 export const makeAssessmentGroupScanRequestObject = (
+  selectedAssociateInfo,
   filterKey,
   countPage,
   numberPage,
@@ -942,8 +1011,9 @@ export const makeAssessmentGroupScanRequestObject = (
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assessmentGroupName',
@@ -991,7 +1061,7 @@ export const makeAssessmentGroupScanRequestObject = (
   };
   return requestObj;
 };
-export const makeAssignmentGroupObj = (filterKey, countPage, numberPage) => {
+export const makeAssignmentGroupObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -1009,8 +1079,9 @@ export const makeAssignmentGroupObj = (filterKey, countPage, numberPage) => {
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assignmentGroupName',
@@ -1034,6 +1105,7 @@ export const makeAssignmentGroupObj = (filterKey, countPage, numberPage) => {
   return requestObj;
 };
 export const makeAssignmentGroupScanRequestObject = (
+  selectedAssociateInfo,
   filterKey,
   countPage,
   numberPage,
@@ -1056,8 +1128,9 @@ export const makeAssignmentGroupScanRequestObject = (
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assignmentGroupName',
@@ -1105,7 +1178,7 @@ export const makeAssignmentGroupScanRequestObject = (
   };
   return requestObj;
 };
-export const makeAssessmentTypeObj = (filterKey, countPage, numberPage) => {
+export const makeAssessmentTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -1123,8 +1196,9 @@ export const makeAssessmentTypeObj = (filterKey, countPage, numberPage) => {
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assessmentTypeName',
@@ -1147,7 +1221,7 @@ export const makeAssessmentTypeObj = (filterKey, countPage, numberPage) => {
   };
   return requestObj;
 };
-export const makeAssignmentTypeObj = (filterKey, countPage, numberPage) => {
+export const makeAssignmentTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -1165,8 +1239,9 @@ export const makeAssignmentTypeObj = (filterKey, countPage, numberPage) => {
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assignmentTypeName',
@@ -1189,7 +1264,12 @@ export const makeAssignmentTypeObj = (filterKey, countPage, numberPage) => {
   };
   return requestObj;
 };
-export const makeAssignmentReviewListRequestObject = (filterKey, countPage, numberPage) => {
+export const makeAssignmentReviewListRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -1207,8 +1287,9 @@ export const makeAssignmentReviewListRequestObject = (filterKey, countPage, numb
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assignmentName',
@@ -1231,7 +1312,12 @@ export const makeAssignmentReviewListRequestObject = (filterKey, countPage, numb
   };
   return requestObj;
 };
-export const makeAssessmentReviewListRequestObject = (filterKey, countPage, numberPage) => {
+export const makeAssessmentReviewListRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -1249,8 +1335,9 @@ export const makeAssessmentReviewListRequestObject = (filterKey, countPage, numb
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assessmentName',
@@ -1274,6 +1361,7 @@ export const makeAssessmentReviewListRequestObject = (filterKey, countPage, numb
   return requestObj;
 };
 export const makeAssignmentTypeScanRequestObject = (
+  selectedAssociateInfo,
   filterKey,
   countPage,
   numberPage,
@@ -1296,8 +1384,9 @@ export const makeAssignmentTypeScanRequestObject = (
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assignmentTypeName',
@@ -1346,6 +1435,7 @@ export const makeAssignmentTypeScanRequestObject = (
   return requestObj;
 };
 export const makeAssessmentTypeScanRequestObject = (
+  selectedAssociateInfo,
   filterKey,
   countPage,
   numberPage,
@@ -1368,8 +1458,9 @@ export const makeAssessmentTypeScanRequestObject = (
     }
   }
   let requestObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assignmentTypeName',
@@ -1417,7 +1508,13 @@ export const makeAssessmentTypeScanRequestObject = (
   };
   return requestObj;
 };
-export const makeAssignmentScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+export const makeAssignmentScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -1435,8 +1532,9 @@ export const makeAssignmentScanRequestObject = (filterKey, numberPage, countPage
     }
   }
   let regObj = {
-    assesseeId: '0123456',
-    associateId: '605091f81edc573048fb467a',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -1486,7 +1584,13 @@ export const makeAssignmentScanRequestObject = (filterKey, numberPage, countPage
 
   return regObj;
 };
-export const makeAssessmentScanRequestObject = (filterKey, numberPage, countPage, searchStr) => {
+export const makeAssessmentScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -1504,8 +1608,9 @@ export const makeAssessmentScanRequestObject = (filterKey, numberPage, countPage
     }
   }
   let regObj = {
-    assesseeId: '0123456',
-    associateId: '0654321',
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',

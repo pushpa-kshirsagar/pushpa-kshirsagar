@@ -42,7 +42,7 @@ const PopUpAssignmentModule = (props) => {
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
-  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const setSecondaryOptionValue = (e) => {
     dispatch({
       type: SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
@@ -64,6 +64,7 @@ const PopUpAssignmentModule = (props) => {
     } else if (targetValue === 'distinct') {
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
       let requestObect = makeAssignmentReviewListRequestObject(
+        selectedAssociateInfo,
         secondaryOptionCheckValue,
         0,
         countPage
@@ -86,7 +87,12 @@ const PopUpAssignmentModule = (props) => {
         }
       });
     } else if (targetValue === 'groups') {
-      let requestObj = makeAssignmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+      let requestObj = makeAssignmentGroupObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
@@ -108,7 +114,12 @@ const PopUpAssignmentModule = (props) => {
       });
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
     } else if (targetValue === 'types') {
-      let requestObj = makeAssignmentTypeObj(secondaryOptionCheckValue, 0, countPage);
+      let requestObj = makeAssignmentTypeObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({

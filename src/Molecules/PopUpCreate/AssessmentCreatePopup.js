@@ -14,6 +14,7 @@ import {
 const AssessmentCreatePopup = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationBasic, informationAllocation } = useSelector(
     (state) => state.AssessmentReducer
   );
@@ -24,8 +25,9 @@ const AssessmentCreatePopup = (props) => {
   };
   const onClickYes = () => {
     let reqBody = {
-      assesseeId: '0123456',
-      associateId: '0654321',
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       assessment: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation

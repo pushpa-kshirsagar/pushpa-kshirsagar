@@ -42,7 +42,7 @@ const PopupAssessmentsModule = (props) => {
 
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft' } = props;
-  const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const setSecondaryOptionValue = (e) => {
     //TODO: set secondary option in assessments
@@ -65,6 +65,7 @@ const PopupAssessmentsModule = (props) => {
       });
     } else if (targetValue === 'distinct') {
       let requestObect = makeAssessmentReviewListRequestObject(
+        selectedAssociateInfo,
         secondaryOptionCheckValue,
         0,
         countPage
@@ -88,7 +89,12 @@ const PopupAssessmentsModule = (props) => {
       });
       dispatch({ type: CLEAR_ASSESSMENT_INFO });
     } else if (targetValue === 'groups') {
-      let requestObj = makeAssessmentGroupObj(secondaryOptionCheckValue, 0, countPage);
+      let requestObj = makeAssessmentGroupObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
@@ -110,7 +116,12 @@ const PopupAssessmentsModule = (props) => {
       });
       dispatch({ type: CLEAR_ASSESSMENT_INFO });
     } else if (targetValue === 'types') {
-      let requestObj = makeAssessmentTypeObj(secondaryOptionCheckValue, 0, countPage);
+      let requestObj = makeAssessmentTypeObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({

@@ -18,7 +18,7 @@ import { makeAssesseeGroupObj } from '../Actions/GenericActions';
 import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 const AssesseeGroupReviewList = (props) => {
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue, countPage } = useSelector(
+  const { secondaryOptionCheckValue, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.AssesseeCreateReducer
   );
   const {
@@ -71,7 +71,7 @@ const AssesseeGroupReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssesseeGroupObj(siftKey, 0, countPage);
+    let requestObect = makeAssesseeGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });

@@ -15,7 +15,7 @@ import {
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssociateGroupObj, makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
+import { makeAssociateGroupObj } from '../Actions/GenericActions';
 import { ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 const AssociateGroupReviewList = (props) => {
   const dispatch = useDispatch();
@@ -27,7 +27,8 @@ const AssociateGroupReviewList = (props) => {
     scanCount,
     reviewListDistinctData,
     reviewListReqObj,
-    middlePaneSelectedValue
+    middlePaneSelectedValue,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -73,7 +74,7 @@ const AssociateGroupReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssociateGroupObj(siftKey, 0, countPage);
+    let requestObect = makeAssociateGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
