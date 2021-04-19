@@ -73,11 +73,12 @@ export const DisplayPaneOne = () => {
     ? selectedAssociateInfo?.associate.informationBasic.associateDescription
     : '';
   const assesseeAlias = '';
+  const assesseeSignIN = localStorage.getItem('assesseeId');
   const assesseeName = leftPaneAssesseeInfo
     ? leftPaneAssesseeInfo.informationBasic.assesseeNameFirst +
       ' ' +
       leftPaneAssesseeInfo.informationBasic.assesseeNameLast
-    : loginUserName;
+    : assesseeSignIN;
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
@@ -129,6 +130,7 @@ export const DisplayPaneOne = () => {
       });
     }
   };
+  console.log("PANE TWO +====>", selectedAssociateInfo)
 
   return (
     <>

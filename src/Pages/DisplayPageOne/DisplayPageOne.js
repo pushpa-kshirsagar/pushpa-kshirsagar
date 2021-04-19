@@ -7,7 +7,9 @@ import {
   CLEAR_ASSIGNMENT_INFO,
   CLEAR_ASSOCIATE_INFO,
   CLEAR_IGAUGE_REDUCER,
+  GET_ASSESSEE_SIGN_IN_INFO,
   GET_USER_SAGA,
+  LOADER_START,
   POPUP_CLOSE
 } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
@@ -39,9 +41,20 @@ const DisplayPageOne = () => {
   const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
-
   const dispatch = useDispatch();
   const isExamMode = false;
+  const assesseeId = localStorage.getItem('assesseeId');
+  const accessToken = localStorage.getItem('token');
+  useEffect(() => {
+    dispatch({ type: LOADER_START });
+    dispatch({
+      type: GET_ASSESSEE_SIGN_IN_INFO,
+      payload: {
+        accessToken,
+        assesseeId
+      }
+    });
+  }, []);
   // const { getSession } = useContext(AccountContext);
   //* code for change username and any attribute
   // const changeUserName = () => {
@@ -70,7 +83,9 @@ const DisplayPageOne = () => {
   // useEffect(() => {
   //   dispatch({ type: GET_USER_SAGA });
   // }, [dispatch]);
-  const { selectedAssociateInfo,leftPaneAssesseeInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, leftPaneAssesseeInfo } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
 
   // const userName =
@@ -79,9 +94,13 @@ const DisplayPageOne = () => {
   //     ' ' +
   //     selectedAssociateInfo.assesseeInformation.assesseeNameLast;
   // const userEmail =
-    // selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
-  const userName = leftPaneAssesseeInfo?leftPaneAssesseeInfo.informationBasic.assesseeNameFirst+' '+leftPaneAssesseeInfo.informationBasic.assesseeNameLast:'';
-  const userEmail = loginUserName?loginUserName:'' ;
+  // selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
+  const userName = leftPaneAssesseeInfo
+    ? leftPaneAssesseeInfo.informationBasic.assesseeNameFirst +
+      ' ' +
+      leftPaneAssesseeInfo.informationBasic.assesseeNameLast
+    : '';
+  const userEmail = assesseeId || '';
   const popupAllClose = () => {
     dispatch({ type: CLEAR_ASSESSEE_INFO });
     dispatch({ type: CLEAR_ASSESSMENT_INFO });

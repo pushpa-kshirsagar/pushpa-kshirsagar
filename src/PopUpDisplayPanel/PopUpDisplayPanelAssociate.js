@@ -66,7 +66,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     secondaryOptionCheckValue,
     currentPopUpOption
   } = useSelector((state) => state.PopUpReducer);
-  const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
+  const { userData = [], assesseePermission } = useSelector((state) => state.UserReducer);
   const { countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
