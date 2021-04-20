@@ -45,6 +45,7 @@ const DisplayPageOne = () => {
   const isExamMode = false;
   const assesseeId = localStorage.getItem('assesseeId');
   const accessToken = localStorage.getItem('token');
+  
   useEffect(() => {
     dispatch({ type: LOADER_START });
     dispatch({
