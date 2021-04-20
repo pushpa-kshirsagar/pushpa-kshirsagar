@@ -22,7 +22,9 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   CLEAR_DISPLAY_PANE_THREE,
-  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
+  SET_MIDDLEPANE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -70,6 +72,19 @@ const PopUpAssesseesModule = (props) => {
         }
       });
       dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      let roleRequestObj = makeAssesseeRoleObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+
+      dispatch({
+        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
@@ -85,6 +100,7 @@ const PopUpAssesseesModule = (props) => {
           value: 'assessee'
         }
       });
+      clearMiddlePaneInfo();
     } else if (targetValue === 'distinct') {
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
@@ -172,6 +188,22 @@ const PopUpAssesseesModule = (props) => {
         payload: targetValue
       });
     }
+  };
+  const clearMiddlePaneInfo = () => {
+    dispatch({
+      type: SET_MIDDLEPANE_STATE,
+      payload: {
+        middlePaneHeader: '',
+        middlePaneHeaderBadgeOne: '',
+        middlePaneHeaderBadgeTwo: '',
+        middlePaneHeaderBadgeThree: '',
+        middlePaneHeaderBadgeFour: '',
+        typeOfMiddlePaneList: '',
+        scanCount: null,
+        showMiddlePaneState: false
+      }
+    });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const BackHandlerEvent = (e) => {
     if (isBackToSectionPopUp) {

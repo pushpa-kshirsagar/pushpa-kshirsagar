@@ -15,7 +15,10 @@ import {
   SET_ASSESSMENT_NEXT_POPUP,
   SET_ASSESSMENT_PREVIOUS_POPUP,
   SET_ASSESSMENT_SECONDARY_OPTION_VALUE,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_VALUE,
@@ -59,10 +62,50 @@ const PopupAssessmentsModule = (props) => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
       });
+      let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+
+      dispatch({
+        type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: '',
+          middlePaneHeaderBadgeOne: '',
+          middlePaneHeaderBadgeTwo: '',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: '',
+          scanCount: null,
+          showMiddlePaneState: false
+        }
+      });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     } else if (targetValue === 'distinct') {
       let requestObect = makeAssessmentReviewListRequestObject(
         selectedAssociateInfo,
@@ -157,6 +200,7 @@ const PopupAssessmentsModule = (props) => {
       dispatch({ type: SET_ASSESSMENT_PREVIOUS_POPUP });
     }
   };
+ 
   return (
     <div>
       <Popup isActive={assessmentsPopUpActive}>

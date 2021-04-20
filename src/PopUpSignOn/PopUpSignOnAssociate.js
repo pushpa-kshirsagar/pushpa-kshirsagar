@@ -24,15 +24,17 @@ import {
   UPDATE_ASSESSEE_PERSONAL_INFO,
   CREATE_ASSOCIATE_SAGA,
   LOADER_START,
-  CLEAR_ASSESSEE_INFO
+  CLEAR_ASSESSEE_INFO,
+  SET_ASSOCIATE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const informationContact = assesseeInfo.informationContact;
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-
+  const { coreGroupReviewListData, selectedAssociateInfo, coreRoleReviewListData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const history = useHistory();
   console.log(associateInfo);
   console.log('==================');
@@ -56,8 +58,6 @@ const PopUpSignOnAssociate = () => {
       informationAllocation,
       informationContact,
       informationPersonal,
-      informationSetup,
-      informationEngagement,
       tempCommunication
     } = assesseeInfo;
     let assesseeContactObj = informationContact;
@@ -109,11 +109,11 @@ const PopUpSignOnAssociate = () => {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP' } });
       }
     } else if (isPopUpValue === 'PICTUREPOPUP') {
-      if (popupMode === 'ASSOCIATE_SIGN_ON') {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
-      } else {
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ASSESSEEGROUPLISTPOPUP' } });
-      }
+      // if (popupMode === 'ASSOCIATE_SIGN_ON') {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'EMAILPOPUP' } });
+      // } else {
+      // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ASSESSEEGROUPLISTPOPUP' } });
+      // }
     } else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
     }
@@ -131,7 +131,52 @@ const PopUpSignOnAssociate = () => {
       });
     }
   };
-
+  const updateAssociateGroups = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
+    console.log(associateInfo.informationAllocation.associateGroup.associateGroupPrimary);
+    let groupid = e.currentTarget.getAttribute('tag');
+    let groupArr = associateInfo.informationAllocation.associateGroup.associateGroupPrimary;
+    if (groupArr.includes(groupid)) {
+      document.getElementById(groupid).style.backgroundColor = 'white';
+      groupArr = groupArr.filter(function (number) {
+        return number !== groupid;
+      });
+    } else {
+      groupArr.push(groupid);
+      document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'associateGroup',
+        actualStateName: 'associateGroupPrimary',
+        value: groupArr
+      }
+    });
+  };
+  const updateAssociateRoles = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
+    console.log(associateInfo.informationAllocation.associateRole.associateRolePrimary);
+    let roleid = e.currentTarget.getAttribute('tag');
+    let roleArr = associateInfo.informationAllocation.associateRole.associateRolePrimary;
+    if (roleArr.includes(roleid)) {
+      document.getElementById(roleid).style.backgroundColor = 'white';
+      roleArr = roleArr.filter(function (number) {
+        return number !== roleid;
+      });
+    } else {
+      roleArr.push(roleid);
+      document.getElementById(roleid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'associateRole',
+        actualStateName: 'associateRolePrimary',
+        value: roleArr
+      }
+    });
+  };
   return (
     <div>
       <PopUpTextField
@@ -164,7 +209,7 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
         basicInfo={associateInfo.basicInfo}
-        nextPopUpValue={'GROUPPOPUP'}
+        nextPopUpValue={popupMode === 'ASSOCIATE_SIGN_ON' ? 'WORKADDRESSPOPUP' : 'GROUPPOPUP'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPPOPUP'}
@@ -175,14 +220,10 @@ const PopUpSignOnAssociate = () => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreGroupReviewListData}
+        textOne={'associateGroupName'}
+        textTwo={'associateGroupDescription'}
+        onClickEvent={updateAssociateGroups}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPOPUP'}
@@ -229,14 +270,10 @@ const PopUpSignOnAssociate = () => {
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a role'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreRoleReviewListData}
+        textOne={'associateRoleName'}
+        textTwo={'associateRoleDescription'}
+        onClickEvent={updateAssociateRoles}
       />
       <PopUpAddress
         isActive={isPopUpValue === 'WORKADDRESSPOPUP'}

@@ -33,7 +33,7 @@ const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
-  const { coreGroupReviewListData, selectedAssociateInfo } = useSelector(
+  const { coreGroupReviewListData, selectedAssociateInfo, coreRoleReviewListData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
   const informationContact = assesseeInfo.informationContact;
@@ -298,17 +298,17 @@ const PopUpSignOnAssessee = (props) => {
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a role'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        // ListData={coreRoleReviewListData}
-        // textOne={'assesseeRoleName'}
-        // textTwo={'assesseeRoleDescription'}
-        // onClickEvent={updateRoleIdObject}
+        // ListData={[
+        //   { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
+        //   { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
+        //   { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
+        // ]}
+        // textOne={'name'}
+        // textTwo={'description'}
+        ListData={coreRoleReviewListData}
+        textOne={'assesseeRoleName'}
+        textTwo={'assesseeRoleDescription'}
+        onClickEvent={updateRoleIdObject}
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}

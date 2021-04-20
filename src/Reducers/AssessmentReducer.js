@@ -6,7 +6,8 @@ import {
   SET_ASSESSMENT_SECONDARY_OPTION_VALUE,
   SET_DISPLAY_PANE_FOUR_SHOW,
   SET_ASSESSMENT_SECONDARY_POPUP,
-  SET_ASSESSMENT_BASIC_REDUCER_STATE
+  SET_ASSESSMENT_BASIC_REDUCER_STATE,
+  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -65,7 +66,7 @@ const initialState = {
 };
 
 const AssessmentReducer = (istate = initialState, action) => {
-  console.log(action.type);
+  // console.log(action.type);
   switch (action.type) {
     case ASSESSMENT_POPUP_OPEN:
       return {
@@ -161,6 +162,17 @@ const AssessmentReducer = (istate = initialState, action) => {
     case SET_DISPLAY_PANE_FOUR_SHOW:
       return {
         isDisplayPaneFourShow: action.payload
+      };
+    case SET_ASSESSMENT_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        informationAllocation: {
+          ...istate.informationAllocation,
+          [action.payload.stateName]: {
+            ...istate.informationAllocation[action.payload.stateName],
+            [action.payload.actualStateName]: action.payload.value
+          }
+        }
       };
     case CLEAR_ASSESSMENT_INFO:
       return initialState;

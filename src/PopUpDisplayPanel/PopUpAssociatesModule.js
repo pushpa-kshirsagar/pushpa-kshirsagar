@@ -21,7 +21,10 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
-  CLEAR_DISPLAY_PANE_THREE
+  CLEAR_DISPLAY_PANE_THREE,
+  SET_MIDDLEPANE_STATE,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -58,6 +61,33 @@ const PopUpAssociatesModule = (props) => {
         type: ASSOCIATE_SIGN_ON,
         payload: { isPopUpValue: 'NAMEALIASPOPUP', popupMode: 'ASSOCIATE_CREATE' }
       });
+      let requestObj = makeAssociateGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({
+        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      let roleRequestObj = makeAssociateRoleObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+
+      dispatch({
+        type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      clearMiddlePaneInfo();
     } else if (targetValue === 'distinct') {
       let requestObect = makeAssociateReviewListRequestObject(
         selectedAssociateInfo,
@@ -139,6 +169,22 @@ const PopUpAssociatesModule = (props) => {
         payload: e.currentTarget.getAttribute('data-value')
       });
     }
+  };
+  const clearMiddlePaneInfo = () => {
+    dispatch({
+      type: SET_MIDDLEPANE_STATE,
+      payload: {
+        middlePaneHeader: '',
+        middlePaneHeaderBadgeOne: '',
+        middlePaneHeaderBadgeTwo: '',
+        middlePaneHeaderBadgeThree: '',
+        middlePaneHeaderBadgeFour: '',
+        typeOfMiddlePaneList: '',
+        scanCount: null,
+        showMiddlePaneState: false
+      }
+    });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const BackHandlerEvent = (e) => {
     if (isBackToSectionPopUp) {

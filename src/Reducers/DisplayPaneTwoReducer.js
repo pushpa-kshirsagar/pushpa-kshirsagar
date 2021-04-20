@@ -6,12 +6,13 @@ import {
   SET_MOBILE_PANE_STATE,
   REVIEWLIST_DISTINCT_DATA,
   SET_REQUEST_OBJECT,
-  SET_CORE_REVIEW_LIST_DATA,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_CORE_ROLE_REVIEW_LIST_REQ_DATA,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_DATA,
-  SET_CORE_GROUP_REVIEW_LIST_DATA
+  SET_CORE_GROUP_REVIEW_LIST_DATA,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_TYPE_REVIEW_LIST_DATA
 } from '../actionType';
 
 const initialState = {
@@ -35,8 +36,11 @@ const initialState = {
   mobilePanestate: 'displayPaneOne',
   reviewListDistinctData: [],
   coreGroupReviewListData: [],
+  coreRoleReviewListData: [],
+  coreTypeReviewListData: [],
   coreGroupReviewListReqObj: null,
   coreRoleReviewListReqObj: null,
+  coreTypeReviewListReqObj: null,
   reviewListReqObj: null,
   middlePaneSelectedValue: '',
   selectedInformationAllorKey: '',
@@ -111,11 +115,23 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         coreRoleReviewListData: [...istate.coreRoleReviewListData, ...action.payload]
       };
 
-    case SET_CORE_ROLE_REVIEW_LIST_REQ_DATA:
+    case SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT:
       return {
         ...istate,
         coreRoleReviewListReqObj: action.payload,
         coreRoleReviewListData: []
+      };
+    case SET_CORE_TYPE_REVIEW_LIST_DATA:
+      return {
+        ...istate,
+        coreTypeReviewListData: [...istate.coreTypeReviewListData, ...action.payload]
+      };
+
+    case SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT:
+      return {
+        ...istate,
+        coreTypeReviewListReqObj: action.payload,
+        coreTypeReviewListData: []
       };
     case SET_REQUEST_OBJECT:
       return {

@@ -19,7 +19,7 @@ import {
 } from '../../endpoints';
 
 const GroupsReviewListDistinctApi = async (requestObj) => {
-  console.log(requestObj.data);
+  // console.log(requestObj.data);
   // let URL = ASSESSEE_GROUP_REVIEWLIST_URL;
   const requestOptions = {
     method: 'POST',

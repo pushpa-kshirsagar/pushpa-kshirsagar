@@ -14,7 +14,8 @@ import {
   SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
   SET_ASSOCIATE_SECONDARY_POPUP,
   ASSOCIATE_CREATE_INFO,
-  SET_ASSOCIATE_INFORMATION
+  SET_ASSOCIATE_INFORMATION,
+  SET_ASSOCIATE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -60,7 +61,7 @@ const initialState = {
       associateNodeSecondary: []
     },
     associateRole: {
-      associateRolePrimary: ['3432342'],
+      associateRolePrimary: [],
       associateRoleSecondary: []
     }
   },
@@ -178,7 +179,7 @@ const AssociateCreateReducer = (istate = initialState, action) => {
             associatesHeaderOneBadgeOne: action.payload,
             associatesPopUpType: 'secondary',
             currentPopUpOption: istate.secondaryPopUpOptions[action.payload],
-            secondaryOptionCheckValue: 'active'
+            secondaryOptionCheckValue: action.payload === 'create' ? 'all' : 'active'
           };
         }
       } else {
@@ -257,6 +258,17 @@ const AssociateCreateReducer = (istate = initialState, action) => {
           associateTelephoneWorkPrimary: action.payload
         }
         // workTeleponeInfo: action.payload
+      };
+    case SET_ASSOCIATE_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        informationAllocation: {
+          ...istate.informationAllocation,
+          [action.payload.stateName]: {
+            ...istate.informationAllocation[action.payload.stateName],
+            [action.payload.actualStateName]: action.payload.value
+          }
+        }
       };
     case UPDATE_ASSOCIATE_ADMIN_BASIC_INFO:
       return {

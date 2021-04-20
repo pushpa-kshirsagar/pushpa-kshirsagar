@@ -587,21 +587,25 @@ const PopUpDisplayPanelAssociate = (props) => {
           value: popupHeaderOne === 'administrators' ? 'administrator' : 'manager'
         }
       });
+      clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
       });
+      clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'group') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }
       });
+      clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'type') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'TYPECREATE' }
       });
+      clearMiddlePaneInfo();
     } else {
       dispatch({
         type: SET_POPUP_STATE,
@@ -617,6 +621,22 @@ const PopUpDisplayPanelAssociate = (props) => {
         }
       });
     }
+  };
+  const clearMiddlePaneInfo = () => {
+    dispatch({
+      type: SET_MIDDLEPANE_STATE,
+      payload: {
+        middlePaneHeader: '',
+        middlePaneHeaderBadgeOne: '',
+        middlePaneHeaderBadgeTwo: '',
+        middlePaneHeaderBadgeThree: '',
+        middlePaneHeaderBadgeFour: '',
+        typeOfMiddlePaneList: '',
+        scanCount: null,
+        showMiddlePaneState: false
+      }
+    });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const BackHandlerEvent = (e) => {
     let revisePopupHeaderOne = 'associate';

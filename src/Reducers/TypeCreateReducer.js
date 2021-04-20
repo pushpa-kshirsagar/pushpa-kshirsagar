@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const TypeCreateReducer = (istate = initialState, action) => {
-  console.log(action.type);
+  // console.log(action.type);
   switch (action.type) {
     case SET_TYPE_REDUCER_STATE:
       return {

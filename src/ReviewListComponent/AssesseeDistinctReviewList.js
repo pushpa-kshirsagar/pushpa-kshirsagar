@@ -26,7 +26,7 @@ const AssesseeDistinctReviewList = (props) => {
     scanCount,
     countPage,
     middlePaneHeader,
-    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
@@ -155,7 +155,7 @@ const AssesseeDistinctReviewList = (props) => {
                     : item
                 }
                 status={assesseeStatus(
-                  middlePaneHeaderBadgeOne,
+                  middlePaneHeaderBadgeTwo,
                   item.informationEngagement.assesseeStatus
                 )}
                 isSelectedReviewList={
