@@ -36,6 +36,7 @@ const PopUpSignOnAssessee = (props) => {
   const { coreGroupReviewListData, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
+  const {reviewMode} = useSelector((state) => state.DisplayPaneThreeReducer);
   const informationContact = assesseeInfo.informationContact;
 
   const dispatch = useDispatch();
@@ -72,7 +73,8 @@ const PopUpSignOnAssessee = (props) => {
       informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
     let dummyassoInfo = {
-      id:  selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
+      id:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
         '60781fb0eba001142b091eeb',
       associateAssent: true,
       informationBasic: {

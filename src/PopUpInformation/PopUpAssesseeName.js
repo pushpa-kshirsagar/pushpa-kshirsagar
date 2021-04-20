@@ -9,7 +9,7 @@ import InputFeild from '../Atoms/InputField/InputField';
 import SelectField from '../Atoms/SelectField/SelectField';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
@@ -32,6 +32,7 @@ const PopUpAssesseeName = (props) => {
     userNameverifyDisable: true
   });
   const { popupMode } = useSelector((state) => state.PopUpReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
 
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
@@ -71,7 +72,11 @@ const PopUpAssesseeName = (props) => {
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      if(reviewMode === 'revise') {
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      }
     }
   };
   return (

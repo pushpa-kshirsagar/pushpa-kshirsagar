@@ -250,7 +250,9 @@ const PopUpDisplayPanelAssociate = (props) => {
                     conditionValue: {
                       condition: 'eq',
                       value: {
-                        from: '605255729d3c823d3964e0ec'
+                        from:
+                          selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                            .associateTagPrimary
                       }
                     }
                   }

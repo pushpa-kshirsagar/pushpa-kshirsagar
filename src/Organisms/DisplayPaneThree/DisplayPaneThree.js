@@ -10,15 +10,19 @@ import Sections from '../../Molecules/Section/Section';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSESSEE_INFO_CREATE,
+  ASSESSEE_INFO_REVISE_SAGA,
   ASSESSEE_SIGN_ON,
   CLEAR_ASSESSMENT_INFO,
   CLEAR_ASSIGNMENT_INFO,
   CLEAR_DISPLAY_PANE_THREE,
+  LOADER_START,
   NAVIGATOR_MODE,
+  SET_ASSESSEE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  UPDATE_ASSESSEE_BASIC_INFO
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -274,6 +278,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: NAVIGATOR_MODE });
   };
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
+  const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
 
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
@@ -292,8 +297,26 @@ export const DisplayPaneThree = () => {
     setIsShowReviseIcon(true);
   };
   const onClickReviseFinish = () => {
-    console.log('ON CLICK FINISH ICON');
-    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+    console.log('ON CLICK FINISH ICON', assesseeInfo.informationBasic);
+    if (headerOneBadgeOne === 'information') {
+      const { informationBasic } = assesseeInfo;
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: id,
+        associateId,
+        assessee: {
+          id,
+          informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSEE_INFO_REVISE_SAGA,
+        payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne: 'assessee', reqBody }
+      });
+    } else {
+      dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+    }
     setIsShowReviseIcon(true);
   };
   const onClickCreateAssessee = () => {
@@ -449,6 +472,56 @@ export const DisplayPaneThree = () => {
     });
   };
   console.log('DISPLAY PANE THREE++++++>', responseObject, headerOneBadgeThree);
+  const reviseAssesseeBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName, informationBasic);
+    dispatch({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
+    if (labelName === 'name') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    if (labelName === 'alias') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+  };
+  const reviseAssesseeRoleBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    dispatch({ type: SET_ASSESSEE_ROLE_REDUCER_STATE, payload: informationBasic });
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesROLECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'assesseesROLECREATE' }
+      });
+    }
+  };
+  const reviseAssesseeGroupBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesGROUPCREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'assesseesGROUPCREATE' }
+      });
+    }
+  };
 
   return (
     <>
@@ -483,6 +556,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssesseeBasicInformation}
                 />
               </div>
               <Sections
@@ -529,6 +603,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssesseeRoleBasicInformation}
                 />
               </div>
               <Sections
@@ -575,6 +650,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssesseeGroupBasicInformation}
                 />
               </div>
               <Sections
