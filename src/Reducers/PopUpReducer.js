@@ -107,6 +107,7 @@ const PopUpReducer = (istate = initialState, action) => {
       };
     case ASSESSEE_SIGN_ON:
       return {
+        ...istate,
         isPopUpOpen: true,
         isPopUpValue: action.payload.isPopUpValue,
         popupMode: action.payload.popupMode
