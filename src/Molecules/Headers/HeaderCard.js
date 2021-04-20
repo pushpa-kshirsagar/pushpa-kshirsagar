@@ -159,7 +159,7 @@ const HeaderCard = (props) => {
                   <IconButton>
                     {!isMobile && <NextIcon className={'iguru-iconbardefault'} />}
                   </IconButton>
-                ) : displayPane === 'right' && reviewMode !== 'revise' ? (
+                ) : displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '' ? (
                   <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>
@@ -182,7 +182,7 @@ const HeaderCard = (props) => {
                   <IconButton onClick={openLeftPaneTripleDotPopup}>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
-                ) : displayPane === 'right' ? (
+                ) : displayPane === 'right' && headerOne !== '' ? (
                   <IconButton onClick={openRightPaneTripleDotPopup}>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>

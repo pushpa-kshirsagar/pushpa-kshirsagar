@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
@@ -35,6 +35,7 @@ const PopUpMiddlePaneList = (props) => {
     selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const [isReviseMode, setIsReviseMode] = useState(false);
 
   const dispatch = useDispatch();
   const {
@@ -64,6 +65,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSESSEE_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            isReviseMode,
             headerOne:
               typeOfMiddlePaneList === 'administratorsDistinctReviewList'
                 ? 'administrator'
@@ -103,6 +105,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -265,6 +268,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -460,9 +464,17 @@ const PopUpMiddlePaneList = (props) => {
         payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
       });
       popupAllClose();
+      setIsReviseMode(false);
       // dispatch({ type: LOADER_STOP });
 
       // onClickInformation(secondaryOptionCheckValue);
+    }else if(dataVal === 'revise'){
+      // alert("IN REVISE");
+      setIsReviseMode(true);
+      dispatch({
+        type: SET_MIDDLEPANE_SECONDARY_OPTION,
+        payload: { badgeValue: dataVal, keyValue: keyVal }
+      });
     } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,

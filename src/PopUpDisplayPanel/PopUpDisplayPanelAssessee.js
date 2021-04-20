@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
@@ -36,6 +36,7 @@ const PopUpDisplayPanelAssessee = (props) => {
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
   const { signOut } = useContext(AccountContext);
   const history = useHistory();
+  const [isReviseMode, setIsReviseMode] = useState(false);
   const setSecondaryOptionValue = (e) => {
     dispatch({
       type: SET_SECONDARY_OPTION_VALUE,
@@ -102,6 +103,9 @@ const PopUpDisplayPanelAssessee = (props) => {
       valueArr = [];
       reviseSecondaryOptionCheckValue = '';
     }
+    if(clickValue === 'revise'){
+      setIsReviseMode(true);
+    }
     if (clickValue === 'information' && popupHeaderOne === 'assessee') {
       dispatch({ type: LOADER_START });
       dispatch({
@@ -109,10 +113,12 @@ const PopUpDisplayPanelAssessee = (props) => {
         payload: {
           secondaryOptionCheckValue,
           headerOne: 'assessee',
+          isReviseMode,
           reqBody: {
             assesseeId: selectedAssociateInfo?.assesseeId,
             associateId:
-              selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary,
             filter: 'true',
             searchCondition: 'AND',
             search: [
@@ -125,7 +131,7 @@ const PopUpDisplayPanelAssessee = (props) => {
                     conditionValue: {
                       condition: 'eq',
                       value: {
-                        from: '6054a4d6cb14fb2075aeec87'
+                        from: selectedAssociateInfo?.assesseeId
                       }
                     }
                   }
@@ -135,6 +141,7 @@ const PopUpDisplayPanelAssessee = (props) => {
           }
         }
       });
+      setIsReviseMode(false);
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
     // dispatch({

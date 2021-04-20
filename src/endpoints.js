@@ -91,4 +91,6 @@ export const CONFIRM_ASSESSEE_URL =
   'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/update-sign-in-info';
 export const ASSESSEE_SIGN_IN_INFO_URL =
   'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/refresh-signin-information';
+export const ASSESSEE_INFO_REVISE_URL =
+  'https://b5qcx708x7.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/revise';
 // export const URL = '';

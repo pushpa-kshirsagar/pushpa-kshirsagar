@@ -24,6 +24,7 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
+      const { isReviseMode = false } = data.payload;
       console.log('IN ROLE REVIEW+++++', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -32,7 +33,8 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          reviewMode: isReviseMode ? 'revise' : ''
         }
       });
     }

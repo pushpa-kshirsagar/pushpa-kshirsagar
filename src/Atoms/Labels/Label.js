@@ -8,7 +8,8 @@ const Label = (props) => {
     fontSize = '1.2rem',
     text = 'Sample Text',
     colour = '#000000',
-    isBadge = false
+    isBadge = false,
+    onClickLabel
   } = props;
   const style = {
     color: colour
@@ -16,7 +17,12 @@ const Label = (props) => {
 
   return (
     <div style={style} className={isBadge ? 'batch-container' : 'text-container'}>
-      <p style={{ ...style, fontSize: fontSize }} className={`${className} text-style`}>
+      <p
+        style={{ ...style, fontSize: fontSize }}
+        data-value={text}
+        className={`${className} text-style`}
+        onClick={onClickLabel}
+      >
         {text}
       </p>
     </div>

@@ -7,13 +7,14 @@ import InputFeild from '../Atoms/InputField/InputField';
 import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import PropTypes from 'prop-types';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpTextField = (props) => {
   const dispatch = useDispatch();
   const { popupMode } = useSelector((state) => state.PopUpReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
     headerPanelColour = '',
     headerOne = '',
@@ -57,7 +58,11 @@ const PopUpTextField = (props) => {
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
     if (validateFun()) {
+      if(reviewMode === 'revise') {
+        dispatch({ type: POPUP_CLOSE });
+      } else {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      }
     }
   };
   return (

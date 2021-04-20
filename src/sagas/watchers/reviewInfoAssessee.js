@@ -25,6 +25,7 @@ function* workerReviewInfoAssesseeSaga(data) {
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       // console.log('ASSESSEE_REVIEW_INFO=======>', userResponse);
+      const { isReviseMode = false } = data.payload;
       if (data.payload.setLeftPaneAssessee) {
         yield put({
           type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -40,7 +41,8 @@ function* workerReviewInfoAssesseeSaga(data) {
             headerOne: data.payload.headerOne,
             headerOneBadgeOne: 'information',
             headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-            responseObject: userResponse.responseObject[0]
+            responseObject: userResponse.responseObject[0],
+            reviewMode: isReviseMode ? 'revise' : ''
           }
         });
       }
