@@ -13,6 +13,9 @@ const createAssesseeRoleApi = async (requestObj) => {
   console.log(requestObj.data);
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(ASSESSEE_ROLE_CREATE_URL, requestOptions);

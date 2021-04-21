@@ -11,6 +11,9 @@ const associateReviewInfoApi = async (requestObj) => {
   let URL = ASSOCIATE_REVIEW_INFO_URL;
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(URL, requestOptions);

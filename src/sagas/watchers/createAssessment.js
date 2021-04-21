@@ -13,6 +13,9 @@ import { ASSESSMENT_CREATE_URL } from '../../endpoints';
 const createAssessmentApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(ASSESSMENT_CREATE_URL, requestOptions);

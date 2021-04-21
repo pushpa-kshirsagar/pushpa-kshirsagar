@@ -1,32 +1,22 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { signUpForAwsCognito } from '../../Actions/GenericActions';
 import {
   CREATE_ASSOCIATE_SAGA,
   SET_ASSOCIATE_INFORMATION,
-  SET_ASSESSEE_INFORMATION_DATA,
   LOADER_STOP,
   SET_DISPLAY_PANE_THREE_STATE,
   CLEAR_ASSOCIATE_INFO,
   POPUP_CLOSE,
   SET_MOBILE_PANE_STATE
 } from '../../actionType';
-import { ASSESSEE_CREATE_URL, ASSOCIATE_CREATE_URL } from '../../endpoints';
-const createAssesseeApi = async (requestObj) => {
-  console.log(requestObj.data);
-  let URL = ASSESSEE_CREATE_URL;
-  const requestOptions = {
-    method: 'POST',
-    body: JSON.stringify(requestObj.data)
-  };
-  const response = await fetch(URL, requestOptions);
-  const json = await response.json();
-  return json;
-};
+import { ASSOCIATE_CREATE_URL } from '../../endpoints';
 
 const createAssociateApi = async (requestObj) => {
   console.log(requestObj.data);
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(ASSOCIATE_CREATE_URL, requestOptions);

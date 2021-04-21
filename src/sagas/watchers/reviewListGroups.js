@@ -23,6 +23,9 @@ const GroupsReviewListDistinctApi = async (requestObj) => {
   // let URL = ASSESSEE_GROUP_REVIEWLIST_URL;
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(requestObj.URL, requestOptions);
@@ -182,7 +185,6 @@ function* workerReviewAssignmentGroupListSaga(data) {
     console.log('loading end');
     yield put({ type: LOADER_STOP });
     yield put({ type: CLEAR_ASSIGNMENT_INFO });
-
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

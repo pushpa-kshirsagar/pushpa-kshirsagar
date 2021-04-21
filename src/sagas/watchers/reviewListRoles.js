@@ -14,6 +14,9 @@ const associateRoleReviewListDistinctApi = async (requestObj) => {
   let URL = ASSOCIATE_ROLE_REVIEW_LIST_URL;
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(URL, requestOptions);
@@ -25,6 +28,9 @@ const assesseeRoleReviewListDistinctApi = async (requestObj) => {
   let URL = ASSESSEE_ROLE_REVIEW_LIST_URL;
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(URL, requestOptions);

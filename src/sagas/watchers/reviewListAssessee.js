@@ -12,6 +12,9 @@ const assesseesReviewListDistinctApi = async (requestObj) => {
   let URL = ASSESSEE_REVIEW_LIST_URL;
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(URL, requestOptions);

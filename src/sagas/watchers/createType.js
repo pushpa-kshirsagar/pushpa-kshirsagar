@@ -12,6 +12,9 @@ import { ASSESSMENT_TYPE_CREATE_URL, ASSIGNMENT_TYPE_CREATE_URL } from '../../en
 const createTypeApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   let URL = '';

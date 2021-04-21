@@ -13,6 +13,9 @@ import { ASSIGNMENT_CREATE_URL } from '../../endpoints';
 const createAssignmentApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(ASSIGNMENT_CREATE_URL, requestOptions);
