@@ -27,11 +27,8 @@ import {
   SET_MIDDLEPANE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import {
-  makeAssesseeGroupObj,
-  makeAssesseeReviewListRequestObject,
-  makeAssesseeRoleObj
-} from '../Actions/GenericActions';
+import { makeAssesseeGroupObj, makeAssesseeRoleObj } from '../Actions/GenericActions';
+import { getAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
 
 const PopUpAssesseesModule = (props) => {
   const {
@@ -79,8 +76,8 @@ const PopUpAssesseesModule = (props) => {
         type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
         payload: {
           request: roleRequestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
+          BadgeOne: '',
+          BadgeTwo: '',
           BadgeThree: '',
           isMiddlePaneList: false
         }
@@ -102,30 +99,13 @@ const PopUpAssesseesModule = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (targetValue === 'distinct') {
-      let requestObect = makeAssesseeReviewListRequestObject(
+      getAssesseeDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assesseeDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-      dispatch({
-        type: ASSESSEE_REVIEW_DISTINCT_SAGA,
-        payload: {
-          HeaderOne: 'assessees',
-          request: requestObect,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue
-        }
-      });
       dispatch({ type: ASSESSEE_INFO_CREATE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {

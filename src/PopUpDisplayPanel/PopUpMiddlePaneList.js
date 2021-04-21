@@ -6,6 +6,7 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
+  ASSESSEE_INFO_REVISE_SAGA,
   GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSESSEE_INFO_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
@@ -19,12 +20,14 @@ import {
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_START,
+  POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
   SET_MOBILE_PANE_STATE,
   SET_SECONDARY_CREATE_OPTION_VALUE
 } from '../actionType';
+import { getAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -34,7 +37,12 @@ const PopUpMiddlePaneList = (props) => {
     secondaryOptionCheckValue,
     selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const {
+    selectedAssociateInfo,
+    countPage,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeOne
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [isReviseMode, setIsReviseMode] = useState(false);
 
   const dispatch = useDispatch();
@@ -44,6 +52,7 @@ const PopUpMiddlePaneList = (props) => {
     popupAllClose,
     typeOfMiddlePaneList
   } = props;
+
   const setSecondaryOptionValue = (e) => {
     dispatch({
       type: SET_SECONDARY_CREATE_OPTION_VALUE,
@@ -53,6 +62,7 @@ const PopUpMiddlePaneList = (props) => {
   const ChangeOptionPopup = (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
+    // alert(keyVal, 'keyVal');
     if (dataVal === 'information') {
       console.log(selectedTagValue);
       dispatch({ type: LOADER_START });
@@ -468,13 +478,44 @@ const PopUpMiddlePaneList = (props) => {
       // dispatch({ type: LOADER_STOP });
 
       // onClickInformation(secondaryOptionCheckValue);
-    }else if(dataVal === 'revise'){
+    } else if (dataVal === 'revise') {
       // alert("IN REVISE");
       setIsReviseMode(true);
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: { badgeValue: dataVal, keyValue: keyVal }
       });
+    } else if (
+      (dataVal === 'suspendApiCall' ||
+        dataVal === 'terminateApiCall' ||
+        dataVal === 'unsuspendApiCall' ||
+        dataVal === 'unterminateApiCall') &&
+      popupHeaderOne === 'assessee'
+    ) {
+      let reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessee: {
+          id: selectedTagValue,
+          informationEngagement: {
+            assesseeStatus: keyVal
+          }
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSEE_INFO_REVISE_SAGA,
+        payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+      });
+      getAssesseeDistinctApiCall(
+        selectedAssociateInfo,
+        middlePaneHeaderBadgeTwo,
+        countPage,
+        dispatch,
+        middlePaneHeaderBadgeOne
+      );
+      dispatch({ type: POPUP_CLOSE });
     } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,

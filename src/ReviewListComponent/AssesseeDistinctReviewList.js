@@ -130,7 +130,8 @@ const AssesseeDistinctReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSESSEE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status')
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -158,6 +159,7 @@ const AssesseeDistinctReviewList = (props) => {
                   middlePaneHeaderBadgeTwo,
                   item.informationEngagement.assesseeStatus
                 )}
+                actualStatus={ item.informationEngagement.assesseeStatus}
                 isSelectedReviewList={
                   middlePaneSelectedValue ===
                   item.informationEngagement.assesseeTag?.assesseeTagPrimary

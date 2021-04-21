@@ -18,7 +18,8 @@ const ReviewList = (props) => {
     isSelectedReviewList = false,
     onClickEvent = null,
     tag = '',
-    id
+    id,
+    actualStatus=''
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
@@ -29,6 +30,7 @@ const ReviewList = (props) => {
           className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
           tag={tag}
           id={id}
+          status={actualStatus}
           data-value={id}
           onClick={onClickEvent}
           style={{ backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '' }}

@@ -74,10 +74,7 @@ const PopupAssessmentsModule = (props) => {
           isMiddlePaneList: false
         }
       });
-      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
-
       dispatch({
         type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
         payload: {

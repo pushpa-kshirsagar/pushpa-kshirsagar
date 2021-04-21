@@ -16,7 +16,9 @@ import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 const AssessmentCreatePopup = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { selectedAssociateInfo,coreTypeReviewListData,coreGroupReviewListData } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, coreTypeReviewListData, coreGroupReviewListData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const { informationBasic, informationAllocation } = useSelector(
     (state) => state.AssessmentReducer
   );

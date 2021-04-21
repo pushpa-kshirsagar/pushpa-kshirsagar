@@ -59,6 +59,7 @@ const initialState = {
   secondaryOptionCheckValue: '',
   whichReviewList: '',
   selectedTagValue: '',
+  selectedTagStatus: '',
   currentPopUpOption: [],
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
@@ -151,6 +152,7 @@ const PopUpReducer = (istate = initialState, action) => {
         secondaryOptionCheckValue: action.payload.secondaryOptionCheckValue,
         popupMode: action.payload.popupMode,
         selectedTagValue: action.payload.selectedTagValue,
+        selectedTagStatus: action.payload.selectedTagStatus,
         currentPopUpOption: action.payload.currentPopUpOption
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
@@ -191,6 +193,7 @@ const PopUpReducer = (istate = initialState, action) => {
         };
       }
     case SET_MIDDLEPANE_SECONDARY_OPTION: {
+      let arrVal = istate.secondaryPopUpOptions[action.payload.badgeValue];
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
@@ -207,7 +210,7 @@ const PopUpReducer = (istate = initialState, action) => {
             popupHeaderOneBadgeOne: action.payload.keyValue,
             popupHeaderOneBadgeTwo: '',
             popupOpenType: 'secondary',
-            popupContentArrValue: istate.secondaryPopUpOptions[action.payload.badgeValue],
+            popupContentArrValue: arrVal,
             secondaryOptionCheckValue:
               action.payload.badgeValue === 'notifications' ||
               action.payload.badgeValue === 'reports'
@@ -215,6 +218,35 @@ const PopUpReducer = (istate = initialState, action) => {
                 : 'active'
           };
         } else {
+          if (
+            (action.payload.badgeValue === 'suspend' ||
+              action.payload.badgeValue === 'terminate') &&
+            (istate.selectedTagStatus === 'CONFIRMED' ||
+              istate.selectedTagStatus === 'UNCONFIRMED' ||
+              istate.selectedTagStatus === 'ACTIVE')
+          ) {
+            arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
+          }
+          if (
+            (action.payload.badgeValue === 'suspend' && istate.selectedTagStatus === 'SUSPENDED') ||
+            (action.payload.badgeValue === 'terminate' && istate.selectedTagStatus === 'TERMINATED')
+          ) {
+            arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
+          }
+          if (
+            (action.payload.badgeValue === 'suspend' && istate.selectedTagStatus === 'TERMINATED') ||
+            (action.payload.badgeValue === 'terminate' && istate.selectedTagStatus === 'SUSPENDED')
+          ) {
+            arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
+          }
+          // if (
+          //   (action.payload.badgeValue === 'suspend' ||
+          //     action.payload.badgeValue === 'terminate') &&
+          //   (istate.selectedTagStatus === 'TERMINATED' || istate.selectedTagStatus === 'SUSPENDED')
+          // )
+          //  {
+          //   arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
+          // }
           return {
             ...istate,
             popupHeaderOne: istate.popupHeaderOne,
@@ -222,7 +254,7 @@ const PopUpReducer = (istate = initialState, action) => {
             popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,
             popupHeaderOneBadgeTwo: action.payload.badgeValue,
             popupOpenType: 'secondary',
-            popupContentArrValue: istate.secondaryPopUpOptions[action.payload.keyValue],
+            popupContentArrValue: arrVal,
             secondaryOptionCheckValue:
               action.payload.keyValue === 'reviseKey' || action.payload.keyValue === 'reviewKey'
                 ? 'key'

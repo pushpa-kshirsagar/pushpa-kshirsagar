@@ -1554,13 +1554,15 @@ export const SELECT_OPTION_PUPUP = [
 export const SUSPEND_PUPUP = [
   {
     data: 'suspend',
-    dataValue: 'suspend',
+    dataValue: 'suspendApiCall',
+    dataKey: 'SUSPENDED',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'unsuspend',
-    dataValue: 'unsuspend',
+    dataValue: 'unsuspendApiCall',
+    dataKey: 'CONFIRMED',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -1568,27 +1570,29 @@ export const SUSPEND_PUPUP = [
 export const TERMINATE_PUPUP = [
   {
     data: 'terminate',
-    dataValue: 'terminate',
+    dataValue: 'terminateApiCall',
+    dataKey: 'TERMINATED',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'unterminate',
-    dataValue: 'unterminate',
+    dataValue: 'unterminateApiCall',
+    dataKey: 'CONFIRMED',
     optionClass: 'optionPrimary',
     disabled: false
   }
 ];
 export const PUBLISH_PUPUP = [
   {
-    data: 'terminate',
-    dataValue: 'terminate',
+    data: 'publish',
+    dataValue: 'publish',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
-    data: 'unterminate',
-    dataValue: 'unterminate',
+    data: 'unpublish',
+    dataValue: 'unpublish',
     optionClass: 'optionPrimary',
     disabled: false
   }

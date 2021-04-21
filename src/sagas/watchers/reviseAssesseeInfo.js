@@ -25,22 +25,24 @@ function* workerReviseInfoAssesseeSaga(data) {
   try {
     const userResponse = yield call(assesseesReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: data.payload.headerOne,
-          headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject[0]
-        }
-      });
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
-        payload: 'review'
-      });
+      if (data.payload.secondaryOptionCheckValue !== '') {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: data.payload.headerOne,
+            headerOneBadgeOne: 'information',
+            headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+            responseObject: userResponse.responseObject[0]
+          }
+        });
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
+          payload: 'review'
+        });
+        console.log('loading end');
+        yield put({ type: LOADER_STOP });
+      }
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

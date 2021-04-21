@@ -2,6 +2,7 @@ import {
   ASSIGNMENT_POPUP_OPEN,
   CLEAR_ASSIGNMENT_INFO,
   SET_ASSIGNMENT_BASIC_REDUCER_STATE,
+  SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
   SET_ASSIGNMENT_NEXT_POPUP,
   SET_ASSIGNMENT_PREVIOUS_POPUP,
   SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
@@ -155,6 +156,17 @@ const AssignmentReducer = (istate = initialState, action) => {
       return {
         ...istate,
         informationBasic: action.payload
+      };
+    case SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        informationAllocation: {
+          ...istate.informationAllocation,
+          [action.payload.stateName]: {
+            ...istate.informationAllocation[action.payload.stateName],
+            [action.payload.actualStateName]: action.payload.value
+          }
+        }
       };
     case CLEAR_ASSIGNMENT_INFO:
       return initialState;
