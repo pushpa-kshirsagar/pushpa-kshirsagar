@@ -522,6 +522,34 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseAssociateGroupBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    if (labelName === 'name') {
+     
+    }
+    if (labelName === 'description') {
+     
+    }
+  };
+
+  const reviseAssociateRoleBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    if (labelName === 'name') {
+    }
+    if (labelName === 'description') {
+    }
+  };
+
+  const reviseAssociateBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    if (labelName === 'name') {
+    }
+    if (labelName === 'description') {
+    }
+  };
 
   return (
     <>
@@ -697,6 +725,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssociateGroupBasicInformation}
                 />
               </div>
               <Sections
@@ -1019,6 +1048,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssociateRoleBasicInformation}
                 />
               </div>
               <Sections
@@ -1062,6 +1092,7 @@ export const DisplayPaneThree = () => {
                 isVerifiedActiveName={false}
                 isVerifiedActivePicture={false}
                 mode={reviewMode}
+                onClickRevise={reviseAssociateBasicInformation}
               />
             </div>
             <Sections

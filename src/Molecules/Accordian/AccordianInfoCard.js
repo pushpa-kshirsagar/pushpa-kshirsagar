@@ -4,7 +4,7 @@ import { IconButton } from '@material-ui/core';
 import './Accordian.css';
 
 const AccordianInfoCard = (props) => {
-  const { mode = '', accordianObject } = props;
+  const { mode = '', accordianObject, onClickRevise } = props;
   const {
     labelTextOneOne = '',
     labelTextOneOneBadges = [],
@@ -43,6 +43,8 @@ const AccordianInfoCard = (props) => {
                     display: 'inline-block'
                   }}
                   className={mode === 'revise' ? 'linkText' : ''}
+                  onClick={onClickRevise}
+                  data-value={labelTextOneOne}
                 >
                   {labelTextOneOne}
                 </span>

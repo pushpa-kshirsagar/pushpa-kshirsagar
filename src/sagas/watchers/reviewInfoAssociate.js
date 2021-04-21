@@ -27,13 +27,15 @@ function* workerReviewInfoAssociateSaga(data) {
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       console.log('ASSESSEE_REVIEW_INFO=======>', userResponse);
+      const { isReviseMode = false } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
           headerOne: 'associate',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          reviewMode: isReviseMode ? 'revise' : ''
         }
       });
     }

@@ -2,22 +2,33 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import {
+  ASSESSEE_SIGN_ON,
+  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  LOADER_START,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT
+} from '../../actionType';
+import { makeAssesseeGroupObj, makeAssesseeRoleObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOne = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const dispatch = useDispatch();
   const { informationEngagement, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  const list1 = [
+  const allianceList1 = [
     {
       id: 'a1',
       labelTextOneOne: 'family',
@@ -109,7 +120,7 @@ const DisplayPaneThreeSectionOne = () => {
       isListCard: true
     }
   ];
-  const list2 = [
+  const allocationList1 = [
     {
       id: 'a1',
       labelTextOneOne: 'group',
@@ -202,7 +213,7 @@ const DisplayPaneThreeSectionOne = () => {
     },
     {
       id: 'a4',
-      labelTextOneOne: 'type',
+      labelTextOneOne: 'role',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
@@ -231,7 +242,7 @@ const DisplayPaneThreeSectionOne = () => {
       isListCard: true
     }
   ];
-  const list3 = [
+  const engagementList1 = [
     {
       id: 'a1',
       labelTextOneOne: 'log',
@@ -295,7 +306,7 @@ const DisplayPaneThreeSectionOne = () => {
       isListCard: false
     }
   ];
-  const list4 = [
+  const setupList1 = [
     {
       id: 'a1',
       labelTextOneOne: 'sign-in',
@@ -315,6 +326,74 @@ const DisplayPaneThreeSectionOne = () => {
     }
   ];
 
+  const reviseAlliance = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      dispatch({ type: LOADER_START });
+      let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({
+        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'GROUPLISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    if (labelName === 'manager') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'MANAGERLISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    if (labelName === 'node') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'NODELISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    if (labelName === 'role') {
+      let roleRequestObj = makeAssesseeRoleObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+
+      dispatch({
+        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'ROLELISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+  };
+  const reviseEngagement = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
+  const reviseSetup = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
+
   return (
     <div
       style={{
@@ -329,8 +408,9 @@ const DisplayPaneThreeSectionOne = () => {
               headerOne="alliance"
               isDisplayCardExpanded={listExpand === 'alliance'}
               setListExpand={setListExpand}
-              list={list1}
+              list={allianceList1}
               mode={reviewMode}
+              onClickRevise={reviseAlliance}
             />
           </div>
           <div className="containerPadding">
@@ -338,8 +418,9 @@ const DisplayPaneThreeSectionOne = () => {
               headerOne="allocation"
               isDisplayCardExpanded={listExpand === 'allocation'}
               setListExpand={setListExpand}
-              list={list2}
+              list={allocationList1}
               mode={reviewMode}
+              onClickRevise={reviseAllocation}
             />
           </div>
           <div className="containerPadding">
@@ -347,8 +428,9 @@ const DisplayPaneThreeSectionOne = () => {
               headerOne="engagement"
               isDisplayCardExpanded={listExpand === 'engagement'}
               setListExpand={setListExpand}
-              list={list3}
+              list={engagementList1}
               mode={reviewMode}
+              onClickRevise={reviseEngagement}
             />
           </div>
           <div className="containerPadding">
@@ -356,8 +438,9 @@ const DisplayPaneThreeSectionOne = () => {
               headerOne="setup"
               isDisplayCardExpanded={listExpand === 'setup'}
               setListExpand={setListExpand}
-              list={list4}
+              list={setupList1}
               mode={reviewMode}
+              onClickRevise={reviseSetup}
             />
           </div>
         </>
@@ -365,7 +448,7 @@ const DisplayPaneThreeSectionOne = () => {
         <>
           <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
             <Paper className={'dossierContainerTop'}>
-              {list2.map((ob) => {
+              {allocationList1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -380,7 +463,7 @@ const DisplayPaneThreeSectionOne = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list3.map((ob) => {
+              {engagementList1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -395,7 +478,7 @@ const DisplayPaneThreeSectionOne = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list4.map((ob) => {
+              {setupList1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (

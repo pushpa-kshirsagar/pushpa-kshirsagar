@@ -28,6 +28,7 @@ function* workerReviewAssociateGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
+      const { isReviseMode = false } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -35,7 +36,8 @@ function* workerReviewAssociateGroupInfoSaga(data) {
           headerOneBadgeOne: 'group',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          reviewMode: isReviseMode ? 'revise' : ''
         }
       });
     }

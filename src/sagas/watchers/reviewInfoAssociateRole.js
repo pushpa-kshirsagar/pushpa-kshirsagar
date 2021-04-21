@@ -28,6 +28,7 @@ function* workerReviewAssociateRoleInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN ASSOCIATE ROLE Review', userResponse);
+      const { isReviseMode = false } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -35,7 +36,8 @@ function* workerReviewAssociateRoleInfoSaga(data) {
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          reviewMode: isReviseMode ? 'revise' : ''
         }
       });
     }

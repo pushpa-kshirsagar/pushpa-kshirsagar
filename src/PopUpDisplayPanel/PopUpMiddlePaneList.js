@@ -149,6 +149,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -182,6 +183,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSOCIATE_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -311,6 +313,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

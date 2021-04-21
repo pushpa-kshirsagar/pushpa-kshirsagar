@@ -5,7 +5,7 @@ import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
 
 const AccordianListCard = (props) => {
-  const { accordianObject, mode='' } = props;
+  const { accordianObject, mode = '', onClickRevise } = props;
   const {
     labelTextOneOne = '',
     labelTextOneOneBadgeOne = '',
@@ -33,7 +33,13 @@ const AccordianListCard = (props) => {
                   'careerLabelRighttransform'
                 ].join(' ')}
               >
-                <span className={mode === 'revise' ? 'linkText' : ''}>{labelTextOneOne}</span>
+                <span
+                  onClick={onClickRevise}
+                  data-value={labelTextOneOne}
+                  className={mode === 'revise' ? 'linkText' : ''}
+                >
+                  {labelTextOneOne}
+                </span>
                 {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
                 {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
                 {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}

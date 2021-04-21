@@ -7,21 +7,27 @@ import Fingerprint from '@material-ui/icons/Fingerprint';
 import Manuscript from '@material-ui/icons/Description';
 import MailOutline from '@material-ui/icons/MailOutline';
 import TelephoneVerified from '@material-ui/icons/Call';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import {
+  ASSESSEE_SIGN_ON,
+  UPDATE_ASSESSEE_CONTACT_INFO,
+  UPDATE_ASSESSEE_PERSONAL_INFO
+} from '../../actionType';
 
 const DisplayPaneThreeSectionTwo = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const dispatch = useDispatch();
   const { informationContact, informationPersonal } = responseObject;
 
   // const longAddressForTest =
   //   '602 Silver Beliza, 48 St. Francis Avenue, SantaCruz West,  Mumbai, Maharashtra 400054, India';
-  const list1 = [
+  const careerListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'document',
@@ -36,7 +42,7 @@ const DisplayPaneThreeSectionTwo = () => {
       IconOne: Manuscript
     }
   ];
-  const list2 = [
+  const contactListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'email address',
@@ -159,7 +165,7 @@ const DisplayPaneThreeSectionTwo = () => {
       }
     }
   ];
-  const list3 = [
+  const credentialListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'fingerprint',
@@ -210,7 +216,7 @@ const DisplayPaneThreeSectionTwo = () => {
       }
     }
   ];
-  const list4 = [
+  const personalListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'birthdate',
@@ -264,7 +270,7 @@ const DisplayPaneThreeSectionTwo = () => {
       isListCard: false
     }
   ];
-  const list5 = [
+  const contactListKey = [
     {
       id: 'a1',
       labelTextOneOne: 'email address',
@@ -315,7 +321,7 @@ const DisplayPaneThreeSectionTwo = () => {
     }
   ];
 
-  const list6 = [
+  const personalListKey = [
     {
       id: 'a4',
       labelTextOneOne: 'gender',
@@ -325,6 +331,115 @@ const DisplayPaneThreeSectionTwo = () => {
       isListCard: false
     }
   ];
+  const reviseCareer = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
+
+  const reviseContact = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'email address') {
+      if (informationContact.assesseeAddressEmailPrimary !== null) {
+        dispatch({
+          type: UPDATE_ASSESSEE_CONTACT_INFO,
+          payload: {
+            stateName: 'assesseeAddressEmailPrimary',
+            value: informationContact.assesseeAddressEmailPrimary
+          }
+        });
+      }
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'EMAILPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    if (labelName === 'home address') {
+      if (informationContact.assesseeAddressHomePrimary !== null) {
+        dispatch({
+          type: UPDATE_ASSESSEE_CONTACT_INFO,
+          payload: {
+            stateName: 'assesseeAddressHomePrimary',
+            value: informationContact.assesseeAddressHomePrimary
+          }
+        });
+      }
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'HOMEADDRESSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    if (labelName === 'work address') {
+      if (informationContact.assesseeAddressWorkPrimary !== null) {
+        dispatch({
+          type: UPDATE_ASSESSEE_CONTACT_INFO,
+          payload: {
+            stateName: 'assesseeAddressWorkPrimary',
+            value: informationContact.assesseeAddressWorkPrimary
+          }
+        });
+      }
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'WORKADDRESSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    if (labelName === 'home telephone') {
+      if (informationContact.assesseeTelephoneHomePrimary !== null) {
+        dispatch({
+          type: UPDATE_ASSESSEE_CONTACT_INFO,
+          payload: {
+            stateName: 'assesseeTelephoneHomePrimary',
+            value: informationContact.assesseeTelephoneHomePrimary
+          }
+        });
+      }
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'HOMETELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    if (labelName === 'mobile telephone') {
+      if (informationContact.assesseeTelephoneMobilePrimary !== null) {
+        dispatch({
+          type: UPDATE_ASSESSEE_CONTACT_INFO,
+          payload: {
+            stateName: 'assesseeTelephoneMobilePrimary',
+            value: informationContact.assesseeTelephoneMobilePrimary
+          }
+        });
+      }
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+  };
+
+  const reviseCredential = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
+
+  const revisePersonal = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    dispatch({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
+    console.log('=====>', labelName);
+    if (labelName === 'birthdate') {
+    }
+    if (labelName === 'birthmark') {
+    }
+    if (labelName === 'birthplace') {
+    }
+    if (labelName === 'community') {
+    }
+    if (labelName === 'gender') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'SINGLEDROPDOWNPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+  };
 
   return (
     <div
@@ -340,8 +455,9 @@ const DisplayPaneThreeSectionTwo = () => {
               headerOne="career"
               isDisplayCardExpanded={listExpand === 'career'}
               setListExpand={setListExpand}
-              list={list1}
+              list={careerListAll}
               mode={reviewMode}
+              onClickRevise={reviseCareer}
             />
           </div>
           <div className="containerPadding">
@@ -349,8 +465,9 @@ const DisplayPaneThreeSectionTwo = () => {
               headerOne="contact"
               isDisplayCardExpanded={listExpand === 'contact'}
               setListExpand={setListExpand}
-              list={list2}
+              list={contactListAll}
               mode={reviewMode}
+              onClickRevise={reviseContact}
             />
           </div>
           <div className="containerPadding">
@@ -358,8 +475,9 @@ const DisplayPaneThreeSectionTwo = () => {
               headerOne="credential"
               isDisplayCardExpanded={listExpand === 'credential'}
               setListExpand={setListExpand}
-              list={list3}
+              list={credentialListAll}
               mode={reviewMode}
+              onClickRevise={reviseCredential}
             />
           </div>
           <div className="containerPadding">
@@ -367,8 +485,9 @@ const DisplayPaneThreeSectionTwo = () => {
               headerOne="personal"
               isDisplayCardExpanded={listExpand === 'personal'}
               setListExpand={setListExpand}
-              list={list4}
+              list={personalListAll}
               mode={reviewMode}
+              onClickRevise={revisePersonal}
             />
           </div>
         </>
@@ -376,7 +495,7 @@ const DisplayPaneThreeSectionTwo = () => {
         <>
           <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
             <Paper className={'dossierContainerTop'}>
-              {list5.map((ob) => {
+              {contactListKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -391,7 +510,7 @@ const DisplayPaneThreeSectionTwo = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list6.map((ob) => {
+              {personalListKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (

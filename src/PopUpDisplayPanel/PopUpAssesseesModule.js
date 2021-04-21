@@ -57,7 +57,6 @@ const PopUpAssesseesModule = (props) => {
       dispatch({ type: ASSESSEE_INFO_CREATE });
       dispatch({ type: LOADER_START });
       let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
         payload: {
