@@ -18,7 +18,8 @@ import {
   UPDATE_ASSESSEE_COMMUNICATION,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_ASSESSEE_INFORMATION_DATA,
-  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+  UPDATE_ASSESSEE_CONTACT_INFO
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -104,13 +105,88 @@ const initialState = {
       assesseeAddressEmailCommunication: false,
       assesseeAddressEmailVerification: false
     },
+    assesseeAddressHomePrimary: {
+      assesseeAddressCountryRegion: '',
+      assesseeAddressProvinceState: '',
+      assesseeAddressPostcode: '',
+      assesseeAddressCity: '',
+      assesseeAddress: '',
+      assesseeAddressCommunication: false,
+      assesseeAddressVerification: false
+    },
+    assesseeAddressHomeSecondary: {
+      assesseeAddressCountryRegion: '',
+      assesseeAddressProvinceState: '',
+      assesseeAddressPostcode: '',
+      assesseeAddressCity: '',
+      assesseeAddress: '',
+      assesseeAddressCommunication: false,
+      assesseeAddressVerification: false
+    },
+    assesseeAddressWorkPrimary: {
+      assesseeAddressCountryRegion: '',
+      assesseeAddressProvinceState: '',
+      assesseeAddressPostcode: '',
+      assesseeAddressCity: '',
+      assesseeAddress: '',
+      assesseeAddressCommunication: false,
+      assesseeAddressVerification: false
+    },
+    assesseeAddressWorkSecondary: {
+      assesseeAddressCountryRegion: '',
+      assesseeAddressProvinceState: '',
+      assesseeAddressPostcode: '',
+      assesseeAddressCity: '',
+      assesseeAddress: '',
+      assesseeAddressCommunication: false,
+      assesseeAddressVerification: false
+    },
+    assesseeTelephoneHomePrimary: {
+      assesseeTelephoneCountryRegion: '',
+      assesseeTelephoneAreaCity: '',
+      assesseeTelephoneNumber: '',
+      assesseeTelephoneExtension: '',
+      assesseeTelephoneCommunication: false,
+      assesseeTelephoneVerification: false
+    },
+    assesseeTelephoneHomeSecondary: {
+      assesseeTelephoneCountryRegion: '',
+      assesseeTelephoneAreaCity: '',
+      assesseeTelephoneNumber: '',
+      assesseeTelephoneExtension: '',
+      assesseeTelephoneCommunication: false,
+      assesseeTelephoneVerification: false
+    },
+    assesseeTelephoneWorkPrimary: {
+      assesseeTelephoneCountryRegion: '',
+      assesseeTelephoneAreaCity: '',
+      assesseeTelephoneNumber: '',
+      assesseeTelephoneExtension: '',
+      assesseeTelephoneCommunication: false,
+      assesseeTelephoneVerification: false
+    },
+    assesseeTelephoneWorkSecondary: {
+      assesseeTelephoneCountryRegion: '',
+      assesseeTelephoneAreaCity: '',
+      assesseeTelephoneNumber: '',
+      assesseeTelephoneExtension: '',
+      assesseeTelephoneCommunication: false,
+      assesseeTelephoneVerification: false
+    },
     assesseeTelephoneMobilePrimary: {
+      assesseeTelephoneCountryRegion: '',
+      assesseeTelephoneNumber: '',
+      assesseeTelephoneCommunication: false,
+      assesseeTelephoneVerification: false
+    },
+    assesseeTelephoneMobileSecondary: {
       assesseeTelephoneCountryRegion: '',
       assesseeTelephoneNumber: '',
       assesseeTelephoneCommunication: false,
       assesseeTelephoneVerification: false
     }
   },
+
   informationSetup: {
     assesseeSignInCredential: ''
   },
@@ -243,11 +319,11 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         ...istate,
         informationPersonal: action.payload
       };
-    case UPDATE_ASSESSEE_HOMEADDRESS_INFO:
-      return {
-        ...istate,
-        homeAddressInfo: action.payload
-      };
+    // case UPDATE_ASSESSEE_HOMEADDRESS_INFO:
+    //   return {
+    //     ...istate,
+    //     homeAddressInfo: action.payload
+    //   };
     case UPDATE_ASSESSEE_INFO:
       return {
         ...istate,
@@ -269,10 +345,28 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           assesseeAddressEmailSecondary: action.payload
         }
       };
+    case UPDATE_ASSESSEE_HOMEADDRESS_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeAddressHomePrimary: action.payload
+        }
+        // workAddressInfo: action.payload
+      };
     case UPDATE_ASSESSEE_ENGAGEMENT_INFO:
       return {
         ...istate,
         informationEngagement: action.payload
+      };
+    case UPDATE_ASSESSEE_CONTACT_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          [action.payload.stateName]: action.payload.value
+        }
+        // informationContact: action.payload
       };
     case UPDATE_ASSESSEE_SETUP_PRIMARY_INFO:
       return {

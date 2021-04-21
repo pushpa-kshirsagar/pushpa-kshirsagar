@@ -526,16 +526,10 @@ export const DisplayPaneThree = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
     if (labelName === 'name') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesGROUPCREATE' }
-      });
+     
     }
     if (labelName === 'description') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'assesseesGROUPCREATE' }
-      });
+     
     }
   };
 

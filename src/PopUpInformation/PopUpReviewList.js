@@ -7,12 +7,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import '../Molecules/PopUp/PopUp.css';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { useDispatch, useSelector } from 'react-redux';
+import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 
 const PopUpReviewList = (props) => {
   const dispatch = useDispatch();
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
 
   const {
     isActive,
@@ -37,7 +38,11 @@ const PopUpReviewList = (props) => {
 
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    if (reviewMode === 'revise') {
+      dispatch({ type: POPUP_CLOSE });
+    } else {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    }
   };
   return (
     <div>

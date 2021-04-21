@@ -5,7 +5,14 @@ import './Accordian.css';
 import AccordianInfoCard from './AccordianInfoCard';
 
 export const AllocationAccordian = (props) => {
-  const { isDisplayCardExpanded, headerOne, setListExpand, list = [], mode = '' } = props;
+  const {
+    isDisplayCardExpanded,
+    headerOne,
+    setListExpand,
+    list = [],
+    mode = '',
+    onClickRevise
+  } = props;
 
   return (
     <AccordianHeader
@@ -17,9 +24,14 @@ export const AllocationAccordian = (props) => {
         return (
           <div key={ob.id}>
             {ob.isListCard ? (
-              <AccordianListCard className="" accordianObject={ob} mode={mode} />
+              <AccordianListCard
+                onClickRevise={onClickRevise}
+                className=""
+                accordianObject={ob}
+                mode={mode}
+              />
             ) : (
-              <AccordianInfoCard accordianObject={ob} mode={mode} />
+              <AccordianInfoCard onClickRevise={onClickRevise} accordianObject={ob} mode={mode} />
             )}
           </div>
         );

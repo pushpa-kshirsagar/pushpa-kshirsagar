@@ -23,11 +23,13 @@ import {
   CREATE_ASSESSEE_SAGA,
   LOADER_START,
   ASSESSEE_INFO_CREATE,
-  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+  UPDATE_ASSESSEE_HOMEADDRESS_INFO
 } from '../actionType';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
+import PopUpAddress from '../PopUpInformation/PopUpAddress';
 
 const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
@@ -36,14 +38,15 @@ const PopUpSignOnAssessee = (props) => {
   const { coreGroupReviewListData, selectedAssociateInfo, coreRoleReviewListData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
-  const {reviewMode} = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const informationContact = assesseeInfo.informationContact;
+  console.log('============>', assesseeInfo);
 
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
     console.log(popupMode);
-    console.log(assesseeInfo.assesseeInformationData);
+    console.log('============>', assesseeInfo);
     console.log('assesseeInformationData');
     if (assesseeInfo.assesseeInformationData) {
       if (popupMode === 'ASSESSEE_SIGN_ON') {
@@ -210,6 +213,7 @@ const PopUpSignOnAssessee = (props) => {
       }
     });
   };
+
   return (
     <div>
       <PopUpAssesseeName
@@ -366,6 +370,17 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
       />
+      <PopUpTelephone
+        isActive={isPopUpValue === 'HOMETELEPHONEPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        inputHeader={'home telephone'}
+        primaryheader={'primary'}
+        basicInfo={informationContact.assesseeTelephoneHomePrimary}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
+      />
       <PopUpDropList
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
         tag={'assesseeGender'}
@@ -433,6 +448,32 @@ const PopUpSignOnAssessee = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'create'}
         onClickYes={onClickYes}
+      />
+      <PopUpAddress
+        isActive={isPopUpValue === 'HOMEADDRESSPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'home address'}
+        primaryheader={'primary'}
+        nextPopUpValue={''}
+        isRequired={true}
+        basicInfo={assesseeInfo.informationContact.assesseeAddressHomePrimary}
+        countryCode={'assesseeTelephoneCountryRegion'}
+        typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
+      />
+      <PopUpAddress
+        isActive={isPopUpValue === 'WORKADDRESSPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'work address'}
+        primaryheader={'primary'}
+        nextPopUpValue={''}
+        isRequired={true}
+        basicInfo={assesseeInfo.informationContact.assesseeAddressWorkPrimary}
+        countryCode={'assesseeTelephoneCountryRegion'}
+        typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
       />
     </div>
   );
