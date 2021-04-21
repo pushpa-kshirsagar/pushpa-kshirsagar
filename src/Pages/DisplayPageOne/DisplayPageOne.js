@@ -10,7 +10,11 @@ import {
   GET_ASSESSEE_SIGN_IN_INFO,
   GET_USER_SAGA,
   LOADER_START,
-  POPUP_CLOSE
+  POPUP_CLOSE,
+  SET_ASSESSEE_GROUP_REDUCER_STATE,
+  SET_ASSESSMENT_GROUP_REDUCER_STATE,
+  SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
+  SET_ASSOCIATE_GROUP_REDUCER_STATE
 } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
@@ -45,7 +49,10 @@ const DisplayPageOne = () => {
   const isExamMode = false;
   const assesseeId = localStorage.getItem('assesseeId');
   const accessToken = localStorage.getItem('token');
-  
+  const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup } = useSelector(
+    (state) => state.GroupCreateReducer
+  );
+
   useEffect(() => {
     dispatch({ type: LOADER_START });
     dispatch({
@@ -174,10 +181,46 @@ const DisplayPageOne = () => {
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
       {popupMode === 'assesseesROLECREATE' && <AssesseeRoleCreatePopUp />}
       {popupMode === 'associatesROLECREATE' && <AssociateRoleCreatePopup />}
-      {popupMode === 'assesseesGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessees'} />}
-      {popupMode === 'assessmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assessments'} />}
-      {popupMode === 'assignmentsGROUPCREATE' && <AllGroupCreatePopup headerOne={'assignments'} />}
-      {popupMode === 'associatesGROUPCREATE' && <AllGroupCreatePopup headerOne={'associates'} />}
+      {popupMode === 'assesseesGROUPCREATE' && (
+        <AllGroupCreatePopup
+          headerOne={'assessees'}
+          reducerObeject={assesseeGroup}
+          groupName={'assesseeGroupName'}
+          groupDescription={'assesseeGroupDescription'}
+          setReducerObject={SET_ASSESSEE_GROUP_REDUCER_STATE}
+          objectName={'assesseeGroup'}
+        />
+      )}
+      {popupMode === 'assessmentsGROUPCREATE' && (
+        <AllGroupCreatePopup
+          headerOne={'assessments'}
+          reducerObeject={assessmentGroup}
+          groupName={'assessmentGroupName'}
+          groupDescription={'assessmentGroupDescription'}
+          setReducerObject={SET_ASSESSMENT_GROUP_REDUCER_STATE}
+          objectName={'assessmentGroup'}
+        />
+      )}
+      {popupMode === 'assignmentsGROUPCREATE' && (
+        <AllGroupCreatePopup
+          headerOne={'assignments'}
+          reducerObeject={assignmentGroup}
+          groupName={'assignmentGroupName'}
+          groupDescription={'assignmentGroupDescription'}
+          setReducerObject={SET_ASSIGNMEMT_GROUP_REDUCER_STATE}
+          objectName={'assignmentGroup'}
+        />
+      )}
+      {popupMode === 'associatesGROUPCREATE' && (
+        <AllGroupCreatePopup
+          headerOne={'associates'}
+          reducerObeject={associateGroup}
+          groupName={'associateGroupName'}
+          groupDescription={'associateGroupDescription'}
+          setReducerObject={SET_ASSOCIATE_GROUP_REDUCER_STATE}
+          objectName={'associateGroup'}
+        />
+      )}
       {popupMode === 'assessmentsTYPECREATE' && <TypeCreatePopup headerOne={'assessments'} />}
       {popupMode === 'assignmentsTYPECREATE' && <TypeCreatePopup headerOne={'assignments'} />}
       {popupMode === 'ASSIGNMENTCREATE' && <AssignmentCreatePopup headerOne={'assignment'} />}

@@ -1,6 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import Store from '../../store';
-import { signUpForAwsCognito } from '../../Actions/GenericActions';
 import {
   CREATE_ASSESSEE_SAGA,
   LOADER_STOP,
@@ -14,6 +13,9 @@ const createAssesseeApi = async (requestObj) => {
   console.log(requestObj.data);
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(ASSESSEE_CREATE_URL, requestOptions);

@@ -6,12 +6,14 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE
 } from '../../actionType';
 import { ASSESSEE_REVIEW_INFO_URL } from '../../endpoints';
-import store from '../../store';
 
 const assesseesReviewInfoApi = async (requestObj) => {
   let URL = ASSESSEE_REVIEW_INFO_URL;
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(URL, requestOptions);

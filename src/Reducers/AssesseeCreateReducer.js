@@ -77,11 +77,11 @@ const initialState = {
       assesseeGroupPrimary: [],
       assesseeGroupSecondary: []
     },
-     assesseeManager: {
+    assesseeManager: {
       assesseeManagerPrimary: [],
       assesseeManagerSecondary: []
     },
-     assesseeNode: {
+    assesseeNode: {
       assesseeNodePrimary: [],
       assesseeNodeSecondary: []
     },

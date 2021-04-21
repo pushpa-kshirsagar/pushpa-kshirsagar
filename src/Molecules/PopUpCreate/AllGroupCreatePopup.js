@@ -6,19 +6,25 @@ import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
 import {
   POPUP_CLOSE,
   CREATE_GROUP_SAGA,
-  SET_GROUP_REDUCER_STATE,
   LOADER_START,
   CLEAR_GROUP_REDUCER_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
 const AllGroupCreatePopup = (props) => {
-  const { headerOne } = props;
+  const {
+    headerOne,
+    reducerObeject,
+    groupDescription,
+    groupName,
+    setReducerObject,
+    objectName
+  } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { groupInformation } = useSelector((state) => state.GroupCreateReducer);
+  // const { reducerObeject } = useSelector((state) => state.GroupCreateReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  console.log(groupInformation);
-  console.log('groupInformation');
+  // console.log(reducerObeject);
+  // console.log('reducerObeject');
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
@@ -28,9 +34,13 @@ const AllGroupCreatePopup = (props) => {
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      whichGroupCreate: headerOne,
+      [objectName]: reducerObeject
     };
-    if (headerOne === 'assessees') {
+    console.log(reqBody);
+    {
+      /* if (headerOne === 'assessees') {
       reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
@@ -141,6 +151,7 @@ const AllGroupCreatePopup = (props) => {
           }
         }
       };
+    }*/
     }
     //console.log('CREATE group api', reqBody);
     dispatch({ type: LOADER_START });
@@ -152,27 +163,27 @@ const AllGroupCreatePopup = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'NAMEPOPUP'}
         label={'name'}
-        actualLableValue={'groupName'}
+        actualLableValue={groupName}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={groupInformation.informationBasic}
-        typeOfSetObject={SET_GROUP_REDUCER_STATE}
+        basicInfo={reducerObeject.informationBasic}
+        typeOfSetObject={setReducerObject}
         isRequired={true}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'description'}
-        actualLableValue={'groupDescription'}
+        actualLableValue={groupDescription}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
-        basicInfo={groupInformation.informationBasic}
+        basicInfo={reducerObeject.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
-        typeOfSetObject={SET_GROUP_REDUCER_STATE}
+        typeOfSetObject={setReducerObject}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}

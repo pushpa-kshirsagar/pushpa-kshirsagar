@@ -130,7 +130,7 @@ export const DisplayPaneOne = () => {
       });
     }
   };
-  console.log("PANE TWO +====>", selectedAssociateInfo)
+  // console.log("PANE TWO +====>", selectedAssociateInfo)
 
   return (
     <>

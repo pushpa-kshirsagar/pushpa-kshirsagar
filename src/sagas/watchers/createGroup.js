@@ -17,6 +17,9 @@ import {
 const createGroupApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   let URL = '';

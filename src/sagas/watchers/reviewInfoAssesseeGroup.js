@@ -11,6 +11,9 @@ const assesseeGroupReviewInfoApi = async (requestObj) => {
   let URL = ASSESSEE_REVIEW_GROUP_URL;
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(URL, requestOptions);
