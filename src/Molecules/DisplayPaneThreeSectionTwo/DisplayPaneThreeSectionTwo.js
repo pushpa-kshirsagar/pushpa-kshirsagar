@@ -21,7 +21,7 @@ const DisplayPaneThreeSectionTwo = () => {
 
   // const longAddressForTest =
   //   '602 Silver Beliza, 48 St. Francis Avenue, SantaCruz West,  Mumbai, Maharashtra 400054, India';
-  const list1 = [
+  const careerListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'document',
@@ -36,7 +36,7 @@ const DisplayPaneThreeSectionTwo = () => {
       IconOne: Manuscript
     }
   ];
-  const list2 = [
+  const contactListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'email address',
@@ -159,7 +159,7 @@ const DisplayPaneThreeSectionTwo = () => {
       }
     }
   ];
-  const list3 = [
+  const credentialListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'fingerprint',
@@ -210,7 +210,7 @@ const DisplayPaneThreeSectionTwo = () => {
       }
     }
   ];
-  const list4 = [
+  const personalListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'birthdate',
@@ -264,7 +264,7 @@ const DisplayPaneThreeSectionTwo = () => {
       isListCard: false
     }
   ];
-  const list5 = [
+  const contactListKey = [
     {
       id: 'a1',
       labelTextOneOne: 'email address',
@@ -315,7 +315,7 @@ const DisplayPaneThreeSectionTwo = () => {
     }
   ];
 
-  const list6 = [
+  const personalListKey = [
     {
       id: 'a4',
       labelTextOneOne: 'gender',
@@ -340,7 +340,7 @@ const DisplayPaneThreeSectionTwo = () => {
               headerOne="career"
               isDisplayCardExpanded={listExpand === 'career'}
               setListExpand={setListExpand}
-              list={list1}
+              list={careerListAll}
               mode={reviewMode}
             />
           </div>
@@ -349,7 +349,7 @@ const DisplayPaneThreeSectionTwo = () => {
               headerOne="contact"
               isDisplayCardExpanded={listExpand === 'contact'}
               setListExpand={setListExpand}
-              list={list2}
+              list={contactListAll}
               mode={reviewMode}
             />
           </div>
@@ -358,7 +358,7 @@ const DisplayPaneThreeSectionTwo = () => {
               headerOne="credential"
               isDisplayCardExpanded={listExpand === 'credential'}
               setListExpand={setListExpand}
-              list={list3}
+              list={credentialListAll}
               mode={reviewMode}
             />
           </div>
@@ -367,7 +367,7 @@ const DisplayPaneThreeSectionTwo = () => {
               headerOne="personal"
               isDisplayCardExpanded={listExpand === 'personal'}
               setListExpand={setListExpand}
-              list={list4}
+              list={personalListAll}
               mode={reviewMode}
             />
           </div>
@@ -376,7 +376,7 @@ const DisplayPaneThreeSectionTwo = () => {
         <>
           <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
             <Paper className={'dossierContainerTop'}>
-              {list5.map((ob) => {
+              {contactListKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -391,7 +391,7 @@ const DisplayPaneThreeSectionTwo = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list6.map((ob) => {
+              {personalListKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (

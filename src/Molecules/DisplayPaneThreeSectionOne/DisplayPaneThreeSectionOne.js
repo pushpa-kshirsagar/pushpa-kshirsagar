@@ -17,7 +17,7 @@ const DisplayPaneThreeSectionOne = () => {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  const list1 = [
+  const allianceList1 = [
     {
       id: 'a1',
       labelTextOneOne: 'family',
@@ -109,7 +109,7 @@ const DisplayPaneThreeSectionOne = () => {
       isListCard: true
     }
   ];
-  const list2 = [
+  const allocationList1 = [
     {
       id: 'a1',
       labelTextOneOne: 'group',
@@ -202,7 +202,7 @@ const DisplayPaneThreeSectionOne = () => {
     },
     {
       id: 'a4',
-      labelTextOneOne: 'type',
+      labelTextOneOne: 'role',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
@@ -231,7 +231,7 @@ const DisplayPaneThreeSectionOne = () => {
       isListCard: true
     }
   ];
-  const list3 = [
+  const engagementList1 = [
     {
       id: 'a1',
       labelTextOneOne: 'log',
@@ -295,7 +295,7 @@ const DisplayPaneThreeSectionOne = () => {
       isListCard: false
     }
   ];
-  const list4 = [
+  const setupList1 = [
     {
       id: 'a1',
       labelTextOneOne: 'sign-in',
@@ -329,7 +329,7 @@ const DisplayPaneThreeSectionOne = () => {
               headerOne="alliance"
               isDisplayCardExpanded={listExpand === 'alliance'}
               setListExpand={setListExpand}
-              list={list1}
+              list={allianceList1}
               mode={reviewMode}
             />
           </div>
@@ -338,7 +338,7 @@ const DisplayPaneThreeSectionOne = () => {
               headerOne="allocation"
               isDisplayCardExpanded={listExpand === 'allocation'}
               setListExpand={setListExpand}
-              list={list2}
+              list={allocationList1}
               mode={reviewMode}
             />
           </div>
@@ -347,7 +347,7 @@ const DisplayPaneThreeSectionOne = () => {
               headerOne="engagement"
               isDisplayCardExpanded={listExpand === 'engagement'}
               setListExpand={setListExpand}
-              list={list3}
+              list={engagementList1}
               mode={reviewMode}
             />
           </div>
@@ -356,7 +356,7 @@ const DisplayPaneThreeSectionOne = () => {
               headerOne="setup"
               isDisplayCardExpanded={listExpand === 'setup'}
               setListExpand={setListExpand}
-              list={list4}
+              list={setupList1}
               mode={reviewMode}
             />
           </div>
@@ -365,7 +365,7 @@ const DisplayPaneThreeSectionOne = () => {
         <>
           <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
             <Paper className={'dossierContainerTop'}>
-              {list2.map((ob) => {
+              {allocationList1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -380,7 +380,7 @@ const DisplayPaneThreeSectionOne = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list3.map((ob) => {
+              {engagementList1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -395,7 +395,7 @@ const DisplayPaneThreeSectionOne = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list4.map((ob) => {
+              {setupList1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
