@@ -39,9 +39,9 @@ function* workerReviseInfoAssesseeSaga(data) {
           type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
           payload: 'review'
         });
-        console.log('loading end');
-        yield put({ type: LOADER_STOP });
       }
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
   } catch (e) {
     console.log('ERROR==', e);

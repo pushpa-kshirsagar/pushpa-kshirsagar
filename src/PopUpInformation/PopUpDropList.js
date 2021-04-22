@@ -5,7 +5,7 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import SelectField from '../Atoms/SelectField/SelectField';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
@@ -27,11 +27,13 @@ const PopUpDropList = (props) => {
     typeOfSetObject,
     nextPopUpValue,
     mappingValue,
-    handleNextPopupValue
+    handleNextPopupValue,
+    mode
   } = props;
 
   //states
   const [state, setState] = useState({ isError: '' });
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   // handling the onchange event
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -61,7 +63,11 @@ const PopUpDropList = (props) => {
     if (validate()) {
       //according to creation mode popup sequence will change
       if (popupMode === 'ASSESSEE_CREATE') {
-        handleNextPopupValue();
+        if (reviewMode === 'revise') {
+          dispatch({ type: POPUP_CLOSE });
+        } else {
+          handleNextPopupValue();
+        }
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
       }
@@ -78,6 +84,7 @@ const PopUpDropList = (props) => {
           headerOneBadgeTwo={''}
           headerOneBadgeThree={''}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

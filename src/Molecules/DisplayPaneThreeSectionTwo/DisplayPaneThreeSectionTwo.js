@@ -13,6 +13,7 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 import {
   ASSESSEE_SIGN_ON,
+  UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
   UPDATE_ASSESSEE_CONTACT_INFO,
   UPDATE_ASSESSEE_PERSONAL_INFO
 } from '../../actionType';
@@ -27,6 +28,62 @@ const DisplayPaneThreeSectionTwo = () => {
 
   // const longAddressForTest =
   //   '602 Silver Beliza, 48 St. Francis Avenue, SantaCruz West,  Mumbai, Maharashtra 400054, India';
+  const ob = {
+    assesseeAddressHomePrimary: {
+      assesseeAddressCountryRegion: '',
+      assesseeAddressProvinceState: '',
+      assesseeAddressPostcode: '',
+      assesseeAddressCity: '',
+      assesseeAddress: '',
+      assesseeAddressCommunication: false,
+      assesseeAddressVerification: false
+    },
+    assesseeAddressHomeSecondary: {
+      assesseeAddressCountryRegion: '',
+      assesseeAddressProvinceState: '',
+      assesseeAddressPostcode: '',
+      assesseeAddressCity: '',
+      assesseeAddress: '',
+      assesseeAddressCommunication: false,
+      assesseeAddressVerification: false
+    },
+    assesseeAddressWorkPrimary: {
+      assesseeAddressCountryRegion: '',
+      assesseeAddressProvinceState: '',
+      assesseeAddressPostcode: '',
+      assesseeAddressCity: '',
+      assesseeAddress: '',
+      assesseeAddressCommunication: false,
+      assesseeAddressVerification: false
+    },
+    assesseeAddressWorkSecondary: {
+      assesseeAddressCountryRegion: '',
+      assesseeAddressProvinceState: '',
+      assesseeAddressPostcode: '',
+      assesseeAddressCity: '',
+      assesseeAddress: '',
+      assesseeAddressCommunication: false,
+      assesseeAddressVerification: false
+    }
+  };
+  const {
+    assesseeAddressCountryRegion = '',
+    assesseeAddressProvinceState = '',
+    assesseeAddressPostcode = '',
+    assesseeAddressCity = '',
+    assesseeAddress = ''
+  } = informationContact?.assesseeAddressHomePrimary;
+  const homeAddressPrimary = `${assesseeAddress} ${assesseeAddressCity} ${assesseeAddressProvinceState} ${assesseeAddressCountryRegion} ${assesseeAddressPostcode}`;
+
+  const {
+    assesseeAddressCountryRegion: addressCountryRegion = '',
+    assesseeAddressProvinceState: addressProvinceState = '',
+    assesseeAddressPostcode: addressPostcode = '',
+    assesseeAddressCity: addressCity = '',
+    assesseeAddress: address = ''
+  } = informationContact?.assesseeAddressHomeSecondary;
+  const homeAddressSecondary = `${address} ${addressCity} ${addressProvinceState} ${addressCountryRegion} ${addressPostcode}`;
+
   const careerListAll = [
     {
       id: 'a1',
@@ -73,15 +130,15 @@ const DisplayPaneThreeSectionTwo = () => {
       multiline:
         informationContact &&
         informationContact.assesseeAddressHomePrimary &&
-        informationContact.assesseeAddressHomePrimary.length > 40, //longAddressForTest.length > 40,
+        homeAddressPrimary.length > 40, //longAddressForTest.length > 40,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationContact.assesseeAddressHomePrimary || 'No Information' //longAddressForTest
+          textOne: homeAddressPrimary || 'No Information' //longAddressForTest
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationContact.assesseeAddressHomeSecondary || 'No Information'
+          textOne: homeAddressSecondary || 'No Information'
         }
       ],
       labelTextOneOneBadgeThree: '',
@@ -340,75 +397,75 @@ const DisplayPaneThreeSectionTwo = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
     if (labelName === 'email address') {
-      if (informationContact.assesseeAddressEmailPrimary !== null) {
-        dispatch({
-          type: UPDATE_ASSESSEE_CONTACT_INFO,
-          payload: {
-            stateName: 'assesseeAddressEmailPrimary',
-            value: informationContact.assesseeAddressEmailPrimary
-          }
-        });
-      }
+      // if (informationContact.assesseeAddressEmailPrimary !== null) {
+      //   dispatch({
+      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
+      //     payload: {
+      //       stateName: 'assesseeAddressEmailPrimary',
+      //       value: informationContact.assesseeAddressEmailPrimary
+      //     }
+      //   });
+      // }
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'EMAILPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
     }
     if (labelName === 'home address') {
-      if (informationContact.assesseeAddressHomePrimary !== null) {
-        dispatch({
-          type: UPDATE_ASSESSEE_CONTACT_INFO,
-          payload: {
-            stateName: 'assesseeAddressHomePrimary',
-            value: informationContact.assesseeAddressHomePrimary
-          }
-        });
-      }
+      // if (informationContact.assesseeAddressHomePrimary !== null) {
+      //   dispatch({
+      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
+      //     payload: {
+      //       stateName: 'assesseeAddressHomePrimary',
+      //       value: informationContact.assesseeAddressHomePrimary
+      //     }
+      //   });
+      // }
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'HOMEADDRESSPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
     }
     if (labelName === 'work address') {
-      if (informationContact.assesseeAddressWorkPrimary !== null) {
-        dispatch({
-          type: UPDATE_ASSESSEE_CONTACT_INFO,
-          payload: {
-            stateName: 'assesseeAddressWorkPrimary',
-            value: informationContact.assesseeAddressWorkPrimary
-          }
-        });
-      }
+      // if (informationContact.assesseeAddressWorkPrimary !== null) {
+      //   dispatch({
+      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
+      //     payload: {
+      //       stateName: 'assesseeAddressWorkPrimary',
+      //       value: informationContact.assesseeAddressWorkPrimary
+      //     }
+      //   });
+      // }
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'WORKADDRESSPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
     }
     if (labelName === 'home telephone') {
-      if (informationContact.assesseeTelephoneHomePrimary !== null) {
-        dispatch({
-          type: UPDATE_ASSESSEE_CONTACT_INFO,
-          payload: {
-            stateName: 'assesseeTelephoneHomePrimary',
-            value: informationContact.assesseeTelephoneHomePrimary
-          }
-        });
-      }
+      // if (informationContact.assesseeTelephoneHomePrimary !== null) {
+      //   dispatch({
+      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
+      //     payload: {
+      //       stateName: 'assesseeTelephoneHomePrimary',
+      //       value: informationContact.assesseeTelephoneHomePrimary
+      //     }
+      //   });
+      // }
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'HOMETELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
     }
     if (labelName === 'mobile telephone') {
-      if (informationContact.assesseeTelephoneMobilePrimary !== null) {
-        dispatch({
-          type: UPDATE_ASSESSEE_CONTACT_INFO,
-          payload: {
-            stateName: 'assesseeTelephoneMobilePrimary',
-            value: informationContact.assesseeTelephoneMobilePrimary
-          }
-        });
-      }
+      // if (informationContact.assesseeTelephoneMobilePrimary !== null) {
+      //   dispatch({
+      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
+      //     payload: {
+      //       stateName: 'assesseeTelephoneMobilePrimary',
+      //       value: informationContact.assesseeTelephoneMobilePrimary
+      //     }
+      //   });
+      // }
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
@@ -423,11 +480,19 @@ const DisplayPaneThreeSectionTwo = () => {
 
   const revisePersonal = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    dispatch({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
+    // dispatch({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
     console.log('=====>', labelName);
     if (labelName === 'birthdate') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'BIRTHDATEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
     }
     if (labelName === 'birthmark') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'BIRTHMARKPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
     }
     if (labelName === 'birthplace') {
     }
@@ -499,9 +564,18 @@ const DisplayPaneThreeSectionTwo = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseContact}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseContact}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
@@ -514,9 +588,18 @@ const DisplayPaneThreeSectionTwo = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={revisePersonal}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={revisePersonal}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );

@@ -6,13 +6,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPDATE_ASSESSEE_COMMUNICATION, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
+import { POPUP_CLOSE, UPDATE_ASSESSEE_COMMUNICATION, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 const PopUpAddressEmail = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   /*props*/
   const {
     isActive = false,
@@ -27,7 +28,8 @@ const PopUpAddressEmail = (props) => {
     signInSetup,
     checkboxValue = primaryLabel + ' (' + primaryLabelBadge + ')',
     handleNextPopupValue,
-    tempCommunication
+    tempCommunication,
+    mode
   } = props;
 
   const [state, setState] = useState({
@@ -120,7 +122,11 @@ const PopUpAddressEmail = (props) => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
       // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      if (reviewMode === 'revise') {
+        dispatch({ type: POPUP_CLOSE });
+      } else {
       handleNextPopupValue();
+      }
     }
   };
 
@@ -132,6 +138,7 @@ const PopUpAddressEmail = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

@@ -19,7 +19,11 @@ import {
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_ASSESSEE_INFORMATION_DATA,
   SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-  UPDATE_ASSESSEE_CONTACT_INFO
+  UPDATE_ASSESSEE_CONTACT_INFO,
+  UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
+  UPDATE_ASSESSEE_TELEPHONE_HOME_INFO,
+  UPDATE_ASSESSEE_TELEPHONE_WORK_INFO,
+  UPDATE_ASSESSEE_ALIAS_INFO
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -191,6 +195,24 @@ const initialState = {
     assesseeSignInCredential: ''
   },
   informationPersonal: {
+    assesseeBirthdate: '',
+    assesseeBirthdateVerification: false,
+    assesseeBirthmark: '',
+    birthplace: {
+      assesseeBirthplaceCountryRegion: '',
+      assesseeBirthplaceProvinceState: '',
+      assesseeBirthplaceCity: ''
+    },
+    community: {
+      communitySocial: {
+        assesseeCommunityCountryRegion: '',
+        assesseeCommunity: ''
+      },
+      communitySpiritual: {
+        assesseeCommunityCountryRegion: '',
+        assesseeCommunity: ''
+      }
+    },
     assesseeGender: ''
   }
 };
@@ -294,12 +316,35 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         ...istate,
         informationBasic: action.payload
       };
+    case UPDATE_ASSESSEE_ALIAS_INFO:
+      return {
+        ...istate,
+        informationBasic: { ...istate.informationBasic, assesseeAlias: action.payload }
+      };
     case UPDATE_ASSESSEE_MOBILE_INFO:
       return {
         ...istate,
         informationContact: {
           ...istate.informationContact,
           assesseeTelephoneMobilePrimary: action.payload
+        }
+        // mobileTelephone: action.payload
+      };
+    case UPDATE_ASSESSEE_TELEPHONE_HOME_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeTelephoneHomePrimary: action.payload
+        }
+        // mobileTelephone: action.payload
+      };
+    case UPDATE_ASSESSEE_TELEPHONE_WORK_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeTelephoneWorkPrimary: action.payload
         }
         // mobileTelephone: action.payload
       };
@@ -360,6 +405,11 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         informationEngagement: action.payload
       };
     case UPDATE_ASSESSEE_CONTACT_INFO:
+      return {
+        ...istate,
+        informationContact: action.payload
+      };
+    case UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE:
       return {
         ...istate,
         informationContact: {

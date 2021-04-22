@@ -9,7 +9,7 @@ const LoadingComponent = (props) => {
   return (
     <div>
       <Dialog open={isActive} className={'loaderimg'}>
-        <div>
+        <div style={{ zIndex: '99999999' }}>
           <img src={Loading} alt={'...'} />
         </div>
       </Dialog>

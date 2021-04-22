@@ -23,7 +23,8 @@ const PopUpAssesseeName = (props) => {
     isActive = false,
     basicInfo,
     nextPopUpValue = '',
-    typeOfSetObject
+    typeOfSetObject,
+    mode
   } = props;
   const dispatch = useDispatch();
   const [state, setState] = useState({
@@ -72,7 +73,7 @@ const PopUpAssesseeName = (props) => {
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
-      if(reviewMode === 'revise') {
+      if (reviewMode === 'revise') {
         dispatch({ type: POPUP_CLOSE });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
@@ -87,6 +88,7 @@ const PopUpAssesseeName = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

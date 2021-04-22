@@ -1,5 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
+  ASSESSEE_SIGN_ON,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   LOADER_STOP,
@@ -66,6 +67,12 @@ function* workerReviewAssesseeRoleListSaga(data) {
           showMiddlePaneState: true
         }
       });
+      // if (data.payload.isReviseMode){
+      //   yield put({
+      //     type: ASSESSEE_SIGN_ON,
+      //     payload: { isPopUpValue: 'ROLELISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      //   });
+      // }
     }
 
     console.log('loading end');

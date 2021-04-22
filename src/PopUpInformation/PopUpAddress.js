@@ -25,7 +25,8 @@ const PopUpAddress = (props) => {
     nextPopUpValue,
     typeOfSetObject,
     basicInfo,
-    isRequired = false
+    isRequired = false,
+    mode
   } = props;
   const objectKeys = Object.keys(basicInfo);
 
@@ -99,6 +100,7 @@ const PopUpAddress = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

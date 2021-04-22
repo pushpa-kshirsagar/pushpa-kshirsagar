@@ -23,7 +23,8 @@ const PopUpDatePicker = (props) => {
     headerOne = 'assessees',
     headerOneBadgeOne = 'information',
     valueState = 'tenure' + 'start',
-    isVerification = false
+    isVerification = false,
+    mode
   } = props;
 
   const handleChange = (event) => {
@@ -44,6 +45,7 @@ const PopUpDatePicker = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

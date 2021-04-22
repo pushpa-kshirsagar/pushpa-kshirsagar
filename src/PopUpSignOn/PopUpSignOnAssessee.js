@@ -24,12 +24,16 @@ import {
   LOADER_START,
   ASSESSEE_INFO_CREATE,
   SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-  UPDATE_ASSESSEE_HOMEADDRESS_INFO
+  UPDATE_ASSESSEE_HOMEADDRESS_INFO,
+  UPDATE_ASSESSEE_TELEPHONE_WORK_INFO,
+  UPDATE_ASSESSEE_TELEPHONE_HOME_INFO,
+  UPDATE_ASSESSEE_ALIAS_INFO
 } from '../actionType';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
 import PopUpAddress from '../PopUpInformation/PopUpAddress';
+import PopUpDatePicker from '../PopUpInformation/PopUpDatePicker';
 
 const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
@@ -225,6 +229,7 @@ const PopUpSignOnAssessee = (props) => {
         basicInfo={assesseeInfo.informationBasic}
         nextPopUpValue={'ALIASPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
@@ -236,6 +241,7 @@ const PopUpSignOnAssessee = (props) => {
         basicInfo={assesseeInfo.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -258,6 +264,7 @@ const PopUpSignOnAssessee = (props) => {
         textOne={'assesseeGroupName'}
         textTwo={'assesseeGroupDescription'}
         onClickEvent={updateAssesseeGroups}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERLISTPOPUP'}
@@ -276,6 +283,7 @@ const PopUpSignOnAssessee = (props) => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'NODELISTPOPUP'}
@@ -294,6 +302,7 @@ const PopUpSignOnAssessee = (props) => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'ROLELISTPOPUP'}
@@ -315,6 +324,7 @@ const PopUpSignOnAssessee = (props) => {
         textOne={'assesseeRoleName'}
         textTwo={'assesseeRoleDescription'}
         onClickEvent={updateRoleIdObject}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILPOPUP'}
@@ -330,6 +340,7 @@ const PopUpSignOnAssessee = (props) => {
         tempCommunication={assesseeInfo.tempCommunication}
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO}
         handleNextPopupValue={handleNextPopupValue}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddressEmail
         isActive={isPopUpValue === 'EMAILSECONDARYPOPUP'}
@@ -345,6 +356,7 @@ const PopUpSignOnAssessee = (props) => {
         typeOfSetObject={UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO}
         handleNextPopupValue={handleNextPopupValue}
         tempCommunication={assesseeInfo.tempCommunication}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpCheckbox
         isActive={isPopUpValue === 'FORCETOSELECTCOMMUNICATION'}
@@ -369,6 +381,7 @@ const PopUpSignOnAssessee = (props) => {
         basicInfo={informationContact.assesseeTelephoneMobilePrimary}
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'HOMETELEPHONEPOPUP'}
@@ -379,7 +392,20 @@ const PopUpSignOnAssessee = (props) => {
         primaryheader={'primary'}
         basicInfo={informationContact.assesseeTelephoneHomePrimary}
         nextPopUpValue={''}
-        typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
+        typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_HOME_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTelephone
+        isActive={isPopUpValue === 'WORKTELEPHONEPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        inputHeader={'work telephone'}
+        primaryheader={'primary'}
+        basicInfo={informationContact.assesseeTelephoneWorkPrimary}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_WORK_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
@@ -399,6 +425,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
         handleNextPopupValue={handleNextPopupValue}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTagPrimary
         isActive={isPopUpValue === 'TAGPRIMARYPOPUP'}
@@ -461,6 +488,7 @@ const PopUpSignOnAssessee = (props) => {
         basicInfo={assesseeInfo.informationContact.assesseeAddressHomePrimary}
         countryCode={'assesseeTelephoneCountryRegion'}
         typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddress
         isActive={isPopUpValue === 'WORKADDRESSPOPUP'}
@@ -474,6 +502,30 @@ const PopUpSignOnAssessee = (props) => {
         basicInfo={assesseeInfo.informationContact.assesseeAddressWorkPrimary}
         countryCode={'assesseeTelephoneCountryRegion'}
         typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDatePicker
+        isActive={isPopUpValue === 'BIRTHDATEPOPUP'}
+        primaryheader=""
+        inputHeader="birthdate"
+        headerPanelColour="genericOne"
+        headerOne="assessees"
+        headerOneBadgeOne="information"
+        valueState='tenurestart'
+        isVerification={false}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'BIRTHMARKPOPUP'}
+        label={'birthmark'}
+        actualLableValue={'assesseeBirthmark'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={assesseeInfo.informationBasic}
+        nextPopUpValue={'PICTUREPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
   );

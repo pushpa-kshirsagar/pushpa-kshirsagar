@@ -38,6 +38,8 @@ const PopupHeader = (props) => {
     if (mode === 'cancel' || mode === 'core' || mode === 'confirm') {
       dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CANCELPOPUP' } });
+    } else if (mode === 'revise') {
+      dispatch({ type: POPUP_CLOSE });
     } else {
       dispatch({ type: CLEAR_POPUP_INFO });
       dispatch({ type: CLEAR_ASSESSEE_INFO });
@@ -84,7 +86,7 @@ const PopupHeader = (props) => {
           </div>
           <div className={'backArrow'}>
             <IconButton className="MuiIconButton-root-1602">
-              {mode === 'core' || mode === 'search' ? (
+              {mode === 'core' || mode === 'search' || mode === 'revise' ? (
                 <Check className={'popupClose'} onClick={onClick} />
               ) : mode === 'confirm' ? (
                 <KeyboardTab

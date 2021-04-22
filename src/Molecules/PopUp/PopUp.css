@@ -386,6 +386,9 @@
 .MuiBackdrop-root {
   top: 74px !important;
 }
+.parentDialogue {
+  z-index: 1000 !important;
+}
 .loaderimg div div {
   box-shadow: none;
   background-color: #3f3f3f00;
@@ -404,7 +407,6 @@
   flex-direction: column;
   /* margin: 0px !important; */
   top: 55px;
-
 }
 @media (max-width: 360px) {
   .popupContent {

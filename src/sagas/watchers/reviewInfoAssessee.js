@@ -3,7 +3,11 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
   GET_ASSESSEE_INFO_SAGA,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  UPDATE_ASSESSEE_BASIC_INFO,
+  UPDATE_ASSESSEE_PERSONAL_INFO,
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
+  UPDATE_ASSESSEE_CONTACT_INFO
 } from '../../actionType';
 import { ASSESSEE_REVIEW_INFO_URL } from '../../endpoints';
 
@@ -37,6 +41,14 @@ function* workerReviewInfoAssesseeSaga(data) {
           }
         });
       } else {
+        const {
+          informationAllocation,
+          informationBasic,
+          informationContact,
+          informationEngagement,
+          informationPersonal,
+          informationSetup
+        } = userResponse.responseObject[0];
         yield put({
           type: SET_DISPLAY_PANE_THREE_STATE,
           payload: {
@@ -47,6 +59,10 @@ function* workerReviewInfoAssesseeSaga(data) {
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });
+        yield put({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
+        yield put({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
+        yield put({ type: UPDATE_ASSESSEE_ENGAGEMENT_INFO, payload: informationEngagement });
+        yield put({ type: UPDATE_ASSESSEE_CONTACT_INFO, payload: informationContact });
       }
     }
     console.log('loading end');

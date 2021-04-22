@@ -368,7 +368,7 @@ const DisplayPaneThreeSectionOne = () => {
     if (labelName === 'role') {
       let roleRequestObj = makeAssesseeRoleObj(selectedAssociateInfo, 'all', 0, -1);
       dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
-
+      dispatch({ type: LOADER_START });
       dispatch({
         type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
         payload: {
@@ -376,7 +376,8 @@ const DisplayPaneThreeSectionOne = () => {
           BadgeOne: '',
           BadgeTwo: '',
           BadgeThree: '',
-          isMiddlePaneList: false
+          isMiddlePaneList: false,
+          isReviseMode: true
         }
       });
       dispatch({
@@ -452,9 +453,18 @@ const DisplayPaneThreeSectionOne = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseAllocation}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseAllocation}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
@@ -467,9 +477,18 @@ const DisplayPaneThreeSectionOne = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseEngagement}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseEngagement}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
@@ -482,9 +501,18 @@ const DisplayPaneThreeSectionOne = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseSetup}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseSetup}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );

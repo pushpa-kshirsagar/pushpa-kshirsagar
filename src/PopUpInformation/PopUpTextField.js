@@ -26,7 +26,8 @@ const PopUpTextField = (props) => {
     nextPopUpValue = '',
     basicInfo,
     typeOfSetObject,
-    actualLableValue
+    actualLableValue,
+    mode
   } = props;
 
   const [state, setState] = useState({
@@ -75,6 +76,7 @@ const PopUpTextField = (props) => {
           headerOneBadgeTwo={headerOneBadgeTwo}
           headerOneBadgeThree={''}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

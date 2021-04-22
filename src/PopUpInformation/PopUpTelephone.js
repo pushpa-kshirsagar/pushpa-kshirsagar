@@ -9,13 +9,13 @@ import '../Molecules/PopUp/PopUp.css';
 import '../Atoms/InputField/InputField.css';
 
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { useDispatch, useSelector } from 'react-redux';
+import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpTelephone = (props) => {
   const dispatch = useDispatch();
-
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
     isActive,
     primaryheader = 'primary',
@@ -27,7 +27,8 @@ const PopUpTelephone = (props) => {
     basicInfo,
     typeOfSetObject,
     isMobileState = true,
-    isRequired = false
+    isRequired = false,
+    mode
   } = props;
 
   const objectKeys = Object.keys(basicInfo);
@@ -82,13 +83,17 @@ const PopUpTelephone = (props) => {
     dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
-    if (isRequired) {
-      if (validate()) {
-        /*according to creation mode popup sequence will change*/
+    if (reviewMode === 'revise') {
+      dispatch({ type: POPUP_CLOSE });
+    } else {
+      if (isRequired) {
+        if (validate()) {
+          /*according to creation mode popup sequence will change*/
+          dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+        }
+      } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
       }
-    } else {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
   };
   return (
@@ -99,6 +104,7 @@ const PopUpTelephone = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
+import { MoreRounded } from '@material-ui/icons';
 
 const PopUpReviewList = (props) => {
   const dispatch = useDispatch();
@@ -33,7 +34,8 @@ const PopUpReviewList = (props) => {
     textOne = 'name',
     textTwo = 'description',
     nextPopUpValue,
-    onClickEvent = null
+    onClickEvent = null,
+    mode
   } = props;
 
   const handleClick = () => {
@@ -53,6 +55,7 @@ const PopUpReviewList = (props) => {
           headerOneBadgeOne={headerOneBadgeOne}
           headerOneBadgeTwo={headerOneBadgeTwo}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

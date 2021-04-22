@@ -299,14 +299,16 @@ export const DisplayPaneThree = () => {
   const onClickReviseFinish = () => {
     console.log('ON CLICK FINISH ICON', assesseeInfo.informationBasic);
     if (headerOneBadgeOne === 'information') {
-      const { informationBasic } = assesseeInfo;
+      const { informationBasic, informationContact, informationPersonal } = assesseeInfo;
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: id,
         associateId,
         assessee: {
           id,
-          informationBasic
+          informationBasic,
+          informationContact,
+          informationPersonal
         }
       };
       dispatch({ type: LOADER_START });
