@@ -1467,13 +1467,15 @@ export const ALLOCATE_POPUP = [
 export const ARCHIVE_POPUP = [
   {
     data: 'archive',
-    dataValue: 'archive',
+    dataValue: 'archiveApiCall',
+    dataKey: 'ARCHIVED',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'unarchive',
-    dataValue: 'unarchive',
+    dataValue: 'unarchiveApiCall',
+    dataKey: 'CONFIRMED',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -1487,7 +1489,8 @@ export const DELETE_POPUP = [
   },
   {
     data: 'yes',
-    dataValue: 'yes',
+    dataValue: 'yesApiCall',
+    dataKey: 'DELETED',
     optionClass: 'optionPrimary',
     disabled: false
   }

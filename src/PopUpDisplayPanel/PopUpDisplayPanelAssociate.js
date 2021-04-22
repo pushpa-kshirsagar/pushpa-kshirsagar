@@ -262,6 +262,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           }
         }
       });
+      clearMiddlePaneInfo();
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
     if (clickValue === 'switch') {
