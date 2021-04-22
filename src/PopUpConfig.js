@@ -1475,7 +1475,7 @@ export const ARCHIVE_POPUP = [
   {
     data: 'unarchive',
     dataValue: 'unarchiveApiCall',
-    dataKey: 'CONFIRMED',
+    dataKey: 'UNARCHIVED',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -1565,7 +1565,7 @@ export const SUSPEND_PUPUP = [
   {
     data: 'unsuspend',
     dataValue: 'unsuspendApiCall',
-    dataKey: 'CONFIRMED',
+    dataKey: 'UNSUSPENDED',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -1581,7 +1581,7 @@ export const TERMINATE_PUPUP = [
   {
     data: 'unterminate',
     dataValue: 'unterminateApiCall',
-    dataKey: 'CONFIRMED',
+    dataKey: 'UNTERMINATED',
     optionClass: 'optionPrimary',
     disabled: false
   }
