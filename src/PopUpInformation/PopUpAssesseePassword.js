@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { POPUP_CLOSE } from '../actionType';
+import { useDispatch, useSelector } from 'react-redux';
+import { LOADER_START, POPUP_CLOSE, SET_ASSESSEE_REVISE_PASSWORD } from '../actionType';
 import { FormControl } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
 import { useHistory } from 'react-router-dom';
@@ -29,6 +29,7 @@ const PopUpAssesseePassword = (props) => {
   const [confirmRevisedPasswordError, setConfirmRevisedPasswordError] = useState('');
   const { getSession, signOut } = useContext(AccountContext);
   const history = useHistory();
+  const { assesseeConfirmStatus } = useSelector((state) => state.UserReducer);
 
   const handleClick = () => {
     //according to creation mode popup sequence will change
@@ -36,7 +37,7 @@ const PopUpAssesseePassword = (props) => {
     setRevisedPasswordError('');
     setCurrentPasswordError('');
     const passwordRegExp = new RegExp(
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!{~:<->}@#$%^&*])(?=.{8,})'
     );
     if (currentPassword !== '' && revisedPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(revisedPassword)) {
@@ -47,29 +48,39 @@ const PopUpAssesseePassword = (props) => {
         setRevisedPasswordError('');
         setConfirmRevisedPasswordError('');
         // TODO: call change password method in aws cognito
-        getSession()
-          .then(({ user }) => {
-            if (user) {
-              user.changePassword(currentPassword, revisedPassword, (err, result) => {
-                if (err) {
-                  alert(err.message || JSON.stringify(err));
-                  //TODO: Show error
-                  return;
-                }
-                signOut(); // sign-out current user
-                //TODO: display success message and redirect to signIn page
-                let path = `/signIn`;
-                history.push(path);
-                dispatch({ type: POPUP_CLOSE });
-                console.log('call result: ' + result);
-              });
-            } else {
-              console.log('USER NOT SIGN IN PLEASE SIGN IN');
+        // dispatch({ type: LOADER_START });
+        dispatch({
+          type: SET_ASSESSEE_REVISE_PASSWORD,
+          payload: {
+            reqObj: {
+              prevPssword: currentPassword,
+              newPassword: revisedPassword
             }
-          })
-          .catch((err) => {
-            console.log('SESSION ERR=====', err);
-          });
+          }
+        });
+        // getSession()
+        //   .then(({ user }) => {
+        //     if (user) {
+        //       user.changePassword(currentPassword, revisedPassword, (err, result) => {
+        //         if (err) {
+        //           alert(err.message || JSON.stringify(err));
+        //           //TODO: Show error
+        //           return;
+        //         }
+        //         signOut(); // sign-out current user
+        //         //TODO: display success message and redirect to signIn page
+        //         let path = `/signIn`;
+        //         history.push(path);
+        //         dispatch({ type: POPUP_CLOSE });
+        //         console.log('call result: ' + result);
+        //       });
+        //     } else {
+        //       console.log('USER NOT SIGN IN PLEASE SIGN IN');
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     console.log('SESSION ERR=====', err);
+        //   });
         console.log('========', currentPassword, revisedPassword, confirmRevisedPassword);
       } else {
         setRevisedPasswordError(INFORMATION_MISMATCHED_ERROR_MESSAGE);
@@ -89,7 +100,12 @@ const PopUpAssesseePassword = (props) => {
     }
     // dispatch({ type: POPUP_CLOSE });
   };
-
+  useEffect(() => {
+    if (assesseeConfirmStatus === 'passwordReviseSuccess') {
+      let path = `/signIn`;
+      history.push(path);
+    }
+  }, [assesseeConfirmStatus, history]);
   return (
     <div>
       <Popup isActive={isActive}>

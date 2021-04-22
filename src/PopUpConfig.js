@@ -1467,13 +1467,15 @@ export const ALLOCATE_POPUP = [
 export const ARCHIVE_POPUP = [
   {
     data: 'archive',
-    dataValue: 'archive',
+    dataValue: 'archiveApiCall',
+    dataKey: 'ARCHIVED',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'unarchive',
-    dataValue: 'unarchive',
+    dataValue: 'unarchiveApiCall',
+    dataKey: 'UNARCHIVED',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -1487,7 +1489,8 @@ export const DELETE_POPUP = [
   },
   {
     data: 'yes',
-    dataValue: 'yes',
+    dataValue: 'yesApiCall',
+    dataKey: 'DELETED',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -1562,7 +1565,7 @@ export const SUSPEND_PUPUP = [
   {
     data: 'unsuspend',
     dataValue: 'unsuspendApiCall',
-    dataKey: 'CONFIRMED',
+    dataKey: 'UNSUSPENDED',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -1578,7 +1581,7 @@ export const TERMINATE_PUPUP = [
   {
     data: 'unterminate',
     dataValue: 'unterminateApiCall',
-    dataKey: 'CONFIRMED',
+    dataKey: 'UNTERMINATED',
     optionClass: 'optionPrimary',
     disabled: false
   }

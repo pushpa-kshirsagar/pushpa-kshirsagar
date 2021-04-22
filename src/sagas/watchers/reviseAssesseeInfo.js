@@ -3,10 +3,12 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
   ASSESSEE_INFO_REVISE_SAGA,
-  SET_DISPLAY_PANE_THREE_REVIEW_MODE
+  SET_DISPLAY_PANE_THREE_REVIEW_MODE,
+  ASSESSEE_REVIEW_DISTINCT_SAGA,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../../actionType';
 import { ASSESSEE_INFO_REVISE_URL } from '../../endpoints';
-
+import Store from '../../store';
 const assesseesReviseInfoApi = async (requestObj) => {
   let URL = ASSESSEE_INFO_REVISE_URL;
   const requestOptions = {
@@ -40,6 +42,19 @@ function* workerReviseInfoAssesseeSaga(data) {
           payload: 'review'
         });
       }
+      // yield put({
+      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //   payload: { stateName: 'reviewListDistinctData', value: [] }
+      // });
+      // yield put({
+      //   type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+      //   payload: {
+      //     HeaderOne: 'assessees',
+      //     request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+      //     BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+      //     BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo
+      //   }
+      // });
       console.log('loading end');
       yield put({ type: LOADER_STOP });
     }

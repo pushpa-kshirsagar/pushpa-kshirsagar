@@ -19,6 +19,8 @@ const Card = (props) => {
     className,
     isAlliance,
     onClick = null,
+    labelTwoTwo = 'label',
+    onClickIconOne = null,
     tag = ''
   } = props;
 
@@ -48,7 +50,7 @@ const Card = (props) => {
           </div>
           <div className={'iguru-iconbox'}>
             {isAlliance ? (
-              <span className={['unitFlex', 'assessmenetStatusText'].join(' ')}>label</span>
+              <span className={['unitFlex', 'assessmenetStatusText'].join(' ')}>{labelTwoTwo}</span>
             ) : (
               <Badge className={['badgeBox', 'notificationIcon'].join(' ')}>
                 <IconsButton>{isAlertActive ? <Notifications /> : null}</IconsButton>
@@ -63,7 +65,7 @@ const Card = (props) => {
                 src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
               />
             ) : isIcon ? (
-              <IconOne className={className} />
+              <IconOne className={className} onClick={onClickIconOne} />
             ) : ImageOne ? (
               <IconButton Icon={ImageOne} className={'imageNA'} />
             ) : null}

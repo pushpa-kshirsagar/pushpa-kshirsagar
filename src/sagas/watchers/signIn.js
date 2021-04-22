@@ -13,9 +13,15 @@ import {
   SET_MOBILE_PANE_STATE,
   LOADER_START,
   GET_ASSESSEE_INFO_SAGA,
-  GET_SIGNED_ASSESSEE_PERMISSION_SAGA
+  GET_SIGNED_ASSESSEE_PERMISSION_SAGA,
+  SET_ASSESSEE_REVISE_PASSWORD,
+  LOADER_STOP
 } from '../../actionType';
-import { ASSESSEE_SIGN_IN_URL, ASSESSEE_SIGN_IN_INFO_URL } from '../../endpoints';
+import {
+  ASSESSEE_SIGN_IN_URL,
+  ASSESSEE_SIGN_IN_INFO_URL,
+  ASSESSEE_CHANGE_PASSWORD_URL
+} from '../../endpoints';
 
 const assesseeSignInApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -141,7 +147,40 @@ const assesseeSignInInfoApi = async (requestObj) => {
   const json = await response.json();
   return json;
 };
+const revisePasswordApi = (requestObj) => {
+  console.log("requestObj.data");
+  console.log(requestObj.data);
+  const requestOptions = {
+    method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
+    body: JSON.stringify(requestObj.data)
+  };
+  const response = fetch(ASSESSEE_CHANGE_PASSWORD_URL, requestOptions);
+  const json = response.json();
+  console.log("json.data",json);
+  console.log("response.data",response);
+  console.log(requestObj.data);
+  return json;
+};
+function* workerSetPassword(data) {
+  try {
+    const response = yield call(revisePasswordApi, { data: data.payload.reqObj });
+    console.log('response.responseCode', response);
+    if (response.responseCode === '000') {
+      console.log('response.responseCode', response.responseCode);
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_USER_STATE,
+        payload: { stateName: 'assesseeConfirmStatus', value: 'passwordReviseSuccess' }
+      });
+    }
+  } catch (error) {
+    yield put({ type: LOADER_STOP });
 
+  }
+}
 function* workerSignInAssesseeInfo(data) {
   try {
     const userResponse = yield call(assesseeSignInInfoApi, { data: data.payload });
@@ -230,6 +269,9 @@ function* workerSignInAssesseeInfo(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
+    // localStorage.setItem('token', null);
+    // localStorage.setItem('assesseeId', null);
+    // localStorage.setItem('refreshToken', null);
   }
 }
 
@@ -237,4 +279,5 @@ export default function* watchSignInAssesseeSaga() {
   console.log('IN WATCH ====>');
   yield takeLatest(ASSESSEE_SIGN_IN_SAGA, workerSignInAssesseeSaga);
   yield takeLatest(GET_ASSESSEE_SIGN_IN_INFO, workerSignInAssesseeInfo);
+  yield takeLatest(SET_ASSESSEE_REVISE_PASSWORD, workerSetPassword);
 }

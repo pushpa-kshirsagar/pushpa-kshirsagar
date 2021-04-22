@@ -24,7 +24,7 @@ const DisplayPageSignIn = () => {
     backgroundImage: `url(${bgImg})`,
     backgroundSize: 'cover'
   };
-  const { authenticate } = useContext(AccountContext);
+  // const { authenticate } = useContext(AccountContext);
   const history = useHistory();
   const [stage, setStage] = useState('signIn'); // 'forgotPassword' 'confirmPassword'
   const [isCredentialsInValid, setIsCredentialsInValid] = useState('');

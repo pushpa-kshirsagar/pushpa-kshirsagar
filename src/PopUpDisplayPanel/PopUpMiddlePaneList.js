@@ -20,11 +20,14 @@ import {
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_START,
+  LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
+  SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_POPUP_SINGLE_STATE,
   SET_SECONDARY_CREATE_OPTION_VALUE
 } from '../actionType';
 import { getAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
@@ -62,7 +65,6 @@ const PopUpMiddlePaneList = (props) => {
   const ChangeOptionPopup = (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
-    // alert(keyVal, 'keyVal');
     if (dataVal === 'information') {
       console.log(selectedTagValue);
       dispatch({ type: LOADER_START });
@@ -481,6 +483,44 @@ const PopUpMiddlePaneList = (props) => {
       // dispatch({ type: LOADER_STOP });
 
       // onClickInformation(secondaryOptionCheckValue);
+    } else if (
+      dataVal === 'distinct' &&
+      typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList'
+    ) {
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'assessees',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList',
+          scanCount: 3,
+          showMiddlePaneState: true
+        }
+      });
+      dispatch({ type: LOADER_STOP });
+      dispatch({ type: POPUP_CLOSE });
+    } else if (
+      dataVal === 'distinct' &&
+      typeOfMiddlePaneList === 'associatesGroupDistinctReviewList'
+    ) {
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'assessees',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'associatesGroupAssociateReviewList',
+          scanCount: 3,
+          showMiddlePaneState: true
+        }
+      });
+      dispatch({ type: LOADER_STOP });
+      dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'revise') {
       // alert("IN REVISE");
       setIsReviseMode(true);
@@ -492,6 +532,9 @@ const PopUpMiddlePaneList = (props) => {
       (dataVal === 'suspendApiCall' ||
         dataVal === 'terminateApiCall' ||
         dataVal === 'unsuspendApiCall' ||
+        dataVal === 'unarchiveApiCall' ||
+        dataVal === 'archiveApiCall' ||
+        dataVal === 'yesApiCall' ||
         dataVal === 'unterminateApiCall') &&
       popupHeaderOne === 'assessee'
     ) {
@@ -511,13 +554,6 @@ const PopUpMiddlePaneList = (props) => {
         type: ASSESSEE_INFO_REVISE_SAGA,
         payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
       });
-      getAssesseeDistinctApiCall(
-        selectedAssociateInfo,
-        middlePaneHeaderBadgeTwo,
-        countPage,
-        dispatch,
-        middlePaneHeaderBadgeOne
-      );
       dispatch({ type: POPUP_CLOSE });
     } else {
       dispatch({

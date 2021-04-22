@@ -5,9 +5,11 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
+  CLEAR_DISPLAY_PANE_THREE,
   GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_CLOSE,
+  SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
   SET_SECONDARY_OPTION_VALUE
@@ -142,6 +144,19 @@ const PopUpDisplayPanelAssessee = (props) => {
         }
       });
       setIsReviseMode(false);
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: '',
+          middlePaneHeaderBadgeOne: '',
+          middlePaneHeaderBadgeTwo: '',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: '',
+          scanCount: null,
+          showMiddlePaneState: false
+        }
+      });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
     // dispatch({

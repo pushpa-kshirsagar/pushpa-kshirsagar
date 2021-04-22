@@ -113,7 +113,7 @@ const DisplayPageConfirmUser = () => {
     setNewPasswordError('');
     setOldPasswordError('');
     const passwordRegExp = new RegExp(
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!{~:<>}@#$%^&*])(?=.{8,})'
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!{~:<->}@#$%^&*])(?=.{8,})'
     );
     if (oldPassword !== '' && newPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(newPassword)) {
