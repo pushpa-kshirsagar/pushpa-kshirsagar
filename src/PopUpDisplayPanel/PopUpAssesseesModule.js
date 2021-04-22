@@ -55,6 +55,7 @@ const PopUpAssesseesModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
       dispatch({ type: ASSESSEE_INFO_CREATE });
+      dispatch({ type: CLEAR_ASSESSEE_INFO });
       dispatch({ type: LOADER_START });
       let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'all', 0, -1);
       dispatch({

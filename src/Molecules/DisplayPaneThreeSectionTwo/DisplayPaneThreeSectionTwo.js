@@ -515,7 +515,7 @@ const DisplayPaneThreeSectionTwo = () => {
     >
       {headerOneBadgeTwo === 'all' ? (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <AllocationAccordian
               headerOne="career"
               isDisplayCardExpanded={listExpand === 'career'}
@@ -558,7 +558,7 @@ const DisplayPaneThreeSectionTwo = () => {
         </>
       ) : (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
               {contactListKey.map((ob) => {
                 return (
