@@ -31,6 +31,7 @@ import watchCreateAssignmentSaga from './watchers/createAssignment';
 import watchSignInAssesseeSaga from './watchers/signIn';
 import watchConfirmAssesseeSaga from './watchers/confirmAssessee';
 import watchReviseInfoAssesseeSaga from './watchers/reviseAssesseeInfo';
+import workerReviseInfoAssociateSaga from './watchers/reviseAssociateInfo';
 
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
@@ -65,6 +66,7 @@ export default function* root() {
     fork(watchReviewInfoAssignmentSaga),
     fork(watchSignInAssesseeSaga),
     fork(watchConfirmAssesseeSaga),
-    fork(watchReviseInfoAssesseeSaga)
+    fork(watchReviseInfoAssesseeSaga),
+    fork(workerReviseInfoAssociateSaga)
   ]);
 }

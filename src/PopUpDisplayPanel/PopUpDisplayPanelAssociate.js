@@ -28,7 +28,8 @@ import {
   GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   CLEAR_DISPLAY_PANE_THREE,
-  ASSESSEE_REVIEW_DISTINCT_SAGA
+  ASSESSEE_REVIEW_DISTINCT_SAGA,
+  SET_POPUP_SINGLE_STATE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -261,6 +262,10 @@ const PopUpDisplayPanelAssociate = (props) => {
             ]
           }
         }
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'Card' }
       });
       clearMiddlePaneInfo();
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });

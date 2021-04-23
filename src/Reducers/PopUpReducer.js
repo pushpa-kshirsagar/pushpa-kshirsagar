@@ -48,6 +48,7 @@ const initialState = {
   duplicateHeaderOne: '',
   popupHeaderOneBadgeOne: '',
   popupHeaderOneBadgeTwo: '',
+  cardValue: 'NoCard',
   popupContentArrValue: [
     { lable: 'basic', dataValue: 'basic', Icon: CalculatorIcon },
     { lable: 'buisness', dataValue: 'buisness', Icon: CalculatorIcon },
@@ -234,7 +235,8 @@ const PopUpReducer = (istate = initialState, action) => {
             arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           }
           if (
-            (action.payload.badgeValue === 'suspend' && istate.selectedTagStatus === 'TERMINATED') ||
+            (action.payload.badgeValue === 'suspend' &&
+              istate.selectedTagStatus === 'TERMINATED') ||
             (action.payload.badgeValue === 'terminate' && istate.selectedTagStatus === 'SUSPENDED')
           ) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];

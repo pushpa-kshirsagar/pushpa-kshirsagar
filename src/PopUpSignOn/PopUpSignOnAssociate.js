@@ -72,7 +72,7 @@ const PopUpSignOnAssociate = () => {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        '605091f81edc573048fb467a',
+        '607d9168d049640b94b5ad3f',
       associate: {
         informationBasic: associateInfo.informationBasic,
         informationAllocation: associateInfo.informationAllocation,

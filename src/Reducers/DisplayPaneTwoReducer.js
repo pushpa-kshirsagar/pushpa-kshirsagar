@@ -12,7 +12,8 @@ import {
   SET_CORE_ROLE_REVIEW_LIST_DATA,
   SET_CORE_GROUP_REVIEW_LIST_DATA,
   SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
-  SET_CORE_TYPE_REVIEW_LIST_DATA
+  SET_CORE_TYPE_REVIEW_LIST_DATA,
+  RELATED_REVIEWLIST_DISTINCT_DATA
 } from '../actionType';
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
   coreGroupReviewListData: [],
   coreRoleReviewListData: [],
   coreTypeReviewListData: [],
+  relatedReviewListDistinctData: [],
   coreGroupReviewListReqObj: null,
   coreRoleReviewListReqObj: null,
   coreTypeReviewListReqObj: null,
@@ -97,6 +99,11 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
       return {
         ...istate,
         reviewListDistinctData: [...istate.reviewListDistinctData, ...action.payload]
+      };
+    case RELATED_REVIEWLIST_DISTINCT_DATA:
+      return {
+        ...istate,
+        relatedReviewListDistinctData: [...istate.relatedReviewListDistinctData, ...action.payload]
       };
     case SET_CORE_GROUP_REVIEW_LIST_DATA:
       return {

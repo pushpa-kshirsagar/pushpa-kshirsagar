@@ -24,7 +24,8 @@ import {
   CLEAR_DISPLAY_PANE_THREE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
-  SET_MIDDLEPANE_STATE
+  SET_MIDDLEPANE_STATE,
+  SET_POPUP_SINGLE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { makeAssesseeGroupObj, makeAssesseeRoleObj } from '../Actions/GenericActions';
@@ -53,7 +54,12 @@ const PopUpAssesseesModule = (props) => {
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
+    
     if (targetValue === 'information') {
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'Create' }
+      });
       dispatch({ type: ASSESSEE_INFO_CREATE });
       dispatch({ type: CLEAR_ASSESSEE_INFO });
       dispatch({ type: LOADER_START });
@@ -106,6 +112,10 @@ const PopUpAssesseesModule = (props) => {
         dispatch,
         targetValue
       );
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'NoCard' }
+      });
       dispatch({ type: ASSESSEE_INFO_CREATE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
@@ -134,6 +144,10 @@ const PopUpAssesseesModule = (props) => {
           isMiddlePaneList: true
         }
       });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'NoCard' }
+      });
       dispatch({ type: ASSESSEE_INFO_CREATE });
     } else if (targetValue === 'groups') {
       let requestObj = makeAssesseeGroupObj(
@@ -160,6 +174,10 @@ const PopUpAssesseesModule = (props) => {
           BadgeThree: '',
           isMiddlePaneList: true
         }
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'NoCard' }
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
     } else {

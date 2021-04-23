@@ -100,7 +100,7 @@ export const DisplayPaneTwo = (props) => {
         {typeOfMiddlePaneList === 'assessmentDistinctReviewList' && (
           <AssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
-        {typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' || typeOfMiddlePaneList === 'associatesGroupAssociateReviewList' && (
+        {typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' && (
           <AssesseeGroupAssesseeReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&

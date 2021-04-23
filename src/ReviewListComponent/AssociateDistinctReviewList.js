@@ -133,7 +133,8 @@ const AssociateDistinctReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status')
       }
     });
     dispatch({
@@ -209,6 +210,7 @@ const AssociateDistinctReviewList = (props) => {
                   middlePaneHeaderBadgeOne,
                   item.informationEngagement.associateStatus
                 )}
+                actualStatus={item.informationEngagement.associateStatus}
                 textOne={item.informationBasic.associateName}
                 textTwo={item.informationBasic.associateDescription}
                 isTooltipActive={false}
