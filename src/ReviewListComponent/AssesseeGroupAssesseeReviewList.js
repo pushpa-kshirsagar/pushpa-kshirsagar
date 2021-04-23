@@ -33,6 +33,7 @@ const AssesseeGroupAssesseeReviewList = (props) => {
     middlePaneSelectedValue,
     reviewListDistinctData,
     selectedAssociateInfo,
+    relatedReviewListDistinctData,
     typeOfMiddlePaneList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
@@ -119,23 +120,26 @@ const AssesseeGroupAssesseeReviewList = (props) => {
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
     { label: 'unpublished', onClick: onClickFooter, Icon: FilterList }
   ];
-  console.log(FilterMode);
 
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     // dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log(relatedReviewListDistinctData);
+  console.log('relatedReviewListDistinctData');
   return (
     <div>
-      <Card
-        textOneOne={'name'}
-        textTwoOne={'description'}
-        IconOne={CrossIcon}
-        isIcon={true}
-        labelTwoTwo={'group'}
-        onClickIconOne={closeRelatedList}
-        isAlliance
-      />
+      {listDistinctData && (
+        <Card
+          textOneOne={'name'}
+          textTwoOne={'description'}
+          IconOne={CrossIcon}
+          isIcon={true}
+          labelTwoTwo={'group'}
+          onClickIconOne={closeRelatedList}
+          isAlliance
+        />
+      )}
       {listDistinctData &&
         listDistinctData.map((item, index) => {
           return (

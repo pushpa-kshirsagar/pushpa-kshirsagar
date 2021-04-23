@@ -62,7 +62,10 @@ function* workerReviewListAssesseeGroupAssesseeSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000')
-      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
+      yield put({
+        type: RELATED_REVIEWLIST_DISTINCT_DATA,
+        payload: userResponse.responseObject[0]
+      });
     yield put({
       type: SET_MIDDLEPANE_STATE,
       payload: {
@@ -87,5 +90,8 @@ function* workerReviewListAssesseeGroupAssesseeSaga(data) {
 
 export default function* watchReviewListAssesseeSaga() {
   yield takeLatest(ASSESSEE_REVIEW_DISTINCT_SAGA, workerReviewListAssesseeSaga);
-  yield takeLatest(GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST, workerReviewListAssesseeGroupAssesseeSaga);
+  yield takeLatest(
+    GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
+    workerReviewListAssesseeGroupAssesseeSaga
+  );
 }

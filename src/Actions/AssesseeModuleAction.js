@@ -143,6 +143,7 @@ export const getAssesseeGroupAssesseeDistinctApiCall = (
     type: GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
     payload: {
       request: reqBody,
+      HeaderOne:'assessees',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
