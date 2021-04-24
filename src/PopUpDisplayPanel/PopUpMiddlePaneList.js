@@ -74,6 +74,7 @@ const PopUpMiddlePaneList = (props) => {
       if (
         typeOfMiddlePaneList === 'assesseesDistinctReviewList' ||
         typeOfMiddlePaneList === 'administratorsDistinctReviewList' ||
+        typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'managersDistinctReviewList'
       ) {
         dispatch({
@@ -490,32 +491,6 @@ const PopUpMiddlePaneList = (props) => {
       dataVal === 'distinct' &&
       typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList'
     ) {
-      // let reqBody = getAssesseeGroupAssesseeReqObj(
-      //   selectedAssociateInfo,
-      //   selectedTagValue,
-      //   secondaryOptionCheckValue,
-      //   0,
-      //   countPage
-      // );
-      // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      // dispatch({
-      //   type: FILTERMODE,
-      //   payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
-      // });
-      // dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      // // dispatch({ type: LOADER_START });
-      // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
-      // dispatch({
-      //   type: GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
-      //   payload: {
-      //     request: reqBody,
-      //     BadgeOne: dataVal,
-      //     BadgeTwo: secondaryOptionCheckValue,
-      //     BadgeThree: '',
-      //     isMiddlePaneList: true
-      //   }
-      // });
       getAssesseeGroupAssesseeDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
@@ -524,21 +499,10 @@ const PopUpMiddlePaneList = (props) => {
         dataVal,
         selectedTagValue
       );
-      // dispatch({ type: GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST, payload: reqBody});
-      // dispatch({
-      //   type: SET_MIDDLEPANE_STATE,
-      //   payload: {
-      //     middlePaneHeader: 'assessees',
-      //     middlePaneHeaderBadgeOne: 'distinct',
-      //     middlePaneHeaderBadgeTwo: 'active',
-      //     middlePaneHeaderBadgeThree: '',
-      //     middlePaneHeaderBadgeFour: '',
-      //     typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList',
-      //     scanCount: 3,
-      //     showMiddlePaneState: true
-      //   }
-      // });
-      // dispatch({ type: LOADER_STOP });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
+      });
       dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'distinct' &&
@@ -575,7 +539,7 @@ const PopUpMiddlePaneList = (props) => {
       dataVal === 'yesApiCall' ||
       dataVal === 'unterminateApiCall'
     ) {
-      if (popupHeaderOne === 'assessee') {
+      if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
         let reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
@@ -594,7 +558,7 @@ const PopUpMiddlePaneList = (props) => {
           payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
         });
       }
-      if (popupHeaderOne === 'associate') {
+      if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
         let reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:

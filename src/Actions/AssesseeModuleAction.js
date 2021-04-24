@@ -4,6 +4,7 @@ import {
   FILTERMODE,
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   LOADER_START,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_REQUEST_OBJECT
@@ -61,7 +62,7 @@ export const getAssesseeGroupAssesseeReqObj = (
       searchObj = {
         condition: 'in',
         value: {
-          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+          in:['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED','ARCHIVED','DELETED']
         }
       };
     }
@@ -132,18 +133,18 @@ export const getAssesseeGroupAssesseeDistinctApiCall = (
   );
   // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-  dispatch({
-    type: FILTERMODE,
-    payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
-  });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-  // dispatch({ type: LOADER_START });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
   // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
   dispatch({
     type: GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
     payload: {
       request: reqBody,
-      HeaderOne:'assessees',
+      HeaderOne: 'assessees',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

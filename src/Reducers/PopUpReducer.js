@@ -293,7 +293,7 @@ const PopUpReducer = (istate = initialState, action) => {
         [action.payload.stateName]: action.payload.value
       };
     case CLEAR_POPUP_INFO:
-      return istate;
+      return initialState;
     default:
       return istate;
   }

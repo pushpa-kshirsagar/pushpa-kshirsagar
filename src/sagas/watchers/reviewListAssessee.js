@@ -64,7 +64,7 @@ function* workerReviewListAssesseeGroupAssesseeSaga(data) {
     if (userResponse.responseCode === '000')
       yield put({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
-        payload: userResponse.responseObject[0]
+        payload: userResponse.responseObject
       });
     yield put({
       type: SET_MIDDLEPANE_STATE,

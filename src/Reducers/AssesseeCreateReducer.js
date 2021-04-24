@@ -91,7 +91,7 @@ const initialState = {
       assesseeNodeSecondary: []
     },
     assesseeRole: {
-      assesseeRolePrimary: ['sdasdd'],
+      assesseeRolePrimary: [],
       assesseeRoleSecondary: []
     }
   },
@@ -195,29 +195,30 @@ const initialState = {
     assesseeSignInCredential: ''
   },
   informationPersonal: {
-    assesseeBirthdate: '',
-    assesseeBirthdateVerification: false,
-    assesseeBirthmark: '',
-    birthplace: {
-      assesseeBirthplaceCountryRegion: '',
-      assesseeBirthplaceProvinceState: '',
-      assesseeBirthplaceCity: ''
-    },
-    community: {
-      communitySocial: {
-        assesseeCommunityCountryRegion: '',
-        assesseeCommunity: ''
-      },
-      communitySpiritual: {
-        assesseeCommunityCountryRegion: '',
-        assesseeCommunity: ''
-      }
-    },
+    // assesseeBirthdate: '',
+    // assesseeBirthdateVerification: false,
+    // assesseeBirthmark: '',
+    // birthplace: {
+    //   assesseeBirthplaceCountryRegion: '',
+    //   assesseeBirthplaceProvinceState: '',
+    //   assesseeBirthplaceCity: ''
+    // },
+    // community: {
+    //   communitySocial: {
+    //     assesseeCommunityCountryRegion: '',
+    //     assesseeCommunity: ''
+    //   },
+    //   communitySpiritual: {
+    //     assesseeCommunityCountryRegion: '',
+    //     assesseeCommunity: ''
+    //   }
+    // },
     assesseeGender: ''
   }
 };
 
 const AssesseeCreateReducer = (istate = initialState, action) => {
+  console.log(action.type)
   switch (action.type) {
     case ASSESSEE_POPUP_OPEN:
       return {

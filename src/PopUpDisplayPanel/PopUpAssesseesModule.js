@@ -25,7 +25,8 @@ import {
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_MIDDLEPANE_STATE,
-  SET_POPUP_SINGLE_STATE
+  SET_POPUP_SINGLE_STATE,
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { makeAssesseeGroupObj, makeAssesseeRoleObj } from '../Actions/GenericActions';
@@ -86,6 +87,22 @@ const PopUpAssesseesModule = (props) => {
           BadgeTwo: '',
           BadgeThree: '',
           isMiddlePaneList: false
+        }
+      });
+      dispatch({
+        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'assesseeGroup',
+          actualStateName: 'assesseeGroupPrimary',
+          value: []
+        }
+      });
+       dispatch({
+        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'assesseeRole',
+          actualStateName: 'assesseeRolePrimary',
+          value: []
         }
       });
       dispatch({

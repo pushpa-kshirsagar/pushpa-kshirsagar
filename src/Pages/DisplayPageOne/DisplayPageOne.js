@@ -36,6 +36,8 @@ import AllGroupCreatePopup from '../../Molecules/PopUpCreate/AllGroupCreatePopup
 import TypeCreatePopup from '../../Molecules/PopUpCreate/TypeCreatePopup';
 import AssignmentCreatePopup from '../../Molecules/PopUpCreate/AssignmentCreatePopup';
 import AssessmentCreatePopup from '../../Molecules/PopUpCreate/AssessmentCreatePopup';
+import PopUpMessageError from '../../PopUpGeneric/PopUpMessageError';
+import { useHistory } from 'react-router-dom';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -45,6 +47,7 @@ const DisplayPageOne = () => {
   const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { assesseeConfirmStatus } = useSelector((state) => state.UserReducer);
   const dispatch = useDispatch();
   const isExamMode = false;
   const assesseeId = localStorage.getItem('assesseeId');
@@ -52,6 +55,7 @@ const DisplayPageOne = () => {
   const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup } = useSelector(
     (state) => state.GroupCreateReducer
   );
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: LOADER_START });
@@ -181,6 +185,9 @@ const DisplayPageOne = () => {
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
       {popupMode === 'assesseesROLECREATE' && <AssesseeRoleCreatePopUp />}
       {popupMode === 'associatesROLECREATE' && <AssociateRoleCreatePopup />}
+      {popupMode === 'responseErrorMsg' && (
+        <PopUpMessageError isActive errorMessage={isPopUpValue} />
+      )}
       {popupMode === 'assesseesGROUPCREATE' && (
         <AllGroupCreatePopup
           headerOne={'assessees'}

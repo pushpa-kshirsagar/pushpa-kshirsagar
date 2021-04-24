@@ -30,14 +30,19 @@ const PopUpAssesseePassword = (props) => {
   const { getSession, signOut } = useContext(AccountContext);
   const history = useHistory();
   const { assesseeConfirmStatus } = useSelector((state) => state.UserReducer);
-
+  useEffect(() => {
+    if (assesseeConfirmStatus === 'passwordReviseSuccess') {
+      let path = `/signIn`;
+      history.push(path);
+    }
+  }, [assesseeConfirmStatus, history]);
   const handleClick = () => {
     //according to creation mode popup sequence will change
     setConfirmRevisedPasswordError('');
     setRevisedPasswordError('');
     setCurrentPasswordError('');
     const passwordRegExp = new RegExp(
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!{~:<->}@#$%^&*])(?=.{8,})'
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!{~:<-?>}@#$%^&*])(?=.{8,})'
     );
     if (currentPassword !== '' && revisedPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(revisedPassword)) {
@@ -48,7 +53,7 @@ const PopUpAssesseePassword = (props) => {
         setRevisedPasswordError('');
         setConfirmRevisedPasswordError('');
         // TODO: call change password method in aws cognito
-        // dispatch({ type: LOADER_START });
+        dispatch({ type: LOADER_START });
         dispatch({
           type: SET_ASSESSEE_REVISE_PASSWORD,
           payload: {
@@ -100,12 +105,7 @@ const PopUpAssesseePassword = (props) => {
     }
     // dispatch({ type: POPUP_CLOSE });
   };
-  useEffect(() => {
-    if (assesseeConfirmStatus === 'passwordReviseSuccess') {
-      let path = `/signIn`;
-      history.push(path);
-    }
-  }, [assesseeConfirmStatus, history]);
+  
   return (
     <div>
       <Popup isActive={isActive}>
