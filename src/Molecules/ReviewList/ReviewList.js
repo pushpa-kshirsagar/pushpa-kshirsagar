@@ -19,7 +19,7 @@ const ReviewList = (props) => {
     onClickEvent = null,
     tag = '',
     id,
-    actualStatus=''
+    actualStatus = ''
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 

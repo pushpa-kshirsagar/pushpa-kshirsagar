@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
@@ -45,6 +45,7 @@ const PopUpSignOnAssessee = (props) => {
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const informationContact = assesseeInfo.informationContact;
   console.log('============>', assesseeInfo);
+  const [roleSelectedError, setRoleSelectedError] = useState('');
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -79,10 +80,11 @@ const PopUpSignOnAssessee = (props) => {
     if (tempCommunication === 'email address (secondary)') {
       informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
+    //6083d82a5c42683849ce14d0 parent associate id
     let dummyassoInfo = {
       id:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        '60781fb0eba001142b091eeb',
+        '6083d82a5c42683849ce14d0',
       associateAssent: true,
       informationBasic: {
         associateName: 'Sample Assocaite',
@@ -98,7 +100,7 @@ const PopUpSignOnAssessee = (props) => {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        '60781fb0eba001142b091eeb',
+        '6083d82a5c42683849ce14d0',
       associateName: selectedAssociateInfo?.associate?.informationBasic.associateName,
       assessee: {
         informationBasic: informationBasic,
@@ -177,7 +179,7 @@ const PopUpSignOnAssessee = (props) => {
     let roleid = e.currentTarget.getAttribute('tag');
     let roleArr = assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary;
     console.log(roleArr.includes(roleid));
-
+    setRoleSelectedError('');
     if (roleArr.includes(roleid)) {
       document.getElementById(roleid).style.backgroundColor = 'white';
       roleArr = roleArr.filter(function (number) {
@@ -265,6 +267,7 @@ const PopUpSignOnAssessee = (props) => {
         textTwo={'assesseeGroupDescription'}
         onClickEvent={updateAssesseeGroups}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        selectedList={assesseeInfo?.informationAllocation?.assesseeGroup.assesseeGroupPrimary}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERLISTPOPUP'}
@@ -313,13 +316,10 @@ const PopUpSignOnAssessee = (props) => {
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a role'}
-        // ListData={[
-        //   { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
-        //   { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
-        //   { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
-        // ]}
-        // textOne={'name'}
-        // textTwo={'description'}
+        isRequired={true}
+        selectedList={assesseeInfo?.informationAllocation?.assesseeRole.assesseeRolePrimary}
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
         ListData={coreRoleReviewListData}
         textOne={'assesseeRoleName'}
         textTwo={'assesseeRoleDescription'}
@@ -511,7 +511,7 @@ const PopUpSignOnAssessee = (props) => {
         headerPanelColour="genericOne"
         headerOne="assessees"
         headerOneBadgeOne="information"
-        valueState='tenurestart'
+        valueState="tenurestart"
         isVerification={false}
         basicInfo={assesseeInfo.informationPersonal}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}

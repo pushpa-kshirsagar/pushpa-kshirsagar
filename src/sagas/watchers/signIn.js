@@ -15,7 +15,9 @@ import {
   GET_ASSESSEE_INFO_SAGA,
   GET_SIGNED_ASSESSEE_PERMISSION_SAGA,
   SET_ASSESSEE_REVISE_PASSWORD,
-  LOADER_STOP
+  LOADER_STOP,
+  POPUP_CLOSE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import {
   ASSESSEE_SIGN_IN_URL,
@@ -23,21 +25,27 @@ import {
   ASSESSEE_CHANGE_PASSWORD_URL
 } from '../../endpoints';
 
-const assesseeSignInApi = async (requestObj) => {
+const apiCallFunction = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSESSEE_SIGN_IN_URL;
+  console.log('requestObj.data');
+  // let URL = ASSESSEE_SIGN_IN_URL;
   const requestOptions = {
     method: 'POST',
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(URL, requestOptions);
+  const response = await fetch(requestObj.URL, requestOptions);
   const json = await response.json();
+  console.log(response);
+  console.log('response');
   return json;
 };
 
 function* workerSignInAssesseeSaga(data) {
   try {
-    const userResponse = yield call(assesseeSignInApi, { data: data.payload });
+    const userResponse = yield call(apiCallFunction, {
+      data: data.payload,
+      URL: ASSESSEE_SIGN_IN_URL
+    });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       console.log('SIGN IN ASSESSEE=======>', userResponse);
@@ -128,6 +136,10 @@ function* workerSignInAssesseeSaga(data) {
         payload: ''
       });
       yield put({ type: SET_SIGN_IN_STATUS, payload: 'success' });
+      yield put({
+        type: SET_USER_STATE,
+        payload: { stateName: 'assesseeConfirmStatus', value: null }
+      });
     } else {
       yield put({ type: SET_SIGN_IN_STATUS, payload: 'error' });
     }
@@ -147,8 +159,8 @@ const assesseeSignInInfoApi = async (requestObj) => {
   const json = await response.json();
   return json;
 };
-const revisePasswordApi = (requestObj) => {
-  console.log("requestObj.data");
+const revisePasswordApi = async (requestObj) => {
+  console.log('requestObj.data');
   console.log(requestObj.data);
   const requestOptions = {
     method: 'POST',
@@ -157,16 +169,19 @@ const revisePasswordApi = (requestObj) => {
     }),
     body: JSON.stringify(requestObj.data)
   };
-  const response = fetch(ASSESSEE_CHANGE_PASSWORD_URL, requestOptions);
-  const json = response.json();
-  console.log("json.data",json);
-  console.log("response.data",response);
+  const response = await fetch(requestObj.URL, requestOptions);
+  const json = await response.json();
+  console.log('json.data', json);
+  console.log('response.data', response);
   console.log(requestObj.data);
   return json;
 };
 function* workerSetPassword(data) {
   try {
-    const response = yield call(revisePasswordApi, { data: data.payload.reqObj });
+    const response = yield call(revisePasswordApi, {
+      data: data.payload.reqObj,
+      URL: ASSESSEE_CHANGE_PASSWORD_URL
+    });
     console.log('response.responseCode', response);
     if (response.responseCode === '000') {
       console.log('response.responseCode', response.responseCode);
@@ -175,10 +190,16 @@ function* workerSetPassword(data) {
         type: SET_USER_STATE,
         payload: { stateName: 'assesseeConfirmStatus', value: 'passwordReviseSuccess' }
       });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
+    yield put({ type: POPUP_CLOSE });
+    yield put({ type: LOADER_STOP });
   } catch (error) {
     yield put({ type: LOADER_STOP });
-
   }
 }
 function* workerSignInAssesseeInfo(data) {

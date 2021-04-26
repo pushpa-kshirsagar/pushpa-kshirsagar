@@ -10,8 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
-import { MoreRounded } from '@material-ui/icons';
-
+import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 const PopUpReviewList = (props) => {
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
@@ -19,7 +18,8 @@ const PopUpReviewList = (props) => {
   const {
     isActive,
     errorMsg = '',
-    headerOneBadgeTwo='',
+    setErrorMsg = null,
+    headerOneBadgeTwo = '',
     inputHeaderBadge = 'primary',
     inputHeader = 'node',
     headerPanelColour = 'genericOne',
@@ -35,15 +35,29 @@ const PopUpReviewList = (props) => {
     textTwo = 'description',
     nextPopUpValue,
     onClickEvent = null,
-    mode
+    mode,
+    isRequired = false,
+    selectedList = []
   } = props;
 
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (reviewMode === 'revise') {
-      dispatch({ type: POPUP_CLOSE });
+    if (isRequired) {
+      if (selectedList.length > 0) {
+        if (reviewMode === 'revise') {
+          dispatch({ type: POPUP_CLOSE });
+        } else {
+          dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+        }
+      } else {
+        setErrorMsg(REQUIRED_ERROR_MESSAGE);
+      }
     } else {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      if (reviewMode === 'revise') {
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      }
     }
   };
   return (
@@ -86,13 +100,17 @@ const PopUpReviewList = (props) => {
                 isAlertActive={false}
                 isFlagActive={false}
                 isSelectActive={false}
-                key={index}
+                key={index.id}
+                isSelectedReviewList={selectedList.includes(index.id)}
                 onClickEvent={onClickEvent}
                 // isSelectedReviewList={selectedIdsArr.includes(index.id)}
               />
             ))}
 
-          <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
+          <FormHelperText
+            className={['helperText', 'helptextmargin'].join(' ')}
+            style={{ margin: '5px 0px 0px 5px' }}
+          >
             <span>{errorMsg}</span>
           </FormHelperText>
         </DialogContent>

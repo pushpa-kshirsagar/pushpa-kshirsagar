@@ -9,8 +9,10 @@ import {
   GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_CLOSE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_POPUP_SINGLE_STATE,
   SET_POPUP_STATE,
   SET_SECONDARY_OPTION_VALUE
 } from '../actionType';
@@ -19,7 +21,8 @@ import {
   ASSESSEE_CARD_POPUP_OPTIONS,
   NOTIFICATION_REPORT_POPUP,
   REVIEW_REVISE_POPUP,
-  SIGN_OUT_POPUP
+  SIGN_OUT_POPUP,
+  SELF_POPUP
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { setAssesseeCardPermissionInJson } from '../Actions/GenericActions';
@@ -105,7 +108,7 @@ const PopUpDisplayPanelAssessee = (props) => {
       valueArr = [];
       reviseSecondaryOptionCheckValue = '';
     }
-    if(clickValue === 'revise'){
+    if (clickValue === 'revise') {
       setIsReviseMode(true);
     }
     if (clickValue === 'information' && popupHeaderOne === 'assessee') {
@@ -144,6 +147,14 @@ const PopUpDisplayPanelAssessee = (props) => {
         }
       });
       setIsReviseMode(false);
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'Card' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneListPopupOptions', value: SELF_POPUP }
+      });
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {

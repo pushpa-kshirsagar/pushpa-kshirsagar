@@ -5,7 +5,8 @@ import {
   LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSESSEE_ROLE_CREATE_URL } from '../../endpoints';
 
@@ -40,11 +41,16 @@ function* workerCreateAssesseeRoleSaga(data) {
           createMode: 'assesseesRole'
         }
       });
+      yield put({ type: POPUP_CLOSE });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
     yield put({ type: LOADER_STOP });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     yield put({ type: CLEAR_ROLE_REDUCER_STATE });
-    yield put({ type: POPUP_CLOSE });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

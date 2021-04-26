@@ -7,6 +7,7 @@ import { DialogContent } from '@material-ui/core';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
   ASSESSEE_INFO_REVISE_SAGA,
+  ASSOCIATE_INFO_REVISE_SAGA,
   GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSESSEE_INFO_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
@@ -27,10 +28,17 @@ import {
   SET_MIDDLEPANE_SECONDARY_OPTION,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_POPUP_SINGLE_STATE,
-  SET_SECONDARY_CREATE_OPTION_VALUE
+  GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
+  SET_SECONDARY_CREATE_OPTION_VALUE,
+  SET_PAGE_COUNT,
+  CLEAR_DISPLAY_PANE_THREE,
+  FILTERMODE,
+  SET_REQUEST_OBJECT
 } from '../actionType';
-import { getAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
+import {
+  getAssesseeGroupAssesseeDistinctApiCall,
+  getAssesseeGroupAssesseeReqObj
+} from '../Actions/AssesseeModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -40,12 +48,7 @@ const PopUpMiddlePaneList = (props) => {
     secondaryOptionCheckValue,
     selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
-  const {
-    selectedAssociateInfo,
-    countPage,
-    middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeOne
-  } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [isReviseMode, setIsReviseMode] = useState(false);
 
   const dispatch = useDispatch();
@@ -71,6 +74,7 @@ const PopUpMiddlePaneList = (props) => {
       if (
         typeOfMiddlePaneList === 'assesseesDistinctReviewList' ||
         typeOfMiddlePaneList === 'administratorsDistinctReviewList' ||
+        typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'managersDistinctReviewList'
       ) {
         dispatch({
@@ -487,20 +491,18 @@ const PopUpMiddlePaneList = (props) => {
       dataVal === 'distinct' &&
       typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList'
     ) {
+      getAssesseeGroupAssesseeDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        dataVal,
+        selectedTagValue
+      );
       dispatch({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assessees',
-          middlePaneHeaderBadgeOne: 'distinct',
-          middlePaneHeaderBadgeTwo: 'active',
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList',
-          scanCount: 3,
-          showMiddlePaneState: true
-        }
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
       });
-      dispatch({ type: LOADER_STOP });
       dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'distinct' &&
@@ -529,31 +531,53 @@ const PopUpMiddlePaneList = (props) => {
         payload: { badgeValue: dataVal, keyValue: keyVal }
       });
     } else if (
-      (dataVal === 'suspendApiCall' ||
-        dataVal === 'terminateApiCall' ||
-        dataVal === 'unsuspendApiCall' ||
-        dataVal === 'unarchiveApiCall' ||
-        dataVal === 'archiveApiCall' ||
-        dataVal === 'yesApiCall' ||
-        dataVal === 'unterminateApiCall') &&
-      popupHeaderOne === 'assessee'
+      dataVal === 'suspendApiCall' ||
+      dataVal === 'terminateApiCall' ||
+      dataVal === 'unsuspendApiCall' ||
+      dataVal === 'unarchiveApiCall' ||
+      dataVal === 'archiveApiCall' ||
+      dataVal === 'yesApiCall' ||
+      dataVal === 'unterminateApiCall'
     ) {
-      let reqBody = {
-        assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId:
-          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        assessee: {
-          id: selectedTagValue,
-          informationEngagement: {
-            assesseeStatus: keyVal
+      if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assessee: {
+            id: selectedTagValue,
+            informationEngagement: {
+              assesseeStatus: keyVal
+            }
           }
-        }
-      };
-      dispatch({ type: LOADER_START });
-      dispatch({
-        type: ASSESSEE_INFO_REVISE_SAGA,
-        payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
-      });
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: ASSESSEE_INFO_REVISE_SAGA,
+          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+        });
+      }
+      if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          associate: {
+            id: selectedTagValue,
+            informationEngagement: {
+              associateStatus: keyVal
+            }
+          }
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: ASSOCIATE_INFO_REVISE_SAGA,
+          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+        });
+      }
+
       dispatch({ type: POPUP_CLOSE });
     } else {
       dispatch({

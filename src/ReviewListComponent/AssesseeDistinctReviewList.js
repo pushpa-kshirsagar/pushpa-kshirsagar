@@ -77,7 +77,12 @@ const AssesseeDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssesseeReviewListRequestObject(selectedAssociateInfo,siftKey, 0, countPage);
+    let requestObect = makeAssesseeReviewListRequestObject(
+      selectedAssociateInfo,
+      siftKey,
+      0,
+      countPage
+    );
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
@@ -159,7 +164,7 @@ const AssesseeDistinctReviewList = (props) => {
                   middlePaneHeaderBadgeTwo,
                   item.informationEngagement.assesseeStatus
                 )}
-                actualStatus={ item.informationEngagement.assesseeStatus}
+                actualStatus={item.informationEngagement.assesseeStatus}
                 isSelectedReviewList={
                   middlePaneSelectedValue ===
                   item.informationEngagement.assesseeTag?.assesseeTagPrimary

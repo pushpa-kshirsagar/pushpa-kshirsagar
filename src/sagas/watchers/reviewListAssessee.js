@@ -3,13 +3,15 @@ import {
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
-  SET_MIDDLEPANE_STATE
+  SET_MIDDLEPANE_STATE,
+  GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
+  RELATED_REVIEWLIST_DISTINCT_DATA
 } from '../../actionType';
-import { ASSESSEE_REVIEW_LIST_URL } from '../../endpoints';
+import { ASSESSEE_REVIEW_LIST_URL, ASSESSEE_GROUP_ASSESSEE_URL } from '../../endpoints';
 
-const assesseesReviewListDistinctApi = async (requestObj) => {
+const reviewListDistinctApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSESSEE_REVIEW_LIST_URL;
+  // let URL = ASSESSEE_REVIEW_LIST_URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -17,14 +19,17 @@ const assesseesReviewListDistinctApi = async (requestObj) => {
     }),
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(URL, requestOptions);
+  const response = await fetch(requestObj.URL, requestOptions);
   const json = await response.json();
   return json;
 };
 
 function* workerReviewListAssesseeSaga(data) {
   try {
-    const userResponse = yield call(assesseesReviewListDistinctApi, { data: data.payload.request });
+    const userResponse = yield call(reviewListDistinctApi, {
+      data: data.payload.request,
+      URL: ASSESSEE_REVIEW_LIST_URL
+    });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000')
       yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
@@ -49,7 +54,44 @@ function* workerReviewListAssesseeSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerReviewListAssesseeGroupAssesseeSaga(data) {
+  try {
+    const userResponse = yield call(reviewListDistinctApi, {
+      data: data.payload.request,
+      URL: ASSESSEE_GROUP_ASSESSEE_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000')
+      yield put({
+        type: RELATED_REVIEWLIST_DISTINCT_DATA,
+        payload: userResponse.responseObject
+      });
+    yield put({
+      type: SET_MIDDLEPANE_STATE,
+      payload: {
+        middlePaneHeader: data.payload.HeaderOne,
+        middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+        middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+        middlePaneHeaderBadgeThree: '',
+        middlePaneHeaderBadgeFour: '',
+        typeOfMiddlePaneList: data.payload.HeaderOne + 'GroupAssesseeReviewList',
+        scanCount: userResponse && userResponse.countTotal,
+        showMiddlePaneState: true
+      }
+    });
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
 
 export default function* watchReviewListAssesseeSaga() {
   yield takeLatest(ASSESSEE_REVIEW_DISTINCT_SAGA, workerReviewListAssesseeSaga);
+  yield takeLatest(
+    GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
+    workerReviewListAssesseeGroupAssesseeSaga
+  );
 }

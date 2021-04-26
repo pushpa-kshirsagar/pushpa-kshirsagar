@@ -476,7 +476,15 @@ export const ALIGNMENT_POPUP_ARR = [
   }
 ];
 //review information popup option
-
+export const SELF_POPUP = [
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  { data: 'revise', dataValue: 'revise', optionClass: 'optionPrimary', disabled: false }
+];
 export const REVIEW_REVISE_POPUP = [
   {
     data: 'information',

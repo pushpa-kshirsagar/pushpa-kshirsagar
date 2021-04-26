@@ -91,7 +91,7 @@ export const makeAssesseeReviewListRequestObject = (
         conditionValue: {
           condition: 'in',
           value: {
-            in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
+            in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED','ARCHIVED','DELETED']
           }
         }
       };
