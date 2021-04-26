@@ -132,7 +132,7 @@ const DisplayPaneThreeSectionOne = () => {
         {
           id: 'associate1',
           textOne: 'Simple Sample 01',
-          textTwo: 'Manager',
+          textTwo: 'Group',
           status: ''
         },
         {
@@ -222,19 +222,19 @@ const DisplayPaneThreeSectionOne = () => {
         {
           id: 'associate1',
           textOne: 'Simple Sample 01',
-          textTwo: 'type',
+          textTwo: 'role',
           status: ''
         },
         {
           id: 'associate2',
           textOne: 'Simple Sample 02',
-          textTwo: 'type',
+          textTwo: 'role',
           status: ''
         },
         {
           id: 'associate3',
           textOne: 'Simple Sample 03',
-          textTwo: 'type',
+          textTwo: 'role',
           status: ''
         }
       ],

@@ -513,6 +513,8 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne="information"
         valueState='tenurestart'
         isVerification={false}
+        basicInfo={assesseeInfo.informationPersonal}
+        typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
@@ -522,9 +524,9 @@ const PopUpSignOnAssessee = (props) => {
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
-        basicInfo={assesseeInfo.informationBasic}
+        basicInfo={assesseeInfo.informationPersonal}
         nextPopUpValue={'PICTUREPOPUP'}
-        typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
+        typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>

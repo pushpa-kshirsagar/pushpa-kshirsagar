@@ -52,10 +52,14 @@ const PopUpDatePicker = (props) => {
         >
           <FormControl style={{ width: '100%' }}>
             <InputFeild
-              type={'datetime-local'}
-              id={inputHeader + primaryheader}
-              label={inputHeader + ' ' + primaryheader}
+              type={'date'}
+              id={'date'}
+              label={'Birthdate'}
               value={basicInfo[valueState]}
+              defaultValue="mm/dd/yyyy"
+              InputLabelProps={{
+                shrink: false
+              }}
               errorMsg={''}
               onClick={handleChange}
             />

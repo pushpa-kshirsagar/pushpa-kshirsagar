@@ -360,6 +360,7 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         }
       };
     case UPDATE_ASSESSEE_PERSONAL_INFO:
+      console.log("IN+++++++>",action);
       return {
         ...istate,
         informationPersonal: action.payload
