@@ -29,7 +29,7 @@ import {
   SET_ASSESSEE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { makeAssesseeGroupObj, makeAssesseeRoleObj } from '../Actions/GenericActions';
+import { makeAssesseeGroupObj, makeAssesseeRoleCreateObj, makeAssesseeRoleObj } from '../Actions/GenericActions';
 import { getAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
 
 const PopUpAssesseesModule = (props) => {
@@ -76,7 +76,7 @@ const PopUpAssesseesModule = (props) => {
         }
       });
       dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-      let roleRequestObj = makeAssesseeRoleObj(selectedAssociateInfo, 'all', 0, -1);
+      let roleRequestObj = makeAssesseeRoleCreateObj(selectedAssociateInfo, 'all', 0, -1);
       dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
 
       dispatch({

@@ -10,7 +10,8 @@ export const GET_ASSESSEE_PERMISSION_URL =
 // export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/b4ff8c35-0445-4f0c-899b-68d8281b2bd8';// for assessee manager (secondary) role
 
 //assessee, manager, admin create
-
+export const MANAGER_ROLE_ID = ['608697d9d53a790a03e49618', '6086980dd53a790a03e4961d'];
+export const ADMIN_ROLE_ID = ['6086924e349b894257720542'];
 export const ASSESSEE_CREATE_URL =
   'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/create';
 // export const ASSOCIATE_CREATE_URL =
@@ -99,4 +100,6 @@ export const ASSOCIATE_INFO_REVISE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-distinct/revise';
 export const ASSESSEE_GROUP_ASSESSEE_URL =
   'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/asseesee-review-list';
+export const ASSOCIATE_GROUP_ASSOCIATE_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/associate-review-list';
 // export const URL = '';

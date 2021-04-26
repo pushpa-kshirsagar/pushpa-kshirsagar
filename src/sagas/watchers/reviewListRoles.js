@@ -57,7 +57,9 @@ function* workerReviewAssesseeRoleListSaga(data) {
       yield put({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader: 'assessees',
+          middlePaneHeader: data.payload.middlePaneHeader
+            ? data.payload.middlePaneHeader
+            : 'assessees',
           middlePaneHeaderBadgeOne: data.payload.BadgeOne,
           middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
           middlePaneHeaderBadgeThree: data.payload.BadgeThree,
@@ -122,9 +124,6 @@ function* workerReviewAssociateRoleListSaga(data) {
   }
 }
 
-// export default function* watchReviewAssesseeRoleListSaga() {
-//   yield takeLatest(GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA, workerReviewAssesseeRoleListSaga);
-// }
 export default function* watchReviewRolesListSaga() {
   yield takeLatest(GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA, workerReviewAssesseeRoleListSaga);
   yield takeLatest(GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA, workerReviewAssociateRoleListSaga);

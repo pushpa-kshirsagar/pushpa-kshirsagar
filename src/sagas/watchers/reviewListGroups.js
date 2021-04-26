@@ -191,10 +191,6 @@ function* workerReviewAssignmentGroupListSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
-
-// export default function* watchReviewAssesseeRoleListSaga() {
-//   yield takeLatest(GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA, workerReviewAssesseeRoleListSaga);
-// }
 export default function* watchReviewGroupsListSaga() {
   yield takeLatest(GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA, workerReviewGroupListSaga);
   yield takeLatest(GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA, workerReviewAssociateGroupListSaga);

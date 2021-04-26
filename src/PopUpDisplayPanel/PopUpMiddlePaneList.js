@@ -39,6 +39,7 @@ import {
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
+import { getAssociateGroupAssociateDistinctApiCall } from '../Actions/AssociateModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -508,20 +509,18 @@ const PopUpMiddlePaneList = (props) => {
       dataVal === 'distinct' &&
       typeOfMiddlePaneList === 'associatesGroupDistinctReviewList'
     ) {
+      getAssociateGroupAssociateDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        dataVal,
+        selectedTagValue
+      );
       dispatch({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assessees',
-          middlePaneHeaderBadgeOne: 'distinct',
-          middlePaneHeaderBadgeTwo: 'active',
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'associatesGroupAssociateReviewList',
-          scanCount: 3,
-          showMiddlePaneState: true
-        }
+        type: FILTERMODE,
+        payload: { FilterMode: 'associateGroupAssociateDistinct' + secondaryOptionCheckValue }
       });
-      dispatch({ type: LOADER_STOP });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'revise') {
       // alert("IN REVISE");
