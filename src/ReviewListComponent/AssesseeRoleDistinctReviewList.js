@@ -16,6 +16,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeRoleObj } from '../Actions/GenericActions';
 import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { assesseeRole } from '../Actions/AssesseeModuleAction';
 const AssesseeRoleDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage,selectedAssociateInfo } = useSelector(
@@ -136,7 +137,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.assesseeRoleStatus}
-                textOne={item.informationBasic.assesseeRoleName}
+                textOne={assesseeRole(item.informationBasic.assesseeRoleName)}
                 textTwo={item.informationBasic.assesseeRoleDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}

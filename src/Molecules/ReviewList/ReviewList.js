@@ -72,7 +72,7 @@ const ReviewList = (props) => {
                     </div>
                   </ClickAwayListener>
                 ) : (
-                  <span>{textOne}</span>
+                  <span dangerouslySetInnerHTML={{ __html: textOne }}></span>
                 )}
                 {/* {textOne} */}
               </div>

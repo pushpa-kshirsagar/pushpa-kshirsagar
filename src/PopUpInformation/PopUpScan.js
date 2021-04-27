@@ -40,12 +40,16 @@ import {
   makeAssignmentTypeScanRequestObject,
   makeAssessmentTypeScanRequestObject,
   makeAssignmentScanRequestObject,
-  makeAssessmentScanRequestObject
+  makeAssessmentScanRequestObject,
+  makeAdminmManagerRoleScanRequestObject
 } from '../Actions/GenericActions';
+import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
+import { getAssociateGroupAssociateDistinctApiCall } from '../Actions/AssociateModuleAction';
+import { getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const {
     scanHeader,
     scanHeaderBadgeOne,
@@ -100,15 +104,29 @@ const PopUpScan = (props) => {
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
-        let requestObect = makeAssesseeRoleScanRequestObject(
-          selectedAssociateInfo,
-          middlePaneHeaderBadgeTwo === 'distinct'
-            ? middlePaneHeaderBadgeThree
-            : middlePaneHeaderBadgeTwo,
-          0,
-          countPage,
-          state.scanValue
-        );
+        let requestObect = {};
+        if (middlePaneHeader === 'administrators' || middlePaneHeader === 'managers') {
+          requestObect = makeAdminmManagerRoleScanRequestObject(
+            selectedAssociateInfo,
+            middlePaneHeaderBadgeTwo === 'distinct'
+              ? middlePaneHeaderBadgeThree
+              : middlePaneHeaderBadgeTwo,
+            0,
+            countPage,
+            state.scanValue,
+            middlePaneHeader === 'administrators' ? ADMIN_ROLE_ID : MANAGER_ROLE_ID
+          );
+        } else {
+          requestObect = makeAssesseeRoleScanRequestObject(
+            selectedAssociateInfo,
+            middlePaneHeaderBadgeTwo === 'distinct'
+              ? middlePaneHeaderBadgeThree
+              : middlePaneHeaderBadgeTwo,
+            0,
+            countPage,
+            state.scanValue
+          );
+        }
         dispatch({ type: SET_PAGE_COUNT, payload: 1 });
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
@@ -379,6 +397,30 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
+      if (typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList') {
+        getAssesseeGroupAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+      }
+      if (typeOfMiddlePaneList === 'associatesGroupAssociateReviewList') {
+        getAssociateGroupAssociateDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+      }
       if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
         console.log(typeOfMiddlePaneList);
       }
@@ -423,6 +465,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'associatesGroupDistinctReviewList' ||
                 isPopUpValue === 'assignmentsTypeDistinctReviewList' ||
                 isPopUpValue === 'assessmentsTypeDistinctReviewList' ||
+                isPopUpValue === 'associatesGroupAssociateReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}
@@ -432,6 +475,7 @@ const PopUpScan = (props) => {
                 ))}
               {(isPopUpValue === 'assesseesDistinctReviewList' ||
                 isPopUpValue === 'administratorsDistinctReviewList' ||
+                isPopUpValue === 'assesseesGroupAssesseeReviewList' ||
                 isPopUpValue === 'managersDistinctReviewList') && (
                 <span>name, alias, email address, mobile telephone, tag.</span>
               )}

@@ -879,6 +879,92 @@ export const makeAssesseeRoleScanRequestObject = (
   };
   return requestObj;
 };
+export const makeAdminmManagerRoleScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr,
+  searchArr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeRoleName',
+      order: 'asc'
+    },
+    numberPage: 0,
+    countPage: 25,
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeRoleStatus',
+            conditionValue: searchObj
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'id',
+            conditionValue: {
+              condition: 'in',
+              value: {
+                in: searchArr
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeRoleName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeRoleDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
 export const makeAssesseeGroupObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
   let searchObj = {
     condition: 'eq',

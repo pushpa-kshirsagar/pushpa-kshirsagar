@@ -13,7 +13,8 @@ import {
   SET_CORE_GROUP_REVIEW_LIST_DATA,
   SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_TYPE_REVIEW_LIST_DATA,
-  RELATED_REVIEWLIST_DISTINCT_DATA
+  RELATED_REVIEWLIST_DISTINCT_DATA,
+  SET_RELATED_REQUEST_OBJECT
 } from '../actionType';
 
 const initialState = {
@@ -44,6 +45,7 @@ const initialState = {
   coreRoleReviewListReqObj: null,
   coreTypeReviewListReqObj: null,
   reviewListReqObj: null,
+  relatedReviewListReqObj: null,
   middlePaneSelectedValue: '',
   selectedInformationAllorKey: '',
   typeOfAssesseeCreate: '',
@@ -63,12 +65,12 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
     case SET_MIDDLEPANE_STATE:
       return {
         ...istate,
+        typeOfMiddlePaneList: action.payload.typeOfMiddlePaneList,
         middlePaneHeader: action.payload.middlePaneHeader,
         middlePaneHeaderBadgeOne: action.payload.middlePaneHeaderBadgeOne,
         middlePaneHeaderBadgeTwo: action.payload.middlePaneHeaderBadgeTwo,
         middlePaneHeaderBadgeThree: action.payload.middlePaneHeaderBadgeThree,
         middlePaneHeaderBadgeFour: action.payload.middlePaneHeaderBadgeFour,
-        typeOfMiddlePaneList: action.payload.typeOfMiddlePaneList,
         scanCount: action.payload.scanCount,
         showMiddlePaneState: action.payload.showMiddlePaneState,
         middlePaneSelectedValue: 'tag'
@@ -145,6 +147,12 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         ...istate,
         reviewListReqObj: action.payload,
         reviewListDistinctData: []
+      };
+    case SET_RELATED_REQUEST_OBJECT:
+      return {
+        ...istate,
+        relatedReviewListReqObj: action.payload,
+        relatedReviewListDistinctData: []
       };
     default:
       return istate;

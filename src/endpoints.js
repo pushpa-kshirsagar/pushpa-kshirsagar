@@ -11,7 +11,7 @@ export const GET_ASSESSEE_PERMISSION_URL =
 
 //assessee, manager, admin create
 export const MANAGER_ROLE_ID = ['608697d9d53a790a03e49618', '6086980dd53a790a03e4961d'];
-export const ADMIN_ROLE_ID = ['6086924e349b894257720542'];
+export const ADMIN_ROLE_ID = ['6086924e349b894257720542', '6086cdff11268860527587fe'];
 export const ASSESSEE_CREATE_URL =
   'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/create';
 // export const ASSOCIATE_CREATE_URL =
