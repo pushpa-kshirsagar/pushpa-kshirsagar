@@ -239,6 +239,30 @@ const DisplayPaneThreeSectionOne = () => {
       });
     });
   }
+  let assesseeRoleListPrimary = [];
+  if (informationAllocation?.assesseeRole.assesseeRolePrimary.length > 0) {
+    const tempArr = informationAllocation?.assesseeRole?.assesseeRolePrimary;
+    tempArr.forEach((ob) => {
+      assesseeRoleListPrimary.push({
+        id: ob.id,
+        textOne: ob.informationBasic.assesseeRoleName,
+        textTwo: ob.informationBasic.assesseeRoleDescription,
+        status: ''
+      });
+    });
+  }
+  let assesseeRoleListSecondary = [];
+  if (informationAllocation?.assesseeRole.assesseeRoleSecondary.length > 0) {
+    const tempArr = informationAllocation?.assesseeRole?.assesseeRoleSecondary;
+    tempArr.forEach((ob) => {
+      assesseeRoleListSecondary.push({
+        id: ob.id,
+        textOne: ob.informationBasic.assesseeRoleName,
+        textTwo: ob.informationBasic.assesseeRoleDescription,
+        status: ''
+      });
+    });
+  }
 
   const allocationList1 = [
     {
@@ -409,30 +433,11 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'role',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'role',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'role',
-              status: ''
-            }
-          ]
+          innerList: assesseeRoleListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assesseeRoleListSecondary
         }
       ],
       innerAssociateList: [
