@@ -221,8 +221,8 @@ const DisplayPaneThreeSectionOne = () => {
     tempArr.forEach((ob) => {
       assesseeGroupListPrimary.push({
         id: ob.id,
-        textOne: ob.informationBasic.assesseeGroupName,
-        textTwo: ob.informationBasic.assesseeGroupDescription,
+        textOne: ob?.informationBasic?.assesseeGroupName || '',
+        textTwo: ob?.informationBasic?.assesseeGroupDescription || '',
         status: ''
       });
     });
@@ -233,8 +233,8 @@ const DisplayPaneThreeSectionOne = () => {
     tempArr.forEach((ob) => {
       assesseeGroupListSecondary.push({
         id: ob.id,
-        textOne: ob.informationBasic.assesseeGroupName,
-        textTwo: ob.informationBasic.assesseeGroupDescription,
+        textOne: ob?.informationBasic?.assesseeGroupName || '',
+        textTwo: ob?.informationBasic?.assesseeGroupDescription || '',
         status: ''
       });
     });
@@ -245,8 +245,8 @@ const DisplayPaneThreeSectionOne = () => {
     tempArr.forEach((ob) => {
       assesseeRoleListPrimary.push({
         id: ob.id,
-        textOne: ob.informationBasic.assesseeRoleName,
-        textTwo: ob.informationBasic.assesseeRoleDescription,
+        textOne: ob?.informationBasic?.assesseeRoleName || '',
+        textTwo: ob?.informationBasic?.assesseeRoleDescription || '',
         status: ''
       });
     });
@@ -257,8 +257,8 @@ const DisplayPaneThreeSectionOne = () => {
     tempArr.forEach((ob) => {
       assesseeRoleListSecondary.push({
         id: ob.id,
-        textOne: ob.informationBasic.assesseeRoleName,
-        textTwo: ob.informationBasic.assesseeRoleDescription,
+        textOne: ob?.informationBasic?.assesseeRoleName || '',
+        textTwo: ob?.informationBasic?.assesseeRoleDescription || '',
         status: ''
       });
     });
