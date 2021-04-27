@@ -29,7 +29,12 @@ import {
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   CLEAR_DISPLAY_PANE_THREE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
-  SET_POPUP_SINGLE_STATE
+  SET_POPUP_SINGLE_STATE,
+  CLEAR_ROLE_REDUCER_STATE,
+  CLEAR_ASSESSEE_INFO,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -56,7 +61,9 @@ import {
   makeAssessmentTypeObj,
   makeAssignmentTypeObj,
   makeAdministratorsReviewListRequestObject,
-  makeManagersReviewListRequestObject
+  makeManagersReviewListRequestObject,
+  makeAdministratorRoleCreateObj,
+  makeManagerRoleCreateObj
 } from '../Actions/GenericActions';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
@@ -189,13 +196,51 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = '';
     }
-    if (clickValue === 'roles') {
+    if (
+      clickValue === 'roles' &&
+      popupHeaderOne !== 'administrators' &&
+      popupHeaderOne !== 'managers'
+    ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = '';
+    }
+    if (
+      (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
+      clickValue === 'roles'
+    ) {
+      //call admin and manager api
+      dispatch({ type: LOADER_START });
+      let roleRequestObj =
+        popupHeaderOne === 'administrators'
+          ? makeAdministratorRoleCreateObj(
+              selectedAssociateInfo,
+              secondaryOptionCheckValue,
+              0,
+              countPage
+            )
+          : makeManagerRoleCreateObj(
+              selectedAssociateInfo,
+              secondaryOptionCheckValue,
+              0,
+              countPage
+            );
+      dispatch({ type: SET_REQUEST_OBJECT, payload: roleRequestObj });
+
+      dispatch({
+        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          middlePaneHeader: popupHeaderOne,
+          BadgeOne: 'roles',
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
     }
     if (clickValue === 'types') {
       revisePopupHeaderOne = clickValue;
@@ -372,6 +417,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           isMiddlePaneList: true
         }
       });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     }
     if (
       clickValue === 'distinct' &&
@@ -379,7 +425,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOneBadgeOne === 'roles'
     ) {
       let requestObj = makeAssesseeRoleObj(
-        secondaryOptionCheckValue,
+        selectedAssociateInfo,
         secondaryOptionCheckValue,
         0,
         countPage
@@ -580,6 +626,52 @@ const PopUpDisplayPanelAssociate = (props) => {
       clickValue === 'information' &&
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
     ) {
+      dispatch({ type: CLEAR_ASSESSEE_INFO });
+      dispatch({ type: LOADER_START });
+      let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({
+        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      let roleRequestObj =
+        popupHeaderOne === 'administrators'
+          ? makeAdministratorRoleCreateObj(selectedAssociateInfo, 'active', 0, -1)
+          : makeManagerRoleCreateObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+
+      dispatch({
+        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      dispatch({
+        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'assesseeGroup',
+          actualStateName: 'assesseeGroupPrimary',
+          value: []
+        }
+      });
+      dispatch({
+        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'assesseeRole',
+          actualStateName: 'assesseeRolePrimary',
+          value: []
+        }
+      });
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ADMINISTRATOR_CREATE' }
@@ -597,6 +689,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {
+      dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }

@@ -30,7 +30,6 @@ const PopUpPicture = (props) => {
     if (handleNextPopupValue) {
       handleNextPopupValue();
     } else {
-      // await dispatch({ type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA, payload: { request: requestObj } });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
   };

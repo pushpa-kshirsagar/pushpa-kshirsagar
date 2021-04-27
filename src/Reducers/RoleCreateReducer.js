@@ -44,7 +44,7 @@ const RoleCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_ROLE_REDUCER_STATE:
-      return istate;
+      return initialState;
     default:
       return istate;
   }

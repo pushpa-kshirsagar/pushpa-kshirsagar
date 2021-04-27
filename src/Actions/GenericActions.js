@@ -1,4 +1,5 @@
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import UserPool from '../UserPool';
 
 export const setAssesseeCardPermissionInJson = (popupValuArr, assesseePermission) => {
@@ -91,7 +92,16 @@ export const makeAssesseeReviewListRequestObject = (
         conditionValue: {
           condition: 'in',
           value: {
-            in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED','ARCHIVED','DELETED']
+            in: [
+              'CONFIRMED',
+              'DISAPPROVED',
+              'SUSPENDED',
+              'TERMINATED',
+              'UNAPPROVED',
+              'UNCONFIRMED',
+              'ARCHIVED',
+              'DELETED'
+            ]
           }
         }
       };
@@ -127,25 +137,17 @@ export const makeAdministratorsReviewListRequestObject = (
   countPage
 ) => {
   let searchObj = {
-    dataType: 'string',
-    conditionColumn: 'informationEngagement.assesseeStatus',
-    conditionValue: {
-      condition: 'eq',
-      value: {
-        from: filterKey.toUpperCase()
-      }
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
     }
   };
   if (filterKey === 'all') {
     {
       searchObj = {
-        dataType: 'string',
-        conditionColumn: 'informationEngagement.assesseeStatus',
-        conditionValue: {
-          condition: 'in',
-          value: {
-            in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
-          }
+        condition: 'in',
+        value: {
+          in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
         }
       };
     }
@@ -165,8 +167,24 @@ export const makeAdministratorsReviewListRequestObject = (
     searchCondition: 'AND',
     search: [
       {
-        condition: 'or',
-        searchBy: [searchObj]
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: searchObj
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeRole.assesseeRolePrimary',
+            conditionValue: {
+              condition: 'in',
+              value: {
+                in: ADMIN_ROLE_ID
+              }
+            }
+          }
+        ]
       }
     ]
   };
@@ -180,25 +198,17 @@ export const makeManagersReviewListRequestObject = (
   countPage
 ) => {
   let searchObj = {
-    dataType: 'string',
-    conditionColumn: 'informationEngagement.assesseeStatus',
-    conditionValue: {
-      condition: 'eq',
-      value: {
-        from: filterKey.toUpperCase()
-      }
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
     }
   };
   if (filterKey === 'all') {
     {
       searchObj = {
-        dataType: 'string',
-        conditionColumn: 'informationEngagement.assesseeStatus',
-        conditionValue: {
-          condition: 'in',
-          value: {
-            in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
-          }
+        condition: 'in',
+        value: {
+          in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
         }
       };
     }
@@ -218,8 +228,24 @@ export const makeManagersReviewListRequestObject = (
     searchCondition: 'AND',
     search: [
       {
-        condition: 'or',
-        searchBy: [searchObj]
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: searchObj
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeRole.assesseeRolePrimary',
+            conditionValue: {
+              condition: 'in',
+              value: {
+                in: MANAGER_ROLE_ID
+              }
+            }
+          }
+        ]
       }
     ]
   };
@@ -471,6 +497,150 @@ export const makeAssociateScanRequestObject = (
   };
 
   return regObj;
+};
+export const makeAssesseeRoleCreateObj = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: 'ACTIVE'
+    }
+  };
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeRoleName',
+      order: 'asc'
+    },
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeRoleStatus',
+            conditionValue: searchObj
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeRoleName',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: 'assessee'
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeManagerRoleCreateObj = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: 'ACTIVE'
+    }
+  };
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeRoleName',
+      order: 'asc'
+    },
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeRoleStatus',
+            conditionValue: searchObj
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeRoleName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: 'manager'
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAdministratorRoleCreateObj = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: 'ACTIVE'
+    }
+  };
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assesseeRoleName',
+      order: 'asc'
+    },
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeRoleStatus',
+            conditionValue: searchObj
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeRoleName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: 'administrator'
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
 };
 export const makeAssesseeRoleObj = (selectedAssociateInfo, filterKey, numberPage, countPage) => {
   let searchObj = {
