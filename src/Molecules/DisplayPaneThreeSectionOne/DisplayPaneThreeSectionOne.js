@@ -282,26 +282,6 @@ const DisplayPaneThreeSectionOne = () => {
           innerList: assesseeGroupListSecondary
         }
       ],
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Group',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Group',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Group',
-          status: ''
-        }
-      ],
       innerInfo: 'No Information',
       isListCard: true
     },
@@ -339,26 +319,6 @@ const DisplayPaneThreeSectionOne = () => {
         {
           labelTextOneOneBadge: 'secondary',
           innerList: []
-        }
-      ],
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Manager',
-          status: 'active'
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Manager',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Manager',
-          status: 'active'
         }
       ],
       innerInfo: 'No Information',
@@ -400,26 +360,6 @@ const DisplayPaneThreeSectionOne = () => {
           innerList: []
         }
       ],
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Node',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Node',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Node',
-          status: ''
-        }
-      ],
       innerInfo: 'No Information',
       isListCard: true
     },
@@ -438,26 +378,6 @@ const DisplayPaneThreeSectionOne = () => {
         {
           labelTextOneOneBadge: 'secondary',
           innerList: assesseeRoleListSecondary
-        }
-      ],
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'role',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'role',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'role',
-          status: ''
         }
       ],
       innerInfo: 'No Information',

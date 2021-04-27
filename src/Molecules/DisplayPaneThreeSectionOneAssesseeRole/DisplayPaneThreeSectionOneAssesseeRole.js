@@ -16,7 +16,7 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
 
-  const list3 = [
+  const engagementList = [
     {
       id: 'a1',
       labelTextOneOne: 'log',
@@ -94,9 +94,9 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
       }}
     >
       <>
-        <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+        <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
-            {list3.map((ob) => {
+            {engagementList.map((ob) => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (

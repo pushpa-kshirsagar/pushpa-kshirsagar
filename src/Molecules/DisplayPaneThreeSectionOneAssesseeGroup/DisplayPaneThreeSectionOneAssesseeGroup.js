@@ -2,21 +2,23 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { informationEngagement } = responseObject;
+  const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
 
-  const list3 = [
+  const engagementList = [
     {
       id: 'a1',
       labelTextOneOne: 'log',
@@ -85,7 +87,7 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
       isListCard: false
     }
   ];
-  const list2 = [
+  const allocationList = [
     {
       id: 'a2',
       labelTextOneOne: 'manager',
@@ -93,24 +95,33 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Manager',
-          status: 'active'
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Manager',
+              status: 'active'
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Manager',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Manager',
-          status: 'active'
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -123,24 +134,33 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Node',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Node',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Node',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Node',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Node',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Node',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -153,30 +173,90 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'type',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'type',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'type',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'type',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'type',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'type',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
-      innerInfo: 'Assessee',
+      innerInfo: 'No Information',
       isListCard: true
     }
   ];
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName, selectedBadgeName);
+    if (labelName === 'manager') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERLISTPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERSECONDARYLISTPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+    }
+    if (labelName === 'node') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODELISTPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODESECONDARYLISTPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+    }
+    if (labelName === 'type') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPELISTPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPESECONDARYLISTPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+    }
+  };
+  const reviseEngagement = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
 
   return (
     <div
@@ -188,13 +268,22 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
       <>
         <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
           <Paper className={'dossierContainerTop'}>
-            {list2.map((ob) => {
+            {allocationList.map((ob) => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseAllocation}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );
@@ -203,13 +292,22 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
         </div>
         <div className="containerPadding">
           <Paper className={'dossierContainerTop'}>
-            {list3.map((ob) => {
+            {engagementList.map((ob) => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseEngagement}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseEngagement}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

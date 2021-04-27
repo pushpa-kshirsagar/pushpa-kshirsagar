@@ -19,29 +19,34 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
   const list3 = [
     {
       id: 'a1',
-      labelTextOneOne: 'associate',
+      labelTextOneOne: 'assessee',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Associate',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Associate',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Associate',
-          status: ''
+          labelTextOneOneBadge: '',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'assessee',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'assessee',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'assessee',
+              status: ''
+            }
+          ]
         }
       ],
       innerInfo: 'assessees',

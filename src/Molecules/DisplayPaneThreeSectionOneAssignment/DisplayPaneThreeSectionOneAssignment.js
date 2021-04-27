@@ -18,7 +18,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
 
-  const list1 = [
+  const allianceList = [
     {
       id: 'a2',
       labelTextOneOne: 'collaborator',
@@ -26,31 +26,40 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'collaborator',
-          status: 'active'
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'collaborator',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'collaborator',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'collaborator',
+              status: 'active'
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'collaborator',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'collaborator',
-          status: 'active'
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
       isListCard: true
     }
   ];
-  const list2 = [
+  const allocationList = [
     {
       id: 'a1',
       labelTextOneOne: 'group',
@@ -58,27 +67,36 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Manager',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Group',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Group',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Group',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Group',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Group',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
-      innerInfo: 'assessees',
+      innerInfo: 'No Information',
       isListCard: true
     },
     {
@@ -88,24 +106,33 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Manager',
-          status: 'active'
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Manager',
+              status: 'active'
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Manager',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Manager',
-          status: 'active'
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -118,24 +145,33 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Node',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Node',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Node',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Node',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Node',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Node',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -148,31 +184,40 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'type',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'type',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'type',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'type',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'type',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'type',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
-      innerInfo: 'Assessee',
+      innerInfo: 'No Information',
       isListCard: true
     }
   ];
-  const list3 = [
+  const engagementListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'log',
@@ -234,8 +279,8 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       isListCard: false
     }
   ];
-  const list4 = [];
-  const list6 = [
+  const setupList = [];
+  const engagementListKey = [
     {
       id: 'a2',
       textOneOne: capitalizeFirstLetter(informationEngagement.assignmentStatus) || 'No Information',
@@ -294,7 +339,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
               headerOne="alliance"
               isDisplayCardExpanded={listExpand === 'alliance'}
               setListExpand={setListExpand}
-              list={list1}
+              list={allianceList}
               mode={reviewMode}
             />
           </div>
@@ -303,7 +348,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
               headerOne="allocation"
               isDisplayCardExpanded={listExpand === 'allocation'}
               setListExpand={setListExpand}
-              list={list2}
+              list={allocationList}
               mode={reviewMode}
             />
           </div>
@@ -312,7 +357,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
               headerOne="engagement"
               isDisplayCardExpanded={listExpand === 'engagement'}
               setListExpand={setListExpand}
-              list={list3}
+              list={engagementListAll}
               mode={reviewMode}
             />
           </div>
@@ -321,7 +366,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
               headerOne="setup"
               isDisplayCardExpanded={listExpand === 'setup'}
               setListExpand={setListExpand}
-              list={list4}
+              list={setupList}
               mode={reviewMode}
             />
           </div>
@@ -330,7 +375,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
         <>
           <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
             <Paper className={'dossierContainerTop'}>
-              {list1.map((ob) => {
+              {allianceList.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -345,7 +390,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list2.map((ob) => {
+              {allocationList.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
@@ -360,7 +405,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list6.map((ob) => {
+              {engagementListKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (

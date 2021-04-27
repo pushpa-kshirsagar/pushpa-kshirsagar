@@ -24,24 +24,29 @@ const DisplayPaneThreeSectionTwoAssignmentType = () => {
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'assignments',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'assignments',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'assignments',
-          status: ''
+          labelTextOneOneBadge: '',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'assignments',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'assignments',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'assignments',
+              status: ''
+            }
+          ]
         }
       ],
       innerInfo: 'assignments',

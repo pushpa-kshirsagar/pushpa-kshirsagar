@@ -26,6 +26,7 @@ const AllGroupCreatePopup = (props) => {
   // console.log(reducerObeject);
   // console.log('reducerObeject');
   const dispatch = useDispatch();
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
@@ -172,6 +173,7 @@ const AllGroupCreatePopup = (props) => {
         basicInfo={reducerObeject.informationBasic}
         typeOfSetObject={setReducerObject}
         isRequired={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
@@ -184,6 +186,7 @@ const AllGroupCreatePopup = (props) => {
         basicInfo={reducerObeject.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={setReducerObject}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -200,17 +203,38 @@ const AllGroupCreatePopup = (props) => {
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'NODELISTPOPUP'}
-        inputHeader={'group'}
+        inputHeader={'manager'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
         ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
         ]}
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERSECONDARYLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={'NODELISTPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'NODELISTPOPUP'}
@@ -219,6 +243,26 @@ const AllGroupCreatePopup = (props) => {
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'TYPELISTPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a node'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'NODESECONDARYLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={''}
         inputHeader={'node'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a node'}
@@ -230,6 +274,7 @@ const AllGroupCreatePopup = (props) => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'TYPELISTPOPUP'}
@@ -249,6 +294,27 @@ const AllGroupCreatePopup = (props) => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPESECONDARYLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'type'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}

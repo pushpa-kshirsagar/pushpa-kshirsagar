@@ -24,27 +24,32 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'assessee',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'assessee',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'assessee',
-          status: ''
+          labelTextOneOneBadge: '',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'assessee',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'assessee',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'assessee',
+              status: ''
+            }
+          ]
         }
       ],
-      innerInfo: 'assessees',
+      innerInfo: 'No Information',
       isListCard: true
     },
     {
@@ -54,24 +59,29 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: '',
-          status: 'active'
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: '',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: '',
-          status: 'active'
+          labelTextOneOneBadge: '',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: '',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: '',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: '',
+              status: 'active'
+            }
+          ]
         }
       ],
       innerInfo: 'No Information',
@@ -87,7 +97,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       }}
     >
       <>
-        <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+        <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list2.map((ob) => {
               return (

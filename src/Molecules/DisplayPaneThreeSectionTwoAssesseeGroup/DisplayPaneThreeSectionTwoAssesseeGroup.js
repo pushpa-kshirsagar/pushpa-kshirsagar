@@ -19,32 +19,37 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'associate',
+      labelTextOneOne: 'assessee',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'associate',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'associate',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'associate',
-          status: ''
+          labelTextOneOneBadge: '',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'assessee',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'assessee',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'assessee',
+              status: ''
+            }
+          ]
         }
       ],
-      innerInfo: 'associate',
+      innerInfo: 'No Information',
       isListCard: true
     }
   ];

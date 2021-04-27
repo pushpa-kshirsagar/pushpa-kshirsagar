@@ -2,6 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
   LOADER_STOP,
+  SET_ASSESSEE_GROUP_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE
 } from '../../actionType';
 import { ASSESSEE_REVIEW_GROUP_URL } from '../../endpoints';
@@ -40,6 +41,12 @@ function* workerReviewAssesseeGroupInfoSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
+      if (isReviseMode) {
+        yield put({
+          type: SET_ASSESSEE_GROUP_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
     }
 
     console.log('loading end');

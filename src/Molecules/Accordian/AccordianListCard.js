@@ -38,27 +38,32 @@ const AccordianListCard = (props) => {
                 <span
                   onClick={onClickRevise}
                   data-value={labelTextOneOne}
+                  data-key={selectedBadge?.labelTextOneOneBadge || ''}
                   className={mode === 'revise' ? 'linkText' : ''}
                 >
                   {labelTextOneOne}
                 </span>
                 {labelTextOneOneBadges.map((ob, key) => {
                   return (
-                    <sup
-                      key={`badge-${key}`}
-                      style={{
-                        backgroundColor:
-                          selectedBadge &&
-                          selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
-                            ? '#F2F2F2'
-                            : '#ffffff'
-                      }}
-                      onClick={() => {
-                        setSelectedBadge(ob);
-                      }}
-                    >
-                      {ob.labelTextOneOneBadge}
-                    </sup>
+                    <>
+                      {ob.labelTextOneOneBadge !== '' && (
+                        <sup
+                          key={`badge-${key}`}
+                          style={{
+                            backgroundColor:
+                              selectedBadge &&
+                              selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
+                                ? '#F2F2F2'
+                                : '#ffffff'
+                          }}
+                          onClick={() => {
+                            setSelectedBadge(ob);
+                          }}
+                        >
+                          {ob.labelTextOneOneBadge}
+                        </sup>
+                      )}
+                    </>
                   );
                 })}
                 {/* {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}

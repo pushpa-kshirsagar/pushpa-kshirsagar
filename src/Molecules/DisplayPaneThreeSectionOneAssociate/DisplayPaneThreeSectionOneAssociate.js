@@ -27,27 +27,44 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeThree: 'sibling',
       labelTextOneOneBadgeFour: 'spouse',
       isListCard: true,
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'family',
-          status: ''
+          labelTextOneOneBadge: 'ascendant',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'family',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'family',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'family',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'family',
-          status: ''
+          labelTextOneOneBadge: 'descendant',
+          innerList: []
         },
         {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'family',
-          status: ''
+          labelTextOneOneBadge: 'sibling',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'spouse',
+          innerList: []
         }
       ],
-      innerInfo: 'assessees'
+      innerInfo: 'No Information'
     },
     {
       id: 'a2',
@@ -56,24 +73,33 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'guardian',
-          status: 'active'
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'guardian',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'guardian',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'guardian',
+              status: 'active'
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'guardian',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'guardian',
-          status: 'active'
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -86,24 +112,33 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'mentor',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'mentor',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'mentor',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'mentor',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'mentor',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'mentor',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -118,27 +153,36 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Manager',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Group',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Group',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Group',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Group',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Group',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
-      innerInfo: 'assessees',
+      innerInfo: 'No Information',
       isListCard: true
     },
     {
@@ -148,24 +192,33 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Manager',
-          status: 'active'
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Manager',
+              status: 'active'
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Manager',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Manager',
-          status: 'active'
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -178,24 +231,33 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'Node',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Node',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Node',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Node',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'Node',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'Node',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -203,32 +265,41 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     },
     {
       id: 'a4',
-      labelTextOneOne: 'type',
+      labelTextOneOne: 'role',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'type',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'role',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'role',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'role',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'type',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'type',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
-      innerInfo: 'Assessee',
+      innerInfo: 'No Information',
       isListCard: true
     }
   ];
@@ -343,27 +414,36 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       isListCard: true,
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'family',
-          status: ''
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: '',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: '',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: '',
+              status: ''
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'family',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'family',
-          status: ''
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
-      innerInfo: 'assessees'
+      innerInfo: 'No Information'
     },
     {
       id: 'a2',
@@ -372,24 +452,33 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      innerAssociateList: [
+      labelTextOneOneBadges: [
         {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'guardian',
-          status: 'active'
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'guardian',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'guardian',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'guardian',
+              status: 'active'
+            }
+          ]
         },
         {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'guardian',
-          status: 'active'
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'guardian',
-          status: 'active'
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
