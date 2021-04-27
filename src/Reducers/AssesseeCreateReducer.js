@@ -30,7 +30,8 @@ import {
   UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO,
   UPDATE_ASSESSEE_WORKADDRESS_INFO,
   UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO,
-  UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO
+  UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO,
+  UPDATE_ASSESSEE_TAG_STATUTORY_INFO
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -484,6 +485,8 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         ...istate,
         informationSetup: action.payload
       };
+    case UPDATE_ASSESSEE_TAG_STATUTORY_INFO:
+      return istate;
     case ASSESSEE_INFO_CREATE:
       return {
         ...istate,

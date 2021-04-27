@@ -33,7 +33,8 @@ import {
   UPDATE_ASSESSEE_WORKADDRESS_INFO,
   UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO,
   UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO,
-  UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO
+  UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO,
+  UPDATE_ASSESSEE_TAG_STATUTORY_INFO
 } from '../actionType';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
@@ -251,6 +252,19 @@ const PopUpSignOnAssessee = (props) => {
         basicInfo={assesseeInfo.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TAGSTATUTORY'}
+        label={'tag'}
+        labelBadgeOne={'statutory'}
+        actualLableValue={'assesseeTagStatutory'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={assesseeInfo.informationBasic}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_TAG_STATUTORY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture

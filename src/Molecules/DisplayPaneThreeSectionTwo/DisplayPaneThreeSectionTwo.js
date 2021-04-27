@@ -303,11 +303,13 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'social',
-          textOne: informationPersonal.assesseeCommunitySocial?.assesseeCommunity || 'No Information'
+          textOne:
+            informationPersonal.assesseeCommunitySocial?.assesseeCommunity || 'No Information'
         },
         {
           labelTextOneOneBadge: 'spiritual',
-          textOne: informationPersonal.assesseeCommunitySpiritual?.assesseeCommunity || 'No Information'
+          textOne:
+            informationPersonal.assesseeCommunitySpiritual?.assesseeCommunity || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -468,6 +470,12 @@ const DisplayPaneThreeSectionTwo = () => {
   const reviseCredential = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
+    if (labelName === 'tag') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'TAGSTATUTORY', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
   };
 
   const revisePersonal = (e) => {

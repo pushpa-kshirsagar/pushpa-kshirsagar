@@ -27,6 +27,7 @@ const PopUpTextField = (props) => {
     basicInfo,
     typeOfSetObject,
     actualLableValue,
+    labelBadgeOne='',
     mode
   } = props;
 
@@ -88,6 +89,7 @@ const PopUpTextField = (props) => {
               value={basicInfo && basicInfo[actualLableValue]}
               onClick={handleChange}
               errorMsg={state.error}
+              labelBadgeOne={labelBadgeOne}
             />
           </FormControl>
           {label === 'name' && (
