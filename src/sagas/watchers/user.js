@@ -4,13 +4,10 @@ import {
   SET_SELECTED_ASSOCIATE,
   SET_USER,
   SET_ASSESSEE_PERMISSION,
-  SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_SIGN_IN_STATUS,
   GET_USER_SAGA,
   GET_SIGNED_ASSESSEE_PERMISSION_SAGA,
-  ASSESSEE_CONFIRM_SAGA
 } from '../../actionType';
-import { CONFIRM_ASSESSEE_URL, GET_ASSESSEE_PERMISSION_URL, GET_USER_URL } from '../../endpoints';
+import { GET_ASSESSEE_PERMISSION_URL, GET_USER_URL } from '../../endpoints';
 function getUserApi(data) {
   return axios.get(GET_USER_URL);
 }

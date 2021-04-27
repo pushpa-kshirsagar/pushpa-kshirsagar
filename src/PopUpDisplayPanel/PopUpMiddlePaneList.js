@@ -21,24 +21,15 @@ import {
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_START,
-  LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
-  SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   SET_SECONDARY_CREATE_OPTION_VALUE,
-  SET_PAGE_COUNT,
-  CLEAR_DISPLAY_PANE_THREE,
-  FILTERMODE,
-  SET_REQUEST_OBJECT
+  FILTERMODE
 } from '../actionType';
-import {
-  getAssesseeGroupAssesseeDistinctApiCall,
-  getAssesseeGroupAssesseeReqObj
-} from '../Actions/AssesseeModuleAction';
+import { getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
 import { getAssociateGroupAssociateDistinctApiCall } from '../Actions/AssociateModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
@@ -185,7 +176,10 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
+      if (
+        typeOfMiddlePaneList === 'associateDistinctReviewList' ||
+        typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
+      ) {
         dispatch({
           type: GET_ASSOCIATE_INFO_SAGA,
           payload: {
@@ -498,7 +492,9 @@ const PopUpMiddlePaneList = (props) => {
         countPage,
         dispatch,
         dataVal,
-        selectedTagValue
+        selectedTagValue,
+        '',
+        false
       );
       dispatch({
         type: FILTERMODE,
@@ -515,7 +511,9 @@ const PopUpMiddlePaneList = (props) => {
         countPage,
         dispatch,
         dataVal,
-        selectedTagValue
+        selectedTagValue,
+        '',
+        false
       );
       dispatch({
         type: FILTERMODE,
