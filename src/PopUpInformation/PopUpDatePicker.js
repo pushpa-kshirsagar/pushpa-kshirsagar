@@ -9,12 +9,12 @@ import '../Atoms/InputField/InputField.css';
 
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
+import { POPUP_CLOSE, SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType';
 
 const PopUpDatePicker = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
-  const basicInfo = useSelector((state) => state.AssesseeCreateReducer);
+  // const basicInfo = useSelector((state) => state.AssesseeCreateReducer);
   const {
     isActive,
     primaryheader = 'start',
@@ -24,17 +24,23 @@ const PopUpDatePicker = (props) => {
     headerOneBadgeOne = 'information',
     valueState = 'tenure' + 'start',
     isVerification = false,
+    typeOfSetObject,
+    basicInfo,
     mode
   } = props;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch({ type: UPDATE_ASSESSEE_INFO, payload: { ...basicInfo, [name]: value } });
+    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (popupMode === 'ASSESSEE_SIGN_ON') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
+    if (mode === 'revise') {
+      dispatch({ type: POPUP_CLOSE });
+    } else {
+      if (popupMode === 'ASSESSEE_SIGN_ON') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'NAMEPOPUP' } });
+      }
     }
   };
   return (
@@ -53,7 +59,7 @@ const PopUpDatePicker = (props) => {
           <FormControl style={{ width: '100%' }}>
             <InputFeild
               type={'date'}
-              id={'date'}
+              id={'assesseeBirthdate'}
               label={'Birthdate'}
               value={basicInfo[valueState]}
               defaultValue="mm/dd/yyyy"

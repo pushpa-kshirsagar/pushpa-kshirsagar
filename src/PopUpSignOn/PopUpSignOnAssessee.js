@@ -27,13 +27,21 @@ import {
   UPDATE_ASSESSEE_HOMEADDRESS_INFO,
   UPDATE_ASSESSEE_TELEPHONE_WORK_INFO,
   UPDATE_ASSESSEE_TELEPHONE_HOME_INFO,
-  UPDATE_ASSESSEE_ALIAS_INFO
+  UPDATE_ASSESSEE_COMMUNITY_SOCIAL_INFO,
+  UPDATE_ASSESSEE_COMMUNITY_SPIRITUAL_INFO,
+  UPDATE_ASSESSEE_HOMEADDRESS_SECONDARY_INFO,
+  UPDATE_ASSESSEE_WORKADDRESS_INFO,
+  UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO,
+  UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO,
+  UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO
 } from '../actionType';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
 import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import PopUpDatePicker from '../PopUpInformation/PopUpDatePicker';
+import PopUpCommunity from '../PopUpInformation/PopUpCommunity';
+import PopUpBirthplace from '../PopUpInformation/PopUpBirthplace';
 
 const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
@@ -384,6 +392,18 @@ const PopUpSignOnAssessee = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTelephone
+        isActive={isPopUpValue === 'MOBILETELEPHONESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        inputHeader={'mobile telephone'}
+        primaryheader={'secondary'}
+        basicInfo={informationContact.assesseeTelephoneMobileSecondary}
+        nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTelephone
         isActive={isPopUpValue === 'HOMETELEPHONEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -393,6 +413,18 @@ const PopUpSignOnAssessee = (props) => {
         basicInfo={informationContact.assesseeTelephoneHomePrimary}
         nextPopUpValue={''}
         typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_HOME_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTelephone
+        isActive={isPopUpValue === 'HOMETELEPHONESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        inputHeader={'home telephone'}
+        primaryheader={'secondary'}
+        basicInfo={informationContact.assesseeTelephoneHomeSecondary}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTelephone
@@ -486,8 +518,20 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={''}
         isRequired={true}
         basicInfo={assesseeInfo.informationContact.assesseeAddressHomePrimary}
-        countryCode={'assesseeTelephoneCountryRegion'}
         typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpAddress
+        isActive={isPopUpValue === 'HOMEADDRESSSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'home address'}
+        primaryheader={'secondary'}
+        nextPopUpValue={''}
+        isRequired={true}
+        basicInfo={assesseeInfo.informationContact.assesseeAddressHomeSecondary}
+        typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddress
@@ -500,8 +544,20 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={''}
         isRequired={true}
         basicInfo={assesseeInfo.informationContact.assesseeAddressWorkPrimary}
-        countryCode={'assesseeTelephoneCountryRegion'}
-        typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
+        typeOfSetObject={UPDATE_ASSESSEE_WORKADDRESS_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpAddress
+        isActive={isPopUpValue === 'WORKADDRESSSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'work address'}
+        primaryheader={'secondary'}
+        nextPopUpValue={''}
+        isRequired={true}
+        basicInfo={assesseeInfo.informationContact.assesseeAddressWorkSecondary}
+        typeOfSetObject={UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDatePicker
@@ -525,7 +581,46 @@ const PopUpSignOnAssessee = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         basicInfo={assesseeInfo.informationPersonal}
-        nextPopUpValue={'PICTUREPOPUP'}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpCommunity
+        isActive={isPopUpValue === 'COMMUNITYSOCIALPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'community'}
+        primaryheader={'social'}
+        nextPopUpValue={''}
+        isRequired={false}
+        basicInfo={assesseeInfo?.informationPersonal?.assesseeCommunitySocial || {}}
+        typeOfSetObject={UPDATE_ASSESSEE_COMMUNITY_SOCIAL_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpCommunity
+        isActive={isPopUpValue === 'COMMUNITYSPIRITUALPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'community'}
+        primaryheader={'spiritual'}
+        nextPopUpValue={''}
+        isRequired={false}
+        basicInfo={assesseeInfo?.informationPersonal?.assesseeCommunitySpiritual || {}}
+        typeOfSetObject={UPDATE_ASSESSEE_COMMUNITY_SPIRITUAL_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpBirthplace
+        isActive={isPopUpValue === 'BIRTHPLACEPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessee'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'birthplace'}
+        primaryheader={''}
+        nextPopUpValue={''}
+        isRequired={false}
+        basicInfo={assesseeInfo?.informationPersonal}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

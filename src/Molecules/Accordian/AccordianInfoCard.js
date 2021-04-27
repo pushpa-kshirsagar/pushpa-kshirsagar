@@ -25,7 +25,7 @@ const AccordianInfoCard = (props) => {
         <div
           style={{
             height:
-              multiline && selectedBadge && selectedBadge.textOne !== 'No Information'
+              selectedBadge && selectedBadge.textOne && selectedBadge.textOne.length > 40
                 ? '105px'
                 : '50px'
           }}
@@ -45,6 +45,7 @@ const AccordianInfoCard = (props) => {
                   className={mode === 'revise' ? 'linkText' : ''}
                   onClick={onClickRevise}
                   data-value={labelTextOneOne}
+                  data-key={selectedBadge?.labelTextOneOneBadge || ''}
                 >
                   {labelTextOneOne}
                 </span>
@@ -75,10 +76,16 @@ const AccordianInfoCard = (props) => {
               {textOneOne ||
                 (selectedBadge && selectedBadge.textOne && (
                   <Input
-                    multiline={multiline && selectedBadge.textOne !== 'No Information'}
+                    multiline={
+                      multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                    }
                     // row={multiline ? 2 : 1}
                     row={2}
-                    rowsMax={multiline && selectedBadge.textOne !== 'No Information' ? 4 : 1}
+                    rowsMax={
+                      multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                        ? 4
+                        : 1
+                    }
                     className={'inputText'}
                     id="name-dn-input"
                     value={(selectedBadge && selectedBadge.textOne) || textOneOne}

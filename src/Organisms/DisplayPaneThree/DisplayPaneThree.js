@@ -55,6 +55,7 @@ import DisplayPaneThreeSectionOneAssessmentType from '../../Molecules/DisplayPan
 import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentType/DisplayPaneThreeSectionTwoAssessmentType';
 import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThreeSectionOneAssignment/DisplayPaneThreeSectionOneAssignment';
 import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThreeSectionTwoAssignment/DisplayPaneThreeSectionTwoAssignment';
+import PopUpFingerprint from '../../PopUpInformation/PopUpFingerprint';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -528,10 +529,8 @@ export const DisplayPaneThree = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
     if (labelName === 'name') {
-     
     }
     if (labelName === 'description') {
-     
     }
   };
 
@@ -1123,6 +1122,14 @@ export const DisplayPaneThree = () => {
           )}
         </>
       )}
+      {/* <PopUpFingerprint
+        isActive={true}
+        headerPanelColour="genericOne"
+        headerOne="fingerprint"
+        headerOneBadgeOne="right hand"
+        headerOneBadgeTwo=""
+        handleNextPopupValue
+      /> */}
     </>
   );
 };

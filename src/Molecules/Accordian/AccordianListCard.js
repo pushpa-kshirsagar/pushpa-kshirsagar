@@ -13,10 +13,12 @@ const AccordianListCard = (props) => {
     labelTextOneOneBadgeThree = '',
     labelTextOneOneBadgeFour = '',
     innerAssociateList = [],
-    innerInfo = 'No Information'
+    innerInfo = 'No Information',
+    labelTextOneOneBadges
   } = accordianObject;
 
   const [isListSelectExpanded, setIsListSelectExpanded] = useState(false);
+  const [selectedBadge, setSelectedBadge] = useState(labelTextOneOneBadges[0]);
 
   return (
     <>
@@ -40,10 +42,29 @@ const AccordianListCard = (props) => {
                 >
                   {labelTextOneOne}
                 </span>
-                {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
+                {labelTextOneOneBadges.map((ob, key) => {
+                  return (
+                    <sup
+                      key={`badge-${key}`}
+                      style={{
+                        backgroundColor:
+                          selectedBadge &&
+                          selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
+                            ? '#F2F2F2'
+                            : '#ffffff'
+                      }}
+                      onClick={() => {
+                        setSelectedBadge(ob);
+                      }}
+                    >
+                      {ob.labelTextOneOneBadge}
+                    </sup>
+                  );
+                })}
+                {/* {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
                 {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
                 {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}
-                {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null}
+                {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null} */}
               </InputLabel>
             </FormControl>
             <div className={'unitFlex'}></div>
@@ -61,9 +82,9 @@ const AccordianListCard = (props) => {
         </div>
         {isListSelectExpanded && (
           <div>
-            {innerAssociateList.length > 0 ? (
+            {selectedBadge.innerList.length > 0 ? (
               <>
-                {innerAssociateList.map((associate) => {
+                {selectedBadge.innerList.map((associate) => {
                   return (
                     <div style={{ padding: '2.5px 0' }}>
                       <ReviewList

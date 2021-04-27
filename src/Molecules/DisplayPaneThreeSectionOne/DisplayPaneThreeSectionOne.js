@@ -23,7 +23,7 @@ const DisplayPaneThreeSectionOne = () => {
   );
   const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
-  const { informationEngagement, informationSetup } = responseObject;
+  const { informationEngagement, informationSetup, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -37,6 +37,43 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadgeThree: 'sibling',
       labelTextOneOneBadgeFour: 'spouse',
       isListCard: true,
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'family',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'family',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'family',
+              status: ''
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'sibling',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'spouse',
+          innerList: []
+        }
+      ],
       innerAssociateList: [
         {
           id: 'associate1',
@@ -57,7 +94,7 @@ const DisplayPaneThreeSectionOne = () => {
           status: ''
         }
       ],
-      innerInfo: 'assessees'
+      innerInfo: 'No Information'
     },
     {
       id: 'a2',
@@ -66,6 +103,35 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'guardian',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'guardian',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'guardian',
+              status: 'active'
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
       innerAssociateList: [
         {
           id: 'associate1',
@@ -96,6 +162,35 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'mentor',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'mentor',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'mentor',
+              status: ''
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
       innerAssociateList: [
         {
           id: 'associate1',
@@ -120,6 +215,31 @@ const DisplayPaneThreeSectionOne = () => {
       isListCard: true
     }
   ];
+  let assesseeGroupListPrimary = [];
+  if (informationAllocation?.assesseeGroup.assesseeGroupPrimary.length > 0) {
+    const tempArr = informationAllocation?.assesseeGroup?.assesseeGroupPrimary;
+    tempArr.forEach((ob) => {
+      assesseeGroupListPrimary.push({
+        id: ob.id,
+        textOne: ob.informationBasic.assesseeGroupName,
+        textTwo: ob.informationBasic.assesseeGroupDescription,
+        status: ''
+      });
+    });
+  }
+  let assesseeGroupListSecondary = [];
+  if (informationAllocation?.assesseeGroup.assesseeGroupSecondary.length > 0) {
+    const tempArr = informationAllocation?.assesseeGroup?.assesseeGroupSecondary;
+    tempArr.forEach((ob) => {
+      assesseeGroupListSecondary.push({
+        id: ob.id,
+        textOne: ob.informationBasic.assesseeGroupName,
+        textTwo: ob.informationBasic.assesseeGroupDescription,
+        status: ''
+      });
+    });
+  }
+
   const allocationList1 = [
     {
       id: 'a1',
@@ -128,6 +248,16 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: assesseeGroupListPrimary
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: assesseeGroupListSecondary
+        }
+      ],
       innerAssociateList: [
         {
           id: 'associate1',
@@ -148,7 +278,7 @@ const DisplayPaneThreeSectionOne = () => {
           status: ''
         }
       ],
-      innerInfo: 'assessees',
+      innerInfo: 'No Information',
       isListCard: true
     },
     {
@@ -158,6 +288,35 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Manager',
+              status: 'active'
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
       innerAssociateList: [
         {
           id: 'associate1',
@@ -188,6 +347,35 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Node',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Node',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Node',
+              status: ''
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
       innerAssociateList: [
         {
           id: 'associate1',
@@ -218,6 +406,35 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'role',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'role',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'role',
+              status: ''
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
       innerAssociateList: [
         {
           id: 'associate1',
@@ -238,7 +455,7 @@ const DisplayPaneThreeSectionOne = () => {
           status: ''
         }
       ],
-      innerInfo: 'Assessee',
+      innerInfo: 'No Information',
       isListCard: true
     }
   ];

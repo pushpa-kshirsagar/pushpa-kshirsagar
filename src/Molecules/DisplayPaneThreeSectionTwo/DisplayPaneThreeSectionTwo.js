@@ -28,44 +28,6 @@ const DisplayPaneThreeSectionTwo = () => {
 
   // const longAddressForTest =
   //   '602 Silver Beliza, 48 St. Francis Avenue, SantaCruz West,  Mumbai, Maharashtra 400054, India';
-  const ob = {
-    assesseeAddressHomePrimary: {
-      assesseeAddressCountryRegion: '',
-      assesseeAddressProvinceState: '',
-      assesseeAddressPostcode: '',
-      assesseeAddressCity: '',
-      assesseeAddress: '',
-      assesseeAddressCommunication: false,
-      assesseeAddressVerification: false
-    },
-    assesseeAddressHomeSecondary: {
-      assesseeAddressCountryRegion: '',
-      assesseeAddressProvinceState: '',
-      assesseeAddressPostcode: '',
-      assesseeAddressCity: '',
-      assesseeAddress: '',
-      assesseeAddressCommunication: false,
-      assesseeAddressVerification: false
-    },
-    assesseeAddressWorkPrimary: {
-      assesseeAddressCountryRegion: '',
-      assesseeAddressProvinceState: '',
-      assesseeAddressPostcode: '',
-      assesseeAddressCity: '',
-      assesseeAddress: '',
-      assesseeAddressCommunication: false,
-      assesseeAddressVerification: false
-    },
-    assesseeAddressWorkSecondary: {
-      assesseeAddressCountryRegion: '',
-      assesseeAddressProvinceState: '',
-      assesseeAddressPostcode: '',
-      assesseeAddressCity: '',
-      assesseeAddress: '',
-      assesseeAddressCommunication: false,
-      assesseeAddressVerification: false
-    }
-  };
   const {
     assesseeAddressCountryRegion = '',
     assesseeAddressProvinceState = '',
@@ -73,8 +35,10 @@ const DisplayPaneThreeSectionTwo = () => {
     assesseeAddressCity = '',
     assesseeAddress = ''
   } = informationContact?.assesseeAddressHomePrimary;
-  const homeAddressPrimary = `${assesseeAddress} ${assesseeAddressCity} ${assesseeAddressProvinceState} ${assesseeAddressCountryRegion} ${assesseeAddressPostcode}`;
-
+  let homeAddressPrimary = `${assesseeAddress} ${assesseeAddressCity} ${assesseeAddressProvinceState} ${assesseeAddressCountryRegion} ${assesseeAddressPostcode}`;
+  if (!homeAddressPrimary.trim()) {
+    homeAddressPrimary = 'No Information';
+  }
   const {
     assesseeAddressCountryRegion: addressCountryRegion = '',
     assesseeAddressProvinceState: addressProvinceState = '',
@@ -82,8 +46,40 @@ const DisplayPaneThreeSectionTwo = () => {
     assesseeAddressCity: addressCity = '',
     assesseeAddress: address = ''
   } = informationContact?.assesseeAddressHomeSecondary;
-  const homeAddressSecondary = `${address} ${addressCity} ${addressProvinceState} ${addressCountryRegion} ${addressPostcode}`;
-
+  let homeAddressSecondary = `${address} ${addressCity} ${addressProvinceState} ${addressCountryRegion} ${addressPostcode}`;
+  if (!homeAddressSecondary.trim()) {
+    homeAddressSecondary = 'No Information';
+  }
+  const {
+    assesseeAddressCountryRegion: workAddressPrimaryRegion = '',
+    assesseeAddressProvinceState: workAddressPrimaryState = '',
+    assesseeAddressPostcode: workAddressPrimaryPostcode = '',
+    assesseeAddressCity: workAddressPrimaryCity = '',
+    assesseeAddress: workAddressPrimaryAddress = ''
+  } = informationContact?.assesseeAddressWorkPrimary;
+  let workAddressPrimary = `${workAddressPrimaryAddress} ${workAddressPrimaryCity} ${workAddressPrimaryState} ${workAddressPrimaryRegion} ${workAddressPrimaryPostcode}`;
+  if (!workAddressPrimary.trim()) {
+    workAddressPrimary = 'No Information';
+  }
+  const {
+    assesseeAddressCountryRegion: workAddressSecondaryCountryRegion = '',
+    assesseeAddressProvinceState: workAddressSecondaryProvinceState = '',
+    assesseeAddressPostcode: workAddressSecondaryPostcode = '',
+    assesseeAddressCity: workAddressSecondaryCity = '',
+    assesseeAddress: workAddressSecondaryAddress = ''
+  } = informationContact?.assesseeAddressWorkSecondary;
+  let workAddressSecondary = `${workAddressSecondaryAddress} ${workAddressSecondaryCity} ${workAddressSecondaryProvinceState} ${workAddressSecondaryCountryRegion} ${workAddressSecondaryPostcode}`;
+  if (!workAddressSecondary.trim()) {
+    workAddressSecondary = 'No Information';
+  }
+  // assesseeTelephoneHomePrimary: {
+  //   assesseeTelephoneCountryRegion: '',
+  //   assesseeTelephoneAreaCity: '',
+  //   assesseeTelephoneNumber: '',
+  //   assesseeTelephoneExtension: '',
+  //   assesseeTelephoneCommunication: false,
+  //   assesseeTelephoneVerification: false
+  // },
   const careerListAll = [
     {
       id: 'a1',
@@ -127,18 +123,15 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a2',
       labelTextOneOne: 'home address',
-      multiline:
-        informationContact &&
-        informationContact.assesseeAddressHomePrimary &&
-        homeAddressPrimary.length > 40, //longAddressForTest.length > 40,
+      multiline: true,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: homeAddressPrimary || 'No Information' //longAddressForTest
+          textOne: homeAddressPrimary //longAddressForTest
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: homeAddressSecondary || 'No Information'
+          textOne: homeAddressSecondary
         }
       ],
       labelTextOneOneBadgeThree: '',
@@ -157,11 +150,15 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationContact.assesseeTelephoneHomePrimary || 'No Information'
+          textOne:
+            informationContact.assesseeTelephoneHomePrimary?.assesseeTelephoneAreaCity ||
+            'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationContact.assesseeTelephoneHomeSecondary || 'No Information'
+          textOne:
+            informationContact.assesseeTelephoneHomeSecondary?.assesseeTelephoneAreaCity ||
+            'No Information'
         }
       ],
       innerAssociateList: [],
@@ -179,12 +176,14 @@ const DisplayPaneThreeSectionTwo = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneNumber ||
+            informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneAreaCity ||
             'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationContact.assesseeTelephoneMobileSecondary || 'No Information'
+          textOne:
+            informationContact.assesseeTelephoneMobileSecondary?.assesseeTelephoneAreaCity ||
+            'No Information'
         }
       ],
       labelTextOneOneBadgeFour: '',
@@ -199,18 +198,15 @@ const DisplayPaneThreeSectionTwo = () => {
     {
       id: 'a5',
       labelTextOneOne: 'work address',
-      multiline:
-        informationContact &&
-        informationContact.assesseeAddressWorkPrimary &&
-        informationContact.assesseeAddressWorkPrimary.length > 40,
+      multiline: true,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationContact.assesseeAddressWorkPrimary || 'No Information'
+          textOne: workAddressPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationContact.assesseeAddressWorkSecondary || 'No Information'
+          textOne: workAddressSecondary
         }
       ],
       innerAssociateList: [],
@@ -307,11 +303,11 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'social',
-          textOne: informationPersonal.assesseeCommunitySocial || 'No Information'
+          textOne: informationPersonal.assesseeCommunitySocial?.assesseeCommunity || 'No Information'
         },
         {
           labelTextOneOneBadge: 'spiritual',
-          textOne: informationPersonal.assesseeCommunitySpiritual || 'No Information'
+          textOne: informationPersonal.assesseeCommunitySpiritual?.assesseeCommunity || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -395,81 +391,77 @@ const DisplayPaneThreeSectionTwo = () => {
 
   const reviseContact = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('=====>', labelName);
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName, selectedBadgeName);
     if (labelName === 'email address') {
-      // if (informationContact.assesseeAddressEmailPrimary !== null) {
-      //   dispatch({
-      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
-      //     payload: {
-      //       stateName: 'assesseeAddressEmailPrimary',
-      //       value: informationContact.assesseeAddressEmailPrimary
-      //     }
-      //   });
-      // }
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'EMAILPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'EMAILPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'EMAILSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
     if (labelName === 'home address') {
-      // if (informationContact.assesseeAddressHomePrimary !== null) {
-      //   dispatch({
-      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
-      //     payload: {
-      //       stateName: 'assesseeAddressHomePrimary',
-      //       value: informationContact.assesseeAddressHomePrimary
-      //     }
-      //   });
-      // }
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'HOMEADDRESSPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'HOMEADDRESSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'HOMEADDRESSSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
     if (labelName === 'work address') {
-      // if (informationContact.assesseeAddressWorkPrimary !== null) {
-      //   dispatch({
-      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
-      //     payload: {
-      //       stateName: 'assesseeAddressWorkPrimary',
-      //       value: informationContact.assesseeAddressWorkPrimary
-      //     }
-      //   });
-      // }
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'WORKADDRESSPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'WORKADDRESSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'WORKADDRESSSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
     if (labelName === 'home telephone') {
-      // if (informationContact.assesseeTelephoneHomePrimary !== null) {
-      //   dispatch({
-      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
-      //     payload: {
-      //       stateName: 'assesseeTelephoneHomePrimary',
-      //       value: informationContact.assesseeTelephoneHomePrimary
-      //     }
-      //   });
-      // }
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'HOMETELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'HOMETELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'HOMETELEPHONESECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
     if (labelName === 'mobile telephone') {
-      // if (informationContact.assesseeTelephoneMobilePrimary !== null) {
-      //   dispatch({
-      //     type: UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
-      //     payload: {
-      //       stateName: 'assesseeTelephoneMobilePrimary',
-      //       value: informationContact.assesseeTelephoneMobilePrimary
-      //     }
-      //   });
-      // }
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'MOBILETELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'MOBILETELEPHONESECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
   };
 
@@ -480,7 +472,7 @@ const DisplayPaneThreeSectionTwo = () => {
 
   const revisePersonal = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    // dispatch({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'birthdate') {
       dispatch({
@@ -495,8 +487,24 @@ const DisplayPaneThreeSectionTwo = () => {
       });
     }
     if (labelName === 'birthplace') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'BIRTHPLACEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
     }
     if (labelName === 'community') {
+      if (selectedBadgeName === 'social') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'COMMUNITYSOCIALPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'spiritual') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'COMMUNITYSPIRITUALPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
     if (labelName === 'gender') {
       dispatch({

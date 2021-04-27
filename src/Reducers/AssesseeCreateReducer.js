@@ -4,6 +4,7 @@ import {
   CLEAR_ASSESSEE_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
   UPDATE_ASSESSEE_HOMEADDRESS_INFO,
+  UPDATE_ASSESSEE_HOMEADDRESS_SECONDARY_INFO,
   UPDATE_ASSESSEE_PERSONAL_INFO,
   ASSESSEE_POPUP_OPEN,
   ASSESSEE_POPUP_CLOSE,
@@ -23,7 +24,13 @@ import {
   UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
   UPDATE_ASSESSEE_TELEPHONE_HOME_INFO,
   UPDATE_ASSESSEE_TELEPHONE_WORK_INFO,
-  UPDATE_ASSESSEE_ALIAS_INFO
+  UPDATE_ASSESSEE_ALIAS_INFO,
+  UPDATE_ASSESSEE_COMMUNITY_SOCIAL_INFO,
+  UPDATE_ASSESSEE_COMMUNITY_SPIRITUAL_INFO,
+  UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO,
+  UPDATE_ASSESSEE_WORKADDRESS_INFO,
+  UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO,
+  UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -195,30 +202,26 @@ const initialState = {
     assesseeSignInCredential: ''
   },
   informationPersonal: {
-    // assesseeBirthdate: '',
-    // assesseeBirthdateVerification: false,
-    // assesseeBirthmark: '',
-    // birthplace: {
-    //   assesseeBirthplaceCountryRegion: '',
-    //   assesseeBirthplaceProvinceState: '',
-    //   assesseeBirthplaceCity: ''
-    // },
-    // community: {
-    //   communitySocial: {
-    //     assesseeCommunityCountryRegion: '',
-    //     assesseeCommunity: ''
-    //   },
-    //   communitySpiritual: {
-    //     assesseeCommunityCountryRegion: '',
-    //     assesseeCommunity: ''
-    //   }
-    // },
+    assesseeBirthdate: '',
+    assesseeBirthdateVerification: false,
+    assesseeBirthmark: '',
+    assesseeBirthplaceCountryRegion: '',
+    assesseeBirthplaceProvinceState: '',
+    assesseeBirthplaceCity: '',
+    assesseeCommunitySocial: {
+      assesseeCommunityCountryRegion: '',
+      assesseeCommunity: ''
+    },
+    assesseeCommunitySpiritual: {
+      assesseeCommunityCountryRegion: '',
+      assesseeCommunity: ''
+    },
     assesseeGender: ''
   }
 };
 
 const AssesseeCreateReducer = (istate = initialState, action) => {
-  console.log(action.type)
+  console.log(action.type);
   switch (action.type) {
     case ASSESSEE_POPUP_OPEN:
       return {
@@ -331,6 +334,15 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         }
         // mobileTelephone: action.payload
       };
+    case UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeTelephoneMobileSecondary: action.payload
+        }
+        // mobileTelephone: action.payload
+      };
     case UPDATE_ASSESSEE_TELEPHONE_HOME_INFO:
       return {
         ...istate,
@@ -338,7 +350,14 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           ...istate.informationContact,
           assesseeTelephoneHomePrimary: action.payload
         }
-        // mobileTelephone: action.payload
+      };
+    case UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeTelephoneHomeSecondary: action.payload
+        }
       };
     case UPDATE_ASSESSEE_TELEPHONE_WORK_INFO:
       return {
@@ -361,10 +380,26 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         }
       };
     case UPDATE_ASSESSEE_PERSONAL_INFO:
-      console.log("IN+++++++>",action);
+      console.log("IN ++++>", action)
       return {
         ...istate,
         informationPersonal: action.payload
+      };
+    case UPDATE_ASSESSEE_COMMUNITY_SOCIAL_INFO:
+      return {
+        ...istate,
+        informationPersonal: {
+          ...istate.informationPersonal,
+          assesseeCommunitySocial: action.payload
+        }
+      };
+    case UPDATE_ASSESSEE_COMMUNITY_SPIRITUAL_INFO:
+      return {
+        ...istate,
+        informationPersonal: {
+          ...istate.informationPersonal,
+          assesseeCommunitySpiritual: action.payload
+        }
       };
     // case UPDATE_ASSESSEE_HOMEADDRESS_INFO:
     //   return {
@@ -400,6 +435,30 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
           assesseeAddressHomePrimary: action.payload
         }
         // workAddressInfo: action.payload
+      };
+    case UPDATE_ASSESSEE_HOMEADDRESS_SECONDARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeAddressHomeSecondary: action.payload
+        }
+      };
+    case UPDATE_ASSESSEE_WORKADDRESS_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeAddressWorkPrimary: action.payload
+        }
+      };
+    case UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          assesseeAddressWorkSecondary: action.payload
+        }
       };
     case UPDATE_ASSESSEE_ENGAGEMENT_INFO:
       return {
