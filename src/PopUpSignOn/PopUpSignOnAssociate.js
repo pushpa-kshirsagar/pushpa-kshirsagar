@@ -25,12 +25,14 @@ import {
   CREATE_ASSOCIATE_SAGA,
   LOADER_START,
   CLEAR_ASSESSEE_INFO,
-  SET_ASSOCIATE_DYNAMIC_SINGLE_STATE
+  SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+  UPDATE_ASSOCIATE_SETUP_INFO
 } from '../actionType';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const informationContact = assesseeInfo.informationContact;
   const { coreGroupReviewListData, selectedAssociateInfo, coreRoleReviewListData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -190,6 +192,7 @@ const PopUpSignOnAssociate = () => {
         actualLableValue={'associateName'}
         basicInfo={associateInfo.informationBasic}
         typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'DESCRIPTIONPOPUP'}
@@ -202,6 +205,7 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.informationBasic}
         typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'ASSOCIATEPICTUREPOPUP'}
@@ -224,6 +228,7 @@ const PopUpSignOnAssociate = () => {
         textOne={'associateGroupName'}
         textTwo={'associateGroupDescription'}
         onClickEvent={updateAssociateGroups}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPOPUP'}
@@ -242,6 +247,7 @@ const PopUpSignOnAssociate = () => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'NODEPOPUP'}
@@ -250,7 +256,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         nextPopUpValue={'ROLEPOPUP'}
         inputHeader={'node'}
-        inputHeaderBadge={'secondary'}
+        inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
         ListData={[
           { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
@@ -260,6 +266,7 @@ const PopUpSignOnAssociate = () => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'ROLEPOPUP'}
@@ -274,6 +281,7 @@ const PopUpSignOnAssociate = () => {
         textOne={'associateRoleName'}
         textTwo={'associateRoleDescription'}
         onClickEvent={updateAssociateRoles}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddress
         isActive={isPopUpValue === 'WORKADDRESSPOPUP'}
@@ -287,6 +295,21 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.informationContact.associateAddressWorkPrimary}
         countryCode={'associateTelephoneCountryRegion'}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKADDRESS_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpAddress
+        isActive={isPopUpValue === 'WORKADDRESSSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'work address'}
+        primaryheader={'secondary'}
+        nextPopUpValue={''}
+        isRequired={true}
+        basicInfo={associateInfo.informationContact.associateAddressWorkPrimary}
+        countryCode={'associateTelephoneCountryRegion'}
+        typeOfSetObject={UPDATE_ASSOCIATE_WORKADDRESS_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'WORKTELEPHONE'}
@@ -300,6 +323,157 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_INFO}
         nextPopUpValue={'ASSOCIATECONFIRMATIONPOPUP'}
         isRequired={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTelephone
+        isActive={isPopUpValue === 'WORKTELEPHONESECONDARY'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'work telephone'}
+        primaryheader={'secondary'}
+        basicInfo={associateInfo.informationContact.associateTelephoneWorkPrimary}
+        isMobileState={false}
+        typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_INFO}
+        nextPopUpValue={''}
+        isRequired={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'DATEFORMATPOPUP'}
+        tag={'associateDateFormat'}
+        label={'date'}
+        listSelect={[
+          { id: 'dd/mm/yyyy', name: 'dd/mm/yyyy' },
+          { id: 'mm/dd/yyyy', name: 'mm/dd/yyyy' }
+        ]}
+        mappingValue={'id'}
+        labelval={'date'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'DICTIONARYPOPUP'}
+        tag={'associateDictionary'}
+        label={'dictionary'}
+        listSelect={[
+          { id: 'Generic', name: 'Generic' },
+          { id: 'iGuru Career', name: 'iGuru Career' },
+          { id: 'iGuru Education', name: 'iGuru Education' },
+          { id: 'iGuru Occupation', name: 'iGuru Occupation' },
+          { id: 'iGuru Pulse', name: 'iGuru Pulse' }
+        ]}
+        mappingValue={'id'}
+        labelval={'dictionary'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'LANGUAGEPOPUP'}
+        tag={'associateLanguage'}
+        label={'language'}
+        listSelect={[{ id: 'English (India)', name: 'English (India)' }]}
+        mappingValue={'id'}
+        labelval={'language'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'PEOPLEPOPUP'}
+        tag={'assesseeNameFormat'}
+        label={'people'}
+        listSelect={[
+          { id: 'First-Name Other-Name Last-Name', name: 'First-Name Other-Name Last-Name' },
+          { id: 'Last-Name First-Name Other-Name', name: 'Last-Name First-Name Other-Name' }
+        ]}
+        mappingValue={'id'}
+        labelval={'people'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'TIMEPOPUP'}
+        tag={'associateTimeFormat'}
+        label={'time'}
+        listSelect={[
+          { id: '12 Hours', name: '12 Hours' },
+          { id: '24 Hours', name: '24 Hours' }
+        ]}
+        mappingValue={'id'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'WEBSITEADDRESSPOPUP'}
+        label={'website address'}
+        labelBadgeOne={'primary'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        isRequired={false}
+        actualLableValue={'associateAddressWebsitePrimary'}
+        basicInfo={associateInfo.informationBasic}
+        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        nextPopUpValue={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'WEBSITEADDRESSSECONDARYPOPUP'}
+        label={'website address'}
+        labelBadgeOne={'secondary'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        isRequired={false}
+        actualLableValue={'associateAddressWebsitePrimary'}
+        basicInfo={associateInfo.informationBasic}
+        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        nextPopUpValue={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TAGSTATUTORYPOPUP'}
+        label={'tag'}
+        labelBadgeOne={'statutory'}
+        actualLableValue={'associateTagStatutory'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        basicInfo={assesseeInfo.informationBasic}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
 
       <PopUpConfirmation
