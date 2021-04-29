@@ -12,6 +12,7 @@ import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_INFO_REVISE_SAGA,
   ASSESSEE_SIGN_ON,
+  ASSOCIATE_SIGN_ON,
   CLEAR_ASSESSMENT_INFO,
   CLEAR_ASSIGNMENT_INFO,
   CLEAR_DISPLAY_PANE_THREE,
@@ -299,7 +300,7 @@ export const DisplayPaneThree = () => {
   };
   const onClickReviseFinish = () => {
     console.log('ON CLICK FINISH ICON', assesseeInfo.informationBasic);
-    if (headerOneBadgeOne === 'information') {
+    if (headerOneBadgeOne === 'information' && headerOne === 'assessee') {
       const { informationBasic, informationContact, informationPersonal } = assesseeInfo;
       const { associateId, id } = responseObject;
       const reqBody = {
@@ -478,7 +479,7 @@ export const DisplayPaneThree = () => {
   const reviseAssesseeBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName, informationBasic);
-    dispatch({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
+    // dispatch({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
     if (labelName === 'name') {
       dispatch({
         type: ASSESSEE_SIGN_ON,
@@ -547,8 +548,16 @@ export const DisplayPaneThree = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
     if (labelName === 'name') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'NAMEALIASPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
     }
     if (labelName === 'description') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'DESCRIPTIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
     }
   };
 

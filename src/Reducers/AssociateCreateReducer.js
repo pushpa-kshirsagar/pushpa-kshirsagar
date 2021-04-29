@@ -15,7 +15,8 @@ import {
   SET_ASSOCIATE_SECONDARY_POPUP,
   ASSOCIATE_CREATE_INFO,
   SET_ASSOCIATE_INFORMATION,
-  SET_ASSOCIATE_DYNAMIC_SINGLE_STATE
+  SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+  UPDATE_ASSOCIATE_SETUP_INFO
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -61,7 +62,7 @@ const initialState = {
       associateNodeSecondary: []
     },
     associateRole: {
-      associateRolePrimary: ["012345"],
+      associateRolePrimary: ['012345'],
       associateRoleSecondary: []
     }
   },
@@ -83,6 +84,13 @@ const initialState = {
       associateTelephoneCommunication: false,
       associateTelephoneVerification: false
     }
+  },
+  informationSetup: {
+    associateDateFormat: '',
+    associateDictionary: '',
+    associateLanguage: '',
+    assesseeNameFormat: '',
+    associateTimeFormat: ''
   },
   basicInfo: {
     name: '',
@@ -289,6 +297,11 @@ const AssociateCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         informationBasic: action.payload
+      };
+    case UPDATE_ASSOCIATE_SETUP_INFO:
+      return {
+        ...istate,
+        informationSetup: action.payload
       };
     case SET_ASSOCIATE_INFORMATION:
       return {

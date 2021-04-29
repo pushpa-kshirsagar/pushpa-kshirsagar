@@ -2,7 +2,8 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
-  GET_ASSOCIATE_INFO_SAGA
+  GET_ASSOCIATE_INFO_SAGA,
+  UPDATE_ASSOCIATE_BASIC_INFO
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_INFO_URL } from '../../endpoints';
 
@@ -38,6 +39,8 @@ function* workerReviewInfoAssociateSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
+      const { informationBasic } = userResponse.responseObject[0]; 
+      yield put({ type: UPDATE_ASSOCIATE_BASIC_INFO, payload: informationBasic });
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });

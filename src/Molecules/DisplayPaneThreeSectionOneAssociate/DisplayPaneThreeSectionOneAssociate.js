@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { ASSOCIATE_SIGN_ON } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
@@ -17,58 +18,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
+  const dispatch = useDispatch();
 
-  const list1 = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'family',
-      labelTextOneOneBadgeOne: 'ascendant',
-      labelTextOneOneBadgeTwo: 'descendant',
-      labelTextOneOneBadgeThree: 'sibling',
-      labelTextOneOneBadgeFour: 'spouse',
-      isListCard: true,
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'ascendant',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'family',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'family',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'family',
-              status: ''
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'descendant',
-          innerList: []
-        },
-        {
-          labelTextOneOneBadge: 'sibling',
-          innerList: []
-        },
-        {
-          labelTextOneOneBadge: 'spouse',
-          innerList: []
-        }
-      ],
-      innerInfo: 'No Information'
-    },
+  const allianceListAll = [
     {
       id: 'a2',
-      labelTextOneOne: 'guardian',
+      labelTextOneOne: 'owner',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
@@ -94,45 +49,6 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               textOne: 'Simple Sample 03',
               textTwo: 'guardian',
               status: 'active'
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'secondary',
-          innerList: []
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    },
-    {
-      id: 'a3',
-      labelTextOneOne: 'mentor',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'mentor',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'mentor',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'mentor',
-              status: ''
             }
           ]
         },
@@ -145,7 +61,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: true
     }
   ];
-  const list2 = [
+  const allocationList = [
     {
       id: 'a1',
       labelTextOneOne: 'group',
@@ -303,7 +219,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: true
     }
   ];
-  const list3 = [
+  const engagementListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'log',
@@ -365,7 +281,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false
     }
   ];
-  const list4 = [
+  const setUpListAll = [
     {
       id: 'a1',
       labelTextOneOne: 'date',
@@ -407,7 +323,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false
     }
   ];
-  const list5 = [
+  const allianceListKey = [
     {
       id: 'a1',
       labelTextOneOne: 'administrator',
@@ -485,7 +401,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: true
     }
   ];
-  const list6 = [
+  const engagementListKey = [
     {
       id: 'a2',
       textOneOne: capitalizeFirstLetter(informationEngagement.associateStatus) || 'No Information',
@@ -529,7 +445,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false
     }
   ];
-  const list7 = [
+  const setUpListKey = [
     {
       id: 'a2',
       labelTextOneOne: 'dictionary',
@@ -547,6 +463,76 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false
     }
   ];
+  const reviseAlliance = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (labelName === 'manager') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'MANAGERPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (labelName === 'node') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'NODEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (labelName === 'role') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'ROLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+  };
+  const reviseEngagement = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
+  const reviseSetup = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'date') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'DATEFORMATPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (labelName === 'dictionary') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'DICTIONARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (labelName === 'language') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'LANGUAGEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (labelName === 'people') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'PEOPLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (labelName === 'time') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'TIMEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+  };
 
   return (
     <div
@@ -557,13 +543,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     >
       {headerOneBadgeTwo === 'all' ? (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <AllocationAccordian
               headerOne="alliance"
               isDisplayCardExpanded={listExpand === 'alliance'}
               setListExpand={setListExpand}
-              list={list1}
+              list={allianceListAll}
               mode={reviewMode}
+              onClickRevise={reviseAlliance}
             />
           </div>
           <div className="containerPadding">
@@ -571,8 +558,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               headerOne="allocation"
               isDisplayCardExpanded={listExpand === 'allocation'}
               setListExpand={setListExpand}
-              list={list2}
+              list={allocationList}
               mode={reviewMode}
+              onClickRevise={reviseAllocation}
             />
           </div>
           <div className="containerPadding">
@@ -580,8 +568,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               headerOne="engagement"
               isDisplayCardExpanded={listExpand === 'engagement'}
               setListExpand={setListExpand}
-              list={list3}
+              list={engagementListAll}
               mode={reviewMode}
+              onClickRevise={reviseEngagement}
             />
           </div>
           <div className="containerPadding">
@@ -589,8 +578,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               headerOne="setup"
               isDisplayCardExpanded={listExpand === 'setup'}
               setListExpand={setListExpand}
-              list={list4}
+              list={setUpListAll}
               mode={reviewMode}
+              onClickRevise={reviseSetup}
             />
           </div>
         </>
@@ -598,13 +588,22 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         <>
           <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
             <Paper className={'dossierContainerTop'}>
-              {list5.map((ob) => {
+              {allianceListKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseAlliance}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseAlliance}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
@@ -613,13 +612,22 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list2.map((ob) => {
+              {allocationList.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseAllocation}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseAllocation}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
@@ -628,13 +636,22 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list6.map((ob) => {
+              {engagementListKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseEngagement}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseEngagement}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
@@ -643,13 +660,22 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           </div>
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
-              {list7.map((ob) => {
+              {setUpListKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseSetup}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseSetup}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
@@ -76,7 +76,7 @@ const PopUpDisplayPanelAssociate = (props) => {
   } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
   const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-
+  const [isReviseMode, setIsReviseMode] = useState(false);
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
 
@@ -280,6 +280,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         type: GET_ASSOCIATE_INFO_SAGA,
         payload: {
           secondaryOptionCheckValue,
+          isReviseMode,
           reqBody: {
             assesseeId: selectedAssociateInfo?.assesseeId,
             associateId:
@@ -314,6 +315,12 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+    }
+    if (clickValue === 'associaterevise') {
+      // alert('IN');
+      setIsReviseMode(true);
+    } else {
+      setIsReviseMode(false);
     }
     if (clickValue === 'switch') {
       dispatch({
@@ -721,6 +728,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           currentPopUpOption: []
         }
       });
+      // setIsReviseMode(false);
     }
   };
   const clearMiddlePaneInfo = () => {

@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Unverified from '../../images/unverified.svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import { ASSOCIATE_SIGN_ON } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoAssociate = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const dispatch = useDispatch();
   const { informationContact, informationCredential } = responseObject;
 
   //   associateAddress: "sampleaddress"
@@ -131,6 +133,69 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
     }
   ];
 
+  const reviseContact = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName, selectedBadgeName);
+    if (labelName === 'website address') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'WEBSITEADDRESSPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'WEBSITEADDRESSSECONDARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+    }
+    if (labelName === 'work address') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'WORKADDRESSPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'WORKADDRESSSECONDARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+    }
+    if (labelName === 'work telephone') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'WORKTELEPHONE', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'WORKTELEPHONESECONDARY', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+    }
+  };
+
+  const reviseCredential = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'tag') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'TAGSTATUTORYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+  };
+  const reviseFramework = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+  };
+
   return (
     <div
       style={{
@@ -140,13 +205,14 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
     >
       {headerOneBadgeTwo === 'all' ? (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <AllocationAccordian
               headerOne="contact"
               isDisplayCardExpanded={listExpand === 'contact'}
               setListExpand={setListExpand}
               list={list1}
               mode={reviewMode}
+              onClickRevise={reviseContact}
             />
           </div>
           <div className="containerPadding">
@@ -156,6 +222,7 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
               setListExpand={setListExpand}
               list={list2}
               mode={reviewMode}
+              onClickRevise={reviseCredential}
             />
           </div>
           <div className="containerPadding">
@@ -165,20 +232,30 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
               setListExpand={setListExpand}
               list={list3}
               mode={reviewMode}
+              onClickRevise={reviseFramework}
             />
           </div>
         </>
       ) : (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
               {list1.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseContact}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseContact}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
@@ -191,9 +268,18 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseCredential}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseCredential}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
@@ -206,9 +292,18 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseFramework}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseFramework}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
