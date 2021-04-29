@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import DisplayPageOne from './Pages/DisplayPageOne/DisplayPageOne';
 import DisplayPageSignOn from './Pages/DisplayPageSignOn/DisplayPageSignOn';
 import DisplayPageSignIn from './Pages/DisplayPageSignIn/DisplayPageSignIn';
@@ -9,7 +9,6 @@ import { AccountContext } from './Account';
 import DisplayPageConfirmUser from './Pages/DisplayPageConfirmUser/DisplayPageConfirmUser';
 
 function App() {
-  const history = useHistory();
   // const { getSession } = useContext(AccountContext);
   // useEffect(() => {
   //   console.log(userPool);
@@ -26,14 +25,13 @@ function App() {
   //   //   console.log('ERROR===>', error);
   //   // });
   // }, []);
-  useEffect(() => {
-    history.pushState(null, null, window.top.location.pathname + window.top.location.search);
-    window.addEventListener('popstate', (e) => {
-      e.preventDefault();
-      // Insert Your Logic Here, You Can Do Whatever You Want
-      history.pushState(null, null, window.top.location.pathname + window.top.location.search);
-    });
-  }, [history]);
+  document.addEventListener(
+    'deviceready',
+    function () {
+      document.addEventListener('backbutton', null, false);
+    },
+    false
+  );
   const checkAuth = () => {
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
