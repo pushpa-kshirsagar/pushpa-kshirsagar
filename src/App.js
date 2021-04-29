@@ -25,13 +25,7 @@ function App() {
   //   //   console.log('ERROR===>', error);
   //   // });
   // }, []);
-  document.addEventListener(
-    'deviceready',
-    function () {
-      document.addEventListener('backbutton', null, false);
-    },
-    false
-  );
+ 
   const checkAuth = () => {
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
