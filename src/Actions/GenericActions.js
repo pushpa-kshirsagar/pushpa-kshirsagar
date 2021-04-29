@@ -569,6 +569,7 @@ export const makeManagerRoleCreateObj = (
       columnName: 'informationBasic.assesseeRoleName',
       order: 'asc'
     },
+    searchCondition: 'or',
     search: [
       {
         condition: 'and',
@@ -585,6 +586,21 @@ export const makeManagerRoleCreateObj = (
               condition: 'ct',
               value: {
                 from: 'manager'
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'boolean',
+            conditionColumn: 'informationSetup.assesseeRoleDefault',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: true
               }
             }
           }
@@ -617,6 +633,7 @@ export const makeAdministratorRoleCreateObj = (
       columnName: 'informationBasic.assesseeRoleName',
       order: 'asc'
     },
+    searchCondition: 'or',
     search: [
       {
         condition: 'and',
@@ -633,6 +650,21 @@ export const makeAdministratorRoleCreateObj = (
               condition: 'ct',
               value: {
                 from: 'administrator'
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'boolean',
+            conditionColumn: 'informationSetup.assesseeRoleDefault',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: true
               }
             }
           }

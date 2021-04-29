@@ -55,6 +55,7 @@ const PopUpSignOnAssessee = (props) => {
   const informationContact = assesseeInfo.informationContact;
   console.log('============>', assesseeInfo);
   const [roleSelectedError, setRoleSelectedError] = useState('');
+  const [assignRoleArr, setAssignRoleArr] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -73,7 +74,41 @@ const PopUpSignOnAssessee = (props) => {
       }
     }
   }, [assesseeInfo.assesseeInformationData, history]);
+  useEffect(() => {
+    let otherRole = [];
+
+    otherRole = coreRoleReviewListData.filter(function (value) {
+      return value.informationSetup.assesseeRoleDefault == false;
+    });
+    setAssignRoleArr(otherRole);
+    console.log(assignRoleArr);
+    console.log('otherRole');
+  }, [coreRoleReviewListData]);
   const onClickYes = async () => {
+    var defaultroleArr = coreRoleReviewListData
+      .filter(function (data) {
+        if (data.informationSetup.assesseeRoleDefault) {
+          return data.id; // skip
+        }
+        return false;
+      })
+      .map(function (data) {
+        return data.id;
+      });
+    let finalRoleArr = [
+      ...assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary,
+      ...defaultroleArr
+    ];
+  
+    console.log(finalRoleArr)
+    dispatch({
+      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assesseeRole',
+        actualStateName: 'assesseeRolePrimary',
+        value: finalRoleArr
+      }
+    });
     const {
       informationBasic,
       informationAllocation,
@@ -90,27 +125,11 @@ const PopUpSignOnAssessee = (props) => {
       informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
     //6083d82a5c42683849ce14d0 parent associate id
-    let dummyassoInfo = {
-      id:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        '6083d82a5c42683849ce14d0',
-      associateAssent: true,
-      informationBasic: {
-        associateName: 'Sample Assocaite',
-        associateNameVerification: false,
-        associateDescription: '',
-        associatePicture: '',
-        associatePictureVerification: false,
-        associateFlag: false
-      },
-      informationSetup: null
-    };
     let requestObect = {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
         '6083d82a5c42683849ce14d0',
-      associateName: selectedAssociateInfo?.associate?.informationBasic.associateName,
       assessee: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,
@@ -118,8 +137,7 @@ const PopUpSignOnAssessee = (props) => {
         informationPersonal: informationPersonal,
         informationEngagement: informationEngagement,
         informationSetup: informationSetup
-      },
-      associate: dummyassoInfo
+      }
     };
     console.log('ONCLICK assessee Create Yes', requestObect);
     console.log('loading start');
@@ -342,7 +360,11 @@ const PopUpSignOnAssessee = (props) => {
         selectedList={assesseeInfo?.informationAllocation?.assesseeRole.assesseeRolePrimary}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
-        ListData={coreRoleReviewListData}
+        ListData={
+          headerOne === 'administrator' || headerOne === 'manager'
+            ? assignRoleArr
+            : coreRoleReviewListData
+        }
         textOne={'assesseeRoleName'}
         textTwo={'assesseeRoleDescription'}
         onClickEvent={updateRoleIdObject}

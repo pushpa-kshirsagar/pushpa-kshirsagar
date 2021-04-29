@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
@@ -37,6 +37,7 @@ const PopUpSignOnAssociate = () => {
   const { coreGroupReviewListData, selectedAssociateInfo, coreRoleReviewListData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
+  const [roleSelectedError, setRoleSelectedError] = useState('');
   const history = useHistory();
   console.log(associateInfo);
   console.log('==================');
@@ -161,6 +162,7 @@ const PopUpSignOnAssociate = () => {
     console.log(associateInfo.informationAllocation.associateRole.associateRolePrimary);
     let roleid = e.currentTarget.getAttribute('tag');
     let roleArr = associateInfo.informationAllocation.associateRole.associateRolePrimary;
+    setRoleSelectedError('');
     if (roleArr.includes(roleid)) {
       document.getElementById(roleid).style.backgroundColor = 'white';
       roleArr = roleArr.filter(function (number) {
@@ -281,6 +283,10 @@ const PopUpSignOnAssociate = () => {
         textOne={'associateRoleName'}
         textTwo={'associateRoleDescription'}
         onClickEvent={updateAssociateRoles}
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
+        isRequired={true}
+        selectedList={associateInfo?.informationAllocation?.associateRole.associateRolePrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddress

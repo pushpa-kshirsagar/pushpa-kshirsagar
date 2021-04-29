@@ -6,6 +6,7 @@ import {
   SET_ASSESSEE_INFORMATION_DATA,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_POPUP_VALUE,
   UPDATE_ASSESSEE_BASIC_INFO,
   UPDATE_ASSESSEE_CONTACT_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
@@ -32,35 +33,40 @@ function* workerCreateAssesseeSaga(data) {
     const userResponse = yield call(createAssesseeApi, { data: data.payload });
     console.log('IN WORKER ====>', userResponse);
     console.log('IN WORKER ====>', JSON.stringify(userResponse));
-    if (userResponse.responseCode === '000')
+    if (userResponse.responseCode === '000') {
       yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject[0] });
-    console.log('loading end');
-    const {
-      informationAllocation,
-      informationBasic,
-      informationContact,
-      informationEngagement,
-      informationPersonal,
-      informationSetup
-    } = userResponse.responseObject[0];
-    yield put({
-      type: SET_DISPLAY_PANE_THREE_STATE,
-      payload: {
-        headerOne: Store.getState().DisplayPaneTwoReducer.typeOfAssesseeCreate,
-        headerOneBadgeOne: 'information',
-        headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
-        responseObject: userResponse.responseObject[0],
-        reviewMode: 'revise',
-        createMode: 'assessee'
-      }
-    });
-    yield put({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
-    yield put({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
-    yield put({ type: UPDATE_ASSESSEE_ENGAGEMENT_INFO, payload: informationEngagement });
-    yield put({ type: UPDATE_ASSESSEE_CONTACT_INFO, payload: informationContact });
-
-    yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    yield put({ type: LOADER_STOP });
+      console.log('loading end');
+      const {
+        informationAllocation,
+        informationBasic,
+        informationContact,
+        informationEngagement,
+        informationPersonal,
+        informationSetup
+      } = userResponse.responseObject[0];
+      yield put({
+        type: SET_DISPLAY_PANE_THREE_STATE,
+        payload: {
+          headerOne: Store.getState().DisplayPaneTwoReducer.typeOfAssesseeCreate,
+          headerOneBadgeOne: 'information',
+          headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
+          responseObject: userResponse.responseObject[0],
+          reviewMode: 'revise',
+          createMode: 'assessee'
+        }
+      });
+      yield put({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
+      yield put({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
+      yield put({ type: UPDATE_ASSESSEE_ENGAGEMENT_INFO, payload: informationEngagement });
+      yield put({ type: UPDATE_ASSESSEE_CONTACT_INFO, payload: informationContact });
+      yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+      yield put({ type: LOADER_STOP });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

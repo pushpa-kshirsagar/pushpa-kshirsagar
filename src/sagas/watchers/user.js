@@ -5,7 +5,7 @@ import {
   SET_USER,
   SET_ASSESSEE_PERMISSION,
   GET_USER_SAGA,
-  GET_SIGNED_ASSESSEE_PERMISSION_SAGA,
+  GET_SIGNED_ASSESSEE_PERMISSION_SAGA
 } from '../../actionType';
 import { GET_ASSESSEE_PERMISSION_URL, GET_USER_URL } from '../../endpoints';
 function getUserApi(data) {

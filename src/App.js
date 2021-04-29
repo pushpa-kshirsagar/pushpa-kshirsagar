@@ -25,6 +25,7 @@ function App() {
   //   //   console.log('ERROR===>', error);
   //   // });
   // }, []);
+ 
   const checkAuth = () => {
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -63,7 +64,7 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
+          <Route exact path="/" render={() => <Redirect to="/signIn" />} />
           <Route path="/signIn" component={DisplayPageSignIn} exact={true} />
           <Route path="/confirm/:id" component={DisplayPageConfirmUser} exact={true} />
           <AuthRoute path="/dashboard" component={DisplayPageOne} exact={true} />

@@ -17,7 +17,7 @@ import CrossIcon from '@material-ui/icons/Clear';
 import { getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
 import { assesseeStatus } from '../Actions/StatusAction';
 
-const AssociateGroupAssociateReviewList = (props) => {
+const AssociateRoleAssociateReviewList = (props) => {
   const dispatch = useDispatch();
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
   const {
@@ -79,11 +79,11 @@ const AssociateGroupAssociateReviewList = (props) => {
       type: SET_MIDDLEPANE_STATE,
       payload: {
         middlePaneHeader: 'associates',
-        middlePaneHeaderBadgeOne: 'group',
+        middlePaneHeaderBadgeOne: 'role',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'associatesGroupDistinctReviewList',
+        typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
@@ -170,11 +170,11 @@ const AssociateGroupAssociateReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.associateGroupName}
-          textTwoOne={listDistinctData.associateGroupDescription}
+          textOneOne={listDistinctData.associateRoleName}
+          textTwoOne={listDistinctData.associateRoleDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'group'}
+          labelTwoTwo={'role'}
           onClickIconOne={closeRelatedList}
           isAlliance
         />
@@ -201,7 +201,7 @@ const AssociateGroupAssociateReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'associateGroupAssociateDistinctinactive' && (
+      {FilterMode === 'associateRoleAssociateDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -213,4 +213,4 @@ const AssociateGroupAssociateReviewList = (props) => {
     </div>
   );
 };
-export default AssociateGroupAssociateReviewList;
+export default AssociateRoleAssociateReviewList;

@@ -17,7 +17,7 @@ import CrossIcon from '@material-ui/icons/Clear';
 import { getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
 import { assesseeStatus } from '../Actions/StatusAction';
 
-const AssociateGroupAssociateReviewList = (props) => {
+const AssesseeRoleAssesseeReviewList = (props) => {
   const dispatch = useDispatch();
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
   const {
@@ -78,12 +78,12 @@ const AssociateGroupAssociateReviewList = (props) => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'associates',
-        middlePaneHeaderBadgeOne: 'group',
+        middlePaneHeader: 'assessees',
+        middlePaneHeaderBadgeOne: 'role',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'associatesGroupDistinctReviewList',
+        typeOfMiddlePaneList: 'assesseeRoleDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
@@ -148,7 +148,7 @@ const AssociateGroupAssociateReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'associate',
+        popupHeaderOne: 'assessee',
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -170,17 +170,17 @@ const AssociateGroupAssociateReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.associateGroupName}
-          textTwoOne={listDistinctData.associateGroupDescription}
+          textOneOne={listDistinctData.assesseeRoleName}
+          textTwoOne={listDistinctData.assesseeRoleDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'group'}
+          labelTwoTwo={'role'}
           onClickIconOne={closeRelatedList}
           isAlliance
         />
       )}
       {listDistinctData &&
-        listDistinctData.associate.map((item, index) => {
+        listDistinctData.assessee.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -190,18 +190,22 @@ const AssociateGroupAssociateReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={assesseeStatus(
                   middlePaneHeaderBadgeTwo,
-                  item.informationEngagement.associateStatus
+                  item.informationEngagement.assesseeStatus
                 )}
-                actualStatus={item.informationEngagement.associateStatus}
-                textOne={item.informationBasic.associateName}
-                textTwo={item.informationBasic.associateDescription}
+                actualStatus={item.informationEngagement.assesseeStatus}
+                textOne={
+                  item.informationBasic.assesseeNameFirst +
+                  ' ' +
+                  item.informationBasic.assesseeNameLast
+                }
+                textTwo={item.informationBasic.assesseeAlias}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
               />
             </div>
           );
         })}
-      {FilterMode === 'associateGroupAssociateDistinctinactive' && (
+      {FilterMode === 'assesseeGroupAssesseeDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -213,4 +217,4 @@ const AssociateGroupAssociateReviewList = (props) => {
     </div>
   );
 };
-export default AssociateGroupAssociateReviewList;
+export default AssesseeRoleAssesseeReviewList;
