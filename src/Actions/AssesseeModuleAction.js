@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import {
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   CLEAR_DISPLAY_PANE_THREE,
@@ -265,7 +264,7 @@ export const getAssesseeGroupAssesseeDistinctApiCall = (
     countPage
   );
   if (isScan) {
-    alert(searchStr)
+    alert(searchStr);
     reqBody = getAssesseeGroupAssesseeScanReqObj(
       selectedAssociateInfo,
       selectedTagValue,
@@ -303,8 +302,8 @@ export const assesseeRole = (roleName) => {
   if (roleName) {
     let newRoles = roleName.split('(');
     let word = '';
-    for (var i = 1; i < newRoles.length; i++) {
-      word = newRoles[i].split(')')[0];
+    for (var j = 1; j < newRoles.length; j++) {
+      word = newRoles[j].split(')')[0];
       let newwrd = word.replace(' ', '||');
       txt = txt.replace('(' + word + ')', '{' + newwrd + '}');
     }

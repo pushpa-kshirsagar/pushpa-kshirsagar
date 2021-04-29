@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  ASSESSMENT_REVIEW_DISTINCT_SAGA,
-  ASSOCIATE_POPUP_CLOSE,
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE_ENABLE,
-  GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
-  LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
-  SET_PAGE_COUNT,
-  SET_POPUP_STATE,
-  SET_REQUEST_OBJECT
+  SET_POPUP_STATE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssessmentReviewListRequestObject } from '../Actions/GenericActions';
-import {
-  ASSESSMENT_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
-} from '../PopUpConfig';
+import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
 import { getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
@@ -29,20 +19,14 @@ import { assesseeStatus } from '../Actions/StatusAction';
 
 const AssociateGroupAssociateReviewList = (props) => {
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue, countPage } = useSelector(
-    (state) => state.AssesseeCreateReducer
-  );
+  const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
   const {
-    numberPage,
-    scanCount,
-    reviewListReqObj,
     middlePaneSelectedValue,
     reviewListDistinctData,
     selectedAssociateInfo,
     relatedReviewListDistinctData,
     middlePaneHeaderBadgeOne,
-    middlePaneHeaderBadgeTwo,
-    typeOfMiddlePaneList
+    middlePaneHeaderBadgeTwo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   {
