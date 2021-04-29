@@ -681,7 +681,10 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       dispatch({
         type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ADMINISTRATOR_CREATE' }
+        payload: {
+          isPopUpValue: 'ASSESSEENAMEPOPUP',
+          popupMode: popupHeaderOne === 'administrators' ? 'ADMINISTRATOR_CREATE' : 'MANAGER_CREATE'
+        }
       });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,

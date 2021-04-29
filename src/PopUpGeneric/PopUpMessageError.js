@@ -1,36 +1,24 @@
 import { DialogContent } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import '../Molecules/PopUp/PopUp.css';
+import { useHistory } from 'react-router-dom';
 
 export const PopUpMessageError = (props) => {
   const { isActive, errorMessage = 'Error Message' } = props;
+  const history = useHistory();
+
+  // useEffect(() => {
+  //   if (errorMessage === 'User unauthorized') {
+  //     let path = `/`;
+  //     history.push(path);
+  //   }
+  // }, [history]);
   return (
     <div>
       <Popup isActive={isActive}>
-        {/* <div style={{ width: '300px' }}> */}
-        {/* <div
-              style={{
-                padding: '3px 10px',
-                backgroundColor: 'rgb(255, 100, 100)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}
-            >
-              <Label text="Error" fontSize="1.6rem" colour="#ffffff" />
-              <div>
-                <IconButton
-                  onClick={() => {
-                    dispatch({ type: POPUP_CLOSE });
-                  }}
-                >
-                  <Clear className={'popupClose'} />
-                </IconButton>
-              </div>
-            </div> */}
         <PopupHeader headerPanelColour={'genericTwo'} headerOne={'Error'} mode={'error'} />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

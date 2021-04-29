@@ -25,7 +25,8 @@ import {
   SET_MIDDLEPANE_STATE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
-  SET_POPUP_SINGLE_STATE
+  SET_POPUP_SINGLE_STATE,
+  CLEAR_ASSESSEE_INFO
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -58,6 +59,8 @@ const PopUpAssociatesModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
       dispatch({ type: ASSOCIATE_CREATE_INFO });
+      dispatch({ type: CLEAR_ASSOCIATE_INFO });
+      dispatch({ type: CLEAR_ASSESSEE_INFO });
       dispatch({
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'Create' }
@@ -124,7 +127,12 @@ const PopUpAssociatesModule = (props) => {
       dispatch({ type: ASSOCIATE_POPUP_CLOSE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
-      let requestObj = makeAssociateRoleObj(secondaryOptionCheckValue);
+      let requestObj = makeAssociateRoleObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({

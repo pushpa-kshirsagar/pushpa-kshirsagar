@@ -124,29 +124,12 @@ const PopUpSignOnAssessee = (props) => {
     if (tempCommunication === 'email address (secondary)') {
       informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
-    
     //6083d82a5c42683849ce14d0 parent associate id
-    let dummyassoInfo = {
-      id:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        '6083d82a5c42683849ce14d0',
-      associateAssent: true,
-      informationBasic: {
-        associateName: 'Sample Assocaite',
-        associateNameVerification: false,
-        associateDescription: '',
-        associatePicture: '',
-        associatePictureVerification: false,
-        associateFlag: false
-      },
-      informationSetup: null
-    };
     let requestObect = {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
         '6083d82a5c42683849ce14d0',
-      associateName: selectedAssociateInfo?.associate?.informationBasic.associateName,
       assessee: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,
@@ -154,13 +137,12 @@ const PopUpSignOnAssessee = (props) => {
         informationPersonal: informationPersonal,
         informationEngagement: informationEngagement,
         informationSetup: informationSetup
-      },
-      associate: dummyassoInfo
+      }
     };
     console.log('ONCLICK assessee Create Yes', requestObect);
     console.log('loading start');
-    // dispatch({ type: LOADER_START });
-    // dispatch({ type: CREATE_ASSESSEE_SAGA, payload: requestObect });
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSESSEE_SAGA, payload: requestObect });
     /* let attributeList = [];
     const dataEmail = {
       Name: 'email',

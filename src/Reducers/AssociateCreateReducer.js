@@ -62,7 +62,7 @@ const initialState = {
       associateNodeSecondary: []
     },
     associateRole: {
-      associateRolePrimary: ['012345'],
+      associateRolePrimary: [],
       associateRoleSecondary: []
     }
   },

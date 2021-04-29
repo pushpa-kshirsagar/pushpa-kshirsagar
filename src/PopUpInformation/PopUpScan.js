@@ -44,8 +44,14 @@ import {
   makeAdminmManagerRoleScanRequestObject
 } from '../Actions/GenericActions';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
-import { getAssociateGroupAssociateDistinctApiCall } from '../Actions/AssociateModuleAction';
-import { getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
+import {
+  getAssociateGroupAssociateDistinctApiCall,
+  getAssociateRoleAssociateDistinctApiCall
+} from '../Actions/AssociateModuleAction';
+import {
+  getAssesseeGroupAssesseeDistinctApiCall,
+  getAssesseeRoleAssesseeDistinctApiCall
+} from '../Actions/AssesseeModuleAction';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
@@ -397,6 +403,18 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
+      if (typeOfMiddlePaneList === 'assesseesRoleAssesseeReviewList') {
+        getAssesseeRoleAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+      }
       if (typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList') {
         getAssesseeGroupAssesseeDistinctApiCall(
           selectedAssociateInfo,
@@ -411,6 +429,18 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'associatesGroupAssociateReviewList') {
         getAssociateGroupAssociateDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+      }
+      if (typeOfMiddlePaneList === 'associatesRoleAssociateReviewList') {
+        getAssociateRoleAssociateDistinctApiCall(
           selectedAssociateInfo,
           middlePaneHeaderBadgeTwo,
           countPage,
@@ -476,11 +506,13 @@ const PopUpScan = (props) => {
               {(isPopUpValue === 'assesseesDistinctReviewList' ||
                 isPopUpValue === 'administratorsDistinctReviewList' ||
                 isPopUpValue === 'assesseesGroupAssesseeReviewList' ||
+                isPopUpValue === 'assesseesRoleAssesseeReviewList' ||
                 isPopUpValue === 'managersDistinctReviewList') && (
                 <span>name, alias, email address, mobile telephone, tag.</span>
               )}
               {isPopUpValue === 'assesseeRelatedAssociate' ||
-                (isPopUpValue === 'associateDistinctReviewList' && (
+                isPopUpValue === 'associateDistinctReviewList' ||
+                (isPopUpValue === 'associatesRoleAssociateReviewList' && (
                   <span>name, description, website address, tag.</span>
                 ))}
             </FormHelperText>
