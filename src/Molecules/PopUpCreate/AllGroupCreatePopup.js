@@ -237,6 +237,46 @@ const AllGroupCreatePopup = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'ROLELISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'role'}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={''}
+        inputHeader={'role'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a role'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ROLESECONDARYLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'role'}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={''}
+        inputHeader={'role'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a role'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Role' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Role' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Role' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'NODELISTPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}

@@ -12,6 +12,7 @@ import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_INFO_REVISE_SAGA,
   ASSESSEE_SIGN_ON,
+  ASSOCIATE_INFO_REVISE_SAGA,
   ASSOCIATE_SIGN_ON,
   CLEAR_ASSESSMENT_INFO,
   CLEAR_ASSIGNMENT_INFO,
@@ -23,7 +24,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE,
-  UPDATE_ASSESSEE_BASIC_INFO
+  ASSESSEE_GROUP_INFO_REVISE_SAGA,
+  ASSOCIATE_GROUP_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -70,7 +72,7 @@ export const DisplayPaneThree = () => {
     reviewMode,
     createMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { showMiddlePaneState } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { showMiddlePaneState, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationBasic } = responseObject;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const rightPaneSectionsAssessee = [
@@ -281,6 +283,10 @@ export const DisplayPaneThree = () => {
   };
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
+  const associateInfo = useSelector((state) => state.AssociateCreateReducer);
+  const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup } = useSelector(
+    (state) => state.GroupCreateReducer
+  );
 
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
@@ -317,6 +323,54 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSESSEE_INFO_REVISE_SAGA,
         payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne: 'assessee', reqBody }
+      });
+    } else if (headerOneBadgeOne === 'group' && headerOne === 'associates') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        associateGroup: {
+          id,
+          informationBasic: associateGroup.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSOCIATE_GROUP_REVISE_INFO_SAGA,
+        payload: { headerOne: 'associates', reqBody }
+      });
+    } else if (headerOneBadgeOne === 'group' && headerOne === 'assessees') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        assesseeGroup: {
+          id,
+          informationBasic: assesseeGroup.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSEE_GROUP_INFO_REVISE_SAGA,
+        payload: { headerOne: 'assessees', reqBody }
+      });
+    } else if (headerOneBadgeOne === 'information' && headerOne === 'associate') {
+      const { informationBasic, informationContact, informationSetup } = associateInfo;
+      const { id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId: id,
+        associate: {
+          id,
+          // informationBasic,
+          // informationContact,
+          informationSetup
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSOCIATE_INFO_REVISE_SAGA,
+        payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne: 'associate', reqBody }
       });
     } else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
@@ -530,8 +584,16 @@ export const DisplayPaneThree = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
     if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesGROUPCREATE' }
+      });
     }
     if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'associatesGROUPCREATE' }
+      });
     }
   };
 
@@ -539,8 +601,16 @@ export const DisplayPaneThree = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
     if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesROLECREATE' }
+      });
     }
     if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'associatesROLECREATE' }
+      });
     }
   };
 

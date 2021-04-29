@@ -15,6 +15,7 @@ const AssociateRoleCreatePopup = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { associateRole } = useSelector((state) => state.RoleCreateReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
@@ -47,6 +48,7 @@ const AssociateRoleCreatePopup = () => {
         basicInfo={associateRole.informationBasic}
         typeOfSetObject={SET_ASSOCIATE_ROLE_REDUCER_STATE}
         isRequired={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
@@ -59,6 +61,7 @@ const AssociateRoleCreatePopup = () => {
         basicInfo={associateRole.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={SET_ASSOCIATE_ROLE_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}

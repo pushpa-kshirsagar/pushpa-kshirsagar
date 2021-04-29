@@ -13,7 +13,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -285,7 +285,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a1',
       labelTextOneOne: 'date',
-      textOneOne: 'dd/mm/yyyy',
+      textOneOne: informationSetup?.associateDateFormat || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -293,7 +293,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a2',
       labelTextOneOne: 'dictionary',
-      textOneOne: 'No Information',
+      textOneOne: informationSetup?.associateDictionary || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -301,7 +301,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a3',
       labelTextOneOne: 'language',
-      textOneOne: 'No Information',
+      textOneOne: informationSetup?.associateLanguage || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -309,7 +309,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a4',
       labelTextOneOne: 'people',
-      textOneOne: 'No Information',
+      textOneOne: informationSetup?.assesseeNameFormat || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -317,7 +317,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a5',
       labelTextOneOne: 'time',
-      textOneOne: 'No Information',
+      textOneOne: informationSetup?.associateTimeFormat || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -449,7 +449,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a2',
       labelTextOneOne: 'dictionary',
-      textOneOne: 'No Information',
+      textOneOne: informationSetup?.associateDictionary || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -457,7 +457,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a3',
       labelTextOneOne: 'language',
-      textOneOne: 'No Information',
+      textOneOne: informationSetup?.associateLanguage || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false

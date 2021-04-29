@@ -124,7 +124,13 @@ const PopUpAssociatesModule = (props) => {
       dispatch({ type: ASSOCIATE_POPUP_CLOSE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
-      let requestObj = makeAssociateRoleObj(secondaryOptionCheckValue);
+      // let requestObj = makeAssociateRoleObj(secondaryOptionCheckValue);
+      let requestObj = makeAssociateRoleObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({

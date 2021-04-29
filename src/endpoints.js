@@ -94,6 +94,8 @@ export const ASSESSEE_SIGN_IN_INFO_URL =
   'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/refresh-signin-information';
 export const ASSESSEE_INFO_REVISE_URL =
   'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/revise';
+export const ASSESSEE_GROUP_INFO_REVISE_URL =
+  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/revise';
 export const ASSESSEE_CHANGE_PASSWORD_URL =
   'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/change-password';
 export const ASSOCIATE_INFO_REVISE_URL =
@@ -102,4 +104,6 @@ export const ASSESSEE_GROUP_ASSESSEE_URL =
   'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/asseesee-review-list';
 export const ASSOCIATE_GROUP_ASSOCIATE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/associate-review-list';
+export const ASSOCIATE_GROUP_INFO_REVISE_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/revise';
 // export const URL = '';
