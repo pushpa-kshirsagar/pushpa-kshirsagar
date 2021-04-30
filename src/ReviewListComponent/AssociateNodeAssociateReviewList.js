@@ -19,7 +19,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import { ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
-import "react-sortable-tree/style.css";
+import 'react-sortable-tree/style.css';
 
 import FileExplorerTheme from 'react-sortable-tree-theme-full-node-drag';
 import '../reactSortableTree.css';
@@ -190,7 +190,7 @@ const AssociateNodeAssociateReviewList = (props) => {
   return (
     <div>
       {treeData && (
-        <div style={{height: 'calc(100vh - 135px)'}}>
+        <div style={{ minheight: 'calc(100vh - 135px)' }}>
           <SortableTree
             treeData={treeData}
             onChange={null}

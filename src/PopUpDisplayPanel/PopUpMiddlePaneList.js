@@ -317,6 +317,17 @@ const PopUpMiddlePaneList = (props) => {
             }
           }
         });
+        // getAssesseeGroupAssesseeDistinctApiCall(
+        //   selectedAssociateInfo,
+        //   secondaryOptionCheckValue,
+        //   countPage,
+        //   dispatch,
+        //   '',
+        //   selectedTagValue, //group id
+        //   '',
+        //   false,
+        //   false
+        // );
       }
       if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
         dispatch({

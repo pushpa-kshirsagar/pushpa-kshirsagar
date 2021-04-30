@@ -194,7 +194,7 @@ const PopUpReducer = (istate = initialState, action) => {
         };
       }
     case SET_MIDDLEPANE_SECONDARY_OPTION: {
-      let arrVal = istate.secondaryPopUpOptions[action.payload.keyValue];
+      let arrVal = istate.secondaryPopUpOptions[action.payload.badgeValue];
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
