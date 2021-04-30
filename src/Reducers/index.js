@@ -14,6 +14,7 @@ import RoleCreateReducer from './RoleCreateReducer';
 import GroupCreateReducer from './GroupCreateReducer';
 import TypeCreateReducer from './TypeCreateReducer';
 import SignOnReducer from './SignOnReducer';
+import NodeCreateReducer from './NodeCreateReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -30,5 +31,6 @@ export default combineReducers({
   RoleCreateReducer,
   GroupCreateReducer,
   TypeCreateReducer,
-  SignOnReducer
+  SignOnReducer,
+  NodeCreateReducer
 });

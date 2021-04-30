@@ -10,12 +10,12 @@ export const PopUpMessageError = (props) => {
   const { isActive, errorMessage = 'Error Message' } = props;
   const history = useHistory();
 
-  // useEffect(() => {
-  //   if (errorMessage === 'User unauthorized') {
-  //     let path = `/`;
-  //     history.push(path);
-  //   }
-  // }, [history]);
+  useEffect(() => {
+    if (errorMessage === 'User unauthorized') {
+      let path = `/`;
+      history.push(path);
+    }
+  }, [history]);
   return (
     <div>
       <Popup isActive={isActive}>

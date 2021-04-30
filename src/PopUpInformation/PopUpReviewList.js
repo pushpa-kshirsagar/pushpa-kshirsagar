@@ -21,6 +21,7 @@ const PopUpReviewList = (props) => {
     setErrorMsg = null,
     headerOneBadgeTwo = '',
     inputHeaderBadge = 'primary',
+    inputHeaderBadgeTwo,
     inputHeader = 'node',
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
@@ -81,6 +82,9 @@ const PopUpReviewList = (props) => {
                   {inputHeader}&nbsp;
                   {inputHeaderBadge ? (
                     <span className={'headerBadge'}>{inputHeaderBadge}</span>
+                  ) : null}&nbsp;
+                  {inputHeaderBadgeTwo ? (
+                    <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
                   ) : null}
                 </Fragment>
               </InputLabel>

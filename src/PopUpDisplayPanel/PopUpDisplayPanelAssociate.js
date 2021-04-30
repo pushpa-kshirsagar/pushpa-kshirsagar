@@ -47,7 +47,8 @@ import {
   REVIEW_DISTINCT_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
   CREATE_INFORMATION_POPUP,
-  ASSESSEE_REVIEW_REVISE_POPUP
+  ASSESSEE_REVIEW_REVISE_POPUP,
+  NODE_POPUP_OPTION
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -185,7 +186,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+      valueArr = NODE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'associate';
     }
     if (clickValue === 'groups') {
@@ -274,7 +275,11 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = MARKETPLACE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'unread';
     }
-    if (clickValue === 'information' && popupHeaderOne === 'associate') {
+    if (
+      clickValue === 'information' &&
+      popupHeaderOne === 'associate' &&
+      (popupHeaderOneBadgeOne === 'review' || popupHeaderOneBadgeOne === 'revise')
+    ) {
       dispatch({ type: LOADER_START });
       dispatch({
         type: GET_ASSOCIATE_INFO_SAGA,
@@ -358,6 +363,15 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (clickValue === 'create' && popupHeaderOne === 'types') {
       revisePopupHeaderOne = secondaryOptionCheckValue;
       revisepopupHeaderOneBadgeOne = 'type';
+      revisepopupHeaderOneBadgeTwo = 'create';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = CREATE_INFORMATION_POPUP;
+      reviseSecondaryOptionCheckValue = 'key';
+    }
+    if (clickValue === 'create' && popupHeaderOne === 'nodes') {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisepopupHeaderOneBadgeOne = 'node';
       revisepopupHeaderOneBadgeTwo = 'create';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
@@ -715,6 +729,13 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'TYPECREATE' }
+      });
+      clearMiddlePaneInfo();
+    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'node') {
+      
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'NODECREATE' }
       });
       clearMiddlePaneInfo();
     } else {

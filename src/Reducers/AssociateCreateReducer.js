@@ -67,6 +67,11 @@ const initialState = {
     }
   },
   informationContact: {
+    associateAddressWebsite: {
+      associateAddressWebsitePrimary: '',
+      associateAddressWebsiteSecondary: ''
+    },
+    associateAddressWebsiteVerification: false,
     associateAddressWorkPrimary: {
       associateAddressCountryRegion: '',
       associateAddressProvinceState: '',
@@ -76,7 +81,24 @@ const initialState = {
       associateAddressCommunication: false,
       associateAddressVerification: false
     },
+    associateAddressWorkSecondary: {
+      associateAddressCountryRegion: '',
+      associateAddressProvinceState: '',
+      associateAddressPostcode: '',
+      associateAddressCity: '',
+      associateAddress: '',
+      associateAddressCommunication: false,
+      associateAddressVerification: false
+    },
     associateTelephoneWorkPrimary: {
+      associateTelephoneCountryRegion: '',
+      associateTelephoneAreaCity: '',
+      associateTelephoneNumber: '',
+      associateTelephoneExtension: '',
+      associateTelephoneCommunication: false,
+      associateTelephoneVerification: false
+    },
+    associateTelephoneWorkSecondary: {
       associateTelephoneCountryRegion: '',
       associateTelephoneAreaCity: '',
       associateTelephoneNumber: '',

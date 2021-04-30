@@ -457,7 +457,8 @@ export const getAssesseeGroupAssesseeDistinctApiCall = (
   targetValue,
   selectedTagValue,
   searchStr,
-  isScan
+  isScan,
+  isMiddlePaneList
 ) => {
   let reqBody = getAssesseeGroupAssesseeReqObj(
     selectedAssociateInfo,
@@ -493,7 +494,7 @@ export const getAssesseeGroupAssesseeDistinctApiCall = (
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
-      isMiddlePaneList: true
+      isMiddlePaneList: isMiddlePaneList
     }
   });
 };

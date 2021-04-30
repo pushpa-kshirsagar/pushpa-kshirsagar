@@ -29,8 +29,14 @@ import {
   SET_SECONDARY_CREATE_OPTION_VALUE,
   FILTERMODE
 } from '../actionType';
-import { getAssesseeGroupAssesseeDistinctApiCall, getAssesseeRoleAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
-import { getAssociateGroupAssociateDistinctApiCall, getAssociateRoleAssociateDistinctApiCall } from '../Actions/AssociateModuleAction';
+import {
+  getAssesseeGroupAssesseeDistinctApiCall,
+  getAssesseeRoleAssesseeDistinctApiCall
+} from '../Actions/AssesseeModuleAction';
+import {
+  getAssociateGroupAssociateDistinctApiCall,
+  getAssociateRoleAssociateDistinctApiCall
+} from '../Actions/AssociateModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -495,9 +501,10 @@ const PopUpMiddlePaneList = (props) => {
         countPage,
         dispatch,
         dataVal,
-        selectedTagValue,
+        selectedTagValue, //group id
         '',
-        false
+        false,
+        true
       );
       dispatch({
         type: FILTERMODE,

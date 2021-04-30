@@ -586,6 +586,43 @@ export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
   },
   { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
 ];
+export const NODE_POPUP_OPTION = [
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: false },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary', disabled: true },
+  {
+    data: 'assessments',
+    dataValue: 'assessments',
+    optionClass: 'optionSecondary',
+    disabled: true
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionSecondary',
+    disabled: true
+  },
+  { data: 'associate', dataValue: 'associate', optionClass: 'optionSecondary', disabled: false }
+];
 export const EXCHANGE_POPUP_OPTION = [
   { data: 'download', dataValue: 'download', optionClass: 'optionPrimary', disabled: false },
   {

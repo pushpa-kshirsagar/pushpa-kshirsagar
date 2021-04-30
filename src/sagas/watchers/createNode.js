@@ -1,16 +1,16 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   CLEAR_TYPE_REDUCER_STATE,
-  CREATE_TYPE_SAGA,
+  CREATE_NODE_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { ASSESSMENT_TYPE_CREATE_URL, ASSIGNMENT_TYPE_CREATE_URL } from '../../endpoints';
+import { NODE_CREATE_URL } from '../../endpoints';
 
-const createTypeApi = async (requestObj) => {
+const createNodeApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -18,34 +18,26 @@ const createTypeApi = async (requestObj) => {
     }),
     body: JSON.stringify(requestObj.data)
   };
-  let URL = '';
-  if (requestObj.data.whichTypeCreate === 'assessments') {
-    URL = ASSESSMENT_TYPE_CREATE_URL;
-  }
-  if (requestObj.data.whichTypeCreate === 'assignments') {
-    URL = ASSIGNMENT_TYPE_CREATE_URL;
-  }
-
-  const response = await fetch(URL, requestOptions);
+  const response = await fetch(requestObj.URL, requestOptions);
   const json = await response.json();
   return json;
 };
 
-function* workerCreateTypeSaga(data) {
+function* workerCreateNodeSaga(data) {
   try {
-    const userResponse = yield call(createTypeApi, { data: data.payload });
+    const userResponse = yield call(createNodeApi, { data: data.payload, URL: NODE_CREATE_URL });
     if (userResponse.responseCode === '000') {
       console.log('loading end', data.payload.whichTypeCreate);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
           headerOne: data.payload.whichTypeCreate,
-          headerOneBadgeOne: 'type',
+          headerOneBadgeOne: 'node',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0],
           reviewMode: 'revise',
-          createMode: `${data.payload.whichTypeCreate}Type`
+          createMode: `${data.payload.whichTypeCreate}Node`
         }
       });
       yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
@@ -65,7 +57,7 @@ function* workerCreateTypeSaga(data) {
   }
 }
 
-export default function* watchcreateTypeSaga() {
+export default function* watchcreateNodeSaga() {
   console.log('IN WATCH ====>');
-  yield takeLatest(CREATE_TYPE_SAGA, workerCreateTypeSaga);
+  yield takeLatest(CREATE_NODE_SAGA, workerCreateNodeSaga);
 }
