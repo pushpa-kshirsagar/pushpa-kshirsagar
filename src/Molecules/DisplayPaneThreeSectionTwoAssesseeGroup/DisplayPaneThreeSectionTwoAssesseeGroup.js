@@ -10,6 +10,8 @@ import { Paper } from '@material-ui/core';
 const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { relatedReviewListDistinctData } = useSelector((state) => state.DisplayPaneTwoReducer);
+  console.log("ASSESSEE LIST ::::::::::::>",relatedReviewListDistinctData);
   // const { informationEngagement, informationSetup } = responseObject;
   // function capitalizeFirstLetter(string) {
   //   if (!string) return '';

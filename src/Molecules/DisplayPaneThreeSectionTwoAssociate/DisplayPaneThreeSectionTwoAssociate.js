@@ -24,8 +24,14 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
   // associateAddressProvinceState: "22"
   // associateAddressVerification: false
 
-  const workAddressPrimary = `${informationContact?.associateAddressWorkPrimary?.associateAddress}, ${informationContact?.associateAddressWorkPrimary?.associateAddressCity}, ${informationContact?.associateAddressWorkPrimary?.associateAddressCountryRegion}, ${informationContact?.associateAddressWorkPrimary?.associateAddressPostcode}`;
-
+  let workAddressPrimary = `${informationContact?.associateAddressWorkPrimary?.associateAddress} ${informationContact?.associateAddressWorkPrimary?.associateAddressCity} ${informationContact?.associateAddressWorkPrimary?.associateAddressCountryRegion} ${informationContact?.associateAddressWorkPrimary?.associateAddressPostcode}`;
+  if (!workAddressPrimary.trim()) {
+    workAddressPrimary = 'No Information';
+  }
+  let workAddressSecondary = `${informationContact?.associateAddressWorkSecondary?.associateAddress} ${informationContact?.associateAddressWorkSecondary?.associateAddressCity} ${informationContact?.associateAddressWorkSecondary?.associateAddressCountryRegion} ${informationContact?.associateAddressWorkSecondary?.associateAddressPostcode}`;
+  if (!workAddressSecondary.trim()) {
+    workAddressSecondary = 'No Information';
+  }
   const list1 = [
     {
       id: 'a1',
@@ -33,11 +39,15 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationContact?.associateAddressWebsite || 'No Information'
+          textOne:
+            informationContact?.associateAddressWebsite?.associateAddressWebsitePrimary ||
+            'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationContact?.associateAddressWebsite || 'No Information'
+          textOne:
+            informationContact?.associateAddressWebsite?.associateAddressWebsiteSecondary ||
+            'No Information'
         }
       ],
       innerAssociateList: [],
@@ -53,11 +63,11 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: workAddressPrimary || 'No Information'
+          textOne: workAddressPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: 'No Information'
+          textOne: workAddressSecondary
         }
       ],
       labelTextOneOneBadgeThree: '',
@@ -75,11 +85,15 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: 'No Information'
+          textOne:
+            informationContact?.associateTelephoneWorkPrimary?.associateTelephoneNumber ||
+            'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: 'No Information'
+          textOne:
+            informationContact?.associateTelephoneWorkSecondary?.associateTelephoneNumber ||
+            'No Information'
         }
       ],
       labelTextOneOneBadgeThree: '',
