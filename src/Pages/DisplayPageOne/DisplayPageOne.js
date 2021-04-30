@@ -38,6 +38,7 @@ import AssignmentCreatePopup from '../../Molecules/PopUpCreate/AssignmentCreateP
 import AssessmentCreatePopup from '../../Molecules/PopUpCreate/AssessmentCreatePopup';
 import PopUpMessageError from '../../PopUpGeneric/PopUpMessageError';
 import { useHistory } from 'react-router-dom';
+import NodeCreatePopup from '../../Molecules/PopUpCreate/NodeCreatePopup';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -230,6 +231,7 @@ const DisplayPageOne = () => {
       )}
       {popupMode === 'assessmentsTYPECREATE' && <TypeCreatePopup headerOne={'assessments'} />}
       {popupMode === 'assignmentsTYPECREATE' && <TypeCreatePopup headerOne={'assignments'} />}
+      {popupMode === 'NODECREATE' && <NodeCreatePopup headerOne={'associate'} />}
       {popupMode === 'ASSIGNMENTCREATE' && <AssignmentCreatePopup headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <AssessmentCreatePopup headerOne={'assessment'} />}
     </>

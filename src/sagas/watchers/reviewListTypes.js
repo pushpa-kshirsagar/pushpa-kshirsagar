@@ -5,7 +5,8 @@ import {
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
   SET_CORE_TYPE_REVIEW_LIST_DATA,
-  SET_MIDDLEPANE_STATE
+  SET_MIDDLEPANE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSESSMENT_TYPE_REVIEWLIST_URL, ASSIGNMENT_TYPE_REVIEWLIST_URL } from '../../endpoints';
 
@@ -31,7 +32,7 @@ function* workerReviewAssessmentTypeListSaga(data) {
       URL: ASSESSMENT_TYPE_REVIEWLIST_URL
     });
     // const userResponse ={responseCode:'000',countTotal:30}
-    if (userResponse.responseCode === '000')
+    if (userResponse.responseCode === '000') {
       yield put({
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
@@ -39,19 +40,25 @@ function* workerReviewAssessmentTypeListSaga(data) {
         payload: userResponse.responseObject
       });
 
-    if (data.payload.isMiddlePaneList) {
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assessments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: data.payload.BadgeThree,
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assessmentsTypeDistinctReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
       yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assessments',
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: data.payload.BadgeThree,
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assessmentsTypeDistinctReviewList',
-          scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
-        }
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
 
@@ -70,7 +77,7 @@ function* workerReviewAssignmentTypeListSaga(data) {
       URL: ASSIGNMENT_TYPE_REVIEWLIST_URL
     });
     // const userResponse ={responseCode:'000',countTotal:30}
-    if (userResponse.responseCode === '000')
+    if (userResponse.responseCode === '000') {
       yield put({
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
@@ -78,19 +85,25 @@ function* workerReviewAssignmentTypeListSaga(data) {
         payload: userResponse.responseObject
       });
 
-    if (data.payload.isMiddlePaneList) {
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assignments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: data.payload.BadgeThree,
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assignmentsTypeDistinctReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
       yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assignments',
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: data.payload.BadgeThree,
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assignmentsTypeDistinctReviewList',
-          scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
-        }
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
 

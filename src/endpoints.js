@@ -110,4 +110,5 @@ export const ASSESSEE_ROLE_ASSESSEE_URL =
   'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role/asseesee-review-list';
 export const ASSOCIATE_ROLE_ASSOCIATE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/associate-review-list';
+export const NODE_CREATE_URL = '';
 // export const URL = '';

@@ -71,19 +71,21 @@ function* workerReviewListAssesseeGroupAssesseeSaga(data) {
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
         payload: userResponse.responseObject
       });
-    yield put({
-      type: SET_MIDDLEPANE_STATE,
-      payload: {
-        middlePaneHeader: data.payload.HeaderOne,
-        middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-        middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-        middlePaneHeaderBadgeThree: '',
-        middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: data.payload.HeaderOne + 'GroupAssesseeReviewList',
-        scanCount: userResponse && userResponse.countTotal,
-        showMiddlePaneState: true
-      }
-    });
+    if (data.payload.isMiddlePaneList) {
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.HeaderOne,
+          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.HeaderOne + 'GroupAssesseeReviewList',
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true
+        }
+      });
+    }
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
