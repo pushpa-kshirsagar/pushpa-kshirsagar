@@ -33,7 +33,7 @@ const AssesseeRoleCreatePopUp = () => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSEE_ROLE_SAGA, payload: requestObj });
   };
-
+console.log("ROLE ASSESSEE POPUP>>>>>>>>>.", assesseeRole);
   return (
     <div>
       <PopUpTextField

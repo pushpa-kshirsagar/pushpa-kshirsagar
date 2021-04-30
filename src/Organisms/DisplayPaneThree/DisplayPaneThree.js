@@ -25,7 +25,9 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE,
   ASSESSEE_GROUP_INFO_REVISE_SAGA,
-  ASSOCIATE_GROUP_REVISE_INFO_SAGA
+  ASSESSEE_ROLE_INFO_REVISE_SAGA,
+  ASSOCIATE_GROUP_REVISE_INFO_SAGA,
+  ASSOCIATE_ROLE_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -287,7 +289,7 @@ export const DisplayPaneThree = () => {
   const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup } = useSelector(
     (state) => state.GroupCreateReducer
   );
-
+  const { associateRole, assesseeRole } = useSelector((state) => state.RoleCreateReducer);
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
     { label: 'first', onClick: onClickFooter, Icon: FirstPage },
@@ -323,6 +325,38 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSESSEE_INFO_REVISE_SAGA,
         payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne: 'assessee', reqBody }
+      });
+    } else if (headerOneBadgeOne === 'role' && headerOne === 'assessees') {
+      console.log("ASSESSEES ROLE REVISE");
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        assesseeRole: {
+          id,
+          informationBasic: assesseeRole.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSEE_ROLE_INFO_REVISE_SAGA,
+        payload: { headerOne: 'assessees', reqBody }
+      });
+    } else if (headerOneBadgeOne === 'role' && headerOne === 'associates') {
+      console.log("ASS0CIATE ROLE REVISE");
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        associateRole: {
+          id,
+          informationBasic: associateRole.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSOCIATE_ROLE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'associates', reqBody }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'associates') {
       const { associateId, id } = responseObject;
@@ -533,7 +567,6 @@ export const DisplayPaneThree = () => {
   const reviseAssesseeBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName, informationBasic);
-    // dispatch({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
     if (labelName === 'name') {
       dispatch({
         type: ASSESSEE_SIGN_ON,
@@ -550,7 +583,6 @@ export const DisplayPaneThree = () => {
   const reviseAssesseeRoleBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
-    dispatch({ type: SET_ASSESSEE_ROLE_REDUCER_STATE, payload: informationBasic });
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,

@@ -4,6 +4,7 @@ import {
   CREATE_ASSESSEE_ROLE_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
+  SET_ASSESSEE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
@@ -40,6 +41,10 @@ function* workerCreateAssesseeRoleSaga(data) {
           reviewMode: 'revise',
           createMode: 'assesseesRole'
         }
+      });
+      yield put({
+        type: SET_ASSESSEE_ROLE_REDUCER_STATE,
+        payload: userResponse.responseObject[0].informationBasic
       });
       yield put({ type: POPUP_CLOSE });
     } else {

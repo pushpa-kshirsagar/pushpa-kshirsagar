@@ -4,6 +4,8 @@ import {
   CREATE_GROUP_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
+  SET_ASSESSEE_GROUP_REDUCER_STATE,
+  SET_ASSOCIATE_GROUP_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE
 } from '../../actionType';
@@ -57,10 +59,22 @@ function* workerCreateGroupSaga(data) {
           createMode: `${data.payload.whichGroupCreate}Group`
         }
       });
+      if (data.payload.whichGroupCreate === 'assessees') {
+        yield put({
+          type: SET_ASSESSEE_GROUP_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
+      if (data.payload.whichGroupCreate === 'associates') {
+        yield put({
+          type: SET_ASSOCIATE_GROUP_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
     }
     yield put({ type: LOADER_STOP });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    yield put({ type: CLEAR_GROUP_REDUCER_STATE });
+    // yield put({ type: CLEAR_GROUP_REDUCER_STATE });
     yield put({ type: POPUP_CLOSE });
   } catch (e) {
     console.log('ERROR==', e);

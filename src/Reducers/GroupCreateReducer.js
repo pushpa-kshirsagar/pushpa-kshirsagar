@@ -99,7 +99,7 @@ const initialState = {
 };
 
 const GroupCreateReducer = (istate = initialState, action) => {
-  console.log(action.type);
+  console.log(action);
   switch (action.type) {
     case SET_ASSESSEE_GROUP_REDUCER_STATE:
       return {
