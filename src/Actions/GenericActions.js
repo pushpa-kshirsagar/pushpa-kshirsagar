@@ -1948,3 +1948,12 @@ export const makeAssessmentScanRequestObject = (
 
   return regObj;
 };
+
+export const makeAssociateNodeObj = (selectedAssociateInfo, filterKey, numberPage, countPage) => {
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+  };
+  return requestObj;
+};

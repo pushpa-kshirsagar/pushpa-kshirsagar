@@ -31,7 +31,7 @@ function* workerCreateNodeSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: data.payload.whichTypeCreate,
+          headerOne: 'associate',
           headerOneBadgeOne: 'node',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',

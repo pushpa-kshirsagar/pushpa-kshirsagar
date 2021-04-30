@@ -26,11 +26,13 @@ import {
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_POPUP_SINGLE_STATE,
-  CLEAR_ASSESSEE_INFO
+  CLEAR_ASSESSEE_INFO,
+  GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
   makeAssociateGroupObj,
+  makeAssociateNodeObj,
   makeAssociateReviewListRequestObject,
   makeAssociateRoleObj
 } from '../Actions/GenericActions';
@@ -175,6 +177,38 @@ const PopUpAssociatesModule = (props) => {
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: targetValue,
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'NoCard' }
+      });
+      dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+    }
+    else if (targetValue === 'nodes') {
+      let requestObj = makeAssociateNodeObj(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        0,
+        countPage
+      );
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'associateNodeDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
         payload: {
           request: requestObj,
           BadgeOne: targetValue,

@@ -183,6 +183,7 @@ const AssesseeDistinctReviewList = (props) => {
                 textTwo={item.informationBasic.assesseeAlias}
                 isTooltipActive={false}
                 onClickEvent={openAssesseeListPopup}
+                isSelectActive={false}
               />
             </div>
           );

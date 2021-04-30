@@ -32,7 +32,7 @@ const ReviewList = (props) => {
           id={id}
           status={actualStatus}
           data-value={id}
-          onClick={onClickEvent}
+          onClick={isSelectActive ? null : onClickEvent}
           style={{ backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '' }}
         >
           <div className={['measureBox', 'heightInherit', 'componentinnerdiv-iguru'].join(' ')}>

@@ -101,14 +101,17 @@ export const ASSESSEE_CHANGE_PASSWORD_URL =
 export const ASSOCIATE_INFO_REVISE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-distinct/revise';
 export const ASSESSEE_GROUP_ASSESSEE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/asseesee-review-list';
+  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/assessee/review-list';
 export const ASSOCIATE_GROUP_ASSOCIATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/associate-review-list';
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/associate/sreview-list';
 export const ASSOCIATE_GROUP_INFO_REVISE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/revise';
 export const ASSESSEE_ROLE_ASSESSEE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role/asseesee-review-list';
+  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role/asseesee/review-list';
 export const ASSOCIATE_ROLE_ASSOCIATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/associate-review-list';
-export const NODE_CREATE_URL = '';
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/associate/review-list';
+export const NODE_CREATE_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/create';
+export const ASSOCIATES_NODE_URL =
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/external/review-list';
 // export const URL = '';
