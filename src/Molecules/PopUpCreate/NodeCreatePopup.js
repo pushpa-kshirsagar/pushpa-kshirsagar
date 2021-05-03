@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
@@ -8,7 +8,8 @@ import {
   CREATE_NODE_SAGA,
   SET_NODE_REDUCER_STATE,
   LOADER_START,
-  CLEAR_NODE_REDUCER_STATE
+  CLEAR_NODE_REDUCER_STATE,
+  SET_NODE_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
@@ -17,7 +18,11 @@ const NodeCreatePopup = (props) => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { nodeInformation } = useSelector((state) => state.NodeCreateReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, coreNodeReviewListData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
+  console.log(nodeInformation);
+  const [roleSelectedError, setRoleSelectedError] = useState('');
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_NODE_REDUCER_STATE });
@@ -38,7 +43,33 @@ const NodeCreatePopup = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_NODE_SAGA, payload: reqBody });
   };
-
+  const updateParentNode = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
+    let tagId = e.currentTarget.getAttribute('tag');
+    let tagIdArr =
+      nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary;
+    if (tagIdArr.includes(tagId)) {
+      setRoleSelectedError('');
+      document.getElementById(tagId).style.backgroundColor = 'white';
+      tagIdArr = tagIdArr.filter(function (number) {
+        return number !== tagId;
+      });
+    } else {
+      var arr = [];
+      tagIdArr = [...arr];
+      tagIdArr.push(tagId);
+      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_NODE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationFramework',
+        stateName: 'associateNodeAscendant',
+        actualStateName: 'associateNodeAscendantPrimary',
+        value: tagIdArr
+      }
+    });
+  };
   return (
     <div>
       <PopUpTextField
@@ -103,14 +134,16 @@ const NodeCreatePopup = (props) => {
         inputHeaderBadge={'ascendant'}
         inputHeaderBadgeTwo={'primary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreNodeReviewListData}
+        isRequired={true}
+        selectedList={
+          nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary
+        }
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={updateParentNode}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation

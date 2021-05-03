@@ -1,4 +1,8 @@
-import { SET_NODE_REDUCER_STATE, CLEAR_NODE_REDUCER_STATE } from '../actionType';
+import {
+  SET_NODE_REDUCER_STATE,
+  CLEAR_NODE_REDUCER_STATE,
+  SET_NODE_DYNAMIC_SINGLE_STATE
+} from '../actionType';
 
 const initialState = {
   nodeInformation: {
@@ -30,7 +34,7 @@ const initialState = {
     },
     informationFramework: {
       associateNodeAscendant: {
-        associateNodeAscendantPrimary: '608bab71a8eac62ab2de85db',
+        associateNodeAscendantPrimary: [],
         associateNodeAscendantSecondary: []
       }
     }
@@ -46,6 +50,20 @@ const NodeCreateReducer = (istate = initialState, action) => {
         nodeInformation: {
           ...istate.nodeInformation,
           informationBasic: action.payload
+        }
+      };
+    case SET_NODE_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        nodeInformation:{
+          ...istate.nodeInformation,
+          [action.payload.objectName]: {
+            ...istate.nodeInformation[action.payload.objectName],
+            [action.payload.stateName]: {
+              ...istate.nodeInformation[action.payload.objectName][action.payload.stateName],
+              [action.payload.actualStateName]: action.payload.value    
+            }
+          }
         }
       };
     case CLEAR_NODE_REDUCER_STATE:

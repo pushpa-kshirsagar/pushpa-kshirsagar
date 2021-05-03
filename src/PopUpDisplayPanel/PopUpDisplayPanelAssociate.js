@@ -34,7 +34,9 @@ import {
   CLEAR_ASSESSEE_INFO,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
-  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
+  INTERNAL_NODE_LIST_SAGA,
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -64,7 +66,8 @@ import {
   makeAdministratorsReviewListRequestObject,
   makeManagersReviewListRequestObject,
   makeAdministratorRoleCreateObj,
-  makeManagerRoleCreateObj
+  makeManagerRoleCreateObj,
+  makeInternalNodeObj
 } from '../Actions/GenericActions';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
@@ -732,7 +735,13 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'node') {
-      
+      let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: { request: requestObj, isMiddlePaneList: false }
+      });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'NODECREATE' }

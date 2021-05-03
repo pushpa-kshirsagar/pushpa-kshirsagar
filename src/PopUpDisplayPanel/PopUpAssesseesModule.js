@@ -29,8 +29,16 @@ import {
   SET_ASSESSEE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { makeAssesseeGroupObj, makeAssesseeRoleCreateObj, makeAssesseeRoleObj } from '../Actions/GenericActions';
-import { getAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
+import {
+  makeAssesseeGroupObj,
+  makeAssesseeRoleCreateObj,
+  makeAssesseeRoleObj
+} from '../Actions/GenericActions';
+import {
+  getAssesseeDistinctApiCall,
+  getAssesseeRoleAssesseeDistinctApiCall,
+  getAssesseeRoleDistinctApiCall
+} from '../Actions/AssesseeModuleAction';
 
 const PopUpAssesseesModule = (props) => {
   const {
@@ -55,7 +63,7 @@ const PopUpAssesseesModule = (props) => {
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    
+
     if (targetValue === 'information') {
       dispatch({
         type: SET_POPUP_SINGLE_STATE,
@@ -97,7 +105,7 @@ const PopUpAssesseesModule = (props) => {
           value: []
         }
       });
-       dispatch({
+      dispatch({
         type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
         payload: {
           stateName: 'assesseeRole',
@@ -136,31 +144,13 @@ const PopUpAssesseesModule = (props) => {
       dispatch({ type: ASSESSEE_INFO_CREATE });
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
-      let requestObj = makeAssesseeRoleObj(
+      getAssesseeRoleDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        targetValue,
+        dispatch
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assesseeRoleDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
       dispatch({
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'NoCard' }

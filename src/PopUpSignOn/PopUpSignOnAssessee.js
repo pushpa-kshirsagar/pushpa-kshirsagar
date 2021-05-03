@@ -43,6 +43,7 @@ import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import PopUpDatePicker from '../PopUpInformation/PopUpDatePicker';
 import PopUpCommunity from '../PopUpInformation/PopUpCommunity';
 import PopUpBirthplace from '../PopUpInformation/PopUpBirthplace';
+import { DEFAULT_ROLE_ID } from '../endpoints';
 
 const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
@@ -75,40 +76,33 @@ const PopUpSignOnAssessee = (props) => {
     }
   }, [assesseeInfo.assesseeInformationData, history]);
   useEffect(() => {
-    let otherRole = [];
+    // let otherRole = [];
 
-    otherRole = coreRoleReviewListData.filter(function (value) {
-      return value.informationSetup.assesseeRoleDefault == false;
-    });
-    setAssignRoleArr(otherRole);
-    console.log(assignRoleArr);
-    console.log('otherRole');
+    // otherRole = coreRoleReviewListData.filter(function (value) {
+    //   return value.informationSetup.assesseeRoleDefault == false;
+    // });
+    // setAssignRoleArr(otherRole);
+    // console.log(assignRoleArr);
+    // console.log('otherRole');
+    if (headerOne === 'assessee') {
+      assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary.push(DEFAULT_ROLE_ID);
+    }
   }, [coreRoleReviewListData]);
   const onClickYes = async () => {
-    var defaultroleArr = coreRoleReviewListData
-      .filter(function (data) {
-        if (data.informationSetup.assesseeRoleDefault) {
-          return data.id; // skip
-        }
-        return false;
-      })
-      .map(function (data) {
-        return data.id;
-      });
-    let finalRoleArr = [
-      ...assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary,
-      ...defaultroleArr
-    ];
-  
-    console.log(finalRoleArr)
-    dispatch({
-      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-      payload: {
-        stateName: 'assesseeRole',
-        actualStateName: 'assesseeRolePrimary',
-        value: finalRoleArr
-      }
-    });
+    // var defaultroleArr = coreRoleReviewListData
+    //   .filter(function (data) {
+    //     if (data.informationSetup.assesseeRoleDefault) {
+    //       return data.id; // skip
+    //     }
+    //     return false;
+    //   })
+    //   .map(function (data) {
+    //     return data.id;
+
+    // let finalRoleArr = [
+    //   ...assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary,
+    //   DEFAULT_ROLE_ID
+    // ];
     const {
       informationBasic,
       informationAllocation,
@@ -118,12 +112,16 @@ const PopUpSignOnAssessee = (props) => {
       informationEngagement,
       tempCommunication
     } = assesseeInfo;
+    if (headerOne === 'administrator' || headerOne === 'manager') {
+      informationAllocation.assesseeRole.assesseeRolePrimary.push(DEFAULT_ROLE_ID);
+    }
     if (tempCommunication === 'email address (primary)') {
       informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication = true;
     }
     if (tempCommunication === 'email address (secondary)') {
       informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
+
     //6083d82a5c42683849ce14d0 parent associate id
     let requestObect = {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
@@ -143,30 +141,6 @@ const PopUpSignOnAssessee = (props) => {
     console.log('loading start');
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSEE_SAGA, payload: requestObect });
-    /* let attributeList = [];
-    const dataEmail = {
-      Name: 'email',
-      Value: 'pushpa.k@boppotechnologies.com' // 'shivam.s@boppotechnologies.com' //'pushpa.k@boppotechnologies.com'
-    };
-    const attributeEmail = new CognitoUserAttribute(dataEmail);
-    attributeList.push(attributeEmail);
-    // const preferredUsername = {
-    //   Name: 'preferred_username',
-    //   Value: 'pushpa.k@boppotechnologies.com'
-    // };
-    // const attributePreferredUsername = new CognitoUserAttribute(preferredUsername);
-    // attributeList.push(attributePreferredUsername);
-    //TODO: Cognito SIGN-UP
-    userPool.signUp(
-      'pushpa.k@boppotechnologies.com', //username//shivam-sharma //pushpa-boppo //pushpa-admin
-      'Admin@123', //password
-      attributeList, // required attribute list
-      null,
-      (error, data) => {
-        console.log('SIGN-ON DATA===>', data);
-        console.log('SIGN-ON ERROR===>', error);
-      }
-    );*/
   };
 
   const onClickCancelYes = () => {
@@ -201,8 +175,8 @@ const PopUpSignOnAssessee = (props) => {
   };
 
   const updateRoleIdObject = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary);
+    // console.log(e.currentTarget.getAttribute('tag'));
+    // console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary);
     let roleid = e.currentTarget.getAttribute('tag');
     let roleArr = assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary;
     console.log(roleArr.includes(roleid));
@@ -360,14 +334,10 @@ const PopUpSignOnAssessee = (props) => {
         selectedList={assesseeInfo?.informationAllocation?.assesseeRole.assesseeRolePrimary}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
-        ListData={
-          headerOne === 'administrator' || headerOne === 'manager'
-            ? assignRoleArr
-            : coreRoleReviewListData
-        }
+        ListData={coreRoleReviewListData}
         textOne={'assesseeRoleName'}
         textTwo={'assesseeRoleDescription'}
-        onClickEvent={updateRoleIdObject}
+        onClickEvent={headerOne === 'assessee' ? null : updateRoleIdObject}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddressEmail

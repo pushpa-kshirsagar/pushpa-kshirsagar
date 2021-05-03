@@ -41,7 +41,7 @@ div.rst__node {
     color: rgba(0, 0, 0, 0.87) !important;
     font-size: 1.6rem !important;
     font-weight: unset !important;
-    padding-bottom: 20px;
+    padding-bottom: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
   }

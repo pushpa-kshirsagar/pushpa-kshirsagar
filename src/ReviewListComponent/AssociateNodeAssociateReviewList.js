@@ -35,42 +35,19 @@ const AssociateNodeAssociateReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
-    treeData = [
+    dummytreeData = [
       {
         id: '599d09d7e4b02ef63fbad571',
-        userGroupId: '599d09d7e4b02ef63fbad570',
         parentOrgHierarchyId: null,
         description: 'Boppo Technologies',
-        location: null,
-        order: 1,
-        isDefault: true,
-        assign: null,
-        name: 'Boppo Technologies',
-        nodeManagers: null,
         children: [
           {
             id: '59ddf74ae4b0bbdc4d706c78',
-            userGroupId: '59ddf74ae4b0bbdc4d706c77',
             parentOrgHierarchyId: '599d09d7e4b02ef63fbad571',
-            description: 'Management Team',
-            location: null,
-            order: 2,
-            isDefault: false,
-            assign: null,
-            name: 'Management Team',
-            nodeManagers: null,
             children: [
               {
                 id: '59ddf784e4b0bbdc4d706c81',
-                userGroupId: '59ddf784e4b0bbdc4d706c80',
                 parentOrgHierarchyId: '59ddf74ae4b0bbdc4d706c78',
-                description: 'Support Team',
-                location: 'Bangalore',
-                order: 3,
-                isDefault: false,
-                assign: null,
-                name: 'Support Team',
-                nodeManagers: null,
                 children: [],
                 title: 'Support Team',
                 expanded: true,
@@ -91,46 +68,12 @@ const AssociateNodeAssociateReviewList = (props) => {
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const [isFetching, setIsFetching] = useState(false);
-  useEffect(() => {
-    document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
-  }, []);
-  const handleScroll = (event) => {
-    var targetPt = event.target;
-    if (
-      Math.ceil(targetPt.scrollHeight - targetPt.scrollTop) !== targetPt.clientHeight ||
-      isFetching
-    )
-      return;
-    setIsFetching(true);
-    console.log(isFetching);
-  };
-  const fetchData = async () => {
-    if (reviewListDistinctData.length < scanCount) {
-      let obj = {
-        ...reviewListReqObj,
-        numberPage: numberPage
-      };
-      dispatch({
-        type: GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
-        payload: {
-          request: obj,
-          BadgeOne: 'distinct',
-          BadgeTwo: secondaryOptionCheckValue
-        }
-      });
-      dispatch({ type: SET_PAGE_COUNT, payload: numberPage + 1 });
-    }
-  };
-  useEffect(() => {
-    console.log(reviewListDistinctData);
-    if (!isFetching) return;
-    fetchMoreListItems();
-  }, [isFetching]);
+  const [nodeTreeData, setTreeData] = useState([]);
 
-  const fetchMoreListItems = () => {
-    fetchData();
-    setIsFetching(false);
-  };
+  useEffect(() => {
+    setTreeData(dummytreeData);
+  }, []);
+
   const siftApiCall = (siftKey) => {
     let requestObect = makeAssociateReviewListRequestObject(
       selectedAssociateInfo,
@@ -187,25 +130,40 @@ const AssociateNodeAssociateReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  const openNodeListPopup = (node, event, target, canUpdate) => {
+    console.log(node);
+    console.log(event);
+    let selectedGroup = {};
+    // if (target === 'hirarchy') {
+    //   selectedGroup = {
+    //     id: event.node.userGroupId,
+    //     name: event.node.name,
+    //     description: event.node.description,
+    //     nodeid: event.node.id,
+    //     order: event.node.order
+    //   };
+    // }
+    console.log(selectedGroup);
+  };
   return (
     <div>
-      {treeData && (
+      {nodeTreeData && (
         <div style={{ minheight: 'calc(100vh - 135px)' }}>
           <SortableTree
-            treeData={treeData}
-            onChange={null}
+            treeData={nodeTreeData}
+            onChange={(treeData) => setTreeData(treeData)}
             theme={FileExplorerTheme}
             isVirtualized={false}
             rowHeight={55}
             scaffoldBlockPxWidth={31}
             slideRegionSize={50}
-            canDrag={({ node }) => null}
-            onMoveNode={({ node }) => null}
+            canDrag={({ node }) => node.parentOrgHierarchyId!==null?true:false}
+            // onMoveNode={({ node }) => changedNode(node) }
             generateNodeProps={(node) => ({
               onClick: (event) => {
-                // if (event.target.type != 'button') {
-                //   this.props.openNodeRelatedAssesseeList(node, event, 'hirarchy', canUpdate);
-                // }
+                if (event.target.type !== 'button') {
+                  openNodeListPopup(node, event, 'hirarchy', true);
+                }
               }
             })}
           />

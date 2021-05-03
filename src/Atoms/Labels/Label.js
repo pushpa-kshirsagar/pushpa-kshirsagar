@@ -22,8 +22,9 @@ const Label = (props) => {
         data-value={text}
         className={`${className} text-style`}
         onClick={onClickLabel}
+        dangerouslySetInnerHTML={{ __html: text }}
       >
-        {text}
+        {/* {text} */}
       </p>
     </div>
   );

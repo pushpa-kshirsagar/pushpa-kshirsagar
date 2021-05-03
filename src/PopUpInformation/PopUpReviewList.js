@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
+import { assesseeRole } from '../Actions/AssesseeModuleAction';
 const PopUpReviewList = (props) => {
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
@@ -82,7 +83,8 @@ const PopUpReviewList = (props) => {
                   {inputHeader}&nbsp;
                   {inputHeaderBadge ? (
                     <span className={'headerBadge'}>{inputHeaderBadge}</span>
-                  ) : null}&nbsp;
+                  ) : null}
+                  &nbsp;
                   {inputHeaderBadgeTwo ? (
                     <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
                   ) : null}
@@ -97,7 +99,11 @@ const PopUpReviewList = (props) => {
           {ListData &&
             ListData.map((index, option) => (
               <ReviewList
-                textOne={index.informationBasic[textOne]}
+                textOne={
+                  inputHeader === 'role'
+                    ? assesseeRole(index.informationBasic[textOne])
+                    : index.informationBasic[textOne]
+                }
                 textTwo={index.informationBasic[textTwo]}
                 id={index.id}
                 tag={index.id}

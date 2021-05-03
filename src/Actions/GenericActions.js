@@ -590,21 +590,6 @@ export const makeManagerRoleCreateObj = (
             }
           }
         ]
-      },
-      {
-        condition: 'or',
-        searchBy: [
-          {
-            dataType: 'boolean',
-            conditionColumn: 'informationSetup.assesseeRoleDefault',
-            conditionValue: {
-              condition: 'eq',
-              value: {
-                from: true
-              }
-            }
-          }
-        ]
       }
     ]
   };
@@ -650,21 +635,6 @@ export const makeAdministratorRoleCreateObj = (
               condition: 'ct',
               value: {
                 from: 'administrator'
-              }
-            }
-          }
-        ]
-      },
-      {
-        condition: 'or',
-        searchBy: [
-          {
-            dataType: 'boolean',
-            conditionColumn: 'informationSetup.assesseeRoleDefault',
-            conditionValue: {
-              condition: 'eq',
-              value: {
-                from: true
               }
             }
           }
@@ -1949,11 +1919,20 @@ export const makeAssessmentScanRequestObject = (
   return regObj;
 };
 
-export const makeAssociateNodeObj = (selectedAssociateInfo, filterKey, numberPage, countPage) => {
+export const makeInternalNodeObj = (selectedAssociateInfo, filterKey, numberPage, countPage) => {
   let requestObj = {
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+  };
+  return requestObj;
+};
+export const makeAssociateNodeObj = (selectedAssociateInfo, filterKey, numberPage, countPage) => {
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    status: 'ACTIVE'
   };
   return requestObj;
 };
