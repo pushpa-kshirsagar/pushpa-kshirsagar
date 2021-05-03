@@ -19,7 +19,7 @@ import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfi
 import { assesseeRole } from '../Actions/AssesseeModuleAction';
 const AssesseeRoleDistinctReviewList = (props) => {
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue, countPage,selectedAssociateInfo } = useSelector(
+  const { secondaryOptionCheckValue, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.AssesseeCreateReducer
   );
   const {
@@ -28,7 +28,8 @@ const AssesseeRoleDistinctReviewList = (props) => {
     middlePaneHeaderBadgeOne,
     reviewListDistinctData,
     reviewListReqObj,
-    middlePaneSelectedValue
+    middlePaneSelectedValue,
+    middlePaneHeader
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -73,7 +74,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssesseeRoleObj(selectedAssociateInfo,siftKey, 0, countPage);
+    let requestObect = makeAssesseeRoleObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
@@ -103,15 +104,20 @@ const AssesseeRoleDistinctReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
+      obj.data === 'assessees'
+        ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
+        : obj
+    );
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessees',
+        popupHeaderOne: middlePaneHeader,
         popupHeaderOneBadgeOne: 'role',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: popupContentArrValue,
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });
@@ -119,7 +125,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+        value: popupContentArrValue
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

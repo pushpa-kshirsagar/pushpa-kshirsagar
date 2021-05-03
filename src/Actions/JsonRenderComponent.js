@@ -12,8 +12,8 @@ const JsonRenderComponent = (props) => {
   } = props;
   const { popupContentArrValue } = useSelector((state) => state.PopUpReducer);
   let popUpOption = currentPopUpOption.length > 0 ? currentPopUpOption : popupContentArrValue;
-  console.log("currentPopUpOption",currentPopUpOption)
-  console.log("currentPopUpOption",popupContentArrValue)
+  // console.log("currentPopUpOption",currentPopUpOption)
+  // console.log("currentPopUpOption",popupContentArrValue)
   return (
     <>
       <div id="dialog-description">

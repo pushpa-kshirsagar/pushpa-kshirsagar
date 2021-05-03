@@ -81,6 +81,8 @@ const initialState = {
     selection: SELECT_OPTION_PUPUP,
     create: ASSESSEE_REVIEW_REVISE_POPUP,
     assessees: REVIEW_DISTINCT_POPUP_OPTION,
+    administrators: REVIEW_DISTINCT_POPUP_OPTION,
+    managers: REVIEW_DISTINCT_POPUP_OPTION,
     assessments: REVIEW_DISTINCT_POPUP_OPTION,
     assignments: ASSIGNMENT_DISTINCT_POPUP,
     associates: REVIEW_DISTINCT_POPUP_OPTION
@@ -194,10 +196,15 @@ const PopUpReducer = (istate = initialState, action) => {
         };
       }
     case SET_MIDDLEPANE_SECONDARY_OPTION: {
-      let arrVal = istate.secondaryPopUpOptions[action.payload.badgeValue];
+      let arrVal =
+        action.payload.keyValue === 'reviseKey' || action.payload.keyValue === 'reviewKey'
+          ? istate.secondaryPopUpOptions[action.payload.keyValue]
+          : istate.secondaryPopUpOptions[action.payload.badgeValue];
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
+          action.payload.badgeValue === 'administrators' ||
+          action.payload.badgeValue === 'managers' ||
           action.payload.badgeValue === 'assessees' ||
           action.payload.badgeValue === 'assessments' ||
           action.payload.badgeValue === 'assignments' ||

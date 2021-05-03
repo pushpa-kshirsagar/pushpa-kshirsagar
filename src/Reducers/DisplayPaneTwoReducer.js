@@ -13,8 +13,10 @@ import {
   SET_CORE_GROUP_REVIEW_LIST_DATA,
   SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_TYPE_REVIEW_LIST_DATA,
+  SET_CORE_NODE_REVIEW_LIST_DATA,
   RELATED_REVIEWLIST_DISTINCT_DATA,
-  SET_RELATED_REQUEST_OBJECT
+  SET_RELATED_REQUEST_OBJECT,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 
 const initialState = {
@@ -40,10 +42,12 @@ const initialState = {
   coreGroupReviewListData: [],
   coreRoleReviewListData: [],
   coreTypeReviewListData: [],
+  coreNodeReviewListData: [],
   relatedReviewListDistinctData: [],
   coreGroupReviewListReqObj: null,
   coreRoleReviewListReqObj: null,
   coreTypeReviewListReqObj: null,
+  coreNodeReviewListReqObj: null,
   reviewListReqObj: null,
   relatedReviewListReqObj: null,
   middlePaneSelectedValue: '',
@@ -135,12 +139,23 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         ...istate,
         coreTypeReviewListData: [...istate.coreTypeReviewListData, ...action.payload]
       };
-
     case SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT:
       return {
         ...istate,
         coreTypeReviewListReqObj: action.payload,
         coreTypeReviewListData: []
+      };
+    case SET_CORE_NODE_REVIEW_LIST_DATA:
+      return {
+        ...istate,
+        coreNodeReviewListData: [...istate.coreNodeReviewListData, ...action.payload]
+      };
+
+    case SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT:
+      return {
+        ...istate,
+        coreNodeReviewListReqObj: action.payload,
+        coreNodeReviewListData: []
       };
     case SET_REQUEST_OBJECT:
       return {

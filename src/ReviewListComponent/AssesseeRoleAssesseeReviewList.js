@@ -14,7 +14,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import { getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
+import { assesseeRole, getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
 import { assesseeStatus } from '../Actions/StatusAction';
 
 const AssesseeRoleAssesseeReviewList = (props) => {
@@ -26,7 +26,8 @@ const AssesseeRoleAssesseeReviewList = (props) => {
     selectedAssociateInfo,
     relatedReviewListDistinctData,
     middlePaneHeaderBadgeOne,
-    middlePaneHeaderBadgeTwo
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeader
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   {
@@ -78,7 +79,7 @@ const AssesseeRoleAssesseeReviewList = (props) => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'assessees',
+        middlePaneHeader: middlePaneHeader,
         middlePaneHeaderBadgeOne: 'role',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
@@ -148,7 +149,7 @@ const AssesseeRoleAssesseeReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessee',
+        popupHeaderOne: middlePaneHeader,
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -170,7 +171,7 @@ const AssesseeRoleAssesseeReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.assesseeRoleName}
+          textOneOne={assesseeRole(listDistinctData.assesseeRoleName)}
           textTwoOne={listDistinctData.assesseeRoleDescription}
           IconOne={CrossIcon}
           isIcon={true}

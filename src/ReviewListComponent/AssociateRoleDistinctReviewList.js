@@ -86,7 +86,6 @@ const AssociateRoleDistinctReviewList = (props) => {
         isMiddlePaneList: true
       }
     });
-    alert('sdasdasdas');
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };

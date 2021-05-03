@@ -50,7 +50,9 @@ const PopUpMiddlePaneList = (props) => {
     secondaryOptionCheckValue,
     selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
-  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, countPage, middlePaneHeader } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const [isReviseMode, setIsReviseMode] = useState(false);
 
   const dispatch = useDispatch();
@@ -570,7 +572,8 @@ const PopUpMiddlePaneList = (props) => {
         dataVal,
         selectedTagValue,
         '',
-        false
+        false,
+        middlePaneHeader
       );
       dispatch({
         type: FILTERMODE,
