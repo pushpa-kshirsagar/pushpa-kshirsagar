@@ -1,6 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSOCIATE_ROLE_REVISE_INFO_SAGA,
+  GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_STOP,
   SET_ASSOCIATE_ROLE_REDUCER_STATE,
@@ -30,7 +31,20 @@ function* workerReviewAssociateRoleInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN ASSOCIATE ROLE Review', userResponse);
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, associateRoleAssociateReqBody } = data.payload;
+      if (associateRoleAssociateReqBody !== null) {
+        yield put({
+          type: GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
+          payload: {
+            request: associateRoleAssociateReqBody,
+            HeaderOne: 'assessees',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {

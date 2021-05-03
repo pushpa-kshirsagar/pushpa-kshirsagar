@@ -1,12 +1,17 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSESSEE_GROUP_INFO_REVISE_SAGA,
+  GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
   LOADER_STOP,
   SET_ASSESSEE_GROUP_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE
 } from '../../actionType';
-import { ASSESSEE_GROUP_INFO_REVISE_URL, ASSESSEE_INFO_REVISE_URL, ASSESSEE_REVIEW_GROUP_URL } from '../../endpoints';
+import {
+  ASSESSEE_GROUP_INFO_REVISE_URL,
+  ASSESSEE_INFO_REVISE_URL,
+  ASSESSEE_REVIEW_GROUP_URL
+} from '../../endpoints';
 
 const assesseeGroupReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -29,8 +34,21 @@ function* workerReviewAssesseeGroupInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, assesseeGroupAssesseeReqBody = null } = data.payload;
       console.log('IN GROUP REVIEW+++++', userResponse);
+      if (assesseeGroupAssesseeReqBody !== null) {
+        yield put({
+          type: GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
+          payload: {
+            request: assesseeGroupAssesseeReqBody,
+            HeaderOne: 'assessees',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {

@@ -7,7 +7,9 @@ import {
   GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
   RELATED_REVIEWLIST_DISTINCT_DATA,
   GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  SET_REVIEW_LIST_RELATE_DATA,
+  LOADER_START
 } from '../../actionType';
 import {
   ASSOCIATE_GROUP_ASSOCIATE_URL,
@@ -66,6 +68,7 @@ function* workerReviewListAssociateSaga(data) {
   }
 }
 function* workerReviewListAssociateGroupAssociateSaga(data) {
+  yield put({ type: LOADER_START });
   try {
     const userResponse = yield call(reviewListDistinctApi, {
       data: data.payload.request,
@@ -74,19 +77,22 @@ function* workerReviewListAssociateGroupAssociateSaga(data) {
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
-      yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'associates',
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'associatesGroupAssociateReviewList',
-          scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
-        }
-      });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: userResponse.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'associates',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'associatesGroupAssociateReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -102,6 +108,7 @@ function* workerReviewListAssociateGroupAssociateSaga(data) {
   }
 }
 function* workerReviewListAssociateRoleAssociateSaga(data) {
+  yield put({ type: LOADER_START });
   try {
     const userResponse = yield call(reviewListDistinctApi, {
       data: data.payload.request,
@@ -110,19 +117,22 @@ function* workerReviewListAssociateRoleAssociateSaga(data) {
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
-      yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'associates',
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'associatesRoleAssociateReviewList',
-          scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
-        }
-      });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: userResponse.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'associates',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'associatesRoleAssociateReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
     } else {
       yield put({
         type: SET_POPUP_VALUE,

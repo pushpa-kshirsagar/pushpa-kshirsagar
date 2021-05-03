@@ -1,6 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
+  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
   LOADER_STOP,
   SET_ASSESSEE_ROLE_REDUCER_STATE,
@@ -29,8 +30,21 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, assesseeRoleAssesseeReqBody = null } = data.payload;
       console.log('IN ROLE REVIEW+++++', userResponse);
+      if (assesseeRoleAssesseeReqBody !== null) {
+        yield put({
+          type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+          payload: {
+            request: assesseeRoleAssesseeReqBody,
+            HeaderOne: 'assessees',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -87,7 +101,7 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0],
+          responseObject: userResponse.responseObject[0]
         }
       });
     }
