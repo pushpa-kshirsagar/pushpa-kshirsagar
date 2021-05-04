@@ -137,10 +137,6 @@ const AssociatesNodeReviewList = (props) => {
     // }
     console.log(selectedGroup);
   };
-  console.log(nodeViewState);
-  console.log('nodeViewState');
-  console.log(reviewListDistinctData);
-  console.log('reviewListDistinctData');
   return (
     <div>
       {reviewListDistinctData.length > 0 && (
@@ -186,22 +182,21 @@ const AssociatesNodeReviewList = (props) => {
                 //     isAlliance
                 //   />;
                 // } else {
-                  return (
-                  
-                     <div className="containerPadding" key={index}>
-                      <ReviewList
-                        className=""
-                        id={index}
-                        tag={item.id}
-                        isSelectedReviewList={middlePaneSelectedValue === item.id}
-                        status={item.informationEngagement.associateStatus}
-                        textOne={item.informationBasic.associateName}
-                        textTwo={item.informationBasic.associateDescription}
-                        isTooltipActive={false}
-                        onClickEvent={openListPopup}
-                      />
-                    </div>
-                  );
+                return (
+                  <div className="containerPadding" key={index}>
+                    <ReviewList
+                      className=""
+                      id={index}
+                      tag={item.id}
+                      isSelectedReviewList={middlePaneSelectedValue === item.id}
+                      status={item.informationEngagement.associateStatus}
+                      textOne={item.informationBasic.associateName}
+                      textTwo={item.informationBasic.associateDescription}
+                      isTooltipActive={false}
+                      onClickEvent={openListPopup}
+                    />
+                  </div>
+                );
                 // }
               })}
             </Fragment>
