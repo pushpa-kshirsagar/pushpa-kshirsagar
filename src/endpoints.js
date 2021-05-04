@@ -118,7 +118,7 @@ export const ASSOCIATE_ROLE_ASSOCIATE_URL =
 export const NODE_CREATE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/create';
 export const ASSOCIATES_NODE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/external/review-list';
+  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/external-parent-child/review-list';
 export const INTERNAL_NODE_URL =
   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/review-list';
 // export const URL = '';

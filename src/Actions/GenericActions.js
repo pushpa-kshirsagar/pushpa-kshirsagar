@@ -1923,7 +1923,8 @@ export const makeInternalNodeObj = (selectedAssociateInfo, filterKey, numberPage
   let requestObj = {
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    status: 'ACTIVE'
   };
   return requestObj;
 };
@@ -1931,8 +1932,7 @@ export const makeAssociateNodeObj = (selectedAssociateInfo, filterKey, numberPag
   let requestObj = {
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    status: 'ACTIVE'
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
   };
   return requestObj;
 };
