@@ -27,7 +27,8 @@ import {
   SET_MIDDLEPANE_SECONDARY_OPTION,
   SET_MOBILE_PANE_STATE,
   SET_SECONDARY_CREATE_OPTION_VALUE,
-  FILTERMODE
+  FILTERMODE,
+  CLEAR_DISPLAY_PANE_THREE
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -347,17 +348,6 @@ const PopUpMiddlePaneList = (props) => {
             }
           }
         });
-        // getAssesseeGroupAssesseeDistinctApiCall(
-        //   selectedAssociateInfo,
-        //   'active',
-        //   countPage,
-        //   dispatch,
-        //   '',
-        //   selectedTagValue, //group id
-        //   '',
-        //   false,
-        //   false
-        // );
       }
       if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
         let associateGroupAssociateReqBody = getAssociateGroupAssociateReqObj(
@@ -559,6 +549,7 @@ const PopUpMiddlePaneList = (props) => {
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
       });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'distinct' &&
@@ -579,6 +570,7 @@ const PopUpMiddlePaneList = (props) => {
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
       });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'distinct' &&
@@ -598,6 +590,7 @@ const PopUpMiddlePaneList = (props) => {
         type: FILTERMODE,
         payload: { FilterMode: 'associateGroupAssociateDistinct' + secondaryOptionCheckValue }
       });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'distinct' &&
@@ -617,6 +610,7 @@ const PopUpMiddlePaneList = (props) => {
         type: FILTERMODE,
         payload: { FilterMode: 'associateRoleAssociateDistinct' + secondaryOptionCheckValue }
       });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'revise') {
       // alert("IN REVISE");
