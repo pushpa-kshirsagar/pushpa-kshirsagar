@@ -49,7 +49,7 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessees',
+          headerOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',

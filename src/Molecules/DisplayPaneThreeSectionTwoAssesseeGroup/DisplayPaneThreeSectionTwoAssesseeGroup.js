@@ -62,38 +62,38 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
     if (labelName === 'assessee') {
-      // getAssesseeGroupAssesseeDistinctApiCall(
-      //   selectedAssociateInfo,
-      //   'active',
-      //   countPage,
-      //   dispatch,
-      //   'distinct',
-      //   responseObject.id, //group id
-      //   '',
-      //   false,
-      //   true
-      // );
+      getAssesseeGroupAssesseeDistinctApiCall(
+        selectedAssociateInfo,
+        'active',
+        countPage,
+        dispatch,
+        'distinct',
+        responseObject.id, //group id
+        '',
+        false,
+        true
+      );
       // dispatch({
       //   type: FILTERMODE,
       //   payload: { FilterMode: 'assesseeGroupAssesseeDistinct' }
       // });
-      dispatch({
-        type: RELATED_REVIEWLIST_DISTINCT_DATA,
-        payload: relatedReviewListPaneThree
-      });
-      dispatch({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assessees',
-          middlePaneHeaderBadgeOne: 'distinct',
-          middlePaneHeaderBadgeTwo: 'active',
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList',
-          scanCount: 4,
-          showMiddlePaneState: true
-        }
-      });
+      // dispatch({
+      //   type: RELATED_REVIEWLIST_DISTINCT_DATA,
+      //   payload: relatedReviewListPaneThree
+      // });
+      // dispatch({
+      //   type: SET_MIDDLEPANE_STATE,
+      //   payload: {
+      //     middlePaneHeader: 'assessees',
+      //     middlePaneHeaderBadgeOne: 'distinct',
+      //     middlePaneHeaderBadgeTwo: 'active',
+      //     middlePaneHeaderBadgeThree: '',
+      //     middlePaneHeaderBadgeFour: '',
+      //     typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList',
+      //     scanCount: 4,
+      //     showMiddlePaneState: true
+      //   }
+      // });
     }
   };
 

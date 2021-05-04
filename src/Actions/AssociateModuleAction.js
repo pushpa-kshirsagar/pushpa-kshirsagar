@@ -404,7 +404,7 @@ export const getAssociateGroupAssociateDistinctApiCall = (
     );
   }
   // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({
     type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -452,7 +452,7 @@ export const getAssociateRoleAssociateDistinctApiCall = (
     );
   }
   // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({
     type: SET_DISPLAY_TWO_SINGLE_STATE,

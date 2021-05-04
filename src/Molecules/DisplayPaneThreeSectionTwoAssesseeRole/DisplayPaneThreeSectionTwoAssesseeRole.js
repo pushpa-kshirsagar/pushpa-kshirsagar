@@ -7,14 +7,15 @@ import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 import { RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../actionType';
+import { getAssesseeRoleAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   // const [listExpand, setListExpand] = useState('');
   const dispatch = useDispatch();
-  const { reviewMode, relatedReviewListPaneThree = null } = useSelector(
+  const { headerOne, reviewMode, relatedReviewListPaneThree = null, responseObject } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { relatedReviewListDistinctData } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
   console.log('ASSESSEE LIST ::::::::::::>', relatedReviewListPaneThree);
   // const { informationEngagement, informationSetup } = responseObject;
   // function capitalizeFirstLetter(string) {
@@ -39,7 +40,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'assessee',
+      labelTextOneOne: headerOne.slice(0, -1),
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -95,10 +96,21 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
     if (labelName === 'assessee') {
-      dispatch({
-        type: RELATED_REVIEWLIST_DISTINCT_DATA,
-        payload: relatedReviewListPaneThree
-      });
+      // getAssesseeRoleAssesseeDistinctApiCall(
+      //   selectedAssociateInfo,
+      //   'active',
+      //   countPage,
+      //   dispatch,
+      //   'distinct',
+      //   responseObject.id,
+      //   '',
+      //   false,
+      //   true
+      // );
+      // dispatch({
+      //   type: RELATED_REVIEWLIST_DISTINCT_DATA,
+      //   payload: relatedReviewListPaneThree
+      // });
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
