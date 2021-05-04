@@ -13,112 +13,113 @@ export const GET_ASSESSEE_PERMISSION_URL =
 export const MANAGER_ROLE_ID = ['608697d9d53a790a03e49618', '6086980dd53a790a03e4961d'];
 export const ADMIN_ROLE_ID = ['6086924e349b894257720542', '6086cdff11268860527587fe'];
 export const DEFAULT_ROLE_ID = '6083f9d0b15e4f3241dbdd21';
-export const ASSESSEE_CREATE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/create';
-// export const ASSOCIATE_CREATE_URL =
-//   'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insightguru/api/associate-distinct/create';
-export const ASSOCIATE_CREATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-sign-on';
+
+export const PLATFORM_URL = 'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com';
+export const ASSESSEES_URL = 'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com';
+export const ASSOCIATES_URL = 'https://9twmgwhme8.execute-api.ap-south-1.amazonaws.com';
+export const ASSESSMENTS_URL = 'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com';
+export const ASSIGNMENTS_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com';
+
+export const ASSESSEE_CREATE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/create';
+export const ASSOCIATE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-sign-on';
 export const ASSESSEE_REVIEW_LIST_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/review-list';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/review-list';
 export const ASSESSEE_REVIEW_INFO_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/review';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/review';
 export const ASSOCIATE_REVIEW_INFO_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-distinct/review';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/review';
 export const ASSESSEE_ROLE_REVIEW_LIST_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role-distinct/review-list';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-role-distinct/review-list';
 export const ASSOCIATE_REVIEWDISTINCT_LIST_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-distinct/review-list';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/review-list';
 export const ASSESSEE_REVIEW_ROLE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role/review';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-role/review';
 export const ASSOCIATE_REVIEW_ROLE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/review';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/review';
 export const ASSESSEE_ROLE_CREATE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role/create';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-role/create';
 export const ASSOCIATE_ROLE_CREATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/create';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/create';
 export const ASSOCIATE_ROLE_REVIEW_LIST_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/review-list';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/review-list';
 export const ASSESSEE_REVIEW_GROUP_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/review';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-group/review';
 export const ASSOCIATE_REVIEW_GROUP_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/review';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-group/review';
 export const ASSESSEE_GROUP_CREATE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/create';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-group/create';
 export const ASSESSMENT_GROUP_CREATE_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-group/create';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/create';
 export const ASSIGNMENT_GROUP_CREATE_URL =
-  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-group/create';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/create';
 export const ASSOCIATE_GROUP_CREATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/create';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-group/create';
 export const ASSESSEE_GROUP_REVIEWLIST_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group-distinct/review-list';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-group-distinct/review-list';
 export const ASSOCIATE_GROUP_REVIEWLIST_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/review-list';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-group/review-list';
 export const ASSESSMENT_GROUP_REVIEWLIST_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-group/review-list';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/review-list';
 export const ASSIGNMENT_GROUP_REVIEWLIST_URL =
-  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-group/review-list';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/review-list';
 export const ASSESSMENT_REVIEW_GROUP_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-group/review';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/review';
 export const ASSESSMENT_REVIEW_INFO_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-distinct/review';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/review';
 export const ASSIGNMENT_REVIEW_INFO_URL =
-  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-distinct/review';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/review';
 export const ASSIGNMENT_REVIEW_GROUP_URL =
-  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-group/review';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/review';
 export const ASSESSMENT_TYPE_CREATE_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-type/create';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/create';
 export const ASSIGNMENT_TYPE_CREATE_URL =
-  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-type/create';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/create';
 export const ASSESSMENT_TYPE_REVIEWLIST_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-type/review-list';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/review-list';
 export const ASSIGNMENT_TYPE_REVIEWLIST_URL =
-  ' https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-type/review-list';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/review-list';
 export const ASSIGNMENT_REVIEW_LIST_URL =
-  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-distinct/review-list';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/review-list';
 export const ASSESSMENT_REVIEW_LIST_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-distinct/review-list';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/review-list';
 export const ASSESSMENT_CREATE_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-distinct/create';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/create';
 export const ASSIGNMENT_CREATE_URL =
-  ' https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-distinct/create';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/create';
 export const ASSIGNMENT_REVIEW_TYPE_URL =
-  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assignment-type/review';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/review';
 export const ASSESSMENT_REVIEW_TYPE_URL =
-  'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessment-type/review';
-export const ASSESSEE_SIGN_IN_URL =
-  'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/cognito-sign-in';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/review';
+export const ASSESSEE_SIGN_IN_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/cognito-sign-in';
 export const CONFIRM_ASSESSEE_URL =
-  'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/update-sign-in-info';
+  PLATFORM_URL + '/dev/insight-guru/api/platform/update-sign-in-info';
 export const ASSESSEE_SIGN_IN_INFO_URL =
-  'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/refresh-signin-information';
+  PLATFORM_URL + '/dev/insight-guru/api/platform/refresh-signin-information';
 export const ASSESSEE_INFO_REVISE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/revise';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/revise';
 export const ASSESSEE_GROUP_INFO_REVISE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/revise';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-group/revise';
 export const ASSESSEE_ROLE_INFO_REVISE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role/revise';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-role/revise';
 export const ASSESSEE_CHANGE_PASSWORD_URL =
-  'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/platform/change-password';
+  PLATFORM_URL + '/dev/insight-guru/api/platform/change-password';
 export const ASSOCIATE_INFO_REVISE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-distinct/revise';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/revise';
 export const ASSESSEE_GROUP_ASSESSEE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-group/assessee/review-list';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-group/assessee/review-list';
 export const ASSOCIATE_GROUP_ASSOCIATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/associate/review-list';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-group/associate/review-list';
 export const ASSOCIATE_GROUP_INFO_REVISE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-group/revise';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-group/revise';
 export const ASSOCIATE_ROLE_INFO_REVISE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/revise';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/revise';
 export const ASSESSEE_ROLE_ASSESSEE_URL =
-  'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-role/assessee/review-list';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-role/assessee/review-list';
 export const ASSOCIATE_ROLE_ASSOCIATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-role/associate/review-list';
-export const NODE_CREATE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/create';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/associate/review-list';
+export const NODE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/create';
 export const ASSOCIATES_NODE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/external/review-list';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/external-parent-child/review-list';
 export const INTERNAL_NODE_URL =
-  'https://xgis5z7671.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-node/review-list';
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/review-list';
 // export const URL = '';
