@@ -6,7 +6,8 @@ import {
   SET_MIDDLEPANE_STATE,
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   RELATED_REVIEWLIST_DISTINCT_DATA,
-  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST
+  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+  SET_REVIEW_LIST_RELATE_DATA
 } from '../../actionType';
 import {
   ASSESSEE_REVIEW_LIST_URL,
@@ -71,6 +72,10 @@ function* workerReviewListAssesseeGroupAssesseeSaga(data) {
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
         payload: userResponse.responseObject
       });
+    yield put({
+      type: SET_REVIEW_LIST_RELATE_DATA,
+      payload: userResponse.responseObject
+    });
     if (data.payload.isMiddlePaneList) {
       yield put({
         type: SET_MIDDLEPANE_STATE,
@@ -107,18 +112,24 @@ function* workerReviewListRoleAssesseeSaga(data) {
         payload: userResponse.responseObject
       });
     yield put({
-      type: SET_MIDDLEPANE_STATE,
-      payload: {
-        middlePaneHeader: data.payload.HeaderOne,
-        middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-        middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-        middlePaneHeaderBadgeThree: '',
-        middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assesseesRoleAssesseeReviewList',
-        scanCount: userResponse && userResponse.countTotal,
-        showMiddlePaneState: true
-      }
+      type: SET_REVIEW_LIST_RELATE_DATA,
+      payload: userResponse.responseObject
     });
+    if (data.payload.isMiddlePaneList) {
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.HeaderOne,
+          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.HeaderOne + 'RoleAssesseeReviewList',
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true
+        }
+      });
+    }
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {

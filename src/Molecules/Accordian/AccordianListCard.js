@@ -5,7 +5,7 @@ import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
 
 const AccordianListCard = (props) => {
-  const { accordianObject, mode = '', onClickRevise } = props;
+  const { accordianObject, mode = '', onClickRevise, onClickReview = null } = props;
   const {
     labelTextOneOne = '',
     labelTextOneOneBadgeOne = '',
@@ -14,11 +14,13 @@ const AccordianListCard = (props) => {
     labelTextOneOneBadgeFour = '',
     innerAssociateList = [],
     innerInfo = 'No Information',
-    labelTextOneOneBadges
+    labelTextOneOneBadges,
+    isReviewLink = false
   } = accordianObject;
 
   const [isListSelectExpanded, setIsListSelectExpanded] = useState(false);
   const [selectedBadge, setSelectedBadge] = useState(labelTextOneOneBadges[0]);
+  const reviewLabelClass = isReviewLink ? 'reviewLinkText' : '';
 
   return (
     <>
@@ -36,10 +38,10 @@ const AccordianListCard = (props) => {
                 ].join(' ')}
               >
                 <span
-                  onClick={onClickRevise}
+                  onClick={mode === 'revise' ? onClickRevise : onClickReview}
                   data-value={labelTextOneOne}
                   data-key={selectedBadge?.labelTextOneOneBadge || ''}
-                  className={mode === 'revise' ? 'linkText' : ''}
+                  className={mode === 'revise' ? 'linkText' : reviewLabelClass}
                 >
                   {labelTextOneOne}
                 </span>

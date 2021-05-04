@@ -31,11 +31,15 @@ import {
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
-  getAssesseeRoleAssesseeDistinctApiCall
+  getAssesseeGroupAssesseeReqObj,
+  getAssesseeRoleAssesseeDistinctApiCall,
+  getAssesseeRoleAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
 import {
   getAssociateGroupAssociateDistinctApiCall,
-  getAssociateRoleAssociateDistinctApiCall
+  getAssociateGroupAssociateReqObj,
+  getAssociateRoleAssociateDistinctApiCall,
+  getAssociateRoleAssociateReqObj
 } from '../Actions/AssociateModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
@@ -119,10 +123,18 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
+        let assesseeRoleAssesseeReqBody = getAssesseeRoleAssesseeReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            assesseeRoleAssesseeReqBody,
             isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
@@ -153,10 +165,18 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
+        let associateRoleAssociateReqBody = getAssociateRoleAssociateReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            associateRoleAssociateReqBody,
             isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
@@ -288,11 +308,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
+        let assesseeGroupAssesseeReqBody = getAssesseeGroupAssesseeReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            assesseeGroupAssesseeReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -321,7 +349,7 @@ const PopUpMiddlePaneList = (props) => {
         });
         // getAssesseeGroupAssesseeDistinctApiCall(
         //   selectedAssociateInfo,
-        //   secondaryOptionCheckValue,
+        //   'active',
         //   countPage,
         //   dispatch,
         //   '',
@@ -332,11 +360,19 @@ const PopUpMiddlePaneList = (props) => {
         // );
       }
       if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
+        let associateGroupAssociateReqBody = getAssociateGroupAssociateReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            associateGroupAssociateReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

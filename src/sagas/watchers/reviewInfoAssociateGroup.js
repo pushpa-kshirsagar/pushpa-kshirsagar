@@ -4,7 +4,8 @@ import {
   LOADER_STOP,
   SET_DISPLAY_PANE_THREE_STATE,
   ASSOCIATE_GROUP_REVISE_INFO_SAGA,
-  SET_ASSOCIATE_GROUP_REDUCER_STATE
+  SET_ASSOCIATE_GROUP_REDUCER_STATE,
+  GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import { ASSOCIATE_GROUP_INFO_REVISE_URL, ASSOCIATE_REVIEW_GROUP_URL } from '../../endpoints';
 
@@ -30,7 +31,20 @@ function* workerReviewAssociateGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, associateGroupAssociateReqBody = null } = data.payload;
+      if (associateGroupAssociateReqBody !== null) {
+        yield put({
+          type: GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
+          payload: {
+            request: associateGroupAssociateReqBody,
+            HeaderOne: 'associates',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -86,7 +100,7 @@ function* workerReviseAssociateGroupInfoSaga(data) {
           headerOneBadgeOne: 'group',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0],
+          responseObject: userResponse.responseObject[0]
         }
       });
     }

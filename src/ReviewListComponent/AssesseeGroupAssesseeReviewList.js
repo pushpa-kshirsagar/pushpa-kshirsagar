@@ -209,7 +209,7 @@ const AssesseeGroupAssesseeReviewList = (props) => {
                 textTwo={item.informationBasic.assesseeAlias}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-                isSelectActive={true}
+                isSelectActive={false}
               />
             </div>
           );
