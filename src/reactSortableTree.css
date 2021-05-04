@@ -1,60 +1,69 @@
-
 /* custom node for hierarical list  style*/
 
 div.rst__node {
-    left: 1px !important;
-    
-  }
-  
-  div.rst__virtualScrollOverride {
-      overflow: unset !important;
-  }
-  div.ReactVirtualized__Grid__innerScrollContainer{
-    overflow: unset !important;
-  }
-  div.rstcustom__rowWrapper{
-    height: 55px;
-    padding: 2.5px; 
-    text-transform: none;
-    width: 100%;
-    cursor: pointer;
-  }
-  .rst__node:first-child .rstcustom__rowContents{
-    background-color:rgb(240, 240, 240);
-  }
-  div.rstcustom__rowContents:hover { 
-    background-color:rgb(240, 240, 240);
-  }
-  
-  div.rstcustom__rowContents{
-    padding: 0 5px 0 5px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  
-  div.rstcustom__rowLabel{
-    width: 100% !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  span.rstcustom__rowTitle{
-    color: rgba(0, 0, 0, 0.87) !important;
-    font-size: 1.6rem !important;
-    font-weight: unset !important;
-    padding-bottom: 12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  span.rstcustom__rowSubtitle{
-    color: rgba(0, 0, 0, 0.54) !important;
-    font-size: 1.2rem !important;
-    font-weight: unset !important;
-    /* padding-bottom: 20px; */
-  }
-  .ReactVirtualized__Grid__innerScrollContainer > div:first-child > rst__node.rst__nodeContent > rstcustom__rowWrapper > rstcustom__row >rstcustom__rowContents{
-    background: gray !important; 
-  }
-  .careerSearch p{
-    margin-bottom: 0rem !important;
-  }
-  /*end custom node for hierarical list  style*/
+  left: 1px !important;
+}
+
+div.rst__virtualScrollOverride {
+  overflow: unset !important;
+}
+div.ReactVirtualized__Grid__innerScrollContainer {
+  overflow: unset !important;
+}
+div.rstcustom__rowWrapper {
+  height: 55px;
+  padding: 2.5px;
+  text-transform: none;
+  width: 100%;
+  cursor: pointer;
+}
+.rst__node:first-child .rstcustom__rowContents {
+  background-color: rgb(240, 240, 240);
+}
+div.rstcustom__rowContents:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+div.rstcustom__rowContents {
+  padding: 0 5px 0 5px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+div.rstcustom__rowLabel {
+  width: 100% !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+span.rstcustom__rowTitle {
+  color: rgba(0, 0, 0, 0.87) !important;
+  font-size: 1.6rem !important;
+  font-weight: unset !important;
+  padding-bottom: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+span.rstcustom__rowSubtitle {
+  color: rgba(0, 0, 0, 0.54) !important;
+  font-size: 1.2rem !important;
+  font-weight: unset !important;
+  /* padding-bottom: 20px; */
+}
+.ReactVirtualized__Grid__innerScrollContainer
+  > div:first-child
+  > rst__node.rst__nodeContent
+  > rstcustom__rowWrapper
+  > rstcustom__row
+  > rstcustom__rowContents {
+  background: gray !important;
+}
+.careerSearch p {
+  margin-bottom: 0rem !important;
+}
+.rst__nodeContent {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60%;
+}
+/*end custom node for hierarical list  style*/

@@ -118,8 +118,11 @@ export const ASSESSEE_ROLE_ASSESSEE_URL =
 export const ASSOCIATE_ROLE_ASSOCIATE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/associate/review-list';
 export const NODE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/create';
-export const ASSOCIATES_NODE_URL =
-  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/external-parent-child/review-list';
+export const EXTERNAL_NODE_TREE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/external/tree-review-list';
+export const EXTERNAL_NODE_LIST_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/external/review-list';
+
 export const INTERNAL_NODE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/review-list';
 // export const URL = '';

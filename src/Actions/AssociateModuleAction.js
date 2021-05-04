@@ -1,11 +1,16 @@
 import {
   CLEAR_DISPLAY_PANE_THREE,
+  FILTERMODE,
   GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
   LOADER_START,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT,
+  SET_REQUEST_OBJECT
 } from '../actionType';
+import { makeAssociateNodeObj } from './GenericActions';
 
 export const getAssociateGroupAssociateReqObj = (
   selectedAssociateInfo,
@@ -463,6 +468,46 @@ export const getAssociateRoleAssociateDistinctApiCall = (
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+
+export const getAssociateNodeApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  nodeViewState
+) => {
+  let requestObj = makeAssociateNodeObj(
+    selectedAssociateInfo,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'nodeViewState', value: nodeViewState }
+  });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'associateNodeDistinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      nodeViewState: nodeViewState,
       isMiddlePaneList: true
     }
   });

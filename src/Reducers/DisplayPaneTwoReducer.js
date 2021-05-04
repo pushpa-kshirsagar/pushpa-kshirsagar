@@ -55,7 +55,8 @@ const initialState = {
   typeOfAssesseeCreate: '',
   middlePaneListPopupOptions: [],
   signInRes: '',
-  leftPaneAssesseeInfo: ''
+  leftPaneAssesseeInfo: '',
+  nodeViewState: 'hierarchy'
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

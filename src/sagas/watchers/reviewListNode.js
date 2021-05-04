@@ -4,12 +4,11 @@ import {
   INTERNAL_NODE_LIST_SAGA,
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
-  SET_CORE_TYPE_REVIEW_LIST_DATA,
   SET_CORE_NODE_REVIEW_LIST_DATA,
   SET_MIDDLEPANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { ASSOCIATES_NODE_URL, INTERNAL_NODE_URL } from '../../endpoints';
+import { EXTERNAL_NODE_TREE_URL, EXTERNAL_NODE_LIST_URL, INTERNAL_NODE_URL } from '../../endpoints';
 
 const nodeReviewListDistinctApi = async (requestObj) => {
   const requestOptions = {
@@ -25,10 +24,12 @@ const nodeReviewListDistinctApi = async (requestObj) => {
 };
 
 function* workerReviewAssociatesNodeListSaga(data) {
+  console.log(data.payload)
   try {
     const userResponse = yield call(nodeReviewListDistinctApi, {
       data: data.payload.request,
-      URL: ASSOCIATES_NODE_URL
+      URL:
+        data.payload.nodeViewState === 'hierarchy' ? EXTERNAL_NODE_TREE_URL : EXTERNAL_NODE_LIST_URL
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {

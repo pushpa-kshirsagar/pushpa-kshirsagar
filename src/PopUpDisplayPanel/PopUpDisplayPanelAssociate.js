@@ -596,6 +596,25 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'distinct' &&
+      popupHeaderOne === 'associate' &&
+      popupHeaderOneBadgeOne === 'nodes'
+    ) {
+      let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: 'nodes',
+          BadgeTwo: secondaryOptionCheckValue,
+          BadgeThree: clickValue,
+          isMiddlePaneList: true
+        }
+      });
+    }
+    if (
+      clickValue === 'distinct' &&
       (popupHeaderOne === 'assignments' || popupHeaderOne === 'assessments') &&
       popupHeaderOneBadgeOne === 'types'
     ) {

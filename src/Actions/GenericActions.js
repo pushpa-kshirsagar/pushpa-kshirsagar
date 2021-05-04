@@ -1932,7 +1932,9 @@ export const makeAssociateNodeObj = (selectedAssociateInfo, filterKey, numberPag
   let requestObj = {
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    status: 'ACTIVE'
+
   };
   return requestObj;
 };

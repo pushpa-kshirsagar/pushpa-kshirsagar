@@ -16,6 +16,7 @@ import {
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import { ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
@@ -23,7 +24,7 @@ import 'react-sortable-tree/style.css';
 
 import FileExplorerTheme from 'react-sortable-tree-theme-full-node-drag';
 import '../reactSortableTree.css';
-const AssociateNodeAssociateReviewList = (props) => {
+const InternalNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
@@ -69,8 +70,12 @@ const AssociateNodeAssociateReviewList = (props) => {
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const [isFetching, setIsFetching] = useState(false);
   const [nodeTreeData, setTreeData] = useState([]);
+  const [secondaryIconData, setSecondaryIconData] = useState([]);
 
+  console.log(reviewListDistinctData);
+  console.log('reviewListDistinctData');
   useEffect(() => {
+    // setTreeData(dummytreeData);
     setTreeData(dummytreeData);
   }, []);
 
@@ -98,14 +103,28 @@ const AssociateNodeAssociateReviewList = (props) => {
 
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    let secondaryIcon = [];
+    if (siftValue === 'sift') {
+      secondaryIcon = [
+        { label: 'primary', onClick: onClickFooter, Icon: FilterList },
+        { label: 'secondary', onClick: onClickFooter, Icon: FilterList }
+      ];
+      setSecondaryIconData(secondaryIcon);
+    }
+    if (siftValue === 'view') {
+      secondaryIcon = [
+        { label: 'hierarchy', onClick: onClickFooter, Icon: AccountTreeIcon },
+        { label: 'list', onClick: onClickFooter, Icon: FilterList }
+      ];
+      setSecondaryIconData(secondaryIcon);
+    }
+    // if (siftValue === 'primary' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
-  const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
-  const secondaryIcon = [
-    { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
+  const primaryIcon = [
+    { label: 'sift', onClick: onClickFooter, Icon: FilterList },
+    { label: 'view', onClick: onClickFooter, Icon: FilterList }
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
@@ -157,7 +176,7 @@ const AssociateNodeAssociateReviewList = (props) => {
             rowHeight={55}
             scaffoldBlockPxWidth={31}
             slideRegionSize={50}
-            canDrag={({ node }) => node.parentOrgHierarchyId!==null?true:false}
+            canDrag={({ node }) => (node.parentOrgHierarchyId !== null ? true : false)}
             // onMoveNode={({ node }) => changedNode(node) }
             generateNodeProps={(node) => ({
               onClick: (event) => {
@@ -187,16 +206,16 @@ const AssociateNodeAssociateReviewList = (props) => {
             </div>
           );
         })} */}
-      {FilterMode === 'assignmentsTypeDistinctinactive' && (
-        <FooterIconTwo
-          FilterModeEnable={FilterModeEnable}
-          FilterMode={FilterMode}
-          onClick={onClickFooter}
-          primaryIcon={primaryIcon}
-          secondaryIcon={secondaryIcon}
-        />
-      )}
+      {/* {FilterMode === 'associateNodeDistinctactive' && ( */}
+      <FooterIconTwo
+        FilterModeEnable={FilterModeEnable}
+        FilterMode={FilterMode}
+        onClick={onClickFooter}
+        primaryIcon={primaryIcon}
+        secondaryIcon={secondaryIconData}
+      />
+      {/* )} */}
     </div>
   );
 };
-export default AssociateNodeAssociateReviewList;
+export default InternalNodeReviewList;
