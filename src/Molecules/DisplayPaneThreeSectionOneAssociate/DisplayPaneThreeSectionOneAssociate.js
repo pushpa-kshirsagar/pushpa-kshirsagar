@@ -252,11 +252,11 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationEngagement.associateTag.associateTagPrimary || 'No Information'
+          textOne: informationEngagement?.associateTag?.associateTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationEngagement.associateTag.associateTagSecondary || 'No Information'
+          textOne: informationEngagement?.associateTag?.associateTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],

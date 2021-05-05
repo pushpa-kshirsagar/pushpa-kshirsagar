@@ -609,6 +609,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           BadgeOne: 'nodes',
           BadgeTwo: secondaryOptionCheckValue,
           BadgeThree: clickValue,
+          nodeViewState: 'hierarchy',
           isMiddlePaneList: true
         }
       });
@@ -688,7 +689,18 @@ const PopUpDisplayPanelAssociate = (props) => {
           ? makeAdministratorRoleCreateObj(selectedAssociateInfo, 'active', 0, -1)
           : makeManagerRoleCreateObj(selectedAssociateInfo, 'active', 0, -1);
       dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
-
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       dispatch({
         type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
         payload: {

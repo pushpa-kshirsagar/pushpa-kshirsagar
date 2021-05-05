@@ -14,16 +14,19 @@ import {
   SET_REQUEST_OBJECT
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
-import { FilterList } from '@material-ui/icons';
-import ReviewList from '../Molecules/ReviewList/ReviewList';
+import { FilterList, AccountTree } from '@material-ui/icons';
+import ListIcon from '@material-ui/icons/FormatListBulleted';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
-import { ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION, ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css';
 
 import FileExplorerTheme from 'react-sortable-tree-theme-full-node-drag';
 import '../reactSortableTree.css';
+import ReviewList from '../Molecules/ReviewList/ReviewList';
+import { Fragment } from 'react';
+import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 const InternalNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -36,6 +39,12 @@ const InternalNodeReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
+    nodeViewState,
+    scanString,
+    searchFocusIndex,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree,
     dummytreeData = [
       {
         id: '599d09d7e4b02ef63fbad571',
@@ -101,33 +110,50 @@ const InternalNodeReviewList = (props) => {
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
 
+  
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    let secondaryIcon = [];
-    if (siftValue === 'sift') {
-      secondaryIcon = [
-        { label: 'primary', onClick: onClickFooter, Icon: FilterList },
-        { label: 'secondary', onClick: onClickFooter, Icon: FilterList }
-      ];
-      setSecondaryIconData(secondaryIcon);
-    }
-    if (siftValue === 'view') {
-      secondaryIcon = [
-        { label: 'hierarchy', onClick: onClickFooter, Icon: AccountTreeIcon },
-        { label: 'list', onClick: onClickFooter, Icon: FilterList }
-      ];
-      setSecondaryIconData(secondaryIcon);
-    }
-    // if (siftValue === 'primary' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
+    if (siftValue === 'list' || siftValue === 'hierarchy') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'nodeViewState', value: siftValue }
+      });
+      getInternalNodeApiCall(
+        selectedAssociateInfo,
+        middlePaneHeaderBadgeTwo,
+        countPage,
+        dispatch,
+        middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeThree,
+        siftValue
+      );
+    }
   };
   /* for middle pane */
-  const primaryIcon = [
-    { label: 'sift', onClick: onClickFooter, Icon: FilterList },
-    { label: 'view', onClick: onClickFooter, Icon: FilterList }
+  const primaryIcon = [{ label: 'view', onClick: onClickFooter, Icon: FilterList }];
+  const secondaryIcon = [
+    { label: 'hierarchy', onClick: onClickFooter, Icon: AccountTree },
+    { label: 'list', onClick: onClickFooter, Icon: ListIcon }
   ];
-  const openListPopup = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
+
+  const openNodeListPopup = (node, event, target, canUpdate) => {
+    let selectedGroup = {};
+    let nodeId = '';
+    if (target === 'hirarchy') {
+      console.log(node);
+      nodeId = node.id;
+      // selectedGroup = {
+      //   id: event.node.userGroupId,
+      //   name: event.node.name,
+      //   description: event.node.description,
+      //   nodeid: event.node.id,
+      //   order: event.node.order
+      // };
+    } else {
+      console.log(node);
+      nodeId = event.currentTarget.getAttribute('tag');
+    }
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -136,83 +162,103 @@ const InternalNodeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        selectedTagValue: nodeId
       }
     });
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
+        value: ASSOCIATE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
-  };
-  const openNodeListPopup = (node, event, target, canUpdate) => {
-    console.log(node);
-    console.log(event);
-    let selectedGroup = {};
-    // if (target === 'hirarchy') {
-    //   selectedGroup = {
-    //     id: event.node.userGroupId,
-    //     name: event.node.name,
-    //     description: event.node.description,
-    //     nodeid: event.node.id,
-    //     order: event.node.order
-    //   };
-    // }
     console.log(selectedGroup);
   };
   return (
     <div>
-      {nodeTreeData && (
-        <div style={{ minheight: 'calc(100vh - 135px)' }}>
-          <SortableTree
-            treeData={nodeTreeData}
-            onChange={(treeData) => setTreeData(treeData)}
-            theme={FileExplorerTheme}
-            isVirtualized={false}
-            rowHeight={55}
-            scaffoldBlockPxWidth={31}
-            slideRegionSize={50}
-            canDrag={({ node }) => (node.parentOrgHierarchyId !== null ? true : false)}
-            // onMoveNode={({ node }) => changedNode(node) }
-            generateNodeProps={(node) => ({
-              onClick: (event) => {
-                if (event.target.type !== 'button') {
-                  openNodeListPopup(node, event, 'hirarchy', true);
-                }
-              }
-            })}
-          />
-        </div>
-      )}
-      {/* {reviewListDistinctData &&
-        reviewListDistinctData.map((item, index) => {
-          return (
-            <div className="containerPadding" key={index}>
-              <ReviewList
-                className=""
-                id={index}
-                tag={item.id}
-                isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.assignmentTypeStatus}
-                textOne={item.informationBasic.assignmentTypeName}
-                textTwo={item.informationBasic.assignmentTypeDescription}
-                isTooltipActive={false}
-                onClickEvent={openListPopup}
+     {reviewListDistinctData.length > 0 && (
+        <>
+          {nodeViewState === 'hierarchy' ? (
+            <div style={{ minheight: 'calc(100vh - 135px)' }}>
+              <SortableTree
+                treeData={reviewListDistinctData}
+                onChange={(treeData) => {
+                  dispatch({
+                    type: SET_DISPLAY_TWO_SINGLE_STATE,
+                    payload: { stateName: 'reviewListDistinctData', value: treeData }
+                  });
+                }}
+                searchQuery={scanString}
+                searchFocusOffset={searchFocusIndex}
+                searchFinishCallback={(matches) => {
+                  console.log(matches);
+                  dispatch({
+                    type: SET_DISPLAY_TWO_SINGLE_STATE,
+                    payload: {
+                      stateName: 'searchFocusIndex',
+                      value: matches.length > 0 ? searchFocusIndex % matches.length : 0
+                    }
+                  });
+                }}
+                theme={FileExplorerTheme}
+                isVirtualized={false}
+                rowHeight={55}
+                scaffoldBlockPxWidth={31}
+                slideRegionSize={50}
+                generateNodeProps={(node) => ({
+                  onClick: (event) => {
+                    if (event.target.type !== 'button') {
+                      openNodeListPopup(node, event, 'hirarchy', true);
+                    }
+                  }
+                })}
               />
             </div>
-          );
-        })} */}
-      {/* {FilterMode === 'associateNodeDistinctactive' && ( */}
+          ) : (
+            <Fragment>
+              {reviewListDistinctData[0].map((item, index) => {
+                // if (index === 0) {
+                //   <Card
+                //     textOneOne={item.informationBasic.associateName}
+                //     textTwoOne={item.informationBasic.associateDescription}
+                //     IconOne={null}
+                //     isIcon={false}
+                //     labelTwoTwo={''}
+                //     onClickIconOne={null}
+                //     isAlliance
+                //   />;
+                // } else {
+                return (
+                  <div className="containerPadding" key={index}>
+                    <ReviewList
+                      className=""
+                      id={index}
+                      tag={item.id}
+                      isSelectedReviewList={middlePaneSelectedValue === item.id}
+                      status={item.informationEngagement.associateNodeStatus}
+                      textOne={item.informationBasic.associateNodeName}
+                      textTwo={item.informationBasic.associateNodeDescription}
+                      isTooltipActive={false}
+                      onClickEvent={(event) => {
+                        openNodeListPopup(item.id, event, 'hirarchy', true);
+                      }}
+                    />
+                  </div>
+                );
+                // }
+              })}
+            </Fragment>
+          )}
+        </>
+      )}
       <FooterIconTwo
         FilterModeEnable={FilterModeEnable}
         FilterMode={FilterMode}
         onClick={onClickFooter}
         primaryIcon={primaryIcon}
-        secondaryIcon={secondaryIconData}
+        secondaryIcon={secondaryIcon}
       />
       {/* )} */}
     </div>

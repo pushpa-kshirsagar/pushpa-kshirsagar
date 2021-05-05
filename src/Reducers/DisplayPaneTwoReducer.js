@@ -56,7 +56,9 @@ const initialState = {
   middlePaneListPopupOptions: [],
   signInRes: '',
   leftPaneAssesseeInfo: '',
-  nodeViewState: 'hierarchy'
+  nodeViewState: 'hierarchy',
+  scanString: '',
+  searchFocusIndex: -1
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

@@ -26,13 +26,16 @@ import {
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_MIDDLEPANE_STATE,
   SET_POPUP_SINGLE_STATE,
-  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  INTERNAL_NODE_LIST_SAGA
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
   makeAssesseeGroupObj,
   makeAssesseeRoleCreateObj,
-  makeAssesseeRoleObj
+  makeAssesseeRoleObj,
+  makeInternalNodeObj
 } from '../Actions/GenericActions';
 import {
   getAssesseeDistinctApiCall,
@@ -86,11 +89,22 @@ const PopUpAssesseesModule = (props) => {
       dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       let roleRequestObj = makeAssesseeRoleCreateObj(selectedAssociateInfo, 'all', 0, -1);
       dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
-
       dispatch({
         type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
         payload: {
           request: roleRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
           BadgeOne: '',
           BadgeTwo: '',
           BadgeThree: '',

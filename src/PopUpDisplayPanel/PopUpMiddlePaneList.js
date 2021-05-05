@@ -28,7 +28,8 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_SECONDARY_CREATE_OPTION_VALUE,
   FILTERMODE,
-  CLEAR_DISPLAY_PANE_THREE
+  CLEAR_DISPLAY_PANE_THREE,
+  LOADER_STOP
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -518,6 +519,12 @@ const PopUpMiddlePaneList = (props) => {
             }
           }
         });
+      }
+      if (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList') {
+        dispatch({ type: LOADER_STOP });
+      }
+      if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
+        dispatch({ type: LOADER_STOP });
       }
       // if(typeOfMiddlePaneList === ''){}
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });

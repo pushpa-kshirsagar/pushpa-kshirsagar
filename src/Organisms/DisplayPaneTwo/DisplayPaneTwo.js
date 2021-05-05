@@ -37,7 +37,7 @@ export const DisplayPaneTwo = (props) => {
     scanCount,
     showMiddlePaneState
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-
+  console.log(typeOfMiddlePaneList,"typeOfMiddlePaneList");
   return (
     <div>
       <div>

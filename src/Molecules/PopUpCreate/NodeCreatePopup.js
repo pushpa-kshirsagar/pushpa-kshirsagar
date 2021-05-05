@@ -29,6 +29,14 @@ const NodeCreatePopup = (props) => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
+    let framworkObj = {
+      associateNodeAscendant: {
+        associateNodeAscendantPrimary:
+          nodeInformation.informationFramework.associateNodeAscendant
+            .associateNodeAscendantPrimary[0],
+        associateNodeAscendantSecondary: []
+      }
+    };
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -36,7 +44,7 @@ const NodeCreatePopup = (props) => {
       associateNode: {
         informationBasic: nodeInformation.informationBasic,
         informationAllocation: nodeInformation.informationAllocation,
-        informationFramework: nodeInformation.informationFramework
+        informationFramework: framworkObj
       }
     };
     console.log('CREATE group api', reqBody);
@@ -134,7 +142,7 @@ const NodeCreatePopup = (props) => {
         inputHeaderBadge={'ascendant'}
         inputHeaderBadgeTwo={'primary'}
         infoMsg={'select a node'}
-        ListData={coreNodeReviewListData}
+        ListData={coreNodeReviewListData[0]}
         isRequired={true}
         selectedList={
           nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary

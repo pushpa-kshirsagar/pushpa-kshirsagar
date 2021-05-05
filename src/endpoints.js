@@ -10,7 +10,12 @@ export const GET_ASSESSEE_PERMISSION_URL =
 // export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/b4ff8c35-0445-4f0c-899b-68d8281b2bd8';// for assessee manager (secondary) role
 
 //assessee, manager, admin create
-export const MANAGER_ROLE_ID = ['608697d9d53a790a03e49618', '6086980dd53a790a03e4961d'];
+export const MANAGER_ROLE_ID = [
+  '608697d9d53a790a03e49618',
+  '6086980dd53a790a03e4961d',
+  '608b9a5d212c0f08a4ff9284',
+  '608b9aa86b842418eb79cb17'
+];
 export const ADMIN_ROLE_ID = ['6086924e349b894257720542', '6086cdff11268860527587fe'];
 export const DEFAULT_ROLE_ID = '6083f9d0b15e4f3241dbdd21';
 
@@ -123,6 +128,8 @@ export const EXTERNAL_NODE_TREE_URL =
 export const EXTERNAL_NODE_LIST_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/external/review-list';
 
-export const INTERNAL_NODE_URL =
+export const INTERNAL_NODE_LIST_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/review-list';
+export const INTERNAL_NODE_TREE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/tree-review-list';
 // export const URL = '';

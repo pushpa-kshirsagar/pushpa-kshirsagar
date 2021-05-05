@@ -202,6 +202,13 @@ const PopUpAssociatesModule = (props) => {
         'hierarchy'
       );
       dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'searchFocusIndex',
+          value: -1
+        }
+      });
+      dispatch({
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'NoCard' }
       });

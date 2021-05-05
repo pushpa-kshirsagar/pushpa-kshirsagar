@@ -23,6 +23,7 @@ import {
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_CLOSE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
   SET_REQUEST_OBJECT
 } from '../actionType';
@@ -455,7 +456,10 @@ const PopUpScan = (props) => {
         console.log(typeOfMiddlePaneList);
       }
     }
-
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'scanString', value: state.scanValue }
+    });
     dispatch({ type: POPUP_CLOSE });
   };
   return (

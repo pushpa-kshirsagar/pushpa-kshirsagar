@@ -8,7 +8,12 @@ import {
   SET_MIDDLEPANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { EXTERNAL_NODE_TREE_URL, EXTERNAL_NODE_LIST_URL, INTERNAL_NODE_URL } from '../../endpoints';
+import {
+  EXTERNAL_NODE_TREE_URL,
+  EXTERNAL_NODE_LIST_URL,
+  INTERNAL_NODE_TREE_URL,
+  INTERNAL_NODE_LIST_URL
+} from '../../endpoints';
 
 const nodeReviewListDistinctApi = async (requestObj) => {
   const requestOptions = {
@@ -24,7 +29,7 @@ const nodeReviewListDistinctApi = async (requestObj) => {
 };
 
 function* workerReviewAssociatesNodeListSaga(data) {
-  console.log(data.payload)
+  console.log(data.payload);
   try {
     const userResponse = yield call(nodeReviewListDistinctApi, {
       data: data.payload.request,
@@ -71,10 +76,12 @@ function* workerReviewAssociatesNodeListSaga(data) {
   }
 }
 function* workerReviewInternalNodeListSaga(data) {
+  console.log(data.payload);
   try {
     const userResponse = yield call(nodeReviewListDistinctApi, {
       data: data.payload.request,
-      URL: INTERNAL_NODE_URL
+      URL:
+        data.payload.nodeViewState === 'hierarchy' ? INTERNAL_NODE_TREE_URL : INTERNAL_NODE_LIST_URL
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
@@ -82,7 +89,7 @@ function* workerReviewInternalNodeListSaga(data) {
         type: data.payload.isMiddlePaneList
           ? REVIEWLIST_DISTINCT_DATA
           : SET_CORE_NODE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject[0]
+        payload: userResponse.responseObject
       });
 
       if (data.payload.isMiddlePaneList) {

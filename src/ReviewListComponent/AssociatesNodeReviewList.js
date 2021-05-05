@@ -18,10 +18,9 @@ import { FilterList, AccountTree } from '@material-ui/icons';
 import ListIcon from '@material-ui/icons/FormatListBulleted';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
-import { ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css';
-
 import FileExplorerTheme from 'react-sortable-tree-theme-full-node-drag';
 import '../reactSortableTree.css';
 import { getAssociateNodeApiCall } from '../Actions/AssociateModuleAction';
@@ -38,45 +37,15 @@ const AssociatesNodeReviewList = (props) => {
     selectedAssociateInfo,
     nodeViewState,
     middlePaneHeaderBadgeOne,
-    middlePaneHeaderBadgeTwo
+    middlePaneHeaderBadgeTwo,
+    scanString,
+    searchFocusIndex
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
-  const [secondaryIconData, setSecondaryIconData] = useState([]);
-  // useEffect(() => {
-  //   // setTreeData(reviewListDistinctData);
-  //   if (reviewListDistinctData) {
-  //     if (nodeViewState === 'hierarchy') {
-  //       alert('aaa');
-  //       setTreeData(reviewListDistinctData);
-  //     } else {
-  //       alert('bbb');
-  //       setTreeData(reviewListDistinctData);
-  //     }
-  //   }
-  // }, [reviewListDistinctData, nodeTreeData]);
-
-  const siftApiCall = (siftKey) => {
-    document.getElementById('middleComponentId').scrollTop = '0px';
-  };
-
-  const onClickFooter = (e) => {
+   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    let secondaryIcon = [];
-    if (siftValue === 'sift') {
-      secondaryIcon = [
-        { label: 'primary', onClick: onClickFooter, Icon: FilterList },
-        { label: 'secondary', onClick: onClickFooter, Icon: FilterList }
-      ];
-      setSecondaryIconData(secondaryIcon);
-    }
-    if (siftValue === 'view') {
-      secondaryIcon = [
-        { label: 'hierarchy', onClick: onClickFooter, Icon: AccountTree },
-        { label: 'list', onClick: onClickFooter, Icon: ListIcon }
-      ];
-      setSecondaryIconData(secondaryIcon);
-    }
+    dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'list' || siftValue === 'hierarchy') {
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -84,57 +53,57 @@ const AssociatesNodeReviewList = (props) => {
       });
       getAssociateNodeApiCall(
         selectedAssociateInfo,
-        middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo,
         countPage,
         dispatch,
-        middlePaneHeaderBadgeTwo,
+        middlePaneHeaderBadgeOne,
         siftValue
       );
     }
-    // if (siftValue === 'primary' || siftValue === 'terminated') siftApiCall(siftValue);
-    dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
-  const primaryIcon = [
-    { label: 'sift', onClick: onClickFooter, Icon: FilterList },
-    { label: 'view', onClick: onClickFooter, Icon: FilterList }
+  const primaryIcon = [{ label: 'view', onClick: onClickFooter, Icon: FilterList }];
+  const secondaryIcon = [
+    { label: 'hierarchy', onClick: onClickFooter, Icon: AccountTree },
+    { label: 'list', onClick: onClickFooter, Icon: ListIcon }
   ];
-  const openListPopup = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
+  const openNodeListPopup = (node, event, target, canUpdate) => {
+    let selectedGroup = {};
+    let nodeId = '';
+    if (target === 'hirarchy') {
+      console.log(node);
+      nodeId = node.id;
+      // selectedGroup = {
+      //   id: event.node.userGroupId,
+      //   name: event.node.name,
+      //   description: event.node.description,
+      //   nodeid: event.node.id,
+      //   order: event.node.order
+      // };
+    } else {
+      console.log(node);
+      nodeId = event.currentTarget.getAttribute('tag');
+    }
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'associate',
+        popupHeaderOne: 'associates',
         popupHeaderOneBadgeOne: 'node',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        popupContentArrValue: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+        selectedTagValue: nodeId
       }
     });
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
+        value: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
-  };
-  const openNodeListPopup = (node, event, target, canUpdate) => {
-    console.log(node);
-    console.log(event);
-    let selectedGroup = {};
-    // if (target === 'hirarchy') {
-    //   selectedGroup = {
-    //     id: event.node.userGroupId,
-    //     name: event.node.name,
-    //     description: event.node.description,
-    //     nodeid: event.node.id,
-    //     order: event.node.order
-    //   };
-    // }
     console.log(selectedGroup);
   };
   return (
@@ -145,11 +114,22 @@ const AssociatesNodeReviewList = (props) => {
             <div style={{ minheight: 'calc(100vh - 135px)' }}>
               <SortableTree
                 treeData={reviewListDistinctData}
-                // onChange={(treeData) => setTreeData(treeData)}
                 onChange={(treeData) => {
                   dispatch({
                     type: SET_DISPLAY_TWO_SINGLE_STATE,
                     payload: { stateName: 'reviewListDistinctData', value: treeData }
+                  });
+                }}
+                searchQuery={scanString}
+                searchFocusOffset={searchFocusIndex}
+                searchFinishCallback={(matches) => {
+                  console.log(matches);
+                  dispatch({
+                    type: SET_DISPLAY_TWO_SINGLE_STATE,
+                    payload: {
+                      stateName: 'searchFocusIndex',
+                      value: matches.length > 0 ? searchFocusIndex % matches.length : 0
+                    }
                   });
                 }}
                 theme={FileExplorerTheme}
@@ -157,8 +137,6 @@ const AssociatesNodeReviewList = (props) => {
                 rowHeight={55}
                 scaffoldBlockPxWidth={31}
                 slideRegionSize={50}
-                canDrag={({ node }) => (node.parentOrgHierarchyId !== null ? true : false)}
-                // onMoveNode={({ node }) => changedNode(node) }
                 generateNodeProps={(node) => ({
                   onClick: (event) => {
                     if (event.target.type !== 'button') {
@@ -193,7 +171,9 @@ const AssociatesNodeReviewList = (props) => {
                       textOne={item.informationBasic.associateName}
                       textTwo={item.informationBasic.associateDescription}
                       isTooltipActive={false}
-                      onClickEvent={openListPopup}
+                      onClickEvent={(event) => {
+                        openNodeListPopup(item.id, event, 'hirarchy', true);
+                      }}
                     />
                   </div>
                 );
@@ -208,7 +188,7 @@ const AssociatesNodeReviewList = (props) => {
         FilterMode={FilterMode}
         onClick={onClickFooter}
         primaryIcon={primaryIcon}
-        secondaryIcon={secondaryIconData}
+        secondaryIcon={secondaryIcon}
       />
       {/* )} */}
     </div>

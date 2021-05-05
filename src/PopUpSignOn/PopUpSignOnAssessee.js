@@ -49,9 +49,12 @@ const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
-  const { coreGroupReviewListData, selectedAssociateInfo, coreRoleReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    coreGroupReviewListData,
+    selectedAssociateInfo,
+    coreRoleReviewListData,
+    coreNodeReviewListData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const informationContact = assesseeInfo.informationContact;
   console.log('============>', assesseeInfo);
@@ -174,6 +177,25 @@ const PopUpSignOnAssessee = (props) => {
     }
   };
 
+  const updateNodeIdObject = (e) => {
+    let nodeid = e.currentTarget.getAttribute('tag');
+    let nodeArr = assesseeInfo.informationAllocation.assesseeNode.assesseeNodePrimary;
+    console.log(nodeArr.includes(nodeid));
+    setRoleSelectedError('');
+    if (nodeArr.includes(nodeid)) {
+      document.getElementById(nodeid).style.backgroundColor = 'white';
+      nodeArr = nodeArr.filter(function (number) {
+        return number !== nodeid;
+      });
+    } else {
+      nodeArr.push(nodeid);
+      document.getElementById(nodeid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+      payload: { stateName: 'assesseeNode', actualStateName: 'assesseeNodePrimary', value: nodeArr }
+    });
+  };
   const updateRoleIdObject = (e) => {
     // console.log(e.currentTarget.getAttribute('tag'));
     // console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary);
@@ -311,14 +333,10 @@ const PopUpSignOnAssessee = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreNodeReviewListData[0]}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={updateNodeIdObject}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
