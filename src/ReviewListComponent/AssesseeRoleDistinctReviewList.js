@@ -130,7 +130,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-
+console.log(reviewListDistinctData);
   return (
     <div>
       {reviewListDistinctData &&

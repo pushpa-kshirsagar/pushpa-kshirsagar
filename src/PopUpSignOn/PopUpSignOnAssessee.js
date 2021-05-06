@@ -331,8 +331,12 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         nextPopUpValue={'ROLELISTPOPUP'}
         inputHeader={'node'}
-        inputHeaderBadge={'secondary'}
+        inputHeaderBadge={''}
         infoMsg={'select a node'}
+        isRequired={true}
+        selectedList={assesseeInfo?.informationAllocation?.assesseeNode.assesseeNodePrimary}
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
         ListData={coreNodeReviewListData[0]}
         textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}

@@ -36,7 +36,8 @@ import {
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
   SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -606,6 +607,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         type: INTERNAL_NODE_LIST_SAGA,
         payload: {
           request: requestObj,
+          paneHeader: 'associate',
           BadgeOne: 'nodes',
           BadgeTwo: secondaryOptionCheckValue,
           BadgeThree: clickValue,
@@ -748,6 +750,16 @@ const PopUpDisplayPanelAssociate = (props) => {
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {
       dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
+      let requestObj = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+      };
+      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
+        payload: { request: requestObj, typeGroup: popupHeaderOne }
+      });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
@@ -771,7 +783,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({
         type: INTERNAL_NODE_LIST_SAGA,
-        payload: { request: requestObj, isMiddlePaneList: false }
+        payload: { request: requestObj, nodeViewState: 'hierarchy', isMiddlePaneList: false }
       });
       dispatch({
         type: SET_POPUP_VALUE,

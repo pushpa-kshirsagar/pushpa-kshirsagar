@@ -31,6 +31,7 @@ import {
   makeAssessmentReviewListRequestObject,
   makeAssessmentTypeObj
 } from '../Actions/GenericActions';
+import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 
 const PopupAssessmentsModule = (props) => {
   const {
@@ -182,7 +183,23 @@ const PopupAssessmentsModule = (props) => {
         }
       });
       dispatch({ type: CLEAR_ASSESSMENT_INFO });
-    } else {
+    } else if (targetValue === 'nodes') {
+      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'nodeViewState', value: 'hierarchy' }
+      });
+      getInternalNodeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        targetValue,
+        '',
+        'hierarchy',
+        'assessments'
+      );
+    }else {
       dispatch({
         type: SET_ASSESSMENT_NEXT_POPUP,
         payload: e.currentTarget.getAttribute('data-value')

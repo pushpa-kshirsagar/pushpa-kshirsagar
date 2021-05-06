@@ -42,6 +42,7 @@ import {
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleDistinctApiCall
 } from '../Actions/AssesseeModuleAction';
+import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 
 const PopUpAssesseesModule = (props) => {
   const {
@@ -201,6 +202,22 @@ const PopUpAssesseesModule = (props) => {
         payload: { stateName: 'cardValue', value: 'NoCard' }
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
+    } else if (targetValue === 'nodes') {
+      dispatch({ type: ASSESSEE_INFO_CREATE });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'nodeViewState', value: 'hierarchy' }
+      });
+      getInternalNodeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        targetValue,
+        '',
+        'hierarchy',
+        'assessees'
+      );
     } else {
       dispatch({
         type: SET_ASSESSEE_NEXT_POPUP,

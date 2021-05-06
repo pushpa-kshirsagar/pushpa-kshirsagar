@@ -21,7 +21,7 @@ export const DEFAULT_ROLE_ID = '6083f9d0b15e4f3241dbdd21';
 
 export const PLATFORM_URL = 'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com';
 export const ASSESSEES_URL = 'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com';
-export const ASSOCIATES_URL = 'https://9twmgwhme8.execute-api.ap-south-1.amazonaws.com';
+export const ASSOCIATES_URL = 'https://02cju60bj8.execute-api.ap-south-1.amazonaws.com';
 export const ASSESSMENTS_URL = 'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com';
 export const ASSIGNMENTS_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com';
 
@@ -132,4 +132,8 @@ export const INTERNAL_NODE_LIST_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/review-list';
 export const INTERNAL_NODE_TREE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/tree-review-list';
+export const ASSESSEE_ROLE_GROUP_URL =
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-role-group/review-list';
+export const ASSOCIATE_ROLE_GROUP_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-role-group/review-list';
 // export const URL = '';

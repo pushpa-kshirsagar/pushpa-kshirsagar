@@ -18,7 +18,12 @@ import { FilterList, AccountTree } from '@material-ui/icons';
 import ListIcon from '@material-ui/icons/FormatListBulleted';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
-import { ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION, ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import {
+  ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
+  ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css';
 
@@ -42,6 +47,7 @@ const InternalNodeReviewList = (props) => {
     nodeViewState,
     scanString,
     searchFocusIndex,
+    middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
     middlePaneHeaderBadgeThree,
@@ -110,7 +116,6 @@ const InternalNodeReviewList = (props) => {
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
 
-  
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
@@ -126,7 +131,8 @@ const InternalNodeReviewList = (props) => {
         dispatch,
         middlePaneHeaderBadgeOne,
         middlePaneHeaderBadgeThree,
-        siftValue
+        siftValue,
+        middlePaneHeader
       );
     }
   };
@@ -143,13 +149,6 @@ const InternalNodeReviewList = (props) => {
     if (target === 'hirarchy') {
       console.log(node);
       nodeId = node.id;
-      // selectedGroup = {
-      //   id: event.node.userGroupId,
-      //   name: event.node.name,
-      //   description: event.node.description,
-      //   nodeid: event.node.id,
-      //   order: event.node.order
-      // };
     } else {
       console.log(node);
       nodeId = event.currentTarget.getAttribute('tag');
@@ -157,12 +156,18 @@ const InternalNodeReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'associate',
+        popupHeaderOne: middlePaneHeader,
         popupHeaderOneBadgeOne: 'node',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue:
+          (middlePaneHeader === 'assessees' && ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION) ||
+          (middlePaneHeader === 'assessments' &&
+            ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
+          (middlePaneHeader === 'assignments' &&
+            ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
+          ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: nodeId
       }
     });
@@ -178,7 +183,7 @@ const InternalNodeReviewList = (props) => {
   };
   return (
     <div>
-     {reviewListDistinctData.length > 0 && (
+      {reviewListDistinctData.length > 0 && (
         <>
           {nodeViewState === 'hierarchy' ? (
             <div style={{ minheight: 'calc(100vh - 135px)' }}>

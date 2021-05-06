@@ -531,15 +531,26 @@ export const makeAssesseeRoleCreateObj = (
             conditionValue: searchObj
           },
           {
-            dataType: 'string',
-            conditionColumn: 'informationBasic.assesseeRoleName',
+            dataType: 'boolean',
+            conditionColumn: 'informationSetup.assesseeRoleDefault',
             conditionValue: {
               condition: 'eq',
               value: {
-                from: 'assessee'
+                from: 'true'
               }
             }
           }
+          // {
+          //   dataType: 'string',
+          //   conditionColumn: 'informationBasic.assesseeRoleName',
+          //   conditionValue: {
+          //     condition: 'ct',
+          //     value: {
+          //       from: 'assessee'
+          //     }
+          //   }
+          // }
+
         ]
       }
     ]
