@@ -51,7 +51,6 @@ const AssociateRoleCreatePopup = () => {
     setRoleSelectedError('');
     let tagIdArr = associateRole.informationAllocation.associateRoleGroup;
     if (tagIdArr.includes(tagId)) {
-      setRoleSelectedError('');
       document.getElementById(tagId).style.backgroundColor = 'white';
       tagIdArr = tagIdArr.filter(function (number) {
         return number !== tagId;
@@ -72,6 +71,8 @@ const AssociateRoleCreatePopup = () => {
       }
     });
   };
+  console.log('ROLE ASOCIATE POPUP>>>>>>>>>.', associateRole);
+
 
   return (
     <div>
@@ -113,7 +114,7 @@ const AssociateRoleCreatePopup = () => {
       <PopUpReviewList
         isActive={isPopUpValue === 'ROLEGROUPPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={'associates'}
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'CONFIRMATIONPOPUP'}

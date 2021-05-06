@@ -53,7 +53,7 @@ const RoleCreateReducer = (istate = initialState, action) => {
     case SET_ROLE_DYNAMIC_STATE:
       return {
         ...istate,
-        assesseeRole: {
+        [action.payload.objectName]: {
           ...istate[action.payload.objectName],
           [action.payload.stateName]: {
             ...istate[action.payload.objectName][action.payload.stateName],

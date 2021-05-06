@@ -749,6 +749,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {
+      dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
       let requestObj = {
         assesseeId: selectedAssociateInfo?.assesseeId,

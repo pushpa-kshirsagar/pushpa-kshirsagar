@@ -51,7 +51,6 @@ const AssesseeRoleCreatePopUp = () => {
     let tagId = e.currentTarget.getAttribute('tag');
     let tagIdArr = assesseeRole.informationAllocation.assesseeRoleGroup;
     if (tagIdArr.includes(tagId)) {
-      setRoleSelectedError('');
       document.getElementById(tagId).style.backgroundColor = 'white';
       tagIdArr = tagIdArr.filter(function (number) {
         return number !== tagId;
@@ -93,7 +92,7 @@ const AssesseeRoleCreatePopUp = () => {
         label={'description'}
         actualLableValue={'assesseeRoleDescription'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={'assessees'}
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'information'}
         basicInfo={assesseeRole.informationBasic}
@@ -104,7 +103,7 @@ const AssesseeRoleCreatePopUp = () => {
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={'assessees'}
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ROLEGROUPPOPUP'}
@@ -112,7 +111,7 @@ const AssesseeRoleCreatePopUp = () => {
       <PopUpReviewList
         isActive={isPopUpValue === 'ROLEGROUPPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={'assessees'}
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
@@ -140,7 +139,7 @@ const AssesseeRoleCreatePopUp = () => {
       <PopUpConfirmation
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
+        headerOne={'assessees'}
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'create'}
         onClickYes={onClickYes}
