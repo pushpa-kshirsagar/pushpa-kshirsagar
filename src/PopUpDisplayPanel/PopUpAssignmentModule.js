@@ -28,6 +28,7 @@ import {
   makeAssignmentTypeObj,
   makeAssignmentReviewListRequestObject
 } from '../Actions/GenericActions';
+import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 
 const PopUpAssignmentModule = (props) => {
   const {
@@ -163,6 +164,22 @@ const PopUpAssignmentModule = (props) => {
         }
       });
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+    } else if (targetValue === 'nodes') {
+      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'nodeViewState', value: 'hierarchy' }
+      });
+      getInternalNodeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        targetValue,
+        '',
+        'hierarchy',
+        'assignments'
+      );
     } else {
       dispatch({
         type: SET_ASSIGNMENT_NEXT_POPUP,

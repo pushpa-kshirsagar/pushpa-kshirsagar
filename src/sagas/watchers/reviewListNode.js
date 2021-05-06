@@ -38,13 +38,6 @@ function* workerReviewAssociatesNodeListSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: data.payload.isMiddlePaneList
-          ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_NODE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject
-      });
-
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -58,6 +51,12 @@ function* workerReviewAssociatesNodeListSaga(data) {
             scanCount: userResponse && userResponse.countTotal ? userResponse.countTotal : 0,
             showMiddlePaneState: true
           }
+        });
+        yield put({
+          type: data.payload.isMiddlePaneList
+            ? REVIEWLIST_DISTINCT_DATA
+            : SET_CORE_NODE_REVIEW_LIST_DATA,
+          payload: userResponse.responseObject
         });
       }
     } else {
@@ -85,18 +84,11 @@ function* workerReviewInternalNodeListSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: data.payload.isMiddlePaneList
-          ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_NODE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject
-      });
-
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: 'associate',
+            middlePaneHeader: data.payload.paneHeader,
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: data.payload.BadgeThree,
@@ -107,6 +99,12 @@ function* workerReviewInternalNodeListSaga(data) {
           }
         });
       }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_NODE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

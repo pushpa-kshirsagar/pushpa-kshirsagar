@@ -520,7 +520,8 @@ export const getInternalNodeApiCall = (
   dispatch,
   targetValue,
   middlePaneHeaderBadgeThree,
-  nodeViewState
+  nodeViewState,
+  paneheader
 ) => {
   let requestObj = makeInternalNodeObj(
     selectedAssociateInfo,
@@ -545,6 +546,7 @@ export const getInternalNodeApiCall = (
     type: INTERNAL_NODE_LIST_SAGA,
     payload: {
       request: requestObj,
+      paneHeader: (paneheader && paneheader) || 'associate',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: middlePaneHeaderBadgeThree,
