@@ -16,7 +16,12 @@ import {
   ASSOCIATE_CREATE_INFO,
   SET_ASSOCIATE_INFORMATION,
   SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
-  UPDATE_ASSOCIATE_SETUP_INFO
+  UPDATE_ASSOCIATE_SETUP_INFO,
+  UPDATE_ASSOCIATE_WEBSITE_INFO,
+  UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
+  UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO,
+  UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -108,12 +113,32 @@ const initialState = {
     }
   },
   informationSetup: {
-    associateDateFormat: '',
-    associateDictionary: '',
-    associateLanguage: '',
-    assesseeNameFormat: '',
-    associateTimeFormat: ''
+    assessee: {
+      assesseeNameFormat: '',
+      assesseeRoleCreate: false,
+      assesseeRoleShare: false,
+      assesseeRoleShared: true
+    },
+    assessment: {},
+    assignment: {},
+    associate: {
+      associateDateFormat: '',
+      associateDictionary: '',
+      associateLanguage: '',
+      associateRoleCreate: false,
+      associateRoleShare: false,
+      associateRoleShared: true,
+      associateTimeFormat: ''
+    }
   },
+
+  // informationSetup: {
+  //   associateDateFormat: '',
+  //   associateDictionary: '',
+  //   associateLanguage: '',
+  //   assesseeNameFormat: '',
+  //   associateTimeFormat: ''
+  // },
   basicInfo: {
     name: '',
     description: '',
@@ -271,12 +296,33 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         ...istate,
         ...action.payload
       };
+    case UPDATE_ASSOCIATE_INFO_CONTACT_INFO:
+      return {
+        ...istate,
+        informationContact: action.payload
+      };
     case UPDATE_ASSOCIATE_WORKADDRESS_INFO:
       return {
         ...istate,
         informationContact: {
           ...istate.informationContact,
           associateAddressWorkPrimary: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          associateAddressWorkSecondary: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_WEBSITE_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          associateAddressWebsite: action.payload
         }
         // workAddressInfo: action.payload
       };
@@ -288,6 +334,14 @@ const AssociateCreateReducer = (istate = initialState, action) => {
           associateTelephoneWorkPrimary: action.payload
         }
         // workTeleponeInfo: action.payload
+      };
+    case UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          associateTelephoneWorkSecondary: action.payload
+        }
       };
     case SET_ASSOCIATE_DYNAMIC_SINGLE_STATE:
       return {
@@ -323,7 +377,18 @@ const AssociateCreateReducer = (istate = initialState, action) => {
     case UPDATE_ASSOCIATE_SETUP_INFO:
       return {
         ...istate,
-        informationSetup: action.payload
+        informationSetup: {
+          ...istate.informationSetup,
+          associate: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO:
+      return {
+        ...istate,
+        informationSetup: {
+          ...istate.informationSetup,
+          assessee: action.payload
+        }
       };
     case SET_ASSOCIATE_INFORMATION:
       return {

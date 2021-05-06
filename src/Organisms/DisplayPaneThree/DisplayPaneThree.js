@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavigatorIcon from '@material-ui/icons/OpenWith';
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
@@ -74,7 +74,9 @@ export const DisplayPaneThree = () => {
     reviewMode,
     createMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { showMiddlePaneState, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { showMiddlePaneState, selectedAssociateInfo } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const { informationBasic } = responseObject;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const rightPaneSectionsAssessee = [
@@ -279,6 +281,21 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssociate, setSelectedSectionAssociate] = useState(
     rightPaneSectionsAssociate[0]
   );
+  useEffect(() => {
+    setSelectedSection(rightPaneSectionsAssessee[0]);
+    setSelectedSectionAssesseeRole(rightPaneSectionsAssesseeRole[0]);
+    setSelectedSectionAssesseeGroup(rightPaneSectionsAssesseeGroup[0]);
+    setSelectedSectionAssociateGroup(rightPaneSectionsAssociateGroup[0]);
+    setSelectedSectionAssessmentGroup(rightPaneSectionsAssessmentGroup[0]);
+    setSelectedSectionAssignmentGroup(rightPaneSectionsAssignmentGroup[0]);
+    setSelectedSectionAssignmentType(rightPaneSectionsAssignmentType[0]);
+    setSelectedSectionAssessmentType(rightPaneSectionsAssessmentType[0]);
+    setSelectedSectionAssessment(rightPaneSectionsAssessment[0]);
+    setSelectedSectionAssignment(rightPaneSectionsAssignment[0]);
+    setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
+    setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
+  }, [responseObject]);
+
   const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
   const onClickFooter = (e) => {
     dispatch({ type: NAVIGATOR_MODE });
@@ -327,7 +344,7 @@ export const DisplayPaneThree = () => {
         payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne: 'assessee', reqBody }
       });
     } else if (headerOneBadgeOne === 'role' && headerOne === 'assessees') {
-      console.log("ASSESSEES ROLE REVISE");
+      console.log('ASSESSEES ROLE REVISE');
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -343,7 +360,7 @@ export const DisplayPaneThree = () => {
         payload: { headerOne: 'assessees', reqBody }
       });
     } else if (headerOneBadgeOne === 'role' && headerOne === 'associates') {
-      console.log("ASS0CIATE ROLE REVISE");
+      console.log('ASS0CIATE ROLE REVISE');
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -396,8 +413,8 @@ export const DisplayPaneThree = () => {
         associateId: id,
         associate: {
           id,
-          // informationBasic,
-          // informationContact,
+          informationBasic,
+          informationContact,
           informationSetup
         }
       };

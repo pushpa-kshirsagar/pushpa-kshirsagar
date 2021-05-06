@@ -3,7 +3,9 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
   GET_ASSOCIATE_INFO_SAGA,
-  UPDATE_ASSOCIATE_BASIC_INFO
+  UPDATE_ASSOCIATE_BASIC_INFO,
+  UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
+  UPDATE_ASSOCIATE_SETUP_INFO
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_INFO_URL } from '../../endpoints';
 
@@ -39,8 +41,14 @@ function* workerReviewInfoAssociateSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
-      const { informationBasic } = userResponse.responseObject[0]; 
+      const {
+        informationBasic,
+        informationContact,
+        informationSetup
+      } = userResponse.responseObject[0];
       yield put({ type: UPDATE_ASSOCIATE_BASIC_INFO, payload: informationBasic });
+      // yield put({ type: UPDATE_ASSOCIATE_INFO_CONTACT_INFO, payload: informationContact });
+      // yield put({ type: UPDATE_ASSOCIATE_SETUP_INFO, payload: informationSetup });
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });

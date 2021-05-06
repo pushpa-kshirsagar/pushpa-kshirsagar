@@ -72,7 +72,7 @@ const AssociatesNodeReviewList = (props) => {
     let nodeId = '';
     if (target === 'hirarchy') {
       console.log(node);
-      nodeId = node.id;
+      nodeId = node?.node?.id || '';
       // selectedGroup = {
       //   id: event.node.userGroupId,
       //   name: event.node.name,
@@ -82,7 +82,7 @@ const AssociatesNodeReviewList = (props) => {
       // };
     } else {
       console.log(node);
-      nodeId = event.currentTarget.getAttribute('tag');
+      nodeId = node;
     }
     dispatch({
       type: SET_POPUP_STATE,
@@ -172,7 +172,7 @@ const AssociatesNodeReviewList = (props) => {
                       textTwo={item.informationBasic.associateDescription}
                       isTooltipActive={false}
                       onClickEvent={(event) => {
-                        openNodeListPopup(item.id, event, 'hirarchy', true);
+                        openNodeListPopup(item.id, event, 'list', true);
                       }}
                     />
                   </div>

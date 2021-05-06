@@ -211,7 +211,8 @@ const PopUpMiddlePaneList = (props) => {
       if (
         typeOfMiddlePaneList === 'associateDistinctReviewList' ||
         typeOfMiddlePaneList === 'associatesRoleAssociateReviewList' ||
-        typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
+        typeOfMiddlePaneList === 'associatesGroupAssociateReviewList' ||
+        typeOfMiddlePaneList === 'associatesNodeDistinctReviewList'
       ) {
         dispatch({
           type: GET_ASSOCIATE_INFO_SAGA,
@@ -520,9 +521,9 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList') {
-        dispatch({ type: LOADER_STOP });
-      }
+      // if (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList') {
+      //   dispatch({ type: LOADER_STOP });
+      // }
       if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
         dispatch({ type: LOADER_STOP });
       }

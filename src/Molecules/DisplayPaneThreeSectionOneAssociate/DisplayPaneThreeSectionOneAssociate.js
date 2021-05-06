@@ -23,7 +23,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   const allianceListAll = [
     {
       id: 'a2',
-      labelTextOneOne: 'owner',
+      labelTextOneOne: 'administrator',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
@@ -360,45 +360,6 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         }
       ],
       innerInfo: 'No Information'
-    },
-    {
-      id: 'a2',
-      labelTextOneOne: 'owner',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'guardian',
-              status: 'active'
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'guardian',
-              status: 'active'
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'guardian',
-              status: 'active'
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'secondary',
-          innerList: []
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
     }
   ];
   const engagementListKey = [

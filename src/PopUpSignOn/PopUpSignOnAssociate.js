@@ -26,7 +26,11 @@ import {
   LOADER_START,
   CLEAR_ASSESSEE_INFO,
   SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
-  UPDATE_ASSOCIATE_SETUP_INFO
+  UPDATE_ASSOCIATE_SETUP_INFO,
+  UPDATE_ASSOCIATE_WEBSITE_INFO,
+  UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO,
+  UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO
 } from '../actionType';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -79,7 +83,8 @@ const PopUpSignOnAssociate = () => {
       associate: {
         informationBasic: associateInfo.informationBasic,
         informationAllocation: associateInfo.informationAllocation,
-        informationContact: associateInfo.informationContact
+        informationContact: associateInfo.informationContact,
+        informationSetup: associateInfo.informationSetup
       },
       assessee: {
         informationBasic: informationBasic,
@@ -312,9 +317,9 @@ const PopUpSignOnAssociate = () => {
         primaryheader={'secondary'}
         nextPopUpValue={''}
         isRequired={true}
-        basicInfo={associateInfo.informationContact.associateAddressWorkPrimary}
-        countryCode={'associateTelephoneCountryRegion'}
-        typeOfSetObject={UPDATE_ASSOCIATE_WORKADDRESS_INFO}
+        basicInfo={associateInfo.informationContact.associateAddressWorkSecondary}
+        countryCode={'associateAddressWorkSecondary'}
+        typeOfSetObject={UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTelephone
@@ -338,9 +343,9 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         inputHeader={'work telephone'}
         primaryheader={'secondary'}
-        basicInfo={associateInfo.informationContact.associateTelephoneWorkPrimary}
+        basicInfo={associateInfo.informationContact.associateTelephoneWorkSecondary}
         isMobileState={false}
-        typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO}
         nextPopUpValue={''}
         isRequired={true}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -360,7 +365,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup || {}}
+        basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -382,7 +387,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup || {}}
+        basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -398,7 +403,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup || {}}
+        basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -417,8 +422,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo.informationSetup.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -436,7 +441,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup || {}}
+        basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -449,8 +454,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         isRequired={false}
         actualLableValue={'associateAddressWebsitePrimary'}
-        basicInfo={associateInfo.informationBasic}
-        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        basicInfo={associateInfo.informationContact.associateAddressWebsite}
+        typeOfSetObject={UPDATE_ASSOCIATE_WEBSITE_INFO}
         nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -462,9 +467,9 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
         isRequired={false}
-        actualLableValue={'associateAddressWebsitePrimary'}
-        basicInfo={associateInfo.informationBasic}
-        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        actualLableValue={'associateAddressWebsiteSecondary'}
+        basicInfo={associateInfo.informationContact.associateAddressWebsite}
+        typeOfSetObject={UPDATE_ASSOCIATE_WEBSITE_INFO}
         nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
