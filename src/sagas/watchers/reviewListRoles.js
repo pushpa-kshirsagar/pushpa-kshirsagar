@@ -138,7 +138,7 @@ function* workerReviewAssesseeRoleGroupListSaga(data) {
         payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
-
+    yield put({ type: LOADER_STOP });
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
