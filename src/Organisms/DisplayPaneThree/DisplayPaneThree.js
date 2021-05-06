@@ -414,7 +414,7 @@ export const DisplayPaneThree = () => {
         associate: {
           id,
           informationBasic,
-          informationContact,
+          // informationContact,
           informationSetup
         }
       };
