@@ -41,8 +41,8 @@ const AssesseeRoleCreatePopUp = () => {
     };
 
     console.log('CREATE Role api', requestObj);
-    // dispatch({ type: LOADER_START });
-    // dispatch({ type: CREATE_ASSESSEE_ROLE_SAGA, payload: requestObj });
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSESSEE_ROLE_SAGA, payload: requestObj });
   };
   console.log('ROLE ASSESSEE POPUP>>>>>>>>>.', assesseeRole);
   const updateRoleGroup = (e) => {

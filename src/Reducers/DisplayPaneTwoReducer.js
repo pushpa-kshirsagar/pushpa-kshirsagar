@@ -58,7 +58,7 @@ const initialState = {
   leftPaneAssesseeInfo: '',
   nodeViewState: 'hierarchy',
   scanString: '',
-  searchFocusIndex: -1
+  searchFocusIndex: 0
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

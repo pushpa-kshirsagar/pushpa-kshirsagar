@@ -1,3 +1,7 @@
+export const SIGN_IN_URL = '/sign-in';
+export const MANAGER_ROLE_ID = ['60952cff1752c36c6936533d'];
+export const ADMIN_ROLE_ID = ['60952c7b1752c36c6936532b', '60952ca11752c36c69365331'];
+export const DEFAULT_ROLE_ID = '60952cd11752c36c69365337';
 // export const GET_USER_URL = 'https://run.mocky.io/v3/a8daa4c8-e6e5-4062-8d88-05f3ffdc324d';
 // export const GET_USER_URL = 'https://run.mocky.io/v3/d5c8b175-f59d-44e0-ae31-84bbc425f91d';
 export const GET_USER_URL = 'https://run.mocky.io/v3/221042b0-a9d2-4268-9842-958d11977630';
@@ -8,16 +12,6 @@ export const GET_ASSESSEE_PERMISSION_URL =
 // export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/d6144b23-0a0d-48b9-b58d-14fbfba95890';// for assessee role
 // export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/c0f46922-44b6-44fc-a8d6-ff2c5ec48a81';// for assessee manager (primary) role
 // export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/b4ff8c35-0445-4f0c-899b-68d8281b2bd8';// for assessee manager (secondary) role
-
-//assessee, manager, admin create
-export const MANAGER_ROLE_ID = [
-  '608697d9d53a790a03e49618',
-  '6086980dd53a790a03e4961d',
-  '608b9a5d212c0f08a4ff9284',
-  '608b9aa86b842418eb79cb17'
-];
-export const ADMIN_ROLE_ID = ['6086924e349b894257720542', '6086cdff11268860527587fe'];
-export const DEFAULT_ROLE_ID = '6083f9d0b15e4f3241dbdd21';
 
 export const PLATFORM_URL = 'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com';
 export const ASSESSEES_URL = 'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com';
@@ -136,4 +130,5 @@ export const ASSESSEE_ROLE_GROUP_URL =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee-role-group/review-list';
 export const ASSOCIATE_ROLE_GROUP_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-role-group/review-list';
+// export const URL = '';
 // export const URL = '';

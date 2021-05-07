@@ -60,6 +60,7 @@ const PopUpSignOnAssessee = (props) => {
   console.log('============>', assesseeInfo);
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const [assignRoleArr, setAssignRoleArr] = useState([]);
+  const [defaultNodeId, setdefaultNodeId] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -79,18 +80,20 @@ const PopUpSignOnAssessee = (props) => {
     }
   }, [assesseeInfo.assesseeInformationData, history]);
   useEffect(() => {
-    // let otherRole = [];
-
-    // otherRole = coreRoleReviewListData.filter(function (value) {
-    //   return value.informationSetup.assesseeRoleDefault == false;
-    // });
-    // setAssignRoleArr(otherRole);
-    // console.log(assignRoleArr);
-    // console.log('otherRole');
     if (headerOne === 'assessee') {
       assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary.push(DEFAULT_ROLE_ID);
     }
-  }, [coreRoleReviewListData]);
+    if (headerOne === 'administrator' && coreNodeReviewListData.length > 0) {
+      let defaultnode = coreNodeReviewListData[0]
+        .filter(
+          (x) =>
+            x.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary === null
+        )
+        .map((x) => x.id);
+      assesseeInfo.informationAllocation.assesseeNode.assesseeNodePrimary.push(defaultnode[0]);
+      setdefaultNodeId(defaultnode[0])
+    }
+  }, [coreRoleReviewListData, coreNodeReviewListData]);
   const onClickYes = async () => {
     // var defaultroleArr = coreRoleReviewListData
     //   .filter(function (data) {
@@ -180,21 +183,26 @@ const PopUpSignOnAssessee = (props) => {
   const updateNodeIdObject = (e) => {
     let nodeid = e.currentTarget.getAttribute('tag');
     let nodeArr = assesseeInfo.informationAllocation.assesseeNode.assesseeNodePrimary;
-    console.log(nodeArr.includes(nodeid));
-    setRoleSelectedError('');
-    if (nodeArr.includes(nodeid)) {
-      document.getElementById(nodeid).style.backgroundColor = 'white';
-      nodeArr = nodeArr.filter(function (number) {
-        return number !== nodeid;
+    if (defaultNodeId !== nodeid || headerOne !== 'administrator') {
+      setRoleSelectedError('');
+      if (nodeArr.includes(nodeid)) {
+        document.getElementById(nodeid).style.backgroundColor = 'white';
+        nodeArr = nodeArr.filter(function (number) {
+          return number !== nodeid;
+        });
+      } else {
+        nodeArr.push(nodeid);
+        document.getElementById(nodeid).style.backgroundColor = '#F0F0F0';
+      }
+      dispatch({
+        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'assesseeNode',
+          actualStateName: 'assesseeNodePrimary',
+          value: nodeArr
+        }
       });
-    } else {
-      nodeArr.push(nodeid);
-      document.getElementById(nodeid).style.backgroundColor = '#F0F0F0';
     }
-    dispatch({
-      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-      payload: { stateName: 'assesseeNode', actualStateName: 'assesseeNodePrimary', value: nodeArr }
-    });
   };
   const updateRoleIdObject = (e) => {
     // console.log(e.currentTarget.getAttribute('tag'));

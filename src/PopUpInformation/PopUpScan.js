@@ -452,14 +452,24 @@ const PopUpScan = (props) => {
           true
         );
       }
+      if (
+        typeOfMiddlePaneList === 'associatesNodeDistinctReviewList' ||
+        typeOfMiddlePaneList === 'associateNodeDistinctReviewList'
+      ) {
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'scanString', value: state.scanValue }
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'typeOfMiddlePaneList', value: typeOfMiddlePaneList }
+        });
+      }
       if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
         console.log(typeOfMiddlePaneList);
       }
     }
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'scanString', value: state.scanValue }
-    });
+
     dispatch({ type: POPUP_CLOSE });
   };
   return (
@@ -500,6 +510,8 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'assignmentsTypeDistinctReviewList' ||
                 isPopUpValue === 'assessmentsTypeDistinctReviewList' ||
                 isPopUpValue === 'associatesGroupAssociateReviewList' ||
+                isPopUpValue === 'associatesNodeDistinctReviewList' ||
+                isPopUpValue === 'associateNodeDistinctReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

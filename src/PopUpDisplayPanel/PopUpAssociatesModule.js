@@ -204,8 +204,8 @@ const PopUpAssociatesModule = (props) => {
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: {
-          stateName: 'searchFocusIndex',
-          value: -1
+          stateName: 'scanString',
+          value: ''
         }
       });
       dispatch({

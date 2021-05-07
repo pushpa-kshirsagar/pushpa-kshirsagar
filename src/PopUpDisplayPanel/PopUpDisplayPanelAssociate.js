@@ -70,6 +70,7 @@ import {
   makeManagerRoleCreateObj,
   makeInternalNodeObj
 } from '../Actions/GenericActions';
+import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -600,21 +601,31 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'associate' &&
       popupHeaderOneBadgeOne === 'nodes'
     ) {
-      let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: INTERNAL_NODE_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          paneHeader: 'associate',
-          BadgeOne: 'nodes',
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: clickValue,
-          nodeViewState: 'hierarchy',
-          isMiddlePaneList: true
-        }
-      });
+      getInternalNodeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        popupHeaderOneBadgeOne,
+        '',
+        'hierarchy',
+        'associate'
+      );
+      // let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      // dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      // dispatch({
+      //   type: INTERNAL_NODE_LIST_SAGA,
+      //   payload: {
+      //     request: requestObj,
+      //     paneHeader: 'associate',
+      //     BadgeOne: 'nodes',
+      //     BadgeTwo: secondaryOptionCheckValue,
+      //     BadgeThree: clickValue,
+      //     nodeViewState: 'hierarchy',
+      //     isMiddlePaneList: true
+      //   }
+      // });
     }
     if (
       clickValue === 'distinct' &&

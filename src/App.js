@@ -7,7 +7,7 @@ import decode from 'jwt-decode';
 import userPool from './UserPool';
 import { AccountContext } from './Account';
 import DisplayPageConfirmUser from './Pages/DisplayPageConfirmUser/DisplayPageConfirmUser';
-
+import { SIGN_IN_URL } from './endpoints';
 function App() {
   // const { getSession } = useContext(AccountContext);
   // useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
   //   //   console.log('ERROR===>', error);
   //   // });
   // }, []);
- 
+
   const checkAuth = () => {
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -54,7 +54,7 @@ function App() {
       <Route
         {...rest}
         render={(props) =>
-          checkAuth() ? <Component {...props} /> : <Redirect to={{ pathname: '/signIn' }} />
+          checkAuth() ? <Component {...props} /> : <Redirect to={{ pathname: SIGN_IN_URL }} />
         }
       />
     );
@@ -64,11 +64,11 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/signIn" />} />
-          <Route path="/signIn" component={DisplayPageSignIn} exact={true} />
+          <Route exact path="/" render={() => <Redirect to={SIGN_IN_URL} />} />
+          <Route path="/sign-in" component={DisplayPageSignIn} exact={true} />
           <Route path="/confirm/:id" component={DisplayPageConfirmUser} exact={true} />
           <AuthRoute path="/dashboard" component={DisplayPageOne} exact={true} />
-          <Route path="/signOn" component={DisplayPageSignOn} exact={true} />
+          <Route path="/sign-on" component={DisplayPageSignOn} exact={true} />
         </Switch>
       </div>
     </Router>

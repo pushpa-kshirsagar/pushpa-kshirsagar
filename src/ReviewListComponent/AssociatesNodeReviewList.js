@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSOCIATE_POPUP_CLOSE,
@@ -28,6 +28,8 @@ import { Fragment } from 'react';
 import Card from '../Molecules/Card/Card';
 const AssociatesNodeReviewList = (props) => {
   const dispatch = useDispatch();
+  const [renderComp, setRenderComp] = useState(false);
+  const inputRef = useRef(null);
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
   );
@@ -43,7 +45,7 @@ const AssociatesNodeReviewList = (props) => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
-   const onClickFooter = (e) => {
+  const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'list' || siftValue === 'hierarchy') {
@@ -106,24 +108,27 @@ const AssociatesNodeReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
     console.log(selectedGroup);
   };
+  const changedNode = (node) => {
+    console.log(node);
+  };
   return (
     <div>
       {reviewListDistinctData.length > 0 && (
         <>
           {nodeViewState === 'hierarchy' ? (
-            <div style={{ minheight: 'calc(100vh - 135px)' }}>
+            <div style={{ minheight: 'calc(100vh - 135px)' }} key={scanString}>
               <SortableTree
                 treeData={reviewListDistinctData}
                 onChange={(treeData) => {
-                  dispatch({
-                    type: SET_DISPLAY_TWO_SINGLE_STATE,
-                    payload: { stateName: 'reviewListDistinctData', value: treeData }
-                  });
+                  treeData.length === 1 &&
+                    dispatch({
+                      type: SET_DISPLAY_TWO_SINGLE_STATE,
+                      payload: { stateName: 'reviewListDistinctData', value: treeData }
+                    });
                 }}
                 searchQuery={scanString}
                 searchFocusOffset={searchFocusIndex}
                 searchFinishCallback={(matches) => {
-                  console.log(matches);
                   dispatch({
                     type: SET_DISPLAY_TWO_SINGLE_STATE,
                     payload: {
@@ -132,6 +137,8 @@ const AssociatesNodeReviewList = (props) => {
                     }
                   });
                 }}
+                canDrag={({ node }) => true && !node.parentId}
+                onMoveNode={({ node }) => changedNode(node)}
                 theme={FileExplorerTheme}
                 isVirtualized={false}
                 rowHeight={55}
