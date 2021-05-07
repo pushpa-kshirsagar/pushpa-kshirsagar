@@ -7,7 +7,8 @@ import {
   UPDATE_ASSESSEE_BASIC_INFO,
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  UPDATE_ASSESSEE_CONTACT_INFO
+  UPDATE_ASSESSEE_CONTACT_INFO,
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import { ASSESSEE_REVIEW_INFO_URL } from '../../endpoints';
 
@@ -59,6 +60,115 @@ function* workerReviewInfoAssesseeSaga(data) {
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });
+        if (
+          informationAllocation &&
+          informationAllocation.assesseeGroup.assesseeGroupPrimary &&
+          informationAllocation.assesseeGroup.assesseeGroupPrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.assesseeGroup.assesseeGroupPrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeGroup',
+              actualStateName: 'assesseeGroupPrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeGroup',
+              actualStateName: 'assesseeGroupPrimary',
+              value: []
+            }
+          });
+        }
+
+        if (
+          informationAllocation &&
+          informationAllocation.assesseeRole.assesseeRolePrimary &&
+          informationAllocation.assesseeRole.assesseeRolePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.assesseeRole.assesseeRolePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeRole',
+              actualStateName: 'assesseeRolePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeRole',
+              actualStateName: 'assesseeRolePrimary',
+              value: []
+            }
+          });
+        }
+
+        if (
+          informationAllocation &&
+          informationAllocation.assesseeGroup.assesseeGroupSecondary &&
+          informationAllocation.assesseeGroup.assesseeGroupSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.assesseeGroup.assesseeGroupSecondary.map(
+            (ob) => ob.id
+          );
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeGroup',
+              actualStateName: 'assesseeGroupSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeGroup',
+              actualStateName: 'assesseeGroupSecondary',
+              value: []
+            }
+          });
+        }
+
+        if (
+          informationAllocation &&
+          informationAllocation.assesseeRole.assesseeRoleSecondary &&
+          informationAllocation.assesseeRole.assesseeRoleSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.assesseeRole.assesseeRoleSecondary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeRole',
+              actualStateName: 'assesseeRoleSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeRole',
+              actualStateName: 'assesseeRoleSecondary',
+              value: []
+            }
+          });
+        }
+        // yield put({
+        //   type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+        //   payload: {
+        //     stateName: 'assesseeGroup',
+        //     actualStateName: 'assesseeGroupPrimary',
+        //     value: roleArr
+        //   }
+        // });
         yield put({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
         yield put({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
         yield put({ type: UPDATE_ASSESSEE_ENGAGEMENT_INFO, payload: informationEngagement });

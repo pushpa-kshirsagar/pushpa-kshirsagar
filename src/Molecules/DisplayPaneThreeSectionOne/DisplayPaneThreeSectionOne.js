@@ -10,11 +10,17 @@ import {
   ASSESSEE_SIGN_ON,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT
 } from '../../actionType';
-import { makeAssesseeGroupObj, makeAssesseeRoleObj } from '../../Actions/GenericActions';
+import {
+  makeAssesseeGroupObj,
+  makeAssesseeRoleObj,
+  makeInternalNodeObj
+} from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOne = () => {
   const [listExpand, setListExpand] = useState('');
@@ -216,7 +222,10 @@ const DisplayPaneThreeSectionOne = () => {
     }
   ];
   let assesseeGroupListPrimary = [];
-  if (informationAllocation?.assesseeGroup.assesseeGroupPrimary.length > 0) {
+  if (
+    informationAllocation?.assesseeGroup.assesseeGroupPrimary &&
+    informationAllocation?.assesseeGroup.assesseeGroupPrimary.length > 0
+  ) {
     const tempArr = informationAllocation?.assesseeGroup?.assesseeGroupPrimary;
     tempArr.forEach((ob) => {
       assesseeGroupListPrimary.push({
@@ -228,7 +237,10 @@ const DisplayPaneThreeSectionOne = () => {
     });
   }
   let assesseeGroupListSecondary = [];
-  if (informationAllocation?.assesseeGroup.assesseeGroupSecondary.length > 0) {
+  if (
+    informationAllocation?.assesseeGroup.assesseeGroupSecondary &&
+    informationAllocation?.assesseeGroup.assesseeGroupSecondary.length > 0
+  ) {
     const tempArr = informationAllocation?.assesseeGroup?.assesseeGroupSecondary;
     tempArr.forEach((ob) => {
       assesseeGroupListSecondary.push({
@@ -240,7 +252,10 @@ const DisplayPaneThreeSectionOne = () => {
     });
   }
   let assesseeRoleListPrimary = [];
-  if (informationAllocation?.assesseeRole.assesseeRolePrimary.length > 0) {
+  if (
+    informationAllocation?.assesseeRole.assesseeRolePrimary &&
+    informationAllocation?.assesseeRole.assesseeRolePrimary.length > 0
+  ) {
     const tempArr = informationAllocation?.assesseeRole?.assesseeRolePrimary;
     tempArr.forEach((ob) => {
       assesseeRoleListPrimary.push({
@@ -252,7 +267,10 @@ const DisplayPaneThreeSectionOne = () => {
     });
   }
   let assesseeRoleListSecondary = [];
-  if (informationAllocation?.assesseeRole.assesseeRoleSecondary.length > 0) {
+  if (
+    informationAllocation?.assesseeRole.assesseeRoleSecondary &&
+    informationAllocation?.assesseeRole.assesseeRoleSecondary.length > 0
+  ) {
     const tempArr = informationAllocation?.assesseeRole?.assesseeRoleSecondary;
     tempArr.forEach((ob) => {
       assesseeRoleListSecondary.push({
@@ -474,6 +492,7 @@ const DisplayPaneThreeSectionOne = () => {
   };
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'group') {
       dispatch({ type: LOADER_START });
@@ -489,23 +508,59 @@ const DisplayPaneThreeSectionOne = () => {
         }
       });
       dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'GROUPLISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'GROUPLISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'GROUPLISTSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
     if (labelName === 'manager') {
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'MANAGERLISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'MANAGERLISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'MANAGERLISTSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
     if (labelName === 'node') {
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
       dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'NODELISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
       });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'NODELISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'NODELISTSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
     if (labelName === 'role') {
       let roleRequestObj = makeAssesseeRoleObj(selectedAssociateInfo, 'all', 0, -1);
@@ -522,10 +577,18 @@ const DisplayPaneThreeSectionOne = () => {
           isReviseMode: true
         }
       });
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'ROLELISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'ROLELISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'ROLELISTSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
   };
   const reviseEngagement = (e) => {

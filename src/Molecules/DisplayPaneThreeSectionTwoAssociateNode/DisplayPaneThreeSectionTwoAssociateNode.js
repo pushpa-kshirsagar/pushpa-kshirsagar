@@ -8,7 +8,7 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 import { RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../actionType';
 
-const DisplayPaneThreeSectionTwoAssociateRole = () => {
+const DisplayPaneThreeSectionTwoAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
   const { reviewMode, relatedReviewListPaneThree = [] } = useSelector(
     (state) => state.DisplayPaneThreeReducer
@@ -116,4 +116,4 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
   );
 };
 
-export default DisplayPaneThreeSectionTwoAssociateRole;
+export default DisplayPaneThreeSectionTwoAssociateNode;

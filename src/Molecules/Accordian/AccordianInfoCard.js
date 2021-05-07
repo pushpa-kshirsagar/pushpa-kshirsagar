@@ -25,7 +25,10 @@ const AccordianInfoCard = (props) => {
         <div
           style={{
             height:
-              selectedBadge && selectedBadge.textOne && selectedBadge.textOne.length > 40
+              multiline &&
+              selectedBadge &&
+              selectedBadge.textOne &&
+              selectedBadge.textOne.length > 40
                 ? '105px'
                 : '50px'
           }}
@@ -76,10 +79,16 @@ const AccordianInfoCard = (props) => {
               {textOneOne ||
                 (selectedBadge && selectedBadge.textOne && (
                   <Input
-                    multiline={selectedBadge.textOne && selectedBadge.textOne.length > 40}
+                    multiline={
+                      multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                    }
                     // row={multiline ? 2 : 1}
                     row={2}
-                    rowsMax={selectedBadge.textOne && selectedBadge.textOne.length > 40 ? 4 : 1}
+                    rowsMax={
+                      multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                        ? 4
+                        : 1
+                    }
                     className={'inputText'}
                     id="name-dn-input"
                     value={(selectedBadge && selectedBadge.textOne) || textOneOne}

@@ -19,7 +19,6 @@ import {
   CLEAR_DISPLAY_PANE_THREE,
   LOADER_START,
   NAVIGATOR_MODE,
-  SET_ASSESSEE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -35,7 +34,6 @@ import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
 import './DisplayPaneThree.css';
-import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
 import DisplayPaneThreeSectionOne from '../../Molecules/DisplayPaneThreeSectionOne/DisplayPaneThreeSectionOne';
 import DisplayPaneThreeSectionTwo from '../../Molecules/DisplayPaneThreeSectionTwo/DisplayPaneThreeSectionTwo';
 import DisplayPaneThreeSectionOneAssociate from '../../Molecules/DisplayPaneThreeSectionOneAssociate/DisplayPaneThreeSectionOneAssociate';
@@ -61,6 +59,8 @@ import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPan
 import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThreeSectionOneAssignment/DisplayPaneThreeSectionOneAssignment';
 import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThreeSectionTwoAssignment/DisplayPaneThreeSectionTwoAssignment';
 import PopUpFingerprint from '../../PopUpInformation/PopUpFingerprint';
+import DisplayPaneThreeSectionOneAssociateNode from '../../Molecules/DisplayPaneThreeSectionOneAssociateNode/DisplayPaneThreeSectionOneAssociateNode';
+import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPaneThreeSectionTwoAssociateNode/DisplayPaneThreeSectionTwoAssociateNode';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -78,7 +78,6 @@ export const DisplayPaneThree = () => {
     (state) => state.DisplayPaneTwoReducer
   );
   const { informationBasic } = responseObject;
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const rightPaneSectionsAssessee = [
     {
       id: 'section1',
@@ -131,6 +130,20 @@ export const DisplayPaneThree = () => {
     {
       id: 'section2',
       sectionComponent: DisplayPaneThreeSectionTwoAssociateRole,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
+  const rightPaneSectionsAssociateNode = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssociateNode,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssociateNode,
       displayPaneLeftHeaderText: '',
       displayPaneLeftBadgeText: ''
     }
@@ -278,6 +291,9 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssociateRole, setSelectedSectionAssociateRole] = useState(
     rightPaneSectionsAssociateRole[0]
   );
+  const [selectedSectionAssociateNode, setSelectedSectionAssociateNode] = useState(
+    rightPaneSectionsAssociateNode[0]
+  );
   const [selectedSectionAssociate, setSelectedSectionAssociate] = useState(
     rightPaneSectionsAssociate[0]
   );
@@ -293,6 +309,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssessment(rightPaneSectionsAssessment[0]);
     setSelectedSectionAssignment(rightPaneSectionsAssignment[0]);
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
+    setSelectedSectionAssociateNode(rightPaneSectionsAssociateNode[0]);
     setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
   }, [responseObject]);
 
@@ -645,6 +662,14 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseAssociateNodeBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    if (labelName === 'name') {
+    }
+    if (labelName === 'description') {
+    }
+  };
 
   const reviseAssociateRoleBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
@@ -708,7 +733,7 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="alias"
-                  textOneOne={`${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`}
+                  textOneOne={`${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`.trim()}
                   textOneTwo={informationBasic.assesseeAlias || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
@@ -1197,6 +1222,53 @@ export const DisplayPaneThree = () => {
               />
             )}
             {createMode === 'associatesRole' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssociateRole}
+                primaryIcon={createAssociateRolePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'associate' &&
+        headerOneBadgeOne === 'node' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.associateNodeName || 'No Information'}
+                  textOneTwo={informationBasic.associateNodeDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  onClickRevise={reviseAssociateNodeBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssociateNode}
+                selectedSection={selectedSectionAssociateNode}
+                setSelectedSection={setSelectedSectionAssociateNode}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'associatesNode' && reviewMode !== 'revise' && (
               <FooterIconTwo
                 FilterModeEnable={true}
                 FilterMode={FilterMode}

@@ -217,6 +217,32 @@ const PopUpSignOnAssessee = (props) => {
       payload: { stateName: 'assesseeRole', actualStateName: 'assesseeRolePrimary', value: roleArr }
     });
   };
+
+  const updateRoleIdSecondaryObject = (e) => {
+    // console.log(e.currentTarget.getAttribute('tag'));
+    // console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRoleSecondary);
+    let roleid = e.currentTarget.getAttribute('tag');
+    let roleArr = assesseeInfo.informationAllocation.assesseeRole.assesseeRoleSecondary;
+    console.log(roleArr.includes(roleid));
+    setRoleSelectedError('');
+    if (roleArr.includes(roleid)) {
+      document.getElementById(roleid).style.backgroundColor = 'white';
+      roleArr = roleArr.filter(function (number) {
+        return number !== roleid;
+      });
+    } else {
+      roleArr.push(roleid);
+      document.getElementById(roleid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assesseeRole',
+        actualStateName: 'assesseeRoleSecondary',
+        value: roleArr
+      }
+    });
+  };
   const updateAssesseeGroups = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     console.log(assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupPrimary);
@@ -238,6 +264,31 @@ const PopUpSignOnAssessee = (props) => {
       payload: {
         stateName: 'assesseeGroup',
         actualStateName: 'assesseeGroupPrimary',
+        value: roleArr
+      }
+    });
+  };
+  const updateAssesseeSecondaryGroups = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
+    console.log(assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupSecondary);
+    let groupid = e.currentTarget.getAttribute('tag');
+    let roleArr = assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupSecondary;
+    console.log(roleArr.includes(groupid));
+
+    if (roleArr.includes(groupid)) {
+      document.getElementById(groupid).style.backgroundColor = 'white';
+      roleArr = roleArr.filter(function (number) {
+        return number !== groupid;
+      });
+    } else {
+      roleArr.push(groupid);
+      document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assesseeGroup',
+        actualStateName: 'assesseeGroupSecondary',
         value: roleArr
       }
     });
@@ -306,6 +357,22 @@ const PopUpSignOnAssessee = (props) => {
         selectedList={assesseeInfo?.informationAllocation?.assesseeGroup.assesseeGroupPrimary}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPLISTSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'MANAGERLISTPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        ListData={coreGroupReviewListData}
+        textOne={'assesseeGroupName'}
+        textTwo={'assesseeGroupDescription'}
+        onClickEvent={updateAssesseeSecondaryGroups}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        selectedList={assesseeInfo?.informationAllocation?.assesseeGroup.assesseeGroupSecondary}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERLISTPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -325,13 +392,51 @@ const PopUpSignOnAssessee = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERLISTSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'NODELISTPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a role'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'NODELISTPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'ROLELISTPOPUP'}
         inputHeader={'node'}
-        inputHeaderBadge={''}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a node'}
+        isRequired={true}
+        selectedList={assesseeInfo?.informationAllocation?.assesseeNode.assesseeNodePrimary}
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
+        ListData={coreNodeReviewListData[0]}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={updateNodeIdObject}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'NODELISTSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'ROLELISTPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'secondary'}
         infoMsg={'select a node'}
         isRequired={true}
         selectedList={assesseeInfo?.informationAllocation?.assesseeNode.assesseeNodePrimary}
@@ -360,6 +465,25 @@ const PopUpSignOnAssessee = (props) => {
         textOne={'assesseeRoleName'}
         textTwo={'assesseeRoleDescription'}
         onClickEvent={headerOne === 'assessee' ? null : updateRoleIdObject}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ROLELISTSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'EMAILPOPUP'}
+        inputHeader={'role'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a role'}
+        isRequired={true}
+        selectedList={assesseeInfo?.informationAllocation?.assesseeRole.assesseeRoleSecondary}
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
+        ListData={coreRoleReviewListData}
+        textOne={'assesseeRoleName'}
+        textTwo={'assesseeRoleDescription'}
+        onClickEvent={headerOne === 'assessee' ? null : updateRoleIdSecondaryObject}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddressEmail

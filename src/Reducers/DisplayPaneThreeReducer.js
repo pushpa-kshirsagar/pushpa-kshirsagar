@@ -2,7 +2,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   CLEAR_DISPLAY_PANE_THREE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
-  SET_REVIEW_LIST_RELATE_DATA
+  SET_REVIEW_LIST_RELATE_DATA,
+  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../actionType';
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   responseObject: {},
   reviewMode: 'review',
   createMode: '',
-  relatedReviewListPaneThree: [{}]
+  relatedReviewListPaneThree: [{}],
+  assesseeRoleAssesseeIdList: []
 };
 
 const DisplayPaneThreeReducer = (istate = initialState, action) => {
@@ -39,6 +41,11 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
       return {
         ...istate,
         relatedReviewListPaneThree: action.payload
+      };
+    case SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST:
+      return {
+        ...istate,
+        assesseeRoleAssesseeIdList: action.payload
       };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;

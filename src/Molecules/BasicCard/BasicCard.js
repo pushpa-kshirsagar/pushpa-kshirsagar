@@ -1,4 +1,4 @@
-import { Avatar, Grid, IconButton } from '@material-ui/core';
+import { Avatar, Grid, IconButton, Input } from '@material-ui/core';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import Notifications from '@material-ui/icons/NotificationsActive';
 import PropTypes from 'prop-types';
@@ -38,12 +38,23 @@ const BasicCard = (props) => {
             onClickLabel={mode === 'revise' ? onClickRevise : null}
             colour={mode === 'revise' ? '#00AFFF' : 'rgba(0, 0, 0, 0.54)'}
           />
-          <Label
+          <Input
+            multiline={false}
+            // row={multiline ? 2 : 1}
+            row={2}
+            rowsMax={1}
+            className={'inputText'}
+            id="name-dn-input"
+            value={textOneOne}
+            disableUnderline={true}
+            readOnly
+          />
+          {/* <Label
             className="padding-top-bottom"
             text={textOneOne}
             fontSize="1.6rem"
             colour="rgba(0, 0, 0, 0.87)"
-          />
+          /> */}
         </div>
         <div className="flex-one-align-center">
           <div className="notifications-icon-container">
@@ -71,12 +82,23 @@ const BasicCard = (props) => {
             onClickLabel={mode === 'revise' ? onClickRevise : null}
             colour={mode === 'revise' ? '#00AFFF' : 'rgba(0, 0, 0, 0.54)'}
           />
-          <Label
+          <Input
+            multiline={false}
+            // row={multiline ? 2 : 1}
+            row={2}
+            rowsMax={1}
+            className={'inputText'}
+            id="name-dn-input"
+            value={textOneTwo}
+            disableUnderline={true}
+            readOnly
+          />
+          {/* <Label
             className="padding-top-bottom"
             text={textOneTwo}
             fontSize="1.6rem"
             colour="rgba(0, 0, 0, 0.87)"
-          />
+          /> */}
         </div>
         <div className="flex-one-align-center">
           <div>

@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core';
+import { Avatar, Input } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -82,11 +82,23 @@ export const HeaderZero = (props) => {
                   <div style={{ display: 'flex' }} className="">
                     <div className="text-right">
                       <div style={{ marginBottom: '5px' }}>
-                        <Label
+                        {/* <Label
                           className=""
                           text={userName}
                           fontSize="1.6rem"
                           colour="rgba(0, 0, 0, 0.87)"
+                        /> */}
+                        <Input
+                          multiline={false}
+                          // row={multiline ? 2 : 1}
+                          row={2}
+                          rowsMax={1}
+                          className={'inputText input-padding-0'}
+                          id="name-dn-input"
+                          value={userName}
+                          style={{ width: '100%', padding: '0' }}
+                          disableUnderline={true}
+                          readOnly
                         />
                       </div>
                       <div>

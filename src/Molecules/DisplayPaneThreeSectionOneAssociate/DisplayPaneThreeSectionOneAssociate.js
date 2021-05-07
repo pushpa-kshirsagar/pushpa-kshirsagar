@@ -35,19 +35,19 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             {
               id: 'associate1',
               textOne: 'Simple Sample 01',
-              textTwo: 'guardian',
+              textTwo: '',
               status: 'active'
             },
             {
               id: 'associate2',
               textOne: 'Simple Sample 02',
-              textTwo: 'guardian',
+              textTwo: '',
               status: 'active'
             },
             {
               id: 'associate3',
               textOne: 'Simple Sample 03',
-              textTwo: 'guardian',
+              textTwo: '',
               status: 'active'
             }
           ]
@@ -269,11 +269,15 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement.associateTenureDate || 'No Information'
+          textOne:
+            informationEngagement.associateTenureDate?.associateTenureDateTimeStart ||
+            'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement.associateTenureDate || 'No Information'
+          textOne:
+            informationEngagement.associateTenureDate?.associateTenureDateTimeEnd ||
+            'No Information'
         }
       ],
       innerAssociateList: [],

@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../actionType';
+import {
+  RELATED_REVIEWLIST_DISTINCT_DATA,
+  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+  SET_MIDDLEPANE_STATE
+} from '../../actionType';
 import { getAssesseeRoleAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionTwoAssesseeRole = () => {
@@ -95,7 +99,10 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   const onclickReviewAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
-    if (labelName === 'assessee') {
+    if (labelName === 'assessee' && assesseeArray.length > 0) {
+      let result = assesseeArray.map((a) => a.id);
+      console.log("RESULT++++", result);
+      dispatch({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: result });
       // getAssesseeRoleAssesseeDistinctApiCall(
       //   selectedAssociateInfo,
       //   'active',
