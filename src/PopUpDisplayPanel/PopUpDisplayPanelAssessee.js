@@ -28,6 +28,7 @@ import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { setAssesseeCardPermissionInJson } from '../Actions/GenericActions';
 import { AccountContext } from '../Account';
 import { useHistory } from 'react-router-dom';
+import { SIGN_IN_URL } from '../endpoints';
 const PopUpDisplayPanelAssessee = (props) => {
   const {
     popupHeaderOne,
@@ -177,8 +178,7 @@ const PopUpDisplayPanelAssessee = (props) => {
 
     if (clickValue === 'yes') {
       //sign out
-      let path = `/signIn`;
-      history.push(path);
+      history.push(SIGN_IN_URL);
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       // signOut();
