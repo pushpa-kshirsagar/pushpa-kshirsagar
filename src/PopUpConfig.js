@@ -1509,6 +1509,22 @@ export const ALLOCATE_POPUP = [
     disabled: false
   }
 ];
+export const SHARE_POPUP = [
+  {
+    data: 'share',
+    dataValue: 'shareApiCall',
+    dataKey: 'SHARED',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unshare',
+    dataValue: 'unshareApiCall',
+    dataKey: 'UNSHARED',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
 export const ARCHIVE_POPUP = [
   {
     data: 'archive',

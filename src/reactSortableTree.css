@@ -66,4 +66,11 @@ span.rstcustom__rowSubtitle {
   bottom: 0;
   width: 60%;
 }
+.rstcustom__rowSearchMatch {
+  outline: solid 2px #0080ff;
+}
+.rstcustom__rowSearchFocus {
+  outline: solid 2px #fc6421 !important;
+}
+
 /*end custom node for hierarical list  style*/

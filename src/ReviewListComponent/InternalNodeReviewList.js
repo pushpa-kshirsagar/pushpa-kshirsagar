@@ -181,22 +181,29 @@ const InternalNodeReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
     console.log(selectedGroup);
   };
+  const changedNode = (node) => {
+    console.log(node);
+    console.log('changedNode');
+  };
   return (
     <div>
       {reviewListDistinctData.length > 0 && (
         <>
           {nodeViewState === 'hierarchy' ? (
-            <div style={{ minheight: 'calc(100vh - 135px)' }}>
+            <div style={{ minheight: 'calc(100vh - 135px)' }} key={scanString}>
               <SortableTree
                 treeData={reviewListDistinctData}
                 onChange={(treeData) => {
-                  dispatch({
-                    type: SET_DISPLAY_TWO_SINGLE_STATE,
-                    payload: { stateName: 'reviewListDistinctData', value: treeData }
-                  });
+                  treeData.length ===1 &&
+                    dispatch({
+                      type: SET_DISPLAY_TWO_SINGLE_STATE,
+                      payload: { stateName: 'reviewListDistinctData', value: treeData }
+                    });
                 }}
                 searchQuery={scanString}
                 searchFocusOffset={searchFocusIndex}
+                canDrag={({ node }) => true && node.parentId !== null}
+                onMoveNode={({ node }) => changedNode(node)}
                 searchFinishCallback={(matches) => {
                   console.log(matches);
                   dispatch({

@@ -540,6 +540,13 @@ export const getInternalNodeApiCall = (
     payload: { FilterMode: 'associateNodeDistinct' + secondaryOptionCheckValue }
   });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: {
+      stateName: 'scanString',
+      value: ''
+    }
+  });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({

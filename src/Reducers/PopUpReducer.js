@@ -34,7 +34,8 @@ import {
   GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
   REVIEW_DISTINCT_POPUP_OPTION,
   CREATE_INFORMATION_POPUP,
-  PUBLISH_PUPUP
+  PUBLISH_PUPUP,
+  SHARE_POPUP
 } from '../PopUpConfig';
 
 const initialState = {
@@ -65,6 +66,7 @@ const initialState = {
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
     archive: ARCHIVE_POPUP,
+    share: SHARE_POPUP,
     delete: DELETE_POPUP,
     flag: FLAG_PUPUP,
     publish: PUBLISH_PUPUP,
