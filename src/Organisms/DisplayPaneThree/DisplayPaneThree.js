@@ -342,7 +342,12 @@ export const DisplayPaneThree = () => {
   const onClickReviseFinish = () => {
     console.log('ON CLICK FINISH ICON', assesseeInfo.informationBasic);
     if (headerOneBadgeOne === 'information' && headerOne === 'assessee') {
-      const { informationBasic, informationContact, informationPersonal, informationAllocation } = assesseeInfo;
+      const {
+        informationBasic,
+        informationContact,
+        informationPersonal,
+        informationAllocation
+      } = assesseeInfo;
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: id,

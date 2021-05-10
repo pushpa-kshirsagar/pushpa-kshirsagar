@@ -114,8 +114,8 @@ const InternalNodeReviewList = (props) => {
     let selectedGroup = {};
     let nodeId = '';
     if (target === 'hirarchy') {
-      console.log(node);
-      nodeId = node.id;
+      console.log(node.node.id);
+      nodeId = node.node.id;
     } else {
       console.log(node);
       nodeId = event.currentTarget.getAttribute('tag');
