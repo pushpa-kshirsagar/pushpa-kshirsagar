@@ -30,7 +30,8 @@ import {
   SET_SECONDARY_CREATE_OPTION_VALUE,
   FILTERMODE,
   CLEAR_DISPLAY_PANE_THREE,
-  LOADER_STOP
+  LOADER_STOP,
+  GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -225,6 +226,40 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue,
             isReviseMode,
+            reqBody: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
+              filter: true,
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue,
+            selectedModule: middlePaneHeader,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -530,9 +565,6 @@ const PopUpMiddlePaneList = (props) => {
       // if (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList') {
       //   dispatch({ type: LOADER_STOP });
       // }
-      if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
-        dispatch({ type: LOADER_STOP });
-      }
       // if(typeOfMiddlePaneList === ''){}
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
       dispatch({

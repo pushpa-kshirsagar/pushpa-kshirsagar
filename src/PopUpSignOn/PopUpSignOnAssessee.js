@@ -44,6 +44,7 @@ import PopUpDatePicker from '../PopUpInformation/PopUpDatePicker';
 import PopUpCommunity from '../PopUpInformation/PopUpCommunity';
 import PopUpBirthplace from '../PopUpInformation/PopUpBirthplace';
 import { DEFAULT_ROLE_ID } from '../endpoints';
+import PopUpFingerprint from '../PopUpInformation/PopUpFingerprint';
 
 const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
@@ -99,6 +100,34 @@ const PopUpSignOnAssessee = (props) => {
       setdefaultNodeId(defaultnode[0]);
     }
   }, [coreRoleReviewListData, coreNodeReviewListData]);
+
+  console.log(
+    'IN SIDE SIGN ON ASSESSEE+++>',
+    coreGroupReviewListData,
+    assesseeInfo?.informationAllocation?.assesseeGroup.assesseeGroupPrimary,
+    assesseeInfo?.informationAllocation?.assesseeGroup.assesseeGroupSecondary
+  );
+  let selectedPrimaryGroup =
+    assesseeInfo?.informationAllocation?.assesseeGroup.assesseeGroupPrimary || [];
+  let selectedSecondaryGroup =
+    assesseeInfo?.informationAllocation?.assesseeGroup.assesseeGroupSecondary || [];
+  let filteredCoreGroupReviewListDataPrimary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for primary popup list
+      if (!selectedSecondaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataPrimary.push(group);
+    });
+  }
+  let filteredCoreGroupReviewListDataSecondary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for Secondary popup list
+      if (!selectedPrimaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataSecondary.push(group);
+    });
+  }
+
   const onClickYes = async () => {
     // var defaultroleArr = coreRoleReviewListData
     //   .filter(function (data) {
@@ -353,6 +382,13 @@ const PopUpSignOnAssessee = (props) => {
         // nextPopUpValue={popupMode === 'ASSESSEE_SIGN_ON' ? 'EMAILPOPUP' :'ROLELISTPOPUP'}
         handleNextPopupValue={handleNextPopupValue}
       />
+      <PopUpPicture
+        isActive={isPopUpValue === 'SIGNATUREPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'signature'}
+        headerOneBadgeOne={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPLISTPOPUP'}
         headerPanelColour={'genericOne'}
@@ -362,7 +398,7 @@ const PopUpSignOnAssessee = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataPrimary}
         textOne={'assesseeGroupName'}
         textTwo={'assesseeGroupDescription'}
         onClickEvent={updateAssesseeGroups}
@@ -378,7 +414,7 @@ const PopUpSignOnAssessee = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataSecondary}
         textOne={'assesseeGroupName'}
         textTwo={'assesseeGroupDescription'}
         onClickEvent={updateAssesseeSecondaryGroups}
@@ -787,6 +823,22 @@ const PopUpSignOnAssessee = (props) => {
         isRequired={false}
         basicInfo={assesseeInfo?.informationPersonal}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpFingerprint
+        isActive={isPopUpValue === 'LEFTFINGERPRINTPOPUP'}
+        headerPanelColour="genericOne"
+        headerOne="fingerprint"
+        headerOneBadgeOne="left hand"
+        headerOneBadgeTwo=""
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpFingerprint
+        isActive={isPopUpValue === 'RIGHTFINGERPRINTPOPUP'}
+        headerPanelColour="genericOne"
+        headerOne="fingerprint"
+        headerOneBadgeOne="right hand"
+        headerOneBadgeTwo=""
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>

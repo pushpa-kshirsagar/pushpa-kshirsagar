@@ -469,7 +469,28 @@ const DisplayPaneThreeSectionTwo = () => {
 
   const reviseCredential = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    if (labelName === 'fingerprint') {
+      if (selectedBadgeName === 'left hand') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'LEFTFINGERPRINTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'right hand') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'RIGHTFINGERPRINTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+    }
+    if (labelName === 'signature') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'SIGNATUREPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
     if (labelName === 'tag') {
       dispatch({
         type: ASSESSEE_SIGN_ON,

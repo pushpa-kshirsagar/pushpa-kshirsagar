@@ -10,7 +10,7 @@ import Person from '@material-ui/icons/Person';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 
 const PopUpPicture = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
@@ -22,15 +22,20 @@ const PopUpPicture = (props) => {
     headerOneBadgeOne = '',
     headerOneBadgeTwo = '',
     nextPopUpValue,
-    handleNextPopupValue
+    handleNextPopupValue,
+    mode
   } = props;
 
   const handleClick = async () => {
     //according to creation mode popup sequence will change
-    if (handleNextPopupValue) {
-      handleNextPopupValue();
+    if (mode === 'revise') {
+      dispatch({ type: POPUP_CLOSE });
     } else {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      if (handleNextPopupValue) {
+        handleNextPopupValue();
+      } else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+      }
     }
   };
 
@@ -43,15 +48,18 @@ const PopUpPicture = (props) => {
           headerOneBadgeOne={headerOneBadgeOne}
           headerOneBadgeTwo={headerOneBadgeTwo}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
-              <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
-                picture &nbsp;
-              </InputLabel>
+              {headerOne !== 'signature' && (
+                <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                  picture &nbsp;
+                </InputLabel>
+              )}
             </div>
 
             <div className={['dashboardImage', 'popupMargin'].join(' ')}>
@@ -73,35 +81,37 @@ const PopUpPicture = (props) => {
           </div>
           <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}></FormHelperText>
 
-          <div className={'fitContent'}>
-            <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
-              <div className={'contFlex'}>
-                <div
-                  className={'f4'}
-                  style={{
-                    color:
-                      popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
-                        ? 'dimgray'
-                        : ''
-                  }}
-                >
-                  verification
-                </div>
-                <div className={'checkedFontNew'}>
-                  <Checkbox
-                    className={''}
-                    color="default"
-                    disableRipple={true}
-                    disabled={
-                      popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
-                        ? true
-                        : false
-                    }
-                  />
+          {headerOne !== 'signature' && (
+            <div className={'fitContent'}>
+              <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
+                <div className={'contFlex'}>
+                  <div
+                    className={'f4'}
+                    style={{
+                      color:
+                        popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                          ? 'dimgray'
+                          : ''
+                    }}
+                  >
+                    verification
+                  </div>
+                  <div className={'checkedFontNew'}>
+                    <Checkbox
+                      className={''}
+                      color="default"
+                      disableRipple={true}
+                      disabled={
+                        popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                          ? true
+                          : false
+                      }
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </DialogContent>
       </Popup>
     </div>

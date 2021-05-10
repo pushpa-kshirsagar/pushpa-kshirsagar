@@ -13,6 +13,7 @@ export const InputField = (props) => {
     value,
     labelBadgeOne,
     isRequired = true,
+    autoFocus = false,
     classNames = ''
   } = props;
   return (
@@ -29,6 +30,7 @@ export const InputField = (props) => {
           value={value}
           onChange={onClick}
           autoComplete="off"
+          autoFocus={autoFocus}
           className={['inputFields', classNames].join(' ')}
         />
       </FormControl>

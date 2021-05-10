@@ -58,7 +58,6 @@ import DisplayPaneThreeSectionOneAssessmentType from '../../Molecules/DisplayPan
 import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentType/DisplayPaneThreeSectionTwoAssessmentType';
 import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThreeSectionOneAssignment/DisplayPaneThreeSectionOneAssignment';
 import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThreeSectionTwoAssignment/DisplayPaneThreeSectionTwoAssignment';
-import PopUpFingerprint from '../../PopUpInformation/PopUpFingerprint';
 import DisplayPaneThreeSectionOneAssociateNode from '../../Molecules/DisplayPaneThreeSectionOneAssociateNode/DisplayPaneThreeSectionOneAssociateNode';
 import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPaneThreeSectionTwoAssociateNode/DisplayPaneThreeSectionTwoAssociateNode';
 
@@ -343,13 +342,19 @@ export const DisplayPaneThree = () => {
   const onClickReviseFinish = () => {
     console.log('ON CLICK FINISH ICON', assesseeInfo.informationBasic);
     if (headerOneBadgeOne === 'information' && headerOne === 'assessee') {
-      const { informationBasic, informationContact, informationPersonal } = assesseeInfo;
+      const {
+        informationBasic,
+        informationContact,
+        informationPersonal,
+        informationAllocation
+      } = assesseeInfo;
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: id,
         associateId,
         assessee: {
           id,
+          informationAllocation,
           informationBasic,
           informationContact,
           informationPersonal
@@ -1234,7 +1239,10 @@ export const DisplayPaneThree = () => {
         )}
       {isReviewRevise &&
         responseObject &&
-        headerOne === 'associate' &&
+        (headerOne === 'associate' ||
+          headerOne === 'assessees' ||
+          headerOne === 'assessments' ||
+          headerOne === 'assignments') &&
         headerOneBadgeOne === 'node' && (
           <>
             <div style={{ padding: '2.5px' }}>
@@ -1279,58 +1287,53 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
-      {isReviewRevise && responseObject && headerOne === 'associate' && (
-        <>
-          <div style={{ padding: '2.5px' }}>
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'associate' &&
+        headerOneBadgeOne === 'information' && (
+          <>
             <div style={{ padding: '2.5px' }}>
-              <BasicCard
-                isAlertActive
-                isFlagActive
-                className=""
-                labelTextOneOne="name"
-                labelTextOneTwo="description"
-                textOneOne={informationBasic.associateName || 'No Information'}
-                textOneTwo={informationBasic.associateDescription || 'No Information'}
-                isVerifiedActiveName={false}
-                isVerifiedActivePicture={false}
-                mode={reviewMode}
-                onClickRevise={reviseAssociateBasicInformation}
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.associateName || 'No Information'}
+                  textOneTwo={informationBasic.associateDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  onClickRevise={reviseAssociateBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssociate}
+                selectedSection={selectedSectionAssociate}
+                setSelectedSection={setSelectedSectionAssociate}
               />
             </div>
-            <Sections
-              listSections={rightPaneSectionsAssociate}
-              selectedSection={selectedSectionAssociate}
-              setSelectedSection={setSelectedSectionAssociate}
-            />
-          </div>
-          {reviewMode === 'revise' && (
-            <FooterIconTwo
-              FilterModeEnable={isShowReviseIcon}
-              FilterMode={FilterMode}
-              onClick={onClickRevise}
-              primaryIcon={revisePrimaryIcon}
-              secondaryIcon={reviseSecondaryIcons}
-            />
-          )}
-          {createMode === 'associate' && reviewMode !== 'revise' && (
-            <FooterIconTwo
-              FilterModeEnable={true}
-              FilterMode={FilterMode}
-              onClick={onClickCreateAssessee}
-              primaryIcon={createAssesseePrimaryIcon}
-              secondaryIcon={[]}
-            />
-          )}
-        </>
-      )}
-      {/* <PopUpFingerprint
-        isActive={true} 
-        headerPanelColour="genericOne"
-        headerOne="fingerprint"
-        headerOneBadgeOne="left hand"
-        headerOneBadgeTwo=""
-        handleNextPopupValue
-      /> */}
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'associate' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssessee}
+                primaryIcon={createAssesseePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
     </>
   );
 };

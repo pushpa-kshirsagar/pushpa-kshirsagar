@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -14,6 +14,7 @@ import { POPUP_CLOSE, SET_NEXT_POPUP, UPDATE_ASSESSEE_INFO } from '../actionType
 const PopUpDatePicker = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
+  // const [inputRef, setInputFocus] = useRef('input');
   // const basicInfo = useSelector((state) => state.AssesseeCreateReducer);
   const {
     isActive,
@@ -43,6 +44,28 @@ const PopUpDatePicker = (props) => {
       }
     }
   };
+  // useEffect(()=>{
+  //   console.log("DATE PICKER", inputRef.current);
+  // });
+  function convertToReviseLocalTime(milisec) {
+    let formatdate = '';
+    let returndateformat = null;
+    var startdate = new Date(milisec);
+    let newstartDate = startdate.toLocaleDateString();
+    let newEdate = newstartDate.split('/');
+    formatdate = newEdate[2] + '-' + newEdate[1] + '-' + newEdate[0];
+    let finaltime = removeSecond(startdate);
+    returndateformat = formatdate + 'T' + finaltime;
+    return returndateformat;
+  }
+
+  function removeSecond(datepass) {
+    let newstartTime = datepass.toLocaleTimeString();
+    let newETime = newstartTime.split(':');
+    let finaltime = newETime[0] + ':' + newETime[1];
+    return finaltime;
+  }
+
   return (
     <div>
       <Popup isActive={isActive}>
@@ -63,6 +86,7 @@ const PopUpDatePicker = (props) => {
               label={'Birthdate'}
               value={basicInfo[valueState]}
               defaultValue="mm/dd/yyyy"
+              autoFocus={true}
               InputLabelProps={{
                 shrink: false
               }}

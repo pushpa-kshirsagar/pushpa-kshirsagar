@@ -27,7 +27,7 @@ const PopUpTextField = (props) => {
     basicInfo,
     typeOfSetObject,
     actualLableValue,
-    labelBadgeOne='',
+    labelBadgeOne = '',
     mode
   } = props;
 
@@ -60,10 +60,10 @@ const PopUpTextField = (props) => {
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
     if (validateFun()) {
-      if(reviewMode === 'revise') {
+      if (reviewMode === 'revise') {
         dispatch({ type: POPUP_CLOSE });
       } else {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
       }
     }
   };

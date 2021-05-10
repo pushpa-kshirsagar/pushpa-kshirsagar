@@ -30,7 +30,8 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
         headerOneBadgeThree: action.payload.headerOneBadgeThree,
         responseObject: action.payload.responseObject,
         reviewMode: action.payload.reviewMode || 'review',
-        createMode: action.payload.createMode || ''
+        createMode: action.payload.createMode || '',
+        selectedModule: action.payload.selectedModule || ''
       };
     case SET_DISPLAY_PANE_THREE_REVIEW_MODE:
       return {
