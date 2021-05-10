@@ -73,8 +73,6 @@ function* workerReviewListAssesseSaga(data) {
         ...data.payload.revisedGroupObject,
         assessee: userResponse.responseObject
       };
-      console.log([responseObj]);
-      console.log('responseObj');
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
       yield put({
         type: SET_MIDDLEPANE_STATE,

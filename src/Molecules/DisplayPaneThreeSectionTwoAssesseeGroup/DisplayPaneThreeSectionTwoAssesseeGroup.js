@@ -115,14 +115,14 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
       console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
-        'active',
+        'all',
         0,
         countPage
       );
       let revisedGroupObject = {
-        assesseeGroupDescription: responseObject.informationBasic.assesseeGroupName,
         id: responseObject.id,
         assesseeGroupName: responseObject.informationBasic.assesseeGroupDescription,
+        assesseeGroupDescription: responseObject.informationBasic.assesseeGroupName,
         assesseeGroupStatus: responseObject.informationEngagement.assesseeGroupStatus
       };
       let existingAssesseeId =
