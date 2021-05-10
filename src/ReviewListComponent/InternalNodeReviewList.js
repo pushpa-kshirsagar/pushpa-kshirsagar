@@ -221,7 +221,7 @@ const InternalNodeReviewList = (props) => {
                       textTwo={item.informationBasic.associateNodeDescription}
                       isTooltipActive={false}
                       onClickEvent={(event) => {
-                        openNodeListPopup(item.id, event, 'hirarchy', true);
+                        openNodeListPopup(item.id, event, 'list', true);
                       }}
                     />
                   </div>

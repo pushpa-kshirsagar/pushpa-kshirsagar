@@ -20,6 +20,7 @@ import {
   GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
+  ASSESSEE_ROLE_SHARE_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -30,14 +31,11 @@ import {
   FILTERMODE,
   CLEAR_DISPLAY_PANE_THREE,
   LOADER_STOP,
-  SET_POPUP_SINGLE_STATE,
-  ASSESSEE_INFO_CREATE
+  GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA
 } from '../actionType';
 import {
-  getAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeReqObj,
-  getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
@@ -78,9 +76,7 @@ const PopUpMiddlePaneList = (props) => {
   const ChangeOptionPopup = (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
-    alert(typeOfMiddlePaneList);
-    alert(keyVal);
-    alert(dataVal);
+    console.log(dataVal);
     if (dataVal === 'information') {
       console.log(selectedTagValue);
       console.log(typeOfMiddlePaneList);
@@ -230,6 +226,40 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue,
             isReviseMode,
+            reqBody: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
+              filter: true,
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue,
+            selectedModule: middlePaneHeader,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -535,9 +565,6 @@ const PopUpMiddlePaneList = (props) => {
       // if (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList') {
       //   dispatch({ type: LOADER_STOP });
       // }
-      if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
-        dispatch({ type: LOADER_STOP });
-      }
       // if(typeOfMiddlePaneList === ''){}
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
       dispatch({
@@ -624,37 +651,6 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
       }
-      if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
-        getAssesseeDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal
-        );
-        dispatch({ type: POPUP_CLOSE });
-      }
-      if (typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList') {
-        getAssesseeGroupDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal
-        );
-        dispatch({ type: POPUP_CLOSE });
-      }
-    } else if (dataVal === 'groups') {
-      if (middlePaneHeader === 'assessees') {
-        getAssesseeGroupDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal
-        );
-        dispatch({ type: POPUP_CLOSE });
-      }
     } else if (dataVal === 'revise') {
       // alert("IN REVISE");
       setIsReviseMode(true);
@@ -662,6 +658,31 @@ const PopUpMiddlePaneList = (props) => {
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: { badgeValue: dataVal, keyValue: keyVal }
       });
+    } else if (dataVal === 'shareApiCall') {
+      if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assesseeRoleShared: [
+            {
+              assesseeRoleId: '499439',
+              assesseeRoleGroupId: '3455'
+            },
+            {
+              assesseeRoleId: '499449',
+              assesseeRoleGroupId: '3455'
+            }
+          ]
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: ASSESSEE_ROLE_SHARE_SAGA,
+          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+        });
+      }
+      dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'suspendApiCall' ||
       dataVal === 'terminateApiCall' ||

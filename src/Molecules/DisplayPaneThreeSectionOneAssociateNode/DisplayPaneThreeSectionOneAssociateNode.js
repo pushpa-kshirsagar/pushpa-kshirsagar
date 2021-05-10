@@ -15,7 +15,47 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-
+  const list2 = [
+    {
+      id: 'a2',
+      labelTextOneOne: 'manager',
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'Manager',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'Manager',
+              status: 'active'
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    }
+  ];
   const list3 = [
     {
       id: 'a1',
@@ -38,7 +78,7 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
     {
       id: 'a2',
       textOneOne:
-        capitalizeFirstLetter(informationEngagement?.associateRoleStatus) || 'No Information',
+        capitalizeFirstLetter(informationEngagement?.associateNodeStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -51,12 +91,12 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationEngagement?.associateRoleTag?.associateRoleTagPrimary || 'No Information'
+            informationEngagement?.associateNodeTag?.associateNodeTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
           textOne:
-            informationEngagement?.associateRoleTag?.associateRoleTagSecondary || 'No Information'
+            informationEngagement?.associateNodeTag?.associateNodeTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -70,13 +110,13 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
         {
           labelTextOneOneBadge: 'start',
           textOne:
-            informationEngagement?.associateRoleTenure?.associateRoleTenureDateTimeStart ||
+            informationEngagement?.associateNodeTenure?.associateNodeTenureDateTimeStart ||
             'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
           textOne:
-            informationEngagement?.associateRoleTenure?.associateRoleTenureDateTimeEnd ||
+            informationEngagement?.associateNodeTenure?.associateNodeTenureDateTimeEnd ||
             'No Information'
         }
       ],
@@ -94,7 +134,22 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
       }}
     >
       <>
-        <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+        <div className={'containerPadding'}>
+          <Paper className={'dossierContainerTop'}>
+            {list2.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                  ) : (
+                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+        </div>
+        <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list3.map((ob) => {
               return (

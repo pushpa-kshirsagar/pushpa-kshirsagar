@@ -28,16 +28,17 @@ function* workerReviewAssociateNodeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN Node REVIEW+++++', userResponse);
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, selectedModule } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'associate',
+          headerOne: selectedModule,
           headerOneBadgeOne: 'node',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0],
-          reviewMode: isReviseMode ? 'revise' : ''
+          reviewMode: isReviseMode ? 'revise' : '',
+          selectedModule: selectedModule
         }
       });
     }

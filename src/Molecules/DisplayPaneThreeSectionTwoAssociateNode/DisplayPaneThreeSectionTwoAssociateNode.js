@@ -10,55 +10,63 @@ import { RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../ac
 
 const DisplayPaneThreeSectionTwoAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
-  const { reviewMode, relatedReviewListPaneThree = [] } = useSelector(
+  const { reviewMode, relatedReviewListPaneThree = [], selectedModule } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
   const dispatch = useDispatch();
-  // const { informationEngagement } = responseObject;
-  // function capitalizeFirstLetter(string) {
-  //   if (!string) return '';
-  //   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  // }
-  let associate = [];
-  if (relatedReviewListPaneThree && relatedReviewListPaneThree.length > 0) {
-    associate = relatedReviewListPaneThree[0].associate;
-  }
-  let associateArray = [];
-  associate.forEach((ob) => {
-    const { id, informationBasic } = ob;
-    associateArray.push({
-      id,
-      textOne: informationBasic?.associateName || '',
-      textTwo: informationBasic?.associateDescription || 'No Information',
-      status: ''
-    });
-  });
 
-  const onclickReviewAssessee = (e) => {
-    const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
-    if (labelName === 'associate' && associateArray.length > 0) {
-      dispatch({
-        type: RELATED_REVIEWLIST_DISTINCT_DATA,
-        payload: relatedReviewListPaneThree
-      });
-      dispatch({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'associates',
-          middlePaneHeaderBadgeOne: 'distinct',
-          middlePaneHeaderBadgeTwo: 'active',
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'associatesRoleAssociateReviewList',
-          scanCount: 4,
-          showMiddlePaneState: true
+  const allModuleList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'assessee',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
         }
-      });
-    }
-  };
-
-  const list3 = [
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'assessment',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'assignment',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
     {
       id: 'a1',
       labelTextOneOne: 'associate',
@@ -69,7 +77,45 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: associateArray
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'item',
+      labelTextOneOneBadgeOne: 'group',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'node',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -77,6 +123,171 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     }
   ];
+  const assesseeModuleList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'assessee',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'node',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    }
+  ];
+  const assessmentModuleList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'assessment',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'item',
+      labelTextOneOneBadgeOne: 'group',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'node',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    }
+  ];
+  const assignmentModuleList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'assignment',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'item',
+      labelTextOneOneBadgeOne: 'group',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'node',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    }
+  ];
+
+  let list = allModuleList;
+  if (selectedModule === 'assessees') {
+    list = assesseeModuleList;
+  }
+  if (selectedModule === 'assessments') {
+    list = assessmentModuleList;
+  }
+  if (selectedModule === 'assignments') {
+    list = assignmentModuleList;
+  }
 
   return (
     <div
@@ -88,16 +299,11 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       <>
         <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
-            {list3.map((ob) => {
+            {list.map((ob) => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard
-                      onClickReview={onclickReviewAssessee}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
+                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                   ) : (
                     <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                   )}

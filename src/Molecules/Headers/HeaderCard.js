@@ -64,8 +64,22 @@ const HeaderCard = (props) => {
     });
   };
   const openMiddlePaneTripleDotPopup = () => {
-    let optArr = ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION;
-    if (middlePaneHeaderBadgeOne !== 'distinct') optArr = TRIPPLE_DOT_POPUP_OPTION;
+    let optArr = [];
+    if (middlePaneHeaderBadgeOne !== 'distinct') {
+      optArr = [...TRIPPLE_DOT_POPUP_OPTION];
+      let newObj = {
+        data: middlePaneHeader,
+        dataValue: middlePaneHeader,
+        dataKey: 'reviewDistinct',
+        optionClass: 'optionPrimary',
+        divider: 'dark',
+        disabled: false
+      };
+      optArr.splice(10, 0, newObj);
+      console.log(optArr);
+    } else {
+      optArr = ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION;
+    }
 
     dispatch({
       type: SET_POPUP_STATE,
@@ -78,7 +92,7 @@ const HeaderCard = (props) => {
         popupContentArrValue: optArr
       }
     });
-    dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+    dispatch({ type: POPUP_OPEN, payload: 'middlePaneTrippleDotPopup' });
   };
   const openLeftPaneTripleDotPopup = () => {
     dispatch({

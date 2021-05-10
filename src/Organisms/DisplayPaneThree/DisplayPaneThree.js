@@ -1239,7 +1239,10 @@ export const DisplayPaneThree = () => {
         )}
       {isReviewRevise &&
         responseObject &&
-        headerOne === 'associate' &&
+        (headerOne === 'associate' ||
+          headerOne === 'assessees' ||
+          headerOne === 'assessments' ||
+          headerOne === 'assignments') &&
         headerOneBadgeOne === 'node' && (
           <>
             <div style={{ padding: '2.5px' }}>
@@ -1284,50 +1287,53 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
-      {isReviewRevise && responseObject && headerOne === 'associate' && (
-        <>
-          <div style={{ padding: '2.5px' }}>
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'associate' &&
+        headerOneBadgeOne === 'information' && (
+          <>
             <div style={{ padding: '2.5px' }}>
-              <BasicCard
-                isAlertActive
-                isFlagActive
-                className=""
-                labelTextOneOne="name"
-                labelTextOneTwo="description"
-                textOneOne={informationBasic.associateName || 'No Information'}
-                textOneTwo={informationBasic.associateDescription || 'No Information'}
-                isVerifiedActiveName={false}
-                isVerifiedActivePicture={false}
-                mode={reviewMode}
-                onClickRevise={reviseAssociateBasicInformation}
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.associateName || 'No Information'}
+                  textOneTwo={informationBasic.associateDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  onClickRevise={reviseAssociateBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssociate}
+                selectedSection={selectedSectionAssociate}
+                setSelectedSection={setSelectedSectionAssociate}
               />
             </div>
-            <Sections
-              listSections={rightPaneSectionsAssociate}
-              selectedSection={selectedSectionAssociate}
-              setSelectedSection={setSelectedSectionAssociate}
-            />
-          </div>
-          {reviewMode === 'revise' && (
-            <FooterIconTwo
-              FilterModeEnable={isShowReviseIcon}
-              FilterMode={FilterMode}
-              onClick={onClickRevise}
-              primaryIcon={revisePrimaryIcon}
-              secondaryIcon={reviseSecondaryIcons}
-            />
-          )}
-          {createMode === 'associate' && reviewMode !== 'revise' && (
-            <FooterIconTwo
-              FilterModeEnable={true}
-              FilterMode={FilterMode}
-              onClick={onClickCreateAssessee}
-              primaryIcon={createAssesseePrimaryIcon}
-              secondaryIcon={[]}
-            />
-          )}
-        </>
-      )}
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'associate' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssessee}
+                primaryIcon={createAssesseePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
     </>
   );
 };
