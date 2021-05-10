@@ -46,7 +46,8 @@ import {
   getAssociateGroupAssociateDistinctApiCall,
   getAssociateGroupAssociateReqObj,
   getAssociateRoleAssociateDistinctApiCall,
-  getAssociateRoleAssociateReqObj
+  getAssociateRoleAssociateReqObj,
+  getInternalNodeApiCall
 } from '../Actions/AssociateModuleAction';
 const PopUpMiddlePaneTrippleDot = (props) => {
   const {
@@ -79,35 +80,58 @@ const PopUpMiddlePaneTrippleDot = (props) => {
   const ChangeOptionPopup = (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
-    // alert(typeOfMiddlePaneList);
-    if (dataVal === 'distinct') {
-      if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
-        getAssesseeDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal
-        );
-      }
-      if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
-        getAssesseeGroupDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          'groups'
-        );
-      }
-      if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
-        getAssesseeRoleDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          'roles',
-          dispatch
-        );
-      }
+    console.log(keyVal);
+    console.log(dataVal);
+    if (keyVal === 'distinctAPICall' && middlePaneHeader === 'assessees') {
+      getAssesseeDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        dataVal
+      );
+      dispatch({ type: POPUP_CLOSE });
+    } else if (
+      keyVal === 'distinct' &&
+      middlePaneHeader === 'assessees' &&
+      popupHeaderOneBadgeOne === 'groups'
+    ) {
+      getAssesseeGroupDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'groups'
+      );
+      dispatch({ type: POPUP_CLOSE });
+    } else if (
+      keyVal === 'distinct' &&
+      middlePaneHeader === 'assessees' &&
+      popupHeaderOneBadgeOne === 'nodes'
+    ) {
+      getInternalNodeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'nodes',
+        '',
+        'hierarchy',
+        'assessees'
+      );
+      dispatch({ type: POPUP_CLOSE });
+    } else if (
+      keyVal === 'distinct' &&
+      middlePaneHeader === 'assessees' &&
+      popupHeaderOneBadgeOne === 'roles'
+    ) {
+      getAssesseeRoleDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        'roles',
+        dispatch
+      );
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'groups') {
       if (middlePaneHeader === 'assessees') {
@@ -130,6 +154,36 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           dispatch
         );
       }
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'nodes') {
+      if (middlePaneHeader === 'assessees') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          '',
+          'hierarchy',
+          'assessees'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      }
+    } else if (dataVal === 'select') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: true }
+      });
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'unselect') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: false }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'selectedTagsArray', value: [] }
+      });
       dispatch({ type: POPUP_CLOSE });
     } else {
       dispatch({

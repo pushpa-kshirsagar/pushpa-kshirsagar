@@ -14,7 +14,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import { getAssesseeGroupAssesseeDistinctApiCall } from '../Actions/AssesseeModuleAction';
+import { getAssesseeGroupAssesseeDistinctApiCall, onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 import { assesseeStatus } from '../Actions/StatusAction';
 
 const AssesseeGroupAssesseeReviewList = (props) => {
@@ -27,7 +27,9 @@ const AssesseeGroupAssesseeReviewList = (props) => {
     relatedReviewListDistinctData,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    typeOfMiddlePaneList
+    typeOfMiddlePaneList,
+    selectedTagsArray,
+    isSelectActive
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
 
@@ -174,6 +176,8 @@ const AssesseeGroupAssesseeReviewList = (props) => {
       }
     });
   };
+  console.log(listDistinctData);
+  console.log("listDistinctData");
   return (
     <div>
       {listDistinctData && (
@@ -194,7 +198,7 @@ const AssesseeGroupAssesseeReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item.id}
+                tag={item.informationEngagement.assesseeTag?.assesseeTagPrimary}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={assesseeStatus(
                   middlePaneHeaderBadgeTwo,
@@ -209,7 +213,13 @@ const AssesseeGroupAssesseeReviewList = (props) => {
                 textTwo={item.informationBasic.assesseeAlias}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-                isSelectActive={false}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(
+                  item.informationEngagement.assesseeTag?.assesseeTagPrimary
+                )}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

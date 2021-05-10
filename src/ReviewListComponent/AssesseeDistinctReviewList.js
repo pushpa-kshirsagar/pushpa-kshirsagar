@@ -17,6 +17,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
 import { ASSESSEE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssesseeDistinctReviewList = (props) => {
   const { popupAllClose } = props;
   const dispatch = useDispatch();
@@ -31,7 +32,9 @@ const AssesseeDistinctReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     typeOfMiddlePaneList,
-    selectedAssociateInfo
+    selectedAssociateInfo,
+    isSelectActive,
+    selectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -183,7 +186,13 @@ const AssesseeDistinctReviewList = (props) => {
                 textTwo={item.informationBasic.assesseeAlias}
                 isTooltipActive={false}
                 onClickEvent={openAssesseeListPopup}
-                isSelectActive={false}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(
+                  item.informationEngagement.assesseeTag?.assesseeTagPrimary
+                )}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

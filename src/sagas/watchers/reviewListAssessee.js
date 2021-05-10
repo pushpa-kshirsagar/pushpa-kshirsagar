@@ -7,7 +7,8 @@ import {
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   RELATED_REVIEWLIST_DISTINCT_DATA,
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
-  SET_REVIEW_LIST_RELATE_DATA
+  SET_REVIEW_LIST_RELATE_DATA,
+  GET_ALLOCATE_ASSESSEE
 } from '../../actionType';
 import {
   ASSESSEE_REVIEW_LIST_URL,
@@ -52,6 +53,45 @@ function* workerReviewListAssesseeSaga(data) {
         showMiddlePaneState: true
       }
     });
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerReviewListAssesseSaga(data) {
+  try {
+    const userResponse = yield call(reviewListDistinctApi, {
+      data: data.payload.request,
+      URL: ASSESSEE_REVIEW_LIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      let responseObj = {
+        ...data.payload.revisedGroupObject,
+        assessee: userResponse.responseObject
+      };
+      console.log([responseObj]);
+      console.log('responseObj');
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'assessees',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList',
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true,
+          isSelectActive: true,
+          selectedTagsArray: data.payload.existingAssesseeId
+        }
+      });
+    }
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
@@ -146,4 +186,5 @@ export default function* watchReviewListAssesseeSaga() {
     GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
     workerReviewListAssesseeGroupAssesseeSaga
   );
+  yield takeLatest(GET_ALLOCATE_ASSESSEE, workerReviewListAssesseSaga);
 }

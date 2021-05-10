@@ -276,6 +276,8 @@ const PopUpReducer = (istate = initialState, action) => {
                 : action.payload.keyValue === 'reviewDistinct' ||
                   action.payload.keyValue === 'reviewDistinctKey'
                 ? 'active'
+                : action.payload.keyValue === 'select'
+                ? 'multiple'
                 : 'all'
           };
         }

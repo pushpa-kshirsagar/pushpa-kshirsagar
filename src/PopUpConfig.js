@@ -187,7 +187,7 @@ export const REVIEW_POPUP_OPTIONS = [
   {
     data: 'distinct',
     dataValue: 'distinct',
-    dataKey: 'distinct',
+    dataKey: 'distinctAPICall',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false
@@ -1595,6 +1595,7 @@ export const SELECT_OPTION_PUPUP = [
     data: 'unselect',
     dataValue: 'unselect',
     optionClass: 'optionPrimary',
+    divider: 'dark',
     disabled: false
   },
   {

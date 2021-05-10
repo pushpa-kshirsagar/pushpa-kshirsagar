@@ -58,7 +58,9 @@ const initialState = {
   leftPaneAssesseeInfo: '',
   nodeViewState: 'hierarchy',
   scanString: '',
-  searchFocusIndex: 0
+  searchFocusIndex: 0,
+  isSelectActive: false,
+  selectedTagsArray: []
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {
@@ -80,7 +82,9 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         middlePaneHeaderBadgeFour: action.payload.middlePaneHeaderBadgeFour,
         scanCount: action.payload.scanCount,
         showMiddlePaneState: action.payload.showMiddlePaneState,
-        middlePaneSelectedValue: 'tag'
+        middlePaneSelectedValue: 'tag',
+        isSelectActive: action.payload.isSelectActive || false,
+        selectedTagsArray: action.payload.selectedTagsArray || []
       };
     case SET_SCAN_POPUP_STATE:
       return {

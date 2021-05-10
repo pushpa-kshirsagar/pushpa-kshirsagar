@@ -19,7 +19,9 @@ const ReviewList = (props) => {
     onClickEvent = null,
     tag = '',
     id,
-    actualStatus = ''
+    actualStatus = '',
+    onClickCheckBox = null,
+    isSelected = false
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
@@ -110,9 +112,11 @@ const ReviewList = (props) => {
                     ].join(' ')}
                   >
                     <Checkbox
-                      id={'id'}
+                      id={tag}
                       className={'assesseeListCheckBoxSelctedOut'}
                       color="default"
+                      onChange={onClickCheckBox}
+                      checked={isSelected}
                     />
                   </div>
                 </div>

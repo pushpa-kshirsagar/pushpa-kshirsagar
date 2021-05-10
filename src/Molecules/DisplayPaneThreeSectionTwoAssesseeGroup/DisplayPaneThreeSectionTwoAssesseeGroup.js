@@ -6,8 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { FILTERMODE, RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../actionType';
+import {
+  FILTERMODE,
+  GET_ALLOCATE_ASSESSEE,
+  LOADER_START,
+  RELATED_REVIEWLIST_DISTINCT_DATA,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MIDDLEPANE_STATE,
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT,
+  SET_REQUEST_OBJECT
+} from '../../actionType';
 import { getAssesseeGroupAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
+import { makeAssesseeReviewListRequestObject } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -16,7 +27,9 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
     (state) => state.DisplayPaneThreeReducer
   );
   const { relatedReviewListDistinctData } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, countPage, reviewListDistinctData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   console.log('ASSESSEE LIST ::::::::::::>', relatedReviewListPaneThree);
   // const { informationEngagement, informationSetup } = responseObject;
   // function capitalizeFirstLetter(string) {
@@ -96,6 +109,78 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
       // });
     }
   };
+  const onclickReviseAssessee = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    if (labelName === 'assessee') {
+      console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+      let requestObect = makeAssesseeReviewListRequestObject(
+        selectedAssociateInfo,
+        'active',
+        0,
+        countPage
+      );
+      let revisedGroupObject = {
+        assesseeGroupDescription: responseObject.informationBasic.assesseeGroupName,
+        id: responseObject.id,
+        assesseeGroupName: responseObject.informationBasic.assesseeGroupDescription,
+        assesseeGroupStatus: responseObject.informationEngagement.assesseeGroupStatus
+      };
+      let existingAssesseeId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0].assessee.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSESSEE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingAssesseeId: existingAssesseeId
+        }
+      });
+
+      // getAssesseeGroupAssesseeDistinctApiCall(
+      //   selectedAssociateInfo,
+      //   'active',
+      //   countPage,
+      //   dispatch,
+      //   'distinct',
+      //   responseObject.id, //group id
+      //   '',
+      //   false,
+      //   true
+      // );
+      // dispatch({
+      //   type: FILTERMODE,
+      //   payload: { FilterMode: 'assesseeGroupAssesseeDistinct' }
+      // });
+      // dispatch({
+      //   type: RELATED_REVIEWLIST_DISTINCT_DATA,
+      //   payload: relatedReviewListPaneThree
+      // });
+      // dispatch({
+      //   type: SET_MIDDLEPANE_STATE,
+      //   payload: {
+      //     middlePaneHeader: 'assessees',
+      //     middlePaneHeaderBadgeOne: 'distinct',
+      //     middlePaneHeaderBadgeTwo: 'active',
+      //     middlePaneHeaderBadgeThree: '',
+      //     middlePaneHeaderBadgeFour: '',
+      //     typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList',
+      //     scanCount: 4,
+      //     showMiddlePaneState: true
+      //   }
+      // });
+    }
+  };
 
   return (
     <div
@@ -113,6 +198,7 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
                   {ob.isListCard ? (
                     <AccordianListCard
                       onClickReview={onclickReviewAssessee}
+                      onClickRevise={onclickReviseAssessee}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}

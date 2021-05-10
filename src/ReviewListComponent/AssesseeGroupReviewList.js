@@ -16,6 +16,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeGroupObj } from '../Actions/GenericActions';
 import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssesseeGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage, selectedAssociateInfo } = useSelector(
@@ -26,7 +27,9 @@ const AssesseeGroupReviewList = (props) => {
     scanCount,
     reviewListDistinctData,
     reviewListReqObj,
-    middlePaneSelectedValue
+    middlePaneSelectedValue,
+    isSelectActive,
+    selectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -120,6 +123,7 @@ const AssesseeGroupReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  
   return (
     <div>
       {reviewListDistinctData &&
@@ -136,6 +140,13 @@ const AssesseeGroupReviewList = (props) => {
                 textTwo={item.informationBasic.assesseeGroupDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(
+                  item.informationEngagement.assesseeTag?.assesseeTagPrimary
+                )}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );
