@@ -119,8 +119,8 @@ const initialState = {
       assesseeRoleShare: false,
       assesseeRoleShared: true
     },
-    assessment: {},
-    assignment: {},
+    assessment: null,
+    assignment: null,
     associate: {
       associateDateFormat: '',
       associateDictionary: '',

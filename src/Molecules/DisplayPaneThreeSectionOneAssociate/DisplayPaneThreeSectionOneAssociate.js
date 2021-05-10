@@ -289,7 +289,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a1',
       labelTextOneOne: 'date',
-      textOneOne: informationSetup?.associateDateFormat || 'No Information',
+      textOneOne: informationSetup?.associate?.associateDateFormat || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -297,7 +297,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a2',
       labelTextOneOne: 'dictionary',
-      textOneOne: informationSetup?.associateDictionary || 'No Information',
+      textOneOne: informationSetup?.associate?.associateDictionary || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -305,7 +305,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a3',
       labelTextOneOne: 'language',
-      textOneOne: informationSetup?.associateLanguage || 'No Information',
+      textOneOne: informationSetup?.associate?.associateLanguage || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -313,7 +313,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a4',
       labelTextOneOne: 'people',
-      textOneOne: informationSetup?.assesseeNameFormat || 'No Information',
+      textOneOne: informationSetup?.assessee?.assesseeNameFormat || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -321,7 +321,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a5',
       labelTextOneOne: 'time',
-      textOneOne: informationSetup?.associateTimeFormat || 'No Information',
+      textOneOne: informationSetup?.associate?.associateTimeFormat || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -398,11 +398,15 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement.associateTenureDate || 'No Information'
+          textOne:
+            informationEngagement.associateTenureDate?.associateTenureDateTimeStart ||
+            'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement.associateTenureDate || 'No Information'
+          textOne:
+            informationEngagement.associateTenureDate?.associateTenureDateTimeEnd ||
+            'No Information'
         }
       ],
       innerAssociateList: [],
@@ -414,7 +418,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a2',
       labelTextOneOne: 'dictionary',
-      textOneOne: informationSetup?.associateDictionary || 'No Information',
+      textOneOne: informationSetup?.associate?.associateDictionary || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
@@ -422,7 +426,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     {
       id: 'a3',
       labelTextOneOne: 'language',
-      textOneOne: informationSetup?.associateLanguage || 'No Information',
+      textOneOne: informationSetup?.associate?.associateLanguage || 'No Information',
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false
