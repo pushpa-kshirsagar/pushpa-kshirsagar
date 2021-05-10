@@ -7,6 +7,7 @@ import IconButton from '../IconButton/IconButton';
 import Label from '../../Atoms/Labels/Label';
 import Avatar from '@material-ui/core/Avatar';
 import './Card.css';
+import { Input } from '@material-ui/core';
 const Card = (props) => {
   const {
     textOneOne = '',
@@ -44,7 +45,17 @@ const Card = (props) => {
               className={['midPaneInformation', textTwoOne !== '' ? null : 'aliasmiddle'].join(' ')}
             >
               {/* {name} */}
-              <Label text={textOneOne} fontSize={'1.6rem'} />
+              {/* <Label text={textOneOne} fontSize={'1.6rem'} /> */}
+              <Input
+                multiline={false}
+                row={2}
+                rowsMax={1}
+                className={'inputText'}
+                id="name-dn-input"
+                value={textOneOne}
+                disableUnderline={true}
+                readOnly
+              />
             </div>
             <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwoOne}</div>
           </div>

@@ -88,6 +88,7 @@ const HeaderCard = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'leftPaneTrippleDotPopup' });
   };
   const openRightPaneTripleDotPopup = () => {
+    alert(middlePaneSelectedValue)
     dispatch({
       type: SET_POPUP_STATE,
       payload: {

@@ -81,7 +81,12 @@ const PopUpSignOnAssessee = (props) => {
   }, [assesseeInfo.assesseeInformationData, history]);
   useEffect(() => {
     if (headerOne === 'assessee') {
-      assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary.push(DEFAULT_ROLE_ID);
+      if (
+        assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary.includes(
+          DEFAULT_ROLE_ID
+        ) === false
+      )
+        assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary.push(DEFAULT_ROLE_ID);
     }
     if (headerOne === 'administrator' && coreNodeReviewListData.length > 0) {
       let defaultnode = coreNodeReviewListData[0]
@@ -91,7 +96,7 @@ const PopUpSignOnAssessee = (props) => {
         )
         .map((x) => x.id);
       assesseeInfo.informationAllocation.assesseeNode.assesseeNodePrimary.push(defaultnode[0]);
-      setdefaultNodeId(defaultnode[0])
+      setdefaultNodeId(defaultnode[0]);
     }
   }, [coreRoleReviewListData, coreNodeReviewListData]);
   const onClickYes = async () => {

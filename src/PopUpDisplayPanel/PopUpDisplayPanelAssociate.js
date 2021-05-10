@@ -51,7 +51,8 @@ import {
   GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
   CREATE_INFORMATION_POPUP,
   ASSESSEE_REVIEW_REVISE_POPUP,
-  NODE_POPUP_OPTION
+  NODE_POPUP_OPTION,
+  SELF_POPUP
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -319,11 +320,27 @@ const PopUpDisplayPanelAssociate = (props) => {
           }
         }
       });
+      clearMiddlePaneInfo();
       dispatch({
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'Card' }
       });
-      clearMiddlePaneInfo();
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'middlePaneSelectedValue',
+          value:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+        }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneListPopupOptions', value: SELF_POPUP }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'typeOfMiddlePaneList', value: 'associateSelfReview' }
+      });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
     if (clickValue === 'associaterevise') {
