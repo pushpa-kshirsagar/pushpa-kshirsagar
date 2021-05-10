@@ -39,6 +39,7 @@ import AssessmentCreatePopup from '../../Molecules/PopUpCreate/AssessmentCreateP
 import PopUpMessageError from '../../PopUpGeneric/PopUpMessageError';
 import { useHistory } from 'react-router-dom';
 import NodeCreatePopup from '../../Molecules/PopUpCreate/NodeCreatePopup';
+import PopUpMiddlePaneTrippleDot from '../../PopUpDisplayPanel/PopUpMiddlePaneTrippleDot';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -171,6 +172,11 @@ const DisplayPageOne = () => {
       </div>
       <PopUpMiddlePaneList
         isActive={isPopUpValue === 'middlePaneListPopup'}
+        typeOfMiddlePaneList={typeOfMiddlePaneList}
+        popupAllClose={popupAllClose}
+      />
+      <PopUpMiddlePaneTrippleDot
+        isActive={isPopUpValue === 'middlePaneTrippleDotPopup'}
         typeOfMiddlePaneList={typeOfMiddlePaneList}
         popupAllClose={popupAllClose}
       />

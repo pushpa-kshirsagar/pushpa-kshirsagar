@@ -20,6 +20,7 @@ import {
   GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
+  ASSESSEE_ROLE_SHARE_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -29,15 +30,11 @@ import {
   SET_SECONDARY_CREATE_OPTION_VALUE,
   FILTERMODE,
   CLEAR_DISPLAY_PANE_THREE,
-  LOADER_STOP,
-  SET_POPUP_SINGLE_STATE,
-  ASSESSEE_INFO_CREATE
+  LOADER_STOP
 } from '../actionType';
 import {
-  getAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeReqObj,
-  getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
@@ -78,9 +75,7 @@ const PopUpMiddlePaneList = (props) => {
   const ChangeOptionPopup = (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
-    alert(typeOfMiddlePaneList);
-    alert(keyVal);
-    alert(dataVal);
+    console.log(dataVal);
     if (dataVal === 'information') {
       console.log(selectedTagValue);
       console.log(typeOfMiddlePaneList);
@@ -624,37 +619,6 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
       }
-      if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
-        getAssesseeDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal
-        );
-        dispatch({ type: POPUP_CLOSE });
-      }
-      if (typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList') {
-        getAssesseeGroupDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal
-        );
-        dispatch({ type: POPUP_CLOSE });
-      }
-    } else if (dataVal === 'groups') {
-      if (middlePaneHeader === 'assessees') {
-        getAssesseeGroupDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal
-        );
-        dispatch({ type: POPUP_CLOSE });
-      }
     } else if (dataVal === 'revise') {
       // alert("IN REVISE");
       setIsReviseMode(true);
@@ -662,6 +626,31 @@ const PopUpMiddlePaneList = (props) => {
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: { badgeValue: dataVal, keyValue: keyVal }
       });
+    } else if (dataVal === 'shareApiCall') {
+      if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assesseeRoleShared: [
+            {
+              assesseeRoleId: '499439',
+              assesseeRoleGroupId: '3455'
+            },
+            {
+              assesseeRoleId: '499449',
+              assesseeRoleGroupId: '3455'
+            }
+          ]
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: ASSESSEE_ROLE_SHARE_SAGA,
+          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+        });
+      }
+      dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'suspendApiCall' ||
       dataVal === 'terminateApiCall' ||
