@@ -16,7 +16,11 @@ import {
   SET_SCAN_POPUP_STATE
 } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
-import { ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION, LEFT_TRIPPLE_DOT_POPUP_OPTION } from '../../PopUpConfig';
+import {
+  ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION,
+  LEFT_TRIPPLE_DOT_POPUP_OPTION,
+  TRIPPLE_DOT_POPUP_OPTION
+} from '../../PopUpConfig';
 const HeaderCard = (props) => {
   const {
     headerOne = '',
@@ -61,6 +65,8 @@ const HeaderCard = (props) => {
   };
   const openMiddlePaneTripleDotPopup = () => {
     let optArr = ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION;
+    if (middlePaneHeaderBadgeOne !== 'distinct') optArr = TRIPPLE_DOT_POPUP_OPTION;
+
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -88,7 +94,6 @@ const HeaderCard = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'leftPaneTrippleDotPopup' });
   };
   const openRightPaneTripleDotPopup = () => {
-    alert(middlePaneSelectedValue)
     dispatch({
       type: SET_POPUP_STATE,
       payload: {

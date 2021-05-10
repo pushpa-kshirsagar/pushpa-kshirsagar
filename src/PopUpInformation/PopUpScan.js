@@ -67,7 +67,8 @@ const PopUpScan = (props) => {
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
     middlePaneHeaderBadgeThree,
-    selectedAssociateInfo
+    selectedAssociateInfo,
+    reviewListDistinctData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isActive = true } = props;
   const [state, setState] = useState({
@@ -460,9 +461,24 @@ const PopUpScan = (props) => {
           type: SET_DISPLAY_TWO_SINGLE_STATE,
           payload: { stateName: 'scanString', value: state.scanValue }
         });
+        let listData = [];
+        if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
+          listData = reviewListDistinctData[0].filter(function (value) {
+            let name = value.informationBasic.associateNodeName.toLowerCase();
+            let desc = value.informationBasic.associateNodeDescription.toLowerCase();
+            return name.includes(state.scanValue) || desc.includes(state.scanValue);
+          });
+        }
+        if (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList') {
+          listData = reviewListDistinctData[0].filter(function (value) {
+            let name = value.informationBasic.associateName.toLowerCase();
+            let desc = value.informationBasic.associateDescription.toLowerCase();
+            return name.includes(state.scanValue) || desc.includes(state.scanValue);
+          });
+        }
         dispatch({
           type: SET_DISPLAY_TWO_SINGLE_STATE,
-          payload: { stateName: 'typeOfMiddlePaneList', value: typeOfMiddlePaneList }
+          payload: { stateName: 'reviewListDistinctData', value: [listData] }
         });
       }
       if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {

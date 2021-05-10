@@ -39,6 +39,7 @@ import {
 } from '../Actions/GenericActions';
 import {
   getAssesseeDistinctApiCall,
+  getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleDistinctApiCall
 } from '../Actions/AssesseeModuleAction';
@@ -172,31 +173,13 @@ const PopUpAssesseesModule = (props) => {
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
     } else if (targetValue === 'groups') {
-      let requestObj = makeAssesseeGroupObj(
+      getAssesseeGroupDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assesseesGroupDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
       dispatch({
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'NoCard' }

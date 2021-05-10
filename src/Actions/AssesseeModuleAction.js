@@ -4,6 +4,7 @@ import {
   FILTERMODE,
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   LOADER_START,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -11,7 +12,11 @@ import {
   SET_PAGE_COUNT,
   SET_REQUEST_OBJECT
 } from '../actionType';
-import { makeAssesseeReviewListRequestObject, makeAssesseeRoleObj } from './GenericActions';
+import {
+  makeAssesseeGroupObj,
+  makeAssesseeReviewListRequestObject,
+  makeAssesseeRoleObj
+} from './GenericActions';
 
 export const getAssesseeDistinctApiCall = (
   selectedAssociateInfo,
@@ -608,6 +613,40 @@ export const getAssesseeRoleDistinctApiCall = (
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({
     type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+
+export const getAssesseeGroupDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue
+) => {
+  let requestObj = makeAssesseeGroupObj(
+    selectedAssociateInfo,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'assesseesGroupDistinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
     payload: {
       request: requestObj,
       BadgeOne: targetValue,

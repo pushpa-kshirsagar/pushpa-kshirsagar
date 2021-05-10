@@ -82,39 +82,6 @@ const InternalNodeReviewList = (props) => {
     ]
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
-  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
-  const [isFetching, setIsFetching] = useState(false);
-  const [nodeTreeData, setTreeData] = useState([]);
-  const [secondaryIconData, setSecondaryIconData] = useState([]);
-
-  console.log(reviewListDistinctData);
-  console.log('reviewListDistinctData');
-  useEffect(() => {
-    // setTreeData(dummytreeData);
-    setTreeData(dummytreeData);
-  }, []);
-
-  const siftApiCall = (siftKey) => {
-    let requestObect = makeAssociateReviewListRequestObject(
-      selectedAssociateInfo,
-      siftKey,
-      0,
-      countPage
-    );
-    dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-    dispatch({ type: LOADER_START });
-    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-    dispatch({
-      type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
-      payload: {
-        request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
-      }
-    });
-    dispatch({ type: ASSOCIATE_POPUP_CLOSE });
-    document.getElementById('middleComponentId').scrollTop = '0px';
-  };
 
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
