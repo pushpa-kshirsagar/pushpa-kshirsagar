@@ -29,11 +29,15 @@ import {
   SET_SECONDARY_CREATE_OPTION_VALUE,
   FILTERMODE,
   CLEAR_DISPLAY_PANE_THREE,
-  LOADER_STOP
+  LOADER_STOP,
+  SET_POPUP_SINGLE_STATE,
+  ASSESSEE_INFO_CREATE
 } from '../actionType';
 import {
+  getAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeReqObj,
+  getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
@@ -74,6 +78,9 @@ const PopUpMiddlePaneList = (props) => {
   const ChangeOptionPopup = (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
+    alert(typeOfMiddlePaneList);
+    alert(keyVal);
+    alert(dataVal);
     if (dataVal === 'information') {
       console.log(selectedTagValue);
       console.log(typeOfMiddlePaneList);
@@ -542,88 +549,112 @@ const PopUpMiddlePaneList = (props) => {
       // dispatch({ type: LOADER_STOP });
 
       // onClickInformation(secondaryOptionCheckValue);
-    } else if (
-      dataVal === 'distinct' &&
-      typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList'
-    ) {
-      getAssesseeGroupAssesseeDistinctApiCall(
-        selectedAssociateInfo,
-        secondaryOptionCheckValue,
-        countPage,
-        dispatch,
-        dataVal,
-        selectedTagValue, //group id
-        '',
-        false,
-        true
-      );
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: POPUP_CLOSE });
-    } else if (
-      dataVal === 'distinct' &&
-      typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList'
-    ) {
-      getAssesseeRoleAssesseeDistinctApiCall(
-        selectedAssociateInfo,
-        secondaryOptionCheckValue,
-        countPage,
-        dispatch,
-        dataVal,
-        selectedTagValue,
-        '',
-        false,
-        middlePaneHeader
-      );
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: POPUP_CLOSE });
-    } else if (
-      dataVal === 'distinct' &&
-      typeOfMiddlePaneList === 'associatesGroupDistinctReviewList'
-    ) {
-      getAssociateGroupAssociateDistinctApiCall(
-        selectedAssociateInfo,
-        secondaryOptionCheckValue,
-        countPage,
-        dispatch,
-        dataVal,
-        selectedTagValue,
-        '',
-        false
-      );
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'associateGroupAssociateDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: POPUP_CLOSE });
-    } else if (
-      dataVal === 'distinct' &&
-      typeOfMiddlePaneList === 'associateRoleDistinctReviewList'
-    ) {
-      getAssociateRoleAssociateDistinctApiCall(
-        selectedAssociateInfo,
-        secondaryOptionCheckValue,
-        countPage,
-        dispatch,
-        dataVal,
-        selectedTagValue,
-        '',
-        false
-      );
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'associateRoleAssociateDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'distinct') {
+      if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
+        getAssesseeGroupAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue, //group id
+          '',
+          false,
+          true
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
+        getAssesseeRoleAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false,
+          middlePaneHeader
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
+        getAssociateGroupAssociateDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'associateGroupAssociateDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
+        getAssociateRoleAssociateDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'associateRoleAssociateDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
+        getAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal
+        );
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList') {
+        getAssesseeGroupDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal
+        );
+        dispatch({ type: POPUP_CLOSE });
+      }
+    } else if (dataVal === 'groups') {
+      if (middlePaneHeader === 'assessees') {
+        getAssesseeGroupDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal
+        );
+        dispatch({ type: POPUP_CLOSE });
+      }
     } else if (dataVal === 'revise') {
       // alert("IN REVISE");
       setIsReviseMode(true);

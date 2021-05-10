@@ -80,6 +80,7 @@ const initialState = {
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP,
     reviewDistinct: REVIEW_POPUP_OPTIONS,
+    reviewDistinctKey: REVIEW_DISTINCT_POPUP_OPTION,
     selection: SELECT_OPTION_PUPUP,
     create: ASSESSEE_REVIEW_REVISE_POPUP,
     assessees: REVIEW_DISTINCT_POPUP_OPTION,
@@ -92,7 +93,7 @@ const initialState = {
 };
 
 const PopUpReducer = (istate = initialState, action) => {
-  // console.log(action.payload);
+  console.log(action.payload);
   switch (action.type) {
     case POPUP_OPEN:
       return {
@@ -199,7 +200,10 @@ const PopUpReducer = (istate = initialState, action) => {
       }
     case SET_MIDDLEPANE_SECONDARY_OPTION: {
       let arrVal =
-        action.payload.keyValue === 'reviseKey' || action.payload.keyValue === 'reviewKey'
+        action.payload.keyValue === 'reviseKey' ||
+        action.payload.keyValue === 'reviewKey' ||
+        action.payload.keyValue === 'reviewDistinctKey' ||
+        action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
           : istate.secondaryPopUpOptions[action.payload.badgeValue];
       if (istate.popupOpenType === 'primary') {
@@ -269,6 +273,9 @@ const PopUpReducer = (istate = initialState, action) => {
             secondaryOptionCheckValue:
               action.payload.keyValue === 'reviseKey' || action.payload.keyValue === 'reviewKey'
                 ? 'key'
+                : action.payload.keyValue === 'reviewDistinct' ||
+                  action.payload.keyValue === 'reviewDistinctKey'
+                ? 'active'
                 : 'all'
           };
         }
