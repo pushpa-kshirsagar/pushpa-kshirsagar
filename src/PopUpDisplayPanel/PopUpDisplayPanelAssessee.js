@@ -152,10 +152,7 @@ const PopUpDisplayPanelAssessee = (props) => {
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'Card' }
       });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'middlePaneListPopupOptions', value: SELF_POPUP }
-      });
+
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
@@ -164,10 +161,18 @@ const PopUpDisplayPanelAssessee = (props) => {
           middlePaneHeaderBadgeTwo: '',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: '',
+          typeOfMiddlePaneList: 'assesseesSelfReview',
           scanCount: null,
           showMiddlePaneState: false
         }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneListPopupOptions', value: SELF_POPUP }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneSelectedValue', value: selectedAssociateInfo?.assesseeId }
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
@@ -193,6 +198,7 @@ const PopUpDisplayPanelAssessee = (props) => {
         popupOpenType: revisePopupType,
         secondaryOptionCheckValue: reviseSecondaryOptionCheckValue,
         popupContentArrValue: valueArr,
+        selectedTagValue: selectedAssociateInfo?.assesseeId,
         popupMode: revisePopupMode
       }
     });

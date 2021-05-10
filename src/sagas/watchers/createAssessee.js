@@ -60,13 +60,13 @@ function* workerCreateAssesseeSaga(data) {
       yield put({ type: UPDATE_ASSESSEE_ENGAGEMENT_INFO, payload: informationEngagement });
       yield put({ type: UPDATE_ASSESSEE_CONTACT_INFO, payload: informationContact });
       yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-      yield put({ type: LOADER_STOP });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

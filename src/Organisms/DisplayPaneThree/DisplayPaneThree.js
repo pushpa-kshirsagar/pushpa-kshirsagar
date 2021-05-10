@@ -1323,14 +1323,14 @@ export const DisplayPaneThree = () => {
           )}
         </>
       )}
-      {/* <PopUpFingerprint
+      <PopUpFingerprint
         isActive={true}
         headerPanelColour="genericOne"
         headerOne="fingerprint"
-        headerOneBadgeOne="right hand"
+        headerOneBadgeOne="left hand"
         headerOneBadgeTwo=""
         handleNextPopupValue
-      /> */}
+      />
     </>
   );
 };

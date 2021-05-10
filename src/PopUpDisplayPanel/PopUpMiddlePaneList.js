@@ -76,9 +76,12 @@ const PopUpMiddlePaneList = (props) => {
     let dataVal = e.currentTarget.getAttribute('data-value');
     if (dataVal === 'information') {
       console.log(selectedTagValue);
+      console.log(typeOfMiddlePaneList);
+      console.log(isReviseMode);
       dispatch({ type: LOADER_START });
       if (
         typeOfMiddlePaneList === 'assesseesDistinctReviewList' ||
+        typeOfMiddlePaneList === 'assesseesSelfReview' ||
         typeOfMiddlePaneList === 'administratorsDistinctReviewList' ||
         typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
@@ -212,6 +215,7 @@ const PopUpMiddlePaneList = (props) => {
         typeOfMiddlePaneList === 'associateDistinctReviewList' ||
         typeOfMiddlePaneList === 'associatesRoleAssociateReviewList' ||
         typeOfMiddlePaneList === 'associatesGroupAssociateReviewList' ||
+        typeOfMiddlePaneList === 'associateSelfReview' ||
         typeOfMiddlePaneList === 'associatesNodeDistinctReviewList'
       ) {
         dispatch({
