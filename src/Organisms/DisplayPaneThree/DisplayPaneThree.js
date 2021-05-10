@@ -58,7 +58,6 @@ import DisplayPaneThreeSectionOneAssessmentType from '../../Molecules/DisplayPan
 import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentType/DisplayPaneThreeSectionTwoAssessmentType';
 import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThreeSectionOneAssignment/DisplayPaneThreeSectionOneAssignment';
 import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThreeSectionTwoAssignment/DisplayPaneThreeSectionTwoAssignment';
-import PopUpFingerprint from '../../PopUpInformation/PopUpFingerprint';
 import DisplayPaneThreeSectionOneAssociateNode from '../../Molecules/DisplayPaneThreeSectionOneAssociateNode/DisplayPaneThreeSectionOneAssociateNode';
 import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPaneThreeSectionTwoAssociateNode/DisplayPaneThreeSectionTwoAssociateNode';
 
@@ -343,13 +342,14 @@ export const DisplayPaneThree = () => {
   const onClickReviseFinish = () => {
     console.log('ON CLICK FINISH ICON', assesseeInfo.informationBasic);
     if (headerOneBadgeOne === 'information' && headerOne === 'assessee') {
-      const { informationBasic, informationContact, informationPersonal } = assesseeInfo;
+      const { informationBasic, informationContact, informationPersonal, informationAllocation } = assesseeInfo;
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: id,
         associateId,
         assessee: {
           id,
+          informationAllocation,
           informationBasic,
           informationContact,
           informationPersonal
@@ -1323,14 +1323,6 @@ export const DisplayPaneThree = () => {
           )}
         </>
       )}
-      <PopUpFingerprint
-        isActive={true}
-        headerPanelColour="genericOne"
-        headerOne="fingerprint"
-        headerOneBadgeOne="left hand"
-        headerOneBadgeTwo=""
-        handleNextPopupValue
-      />
     </>
   );
 };

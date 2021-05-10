@@ -44,6 +44,7 @@ import PopUpDatePicker from '../PopUpInformation/PopUpDatePicker';
 import PopUpCommunity from '../PopUpInformation/PopUpCommunity';
 import PopUpBirthplace from '../PopUpInformation/PopUpBirthplace';
 import { DEFAULT_ROLE_ID } from '../endpoints';
+import PopUpFingerprint from '../PopUpInformation/PopUpFingerprint';
 
 const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
@@ -380,6 +381,13 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         // nextPopUpValue={popupMode === 'ASSESSEE_SIGN_ON' ? 'EMAILPOPUP' :'ROLELISTPOPUP'}
         handleNextPopupValue={handleNextPopupValue}
+      />
+      <PopUpPicture
+        isActive={isPopUpValue === 'SIGNATUREPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'signature'}
+        headerOneBadgeOne={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPLISTPOPUP'}
@@ -815,6 +823,22 @@ const PopUpSignOnAssessee = (props) => {
         isRequired={false}
         basicInfo={assesseeInfo?.informationPersonal}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpFingerprint
+        isActive={isPopUpValue === 'LEFTFINGERPRINTPOPUP'}
+        headerPanelColour="genericOne"
+        headerOne="fingerprint"
+        headerOneBadgeOne="left hand"
+        headerOneBadgeTwo=""
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpFingerprint
+        isActive={isPopUpValue === 'RIGHTFINGERPRINTPOPUP'}
+        headerPanelColour="genericOne"
+        headerOne="fingerprint"
+        headerOneBadgeOne="right hand"
+        headerOneBadgeTwo=""
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>

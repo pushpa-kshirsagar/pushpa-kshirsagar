@@ -42,21 +42,21 @@ function* workerReviseInfoAssesseeSaga(data) {
           payload: 'review'
         });
       }
-      if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
-        yield put({
-          type: SET_DISPLAY_TWO_SINGLE_STATE,
-          payload: { stateName: 'reviewListDistinctData', value: [] }
-        });
-        yield put({
-          type: ASSESSEE_REVIEW_DISTINCT_SAGA,
-          payload: {
-            HeaderOne: 'assessees',
-            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo
-          }
-        });
-      }
+      // if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
+      //   yield put({
+      //     type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //     payload: { stateName: 'reviewListDistinctData', value: [] }
+      //   });
+      //   yield put({
+      //     type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+      //     payload: {
+      //       HeaderOne: 'assessees',
+      //       request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+      //       BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+      //       BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo
+      //     }
+      //   });
+      // }
 
       console.log('loading end');
       yield put({ type: LOADER_STOP });
