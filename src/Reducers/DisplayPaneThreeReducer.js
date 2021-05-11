@@ -3,7 +3,9 @@ import {
   CLEAR_DISPLAY_PANE_THREE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   SET_REVIEW_LIST_RELATE_DATA,
-  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST
+  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_STATUS_POPUP_VALUE
 } from '../actionType';
 
 const initialState = {
@@ -16,7 +18,13 @@ const initialState = {
   reviewMode: 'review',
   createMode: '',
   relatedReviewListPaneThree: [{}],
-  assesseeRoleAssesseeIdList: []
+  assesseeRoleAssessee: [],
+  assesseeGroupAssessee: {
+    assesseeAdded: [],
+    assesseeRemoved: []
+  },
+  selectedModule: '',
+  statusPopUpValue: ''
 };
 
 const DisplayPaneThreeReducer = (istate = initialState, action) => {
@@ -46,7 +54,20 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
     case SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST:
       return {
         ...istate,
-        assesseeRoleAssesseeIdList: action.payload
+        assesseeRoleAssessee: action.payload
+      };
+    case SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST:
+      return {
+        ...istate,
+        assesseeGroupAssessee: {
+          ...istate.assesseeGroupAssessee,
+          assesseeAdded: action.payload
+        }
+      };
+    case SET_STATUS_POPUP_VALUE:
+      return {
+        ...istate,
+        statusPopUpValue: action.payload
       };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;

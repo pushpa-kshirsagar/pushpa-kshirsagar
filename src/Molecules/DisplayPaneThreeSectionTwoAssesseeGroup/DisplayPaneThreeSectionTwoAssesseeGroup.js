@@ -115,14 +115,14 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
       console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
-        'all',
+        'active',
         0,
         countPage
       );
       let revisedGroupObject = {
         id: responseObject.id,
-        assesseeGroupName: responseObject.informationBasic.assesseeGroupDescription,
-        assesseeGroupDescription: responseObject.informationBasic.assesseeGroupName,
+        assesseeGroupName: responseObject.informationBasic.assesseeGroupName,
+        assesseeGroupDescription: responseObject.informationBasic.assesseeGroupDescription,
         assesseeGroupStatus: responseObject.informationEngagement.assesseeGroupStatus
       };
       let existingAssesseeId =
@@ -130,6 +130,10 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
         relatedReviewListPaneThree[0].assessee.map((val) => {
           return val.id;
         });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeGroupAssesseeRevise' }
+      });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'relatedReviewListDistinctData', value: [] }
@@ -143,7 +147,8 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
         payload: {
           request: requestObect,
           revisedGroupObject: revisedGroupObject,
-          existingAssesseeId: existingAssesseeId
+          existingAssesseeId: existingAssesseeId,
+          typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList'
         }
       });
 
@@ -158,10 +163,6 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
       //   false,
       //   true
       // );
-      // dispatch({
-      //   type: FILTERMODE,
-      //   payload: { FilterMode: 'assesseeGroupAssesseeDistinct' }
-      // });
       // dispatch({
       //   type: RELATED_REVIEWLIST_DISTINCT_DATA,
       //   payload: relatedReviewListPaneThree

@@ -69,7 +69,7 @@ function* workerReviewAssesseeGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -98,6 +98,20 @@ function* workerReviseAssesseeGroupInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
+      const { assesseeGroupAssesseeReqBody = null } = data.payload;
+      if (assesseeGroupAssesseeReqBody !== null) {
+        yield put({
+          type: GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
+          payload: {
+            request: assesseeGroupAssesseeReqBody,
+            HeaderOne: 'assessees',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       console.log('IN GROUP REVIEW+++++', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -112,7 +126,7 @@ function* workerReviseAssesseeGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

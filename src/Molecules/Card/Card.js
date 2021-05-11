@@ -53,6 +53,7 @@ const Card = (props) => {
                 className={'inputText'}
                 id="name-dn-input"
                 value={textOneOne}
+                // dangerouslySetInnerHTML={{ __html: textOneOne }}
                 disableUnderline={true}
                 readOnly
               />

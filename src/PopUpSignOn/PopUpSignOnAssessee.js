@@ -56,7 +56,7 @@ const PopUpSignOnAssessee = (props) => {
     coreRoleReviewListData,
     coreNodeReviewListData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, statusPopUpValue = '' } = useSelector((state) => state.DisplayPaneThreeReducer);
   const informationContact = assesseeInfo.informationContact;
   console.log('============>', assesseeInfo);
   const [roleSelectedError, setRoleSelectedError] = useState('');
@@ -513,7 +513,7 @@ const PopUpSignOnAssessee = (props) => {
         ListData={coreRoleReviewListData}
         textOne={'assesseeRoleName'}
         textTwo={'assesseeRoleDescription'}
-        onClickEvent={headerOne === 'assessee' ? null : updateRoleIdObject}
+        onClickEvent={updateRoleIdObject}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -532,7 +532,7 @@ const PopUpSignOnAssessee = (props) => {
         ListData={coreRoleReviewListData}
         textOne={'assesseeRoleName'}
         textTwo={'assesseeRoleDescription'}
-        onClickEvent={headerOne === 'assessee' ? null : updateRoleIdSecondaryObject}
+        onClickEvent={updateRoleIdSecondaryObject}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddressEmail
@@ -658,6 +658,29 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
         handleNextPopupValue={handleNextPopupValue}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'STATUSPOPUP'}
+        tag={'assesseeStatus'}
+        label={'status'}
+        listSelect={[
+          { id: 'Active', name: 'Active' },
+          { id: 'Suspended', name: 'Suspended' },
+          { id: 'Terminated', name: 'Terminated' },
+          { id: 'Unverified', name: 'Unverified' },
+          { id: 'Confirmed', name: 'Confirmed' },
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        basicInfo={statusPopUpValue}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
+        handleNextPopupValue={handleNextPopupValue}
+        isNotRevised={true}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTagPrimary

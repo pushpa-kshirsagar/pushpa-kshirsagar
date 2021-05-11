@@ -9,11 +9,16 @@
   font-size: unset !important;
   text-align: left !important;
 }
-.selectFontAlign svg{
+.selectFontAlign svg {
   font-size: 24px;
 }
-.selectMenu{
+.selectMenu {
   padding-top: 12px !important;
   padding-bottom: 12px !important;
   font-size: 1.6rem !important;
+}
+
+.margin-left-right-5 {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
 }

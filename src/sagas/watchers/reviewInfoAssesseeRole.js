@@ -63,10 +63,10 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
           payload: userResponse.responseObject[0].informationBasic
         });
       }
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -95,6 +95,19 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN ROLE REVIEW+++++', userResponse);
+      if (data.payload.assesseeRoleAssesseeReqBody !== null) {
+        yield put({
+          type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+          payload: {
+            request: data.payload.assesseeRoleAssesseeReqBody,
+            HeaderOne: 'assessees',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -105,20 +118,20 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
           responseObject: userResponse.responseObject[0]
         }
       });
-      yield put({
-        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree
-        }
-      });
+      // yield put({
+      //   type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+      //   payload: {
+      //     HeaderOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
+      //     request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+      //     BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+      //     BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+      //     BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree
+      //   }
+      // });
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
