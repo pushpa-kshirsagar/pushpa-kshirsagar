@@ -21,7 +21,8 @@ const ReviewList = (props) => {
     id,
     actualStatus = '',
     onClickCheckBox = null,
-    isSelected = false
+    isSelected = false,
+    dataValue = ''
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
@@ -33,7 +34,7 @@ const ReviewList = (props) => {
           tag={tag}
           id={id}
           status={actualStatus}
-          data-value={id}
+          data-value={dataValue}
           onClick={isSelectActive ? null : onClickEvent}
           style={{ backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '' }}
         >

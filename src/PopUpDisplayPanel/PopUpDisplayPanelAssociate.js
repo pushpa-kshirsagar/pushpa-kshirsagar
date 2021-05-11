@@ -782,7 +782,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       let requestObj = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
-          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        parentId: localStorage.getItem('parentId')
       };
       dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({

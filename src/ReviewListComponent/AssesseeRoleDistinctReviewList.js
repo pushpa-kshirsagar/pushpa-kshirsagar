@@ -118,7 +118,9 @@ const AssesseeRoleDistinctReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: popupContentArrValue,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status'),
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
       }
     });
     dispatch({
@@ -130,7 +132,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-console.log(reviewListDistinctData);
+  // console.log(reviewListDistinctData);
   return (
     <div>
       {reviewListDistinctData &&
@@ -141,8 +143,10 @@ console.log(reviewListDistinctData);
                 className=""
                 id={index}
                 tag={item.id}
+                dataValue={item.informationAllocation.assesseeRoleGroup}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.assesseeRoleStatus}
+                actualStatus={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
                 textOne={assesseeRole(item.informationBasic.assesseeRoleName)}
                 textTwo={item.informationBasic.assesseeRoleDescription}
                 isTooltipActive={false}

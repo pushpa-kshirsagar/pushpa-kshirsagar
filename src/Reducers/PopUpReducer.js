@@ -62,6 +62,7 @@ const initialState = {
   whichReviewList: '',
   selectedTagValue: '',
   selectedTagStatus: '',
+  selectedTagGroupId: '',
   currentPopUpOption: [],
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
@@ -159,6 +160,7 @@ const PopUpReducer = (istate = initialState, action) => {
         popupMode: action.payload.popupMode,
         selectedTagValue: action.payload.selectedTagValue,
         selectedTagStatus: action.payload.selectedTagStatus,
+        selectedTagGroupId: action.payload.selectedTagGroupId,
         currentPopUpOption: action.payload.currentPopUpOption
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
@@ -252,6 +254,12 @@ const PopUpReducer = (istate = initialState, action) => {
               istate.selectedTagStatus === 'TERMINATED') ||
             (action.payload.badgeValue === 'terminate' && istate.selectedTagStatus === 'SUSPENDED')
           ) {
+            arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
+          }
+          if (action.payload.badgeValue === 'share' && istate.selectedTagStatus === 'SHARED') {
+            arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
+          }
+          if (action.payload.badgeValue === 'share' && istate.selectedTagStatus === 'UNSHARED') {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
           // if (

@@ -1,21 +1,13 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSESSEE_ROLE_SHARE_SAGA,
-  GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
-  INTERNAL_NODE_LIST_SAGA,
+  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   LOADER_STOP,
-  REVIEWLIST_DISTINCT_DATA,
-  SET_CORE_NODE_REVIEW_LIST_DATA,
-  SET_MIDDLEPANE_STATE,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  SET_REQUEST_OBJECT
 } from '../../actionType';
-import {
-  EXTERNAL_NODE_TREE_URL,
-  EXTERNAL_NODE_LIST_URL,
-  INTERNAL_NODE_TREE_URL,
-  INTERNAL_NODE_LIST_URL,
-  ASSESSEE_ROLE_SHARE_URL
-} from '../../endpoints';
+import { ASSESSEE_ROLE_SHARE_URL, ASSESSEE_ROLE_UNSHARE_URL } from '../../endpoints';
+import Store from '../../store';
 
 const sharedApiCall = async (requestObj) => {
   const requestOptions = {
@@ -34,10 +26,26 @@ function* workerAssesseeRoleShareSaga(data) {
   try {
     const userResponse = yield call(sharedApiCall, {
       data: data.payload.request,
-      URL: ASSESSEE_ROLE_SHARE_URL
+      URL:
+        data.payload.apiCall === 'shareApiCall'
+          ? ASSESSEE_ROLE_SHARE_URL
+          : ASSESSEE_ROLE_UNSHARE_URL
     });
-    // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
+      yield put({
+        type: SET_REQUEST_OBJECT,
+        payload: Store.getState().DisplayPaneTwoReducer.reviewListReqObj
+      });
+      yield put({
+        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: '',
+          isMiddlePaneList: true
+        }
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

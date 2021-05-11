@@ -658,7 +658,6 @@ export const getAssesseeGroupDistinctApiCall = (
 };
 
 export const onClickCheckBoxSelection = (selectedTagsArray, event, dispatch) => {
-  console.log(event.target.id);
   let id = event.target.id;
   let checkedArr = [...selectedTagsArray];
   if (checkedArr.includes(id)) {

@@ -52,7 +52,8 @@ const PopUpMiddlePaneList = (props) => {
     popupHeaderOneBadgeTwo,
     popupOpenType,
     secondaryOptionCheckValue,
-    selectedTagValue
+    selectedTagValue,
+    selectedTagGroupId
   } = useSelector((state) => state.PopUpReducer);
   const { selectedAssociateInfo, countPage, middlePaneHeader } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -658,7 +659,7 @@ const PopUpMiddlePaneList = (props) => {
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: { badgeValue: dataVal, keyValue: keyVal }
       });
-    } else if (dataVal === 'shareApiCall') {
+    } else if (dataVal === 'shareApiCall' || dataVal === 'unshareApiCall') {
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
         let reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
@@ -667,19 +668,20 @@ const PopUpMiddlePaneList = (props) => {
               .associateTagPrimary,
           assesseeRoleShared: [
             {
-              assesseeRoleId: '499439',
-              assesseeRoleGroupId: '3455'
-            },
-            {
-              assesseeRoleId: '499449',
-              assesseeRoleGroupId: '3455'
+              assesseeRoleId: selectedTagValue,
+              assesseeRoleGroupId: selectedTagGroupId
             }
           ]
         };
         dispatch({ type: LOADER_START });
         dispatch({
           type: ASSESSEE_ROLE_SHARE_SAGA,
-          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+          payload: {
+            secondaryOptionCheckValue: '',
+            headerOne: '',
+            request: reqBody,
+            apiCall: dataVal
+          }
         });
       }
       dispatch({ type: POPUP_CLOSE });

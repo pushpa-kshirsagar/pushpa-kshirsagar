@@ -59,6 +59,11 @@ function* workerSignInAssesseeSaga(data) {
         yield put({ type: SET_USER, payload: userResponse?.responseObject?.signInResponse });
       } else if (userResponse?.responseObject?.signInResponse.length === 1) {
         const selectedAssociate = userResponse?.responseObject?.signInResponse[0];
+        localStorage.setItem(
+          'parentId',
+          userResponse?.responseObject?.signInResponse[0]?.associate.parentId
+        );
+
         console.log('SELECTED ASSOCIATE +++++ >', selectedAssociate);
         yield put({ type: LOADER_START });
         yield put({

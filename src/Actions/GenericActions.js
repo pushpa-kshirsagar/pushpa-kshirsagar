@@ -540,17 +540,6 @@ export const makeAssesseeRoleCreateObj = (
               }
             }
           }
-          // {
-          //   dataType: 'string',
-          //   conditionColumn: 'informationBasic.assesseeRoleName',
-          //   conditionValue: {
-          //     condition: 'ct',
-          //     value: {
-          //       from: 'assessee'
-          //     }
-          //   }
-          // }
-
         ]
       }
     ]
@@ -573,6 +562,7 @@ export const makeManagerRoleCreateObj = (
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    parentId: localStorage.getItem('parentId'),
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -580,7 +570,7 @@ export const makeManagerRoleCreateObj = (
       columnName: 'informationBasic.assesseeRoleName',
       order: 'asc'
     },
-    searchCondition: 'or',
+    searchCondition: 'and',
     search: [
       {
         condition: 'and',
@@ -622,6 +612,7 @@ export const makeAdministratorRoleCreateObj = (
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    parentId: localStorage.getItem('parentId'),
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -629,7 +620,7 @@ export const makeAdministratorRoleCreateObj = (
       columnName: 'informationBasic.assesseeRoleName',
       order: 'asc'
     },
-    searchCondition: 'or',
+    searchCondition: 'and',
     search: [
       {
         condition: 'and',
@@ -677,6 +668,7 @@ export const makeAssesseeRoleObj = (selectedAssociateInfo, filterKey, numberPage
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
+    parentId: localStorage.getItem('parentId'),
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
@@ -1945,7 +1937,6 @@ export const makeAssociateNodeObj = (selectedAssociateInfo, filterKey, numberPag
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     status: 'ACTIVE'
-
   };
   return requestObj;
 };
