@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { SET_POPUP_VALUE } from '../../actionType';
+import { ASSESSEE_SIGN_ON, SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -256,6 +256,16 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
+    if (labelName === 'status') {
+      dispatch({
+        type: SET_STATUS_POPUP_VALUE,
+        payload: capitalizeFirstLetter(informationEngagement?.assesseeGroupStatus)
+      });
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
   };
 
   return (

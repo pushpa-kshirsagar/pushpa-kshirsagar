@@ -14,7 +14,8 @@ import {
   LOADER_START,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
-  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
+  SET_STATUS_POPUP_VALUE
 } from '../../actionType';
 import {
   makeAssesseeGroupObj,
@@ -594,6 +595,16 @@ const DisplayPaneThreeSectionOne = () => {
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
+    if (labelName === 'status') {
+      dispatch({
+        type: SET_STATUS_POPUP_VALUE,
+        payload: capitalizeFirstLetter(informationEngagement?.assesseeStatus)
+      });
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
   };
   const reviseSetup = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');

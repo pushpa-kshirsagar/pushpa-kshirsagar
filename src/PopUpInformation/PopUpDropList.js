@@ -28,21 +28,25 @@ const PopUpDropList = (props) => {
     nextPopUpValue,
     mappingValue,
     handleNextPopupValue,
-    mode
+    mode,
+    isNotRevised = false
   } = props;
 
   //states
-  const [state, setState] = useState({ isError: '' });
+  let errorMessage = isNotRevised ? 'this information cannot be revised' : '';
+  const [state, setState] = useState({ isError: errorMessage });
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   // handling the onchange event
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-      isError: ''
-    }));
-    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+    if (!isNotRevised) {
+      setState((prevState) => ({
+        ...prevState,
+        [name]: value,
+        isError: ''
+      }));
+      dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+    }
   };
   //this function for validate
   const validate = () => {
@@ -85,6 +89,7 @@ const PopUpDropList = (props) => {
           headerOneBadgeThree={''}
           onClick={handleClick}
           mode={mode}
+          isNotRevised={isNotRevised}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
@@ -96,7 +101,7 @@ const PopUpDropList = (props) => {
               listSelect={listSelect}
               errorMsg={state.isError}
               onChange={handleChange}
-              value={basicInfo && basicInfo[tag]}
+              value={isNotRevised ? basicInfo : basicInfo && basicInfo[tag]}
               mappingValue={mappingValue}
             />
           </FormControl>

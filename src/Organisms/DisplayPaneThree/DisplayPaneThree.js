@@ -60,6 +60,7 @@ import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThr
 import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThreeSectionTwoAssignment/DisplayPaneThreeSectionTwoAssignment';
 import DisplayPaneThreeSectionOneAssociateNode from '../../Molecules/DisplayPaneThreeSectionOneAssociateNode/DisplayPaneThreeSectionOneAssociateNode';
 import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPaneThreeSectionTwoAssociateNode/DisplayPaneThreeSectionTwoAssociateNode';
+import { getAssesseeGroupAssesseeReqObj, getAssesseeRoleAssesseeReqObj } from '../../Actions/AssesseeModuleAction';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -71,9 +72,11 @@ export const DisplayPaneThree = () => {
     headerOneBadgeThree,
     responseObject,
     reviewMode,
-    createMode
+    createMode,
+    assesseeGroupAssessee,
+    assesseeRoleAssessee = []
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { showMiddlePaneState, selectedAssociateInfo } = useSelector(
+  const { showMiddlePaneState, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
   const { informationBasic } = responseObject;
@@ -341,7 +344,10 @@ export const DisplayPaneThree = () => {
   };
   const onClickReviseFinish = () => {
     console.log('ON CLICK FINISH ICON', assesseeInfo.informationBasic);
-    if (headerOneBadgeOne === 'information' && headerOne === 'assessee') {
+    if (
+      headerOneBadgeOne === 'information' &&
+      (headerOne === 'assessee' || headerOne === 'administrator' || headerOne === 'manager')
+    ) {
       const {
         informationBasic,
         informationContact,
@@ -363,7 +369,7 @@ export const DisplayPaneThree = () => {
       dispatch({ type: LOADER_START });
       dispatch({
         type: ASSESSEE_INFO_REVISE_SAGA,
-        payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne: 'assessee', reqBody }
+        payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne, reqBody }
       });
     } else if (headerOneBadgeOne === 'role' && headerOne === 'assessees') {
       console.log('ASSESSEES ROLE REVISE');
@@ -371,15 +377,23 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
+        assesseeRoleAssessee,
         assesseeRole: {
           id,
           informationBasic: assesseeRole.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let assesseeRoleAssesseeReqBody = getAssesseeRoleAssesseeReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSESSEE_ROLE_INFO_REVISE_SAGA,
-        payload: { headerOne: 'assessees', reqBody }
+        payload: { headerOne: 'assessees', reqBody, assesseeRoleAssesseeReqBody }
       });
     } else if (headerOneBadgeOne === 'role' && headerOne === 'associates') {
       console.log('ASS0CIATE ROLE REVISE');
@@ -417,15 +431,26 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
+        assesseeGroupAssessee: {
+          assesseeAdded: assesseeGroupAssessee.assesseeAdded,
+          assesseeRemoved: assesseeGroupAssessee.assesseeRemoved
+        },
         assesseeGroup: {
           id,
           informationBasic: assesseeGroup.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let assesseeGroupAssesseeReqBody = getAssesseeGroupAssesseeReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSESSEE_GROUP_INFO_REVISE_SAGA,
-        payload: { headerOne: 'assessees', reqBody }
+        payload: { headerOne: 'assessees', assesseeGroupAssesseeReqBody, reqBody }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'associate') {
       const { informationBasic, informationContact, informationSetup } = associateInfo;

@@ -56,7 +56,7 @@ export const SelectField = (props) => {
               ))}
         </Select>
       </FormControl>
-      <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
+      <FormHelperText className={['helperText', 'margin-left-right-5', 'helptextmargin'].join(' ')}>
         {errorMsg}
       </FormHelperText>
     </Fragment>

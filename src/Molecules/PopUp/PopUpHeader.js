@@ -29,7 +29,8 @@ const PopupHeader = (props) => {
     headerOneBadgeTwo,
     headerOneBadgeThree,
     onClick,
-    mode = 'core'
+    mode = 'core',
+    isNotRevised = false
   } = props;
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -85,23 +86,25 @@ const PopupHeader = (props) => {
             ) : null}
           </div>
           <div className={'backArrow'}>
-            <IconButton className="MuiIconButton-root-1602">
-              {mode === 'core' || mode === 'search' || mode === 'revise' ? (
-                <Check className={'popupClose'} onClick={onClick} />
-              ) : mode === 'confirm' ? (
-                <KeyboardTab
-                  className={['popupClose', 'previousToLast'].join(' ')}
-                  onClick={onClick}
-                />
-              ) : mode === 'error' || mode === 'cancel' ? null : (
-                <Previous className={'popupClose'} onClick={onClick} />
-              )}
-              {/* {headerPanelColour === 'genericOne' ? (
+            {!isNotRevised && (
+              <IconButton className="MuiIconButton-root-1602">
+                {mode === 'core' || mode === 'search' || mode === 'revise' ? (
+                  <Check className={'popupClose'} onClick={onClick} />
+                ) : mode === 'confirm' ? (
+                  <KeyboardTab
+                    className={['popupClose', 'previousToLast'].join(' ')}
+                    onClick={onClick}
+                  />
+                ) : mode === 'error' || mode === 'cancel' ? null : (
+                  <Previous className={'popupClose'} onClick={onClick} />
+                )}
+                {/* {headerPanelColour === 'genericOne' ? (
                 <Check className={'popupClose'} onClick={onClick} />
               ) : headerPanelColour === 'genericTwo' ? null : (
                 <Previous className={'popupClose'} />
               )} */}
-            </IconButton>
+              </IconButton>
+            )}
           </div>
           <div className={'backArrow'}>
             <IconButton onClick={onClose} className="MuiIconButton-root-1602">

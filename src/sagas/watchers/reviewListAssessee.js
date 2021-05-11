@@ -82,7 +82,7 @@ function* workerReviewListAssesseSaga(data) {
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList',
+          typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
           scanCount: userResponse && userResponse.countTotal,
           showMiddlePaneState: true,
           isSelectActive: true,

@@ -7,11 +7,18 @@ import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 import {
+  FILTERMODE,
+  GET_ALLOCATE_ASSESSEE,
+  LOADER_START,
   RELATED_REVIEWLIST_DISTINCT_DATA,
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
-  SET_MIDDLEPANE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MIDDLEPANE_STATE,
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT
 } from '../../actionType';
 import { getAssesseeRoleAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
+import { makeAssesseeReviewListRequestObject } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -96,6 +103,51 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       isReviewLink: true
     }
   ];
+
+  const onclickReviseAssessee = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    if (labelName === 'assessee') {
+      console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+      let requestObect = makeAssesseeReviewListRequestObject(
+        selectedAssociateInfo,
+        'active',
+        0,
+        countPage
+      );
+      let revisedRoleObject = {
+        id: responseObject.id,
+        assesseeRoleName: responseObject.informationBasic.assesseeRoleName,
+        assesseeRoleDescription: responseObject.informationBasic.assesseeRoleDescription,
+        assesseeRoleStatus: responseObject.informationEngagement.assesseeRoleStatus
+      };
+      let existingAssesseeId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0].assessee.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeRoleAssesseeRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSESSEE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedRoleObject,
+          existingAssesseeId: existingAssesseeId,
+          typeOfMiddlePaneList: 'assesseesRoleAssesseeReviewList'
+        }
+      });
+    }
+  }
   const onclickReviewAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
@@ -150,6 +202,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
                   {ob.isListCard ? (
                     <AccordianListCard
                       onClickReview={onclickReviewAssessee}
+                      onClickRevise={onclickReviseAssessee}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}
