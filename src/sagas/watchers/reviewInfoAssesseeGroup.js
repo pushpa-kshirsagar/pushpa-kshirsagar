@@ -4,8 +4,10 @@ import {
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
   LOADER_STOP,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSESSEE_GROUP_REDUCER_STATE,
-  SET_DISPLAY_PANE_THREE_STATE
+  SET_DISPLAY_PANE_THREE_STATE,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import {
   ASSESSEE_GROUP_INFO_REVISE_URL,
@@ -122,6 +124,11 @@ function* workerReviseAssesseeGroupInfoSaga(data) {
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0]
         }
+      });
+      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      yield put({
+        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+        payload: []
       });
     }
 
