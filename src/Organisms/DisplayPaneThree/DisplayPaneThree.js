@@ -379,6 +379,8 @@ export const DisplayPaneThree = () => {
     } else if (
       headerOneBadgeOne === 'node' &&
       (headerOne === 'associate' ||
+        headerOne === 'administrators' ||
+        headerOne === 'managers' ||
         headerOne === 'assessees' ||
         headerOne === 'assessments' ||
         headerOne === 'assignments')
@@ -1303,6 +1305,8 @@ export const DisplayPaneThree = () => {
         responseObject &&
         (headerOne === 'associate' ||
           headerOne === 'assessees' ||
+          headerOne === 'administrators' ||
+          headerOne === 'managers' ||
           headerOne === 'assessments' ||
           headerOne === 'assignments') &&
         headerOneBadgeOne === 'node' && (

@@ -22,6 +22,7 @@ import AssesseeRoleAssesseeReviewList from '../../ReviewListComponent/AssesseeRo
 import AssociateRoleAssociateReviewList from '../../ReviewListComponent/AssociateRoleAssociateReviewList';
 import AssociatesNodeReviewList from '../../ReviewListComponent/AssociatesNodeReviewList';
 import InternalNodeReviewList from '../../ReviewListComponent/InternalNodeReviewList';
+import AssesseeNodeAssesseeReviewList from '../../ReviewListComponent/AssesseeNodeAssesseeReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -122,6 +123,9 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'associateNodeDistinctReviewList' && (
           <InternalNodeReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assesseesNodeAssesseeReviewList' && (
+          <AssesseeNodeAssesseeReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&

@@ -141,5 +141,6 @@ export const ASSOCIATE_ROLE_SHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/share';
 export const ASSOCIATE_ROLE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/unshare';
-export const ASSESSEE_NODE_ASSESSEE_URL = ASSESSEES_URL + '';
+export const ASSESSEE_NODE_ASSESSEE_URL =
+  ASSESSEES_URL + '/dev/insight-guru/api/associate-node/assessee/review-list';
 // export const URL = '';

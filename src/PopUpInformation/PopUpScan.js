@@ -68,7 +68,8 @@ const PopUpScan = (props) => {
     middlePaneHeaderBadgeTwo,
     middlePaneHeaderBadgeThree,
     selectedAssociateInfo,
-    reviewListDistinctData
+    reviewListDistinctData,
+    nodeViewState
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isActive = true } = props;
   const [state, setState] = useState({
@@ -454,8 +455,9 @@ const PopUpScan = (props) => {
         );
       }
       if (
-        typeOfMiddlePaneList === 'associatesNodeDistinctReviewList' ||
-        typeOfMiddlePaneList === 'associateNodeDistinctReviewList'
+        (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList' ||
+          typeOfMiddlePaneList === 'associateNodeDistinctReviewList') &&
+        nodeViewState === 'list'
       ) {
         dispatch({
           type: SET_DISPLAY_TWO_SINGLE_STATE,

@@ -100,11 +100,13 @@ const PopUpReviewList = (props) => {
             ListData.map((index, option) => (
               <ReviewList
                 textOne={
-                  inputHeader === 'role'
-                    ? assesseeRole(index.informationBasic[textOne])
-                    : index.informationBasic[textOne]
+                  index?.informationBasic
+                    ? inputHeader === 'role'
+                      ? assesseeRole(index.informationBasic[textOne])
+                      : index.informationBasic[textOne]
+                    : null
                 }
-                textTwo={index.informationBasic[textTwo]}
+                textTwo={index?.informationBasic && index.informationBasic[textTwo]}
                 id={index.id}
                 tag={index.id}
                 isAlertActive={false}

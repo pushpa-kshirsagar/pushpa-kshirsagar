@@ -91,6 +91,7 @@ const PopUpMiddlePaneList = (props) => {
         typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesRoleAssesseeReviewList' ||
+        typeOfMiddlePaneList === 'assesseesNodeAssesseeReviewList' ||
         typeOfMiddlePaneList === 'managersDistinctReviewList'
       ) {
         dispatch({
@@ -580,6 +581,7 @@ const PopUpMiddlePaneList = (props) => {
 
       // onClickInformation(secondaryOptionCheckValue);
     } else if (dataVal === 'distinct') {
+      alert(typeOfMiddlePaneList)
       if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
         getAssesseeGroupAssesseeDistinctApiCall(
           selectedAssociateInfo,
@@ -618,7 +620,7 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
       }
-      if (typeOfMiddlePaneList === 'assesseeNodeDistinctReviewList') {
+      if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
         getAssesseeNodeAssesseeDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
@@ -632,7 +634,7 @@ const PopUpMiddlePaneList = (props) => {
         );
         dispatch({
           type: FILTERMODE,
-          payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
+          payload: { FilterMode: 'assesseeNodeAssesseeDistinct' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });

@@ -256,7 +256,7 @@ export const getAssesseeRoleAssesseeScanReqObj = (
 
 export const getAssesseeNodeAssesseeReqObj = (
   selectedAssociateInfo,
-  roleId,
+  nodeId,
   filterKey,
   numberPage,
   countPage
@@ -292,7 +292,7 @@ export const getAssesseeNodeAssesseeReqObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
-    roleId: roleId,
+    nodeId: nodeId,
     filter: 'true',
     searchCondition: 'AND',
     search: [
@@ -305,7 +305,7 @@ export const getAssesseeNodeAssesseeReqObj = (
             conditionValue: {
               condition: 'eq',
               value: {
-                from: roleId
+                from: nodeId
               }
             }
           },
@@ -315,7 +315,7 @@ export const getAssesseeNodeAssesseeReqObj = (
             conditionValue: {
               condition: 'eq',
               value: {
-                from: roleId
+                from: nodeId
               }
             }
           }
@@ -336,7 +336,7 @@ export const getAssesseeNodeAssesseeReqObj = (
 };
 export const getAssesseeNodeAssesseeScanReqObj = (
   selectedAssociateInfo,
-  roleId,
+  nodeId,
   filterKey,
   numberPage,
   countPage,
@@ -373,7 +373,7 @@ export const getAssesseeNodeAssesseeScanReqObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
-    roleId: roleId,
+    nodeId: nodeId,
     filter: 'true',
     searchCondition: 'AND',
     search: [
@@ -386,7 +386,7 @@ export const getAssesseeNodeAssesseeScanReqObj = (
             conditionValue: {
               condition: 'eq',
               value: {
-                from: roleId
+                from: nodeId
               }
             }
           },
@@ -396,7 +396,7 @@ export const getAssesseeNodeAssesseeScanReqObj = (
             conditionValue: {
               condition: 'eq',
               value: {
-                from: roleId
+                from: nodeId
               }
             }
           },

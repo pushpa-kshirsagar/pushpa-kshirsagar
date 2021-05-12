@@ -22,7 +22,8 @@ import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+  GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css';
@@ -134,7 +135,7 @@ const InternalNodeReviewList = (props) => {
             ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
           (middlePaneHeader === 'assignments' &&
             ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
-          ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+          GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: nodeId
       }
     });
@@ -142,7 +143,13 @@ const InternalNodeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+        value:
+          (middlePaneHeader === 'assessees' && ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION) ||
+          (middlePaneHeader === 'assessments' &&
+            ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
+          (middlePaneHeader === 'assignments' &&
+            ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
+          GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -153,7 +160,7 @@ const InternalNodeReviewList = (props) => {
     let dragedNodeId = node.id;
     let dragedNodeParentId = '';
     reviewListDistinctData.map((nodeData) => {
-      console.log('nodeData',nodeData);
+      console.log('nodeData', nodeData);
       nodeData.children.map((chnode) => {
         console.log(chnode.id);
         if (dragedNodeId === chnode.id) {
