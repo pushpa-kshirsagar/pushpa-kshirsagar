@@ -392,7 +392,14 @@ export const DisplayPaneThree = () => {
         associateId,
         associateNode: {
           id,
-          informationBasic: nodeInformation.informationBasic
+          informationBasic: nodeInformation.informationBasic,
+          informationFramework: {
+            associateNodeAscendant: {
+              associateNodeAscendantPrimary:
+                nodeInformation.informationFramework.associateNodeAscendant
+                  .associateNodeAscendantPrimary[0]
+            }
+          }
         }
       };
       dispatch({ type: LOADER_START });

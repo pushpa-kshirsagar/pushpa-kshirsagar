@@ -21,13 +21,111 @@ import { getAssesseeNodeAssesseeDistinctApiCall } from '../../Actions/AssesseeMo
 
 const DisplayPaneThreeSectionTwoAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
-  const { reviewMode, relatedReviewListPaneThree = [], selectedModule } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
-  );
+  const {
+    reviewMode,
+    relatedReviewListPaneThree = [],
+    selectedModule,
+    responseObject
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { countPage, selectedAssociateInfo, selectedTagValue } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
   const dispatch = useDispatch();
+  const { informationFramework } = responseObject;
+  let ascendantAll = [];
+  let ascendantPrimary = [];
+  let ascendantSecondary = [];
+  if (informationFramework && informationFramework.associateNodeAscendant) {
+    if (
+      informationFramework.associateNodeAscendant.associateNodeAscendantAll &&
+      informationFramework.associateNodeAscendant.associateNodeAscendantAll.length > 0
+    ) {
+      informationFramework.associateNodeAscendant.associateNodeAscendantAll.forEach((ob) => {
+        ascendantAll.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateNodeAscendant.associateNodeAscendantPrimary &&
+      typeof informationFramework.associateNodeAscendant.associateNodeAscendantPrimary !==
+        'string' &&
+      informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.length > 0
+    ) {
+      informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.forEach((ob) => {
+        ascendantPrimary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateNodeAscendant.associateNodeAscendantSecondary &&
+      informationFramework.associateNodeAscendant.associateNodeAscendantSecondary.length > 0
+    ) {
+      informationFramework.associateNodeAscendant.associateNodeAscendantSecondary.forEach((ob) => {
+        ascendantSecondary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+  }
+  let descendantAll = [];
+  let descendantPrimary = [];
+  let descendantSecondary = [];
+  if (informationFramework && informationFramework.associateNodeDescendant) {
+    if (
+      informationFramework.associateNodeDescendant.associateNodeDescendantAll &&
+      informationFramework.associateNodeDescendant.associateNodeDescendantAll.length > 0
+    ) {
+      informationFramework.associateNodeDescendant.associateNodeDescendantAll.forEach((ob) => {
+        descendantAll.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateNodeDescendant.associateNodeDescendantPrimary &&
+      typeof informationFramework.associateNodeDescendant.associateNodeDescendantPrimary !==
+        'string' &&
+      informationFramework.associateNodeDescendant.associateNodeDescendantPrimary.length > 0
+    ) {
+      informationFramework.associateNodeDescendant.associateNodeDescendantPrimary.forEach((ob) => {
+        descendantPrimary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateNodeDescendant.associateNodeDescendantSecondary &&
+      informationFramework.associateNodeDescendant.associateNodeDescendantSecondary.length > 0
+    ) {
+      informationFramework.associateNodeDescendant.associateNodeDescendantSecondary.forEach(
+        (ob) => {
+          descendantSecondary.push({
+            id: ob.id,
+            textOne: ob?.informationBasic?.associateNodeName || '',
+            textTwo: ob?.informationBasic?.associateNodeDescription || '',
+            status: ''
+          });
+        }
+      );
+    }
+  }
 
   const allModuleList = [
     {
@@ -124,48 +222,15 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: ascendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: ascendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: ascendantSecondary
             }
           ]
         },
@@ -174,48 +239,15 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: descendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: descendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: descendantSecondary
             }
           ]
         }
@@ -253,48 +285,15 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: ascendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: ascendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: ascendantSecondary
             }
           ]
         },
@@ -303,48 +302,15 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: descendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: descendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: descendantSecondary
             }
           ]
         }
@@ -399,48 +365,15 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: ascendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: ascendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: ascendantSecondary
             }
           ]
         },
@@ -449,48 +382,15 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: descendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: descendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: descendantSecondary
             }
           ]
         }
@@ -545,48 +445,15 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: ascendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: ascendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: ascendantSecondary
             }
           ]
         },
@@ -595,48 +462,15 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: descendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: descendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: descendantSecondary
             }
           ]
         }
