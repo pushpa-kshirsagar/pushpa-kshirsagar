@@ -7,6 +7,7 @@ import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { ASSOCIATE_SIGN_ON } from '../../actionType';
+import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
 
 const DisplayPaneThreeSectionTwoAssociate = () => {
   const [listExpand, setListExpand] = useState('');
@@ -127,23 +128,116 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
     }
   ];
   const list3 = [
+    ,
     {
       id: 'a1',
       labelTextOneOne: 'associate',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
-          textOne: ''
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         },
         {
           labelTextOneOneBadge: 'descendant',
-          textOne: ''
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         }
       ],
-      innerAssociateList: [],
-      innerInfo: 'associate',
-      isListCard: false,
-      IconOne: null
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true,
+      isMultiList: true
     }
   ];
 
@@ -306,18 +400,19 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard
-                        onClickRevise={reviseFramework}
-                        className=""
-                        accordianObject={ob}
-                        mode={reviewMode}
-                      />
+                      <>
+                        {ob.isMultiList ? (
+                          <AccordianMultiListCard
+                            onClickRevise={reviseFramework}
+                            accordianObject={ob}
+                            mode={reviewMode}
+                          />
+                        ) : (
+                          <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                        )}
+                      </>
                     ) : (
-                      <AccordianInfoCard
-                        onClickRevise={reviseFramework}
-                        accordianObject={ob}
-                        mode={reviewMode}
-                      />
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );

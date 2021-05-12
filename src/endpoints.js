@@ -132,6 +132,8 @@ export const ASSOCIATE_ROLE_GROUP_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-role-group/review-list';
 export const ASSOCIATE_NODE_REVIEW_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/review';
+export const ASSOCIATE_NODE_REVISE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/revise';
 export const ASSESSEE_ROLE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-role/share';
 export const ASSESSEE_ROLE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assessee-role/unshare';

@@ -6,13 +6,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../actionType';
+import {
+  INTERNAL_NODE_LIST_SAGA,
+  LOADER_START,
+  RELATED_REVIEWLIST_DISTINCT_DATA,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_MIDDLEPANE_STATE,
+  SET_POPUP_VALUE
+} from '../../actionType';
+import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
+import { makeInternalNodeObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionTwoAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
   const { reviewMode, relatedReviewListPaneThree = [], selectedModule } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
 
   const allModuleList = [
@@ -104,23 +114,112 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     {
       id: 'a1',
       labelTextOneOne: 'node',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         },
         {
           labelTextOneOneBadge: 'descendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         }
       ],
       innerInfo: 'No Information',
       isListCard: true,
-      isReviewLink: true
+      isReviewLink: true,
+      isMultiList: true
     }
   ];
   const assesseeModuleList = [
@@ -144,23 +243,112 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     {
       id: 'a1',
       labelTextOneOne: 'node',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         },
         {
           labelTextOneOneBadge: 'descendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         }
       ],
       innerInfo: 'No Information',
       isListCard: true,
-      isReviewLink: true
+      isReviewLink: true,
+      isMultiList: true
     }
   ];
   const assessmentModuleList = [
@@ -201,23 +389,112 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     {
       id: 'a1',
       labelTextOneOne: 'node',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         },
         {
           labelTextOneOneBadge: 'descendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         }
       ],
       innerInfo: 'No Information',
       isListCard: true,
-      isReviewLink: true
+      isReviewLink: true,
+      isMultiList: true
     }
   ];
   const assignmentModuleList = [
@@ -258,23 +535,112 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     {
       id: 'a1',
       labelTextOneOne: 'node',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'ascendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         },
         {
           labelTextOneOneBadge: 'descendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'all',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'all',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'primary',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'descendant1',
+                  textTwo: 'secondary',
+                  status: ''
+                },
+                {
+                  id: 'associate1',
+                  textOne: 'descendant2',
+                  textTwo: 'secondary',
+                  status: ''
+                }
+              ]
+            }
+          ]
         }
       ],
       innerInfo: 'No Information',
       isListCard: true,
-      isReviewLink: true
+      isReviewLink: true,
+      isMultiList: true
     }
   ];
 
@@ -288,6 +654,30 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   if (selectedModule === 'assignments') {
     list = assignmentModuleList;
   }
+
+  const reviseNode = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
+    console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
+    if (
+      labelName === 'node' &&
+      selectedBadgeName === 'ascendant' &&
+      innerSelectedBadgeName === 'primary'
+    ) {
+      let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: { request: requestObj, nodeViewState: 'list', isMiddlePaneList: false }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PARENTLISTPOPUP', popupMode: 'NODECREATE' }
+      });
+    }
+  };
 
   return (
     <div
@@ -303,7 +693,17 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <>
+                      {ob.isMultiList ? (
+                        <AccordianMultiListCard
+                          onClickRevise={reviseNode}
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
+                      ) : (
+                        <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      )}
+                    </>
                   ) : (
                     <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                   )}
