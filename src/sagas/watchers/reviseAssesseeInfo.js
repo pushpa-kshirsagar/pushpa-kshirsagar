@@ -5,7 +5,8 @@ import {
   ASSESSEE_INFO_REVISE_SAGA,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_SELECTED_ASSOCIATE
 } from '../../actionType';
 import { ASSESSEE_INFO_REVISE_URL } from '../../endpoints';
 import Store from '../../store';
@@ -40,6 +41,15 @@ function* workerReviseInfoAssesseeSaga(data) {
         yield put({
           type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
           payload: 'review'
+        });
+      }
+      if (Store.getState().PopUpReducer.cardValue === 'Card') {
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: {
+            stateName: 'leftPaneAssesseeInfo',
+            value: userResponse?.responseObject[0]
+          }
         });
       }
       // if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
