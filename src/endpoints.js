@@ -15,7 +15,7 @@ export const GET_ASSESSEE_PERMISSION_URL =
 
 export const PLATFORM_URL = 'https://o5iei7cfnl.execute-api.ap-south-1.amazonaws.com';
 export const ASSESSEES_URL = 'https://s94d6wfsbd.execute-api.ap-south-1.amazonaws.com';
-export const ASSOCIATES_URL = 'https://3rxl01e1o5.execute-api.ap-south-1.amazonaws.com';
+export const ASSOCIATES_URL = 'https://gfxqx4a5uc.execute-api.ap-south-1.amazonaws.com';
 export const ASSESSMENTS_URL = 'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com';
 export const ASSIGNMENTS_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com';
 

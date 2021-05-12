@@ -252,7 +252,7 @@
   cursor: pointer;
 }
 .fixed10PadDim {
-  min-width: 255px;
+  max-width: 255px;
   box-sizing: border-box;
 }
 .fixed05PadDim {

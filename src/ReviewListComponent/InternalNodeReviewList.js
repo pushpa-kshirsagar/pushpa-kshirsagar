@@ -149,8 +149,20 @@ const InternalNodeReviewList = (props) => {
     console.log(selectedGroup);
   };
   const changedNode = (node) => {
-    console.log(node);
-    console.log('changedNode');
+    console.log(node.id);
+    let dragedNodeId = node.id;
+    let dragedNodeParentId = '';
+    reviewListDistinctData.map((nodeData) => {
+      console.log('nodeData',nodeData);
+      nodeData.children.map((chnode) => {
+        console.log(chnode.id);
+        if (dragedNodeId === chnode.id) {
+          dragedNodeParentId = nodeData.id;
+        }
+      });
+    });
+    // console.log('treedata', reviewListDistinctData);
+    console.log(dragedNodeParentId, 'dragedNodeParentId');
   };
   return (
     <div>
@@ -161,7 +173,7 @@ const InternalNodeReviewList = (props) => {
               <SortableTree
                 treeData={reviewListDistinctData}
                 onChange={(treeData) => {
-                  treeData.length ===1 &&
+                  treeData.length === 1 &&
                     dispatch({
                       type: SET_DISPLAY_TWO_SINGLE_STATE,
                       payload: { stateName: 'reviewListDistinctData', value: treeData }
