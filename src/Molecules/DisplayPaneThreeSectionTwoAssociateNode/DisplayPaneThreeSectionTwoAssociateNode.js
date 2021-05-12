@@ -7,6 +7,7 @@ import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 import {
+  FILTERMODE,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   RELATED_REVIEWLIST_DISTINCT_DATA,
@@ -16,13 +17,16 @@ import {
 } from '../../actionType';
 import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
 import { makeInternalNodeObj } from '../../Actions/GenericActions';
+import { getAssesseeNodeAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionTwoAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
   const { reviewMode, relatedReviewListPaneThree = [], selectedModule } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { countPage, selectedAssociateInfo, selectedTagValue } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const dispatch = useDispatch();
 
   const allModuleList = [
@@ -678,7 +682,29 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       });
     }
   };
-
+  const reviewNode = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
+    console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
+    if (labelName === 'assessee') {
+      getAssesseeNodeAssesseeDistinctApiCall(
+        selectedAssociateInfo,
+        'active',
+        countPage,
+        dispatch,
+        'distinct',
+        selectedTagValue,
+        '',
+        false,
+        'assessees'
+      );
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeNodeAssesseeRevise' }
+      });
+    }
+  };
   return (
     <div
       style={{
@@ -696,6 +722,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
                     <>
                       {ob.isMultiList ? (
                         <AccordianMultiListCard
+                          onClickReview={reviewNode}
                           onClickRevise={reviseNode}
                           accordianObject={ob}
                           mode={reviewMode}

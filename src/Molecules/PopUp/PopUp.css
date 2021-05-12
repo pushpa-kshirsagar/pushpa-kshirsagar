@@ -255,6 +255,10 @@
   min-width: 255px;
   box-sizing: border-box;
 }
+.fixed10PadDim-error {
+  max-width: 255px !important;
+  box-sizing: border-box;
+}
 .fixed05PadDim {
   min-width: 300px;
   box-sizing: border-box;

@@ -36,6 +36,7 @@ import {
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeReqObj,
+  getAssesseeNodeAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
@@ -90,6 +91,7 @@ const PopUpMiddlePaneList = (props) => {
         typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesRoleAssesseeReviewList' ||
+        typeOfMiddlePaneList === 'assesseesNodeAssesseeReviewList' ||
         typeOfMiddlePaneList === 'managersDistinctReviewList'
       ) {
         dispatch({
@@ -579,6 +581,7 @@ const PopUpMiddlePaneList = (props) => {
 
       // onClickInformation(secondaryOptionCheckValue);
     } else if (dataVal === 'distinct') {
+      alert(typeOfMiddlePaneList)
       if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
         getAssesseeGroupAssesseeDistinctApiCall(
           selectedAssociateInfo,
@@ -613,6 +616,25 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({
           type: FILTERMODE,
           payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
+        getAssesseeNodeAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false,
+          middlePaneHeader
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assesseeNodeAssesseeDistinct' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });

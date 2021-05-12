@@ -130,6 +130,14 @@ const PopUpAssesseesModule = (props) => {
         }
       });
       dispatch({
+        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'assesseeNode',
+          actualStateName: 'assesseeNodePrimary',
+          value: []
+        }
+      });
+      dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
