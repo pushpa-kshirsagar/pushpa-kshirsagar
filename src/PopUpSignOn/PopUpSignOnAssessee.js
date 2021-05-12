@@ -43,7 +43,7 @@ import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import PopUpDatePicker from '../PopUpInformation/PopUpDatePicker';
 import PopUpCommunity from '../PopUpInformation/PopUpCommunity';
 import PopUpBirthplace from '../PopUpInformation/PopUpBirthplace';
-import { DEFAULT_ROLE_ID } from '../endpoints';
+import { DEFAULT_ROLE_ID, SIGN_IN_URL } from '../endpoints';
 import PopUpFingerprint from '../PopUpInformation/PopUpFingerprint';
 
 const PopUpSignOnAssessee = (props) => {
@@ -71,7 +71,7 @@ const PopUpSignOnAssessee = (props) => {
     console.log('assesseeInformationData');
     if (assesseeInfo.assesseeInformationData) {
       if (popupMode === 'ASSESSEE_SIGN_ON') {
-        let path = `/signIn`;
+        let path = SIGN_IN_URL;
         history.push(path);
       } else {
         console.log('show right pane');
@@ -167,7 +167,7 @@ const PopUpSignOnAssessee = (props) => {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        '6083d82a5c42683849ce14d0',
+        '608402400ef5627f72d812a7',
       assessee: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,

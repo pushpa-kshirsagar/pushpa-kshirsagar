@@ -3,6 +3,7 @@ import {
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
+  GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
@@ -190,6 +191,208 @@ export const getAssesseeRoleAssesseeScanReqObj = (
           {
             dataType: 'string',
             conditionColumn: 'informationAllocation.assesseeRole.assesseeRoleSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: roleId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameFirst',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameOther',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameLast',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeAlias',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+
+export const getAssesseeNodeAssesseeReqObj = (
+  selectedAssociateInfo,
+  roleId,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: [
+            'CONFIRMED',
+            'DISAPPROVED',
+            'SUSPENDED',
+            'TERMINATED',
+            'UNAPPROVED',
+            'UNCONFIRMED',
+            'ARCHIVED',
+            'DELETED'
+          ]
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    roleId: roleId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeNode.assesseeNodePrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: roleId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeNode.assesseeNodeSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: roleId
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+export const getAssesseeNodeAssesseeScanReqObj = (
+  selectedAssociateInfo,
+  roleId,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: [
+            'CONFIRMED',
+            'DISAPPROVED',
+            'SUSPENDED',
+            'TERMINATED',
+            'UNAPPROVED',
+            'UNCONFIRMED',
+            'ARCHIVED',
+            'DELETED'
+          ]
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    roleId: roleId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeNode.assesseeNodePrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: roleId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeNode.assesseeNodeSecondary',
             conditionValue: {
               condition: 'eq',
               value: {
@@ -543,6 +746,55 @@ export const getAssesseeRoleAssesseeDistinctApiCall = (
   // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
   dispatch({
     type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+    payload: {
+      request: reqBody,
+      HeaderOne: middlePaneHeader,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getAssesseeNodeAssesseeDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan,
+  middlePaneHeader
+) => {
+  let reqBody = getAssesseeNodeAssesseeReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getAssesseeNodeAssesseeScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
     payload: {
       request: reqBody,
       HeaderOne: middlePaneHeader,

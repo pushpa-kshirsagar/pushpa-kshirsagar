@@ -813,7 +813,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({
         type: INTERNAL_NODE_LIST_SAGA,
-        payload: { request: requestObj, nodeViewState: 'hierarchy', isMiddlePaneList: false }
+        payload: { request: requestObj, nodeViewState: 'list', isMiddlePaneList: false }
       });
       dispatch({
         type: SET_POPUP_VALUE,

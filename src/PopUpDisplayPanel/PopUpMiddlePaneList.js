@@ -36,6 +36,7 @@ import {
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeReqObj,
+  getAssesseeNodeAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
@@ -599,6 +600,25 @@ const PopUpMiddlePaneList = (props) => {
       }
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
         getAssesseeRoleAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false,
+          middlePaneHeader
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assesseeNodeDistinctReviewList') {
+        getAssesseeNodeAssesseeDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,

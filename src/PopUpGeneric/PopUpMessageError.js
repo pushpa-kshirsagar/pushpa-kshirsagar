@@ -21,7 +21,7 @@ export const PopUpMessageError = (props) => {
       <Popup isActive={isActive}>
         <PopupHeader headerPanelColour={'genericTwo'} headerOne={'Error'} mode={'error'} />
         <DialogContent
-          className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
+          className={['popupContent', 'fixed10PadDim-error', 'revisePopupContent'].join(' ')}
         >
           {errorMessage}
         </DialogContent>
