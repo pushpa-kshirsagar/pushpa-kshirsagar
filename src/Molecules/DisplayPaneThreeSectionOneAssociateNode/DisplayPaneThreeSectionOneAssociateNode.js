@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { ASSESSEE_SIGN_ON, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { informationEngagement } = responseObject;
+  const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -125,6 +127,20 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
       isListCard: false
     }
   ];
+  const reviseEngagement = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'status') {
+      dispatch({
+        type: SET_STATUS_POPUP_VALUE,
+        payload: capitalizeFirstLetter(informationEngagement?.associateNodeStatus)
+      });
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+  };
 
   return (
     <div
@@ -155,9 +171,18 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseEngagement}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseEngagement}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

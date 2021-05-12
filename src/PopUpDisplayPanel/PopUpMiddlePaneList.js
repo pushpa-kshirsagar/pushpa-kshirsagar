@@ -261,6 +261,7 @@ const PopUpMiddlePaneList = (props) => {
           payload: {
             secondaryOptionCheckValue,
             selectedModule: middlePaneHeader,
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

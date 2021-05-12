@@ -26,7 +26,8 @@ import {
   ASSESSEE_GROUP_INFO_REVISE_SAGA,
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
   ASSOCIATE_GROUP_REVISE_INFO_SAGA,
-  ASSOCIATE_ROLE_REVISE_INFO_SAGA
+  ASSOCIATE_ROLE_REVISE_INFO_SAGA,
+  ASSESSEE_NODE_INFO_REVISE_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -60,7 +61,10 @@ import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThr
 import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThreeSectionTwoAssignment/DisplayPaneThreeSectionTwoAssignment';
 import DisplayPaneThreeSectionOneAssociateNode from '../../Molecules/DisplayPaneThreeSectionOneAssociateNode/DisplayPaneThreeSectionOneAssociateNode';
 import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPaneThreeSectionTwoAssociateNode/DisplayPaneThreeSectionTwoAssociateNode';
-import { getAssesseeGroupAssesseeReqObj, getAssesseeRoleAssesseeReqObj } from '../../Actions/AssesseeModuleAction';
+import {
+  getAssesseeGroupAssesseeReqObj,
+  getAssesseeRoleAssesseeReqObj
+} from '../../Actions/AssesseeModuleAction';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -326,6 +330,7 @@ export const DisplayPaneThree = () => {
     (state) => state.GroupCreateReducer
   );
   const { associateRole, assesseeRole } = useSelector((state) => state.RoleCreateReducer);
+  const { nodeInformation } = useSelector((state) => state.NodeCreateReducer);
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
     { label: 'first', onClick: onClickFooter, Icon: FirstPage },
@@ -370,6 +375,28 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSESSEE_INFO_REVISE_SAGA,
         payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne, reqBody }
+      });
+    } else if (
+      headerOneBadgeOne === 'node' &&
+      (headerOne === 'associate' ||
+        headerOne === 'assessees' ||
+        headerOne === 'assessments' ||
+        headerOne === 'assignments')
+    ) {
+      console.log('IN NODE REVISE');
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        associateNode: {
+          id,
+          informationBasic: nodeInformation.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSEE_NODE_INFO_REVISE_SAGA,
+        payload: { selectedModule: headerOne, reqBody }
       });
     } else if (headerOneBadgeOne === 'role' && headerOne === 'assessees') {
       console.log('ASSESSEES ROLE REVISE');
@@ -696,8 +723,16 @@ export const DisplayPaneThree = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
     if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'NODECREATE' }
+      });
     }
     if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'NODECREATE' }
+      });
     }
   };
 
@@ -763,7 +798,9 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="alias"
-                  textOneOne={`${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`.trim()}
+                  textOneOne={`${
+                    informationBasic.assesseeNamePrefix
+                  } ${informationBasic.assesseeNameFirst.trim()} ${informationBasic.assesseeNameOther.trim()} ${informationBasic.assesseeNameLast.trim()} ${informationBasic.assesseeNameSuffix.trim()}`.trim()}
                   textOneTwo={informationBasic.assesseeAlias || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}

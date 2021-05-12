@@ -92,6 +92,7 @@ const NodeCreatePopup = (props) => {
         basicInfo={nodeInformation.informationBasic}
         typeOfSetObject={SET_NODE_REDUCER_STATE}
         isRequired={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
@@ -104,6 +105,7 @@ const NodeCreatePopup = (props) => {
         basicInfo={nodeInformation.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={SET_NODE_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}

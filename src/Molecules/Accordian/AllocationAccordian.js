@@ -3,6 +3,7 @@ import AccordianHeader from './AccordianHeader';
 import AccordianListCard from './AccordianListCard';
 import './Accordian.css';
 import AccordianInfoCard from './AccordianInfoCard';
+import AccordianMultiListCard from './AccordianMultiListCard';
 
 export const AllocationAccordian = (props) => {
   const {
@@ -24,14 +25,19 @@ export const AllocationAccordian = (props) => {
         return (
           <div key={ob.id}>
             {ob.isListCard ? (
-              <AccordianListCard
-                onClickRevise={onClickRevise}
-                className=""
-                accordianObject={ob}
-                mode={mode}
-              />
+              <>
+                {ob.isMultiList ? (
+                  <AccordianMultiListCard
+                    onClickRevise={onClickRevise}
+                    accordianObject={ob}
+                    mode={mode}
+                  />
+                ) : (
+                  <AccordianListCard className="" accordianObject={ob} mode={onClickRevise} />
+                )}
+              </>
             ) : (
-              <AccordianInfoCard onClickRevise={onClickRevise} accordianObject={ob} mode={mode} />
+              <AccordianInfoCard accordianObject={ob} mode={onClickRevise} />
             )}
           </div>
         );

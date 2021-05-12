@@ -75,9 +75,9 @@ export const DisplayPaneOne = () => {
   const assesseeAlias = '';
   const assesseeSignIN = localStorage.getItem('assesseeId');
   const assesseeName = leftPaneAssesseeInfo
-    ? leftPaneAssesseeInfo.informationBasic.assesseeNameFirst +
+    ? leftPaneAssesseeInfo.informationBasic.assesseeNameFirst.trim() +
       ' ' +
-      leftPaneAssesseeInfo.informationBasic.assesseeNameLast
+      leftPaneAssesseeInfo.informationBasic.assesseeNameLast.trim()
     : assesseeSignIN;
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
