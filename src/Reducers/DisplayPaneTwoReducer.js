@@ -60,7 +60,8 @@ const initialState = {
   scanString: '',
   searchFocusIndex: 0,
   isSelectActive: false,
-  selectedTagsArray: []
+  selectedTagsArray: [],
+  unselectedTagsArray: []
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

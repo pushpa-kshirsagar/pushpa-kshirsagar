@@ -29,7 +29,8 @@ const AssesseeGroupReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     isSelectActive,
-    selectedTagsArray
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -145,7 +146,7 @@ const AssesseeGroupReviewList = (props) => {
                   item.informationEngagement.assesseeTag?.assesseeTagPrimary
                 )}
                 onClickCheckBox={(event) => {
-                  onClickCheckBoxSelection(selectedTagsArray, event, dispatch);
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
               />
             </div>

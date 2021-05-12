@@ -81,18 +81,75 @@ const DisplayPaneThreeSectionTwo = () => {
   //   assesseeTelephoneVerification: false
   // },
   const careerListAll = [
+    // {
+    //   id: 'a1',
+    //   labelTextOneOne: 'document',
+    //   textOneOne: '',
+    //   labelTextOneOneBadgeOne: 'form',
+    //   labelTextOneOneBadgeTwo: 'report',
+    //   labelTextOneOneBadgeThree: 'resume',
+    //   labelTextOneOneBadgeFour: '',
+    //   innerAssociateList: [],
+    //   innerInfo: 'assessees',
+    //   isListCard: false,
+    //   IconOne: Manuscript
+    // },
     {
       id: 'a1',
-      labelTextOneOne: 'document',
-      textOneOne: '',
-      labelTextOneOneBadgeOne: 'form',
-      labelTextOneOneBadgeTwo: 'report',
-      labelTextOneOneBadgeThree: 'resume',
-      labelTextOneOneBadgeFour: '',
+      labelTextOneOne: 'academia',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'education',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'license',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'profile',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne: ''
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: Manuscript
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'report',
+      labelTextOneOneBadges: [],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: Manuscript
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'tag',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'iGauge',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false
     }
   ];
   const contactListAll = [
