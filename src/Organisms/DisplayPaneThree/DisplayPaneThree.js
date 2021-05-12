@@ -404,7 +404,10 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
-        assesseeRoleAssessee,
+        assesseeRoleAssessee: {
+          assesseeRoleAssesseeAllocate: assesseeRoleAssessee.assesseeRoleAssesseeAllocate,
+          assesseeRoleAssesseeUnallocate: assesseeRoleAssessee.assesseeRoleAssesseeUnallocate
+        },
         assesseeRole: {
           id,
           informationBasic: assesseeRole.informationBasic
@@ -459,8 +462,8 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
         assesseeGroupAssessee: {
-          assesseeAdded: assesseeGroupAssessee.assesseeAdded,
-          assesseeRemoved: assesseeGroupAssessee.assesseeRemoved
+          assesseeGroupAssesseeAllocate: assesseeGroupAssessee.assesseeGroupAssesseeAllocate,
+          assesseeGroupAssesseeUnallocate: assesseeGroupAssessee.assesseeGroupAssesseeUnallocate
         },
         assesseeGroup: {
           id,

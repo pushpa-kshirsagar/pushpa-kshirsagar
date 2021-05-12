@@ -5,7 +5,9 @@ import {
   SET_REVIEW_LIST_RELATE_DATA,
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_STATUS_POPUP_VALUE
+  SET_STATUS_POPUP_VALUE,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../actionType';
 
 const initialState = {
@@ -18,10 +20,14 @@ const initialState = {
   reviewMode: 'review',
   createMode: '',
   relatedReviewListPaneThree: [{}],
-  assesseeRoleAssessee: [],
+  // assesseeRoleAssessee: [],
   assesseeGroupAssessee: {
-    assesseeAdded: [],
-    assesseeRemoved: []
+    assesseeGroupAssesseeAllocate: [],
+    assesseeGroupAssesseeUnallocate: []
+  },
+  assesseeRoleAssessee: {
+    assesseeRoleAssesseeAllocate: [],
+    assesseeRoleAssesseeUnallocate: []
   },
   selectedModule: '',
   statusPopUpValue: ''
@@ -54,14 +60,33 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
     case SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST:
       return {
         ...istate,
-        assesseeRoleAssessee: action.payload
+        assesseeRoleAssessee: {
+          ...istate.assesseeRoleAssessee,
+          assesseeRoleAssesseeAllocate: action.payload
+        }
+      };
+    case SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST:
+      return {
+        ...istate,
+        assesseeRoleAssessee: {
+          ...istate.assesseeRoleAssessee,
+          assesseeRoleAssesseeUnallocate: action.payload
+        }
       };
     case SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST:
       return {
         ...istate,
         assesseeGroupAssessee: {
           ...istate.assesseeGroupAssessee,
-          assesseeAdded: action.payload
+          assesseeGroupAssesseeAllocate: action.payload
+        }
+      };
+    case SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST:
+      return {
+        ...istate,
+        assesseeGroupAssessee: {
+          ...istate.assesseeGroupAssessee,
+          assesseeGroupAssesseeUnallocate: action.payload
         }
       };
     case SET_STATUS_POPUP_VALUE:

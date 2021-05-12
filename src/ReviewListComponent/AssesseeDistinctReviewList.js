@@ -34,7 +34,8 @@ const AssesseeDistinctReviewList = (props) => {
     typeOfMiddlePaneList,
     selectedAssociateInfo,
     isSelectActive,
-    selectedTagsArray
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -191,7 +192,7 @@ const AssesseeDistinctReviewList = (props) => {
                   item.informationEngagement.assesseeTag?.assesseeTagPrimary
                 )}
                 onClickCheckBox={(event) => {
-                  onClickCheckBoxSelection(selectedTagsArray, event, dispatch);
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
               />
             </div>

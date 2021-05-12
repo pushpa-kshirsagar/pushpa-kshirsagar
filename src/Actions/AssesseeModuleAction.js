@@ -657,18 +657,32 @@ export const getAssesseeGroupDistinctApiCall = (
   });
 };
 
-export const onClickCheckBoxSelection = (selectedTagsArray, event, dispatch) => {
+export const onClickCheckBoxSelection = (
+  selectedTagsArray,
+  unselectedTagsArray,
+  event,
+  dispatch
+) => {
   let id = event.target.id;
   let checkedArr = [...selectedTagsArray];
+  let unCheckArr = [...unselectedTagsArray];
   if (checkedArr.includes(id)) {
     checkedArr = checkedArr.filter(function (number) {
       return number !== id;
     });
+    unCheckArr.push(id);
   } else {
     checkedArr.push(id);
+    unCheckArr = unCheckArr.filter(function (number) {
+      return number !== id;
+    });
   }
   dispatch({
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: { stateName: 'selectedTagsArray', value: checkedArr }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedTagsArray', value: unCheckArr }
   });
 };
