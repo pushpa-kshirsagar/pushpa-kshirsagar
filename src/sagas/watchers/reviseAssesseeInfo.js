@@ -9,6 +9,7 @@ import {
   SET_SELECTED_ASSOCIATE
 } from '../../actionType';
 import { ASSESSEE_INFO_REVISE_URL } from '../../endpoints';
+import { refreshMiddlePaneList } from '../../Actions/PlatformModuleAction';
 import Store from '../../store';
 const assesseesReviseInfoApi = async (requestObj) => {
   let URL = ASSESSEE_INFO_REVISE_URL;
@@ -51,21 +52,25 @@ function* workerReviseInfoAssesseeSaga(data) {
             value: userResponse?.responseObject[0]
           }
         });
+      } else {
+        refreshMiddlePaneList(ASSESSEE_REVIEW_DISTINCT_SAGA, 'assessees');
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+          payload: {
+            HeaderOne: 'assessees',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue
+          }
+        });
       }
       // if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
-      //   yield put({
-      //     type: SET_DISPLAY_TWO_SINGLE_STATE,
-      //     payload: { stateName: 'reviewListDistinctData', value: [] }
-      //   });
-      //   yield put({
-      //     type: ASSESSEE_REVIEW_DISTINCT_SAGA,
-      //     payload: {
-      //       HeaderOne: 'assessees',
-      //       request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-      //       BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-      //       BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo
-      //     }
-      //   });
+
       // }
 
       console.log('loading end');

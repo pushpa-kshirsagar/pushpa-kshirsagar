@@ -581,7 +581,6 @@ const PopUpMiddlePaneList = (props) => {
 
       // onClickInformation(secondaryOptionCheckValue);
     } else if (dataVal === 'distinct') {
-      alert(typeOfMiddlePaneList)
       if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
         getAssesseeGroupAssesseeDistinctApiCall(
           selectedAssociateInfo,

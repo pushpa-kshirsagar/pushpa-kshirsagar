@@ -83,7 +83,7 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         middlePaneHeaderBadgeFour: action.payload.middlePaneHeaderBadgeFour,
         scanCount: action.payload.scanCount,
         showMiddlePaneState: action.payload.showMiddlePaneState,
-        middlePaneSelectedValue: 'tag',
+        middlePaneSelectedValue: istate.middlePaneSelectedValue,
         isSelectActive: action.payload.isSelectActive || false,
         selectedTagsArray: action.payload.selectedTagsArray || []
       };
