@@ -11,12 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import {
-  ASSESSEE_SIGN_ON,
-  UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE,
-  UPDATE_ASSESSEE_CONTACT_INFO,
-  UPDATE_ASSESSEE_PERSONAL_INFO
-} from '../../actionType';
+import { ASSESSEE_SIGN_ON } from '../../actionType';
 
 const DisplayPaneThreeSectionTwo = () => {
   const [listExpand, setListExpand] = useState('');
@@ -81,19 +76,6 @@ const DisplayPaneThreeSectionTwo = () => {
   //   assesseeTelephoneVerification: false
   // },
   const careerListAll = [
-    // {
-    //   id: 'a1',
-    //   labelTextOneOne: 'document',
-    //   textOneOne: '',
-    //   labelTextOneOneBadgeOne: 'form',
-    //   labelTextOneOneBadgeTwo: 'report',
-    //   labelTextOneOneBadgeThree: 'resume',
-    //   labelTextOneOneBadgeFour: '',
-    //   innerAssociateList: [],
-    //   innerInfo: 'assessees',
-    //   isListCard: false,
-    //   IconOne: Manuscript
-    // },
     {
       id: 'a1',
       labelTextOneOne: 'academia',
@@ -143,7 +125,7 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOne: 'tag',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'iGauge',
+          labelTextOneOneBadge: 'iGuru',
           textOne: ''
         }
       ],
@@ -419,7 +401,9 @@ const DisplayPaneThreeSectionTwo = () => {
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationContact.assesseeTelephoneMobileSecondary || 'No Information'
+          textOne:
+            informationContact.assesseeTelephoneMobileSecondary.assesseeTelephoneNumber ||
+            'No Information'
         }
       ],
       labelTextOneOneBadgeFour: '',
@@ -555,6 +539,37 @@ const DisplayPaneThreeSectionTwo = () => {
       });
     }
   };
+  const reviewCredential = (labelName, selectedBadgeName) => {
+    // const labelName = e.currentTarget.getAttribute('data-value');
+    // const selectedBadgeName = e.currentTarget.getAttribute('id');
+    console.log('=====>', labelName);
+    if (labelName === 'fingerprint') {
+      if (selectedBadgeName === 'left hand') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'LEFTFINGERPRINTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'right hand') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'RIGHTFINGERPRINTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+    }
+    if (labelName === 'signature') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'SIGNATUREPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
+    // if (labelName === 'tag') {
+    //   dispatch({
+    //     type: ASSESSEE_SIGN_ON,
+    //     payload: { isPopUpValue: 'TAGSTATUTORY', popupMode: 'ASSESSEE_CREATE' }
+    //   });
+    // }
+  };
 
   const revisePersonal = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
@@ -637,6 +652,7 @@ const DisplayPaneThreeSectionTwo = () => {
               list={credentialListAll}
               mode={reviewMode}
               onClickRevise={reviseCredential}
+              onClickReview={reviewCredential}
             />
           </div>
           <div className="containerPadding">

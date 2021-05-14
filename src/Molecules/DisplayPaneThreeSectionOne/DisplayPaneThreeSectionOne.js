@@ -39,69 +39,211 @@ const DisplayPaneThreeSectionOne = () => {
     {
       id: 'a1',
       labelTextOneOne: 'family',
-      labelTextOneOneBadgeOne: 'ascendant',
-      labelTextOneOneBadgeTwo: 'descendant',
-      labelTextOneOneBadgeThree: 'sibling',
-      labelTextOneOneBadgeFour: 'spouse',
-      isListCard: true,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
-          innerList: [
+          innerLabelBadgeList: [
             {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'family',
-              status: ''
+              labelTextTwoBadge: 'father',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'father',
+                  status: ''
+                }
+              ]
             },
             {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'family',
-              status: ''
+              labelTextTwoBadge: 'mother',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'mother',
+                  status: ''
+                }
+              ]
             },
             {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'family',
-              status: ''
+              labelTextTwoBadge: 'unlisted',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'family',
+                  status: ''
+                },
+                {
+                  id: 'associate2',
+                  textOne: 'Simple Sample 02',
+                  textTwo: 'family',
+                  status: ''
+                }
+              ]
             }
           ]
         },
         {
           labelTextOneOneBadge: 'descendant',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'daughter',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'daughter',
+                  status: ''
+                },
+                {
+                  id: 'associate2',
+                  textOne: 'Simple Sample 02',
+                  textTwo: 'daughter',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'son',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'son',
+                  status: ''
+                },
+                {
+                  id: 'associate2',
+                  textOne: 'Simple Sample 02',
+                  textTwo: 'son',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'unlisted',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'family',
+                  status: ''
+                },
+                {
+                  id: 'associate2',
+                  textOne: 'Simple Sample 02',
+                  textTwo: 'family',
+                  status: ''
+                },
+                {
+                  id: 'associate3',
+                  textOne: 'Simple Sample 03',
+                  textTwo: 'family',
+                  status: ''
+                }
+              ]
+            }
+          ]
         },
         {
           labelTextOneOneBadge: 'sibling',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'brother',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'brother',
+                  status: ''
+                },
+                {
+                  id: 'associate2',
+                  textOne: 'Simple Sample 02',
+                  textTwo: 'brother',
+                  status: ''
+                },
+                {
+                  id: 'associate3',
+                  textOne: 'Simple Sample 03',
+                  textTwo: 'brother',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'sister',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'sister',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'unlisted',
+              innerList: []
+            }
+          ]
         },
         {
           labelTextOneOneBadge: 'spouse',
-          innerList: []
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'husband',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'husband',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'wife',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'wife',
+                  status: ''
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'unlisted',
+              innerList: [
+                {
+                  id: 'associate1',
+                  textOne: 'Simple Sample 01',
+                  textTwo: 'family',
+                  status: ''
+                },
+                {
+                  id: 'associate2',
+                  textOne: 'Simple Sample 02',
+                  textTwo: 'family',
+                  status: ''
+                },
+                {
+                  id: 'associate3',
+                  textOne: 'Simple Sample 03',
+                  textTwo: 'family',
+                  status: ''
+                }
+              ]
+            }
+          ]
         }
       ],
-      innerAssociateList: [
-        {
-          id: 'associate1',
-          textOne: 'Simple Sample 01',
-          textTwo: 'family',
-          status: ''
-        },
-        {
-          id: 'associate2',
-          textOne: 'Simple Sample 02',
-          textTwo: 'family',
-          status: ''
-        },
-        {
-          id: 'associate3',
-          textOne: 'Simple Sample 03',
-          textTwo: 'family',
-          status: ''
-        }
-      ],
-      innerInfo: 'No Information'
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
     },
     {
       id: 'a2',
@@ -594,6 +736,7 @@ const DisplayPaneThreeSectionOne = () => {
   };
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'status') {
       dispatch({
@@ -605,10 +748,44 @@ const DisplayPaneThreeSectionOne = () => {
         payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'ASSESSEE_CREATE' }
       });
     }
+    if (labelName === 'tag') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+    }
+    if (labelName === 'tenure') {
+      if (selectedBadgeName === 'start') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'end') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+    }
   };
   const reviseSetup = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
+    if (labelName === 'sign-in') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'FORCETOSELECTSIGNIN', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
   };
 
   return (

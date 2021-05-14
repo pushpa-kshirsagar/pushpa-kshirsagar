@@ -57,19 +57,28 @@ const BasicCard = (props) => {
           /> */}
         </div>
         <div className="flex-one-align-center">
-          <div className="notifications-icon-container">
-            {isAlertActive && <Notifications className="notificaton-icon" />}
-          </div>
+          {isAlertActive && (
+            <div className="notifications-icon-container">
+              <Notifications className="notificaton-icon" />
+            </div>
+          )}
         </div>
         <div className={'iguru-iconbox'}>
           {isImageActive ? (
             <Avatar
               alt=""
               className={'svgRootSize'}
+              id="profile-icon"
+              onClick={mode === 'revise' ? onClickRevise : null}
               src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
             />
           ) : (
-            <IconsButton Icon={PersonIcon} className={'imageNA'} />
+            <IconsButton
+              id="profile-icon"
+              onClick={mode === 'revise' ? onClickRevise : null}
+              Icon={PersonIcon}
+              className={'imageNA'}
+            />
           )}
         </div>
       </div>

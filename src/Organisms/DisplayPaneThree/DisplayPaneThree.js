@@ -407,7 +407,10 @@ export const DisplayPaneThree = () => {
         type: ASSESSEE_NODE_INFO_REVISE_SAGA,
         payload: { selectedModule: headerOne, reqBody }
       });
-    } else if (headerOneBadgeOne === 'role' && headerOne === 'assessees') {
+    } else if (
+      headerOneBadgeOne === 'role' &&
+      (headerOne === 'assessees' || headerOne === 'managers' || headerOne === 'administrators')
+    ) {
       console.log('ASSESSEES ROLE REVISE');
       const { associateId, id } = responseObject;
       const reqBody = {
@@ -669,7 +672,15 @@ export const DisplayPaneThree = () => {
   console.log('DISPLAY PANE THREE++++++>', responseObject, headerOneBadgeThree);
   const reviseAssesseeBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const profileId = e.currentTarget.getAttribute('id');
+    console.log('====>', profileId);
     console.log('====>', labelName, informationBasic);
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'ASSESSEE_CREATE' }
+      });
+    }
     if (labelName === 'name') {
       dispatch({
         type: ASSESSEE_SIGN_ON,
@@ -814,8 +825,8 @@ export const DisplayPaneThree = () => {
                     informationBasic.assesseeNamePrefix
                   } ${informationBasic.assesseeNameFirst.trim()} ${informationBasic.assesseeNameOther.trim()} ${informationBasic.assesseeNameLast.trim()} ${informationBasic.assesseeNameSuffix.trim()}`.trim()}
                   textOneTwo={informationBasic.assesseeAlias || 'No Information'}
-                  isVerifiedActiveName={false}
-                  isVerifiedActivePicture={false}
+                  isVerifiedActiveName={informationBasic?.assesseeNameVerification || false}
+                  isVerifiedActivePicture={informationBasic?.assesseePictureVerification || false}
                   mode={reviewMode}
                   onClickRevise={reviseAssesseeBasicInformation}
                 />

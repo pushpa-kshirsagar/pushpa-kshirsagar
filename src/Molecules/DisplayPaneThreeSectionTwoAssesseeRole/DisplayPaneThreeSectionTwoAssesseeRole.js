@@ -17,8 +17,17 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT
 } from '../../actionType';
-import { getAssesseeRoleAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
-import { makeAssesseeReviewListRequestObject } from '../../Actions/GenericActions';
+import {
+  getAssesseeRoleAssesseeDistinctApiCall,
+  getAssesseeRoleAssesseeReqObj
+} from '../../Actions/AssesseeModuleAction';
+import {
+  makeAdministratorRoleCreateObj,
+  makeAdministratorsReviewListRequestObject,
+  makeAssesseeReviewListRequestObject,
+  makeManagerRoleCreateObj,
+  makeManagersReviewListRequestObject
+} from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -106,14 +115,26 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
 
   const onclickReviseAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    if (labelName === 'assessee') {
+    if (labelName === 'assessee' || labelName === 'administrator' || labelName === 'manager') {
       console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
-      let requestObect = makeAssesseeReviewListRequestObject(
-        selectedAssociateInfo,
-        'active',
-        0,
-        countPage
-      );
+      let roleRequestObj =
+        labelName === 'administrator' || labelName === 'manager'
+          ? getAssesseeRoleAssesseeReqObj(
+              selectedAssociateInfo,
+              responseObject.id,
+              'active',
+              0,
+              countPage
+            )
+          : makeAssesseeReviewListRequestObject(selectedAssociateInfo, 'active', 0, countPage);
+      // let roleRequestObj =
+      //   labelName === 'administrator'
+      //     ? makeAdministratorsReviewListRequestObject(selectedAssociateInfo, 'active', 0, countPage)
+      //     : labelName === 'manager'
+      //     ? makeManagersReviewListRequestObject(selectedAssociateInfo, 'active', 0, countPage)
+      //     : makeAssesseeReviewListRequestObject(selectedAssociateInfo, 'active', 0, countPage);
+
+      console.log(labelName === 'administrator');
       let revisedRoleObject = {
         id: responseObject.id,
         assesseeRoleName: responseObject.informationBasic.assesseeRoleName,
@@ -140,20 +161,24 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       dispatch({
         type: GET_ALLOCATE_ASSESSEE,
         payload: {
-          request: requestObect,
+          request: roleRequestObj,
+          headerOne: `${labelName}s`,
           revisedGroupObject: revisedRoleObject,
           existingAssesseeId: existingAssesseeId,
           typeOfMiddlePaneList: 'assesseesRoleAssesseeReviewList'
         }
       });
     }
-  }
+  };
   const onclickReviewAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
-    if (labelName === 'assessee' && assesseeArray.length > 0) {
+    console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName, assesseeArray);
+    if (
+      (labelName === 'assessee' || labelName === 'administrator' || labelName === 'manager') &&
+      assesseeArray.length > 0
+    ) {
       let result = assesseeArray.map((a) => a.id);
-      console.log("RESULT++++", result);
+      console.log('RESULT++++', result);
       dispatch({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: result });
       // getAssesseeRoleAssesseeDistinctApiCall(
       //   selectedAssociateInfo,
@@ -173,7 +198,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader: 'assessees',
+          middlePaneHeader: `${labelName}s`,
           middlePaneHeaderBadgeOne: 'distinct',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
