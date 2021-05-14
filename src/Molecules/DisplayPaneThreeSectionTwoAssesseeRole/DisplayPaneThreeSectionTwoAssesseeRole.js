@@ -106,7 +106,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
 
   const onclickReviseAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    if (labelName === 'assessee') {
+    if (labelName === 'assessee' || labelName === 'administrator') {
       console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
@@ -150,8 +150,8 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   }
   const onclickReviewAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
-    if (labelName === 'assessee' && assesseeArray.length > 0) {
+    console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName, assesseeArray);
+    if ((labelName === 'assessee' || labelName === 'administrator') && assesseeArray.length > 0) {
       let result = assesseeArray.map((a) => a.id);
       console.log("RESULT++++", result);
       dispatch({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: result });

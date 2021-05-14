@@ -522,13 +522,14 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
     console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
     if (labelName === 'assessee') {
+      console.log('IN ASSSESSEE ');
       getAssesseeNodeAssesseeDistinctApiCall(
         selectedAssociateInfo,
         'active',
         countPage,
         dispatch,
         'distinct',
-        selectedTagValue,
+        responseObject.id,
         '',
         false,
         'assessees'
@@ -562,11 +563,20 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
                           mode={reviewMode}
                         />
                       ) : (
-                        <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                        <AccordianListCard
+                          onClickReview={reviewNode}
+                          className=""
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
                       )}
                     </>
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickReview={reviewNode}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

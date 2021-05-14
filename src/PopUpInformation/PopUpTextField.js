@@ -28,11 +28,12 @@ const PopUpTextField = (props) => {
     typeOfSetObject,
     actualLableValue,
     labelBadgeOne = '',
-    mode
+    mode,
+    isNotRevised = false
   } = props;
-
+  let errorMessage = isNotRevised ? 'this information cannot be revised' : '';
   const [state, setState] = useState({
-    error: '',
+    error: errorMessage,
     isVerified: true
   });
 
@@ -49,17 +50,19 @@ const PopUpTextField = (props) => {
     return isValidate;
   };
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
-    setState((prevState) => ({
-      ...prevState,
-      error: '',
-      isVerified: false
-    }));
+    if (!isNotRevised) {
+      const { name, value } = event.target;
+      dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+      setState((prevState) => ({
+        ...prevState,
+        error: '',
+        isVerified: false
+      }));
+    }
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (validateFun()) {
+    if (validateFun() && !isNotRevised) {
       if (reviewMode === 'revise') {
         dispatch({ type: POPUP_CLOSE });
       } else {
@@ -78,6 +81,7 @@ const PopUpTextField = (props) => {
           headerOneBadgeThree={''}
           onClick={handleClick}
           mode={mode}
+          isNotRevised={isNotRevised}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
@@ -86,7 +90,7 @@ const PopUpTextField = (props) => {
             <InputFeild
               id={actualLableValue}
               label={label}
-              value={basicInfo && basicInfo[actualLableValue]}
+              value={basicInfo && isNotRevised ? basicInfo : basicInfo[actualLableValue]}
               onClick={handleChange}
               errorMsg={state.error}
               labelBadgeOne={labelBadgeOne}

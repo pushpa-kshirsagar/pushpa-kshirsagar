@@ -21,7 +21,8 @@ const PopUpCheckbox = (props) => {
     typeOfPrimarySetObject,
     typeOfSecondaSetObject,
     nextPopUpValue,
-    forceToSelect = ''
+    forceToSelect = '',
+    mode
   } = props;
 
   const [state, setState] = useState({
@@ -111,6 +112,7 @@ const PopUpCheckbox = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
