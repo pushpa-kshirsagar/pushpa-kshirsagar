@@ -407,7 +407,10 @@ export const DisplayPaneThree = () => {
         type: ASSESSEE_NODE_INFO_REVISE_SAGA,
         payload: { selectedModule: headerOne, reqBody }
       });
-    } else if (headerOneBadgeOne === 'role' && headerOne === 'assessees') {
+    } else if (
+      headerOneBadgeOne === 'role' &&
+      (headerOne === 'assessees' || headerOne === 'managers' || headerOne === 'administrators')
+    ) {
       console.log('ASSESSEES ROLE REVISE');
       const { associateId, id } = responseObject;
       const reqBody = {
@@ -672,7 +675,7 @@ export const DisplayPaneThree = () => {
     const profileId = e.currentTarget.getAttribute('id');
     console.log('====>', profileId);
     console.log('====>', labelName, informationBasic);
-    if(profileId === 'profile-icon') {
+    if (profileId === 'profile-icon') {
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'ASSESSEE_CREATE' }

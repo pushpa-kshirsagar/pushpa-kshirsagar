@@ -523,7 +523,7 @@ const PopUpSignOnAssessee = (props) => {
         selectedList={assesseeInfo?.informationAllocation?.assesseeNode.assesseeNodePrimary}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
-        ListData={coreNodeReviewListData[0]}
+        ListData={coreNodeReviewListData}
         textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}
         onClickEvent={updateNodeIdObject}
@@ -542,7 +542,7 @@ const PopUpSignOnAssessee = (props) => {
         selectedList={assesseeInfo?.informationAllocation?.assesseeNode.assesseeNodePrimary}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
-        ListData={coreNodeReviewListData[0]}
+        ListData={coreNodeReviewListData}
         textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}
         onClickEvent={updateNodeIdObject}

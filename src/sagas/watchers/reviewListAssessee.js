@@ -79,7 +79,7 @@ function* workerReviewListAssesseSaga(data) {
       yield put({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader: 'assessees',
+          middlePaneHeader: data.payload.headerOne || 'assessees',
           middlePaneHeaderBadgeOne: 'distinct',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
