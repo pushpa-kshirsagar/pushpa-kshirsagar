@@ -19,9 +19,7 @@ import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfi
 import { assesseeRole } from '../Actions/AssesseeModuleAction';
 const AssesseeRoleDistinctReviewList = (props) => {
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue } = useSelector(
-    (state) => state.AssesseeCreateReducer
-  );
+  const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
   const {
     numberPage,
     scanCount,
@@ -135,8 +133,9 @@ const AssesseeRoleDistinctReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   // console.log(reviewListDistinctData);
-  console.log("selectedAssociateInfo",selectedAssociateInfo);
-  const associateSeftId = selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
+  console.log('selectedAssociateInfo', selectedAssociateInfo);
+  const associateSeftId =
+    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
     <div>
       {reviewListDistinctData &&
@@ -149,14 +148,14 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 tag={item.id}
                 dataValue={item.informationAllocation.assesseeRoleGroup}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={associateSeftId === item.associateId?'besboke':'generic'}
+                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 // status={item.informationEngagement.assesseeRoleStatus}
                 actualStatus={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
                 textOne={assesseeRole(item.informationBasic.assesseeRoleName)}
                 textTwo={item.informationBasic.assesseeRoleDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-              />
+              />  
             </div>
           );
         })}

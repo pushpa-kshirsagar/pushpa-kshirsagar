@@ -636,7 +636,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'nodes' &&
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
-    ){
+    ) {
       getInternalNodeApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
@@ -648,58 +648,58 @@ const PopUpDisplayPanelAssociate = (props) => {
         popupHeaderOne
       );
     }
-      if (
-        clickValue === 'distinct' &&
-        (popupHeaderOne === 'assignments' || popupHeaderOne === 'assessments') &&
-        popupHeaderOneBadgeOne === 'types'
-      ) {
-        let requestObj = {};
-        dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-        dispatch({ type: LOADER_START });
-        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-        if (popupHeaderOne === 'assessments') {
-          requestObj = makeAssessmentTypeObj(
-            selectedAssociateInfo,
-            secondaryOptionCheckValue,
-            0,
-            countPage
-          );
-          dispatch({
-            type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
-            payload: {
-              request: requestObj,
-              BadgeOne: 'types',
-              BadgeTwo: 'distinct',
-              BadgeThree: secondaryOptionCheckValue,
-              isMiddlePaneList: true
-            }
-          });
-        }
-        if (popupHeaderOne === 'assignments') {
-          requestObj = makeAssignmentTypeObj(
-            selectedAssociateInfo,
-            secondaryOptionCheckValue,
-            0,
-            countPage
-          );
-          dispatch({
-            type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
-            payload: {
-              request: requestObj,
-              BadgeOne: 'types',
-              BadgeTwo: 'distinct',
-              BadgeThree: secondaryOptionCheckValue,
-              isMiddlePaneList: true
-            }
-          });
-        }
-        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+    if (
+      clickValue === 'distinct' &&
+      (popupHeaderOne === 'assignments' || popupHeaderOne === 'assessments') &&
+      popupHeaderOneBadgeOne === 'types'
+    ) {
+      let requestObj = {};
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      if (popupHeaderOne === 'assessments') {
+        requestObj = makeAssessmentTypeObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
         dispatch({
-          type: FILTERMODE,
-          payload: { FilterMode: popupHeaderOne + 'TypeDistinct' + secondaryOptionCheckValue }
+          type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: 'types',
+            BadgeTwo: 'distinct',
+            BadgeThree: secondaryOptionCheckValue,
+            isMiddlePaneList: true
+          }
         });
       }
+      if (popupHeaderOne === 'assignments') {
+        requestObj = makeAssignmentTypeObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        );
+        dispatch({
+          type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: 'types',
+            BadgeTwo: 'distinct',
+            BadgeThree: secondaryOptionCheckValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: popupHeaderOne + 'TypeDistinct' + secondaryOptionCheckValue }
+      });
+    }
     if (
       clickValue === 'information' &&
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
@@ -787,7 +787,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-          associateAscendantPrimary: localStorage.getItem('parentId')
+        associateAscendantPrimary: localStorage.getItem('parentId')
       };
       dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({
