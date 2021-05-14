@@ -614,7 +614,7 @@ const PopUpMiddlePaneList = (props) => {
         );
         dispatch({
           type: FILTERMODE,
-          payload: { FilterMode: 'assesseeGroupAssesseeDistinct' + secondaryOptionCheckValue }
+          payload: { FilterMode: 'assesseeRoleAssesseeDistinct' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
