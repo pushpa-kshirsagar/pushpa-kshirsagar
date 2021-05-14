@@ -62,6 +62,9 @@ const PopUpReviewList = (props) => {
       }
     }
   };
+  console.log('props', props);
+  console.log('inputHeader', inputHeader);
+  console.log('textOne', textOne);
   return (
     <div>
       <PopUp isActive={isActive}>
@@ -96,16 +99,10 @@ const PopUpReviewList = (props) => {
               </div>
             </div>
           </div>
-          {ListData &&
+          {ListData.length > 0 &&
             ListData.map((index, option) => (
               <ReviewList
-                textOne={
-                  index?.informationBasic
-                    ? inputHeader === 'role'
-                      ? assesseeRole(index.informationBasic[textOne])
-                      : index.informationBasic[textOne]
-                    : null
-                }
+                textOne={index?.informationBasic ? index.informationBasic[textOne] : null}
                 textTwo={index?.informationBasic && index.informationBasic[textTwo]}
                 id={index.id}
                 tag={index.id}

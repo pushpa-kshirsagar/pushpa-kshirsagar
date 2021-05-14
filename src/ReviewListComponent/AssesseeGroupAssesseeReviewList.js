@@ -167,24 +167,6 @@ const AssesseeGroupAssesseeReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    // let requestObect = makeAssesseeReviewListRequestObject(
-    //   selectedAssociateInfo,
-    //   siftKey,
-    //   0,
-    //   countPage
-    // );
-    // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-    // dispatch({ type: LOADER_START });
-    // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-    // dispatch({
-    //   type: ASSESSEE_REVIEW_DISTINCT_SAGA,
-    //   payload: {
-    //     request: requestObect,
-    //     HeaderOne: middlePaneHeader,
-    //     BadgeOne: 'distinct',
-    //     BadgeTwo: siftKey
-    //   }
-    // });
     getAssesseeGroupAssesseeDistinctApiCall(
       selectedAssociateInfo,
       siftKey,

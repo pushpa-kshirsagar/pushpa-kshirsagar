@@ -110,6 +110,7 @@ const PopUpAssesseesModule = (props) => {
           BadgeOne: '',
           BadgeTwo: '',
           BadgeThree: '',
+          nodeViewState: 'list',
           isMiddlePaneList: false
         }
       });
@@ -166,6 +167,10 @@ const PopUpAssesseesModule = (props) => {
         payload: { stateName: 'cardValue', value: 'NoCard' }
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneSelectedValue', value: '' }
+      });
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
       getAssesseeRoleDistinctApiCall(
@@ -178,6 +183,10 @@ const PopUpAssesseesModule = (props) => {
       dispatch({
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'NoCard' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneSelectedValue', value: '' }
       });
       dispatch({ type: ASSESSEE_INFO_CREATE });
     } else if (targetValue === 'groups') {
@@ -192,12 +201,16 @@ const PopUpAssesseesModule = (props) => {
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'NoCard' }
       });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneSelectedValue', value: '' }
+      });
       dispatch({ type: ASSESSEE_INFO_CREATE });
     } else if (targetValue === 'nodes') {
       dispatch({ type: ASSESSEE_INFO_CREATE });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'nodeViewState', value: 'hierarchy' }
+        payload: { stateName: 'middlePaneSelectedValue', value: '' }
       });
       getInternalNodeApiCall(
         selectedAssociateInfo,
@@ -229,6 +242,10 @@ const PopUpAssesseesModule = (props) => {
         scanCount: null,
         showMiddlePaneState: false
       }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: '' }
     });
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
