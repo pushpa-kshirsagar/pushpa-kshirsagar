@@ -144,7 +144,7 @@ const NodeCreatePopup = (props) => {
         inputHeaderBadge={'ascendant'}
         inputHeaderBadgeTwo={'primary'}
         infoMsg={'select a node'}
-        ListData={coreNodeReviewListData[0]}
+        ListData={coreNodeReviewListData}
         isRequired={true}
         selectedList={
           nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary
