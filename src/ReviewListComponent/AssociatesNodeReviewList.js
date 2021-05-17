@@ -155,7 +155,7 @@ const AssociatesNodeReviewList = (props) => {
             </div>
           ) : (
             <Fragment>
-              {reviewListDistinctData[0].map((item, index) => {
+              {reviewListDistinctData.map((item, index) => {
                 // if (index === 0) {
                 //   <Card
                 //     textOneOne={item.informationBasic.associateName}

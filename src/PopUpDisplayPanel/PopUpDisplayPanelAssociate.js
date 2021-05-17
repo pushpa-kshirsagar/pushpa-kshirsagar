@@ -787,7 +787,8 @@ const PopUpDisplayPanelAssociate = (props) => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        associateAscendantPrimary: localStorage.getItem('parentId')
+        associateAscendantPrimary:
+          localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId')
       };
       dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({

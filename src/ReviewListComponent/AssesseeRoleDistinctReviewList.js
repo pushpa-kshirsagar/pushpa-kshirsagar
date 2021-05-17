@@ -133,7 +133,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   // console.log(reviewListDistinctData);
-  console.log('selectedAssociateInfo', selectedAssociateInfo);
+  // console.log('selectedAssociateInfo', selectedAssociateInfo);
   const associateSeftId =
     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
