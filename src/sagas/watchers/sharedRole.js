@@ -1,12 +1,18 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  ASSESSEE_ROLE_SHARE_SAGA,
+  SHARE_ROLES_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   LOADER_STOP,
   SET_POPUP_VALUE,
-  SET_REQUEST_OBJECT
+  SET_REQUEST_OBJECT,
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
 } from '../../actionType';
-import { ASSESSEE_ROLE_SHARE_URL, ASSESSEE_ROLE_UNSHARE_URL } from '../../endpoints';
+import {
+  ASSESSEE_ROLE_SHARE_URL,
+  ASSESSEE_ROLE_UNSHARE_URL,
+  ASSOCIATE_ROLE_SHARE_URL,
+  ASSOCIATE_ROLE_UNSHARE_URL
+} from '../../endpoints';
 import Store from '../../store';
 
 const sharedApiCall = async (requestObj) => {
@@ -22,14 +28,24 @@ const sharedApiCall = async (requestObj) => {
   return json;
 };
 
-function* workerAssesseeRoleShareSaga(data) {
+function* workerRoleShareSaga(data) {
   try {
-    const userResponse = yield call(sharedApiCall, {
-      data: data.payload.request,
-      URL:
+    let APIURL = '';
+    if (data.payload.shareValue === 'assessee') {
+      APIURL =
         data.payload.apiCall === 'shareApiCall'
           ? ASSESSEE_ROLE_SHARE_URL
-          : ASSESSEE_ROLE_UNSHARE_URL
+          : ASSESSEE_ROLE_UNSHARE_URL;
+    }
+    if (data.payload.shareValue === 'associate') {
+      APIURL =
+        data.payload.apiCall === 'shareApiCall'
+          ? ASSOCIATE_ROLE_SHARE_URL
+          : ASSOCIATE_ROLE_UNSHARE_URL;
+    }
+    const userResponse = yield call(sharedApiCall, {
+      data: data.payload.request,
+      URL: APIURL
     });
     if (userResponse.responseCode === '000') {
       yield put({
@@ -37,7 +53,10 @@ function* workerAssesseeRoleShareSaga(data) {
         payload: Store.getState().DisplayPaneTwoReducer.reviewListReqObj
       });
       yield put({
-        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        type:
+          data.payload.shareValue === 'assessee'
+            ? GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA
+            : GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
         payload: {
           request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
           BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
@@ -62,5 +81,5 @@ function* workerAssesseeRoleShareSaga(data) {
   }
 }
 export default function* watchRoleShareSaga() {
-  yield takeLatest(ASSESSEE_ROLE_SHARE_SAGA, workerAssesseeRoleShareSaga);
+  yield takeLatest(SHARE_ROLES_SAGA, workerRoleShareSaga);
 }

@@ -20,7 +20,7 @@ import {
   GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_INFO_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
-  ASSESSEE_ROLE_SHARE_SAGA,
+  SHARE_ROLES_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -691,8 +691,10 @@ const PopUpMiddlePaneList = (props) => {
         payload: { badgeValue: dataVal, keyValue: keyVal }
       });
     } else if (dataVal === 'shareApiCall' || dataVal === 'unshareApiCall') {
+      let reqBody = null;
+      let shareVal = '';
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
-        let reqBody = {
+        reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
@@ -704,14 +706,33 @@ const PopUpMiddlePaneList = (props) => {
             }
           ]
         };
+        shareVal = 'assessee';
+      }
+      if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
+        reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          associateRoleShared: [
+            {
+              associateRoleId: selectedTagValue,
+              associateRoleGroupId: selectedTagGroupId
+            }
+          ]
+        };
+        shareVal = 'associate';
+      }
+      if (reqBody) {
         dispatch({ type: LOADER_START });
         dispatch({
-          type: ASSESSEE_ROLE_SHARE_SAGA,
+          type: SHARE_ROLES_SAGA,
           payload: {
             secondaryOptionCheckValue: '',
             headerOne: '',
             request: reqBody,
-            apiCall: dataVal
+            apiCall: dataVal,
+            shareValue: shareVal
           }
         });
       }
