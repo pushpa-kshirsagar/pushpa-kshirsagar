@@ -642,6 +642,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        isMobileState={true}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONESECONDARYPOPUP'}
@@ -654,6 +655,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        isMobileState={true}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'HOMETELEPHONEPOPUP'}

@@ -30,13 +30,17 @@ import {
   UPDATE_ASSOCIATE_WEBSITE_INFO,
   UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO,
   UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
-  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO
+  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO
 } from '../actionType';
+import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
-  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, responseObject, statusPopUpValue } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const informationContact = assesseeInfo.informationContact;
   const { coreGroupReviewListData, selectedAssociateInfo, coreRoleReviewListData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -221,6 +225,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         basicInfo={associateInfo.basicInfo}
         nextPopUpValue={popupMode === 'ASSOCIATE_SIGN_ON' ? 'WORKADDRESSPOPUP' : 'GROUPPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPPOPUP'}
@@ -238,6 +243,21 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'MANAGERPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        ListData={coreGroupReviewListData}
+        textOne={'associateGroupName'}
+        textTwo={'associateGroupDescription'}
+        onClickEvent={updateAssociateGroups}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
@@ -245,6 +265,25 @@ const PopUpSignOnAssociate = () => {
         nextPopUpValue={'NODEPOPUP'}
         inputHeader={'manager'}
         inputHeaderBadge={'primary'}
+        infoMsg={'select a manager'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'NODEPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'secondary'}
         infoMsg={'select a manager'}
         ListData={[
           { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
@@ -276,6 +315,25 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'NODESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={''}
+        inputHeader={'node'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a node'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'ROLEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
@@ -283,6 +341,25 @@ const PopUpSignOnAssociate = () => {
         nextPopUpValue={'WORKADDRESSPOPUP'}
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
+        infoMsg={'select a role'}
+        ListData={coreRoleReviewListData}
+        textOne={'associateRoleName'}
+        textTwo={'associateRoleDescription'}
+        onClickEvent={updateAssociateRoles}
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
+        isRequired={true}
+        selectedList={associateInfo?.informationAllocation?.associateRole.associateRolePrimary}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ROLESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'WORKADDRESSPOPUP'}
+        inputHeader={'role'}
+        inputHeaderBadge={'secondary'}
         infoMsg={'select a role'}
         ListData={coreRoleReviewListData}
         textOne={'associateRoleName'}
@@ -657,6 +734,88 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={''}
         mode={'cancel'}
         onClickYes={onClickCancelYes}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TAGREADONLYPRIMARYPOPUP'}
+        label={'tag'}
+        labelBadgeOne={'primary'}
+        actualLableValue={'associateTagPrimary'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        basicInfo={responseObject?.informationEngagement?.associateTag?.associateTagPrimary || ''}
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTagSecondary
+        isActive={isPopUpValue === 'TAGSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        tagSecondary={assesseeInfo.informationEngagement}
+        signInSetup={assesseeInfo.informationSetup}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_ENGAGEMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'STATUSPOPUP'}
+        tag={'associateStatus'}
+        label={'status'}
+        listSelect={[
+          { id: 'Active', name: 'Active' },
+          { id: 'Suspended', name: 'Suspended' },
+          { id: 'Terminated', name: 'Terminated' },
+          { id: 'Unverified', name: 'Unverified' },
+          { id: 'Confirmed', name: 'Confirmed' }
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        basicInfo={statusPopUpValue}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
+        handleNextPopupValue={handleNextPopupValue}
+        isNotRevised={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TENURESATRTDATEPOPUP'}
+        label={'tenure'}
+        labelBadgeOne={'start'}
+        actualLableValue={''}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        basicInfo={
+          responseObject?.informationEngagement?.associateTenureDate
+            ?.associateTenureDateTimeStart || 'mm/dd/yyyy --:-- --'
+        }
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TENUREENDDATEPOPUP'}
+        label={'tenure'}
+        labelBadgeOne={'end'}
+        actualLableValue={''}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        basicInfo={
+          responseObject?.informationEngagement?.associateTenureDate?.associateTenureDateTimeEnd ||
+          'mm/dd/yyyy --:-- --'
+        }
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
   );

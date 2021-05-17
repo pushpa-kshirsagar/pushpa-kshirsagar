@@ -148,7 +148,7 @@ const PopUpAddress = (props) => {
 
             <InputFeild
               id={objectKeys[2]}
-              label={'postcode / zip'}
+              label={'postcode'}
               value={basicInfo && basicInfo[objectKeys[2]]}
               errorMsg={zipcodeErr}
               onClick={handleChange}

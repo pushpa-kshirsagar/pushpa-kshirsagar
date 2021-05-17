@@ -37,6 +37,7 @@ import {
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeReqObj,
   getAssesseeNodeAssesseeDistinctApiCall,
+  getAssesseeNodeAssesseeReqObj,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
@@ -258,10 +259,18 @@ const PopUpMiddlePaneList = (props) => {
       }
       if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
         dispatch({ type: LOADER_START });
+        let associateNodeAssesseeReqBody = getAssesseeNodeAssesseeReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            associateNodeAssesseeReqBody,
             selectedModule: middlePaneHeader,
             isReviseMode,
             reqBody: {

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { ASSOCIATE_SIGN_ON } from '../../actionType';
+import { ASSOCIATE_SIGN_ON, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
@@ -438,35 +438,107 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   };
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'group') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'GROUPSECONDARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
     if (labelName === 'manager') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'MANAGERPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'MANAGERPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'MANAGERSECONDARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
     if (labelName === 'node') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'NODEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'NODEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'NODESECONDARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
     if (labelName === 'role') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ROLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ROLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ROLESECONDARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
   };
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    if (labelName === 'status') {
+      dispatch({
+        type: SET_STATUS_POPUP_VALUE,
+        payload: capitalizeFirstLetter(informationEngagement?.associateStatus)
+      });
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (labelName === 'tag') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+    }
+    if (labelName === 'tenure') {
+      if (selectedBadgeName === 'start') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'end') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+    }
   };
   const reviseSetup = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');

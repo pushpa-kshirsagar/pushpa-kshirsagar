@@ -78,7 +78,8 @@ export const DisplayPaneThree = () => {
     reviewMode,
     createMode,
     assesseeGroupAssessee,
-    assesseeRoleAssessee = []
+    assesseeRoleAssessee,
+    associateNodeAssessee
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { showMiddlePaneState, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -390,6 +391,10 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
+        associateNodeAssessee: {
+          associateNodeAssesseeAllocate: associateNodeAssessee.associateNodeAssesseeAllocate,
+          associateNodeAssesseeUnallocate: associateNodeAssessee.associateNodeAssesseeUnallocate
+        },
         associateNode: {
           id,
           informationBasic: nodeInformation.informationBasic,
@@ -779,6 +784,13 @@ export const DisplayPaneThree = () => {
   const reviseAssociateBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'ASSOCIATEPICTUREPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
     if (labelName === 'name') {
       dispatch({
         type: ASSOCIATE_SIGN_ON,

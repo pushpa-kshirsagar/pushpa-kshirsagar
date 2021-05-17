@@ -7,7 +7,9 @@ import {
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_STATUS_POPUP_VALUE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+  SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST
 } from '../actionType';
 
 const initialState = {
@@ -28,6 +30,10 @@ const initialState = {
   assesseeRoleAssessee: {
     assesseeRoleAssesseeAllocate: [],
     assesseeRoleAssesseeUnallocate: []
+  },
+  associateNodeAssessee: {
+    associateNodeAssesseeAllocate: [],
+    associateNodeAssesseeUnallocate: []
   },
   selectedModule: '',
   statusPopUpValue: ''
@@ -87,6 +93,22 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
         assesseeGroupAssessee: {
           ...istate.assesseeGroupAssessee,
           assesseeGroupAssesseeUnallocate: action.payload
+        }
+      };
+    case SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST:
+      return {
+        ...istate,
+        associateNodeAssessee: {
+          ...istate.associateNodeAssessee,
+          associateNodeAssesseeAllocate: action.payload
+        }
+      };
+    case SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST:
+      return {
+        ...istate,
+        associateNodeAssessee: {
+          ...istate.associateNodeAssessee,
+          associateNodeAssesseeUnallocate: action.payload
         }
       };
     case SET_STATUS_POPUP_VALUE:

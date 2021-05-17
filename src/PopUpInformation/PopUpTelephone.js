@@ -26,7 +26,7 @@ const PopUpTelephone = (props) => {
     nextPopUpValue,
     basicInfo,
     typeOfSetObject,
-    isMobileState = true,
+    isMobileState = false,
     isRequired = false,
     mode
   } = props;

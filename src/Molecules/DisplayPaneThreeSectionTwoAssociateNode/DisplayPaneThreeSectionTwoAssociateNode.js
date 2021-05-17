@@ -58,8 +58,6 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     }
     if (
       informationFramework.associateNodeAscendant.associateNodeAscendantPrimary &&
-      typeof informationFramework.associateNodeAscendant.associateNodeAscendantPrimary !==
-        'string' &&
       informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.length > 0
     ) {
       informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.forEach((ob) => {
@@ -133,6 +131,21 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       );
     }
   }
+  let assessee = [];
+  if (relatedReviewListPaneThree && relatedReviewListPaneThree.length > 0) {
+    assessee = relatedReviewListPaneThree[0].assessee;
+  }
+
+  const assesseeNodeList = [];
+  assessee.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    assesseeNodeList.push({
+      id,
+      textOne: `${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`,
+      textTwo: informationBasic.assesseeAlias || 'No Information',
+      status: ''
+    });
+  });
 
   const allModuleList = [
     {
@@ -145,7 +158,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: assesseeNodeList
         }
       ],
       innerInfo: 'No Information',
@@ -276,7 +289,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: assesseeNodeList
         }
       ],
       innerInfo: 'No Information',
@@ -532,9 +545,9 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       );
       let revisedRoleObject = {
         id: responseObject.id,
-        assesseeRoleName: responseObject.informationBasic.assesseeRoleName,
-        assesseeRoleDescription: responseObject.informationBasic.assesseeRoleDescription,
-        assesseeRoleStatus: responseObject.informationEngagement.assesseeRoleStatus
+        associateNodeName: responseObject.informationBasic.associateNodeName,
+        associateNodeDescription: responseObject.informationBasic.associateNodeDescription,
+        associateNodeStatus: responseObject.informationEngagement.associateNodeStatus
       };
       let existingAssesseeId =
         relatedReviewListPaneThree &&
