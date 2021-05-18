@@ -81,37 +81,35 @@ const PopUpPicture = (props) => {
           </div>
           <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}></FormHelperText>
 
-          {headerOne !== 'signature' && (
-            <div className={'fitContent'}>
-              <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
-                <div className={'contFlex'}>
-                  <div
-                    className={'f4'}
-                    style={{
-                      color:
-                        popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
-                          ? 'dimgray'
-                          : ''
-                    }}
-                  >
-                    verification
-                  </div>
-                  <div className={'checkedFontNew'}>
-                    <Checkbox
-                      className={''}
-                      color="default"
-                      disableRipple={true}
-                      disabled={
-                        popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
-                          ? true
-                          : false
-                      }
-                    />
-                  </div>
+          <div className={'fitContent'}>
+            <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
+              <div className={'contFlex'}>
+                <div
+                  className={'f4'}
+                  style={{
+                    color:
+                      popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                        ? 'dimgray'
+                        : ''
+                  }}
+                >
+                  verification
+                </div>
+                <div className={'checkedFontNew'}>
+                  <Checkbox
+                    className={''}
+                    color="default"
+                    disableRipple={true}
+                    disabled={
+                      popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSOCIATE_SIGN_ON'
+                        ? true
+                        : false
+                    }
+                  />
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </DialogContent>
       </Popup>
     </div>

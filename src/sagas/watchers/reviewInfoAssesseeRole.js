@@ -40,7 +40,7 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
           type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
           payload: {
             request: assesseeRoleAssesseeReqBody,
-            HeaderOne: 'assessees',
+            HeaderOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
             BadgeOne: '',
             BadgeTwo: '',
             BadgeThree: '',
@@ -96,13 +96,13 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      console.log('IN ROLE REVIEW+++++', userResponse);
+      console.log('IN ROLE REVIEW+++++', userResponse,  Store.getState().DisplayPaneTwoReducer.middlePaneHeader);
       if (data.payload.assesseeRoleAssesseeReqBody !== null) {
         yield put({
           type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
           payload: {
             request: data.payload.assesseeRoleAssesseeReqBody,
-            HeaderOne: 'assessees',
+            HeaderOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
             BadgeOne: '',
             BadgeTwo: '',
             BadgeThree: '',
@@ -113,7 +113,7 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessees',
+          headerOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',

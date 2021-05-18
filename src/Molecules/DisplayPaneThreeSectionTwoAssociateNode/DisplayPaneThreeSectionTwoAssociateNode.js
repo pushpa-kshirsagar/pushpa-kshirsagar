@@ -8,15 +8,22 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 import {
   FILTERMODE,
+  GET_ALLOCATE_ASSESSEE,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   RELATED_REVIEWLIST_DISTINCT_DATA,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT,
   SET_POPUP_VALUE
 } from '../../actionType';
 import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
-import { makeInternalNodeObj } from '../../Actions/GenericActions';
+import {
+  makeAssesseeReviewListRequestObject,
+  makeInternalNodeObj
+} from '../../Actions/GenericActions';
 import { getAssesseeNodeAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionTwoAssociateNode = () => {
@@ -51,8 +58,6 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     }
     if (
       informationFramework.associateNodeAscendant.associateNodeAscendantPrimary &&
-      typeof informationFramework.associateNodeAscendant.associateNodeAscendantPrimary !==
-        'string' &&
       informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.length > 0
     ) {
       informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.forEach((ob) => {
@@ -126,6 +131,21 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       );
     }
   }
+  let assessee = [];
+  if (relatedReviewListPaneThree && relatedReviewListPaneThree.length > 0) {
+    assessee = relatedReviewListPaneThree[0].assessee;
+  }
+
+  const assesseeNodeList = [];
+  assessee.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    assesseeNodeList.push({
+      id,
+      textOne: `${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`,
+      textTwo: informationBasic.assesseeAlias || 'No Information',
+      status: ''
+    });
+  });
 
   const allModuleList = [
     {
@@ -138,7 +158,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: assesseeNodeList
         }
       ],
       innerInfo: 'No Information',
@@ -269,7 +289,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: assesseeNodeList
         }
       ],
       innerInfo: 'No Information',
@@ -515,6 +535,48 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         payload: { isPopUpValue: 'PARENTLISTPOPUP', popupMode: 'NODECREATE' }
       });
     }
+    if (labelName === 'assessee') {
+      console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+      let requestObect = makeAssesseeReviewListRequestObject(
+        selectedAssociateInfo,
+        'active',
+        0,
+        countPage
+      );
+      let revisedRoleObject = {
+        id: responseObject.id,
+        associateNodeName: responseObject.informationBasic.associateNodeName,
+        associateNodeDescription: responseObject.informationBasic.associateNodeDescription,
+        associateNodeStatus: responseObject.informationEngagement.associateNodeStatus
+      };
+      let existingAssesseeId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0]?.assessee &&
+        relatedReviewListPaneThree[0].assessee.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeNodeAssesseeRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSESSEE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedRoleObject,
+          existingAssesseeId: existingAssesseeId,
+          typeOfMiddlePaneList: 'assesseesNodeAssesseeReviewList'
+        }
+      });
+    }
   };
   const reviewNode = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
@@ -522,13 +584,14 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
     console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
     if (labelName === 'assessee') {
+      console.log('IN ASSSESSEE ');
       getAssesseeNodeAssesseeDistinctApiCall(
         selectedAssociateInfo,
         'active',
         countPage,
         dispatch,
         'distinct',
-        selectedTagValue,
+        responseObject.id,
         '',
         false,
         'assessees'
@@ -539,6 +602,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       });
     }
   };
+
   return (
     <div
       style={{
@@ -562,11 +626,22 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
                           mode={reviewMode}
                         />
                       ) : (
-                        <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                        <AccordianListCard
+                          onClickReview={reviewNode}
+                          onClickRevise={reviseNode}
+                          className=""
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
                       )}
                     </>
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickReview={reviewNode}
+                      onClickRevise={reviseNode}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

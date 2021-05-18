@@ -562,7 +562,8 @@ export const makeManagerRoleCreateObj = (
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary: localStorage.getItem('parentId'),
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -612,7 +613,8 @@ export const makeAdministratorRoleCreateObj = (
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary: localStorage.getItem('parentId'),
+      associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     countPage: countPage,
     numberPage: numberPage,
     filter: 'true',
@@ -668,7 +670,8 @@ export const makeAssesseeRoleObj = (selectedAssociateInfo, filterKey, numberPage
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
-    associateAscendantPrimary: localStorage.getItem('parentId'),
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
@@ -711,7 +714,8 @@ export const makeAssociateRoleObj = (selectedAssociateInfo, filterKey, numberPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary: localStorage.getItem('parentId'),
+      associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.associateRoleName',

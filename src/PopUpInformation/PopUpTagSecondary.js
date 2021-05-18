@@ -7,7 +7,7 @@ import InputFeild from '../Atoms/InputField/InputField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
+import { POPUP_CLOSE, SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 
 const PopUpTagSecondary = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +22,8 @@ const PopUpTagSecondary = (props) => {
     tagSecondary,
     checkboxValue = 'tag (secondary)',
     typeOfSetObject,
-    signInSetup
+    signInSetup,
+    mode
   } = props;
   const { popupMode } = useSelector((state) => state.PopUpReducer);
 
@@ -49,10 +50,14 @@ const PopUpTagSecondary = (props) => {
   };
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
-    if (signInSetup.assesseeSignIn === '') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTSIGNIN' } });
+    if (mode === 'revise') {
+      dispatch({ type: POPUP_CLOSE });
     } else {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
+      if (signInSetup.assesseeSignIn === '') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'FORCETOSELECTSIGNIN' } });
+      } else {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
+      }
     }
   };
   return (
@@ -63,6 +68,7 @@ const PopUpTagSecondary = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
           onClick={handleClick}
+          mode={mode}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

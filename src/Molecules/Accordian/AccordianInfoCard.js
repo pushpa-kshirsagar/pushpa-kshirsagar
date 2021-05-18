@@ -4,7 +4,7 @@ import { IconButton } from '@material-ui/core';
 import './Accordian.css';
 
 const AccordianInfoCard = (props) => {
-  const { mode = '', accordianObject, onClickRevise } = props;
+  const { mode = '', accordianObject, onClickRevise, onClickReview } = props;
   const {
     labelTextOneOne = '',
     labelTextOneOneBadges = [],
@@ -102,7 +102,15 @@ const AccordianInfoCard = (props) => {
           <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
             {IconOne && (
               <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
-                <IconButton>
+                <IconButton
+                  onClick={
+                    mode === 'revise'
+                      ? () => {}
+                      : () => {
+                          onClickReview(labelTextOneOne, selectedBadge?.labelTextOneOneBadge || '');
+                        }
+                  }
+                >
                   <IconOne />
                 </IconButton>
               </div>

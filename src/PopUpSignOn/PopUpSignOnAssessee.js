@@ -56,7 +56,9 @@ const PopUpSignOnAssessee = (props) => {
     coreRoleReviewListData,
     coreNodeReviewListData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { reviewMode, statusPopUpValue = '' } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, statusPopUpValue = '', responseObject } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const informationContact = assesseeInfo.informationContact;
   console.log('============>', assesseeInfo);
   const [roleSelectedError, setRoleSelectedError] = useState('');
@@ -374,6 +376,54 @@ const PopUpSignOnAssessee = (props) => {
         typeOfSetObject={UPDATE_ASSESSEE_TAG_STATUTORY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TAGREADONLYPRIMARYPOPUP'}
+        label={'tag'}
+        labelBadgeOne={'primary'}
+        actualLableValue={'assesseeTagPrimary'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={responseObject?.informationEngagement?.assesseeTag?.assesseeTagPrimary || ''}
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TENURESATRTDATEPOPUP'}
+        label={'tenure'}
+        labelBadgeOne={'start'}
+        actualLableValue={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={
+          responseObject?.informationEngagement?.assesseeTenure?.assesseeTenureDateTimeStart ||
+          'mm/dd/yyyy --:-- --'
+        }
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TENUREENDDATEPOPUP'}
+        label={'tenure'}
+        labelBadgeOne={'end'}
+        actualLableValue={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={
+          responseObject?.informationEngagement?.assesseeTenure?.assesseeTenureDateTimeEnd ||
+          'mm/dd/yyyy --:-- --'
+        }
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
         headerPanelColour={'genericOne'}
@@ -381,13 +431,14 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         // nextPopUpValue={popupMode === 'ASSESSEE_SIGN_ON' ? 'EMAILPOPUP' :'ROLELISTPOPUP'}
         handleNextPopupValue={handleNextPopupValue}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'SIGNATUREPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'signature'}
         headerOneBadgeOne={''}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        mode={'revise'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPLISTPOPUP'}
@@ -591,6 +642,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        isMobileState={true}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'MOBILETELEPHONESECONDARYPOPUP'}
@@ -603,6 +655,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        isMobileState={true}
       />
       <PopUpTelephone
         isActive={isPopUpValue === 'HOMETELEPHONEPOPUP'}
@@ -669,7 +722,7 @@ const PopUpSignOnAssessee = (props) => {
           { id: 'Suspended', name: 'Suspended' },
           { id: 'Terminated', name: 'Terminated' },
           { id: 'Unverified', name: 'Unverified' },
-          { id: 'Confirmed', name: 'Confirmed' },
+          { id: 'Confirmed', name: 'Confirmed' }
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}
@@ -692,6 +745,7 @@ const PopUpSignOnAssessee = (props) => {
         // nextPopUpValue={'CONFIRMATIONPOPUP'}
         handleNextPopupValue={handleNextPopupValue}
         typeOfSetObject={UPDATE_ASSESSEE_SETUP_PRIMARY_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTagSecondary
         isActive={isPopUpValue === 'TAGSECONDARYPOPUP'}
@@ -702,6 +756,7 @@ const PopUpSignOnAssessee = (props) => {
         signInSetup={assesseeInfo.informationSetup}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_ENGAGEMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpCheckbox
         isActive={isPopUpValue === 'FORCETOSELECTSIGNIN'}
@@ -716,6 +771,7 @@ const PopUpSignOnAssessee = (props) => {
         ]}
         forceToSelect="signIn"
         typeOfSetObject={UPDATE_ASSESSEE_SETUP_PRIMARY_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}
@@ -854,7 +910,7 @@ const PopUpSignOnAssessee = (props) => {
         headerOne="fingerprint"
         headerOneBadgeOne="left hand"
         headerOneBadgeTwo=""
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        mode={'revise'}
       />
       <PopUpFingerprint
         isActive={isPopUpValue === 'RIGHTFINGERPRINTPOPUP'}
@@ -862,7 +918,7 @@ const PopUpSignOnAssessee = (props) => {
         headerOne="fingerprint"
         headerOneBadgeOne="right hand"
         headerOneBadgeTwo=""
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        mode={'revise'}
       />
     </div>
   );

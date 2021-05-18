@@ -1,6 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSESSEE_NODE_INFO_REVISE_SAGA,
+  GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
   LOADER_STOP,
   SET_DISPLAY_PANE_THREE_STATE,
@@ -30,7 +31,21 @@ function* workerReviewAssociateNodeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN Node REVIEW+++++', userResponse);
-      const { isReviseMode = false, selectedModule } = data.payload;
+      const { isReviseMode = false, selectedModule, associateNodeAssesseeReqBody } = data.payload;
+      if(associateNodeAssesseeReqBody){
+        yield put({
+          type: GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
+          payload: {
+            request: associateNodeAssesseeReqBody,
+            HeaderOne: selectedModule,
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
+
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -51,7 +66,7 @@ function* workerReviewAssociateNodeInfoSaga(data) {
       }
     }
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

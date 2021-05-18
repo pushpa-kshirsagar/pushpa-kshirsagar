@@ -12,7 +12,8 @@ export const AllocationAccordian = (props) => {
     setListExpand,
     list = [],
     mode = '',
-    onClickRevise
+    onClickRevise,
+    onClickReview
   } = props;
 
   return (
@@ -33,11 +34,21 @@ export const AllocationAccordian = (props) => {
                     mode={mode}
                   />
                 ) : (
-                  <AccordianListCard className="" accordianObject={ob} mode={onClickRevise} />
+                  <AccordianListCard
+                    className=""
+                    onClickRevise={onClickRevise}
+                    accordianObject={ob}
+                    mode={mode}
+                  />
                 )}
               </>
             ) : (
-              <AccordianInfoCard accordianObject={ob} mode={onClickRevise} />
+              <AccordianInfoCard
+                onClickReview={onClickReview}
+                onClickRevise={onClickRevise}
+                accordianObject={ob}
+                mode={mode}
+              />
             )}
           </div>
         );

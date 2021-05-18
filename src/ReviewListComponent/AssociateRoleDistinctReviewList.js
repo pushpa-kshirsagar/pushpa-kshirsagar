@@ -111,7 +111,9 @@ const AssociateRoleDistinctReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status'),
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
       }
     });
     dispatch({
@@ -123,7 +125,8 @@ const AssociateRoleDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-
+  const associateSeftId =
+    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
     <div>
       {reviewListDistinctData &&
@@ -135,7 +138,10 @@ const AssociateRoleDistinctReviewList = (props) => {
                 id={index}
                 tag={item.informationEngagement.associateRoleTag}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.associateRoleStatus}
+                // status={item.informationEngagement.associateRoleStatus}
+                dataValue={item.informationAllocation.associateRoleGroup}
+                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                actualStatus={item.associateRoleShared ? 'SHARED' : 'UNSHARED'}
                 textOne={item.informationBasic.associateRoleName}
                 textTwo={item.informationBasic.associateRoleDescription}
                 isTooltipActive={false}
