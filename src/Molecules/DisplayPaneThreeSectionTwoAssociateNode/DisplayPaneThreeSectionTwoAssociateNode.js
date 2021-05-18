@@ -157,8 +157,12 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
           innerList: assesseeNodeList
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -174,7 +178,11 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
           innerList: []
         }
       ],
@@ -191,7 +199,11 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
           innerList: []
         }
       ],
@@ -208,7 +220,32 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'iGuru analytic',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
           innerList: []
         }
       ],
@@ -288,8 +325,12 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
           innerList: assesseeNodeList
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
@@ -351,7 +392,11 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
           innerList: []
         }
       ],
@@ -431,7 +476,11 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
           innerList: []
         }
       ],

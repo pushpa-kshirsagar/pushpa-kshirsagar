@@ -502,6 +502,7 @@ export const DisplayPaneThree = () => {
     } else if (headerOneBadgeOne === 'information' && headerOne === 'associate') {
       const { informationBasic, informationContact, informationSetup } = associateInfo;
       const { id } = responseObject;
+      console.log('NODE INFO', nodeInformation);
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId: id,
@@ -509,9 +510,16 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic,
           // informationContact,
-          informationSetup
+          informationSetup,
+          informationFramework: {
+            iguruNodeAscendant: {
+              iguruNodeAscendantPrimary:
+                associateInfo.informationFramework.iguruNodeAscendant.iguruNodeAscendantPrimary[0]
+            }
+          }
         }
       };
+      console.log(JSON.stringify(reqBody));
       dispatch({ type: LOADER_START });
       dispatch({
         type: ASSOCIATE_INFO_REVISE_SAGA,

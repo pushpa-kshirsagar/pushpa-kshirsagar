@@ -85,6 +85,44 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
       isListCard: false
     }
   ];
+  const setUpList = [
+    {
+      id: 'a2',
+      labelTextOneOne: 'permission',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: '',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: '',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: '',
+              status: 'active'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    }
+  ];
 
   return (
     <div
@@ -94,9 +132,24 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
       }}
     >
       <>
-        <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+        <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list3.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                  ) : (
+                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+        </div>
+        <div className={'containerPadding'}>
+          <Paper className={'dossierContainerTop'}>
+            {setUpList.map((ob) => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (

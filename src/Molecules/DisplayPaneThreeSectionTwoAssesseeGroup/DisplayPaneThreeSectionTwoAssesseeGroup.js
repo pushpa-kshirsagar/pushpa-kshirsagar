@@ -61,7 +61,7 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
           innerList: assesseeArray
         }
       ],

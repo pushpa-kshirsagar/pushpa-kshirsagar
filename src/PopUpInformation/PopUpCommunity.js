@@ -87,7 +87,7 @@ const PopUpCommunity = (props) => {
             />
             <SelectField
               tag={objectKeys[1]}
-              label={'social community'}
+              label={`${primaryheader} community`}
               listSelect={[
                 { stateCode: '01', name: 'Other Backward Class' },
                 { stateCode: '02', name: 'Scheduled Class' },

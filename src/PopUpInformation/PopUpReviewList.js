@@ -62,9 +62,9 @@ const PopUpReviewList = (props) => {
       }
     }
   };
-  console.log('props', props);
-  console.log('inputHeader', inputHeader);
-  console.log('textOne', textOne);
+  // console.log('props', props);
+  // console.log('inputHeader', inputHeader);
+  // console.log('textOne', textOne);
   return (
     <div>
       <PopUp isActive={isActive}>

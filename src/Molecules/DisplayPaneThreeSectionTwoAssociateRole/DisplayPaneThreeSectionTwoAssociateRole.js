@@ -68,7 +68,7 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
           innerList: associateArray
         }
       ],

@@ -96,28 +96,32 @@ const PopUpTextField = (props) => {
               labelBadgeOne={labelBadgeOne}
             />
           </FormControl>
-          {label === 'name' && (
-            <div className={'fitContent'}>
-              <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
-                <div className={'contFlex'}>
-                  <div
-                    className={'f4'}
-                    style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
-                  >
-                    verification
-                  </div>
-                  <div className={'checkedFontNew'}>
-                    <Checkbox
-                      className={''}
-                      color="default"
-                      disableRipple={true}
-                      disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
-                    />
+          {label === 'name' ||
+            (labelBadgeOne === 'statutory' && (
+              <div className={'fitContent'}>
+                <div
+                  className={['PopupFormBox', 'popupMinHei0'].join(' ')}
+                  style={{ minHeight: 0 }}
+                >
+                  <div className={'contFlex'}>
+                    <div
+                      className={'f4'}
+                      style={{ color: popupMode === 'ASSOCIATE_SIGN_ON' ? 'dimgray' : '' }}
+                    >
+                      verification
+                    </div>
+                    <div className={'checkedFontNew'}>
+                      <Checkbox
+                        className={''}
+                        color="default"
+                        disableRipple={true}
+                        disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            ))}
         </DialogContent>
       </Popup>
     </div>

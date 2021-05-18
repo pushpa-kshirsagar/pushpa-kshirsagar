@@ -288,44 +288,244 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   const setUpListAll = [
     {
       id: 'a1',
-      labelTextOneOne: 'date',
-      textOneOne: informationSetup?.associate?.associateDateFormat || 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
+      labelTextOneOne: 'assessee',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'enrolment',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'approval',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'information',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'group',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'role',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'name',
+              innerList: []
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
     },
     {
       id: 'a2',
-      labelTextOneOne: 'dictionary',
-      textOneOne: informationSetup?.associate?.associateDictionary || 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
+      labelTextOneOne: 'assessment',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'information',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'group',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'type',
+              innerList: []
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
     },
     {
       id: 'a3',
-      labelTextOneOne: 'language',
-      textOneOne: informationSetup?.associate?.associateLanguage || 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
+      labelTextOneOne: 'assignment',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'information',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'group',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'type',
+              innerList: []
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
     },
     {
       id: 'a4',
-      labelTextOneOne: 'people',
-      textOneOne: informationSetup?.assessee?.assesseeNameFormat || 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
+      labelTextOneOne: 'associate',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'enrolment',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'approval',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'information',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'group',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'node',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'role',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'permission',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'node',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'date',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'language',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'time',
+              innerList: []
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
     },
     {
       id: 'a5',
-      labelTextOneOne: 'time',
-      textOneOne: informationSetup?.associate?.associateTimeFormat || 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
+      labelTextOneOne: 'iGuru analytic',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'core information',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'group',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'type',
+              innerList: []
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
     }
+    // {
+    //   id: 'a1',
+    //   labelTextOneOne: 'date',
+    //   textOneOne: informationSetup?.associate?.associateDateFormat || 'No Information',
+    //   innerAssociateList: [],
+    //   innerInfo: 'assessees',
+    //   isListCard: false
+    // },
+    // {
+    //   id: 'a2',
+    //   labelTextOneOne: 'dictionary',
+    //   textOneOne: informationSetup?.associate?.associateDictionary || 'No Information',
+    //   innerAssociateList: [],
+    //   innerInfo: 'assessees',
+    //   isListCard: false
+    // },
+    // {
+    //   id: 'a3',
+    //   labelTextOneOne: 'language',
+    //   textOneOne: informationSetup?.associate?.associateLanguage || 'No Information',
+    //   innerAssociateList: [],
+    //   innerInfo: 'assessees',
+    //   isListCard: false
+    // },
+    // {
+    //   id: 'a4',
+    //   labelTextOneOne: 'people',
+    //   textOneOne: informationSetup?.assessee?.assesseeNameFormat || 'No Information',
+    //   innerAssociateList: [],
+    //   innerInfo: 'assessees',
+    //   isListCard: false
+    // },
+    // {
+    //   id: 'a5',
+    //   labelTextOneOne: 'time',
+    //   textOneOne: informationSetup?.associate?.associateTimeFormat || 'No Information',
+    //   innerAssociateList: [],
+    //   innerInfo: 'assessees',
+    //   isListCard: false
+    // }
   ];
   const allianceListKey = [
     {

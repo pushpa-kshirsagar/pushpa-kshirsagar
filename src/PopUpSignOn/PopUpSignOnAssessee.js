@@ -693,6 +693,18 @@ const PopUpSignOnAssessee = (props) => {
         typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_WORK_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+      <PopUpTelephone
+        isActive={isPopUpValue === 'WORKTELEPHONESECONDARPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        inputHeader={'work telephone'}
+        primaryheader={'secondary'}
+        basicInfo={informationContact.assesseeTelephoneWorkSecondary}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_WORK_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
       <PopUpDropList
         isActive={isPopUpValue === 'SINGLEDROPDOWNPOPUP'}
         tag={'assesseeGender'}
@@ -848,7 +860,7 @@ const PopUpSignOnAssessee = (props) => {
         headerOne="assessees"
         headerOneBadgeOne="information"
         valueState="tenurestart"
-        isVerification={false}
+        isVerification={true}
         basicInfo={assesseeInfo.informationPersonal}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

@@ -31,7 +31,8 @@ import {
   UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO,
   UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
-  UPDATE_ASSESSEE_ENGAGEMENT_INFO
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
+  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 const PopUpSignOnAssociate = () => {
@@ -42,9 +43,12 @@ const PopUpSignOnAssociate = () => {
     (state) => state.DisplayPaneThreeReducer
   );
   const informationContact = assesseeInfo.informationContact;
-  const { coreGroupReviewListData, selectedAssociateInfo, coreRoleReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    coreGroupReviewListData,
+    selectedAssociateInfo,
+    coreRoleReviewListData,
+    coreNodeReviewListData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const history = useHistory();
   console.log(associateInfo);
@@ -190,6 +194,33 @@ const PopUpSignOnAssociate = () => {
       }
     });
   };
+  const updateParentNode = (e) => {
+    console.log(e.currentTarget.getAttribute('tag'));
+    let tagId = e.currentTarget.getAttribute('tag');
+    let tagIdArr = associateInfo.informationFramework.iguruNodeAscendant.iguruNodeAscendantPrimary;
+    if (tagIdArr.includes(tagId)) {
+      setRoleSelectedError('');
+      document.getElementById(tagId).style.backgroundColor = 'white';
+      tagIdArr = tagIdArr.filter(function (number) {
+        return number !== tagId;
+      });
+    } else {
+      var arr = [];
+      tagIdArr = [...arr];
+      tagIdArr.push(tagId);
+      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationFramework',
+        stateName: 'iguruNodeAscendant',
+        actualStateName: 'iguruNodeAscendantPrimary',
+        value: tagIdArr
+      }
+    });
+  };
+  console.log('INFO+++++', coreNodeReviewListData);
   return (
     <div>
       <PopUpTextField
@@ -369,6 +400,28 @@ const PopUpSignOnAssociate = () => {
         errorMsg={roleSelectedError}
         isRequired={true}
         selectedList={associateInfo?.informationAllocation?.associateRole.associateRolePrimary}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ASSOCIATESPARENTLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'ascendant'}
+        inputHeaderBadgeTwo={'primary'}
+        infoMsg={'select a node'}
+        ListData={coreNodeReviewListData[0]}
+        isRequired={true}
+        selectedList={
+          associateInfo.informationFramework.iguruNodeAscendant.iguruNodeAscendantPrimary
+        }
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
+        textOne={'associateName'}
+        textTwo={'associateDescription'}
+        onClickEvent={updateParentNode}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddress

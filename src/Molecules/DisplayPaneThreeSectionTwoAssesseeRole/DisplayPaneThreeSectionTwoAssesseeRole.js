@@ -67,44 +67,8 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
           innerList: assesseeArray
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true
-    },
-    {
-      id: 'a2',
-      labelTextOneOne: 'permission',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: '',
-              status: 'active'
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: '',
-              status: 'active'
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: '',
-              status: 'active'
-            }
-          ]
         }
       ],
       innerInfo: 'No Information',

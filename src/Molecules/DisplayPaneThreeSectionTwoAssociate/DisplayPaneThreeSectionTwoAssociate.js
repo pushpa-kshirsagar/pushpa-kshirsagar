@@ -6,13 +6,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
-import { ASSOCIATE_SIGN_ON } from '../../actionType';
+import {
+  ASSOCIATE_SIGN_ON,
+  GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
+  INTERNAL_NODE_LIST_SAGA,
+  LOADER_START,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_POPUP_VALUE
+} from '../../actionType';
 import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
+import { makeAssociateNodeObj, makeInternalNodeObj } from '../../Actions/GenericActions';
+import { getAssociateNodeApiCall } from '../../Actions/AssociateModuleAction';
 
 const DisplayPaneThreeSectionTwoAssociate = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
+  );
+  const { countPage, selectedAssociateInfo, selectedTagValue } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
   );
   const dispatch = useDispatch();
   const { informationContact, informationCredential } = responseObject;
@@ -128,7 +140,6 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
     }
   ];
   const list3 = [
-    ,
     {
       id: 'a1',
       labelTextOneOne: 'associate',
@@ -138,48 +149,15 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: []
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: []
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'ascendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: []
             }
           ]
         },
@@ -188,48 +166,15 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'all',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'all',
-                  status: ''
-                }
-              ]
+              innerList: []
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'primary',
-                  status: ''
-                }
-              ]
+              innerList: []
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: [
-                {
-                  id: 'associate1',
-                  textOne: 'descendant1',
-                  textTwo: 'secondary',
-                  status: ''
-                },
-                {
-                  id: 'associate1',
-                  textOne: 'descendant2',
-                  textTwo: 'secondary',
-                  status: ''
-                }
-              ]
+              innerList: []
             }
           ]
         }
@@ -301,7 +246,26 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
   };
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('=====>', labelName);
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
+    console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
+    if (
+      labelName === 'associate' &&
+      selectedBadgeName === 'ascendant' &&
+      innerSelectedBadgeName === 'primary'
+    ) {
+      let requestObj = makeAssociateNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
+        payload: { request: requestObj, nodeViewState: 'list', isMiddlePaneList: false }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ASSOCIATESPARENTLISTPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
   };
 
   return (

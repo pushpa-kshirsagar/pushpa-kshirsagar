@@ -190,13 +190,13 @@ const DisplayPaneThreeSectionTwo = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationContact.assesseeTelephoneHomePrimary?.assesseeTelephoneAreaCity ||
+            informationContact.assesseeTelephoneHomePrimary?.assesseeTelephoneNumber ||
             'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
           textOne:
-            informationContact.assesseeTelephoneHomeSecondary?.assesseeTelephoneAreaCity ||
+            informationContact.assesseeTelephoneHomeSecondary?.assesseeTelephoneNumber ||
             'No Information'
         }
       ],
@@ -252,6 +252,31 @@ const DisplayPaneThreeSectionTwo = () => {
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: MailOutline,
+      IconTwo: () => {
+        return <img src={Unverified} alt="Unverified" />;
+      }
+    },
+    {
+      id: 'a3',
+      labelTextOneOne: 'work telephone',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          textOne:
+            informationContact.assesseeTelephoneWorkPrimary?.assesseeTelephoneNumber ||
+            'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          textOne:
+            informationContact.assesseeTelephoneWorkPrimary?.assesseeTelephoneNumber ||
+            'No Information'
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: TelephoneVerified,
       IconTwo: () => {
         return <img src={Unverified} alt="Unverified" />;
       }
@@ -489,6 +514,20 @@ const DisplayPaneThreeSectionTwo = () => {
         dispatch({
           type: ASSESSEE_SIGN_ON,
           payload: { isPopUpValue: 'HOMETELEPHONESECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+    }
+    if (labelName === 'work telephone') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'WORKTELEPHONEPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'WORKTELEPHONESECONDARPOPUP', popupMode: 'ASSESSEE_CREATE' }
         });
       }
     }

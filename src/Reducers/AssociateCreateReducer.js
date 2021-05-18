@@ -21,7 +21,8 @@ import {
   UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
   UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO,
   UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
-  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO
+  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -131,7 +132,18 @@ const initialState = {
       associateTimeFormat: ''
     }
   },
-
+  informationFramework: {
+    iguruNodeAscendant: {
+      iguruNodeAscendantPrimary: [],
+      iguruNodeAscendantSecondary: [],
+      iguruNodeAscendantAll: []
+    },
+    iguruNodeDescendant: {
+      iguruNodeDescendantPrimary: [],
+      iguruNodeDescendantSecondary: [],
+      iguruNodeDescendantAll: []
+    }
+  },
   // informationSetup: {
   //   associateDateFormat: '',
   //   associateDictionary: '',
@@ -394,6 +406,20 @@ const AssociateCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         associateInfomationData: action.payload
+      };
+    case SET_IGURU_NODE_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        // nodeInformation:{
+        // ...istate.nodeInformation,
+        [action.payload.objectName]: {
+          ...istate[action.payload.objectName],
+          [action.payload.stateName]: {
+            ...istate[action.payload.objectName][action.payload.stateName],
+            [action.payload.actualStateName]: action.payload.value
+          }
+        }
+        // }
       };
     case CLEAR_ASSOCIATE_INFO:
       return initialState;

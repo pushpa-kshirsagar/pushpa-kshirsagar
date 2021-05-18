@@ -52,13 +52,13 @@ function* workerReviewAssociatesNodeListSaga(data) {
             showMiddlePaneState: true
           }
         });
-        yield put({
-          type: data.payload.isMiddlePaneList
-            ? REVIEWLIST_DISTINCT_DATA
-            : SET_CORE_NODE_REVIEW_LIST_DATA,
-          payload: userResponse.responseObject
-        });
       }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_NODE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
