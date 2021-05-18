@@ -66,6 +66,37 @@ const PopUpAssesseesModule = (props) => {
       payload: e.currentTarget.getAttribute('data-value')
     });
   };
+  const resetDataFunction = () => {
+    dispatch({
+      type: SET_POPUP_SINGLE_STATE,
+      payload: { stateName: 'cardValue', value: 'NoCard' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: '' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedFlagedArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'unselectedFlagedArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedTagsArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'unselectedTagsArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'flagedValue', value: '' }
+    });
+    dispatch({ type: ASSESSEE_INFO_CREATE });
+  };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
 
@@ -162,15 +193,7 @@ const PopUpAssesseesModule = (props) => {
         dispatch,
         targetValue
       );
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: { stateName: 'cardValue', value: 'NoCard' }
-      });
-      dispatch({ type: ASSESSEE_INFO_CREATE });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'middlePaneSelectedValue', value: '' }
-      });
+      resetDataFunction();
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
       getAssesseeRoleDistinctApiCall(
@@ -180,15 +203,7 @@ const PopUpAssesseesModule = (props) => {
         targetValue,
         dispatch
       );
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: { stateName: 'cardValue', value: 'NoCard' }
-      });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'middlePaneSelectedValue', value: '' }
-      });
-      dispatch({ type: ASSESSEE_INFO_CREATE });
+      resetDataFunction();
     } else if (targetValue === 'groups') {
       getAssesseeGroupDistinctApiCall(
         selectedAssociateInfo,
@@ -197,21 +212,8 @@ const PopUpAssesseesModule = (props) => {
         dispatch,
         targetValue
       );
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: { stateName: 'cardValue', value: 'NoCard' }
-      });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'middlePaneSelectedValue', value: '' }
-      });
-      dispatch({ type: ASSESSEE_INFO_CREATE });
+      resetDataFunction();
     } else if (targetValue === 'nodes') {
-      dispatch({ type: ASSESSEE_INFO_CREATE });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'middlePaneSelectedValue', value: '' }
-      });
       getInternalNodeApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
@@ -222,6 +224,7 @@ const PopUpAssesseesModule = (props) => {
         'hierarchy',
         'assessees'
       );
+      resetDataFunction();
     } else {
       dispatch({
         type: SET_ASSESSEE_NEXT_POPUP,

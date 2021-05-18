@@ -17,7 +17,13 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
 import { ASSESSEE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import Check from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import {
+  onClickCheckBoxSelection,
+  onClickFlagSelection,
+  setFlagedArray
+} from '../Actions/AssesseeModuleAction';
 const AssesseeDistinctReviewList = (props) => {
   const { popupAllClose } = props;
   const dispatch = useDispatch();
@@ -35,7 +41,10 @@ const AssesseeDistinctReviewList = (props) => {
     selectedAssociateInfo,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    unselectedTagsArray,
+    selectedFlagedArray,
+    unselectedFlagedArray,
+    flagedValue
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -75,6 +84,10 @@ const AssesseeDistinctReviewList = (props) => {
     if (!isFetching) return;
     fetchMoreListItems();
   }, [isFetching]);
+
+  useEffect(() => {
+    setFlagedArray(reviewListDistinctData, 'assesseeFlag', dispatch);
+  }, [reviewListDistinctData]);
 
   const fetchMoreListItems = () => {
     fetchData();
@@ -116,6 +129,11 @@ const AssesseeDistinctReviewList = (props) => {
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
+  const flagPrimaryIcon = [{ label: 'flag', onClick: onClickFooter, Icon: FilterList }];
+  const flagSecondaryIcon = [
+    { label: 'cancel', onClick: onClickFooter, Icon: ClearIcon },
+    { label: 'finish', onClick: onClickFooter, Icon: Check }
+  ];
   const secondaryIcon = [
     { label: 'disapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
@@ -140,7 +158,8 @@ const AssesseeDistinctReviewList = (props) => {
         popupOpenType: 'primary',
         popupContentArrValue: ASSESSEE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
-        selectedTagStatus: e.currentTarget.getAttribute('status')
+        selectedTagStatus: e.currentTarget.getAttribute('status'),
+        isFlaged: e.currentTarget.getAttribute('data-flag') === 'true' ? true : false
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -187,12 +206,19 @@ const AssesseeDistinctReviewList = (props) => {
                 textTwo={item.informationBasic.assesseeAlias}
                 isTooltipActive={false}
                 onClickEvent={openAssesseeListPopup}
+                isFlagActive={selectedFlagedArray.includes(
+                  item.informationEngagement.assesseeTag?.assesseeTagPrimary
+                )}
+                flagedValue={flagedValue}
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(
                   item.informationEngagement.assesseeTag?.assesseeTagPrimary
                 )}
                 onClickCheckBox={(event) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
+                onClickAddFladed={(event) => {
+                  onClickFlagSelection(selectedFlagedArray, unselectedFlagedArray, event, dispatch);
                 }}
               />
             </div>
@@ -205,6 +231,15 @@ const AssesseeDistinctReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'assesseeFlag' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={flagPrimaryIcon}
+          secondaryIcon={flagSecondaryIcon}
         />
       )}
       {/* <PopUpMiddlePaneList

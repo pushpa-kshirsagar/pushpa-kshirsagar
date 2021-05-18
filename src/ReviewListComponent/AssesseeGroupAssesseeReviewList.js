@@ -126,7 +126,7 @@ const AssesseeGroupAssesseeReviewList = (props) => {
     });
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'isSelectActive', value: false }
+      payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });

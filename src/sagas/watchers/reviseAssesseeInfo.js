@@ -53,7 +53,7 @@ function* workerReviseInfoAssesseeSaga(data) {
           }
         });
       } else {
-        refreshMiddlePaneList(ASSESSEE_REVIEW_DISTINCT_SAGA, 'assessees');
+        // refreshMiddlePaneList(ASSESSEE_REVIEW_DISTINCT_SAGA, 'assessees');
         yield put({
           type: SET_DISPLAY_TWO_SINGLE_STATE,
           payload: { stateName: 'reviewListDistinctData', value: [] }

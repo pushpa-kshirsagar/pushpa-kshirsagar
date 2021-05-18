@@ -35,7 +35,8 @@ import {
   REVIEW_DISTINCT_POPUP_OPTION,
   CREATE_INFORMATION_POPUP,
   PUBLISH_PUPUP,
-  SHARE_POPUP
+  SHARE_POPUP,
+  FLAG_OPTION_PUPUP
 } from '../PopUpConfig';
 
 const initialState = {
@@ -70,6 +71,7 @@ const initialState = {
     share: SHARE_POPUP,
     delete: DELETE_POPUP,
     flag: FLAG_PUPUP,
+    flaged: FLAG_OPTION_PUPUP,
     publish: PUBLISH_PUPUP,
     select: SELECT_PUPUP,
     suspend: SUSPEND_PUPUP,
@@ -204,10 +206,12 @@ const PopUpReducer = (istate = initialState, action) => {
       let arrVal =
         action.payload.keyValue === 'reviseKey' ||
         action.payload.keyValue === 'reviewKey' ||
+        action.payload.keyValue === 'flaged' ||
         action.payload.keyValue === 'reviewDistinctKey' ||
         action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
           : istate.secondaryPopUpOptions[action.payload.badgeValue];
+      console.log('arrVal', arrVal);
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
@@ -262,6 +266,12 @@ const PopUpReducer = (istate = initialState, action) => {
           if (action.payload.badgeValue === 'share' && istate.selectedTagStatus === 'UNSHARED') {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
+          if (action.payload.keyValue === 'flag' && istate.isFlaged) {
+            arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
+          }
+          if (action.payload.keyValue === 'flag' && !istate.isFlaged) {
+            arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
+          }
           // if (
           //   (action.payload.badgeValue === 'suspend' ||
           //     action.payload.badgeValue === 'terminate') &&
@@ -284,7 +294,7 @@ const PopUpReducer = (istate = initialState, action) => {
                 : action.payload.keyValue === 'reviewDistinct' ||
                   action.payload.keyValue === 'reviewDistinctKey'
                 ? 'active'
-                : action.payload.keyValue === 'select'
+                : action.payload.keyValue === 'select' || action.payload.keyValue === 'flaged'
                 ? 'multiple'
                 : 'all'
           };

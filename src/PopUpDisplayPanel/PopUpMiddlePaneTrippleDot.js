@@ -40,7 +40,8 @@ import {
   getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeReqObj,
-  getAssesseeRoleDistinctApiCall
+  getAssesseeRoleDistinctApiCall,
+  setFlagedArray
 } from '../Actions/AssesseeModuleAction';
 import {
   getAssociateGroupAssociateDistinctApiCall,
@@ -58,9 +59,13 @@ const PopUpMiddlePaneTrippleDot = (props) => {
     secondaryOptionCheckValue,
     selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
-  const { selectedAssociateInfo, countPage, middlePaneHeader } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    countPage,
+    middlePaneHeader,
+    reviewListDistinctData,
+    middlePaneHeaderBadgeTwo
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [isReviseMode, setIsReviseMode] = useState(false);
 
   const dispatch = useDispatch();
@@ -77,7 +82,7 @@ const PopUpMiddlePaneTrippleDot = (props) => {
       payload: e.currentTarget.getAttribute('data-value')
     });
   };
-  const ChangeOptionPopup = (e) => {
+  const ChangeOptionPopup = async (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(keyVal);
@@ -170,19 +175,41 @@ const PopUpMiddlePaneTrippleDot = (props) => {
         dispatch({ type: POPUP_CLOSE });
       }
     } else if (dataVal === 'select') {
+      // console.log(secondaryOptionCheckValue)
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'isSelectActive', value: true }
+        payload: { stateName: 'isSelectActive', value: secondaryOptionCheckValue }
       });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'unselect') {
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'isSelectActive', value: false }
+        payload: { stateName: 'isSelectActive', value: '' }
       });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'selectedTagsArray', value: [] }
+      });
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'flaged') {
+      await setFlagedArray(reviewListDistinctData, 'assesseeFlag', dispatch);
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'flagedValue', value: secondaryOptionCheckValue + dataVal }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeFlag' }
+      });
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'unflaged') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'flagedValue', value: '' }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeDistinct' + middlePaneHeaderBadgeTwo }
       });
       dispatch({ type: POPUP_CLOSE });
     } else {

@@ -14,7 +14,7 @@ const PopUpAdministratorSignInCredentialRevise = (props) => {
     headerPanelColour,
     headerOne,
     headerOneBadgeOne,
-    signInOptions = [],
+    signInOptions = ["email.com","909080908"],
     signValue,
     onClick,
     onClose

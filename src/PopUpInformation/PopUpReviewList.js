@@ -108,7 +108,7 @@ const PopUpReviewList = (props) => {
                 tag={index.id}
                 isAlertActive={false}
                 isFlagActive={false}
-                isSelectActive={false}
+                isSelectActive={''}
                 key={index.id}
                 isSelectedReviewList={selectedList.includes(index.id)}
                 onClickEvent={onClickEvent}
