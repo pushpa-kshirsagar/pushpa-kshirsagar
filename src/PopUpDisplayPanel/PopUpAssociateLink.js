@@ -9,12 +9,12 @@ const PopUpAssociateLink = () => {
   const { isPopUpValue, popupHeaderOne, popupHeaderOneBadgeOne } = useSelector(
     (state) => state.PopUpReducer
   );
-  const signInOptions = [
-    { name: 'shivam.s@boppotechologies.com' },
-    { name: 'simple.sample@gmail.com' },
-    { name: '8006777221' },
-    { name: '8877665698' }
-  ];
+  // const signInOptions = [
+  //   { name: 'shivam.s@boppotechologies.com' },
+  //   { name: 'simple.sample@gmail.com' },
+  //   { name: '8006777221' },
+  //   { name: '8877665698' }
+  // ];
   console.log('LINK POPUP +++++', isPopUpValue);
   return (
     <div>
@@ -23,7 +23,7 @@ const PopUpAssociateLink = () => {
         headerPanelColour={'genericOne'}
         headerOne={popupHeaderOne}
         headerOneBadgeOne={popupHeaderOneBadgeOne}
-        signInOptions={signInOptions}
+        // signInOptions={signInOptions}
         onClick={() => {
           dispatch({
             type: SET_POPUP_STATE,
@@ -48,7 +48,7 @@ const PopUpAssociateLink = () => {
         headerPanelColour={'genericOne'}
         headerOne={popupHeaderOne}
         headerOneBadgeOne={popupHeaderOneBadgeOne}
-        signInOptions={signInOptions}
+        // signInOptions={signInOptions}
         onClick={() => {
           //TODO: Display associate list in displayPaneTwo
         }}
