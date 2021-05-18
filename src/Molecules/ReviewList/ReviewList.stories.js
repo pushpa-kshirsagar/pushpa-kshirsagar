@@ -15,5 +15,5 @@ ReviewList.args = {
   status: 'active',
   isAlertActive: true,
   isFlagActive: true,
-  isSelectActive: true
+  isSelectActive: ''
 };

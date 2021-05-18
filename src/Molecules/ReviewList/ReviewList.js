@@ -4,6 +4,7 @@ import Notifications from '@material-ui/icons/NotificationsActive';
 import IconButton from '@material-ui/core/IconButton';
 import Checkbox from '@material-ui/core/Checkbox';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
+import FlagIcon from '@material-ui/icons/Flag';
 import './ReviewList.css';
 
 const ReviewList = (props) => {
@@ -13,7 +14,7 @@ const ReviewList = (props) => {
     status,
     isAlertActive = false,
     isFlagActive = false,
-    isSelectActive = false,
+    isSelectActive = '',
     isTooltipActive = false,
     isSelectedReviewList = false,
     onClickEvent = null,
@@ -21,8 +22,10 @@ const ReviewList = (props) => {
     id,
     actualStatus = '',
     onClickCheckBox = null,
+    onClickAddFladed = null,
     isSelected = false,
-    dataValue = ''
+    dataValue = '',
+    flagedValue = ''
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
@@ -31,15 +34,18 @@ const ReviewList = (props) => {
       <div disableFocusRipple={true} disableRipple={true} className={'reviewListBorder'}>
         <div
           className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
-          tag={tag}
-          id={id}
-          status={actualStatus}
-          data-value={dataValue}
-          onClick={isSelectActive ? null : onClickEvent}
           style={{ backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '' }}
         >
           <div className={['measureBox', 'heightInherit', 'componentinnerdiv-iguru'].join(' ')}>
-            <div className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}>
+            <div
+              className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}
+              tag={tag}
+              id={id}
+              status={actualStatus}
+              data-value={dataValue}
+              data-flag={isFlagActive}
+              onClick={isSelectActive !== '' ? null : onClickEvent}
+            >
               <div
                 className={[
                   'midPaneInformation',
@@ -96,15 +102,28 @@ const ReviewList = (props) => {
             </div>
 
             <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-              {isFlagActive ? (
+              {isFlagActive || flagedValue !== '' ? (
                 <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
                   <IconButton className={'assesseeListiconSize'}>
-                    <FlagOutlinedIcon className={'flagiconmargin'} />
-                    {/* <i className="far fa-flag" id={'flagid'}></i> */}
+                    {/* */}
+                    {isFlagActive ? (
+                      <FlagIcon
+                        className={'flagiconmargin'}
+                        id={tag}
+                        onClick={flagedValue !== '' ? onClickAddFladed : null}
+                      />
+                    ) : (
+                      <FlagOutlinedIcon
+                        id={tag}
+                        className={'flagiconmargin'}
+                        onClick={onClickAddFladed}
+                      />
+                    )}
                   </IconButton>
                 </div>
               ) : null}
-              {isSelectActive ? (
+
+              {isSelectActive !== '' ? (
                 <div className={'unitFlex'}>
                   <div
                     className={[

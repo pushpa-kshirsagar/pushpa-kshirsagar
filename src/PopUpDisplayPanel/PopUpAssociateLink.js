@@ -15,7 +15,7 @@ const PopUpAssociateLink = () => {
   //   { name: '8006777221' },
   //   { name: '8877665698' }
   // ];
-  console.log('LINK POPUP +++++', isPopUpValue);
+  // console.log('LINK POPUP +++++', isPopUpValue);
   return (
     <div>
       <PopUpAdministratorSignInCredentialRevise

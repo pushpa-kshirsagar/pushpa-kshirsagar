@@ -59,9 +59,13 @@ const initialState = {
   nodeViewState: 'hierarchy',
   scanString: '',
   searchFocusIndex: 0,
-  isSelectActive: false,
+  isSelectActive: '',
   selectedTagsArray: [],
-  unselectedTagsArray: []
+  unselectedTagsArray: [],
+  selectedFlagedArray: [],
+  unselectedFlagedArray: [],
+  isFlaged: false,
+  flagedValue:''
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {
@@ -84,8 +88,9 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         scanCount: action.payload.scanCount,
         showMiddlePaneState: action.payload.showMiddlePaneState,
         middlePaneSelectedValue: istate.middlePaneSelectedValue,
-        isSelectActive: action.payload.isSelectActive || false,
-        selectedTagsArray: action.payload.selectedTagsArray || []
+        isSelectActive: action.payload.isSelectActive || '',
+        selectedTagsArray: action.payload.selectedTagsArray || [],
+        isFlaged: action.payload.isFlaged || false
       };
     case SET_SCAN_POPUP_STATE:
       return {

@@ -1646,13 +1646,13 @@ export const DELETE_POPUP = [
 export const FLAG_PUPUP = [
   {
     data: 'flag',
-    dataValue: 'flag',
+    dataValue: 'flagedApiCall',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'unflag',
-    dataValue: 'unflag',
+    dataValue: 'unflagedApiCall',
     optionClass: 'optionPrimary',
     disabled: false
   }
@@ -1693,6 +1693,38 @@ export const SELECT_OPTION_PUPUP = [
     disabled: false
   },
   { data: 'flaged', dataValue: 'flaged', optionClass: 'optionSecondary', disabled: false },
+  {
+    data: 'multiple',
+    dataValue: 'multiple',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  { data: 'hide', dataValue: 'hide', optionClass: 'optionSecondary', disabled: false },
+  { data: 'unhide', dataValue: 'unhide', optionClass: 'optionSecondary', disabled: false }
+];
+export const FLAG_OPTION_PUPUP = [
+  {
+    data: 'flaged',
+    dataValue: 'flaged',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unflaged',
+    dataValue: 'unflaged',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'all',
+    dataValue: 'all',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  { data: 'selected', dataValue: 'selected', optionClass: 'optionSecondary', disabled: false },
   {
     data: 'multiple',
     dataValue: 'multiple',
@@ -1781,7 +1813,7 @@ export const ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION = [
   {
     data: 'flag',
     dataValue: 'flag',
-    dataKey: 'flag',
+    dataKey: 'flaged',
     optionClass: 'optionPrimary',
     disabled: false
   },
@@ -1868,7 +1900,7 @@ export const ASSESSMENT_ASSIGNMENT_TRIPPLE_DOT_POPUP_OPTION = [
   {
     data: 'flag',
     dataValue: 'flag',
-    dataKey: 'flag',
+    dataKey: 'flaged',
     optionClass: 'optionPrimary',
     disabled: false
   },
@@ -1962,7 +1994,7 @@ export const TRIPPLE_DOT_POPUP_OPTION = [
   {
     data: 'flag',
     dataValue: 'flag',
-    dataKey: 'flag',
+    dataKey: 'flaged',
     optionClass: 'optionPrimary',
     disabled: false
   },

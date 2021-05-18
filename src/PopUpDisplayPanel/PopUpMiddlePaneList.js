@@ -737,6 +737,28 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'flagedApiCall' || dataVal === 'unflagedApiCall') {
+      let reqBody = null;
+      if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
+        reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assessee: {
+            id: selectedTagValue,
+            informationBasic: {
+              assesseeFlag: dataVal === 'flagedApiCall' ? true : false
+            }
+          }
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: ASSESSEE_INFO_REVISE_SAGA,
+          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+        });
+        dispatch({ type: POPUP_CLOSE });
+      }
     } else if (
       dataVal === 'suspendApiCall' ||
       dataVal === 'terminateApiCall' ||

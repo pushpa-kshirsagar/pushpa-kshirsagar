@@ -9,7 +9,8 @@ import {
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
   SET_REVIEW_LIST_RELATE_DATA,
   GET_ALLOCATE_ASSESSEE,
-  GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST
+  GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import {
   ASSESSEE_REVIEW_LIST_URL,
@@ -40,21 +41,28 @@ function* workerReviewListAssesseeSaga(data) {
       URL: ASSESSEE_REVIEW_LIST_URL
     });
     // const userResponse ={responseCode:'000',countTotal:30}
-    if (userResponse.responseCode === '000')
+    if (userResponse.responseCode === '000') {
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.HeaderOne,
+          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.HeaderOne + 'DistinctReviewList',
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true
+        }
+      });
       yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
-    yield put({
-      type: SET_MIDDLEPANE_STATE,
-      payload: {
-        middlePaneHeader: data.payload.HeaderOne,
-        middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-        middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-        middlePaneHeaderBadgeThree: '',
-        middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: data.payload.HeaderOne + 'DistinctReviewList',
-        scanCount: userResponse && userResponse.countTotal,
-        showMiddlePaneState: true
-      }
-    });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
@@ -87,9 +95,14 @@ function* workerReviewListAssesseSaga(data) {
           typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
           scanCount: userResponse && userResponse.countTotal,
           showMiddlePaneState: true,
-          isSelectActive: true,
+          isSelectActive: 'multiple',
           selectedTagsArray: data.payload.existingAssesseeId
         }
+      });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
     console.log('loading end');
@@ -107,30 +120,37 @@ function* workerReviewListAssesseeGroupAssesseeSaga(data) {
       URL: ASSESSEE_GROUP_ASSESSEE_URL
     });
     // const userResponse ={responseCode:'000',countTotal:30}
-    if (userResponse.responseCode === '000')
+    if (userResponse.responseCode === '000') {
       yield put({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
         payload: userResponse.responseObject
       });
-    yield put({
-      type: SET_REVIEW_LIST_RELATE_DATA,
-      payload: userResponse.responseObject
-    });
-    if (data.payload.isMiddlePaneList) {
       yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: data.payload.HeaderOne,
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: data.payload.HeaderOne + 'GroupAssesseeReviewList',
-          scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
-        }
+        type: SET_REVIEW_LIST_RELATE_DATA,
+        payload: userResponse.responseObject
+      });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: data.payload.HeaderOne,
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: data.payload.HeaderOne + 'GroupAssesseeReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
+
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
@@ -146,28 +166,34 @@ function* workerReviewListRoleAssesseeSaga(data) {
       URL: ASSESSEE_ROLE_ASSESSEE_URL
     });
     // const userResponse ={responseCode:'000',countTotal:30}
-    if (userResponse.responseCode === '000')
+    if (userResponse.responseCode === '000') {
       yield put({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
         payload: userResponse.responseObject
       });
-    yield put({
-      type: SET_REVIEW_LIST_RELATE_DATA,
-      payload: userResponse.responseObject
-    });
-    if (data.payload.isMiddlePaneList) {
       yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: data.payload.HeaderOne,
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: data.payload.HeaderOne + 'RoleAssesseeReviewList',
-          scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
-        }
+        type: SET_REVIEW_LIST_RELATE_DATA,
+        payload: userResponse.responseObject
+      });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: data.payload.HeaderOne,
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: data.payload.HeaderOne + 'RoleAssesseeReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
     console.log('loading end');
@@ -190,30 +216,37 @@ function* workerReviewListNodeAssesseeSaga(data) {
     //   responseObject: [[{ assesseeNodeName: 'sample', assessee: [] }]],
     //   countTotal: 0
     // };
-    if (userResponse.responseCode === '000')
+    if (userResponse.responseCode === '000') {
       yield put({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
         payload: userResponse.responseObject
       });
-    yield put({
-      type: SET_REVIEW_LIST_RELATE_DATA,
-      payload: userResponse.responseObject
-    });
-    if (data.payload.isMiddlePaneList) {
       yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: data.payload.HeaderOne,
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assesseesNodeAssesseeReviewList',
-          scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
-        }
+        type: SET_REVIEW_LIST_RELATE_DATA,
+        payload: userResponse.responseObject
+      });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: data.payload.HeaderOne,
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assesseesNodeAssesseeReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
+
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {

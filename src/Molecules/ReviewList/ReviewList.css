@@ -60,6 +60,7 @@
 }
 .flagiconmargin {
   margin-top: -5px;
+  font-size:1.7rem !important
 }
 .assesseeListCheckBoxSelctedOut svg {
   height: 1.6rem;

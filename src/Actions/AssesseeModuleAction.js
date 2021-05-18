@@ -938,3 +938,46 @@ export const onClickCheckBoxSelection = (
     payload: { stateName: 'unselectedTagsArray', value: unCheckArr }
   });
 };
+export const onClickFlagSelection = (
+  selectedFlagedArray,
+  unselectedFlagedArray,
+  event,
+  dispatch
+) => {
+  console.log("event", event);
+  let id = event.target.id;
+  let flagedArr = [...selectedFlagedArray];
+  let unFlagedArr = [...unselectedFlagedArray];
+  if (flagedArr.includes(id)) {
+    flagedArr = flagedArr.filter(function (number) {
+      return number !== id;
+    });
+    unFlagedArr.push(id);
+  } else {
+    flagedArr.push(id);
+    unFlagedArr = unFlagedArr.filter(function (number) {
+      return number !== id;
+    });
+  }
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedFlagedArray', value: flagedArr }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedFlagedArray', value: unFlagedArr }
+  });
+};
+
+export const setFlagedArray = (reviewListDistinctData, key, dispatch) => {
+  let flagedArr = [];
+  reviewListDistinctData.map((data) => {
+    if (data.informationBasic[key]) {
+      flagedArr.push(data.informationEngagement.assesseeTag.assesseeTagPrimary);
+    }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedFlagedArray', value: flagedArr }
+  });
+};
