@@ -563,3 +563,14 @@ export const getInternalNodeApiCall = (
   });
 };
 
+export function sortingListInAsc(array, key) {
+  return array.sort(function (a, b) {
+    if (a.informationBasic[key] && b.informationBasic[key]) {
+      var x = a.informationBasic[key].toLowerCase().replace(/[()]/g, '');
+      var y = b.informationBasic[key].toLowerCase().replace(/[()]/g, '');
+      return x < y ? -1 : x > y ? 1 : 0;
+    } else {
+      return array;
+    }
+  });
+}

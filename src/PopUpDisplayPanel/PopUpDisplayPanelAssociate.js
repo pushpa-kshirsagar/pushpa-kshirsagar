@@ -72,6 +72,7 @@ import {
   makeInternalNodeObj
 } from '../Actions/GenericActions';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
+import { getRoleGroupReviewListApi } from '../Actions/AssesseeModuleAction';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -781,20 +782,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {
-      dispatch({ type: LOADER_START });
-      dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
-      let requestObj = {
-        assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId:
-          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        associateAscendantPrimary:
-          localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId')
-      };
-      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
-        payload: { request: requestObj, typeGroup: popupHeaderOne }
-      });
+      getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
+
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }

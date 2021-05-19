@@ -1,13 +1,16 @@
 import {
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   CLEAR_DISPLAY_PANE_THREE,
+  CLEAR_ROLE_REDUCER_STATE,
   FILTERMODE,
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   LOADER_START,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
@@ -944,7 +947,7 @@ export const onClickFlagSelection = (
   event,
   dispatch
 ) => {
-  console.log("event", event);
+  console.log('event', event);
   let id = event.target.id;
   let flagedArr = [...selectedFlagedArray];
   let unFlagedArr = [...unselectedFlagedArray];
@@ -979,5 +982,22 @@ export const setFlagedArray = (reviewListDistinctData, key, dispatch) => {
   dispatch({
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: { stateName: 'selectedFlagedArray', value: flagedArr }
+  });
+};
+
+export const getRoleGroupReviewListApi = (selectedAssociateInfo, dispatch, popupHeaderOne) => {
+  dispatch({ type: LOADER_START });
+  dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId')
+  };
+  dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
+    payload: { request: requestObj, typeGroup: popupHeaderOne }
   });
 };
