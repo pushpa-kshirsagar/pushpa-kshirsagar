@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
@@ -35,6 +35,9 @@ const DisplayPaneThreeSectionOne = () => {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
+  useEffect(() => {
+    setListExpand('');
+  }, [responseObject]);
   const allianceList1 = [
     {
       id: 'a1',

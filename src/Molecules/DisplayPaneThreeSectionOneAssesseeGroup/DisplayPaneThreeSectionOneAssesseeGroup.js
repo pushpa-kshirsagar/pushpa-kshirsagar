@@ -255,6 +255,7 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   };
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'status') {
       dispatch({
@@ -263,8 +264,36 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
       });
       dispatch({
         type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'assesseesGROUPCREATE' }
       });
+    }
+    if (labelName === 'tag') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+    }
+    if (labelName === 'tenure') {
+      if (selectedBadgeName === 'start') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'end') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'assesseesGROUPCREATE' }
+        });
+      }
     }
   };
 

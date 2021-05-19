@@ -19,6 +19,7 @@ const PopUpDropList = (props) => {
     headerPanelColour,
     headerOne,
     headerOneBadgeOne,
+    headerOneBadgeTwo,
     listSelect,
     isRequired = false,
     basicInfo,
@@ -85,7 +86,7 @@ const PopUpDropList = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
-          headerOneBadgeTwo={''}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           headerOneBadgeThree={''}
           onClick={handleClick}
           mode={mode}

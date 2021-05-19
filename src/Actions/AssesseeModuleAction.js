@@ -988,7 +988,6 @@ export const setFlagedArray = (reviewListDistinctData, key, dispatch) => {
 
 export const getRoleGroupReviewListApi = (selectedAssociateInfo, dispatch, popupHeaderOne) => {
   dispatch({ type: LOADER_START });
-  dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
   let requestObj = {
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:

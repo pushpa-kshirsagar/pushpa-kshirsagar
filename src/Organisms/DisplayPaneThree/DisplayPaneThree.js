@@ -305,6 +305,7 @@ export const DisplayPaneThree = () => {
     rightPaneSectionsAssociate[0]
   );
   useEffect(() => {
+    console.log("IN SIDE USE EFFEECT");
     setSelectedSection(rightPaneSectionsAssessee[0]);
     setSelectedSectionAssesseeRole(rightPaneSectionsAssesseeRole[0]);
     setSelectedSectionAssesseeGroup(rightPaneSectionsAssesseeGroup[0]);
@@ -418,16 +419,20 @@ export const DisplayPaneThree = () => {
     ) {
       console.log('ASSESSEES ROLE REVISE');
       const { associateId, id } = responseObject;
+      let allocationObj = {
+        assesseeRoleGroup: assesseeRole.informationAllocation.assesseeRoleGroup[0]
+    };
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
         assesseeRoleAssessee: {
-          assesseeRoleAssesseeAllocate: assesseeRoleAssessee.assesseeRoleAssesseeAllocate,
-          assesseeRoleAssesseeUnallocate: assesseeRoleAssessee.assesseeRoleAssesseeUnallocate
+          assesseeRoleAssesseeAllocate: assesseeRoleAssessee?.assesseeRoleAssesseeAllocate || [],
+          assesseeRoleAssesseeUnallocate: assesseeRoleAssessee?.assesseeRoleAssesseeUnallocate || []
         },
         assesseeRole: {
           id,
-          informationBasic: assesseeRole.informationBasic
+          informationBasic: assesseeRole.informationBasic,
+          informationAllocation: allocationObj
         }
       };
       dispatch({ type: LOADER_START });
@@ -877,7 +882,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assesseeFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="alias"
@@ -927,7 +932,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assesseeRoleFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -974,7 +979,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assesseeGroupFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1021,7 +1026,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.associateGroupFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1068,7 +1073,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assessmentGroupFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1114,7 +1119,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assessmentFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1160,7 +1165,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assignmentFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1206,7 +1211,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assignmentGroupFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1252,7 +1257,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assignmentTypeFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1298,7 +1303,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.assessmentTypeFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1344,7 +1349,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.associateRoleFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1396,7 +1401,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.associateNodeFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
@@ -1443,7 +1448,7 @@ export const DisplayPaneThree = () => {
               <div style={{ padding: '2.5px' }}>
                 <BasicCard
                   isAlertActive
-                  isFlagActive
+                  isFlagActive={informationBasic?.associateFlag || false}
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"

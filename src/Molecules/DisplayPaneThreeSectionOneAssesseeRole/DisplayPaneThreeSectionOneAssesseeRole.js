@@ -6,33 +6,41 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { ASSESSEE_SIGN_ON, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import { ASSESSEE_SIGN_ON, SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import { assesseeRole, getRoleGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionOneAssesseeRole = () => {
   // const [listExpand, setListExpand] = useState('');
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   const dispatch = useDispatch();
+  let assesseeRoleGroupList = [];
+  const tempRoleGroup = informationAllocation?.assesseeRoleGroup;
+  if (tempRoleGroup) {
+    assesseeRoleGroupList.push({
+      id: tempRoleGroup?.id || '',
+      textOne: tempRoleGroup?.informationBasic?.assesseeRoleGroupName || '',
+      textTwo: tempRoleGroup?.informationBasic?.assesseeRoleGroupDescription || '',
+      status: ''
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
       labelTextOneOne: 'group',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'primary',
-          innerList: []
-        },
-        {
-          labelTextOneOneBadge: 'secondary',
-          innerList: []
+          labelTextOneOneBadge: '',
+          innerList: assesseeRoleGroupList
         }
       ],
       innerInfo: 'No Information',
@@ -148,6 +156,7 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
   ];
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'status') {
       dispatch({
@@ -155,14 +164,53 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
         payload: capitalizeFirstLetter(informationEngagement?.assesseeRoleStatus)
       });
       dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'assesseesROLECREATE' }
       });
+    }
+    if (labelName === 'tag') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'assesseesROLECREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'assesseesROLECREATE' }
+        });
+      }
+    }
+    if (labelName === 'tenure') {
+      if (selectedBadgeName === 'start') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'assesseesROLECREATE' }
+        });
+      }
+      if (selectedBadgeName === 'end') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'assesseesROLECREATE' }
+        });
+      }
     }
   };
   const reviseSetUp = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
+  };
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, 'assessees');
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ROLEGROUPPOPUP', popupMode: 'assesseesROLECREATE' }
+      });
+    }
   };
 
   return (
@@ -179,9 +227,18 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      className=""
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

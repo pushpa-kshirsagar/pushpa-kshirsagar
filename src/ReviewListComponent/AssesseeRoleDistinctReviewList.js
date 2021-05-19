@@ -155,7 +155,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 textTwo={item.informationBasic.assesseeRoleDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-              />  
+              />
             </div>
           );
         })}

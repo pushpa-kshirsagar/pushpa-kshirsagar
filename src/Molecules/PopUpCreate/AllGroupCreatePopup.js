@@ -7,9 +7,13 @@ import {
   POPUP_CLOSE,
   CREATE_GROUP_SAGA,
   LOADER_START,
-  CLEAR_GROUP_REDUCER_STATE
+  CLEAR_GROUP_REDUCER_STATE,
+  UPDATE_ASSESSEE_PERSONAL_INFO,
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
+import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 
 const AllGroupCreatePopup = (props) => {
   const {
@@ -26,7 +30,9 @@ const AllGroupCreatePopup = (props) => {
   // console.log(reducerObeject);
   // console.log('reducerObeject');
   const dispatch = useDispatch();
-  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, responseObject, statusPopUpValue } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
@@ -372,6 +378,95 @@ const AllGroupCreatePopup = (props) => {
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'create'}
         onClickYes={onClickYes}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TAGREADONLYPRIMARYPOPUP'}
+        label={'tag'}
+        labelBadgeOne={'primary'}
+        actualLableValue={'assesseeTagPrimary'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        basicInfo={
+          responseObject?.informationEngagement?.assesseeGroupTag?.assesseeGroupTagPrimary || ''
+        }
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TENURESATRTDATEPOPUP'}
+        label={'tenure'}
+        labelBadgeOne={'start'}
+        actualLableValue={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        basicInfo={
+          responseObject?.informationEngagement?.assesseeGroupTenure
+            ?.assesseeGroupTenureDateTimeStart || 'mm/dd/yyyy --:-- --'
+        }
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TENUREENDDATEPOPUP'}
+        label={'tenure'}
+        labelBadgeOne={'end'}
+        actualLableValue={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        basicInfo={
+          responseObject?.informationEngagement?.assesseeGroupTenure
+            ?.assesseeGroupTenureDateTimeEnd || 'mm/dd/yyyy --:-- --'
+        }
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'STATUSPOPUP'}
+        tag={'assesseeStatus'}
+        label={'status'}
+        listSelect={[
+          { id: 'Active', name: 'Active' },
+          { id: 'Suspended', name: 'Suspended' },
+          { id: 'Terminated', name: 'Terminated' },
+          { id: 'Unverified', name: 'Unverified' },
+          { id: 'Confirmed', name: 'Confirmed' }
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        isRequired={true}
+        basicInfo={statusPopUpValue}
+        nextPopUpValue={''}
+        typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
+        handleNextPopupValue={() => {}}
+        isNotRevised={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTagSecondary
+        isActive={isPopUpValue === 'TAGSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        tagSecondary={reducerObeject?.informationEngagement || {}}
+        signInSetup={reducerObeject?.informationSetup || {}}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_ENGAGEMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
   );

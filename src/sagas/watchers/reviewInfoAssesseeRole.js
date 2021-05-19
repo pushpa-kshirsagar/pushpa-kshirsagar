@@ -1,4 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
+import { assesseeRole } from '../../Actions/AssesseeModuleAction';
 import {
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
@@ -8,6 +9,7 @@ import {
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSESSEE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_ROLE_DYNAMIC_STATE,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSESSEE_REVIEW_ROLE_URL, ASSESSEE_ROLE_INFO_REVISE_URL } from '../../endpoints';
@@ -64,6 +66,21 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
           type: SET_ASSESSEE_ROLE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
         });
+        let assesseeRoleGroupObj =
+          userResponse.responseObject[0].informationAllocation.assesseeRoleGroup;
+        let tempList = [];
+        if (assesseeRoleGroupObj) {
+          tempList.push(assesseeRole.id);
+        }
+        yield put({
+          type: SET_ROLE_DYNAMIC_STATE,
+          payload: {
+            objectName: 'assesseeRole',
+            stateName: 'informationAllocation',
+            actualStateName: 'assesseeRoleGroup',
+            value: tempList
+          }
+        });
       }
     } else {
       console.log('loading end');
@@ -96,7 +113,11 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      console.log('IN ROLE REVIEW+++++', userResponse,  Store.getState().DisplayPaneTwoReducer.middlePaneHeader);
+      console.log(
+        'IN ROLE REVIEW+++++',
+        userResponse,
+        Store.getState().DisplayPaneTwoReducer.middlePaneHeader
+      );
       if (data.payload.assesseeRoleAssesseeReqBody !== null) {
         yield put({
           type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,

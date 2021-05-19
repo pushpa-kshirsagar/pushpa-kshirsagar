@@ -6,7 +6,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import React from 'react';
 import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
 import Unverified from '../../images/unverified.svg';
-// import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
+import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import FlagIcon from '@material-ui/icons/Flag';
 import Label from '../../Atoms/Labels/Label';
 import IconsButton from '../IconButton/IconButton';
@@ -112,7 +112,12 @@ const BasicCard = (props) => {
         <div className="flex-one-align-center">
           <div>
             <IconButton className="icon-container">
-              {isFlagActive && <FlagIcon className="iguru-icons-wid-hei" />}
+              {/* {isFlagActive && <FlagIcon className="iguru-icons-wid-hei" />} */}
+              {isFlagActive ? (
+                      <FlagIcon className={'iguru-icons-wid-hei'} />
+                    ) : (
+                      <FlagOutlinedIcon className={'iguru-icons-wid-hei'} />
+                    )}
             </IconButton>
           </div>
           <div>
