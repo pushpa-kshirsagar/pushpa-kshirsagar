@@ -412,7 +412,7 @@ const PopUpSignOnAssociate = () => {
         inputHeaderBadge={'ascendant'}
         inputHeaderBadgeTwo={'primary'}
         infoMsg={'select a node'}
-        ListData={coreNodeReviewListData[0]}
+        ListData={coreNodeReviewListData}
         isRequired={true}
         selectedList={
           associateInfo.informationFramework.iguruNodeAscendant.iguruNodeAscendantPrimary
