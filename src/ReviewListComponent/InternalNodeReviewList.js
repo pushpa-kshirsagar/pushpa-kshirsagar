@@ -32,7 +32,7 @@ import FileExplorerTheme from 'react-sortable-tree-theme-full-node-drag';
 import '../reactSortableTree.css';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { Fragment } from 'react';
-import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
+import { getInternalNodeApiCall, sortingListInAsc } from '../Actions/AssociateModuleAction';
 const InternalNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -83,6 +83,7 @@ const InternalNodeReviewList = (props) => {
     ]
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
+  const [sortedReviewListDistinctData, setSortedReviewListDistinctData] = useState([]);
 
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
@@ -171,6 +172,12 @@ const InternalNodeReviewList = (props) => {
     // console.log('treedata', reviewListDistinctData);
     console.log(dragedNodeParentId, 'dragedNodeParentId');
   };
+  useEffect(() => {
+    if (nodeViewState === 'list') {
+      let sortedArr = sortingListInAsc(reviewListDistinctData, 'associateNodeName');
+      setSortedReviewListDistinctData(sortedArr);
+    }
+  }, [reviewListDistinctData]);
   return (
     <div>
       {reviewListDistinctData.length > 0 && (
@@ -216,7 +223,7 @@ const InternalNodeReviewList = (props) => {
             </div>
           ) : (
             <Fragment>
-              {reviewListDistinctData.map((item, index) => {
+              {sortedReviewListDistinctData.map((item, index) => {
                 // if (index === 0) {
                 //   <Card
                 //     textOneOne={item.informationBasic.associateName}

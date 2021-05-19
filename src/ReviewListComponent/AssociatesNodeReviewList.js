@@ -23,7 +23,7 @@ import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css';
 import FileExplorerTheme from 'react-sortable-tree-theme-full-node-drag';
 import '../reactSortableTree.css';
-import { getAssociateNodeApiCall } from '../Actions/AssociateModuleAction';
+import { getAssociateNodeApiCall, sortingListInAsc } from '../Actions/AssociateModuleAction';
 import { Fragment } from 'react';
 import Card from '../Molecules/Card/Card';
 const AssociatesNodeReviewList = (props) => {
@@ -45,6 +45,7 @@ const AssociatesNodeReviewList = (props) => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
+  const [sortedReviewListDistinctData, setSortedReviewListDistinctData] = useState([]);
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
@@ -111,6 +112,12 @@ const AssociatesNodeReviewList = (props) => {
   const changedNode = (node) => {
     console.log(node);
   };
+  useEffect(() => {
+    if (nodeViewState === 'list') {
+      let sortedArr = sortingListInAsc(reviewListDistinctData, 'associateNodeName');
+      setSortedReviewListDistinctData(sortedArr);
+    }
+  }, [reviewListDistinctData]);
   return (
     <div>
       {reviewListDistinctData.length > 0 && (
@@ -155,7 +162,7 @@ const AssociatesNodeReviewList = (props) => {
             </div>
           ) : (
             <Fragment>
-              {reviewListDistinctData.map((item, index) => {
+              {sortedReviewListDistinctData.map((item, index) => {
                 // if (index === 0) {
                 //   <Card
                 //     textOneOne={item.informationBasic.associateName}

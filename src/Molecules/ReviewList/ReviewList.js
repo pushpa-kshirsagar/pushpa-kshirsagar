@@ -104,20 +104,16 @@ const ReviewList = (props) => {
             <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
               {isFlagActive || flagedValue !== '' ? (
                 <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
-                  <IconButton className={'assesseeListiconSize'}>
+                  <IconButton
+                    className={'assesseeListiconSize'}
+                    id={tag} 
+                    onClick={flagedValue !== '' ? onClickAddFladed : null}
+                  >
                     {/* */}
                     {isFlagActive ? (
-                      <FlagIcon
-                        className={'flagiconmargin'}
-                        id={tag}
-                        onClick={flagedValue !== '' ? onClickAddFladed : null}
-                      />
+                      <FlagIcon className={'flagiconmargin'} id={tag} />
                     ) : (
-                      <FlagOutlinedIcon
-                        id={tag}
-                        className={'flagiconmargin'}
-                        onClick={onClickAddFladed}
-                      />
+                      <FlagOutlinedIcon className={'flagiconmargin'} id={tag} />
                     )}
                   </IconButton>
                 </div>
