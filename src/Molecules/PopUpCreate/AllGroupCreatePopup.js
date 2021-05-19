@@ -195,6 +195,7 @@ const AllGroupCreatePopup = (props) => {
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'MANAGERLISTPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERLISTPOPUP'}

@@ -110,6 +110,7 @@ const AssociateRoleCreatePopup = () => {
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ROLEGROUPPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'ROLEGROUPPOPUP'}

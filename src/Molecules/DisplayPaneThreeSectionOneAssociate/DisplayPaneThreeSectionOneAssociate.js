@@ -464,7 +464,59 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOne: 'iGuru analytic',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'core information',
+          labelTextOneOneBadge: 'information',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'group',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'type',
+              innerList: []
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
+    },
+    {
+      id: 'a6',
+      labelTextOneOne: 'iGuru marketplace',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    },
+    {
+      id: 'a7',
+      labelTextOneOne: 'iGuru mine',
+      textOneOne: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    },
+    {
+      id: 'a8',
+      labelTextOneOne: 'item',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'information',
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'distinct',

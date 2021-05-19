@@ -251,7 +251,7 @@ const AssesseeNodeAssesseeReviewList = (props) => {
                   item.informationEngagement.assesseeTag?.assesseeTagPrimary
                 )}
                 onClickCheckBox={(event) => {
-                  onClickCheckBoxSelection(selectedTagsArray, event, dispatch);
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 onClickEvent={openListPopup}
               />

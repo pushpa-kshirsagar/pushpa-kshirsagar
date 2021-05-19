@@ -262,6 +262,10 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
           labelTextOneOneBadge: 'group',
           innerList: []
         }
@@ -412,6 +416,10 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
         {
           labelTextOneOneBadge: 'group',
           innerList: []

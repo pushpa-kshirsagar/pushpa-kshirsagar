@@ -709,7 +709,15 @@ export const DisplayPaneThree = () => {
   };
   const reviseAssesseeRoleBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    console.log('====>', profileId);
+    console.log('====>', labelName, informationBasic);
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'assesseesROLECREATE' }
+      });
+    }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -725,7 +733,15 @@ export const DisplayPaneThree = () => {
   };
   const reviseAssesseeGroupBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    console.log('====>', profileId);
+    console.log('====>', labelName, informationBasic);
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'assesseesGROUPCREATE' }
+      });
+    }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -741,7 +757,15 @@ export const DisplayPaneThree = () => {
   };
   const reviseAssociateGroupBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    console.log('====>', profileId);
+    console.log('====>', labelName, informationBasic);
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'associatesGROUPCREATE' }
+      });
+    }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -757,7 +781,15 @@ export const DisplayPaneThree = () => {
   };
   const reviseAssociateNodeBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    console.log('====>', profileId);
+    console.log('====>', labelName, informationBasic);
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'NODECREATE' }
+      });
+    }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -774,7 +806,15 @@ export const DisplayPaneThree = () => {
 
   const reviseAssociateRoleBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    console.log('====>', profileId);
+    console.log('====>', labelName, informationBasic);
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'associatesROLECREATE' }
+      });
+    }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,

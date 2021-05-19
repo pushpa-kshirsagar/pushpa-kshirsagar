@@ -915,6 +915,7 @@ export const onClickCheckBoxSelection = (
   event,
   dispatch
 ) => {
+  console.log("EVENT", event);
   let id = event.target.id;
   let checkedArr = [...selectedTagsArray];
   let unCheckArr = [...unselectedTagsArray];
