@@ -782,8 +782,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {
+      dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
       getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
-
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }

@@ -83,13 +83,6 @@ function* workerReviewAssociateRoleListSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: data.payload.isMiddlePaneList
-          ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_ROLE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject
-      });
-
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -105,6 +98,12 @@ function* workerReviewAssociateRoleListSaga(data) {
           }
         });
       }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_ROLE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
