@@ -28,7 +28,7 @@ const IconTwoWithFlexSixColumn = (props) => {
           Icon={data[0].Icon}
           colour={'displayPaneCentre'}
           onClick={data[0].onClick}
-          dataValue={data[0].label}
+          dataValue={data[0].dataValue ? data[0].dataValue : data[0].label}
         />
       </div>
       <div className={'mbPager'}>
@@ -37,7 +37,7 @@ const IconTwoWithFlexSixColumn = (props) => {
           Icon={data[1].Icon}
           colour={'displayPaneCentre'}
           onClick={data[1].onClick}
-          dataValue={data[1].label}
+          dataValue={data[1].dataValue ? data[1].dataValue : data[1].label}
         />
       </div>
       <div className={'mbPager'}></div>

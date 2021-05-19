@@ -1,9 +1,12 @@
 import {
+  ASSOCIATE_REVIEW_DISTINCT_SAGA,
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
   GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -11,7 +14,13 @@ import {
   SET_PAGE_COUNT,
   SET_REQUEST_OBJECT
 } from '../actionType';
-import { makeAssociateNodeObj, makeInternalNodeObj } from './GenericActions';
+import {
+  makeAssociateGroupObj,
+  makeAssociateNodeObj,
+  makeAssociateReviewListRequestObject,
+  makeAssociateRoleObj,
+  makeInternalNodeObj
+} from './GenericActions';
 
 export const getAssociateGroupAssociateReqObj = (
   selectedAssociateInfo,
@@ -574,3 +583,103 @@ export function sortingListInAsc(array, key) {
     }
   });
 }
+
+export const getAssociateDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  dispatch,
+  countPage,
+  targetValue
+) => {
+  let requestObect = makeAssociateReviewListRequestObject(
+    selectedAssociateInfo,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+  dispatch({
+    type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
+    payload: {
+      request: requestObect,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue
+    }
+  });
+};
+
+export const getAssociateRoleDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue
+) => {
+  let requestObj = makeAssociateRoleObj(
+    selectedAssociateInfo,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'associateRoleDistinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+
+export const getAssociateGroupDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue
+) => {
+  let requestObj = makeAssociateGroupObj(
+    selectedAssociateInfo,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'associateGroupDistinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};

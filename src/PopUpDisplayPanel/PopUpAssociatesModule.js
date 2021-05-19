@@ -13,11 +13,6 @@ import {
   SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
   SET_PREVIOUS_SECTION_POPUP,
   SET_PAGE_COUNT,
-  FILTERMODE,
-  SET_MOBILE_PANE_STATE,
-  LOADER_START,
-  SET_REQUEST_OBJECT,
-  ASSOCIATE_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
@@ -27,17 +22,16 @@ import {
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_POPUP_SINGLE_STATE,
   CLEAR_ASSESSEE_INFO,
-  GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
+import { makeAssociateGroupObj, makeAssociateRoleObj } from '../Actions/GenericActions';
 import {
-  makeAssociateGroupObj,
-  makeAssociateNodeObj,
-  makeAssociateReviewListRequestObject,
-  makeAssociateRoleObj
-} from '../Actions/GenericActions';
-import { getAssociateNodeApiCall } from '../Actions/AssociateModuleAction';
+  getAssociateDistinctApiCall,
+  getAssociateNodeApiCall,
+  getAssociateRoleDistinctApiCall,
+  getAssociateGroupDistinctApiCall
+} from '../Actions/AssociateModuleAction';
 
 const PopUpAssociatesModule = (props) => {
   const {
@@ -58,6 +52,44 @@ const PopUpAssociatesModule = (props) => {
       type: SET_ASSOCIATE_SECONDARY_OPTION_VALUE,
       payload: e.currentTarget.getAttribute('data-value')
     });
+  };
+  const resetDataFunction = () => {
+    dispatch({
+      type: SET_POPUP_SINGLE_STATE,
+      payload: { stateName: 'cardValue', value: 'NoCard' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: '' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedFlagedArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'unselectedFlagedArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedTagsArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'unselectedTagsArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'flagedValue', value: '' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: {
+        stateName: 'scanString',
+        value: ''
+      }
+    });
+    dispatch({ type: ASSOCIATE_POPUP_CLOSE });
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
@@ -101,97 +133,33 @@ const PopUpAssociatesModule = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (targetValue === 'distinct') {
-      let requestObect = makeAssociateReviewListRequestObject(
+      getAssociateDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        dispatch,
+        countPage,
+        targetValue
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-      dispatch({
-        type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
-        payload: {
-          request: requestObect,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue
-        }
-      });
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: { stateName: 'cardValue', value: 'NoCard' }
-      });
-      dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+      resetDataFunction();
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
-      let requestObj = makeAssociateRoleObj(
+      getAssociateRoleDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'associateRoleDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: { stateName: 'cardValue', value: 'NoCard' }
-      });
-      dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+      resetDataFunction();
     } else if (targetValue === 'groups') {
-      let requestObj = makeAssociateGroupObj(
+      getAssociateGroupDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'associateGroupDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: { stateName: 'cardValue', value: 'NoCard' }
-      });
-      dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+      resetDataFunction();
     } else if (targetValue === 'nodes') {
       getAssociateNodeApiCall(
         selectedAssociateInfo,
@@ -201,18 +169,7 @@ const PopUpAssociatesModule = (props) => {
         targetValue,
         'hierarchy'
       );
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: {
-          stateName: 'scanString',
-          value: ''
-        }
-      });
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: { stateName: 'cardValue', value: 'NoCard' }
-      });
-      dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+      resetDataFunction();
     } else {
       dispatch({
         type: SET_ASSOCIATE_NEXT_POPUP,
