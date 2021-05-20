@@ -305,7 +305,6 @@ export const DisplayPaneThree = () => {
     rightPaneSectionsAssociate[0]
   );
   useEffect(() => {
-    console.log("IN SIDE USE EFFEECT");
     setSelectedSection(rightPaneSectionsAssessee[0]);
     setSelectedSectionAssesseeRole(rightPaneSectionsAssesseeRole[0]);
     setSelectedSectionAssesseeGroup(rightPaneSectionsAssesseeGroup[0]);
