@@ -44,21 +44,21 @@ function* workerReviseInfoAssociateSaga(data) {
           payload: 'review'
         });
       }
-      if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
-        yield put({
-          type: SET_DISPLAY_TWO_SINGLE_STATE,
-          payload: { stateName: 'reviewListDistinctData', value: [] }
-        });
-        yield put({
-          type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
-          payload: {
-            HeaderOne: 'associates',
-            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo
-          }
-        });
-      }
+      // if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
+      //   yield put({
+      //     type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //     payload: { stateName: 'reviewListDistinctData', value: [] }
+      //   });
+      //   yield put({
+      //     type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
+      //     payload: {
+      //       HeaderOne: 'associates',
+      //       request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+      //       BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+      //       BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo
+      //     }
+      //   });
+      // }
 
       console.log('loading end');
       yield put({ type: LOADER_STOP });

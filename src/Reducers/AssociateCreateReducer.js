@@ -133,15 +133,15 @@ const initialState = {
     }
   },
   informationFramework: {
-    iguruNodeAscendant: {
-      iguruNodeAscendantPrimary: [],
-      iguruNodeAscendantSecondary: [],
-      iguruNodeAscendantAll: []
+    associateAscendant: {
+      associateAscendantPrimary: [],
+      associateAscendantSecondary: [],
+      associateAscendantAll: []
     },
-    iguruNodeDescendant: {
-      iguruNodeDescendantPrimary: [],
-      iguruNodeDescendantSecondary: [],
-      iguruNodeDescendantAll: []
+    associateDescendant: {
+      associateDescendantPrimary: [],
+      associateDescendantSecondary: [],
+      associateDescendantAll: []
     }
   },
   // informationSetup: {

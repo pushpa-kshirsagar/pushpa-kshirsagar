@@ -217,6 +217,45 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       ],
       innerInfo: 'No Information',
       isListCard: true
+    },
+    {
+      id: 'typ2',
+      labelTextOneOne: 'type',
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'type',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'type',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'type',
+              status: ''
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
     }
   ];
   const engagementListAll = [
@@ -291,7 +330,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOne: 'assessee',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'enrolment',
+          labelTextOneOneBadge: 'create',
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'approval',
@@ -340,6 +379,19 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOne: 'assessment',
       labelTextOneOneBadges: [
         {
+          labelTextOneOneBadge: 'create',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'approval',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerList: []
+            }
+          ]
+        },
+        {
           labelTextOneOneBadge: 'information',
           innerLabelBadgeList: [
             {
@@ -352,6 +404,15 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'type',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
               innerList: []
             }
           ]
@@ -367,6 +428,19 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOne: 'assignment',
       labelTextOneOneBadges: [
         {
+          labelTextOneOneBadge: 'create',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'approval',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerList: []
+            }
+          ]
+        },
+        {
           labelTextOneOneBadge: 'information',
           innerLabelBadgeList: [
             {
@@ -382,6 +456,15 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerList: []
             }
           ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
         }
       ],
       innerInfo: 'No',
@@ -394,7 +477,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOne: 'associate',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'enrolment',
+          labelTextOneOneBadge: 'create',
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'approval',
@@ -423,6 +506,10 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'role',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'type',
               innerList: []
             }
           ]
@@ -464,6 +551,19 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOne: 'iGuru analytic',
       labelTextOneOneBadges: [
         {
+          labelTextOneOneBadge: 'create',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'approval',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerList: []
+            }
+          ]
+        },
+        {
           labelTextOneOneBadge: 'information',
           innerLabelBadgeList: [
             {
@@ -479,6 +579,15 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerList: []
             }
           ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
         }
       ],
       innerInfo: 'No',
@@ -491,7 +600,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOne: 'iGuru marketplace',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'rating',
           innerList: []
         }
       ],
@@ -513,8 +622,62 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     },
     {
       id: 'a8',
+      labelTextOneOne: 'iGuru platform',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'brand',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'domain',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'theme',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
+    },
+    {
+      id: 'a9',
       labelTextOneOne: 'item',
       labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'create',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'approval',
+              innerList: []
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerList: []
+            }
+          ]
+        },
         {
           labelTextOneOneBadge: 'information',
           innerLabelBadgeList: [
@@ -528,6 +691,15 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'type',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
               innerList: []
             }
           ]

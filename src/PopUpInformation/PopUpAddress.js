@@ -8,7 +8,7 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_NEXT_POPUP } from '../actionType';
+import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
@@ -83,13 +83,17 @@ const PopUpAddress = (props) => {
     dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
-    if (isRequired) {
-      if (validateFun()) {
+    if (mode === 'revise') {
+      dispatch({ type: POPUP_CLOSE });
+    } else {
+      if (isRequired) {
+        if (validateFun()) {
+          dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+        }
+      } else {
+        /*according to creation mode popup sequence will change*/
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
       }
-    } else {
-      /*according to creation mode popup sequence will change*/
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
   };
   return (

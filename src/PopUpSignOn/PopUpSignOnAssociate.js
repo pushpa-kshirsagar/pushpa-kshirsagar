@@ -67,6 +67,15 @@ const PopUpSignOnAssociate = () => {
       }
     }
   }, [assesseeInfo.assesseeInformationData, history]);
+
+  const coreNodeReviewListDataRemoveSelf = [];
+  if (coreNodeReviewListData.length > 0) {
+    coreNodeReviewListData.forEach((ob) => {
+      if (responseObject.id !== ob.id) {
+        coreNodeReviewListDataRemoveSelf.push(ob);
+      }
+    });
+  }
   const CreateApi = () => {
     const {
       informationBasic,
@@ -197,7 +206,7 @@ const PopUpSignOnAssociate = () => {
   const updateParentNode = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let tagId = e.currentTarget.getAttribute('tag');
-    let tagIdArr = associateInfo.informationFramework.iguruNodeAscendant.iguruNodeAscendantPrimary;
+    let tagIdArr = associateInfo.informationFramework.associateAscendant.associateAscendantPrimary;
     if (tagIdArr.includes(tagId)) {
       setRoleSelectedError('');
       document.getElementById(tagId).style.backgroundColor = 'white';
@@ -214,8 +223,8 @@ const PopUpSignOnAssociate = () => {
       type: SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
       payload: {
         objectName: 'informationFramework',
-        stateName: 'iguruNodeAscendant',
-        actualStateName: 'iguruNodeAscendantPrimary',
+        stateName: 'associateAscendant',
+        actualStateName: 'associateAscendantPrimary',
         value: tagIdArr
       }
     });
@@ -412,10 +421,10 @@ const PopUpSignOnAssociate = () => {
         inputHeaderBadge={'ascendant'}
         inputHeaderBadgeTwo={'primary'}
         infoMsg={'select a node'}
-        ListData={coreNodeReviewListData}
+        ListData={coreNodeReviewListDataRemoveSelf}
         isRequired={true}
         selectedList={
-          associateInfo.informationFramework.iguruNodeAscendant.iguruNodeAscendantPrimary
+          associateInfo.informationFramework.associateAscendant.associateAscendantPrimary
         }
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
