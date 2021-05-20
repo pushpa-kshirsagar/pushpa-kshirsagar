@@ -3,10 +3,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import PopUpWhiteHeader from '../Molecules/PopUp/PopUpWhiteHeader';
-import { FormControl, InputLabel } from '@material-ui/core';
+import { FormControl, FormHelperText, InputLabel } from '@material-ui/core';
 import SelectField from '../Atoms/SelectField/SelectField';
 import { SET_SIGN_ON_SINGLE_STATE } from '../actionType';
 import { useDispatch } from 'react-redux';
+import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpAdministratorSignInCredentialRevise = (props) => {
   const {
@@ -14,16 +15,20 @@ const PopUpAdministratorSignInCredentialRevise = (props) => {
     headerPanelColour,
     headerOne,
     headerOneBadgeOne,
-    signInOptions = ["email.com","909080908"],
+    signInOptions = ['email.com', '909080908'],
     signValue,
     onClick,
-    onClose
+    onClose,
+    isRequired = false,
+    errorMsg = '',
+    setErrorMsg = null
   } = props;
   const dispatch = useDispatch();
   const [signIn, setSignIn] = useState();
   const handleChange = (event) => {
     const { value } = event.target;
     // setSignIn(value);
+    setErrorMsg('');
     dispatch({
       type: SET_SIGN_ON_SINGLE_STATE,
       payload: {
@@ -66,7 +71,7 @@ const PopUpAdministratorSignInCredentialRevise = (props) => {
               tag={'assesseeSignIn'}
               label={'credential'}
               listSelect={signInOptions}
-              errorMsg={''}
+              errorMsg={errorMsg}
               onChange={handleChange}
               value={signValue === '' ? signInOptions[0] : signValue}
             />

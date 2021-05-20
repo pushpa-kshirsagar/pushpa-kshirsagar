@@ -54,11 +54,12 @@ const NodeCreatePopup = (props) => {
   const updateParentNode = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let tagId = e.currentTarget.getAttribute('tag');
+    // document.getElementById(tagId).style.backgroundColor = 'white';
     let tagIdArr =
       nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary;
     if (tagIdArr.includes(tagId)) {
       setRoleSelectedError('');
-      document.getElementById(tagId).style.backgroundColor = 'white';
+      // document.getElementById(tagId).style.backgroundColor = 'white';
       tagIdArr = tagIdArr.filter(function (number) {
         return number !== tagId;
       });
@@ -66,7 +67,7 @@ const NodeCreatePopup = (props) => {
       var arr = [];
       tagIdArr = [...arr];
       tagIdArr.push(tagId);
-      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+      // document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
     }
     dispatch({
       type: SET_NODE_DYNAMIC_SINGLE_STATE,

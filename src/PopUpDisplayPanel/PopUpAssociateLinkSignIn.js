@@ -6,15 +6,34 @@ import PopUpWhiteHeader from '../Molecules/PopUp/PopUpWhiteHeader';
 import { InputLabel } from '@material-ui/core';
 import InputField from '../Atoms/InputField/InputField';
 import Label from '../Atoms/Labels/Label';
+import { useDispatch } from 'react-redux';
+import { SET_DISPLAY_TWO_SINGLE_STATE, SET_SIGN_ON_SINGLE_STATE } from '../actionType';
+import { INCORRECT_INFORMATION_ERROR_MESSAGE } from '../errorMessage';
 
 const PopUpAssociateLinkSignIn = (props) => {
-  const { isActive, headerPanelColour, headerOne, headerOneBadgeOne, onClick, onClose } = props;
+  const {
+    isActive,
+    headerPanelColour,
+    headerOne,
+    headerOneBadgeOne,
+    onClick,
+    onClose,
+    setUserName,
+    setPassword,
+    userName,
+    password,
+    errorMsg = '',
+    setIsUserNameValid = null,
+    setIsPasswordValid = null,
+    isUserNameValid = '',
+    isPasswordValid = ''
+  } = props;
   const [isCredentialsInValid, setIsCredentialsInValid] = useState('');
-  const [isUserNameValid, setIsUserNameValid] = useState('');
-  const [isPasswordValid, setIsPasswordValid] = useState('');
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-
+  const dispatch = useDispatch();
+  // const [isUserNameValid, setIsUserNameValid] = useState('');
+  // const [isPasswordValid, setIsPasswordValid] = useState('');
+  // const [userName, setUserName] = useState('');
+  // const [password, setPassword] = useState('');
   return (
     <div>
       <Popup isActive={isActive}>
@@ -51,6 +70,10 @@ const PopUpAssociateLinkSignIn = (props) => {
                 setIsUserNameValid('');
                 setIsCredentialsInValid('');
                 setUserName(e.target.value);
+                dispatch({
+                  type: SET_DISPLAY_TWO_SINGLE_STATE,
+                  payload: { stateName: 'errorResponse', value: '' }
+                });
               }}
             />
             <InputField
@@ -63,6 +86,10 @@ const PopUpAssociateLinkSignIn = (props) => {
                 setIsPasswordValid('');
                 setIsCredentialsInValid('');
                 setPassword(e.target.value);
+                dispatch({
+                  type: SET_DISPLAY_TWO_SINGLE_STATE,
+                  payload: { stateName: 'errorResponse', value: '' }
+                });
               }}
             />
             <div
@@ -82,11 +109,18 @@ const PopUpAssociateLinkSignIn = (props) => {
                 {/* <Label text="forgot information" fontSize="1.2rem" colour="#0000008a" /> */}
               </div>
               <div>
-                {isCredentialsInValid && (
+                {/* {isCredentialsInValid && (
                   <Label
                     text={isCredentialsInValid}
                     fontSize="1.2rem"
                     colour={isCredentialsInValid === 'in progress' ? 'green' : 'rgb(244, 67, 54)'}
+                  />
+                )} */}
+                {errorMsg === '5015' && (
+                  <Label
+                    text={INCORRECT_INFORMATION_ERROR_MESSAGE}
+                    fontSize="1.2rem"
+                    colour={'rgb(244, 67, 54)'}
                   />
                 )}
               </div>

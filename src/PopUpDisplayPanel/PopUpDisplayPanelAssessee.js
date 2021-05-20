@@ -6,6 +6,7 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
   CLEAR_DISPLAY_PANE_THREE,
+  CLEAR_SIGN_ON_SINGLE_STATE,
   GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_CLOSE,
@@ -37,7 +38,9 @@ const PopUpDisplayPanelAssessee = (props) => {
     secondaryOptionCheckValue
   } = useSelector((state) => state.PopUpReducer);
   const { assesseePermission } = useSelector((state) => state.UserReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, leftPaneAssesseeInfo } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
   const { signOut } = useContext(AccountContext);
@@ -108,6 +111,7 @@ const PopUpDisplayPanelAssessee = (props) => {
       revisePopupMode = 'ASSOCIATE_LINK';
       valueArr = [];
       reviseSecondaryOptionCheckValue = '';
+      dispatch({ type: CLEAR_SIGN_ON_SINGLE_STATE });
     }
     if (clickValue === 'revise') {
       setIsReviseMode(true);

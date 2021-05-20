@@ -45,6 +45,10 @@ const ReviewList = (props) => {
               data-value={dataValue}
               data-flag={isFlagActive}
               onClick={isSelectActive !== '' ? null : onClickEvent}
+              style={{
+                backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '',
+                height: '49px'
+              }}
             >
               <div
                 className={[
@@ -106,7 +110,7 @@ const ReviewList = (props) => {
                 <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
                   <IconButton
                     className={'assesseeListiconSize'}
-                    id={tag} 
+                    id={tag}
                     onClick={flagedValue !== '' ? onClickAddFladed : null}
                   >
                     {/* */}

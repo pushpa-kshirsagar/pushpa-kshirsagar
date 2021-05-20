@@ -37,7 +37,8 @@ import {
   INTERNAL_NODE_LIST_SAGA,
   SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
-  GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA
+  GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
+  CLEAR_NODE_REDUCER_STATE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -803,6 +804,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'node') {
       let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      dispatch({ type: CLEAR_NODE_REDUCER_STATE });
       dispatch({ type: LOADER_START });
       dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({

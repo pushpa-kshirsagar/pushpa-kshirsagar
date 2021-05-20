@@ -6,18 +6,23 @@ import {
   SET_SELECTED_ASSOCIATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_USER,
-  SET_USER_STATE
+  SET_USER_STATE,
+  ASSESSEE_ASSOCIATE_LINK_LIST,
+  REVIEWLIST_DISTINCT_DATA,
+  SET_MIDDLEPANE_STATE,
+  POPUP_CLOSE
 } from '../../actionType';
-import { CONFIRM_ASSESSEE_URL } from '../../endpoints';
+import { ASSESSEE_LINK_URL, CONFIRM_ASSESSEE_URL } from '../../endpoints';
 
 const assesseesConfirmApi = async (requestObj) => {
-  console.log(requestObj.data);
-  let URL = CONFIRM_ASSESSEE_URL;
   const requestOptions = {
     method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(URL, requestOptions);
+  const response = await fetch(requestObj.URL, requestOptions);
   const json = await response.json();
   return json;
 };
@@ -25,7 +30,10 @@ const assesseesConfirmApi = async (requestObj) => {
 function* workerConfirmAssesseeSaga(data) {
   console.log('WATCH+++', data.payload.requestObject);
   try {
-    const response = yield call(assesseesConfirmApi, { data: data.payload.requestObject });
+    const response = yield call(assesseesConfirmApi, {
+      data: data.payload.requestObject,
+      URL: CONFIRM_ASSESSEE_URL
+    });
     if (response.responseCode === '000') {
       console.log('success==', response.responseObject);
       localStorage.setItem('token', response?.responseObject?.cognitoResponse?.accessToken);
@@ -58,7 +66,50 @@ function* workerConfirmAssesseeSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerAssesseeAssociateLinkSaga(data) {
+  console.log('WATCH+++', data.payload.request);
+  try {
+    const response = yield call(assesseesConfirmApi, {
+      data: data.payload.request,
+      URL: ASSESSEE_LINK_URL
+    });
+    if (response.responseCode === '000') {
+      yield put({ type: POPUP_CLOSE });
+      console.log('response+++', response.responseObject);
+
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'associates',
+          middlePaneHeaderBadgeOne: 'active',
+          middlePaneHeaderBadgeTwo: '',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assesseeassociatesReviewList',
+          scanCount: 0,
+          showMiddlePaneState: true
+        }
+      });
+      console.log('11+++');
+      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
+      console.log('21+++');
+
+      console.log('success==', response.responseObject);
+    } else {
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'errorResponse', value: response }
+      });
+    }
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
 
 export default function* watchConfirmAssesseeSaga() {
   yield takeLatest(ASSESSEE_CONFIRM_SAGA, workerConfirmAssesseeSaga);
+  yield takeLatest(ASSESSEE_ASSOCIATE_LINK_LIST, workerAssesseeAssociateLinkSaga);
 }

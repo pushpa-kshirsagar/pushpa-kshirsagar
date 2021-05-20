@@ -5,7 +5,9 @@ const initialState = {
   assesseeAssent: false,
   signInCredential: '',
   currentPassword: '',
-  revisedPassword: ''
+  revisedPassword: '',
+  signInCredentialSecondary: '',
+  assesseeSignInPassword: ''
 };
 
 const SignOnReducer = (istate = initialState, action) => {

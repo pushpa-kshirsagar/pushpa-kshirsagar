@@ -6,51 +6,23 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
-  ASSESSEE_INFO_REVISE_SAGA,
-  ASSOCIATE_INFO_REVISE_SAGA,
-  GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
-  GET_ASSESSEE_INFO_SAGA,
-  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
-  GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
-  GET_ASSESSMENT_INFO_SAGA,
-  GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA,
-  GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
-  GET_ASSIGNMENT_INFO_SAGA,
-  GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA,
-  GET_ASSOCIATE_GROUP_REVIEW_INFO_SAGA,
-  GET_ASSOCIATE_INFO_SAGA,
-  GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
-  LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
-  SET_MOBILE_PANE_STATE,
   SET_SECONDARY_CREATE_OPTION_VALUE,
-  FILTERMODE,
-  CLEAR_DISPLAY_PANE_THREE,
-  LOADER_STOP,
-  SET_POPUP_SINGLE_STATE,
-  ASSESSEE_INFO_CREATE
+  FILTERMODE
 } from '../actionType';
 import {
   getAssesseeDistinctApiCall,
-  getAssesseeGroupAssesseeDistinctApiCall,
-  getAssesseeGroupAssesseeReqObj,
   getAssesseeGroupDistinctApiCall,
-  getAssesseeRoleAssesseeDistinctApiCall,
-  getAssesseeRoleAssesseeReqObj,
   getAssesseeRoleDistinctApiCall,
   setFlagedArray
 } from '../Actions/AssesseeModuleAction';
 import {
   getAssociateDistinctApiCall,
-  getAssociateGroupAssociateDistinctApiCall,
-  getAssociateGroupAssociateReqObj,
   getAssociateGroupDistinctApiCall,
   getAssociateNodeApiCall,
-  getAssociateRoleAssociateDistinctApiCall,
-  getAssociateRoleAssociateReqObj,
   getAssociateRoleDistinctApiCall,
   getInternalNodeApiCall
 } from '../Actions/AssociateModuleAction';
@@ -70,16 +42,9 @@ const PopUpMiddlePaneTrippleDot = (props) => {
     reviewListDistinctData,
     middlePaneHeaderBadgeTwo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const [isReviseMode, setIsReviseMode] = useState(false);
 
   const dispatch = useDispatch();
-  const {
-    headerPanelColour = 'displayPaneCentre',
-    isActive,
-    popupAllClose,
-    typeOfMiddlePaneList
-  } = props;
-
+  const { headerPanelColour = 'displayPaneCentre', isActive } = props;
   const setSecondaryOptionValue = (e) => {
     dispatch({
       type: SET_SECONDARY_CREATE_OPTION_VALUE,
