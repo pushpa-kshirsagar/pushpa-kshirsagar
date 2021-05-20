@@ -44,10 +44,14 @@ import {
   setFlagedArray
 } from '../Actions/AssesseeModuleAction';
 import {
+  getAssociateDistinctApiCall,
   getAssociateGroupAssociateDistinctApiCall,
   getAssociateGroupAssociateReqObj,
+  getAssociateGroupDistinctApiCall,
+  getAssociateNodeApiCall,
   getAssociateRoleAssociateDistinctApiCall,
   getAssociateRoleAssociateReqObj,
+  getAssociateRoleDistinctApiCall,
   getInternalNodeApiCall
 } from '../Actions/AssociateModuleAction';
 const PopUpMiddlePaneTrippleDot = (props) => {
@@ -96,50 +100,47 @@ const PopUpMiddlePaneTrippleDot = (props) => {
         dataVal
       );
       dispatch({ type: POPUP_CLOSE });
-    } else if (
-      keyVal === 'distinct' &&
-      middlePaneHeader === 'assessees' &&
-      popupHeaderOneBadgeOne === 'groups'
-    ) {
-      getAssesseeGroupDistinctApiCall(
+    } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'associates') {
+      getAssociateDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        countPage,
         dispatch,
-        'groups'
-      );
-      dispatch({ type: POPUP_CLOSE });
-    } else if (
-      keyVal === 'distinct' &&
-      middlePaneHeader === 'assessees' &&
-      popupHeaderOneBadgeOne === 'nodes'
-    ) {
-      getInternalNodeApiCall(
-        selectedAssociateInfo,
-        secondaryOptionCheckValue,
         countPage,
-        dispatch,
-        'nodes',
-        '',
-        'hierarchy',
-        'assessees'
+        dataVal
       );
       dispatch({ type: POPUP_CLOSE });
-    } else if (
-      keyVal === 'distinct' &&
-      middlePaneHeader === 'assessees' &&
-      popupHeaderOneBadgeOne === 'roles'
-    ) {
-      getAssesseeRoleDistinctApiCall(
-        selectedAssociateInfo,
-        secondaryOptionCheckValue,
-        countPage,
-        'roles',
-        dispatch
-      );
-      dispatch({ type: POPUP_CLOSE });
-    } else if (dataVal === 'groups') {
-      if (middlePaneHeader === 'assessees') {
+    } else if (middlePaneHeader === 'assessees') {
+      if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'groups') {
+        getAssesseeGroupDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          'assessees'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'roles') {
+        getAssesseeRoleDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          'roles',
+          dispatch
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'groups') {
         getAssesseeGroupDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
@@ -148,9 +149,7 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           dataVal
         );
         dispatch({ type: POPUP_CLOSE });
-      }
-    } else if (dataVal === 'roles') {
-      if (middlePaneHeader === 'assessees') {
+      } else if (keyVal === 'roles') {
         getAssesseeRoleDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
@@ -158,10 +157,8 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           dataVal,
           dispatch
         );
-      }
-      dispatch({ type: POPUP_CLOSE });
-    } else if (dataVal === 'nodes') {
-      if (middlePaneHeader === 'assessees') {
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'nodes') {
         getInternalNodeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
@@ -173,6 +170,74 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           'assessees'
         );
         dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
+      }
+    } else if (middlePaneHeader === 'associates') {
+      if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'groups') {
+        getAssociateGroupDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
+        getAssociateNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          'hierarchy'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'roles') {
+        getAssociateRoleDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'roles'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'groups') {
+        getAssociateGroupDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'roles') {
+        getAssociateRoleDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'roles'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'nodes') {
+        getAssociateNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          'hierarchy'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
       }
     } else if (dataVal === 'select') {
       // console.log(secondaryOptionCheckValue)

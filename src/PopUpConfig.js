@@ -908,12 +908,14 @@ export const ASSOCIATE_REVIEW_LIST_POPUP_OPTION = [
   {
     data: 'review',
     dataValue: 'review',
+    dataKey: 'reviewKey',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'revise',
     dataValue: 'revise',
+    dataKey: 'reviewKey',
     optionClass: 'optionPrimary',
     disabled: false
   },

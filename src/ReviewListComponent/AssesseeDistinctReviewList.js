@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
+  FILTERMODE,
   FILTERMODE_ENABLE,
   LOADER_START,
   POPUP_OPEN,
@@ -123,16 +124,29 @@ const AssesseeDistinctReviewList = (props) => {
       siftValue === 'disapproved' ||
       siftValue === 'unapproved' ||
       siftValue === 'unconfirmed'
-    )
+    ) {
       siftApiCall(siftValue);
-    dispatch({ type: FILTERMODE_ENABLE });
+    } else if (siftValue === 'flagCancel') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'flagedValue', value: '' }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeDistinct' + middlePaneHeaderBadgeTwo }
+      });
+    } else if (siftValue === 'flagFinish') {
+      console.log('api call for multiple flag assessee');
+    } else {
+      dispatch({ type: FILTERMODE_ENABLE });
+    }
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const flagPrimaryIcon = [{ label: 'flag', onClick: onClickFooter, Icon: FilterList }];
   const flagSecondaryIcon = [
-    { label: 'cancel', onClick: onClickFooter, Icon: ClearIcon },
-    { label: 'finish', onClick: onClickFooter, Icon: Check }
+    { label: 'cancel', dataValue: 'flagCancel', onClick: onClickFooter, Icon: ClearIcon },
+    { label: 'finish', dataValue: 'flagFinish', onClick: onClickFooter, Icon: Check }
   ];
   const secondaryIcon = [
     { label: 'disapproved', onClick: onClickFooter, Icon: FilterList },

@@ -163,7 +163,9 @@ const PopUpReducer = (istate = initialState, action) => {
         selectedTagValue: action.payload.selectedTagValue,
         selectedTagStatus: action.payload.selectedTagStatus,
         selectedTagGroupId: action.payload.selectedTagGroupId,
-        currentPopUpOption: action.payload.currentPopUpOption
+        currentPopUpOption: action.payload.currentPopUpOption,
+        isFlaged: action.payload.isFlaged
+
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
       return {
@@ -211,7 +213,6 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
           : istate.secondaryPopUpOptions[action.payload.badgeValue];
-      console.log('arrVal', arrVal);
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
@@ -272,6 +273,8 @@ const PopUpReducer = (istate = initialState, action) => {
           if (action.payload.keyValue === 'flag' && !istate.isFlaged) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
+      console.log('arrVal', arrVal);
+
           // if (
           //   (action.payload.badgeValue === 'suspend' ||
           //     action.payload.badgeValue === 'terminate') &&

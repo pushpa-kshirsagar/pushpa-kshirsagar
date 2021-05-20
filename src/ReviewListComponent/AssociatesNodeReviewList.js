@@ -114,7 +114,7 @@ const AssociatesNodeReviewList = (props) => {
   };
   useEffect(() => {
     if (nodeViewState === 'list') {
-      let sortedArr = sortingListInAsc(reviewListDistinctData, 'associateNodeName');
+      let sortedArr = sortingListInAsc(reviewListDistinctData, 'associateName');
       setSortedReviewListDistinctData(sortedArr);
     }
   }, [reviewListDistinctData]);
