@@ -90,6 +90,7 @@ const PopUpAssociatesModule = (props) => {
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');

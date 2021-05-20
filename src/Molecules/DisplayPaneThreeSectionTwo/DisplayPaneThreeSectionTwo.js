@@ -29,7 +29,7 @@ const DisplayPaneThreeSectionTwo = () => {
     assesseeAddressPostcode = '',
     assesseeAddressCity = '',
     assesseeAddress = ''
-  } = informationContact?.assesseeAddressHomePrimary;
+  } = informationContact?.assesseeAddressHomePrimary || {};
   let homeAddressPrimary = `${assesseeAddress} ${assesseeAddressCity} ${assesseeAddressProvinceState} ${assesseeAddressCountryRegion} ${assesseeAddressPostcode}`;
   if (!homeAddressPrimary.trim()) {
     homeAddressPrimary = 'No Information';
@@ -40,7 +40,7 @@ const DisplayPaneThreeSectionTwo = () => {
     assesseeAddressPostcode: addressPostcode = '',
     assesseeAddressCity: addressCity = '',
     assesseeAddress: address = ''
-  } = informationContact?.assesseeAddressHomeSecondary;
+  } = informationContact?.assesseeAddressHomeSecondary || {};
   let homeAddressSecondary = `${address} ${addressCity} ${addressProvinceState} ${addressCountryRegion} ${addressPostcode}`;
   if (!homeAddressSecondary.trim()) {
     homeAddressSecondary = 'No Information';
@@ -51,7 +51,7 @@ const DisplayPaneThreeSectionTwo = () => {
     assesseeAddressPostcode: workAddressPrimaryPostcode = '',
     assesseeAddressCity: workAddressPrimaryCity = '',
     assesseeAddress: workAddressPrimaryAddress = ''
-  } = informationContact?.assesseeAddressWorkPrimary;
+  } = informationContact?.assesseeAddressWorkPrimary || {};
   let workAddressPrimary = `${workAddressPrimaryAddress} ${workAddressPrimaryCity} ${workAddressPrimaryState} ${workAddressPrimaryRegion} ${workAddressPrimaryPostcode}`;
   if (!workAddressPrimary.trim()) {
     workAddressPrimary = 'No Information';
@@ -62,7 +62,7 @@ const DisplayPaneThreeSectionTwo = () => {
     assesseeAddressPostcode: workAddressSecondaryPostcode = '',
     assesseeAddressCity: workAddressSecondaryCity = '',
     assesseeAddress: workAddressSecondaryAddress = ''
-  } = informationContact?.assesseeAddressWorkSecondary;
+  } = informationContact?.assesseeAddressWorkSecondary || {};
   let workAddressSecondary = `${workAddressSecondaryAddress} ${workAddressSecondaryCity} ${workAddressSecondaryProvinceState} ${workAddressSecondaryCountryRegion} ${workAddressSecondaryPostcode}`;
   if (!workAddressSecondary.trim()) {
     workAddressSecondary = 'No Information';
@@ -421,13 +421,13 @@ const DisplayPaneThreeSectionTwo = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneNumber ||
+            informationContact?.assesseeTelephoneMobilePrimary?.assesseeTelephoneNumber ||
             'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
           textOne:
-            informationContact.assesseeTelephoneMobileSecondary.assesseeTelephoneNumber ||
+            informationContact?.assesseeTelephoneMobileSecondary?.assesseeTelephoneNumber ||
             'No Information'
         }
       ],

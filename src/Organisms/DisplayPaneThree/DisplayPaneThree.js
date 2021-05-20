@@ -420,7 +420,7 @@ export const DisplayPaneThree = () => {
       const { associateId, id } = responseObject;
       let allocationObj = {
         assesseeRoleGroup: assesseeRole.informationAllocation.assesseeRoleGroup[0]
-    };
+      };
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
@@ -513,13 +513,11 @@ export const DisplayPaneThree = () => {
         associate: {
           id,
           informationBasic,
-          // informationContact,
-          informationSetup,
+          informationContact,
+          // informationSetup,
           informationFramework: {
-            iguruNodeAscendant: {
-              iguruNodeAscendantPrimary:
-                associateInfo.informationFramework.iguruNodeAscendant.iguruNodeAscendantPrimary[0]
-            }
+            associateAscendantPrimary:
+              associateInfo.informationFramework.associateAscendant.associateAscendantPrimary[0]
           }
         }
       };

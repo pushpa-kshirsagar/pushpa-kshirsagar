@@ -598,7 +598,6 @@ export const getAssociateDistinctApiCall = (
     countPage
   );
   dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({
     type: FILTERMODE,
     payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }

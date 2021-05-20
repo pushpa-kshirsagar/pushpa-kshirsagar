@@ -36,15 +36,67 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
   // associateAddressPostcode: "123456"
   // associateAddressProvinceState: "22"
   // associateAddressVerification: false
-
-  let workAddressPrimary = `${informationContact?.associateAddressWorkPrimary?.associateAddress} ${informationContact?.associateAddressWorkPrimary?.associateAddressCity} ${informationContact?.associateAddressWorkPrimary?.associateAddressCountryRegion} ${informationContact?.associateAddressWorkPrimary?.associateAddressPostcode}`;
+  const {
+    associateAddressCountryRegion = '',
+    associateAddressProvinceState = '',
+    associateAddressPostcode = '',
+    associateAddressCity = '',
+    associateAddress = ''
+  } = informationContact?.associateAddressWorkPrimary || {};
+  let workAddressPrimary = `${associateAddress} ${associateAddressCity} ${associateAddressProvinceState} ${associateAddressCountryRegion} ${associateAddressPostcode}`;
   if (!workAddressPrimary.trim()) {
     workAddressPrimary = 'No Information';
   }
-  let workAddressSecondary = `${informationContact?.associateAddressWorkSecondary?.associateAddress} ${informationContact?.associateAddressWorkSecondary?.associateAddressCity} ${informationContact?.associateAddressWorkSecondary?.associateAddressCountryRegion} ${informationContact?.associateAddressWorkSecondary?.associateAddressPostcode}`;
+  // let workAddressPrimary = `${informationContact?.associateAddressWorkPrimary?.associateAddress} ${informationContact?.associateAddressWorkPrimary?.associateAddressCity} ${informationContact?.associateAddressWorkPrimary?.associateAddressCountryRegion} ${informationContact?.associateAddressWorkPrimary?.associateAddressPostcode}`;
+  // if (!workAddressPrimary.trim()) {
+  //   workAddressPrimary = 'No Information';
+  // }
+  const {
+    associateAddressCountryRegion: associateAddressCountryRegionSecondary = '',
+    associateAddressProvinceState: associateAddressProvinceStateSecondary = '',
+    associateAddressPostcode: associateAddressPostcodeSecondary = '',
+    associateAddressCity: associateAddressCitySecondary = '',
+    associateAddress: associateAddressSecondary = ''
+  } = informationContact?.associateAddressWorkSecondary || {};
+  let workAddressSecondary = `${associateAddressSecondary} ${associateAddressCitySecondary} ${associateAddressProvinceStateSecondary} ${associateAddressCountryRegionSecondary} ${associateAddressPostcodeSecondary}`;
+  // let workAddressSecondary = `${informationContact?.associateAddressWorkSecondary?.associateAddress} ${informationContact?.associateAddressWorkSecondary?.associateAddressCity} ${informationContact?.associateAddressWorkSecondary?.associateAddressCountryRegion} ${informationContact?.associateAddressWorkSecondary?.associateAddressPostcode}`;
   if (!workAddressSecondary.trim()) {
     workAddressSecondary = 'No Information';
   }
+  // +91 (citycode) number 'extension' extennumber
+  // +91 (80) 786899 extension 987
+  const {
+    associateTelephoneAreaCity = '',
+    associateTelephoneCountryRegion = '',
+    associateTelephoneExtension = '',
+    associateTelephoneNumber = ''
+  } = informationContact?.associateTelephoneWorkPrimary || {};
+  let workTelephonePrimary = 'No Information';
+  if (
+    associateTelephoneAreaCity ||
+    associateTelephoneCountryRegion ||
+    associateTelephoneExtension ||
+    associateTelephoneNumber
+  ) {
+    workTelephonePrimary = `+${associateTelephoneCountryRegion} (${associateTelephoneAreaCity}) ${associateTelephoneNumber} extension ${associateTelephoneExtension}`;
+  }
+
+  const {
+    associateTelephoneAreaCity: associateTelephoneAreaCitySecondary = '',
+    associateTelephoneCountryRegion: associateTelephoneCountryRegionSecondary = '',
+    associateTelephoneExtension: associateTelephoneExtensionSecondary = '',
+    associateTelephoneNumber: associateTelephoneNumberSecondary = ''
+  } = informationContact?.associateTelephoneWorkSecondary || {};
+  let workTelephoneSecondary = 'No Information';
+  if (
+    associateTelephoneAreaCitySecondary ||
+    associateTelephoneCountryRegionSecondary ||
+    associateTelephoneExtensionSecondary ||
+    associateTelephoneNumberSecondary
+  ) {
+    workTelephoneSecondary = `+${associateTelephoneCountryRegionSecondary} (${associateTelephoneAreaCitySecondary}) ${associateTelephoneNumberSecondary} extension ${associateTelephoneExtensionSecondary}`;
+  }
+
   const list1 = [
     {
       id: 'a1',
@@ -98,15 +150,11 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne:
-            informationContact?.associateTelephoneWorkPrimary?.associateTelephoneNumber ||
-            'No Information'
+          textOne: workTelephonePrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne:
-            informationContact?.associateTelephoneWorkSecondary?.associateTelephoneNumber ||
-            'No Information'
+          textOne: workTelephoneSecondary
         }
       ],
       labelTextOneOneBadgeThree: '',

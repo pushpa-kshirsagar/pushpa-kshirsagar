@@ -5,7 +5,8 @@ import {
   GET_ASSOCIATE_INFO_SAGA,
   UPDATE_ASSOCIATE_BASIC_INFO,
   UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
-  UPDATE_ASSOCIATE_SETUP_INFO
+  UPDATE_ASSOCIATE_SETUP_INFO,
+  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_INFO_URL } from '../../endpoints';
 
@@ -44,11 +45,25 @@ function* workerReviewInfoAssociateSaga(data) {
       const {
         informationBasic,
         informationContact,
-        informationSetup
+        informationSetup,
+        informationFramework
       } = userResponse.responseObject[0];
       yield put({ type: UPDATE_ASSOCIATE_BASIC_INFO, payload: informationBasic });
-      // yield put({ type: UPDATE_ASSOCIATE_INFO_CONTACT_INFO, payload: informationContact });
+      yield put({ type: UPDATE_ASSOCIATE_INFO_CONTACT_INFO, payload: informationContact });
       // yield put({ type: UPDATE_ASSOCIATE_SETUP_INFO, payload: informationSetup });
+      let ascendantPrimaryList = [];
+      if (informationFramework?.associateAscendantPrimary) {
+        ascendantPrimaryList.push(informationFramework?.associateAscendantPrimary);
+      }
+      yield put({
+        type: SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          objectName: 'informationFramework',
+          stateName: 'associateAscendant',
+          actualStateName: 'associateAscendantPrimary',
+          value: ascendantPrimaryList
+        }
+      });
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });
