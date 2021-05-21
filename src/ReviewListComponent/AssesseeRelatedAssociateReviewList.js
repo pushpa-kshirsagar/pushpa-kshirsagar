@@ -13,11 +13,12 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 const AssesseeRelatedAssociateReviewList = (props) => {
   const { userData } = useSelector((state) => state.UserReducer);
   const dispatch = useDispatch();
-  console.log('IN USER DATA++++++>', userData);
   const onClickReviewList = (e) => {
-    console.log(userData[e.currentTarget.getAttribute('data-value')]);
-    let selectedAsso = userData[e.currentTarget.getAttribute('data-value')];
-
+    let selectedAssessee = e.currentTarget.getAttribute('data-value');
+    let selectedAssociate = userData.filter(function (data) {
+      return data.assesseeId === selectedAssessee;
+    });
+    let selectedAsso = selectedAssociate[0];
     dispatch({ type: LOADER_START });
     dispatch({
       type: SET_SELECTED_ASSOCIATE,
@@ -80,6 +81,7 @@ const AssesseeRelatedAssociateReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
+                dataValue={item.assesseeId}
                 tag={item.associate.informationEngagement.associateTag.associateTagPrimary}
                 status={item.associate.informationEngagement.associateStatus}
                 textOne={item.associate.informationBasic.associateName}

@@ -5,7 +5,6 @@ import {
   FILTERMODE,
   FILTERMODE_ENABLE,
   POPUP_OPEN,
-  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
@@ -20,8 +19,6 @@ import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
 import {
-  assesseeRole,
-  getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeNodeAssesseeDistinctApiCall,
   onClickCheckBoxSelection
 } from '../Actions/AssesseeModuleAction';

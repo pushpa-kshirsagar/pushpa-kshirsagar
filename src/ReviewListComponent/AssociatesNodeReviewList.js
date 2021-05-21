@@ -197,13 +197,15 @@ const AssociatesNodeReviewList = (props) => {
           )}
         </>
       )}
-      <FooterIconTwo
-        FilterModeEnable={FilterModeEnable}
-        FilterMode={FilterMode}
-        onClick={onClickFooter}
-        primaryIcon={primaryIcon}
-        secondaryIcon={secondaryIcon}
-      />
+      {FilterMode === 'associatesNodeDistinct' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryIcon}
+        />
+      )}
       {/* )} */}
     </div>
   );

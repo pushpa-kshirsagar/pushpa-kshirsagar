@@ -68,7 +68,7 @@ function App() {
           <Route path="/sign-in" component={DisplayPageSignIn} exact={true} />
           <Route path="/confirm/:id" component={DisplayPageConfirmUser} exact={true} />
           <AuthRoute path="/dashboard" component={DisplayPageOne} exact={true} />
-          <Route path="/sign-on" component={DisplayPageSignOn} exact={true} />
+          <Route path="/sign-on/:associateTagPrimary" component={DisplayPageSignOn} exact={true} />
         </Switch>
       </div>
     </Router>

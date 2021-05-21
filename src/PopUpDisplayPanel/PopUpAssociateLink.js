@@ -27,6 +27,8 @@ const PopUpAssociateLink = () => {
   const [signInOptions, setSignInOptions] = useState([]);
   const [isUserNameValid, setIsUserNameValid] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState('');
+  const [isCredentialsInValid, setIsCredentialsInValid] = useState('');
+
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const setLinkUserNamePassword = (e) => {
@@ -51,7 +53,8 @@ const PopUpAssociateLink = () => {
         }
       };
       dispatch({ type: SET_REQUEST_OBJECT, payload: reqObj });
-      dispatch({ type: LOADER_START });
+      setIsCredentialsInValid('in progress');
+      // dispatch({ type: LOADER_START });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'errorResponse', value: '' }
@@ -89,6 +92,9 @@ const PopUpAssociateLink = () => {
     if (signInCredential === '') {
       setErrorMsg(REQUIRED_ERROR_MESSAGE);
     } else {
+      setPassword('');
+      setUserName('');
+      setIsCredentialsInValid('');
       dispatch({
         type: SET_POPUP_STATE,
         payload: {
@@ -136,6 +142,8 @@ const PopUpAssociateLink = () => {
         password={password}
         errorMsg={errorResponse.responseCode}
         setPassword={setPassword}
+        setIsCredentialsInValid={setIsCredentialsInValid}
+        isCredentialsInValid={isCredentialsInValid}
         onClick={() => {
           //TODO: Display associate list in displayPaneTwo
           setLinkUserNamePassword();

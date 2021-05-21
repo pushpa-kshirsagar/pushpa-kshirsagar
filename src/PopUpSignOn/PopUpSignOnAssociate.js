@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../PopUpInformation/PopUpTextField';
@@ -32,9 +32,11 @@ import {
   UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE
+  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
+  RESET_ALL_REDUCER
 } from '../actionType';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
+import { SIGN_IN_URL } from '../endpoints';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
@@ -43,6 +45,7 @@ const PopUpSignOnAssociate = () => {
     (state) => state.DisplayPaneThreeReducer
   );
   const informationContact = assesseeInfo.informationContact;
+  const { associateTagPrimary } = useParams();
   const {
     coreGroupReviewListData,
     selectedAssociateInfo,
@@ -58,12 +61,11 @@ const PopUpSignOnAssociate = () => {
     if (assesseeInfo.assesseeInformationData) {
       console.log(popupMode);
       if (popupMode === 'ASSOCIATE_SIGN_ON') {
-        let path = `/signIn`;
+        let path = SIGN_IN_URL;
         history.push(path);
       } else {
-        dispatch({ type: CLEAR_ASSOCIATE_INFO });
-        dispatch({ type: CLEAR_ASSESSEE_INFO });
-        dispatch({ type: POPUP_CLOSE });
+        window.location.reload();
+        dispatch({ type: RESET_ALL_REDUCER });
       }
     }
   }, [assesseeInfo.assesseeInformationData, history]);
@@ -96,12 +98,12 @@ const PopUpSignOnAssociate = () => {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        '6083d82a5c42683849ce14d0',
+        associateTagPrimary,
       associate: {
         informationBasic: associateInfo.informationBasic,
         informationAllocation: associateInfo.informationAllocation,
         informationContact: associateInfo.informationContact,
-        informationSetup: associateInfo.informationSetup
+        // informationSetup: associateInfo.informationSetup
       },
       assessee: {
         informationBasic: informationBasic,

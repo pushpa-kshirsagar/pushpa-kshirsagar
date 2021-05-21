@@ -55,13 +55,14 @@ function* workerSignInAssesseeSaga(data) {
         'refreshToken',
         userResponse?.responseObject?.cognitoResponse?.refreshToken
       );
-      if (userResponse?.responseObject?.signInResponse.length > 1) {
+      if (userResponse?.responseObject?.signInRespone.length > 1) {
         yield put({ type: SET_USER, payload: userResponse?.responseObject?.signInResponse });
       } else if (userResponse?.responseObject?.signInResponse.length === 1) {
         const selectedAssociate = userResponse?.responseObject?.signInResponse[0];
         localStorage.setItem(
           'parentId',
-          userResponse?.responseObject?.signInResponse[0]?.associate.parentId
+          userResponse?.responseObject?.signInResponse[0]?.associate?.informationFramework
+            ?.associateAscendantPrimary
         );
 
         console.log('SELECTED ASSOCIATE +++++ >', selectedAssociate);
@@ -214,6 +215,7 @@ function* workerSignInAssesseeInfo(data) {
     if (userResponse.responseCode === '000') {
       if (userResponse?.responseObject.length > 1) {
         yield put({ type: SET_USER, payload: userResponse?.responseObject });
+        yield put({ type: LOADER_STOP });
       } else if (userResponse?.responseObject.length === 1) {
         const selectedAssociate = userResponse?.responseObject[0];
         console.log('SELECTED ASSOCIATE +++++ >', selectedAssociate);
