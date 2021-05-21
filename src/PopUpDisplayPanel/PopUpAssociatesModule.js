@@ -134,12 +134,20 @@ const PopUpAssociatesModule = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (targetValue === 'distinct') {
-      getAssociateDistinctApiCall(
+      // getAssociateDistinctApiCall(
+      //   selectedAssociateInfo,
+      //   secondaryOptionCheckValue,
+      //   dispatch,
+      //   countPage,
+      //   targetValue
+      // );
+      getAssociateNodeApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        dispatch,
         countPage,
-        targetValue
+        dispatch,
+        targetValue,
+        'list'
       );
       resetDataFunction();
       // document.getElementById('middleComponentId').scrollTop = '0px';

@@ -10,6 +10,7 @@ import {
   GET_ASSESSEE_INFO_SAGA,
   LOADER_START,
   POPUP_CLOSE,
+  RESET_ALL_REDUCER,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -112,6 +113,22 @@ const PopUpDisplayPanelAssessee = (props) => {
       valueArr = [];
       reviseSecondaryOptionCheckValue = '';
       dispatch({ type: CLEAR_SIGN_ON_SINGLE_STATE });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: '',
+          middlePaneHeaderBadgeOne: '',
+          middlePaneHeaderBadgeTwo: '',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: '',
+          scanCount: null,
+          showMiddlePaneState: false,
+          selectedTagsArray:[],
+          unselectedTagsArray:[]
+        }
+      });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     }
     if (clickValue === 'revise') {
       setIsReviseMode(true);
@@ -190,6 +207,9 @@ const PopUpDisplayPanelAssessee = (props) => {
       history.push(SIGN_IN_URL);
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
+      localStorage.removeItem('parentId');
+      localStorage.removeItem('assesseeId');
+      dispatch({ type: RESET_ALL_REDUCER });
       // signOut();
     }
     dispatch({

@@ -10,9 +10,10 @@ import {
   ASSESSEE_ASSOCIATE_LINK_LIST,
   REVIEWLIST_DISTINCT_DATA,
   SET_MIDDLEPANE_STATE,
-  POPUP_CLOSE
+  POPUP_CLOSE,
+  ASSESSEE_ASSOCIATE_LINK_REVISE_SAGA
 } from '../../actionType';
-import { ASSESSEE_LINK_URL, CONFIRM_ASSESSEE_URL } from '../../endpoints';
+import { ASSESSEE_LINK_URL, CONFIRM_ASSESSEE_URL, LINKED_ASSOCIATE_URL } from '../../endpoints';
 
 const assesseesConfirmApi = async (requestObj) => {
   const requestOptions = {
@@ -67,7 +68,6 @@ function* workerConfirmAssesseeSaga(data) {
   }
 }
 function* workerAssesseeAssociateLinkSaga(data) {
-  console.log('WATCH+++', data.payload.request);
   try {
     const response = yield call(assesseesConfirmApi, {
       data: data.payload.request,
@@ -76,7 +76,7 @@ function* workerAssesseeAssociateLinkSaga(data) {
     if (response.responseCode === '000') {
       yield put({ type: POPUP_CLOSE });
       console.log('response+++', response.responseObject);
-
+      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
       yield put({
         type: SET_MIDDLEPANE_STATE,
         payload: {
@@ -86,15 +86,41 @@ function* workerAssesseeAssociateLinkSaga(data) {
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assesseeassociatesReviewList',
-          scanCount: 0,
+          scanCount: response?.countTotal || 0,
           showMiddlePaneState: true
         }
       });
-      console.log('11+++');
-      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
-      console.log('21+++');
-
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: 'multiple' }
+      });
       console.log('success==', response.responseObject);
+    } else {
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'errorResponse', value: response }
+      });
+    }
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerAssesseeAssociateLinkReviseSaga(data) {
+  console.log('WATCH+++', data.payload.request);
+  try {
+    const response = yield call(assesseesConfirmApi, {
+      data: data.payload.request,
+      URL: LINKED_ASSOCIATE_URL
+    });
+    if (response.responseCode === '000') {
+      console.log(response);
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'errorResponse', value: response }
+      });
     } else {
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -112,4 +138,5 @@ function* workerAssesseeAssociateLinkSaga(data) {
 export default function* watchConfirmAssesseeSaga() {
   yield takeLatest(ASSESSEE_CONFIRM_SAGA, workerConfirmAssesseeSaga);
   yield takeLatest(ASSESSEE_ASSOCIATE_LINK_LIST, workerAssesseeAssociateLinkSaga);
+  yield takeLatest(ASSESSEE_ASSOCIATE_LINK_REVISE_SAGA, workerAssesseeAssociateLinkReviseSaga);
 }

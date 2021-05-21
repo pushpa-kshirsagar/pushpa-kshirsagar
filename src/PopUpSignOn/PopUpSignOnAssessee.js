@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../PopUpInformation/PopUpPicture';
 import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
@@ -48,6 +48,7 @@ import PopUpFingerprint from '../PopUpInformation/PopUpFingerprint';
 
 const PopUpSignOnAssessee = (props) => {
   const { headerOne = 'assessee' } = props;
+  const { associateTagPrimary } = useParams();
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const {
@@ -68,15 +69,11 @@ const PopUpSignOnAssessee = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
-    console.log(popupMode);
-    console.log('============>', assesseeInfo);
-    console.log('assesseeInformationData');
     if (assesseeInfo.assesseeInformationData) {
       if (popupMode === 'ASSESSEE_SIGN_ON') {
         let path = SIGN_IN_URL;
         history.push(path);
       } else {
-        console.log('show right pane');
         onClickCancelYes();
         dispatch({ type: ASSESSEE_INFO_CREATE });
       }
@@ -131,20 +128,6 @@ const PopUpSignOnAssessee = (props) => {
   }
 
   const onClickYes = async () => {
-    // var defaultroleArr = coreRoleReviewListData
-    //   .filter(function (data) {
-    //     if (data.informationSetup.assesseeRoleDefault) {
-    //       return data.id; // skip
-    //     }
-    //     return false;
-    //   })
-    //   .map(function (data) {
-    //     return data.id;
-
-    // let finalRoleArr = [
-    //   ...assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary,
-    //   DEFAULT_ROLE_ID
-    // ];
     const {
       informationBasic,
       informationAllocation,
@@ -169,7 +152,7 @@ const PopUpSignOnAssessee = (props) => {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        '6083f0ece637d81aa1190c87',
+        associateTagPrimary,
       assessee: {
         informationBasic: informationBasic,
         informationAllocation: informationAllocation,
@@ -337,7 +320,7 @@ const PopUpSignOnAssessee = (props) => {
       }
     });
   };
-
+console.log('associateTagPrimary',associateTagPrimary);
   return (
     <div>
       <PopUpAssesseeName
@@ -519,7 +502,7 @@ const PopUpSignOnAssessee = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
-        isRequired={true}
+        isRequired={false}
         selectedList={assesseeInfo?.informationAllocation?.assesseeNode.assesseeNodePrimary}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}

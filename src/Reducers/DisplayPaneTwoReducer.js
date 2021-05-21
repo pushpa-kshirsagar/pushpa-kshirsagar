@@ -91,6 +91,7 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         middlePaneSelectedValue: istate.middlePaneSelectedValue,
         isSelectActive: action.payload.isSelectActive || '',
         selectedTagsArray: action.payload.selectedTagsArray || [],
+        unselectedTagsArray: action.payload.unselectedTagsArray || [],
         isFlaged: action.payload.isFlaged || false
       };
     case SET_SCAN_POPUP_STATE:

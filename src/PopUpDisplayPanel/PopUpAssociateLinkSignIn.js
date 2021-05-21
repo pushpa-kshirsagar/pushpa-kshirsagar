@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
@@ -6,7 +6,7 @@ import PopUpWhiteHeader from '../Molecules/PopUp/PopUpWhiteHeader';
 import { InputLabel } from '@material-ui/core';
 import InputField from '../Atoms/InputField/InputField';
 import Label from '../Atoms/Labels/Label';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SET_DISPLAY_TWO_SINGLE_STATE, SET_SIGN_ON_SINGLE_STATE } from '../actionType';
 import { INCORRECT_INFORMATION_ERROR_MESSAGE } from '../errorMessage';
 
@@ -26,10 +26,17 @@ const PopUpAssociateLinkSignIn = (props) => {
     setIsUserNameValid = null,
     setIsPasswordValid = null,
     isUserNameValid = '',
-    isPasswordValid = ''
+    isPasswordValid = '',
+    setIsCredentialsInValid = null,
+    isCredentialsInValid = ''
   } = props;
-  const [isCredentialsInValid, setIsCredentialsInValid] = useState('');
   const dispatch = useDispatch();
+  const { errorResponse } = useSelector((state) => state.DisplayPaneTwoReducer);
+  useEffect(() => {
+    if (errorResponse.responseCode === '2053')
+      setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
+    else setIsCredentialsInValid(errorResponse.responseMessage);
+  }, [errorResponse]);
   // const [isUserNameValid, setIsUserNameValid] = useState('');
   // const [isPasswordValid, setIsPasswordValid] = useState('');
   // const [userName, setUserName] = useState('');
@@ -109,20 +116,20 @@ const PopUpAssociateLinkSignIn = (props) => {
                 {/* <Label text="forgot information" fontSize="1.2rem" colour="#0000008a" /> */}
               </div>
               <div>
-                {/* {isCredentialsInValid && (
+                {isCredentialsInValid && (
                   <Label
                     text={isCredentialsInValid}
                     fontSize="1.2rem"
                     colour={isCredentialsInValid === 'in progress' ? 'green' : 'rgb(244, 67, 54)'}
                   />
-                )} */}
-                {errorMsg === '5015' && (
+                )}
+                {/* {errorMsg === '5015' && (
                   <Label
                     text={INCORRECT_INFORMATION_ERROR_MESSAGE}
                     fontSize="1.2rem"
                     colour={'rgb(244, 67, 54)'}
                   />
-                )}
+                )} */}
               </div>
             </div>
           </>

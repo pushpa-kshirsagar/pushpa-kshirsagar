@@ -503,10 +503,18 @@ export const getAssociateNodeApiCall = (
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: { stateName: 'nodeViewState', value: nodeViewState }
   });
-  dispatch({
-    type: FILTERMODE,
-    payload: { FilterMode: 'associatesNodeDistinct' + secondaryOptionCheckValue }
-  });
+  if (targetValue === 'distinct') {
+    dispatch({
+      type: FILTERMODE,
+      payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
+    });
+  } else {
+    dispatch({
+      type: FILTERMODE,
+      payload: { FilterMode: 'associatesNodeDistinct' }
+    });
+  }
+
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
