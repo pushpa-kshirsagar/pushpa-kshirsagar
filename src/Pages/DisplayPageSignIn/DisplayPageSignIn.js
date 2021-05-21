@@ -15,7 +15,7 @@ import {
   REQUIRED_ERROR_MESSAGE
 } from '../../errorMessage';
 import { useDispatch, useSelector } from 'react-redux';
-import { ASSESSEE_SIGN_IN_SAGA, SET_SIGN_IN_STATUS } from '../../actionType';
+import { ASSESSEE_SIGN_IN_SAGA, RESET_ALL_REDUCER, SET_SIGN_IN_STATUS } from '../../actionType';
 
 const DisplayPageSignIn = () => {
   const bgImg = './Image/bg.jpg';
@@ -48,7 +48,8 @@ const DisplayPageSignIn = () => {
       setIsCredentialsInValid('');
       let path = `/dashboard`;
       history.push(path);
-      // window.location.reload();
+      window.location.reload();
+      dispatch({ type: RESET_ALL_REDUCER });
       dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
     }
     if (assesseeSignInStatus === 'confirmUSer') {
