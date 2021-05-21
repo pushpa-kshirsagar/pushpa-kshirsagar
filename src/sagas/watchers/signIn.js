@@ -55,7 +55,7 @@ function* workerSignInAssesseeSaga(data) {
         'refreshToken',
         userResponse?.responseObject?.cognitoResponse?.refreshToken
       );
-      if (userResponse?.responseObject?.signInRespone.length > 1) {
+      if (userResponse?.responseObject?.signInResponse.length > 1) {
         yield put({ type: SET_USER, payload: userResponse?.responseObject?.signInResponse });
       } else if (userResponse?.responseObject?.signInResponse.length === 1) {
         const selectedAssociate = userResponse?.responseObject?.signInResponse[0];
