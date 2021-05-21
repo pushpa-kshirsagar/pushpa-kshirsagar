@@ -5,8 +5,8 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
+import { useDispatch, useSelector } from 'react-redux';
+import { POPUP_CLOSE, SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
 
 const PopUpCheckbox = (props) => {
   /*props*/
@@ -25,15 +25,19 @@ const PopUpCheckbox = (props) => {
     mode
   } = props;
 
-  const [state, setState] = useState({
-    isChecked: 'email address (primary)'
-  });
   const dispatch = useDispatch();
   /*handling the onchange event*/
   const handleChange = (event) => {
     console.log(event.target.checked);
     setState({ isChecked: event.target.value });
   };
+  const { availableSignInCredentialList = [], currentlySignInCredential } = useSelector(
+    (state) => state.AssesseeCreateReducer
+  );
+
+  const [state, setState] = useState({
+    isChecked: currentlySignInCredential
+  });
 
   const createNameWithBadge = (name) => {
     var txt = name;
@@ -75,13 +79,14 @@ const PopUpCheckbox = (props) => {
 
     return arr;
   };
+
   const handleClick = () => {
     if (forceToSelect === 'signIn') {
       dispatch({
         type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO,
-        payload: { assesseeSignIn: state.isChecked }
+        payload: { assesseeSignInCredential: state.isChecked }
       });
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CONFIRMATIONPOPUP' } });
+      dispatch({ type: POPUP_CLOSE });
     } else {
       if (state.isChecked === 'email address (primary)') {
         dispatch({
@@ -127,6 +132,7 @@ const PopUpCheckbox = (props) => {
                       color="default"
                       value={item}
                       name={item}
+                      disabled={!availableSignInCredentialList.includes(item)}
                       checked={state.isChecked === item}
                       onChange={handleChange}
                     />

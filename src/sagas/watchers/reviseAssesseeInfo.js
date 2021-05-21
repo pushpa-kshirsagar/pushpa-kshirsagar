@@ -6,7 +6,8 @@ import {
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_SELECTED_ASSOCIATE
+  SET_SELECTED_ASSOCIATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSESSEE_INFO_REVISE_URL } from '../../endpoints';
 import { refreshMiddlePaneList } from '../../Actions/PlatformModuleAction';
@@ -52,6 +53,7 @@ function* workerReviseInfoAssesseeSaga(data) {
             value: userResponse?.responseObject[0]
           }
         });
+        yield put({ type: LOADER_STOP });
       } else {
         // refreshMiddlePaneList(ASSESSEE_REVIEW_DISTINCT_SAGA, 'assessees');
         yield put({
@@ -72,9 +74,13 @@ function* workerReviseInfoAssesseeSaga(data) {
       // if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
 
       // }
-
+    } else {
       console.log('loading end');
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
   } catch (e) {
     console.log('ERROR==', e);

@@ -358,8 +358,25 @@ export const DisplayPaneThree = () => {
         informationBasic,
         informationContact,
         informationPersonal,
-        informationAllocation
+        informationAllocation,
+        informationSetup
       } = assesseeInfo;
+      let selectedSignInCredential = '';
+      if (informationSetup?.assesseeSignInCredential === 'email address (primary)') {
+        selectedSignInCredential =
+          responseObject.informationContact?.assesseeAddressEmailPrimary?.assesseeAddressEmail;
+      } else if (informationSetup?.assesseeSignInCredential === 'email address (secondary)') {
+        selectedSignInCredential =
+          responseObject.informationContact?.assesseeAddressEmailSecondary?.assesseeAddressEmail;
+      } else if (informationSetup?.assesseeSignInCredential === 'tag (primary)') {
+        selectedSignInCredential =
+          responseObject.informationEngagement?.assesseeTag?.assesseeTagPrimary;
+      } else if (informationSetup?.assesseeSignInCredential === 'tag (secondary)') {
+        selectedSignInCredential =
+          responseObject.informationEngagement?.assesseeTag?.assesseeTagSecondary;
+      } else {
+        selectedSignInCredential = responseObject?.informationSetup?.assesseeSignInCredential;
+      }
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: id,
@@ -369,7 +386,10 @@ export const DisplayPaneThree = () => {
           informationAllocation,
           informationBasic,
           informationContact,
-          informationPersonal
+          informationPersonal,
+          informationSetup: {
+            assesseeSignInCredential: selectedSignInCredential
+          }
         }
       };
       dispatch({ type: LOADER_START });

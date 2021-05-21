@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { SET_POPUP_VALUE } from '../../actionType';
+import { SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociateGroup = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -254,6 +254,50 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
     }
   };
 
+  const reviseEngagement = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName);
+    if (labelName === 'status') {
+      dispatch({
+        type: SET_STATUS_POPUP_VALUE,
+        payload: capitalizeFirstLetter(informationEngagement?.associateGroupStatus)
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'associatesGROUPCREATE' }
+      });
+    }
+    if (labelName === 'tag') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'associatesGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'associatesGROUPCREATE' }
+        });
+      }
+    }
+    if (labelName === 'tenure') {
+      if (selectedBadgeName === 'start') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'associatesGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'end') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'associatesGROUPCREATE' }
+        });
+      }
+    }
+  };
+
   return (
     <div
       style={{
@@ -292,9 +336,18 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseEngagement}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseEngagement}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

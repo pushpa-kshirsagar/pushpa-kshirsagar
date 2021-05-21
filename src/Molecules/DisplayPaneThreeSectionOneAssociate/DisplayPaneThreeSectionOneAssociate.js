@@ -356,6 +356,10 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             {
               labelTextTwoBadge: 'role',
               innerList: []
+            },
+            {
+              labelTextTwoBadge: 'type',
+              innerList: []
             }
           ]
         },
@@ -531,6 +535,10 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerList: []
             },
             {
+              labelTextTwoBadge: 'domain',
+              innerList: []
+            },
+            {
               labelTextTwoBadge: 'language',
               innerList: []
             },
@@ -596,36 +604,85 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isMultiList: true
     },
     {
-      id: 'a6',
+      id: 'marketPlace002',
       labelTextOneOne: 'iGuru marketplace',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'rating',
-          innerList: []
+          labelTextOneOneBadge: 'create',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'information',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'rating',
+              innerList: []
+            }
+          ]
         }
       ],
-      innerInfo: 'No Information',
-      isListCard: true
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
     },
     {
-      id: 'a7',
+      id: 'mine002',
       labelTextOneOne: 'iGuru mine',
-      textOneOne: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
-          innerList: []
+          labelTextOneOneBadge: 'create',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'information',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
         }
       ],
-      innerInfo: 'No Information',
-      isListCard: true
+      innerInfo: 'No',
+      isListCard: true,
+      isReviewLink: false,
+      isMultiList: true
     },
     {
       id: 'a8',
       labelTextOneOne: 'iGuru platform',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'brand',
+          labelTextOneOneBadge: 'create',
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: '',
@@ -634,23 +691,23 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           ]
         },
         {
-          labelTextOneOneBadge: 'domain',
+          labelTextOneOneBadge: 'information',
           innerLabelBadgeList: [
             {
-              labelTextTwoBadge: 'primary',
+              labelTextTwoBadge: '',
+              innerList: []
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'brand',
               innerList: []
             },
             {
-              labelTextTwoBadge: 'secondary',
-              innerList: []
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'theme',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: '',
+              labelTextTwoBadge: 'theme',
               innerList: []
             }
           ]
@@ -838,24 +895,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false
     }
   ];
-  const setUpListKey = [
-    {
-      id: 'a2',
-      labelTextOneOne: 'dictionary',
-      textOneOne: informationSetup?.associate?.associateDictionary || 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
-    },
-    {
-      id: 'a3',
-      labelTextOneOne: 'language',
-      textOneOne: informationSetup?.associate?.associateLanguage || 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
-    }
-  ];
+
   const reviseAlliance = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
@@ -1114,30 +1154,6 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                     ) : (
                       <AccordianInfoCard
                         onClickRevise={reviseEngagement}
-                        accordianObject={ob}
-                        mode={reviewMode}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </Paper>
-          </div>
-          <div className="containerPadding">
-            <Paper className={'dossierContainerTop'}>
-              {setUpListKey.map((ob) => {
-                return (
-                  <div key={ob.id}>
-                    {ob.isListCard ? (
-                      <AccordianListCard
-                        onClickRevise={reviseSetup}
-                        className=""
-                        accordianObject={ob}
-                        mode={reviewMode}
-                      />
-                    ) : (
-                      <AccordianInfoCard
-                        onClickRevise={reviseSetup}
                         accordianObject={ob}
                         mode={reviewMode}
                       />

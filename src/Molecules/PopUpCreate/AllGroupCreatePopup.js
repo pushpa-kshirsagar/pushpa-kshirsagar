@@ -164,6 +164,29 @@ const AllGroupCreatePopup = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_GROUP_SAGA, payload: reqBody });
   };
+  let tagPrimary = '';
+  let tenureStartDate = 'mm/dd/yyyy --:-- --';
+  let tenureEndDate = 'mm/dd/yyyy --:-- --';
+  if (headerOne === 'assessees') {
+    tagPrimary =
+      responseObject?.informationEngagement?.assesseeGroupTag?.assesseeGroupTagPrimary || '';
+    tenureStartDate =
+      responseObject?.informationEngagement?.assesseeGroupTenure
+        ?.assesseeGroupTenureDateTimeStart || 'mm/dd/yyyy --:-- --';
+    tenureEndDate =
+      responseObject?.informationEngagement?.assesseeGroupTenure?.assesseeGroupTenureDateTimeEnd ||
+      'mm/dd/yyyy --:-- --';
+  }
+  if (headerOne === 'associates') {
+    tagPrimary =
+      responseObject?.informationEngagement?.associateGroupTag?.associateGroupTagPrimary || '';
+    tenureStartDate =
+      responseObject?.informationEngagement?.associateGroupTenure
+        ?.associateGroupTenureDateTimeStart || 'mm/dd/yyyy --:-- --';
+    tenureEndDate =
+      responseObject?.informationEngagement?.associateGroupTenure
+        ?.associateGroupTenureDateTimeEnd || 'mm/dd/yyyy --:-- --';
+  }
 
   return (
     <div>
@@ -388,9 +411,7 @@ const AllGroupCreatePopup = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
-        basicInfo={
-          responseObject?.informationEngagement?.assesseeGroupTag?.assesseeGroupTagPrimary || ''
-        }
+        basicInfo={tagPrimary}
         nextPopUpValue={''}
         isNotRevised={true}
         typeOfSetObject={''}
@@ -405,10 +426,7 @@ const AllGroupCreatePopup = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
-        basicInfo={
-          responseObject?.informationEngagement?.assesseeGroupTenure
-            ?.assesseeGroupTenureDateTimeStart || 'mm/dd/yyyy --:-- --'
-        }
+        basicInfo={tenureStartDate}
         nextPopUpValue={''}
         isNotRevised={true}
         typeOfSetObject={''}
@@ -423,10 +441,7 @@ const AllGroupCreatePopup = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
-        basicInfo={
-          responseObject?.informationEngagement?.assesseeGroupTenure
-            ?.assesseeGroupTenureDateTimeEnd || 'mm/dd/yyyy --:-- --'
-        }
+        basicInfo={tenureEndDate}
         nextPopUpValue={''}
         isNotRevised={true}
         typeOfSetObject={''}

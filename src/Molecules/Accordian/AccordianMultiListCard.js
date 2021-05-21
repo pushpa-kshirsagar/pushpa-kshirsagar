@@ -64,12 +64,14 @@ const AccordianMultiListCard = (props) => {
                                 : '#ffffff'
                           }}
                           onClick={() => {
-                            setSelectedBadge((state) => {
-                              if (state.labelTextOneOneBadge === ob.labelTextOneOneBadge) {
-                                return '';
-                              }
-                              return ob;
-                            });
+                            if (ob.innerLabelBadgeList[0].labelTextTwoBadge !== '') {
+                              setSelectedBadge((state) => {
+                                if (state.labelTextOneOneBadge === ob.labelTextOneOneBadge) {
+                                  return '';
+                                }
+                                return ob;
+                              });
+                            }
                           }}
                         >
                           {ob.labelTextOneOneBadge}

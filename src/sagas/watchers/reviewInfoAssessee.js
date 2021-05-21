@@ -8,7 +8,8 @@ import {
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   UPDATE_ASSESSEE_CONTACT_INFO,
-  SET_ASSESSEE_DYNAMIC_SINGLE_STATE
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO
 } from '../../actionType';
 import { ASSESSEE_REVIEW_INFO_URL } from '../../endpoints';
 
@@ -173,6 +174,7 @@ function* workerReviewInfoAssesseeSaga(data) {
         yield put({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
         yield put({ type: UPDATE_ASSESSEE_ENGAGEMENT_INFO, payload: informationEngagement });
         yield put({ type: UPDATE_ASSESSEE_CONTACT_INFO, payload: informationContact });
+        yield put({ type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO, payload: informationSetup });
       }
     }
     console.log('loading end');

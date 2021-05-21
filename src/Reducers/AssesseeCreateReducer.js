@@ -31,7 +31,9 @@ import {
   UPDATE_ASSESSEE_WORKADDRESS_INFO,
   UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO,
   UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO,
-  UPDATE_ASSESSEE_TAG_STATUTORY_INFO
+  UPDATE_ASSESSEE_TAG_STATUTORY_INFO,
+  SET_AVAILABLE_SIGNIN_LIST,
+  SET_CURRENTLY_SIGNIN_CREDENTIAL
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -198,7 +200,8 @@ const initialState = {
       assesseeTelephoneVerification: false
     }
   },
-
+  availableSignInCredentialList: [],
+  currentlySignInCredential: '',
   informationSetup: {
     assesseeSignInCredential: ''
   },
@@ -485,6 +488,16 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         informationSetup: action.payload
+      };
+    case SET_AVAILABLE_SIGNIN_LIST:
+      return {
+        ...istate,
+        availableSignInCredentialList: action.payload
+      };
+    case SET_CURRENTLY_SIGNIN_CREDENTIAL:
+      return {
+        ...istate,
+        currentlySignInCredential: action.payload
       };
     case UPDATE_ASSESSEE_TAG_STATUTORY_INFO:
       return istate;

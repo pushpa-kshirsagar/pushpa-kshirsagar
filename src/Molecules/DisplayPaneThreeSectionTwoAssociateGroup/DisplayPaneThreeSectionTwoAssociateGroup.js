@@ -7,12 +7,14 @@ import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 import { RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../actionType';
+import { getAssociateDistinctApiCall } from '../../Actions/AssociateModuleAction';
 
 const DisplayPaneThreeSectionTwoAssociateGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { reviewMode, relatedReviewListPaneThree } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   console.log('ASSOCIATE LIST ::::::::::::>', relatedReviewListPaneThree);
   // const { informationEngagement, informationSetup } = responseObject;
@@ -57,7 +59,7 @@ const DisplayPaneThreeSectionTwoAssociateGroup = () => {
 
   const onclickReviewAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
+    console.log('Associate review CLICK :::::::>>>>>>>', labelName);
     if (labelName === 'associate') {
       dispatch({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
@@ -78,6 +80,13 @@ const DisplayPaneThreeSectionTwoAssociateGroup = () => {
       });
     }
   };
+  const onclickReviseAssessee = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('Associate revise CLICK :::::::>>>>>>>', labelName);
+    if (labelName === 'associate') {
+      getAssociateDistinctApiCall(selectedAssociateInfo, 'active', dispatch, countPage, 'distinct');
+    }
+  };
 
   return (
     <div
@@ -95,6 +104,7 @@ const DisplayPaneThreeSectionTwoAssociateGroup = () => {
                   {ob.isListCard ? (
                     <AccordianListCard
                       onClickReview={onclickReviewAssessee}
+                      onClickRevise={onclickReviseAssessee}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}

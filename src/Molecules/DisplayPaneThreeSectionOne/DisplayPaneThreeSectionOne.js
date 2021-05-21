@@ -12,9 +12,11 @@ import {
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
+  SET_AVAILABLE_SIGNIN_LIST,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
+  SET_CURRENTLY_SIGNIN_CREDENTIAL,
   SET_STATUS_POPUP_VALUE
 } from '../../actionType';
 import {
@@ -30,7 +32,12 @@ const DisplayPaneThreeSectionOne = () => {
   );
   const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
-  const { informationEngagement, informationSetup, informationAllocation } = responseObject;
+  const {
+    informationEngagement,
+    informationSetup,
+    informationAllocation,
+    informationContact
+  } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -823,6 +830,48 @@ const DisplayPaneThreeSectionOne = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
     if (labelName === 'sign-in') {
+      let availableCredentialArray = [];
+      if (informationContact?.assesseeAddressEmailPrimary?.assesseeAddressEmail) {
+        availableCredentialArray.push('email address (primary)');
+        if (
+          informationContact?.assesseeAddressEmailPrimary?.assesseeAddressEmail ===
+          informationSetup.assesseeSignInCredential
+        ) {
+          dispatch({ type: SET_CURRENTLY_SIGNIN_CREDENTIAL, payload: 'email address (primary)' });
+        }
+      }
+      if (informationContact?.assesseeAddressEmailSecondary?.assesseeAddressEmail) {
+        availableCredentialArray.push('email address (secondary)');
+        if (
+          informationContact?.assesseeAddressEmailSecondary?.assesseeAddressEmail ===
+          informationSetup.assesseeSignInCredential
+          ) {
+          dispatch({ type: SET_CURRENTLY_SIGNIN_CREDENTIAL, payload: 'email address (secondary)' });
+        }
+      }
+      if (informationEngagement?.assesseeTag?.assesseeTagPrimary) {
+        availableCredentialArray.push('tag (primary)');
+        if (
+          informationEngagement?.assesseeTag?.assesseeTagPrimary ===
+          informationSetup.assesseeSignInCredential
+        ) {
+          dispatch({ type: SET_CURRENTLY_SIGNIN_CREDENTIAL, payload: 'tag (primary)' });
+        }
+      }
+      if (informationEngagement?.assesseeTag?.assesseeTagSecondary) {
+        availableCredentialArray.push('tag (secondary)');
+        if (
+          informationEngagement?.assesseeTag?.assesseeTagSecondary ===
+          informationSetup.assesseeSignInCredential
+        ) {
+          dispatch({ type: SET_CURRENTLY_SIGNIN_CREDENTIAL, payload: 'tag (secondary)' });
+        }
+      }
+
+      dispatch({
+        type: SET_AVAILABLE_SIGNIN_LIST,
+        payload: availableCredentialArray
+      });
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'FORCETOSELECTSIGNIN', popupMode: 'ASSESSEE_CREATE' }
