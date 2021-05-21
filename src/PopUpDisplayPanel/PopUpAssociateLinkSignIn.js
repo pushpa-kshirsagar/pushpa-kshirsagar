@@ -33,7 +33,7 @@ const PopUpAssociateLinkSignIn = (props) => {
   const dispatch = useDispatch();
   const { errorResponse } = useSelector((state) => state.DisplayPaneTwoReducer);
   useEffect(() => {
-    if (errorResponse.responseCode === '2053')
+    if (errorResponse.responseCode === '2053' || errorResponse.responseCode === '5015')
       setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
     else setIsCredentialsInValid(errorResponse.responseMessage);
   }, [errorResponse]);

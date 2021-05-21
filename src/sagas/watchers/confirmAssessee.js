@@ -11,7 +11,8 @@ import {
   REVIEWLIST_DISTINCT_DATA,
   SET_MIDDLEPANE_STATE,
   POPUP_CLOSE,
-  ASSESSEE_ASSOCIATE_LINK_REVISE_SAGA
+  ASSESSEE_ASSOCIATE_LINK_REVISE_SAGA,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSESSEE_LINK_URL, CONFIRM_ASSESSEE_URL, LINKED_ASSOCIATE_URL } from '../../endpoints';
 
@@ -123,8 +124,8 @@ function* workerAssesseeAssociateLinkReviseSaga(data) {
       });
     } else {
       yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'errorResponse', value: response }
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
     yield put({ type: LOADER_STOP });
