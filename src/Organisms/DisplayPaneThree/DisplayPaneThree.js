@@ -318,6 +318,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
     setSelectedSectionAssociateNode(rightPaneSectionsAssociateNode[0]);
     setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
+    setIsShowReviseIcon(false);
   }, [responseObject]);
 
   const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
@@ -701,7 +702,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     dispatch({
       type: SET_MOBILE_PANE_STATE,
-      payload: typeOfMiddlePaneList==='' ? 'displayPaneTwo' : 'displayPaneOne'
+      payload: typeOfMiddlePaneList === '' ? 'displayPaneOne' : 'displayPaneTwo'
     });
   };
   console.log('DISPLAY PANE THREE++++++>', responseObject, headerOneBadgeThree);

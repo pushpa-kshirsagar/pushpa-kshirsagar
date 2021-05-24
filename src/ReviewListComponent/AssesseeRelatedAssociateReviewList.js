@@ -19,6 +19,7 @@ const AssesseeRelatedAssociateReviewList = (props) => {
       return data.assesseeId === selectedAssessee;
     });
     let selectedAsso = selectedAssociate[0];
+    console.log('selectedAsso', selectedAsso);
     dispatch({ type: LOADER_START });
     dispatch({
       type: SET_SELECTED_ASSOCIATE,
@@ -26,7 +27,7 @@ const AssesseeRelatedAssociateReviewList = (props) => {
     });
     localStorage.setItem(
       'parentId',
-      selectedAsso?.associate?.informationFramework?.associateAscendantPrimary
+      selectedAsso?.associate?.informationFramework?.associateAscendantPrimary || null
     );
     dispatch({
       type: GET_ASSESSEE_INFO_SAGA,

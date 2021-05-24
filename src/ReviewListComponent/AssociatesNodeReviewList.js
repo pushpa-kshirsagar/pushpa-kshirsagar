@@ -112,12 +112,12 @@ const AssociatesNodeReviewList = (props) => {
   const changedNode = (node) => {
     console.log(node);
   };
-  useEffect(() => {
-    if (nodeViewState === 'list') {
-      let sortedArr = sortingListInAsc(reviewListDistinctData, 'associateName');
-      setSortedReviewListDistinctData(sortedArr);
-    }
-  }, [reviewListDistinctData]);
+  // useEffect(() => {
+  //   if (nodeViewState === 'list') {
+  //     let sortedArr = sortingListInAsc(reviewListDistinctData, 'associateName');
+  //     setSortedReviewListDistinctData(sortedArr);
+  //   }
+  // }, [reviewListDistinctData]);
   return (
     <div>
       {reviewListDistinctData.length > 0 && (
@@ -162,7 +162,7 @@ const AssociatesNodeReviewList = (props) => {
             </div>
           ) : (
             <Fragment>
-              {sortedReviewListDistinctData.map((item, index) => {
+              {reviewListDistinctData.map((item, index) => {
                 // if (index === 0) {
                 //   <Card
                 //     textOneOne={item.informationBasic.associateName}

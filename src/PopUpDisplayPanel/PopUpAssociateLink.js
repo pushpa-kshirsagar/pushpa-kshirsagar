@@ -7,7 +7,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   LOADER_START,
   CLEAR_SIGN_ON_SINGLE_STATE,
-  SET_REQUEST_OBJECT
+  SET_REQUEST_OBJECT,
+  SET_MOBILE_PANE_STATE
 } from '../actionType';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 import PopUpAdministratorSignInCredentialRevise from './PopUpAdministratorSignInCredentialRevise';
@@ -32,9 +33,6 @@ const PopUpAssociateLink = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const setLinkUserNamePassword = (e) => {
-    console.log('signInCredential', signInCredential);
-    console.log('userName', userName);
-    console.log('password', password);
     if (password === '') {
       setIsPasswordValid(REQUIRED_ERROR_MESSAGE);
     }
@@ -54,12 +52,13 @@ const PopUpAssociateLink = () => {
       };
       dispatch({ type: SET_REQUEST_OBJECT, payload: reqObj });
       setIsCredentialsInValid('in progress');
-      // dispatch({ type: LOADER_START });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'errorResponse', value: '' }
       });
       dispatch({ type: ASSESSEE_ASSOCIATE_LINK_LIST, payload: { request: reqObj } });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+
     }
   };
 

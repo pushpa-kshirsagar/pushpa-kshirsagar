@@ -1,5 +1,7 @@
 import {
+  ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
+  CLEAR_ASSESSEE_INFO,
   CLEAR_DISPLAY_PANE_THREE,
   CLEAR_ROLE_REDUCER_STATE,
   FILTERMODE,
@@ -9,7 +11,11 @@ import {
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
+  SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -17,9 +23,13 @@ import {
   SET_REQUEST_OBJECT
 } from '../actionType';
 import {
+  makeAdministratorRoleCreateObj,
   makeAssesseeGroupObj,
   makeAssesseeReviewListRequestObject,
-  makeAssesseeRoleObj
+  makeAssesseeRoleCreateObj,
+  makeAssesseeRoleObj,
+  makeInternalNodeObj,
+  makeManagerRoleCreateObj
 } from './GenericActions';
 
 export const getAssesseeDistinctApiCall = (
@@ -918,7 +928,7 @@ export const onClickCheckBoxSelection = (
   event,
   dispatch
 ) => {
-  console.log("EVENT", event);
+  console.log('EVENT', event);
   let id = event.target.id;
   let checkedArr = [...selectedTagsArray];
   let unCheckArr = [...unselectedTagsArray];
@@ -999,5 +1009,92 @@ export const getRoleGroupReviewListApi = (selectedAssociateInfo, dispatch, popup
   dispatch({
     type: GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
     payload: { request: requestObj, typeGroup: popupHeaderOne }
+  });
+};
+
+export const assesseeCreateApiCalls = (
+  selectedAssociateInfo,
+  dispatch,
+  secondaryOptionCheckValue,
+  typeOfAssesseeCreate
+) => {
+  dispatch({ type: ASSESSEE_INFO_CREATE });
+  dispatch({ type: CLEAR_ASSESSEE_INFO });
+  dispatch({ type: LOADER_START });
+  let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'all', 0, -1);
+  dispatch({
+    type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
+  dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+  let roleRequestObj = makeAssesseeRoleCreateObj(selectedAssociateInfo, 'all', 0, -1);
+  if (typeOfAssesseeCreate === 'administrator')
+    roleRequestObj = makeManagerRoleCreateObj(selectedAssociateInfo, 'active', 0, -1);
+  if (typeOfAssesseeCreate === 'manager')
+    roleRequestObj = makeAdministratorRoleCreateObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+  dispatch({
+    type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+    payload: {
+      request: roleRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
+  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+  dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+  dispatch({
+    type: INTERNAL_NODE_LIST_SAGA,
+    payload: {
+      request: nodeRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      nodeViewState: 'list',
+      isMiddlePaneList: false
+    }
+  });
+  dispatch({
+    type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'assesseeGroup',
+      actualStateName: 'assesseeGroupPrimary',
+      value: []
+    }
+  });
+  dispatch({
+    type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'assesseeRole',
+      actualStateName: 'assesseeRolePrimary',
+      value: []
+    }
+  });
+  dispatch({
+    type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'assesseeNode',
+      actualStateName: 'assesseeNodePrimary',
+      value: []
+    }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: {
+      stateName: 'typeOfAssesseeCreate',
+      value: typeOfAssesseeCreate
+    }
   });
 };
