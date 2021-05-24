@@ -106,48 +106,22 @@ function* workerCreateAssociateSaga(data) {
     const userResponse = yield call(createAssociateApi, { data: data.payload });
     console.log(userResponse);
     console.log('userResponse');
-    if (userResponse.responseCode === '000')
+    if (userResponse.responseCode === '000') {
       yield put({ type: SET_ASSOCIATE_INFORMATION, payload: userResponse.associate });
-    // let obj = {
-    //   ...data.payload,
-    //   associateName: 'Boppo Technologies',
-    //   associateId: userResponse.responseObject.id,
-    //   associate: userResponse.responseObject
-    // };
-
-    // const assesseeRes = yield call(createAssesseeApi, { data: obj });
-    // if (assesseeRes.responseCode === '000') {
-    // let validEmail =
-    //   userResponse.assessee.informationContact.assesseeAddressEmailPrimary
-    //     .assesseeAddressEmail;
-    // if (
-    //   userResponse.assessee.informationContact.assesseeAddressEmailSecondary
-    //     .assesseeAddressEmailCommunication
-    // ) {
-    //   validEmail =
-    //     userResponse.assessee.informationContact.assesseeAddressEmailSecondary
-    //       .assesseeAddressEmail;
-    // }
-    // signUpForAwsCognito(
-    //   validEmail,
-    //   userResponse.assessee.informationSetup.assesseeSignInCredential,
-    //   userResponse.assessee.informationSetup.assesseeSignInPassword
-    // );
-
-    //   yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject }); //set asessee data
-    // }
+      yield put({
+        type: SET_DISPLAY_PANE_THREE_STATE,
+        payload: {
+          headerOne: 'associate',
+          headerOneBadgeOne: 'information',
+          headerOneBadgeTwo: 'all',
+          responseObject: userResponse.associate,
+          createMode: 'associate',
+          reviewMode: 'revise'
+        }
+      });
+    } else {
+    }
     console.log('loading end');
-    yield put({
-      type: SET_DISPLAY_PANE_THREE_STATE,
-      payload: {
-        headerOne: 'associate',
-        headerOneBadgeOne: 'information',
-        headerOneBadgeTwo: 'all',
-        responseObject: userResponse.associate,
-        createMode: 'associate',
-        reviewMode: 'revise'
-      }
-    });
     yield put({ type: LOADER_STOP });
     yield put({ type: CLEAR_ASSOCIATE_INFO });
     yield put({ type: POPUP_CLOSE });

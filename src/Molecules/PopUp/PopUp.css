@@ -413,9 +413,9 @@
   top: 55px;
 }
 @media (max-width: 360px) {
-  .popupContent {
+  /* .popupContent {
     width: calc(100vw - 64px);
-  }
+  } */
   .textsheetPopupContent {
     width: calc(100vw - 64px);
   }

@@ -38,7 +38,8 @@ import {
   SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
-  CLEAR_NODE_REDUCER_STATE
+  CLEAR_NODE_REDUCER_STATE,
+  CLEAR_GROUP_REDUCER_STATE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -369,6 +370,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           showMiddlePaneState: true
         }
       });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
     if (clickValue === 'create' && popupHeaderOne === 'roles') {
       revisePopupHeaderOne = secondaryOptionCheckValue;
@@ -791,6 +793,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'group') {
+      dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }

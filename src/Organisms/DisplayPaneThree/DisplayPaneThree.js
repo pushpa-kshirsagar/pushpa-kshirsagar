@@ -81,7 +81,7 @@ export const DisplayPaneThree = () => {
     assesseeRoleAssessee,
     associateNodeAssessee
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { showMiddlePaneState, countPage, selectedAssociateInfo } = useSelector(
+  const { typeOfMiddlePaneList, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
   const { informationBasic } = responseObject;
@@ -701,7 +701,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     dispatch({
       type: SET_MOBILE_PANE_STATE,
-      payload: showMiddlePaneState ? 'displayPaneTwo' : 'displayPaneOne'
+      payload: typeOfMiddlePaneList==='' ? 'displayPaneTwo' : 'displayPaneOne'
     });
   };
   console.log('DISPLAY PANE THREE++++++>', responseObject, headerOneBadgeThree);

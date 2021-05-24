@@ -24,6 +24,10 @@ const AssesseeRelatedAssociateReviewList = (props) => {
       type: SET_SELECTED_ASSOCIATE,
       payload: selectedAsso
     });
+    localStorage.setItem(
+      'parentId',
+      selectedAsso?.associate?.informationFramework?.associateAscendantPrimary
+    );
     dispatch({
       type: GET_ASSESSEE_INFO_SAGA,
       payload: {

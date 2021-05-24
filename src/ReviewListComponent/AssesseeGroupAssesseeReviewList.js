@@ -101,29 +101,32 @@ const AssesseeGroupAssesseeReviewList = (props) => {
   const onClickReviseFinish = () => {
     console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray);
     setIsShowReviseIcon(true);
-    dispatch({
-      type: SET_MIDDLEPANE_STATE,
-      payload: {
-        middlePaneHeader:
-          typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-            ? 'associates'
-            : 'assessees',
-        middlePaneHeaderBadgeOne: 'group',
-        middlePaneHeaderBadgeTwo: 'active',
-        middlePaneHeaderBadgeThree: '',
-        middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList:
-          typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-            ? 'associatesGroupDistinctReviewList'
-            : 'assesseesGroupDistinctReviewList',
-        scanCount: reviewListDistinctData.length,
-        showMiddlePaneState: true
-      }
-    });
-    dispatch({
-      type: FILTERMODE,
-      payload: { FilterMode: '' }
-    });
+    if (typeOfMiddlePaneList !== '') {
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader:
+            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
+              ? 'associates'
+              : 'assessees',
+          middlePaneHeaderBadgeOne: 'group',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList:
+            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
+              ? 'associatesGroupDistinctReviewList'
+              : 'assesseesGroupDistinctReviewList',
+          scanCount: reviewListDistinctData.length,
+          showMiddlePaneState: true
+        }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: '' }
+      });
+    }
+
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: { stateName: 'isSelectActive', value: '' }

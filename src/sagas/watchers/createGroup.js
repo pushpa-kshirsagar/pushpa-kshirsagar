@@ -7,7 +7,8 @@ import {
   SET_ASSESSEE_GROUP_REDUCER_STATE,
   SET_ASSOCIATE_GROUP_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import {
   ASSESSEE_GROUP_CREATE_URL,
@@ -46,7 +47,6 @@ function* workerCreateGroupSaga(data) {
   try {
     const userResponse = yield call(createGroupApi, { data: data.payload });
     if (userResponse.responseCode === '000') {
-      console.log('loading end', data.payload.whichGroupCreate);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -71,11 +71,16 @@ function* workerCreateGroupSaga(data) {
           payload: userResponse.responseObject[0].informationBasic
         });
       }
+      yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+      // yield put({ type: CLEAR_GROUP_REDUCER_STATE });
+      yield put({ type: POPUP_CLOSE });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
     yield put({ type: LOADER_STOP });
-    yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    // yield put({ type: CLEAR_GROUP_REDUCER_STATE });
-    yield put({ type: POPUP_CLOSE });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
