@@ -55,7 +55,6 @@ function* workerCreateAssesseeRoleSaga(data) {
     }
     yield put({ type: LOADER_STOP });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    yield put({ type: CLEAR_ROLE_REDUCER_STATE });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

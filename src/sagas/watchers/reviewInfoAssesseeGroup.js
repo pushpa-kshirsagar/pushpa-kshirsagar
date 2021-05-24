@@ -100,7 +100,7 @@ function* workerReviseAssesseeGroupInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      const { assesseeGroupAssesseeReqBody = null } = data.payload;
+      const { assesseeGroupAssesseeReqBody = null, createMode } = data.payload;
       if (assesseeGroupAssesseeReqBody !== null) {
         yield put({
           type: GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
@@ -122,7 +122,8 @@ function* workerReviseAssesseeGroupInfoSaga(data) {
           headerOneBadgeOne: 'group',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          createMode
         }
       });
       yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });

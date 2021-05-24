@@ -5,7 +5,9 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   ASSOCIATE_GROUP_REVISE_INFO_SAGA,
   SET_ASSOCIATE_GROUP_REDUCER_STATE,
-  GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA
+  GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSOCIATE_GROUP_INFO_REVISE_URL, ASSOCIATE_REVIEW_GROUP_URL } from '../../endpoints';
 
@@ -93,6 +95,20 @@ function* workerReviseAssociateGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
+      const { associateGroupAssociateReqBody = null } = data.payload;
+      if (associateGroupAssociateReqBody !== null) {
+        yield put({
+          type: GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
+          payload: {
+            request: associateGroupAssociateReqBody,
+            HeaderOne: 'associates',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -102,6 +118,11 @@ function* workerReviseAssociateGroupInfoSaga(data) {
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0]
         }
+      });
+      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      yield put({
+        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+        payload: []
       });
     }
 

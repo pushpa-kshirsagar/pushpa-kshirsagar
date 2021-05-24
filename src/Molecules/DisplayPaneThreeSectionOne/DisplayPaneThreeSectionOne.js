@@ -404,6 +404,37 @@ const DisplayPaneThreeSectionOne = () => {
       });
     });
   }
+  let assesseeNodeListPrimary = [];
+  if (
+    informationAllocation?.assesseeNode.assesseeNodePrimary &&
+    informationAllocation?.assesseeNode.assesseeNodePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assesseeNode?.assesseeNodePrimary;
+    tempArr.forEach((ob) => {
+      assesseeNodeListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assesseeNodeListSecondary = [];
+  if (
+    informationAllocation?.assesseeNode.assesseeNodeSecondary &&
+    informationAllocation?.assesseeNode.assesseeNodeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assesseeNode?.assesseeNodeSecondary;
+    tempArr.forEach((ob) => {
+      assesseeNodeListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
+
   let assesseeRoleListPrimary = [];
   if (
     informationAllocation?.assesseeRole.assesseeRolePrimary &&
@@ -505,30 +536,11 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Node',
-              status: ''
-            }
-          ]
+          innerList: assesseeNodeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assesseeNodeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -676,6 +688,29 @@ const DisplayPaneThreeSectionOne = () => {
       innerInfo: 'assessees',
       isListCard: false
     }
+    // {
+    //   id: 'a1',
+    //   labelTextOneOne: 'sign-in',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'credential',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: []
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: []
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true,
+    //   isReviewLink: false,
+    //   isMultiList: true
+    // }
   ];
 
   const reviseAlliance = (e) => {

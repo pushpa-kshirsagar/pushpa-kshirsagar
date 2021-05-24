@@ -9,12 +9,14 @@ import {
   GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
   SET_POPUP_VALUE,
   SET_REVIEW_LIST_RELATE_DATA,
-  LOADER_START
+  LOADER_START,
+  GET_ALLOCATE_ASSOCIATE
 } from '../../actionType';
 import {
   ASSOCIATE_GROUP_ASSOCIATE_URL,
   ASSOCIATE_REVIEWDISTINCT_LIST_URL,
-  ASSOCIATE_ROLE_ASSOCIATE_URL
+  ASSOCIATE_ROLE_ASSOCIATE_URL,
+  EXTERNAL_NODE_LIST_URL
 } from '../../endpoints';
 
 const reviewListDistinctApi = async (requestObj) => {
@@ -148,6 +150,49 @@ function* workerReviewListAssociateRoleAssociateSaga(data) {
   }
 }
 
+function* workerReviewListAssociateAllocateSaga(data) {
+  try {
+    const userResponse = yield call(reviewListDistinctApi, {
+      data: data.payload.request,
+      URL: EXTERNAL_NODE_LIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      let responseObj = {
+        ...data.payload.revisedGroupObject,
+        associate: userResponse.responseObject
+      };
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.headerOne || 'associate',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true,
+          isSelectActive: 'multiple',
+          selectedTagsArray: data.payload.existingAssesseeId
+        }
+      });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
+
 export default function* watchReviewListAssociateSaga() {
   yield takeLatest(ASSOCIATE_REVIEW_DISTINCT_SAGA, workerReviewListAssociateSaga);
   yield takeLatest(
@@ -158,4 +203,5 @@ export default function* watchReviewListAssociateSaga() {
     GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
     workerReviewListAssociateGroupAssociateSaga
   );
+  yield takeLatest(GET_ALLOCATE_ASSOCIATE, workerReviewListAssociateAllocateSaga);
 }

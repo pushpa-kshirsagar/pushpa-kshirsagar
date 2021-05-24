@@ -13,7 +13,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { informationEngagement, informationSetup } = responseObject;
+  const { informationEngagement, informationSetup, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -61,6 +61,36 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: true
     }
   ];
+  let associateRoleListPrimary = [];
+  if (
+    informationAllocation?.associateRole.associateRolePrimary &&
+    informationAllocation?.associateRole.associateRolePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.associateRole?.associateRolePrimary;
+    tempArr.forEach((ob) => {
+      associateRoleListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateRoleName || '',
+        textTwo: ob?.informationBasic?.associateRoleDescription || '',
+        status: ''
+      });
+    });
+  }
+  let associateRoleListSecondary = [];
+  if (
+    informationAllocation?.associateRole.associateRoleSecondary &&
+    informationAllocation?.associateRole.associateRoleSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.associateRole?.associateRoleSecondary;
+    tempArr.forEach((ob) => {
+      associateRoleListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateRoleName || '',
+        textTwo: ob?.informationBasic?.associateRoleDescription || '',
+        status: ''
+      });
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -189,30 +219,11 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'role',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'role',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'role',
-              status: ''
-            }
-          ]
+          innerList: associateRoleListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: associateRoleListSecondary
         }
       ],
       innerInfo: 'No Information',

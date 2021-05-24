@@ -96,7 +96,7 @@ const PopUpTextField = (props) => {
               labelBadgeOne={labelBadgeOne}
             />
           </FormControl>
-          {(label === 'name' || labelBadgeOne === 'statutory') && (
+          {(label === 'name' || labelBadgeOne === 'statutory' || label === 'website address') && (
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>
