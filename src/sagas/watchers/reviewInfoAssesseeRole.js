@@ -138,7 +138,8 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          createMode: data.payload.createMode
         }
       });
       yield put({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });

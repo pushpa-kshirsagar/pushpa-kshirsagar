@@ -27,7 +27,9 @@ import {
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
   ASSOCIATE_GROUP_REVISE_INFO_SAGA,
   ASSOCIATE_ROLE_REVISE_INFO_SAGA,
-  ASSESSEE_NODE_INFO_REVISE_SAGA
+  ASSESSEE_NODE_INFO_REVISE_SAGA,
+  CLEAR_GROUP_REDUCER_STATE,
+  CLEAR_ROLE_REDUCER_STATE
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -464,7 +466,7 @@ export const DisplayPaneThree = () => {
       );
       dispatch({
         type: ASSESSEE_ROLE_INFO_REVISE_SAGA,
-        payload: { headerOne: 'assessees', reqBody, assesseeRoleAssesseeReqBody }
+        payload: { headerOne: 'assessees', reqBody, assesseeRoleAssesseeReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'role' && headerOne === 'associates') {
       console.log('ASS0CIATE ROLE REVISE');
@@ -503,8 +505,9 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
         assesseeGroupAssessee: {
-          assesseeGroupAssesseeAllocate: assesseeGroupAssessee.assesseeGroupAssesseeAllocate,
-          assesseeGroupAssesseeUnallocate: assesseeGroupAssessee.assesseeGroupAssesseeUnallocate
+          assesseeGroupAssesseeAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          assesseeGroupAssesseeUnallocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
         },
         assesseeGroup: {
           id,
@@ -521,7 +524,7 @@ export const DisplayPaneThree = () => {
       );
       dispatch({
         type: ASSESSEE_GROUP_INFO_REVISE_SAGA,
-        payload: { headerOne: 'assessees', assesseeGroupAssesseeReqBody, reqBody }
+        payload: { headerOne: 'assessees', assesseeGroupAssesseeReqBody, reqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'associate') {
       const { informationBasic, informationContact, informationSetup } = associateInfo;
@@ -599,6 +602,7 @@ export const DisplayPaneThree = () => {
 
   const onClickCreateAssesseeGroup = () => {
     console.log('ON CLICK CREATE ASSESSEE GROUP');
+    dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesGROUPCREATE' }
@@ -606,6 +610,7 @@ export const DisplayPaneThree = () => {
   };
   const onClickCreateAssociateGroup = () => {
     console.log('ON CLICK CREATE ASSOCIATE GROUP');
+    dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesGROUPCREATE' }
@@ -613,6 +618,7 @@ export const DisplayPaneThree = () => {
   };
   const onClickCreateAssessmentGroup = () => {
     console.log('ON CLICK CREATE ASSESSMENT GROUP');
+    dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assessmentsGROUPCREATE' }
@@ -620,6 +626,7 @@ export const DisplayPaneThree = () => {
   };
   const onClickCreateAssignmentGroup = () => {
     console.log('ON CLICK CREATE ASSIGNMENT GROUP');
+    dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assignmentsGROUPCREATE' }
@@ -642,6 +649,7 @@ export const DisplayPaneThree = () => {
 
   const onClickCreateAssesseeRole = () => {
     console.log('ON CLICK CREATE ASSESSEE ROLE');
+    dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesROLECREATE' }
@@ -649,6 +657,7 @@ export const DisplayPaneThree = () => {
   };
   const onClickCreateAssociateRole = () => {
     console.log('ON CLICK CREATE ASSOCIATE ROLE');
+    dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesROLECREATE' }
@@ -701,7 +710,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     dispatch({
       type: SET_MOBILE_PANE_STATE,
-      payload: typeOfMiddlePaneList==='' ? 'displayPaneTwo' : 'displayPaneOne'
+      payload: typeOfMiddlePaneList === '' ? 'displayPaneOne' : 'displayPaneTwo'
     });
   };
   console.log('DISPLAY PANE THREE++++++>', responseObject, headerOneBadgeThree);
