@@ -85,7 +85,9 @@ const initialState = {
     reviewDistinct: REVIEW_POPUP_OPTIONS,
     reviewDistinctKey: REVIEW_DISTINCT_POPUP_OPTION,
     selection: SELECT_OPTION_PUPUP,
-    create: ASSESSEE_REVIEW_REVISE_POPUP,
+    create: REVIEW_REVISE_POPUP,
+    assesseeCreate: ASSESSEE_REVIEW_REVISE_POPUP,
+    createKey: CREATE_INFORMATION_POPUP,
     assessees: REVIEW_DISTINCT_POPUP_OPTION,
     administrators: REVIEW_DISTINCT_POPUP_OPTION,
     managers: REVIEW_DISTINCT_POPUP_OPTION,
@@ -165,7 +167,6 @@ const PopUpReducer = (istate = initialState, action) => {
         selectedTagGroupId: action.payload.selectedTagGroupId,
         currentPopUpOption: action.payload.currentPopUpOption,
         isFlaged: action.payload.isFlaged
-
       };
     case SET_GRID_COLUMN_COUNT_VALUE:
       return {
@@ -209,6 +210,8 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload.keyValue === 'reviseKey' ||
         action.payload.keyValue === 'reviewKey' ||
         action.payload.keyValue === 'flaged' ||
+        action.payload.keyValue === 'createKey' ||
+        action.payload.keyValue === 'assesseeCreate' ||
         action.payload.keyValue === 'reviewDistinctKey' ||
         action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
@@ -273,7 +276,7 @@ const PopUpReducer = (istate = initialState, action) => {
           if (action.payload.keyValue === 'flag' && !istate.isFlaged) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
-      console.log('arrVal', arrVal);
+          console.log('arrVal', arrVal);
 
           // if (
           //   (action.payload.badgeValue === 'suspend' ||
@@ -292,7 +295,9 @@ const PopUpReducer = (istate = initialState, action) => {
             popupOpenType: 'secondary',
             popupContentArrValue: arrVal,
             secondaryOptionCheckValue:
-              action.payload.keyValue === 'reviseKey' || action.payload.keyValue === 'reviewKey'
+              action.payload.keyValue === 'reviseKey' ||
+              action.payload.keyValue === 'reviewKey' ||
+              action.payload.keyValue === 'createKey'
                 ? 'key'
                 : action.payload.keyValue === 'reviewDistinct' ||
                   action.payload.keyValue === 'reviewDistinctKey'

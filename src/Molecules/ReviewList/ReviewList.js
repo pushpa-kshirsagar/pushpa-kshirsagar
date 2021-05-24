@@ -47,7 +47,7 @@ const ReviewList = (props) => {
               onClick={isSelectActive !== '' ? null : onClickEvent}
               style={{
                 backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '',
-                height: '49px'
+                height: '48px'
               }}
             >
               <div

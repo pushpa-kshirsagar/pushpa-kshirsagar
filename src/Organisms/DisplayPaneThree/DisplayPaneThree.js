@@ -318,7 +318,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
     setSelectedSectionAssociateNode(rightPaneSectionsAssociateNode[0]);
     setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
-    setIsShowReviseIcon(false);
+    setIsShowReviseIcon(true);
   }, [responseObject]);
 
   const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
@@ -413,8 +413,9 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
         associateNodeAssessee: {
-          associateNodeAssesseeAllocate: associateNodeAssessee.associateNodeAssesseeAllocate,
-          associateNodeAssesseeUnallocate: associateNodeAssessee.associateNodeAssesseeUnallocate
+          associateNodeAssesseeAllocate: associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+          associateNodeAssesseeUnallocate:
+            associateNodeAssessee?.associateNodeAssesseeUnallocate || []
         },
         associateNode: {
           id,

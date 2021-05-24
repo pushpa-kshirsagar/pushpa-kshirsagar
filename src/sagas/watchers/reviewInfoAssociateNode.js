@@ -3,10 +3,13 @@ import {
   ASSESSEE_NODE_INFO_REVISE_SAGA,
   GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
+  INTERNAL_NODE_LIST_SAGA,
   LOADER_STOP,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_NODE_REDUCER_STATE
 } from '../../actionType';
+import Store from '../../store';
 import { ASSOCIATE_NODE_REVIEW_URL, ASSOCIATE_NODE_REVISE_URL } from '../../endpoints';
 
 const associateNodeReviewInfoApi = async (requestObj) => {
@@ -32,7 +35,7 @@ function* workerReviewAssociateNodeInfoSaga(data) {
     if (userResponse.responseCode === '000') {
       console.log('IN Node REVIEW+++++', userResponse);
       const { isReviseMode = false, selectedModule, associateNodeAssesseeReqBody } = data.payload;
-      if(associateNodeAssesseeReqBody){
+      if (associateNodeAssesseeReqBody) {
         yield put({
           type: GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
           payload: {
@@ -95,7 +98,7 @@ function* workerReviseAssociateNodeInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      console.log('IN Node revise+++++', userResponse);
+      console.log('INter Node revise+++++', userResponse);
       const { selectedModule } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -108,9 +111,26 @@ function* workerReviseAssociateNodeInfoSaga(data) {
           selectedModule: selectedModule
         }
       });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          HeaderOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          isMiddlePaneList: Store.getState().DisplayPaneTwoReducer.isMiddlePaneList,
+          nodeViewState: Store.getState().DisplayPaneTwoReducer.nodeViewState,
+          scanString: '',
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue
+        }
+      });
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // console.log('loading end');
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

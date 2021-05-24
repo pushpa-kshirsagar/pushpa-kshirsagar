@@ -314,7 +314,7 @@ body {
 /* below css for scroll */
 ::-webkit-scrollbar {
   width: 4px;
-  height: 2px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -341,5 +341,5 @@ body {
 } /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 
 ::-webkit-scrollbar-corner {
-  background-color: black;
+  background-color: gray;
 } /* if */

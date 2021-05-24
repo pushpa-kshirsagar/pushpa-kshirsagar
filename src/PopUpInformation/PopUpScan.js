@@ -459,10 +459,6 @@ const PopUpScan = (props) => {
           typeOfMiddlePaneList === 'associateNodeDistinctReviewList') &&
         nodeViewState === 'list'
       ) {
-        dispatch({
-          type: SET_DISPLAY_TWO_SINGLE_STATE,
-          payload: { stateName: 'scanString', value: state.scanValue }
-        });
         let listData = [];
         if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
           listData = reviewListDistinctData[0].filter(function (value) {
@@ -483,6 +479,10 @@ const PopUpScan = (props) => {
           payload: { stateName: 'reviewListDistinctData', value: [listData] }
         });
       }
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'scanString', value: state.scanValue }
+      });
       if (typeOfMiddlePaneList === 'assesseeRelatedAssociate') {
         console.log(typeOfMiddlePaneList);
       }

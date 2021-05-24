@@ -105,18 +105,12 @@ const AssesseeGroupAssesseeReviewList = (props) => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associates'
-              : 'assessees',
+          middlePaneHeader: 'assessees',
           middlePaneHeaderBadgeOne: 'group',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associatesGroupDistinctReviewList'
-              : 'assesseesGroupDistinctReviewList',
+          typeOfMiddlePaneList: 'assesseesGroupDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
@@ -225,8 +219,6 @@ const AssesseeGroupAssesseeReviewList = (props) => {
       }
     });
   };
-  console.log(listDistinctData);
-  console.log('listDistinctData');
   return (
     <div>
       {listDistinctData && (

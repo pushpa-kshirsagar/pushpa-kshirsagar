@@ -122,6 +122,25 @@ const InternalNodeReviewList = (props) => {
       console.log(node);
       nodeId = event.currentTarget.getAttribute('tag');
     }
+    let optArr = [...GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION];
+    if (middlePaneHeader === 'assessees')
+      optArr = [...ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION];
+    if (middlePaneHeader === 'assessments')
+      optArr = [...ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION];
+    if (middlePaneHeader === 'assignments')
+      optArr = [...ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION];
+    if (middlePaneHeader === 'associate') {
+      let newObj = {
+        data: 'create',
+        dataValue: 'create',
+        dataKey: 'createKey',
+        optionClass: 'optionPrimary',
+        disabled: false
+      };
+      optArr.splice(2, 0, newObj);
+    }
+
+    console.log('optArr', optArr);
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -130,13 +149,7 @@ const InternalNodeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue:
-          (middlePaneHeader === 'assessees' && ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION) ||
-          (middlePaneHeader === 'assessments' &&
-            ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
-          (middlePaneHeader === 'assignments' &&
-            ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
-          GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: optArr,
         selectedTagValue: nodeId
       }
     });
@@ -172,12 +185,8 @@ const InternalNodeReviewList = (props) => {
     // console.log('treedata', reviewListDistinctData);
     console.log(dragedNodeParentId, 'dragedNodeParentId');
   };
-  // useEffect(() => {
-  //   if (nodeViewState === 'list') {
-  //     let sortedArr = sortingListInAsc(reviewListDistinctData, 'associateNodeName');
-  //     setSortedReviewListDistinctData(sortedArr);
-  //   }
-  // }, [reviewListDistinctData]);
+  useEffect(() => {
+  }, [reviewListDistinctData]);
   return (
     <div>
       {reviewListDistinctData.length > 0 && (
@@ -223,7 +232,7 @@ const InternalNodeReviewList = (props) => {
             </div>
           ) : (
             <Fragment>
-              {reviewListDistinctData.map((item, index) => {
+              {sortedReviewListDistinctData.map((item, index) => {
                 // if (index === 0) {
                 //   <Card
                 //     textOneOne={item.informationBasic.associateName}

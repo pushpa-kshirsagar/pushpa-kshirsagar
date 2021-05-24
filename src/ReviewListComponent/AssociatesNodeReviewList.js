@@ -76,13 +76,6 @@ const AssociatesNodeReviewList = (props) => {
     if (target === 'hirarchy') {
       console.log(node);
       nodeId = node?.node?.id || '';
-      // selectedGroup = {
-      //   id: event.node.userGroupId,
-      //   name: event.node.name,
-      //   description: event.node.description,
-      //   nodeid: event.node.id,
-      //   order: event.node.order
-      // };
     } else {
       console.log(node);
       nodeId = node;

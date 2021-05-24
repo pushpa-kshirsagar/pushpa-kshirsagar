@@ -39,8 +39,9 @@ const PopUpMiddlePaneTrippleDot = (props) => {
     selectedAssociateInfo,
     countPage,
     middlePaneHeader,
-    reviewListDistinctData,
-    middlePaneHeaderBadgeTwo
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    reviewListDistinctData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
@@ -56,6 +57,14 @@ const PopUpMiddlePaneTrippleDot = (props) => {
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(keyVal);
     console.log(dataVal);
+    if (dataVal === 'create') {
+      if (middlePaneHeader === 'assessees' && middlePaneHeaderBadgeOne === 'distinct') {
+        keyVal = 'assesseeCreate';
+      }
+      if (middlePaneHeaderBadgeOne !== 'distinct') {
+        keyVal = 'createKey';
+      }
+    }
     if (keyVal === 'distinctAPICall' && middlePaneHeader === 'assessees') {
       getAssesseeDistinctApiCall(
         selectedAssociateInfo,
