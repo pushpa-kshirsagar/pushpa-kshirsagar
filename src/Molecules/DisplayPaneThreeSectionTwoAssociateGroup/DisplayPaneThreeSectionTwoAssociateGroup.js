@@ -6,12 +6,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../actionType';
+import {
+  FILTERMODE,
+  LOADER_START,
+  RELATED_REVIEWLIST_DISTINCT_DATA,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MIDDLEPANE_STATE,
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT,
+  GET_ALLOCATE_ASSOCIATE
+} from '../../actionType';
 import { getAssociateDistinctApiCall } from '../../Actions/AssociateModuleAction';
+import {
+  makeAssociateNodeObj,
+  makeAssociateReviewListRequestObject
+} from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionTwoAssociateGroup = () => {
   // const [listExpand, setListExpand] = useState('');
-  const { reviewMode, relatedReviewListPaneThree } = useSelector(
+  const { reviewMode, relatedReviewListPaneThree, responseObject } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
   const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
@@ -82,9 +95,42 @@ const DisplayPaneThreeSectionTwoAssociateGroup = () => {
   };
   const onclickReviseAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('Associate revise CLICK :::::::>>>>>>>', labelName);
     if (labelName === 'associate') {
-      getAssociateDistinctApiCall(selectedAssociateInfo, 'active', dispatch, countPage, 'distinct');
+      // getAssociateDistinctApiCall(selectedAssociateInfo, 'active', dispatch, countPage, 'distinct');
+      console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+      let requestObect = makeAssociateNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        associateGroupName: responseObject.informationBasic.associateGroupName,
+        associateGroupDescription: responseObject.informationBasic.associateGroupDescription,
+        associateGroupStatus: responseObject.informationEngagement.associateGroupStatus
+      };
+      let existingAssesseeId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0].associate.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'associateGroupAssociateRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSOCIATE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingAssesseeId: existingAssesseeId,
+          typeOfMiddlePaneList: 'associatesGroupAssociateReviewList'
+        }
+      });
     }
   };
 

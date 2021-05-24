@@ -110,6 +110,30 @@ function* workerReviewInfoAssesseeSaga(data) {
             }
           });
         }
+        if (
+          informationAllocation &&
+          informationAllocation.assesseeNode.assesseeNodePrimary &&
+          informationAllocation.assesseeNode.assesseeNodePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.assesseeNode.assesseeNodePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeNode',
+              actualStateName: 'assesseeNodePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeNode',
+              actualStateName: 'assesseeNodePrimary',
+              value: []
+            }
+          });
+        }
 
         if (
           informationAllocation &&
@@ -133,6 +157,30 @@ function* workerReviewInfoAssesseeSaga(data) {
             payload: {
               stateName: 'assesseeGroup',
               actualStateName: 'assesseeGroupSecondary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation.assesseeNode.assesseeNodeSecondary &&
+          informationAllocation.assesseeNode.assesseeNodeSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.assesseeNode.assesseeNodeSecondary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeNode',
+              actualStateName: 'assesseeNodeSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeNode',
+              actualStateName: 'assesseeNodeSecondary',
               value: []
             }
           });

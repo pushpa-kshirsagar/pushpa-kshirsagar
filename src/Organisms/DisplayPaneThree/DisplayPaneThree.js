@@ -67,6 +67,7 @@ import {
   getAssesseeGroupAssesseeReqObj,
   getAssesseeRoleAssesseeReqObj
 } from '../../Actions/AssesseeModuleAction';
+import { getAssociateGroupAssociateReqObj } from '../../Actions/AssociateModuleAction';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -320,7 +321,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
     setSelectedSectionAssociateNode(rightPaneSectionsAssociateNode[0]);
     setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
-    setIsShowReviseIcon(false);
+    setIsShowReviseIcon(true);
   }, [responseObject]);
 
   const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
@@ -415,8 +416,8 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
         associateNodeAssessee: {
-          associateNodeAssesseeAllocate: associateNodeAssessee.associateNodeAssesseeAllocate,
-          associateNodeAssesseeUnallocate: associateNodeAssessee.associateNodeAssesseeUnallocate
+          associateNodeAssesseeAllocate: associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+          associateNodeAssesseeUnallocate: associateNodeAssessee?.associateNodeAssesseeUnallocate || []
         },
         associateNode: {
           id,
@@ -490,15 +491,27 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
+        associateGroupAssociate: {
+          associateGroupAssesseeAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          associateGroupAssesseeUnallocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         associateGroup: {
           id,
           informationBasic: associateGroup.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let associateGroupAssociateReqBody = getAssociateGroupAssociateReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSOCIATE_GROUP_REVISE_INFO_SAGA,
-        payload: { headerOne: 'associates', reqBody }
+        payload: { headerOne: 'associates', associateGroupAssociateReqBody, reqBody }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'assessees') {
       const { associateId, id } = responseObject;
