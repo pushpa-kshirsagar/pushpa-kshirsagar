@@ -113,17 +113,16 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      console.log(
-        'IN ROLE REVIEW+++++',
-        userResponse,
-        Store.getState().DisplayPaneTwoReducer.middlePaneHeader
-      );
+      let middlePaneHeader =
+        Store.getState().DisplayPaneTwoReducer.middlePaneHeader === ''
+          ? 'assessees'
+          : Store.getState().DisplayPaneTwoReducer.middlePaneHeader;
       if (data.payload.assesseeRoleAssesseeReqBody !== null) {
         yield put({
           type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
           payload: {
             request: data.payload.assesseeRoleAssesseeReqBody,
-            HeaderOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
+            HeaderOne: middlePaneHeader,
             BadgeOne: '',
             BadgeTwo: '',
             BadgeThree: '',
@@ -134,7 +133,7 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
+          headerOne: middlePaneHeader,
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
@@ -147,7 +146,7 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
       // yield put({
       //   type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
       //   payload: {
-      //     HeaderOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
+      //     HeaderOne: middlePaneHeader,
       //     request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
       //     BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
       //     BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,

@@ -320,6 +320,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
     setSelectedSectionAssociateNode(rightPaneSectionsAssociateNode[0]);
     setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
+    setIsShowReviseIcon(false);
   }, [responseObject]);
 
   const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);

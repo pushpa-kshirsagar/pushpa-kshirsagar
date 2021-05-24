@@ -62,7 +62,7 @@ function* workerSignInAssesseeSaga(data) {
         localStorage.setItem(
           'parentId',
           userResponse?.responseObject?.signInResponse[0]?.associate?.informationFramework
-            ?.associateAscendantPrimary
+            ?.associateAscendantPrimary || null
         );
 
         console.log('SELECTED ASSOCIATE +++++ >', selectedAssociate);

@@ -38,6 +38,7 @@ import {
   makeInternalNodeObj
 } from '../Actions/GenericActions';
 import {
+  assesseeCreateApiCalls,
   getAssesseeDistinctApiCall,
   getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
@@ -101,88 +102,19 @@ const PopUpAssesseesModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
 
     if (targetValue === 'information') {
+      assesseeCreateApiCalls(
+        selectedAssociateInfo,
+        dispatch,
+        secondaryOptionCheckValue,
+        'assessee'
+      );
       dispatch({
         type: SET_POPUP_SINGLE_STATE,
         payload: { stateName: 'cardValue', value: 'Create' }
       });
-      dispatch({ type: ASSESSEE_INFO_CREATE });
-      dispatch({ type: CLEAR_ASSESSEE_INFO });
-      dispatch({ type: LOADER_START });
-      let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({
-        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: '',
-          BadgeTwo: '',
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
-      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-      let roleRequestObj = makeAssesseeRoleCreateObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
-      dispatch({
-        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-        payload: {
-          request: roleRequestObj,
-          BadgeOne: '',
-          BadgeTwo: '',
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
-      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
-      dispatch({
-        type: INTERNAL_NODE_LIST_SAGA,
-        payload: {
-          request: nodeRequestObj,
-          BadgeOne: '',
-          BadgeTwo: '',
-          BadgeThree: '',
-          nodeViewState: 'list',
-          isMiddlePaneList: false
-        }
-      });
-      dispatch({
-        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-        payload: {
-          stateName: 'assesseeGroup',
-          actualStateName: 'assesseeGroupPrimary',
-          value: []
-        }
-      });
-      dispatch({
-        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-        payload: {
-          stateName: 'assesseeRole',
-          actualStateName: 'assesseeRolePrimary',
-          value: []
-        }
-      });
-      dispatch({
-        type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-        payload: {
-          stateName: 'assesseeNode',
-          actualStateName: 'assesseeNodePrimary',
-          value: []
-        }
-      });
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: 'ASSESSEE_CREATE' }
-      });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
-      });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: {
-          stateName: 'typeOfAssesseeCreate',
-          value: 'assessee'
-        }
       });
       clearMiddlePaneInfo();
     } else if (targetValue === 'distinct') {
