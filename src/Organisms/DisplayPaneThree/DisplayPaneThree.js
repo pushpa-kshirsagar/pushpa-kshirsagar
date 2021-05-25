@@ -67,7 +67,7 @@ import {
   getAssesseeGroupAssesseeReqObj,
   getAssesseeRoleAssesseeReqObj
 } from '../../Actions/AssesseeModuleAction';
-import { getAssociateGroupAssociateReqObj } from '../../Actions/AssociateModuleAction';
+import { getAssociateGroupAssociateReqObj, getAssociateRoleAssociateReqObj } from '../../Actions/AssociateModuleAction';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -496,7 +496,7 @@ export const DisplayPaneThree = () => {
         }
       };
       dispatch({ type: LOADER_START });
-      let associateRoleAssociateReqBody = getAssociateGroupAssociateReqObj(
+      let associateRoleAssociateReqBody = getAssociateRoleAssociateReqObj(
         selectedAssociateInfo,
         id,
         'active',

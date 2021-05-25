@@ -27,7 +27,7 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
     (state) => state.DisplayPaneTwoReducer
   );
   const dispatch = useDispatch();
-  const { informationContact, informationCredential } = responseObject;
+  const { informationContact, informationCredential, informationFramework } = responseObject;
 
   //   associateAddress: "sampleaddress"
   // associateAddressCity: "33"
@@ -187,6 +187,96 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
       }
     }
   ];
+
+  let ascendantAll = [];
+  let ascendantPrimary = [];
+  let ascendantSecondary = [];
+  if (informationFramework && informationFramework.associateAscendant) {
+    if (
+      informationFramework.associateAscendant.associateAscendantAll &&
+      informationFramework.associateAscendant.associateAscendantAll.length > 0
+    ) {
+      informationFramework.associateAscendant.associateAscendantAll.forEach((ob) => {
+        ascendantAll.push({
+          id: ob.id,
+          textOne: ob?.associateName || '',
+          textTwo: ob?.associateDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateAscendant.associateAscendantPrimary &&
+      informationFramework.associateAscendant.associateAscendantPrimary.length > 0
+    ) {
+      informationFramework.associateAscendant.associateAscendantPrimary.forEach((ob) => {
+        ascendantPrimary.push({
+          id: ob.id,
+          textOne: ob?.associateName || '',
+          textTwo: ob?.associateDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateAscendant.associateAscendantSecondary &&
+      informationFramework.associateAscendant.associateAscendantSecondary.length > 0
+    ) {
+      informationFramework.associateAscendant.associateAscendantSecondary.forEach((ob) => {
+        ascendantSecondary.push({
+          id: ob.id,
+          textOne: ob?.associateName || '',
+          textTwo: ob?.associateDescription || '',
+          status: ''
+        });
+      });
+    }
+  }
+  let descendantAll = [];
+  let descendantPrimary = [];
+  let descendantSecondary = [];
+  if (informationFramework && informationFramework.associateDescendant) {
+    if (
+      informationFramework.associateDescendant.associateDescendantAll &&
+      informationFramework.associateDescendant.associateDescendantAll.length > 0
+    ) {
+      informationFramework.associateDescendant.associateDescendantAll.forEach((ob) => {
+        descendantAll.push({
+          id: ob.id,
+          textOne: ob?.associateName || '',
+          textTwo: ob?.associateDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateDescendant.associateDescendantPrimary &&
+      typeof informationFramework.associateDescendant.associateDescendantPrimary !== 'string' &&
+      informationFramework.associateDescendant.associateDescendantPrimary.length > 0
+    ) {
+      informationFramework.associateDescendant.associateDescendantPrimary.forEach((ob) => {
+        descendantPrimary.push({
+          id: ob.id,
+          textOne: ob?.associateName || '',
+          textTwo: ob?.associateDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateDescendant.associateDescendantSecondary &&
+      informationFramework.associateDescendant.associateDescendantSecondary.length > 0
+    ) {
+      informationFramework.associateDescendant.associateDescendantSecondary.forEach((ob) => {
+        descendantSecondary.push({
+          id: ob.id,
+          textOne: ob?.associateName || '',
+          textTwo: ob?.associateDescription || '',
+          status: ''
+        });
+      });
+    }
+  }
   const list3 = [
     {
       id: 'a1',
@@ -197,15 +287,15 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: []
+              innerList: ascendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: []
+              innerList: ascendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: []
+              innerList: ascendantSecondary
             }
           ]
         },
@@ -214,15 +304,15 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'all',
-              innerList: []
+              innerList: descendantAll
             },
             {
               labelTextTwoBadge: 'primary',
-              innerList: []
+              innerList: descendantPrimary
             },
             {
               labelTextTwoBadge: 'secondary',
-              innerList: []
+              innerList: descendantSecondary
             }
           ]
         }
