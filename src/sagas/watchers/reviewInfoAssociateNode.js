@@ -111,23 +111,23 @@ function* workerReviseAssociateNodeInfoSaga(data) {
           selectedModule: selectedModule
         }
       });
-      // yield put({
-      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-      //   payload: { stateName: 'reviewListDistinctData', value: [] }
-      // });
-      // yield put({
-      //   type: INTERNAL_NODE_LIST_SAGA,
-      //   payload: {
-      //     HeaderOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
-      //     request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-      //     BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-      //     BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-      //     isMiddlePaneList: Store.getState().DisplayPaneTwoReducer.isMiddlePaneList,
-      //     nodeViewState: Store.getState().DisplayPaneTwoReducer.nodeViewState,
-      //     scanString: '',
-      //     middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue
-      //   }
-      // });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          paneHeader: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          isMiddlePaneList: true,
+          nodeViewState: Store.getState().DisplayPaneTwoReducer.nodeViewState,
+          scanString: '',
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue
+        }
+      });
     }
     // console.log('loading end');
     yield put({ type: LOADER_STOP });

@@ -14,6 +14,9 @@ import {
   FILTERMODE
 } from '../actionType';
 import {
+  assesseeCreateApiCalls,
+  getAdminManagerDistinctApiCall,
+  getAdminManagerRoleApiCall,
   getAssesseeDistinctApiCall,
   getAssesseeGroupDistinctApiCall,
   getAssesseeRoleDistinctApiCall,
@@ -58,7 +61,12 @@ const PopUpMiddlePaneTrippleDot = (props) => {
     console.log(keyVal);
     console.log(dataVal);
     if (dataVal === 'create') {
-      if (middlePaneHeader === 'assessees' && middlePaneHeaderBadgeOne === 'distinct') {
+      if (
+        (middlePaneHeader === 'assessees' ||
+          middlePaneHeader === 'administrators' ||
+          middlePaneHeader === 'managers') &&
+        middlePaneHeaderBadgeOne === 'distinct'
+      ) {
         keyVal = 'assesseeCreate';
       }
       if (middlePaneHeaderBadgeOne !== 'distinct') {
@@ -72,6 +80,18 @@ const PopUpMiddlePaneTrippleDot = (props) => {
         countPage,
         dispatch,
         dataVal
+      );
+      dispatch({ type: POPUP_CLOSE });
+    } else if (
+      keyVal === 'distinctAPICall' &&
+      (middlePaneHeader === 'administrators' || middlePaneHeader === 'managers')
+    ) {
+      getAdminManagerDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        middlePaneHeader,
+        dispatch
       );
       dispatch({ type: POPUP_CLOSE });
     } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'associates') {
@@ -92,15 +112,21 @@ const PopUpMiddlePaneTrippleDot = (props) => {
         'hierarchy'
       );
       dispatch({ type: POPUP_CLOSE });
-    } else if (middlePaneHeader === 'assessees') {
+    } else if (
+      middlePaneHeader === 'assessees' ||
+      middlePaneHeader === 'administrators' ||
+      middlePaneHeader === 'managers'
+    ) {
       if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'groups') {
-        getAssesseeGroupDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          'groups'
-        );
+        if (middlePaneHeader === 'assessees') {
+          getAssesseeGroupDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            'groups'
+          );
+        }
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
         getInternalNodeApiCall(
@@ -111,35 +137,58 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           'nodes',
           '',
           'hierarchy',
-          'assessees'
+          middlePaneHeader
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'roles') {
-        getAssesseeRoleDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          'roles',
-          dispatch
-        );
+        if (middlePaneHeader === 'administrators' || middlePaneHeader === 'managers') {
+          getAdminManagerRoleApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            popupHeaderOne,
+            dispatch
+          );
+        } else {
+          getAssesseeRoleDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            'roles',
+            dispatch
+          );
+        }
+
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'groups') {
-        getAssesseeGroupDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal
-        );
+        if (middlePaneHeader === 'assessees') {
+          getAssesseeGroupDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal
+          );
+        }
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'roles') {
-        getAssesseeRoleDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dataVal,
-          dispatch
-        );
+        if (middlePaneHeader === 'administrators' || middlePaneHeader === 'managers') {
+          getAdminManagerRoleApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            popupHeaderOne,
+            dispatch
+          );
+        } else {
+          getAssesseeRoleDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            'roles',
+            dispatch
+          );
+        }
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'nodes') {
         getInternalNodeApiCall(
@@ -150,9 +199,28 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           dataVal,
           '',
           'hierarchy',
-          'assessees'
+          middlePaneHeader
         );
         dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'information') {
+        dispatch({ type: POPUP_CLOSE });
+        if (
+          (middlePaneHeader === 'assessees' ||
+            middlePaneHeader === 'administrators' ||
+            middlePaneHeader === 'managers') &&
+          middlePaneHeaderBadgeOne === 'distinct'
+        ) {
+          assesseeCreateApiCalls(
+            selectedAssociateInfo,
+            dispatch,
+            secondaryOptionCheckValue,
+            middlePaneHeader === 'administrators'
+              ? 'administrator'
+              : middlePaneHeader === 'managers'
+              ? 'manager'
+              : 'assessee'
+          );
+        }
       } else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,

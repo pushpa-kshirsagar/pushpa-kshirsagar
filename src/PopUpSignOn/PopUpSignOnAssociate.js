@@ -380,7 +380,7 @@ const PopUpSignOnAssociate = () => {
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
-        nextPopUpValue={'WORKADDRESSPOPUP'}
+        nextPopUpValue={'TYPELISTPOPUP'}
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a role'}
@@ -411,6 +411,25 @@ const PopUpSignOnAssociate = () => {
         errorMsg={roleSelectedError}
         isRequired={true}
         selectedList={associateInfo?.informationAllocation?.associateRole.associateRolePrimary}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPELISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'WORKADDRESSPOPUP'}
+        inputHeader={'type'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a type'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList

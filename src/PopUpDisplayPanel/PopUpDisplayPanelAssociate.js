@@ -74,7 +74,12 @@ import {
   makeInternalNodeObj
 } from '../Actions/GenericActions';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
-import { assesseeCreateApiCalls, getRoleGroupReviewListApi } from '../Actions/AssesseeModuleAction';
+import {
+  assesseeCreateApiCalls,
+  getAdminManagerDistinctApiCall,
+  getAdminManagerRoleApiCall,
+  getRoleGroupReviewListApi
+} from '../Actions/AssesseeModuleAction';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -101,7 +106,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           payload: e.currentTarget.getAttribute('data-value')
         });
       }
-    }  else if (
+    } else if (
       popupHeaderOne === 'administrators' ||
       popupHeaderOne === 'managers' ||
       popupHeaderOne === 'associate'
@@ -216,35 +221,14 @@ const PopUpDisplayPanelAssociate = (props) => {
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
       clickValue === 'roles'
     ) {
-      //call admin and manager api
-      dispatch({ type: LOADER_START });
-      let roleRequestObj =
-        popupHeaderOne === 'administrators'
-          ? makeAdministratorRoleCreateObj(
-              selectedAssociateInfo,
-              secondaryOptionCheckValue,
-              0,
-              countPage
-            )
-          : makeManagerRoleCreateObj(
-              selectedAssociateInfo,
-              secondaryOptionCheckValue,
-              0,
-              countPage
-            );
-      dispatch({ type: SET_REQUEST_OBJECT, payload: roleRequestObj });
-
-      dispatch({
-        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-        payload: {
-          request: roleRequestObj,
-          middlePaneHeader: popupHeaderOne,
-          BadgeOne: 'roles',
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
+      //call admin and manager role api
+      getAdminManagerRoleApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        popupHeaderOne,
+        dispatch
+      );
     }
     if (clickValue === 'types') {
       revisePopupHeaderOne = clickValue;
@@ -427,40 +411,13 @@ const PopUpDisplayPanelAssociate = (props) => {
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
       popupHeaderOneBadgeOne === 'review'
     ) {
-      let requestObj = makeAdministratorsReviewListRequestObject(
+      getAdminManagerDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        popupHeaderOne,
+        dispatch
       );
-      if (popupHeaderOne === 'managers') {
-        requestObj = makeManagersReviewListRequestObject(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          0,
-          countPage
-        );
-      }
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: popupHeaderOne + 'Distinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: ASSESSEE_REVIEW_DISTINCT_SAGA,
-        payload: {
-          request: requestObj,
-          HeaderOne: popupHeaderOne,
-          BadgeOne: 'distinct',
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     }
     if (
       clickValue === 'distinct' &&
@@ -706,13 +663,6 @@ const PopUpDisplayPanelAssociate = (props) => {
         secondaryOptionCheckValue,
         popupHeaderOne === 'administrators' ? 'administrator' : 'manager'
       );
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSESSEENAMEPOPUP',
-          popupMode: popupHeaderOne === 'administrators' ? 'ADMINISTRATOR_CREATE' : 'MANAGER_CREATE'
-        }
-      });
 
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {

@@ -75,7 +75,7 @@ function* workerReviewAssociatesNodeListSaga(data) {
   }
 }
 function* workerReviewInternalNodeListSaga(data) {
-  console.log(data.payload);
+  console.log(data.payload,"000000");
   try {
     const userResponse = yield call(nodeReviewListDistinctApi, {
       data: data.payload.request,

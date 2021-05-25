@@ -60,7 +60,7 @@ export const DisplayPaneTwo = (props) => {
       {popupMode === 'SCAN_POPUP_FUN' && <PopUpScan />}
       <div
         style={{
-          height: 'calc(100vh - 195px)',
+          height: 'calc(100vh - 190px)',
           overflow: 'overlay'
         }}
         className="containerPadding"

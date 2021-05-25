@@ -365,7 +365,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
   return (
     <div
       style={{
-        height: 'calc(100vh - 336px)',
+        height: 'calc(100vh - 355px)',
         overflow: 'overlay'
       }}
     >

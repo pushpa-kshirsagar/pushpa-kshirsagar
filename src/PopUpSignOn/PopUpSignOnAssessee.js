@@ -95,8 +95,7 @@ const PopUpSignOnAssessee = (props) => {
     // console.log("descenArr",descenArr);
     // descenArr ? setAssignNodeArr(descenArr):setAssignNodeArr([]);
     if (headerOne === 'administrator' && coreNodeReviewListData.length > 0) {
-      let defaultnode = coreNodeReviewListData[0]
-        .filter(
+      let defaultnode = coreNodeReviewListData.filter(
           (x) =>
             x.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary === null
         )
@@ -545,7 +544,7 @@ console.log('associateTagPrimary',associateTagPrimary);
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
-        nextPopUpValue={'EMAILPOPUP'}
+        nextPopUpValue={'TYPELISTPOPUP'}
         inputHeader={'role'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a role'}
@@ -576,6 +575,25 @@ console.log('associateTagPrimary',associateTagPrimary);
         textOne={'assesseeRoleName'}
         textTwo={'assesseeRoleDescription'}
         onClickEvent={updateRoleIdSecondaryObject}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPELISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'EMAILPOPUP'}
+        inputHeader={'type'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a type'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddressEmail

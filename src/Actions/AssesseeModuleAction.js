@@ -1,6 +1,7 @@
 import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
+  ASSESSEE_SIGN_ON,
   CLEAR_ASSESSEE_INFO,
   CLEAR_DISPLAY_PANE_THREE,
   CLEAR_ROLE_REDUCER_STATE,
@@ -24,12 +25,14 @@ import {
 } from '../actionType';
 import {
   makeAdministratorRoleCreateObj,
+  makeAdministratorsReviewListRequestObject,
   makeAssesseeGroupObj,
   makeAssesseeReviewListRequestObject,
   makeAssesseeRoleCreateObj,
   makeAssesseeRoleObj,
   makeInternalNodeObj,
-  makeManagerRoleCreateObj
+  makeManagerRoleCreateObj,
+  makeManagersReviewListRequestObject
 } from './GenericActions';
 
 export const getAssesseeDistinctApiCall = (
@@ -1097,4 +1100,90 @@ export const assesseeCreateApiCalls = (
       value: typeOfAssesseeCreate
     }
   });
+  let popupMode = 'ASSESSEE_CREATE';
+  if (typeOfAssesseeCreate === 'administrator') {
+    popupMode = 'ADMINISTRATOR_CREATE';
+  }
+  if (typeOfAssesseeCreate === 'managers') {
+    popupMode = 'MANAGER_CREATE';
+  }
+  dispatch({
+    type: ASSESSEE_SIGN_ON,
+    payload: { isPopUpValue: 'ASSESSEENAMEPOPUP', popupMode: popupMode }
+  });
+};
+
+export const getAdminManagerRoleApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  popupHeaderOne,
+  dispatch
+) => {
+  dispatch({ type: LOADER_START });
+  let roleRequestObj =
+    popupHeaderOne === 'administrators'
+      ? makeAdministratorRoleCreateObj(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          0,
+          countPage
+        )
+      : makeManagerRoleCreateObj(selectedAssociateInfo, secondaryOptionCheckValue, 0, countPage);
+  dispatch({ type: SET_REQUEST_OBJECT, payload: roleRequestObj });
+
+  dispatch({
+    type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+    payload: {
+      request: roleRequestObj,
+      middlePaneHeader: popupHeaderOne,
+      BadgeOne: 'roles',
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+
+export const getAdminManagerDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  popupHeaderOne,
+  dispatch
+) => {
+  let requestObj = makeAdministratorsReviewListRequestObject(
+    selectedAssociateInfo,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (popupHeaderOne === 'managers') {
+    requestObj = makeManagersReviewListRequestObject(
+      selectedAssociateInfo,
+      secondaryOptionCheckValue,
+      0,
+      countPage
+    );
+  }
+  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: popupHeaderOne + 'Distinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({
+    type: ASSESSEE_REVIEW_DISTINCT_SAGA,
+    payload: {
+      request: requestObj,
+      HeaderOne: popupHeaderOne,
+      BadgeOne: 'distinct',
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
 };
