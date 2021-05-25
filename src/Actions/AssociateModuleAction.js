@@ -489,6 +489,7 @@ export const getAssociateNodeApiCall = (
   countPage,
   dispatch,
   targetValue,
+  badgeValue,
   nodeViewState
 ) => {
   let requestObj = makeAssociateNodeObj(
@@ -522,7 +523,7 @@ export const getAssociateNodeApiCall = (
     type: GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
     payload: {
       request: requestObj,
-      BadgeOne: targetValue,
+      BadgeOne: badgeValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
       nodeViewState: nodeViewState,

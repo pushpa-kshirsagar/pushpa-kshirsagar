@@ -147,6 +147,7 @@ const PopUpAssociatesModule = (props) => {
         countPage,
         dispatch,
         targetValue,
+        targetValue,
         'list'
       );
       resetDataFunction();
@@ -176,6 +177,7 @@ const PopUpAssociatesModule = (props) => {
         countPage,
         dispatch,
         targetValue,
+        'distinct',
         'hierarchy'
       );
       resetDataFunction();

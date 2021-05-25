@@ -63,7 +63,7 @@ const PopUpSignOnAssessee = (props) => {
   const informationContact = assesseeInfo.informationContact;
   console.log('============>', assesseeInfo);
   const [roleSelectedError, setRoleSelectedError] = useState('');
-  const [assignRoleArr, setAssignRoleArr] = useState([]);
+  const [assignNodeArr, setAssignNodeArr] = useState([]);
   const [defaultNodeId, setdefaultNodeId] = useState([]);
 
   const dispatch = useDispatch();
@@ -88,6 +88,12 @@ const PopUpSignOnAssessee = (props) => {
       )
         assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary.push(DEFAULT_ROLE_ID);
     }
+    console.log("coreNodeReviewListData",coreNodeReviewListData);
+    // let rootArr = coreNodeReviewListData.length > 0 && coreNodeReviewListData[0].associateNodeRoot;
+    // let descenArr = coreNodeReviewListData.length > 0 && coreNodeReviewListData[0].associateNodeDescendantAll.unshift(rootArr);
+    // console.log("rootArr",rootArr);
+    // console.log("descenArr",descenArr);
+    // descenArr ? setAssignNodeArr(descenArr):setAssignNodeArr([]);
     if (headerOne === 'administrator' && coreNodeReviewListData.length > 0) {
       let defaultnode = coreNodeReviewListData[0]
         .filter(
@@ -98,6 +104,7 @@ const PopUpSignOnAssessee = (props) => {
       assesseeInfo.informationAllocation.assesseeNode.assesseeNodePrimary.push(defaultnode[0]);
       setdefaultNodeId(defaultnode[0]);
     }
+    // console.log("assignNodeArr",assignNodeArr);
   }, [coreRoleReviewListData, coreNodeReviewListData]);
 
   console.log(
@@ -507,6 +514,7 @@ console.log('associateTagPrimary',associateTagPrimary);
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
         ListData={coreNodeReviewListData}
+        // ListData={assignNodeArr}
         textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}
         onClickEvent={updateNodeIdObject}
@@ -525,6 +533,7 @@ console.log('associateTagPrimary',associateTagPrimary);
         selectedList={assesseeInfo?.informationAllocation?.assesseeNode.assesseeNodePrimary}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
+        // ListData={assignNodeArr}
         ListData={coreNodeReviewListData}
         textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}

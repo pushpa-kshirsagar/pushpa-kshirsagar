@@ -75,12 +75,21 @@ const PopUpMiddlePaneTrippleDot = (props) => {
       );
       dispatch({ type: POPUP_CLOSE });
     } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'associates') {
-      getAssociateDistinctApiCall(
+      // getAssociateDistinctApiCall(
+      //   selectedAssociateInfo,
+      //   secondaryOptionCheckValue,
+      //   dispatch,
+      //   countPage,
+      //   dataVal
+      // );
+      getAssociateNodeApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        dispatch,
         countPage,
-        dataVal
+        dispatch,
+        'nodes',
+        'distinct',
+        'hierarchy'
       );
       dispatch({ type: POPUP_CLOSE });
     } else if (middlePaneHeader === 'assessees') {
@@ -167,6 +176,7 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           countPage,
           dispatch,
           'nodes',
+          'distinct',
           'hierarchy'
         );
         dispatch({ type: POPUP_CLOSE });
@@ -204,6 +214,7 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           countPage,
           dispatch,
           'nodes',
+          'distinct',
           'hierarchy'
         );
         dispatch({ type: POPUP_CLOSE });

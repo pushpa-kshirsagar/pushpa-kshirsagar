@@ -10,6 +10,7 @@ import {
   LOADER_START,
   CLEAR_TYPE_REDUCER_STATE
 } from '../../actionType';
+import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
 const TypeCreatePopup = (props) => {
   const { headerOne } = props;
@@ -99,7 +100,27 @@ const TypeCreatePopup = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'type'}
         headerOneBadgeTwo={'information'}
+        nextPopUpValue={'GROUPPOPUP'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'type'}
+        headerOneBadgeTwo={'information'}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={''}
+        infoMsg={'select a group'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        // mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
        <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}

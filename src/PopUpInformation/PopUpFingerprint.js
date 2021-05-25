@@ -18,7 +18,8 @@ import rightHandImg from '../images/rhand.png';
 
 const PopUpFingerprint = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
-  const [imgsrc, setimgsrc] = useState('');
+  const [fingerIndex, setfingerIndex] = useState(0);
+  const [secondPopup, setSecondPopup] = useState(false);
 
   const dispatch = useDispatch();
   const {
@@ -34,15 +35,19 @@ const PopUpFingerprint = (props) => {
 
   const handleClick = async () => {
     //according to creation mode popup sequence will change
-    if (mode === 'revise') {
-      dispatch({ type: POPUP_CLOSE });
-    } else {
-      if (handleNextPopupValue) {
-        handleNextPopupValue();
+    if (secondPopup === false) {
+      if (mode === 'revise') {
+        dispatch({ type: POPUP_CLOSE });
       } else {
-        // await dispatch({ type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA, payload: { request: requestObj } });
-        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+        if (handleNextPopupValue) {
+          handleNextPopupValue();
+        } else {
+          // await dispatch({ type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA, payload: { request: requestObj } });
+          dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+        }
       }
+    } else {
+      setSecondPopup(false);
     }
   };
   const assesseeLeftFingerPrint = ['', '', '', '', ''];
@@ -143,7 +148,10 @@ const PopUpFingerprint = (props) => {
       coords: '2,42,40,70'
     }
   ];
-
+  const openSecondPopup = (findex) => {
+    setfingerIndex(findex + 1);
+    setSecondPopup(true);
+  };
   return (
     <div>
       <Popup isActive={isActive}>
@@ -151,7 +159,7 @@ const PopUpFingerprint = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
-          headerOneBadgeTwo={headerOneBadgeTwo}
+          headerOneBadgeTwo={secondPopup ? fingerIndex : ''}
           onClick={handleClick}
           mode={mode}
         />
@@ -159,8 +167,7 @@ const PopUpFingerprint = (props) => {
           <div id="dialog-description">
             <div className="true">
               <div className={'imagePopup'} style={{ margin: 5 }}>
-                {'1' === '3' ? (
-                  // <img className={classes.fingerImg} src={imgsrc}/>
+                {secondPopup ? (
                   <Button
                     variant="fab"
                     disabled={true}
@@ -171,11 +178,7 @@ const PopUpFingerprint = (props) => {
                       unAvailable
                       imageNA"
                   >
-                    <Avatar
-                      alt="Anonymous"
-                      src={imgsrc}
-                      className={'avatar profileAvatarRight assesseeCredentialImage'}
-                    />
+                    <Person className={['svgRootSize', 'uploadImageWidthHeight'].join(' ')} />
                   </Button>
                 ) : (
                   <div>
@@ -196,7 +199,7 @@ const PopUpFingerprint = (props) => {
                             <area
                               alt=""
                               key={index}
-                              onClick={() => null}
+                              onClick={(e) => openSecondPopup(index)}
                               coords={value.coords}
                               shape="rect"
                             />
@@ -205,7 +208,7 @@ const PopUpFingerprint = (props) => {
                             <area
                               alt=""
                               key={index}
-                              onClick={() => null}
+                              onClick={(e) => openSecondPopup(index)}
                               coords={value.coords}
                               shape="rect"
                             />
