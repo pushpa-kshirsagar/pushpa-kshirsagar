@@ -6,13 +6,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { RELATED_REVIEWLIST_DISTINCT_DATA, SET_MIDDLEPANE_STATE } from '../../actionType';
+import {
+  FILTERMODE,
+  GET_ALLOCATE_ASSOCIATE,
+  LOADER_START,
+  RELATED_REVIEWLIST_DISTINCT_DATA,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MIDDLEPANE_STATE,
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT
+} from '../../actionType';
+import { makeAssociateNodeObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionTwoAssociateRole = () => {
   // const [listExpand, setListExpand] = useState('');
-  const { reviewMode, relatedReviewListPaneThree = [] } = useSelector(
+  const { reviewMode, relatedReviewListPaneThree = [], responseObject } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   // const { informationEngagement } = responseObject;
   // function capitalizeFirstLetter(string) {
@@ -34,7 +45,7 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
     });
   });
 
-  const onclickReviewAssessee = (e) => {
+  const onclickReviewAssociate = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
     if (labelName === 'associate' && associateArray.length > 0) {
@@ -53,6 +64,45 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
           typeOfMiddlePaneList: 'associatesRoleAssociateReviewList',
           scanCount: 4,
           showMiddlePaneState: true
+        }
+      });
+    }
+  };
+  const onclickReviseAssociate = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
+    if (labelName === 'associate') {
+      let requestObect = makeAssociateNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        associateRoleName: responseObject.informationBasic.associateRoleName,
+        associateRoleDescription: responseObject.informationBasic.associateRoleDescription,
+        associateRoleStatus: responseObject.informationEngagement.associateRoleStatus
+      };
+      let existingAssesseeId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0].associate.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'associateRoleAssociateRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSOCIATE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingAssesseeId: existingAssesseeId,
+          typeOfMiddlePaneList: 'associatesRoleAssociateReviewList'
         }
       });
     }
@@ -93,7 +143,8 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
                 <div key={ob.id}>
                   {ob.isListCard ? (
                     <AccordianListCard
-                      onClickReview={onclickReviewAssessee}
+                      onClickReview={onclickReviewAssociate}
+                      onClickRevise={onclickReviseAssociate}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}

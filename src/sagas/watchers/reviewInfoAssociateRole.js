@@ -4,8 +4,10 @@ import {
   GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
   LOADER_STOP,
+  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSOCIATE_ROLE_REDUCER_STATE,
-  SET_DISPLAY_PANE_THREE_STATE
+  SET_DISPLAY_PANE_THREE_STATE,
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_ROLE_URL, ASSOCIATE_ROLE_INFO_REVISE_URL } from '../../endpoints';
 
@@ -37,7 +39,7 @@ function* workerReviewAssociateRoleInfoSaga(data) {
           type: GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
           payload: {
             request: associateRoleAssociateReqBody,
-            HeaderOne: 'assessees',
+            HeaderOne: 'associates',
             BadgeOne: '',
             BadgeTwo: '',
             BadgeThree: '',
@@ -62,10 +64,9 @@ function* workerReviewAssociateRoleInfoSaga(data) {
           payload: userResponse.responseObject[0].informationBasic
         });
       }
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -95,6 +96,20 @@ function* workerReviseAssociateRoleInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN ASSOCIATE ROLE Review', userResponse);
+      const { associateRoleAssociateReqBody } = data.payload;
+      if (associateRoleAssociateReqBody !== null) {
+        yield put({
+          type: GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
+          payload: {
+            request: associateRoleAssociateReqBody,
+            HeaderOne: 'associates',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -106,7 +121,8 @@ function* workerReviseAssociateRoleInfoSaga(data) {
         }
       });
     }
-
+    yield put({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
+    yield put({ type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {

@@ -158,9 +158,12 @@ function* workerReviewListAssociateAllocateSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
+      let Arr1 = userResponse.responseObject[0].associateRoot;
+      let Arr2 = userResponse.responseObject[0].associateDescendantAll;
+      Arr2.unshift(Arr1);
       let responseObj = {
         ...data.payload.revisedGroupObject,
-        associate: userResponse.responseObject
+        associate: Arr2
       };
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
       yield put({

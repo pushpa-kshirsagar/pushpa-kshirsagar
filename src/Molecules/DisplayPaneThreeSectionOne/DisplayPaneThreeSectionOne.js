@@ -867,6 +867,7 @@ const DisplayPaneThreeSectionOne = () => {
   };
   const reviseSetup = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'sign-in') {
       let availableCredentialArray = [];
@@ -935,10 +936,18 @@ const DisplayPaneThreeSectionOne = () => {
         type: SET_AVAILABLE_SIGNIN_LIST,
         payload: availableCredentialArray
       });
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'FORCETOSELECTSIGNIN', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'FORCETOSELECTSIGNIN', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
   };
 
