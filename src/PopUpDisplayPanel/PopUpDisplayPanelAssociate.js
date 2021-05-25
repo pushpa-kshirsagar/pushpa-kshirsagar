@@ -101,17 +101,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           payload: e.currentTarget.getAttribute('data-value')
         });
       }
-    } else if (popupHeaderOne === 'types') {
-      if (
-        e.currentTarget.getAttribute('data-value') === 'assignments' ||
-        e.currentTarget.getAttribute('data-value') === 'assessments'
-      ) {
-        dispatch({
-          type: SET_SECONDARY_OPTION_VALUE,
-          payload: e.currentTarget.getAttribute('data-value')
-        });
-      }
-    } else if (
+    }  else if (
       popupHeaderOne === 'administrators' ||
       popupHeaderOne === 'managers' ||
       popupHeaderOne === 'associate'

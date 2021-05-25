@@ -48,8 +48,10 @@ const PopUpConfirmation = (props) => {
       popupMode === 'associatesGROUPCREATE' ||
       popupMode === 'assignmentsGROUPCREATE' ||
       popupMode === 'assessmentsGROUPCREATE' ||
-      popupMode === 'assignmentsTYPECREATE' ||
+      popupMode === 'assesseesTYPECREATE' ||
       popupMode === 'assessmentsTYPECREATE' ||
+      popupMode === 'assessmentsTYPECREATE' ||
+      popupMode === 'associatesTYPECREATE' ||
       popupMode === 'NODECREATE'
     ) {
       dispatch({

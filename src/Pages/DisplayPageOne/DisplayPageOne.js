@@ -235,8 +235,10 @@ const DisplayPageOne = () => {
           objectName={'associateGroup'}
         />
       )}
+      {popupMode === 'assesseesTYPECREATE' && <TypeCreatePopup headerOne={'assessees'} />}
       {popupMode === 'assessmentsTYPECREATE' && <TypeCreatePopup headerOne={'assessments'} />}
       {popupMode === 'assignmentsTYPECREATE' && <TypeCreatePopup headerOne={'assignments'} />}
+      {popupMode === 'associatesTYPECREATE' && <TypeCreatePopup headerOne={'associates'} />}
       {popupMode === 'NODECREATE' && <NodeCreatePopup headerOne={'associate'} />}
       {popupMode === 'ASSIGNMENTCREATE' && <AssignmentCreatePopup headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <AssessmentCreatePopup headerOne={'assessment'} />}

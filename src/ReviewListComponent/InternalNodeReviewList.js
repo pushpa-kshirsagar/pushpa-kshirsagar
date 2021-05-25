@@ -33,6 +33,7 @@ import '../reactSortableTree.css';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { Fragment } from 'react';
 import { getInternalNodeApiCall, sortingListInAsc } from '../Actions/AssociateModuleAction';
+import Card from '../Molecules/Card/Card';
 const InternalNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -114,13 +115,10 @@ const InternalNodeReviewList = (props) => {
 
   const openNodeListPopup = (node, event, target, canUpdate) => {
     let selectedGroup = {};
-    let nodeId = '';
+    let nodeId = node;
     if (target === 'hirarchy') {
       console.log(node.node.id);
       nodeId = node.node.id;
-    } else {
-      console.log(node);
-      nodeId = event.currentTarget.getAttribute('tag');
     }
     let optArr = [...GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION];
     if (middlePaneHeader === 'assessees')
@@ -141,6 +139,7 @@ const InternalNodeReviewList = (props) => {
     }
 
     console.log('optArr', optArr);
+    console.log('nodeId', nodeId);
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -186,7 +185,12 @@ const InternalNodeReviewList = (props) => {
     console.log(dragedNodeParentId, 'dragedNodeParentId');
   };
   useEffect(() => {
+    // dispatch({
+    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+    //   payload: { stateName: 'scanString', value: 'scanString' }
+    // });
   }, [reviewListDistinctData]);
+  console.log('reviewListDistinctData', reviewListDistinctData);
   return (
     <div>
       {reviewListDistinctData.length > 0 && (
@@ -232,37 +236,61 @@ const InternalNodeReviewList = (props) => {
             </div>
           ) : (
             <Fragment>
-              {sortedReviewListDistinctData.map((item, index) => {
-                // if (index === 0) {
-                //   <Card
-                //     textOneOne={item.informationBasic.associateName}
-                //     textTwoOne={item.informationBasic.associateDescription}
-                //     IconOne={null}
-                //     isIcon={false}
-                //     labelTwoTwo={''}
-                //     onClickIconOne={null}
-                //     isAlliance
-                //   />;
-                // } else {
-                return (
-                  <div className="containerPadding" key={index}>
-                    <ReviewList
-                      className=""
-                      id={index}
-                      tag={item.id}
-                      isSelectedReviewList={middlePaneSelectedValue === item.id}
-                      status={item.informationEngagement.associateNodeStatus}
-                      textOne={item.informationBasic.associateNodeName}
-                      textTwo={item.informationBasic.associateNodeDescription}
-                      isTooltipActive={false}
-                      onClickEvent={(event) => {
-                        openNodeListPopup(item.id, event, 'list', true);
-                      }}
-                    />
-                  </div>
-                );
-                // }
-              })}
+              {reviewListDistinctData && (
+                <Card
+                  textOneOne={
+                    reviewListDistinctData[0].associateNodeRoot.informationBasic.associateNodeName
+                  }
+                  textTwoOne={
+                    reviewListDistinctData[0].associateNodeRoot.informationBasic
+                      .associateNodeDescription
+                  }
+                  isIcon={false}
+                  labelTwoTwo={''}
+                  onClickIconOne={null}
+                  onClick={(event) => {
+                    openNodeListPopup(
+                      reviewListDistinctData[0].associateNodeRoot.id,
+                      event,
+                      'list',
+                      true
+                    );
+                  }}
+                  isAlliance
+                />
+              )}
+              {reviewListDistinctData &&
+                reviewListDistinctData[0].associateNodeDescendantAll.map((item, index) => {
+                  // if (index === 0) {
+                  //   <Card
+                  //     textOneOne={item.informationBasic.associateName}
+                  //     textTwoOne={item.informationBasic.associateDescription}
+                  //     IconOne={null}
+                  //     isIcon={false}
+                  //     labelTwoTwo={''}
+                  //     onClickIconOne={null}
+                  //     isAlliance
+                  //   />;
+                  // } else {
+                  return (
+                    <div className="containerPadding" key={index}>
+                      <ReviewList
+                        className=""
+                        id={index}
+                        tag={item.id}
+                        isSelectedReviewList={middlePaneSelectedValue === item.id}
+                        status={item.informationEngagement.associateNodeStatus}
+                        textOne={item.informationBasic.associateNodeName}
+                        textTwo={item.informationBasic.associateNodeDescription}
+                        isTooltipActive={false}
+                        onClickEvent={(event) => {
+                          openNodeListPopup(item.id, event, 'list', true);
+                        }}
+                      />
+                    </div>
+                  );
+                  // }
+                })}
             </Fragment>
           )}
         </>

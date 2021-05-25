@@ -99,12 +99,18 @@ function* workerReviewInternalNodeListSaga(data) {
           }
         });
       }
-      yield put({
-        type: data.payload.isMiddlePaneList
-          ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_NODE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject
-      });
+
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: REVIEWLIST_DISTINCT_DATA,
+          payload: userResponse.responseObject
+        });
+      } else {
+        let Arr1 = userResponse.responseObject[0].associateNodeRoot;
+        let Arr2 = userResponse.responseObject[0].associateNodeDescendantAll;
+        Arr2.unshift(Arr1);
+        yield put({ type: SET_CORE_NODE_REVIEW_LIST_DATA, payload: Arr2 });
+      }
     } else {
       yield put({
         type: SET_POPUP_VALUE,

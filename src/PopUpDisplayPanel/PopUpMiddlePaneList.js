@@ -31,7 +31,12 @@ import {
   FILTERMODE,
   CLEAR_DISPLAY_PANE_THREE,
   LOADER_STOP,
-  GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA
+  GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
+  CLEAR_NODE_REDUCER_STATE,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  INTERNAL_NODE_LIST_SAGA,
+  SET_POPUP_VALUE,
+  SET_NODE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -47,6 +52,7 @@ import {
   getAssociateRoleAssociateDistinctApiCall,
   getAssociateRoleAssociateReqObj
 } from '../Actions/AssociateModuleAction';
+import { makeInternalNodeObj } from '../Actions/GenericActions';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -80,7 +86,7 @@ const PopUpMiddlePaneList = (props) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
-    if (dataVal === 'information') {
+    if (dataVal === 'information' && popupHeaderOneBadgeTwo !== 'create') {
       console.log(selectedTagValue);
       console.log(typeOfMiddlePaneList);
       console.log(isReviseMode);
@@ -808,6 +814,28 @@ const PopUpMiddlePaneList = (props) => {
       }
 
       dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'information' && popupHeaderOneBadgeTwo === 'create') {
+      dispatch({ type: POPUP_CLOSE });
+      let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      dispatch({ type: CLEAR_NODE_REDUCER_STATE });
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: { request: requestObj, nodeViewState: 'list', isMiddlePaneList: false }
+      });
+      dispatch({
+        type: SET_NODE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          objectName: 'informationFramework',
+          stateName: 'associateNodeAscendant',
+          actualStateName: 'associateNodeAscendantPrimary',
+          value: [selectedTagValue]
+        }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'NODECREATE' }
+      });
     } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,

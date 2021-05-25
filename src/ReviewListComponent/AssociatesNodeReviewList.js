@@ -60,6 +60,7 @@ const AssociatesNodeReviewList = (props) => {
         countPage,
         dispatch,
         middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeOne,
         siftValue
       );
     }
@@ -72,13 +73,10 @@ const AssociatesNodeReviewList = (props) => {
   ];
   const openNodeListPopup = (node, event, target, canUpdate) => {
     let selectedGroup = {};
-    let nodeId = '';
+    let nodeId = node;
     if (target === 'hirarchy') {
       console.log(node);
       nodeId = node?.node?.id || '';
-    } else {
-      console.log(node);
-      nodeId = node;
     }
     dispatch({
       type: SET_POPUP_STATE,
@@ -155,37 +153,49 @@ const AssociatesNodeReviewList = (props) => {
             </div>
           ) : (
             <Fragment>
-              {reviewListDistinctData.map((item, index) => {
-                // if (index === 0) {
-                //   <Card
-                //     textOneOne={item.informationBasic.associateName}
-                //     textTwoOne={item.informationBasic.associateDescription}
-                //     IconOne={null}
-                //     isIcon={false}
-                //     labelTwoTwo={''}
-                //     onClickIconOne={null}
-                //     isAlliance
-                //   />;
-                // } else {
-                return (
-                  <div className="containerPadding" key={index}>
-                    <ReviewList
-                      className=""
-                      id={index}
-                      tag={item.id}
-                      isSelectedReviewList={middlePaneSelectedValue === item.id}
-                      status={item.informationEngagement.associateStatus}
-                      textOne={item.informationBasic.associateName}
-                      textTwo={item.informationBasic.associateDescription}
-                      isTooltipActive={false}
-                      onClickEvent={(event) => {
-                        openNodeListPopup(item.id, event, 'list', true);
-                      }}
-                    />
-                  </div>
-                );
-                // }
-              })}
+              {reviewListDistinctData && (
+                <Card
+                  textOneOne={
+                    reviewListDistinctData[0].associateRoot.informationBasic.associateName
+                  }
+                  textTwoOne={
+                    reviewListDistinctData[0].associateRoot.informationBasic.associateDescription
+                  }
+                  isIcon={false}
+                  labelTwoTwo={''}
+                  onClickIconOne={null}
+                  onClick={(event) => {
+                    openNodeListPopup(
+                      reviewListDistinctData[0].associateRoot.id,
+                      event,
+                      'list',
+                      true
+                    );
+                  }}
+                  isAlliance
+                />
+              )}
+              {reviewListDistinctData &&
+                reviewListDistinctData[0].associateDescendantAll.map((item, index) => {
+                  return (
+                    <div className="containerPadding" key={index}>
+                      <ReviewList
+                        className=""
+                        id={index}
+                        tag={item.id}
+                        isSelectedReviewList={middlePaneSelectedValue === item.id}
+                        status={item.informationEngagement.associateStatus}
+                        textOne={item.informationBasic.associateName}
+                        textTwo={item.informationBasic.associateDescription}
+                        isTooltipActive={false}
+                        onClickEvent={(event) => {
+                          openNodeListPopup(item.id, event, 'list', true);
+                        }}
+                      />
+                    </div>
+                  );
+                  // }
+                })}
             </Fragment>
           )}
         </>
