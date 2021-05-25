@@ -789,7 +789,9 @@ console.log('associateTagPrimary',associateTagPrimary);
           'email address (primary)',
           'email address (secondary)',
           'tag (primary)',
-          'tag (secondary)'
+          'tag (secondary)',
+          'mobile telephone (primary)',
+          'mobile telephone (secondary)'
         ]}
         forceToSelect="signIn"
         typeOfSetObject={UPDATE_ASSESSEE_SETUP_PRIMARY_INFO}

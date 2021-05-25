@@ -67,7 +67,7 @@ import {
   getAssesseeGroupAssesseeReqObj,
   getAssesseeRoleAssesseeReqObj
 } from '../../Actions/AssesseeModuleAction';
-import { getAssociateGroupAssociateReqObj } from '../../Actions/AssociateModuleAction';
+import { getAssociateGroupAssociateReqObj, getAssociateRoleAssociateReqObj } from '../../Actions/AssociateModuleAction';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -378,6 +378,14 @@ export const DisplayPaneThree = () => {
       } else if (informationSetup?.assesseeSignInCredential === 'tag (secondary)') {
         selectedSignInCredential =
           responseObject.informationEngagement?.assesseeTag?.assesseeTagSecondary;
+      } else if (informationSetup?.assesseeSignInCredential === 'mobile telephone (primary)') {
+        selectedSignInCredential =
+          responseObject.informationContact?.assesseeTelephoneMobilePrimary
+            ?.assesseeTelephoneNumber;
+      } else if (informationSetup?.assesseeSignInCredential === 'mobile telephone (secondary)') {
+        selectedSignInCredential =
+          responseObject.informationContact?.assesseeTelephoneMobileSecondary
+            ?.assesseeTelephoneNumber;
       } else {
         selectedSignInCredential = responseObject?.informationSetup?.assesseeSignInCredential;
       }
@@ -477,15 +485,27 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
+        associateRoleAssociate: {
+          associateRoleAssociateAllocate: assesseeRoleAssessee?.assesseeRoleAssesseeAllocate || [],
+          associateRoleAssociateUnallocate:
+            assesseeRoleAssessee?.assesseeRoleAssesseeUnallocate || []
+        },
         associateRole: {
           id,
           informationBasic: associateRole.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let associateRoleAssociateReqBody = getAssociateRoleAssociateReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSOCIATE_ROLE_REVISE_INFO_SAGA,
-        payload: { headerOne: 'associates', reqBody }
+        payload: { headerOne: 'associates', reqBody, associateRoleAssociateReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'associates') {
       const { associateId, id } = responseObject;
@@ -493,9 +513,9 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
         associateGroupAssociate: {
-          associateGroupAssesseeAllocate:
+          associateGroupAssociateAllocate:
             assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
-          associateGroupAssesseeUnallocate:
+          associateGroupAssociateUnallocate:
             assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
         },
         associateGroup: {
@@ -513,7 +533,7 @@ export const DisplayPaneThree = () => {
       );
       dispatch({
         type: ASSOCIATE_GROUP_REVISE_INFO_SAGA,
-        payload: { headerOne: 'associates', associateGroupAssociateReqBody, reqBody }
+        payload: { headerOne: 'associates', associateGroupAssociateReqBody, reqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'assessees') {
       const { associateId, id } = responseObject;

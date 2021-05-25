@@ -215,13 +215,13 @@ const DisplayPaneThreeSectionTwo = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneAreaCity ||
+            informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneNumber ||
             'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
           textOne:
-            informationContact.assesseeTelephoneMobileSecondary?.assesseeTelephoneAreaCity ||
+            informationContact.assesseeTelephoneMobileSecondary?.assesseeTelephoneNumber ||
             'No Information'
         }
       ],

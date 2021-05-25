@@ -677,7 +677,11 @@ const DisplayPaneThreeSectionOne = () => {
       textOneOne: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'credential',
+          labelTextOneOneBadge: 'primary',
+          textOne: informationEngagement?.assesseeTag?.assesseeTagPrimary || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
           textOne: informationSetup?.assesseeSignInCredential || 'No Information'
         }
       ],
@@ -863,6 +867,7 @@ const DisplayPaneThreeSectionOne = () => {
   };
   const reviseSetup = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'sign-in') {
       let availableCredentialArray = [];
@@ -880,7 +885,7 @@ const DisplayPaneThreeSectionOne = () => {
         if (
           informationContact?.assesseeAddressEmailSecondary?.assesseeAddressEmail ===
           informationSetup.assesseeSignInCredential
-          ) {
+        ) {
           dispatch({ type: SET_CURRENTLY_SIGNIN_CREDENTIAL, payload: 'email address (secondary)' });
         }
       }
@@ -902,15 +907,47 @@ const DisplayPaneThreeSectionOne = () => {
           dispatch({ type: SET_CURRENTLY_SIGNIN_CREDENTIAL, payload: 'tag (secondary)' });
         }
       }
+      if (informationContact?.assesseeTelephoneMobilePrimary?.assesseeTelephoneNumber) {
+        availableCredentialArray.push('mobile telephone (primary)');
+        if (
+          informationContact?.assesseeTelephoneMobilePrimary?.assesseeTelephoneNumber ===
+          informationSetup.assesseeSignInCredential
+        ) {
+          dispatch({
+            type: SET_CURRENTLY_SIGNIN_CREDENTIAL,
+            payload: 'mobile telephone (primary)'
+          });
+        }
+      }
+      if (informationContact?.assesseeTelephoneMobileSecondary?.assesseeTelephoneNumber) {
+        availableCredentialArray.push('mobile telephone (secondary)');
+        if (
+          informationContact?.assesseeTelephoneMobileSecondary?.assesseeTelephoneNumber ===
+          informationSetup.assesseeSignInCredential
+        ) {
+          dispatch({
+            type: SET_CURRENTLY_SIGNIN_CREDENTIAL,
+            payload: 'mobile telephone (secondary)'
+          });
+        }
+      }
 
       dispatch({
         type: SET_AVAILABLE_SIGNIN_LIST,
         payload: availableCredentialArray
       });
-      dispatch({
-        type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'FORCETOSELECTSIGNIN', popupMode: 'ASSESSEE_CREATE' }
-      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'FORCETOSELECTSIGNIN', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
     }
   };
 

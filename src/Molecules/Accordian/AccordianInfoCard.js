@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormControl, InputLabel, Input } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import './Accordian.css';
+import { useSelector } from 'react-redux';
 
 const AccordianInfoCard = (props) => {
   const { mode = '', accordianObject, onClickRevise, onClickReview } = props;
+  const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
     labelTextOneOne = '',
     labelTextOneOneBadges = [],
@@ -18,6 +20,9 @@ const AccordianInfoCard = (props) => {
     multiline = false
   } = accordianObject;
   const [selectedBadge, setSelectedBadge] = useState(labelTextOneOneBadges[0]);
+  useEffect(() => {
+    setSelectedBadge(labelTextOneOneBadges[0]);
+  }, [responseObject]);
 
   return (
     <div className={'detailsContactContainer'}>
@@ -52,6 +57,16 @@ const AccordianInfoCard = (props) => {
                 >
                   {labelTextOneOne}
                 </span>
+                {labelTextOneOne === 'sign-in' && (
+                  <sup
+                    key={`badge-sign-in`}
+                    style={{
+                      backgroundColor: '#F2F2F2'
+                    }}
+                  >
+                    credential
+                  </sup>
+                )}
                 {labelTextOneOneBadges.map((ob, key) => {
                   return (
                     <sup

@@ -95,7 +95,7 @@ function* workerReviseAssociateGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { associateGroupAssociateReqBody = null } = data.payload;
+      const { associateGroupAssociateReqBody = null, createMode } = data.payload;
       if (associateGroupAssociateReqBody !== null) {
         yield put({
           type: GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
@@ -116,7 +116,8 @@ function* workerReviseAssociateGroupInfoSaga(data) {
           headerOneBadgeOne: 'group',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          createMode
         }
       });
       yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
@@ -124,10 +125,10 @@ function* workerReviseAssociateGroupInfoSaga(data) {
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
         payload: []
       });
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

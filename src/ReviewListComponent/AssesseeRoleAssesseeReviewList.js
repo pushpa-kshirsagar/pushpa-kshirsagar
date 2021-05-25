@@ -45,7 +45,7 @@ const AssesseeRoleAssesseeReviewList = (props) => {
     unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
-  {
+  // {
     /** no need for pagination 
   const [isFetching, setIsFetching] = useState(false);
   useEffect(() => {
@@ -89,7 +89,7 @@ const AssesseeRoleAssesseeReviewList = (props) => {
     setIsFetching(false);
   };
 */
-  }
+  // }
   const closeRelatedList = () => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
