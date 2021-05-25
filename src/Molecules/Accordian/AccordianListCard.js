@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReviewList from '../ReviewList/ReviewList';
 import { FormControl, InputLabel } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
+import { useSelector } from 'react-redux';
 
 const AccordianListCard = (props) => {
   const { accordianObject, mode = '', onClickRevise, onClickReview = null } = props;
+  const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
     labelTextOneOne = '',
     innerInfo = 'No Information',
@@ -16,6 +18,9 @@ const AccordianListCard = (props) => {
   const [isListSelectExpanded, setIsListSelectExpanded] = useState(false);
   const [selectedBadge, setSelectedBadge] = useState(labelTextOneOneBadges[0]);
   const reviewLabelClass = isReviewLink ? 'reviewLinkText' : '';
+  useEffect(() => {
+    setSelectedBadge(labelTextOneOneBadges[0]);
+  }, [responseObject]);
 
   return (
     <>

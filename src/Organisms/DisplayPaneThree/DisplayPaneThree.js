@@ -378,6 +378,14 @@ export const DisplayPaneThree = () => {
       } else if (informationSetup?.assesseeSignInCredential === 'tag (secondary)') {
         selectedSignInCredential =
           responseObject.informationEngagement?.assesseeTag?.assesseeTagSecondary;
+      } else if (informationSetup?.assesseeSignInCredential === 'mobile telephone (primary)') {
+        selectedSignInCredential =
+          responseObject.informationContact?.assesseeTelephoneMobilePrimary
+            ?.assesseeTelephoneNumber;
+      } else if (informationSetup?.assesseeSignInCredential === 'mobile telephone (secondary)') {
+        selectedSignInCredential =
+          responseObject.informationContact?.assesseeTelephoneMobileSecondary
+            ?.assesseeTelephoneNumber;
       } else {
         selectedSignInCredential = responseObject?.informationSetup?.assesseeSignInCredential;
       }

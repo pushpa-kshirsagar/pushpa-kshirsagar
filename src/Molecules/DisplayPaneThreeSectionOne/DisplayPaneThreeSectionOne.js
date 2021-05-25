@@ -677,7 +677,11 @@ const DisplayPaneThreeSectionOne = () => {
       textOneOne: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'credential',
+          labelTextOneOneBadge: 'primary',
+          textOne: informationEngagement?.assesseeTag?.assesseeTagPrimary || 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
           textOne: informationSetup?.assesseeSignInCredential || 'No Information'
         }
       ],
@@ -880,7 +884,7 @@ const DisplayPaneThreeSectionOne = () => {
         if (
           informationContact?.assesseeAddressEmailSecondary?.assesseeAddressEmail ===
           informationSetup.assesseeSignInCredential
-          ) {
+        ) {
           dispatch({ type: SET_CURRENTLY_SIGNIN_CREDENTIAL, payload: 'email address (secondary)' });
         }
       }
@@ -900,6 +904,30 @@ const DisplayPaneThreeSectionOne = () => {
           informationSetup.assesseeSignInCredential
         ) {
           dispatch({ type: SET_CURRENTLY_SIGNIN_CREDENTIAL, payload: 'tag (secondary)' });
+        }
+      }
+      if (informationContact?.assesseeTelephoneMobilePrimary?.assesseeTelephoneNumber) {
+        availableCredentialArray.push('mobile telephone (primary)');
+        if (
+          informationContact?.assesseeTelephoneMobilePrimary?.assesseeTelephoneNumber ===
+          informationSetup.assesseeSignInCredential
+        ) {
+          dispatch({
+            type: SET_CURRENTLY_SIGNIN_CREDENTIAL,
+            payload: 'mobile telephone (primary)'
+          });
+        }
+      }
+      if (informationContact?.assesseeTelephoneMobileSecondary?.assesseeTelephoneNumber) {
+        availableCredentialArray.push('mobile telephone (secondary)');
+        if (
+          informationContact?.assesseeTelephoneMobileSecondary?.assesseeTelephoneNumber ===
+          informationSetup.assesseeSignInCredential
+        ) {
+          dispatch({
+            type: SET_CURRENTLY_SIGNIN_CREDENTIAL,
+            payload: 'mobile telephone (secondary)'
+          });
         }
       }
 
