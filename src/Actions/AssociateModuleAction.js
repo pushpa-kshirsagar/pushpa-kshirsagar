@@ -1,5 +1,9 @@
 import {
+  ASSOCIATE_CREATE_INFO,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
+  ASSOCIATE_SIGN_ON,
+  CLEAR_ASSESSEE_INFO,
+  CLEAR_ASSOCIATE_INFO,
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
   GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
@@ -9,10 +13,14 @@ import {
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
-  SET_REQUEST_OBJECT
+  SET_POPUP_SINGLE_STATE,
+  SET_REQUEST_OBJECT,
+  SET_SINGLE_ASSOCIATE_INFORMATION
 } from '../actionType';
 import {
   makeAssociateGroupObj,
@@ -413,7 +421,6 @@ export const getAssociateGroupAssociateDistinctApiCall = (
       searchStr
     );
   }
-  // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({
@@ -461,7 +468,6 @@ export const getAssociateRoleAssociateDistinctApiCall = (
       searchStr
     );
   }
-  // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({
@@ -498,7 +504,6 @@ export const getAssociateNodeApiCall = (
     0,
     countPage
   );
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({
     type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -547,7 +552,6 @@ export const getInternalNodeApiCall = (
     0,
     countPage
   );
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({
     type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -606,7 +610,6 @@ export const getAssociateDistinctApiCall = (
     0,
     countPage
   );
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   dispatch({
     type: FILTERMODE,
     payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
@@ -638,7 +641,6 @@ export const getAssociateRoleDistinctApiCall = (
     countPage
   );
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   dispatch({
     type: FILTERMODE,
     payload: { FilterMode: 'associateRoleDistinct' + secondaryOptionCheckValue }
@@ -671,7 +673,6 @@ export const getAssociateGroupDistinctApiCall = (
     0,
     countPage
   );
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({
     type: FILTERMODE,
@@ -688,6 +689,56 @@ export const getAssociateGroupDistinctApiCall = (
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
       isMiddlePaneList: true
+    }
+  });
+};
+
+export const associateCreatePopup = (
+  selectedAssociateInfo,
+  dispatch,
+  secondaryOptionCheckValue,
+  targetValue,
+  parentAssociateId
+) => {
+  dispatch({ type: CLEAR_ASSOCIATE_INFO });
+  dispatch({ type: CLEAR_ASSESSEE_INFO });
+  dispatch({
+    type: SET_POPUP_SINGLE_STATE,
+    payload: { stateName: 'cardValue', value: 'Create' }
+  });
+  let requestObj = makeAssociateGroupObj(selectedAssociateInfo, 'all', 0, -1);
+  dispatch({
+    type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
+  dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+  let roleRequestObj = makeAssociateRoleObj(selectedAssociateInfo, 'all', 0, -1);
+  dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+  dispatch({
+    type: SET_SINGLE_ASSOCIATE_INFORMATION,
+    payload: {
+      stateName: 'parentAssociateId',
+      value: parentAssociateId
+    }
+  });
+  dispatch({
+    type: ASSOCIATE_SIGN_ON,
+    payload: { isPopUpValue: 'NAMEALIASPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+  });
+  dispatch({
+    type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+    payload: {
+      request: roleRequestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: false
     }
   });
 };

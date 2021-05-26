@@ -75,7 +75,7 @@ function* workerReviewAssociatesNodeListSaga(data) {
   }
 }
 function* workerReviewInternalNodeListSaga(data) {
-  console.log(data.payload,"000000");
+  // console.log(data.payload,"000000");
   try {
     const userResponse = yield call(nodeReviewListDistinctApi, {
       data: data.payload.request,
@@ -107,7 +107,7 @@ function* workerReviewInternalNodeListSaga(data) {
         });
       } else {
         let Arr1 = userResponse.responseObject[0].associateNodeRoot;
-        let Arr2 = userResponse.responseObject[0].associateNodeDescendantAll;
+        let Arr2 = userResponse.responseObject[0]?.associateNodeDescendantAll || [];
         Arr2.unshift(Arr1);
         yield put({ type: SET_CORE_NODE_REVIEW_LIST_DATA, payload: Arr2 });
       }

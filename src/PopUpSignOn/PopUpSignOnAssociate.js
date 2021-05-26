@@ -97,12 +97,13 @@ const PopUpSignOnAssociate = () => {
     let requestObect = {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
-        associateTagPrimary,
+        associateInfo.parentAssociateId === ''
+          ? associateTagPrimary
+          : associateInfo.parentAssociateId,
       associate: {
         informationBasic: associateInfo.informationBasic,
         informationAllocation: associateInfo.informationAllocation,
-        informationContact: associateInfo.informationContact,
+        informationContact: associateInfo.informationContact
         // informationSetup: associateInfo.informationSetup
       },
       assessee: {
@@ -116,8 +117,8 @@ const PopUpSignOnAssociate = () => {
     };
     console.log('ONCLICK YES', requestObect);
     console.log('loading start');
-    dispatch({ type: LOADER_START });
-    dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
+    // dispatch({ type: LOADER_START });
+    // dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
   };
   const handleNextPopupValue = () => {
     // alert(isPopUpValue);

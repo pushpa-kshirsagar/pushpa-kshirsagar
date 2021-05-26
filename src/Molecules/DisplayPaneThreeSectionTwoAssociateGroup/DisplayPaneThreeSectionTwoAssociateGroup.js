@@ -118,7 +118,6 @@ const DisplayPaneThreeSectionTwoAssociateGroup = () => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'relatedReviewListDistinctData', value: [] }
       });
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
       // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });

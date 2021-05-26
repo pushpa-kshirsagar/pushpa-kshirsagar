@@ -73,7 +73,6 @@ const AssignmentGroupReviewList = (props) => {
   };
   const siftApiCall = (siftKey) => {
     let requestObect = makeAssignmentGroupObj(selectedAssociateInfo,siftKey, 0, countPage);
-    dispatch({ type: SET_PAGE_COUNT, payload: 1 });
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({

@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  ASSOCIATE_POPUP_CLOSE,
-  ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
-  GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
-  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
-  LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_PAGE_COUNT,
-  SET_POPUP_STATE,
-  SET_REQUEST_OBJECT
+  SET_POPUP_STATE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList, AccountTree } from '@material-ui/icons';
 import ListIcon from '@material-ui/icons/FormatListBulleted';
-import AccountTreeIcon from '@material-ui/icons/AccountTree';
-import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
@@ -32,18 +22,13 @@ import FileExplorerTheme from 'react-sortable-tree-theme-full-node-drag';
 import '../reactSortableTree.css';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { Fragment } from 'react';
-import { getInternalNodeApiCall, sortingListInAsc } from '../Actions/AssociateModuleAction';
+import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 import Card from '../Molecules/Card/Card';
 const InternalNodeReviewList = (props) => {
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue, countPage } = useSelector(
-    (state) => state.AssesseeCreateReducer
-  );
+  const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
   const {
-    numberPage,
-    scanCount,
     reviewListDistinctData,
-    reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
     nodeViewState,
@@ -52,40 +37,9 @@ const InternalNodeReviewList = (props) => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeThree,
-    dummytreeData = [
-      {
-        id: '599d09d7e4b02ef63fbad571',
-        parentOrgHierarchyId: null,
-        description: 'Boppo Technologies',
-        children: [
-          {
-            id: '59ddf74ae4b0bbdc4d706c78',
-            parentOrgHierarchyId: '599d09d7e4b02ef63fbad571',
-            children: [
-              {
-                id: '59ddf784e4b0bbdc4d706c81',
-                parentOrgHierarchyId: '59ddf74ae4b0bbdc4d706c78',
-                children: [],
-                title: 'Support Team',
-                expanded: true,
-                subtitle: 'Support Team'
-              }
-            ],
-            title: 'Management Team',
-            expanded: true,
-            subtitle: 'Management Team'
-          }
-        ],
-        title: 'Boppo Technologies',
-        expanded: true,
-        subtitle: 'Boppo Technologies'
-      }
-    ]
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
-  const [sortedReviewListDistinctData, setSortedReviewListDistinctData] = useState([]);
-
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
@@ -137,9 +91,6 @@ const InternalNodeReviewList = (props) => {
       };
       optArr.splice(2, 0, newObj);
     }
-
-    console.log('optArr', optArr);
-    console.log('nodeId', nodeId);
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -182,7 +133,6 @@ const InternalNodeReviewList = (props) => {
       });
     });
     // console.log('treedata', reviewListDistinctData);
-    console.log(dragedNodeParentId, 'dragedNodeParentId');
   };
   useEffect(() => {
     // dispatch({
@@ -190,7 +140,6 @@ const InternalNodeReviewList = (props) => {
     //   payload: { stateName: 'scanString', value: 'scanString' }
     // });
   }, [reviewListDistinctData]);
-  console.log('reviewListDistinctData', reviewListDistinctData);
   return (
     <div>
       {reviewListDistinctData.length > 0 && (

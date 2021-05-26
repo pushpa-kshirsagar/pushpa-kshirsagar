@@ -6,16 +6,22 @@ import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
 import {
   POPUP_CLOSE,
   CREATE_TYPE_SAGA,
-  SET_TYPE_REDUCER_STATE,
   LOADER_START,
   CLEAR_TYPE_REDUCER_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
 const TypeCreatePopup = (props) => {
-  const { headerOne } = props;
+  const {
+    headerOne,
+    reducerObeject,
+    typeDescription,
+    typeName,
+    setReducerObject,
+    objectName
+  } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { typeInformation } = useSelector((state) => state.TypeCreateReducer);
+  // const { typeInformation } = useSelector((state) => state.TypeCreateReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
@@ -27,42 +33,10 @@ const TypeCreatePopup = (props) => {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      whichTypeCreate: headerOne,
+      [objectName]: reducerObeject
     };
-    if (headerOne === 'assessments') {
-      reqBody = {
-        assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId:
-          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        whichTypeCreate: 'assessments',
-        assessmentType: {
-          informationBasic: {
-            assessmentTypeName: typeInformation.informationBasic.typeName,
-            assessmentTypeNameVerification: false,
-            assessmentTypeDescription: typeInformation.informationBasic.typeDescription,
-            assessmentTypePicture: '',
-            assessmentTypePictureVerification: false
-          }
-        }
-      };
-    }
-    if (headerOne === 'assignments') {
-      reqBody = {
-        assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId:
-          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        whichTypeCreate: 'assignments',
-        assignmentType: {
-          informationBasic: {
-            assignmentTypeName: typeInformation.informationBasic.typeName,
-            assignmentTypeNameVerification: false,
-            assignmentTypeDescription: typeInformation.informationBasic.typeDescription,
-            assignmentTypePicture: '',
-            assignmentTypePictureVerification: false
-          }
-        }
-      };
-    }
-    //console.log('CREATE group api', reqBody);
+    console.log('CREATE type api', reqBody);
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_TYPE_SAGA, payload: reqBody });
   };
@@ -72,27 +46,27 @@ const TypeCreatePopup = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'NAMEPOPUP'}
         label={'name'}
-        actualLableValue={'typeName'}
+        actualLableValue={typeName}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'type'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={typeInformation.informationBasic}
-        typeOfSetObject={SET_TYPE_REDUCER_STATE}
+        basicInfo={reducerObeject.informationBasic}
+        typeOfSetObject={setReducerObject}
         isRequired={true}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'description'}
-        actualLableValue={'typeDescription'}
+        actualLableValue={typeDescription}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'type'}
         headerOneBadgeTwo={'information'}
-        basicInfo={typeInformation.informationBasic}
+        basicInfo={reducerObeject.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
-        typeOfSetObject={SET_TYPE_REDUCER_STATE}
+        typeOfSetObject={setReducerObject}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -122,7 +96,7 @@ const TypeCreatePopup = (props) => {
         onClickEvent={null}
         // mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpConfirmation
+      <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}

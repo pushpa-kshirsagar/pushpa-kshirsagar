@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSOCIATE_POPUP_CLOSE,
-  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -14,24 +15,23 @@ import {
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssesseeRoleObj } from '../Actions/GenericActions';
+import { makeAssessmentTypeObj } from '../Actions/GenericActions';
 import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-import { assesseeRole } from '../Actions/AssesseeModuleAction';
-const AssesseeRoleDistinctReviewList = (props) => {
+const AssesseeTypeReviewList = (props) => {
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
+  const { secondaryOptionCheckValue, countPage } = useSelector(
+    (state) => state.AssesseeCreateReducer
+  );
   const {
     numberPage,
     scanCount,
-    middlePaneHeaderBadgeOne,
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
-    middlePaneHeader,
-    selectedAssociateInfo,
-    countPage
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
+  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const [isFetching, setIsFetching] = useState(false);
   useEffect(() => {
     document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
@@ -53,7 +53,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',
@@ -74,17 +74,15 @@ const AssesseeRoleDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssesseeRoleObj(selectedAssociateInfo, siftKey, 0, countPage);
+    let requestObect = makeAssessmentTypeObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({
-      type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+      type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
       payload: {
         request: requestObect,
-        BadgeOne: middlePaneHeaderBadgeOne,
-        BadgeTwo: siftKey,
-        BadgeThree: '',
-        isMiddlePaneList: true
+        BadgeOne: 'distinct',
+        BadgeTwo: siftKey
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
@@ -103,38 +101,27 @@ const AssesseeRoleDistinctReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
-    let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
-      obj.data === 'assessees'
-        ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
-        : obj
-    );
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: middlePaneHeader,
-        popupHeaderOneBadgeOne: 'role',
+        popupHeaderOne: 'assessees',
+        popupHeaderOneBadgeOne: 'type',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: popupContentArrValue,
-        selectedTagValue: e.currentTarget.getAttribute('tag'),
-        selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        popupContentArrValue: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+        selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: popupContentArrValue
+        value: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  // console.log(reviewListDistinctData);
-  // console.log('selectedAssociateInfo', selectedAssociateInfo);
-  const associateSeftId =
-    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
     <div>
       {reviewListDistinctData &&
@@ -145,20 +132,17 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 className=""
                 id={index}
                 tag={item.id}
-                dataValue={item.informationAllocation.assesseeRoleGroup}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                // status={item.informationEngagement.assesseeRoleStatus}
-                actualStatus={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
-                textOne={assesseeRole(item.informationBasic.assesseeRoleName)}
-                textTwo={item.informationBasic.assesseeRoleDescription}
+                status={item.informationEngagement.assesseeTypeStatus}
+                textOne={item.informationBasic.assesseeTypeName}
+                textTwo={item.informationBasic.assesseeTypeDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
               />
             </div>
           );
         })}
-      {FilterMode === 'assesseeRoleDistinctinactive' && (
+      {FilterMode === 'assesseesTypeDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -170,4 +154,4 @@ const AssesseeRoleDistinctReviewList = (props) => {
     </div>
   );
 };
-export default AssesseeRoleDistinctReviewList;
+export default AssesseeTypeReviewList;

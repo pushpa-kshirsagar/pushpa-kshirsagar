@@ -22,7 +22,8 @@ import {
   UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO,
   UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
-  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE
+  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
+  SET_SINGLE_ASSOCIATE_INFORMATION
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -36,6 +37,7 @@ const initialState = {
   associatesPopUpType: 'primary',
   isBackToSectionPopUp: false,
   associatesHeaderOne: '',
+  parentAssociateId: '',
   associatesHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
   associateInfomationData: '',
@@ -406,6 +408,11 @@ const AssociateCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         associateInfomationData: action.payload
+      };
+    case SET_SINGLE_ASSOCIATE_INFORMATION:
+      return {
+        ...istate,
+        [action.payload.stateName]: action.payload.value
       };
     case SET_IGURU_NODE_DYNAMIC_SINGLE_STATE:
       return {

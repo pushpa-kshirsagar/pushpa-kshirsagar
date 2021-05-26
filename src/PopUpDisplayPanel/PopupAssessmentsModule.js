@@ -64,7 +64,6 @@ const PopupAssessmentsModule = (props) => {
         payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
       });
       let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
         payload: {
@@ -112,7 +111,6 @@ const PopupAssessmentsModule = (props) => {
         countPage
       );
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assessmentsDistinct' + secondaryOptionCheckValue }
@@ -137,7 +135,6 @@ const PopupAssessmentsModule = (props) => {
         countPage
       );
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assessmentGroupDistinct' + secondaryOptionCheckValue }
@@ -163,7 +160,6 @@ const PopupAssessmentsModule = (props) => {
         0,
         countPage
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,

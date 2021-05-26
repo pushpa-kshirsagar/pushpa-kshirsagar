@@ -72,12 +72,21 @@ const AssociatesNodeReviewList = (props) => {
     { label: 'list', onClick: onClickFooter, Icon: ListIcon }
   ];
   const openNodeListPopup = (node, event, target, canUpdate) => {
+    let optArr = [...ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION]
     let selectedGroup = {};
     let nodeId = node;
     if (target === 'hirarchy') {
       console.log(node);
       nodeId = node?.node?.id || '';
     }
+    let newObj = {
+      data: 'create',
+      dataValue: 'create',
+      dataKey: 'createKey',
+      optionClass: 'optionPrimary',
+      disabled: false
+    };
+    optArr.splice(2, 0, newObj);
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -86,7 +95,7 @@ const AssociatesNodeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: optArr,
         selectedTagValue: nodeId
       }
     });
@@ -94,7 +103,7 @@ const AssociatesNodeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+        value: optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

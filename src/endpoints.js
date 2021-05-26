@@ -147,4 +147,7 @@ export const ASSESSEE_LINK_URL =
   PLATFORM_URL + '/dev/insight-guru/api/platform/assessee-distinct/associate/review-list';
 export const LINKED_ASSOCIATE_URL =
   PLATFORM_URL + '/dev/insight-guru/api/platform/assessee-distinct/associate/revise-list';
+export const ASSESSEE_TYPE_REVIEWLIST_URL =
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-type/create';
+export const ASSOCIATE_TYPE_REVIEWLIST_URL = '';
 // export const URL = '';

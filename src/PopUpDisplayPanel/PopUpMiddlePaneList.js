@@ -36,7 +36,8 @@ import {
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
   SET_POPUP_VALUE,
-  SET_NODE_DYNAMIC_SINGLE_STATE
+  SET_NODE_DYNAMIC_SINGLE_STATE,
+  SET_SINGLE_ASSOCIATE_INFORMATION
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -47,6 +48,7 @@ import {
   getAssesseeRoleAssesseeReqObj
 } from '../Actions/AssesseeModuleAction';
 import {
+  associateCreatePopup,
   getAssociateGroupAssociateDistinctApiCall,
   getAssociateGroupAssociateReqObj,
   getAssociateRoleAssociateDistinctApiCall,
@@ -814,7 +816,11 @@ const PopUpMiddlePaneList = (props) => {
       }
 
       dispatch({ type: POPUP_CLOSE });
-    } else if (dataVal === 'information' && popupHeaderOneBadgeTwo === 'create') {
+    } else if (
+      dataVal === 'information' &&
+      popupHeaderOneBadgeTwo === 'create' &&
+      middlePaneHeader === 'associate'
+    ) {
       dispatch({ type: POPUP_CLOSE });
       let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
       dispatch({ type: CLEAR_NODE_REDUCER_STATE });
@@ -836,6 +842,19 @@ const PopUpMiddlePaneList = (props) => {
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'NODECREATE' }
       });
+    } else if (
+      dataVal === 'information' &&
+      popupHeaderOneBadgeTwo === 'create' &&
+      middlePaneHeader === 'associates'
+    ) {
+      dispatch({ type: POPUP_CLOSE });
+      associateCreatePopup(
+        selectedAssociateInfo,
+        dispatch,
+        secondaryOptionCheckValue,
+        dataVal,
+        selectedTagValue
+      );
     } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,

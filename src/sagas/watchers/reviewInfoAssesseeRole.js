@@ -9,6 +9,7 @@ import {
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSESSEE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_ROLE_DYNAMIC_STATE,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
@@ -143,16 +144,22 @@ function* workerReviseAssesseeRoleInfoSaga(data) {
       });
       yield put({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
       yield put({ type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
-      // yield put({
-      //   type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-      //   payload: {
-      //     HeaderOne: middlePaneHeader,
-      //     request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-      //     BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-      //     BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-      //     BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree
-      //   }
-      // });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: middlePaneHeader,
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
+        }
+      });
     }
 
     console.log('loading end');

@@ -42,7 +42,8 @@ import {
   getAssesseeDistinctApiCall,
   getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall,
-  getAssesseeRoleDistinctApiCall
+  getAssesseeRoleDistinctApiCall,
+  getAssesseeTypeApiCall
 } from '../Actions/AssesseeModuleAction';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 
@@ -157,6 +158,14 @@ const PopUpAssesseesModule = (props) => {
         'assessees'
       );
       resetDataFunction();
+    } else if (targetValue === 'types') {
+      getAssesseeTypeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        targetValue
+      );
     } else {
       dispatch({
         type: SET_ASSESSEE_NEXT_POPUP,

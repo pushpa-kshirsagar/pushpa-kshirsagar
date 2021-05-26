@@ -36,7 +36,8 @@ import {
   CREATE_INFORMATION_POPUP,
   PUBLISH_PUPUP,
   SHARE_POPUP,
-  FLAG_OPTION_PUPUP
+  FLAG_OPTION_PUPUP,
+  GROUP_TYPE_POPUP_OPTION
 } from '../PopUpConfig';
 
 const initialState = {
@@ -187,12 +188,34 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload !== 'assessees' &&
         action.payload !== 'assessments' &&
         action.payload !== 'assignments' &&
-        action.payload !== 'associates'
+        action.payload !== 'associates' &&
+        action.payload !== 'culture profiles' &&
+        action.payload !== 'job profiles' &&
+        action.payload !== 'items'
       ) {
         return {
           ...istate,
           secondaryOptionCheckValue: action.payload,
           currentPopUpOption: REVIEW_DISTINCT_POPUP_OPTION
+        };
+      } else if (
+        (istate.popupHeaderOne === 'groups' || istate.popupHeaderOne === 'types') &&
+        (action.payload === 'assessees' ||
+          action.payload === 'assessments' ||
+          action.payload === 'assignments' ||
+          action.payload === 'associates' ||
+          action.payload === 'culture profiles' ||
+          action.payload === 'job profiles' ||
+          action.payload === 'items')
+      ) {
+        let tempArr = [];
+        GROUP_TYPE_POPUP_OPTION.forEach((element) => {
+          tempArr.push({ ...element, disabled: false });
+        });
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload,
+          currentPopUpOption: tempArr
         };
       } else {
         let tempArr = [];

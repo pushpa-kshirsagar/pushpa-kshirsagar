@@ -22,7 +22,8 @@ import {
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_POPUP_SINGLE_STATE,
   CLEAR_ASSESSEE_INFO,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_SINGLE_ASSOCIATE_INFORMATION
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import { makeAssociateGroupObj, makeAssociateRoleObj } from '../Actions/GenericActions';
@@ -30,7 +31,8 @@ import {
   getAssociateDistinctApiCall,
   getAssociateNodeApiCall,
   getAssociateRoleDistinctApiCall,
-  getAssociateGroupDistinctApiCall
+  getAssociateGroupDistinctApiCall,
+  associateCreatePopup
 } from '../Actions/AssociateModuleAction';
 
 const PopUpAssociatesModule = (props) => {
@@ -96,42 +98,15 @@ const PopUpAssociatesModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
       dispatch({ type: ASSOCIATE_CREATE_INFO });
-      dispatch({ type: CLEAR_ASSOCIATE_INFO });
-      dispatch({ type: CLEAR_ASSESSEE_INFO });
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: { stateName: 'cardValue', value: 'Create' }
-      });
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'NAMEALIASPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-      let requestObj = makeAssociateGroupObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
-      dispatch({
-        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: '',
-          BadgeTwo: '',
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
-      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-      let roleRequestObj = makeAssociateRoleObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
-
-      dispatch({
-        type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
-        payload: {
-          request: roleRequestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
+      let parentAssociateId =
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
+      associateCreatePopup(
+        selectedAssociateInfo,
+        dispatch,
+        secondaryOptionCheckValue,
+        targetValue,
+        parentAssociateId
+      );
       clearMiddlePaneInfo();
     } else if (targetValue === 'distinct') {
       // getAssociateDistinctApiCall(

@@ -14,9 +14,7 @@ import {
   SET_SECONDARY_CREATE_OPTION_VALUE,
   SET_POPUP_STATE,
   SET_SECONDARY_OPTION_VALUE,
-  ASSESSEE_SIGN_ON,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_PAGE_COUNT,
   FILTERMODE,
   SET_REQUEST_OBJECT,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
@@ -28,16 +26,10 @@ import {
   GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   CLEAR_DISPLAY_PANE_THREE,
-  ASSESSEE_REVIEW_DISTINCT_SAGA,
   SET_POPUP_SINGLE_STATE,
   CLEAR_ROLE_REDUCER_STATE,
-  CLEAR_ASSESSEE_INFO,
-  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
-  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
-  SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
-  GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
   CLEAR_NODE_REDUCER_STATE,
   CLEAR_GROUP_REDUCER_STATE
 } from '../actionType';
@@ -54,7 +46,9 @@ import {
   CREATE_INFORMATION_POPUP,
   ASSESSEE_REVIEW_REVISE_POPUP,
   NODE_POPUP_OPTION,
-  SELF_POPUP
+  SELF_POPUP,
+  ITEMS_POPUP,
+  GROUP_TYPE_POPUP_OPTION
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -197,12 +191,24 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = NODE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'associate';
     }
-    if (clickValue === 'groups') {
+    if (
+      clickValue === 'groups' &&
+      popupHeaderOne !== 'administrators' &&
+      popupHeaderOne !== 'managers'
+    ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+      valueArr = GROUP_TYPE_POPUP_OPTION;
+      reviseSecondaryOptionCheckValue = '';
+    }
+    if (clickValue === 'types') {
+      revisePopupHeaderOne = clickValue;
+      revisepopupHeaderOneBadgeOne = '';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = GROUP_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = '';
     }
     if (
@@ -230,14 +236,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         dispatch
       );
     }
-    if (clickValue === 'types') {
-      revisePopupHeaderOne = clickValue;
-      revisepopupHeaderOneBadgeOne = '';
-      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
-      revisePopupType = 'secondary';
-      valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
-      reviseSecondaryOptionCheckValue = '';
-    }
+
     if (clickValue === 'exchange') {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
@@ -348,6 +347,15 @@ const PopUpDisplayPanelAssociate = (props) => {
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       }
     }
+    if (clickValue === 'items') {
+      revisePopupHeaderOne = 'items';
+      revisepopupHeaderOneBadgeOne = '';
+      revisepopupHeaderOneBadgeTwo = '';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = ITEMS_POPUP;
+      reviseSecondaryOptionCheckValue = '';
+    }
     if (clickValue === 'create' && popupHeaderOne === 'roles') {
       revisePopupHeaderOne = secondaryOptionCheckValue;
       revisepopupHeaderOneBadgeOne = 'role';
@@ -430,7 +438,6 @@ const PopUpDisplayPanelAssociate = (props) => {
         0,
         countPage
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeRoleDistinct' + secondaryOptionCheckValue }
@@ -460,7 +467,6 @@ const PopUpDisplayPanelAssociate = (props) => {
         0,
         countPage
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'associateRoleDistinct' + secondaryOptionCheckValue }
@@ -488,7 +494,6 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOneBadgeOne === 'groups'
     ) {
       let requestObj = {};
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -607,7 +612,6 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOneBadgeOne === 'types'
     ) {
       let requestObj = {};
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -765,24 +769,33 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupType = 'secondary';
       }
       if (
-        (popupHeaderOne === 'assessments' || popupHeaderOne === 'assignments') &&
+        (popupHeaderOne === 'assessees' ||
+          popupHeaderOne === 'assessments' ||
+          popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'culture profiles' ||
+          popupHeaderOne === 'job profiles' ||
+          popupHeaderOne === 'items' ||
+          popupHeaderOne === 'associates') &&
         (popupHeaderOneBadgeOne === 'types' || popupHeaderOneBadgeOne === 'type')
       ) {
         revisePopupHeaderOne = 'types';
         revisepopupHeaderOneBadgeOne = '';
-        valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+        valueArr = GROUP_TYPE_POPUP_OPTION;
         revisePopupType = 'secondary';
       }
       if (
         (popupHeaderOne === 'assessees' ||
           popupHeaderOne === 'assessments' ||
           popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'culture profiles' ||
+          popupHeaderOne === 'job profiles' ||
+          popupHeaderOne === 'items' ||
           popupHeaderOne === 'associates') &&
         (popupHeaderOneBadgeOne === 'groups' || popupHeaderOneBadgeOne === 'group')
       ) {
         revisePopupHeaderOne = 'groups';
         revisepopupHeaderOneBadgeOne = '';
-        valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+        valueArr = GROUP_TYPE_POPUP_OPTION;
         revisePopupType = 'secondary';
       }
       if (

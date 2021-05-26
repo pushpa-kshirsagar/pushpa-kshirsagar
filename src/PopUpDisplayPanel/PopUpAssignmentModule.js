@@ -59,7 +59,6 @@ const PopUpAssignmentModule = (props) => {
         payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
       });
       let requestObj = makeAssignmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
         payload: {
@@ -94,7 +93,6 @@ const PopUpAssignmentModule = (props) => {
         countPage
       );
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assignmentsDistinct' + secondaryOptionCheckValue }
@@ -117,7 +115,6 @@ const PopUpAssignmentModule = (props) => {
         0,
         countPage
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,
@@ -144,7 +141,6 @@ const PopUpAssignmentModule = (props) => {
         0,
         countPage
       );
-      dispatch({ type: SET_PAGE_COUNT, payload: 1 });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: FILTERMODE,

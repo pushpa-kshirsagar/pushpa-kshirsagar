@@ -12,9 +12,13 @@ import {
   LOADER_START,
   POPUP_CLOSE,
   SET_ASSESSEE_GROUP_REDUCER_STATE,
+  SET_ASSESSEE_TYPE_REDUCER_STATE,
   SET_ASSESSMENT_GROUP_REDUCER_STATE,
+  SET_ASSESSMENT_TYPE_REDUCER_STATE,
   SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
-  SET_ASSOCIATE_GROUP_REDUCER_STATE
+  SET_ASSIGNMENT_TYPE_REDUCER_STATE,
+  SET_ASSOCIATE_GROUP_REDUCER_STATE,
+  SET_ASSOCIATE_TYPE_REDUCER_STATE
 } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
@@ -56,6 +60,9 @@ const DisplayPageOne = () => {
   const accessToken = localStorage.getItem('token');
   const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup } = useSelector(
     (state) => state.GroupCreateReducer
+  );
+  const { assesseeType, assessmentType, assignmentType, associateType } = useSelector(
+    (state) => state.TypeCreateReducer
   );
   const history = useHistory();
 
@@ -235,10 +242,46 @@ const DisplayPageOne = () => {
           objectName={'associateGroup'}
         />
       )}
-      {popupMode === 'assesseesTYPECREATE' && <TypeCreatePopup headerOne={'assessees'} />}
-      {popupMode === 'assessmentsTYPECREATE' && <TypeCreatePopup headerOne={'assessments'} />}
-      {popupMode === 'assignmentsTYPECREATE' && <TypeCreatePopup headerOne={'assignments'} />}
-      {popupMode === 'associatesTYPECREATE' && <TypeCreatePopup headerOne={'associates'} />}
+      {popupMode === 'assesseesTYPECREATE' && (
+        <TypeCreatePopup
+          headerOne={'assessees'}
+          reducerObeject={assesseeType}
+          typeName={'assesseeTypeName'}
+          typeDescription={'assesseeTypeDescription'}
+          setReducerObject={SET_ASSESSEE_TYPE_REDUCER_STATE}
+          objectName={'assesseeType'}
+        />
+      )}
+      {popupMode === 'assessmentsTYPECREATE' && (
+        <TypeCreatePopup
+          headerOne={'assessments'}
+          reducerObeject={assessmentType}
+          typeName={'assessmentTypeName'}
+          typeDescription={'assessmentTypeDescription'}
+          setReducerObject={SET_ASSESSMENT_TYPE_REDUCER_STATE}
+          objectName={'assessmentType'}
+        />
+      )}
+      {popupMode === 'assignmentsTYPECREATE' && (
+        <TypeCreatePopup
+          headerOne={'assignments'}
+          reducerObeject={assignmentType}
+          typeName={'assignmentTypeName'}
+          typeDescription={'assignmentTypeDescription'}
+          setReducerObject={SET_ASSIGNMENT_TYPE_REDUCER_STATE}
+          objectName={'assignmentType'}
+        />
+      )}
+      {popupMode === 'associatesTYPECREATE' && (
+        <TypeCreatePopup
+          headerOne={'associates'}
+          reducerObeject={associateType}
+          typeName={'associateTypeName'}
+          typeDescription={'associateTypeDescription'}
+          setReducerObject={SET_ASSOCIATE_TYPE_REDUCER_STATE}
+          objectName={'associateType'}
+        />
+      )}
       {popupMode === 'NODECREATE' && <NodeCreatePopup headerOne={'associate'} />}
       {popupMode === 'ASSIGNMENTCREATE' && <AssignmentCreatePopup headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <AssessmentCreatePopup headerOne={'assessment'} />}

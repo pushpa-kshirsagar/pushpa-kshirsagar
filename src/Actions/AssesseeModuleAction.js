@@ -4,12 +4,12 @@ import {
   ASSESSEE_SIGN_ON,
   CLEAR_ASSESSEE_INFO,
   CLEAR_DISPLAY_PANE_THREE,
-  CLEAR_ROLE_REDUCER_STATE,
   FILTERMODE,
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
@@ -30,6 +30,7 @@ import {
   makeAssesseeReviewListRequestObject,
   makeAssesseeRoleCreateObj,
   makeAssesseeRoleObj,
+  makeAssesseeTypeObj,
   makeInternalNodeObj,
   makeManagerRoleCreateObj,
   makeManagersReviewListRequestObject
@@ -49,7 +50,7 @@ export const getAssesseeDistinctApiCall = (
     countPage
   );
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+
   dispatch({
     type: FILTERMODE,
     payload: { FilterMode: 'assesseeDistinct' + secondaryOptionCheckValue }
@@ -702,7 +703,7 @@ export const getAssesseeGroupAssesseeDistinctApiCall = (
       searchStr
     );
   }
-  // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+
   // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({
@@ -751,7 +752,7 @@ export const getAssesseeRoleAssesseeDistinctApiCall = (
       searchStr
     );
   }
-  // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+
   // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({
@@ -800,7 +801,7 @@ export const getAssesseeNodeAssesseeDistinctApiCall = (
       searchStr
     );
   }
-  // dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+
   // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({
@@ -870,7 +871,6 @@ export const getAssesseeRoleDistinctApiCall = (
     0,
     countPage
   );
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({
     type: FILTERMODE,
@@ -904,7 +904,7 @@ export const getAssesseeGroupDistinctApiCall = (
     0,
     countPage
   );
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({
     type: FILTERMODE,
@@ -1166,7 +1166,7 @@ export const getAdminManagerDistinctApiCall = (
       countPage
     );
   }
-  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
+
   dispatch({
     type: FILTERMODE,
     payload: { FilterMode: popupHeaderOne + 'Distinct' + secondaryOptionCheckValue }
@@ -1186,4 +1186,38 @@ export const getAdminManagerDistinctApiCall = (
     }
   });
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+};
+
+export const getAssesseeTypeApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue
+) => {
+  let requestObj = makeAssesseeTypeObj(
+    selectedAssociateInfo,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'assesseesTypeDistinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
 };

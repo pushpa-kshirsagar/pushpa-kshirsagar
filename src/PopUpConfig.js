@@ -279,6 +279,43 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
     permission: 'review'
   },
   {
+    data: 'analytics',
+    dataValue: 'analytics',
+    dataKey: 'analytics',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'marketplace',
+    dataValue: 'marketplace',
+    dataKey: 'marketplace',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'mine',
+    dataValue: 'mine',
+    dataKey: 'mine',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'exchange',
+    dataValue: 'exchange',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'associateHierarchy',
+    permission: 'review'
+  },
+  {
     data: 'groups',
     dataValue: 'groups',
     dataKey: 'groups',
@@ -321,21 +358,12 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
     permission: 'review'
   },
   {
-    data: 'marketplace',
-    dataValue: 'marketplace',
+    data: 'items',
+    dataValue: 'items',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
-    permissionArr: 'associateHierarchy',
-    permission: 'review'
-  },
-  {
-    data: 'exchange',
-    dataValue: 'exchange',
-    optionClass: 'optionPrimary',
-    divider: 'dark',
-    disabled: false,
-    permissionArr: 'associateHierarchy',
+    permissionArr: 'assessee',
     permission: 'review'
   },
   {
@@ -485,6 +513,15 @@ export const SELF_POPUP = [
   },
   { data: 'revise', dataValue: 'revise', optionClass: 'optionPrimary', disabled: false }
 ];
+export const ITEMS_POPUP = [
+  {
+    data: 'create',
+    dataValue: 'create',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  { data: 'review', dataValue: 'review', optionClass: 'optionPrimary', disabled: false }
+];
 export const REVIEW_REVISE_POPUP = [
   {
     data: 'information',
@@ -585,6 +622,68 @@ export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
     disabled: false
   },
   { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
+];
+export const GROUP_TYPE_POPUP_OPTION = [
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: true },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: true
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: true
+  },
+  { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary' },
+  {
+    data: 'assessments',
+    dataValue: 'assessments',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'associates',
+    dataValue: 'associates',
+    optionClass: 'optionSecondary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'culture profiles',
+    dataValue: 'culture profiles',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'job profiles',
+    dataValue: 'job profiles',
+    optionClass: 'optionSecondary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'items',
+    dataValue: 'items',
+    optionClass: 'optionSecondary',
+    disabled: false
+  }
 ];
 export const NODE_POPUP_OPTION = [
   { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: false },
