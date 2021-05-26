@@ -788,10 +788,10 @@ console.log('associateTagPrimary',associateTagPrimary);
         valueArr={[
           'email address (primary)',
           'email address (secondary)',
-          'tag (primary)',
-          'tag (secondary)',
           'mobile telephone (primary)',
-          'mobile telephone (secondary)'
+          'mobile telephone (secondary)',
+          'tag (primary)',
+          'tag (secondary)'
         ]}
         forceToSelect="signIn"
         typeOfSetObject={UPDATE_ASSESSEE_SETUP_PRIMARY_INFO}

@@ -3,6 +3,8 @@ import ReviewList from '../ReviewList/ReviewList';
 import { FormControl, InputLabel } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_BRAND_LOGO_TYPE } from '../../actionType';
 
 const AccordianMultiListCard = (props) => {
   const { accordianObject, mode = '', onClickRevise, onClickReview = null } = props;
@@ -12,7 +14,8 @@ const AccordianMultiListCard = (props) => {
     labelTextOneOneBadges,
     isReviewLink = false
   } = accordianObject;
-
+  const dispatch = useDispatch();
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const [isListSelectExpanded, setIsListSelectExpanded] = useState(false);
   const [selectedBadge, setSelectedBadge] = useState('');
   const [innerSelectedBadge, setInnerSelectedBadge] = useState('');
@@ -21,9 +24,26 @@ const AccordianMultiListCard = (props) => {
     if (selectedBadge === '') {
       setInnerSelectedBadge('');
     } else {
-      setInnerSelectedBadge(selectedBadge.innerLabelBadgeList[0]);
+      if (labelTextOneOneBadges[0]?.labelTextOneOneBadge === 'primary') {
+        setInnerSelectedBadge(selectedBadge.innerLabelBadgeList[0]);
+      }
     }
   }, [selectedBadge]);
+  const setBrandLogo = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('Brand ====> ', labelName);
+    if (reviewMode === 'revise') {
+      if (labelName === 'Associate') {
+        dispatch({ type: SET_BRAND_LOGO_TYPE, payload: 'Associate' });
+      }
+      if (labelName === 'Associate & iGuru') {
+        dispatch({ type: SET_BRAND_LOGO_TYPE, payload: 'Associate & iGuru' });
+      }
+      if (labelName === 'iGuru') {
+        dispatch({ type: SET_BRAND_LOGO_TYPE, payload: 'iGuru' });
+      }
+    }
+  };
 
   return (
     <>
@@ -140,6 +160,8 @@ const AccordianMultiListCard = (props) => {
                         status={associate.status}
                         textOne={associate.textOne}
                         textTwo={associate.textTwo}
+                        onClickEvent={setBrandLogo}
+                        dataValue={associate.textOne}
                       />
                     </div>
                   );

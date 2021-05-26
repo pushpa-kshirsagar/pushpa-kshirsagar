@@ -16,10 +16,12 @@ const AccordianListCard = (props) => {
   } = accordianObject;
 
   const [isListSelectExpanded, setIsListSelectExpanded] = useState(false);
-  const [selectedBadge, setSelectedBadge] = useState(labelTextOneOneBadges[0]);
+  const [selectedBadge, setSelectedBadge] = useState('');
   const reviewLabelClass = isReviewLink ? 'reviewLinkText' : '';
   useEffect(() => {
-    setSelectedBadge(labelTextOneOneBadges[0]);
+    if (labelTextOneOneBadges[0].labelTextOneOneBadge === 'primary') {
+      setSelectedBadge(labelTextOneOneBadges[0]);
+    }
   }, [responseObject]);
 
   return (
@@ -76,7 +78,11 @@ const AccordianListCard = (props) => {
             </FormControl>
             <div className={'unitFlex'}></div>
             <div
-              onClick={() => setIsListSelectExpanded((state) => !state)}
+              onClick={() => {
+                if (selectedBadge) {
+                  setIsListSelectExpanded((state) => !state);
+                }
+              }}
               className={['unitFlex', 'careerLabelRight', 'showLessMoreList'].join(' ')}
             >
               {isListSelectExpanded ? (
@@ -89,21 +95,22 @@ const AccordianListCard = (props) => {
         </div>
         {isListSelectExpanded && (
           <div>
-            {selectedBadge.innerList.length > 0 ? (
+            {selectedBadge && selectedBadge.innerList.length > 0 ? (
               <>
-                {selectedBadge.innerList.map((associate) => {
-                  return (
-                    <div style={{ padding: '2.5px 0' }}>
-                      <ReviewList
-                        className=""
-                        id={associate.id}
-                        status={associate.status}
-                        textOne={associate.textOne}
-                        textTwo={associate.textTwo}
-                      />
-                    </div>
-                  );
-                })}
+                {selectedBadge &&
+                  selectedBadge.innerList.map((associate) => {
+                    return (
+                      <div style={{ padding: '2.5px 0' }}>
+                        <ReviewList
+                          className=""
+                          id={associate.id}
+                          status={associate.status}
+                          textOne={associate.textOne}
+                          textTwo={associate.textTwo}
+                        />
+                      </div>
+                    );
+                  })}
               </>
             ) : (
               <div

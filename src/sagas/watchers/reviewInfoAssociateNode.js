@@ -99,7 +99,20 @@ function* workerReviseAssociateNodeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('INter Node revise+++++', userResponse);
-      const { selectedModule } = data.payload;
+      const { selectedModule, associateNodeAssesseeReqBody, createMode } = data.payload;
+      if (associateNodeAssesseeReqBody) {
+        yield put({
+          type: GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
+          payload: {
+            request: associateNodeAssesseeReqBody,
+            HeaderOne: selectedModule,
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -108,29 +121,33 @@ function* workerReviseAssociateNodeInfoSaga(data) {
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0],
-          selectedModule: selectedModule
+          selectedModule: selectedModule,
+          createMode
         }
       });
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }
       });
-      yield put({
-        type: INTERNAL_NODE_LIST_SAGA,
-        payload: {
-          paneHeader: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          isMiddlePaneList: true,
-          nodeViewState: Store.getState().DisplayPaneTwoReducer.nodeViewState,
-          scanString: '',
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue
-        }
-      });
+      if (createMode === '') {
+        yield put({
+          type: INTERNAL_NODE_LIST_SAGA,
+          payload: {
+            paneHeader: Store.getState().DisplayPaneTwoReducer.middlePaneHeader,
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            isMiddlePaneList: true,
+            nodeViewState: Store.getState().DisplayPaneTwoReducer.nodeViewState,
+            scanString: '',
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue
+          }
+        });
+      }
+    } else {
+      yield put({ type: LOADER_STOP });
     }
     // console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

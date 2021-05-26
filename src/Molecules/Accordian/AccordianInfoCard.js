@@ -19,9 +19,11 @@ const AccordianInfoCard = (props) => {
     textOneOne = '',
     multiline = false
   } = accordianObject;
-  const [selectedBadge, setSelectedBadge] = useState(labelTextOneOneBadges[0]);
+  const [selectedBadge, setSelectedBadge] = useState('');
   useEffect(() => {
-    setSelectedBadge(labelTextOneOneBadges[0]);
+    if (labelTextOneOneBadges[0]?.labelTextOneOneBadge === 'primary') {
+      setSelectedBadge(labelTextOneOneBadges[0]);
+    }
   }, [responseObject]);
 
   return (

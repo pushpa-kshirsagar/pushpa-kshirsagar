@@ -105,13 +105,13 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationContact?.associateAddressWebsite?.associateAddressWebsitePrimary ||
+            informationContact?.associateAddressWebsitePrimary?.associateAddressWebsite ||
             'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
           textOne:
-            informationContact?.associateAddressWebsite?.associateAddressWebsiteSecondary ||
+            informationContact?.associateAddressWebsiteSecondary?.associateAddressWebsite ||
             'No Information'
         }
       ],

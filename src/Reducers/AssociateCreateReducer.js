@@ -17,12 +17,14 @@ import {
   SET_ASSOCIATE_INFORMATION,
   SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
   UPDATE_ASSOCIATE_SETUP_INFO,
-  UPDATE_ASSOCIATE_WEBSITE_INFO,
+  UPDATE_ASSOCIATE_WEBSITE_PRIMARY_INFO,
+  UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO,
   UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
   UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO,
   UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
-  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE
+  SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
+  SET_BRAND_LOGO_TYPE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -73,11 +75,14 @@ const initialState = {
     }
   },
   informationContact: {
-    associateAddressWebsite: {
-      associateAddressWebsitePrimary: '',
-      associateAddressWebsiteSecondary: ''
+    associateAddressWebsitePrimary: {
+      associateAddressWebsite: '',
+      associateAddressWebsiteVerification: false
     },
-    associateAddressWebsiteVerification: false,
+    associateAddressWebsiteSecondary: {
+      associateAddressWebsite: '',
+      associateAddressWebsiteVerification: false
+    },
     associateAddressWorkPrimary: {
       associateAddressCountryRegion: '',
       associateAddressProvinceState: '',
@@ -309,9 +314,17 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         ...action.payload
       };
     case UPDATE_ASSOCIATE_INFO_CONTACT_INFO:
+      let contactObj = istate.informationContact;
+      for (const [key, value] of Object.entries(action.payload)) {
+        console.log(`${key}: ${value}`);
+        if (value !== null) {
+          contactObj = { ...contactObj, [key]: value };
+        }
+      }
+      console.log('final object contact', contactObj);
       return {
         ...istate,
-        informationContact: action.payload
+        informationContact: contactObj
       };
     case UPDATE_ASSOCIATE_WORKADDRESS_INFO:
       return {
@@ -329,14 +342,21 @@ const AssociateCreateReducer = (istate = initialState, action) => {
           associateAddressWorkSecondary: action.payload
         }
       };
-    case UPDATE_ASSOCIATE_WEBSITE_INFO:
+    case UPDATE_ASSOCIATE_WEBSITE_PRIMARY_INFO:
       return {
         ...istate,
         informationContact: {
           ...istate.informationContact,
-          associateAddressWebsite: action.payload
+          associateAddressWebsitePrimary: action.payload
         }
-        // workAddressInfo: action.payload
+      };
+    case UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO:
+      return {
+        ...istate,
+        informationContact: {
+          ...istate.informationContact,
+          associateAddressWebsiteSecondary: action.payload
+        }
       };
     case UPDATE_ASSOCIATE_WORKTELEPHONE_INFO:
       return {
@@ -345,7 +365,6 @@ const AssociateCreateReducer = (istate = initialState, action) => {
           ...istate.informationContact,
           associateTelephoneWorkPrimary: action.payload
         }
-        // workTeleponeInfo: action.payload
       };
     case UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO:
       return {

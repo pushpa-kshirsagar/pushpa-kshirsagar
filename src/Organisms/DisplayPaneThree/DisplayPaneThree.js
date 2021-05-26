@@ -29,7 +29,8 @@ import {
   ASSOCIATE_ROLE_REVISE_INFO_SAGA,
   ASSESSEE_NODE_INFO_REVISE_SAGA,
   CLEAR_GROUP_REDUCER_STATE,
-  CLEAR_ROLE_REDUCER_STATE
+  CLEAR_ROLE_REDUCER_STATE,
+  CLEAR_NODE_REDUCER_STATE
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -65,6 +66,7 @@ import DisplayPaneThreeSectionOneAssociateNode from '../../Molecules/DisplayPane
 import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPaneThreeSectionTwoAssociateNode/DisplayPaneThreeSectionTwoAssociateNode';
 import {
   getAssesseeGroupAssesseeReqObj,
+  getAssesseeNodeAssesseeReqObj,
   getAssesseeRoleAssesseeReqObj
 } from '../../Actions/AssesseeModuleAction';
 import { getAssociateGroupAssociateReqObj, getAssociateRoleAssociateReqObj } from '../../Actions/AssociateModuleAction';
@@ -441,9 +443,16 @@ export const DisplayPaneThree = () => {
         }
       };
       dispatch({ type: LOADER_START });
+      let associateNodeAssesseeReqBody = getAssesseeNodeAssesseeReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSESSEE_NODE_INFO_REVISE_SAGA,
-        payload: { selectedModule: headerOne, reqBody }
+        payload: { selectedModule: headerOne, reqBody, associateNodeAssesseeReqBody, createMode }
       });
     } else if (
       headerOneBadgeOne === 'role' &&
@@ -699,6 +708,14 @@ export const DisplayPaneThree = () => {
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesROLECREATE' }
     });
   };
+  const onClickCreateAssociateNode = () => {
+    console.log('ON CLICK CREATE ASSOCIATE Node');
+    dispatch({ type: CLEAR_NODE_REDUCER_STATE });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'NODECREATE' }
+    });
+  };
 
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
   const createAssesseePrimaryIcon = [
@@ -735,6 +752,9 @@ export const DisplayPaneThree = () => {
   ];
   const createAssociateRolePrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssociateRole, Icon: AddIcon }
+  ];
+  const createAssociateNodePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssociateNode, Icon: AddIcon }
   ];
 
   const reviseSecondaryIcons = [
@@ -1494,8 +1514,8 @@ export const DisplayPaneThree = () => {
               <FooterIconTwo
                 FilterModeEnable={true}
                 FilterMode={FilterMode}
-                onClick={onClickCreateAssociateRole}
-                primaryIcon={createAssociateRolePrimaryIcon}
+                onClick={onClickCreateAssociateNode}
+                primaryIcon={createAssociateNodePrimaryIcon}
                 secondaryIcon={[]}
               />
             )}

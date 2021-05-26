@@ -52,8 +52,10 @@ function* workerReviewInfoAssociateSaga(data) {
       yield put({ type: UPDATE_ASSOCIATE_INFO_CONTACT_INFO, payload: informationContact });
       // yield put({ type: UPDATE_ASSOCIATE_SETUP_INFO, payload: informationSetup });
       let ascendantPrimaryList = [];
-      if (informationFramework?.associateAscendantPrimary) {
-        ascendantPrimaryList.push(informationFramework?.associateAscendantPrimary);
+      if (informationFramework?.associateAscendant?.associateAscendantPrimary) {
+        let ascendantPrimaryId =
+          informationFramework?.associateAscendant?.associateAscendantPrimary[0]?.id || '';
+        ascendantPrimaryList.push(ascendantPrimaryId);
       }
       yield put({
         type: SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,

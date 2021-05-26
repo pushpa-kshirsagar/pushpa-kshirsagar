@@ -37,7 +37,7 @@ function* workerCreateNodeSaga(data) {
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0],
           reviewMode: 'revise',
-          createMode: `${data.payload.whichTypeCreate}Node`
+          createMode: 'associatesNode' //`${data.payload.whichTypeCreate}Node`
         }
       });
       yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
