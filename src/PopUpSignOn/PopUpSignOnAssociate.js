@@ -33,7 +33,10 @@ import {
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
-  RESET_ALL_REDUCER
+  RESET_ALL_REDUCER,
+  UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
+  UPDATE_ASSOCIATE_WEBSITE_PRIMARY_INFO,
+  UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO
 } from '../actionType';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../endpoints';
@@ -614,9 +617,9 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
         isRequired={false}
-        actualLableValue={'associateAddressWebsitePrimary'}
-        basicInfo={associateInfo.informationContact.associateAddressWebsite}
-        typeOfSetObject={UPDATE_ASSOCIATE_WEBSITE_INFO}
+        actualLableValue={'associateAddressWebsite'}
+        basicInfo={associateInfo.informationContact.associateAddressWebsitePrimary}
+        typeOfSetObject={UPDATE_ASSOCIATE_WEBSITE_PRIMARY_INFO}
         nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -628,9 +631,9 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
         isRequired={false}
-        actualLableValue={'associateAddressWebsiteSecondary'}
-        basicInfo={associateInfo.informationContact.associateAddressWebsite}
-        typeOfSetObject={UPDATE_ASSOCIATE_WEBSITE_INFO}
+        actualLableValue={'associateAddressWebsite'}
+        basicInfo={associateInfo.informationContact.associateAddressWebsiteSecondary}
+        typeOfSetObject={UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO}
         nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

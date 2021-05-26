@@ -56,18 +56,33 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         });
       });
     }
-    if (
-      informationFramework.associateNodeAscendant.associateNodeAscendantPrimary &&
-      informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.length > 0
-    ) {
-      informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.forEach((ob) => {
+    if (informationFramework.associateNodeAscendant.associateNodeAscendantPrimary) {
+      let p1 = informationFramework.associateNodeAscendant.associateNodeAscendantPrimary;
+      if (Array.isArray(p1)) {
         ascendantPrimary.push({
-          id: ob.id,
-          textOne: ob?.informationBasic?.associateNodeName || '',
-          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          id: p1[0].id,
+          textOne: p1[0]?.informationBasic?.associateNodeName || '',
+          textTwo: p1[0]?.informationBasic?.associateNodeDescription || '',
           status: ''
         });
-      });
+        ascendantPrimary.push(p1[0]);
+      } else {
+        ascendantPrimary.push({
+          id: p1.id,
+          textOne: p1?.informationBasic?.associateNodeName || '',
+          textTwo: p1?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      }
+      // console.log('primary ======>', ascendantPrimary);
+      // informationFramework.associateNodeAscendant.associateNodeAscendantPrimary.forEach((ob) => {
+      //   ascendantPrimary.push({
+      //     id: ob.id,
+      //     textOne: ob?.informationBasic?.associateNodeName || '',
+      //     textTwo: ob?.informationBasic?.associateNodeDescription || '',
+      //     status: ''
+      //   });
+      // });
     }
     if (
       informationFramework.associateNodeAscendant.associateNodeAscendantSecondary &&
@@ -592,8 +607,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         payload: { isPopUpValue: 'PARENTLISTPOPUP', popupMode: 'NODECREATE' }
       });
     }
-    if (labelName === 'assessee') {
-      console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+    if (labelName === 'assessee' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
         'active',
@@ -639,7 +653,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
     console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
-    if (labelName === 'assessee') {
+    if (labelName === 'assessee' && selectedBadgeName === 'distinct') {
       console.log('IN ASSSESSEE ');
       getAssesseeNodeAssesseeDistinctApiCall(
         selectedAssociateInfo,

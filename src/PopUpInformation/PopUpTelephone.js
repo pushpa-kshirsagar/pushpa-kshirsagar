@@ -36,7 +36,7 @@ const PopUpTelephone = (props) => {
   const [oneErr, setoneErr] = useState('');
   const [twoErr, settwoErr] = useState('');
   const [threeErr, setthreeErr] = useState('');
-  // console.log("TELEPHONE Object Key", objectKeys);
+  console.log("TELEPHONE Object Key", objectKeys);
   const validate = () => {
     let isValidate = true;
     if (basicInfo && basicInfo[objectKeys[0]] === '') {
@@ -162,10 +162,10 @@ const PopUpTelephone = (props) => {
 
             <InputFeild
               type={'text'}
-              id={isMobileState ? objectKeys[2] : objectKeys[3]}
+              id={isMobileState ? objectKeys[1] : objectKeys[3]}
               label={isMobileState ? 'mobile number' : 'extension number'}
               value={
-                basicInfo && isMobileState ? basicInfo[objectKeys[2]] : basicInfo[objectKeys[3]]
+                basicInfo && isMobileState ? basicInfo[objectKeys[1]] : basicInfo[objectKeys[3]]
               }
               errorMsg={isMobileState ? oneErr : threeErr}
               onClick={handleChange}

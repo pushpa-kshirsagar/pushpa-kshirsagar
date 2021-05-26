@@ -715,7 +715,26 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'brand',
-              innerList: []
+              innerList: [
+                {
+                  id: 'brand1',
+                  textOne: 'Associate',
+                  textTwo: '',
+                  status: ''
+                },
+                {
+                  id: 'brand2',
+                  textOne: 'Associate & iGuru',
+                  textTwo: '',
+                  status: ''
+                },
+                {
+                  id: 'brand3',
+                  textOne: 'iGuru',
+                  textTwo: '',
+                  status: ''
+                }
+              ]
             },
             {
               labelTextTwoBadge: 'theme',

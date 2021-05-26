@@ -2,7 +2,8 @@ import {
   SET_ASSESSEE_PERMISSION,
   SET_USER,
   SET_SIGN_IN_STATUS,
-  SET_USER_STATE
+  SET_USER_STATE,
+  SET_BRAND_LOGO_TYPE
 } from '../actionType';
 
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
   assesseeSignInStatus: '',
   assesseeConfirmStatus: '',
   assesseePermission: '',
-  loginUserName: ''
+  loginUserName: '',
+  brandLogoType: 'iGuru'
 };
 
 const UserReducer = (istate = initialState, action) => {
@@ -34,6 +36,11 @@ const UserReducer = (istate = initialState, action) => {
       return {
         ...istate,
         assesseePermission: action.payload
+      };
+    case SET_BRAND_LOGO_TYPE:
+      return {
+        ...istate,
+        brandLogoType: action.payload
       };
     default:
       return istate;

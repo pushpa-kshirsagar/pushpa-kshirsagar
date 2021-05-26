@@ -9,20 +9,30 @@ import IconsButton from '../IconButton/IconButton';
 // import prafulta from '../../images/prafulta.jpg';
 // import insightGURULogo from '../../images/prafulta.jpg';
 import './HeaderZero.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SET_MOBILE_PANE_STATE } from '../../actionType';
 
 export const HeaderZero = (props) => {
   // const insightGURULogo = require('../../images/prafulta.jpg');
   const { userName = '', userEmail = '', isImageActive = false } = props;
-  const isBespoke = true;
+  const { brandLogoType } = useSelector((state) => state.UserReducer);
+  // const isBespoke = false;
   const dispatch = useDispatch();
   const iguruBrandLogo = './Image/logo-04.jpeg'; //'./Image/logo-03.jpeg'
-  // const iguruMainLogo = isBespoke ? './Image/client-logo.jpeg' : './Image/main-logo.jpeg';
-  const iguruMainLogo = './Image/main-logo.jpeg';
+  let iguruMainLogo = './Image/main-logo.jpeg';
+  // const iguruMainLogo = './Image/main-logo.jpeg';
+  if (brandLogoType === 'iGuru') {
+    iguruMainLogo = './Image/main-logo.jpeg';
+  }
+  if (brandLogoType === 'Associate' || brandLogoType === 'Associate & iGuru') {
+    iguruMainLogo = './Image/client-logo.jpeg';
+  }
   const onClickLogo = () => {
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
   };
+  
+  console.log("IN HEADER ===>", iguruMainLogo, brandLogoType);
+
   return (
     <div className="header-container">
       {!isMobile ? (
@@ -50,7 +60,7 @@ export const HeaderZero = (props) => {
                     flexDirection: 'column'
                   }}
                 >
-                  {isBespoke && (
+                  {brandLogoType === 'Associate & iGuru' && (
                     <div>
                       <Avatar
                         alt=""
@@ -146,7 +156,7 @@ export const HeaderZero = (props) => {
                   flexDirection: 'column'
                 }}
               >
-                {isBespoke && (
+                {brandLogoType === 'Associate & iGuru' && (
                   <div>
                     <Avatar
                       alt=""
