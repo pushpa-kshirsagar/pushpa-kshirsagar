@@ -16,8 +16,8 @@ import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentTypeObj } from '../Actions/GenericActions';
-import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-const AssesseeTypeReviewList = (props) => {
+import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION, ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+const AssociateTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
@@ -102,11 +102,6 @@ const AssesseeTypeReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
-    let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
-      obj.data === 'assessees'
-        ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
-        : obj
-    );
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -115,7 +110,7 @@ const AssesseeTypeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: popupContentArrValue,
+        popupContentArrValue: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
     });
@@ -123,7 +118,7 @@ const AssesseeTypeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: popupContentArrValue
+        value: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -139,9 +134,9 @@ const AssesseeTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.assesseeTypeStatus}
-                textOne={item.informationBasic.assesseeTypeName}
-                textTwo={item.informationBasic.assesseeTypeDescription}
+                status={item.informationEngagement.associateTypeStatus}
+                textOne={item.informationBasic.associateTypeName}
+                textTwo={item.informationBasic.associateTypeDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
               />
@@ -160,4 +155,4 @@ const AssesseeTypeReviewList = (props) => {
     </div>
   );
 };
-export default AssesseeTypeReviewList;
+export default AssociateTypeReviewList;

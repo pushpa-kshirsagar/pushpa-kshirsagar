@@ -11,7 +11,8 @@ import {
 import {
   ASSESSEE_TYPE_CREATE_URL,
   ASSESSMENT_TYPE_CREATE_URL,
-  ASSIGNMENT_TYPE_CREATE_URL
+  ASSIGNMENT_TYPE_CREATE_URL,
+  ASSOCIATE_TYPE_CREATE_URL
 } from '../../endpoints';
 
 const createTypeApi = async (requestObj) => {
@@ -31,6 +32,9 @@ const createTypeApi = async (requestObj) => {
   }
   if (requestObj.data.whichTypeCreate === 'assignments') {
     URL = ASSIGNMENT_TYPE_CREATE_URL;
+  }
+  if (requestObj.data.whichTypeCreate === 'associates') {
+    URL = ASSOCIATE_TYPE_CREATE_URL;
   }
 
   const response = await fetch(URL, requestOptions);

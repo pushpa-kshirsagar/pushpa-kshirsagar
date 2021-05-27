@@ -38,7 +38,6 @@ import {
   SHARE_POPUP,
   FLAG_OPTION_PUPUP,
   GROUP_TYPE_POPUP_OPTION,
-  ITEMS_POPUP,
   ANALYTICS_POPUP
 } from '../PopUpConfig';
 
@@ -194,6 +193,7 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload !== 'primary' &&
         action.payload !== 'secondary' &&
         action.payload !== 'analytics' &&
+        action.payload !== 'assessment centres' &&
         action.payload !== 'culture profiles' &&
         action.payload !== 'job profiles' &&
         action.payload !== 'items'
@@ -204,7 +204,9 @@ const PopUpReducer = (istate = initialState, action) => {
           currentPopUpOption: REVIEW_DISTINCT_POPUP_OPTION
         };
       } else if (
-        (istate.popupHeaderOne === 'groups' || istate.popupHeaderOne === 'types') &&
+        (istate.popupHeaderOne === 'groups' ||
+          istate.popupHeaderOne === 'types' ||
+          istate.popupHeaderOne === 'items') &&
         (action.payload === 'assessees' ||
           action.payload === 'assessments' ||
           action.payload === 'assignments' ||
@@ -223,21 +225,11 @@ const PopUpReducer = (istate = initialState, action) => {
           currentPopUpOption: tempArr
         };
       } else if (
-        istate.popupHeaderOne === 'items' &&
-        (action.payload === 'primary' || action.payload === 'secondary')
-      ) {
-        let tempArr = [];
-        ITEMS_POPUP.forEach((element) => {
-          tempArr.push({ ...element, disabled: false });
-        });
-        return {
-          ...istate,
-          secondaryOptionCheckValue: action.payload,
-          currentPopUpOption: tempArr
-        };
-      } else if (
         istate.popupHeaderOne === 'analytics' &&
-        (action.payload === 'culture profiles' || action.payload === 'job profiles')
+        (action.payload === 'culture profiles' ||
+          action.payload === 'job profiles' ||
+          action.payload === 'assessment centres' ||
+          action.payload === 'items')
       ) {
         let tempArr = [];
         ANALYTICS_POPUP.forEach((element) => {

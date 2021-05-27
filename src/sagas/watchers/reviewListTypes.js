@@ -17,7 +17,8 @@ import {
   ASSOCIATE_TYPE_REVIEWLIST_URL,
   ASSESSMENT_TYPE_REVIEWLIST_URL,
   ASSIGNMENT_TYPE_REVIEWLIST_URL,
-  ASSESSEE_TYPE_GROUP_URL
+  ASSESSEE_TYPE_GROUP_URL,
+  ASSOCIATE_TYPE_GROUP_URL
 } from '../../endpoints';
 
 const TypesReviewListDistinctApi = async (requestObj) => {
@@ -219,7 +220,12 @@ function* workerReviewTypeGroupListSaga(data) {
   try {
     const userResponse = yield call(TypesReviewListDistinctApi, {
       data: data.payload.request,
-      URL: data.payload.typeGroup === 'assessees' ? ASSESSEE_TYPE_GROUP_URL : ''
+      URL:
+        data.payload.typeGroup === 'assessees'
+          ? ASSESSEE_TYPE_GROUP_URL
+          : data.payload.typeGroup === 'associates'
+          ? ASSOCIATE_TYPE_GROUP_URL
+          : ''
     });
     if (userResponse.responseCode === '000') {
       yield put({

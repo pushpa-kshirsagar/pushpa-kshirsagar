@@ -11,6 +11,7 @@ import {
   GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
@@ -27,6 +28,7 @@ import {
   makeAssociateNodeObj,
   makeAssociateReviewListRequestObject,
   makeAssociateRoleObj,
+  makeAssociateTypeObj,
   makeInternalNodeObj
 } from './GenericActions';
 
@@ -739,6 +741,41 @@ export const associateCreatePopup = (
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
       isMiddlePaneList: false
+    }
+  });
+};
+export const getAssociatesTypeApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  middlePaneHeader = 'associates'
+) => {
+  let requestObj = makeAssociateTypeObj(
+    selectedAssociateInfo,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'associatesTypeDistinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+    payload: {
+      middlePaneHeader: middlePaneHeader,
+      request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
     }
   });
 };

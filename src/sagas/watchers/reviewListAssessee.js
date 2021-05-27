@@ -184,7 +184,7 @@ function* workerReviewListRoleAssesseeSaga(data) {
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',
             middlePaneHeaderBadgeFour: '',
-            typeOfMiddlePaneList: data.payload.HeaderOne + 'RoleAssesseeReviewList',
+            typeOfMiddlePaneList: 'assesseesRoleAssesseeReviewList',
             scanCount: userResponse && userResponse.countTotal,
             showMiddlePaneState: true
           }

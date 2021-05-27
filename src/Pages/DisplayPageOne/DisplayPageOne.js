@@ -250,6 +250,9 @@ const DisplayPageOne = () => {
           typeDescription={'assesseeTypeDescription'}
           setReducerObject={SET_ASSESSEE_TYPE_REDUCER_STATE}
           objectName={'assesseeType'}
+          allocationObj={'assesseeTypeGroup'}
+          groupName={'assesseeTypeGroupName'}
+          groupDescription={'assesseeTypeGroupDescription'}
         />
       )}
       {popupMode === 'assessmentsTYPECREATE' && (
@@ -260,6 +263,7 @@ const DisplayPageOne = () => {
           typeDescription={'assessmentTypeDescription'}
           setReducerObject={SET_ASSESSMENT_TYPE_REDUCER_STATE}
           objectName={'assessmentType'}
+          allocationObj={'assessmentTypeGroup'}
         />
       )}
       {popupMode === 'assignmentsTYPECREATE' && (
@@ -270,6 +274,7 @@ const DisplayPageOne = () => {
           typeDescription={'assignmentTypeDescription'}
           setReducerObject={SET_ASSIGNMENT_TYPE_REDUCER_STATE}
           objectName={'assignmentType'}
+          allocationObj={'assignmentTypeGroup'}
         />
       )}
       {popupMode === 'associatesTYPECREATE' && (
@@ -280,6 +285,9 @@ const DisplayPageOne = () => {
           typeDescription={'associateTypeDescription'}
           setReducerObject={SET_ASSOCIATE_TYPE_REDUCER_STATE}
           objectName={'associateType'}
+          allocationObj={'associateTypeGroup'}
+          groupName={'associateTypeGroupName'}
+          groupDescription={'associateTypeGroupDescription'}
         />
       )}
       {popupMode === 'NODECREATE' && <NodeCreatePopup headerOne={'associate'} />}

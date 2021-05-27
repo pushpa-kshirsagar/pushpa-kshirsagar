@@ -513,23 +513,6 @@ export const SELF_POPUP = [
   },
   { data: 'revise', dataValue: 'revise', optionClass: 'optionPrimary', disabled: false }
 ];
-export const ITEMS_POPUP = [
-  {
-    data: 'create',
-    dataValue: 'create',
-    optionClass: 'optionPrimary',
-    disabled: true
-  },
-  {
-    data: 'review',
-    dataValue: 'review',
-    optionClass: 'optionPrimary',
-    divider: 'dark',
-    disabled: true
-  },
-  { data: 'primary', dataValue: 'primary', optionClass: 'optionSecondary', disabled: false },
-  { data: 'secondary', dataValue: 'secondary', optionClass: 'optionSecondary', disabled: false }
-];
 export const ANALYTICS_POPUP = [
   {
     data: 'create',
@@ -545,6 +528,29 @@ export const ANALYTICS_POPUP = [
     disabled: true
   },
   {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: true,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: true,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'assessment centres',
+    dataValue: 'assessment centres',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
     data: 'culture profiles',
     dataValue: 'culture profiles',
     optionClass: 'optionSecondary',
@@ -553,6 +559,12 @@ export const ANALYTICS_POPUP = [
   {
     data: 'job profiles',
     dataValue: 'job profiles',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'items',
+    dataValue: 'items',
     optionClass: 'optionSecondary',
     disabled: false
   }

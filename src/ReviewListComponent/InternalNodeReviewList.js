@@ -75,8 +75,19 @@ const InternalNodeReviewList = (props) => {
       nodeId = node.node.id;
     }
     let optArr = [...GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION];
-    if (middlePaneHeader === 'assessees')
-      optArr = [...ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION];
+    if (
+      middlePaneHeader === 'assessees' ||
+      middlePaneHeader === 'administrators' ||
+      middlePaneHeader === 'managers'
+    ) {
+      let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
+        obj.data === 'assessees'
+          ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
+          : obj
+      );
+      optArr = popupContentArrValue;
+    }
+
     if (middlePaneHeader === 'assessments')
       optArr = [...ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION];
     if (middlePaneHeader === 'assignments')

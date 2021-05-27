@@ -31,7 +31,8 @@ import {
   INTERNAL_NODE_LIST_SAGA,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   CLEAR_NODE_REDUCER_STATE,
-  CLEAR_GROUP_REDUCER_STATE
+  CLEAR_GROUP_REDUCER_STATE,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -47,7 +48,6 @@ import {
   ASSESSEE_REVIEW_REVISE_POPUP,
   NODE_POPUP_OPTION,
   SELF_POPUP,
-  ITEMS_POPUP,
   GROUP_TYPE_POPUP_OPTION,
   ANALYTICS_POPUP
 } from '../PopUpConfig';
@@ -69,7 +69,7 @@ import {
   makeInternalNodeObj,
   getTypeGroupListApi
 } from '../Actions/GenericActions';
-import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
+import { getAssociatesTypeApiCall, getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 import {
   assesseeCreateApiCalls,
   getAdminManagerDistinctApiCall,
@@ -361,7 +361,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeTwo = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = ITEMS_POPUP;
+      valueArr = GROUP_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = '';
     }
     if (clickValue === 'analytics') {
@@ -400,10 +400,46 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = CREATE_INFORMATION_POPUP;
       reviseSecondaryOptionCheckValue = 'key';
     }
+    if (clickValue === 'create' && popupHeaderOne === 'items') {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisepopupHeaderOneBadgeOne = 'item';
+      revisepopupHeaderOneBadgeTwo = 'create';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = CREATE_INFORMATION_POPUP;
+      reviseSecondaryOptionCheckValue = 'key';
+    }
     if (clickValue === 'create' && popupHeaderOne === 'nodes') {
       revisePopupHeaderOne = secondaryOptionCheckValue;
       revisepopupHeaderOneBadgeOne = 'node';
       revisepopupHeaderOneBadgeTwo = 'create';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = CREATE_INFORMATION_POPUP;
+      reviseSecondaryOptionCheckValue = 'key';
+    }
+    if (clickValue === 'review' && popupHeaderOne === 'items') {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisepopupHeaderOneBadgeOne = 'items';
+      revisepopupHeaderOneBadgeTwo = '';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = REVIEW_DISTINCT_POPUP_OPTION;
+      reviseSecondaryOptionCheckValue = 'active';
+    }
+    if (clickValue === 'review' && popupHeaderOne === 'analytics') {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisepopupHeaderOneBadgeOne = 'review';
+      revisepopupHeaderOneBadgeTwo = '';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = REVIEW_DISTINCT_POPUP_OPTION;
+      reviseSecondaryOptionCheckValue = 'active';
+    }
+    if (clickValue === 'create' && popupHeaderOne === 'analytics') {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisepopupHeaderOneBadgeOne = 'create';
+      revisepopupHeaderOneBadgeTwo = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = CREATE_INFORMATION_POPUP;
@@ -625,7 +661,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'distinct' &&
-      (popupHeaderOne === 'assignments' ||
+      ( popupHeaderOne === 'assignments' ||
+        // popupHeaderOne === 'associates' ||
         popupHeaderOne === 'assessments' ||
         popupHeaderOne === 'assessees') &&
       popupHeaderOneBadgeOne === 'types'
@@ -689,6 +726,16 @@ const PopUpDisplayPanelAssociate = (props) => {
           'types'
         );
       }
+      if (popupHeaderOne === 'associates') {
+        getAssociatesTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          popupHeaderOne
+        );
+      }
     }
     if (
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
@@ -732,8 +779,10 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'type') {
-      if (popupHeaderOne === 'assessees') {
+      if (popupHeaderOne === 'assessees' || popupHeaderOne === 'associates') {
         getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
+      } else {
+        dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: '' });
       }
       dispatch({
         type: SET_POPUP_VALUE,
@@ -849,6 +898,21 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupType = 'secondary';
       }
       if (
+        (popupHeaderOne === 'assessees' ||
+          popupHeaderOne === 'assessments' ||
+          popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'culture profiles' ||
+          popupHeaderOne === 'job profiles' ||
+          popupHeaderOne === 'items' ||
+          popupHeaderOne === 'associates') &&
+        (popupHeaderOneBadgeOne === 'items' || popupHeaderOneBadgeOne === 'item')
+      ) {
+        revisePopupHeaderOne = 'items';
+        revisepopupHeaderOneBadgeOne = '';
+        valueArr = GROUP_TYPE_POPUP_OPTION;
+        revisePopupType = 'secondary';
+      }
+      if (
         popupHeaderOne === 'assessee' &&
         (popupHeaderOneBadgeOne === 'upload' || popupHeaderOneBadgeOne === 'download')
       ) {
@@ -856,6 +920,16 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisepopupHeaderOneBadgeOne = '';
         valueArr = EXCHANGE_POPUP_OPTION;
         revisePopupType = 'secondary';
+      }
+      if (
+        popupHeaderOne === 'assessment centres' ||
+        popupHeaderOne === 'culture profiles' ||
+        popupHeaderOne === 'culture profiles'
+      ) {
+        revisePopupHeaderOne = 'analytics';
+        revisepopupHeaderOneBadgeOne = '';
+        valueArr = ANALYTICS_POPUP;
+        revisePopupType = '';
       }
       dispatch({
         type: SET_POPUP_STATE,

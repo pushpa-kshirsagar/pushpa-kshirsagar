@@ -15,6 +15,7 @@ import {
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
   GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
@@ -42,7 +43,8 @@ import {
   makeAssessmentTypeScanRequestObject,
   makeAssignmentScanRequestObject,
   makeAssessmentScanRequestObject,
-  makeAdminmManagerRoleScanRequestObject
+  makeAdminmManagerRoleScanRequestObject,
+  makeAssesseeTypeScanRequestObject
 } from '../Actions/GenericActions';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import {
@@ -264,6 +266,32 @@ const PopUpScan = (props) => {
           type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
           payload: {
             request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'assesseesTypeDistinctReviewList') {
+        let requestObect = makeAssesseeTypeScanRequestObject(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo === 'distinct'
+            ? middlePaneHeaderBadgeThree
+            : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            middlePaneHeader: middlePaneHeader,
             BadgeOne: middlePaneHeaderBadgeOne,
             BadgeTwo: middlePaneHeaderBadgeTwo,
             BadgeThree: middlePaneHeaderBadgeThree,
