@@ -48,7 +48,8 @@ import {
   NODE_POPUP_OPTION,
   SELF_POPUP,
   ITEMS_POPUP,
-  GROUP_TYPE_POPUP_OPTION
+  GROUP_TYPE_POPUP_OPTION,
+  ANALYTICS_POPUP
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -65,14 +66,17 @@ import {
   makeManagersReviewListRequestObject,
   makeAdministratorRoleCreateObj,
   makeManagerRoleCreateObj,
-  makeInternalNodeObj
+  makeInternalNodeObj,
+  getTypeGroupListApi
 } from '../Actions/GenericActions';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 import {
   assesseeCreateApiCalls,
   getAdminManagerDistinctApiCall,
   getAdminManagerRoleApiCall,
-  getRoleGroupReviewListApi
+  getAssesseeTypeApiCall,
+  getRoleGroupReviewListApi,
+  getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
@@ -203,7 +207,11 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = GROUP_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = '';
     }
-    if (clickValue === 'types') {
+    if (
+      clickValue === 'types' &&
+      popupHeaderOne !== 'administrators' &&
+      popupHeaderOne !== 'managers'
+    ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
@@ -354,6 +362,15 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = ITEMS_POPUP;
+      reviseSecondaryOptionCheckValue = '';
+    }
+    if (clickValue === 'analytics') {
+      revisePopupHeaderOne = 'analytics';
+      revisepopupHeaderOneBadgeOne = '';
+      revisepopupHeaderOneBadgeTwo = '';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = ANALYTICS_POPUP;
       reviseSecondaryOptionCheckValue = '';
     }
     if (clickValue === 'create' && popupHeaderOne === 'roles') {
@@ -608,7 +625,9 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'distinct' &&
-      (popupHeaderOne === 'assignments' || popupHeaderOne === 'assessments') &&
+      (popupHeaderOne === 'assignments' ||
+        popupHeaderOne === 'assessments' ||
+        popupHeaderOne === 'assessees') &&
       popupHeaderOneBadgeOne === 'types'
     ) {
       let requestObj = {};
@@ -632,6 +651,11 @@ const PopUpDisplayPanelAssociate = (props) => {
             isMiddlePaneList: true
           }
         });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: popupHeaderOne + 'TypeDistinct' + secondaryOptionCheckValue }
+        });
       }
       if (popupHeaderOne === 'assignments') {
         requestObj = makeAssignmentTypeObj(
@@ -650,12 +674,35 @@ const PopUpDisplayPanelAssociate = (props) => {
             isMiddlePaneList: true
           }
         });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: popupHeaderOne + 'TypeDistinct' + secondaryOptionCheckValue }
+        });
       }
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: popupHeaderOne + 'TypeDistinct' + secondaryOptionCheckValue }
-      });
+      if (popupHeaderOne === 'assessees') {
+        getAssesseeTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types'
+        );
+      }
+    }
+    if (
+      (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
+      clickValue === 'types'
+    ) {
+      //call admin and manager type api
+      getAssesseeTypeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'types',
+        popupHeaderOne
+      );
     }
     if (
       clickValue === 'information' &&
@@ -685,6 +732,9 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'type') {
+      if (popupHeaderOne === 'assessees') {
+        getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
+      }
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'TYPECREATE' }

@@ -831,6 +831,7 @@ const PopUpMiddlePaneList = (props) => {
         type: INTERNAL_NODE_LIST_SAGA,
         payload: { request: requestObj, nodeViewState: 'list', isMiddlePaneList: false }
       });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: SET_NODE_DYNAMIC_SINGLE_STATE,
         payload: {
@@ -850,6 +851,7 @@ const PopUpMiddlePaneList = (props) => {
       middlePaneHeader === 'associates'
     ) {
       dispatch({ type: POPUP_CLOSE });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       associateCreatePopup(
         selectedAssociateInfo,
         dispatch,

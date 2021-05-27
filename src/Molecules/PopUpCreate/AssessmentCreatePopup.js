@@ -9,7 +9,8 @@ import {
   CLEAR_ASSESSMENT_INFO,
   CREATE_ASSESSMENT_SAGA,
   LOADER_START,
-  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE
+  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
@@ -24,6 +25,10 @@ const AssessmentCreatePopup = (props) => {
   );
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_ASSESSMENT_INFO });
     dispatch({ type: POPUP_CLOSE });
   };

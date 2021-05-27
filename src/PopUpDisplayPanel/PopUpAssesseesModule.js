@@ -166,6 +166,7 @@ const PopUpAssesseesModule = (props) => {
         dispatch,
         targetValue
       );
+      resetDataFunction();
     } else {
       dispatch({
         type: SET_ASSESSEE_NEXT_POPUP,

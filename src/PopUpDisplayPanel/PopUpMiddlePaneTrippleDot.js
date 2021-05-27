@@ -20,6 +20,7 @@ import {
   getAssesseeDistinctApiCall,
   getAssesseeGroupDistinctApiCall,
   getAssesseeRoleDistinctApiCall,
+  getAssesseeTypeApiCall,
   setFlagedArray
 } from '../Actions/AssesseeModuleAction';
 import {
@@ -160,6 +161,16 @@ const PopUpMiddlePaneTrippleDot = (props) => {
         }
 
         dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
+        getAssesseeTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          middlePaneHeader
+        );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'groups') {
         if (middlePaneHeader === 'assessees') {
           getAssesseeGroupDistinctApiCall(
@@ -199,6 +210,16 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           dataVal,
           '',
           'hierarchy',
+          middlePaneHeader
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'types') {
+        getAssesseeTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
           middlePaneHeader
         );
         dispatch({ type: POPUP_CLOSE });

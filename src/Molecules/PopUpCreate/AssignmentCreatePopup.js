@@ -9,7 +9,8 @@ import {
   CLEAR_ASSIGNMENT_INFO,
   CREATE_ASSIGNMENT_SAGA,
   LOADER_START,
-  SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE
+  SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
@@ -24,6 +25,10 @@ const AssignmentCreatePopup = (props) => {
   );
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_ASSIGNMENT_INFO });
     dispatch({ type: POPUP_CLOSE });
   };

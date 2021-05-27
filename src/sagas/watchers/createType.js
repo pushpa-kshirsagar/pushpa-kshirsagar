@@ -1,6 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  CLEAR_TYPE_REDUCER_STATE,
   CREATE_TYPE_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
@@ -13,7 +12,7 @@ import {
   SET_POPUP_VALUE
 } from '../../actionType';
 import {
-  ASSESSEE_TYPE_REVIEWLIST_URL,
+  ASSESSEE_TYPE_CREATE_URL,
   ASSESSMENT_TYPE_CREATE_URL,
   ASSIGNMENT_TYPE_CREATE_URL
 } from '../../endpoints';
@@ -28,7 +27,7 @@ const createTypeApi = async (requestObj) => {
   };
   let URL = '';
   if (requestObj.data.whichTypeCreate === 'assessees') {
-    URL = ASSESSEE_TYPE_REVIEWLIST_URL;
+    URL = ASSESSEE_TYPE_CREATE_URL;
   }
   if (requestObj.data.whichTypeCreate === 'assessments') {
     URL = ASSESSMENT_TYPE_CREATE_URL;

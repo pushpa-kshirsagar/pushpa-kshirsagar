@@ -9,7 +9,8 @@ import {
   SET_NODE_REDUCER_STATE,
   LOADER_START,
   CLEAR_NODE_REDUCER_STATE,
-  SET_NODE_DYNAMIC_SINGLE_STATE
+  SET_NODE_DYNAMIC_SINGLE_STATE,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
@@ -25,6 +26,10 @@ const NodeCreatePopup = (props) => {
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_NODE_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
   };
