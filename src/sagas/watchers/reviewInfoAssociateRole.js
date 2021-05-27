@@ -96,7 +96,7 @@ function* workerReviseAssociateRoleInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN ASSOCIATE ROLE Review', userResponse);
-      const { associateRoleAssociateReqBody } = data.payload;
+      const { associateRoleAssociateReqBody = null, createMode } = data.payload;
       if (associateRoleAssociateReqBody !== null) {
         yield put({
           type: GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
@@ -117,14 +117,16 @@ function* workerReviseAssociateRoleInfoSaga(data) {
           headerOneBadgeOne: 'role',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          createMode
         }
       });
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
     yield put({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
     yield put({ type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

@@ -27,6 +27,7 @@ const TypeCreatePopup = (props) => {
   } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   // const { typeInformation } = useSelector((state) => state.TypeCreateReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo, coreGroupReviewListData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
@@ -81,6 +82,7 @@ const TypeCreatePopup = (props) => {
         basicInfo={reducerObeject.informationBasic}
         typeOfSetObject={setReducerObject}
         isRequired={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
@@ -93,6 +95,7 @@ const TypeCreatePopup = (props) => {
         basicInfo={reducerObeject.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={setReducerObject}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -101,6 +104,7 @@ const TypeCreatePopup = (props) => {
         headerOneBadgeOne={'type'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'GROUPPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPPOPUP'}
@@ -135,7 +139,7 @@ const TypeCreatePopup = (props) => {
         onClickEvent={updateGroup}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
-        // mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}

@@ -27,6 +27,8 @@ import watchReviewListAssessmentSaga from './watchers/reviewListAssessments';
 import watchCreateAssessmentSaga from './watchers/createAssessment';
 import watchReviewAssessmentTypeInfoSaga from './watchers/reviewInfoAssessmentType';
 import watchReviewAssignmentTypeInfoSaga from './watchers/reviewInfoAssignmentType';
+import watchReviewAssociateTypeInfoSaga from './watchers/reviewInfoAssociateType';
+import watchReviewAssesseeTypeInfoSaga from './watchers/reviewInfoAssesseeType';
 import watchCreateAssignmentSaga from './watchers/createAssignment';
 import watchSignInAssesseeSaga from './watchers/signIn';
 import watchConfirmAssesseeSaga from './watchers/confirmAssessee';
@@ -75,6 +77,8 @@ export default function* root() {
     fork(watchcreateNodeSaga),
     fork(watchReviewAssociatesNodeListSaga),
     fork(watchReviewAssociateNodeInfoSaga),
-    fork(watchRoleShareSaga)
+    fork(watchRoleShareSaga),
+    fork(watchReviewAssesseeTypeInfoSaga),
+    fork(watchReviewAssociateTypeInfoSaga)
   ]);
 }

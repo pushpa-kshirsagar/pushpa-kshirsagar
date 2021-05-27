@@ -75,6 +75,71 @@ const DisplayPaneThreeSectionTwo = () => {
   //   assesseeTelephoneCommunication: false,
   //   assesseeTelephoneVerification: false
   // },
+// +91 (citycode) number 'extension' extennumber
+  // +91 (80) 786899 extension 987
+  const {
+    assesseeTelephoneAreaCity = '',
+    assesseeTelephoneCountryRegion = '',
+    assesseeTelephoneExtension = '',
+    assesseeTelephoneNumber = ''
+  } = informationContact?.assesseeTelephoneWorkPrimary || {};
+  let workTelephonePrimary = 'No Information';
+  if (
+    assesseeTelephoneAreaCity ||
+    assesseeTelephoneCountryRegion ||
+    assesseeTelephoneExtension ||
+    assesseeTelephoneNumber
+  ) {
+    workTelephonePrimary = `+${assesseeTelephoneCountryRegion} (${assesseeTelephoneAreaCity}) ${assesseeTelephoneNumber} extension ${assesseeTelephoneExtension}`;
+  }
+
+  const {
+    assesseeTelephoneAreaCity: assesseeTelephoneAreaCitySecondary = '',
+    assesseeTelephoneCountryRegion: assesseeTelephoneCountryRegionSecondary = '',
+    assesseeTelephoneExtension: assesseeTelephoneExtensionSecondary = '',
+    assesseeTelephoneNumber: assesseeTelephoneNumberSecondary = ''
+  } = informationContact?.assesseeTelephoneWorkSecondary || {};
+  let workTelephoneSecondary = 'No Information';
+  if (
+    assesseeTelephoneAreaCitySecondary ||
+    assesseeTelephoneCountryRegionSecondary ||
+    assesseeTelephoneExtensionSecondary ||
+    assesseeTelephoneNumberSecondary
+  ) {
+    workTelephoneSecondary = `+${assesseeTelephoneCountryRegionSecondary} (${assesseeTelephoneAreaCitySecondary}) ${assesseeTelephoneNumberSecondary} extension ${assesseeTelephoneExtensionSecondary}`;
+  }
+  const {
+    assesseeTelephoneAreaCity: assesseeHomeTelephoneCity = '',
+    assesseeTelephoneCountryRegion: assesseeHomeTelephoneRegion = '',
+    assesseeTelephoneExtension: assesseeHomeTelephoneExtension = '',
+    assesseeTelephoneNumber: assesseeHomeTelephoneNumber = ''
+  } = informationContact?.assesseeTelephoneHomePrimary || {};
+  let homeTelephonePrimary = 'No Information';
+  if (
+    assesseeHomeTelephoneCity ||
+    assesseeHomeTelephoneRegion ||
+    assesseeHomeTelephoneExtension ||
+    assesseeHomeTelephoneNumber
+  ) {
+    homeTelephonePrimary = `+${assesseeHomeTelephoneRegion} (${assesseeHomeTelephoneCity}) ${assesseeHomeTelephoneNumber} extension ${assesseeHomeTelephoneExtension}`;
+  }
+
+  const {
+    assesseeTelephoneAreaCity: assesseeHomeTelephoneCitySecondary = '',
+    assesseeTelephoneCountryRegion: assesseeHomeTelephoneRegionSecondary = '',
+    assesseeTelephoneExtension: assesseeHomeTelephoneExtensionSecondary = '',
+    assesseeTelephoneNumber: assesseeHomeTelephoneNumberSecondary = ''
+  } = informationContact?.assesseeTelephoneHomeSecondary || {};
+  let homeTelephoneSecondary = 'No Information';
+  if (
+    assesseeHomeTelephoneCitySecondary ||
+    assesseeHomeTelephoneRegionSecondary ||
+    assesseeHomeTelephoneExtensionSecondary ||
+    assesseeHomeTelephoneNumberSecondary
+  ) {
+    homeTelephoneSecondary = `+${assesseeHomeTelephoneRegionSecondary} (${assesseeHomeTelephoneCitySecondary}) ${assesseeHomeTelephoneNumberSecondary} extension ${assesseeHomeTelephoneExtensionSecondary}`;
+  }
+
   const careerListAll = [
     {
       id: 'a1',
@@ -189,15 +254,11 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne:
-            informationContact.assesseeTelephoneHomePrimary?.assesseeTelephoneNumber ||
-            'No Information'
+          textOne: homeTelephonePrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne:
-            informationContact.assesseeTelephoneHomeSecondary?.assesseeTelephoneNumber ||
-            'No Information'
+          textOne: homeTelephoneSecondary
         }
       ],
       innerAssociateList: [],
@@ -262,15 +323,11 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne:
-            informationContact.assesseeTelephoneWorkPrimary?.assesseeTelephoneNumber ||
-            'No Information'
+          textOne: workTelephonePrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne:
-            informationContact.assesseeTelephoneWorkPrimary?.assesseeTelephoneNumber ||
-            'No Information'
+          textOne: workTelephoneSecondary
         }
       ],
       innerAssociateList: [],

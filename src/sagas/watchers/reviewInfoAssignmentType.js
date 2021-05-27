@@ -2,6 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA,
   LOADER_STOP,
+  SET_ASSIGNMENT_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE
 } from '../../actionType';
 import { ASSIGNMENT_REVIEW_TYPE_URL } from '../../endpoints';
@@ -28,6 +29,7 @@ function* workerReviewAssignmentTypeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
+      const { isReviseMode = false } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -35,9 +37,16 @@ function* workerReviewAssignmentTypeInfoSaga(data) {
           headerOneBadgeOne: 'type',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0]
+          responseObject: userResponse.responseObject[0],
+          reviewMode: isReviseMode ? 'revise' : ''
         }
       });
+      if (isReviseMode) {
+        yield put({
+          type: SET_ASSIGNMENT_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject.informationBasic
+        });
+      }
     }
 
     console.log('loading end');

@@ -318,12 +318,10 @@ const AssociateCreateReducer = (istate = initialState, action) => {
     case UPDATE_ASSOCIATE_INFO_CONTACT_INFO:
       let contactObj = istate.informationContact;
       for (const [key, value] of Object.entries(action.payload)) {
-        console.log(`${key}: ${value}`);
         if (value !== null) {
           contactObj = { ...contactObj, [key]: value };
         }
       }
-      console.log('final object contact', contactObj);
       return {
         ...istate,
         informationContact: contactObj

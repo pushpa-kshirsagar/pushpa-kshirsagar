@@ -37,7 +37,8 @@ import {
   INTERNAL_NODE_LIST_SAGA,
   SET_POPUP_VALUE,
   SET_NODE_DYNAMIC_SINGLE_STATE,
-  SET_SINGLE_ASSOCIATE_INFORMATION
+  SET_SINGLE_ASSOCIATE_INFORMATION,
+  GET_ASSESSEE_TYPE_REVIEW_INFO_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -524,6 +525,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -556,6 +558,40 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
+            isReviseMode,
+            reqBody: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
+              filter: 'true',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'assesseesTypeDistinctReviewList') {
+        dispatch({
+          type: GET_ASSESSEE_TYPE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

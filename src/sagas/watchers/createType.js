@@ -1,9 +1,12 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  CLEAR_TYPE_REDUCER_STATE,
   CREATE_TYPE_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
+  SET_ASSESSEE_TYPE_REDUCER_STATE,
+  SET_ASSESSMENT_TYPE_REDUCER_STATE,
+  SET_ASSIGNMENT_TYPE_REDUCER_STATE,
+  SET_ASSOCIATE_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
@@ -59,8 +62,32 @@ function* workerCreateTypeSaga(data) {
           createMode: `${data.payload.whichTypeCreate}Type`
         }
       });
+      if (data.payload.whichTypeCreate === 'assessees') {
+        yield put({
+          type: SET_ASSESSEE_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
+      if (data.payload.whichTypeCreate === 'assessments') {
+        yield put({
+          type: SET_ASSESSMENT_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
+      if (data.payload.whichTypeCreate === 'assignments') {
+        yield put({
+          type: SET_ASSIGNMENT_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
+      if (data.payload.whichTypeCreate === 'associates') {
+        yield put({
+          type: SET_ASSOCIATE_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
       yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-      yield put({ type: CLEAR_TYPE_REDUCER_STATE });
+      // yield put({ type: CLEAR_TYPE_REDUCER_STATE });
       yield put({ type: POPUP_CLOSE });
     } else {
       yield put({
