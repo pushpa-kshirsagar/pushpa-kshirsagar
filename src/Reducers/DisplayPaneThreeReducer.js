@@ -9,7 +9,8 @@ import {
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
-  SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../actionType';
 
 const initialState = {
@@ -41,6 +42,11 @@ const initialState = {
 
 const DisplayPaneThreeReducer = (istate = initialState, action) => {
   switch (action.type) {
+    case SET_DISPLAY_THREE_SINGLE_STATE:
+      return {
+        ...istate,
+        [action.payload.stateName]: action.payload.value
+      };
     case SET_DISPLAY_PANE_THREE_STATE:
       return {
         isReviewRevise: true,

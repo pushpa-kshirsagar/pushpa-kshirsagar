@@ -34,7 +34,8 @@ import {
   UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO,
   UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO,
   UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO,
-  UPDATE_ASSESSEE_TAG_STATUTORY_INFO
+  UPDATE_ASSESSEE_TAG_STATUTORY_INFO,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../actionType';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
@@ -175,6 +176,10 @@ const PopUpSignOnAssessee = (props) => {
   };
 
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_ASSESSEE_INFO });
     dispatch({ type: POPUP_CLOSE });
   };

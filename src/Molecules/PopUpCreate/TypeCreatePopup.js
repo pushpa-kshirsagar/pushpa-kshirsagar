@@ -7,7 +7,8 @@ import {
   POPUP_CLOSE,
   CREATE_TYPE_SAGA,
   LOADER_START,
-  CLEAR_TYPE_REDUCER_STATE
+  CLEAR_TYPE_REDUCER_STATE,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
@@ -22,9 +23,13 @@ const TypeCreatePopup = (props) => {
   } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   // const { typeInformation } = useSelector((state) => state.TypeCreateReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo,coreGroupReviewListData } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
   };
@@ -84,15 +89,13 @@ const TypeCreatePopup = (props) => {
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         inputHeader={'group'}
+        // isRequired={true}
         inputHeaderBadge={''}
         infoMsg={'select a group'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
+        ListData={coreGroupReviewListData}
+        // selectedList={reducerObeject?.informationAllocation?.assesseeNode.assesseeNodePrimary}
+        textOne={'assesseeTypeGroupName'}
+        textTwo={'assesseeTypeGroupNameDescription'}
         onClickEvent={null}
         // mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

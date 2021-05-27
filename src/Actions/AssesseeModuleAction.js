@@ -21,7 +21,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
-  SET_REQUEST_OBJECT
+  SET_REQUEST_OBJECT,
+  GET_TYPE_GROUP_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   makeAdministratorRoleCreateObj,
@@ -1014,6 +1015,21 @@ export const getRoleGroupReviewListApi = (selectedAssociateInfo, dispatch, popup
     payload: { request: requestObj, typeGroup: popupHeaderOne }
   });
 };
+export const getTypeGroupReviewListApi = (selectedAssociateInfo, dispatch, popupHeaderOne) => {
+  dispatch({ type: LOADER_START });
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId')
+  };
+  dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_TYPE_GROUP_REVIEW_LIST_SAGA,
+    payload: { request: requestObj, typeGroup: popupHeaderOne }
+  });
+};
 
 export const assesseeCreateApiCalls = (
   selectedAssociateInfo,
@@ -1193,7 +1209,8 @@ export const getAssesseeTypeApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  middlePaneHeader = 'assessees'
 ) => {
   let requestObj = makeAssesseeTypeObj(
     selectedAssociateInfo,
@@ -1213,6 +1230,7 @@ export const getAssesseeTypeApiCall = (
   dispatch({
     type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
     payload: {
+      middlePaneHeader: middlePaneHeader,
       request: requestObj,
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,

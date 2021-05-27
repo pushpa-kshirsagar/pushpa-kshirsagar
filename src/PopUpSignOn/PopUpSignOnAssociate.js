@@ -36,7 +36,8 @@ import {
   RESET_ALL_REDUCER,
   UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
   UPDATE_ASSOCIATE_WEBSITE_PRIMARY_INFO,
-  UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO
+  UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../actionType';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../endpoints';
@@ -150,6 +151,10 @@ const PopUpSignOnAssociate = () => {
     }
   };
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_ASSOCIATE_INFO });
     dispatch({ type: POPUP_CLOSE });
   };

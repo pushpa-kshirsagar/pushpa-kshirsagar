@@ -11,7 +11,8 @@ import {
   LOADER_START,
   SET_ROLE_DYNAMIC_STATE,
   UPDATE_ASSESSEE_PERSONAL_INFO,
-  UPDATE_ASSESSEE_ENGAGEMENT_INFO
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
@@ -27,6 +28,10 @@ const AssesseeRoleCreatePopUp = () => {
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
   };

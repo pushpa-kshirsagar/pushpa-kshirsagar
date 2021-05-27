@@ -37,7 +37,9 @@ import {
   PUBLISH_PUPUP,
   SHARE_POPUP,
   FLAG_OPTION_PUPUP,
-  GROUP_TYPE_POPUP_OPTION
+  GROUP_TYPE_POPUP_OPTION,
+  ITEMS_POPUP,
+  ANALYTICS_POPUP
 } from '../PopUpConfig';
 
 const initialState = {
@@ -189,6 +191,9 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload !== 'assessments' &&
         action.payload !== 'assignments' &&
         action.payload !== 'associates' &&
+        action.payload !== 'primary' &&
+        action.payload !== 'secondary' &&
+        action.payload !== 'analytics' &&
         action.payload !== 'culture profiles' &&
         action.payload !== 'job profiles' &&
         action.payload !== 'items'
@@ -210,6 +215,32 @@ const PopUpReducer = (istate = initialState, action) => {
       ) {
         let tempArr = [];
         GROUP_TYPE_POPUP_OPTION.forEach((element) => {
+          tempArr.push({ ...element, disabled: false });
+        });
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload,
+          currentPopUpOption: tempArr
+        };
+      } else if (
+        istate.popupHeaderOne === 'items' &&
+        (action.payload === 'primary' || action.payload === 'secondary')
+      ) {
+        let tempArr = [];
+        ITEMS_POPUP.forEach((element) => {
+          tempArr.push({ ...element, disabled: false });
+        });
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload,
+          currentPopUpOption: tempArr
+        };
+      } else if (
+        istate.popupHeaderOne === 'analytics' &&
+        (action.payload === 'culture profiles' || action.payload === 'job profiles')
+      ) {
+        let tempArr = [];
+        ANALYTICS_POPUP.forEach((element) => {
           tempArr.push({ ...element, disabled: false });
         });
         return {

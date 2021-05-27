@@ -518,9 +518,44 @@ export const ITEMS_POPUP = [
     data: 'create',
     dataValue: 'create',
     optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: true
+  },
+  { data: 'primary', dataValue: 'primary', optionClass: 'optionSecondary', disabled: false },
+  { data: 'secondary', dataValue: 'secondary', optionClass: 'optionSecondary', disabled: false }
+];
+export const ANALYTICS_POPUP = [
+  {
+    data: 'create',
+    dataValue: 'create',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: true
+  },
+  {
+    data: 'culture profiles',
+    dataValue: 'culture profiles',
+    optionClass: 'optionSecondary',
     disabled: false
   },
-  { data: 'review', dataValue: 'review', optionClass: 'optionPrimary', disabled: false }
+  {
+    data: 'job profiles',
+    dataValue: 'job profiles',
+    optionClass: 'optionSecondary',
+    disabled: false
+  }
 ];
 export const REVIEW_REVISE_POPUP = [
   {

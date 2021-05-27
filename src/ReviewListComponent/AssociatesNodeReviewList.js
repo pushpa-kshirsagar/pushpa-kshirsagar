@@ -82,7 +82,7 @@ const AssociatesNodeReviewList = (props) => {
     let newObj = {
       data: 'create',
       dataValue: 'create',
-      dataKey: 'createKey',
+      dataKey: 'create',
       optionClass: 'optionPrimary',
       disabled: false
     };

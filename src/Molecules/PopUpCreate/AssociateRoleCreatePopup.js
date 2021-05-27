@@ -9,7 +9,8 @@ import {
   CREATE_ASSOCIATE_ROLE_SAGA,
   SET_ASSOCIATE_ROLE_REDUCER_STATE,
   LOADER_START,
-  SET_ROLE_DYNAMIC_STATE
+  SET_ROLE_DYNAMIC_STATE,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
@@ -24,6 +25,10 @@ const AssociateRoleCreatePopup = () => {
 
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
   };

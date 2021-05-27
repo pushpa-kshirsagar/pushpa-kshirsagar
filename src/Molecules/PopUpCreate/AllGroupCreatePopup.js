@@ -9,7 +9,8 @@ import {
   LOADER_START,
   CLEAR_GROUP_REDUCER_STATE,
   UPDATE_ASSESSEE_PERSONAL_INFO,
-  UPDATE_ASSESSEE_ENGAGEMENT_INFO
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
@@ -34,6 +35,10 @@ const AllGroupCreatePopup = (props) => {
     (state) => state.DisplayPaneThreeReducer
   );
   const onClickCancelYes = () => {
+    dispatch({
+      type: SET_DISPLAY_THREE_SINGLE_STATE,
+      payload: { stateName: 'createMode', value: '' }
+    });
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
   };

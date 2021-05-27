@@ -8,7 +8,11 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { ASSESSEE_TYPE_REVIEWLIST_URL, ASSESSMENT_TYPE_CREATE_URL, ASSIGNMENT_TYPE_CREATE_URL } from '../../endpoints';
+import {
+  ASSESSEE_TYPE_CREATE_URL,
+  ASSESSMENT_TYPE_CREATE_URL,
+  ASSIGNMENT_TYPE_CREATE_URL
+} from '../../endpoints';
 
 const createTypeApi = async (requestObj) => {
   const requestOptions = {
@@ -20,7 +24,7 @@ const createTypeApi = async (requestObj) => {
   };
   let URL = '';
   if (requestObj.data.whichTypeCreate === 'assessees') {
-    URL = ASSESSEE_TYPE_REVIEWLIST_URL;
+    URL = ASSESSEE_TYPE_CREATE_URL;
   }
   if (requestObj.data.whichTypeCreate === 'assessments') {
     URL = ASSESSMENT_TYPE_CREATE_URL;
