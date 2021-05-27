@@ -385,7 +385,6 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         }
       };
     case UPDATE_ASSESSEE_PERSONAL_INFO:
-      console.log("IN ++++>", action)
       return {
         ...istate,
         informationPersonal: action.payload
@@ -471,9 +470,17 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         informationEngagement: action.payload
       };
     case UPDATE_ASSESSEE_CONTACT_INFO:
+      let contactObj = istate.informationContact;
+      for (const [key, value] of Object.entries(action.payload)) {
+        console.log(`${key}: ${value}`);
+        if (value !== null) {
+          contactObj = { ...contactObj, [key]: value };
+        }
+      }
+      console.log('final object contact', contactObj);
       return {
         ...istate,
-        informationContact: action.payload
+        informationContact: contactObj
       };
     case UPDATE_ASSESSEE_CONTACT_DYNAMIC_SINGLE_STATE:
       return {

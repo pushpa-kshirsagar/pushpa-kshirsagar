@@ -10,10 +10,21 @@ import { Paper } from '@material-ui/core';
 const DisplayPaneThreeSectionOneAssociateRole = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+
+  let associateRoleGroupList = [];
+  const tempRoleGroup = informationAllocation?.associateRoleGroup;
+  if (tempRoleGroup) {
+    associateRoleGroupList.push({
+      id: tempRoleGroup?.id || '',
+      textOne: tempRoleGroup?.informationBasic?.associateRoleGroupName || '',
+      textTwo: tempRoleGroup?.informationBasic?.associateRoleGroupDescription || '',
+      status: ''
+    });
   }
 
   const allocationList = [
@@ -27,7 +38,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: associateRoleGroupList
         }
       ],
       innerInfo: 'No Information',

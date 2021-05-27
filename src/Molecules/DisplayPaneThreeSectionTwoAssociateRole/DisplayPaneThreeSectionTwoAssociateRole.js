@@ -70,8 +70,9 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
   };
   const onclickReviseAssociate = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
-    if (labelName === 'associate') {
+    if (labelName === 'associate' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssociateNodeObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedGroupObject = {
         id: responseObject.id,
@@ -79,11 +80,14 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
         associateRoleDescription: responseObject.informationBasic.associateRoleDescription,
         associateRoleStatus: responseObject.informationEngagement.associateRoleStatus
       };
-      let existingAssesseeId =
-        relatedReviewListPaneThree &&
-        relatedReviewListPaneThree[0].associate.map((val) => {
-          return val.id;
-        });
+      let existingAssesseeId = [];
+      if (relatedReviewListPaneThree && relatedReviewListPaneThree[0]?.associate) {
+        existingAssesseeId =
+          relatedReviewListPaneThree &&
+          relatedReviewListPaneThree[0].associate.map((val) => {
+            return val.id;
+          });
+      }
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'associateRoleAssociateRevise' }
