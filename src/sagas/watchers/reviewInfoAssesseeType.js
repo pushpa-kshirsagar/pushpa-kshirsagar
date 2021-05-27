@@ -1,15 +1,15 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA,
+  GET_ASSESSEE_TYPE_REVIEW_INFO_SAGA,
   LOADER_STOP,
-  SET_ASSIGNMENT_TYPE_REDUCER_STATE,
+  SET_ASSESSEE_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE
 } from '../../actionType';
-import { ASSIGNMENT_REVIEW_TYPE_URL } from '../../endpoints';
+import { ASSESSEE_REVIEW_TYPE_URL } from '../../endpoints';
 
-const assignmentTypeReviewInfoApi = async (requestObj) => {
+const assesseeTypeReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSIGNMENT_REVIEW_TYPE_URL;
+  let URL = ASSESSEE_REVIEW_TYPE_URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -22,9 +22,9 @@ const assignmentTypeReviewInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviewAssignmentTypeInfoSaga(data) {
+function* workerReviewAssesseeTypeInfoSaga(data) {
   try {
-    const userResponse = yield call(assignmentTypeReviewInfoApi, {
+    const userResponse = yield call(assesseeTypeReviewInfoApi, {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
@@ -33,17 +33,17 @@ function* workerReviewAssignmentTypeInfoSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assignments',
+          headerOne: 'assessees',
           headerOneBadgeOne: 'type',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0],
+          responseObject: userResponse.responseObject,
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
       if (isReviseMode) {
         yield put({
-          type: SET_ASSIGNMENT_TYPE_REDUCER_STATE,
+          type: SET_ASSESSEE_TYPE_REDUCER_STATE,
           payload: userResponse.responseObject.informationBasic
         });
       }
@@ -58,6 +58,6 @@ function* workerReviewAssignmentTypeInfoSaga(data) {
   }
 }
 
-export default function* watchReviewAssignmentTypeInfoSaga() {
-  yield takeLatest(GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA, workerReviewAssignmentTypeInfoSaga);
+export default function* watchReviewAssesseeTypeInfoSaga() {
+  yield takeLatest(GET_ASSESSEE_TYPE_REVIEW_INFO_SAGA, workerReviewAssesseeTypeInfoSaga);
 }

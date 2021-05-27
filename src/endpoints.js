@@ -89,6 +89,10 @@ export const ASSIGNMENT_REVIEW_TYPE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/review';
 export const ASSESSMENT_REVIEW_TYPE_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/review';
+export const ASSESSEE_REVIEW_TYPE_URL =
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-type/review';
+export const ASSOCIATE_REVIEW_TYPE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/review';
 export const ASSESSEE_SIGN_IN_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/cognito-sign-in';
 export const CONFIRM_ASSESSEE_URL =
   PLATFORM_URL + '/dev/insight-guru/api/platform/update-sign-in-info';

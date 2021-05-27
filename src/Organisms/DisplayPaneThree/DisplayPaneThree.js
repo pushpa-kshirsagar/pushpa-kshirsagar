@@ -30,7 +30,8 @@ import {
   ASSESSEE_NODE_INFO_REVISE_SAGA,
   CLEAR_GROUP_REDUCER_STATE,
   CLEAR_ROLE_REDUCER_STATE,
-  CLEAR_NODE_REDUCER_STATE
+  CLEAR_NODE_REDUCER_STATE,
+  CLEAR_TYPE_REDUCER_STATE
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -70,6 +71,10 @@ import {
   getAssesseeRoleAssesseeReqObj
 } from '../../Actions/AssesseeModuleAction';
 import { getAssociateGroupAssociateReqObj, getAssociateRoleAssociateReqObj } from '../../Actions/AssociateModuleAction';
+import DisplayPaneThreeSectionOneAssesseeType from '../../Molecules/DisplayPaneThreeSectionOneAssesseeType/DisplayPaneThreeSectionOneAssesseeType';
+import DisplayPaneThreeSectionOneAssociateType from '../../Molecules/DisplayPaneThreeSectionOneAssociateType/DisplayPaneThreeSectionOneAssociateType';
+import DisplayPaneThreeSectionTwoAssesseeType from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeType/DisplayPaneThreeSectionTwoAssesseeType';
+import DisplayPaneThreeSectionTwoAssociateType from '../../Molecules/DisplayPaneThreeSectionTwoAssociateType/DisplayPaneThreeSectionTwoAssociateType';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -230,6 +235,34 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssesseeType = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssesseeType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssesseeType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
+  const rightPaneSectionsAssociateType = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssociateType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssociateType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssociate = [
     {
       id: 'section1',
@@ -294,6 +327,12 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssessmentType, setSelectedSectionAssessmentType] = useState(
     rightPaneSectionsAssessmentType[0]
   );
+  const [selectedSectionAssesseeType, setSelectedSectionAssesseeType] = useState(
+    rightPaneSectionsAssesseeType[0]
+  );
+  const [selectedSectionAssociateType, setSelectedSectionAssociateType] = useState(
+    rightPaneSectionsAssociateType[0]
+  );
   const [selectedSectionAssessment, setSelectedSectionAssessment] = useState(
     rightPaneSectionsAssessment[0]
   );
@@ -318,6 +357,8 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssignmentGroup(rightPaneSectionsAssignmentGroup[0]);
     setSelectedSectionAssignmentType(rightPaneSectionsAssignmentType[0]);
     setSelectedSectionAssessmentType(rightPaneSectionsAssessmentType[0]);
+    setSelectedSectionAssesseeType(rightPaneSectionsAssesseeType[0]);
+    setSelectedSectionAssociateType(rightPaneSectionsAssociateType[0]);
     setSelectedSectionAssessment(rightPaneSectionsAssessment[0]);
     setSelectedSectionAssignment(rightPaneSectionsAssignment[0]);
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
@@ -679,6 +720,7 @@ export const DisplayPaneThree = () => {
   };
   const onClickCreateAssignmentType = () => {
     console.log('ON CLICK CREATE ASSIGNMENT TYPE');
+    dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assignmentsTYPECREATE' }
@@ -686,9 +728,26 @@ export const DisplayPaneThree = () => {
   };
   const onClickCreateAssessmentType = () => {
     console.log('ON CLICK CREATE ASSESSMENT TYPE');
+    dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assessmentsTYPECREATE' }
+    });
+  };
+  const onClickCreateAssesseeType = () => {
+    console.log('ON CLICK CREATE ASSESSEE TYPE');
+    dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesTYPECREATE' }
+    });
+  };
+  const onClickCreateAssociateType = () => {
+    console.log('ON CLICK CREATE ASSOCIATE TYPE');
+    dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesTYPECREATE' }
     });
   };
 
@@ -745,6 +804,12 @@ export const DisplayPaneThree = () => {
   ];
   const createAssessmentTypePrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessmentType, Icon: AddIcon }
+  ];
+  const createAssesseeTypePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssesseeType, Icon: AddIcon }
+  ];
+  const createAssociateTypePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateAssociateType, Icon: AddIcon }
   ];
 
   const createAssesseeRolePrimaryIcon = [
@@ -936,6 +1001,98 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSOCIATE_SIGN_ON,
         payload: { isPopUpValue: 'DESCRIPTIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+  };
+  const reviseAssociateTypeBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'associatesTYPECREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesTYPECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'associatesTYPECREATE' }
+      });
+    }
+  };
+  const reviseAssesseeTypeBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'assesseesTYPECREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesTYPECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'assesseesTYPECREATE' }
+      });
+    }
+  };
+  const reviseAssessmentTypeBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'assessmentsTYPECREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assessmentsTYPECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'assessmentsTYPECREATE' }
+      });
+    }
+  };
+  const reviseAssignmentTypeBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'assignmentsTYPECREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assignmentsTYPECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'assignmentsTYPECREATE' }
       });
     }
   };
@@ -1348,6 +1505,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssignmentTypeBasicInformation}
                 />
               </div>
               <Sections
@@ -1394,6 +1552,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssessmentTypeBasicInformation}
                 />
               </div>
               <Sections
@@ -1417,6 +1576,100 @@ export const DisplayPaneThree = () => {
                 FilterMode={FilterMode}
                 onClick={onClickCreateAssessmentType}
                 primaryIcon={createAssessmentTypePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assessees' &&
+        headerOneBadgeOne === 'type' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={informationBasic?.assesseeTypeFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.assesseeTypeName || 'No Information'}
+                  textOneTwo={informationBasic.assesseeTypeDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  onClickRevise={reviseAssesseeTypeBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssesseeType}
+                selectedSection={selectedSectionAssesseeType}
+                setSelectedSection={setSelectedSectionAssesseeType}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assesseesType' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssesseeType}
+                primaryIcon={createAssesseeTypePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'associates' &&
+        headerOneBadgeOne === 'type' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={informationBasic?.associateTypeFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.associateTypeName || 'No Information'}
+                  textOneTwo={informationBasic.associateTypeDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  onClickRevise={reviseAssociateTypeBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssociateType}
+                selectedSection={selectedSectionAssociateType}
+                setSelectedSection={setSelectedSectionAssociateType}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'associatesType' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssociateType}
+                primaryIcon={createAssociateTypePrimaryIcon}
                 secondaryIcon={[]}
               />
             )}

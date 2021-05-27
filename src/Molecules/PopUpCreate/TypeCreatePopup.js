@@ -23,6 +23,7 @@ const TypeCreatePopup = (props) => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   // const { typeInformation } = useSelector((state) => state.TypeCreateReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
@@ -40,6 +41,7 @@ const TypeCreatePopup = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_TYPE_SAGA, payload: reqBody });
   };
+  console.log("TYPE OBJECT", reducerObeject);
 
   return (
     <div>
@@ -55,6 +57,7 @@ const TypeCreatePopup = (props) => {
         basicInfo={reducerObeject.informationBasic}
         typeOfSetObject={setReducerObject}
         isRequired={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
@@ -67,6 +70,7 @@ const TypeCreatePopup = (props) => {
         basicInfo={reducerObeject.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={setReducerObject}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -75,6 +79,7 @@ const TypeCreatePopup = (props) => {
         headerOneBadgeOne={'type'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'GROUPPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPPOPUP'}
@@ -94,7 +99,7 @@ const TypeCreatePopup = (props) => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
-        // mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}

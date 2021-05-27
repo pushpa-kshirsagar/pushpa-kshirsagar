@@ -7,7 +7,7 @@ import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 
-const DisplayPaneThreeSectionOneAssignmentType = () => {
+const DisplayPaneThreeSectionOneAssociateType = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { informationEngagement } = responseObject;
@@ -48,14 +48,14 @@ const DisplayPaneThreeSectionOneAssignmentType = () => {
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'assessees',
+      innerInfo: 'No Information',
       isListCard: false,
       IconOne: Manuscript
     },
     {
       id: 'a2',
       textOneOne:
-        capitalizeFirstLetter(informationEngagement?.assignmentTypeStatus) || 'No Information',
+        capitalizeFirstLetter(informationEngagement?.associateTypeStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -68,12 +68,12 @@ const DisplayPaneThreeSectionOneAssignmentType = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationEngagement?.assignmentTypeTag?.assignmentTypeTagPrimary || 'No Information'
+            informationEngagement?.associateTypeTag?.associateTypeTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
           textOne:
-            informationEngagement?.assignmentTypeTag?.assignmentTypeTagSecondary || 'No Information'
+            informationEngagement?.associateTypeTag?.associateTypeTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -87,18 +87,18 @@ const DisplayPaneThreeSectionOneAssignmentType = () => {
         {
           labelTextOneOneBadge: 'start',
           textOne:
-            informationEngagement?.assignmentTypeTenure?.assignmentTypeTenureDateTimeStart ||
+            informationEngagement?.associateTypeTenure?.associateTypeTenureDateTimeStart ||
             'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
           textOne:
-            informationEngagement?.assignmentTypeTenure?.assignmentTypeTenureDateTimeEnd ||
+            informationEngagement?.associateTypeTenure?.associateTypeTenureDateTimeEnd ||
             'No Information'
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'Assessee',
+      innerInfo: 'No Information',
       isListCard: false
     }
   ];
@@ -151,4 +151,4 @@ const DisplayPaneThreeSectionOneAssignmentType = () => {
   );
 };
 
-export default DisplayPaneThreeSectionOneAssignmentType;
+export default DisplayPaneThreeSectionOneAssociateType;

@@ -19,7 +19,10 @@ const AccordianListCard = (props) => {
   const [selectedBadge, setSelectedBadge] = useState('');
   const reviewLabelClass = isReviewLink ? 'reviewLinkText' : '';
   useEffect(() => {
-    if (labelTextOneOneBadges[0].labelTextOneOneBadge === 'primary') {
+    if (
+      labelTextOneOneBadges[0].labelTextOneOneBadge === 'primary' ||
+      labelTextOneOneBadges[0].labelTextOneOneBadge === ''
+    ) {
       setSelectedBadge(labelTextOneOneBadges[0]);
     }
   }, [responseObject]);
