@@ -38,7 +38,8 @@ import {
   SHARE_POPUP,
   FLAG_OPTION_PUPUP,
   GROUP_TYPE_POPUP_OPTION,
-  ANALYTICS_POPUP
+  ANALYTICS_POPUP,
+  EXCHANGE_POPUP_OPTION
 } from '../PopUpConfig';
 
 const initialState = {
@@ -217,6 +218,25 @@ const PopUpReducer = (istate = initialState, action) => {
       ) {
         let tempArr = [];
         GROUP_TYPE_POPUP_OPTION.forEach((element) => {
+          tempArr.push({ ...element, disabled: false });
+        });
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload,
+          currentPopUpOption: tempArr
+        };
+      } else if (
+        istate.popupHeaderOne === 'exchange' &&
+        (action.payload === 'assessees' ||
+          action.payload === 'assessments' ||
+          action.payload === 'assignments' ||
+          action.payload === 'associates' ||
+          action.payload === 'culture profiles' ||
+          action.payload === 'job profiles' ||
+          action.payload === 'items')
+      ) {
+        let tempArr = [];
+        EXCHANGE_POPUP_OPTION.forEach((element) => {
           tempArr.push({ ...element, disabled: false });
         });
         return {

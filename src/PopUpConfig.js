@@ -367,6 +367,15 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
     permission: 'review'
   },
   {
+    data: 'interviews',
+    dataValue: 'interviews',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
     data: 'notifications',
     dataValue: 'notifications',
     optionClass: 'optionPrimary',
@@ -561,10 +570,19 @@ export const ANALYTICS_POPUP = [
     dataValue: 'job profiles',
     optionClass: 'optionSecondary',
     disabled: false
+  }
+];
+
+export const MINE_REVIEW = [
+  {
+    data: 'ascendants',
+    dataValue: 'ascendants',
+    optionClass: 'optionPrimary',
+    disabled: false
   },
   {
-    data: 'items',
-    dataValue: 'items',
+    data: 'active',
+    dataValue: 'active',
     optionClass: 'optionSecondary',
     disabled: false
   }
@@ -770,13 +788,13 @@ export const NODE_POPUP_OPTION = [
   { data: 'associate', dataValue: 'associate', optionClass: 'optionSecondary', disabled: false }
 ];
 export const EXCHANGE_POPUP_OPTION = [
-  { data: 'download', dataValue: 'download', optionClass: 'optionPrimary', disabled: false },
+  { data: 'download', dataValue: 'download', optionClass: 'optionPrimary', disabled: true },
   {
     data: 'upload',
     dataValue: 'upload',
     optionClass: 'optionPrimary',
     divider: 'dark',
-    disabled: false
+    disabled: true
   },
   { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary', disabled: false },
   {
@@ -791,7 +809,26 @@ export const EXCHANGE_POPUP_OPTION = [
     optionClass: 'optionSecondary',
     disabled: false
   },
-  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
+  {
+    data: 'associates',
+    dataValue: 'associates',
+    divider: 'light',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'culture profiles',
+    dataValue: 'culture profiles',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'job profiles',
+    dataValue: 'job profiles',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  { data: 'items', dataValue: 'items', optionClass: 'optionSecondary', disabled: false }
 ];
 export const MARKETPLACE_POPUP_OPTION = [
   {

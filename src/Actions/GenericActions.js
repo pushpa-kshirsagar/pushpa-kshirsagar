@@ -1135,7 +1135,7 @@ export const makeAssesseeTypeScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeGroupName',
+      columnName: 'informationBasic.assesseeTypeName',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1146,7 +1146,7 @@ export const makeAssesseeTypeScanRequestObject = (
         searchBy: [
           {
             dataType: 'string',
-            conditionColumn: 'informationEngagement.assesseeGroupStatus',
+            conditionColumn: 'informationEngagement.assesseeTypeStatus',
             conditionValue: searchObj
           }
         ]
@@ -1156,7 +1156,81 @@ export const makeAssesseeTypeScanRequestObject = (
         searchBy: [
           {
             dataType: 'string',
-            conditionColumn: 'informationBasic.assesseeGroupName',
+            conditionColumn: 'informationBasic.assesseeTypeName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeTypeDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeAssociateTypeScanRequestObject = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.associateTypeName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateTypeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateTypeName',
             conditionValue: {
               condition: 'ct',
               value: {

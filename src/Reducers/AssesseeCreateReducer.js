@@ -103,6 +103,10 @@ const initialState = {
     assesseeRole: {
       assesseeRolePrimary: [],
       assesseeRoleSecondary: []
+    },
+    assesseeType: {
+      assesseeTypePrimary: [],
+      assesseeTypeSecondary: []
     }
   },
   informationEngagement: {

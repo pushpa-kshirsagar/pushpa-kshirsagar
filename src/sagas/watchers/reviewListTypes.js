@@ -72,7 +72,6 @@ function* workerReviewAssesseeTypeListSaga(data) {
         payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
-
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
