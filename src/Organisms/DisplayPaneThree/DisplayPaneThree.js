@@ -33,7 +33,9 @@ import {
   CLEAR_NODE_REDUCER_STATE,
   CLEAR_TYPE_REDUCER_STATE,
   ASSESSMENT_INFO_REVISE_SAGA,
-  ASSIGNMENT_INFO_REVISE_SAGA
+  ASSIGNMENT_INFO_REVISE_SAGA,
+  ASSESSEE_TYPE_INFO_REVISE_SAGA,
+  ASSOCIATE_TYPE_INFO_REVISE_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -384,6 +386,9 @@ export const DisplayPaneThree = () => {
   const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup } = useSelector(
     (state) => state.GroupCreateReducer
   );
+  const { assesseeType, assessmentType, assignmentType, associateType } = useSelector(
+    (state) => state.TypeCreateReducer
+  );
   const { associateRole, assesseeRole } = useSelector((state) => state.RoleCreateReducer);
   const { nodeInformation } = useSelector((state) => state.NodeCreateReducer);
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
@@ -618,6 +623,36 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSESSEE_GROUP_INFO_REVISE_SAGA,
         payload: { headerOne: 'assessees', assesseeGroupAssesseeReqBody, reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'assessees') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        assesseeType: {
+          id,
+          informationBasic: assesseeType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSEE_TYPE_INFO_REVISE_SAGA,
+        payload: { headerOne: 'assessees', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'associates') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        associateType: {
+          id,
+          informationBasic: associateType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSOCIATE_TYPE_INFO_REVISE_SAGA,
+        payload: { headerOne: 'associates', reqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assessment') {
       const { informationBasic } = assessmentInfo;

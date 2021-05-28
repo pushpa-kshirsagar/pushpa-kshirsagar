@@ -376,8 +376,8 @@ const DisplayPaneThreeSectionOne = () => {
   ];
   let assesseeGroupListPrimary = [];
   if (
-    informationAllocation?.assesseeGroup.assesseeGroupPrimary &&
-    informationAllocation?.assesseeGroup.assesseeGroupPrimary.length > 0
+    informationAllocation?.assesseeGroup?.assesseeGroupPrimary &&
+    informationAllocation?.assesseeGroup?.assesseeGroupPrimary.length > 0
   ) {
     const tempArr = informationAllocation?.assesseeGroup?.assesseeGroupPrimary;
     tempArr.forEach((ob) => {
@@ -391,8 +391,8 @@ const DisplayPaneThreeSectionOne = () => {
   }
   let assesseeGroupListSecondary = [];
   if (
-    informationAllocation?.assesseeGroup.assesseeGroupSecondary &&
-    informationAllocation?.assesseeGroup.assesseeGroupSecondary.length > 0
+    informationAllocation?.assesseeGroup?.assesseeGroupSecondary &&
+    informationAllocation?.assesseeGroup?.assesseeGroupSecondary.length > 0
   ) {
     const tempArr = informationAllocation?.assesseeGroup?.assesseeGroupSecondary;
     tempArr.forEach((ob) => {
@@ -406,8 +406,8 @@ const DisplayPaneThreeSectionOne = () => {
   }
   let assesseeNodeListPrimary = [];
   if (
-    informationAllocation?.assesseeNode.assesseeNodePrimary &&
-    informationAllocation?.assesseeNode.assesseeNodePrimary.length > 0
+    informationAllocation?.assesseeNode?.assesseeNodePrimary &&
+    informationAllocation?.assesseeNode?.assesseeNodePrimary.length > 0
   ) {
     const tempArr = informationAllocation?.assesseeNode?.assesseeNodePrimary;
     tempArr.forEach((ob) => {
@@ -421,8 +421,8 @@ const DisplayPaneThreeSectionOne = () => {
   }
   let assesseeNodeListSecondary = [];
   if (
-    informationAllocation?.assesseeNode.assesseeNodeSecondary &&
-    informationAllocation?.assesseeNode.assesseeNodeSecondary.length > 0
+    informationAllocation?.assesseeNode?.assesseeNodeSecondary &&
+    informationAllocation?.assesseeNode?.assesseeNodeSecondary.length > 0
   ) {
     const tempArr = informationAllocation?.assesseeNode?.assesseeNodeSecondary;
     tempArr.forEach((ob) => {
@@ -437,8 +437,8 @@ const DisplayPaneThreeSectionOne = () => {
 
   let assesseeRoleListPrimary = [];
   if (
-    informationAllocation?.assesseeRole.assesseeRolePrimary &&
-    informationAllocation?.assesseeRole.assesseeRolePrimary.length > 0
+    informationAllocation?.assesseeRole?.assesseeRolePrimary &&
+    informationAllocation?.assesseeRole?.assesseeRolePrimary.length > 0
   ) {
     const tempArr = informationAllocation?.assesseeRole?.assesseeRolePrimary;
     tempArr.forEach((ob) => {
@@ -452,8 +452,8 @@ const DisplayPaneThreeSectionOne = () => {
   }
   let assesseeRoleListSecondary = [];
   if (
-    informationAllocation?.assesseeRole.assesseeRoleSecondary &&
-    informationAllocation?.assesseeRole.assesseeRoleSecondary.length > 0
+    informationAllocation?.assesseeRole?.assesseeRoleSecondary &&
+    informationAllocation?.assesseeRole?.assesseeRoleSecondary.length > 0
   ) {
     const tempArr = informationAllocation?.assesseeRole?.assesseeRoleSecondary;
     tempArr.forEach((ob) => {

@@ -74,9 +74,12 @@ const PopUpSignOnAssociate = () => {
     }
   }, [assesseeInfo.assesseeInformationData, history]);
 
+  // console.log("NODE LIST", coreNodeReviewListData);
   const coreNodeReviewListDataRemoveSelf = [];
   if (coreNodeReviewListData.length > 0) {
-    coreNodeReviewListData.forEach((ob) => {
+    const { associateDescendantAll, associateRoot } = coreNodeReviewListData[0];
+    let tempArr = [...associateDescendantAll, associateRoot];
+    tempArr.forEach((ob) => {
       if (responseObject.id !== ob.id) {
         coreNodeReviewListDataRemoveSelf.push(ob);
       }

@@ -61,7 +61,7 @@ const NodeCreateReducer = (istate = initialState, action) => {
             ...istate.nodeInformation[action.payload.objectName],
             [action.payload.stateName]: {
               ...istate.nodeInformation[action.payload.objectName][action.payload.stateName],
-              [action.payload.actualStateName]: action.payload.value    
+              [action.payload.actualStateName]: action.payload.value
             }
           }
         }

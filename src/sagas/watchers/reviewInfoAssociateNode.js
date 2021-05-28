@@ -7,6 +7,7 @@ import {
   LOADER_STOP,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_NODE_DYNAMIC_SINGLE_STATE,
   SET_NODE_REDUCER_STATE
 } from '../../actionType';
 import Store from '../../store';
@@ -62,9 +63,25 @@ function* workerReviewAssociateNodeInfoSaga(data) {
         }
       });
       if (isReviseMode) {
+        const { informationBasic, informationFramework } = userResponse.responseObject[0];
         yield put({
           type: SET_NODE_REDUCER_STATE,
-          payload: userResponse.responseObject[0].informationBasic
+          payload: informationBasic
+        });
+        let ascendantPrimaryList = [];
+        if (informationFramework?.associateNodeAscendant?.associateNodeAscendantPrimary) {
+          let ascendantPrimaryId =
+            informationFramework?.associateNodeAscendant?.associateNodeAscendantPrimary?.id || '';
+          ascendantPrimaryList.push(ascendantPrimaryId);
+        }
+        yield put({
+          type: SET_NODE_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationFramework',
+            stateName: 'associateNodeAscendant',
+            actualStateName: 'associateNodeAscendantPrimary',
+            value: ascendantPrimaryList
+          }
         });
       }
     }

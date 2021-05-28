@@ -63,8 +63,8 @@ function* workerReviewInfoAssesseeSaga(data) {
         });
         if (
           informationAllocation &&
-          informationAllocation.assesseeGroup.assesseeGroupPrimary &&
-          informationAllocation.assesseeGroup.assesseeGroupPrimary.length > 0
+          informationAllocation?.assesseeGroup?.assesseeGroupPrimary &&
+          informationAllocation?.assesseeGroup?.assesseeGroupPrimary.length > 0
         ) {
           let tempArr = informationAllocation.assesseeGroup.assesseeGroupPrimary.map((ob) => ob.id);
           yield put({
@@ -88,8 +88,8 @@ function* workerReviewInfoAssesseeSaga(data) {
 
         if (
           informationAllocation &&
-          informationAllocation.assesseeRole.assesseeRolePrimary &&
-          informationAllocation.assesseeRole.assesseeRolePrimary.length > 0
+          informationAllocation?.assesseeRole?.assesseeRolePrimary &&
+          informationAllocation?.assesseeRole?.assesseeRolePrimary.length > 0
         ) {
           let tempArr = informationAllocation.assesseeRole.assesseeRolePrimary.map((ob) => ob.id);
           yield put({
@@ -112,8 +112,8 @@ function* workerReviewInfoAssesseeSaga(data) {
         }
         if (
           informationAllocation &&
-          informationAllocation.assesseeNode.assesseeNodePrimary &&
-          informationAllocation.assesseeNode.assesseeNodePrimary.length > 0
+          informationAllocation?.assesseeNode?.assesseeNodePrimary &&
+          informationAllocation?.assesseeNode?.assesseeNodePrimary.length > 0
         ) {
           let tempArr = informationAllocation.assesseeNode.assesseeNodePrimary.map((ob) => ob.id);
           yield put({
@@ -137,8 +137,8 @@ function* workerReviewInfoAssesseeSaga(data) {
 
         if (
           informationAllocation &&
-          informationAllocation.assesseeGroup.assesseeGroupSecondary &&
-          informationAllocation.assesseeGroup.assesseeGroupSecondary.length > 0
+          informationAllocation?.assesseeGroup?.assesseeGroupSecondary &&
+          informationAllocation?.assesseeGroup?.assesseeGroupSecondary.length > 0
         ) {
           let tempArr = informationAllocation.assesseeGroup.assesseeGroupSecondary.map(
             (ob) => ob.id
@@ -163,8 +163,8 @@ function* workerReviewInfoAssesseeSaga(data) {
         }
         if (
           informationAllocation &&
-          informationAllocation.assesseeNode.assesseeNodeSecondary &&
-          informationAllocation.assesseeNode.assesseeNodeSecondary.length > 0
+          informationAllocation?.assesseeNode?.assesseeNodeSecondary &&
+          informationAllocation?.assesseeNode?.assesseeNodeSecondary.length > 0
         ) {
           let tempArr = informationAllocation.assesseeNode.assesseeNodeSecondary.map((ob) => ob.id);
           yield put({
@@ -188,8 +188,8 @@ function* workerReviewInfoAssesseeSaga(data) {
 
         if (
           informationAllocation &&
-          informationAllocation.assesseeRole.assesseeRoleSecondary &&
-          informationAllocation.assesseeRole.assesseeRoleSecondary.length > 0
+          informationAllocation?.assesseeRole?.assesseeRoleSecondary &&
+          informationAllocation?.assesseeRole?.assesseeRoleSecondary.length > 0
         ) {
           let tempArr = informationAllocation.assesseeRole.assesseeRoleSecondary.map((ob) => ob.id);
           yield put({

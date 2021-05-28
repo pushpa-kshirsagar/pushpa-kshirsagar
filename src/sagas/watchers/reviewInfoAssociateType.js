@@ -1,11 +1,12 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
+  ASSOCIATE_TYPE_INFO_REVISE_SAGA,
   GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA,
   LOADER_STOP,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE
 } from '../../actionType';
-import { ASSOCIATE_REVIEW_TYPE_URL } from '../../endpoints';
+import { ASSOCIATE_REVIEW_TYPE_URL, ASSOCIATE_REVISE_TYPE_URL } from '../../endpoints';
 
 const associateTypeReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -28,7 +29,6 @@ function* workerReviewAssociateTypeInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      console.log('IN GROUP REVIEW+++++', userResponse);
       const { isReviseMode = false } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -37,16 +37,59 @@ function* workerReviewAssociateTypeInfoSaga(data) {
           headerOneBadgeOne: 'type',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
+          responseObject: userResponse.responseObject[0],
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
       if (isReviseMode) {
         yield put({
           type: SET_ASSOCIATE_TYPE_REDUCER_STATE,
-          payload: userResponse.responseObject.informationBasic
+          payload: userResponse.responseObject[0].informationBasic
         });
       }
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
+const associateTypeReviseInfoApi = async (requestObj) => {
+  console.log(requestObj.data);
+  let URL = ASSOCIATE_REVISE_TYPE_URL;
+  const requestOptions = {
+    method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
+    body: JSON.stringify(requestObj.data)
+  };
+  const response = await fetch(URL, requestOptions);
+  const json = await response.json();
+  return json;
+};
+
+function* workerReviseAssociateTypeInfoSaga(data) {
+  try {
+    const userResponse = yield call(associateTypeReviseInfoApi, {
+      data: data.payload.reqBody
+    });
+    if (userResponse.responseCode === '000') {
+      const { createMode } = data.payload;
+      yield put({
+        type: SET_DISPLAY_PANE_THREE_STATE,
+        payload: {
+          headerOne: 'associates',
+          headerOneBadgeOne: 'type',
+          headerOneBadgeTwo: 'information',
+          headerOneBadgeThree: 'key',
+          responseObject: userResponse.responseObject[0],
+          createMode
+        }
+      });
     }
 
     console.log('loading end');
@@ -60,4 +103,5 @@ function* workerReviewAssociateTypeInfoSaga(data) {
 
 export default function* watchReviewAssociateTypeInfoSaga() {
   yield takeLatest(GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA, workerReviewAssociateTypeInfoSaga);
+  yield takeLatest(ASSOCIATE_TYPE_INFO_REVISE_SAGA, workerReviseAssociateTypeInfoSaga);
 }

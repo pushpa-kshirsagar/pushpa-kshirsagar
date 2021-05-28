@@ -771,7 +771,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }
       });
       clearMiddlePaneInfo();
-    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'type') {
+    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'types') {
       if (popupHeaderOne === 'assessees' || popupHeaderOne === 'associates') {
         getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       } else {
@@ -782,7 +782,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'TYPECREATE' }
       });
       clearMiddlePaneInfo();
-    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'node') {
+    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'nodes') {
       let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
       dispatch({ type: CLEAR_NODE_REDUCER_STATE });
       dispatch({ type: LOADER_START });
