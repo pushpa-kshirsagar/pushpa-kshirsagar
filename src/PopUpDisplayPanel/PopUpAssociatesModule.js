@@ -32,7 +32,8 @@ import {
   getAssociateNodeApiCall,
   getAssociateRoleDistinctApiCall,
   getAssociateGroupDistinctApiCall,
-  associateCreatePopup
+  associateCreatePopup,
+  getAssociatesTypeApiCall
 } from '../Actions/AssociateModuleAction';
 
 const PopUpAssociatesModule = (props) => {
@@ -154,6 +155,15 @@ const PopUpAssociatesModule = (props) => {
         targetValue,
         'distinct',
         'hierarchy'
+      );
+      resetDataFunction();
+    } else if (targetValue === 'types') {
+      getAssociatesTypeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'types'
       );
       resetDataFunction();
     } else {

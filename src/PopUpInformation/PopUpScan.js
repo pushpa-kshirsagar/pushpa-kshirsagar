@@ -22,6 +22,7 @@ import {
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -44,7 +45,8 @@ import {
   makeAssignmentScanRequestObject,
   makeAssessmentScanRequestObject,
   makeAdminmManagerRoleScanRequestObject,
-  makeAssesseeTypeScanRequestObject
+  makeAssesseeTypeScanRequestObject,
+  makeAssociateTypeScanRequestObject
 } from '../Actions/GenericActions';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import {
@@ -289,6 +291,32 @@ const PopUpScan = (props) => {
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
         dispatch({
           type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            middlePaneHeader: middlePaneHeader,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'associatesTypeDistinctReviewList') {
+        let requestObect = makeAssociateTypeScanRequestObject(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo === 'distinct'
+            ? middlePaneHeaderBadgeThree
+            : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
           payload: {
             request: requestObect,
             middlePaneHeader: middlePaneHeader,
@@ -547,6 +575,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'associatesNodeDistinctReviewList' ||
                 isPopUpValue === 'associateNodeDistinctReviewList' ||
                 isPopUpValue === 'assesseesTypeDistinctReviewList' ||
+                isPopUpValue === 'associatesTypeDistinctReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

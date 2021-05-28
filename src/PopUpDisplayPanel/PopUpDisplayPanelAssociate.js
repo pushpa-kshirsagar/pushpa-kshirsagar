@@ -49,7 +49,8 @@ import {
   NODE_POPUP_OPTION,
   SELF_POPUP,
   GROUP_TYPE_POPUP_OPTION,
-  ANALYTICS_POPUP
+  ANALYTICS_POPUP,
+  MINE_REVIEW
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -141,6 +142,14 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = setAssociateCardPermissionInJson(MODULE_POPUP_OPTION, assesseePermission);
       reviseSecondaryOptionCheckValue = 'all';
     }
+    if (clickValue === 'mine' || clickValue === 'interviews' || clickValue === 'marketplace') {
+      revisePopupHeaderOne = clickValue;
+      revisepopupHeaderOneBadgeOne = '';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = MODULE_POPUP_OPTION;
+      reviseSecondaryOptionCheckValue = 'all';
+    }
     if (clickValue === 'notifications' || clickValue === 'reports') {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = 'review';
@@ -150,7 +159,9 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseSecondaryOptionCheckValue = 'unread';
     }
     if (
-      (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
+      (popupHeaderOne === 'administrators' ||
+        popupHeaderOne === 'managers' ||
+        popupHeaderOne === 'interviews') &&
       clickValue === 'review'
     ) {
       revisePopupHeaderOne = popupHeaderOne;
@@ -158,21 +169,6 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = REVIEW_POPUP_OPTIONS;
-      reviseSecondaryOptionCheckValue = 'active';
-    }
-    if (
-      (popupHeaderOne === 'groups' ||
-        popupHeaderOne === 'nodes' ||
-        popupHeaderOne === 'roles' ||
-        popupHeaderOne === 'types') &&
-      clickValue === 'review'
-    ) {
-      revisePopupHeaderOne = secondaryOptionCheckValue;
-      revisepopupHeaderOneBadgeOne = popupHeaderOne;
-      revisepopupHeaderOneBadgeTwo = 'review';
-      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
-      revisePopupType = 'secondary';
-      valueArr = REVIEW_DISTINCT_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'active';
     }
     if (clickValue === 'associatereview' || clickValue === 'associaterevise') {
@@ -251,23 +247,24 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = EXCHANGE_POPUP_OPTION;
-      reviseSecondaryOptionCheckValue = 'assessees';
+      reviseSecondaryOptionCheckValue = '';
     }
-    if (clickValue === 'download' || clickValue === 'upload') {
-      revisePopupHeaderOne = 'assessee';
+    if (
+      ((clickValue === 'download' || clickValue === 'upload') &&
+        secondaryOptionCheckValue === 'assessee') ||
+      secondaryOptionCheckValue === 'associates' ||
+      secondaryOptionCheckValue === 'assessments' ||
+      secondaryOptionCheckValue === 'assignments' ||
+      secondaryOptionCheckValue === 'culture profiles' ||
+      secondaryOptionCheckValue === 'job profiles' ||
+      secondaryOptionCheckValue === 'items'
+    ) {
+      revisePopupHeaderOne = secondaryOptionCheckValue;
       revisepopupHeaderOneBadgeOne = clickValue;
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = REVIEW_POPUP_OPTIONS;
-      reviseSecondaryOptionCheckValue = 'unread';
-    }
-    if (clickValue === 'marketplace') {
-      revisePopupHeaderOne = 'marketplace';
-      revisepopupHeaderOneBadgeOne = '';
-      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
-      revisePopupType = 'secondary';
-      valueArr = MARKETPLACE_POPUP_OPTION;
-      reviseSecondaryOptionCheckValue = 'unread';
+      reviseSecondaryOptionCheckValue = 'active';
     }
     if (
       clickValue === 'information' &&
@@ -373,55 +370,34 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = ANALYTICS_POPUP;
       reviseSecondaryOptionCheckValue = '';
     }
-    if (clickValue === 'create' && popupHeaderOne === 'roles') {
+    if (
+      clickValue === 'create' &&
+      (popupHeaderOne === 'groups' ||
+        popupHeaderOne === 'roles' ||
+        popupHeaderOne === 'types' ||
+        popupHeaderOne === 'items' ||
+        popupHeaderOne === 'analytics' ||
+        popupHeaderOne === 'nodes')
+    ) {
       revisePopupHeaderOne = secondaryOptionCheckValue;
-      revisepopupHeaderOneBadgeOne = 'role';
+      revisepopupHeaderOneBadgeOne = popupHeaderOne;
       revisepopupHeaderOneBadgeTwo = 'create';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = CREATE_INFORMATION_POPUP;
       reviseSecondaryOptionCheckValue = 'key';
     }
-    if (clickValue === 'create' && popupHeaderOne === 'groups') {
+    if (
+      (popupHeaderOne === 'groups' ||
+        popupHeaderOne === 'nodes' ||
+        popupHeaderOne === 'roles' ||
+        popupHeaderOne === 'items' ||
+        popupHeaderOne === 'types') &&
+      clickValue === 'review'
+    ) {
       revisePopupHeaderOne = secondaryOptionCheckValue;
-      revisepopupHeaderOneBadgeOne = 'group';
-      revisepopupHeaderOneBadgeTwo = 'create';
-      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
-      revisePopupType = 'secondary';
-      valueArr = CREATE_INFORMATION_POPUP;
-      reviseSecondaryOptionCheckValue = 'key';
-    }
-    if (clickValue === 'create' && popupHeaderOne === 'types') {
-      revisePopupHeaderOne = secondaryOptionCheckValue;
-      revisepopupHeaderOneBadgeOne = 'type';
-      revisepopupHeaderOneBadgeTwo = 'create';
-      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
-      revisePopupType = 'secondary';
-      valueArr = CREATE_INFORMATION_POPUP;
-      reviseSecondaryOptionCheckValue = 'key';
-    }
-    if (clickValue === 'create' && popupHeaderOne === 'items') {
-      revisePopupHeaderOne = secondaryOptionCheckValue;
-      revisepopupHeaderOneBadgeOne = 'item';
-      revisepopupHeaderOneBadgeTwo = 'create';
-      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
-      revisePopupType = 'secondary';
-      valueArr = CREATE_INFORMATION_POPUP;
-      reviseSecondaryOptionCheckValue = 'key';
-    }
-    if (clickValue === 'create' && popupHeaderOne === 'nodes') {
-      revisePopupHeaderOne = secondaryOptionCheckValue;
-      revisepopupHeaderOneBadgeOne = 'node';
-      revisepopupHeaderOneBadgeTwo = 'create';
-      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
-      revisePopupType = 'secondary';
-      valueArr = CREATE_INFORMATION_POPUP;
-      reviseSecondaryOptionCheckValue = 'key';
-    }
-    if (clickValue === 'review' && popupHeaderOne === 'items') {
-      revisePopupHeaderOne = secondaryOptionCheckValue;
-      revisepopupHeaderOneBadgeOne = 'items';
-      revisepopupHeaderOneBadgeTwo = '';
+      revisepopupHeaderOneBadgeOne = popupHeaderOne;
+      revisepopupHeaderOneBadgeTwo = 'review';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = REVIEW_DISTINCT_POPUP_OPTION;
@@ -436,14 +412,31 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = REVIEW_DISTINCT_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'active';
     }
-    if (clickValue === 'create' && popupHeaderOne === 'analytics') {
-      revisePopupHeaderOne = secondaryOptionCheckValue;
+    if (
+      clickValue === 'create' &&
+      (popupHeaderOne === 'mine' ||
+        popupHeaderOne === 'interviews' ||
+        popupHeaderOne === 'marketplace')
+    ) {
+      revisePopupHeaderOne = popupHeaderOne;
       revisepopupHeaderOneBadgeOne = 'create';
       revisepopupHeaderOneBadgeTwo = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = CREATE_INFORMATION_POPUP;
       reviseSecondaryOptionCheckValue = 'key';
+    }
+    if (
+      clickValue === 'review' &&
+      (popupHeaderOne === 'mine' || popupHeaderOne === 'marketplace')
+    ) {
+      revisePopupHeaderOne = popupHeaderOne;
+      revisepopupHeaderOneBadgeOne = 'review';
+      revisepopupHeaderOneBadgeTwo = '';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = MINE_REVIEW;
+      reviseSecondaryOptionCheckValue = 'active';
     }
     if (
       clickValue === 'create' &&
@@ -661,8 +654,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'distinct' &&
-      ( popupHeaderOne === 'assignments' ||
-        // popupHeaderOne === 'associates' ||
+      (popupHeaderOne === 'assignments' ||
+        popupHeaderOne === 'associates' ||
         popupHeaderOne === 'assessments' ||
         popupHeaderOne === 'assessees') &&
       popupHeaderOneBadgeOne === 'types'
@@ -850,7 +843,9 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: POPUP_CLOSE });
     } else {
       if (
-        (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers') &&
+        (popupHeaderOne === 'administrators' ||
+          popupHeaderOne === 'managers' ||
+          popupHeaderOne === 'interviews') &&
         (popupHeaderOneBadgeOne === 'review' || popupHeaderOneBadgeOne === 'create')
       ) {
         revisePopupHeaderOne = popupHeaderOne;
@@ -913,7 +908,13 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupType = 'secondary';
       }
       if (
-        popupHeaderOne === 'assessee' &&
+        (popupHeaderOne === 'assessee' ||
+          popupHeaderOne === 'associates' ||
+          popupHeaderOne === 'assessments' ||
+          popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'culture profiles' ||
+          popupHeaderOne === 'job profiles' ||
+          popupHeaderOne === 'items') &&
         (popupHeaderOneBadgeOne === 'upload' || popupHeaderOneBadgeOne === 'download')
       ) {
         revisePopupHeaderOne = 'exchange';
@@ -929,7 +930,16 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupHeaderOne = 'analytics';
         revisepopupHeaderOneBadgeOne = '';
         valueArr = ANALYTICS_POPUP;
-        revisePopupType = '';
+        revisePopupType = 'secondary';
+      }
+      if (
+        (popupHeaderOne === 'mine' || popupHeaderOne === 'marketplace') &&
+        (popupHeaderOneBadgeOne === 'review' || popupHeaderOneBadgeOne === 'create')
+      ) {
+        revisePopupHeaderOne = popupHeaderOne;
+        revisepopupHeaderOneBadgeOne = '';
+        valueArr = MODULE_POPUP_OPTION;
+        revisePopupType = 'secondary';
       }
       dispatch({
         type: SET_POPUP_STATE,

@@ -22,7 +22,8 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_REQUEST_OBJECT,
-  GET_TYPE_GROUP_REVIEW_LIST_SAGA
+  GET_TYPE_GROUP_REVIEW_LIST_SAGA,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import {
   makeAdministratorRoleCreateObj,
@@ -1081,12 +1082,25 @@ export const assesseeCreateApiCalls = (
       isMiddlePaneList: false
     }
   });
+  let typeRequestObj = makeAssesseeTypeObj(selectedAssociateInfo, 'all', 0, -1);
+  dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typeRequestObj });
   dispatch({
     type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
     payload: {
       stateName: 'assesseeGroup',
       actualStateName: 'assesseeGroupPrimary',
       value: []
+    }
+  });
+  dispatch({
+    type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
+    payload: {
+      middlePaneHeader: '',
+      request: typeRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
     }
   });
   dispatch({
@@ -1102,6 +1116,14 @@ export const assesseeCreateApiCalls = (
     payload: {
       stateName: 'assesseeNode',
       actualStateName: 'assesseeNodePrimary',
+      value: []
+    }
+  });
+  dispatch({
+    type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'assesseeType',
+      actualStateName: 'assesseeTypePrimary',
       value: []
     }
   });

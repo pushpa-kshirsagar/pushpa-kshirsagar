@@ -28,6 +28,7 @@ import {
   getAssociateGroupDistinctApiCall,
   getAssociateNodeApiCall,
   getAssociateRoleDistinctApiCall,
+  getAssociatesTypeApiCall,
   getInternalNodeApiCall
 } from '../Actions/AssociateModuleAction';
 const PopUpMiddlePaneTrippleDot = (props) => {
@@ -278,6 +279,16 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           'roles'
         );
         dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
+        getAssociatesTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          'associates'
+        );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'groups') {
         getAssociateGroupDistinctApiCall(
           selectedAssociateInfo,
@@ -305,6 +316,16 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           'nodes',
           'distinct',
           'hierarchy'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'types') {
+        getAssociatesTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          'associates'
         );
         dispatch({ type: POPUP_CLOSE });
       } else {

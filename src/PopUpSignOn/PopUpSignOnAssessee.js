@@ -56,7 +56,8 @@ const PopUpSignOnAssessee = (props) => {
     coreGroupReviewListData,
     selectedAssociateInfo,
     coreRoleReviewListData,
-    coreNodeReviewListData
+    coreNodeReviewListData,
+    coreTypeReviewListData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { reviewMode, statusPopUpValue = '', responseObject } = useSelector(
     (state) => state.DisplayPaneThreeReducer
@@ -256,6 +257,31 @@ const PopUpSignOnAssessee = (props) => {
     });
   };
 
+  const updateTypeIdObject = (e) => {
+    // console.log(e.currentTarget.getAttribute('tag'));
+    // console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRoleSecondary);
+    let typeid = e.currentTarget.getAttribute('tag');
+    let typeArr = assesseeInfo.informationAllocation.assesseeType.assesseeTypeSecondary;
+    console.log(typeArr.includes(typeid));
+    setRoleSelectedError('');
+    if (typeArr.includes(typeid)) {
+      document.getElementById(typeid).style.backgroundColor = 'white';
+      typeArr = typeArr.filter(function (number) {
+        return number !== typeid;
+      });
+    } else {
+      typeArr.push(typeid);
+      document.getElementById(typeid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assesseeType',
+        actualStateName: 'assesseeTypeSecondary',
+        value: typeArr
+      }
+    });
+  };
   const updateRoleIdSecondaryObject = (e) => {
     // console.log(e.currentTarget.getAttribute('tag'));
     // console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRoleSecondary);
@@ -591,14 +617,10 @@ console.log('associateTagPrimary',associateTagPrimary);
         inputHeader={'type'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a type'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreTypeReviewListData}
+        textOne={'assesseeTypeName'}
+        textTwo={'assesseeTypeDescription'}
+        onClickEvent={updateTypeIdObject}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddressEmail
