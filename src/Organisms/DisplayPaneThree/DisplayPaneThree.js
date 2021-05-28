@@ -31,7 +31,9 @@ import {
   CLEAR_GROUP_REDUCER_STATE,
   CLEAR_ROLE_REDUCER_STATE,
   CLEAR_NODE_REDUCER_STATE,
-  CLEAR_TYPE_REDUCER_STATE
+  CLEAR_TYPE_REDUCER_STATE,
+  ASSESSMENT_INFO_REVISE_SAGA,
+  ASSIGNMENT_INFO_REVISE_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -70,7 +72,10 @@ import {
   getAssesseeNodeAssesseeReqObj,
   getAssesseeRoleAssesseeReqObj
 } from '../../Actions/AssesseeModuleAction';
-import { getAssociateGroupAssociateReqObj, getAssociateRoleAssociateReqObj } from '../../Actions/AssociateModuleAction';
+import {
+  getAssociateGroupAssociateReqObj,
+  getAssociateRoleAssociateReqObj
+} from '../../Actions/AssociateModuleAction';
 import DisplayPaneThreeSectionOneAssesseeType from '../../Molecules/DisplayPaneThreeSectionOneAssesseeType/DisplayPaneThreeSectionOneAssesseeType';
 import DisplayPaneThreeSectionOneAssociateType from '../../Molecules/DisplayPaneThreeSectionOneAssociateType/DisplayPaneThreeSectionOneAssociateType';
 import DisplayPaneThreeSectionTwoAssesseeType from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeType/DisplayPaneThreeSectionTwoAssesseeType';
@@ -94,6 +99,8 @@ export const DisplayPaneThree = () => {
   const { typeOfMiddlePaneList, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
+  const assessmentInfo = useSelector((state) => state.AssessmentReducer);
+  const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { informationBasic } = responseObject;
   const rightPaneSectionsAssessee = [
     {
@@ -612,6 +619,48 @@ export const DisplayPaneThree = () => {
         type: ASSESSEE_GROUP_INFO_REVISE_SAGA,
         payload: { headerOne: 'assessees', assesseeGroupAssesseeReqBody, reqBody, createMode }
       });
+    } else if (headerOneBadgeOne === 'information' && headerOne === 'assessment') {
+      const { informationBasic } = assessmentInfo;
+      const { id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId: id,
+        assessment: {
+          id,
+          informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assessment',
+          reqBody,
+          createMode
+        }
+      });
+    } else if (headerOneBadgeOne === 'information' && headerOne === 'assignment') {
+      const { informationBasic } = assignmentInfo;
+      const { id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId: id,
+        assignment: {
+          id,
+          informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSIGNMENT_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assignment',
+          reqBody,
+          createMode
+        }
+      });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'associate') {
       const { informationBasic, informationContact, informationSetup } = associateInfo;
       const { id } = responseObject;
@@ -1004,6 +1053,53 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseAssessmentBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+  };
+  const reviseAssignmentBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+  };
+
   const reviseAssociateTypeBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
@@ -1367,6 +1463,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssessmentBasicInformation}
                 />
               </div>
               <Sections
@@ -1413,6 +1510,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  onClickRevise={reviseAssignmentBasicInformation}
                 />
               </div>
               <Sections

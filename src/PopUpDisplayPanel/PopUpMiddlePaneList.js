@@ -314,6 +314,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSESSMENT_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -346,6 +347,7 @@ const PopUpMiddlePaneList = (props) => {
           type: GET_ASSIGNMENT_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

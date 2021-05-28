@@ -23,6 +23,7 @@ const AssessmentCreatePopup = (props) => {
   const { informationBasic, informationAllocation } = useSelector(
     (state) => state.AssessmentReducer
   );
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({
@@ -107,6 +108,7 @@ const AssessmentCreatePopup = (props) => {
         basicInfo={informationBasic}
         typeOfSetObject={SET_ASSESSMENT_BASIC_REDUCER_STATE}
         isRequired={true}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
@@ -119,6 +121,7 @@ const AssessmentCreatePopup = (props) => {
         basicInfo={informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={SET_ASSESSMENT_BASIC_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
@@ -127,6 +130,7 @@ const AssessmentCreatePopup = (props) => {
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={''}
         nextPopUpValue={'GROUPPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPPOPUP'}
@@ -141,6 +145,7 @@ const AssessmentCreatePopup = (props) => {
         textOne={'assessmentGroupName'}
         textTwo={'assessmentGroupDescription'}
         onClickEvent={updateAssessmentGroups}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPOPUP'}
@@ -159,6 +164,7 @@ const AssessmentCreatePopup = (props) => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'NODEPOPUP'}
@@ -177,6 +183,7 @@ const AssessmentCreatePopup = (props) => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
         isActive={isPopUpValue === 'TYPEPOPUP'}
@@ -191,6 +198,7 @@ const AssessmentCreatePopup = (props) => {
         textOne={'assessmentTypeName'}
         textTwo={'assessmentTypeDescription'}
         onClickEvent={updateAssessmentTypes}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation
         isActive={isPopUpValue === 'CANCELPOPUP'}

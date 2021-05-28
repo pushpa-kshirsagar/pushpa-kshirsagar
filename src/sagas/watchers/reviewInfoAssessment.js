@@ -2,13 +2,15 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
-  GET_ASSIGNMENT_INFO_SAGA
+  GET_ASSESSMENT_INFO_SAGA,
+  SET_ASSESSMENT_BASIC_REDUCER_STATE,
+  ASSESSMENT_INFO_REVISE_SAGA
 } from '../../actionType';
-import { ASSIGNMENT_REVIEW_INFO_URL } from '../../endpoints';
+import { ASSESSMENT_REVIEW_INFO_URL, ASSESSMENT_REVISE_INFO_URL } from '../../endpoints';
 
-const assignmentReviewInfoApi = async (requestObj) => {
+const assessmentReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSIGNMENT_REVIEW_INFO_URL;
+  let URL = ASSESSMENT_REVIEW_INFO_URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -21,19 +23,66 @@ const assignmentReviewInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviewInfoAssignmentSaga(data) {
+function* workerReviewInfoAssessmentSaga(data) {
   try {
-    const userResponse = yield call(assignmentReviewInfoApi, { data: data.payload.reqBody });
+    const userResponse = yield call(assessmentReviewInfoApi, { data: data.payload.reqBody });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      console.log('ASSIGNMENT_REVIEW_INFO=======>', userResponse);
+      const { isReviseMode = false } = data.payload;
+      console.log('ASSESSMENT_REVIEW_INFO=======>', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assignment',
+          headerOne: 'assessment',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject
+          responseObject: userResponse.responseObject[0],
+          reviewMode: isReviseMode ? 'revise' : ''
+        }
+      });
+      if (isReviseMode) {
+        yield put({
+          type: SET_ASSESSMENT_BASIC_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
+const assessmentReviseInfoApi = async (requestObj) => {
+  console.log(requestObj.data);
+  let URL = ASSESSMENT_REVISE_INFO_URL;
+  const requestOptions = {
+    method: 'POST',
+    headers: new Headers({
+      Authorization: localStorage.getItem('token')
+    }),
+    body: JSON.stringify(requestObj.data)
+  };
+  const response = await fetch(URL, requestOptions);
+  const json = await response.json();
+  return json;
+};
+
+function* workerReviseInfoAssessmentSaga(data) {
+  try {
+    const userResponse = yield call(assessmentReviseInfoApi, { data: data.payload.reqBody });
+    if (userResponse.responseCode === '000') {
+      const { createMode } = data.payload;
+      yield put({
+        type: SET_DISPLAY_PANE_THREE_STATE,
+        payload: {
+          headerOne: 'assessment',
+          headerOneBadgeOne: 'information',
+          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+          responseObject: userResponse.responseObject,
+          createMode
         }
       });
     }
@@ -46,7 +95,7 @@ function* workerReviewInfoAssignmentSaga(data) {
   }
 }
 
-export default function* watchReviewInfoAssignmentSaga() {
-  console.log('IN WATCH ====>');
-  yield takeLatest(GET_ASSIGNMENT_INFO_SAGA, workerReviewInfoAssignmentSaga);
+export default function* watchReviewInfoAssessmentSaga() {
+  yield takeLatest(GET_ASSESSMENT_INFO_SAGA, workerReviewInfoAssessmentSaga);
+  yield takeLatest(ASSESSMENT_INFO_REVISE_SAGA, workerReviseInfoAssessmentSaga);
 }

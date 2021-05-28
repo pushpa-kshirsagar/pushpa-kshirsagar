@@ -5,6 +5,7 @@ import {
   CREATE_ASSESSMENT_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
+  SET_ASSESSMENT_BASIC_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE
 } from '../../actionType';
@@ -39,10 +40,14 @@ function* workerCreateAssessmentSaga(data) {
           createMode: 'assessment'
         }
       });
+      yield put({
+        type: SET_ASSESSMENT_BASIC_REDUCER_STATE,
+        payload: apiResponse.responseObject[0].informationBasic
+      });
     }
     yield put({ type: LOADER_STOP });
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    yield put({ type: CLEAR_ASSESSMENT_INFO });
+    // yield put({ type: CLEAR_ASSESSMENT_INFO });
     yield put({ type: POPUP_CLOSE });
   } catch (e) {
     console.log('ERROR==', e);

@@ -10,13 +10,23 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   const [listExpand, setListExpand] = useState('');
   const { headerOneBadgeTwo, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
 
-  const list3 = [
+  const frameworkAll = [
     {
       id: 'a1',
       labelTextOneOne: 'communiqué',
       isListCard: true,
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
@@ -93,7 +103,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       IconOne: null
     }
   ];
-  const list4 = [
+  const frameworkKey = [
     {
       id: 'a2',
       labelTextOneOne: 'item',
@@ -168,21 +178,21 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     >
       {headerOneBadgeTwo === 'all' ? (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className={'containerPadding'}>
             <AllocationAccordian
               headerOne="framework"
               isDisplayCardExpanded={listExpand === 'framework'}
               setListExpand={setListExpand}
-              list={list3}
+              list={frameworkAll}
               mode={reviewMode}
             />
           </div>
         </>
       ) : (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className={'containerPadding'}>
             <Paper className={'dossierContainerTop'}>
-              {list4.map((ob) => {
+              {frameworkKey.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
