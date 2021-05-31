@@ -358,7 +358,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeTwo = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = GROUP_TYPE_POPUP_OPTION;
+      valueArr = MODULE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = '';
     }
     if (clickValue === 'analytics') {
@@ -375,7 +375,6 @@ const PopUpDisplayPanelAssociate = (props) => {
       (popupHeaderOne === 'groups' ||
         popupHeaderOne === 'roles' ||
         popupHeaderOne === 'types' ||
-        popupHeaderOne === 'items' ||
         popupHeaderOne === 'analytics' ||
         popupHeaderOne === 'nodes')
     ) {
@@ -387,15 +386,24 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = CREATE_INFORMATION_POPUP;
       reviseSecondaryOptionCheckValue = 'key';
     }
+    if ((clickValue === 'create' || clickValue === 'review') && popupHeaderOne === 'items') {
+      revisePopupHeaderOne = popupHeaderOne;
+      revisepopupHeaderOneBadgeOne = clickValue;
+      revisepopupHeaderOneBadgeTwo = '';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = clickValue === 'create' ? CREATE_INFORMATION_POPUP : REVIEW_DISTINCT_POPUP_OPTION;
+      reviseSecondaryOptionCheckValue = clickValue === 'create' ? 'key' : 'active';
+    }
     if (
       (popupHeaderOne === 'groups' ||
         popupHeaderOne === 'nodes' ||
         popupHeaderOne === 'roles' ||
-        popupHeaderOne === 'items' ||
         popupHeaderOne === 'types') &&
       clickValue === 'review'
     ) {
-      revisePopupHeaderOne = secondaryOptionCheckValue;
+      revisePopupHeaderOne =
+        secondaryOptionCheckValue === 'associate' ? 'associates' : secondaryOptionCheckValue;
       revisepopupHeaderOneBadgeOne = popupHeaderOne;
       revisepopupHeaderOneBadgeTwo = 'review';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
@@ -404,8 +412,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseSecondaryOptionCheckValue = 'active';
     }
     if (clickValue === 'review' && popupHeaderOne === 'analytics') {
-      revisePopupHeaderOne = secondaryOptionCheckValue;
-      revisepopupHeaderOneBadgeOne = 'review';
+      revisePopupHeaderOne = 'review';
+      revisepopupHeaderOneBadgeOne = '';
       revisepopupHeaderOneBadgeTwo = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
@@ -623,7 +631,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'distinct' &&
-      popupHeaderOne === 'associate' &&
+      popupHeaderOne === 'associates' &&
       popupHeaderOneBadgeOne === 'nodes'
     ) {
       getInternalNodeApiCall(
@@ -933,7 +941,9 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupType = 'secondary';
       }
       if (
-        (popupHeaderOne === 'mine' || popupHeaderOne === 'marketplace') &&
+        (popupHeaderOne === 'mine' ||
+          popupHeaderOne === 'marketplace' ||
+          popupHeaderOne === 'items') &&
         (popupHeaderOneBadgeOne === 'review' || popupHeaderOneBadgeOne === 'create')
       ) {
         revisePopupHeaderOne = popupHeaderOne;

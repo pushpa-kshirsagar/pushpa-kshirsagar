@@ -44,13 +44,6 @@ function* workerReviewAssesseeTypeListSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: data.payload.isMiddlePaneList
-          ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_TYPE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject
-      });
-
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -66,6 +59,12 @@ function* workerReviewAssesseeTypeListSaga(data) {
           }
         });
       }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_TYPE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -88,13 +87,6 @@ function* workerReviewAssociateTypeListSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: data.payload.isMiddlePaneList
-          ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_TYPE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject
-      });
-
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -110,6 +102,12 @@ function* workerReviewAssociateTypeListSaga(data) {
           }
         });
       }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_TYPE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -133,13 +131,6 @@ function* workerReviewAssessmentTypeListSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: data.payload.isMiddlePaneList
-          ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_TYPE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject
-      });
-
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -155,6 +146,12 @@ function* workerReviewAssessmentTypeListSaga(data) {
           }
         });
       }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_TYPE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -178,13 +175,6 @@ function* workerReviewAssignmentTypeListSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: data.payload.isMiddlePaneList
-          ? REVIEWLIST_DISTINCT_DATA
-          : SET_CORE_TYPE_REVIEW_LIST_DATA,
-        payload: userResponse.responseObject
-      });
-
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -200,6 +190,12 @@ function* workerReviewAssignmentTypeListSaga(data) {
           }
         });
       }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_TYPE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

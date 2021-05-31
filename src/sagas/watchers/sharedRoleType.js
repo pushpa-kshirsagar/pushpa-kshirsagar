@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  SHARE_ROLES_SAGA,
+  SHARE_ROLES_TYPES_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   LOADER_STOP,
   SET_POPUP_VALUE,
@@ -11,7 +11,11 @@ import {
   ASSESSEE_ROLE_SHARE_URL,
   ASSESSEE_ROLE_UNSHARE_URL,
   ASSOCIATE_ROLE_SHARE_URL,
-  ASSOCIATE_ROLE_UNSHARE_URL
+  ASSOCIATE_ROLE_UNSHARE_URL,
+  ASSOCIATE_TYPE_SHARE_URL,
+  ASSOCIATE_TYPE_UNSHARE_URL,
+  ASSESSEE_TYPE_SHARE_URL,
+  ASSESSEE_TYPE_UNSHARE_URL
 } from '../../endpoints';
 import Store from '../../store';
 
@@ -28,20 +32,32 @@ const sharedApiCall = async (requestObj) => {
   return json;
 };
 
-function* workerRoleShareSaga(data) {
+function* workerRoleTypeShareSaga(data) {
   try {
     let APIURL = '';
-    if (data.payload.shareValue === 'assessee') {
+    if (data.payload.shareValue === 'assesseeRole') {
       APIURL =
         data.payload.apiCall === 'shareApiCall'
           ? ASSESSEE_ROLE_SHARE_URL
           : ASSESSEE_ROLE_UNSHARE_URL;
     }
-    if (data.payload.shareValue === 'associate') {
+    if (data.payload.shareValue === 'associateRole') {
       APIURL =
         data.payload.apiCall === 'shareApiCall'
           ? ASSOCIATE_ROLE_SHARE_URL
           : ASSOCIATE_ROLE_UNSHARE_URL;
+    }
+    if (data.payload.shareValue === 'assesseeType') {
+      APIURL =
+        data.payload.apiCall === 'shareApiCall'
+          ? ASSESSEE_TYPE_SHARE_URL
+          : ASSESSEE_TYPE_UNSHARE_URL;
+    }
+    if (data.payload.shareValue === 'associateType') {
+      APIURL =
+        data.payload.apiCall === 'shareApiCall'
+          ? ASSOCIATE_TYPE_SHARE_URL
+          : ASSOCIATE_TYPE_UNSHARE_URL;
     }
     const userResponse = yield call(sharedApiCall, {
       data: data.payload.request,
@@ -80,6 +96,6 @@ function* workerRoleShareSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
-export default function* watchRoleShareSaga() {
-  yield takeLatest(SHARE_ROLES_SAGA, workerRoleShareSaga);
+export default function* watchRoleTypeShareSaga() {
+  yield takeLatest(SHARE_ROLES_TYPES_SAGA, workerRoleTypeShareSaga);
 }

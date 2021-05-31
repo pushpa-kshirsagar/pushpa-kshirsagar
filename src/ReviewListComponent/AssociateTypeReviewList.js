@@ -123,6 +123,8 @@ const AssociateTypeReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  const associateSeftId =
+    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
     <div>
       {reviewListDistinctData &&
@@ -134,11 +136,15 @@ const AssociateTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
+                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 status={item.informationEngagement.associateTypeStatus}
+                // actualStatus={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
                 textOne={item.informationBasic.associateTypeName}
                 textTwo={item.informationBasic.associateTypeDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                // dataValue={item.informationAllocation.associateTypeGroup}
               />
             </div>
           );

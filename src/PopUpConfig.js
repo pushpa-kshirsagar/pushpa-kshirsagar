@@ -358,8 +358,8 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
     permission: 'review'
   },
   {
-    data: 'items',
-    dataValue: 'items',
+    data: 'interviews',
+    dataValue: 'interviews',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -367,8 +367,8 @@ export const ASSOCIATE_CARD_POPUP_OPTION = [
     permission: 'review'
   },
   {
-    data: 'interviews',
-    dataValue: 'interviews',
+    data: 'items',
+    dataValue: 'items',
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false,
@@ -557,6 +557,7 @@ export const ANALYTICS_POPUP = [
     data: 'assessment centres',
     dataValue: 'assessment centres',
     optionClass: 'optionSecondary',
+    divider: 'light',
     disabled: false
   },
   {
@@ -825,6 +826,7 @@ export const EXCHANGE_POPUP_OPTION = [
   {
     data: 'job profiles',
     dataValue: 'job profiles',
+    divider: 'light',
     optionClass: 'optionSecondary',
     disabled: false
   },

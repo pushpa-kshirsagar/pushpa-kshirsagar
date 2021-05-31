@@ -91,7 +91,7 @@ const AssociatesNodeReviewList = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: 'associates',
-        popupHeaderOneBadgeOne: 'node',
+        popupHeaderOneBadgeOne: '',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
