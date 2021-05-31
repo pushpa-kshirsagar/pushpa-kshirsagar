@@ -175,6 +175,7 @@ export const ASSOCIATE_TYPE_SHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/share';
 export const ASSOCIATE_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/unshare';
-export const ASSESSEE_TYPE_SHARE_URL = '';
-export const ASSESSEE_TYPE_UNSHARE_URL = '';
+export const ASSESSEE_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/share';
+export const ASSESSEE_TYPE_UNSHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/unshare';
 // export const URL = '';
