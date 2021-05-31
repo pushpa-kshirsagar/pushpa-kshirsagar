@@ -171,4 +171,10 @@ export const ASSESSEE_TYPE_GROUP_URL =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee-type-group/review-list';
 export const ASSOCIATE_TYPE_GROUP_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-type-group/review-list';
+export const ASSOCIATE_TYPE_SHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/share';
+export const ASSOCIATE_TYPE_UNSHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/unshare';
+export const ASSESSEE_TYPE_SHARE_URL = '';
+export const ASSESSEE_TYPE_UNSHARE_URL = '';
 // export const URL = '';

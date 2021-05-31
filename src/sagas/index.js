@@ -37,7 +37,7 @@ import workerReviseInfoAssociateSaga from './watchers/reviseAssociateInfo';
 import watchcreateNodeSaga from './watchers/createNode';
 import watchReviewAssociatesNodeListSaga from './watchers/reviewListNode';
 import watchReviewAssociateNodeInfoSaga from './watchers/reviewInfoAssociateNode';
-import watchRoleShareSaga from './watchers/sharedRole';
+import workerRoleTypeShareSaga from './watchers/sharedRoleType';
 
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
@@ -77,7 +77,7 @@ export default function* root() {
     fork(watchcreateNodeSaga),
     fork(watchReviewAssociatesNodeListSaga),
     fork(watchReviewAssociateNodeInfoSaga),
-    fork(watchRoleShareSaga),
+    fork(workerRoleTypeShareSaga),
     fork(watchReviewAssesseeTypeInfoSaga),
     fork(watchReviewAssociateTypeInfoSaga)
   ]);
