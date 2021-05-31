@@ -756,7 +756,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       );
 
       clearMiddlePaneInfo();
-    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'role') {
+    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'roles') {
       dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
       getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       dispatch({
@@ -764,7 +764,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
       });
       clearMiddlePaneInfo();
-    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'group') {
+    } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'groups') {
       dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
       dispatch({
         type: SET_POPUP_VALUE,
