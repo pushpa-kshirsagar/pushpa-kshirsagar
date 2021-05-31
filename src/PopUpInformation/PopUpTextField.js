@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -36,12 +36,16 @@ const PopUpTextField = (props) => {
     error: errorMessage,
     isVerified: true
   });
+  const [localObject, setLocalObject] = useState(basicInfo);
+  useEffect(() => {
+    setLocalObject(basicInfo);
+  }, [basicInfo]);
 
   const validateFun = () => {
     let isValidate = true;
     if (isRequired) {
-      if (basicInfo) {
-        if (basicInfo[actualLableValue] === '') {
+      if (localObject) {
+        if (localObject[actualLableValue] === '') {
           setState((prevState) => ({ ...prevState, error: REQUIRED_ERROR_MESSAGE }));
           return false;
         }
@@ -52,7 +56,8 @@ const PopUpTextField = (props) => {
   const handleChange = (event) => {
     if (!isNotRevised) {
       const { name, value } = event.target;
-      dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+      // dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+      setLocalObject({ ...basicInfo, [name]: value });
       setState((prevState) => ({
         ...prevState,
         error: '',
@@ -63,6 +68,7 @@ const PopUpTextField = (props) => {
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
     if (validateFun() && !isNotRevised) {
+      dispatch({ type: typeOfSetObject, payload: { ...localObject } });
       if (reviewMode === 'revise') {
         dispatch({ type: POPUP_CLOSE });
       } else {
@@ -90,7 +96,7 @@ const PopUpTextField = (props) => {
             <InputFeild
               id={actualLableValue}
               label={label}
-              value={basicInfo && isNotRevised ? basicInfo : basicInfo[actualLableValue]}
+              value={basicInfo && isNotRevised ? basicInfo : localObject[actualLableValue]}
               onClick={handleChange}
               errorMsg={state.error}
               labelBadgeOne={labelBadgeOne}
