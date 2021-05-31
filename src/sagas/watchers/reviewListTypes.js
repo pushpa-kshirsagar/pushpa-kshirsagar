@@ -48,7 +48,9 @@ function* workerReviewAssesseeTypeListSaga(data) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: data.payload.middlePaneHeader,
+            middlePaneHeader: data.payload.middlePaneHeader
+              ? data.payload.middlePaneHeader
+              : 'assessees',
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: data.payload.BadgeThree,
