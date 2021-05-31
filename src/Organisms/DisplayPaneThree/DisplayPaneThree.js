@@ -626,12 +626,14 @@ export const DisplayPaneThree = () => {
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'assessees') {
       const { associateId, id } = responseObject;
+      console.log(assesseeType);
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
         assesseeType: {
           id,
-          informationBasic: assesseeType.informationBasic
+          informationBasic: assesseeType.informationBasic,
+          informationAllocation: assesseeType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });
@@ -641,12 +643,14 @@ export const DisplayPaneThree = () => {
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'associates') {
       const { associateId, id } = responseObject;
+      console.log(associateType);
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
         associateType: {
           id,
-          informationBasic: associateType.informationBasic
+          informationBasic: associateType.informationBasic,
+          informationAllocation: associateType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });

@@ -68,6 +68,7 @@ const TypeCreatePopup = (props) => {
       }
     });
   };
+  console.log("CREATE TYPE===", reducerObeject);
   return (
     <div>
       <PopUpTextField

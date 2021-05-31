@@ -6,7 +6,8 @@ import {
   LOADER_STOP,
   SET_ASSESSEE_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_TYPE_GROUP_ALLOCATION
 } from '../../actionType';
 import { ASSESSEE_REVIEW_TYPE_URL, ASSESSEE_REVISE_TYPE_URL } from '../../endpoints';
 import Store from '../../store';
@@ -49,6 +50,15 @@ function* workerReviewAssesseeTypeInfoSaga(data) {
         yield put({
           type: SET_ASSESSEE_TYPE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_TYPE_GROUP_ALLOCATION,
+          payload: {
+            objectName: 'assesseeType',
+            stateName: 'assesseeTypeGroup',
+            value:
+              userResponse?.responseObject[0]?.informationAllocation?.assesseeTypeGroup?.id || ''
+          }
         });
       }
     }

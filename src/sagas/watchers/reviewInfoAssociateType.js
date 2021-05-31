@@ -4,7 +4,8 @@ import {
   GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA,
   LOADER_STOP,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
-  SET_DISPLAY_PANE_THREE_STATE
+  SET_DISPLAY_PANE_THREE_STATE,
+  SET_TYPE_GROUP_ALLOCATION
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_TYPE_URL, ASSOCIATE_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -45,6 +46,15 @@ function* workerReviewAssociateTypeInfoSaga(data) {
         yield put({
           type: SET_ASSOCIATE_TYPE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_TYPE_GROUP_ALLOCATION,
+          payload: {
+            objectName: 'associateType',
+            stateName: 'associateTypeGroup',
+            value:
+              userResponse?.responseObject[0]?.informationAllocation?.associateTypeGroup?.id || ''
+          }
         });
       }
     }
