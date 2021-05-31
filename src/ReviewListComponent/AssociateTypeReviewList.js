@@ -111,7 +111,9 @@ const AssociateTypeReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status'),
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
       }
     });
     dispatch({
@@ -136,15 +138,14 @@ const AssociateTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                status={item.informationEngagement.associateTypeStatus}
-                // actualStatus={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
+                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                // status={item.informationEngagement.associateTypeStatus}
+                actualStatus={item.associateTypeShared ? 'SHARED' : 'UNSHARED'}
                 textOne={item.informationBasic.associateTypeName}
                 textTwo={item.informationBasic.associateTypeDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                // dataValue={item.informationAllocation.associateTypeGroup}
+                dataValue={item.informationAllocation.associateTypeGroup}
               />
             </div>
           );

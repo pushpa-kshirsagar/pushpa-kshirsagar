@@ -5,7 +5,9 @@ import {
   LOADER_STOP,
   SET_POPUP_VALUE,
   SET_REQUEST_OBJECT,
-  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import {
   ASSESSEE_ROLE_SHARE_URL,
@@ -70,9 +72,13 @@ function* workerRoleTypeShareSaga(data) {
       });
       yield put({
         type:
-          data.payload.shareValue === 'assessee'
+          data.payload.shareValue === 'assesseeRole'
             ? GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA
-            : GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+            : data.payload.shareValue === 'associateRole'
+            ? GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'assesseeType'
+            ? GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA
+            : GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
         payload: {
           request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
           BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,

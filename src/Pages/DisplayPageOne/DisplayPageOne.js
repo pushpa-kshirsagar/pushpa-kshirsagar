@@ -44,6 +44,7 @@ import PopUpMessageError from '../../PopUpGeneric/PopUpMessageError';
 import { useHistory } from 'react-router-dom';
 import NodeCreatePopup from '../../Molecules/PopUpCreate/NodeCreatePopup';
 import PopUpMiddlePaneTrippleDot from '../../PopUpDisplayPanel/PopUpMiddlePaneTrippleDot';
+import ItemCreatePopUp from '../../Molecules/PopUpCreate/ItemCreatePopUp';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -293,6 +294,7 @@ const DisplayPageOne = () => {
       {popupMode === 'NODECREATE' && <NodeCreatePopup headerOne={'associate'} />}
       {popupMode === 'ASSIGNMENTCREATE' && <AssignmentCreatePopup headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <AssessmentCreatePopup headerOne={'assessment'} />}
+      {popupMode === 'ITEMCREATE' && <ItemCreatePopUp />}
     </>
   );
 };

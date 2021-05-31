@@ -131,11 +131,9 @@ const TypeCreatePopup = (props) => {
             ? []
             : [reducerObeject?.informationAllocation[allocationObj]]
         }
-        textOne={headerOne === 'assessees' || (headerOne === 'associates' && groupName) || 'name'}
+        textOne={headerOne === 'assessees' || headerOne === 'associates' ? groupName : 'name'}
         textTwo={
-          headerOne === 'assessees' ||
-          (headerOne === 'associates' && groupDescription) ||
-          'description'
+          headerOne === 'assessees' || headerOne === 'associates' ? groupDescription : 'description'
         }
         onClickEvent={updateGroup}
         setErrorMsg={setRequiredErrorMsg}

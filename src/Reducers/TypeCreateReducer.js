@@ -9,15 +9,6 @@ import {
 } from '../actionType';
 
 const initialState = {
-  typeInformation: {
-    informationBasic: {
-      typeName: '',
-      typeNameVerification: false,
-      typeDescription: '',
-      typePicture: '',
-      typePictureVerification: false
-    }
-  },
   assesseeType: {
     informationBasic: {
       assesseeTypeName: '',
@@ -75,14 +66,6 @@ const initialState = {
 const TypeCreateReducer = (istate = initialState, action) => {
   // console.log(action.type);
   switch (action.type) {
-    case SET_TYPE_REDUCER_STATE:
-      return {
-        ...istate,
-        typeInformation: {
-          ...istate.typeInformation,
-          informationBasic: action.payload
-        }
-      };
     case SET_TYPE_GROUP_ALLOCATION:
       return {
         ...istate,

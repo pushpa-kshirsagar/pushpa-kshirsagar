@@ -772,6 +772,13 @@ const PopUpDisplayPanelAssociate = (props) => {
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
       });
       clearMiddlePaneInfo();
+    } else if (clickValue === 'information' && popupHeaderOne === 'items') {
+      // dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ITEMCREATE' }
+      });
+      clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'groups') {
       dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
       dispatch({
