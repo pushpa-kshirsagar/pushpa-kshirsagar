@@ -112,7 +112,7 @@ function* workerReviseAssesseeTypeInfoSaga(data) {
       yield put({
         type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
         payload: {
-          HeaderOne: 'assessees',
+          middlePaneHeader: 'assessees',
           request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
           BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
           BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,

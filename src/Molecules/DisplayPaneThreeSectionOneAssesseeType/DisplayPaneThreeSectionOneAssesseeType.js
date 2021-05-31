@@ -120,7 +120,7 @@ const DisplayPaneThreeSectionOneAssesseeType = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
     if (labelName === 'group') {
-      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'associates');
+      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'assessees');
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'assesseesTYPECREATE' }
