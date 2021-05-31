@@ -62,6 +62,8 @@ function* workerReviseInfoAssociateSaga(data) {
 
       console.log('loading end');
       yield put({ type: LOADER_STOP });
+    } else {
+      yield put({ type: LOADER_STOP });
     }
   } catch (e) {
     console.log('ERROR==', e);

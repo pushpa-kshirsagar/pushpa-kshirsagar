@@ -11,12 +11,9 @@ import {
   GET_ALLOCATE_ASSESSEE,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
-  RELATED_REVIEWLIST_DISTINCT_DATA,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_PAGE_COUNT,
   SET_POPUP_VALUE
 } from '../../actionType';
 import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
@@ -34,9 +31,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     selectedModule,
     responseObject
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { countPage, selectedAssociateInfo, selectedTagValue } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const { informationFramework } = responseObject;
   let ascendantAll = [];
@@ -425,27 +420,6 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a1',
-      labelTextOneOne: 'item',
-      labelTextOneOneBadgeOne: 'group',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'distinct',
-          innerList: []
-        },
-        {
-          labelTextOneOneBadge: 'group',
-          innerList: []
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true
-    },
-    {
-      id: 'a1',
       labelTextOneOne: 'node',
       labelTextOneOneBadges: [
         {
@@ -502,23 +476,6 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           labelTextOneOneBadge: 'distinct',
           innerList: []
         },
-        {
-          labelTextOneOneBadge: 'group',
-          innerList: []
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true
-    },
-    {
-      id: 'a1',
-      labelTextOneOne: 'item',
-      labelTextOneOneBadgeOne: 'group',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'group',
           innerList: []

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { ASSESSEE_SIGN_ON, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import { ASSESSEE_SIGN_ON, SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -129,6 +129,7 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
   ];
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'status') {
       dispatch({
@@ -137,8 +138,36 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
       });
       dispatch({
         type: ASSESSEE_SIGN_ON,
-        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'NODECREATE' }
       });
+    }
+    if (labelName === 'tag') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'NODECREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'NODECREATE' }
+        });
+      }
+    }
+    if (labelName === 'tenure') {
+      if (selectedBadgeName === 'start') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'NODECREATE' }
+        });
+      }
+      if (selectedBadgeName === 'end') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'NODECREATE' }
+        });
+      }
     }
   };
 

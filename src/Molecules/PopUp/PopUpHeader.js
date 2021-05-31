@@ -30,26 +30,31 @@ const PopupHeader = (props) => {
     headerOneBadgeThree,
     onClick,
     mode = 'core',
-    isNotRevised = false
+    isNotRevised = false,
+    onClosePopUpEvent = null
   } = props;
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
 
   const onClose = () => {
-    if (mode === 'cancel' || mode === 'core' || mode === 'confirm') {
-      dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CANCELPOPUP' } });
-    } else if (mode === 'revise') {
-      dispatch({ type: POPUP_CLOSE });
+    if (onClosePopUpEvent !== null) {
+      onClosePopUpEvent();
     } else {
-      dispatch({ type: CLEAR_POPUP_INFO });
-      dispatch({ type: CLEAR_ASSESSEE_INFO });
-      dispatch({ type: CLEAR_ASSESSMENT_INFO });
-      dispatch({ type: POPUP_CLOSE });
-      dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
-      dispatch({ type: CLEAR_ASSOCIATE_INFO });
-      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
-      dispatch({ type: CLEAR_IGAUGE_REDUCER });
+      if (mode === 'cancel' || mode === 'core' || mode === 'confirm') {
+        dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'CANCELPOPUP' } });
+      } else if (mode === 'revise') {
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({ type: CLEAR_POPUP_INFO });
+        dispatch({ type: CLEAR_ASSESSEE_INFO });
+        dispatch({ type: CLEAR_ASSESSMENT_INFO });
+        dispatch({ type: POPUP_CLOSE });
+        dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
+        dispatch({ type: CLEAR_ASSOCIATE_INFO });
+        dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+        dispatch({ type: CLEAR_IGAUGE_REDUCER });
+      }
     }
   };
 

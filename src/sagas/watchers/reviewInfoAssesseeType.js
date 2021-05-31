@@ -2,11 +2,14 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSESSEE_TYPE_INFO_REVISE_SAGA,
   GET_ASSESSEE_TYPE_REVIEW_INFO_SAGA,
+  GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
   LOADER_STOP,
   SET_ASSESSEE_TYPE_REDUCER_STATE,
-  SET_DISPLAY_PANE_THREE_STATE
+  SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../../actionType';
 import { ASSESSEE_REVIEW_TYPE_URL, ASSESSEE_REVISE_TYPE_URL } from '../../endpoints';
+import Store from '../../store';
 
 const assesseeTypeReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -90,6 +93,22 @@ function* workerReviseAssesseeTypeInfoSaga(data) {
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0],
           createMode
+        }
+      });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: 'assessees',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
         }
       });
     }

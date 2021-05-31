@@ -3,21 +3,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Checkbox from '@material-ui/core/Checkbox';
-import InputLabel from '@material-ui/core/InputLabel';
+// import FormHelperText from '@material-ui/core/FormHelperText';
+// import Checkbox from '@material-ui/core/Checkbox';
+// import InputLabel from '@material-ui/core/InputLabel';
 import Person from '@material-ui/icons/Person';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
-import { Avatar } from '@material-ui/core';
-import { Fingerprint } from '@material-ui/icons';
+import { useDispatch } from 'react-redux';
+import { CLEAR_ASSESSEE_INFO, POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
+// import { Avatar } from '@material-ui/core';
+// import { Fingerprint } from '@material-ui/icons';
 import leftHandImg from '../images/lhand.png';
 import rightHandImg from '../images/rhand.png';
 
 const PopUpFingerprint = (props) => {
-  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const [fingerIndex, setfingerIndex] = useState(0);
   const [secondPopup, setSecondPopup] = useState(false);
 
@@ -27,7 +26,6 @@ const PopUpFingerprint = (props) => {
     headerPanelColour = 'genericOne',
     headerOne = 'assessee',
     headerOneBadgeOne = '',
-    headerOneBadgeTwo = '',
     nextPopUpValue,
     handleNextPopupValue,
     mode
@@ -99,14 +97,13 @@ const PopUpFingerprint = (props) => {
       coords: '211,39,249,69'
     }
   ];
-  console.log(leftFingerArea);
 
   const rightFingerArea = [
     {
       title: '1',
       headerTitle: 'right hand 1',
       fingerImg:
-        assesseeRightFingerPrint[0] != undefined
+        assesseeRightFingerPrint[0] !== undefined
           ? 'data:image/png;base64,' + assesseeRightFingerPrint[0].fingerprint
           : null,
       coords: '210,134,259,170'
@@ -152,6 +149,19 @@ const PopUpFingerprint = (props) => {
     setfingerIndex(findex + 1);
     setSecondPopup(true);
   };
+  const onClosePopUp = () => {
+    if (secondPopup === false) {
+      if (mode === 'revise') {
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({ type: POPUP_CLOSE });
+        dispatch({ type: CLEAR_ASSESSEE_INFO });
+      }
+    } else {
+      setSecondPopup(false);
+    }
+  };
+
   return (
     <div>
       <Popup isActive={isActive}>
@@ -162,6 +172,7 @@ const PopUpFingerprint = (props) => {
           headerOneBadgeTwo={secondPopup ? fingerIndex : ''}
           onClick={handleClick}
           mode={mode}
+          onClosePopUpEvent={onClosePopUp}
         />
         <DialogContent className={'popupContent'}>
           <div id="dialog-description">
