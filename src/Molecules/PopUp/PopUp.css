@@ -58,7 +58,7 @@
 .popupContent {
   padding: 2.5px 0px !important;
   text-align: center;
-  max-height: 450px;
+  max-height: 100%;
   overflow: overlay;
   overflow: auto;
 }
@@ -388,7 +388,7 @@
   margin-right: -2px !important;
 }
 .MuiBackdrop-root {
-  top: 74px !important;
+  top: 65px !important;
 }
 .parentDialogue {
   z-index: 1000 !important;
@@ -407,10 +407,18 @@
 .MuiDialog-paperScrollPaper {
   display: flex;
   /* position: fixed !important; */
-  max-height: calc(100% - 64px);
+  max-height: calc(100% - 70px) !important;
   flex-direction: column;
   /* margin: 0px !important; */
   top: 55px;
+}
+.MuiDialog-paper {
+  position: absolute !important;
+  top: 55% !important;
+  overflow-y: auto !important;
+  margin: 0px !important;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 @media (max-width: 360px) {
   /* .popupContent {
@@ -420,6 +428,11 @@
     width: calc(100vw - 64px);
   }
   .MuiDialog-paper {
+    position: absolute !important;
+    top: 55% !important;
+    overflow-y: auto !important;
     margin: 0px !important;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

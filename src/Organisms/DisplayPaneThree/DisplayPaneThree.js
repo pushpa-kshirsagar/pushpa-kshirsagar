@@ -286,6 +286,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsItem = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssociate,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoAssociate,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssessment = [
     {
       id: 'section1',
@@ -357,6 +371,7 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssociate, setSelectedSectionAssociate] = useState(
     rightPaneSectionsAssociate[0]
   );
+  const [selectedSectionItem, setSelectedSectionItem] = useState(rightPaneSectionsItem[0]);
   useEffect(() => {
     setSelectedSection(rightPaneSectionsAssessee[0]);
     setSelectedSectionAssesseeRole(rightPaneSectionsAssesseeRole[0]);
@@ -373,6 +388,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
     setSelectedSectionAssociateNode(rightPaneSectionsAssociateNode[0]);
     setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
+    setSelectedSectionItem(rightPaneSectionsItem[0]);
     setIsShowReviseIcon(true);
   }, [responseObject]);
 
@@ -1948,6 +1964,53 @@ export const DisplayPaneThree = () => {
               />
             )}
             {createMode === 'associate' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssessee}
+                primaryIcon={createAssesseePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'item' &&
+        headerOneBadgeOne === 'information' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={informationBasic?.itemFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.itemName || 'No Information'}
+                  textOneTwo={informationBasic.itemDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  // onClickRevise={reviseAssociateBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsItem}
+                selectedSection={selectedSectionItem}
+                setSelectedSection={setSelectedSectionItem}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'item' && reviewMode !== 'revise' && (
               <FooterIconTwo
                 FilterModeEnable={true}
                 FilterMode={FilterMode}

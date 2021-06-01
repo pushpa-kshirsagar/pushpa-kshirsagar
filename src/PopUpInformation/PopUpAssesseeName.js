@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -32,25 +32,30 @@ const PopUpAssesseeName = (props) => {
     assesseeNameLastErr: '',
     userNameverifyDisable: true
   });
+  const [localObject, setLocalObject] = useState(basicInfo);
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  useEffect(() => {
+    setLocalObject(basicInfo);
+  }, [basicInfo]);
 
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
-    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: checked } });
+    setLocalObject({ ...localObject, [name]: checked });
+    // dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: checked } });
   };
   const validate = () => {
     let isValidate = true;
 
-    if (basicInfo) {
-      if (basicInfo.assesseeNameFirst === '') {
+    if (localObject) {
+      if (localObject.assesseeNameFirst === '') {
         setState((prevState) => ({
           ...prevState,
           assesseeNameFirstErr: REQUIRED_ERROR_MESSAGE
         }));
         isValidate = false;
       }
-      if (basicInfo.assesseeNameLast === '') {
+      if (localObject.assesseeNameLast === '') {
         setState((prevState) => ({
           ...prevState,
           assesseeNameLastErr: REQUIRED_ERROR_MESSAGE
@@ -63,7 +68,8 @@ const PopUpAssesseeName = (props) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+    // dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+    setLocalObject({ ...localObject, [name]: value });
     setState((prevState) => ({
       ...prevState,
       [name + 'Err']: '',
@@ -73,6 +79,7 @@ const PopUpAssesseeName = (props) => {
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
+      dispatch({ type: typeOfSetObject, payload: { ...localObject } });
       if (reviewMode === 'revise') {
         dispatch({ type: POPUP_CLOSE });
       } else {
@@ -80,6 +87,8 @@ const PopUpAssesseeName = (props) => {
       }
     }
   };
+console.log("LOCAL", localObject);
+
   return (
     <div>
       <Popup isActive={isActive}>
@@ -123,28 +132,28 @@ const PopUpAssesseeName = (props) => {
             mappingValue={'name'}
             errorMsg={errorMsg}
             onChange={handleChange}
-            value={basicInfo && basicInfo.assesseeNamePrefix}
+            value={localObject && localObject.assesseeNamePrefix}
           />
           <InputFeild
             id={'assesseeNameFirst'}
             label={'first name'}
             errorMsg={state.assesseeNameFirstErr}
             onClick={handleChange}
-            value={basicInfo && basicInfo.assesseeNameFirst}
+            value={localObject && localObject.assesseeNameFirst}
           />
           <InputFeild
             id={'assesseeNameOther'}
             label={'other name'}
             errorMsg={errorMsg}
             onClick={handleChange}
-            value={basicInfo && basicInfo.assesseeNameOther}
+            value={localObject && localObject.assesseeNameOther}
           />
           <InputFeild
             id={'assesseeNameLast'}
             label={'last name'}
             errorMsg={state.assesseeNameLastErr}
             onClick={handleChange}
-            value={basicInfo && basicInfo.assesseeNameLast}
+            value={localObject && localObject.assesseeNameLast}
           />
           <SelectField
             tag={'assesseeNameSuffix'}
@@ -153,7 +162,7 @@ const PopUpAssesseeName = (props) => {
             mappingValue={'name'}
             errorMsg={errorMsg}
             onChange={handleChange}
-            value={basicInfo && basicInfo.assesseeNameSuffix}
+            value={localObject && localObject.assesseeNameSuffix}
           />
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'popupMinHei0'].join(' ')}>
@@ -174,7 +183,7 @@ const PopUpAssesseeName = (props) => {
                     className={''}
                     color="default"
                     name={'assesseeNameVerification'}
-                    checked={basicInfo && basicInfo.assesseeNameVerification}
+                    checked={localObject && localObject.assesseeNameVerification}
                     disableRipple={true}
                     onChange={handleCheckbox}
                     disabled={popupMode === 'ASSESSEE_SIGN_ON' ? true : state.userNameverifyDisable}

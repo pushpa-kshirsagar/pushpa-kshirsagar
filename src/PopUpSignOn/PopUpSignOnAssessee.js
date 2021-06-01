@@ -63,7 +63,6 @@ const PopUpSignOnAssessee = (props) => {
     (state) => state.DisplayPaneThreeReducer
   );
   const informationContact = assesseeInfo.informationContact;
-  console.log('============>', assesseeInfo);
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const [assignNodeArr, setAssignNodeArr] = useState([]);
   const [defaultNodeId, setdefaultNodeId] = useState([]);
@@ -90,7 +89,7 @@ const PopUpSignOnAssessee = (props) => {
       )
         assesseeInfo.informationAllocation.assesseeRole.assesseeRolePrimary.push(DEFAULT_ROLE_ID);
     }
-    console.log("coreNodeReviewListData",coreNodeReviewListData);
+
     // let rootArr = coreNodeReviewListData.length > 0 && coreNodeReviewListData[0].associateNodeRoot;
     // let descenArr = coreNodeReviewListData.length > 0 && coreNodeReviewListData[0].associateNodeDescendantAll.unshift(rootArr);
     // console.log("rootArr",rootArr);
@@ -771,7 +770,8 @@ console.log('associateTagPrimary',associateTagPrimary);
           { id: 'Suspended', name: 'Suspended' },
           { id: 'Terminated', name: 'Terminated' },
           { id: 'Unverified', name: 'Unverified' },
-          { id: 'Confirmed', name: 'Confirmed' }
+          { id: 'Confirmed', name: 'Confirmed' },
+          { id: 'Unconfirmed', name: 'Unconfirmed' }
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}

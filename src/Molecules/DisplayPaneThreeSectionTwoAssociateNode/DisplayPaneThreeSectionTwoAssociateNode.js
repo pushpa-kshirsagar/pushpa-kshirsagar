@@ -159,7 +159,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
 
   const allModuleList = [
     {
-      id: 'a1',
+      id: 'a1-01',
       labelTextOneOne: 'assessee',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
@@ -180,7 +180,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a2-02',
       labelTextOneOne: 'assessment',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
@@ -201,7 +201,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a3-03',
       labelTextOneOne: 'assignment',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
@@ -222,7 +222,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a4-04',
       labelTextOneOne: 'associate',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
@@ -243,7 +243,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a5-05',
       labelTextOneOne: 'iGuru analytic',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
@@ -264,7 +264,28 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a6-06',
+      labelTextOneOne: 'interview',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a7-07',
       labelTextOneOne: 'item',
       labelTextOneOneBadgeOne: 'group',
       labelTextOneOneBadgeTwo: '',
@@ -285,7 +306,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a8-8',
       labelTextOneOne: 'node',
       labelTextOneOneBadges: [
         {
@@ -352,7 +373,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a2',
       labelTextOneOne: 'node',
       labelTextOneOneBadges: [
         {
@@ -398,7 +419,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   ];
   const assessmentModuleList = [
     {
-      id: 'a1',
+      id: 'a3',
       labelTextOneOne: 'assessment',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
@@ -419,7 +440,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a4',
       labelTextOneOne: 'node',
       labelTextOneOneBadges: [
         {
@@ -465,7 +486,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   ];
   const assignmentModuleList = [
     {
-      id: 'a1',
+      id: 'a5',
       labelTextOneOne: 'assignment',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
@@ -486,7 +507,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isReviewLink: true
     },
     {
-      id: 'a1',
+      id: 'a6',
       labelTextOneOne: 'node',
       labelTextOneOneBadges: [
         {
