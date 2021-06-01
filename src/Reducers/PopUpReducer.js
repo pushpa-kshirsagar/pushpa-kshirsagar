@@ -206,8 +206,7 @@ const PopUpReducer = (istate = initialState, action) => {
         };
       } else if (
         (istate.popupHeaderOne === 'groups' ||
-          istate.popupHeaderOne === 'types' ||
-          istate.popupHeaderOne === 'items') &&
+          istate.popupHeaderOne === 'types') &&
         (action.payload === 'assessees' ||
           action.payload === 'assessments' ||
           action.payload === 'assignments' ||

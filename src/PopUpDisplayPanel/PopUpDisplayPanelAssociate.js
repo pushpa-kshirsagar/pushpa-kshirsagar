@@ -32,7 +32,8 @@ import {
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   CLEAR_NODE_REDUCER_STATE,
   CLEAR_GROUP_REDUCER_STATE,
-  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  CLEAR_ITEM_REDUCER_STATE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -79,6 +80,7 @@ import {
   getRoleGroupReviewListApi,
   getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
+import { getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -108,6 +110,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     } else if (
       popupHeaderOne === 'administrators' ||
       popupHeaderOne === 'managers' ||
+      popupHeaderOne === 'items' ||
+      popupHeaderOne === 'interviews' ||
       popupHeaderOne === 'associate'
     ) {
       dispatch({
@@ -489,6 +493,19 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'distinct' &&
+      popupHeaderOne === 'items' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getItemsDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        popupHeaderOne,
+        dispatch
+      );
+    }
+    if (
+      clickValue === 'distinct' &&
       popupHeaderOne === 'assessees' &&
       popupHeaderOneBadgeOne === 'roles'
     ) {
@@ -779,7 +796,14 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOne === 'items') {
-      // dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
+      dispatch({ type: CLEAR_ITEM_REDUCER_STATE });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'selectedInformationAllorKey',
+          value: secondaryOptionCheckValue
+        }
+      });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ITEMCREATE' }
