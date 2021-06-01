@@ -79,6 +79,7 @@ import {
   getRoleGroupReviewListApi,
   getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
+import { getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -108,6 +109,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     } else if (
       popupHeaderOne === 'administrators' ||
       popupHeaderOne === 'managers' ||
+      popupHeaderOne === 'items' ||
+      popupHeaderOne === 'interviews' ||
       popupHeaderOne === 'associate'
     ) {
       dispatch({
@@ -480,6 +483,19 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOneBadgeOne === 'review'
     ) {
       getAdminManagerDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        popupHeaderOne,
+        dispatch
+      );
+    }
+    if (
+      clickValue === 'distinct' &&
+      popupHeaderOne === 'items' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getItemsDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
         countPage,
