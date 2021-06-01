@@ -33,7 +33,8 @@ import {
   getAssociateRoleDistinctApiCall,
   getAssociateGroupDistinctApiCall,
   associateCreatePopup,
-  getAssociatesTypeApiCall
+  getAssociatesTypeApiCall,
+  getInternalNodeApiCall
 } from '../Actions/AssociateModuleAction';
 
 const PopUpAssociatesModule = (props) => {
@@ -110,22 +111,26 @@ const PopUpAssociatesModule = (props) => {
       );
       clearMiddlePaneInfo();
     } else if (targetValue === 'distinct') {
-      // getAssociateDistinctApiCall(
-      //   selectedAssociateInfo,
-      //   secondaryOptionCheckValue,
-      //   dispatch,
-      //   countPage,
-      //   targetValue
-      // );
-      getAssociateNodeApiCall(
-        selectedAssociateInfo,
-        secondaryOptionCheckValue,
-        countPage,
-        dispatch,
-        targetValue,
-        targetValue,
-        'list'
-      );
+      if (secondaryOptionCheckValue === 'active') {
+        getAssociateNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          targetValue,
+          'distinct',
+          'hierarchy'
+        );
+      } else {
+        getAssociateDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          dispatch,
+          countPage,
+          targetValue
+        );
+      }
+
       resetDataFunction();
       // document.getElementById('middleComponentId').scrollTop = '0px';
     } else if (targetValue === 'roles') {
@@ -147,14 +152,25 @@ const PopUpAssociatesModule = (props) => {
       );
       resetDataFunction();
     } else if (targetValue === 'nodes') {
-      getAssociateNodeApiCall(
+      // getAssociateNodeApiCall(
+      //   selectedAssociateInfo,
+      //   secondaryOptionCheckValue,
+      //   countPage,
+      //   dispatch,
+      //   targetValue,
+      //   'distinct',
+      //   'hierarchy'
+      // );
+
+      getInternalNodeApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
         countPage,
         dispatch,
         targetValue,
-        'distinct',
-        'hierarchy'
+        '',
+        'hierarchy',
+        'associates'
       );
       resetDataFunction();
     } else if (targetValue === 'types') {

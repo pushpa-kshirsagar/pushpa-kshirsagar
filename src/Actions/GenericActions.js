@@ -2186,3 +2186,386 @@ export const makeAssociateNodeObj = (selectedAssociateInfo, filterKey, numberPag
   return requestObj;
 };
 
+export const getAssesseeTypeAssesseeReqObj = (
+  selectedAssociateInfo,
+  typeId,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: [
+            'CONFIRMED',
+            'DISAPPROVED',
+            'SUSPENDED',
+            'TERMINATED',
+            'UNAPPROVED',
+            'UNCONFIRMED',
+            'ARCHIVED',
+            'DELETED'
+          ]
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    typeId: typeId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeType.assesseeTypePrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: typeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeType.assesseeTypeSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: typeId
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+export const getAssesseeTypeAssesseeScanReqObj = (
+  selectedAssociateInfo,
+  typeId,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: [
+            'CONFIRMED',
+            'DISAPPROVED',
+            'SUSPENDED',
+            'TERMINATED',
+            'UNAPPROVED',
+            'UNCONFIRMED',
+            'ARCHIVED',
+            'DELETED'
+          ]
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    typeId: typeId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeType.assesseeTypePrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: typeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assesseeType.assesseeTypeSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: typeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameFirst',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameOther',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeNameLast',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assesseeAlias',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+
+export const getAssociateTypeAssociateReqObj = (
+  selectedAssociateInfo,
+  typeId,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: [
+            'CONFIRMED',
+            'DISAPPROVED',
+            'SUSPENDED',
+            'TERMINATED',
+            'UNAPPROVED',
+            'UNCONFIRMED',
+            'ARCHIVED',
+            'DELETED'
+          ]
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    typeId: typeId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.associateType.associateTypePrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: typeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.associateType.associateTypeSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: typeId
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+export const getAssociateTypeAssociateScanReqObj = (
+  selectedAssociateInfo,
+  typeId,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: [
+            'CONFIRMED',
+            'DISAPPROVED',
+            'SUSPENDED',
+            'TERMINATED',
+            'UNAPPROVED',
+            'UNCONFIRMED',
+            'ARCHIVED',
+            'DELETED'
+          ]
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    typeId: typeId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.associateType.associateTypePrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: typeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.associateType.associateTypeSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: typeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};

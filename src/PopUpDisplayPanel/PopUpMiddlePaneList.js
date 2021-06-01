@@ -47,14 +47,16 @@ import {
   getAssesseeNodeAssesseeDistinctApiCall,
   getAssesseeNodeAssesseeReqObj,
   getAssesseeRoleAssesseeDistinctApiCall,
-  getAssesseeRoleAssesseeReqObj
+  getAssesseeRoleAssesseeReqObj,
+  getAssesseeTypeAssesseeDistinctApiCall
 } from '../Actions/AssesseeModuleAction';
 import {
   associateCreatePopup,
   getAssociateGroupAssociateDistinctApiCall,
   getAssociateGroupAssociateReqObj,
   getAssociateRoleAssociateDistinctApiCall,
-  getAssociateRoleAssociateReqObj
+  getAssociateRoleAssociateReqObj,
+  getAssociateTypeAssociateDistinctApiCall
 } from '../Actions/AssociateModuleAction';
 import { makeInternalNodeObj } from '../Actions/GenericActions';
 const PopUpMiddlePaneList = (props) => {
@@ -708,6 +710,25 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
       }
+      if (typeOfMiddlePaneList === 'assesseesTypeDistinctReviewList') {
+        getAssesseeTypeAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false,
+          middlePaneHeader
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assesseeRoleAssesseeDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
       if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
         getAssesseeNodeAssesseeDistinctApiCall(
           selectedAssociateInfo,
@@ -747,6 +768,24 @@ const PopUpMiddlePaneList = (props) => {
       }
       if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
         getAssociateRoleAssociateDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'associateRoleAssociateDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'associatesTypeDistinctReviewList') {
+        getAssociateTypeAssociateDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,
@@ -897,7 +936,10 @@ const PopUpMiddlePaneList = (props) => {
           payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
         });
       }
-      if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
+      if (
+        typeOfMiddlePaneList === 'associateDistinctReviewList' ||
+        typeOfMiddlePaneList === 'associatesNodeDistinctReviewList'
+      ) {
         let reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:

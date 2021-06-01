@@ -18,7 +18,7 @@ import { FilterList, AccountTree } from '@material-ui/icons';
 import ListIcon from '@material-ui/icons/FormatListBulleted';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
-import { ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION, GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
 import 'react-sortable-tree/style.css';
 import FileExplorerTheme from 'react-sortable-tree-theme-full-node-drag';
@@ -72,7 +72,7 @@ const AssociatesNodeReviewList = (props) => {
     { label: 'list', onClick: onClickFooter, Icon: ListIcon }
   ];
   const openNodeListPopup = (node, event, target, canUpdate) => {
-    let optArr = [...ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION]
+    let optArr = [...GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION]
     let selectedGroup = {};
     let nodeId = node;
     if (target === 'hirarchy') {
