@@ -5,7 +5,7 @@ import PopUpTextField from '../../PopUpInformation/PopUpTextField';
 import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
 import {
   POPUP_CLOSE,
-  CREATE_TYPE_SAGA,
+  CREATE_ITEM_SAGA,
   LOADER_START,
   CLEAR_TYPE_REDUCER_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
@@ -19,9 +19,7 @@ const ItemCreatePopUp = (props) => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { selectedAssociateInfo, coreGroupReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
 
@@ -41,8 +39,8 @@ const ItemCreatePopUp = (props) => {
       item: itemInformation
     };
     console.log('CREATE item api', reqBody);
-    // dispatch({ type: LOADER_START });
-    // dispatch({ type: CREATE_TYPE_SAGA, payload: reqBody });
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ITEM_SAGA, payload: reqBody });
   };
   const updateGroup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
