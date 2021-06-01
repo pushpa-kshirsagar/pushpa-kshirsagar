@@ -126,9 +126,9 @@ export const DisplayPaneTwo = (props) => {
         {typeOfMiddlePaneList === 'associatesRoleAssociateReviewList' && (
           <AssociateRoleAssociateReviewList popupAllClose={popupAllClose} />
         )}
-        {typeOfMiddlePaneList === 'associatesTypeAssociateReviewList' && (
+        {/* {typeOfMiddlePaneList === 'associatesTypeAssociateReviewList' && (
           <AssociateTypeAssociateReviewList popupAllClose={popupAllClose} />
-        )}
+        )} */}
         {typeOfMiddlePaneList === 'associatesNodeDistinctReviewList' && (
           <AssociatesNodeReviewList popupAllClose={popupAllClose} />
         )}
