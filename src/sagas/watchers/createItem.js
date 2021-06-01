@@ -9,7 +9,7 @@ import {
   SET_POPUP_VALUE
 } from '../../actionType';
 import { ITEM_CREATE_URL } from '../../endpoints';
-// import Store from '../../store';
+import Store from '../../store';
 
 const createNodeApi = async (requestObj) => {
   const requestOptions = {
@@ -33,7 +33,7 @@ function* workerCreateItemSaga(data) {
         payload: {
           headerOne: 'item',
           headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: 'all', //Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
+          headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
           headerOneBadgeThree: '',
           responseObject: userResponse.responseObject[0],
           reviewMode: 'revise',
