@@ -32,7 +32,8 @@ import {
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   CLEAR_NODE_REDUCER_STATE,
   CLEAR_GROUP_REDUCER_STATE,
-  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  CLEAR_ITEM_REDUCER_STATE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -795,7 +796,14 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOne === 'items') {
-      // dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
+      dispatch({ type: CLEAR_ITEM_REDUCER_STATE });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'selectedInformationAllorKey',
+          value: secondaryOptionCheckValue
+        }
+      });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ITEMCREATE' }
