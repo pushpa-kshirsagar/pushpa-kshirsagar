@@ -8,6 +8,7 @@ import {
   FILTERMODE,
   GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
@@ -24,6 +25,8 @@ import {
   SET_SINGLE_ASSOCIATE_INFORMATION
 } from '../actionType';
 import {
+  getAssociateTypeAssociateReqObj,
+  getAssociateTypeAssociateScanReqObj,
   makeAssociateGroupObj,
   makeAssociateNodeObj,
   makeAssociateReviewListRequestObject,
@@ -491,6 +494,53 @@ export const getAssociateRoleAssociateDistinctApiCall = (
   });
 };
 
+export const getAssociateTypeAssociateDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = getAssociateTypeAssociateReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getAssociateTypeAssociateScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'associates',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
 export const getAssociateNodeApiCall = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,
@@ -511,17 +561,21 @@ export const getAssociateNodeApiCall = (
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: { stateName: 'nodeViewState', value: nodeViewState }
   });
-  if (targetValue === 'distinct') {
-    dispatch({
-      type: FILTERMODE,
-      payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
-    });
-  } else {
-    dispatch({
-      type: FILTERMODE,
-      payload: { FilterMode: 'associatesNodeDistinct' }
-    });
-  }
+  // if (targetValue === 'distinct') {
+  //   dispatch({
+  //     type: FILTERMODE,
+  //     payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
+  //   });
+  // } else {
+  //   dispatch({
+  //     type: FILTERMODE,
+  //     payload: { FilterMode: 'associatesNodeDistinct' }
+  //   });
+  // }
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'associatesNodeDistinct' }
+  });
 
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });

@@ -13,6 +13,7 @@ import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
@@ -92,6 +93,8 @@ const InternalNodeReviewList = (props) => {
       optArr = [...ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION];
     if (middlePaneHeader === 'assignments')
       optArr = [...ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION];
+    if (middlePaneHeader === 'associates')
+      optArr = [...ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION];
     if (middlePaneHeader === 'associate') {
       let newObj = {
         data: 'create',

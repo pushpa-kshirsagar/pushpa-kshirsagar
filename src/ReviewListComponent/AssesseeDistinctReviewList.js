@@ -125,6 +125,7 @@ const AssesseeDistinctReviewList = (props) => {
       siftValue === 'unconfirmed'
     ) {
       siftApiCall(siftValue);
+      dispatch({ type: FILTERMODE_ENABLE });
     } else if (siftValue === 'flagCancel') {
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,

@@ -8,6 +8,7 @@ import {
   GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+  GET_ASSESSEETYPE_ASSESSEE_REVIEW_LIST,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
@@ -26,6 +27,8 @@ import {
   SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import {
+  getAssesseeTypeAssesseeReqObj,
+  getAssesseeTypeAssesseeScanReqObj,
   makeAdministratorRoleCreateObj,
   makeAdministratorsReviewListRequestObject,
   makeAssesseeGroupObj,
@@ -765,6 +768,55 @@ export const getAssesseeRoleAssesseeDistinctApiCall = (
   // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
   dispatch({
     type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+    payload: {
+      request: reqBody,
+      HeaderOne: middlePaneHeader,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getAssesseeTypeAssesseeDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan,
+  middlePaneHeader
+) => {
+  let reqBody = getAssesseeTypeAssesseeReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getAssesseeTypeAssesseeScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ASSESSEETYPE_ASSESSEE_REVIEW_LIST,
     payload: {
       request: reqBody,
       HeaderOne: middlePaneHeader,

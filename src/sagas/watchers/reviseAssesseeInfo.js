@@ -28,6 +28,7 @@ const assesseesReviseInfoApi = async (requestObj) => {
 
 function* workerReviseInfoAssesseeSaga(data) {
   try {
+    console.log('reviewLsit', data);
     const userResponse = yield call(assesseesReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
       if (data.payload.secondaryOptionCheckValue !== '') {
