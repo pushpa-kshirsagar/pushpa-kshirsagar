@@ -35,7 +35,8 @@ import {
   ASSESSMENT_INFO_REVISE_SAGA,
   ASSIGNMENT_INFO_REVISE_SAGA,
   ASSESSEE_TYPE_INFO_REVISE_SAGA,
-  ASSOCIATE_TYPE_INFO_REVISE_SAGA
+  ASSOCIATE_TYPE_INFO_REVISE_SAGA,
+  CLEAR_ITEM_REDUCER_STATE
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -82,6 +83,8 @@ import DisplayPaneThreeSectionOneAssesseeType from '../../Molecules/DisplayPaneT
 import DisplayPaneThreeSectionOneAssociateType from '../../Molecules/DisplayPaneThreeSectionOneAssociateType/DisplayPaneThreeSectionOneAssociateType';
 import DisplayPaneThreeSectionTwoAssesseeType from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeType/DisplayPaneThreeSectionTwoAssesseeType';
 import DisplayPaneThreeSectionTwoAssociateType from '../../Molecules/DisplayPaneThreeSectionTwoAssociateType/DisplayPaneThreeSectionTwoAssociateType';
+import DisplayPaneThreeSectionOneItem from '../../Molecules/DisplayPaneThreeSectionOneItem/DisplayPaneThreeSectionOneItem';
+import DisplayPaneThreeSectionTwoItem from '../../Molecules/DisplayPaneThreeSectionTwoItem/DisplayPaneThreeSectionTwoItem';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -289,13 +292,13 @@ export const DisplayPaneThree = () => {
   const rightPaneSectionsItem = [
     {
       id: 'section1',
-      sectionComponent: DisplayPaneThreeSectionOneAssociate,
+      sectionComponent: DisplayPaneThreeSectionOneItem,
       displayPaneLeftHeaderText: '',
       displayPaneLeftBadgeText: ''
     },
     {
       id: 'section2',
-      sectionComponent: DisplayPaneThreeSectionTwoAssociate,
+      sectionComponent: DisplayPaneThreeSectionTwoItem,
       displayPaneLeftHeaderText: '',
       displayPaneLeftBadgeText: ''
     }
@@ -863,6 +866,14 @@ export const DisplayPaneThree = () => {
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesROLECREATE' }
     });
   };
+  const onClickCreateItem = () => {
+    console.log('ON CLICK CREATE ITEM');
+    dispatch({ type: CLEAR_ITEM_REDUCER_STATE });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ITEMCREATE' }
+    });
+  };
   const onClickCreateAssociateRole = () => {
     console.log('ON CLICK CREATE ASSOCIATE ROLE');
     dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
@@ -884,6 +895,7 @@ export const DisplayPaneThree = () => {
   const createAssesseePrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessee, Icon: AddIcon }
   ];
+  const createItemPrimaryIcon = [{ label: 'create', onClick: onClickCreateItem, Icon: AddIcon }];
   const createAssessmentPrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessment, Icon: AddIcon }
   ];
@@ -2014,8 +2026,8 @@ export const DisplayPaneThree = () => {
               <FooterIconTwo
                 FilterModeEnable={true}
                 FilterMode={FilterMode}
-                onClick={onClickCreateAssessee}
-                primaryIcon={createAssesseePrimaryIcon}
+                onClick={onClickCreateItem}
+                primaryIcon={createItemPrimaryIcon}
                 secondaryIcon={[]}
               />
             )}

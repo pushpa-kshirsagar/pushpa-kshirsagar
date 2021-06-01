@@ -1,7 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-    CLEAR_ITEM_REDUCER_STATE,
-    CREATE_ITEM_SAGA,
+  CLEAR_ITEM_REDUCER_STATE,
+  CREATE_ITEM_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
@@ -9,6 +9,7 @@ import {
   SET_POPUP_VALUE
 } from '../../actionType';
 import { ITEM_CREATE_URL } from '../../endpoints';
+// import Store from '../../store';
 
 const createNodeApi = async (requestObj) => {
   const requestOptions = {
@@ -30,13 +31,13 @@ function* workerCreateItemSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessment',
-          headerOneBadgeOne: 'item',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'all',
+          headerOne: 'item',
+          headerOneBadgeOne: 'information',
+          headerOneBadgeTwo: 'all', //Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
+          headerOneBadgeThree: '',
           responseObject: userResponse.responseObject[0],
           reviewMode: 'revise',
-          createMode: 'assessmentItem' //`${data.payload.whichTypeCreate}Node`
+          createMode: 'item' //`${data.payload.whichTypeCreate}Node`
         }
       });
       yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
