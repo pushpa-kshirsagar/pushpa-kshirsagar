@@ -91,8 +91,12 @@ export const ASSIGNMENT_CREATE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/create';
 export const ASSIGNMENT_REVIEW_TYPE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/review';
+export const ASSIGNMENT_REVISE_TYPE_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/revise';
 export const ASSESSMENT_REVIEW_TYPE_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/review';
+export const ASSESSMENT_REVISE_TYPE_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/revise';
 export const ASSESSEE_REVIEW_TYPE_URL =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee-type/review';
 export const ASSESSEE_REVISE_TYPE_URL =

@@ -379,7 +379,7 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'itemDistinctReviewList') {
+      if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
         dispatch({
           type: GET_ITEM_INFO_SAGA,
           payload: {

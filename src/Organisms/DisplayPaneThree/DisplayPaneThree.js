@@ -37,7 +37,9 @@ import {
   ASSESSEE_TYPE_INFO_REVISE_SAGA,
   ASSOCIATE_TYPE_INFO_REVISE_SAGA,
   CLEAR_ITEM_REDUCER_STATE,
-  ITEM_INFO_REVISE_SAGA
+  ITEM_INFO_REVISE_SAGA,
+  ASSESSMENT_TYPE_REVISE_INFO_SAGA,
+  ASSIGNMENT_TYPE_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -662,6 +664,38 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSESSEE_TYPE_INFO_REVISE_SAGA,
         payload: { headerOne: 'assessees', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'assessments') {
+      const { associateId, id } = responseObject;
+      console.log(assessmentType);
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        assessmentType: {
+          id,
+          informationBasic: assessmentType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'assessments', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'assignments') {
+      const { associateId, id } = responseObject;
+      console.log(assignmentType);
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        assignmentType: {
+          id,
+          informationBasic: assignmentType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'assignment', reqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'associates') {
       const { associateId, id } = responseObject;

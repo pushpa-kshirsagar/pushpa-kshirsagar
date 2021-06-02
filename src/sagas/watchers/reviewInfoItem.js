@@ -3,7 +3,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
   GET_ITEM_INFO_SAGA,
-  ITEM_INFO_REVISE_SAGA
+  ITEM_INFO_REVISE_SAGA,
+  SET_TYPE_REDUCER_STATE
 } from '../../actionType';
 import { ITEM_REVISE_URL, ITEM_REVIEW_URL } from '../../endpoints';
 
@@ -40,10 +41,10 @@ function* workerReviewInfoItemSaga(data) {
         }
       });
       if (isReviseMode) {
-        // yield put({
-        //   type: SET_ASSESSMENT_BASIC_REDUCER_STATE,
-        //   payload: userResponse.responseObject[0].informationBasic
-        // });
+        yield put({
+          type: SET_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
       }
     }
     console.log('loading end');
