@@ -69,12 +69,7 @@ import {
   makeAssignmentGroupObj,
   makeAssessmentTypeObj,
   makeAssignmentTypeObj,
-  makeAdministratorsReviewListRequestObject,
-  makeManagersReviewListRequestObject,
-  makeAdministratorRoleCreateObj,
-  makeManagerRoleCreateObj,
-  makeInternalNodeObj,
-  getTypeGroupListApi
+  makeInternalNodeObj
 } from '../Actions/GenericActions';
 import { getAssociatesTypeApiCall, getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 import {
@@ -121,6 +116,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'managers' ||
       popupHeaderOne === 'items' ||
       popupHeaderOne === 'interviews' ||
+      // popupHeaderOne === 'exchange' ||
       popupHeaderOne === 'assessment centres' ||
       popupHeaderOne === 'associate'
     ) {
@@ -209,15 +205,15 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = NODE_POPUP_OPTION;
-      reviseSecondaryOptionCheckValue = 'associate';
+      reviseSecondaryOptionCheckValue = 'associates';
     }
     if (
       clickValue === 'groups' &&
       popupHeaderOne !== 'administrators' &&
-      popupHeaderOne !== 'managers'&&
-      popupHeaderOne !== 'assessees'&&
-      popupHeaderOne !== 'assessments'&&
-      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'managers' &&
+      popupHeaderOne !== 'assessees' &&
+      popupHeaderOne !== 'assessments' &&
+      popupHeaderOne !== 'assessments' &&
       popupHeaderOne !== 'items'
     ) {
       revisePopupHeaderOne = clickValue;
@@ -230,10 +226,10 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'types' &&
       popupHeaderOne !== 'administrators' &&
-      popupHeaderOne !== 'managers'&&
-      popupHeaderOne !== 'assessees'&&
-      popupHeaderOne !== 'assessments'&&
-      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'managers' &&
+      popupHeaderOne !== 'assessees' &&
+      popupHeaderOne !== 'assessments' &&
+      popupHeaderOne !== 'assessments' &&
       popupHeaderOne !== 'items'
     ) {
       revisePopupHeaderOne = clickValue;
@@ -246,10 +242,10 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'roles' &&
       popupHeaderOne !== 'administrators' &&
-      popupHeaderOne !== 'managers'&&
-      popupHeaderOne !== 'assessees'&&
-      popupHeaderOne !== 'assessments'&&
-      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'managers' &&
+      popupHeaderOne !== 'assessees' &&
+      popupHeaderOne !== 'assessments' &&
+      popupHeaderOne !== 'assessments' &&
       popupHeaderOne !== 'items'
     ) {
       revisePopupHeaderOne = clickValue;

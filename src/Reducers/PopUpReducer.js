@@ -191,8 +191,7 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload !== 'assessments' &&
         action.payload !== 'assignments' &&
         action.payload !== 'associates' &&
-        action.payload !== 'primary' &&
-        action.payload !== 'secondary' &&
+        action.payload !== 'interviews' &&
         action.payload !== 'analytics' &&
         action.payload !== 'assessment centres' &&
         action.payload !== 'culture profiles' &&
@@ -229,6 +228,7 @@ const PopUpReducer = (istate = initialState, action) => {
           action.payload === 'assessments' ||
           action.payload === 'assignments' ||
           action.payload === 'associates' ||
+          action.payload === 'assessment centres' ||
           action.payload === 'culture profiles' ||
           action.payload === 'job profiles' ||
           action.payload === 'interviews' ||

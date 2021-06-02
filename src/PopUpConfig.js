@@ -786,7 +786,7 @@ export const NODE_POPUP_OPTION = [
     optionClass: 'optionSecondary',
     disabled: true
   },
-  { data: 'associate', dataValue: 'associate', optionClass: 'optionSecondary', disabled: false }
+  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
 ];
 export const EXCHANGE_POPUP_OPTION = [
   { data: 'download', dataValue: 'download', optionClass: 'optionPrimary', disabled: true },
@@ -814,6 +814,12 @@ export const EXCHANGE_POPUP_OPTION = [
     data: 'associates',
     dataValue: 'associates',
     divider: 'light',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'assessment centres',
+    dataValue: 'assessment centres',
     optionClass: 'optionSecondary',
     disabled: false
   },
