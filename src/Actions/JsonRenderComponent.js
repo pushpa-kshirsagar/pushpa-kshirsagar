@@ -26,7 +26,7 @@ const JsonRenderComponent = (props) => {
                     <Button
                       className={item.optionClass}
                       data-value={item.dataValue}
-                      data-key={item.dataKey?item.dataKey:item.dataValue}
+                      data-key={item.dataKey ? item.dataKey : item.dataValue}
                       onClick={
                         item.optionClass === 'optionSecondary'
                           ? setSecondaryOptionValue
@@ -42,7 +42,7 @@ const JsonRenderComponent = (props) => {
                         </IconButton>
                       ) : null}
                     </Button>
-                    {item.divider && <Divider {...item.divider} key={index} />}
+                    {item.divider && <Divider light={item.divider === 'light'} key={index} />}
                   </div>
                 );
               })}

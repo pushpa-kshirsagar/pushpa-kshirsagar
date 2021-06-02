@@ -82,10 +82,12 @@ export const DisplayPaneOne = () => {
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
     let popupHeaderOne = '';
+    let popupHeaderOneBadgeOne = '';
     let value = '';
     if (e.currentTarget.getAttribute('data-value') !== '') {
       if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
         popupHeaderOne = 'assessee';
+        popupHeaderOneBadgeOne = 'self';
         popupContentArrValue = setAssesseeCardPermissionInJson(
           ASSESSEE_CARD_POPUP_OPTIONS,
           assesseePermission
@@ -94,6 +96,7 @@ export const DisplayPaneOne = () => {
       }
       if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
         popupHeaderOne = 'associate';
+        popupHeaderOneBadgeOne = 'self';
         popupContentArrValue = ASSOCIATE_CARD_POPUP_OPTION;
         // popupContentArrValue = setAssociateCardPermissionInJson(
         //   ASSOCIATE_CARD_POPUP_OPTION,
@@ -106,7 +109,7 @@ export const DisplayPaneOne = () => {
         type: SET_POPUP_STATE,
         payload: {
           popupHeaderOne: popupHeaderOne,
-          popupHeaderOneBadgeOne: '',
+          popupHeaderOneBadgeOne: popupHeaderOneBadgeOne,
           isPopUpValue: value,
           popupOpenType: 'primary',
           popupContentArrValue: popupContentArrValue,

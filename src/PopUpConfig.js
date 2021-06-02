@@ -728,7 +728,7 @@ export const GROUP_TYPE_POPUP_OPTION = [
     data: 'associates',
     dataValue: 'associates',
     optionClass: 'optionSecondary',
-    divider: 'dark',
+    divider: 'light',
     disabled: false
   },
   {
@@ -741,7 +741,7 @@ export const GROUP_TYPE_POPUP_OPTION = [
     data: 'job profiles',
     dataValue: 'job profiles',
     optionClass: 'optionSecondary',
-    divider: 'dark',
+    divider: 'light',
     disabled: false
   },
   {

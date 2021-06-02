@@ -86,6 +86,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
     popupHeaderOneBadgeTwo,
+    popupHeaderOneBadgeThree,
     popupOpenType,
     secondaryOptionCheckValue,
     currentPopUpOption
@@ -111,6 +112,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'administrators' ||
       popupHeaderOne === 'managers' ||
       popupHeaderOne === 'items' ||
+      popupHeaderOne === 'interviews' ||
+      popupHeaderOne === 'assessment centres' ||
       popupHeaderOne === 'interviews' ||
       popupHeaderOne === 'associate'
     ) {
@@ -177,7 +180,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (clickValue === 'associatereview' || clickValue === 'associaterevise') {
       revisePopupHeaderOne = 'associate';
-      revisepopupHeaderOneBadgeOne = clickValue === 'associatereview' ? 'review' : 'revise';
+      revisepopupHeaderOneBadgeOne = 'seft';
+      revisepopupHeaderOneBadgeTwo = clickValue === 'associatereview' ? 'review' : 'revise';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = REVIEW_REVISE_POPUP;
@@ -404,7 +408,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeTwo = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = clickValue === 'create' ? CREATE_INFORMATION_POPUP : REVIEW_DISTINCT_POPUP_OPTION;
+      valueArr = clickValue === 'create' ? REVIEW_REVISE_POPUP : REVIEW_POPUP_OPTIONS;
       reviseSecondaryOptionCheckValue = clickValue === 'create' ? 'key' : 'active';
     }
     if (
@@ -876,8 +880,9 @@ const PopUpDisplayPanelAssociate = (props) => {
   };
   const BackHandlerEvent = (e) => {
     let revisePopupHeaderOne = 'associate';
-    let revisepopupHeaderOneBadgeOne = '';
+    let revisepopupHeaderOneBadgeOne = 'seft';
     let revisepopupHeaderOneBadgeTwo = '';
+    let revisepopupHeaderOneBadgeThree = '';
     let reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
     let revisePopupType = 'primary';
     let valueArr = setAssociateCardPermissionInJson(
@@ -968,9 +973,10 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupType = 'secondary';
       }
       if (
-        popupHeaderOne === 'assessment centres' ||
-        popupHeaderOne === 'culture profiles' ||
-        popupHeaderOne === 'job profiles'
+        (popupHeaderOne === 'assessment centres' ||
+          popupHeaderOne === 'culture profiles' ||
+          popupHeaderOne === 'job profiles') &&
+        (popupHeaderOneBadgeOne === 'create' || popupHeaderOneBadgeOne === 'review')
       ) {
         revisePopupHeaderOne = 'analytics';
         revisepopupHeaderOneBadgeOne = '';
@@ -994,6 +1000,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           popupHeaderOne: revisePopupHeaderOne,
           popupHeaderOneBadgeOne: revisepopupHeaderOneBadgeOne,
           popupHeaderOneBadgeTwo: revisepopupHeaderOneBadgeTwo,
+          popupHeaderOneBadgeThree: revisepopupHeaderOneBadgeThree,
           isPopUpValue: reviseisPopUpValue,
           popupOpenType: revisePopupType,
           secondaryOptionCheckValue: '',
@@ -1011,6 +1018,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           headerOne={popupHeaderOne}
           headerOneBadgeOne={popupHeaderOneBadgeOne}
           headerOneBadgeTwo={popupHeaderOneBadgeTwo}
+          headerOneBadgeThree={popupHeaderOneBadgeThree}
           onClick={BackHandlerEvent}
           mode={''}
         />

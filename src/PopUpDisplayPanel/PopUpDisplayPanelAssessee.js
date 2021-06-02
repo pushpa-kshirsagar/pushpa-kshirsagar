@@ -35,6 +35,7 @@ const PopUpDisplayPanelAssessee = (props) => {
   const {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
+    popupHeaderOneBadgeTwo,
     popupOpenType,
     secondaryOptionCheckValue
   } = useSelector((state) => state.PopUpReducer);
@@ -67,6 +68,7 @@ const PopUpDisplayPanelAssessee = (props) => {
     if (clickValue === 'assesseeselfassignments') {
       revisePopupHeaderOne = 'assignments';
       revisepopupHeaderOneBadgeOne = 'review';
+      revisepopupHeaderOneBadgeTwo = '';
       reviseisPopUpValue = 'ASSESSEE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = ASSIGNMENT_DISTINCT_POPUP;
@@ -75,6 +77,7 @@ const PopUpDisplayPanelAssessee = (props) => {
     if (clickValue === 'notifications' || clickValue === 'reports') {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = 'review';
+      revisepopupHeaderOneBadgeTwo = '';
       reviseisPopUpValue = 'ASSESSEE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = NOTIFICATION_REPORT_POPUP;
@@ -82,7 +85,8 @@ const PopUpDisplayPanelAssessee = (props) => {
     }
     if (clickValue === 'review' || clickValue === 'revise') {
       revisePopupHeaderOne = 'assessee';
-      revisepopupHeaderOneBadgeOne = clickValue;
+      revisepopupHeaderOneBadgeOne = 'seft';
+      revisepopupHeaderOneBadgeTwo = clickValue;
       reviseisPopUpValue = 'ASSESSEE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = REVIEW_REVISE_POPUP;
@@ -90,7 +94,8 @@ const PopUpDisplayPanelAssessee = (props) => {
     }
     if (clickValue === 'sign-out') {
       revisePopupHeaderOne = 'assessee';
-      revisepopupHeaderOneBadgeOne = clickValue;
+      revisepopupHeaderOneBadgeOne = 'self';
+      revisepopupHeaderOneBadgeTwo = clickValue;
       reviseisPopUpValue = 'ASSESSEE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = SIGN_OUT_POPUP;
@@ -99,6 +104,7 @@ const PopUpDisplayPanelAssessee = (props) => {
     if (clickValue === 'password') {
       revisePopupHeaderOne = 'assessee';
       revisepopupHeaderOneBadgeOne = clickValue;
+      revisepopupHeaderOneBadgeTwo = 'self';
       reviseisPopUpValue = 'REVISE_PASSWORD_POPUP';
       revisePopupType = 'secondary';
       valueArr = SIGN_OUT_POPUP;
@@ -107,6 +113,7 @@ const PopUpDisplayPanelAssessee = (props) => {
     if (clickValue === 'link') {
       revisePopupHeaderOne = 'associate';
       revisepopupHeaderOneBadgeOne = clickValue;
+      revisepopupHeaderOneBadgeTwo = 'self';
       reviseisPopUpValue = 'REVISE_CREDENTIAL_SIGNIN_POPUP';
       revisePopupType = 'secondary';
       revisePopupMode = 'ASSOCIATE_LINK';
@@ -239,7 +246,7 @@ const PopUpDisplayPanelAssessee = (props) => {
         type: SET_POPUP_STATE,
         payload: {
           popupHeaderOne: 'assessee',
-          popupHeaderOneBadgeOne: '',
+          popupHeaderOneBadgeOne: 'self',
           isPopUpValue: 'ASSESSEE_CARD_POPUP',
           popupOpenType: 'primary',
           secondaryOptionCheckValue: '',
@@ -255,6 +262,7 @@ const PopUpDisplayPanelAssessee = (props) => {
           headerPanelColour={headerPanelColour + popupOpenType}
           headerOne={popupHeaderOne}
           headerOneBadgeOne={popupHeaderOneBadgeOne}
+          headerOneBadgeTwo={popupHeaderOneBadgeTwo}
           onClick={BackHandlerEvent}
           mode={''}
         />
