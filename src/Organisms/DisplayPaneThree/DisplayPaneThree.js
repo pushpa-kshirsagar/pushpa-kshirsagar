@@ -36,7 +36,10 @@ import {
   ASSIGNMENT_INFO_REVISE_SAGA,
   ASSESSEE_TYPE_INFO_REVISE_SAGA,
   ASSOCIATE_TYPE_INFO_REVISE_SAGA,
-  CLEAR_ITEM_REDUCER_STATE
+  CLEAR_ITEM_REDUCER_STATE,
+  ITEM_INFO_REVISE_SAGA,
+  ASSESSMENT_TYPE_REVISE_INFO_SAGA,
+  ASSIGNMENT_TYPE_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -85,6 +88,7 @@ import DisplayPaneThreeSectionTwoAssesseeType from '../../Molecules/DisplayPaneT
 import DisplayPaneThreeSectionTwoAssociateType from '../../Molecules/DisplayPaneThreeSectionTwoAssociateType/DisplayPaneThreeSectionTwoAssociateType';
 import DisplayPaneThreeSectionOneItem from '../../Molecules/DisplayPaneThreeSectionOneItem/DisplayPaneThreeSectionOneItem';
 import DisplayPaneThreeSectionTwoItem from '../../Molecules/DisplayPaneThreeSectionTwoItem/DisplayPaneThreeSectionTwoItem';
+import { ITEM_REVISE_URL } from '../../endpoints';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -106,6 +110,7 @@ export const DisplayPaneThree = () => {
   );
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
+  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { informationBasic } = responseObject;
   const rightPaneSectionsAssessee = [
     {
@@ -660,6 +665,38 @@ export const DisplayPaneThree = () => {
         type: ASSESSEE_TYPE_INFO_REVISE_SAGA,
         payload: { headerOne: 'assessees', reqBody, createMode }
       });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'assessments') {
+      const { associateId, id } = responseObject;
+      console.log(assessmentType);
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        assessmentType: {
+          id,
+          informationBasic: assessmentType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'assessments', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'assignments') {
+      const { associateId, id } = responseObject;
+      console.log(assignmentType);
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        assignmentType: {
+          id,
+          informationBasic: assignmentType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'assignment', reqBody, createMode }
+      });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'associates') {
       const { associateId, id } = responseObject;
       console.log(associateType);
@@ -676,6 +713,27 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSOCIATE_TYPE_INFO_REVISE_SAGA,
         payload: { headerOne: 'associates', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'information' && headerOne === 'item') {
+      const { informationBasic } = itemInformation;
+      const { id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId: id,
+        item: {
+          id,
+          informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ITEM_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'item',
+          reqBody,
+          createMode
+        }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assessment') {
       const { informationBasic } = assessmentInfo;
@@ -1163,6 +1221,30 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+  };
+
+  const reviseItemBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'ITEMCREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ITEMCREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'ITEMCREATE' }
       });
     }
   };
@@ -2004,7 +2086,7 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
-                  // onClickRevise={reviseAssociateBasicInformation}
+                  onClickRevise={reviseItemBasicInformation}
                 />
               </div>
               <Sections

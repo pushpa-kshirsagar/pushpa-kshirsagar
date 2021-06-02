@@ -91,8 +91,12 @@ export const ASSIGNMENT_CREATE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/create';
 export const ASSIGNMENT_REVIEW_TYPE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/review';
+export const ASSIGNMENT_REVISE_TYPE_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/revise';
 export const ASSESSMENT_REVIEW_TYPE_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/review';
+export const ASSESSMENT_REVISE_TYPE_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/revise';
 export const ASSESSEE_REVIEW_TYPE_URL =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee-type/review';
 export const ASSESSEE_REVISE_TYPE_URL =
@@ -134,7 +138,10 @@ export const ASSOCIATE_TYPE_ASSOCIATE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/associate/review-list';
 export const NODE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/create';
 export const ITEM_CREATE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/create';
-export const ITEM_REVIEWLIST_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/review-list';
+export const ITEM_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/review-list';
+export const ITEM_REVIEW_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/review';
+export const ITEM_REVISE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/revise';
 export const EXTERNAL_NODE_TREE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/iguru-node/review-list-hierarchy';
 export const EXTERNAL_NODE_LIST_URL =

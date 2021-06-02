@@ -1,16 +1,16 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA,
+  SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
-  SET_ASSESSMENT_TYPE_REDUCER_STATE,
-  ASSESSMENT_TYPE_REVISE_INFO_SAGA,
-  SET_DISPLAY_PANE_THREE_STATE
+  GET_ITEM_INFO_SAGA,
+  ITEM_INFO_REVISE_SAGA,
+  SET_TYPE_REDUCER_STATE
 } from '../../actionType';
-import { ASSESSMENT_REVIEW_TYPE_URL, ASSESSMENT_REVISE_TYPE_URL } from '../../endpoints';
+import { ITEM_REVISE_URL, ITEM_REVIEW_URL } from '../../endpoints';
 
-const assessmentTypeReviewInfoApi = async (requestObj) => {
+const itemReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSESSMENT_REVIEW_TYPE_URL;
+  let URL = ITEM_REVIEW_URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -23,33 +23,30 @@ const assessmentTypeReviewInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviewAssessmentTypeInfoSaga(data) {
+function* workerReviewInfoItemSaga(data) {
   try {
-    const userResponse = yield call(assessmentTypeReviewInfoApi, {
-      data: data.payload.reqBody
-    });
+    const userResponse = yield call(itemReviewInfoApi, { data: data.payload.reqBody });
+    // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      console.log('IN GROUP REVIEW+++++', userResponse);
       const { isReviseMode = false } = data.payload;
+      console.log('Item Review=======>', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessments',
-          headerOneBadgeOne: 'type',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
+          headerOne: 'item',
+          headerOneBadgeOne: 'information',
+          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+          responseObject: userResponse.responseObject[0],
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
       if (isReviseMode) {
         yield put({
-          type: SET_ASSESSMENT_TYPE_REDUCER_STATE,
-          payload: userResponse.responseObject.informationBasic
+          type: SET_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
         });
       }
     }
-
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
@@ -58,9 +55,9 @@ function* workerReviewAssessmentTypeInfoSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
-const assessmentTypeReviseInfoApi = async (requestObj) => {
+const itemReviseInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSESSMENT_REVISE_TYPE_URL;
+  let URL = ITEM_REVISE_URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -73,27 +70,22 @@ const assessmentTypeReviseInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviseAssessmentTypeInfoSaga(data) {
+function* workerReviseInfoItemSaga(data) {
   try {
-    const userResponse = yield call(assessmentTypeReviseInfoApi, {
-      data: data.payload.reqBody
-    });
+    const userResponse = yield call(itemReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
-      console.log('IN GROUP REVIEW+++++', userResponse);
-      const { createMode = '' } = data.payload;
+      const { createMode } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessments',
-          headerOneBadgeOne: 'type',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'key',
+          headerOne: 'item',
+          headerOneBadgeOne: 'information',
+          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
           responseObject: userResponse.responseObject,
           createMode
         }
       });
     }
-
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
@@ -103,7 +95,7 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
   }
 }
 
-export default function* watchReviewAssessmentTypeInfoSaga() {
-  yield takeLatest(GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA, workerReviewAssessmentTypeInfoSaga);
-  yield takeLatest(ASSESSMENT_TYPE_REVISE_INFO_SAGA, workerReviseAssessmentTypeInfoSaga);
+export default function* watchReviewInfoItemSaga() {
+  yield takeLatest(GET_ITEM_INFO_SAGA, workerReviewInfoItemSaga);
+  yield takeLatest(ITEM_INFO_REVISE_SAGA, workerReviseInfoItemSaga);
 }

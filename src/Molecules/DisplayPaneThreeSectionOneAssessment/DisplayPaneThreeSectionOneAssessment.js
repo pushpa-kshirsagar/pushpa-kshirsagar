@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssessment = () => {
   const [listExpand, setListExpand] = useState('');
+  const dispatch = useDispatch();
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
@@ -361,6 +363,67 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       isListCard: false
     }
   ];
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'GROUPSECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        });
+      }
+    }
+    if (labelName === 'manager') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERSECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        });
+      }
+    }
+    if (labelName === 'node') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODESECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        });
+      }
+    }
+    if (labelName === 'role') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'ROLEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'ROLESECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        });
+      }
+    }
+  };
 
   return (
     <div
