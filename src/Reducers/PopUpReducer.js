@@ -205,8 +205,7 @@ const PopUpReducer = (istate = initialState, action) => {
           currentPopUpOption: REVIEW_DISTINCT_POPUP_OPTION
         };
       } else if (
-        (istate.popupHeaderOne === 'groups' ||
-          istate.popupHeaderOne === 'types') &&
+        (istate.popupHeaderOne === 'groups' || istate.popupHeaderOne === 'types') &&
         (action.payload === 'assessees' ||
           action.payload === 'assessments' ||
           action.payload === 'assignments' ||
@@ -232,6 +231,7 @@ const PopUpReducer = (istate = initialState, action) => {
           action.payload === 'associates' ||
           action.payload === 'culture profiles' ||
           action.payload === 'job profiles' ||
+          action.payload === 'interviews' ||
           action.payload === 'items')
       ) {
         let tempArr = [];

@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
-import { DialogContent } from '@material-ui/core';
+import { DialogContent, FormControl } from '@material-ui/core';
+import InputFeild from '../Atoms/InputField/InputField';
+import SelectField from '../Atoms/SelectField/SelectField';
+import UploadIcon from '@material-ui/icons/Publish';
+import DownloadIcon from '@material-ui/icons/GetApp';
 import {
   SET_POPUP_VALUE,
   GET_ASSOCIATE_INFO_SAGA,
@@ -51,7 +55,8 @@ import {
   SELF_POPUP,
   GROUP_TYPE_POPUP_OPTION,
   ANALYTICS_POPUP,
-  MINE_REVIEW
+  MINE_REVIEW,
+  UPLOAD_DOWNLOAD_POPUP
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -81,6 +86,8 @@ import {
   getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
 import { getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+import IconButton from '../Molecules/IconButton/IconButton';
+import { Fragment } from 'react';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -94,6 +101,7 @@ const PopUpDisplayPanelAssociate = (props) => {
   const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
   const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [isReviseMode, setIsReviseMode] = useState(false);
+  const [exchageMode, setexchageMode] = useState(false);
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
 
@@ -114,9 +122,13 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'items' ||
       popupHeaderOne === 'interviews' ||
       popupHeaderOne === 'assessment centres' ||
-      popupHeaderOne === 'interviews' ||
       popupHeaderOne === 'associate'
     ) {
+      dispatch({
+        type: SET_SECONDARY_CREATE_OPTION_VALUE,
+        payload: e.currentTarget.getAttribute('data-value')
+      });
+    } else if (popupHeaderOneBadgeOne === 'exchange') {
       dispatch({
         type: SET_SECONDARY_CREATE_OPTION_VALUE,
         payload: e.currentTarget.getAttribute('data-value')
@@ -202,7 +214,11 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'groups' &&
       popupHeaderOne !== 'administrators' &&
-      popupHeaderOne !== 'managers'
+      popupHeaderOne !== 'managers'&&
+      popupHeaderOne !== 'assessees'&&
+      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'items'
     ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
@@ -214,7 +230,11 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'types' &&
       popupHeaderOne !== 'administrators' &&
-      popupHeaderOne !== 'managers'
+      popupHeaderOne !== 'managers'&&
+      popupHeaderOne !== 'assessees'&&
+      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'items'
     ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
@@ -226,7 +246,11 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'roles' &&
       popupHeaderOne !== 'administrators' &&
-      popupHeaderOne !== 'managers'
+      popupHeaderOne !== 'managers'&&
+      popupHeaderOne !== 'assessees'&&
+      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'assessments'&&
+      popupHeaderOne !== 'items'
     ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
@@ -259,12 +283,13 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       ((clickValue === 'download' || clickValue === 'upload') &&
-        secondaryOptionCheckValue === 'assessee') ||
+        secondaryOptionCheckValue === 'assessees') ||
       secondaryOptionCheckValue === 'associates' ||
       secondaryOptionCheckValue === 'assessments' ||
       secondaryOptionCheckValue === 'assignments' ||
       secondaryOptionCheckValue === 'culture profiles' ||
       secondaryOptionCheckValue === 'job profiles' ||
+      secondaryOptionCheckValue === 'interviews' ||
       secondaryOptionCheckValue === 'items'
     ) {
       revisePopupHeaderOne = secondaryOptionCheckValue;
@@ -273,6 +298,27 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisePopupType = 'secondary';
       valueArr = REVIEW_POPUP_OPTIONS;
       reviseSecondaryOptionCheckValue = 'active';
+    }
+    if (
+      clickValue === 'distinct' &&
+      (popupHeaderOne === 'assessees' ||
+        popupHeaderOne === 'associates' ||
+        popupHeaderOne === 'assessments' ||
+        popupHeaderOne === 'assignments' ||
+        popupHeaderOne === 'culture profiles' ||
+        popupHeaderOne === 'job profiles' ||
+        popupHeaderOne === 'interviews' ||
+        popupHeaderOne === 'items') &&
+      (popupHeaderOneBadgeOne === 'download' || popupHeaderOneBadgeOne === 'upload')
+    ) {
+      revisePopupHeaderOne = popupHeaderOne;
+      revisepopupHeaderOneBadgeOne = 'exchange';
+      revisepopupHeaderOneBadgeTwo = popupHeaderOneBadgeOne;
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = UPLOAD_DOWNLOAD_POPUP;
+      reviseSecondaryOptionCheckValue = 'all';
+      setexchageMode(true);
     }
     if (
       clickValue === 'information' &&
@@ -891,6 +937,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     );
     if (popupOpenType === 'primary') {
       dispatch({ type: POPUP_CLOSE });
+      setexchageMode(false);
     } else {
       if (
         (popupHeaderOne === 'administrators' ||
@@ -958,12 +1005,13 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupType = 'secondary';
       }
       if (
-        (popupHeaderOne === 'assessee' ||
+        (popupHeaderOne === 'assessees' ||
           popupHeaderOne === 'associates' ||
           popupHeaderOne === 'assessments' ||
           popupHeaderOne === 'assignments' ||
           popupHeaderOne === 'culture profiles' ||
           popupHeaderOne === 'job profiles' ||
+          popupHeaderOne === 'interviews' ||
           popupHeaderOne === 'items') &&
         (popupHeaderOneBadgeOne === 'upload' || popupHeaderOneBadgeOne === 'download')
       ) {
@@ -971,6 +1019,25 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisepopupHeaderOneBadgeOne = '';
         valueArr = EXCHANGE_POPUP_OPTION;
         revisePopupType = 'secondary';
+      }
+      if (
+        (popupHeaderOne === 'assessees' ||
+          popupHeaderOne === 'associates' ||
+          popupHeaderOne === 'assessments' ||
+          popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'culture profiles' ||
+          popupHeaderOne === 'job profiles' ||
+          popupHeaderOne === 'interviews' ||
+          popupHeaderOne === 'items') &&
+        popupHeaderOneBadgeOne === 'exchange' &&
+        (popupHeaderOneBadgeTwo === 'upload' || popupHeaderOneBadgeTwo === 'download')
+      ) {
+        revisePopupHeaderOne = popupHeaderOne;
+        revisepopupHeaderOneBadgeOne = popupHeaderOneBadgeTwo;
+        revisepopupHeaderOneBadgeTwo = '';
+        valueArr = REVIEW_POPUP_OPTIONS;
+        revisePopupType = 'secondary';
+        setexchageMode(false);
       }
       if (
         (popupHeaderOne === 'assessment centres' ||
@@ -1029,6 +1096,34 @@ const PopUpDisplayPanelAssociate = (props) => {
             secondaryOptionCheckValue={secondaryOptionCheckValue}
             currentPopUpOption={currentPopUpOption}
           />
+          {exchageMode && (
+            <Fragment>
+              <FormControl style={{ width: '100%' }}>
+                <SelectField
+                  tag={'location'}
+                  label={'location'}
+                  // dataValue={'location'}
+                  listSelect={[
+                    { id: 'device', name: 'device' },
+                    { id: 'google', name: 'google' },
+                    { id: 'microsoft', name: 'microsoft' }
+                  ]}
+                  onChange={null}
+                  value={''}
+                  mappingValue={'id'}
+                />
+                <InputFeild id={'template'} label={'template'} value={''} labelBadgeOne={''} />
+              </FormControl>
+              <IconButton
+                Icon={popupHeaderOneBadgeTwo === 'upload' ? UploadIcon : DownloadIcon}
+                className=""
+                colour="genericOne"
+                label={popupHeaderOneBadgeTwo}
+                dataValue={popupHeaderOneBadgeTwo}
+                onClick={null}
+              />
+            </Fragment>
+          )}
         </DialogContent>
       </Popup>
     </div>

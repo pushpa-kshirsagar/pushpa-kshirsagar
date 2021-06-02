@@ -1,4 +1,5 @@
 export const assesseeStatus = (middlePaneState, status) => {
+  console.log(middlePaneState, status);
   if (middlePaneState === 'all' || middlePaneState === 'active') {
     return status === 'CONFIRMED' ? 'active' : 'inactive';
   }

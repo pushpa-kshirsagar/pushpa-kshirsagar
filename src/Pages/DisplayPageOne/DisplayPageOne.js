@@ -45,6 +45,7 @@ import { useHistory } from 'react-router-dom';
 import NodeCreatePopup from '../../Molecules/PopUpCreate/NodeCreatePopup';
 import PopUpMiddlePaneTrippleDot from '../../PopUpDisplayPanel/PopUpMiddlePaneTrippleDot';
 import ItemCreatePopUp from '../../Molecules/PopUpCreate/ItemCreatePopUp';
+import PopUpDownloadUpload from '../../PopUpDisplayPanel/PopUpDownloadUpload';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -295,6 +296,7 @@ const DisplayPageOne = () => {
       {popupMode === 'ASSIGNMENTCREATE' && <AssignmentCreatePopup headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <AssessmentCreatePopup headerOne={'assessment'} />}
       {popupMode === 'ITEMCREATE' && <ItemCreatePopUp />}
+      {popupMode === 'UPLOAD_DOWNLOAD_POPUP' && <PopUpDownloadUpload isActive/>}
     </>
   );
 };

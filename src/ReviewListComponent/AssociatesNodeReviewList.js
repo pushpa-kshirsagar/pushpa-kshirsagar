@@ -26,6 +26,7 @@ import '../reactSortableTree.css';
 import { getAssociateNodeApiCall, sortingListInAsc } from '../Actions/AssociateModuleAction';
 import { Fragment } from 'react';
 import Card from '../Molecules/Card/Card';
+import { assesseeStatus } from '../Actions/StatusAction';
 const AssociatesNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const [renderComp, setRenderComp] = useState(false);
@@ -193,7 +194,11 @@ const AssociatesNodeReviewList = (props) => {
                         id={index}
                         tag={item.id}
                         isSelectedReviewList={middlePaneSelectedValue === item.id}
-                        status={item.informationEngagement.associateStatus}
+                        status={assesseeStatus(
+                          middlePaneHeaderBadgeTwo,
+                          item.informationEngagement.associateStatus
+                        )}
+                        actualStatus={item.informationEngagement.associateStatus}
                         textOne={item.informationBasic.associateName}
                         textTwo={item.informationBasic.associateDescription}
                         isTooltipActive={false}

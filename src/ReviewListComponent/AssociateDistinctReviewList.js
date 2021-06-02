@@ -18,7 +18,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
-import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION, GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
 const AssociateDistinctReviewList = (props) => {
   const { popupAllClose } = props;
@@ -131,7 +131,7 @@ const AssociateDistinctReviewList = (props) => {
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }
@@ -140,7 +140,7 @@ const AssociateDistinctReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+        value: GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

@@ -830,7 +830,69 @@ export const EXCHANGE_POPUP_OPTION = [
     optionClass: 'optionSecondary',
     disabled: false
   },
+  { data: 'interviews', dataValue: 'interviews', optionClass: 'optionSecondary', disabled: false },
   { data: 'items', dataValue: 'items', optionClass: 'optionSecondary', disabled: false }
+];
+export const UPLOAD_DOWNLOAD_POPUP = [
+  {
+    data: 'information',
+    dataValue: 'information',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'all',
+    dataValue: 'all',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'key',
+    dataValue: 'key',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'anonymous',
+    dataValue: 'anonymous',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'blank',
+    dataValue: 'blank',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'first-name other-name last-name',
+    dataValue: 'first-name other-name last-name',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'last-name first-name other-name',
+    dataValue: 'last-name first-name other-name',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'template',
+    dataValue: 'template',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'worksheet',
+    dataValue: 'worksheet',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
 ];
 export const MARKETPLACE_POPUP_OPTION = [
   {
@@ -1093,14 +1155,14 @@ export const ASSOCIATE_REVIEW_LIST_POPUP_OPTION = [
   {
     data: 'review',
     dataValue: 'review',
-    dataKey: 'reviewKey',
+    dataKey: 'review',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'revise',
     dataValue: 'revise',
-    dataKey: 'reviewKey',
+    dataKey: 'revise',
     optionClass: 'optionPrimary',
     disabled: false
   },
