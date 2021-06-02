@@ -39,7 +39,8 @@ import {
   SET_NODE_DYNAMIC_SINGLE_STATE,
   SET_SINGLE_ASSOCIATE_INFORMATION,
   GET_ASSESSEE_TYPE_REVIEW_INFO_SAGA,
-  GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA
+  GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA,
+  GET_ITEM_INFO_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -348,6 +349,39 @@ const PopUpMiddlePaneList = (props) => {
       if (typeOfMiddlePaneList === 'assignmentDistinctReviewList') {
         dispatch({
           type: GET_ASSIGNMENT_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue,
+            isReviseMode,
+            reqBody: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
+              filter: true,
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'itemDistinctReviewList') {
+        dispatch({
+          type: GET_ITEM_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
             isReviseMode,

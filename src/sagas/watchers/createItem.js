@@ -41,7 +41,7 @@ function* workerCreateItemSaga(data) {
         }
       });
       yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-      yield put({ type: CLEAR_ITEM_REDUCER_STATE });
+      // yield put({ type: CLEAR_ITEM_REDUCER_STATE });
       yield put({ type: POPUP_CLOSE });
     } else {
       yield put({

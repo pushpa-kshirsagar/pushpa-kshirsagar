@@ -134,7 +134,10 @@ export const ASSOCIATE_TYPE_ASSOCIATE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/associate/review-list';
 export const NODE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/create';
 export const ITEM_CREATE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/create';
-export const ITEM_REVIEWLIST_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/review-list';
+export const ITEM_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/review-list';
+export const ITEM_REVIEW_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/review';
+export const ITEM_REVISE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-distinct/revise';
 export const EXTERNAL_NODE_TREE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/iguru-node/review-list-hierarchy';
 export const EXTERNAL_NODE_LIST_URL =
