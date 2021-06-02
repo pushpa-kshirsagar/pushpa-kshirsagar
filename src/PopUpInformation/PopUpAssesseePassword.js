@@ -18,8 +18,9 @@ const PopUpAssesseePassword = (props) => {
     isActive = false,
     headerPanelColour = 'genericOne',
     headerOne = 'assessee',
-    headerOneBadgeOne = 'password',
-    headerOneBadgeTwo = 'revise'
+    headerOneBadgeOne = 'self',
+    headerOneBadgeTwo = 'password',
+    headerOneBadgeThree = 'revise'
   } = props;
   const [currentPassword, setCurrentPassword] = useState('');
   const [currentPasswordError, setCurrentPasswordError] = useState('');
@@ -114,6 +115,7 @@ const PopUpAssesseePassword = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
           headerOneBadgeTwo={headerOneBadgeTwo}
+          headerOneBadgeThree={headerOneBadgeThree}
           onClick={handleClick}
         />
         <DialogContent

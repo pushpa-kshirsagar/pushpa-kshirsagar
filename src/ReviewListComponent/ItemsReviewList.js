@@ -106,7 +106,7 @@ const ItemsReviewList = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: middlePaneHeader,
-        popupHeaderOneBadgeOne: 'type',
+        popupHeaderOneBadgeOne: '',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
