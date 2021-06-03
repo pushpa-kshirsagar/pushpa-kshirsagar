@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
@@ -8,11 +8,10 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 import { SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
-const DisplayPaneThreeSectionOneAssessmentGroup = () => {
-  // const [listExpand, setListExpand] = useState('');
+const DisplayPaneThreeSectionOneItemGroup = () => {
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const dispatch = useDispatch();
   const { informationEngagement } = responseObject;
+  const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -157,8 +156,7 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
     },
     {
       id: 'a2',
-      textOneOne:
-        capitalizeFirstLetter(informationEngagement?.assessmentGroupStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement?.itemGroupStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -170,14 +168,11 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne:
-            informationEngagement?.assessmentGroupTag?.assessmentGroupTagPrimary || 'No Information'
+          textOne: informationEngagement?.itemGroupTag?.itemGroupTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne:
-            informationEngagement?.assessmentGroupTag?.assessmentGroupTagSecondary ||
-            'No Information'
+          textOne: informationEngagement?.itemGroupTag?.itemGroupTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -191,18 +186,16 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
         {
           labelTextOneOneBadge: 'start',
           textOne:
-            informationEngagement?.assessmentGroupTenure?.assessmentGroupTenureDateTimeStart ||
-            'No Information'
+            informationEngagement?.itemGroupTenure?.itemGroupTenureDateTimeStart || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
           textOne:
-            informationEngagement?.assessmentGroupTenure?.assessmentGroupTenureDateTimeEnd ||
-            'No Information'
+            informationEngagement?.itemGroupTenure?.itemGroupTenureDateTimeEnd || 'No Information'
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'Assessee',
+      innerInfo: 'No Information',
       isListCard: false
     }
   ];
@@ -214,7 +207,7 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'MANAGERLISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'MANAGERLISTPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
       if (selectedBadgeName === 'secondary') {
@@ -222,7 +215,7 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
           type: SET_POPUP_VALUE,
           payload: {
             isPopUpValue: 'MANAGERSECONDARYLISTPOPUP',
-            popupMode: 'assessmentsGROUPCREATE'
+            popupMode: 'itemsGROUPCREATE'
           }
         });
       }
@@ -231,13 +224,13 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'NODELISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'NODELISTPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
       if (selectedBadgeName === 'secondary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'NODESECONDARYLISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'NODESECONDARYLISTPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
     }
@@ -245,13 +238,13 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TYPELISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'TYPELISTPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
       if (selectedBadgeName === 'secondary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TYPESECONDARYLISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'TYPESECONDARYLISTPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
     }
@@ -263,24 +256,24 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
     if (labelName === 'status') {
       dispatch({
         type: SET_STATUS_POPUP_VALUE,
-        payload: capitalizeFirstLetter(informationEngagement?.assessmentGroupStatus)
+        payload: capitalizeFirstLetter(informationEngagement?.itemGroupStatus)
       });
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'itemsGROUPCREATE' }
       });
     }
     if (labelName === 'tag') {
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
       if (selectedBadgeName === 'secondary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
     }
@@ -288,13 +281,13 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
       if (selectedBadgeName === 'start') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
       if (selectedBadgeName === 'end') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'itemsGROUPCREATE' }
         });
       }
     }
@@ -366,4 +359,4 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
   );
 };
 
-export default DisplayPaneThreeSectionOneAssessmentGroup;
+export default DisplayPaneThreeSectionOneItemGroup;

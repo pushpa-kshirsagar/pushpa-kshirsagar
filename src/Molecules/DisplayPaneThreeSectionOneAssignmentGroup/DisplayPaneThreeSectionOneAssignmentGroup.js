@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssignmentGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { informationEngagement } = responseObject;
+  const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -205,6 +207,100 @@ const DisplayPaneThreeSectionOneAssignmentGroup = () => {
     }
   ];
 
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName, selectedBadgeName);
+    if (labelName === 'manager') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERLISTPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: {
+            isPopUpValue: 'MANAGERSECONDARYLISTPOPUP',
+            popupMode: 'assignmentsGROUPCREATE'
+          }
+        });
+      }
+    }
+    if (labelName === 'node') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODELISTPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODESECONDARYLISTPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+    }
+    if (labelName === 'type') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPELISTPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPESECONDARYLISTPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+    }
+  };
+  const reviseEngagement = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName);
+    if (labelName === 'status') {
+      dispatch({
+        type: SET_STATUS_POPUP_VALUE,
+        payload: capitalizeFirstLetter(informationEngagement?.assessmentGroupStatus)
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+      });
+    }
+    if (labelName === 'tag') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+    }
+    if (labelName === 'tenure') {
+      if (selectedBadgeName === 'start') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'end') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+        });
+      }
+    }
+  };
+
   return (
     <div
       style={{
@@ -219,9 +315,18 @@ const DisplayPaneThreeSectionOneAssignmentGroup = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseAllocation}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );
@@ -234,9 +339,18 @@ const DisplayPaneThreeSectionOneAssignmentGroup = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseEngagement}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseEngagement}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

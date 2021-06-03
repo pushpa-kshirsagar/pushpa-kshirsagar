@@ -305,7 +305,7 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
       }}
     >
       <>
-        <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+        <div className="containerPadding">
           <Paper className={'dossierContainerTop'}>
             {allocationList.map((ob) => {
               return (

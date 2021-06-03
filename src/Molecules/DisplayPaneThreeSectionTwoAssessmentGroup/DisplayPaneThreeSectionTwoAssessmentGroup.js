@@ -26,7 +26,7 @@ const DisplayPaneThreeSectionTwoAssessmentGroup = () => {
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
           innerList: [
             {
               id: 'associate1',
@@ -49,7 +49,7 @@ const DisplayPaneThreeSectionTwoAssessmentGroup = () => {
           ]
         }
       ],
-      innerInfo: 'assessment',
+      innerInfo: 'No Information',
       isListCard: true
     }
   ];
@@ -62,7 +62,7 @@ const DisplayPaneThreeSectionTwoAssessmentGroup = () => {
       }}
     >
       <>
-        <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+        <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list2.map((ob) => {
               return (

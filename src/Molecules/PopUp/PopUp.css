@@ -218,12 +218,19 @@
   font-size: 1.6rem;
   color: #ffffff;
   font-weight: bold;
-  max-width: 200px;
+  max-width: 180px;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  /* text-overflow: ellipsis; */
+  /* overflow: hidden; */
+  overflow-x: scroll;
   line-height: 1.6 !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+.titleBox::-webkit-scrollbar {
+  display: none;
+}
+
 .textSheetTitleBox {
   text-align: left;
   flex: 4;
@@ -383,6 +390,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 6px;
 }
 .checkedFontNew span {
   margin-right: -2px !important;
@@ -407,7 +415,7 @@
 .MuiDialog-paperScrollPaper {
   display: flex;
   /* position: fixed !important; */
-  max-height: calc(100% - 70px) !important;
+  max-height: calc(100% - 100px) !important;
   flex-direction: column;
   /* margin: 0px !important; */
   top: 55px;
@@ -424,6 +432,14 @@
   /* .popupContent {
     width: calc(100vw - 64px);
   } */
+  .MuiDialog-paperScrollPaper {
+    display: flex;
+    /* position: fixed !important; */
+    max-height: calc(100% - 70px) !important;
+    flex-direction: column;
+    /* margin: 0px !important; */
+    top: 55px;
+  }
   .textsheetPopupContent {
     width: calc(100vw - 64px);
   }

@@ -12,6 +12,7 @@ import { AccountContext } from '../../Account';
 import {
   INCORRECT_INFORMATION_ERROR_MESSAGE,
   INFORMATION_MISMATCHED_ERROR_MESSAGE,
+  INVALID_PASSWORD_ERROR_MESSAGE,
   REQUIRED_ERROR_MESSAGE
 } from '../../errorMessage';
 import { useDispatch, useSelector } from 'react-redux';
@@ -132,7 +133,7 @@ const DisplayPageSignIn = () => {
     );
     if (code !== '' && revisedPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(revisedPassword)) {
-        setRevisedPasswordError('revised password invalid');
+        setRevisedPasswordError(INVALID_PASSWORD_ERROR_MESSAGE);
         return;
       }
       if (revisedPassword === confirmRevisedPassword) {
