@@ -31,7 +31,8 @@ const PopupHeader = (props) => {
     onClick,
     mode = 'core',
     isNotRevised = false,
-    onClosePopUpEvent = null
+    onClosePopUpEvent = null,
+    setexchageMode=null
   } = props;
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -54,6 +55,7 @@ const PopupHeader = (props) => {
         dispatch({ type: CLEAR_ASSOCIATE_INFO });
         dispatch({ type: CLEAR_ASSIGNMENT_INFO });
         dispatch({ type: CLEAR_IGAUGE_REDUCER });
+        setexchageMode();
       }
     }
   };

@@ -687,7 +687,46 @@ export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
     optionClass: 'optionSecondary',
     disabled: false
   },
-  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
+  {
+    data: 'associates',
+    dataValue: 'associates',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'assessment centres',
+    dataValue: 'assessment centres',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'culture profiles',
+    dataValue: 'culture profiles',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'job profiles',
+    dataValue: 'job profiles',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'interviews',
+    dataValue: 'interviews',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'items',
+    dataValue: 'items',
+    optionClass: 'optionSecondary',
+    disabled: false
+  }
 ];
 export const GROUP_TYPE_POPUP_OPTION = [
   { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: true },
@@ -732,6 +771,13 @@ export const GROUP_TYPE_POPUP_OPTION = [
     disabled: false
   },
   {
+    data: 'assessment centres',
+    dataValue: 'assessment centres',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
     data: 'culture profiles',
     dataValue: 'culture profiles',
     optionClass: 'optionSecondary',
@@ -740,6 +786,13 @@ export const GROUP_TYPE_POPUP_OPTION = [
   {
     data: 'job profiles',
     dataValue: 'job profiles',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'interviews',
+    dataValue: 'interviews',
     optionClass: 'optionSecondary',
     divider: 'light',
     disabled: false
@@ -786,7 +839,46 @@ export const NODE_POPUP_OPTION = [
     optionClass: 'optionSecondary',
     disabled: true
   },
-  { data: 'associates', dataValue: 'associates', optionClass: 'optionSecondary', disabled: false }
+  {
+    data: 'associates',
+    dataValue: 'associates',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'assessment centres',
+    dataValue: 'assessment centres',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: true
+  },
+  {
+    data: 'culture profiles',
+    dataValue: 'culture profiles',
+    optionClass: 'optionSecondary',
+    disabled: true
+  },
+  {
+    data: 'job profiles',
+    dataValue: 'job profiles',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: true
+  },
+  {
+    data: 'interviews',
+    dataValue: 'interviews',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: true
+  },
+  {
+    data: 'items',
+    dataValue: 'items',
+    optionClass: 'optionSecondary',
+    disabled: true
+  }
 ];
 export const EXCHANGE_POPUP_OPTION = [
   { data: 'download', dataValue: 'download', optionClass: 'optionPrimary', disabled: true },
@@ -820,6 +912,7 @@ export const EXCHANGE_POPUP_OPTION = [
   {
     data: 'assessment centres',
     dataValue: 'assessment centres',
+    divider: 'light',
     optionClass: 'optionSecondary',
     disabled: false
   },

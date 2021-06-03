@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
@@ -104,7 +104,9 @@ const PopUpDisplayPanelAssociate = (props) => {
   const [exchageMode, setexchageMode] = useState(false);
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
-
+  useEffect(() => {
+    setexchageMode(false);
+  }, []);
   const setSecondaryOptionValue = (e) => {
     if (popupHeaderOne === 'roles') {
       if (
@@ -203,12 +205,15 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'nodes' &&
       popupHeaderOne !== 'administrators' &&
+      popupHeaderOne !== 'items' &&
+      popupHeaderOne !== 'interviews' &&
       popupHeaderOne !== 'managers'
     ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
+      // valueArr = GROUP_TYPE_POPUP_OPTION;
       valueArr = NODE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'associates';
     }
@@ -258,6 +263,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+      // valueArr = GROUP_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = '';
     }
     if (
@@ -288,6 +294,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       secondaryOptionCheckValue === 'associates' ||
       secondaryOptionCheckValue === 'assessments' ||
       secondaryOptionCheckValue === 'assignments' ||
+      secondaryOptionCheckValue === 'assessment centres' ||
       secondaryOptionCheckValue === 'culture profiles' ||
       secondaryOptionCheckValue === 'job profiles' ||
       secondaryOptionCheckValue === 'interviews' ||
@@ -556,6 +563,19 @@ const PopUpDisplayPanelAssociate = (props) => {
       );
     }
     if (
+      clickValue === 'groups' &&
+      popupHeaderOne === 'items' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getItemGroupDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'groups'
+      );
+    }
+    if (
       clickValue === 'distinct' &&
       popupHeaderOne === 'assessees' &&
       popupHeaderOneBadgeOne === 'roles'
@@ -651,6 +671,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           0,
           countPage
         );
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
         dispatch({
           type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -674,6 +695,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           0,
           countPage
         );
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
         dispatch({
           type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -713,7 +735,9 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'nodes' &&
-      (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
+      (popupHeaderOne === 'administrators' ||
+        popupHeaderOne === 'managers' ||
+        popupHeaderOne === 'items')
     ) {
       getInternalNodeApiCall(
         selectedAssociateInfo,
@@ -960,10 +984,12 @@ const PopUpDisplayPanelAssociate = (props) => {
         (popupHeaderOne === 'assessees' ||
           popupHeaderOne === 'assessments' ||
           popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'associates' ||
+          popupHeaderOne === 'assessment centres' ||
           popupHeaderOne === 'culture profiles' ||
           popupHeaderOne === 'job profiles' ||
-          popupHeaderOne === 'items' ||
-          popupHeaderOne === 'associates') &&
+          popupHeaderOne === 'interviews' ||
+          popupHeaderOne === 'items') &&
         (popupHeaderOneBadgeOne === 'types' || popupHeaderOneBadgeOne === 'type')
       ) {
         revisePopupHeaderOne = 'types';
@@ -975,10 +1001,12 @@ const PopUpDisplayPanelAssociate = (props) => {
         (popupHeaderOne === 'assessees' ||
           popupHeaderOne === 'assessments' ||
           popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'associates' ||
+          popupHeaderOne === 'assessment centres' ||
           popupHeaderOne === 'culture profiles' ||
           popupHeaderOne === 'job profiles' ||
-          popupHeaderOne === 'items' ||
-          popupHeaderOne === 'associates') &&
+          popupHeaderOne === 'interviews' ||
+          popupHeaderOne === 'items') &&
         (popupHeaderOneBadgeOne === 'groups' || popupHeaderOneBadgeOne === 'group')
       ) {
         revisePopupHeaderOne = 'groups';
@@ -1003,9 +1031,10 @@ const PopUpDisplayPanelAssociate = (props) => {
       }
       if (
         (popupHeaderOne === 'assessees' ||
-          popupHeaderOne === 'associates' ||
-          popupHeaderOne === 'assessments' ||
           popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'assessments' ||
+          popupHeaderOne === 'associates' ||
+          popupHeaderOne === 'assessment centres' ||
           popupHeaderOne === 'culture profiles' ||
           popupHeaderOne === 'job profiles' ||
           popupHeaderOne === 'interviews' ||
@@ -1022,6 +1051,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           popupHeaderOne === 'associates' ||
           popupHeaderOne === 'assessments' ||
           popupHeaderOne === 'assignments' ||
+          popupHeaderOne === 'assessment centres' ||
           popupHeaderOne === 'culture profiles' ||
           popupHeaderOne === 'job profiles' ||
           popupHeaderOne === 'interviews' ||
@@ -1083,6 +1113,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           headerOneBadgeOne={popupHeaderOneBadgeOne}
           headerOneBadgeTwo={popupHeaderOneBadgeTwo}
           headerOneBadgeThree={popupHeaderOneBadgeThree}
+          setexchageMode={setexchageMode}
           onClick={BackHandlerEvent}
           mode={''}
         />

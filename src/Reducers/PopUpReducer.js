@@ -205,12 +205,17 @@ const PopUpReducer = (istate = initialState, action) => {
           currentPopUpOption: REVIEW_DISTINCT_POPUP_OPTION
         };
       } else if (
-        (istate.popupHeaderOne === 'groups' || istate.popupHeaderOne === 'types') &&
+        (istate.popupHeaderOne === 'groups' ||
+          // istate.popupHeaderOne === 'nodes' ||
+          istate.popupHeaderOne === 'roles' ||
+          istate.popupHeaderOne === 'types') &&
         (action.payload === 'assessees' ||
           action.payload === 'assessments' ||
           action.payload === 'assignments' ||
           action.payload === 'associates' ||
+          action.payload === 'interviews' ||
           action.payload === 'culture profiles' ||
+          action.payload === 'assessment centres' ||
           action.payload === 'job profiles' ||
           action.payload === 'items')
       ) {
