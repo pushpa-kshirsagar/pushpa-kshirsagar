@@ -96,7 +96,8 @@ const initialState = {
     managers: REVIEW_DISTINCT_POPUP_OPTION,
     assessments: REVIEW_DISTINCT_POPUP_OPTION,
     assignments: ASSIGNMENT_DISTINCT_POPUP,
-    associates: REVIEW_DISTINCT_POPUP_OPTION
+    associates: REVIEW_DISTINCT_POPUP_OPTION,
+    items: REVIEW_DISTINCT_POPUP_OPTION
   }
 };
 

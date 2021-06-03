@@ -191,4 +191,7 @@ export const ASSOCIATE_TYPE_UNSHARE_URL =
 export const ASSESSEE_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/share';
 export const ASSESSEE_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/unshare';
+export const ITEM_GROUP_CREATE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/create';
+export const ITEM_GROUP_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/review-list';
 // export const URL = '';

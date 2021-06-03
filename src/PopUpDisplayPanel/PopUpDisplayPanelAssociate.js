@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
-import { DialogContent, FormControl } from '@material-ui/core';
+import { DialogContent, FormControl, FormHelperText } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
 import SelectField from '../Atoms/SelectField/SelectField';
 import UploadIcon from '@material-ui/icons/Publish';
@@ -71,16 +71,21 @@ import {
   makeAssignmentTypeObj,
   makeInternalNodeObj
 } from '../Actions/GenericActions';
-import { getAssociatesTypeApiCall, getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
+import {
+  getAssociateGroupDistinctApiCall,
+  getAssociatesTypeApiCall,
+  getInternalNodeApiCall
+} from '../Actions/AssociateModuleAction';
 import {
   assesseeCreateApiCalls,
   getAdminManagerDistinctApiCall,
   getAdminManagerRoleApiCall,
+  getAssesseeGroupDistinctApiCall,
   getAssesseeTypeApiCall,
   getRoleGroupReviewListApi,
   getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
-import { getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+import { getItemGroupDistinctApiCall, getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
 import IconButton from '../Molecules/IconButton/IconButton';
 import { Fragment } from 'react';
 const PopUpDisplayPanelAssociate = (props) => {
@@ -188,7 +193,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (clickValue === 'associatereview' || clickValue === 'associaterevise') {
       revisePopupHeaderOne = 'associate';
-      revisepopupHeaderOneBadgeOne = 'seft';
+      revisepopupHeaderOneBadgeOne = 'self';
       revisepopupHeaderOneBadgeTwo = clickValue === 'associatereview' ? 'review' : 'revise';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
@@ -613,6 +618,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       (popupHeaderOne === 'assessees' ||
         popupHeaderOne === 'assignments' ||
         popupHeaderOne === 'associates' ||
+        popupHeaderOne === 'items' ||
         popupHeaderOne === 'assessments') &&
       popupHeaderOneBadgeOne === 'groups'
     ) {
@@ -621,40 +627,22 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       if (popupHeaderOne === 'assessees') {
-        requestObj = makeAssesseeGroupObj(
+        getAssesseeGroupDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
-          0,
-          countPage
+          countPage,
+          dispatch,
+          'groups'
         );
-        dispatch({
-          type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-          payload: {
-            request: requestObj,
-            BadgeOne: 'groups',
-            BadgeTwo: 'distinct',
-            BadgeThree: secondaryOptionCheckValue,
-            isMiddlePaneList: true
-          }
-        });
       }
       if (popupHeaderOne === 'associates') {
-        requestObj = makeAssociateGroupObj(
+        getAssociateGroupDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
-          0,
-          countPage
+          countPage,
+          dispatch,
+          'groups'
         );
-        dispatch({
-          type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
-          payload: {
-            request: requestObj,
-            BadgeOne: 'groups',
-            BadgeTwo: 'distinct',
-            BadgeThree: secondaryOptionCheckValue,
-            isMiddlePaneList: true
-          }
-        });
       }
       if (popupHeaderOne === 'assessments') {
         requestObj = makeAssessmentGroupObj(
@@ -672,6 +660,11 @@ const PopUpDisplayPanelAssociate = (props) => {
             BadgeThree: secondaryOptionCheckValue,
             isMiddlePaneList: true
           }
+        });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: popupHeaderOne + 'GroupDistinct' + secondaryOptionCheckValue }
         });
       }
       if (popupHeaderOne === 'assignments') {
@@ -692,11 +685,15 @@ const PopUpDisplayPanelAssociate = (props) => {
           }
         });
       }
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: popupHeaderOne + 'GroupDistinct' + secondaryOptionCheckValue }
-      });
+      if (popupHeaderOne === 'items') {
+        getItemGroupDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+      }
     }
     if (
       clickValue === 'distinct' &&
@@ -841,7 +838,11 @@ const PopUpDisplayPanelAssociate = (props) => {
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
       });
       clearMiddlePaneInfo();
-    } else if (clickValue === 'information' && popupHeaderOne === 'items') {
+    } else if (
+      clickValue === 'information' &&
+      popupHeaderOne === 'items' &&
+      popupHeaderOneBadgeOne === 'create'
+    ) {
       dispatch({ type: CLEAR_ITEM_REDUCER_STATE });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -922,7 +923,7 @@ const PopUpDisplayPanelAssociate = (props) => {
   };
   const BackHandlerEvent = (e) => {
     let revisePopupHeaderOne = 'associate';
-    let revisepopupHeaderOneBadgeOne = 'seft';
+    let revisepopupHeaderOneBadgeOne = 'self';
     let revisepopupHeaderOneBadgeTwo = '';
     let revisepopupHeaderOneBadgeThree = '';
     let reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
@@ -1118,6 +1119,9 @@ const PopUpDisplayPanelAssociate = (props) => {
                 dataValue={popupHeaderOneBadgeTwo}
                 onClick={null}
               />
+              <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
+                <span></span>
+              </FormHelperText>
             </Fragment>
           )}
         </DialogContent>

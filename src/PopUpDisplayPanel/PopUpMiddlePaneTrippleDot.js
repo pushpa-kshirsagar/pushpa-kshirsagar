@@ -31,6 +31,7 @@ import {
   getAssociatesTypeApiCall,
   getInternalNodeApiCall
 } from '../Actions/AssociateModuleAction';
+import { getItemGroupDistinctApiCall, getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
 const PopUpMiddlePaneTrippleDot = (props) => {
   const {
     popupHeaderOne,
@@ -74,8 +75,7 @@ const PopUpMiddlePaneTrippleDot = (props) => {
       if (middlePaneHeaderBadgeOne !== 'distinct') {
         keyVal = 'createKey';
       }
-    }
-    if (keyVal === 'distinctAPICall' && middlePaneHeader === 'assessees') {
+    } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'assessees') {
       getAssesseeDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
@@ -112,6 +112,15 @@ const PopUpMiddlePaneTrippleDot = (props) => {
         'nodes',
         'distinct',
         'hierarchy'
+      );
+      dispatch({ type: POPUP_CLOSE });
+    } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'items') {
+      getItemsDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        'items',
+        dispatch
       );
       dispatch({ type: POPUP_CLOSE });
     } else if (
@@ -326,6 +335,31 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           dispatch,
           'types',
           'associates'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
+      }
+    } else if (middlePaneHeader === 'items') {
+      if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'groups') {
+        getItemGroupDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'groups') {
+        getItemGroupDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
         );
         dispatch({ type: POPUP_CLOSE });
       } else {

@@ -836,7 +836,13 @@ export const EXCHANGE_POPUP_OPTION = [
     optionClass: 'optionSecondary',
     disabled: false
   },
-  { data: 'interviews', dataValue: 'interviews', optionClass: 'optionSecondary', disabled: false },
+  {
+    data: 'interviews',
+    dataValue: 'interviews',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
   { data: 'items', dataValue: 'items', optionClass: 'optionSecondary', disabled: false }
 ];
 export const UPLOAD_DOWNLOAD_POPUP = [
@@ -898,7 +904,7 @@ export const UPLOAD_DOWNLOAD_POPUP = [
     optionClass: 'optionSecondary',
     divider: 'light',
     disabled: false
-  },
+  }
 ];
 export const MARKETPLACE_POPUP_OPTION = [
   {
