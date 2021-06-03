@@ -18,7 +18,8 @@ import {
   SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
   SET_ASSIGNMENT_TYPE_REDUCER_STATE,
   SET_ASSOCIATE_GROUP_REDUCER_STATE,
-  SET_ASSOCIATE_TYPE_REDUCER_STATE
+  SET_ASSOCIATE_TYPE_REDUCER_STATE,
+  SET_ITEM_GROUP_REDUCER_STATE
 } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
@@ -60,7 +61,7 @@ const DisplayPageOne = () => {
   const isExamMode = false;
   const assesseeId = localStorage.getItem('assesseeId');
   const accessToken = localStorage.getItem('token');
-  const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup } = useSelector(
+  const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup, itemGroup } = useSelector(
     (state) => state.GroupCreateReducer
   );
   const { assesseeType, assessmentType, assignmentType, associateType } = useSelector(
@@ -242,6 +243,16 @@ const DisplayPageOne = () => {
           groupDescription={'associateGroupDescription'}
           setReducerObject={SET_ASSOCIATE_GROUP_REDUCER_STATE}
           objectName={'associateGroup'}
+        />
+      )}
+      {popupMode === 'itemsGROUPCREATE' && (
+        <AllGroupCreatePopup
+          headerOne={'items'}
+          reducerObeject={itemGroup}
+          groupName={'itemGroupName'}
+          groupDescription={'itemGroupDescription'}
+          setReducerObject={SET_ITEM_GROUP_REDUCER_STATE}
+          objectName={'itemGroup'}
         />
       )}
       {popupMode === 'assesseesTYPECREATE' && (

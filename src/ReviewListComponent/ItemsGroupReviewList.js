@@ -16,9 +16,12 @@ import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentTypeObj } from '../Actions/GenericActions';
-import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-import { getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
-const ItemsReviewList = (props) => {
+import {
+  ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
+import { getItemGroupDistinctApiCall, getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+const ItemsGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
@@ -76,14 +79,14 @@ const ItemsReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    getItemsDistinctApiCall(selectedAssociateInfo, siftKey, countPage, 'items', dispatch);
-    dispatch({ type: FILTERMODE_ENABLE });
+    getItemGroupDistinctApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'groups');
+    dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
+    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -93,15 +96,22 @@ const ItemsReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let optArr = [];
+    let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
+      obj.data === 'assessees'
+        ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
+        : obj
+    );
+    optArr = popupContentArrValue;
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: middlePaneHeader,
-        popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeOne: 'group',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -111,11 +121,12 @@ const ItemsReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+        value: optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log('FilterMode',FilterMode);
   const associateSeftId =
     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
@@ -129,9 +140,9 @@ const ItemsReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.itemStatus}
-                textOne={item.informationBasic.itemName}
-                textTwo={item.informationBasic.itemDescription}
+                status={item.informationEngagement.itemGroupStatus}
+                textOne={item.informationBasic.itemGroupName}
+                textTwo={item.informationBasic.itemGroupDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 // dataValue={item.informationAllocation.itemGroup}
@@ -139,9 +150,7 @@ const ItemsReviewList = (props) => {
             </div>
           );
         })}
-      {(FilterMode === 'itemDistinctinactive' ||
-        FilterMode === 'itemDistinctsuspended' ||
-        FilterMode === 'itemDistinctterminated') && (
+      {(FilterMode === 'itemGroupDistinctinactive' ||FilterMode === 'itemGroupDistinctsuspended' || FilterMode === 'itemGroupDistinctterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -153,4 +162,4 @@ const ItemsReviewList = (props) => {
     </div>
   );
 };
-export default ItemsReviewList;
+export default ItemsGroupReviewList;

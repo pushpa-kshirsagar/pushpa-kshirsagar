@@ -85,7 +85,7 @@ const PopUpDisplayPanelAssessee = (props) => {
     }
     if (clickValue === 'review' || clickValue === 'revise') {
       revisePopupHeaderOne = 'assessee';
-      revisepopupHeaderOneBadgeOne = 'seft';
+      revisepopupHeaderOneBadgeOne = 'self';
       revisepopupHeaderOneBadgeTwo = clickValue;
       reviseisPopUpValue = 'ASSESSEE_CARD_POPUP';
       revisePopupType = 'secondary';

@@ -23,6 +23,8 @@ import {
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+  GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+  GET_ITEM_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -46,7 +48,10 @@ import {
   makeAssessmentScanRequestObject,
   makeAdminmManagerRoleScanRequestObject,
   makeAssesseeTypeScanRequestObject,
-  makeAssociateTypeScanRequestObject
+  makeAssociateTypeScanRequestObject,
+  getItemScanRequestObj,
+  makeItemGroupScanObj,
+  makeItemScanObj
 } from '../Actions/GenericActions';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import {
@@ -329,6 +334,56 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
+      if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
+        let requestObect = makeItemScanObj(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo === 'distinct'
+            ? middlePaneHeaderBadgeThree
+            : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ITEM_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            middlePaneHeader: middlePaneHeader,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'itemsGroupDistinctReviewList') {
+        let requestObect = makeItemGroupScanObj(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo === 'distinct'
+            ? middlePaneHeaderBadgeThree
+            : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            middlePaneHeader: middlePaneHeader,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+      }
       if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
         let requestObect = makeAssignmentTypeScanRequestObject(
           selectedAssociateInfo,
@@ -577,6 +632,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'assesseesTypeDistinctReviewList' ||
                 isPopUpValue === 'associatesTypeDistinctReviewList' ||
                 isPopUpValue === 'itemsDistinctReviewList' ||
+                isPopUpValue === 'itemsGroupDistinctReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

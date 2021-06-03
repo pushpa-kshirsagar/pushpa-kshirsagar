@@ -3,7 +3,8 @@ import {
   SET_ASSESSEE_GROUP_REDUCER_STATE,
   SET_ASSESSMENT_GROUP_REDUCER_STATE,
   SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
-  SET_ASSOCIATE_GROUP_REDUCER_STATE
+  SET_ASSOCIATE_GROUP_REDUCER_STATE,
+  SET_ITEM_GROUP_REDUCER_STATE
 } from '../actionType';
 
 const initialState = {
@@ -95,6 +96,26 @@ const initialState = {
         associateGroupTypePrimary: []
       }
     }
+  },
+  itemGroup: {
+    informationBasic: {
+      itemGroupName: '',
+      itemGroupNameVerification: false,
+      itemGroupDescription: '',
+      itemGroupPicture: '',
+      itemGroupPictureVerification: false
+    },
+    informationAllocation: {
+      itemGroupManager: {
+        itemGroupManagerPrimary: ['607d9470248db70ca6fe4e7a']
+      },
+      itemGroupNode: {
+        itemGroupNodeSecondary: []
+      },
+      itemGroupType: {
+        itemGroupTypePrimary: []
+      }
+    }
   }
 };
 
@@ -130,6 +151,14 @@ const GroupCreateReducer = (istate = initialState, action) => {
         ...istate,
         associateGroup: {
           ...istate.associateGroup,
+          informationBasic: action.payload
+        }
+      };
+    case SET_ITEM_GROUP_REDUCER_STATE:
+      return {
+        ...istate,
+        itemGroup: {
+          ...istate.itemGroup,
           informationBasic: action.payload
         }
       };

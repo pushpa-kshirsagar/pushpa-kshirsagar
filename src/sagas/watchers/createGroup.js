@@ -14,7 +14,8 @@ import {
   ASSESSEE_GROUP_CREATE_URL,
   ASSESSMENT_GROUP_CREATE_URL,
   ASSIGNMENT_GROUP_CREATE_URL,
-  ASSOCIATE_GROUP_CREATE_URL
+  ASSOCIATE_GROUP_CREATE_URL,
+  ITEM_GROUP_CREATE_URL
 } from '../../endpoints';
 
 const createGroupApi = async (requestObj) => {
@@ -37,6 +38,9 @@ const createGroupApi = async (requestObj) => {
   }
   if (requestObj.data.whichGroupCreate === 'associates') {
     URL = ASSOCIATE_GROUP_CREATE_URL;
+  }
+  if (requestObj.data.whichGroupCreate === 'items') {
+    URL = ITEM_GROUP_CREATE_URL;
   }
   const response = await fetch(URL, requestOptions);
   const json = await response.json();
