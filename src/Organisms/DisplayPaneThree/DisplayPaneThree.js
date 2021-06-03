@@ -41,7 +41,8 @@ import {
   ASSESSMENT_TYPE_REVISE_INFO_SAGA,
   ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
   ASSESSMENT_GROUP_REVISE_INFO_SAGA,
-  ASSIGNMENT_GROUP_REVISE_INFO_SAGA
+  ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
+  ITEM_GROUP_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -90,7 +91,6 @@ import DisplayPaneThreeSectionTwoAssesseeType from '../../Molecules/DisplayPaneT
 import DisplayPaneThreeSectionTwoAssociateType from '../../Molecules/DisplayPaneThreeSectionTwoAssociateType/DisplayPaneThreeSectionTwoAssociateType';
 import DisplayPaneThreeSectionOneItem from '../../Molecules/DisplayPaneThreeSectionOneItem/DisplayPaneThreeSectionOneItem';
 import DisplayPaneThreeSectionTwoItem from '../../Molecules/DisplayPaneThreeSectionTwoItem/DisplayPaneThreeSectionTwoItem';
-import { ITEM_REVISE_URL } from '../../endpoints';
 import DisplayPaneThreeSectionOneItemGroup from '../../Molecules/DisplayPaneThreeSectionOneItemGroup/DisplayPaneThreeSectionOneItemGroup';
 import DisplayPaneThreeSectionTwoItemGroup from '../../Molecules/DisplayPaneThreeSectionTwoItemGroup/DisplayPaneThreeSectionTwoItemGroup';
 
@@ -429,9 +429,13 @@ export const DisplayPaneThree = () => {
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
-  const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup } = useSelector(
-    (state) => state.GroupCreateReducer
-  );
+  const {
+    assesseeGroup,
+    assessmentGroup,
+    assignmentGroup,
+    associateGroup,
+    itemGroup
+  } = useSelector((state) => state.GroupCreateReducer);
   const { assesseeType, assessmentType, assignmentType, associateType } = useSelector(
     (state) => state.TypeCreateReducer
   );
@@ -658,6 +662,22 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSESSMENT_GROUP_REVISE_INFO_SAGA,
         payload: { headerOne: 'assessments', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'group' && headerOne === 'items') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        itemGroup: {
+          id,
+          informationBasic: itemGroup.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ITEM_GROUP_REVISE_INFO_SAGA,
+        payload: { headerOne: 'items', reqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'assignments') {
       const { associateId, id } = responseObject;

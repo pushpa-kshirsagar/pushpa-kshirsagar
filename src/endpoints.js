@@ -198,4 +198,6 @@ export const ASSESSEE_TYPE_UNSHARE_URL =
 export const ITEM_GROUP_CREATE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/create';
 export const ITEM_GROUP_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/review-list';
+export const ITEM_REVIEW_GROUP_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/review';
+export const ITEM_REVISE_GROUP_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/revise';
 // export const URL = '';

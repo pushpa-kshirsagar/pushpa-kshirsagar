@@ -98,6 +98,15 @@ const AllGroupCreatePopup = (props) => {
       responseObject?.informationEngagement?.assignmentGroupTenure
         ?.assignmentGroupTenureDateTimeEnd || 'mm/dd/yyyy --:-- --';
   }
+  if (headerOne === 'items') {
+    tagPrimary = responseObject?.informationEngagement?.itemGroupTag?.itemGroupTagPrimary || '';
+    tenureStartDate =
+      responseObject?.informationEngagement?.itemGroupTenure?.itemGroupTenureDateTimeStart ||
+      'mm/dd/yyyy --:-- --';
+    tenureEndDate =
+      responseObject?.informationEngagement?.itemGroupTenure?.itemGroupTenureDateTimeEnd ||
+      'mm/dd/yyyy --:-- --';
+  }
 
   return (
     <div>
