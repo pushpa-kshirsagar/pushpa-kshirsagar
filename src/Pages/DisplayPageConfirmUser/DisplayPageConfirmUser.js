@@ -14,7 +14,8 @@ import PopUpAdministratorSignInPasswordRevise from '../../PopUpDisplayPanel/PopU
 import {
   INFORMATION_MISMATCHED_ERROR_MESSAGE,
   REQUIRED_ERROR_MESSAGE,
-  INCORRECT_INFORMATION_ERROR_MESSAGE
+  INCORRECT_INFORMATION_ERROR_MESSAGE,
+  INVALID_PASSWORD_ERROR_MESSAGE
 } from '../../errorMessage';
 import {
   SET_SIGN_ON_SINGLE_STATE,
@@ -117,7 +118,7 @@ const DisplayPageConfirmUser = () => {
     );
     if (oldPassword !== '' && newPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(newPassword)) {
-        setNewPasswordError('revised password invalid');
+        setNewPasswordError(INVALID_PASSWORD_ERROR_MESSAGE);
         return;
       }
       if (newPassword === confirmRevisedPassword) {

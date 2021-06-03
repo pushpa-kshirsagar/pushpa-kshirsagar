@@ -63,6 +63,8 @@ export const ASSIGNMENT_GROUP_REVIEWLIST_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/review-list';
 export const ASSESSMENT_REVIEW_GROUP_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/review';
+export const ASSESSMENT_REVISE_GROUP_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/revise';
 export const ASSESSMENT_REVIEW_INFO_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/review';
 export const ASSESSMENT_REVISE_INFO_URL =
@@ -73,6 +75,8 @@ export const ASSIGNMENT_REVISE_INFO_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/revise';
 export const ASSIGNMENT_REVIEW_GROUP_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/review';
+export const ASSIGNMENT_REVISE_GROUP_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/revise';
 export const ASSESSMENT_TYPE_CREATE_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/create';
 export const ASSIGNMENT_TYPE_CREATE_URL =

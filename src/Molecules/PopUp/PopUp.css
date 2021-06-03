@@ -218,12 +218,19 @@
   font-size: 1.6rem;
   color: #ffffff;
   font-weight: bold;
-  max-width: 200px;
+  max-width: 190px;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  /* text-overflow: ellipsis; */
+  /* overflow: hidden; */
+  overflow-x: scroll;
   line-height: 1.6 !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+.titleBox::-webkit-scrollbar {
+  display: none;
+}
+
 .textSheetTitleBox {
   text-align: left;
   flex: 4;

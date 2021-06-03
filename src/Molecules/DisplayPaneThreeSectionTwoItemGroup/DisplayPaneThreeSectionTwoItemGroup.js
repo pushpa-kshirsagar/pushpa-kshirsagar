@@ -7,7 +7,7 @@ import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
 
-const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
+const DisplayPaneThreeSectionTwoItemGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   // const { informationEngagement, informationSetup } = responseObject;
@@ -19,7 +19,7 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'assignments',
+      labelTextOneOne: 'item',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -31,19 +31,19 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
             {
               id: 'associate1',
               textOne: 'Simple Sample 01',
-              textTwo: 'assignments',
+              textTwo: 'item',
               status: ''
             },
             {
               id: 'associate2',
               textOne: 'Simple Sample 02',
-              textTwo: 'assignments',
+              textTwo: 'item',
               status: ''
             },
             {
               id: 'associate3',
               textOne: 'Simple Sample 03',
-              textTwo: 'assignments',
+              textTwo: 'item',
               status: ''
             }
           ]
@@ -87,4 +87,4 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
   );
 };
 
-export default DisplayPaneThreeSectionTwoAssignmentGroup;
+export default DisplayPaneThreeSectionTwoItemGroup;

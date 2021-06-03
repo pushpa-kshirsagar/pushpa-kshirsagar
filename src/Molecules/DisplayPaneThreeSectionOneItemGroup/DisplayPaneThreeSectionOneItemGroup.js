@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
-const DisplayPaneThreeSectionOneAssessmentGroup = () => {
+const DisplayPaneThreeSectionOneItemGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const dispatch = useDispatch();
   const { informationEngagement } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -157,8 +155,7 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
     },
     {
       id: 'a2',
-      textOneOne:
-        capitalizeFirstLetter(informationEngagement?.assessmentGroupStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement?.itemGroupStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -170,14 +167,11 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne:
-            informationEngagement?.assessmentGroupTag?.assessmentGroupTagPrimary || 'No Information'
+          textOne: informationEngagement?.itemGroupTag?.itemGroupTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne:
-            informationEngagement?.assessmentGroupTag?.assessmentGroupTagSecondary ||
-            'No Information'
+          textOne: informationEngagement?.itemGroupTag?.itemGroupTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -191,114 +185,19 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
         {
           labelTextOneOneBadge: 'start',
           textOne:
-            informationEngagement?.assessmentGroupTenure?.assessmentGroupTenureDateTimeStart ||
-            'No Information'
+            informationEngagement?.itemGroupTenure?.itemGroupTenureDateTimeStart || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
           textOne:
-            informationEngagement?.assessmentGroupTenure?.assessmentGroupTenureDateTimeEnd ||
-            'No Information'
+            informationEngagement?.itemGroupTenure?.itemGroupTenureDateTimeEnd || 'No Information'
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'Assessee',
+      innerInfo: 'No Information',
       isListCard: false
     }
   ];
-  const reviseAllocation = (e) => {
-    const labelName = e.currentTarget.getAttribute('data-value');
-    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    console.log('=====>', labelName, selectedBadgeName);
-    if (labelName === 'manager') {
-      if (selectedBadgeName === 'primary') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'MANAGERLISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-      if (selectedBadgeName === 'secondary') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: {
-            isPopUpValue: 'MANAGERSECONDARYLISTPOPUP',
-            popupMode: 'assessmentsGROUPCREATE'
-          }
-        });
-      }
-    }
-    if (labelName === 'node') {
-      if (selectedBadgeName === 'primary') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'NODELISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-      if (selectedBadgeName === 'secondary') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'NODESECONDARYLISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-    }
-    if (labelName === 'type') {
-      if (selectedBadgeName === 'primary') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TYPELISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-      if (selectedBadgeName === 'secondary') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TYPESECONDARYLISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-    }
-  };
-  const reviseEngagement = (e) => {
-    const labelName = e.currentTarget.getAttribute('data-value');
-    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    console.log('=====>', labelName);
-    if (labelName === 'status') {
-      dispatch({
-        type: SET_STATUS_POPUP_VALUE,
-        payload: capitalizeFirstLetter(informationEngagement?.assessmentGroupStatus)
-      });
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'STATUSPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-      });
-    }
-    if (labelName === 'tag') {
-      if (selectedBadgeName === 'primary') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TAGREADONLYPRIMARYPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-      if (selectedBadgeName === 'secondary') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TAGSECONDARYPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-    }
-    if (labelName === 'tenure') {
-      if (selectedBadgeName === 'start') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TENURESATRTDATEPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-      if (selectedBadgeName === 'end') {
-        dispatch({
-          type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'TENUREENDDATEPOPUP', popupMode: 'assessmentsGROUPCREATE' }
-        });
-      }
-    }
-  };
 
   return (
     <div
@@ -314,18 +213,9 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard
-                      onClickRevise={reviseAllocation}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
+                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                   ) : (
-                    <AccordianInfoCard
-                      onClickRevise={reviseAllocation}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
+                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                   )}
                 </div>
               );
@@ -338,18 +228,9 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard
-                      onClickRevise={reviseEngagement}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
+                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
                   ) : (
-                    <AccordianInfoCard
-                      onClickRevise={reviseEngagement}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
+                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                   )}
                 </div>
               );
@@ -366,4 +247,4 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
   );
 };
 
-export default DisplayPaneThreeSectionOneAssessmentGroup;
+export default DisplayPaneThreeSectionOneItemGroup;

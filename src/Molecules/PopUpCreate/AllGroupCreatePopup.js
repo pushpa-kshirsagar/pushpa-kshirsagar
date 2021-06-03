@@ -78,6 +78,26 @@ const AllGroupCreatePopup = (props) => {
       responseObject?.informationEngagement?.associateGroupTenure
         ?.associateGroupTenureDateTimeEnd || 'mm/dd/yyyy --:-- --';
   }
+  if (headerOne === 'assessments') {
+    tagPrimary =
+      responseObject?.informationEngagement?.assessmentGroupTag?.assessmentGroupTagPrimary || '';
+    tenureStartDate =
+      responseObject?.informationEngagement?.assessmentGroupTenure
+        ?.assessmentGroupTenureDateTimeStart || 'mm/dd/yyyy --:-- --';
+    tenureEndDate =
+      responseObject?.informationEngagement?.assessmentGroupTenure
+        ?.assessmentGroupTenureDateTimeEnd || 'mm/dd/yyyy --:-- --';
+  }
+  if (headerOne === 'assignments') {
+    tagPrimary =
+      responseObject?.informationEngagement?.assignmentGroupTag?.assignmentGroupTagPrimary || '';
+    tenureStartDate =
+      responseObject?.informationEngagement?.assignmentGroupTenure
+        ?.assignmentGroupTenureDateTimeStart || 'mm/dd/yyyy --:-- --';
+    tenureEndDate =
+      responseObject?.informationEngagement?.assignmentGroupTenure
+        ?.assignmentGroupTenureDateTimeEnd || 'mm/dd/yyyy --:-- --';
+  }
 
   return (
     <div>

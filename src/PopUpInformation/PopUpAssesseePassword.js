@@ -10,7 +10,11 @@ import { FormControl } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
 import { useHistory } from 'react-router-dom';
 import { AccountContext } from '../Account';
-import { INFORMATION_MISMATCHED_ERROR_MESSAGE, REQUIRED_ERROR_MESSAGE } from '../errorMessage';
+import {
+  INFORMATION_MISMATCHED_ERROR_MESSAGE,
+  INVALID_PASSWORD_ERROR_MESSAGE,
+  REQUIRED_ERROR_MESSAGE
+} from '../errorMessage';
 
 const PopUpAssesseePassword = (props) => {
   const dispatch = useDispatch();
@@ -47,7 +51,7 @@ const PopUpAssesseePassword = (props) => {
     );
     if (currentPassword !== '' && revisedPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(revisedPassword)) {
-        setRevisedPasswordError('revised password invalid');
+        setRevisedPasswordError(INVALID_PASSWORD_ERROR_MESSAGE);
         return;
       }
       if (revisedPassword === confirmRevisedPassword) {
@@ -106,7 +110,7 @@ const PopUpAssesseePassword = (props) => {
     }
     // dispatch({ type: POPUP_CLOSE });
   };
-  
+
   return (
     <div>
       <Popup isActive={isActive}>
