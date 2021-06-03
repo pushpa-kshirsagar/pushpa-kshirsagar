@@ -5,7 +5,7 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOADER_START, POPUP_CLOSE, SET_ASSESSEE_REVISE_PASSWORD } from '../actionType';
+import { LOADER_START, SET_ASSESSEE_REVISE_PASSWORD } from '../actionType';
 import { FormControl } from '@material-ui/core';
 import InputFeild from '../Atoms/InputField/InputField';
 import { useHistory } from 'react-router-dom';

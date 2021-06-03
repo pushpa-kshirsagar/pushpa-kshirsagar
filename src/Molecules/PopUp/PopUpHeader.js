@@ -55,7 +55,7 @@ const PopupHeader = (props) => {
         dispatch({ type: CLEAR_ASSOCIATE_INFO });
         dispatch({ type: CLEAR_ASSIGNMENT_INFO });
         dispatch({ type: CLEAR_IGAUGE_REDUCER });
-        setexchageMode();
+        // setexchageMode();
       }
     }
   };
