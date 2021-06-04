@@ -5,9 +5,10 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_REQUEST_OBJECT,
   GET_ITEM_REVIEW_LIST_SAGA,
-  GET_ITEM_GROUP_REVIEW_LIST_SAGA
+  GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA
 } from '../actionType';
-import { makeItemGroupObj, makeItemObj } from './GenericActions';
+import { makeItemGroupObj, makeItemObj, makeItemsTypeObj } from './GenericActions';
 
 export const getItemsDistinctApiCall = (
   selectedAssociateInfo,
@@ -58,6 +59,36 @@ export const getItemGroupDistinctApiCall = (
   dispatch({
     type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
     payload: {
+      request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getItemsTypeApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  middlePaneHeader = 'items'
+) => {
+  let requestObj = makeItemsTypeObj(selectedAssociateInfo, secondaryOptionCheckValue, 0, countPage);
+
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({
+    type: FILTERMODE,
+    payload: { FilterMode: 'itemsTypeDistinct' + secondaryOptionCheckValue }
+  });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+    payload: {
+      middlePaneHeader: middlePaneHeader,
       request: requestObj,
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,

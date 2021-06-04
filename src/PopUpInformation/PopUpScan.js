@@ -25,6 +25,7 @@ import {
   GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
   GET_ITEM_GROUP_REVIEW_LIST_SAGA,
   GET_ITEM_REVIEW_LIST_SAGA,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -51,7 +52,8 @@ import {
   makeAssociateTypeScanRequestObject,
   getItemScanRequestObj,
   makeItemGroupScanObj,
-  makeItemScanObj
+  makeItemScanObj,
+  makeItemTypeScanObj
 } from '../Actions/GenericActions';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import {
@@ -384,6 +386,31 @@ const PopUpScan = (props) => {
         });
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
       }
+      if (typeOfMiddlePaneList === 'itemsTypeDistinctReviewList') {
+        let requestObect = makeItemTypeScanObj(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo === 'distinct'
+            ? middlePaneHeaderBadgeThree
+            : middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            middlePaneHeader: middlePaneHeader,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+      }
       if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
         let requestObect = makeAssignmentTypeScanRequestObject(
           selectedAssociateInfo,
@@ -633,6 +660,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'associatesTypeDistinctReviewList' ||
                 isPopUpValue === 'itemsDistinctReviewList' ||
                 isPopUpValue === 'itemsGroupDistinctReviewList' ||
+                isPopUpValue === 'itemsTypeDistinctReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

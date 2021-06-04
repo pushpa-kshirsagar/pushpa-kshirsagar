@@ -134,6 +134,7 @@ const AssociateDistinctReviewList = (props) => {
         popupContentArrValue: GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
+        // isFlaged: e.currentTarget.getAttribute('data-flag') === 'true' ? true : false
       }
     });
     dispatch({

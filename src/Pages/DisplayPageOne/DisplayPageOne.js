@@ -19,7 +19,8 @@ import {
   SET_ASSIGNMENT_TYPE_REDUCER_STATE,
   SET_ASSOCIATE_GROUP_REDUCER_STATE,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
-  SET_ITEM_GROUP_REDUCER_STATE
+  SET_ITEM_GROUP_REDUCER_STATE,
+  SET_ITEM_TYPE_REDUCER_STATE
 } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
@@ -61,10 +62,14 @@ const DisplayPageOne = () => {
   const isExamMode = false;
   const assesseeId = localStorage.getItem('assesseeId');
   const accessToken = localStorage.getItem('token');
-  const { assesseeGroup, assessmentGroup, assignmentGroup, associateGroup, itemGroup } = useSelector(
-    (state) => state.GroupCreateReducer
-  );
-  const { assesseeType, assessmentType, assignmentType, associateType } = useSelector(
+  const {
+    assesseeGroup,
+    assessmentGroup,
+    assignmentGroup,
+    associateGroup,
+    itemGroup
+  } = useSelector((state) => state.GroupCreateReducer);
+  const { assesseeType, assessmentType, assignmentType, associateType, itemType } = useSelector(
     (state) => state.TypeCreateReducer
   );
   const history = useHistory();
@@ -303,11 +308,24 @@ const DisplayPageOne = () => {
           groupDescription={'associateTypeGroupDescription'}
         />
       )}
+      {popupMode === 'itemsTYPECREATE' && (
+        <TypeCreatePopup
+          headerOne={'items'}
+          reducerObeject={itemType}
+          typeName={'itemTypeName'}
+          typeDescription={'itemTypeDescription'}
+          setReducerObject={SET_ITEM_TYPE_REDUCER_STATE}
+          objectName={'itemType'}
+          allocationObj={'itemTypeGroup'}
+          groupName={'itemTypeGroupName'}
+          groupDescription={'itemTypeGroupDescription'}
+        />
+      )}
       {popupMode === 'NODECREATE' && <NodeCreatePopup headerOne={'associate'} />}
       {popupMode === 'ASSIGNMENTCREATE' && <AssignmentCreatePopup headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <AssessmentCreatePopup headerOne={'assessment'} />}
       {popupMode === 'ITEMCREATE' && <ItemCreatePopUp />}
-      {popupMode === 'UPLOAD_DOWNLOAD_POPUP' && <PopUpDownloadUpload isActive/>}
+      {popupMode === 'UPLOAD_DOWNLOAD_POPUP' && <PopUpDownloadUpload isActive />}
     </>
   );
 };

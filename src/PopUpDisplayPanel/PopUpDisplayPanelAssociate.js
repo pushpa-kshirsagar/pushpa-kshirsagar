@@ -56,7 +56,8 @@ import {
   GROUP_TYPE_POPUP_OPTION,
   ANALYTICS_POPUP,
   MINE_REVIEW,
-  UPLOAD_DOWNLOAD_POPUP
+  UPLOAD_DOWNLOAD_POPUP,
+  ROLE_POPUP_OPTION
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
@@ -85,7 +86,11 @@ import {
   getRoleGroupReviewListApi,
   getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
-import { getItemGroupDistinctApiCall, getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+import {
+  getItemGroupDistinctApiCall,
+  getItemsDistinctApiCall,
+  getItemsTypeApiCall
+} from '../Actions/ItemModuleAction';
 import IconButton from '../Molecules/IconButton/IconButton';
 import { Fragment } from 'react';
 const PopUpDisplayPanelAssociate = (props) => {
@@ -262,7 +267,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+      valueArr = ROLE_POPUP_OPTION;
       // valueArr = GROUP_TYPE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = '';
     }
@@ -313,6 +318,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         popupHeaderOne === 'associates' ||
         popupHeaderOne === 'assessments' ||
         popupHeaderOne === 'assignments' ||
+        popupHeaderOne === 'assessment centres' ||
         popupHeaderOne === 'culture profiles' ||
         popupHeaderOne === 'job profiles' ||
         popupHeaderOne === 'interviews' ||
@@ -576,6 +582,20 @@ const PopUpDisplayPanelAssociate = (props) => {
       );
     }
     if (
+      clickValue === 'types' &&
+      popupHeaderOne === 'items' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getItemsTypeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'types',
+        popupHeaderOne
+      );
+    }
+    if (
       clickValue === 'distinct' &&
       popupHeaderOne === 'assessees' &&
       popupHeaderOneBadgeOne === 'roles'
@@ -755,6 +775,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       (popupHeaderOne === 'assignments' ||
         popupHeaderOne === 'associates' ||
         popupHeaderOne === 'assessments' ||
+        popupHeaderOne === 'items' ||
         popupHeaderOne === 'assessees') &&
       popupHeaderOneBadgeOne === 'types'
     ) {
@@ -819,6 +840,16 @@ const PopUpDisplayPanelAssociate = (props) => {
       }
       if (popupHeaderOne === 'associates') {
         getAssociatesTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          popupHeaderOne
+        );
+      }
+      if (popupHeaderOne === 'items') {
+        getItemsTypeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,
@@ -977,7 +1008,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       ) {
         revisePopupHeaderOne = 'roles';
         revisepopupHeaderOneBadgeOne = '';
-        valueArr = GROUP_NODE_ROLE_TYPE_POPUP_OPTION;
+        valueArr = ROLE_POPUP_OPTION;
         revisePopupType = 'secondary';
       }
       if (
@@ -1104,6 +1135,10 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
     }
   };
+  const onClosePopUpEvent = () => {
+    dispatch({ type: POPUP_CLOSE });
+    setexchageMode(false);
+  };
   return (
     <div>
       <Popup isActive={isActive}>
@@ -1113,7 +1148,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           headerOneBadgeOne={popupHeaderOneBadgeOne}
           headerOneBadgeTwo={popupHeaderOneBadgeTwo}
           headerOneBadgeThree={popupHeaderOneBadgeThree}
-          setexchageMode={setexchageMode}
+          onClosePopUpEvent={onClosePopUpEvent}
           onClick={BackHandlerEvent}
           mode={''}
         />
@@ -1150,7 +1185,7 @@ const PopUpDisplayPanelAssociate = (props) => {
                 dataValue={popupHeaderOneBadgeTwo}
                 onClick={null}
               />
-              <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
+              <FormHelperText className={['helperTextCore'].join(' ')}>
                 <span></span>
               </FormHelperText>
             </Fragment>

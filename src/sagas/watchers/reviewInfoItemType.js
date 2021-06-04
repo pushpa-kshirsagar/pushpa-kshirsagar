@@ -3,7 +3,8 @@ import {
   LOADER_STOP,
   GET_ITEM_TYPE_REVIEW_INFO_SAGA,
   SET_DISPLAY_PANE_THREE_STATE,
-  ITEM_TYPE_REVISE_INFO_SAGA
+  ITEM_TYPE_REVISE_INFO_SAGA,
+  SET_ITEM_TYPE_REDUCER_STATE
 } from '../../actionType';
 import { ITEM_REVIEW_TYPE_URL, ITEM_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -37,15 +38,15 @@ function* workerReviewItemTypeInfoSaga(data) {
           headerOneBadgeOne: 'type',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
+          responseObject: userResponse.responseObject[0],
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
       if (isReviseMode) {
-        // yield put({
-        //   type: SET_ASSESSMENT_TYPE_REDUCER_STATE,
-        //   payload: userResponse.responseObject.informationBasic
-        // });
+        yield put({
+          type: SET_ITEM_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
       }
     }
 

@@ -21,7 +21,9 @@ body {
   display: flex !important;
   height: 50px;
 }
-
+.helperTextCore{
+  height: 10px;
+}
 .iguru-leftpanel {
   flex: 6;
   margin: 0 1px;
