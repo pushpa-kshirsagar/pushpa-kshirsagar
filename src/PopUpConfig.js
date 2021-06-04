@@ -579,6 +579,7 @@ export const MINE_REVIEW = [
     data: 'ascendants',
     dataValue: 'ascendants',
     optionClass: 'optionPrimary',
+    divider: 'dark',
     disabled: false
   },
   {
@@ -608,7 +609,7 @@ export const ASSESSEE_REVIEW_REVISE_POPUP = [
     disabled: false
   },
   { data: 'all', dataValue: 'all', optionClass: 'optionSecondary' },
-  { data: 'key', dataValue: 'key', optionClass: 'optionSecondary', divider: 'dark' },
+  { data: 'key', dataValue: 'key', optionClass: 'optionSecondary', divider: 'light' },
   { data: 'anonymous', dataValue: 'anonymous', optionClass: 'optionSecondary' },
   { data: 'blank', dataValue: 'blank', optionClass: 'optionSecondary' }
 ];
@@ -802,6 +803,82 @@ export const GROUP_TYPE_POPUP_OPTION = [
     dataValue: 'items',
     optionClass: 'optionSecondary',
     disabled: false
+  }
+];
+export const ROLE_POPUP_OPTION = [
+  { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: true },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: true
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: true
+  },
+  { data: 'assessees', dataValue: 'assessees', optionClass: 'optionSecondary' },
+  {
+    data: 'assessments',
+    dataValue: 'assessments',
+    optionClass: 'optionSecondary',
+    disabled: true
+  },
+  {
+    data: 'assignments',
+    dataValue: 'assignments',
+    optionClass: 'optionSecondary',
+    disabled: true
+  },
+  {
+    data: 'associates',
+    dataValue: 'associates',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'assessment centres',
+    dataValue: 'assessment centres',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: true
+  },
+  {
+    data: 'culture profiles',
+    dataValue: 'culture profiles',
+    optionClass: 'optionSecondary',
+    disabled: true
+  },
+  {
+    data: 'job profiles',
+    dataValue: 'job profiles',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: true
+  },
+  {
+    data: 'interviews',
+    dataValue: 'interviews',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: true
+  },
+  {
+    data: 'items',
+    dataValue: 'items',
+    optionClass: 'optionSecondary',
+    disabled: true
   }
 ];
 export const NODE_POPUP_OPTION = [

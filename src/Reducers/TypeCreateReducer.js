@@ -5,7 +5,8 @@ import {
   SET_ASSESSMENT_TYPE_REDUCER_STATE,
   SET_ASSIGNMENT_TYPE_REDUCER_STATE,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
-  SET_TYPE_GROUP_ALLOCATION
+  SET_TYPE_GROUP_ALLOCATION,
+  SET_ITEM_TYPE_REDUCER_STATE
 } from '../actionType';
 
 const initialState = {
@@ -60,6 +61,19 @@ const initialState = {
     informationAllocation: {
       associateTypeGroup: ''
     }
+  },
+  itemType: {
+    informationBasic: {
+      itemTypeName: '',
+      itemTypeNameVerification: false,
+      itemTypeDescription: '',
+      itemTypePicture: '',
+      itemTypePictureVerification: false,
+      itemTypeFlag: false
+    },
+    informationAllocation: {
+      itemTypeGroup: ''
+    }
   }
 };
 
@@ -106,6 +120,14 @@ const TypeCreateReducer = (istate = initialState, action) => {
         ...istate,
         associateType: {
           ...istate.associateType,
+          informationBasic: action.payload
+        }
+      };
+    case SET_ITEM_TYPE_REDUCER_STATE:
+      return {
+        ...istate,
+        itemType: {
+          ...istate.itemType,
           informationBasic: action.payload
         }
       };

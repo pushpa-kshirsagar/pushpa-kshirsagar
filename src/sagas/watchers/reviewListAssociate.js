@@ -11,14 +11,16 @@ import {
   SET_REVIEW_LIST_RELATE_DATA,
   LOADER_START,
   GET_ALLOCATE_ASSOCIATE,
-  GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA
+  GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA,
+  GET_NODE_ASSOCIATE_REVIEW_LIST
 } from '../../actionType';
 import {
   ASSOCIATE_GROUP_ASSOCIATE_URL,
   ASSOCIATE_REVIEWDISTINCT_LIST_URL,
   ASSOCIATE_ROLE_ASSOCIATE_URL,
   ASSOCIATE_TYPE_ASSOCIATE_URL,
-  EXTERNAL_NODE_LIST_URL
+  EXTERNAL_NODE_LIST_URL,
+  ASSOCIATE_NODE_ASSOCIATE_URL
 } from '../../endpoints';
 
 const reviewListDistinctApi = async (requestObj) => {
@@ -191,6 +193,46 @@ function* workerAssociateTypeAssociateSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerNodeAssociateSaga(data) {
+  yield put({ type: LOADER_START });
+  try {
+    const userResponse = yield call(reviewListDistinctApi, {
+      data: data.payload.request,
+      URL: ASSOCIATE_NODE_ASSOCIATE_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: userResponse.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'associates',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'nodeAssociatesReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
 
 function* workerReviewListAssociateAllocateSaga(data) {
   try {
@@ -241,6 +283,7 @@ function* workerReviewListAssociateAllocateSaga(data) {
 export default function* watchReviewListAssociateSaga() {
   yield takeLatest(ASSOCIATE_REVIEW_DISTINCT_SAGA, workerReviewListAssociateSaga);
   yield takeLatest(GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA, workerAssociateTypeAssociateSaga);
+  yield takeLatest(GET_NODE_ASSOCIATE_REVIEW_LIST, workerNodeAssociateSaga);
   yield takeLatest(
     GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
     workerReviewListAssociateRoleAssociateSaga

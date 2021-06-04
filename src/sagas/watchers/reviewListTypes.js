@@ -4,6 +4,7 @@ import {
   GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   GET_TYPE_GROUP_REVIEW_LIST_SAGA,
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
@@ -18,7 +19,8 @@ import {
   ASSESSMENT_TYPE_REVIEWLIST_URL,
   ASSIGNMENT_TYPE_REVIEWLIST_URL,
   ASSESSEE_TYPE_GROUP_URL,
-  ASSOCIATE_TYPE_GROUP_URL
+  ASSOCIATE_TYPE_GROUP_URL,
+  ITEM_TYPE_REVIEWLIST_URL
 } from '../../endpoints';
 
 const TypesReviewListDistinctApi = async (requestObj) => {
@@ -99,6 +101,50 @@ function* workerReviewAssociateTypeListSaga(data) {
             middlePaneHeaderBadgeThree: data.payload.BadgeThree,
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'associatesTypeDistinctReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_TYPE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerReviewItemTypeListSaga(data) {
+  try {
+    const userResponse = yield call(TypesReviewListDistinctApi, {
+      data: data.payload.request,
+      URL: ITEM_TYPE_REVIEWLIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'items',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: data.payload.BadgeThree,
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'itemsTypeDistinctReviewList',
             scanCount: userResponse && userResponse.countTotal,
             showMiddlePaneState: true
           }
@@ -250,5 +296,6 @@ export default function* watchReviewTypesListSaga() {
   yield takeLatest(GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA, workerReviewAssignmentTypeListSaga);
   yield takeLatest(GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA, workerReviewAssesseeTypeListSaga);
   yield takeLatest(GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA, workerReviewAssociateTypeListSaga);
+  yield takeLatest(GET_ITEM_TYPE_REVIEW_LIST_SAGA, workerReviewItemTypeListSaga);
   yield takeLatest(GET_TYPE_GROUP_REVIEW_LIST_SAGA, workerReviewTypeGroupListSaga);
 }

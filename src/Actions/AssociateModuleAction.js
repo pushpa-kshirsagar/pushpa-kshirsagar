@@ -22,17 +22,20 @@ import {
   SET_PAGE_COUNT,
   SET_POPUP_SINGLE_STATE,
   SET_REQUEST_OBJECT,
-  SET_SINGLE_ASSOCIATE_INFORMATION
+  SET_SINGLE_ASSOCIATE_INFORMATION,
+  GET_NODE_ASSOCIATE_REVIEW_LIST
 } from '../actionType';
 import {
   getAssociateTypeAssociateReqObj,
   getAssociateTypeAssociateScanReqObj,
+  getNodeAssociatesReqObj,
   makeAssociateGroupObj,
   makeAssociateNodeObj,
   makeAssociateReviewListRequestObject,
   makeAssociateRoleObj,
   makeAssociateTypeObj,
-  makeInternalNodeObj
+  makeInternalNodeObj,
+  getNodeAssociatesScanReqObj
 } from './GenericActions';
 
 export const getAssociateGroupAssociateReqObj = (
@@ -826,6 +829,56 @@ export const getAssociatesTypeApiCall = (
     payload: {
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+
+export const getNodeRelatedAssociateDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan,
+  middlePaneHeader
+) => {
+  let reqBody = getNodeAssociatesReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getNodeAssociatesScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_NODE_ASSOCIATE_REVIEW_LIST,
+    payload: {
+      request: reqBody,
+      HeaderOne: middlePaneHeader,
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

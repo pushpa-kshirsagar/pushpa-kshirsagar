@@ -1110,6 +1110,51 @@ export const makeAssociateTypeObj = (selectedAssociateInfo, filterKey, countPage
   };
   return requestObj;
 };
+export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.itemTypeName',
+      order: 'asc'
+    },
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.itemTypeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
 export const makeAssesseeTypeScanRequestObject = (
   selectedAssociateInfo,
   filterKey,
@@ -1596,6 +1641,80 @@ export const makeItemGroupScanObj = (
           {
             dataType: 'string',
             conditionColumn: 'informationBasic.itemGroupDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeItemTypeScanObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.itemTypeName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.itemTypeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.itemTypeName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.itemTypeDescription',
             conditionValue: {
               condition: 'ct',
               value: {
@@ -2979,6 +3098,187 @@ export const getItemGroupScanRequestObj12 = (
           {
             dataType: 'string',
             conditionColumn: 'informationEngagement.itemStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+export const getNodeAssociatesReqObj = (
+  selectedAssociateInfo,
+  nodeId,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: [
+            'CONFIRMED',
+            'DISAPPROVED',
+            'SUSPENDED',
+            'TERMINATED',
+            'UNAPPROVED',
+            'UNCONFIRMED',
+            'ARCHIVED',
+            'DELETED'
+          ]
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    nodeId: nodeId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.associateNode.associateNodePrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: nodeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.associateNode.associateNodeSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: nodeId
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+export const getNodeAssociatesScanReqObj = (
+  selectedAssociateInfo,
+  nodeId,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: [
+            'CONFIRMED',
+            'DISAPPROVED',
+            'SUSPENDED',
+            'TERMINATED',
+            'UNAPPROVED',
+            'UNCONFIRMED',
+            'ARCHIVED',
+            'DELETED'
+          ]
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    nodeId: nodeId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.associateNode.associateNodePrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: nodeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.associateNode.associateNodeSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: nodeId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.associateDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.associateStatus',
             conditionValue: searchObj
           }
         ]
