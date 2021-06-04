@@ -8,6 +8,7 @@ import {
   SET_ASSIGNMENT_TYPE_REDUCER_STATE,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_ITEM_TYPE_REDUCER_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
@@ -87,6 +88,12 @@ function* workerCreateTypeSaga(data) {
       if (data.payload.whichTypeCreate === 'associates') {
         yield put({
           type: SET_ASSOCIATE_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
+      }
+      if (data.payload.whichTypeCreate === 'items') {
+        yield put({
+          type: SET_ITEM_TYPE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
         });
       }

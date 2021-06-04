@@ -200,6 +200,8 @@ export const ITEM_GROUP_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/review-list';
 export const ITEM_REVIEW_GROUP_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/review';
 export const ITEM_REVISE_GROUP_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/revise';
+export const ITEM_REVIEW_TYPE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-type/review';
+export const ITEM_REVISE_TYPE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-type/revise';
 export const ASSOCIATE_NODE_ASSOCIATE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/associate/review-list';
 export const ITEM_TYPE_CREATE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-type/create';

@@ -42,7 +42,8 @@ import {
   ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
   ASSESSMENT_GROUP_REVISE_INFO_SAGA,
   ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
-  ITEM_GROUP_REVISE_INFO_SAGA
+  ITEM_GROUP_REVISE_INFO_SAGA,
+  ITEM_TYPE_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -93,6 +94,8 @@ import DisplayPaneThreeSectionOneItem from '../../Molecules/DisplayPaneThreeSect
 import DisplayPaneThreeSectionTwoItem from '../../Molecules/DisplayPaneThreeSectionTwoItem/DisplayPaneThreeSectionTwoItem';
 import DisplayPaneThreeSectionOneItemGroup from '../../Molecules/DisplayPaneThreeSectionOneItemGroup/DisplayPaneThreeSectionOneItemGroup';
 import DisplayPaneThreeSectionTwoItemGroup from '../../Molecules/DisplayPaneThreeSectionTwoItemGroup/DisplayPaneThreeSectionTwoItemGroup';
+import DisplayPaneThreeSectionTwoItemType from '../../Molecules/DisplayPaneThreeSectionTwoItemType/DisplayPaneThreeSectionTwoItemType';
+import DisplayPaneThreeSectionOneItemType from '../../Molecules/DisplayPaneThreeSectionOneItemType/DisplayPaneThreeSectionOneItemType';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -298,6 +301,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsItemType = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneItemType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoItemType,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssociate = [
     {
       id: 'section1',
@@ -385,6 +402,9 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssociateType, setSelectedSectionAssociateType] = useState(
     rightPaneSectionsAssociateType[0]
   );
+  const [selectedSectionItemType, setSelectedSectionItemType] = useState(
+    rightPaneSectionsItemType[0]
+  );
   const [selectedSectionAssessment, setSelectedSectionAssessment] = useState(
     rightPaneSectionsAssessment[0]
   );
@@ -413,6 +433,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssessmentType(rightPaneSectionsAssessmentType[0]);
     setSelectedSectionAssesseeType(rightPaneSectionsAssesseeType[0]);
     setSelectedSectionAssociateType(rightPaneSectionsAssociateType[0]);
+    setSelectedSectionItemType(rightPaneSectionsItemType[0]);
     setSelectedSectionAssessment(rightPaneSectionsAssessment[0]);
     setSelectedSectionAssignment(rightPaneSectionsAssignment[0]);
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
@@ -436,7 +457,7 @@ export const DisplayPaneThree = () => {
     associateGroup,
     itemGroup
   } = useSelector((state) => state.GroupCreateReducer);
-  const { assesseeType, assessmentType, assignmentType, associateType } = useSelector(
+  const { assesseeType, assessmentType, assignmentType, associateType, itemType } = useSelector(
     (state) => state.TypeCreateReducer
   );
   const { associateRole, assesseeRole } = useSelector((state) => state.RoleCreateReducer);
@@ -773,6 +794,22 @@ export const DisplayPaneThree = () => {
         type: ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
         payload: { headerOne: 'assignment', reqBody, createMode }
       });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'items') {
+      const { associateId, id } = responseObject;
+      console.log(itemType);
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        itemType: {
+          id,
+          informationBasic: itemType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ITEM_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'items', reqBody, createMode }
+      });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'associates') {
       const { associateId, id } = responseObject;
       console.log(associateType);
@@ -1001,6 +1038,14 @@ export const DisplayPaneThree = () => {
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesTYPECREATE' }
     });
   };
+  const onClickCreateItemType = () => {
+    console.log('ON CLICK CREATE ASSOCIATE TYPE');
+    dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'itemsTYPECREATE' }
+    });
+  };
 
   const onClickCreateAssesseeRole = () => {
     console.log('ON CLICK CREATE ASSESSEE ROLE');
@@ -1073,6 +1118,9 @@ export const DisplayPaneThree = () => {
   ];
   const createAssociateTypePrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssociateType, Icon: AddIcon }
+  ];
+  const createItemTypePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateItemType, Icon: AddIcon }
   ];
 
   const createAssesseeRolePrimaryIcon = [
@@ -1433,6 +1481,30 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseItemTypeBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'itemsTYPECREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'itemsTYPECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'itemsTYPECREATE' }
+      });
+    }
+  };
+
   const reviseAssesseeTypeBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
@@ -2129,6 +2201,50 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
+      {isReviewRevise && responseObject && headerOne === 'items' && headerOneBadgeOne === 'type' && (
+        <>
+          <div style={{ padding: '2.5px' }}>
+            <div style={{ padding: '2.5px' }}>
+              <BasicCard
+                isAlertActive
+                isFlagActive={informationBasic?.itemTypeFlag || false}
+                className=""
+                labelTextOneOne="name"
+                labelTextOneTwo="description"
+                textOneOne={informationBasic.itemTypeName || 'No Information'}
+                textOneTwo={informationBasic.itemTypeDescription || 'No Information'}
+                isVerifiedActiveName={false}
+                isVerifiedActivePicture={false}
+                mode={reviewMode}
+                onClickRevise={reviseItemTypeBasicInformation}
+              />
+            </div>
+            <Sections
+              listSections={rightPaneSectionsItemType}
+              selectedSection={selectedSectionItemType}
+              setSelectedSection={setSelectedSectionItemType}
+            />
+          </div>
+          {reviewMode === 'revise' && (
+            <FooterIconTwo
+              FilterModeEnable={isShowReviseIcon}
+              FilterMode={FilterMode}
+              onClick={onClickRevise}
+              primaryIcon={revisePrimaryIcon}
+              secondaryIcon={reviseSecondaryIcons}
+            />
+          )}
+          {createMode === 'itemsType' && reviewMode !== 'revise' && (
+            <FooterIconTwo
+              FilterModeEnable={true}
+              FilterMode={FilterMode}
+              onClick={onClickCreateItemType}
+              primaryIcon={createItemTypePrimaryIcon}
+              secondaryIcon={[]}
+            />
+          )}
+        </>
+      )}
       {isReviewRevise &&
         responseObject &&
         headerOne === 'associates' &&
