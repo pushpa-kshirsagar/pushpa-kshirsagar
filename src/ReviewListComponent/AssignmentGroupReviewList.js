@@ -102,9 +102,9 @@ const AssignmentGroupReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessees',
-        popupHeaderOneBadgeOne: '',
-        popupHeaderOneBadgeTwo: 'group',
+        popupHeaderOne: 'assignments',
+        popupHeaderOneBadgeOne: 'group',
+        popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
@@ -140,7 +140,7 @@ const AssignmentGroupReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assignmentGroupDistinctinactive' && (
+      {FilterMode === 'assignmentsGroupDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

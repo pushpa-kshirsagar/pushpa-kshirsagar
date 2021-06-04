@@ -16,7 +16,11 @@ import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentTypeObj } from '../Actions/GenericActions';
-import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION, ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import {
+  ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
+import { getAssociatesTypeApiCall } from '../Actions/AssociateModuleAction';
 const AssociateTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -75,24 +79,22 @@ const AssociateTypeReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssessmentTypeObj(selectedAssociateInfo, siftKey, 0, countPage);
-    dispatch({ type: LOADER_START });
-    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-    dispatch({
-      type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
-      payload: {
-        request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
-      }
-    });
+    getAssociatesTypeApiCall(
+      selectedAssociateInfo,
+      siftKey,
+      countPage,
+      dispatch,
+      'types',
+      'associates'
+    );
+
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
+    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -125,6 +127,7 @@ const AssociateTypeReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log(FilterMode, 'FilterMode');
   const associateSeftId =
     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
@@ -150,7 +153,7 @@ const AssociateTypeReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assesseesTypeDistinctinactive' && (
+      {(FilterMode === 'associatesTypeDistinctinactive' || FilterMode === 'associatesTypeDistinctsuspended'|| FilterMode === 'associatesTypeDistinctterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

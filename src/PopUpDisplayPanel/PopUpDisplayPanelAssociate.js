@@ -726,6 +726,10 @@ const PopUpDisplayPanelAssociate = (props) => {
             isMiddlePaneList: true
           }
         });
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: popupHeaderOne + 'GroupDistinct' + secondaryOptionCheckValue }
+        });
       }
       if (popupHeaderOne === 'items') {
         getItemGroupDistinctApiCall(
