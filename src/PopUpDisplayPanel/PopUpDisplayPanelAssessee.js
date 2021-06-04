@@ -111,9 +111,9 @@ const PopUpDisplayPanelAssessee = (props) => {
       reviseSecondaryOptionCheckValue = 'all';
     }
     if (clickValue === 'link') {
-      revisePopupHeaderOne = 'associate';
-      revisepopupHeaderOneBadgeOne = clickValue;
-      revisepopupHeaderOneBadgeTwo = 'self';
+      revisePopupHeaderOne = 'assessee';
+      revisepopupHeaderOneBadgeOne = 'self';
+      revisepopupHeaderOneBadgeTwo = 'link';
       reviseisPopUpValue = 'REVISE_CREDENTIAL_SIGNIN_POPUP';
       revisePopupType = 'secondary';
       revisePopupMode = 'ASSOCIATE_LINK';

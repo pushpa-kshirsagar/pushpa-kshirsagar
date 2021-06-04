@@ -16,6 +16,7 @@ const PopUpAssociateLinkSignIn = (props) => {
     headerPanelColour,
     headerOne,
     headerOneBadgeOne,
+    headerOneBadgetwo,
     onClick,
     onClose,
     setUserName,
@@ -48,6 +49,7 @@ const PopUpAssociateLinkSignIn = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
+          headerOneBadgeTwo={headerOneBadgetwo}
           mode={'core'}
           onClick={onClick}
           onClose={onClose}

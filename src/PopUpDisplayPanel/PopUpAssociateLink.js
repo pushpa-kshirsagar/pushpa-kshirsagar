@@ -15,9 +15,12 @@ import PopUpAdministratorSignInCredentialRevise from './PopUpAdministratorSignIn
 import PopUpAssociateLinkSignIn from './PopUpAssociateLinkSignIn';
 const PopUpAssociateLink = () => {
   const dispatch = useDispatch();
-  const { isPopUpValue, popupHeaderOne, popupHeaderOneBadgeOne } = useSelector(
-    (state) => state.PopUpReducer
-  );
+  const {
+    isPopUpValue,
+    popupHeaderOne,
+    popupHeaderOneBadgeOne,
+    popupHeaderOneBadgeTwo
+  } = useSelector((state) => state.PopUpReducer);
   const { selectedAssociateInfo, leftPaneAssesseeInfo, errorResponse } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
@@ -58,7 +61,6 @@ const PopUpAssociateLink = () => {
       });
       dispatch({ type: ASSESSEE_ASSOCIATE_LINK_LIST, payload: { request: reqObj } });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-
     }
   };
 
@@ -97,9 +99,9 @@ const PopUpAssociateLink = () => {
       dispatch({
         type: SET_POPUP_STATE,
         payload: {
-          popupHeaderOne: 'associate',
-          popupHeaderOneBadgeOne: 'link',
-          popupHeaderOneBadgeTwo: '',
+          popupHeaderOne: 'assessee',
+          popupHeaderOneBadgeOne: 'self',
+          popupHeaderOneBadgeTwo: 'link',
           isPopUpValue: 'SIGNIN_POPUP',
           popupOpenType: 'secondary',
           secondaryOptionCheckValue: '',
@@ -116,6 +118,7 @@ const PopUpAssociateLink = () => {
         headerPanelColour={'genericOne'}
         headerOne={popupHeaderOne}
         headerOneBadgeOne={popupHeaderOneBadgeOne}
+        headerOneBadgetwo={popupHeaderOneBadgeTwo}
         signInOptions={signInOptions}
         errorMsg={errorMsg}
         setErrorMsg={setErrorMsg}
@@ -132,6 +135,7 @@ const PopUpAssociateLink = () => {
         headerPanelColour={'genericOne'}
         headerOne={popupHeaderOne}
         headerOneBadgeOne={popupHeaderOneBadgeOne}
+        headerOneBadgetwo={popupHeaderOneBadgeTwo}
         setIsPasswordValid={setIsPasswordValid}
         setIsUserNameValid={setIsUserNameValid}
         isUserNameValid={isUserNameValid}
