@@ -331,7 +331,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'information' &&
       popupHeaderOne === 'associate' &&
-      (popupHeaderOneBadgeOne === 'review' || popupHeaderOneBadgeOne === 'revise')
+      (popupHeaderOneBadgeTwo === 'review' || popupHeaderOneBadgeTwo === 'revise')
     ) {
       dispatch({ type: LOADER_START });
       dispatch({

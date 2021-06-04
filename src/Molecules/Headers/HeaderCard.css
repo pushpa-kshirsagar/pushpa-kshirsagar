@@ -57,9 +57,15 @@
   font-size: 1.6rem;
   flex: 4;
   overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.6 !important;
   white-space: nowrap;
   justify-content: flex-start;
   align-items: center;
   display: flex;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.iguru-moretextpanelheader::-webkit-scrollbar {
+  display: none;
 }

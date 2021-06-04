@@ -13,12 +13,28 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { informationEngagement, informationSetup, informationAllocation } = responseObject;
+  const {
+    informationEngagement,
+    informationSetup,
+    informationAllocation,
+    informationAlliance
+  } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   const dispatch = useDispatch();
+  let administratorPrimaryList = [];
+  if (informationAlliance?.associateAdministratorPrimary) {
+    const ob = informationAlliance?.associateAdministratorPrimary || {};
+    const administratorName = `${ob?.informationBasic.assesseeNamePrefix} ${ob?.informationBasic.assesseeNameFirst.trim()} ${ob?.informationBasic.assesseeNameOther.trim()} ${ob?.informationBasic.assesseeNameLast.trim()} ${ob?.informationBasic.assesseeNameSuffix.trim()}`.trim();
+    administratorPrimaryList.push({
+      id: ob.id,
+      textOne: administratorName || '',
+      textTwo: ob?.informationBasic?.assesseeAlias || '',
+      status: ''
+    });
+  }
 
   const allianceListAll = [
     {
@@ -31,26 +47,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: '',
-              status: 'active'
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: '',
-              status: 'active'
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: '',
-              status: 'active'
-            }
-          ]
+          innerList: administratorPrimaryList
         },
         {
           labelTextOneOneBadge: 'secondary',
@@ -848,26 +845,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: '',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: '',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: '',
-              status: ''
-            }
-          ]
+          innerList: administratorPrimaryList
         },
         {
           labelTextOneOneBadge: 'secondary',
@@ -1121,7 +1099,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         </>
       ) : (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
               {allianceListKey.map((ob) => {
                 return (
