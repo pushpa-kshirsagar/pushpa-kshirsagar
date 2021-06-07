@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssignment = () => {
   const [listExpand, setListExpand] = useState('');
+  const dispatch = useDispatch();
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
@@ -324,6 +326,78 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       isListCard: false
     }
   ];
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      // let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      // dispatch({
+      //   type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+      //   payload: {
+      //     request: requestObj,
+      //     BadgeOne: '',
+      //     BadgeTwo: '',
+      //     BadgeThree: '',
+      //     isMiddlePaneList: false
+      //   }
+      // });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'GROUPSECONDARYPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+        });
+      }
+    }
+    if (labelName === 'manager') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERSECONDARYPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+        });
+      }
+    }
+    if (labelName === 'node') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODESECONDARYPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+        });
+      }
+    }
+    if (labelName === 'type') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPESECONDARYPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+        });
+      }
+    }
+  };
 
   return (
     <div
@@ -350,6 +424,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
               setListExpand={setListExpand}
               list={allocationList}
               mode={reviewMode}
+              onClickRevise={reviseAllocation}
             />
           </div>
           <div className="containerPadding">
@@ -394,9 +469,18 @@ const DisplayPaneThreeSectionOneAssignment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseAllocation}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseAllocation}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );
