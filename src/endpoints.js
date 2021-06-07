@@ -207,4 +207,12 @@ export const ASSOCIATE_NODE_ASSOCIATE_URL =
 export const ITEM_TYPE_CREATE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/item-type/create';
 export const ITEM_TYPE_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/item-type/review-list';
+export const ITEMGROUPITEM_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/item/review-list';
+export const ITEMTYPEPITEM_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/item-type/item/review-list';
+export const ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/assessment/review-list';
+export const ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/assessment/review-list';
 // export const URL = '';

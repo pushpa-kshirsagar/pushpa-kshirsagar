@@ -63,6 +63,8 @@ import {
   getNodeRelatedAssociateDistinctApiCall
 } from '../Actions/AssociateModuleAction';
 import { makeInternalNodeObj } from '../Actions/GenericActions';
+import { getItemGroupItemDistinctApiCall, getItemTypeItemDistinctApiCall } from '../Actions/ItemModuleAction';
+import { getAssessmentGroupAssessmentDistinctApiCall } from '../Actions/AssessmentModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -920,6 +922,60 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({
           type: FILTERMODE,
           payload: { FilterMode: 'associateRoleAssociateDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'itemsGroupDistinctReviewList') {
+        getItemGroupItemDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'itemGroupItemDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'itemsTypeDistinctReviewList') {
+        getItemTypeItemDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'itemTypeItemDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
+        getAssessmentGroupAssessmentDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'itemTypeItemDistinct' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });

@@ -93,6 +93,7 @@ import {
 } from '../Actions/ItemModuleAction';
 import IconButton from '../Molecules/IconButton/IconButton';
 import { Fragment } from 'react';
+import { getAssessmentGroupApiCall } from '../Actions/AssessmentModuleAction';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -685,28 +686,14 @@ const PopUpDisplayPanelAssociate = (props) => {
         );
       }
       if (popupHeaderOne === 'assessments') {
-        requestObj = makeAssessmentGroupObj(
+        getAssessmentGroupApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
-          0,
-          countPage
+          countPage,
+          dispatch,
+          'groups',
+          true
         );
-        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-        dispatch({
-          type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
-          payload: {
-            request: requestObj,
-            BadgeOne: 'groups',
-            BadgeTwo: 'distinct',
-            BadgeThree: secondaryOptionCheckValue,
-            isMiddlePaneList: true
-          }
-        });
-        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-        dispatch({
-          type: FILTERMODE,
-          payload: { FilterMode: popupHeaderOne + 'GroupDistinct' + secondaryOptionCheckValue }
-        });
       }
       if (popupHeaderOne === 'assignments') {
         requestObj = makeAssignmentGroupObj(

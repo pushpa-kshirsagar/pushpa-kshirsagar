@@ -6,9 +6,21 @@ import {
   SET_REQUEST_OBJECT,
   GET_ITEM_REVIEW_LIST_SAGA,
   GET_ITEM_GROUP_REVIEW_LIST_SAGA,
-  GET_ITEM_TYPE_REVIEW_LIST_SAGA
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+  GET_ITEMGROUPITEM_REVIEW_LIST_SAGA,
+  GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_RELATED_REQUEST_OBJECT
 } from '../actionType';
-import { makeItemGroupObj, makeItemObj, makeItemsTypeObj } from './GenericActions';
+import {
+  getItemGroupItemReqObj,
+  getItemGroupItemScanReqObj,
+  getItemTypeItemReqObj,
+  getItemTypeItemScanReqObj,
+  makeItemGroupObj,
+  makeItemObj,
+  makeItemsTypeObj
+} from './GenericActions';
 
 export const getItemsDistinctApiCall = (
   selectedAssociateInfo,
@@ -90,6 +102,101 @@ export const getItemsTypeApiCall = (
     payload: {
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getItemGroupItemDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = getItemGroupItemReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getItemGroupItemScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ITEMGROUPITEM_REVIEW_LIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'items',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+
+export const getItemTypeItemDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = getItemTypeItemReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getItemTypeItemScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'items',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

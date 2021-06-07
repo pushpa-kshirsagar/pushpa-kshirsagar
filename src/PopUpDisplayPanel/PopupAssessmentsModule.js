@@ -32,6 +32,12 @@ import {
   makeAssessmentTypeObj
 } from '../Actions/GenericActions';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
+import {
+  createAssessmentPopup,
+  getAssessmentDistinctApiCall,
+  getAssessmentGroupApiCall,
+  getAssessmentTypeApiCall
+} from '../Actions/AssessmentModuleAction';
 
 const PopupAssessmentsModule = (props) => {
   const {
@@ -58,129 +64,41 @@ const PopupAssessmentsModule = (props) => {
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
-      dispatch({ type: CLEAR_ASSESSMENT_INFO });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
-      });
-      let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({
-        type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: '',
-          BadgeTwo: '',
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
-      let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({
-        type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
-        payload: {
-          request: roleRequestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
-      });
-      dispatch({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: '',
-          middlePaneHeaderBadgeOne: '',
-          middlePaneHeaderBadgeTwo: '',
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: '',
-          scanCount: null,
-          showMiddlePaneState: false
-        }
-      });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      resetDataFunction();
+      createAssessmentPopup(
+        selectedAssociateInfo,
+        dispatch,
+        secondaryOptionCheckValue,
+        targetValue
+      );
     } else if (targetValue === 'distinct') {
-      let requestObect = makeAssessmentReviewListRequestObject(
+      getAssessmentDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assessmentsDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-      dispatch({
-        type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
-        payload: {
-          request: requestObect,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue
-        }
-      });
-      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+      resetDataFunction();
     } else if (targetValue === 'groups') {
-      let requestObj = makeAssessmentGroupObj(
+      getAssessmentGroupApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assessmentGroupDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
-      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+      resetDataFunction();
     } else if (targetValue === 'types') {
-      let requestObj = makeAssessmentTypeObj(
+      getAssessmentTypeApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assignmentsTypeDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
-      dispatch({ type: CLEAR_ASSESSMENT_INFO });
+      resetDataFunction();
     } else if (targetValue === 'nodes') {
-      dispatch({ type: CLEAR_ASSESSMENT_INFO });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'nodeViewState', value: 'hierarchy' }
@@ -195,12 +113,17 @@ const PopupAssessmentsModule = (props) => {
         'hierarchy',
         'assessments'
       );
-    }else {
+      resetDataFunction();
+    } else {
       dispatch({
         type: SET_ASSESSMENT_NEXT_POPUP,
         payload: e.currentTarget.getAttribute('data-value')
       });
     }
+  };
+  const resetDataFunction = () => {
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+    dispatch({ type: CLEAR_ASSESSMENT_INFO });
   };
   const BackHandlerEvent = (e) => {
     if (isBackToSectionPopUp) {
@@ -210,7 +133,7 @@ const PopupAssessmentsModule = (props) => {
       dispatch({ type: SET_ASSESSMENT_PREVIOUS_POPUP });
     }
   };
- 
+
   return (
     <div>
       <Popup isActive={assessmentsPopUpActive}>

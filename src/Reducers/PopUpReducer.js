@@ -39,7 +39,8 @@ import {
   FLAG_OPTION_PUPUP,
   GROUP_TYPE_POPUP_OPTION,
   ANALYTICS_POPUP,
-  EXCHANGE_POPUP_OPTION
+  EXCHANGE_POPUP_OPTION,
+  ROLE_POPUP_OPTION
 } from '../PopUpConfig';
 
 const initialState = {
@@ -205,10 +206,7 @@ const PopUpReducer = (istate = initialState, action) => {
           currentPopUpOption: REVIEW_DISTINCT_POPUP_OPTION
         };
       } else if (
-        (istate.popupHeaderOne === 'groups' ||
-          // istate.popupHeaderOne === 'nodes' ||
-          istate.popupHeaderOne === 'roles' ||
-          istate.popupHeaderOne === 'types') &&
+        (istate.popupHeaderOne === 'groups' || istate.popupHeaderOne === 'types') &&
         (action.payload === 'assessees' ||
           action.payload === 'assessments' ||
           action.payload === 'assignments' ||
@@ -222,6 +220,28 @@ const PopUpReducer = (istate = initialState, action) => {
         let tempArr = [];
         GROUP_TYPE_POPUP_OPTION.forEach((element) => {
           tempArr.push({ ...element, disabled: false });
+        });
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload,
+          currentPopUpOption: tempArr
+        };
+      } else if (
+        istate.popupHeaderOne === 'roles' &&
+        (action.payload === 'assessees' || action.payload === 'associates')
+      ) {
+        let tempArr = [];
+        ROLE_POPUP_OPTION.forEach((element) => {
+          if (
+            element.data === 'create' ||
+            element.data === 'review' ||
+            element.data === 'notifications' ||
+            element.data === 'reports'
+          ) {
+            tempArr.push({ ...element, disabled: false });
+          } else {
+            tempArr.push(element);
+          }
         });
         return {
           ...istate,
@@ -292,6 +312,7 @@ const PopUpReducer = (istate = initialState, action) => {
           action.payload.badgeValue === 'notifications' ||
           action.payload.badgeValue === 'administrators' ||
           action.payload.badgeValue === 'managers' ||
+          action.payload.badgeValue === 'items' ||
           action.payload.badgeValue === 'assessees' ||
           action.payload.badgeValue === 'assessments' ||
           action.payload.badgeValue === 'assignments' ||

@@ -17,9 +17,12 @@ import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 const AssessmentCreatePopup = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { selectedAssociateInfo, coreTypeReviewListData, coreGroupReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    coreTypeReviewListData,
+    coreGroupReviewListData,
+    coreNodeReviewListData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationBasic, informationAllocation } = useSelector(
     (state) => state.AssessmentReducer
   );
@@ -49,8 +52,6 @@ const AssessmentCreatePopup = (props) => {
     dispatch({ type: CREATE_ASSESSMENT_SAGA, payload: reqBody });
   };
   const updateAssessmentGroups = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(informationAllocation.assessmentGroup.assessmentGroupPrimary);
     let groupid = e.currentTarget.getAttribute('tag');
     let groupArr = informationAllocation.assessmentGroup.assessmentGroupPrimary;
     if (groupArr.includes(groupid)) {
@@ -71,9 +72,28 @@ const AssessmentCreatePopup = (props) => {
       }
     });
   };
+  const updateAssessmentNodes = (e) => {
+    let groupid = e.currentTarget.getAttribute('tag');
+    let groupArr = informationAllocation.assessmentNode.assessmentNodePrimary;
+    if (groupArr.includes(groupid)) {
+      document.getElementById(groupid).style.backgroundColor = 'white';
+      groupArr = groupArr.filter(function (number) {
+        return number !== groupid;
+      });
+    } else {
+      groupArr.push(groupid);
+      document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assessmentNode',
+        actualStateName: 'assessmentNodePrimary',
+        value: groupArr
+      }
+    });
+  };
   const updateAssessmentTypes = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(informationAllocation.assessmentType.assessmentTypePrimary);
     let groupid = e.currentTarget.getAttribute('tag');
     let groupArr = informationAllocation.assessmentType.assessmentTypePrimary;
     if (groupArr.includes(groupid)) {
@@ -94,6 +114,8 @@ const AssessmentCreatePopup = (props) => {
       }
     });
   };
+  console.log(informationBasic, informationAllocation);
+
   return (
     <div>
       <PopUpTextField
@@ -145,6 +167,7 @@ const AssessmentCreatePopup = (props) => {
         textOne={'assessmentGroupName'}
         textTwo={'assessmentGroupDescription'}
         onClickEvent={updateAssessmentGroups}
+        selectedList={informationAllocation.assessmentGroup.assessmentGroupPrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -175,14 +198,11 @@ const AssessmentCreatePopup = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreNodeReviewListData}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={updateAssessmentNodes}
+        selectedList={informationAllocation.assessmentNode.assessmentNodePrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -198,6 +218,7 @@ const AssessmentCreatePopup = (props) => {
         textOne={'assessmentTypeName'}
         textTwo={'assessmentTypeDescription'}
         onClickEvent={updateAssessmentTypes}
+        selectedList={informationAllocation.assessmentType.assessmentTypePrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation
