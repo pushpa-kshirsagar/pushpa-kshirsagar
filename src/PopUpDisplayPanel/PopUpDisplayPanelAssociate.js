@@ -87,6 +87,7 @@ import {
   getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
 import {
+  createItemPopupApiCall,
   getItemGroupDistinctApiCall,
   getItemsDistinctApiCall,
   getItemsTypeApiCall
@@ -889,18 +890,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'items' &&
       popupHeaderOneBadgeOne === 'create'
     ) {
-      dispatch({ type: CLEAR_ITEM_REDUCER_STATE });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: {
-          stateName: 'selectedInformationAllorKey',
-          value: secondaryOptionCheckValue
-        }
-      });
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ITEMCREATE' }
-      });
+      createItemPopupApiCall(selectedAssociateInfo, secondaryOptionCheckValue, dispatch);
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'groups') {
       dispatch({ type: CLEAR_GROUP_REDUCER_STATE });

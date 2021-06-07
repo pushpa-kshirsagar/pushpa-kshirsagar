@@ -975,7 +975,7 @@ const PopUpMiddlePaneList = (props) => {
         );
         dispatch({
           type: FILTERMODE,
-          payload: { FilterMode: 'itemTypeItemDistinct' + secondaryOptionCheckValue }
+          payload: { FilterMode: 'assessmentGroupAssessment' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });

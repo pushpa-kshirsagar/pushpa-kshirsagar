@@ -257,8 +257,6 @@ const PopUpSignOnAssessee = (props) => {
   };
 
   const updateTypeIdObject = (e) => {
-    // console.log(e.currentTarget.getAttribute('tag'));
-    // console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRoleSecondary);
     let typeid = e.currentTarget.getAttribute('tag');
     let typeArr = assesseeInfo.informationAllocation.assesseeType.assesseeTypeSecondary;
     console.log(typeArr.includes(typeid));
@@ -276,14 +274,12 @@ const PopUpSignOnAssessee = (props) => {
       type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
       payload: {
         stateName: 'assesseeType',
-        actualStateName: 'assesseeTypeSecondary',
+        actualStateName: 'assesseeTypePrimary',
         value: typeArr
       }
     });
   };
   const updateRoleIdSecondaryObject = (e) => {
-    // console.log(e.currentTarget.getAttribute('tag'));
-    // console.log(assesseeInfo.informationAllocation.assesseeRole.assesseeRoleSecondary);
     let roleid = e.currentTarget.getAttribute('tag');
     let roleArr = assesseeInfo.informationAllocation.assesseeRole.assesseeRoleSecondary;
     console.log(roleArr.includes(roleid));
@@ -307,11 +303,8 @@ const PopUpSignOnAssessee = (props) => {
     });
   };
   const updateAssesseeGroups = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupPrimary);
     let groupid = e.currentTarget.getAttribute('tag');
     let roleArr = assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupPrimary;
-    console.log(roleArr.includes(groupid));
 
     if (roleArr.includes(groupid)) {
       document.getElementById(groupid).style.backgroundColor = 'white';
@@ -332,11 +325,8 @@ const PopUpSignOnAssessee = (props) => {
     });
   };
   const updateAssesseeSecondaryGroups = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupSecondary);
     let groupid = e.currentTarget.getAttribute('tag');
     let roleArr = assesseeInfo.informationAllocation.assesseeGroup.assesseeGroupSecondary;
-    console.log(roleArr.includes(groupid));
 
     if (roleArr.includes(groupid)) {
       document.getElementById(groupid).style.backgroundColor = 'white';
@@ -356,7 +346,7 @@ const PopUpSignOnAssessee = (props) => {
       }
     });
   };
-console.log('associateTagPrimary',associateTagPrimary);
+console.log('assesseeInfo',assesseeInfo);
   return (
     <div>
       <PopUpAssesseeName
@@ -620,6 +610,7 @@ console.log('associateTagPrimary',associateTagPrimary);
         textOne={'assesseeTypeName'}
         textTwo={'assesseeTypeDescription'}
         onClickEvent={updateTypeIdObject}
+        selectedList={assesseeInfo?.informationAllocation?.assesseeType.assesseeTypeSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpAddressEmail

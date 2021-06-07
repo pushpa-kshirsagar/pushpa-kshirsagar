@@ -52,6 +52,7 @@ const PopUpConfirmation = (props) => {
       popupMode === 'assessmentsTYPECREATE' ||
       popupMode === 'assessmentsTYPECREATE' ||
       popupMode === 'associatesTYPECREATE' ||
+      popupMode === 'ASSESSMENTCREATE' ||
       popupMode === 'NODECREATE' ||
       popupMode === 'ITEMCREATE'
     ) {

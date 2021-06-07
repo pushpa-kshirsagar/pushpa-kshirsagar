@@ -10,18 +10,81 @@ import {
   GET_ITEMGROUPITEM_REVIEW_LIST_SAGA,
   GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_RELATED_REQUEST_OBJECT
+  SET_RELATED_REQUEST_OBJECT,
+  CLEAR_ITEM_REDUCER_STATE,
+  SET_POPUP_VALUE,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  INTERNAL_NODE_LIST_SAGA
 } from '../actionType';
 import {
   getItemGroupItemReqObj,
   getItemGroupItemScanReqObj,
   getItemTypeItemReqObj,
   getItemTypeItemScanReqObj,
+  makeInternalNodeObj,
   makeItemGroupObj,
   makeItemObj,
   makeItemsTypeObj
 } from './GenericActions';
 
+export const createItemPopupApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  dispatch
+) => {
+  dispatch({ type: CLEAR_ITEM_REDUCER_STATE });
+  dispatch({ type: LOADER_START });
+  let requestObj = makeItemGroupObj(selectedAssociateInfo, 'all', 0, -1);
+  dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
+  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+  dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+  dispatch({
+    type: INTERNAL_NODE_LIST_SAGA,
+    payload: {
+      request: nodeRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      nodeViewState: 'list',
+      isMiddlePaneList: false
+    }
+  });
+  let typeRequestObj = makeItemsTypeObj(selectedAssociateInfo, 'all', 0, -1);
+  dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typeRequestObj });
+  dispatch({
+    type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+    payload: {
+      request: typeRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: {
+      stateName: 'selectedInformationAllorKey',
+      value: secondaryOptionCheckValue
+    }
+  });
+  dispatch({
+    type: SET_POPUP_VALUE,
+    payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ITEMCREATE' }
+  });
+};
 export const getItemsDistinctApiCall = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,

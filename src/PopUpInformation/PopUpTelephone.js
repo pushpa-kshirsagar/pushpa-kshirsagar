@@ -36,7 +36,7 @@ const PopUpTelephone = (props) => {
   const [oneErr, setoneErr] = useState('');
   const [twoErr, settwoErr] = useState('');
   const [threeErr, setthreeErr] = useState('');
-  console.log("TELEPHONE Object Key", objectKeys);
+  // console.log("TELEPHONE Object Key", objectKeys);
   const validate = () => {
     let isValidate = true;
     if (basicInfo && basicInfo[objectKeys[0]] === '') {

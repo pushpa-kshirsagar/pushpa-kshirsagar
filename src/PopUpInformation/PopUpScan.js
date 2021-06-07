@@ -64,7 +64,11 @@ import {
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeDistinctApiCall
 } from '../Actions/AssesseeModuleAction';
-import { getItemGroupItemDistinctApiCall, getItemTypeItemDistinctApiCall } from '../Actions/ItemModuleAction';
+import {
+  getItemGroupItemDistinctApiCall,
+  getItemTypeItemDistinctApiCall
+} from '../Actions/ItemModuleAction';
+import { getAssessmentGroupAssessmentDistinctApiCall } from '../Actions/AssessmentModuleAction';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
@@ -257,6 +261,21 @@ const PopUpScan = (props) => {
             isMiddlePaneList: true
           }
         });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'assessmentGroupAssessmentReviewList') {
+        getAssessmentGroupAssessmentDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
@@ -688,6 +707,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'itemsTypeDistinctReviewList' ||
                 isPopUpValue === 'itemTypeItemReviewList' ||
                 isPopUpValue === 'itemGroupItemReviewList' ||
+                isPopUpValue === 'assessmentGroupAssessmentReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

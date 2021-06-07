@@ -6,7 +6,8 @@ import {
   SET_MIDDLEPANE_STATE,
   CLEAR_ASSESSMENT_INFO,
   GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
-  GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA
+  GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA,
+  RELATED_REVIEWLIST_DISTINCT_DATA
 } from '../../actionType';
 import {
   ASSESSMENT_REVIEW_LIST_URL,
@@ -67,7 +68,7 @@ function* workerAssessmentGroupAssessmentSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000')
-      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [userResponse.responseObject] });
     yield put({
       type: SET_MIDDLEPANE_STATE,
       payload: {
@@ -76,7 +77,7 @@ function* workerAssessmentGroupAssessmentSaga(data) {
         middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assessmentDistinctReviewList',
+        typeOfMiddlePaneList: 'assessmentGroupAssessmentReviewList',
         scanCount: userResponse && userResponse.countTotal,
         showMiddlePaneState: true
       }
@@ -107,7 +108,7 @@ function* workerAssessmentTypeAssessmentSaga(data) {
         middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assessmentDistinctReviewList',
+        typeOfMiddlePaneList: 'assessmentTypeAssessmentReviewList',
         scanCount: userResponse && userResponse.countTotal,
         showMiddlePaneState: true
       }

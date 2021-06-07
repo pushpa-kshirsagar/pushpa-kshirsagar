@@ -87,7 +87,7 @@ const PopUpAssesseeName = (props) => {
       }
     }
   };
-console.log("LOCAL", localObject);
+// console.log("LOCAL", localObject);
 
   return (
     <div>

@@ -115,7 +115,6 @@ const AssessmentCreatePopup = (props) => {
     });
   };
   console.log(informationBasic, informationAllocation);
-
   return (
     <div>
       <PopUpTextField

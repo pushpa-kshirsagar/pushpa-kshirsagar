@@ -102,13 +102,14 @@ const AssessmentGroupReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessees',
+        popupHeaderOne: 'assessments',
         popupHeaderOneBadgeOne: '',
         popupHeaderOneBadgeTwo: 'group',
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status')
       }
     });
     dispatch({
@@ -132,6 +133,7 @@ const AssessmentGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.assessmentGroupStatus}
+                actualStatus={item.informationEngagement.assessmentGroupStatus}
                 textOne={item.informationBasic.assessmentGroupName}
                 textTwo={item.informationBasic.assessmentGroupDescription}
                 isTooltipActive={false}

@@ -232,6 +232,8 @@ function* workerReviewItemGroupListSaga(data) {
             showMiddlePaneState: true
           }
         });
+        console.log('loading end');
+        yield put({ type: LOADER_STOP });
       }
       yield put({
         type: data.payload.isMiddlePaneList
@@ -244,10 +246,9 @@ function* workerReviewItemGroupListSaga(data) {
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
-    yield put({ type: CLEAR_ASSIGNMENT_INFO });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

@@ -10,16 +10,22 @@ import {
   CLEAR_TYPE_REDUCER_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_TYPE_GROUP_ALLOCATION,
-  SET_TYPE_REDUCER_STATE
+  SET_TYPE_REDUCER_STATE,
+  SET_ITEM_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
 const ItemCreatePopUp = (props) => {
-  const { headerOne = 'item', reducerObeject, objectName, allocationObj } = props;
+  const { headerOne = 'item' } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const {
+    selectedAssociateInfo,
+    coreGroupReviewListData,
+    coreTypeReviewListData,
+    coreNodeReviewListData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
 
@@ -42,17 +48,49 @@ const ItemCreatePopUp = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ITEM_SAGA, payload: reqBody });
   };
-  const updateGroup = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    setRequiredErrorMsg('');
-    let tagId = e.currentTarget.getAttribute('tag');
-    let tagIdArr = reducerObeject?.informationAllocation[allocationObj];
+  // const updateGroup = (e) => {
+  //   console.log(e.currentTarget.getAttribute('tag'));
+  //   setRequiredErrorMsg('');
+  //   let tagId = e.currentTarget.getAttribute('tag');
+  //   let tagIdArr = itemInformation?.informationAllocation.itemGroup.itemGroupPrimary;
+  //   dispatch({
+  //     type: SET_TYPE_GROUP_ALLOCATION,
+  //     payload: {
+  //       objectName: objectName,
+  //       stateName: allocationObj,
+  //       value: tagId
+  //     }
+  //   });
+  // };
+  const updateGroup = (e, stateName, actualStateName) => {
+    let groupid = e.currentTarget.getAttribute('tag');
+    // let groupArr = itemInformation.informationAllocation.itemGroup.itemGroupPrimary;
+    let groupArr = itemInformation.informationAllocation[stateName][actualStateName];
+    if (groupArr.includes(groupid)) {
+      document.getElementById(groupid).style.backgroundColor = 'white';
+      groupArr = groupArr.filter(function (number) {
+        return number !== groupid;
+      });
+    } else {
+      groupArr.push(groupid);
+      document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
+    }
+    // dispatch({
+    //   type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+    //   payload: {
+    //     objectName: 'informationAllocation',
+    //     stateName: 'itemGroup',
+    //     actualStateName: 'itemGroupPrimary',
+    //     value: groupArr
+    //   }
+    // });
     dispatch({
-      type: SET_TYPE_GROUP_ALLOCATION,
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
       payload: {
-        objectName: objectName,
-        stateName: allocationObj,
-        value: tagId
+        objectName: 'informationAllocation',
+        stateName: stateName,
+        actualStateName: actualStateName,
+        value: groupArr
       }
     });
   };
@@ -105,17 +143,14 @@ const ItemCreatePopUp = (props) => {
         isRequired={false}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
-        ]}
-        selectedList={[]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={updateGroup}
         setErrorMsg={setRequiredErrorMsg}
-        errorMsg={requiredErrorMsg}
+        ListData={coreGroupReviewListData}
+        textOne={'itemGroupName'}
+        textTwo={'itemGroupDescription'}
+        onClickEvent={(e) => {
+          updateGroup(e, 'itemGroup', 'itemGroupPrimary');
+        }}
+        selectedList={itemInformation.informationAllocation.itemGroup.itemGroupPrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -137,7 +172,7 @@ const ItemCreatePopUp = (props) => {
         selectedList={[]}
         textOne={'name'}
         textTwo={'description'}
-        onClickEvent={updateGroup}
+        onClickEvent={null}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -153,15 +188,13 @@ const ItemCreatePopUp = (props) => {
         isRequired={false}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        selectedList={[]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={updateGroup}
+        ListData={coreNodeReviewListData}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={(e) => {
+          updateGroup(e, 'itemNode', 'itemNodePrimary');
+        }}
+        selectedList={itemInformation.informationAllocation.itemNode.itemNodePrimary}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -177,17 +210,15 @@ const ItemCreatePopUp = (props) => {
         isRequired={false}
         inputHeaderBadge={'primary'}
         infoMsg={'select a type'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
-        ]}
-        selectedList={[]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={updateGroup}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
+        ListData={coreTypeReviewListData}
+        textOne={'itemTypeName'}
+        textTwo={'itemTypeDescription'}
+        onClickEvent={(e) => {
+          updateGroup(e, 'itemType', 'itemTypePrimary');
+        }}
+        selectedList={itemInformation.informationAllocation.itemType.itemTypePrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation
