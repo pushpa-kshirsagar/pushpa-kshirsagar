@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { SET_POPUP_VALUE } from '../../actionType';
+import { GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA, SET_POPUP_VALUE } from '../../actionType';
+import { makeAssessmentGroupObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssessment = () => {
   const [listExpand, setListExpand] = useState('');
@@ -14,6 +15,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationEngagement } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -368,6 +370,17 @@ const DisplayPaneThreeSectionOneAssessment = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'group') {
+      let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({
+        type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
@@ -409,17 +422,17 @@ const DisplayPaneThreeSectionOneAssessment = () => {
         });
       }
     }
-    if (labelName === 'role') {
+    if (labelName === 'type') {
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'ROLEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+          payload: { isPopUpValue: 'TYPEPOPUP', popupMode: 'ASSESSMENTCREATE' }
         });
       }
       if (selectedBadgeName === 'secondary') {
         dispatch({
           type: SET_POPUP_VALUE,
-          payload: { isPopUpValue: 'ROLESECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
+          payload: { isPopUpValue: 'TYPESECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
         });
       }
     }
@@ -450,6 +463,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
               setListExpand={setListExpand}
               list={allocationList}
               mode={reviewMode}
+              onClickRevise={reviseAllocation}
             />
           </div>
           <div className="containerPadding">

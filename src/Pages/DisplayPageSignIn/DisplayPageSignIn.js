@@ -134,6 +134,7 @@ const DisplayPageSignIn = () => {
     if (code !== '' && revisedPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(revisedPassword)) {
         setRevisedPasswordError(INVALID_PASSWORD_ERROR_MESSAGE);
+        setConfirmRevisedPasswordError(INVALID_PASSWORD_ERROR_MESSAGE);
         return;
       }
       if (revisedPassword === confirmRevisedPassword) {

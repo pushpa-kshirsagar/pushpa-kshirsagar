@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Fingerprint from '@material-ui/icons/Fingerprint';
 import Manuscript from '@material-ui/icons/Description';
 import MailOutline from '@material-ui/icons/MailOutline';
+import MailIcon from '@material-ui/icons/Mail';
 import TelephoneVerified from '@material-ui/icons/Call';
 import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
@@ -75,7 +76,7 @@ const DisplayPaneThreeSectionTwo = () => {
   //   assesseeTelephoneCommunication: false,
   //   assesseeTelephoneVerification: false
   // },
-// +91 (citycode) number 'extension' extennumber
+  // +91 (citycode) number 'extension' extennumber
   // +91 (80) 786899 extension 987
   const {
     assesseeTelephoneAreaCity = '',
@@ -199,6 +200,10 @@ const DisplayPaneThreeSectionTwo = () => {
       isListCard: false
     }
   ];
+  const emailPrimaryCommunication =
+    informationContact?.assesseeAddressEmailPrimary?.assesseeAddressEmailCommunication || false;
+  const emailSecondaryCommunication =
+    informationContact?.assesseeAddressEmailSecondary?.assesseeAddressEmailCommunication || false;
   const contactListAll = [
     {
       id: 'a1',
@@ -207,19 +212,21 @@ const DisplayPaneThreeSectionTwo = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail || 'No Information'
+            informationContact.assesseeAddressEmailPrimary.assesseeAddressEmail || 'No Information',
+          IconOne: emailPrimaryCommunication ? MailIcon : MailOutline
         },
         {
           labelTextOneOneBadge: 'secondary',
           textOne:
             informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail ||
-            'No Information'
+            'No Information',
+          IconOne: emailSecondaryCommunication ? MailIcon : MailOutline
         }
       ],
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
-      IconOne: MailOutline,
+      IconOne: emailPrimaryCommunication ? MailIcon : MailOutline,
       IconTwo: () => {
         return <img src={Unverified} alt="Unverified" />;
       }

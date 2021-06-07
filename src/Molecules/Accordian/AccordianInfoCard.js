@@ -126,7 +126,67 @@ const AccordianInfoCard = (props) => {
           </div>
           <div className={'unitFlex'}></div>
           <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-            {IconOne && (
+            {selectedBadge?.IconOne ? (
+              <>
+                <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                  <IconButton
+                    onClick={
+                      mode === 'revise'
+                        ? () => {}
+                        : () => {
+                            onClickReview(
+                              labelTextOneOne,
+                              selectedBadge?.labelTextOneOneBadge || ''
+                            );
+                          }
+                    }
+                  >
+                    <selectedBadge.IconOne />
+                  </IconButton>
+                </div>
+              </>
+            ) : (
+              <>
+                {IconOne && (
+                  <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                    <IconButton
+                      onClick={
+                        mode === 'revise'
+                          ? () => {}
+                          : () => {
+                              onClickReview(
+                                labelTextOneOne,
+                                selectedBadge?.labelTextOneOneBadge || ''
+                              );
+                            }
+                      }
+                    >
+                      <IconOne />
+                    </IconButton>
+                  </div>
+                )}
+              </>
+            )}
+            {selectedBadge.IconTwo ? (
+              <>
+                <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                  <IconButton>
+                    <selectedBadge.IconTwo />
+                  </IconButton>
+                </div>
+              </>
+            ) : (
+              <>
+                {IconTwo && (
+                  <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                    <IconButton>
+                      <IconTwo />
+                    </IconButton>
+                  </div>
+                )}
+              </>
+            )}
+            {/* {IconOne && (
               <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
                 <IconButton
                   onClick={
@@ -140,14 +200,14 @@ const AccordianInfoCard = (props) => {
                   <IconOne />
                 </IconButton>
               </div>
-            )}
-            {IconTwo && (
+            )} */}
+            {/* {IconTwo && (
               <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
                 <IconButton>
                   <IconTwo />
                 </IconButton>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
