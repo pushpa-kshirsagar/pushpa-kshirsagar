@@ -119,6 +119,7 @@ const DisplayPageConfirmUser = () => {
     if (oldPassword !== '' && newPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(newPassword)) {
         setNewPasswordError(INVALID_PASSWORD_ERROR_MESSAGE);
+        setConfirmRevisedPasswordError(INVALID_PASSWORD_ERROR_MESSAGE);
         return;
       }
       if (newPassword === confirmRevisedPassword) {

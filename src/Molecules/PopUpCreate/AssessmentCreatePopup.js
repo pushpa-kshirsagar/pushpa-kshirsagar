@@ -170,6 +170,21 @@ const AssessmentCreatePopup = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'MANAGERPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        ListData={coreGroupReviewListData}
+        textOne={'assessmentGroupName'}
+        textTwo={'assessmentGroupDescription'}
+        onClickEvent={updateAssessmentGroups}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -189,7 +204,45 @@ const AssessmentCreatePopup = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'NODEPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a manager'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'NODEPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'TYPEPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a node'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'NODESECONDARYPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
@@ -218,6 +271,21 @@ const AssessmentCreatePopup = (props) => {
         textTwo={'assessmentTypeDescription'}
         onClickEvent={updateAssessmentTypes}
         selectedList={informationAllocation.assessmentType.assessmentTypePrimary}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'type'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a type'}
+        ListData={coreTypeReviewListData}
+        textOne={'assessmentTypeName'}
+        textTwo={'assessmentTypeDescription'}
+        onClickEvent={updateAssessmentTypes}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation

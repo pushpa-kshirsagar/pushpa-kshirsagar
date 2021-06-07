@@ -21,7 +21,7 @@ body {
   display: flex !important;
   height: 50px;
 }
-.helperTextCore{
+.helperTextCore {
   height: 10px;
 }
 .iguru-leftpanel {
@@ -316,7 +316,7 @@ body {
 /* below css for scroll */
 ::-webkit-scrollbar {
   width: 4px;
-  height: 3px;
+  height: 2px;
 }
 
 ::-webkit-scrollbar-track {
