@@ -130,7 +130,8 @@ const PopUpAssesseePassword = (props) => {
             <InputFeild
               id={'current password'}
               value={currentPassword}
-              label={'current password'}
+              label={'password'}
+              labelBadgeOne={'current'}
               type="password"
               errorMsg={currentPasswordError}
               onClick={(e) => {
@@ -141,7 +142,8 @@ const PopUpAssesseePassword = (props) => {
               id={'revised password'}
               value={revisedPassword}
               type="password"
-              label={'revised password'}
+              label={'password'}
+              labelBadgeOne={'revised'}
               errorMsg={revisedPasswordError}
               onClick={(e) => {
                 setRevisedPassword(e.target.value);
@@ -151,7 +153,8 @@ const PopUpAssesseePassword = (props) => {
               id={'revised password'}
               value={confirmRevisedPassword}
               type="password"
-              label={'revised password'}
+              label={'password'}
+              labelBadgeOne={'revised'}
               errorMsg={confirmRevisedPasswordError}
               onClick={(e) => {
                 setConfirmRevisedPassword(e.target.value);

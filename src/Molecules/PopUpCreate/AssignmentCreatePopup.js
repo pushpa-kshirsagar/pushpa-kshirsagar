@@ -130,6 +130,24 @@ const AssignmentCreatePopup = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'MANAGERPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        ListData={coreGroupReviewListData}
+        textOne={'assignmentGroupName'}
+        textTwo={'assignmentGroupDescription'}
+        selectedList={informationAllocation.assignmentGroup.assignmentGroupSecondary}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentGroup', 'assignmentGroupSecondary');
+        }}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -137,6 +155,25 @@ const AssignmentCreatePopup = (props) => {
         nextPopUpValue={'NODEPOPUP'}
         inputHeader={'manager'}
         inputHeaderBadge={'primary'}
+        infoMsg={'select a manager'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'NODEPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'secondary'}
         infoMsg={'select a manager'}
         ListData={[
           { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
@@ -167,6 +204,24 @@ const AssignmentCreatePopup = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'NODESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'TYPEPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a node'}
+        ListData={coreNodeReviewListData}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        selectedList={informationAllocation.assignmentNode.assignmentNodeSecondary}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentNode', 'assignmentNodeSecondary');
+        }}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'TYPEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -182,6 +237,24 @@ const AssignmentCreatePopup = (props) => {
           updateAllocationObj(e, 'assignmentType', 'assignmentTypePrimary');
         }}
         selectedList={informationAllocation.assignmentType.assignmentTypePrimary}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'type'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a type'}
+        ListData={coreTypeReviewListData}
+        textOne={'assignmentTypeName'}
+        textTwo={'assignmentTypeDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentType', 'assignmentTypeSecondary');
+        }}
+        selectedList={informationAllocation.assignmentType.assignmentTypeSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation

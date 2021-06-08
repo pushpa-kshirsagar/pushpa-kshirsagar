@@ -73,6 +73,25 @@ const AssessmentCreatePopup = (props) => {
     });
   };
   console.log(informationBasic, informationAllocation);
+  let selectedPrimaryGroup = informationAllocation?.assessmentGroup.assessmentGroupPrimary || [];
+  let selectedSecondaryGroup = informationAllocation?.assessmentGroup.assessmentGroupSecondary || [];
+  let filteredCoreGroupReviewListDataPrimary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for primary popup list
+      if (!selectedSecondaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataPrimary.push(group);
+    });
+  }
+  let filteredCoreGroupReviewListDataSecondary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for Secondary popup list
+      if (!selectedPrimaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataSecondary.push(group);
+    });
+  }
+
   return (
     <div>
       <PopUpTextField
@@ -120,7 +139,7 @@ const AssessmentCreatePopup = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataPrimary}
         textOne={'assessmentGroupName'}
         textTwo={'assessmentGroupDescription'}
         onClickEvent={(e) => {
@@ -138,7 +157,7 @@ const AssessmentCreatePopup = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataSecondary}
         textOne={'assessmentGroupName'}
         textTwo={'assessmentGroupDescription'}
         onClickEvent={(e) => {

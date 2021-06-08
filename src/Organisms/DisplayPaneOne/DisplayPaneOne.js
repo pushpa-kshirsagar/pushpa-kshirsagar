@@ -173,17 +173,18 @@ export const DisplayPaneOne = () => {
           )}
         </div>
 
-        {/* {assesseePermission && assesseePermission.associateHierarchy.includes('review') && ( */}
-        <>
-          <Sections
-            listSections={leftPaneSections}
-            selectedSection={selectedSection}
-            setSelectedSection={setSelectedSection}
-          />
+        {(assesseePermission && assesseePermission.associateHierarchy.includes('review')) ||
+          (true && (
+            <>
+              <Sections
+                listSections={leftPaneSections}
+                selectedSection={selectedSection}
+                setSelectedSection={setSelectedSection}
+              />
 
-          <FooterIconOne />
-        </>
-        {/* )} */}
+              <FooterIconOne />
+            </>
+          ))}
       </div>
       <PopUpDisplayPaneOneSectionTwo
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}

@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { SET_POPUP_VALUE } from '../../actionType';
+import { GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA, GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA, LOADER_START, SET_POPUP_VALUE } from '../../actionType';
+import { makeAssignmentGroupObj, makeAssignmentTypeObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssignment = () => {
   const [listExpand, setListExpand] = useState('');
@@ -14,6 +15,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationEngagement } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -331,17 +333,18 @@ const DisplayPaneThreeSectionOneAssignment = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'group') {
-      // let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
-      // dispatch({
-      //   type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
-      //   payload: {
-      //     request: requestObj,
-      //     BadgeOne: '',
-      //     BadgeTwo: '',
-      //     BadgeThree: '',
-      //     isMiddlePaneList: false
-      //   }
-      // });
+      dispatch({ type: LOADER_START });
+      let requestObj = makeAssignmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({
+        type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
@@ -384,6 +387,18 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       }
     }
     if (labelName === 'type') {
+      dispatch({ type: LOADER_START });
+      let roleRequestObj = makeAssignmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({
+        type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
@@ -408,7 +423,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
     >
       {headerOneBadgeTwo === 'all' ? (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <AllocationAccordian
               headerOne="alliance"
               isDisplayCardExpanded={listExpand === 'alliance'}
@@ -448,7 +463,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
         </>
       ) : (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
               {allianceList.map((ob) => {
                 return (

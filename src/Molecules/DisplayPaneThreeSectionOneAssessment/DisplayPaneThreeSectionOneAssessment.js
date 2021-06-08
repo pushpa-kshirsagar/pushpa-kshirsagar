@@ -6,17 +6,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA, SET_POPUP_VALUE } from '../../actionType';
-import { makeAssessmentGroupObj } from '../../Actions/GenericActions';
+import {
+  GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+  INTERNAL_NODE_LIST_SAGA,
+  LOADER_START,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
+  SET_POPUP_VALUE
+} from '../../actionType';
+import {
+  makeAssessmentGroupObj,
+  makeAssessmentTypeObj,
+  makeInternalNodeObj
+} from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssessment = () => {
   const [listExpand, setListExpand] = useState('');
   const dispatch = useDispatch();
-  const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
+  const { responseObject, headerOneBadgeTwo, headerOneBadgeOne, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
   const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -100,6 +113,66 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       isListCard: true
     }
   ];
+  let assessmentGroupListPrimary = [];
+  if (
+    informationAllocation?.assessmentGroup?.assessmentGroupPrimary &&
+    informationAllocation?.assessmentGroup?.assessmentGroupPrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assessmentGroup?.assessmentGroupPrimary;
+    tempArr.forEach((ob) => {
+      assessmentGroupListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.assessmentGroupName || '',
+        textTwo: ob?.informationBasic?.assessmentGroupDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assessmentGroupListSecondary = [];
+  if (
+    informationAllocation?.assessmentGroup?.assessmentGroupSecondary &&
+    informationAllocation?.assessmentGroup?.assessmentGroupSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assessmentGroup?.assessmentGroupSecondary;
+    tempArr.forEach((ob) => {
+      assessmentGroupListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.assessmentGroupName || '',
+        textTwo: ob?.informationBasic?.assessmentGroupDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assessmentNodeListPrimary = [];
+  if (
+    informationAllocation?.assessmentNode?.assessmentNodePrimary &&
+    informationAllocation?.assessmentNode?.assessmentNodePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assessmentNode?.assessmentNodePrimary;
+    tempArr.forEach((ob) => {
+      assessmentNodeListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assessmentNodeListSecondary = [];
+  if (
+    informationAllocation?.assessmentNode?.assessmentNodeSecondary &&
+    informationAllocation?.assessmentNode?.assessmentNodeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assessmentNode?.assessmentNodeSecondary;
+    tempArr.forEach((ob) => {
+      assessmentNodeListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -111,30 +184,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Group',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Group',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Group',
-              status: ''
-            }
-          ]
+          innerList: assessmentGroupListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assessmentGroupListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -189,30 +243,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Node',
-              status: ''
-            }
-          ]
+          innerList: assessmentNodeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assessmentNodeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -370,7 +405,9 @@ const DisplayPaneThreeSectionOneAssessment = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'group') {
+      dispatch({ type: LOADER_START });
       let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
         payload: {
@@ -409,6 +446,20 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       }
     }
     if (labelName === 'node') {
+      dispatch({ type: LOADER_START });
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          nodeViewState: 'list',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
@@ -423,6 +474,19 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       }
     }
     if (labelName === 'type') {
+      dispatch({ type: LOADER_START });
+      let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+      dispatch({
+        type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: headerOneBadgeOne,
+          BadgeTwo: headerOneBadgeTwo,
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,

@@ -849,14 +849,15 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assessment') {
-      const { informationBasic } = assessmentInfo;
+      const { informationBasic, informationAllocation } = assessmentInfo;
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId: id,
         assessment: {
           id,
-          informationBasic
+          informationBasic,
+          informationAllocation
         }
       };
       dispatch({ type: LOADER_START });
@@ -893,7 +894,6 @@ export const DisplayPaneThree = () => {
     } else if (headerOneBadgeOne === 'information' && headerOne === 'associate') {
       const { informationBasic, informationContact, informationSetup } = associateInfo;
       const { id } = responseObject;
-      console.log('NODE INFO', nodeInformation);
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId: id,
