@@ -29,6 +29,7 @@ import {
   makeAssignmentReviewListRequestObject
 } from '../Actions/GenericActions';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
+import { createAssignmentPopupApiCall } from '../Actions/AssignmentModuleAction';
 
 const PopUpAssignmentModule = (props) => {
   const {
@@ -54,36 +55,7 @@ const PopUpAssignmentModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
-      });
-      let requestObj = makeAssignmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({
-        type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: '',
-          BadgeTwo: '',
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
-      let roleRequestObj = makeAssignmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
-      dispatch({
-        type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
-        payload: {
-          request: roleRequestObj,
-          BadgeOne: '',
-          BadgeTwo: '',
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
-      });
+      createAssignmentPopupApiCall(selectedAssociateInfo, secondaryOptionCheckValue, dispatch);
     } else if (targetValue === 'distinct') {
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
       let requestObect = makeAssignmentReviewListRequestObject(

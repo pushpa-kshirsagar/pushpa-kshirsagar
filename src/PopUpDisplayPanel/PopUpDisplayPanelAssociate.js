@@ -168,7 +168,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
-      valueArr = setAssociateCardPermissionInJson(MODULE_POPUP_OPTION, assesseePermission);
+      // valueArr = setAssociateCardPermissionInJson(MODULE_POPUP_OPTION, assesseePermission);
+      valueArr = MODULE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'all';
     }
     if (clickValue === 'mine' || clickValue === 'interviews' || clickValue === 'marketplace') {
@@ -178,14 +179,6 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisePopupType = 'secondary';
       valueArr = MODULE_POPUP_OPTION;
       reviseSecondaryOptionCheckValue = 'all';
-    }
-    if (clickValue === 'notifications' || clickValue === 'reports') {
-      revisePopupHeaderOne = clickValue;
-      revisepopupHeaderOneBadgeOne = 'review';
-      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
-      revisePopupType = 'secondary';
-      valueArr = NOTIFICATION_REPORT_POPUP;
-      reviseSecondaryOptionCheckValue = 'unread';
     }
     if (
       (popupHeaderOne === 'administrators' ||
@@ -865,6 +858,14 @@ const PopUpDisplayPanelAssociate = (props) => {
         popupHeaderOne
       );
     }
+    if (clickValue === 'notifications' || clickValue === 'reports') {
+      revisePopupHeaderOne = clickValue;
+      revisepopupHeaderOneBadgeOne = 'review';
+      reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
+      revisePopupType = 'secondary';
+      valueArr = NOTIFICATION_REPORT_POPUP;
+      reviseSecondaryOptionCheckValue = 'unread';
+    }
     if (
       clickValue === 'information' &&
       (popupHeaderOne === 'administrators' || popupHeaderOne === 'managers')
@@ -964,10 +965,11 @@ const PopUpDisplayPanelAssociate = (props) => {
     let revisepopupHeaderOneBadgeThree = '';
     let reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
     let revisePopupType = 'primary';
-    let valueArr = setAssociateCardPermissionInJson(
-      ASSOCIATE_CARD_POPUP_OPTION,
-      assesseePermission
-    );
+    // let valueArr = setAssociateCardPermissionInJson(
+    //   ASSOCIATE_CARD_POPUP_OPTION,
+    //   assesseePermission
+    // );
+    let valueArr = ASSOCIATE_CARD_POPUP_OPTION;
     if (popupOpenType === 'primary') {
       dispatch({ type: POPUP_CLOSE });
       setexchageMode(false);

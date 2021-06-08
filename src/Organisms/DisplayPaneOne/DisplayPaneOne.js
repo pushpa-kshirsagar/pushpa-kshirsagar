@@ -77,6 +77,8 @@ export const DisplayPaneOne = () => {
   const assesseeName = leftPaneAssesseeInfo
     ? leftPaneAssesseeInfo.informationBasic.assesseeNameFirst.trim() +
       ' ' +
+      leftPaneAssesseeInfo.informationBasic.assesseeNameOther.trim() +
+      ' ' +
       leftPaneAssesseeInfo.informationBasic.assesseeNameLast.trim()
     : assesseeSignIN;
   const openCardPopup = (e) => {
@@ -88,10 +90,11 @@ export const DisplayPaneOne = () => {
       if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
         popupHeaderOne = 'assessee';
         popupHeaderOneBadgeOne = 'self';
-        popupContentArrValue = setAssesseeCardPermissionInJson(
-          ASSESSEE_CARD_POPUP_OPTIONS,
-          assesseePermission
-        );
+        // popupContentArrValue = setAssesseeCardPermissionInJson(
+        //   ASSESSEE_CARD_POPUP_OPTIONS,
+        //   assesseePermission
+        // );
+        popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
         value = 'ASSESSEE_CARD_POPUP';
       }
       if (e.currentTarget.getAttribute('data-value') === 'associate_card') {
@@ -170,17 +173,17 @@ export const DisplayPaneOne = () => {
           )}
         </div>
 
-        {assesseePermission && assesseePermission.associateHierarchy.includes('review') && (
-          <>
-            <Sections
-              listSections={leftPaneSections}
-              selectedSection={selectedSection}
-              setSelectedSection={setSelectedSection}
-            />
+        {/* {assesseePermission && assesseePermission.associateHierarchy.includes('review') && ( */}
+        <>
+          <Sections
+            listSections={leftPaneSections}
+            selectedSection={selectedSection}
+            setSelectedSection={setSelectedSection}
+          />
 
-            <FooterIconOne />
-          </>
-        )}
+          <FooterIconOne />
+        </>
+        {/* )} */}
       </div>
       <PopUpDisplayPaneOneSectionTwo
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}

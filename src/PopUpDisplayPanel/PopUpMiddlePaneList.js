@@ -63,8 +63,15 @@ import {
   getNodeRelatedAssociateDistinctApiCall
 } from '../Actions/AssociateModuleAction';
 import { makeInternalNodeObj } from '../Actions/GenericActions';
-import { getItemGroupItemDistinctApiCall, getItemTypeItemDistinctApiCall } from '../Actions/ItemModuleAction';
-import { getAssessmentGroupAssessmentDistinctApiCall } from '../Actions/AssessmentModuleAction';
+import {
+  getItemGroupItemDistinctApiCall,
+  getItemTypeItemDistinctApiCall
+} from '../Actions/ItemModuleAction';
+import {
+  getAssessmentGroupAssessmentDistinctApiCall,
+  getAssessmentTypeAssessmentDistinctApiCall,
+  getNodeRelatedAssessmentsDistinctApiCall
+} from '../Actions/AssessmentModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -851,6 +858,10 @@ const PopUpMiddlePaneList = (props) => {
             false,
             middlePaneHeader
           );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'assesseeNodeAssesseeDistinct' + secondaryOptionCheckValue }
+          });
         }
         if (popupHeaderOne === 'associates') {
           getNodeRelatedAssociateDistinctApiCall(
@@ -864,11 +875,29 @@ const PopUpMiddlePaneList = (props) => {
             false,
             middlePaneHeader
           );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'associateNodeAssociateDistinct' + secondaryOptionCheckValue }
+          });
         }
-        dispatch({
-          type: FILTERMODE,
-          payload: { FilterMode: 'assesseeNodeAssesseeDistinct' + secondaryOptionCheckValue }
-        });
+        if (popupHeaderOne === 'assessments') {
+          getNodeRelatedAssessmentsDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false,
+            middlePaneHeader
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'assessmentNodeAssessmentDistinct' + secondaryOptionCheckValue }
+          });
+        }
+
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
       }
@@ -964,6 +993,24 @@ const PopUpMiddlePaneList = (props) => {
       }
       if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
         getAssessmentGroupAssessmentDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assessmentGroupAssessment' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assessmentsTypeDistinctReviewList') {
+        getAssessmentTypeAssessmentDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,
