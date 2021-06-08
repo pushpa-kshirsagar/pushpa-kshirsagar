@@ -159,7 +159,7 @@ function* workerReviewAssessmentGroupListSaga(data) {
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });
-    yield put({ type: CLEAR_ASSESSMENT_INFO });
+    // yield put({ type: CLEAR_ASSESSMENT_INFO });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

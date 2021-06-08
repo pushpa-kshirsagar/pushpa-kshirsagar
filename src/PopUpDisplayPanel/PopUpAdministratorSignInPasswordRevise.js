@@ -60,7 +60,8 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
             <InputField
               id={'current password'}
               value={oldPassword}
-              label={'current password'}
+              label={'password'}
+              labelBadgeOne={'current'}
               type="password"
               errorMsg={oldPasswordError}
               onClick={(e) => {
@@ -72,7 +73,8 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
               id={'revised password'}
               value={newPassword}
               type="password"
-              label={'revised password'}
+              label={'password'}
+              labelBadgeOne={'revised'}
               errorMsg={newPasswordError}
               onClick={(e) => {
                 setNewPassword(e.target.value)
@@ -83,10 +85,11 @@ const PopUpAdministratorSignInPasswordRevise = (props) => {
               id={'revised password'}
               value={confirmRevisedPassword}
               type="password"
-              label={'revised password'}
+              label={'password'}
+              labelBadgeOne={'revised'}
               errorMsg={confirmRevisedPasswordError}
               onClick={(e) => {
-                setConfirmRevisedPassword(e.target.value)
+                setConfirmRevisedPassword(e.target.value);
                 setConfirmRevisedPasswordError('');
               }}
             />

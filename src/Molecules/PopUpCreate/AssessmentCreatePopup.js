@@ -72,6 +72,28 @@ const AssessmentCreatePopup = (props) => {
       }
     });
   };
+  const updateAssessmentSecondaryGroups = (e) => {
+    let groupid = e.currentTarget.getAttribute('tag');
+    let roleArr = informationAllocation.assessmentGroup.assessmentGroupSecondary;
+
+    if (roleArr.includes(groupid)) {
+      document.getElementById(groupid).style.backgroundColor = 'white';
+      roleArr = roleArr.filter(function (number) {
+        return number !== groupid;
+      });
+    } else {
+      roleArr.push(groupid);
+      document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assessmentGroup',
+        actualStateName: 'assessmentGroupSecondary',
+        value: roleArr
+      }
+    });
+  };
   const updateAssessmentNodes = (e) => {
     let groupid = e.currentTarget.getAttribute('tag');
     let groupArr = informationAllocation.assessmentNode.assessmentNodePrimary;
@@ -115,6 +137,25 @@ const AssessmentCreatePopup = (props) => {
     });
   };
   console.log(informationBasic, informationAllocation);
+  let selectedPrimaryGroup = informationAllocation?.assessmentGroup.assessmentGroupPrimary || [];
+  let selectedSecondaryGroup = informationAllocation?.assessmentGroup.assessmentGroupSecondary || [];
+  let filteredCoreGroupReviewListDataPrimary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for primary popup list
+      if (!selectedSecondaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataPrimary.push(group);
+    });
+  }
+  let filteredCoreGroupReviewListDataSecondary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for Secondary popup list
+      if (!selectedPrimaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataSecondary.push(group);
+    });
+  }
+
   return (
     <div>
       <PopUpTextField
@@ -162,7 +203,7 @@ const AssessmentCreatePopup = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataPrimary}
         textOne={'assessmentGroupName'}
         textTwo={'assessmentGroupDescription'}
         onClickEvent={updateAssessmentGroups}
@@ -178,10 +219,10 @@ const AssessmentCreatePopup = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataSecondary}
         textOne={'assessmentGroupName'}
         textTwo={'assessmentGroupDescription'}
-        onClickEvent={updateAssessmentGroups}
+        onClickEvent={updateAssessmentSecondaryGroups}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList

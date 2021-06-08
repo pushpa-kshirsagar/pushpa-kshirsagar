@@ -4,7 +4,8 @@ import {
   LOADER_STOP,
   GET_ASSESSMENT_INFO_SAGA,
   SET_ASSESSMENT_BASIC_REDUCER_STATE,
-  ASSESSMENT_INFO_REVISE_SAGA
+  ASSESSMENT_INFO_REVISE_SAGA,
+  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_INFO_URL, ASSESSMENT_REVISE_INFO_URL } from '../../endpoints';
 
@@ -41,10 +42,61 @@ function* workerReviewInfoAssessmentSaga(data) {
         }
       });
       if (isReviseMode) {
+        const { informationAllocation } = userResponse.responseObject[0];
         yield put({
           type: SET_ASSESSMENT_BASIC_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
         });
+        if (
+          informationAllocation &&
+          informationAllocation?.assessmentGroup?.assessmentGroupPrimary &&
+          informationAllocation?.assessmentGroup?.assessmentGroupPrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.assessmentGroup.assessmentGroupPrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentGroup',
+              actualStateName: 'assessmentGroupPrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentGroup',
+              actualStateName: 'assessmentGroupPrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.assessmentGroup?.assessmentGroupSecondary &&
+          informationAllocation?.assessmentGroup?.assessmentGroupSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.assessmentGroup.assessmentGroupSecondary.map(
+            (ob) => ob.id
+          );
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentGroup',
+              actualStateName: 'assessmentGroupSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentGroup',
+              actualStateName: 'assessmentGroupSecondary',
+              value: []
+            }
+          });
+        }
       }
     }
     console.log('loading end');
