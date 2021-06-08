@@ -1093,7 +1093,7 @@ export const assesseeCreateApiCalls = (
   dispatch({ type: ASSESSEE_INFO_CREATE });
   dispatch({ type: CLEAR_ASSESSEE_INFO });
   dispatch({ type: LOADER_START });
-  let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'all', 0, -1);
+  let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({
     type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -1105,7 +1105,7 @@ export const assesseeCreateApiCalls = (
     }
   });
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-  let roleRequestObj = makeAssesseeRoleCreateObj(selectedAssociateInfo, 'all', 0, -1);
+  let roleRequestObj = makeAssesseeRoleCreateObj(selectedAssociateInfo, 'active', 0, -1);
   if (typeOfAssesseeCreate === 'administrator')
     roleRequestObj = makeManagerRoleCreateObj(selectedAssociateInfo, 'active', 0, -1);
   if (typeOfAssesseeCreate === 'manager')
@@ -1121,7 +1121,7 @@ export const assesseeCreateApiCalls = (
       isMiddlePaneList: false
     }
   });
-  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
   dispatch({
     type: INTERNAL_NODE_LIST_SAGA,

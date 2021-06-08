@@ -24,7 +24,7 @@ export const createAssignmentPopupApiCall = (
     payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
   });
 
-  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
   dispatch({
     type: INTERNAL_NODE_LIST_SAGA,
@@ -37,7 +37,7 @@ export const createAssignmentPopupApiCall = (
       isMiddlePaneList: false
     }
   });
-  let requestObj = makeAssignmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+  let requestObj = makeAssignmentGroupObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({
     type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -48,7 +48,7 @@ export const createAssignmentPopupApiCall = (
       isMiddlePaneList: false
     }
   });
-  let roleRequestObj = makeAssignmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
+  let roleRequestObj = makeAssignmentTypeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({
     type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
     payload: {

@@ -765,7 +765,7 @@ export const associateCreatePopup = (
     type: SET_POPUP_SINGLE_STATE,
     payload: { stateName: 'cardValue', value: 'Create' }
   });
-  let requestObj = makeAssociateGroupObj(selectedAssociateInfo, 'all', 0, -1);
+  let requestObj = makeAssociateGroupObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({
     type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -777,7 +777,7 @@ export const associateCreatePopup = (
     }
   });
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-  let roleRequestObj = makeAssociateRoleObj(selectedAssociateInfo, 'all', 0, -1);
+  let roleRequestObj = makeAssociateRoleObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
   dispatch({
     type: SET_SINGLE_ASSOCIATE_INFORMATION,

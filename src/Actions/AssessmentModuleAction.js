@@ -45,7 +45,7 @@ export const createAssessmentPopup = (
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: { stateName: 'selectedInformationAllorKey', value: secondaryOptionCheckValue }
   });
-  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
   dispatch({
     type: INTERNAL_NODE_LIST_SAGA,
@@ -58,7 +58,7 @@ export const createAssessmentPopup = (
       isMiddlePaneList: false
     }
   });
-  let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
+  let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
   dispatch({
     type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
@@ -70,7 +70,7 @@ export const createAssessmentPopup = (
       isMiddlePaneList: false
     }
   });
-  let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+  let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
   dispatch({
     type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
