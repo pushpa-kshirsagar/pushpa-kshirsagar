@@ -144,6 +144,27 @@ const ItemCreatePopUp = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={'MANAGERPPOPUP'}
+        inputHeader={'group'}
+        isRequired={false}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        setErrorMsg={setRequiredErrorMsg}
+        ListData={coreGroupReviewListData}
+        textOne={'itemGroupName'}
+        textTwo={'itemGroupDescription'}
+        onClickEvent={(e) => {
+          updateGroup(e, 'itemGroup', 'itemGroupSecondary');
+        }}
+        selectedList={itemInformation.informationAllocation.itemGroup.itemGroupSecondary}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -153,6 +174,30 @@ const ItemCreatePopUp = (props) => {
         inputHeader={'manager'}
         isRequired={false}
         inputHeaderBadge={'primary'}
+        infoMsg={'select a manager'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        selectedList={[]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={'NODEPOPUP'}
+        inputHeader={'manager'}
+        isRequired={false}
+        inputHeaderBadge={'secondary'}
         infoMsg={'select a manager'}
         ListData={[
           { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
@@ -182,9 +227,31 @@ const ItemCreatePopUp = (props) => {
         textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}
         onClickEvent={(e) => {
-          updateGroup(e, 'itemNode', 'itemNodePrimary');
+          updateGroup(e, 'itemNode', 'itemNodeSecondary');
         }}
-        selectedList={itemInformation.informationAllocation.itemNode.itemNodePrimary}
+        selectedList={itemInformation.informationAllocation.itemNode.itemNodeSecondary}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'NODESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={'TYPEPOPUP'}
+        inputHeader={'node'}
+        isRequired={false}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a node'}
+        ListData={coreNodeReviewListData}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={(e) => {
+          updateGroup(e, 'itemNode', 'itemNodeSecondary');
+        }}
+        selectedList={itemInformation.informationAllocation.itemNode.itemNodeSecondary}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -209,6 +276,28 @@ const ItemCreatePopUp = (props) => {
           updateGroup(e, 'itemType', 'itemTypePrimary');
         }}
         selectedList={itemInformation.informationAllocation.itemType.itemTypePrimary}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'type'}
+        isRequired={false}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a type'}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        ListData={coreTypeReviewListData}
+        textOne={'itemTypeName'}
+        textTwo={'itemTypeDescription'}
+        onClickEvent={(e) => {
+          updateGroup(e, 'itemType', 'itemTypeSecondary');
+        }}
+        selectedList={itemInformation.informationAllocation.itemType.itemTypeSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation

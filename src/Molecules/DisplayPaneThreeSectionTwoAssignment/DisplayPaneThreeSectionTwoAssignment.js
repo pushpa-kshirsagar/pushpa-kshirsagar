@@ -17,6 +17,12 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       isListCard: true,
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
@@ -42,6 +48,12 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       isListCard: true,
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
@@ -50,6 +62,12 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       id: 'a4',
       labelTextOneOne: 'report',
       isListCard: false,
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'report',
+          textOne: ''
+        }
+      ],
       innerAssociateList: [],
       innerInfo: 'assessment',
       IconOne: null
@@ -86,7 +104,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
     >
       {headerOneBadgeTwo === 'all' ? (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <AllocationAccordian
               headerOne="framework"
               isDisplayCardExpanded={listExpand === 'framework'}
@@ -107,7 +125,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         </>
       ) : (
         <>
-          <div style={{ padding: '5px 2.5px 2.5px 2.5px' }}>
+          <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
               {frameworkList.map((ob) => {
                 return (

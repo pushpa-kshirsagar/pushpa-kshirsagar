@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA, GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA, LOADER_START, SET_POPUP_VALUE } from '../../actionType';
-import { makeAssignmentGroupObj, makeAssignmentTypeObj } from '../../Actions/GenericActions';
+import { GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA, GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA, INTERNAL_NODE_LIST_SAGA, LOADER_START, SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, SET_POPUP_VALUE } from '../../actionType';
+import { makeAssignmentGroupObj, makeAssignmentTypeObj, makeInternalNodeObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssignment = () => {
   const [listExpand, setListExpand] = useState('');
@@ -16,7 +16,7 @@ const DisplayPaneThreeSectionOneAssignment = () => {
     (state) => state.DisplayPaneThreeReducer
   );
   const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -63,6 +63,96 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       isListCard: true
     }
   ];
+  let assignmentGroupListPrimary = [];
+  if (
+    informationAllocation?.assignmentGroup?.assignmentGroupPrimary &&
+    informationAllocation?.assignmentGroup?.assignmentGroupPrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assignmentGroup?.assignmentGroupPrimary;
+    tempArr.forEach((ob) => {
+      assignmentGroupListPrimary.push({
+        id: ob?.id || '',
+        textOne: ob?.informationBasic?.assignmentGroupName || '',
+        textTwo: ob?.informationBasic?.assignmentGroupDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assignmentGroupListSecondary = [];
+  if (
+    informationAllocation?.assignmentGroup?.assignmentGroupSecondary &&
+    informationAllocation?.assignmentGroup?.assignmentGroupSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assignmentGroup?.assignmentGroupSecondary;
+    tempArr.forEach((ob) => {
+      assignmentGroupListSecondary.push({
+        id: ob?.id || '',
+        textOne: ob?.informationBasic?.assignmentGroupName || '',
+        textTwo: ob?.informationBasic?.assignmentGroupDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assignmentNodeListPrimary = [];
+  if (
+    informationAllocation?.assignmentNode?.assignmentNodePrimary &&
+    informationAllocation?.assignmentNode?.assignmentNodePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assignmentNode?.assignmentNodePrimary;
+    tempArr.forEach((ob) => {
+      assignmentNodeListPrimary.push({
+        id: ob?.id || '',
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assignmentNodeListSecondary = [];
+  if (
+    informationAllocation?.assignmentNode?.assignmentNodeSecondary &&
+    informationAllocation?.assignmentNode?.assignmentNodeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assignmentNode?.assignmentNodeSecondary;
+    tempArr.forEach((ob) => {
+      assignmentNodeListSecondary.push({
+        id: ob?.id || '',
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assignmentTypeListPrimary = [];
+  if (
+    informationAllocation?.assignmentType?.assignmentTypePrimary &&
+    informationAllocation?.assignmentType?.assignmentTypePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assignmentType?.assignmentTypePrimary;
+    tempArr.forEach((ob) => {
+      assignmentTypeListPrimary.push({
+        id: ob?.id || '',
+        textOne: ob?.informationBasic?.assignmentTypeName || '',
+        textTwo: ob?.informationBasic?.assignmentTypeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assignmentTypeListSecondary = [];
+  if (
+    informationAllocation?.assignmentType?.assignmentTypeSecondary &&
+    informationAllocation?.assignmentType?.assignmentTypeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assignmentType?.assignmentTypeSecondary;
+    tempArr.forEach((ob) => {
+      assignmentTypeListSecondary.push({
+        id: ob?.id || '',
+        textOne: ob?.informationBasic?.assignmentTypeName || '',
+        textTwo: ob?.informationBasic?.assignmentTypeDescription || '',
+        status: ''
+      });
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -74,30 +164,11 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Group',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Group',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Group',
-              status: ''
-            }
-          ]
+          innerList: assignmentGroupListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assignmentGroupListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -152,30 +223,11 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Node',
-              status: ''
-            }
-          ]
+          innerList: assignmentNodeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assignmentNodeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -191,30 +243,11 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'type',
-              status: ''
-            }
-          ]
+          innerList: assignmentTypeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assignmentTypeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -334,7 +367,8 @@ const DisplayPaneThreeSectionOneAssignment = () => {
     console.log('=====>', labelName);
     if (labelName === 'group') {
       dispatch({ type: LOADER_START });
-      let requestObj = makeAssignmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      let requestObj = makeAssignmentGroupObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
         payload: {
@@ -373,6 +407,20 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       }
     }
     if (labelName === 'node') {
+      dispatch({ type: LOADER_START });
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          nodeViewState: 'list',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: SET_POPUP_VALUE,
@@ -388,7 +436,8 @@ const DisplayPaneThreeSectionOneAssignment = () => {
     }
     if (labelName === 'type') {
       dispatch({ type: LOADER_START });
-      let roleRequestObj = makeAssignmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
+      let roleRequestObj = makeAssignmentTypeObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
       dispatch({
         type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
         payload: {

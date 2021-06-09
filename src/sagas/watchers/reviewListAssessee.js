@@ -11,7 +11,8 @@ import {
   GET_ALLOCATE_ASSESSEE,
   GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   SET_POPUP_VALUE,
-  GET_ASSESSEETYPE_ASSESSEE_REVIEW_LIST
+  GET_ASSESSEETYPE_ASSESSEE_REVIEW_LIST,
+  SET_ADMINISTRATOR_SECONDARY_LIST
 } from '../../actionType';
 import {
   ASSESSEE_REVIEW_LIST_URL,
@@ -167,30 +168,36 @@ function* workerReviewListRoleAssesseeSaga(data) {
       data: data.payload.request,
       URL: ASSESSEE_ROLE_ASSESSEE_URL
     });
+    const { isAdministratorSecondary = false } = data.payload;
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({
-        type: RELATED_REVIEWLIST_DISTINCT_DATA,
-        payload: userResponse.responseObject
-      });
-      yield put({
-        type: SET_REVIEW_LIST_RELATE_DATA,
-        payload: userResponse.responseObject
-      });
-      if (data.payload.isMiddlePaneList) {
+      if (isAdministratorSecondary) {
+        const { assessee = [] } = userResponse.responseObject[0];
+        yield put({ type: SET_ADMINISTRATOR_SECONDARY_LIST, payload: assessee });
+      } else {
         yield put({
-          type: SET_MIDDLEPANE_STATE,
-          payload: {
-            middlePaneHeader: data.payload.HeaderOne,
-            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-            middlePaneHeaderBadgeThree: '',
-            middlePaneHeaderBadgeFour: '',
-            typeOfMiddlePaneList: 'assesseesRoleAssesseeReviewList',
-            scanCount: userResponse && userResponse.countTotal,
-            showMiddlePaneState: true
-          }
+          type: RELATED_REVIEWLIST_DISTINCT_DATA,
+          payload: userResponse.responseObject
         });
+        yield put({
+          type: SET_REVIEW_LIST_RELATE_DATA,
+          payload: userResponse.responseObject
+        });
+        if (data.payload.isMiddlePaneList) {
+          yield put({
+            type: SET_MIDDLEPANE_STATE,
+            payload: {
+              middlePaneHeader: data.payload.HeaderOne,
+              middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+              middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+              middlePaneHeaderBadgeThree: '',
+              middlePaneHeaderBadgeFour: '',
+              typeOfMiddlePaneList: 'assesseesRoleAssesseeReviewList',
+              scanCount: userResponse && userResponse.countTotal,
+              showMiddlePaneState: true
+            }
+          });
+        }
       }
     } else {
       yield put({
@@ -199,7 +206,9 @@ function* workerReviewListRoleAssesseeSaga(data) {
       });
     }
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    if (!isAdministratorSecondary) {
+      yield put({ type: LOADER_STOP });
+    }
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

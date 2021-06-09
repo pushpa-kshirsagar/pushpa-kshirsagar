@@ -10,7 +10,8 @@ import {
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
   SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  SET_ADMINISTRATOR_SECONDARY_LIST
 } from '../actionType';
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   responseObject: {},
   reviewMode: 'review',
   createMode: '',
+  administratorSecondary: [],
   relatedReviewListPaneThree: [{}],
   // assesseeRoleAssessee: [],
   assesseeGroupAssessee: {
@@ -49,6 +51,7 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
       };
     case SET_DISPLAY_PANE_THREE_STATE:
       return {
+        ...istate,
         isReviewRevise: true,
         headerOne: action.payload.headerOne,
         headerOneBadgeOne: action.payload.headerOneBadgeOne,
@@ -121,6 +124,11 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
       return {
         ...istate,
         statusPopUpValue: action.payload
+      };
+    case SET_ADMINISTRATOR_SECONDARY_LIST:
+      return {
+        ...istate,
+        administratorSecondary: action.payload
       };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;

@@ -203,7 +203,7 @@ function* workerReviewAssignmentGroupListSaga(data) {
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });
-    yield put({ type: CLEAR_ASSIGNMENT_INFO });
+    // yield put({ type: CLEAR_ASSIGNMENT_INFO });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -241,6 +241,8 @@ function* workerReviewItemGroupListSaga(data) {
           : SET_CORE_GROUP_REVIEW_LIST_DATA,
         payload: userResponse.responseObject
       });
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

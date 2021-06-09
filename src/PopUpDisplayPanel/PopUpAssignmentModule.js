@@ -55,6 +55,7 @@ const PopUpAssignmentModule = (props) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       createAssignmentPopupApiCall(selectedAssociateInfo, secondaryOptionCheckValue, dispatch);
     } else if (targetValue === 'distinct') {
       dispatch({ type: CLEAR_ASSIGNMENT_INFO });

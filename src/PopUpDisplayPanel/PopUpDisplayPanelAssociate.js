@@ -37,7 +37,8 @@ import {
   CLEAR_NODE_REDUCER_STATE,
   CLEAR_GROUP_REDUCER_STATE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
-  CLEAR_ITEM_REDUCER_STATE
+  CLEAR_ITEM_REDUCER_STATE,
+  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -82,6 +83,7 @@ import {
   getAdminManagerDistinctApiCall,
   getAdminManagerRoleApiCall,
   getAssesseeGroupDistinctApiCall,
+  getAssesseeRoleAssesseeReqObj,
   getAssesseeTypeApiCall,
   getRoleGroupReviewListApi,
   getTypeGroupReviewListApi
@@ -95,6 +97,7 @@ import {
 import IconButton from '../Molecules/IconButton/IconButton';
 import { Fragment } from 'react';
 import { getAssessmentGroupApiCall } from '../Actions/AssessmentModuleAction';
+import { ADMINISTRATOR_SECONDARY_ID } from '../endpoints';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -335,6 +338,25 @@ const PopUpDisplayPanelAssociate = (props) => {
       (popupHeaderOneBadgeTwo === 'review' || popupHeaderOneBadgeTwo === 'revise')
     ) {
       dispatch({ type: LOADER_START });
+      let assesseeRoleAssesseeReqBody = getAssesseeRoleAssesseeReqObj(
+        selectedAssociateInfo,
+        ADMINISTRATOR_SECONDARY_ID,
+        'active',
+        0,
+        countPage
+      );
+      dispatch({
+        type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+        payload: {
+          request: assesseeRoleAssesseeReqBody,
+          HeaderOne: '',
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false,
+          isAdministratorSecondary: true
+        }
+      });
       dispatch({
         type: GET_ASSOCIATE_INFO_SAGA,
         payload: {
