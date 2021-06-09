@@ -3,7 +3,9 @@ import {
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE
 } from '../actionType';
@@ -38,6 +40,7 @@ export const createAssignmentPopupApiCall = (
     }
   });
   let requestObj = makeAssignmentGroupObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
   dispatch({
     type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -48,11 +51,12 @@ export const createAssignmentPopupApiCall = (
       isMiddlePaneList: false
     }
   });
-  let roleRequestObj = makeAssignmentTypeObj(selectedAssociateInfo, 'active', 0, -1);
+  let typeRequestObj = makeAssignmentTypeObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typeRequestObj });
   dispatch({
     type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
     payload: {
-      request: roleRequestObj,
+      request: typeRequestObj,
       BadgeOne: '',
       BadgeTwo: '',
       BadgeThree: '',

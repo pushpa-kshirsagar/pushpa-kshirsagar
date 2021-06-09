@@ -11,7 +11,7 @@ import {
 import { ITEM_CREATE_URL } from '../../endpoints';
 import Store from '../../store';
 
-const createNodeApi = async (requestObj) => {
+const createApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -26,7 +26,7 @@ const createNodeApi = async (requestObj) => {
 
 function* workerCreateItemSaga(data) {
   try {
-    const userResponse = yield call(createNodeApi, { data: data.payload, URL: ITEM_CREATE_URL });
+    const userResponse = yield call(createApi, { data: data.payload, URL: ITEM_CREATE_URL });
     if (userResponse.responseCode === '000') {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
