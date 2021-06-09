@@ -141,11 +141,10 @@ const AssignmentCreatePopup = (props) => {
         ListData={coreGroupReviewListData}
         textOne={'assignmentGroupName'}
         textTwo={'assignmentGroupDescription'}
-        // onClickEvent={updateAssignmentGroups}
+        selectedList={informationAllocation.assignmentGroup.assignmentGroupSecondary}
         onClickEvent={(e) => {
           updateAllocationObj(e, 'assignmentGroup', 'assignmentGroupSecondary');
         }}
-        selectedList={informationAllocation.assignmentGroup.assignmentGroupSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
