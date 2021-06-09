@@ -26,9 +26,9 @@ import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getAssessmentGroupAssessmentDistinctApiCall } from '../Actions/AssessmentModuleAction';
+import { getAssessmentGroupAssessmentDistinctApiCall, getAssessmentTypeAssessmentDistinctApiCall } from '../Actions/AssessmentModuleAction';
 
-const AssessmentGroupAssessmentReviewList = (props) => {
+const AssessmentTypeAssessmentReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -150,11 +150,11 @@ const AssessmentGroupAssessmentReviewList = (props) => {
       type: SET_MIDDLEPANE_STATE,
       payload: {
         middlePaneHeader: 'assessments',
-        middlePaneHeaderBadgeOne: 'group',
+        middlePaneHeaderBadgeOne: 'type',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assessmentsGroupDistinctReviewList',
+        typeOfMiddlePaneList: 'assessmentsTypeDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
@@ -164,7 +164,7 @@ const AssessmentGroupAssessmentReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getAssessmentGroupAssessmentDistinctApiCall(
+    getAssessmentTypeAssessmentDistinctApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
@@ -215,11 +215,11 @@ const AssessmentGroupAssessmentReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.assessmentGroupName}
-          textTwoOne={listDistinctData.assessmentGroupDescription}
+          textOneOne={listDistinctData.assessmentTypeName}
+          textTwoOne={listDistinctData.assessmentTypeDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'group'}
+          labelTwoTwo={'type'}
           onClickIconOne={closeRelatedList}
           isAlliance
         />
@@ -248,7 +248,7 @@ const AssessmentGroupAssessmentReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assessmentGroupAssessmentinactive' && (
+      {FilterMode === 'assessmentTypeAssessmentinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -260,4 +260,4 @@ const AssessmentGroupAssessmentReviewList = (props) => {
     </div>
   );
 };
-export default AssessmentGroupAssessmentReviewList;
+export default AssessmentTypeAssessmentReviewList;

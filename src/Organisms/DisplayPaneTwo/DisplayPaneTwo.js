@@ -35,6 +35,8 @@ import ItemsTypeReviewList from '../../ReviewListComponent/ItemsTypeReviewList';
 import ItemsGroupItemsReviewList from '../../ReviewListComponent/ItemsGroupItemsReviewList';
 import ItemsTypeItemsReviewList from '../../ReviewListComponent/ItemsTypeItemsReviewList';
 import AssessmentGroupAssessmentReviewList from '../../ReviewListComponent/AssessmentGroupAssessmentReviewList';
+import AssessmentTypeAssessmentReviewList from '../../ReviewListComponent/AssessmentTypeAssessmentReviewList';
+import AssessmentNodeAssessmentReviewList from '../../ReviewListComponent/AssessmentNodeAssessmentReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -120,6 +122,12 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'assessmentGroupAssessmentReviewList' && (
           <AssessmentGroupAssessmentReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assessmentTypeAssessmentReviewList' && (
+          <AssessmentTypeAssessmentReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assessmentNodeAssessmentReviewList' && (
+          <AssessmentNodeAssessmentReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' && (
           <AssesseeGroupAssesseeReviewList popupAllClose={popupAllClose} />

@@ -215,4 +215,6 @@ export const ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/assessment/review-list';
 export const ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/assessment/review-list';
+export const ASSESSMENTNODE_ASSESSMENT_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/associate-node/assessment/review-list';
 // export const URL = '';

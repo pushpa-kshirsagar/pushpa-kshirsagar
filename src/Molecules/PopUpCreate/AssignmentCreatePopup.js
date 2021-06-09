@@ -20,9 +20,12 @@ const AssignmentCreatePopup = (props) => {
   const { informationBasic, informationAllocation } = useSelector(
     (state) => state.AssignmentReducer
   );
-  const { selectedAssociateInfo, coreTypeReviewListData, coreGroupReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    coreTypeReviewListData,
+    coreGroupReviewListData,
+    coreNodeReviewListData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
@@ -48,11 +51,9 @@ const AssignmentCreatePopup = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSIGNMENT_SAGA, payload: reqBody });
   };
-  const updateAssignmentGroups = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(informationAllocation.assignmentGroup.assignmentGroupPrimary);
+  const updateAllocationObj = (e, stateName, actualStateName) => {
     let groupid = e.currentTarget.getAttribute('tag');
-    let groupArr = informationAllocation.assignmentGroup.assignmentGroupPrimary;
+    let groupArr = informationAllocation[stateName][actualStateName];
     if (groupArr.includes(groupid)) {
       document.getElementById(groupid).style.backgroundColor = 'white';
       groupArr = groupArr.filter(function (number) {
@@ -65,31 +66,8 @@ const AssignmentCreatePopup = (props) => {
     dispatch({
       type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
       payload: {
-        stateName: 'assignmentGroup',
-        actualStateName: 'assignmentGroupPrimary',
-        value: groupArr
-      }
-    });
-  };
-  const updateAssignmentTypes = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(informationAllocation.assignmentType.assignmentTypePrimary);
-    let groupid = e.currentTarget.getAttribute('tag');
-    let groupArr = informationAllocation.assignmentType.assignmentTypePrimary;
-    if (groupArr.includes(groupid)) {
-      document.getElementById(groupid).style.backgroundColor = 'white';
-      groupArr = groupArr.filter(function (number) {
-        return number !== groupid;
-      });
-    } else {
-      groupArr.push(groupid);
-      document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
-    }
-    dispatch({
-      type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
-      payload: {
-        stateName: 'assignmentType',
-        actualStateName: 'assignmentTypePrimary',
+        stateName: stateName,
+        actualStateName: actualStateName,
         value: groupArr
       }
     });
@@ -144,7 +122,11 @@ const AssignmentCreatePopup = (props) => {
         ListData={coreGroupReviewListData}
         textOne={'assignmentGroupName'}
         textTwo={'assignmentGroupDescription'}
-        onClickEvent={updateAssignmentGroups}
+        // onClickEvent={updateAssignmentGroups}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentGroup', 'assignmentGroupPrimary');
+        }}
+        selectedList={informationAllocation.assignmentGroup.assignmentGroupPrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -159,7 +141,11 @@ const AssignmentCreatePopup = (props) => {
         ListData={coreGroupReviewListData}
         textOne={'assignmentGroupName'}
         textTwo={'assignmentGroupDescription'}
-        onClickEvent={updateAssignmentGroups}
+        // onClickEvent={updateAssignmentGroups}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentGroup', 'assignmentGroupSecondary');
+        }}
+        selectedList={informationAllocation.assignmentGroup.assignmentGroupSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -209,14 +195,13 @@ const AssignmentCreatePopup = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreNodeReviewListData}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        selectedList={informationAllocation.assignmentNode.assignmentNodePrimary}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentNode', 'assignmentNodePrimary');
+        }}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -228,14 +213,13 @@ const AssignmentCreatePopup = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreNodeReviewListData}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        selectedList={informationAllocation.assignmentNode.assignmentNodeSecondary}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentNode', 'assignmentNodeSecondary');
+        }}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -250,7 +234,10 @@ const AssignmentCreatePopup = (props) => {
         ListData={coreTypeReviewListData}
         textOne={'assignmentTypeName'}
         textTwo={'assignmentTypeDescription'}
-        onClickEvent={updateAssignmentTypes}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentType', 'assignmentTypePrimary');
+        }}
+        selectedList={informationAllocation.assignmentType.assignmentTypePrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -265,7 +252,10 @@ const AssignmentCreatePopup = (props) => {
         ListData={coreTypeReviewListData}
         textOne={'assignmentTypeName'}
         textTwo={'assignmentTypeDescription'}
-        onClickEvent={updateAssignmentTypes}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'assignmentType', 'assignmentTypeSecondary');
+        }}
+        selectedList={informationAllocation.assignmentType.assignmentTypeSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation

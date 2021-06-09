@@ -68,7 +68,7 @@ import {
   getItemGroupItemDistinctApiCall,
   getItemTypeItemDistinctApiCall
 } from '../Actions/ItemModuleAction';
-import { getAssessmentGroupAssessmentDistinctApiCall } from '../Actions/AssessmentModuleAction';
+import { getAssessmentGroupAssessmentDistinctApiCall, getAssessmentTypeAssessmentDistinctApiCall, getNodeRelatedAssessmentsDistinctApiCall } from '../Actions/AssessmentModuleAction';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
@@ -266,6 +266,21 @@ const PopUpScan = (props) => {
       }
       if (typeOfMiddlePaneList === 'assessmentGroupAssessmentReviewList') {
         getAssessmentGroupAssessmentDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'assessmentTypeAssessmentReviewList') {
+        getAssessmentTypeAssessmentDistinctApiCall(
           selectedAssociateInfo,
           middlePaneHeaderBadgeTwo,
           countPage,
@@ -624,6 +639,19 @@ const PopUpScan = (props) => {
           true
         );
       }
+      if (typeOfMiddlePaneList === 'assessmentNodeAssessmentReviewList') {
+        getNodeRelatedAssessmentsDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true,
+          middlePaneHeader
+        );
+      }
       if (
         (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList' ||
           typeOfMiddlePaneList === 'associateNodeDistinctReviewList') &&
@@ -708,6 +736,8 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'itemTypeItemReviewList' ||
                 isPopUpValue === 'itemGroupItemReviewList' ||
                 isPopUpValue === 'assessmentGroupAssessmentReviewList' ||
+                isPopUpValue === 'assessmentTypeAssessmentReviewList' ||
+                isPopUpValue === 'assessmentNodeAssessmentReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

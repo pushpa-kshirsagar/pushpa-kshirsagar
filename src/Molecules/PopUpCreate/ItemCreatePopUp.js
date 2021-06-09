@@ -64,7 +64,6 @@ const ItemCreatePopUp = (props) => {
   // };
   const updateGroup = (e, stateName, actualStateName) => {
     let groupid = e.currentTarget.getAttribute('tag');
-    // let groupArr = itemInformation.informationAllocation.itemGroup.itemGroupPrimary;
     let groupArr = itemInformation.informationAllocation[stateName][actualStateName];
     if (groupArr.includes(groupid)) {
       document.getElementById(groupid).style.backgroundColor = 'white';
@@ -75,15 +74,6 @@ const ItemCreatePopUp = (props) => {
       groupArr.push(groupid);
       document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
     }
-    // dispatch({
-    //   type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-    //   payload: {
-    //     objectName: 'informationAllocation',
-    //     stateName: 'itemGroup',
-    //     actualStateName: 'itemGroupPrimary',
-    //     value: groupArr
-    //   }
-    // });
     dispatch({
       type: SET_ITEM_DYNAMIC_SINGLE_STATE,
       payload: {

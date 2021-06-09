@@ -26,9 +26,13 @@ import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getAssessmentGroupAssessmentDistinctApiCall } from '../Actions/AssessmentModuleAction';
+import {
+  getAssessmentGroupAssessmentDistinctApiCall,
+  getAssessmentTypeAssessmentDistinctApiCall,
+  getNodeRelatedAssessmentsDistinctApiCall
+} from '../Actions/AssessmentModuleAction';
 
-const AssessmentGroupAssessmentReviewList = (props) => {
+const AssessmentNodeAssessmentReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -150,11 +154,11 @@ const AssessmentGroupAssessmentReviewList = (props) => {
       type: SET_MIDDLEPANE_STATE,
       payload: {
         middlePaneHeader: 'assessments',
-        middlePaneHeaderBadgeOne: 'group',
+        middlePaneHeaderBadgeOne: 'node',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assessmentsGroupDistinctReviewList',
+        typeOfMiddlePaneList: 'associateNodeDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
@@ -164,7 +168,7 @@ const AssessmentGroupAssessmentReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getAssessmentGroupAssessmentDistinctApiCall(
+    getNodeRelatedAssessmentsDistinctApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
@@ -172,8 +176,10 @@ const AssessmentGroupAssessmentReviewList = (props) => {
       middlePaneHeaderBadgeOne,
       listDistinctData.id,
       '',
-      false
+      false,
+      'assessments'
     );
+
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
@@ -215,11 +221,11 @@ const AssessmentGroupAssessmentReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.assessmentGroupName}
-          textTwoOne={listDistinctData.assessmentGroupDescription}
+          textOneOne={listDistinctData.associateNodeName}
+          textTwoOne={listDistinctData.associateNodeDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'group'}
+          labelTwoTwo={'node'}
           onClickIconOne={closeRelatedList}
           isAlliance
         />
@@ -248,7 +254,7 @@ const AssessmentGroupAssessmentReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assessmentGroupAssessmentinactive' && (
+      {FilterMode === 'assessmentNodeAssessmentDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -260,4 +266,4 @@ const AssessmentGroupAssessmentReviewList = (props) => {
     </div>
   );
 };
-export default AssessmentGroupAssessmentReviewList;
+export default AssessmentNodeAssessmentReviewList;
