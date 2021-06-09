@@ -51,6 +51,24 @@ const AssignmentCreatePopup = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSIGNMENT_SAGA, payload: reqBody });
   };
+  let selectedPrimaryGroup = informationAllocation?.assignmentGroup.assignmentGroupPrimary || [];
+  let selectedSecondaryGroup = informationAllocation?.assignmentGroup.assignmentGroupSecondary || [];
+  let filteredCoreGroupReviewListDataPrimary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for primary popup list
+      if (!selectedSecondaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataPrimary.push(group);
+    });
+  }
+  let filteredCoreGroupReviewListDataSecondary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for Secondary popup list
+      if (!selectedPrimaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataSecondary.push(group);
+    });
+  }
   const updateAllocationObj = (e, stateName, actualStateName) => {
     let groupid = e.currentTarget.getAttribute('tag');
     let groupArr = informationAllocation[stateName][actualStateName];
@@ -119,7 +137,7 @@ const AssignmentCreatePopup = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataPrimary}
         textOne={'assignmentGroupName'}
         textTwo={'assignmentGroupDescription'}
         // onClickEvent={updateAssignmentGroups}
@@ -138,7 +156,7 @@ const AssignmentCreatePopup = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataSecondary}
         textOne={'assignmentGroupName'}
         textTwo={'assignmentGroupDescription'}
         selectedList={informationAllocation.assignmentGroup.assignmentGroupSecondary}

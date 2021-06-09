@@ -173,6 +173,36 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       });
     });
   }
+  let assessmentTypeListPrimary = [];
+  if (
+    informationAllocation?.assessmentType?.assessmentTypePrimary &&
+    informationAllocation?.assessmentType?.assessmentTypePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assessmentType?.assessmentTypePrimary;
+    tempArr.forEach((ob) => {
+      assessmentTypeListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.assessmentTypeName || '',
+        textTwo: ob?.informationBasic?.assessmentTypeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assessmentTypeListSecondary = [];
+  if (
+    informationAllocation?.assessmentType?.assessmentTypeSecondary &&
+    informationAllocation?.assessmentType?.assessmentTypeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assessmentType?.assessmentTypeSecondary;
+    tempArr.forEach((ob) => {
+      assessmentTypeListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.assessmentTypeName || '',
+        textTwo: ob?.informationBasic?.assessmentTypeDescription || '',
+        status: ''
+      });
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -263,30 +293,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'type',
-              status: ''
-            }
-          ]
+          innerList: assessmentTypeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assessmentTypeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -406,7 +417,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
     console.log('=====>', labelName);
     if (labelName === 'group') {
       dispatch({ type: LOADER_START });
-      let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'all', 0, -1);
+      let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'active', 0, -1);
       dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
@@ -447,7 +458,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
     }
     if (labelName === 'node') {
       dispatch({ type: LOADER_START });
-      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
       dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
       dispatch({
         type: INTERNAL_NODE_LIST_SAGA,
@@ -475,7 +486,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
     }
     if (labelName === 'type') {
       dispatch({ type: LOADER_START });
-      let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'all', 0, -1);
+      let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'active', 0, -1);
       dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
       dispatch({
         type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,

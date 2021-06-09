@@ -97,6 +97,106 @@ function* workerReviewInfoAssessmentSaga(data) {
             }
           });
         }
+        if (
+          informationAllocation &&
+          informationAllocation?.assessmentNode?.assessmentNodePrimary &&
+          informationAllocation?.assessmentNode?.assessmentNodePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.assessmentNode.assessmentNodePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentNode',
+              actualStateName: 'assessmentNodePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentNode',
+              actualStateName: 'assessmentNodePrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.assessmentNode?.assessmentNodeSecondary &&
+          informationAllocation?.assessmentNode?.assessmentNodeSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.assessmentNode.assessmentNodeSecondary.map(
+            (ob) => ob.id
+          );
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentNode',
+              actualStateName: 'assessmentNodeSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentNode',
+              actualStateName: 'assessmentNodeSecondary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.assessmentType?.assessmentTypePrimary &&
+          informationAllocation?.assessmentType?.assessmentTypePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.assessmentType.assessmentTypePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentType',
+              actualStateName: 'assessmentTypePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentType',
+              actualStateName: 'assessmentTypePrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.assessmentType?.assessmentTypeSecondary &&
+          informationAllocation?.assessmentType?.assessmentTypeSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.assessmentType.assessmentTypeSecondary.map(
+            (ob) => ob.id
+          );
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentType',
+              actualStateName: 'assessmentTypeSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assessmentType',
+              actualStateName: 'assessmentTypeSecondary',
+              value: []
+            }
+          });
+        }
       }
     }
     console.log('loading end');

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
@@ -10,9 +10,13 @@ import { ASSOCIATE_SIGN_ON, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
-  const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
-  );
+  const {
+    responseObject,
+    headerOneBadgeTwo,
+    reviewMode,
+    administratorSecondary,
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { middlePaneHeader = '' } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     informationEngagement,
     informationSetup,
@@ -23,16 +27,33 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
+  useEffect(()=>{},[administratorSecondary]);
   const dispatch = useDispatch();
   let administratorPrimaryList = [];
   if (informationAlliance?.associateAdministratorPrimary) {
     const ob = informationAlliance?.associateAdministratorPrimary || {};
-    const administratorName = `${ob?.informationBasic.assesseeNamePrefix} ${ob?.informationBasic.assesseeNameFirst.trim()} ${ob?.informationBasic.assesseeNameOther.trim()} ${ob?.informationBasic.assesseeNameLast.trim()} ${ob?.informationBasic.assesseeNameSuffix.trim()}`.trim();
+    const administratorName = `${
+      ob?.informationBasic.assesseeNamePrefix
+    } ${ob?.informationBasic.assesseeNameFirst.trim()} ${ob?.informationBasic.assesseeNameOther.trim()} ${ob?.informationBasic.assesseeNameLast.trim()} ${ob?.informationBasic.assesseeNameSuffix.trim()}`.trim();
     administratorPrimaryList.push({
       id: ob.id,
       textOne: administratorName || '',
       textTwo: ob?.informationBasic?.assesseeAlias || '',
       status: ''
+    });
+  }
+  let administratorSecondaryList = [];
+  if (administratorSecondary && administratorSecondary.length > 0) {
+    administratorSecondary.map((ob) => {
+      const administratorSecondaryName = `${
+        ob?.informationBasic.assesseeNamePrefix
+      } ${ob?.informationBasic.assesseeNameFirst.trim()} ${ob?.informationBasic.assesseeNameOther.trim()} ${ob?.informationBasic.assesseeNameLast.trim()} ${ob?.informationBasic.assesseeNameSuffix.trim()}`.trim();
+      administratorSecondaryList.push({
+        id: ob.id,
+        textOne: administratorSecondaryName || '',
+        textTwo: ob?.informationBasic?.assesseeAlias || '',
+        status: ''
+      });
     });
   }
 
@@ -44,16 +65,24 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'primary',
-          innerList: administratorPrimaryList
-        },
-        {
-          labelTextOneOneBadge: 'secondary',
-          innerList: []
-        }
-      ],
+      labelTextOneOneBadges:
+        middlePaneHeader === ''
+          ? [
+              {
+                labelTextOneOneBadge: 'primary',
+                innerList: administratorPrimaryList
+              },
+              {
+                labelTextOneOneBadge: 'secondary',
+                innerList: administratorSecondaryList
+              }
+            ]
+          : [
+              {
+                labelTextOneOneBadge: 'primary',
+                innerList: administratorPrimaryList
+              }
+            ],
       innerInfo: 'No Information',
       isListCard: true
     }
@@ -842,16 +871,24 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       isListCard: true,
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'primary',
-          innerList: administratorPrimaryList
-        },
-        {
-          labelTextOneOneBadge: 'secondary',
-          innerList: []
-        }
-      ],
+      labelTextOneOneBadges:
+        middlePaneHeader === ''
+          ? [
+              {
+                labelTextOneOneBadge: 'primary',
+                innerList: administratorPrimaryList
+              },
+              {
+                labelTextOneOneBadge: 'secondary',
+                innerList: administratorSecondaryList
+              }
+            ]
+          : [
+              {
+                labelTextOneOneBadge: 'primary',
+                innerList: administratorPrimaryList
+              }
+            ],
       innerInfo: 'No Information'
     }
   ];

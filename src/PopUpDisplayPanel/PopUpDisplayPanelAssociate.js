@@ -22,10 +22,7 @@ import {
   FILTERMODE,
   SET_REQUEST_OBJECT,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
-  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
-  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
-  GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
@@ -37,8 +34,8 @@ import {
   CLEAR_NODE_REDUCER_STATE,
   CLEAR_GROUP_REDUCER_STATE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
-  CLEAR_ITEM_REDUCER_STATE,
-  CLEAR_TYPE_REDUCER_STATE
+  CLEAR_TYPE_REDUCER_STATE,
+  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -47,9 +44,7 @@ import {
   REVIEW_REVISE_POPUP,
   EXCHANGE_POPUP_OPTION,
   REVIEW_POPUP_OPTIONS,
-  MARKETPLACE_POPUP_OPTION,
   REVIEW_DISTINCT_POPUP_OPTION,
-  GROUP_NODE_ROLE_TYPE_POPUP_OPTION,
   CREATE_INFORMATION_POPUP,
   ASSESSEE_REVIEW_REVISE_POPUP,
   NODE_POPUP_OPTION,
@@ -83,6 +78,7 @@ import {
   getAdminManagerDistinctApiCall,
   getAdminManagerRoleApiCall,
   getAssesseeGroupDistinctApiCall,
+  getAssesseeRoleAssesseeReqObj,
   getAssesseeTypeApiCall,
   getRoleGroupReviewListApi,
   getTypeGroupReviewListApi
@@ -96,6 +92,7 @@ import {
 import IconButton from '../Molecules/IconButton/IconButton';
 import { Fragment } from 'react';
 import { getAssessmentGroupApiCall } from '../Actions/AssessmentModuleAction';
+import { ADMINISTRATOR_SECONDARY_ID } from '../endpoints';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -336,6 +333,25 @@ const PopUpDisplayPanelAssociate = (props) => {
       (popupHeaderOneBadgeTwo === 'review' || popupHeaderOneBadgeTwo === 'revise')
     ) {
       dispatch({ type: LOADER_START });
+      let assesseeRoleAssesseeReqBody = getAssesseeRoleAssesseeReqObj(
+        selectedAssociateInfo,
+        ADMINISTRATOR_SECONDARY_ID,
+        'active',
+        0,
+        countPage
+      );
+      dispatch({
+        type: GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+        payload: {
+          request: assesseeRoleAssesseeReqBody,
+          HeaderOne: '',
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false,
+          isAdministratorSecondary: true
+        }
+      });
       dispatch({
         type: GET_ASSOCIATE_INFO_SAGA,
         payload: {

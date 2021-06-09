@@ -6,13 +6,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
-import { ASSOCIATE_SIGN_ON, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import {
+  ASSOCIATE_SIGN_ON,
+  GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+  INTERNAL_NODE_LIST_SAGA,
+  LOADER_START,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_POPUP_VALUE,
+  SET_STATUS_POPUP_VALUE
+} from '../../actionType';
+import { makeInternalNodeObj, makeItemGroupObj, makeItemsTypeObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneItem = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationEngagement, informationSetup, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -335,6 +346,102 @@ const DisplayPaneThreeSectionOneItem = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    if (labelName === 'group') {
+      dispatch({ type: LOADER_START });
+      let requestObj = makeItemGroupObj(selectedAssociateInfo, 'active', 0, -1);
+      // dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'ITEMCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'GROUPSECONDARYPOPUP', popupMode: 'ITEMCREATE' }
+        });
+      }
+    }
+    if (labelName === 'manager') {
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERPPOPUP', popupMode: 'ITEMCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERSECONDARYPOPUP', popupMode: 'ITEMCREATE' }
+        });
+      }
+    }
+    if (labelName === 'node') {
+      dispatch({ type: LOADER_START });
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          nodeViewState: 'list',
+          isMiddlePaneList: false
+        }
+      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODEPOPUP', popupMode: 'ITEMCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODESECONDARYPOPUP', popupMode: 'ITEMCREATE' }
+        });
+      }
+    }
+    if (labelName === 'type') {
+      dispatch({ type: LOADER_START });
+      let roleRequestObj = makeItemsTypeObj(selectedAssociateInfo, 'active', 0, -1);
+      // dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+      dispatch({
+        type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPEPOPUP', popupMode: 'ITEMCREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPESECONDARYPOPUP', popupMode: 'ITEMCREATE' }
+        });
+      }
+    }
   };
 
   const reviseEngagement = (e) => {

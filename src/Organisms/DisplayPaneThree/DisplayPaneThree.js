@@ -860,6 +860,7 @@ export const DisplayPaneThree = () => {
           informationAllocation
         }
       };
+      console.log("ASSESSMENT REVISE ===", reqBody);
       dispatch({ type: LOADER_START });
       dispatch({
         type: ASSESSMENT_INFO_REVISE_SAGA,
@@ -871,14 +872,15 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assignment') {
-      const { informationBasic } = assignmentInfo;
+      const { informationBasic, informationAllocation } = assignmentInfo;
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId: id,
         assignment: {
           id,
-          informationBasic
+          informationBasic,
+          informationAllocation
         }
       };
       dispatch({ type: LOADER_START });
