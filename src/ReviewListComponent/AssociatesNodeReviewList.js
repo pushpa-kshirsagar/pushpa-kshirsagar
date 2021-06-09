@@ -49,7 +49,6 @@ const AssociatesNodeReviewList = (props) => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
-  const [sortedReviewListDistinctData, setSortedReviewListDistinctData] = useState([]);
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
@@ -123,12 +122,6 @@ const AssociatesNodeReviewList = (props) => {
   const changedNode = (node) => {
     console.log(node);
   };
-  // useEffect(() => {
-  //   if (nodeViewState === 'list') {
-  //     let sortedArr = sortingListInAsc(reviewListDistinctData, 'associateName');
-  //     setSortedReviewListDistinctData(sortedArr);
-  //   }
-  // }, [reviewListDistinctData]);
   return (
     <div>
       {reviewListDistinctData.length > 0 && (

@@ -65,7 +65,8 @@ import {
 import { makeInternalNodeObj } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
-  getItemTypeItemDistinctApiCall
+  getItemTypeItemDistinctApiCall,
+  getNodeRelatedItemsDistinctApiCall
 } from '../Actions/ItemModuleAction';
 import {
   getAssessmentGroupAssessmentDistinctApiCall,
@@ -897,6 +898,23 @@ const PopUpMiddlePaneList = (props) => {
             payload: { FilterMode: 'assessmentNodeAssessmentDistinct' + secondaryOptionCheckValue }
           });
         }
+        if (popupHeaderOne === 'items') {
+          getNodeRelatedItemsDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false,
+            middlePaneHeader
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'assessmentNodeAssessmentDistinct' + secondaryOptionCheckValue }
+          });
+        }
 
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
@@ -1096,6 +1114,36 @@ const PopUpMiddlePaneList = (props) => {
           ]
         };
         shareVal = 'assesseeType';
+      }
+      if (typeOfMiddlePaneList === 'assessmentsTypeDistinctReviewList') {
+        reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assessmentTypeShared: [
+            {
+              assessmentTypeId: selectedTagValue,
+              assessmentTypeGroupId: selectedTagGroupId
+            }
+          ]
+        };
+        shareVal = 'assessmentType';
+      }
+      if (typeOfMiddlePaneList === 'itemsTypeDistinctReviewList') {
+        reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          itemTypeShared: [
+            {
+              itemTypeId: selectedTagValue,
+              itemTypeGroupId: selectedTagGroupId
+            }
+          ]
+        };
+        shareVal = 'itemType';
       }
       if (reqBody) {
         dispatch({ type: LOADER_START });

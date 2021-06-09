@@ -211,10 +211,24 @@ export const ITEMGROUPITEM_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/item-group/item/review-list';
 export const ITEMTYPEPITEM_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/item-type/item/review-list';
+export const ITEMNODEITEM_REVIEWLIST_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/associate-node/item/review-list';
 export const ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/assessment/review-list';
 export const ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/assessment/review-list';
 export const ASSESSMENTNODE_ASSESSMENT_REVIEWLIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/associate-node/assessment/review-list';
+export const ITEM_TYPE_SHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/assessment-item-types/share';
+export const ITEM_TYPE_UNSHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/assessment-item-types/unshare';
+export const ASSESSMENT_TYPE_SHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/assessment-type/share';
+export const ASSESSMENT_TYPE_UNSHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/assessment-type/unshare';
+export const ITEM_TYPE_GROUP_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/item-type-group/review-list';
+export const ASSESSMENT_TYPE_GROUP_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type-group/review-list';
 // export const URL = '';

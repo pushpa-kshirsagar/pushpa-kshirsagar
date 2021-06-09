@@ -118,7 +118,7 @@ const ItemsTypeReviewList = (props) => {
         popupContentArrValue: optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        // selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
       }
     });
     dispatch({
@@ -144,9 +144,12 @@ const ItemsTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.itemTypeStatus}
+                // status={item.informationEngagement.itemTypeStatus}
                 textOne={item.informationBasic.itemTypeName}
                 textTwo={item.informationBasic.itemTypeDescription}
+                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                actualStatus={item.itemTypeShared ? 'SHARED' : 'UNSHARED'}
+                dataValue={item.informationAllocation?.itemTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 // dataValue={item.informationAllocation.itemGroup}

@@ -20,7 +20,9 @@ import {
   ASSIGNMENT_TYPE_REVIEWLIST_URL,
   ASSESSEE_TYPE_GROUP_URL,
   ASSOCIATE_TYPE_GROUP_URL,
-  ITEM_TYPE_REVIEWLIST_URL
+  ITEM_TYPE_REVIEWLIST_URL,
+  ASSESSMENT_TYPE_GROUP_URL,
+  ITEM_TYPE_GROUP_URL
 } from '../../endpoints';
 
 const TypesReviewListDistinctApi = async (requestObj) => {
@@ -268,6 +270,10 @@ function* workerReviewTypeGroupListSaga(data) {
           ? ASSESSEE_TYPE_GROUP_URL
           : data.payload.typeGroup === 'associates'
           ? ASSOCIATE_TYPE_GROUP_URL
+          : data.payload.typeGroup === 'assessments'
+          ? ASSESSMENT_TYPE_GROUP_URL
+          : data.payload.typeGroup === 'items'
+          ? ITEM_TYPE_GROUP_URL
           : ''
     });
     if (userResponse.responseCode === '000') {

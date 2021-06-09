@@ -223,6 +223,7 @@ const AssociateTypeAssociateReviewList = (props) => {
           labelTwoTwo={'type'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&

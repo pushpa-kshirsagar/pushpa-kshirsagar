@@ -21,6 +21,7 @@ import {
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
+  SET_POPUP_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_PREVIOUS_SECTION_POPUP,
   SET_REQUEST_OBJECT
@@ -122,6 +123,34 @@ const PopupAssessmentsModule = (props) => {
     }
   };
   const resetDataFunction = () => {
+    dispatch({
+      type: SET_POPUP_SINGLE_STATE,
+      payload: { stateName: 'cardValue', value: 'NoCard' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: '' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedFlagedArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'unselectedFlagedArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedTagsArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'unselectedTagsArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'flagedValue', value: '' }
+    });
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     dispatch({ type: CLEAR_ASSESSMENT_INFO });
   };

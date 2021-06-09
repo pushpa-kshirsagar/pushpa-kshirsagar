@@ -79,7 +79,8 @@ const InternalNodeReviewList = (props) => {
     if (
       middlePaneHeader === 'assessees' ||
       middlePaneHeader === 'administrators' ||
-      middlePaneHeader === 'managers'
+      middlePaneHeader === 'managers' ||
+      middlePaneHeader === 'items'
     ) {
       let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
         obj.data === 'assessees'

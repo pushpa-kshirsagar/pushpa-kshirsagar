@@ -282,6 +282,8 @@ const DisplayPageOne = () => {
           setReducerObject={SET_ASSESSMENT_TYPE_REDUCER_STATE}
           objectName={'assessmentType'}
           allocationObj={'assessmentTypeGroup'}
+          groupName={'assessmentTypeGroupName'}
+          groupDescription={'assessmentTypeGroupDescription'}
         />
       )}
       {popupMode === 'assignmentsTYPECREATE' && (
@@ -293,6 +295,8 @@ const DisplayPageOne = () => {
           setReducerObject={SET_ASSIGNMENT_TYPE_REDUCER_STATE}
           objectName={'assignmentType'}
           allocationObj={'assignmentTypeGroup'}
+          groupName={'assignmentTypeGroupName'}
+          groupDescription={'assignmentTypeGroupDescription'}
         />
       )}
       {popupMode === 'associatesTYPECREATE' && (

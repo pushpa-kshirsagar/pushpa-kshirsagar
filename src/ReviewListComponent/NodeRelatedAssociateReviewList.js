@@ -169,14 +169,14 @@ const NodeRelatedAssociateReviewList = (props) => {
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (
-      siftValue === 'suspended' ||
-      siftValue === 'terminated' ||
-      siftValue === 'disapproved' ||
-      siftValue === 'unapproved' ||
-      siftValue === 'unconfirmed'
-    )
-      siftApiCall(siftValue);
+    // if (
+    //   siftValue === 'suspended' ||
+    //   siftValue === 'terminated' ||
+    //   siftValue === 'disapproved' ||
+    //   siftValue === 'unapproved' ||
+    //   siftValue === 'unconfirmed'
+    // )
+    //   siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
@@ -223,6 +223,7 @@ const NodeRelatedAssociateReviewList = (props) => {
           labelTwoTwo={'node'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&

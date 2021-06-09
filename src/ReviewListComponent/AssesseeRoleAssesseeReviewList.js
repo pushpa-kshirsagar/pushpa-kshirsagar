@@ -218,6 +218,7 @@ const AssesseeRoleAssesseeReviewList = (props) => {
           labelTwoTwo={'role'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&

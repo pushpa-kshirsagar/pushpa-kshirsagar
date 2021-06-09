@@ -115,11 +115,21 @@ const TypeCreatePopup = (props) => {
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         inputHeader={'group'}
-        isRequired={headerOne === 'assessees' || headerOne === 'associates' ? true : false}
+        isRequired={
+          headerOne === 'assessees' ||
+          headerOne === 'associates' ||
+          headerOne === 'items' ||
+          headerOne === 'assessments'
+            ? true
+            : false
+        }
         inputHeaderBadge={''}
         infoMsg={'select a group'}
         ListData={
-          ((headerOne === 'assessees' || headerOne === 'associates') &&
+          ((headerOne === 'assessees' ||
+            headerOne === 'associates' ||
+            headerOne === 'items' ||
+            headerOne === 'assessments') &&
             coreGroupReviewListData) || [
             { id: '01', informationBasic: { name: 'Simple Sample 01', description: '' } },
             { id: '02', informationBasic: { name: 'Simple Sample 02', description: '' } },
@@ -131,9 +141,21 @@ const TypeCreatePopup = (props) => {
             ? []
             : [reducerObeject?.informationAllocation[allocationObj]]
         }
-        textOne={headerOne === 'assessees' || headerOne === 'associates' ? groupName : 'name'}
+        textOne={
+          headerOne === 'assessees' ||
+          headerOne === 'associates' ||
+          headerOne === 'items' ||
+          headerOne === 'assessments'
+            ? groupName
+            : 'name'
+        }
         textTwo={
-          headerOne === 'assessees' || headerOne === 'associates' ? groupDescription : 'description'
+          headerOne === 'assessees' ||
+          headerOne === 'associates' ||
+          headerOne === 'items' ||
+          headerOne === 'assessments'
+            ? groupDescription
+            : 'description'
         }
         onClickEvent={updateGroup}
         setErrorMsg={setRequiredErrorMsg}

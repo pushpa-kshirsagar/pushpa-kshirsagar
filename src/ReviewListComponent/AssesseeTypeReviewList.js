@@ -145,12 +145,12 @@ const AssesseeTypeReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                // status={item.informationEngagement.assesseeTypeStatus}
                 actualStatus={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
+                dataValue={item.informationAllocation.assesseeTypeGroup}
+                // status={item.informationEngagement.assesseeTypeStatus}
                 textOne={item.informationBasic.assesseeTypeName}
                 textTwo={item.informationBasic.assesseeTypeDescription}
                 isTooltipActive={false}
-                dataValue={item.informationAllocation.assesseeTypeGroup}
                 onClickEvent={openListPopup}
               />
             </div>

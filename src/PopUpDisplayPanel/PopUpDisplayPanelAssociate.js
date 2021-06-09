@@ -37,7 +37,8 @@ import {
   CLEAR_NODE_REDUCER_STATE,
   CLEAR_GROUP_REDUCER_STATE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
-  CLEAR_ITEM_REDUCER_STATE
+  CLEAR_ITEM_REDUCER_STATE,
+  CLEAR_TYPE_REDUCER_STATE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -901,7 +902,13 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'types') {
-      if (popupHeaderOne === 'assessees' || popupHeaderOne === 'associates') {
+      dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
+      if (
+        popupHeaderOne === 'assessees' ||
+        popupHeaderOne === 'associates' ||
+        popupHeaderOne === 'items' ||
+        popupHeaderOne === 'assessments'
+      ) {
         getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       } else {
         dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: '' });

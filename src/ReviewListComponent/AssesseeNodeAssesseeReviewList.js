@@ -212,7 +212,6 @@ const AssesseeNodeAssesseeReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          // textOneOne={assesseeRole(listDistinctData.assesseeRoleName)}
           textOneOne={listDistinctData.associateNodeName}
           textTwoOne={listDistinctData.associateNodeDescription}
           IconOne={CrossIcon}
@@ -220,6 +219,7 @@ const AssesseeNodeAssesseeReviewList = (props) => {
           labelTwoTwo={'node'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&

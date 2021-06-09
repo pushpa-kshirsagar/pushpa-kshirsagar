@@ -8,6 +8,7 @@ import Label from '../../Atoms/Labels/Label';
 import Avatar from '@material-ui/core/Avatar';
 import './Card.css';
 import { Input } from '@material-ui/core';
+import { Fragment } from 'react';
 const Card = (props) => {
   const {
     textOneOne = '',
@@ -77,7 +78,9 @@ const Card = (props) => {
                 src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
               />
             ) : isIcon ? (
-              <IconOne className={className} onClick={onClickIconOne} />
+              <Fragment>
+                <IconOne className={className} onClick={onClickIconOne} />
+              </Fragment>
             ) : ImageOne ? (
               <IconButton Icon={ImageOne} className={'imageNA'} />
             ) : null}

@@ -173,15 +173,17 @@ export const DisplayPaneOne = () => {
           )}
         </div>
 
-        <>
-          <Sections
-            listSections={leftPaneSections}
-            selectedSection={selectedSection}
-            setSelectedSection={setSelectedSection}
-          />
+        {selectedAssociateInfo && (
+          <>
+            <Sections
+              listSections={leftPaneSections}
+              selectedSection={selectedSection}
+              setSelectedSection={setSelectedSection}
+            />
 
-          <FooterIconOne />
-        </>
+            <FooterIconOne />
+          </>
+        )}
       </div>
       <PopUpDisplayPaneOneSectionTwo
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}

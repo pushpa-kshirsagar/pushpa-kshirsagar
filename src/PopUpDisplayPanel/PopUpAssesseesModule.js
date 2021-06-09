@@ -97,6 +97,7 @@ const PopUpAssesseesModule = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: { stateName: 'flagedValue', value: '' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     dispatch({ type: ASSESSEE_INFO_CREATE });
   };
   const ChangeOptionPopup = (e) => {

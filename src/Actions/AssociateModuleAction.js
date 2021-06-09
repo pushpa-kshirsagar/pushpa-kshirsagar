@@ -564,17 +564,10 @@ export const getAssociateNodeApiCall = (
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: { stateName: 'nodeViewState', value: nodeViewState }
   });
-  // if (targetValue === 'distinct') {
-  //   dispatch({
-  //     type: FILTERMODE,
-  //     payload: { FilterMode: 'associateDistinct' + secondaryOptionCheckValue }
-  //   });
-  // } else {
-  //   dispatch({
-  //     type: FILTERMODE,
-  //     payload: { FilterMode: 'associatesNodeDistinct' }
-  //   });
-  // }
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'middlePaneSelectedValue', value: '' }
+  });
   dispatch({
     type: FILTERMODE,
     payload: { FilterMode: 'associatesNodeDistinct' }

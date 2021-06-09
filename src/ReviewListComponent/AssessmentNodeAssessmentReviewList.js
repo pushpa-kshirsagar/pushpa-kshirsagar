@@ -228,6 +228,7 @@ const AssessmentNodeAssessmentReviewList = (props) => {
           labelTwoTwo={'node'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&

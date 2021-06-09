@@ -16,13 +16,16 @@ import {
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
-  INTERNAL_NODE_LIST_SAGA
+  INTERNAL_NODE_LIST_SAGA,
+  GET_NODE_ITEMS_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   getItemGroupItemReqObj,
   getItemGroupItemScanReqObj,
   getItemTypeItemReqObj,
   getItemTypeItemScanReqObj,
+  getNodeItemsReqObj,
+  getNodeItemsScanReqObj,
   makeInternalNodeObj,
   makeItemGroupObj,
   makeItemObj,
@@ -260,6 +263,55 @@ export const getItemTypeItemDistinctApiCall = (
     payload: {
       request: reqBody,
       HeaderOne: 'items',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getNodeRelatedItemsDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan,
+  middlePaneHeader
+) => {
+  let reqBody = getNodeItemsReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getNodeItemsScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_NODE_ITEMS_REVIEW_LIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: middlePaneHeader,
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

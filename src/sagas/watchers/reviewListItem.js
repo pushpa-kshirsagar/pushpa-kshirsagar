@@ -9,11 +9,13 @@ import {
   GET_ITEMGROUPITEM_REVIEW_LIST_SAGA,
   RELATED_REVIEWLIST_DISTINCT_DATA,
   SET_REVIEW_LIST_RELATE_DATA,
-  GET_ITEMTYPEITEM_REVIEW_LIST_SAGA
+  GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
+  GET_NODE_ITEMS_REVIEW_LIST_SAGA
 } from '../../actionType';
 import {
   ITEM_REVIEWLIST_URL,
   ITEMGROUPITEM_REVIEWLIST_URL,
+  ITEMNODEITEM_REVIEWLIST_URL,
   ITEMTYPEPITEM_REVIEWLIST_URL
 } from '../../endpoints';
 import Store from '../../store';
@@ -166,8 +168,55 @@ function* workeItemTypeItemReviewListSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workeItemNodeItemReviewListSaga(data) {
+  try {
+    const response = yield call(apiCall, {
+      data: data.payload.request,
+      URL: ITEMNODEITEM_REVIEWLIST_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({
+        type: RELATED_REVIEWLIST_DISTINCT_DATA,
+        payload: [response.responseObject]
+      });
+      yield put({
+        type: SET_REVIEW_LIST_RELATE_DATA,
+        payload: response.responseObject
+      });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: data.payload.HeaderOne,
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'itemNodeItemReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
 export default function* watchItemReviewListSaga() {
   yield takeLatest(GET_ITEM_REVIEW_LIST_SAGA, workerReviewListItemsSaga);
   yield takeLatest(GET_ITEMGROUPITEM_REVIEW_LIST_SAGA, workeItemGroupItemReviewListSaga);
   yield takeLatest(GET_ITEMTYPEITEM_REVIEW_LIST_SAGA, workeItemTypeItemReviewListSaga);
+  yield takeLatest(GET_NODE_ITEMS_REVIEW_LIST_SAGA, workeItemNodeItemReviewListSaga);
 }

@@ -31,7 +31,12 @@ import {
   getAssociatesTypeApiCall,
   getInternalNodeApiCall
 } from '../Actions/AssociateModuleAction';
-import { getItemGroupDistinctApiCall, getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+import { getItemGroupDistinctApiCall, getItemsDistinctApiCall, getItemsTypeApiCall } from '../Actions/ItemModuleAction';
+import {
+  getAssessmentDistinctApiCall,
+  getAssessmentGroupApiCall,
+  getAssessmentTypeApiCall
+} from '../Actions/AssessmentModuleAction';
 const PopUpMiddlePaneTrippleDot = (props) => {
   const {
     popupHeaderOne,
@@ -121,6 +126,15 @@ const PopUpMiddlePaneTrippleDot = (props) => {
         countPage,
         'items',
         dispatch
+      );
+      dispatch({ type: POPUP_CLOSE });
+    } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'assessments') {
+      getAssessmentDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'distinct'
       );
       dispatch({ type: POPUP_CLOSE });
     } else if (
@@ -353,6 +367,15 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           'groups'
         );
         dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
+        getItemsTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          middlePaneHeader
+        );
       } else if (keyVal === 'groups') {
         getItemGroupDistinctApiCall(
           selectedAssociateInfo,
@@ -360,6 +383,82 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           countPage,
           dispatch,
           'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'types') {
+        getItemsTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          middlePaneHeader
+        );
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
+      }
+    } else if (middlePaneHeader === 'assessments') {
+      if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'groups') {
+        getAssessmentGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
+        getAssessmentTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          'assessments'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'groups') {
+        getAssessmentGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'types') {
+        getAssessmentTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          'assessments'
         );
         dispatch({ type: POPUP_CLOSE });
       } else {

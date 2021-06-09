@@ -110,7 +110,9 @@ const AssessmentTypeReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status'),
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
       }
     });
     dispatch({
@@ -122,6 +124,9 @@ const AssessmentTypeReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  const associateSeftId =
+    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
+
   return (
     <div>
       {reviewListDistinctData &&
@@ -133,9 +138,12 @@ const AssessmentTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.assessmentTypeStatus}
+                // status={item.informationEngagement.assessmentTypeStatus}
                 textOne={item.informationBasic.assessmentTypeName}
                 textTwo={item.informationBasic.assessmentTypeDescription}
+                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                actualStatus={item.assessmentTypeShared ? 'SHARED' : 'UNSHARED'}
+                dataValue={item.informationAllocation?.assessmentTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
               />

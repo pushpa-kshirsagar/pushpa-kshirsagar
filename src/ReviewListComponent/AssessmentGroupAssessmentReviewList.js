@@ -222,6 +222,7 @@ const AssessmentGroupAssessmentReviewList = (props) => {
           labelTwoTwo={'group'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&

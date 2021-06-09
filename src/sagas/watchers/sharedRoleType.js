@@ -7,7 +7,9 @@ import {
   SET_REQUEST_OBJECT,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
-  GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA
+  GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import {
   ASSESSEE_ROLE_SHARE_URL,
@@ -17,7 +19,11 @@ import {
   ASSOCIATE_TYPE_SHARE_URL,
   ASSOCIATE_TYPE_UNSHARE_URL,
   ASSESSEE_TYPE_SHARE_URL,
-  ASSESSEE_TYPE_UNSHARE_URL
+  ASSESSEE_TYPE_UNSHARE_URL,
+  ITEM_TYPE_SHARE_URL,
+  ITEM_TYPE_UNSHARE_URL,
+  ASSESSMENT_TYPE_SHARE_URL,
+  ASSESSMENT_TYPE_UNSHARE_URL
 } from '../../endpoints';
 import Store from '../../store';
 
@@ -61,6 +67,16 @@ function* workerRoleTypeShareSaga(data) {
           ? ASSOCIATE_TYPE_SHARE_URL
           : ASSOCIATE_TYPE_UNSHARE_URL;
     }
+    if (data.payload.shareValue === 'itemType') {
+      APIURL =
+        data.payload.apiCall === 'shareApiCall' ? ITEM_TYPE_SHARE_URL : ITEM_TYPE_UNSHARE_URL;
+    }
+    if (data.payload.shareValue === 'assessmentType') {
+      APIURL =
+        data.payload.apiCall === 'shareApiCall'
+          ? ASSESSMENT_TYPE_SHARE_URL
+          : ASSESSMENT_TYPE_SHARE_URL;
+    }
     const userResponse = yield call(sharedApiCall, {
       data: data.payload.request,
       URL: APIURL
@@ -78,7 +94,13 @@ function* workerRoleTypeShareSaga(data) {
             ? GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
             : data.payload.shareValue === 'assesseeType'
             ? GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA
-            : GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+            : data.payload.shareValue === 'associateType'
+            ? GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'itemType'
+            ? GET_ITEM_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'assessmentType'
+            ? GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA
+            : null,
         payload: {
           request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
           BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,

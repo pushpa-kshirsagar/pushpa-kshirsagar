@@ -18,10 +18,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import {
-  getAssesseeGroupAssesseeDistinctApiCall,
-  onClickCheckBoxSelection
-} from '../Actions/AssesseeModuleAction';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
@@ -227,10 +224,7 @@ const ItemsGroupItemsReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={assesseeStatus(
-                  middlePaneHeaderBadgeTwo,
-                  item.informationEngagement.itemStatus
-                )}
+                status={item.informationEngagement.itemStatus}
                 actualStatus={item.informationEngagement.itemStatus}
                 textOne={item.informationBasic.itemName}
                 textTwo={item.informationBasic.itemDescription}
