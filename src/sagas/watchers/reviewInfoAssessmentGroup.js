@@ -1,10 +1,13 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSESSMENT_GROUP_REVISE_INFO_SAGA,
+  GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
   GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
   LOADER_STOP,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSESSMENT_GROUP_REDUCER_STATE,
-  SET_DISPLAY_PANE_THREE_STATE
+  SET_DISPLAY_PANE_THREE_STATE,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_GROUP_URL, ASSESSMENT_REVISE_GROUP_URL } from '../../endpoints';
 
@@ -30,7 +33,20 @@ function* workerReviewAssessmentGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, assessmentGroupAssessmentReqBody = null } = data.payload;
+      if (assessmentGroupAssessmentReqBody !== null) {
+        yield put({
+          type: GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
+          payload: {
+            request: assessmentGroupAssessmentReqBody,
+            HeaderOne: 'assessments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -51,7 +67,7 @@ function* workerReviewAssessmentGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -81,7 +97,20 @@ function* workerReviseAssessmentGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { createMode = '' } = data.payload;
+      const { createMode = '', assessmentGroupAssessmentReqBody = null } = data.payload;
+      if (assessmentGroupAssessmentReqBody !== null) {
+        yield put({
+          type: GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
+          payload: {
+            request: assessmentGroupAssessmentReqBody,
+            HeaderOne: 'assessments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -93,10 +122,15 @@ function* workerReviseAssessmentGroupInfoSaga(data) {
           createMode
         }
       });
+      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      yield put({
+        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+        payload: []
+      });
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

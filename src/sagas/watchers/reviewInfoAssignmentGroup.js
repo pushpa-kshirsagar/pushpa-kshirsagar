@@ -30,7 +30,20 @@ function* workerReviewAssignmentGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, assignmentGroupAssignmentReqBody = null } = data.payload;
+      // if (assignmentGroupAssignmentReqBody !== null) {
+      //   yield put({
+      //     type: GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
+      //     payload: {
+      //       request: assignmentGroupAssignmentReqBody,
+      //       HeaderOne: 'assessments',
+      //       BadgeOne: '',
+      //       BadgeTwo: '',
+      //       BadgeThree: '',
+      //       isMiddlePaneList: false
+      //     }
+      //   });
+      // }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
