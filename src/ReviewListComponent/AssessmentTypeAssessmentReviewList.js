@@ -26,7 +26,10 @@ import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getAssessmentGroupAssessmentDistinctApiCall, getAssessmentTypeAssessmentDistinctApiCall } from '../Actions/AssessmentModuleAction';
+import {
+  getAssessmentGroupAssessmentDistinctApiCall,
+  getAssessmentTypeAssessmentDistinctApiCall
+} from '../Actions/AssessmentModuleAction';
 
 const AssessmentTypeAssessmentReviewList = (props) => {
   const dispatch = useDispatch();
@@ -105,18 +108,12 @@ const AssessmentTypeAssessmentReviewList = (props) => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associates'
-              : 'assessees',
-          middlePaneHeaderBadgeOne: 'group',
+          middlePaneHeader: 'assessments',
+          middlePaneHeaderBadgeOne: 'type',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associatesGroupDistinctReviewList'
-              : 'assesseesGroupDistinctReviewList',
+          typeOfMiddlePaneList: 'assessmentsTypeDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
@@ -249,6 +246,15 @@ const AssessmentTypeAssessmentReviewList = (props) => {
             </div>
           );
         })}
+      {FilterMode === 'assessmentTypeAssessmentRevise' && (
+        <FooterIconTwo
+          FilterModeEnable={isShowReviseIcon}
+          FilterMode={FilterMode}
+          onClick={onClickRevise}
+          primaryIcon={revisePrimaryIcon}
+          secondaryIcon={reviseSecondaryIcons}
+        />
+      )}
       {FilterMode === 'assessmentTypeAssessmentinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}

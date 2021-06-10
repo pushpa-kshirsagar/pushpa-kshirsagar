@@ -105,18 +105,12 @@ const AssessmentGroupAssessmentReviewList = (props) => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associates'
-              : 'assessees',
+          middlePaneHeader: 'assessments',
           middlePaneHeaderBadgeOne: 'group',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associatesGroupDistinctReviewList'
-              : 'assesseesGroupDistinctReviewList',
+          typeOfMiddlePaneList: 'assessmentsGroupDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
@@ -249,6 +243,15 @@ const AssessmentGroupAssessmentReviewList = (props) => {
             </div>
           );
         })}
+      {FilterMode === 'assessmentGroupAssessmenteRevise' && (
+        <FooterIconTwo
+          FilterModeEnable={isShowReviseIcon}
+          FilterMode={FilterMode}
+          onClick={onClickRevise}
+          primaryIcon={revisePrimaryIcon}
+          secondaryIcon={reviseSecondaryIcons}
+        />
+      )}
       {FilterMode === 'assessmentGroupAssessmentinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}

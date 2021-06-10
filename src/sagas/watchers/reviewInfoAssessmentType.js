@@ -4,7 +4,8 @@ import {
   LOADER_STOP,
   SET_ASSESSMENT_TYPE_REDUCER_STATE,
   ASSESSMENT_TYPE_REVISE_INFO_SAGA,
-  SET_DISPLAY_PANE_THREE_STATE
+  SET_DISPLAY_PANE_THREE_STATE,
+  GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_TYPE_URL, ASSESSMENT_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -30,7 +31,20 @@ function* workerReviewAssessmentTypeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, assessmentTypeAssessmentReqBody = null } = data.payload;
+      if (assessmentTypeAssessmentReqBody !== null) {
+        yield put({
+          type: GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA,
+          payload: {
+            request: assessmentTypeAssessmentReqBody,
+            HeaderOne: 'assessments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -51,7 +65,7 @@ function* workerReviewAssessmentTypeInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -80,7 +94,20 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { createMode = '' } = data.payload;
+      const { createMode = '', assessmentTypeAssessmentReqBody = null } = data.payload;
+      if (assessmentTypeAssessmentReqBody !== null) {
+        yield put({
+          type: GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA,
+          payload: {
+            request: assessmentTypeAssessmentReqBody,
+            HeaderOne: 'assessments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -95,7 +122,7 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

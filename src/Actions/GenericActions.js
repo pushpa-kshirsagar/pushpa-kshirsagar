@@ -3822,7 +3822,7 @@ export const getAssessmentGroupAssessmentReqObj = (
         searchBy: [
           {
             dataType: 'string',
-            conditionColumn: 'informationEngagement.assessmentGroupStatus',
+            conditionColumn: 'informationEngagement.assessmentStatus',
             conditionValue: searchObj
           }
         ]
@@ -3830,6 +3830,78 @@ export const getAssessmentGroupAssessmentReqObj = (
     ]
   };
 };
+export const getAssignmentGroupAssignmentReqObj = (
+  selectedAssociateInfo,
+  groupId,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED']
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    groupId: groupId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assignmentGroup.assignmentGroupPrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: groupId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assignmentGroup.assignmentGroupSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: groupId
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assignmentStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+
 export const getAssessmentGroupAssessmentScanReqObj = (
   selectedAssociateInfo,
   groupId,
@@ -3985,7 +4057,7 @@ export const getAssessmentTypeAssessmentReqObj = (
         searchBy: [
           {
             dataType: 'string',
-            conditionColumn: 'informationEngagement.assessmentTypeStatus',
+            conditionColumn: 'informationEngagement.assessmentStatus',
             conditionValue: searchObj
           }
         ]

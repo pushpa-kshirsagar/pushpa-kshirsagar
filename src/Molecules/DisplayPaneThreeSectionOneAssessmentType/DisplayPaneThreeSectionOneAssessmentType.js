@@ -10,11 +10,20 @@ import { Paper } from '@material-ui/core';
 const DisplayPaneThreeSectionOneAssessmentType = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
+  let groupList = [];
+  // if (informationAllocation && informationAllocation.assessmentTypeGroup) {
+  //   groupList.push({
+  //     id: informationAllocation.assessmentTypeGroup,
+  //     textOne: informationBasic?.assessmentName || '',
+  //     textTwo: informationBasic?.assessmentDescription || '',
+  //     status: ''
+  //   });
+  // }
   const allocationList = [
     {
       id: 'a1',
@@ -26,7 +35,7 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: groupList
         }
       ],
       innerInfo: 'No Information',

@@ -62,7 +62,12 @@ import {
   getAssociateTypeAssociateDistinctApiCall,
   getNodeRelatedAssociateDistinctApiCall
 } from '../Actions/AssociateModuleAction';
-import { makeInternalNodeObj } from '../Actions/GenericActions';
+import {
+  getAssessmentGroupAssessmentReqObj,
+  makeInternalNodeObj,
+  getAssignmentGroupAssignmentReqObj,
+  getAssessmentTypeAssessmentReqObj
+} from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
   getItemTypeItemDistinctApiCall,
@@ -509,11 +514,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
+        let assessmentGroupAssessmentReqBody = getAssessmentGroupAssessmentReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            assessmentGroupAssessmentReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -543,11 +556,19 @@ const PopUpMiddlePaneList = (props) => {
       }
       if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
         // alert(selectedTagValue);
+        let assignmentGroupAssignmentReqBody = getAssignmentGroupAssignmentReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            assignmentGroupAssignmentReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -644,11 +665,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assessmentsTypeDistinctReviewList') {
+        let assessmentTypeAssessmentReqBody = getAssessmentTypeAssessmentReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            assessmentTypeAssessmentReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

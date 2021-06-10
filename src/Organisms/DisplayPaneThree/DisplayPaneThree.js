@@ -96,6 +96,7 @@ import DisplayPaneThreeSectionOneItemGroup from '../../Molecules/DisplayPaneThre
 import DisplayPaneThreeSectionTwoItemGroup from '../../Molecules/DisplayPaneThreeSectionTwoItemGroup/DisplayPaneThreeSectionTwoItemGroup';
 import DisplayPaneThreeSectionTwoItemType from '../../Molecules/DisplayPaneThreeSectionTwoItemType/DisplayPaneThreeSectionTwoItemType';
 import DisplayPaneThreeSectionOneItemType from '../../Molecules/DisplayPaneThreeSectionOneItemType/DisplayPaneThreeSectionOneItemType';
+import { getAssessmentGroupAssessmentReqObj, getAssessmentTypeAssessmentReqObj } from '../../Actions/GenericActions';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -674,15 +675,28 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessmentGroupAssessment: {
+          assessmentGroupAssessmentAllocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          assessmentGroupAssessmentUnallocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         assessmentGroup: {
           id,
           informationBasic: assessmentGroup.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let assessmentGroupAssessmentReqBody = getAssessmentGroupAssessmentReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSESSMENT_GROUP_REVISE_INFO_SAGA,
-        payload: { headerOne: 'assessments', reqBody, createMode }
+        payload: { headerOne: 'assessments', reqBody, assessmentGroupAssessmentReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'items') {
       const { associateId, id } = responseObject;
@@ -706,12 +720,25 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        // assignmentGroupAssignment: {
+        //   assignmentGroupAssignmentAllocate:
+        //     assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+        //   assignmentGroupAssignmentUnallocate:
+        //     assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        // },
         assignmentGroup: {
           id,
           informationBasic: assignmentGroup.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      // let assignmentGroupAssignmentReqBody = getAssignmentGroupAssignmentReqObj(
+      //   selectedAssociateInfo,
+      //   id,
+      //   'active',
+      //   0,
+      //   countPage
+      // );
       dispatch({
         type: ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
         payload: { headerOne: 'assignments', reqBody, createMode }
@@ -767,15 +794,28 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessmentTypeAssessment: {
+          assessmentTypeAssessmentAllocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          assessmentTypeAssessmentUnallocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         assessmentType: {
           id,
           informationBasic: assessmentType.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let assessmentTypeAssessmentReqBody = getAssessmentTypeAssessmentReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSESSMENT_TYPE_REVISE_INFO_SAGA,
-        payload: { headerOne: 'assessments', reqBody, createMode }
+        payload: { headerOne: 'assessments', reqBody, assessmentTypeAssessmentReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'assignments') {
       const { associateId, id } = responseObject;
@@ -860,7 +900,7 @@ export const DisplayPaneThree = () => {
           informationAllocation
         }
       };
-      console.log("ASSESSMENT REVISE ===", reqBody);
+      console.log('ASSESSMENT REVISE ===', reqBody);
       dispatch({ type: LOADER_START });
       dispatch({
         type: ASSESSMENT_INFO_REVISE_SAGA,
@@ -921,6 +961,7 @@ export const DisplayPaneThree = () => {
     }
     setIsShowReviseIcon(true);
   };
+
   const onClickCreateAssessee = () => {
     console.log('ON CLICK CREATE ASSESSEE');
     dispatch({ type: ASSESSEE_INFO_CREATE });
