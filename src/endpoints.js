@@ -228,8 +228,15 @@ export const ASSESSMENT_TYPE_SHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assessment-type/share';
 export const ASSESSMENT_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assessment-type/unshare';
+export const ASSIGNMENT_TYPE_SHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/assignment-type/share';
+export const ASSIGNMENT_TYPE_UNSHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/assignment-type/unshare';
 export const ITEM_TYPE_GROUP_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/item-type-group/review-list';
 export const ASSESSMENT_TYPE_GROUP_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type-group/review-list';
-// export const URL = '';
+export const ASSIGNMENT_TYPE_GROUP_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type-group/review-list';
+export const ASSIGNMENT_TYPE_ASSIGNMENT_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/assignment/review-list';

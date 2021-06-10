@@ -56,6 +56,7 @@ const PopUpAdministratorSignInCredentialRevise = (props) => {
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
+          style={{ maxWidth: '310px' }}
         >
           <div className={'fitContent'}>
             <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>

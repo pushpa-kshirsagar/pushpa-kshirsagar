@@ -22,7 +22,8 @@ import {
   ASSOCIATE_TYPE_GROUP_URL,
   ITEM_TYPE_REVIEWLIST_URL,
   ASSESSMENT_TYPE_GROUP_URL,
-  ITEM_TYPE_GROUP_URL
+  ITEM_TYPE_GROUP_URL,
+  ASSIGNMENT_TYPE_GROUP_URL
 } from '../../endpoints';
 
 const TypesReviewListDistinctApi = async (requestObj) => {
@@ -274,6 +275,8 @@ function* workerReviewTypeGroupListSaga(data) {
           ? ASSESSMENT_TYPE_GROUP_URL
           : data.payload.typeGroup === 'items'
           ? ITEM_TYPE_GROUP_URL
+          : data.payload.typeGroup === 'assignments'
+          ? ASSIGNMENT_TYPE_GROUP_URL
           : ''
     });
     if (userResponse.responseCode === '000') {
@@ -287,7 +290,6 @@ function* workerReviewTypeGroupListSaga(data) {
         payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
-    yield put({ type: LOADER_STOP });
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {

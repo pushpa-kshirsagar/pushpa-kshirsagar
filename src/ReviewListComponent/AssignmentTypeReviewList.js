@@ -110,7 +110,9 @@ const AssignmentTypeReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status'),
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
       }
     });
     dispatch({
@@ -122,6 +124,9 @@ const AssignmentTypeReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  const associateSeftId =
+    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
+
   return (
     <div>
       {reviewListDistinctData &&
@@ -133,9 +138,11 @@ const AssignmentTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.assignmentTypeStatus}
                 textOne={item.informationBasic.assignmentTypeName}
                 textTwo={item.informationBasic.assignmentTypeDescription}
+                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                actualStatus={item.assignmentTypeShared ? 'SHARED' : 'UNSHARED'}
+                dataValue={item.informationAllocation?.assignmentTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
               />

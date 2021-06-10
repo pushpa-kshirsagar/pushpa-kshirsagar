@@ -9,7 +9,8 @@ import {
   GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
-  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA
+  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+  GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import {
   ASSESSEE_ROLE_SHARE_URL,
@@ -23,7 +24,9 @@ import {
   ITEM_TYPE_SHARE_URL,
   ITEM_TYPE_UNSHARE_URL,
   ASSESSMENT_TYPE_SHARE_URL,
-  ASSESSMENT_TYPE_UNSHARE_URL
+  ASSESSMENT_TYPE_UNSHARE_URL,
+  ASSIGNMENT_TYPE_SHARE_URL,
+  ASSIGNMENT_TYPE_UNSHARE_URL
 } from '../../endpoints';
 import Store from '../../store';
 
@@ -75,7 +78,13 @@ function* workerRoleTypeShareSaga(data) {
       APIURL =
         data.payload.apiCall === 'shareApiCall'
           ? ASSESSMENT_TYPE_SHARE_URL
-          : ASSESSMENT_TYPE_SHARE_URL;
+          : ASSESSMENT_TYPE_UNSHARE_URL;
+    }
+    if (data.payload.shareValue === 'assignmentType') {
+      APIURL =
+        data.payload.apiCall === 'shareApiCall'
+          ? ASSIGNMENT_TYPE_SHARE_URL
+          : ASSIGNMENT_TYPE_UNSHARE_URL;
     }
     const userResponse = yield call(sharedApiCall, {
       data: data.payload.request,
@@ -100,6 +109,8 @@ function* workerRoleTypeShareSaga(data) {
             ? GET_ITEM_TYPE_REVIEW_LIST_SAGA
             : data.payload.shareValue === 'assessmentType'
             ? GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'assignmentType'
+            ? GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA
             : null,
         payload: {
           request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,

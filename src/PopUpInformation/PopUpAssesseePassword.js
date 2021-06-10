@@ -15,6 +15,7 @@ import {
   INVALID_PASSWORD_ERROR_MESSAGE,
   REQUIRED_ERROR_MESSAGE
 } from '../errorMessage';
+import { SIGN_IN_URL } from '../endpoints';
 
 const PopUpAssesseePassword = (props) => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const PopUpAssesseePassword = (props) => {
   const { assesseeConfirmStatus } = useSelector((state) => state.UserReducer);
   useEffect(() => {
     if (assesseeConfirmStatus === 'passwordReviseSuccess') {
-      let path = `/signIn`;
+      let path = SIGN_IN_URL;
       history.push(path);
     }
   }, [assesseeConfirmStatus, history]);

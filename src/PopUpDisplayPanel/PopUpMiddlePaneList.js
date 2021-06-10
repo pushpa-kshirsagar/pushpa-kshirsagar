@@ -73,6 +73,7 @@ import {
   getAssessmentTypeAssessmentDistinctApiCall,
   getNodeRelatedAssessmentsDistinctApiCall
 } from '../Actions/AssessmentModuleAction';
+import { getAssignmnetTypeAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -1040,7 +1041,25 @@ const PopUpMiddlePaneList = (props) => {
         );
         dispatch({
           type: FILTERMODE,
-          payload: { FilterMode: 'assessmentGroupAssessment' + secondaryOptionCheckValue }
+          payload: { FilterMode: 'assessmentTypeAssessment' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
+        getAssignmnetTypeAssignmnetDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assignmnetTypeAssignmnet' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
@@ -1144,6 +1163,21 @@ const PopUpMiddlePaneList = (props) => {
           ]
         };
         shareVal = 'itemType';
+      }
+      if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
+        reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentTypeShared: [
+            {
+              assignmentTypeId: selectedTagValue,
+              assignmentTypeGroupId: selectedTagGroupId
+            }
+          ]
+        };
+        shareVal = 'assignmentType';
       }
       if (reqBody) {
         dispatch({ type: LOADER_START });

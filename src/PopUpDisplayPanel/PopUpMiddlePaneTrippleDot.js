@@ -31,12 +31,17 @@ import {
   getAssociatesTypeApiCall,
   getInternalNodeApiCall
 } from '../Actions/AssociateModuleAction';
-import { getItemGroupDistinctApiCall, getItemsDistinctApiCall, getItemsTypeApiCall } from '../Actions/ItemModuleAction';
+import {
+  getItemGroupDistinctApiCall,
+  getItemsDistinctApiCall,
+  getItemsTypeApiCall
+} from '../Actions/ItemModuleAction';
 import {
   getAssessmentDistinctApiCall,
   getAssessmentGroupApiCall,
   getAssessmentTypeApiCall
 } from '../Actions/AssessmentModuleAction';
+import { assignmentsDistinctApiCall, assignmentsGroupApiCall, assignmentTypeApiCall } from '../Actions/AssignmentModuleAction';
 const PopUpMiddlePaneTrippleDot = (props) => {
   const {
     popupHeaderOne,
@@ -130,6 +135,15 @@ const PopUpMiddlePaneTrippleDot = (props) => {
       dispatch({ type: POPUP_CLOSE });
     } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'assessments') {
       getAssessmentDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'distinct'
+      );
+      dispatch({ type: POPUP_CLOSE });
+    } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'assignments') {
+      assignmentsDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
         countPage,
@@ -459,6 +473,73 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           '',
           'hierarchy',
           'assessments'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
+      }
+    } else if (middlePaneHeader === 'assignments') {
+      if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'groups') {
+        assignmentsGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
+        assignmentTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          'assignments'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'groups') {
+        assignmentsGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'types') {
+        assignmentTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          'assignments'
         );
         dispatch({ type: POPUP_CLOSE });
       } else {

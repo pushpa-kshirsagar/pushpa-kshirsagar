@@ -18,6 +18,7 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
+  SET_POPUP_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_PREVIOUS_SECTION_POPUP,
   SET_REQUEST_OBJECT
@@ -29,7 +30,12 @@ import {
   makeAssignmentReviewListRequestObject
 } from '../Actions/GenericActions';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
-import { createAssignmentPopupApiCall } from '../Actions/AssignmentModuleAction';
+import {
+  assignmentsDistinctApiCall,
+  assignmentsGroupApiCall,
+  assignmentTypeApiCall,
+  createAssignmentPopupApiCall
+} from '../Actions/AssignmentModuleAction';
 
 const PopUpAssignmentModule = (props) => {
   const {
@@ -51,94 +57,71 @@ const PopUpAssignmentModule = (props) => {
       payload: e.currentTarget.getAttribute('data-value')
     });
   };
+  const resetDataFunction = () => {
+    dispatch({
+      type: SET_POPUP_SINGLE_STATE,
+      payload: { stateName: 'cardValue', value: 'NoCard' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: '' }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedFlagedArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'unselectedFlagedArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedTagsArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'unselectedTagsArray', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'flagedValue', value: '' }
+    });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+    dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+  };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'information') {
-      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      resetDataFunction();
       createAssignmentPopupApiCall(selectedAssociateInfo, secondaryOptionCheckValue, dispatch);
     } else if (targetValue === 'distinct') {
-      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
-      let requestObect = makeAssignmentReviewListRequestObject(
+      assignmentsDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assignmentsDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-      dispatch({
-        type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
-        payload: {
-          request: requestObect,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue
-        }
-      });
+      resetDataFunction();
     } else if (targetValue === 'groups') {
-      let requestObj = makeAssignmentGroupObj(
+      assignmentsGroupApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assignmentsGroupDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
-      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+      resetDataFunction();
     } else if (targetValue === 'types') {
-      let requestObj = makeAssignmentTypeObj(
+      assignmentTypeApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
-        0,
-        countPage
+        countPage,
+        dispatch,
+        targetValue
       );
-      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assignmentsTypeDistinct' + secondaryOptionCheckValue }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-      dispatch({
-        type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: targetValue,
-          BadgeTwo: secondaryOptionCheckValue,
-          BadgeThree: '',
-          isMiddlePaneList: true
-        }
-      });
-      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+      resetDataFunction();
     } else if (targetValue === 'nodes') {
-      dispatch({ type: CLEAR_ASSIGNMENT_INFO });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'nodeViewState', value: 'hierarchy' }
-      });
       getInternalNodeApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
@@ -149,6 +132,7 @@ const PopUpAssignmentModule = (props) => {
         'hierarchy',
         'assignments'
       );
+      resetDataFunction();
     } else {
       dispatch({
         type: SET_ASSIGNMENT_NEXT_POPUP,

@@ -57,12 +57,8 @@ import {
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
-  setAssociateCardPermissionInJson,
   makeAssesseeRoleObj,
   makeAssociateRoleObj,
-  makeAssesseeGroupObj,
-  makeAssociateGroupObj,
-  makeAssessmentGroupObj,
   makeAssignmentGroupObj,
   makeAssessmentTypeObj,
   makeAssignmentTypeObj,
@@ -91,8 +87,12 @@ import {
 } from '../Actions/ItemModuleAction';
 import IconButton from '../Molecules/IconButton/IconButton';
 import { Fragment } from 'react';
-import { getAssessmentGroupApiCall } from '../Actions/AssessmentModuleAction';
+import {
+  getAssessmentGroupApiCall,
+  getAssessmentTypeApiCall
+} from '../Actions/AssessmentModuleAction';
 import { ADMINISTRATOR_SECONDARY_ID } from '../endpoints';
+import { assignmentTypeApiCall } from '../Actions/AssignmentModuleAction';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -101,12 +101,18 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOneBadgeThree,
     popupOpenType,
     secondaryOptionCheckValue,
-    currentPopUpOption
+    currentPopUpOption,
+    popupContentArrValue
   } = useSelector((state) => state.PopUpReducer);
   const { userData, assesseePermission } = useSelector((state) => state.UserReducer);
   const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [isReviseMode, setIsReviseMode] = useState(false);
   const [exchageMode, setexchageMode] = useState(false);
+  const [duplicateHeader, setDuplicateHeader] = useState('');
+  const [duplicateBadgeOne, setDuplicateBadgeOne] = useState('');
+  const [duplicateBadgeTwo, setDuplicateBadgeTwo] = useState('');
+  const [duplicateValueArr, setDuplicateValueArr] = useState('');
+  const [duplicateSecondaryOpt, setDuplicateSecondaryOpt] = useState('');
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
   useEffect(() => {
@@ -786,50 +792,22 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       if (popupHeaderOne === 'assessments') {
-        requestObj = makeAssessmentTypeObj(
+        getAssessmentTypeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
-          0,
-          countPage
+          countPage,
+          dispatch,
+          'types'
         );
-        dispatch({
-          type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
-          payload: {
-            request: requestObj,
-            BadgeOne: 'types',
-            BadgeTwo: 'distinct',
-            BadgeThree: secondaryOptionCheckValue,
-            isMiddlePaneList: true
-          }
-        });
-        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-        dispatch({
-          type: FILTERMODE,
-          payload: { FilterMode: popupHeaderOne + 'TypeDistinct' + secondaryOptionCheckValue }
-        });
       }
       if (popupHeaderOne === 'assignments') {
-        requestObj = makeAssignmentTypeObj(
+        assignmentTypeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
-          0,
-          countPage
+          countPage,
+          dispatch,
+          'types'
         );
-        dispatch({
-          type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
-          payload: {
-            request: requestObj,
-            BadgeOne: 'types',
-            BadgeTwo: 'distinct',
-            BadgeThree: secondaryOptionCheckValue,
-            isMiddlePaneList: true
-          }
-        });
-        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-        dispatch({
-          type: FILTERMODE,
-          payload: { FilterMode: popupHeaderOne + 'TypeDistinct' + secondaryOptionCheckValue }
-        });
       }
       if (popupHeaderOne === 'assessees') {
         getAssesseeTypeApiCall(
@@ -876,6 +854,11 @@ const PopUpDisplayPanelAssociate = (props) => {
       );
     }
     if (clickValue === 'notifications' || clickValue === 'reports') {
+      setDuplicateHeader(popupHeaderOne);
+      setDuplicateBadgeOne(popupHeaderOneBadgeOne);
+      setDuplicateBadgeTwo(popupHeaderOneBadgeTwo);
+      setDuplicateValueArr(popupContentArrValue);
+      setDuplicateSecondaryOpt(secondaryOptionCheckValue);
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = 'review';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
@@ -923,7 +906,8 @@ const PopUpDisplayPanelAssociate = (props) => {
         popupHeaderOne === 'assessees' ||
         popupHeaderOne === 'associates' ||
         popupHeaderOne === 'items' ||
-        popupHeaderOne === 'assessments'
+        popupHeaderOne === 'assessments' ||
+        popupHeaderOne === 'assignments'
       ) {
         getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       } else {
@@ -988,6 +972,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     let revisepopupHeaderOneBadgeThree = '';
     let reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
     let revisePopupType = 'primary';
+    let reviseSecondryOpt = '';
     // let valueArr = setAssociateCardPermissionInJson(
     //   ASSOCIATE_CARD_POPUP_OPTION,
     //   assesseePermission
@@ -1007,6 +992,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisepopupHeaderOneBadgeOne = '';
         valueArr = MODULE_POPUP_OPTION;
         revisePopupType = 'secondary';
+        reviseSecondryOpt = '';
       }
       if (
         (popupHeaderOne === 'assessees' || popupHeaderOne === 'associates') &&
@@ -1015,6 +1001,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupHeaderOne = 'roles';
         revisepopupHeaderOneBadgeOne = '';
         valueArr = ROLE_POPUP_OPTION;
+        reviseSecondryOpt = '';
         revisePopupType = 'secondary';
       }
       if (
@@ -1032,6 +1019,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupHeaderOne = 'types';
         revisepopupHeaderOneBadgeOne = '';
         valueArr = GROUP_TYPE_POPUP_OPTION;
+        reviseSecondryOpt = '';
         revisePopupType = 'secondary';
       }
       if (
@@ -1049,6 +1037,14 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupHeaderOne = 'groups';
         revisepopupHeaderOneBadgeOne = '';
         valueArr = GROUP_TYPE_POPUP_OPTION;
+        reviseSecondryOpt = '';
+        revisePopupType = 'secondary';
+      }
+      if (popupHeaderOne === 'associates' && popupHeaderOneBadgeOne === 'nodes') {
+        revisePopupHeaderOne = 'nodes';
+        revisepopupHeaderOneBadgeOne = '';
+        valueArr = NODE_POPUP_OPTION;
+        reviseSecondryOpt = 'associates';
         revisePopupType = 'secondary';
       }
       if (
@@ -1064,6 +1060,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupHeaderOne = 'items';
         revisepopupHeaderOneBadgeOne = '';
         valueArr = GROUP_TYPE_POPUP_OPTION;
+        reviseSecondryOpt = '';
         revisePopupType = 'secondary';
       }
       if (
@@ -1081,6 +1078,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupHeaderOne = 'exchange';
         revisepopupHeaderOneBadgeOne = '';
         valueArr = EXCHANGE_POPUP_OPTION;
+        reviseSecondryOpt = '';
         revisePopupType = 'secondary';
       }
       if (
@@ -1100,6 +1098,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisepopupHeaderOneBadgeOne = popupHeaderOneBadgeTwo;
         revisepopupHeaderOneBadgeTwo = '';
         valueArr = REVIEW_POPUP_OPTIONS;
+        reviseSecondryOpt = '';
         revisePopupType = 'secondary';
         setexchageMode(false);
       }
@@ -1112,7 +1111,18 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupHeaderOne = 'analytics';
         revisepopupHeaderOneBadgeOne = '';
         valueArr = ANALYTICS_POPUP;
+        reviseSecondryOpt = '';
         revisePopupType = 'secondary';
+      }
+      if (popupHeaderOne === 'notifications' || popupHeaderOne === 'reports') {
+        revisePopupHeaderOne = duplicateHeader;
+        revisepopupHeaderOneBadgeOne = duplicateBadgeOne;
+        revisepopupHeaderOneBadgeTwo = duplicateBadgeTwo;
+        valueArr = duplicateValueArr;
+        reviseSecondryOpt =
+          popupHeaderOne === 'associates' && popupHeaderOneBadgeOne === 'nodes'
+            ? duplicateSecondaryOpt
+            : '';
       }
       if (
         (popupHeaderOne === 'mine' ||
@@ -1123,6 +1133,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         revisePopupHeaderOne = popupHeaderOne;
         revisepopupHeaderOneBadgeOne = '';
         valueArr = MODULE_POPUP_OPTION;
+        reviseSecondryOpt = '';
         revisePopupType = 'secondary';
       }
       dispatch({
@@ -1134,7 +1145,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           popupHeaderOneBadgeThree: revisepopupHeaderOneBadgeThree,
           isPopUpValue: reviseisPopUpValue,
           popupOpenType: revisePopupType,
-          secondaryOptionCheckValue: '',
+          secondaryOptionCheckValue: reviseSecondryOpt,
           popupContentArrValue: valueArr,
           currentPopUpOption: []
         }

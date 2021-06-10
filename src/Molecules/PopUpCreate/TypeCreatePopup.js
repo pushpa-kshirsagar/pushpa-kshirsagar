@@ -118,7 +118,7 @@ const TypeCreatePopup = (props) => {
         isRequired={
           headerOne === 'assessees' ||
           headerOne === 'associates' ||
-          headerOne === 'items' ||
+          headerOne === 'items' || headerOne === 'assignments' ||
           headerOne === 'assessments'
             ? true
             : false
@@ -129,7 +129,8 @@ const TypeCreatePopup = (props) => {
           ((headerOne === 'assessees' ||
             headerOne === 'associates' ||
             headerOne === 'items' ||
-            headerOne === 'assessments') &&
+            headerOne === 'assessments'||
+            headerOne === 'assignments') &&
             coreGroupReviewListData) || [
             { id: '01', informationBasic: { name: 'Simple Sample 01', description: '' } },
             { id: '02', informationBasic: { name: 'Simple Sample 02', description: '' } },
@@ -145,7 +146,8 @@ const TypeCreatePopup = (props) => {
           headerOne === 'assessees' ||
           headerOne === 'associates' ||
           headerOne === 'items' ||
-          headerOne === 'assessments'
+          headerOne === 'assessments'||
+          headerOne === 'assignments'
             ? groupName
             : 'name'
         }
@@ -153,7 +155,8 @@ const TypeCreatePopup = (props) => {
           headerOne === 'assessees' ||
           headerOne === 'associates' ||
           headerOne === 'items' ||
-          headerOne === 'assessments'
+          headerOne === 'assessments'||
+          headerOne === 'assignments'
             ? groupDescription
             : 'description'
         }

@@ -307,6 +307,7 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
           : istate.secondaryPopUpOptions[action.payload.badgeValue];
+      console.log('istate.selectedTagStatus', istate.selectedTagStatus);
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
@@ -339,6 +340,7 @@ const PopUpReducer = (istate = initialState, action) => {
               action.payload.badgeValue === 'terminate') &&
             (istate.selectedTagStatus === 'CONFIRMED' ||
               istate.selectedTagStatus === 'UNCONFIRMED' ||
+              // istate.selectedTagStatus === 'SHARED' ||
               istate.selectedTagStatus === 'ACTIVE')
           ) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];

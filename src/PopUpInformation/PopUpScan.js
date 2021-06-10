@@ -70,6 +70,7 @@ import {
   getNodeRelatedItemsDistinctApiCall
 } from '../Actions/ItemModuleAction';
 import { getAssessmentGroupAssessmentDistinctApiCall, getAssessmentTypeAssessmentDistinctApiCall, getNodeRelatedAssessmentsDistinctApiCall } from '../Actions/AssessmentModuleAction';
+import { getAssignmnetTypeAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
@@ -667,6 +668,18 @@ const PopUpScan = (props) => {
           middlePaneHeader
         );
       }
+      if (typeOfMiddlePaneList === 'assignmentTypeAssignmentReviewList') {
+        getAssignmnetTypeAssignmnetDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+      }
       if (
         (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList' ||
           typeOfMiddlePaneList === 'associateNodeDistinctReviewList') &&
@@ -754,6 +767,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'assessmentTypeAssessmentReviewList' ||
                 isPopUpValue === 'assessmentNodeAssessmentReviewList' ||
                 isPopUpValue === 'itemNodeItemReviewList' ||
+                isPopUpValue === 'assignmentTypeAssignmentReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

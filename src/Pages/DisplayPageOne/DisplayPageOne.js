@@ -38,7 +38,7 @@ import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import AssesseeRoleCreatePopUp from '../../Molecules/PopUpCreate/AssesseeRoleCreatePopUp';
 import AssociateRoleCreatePopup from '../../Molecules/PopUpCreate/AssociateRoleCreatePopup';
-import AllGroupCreatePopup from '../../Molecules/PopUpCreate/AllGroupCreatePopup';
+import GroupCreatePopup from '../../Molecules/PopUpCreate/GroupCreatePopup';
 import TypeCreatePopup from '../../Molecules/PopUpCreate/TypeCreatePopup';
 import AssignmentCreatePopup from '../../Molecules/PopUpCreate/AssignmentCreatePopup';
 import AssessmentCreatePopup from '../../Molecules/PopUpCreate/AssessmentCreatePopup';
@@ -211,7 +211,7 @@ const DisplayPageOne = () => {
         <PopUpMessageError isActive errorMessage={isPopUpValue} />
       )}
       {popupMode === 'assesseesGROUPCREATE' && (
-        <AllGroupCreatePopup
+        <GroupCreatePopup
           headerOne={'assessees'}
           reducerObeject={assesseeGroup}
           groupName={'assesseeGroupName'}
@@ -221,7 +221,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'assessmentsGROUPCREATE' && (
-        <AllGroupCreatePopup
+        <GroupCreatePopup
           headerOne={'assessments'}
           reducerObeject={assessmentGroup}
           groupName={'assessmentGroupName'}
@@ -231,7 +231,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'assignmentsGROUPCREATE' && (
-        <AllGroupCreatePopup
+        <GroupCreatePopup
           headerOne={'assignments'}
           reducerObeject={assignmentGroup}
           groupName={'assignmentGroupName'}
@@ -241,7 +241,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'associatesGROUPCREATE' && (
-        <AllGroupCreatePopup
+        <GroupCreatePopup
           headerOne={'associates'}
           reducerObeject={associateGroup}
           groupName={'associateGroupName'}
@@ -251,7 +251,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'itemsGROUPCREATE' && (
-        <AllGroupCreatePopup
+        <GroupCreatePopup
           headerOne={'items'}
           reducerObeject={itemGroup}
           groupName={'itemGroupName'}
