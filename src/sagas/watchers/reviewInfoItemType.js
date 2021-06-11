@@ -4,7 +4,10 @@ import {
   GET_ITEM_TYPE_REVIEW_INFO_SAGA,
   SET_DISPLAY_PANE_THREE_STATE,
   ITEM_TYPE_REVISE_INFO_SAGA,
-  SET_ITEM_TYPE_REDUCER_STATE
+  SET_ITEM_TYPE_REDUCER_STATE,
+  GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ITEM_REVIEW_TYPE_URL, ITEM_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -30,7 +33,20 @@ function* workerReviewItemTypeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN TYPE REVIEW+++++', userResponse);
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, itemTypeItemReqBody = null } = data.payload;
+      if (itemTypeItemReqBody !== null) {
+        yield put({
+          type: GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
+          payload: {
+            request: itemTypeItemReqBody,
+            HeaderOne: 'items',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -51,7 +67,7 @@ function* workerReviewItemTypeInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -80,7 +96,20 @@ function* workerReviseItemTypeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN Type revise+++++', userResponse);
-      const { createMode = '' } = data.payload;
+      const { createMode = '', itemTypeItemReqBody = null } = data.payload;
+      if (itemTypeItemReqBody !== null) {
+        yield put({
+          type: GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
+          payload: {
+            request: itemTypeItemReqBody,
+            HeaderOne: 'items',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -93,9 +122,13 @@ function* workerReviseItemTypeInfoSaga(data) {
         }
       });
     }
-
+    yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+    yield put({
+      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+      payload: []
+    });
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

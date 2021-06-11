@@ -1,12 +1,15 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
+  GET_ITEMGROUPITEM_REVIEW_LIST_SAGA,
   GET_ITEM_GROUP_REVIEW_INFO_SAGA,
   GET_ITEM_GROUP_REVIEW_LIST_SAGA,
   ITEM_GROUP_REVISE_INFO_SAGA,
   LOADER_STOP,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_ITEM_GROUP_REDUCER_STATE
+  SET_ITEM_GROUP_REDUCER_STATE,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ITEM_REVISE_GROUP_URL, ITEM_REVIEW_GROUP_URL } from '../../endpoints';
 
@@ -31,7 +34,20 @@ function* workerReviewItemGroupInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, itemGroupItemReqBody = null } = data.payload;
+      if (itemGroupItemReqBody !== null) {
+        yield put({
+          type: GET_ITEMGROUPITEM_REVIEW_LIST_SAGA,
+          payload: {
+            request: itemGroupItemReqBody,
+            HeaderOne: 'items',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -52,7 +68,7 @@ function* workerReviewItemGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -80,7 +96,20 @@ function* workerReviseItemGroupInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      const { createMode = '' } = data.payload;
+      const { createMode = '', itemGroupItemReqBody = null } = data.payload;
+      if (itemGroupItemReqBody !== null) {
+        yield put({
+          type: GET_ITEMGROUPITEM_REVIEW_LIST_SAGA,
+          payload: {
+            request: itemGroupItemReqBody,
+            HeaderOne: 'items',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -91,6 +120,11 @@ function* workerReviseItemGroupInfoSaga(data) {
           responseObject: userResponse.responseObject,
           createMode
         }
+      });
+      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      yield put({
+        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+        payload: []
       });
       // if (createMode === '') {
       // yield put({
@@ -123,7 +157,7 @@ function* workerReviseItemGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

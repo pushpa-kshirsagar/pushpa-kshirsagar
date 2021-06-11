@@ -98,7 +98,9 @@ import DisplayPaneThreeSectionTwoItemType from '../../Molecules/DisplayPaneThree
 import DisplayPaneThreeSectionOneItemType from '../../Molecules/DisplayPaneThreeSectionOneItemType/DisplayPaneThreeSectionOneItemType';
 import {
   getAssessmentGroupAssessmentReqObj,
-  getAssessmentTypeAssessmentReqObj
+  getAssessmentTypeAssessmentReqObj,
+  getItemGroupItemReqObj,
+  getItemTypeItemReqObj
 } from '../../Actions/GenericActions';
 
 export const DisplayPaneThree = () => {
@@ -707,15 +709,26 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        itemGroupItem: {
+          itemGroupItemAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          itemGroupItemUnallocate: assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         itemGroup: {
           id,
           informationBasic: itemGroup.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let itemGroupItemReqBody = getItemGroupItemReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ITEM_GROUP_REVISE_INFO_SAGA,
-        payload: { headerOne: 'items', reqBody, createMode }
+        payload: { headerOne: 'items', reqBody, itemGroupItemReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'assignments') {
       const { associateId, id } = responseObject;
@@ -843,15 +856,26 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
+        itemTypeItem: {
+          itemTypeItemAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          itemTypeItemUnallocate: assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         itemType: {
           id,
           informationBasic: itemType.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let itemTypeItemReqBody = getItemTypeItemReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ITEM_TYPE_REVISE_INFO_SAGA,
-        payload: { headerOne: 'items', reqBody, createMode }
+        payload: { headerOne: 'items', reqBody, itemTypeItemReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'associates') {
       const { associateId, id } = responseObject;
@@ -1983,8 +2007,8 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
-                  textOneOne={informationBasic.assignmentName || 'No Information'}
-                  textOneTwo={informationBasic.assignmentDescription || 'No Information'}
+                  textOneOne={informationBasic?.assignmentName || 'No Information'}
+                  textOneTwo={informationBasic?.assignmentDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}

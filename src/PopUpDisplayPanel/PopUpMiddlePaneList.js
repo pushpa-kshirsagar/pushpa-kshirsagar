@@ -69,7 +69,9 @@ import {
   makeInternalNodeObj,
   getAssignmentGroupAssignmentReqObj,
   getAssessmentTypeAssessmentReqObj,
-  getNodeAssessmentsReqObj
+  getNodeAssessmentsReqObj,
+  getItemGroupItemReqObj,
+  getItemTypeItemReqObj
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -625,12 +627,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'itemsGroupDistinctReviewList') {
-        // alert(selectedTagValue);
+        let itemGroupItemReqBody = getItemGroupItemReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ITEM_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            itemGroupItemReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -659,12 +668,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'itemsTypeDistinctReviewList') {
-        // alert(selectedTagValue);
+        let itemTypeItemReqBody = getItemTypeItemReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ITEM_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            itemTypeItemReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
