@@ -31,7 +31,10 @@ const ItemsReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
-    middlePaneHeader
+    middlePaneHeader,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -61,15 +64,16 @@ const ItemsReviewList = (props) => {
         type: GET_ITEM_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
-          BadgeOne: 'distinct',
-          BadgeTwo: secondaryOptionCheckValue
+          middlePaneHeader: middlePaneHeader,
+          BadgeOne: middlePaneHeaderBadgeOne,
+          BadgeTwo: middlePaneHeaderBadgeTwo,
+          isMiddlePaneList: true
         }
       });
       dispatch({ type: SET_PAGE_COUNT, payload: numberPage + 1 });
     }
   };
   useEffect(() => {
-    console.log(reviewListDistinctData);
     if (!isFetching) return;
     fetchMoreListItems();
   }, [isFetching]);
@@ -119,6 +123,8 @@ const ItemsReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log(reviewListDistinctData);
+
   const associateSeftId =
     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (

@@ -34,6 +34,7 @@ const apiCall = async (requestObj) => {
 };
 
 function* workerReviewListItemsSaga(data) {
+  console.log('data.payload', data.payload);
   try {
     const userResponse = yield call(apiCall, {
       data: data.payload.request,

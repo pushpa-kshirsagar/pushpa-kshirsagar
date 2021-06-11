@@ -96,7 +96,10 @@ import DisplayPaneThreeSectionOneItemGroup from '../../Molecules/DisplayPaneThre
 import DisplayPaneThreeSectionTwoItemGroup from '../../Molecules/DisplayPaneThreeSectionTwoItemGroup/DisplayPaneThreeSectionTwoItemGroup';
 import DisplayPaneThreeSectionTwoItemType from '../../Molecules/DisplayPaneThreeSectionTwoItemType/DisplayPaneThreeSectionTwoItemType';
 import DisplayPaneThreeSectionOneItemType from '../../Molecules/DisplayPaneThreeSectionOneItemType/DisplayPaneThreeSectionOneItemType';
-import { getAssessmentGroupAssessmentReqObj, getAssessmentTypeAssessmentReqObj } from '../../Actions/GenericActions';
+import {
+  getAssessmentGroupAssessmentReqObj,
+  getAssessmentTypeAssessmentReqObj
+} from '../../Actions/GenericActions';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -1186,6 +1189,10 @@ export const DisplayPaneThree = () => {
     dispatch({
       type: SET_MOBILE_PANE_STATE,
       payload: typeOfMiddlePaneList === '' ? 'displayPaneOne' : 'displayPaneTwo'
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: '' }
     });
   };
   console.log('DISPLAY PANE THREE++++++>', responseObject, headerOneBadgeThree);

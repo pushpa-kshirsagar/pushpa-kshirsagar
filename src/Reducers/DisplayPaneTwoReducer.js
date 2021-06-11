@@ -34,7 +34,7 @@ const initialState = {
   scanHeaderBadgeOne: '',
   scanHeaderBadgeTwo: '',
   numberPage: 1,
-  countPage: 20,
+  countPage: 15,
   scanCount: null,
   showMiddlePaneState: false,
   mobilePanestate: 'displayPaneOne',
