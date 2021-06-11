@@ -2003,8 +2003,8 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
-                  textOneOne={informationBasic.assignmentName || 'No Information'}
-                  textOneTwo={informationBasic.assignmentDescription || 'No Information'}
+                  textOneOne={informationBasic?.assignmentName || 'No Information'}
+                  textOneTwo={informationBasic?.assignmentDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
