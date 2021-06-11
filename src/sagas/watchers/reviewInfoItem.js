@@ -4,7 +4,8 @@ import {
   LOADER_STOP,
   GET_ITEM_INFO_SAGA,
   ITEM_INFO_REVISE_SAGA,
-  SET_TYPE_REDUCER_STATE
+  SET_TYPE_REDUCER_STATE,
+  SET_ITEM_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import { ITEM_REVISE_URL, ITEM_REVIEW_URL } from '../../endpoints';
 
@@ -41,10 +42,167 @@ function* workerReviewInfoItemSaga(data) {
         }
       });
       if (isReviseMode) {
+        const { informationBasic, informationAllocation } = userResponse.responseObject[0];
         yield put({
           type: SET_TYPE_REDUCER_STATE,
-          payload: userResponse.responseObject[0].informationBasic
+          payload: informationBasic
         });
+        if (
+          informationAllocation &&
+          informationAllocation?.itemGroup?.itemGroupPrimary &&
+          informationAllocation?.itemGroup?.itemGroupPrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.itemGroup.itemGroupPrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemGroup',
+              actualStateName: 'itemGroupPrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemGroup',
+              actualStateName: 'itemGroupPrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.itemGroup?.itemGroupSecondary &&
+          informationAllocation?.itemGroup?.itemGroupSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.itemGroup.itemGroupSecondary.map((ob) => ob.id);
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemGroup',
+              actualStateName: 'itemGroupSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemGroup',
+              actualStateName: 'itemGroupSecondary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.itemNode?.itemNodePrimary &&
+          informationAllocation?.itemNode?.itemNodePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.itemNode.itemNodePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemNode',
+              actualStateName: 'itemNodePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemNode',
+              actualStateName: 'itemNodePrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.itemNode?.itemNodeSecondary &&
+          informationAllocation?.itemNode?.itemNodeSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.itemNode.itemNodeSecondary.map((ob) => ob.id);
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemNode',
+              actualStateName: 'itemNodeSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemNode',
+              actualStateName: 'itemNodeSecondary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.itemType?.itemTypePrimary &&
+          informationAllocation?.itemType?.itemTypePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.itemType.itemTypePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemType',
+              actualStateName: 'itemTypePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemType',
+              actualStateName: 'itemTypePrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.itemType?.itemTypeSecondary &&
+          informationAllocation?.itemType?.itemTypeSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.itemType.itemTypeSecondary.map((ob) => ob.id);
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemType',
+              actualStateName: 'itemTypeSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'itemType',
+              actualStateName: 'itemTypeSecondary',
+              value: []
+            }
+          });
+        }
       }
     }
     console.log('loading end');

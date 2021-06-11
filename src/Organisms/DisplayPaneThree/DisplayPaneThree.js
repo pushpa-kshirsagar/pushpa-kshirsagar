@@ -871,14 +871,15 @@ export const DisplayPaneThree = () => {
         payload: { headerOne: 'associates', reqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'item') {
-      const { informationBasic } = itemInformation;
+      const { informationBasic, informationAllocation } = itemInformation;
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId: id,
         item: {
           id,
-          informationBasic
+          informationBasic,
+          informationAllocation
         }
       };
       dispatch({ type: LOADER_START });

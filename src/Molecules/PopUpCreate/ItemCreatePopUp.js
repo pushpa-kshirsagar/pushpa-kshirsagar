@@ -48,6 +48,24 @@ const ItemCreatePopUp = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ITEM_SAGA, payload: reqBody });
   };
+  let selectedPrimaryGroup = itemInformation?.informationAllocation?.itemGroup.itemGroupPrimary || [];
+  let selectedSecondaryGroup = itemInformation?.informationAllocation?.itemGroup.itemGroupSecondary || [];
+  let filteredCoreGroupReviewListDataPrimary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for primary popup list
+      if (!selectedSecondaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataPrimary.push(group);
+    });
+  }
+  let filteredCoreGroupReviewListDataSecondary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for Secondary popup list
+      if (!selectedPrimaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataSecondary.push(group);
+    });
+  }
   // const updateGroup = (e) => {
   //   console.log(e.currentTarget.getAttribute('tag'));
   //   setRequiredErrorMsg('');
@@ -134,7 +152,7 @@ const ItemCreatePopUp = (props) => {
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
         setErrorMsg={setRequiredErrorMsg}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataPrimary}
         textOne={'itemGroupName'}
         textTwo={'itemGroupDescription'}
         onClickEvent={(e) => {
@@ -155,7 +173,7 @@ const ItemCreatePopUp = (props) => {
         inputHeaderBadge={'secondary'}
         infoMsg={'select a group'}
         setErrorMsg={setRequiredErrorMsg}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataSecondary}
         textOne={'itemGroupName'}
         textTwo={'itemGroupDescription'}
         onClickEvent={(e) => {
@@ -227,9 +245,9 @@ const ItemCreatePopUp = (props) => {
         textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}
         onClickEvent={(e) => {
-          updateGroup(e, 'itemNode', 'itemNodeSecondary');
+          updateGroup(e, 'itemNode', 'itemNodePrimary');
         }}
-        selectedList={itemInformation.informationAllocation.itemNode.itemNodeSecondary}
+        selectedList={itemInformation.informationAllocation.itemNode.itemNodePrimary}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
