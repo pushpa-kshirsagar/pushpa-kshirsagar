@@ -3658,7 +3658,7 @@ export const getItemGroupItemReqObj = (
         searchBy: [
           {
             dataType: 'string',
-            conditionColumn: 'informationEngagement.itemGroupStatus',
+            conditionColumn: 'informationEngagement.itemStatus',
             conditionValue: searchObj
           }
         ]
@@ -3822,7 +3822,7 @@ export const getItemTypeItemReqObj = (
         searchBy: [
           {
             dataType: 'string',
-            conditionColumn: 'informationEngagement.itemTypeStatus',
+            conditionColumn: 'informationEngagement.itemStatus',
             conditionValue: searchObj
           }
         ]

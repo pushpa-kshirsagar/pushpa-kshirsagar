@@ -10,7 +10,8 @@ import {
   RELATED_REVIEWLIST_DISTINCT_DATA,
   SET_REVIEW_LIST_RELATE_DATA,
   GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
-  GET_NODE_ITEMS_REVIEW_LIST_SAGA
+  GET_NODE_ITEMS_REVIEW_LIST_SAGA,
+  GET_ALLOCATE_ITEM
 } from '../../actionType';
 import {
   ITEM_REVIEWLIST_URL,
@@ -214,9 +215,54 @@ function* workeItemNodeItemReviewListSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+
+function* workerItemAllocateReviewListSaga(data) {
+  try {
+    const userResponse = yield call(apiCall, {
+      data: data.payload.request,
+      URL: ITEM_REVIEWLIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      let responseObj = {
+        ...data.payload.revisedGroupObject,
+        item: userResponse.responseObject
+      };
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.headerOne || 'items',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true,
+          isSelectActive: 'multiple',
+          selectedTagsArray: data.payload.existingItemId
+        }
+      });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
+
 export default function* watchItemReviewListSaga() {
   yield takeLatest(GET_ITEM_REVIEW_LIST_SAGA, workerReviewListItemsSaga);
   yield takeLatest(GET_ITEMGROUPITEM_REVIEW_LIST_SAGA, workeItemGroupItemReviewListSaga);
   yield takeLatest(GET_ITEMTYPEITEM_REVIEW_LIST_SAGA, workeItemTypeItemReviewListSaga);
   yield takeLatest(GET_NODE_ITEMS_REVIEW_LIST_SAGA, workeItemNodeItemReviewListSaga);
+  yield takeLatest(GET_ALLOCATE_ITEM, workerItemAllocateReviewListSaga);
 }
