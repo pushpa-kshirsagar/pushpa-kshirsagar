@@ -70,7 +70,7 @@ import {
   getNodeRelatedItemsDistinctApiCall
 } from '../Actions/ItemModuleAction';
 import { getAssessmentGroupAssessmentDistinctApiCall, getAssessmentTypeAssessmentDistinctApiCall, getNodeRelatedAssessmentsDistinctApiCall } from '../Actions/AssessmentModuleAction';
-import { getAssignmnetTypeAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
+import { getAssignmnetGroupAssignmnetDistinctApiCall, getAssignmnetTypeAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
@@ -593,6 +593,18 @@ const PopUpScan = (props) => {
           true
         );
       }
+      if (typeOfMiddlePaneList === 'assignmentGroupAssignmentReviewList') {
+        getAssignmnetGroupAssignmnetDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+      }
       if (typeOfMiddlePaneList === 'associatesGroupAssociateReviewList') {
         getAssociateGroupAssociateDistinctApiCall(
           selectedAssociateInfo,
@@ -768,6 +780,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'assessmentNodeAssessmentReviewList' ||
                 isPopUpValue === 'itemNodeItemReviewList' ||
                 isPopUpValue === 'assignmentTypeAssignmentReviewList' ||
+                isPopUpValue === 'assignmentGroupAssignmentReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}
