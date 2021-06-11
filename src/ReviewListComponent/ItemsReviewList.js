@@ -5,6 +5,7 @@ import {
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+  GET_ITEM_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -49,13 +50,15 @@ const ItemsReviewList = (props) => {
     console.log(isFetching);
   };
   const fetchData = async () => {
+    console.log(reviewListDistinctData.length);
     if (reviewListDistinctData.length < scanCount) {
+      dispatch({ type: LOADER_START });
       let obj = {
         ...reviewListReqObj,
         numberPage: numberPage
       };
       dispatch({
-        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+        type: GET_ITEM_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',

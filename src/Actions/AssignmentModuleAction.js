@@ -13,15 +13,21 @@ import {
   SET_POPUP_VALUE,
   SET_RELATED_REQUEST_OBJECT,
   SET_REQUEST_OBJECT,
-  GET_ASSIGNMENTTYPE_ASSIGNMENT_REVIEWLIST_SAGA
+  GET_ASSIGNMENTTYPE_ASSIGNMENT_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
+  GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
+  getAssignmentGroupAssignmentReqObj,
   getAssignmentTypeAssignmentReqObj,
   getAssignmentTypeAssignmentScanReqObj,
   makeAssignmentGroupObj,
   makeAssignmentReviewListRequestObject,
   makeAssignmentTypeObj,
-  makeInternalNodeObj
+  makeInternalNodeObj,
+  getAssignmentGroupAssignmentScanReqObj,
+  getNodeAssignmentsReqObj,
+  getNodeAssignmentsScanReqObj
 } from './GenericActions';
 
 export const createAssignmentPopupApiCall = (
@@ -208,6 +214,102 @@ export const getAssignmnetTypeAssignmnetDistinctApiCall = (
     payload: {
       request: reqBody,
       HeaderOne: 'items',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getAssignmnetGroupAssignmnetDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = getAssignmentGroupAssignmentReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getAssignmentGroupAssignmentScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'assignments',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getNodeRelatedAssignmentsDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan,
+  middlePaneHeader
+) => {
+  let reqBody = getNodeAssignmentsReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getNodeAssignmentsScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: middlePaneHeader,
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

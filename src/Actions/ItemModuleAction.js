@@ -39,7 +39,7 @@ export const createItemPopupApiCall = (
 ) => {
   dispatch({ type: CLEAR_ITEM_REDUCER_STATE });
   dispatch({ type: LOADER_START });
-  let requestObj = makeItemGroupObj(selectedAssociateInfo, 'all', 0, -1);
+  let requestObj = makeItemGroupObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
   dispatch({
     type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
@@ -51,7 +51,7 @@ export const createItemPopupApiCall = (
       isMiddlePaneList: false
     }
   });
-  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'all', 0, -1);
+  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
   dispatch({
     type: INTERNAL_NODE_LIST_SAGA,
@@ -64,7 +64,7 @@ export const createItemPopupApiCall = (
       isMiddlePaneList: false
     }
   });
-  let typeRequestObj = makeItemsTypeObj(selectedAssociateInfo, 'all', 0, -1);
+  let typeRequestObj = makeItemsTypeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typeRequestObj });
   dispatch({
     type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,

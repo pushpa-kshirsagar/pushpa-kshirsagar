@@ -22,9 +22,9 @@ import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getAssignmnetTypeAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
+import { getAssignmnetGroupAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
 
-const AssignmentTypeAssignmentReviewList = (props) => {
+const AssignmentGroupAssignmentReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -140,11 +140,11 @@ const AssignmentTypeAssignmentReviewList = (props) => {
       type: SET_MIDDLEPANE_STATE,
       payload: {
         middlePaneHeader: 'assignments',
-        middlePaneHeaderBadgeOne: 'type',
+        middlePaneHeaderBadgeOne: 'group',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assignmentsTypeDistinctReviewList',
+        typeOfMiddlePaneList: 'assignmentsGroupDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
@@ -154,7 +154,7 @@ const AssignmentTypeAssignmentReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getAssignmnetTypeAssignmnetDistinctApiCall(
+    getAssignmnetGroupAssignmnetDistinctApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
@@ -205,11 +205,11 @@ const AssignmentTypeAssignmentReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.assignmentTypeName}
-          textTwoOne={listDistinctData.assignmentTypeDescription}
+          textOneOne={listDistinctData.assignmentGroupName}
+          textTwoOne={listDistinctData.assignmentGroupDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'type'}
+          labelTwoTwo={'group'}
           onClickIconOne={closeRelatedList}
           isAlliance
           className={'iguru-iconboxSVG'}
@@ -239,7 +239,7 @@ const AssignmentTypeAssignmentReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assignmentTypeAssignmentinactive' && (
+      {FilterMode === 'assignmentGroupAssignmentinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -251,4 +251,4 @@ const AssignmentTypeAssignmentReviewList = (props) => {
     </div>
   );
 };
-export default AssignmentTypeAssignmentReviewList;
+export default AssignmentGroupAssignmentReviewList;

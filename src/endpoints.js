@@ -240,3 +240,7 @@ export const ASSIGNMENT_TYPE_GROUP_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type-group/review-list';
 export const ASSIGNMENT_TYPE_ASSIGNMENT_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/assignment/review-list';
+export const ASSIGNMENT_GROUP_ASSIGNMENT_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/assignment/review-list';
+export const ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/associate-node/assignment/review-list';

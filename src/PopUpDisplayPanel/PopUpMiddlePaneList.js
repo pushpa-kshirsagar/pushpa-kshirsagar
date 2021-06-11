@@ -78,7 +78,11 @@ import {
   getAssessmentTypeAssessmentDistinctApiCall,
   getNodeRelatedAssessmentsDistinctApiCall
 } from '../Actions/AssessmentModuleAction';
-import { getAssignmnetTypeAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
+import {
+  getAssignmnetGroupAssignmnetDistinctApiCall,
+  getAssignmnetTypeAssignmnetDistinctApiCall,
+  getNodeRelatedAssignmentsDistinctApiCall
+} from '../Actions/AssignmentModuleAction';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -365,7 +369,12 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'assignmentDistinctReviewList') {
+      if (
+        typeOfMiddlePaneList === 'assignmentDistinctReviewList' ||
+        typeOfMiddlePaneList === 'assignmentTypeAssignmentReviewList' ||
+        // typeOfMiddlePaneList === 'assignmentNodeAssignmentReviewList' ||
+        typeOfMiddlePaneList === 'assignmentGroupAssignmentReviewList'
+      ) {
         dispatch({
           type: GET_ASSIGNMENT_INFO_SAGA,
           payload: {
@@ -928,6 +937,23 @@ const PopUpMiddlePaneList = (props) => {
             payload: { FilterMode: 'assessmentNodeAssessmentDistinct' + secondaryOptionCheckValue }
           });
         }
+        if (popupHeaderOne === 'assignments') {
+          getNodeRelatedAssignmentsDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false,
+            middlePaneHeader
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'assessmentNodeAssessmentDistinct' + secondaryOptionCheckValue }
+          });
+        }
         if (popupHeaderOne === 'items') {
           getNodeRelatedItemsDistinctApiCall(
             selectedAssociateInfo,
@@ -1088,7 +1114,25 @@ const PopUpMiddlePaneList = (props) => {
         );
         dispatch({
           type: FILTERMODE,
-          payload: { FilterMode: 'assignmnetTypeAssignmnet' + secondaryOptionCheckValue }
+          payload: { FilterMode: 'assignmnetTypeAssignment' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
+        getAssignmnetGroupAssignmnetDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assignmnetGroupAssignment' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
