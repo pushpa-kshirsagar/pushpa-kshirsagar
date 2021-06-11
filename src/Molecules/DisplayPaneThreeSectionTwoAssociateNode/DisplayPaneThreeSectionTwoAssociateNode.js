@@ -9,6 +9,7 @@ import { Paper } from '@material-ui/core';
 import {
   FILTERMODE,
   GET_ALLOCATE_ASSESSEE,
+  GET_ALLOCATE_ASSESSMENT,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
@@ -19,6 +20,7 @@ import {
 import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
 import {
   makeAssesseeReviewListRequestObject,
+  makeAssessmentReviewListRequestObject,
   makeInternalNodeObj
 } from '../../Actions/GenericActions';
 import { getAssesseeNodeAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
@@ -145,6 +147,10 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   if (relatedReviewListPaneThree && relatedReviewListPaneThree.length > 0) {
     assessee = relatedReviewListPaneThree[0].assessee;
   }
+  let assessment = [];
+  if (relatedReviewListPaneThree && relatedReviewListPaneThree.length > 0) {
+    assessment = relatedReviewListPaneThree[0].assessment;
+  }
 
   const assesseeNodeList = [];
   assessee.forEach((ob) => {
@@ -153,6 +159,17 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       id,
       textOne: `${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`,
       textTwo: informationBasic.assesseeAlias || 'No Information',
+      status: ''
+    });
+  });
+
+  const assessmentNodeList = [];
+  assessment.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    assessmentNodeList.push({
+      id,
+      textOne: informationBasic.assessmentName,
+      textTwo: informationBasic.assessmentDescription || 'No Information',
       status: ''
     });
   });
@@ -189,7 +206,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: []
+          innerList: assessmentNodeList
         },
         {
           labelTextOneOneBadge: 'group',
@@ -567,6 +584,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
+    
     console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
     if (
       labelName === 'node' &&
@@ -622,6 +640,46 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           revisedGroupObject: revisedRoleObject,
           existingAssesseeId: existingAssesseeId,
           typeOfMiddlePaneList: 'assesseesNodeAssesseeReviewList'
+        }
+      });
+    }
+    if (labelName === 'assessment' && selectedBadgeName === 'distinct') {
+      let requestObect = makeAssessmentReviewListRequestObject(
+        selectedAssociateInfo,
+        'active',
+        0,
+        countPage
+      );
+      let revisedRoleObject = {
+        id: responseObject.id,
+        associateNodeName: responseObject.informationBasic.associateNodeName,
+        associateNodeDescription: responseObject.informationBasic.associateNodeDescription,
+        associateNodeStatus: responseObject.informationEngagement.associateNodeStatus
+      };
+      let existingAssessmentId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0]?.assessment &&
+        relatedReviewListPaneThree[0].assessment.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assessmentNodeAssessmentRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSESSMENT,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedRoleObject,
+          existingAssesseeId: existingAssessmentId,
+          typeOfMiddlePaneList: 'assessmentNodeAssessmentReviewList'
         }
       });
     }

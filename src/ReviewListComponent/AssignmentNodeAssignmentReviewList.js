@@ -145,7 +145,7 @@ const AssignmentNodeAssignmentReviewList = (props) => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'assessments',
+        middlePaneHeader: 'assignments',
         middlePaneHeaderBadgeOne: 'node',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
@@ -224,7 +224,7 @@ const AssignmentNodeAssignmentReviewList = (props) => {
         />
       )}
       {listDistinctData &&
-        listDistinctData.assessment.map((item, index) => {
+        listDistinctData.assignment.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList

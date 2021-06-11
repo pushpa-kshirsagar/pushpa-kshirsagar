@@ -38,7 +38,7 @@ function* workerReviewAssociateNodeInfoSaga(data) {
       const { isReviseMode = false, selectedModule, associateNodeAssesseeReqBody } = data.payload;
       if (associateNodeAssesseeReqBody) {
         yield put({
-          type: GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
+          type: data.payload.getReviewListSaga,
           payload: {
             request: associateNodeAssesseeReqBody,
             HeaderOne: selectedModule,

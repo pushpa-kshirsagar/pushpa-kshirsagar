@@ -42,7 +42,9 @@ import {
   GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA,
   GET_ITEM_INFO_SAGA,
   GET_ITEM_GROUP_REVIEW_INFO_SAGA,
-  GET_ITEM_TYPE_REVIEW_INFO_SAGA
+  GET_ITEM_TYPE_REVIEW_INFO_SAGA,
+  GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
+  GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -66,7 +68,8 @@ import {
   getAssessmentGroupAssessmentReqObj,
   makeInternalNodeObj,
   getAssignmentGroupAssignmentReqObj,
-  getAssessmentTypeAssessmentReqObj
+  getAssessmentTypeAssessmentReqObj,
+  getNodeAssessmentsReqObj
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -295,19 +298,35 @@ const PopUpMiddlePaneList = (props) => {
       }
       if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
         dispatch({ type: LOADER_START });
-        let associateNodeAssesseeReqBody = getAssesseeNodeAssesseeReqObj(
-          selectedAssociateInfo,
-          selectedTagValue,
-          'active',
-          0,
-          countPage
-        );
+        let associateNodeAssesseeReqBody = '';
+        let sagaCall = '';
+        if (popupHeaderOne === 'assessees') {
+          associateNodeAssesseeReqBody = getAssesseeNodeAssesseeReqObj(
+            selectedAssociateInfo,
+            selectedTagValue,
+            'active',
+            0,
+            countPage
+          );
+          sagaCall = GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST;
+        }
+        if (popupHeaderOne === 'assessments') {
+          associateNodeAssesseeReqBody = getNodeAssessmentsReqObj(
+            selectedAssociateInfo,
+            selectedTagValue,
+            'active',
+            0,
+            countPage
+          );
+          sagaCall = GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA;
+        }
         dispatch({
           type: GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
             associateNodeAssesseeReqBody,
             selectedModule: middlePaneHeader,
+            getReviewListSaga: sagaCall,
             isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,

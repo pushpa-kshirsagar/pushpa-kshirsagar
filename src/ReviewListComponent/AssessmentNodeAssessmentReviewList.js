@@ -144,7 +144,7 @@ const AssessmentNodeAssessmentReviewList = (props) => {
   };
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
 
-  const reviseSecondaryIcons = [
+  const reviseSecondaryIcon = [
     { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
     { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
   ];
@@ -262,6 +262,15 @@ const AssessmentNodeAssessmentReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'assessmentNodeAssessmentRevise' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={revisePrimaryIcon}
+          secondaryIcon={reviseSecondaryIcon}
         />
       )}
     </div>
