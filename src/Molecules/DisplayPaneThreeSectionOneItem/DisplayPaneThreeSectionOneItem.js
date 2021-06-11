@@ -12,7 +12,9 @@ import {
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_POPUP_VALUE,
   SET_STATUS_POPUP_VALUE
 } from '../../actionType';
@@ -72,6 +74,96 @@ const DisplayPaneThreeSectionOneItem = () => {
       isListCard: true
     }
   ];
+  let itemGroupListPrimary = [];
+  if (
+    informationAllocation?.itemGroup?.itemGroupPrimary &&
+    informationAllocation?.itemGroup?.itemGroupPrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.itemGroup?.itemGroupPrimary;
+    tempArr.forEach((ob) => {
+      itemGroupListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.itemGroupName || '',
+        textTwo: ob?.informationBasic?.itemGroupDescription || '',
+        status: ''
+      });
+    });
+  }
+  let itemGroupListSecondary = [];
+  if (
+    informationAllocation?.itemGroup?.itemGroupSecondary &&
+    informationAllocation?.itemGroup?.itemGroupSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.itemGroup?.itemGroupSecondary;
+    tempArr.forEach((ob) => {
+      itemGroupListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.itemGroupName || '',
+        textTwo: ob?.informationBasic?.itemGroupDescription || '',
+        status: ''
+      });
+    });
+  }
+  let itemNodeListPrimary = [];
+  if (
+    informationAllocation?.itemNode?.itemNodePrimary &&
+    informationAllocation?.itemNode?.itemNodePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.itemNode?.itemNodePrimary;
+    tempArr.forEach((ob) => {
+      itemNodeListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let itemNodeListSecondary = [];
+  if (
+    informationAllocation?.itemNode?.itemNodeSecondary &&
+    informationAllocation?.itemNode?.itemNodeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.itemNode?.itemNodeSecondary;
+    tempArr.forEach((ob) => {
+      itemNodeListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let itemTypeListPrimary = [];
+  if (
+    informationAllocation?.itemType?.itemTypePrimary &&
+    informationAllocation?.itemType?.itemTypePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.itemType?.itemTypePrimary;
+    tempArr.forEach((ob) => {
+      itemTypeListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.itemTypeName || '',
+        textTwo: ob?.informationBasic?.itemTypeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let itemTypeListSecondary = [];
+  if (
+    informationAllocation?.itemType?.itemTypeSecondary &&
+    informationAllocation?.itemType?.itemTypeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.itemType?.itemTypeSecondary;
+    tempArr.forEach((ob) => {
+      itemTypeListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.itemTypeName || '',
+        textTwo: ob?.informationBasic?.itemTypeDescription || '',
+        status: ''
+      });
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -83,30 +175,11 @@ const DisplayPaneThreeSectionOneItem = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Group',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Group',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Group',
-              status: ''
-            }
-          ]
+          innerList: itemGroupListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: itemGroupListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -161,30 +234,11 @@ const DisplayPaneThreeSectionOneItem = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Node',
-              status: ''
-            }
-          ]
+          innerList: itemNodeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: itemNodeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -200,30 +254,11 @@ const DisplayPaneThreeSectionOneItem = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'type',
-              status: ''
-            }
-          ]
+          innerList: itemTypeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: itemTypeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -349,7 +384,7 @@ const DisplayPaneThreeSectionOneItem = () => {
     if (labelName === 'group') {
       dispatch({ type: LOADER_START });
       let requestObj = makeItemGroupObj(selectedAssociateInfo, 'active', 0, -1);
-      // dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
         payload: {
@@ -418,7 +453,7 @@ const DisplayPaneThreeSectionOneItem = () => {
     if (labelName === 'type') {
       dispatch({ type: LOADER_START });
       let roleRequestObj = makeItemsTypeObj(selectedAssociateInfo, 'active', 0, -1);
-      // dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+      dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
       dispatch({
         type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
         payload: {
