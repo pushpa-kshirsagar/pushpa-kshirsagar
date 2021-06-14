@@ -99,6 +99,8 @@ import DisplayPaneThreeSectionOneItemType from '../../Molecules/DisplayPaneThree
 import {
   getAssessmentGroupAssessmentReqObj,
   getAssessmentTypeAssessmentReqObj,
+  getAssignmentGroupAssignmentReqObj,
+  getAssignmentTypeAssignmentReqObj,
   getItemGroupItemReqObj,
   getItemTypeItemReqObj
 } from '../../Actions/GenericActions';
@@ -521,6 +523,14 @@ export const DisplayPaneThree = () => {
       } else {
         selectedSignInCredential = responseObject?.informationSetup?.assesseeSignInCredential;
       }
+      informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication = false;
+      if (assesseeInfo.tempCommunication === 'email address (primary)') {
+        informationContact.assesseeAddressEmailPrimary.assesseeAddressEmailCommunication = true;
+      }
+      informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = false;
+      if (assesseeInfo.tempCommunication === 'email address (secondary)') {
+        informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
+      }
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: id,
@@ -736,28 +746,28 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        // assignmentGroupAssignment: {
-        //   assignmentGroupAssignmentAllocate:
-        //     assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
-        //   assignmentGroupAssignmentUnallocate:
-        //     assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
-        // },
+        assignmentGroupAssignment: {
+          assignmentGroupAssignmentAllocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          assignmentGroupAssignmentUnallocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         assignmentGroup: {
           id,
           informationBasic: assignmentGroup.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
-      // let assignmentGroupAssignmentReqBody = getAssignmentGroupAssignmentReqObj(
-      //   selectedAssociateInfo,
-      //   id,
-      //   'active',
-      //   0,
-      //   countPage
-      // );
+      let assignmentGroupAssignmentReqBody = getAssignmentGroupAssignmentReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
-        payload: { headerOne: 'assignments', reqBody, createMode }
+        payload: { headerOne: 'assignments', reqBody, assignmentGroupAssignmentReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'assessees') {
       const { associateId, id } = responseObject;
@@ -840,15 +850,28 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assignmentTypeAssignment: {
+          assignmentTypeAssignmentAllocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          assignmentTypeAssignmentUnallocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         assignmentType: {
           id,
           informationBasic: assignmentType.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let assignmentTypeAssignmentReqBody = getAssignmentTypeAssignmentReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
-        payload: { headerOne: 'assignment', reqBody, createMode }
+        payload: { headerOne: 'assignment', reqBody, assignmentTypeAssignmentReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'items') {
       const { associateId, id } = responseObject;

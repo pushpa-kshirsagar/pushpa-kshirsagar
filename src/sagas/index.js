@@ -4,7 +4,7 @@ import rootSaga from './watchers/user';
 import watchcreateAssociateSaga from './watchers/createAssociate';
 import watchcreateAssesseeSaga from './watchers/createAssessee';
 import watchReviewListAssesseeSaga from './watchers/reviewListAssessee';
-import watchReviewInfoAssesseeSaga from './watchers/reviewInfoAssessee';
+import watchReviewInfoAssesseeSaga from './watchers/assesseeReviewRevise';
 import watchReviewInfoAssociateSaga from './watchers/reviewInfoAssociate';
 import watchReviewListAssociateSaga from './watchers/reviewListAssociate';
 import watchReviewRolesListSaga from './watchers/reviewListRoles';
@@ -33,7 +33,6 @@ import watchReviewAssesseeTypeInfoSaga from './watchers/reviewInfoAssesseeType';
 import watchCreateAssignmentSaga from './watchers/createAssignment';
 import watchSignInAssesseeSaga from './watchers/signIn';
 import watchConfirmAssesseeSaga from './watchers/confirmAssessee';
-import watchReviseInfoAssesseeSaga from './watchers/reviseAssesseeInfo';
 import workerReviseInfoAssociateSaga from './watchers/reviseAssociateInfo';
 import watchcreateNodeSaga from './watchers/createNode';
 import watchReviewAssociatesNodeListSaga from './watchers/reviewListNode';
@@ -77,7 +76,6 @@ export default function* root() {
     fork(watchReviewInfoAssignmentSaga),
     fork(watchSignInAssesseeSaga),
     fork(watchConfirmAssesseeSaga),
-    fork(watchReviseInfoAssesseeSaga),
     fork(workerReviseInfoAssociateSaga),
     fork(watchcreateNodeSaga),
     fork(watchReviewAssociatesNodeListSaga),

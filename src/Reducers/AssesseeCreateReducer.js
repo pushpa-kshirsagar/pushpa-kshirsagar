@@ -33,7 +33,8 @@ import {
   UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO,
   UPDATE_ASSESSEE_TAG_STATUTORY_INFO,
   SET_AVAILABLE_SIGNIN_LIST,
-  SET_CURRENTLY_SIGNIN_CREDENTIAL
+  SET_CURRENTLY_SIGNIN_CREDENTIAL,
+  SET_ASSESSEE_CREATE_SINGLE_STATE
 } from '../actionType';
 import {
   ASSESSEE_REVIEW_REVISE_POPUP,
@@ -526,6 +527,11 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
       return {
         ...istate,
         assesseeInformationData: action.payload
+      };
+    case SET_ASSESSEE_CREATE_SINGLE_STATE:
+      return {
+        ...istate,
+        [action.payload.stateName]: action.payload.value
       };
     case CLEAR_ASSESSEE_INFO:
       return initialState;

@@ -5,7 +5,9 @@ import {
   SET_ASSESSMENT_TYPE_REDUCER_STATE,
   ASSESSMENT_TYPE_REVISE_INFO_SAGA,
   SET_DISPLAY_PANE_THREE_STATE,
-  GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA
+  GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_TYPE_URL, ASSESSMENT_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -62,10 +64,10 @@ function* workerReviewAssessmentTypeInfoSaga(data) {
           payload: userResponse.responseObject.informationBasic
         });
       }
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-
-    console.log('loading end');
-    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -119,10 +121,15 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
           createMode
         }
       });
+      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      yield put({
+        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+        payload: []
+      });
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-
-    console.log('loading end');
-    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

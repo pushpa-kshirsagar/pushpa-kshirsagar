@@ -98,19 +98,19 @@ const AssignmentTypeAssignmentReviewList = (props) => {
     console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray);
     setIsShowReviseIcon(true);
     if (typeOfMiddlePaneList !== '') {
-      //   dispatch({
-      //     type: SET_MIDDLEPANE_STATE,
-      //     payload: {
-      //       middlePaneHeader: 'assignments',
-      //       middlePaneHeaderBadgeOne: 'type',
-      //       middlePaneHeaderBadgeTwo: 'active',
-      //       middlePaneHeaderBadgeThree: '',
-      //       middlePaneHeaderBadgeFour: '',
-      //       typeOfMiddlePaneList: 'assignmentsTypeDistinctReviewList',
-      //       scanCount: reviewListDistinctData.length,
-      //       showMiddlePaneState: true
-      //     }
-      //   });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'assignments',
+          middlePaneHeaderBadgeOne: 'type',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assignmentsTypeDistinctReviewList',
+          scanCount: reviewListDistinctData.length,
+          showMiddlePaneState: true
+        }
+      });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: '' }
@@ -239,6 +239,15 @@ const AssignmentTypeAssignmentReviewList = (props) => {
             </div>
           );
         })}
+      {FilterMode === 'assignmentTypeAssignmentRevise' && (
+        <FooterIconTwo
+          FilterModeEnable={isShowReviseIcon}
+          FilterMode={FilterMode}
+          onClick={onClickRevise}
+          primaryIcon={revisePrimaryIcon}
+          secondaryIcon={reviseSecondaryIcons}
+        />
+      )}
       {FilterMode === 'assignmentTypeAssignmentinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}

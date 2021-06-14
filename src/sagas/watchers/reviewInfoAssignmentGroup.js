@@ -1,10 +1,13 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
+  GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
   GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
   LOADER_STOP,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
-  SET_DISPLAY_PANE_THREE_STATE
+  SET_DISPLAY_PANE_THREE_STATE,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSIGNMENT_REVIEW_GROUP_URL, ASSIGNMENT_REVISE_GROUP_URL } from '../../endpoints';
 
@@ -31,19 +34,19 @@ function* workerReviewAssignmentGroupInfoSaga(data) {
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
       const { isReviseMode = false, assignmentGroupAssignmentReqBody = null } = data.payload;
-      // if (assignmentGroupAssignmentReqBody !== null) {
-      //   yield put({
-      //     type: GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
-      //     payload: {
-      //       request: assignmentGroupAssignmentReqBody,
-      //       HeaderOne: 'assessments',
-      //       BadgeOne: '',
-      //       BadgeTwo: '',
-      //       BadgeThree: '',
-      //       isMiddlePaneList: false
-      //     }
-      //   });
-      // }
+      if (assignmentGroupAssignmentReqBody !== null) {
+        yield put({
+          type: GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
+          payload: {
+            request: assignmentGroupAssignmentReqBody,
+            HeaderOne: 'assignments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -61,10 +64,10 @@ function* workerReviewAssignmentGroupInfoSaga(data) {
           payload: userResponse.responseObject.informationBasic
         });
       }
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -93,7 +96,20 @@ function* workerReviseAssignmentGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { createMode = '' } = data.payload;
+      const { createMode = '', assignmentGroupAssignmentReqBody = null } = data.payload;
+      if (assignmentGroupAssignmentReqBody !== null) {
+        yield put({
+          type: GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
+          payload: {
+            request: assignmentGroupAssignmentReqBody,
+            HeaderOne: 'assignments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -105,10 +121,15 @@ function* workerReviseAssignmentGroupInfoSaga(data) {
           createMode
         }
       });
+      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      yield put({
+        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+        payload: []
+      });
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
