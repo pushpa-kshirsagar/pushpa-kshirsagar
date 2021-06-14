@@ -15,7 +15,7 @@ import {
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
-const ItemCreatePopUp = (props) => {
+const PopUpItemCreate = (props) => {
   const { headerOne = 'item' } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
@@ -338,4 +338,4 @@ const ItemCreatePopUp = (props) => {
   );
 };
 
-export default ItemCreatePopUp;
+export default PopUpItemCreate;

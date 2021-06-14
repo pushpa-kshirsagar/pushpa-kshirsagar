@@ -35,7 +35,9 @@ import {
   CLEAR_GROUP_REDUCER_STATE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   CLEAR_TYPE_REDUCER_STATE,
-  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST
+  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
+  CLEAR_CULTURE_REDUCER_STATE,
+  CLEAR_JOB_REDUCER_STATE
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -487,7 +489,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
       revisePopupType = 'secondary';
       valueArr = clickValue === 'create' ? REVIEW_REVISE_POPUP : REVIEW_POPUP_OPTIONS;
-      reviseSecondaryOptionCheckValue = clickValue === 'create' ? 'key' : 'active';
+      reviseSecondaryOptionCheckValue = clickValue === 'create' ? 'all' : 'active';
     }
     if (
       (popupHeaderOne === 'groups' ||
@@ -884,6 +886,19 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
+      });
+      clearMiddlePaneInfo();
+    } else if (
+      clickValue === 'information' &&
+      popupHeaderOneBadgeOne === 'create' &&
+      (popupHeaderOne === 'culture profiles' || popupHeaderOne === 'job profiles')
+    ) {
+      let createType = popupHeaderOne === 'culture profiles' ? 'CULTURE' : 'JOB';
+      dispatch({ type: CLEAR_CULTURE_REDUCER_STATE });
+      dispatch({ type: CLEAR_JOB_REDUCER_STATE });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: createType + 'CREATE' }
       });
       clearMiddlePaneInfo();
     } else if (

@@ -8,7 +8,6 @@ import {
   CLEAR_ASSOCIATE_INFO,
   CLEAR_IGAUGE_REDUCER,
   GET_ASSESSEE_SIGN_IN_INFO,
-  GET_USER_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_ASSESSEE_GROUP_REDUCER_STATE,
@@ -19,8 +18,10 @@ import {
   SET_ASSIGNMENT_TYPE_REDUCER_STATE,
   SET_ASSOCIATE_GROUP_REDUCER_STATE,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
+  SET_CULTURE_GROUP_REDUCER_STATE,
   SET_ITEM_GROUP_REDUCER_STATE,
-  SET_ITEM_TYPE_REDUCER_STATE
+  SET_ITEM_TYPE_REDUCER_STATE,
+  SET_JOB_GROUP_REDUCER_STATE
 } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
@@ -36,18 +37,20 @@ import LoadingComponent from '../../PopUpInformation/LoadingComponent';
 import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
 import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
-import AssesseeRoleCreatePopUp from '../../Molecules/PopUpCreate/AssesseeRoleCreatePopUp';
-import AssociateRoleCreatePopup from '../../Molecules/PopUpCreate/AssociateRoleCreatePopup';
-import GroupCreatePopup from '../../Molecules/PopUpCreate/GroupCreatePopup';
-import TypeCreatePopup from '../../Molecules/PopUpCreate/TypeCreatePopup';
-import AssignmentCreatePopup from '../../Molecules/PopUpCreate/AssignmentCreatePopup';
-import AssessmentCreatePopup from '../../Molecules/PopUpCreate/AssessmentCreatePopup';
+import PopUpAssesseeRoleCreate from '../../Molecules/PopUpCreate/PopUpAssesseeRoleCreate';
+import PopUpAssociateRoleCreate from '../../Molecules/PopUpCreate/PopUpAssociateRoleCreate';
+import PopUpGroupCreate from '../../Molecules/PopUpCreate/PopUpGroupCreate';
+import PopUpTypeCreate from '../../Molecules/PopUpCreate/PopUpTypeCreate';
+import PopUpCultureProfileCreate from '../../Molecules/PopUpCreate/PopUpCultureProfileCreate';
+import PopUpAssignmentCreate from '../../Molecules/PopUpCreate/PopUpAssignmentCreate';
+import PopUpAssessmentCreate from '../../Molecules/PopUpCreate/PopUpAssessmentCreate';
 import PopUpMessageError from '../../PopUpGeneric/PopUpMessageError';
 import { useHistory } from 'react-router-dom';
-import NodeCreatePopup from '../../Molecules/PopUpCreate/NodeCreatePopup';
+import PopUpNodeCreate from '../../Molecules/PopUpCreate/PopUpNodeCreate';
 import PopUpMiddlePaneTrippleDot from '../../PopUpDisplayPanel/PopUpMiddlePaneTrippleDot';
-import ItemCreatePopUp from '../../Molecules/PopUpCreate/ItemCreatePopUp';
+import PopUpItemCreate from '../../Molecules/PopUpCreate/PopUpItemCreate';
 import PopUpDownloadUpload from '../../PopUpDisplayPanel/PopUpDownloadUpload';
+import PopUpJobProfileCreate from '../../Molecules/PopUpCreate/PopUpJobProfileCreate';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -67,7 +70,9 @@ const DisplayPageOne = () => {
     assessmentGroup,
     assignmentGroup,
     associateGroup,
-    itemGroup
+    itemGroup,
+    cultureProfileGroup,
+    jobProfileGroup
   } = useSelector((state) => state.GroupCreateReducer);
   const { assesseeType, assessmentType, assignmentType, associateType, itemType } = useSelector(
     (state) => state.TypeCreateReducer
@@ -139,6 +144,7 @@ const DisplayPageOne = () => {
     dispatch({ type: CLEAR_IGAUGE_REDUCER });
   };
   const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneTwoReducer);
+  console.log('popupMode', popupMode);
   return (
     <>
       <HeaderZero userName={userName} userEmail={userEmail} />
@@ -205,13 +211,13 @@ const DisplayPageOne = () => {
       {popupMode === 'ADMINISTRATOR_CREATE' && <PopUpSignOnAssessee headerOne={'administrator'} />}
       {popupMode === 'MANAGER_CREATE' && <PopUpSignOnAssessee headerOne={'manager'} />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
-      {popupMode === 'assesseesROLECREATE' && <AssesseeRoleCreatePopUp />}
-      {popupMode === 'associatesROLECREATE' && <AssociateRoleCreatePopup />}
+      {popupMode === 'assesseesROLECREATE' && <PopUpAssesseeRoleCreate />}
+      {popupMode === 'associatesROLECREATE' && <PopUpAssociateRoleCreate />}
       {popupMode === 'responseErrorMsg' && (
         <PopUpMessageError isActive errorMessage={isPopUpValue} />
       )}
       {popupMode === 'assesseesGROUPCREATE' && (
-        <GroupCreatePopup
+        <PopUpGroupCreate
           headerOne={'assessees'}
           reducerObeject={assesseeGroup}
           groupName={'assesseeGroupName'}
@@ -221,7 +227,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'assessmentsGROUPCREATE' && (
-        <GroupCreatePopup
+        <PopUpGroupCreate
           headerOne={'assessments'}
           reducerObeject={assessmentGroup}
           groupName={'assessmentGroupName'}
@@ -231,7 +237,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'assignmentsGROUPCREATE' && (
-        <GroupCreatePopup
+        <PopUpGroupCreate
           headerOne={'assignments'}
           reducerObeject={assignmentGroup}
           groupName={'assignmentGroupName'}
@@ -241,7 +247,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'associatesGROUPCREATE' && (
-        <GroupCreatePopup
+        <PopUpGroupCreate
           headerOne={'associates'}
           reducerObeject={associateGroup}
           groupName={'associateGroupName'}
@@ -251,7 +257,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'itemsGROUPCREATE' && (
-        <GroupCreatePopup
+        <PopUpGroupCreate
           headerOne={'items'}
           reducerObeject={itemGroup}
           groupName={'itemGroupName'}
@@ -260,8 +266,28 @@ const DisplayPageOne = () => {
           objectName={'itemGroup'}
         />
       )}
+      {popupMode === 'culture profilesGROUPCREATE' && (
+        <PopUpGroupCreate
+          headerOne={'culture profiles'}
+          reducerObeject={cultureProfileGroup}
+          groupName={'cultureProfileName'}
+          groupDescription={'cultureProfileDescription'}
+          setReducerObject={SET_CULTURE_GROUP_REDUCER_STATE}
+          objectName={'cultureProfile'}
+        />
+      )}
+      {popupMode === 'job profilesGROUPCREATE' && (
+        <PopUpGroupCreate
+          headerOne={'job profiles'}
+          reducerObeject={jobProfileGroup}
+          groupName={'jobProfileName'}
+          groupDescription={'jobProfileDescription'}
+          setReducerObject={SET_JOB_GROUP_REDUCER_STATE}
+          objectName={'jobProfile'}
+        />
+      )}
       {popupMode === 'assesseesTYPECREATE' && (
-        <TypeCreatePopup
+        <PopUpTypeCreate
           headerOne={'assessees'}
           reducerObeject={assesseeType}
           typeName={'assesseeTypeName'}
@@ -273,8 +299,12 @@ const DisplayPageOne = () => {
           groupDescription={'assesseeTypeGroupDescription'}
         />
       )}
+      {popupMode === 'CULTURECREATE' && (
+        <PopUpCultureProfileCreate headerOne={'culture profiles'} />
+      )}
+      {popupMode === 'JOBCREATE' && <PopUpJobProfileCreate headerOne={'job profiles'} />}
       {popupMode === 'assessmentsTYPECREATE' && (
-        <TypeCreatePopup
+        <PopUpTypeCreate
           headerOne={'assessments'}
           reducerObeject={assessmentType}
           typeName={'assessmentTypeName'}
@@ -287,7 +317,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'assignmentsTYPECREATE' && (
-        <TypeCreatePopup
+        <PopUpTypeCreate
           headerOne={'assignments'}
           reducerObeject={assignmentType}
           typeName={'assignmentTypeName'}
@@ -300,7 +330,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'associatesTYPECREATE' && (
-        <TypeCreatePopup
+        <PopUpTypeCreate
           headerOne={'associates'}
           reducerObeject={associateType}
           typeName={'associateTypeName'}
@@ -313,7 +343,7 @@ const DisplayPageOne = () => {
         />
       )}
       {popupMode === 'itemsTYPECREATE' && (
-        <TypeCreatePopup
+        <PopUpTypeCreate
           headerOne={'items'}
           reducerObeject={itemType}
           typeName={'itemTypeName'}
@@ -323,12 +353,13 @@ const DisplayPageOne = () => {
           allocationObj={'itemTypeGroup'}
           groupName={'itemTypeGroupName'}
           groupDescription={'itemTypeGroupDescription'}
+          PopUpAssessmentCreate
         />
       )}
-      {popupMode === 'NODECREATE' && <NodeCreatePopup headerOne={'associate'} />}
-      {popupMode === 'ASSIGNMENTCREATE' && <AssignmentCreatePopup headerOne={'assignment'} />}
-      {popupMode === 'ASSESSMENTCREATE' && <AssessmentCreatePopup headerOne={'assessment'} />}
-      {popupMode === 'ITEMCREATE' && <ItemCreatePopUp />}
+      {popupMode === 'NODECREATE' && <PopUpNodeCreate headerOne={'associate'} />}
+      {popupMode === 'ASSIGNMENTCREATE' && <PopUpAssignmentCreate headerOne={'assignment'} />}
+      {popupMode === 'ASSESSMENTCREATE' && <PopUpAssessmentCreate headerOne={'assessment'} />}
+      {popupMode === 'ITEMCREATE' && <PopUpItemCreate />}
       {popupMode === 'UPLOAD_DOWNLOAD_POPUP' && <PopUpDownloadUpload isActive />}
     </>
   );

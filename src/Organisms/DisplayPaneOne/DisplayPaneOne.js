@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_MIDDLEPANE_STATE, SET_MOBILE_PANE_STATE, SET_POPUP_STATE } from '../../actionType';
 import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
-import PopUpSpreadSheet from '../../PopUpIcon/PopUpSpreadSheet';
+import PopUpWorkSheet from '../../PopUpIcon/PopUpWorkSheet';
 import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword';
 import PopUpDisplayPanelAssessee from '../../PopUpDisplayPanel/PopUpDisplayPanelAssessee';
 import PopUpDisplayPanelAssociate from '../../PopUpDisplayPanel/PopUpDisplayPanelAssociate';
@@ -196,7 +196,7 @@ export const DisplayPaneOne = () => {
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
       <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
       <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
-      <PopUpSpreadSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
+      <PopUpWorkSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
       <PopUpAssociateLink />
     </>

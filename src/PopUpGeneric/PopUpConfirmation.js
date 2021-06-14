@@ -48,6 +48,8 @@ const PopUpConfirmation = (props) => {
       popupMode === 'associatesGROUPCREATE' ||
       popupMode === 'assignmentsGROUPCREATE' ||
       popupMode === 'assessmentsGROUPCREATE' ||
+      popupMode === 'culture profilesGROUPCREATE' ||
+      popupMode === 'job profilesGROUPCREATE' ||
       popupMode === 'assesseesTYPECREATE' ||
       popupMode === 'assessmentsTYPECREATE' ||
       popupMode === 'assignmentsTYPECREATE' ||
@@ -55,6 +57,8 @@ const PopUpConfirmation = (props) => {
       popupMode === 'ASSESSMENTCREATE' ||
       popupMode === 'ASSIGNMENTCREATE' ||
       popupMode === 'NODECREATE' ||
+      popupMode === 'CULTURECREATE' ||
+      popupMode === 'JOBCREATE' ||
       popupMode === 'ITEMCREATE'
     ) {
       dispatch({

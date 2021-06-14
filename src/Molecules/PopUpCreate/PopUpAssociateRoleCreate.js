@@ -14,7 +14,7 @@ import {
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
-const AssociateRoleCreatePopup = () => {
+const PopUpAssociateRoleCreate = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { associateRole } = useSelector((state) => state.RoleCreateReducer);
   const { selectedAssociateInfo, coreRoleReviewListData } = useSelector(
@@ -157,4 +157,4 @@ const AssociateRoleCreatePopup = () => {
   );
 };
 
-export default AssociateRoleCreatePopup;
+export default PopUpAssociateRoleCreate;

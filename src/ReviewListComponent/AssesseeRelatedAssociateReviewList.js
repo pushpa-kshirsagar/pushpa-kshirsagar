@@ -62,7 +62,7 @@ const AssesseeRelatedAssociateReviewList = (props) => {
       }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
-    dispatch({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
+    // dispatch({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {

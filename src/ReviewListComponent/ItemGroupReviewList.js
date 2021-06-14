@@ -20,12 +20,8 @@ import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   ASSOCIATE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
-import {
-  getItemGroupDistinctApiCall,
-  getItemsDistinctApiCall,
-  getItemsTypeApiCall
-} from '../Actions/ItemModuleAction';
-const ItemsTypeReviewList = (props) => {
+import { getItemGroupDistinctApiCall, getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+const ItemGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
@@ -83,7 +79,7 @@ const ItemsTypeReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    getItemsTypeApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'types', 'items');
+    getItemGroupDistinctApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'groups');
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
@@ -111,7 +107,7 @@ const ItemsTypeReviewList = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: middlePaneHeader,
-        popupHeaderOneBadgeOne: 'type',
+        popupHeaderOneBadgeOne: 'group',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -130,7 +126,7 @@ const ItemsTypeReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log('FilterMode', FilterMode);
+  console.log('FilterMode',FilterMode);
   const associateSeftId =
     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
@@ -144,12 +140,9 @@ const ItemsTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                // status={item.informationEngagement.itemTypeStatus}
-                textOne={item.informationBasic.itemTypeName}
-                textTwo={item.informationBasic.itemTypeDescription}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                actualStatus={item.itemTypeShared ? 'SHARED' : 'UNSHARED'}
-                dataValue={item.informationAllocation?.itemTypeGroup}
+                status={item.informationEngagement.itemGroupStatus}
+                textOne={item.informationBasic.itemGroupName}
+                textTwo={item.informationBasic.itemGroupDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 // dataValue={item.informationAllocation.itemGroup}
@@ -157,9 +150,7 @@ const ItemsTypeReviewList = (props) => {
             </div>
           );
         })}
-      {(FilterMode === 'itemsTypeDistinctinactive' ||
-        FilterMode === 'itemsTypeDistinctsuspended' ||
-        FilterMode === 'itemsTypeDistinctterminated') && (
+      {(FilterMode === 'itemGroupDistinctinactive' ||FilterMode === 'itemGroupDistinctsuspended' || FilterMode === 'itemGroupDistinctterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -171,4 +162,4 @@ const ItemsTypeReviewList = (props) => {
     </div>
   );
 };
-export default ItemsTypeReviewList;
+export default ItemGroupReviewList;

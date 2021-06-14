@@ -29,7 +29,7 @@ const PopUpAdministratorSignInCredentialRevise = (props) => {
   const handleChange = (event) => {
     const { value } = event.target;
     // setSignIn(value);
-    setErrorMsg('');
+    // setErrorMsg('');
     dispatch({
       type: SET_SIGN_ON_SINGLE_STATE,
       payload: {

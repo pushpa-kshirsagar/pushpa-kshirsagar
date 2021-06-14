@@ -20,24 +20,24 @@ import AssesseeGroupAssesseeReviewList from '../../ReviewListComponent/AssesseeG
 import AssociateGroupAssociateReviewList from '../../ReviewListComponent/AssociateGroupAssociateReviewList';
 import AssesseeRoleAssesseeReviewList from '../../ReviewListComponent/AssesseeRoleAssesseeReviewList';
 import AssociateRoleAssociateReviewList from '../../ReviewListComponent/AssociateRoleAssociateReviewList';
-import AssociatesNodeReviewList from '../../ReviewListComponent/AssociatesNodeReviewList';
-import InternalNodeReviewList from '../../ReviewListComponent/InternalNodeReviewList';
+import IguruNodeReviewList from '../../ReviewListComponent/IguruNodeReviewList';
+import AssociateNodeReviewList from '../../ReviewListComponent/AssociateNodeReviewList';
 import AssesseeNodeAssesseeReviewList from '../../ReviewListComponent/AssesseeNodeAssesseeReviewList';
 import AssesseeAssociateReviewList from '../../ReviewListComponent/AssesseeAssociateReviewList';
 import AssesseeTypeReviewList from '../../ReviewListComponent/AssesseeTypeReviewList';
 import AssociateTypeReviewList from '../../ReviewListComponent/AssociateTypeReviewList';
 import AssesseeTypeAssesseeReviewList from '../../ReviewListComponent/AssesseeTypeAssesseeReviewList';
 import AssociateTypeAssociateReviewList from '../../ReviewListComponent/AssociateTypeAssociateReviewList';
-import ItemsReviewList from '../../ReviewListComponent/ItemsReviewList';
-import ItemsGroupReviewList from '../../ReviewListComponent/ItemsGroupReviewList';
+import ItemReviewList from '../../ReviewListComponent/ItemReviewList';
+import ItemGroupReviewList from '../../ReviewListComponent/ItemGroupReviewList';
 import NodeRelatedAssociateReviewList from '../../ReviewListComponent/NodeRelatedAssociateReviewList';
-import ItemsTypeReviewList from '../../ReviewListComponent/ItemsTypeReviewList';
-import ItemsGroupItemsReviewList from '../../ReviewListComponent/ItemsGroupItemsReviewList';
-import ItemsTypeItemsReviewList from '../../ReviewListComponent/ItemsTypeItemsReviewList';
+import ItemTypeReviewList from '../../ReviewListComponent/ItemTypeReviewList';
+import ItemGroupItemReviewList from '../../ReviewListComponent/ItemGroupItemReviewList';
+import ItemTypeItemReviewList from '../../ReviewListComponent/ItemTypeItemReviewList';
 import AssessmentGroupAssessmentReviewList from '../../ReviewListComponent/AssessmentGroupAssessmentReviewList';
 import AssessmentTypeAssessmentReviewList from '../../ReviewListComponent/AssessmentTypeAssessmentReviewList';
 import AssessmentNodeAssessmentReviewList from '../../ReviewListComponent/AssessmentNodeAssessmentReviewList';
-import ItemsNodeItemsReviewList from '../../ReviewListComponent/ItemsNodeItemsReviewList';
+import ItemNodeItemReviewList from '../../ReviewListComponent/ItemNodeItemReviewList';
 import AssignmentTypeAssignmentReviewList from '../../ReviewListComponent/AssignmentTypeAssignmentReviewList';
 import AssignmentGroupAssignmentReviewList from '../../ReviewListComponent/AssignmentGroupAssignmentReviewList';
 import AssignmentNodeAssignmentReviewList from '../../ReviewListComponent/AssignmentNodeAssignmentReviewList';
@@ -161,10 +161,10 @@ export const DisplayPaneTwo = (props) => {
           <AssociateTypeAssociateReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'associatesNodeDistinctReviewList' && (
-          <AssociatesNodeReviewList popupAllClose={popupAllClose} />
+          <IguruNodeReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'associateNodeDistinctReviewList' && (
-          <InternalNodeReviewList popupAllClose={popupAllClose} />
+          <AssociateNodeReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesNodeAssesseeReviewList' && (
           <AssesseeNodeAssesseeReviewList popupAllClose={popupAllClose} />
@@ -179,22 +179,22 @@ export const DisplayPaneTwo = (props) => {
           <AssociateTypeReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemsDistinctReviewList' && (
-          <ItemsReviewList popupAllClose={popupAllClose} />
+          <ItemReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemsTypeDistinctReviewList' && (
-          <ItemsTypeReviewList popupAllClose={popupAllClose} />
+          <ItemTypeReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemsGroupDistinctReviewList' && (
-          <ItemsGroupReviewList popupAllClose={popupAllClose} />
+          <ItemGroupReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemGroupItemReviewList' && (
-          <ItemsGroupItemsReviewList popupAllClose={popupAllClose} />
+          <ItemGroupItemReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemNodeItemReviewList' && (
-          <ItemsNodeItemsReviewList popupAllClose={popupAllClose} />
+          <ItemNodeItemReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemTypeItemReviewList' && (
-          <ItemsTypeItemsReviewList popupAllClose={popupAllClose} />
+          <ItemTypeItemReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&

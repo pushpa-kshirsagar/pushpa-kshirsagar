@@ -25,7 +25,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { Fragment } from 'react';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 import Card from '../Molecules/Card/Card';
-const InternalNodeReviewList = (props) => {
+const AssociateNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
   const {
@@ -270,4 +270,4 @@ const InternalNodeReviewList = (props) => {
     </div>
   );
 };
-export default InternalNodeReviewList;
+export default AssociateNodeReviewList;

@@ -244,3 +244,5 @@ export const ASSIGNMENT_GROUP_ASSIGNMENT_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/assignment/review-list';
 export const ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/associate-node/assignment/review-list';
+export const SEND_AUTH_CODE_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/forgot-password';
+export const FORGOT_PASSWORD_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/confirm-password';

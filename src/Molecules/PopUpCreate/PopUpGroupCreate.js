@@ -16,7 +16,7 @@ import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 
-const GroupCreatePopup = (props) => {
+const PopUpGroupCreate = (props) => {
   const {
     headerOne,
     reducerObeject,
@@ -404,4 +404,4 @@ const GroupCreatePopup = (props) => {
   );
 };
 
-export default GroupCreatePopup;
+export default PopUpGroupCreate;

@@ -13,7 +13,7 @@ import {
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
-const TypeCreatePopup = (props) => {
+const PopUpTypeCreate = (props) => {
   const {
     headerOne,
     reducerObeject,
@@ -185,4 +185,4 @@ const TypeCreatePopup = (props) => {
   );
 };
 
-export default TypeCreatePopup;
+export default PopUpTypeCreate;

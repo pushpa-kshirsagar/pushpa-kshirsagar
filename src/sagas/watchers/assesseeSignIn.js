@@ -104,7 +104,7 @@ function* workerSignInAssesseeSaga(data) {
           }
         });
         yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
-        yield put({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
+        // yield put({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
       } else {
         //show message
       }
@@ -257,7 +257,7 @@ function* workerSignInAssesseeInfo(data) {
           }
         });
         yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
-        yield put({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
+        // yield put({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
       } else {
         //show message
       }

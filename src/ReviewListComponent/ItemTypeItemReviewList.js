@@ -30,7 +30,7 @@ import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import { getItemTypeItemDistinctApiCall } from '../Actions/ItemModuleAction';
 
-const ItemsTypeItemsReviewList = (props) => {
+const ItemTypeItemReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -268,4 +268,4 @@ const ItemsTypeItemsReviewList = (props) => {
     </div>
   );
 };
-export default ItemsTypeItemsReviewList;
+export default ItemTypeItemReviewList;

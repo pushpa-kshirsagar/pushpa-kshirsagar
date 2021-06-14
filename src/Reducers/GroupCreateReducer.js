@@ -4,7 +4,9 @@ import {
   SET_ASSESSMENT_GROUP_REDUCER_STATE,
   SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
   SET_ASSOCIATE_GROUP_REDUCER_STATE,
-  SET_ITEM_GROUP_REDUCER_STATE
+  SET_CULTURE_GROUP_REDUCER_STATE,
+  SET_ITEM_GROUP_REDUCER_STATE,
+  SET_JOB_GROUP_REDUCER_STATE
 } from '../actionType';
 
 const initialState = {
@@ -116,6 +118,46 @@ const initialState = {
         itemGroupTypePrimary: []
       }
     }
+  },
+  cultureProfileGroup: {
+    informationBasic: {
+      cultureProfileGroupName: '',
+      cultureProfileGroupNameVerification: false,
+      cultureProfileGroupDescription: '',
+      cultureProfileGroupPicture: '',
+      cultureProfileGroupPictureVerification: false
+    },
+    informationAllocation: {
+      cultureProfileGroupManager: {
+        cultureProfileGroupManagerPrimary: ['607d9470248db70ca6fe4e7a']
+      },
+      cultureProfileGroupNode: {
+        cultureProfileGroupNodeSecondary: []
+      },
+      cultureProfileGroupType: {
+        cultureProfileGroupTypePrimary: []
+      }
+    }
+  },
+  jobProfileGroup: {
+    informationBasic: {
+      jobProfileGroupName: '',
+      jobProfileGroupNameVerification: false,
+      jobProfileGroupDescription: '',
+      jobProfileGroupPicture: '',
+      jobProfileGroupPictureVerification: false
+    },
+    informationAllocation: {
+      jobProfileGroupManager: {
+        jobProfileGroupManagerPrimary: ['607d9470248db70ca6fe4e7a']
+      },
+      jobProfileGroupNode: {
+        jobProfileGroupNodeSecondary: []
+      },
+      jobProfileGroupType: {
+        jobProfileGroupTypePrimary: []
+      }
+    }
   }
 };
 
@@ -159,6 +201,22 @@ const GroupCreateReducer = (istate = initialState, action) => {
         ...istate,
         itemGroup: {
           ...istate.itemGroup,
+          informationBasic: action.payload
+        }
+      };
+    case SET_CULTURE_GROUP_REDUCER_STATE:
+      return {
+        ...istate,
+        cultureProfileGroup: {
+          ...istate.cultureProfileGroup,
+          informationBasic: action.payload
+        }
+      };
+    case SET_JOB_GROUP_REDUCER_STATE:
+      return {
+        ...istate,
+        jobProfileGroup: {
+          ...istate.jobProfileGroup,
           informationBasic: action.payload
         }
       };

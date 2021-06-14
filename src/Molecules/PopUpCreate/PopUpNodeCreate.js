@@ -4,27 +4,31 @@ import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
 import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
 import {
-  CLEAR_ROLE_REDUCER_STATE,
   POPUP_CLOSE,
-  CREATE_ASSESSEE_ROLE_SAGA,
-  SET_ASSESSEE_ROLE_REDUCER_STATE,
+  CREATE_NODE_SAGA,
+  SET_NODE_REDUCER_STATE,
   LOADER_START,
-  SET_ROLE_DYNAMIC_STATE,
+  CLEAR_NODE_REDUCER_STATE,
+  SET_NODE_DYNAMIC_SINGLE_STATE,
+  SET_DISPLAY_THREE_SINGLE_STATE,
   UPDATE_ASSESSEE_PERSONAL_INFO,
-  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
-import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
+import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 
-const AssesseeRoleCreatePopUp = () => {
+const PopUpNodeCreate = (props) => {
+  const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { assesseeRole } = useSelector((state) => state.RoleCreateReducer);
-  const { selectedAssociateInfo, coreRoleReviewListData } = useSelector(
+  const { nodeInformation } = useSelector((state) => state.NodeCreateReducer);
+  const { reviewMode, responseObject, statusPopUpValue } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
+  const { selectedAssociateInfo, coreNodeReviewListData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
-  const { reviewMode, responseObject, statusPopUpValue } = useSelector((state) => state.DisplayPaneThreeReducer);
+  console.log(nodeInformation);
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
@@ -32,35 +36,41 @@ const AssesseeRoleCreatePopUp = () => {
       type: SET_DISPLAY_THREE_SINGLE_STATE,
       payload: { stateName: 'createMode', value: '' }
     });
-    dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
+    dispatch({ type: CLEAR_NODE_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
-    let allocationObj = {
-        assesseeRoleGroup: assesseeRole.informationAllocation.assesseeRoleGroup[0]
+    let framworkObj = {
+      associateNodeAscendant: {
+        associateNodeAscendantPrimary:
+          nodeInformation.informationFramework.associateNodeAscendant
+            .associateNodeAscendantPrimary[0],
+        associateNodeAscendantSecondary: []
+      }
     };
-    var requestObj = {
+    let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-      assesseeRole: {
-        informationBasic: assesseeRole.informationBasic,
-        informationAllocation: allocationObj
+      associateNode: {
+        informationBasic: nodeInformation.informationBasic,
+        informationAllocation: nodeInformation.informationAllocation,
+        informationFramework: framworkObj
       }
     };
-
-    console.log('CREATE Role api', requestObj);
+    console.log('CREATE group api', reqBody);
     dispatch({ type: LOADER_START });
-    dispatch({ type: CREATE_ASSESSEE_ROLE_SAGA, payload: requestObj });
+    dispatch({ type: CREATE_NODE_SAGA, payload: reqBody });
   };
-  console.log('ROLE ASSESSEE POPUP>>>>>>>>>.', assesseeRole);
-  const updateRoleGroup = (e) => {
+  const updateParentNode = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
-    setRoleSelectedError('');
     let tagId = e.currentTarget.getAttribute('tag');
-    let tagIdArr = assesseeRole.informationAllocation.assesseeRoleGroup;
+    // document.getElementById(tagId).style.backgroundColor = 'white';
+    let tagIdArr =
+      nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary;
     if (tagIdArr.includes(tagId)) {
-      document.getElementById(tagId).style.backgroundColor = 'white';
+      setRoleSelectedError('');
+      // document.getElementById(tagId).style.backgroundColor = 'white';
       tagIdArr = tagIdArr.filter(function (number) {
         return number !== tagId;
       });
@@ -68,14 +78,14 @@ const AssesseeRoleCreatePopUp = () => {
       var arr = [];
       tagIdArr = [...arr];
       tagIdArr.push(tagId);
-      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+      // document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
     }
     dispatch({
-      type: SET_ROLE_DYNAMIC_STATE,
+      type: SET_NODE_DYNAMIC_SINGLE_STATE,
       payload: {
-        objectName: 'assesseeRole',
-        stateName: 'informationAllocation',
-        actualStateName: 'assesseeRoleGroup',
+        objectName: 'informationFramework',
+        stateName: 'associateNodeAscendant',
+        actualStateName: 'associateNodeAscendantPrimary',
         value: tagIdArr
       }
     });
@@ -85,57 +95,78 @@ const AssesseeRoleCreatePopUp = () => {
       <PopUpTextField
         isActive={isPopUpValue === 'NAMEPOPUP'}
         label={'name'}
-        actualLableValue={'assesseeRoleName'}
+        actualLableValue={'associateNodeName'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessee'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={assesseeRole.informationBasic}
-        typeOfSetObject={SET_ASSESSEE_ROLE_REDUCER_STATE}
+        basicInfo={nodeInformation.informationBasic}
+        typeOfSetObject={SET_NODE_REDUCER_STATE}
         isRequired={true}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'description'}
-        actualLableValue={'assesseeRoleDescription'}
+        actualLableValue={'associateNodeDescription'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
-        basicInfo={assesseeRole.informationBasic}
+        basicInfo={nodeInformation.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
-        typeOfSetObject={SET_ASSESSEE_ROLE_REDUCER_STATE}
+        typeOfSetObject={SET_NODE_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
-        nextPopUpValue={'ROLEGROUPPOPUP'}
+        nextPopUpValue={'MANAGERLISTPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
-        isActive={isPopUpValue === 'ROLEGROUPPOPUP'}
+        isActive={isPopUpValue === 'MANAGERLISTPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
-        headerOneBadgeTwo={'information'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'PARENTLISTPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a role'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'PARENTLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
-        inputHeader={'group'}
-        inputHeaderBadge={''}
+        inputHeader={'node'}
+        inputHeaderBadge={'ascendant'}
+        inputHeaderBadgeTwo={'primary'}
+        infoMsg={'select a node'}
+        ListData={coreNodeReviewListData}
         isRequired={true}
-        selectedList={assesseeRole?.informationAllocation?.assesseeRoleGroup}
+        selectedList={
+          nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary
+        }
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
-        infoMsg={'select a group'}
-        ListData={coreRoleReviewListData}
-        textOne={'assesseeRoleGroupName'}
-        textTwo={'assesseeRoleGroupDescription'}
-        onClickEvent={updateRoleGroup}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={updateParentNode}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirmation
@@ -149,8 +180,8 @@ const AssesseeRoleCreatePopUp = () => {
       <PopUpConfirmation
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'create'}
         onClickYes={onClickYes}
       />
@@ -160,11 +191,11 @@ const AssesseeRoleCreatePopUp = () => {
         labelBadgeOne={'primary'}
         actualLableValue={'assesseeTagPrimary'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
         basicInfo={
-          responseObject?.informationEngagement?.assesseeRoleTag?.assesseeRoleTagPrimary || ''
+          responseObject?.informationEngagement?.associateNodeTag?.associateNodeTagPrimary || ''
         }
         nextPopUpValue={''}
         isNotRevised={true}
@@ -177,12 +208,12 @@ const AssesseeRoleCreatePopUp = () => {
         labelBadgeOne={'start'}
         actualLableValue={''}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
         basicInfo={
-          responseObject?.informationEngagement?.assesseeRoleTenure
-            ?.assesseeRoleTenureDateTimeStart || 'mm/dd/yyyy --:-- --'
+          responseObject?.informationEngagement?.associateNodeTenure
+            ?.associateNodeTenureDateTimeStart || 'mm/dd/yyyy --:-- --'
         }
         nextPopUpValue={''}
         isNotRevised={true}
@@ -195,12 +226,12 @@ const AssesseeRoleCreatePopUp = () => {
         labelBadgeOne={'end'}
         actualLableValue={''}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
         basicInfo={
-          responseObject?.informationEngagement?.assesseeRoleTenure
-            ?.assesseeRoleTenureDateTimeEnd || 'mm/dd/yyyy --:-- --'
+          responseObject?.informationEngagement?.associateNodeTenure
+            ?.associateNodeTenureDateTimeEnd || 'mm/dd/yyyy --:-- --'
         }
         nextPopUpValue={''}
         isNotRevised={true}
@@ -220,8 +251,8 @@ const AssesseeRoleCreatePopUp = () => {
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
         isRequired={true}
         basicInfo={statusPopUpValue}
@@ -234,11 +265,11 @@ const AssesseeRoleCreatePopUp = () => {
       <PopUpTagSecondary
         isActive={isPopUpValue === 'TAGSECONDARYPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'assessees'}
-        headerOneBadgeOne={'role'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
-        tagSecondary={assesseeRole?.informationEngagement || {}}
-        signInSetup={assesseeRole?.informationSetup || {}}
+        tagSecondary={responseObject?.informationEngagement || {}}
+        signInSetup={responseObject?.informationSetup || {}}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_ENGAGEMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -247,4 +278,4 @@ const AssesseeRoleCreatePopUp = () => {
   );
 };
 
-export default AssesseeRoleCreatePopUp;
+export default PopUpNodeCreate;

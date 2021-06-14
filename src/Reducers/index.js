@@ -16,6 +16,8 @@ import TypeCreateReducer from './TypeCreateReducer';
 import SignOnReducer from './SignOnReducer';
 import NodeCreateReducer from './NodeCreateReducer';
 import ItemCreateReducer from './ItemCreateReducer';
+import CultureProfileCreateReducer from './CultureProfileCreateReducer';
+import JobProfileCreateReducer from './JobProfileCreateReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -34,5 +36,7 @@ export default combineReducers({
   TypeCreateReducer,
   SignOnReducer,
   NodeCreateReducer,
-  ItemCreateReducer
+  ItemCreateReducer,
+  CultureProfileCreateReducer,
+  JobProfileCreateReducer
 });

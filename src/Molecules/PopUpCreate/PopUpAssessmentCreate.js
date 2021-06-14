@@ -14,7 +14,7 @@ import {
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
-const AssessmentCreatePopup = (props) => {
+const PopUpAssessmentCreate = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const {
@@ -296,4 +296,4 @@ const AssessmentCreatePopup = (props) => {
   );
 };
 
-export default AssessmentCreatePopup;
+export default PopUpAssessmentCreate;

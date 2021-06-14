@@ -5,11 +5,13 @@ import {
   FILTERMODE,
   FILTERMODE_ENABLE,
   POPUP_OPEN,
+  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
@@ -23,12 +25,9 @@ import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import {
-  getItemGroupItemDistinctApiCall,
-  getNodeRelatedItemsDistinctApiCall
-} from '../Actions/ItemModuleAction';
+import { getItemGroupItemDistinctApiCall } from '../Actions/ItemModuleAction';
 
-const ItemsNodeItemsReviewList = (props) => {
+const ItemGroupItemReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -58,19 +57,19 @@ const ItemsNodeItemsReviewList = (props) => {
     console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray);
     setIsShowReviseIcon(true);
     if (typeOfMiddlePaneList !== '') {
-      // dispatch({
-      //   type: SET_MIDDLEPANE_STATE,
-      //   payload: {
-      //     middlePaneHeader: 'items',
-      //     middlePaneHeaderBadgeOne: 'group',
-      //     middlePaneHeaderBadgeTwo: 'active',
-      //     middlePaneHeaderBadgeThree: '',
-      //     middlePaneHeaderBadgeFour: '',
-      //     typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
-      //     scanCount: reviewListDistinctData.length,
-      //     showMiddlePaneState: true
-      //   }
-      // });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'items',
+          middlePaneHeaderBadgeOne: 'group',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'itemsGroupDistinctReviewList',
+          scanCount: reviewListDistinctData.length,
+          showMiddlePaneState: true
+        }
+      });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: '' }
@@ -82,9 +81,9 @@ const ItemsNodeItemsReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: selectedTagsArray });
+    dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     dispatch({
-      type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
       payload: unselectedTagsArray
     });
   };
@@ -144,25 +143,21 @@ const ItemsNodeItemsReviewList = (props) => {
       type: SET_MIDDLEPANE_STATE,
       payload: {
         middlePaneHeader: 'items',
-        middlePaneHeaderBadgeOne: 'node',
+        middlePaneHeaderBadgeOne: 'group',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'associateNodeDistinctReviewList',
+        typeOfMiddlePaneList: 'itemsGroupDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
-    });
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'scanString', value: '' }
     });
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getNodeRelatedItemsDistinctApiCall(
+    getItemGroupItemDistinctApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
@@ -170,8 +165,7 @@ const ItemsNodeItemsReviewList = (props) => {
       middlePaneHeaderBadgeOne,
       listDistinctData.id,
       '',
-      false,
-      'items'
+      false
     );
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
@@ -214,11 +208,11 @@ const ItemsNodeItemsReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.associateNodeName}
-          textTwoOne={listDistinctData.associateNodeDescription}
+          textOneOne={listDistinctData.itemGroupName}
+          textTwoOne={listDistinctData.itemGroupDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'node'}
+          labelTwoTwo={'group'}
           onClickIconOne={closeRelatedList}
           isAlliance
         />
@@ -247,7 +241,16 @@ const ItemsNodeItemsReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'itemNodeItemDistinctinactive' && (
+      {FilterMode === 'itemGroupItemeRevise' && (
+        <FooterIconTwo
+          FilterModeEnable={isShowReviseIcon}
+          FilterMode={FilterMode}
+          onClick={onClickRevise}
+          primaryIcon={revisePrimaryIcon}
+          secondaryIcon={reviseSecondaryIcons}
+        />
+      )}
+      {FilterMode === 'itemGroupItemDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}
@@ -259,4 +262,4 @@ const ItemsNodeItemsReviewList = (props) => {
     </div>
   );
 };
-export default ItemsNodeItemsReviewList;
+export default ItemGroupItemReviewList;

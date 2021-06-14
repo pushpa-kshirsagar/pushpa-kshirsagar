@@ -30,7 +30,7 @@ import { getAssociateNodeApiCall, sortingListInAsc } from '../Actions/AssociateM
 import { Fragment } from 'react';
 import Card from '../Molecules/Card/Card';
 import { assesseeStatus } from '../Actions/StatusAction';
-const AssociatesNodeReviewList = (props) => {
+const IguruNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const [renderComp, setRenderComp] = useState(false);
   const inputRef = useRef(null);
@@ -230,4 +230,4 @@ const AssociatesNodeReviewList = (props) => {
     </div>
   );
 };
-export default AssociatesNodeReviewList;
+export default IguruNodeReviewList;

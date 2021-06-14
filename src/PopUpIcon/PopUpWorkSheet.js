@@ -10,7 +10,7 @@ import { DialogTitle, IconButton, Paper } from '@material-ui/core';
 import { CLEAR_ASSESSEE_INFO, POPUP_CLOSE } from '../actionType';
 import { useDispatch } from 'react-redux';
 
-const PopUpSpreadSheet = (props) => {
+const PopUpWorkSheet = (props) => {
   // const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   const {
@@ -183,7 +183,7 @@ const PopUpSpreadSheet = (props) => {
     </div>
   );
 };
-PopUpSpreadSheet.propTypes = {
+PopUpWorkSheet.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -198,4 +198,4 @@ PopUpSpreadSheet.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopUpSpreadSheet;
+export default PopUpWorkSheet;
