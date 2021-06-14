@@ -29,11 +29,25 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
   //   if (!string) return '';
   //   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   // }
+  let assignmentList = [];
+  if (relatedReviewListPaneThree) {
+    assignmentList = relatedReviewListPaneThree?.assignment || [];
+  }
+  let assignmentArray = [];
+  assignmentList.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    assignmentArray.push({
+      id,
+      textOne: informationBasic?.assignmentName || '',
+      textTwo: informationBasic?.assignmentDescription || '',
+      status: ''
+    });
+  });
 
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'assignments',
+      labelTextOneOne: 'assignment',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -41,26 +55,7 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'assignments',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'assignments',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'assignments',
-              status: ''
-            }
-          ]
+          innerList: assignmentArray
         }
       ],
       innerInfo: 'No Information',
@@ -68,7 +63,7 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
     }
   ];
 
-  const onclickReviseAssessment = (e) => {
+  const onclickReviseAssignment = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     if (labelName === 'assignment' && selectedBadgeName === 'distinct') {
@@ -85,11 +80,14 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
         assignmentGroupDescription: responseObject.informationBasic.assignmentGroupDescription,
         assignmentGroupStatus: responseObject.informationEngagement.assignmentGroupStatus
       };
-      let existingAssignmentId =
-        relatedReviewListPaneThree &&
-        relatedReviewListPaneThree.assignment.map((val) => {
-          return val.id;
-        });
+      let existingAssignmentId = [];
+      if (relatedReviewListPaneThree && relatedReviewListPaneThree.assignment) {
+        existingAssignmentId =
+          relatedReviewListPaneThree &&
+          relatedReviewListPaneThree.assignment.map((val) => {
+            return val.id;
+          });
+      }
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assignmentGroupAssignmentRevise' }
@@ -106,7 +104,7 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
         payload: {
           request: requestObect,
           revisedGroupObject: revisedGroupObject,
-          existingAssesseeId: existingAssignmentId,
+          existingAssignmentId: existingAssignmentId,
           typeOfMiddlePaneList: 'assignmentGroupAssignmentReviewList'
         }
       });
@@ -128,14 +126,14 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
                 <div key={ob.id}>
                   {ob.isListCard ? (
                     <AccordianListCard
-                      onClickRevise={onclickReviseAssessment}
+                      onClickRevise={onclickReviseAssignment}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}
                     />
                   ) : (
                     <AccordianInfoCard
-                      onClickRevise={onclickReviseAssessment}
+                      onClickRevise={onclickReviseAssignment}
                       accordianObject={ob}
                       mode={reviewMode}
                     />

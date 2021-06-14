@@ -71,7 +71,8 @@ import {
   getAssessmentTypeAssessmentReqObj,
   getNodeAssessmentsReqObj,
   getItemGroupItemReqObj,
-  getItemTypeItemReqObj
+  getItemTypeItemReqObj,
+  getAssignmentTypeAssignmentReqObj
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -750,11 +751,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
+        let assignmentTypeAssignmentReqBody = getAssignmentTypeAssignmentReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSIGNMENT_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            assignmentTypeAssignmentReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

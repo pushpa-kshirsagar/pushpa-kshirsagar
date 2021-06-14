@@ -276,7 +276,7 @@ const DisplayPageOne = () => {
           objectName={'cultureProfile'}
         />
       )}
-      {popupMode === 'job profilesGROUPCREATE' && (
+      {/* {popupMode === 'job profilesGROUPCREATE' && (
         <PopUpGroupCreate
           headerOne={'job profiles'}
           reducerObeject={jobProfileGroup}
@@ -285,7 +285,7 @@ const DisplayPageOne = () => {
           setReducerObject={SET_JOB_GROUP_REDUCER_STATE}
           objectName={'jobProfile'}
         />
-      )}
+      )} */}
       {popupMode === 'assesseesTYPECREATE' && (
         <PopUpTypeCreate
           headerOne={'assessees'}

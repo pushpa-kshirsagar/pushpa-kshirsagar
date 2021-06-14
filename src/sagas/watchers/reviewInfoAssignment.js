@@ -42,10 +42,10 @@ function* workerReviewInfoAssignmentSaga(data) {
         }
       });
       if (isReviseMode) {
-        const { informationAllocation } = userResponse.responseObject[0];
+        const { informationAllocation, informationBasic } = userResponse.responseObject[0];
         yield put({
           type: SET_ASSIGNMENT_BASIC_REDUCER_STATE,
-          payload: userResponse.responseObject[0].informationBasic
+          payload: informationBasic
         });
         if (
           informationAllocation &&

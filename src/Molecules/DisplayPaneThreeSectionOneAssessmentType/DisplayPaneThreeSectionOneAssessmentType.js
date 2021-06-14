@@ -16,11 +16,13 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   let groupList = [];
-  // if (informationAllocation && informationAllocation.assessmentTypeGroup) {
-  //   groupList.push({
-  //     id: informationAllocation.assessmentTypeGroup,
-  //     textOne: informationBasic?.assessmentName || '',
-  //     textTwo: informationBasic?.assessmentDescription || '',
+  // let assessmentTypeGroupList = [];
+  // const tempTypeGroup = informationAllocation?.assessmentTypeGroup;
+  // if (tempTypeGroup) {
+  //   assessmentTypeGroupList.push({
+  //     id: tempTypeGroup?.id || '',
+  //     textOne: tempTypeGroup?.informationBasic?.assessmentTypeGroupName || '',
+  //     textTwo: tempTypeGroup?.informationBasic?.assessmentTypeGroupDescription || '',
   //     status: ''
   //   });
   // }

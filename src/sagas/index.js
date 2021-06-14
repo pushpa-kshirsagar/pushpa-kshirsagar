@@ -2,7 +2,7 @@ import { all, fork } from 'redux-saga/effects';
 import watchcreateAssociateSaga from './watchers/associateCreate';
 import watchcreateAssesseeSaga from './watchers/assesseeCreate';
 import watchReviewListAssesseeSaga from './watchers/assesseeReviewList';
-import watchReviewInfoAssesseeSaga from './watchers/reviewInfoAssessee';
+import watchReviewInfoAssesseeSaga from './watchers/assesseeReviewRevise';
 import watchReviewInfoAssociateSaga from './watchers/reviewInfoAssociate';
 import watchReviewListAssociateSaga from './watchers/associateReviewList';
 import watchReviewRolesListSaga from './watchers/roleReviewList';
@@ -31,7 +31,6 @@ import watchReviewAssesseeTypeInfoSaga from './watchers/reviewInfoAssesseeType';
 import watchCreateAssignmentSaga from './watchers/assignmentCreate';
 import watchSignInAssesseeSaga from './watchers/assesseeSignIn';
 import watchConfirmAssesseeSaga from './watchers/confirmAssessee';
-import watchReviseInfoAssesseeSaga from './watchers/reviseAssesseeInfo';
 import workerReviseInfoAssociateSaga from './watchers/reviseAssociateInfo';
 import watchcreateNodeSaga from './watchers/associateNodeCreate';
 import watchReviewAssociatesNodeListSaga from './watchers/associateNodeReviewList';
@@ -75,7 +74,6 @@ export default function* root() {
     fork(watchReviewInfoAssignmentSaga),
     fork(watchSignInAssesseeSaga),
     fork(watchConfirmAssesseeSaga),
-    fork(watchReviseInfoAssesseeSaga),
     fork(workerReviseInfoAssociateSaga),
     fork(watchcreateNodeSaga),
     fork(watchReviewAssociatesNodeListSaga),
