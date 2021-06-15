@@ -44,7 +44,8 @@ import {
   GET_ITEM_GROUP_REVIEW_INFO_SAGA,
   GET_ITEM_TYPE_REVIEW_INFO_SAGA,
   GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
-  GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA
+  GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA,
+  GET_CULTURE_PROFILE_INFO_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -432,6 +433,39 @@ const PopUpMiddlePaneList = (props) => {
       if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
         dispatch({
           type: GET_ITEM_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue,
+            isReviseMode,
+            reqBody: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary, //605255729d3c823d3964e0ec
+              filter: true,
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'String',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'cultureProfilesDistinctReviewList') {
+        dispatch({
+          type: GET_CULTURE_PROFILE_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
             isReviseMode,
