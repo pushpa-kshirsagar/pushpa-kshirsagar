@@ -216,6 +216,7 @@ const PopUpDisplayPanelAssessee = (props) => {
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('parentId');
       localStorage.removeItem('assesseeId');
+      localStorage.clear();
       dispatch({ type: RESET_ALL_REDUCER });
       // signOut();
     }

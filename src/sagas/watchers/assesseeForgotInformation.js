@@ -29,7 +29,7 @@ function* workerSendAuthCodeSaga(data) {
     if (response.responseCode === '000') {
       yield put({ type: SET_SIGN_IN_STATUS, payload: 'AUTH_CODE_SEND' });
     } else {
-      yield put({ type: SET_SIGN_IN_STATUS, payload: '' });
+      yield put({ type: SET_SIGN_IN_STATUS, payload: 'CODE '+response.responseCode });
     }
     yield put({ type: LOADER_STOP });
   } catch (e) {

@@ -12,6 +12,7 @@ import { AccountContext } from '../../Account';
 import {
   INCORRECT_INFORMATION_ERROR_MESSAGE,
   INFORMATION_MISMATCHED_ERROR_MESSAGE,
+  INVALID_AUTH_CODE_ERROR_MESSAGE,
   INVALID_PASSWORD_ERROR_MESSAGE,
   REQUIRED_ERROR_MESSAGE
 } from '../../errorMessage';
@@ -60,7 +61,7 @@ const DisplayPageSignIn = () => {
       setIsCredentialsInValid('');
       let path = `/dashboard`;
       history.push(path);
-      window.location.reload();
+      // window.location.reload();
       dispatch({ type: RESET_ALL_REDUCER });
       dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
     }
@@ -76,6 +77,14 @@ const DisplayPageSignIn = () => {
     }
     if (assesseeSignInStatus === 'AUTH_CODE_SEND') {
       setStage('confirmPassword');
+    }
+    if (assesseeSignInStatus === 'CODE 400') {
+      setCodeError(INCORRECT_INFORMATION_ERROR_MESSAGE);
+      dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
+    }
+    if (assesseeSignInStatus === 'CODE 001') {
+      setForgotCredentialError(INCORRECT_INFORMATION_ERROR_MESSAGE);
+      dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
     }
     if (assesseeSignInStatus === 'PASSWORD_UPDATED') {
       let path = SIGN_IN_URL;
@@ -134,6 +143,7 @@ const DisplayPageSignIn = () => {
     }
     dispatch({ type: LOADER_START });
     dispatch({ type: SEND_AUTH_CODE_FORGOT_PASS, payload: { credential: forgotCredential } });
+    setForgotCredentialError('');
     // getUser(forgotCredential).forgotPassword({
     //   onSuccess: (data) => {
     //     console.log('onSuccess IN FORGOT PASSWORD', data);
@@ -162,7 +172,7 @@ const DisplayPageSignIn = () => {
       if (revisedPassword === confirmRevisedPassword) {
         setRevisedPasswordError('');
         setConfirmRevisedPasswordError('');
-
+        setCodeError('');
         //code for forgot password
         dispatch({ type: LOADER_START });
         dispatch({
@@ -354,6 +364,7 @@ const DisplayPageSignIn = () => {
                   errorMsg={codeError}
                   onClick={(e) => {
                     setCode(e.target.value);
+                    setCodeError('');
                   }}
                 />
                 <InputField
@@ -364,6 +375,7 @@ const DisplayPageSignIn = () => {
                   errorMsg={revisedPasswordError}
                   onClick={(e) => {
                     setRevisedPassword(e.target.value);
+                    setRevisedPasswordError('');
                   }}
                 />
                 <InputField
@@ -374,6 +386,7 @@ const DisplayPageSignIn = () => {
                   errorMsg={confirmRevisedPasswordError}
                   onClick={(e) => {
                     setConfirmRevisedPassword(e.target.value);
+                    setConfirmRevisedPasswordError('');
                   }}
                 />
               </FormControl>
