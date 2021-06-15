@@ -43,7 +43,8 @@ import {
   ASSESSMENT_GROUP_REVISE_INFO_SAGA,
   ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
   ITEM_GROUP_REVISE_INFO_SAGA,
-  ITEM_TYPE_REVISE_INFO_SAGA
+  ITEM_TYPE_REVISE_INFO_SAGA,
+  CLEAR_CULTURE_REDUCER_STATE
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -104,6 +105,10 @@ import {
   getItemGroupItemReqObj,
   getItemTypeItemReqObj
 } from '../../Actions/GenericActions';
+import DisplayPaneThreeSectionOneCultureProfileDistinct from '../../Molecules/DisplayPaneThreeSectionOneCultureProfileDistinct/DisplayPaneThreeSectionOneCultureProfileDistinct';
+import DisplayPaneThreeSectionTwoCultureProfileDistinct from '../../Molecules/DisplayPaneThreeSectionTwoCultureProfileDistinct/DisplayPaneThreeSectionTwoCultureProfileDistinct';
+import DisplayPaneThreeSectionOneJobProfileDistinct from '../../Molecules/DisplayPaneThreeSectionOneJobProfileDistinct/DisplayPaneThreeSectionOneJobProfileDistinct';
+import DisplayPaneThreeSectionTwoJobProfileDistinct from '../../Molecules/DisplayPaneThreeSectionTwoJobProfileDistinct/DisplayPaneThreeSectionTwoJobProfileDistinct';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -365,6 +370,34 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsCultureProfile = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneCultureProfileDistinct,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoCultureProfileDistinct,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
+  const rightPaneSectionsJobProfile = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneJobProfileDistinct,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionTwoJobProfileDistinct,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssignment = [
     {
       id: 'section1',
@@ -416,6 +449,12 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssessment, setSelectedSectionAssessment] = useState(
     rightPaneSectionsAssessment[0]
   );
+  const [selectedSectionCultureProfile, setSelectedSectionCultureProfile] = useState(
+    rightPaneSectionsCultureProfile[0]
+  );
+  const [selectedSectionJobProfile, setSelectedSectionJobProfile] = useState(
+    rightPaneSectionsJobProfile[0]
+  );
   const [selectedSectionAssignment, setSelectedSectionAssignment] = useState(
     rightPaneSectionsAssignment[0]
   );
@@ -443,6 +482,8 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateType(rightPaneSectionsAssociateType[0]);
     setSelectedSectionItemType(rightPaneSectionsItemType[0]);
     setSelectedSectionAssessment(rightPaneSectionsAssessment[0]);
+    setSelectedSectionCultureProfile(rightPaneSectionsCultureProfile[0]);
+    setSelectedSectionJobProfile(rightPaneSectionsJobProfile[0]);
     setSelectedSectionAssignment(rightPaneSectionsAssignment[0]);
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);
     setSelectedSectionAssociateNode(rightPaneSectionsAssociateNode[0]);
@@ -1045,6 +1086,31 @@ export const DisplayPaneThree = () => {
     });
   };
 
+  const onClickCreateCultureProfile = () => {
+    console.log('ON CLICK CREATE CultureProfile');
+    dispatch({ type: CLEAR_CULTURE_REDUCER_STATE });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedInformationAllorKey', value: headerOneBadgeTwo }
+    });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+    });
+  };
+  const onClickCreateJobProfile = () => {
+    console.log('ON CLICK CREATE CultureProfile');
+    dispatch({ type: CLEAR_CULTURE_REDUCER_STATE });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'selectedInformationAllorKey', value: headerOneBadgeTwo }
+    });
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+    });
+  };
+
   const onClickCreateAssignment = () => {
     console.log('ON CLICK CREATE ASSIGNMENT');
     dispatch({ type: CLEAR_ASSIGNMENT_INFO });
@@ -1181,6 +1247,12 @@ export const DisplayPaneThree = () => {
   const createItemPrimaryIcon = [{ label: 'create', onClick: onClickCreateItem, Icon: AddIcon }];
   const createAssessmentPrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessment, Icon: AddIcon }
+  ];
+  const createCultureProfilePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateCultureProfile, Icon: AddIcon }
+  ];
+  const createJobProfilePrimaryIcon = [
+    { label: 'create', onClick: onClickCreateCultureProfile, Icon: AddIcon }
   ];
   const createAssignmentPrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssignment, Icon: AddIcon }
@@ -1508,6 +1580,53 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseCultureProfileBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'CULTUREPROFILECREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CULTUREPROFILECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'CULTUREPROFILECREATE' }
+      });
+    }
+  };
+  const reviseJobProfileBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('====>', labelName);
+    const profileId = e.currentTarget.getAttribute('id');
+    if (profileId === 'profile-icon') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'JOBPROFILECREATE' }
+      });
+    }
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'JOBPROFILECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'JOBPROFILECREATE' }
+      });
+    }
+  };
+
   const reviseAssignmentBasicInformation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('====>', labelName);
@@ -2012,6 +2131,100 @@ export const DisplayPaneThree = () => {
                 FilterMode={FilterMode}
                 onClick={onClickCreateAssessment}
                 primaryIcon={createAssessmentPrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'culture profiles' &&
+        headerOneBadgeOne === 'information' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={informationBasic?.cultureProfileFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.cultureProfileName || 'No Information'}
+                  textOneTwo={informationBasic.cultureProfileDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  onClickRevise={reviseCultureProfileBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsCultureProfile}
+                selectedSection={selectedSectionCultureProfile}
+                setSelectedSection={setSelectedSectionCultureProfile}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'cultureProfile' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateCultureProfile}
+                primaryIcon={createCultureProfilePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'job profiles' &&
+        headerOneBadgeOne === 'information' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={informationBasic?.jobProfileFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={informationBasic.jobProfileName || 'No Information'}
+                  textOneTwo={informationBasic.jobProfileDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  onClickRevise={reviseJobProfileBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsJobProfile}
+                selectedSection={selectedSectionJobProfile}
+                setSelectedSection={setSelectedSectionJobProfile}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'jobProfile' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateJobProfile}
+                primaryIcon={createJobProfilePrimaryIcon}
                 secondaryIcon={[]}
               />
             )}
