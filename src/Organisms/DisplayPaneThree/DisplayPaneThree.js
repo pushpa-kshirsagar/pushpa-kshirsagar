@@ -1175,7 +1175,7 @@ export const DisplayPaneThree = () => {
     });
     dispatch({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CULTURECREATE' }
     });
   };
   const onClickCreateJobProfile = () => {
@@ -1808,19 +1808,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'CULTUREPROFILECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'CULTURECREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CULTUREPROFILECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CULTURECREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'CULTUREPROFILECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'CULTURECREATE' }
       });
     }
   };

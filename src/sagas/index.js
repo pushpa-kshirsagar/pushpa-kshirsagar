@@ -43,6 +43,7 @@ import watchReviewItemGroupInfoSaga from './watchers/reviewInfoItemGroup';
 import watchForgotCredentialSaga from './watchers/assesseeForgotInformation';
 import watchcreateCultureProfileSaga from './watchers/cultureProfileCreate';
 import watchReviewListCultureProfileSaga from './watchers/cultureProfileReviewList';
+import watchReviewInfoCultureProfileSaga from './watchers/cultureProfileReviewRevise';
 
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
@@ -90,6 +91,7 @@ export default function* root() {
     fork(watchReviewItemTypeInfoSaga),
     fork(watchForgotCredentialSaga),
     fork(watchcreateCultureProfileSaga),
-    fork(watchReviewListCultureProfileSaga)
+    fork(watchReviewListCultureProfileSaga),
+    fork(watchReviewInfoCultureProfileSaga)
   ]);
 }
