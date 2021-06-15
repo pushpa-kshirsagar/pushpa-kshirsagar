@@ -95,6 +95,7 @@ import {
 } from '../Actions/AssessmentModuleAction';
 import { ADMINISTRATOR_SECONDARY_ID } from '../endpoints';
 import { assignmentTypeApiCall } from '../Actions/AssignmentModuleAction';
+import { getCultureProfilesDistinctApiCall } from '../Actions/ActionCultureProfile';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -581,6 +582,19 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOneBadgeOne === 'review'
     ) {
       getItemsDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        popupHeaderOne,
+        dispatch
+      );
+    }
+    if (
+      clickValue === 'distinct' &&
+      popupHeaderOne === 'culture profiles' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getCultureProfilesDistinctApiCall(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
         countPage,

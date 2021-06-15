@@ -19,6 +19,7 @@ export const ASSESSEES_URL = 'https://3pbuyvo5wk.execute-api.ap-south-1.amazonaw
 export const ASSOCIATES_URL = 'https://gfxqx4a5uc.execute-api.ap-south-1.amazonaws.com';
 export const ASSESSMENTS_URL = 'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com';
 export const ASSIGNMENTS_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com';
+export const ANALYTICS = 'https://5kgxms9tld.execute-api.ap-south-1.amazonaws.com';
 
 export const ASSESSEE_CREATE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/create';
 export const ASSOCIATE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-sign-on';
@@ -246,3 +247,5 @@ export const ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/associate-node/assignment/review-list';
 export const SEND_AUTH_CODE_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/forgot-password';
 export const FORGOT_PASSWORD_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/confirm-password';
+export const CULTURE_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/culture-profile/create';
+export const CULTURE_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/culture-profile/review-list';

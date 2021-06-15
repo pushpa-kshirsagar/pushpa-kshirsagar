@@ -4576,3 +4576,357 @@ export const getAssignmentTypeAssignmentScanReqObj = (
     ]
   };
 };
+
+export const makeCultureProfileObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.cultureProfileName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.cultureProfileStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeCultureProfileScanObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.cultureProfileName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.cultureProfileStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.cultureProfileName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.cultureProfileDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeCultureProfileGroupObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.cultureProfileGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.cultureProfileGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeCultureProfileGroupScanObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.cultureProfileGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.cultureProfileGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.cultureProfileGroupName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.cultureProfileGroupDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeCultureProfileTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.cultureProfileTypeName',
+      order: 'asc'
+    },
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.cultureProfileTypeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeCultureProfileTypeScanObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.cultureProfileTypeName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.cultureProfileTypeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.cultureProfileTypeName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.cultureProfileTypeDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};

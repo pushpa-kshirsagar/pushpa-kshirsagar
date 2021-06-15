@@ -50,6 +50,7 @@ function* workerSignInAssesseeSaga(data) {
     if (userResponse.responseCode === '000') {
       console.log('SIGN IN ASSESSEE=======>', userResponse);
       localStorage.setItem('token', userResponse?.responseObject?.cognitoResponse?.accessToken);
+      localStorage.setItem('idToken', userResponse?.responseObject?.cognitoResponse?.idToken);
       localStorage.setItem('assesseeId', data.payload.credential);
       localStorage.setItem(
         'refreshToken',

@@ -9,6 +9,8 @@ import {
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_CULTURE_REDUCER_STATE,
   SET_CULTURE_DYNAMIC_SINGLE_STATE,
+  LOADER_START,
+  CREATE_CULTURE_SAGA
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
@@ -33,11 +35,12 @@ const PopUpCultureProfileCreate = (props) => {
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      cultureProfile: cultureProfileInformation
     };
     console.log('CREATE type api', reqBody);
-    // dispatch({ type: LOADER_START });
-    // dispatch({ type: CREATE_TYPE_SAGA, payload: reqBody });
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_CULTURE_SAGA, payload: reqBody });
   };
   const updateGroup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
@@ -53,7 +56,7 @@ const PopUpCultureProfileCreate = (props) => {
       }
     });
   };
-  console.log("cultureProfileInformation", cultureProfileInformation);
+  console.log('cultureProfileInformation', cultureProfileInformation);
   return (
     <div>
       <PopUpTextField
@@ -98,11 +101,11 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={
-          [{ id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
           { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }]
-        }
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
+        ]}
         selectedList={[]}
         textOne={'name'}
         textTwo={'description'}
@@ -120,11 +123,11 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'manager'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a manager'}
-        ListData={
-          [{ id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
           { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }]
-        }
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
         selectedList={[]}
         textOne={'name'}
         textTwo={'description'}
@@ -142,11 +145,11 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
-        ListData={
-          [{ id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
           { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }]
-        }
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
+        ]}
         selectedList={[]}
         textOne={'name'}
         textTwo={'description'}
@@ -164,11 +167,11 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'type'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a type'}
-        ListData={
-          [{ id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
           { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }]
-        }
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
+        ]}
         selectedList={[]}
         textOne={'name'}
         textTwo={'description'}
