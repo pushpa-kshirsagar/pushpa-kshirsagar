@@ -95,7 +95,10 @@ import {
 } from '../Actions/AssessmentModuleAction';
 import { ADMINISTRATOR_SECONDARY_ID } from '../endpoints';
 import { assignmentTypeApiCall } from '../Actions/AssignmentModuleAction';
-import { getCultureProfilesDistinctApiCall } from '../Actions/ActionCultureProfile';
+import {
+  cultureProfileCreatePopup,
+  getCultureProfilesDistinctApiCall
+} from '../Actions/ActionCultureProfile';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -139,6 +142,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'interviews' ||
       // popupHeaderOne === 'exchange' ||
       popupHeaderOne === 'assessment centres' ||
+      popupHeaderOne === 'culture profiles' ||
+      popupHeaderOne === 'job profiles' ||
       popupHeaderOne === 'associate'
     ) {
       dispatch({
@@ -170,7 +175,10 @@ const PopUpDisplayPanelAssociate = (props) => {
     let reviseSecondaryOptionCheckValue = '';
     let valueArr = [];
 
-    if (clickValue === 'administrators' || clickValue === 'managers') {
+    if (
+      (clickValue === 'administrators' || clickValue === 'managers') &&
+      popupHeaderOne !== 'culture profiles'&& popupHeaderOne !== 'job profiles'
+    ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
       reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
@@ -213,6 +221,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       clickValue === 'nodes' &&
       popupHeaderOne !== 'administrators' &&
       popupHeaderOne !== 'items' &&
+      popupHeaderOne !== 'culture profiles' &&
+      popupHeaderOne !== 'job profiles' &&
       popupHeaderOne !== 'interviews' &&
       popupHeaderOne !== 'managers'
     ) {
@@ -231,6 +241,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne !== 'assessees' &&
       popupHeaderOne !== 'assessments' &&
       popupHeaderOne !== 'assessments' &&
+      popupHeaderOne !== 'culture profiles' &&
+      popupHeaderOne !== 'job profiles' &&
       popupHeaderOne !== 'items'
     ) {
       revisePopupHeaderOne = clickValue;
@@ -246,7 +258,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne !== 'managers' &&
       popupHeaderOne !== 'assessees' &&
       popupHeaderOne !== 'assessments' &&
-      popupHeaderOne !== 'assessments' &&
+      popupHeaderOne !== 'culture profiles' &&
+      popupHeaderOne !== 'job profiles' &&
       popupHeaderOne !== 'items'
     ) {
       revisePopupHeaderOne = clickValue;
@@ -781,6 +794,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       clickValue === 'nodes' &&
       (popupHeaderOne === 'administrators' ||
         popupHeaderOne === 'managers' ||
+        popupHeaderOne === 'culture profiles' ||
+        popupHeaderOne === 'job profiles' ||
         popupHeaderOne === 'items')
     ) {
       getInternalNodeApiCall(
@@ -907,13 +922,12 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOneBadgeOne === 'create' &&
       (popupHeaderOne === 'culture profiles' || popupHeaderOne === 'job profiles')
     ) {
-      let createType = popupHeaderOne === 'culture profiles' ? 'CULTURE' : 'JOB';
-      dispatch({ type: CLEAR_CULTURE_REDUCER_STATE });
-      dispatch({ type: CLEAR_JOB_REDUCER_STATE });
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: createType + 'CREATE' }
-      });
+      cultureProfileCreatePopup(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        dispatch,
+        popupHeaderOne
+      );
       clearMiddlePaneInfo();
     } else if (
       clickValue === 'information' &&

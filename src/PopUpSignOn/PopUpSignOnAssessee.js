@@ -96,7 +96,8 @@ const PopUpSignOnAssessee = (props) => {
     // console.log("descenArr",descenArr);
     // descenArr ? setAssignNodeArr(descenArr):setAssignNodeArr([]);
     if (headerOne === 'administrator' && coreNodeReviewListData.length > 0) {
-      let defaultnode = coreNodeReviewListData.filter(
+      let defaultnode = coreNodeReviewListData
+        .filter(
           (x) =>
             x.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary === null
         )
@@ -346,7 +347,10 @@ const PopUpSignOnAssessee = (props) => {
       }
     });
   };
-console.log('assesseeInfo',assesseeInfo);
+  console.log('assesseeInfo', assesseeInfo);
+  const onClickCheckbox = (e) => {
+    console.log('onClickCheckbox',e);
+  };
   return (
     <div>
       <PopUpAssesseeName
@@ -839,6 +843,7 @@ console.log('assesseeInfo',assesseeInfo);
         primaryheader={'primary'}
         nextPopUpValue={''}
         isRequired={true}
+        onClickCheckbox={onClickCheckbox}
         basicInfo={assesseeInfo.informationContact.assesseeAddressHomePrimary}
         typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -852,6 +857,7 @@ console.log('assesseeInfo',assesseeInfo);
         primaryheader={'secondary'}
         nextPopUpValue={''}
         isRequired={true}
+        onClickCheckbox={onClickCheckbox}
         basicInfo={assesseeInfo.informationContact.assesseeAddressHomeSecondary}
         typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -865,6 +871,7 @@ console.log('assesseeInfo',assesseeInfo);
         primaryheader={'primary'}
         nextPopUpValue={''}
         isRequired={true}
+        onClickCheckbox={onClickCheckbox}
         basicInfo={assesseeInfo.informationContact.assesseeAddressWorkPrimary}
         typeOfSetObject={UPDATE_ASSESSEE_WORKADDRESS_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -878,6 +885,7 @@ console.log('assesseeInfo',assesseeInfo);
         primaryheader={'secondary'}
         nextPopUpValue={''}
         isRequired={true}
+        onClickCheckbox={onClickCheckbox}
         basicInfo={assesseeInfo.informationContact.assesseeAddressWorkSecondary}
         typeOfSetObject={UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

@@ -6,14 +6,56 @@ import {
   GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
   LOADER_START,
   SET_MOBILE_PANE_STATE,
-  SET_REQUEST_OBJECT
+  SET_REQUEST_OBJECT,
+  CLEAR_CULTURE_REDUCER_STATE,
+  CLEAR_JOB_REDUCER_STATE,
+  SET_POPUP_VALUE,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  INTERNAL_NODE_LIST_SAGA,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../actionType';
 import {
   makeCultureProfileGroupObj,
   makeCultureProfileObj,
-  makeCultureProfileTypeObj
+  makeCultureProfileTypeObj,
+  makeInternalNodeObj
 } from './GenericActions';
 
+export const cultureProfileCreatePopup = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  dispatch,
+  popupHeaderOne
+) => {
+  dispatch({ type: CLEAR_CULTURE_REDUCER_STATE });
+  dispatch({ type: CLEAR_JOB_REDUCER_STATE });
+  dispatch({ type: LOADER_START });
+  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+  dispatch({
+    type: INTERNAL_NODE_LIST_SAGA,
+    payload: {
+      request: nodeRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      nodeViewState: 'list',
+      isMiddlePaneList: false
+    }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: {
+      stateName: 'selectedInformationAllorKey',
+      value: secondaryOptionCheckValue
+    }
+  });
+  let createType = popupHeaderOne === 'culture profiles' ? 'CULTURE' : 'JOB';
+  dispatch({
+    type: SET_POPUP_VALUE,
+    payload: { isPopUpValue: 'NAMEPOPUP', popupMode: createType + 'CREATE' }
+  });
+};
 export const getCultureProfilesDistinctApiCall = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,

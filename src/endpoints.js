@@ -249,3 +249,4 @@ export const SEND_AUTH_CODE_URL = PLATFORM_URL + '/dev/insight-guru/api/platform
 export const FORGOT_PASSWORD_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/confirm-password';
 export const CULTURE_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/culture-profile/create';
 export const CULTURE_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/culture-profile/review-list';
+export const CULTURE_GROUP_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/culture-profile-group/create';

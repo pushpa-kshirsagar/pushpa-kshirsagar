@@ -104,7 +104,7 @@ const PopUpGroupCreate = (props) => {
       responseObject?.informationEngagement?.itemGroupTenure?.itemGroupTenureDateTimeEnd ||
       'mm/dd/yyyy --:-- --';
   }
-
+  console.log('reducerObeject', reducerObeject);
   return (
     <div>
       <PopUpTextField

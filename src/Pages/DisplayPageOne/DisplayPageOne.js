@@ -270,22 +270,22 @@ const DisplayPageOne = () => {
         <PopUpGroupCreate
           headerOne={'culture profiles'}
           reducerObeject={cultureProfileGroup}
-          groupName={'cultureProfileName'}
-          groupDescription={'cultureProfileDescription'}
+          groupName={'cultureProfileGroupName'}
+          groupDescription={'cultureProfileGroupDescription'}
           setReducerObject={SET_CULTURE_GROUP_REDUCER_STATE}
-          objectName={'cultureProfile'}
+          objectName={'cultureProfileGroup'}
         />
       )}
-      {/* {popupMode === 'job profilesGROUPCREATE' && (
+      {popupMode === 'job profilesGROUPCREATE' && (
         <PopUpGroupCreate
           headerOne={'job profiles'}
           reducerObeject={jobProfileGroup}
           groupName={'jobProfileName'}
           groupDescription={'jobProfileDescription'}
           setReducerObject={SET_JOB_GROUP_REDUCER_STATE}
-          objectName={'jobProfile'}
+          objectName={'jobProfileGroup'}
         />
-      )} */}
+      )}
       {popupMode === 'assesseesTYPECREATE' && (
         <PopUpTypeCreate
           headerOne={'assessees'}
