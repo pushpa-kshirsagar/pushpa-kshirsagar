@@ -19,7 +19,9 @@ const PopUpCultureProfileCreate = (props) => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, coreNodeReviewListData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
 
@@ -42,17 +44,25 @@ const PopUpCultureProfileCreate = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_CULTURE_SAGA, payload: reqBody });
   };
-  const updateGroup = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    setRequiredErrorMsg('');
+  const updateAllocationObj = (e, stateName, actualStateName) => {
     let tagId = e.currentTarget.getAttribute('tag');
-    let tagIdArr = reducerObeject?.informationAllocation[allocationObj];
+    let tagIdArr = cultureProfileInformation.informationAllocation[stateName][actualStateName];
+    if (tagIdArr.includes(tagId)) {
+      document.getElementById(tagId).style.backgroundColor = 'white';
+      tagIdArr = tagIdArr.filter(function (number) {
+        return number !== tagId;
+      });
+    } else {
+      tagIdArr.push(tagId);
+      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    }
     dispatch({
       type: SET_CULTURE_DYNAMIC_SINGLE_STATE,
       payload: {
         objectName: 'informationAllocation',
-        stateName: '',
-        value: tagId
+        stateName: stateName,
+        actualStateName: actualStateName,
+        value: tagIdArr
       }
     });
   };
@@ -109,7 +119,7 @@ const PopUpCultureProfileCreate = (props) => {
         selectedList={[]}
         textOne={'name'}
         textTwo={'description'}
-        onClickEvent={updateGroup}
+        onClickEvent={null}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -131,7 +141,7 @@ const PopUpCultureProfileCreate = (props) => {
         selectedList={[]}
         textOne={'name'}
         textTwo={'description'}
-        onClickEvent={updateGroup}
+        onClickEvent={null}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -145,15 +155,16 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        selectedList={[]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={updateGroup}
+        ListData={coreNodeReviewListData}
+        selectedList={
+          cultureProfileInformation.informationAllocation.cultureProfileNode
+            .cultureProfileNodePrimary
+        }
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'cultureProfileNode', 'cultureProfileNodePrimary');
+        }}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -175,7 +186,7 @@ const PopUpCultureProfileCreate = (props) => {
         selectedList={[]}
         textOne={'name'}
         textTwo={'description'}
-        onClickEvent={updateGroup}
+        onClickEvent={null}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

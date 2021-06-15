@@ -229,10 +229,7 @@ const ItemTypeItemReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={assesseeStatus(
-                  middlePaneHeaderBadgeTwo,
-                  item.informationEngagement.itemStatus
-                )}
+                status={item.informationEngagement.itemStatus}
                 actualStatus={item.informationEngagement.itemStatus}
                 textOne={item.informationBasic.itemName}
                 textTwo={item.informationBasic.itemDescription}

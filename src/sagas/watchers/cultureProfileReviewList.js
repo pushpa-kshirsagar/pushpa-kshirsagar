@@ -3,6 +3,9 @@ import Store from '../../store';
 import {
   GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
   LOADER_STOP,
+  REVIEWLIST_DISTINCT_DATA,
+  SET_CORE_ROLE_REVIEW_LIST_DATA,
+  SET_MIDDLEPANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
 import { CULTURE_REVIEWLIST_URL } from '../../endpoints';
@@ -27,6 +30,27 @@ function* workerCultureProfileReviewListSaga(data) {
       URL: CULTURE_REVIEWLIST_URL
     });
     if (response.responseCode === '000') {
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'culture profiles',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'cultureProfilesDistinctReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_ROLE_REVIEW_LIST_DATA,
+        payload: response.responseObject
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

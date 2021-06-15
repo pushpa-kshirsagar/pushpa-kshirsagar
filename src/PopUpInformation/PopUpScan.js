@@ -23,6 +23,7 @@ import {
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+  GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
   GET_ITEM_GROUP_REVIEW_LIST_SAGA,
   GET_ITEM_REVIEW_LIST_SAGA,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
@@ -53,7 +54,8 @@ import {
   getItemScanRequestObj,
   makeItemGroupScanObj,
   makeItemScanObj,
-  makeItemTypeScanObj
+  makeItemTypeScanObj,
+  makeCultureProfileScanObj
 } from '../Actions/GenericActions';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import {
@@ -69,8 +71,15 @@ import {
   getItemTypeItemDistinctApiCall,
   getNodeRelatedItemsDistinctApiCall
 } from '../Actions/ItemModuleAction';
-import { getAssessmentGroupAssessmentDistinctApiCall, getAssessmentTypeAssessmentDistinctApiCall, getNodeRelatedAssessmentsDistinctApiCall } from '../Actions/AssessmentModuleAction';
-import { getAssignmnetGroupAssignmnetDistinctApiCall, getAssignmnetTypeAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
+import {
+  getAssessmentGroupAssessmentDistinctApiCall,
+  getAssessmentTypeAssessmentDistinctApiCall,
+  getNodeRelatedAssessmentsDistinctApiCall
+} from '../Actions/AssessmentModuleAction';
+import {
+  getAssignmnetGroupAssignmnetDistinctApiCall,
+  getAssignmnetTypeAssignmnetDistinctApiCall
+} from '../Actions/AssignmentModuleAction';
 
 const PopUpScan = (props) => {
   const dispatch = useDispatch();
@@ -569,6 +578,29 @@ const PopUpScan = (props) => {
         dispatch({ type: ASSOCIATE_POPUP_CLOSE });
         document.getElementById('middleComponentId').scrollTop = '0px';
       }
+      if (typeOfMiddlePaneList === 'cultureProfilesDistinctReviewList') {
+        let requestObect = makeCultureProfileScanObj(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
       if (typeOfMiddlePaneList === 'assesseesRoleAssesseeReviewList') {
         getAssesseeRoleAssesseeDistinctApiCall(
           selectedAssociateInfo,
@@ -641,7 +673,7 @@ const PopUpScan = (props) => {
           true
         );
       }
-      
+
       if (typeOfMiddlePaneList === 'associatesRoleAssociateReviewList') {
         getAssociateRoleAssociateDistinctApiCall(
           selectedAssociateInfo,
@@ -784,10 +816,12 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}
-              {isPopUpValue === 'assignmentDistinctReviewList' ||
-                (isPopUpValue === 'assessmentDistinctReviewList' && (
+              {(isPopUpValue === 'assignmentDistinctReviewList' ||
+                isPopUpValue === 'cultureProfilesDistinctReviewList' ||
+                isPopUpValue === 'jobProfilesDistinctReviewList' ||
+                isPopUpValue === 'assessmentDistinctReviewList') && (
                   <span>name, description, tag.</span>
-                ))}
+                )}
               {(isPopUpValue === 'assesseesDistinctReviewList' ||
                 isPopUpValue === 'administratorsDistinctReviewList' ||
                 isPopUpValue === 'assesseesGroupAssesseeReviewList' ||

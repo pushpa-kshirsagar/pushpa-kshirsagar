@@ -26,7 +26,8 @@ const PopUpAddress = (props) => {
     typeOfSetObject,
     basicInfo,
     isRequired = false,
-    mode
+    mode,
+    onClickCheckbox = null
   } = props;
   const objectKeys = Object.keys(basicInfo);
 
@@ -189,6 +190,7 @@ const PopUpAddress = (props) => {
                     <Checkbox
                       className={''}
                       color="default"
+                      onClick={onClickCheckbox}
                       disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
                     />
                   </div>

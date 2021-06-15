@@ -41,6 +41,7 @@ import ItemNodeItemReviewList from '../../ReviewListComponent/ItemNodeItemReview
 import AssignmentTypeAssignmentReviewList from '../../ReviewListComponent/AssignmentTypeAssignmentReviewList';
 import AssignmentGroupAssignmentReviewList from '../../ReviewListComponent/AssignmentGroupAssignmentReviewList';
 import AssignmentNodeAssignmentReviewList from '../../ReviewListComponent/AssignmentNodeAssignmentReviewList';
+import CultureProfileDistinctReviewList from '../../ReviewListComponent/CultureProfileDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -195,6 +196,9 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'itemTypeItemReviewList' && (
           <ItemTypeItemReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'cultureProfilesDistinctReviewList' && (
+          <CultureProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
