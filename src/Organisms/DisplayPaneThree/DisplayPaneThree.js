@@ -531,6 +531,48 @@ export const DisplayPaneThree = () => {
       if (assesseeInfo.tempCommunication === 'email address (secondary)') {
         informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
       }
+      //address communication
+      informationContact.assesseeAddressHomePrimary.assesseeAddressCommunication = false;
+      informationContact.assesseeAddressHomeSecondary.assesseeAddressCommunication = false;
+      informationContact.assesseeAddressWorkPrimary.assesseeAddressCommunication = false;
+      informationContact.assesseeAddressWorkSecondary.assesseeAddressCommunication = false;
+      if (assesseeInfo.tempAddressCommunication === 'home address primary') {
+        informationContact.assesseeAddressHomePrimary.assesseeAddressCommunication = true;
+      }
+       if (assesseeInfo.tempAddressCommunication === 'home address secondary') {
+        informationContact.assesseeAddressHomeSecondary.assesseeAddressCommunication = true;
+      }
+       if (assesseeInfo.tempAddressCommunication === 'work address primary') {
+        informationContact.assesseeAddressWorkPrimary.assesseeAddressCommunication = true;
+      }
+       if (assesseeInfo.tempAddressCommunication === 'work address secondary') {
+        informationContact.assesseeAddressWorkSecondary.assesseeAddressCommunication = true;
+      }
+      // telephone communication
+      informationContact.assesseeTelephoneHomePrimary.assesseeTelephoneCommunication = false;
+      informationContact.assesseeTelephoneHomeSecondary.assesseeTelephoneCommunication = false;
+      informationContact.assesseeTelephoneWorkPrimary.assesseeTelephoneCommunication = false;
+      informationContact.assesseeTelephoneWorkSecondary.assesseeTelephoneCommunication = false;
+      informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneCommunication = false;
+      informationContact.assesseeTelephoneMobileSecondary.assesseeTelephoneCommunication = false;
+      if (assesseeInfo.tempTelephoneCommunication === 'home telephone primary') {
+        informationContact.assesseeTelephoneHomePrimary.assesseeTelephoneCommunication = true;
+      }
+      if (assesseeInfo.tempTelephoneCommunication === 'home telephone secondary') {
+        informationContact.assesseeTelephoneHomeSecondary.assesseeTelephoneCommunication = true;
+      }
+      if (assesseeInfo.tempTelephoneCommunication === 'work telephone primary') {
+        informationContact.assesseeTelephoneWorkPrimary.assesseeTelephoneCommunication = true;
+      }
+      if (assesseeInfo.tempTelephoneCommunication === 'work telephone secondary') {
+        informationContact.assesseeTelephoneWorkSecondary.assesseeTelephoneCommunication = true;
+      }
+      if (assesseeInfo.tempTelephoneCommunication === 'mobile telephone primary') {
+        informationContact.assesseeTelephoneMobilePrimary.assesseeTelephoneCommunication = true;
+      }
+      if (assesseeInfo.tempTelephoneCommunication === 'mobile telephone secondary') {
+        informationContact.assesseeTelephoneMobileSecondary.assesseeTelephoneCommunication = true;
+      }
       const { associateId, id } = responseObject;
       const reqBody = {
         assesseeId: id,

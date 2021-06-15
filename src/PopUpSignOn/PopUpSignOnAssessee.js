@@ -35,7 +35,8 @@ import {
   UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO,
   UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO,
   UPDATE_ASSESSEE_TAG_STATUTORY_INFO,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  SET_ASSESSEE_CREATE_SINGLE_STATE
 } from '../actionType';
 import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
@@ -348,8 +349,21 @@ const PopUpSignOnAssessee = (props) => {
     });
   };
   console.log('assesseeInfo', assesseeInfo);
-  const onClickCheckbox = (e) => {
-    console.log('onClickCheckbox',e);
+  const onClickCheckbox = (e, inputHeader, primaryheader) => {
+    console.log('onClickCheckbox', e.target.checked);
+    let val = inputHeader + ' ' + primaryheader;
+    dispatch({
+      type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+      payload: { stateName: 'tempAddressCommunication', value: e.target.checked ? val : '' }
+    });
+  };
+  const onClickCheckboxMobile = (e, inputHeader, primaryheader) => {
+    console.log('onClickCheckbox', e.target.checked);
+    let val = inputHeader + ' ' + primaryheader;
+    dispatch({
+      type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+      payload: { stateName: 'tempTelephoneCommunication', value: e.target.checked ? val : '' }
+    });
   };
   return (
     <div>
@@ -669,6 +683,8 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         inputHeader={'mobile telephone'}
         primaryheader={'primary'}
+        onClickCheckbox={onClickCheckboxMobile}
+        tempTelephoneCommunication={assesseeInfo.tempTelephoneCommunication}
         basicInfo={informationContact.assesseeTelephoneMobilePrimary}
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_INFO}
@@ -682,6 +698,7 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         inputHeader={'mobile telephone'}
         primaryheader={'secondary'}
+        onClickCheckbox={onClickCheckboxMobile}
         basicInfo={informationContact.assesseeTelephoneMobileSecondary}
         nextPopUpValue={'SINGLEDROPDOWNPOPUP'}
         typeOfSetObject={UPDATE_ASSESSEE_MOBILE_SECONDARY_INFO}
@@ -695,6 +712,8 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         inputHeader={'home telephone'}
         primaryheader={'primary'}
+        onClickCheckbox={onClickCheckboxMobile}
+        tempTelephoneCommunication={assesseeInfo.tempTelephoneCommunication}
         basicInfo={informationContact.assesseeTelephoneHomePrimary}
         nextPopUpValue={''}
         typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_HOME_INFO}
@@ -707,6 +726,8 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         inputHeader={'home telephone'}
         primaryheader={'secondary'}
+        onClickCheckbox={onClickCheckboxMobile}
+        tempTelephoneCommunication={assesseeInfo.tempTelephoneCommunication}
         basicInfo={informationContact.assesseeTelephoneHomeSecondary}
         nextPopUpValue={''}
         typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_HOME_SECONDARY_INFO}
@@ -719,6 +740,8 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         inputHeader={'work telephone'}
         primaryheader={'primary'}
+        onClickCheckbox={onClickCheckboxMobile}
+        tempTelephoneCommunication={assesseeInfo.tempTelephoneCommunication}
         basicInfo={informationContact.assesseeTelephoneWorkPrimary}
         nextPopUpValue={''}
         typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_WORK_INFO}
@@ -731,6 +754,8 @@ const PopUpSignOnAssessee = (props) => {
         headerOneBadgeOne={'information'}
         inputHeader={'work telephone'}
         primaryheader={'secondary'}
+        onClickCheckbox={onClickCheckboxMobile}
+        tempTelephoneCommunication={assesseeInfo.tempTelephoneCommunication}
         basicInfo={informationContact.assesseeTelephoneWorkSecondary}
         nextPopUpValue={''}
         typeOfSetObject={UPDATE_ASSESSEE_TELEPHONE_WORK_INFO}
@@ -844,6 +869,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={''}
         isRequired={true}
         onClickCheckbox={onClickCheckbox}
+        addressCommunication={assesseeInfo.tempAddressCommunication}
         basicInfo={assesseeInfo.informationContact.assesseeAddressHomePrimary}
         typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -858,6 +884,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={''}
         isRequired={true}
         onClickCheckbox={onClickCheckbox}
+        addressCommunication={assesseeInfo.tempAddressCommunication}
         basicInfo={assesseeInfo.informationContact.assesseeAddressHomeSecondary}
         typeOfSetObject={UPDATE_ASSESSEE_HOMEADDRESS_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -872,6 +899,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={''}
         isRequired={true}
         onClickCheckbox={onClickCheckbox}
+        addressCommunication={assesseeInfo.tempAddressCommunication}
         basicInfo={assesseeInfo.informationContact.assesseeAddressWorkPrimary}
         typeOfSetObject={UPDATE_ASSESSEE_WORKADDRESS_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -886,6 +914,7 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={''}
         isRequired={true}
         onClickCheckbox={onClickCheckbox}
+        addressCommunication={assesseeInfo.tempAddressCommunication}
         basicInfo={assesseeInfo.informationContact.assesseeAddressWorkSecondary}
         typeOfSetObject={UPDATE_ASSESSEE_WORKADDRESS_SECONDARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

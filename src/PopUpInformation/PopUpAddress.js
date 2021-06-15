@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
+import { input } from 'aws-amplify';
 
 const PopUpAddress = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
@@ -27,7 +28,8 @@ const PopUpAddress = (props) => {
     basicInfo,
     isRequired = false,
     mode,
-    onClickCheckbox = null
+    onClickCheckbox = null,
+    addressCommunication
   } = props;
   const objectKeys = Object.keys(basicInfo);
 
@@ -190,7 +192,10 @@ const PopUpAddress = (props) => {
                     <Checkbox
                       className={''}
                       color="default"
-                      onClick={onClickCheckbox}
+                      checked={addressCommunication === inputHeader + ' ' + primaryheader}
+                      onClick={(e) => {
+                        onClickCheckbox(e, inputHeader, primaryheader);
+                      }}
                       disabled={popupMode === 'ASSOCIATE_SIGN_ON' ? true : false}
                     />
                   </div>

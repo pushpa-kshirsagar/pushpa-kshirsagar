@@ -16,6 +16,7 @@ import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 const PopUpTelephone = (props) => {
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const {
     isActive,
     primaryheader = 'primary',
@@ -28,7 +29,9 @@ const PopUpTelephone = (props) => {
     typeOfSetObject,
     isMobileState = false,
     isRequired = false,
-    mode
+    mode,
+    onClickCheckbox = null,
+    tempTelephoneCommunication = ''
   } = props;
 
   const objectKeys = Object.keys(basicInfo);
@@ -182,7 +185,19 @@ const PopUpTelephone = (props) => {
                     communication
                   </div>
                   <div className={'checkedFontNew'}>
-                    <Checkbox className={''} color="default" disabled={true} checked={false} />
+                    <Checkbox
+                      className={''}
+                      color="default"
+                      onClick={(e) => {
+                        onClickCheckbox(e, inputHeader, primaryheader);
+                      }}
+                      checked={tempTelephoneCommunication === inputHeader + ' ' + primaryheader}
+                      disabled={
+                        popupMode === 'ASSOCIATE_SIGN_ON' || popupMode === 'ASSESSEE_SIGN_ON'
+                          ? true
+                          : false
+                      }
+                    />
                   </div>
                 </div>
               </div>

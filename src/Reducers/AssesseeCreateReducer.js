@@ -69,6 +69,8 @@ const initialState = {
   assesseeCreateInfo: '',
   currentPopUpOption: [],
   tempCommunication: '',
+  tempAddressCommunication:'',
+  tempTelephoneCommunication:'',
   assesseeInformationData: null,
   assesseeReviewListDistinctData: [],
   secondaryPopUpOptions: {

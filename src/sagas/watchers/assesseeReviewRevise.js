@@ -236,6 +236,71 @@ function* workerReviewInfoAssesseeSaga(data) {
             payload: { stateName: 'tempCommunication', value: 'email address (secondary)' }
           });
         }
+        if (informationContact?.assesseeAddressHomePrimary?.assesseeAddressCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempAddressCommunication', value: 'home address primary' }
+          });
+        }
+        if (informationContact?.assesseeAddressHomeSecondary?.assesseeAddressCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempAddressCommunication', value: 'home address secondary' }
+          });
+        }
+        if (informationContact?.assesseeAddressWorkPrimary?.assesseeAddressCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempAddressCommunication', value: 'work address primary' }
+          });
+        }
+        if (informationContact?.assesseeAddressWorkSecondary?.assesseeAddressCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempAddressCommunication', value: 'work address secondary' }
+          });
+        }
+        if (informationContact?.assesseeTelephoneHomePrimary?.assesseeTelephoneCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempTelephoneCommunication', value: 'home telephone primary' }
+          });
+        }
+        if (informationContact?.assesseeTelephoneHomeSecondary?.assesseeTelephoneCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempTelephoneCommunication', value: 'home telephone secondary' }
+          });
+        }
+        //
+        if (informationContact?.assesseeTelephoneWorkPrimary?.assesseeTelephoneCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempTelephoneCommunication', value: 'work telephone primary' }
+          });
+        }
+        if (informationContact?.assesseeTelephoneWorkSecondary?.assesseeTelephoneCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempTelephoneCommunication', value: 'work telephone secondary' }
+          });
+        }
+        //
+        if (informationContact?.assesseeTelephoneMobilePrimary?.assesseeTelephoneCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: { stateName: 'tempTelephoneCommunication', value: 'mobile telephone primary' }
+          });
+        }
+        if (informationContact?.assesseeTelephoneMobileSecondary?.assesseeTelephoneCommunication) {
+          yield put({
+            type: SET_ASSESSEE_CREATE_SINGLE_STATE,
+            payload: {
+              stateName: 'tempTelephoneCommunication',
+              value: 'mobile telephone secondary'
+            }
+          });
+        }
         yield put({ type: UPDATE_ASSESSEE_BASIC_INFO, payload: informationBasic });
         yield put({ type: UPDATE_ASSESSEE_PERSONAL_INFO, payload: informationPersonal });
         yield put({ type: UPDATE_ASSESSEE_ENGAGEMENT_INFO, payload: informationEngagement });
@@ -251,7 +316,6 @@ function* workerReviewInfoAssesseeSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
-
 
 const assesseesReviseInfoApi = async (requestObj) => {
   let URL = ASSESSEE_INFO_REVISE_URL;
