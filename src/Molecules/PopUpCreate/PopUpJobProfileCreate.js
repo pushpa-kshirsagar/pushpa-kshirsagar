@@ -8,7 +8,9 @@ import {
   CLEAR_TYPE_REDUCER_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_JOB_REDUCER_STATE,
-  SET_JOB_DYNAMIC_SINGLE_STATE
+  SET_JOB_DYNAMIC_SINGLE_STATE,
+  LOADER_START,
+  CREATE_JOB_SAGA
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
@@ -35,11 +37,12 @@ const PopUpJobProfileCreate = (props) => {
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      jobProfile: jobProfileInformation
     };
     console.log('CREATE api', reqBody);
-    // dispatch({ type: LOADER_START });
-    // dispatch({ type: CREATE_TYPE_SAGA, payload: reqBody });
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_JOB_SAGA, payload: reqBody });
   };
   const updateAllocationObj = (e, stateName, actualStateName) => {
     let tagId = e.currentTarget.getAttribute('tag');
@@ -69,7 +72,7 @@ const PopUpJobProfileCreate = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'NAMEPOPUP'}
         label={'name'}
-        actualLableValue={'cultureProfileName'}
+        actualLableValue={'jobProfileName'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
@@ -82,7 +85,7 @@ const PopUpJobProfileCreate = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'description'}
-        actualLableValue={'cultureProfileDescription'}
+        actualLableValue={'jobProfileDescription'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}

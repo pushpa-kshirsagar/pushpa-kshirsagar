@@ -6,7 +6,9 @@ import {
   SET_ASSIGNMENT_TYPE_REDUCER_STATE,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
   SET_TYPE_GROUP_ALLOCATION,
-  SET_ITEM_TYPE_REDUCER_STATE
+  SET_ITEM_TYPE_REDUCER_STATE,
+  SET_CULTURE_TYPE_REDUCER_STATE,
+  SET_JOB_TYPE_REDUCER_STATE
 } from '../actionType';
 
 const initialState = {
@@ -74,6 +76,32 @@ const initialState = {
     informationAllocation: {
       itemTypeGroup: ''
     }
+  },
+  cultureProfileType: {
+    informationBasic: {
+      cultureProfileTypeName: '',
+      cultureProfileTypeNameVerification: false,
+      cultureProfileTypeDescription: '',
+      cultureProfileTypePicture: '',
+      cultureProfileTypePictureVerification: false,
+      cultureProfileTypeFlag: false
+    },
+    informationAllocation: {
+      cultureProfileTypeGroup: ''
+    }
+  },
+  jobProfileType: {
+    informationBasic: {
+      cultureProfileTypeName: '',
+      cultureProfileTypeNameVerification: false,
+      cultureProfileTypeDescription: '',
+      cultureProfileTypePicture: '',
+      cultureProfileTypePictureVerification: false,
+      cultureProfileTypeFlag: false
+    },
+    informationAllocation: {
+      cultureProfileTypeGroup: ''
+    }
   }
 };
 
@@ -128,6 +156,22 @@ const TypeCreateReducer = (istate = initialState, action) => {
         ...istate,
         itemType: {
           ...istate.itemType,
+          informationBasic: action.payload
+        }
+      };
+    case SET_CULTURE_TYPE_REDUCER_STATE:
+      return {
+        ...istate,
+        cultureProfileType: {
+          ...istate.cultureProfileType,
+          informationBasic: action.payload
+        }
+      };
+    case SET_JOB_TYPE_REDUCER_STATE:
+      return {
+        ...istate,
+        jobProfileType: {
+          ...istate.jobProfileType,
           informationBasic: action.payload
         }
       };

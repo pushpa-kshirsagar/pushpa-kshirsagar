@@ -97,8 +97,11 @@ import { ADMINISTRATOR_SECONDARY_ID } from '../endpoints';
 import { assignmentTypeApiCall } from '../Actions/AssignmentModuleAction';
 import {
   cultureProfileCreatePopup,
-  getCultureProfilesDistinctApiCall
+  getCultureProfileGroupApiCall,
+  getCultureProfilesDistinctApiCall,
+  getCultureProfileTypeApiCall
 } from '../Actions/ActionCultureProfile';
+import { jobProfileCreatePopup } from '../Actions/ActionJobProfile';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -177,7 +180,8 @@ const PopUpDisplayPanelAssociate = (props) => {
 
     if (
       (clickValue === 'administrators' || clickValue === 'managers') &&
-      popupHeaderOne !== 'culture profiles'&& popupHeaderOne !== 'job profiles'
+      popupHeaderOne !== 'culture profiles' &&
+      popupHeaderOne !== 'job profiles'
     ) {
       revisePopupHeaderOne = clickValue;
       revisepopupHeaderOneBadgeOne = '';
@@ -703,10 +707,12 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       clickValue === 'distinct' &&
       (popupHeaderOne === 'assessees' ||
+        popupHeaderOne === 'assessments' ||
         popupHeaderOne === 'assignments' ||
         popupHeaderOne === 'associates' ||
         popupHeaderOne === 'items' ||
-        popupHeaderOne === 'assessments') &&
+        popupHeaderOne === 'culture profiles' ||
+        popupHeaderOne === 'job profilesss') &&
       popupHeaderOneBadgeOne === 'groups'
     ) {
       let requestObj = {};
@@ -773,6 +779,15 @@ const PopUpDisplayPanelAssociate = (props) => {
           'groups'
         );
       }
+      if (popupHeaderOne === 'culture profiles') {
+        getCultureProfileGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+      }
     }
     if (
       clickValue === 'distinct' &&
@@ -815,6 +830,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         popupHeaderOne === 'associates' ||
         popupHeaderOne === 'assessments' ||
         popupHeaderOne === 'items' ||
+        popupHeaderOne === 'culture profiles' ||
         popupHeaderOne === 'assessees') &&
       popupHeaderOneBadgeOne === 'types'
     ) {
@@ -861,6 +877,16 @@ const PopUpDisplayPanelAssociate = (props) => {
       }
       if (popupHeaderOne === 'items') {
         getItemsTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          popupHeaderOne
+        );
+      }
+      if (popupHeaderOne === 'culture profiles') {
+        getCultureProfileTypeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,
@@ -922,12 +948,12 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOneBadgeOne === 'create' &&
       (popupHeaderOne === 'culture profiles' || popupHeaderOne === 'job profiles')
     ) {
-      cultureProfileCreatePopup(
-        selectedAssociateInfo,
-        secondaryOptionCheckValue,
-        dispatch,
-        popupHeaderOne
-      );
+      if (popupHeaderOne === 'culture profiles') {
+        cultureProfileCreatePopup(selectedAssociateInfo, secondaryOptionCheckValue, dispatch);
+      } else {
+        jobProfileCreatePopup(selectedAssociateInfo, secondaryOptionCheckValue, dispatch);
+      }
+
       clearMiddlePaneInfo();
     } else if (
       clickValue === 'information' &&

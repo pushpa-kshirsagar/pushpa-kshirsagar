@@ -19,9 +19,11 @@ import {
   SET_ASSOCIATE_GROUP_REDUCER_STATE,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
   SET_CULTURE_GROUP_REDUCER_STATE,
+  SET_CULTURE_TYPE_REDUCER_STATE,
   SET_ITEM_GROUP_REDUCER_STATE,
   SET_ITEM_TYPE_REDUCER_STATE,
-  SET_JOB_GROUP_REDUCER_STATE
+  SET_JOB_GROUP_REDUCER_STATE,
+  SET_JOB_TYPE_REDUCER_STATE
 } from '../../actionType';
 import HeaderZero from '../../Molecules/HeaderZero/HeaderZero';
 import './DisplayPageOne.css';
@@ -74,9 +76,15 @@ const DisplayPageOne = () => {
     cultureProfileGroup,
     jobProfileGroup
   } = useSelector((state) => state.GroupCreateReducer);
-  const { assesseeType, assessmentType, assignmentType, associateType, itemType } = useSelector(
-    (state) => state.TypeCreateReducer
-  );
+  const {
+    assesseeType,
+    assessmentType,
+    assignmentType,
+    associateType,
+    itemType,
+    cultureProfileType,
+    jobProfileType
+  } = useSelector((state) => state.TypeCreateReducer);
   const history = useHistory();
 
   useEffect(() => {
@@ -299,10 +307,6 @@ const DisplayPageOne = () => {
           groupDescription={'assesseeTypeGroupDescription'}
         />
       )}
-      {popupMode === 'CULTURECREATE' && (
-        <PopUpCultureProfileCreate headerOne={'culture profiles'} />
-      )}
-      {popupMode === 'JOBCREATE' && <PopUpJobProfileCreate headerOne={'job profiles'} />}
       {popupMode === 'assessmentsTYPECREATE' && (
         <PopUpTypeCreate
           headerOne={'assessments'}
@@ -356,6 +360,38 @@ const DisplayPageOne = () => {
           PopUpAssessmentCreate
         />
       )}
+      {popupMode === 'culture profilesTYPECREATE' && (
+        <PopUpTypeCreate
+          headerOne={'culture profiles'}
+          reducerObeject={cultureProfileType}
+          typeName={'cultureProfileTypeName'}
+          typeDescription={'cultureProfileTypeDescription'}
+          setReducerObject={SET_CULTURE_TYPE_REDUCER_STATE}
+          objectName={'cultureProfileType'}
+          allocationObj={'cultureProfileTypeGroup'}
+          groupName={'cultureProfileTypeGroupName'}
+          groupDescription={'cultureProfileTypeGroupDescription'}
+          PopUpAssessmentCreate
+        />
+      )}
+      {popupMode === 'job profilesTYPECREATE' && (
+        <PopUpTypeCreate
+          headerOne={'job profiles'}
+          reducerObeject={jobProfileType}
+          typeName={'jobProfileTypeName'}
+          typeDescription={'jobProfileTypeDescription'}
+          setReducerObject={SET_JOB_TYPE_REDUCER_STATE}
+          objectName={'jobProfileType'}
+          allocationObj={'jobProfileTypeGroup'}
+          groupName={'jobProfileTypeGroupName'}
+          groupDescription={'jobProfileTypeGroupDescription'}
+          PopUpAssessmentCreate
+        />
+      )}
+      {popupMode === 'CULTURECREATE' && (
+        <PopUpCultureProfileCreate headerOne={'culture profiles'} />
+      )}
+      {popupMode === 'JOBCREATE' && <PopUpJobProfileCreate headerOne={'job profiles'} />}
       {popupMode === 'NODECREATE' && <PopUpNodeCreate headerOne={'associate'} />}
       {popupMode === 'ASSIGNMENTCREATE' && <PopUpAssignmentCreate headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <PopUpAssessmentCreate headerOne={'assessment'} />}

@@ -68,7 +68,7 @@ const PopUpTypeCreate = (props) => {
       }
     });
   };
-  // console.log("CREATE TYPE===", reducerObeject);
+  console.log("CREATE TYPE===", reducerObeject);
   return (
     <div>
       <PopUpTextField

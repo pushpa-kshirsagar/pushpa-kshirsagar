@@ -54,6 +54,8 @@ const PopUpConfirmation = (props) => {
       popupMode === 'assessmentsTYPECREATE' ||
       popupMode === 'assignmentsTYPECREATE' ||
       popupMode === 'associatesTYPECREATE' ||
+      popupMode === 'culture profilesTYPECREATE' ||
+      popupMode === 'job profilesTYPECREATE' ||
       popupMode === 'ASSESSMENTCREATE' ||
       popupMode === 'ASSIGNMENTCREATE' ||
       popupMode === 'NODECREATE' ||

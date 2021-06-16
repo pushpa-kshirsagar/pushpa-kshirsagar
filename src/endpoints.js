@@ -270,3 +270,14 @@ export const CULTURE_REVISE_TYPE_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-type/revise';
 export const JOB_REVIEW_TYPE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-type/review';
 export const JOB_REVISE_TYPE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-type/revise';
+export const CULTURE_TYPE_CREATE_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile-type/create';
+export const CULTURE_GROUP_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile-group/review-list';
+ export const CULTURE_TYPE_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile-type/review-list';
+  //job
+export const JOB_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/create';
+export const JOB_GROUP_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-group/create';
+export const JOB_GROUP_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-profile-group/review-list';

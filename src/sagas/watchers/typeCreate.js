@@ -17,6 +17,7 @@ import {
   ASSESSMENT_TYPE_CREATE_URL,
   ASSIGNMENT_TYPE_CREATE_URL,
   ASSOCIATE_TYPE_CREATE_URL,
+  CULTURE_TYPE_CREATE_URL,
   ITEM_TYPE_CREATE_URL
 } from '../../endpoints';
 
@@ -24,7 +25,10 @@ const createTypeApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: localStorage.getItem('token')
+      Authorization:
+        requestObj.data.whichTypeCreate === 'culture profiles'
+          ? localStorage.getItem('idToken')
+          : localStorage.getItem('token')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -43,6 +47,9 @@ const createTypeApi = async (requestObj) => {
   }
   if (requestObj.data.whichTypeCreate === 'items') {
     URL = ITEM_TYPE_CREATE_URL;
+  }
+  if (requestObj.data.whichTypeCreate === 'culture profiles') {
+    URL = CULTURE_TYPE_CREATE_URL;
   }
 
   const response = await fetch(URL, requestOptions);
