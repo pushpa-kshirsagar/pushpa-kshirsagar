@@ -1,12 +1,12 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   GET_CULTURE_GROUP_REVIEW_INFO_SAGA,
-  GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
   CULTURE_GROUP_REVISE_INFO_SAGA,
   LOADER_STOP,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_DISPLAY_PANE_THREE_STATE,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_CULTURE_GROUP_REDUCER_STATE
 } from '../../actionType';
 import { CULTURE_REVIEW_GROUP_URL, CULTURE_REVISE_GROUP_URL } from '../../endpoints';
 
@@ -16,7 +16,7 @@ const cultureProfileGroupReviewInfoApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -57,15 +57,15 @@ function* workerReviewCultureProfileGroupInfoSaga(data) {
         }
       });
       if (isReviseMode) {
-        // yield put({
-        //   type: SET_ASSESSMENT_GROUP_REDUCER_STATE,
-        //   payload: userResponse.responseObject[0].informationBasic
-        // });
+        yield put({
+          type: SET_CULTURE_GROUP_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
       }
     }
 
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -79,7 +79,7 @@ const cultureProfileGroupReviseInfoApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -127,7 +127,7 @@ function* workerReviseCultureProfileGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

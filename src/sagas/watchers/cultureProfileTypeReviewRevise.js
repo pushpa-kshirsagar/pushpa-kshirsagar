@@ -15,7 +15,7 @@ const cultureProfileTypeReviewInfoApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -64,7 +64,7 @@ function* workerReviewCultureProfileTypeInfoSaga(data) {
     }
 
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -78,7 +78,7 @@ const cultureProfileTypeReviseInfoApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -126,7 +126,7 @@ function* workerReviseCultureProfileTypeInfoSaga(data) {
     }
 
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

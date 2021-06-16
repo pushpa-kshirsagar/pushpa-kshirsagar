@@ -17,7 +17,7 @@ const jobProfileReviewInfoApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -65,7 +65,7 @@ const jobProfileReviseInfoApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };

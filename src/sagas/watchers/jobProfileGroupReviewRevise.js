@@ -5,7 +5,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   GET_JOB_GROUP_REVIEW_INFO_SAGA,
-  JOB_GROUP_REVISE_INFO_SAGA
+  JOB_GROUP_REVISE_INFO_SAGA,
+  SET_JOB_GROUP_REDUCER_STATE
 } from '../../actionType';
 import { JOB_REVIEW_GROUP_URL, JOB_REVISE_GROUP_URL } from '../../endpoints';
 
@@ -15,7 +16,7 @@ const jobProfileGroupReviewInfoApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -56,10 +57,10 @@ function* workerReviewJobProfileGroupInfoSaga(data) {
         }
       });
       if (isReviseMode) {
-        // yield put({
-        //   type: SET_ASSESSMENT_GROUP_REDUCER_STATE,
-        //   payload: userResponse.responseObject[0].informationBasic
-        // });
+        yield put({
+          type: SET_JOB_GROUP_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
       }
     }
 
@@ -77,7 +78,7 @@ const jobProfileGroupReviseInfoApi = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };
