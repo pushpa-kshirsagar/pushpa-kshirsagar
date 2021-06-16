@@ -98,7 +98,9 @@ const initialState = {
     assessments: REVIEW_DISTINCT_POPUP_OPTION,
     assignments: ASSIGNMENT_DISTINCT_POPUP,
     associates: REVIEW_DISTINCT_POPUP_OPTION,
-    items: REVIEW_DISTINCT_POPUP_OPTION
+    items: REVIEW_DISTINCT_POPUP_OPTION,
+    cultureProfiles: REVIEW_DISTINCT_POPUP_OPTION,
+    jobProfiles: REVIEW_DISTINCT_POPUP_OPTION
   }
 };
 
@@ -318,6 +320,8 @@ const PopUpReducer = (istate = initialState, action) => {
           action.payload.badgeValue === 'assessments' ||
           action.payload.badgeValue === 'assignments' ||
           action.payload.badgeValue === 'associates' ||
+          action.payload.badgeValue === 'cultureProfiles' ||
+          action.payload.badgeValue === 'jobProfiles' ||
           action.payload.badgeValue === 'reports'
         ) {
           return {

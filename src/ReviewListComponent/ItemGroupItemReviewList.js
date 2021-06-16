@@ -215,6 +215,7 @@ const ItemGroupItemReviewList = (props) => {
           labelTwoTwo={'group'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          relatedCardFixed={true}
         />
       )}
       {listDistinctData &&

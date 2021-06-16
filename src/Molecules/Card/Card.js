@@ -21,13 +21,14 @@ const Card = (props) => {
     className,
     isAlliance,
     onClick = null,
+    relatedCardFixed = false,
     labelTwoTwo = 'label',
     onClickIconOne = null,
     tag = ''
   } = props;
 
   return (
-    <div className={'iguru-leftpanel'}>
+    <div className={('iguru-leftpanel', relatedCardFixed && 'relatedCardFixed')}>
       <Paper
         style={{
           boxShadow:

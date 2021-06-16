@@ -223,6 +223,7 @@ const AssociateRoleAssociateReviewList = (props) => {
           labelTwoTwo={'role'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          relatedCardFixed={true}
           className={'iguru-iconboxSVG'}
         />
       )}

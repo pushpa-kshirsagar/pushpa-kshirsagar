@@ -9,7 +9,11 @@ import Sections from '../../Molecules/Section/Section';
 import FooterIconOne from '../../Molecules/FooterIconOne/FooterIconOne';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_MIDDLEPANE_STATE, SET_MOBILE_PANE_STATE, SET_POPUP_STATE } from '../../actionType';
-import { ASSESSEE_CARD_POPUP_OPTIONS, ASSOCIATE_CARD_POPUP_OPTION } from '../../PopUpConfig';
+import {
+  ASSESSEE_CARD_POPUP_OPTIONS,
+  ASSOCIATE_CARD_POPUP_OPTION,
+  SELF_POPUP_OPTION
+} from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpWorkSheet from '../../PopUpIcon/PopUpWorkSheet';
 import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword';
@@ -90,10 +94,6 @@ export const DisplayPaneOne = () => {
       if (e.currentTarget.getAttribute('data-value') === 'assessee_card') {
         popupHeaderOne = 'assessee';
         popupHeaderOneBadgeOne = 'self';
-        // popupContentArrValue = setAssesseeCardPermissionInJson(
-        //   ASSESSEE_CARD_POPUP_OPTIONS,
-        //   assesseePermission
-        // );
         popupContentArrValue = ASSESSEE_CARD_POPUP_OPTIONS;
         value = 'ASSESSEE_CARD_POPUP';
       }
@@ -107,6 +107,12 @@ export const DisplayPaneOne = () => {
         // );
 
         value = 'ASSOCIATE_CARD_POPUP';
+      }
+      if (e.currentTarget.getAttribute('data-value') === 'assessee') {
+        popupHeaderOne = 'assessee';
+        popupHeaderOneBadgeOne = 'self';
+        popupContentArrValue = SELF_POPUP_OPTION;
+        value = 'ASSESSEE_CARD_POPUP';
       }
       dispatch({
         type: SET_POPUP_STATE,
@@ -155,7 +161,7 @@ export const DisplayPaneOne = () => {
             ImageOne={selectedAssociateInfo ? PersonIcon : null}
             textOneOne={assesseeName}
             textTwoOne={assesseeAlias}
-            onClick={selectedAssociateInfo && selectedAssociateInfo ? openCardPopup : null}
+            onClick={openCardPopup}
             tag={selectedAssociateInfo ? 'assessee_card' : 'assessee'}
           />
         </div>

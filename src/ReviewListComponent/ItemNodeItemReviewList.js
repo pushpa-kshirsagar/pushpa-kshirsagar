@@ -221,6 +221,8 @@ const ItemNodeItemReviewList = (props) => {
           labelTwoTwo={'node'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          relatedCardFixed={true}
+
         />
       )}
       {listDistinctData &&

@@ -191,7 +191,7 @@ function* workerReviewCultureProfileTypeListSaga(data) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: 'culture Profiles',
+            middlePaneHeader: 'culture profiles',
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: data.payload.BadgeThree,

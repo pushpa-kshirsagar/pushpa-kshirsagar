@@ -21,6 +21,11 @@ body {
   display: flex !important;
   height: 50px;
 }
+.relatedCardFixed{
+  top: 0;
+    z-index: 2;
+    position: sticky;
+}
 .helperTextCore {
   height: 10px;
 }

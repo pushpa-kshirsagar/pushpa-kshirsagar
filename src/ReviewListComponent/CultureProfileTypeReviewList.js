@@ -23,7 +23,10 @@ import {
   ASSOCIATE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { getItemGroupDistinctApiCall, getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
-import { getCultureProfileGroupApiCall, getCultureProfileTypeApiCall } from '../Actions/ActionCultureProfile';
+import {
+  getCultureProfileGroupApiCall,
+  getCultureProfileTypeApiCall
+} from '../Actions/ActionCultureProfile';
 const CultureProfileTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -100,10 +103,15 @@ const CultureProfileTypeReviewList = (props) => {
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let optArr = [];
+    let reviseHeader = middlePaneHeader;
+    if (middlePaneHeader === 'culture profiles') {
+      reviseHeader = 'cultureProfiles';
+    }
+    if (middlePaneHeader === 'job profiles') {
+      reviseHeader = 'jobProfiles';
+    }
     let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
-      obj.data === 'assessees'
-        ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
-        : obj
+      obj.data === 'assessees' ? { ...obj, data: middlePaneHeader, dataValue: reviseHeader } : obj
     );
     optArr = popupContentArrValue;
     dispatch({

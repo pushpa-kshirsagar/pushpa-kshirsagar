@@ -2506,3 +2506,25 @@ export const LEFT_TRIPPLE_DOT_POPUP_OPTION = [
     disabled: true
   }
 ];
+
+export const SELF_POPUP_OPTION = [
+  {
+    data: 'password',
+    dataValue: 'password',
+    dataKey: 'password',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'sign-out',
+    dataValue: 'sign-out',
+    dataKey: 'sign-out',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  }
+];

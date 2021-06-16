@@ -218,6 +218,8 @@ const ItemTypeItemReviewList = (props) => {
           labelTwoTwo={'type'}
           onClickIconOne={closeRelatedList}
           isAlliance
+          relatedCardFixed={true}
+
         />
       )}
       {listDistinctData &&

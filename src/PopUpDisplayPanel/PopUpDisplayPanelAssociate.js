@@ -621,6 +621,34 @@ const PopUpDisplayPanelAssociate = (props) => {
     }
     if (
       clickValue === 'groups' &&
+      popupHeaderOne === 'culture profiles' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getCultureProfileGroupApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'groups',
+        popupHeaderOne
+      );
+    }
+    if (
+      clickValue === 'types' &&
+      popupHeaderOne === 'culture profiles' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getCultureProfileTypeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'types',
+        popupHeaderOne
+      );
+    }
+    if (
+      clickValue === 'groups' &&
       popupHeaderOne === 'items' &&
       popupHeaderOneBadgeOne === 'review'
     ) {
