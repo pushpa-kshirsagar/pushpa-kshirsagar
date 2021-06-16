@@ -24,11 +24,9 @@ import {
 export const cultureProfileCreatePopup = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,
-  dispatch,
-  popupHeaderOne
+  dispatch
 ) => {
   dispatch({ type: CLEAR_CULTURE_REDUCER_STATE });
-  dispatch({ type: CLEAR_JOB_REDUCER_STATE });
   dispatch({ type: LOADER_START });
   let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
@@ -50,10 +48,9 @@ export const cultureProfileCreatePopup = (
       value: secondaryOptionCheckValue
     }
   });
-  let createType = popupHeaderOne === 'culture profiles' ? 'CULTURE' : 'JOB';
   dispatch({
     type: SET_POPUP_VALUE,
-    payload: { isPopUpValue: 'NAMEPOPUP', popupMode: createType + 'CREATE' }
+    payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CULTURECREATE' }
   });
 };
 export const getCultureProfilesDistinctApiCall = (
@@ -106,7 +103,7 @@ export const getCultureProfileGroupApiCall = (
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({
     type: FILTERMODE,
-    payload: { FilterMode: 'cultureProfileGroupDistinct' + secondaryOptionCheckValue }
+    payload: { FilterMode: 'cultureProfileGroup' + secondaryOptionCheckValue }
   });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
@@ -122,7 +119,7 @@ export const getCultureProfileGroupApiCall = (
     }
   });
 };
-export const getItemsTypeApiCall = (
+export const getCultureProfileTypeApiCall = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,
   countPage,

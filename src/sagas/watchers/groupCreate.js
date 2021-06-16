@@ -16,7 +16,8 @@ import {
   ASSIGNMENT_GROUP_CREATE_URL,
   ASSOCIATE_GROUP_CREATE_URL,
   CULTURE_GROUP_CREATE_URL,
-  ITEM_GROUP_CREATE_URL
+  ITEM_GROUP_CREATE_URL,
+  JOB_GROUP_CREATE_URL
 } from '../../endpoints';
 
 const createGroupApi = async (requestObj) => {
@@ -48,6 +49,9 @@ const createGroupApi = async (requestObj) => {
   }
   if (requestObj.data.whichGroupCreate === 'culture profiles') {
     URL = CULTURE_GROUP_CREATE_URL;
+  }
+  if (requestObj.data.whichGroupCreate === 'job profiles') {
+    URL = JOB_GROUP_CREATE_URL;
   }
   const response = await fetch(URL, requestOptions);
   const json = await response.json();

@@ -41,7 +41,15 @@ import {
   getAssessmentGroupApiCall,
   getAssessmentTypeApiCall
 } from '../Actions/AssessmentModuleAction';
-import { assignmentsDistinctApiCall, assignmentsGroupApiCall, assignmentTypeApiCall } from '../Actions/AssignmentModuleAction';
+import {
+  assignmentsDistinctApiCall,
+  assignmentsGroupApiCall,
+  assignmentTypeApiCall
+} from '../Actions/AssignmentModuleAction';
+import {
+  getCultureProfileGroupApiCall,
+  getCultureProfilesDistinctApiCall
+} from '../Actions/ActionCultureProfile';
 const PopUpMiddlePaneTrippleDot = (props) => {
   const {
     popupHeaderOne,
@@ -149,6 +157,15 @@ const PopUpMiddlePaneTrippleDot = (props) => {
         countPage,
         dispatch,
         'distinct'
+      );
+      dispatch({ type: POPUP_CLOSE });
+    } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'culture profiles') {
+      getCultureProfilesDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        'culture profiles',
+        dispatch
       );
       dispatch({ type: POPUP_CLOSE });
     } else if (
@@ -542,6 +559,29 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           'assignments'
         );
         dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
+      }
+    } else if (middlePaneHeader === 'culture profiles') {
+      if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'groups') {
+        getCultureProfileGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+      } else if (keyVal === 'groups') {
+        getCultureProfileGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
       } else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,

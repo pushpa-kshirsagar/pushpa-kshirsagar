@@ -1,13 +1,13 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import Store from '../../store';
 import {
-  CREATE_CULTURE_SAGA,
+  CREATE_JOB_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { ASSESSEE_CREATE_URL, CULTURE_CREATE_URL } from '../../endpoints';
+import { JOB_CREATE_URL } from '../../endpoints';
 
 const createApiCall = async (requestObj) => {
   const requestOptions = {
@@ -22,19 +22,19 @@ const createApiCall = async (requestObj) => {
   return json;
 };
 
-function* workerCreateCultureProfileSaga(data) {
+function* workerCreateJobProfileSaga(data) {
   try {
-    const response = yield call(createApiCall, { data: data.payload, URL: CULTURE_CREATE_URL });
+    const response = yield call(createApiCall, { data: data.payload, URL: JOB_CREATE_URL });
     if (response.responseCode === '000') {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'culture profile',
+          headerOne: 'job profile',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
           responseObject: response.responseObject,
           reviewMode: 'revise',
-          createMode: 'cultureProfile'
+          createMode: 'jobProfile'
         }
       });
     } else {
@@ -51,7 +51,7 @@ function* workerCreateCultureProfileSaga(data) {
   }
 }
 
-export default function* watchcreateCultureProfileSaga() {
+export default function* watchCreateJobProfileSaga() {
   console.log('IN WATCH ====>');
-  yield takeLatest(CREATE_CULTURE_SAGA, workerCreateCultureProfileSaga);
+  yield takeLatest(CREATE_JOB_SAGA, workerCreateJobProfileSaga);
 }

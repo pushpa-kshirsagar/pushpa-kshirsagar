@@ -44,6 +44,7 @@ import watchForgotCredentialSaga from './watchers/assesseeForgotInformation';
 import watchcreateCultureProfileSaga from './watchers/cultureProfileCreate';
 import watchReviewListCultureProfileSaga from './watchers/cultureProfileReviewList';
 import watchReviewInfoCultureProfileSaga from './watchers/cultureProfileReviewRevise';
+import watchCreateJobProfileSaga from './watchers/jobProfileCreate';
 
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
@@ -92,6 +93,7 @@ export default function* root() {
     fork(watchForgotCredentialSaga),
     fork(watchcreateCultureProfileSaga),
     fork(watchReviewListCultureProfileSaga),
-    fork(watchReviewInfoCultureProfileSaga)
+    fork(watchReviewInfoCultureProfileSaga),
+    fork(watchCreateJobProfileSaga)
   ]);
 }

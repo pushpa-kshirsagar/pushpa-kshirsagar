@@ -2,19 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSOCIATE_POPUP_CLOSE,
+  ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
-  GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+  GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
+  GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
+  LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
-  SET_POPUP_STATE
+  SET_POPUP_STATE,
+  SET_REQUEST_OBJECT
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-import { getItemGroupDistinctApiCall } from '../Actions/ItemModuleAction';
-const ItemGroupReviewList = (props) => {
+import { makeAssessmentTypeObj } from '../Actions/GenericActions';
+import {
+  ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
+import { getItemGroupDistinctApiCall, getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+import { getCultureProfileGroupApiCall, getCultureProfileTypeApiCall } from '../Actions/ActionCultureProfile';
+const CultureProfileTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
@@ -51,7 +61,7 @@ const ItemGroupReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+        type: GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',
@@ -72,7 +82,7 @@ const ItemGroupReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    getItemGroupDistinctApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'groups');
+    getCultureProfileTypeApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'types');
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
@@ -100,7 +110,7 @@ const ItemGroupReviewList = (props) => {
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: middlePaneHeader,
-        popupHeaderOneBadgeOne: 'group',
+        popupHeaderOneBadgeOne: 'type',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -120,6 +130,8 @@ const ItemGroupReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   console.log('FilterMode', FilterMode);
+  const associateSeftId =
+    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
     <div>
       {reviewListDistinctData &&
@@ -131,19 +143,19 @@ const ItemGroupReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.itemGroupStatus}
-                textOne={item.informationBasic.itemGroupName}
-                textTwo={item.informationBasic.itemGroupDescription}
+                status={item.informationEngagement.cultureProfileTypeStatus}
+                textOne={item.informationBasic.cultureProfileTypeName}
+                textTwo={item.informationBasic.cultureProfileTypeDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-                // dataValue={item.informationAllocation.itemGroup}
+                // dataValue={item.informationAllocation.cultureProfileType}
               />
             </div>
           );
         })}
-      {(FilterMode === 'itemGroupDistinctinactive' ||
-        FilterMode === 'itemGroupDistinctsuspended' ||
-        FilterMode === 'itemGroupDistinctterminated') && (
+      {(FilterMode === 'cultureProfileTypeinactive' ||
+        FilterMode === 'cultureProfileTypesuspended' ||
+        FilterMode === 'cultureProfileTypeterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -155,4 +167,4 @@ const ItemGroupReviewList = (props) => {
     </div>
   );
 };
-export default ItemGroupReviewList;
+export default CultureProfileTypeReviewList;
