@@ -44,7 +44,8 @@ import {
   ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
   ITEM_GROUP_REVISE_INFO_SAGA,
   ITEM_TYPE_REVISE_INFO_SAGA,
-  CLEAR_CULTURE_REDUCER_STATE
+  CLEAR_CULTURE_REDUCER_STATE,
+  CULTURE_PROFILE_INFO_REVISE_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -579,6 +580,7 @@ export const DisplayPaneThree = () => {
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
+  const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
   const {
     assesseeGroup,
     assessmentGroup,
@@ -1079,6 +1081,28 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSOCIATE_TYPE_INFO_REVISE_SAGA,
         payload: { headerOne: 'associates', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'information' && headerOne === 'culture profile') {
+      const { informationBasic, informationAllocation } = cultureProfileInformation;
+      const { id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId: id,
+        cultureProfile: {
+          id,
+          informationBasic,
+          informationAllocation
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: CULTURE_PROFILE_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'culture profile',
+          reqBody,
+          createMode
+        }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'item') {
       const { informationBasic, informationAllocation } = itemInformation;

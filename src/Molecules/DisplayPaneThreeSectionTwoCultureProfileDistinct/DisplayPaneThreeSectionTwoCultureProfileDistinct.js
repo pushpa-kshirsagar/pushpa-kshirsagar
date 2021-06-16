@@ -70,6 +70,8 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
               list={frameworkAll}
               mode={reviewMode}
             />
+          </div>
+          <div className={'containerPadding'}>
             <AllocationAccordian
               headerOne="framework+"
               isDisplayCardExpanded={listExpand === 'framework+'}

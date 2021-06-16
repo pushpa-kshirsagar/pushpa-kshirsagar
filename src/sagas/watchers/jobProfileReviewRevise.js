@@ -4,13 +4,16 @@ import {
   LOADER_STOP,
   SET_CULTURE_REDUCER_STATE,
   GET_CULTURE_PROFILE_INFO_SAGA,
-  CULTURE_PROFILE_INFO_REVISE_SAGA
+  CULTURE_PROFILE_INFO_REVISE_SAGA,
+  SET_JOB_REDUCER_STATE,
+  GET_JOB_PROFILE_INFO_SAGA,
+  JOB_PROFILE_INFO_REVISE_SAGA
 } from '../../actionType';
-import { CULTURE_PROFILE_REVIEW_INFO_URL, CULTURE_PROFILE_REVISE_INFO_URL } from '../../endpoints';
+import { JOB_PROFILE_REVIEW_INFO_URL, JOB_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 
-const cultureProfileReviewInfoApi = async (requestObj) => {
+const jobProfileReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = CULTURE_PROFILE_REVIEW_INFO_URL;
+  let URL = JOB_PROFILE_REVIEW_INFO_URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -23,17 +26,17 @@ const cultureProfileReviewInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviewInfoCultureProfileSaga(data) {
+function* workerReviewInfoJobProfileSaga(data) {
   try {
-    const userResponse = yield call(cultureProfileReviewInfoApi, { data: data.payload.reqBody });
+    const userResponse = yield call(jobProfileReviewInfoApi, { data: data.payload.reqBody });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       const { isReviseMode = false } = data.payload;
-      console.log('cultureProfile=======>', userResponse);
+      console.log('jobProfile=======>', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'culture profile',
+          headerOne: 'job profile',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
           responseObject: userResponse.responseObject[0],
@@ -43,8 +46,8 @@ function* workerReviewInfoCultureProfileSaga(data) {
       if (isReviseMode) {
         const { informationBasic } = userResponse.responseObject[0];
         yield put({
-          type: SET_CULTURE_REDUCER_STATE,
-          payload: userResponse.responseObject[0].informationBasic
+          type: SET_JOB_REDUCER_STATE,
+          payload: informationBasic
         });
       }
     }
@@ -56,9 +59,9 @@ function* workerReviewInfoCultureProfileSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
-const cultureProfileReviseInfoApi = async (requestObj) => {
+const jobProfileReviseInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = CULTURE_PROFILE_REVISE_INFO_URL;
+  let URL = JOB_PROFILE_REVISE_INFO_URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -71,15 +74,15 @@ const cultureProfileReviseInfoApi = async (requestObj) => {
   return json;
 };
 
-function* workerReviseInfoCultureProfileSaga(data) {
+function* workerReviseInfoJobProfileSaga(data) {
   try {
-    const userResponse = yield call(cultureProfileReviseInfoApi, { data: data.payload.reqBody });
+    const userResponse = yield call(jobProfileReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
       const { createMode } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'culture profile',
+          headerOne: 'job profile',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
           responseObject: userResponse.responseObject,
@@ -96,7 +99,7 @@ function* workerReviseInfoCultureProfileSaga(data) {
   }
 }
 
-export default function* watchReviewInfoCultureProfileSaga() {
-  yield takeLatest(GET_CULTURE_PROFILE_INFO_SAGA, workerReviewInfoCultureProfileSaga);
-  yield takeLatest(CULTURE_PROFILE_INFO_REVISE_SAGA, workerReviseInfoCultureProfileSaga);
+export default function* watchReviewInfoJobProfileSaga() {
+  yield takeLatest(GET_JOB_PROFILE_INFO_SAGA, workerReviewInfoJobProfileSaga);
+  yield takeLatest(JOB_PROFILE_INFO_REVISE_SAGA, workerReviseInfoJobProfileSaga);
 }
