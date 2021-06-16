@@ -14,7 +14,7 @@ const apiCallFumction = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('idToken')
+      Authorization: localStorage.getItem('idToken')
     }),
     body: JSON.stringify(requestObj.data)
   };

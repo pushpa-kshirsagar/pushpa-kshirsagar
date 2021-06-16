@@ -252,10 +252,24 @@ export const CULTURE_PROFILE_REVIEW_INFO_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile/review';
 export const CULTURE_PROFILE_REVISE_INFO_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile/revise';
+export const JOB_PROFILE_REVIEW_INFO_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/review';
+export const JOB_PROFILE_REVISE_INFO_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/revise';
 export const CULTURE_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile/review-list';
 export const CULTURE_GROUP_CREATE_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-group/create';
+export const CULTURE_REVIEW_GROUP_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile-group/review';
+export const CULTURE_REVISE_GROUP_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile-group/revise';
+export const JOB_REVIEW_GROUP_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-group/review';
+export const JOB_REVISE_GROUP_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-group/revise';
+export const CULTURE_REVIEW_TYPE_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile-type/review';
+export const CULTURE_REVISE_TYPE_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile-type/revise';
+export const JOB_REVIEW_TYPE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-type/review';
+export const JOB_REVISE_TYPE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-type/revise';
 export const CULTURE_TYPE_CREATE_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-type/create';
 export const CULTURE_GROUP_REVIEWLIST_URL =

@@ -44,7 +44,9 @@ import {
   ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
   ITEM_GROUP_REVISE_INFO_SAGA,
   ITEM_TYPE_REVISE_INFO_SAGA,
-  CLEAR_CULTURE_REDUCER_STATE
+  CLEAR_CULTURE_REDUCER_STATE,
+  CULTURE_PROFILE_INFO_REVISE_SAGA,
+  CULTURE_GROUP_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -579,12 +581,14 @@ export const DisplayPaneThree = () => {
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
+  const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
   const {
     assesseeGroup,
     assessmentGroup,
     assignmentGroup,
     associateGroup,
-    itemGroup
+    itemGroup,
+    cultureProfileGroup
   } = useSelector((state) => state.GroupCreateReducer);
   const { assesseeType, assessmentType, assignmentType, associateType, itemType } = useSelector(
     (state) => state.TypeCreateReducer
@@ -876,6 +880,22 @@ export const DisplayPaneThree = () => {
         type: ASSESSMENT_GROUP_REVISE_INFO_SAGA,
         payload: { headerOne: 'assessments', reqBody, assessmentGroupAssessmentReqBody, createMode }
       });
+    } else if (headerOneBadgeOne === 'group' && headerOne === 'culture profiles') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+          cultureProfileGroup: {
+          id,
+          informationBasic: cultureProfileGroup.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: CULTURE_GROUP_REVISE_INFO_SAGA,
+        payload: { headerOne: 'culture profiles', reqBody, createMode }
+      });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'items') {
       const { associateId, id } = responseObject;
       const reqBody = {
@@ -1080,6 +1100,28 @@ export const DisplayPaneThree = () => {
         type: ASSOCIATE_TYPE_INFO_REVISE_SAGA,
         payload: { headerOne: 'associates', reqBody, createMode }
       });
+    } else if (headerOneBadgeOne === 'information' && headerOne === 'culture profile') {
+      const { informationBasic, informationAllocation } = cultureProfileInformation;
+      const { id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId: id,
+        cultureProfile: {
+          id,
+          informationBasic,
+          informationAllocation
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: CULTURE_PROFILE_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'culture profile',
+          reqBody,
+          createMode
+        }
+      });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'item') {
       const { informationBasic, informationAllocation } = itemInformation;
       const { id } = responseObject;
@@ -1271,11 +1313,10 @@ export const DisplayPaneThree = () => {
     });
   };
   const onClickCreateCultureProfileGroup = () => {
-    console.log('ON CLICK CREATE Culture GROUP');
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'cultureProfileGROUPCREATE' }
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture profilesGROUPCREATE' }
     });
   };
   const onClickCreateJobProfileGroup = () => {
@@ -1610,19 +1651,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'cultureProfilesGROUPCREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'culture profilesGROUPCREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'cultureProfilesGROUPCREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture profilesGROUPCREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'cultureProfilesGROUPCREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'culture profilesGROUPCREATE' }
       });
     }
   };
@@ -1634,19 +1675,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'jobProfilesGROUPCREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'job profilesGROUPCREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'jobProfilesGROUPCREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesGROUPCREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'jobProfilesGROUPCREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'job profilesGROUPCREATE' }
       });
     }
   };
@@ -1658,19 +1699,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'cultureProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'cultureProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'cultureProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
       });
     }
   };
@@ -1682,19 +1723,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'jobProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'job ProfilesTYPECREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'jobProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job ProfilesTYPECREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'jobProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'job ProfilesTYPECREATE' }
       });
     }
   };
@@ -2344,7 +2385,7 @@ export const DisplayPaneThree = () => {
                 secondaryIcon={reviseSecondaryIcons}
               />
             )}
-            {createMode === 'cultureProfilesGroup' && reviewMode !== 'revise' && (
+            {createMode === 'culture ProfilesGroup' && reviewMode !== 'revise' && (
               <FooterIconTwo
                 FilterModeEnable={true}
                 FilterMode={FilterMode}
@@ -2391,7 +2432,7 @@ export const DisplayPaneThree = () => {
                 secondaryIcon={reviseSecondaryIcons}
               />
             )}
-            {createMode === 'jobProfilesGroup' && reviewMode !== 'revise' && (
+            {createMode === 'job ProfilesGroup' && reviewMode !== 'revise' && (
               <FooterIconTwo
                 FilterModeEnable={true}
                 FilterMode={FilterMode}

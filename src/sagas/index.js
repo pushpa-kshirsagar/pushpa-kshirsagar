@@ -44,6 +44,11 @@ import watchForgotCredentialSaga from './watchers/assesseeForgotInformation';
 import watchcreateCultureProfileSaga from './watchers/cultureProfileCreate';
 import watchReviewListCultureProfileSaga from './watchers/cultureProfileReviewList';
 import watchReviewInfoCultureProfileSaga from './watchers/cultureProfileReviewRevise';
+import watchReviewCultureProfileGroupInfoSaga from './watchers/cultureProfileGroupReviewRevise';
+import watchReviewCultureProfileTypeInfoSaga from './watchers/cultureProfileTypeReviewRevise';
+import watchReviewInfoJobProfileSaga from './watchers/jobProfileReviewRevise';
+import watchReviewJobProfileGroupInfoSaga from './watchers/jobProfileGroupReviewRevise';
+import watchReviewJobProfileTypeInfoSaga from './watchers/jobProfileTypeReviewRevise';
 import watchCreateJobProfileSaga from './watchers/jobProfileCreate';
 
 export default function* root() {
@@ -94,6 +99,11 @@ export default function* root() {
     fork(watchcreateCultureProfileSaga),
     fork(watchReviewListCultureProfileSaga),
     fork(watchReviewInfoCultureProfileSaga),
+    fork(watchReviewInfoJobProfileSaga),
+    fork(watchReviewCultureProfileGroupInfoSaga),
+    fork(watchReviewJobProfileGroupInfoSaga),
+    fork(watchReviewCultureProfileTypeInfoSaga),
+    fork(watchReviewJobProfileTypeInfoSaga),
     fork(watchCreateJobProfileSaga)
   ]);
 }
