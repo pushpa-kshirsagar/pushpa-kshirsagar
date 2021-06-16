@@ -3,43 +3,42 @@ import watchcreateAssociateSaga from './watchers/associateCreate';
 import watchcreateAssesseeSaga from './watchers/assesseeCreate';
 import watchReviewListAssesseeSaga from './watchers/assesseeReviewList';
 import watchReviewInfoAssesseeSaga from './watchers/assesseeReviewRevise';
-import watchReviewInfoAssociateSaga from './watchers/reviewInfoAssociate';
+import watchReviewInfoAssociateSaga from './watchers/associateReviewRevise';
 import watchReviewListAssociateSaga from './watchers/associateReviewList';
 import watchReviewRolesListSaga from './watchers/roleReviewList';
 import watchcreateAssesseeRoleSaga from './watchers/assesseeRoleCreate';
 import watchcreateAssociateRoleSaga from './watchers/associateRoleCreate';
-import watchReviewAssesseeRoleInfoSaga from './watchers/reviewInfoAssesseeRole';
-import watchReviewAssociateRoleInfoSaga from './watchers/reviewInfoAssociateRole';
-import watchReviewAssesseeGroupInfoSaga from './watchers/reviewInfoAssesseeGroup';
-import watchReviewAssociateGroupInfoSaga from './watchers/reviewInfoAssociateGroup';
+import watchReviewAssesseeRoleInfoSaga from './watchers/assesseeRoleReviewRevise';
+import watchReviewAssociateRoleInfoSaga from './watchers/associateRoleReviewRevise';
+import watchReviewAssesseeGroupInfoSaga from './watchers/assesseeGroupReviewRevise';
+import watchReviewAssociateGroupInfoSaga from './watchers/associateGroupReviewRevise';
 import watchcreateGroupSaga from './watchers/groupCreate';
 import watchReviewGroupsListSaga from './watchers/groupReviewList';
-import watchReviewAssessmentGroupInfoSaga from './watchers/reviewInfoAssessmentGroup';
-import watchReviewInfoAssessmentSaga from './watchers/reviewInfoAssessment';
-import watchReviewInfoAssignmentSaga from './watchers/reviewInfoAssignment';
-import watchReviewAssignmentGroupInfoSaga from './watchers/reviewInfoAssignmentGroup';
+import watchReviewAssessmentGroupInfoSaga from './watchers/assessmentGroupReviewRevise';
+import watchReviewInfoAssessmentSaga from './watchers/assessmentReviewRevise';
+import watchReviewInfoAssignmentSaga from './watchers/assignmentReviewRevise';
+import watchReviewAssignmentGroupInfoSaga from './watchers/assignmentGroupReviewRevise';
 import watchcreateTypeSaga from './watchers/typeCreate';
 import watchReviewTypesListSaga from './watchers/typeReviewList';
 import watchReviewListAssignmentSaga from './watchers/assignmentReviewList';
 import watchReviewListAssessmentSaga from './watchers/assessmentsReviewList';
 import watchCreateAssessmentSaga from './watchers/assessmentCreate';
-import watchReviewAssessmentTypeInfoSaga from './watchers/reviewInfoAssessmentType';
-import watchReviewAssignmentTypeInfoSaga from './watchers/reviewInfoAssignmentType';
-import watchReviewItemTypeInfoSaga from './watchers/reviewInfoItemType';
-import watchReviewAssociateTypeInfoSaga from './watchers/reviewInfoAssociateType';
-import watchReviewAssesseeTypeInfoSaga from './watchers/reviewInfoAssesseeType';
+import watchReviewAssessmentTypeInfoSaga from './watchers/assessmentTypeReviewRevise';
+import watchReviewAssignmentTypeInfoSaga from './watchers/assignmentTypeReviewRevise';
+import watchReviewItemTypeInfoSaga from './watchers/itemTypeReviewRevise';
+import watchReviewAssociateTypeInfoSaga from './watchers/associateTypeReviewRevise';
+import watchReviewAssesseeTypeInfoSaga from './watchers/assesseeTypeReviewRevise';
 import watchCreateAssignmentSaga from './watchers/assignmentCreate';
 import watchSignInAssesseeSaga from './watchers/assesseeSignIn';
 import watchConfirmAssesseeSaga from './watchers/confirmAssessee';
-import workerReviseInfoAssociateSaga from './watchers/reviseAssociateInfo';
 import watchcreateNodeSaga from './watchers/associateNodeCreate';
 import watchReviewAssociatesNodeListSaga from './watchers/associateNodeReviewList';
-import watchReviewAssociateNodeInfoSaga from './watchers/reviewInfoAssociateNode';
+import watchReviewAssociateNodeInfoSaga from './watchers/associateNodeReviewRevise';
 import workerRoleTypeShareSaga from './watchers/sharedRoleType';
 import watchcreateItemSaga from './watchers/itemCreate';
 import watchItemReviewListSaga from './watchers/itemReviewList';
-import watchReviewInfoItemSaga from './watchers/reviewInfoItem';
-import watchReviewItemGroupInfoSaga from './watchers/reviewInfoItemGroup';
+import watchReviewInfoItemSaga from './watchers/itemReviewRevise';
+import watchReviewItemGroupInfoSaga from './watchers/itemGroupReviewRevise';
 import watchForgotCredentialSaga from './watchers/assesseeForgotInformation';
 import watchcreateCultureProfileSaga from './watchers/cultureProfileCreate';
 import watchReviewListCultureProfileSaga from './watchers/cultureProfileReviewList';
@@ -83,7 +82,6 @@ export default function* root() {
     fork(watchReviewInfoAssignmentSaga),
     fork(watchSignInAssesseeSaga),
     fork(watchConfirmAssesseeSaga),
-    fork(workerReviseInfoAssociateSaga),
     fork(watchcreateNodeSaga),
     fork(watchReviewAssociatesNodeListSaga),
     fork(watchReviewAssociateNodeInfoSaga),
