@@ -1,14 +1,14 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import Store from '../../store';
 import {
-  GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
+  GET_JOBPROFILE_REVIEW_LIST_SAGA,
   LOADER_STOP,
-  REVIEWLIST_DISTINCT_DATA,
   RELATED_REVIEWLIST_DISTINCT_DATA,
+  REVIEWLIST_DISTINCT_DATA,
   SET_MIDDLEPANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { CULTURE_REVIEWLIST_URL } from '../../endpoints';
+import { JOB_REVIEWLIST_URL } from '../../endpoints';
 
 const apiCallFumction = async (requestObj) => {
   const requestOptions = {
@@ -23,23 +23,23 @@ const apiCallFumction = async (requestObj) => {
   return json;
 };
 
-function* workerCultureProfileReviewListSaga(data) {
+function* workerJobProfileReviewListSaga(data) {
   try {
     const response = yield call(apiCallFumction, {
       data: data.payload.request,
-      URL: CULTURE_REVIEWLIST_URL
+      URL: JOB_REVIEWLIST_URL
     });
     if (response.responseCode === '000') {
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: 'culture profiles',
+            middlePaneHeader: 'job profiles',
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',
             middlePaneHeaderBadgeFour: '',
-            typeOfMiddlePaneList: 'cultureProfilesDistinctReviewList',
+            typeOfMiddlePaneList: 'jobProfilesDistinctReviewList',
             scanCount: response && response.countTotal,
             showMiddlePaneState: true
           }
@@ -64,7 +64,7 @@ function* workerCultureProfileReviewListSaga(data) {
   }
 }
 
-export default function* watchReviewListCultureProfileSaga() {
+export default function* watchReviewListJobProfileSaga() {
   console.log('IN WATCH ====>');
-  yield takeLatest(GET_CULTUREPROFILE_REVIEW_LIST_SAGA, workerCultureProfileReviewListSaga);
+  yield takeLatest(GET_JOBPROFILE_REVIEW_LIST_SAGA, workerJobProfileReviewListSaga);
 }

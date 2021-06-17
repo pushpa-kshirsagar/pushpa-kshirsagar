@@ -12,7 +12,9 @@ import {
   SET_POPUP_VALUE,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import {
   makeCultureProfileGroupObj,
@@ -28,6 +30,18 @@ export const cultureProfileCreatePopup = (
 ) => {
   dispatch({ type: CLEAR_CULTURE_REDUCER_STATE });
   dispatch({ type: LOADER_START });
+  let requestObj = makeCultureProfileGroupObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
   let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
   dispatch({
@@ -38,6 +52,18 @@ export const cultureProfileCreatePopup = (
       BadgeTwo: '',
       BadgeThree: '',
       nodeViewState: 'list',
+      isMiddlePaneList: false
+    }
+  });
+  let typeRequestObj = makeCultureProfileTypeObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typeRequestObj });
+  dispatch({
+    type: GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
+    payload: {
+      request: typeRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
       isMiddlePaneList: false
     }
   });

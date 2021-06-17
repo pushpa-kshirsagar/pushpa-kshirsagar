@@ -246,6 +246,8 @@ export const ASSIGNMENT_GROUP_ASSIGNMENT_URL =
 export const ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/associate-node/assignment/review-list';
 export const SEND_AUTH_CODE_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/forgot-password';
+export const FORGOT_CREDENTIAL_URL =
+  PLATFORM_URL + '/dev/insight-guru/api/platform/forget-credential';
 export const FORGOT_PASSWORD_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/confirm-password';
 export const CULTURE_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/culture-profile/create';
 export const CULTURE_PROFILE_REVIEW_INFO_URL =
@@ -274,10 +276,14 @@ export const CULTURE_TYPE_CREATE_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-type/create';
 export const CULTURE_GROUP_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-group/review-list';
- export const CULTURE_TYPE_REVIEWLIST_URL =
+export const CULTURE_TYPE_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-type/review-list';
-  //job
+//job
+export const JOB_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/review-list';
 export const JOB_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/create';
 export const JOB_GROUP_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-group/create';
 export const JOB_GROUP_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/job-profile-group/review-list';
+export const JOB_TYPE_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-profile-type/review-list';
+export const JOB_TYPE_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-type/create';

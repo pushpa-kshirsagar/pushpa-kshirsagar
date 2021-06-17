@@ -23,11 +23,15 @@ import {
   SET_SIGN_IN_STATUS,
   SEND_AUTH_CODE_FORGOT_PASS,
   FORGOT_PASSWORD_SAGA,
-  LOADER_START
+  SEND_FORGOT_CREDENTIAL_SAGA,
+  LOADER_START,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../../actionType';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
 import { Fragment } from 'react';
 import { SIGN_IN_URL } from '../../endpoints';
+import SelectField from '../../Atoms/SelectField/SelectField';
+import ReviewList from '../../Molecules/ReviewList/ReviewList';
 
 const DisplayPageSignIn = () => {
   const bgImg = './Image/bg.jpg';
@@ -52,8 +56,13 @@ const DisplayPageSignIn = () => {
   const [revisedPasswordError, setRevisedPasswordError] = useState('');
   const [confirmRevisedPassword, setConfirmRevisedPassword] = useState('');
   const [confirmRevisedPasswordError, setConfirmRevisedPasswordError] = useState('');
+  const [credentialOptionError, setCredentialOptionError] = useState('');
+  const [credentialOption, setCredentialOption] = useState('');
   const dispatch = useDispatch();
   const { assesseeSignInStatus } = useSelector((state) => state.UserReducer);
+  const { credentialOptionArr, middlePaneSelectedValue } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const { isLoading } = useSelector((state) => state.LoaderReducer);
 
   useEffect(() => {
@@ -77,14 +86,23 @@ const DisplayPageSignIn = () => {
     }
     if (assesseeSignInStatus === 'AUTH_CODE_SEND') {
       setStage('confirmPassword');
+      dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
+      setIsCredentialsInValid('');
+    }
+    if (assesseeSignInStatus === 'CREDENTIAL_SEND') {
+      setStage('credentialOptions');
+      dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
+      setIsCredentialsInValid('');
     }
     if (assesseeSignInStatus === 'CODE 400') {
       setCodeError(INCORRECT_INFORMATION_ERROR_MESSAGE);
       dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
+      setIsCredentialsInValid('');
     }
     if (assesseeSignInStatus === 'CODE 001') {
       setForgotCredentialError(INCORRECT_INFORMATION_ERROR_MESSAGE);
       dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
+      setIsCredentialsInValid('');
     }
     if (assesseeSignInStatus === 'PASSWORD_UPDATED') {
       let path = SIGN_IN_URL;
@@ -93,6 +111,7 @@ const DisplayPageSignIn = () => {
     }
   }, [assesseeSignInStatus, history]);
   console.log('assesseeSignInStatus', assesseeSignInStatus);
+  console.log('credentialOptionArr', credentialOptionArr);
 
   const onClickSignIn = () => {
     setIsCredentialsInValid('in progress');
@@ -136,26 +155,29 @@ const DisplayPageSignIn = () => {
     return new CognitoUser({ Username, Pool });
   };
   const sendCode = () => {
-    console.log('sendCode+++++++');
+    console.log('sendCode+++++++', forgotCredential, credentialOption);
     if (forgotCredential === '') {
       setForgotCredentialError(REQUIRED_ERROR_MESSAGE);
       return;
     }
-    dispatch({ type: LOADER_START });
-    dispatch({ type: SEND_AUTH_CODE_FORGOT_PASS, payload: { credential: forgotCredential } });
-    setForgotCredentialError('');
-    // getUser(forgotCredential).forgotPassword({
-    //   onSuccess: (data) => {
-    //     console.log('onSuccess IN FORGOT PASSWORD', data);
-    //   },
-    //   onFailure: (err) => {
-    //     console.log('onFailure IN FORGOT PASSWORD', err);
-    //   },
-    //   inputVerificationCode: (data) => {
-    //     console.log('inputVerificationCode IN FORGOT PASSWORD', data);
-    //     setStage('confirmPassword');
-    //   }
-    // });
+    if (credentialOption === '') {
+      setCredentialOptionError(REQUIRED_ERROR_MESSAGE);
+      return;
+    }
+    if (credentialOption === 'password' && forgotCredential !== '' && credentialOption !== '') {
+      // dispatch({ type: LOADER_START });
+      setIsCredentialsInValid('in progress');
+      dispatch({
+        type: SEND_AUTH_CODE_FORGOT_PASS,
+        payload: { assesseeSignInCredential: forgotCredential }
+      });
+      setForgotCredentialError('');
+    }
+    if (credentialOption === 'credential' && forgotCredential !== '' && credentialOption !== '') {
+      // dispatch({ type: LOADER_START });
+      setIsCredentialsInValid('in progress');
+      dispatch({ type: SEND_FORGOT_CREDENTIAL_SAGA, payload: { assesseeEmail: forgotCredential } });
+    }
   };
 
   const resetPassword = () => {
@@ -178,9 +200,9 @@ const DisplayPageSignIn = () => {
         dispatch({
           type: FORGOT_PASSWORD_SAGA,
           payload: {
-            credential: forgotCredential,
-            password: confirmRevisedPassword,
-            authenticationCode: code
+            assesseeSignInCredential: forgotCredential,
+            assesseeSignInPassword: confirmRevisedPassword,
+            assesseeAuthenticationCode: code
           }
         });
         // getUser(forgotCredential).confirmPassword(code, revisedPassword, {
@@ -210,7 +232,23 @@ const DisplayPageSignIn = () => {
       console.log('ALL Field requred');
     }
   };
-
+  const resetCredential = () => {
+    setStage('signIn');
+    setUserName(middlePaneSelectedValue);
+    setPassword('');
+    setCredentialOption('');
+    setForgotCredential('');
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: '' }
+    });
+  };
+  const onClickList = (e) => {
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'middlePaneSelectedValue', value: e.currentTarget.getAttribute('tag') }
+    });
+  };
   return (
     <Fragment>
       <LoadingComponent isActive={isLoading} />
@@ -258,6 +296,21 @@ const DisplayPageSignIn = () => {
                     </IconButton>
                   </>
                 )}
+                {stage === 'credentialOptions' && (
+                  <>
+                    <IconButton
+                      onClick={() => {
+                        setStage('forgotPassword');
+                      }}
+                      className="form-icon-style rotate-icon"
+                    >
+                      <SendIcon style={{ height: 20, width: 20 }} />
+                    </IconButton>
+                    <IconButton className="form-icon-style">
+                      <SendIcon style={{ height: 20, width: 20 }} onClick={resetCredential} />
+                    </IconButton>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -280,6 +333,7 @@ const DisplayPageSignIn = () => {
                   label="credential"
                   type="text"
                   errorMsg={isUserNameValid}
+                  value={userName}
                   onClick={(e) => {
                     setIsUserNameValid('');
                     setIsCredentialsInValid('');
@@ -291,6 +345,7 @@ const DisplayPageSignIn = () => {
                   label="password"
                   type="password"
                   errorMsg={isPasswordValid}
+                  value={password}
                   onClick={(e) => {
                     setIsPasswordValid('');
                     setIsCredentialsInValid('');
@@ -341,17 +396,47 @@ const DisplayPageSignIn = () => {
               </div> */}
                   </div>
                 </div>
-                <InputField
-                  id={'forgotCredential'}
-                  value={forgotCredential}
-                  label={'credential'}
-                  type="text"
-                  errorMsg={forgotCredentialError}
-                  onClick={(e) => {
-                    setForgotCredentialError('');
-                    setForgotCredential(e.target.value);
-                  }}
-                />
+                <FormControl style={{ width: '100%' }}>
+                  <SelectField
+                    tag={'assesseeSignIn'}
+                    label={'credential'}
+                    listSelect={['credential', 'password']}
+                    errorMsg={credentialOptionError}
+                    onChange={(e) => {
+                      setCredentialOption(e.target.value);
+                      setCredentialOptionError('');
+                    }}
+                    value={credentialOption}
+                  />
+
+                  <InputField
+                    id={'forgotCredential'}
+                    value={forgotCredential}
+                    label={'credential'}
+                    type="text"
+                    errorMsg={forgotCredentialError}
+                    onClick={(e) => {
+                      setForgotCredentialError('');
+                      setForgotCredential(e.target.value);
+                    }}
+                  />
+                  <div className={'forgot-and-progress-flex'}>
+                    <div>
+                      <Label text="" fontSize="1.2rem" colour="#0000008a" />
+                    </div>
+                    <div>
+                      {isCredentialsInValid && (
+                        <Label
+                          text={isCredentialsInValid}
+                          fontSize="1.2rem"
+                          colour={
+                            isCredentialsInValid === 'in progress' ? '#7DC832' : 'rgb(244, 67, 54)'
+                          }
+                        />
+                      )}
+                    </div>
+                  </div>
+                </FormControl>
               </>
             )}
             {stage === 'confirmPassword' && (
@@ -390,6 +475,28 @@ const DisplayPageSignIn = () => {
                   }}
                 />
               </FormControl>
+            )}
+            {stage === 'credentialOptions' && (
+              <>
+                {credentialOptionArr.map((item, index) => {
+                  return (
+                    <div className="containerPadding" key={index}>
+                      <ReviewList
+                        className=""
+                        id={index}
+                        tag={item.username}
+                        isSelectedReviewList={middlePaneSelectedValue === item.username}
+                        // status={item.informationEngagement.itemStatus}
+                        // actualStatus={item.informationEngagement.itemStatus}
+                        textOne={item.username}
+                        textTwo={''}
+                        isTooltipActive={false}
+                        onClickEvent={onClickList}
+                      />
+                    </div>
+                  );
+                })}
+              </>
             )}
           </div>
         </div>

@@ -25,7 +25,8 @@ const createGroupApi = async (requestObj) => {
     method: 'POST',
     headers: new Headers({
       Authorization:
-        requestObj.data.whichGroupCreate === 'culture profiles'
+        requestObj.data.whichGroupCreate === 'culture profiles' ||
+        requestObj.data.whichGroupCreate === 'job profiles'
           ? localStorage.getItem('idToken')
           : localStorage.getItem('token')
     }),
