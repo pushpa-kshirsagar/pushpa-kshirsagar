@@ -46,7 +46,9 @@ import {
   ITEM_TYPE_REVISE_INFO_SAGA,
   CLEAR_CULTURE_REDUCER_STATE,
   CULTURE_PROFILE_INFO_REVISE_SAGA,
-  CULTURE_GROUP_REVISE_INFO_SAGA
+  CULTURE_GROUP_REVISE_INFO_SAGA,
+  CULTURE_TYPE_REVISE_INFO_SAGA,
+  JOB_TYPE_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -588,11 +590,18 @@ export const DisplayPaneThree = () => {
     assignmentGroup,
     associateGroup,
     itemGroup,
-    cultureProfileGroup
+    cultureProfileGroup,
+    jobProfileGroup
   } = useSelector((state) => state.GroupCreateReducer);
-  const { assesseeType, assessmentType, assignmentType, associateType, itemType } = useSelector(
-    (state) => state.TypeCreateReducer
-  );
+  const {
+    assesseeType,
+    assessmentType,
+    assignmentType,
+    associateType,
+    itemType,
+    cultureProfileType,
+    jobProfileType
+  } = useSelector((state) => state.TypeCreateReducer);
   const { associateRole, assesseeRole } = useSelector((state) => state.RoleCreateReducer);
   const { nodeInformation } = useSelector((state) => state.NodeCreateReducer);
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
@@ -664,13 +673,13 @@ export const DisplayPaneThree = () => {
       if (assesseeInfo.tempAddressCommunication === 'home address primary') {
         informationContact.assesseeAddressHomePrimary.assesseeAddressCommunication = true;
       }
-       if (assesseeInfo.tempAddressCommunication === 'home address secondary') {
+      if (assesseeInfo.tempAddressCommunication === 'home address secondary') {
         informationContact.assesseeAddressHomeSecondary.assesseeAddressCommunication = true;
       }
-       if (assesseeInfo.tempAddressCommunication === 'work address primary') {
+      if (assesseeInfo.tempAddressCommunication === 'work address primary') {
         informationContact.assesseeAddressWorkPrimary.assesseeAddressCommunication = true;
       }
-       if (assesseeInfo.tempAddressCommunication === 'work address secondary') {
+      if (assesseeInfo.tempAddressCommunication === 'work address secondary') {
         informationContact.assesseeAddressWorkSecondary.assesseeAddressCommunication = true;
       }
       // telephone communication
@@ -886,7 +895,7 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-          cultureProfileGroup: {
+        cultureProfileGroup: {
           id,
           informationBasic: cultureProfileGroup.informationBasic
         }
@@ -1055,6 +1064,44 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
         payload: { headerOne: 'assignment', reqBody, assignmentTypeAssignmentReqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'culture profiles') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        // cultureProfileTypeCultureProfile: {
+        //   cultureProfileTypeCultureProfileAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+        //   cultureProfileTypeCultureProfileUnallocate: assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        // },
+        cultureProfileType: {
+          id,
+          informationBasic: cultureProfileType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: CULTURE_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'culture profiles', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'job profiles') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        // jobProfileTypeJobProfile: {
+        //   jobProfileTypeJobProfileAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+        //   jobProfileTypeJobProfileUnallocate: assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        // },
+        jobProfileType: {
+          id,
+          informationBasic: jobProfileType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: JOB_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'job profiles', reqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'items') {
       const { associateId, id } = responseObject;
@@ -1324,7 +1371,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'jobProfileGROUPCREATE' }
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesTYPECREATE' }
     });
   };
   const onClickCreateCultureProfileType = () => {
@@ -1332,7 +1379,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'cultureProfileTYPECREATE' }
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture profilesTYPECREATE' }
     });
   };
   const onClickCreateJobProfileType = () => {
@@ -1340,7 +1387,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'jobProfileTYPECREATE' }
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesTYPECREATE' }
     });
   };
 
@@ -1699,19 +1746,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'culture profilesTYPECREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture profilesTYPECREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'culture profilesTYPECREATE' }
       });
     }
   };
@@ -1723,19 +1770,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'job ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'job profilesTYPECREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesTYPECREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'job ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'job profilesTYPECREATE' }
       });
     }
   };
@@ -1914,19 +1961,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'JOBPROFILECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'JOBCREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'JOBPROFILECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'JOBCREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'JOBPROFILECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'JOBCREATE' }
       });
     }
   };

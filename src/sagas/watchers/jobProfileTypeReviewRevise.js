@@ -5,7 +5,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   GET_JOB_TYPE_REVIEW_INFO_SAGA,
-  JOB_TYPE_REVISE_INFO_SAGA
+  JOB_TYPE_REVISE_INFO_SAGA,
+  SET_JOB_TYPE_REDUCER_STATE
 } from '../../actionType';
 import { JOB_REVIEW_TYPE_URL, JOB_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -56,15 +57,15 @@ function* workerReviewJobProfileTypeInfoSaga(data) {
         }
       });
       if (isReviseMode) {
-        // yield put({
-        //   type: SET_ASSESSMENT_GROUP_REDUCER_STATE,
-        //   payload: userResponse.responseObject[0].informationBasic
-        // });
+        yield put({
+          type: SET_JOB_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
       }
     }
 
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -125,7 +126,7 @@ function* workerReviseJobProfileTypeInfoSaga(data) {
     }
 
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

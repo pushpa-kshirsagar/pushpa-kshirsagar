@@ -47,7 +47,9 @@ import {
   GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA,
   GET_CULTURE_PROFILE_INFO_SAGA,
   GET_CULTURE_GROUP_REVIEW_INFO_SAGA,
-  GET_JOB_GROUP_REVIEW_INFO_SAGA
+  GET_JOB_GROUP_REVIEW_INFO_SAGA,
+  GET_CULTURE_TYPE_REVIEW_INFO_SAGA,
+  GET_JOB_TYPE_REVIEW_INFO_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -696,7 +698,7 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'jobProfileDistinctReviewList') {
+      if (typeOfMiddlePaneList === 'jobProfilesGroupDistinctReviewList') {
         dispatch({
           type: GET_JOB_GROUP_REVIEW_INFO_SAGA,
           payload: {
@@ -743,6 +745,72 @@ const PopUpMiddlePaneList = (props) => {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
             itemGroupItemReqBody,
+            reqBody: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
+              filter: 'true',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'cultureProfilesTypeDistinctReviewList') {
+        dispatch({
+          type: GET_CULTURE_TYPE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            isReviseMode,
+            reqBody: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary,
+              filter: 'true',
+              search: [
+                {
+                  condition: 'and',
+                  searchBy: [
+                    {
+                      dataType: 'string',
+                      conditionColumn: 'id',
+                      conditionValue: {
+                        condition: 'eq',
+                        value: {
+                          from: selectedTagValue
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesTypeDistinctReviewList') {
+        dispatch({
+          type: GET_JOB_TYPE_REVIEW_INFO_SAGA,
+          payload: {
+            secondaryOptionCheckValue: 'key',
+            isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
