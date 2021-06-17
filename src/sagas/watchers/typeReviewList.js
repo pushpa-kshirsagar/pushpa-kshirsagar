@@ -6,6 +6,7 @@ import {
   GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
   GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+  GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
   GET_TYPE_GROUP_REVIEW_LIST_SAGA,
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
@@ -25,7 +26,8 @@ import {
   ASSESSMENT_TYPE_GROUP_URL,
   ITEM_TYPE_GROUP_URL,
   ASSIGNMENT_TYPE_GROUP_URL,
-  CULTURE_TYPE_REVIEWLIST_URL
+  CULTURE_TYPE_REVIEWLIST_URL,
+  JOB_TYPE_REVIEWLIST_URL
 } from '../../endpoints';
 
 const TypesReviewListDistinctApi = async (requestObj) => {
@@ -223,6 +225,51 @@ function* workerReviewCultureProfileTypeListSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerReviewJobProfileTypeListSaga(data) {
+  try {
+    const userResponse = yield call(TypesReviewListDistinctApi, {
+      data: data.payload.request,
+      URL: JOB_TYPE_REVIEWLIST_URL,
+      idIdToken: true
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'job profiles',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: data.payload.BadgeThree,
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'jobProfilesTypeDistinctReviewList',
+            scanCount: userResponse && userResponse.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+      yield put({
+        type: data.payload.isMiddlePaneList
+          ? REVIEWLIST_DISTINCT_DATA
+          : SET_CORE_TYPE_REVIEW_LIST_DATA,
+        payload: userResponse.responseObject
+      });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
 function* workerReviewAssessmentTypeListSaga(data) {
   try {
     const userResponse = yield call(TypesReviewListDistinctApi, {
@@ -357,6 +404,7 @@ export default function* watchReviewTypesListSaga() {
     GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
     workerReviewCultureProfileTypeListSaga
   );
+  yield takeLatest(GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA, workerReviewJobProfileTypeListSaga);
   yield takeLatest(GET_ITEM_TYPE_REVIEW_LIST_SAGA, workerReviewItemTypeListSaga);
   yield takeLatest(GET_TYPE_GROUP_REVIEW_LIST_SAGA, workerReviewTypeGroupListSaga);
 }

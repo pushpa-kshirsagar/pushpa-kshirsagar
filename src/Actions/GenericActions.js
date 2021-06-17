@@ -4930,3 +4930,356 @@ export const makeCultureProfileTypeScanObj = (
   };
   return requestObj;
 };
+export const makeJobProfileObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.jobProfileStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeJobProfileScanObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.jobProfileStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.jobProfileName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.jobProfileDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeJobProfileGroupObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.jobProfileGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeJobProfileGroupScanObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileGroupName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.jobProfileGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.jobProfileGroupName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.jobProfileGroupDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileTypeName',
+      order: 'asc'
+    },
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.jobProfileTypeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};
+export const makeJobProfileTypeScanObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+        }
+      };
+    }
+  }
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileTypeName',
+      order: 'asc'
+    },
+    numberPage: numberPage,
+    countPage: countPage,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.jobProfileTypeStatus',
+            conditionValue: searchObj
+          }
+        ]
+      },
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.jobProfileTypeName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.jobProfileTypeDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  return requestObj;
+};

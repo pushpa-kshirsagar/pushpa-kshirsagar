@@ -66,7 +66,8 @@ const initialState = {
   unselectedFlagedArray: [],
   isFlaged: false,
   flagedValue: '',
-  errorResponse: ''
+  errorResponse: '',
+  credentialOptionArr:[]
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

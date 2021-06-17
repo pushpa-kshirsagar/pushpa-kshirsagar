@@ -19,9 +19,12 @@ const PopUpCultureProfileCreate = (props) => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { selectedAssociateInfo, coreNodeReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    coreNodeReviewListData,
+    coreGroupReviewListData,
+    coreTypeReviewListData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
 
@@ -111,15 +114,16 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
-        ]}
-        selectedList={[]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreGroupReviewListData}
+        selectedList={
+          cultureProfileInformation.informationAllocation.cultureProfileGroup
+            .cultureProfileGroupPrimary
+        }
+        textOne={'cultureProfileGroupName'}
+        textTwo={'cultureProfileGroupDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'cultureProfileGroup', 'cultureProfileGroupPrimary');
+        }}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -178,15 +182,16 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'type'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a type'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
-        ]}
-        selectedList={[]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreTypeReviewListData}
+        selectedList={
+          cultureProfileInformation.informationAllocation.cultureProfileType
+            .cultureProfileTypePrimary
+        }
+        textOne={'cultureProfileTypeName'}
+        textTwo={'cultureProfileTypeDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'cultureProfileType', 'cultureProfileTypePrimary');
+        }}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

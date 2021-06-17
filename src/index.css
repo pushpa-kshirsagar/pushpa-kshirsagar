@@ -21,10 +21,16 @@ body {
   display: flex !important;
   height: 50px;
 }
-.relatedCardFixed{
+.forgot-and-progress-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5px;
+}
+.relatedCardFixed {
   top: 0;
-    z-index: 2;
-    position: sticky;
+  z-index: 2;
+  position: sticky;
 }
 .helperTextCore {
   height: 10px;
@@ -47,7 +53,7 @@ body {
   color: #808080;
   width: 2rem !important;
   bottom: 0;
-  font-size: 2rem!important;
+  font-size: 2rem !important;
   height: 2rem !important;
   position: relative;
   text-align: center;
@@ -75,8 +81,8 @@ body {
   font-size: 4rem;
   background-color: #e5e5e5 !important;
   color: #fff;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important;
 }
 .imageNA svg {
   height: 4rem;
@@ -87,8 +93,8 @@ body {
   font-size: 4rem;
   background-color: #b2b2b2 !important;
   color: #fff;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important;
 }
 .imageNASelected svg {
   height: 4rem;
