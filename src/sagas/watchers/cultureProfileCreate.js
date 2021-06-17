@@ -32,7 +32,7 @@ function* workerCreateCultureProfileSaga(data) {
           headerOne: 'culture profile',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
-          responseObject: response.responseObject,
+          responseObject: response.responseObject[0],
           reviewMode: 'revise',
           createMode: 'cultureProfile'
         }
