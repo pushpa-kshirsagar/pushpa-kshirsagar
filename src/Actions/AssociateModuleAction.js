@@ -576,6 +576,7 @@ export const getAssociateNodeApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
     payload: {
@@ -623,6 +624,7 @@ export const getInternalNodeApiCall = (
   });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: INTERNAL_NODE_LIST_SAGA,
     payload: {
@@ -669,6 +671,7 @@ export const getAssociateDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
     payload: {
@@ -700,6 +703,7 @@ export const getAssociateRoleDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
     payload: {
@@ -733,6 +737,7 @@ export const getAssociateGroupDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -817,6 +822,7 @@ export const getAssociatesTypeApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
     payload: {

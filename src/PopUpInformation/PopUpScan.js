@@ -29,6 +29,7 @@ import {
   GET_ITEM_GROUP_REVIEW_LIST_SAGA,
   GET_ITEM_REVIEW_LIST_SAGA,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+  GET_JOBPROFILE_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -59,7 +60,8 @@ import {
   makeItemTypeScanObj,
   makeCultureProfileScanObj,
   makeCultureProfileGroupScanObj,
-  makeCultureProfileTypeScanObj
+  makeCultureProfileTypeScanObj,
+  makeJobProfileScanObj
 } from '../Actions/GenericActions';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import {
@@ -571,6 +573,29 @@ const PopUpScan = (props) => {
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
         dispatch({
           type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesDistinctReviewList') {
+        let requestObect = makeJobProfileScanObj(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({
+          type: GET_JOBPROFILE_REVIEW_LIST_SAGA,
           payload: {
             request: requestObect,
             BadgeOne: middlePaneHeaderBadgeOne,

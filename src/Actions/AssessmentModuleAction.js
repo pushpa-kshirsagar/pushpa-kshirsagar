@@ -18,7 +18,8 @@ import {
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
   CLEAR_ASSESSMENT_INFO,
-  GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA
+  GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA,
+  SET_PAGE_COUNT
 } from '../actionType';
 import {
   getAssessmentGroupAssessmentReqObj,
@@ -214,6 +215,7 @@ export const getAssessmentDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
     payload: {
@@ -244,6 +246,7 @@ export const getAssessmentGroupApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -275,6 +278,7 @@ export const getAssessmentTypeApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
     payload: {

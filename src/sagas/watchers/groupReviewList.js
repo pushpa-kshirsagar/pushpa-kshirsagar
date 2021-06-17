@@ -313,7 +313,8 @@ function* workerReviewJobProfileGroupListSaga(data) {
   try {
     const userResponse = yield call(GroupsReviewListDistinctApi, {
       data: data.payload.request,
-      URL: JOB_GROUP_REVIEWLIST_URL
+      URL: JOB_GROUP_REVIEWLIST_URL,
+      isIdToken: true
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
@@ -363,5 +364,5 @@ export default function* watchReviewGroupsListSaga() {
   yield takeLatest(GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA, workerReviewAssignmentGroupListSaga);
   yield takeLatest(GET_ITEM_GROUP_REVIEW_LIST_SAGA, workerReviewItemGroupListSaga);
   yield takeLatest(GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA, workerReviewCulProfileGroupListSaga);
-  // yield takeLatest(GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA, workerReviewJobProfileGroupListSaga);
+  yield takeLatest(GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA, workerReviewJobProfileGroupListSaga);
 }

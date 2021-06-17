@@ -17,7 +17,8 @@ import {
   SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
-  GET_NODE_ITEMS_REVIEW_LIST_SAGA
+  GET_NODE_ITEMS_REVIEW_LIST_SAGA,
+  SET_PAGE_COUNT
 } from '../actionType';
 import {
   getItemGroupItemReqObj,
@@ -105,6 +106,7 @@ export const getItemsDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ITEM_REVIEW_LIST_SAGA,
     payload: {
@@ -134,6 +136,7 @@ export const getItemGroupDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -163,6 +166,7 @@ export const getItemsTypeApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
     payload: {

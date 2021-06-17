@@ -4,23 +4,30 @@ import {
   GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
   GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
   GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
+  CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
+  CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA,
   LOADER_START,
   SET_MOBILE_PANE_STATE,
   SET_REQUEST_OBJECT,
   CLEAR_CULTURE_REDUCER_STATE,
-  CLEAR_JOB_REDUCER_STATE,
   SET_POPUP_VALUE,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
-  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
+  SET_PAGE_COUNT,
+  SET_RELATED_REQUEST_OBJECT
 } from '../actionType';
 import {
+  geCultureGroupCultureReqObj,
+  geCultureGroupCultureScanReqObj,
   makeCultureProfileGroupObj,
   makeCultureProfileObj,
   makeCultureProfileTypeObj,
-  makeInternalNodeObj
+  makeInternalNodeObj,
+  geCultureTypeCultureReqObj,
+  geCultureTypeCultureScanReqObj
 } from './GenericActions';
 
 export const cultureProfileCreatePopup = (
@@ -101,6 +108,7 @@ export const getCultureProfilesDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
     payload: {
@@ -134,6 +142,7 @@ export const getCultureProfileGroupApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -168,11 +177,106 @@ export const getCultureProfileTypeApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
     payload: {
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getCultureGroupCultureDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = geCultureGroupCultureReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = geCultureGroupCultureScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'culture profiles',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getCultureTypeCultureDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = geCultureTypeCultureReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = geCultureTypeCultureScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'culture profiles',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

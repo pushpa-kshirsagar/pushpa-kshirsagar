@@ -10,6 +10,7 @@ import {
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT,
   SET_POPUP_VALUE,
   SET_REQUEST_OBJECT
 } from '../actionType';
@@ -74,6 +75,7 @@ export const getJobProfilesDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_JOBPROFILE_REVIEW_LIST_SAGA,
     payload: {
@@ -107,6 +109,7 @@ export const getJobProfileGroupApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -141,6 +144,7 @@ export const getJobProfileTypeApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
     payload: {

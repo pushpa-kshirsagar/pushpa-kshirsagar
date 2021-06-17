@@ -101,7 +101,7 @@ import {
   getCultureProfilesDistinctApiCall,
   getCultureProfileTypeApiCall
 } from '../Actions/ActionCultureProfile';
-import { jobProfileCreatePopup } from '../Actions/ActionJobProfile';
+import { getJobProfileGroupApiCall, getJobProfilesDistinctApiCall, getJobProfileTypeApiCall, jobProfileCreatePopup } from '../Actions/ActionJobProfile';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -648,6 +648,47 @@ const PopUpDisplayPanelAssociate = (props) => {
       );
     }
     if (
+      clickValue === 'distinct' &&
+      popupHeaderOne === 'job profiles' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getJobProfilesDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        popupHeaderOne,
+        dispatch
+      );
+    }
+    if (
+      clickValue === 'groups' &&
+      popupHeaderOne === 'job profiles' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getJobProfileGroupApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'groups',
+        popupHeaderOne
+      );
+    }
+    if (
+      clickValue === 'types' &&
+      popupHeaderOne === 'job profiles' &&
+      popupHeaderOneBadgeOne === 'review'
+    ) {
+      getJobProfileTypeApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        dispatch,
+        'types',
+        popupHeaderOne
+      );
+    }
+    if (
       clickValue === 'groups' &&
       popupHeaderOne === 'items' &&
       popupHeaderOneBadgeOne === 'review'
@@ -740,7 +781,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         popupHeaderOne === 'associates' ||
         popupHeaderOne === 'items' ||
         popupHeaderOne === 'culture profiles' ||
-        popupHeaderOne === 'job profilesss') &&
+        popupHeaderOne === 'job profiles') &&
       popupHeaderOneBadgeOne === 'groups'
     ) {
       let requestObj = {};
@@ -809,6 +850,15 @@ const PopUpDisplayPanelAssociate = (props) => {
       }
       if (popupHeaderOne === 'culture profiles') {
         getCultureProfileGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups'
+        );
+      }
+      if (popupHeaderOne === 'job profiles') {
+        getJobProfileGroupApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,

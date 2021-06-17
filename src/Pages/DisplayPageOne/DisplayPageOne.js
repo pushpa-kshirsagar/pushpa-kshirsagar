@@ -288,8 +288,8 @@ const DisplayPageOne = () => {
         <PopUpGroupCreate
           headerOne={'job profiles'}
           reducerObeject={jobProfileGroup}
-          groupName={'jobProfileName'}
-          groupDescription={'jobProfileDescription'}
+          groupName={'jobProfileGroupName'}
+          groupDescription={'jobProfileGroupDescription'}
           setReducerObject={SET_JOB_GROUP_REDUCER_STATE}
           objectName={'jobProfileGroup'}
         />

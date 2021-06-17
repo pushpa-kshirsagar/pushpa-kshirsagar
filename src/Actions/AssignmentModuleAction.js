@@ -15,7 +15,8 @@ import {
   SET_REQUEST_OBJECT,
   GET_ASSIGNMENTTYPE_ASSIGNMENT_REVIEWLIST_SAGA,
   GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
-  GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA
+  GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA,
+  SET_PAGE_COUNT
 } from '../actionType';
 import {
   getAssignmentGroupAssignmentReqObj,
@@ -103,6 +104,7 @@ export const assignmentsDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
     payload: {
@@ -132,6 +134,7 @@ export const assignmentsGroupApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -163,6 +166,7 @@ export const assignmentTypeApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
     payload: {

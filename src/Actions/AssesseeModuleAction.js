@@ -63,6 +63,7 @@ export const getAssesseeDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: ASSESSEE_REVIEW_DISTINCT_SAGA,
     payload: {
@@ -933,6 +934,7 @@ export const getAssesseeRoleDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
     payload: {
@@ -967,6 +969,7 @@ export const getAssesseeGroupDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -1221,7 +1224,7 @@ export const getAdminManagerRoleApiCall = (
         )
       : makeManagerRoleCreateObj(selectedAssociateInfo, secondaryOptionCheckValue, 0, countPage);
   dispatch({ type: SET_REQUEST_OBJECT, payload: roleRequestObj });
-
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
     payload: {
@@ -1264,6 +1267,7 @@ export const getAdminManagerDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: ASSESSEE_REVIEW_DISTINCT_SAGA,
     payload: {
@@ -1301,6 +1305,7 @@ export const getAssesseeTypeApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
   dispatch({
     type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
     payload: {

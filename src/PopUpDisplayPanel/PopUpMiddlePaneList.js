@@ -92,6 +92,7 @@ import {
   getAssignmnetTypeAssignmnetDistinctApiCall,
   getNodeRelatedAssignmentsDistinctApiCall
 } from '../Actions/AssignmentModuleAction';
+import { getCultureGroupCultureDistinctApiCall, getCultureTypeCultureDistinctApiCall } from '../Actions/ActionCultureProfile';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -1279,6 +1280,42 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({
           type: FILTERMODE,
           payload: { FilterMode: 'assignmnetGroupAssignment' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'cultureProfilesGroupDistinctReviewList') {
+        getCultureGroupCultureDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'cultureGroupCultureDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'cultureProfilesTypeDistinctReviewList') {
+        getCultureTypeCultureDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'cultureTypeCultureDistinct' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });

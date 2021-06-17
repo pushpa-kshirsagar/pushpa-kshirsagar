@@ -48,7 +48,8 @@ import {
 } from '../Actions/AssignmentModuleAction';
 import {
   getCultureProfileGroupApiCall,
-  getCultureProfilesDistinctApiCall
+  getCultureProfilesDistinctApiCall,
+  getCultureProfileTypeApiCall
 } from '../Actions/ActionCultureProfile';
 const PopUpMiddlePaneTrippleDot = (props) => {
   const {
@@ -574,6 +575,15 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           dispatch,
           'groups'
         );
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
+        getCultureProfileTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          popupHeaderOne
+        );
       } else if (keyVal === 'groups') {
         getCultureProfileGroupApiCall(
           selectedAssociateInfo,
@@ -581,6 +591,15 @@ const PopUpMiddlePaneTrippleDot = (props) => {
           countPage,
           dispatch,
           'groups'
+        );
+      } else if (keyVal === 'types') {
+        getCultureProfileTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          popupHeaderOne
         );
       } else {
         dispatch({
