@@ -129,6 +129,29 @@ const PopUpCultureProfileCreate = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'MANAGERPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        ListData={coreGroupReviewListData}
+        selectedList={
+          cultureProfileInformation.informationAllocation.cultureProfileGroup
+            .cultureProfileGroupSecondary
+        }
+        textOne={'cultureProfileGroupName'}
+        textTwo={'cultureProfileGroupDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'cultureProfileGroup', 'cultureProfileGroupSecondary');
+        }}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -136,6 +159,28 @@ const PopUpCultureProfileCreate = (props) => {
         nextPopUpValue={'NODEPOPUP'}
         inputHeader={'manager'}
         inputHeaderBadge={'primary'}
+        infoMsg={'select a manager'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        selectedList={[]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'NODEPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'secondary'}
         infoMsg={'select a manager'}
         ListData={[
           { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
@@ -174,6 +219,29 @@ const PopUpCultureProfileCreate = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'NODESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'TYPEPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a node'}
+        ListData={coreNodeReviewListData}
+        selectedList={
+          cultureProfileInformation.informationAllocation.cultureProfileNode
+            .cultureProfileNodeSecondary
+        }
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'cultureProfileNode', 'cultureProfileNodeSecondary');
+        }}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'TYPEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -191,6 +259,29 @@ const PopUpCultureProfileCreate = (props) => {
         textTwo={'cultureProfileTypeDescription'}
         onClickEvent={(e) => {
           updateAllocationObj(e, 'cultureProfileType', 'cultureProfileTypePrimary');
+        }}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'type'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a type'}
+        ListData={coreTypeReviewListData}
+        selectedList={
+          cultureProfileInformation.informationAllocation.cultureProfileType
+            .cultureProfileTypeSecondary
+        }
+        textOne={'cultureProfileTypeName'}
+        textTwo={'cultureProfileTypeDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'cultureProfileType', 'cultureProfileTypeSecondary');
         }}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}

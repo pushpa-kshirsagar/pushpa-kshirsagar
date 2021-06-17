@@ -17,6 +17,8 @@ import {
 import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
 import { makeAssociateNodeObj, makeInternalNodeObj } from '../../Actions/GenericActions';
 import { getAssociateNodeApiCall } from '../../Actions/AssociateModuleAction';
+import MailOutline from '@material-ui/icons/MailOutline';
+import MailIcon from '@material-ui/icons/Mail';
 
 const DisplayPaneThreeSectionTwoAssociate = () => {
   const [listExpand, setListExpand] = useState('');
@@ -96,7 +98,10 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
   ) {
     workTelephoneSecondary = `+${associateTelephoneCountryRegionSecondary} (${associateTelephoneAreaCitySecondary}) ${associateTelephoneNumberSecondary} extension ${associateTelephoneExtensionSecondary}`;
   }
-
+  const workAddressPrimaryCommunication =
+    informationContact?.associateAddressWorkPrimary?.associateAddressCommunication || false;
+  const workAddressSecondaryCommunication =
+    informationContact?.associateAddressWorkSecondary?.associateAddressCommunication || false;
   const list1 = [
     {
       id: 'a1',
@@ -128,11 +133,13 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: workAddressPrimary
+          textOne: workAddressPrimary,
+          IconOne: workAddressPrimaryCommunication ? MailIcon : MailOutline
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: workAddressSecondary
+          textOne: workAddressSecondary,
+          IconOne: workAddressSecondaryCommunication ? MailIcon : MailOutline
         }
       ],
       labelTextOneOneBadgeThree: '',
@@ -140,8 +147,10 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
-      IconOne: null,
-      IconTwo: null
+      IconOne: MailOutline,
+      IconTwo: () => {
+        return <img src={Unverified} alt="Unverified" />;
+      }
     },
     {
       id: 'a3',

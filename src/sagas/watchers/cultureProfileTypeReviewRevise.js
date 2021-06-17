@@ -5,7 +5,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   GET_CULTURE_TYPE_REVIEW_INFO_SAGA,
-  CULTURE_TYPE_REVISE_INFO_SAGA
+  CULTURE_TYPE_REVISE_INFO_SAGA,
+  SET_CULTURE_TYPE_REDUCER_STATE
 } from '../../actionType';
 import { CULTURE_REVIEW_TYPE_URL, CULTURE_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -56,10 +57,10 @@ function* workerReviewCultureProfileTypeInfoSaga(data) {
         }
       });
       if (isReviseMode) {
-        // yield put({
-        //   type: SET_ASSESSMENT_GROUP_REDUCER_STATE,
-        //   payload: userResponse.responseObject[0].informationBasic
-        // });
+        yield put({
+          type: SET_CULTURE_TYPE_REDUCER_STATE,
+          payload: userResponse.responseObject[0].informationBasic
+        });
       }
     }
 

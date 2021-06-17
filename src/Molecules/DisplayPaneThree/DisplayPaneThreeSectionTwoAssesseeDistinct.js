@@ -204,6 +204,17 @@ const DisplayPaneThreeSectionTwo = () => {
     informationContact?.assesseeAddressEmailPrimary?.assesseeAddressEmailCommunication || false;
   const emailSecondaryCommunication =
     informationContact?.assesseeAddressEmailSecondary?.assesseeAddressEmailCommunication || false;
+
+  const homeAddressPrimaryCommunication =
+    informationContact?.assesseeAddressHomePrimary?.assesseeAddressCommunication || false;
+  const homeAddressSecondaryCommunication =
+    informationContact?.assesseeAddressHomeSecondary?.assesseeAddressCommunication || false;
+
+  const workAddressPrimaryCommunication =
+    informationContact?.assesseeAddressWorkPrimary?.assesseeAddressCommunication || false;
+  const workAddressSecondaryCommunication =
+    informationContact?.assesseeAddressWorkSecondary?.assesseeAddressCommunication || false;
+
   const contactListAll = [
     {
       id: 'a1',
@@ -238,11 +249,13 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: homeAddressPrimary //longAddressForTest
+          textOne: homeAddressPrimary, //longAddressForTest
+          IconOne: homeAddressPrimaryCommunication ? MailIcon : MailOutline
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: homeAddressSecondary
+          textOne: homeAddressSecondary,
+          IconOne: homeAddressSecondaryCommunication ? MailIcon : MailOutline
         }
       ],
       labelTextOneOneBadgeThree: '',
@@ -309,11 +322,13 @@ const DisplayPaneThreeSectionTwo = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: workAddressPrimary
+          textOne: workAddressPrimary,
+          IconOne: workAddressPrimaryCommunication ? MailIcon : MailOutline
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: workAddressSecondary
+          textOne: workAddressSecondary,
+          IconOne: workAddressSecondaryCommunication ? MailIcon : MailOutline
         }
       ],
       innerAssociateList: [],

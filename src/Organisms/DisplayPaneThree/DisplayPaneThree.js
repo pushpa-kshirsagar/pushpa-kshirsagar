@@ -46,7 +46,9 @@ import {
   ITEM_TYPE_REVISE_INFO_SAGA,
   CLEAR_CULTURE_REDUCER_STATE,
   CULTURE_PROFILE_INFO_REVISE_SAGA,
-  CULTURE_GROUP_REVISE_INFO_SAGA
+  CULTURE_GROUP_REVISE_INFO_SAGA,
+  CULTURE_TYPE_REVISE_INFO_SAGA,
+  JOB_TYPE_REVISE_INFO_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -54,32 +56,32 @@ import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
 import './DisplayPaneThree.css';
-import DisplayPaneThreeSectionOne from '../../Molecules/DisplayPaneThreeSectionOne/DisplayPaneThreeSectionOne';
-import DisplayPaneThreeSectionTwo from '../../Molecules/DisplayPaneThreeSectionTwo/DisplayPaneThreeSectionTwo';
-import DisplayPaneThreeSectionOneAssociate from '../../Molecules/DisplayPaneThreeSectionOneAssociate/DisplayPaneThreeSectionOneAssociate';
-import DisplayPaneThreeSectionTwoAssociate from '../../Molecules/DisplayPaneThreeSectionTwoAssociate/DisplayPaneThreeSectionTwoAssociate';
-import DisplayPaneThreeSectionOneAssesseeRole from '../../Molecules/DisplayPaneThreeSectionOneAssesseeRole/DisplayPaneThreeSectionOneAssesseeRole';
-import DisplayPaneThreeSectionTwoAssesseeRole from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeRole/DisplayPaneThreeSectionTwoAssesseeRole';
-import DisplayPaneThreeSectionOneAssociateRole from '../../Molecules/DisplayPaneThreeSectionOneAssociateRole/DisplayPaneThreeSectionOneAssociateRole';
-import DisplayPaneThreeSectionTwoAssociateRole from '../../Molecules/DisplayPaneThreeSectionTwoAssociateRole/DisplayPaneThreeSectionTwoAssociateRole';
-import DisplayPaneThreeSectionOneAssesseeGroup from '../../Molecules/DisplayPaneThreeSectionOneAssesseeGroup/DisplayPaneThreeSectionOneAssesseeGroup';
-import DisplayPaneThreeSectionTwoAssesseeGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeGroup/DisplayPaneThreeSectionTwoAssesseeGroup';
-import DisplayPaneThreeSectionOneAssociateGroup from '../../Molecules/DisplayPaneThreeSectionOneAssociateGroup/DisplayPaneThreeSectionOneAssociateGroup';
-import DisplayPaneThreeSectionTwoAssociateGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssociateGroup/DisplayPaneThreeSectionTwoAssociateGroup';
-import DisplayPaneThreeSectionOneAssessmentGroup from '../../Molecules/DisplayPaneThreeSectionOneAssessmentGroup/DisplayPaneThreeSectionOneAssessmentGroup';
-import DisplayPaneThreeSectionTwoAssessmentGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentGroup/DisplayPaneThreeSectionTwoAssessmentGroup';
-import DisplayPaneThreeSectionOneAssignmentGroup from '../../Molecules/DisplayPaneThreeSectionOneAssignmentGroup/DisplayPaneThreeSectionOneAssignmentGroup';
-import DisplayPaneThreeSectionTwoAssignmentGroup from '../../Molecules/DisplayPaneThreeSectionTwoAssignmentGroup/DisplayPaneThreeSectionTwoAssignmentGroup';
-import DisplayPaneThreeSectionOneAssessment from '../../Molecules/DisplayPaneThreeSectionOneAssessment/DisplayPaneThreeSectionOneAssessment';
-import DisplayPaneThreeSectionTwoAssessment from '../../Molecules/DisplayPaneThreeSectionTwoAssessment/DisplayPaneThreeSectionTwoAssessment';
-import DisplayPaneThreeSectionOneAssignmentType from '../../Molecules/DisplayPaneThreeSectionOneAssignmentType/DisplayPaneThreeSectionOneAssignmentType';
-import DisplayPaneThreeSectionTwoAssignmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssignmentType/DisplayPaneThreeSectionTwoAssignmentType';
-import DisplayPaneThreeSectionOneAssessmentType from '../../Molecules/DisplayPaneThreeSectionOneAssessmentType/DisplayPaneThreeSectionOneAssessmentType';
-import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPaneThreeSectionTwoAssessmentType/DisplayPaneThreeSectionTwoAssessmentType';
-import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThreeSectionOneAssignment/DisplayPaneThreeSectionOneAssignment';
-import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThreeSectionTwoAssignment/DisplayPaneThreeSectionTwoAssignment';
-import DisplayPaneThreeSectionOneAssociateNode from '../../Molecules/DisplayPaneThreeSectionOneAssociateNode/DisplayPaneThreeSectionOneAssociateNode';
-import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPaneThreeSectionTwoAssociateNode/DisplayPaneThreeSectionTwoAssociateNode';
+import DisplayPaneThreeSectionOne from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssesseeDistinct';
+import DisplayPaneThreeSectionTwo from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssesseeDistinct';
+import DisplayPaneThreeSectionOneAssociate from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssociateDistinct';
+import DisplayPaneThreeSectionTwoAssociate from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssociateDistinct';
+import DisplayPaneThreeSectionOneAssesseeRole from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssesseeRole';
+import DisplayPaneThreeSectionTwoAssesseeRole from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssesseeRole';
+import DisplayPaneThreeSectionOneAssociateRole from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssociateRole';
+import DisplayPaneThreeSectionTwoAssociateRole from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssociateRole';
+import DisplayPaneThreeSectionOneAssesseeGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssesseeGroup';
+import DisplayPaneThreeSectionTwoAssesseeGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssesseeGroup';
+import DisplayPaneThreeSectionOneAssociateGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssociateGroup';
+import DisplayPaneThreeSectionTwoAssociateGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssociateGroup';
+import DisplayPaneThreeSectionOneAssessmentGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentGroup';
+import DisplayPaneThreeSectionTwoAssessmentGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssessmentGroup';
+import DisplayPaneThreeSectionOneAssignmentGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssignmentGroup';
+import DisplayPaneThreeSectionTwoAssignmentGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssignmentGroup';
+import DisplayPaneThreeSectionOneAssessment from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentDistinct';
+import DisplayPaneThreeSectionTwoAssessment from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssessmentDistinct';
+import DisplayPaneThreeSectionOneAssignmentType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssignmentType';
+import DisplayPaneThreeSectionTwoAssignmentType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssignmentType';
+import DisplayPaneThreeSectionOneAssessmentType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentType';
+import DisplayPaneThreeSectionTwoAssessmentType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssessmentType';
+import DisplayPaneThreeSectionOneAssignment from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssignmentDistinct';
+import DisplayPaneThreeSectionTwoAssignment from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssignmentDistinct';
+import DisplayPaneThreeSectionOneAssociateNode from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssociateNode';
+import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssociateNode';
 import {
   getAssesseeGroupAssesseeReqObj,
   getAssesseeNodeAssesseeReqObj,
@@ -89,16 +91,16 @@ import {
   getAssociateGroupAssociateReqObj,
   getAssociateRoleAssociateReqObj
 } from '../../Actions/AssociateModuleAction';
-import DisplayPaneThreeSectionOneAssesseeType from '../../Molecules/DisplayPaneThreeSectionOneAssesseeType/DisplayPaneThreeSectionOneAssesseeType';
-import DisplayPaneThreeSectionOneAssociateType from '../../Molecules/DisplayPaneThreeSectionOneAssociateType/DisplayPaneThreeSectionOneAssociateType';
-import DisplayPaneThreeSectionTwoAssesseeType from '../../Molecules/DisplayPaneThreeSectionTwoAssesseeType/DisplayPaneThreeSectionTwoAssesseeType';
-import DisplayPaneThreeSectionTwoAssociateType from '../../Molecules/DisplayPaneThreeSectionTwoAssociateType/DisplayPaneThreeSectionTwoAssociateType';
-import DisplayPaneThreeSectionOneItem from '../../Molecules/DisplayPaneThreeSectionOneItem/DisplayPaneThreeSectionOneItem';
-import DisplayPaneThreeSectionTwoItem from '../../Molecules/DisplayPaneThreeSectionTwoItem/DisplayPaneThreeSectionTwoItem';
-import DisplayPaneThreeSectionOneItemGroup from '../../Molecules/DisplayPaneThreeSectionOneItemGroup/DisplayPaneThreeSectionOneItemGroup';
-import DisplayPaneThreeSectionTwoItemGroup from '../../Molecules/DisplayPaneThreeSectionTwoItemGroup/DisplayPaneThreeSectionTwoItemGroup';
-import DisplayPaneThreeSectionTwoItemType from '../../Molecules/DisplayPaneThreeSectionTwoItemType/DisplayPaneThreeSectionTwoItemType';
-import DisplayPaneThreeSectionOneItemType from '../../Molecules/DisplayPaneThreeSectionOneItemType/DisplayPaneThreeSectionOneItemType';
+import DisplayPaneThreeSectionOneAssesseeType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssesseeType';
+import DisplayPaneThreeSectionOneAssociateType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssociateType';
+import DisplayPaneThreeSectionTwoAssesseeType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssesseeType';
+import DisplayPaneThreeSectionTwoAssociateType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoAssociateType';
+import DisplayPaneThreeSectionOneItem from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneItemDistinct';
+import DisplayPaneThreeSectionTwoItem from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoItemDistinct';
+import DisplayPaneThreeSectionOneItemGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneItemGroup';
+import DisplayPaneThreeSectionTwoItemGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoItemGroup';
+import DisplayPaneThreeSectionTwoItemType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoItemType';
+import DisplayPaneThreeSectionOneItemType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneItemType';
 import {
   getAssessmentGroupAssessmentReqObj,
   getAssessmentTypeAssessmentReqObj,
@@ -107,18 +109,18 @@ import {
   getItemGroupItemReqObj,
   getItemTypeItemReqObj
 } from '../../Actions/GenericActions';
-import DisplayPaneThreeSectionOneCultureProfileDistinct from '../../Molecules/DisplayPaneThreeSectionOneCultureProfileDistinct/DisplayPaneThreeSectionOneCultureProfileDistinct';
-import DisplayPaneThreeSectionTwoCultureProfileDistinct from '../../Molecules/DisplayPaneThreeSectionTwoCultureProfileDistinct/DisplayPaneThreeSectionTwoCultureProfileDistinct';
-import DisplayPaneThreeSectionOneJobProfileDistinct from '../../Molecules/DisplayPaneThreeSectionOneJobProfileDistinct/DisplayPaneThreeSectionOneJobProfileDistinct';
-import DisplayPaneThreeSectionTwoJobProfileDistinct from '../../Molecules/DisplayPaneThreeSectionTwoJobProfileDistinct/DisplayPaneThreeSectionTwoJobProfileDistinct';
-import DisplayPaneThreeSectionOneCultureProfileGroup from '../../Molecules/DisplayPaneThreeSectionOneCultureProfileGroup/DisplayPaneThreeSectionOneCultureProfileGroup';
-import DisplayPaneThreeSectionTwoCultureProfileGroup from '../../Molecules/DisplayPaneThreeSectionTwoCultureProfileGroup/DisplayPaneThreeSectionTwoCultureProfileGroup';
-import DisplayPaneThreeSectionOneJobProfileGroup from '../../Molecules/DisplayPaneThreeSectionOneJobProfileGroup/DisplayPaneThreeSectionOneJobProfileGroup';
-import DisplayPaneThreeSectionTwoJobProfileGroup from '../../Molecules/DisplayPaneThreeSectionTwoJobProfileGroup/DisplayPaneThreeSectionTwoJobProfileGroup';
-import DisplayPaneThreeSectionOneCultureProfileType from '../../Molecules/DisplayPaneThreeSectionOneCultureProfileType/DisplayPaneThreeSectionOneCultureProfileType';
-import DisplayPaneThreeSectionOneJobProfileType from '../../Molecules/DisplayPaneThreeSectionOneJobProfileType/DisplayPaneThreeSectionOneJobProfileType';
-import DisplayPaneThreeSectionTwoCultureProfileType from '../../Molecules/DisplayPaneThreeSectionTwoCultureProfileType/DisplayPaneThreeSectionTwoCultureProfileType';
-import DisplayPaneThreeSectionTwoJobProfileType from '../../Molecules/DisplayPaneThreeSectionTwoJobProfileType/DisplayPaneThreeSectionTwoJobProfileType';
+import DisplayPaneThreeSectionOneCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneCultureProfileDistinct';
+import DisplayPaneThreeSectionTwoCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileDistinct';
+import DisplayPaneThreeSectionOneJobProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneJobProfileDistinct';
+import DisplayPaneThreeSectionTwoJobProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoJobProfileDistinct';
+import DisplayPaneThreeSectionOneCultureProfileGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneCultureProfileGroup';
+import DisplayPaneThreeSectionTwoCultureProfileGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileGroup';
+import DisplayPaneThreeSectionOneJobProfileGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneJobProfileGroup';
+import DisplayPaneThreeSectionTwoJobProfileGroup from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoJobProfileGroup';
+import DisplayPaneThreeSectionOneCultureProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneCultureProfileType';
+import DisplayPaneThreeSectionOneJobProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneJobProfileType';
+import DisplayPaneThreeSectionTwoCultureProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileType';
+import DisplayPaneThreeSectionTwoJobProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoJobProfileType';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -588,11 +590,18 @@ export const DisplayPaneThree = () => {
     assignmentGroup,
     associateGroup,
     itemGroup,
-    cultureProfileGroup
+    cultureProfileGroup,
+    jobProfileGroup
   } = useSelector((state) => state.GroupCreateReducer);
-  const { assesseeType, assessmentType, assignmentType, associateType, itemType } = useSelector(
-    (state) => state.TypeCreateReducer
-  );
+  const {
+    assesseeType,
+    assessmentType,
+    assignmentType,
+    associateType,
+    itemType,
+    cultureProfileType,
+    jobProfileType
+  } = useSelector((state) => state.TypeCreateReducer);
   const { associateRole, assesseeRole } = useSelector((state) => state.RoleCreateReducer);
   const { nodeInformation } = useSelector((state) => state.NodeCreateReducer);
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
@@ -664,13 +673,13 @@ export const DisplayPaneThree = () => {
       if (assesseeInfo.tempAddressCommunication === 'home address primary') {
         informationContact.assesseeAddressHomePrimary.assesseeAddressCommunication = true;
       }
-       if (assesseeInfo.tempAddressCommunication === 'home address secondary') {
+      if (assesseeInfo.tempAddressCommunication === 'home address secondary') {
         informationContact.assesseeAddressHomeSecondary.assesseeAddressCommunication = true;
       }
-       if (assesseeInfo.tempAddressCommunication === 'work address primary') {
+      if (assesseeInfo.tempAddressCommunication === 'work address primary') {
         informationContact.assesseeAddressWorkPrimary.assesseeAddressCommunication = true;
       }
-       if (assesseeInfo.tempAddressCommunication === 'work address secondary') {
+      if (assesseeInfo.tempAddressCommunication === 'work address secondary') {
         informationContact.assesseeAddressWorkSecondary.assesseeAddressCommunication = true;
       }
       // telephone communication
@@ -886,7 +895,7 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-          cultureProfileGroup: {
+        cultureProfileGroup: {
           id,
           informationBasic: cultureProfileGroup.informationBasic
         }
@@ -1055,6 +1064,44 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
         payload: { headerOne: 'assignment', reqBody, assignmentTypeAssignmentReqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'culture profiles') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        // cultureProfileTypeCultureProfile: {
+        //   cultureProfileTypeCultureProfileAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+        //   cultureProfileTypeCultureProfileUnallocate: assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        // },
+        cultureProfileType: {
+          id,
+          informationBasic: cultureProfileType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: CULTURE_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'culture profiles', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'type' && headerOne === 'job profiles') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId,
+        // jobProfileTypeJobProfile: {
+        //   jobProfileTypeJobProfileAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+        //   jobProfileTypeJobProfileUnallocate: assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        // },
+        jobProfileType: {
+          id,
+          informationBasic: jobProfileType.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: JOB_TYPE_REVISE_INFO_SAGA,
+        payload: { headerOne: 'job profiles', reqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'items') {
       const { associateId, id } = responseObject;
@@ -1324,7 +1371,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'jobProfileGROUPCREATE' }
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesTYPECREATE' }
     });
   };
   const onClickCreateCultureProfileType = () => {
@@ -1332,7 +1379,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'cultureProfileTYPECREATE' }
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture profilesTYPECREATE' }
     });
   };
   const onClickCreateJobProfileType = () => {
@@ -1340,7 +1387,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
     dispatch({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'jobProfileTYPECREATE' }
+      payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesTYPECREATE' }
     });
   };
 
@@ -1699,19 +1746,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'culture profilesTYPECREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture profilesTYPECREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'culture ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'culture profilesTYPECREATE' }
       });
     }
   };
@@ -1723,19 +1770,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'job ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'job profilesTYPECREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesTYPECREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'job ProfilesTYPECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'job profilesTYPECREATE' }
       });
     }
   };
@@ -1914,19 +1961,19 @@ export const DisplayPaneThree = () => {
     if (profileId === 'profile-icon') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'JOBPROFILECREATE' }
+        payload: { isPopUpValue: 'PICTUREPOPUP', popupMode: 'JOBCREATE' }
       });
     }
     if (labelName === 'name') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'JOBPROFILECREATE' }
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'JOBCREATE' }
       });
     }
     if (labelName === 'description') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'JOBPROFILECREATE' }
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'JOBCREATE' }
       });
     }
   };
