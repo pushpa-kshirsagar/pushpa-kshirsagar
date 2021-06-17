@@ -32,7 +32,7 @@ function* workerCreateJobProfileSaga(data) {
           headerOne: 'job profile',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
-          responseObject: response.responseObject,
+          responseObject: response.responseObject[0],
           reviewMode: 'revise',
           createMode: 'jobProfile'
         }
