@@ -5,12 +5,12 @@ import {
   FILTERMODE,
   FILTERMODE_ENABLE,
   POPUP_OPEN,
-  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -18,13 +18,16 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import {
+  getAssesseeGroupAssesseeDistinctApiCall,
+  onClickCheckBoxSelection
+} from '../Actions/AssesseeModuleAction';
+import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getCultureGroupCultureDistinctApiCall } from '../Actions/ActionCultureProfile';
 
-const CultureProfileGroupCultureProfileReviewList = (props) => {
+const AssociateRoleAssociateDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -57,12 +60,12 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader: 'culture Profiles',
-          middlePaneHeaderBadgeOne: 'groups',
+          middlePaneHeader: 'associates',
+          middlePaneHeaderBadgeOne: 'role',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'cultureProfilesGroupDistinctReviewList',
+          typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
@@ -78,9 +81,9 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
+    dispatch({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     dispatch({
-      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+      type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
       payload: unselectedTagsArray
     });
   };
@@ -139,12 +142,12 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'culture profiles',
-        middlePaneHeaderBadgeOne: 'groups',
+        middlePaneHeader: 'associates',
+        middlePaneHeaderBadgeOne: 'role',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'cultureProfilesGroupDistinctReviewList',
+        typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
@@ -154,28 +157,36 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getCultureGroupCultureDistinctApiCall(
+    getAssesseeGroupAssesseeDistinctApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
       dispatch,
       middlePaneHeaderBadgeOne,
-      listDistinctData.id,
-      '',
-      false
+      listDistinctData.id
     );
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (
+      siftValue === 'suspended' ||
+      siftValue === 'terminated' ||
+      siftValue === 'disapproved' ||
+      siftValue === 'unapproved' ||
+      siftValue === 'unconfirmed'
+    )
+      siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const secondaryIcon = [
+    { label: 'disapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
   ];
 
   const openListPopup = (e) => {
@@ -183,7 +194,7 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'culture profile',
+        popupHeaderOne: 'associate',
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -205,18 +216,19 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.cultureProfileGroupName}
-          textTwoOne={listDistinctData.cultureProfileGroupDescription}
+          textOneOne={listDistinctData.associateRoleName}
+          textTwoOne={listDistinctData.associateRoleDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'group'}
+          labelTwoTwo={'role'}
           onClickIconOne={closeRelatedList}
           isAlliance
           relatedCardFixed={true}
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&
-        listDistinctData.cultureProfile.map((item, index) => {
+        listDistinctData.associate.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -224,10 +236,13 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.cultureProfileStatus}
-                actualStatus={item.informationEngagement.cultureProfileStatus}
-                textOne={item.informationBasic.cultureProfileName}
-                textTwo={item.informationBasic.cultureProfileDescription}
+                status={assesseeStatus(
+                  middlePaneHeaderBadgeTwo,
+                  item.informationEngagement.associateStatus
+                )}
+                actualStatus={item.informationEngagement.associateStatus}
+                textOne={item.informationBasic.associateName}
+                textTwo={item.informationBasic.associateDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
@@ -239,7 +254,7 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'cultureGroupCultureeRevise' && (
+      {FilterMode === 'associateRoleAssociateRevise' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}
@@ -248,11 +263,11 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
           secondaryIcon={reviseSecondaryIcons}
         />
       )}
-      {FilterMode === 'cultureGroupCultureDistinctinactive' && (
+      {FilterMode === 'associateRoleAssociateDistinctinactive' && (
         <FooterIconTwo
-          FilterModeEnable={isShowReviseIcon}
+          FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
-          onClick={onClickRevise}
+          onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
         />
@@ -260,4 +275,4 @@ const CultureProfileGroupCultureProfileReviewList = (props) => {
     </div>
   );
 };
-export default CultureProfileGroupCultureProfileReviewList;
+export default AssociateRoleAssociateDistinctReviewList;

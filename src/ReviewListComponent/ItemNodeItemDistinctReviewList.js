@@ -5,12 +5,12 @@ import {
   FILTERMODE,
   FILTERMODE_ENABLE,
   POPUP_OPEN,
-  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -19,12 +19,16 @@ import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getAssignmnetTypeAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
+import {
+  getItemGroupItemDistinctApiCall,
+  getNodeRelatedItemsDistinctApiCall
+} from '../Actions/ItemModuleAction';
 
-const AssignmentTypeAssignmentReviewList = (props) => {
+const ItemNodeItemDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -35,12 +39,61 @@ const AssignmentTypeAssignmentReviewList = (props) => {
     relatedReviewListDistinctData,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    typeOfMiddlePaneList,
-    isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    isSelectActive,
+    unselectedTagsArray,
+    typeOfMiddlePaneList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
+
+  const onClickRevise = () => {
+    console.log('ON CLICK REVISE ICON');
+    setIsShowReviseIcon(false);
+  };
+  const onClickReviseCancel = () => {
+    console.log('ON CLICK cancel ICON');
+    setIsShowReviseIcon(true);
+  };
+  const onClickReviseFinish = () => {
+    console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray);
+    setIsShowReviseIcon(true);
+    if (typeOfMiddlePaneList !== '') {
+      // dispatch({
+      //   type: SET_MIDDLEPANE_STATE,
+      //   payload: {
+      //     middlePaneHeader: 'items',
+      //     middlePaneHeaderBadgeOne: 'group',
+      //     middlePaneHeaderBadgeTwo: 'active',
+      //     middlePaneHeaderBadgeThree: '',
+      //     middlePaneHeaderBadgeFour: '',
+      //     typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
+      //     scanCount: reviewListDistinctData.length,
+      //     showMiddlePaneState: true
+      //   }
+      // });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: '' }
+      });
+    }
+
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'isSelectActive', value: '' }
+    });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+    dispatch({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: selectedTagsArray });
+    dispatch({
+      type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+      payload: unselectedTagsArray
+    });
+  };
+  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
+
+  const reviseSecondaryIcons = [
+    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
+    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
+  ];
   // {
   /** no need for pagination 
   const [isFetching, setIsFetching] = useState(false);
@@ -86,75 +139,30 @@ const AssignmentTypeAssignmentReviewList = (props) => {
   };
 */
   // }
-  const onClickRevise = () => {
-    console.log('ON CLICK REVISE ICON');
-    setIsShowReviseIcon(false);
-  };
-  const onClickReviseCancel = () => {
-    console.log('ON CLICK cancel ICON');
-    setIsShowReviseIcon(true);
-  };
-  const onClickReviseFinish = () => {
-    console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray);
-    setIsShowReviseIcon(true);
-    if (typeOfMiddlePaneList !== '') {
-      dispatch({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assignments',
-          middlePaneHeaderBadgeOne: 'type',
-          middlePaneHeaderBadgeTwo: 'active',
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assignmentsTypeDistinctReviewList',
-          scanCount: reviewListDistinctData.length,
-          showMiddlePaneState: true
-        }
-      });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: '' }
-      });
-    }
-
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'isSelectActive', value: '' }
-    });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
-    dispatch({
-      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-      payload: unselectedTagsArray
-    });
-  };
-  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
-
-  const reviseSecondaryIcons = [
-    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
-    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
-  ];
-
   const closeRelatedList = () => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'assignments',
-        middlePaneHeaderBadgeOne: 'type',
+        middlePaneHeader: 'items',
+        middlePaneHeaderBadgeOne: 'node',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assignmentsTypeDistinctReviewList',
+        typeOfMiddlePaneList: 'associateNodeDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'scanString', value: '' }
     });
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getAssignmnetTypeAssignmnetDistinctApiCall(
+    getNodeRelatedItemsDistinctApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
@@ -162,7 +170,8 @@ const AssignmentTypeAssignmentReviewList = (props) => {
       middlePaneHeaderBadgeOne,
       listDistinctData.id,
       '',
-      false
+      false,
+      'items'
     );
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
@@ -183,7 +192,7 @@ const AssignmentTypeAssignmentReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assignment',
+        popupHeaderOne: 'item',
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -205,19 +214,19 @@ const AssignmentTypeAssignmentReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.assignmentTypeName}
-          textTwoOne={listDistinctData.assignmentTypeDescription}
+          textOneOne={listDistinctData.associateNodeName}
+          textTwoOne={listDistinctData.associateNodeDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'type'}
+          labelTwoTwo={'node'}
           onClickIconOne={closeRelatedList}
           isAlliance
           relatedCardFixed={true}
-          className={'iguru-iconboxSVG'}
+
         />
       )}
       {listDistinctData &&
-        listDistinctData.assignment.map((item, index) => {
+        listDistinctData.item.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -225,10 +234,10 @@ const AssignmentTypeAssignmentReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.assignmentStatus}
-                actualStatus={item.informationEngagement.assignmentStatus}
-                textOne={item.informationBasic.assignmentName}
-                textTwo={item.informationBasic.assignmentDescription}
+                status={item.informationEngagement.itemStatus}
+                actualStatus={item.informationEngagement.itemStatus}
+                textOne={item.informationBasic.itemName}
+                textTwo={item.informationBasic.itemDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
@@ -240,20 +249,11 @@ const AssignmentTypeAssignmentReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assignmentTypeAssignmentRevise' && (
+      {FilterMode === 'itemNodeItemDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}
           onClick={onClickRevise}
-          primaryIcon={revisePrimaryIcon}
-          secondaryIcon={reviseSecondaryIcons}
-        />
-      )}
-      {FilterMode === 'assignmentTypeAssignmentinactive' && (
-        <FooterIconTwo
-          FilterModeEnable={FilterModeEnable}
-          FilterMode={FilterMode}
-          onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
         />
@@ -261,4 +261,4 @@ const AssignmentTypeAssignmentReviewList = (props) => {
     </div>
   );
 };
-export default AssignmentTypeAssignmentReviewList;
+export default ItemNodeItemDistinctReviewList;

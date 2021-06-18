@@ -18,17 +18,16 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import {
+  getAssesseeGroupAssesseeDistinctApiCall,
+  onClickCheckBoxSelection
+} from '../Actions/AssesseeModuleAction';
 import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import {
-  getItemGroupItemDistinctApiCall,
-  getNodeRelatedItemsDistinctApiCall
-} from '../Actions/ItemModuleAction';
 
-const ItemNodeItemReviewList = (props) => {
+const AssociateTypeAssociateDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -58,19 +57,19 @@ const ItemNodeItemReviewList = (props) => {
     console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray);
     setIsShowReviseIcon(true);
     if (typeOfMiddlePaneList !== '') {
-      // dispatch({
-      //   type: SET_MIDDLEPANE_STATE,
-      //   payload: {
-      //     middlePaneHeader: 'items',
-      //     middlePaneHeaderBadgeOne: 'group',
-      //     middlePaneHeaderBadgeTwo: 'active',
-      //     middlePaneHeaderBadgeThree: '',
-      //     middlePaneHeaderBadgeFour: '',
-      //     typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
-      //     scanCount: reviewListDistinctData.length,
-      //     showMiddlePaneState: true
-      //   }
-      // });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'associates',
+          middlePaneHeaderBadgeOne: 'role',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
+          scanCount: reviewListDistinctData.length,
+          showMiddlePaneState: true
+        }
+      });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: '' }
@@ -143,48 +142,51 @@ const ItemNodeItemReviewList = (props) => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'items',
-        middlePaneHeaderBadgeOne: 'node',
+        middlePaneHeader: 'associates',
+        middlePaneHeaderBadgeOne: 'type',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'associateNodeDistinctReviewList',
+        typeOfMiddlePaneList: 'associatesTypeDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
-    });
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'scanString', value: '' }
     });
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getNodeRelatedItemsDistinctApiCall(
+    getAssesseeGroupAssesseeDistinctApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
       dispatch,
       middlePaneHeaderBadgeOne,
-      listDistinctData.id,
-      '',
-      false,
-      'items'
+      listDistinctData.id
     );
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (
+      siftValue === 'suspended' ||
+      siftValue === 'terminated' ||
+      siftValue === 'disapproved' ||
+      siftValue === 'unapproved' ||
+      siftValue === 'unconfirmed'
+    )
+      siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const secondaryIcon = [
+    { label: 'disapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
   ];
 
   const openListPopup = (e) => {
@@ -192,7 +194,7 @@ const ItemNodeItemReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'item',
+        popupHeaderOne: 'associate',
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -214,19 +216,19 @@ const ItemNodeItemReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.associateNodeName}
-          textTwoOne={listDistinctData.associateNodeDescription}
+          textOneOne={listDistinctData.associateTypeName}
+          textTwoOne={listDistinctData.associateTypeDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'node'}
+          labelTwoTwo={'type'}
           onClickIconOne={closeRelatedList}
           isAlliance
           relatedCardFixed={true}
-
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&
-        listDistinctData.item.map((item, index) => {
+        listDistinctData.associate.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -234,10 +236,13 @@ const ItemNodeItemReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.itemStatus}
-                actualStatus={item.informationEngagement.itemStatus}
-                textOne={item.informationBasic.itemName}
-                textTwo={item.informationBasic.itemDescription}
+                status={assesseeStatus(
+                  middlePaneHeaderBadgeTwo,
+                  item.informationEngagement.associateStatus
+                )}
+                actualStatus={item.informationEngagement.associateStatus}
+                textOne={item.informationBasic.associateName}
+                textTwo={item.informationBasic.associateDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
@@ -249,11 +254,20 @@ const ItemNodeItemReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'itemNodeItemDistinctinactive' && (
+      {FilterMode === 'associateTypeAssociateRevise' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}
           onClick={onClickRevise}
+          primaryIcon={revisePrimaryIcon}
+          secondaryIcon={reviseSecondaryIcons}
+        />
+      )}
+      {FilterMode === 'associateTypeAssociateDistinctinactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
         />
@@ -261,4 +275,4 @@ const ItemNodeItemReviewList = (props) => {
     </div>
   );
 };
-export default ItemNodeItemReviewList;
+export default AssociateTypeAssociateDistinctReviewList;

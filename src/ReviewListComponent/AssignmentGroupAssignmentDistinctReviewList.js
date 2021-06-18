@@ -18,16 +18,13 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import {
-  getAssesseeGroupAssesseeDistinctApiCall,
-  onClickCheckBoxSelection
-} from '../Actions/AssesseeModuleAction';
-import { assesseeStatus } from '../Actions/StatusAction';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import { getAssignmnetGroupAssignmnetDistinctApiCall } from '../Actions/AssignmentModuleAction';
 
-const AssociateGroupAssociateReviewList = (props) => {
+const AssignmentGroupAssignmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -104,18 +101,12 @@ const AssociateGroupAssociateReviewList = (props) => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associates'
-              : 'assessees',
+          middlePaneHeader: 'assignments',
           middlePaneHeaderBadgeOne: 'group',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associatesGroupDistinctReviewList'
-              : 'assesseesGroupDistinctReviewList',
+          typeOfMiddlePaneList: 'assignmentsGroupDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
@@ -148,12 +139,12 @@ const AssociateGroupAssociateReviewList = (props) => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'associates',
+        middlePaneHeader: 'assignments',
         middlePaneHeaderBadgeOne: 'group',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'associatesGroupDistinctReviewList',
+        typeOfMiddlePaneList: 'assignmentsGroupDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
@@ -163,36 +154,28 @@ const AssociateGroupAssociateReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getAssesseeGroupAssesseeDistinctApiCall(
+    getAssignmnetGroupAssignmnetDistinctApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
       dispatch,
       middlePaneHeaderBadgeOne,
-      listDistinctData.id
+      listDistinctData.id,
+      '',
+      false
     );
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (
-      siftValue === 'suspended' ||
-      siftValue === 'terminated' ||
-      siftValue === 'disapproved' ||
-      siftValue === 'unapproved' ||
-      siftValue === 'unconfirmed'
-    )
-      siftApiCall(siftValue);
+    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const secondaryIcon = [
-    { label: 'disapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
 
   const openListPopup = (e) => {
@@ -200,7 +183,7 @@ const AssociateGroupAssociateReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'associate',
+        popupHeaderOne: 'assignment',
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -222,8 +205,8 @@ const AssociateGroupAssociateReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.associateGroupName}
-          textTwoOne={listDistinctData.associateGroupDescription}
+          textOneOne={listDistinctData.assignmentGroupName}
+          textTwoOne={listDistinctData.assignmentGroupDescription}
           IconOne={CrossIcon}
           isIcon={true}
           labelTwoTwo={'group'}
@@ -234,7 +217,7 @@ const AssociateGroupAssociateReviewList = (props) => {
         />
       )}
       {listDistinctData &&
-        listDistinctData.associate.map((item, index) => {
+        listDistinctData.assignment.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -242,13 +225,10 @@ const AssociateGroupAssociateReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={assesseeStatus(
-                  middlePaneHeaderBadgeTwo,
-                  item.informationEngagement.associateStatus
-                )}
-                actualStatus={item.informationEngagement.associateStatus}
-                textOne={item.informationBasic.associateName}
-                textTwo={item.informationBasic.associateDescription}
+                status={item.informationEngagement.assignmentStatus}
+                actualStatus={item.informationEngagement.assignmentStatus}
+                textOne={item.informationBasic.assignmentName}
+                textTwo={item.informationBasic.assignmentDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
@@ -260,7 +240,7 @@ const AssociateGroupAssociateReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'associateGroupAssociateRevise' && (
+      {FilterMode === 'assignmentGroupAssignmentRevise' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}
@@ -269,7 +249,7 @@ const AssociateGroupAssociateReviewList = (props) => {
           secondaryIcon={reviseSecondaryIcons}
         />
       )}
-      {FilterMode === 'associateGroupAssociateDistinctinactive' && (
+      {FilterMode === 'assignmentGroupAssignmentinactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
@@ -281,4 +261,4 @@ const AssociateGroupAssociateReviewList = (props) => {
     </div>
   );
 };
-export default AssociateGroupAssociateReviewList;
+export default AssignmentGroupAssignmentDistinctReviewList;
