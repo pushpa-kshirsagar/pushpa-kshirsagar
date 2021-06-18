@@ -79,8 +79,10 @@ import {
   getItemGroupItemReqObj,
   getItemTypeItemReqObj,
   getAssignmentTypeAssignmentReqObj,
-  geCultureGroupCultureReqObj,
-  geCultureTypeCultureReqObj
+  getCultureGroupCultureReqObj,
+  getCultureTypeCultureReqObj,
+  getJobProfileGroupJobProfileReqObj,
+  getJobProfileTypeJobProfileReqObj
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -718,7 +720,7 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'cultureProfilesGroupDistinctReviewList') {
-        let cultureGroupCultureReqBody = geCultureGroupCultureReqObj(
+        let cultureGroupCultureReqBody = getCultureGroupCultureReqObj(
           selectedAssociateInfo,
           selectedTagValue,
           'active',
@@ -759,18 +761,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'jobProfilesGroupDistinctReviewList') {
-        // let assessmentGroupAssessmentReqBody = getJobGroupJobReqObj(
-        //   selectedAssociateInfo,
-        //   selectedTagValue,
-        //   'active',
-        //   0,
-        //   countPage
-        // );
+        let jobGroupJobReqBody = getJobProfileGroupJobProfileReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_JOB_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            jobGroupJobReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -840,7 +843,7 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'cultureProfilesTypeDistinctReviewList') {
-        let cultureTypeCultureReqBody = geCultureTypeCultureReqObj(
+        let cultureTypeCultureReqBody = getCultureTypeCultureReqObj(
           selectedAssociateInfo,
           selectedTagValue,
           'active',
@@ -881,11 +884,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'jobProfilesTypeDistinctReviewList') {
+        let jobTypeJobReqBody = getJobProfileTypeJobProfileReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_JOB_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            jobTypeJobReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

@@ -6,7 +6,8 @@ import {
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   GET_JOB_GROUP_REVIEW_INFO_SAGA,
   JOB_GROUP_REVISE_INFO_SAGA,
-  SET_JOB_GROUP_REDUCER_STATE
+  SET_JOB_GROUP_REDUCER_STATE,
+  JOB_GROUP_JOB_REVIEWLIST_SAGA
 } from '../../actionType';
 import { JOB_REVIEW_GROUP_URL, JOB_REVISE_GROUP_URL } from '../../endpoints';
 
@@ -33,17 +34,17 @@ function* workerReviewJobProfileGroupInfoSaga(data) {
     if (userResponse.responseCode === '000') {
       const { isReviseMode = false, jobGroupJobReqBody = null } = data.payload;
       if (jobGroupJobReqBody !== null) {
-        // yield put({
-        //   type: GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
-        //   payload: {
-        //     request: cultureGroupCultureReqBody,
-        //     HeaderOne: 'culture profiles',
-        //     BadgeOne: '',
-        //     BadgeTwo: '',
-        //     BadgeThree: '',
-        //     isMiddlePaneList: false
-        //   }
-        // });
+        yield put({
+          type: JOB_GROUP_JOB_REVIEWLIST_SAGA,
+          payload: {
+            request: jobGroupJobReqBody,
+            HeaderOne: 'job profiles',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
       }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -65,7 +66,7 @@ function* workerReviewJobProfileGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -95,17 +96,17 @@ function* workerReviseJobProfileGroupInfoSaga(data) {
     if (userResponse.responseCode === '000') {
       const { createMode = '', jobGroupJobReqBody = null } = data.payload;
       if (jobGroupJobReqBody !== null) {
-        // yield put({
-        //   type: GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
-        //   payload: {
-        //     request: assessmentGroupAssessmentReqBody,
-        //     HeaderOne: 'culture profiles',
-        //     BadgeOne: '',
-        //     BadgeTwo: '',
-        //     BadgeThree: '',
-        //     isMiddlePaneList: false
-        //   }
-        // });
+        yield put({
+          type: JOB_GROUP_JOB_REVIEWLIST_SAGA,
+          payload: {
+            request: jobGroupJobReqBody,
+            HeaderOne: 'job profiles',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
       }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -126,7 +127,7 @@ function* workerReviseJobProfileGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

@@ -2,12 +2,10 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
-  SET_CULTURE_REDUCER_STATE,
-  GET_CULTURE_PROFILE_INFO_SAGA,
-  CULTURE_PROFILE_INFO_REVISE_SAGA,
   SET_JOB_REDUCER_STATE,
   GET_JOB_PROFILE_INFO_SAGA,
-  JOB_PROFILE_INFO_REVISE_SAGA
+  JOB_PROFILE_INFO_REVISE_SAGA,
+  SET_JOB_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import { JOB_PROFILE_REVIEW_INFO_URL, JOB_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 
@@ -44,11 +42,173 @@ function* workerReviewInfoJobProfileSaga(data) {
         }
       });
       if (isReviseMode) {
-        const { informationBasic } = userResponse.responseObject[0];
+        const { informationBasic, informationAllocation } = userResponse.responseObject[0];
         yield put({
           type: SET_JOB_REDUCER_STATE,
           payload: informationBasic
         });
+        if (
+          informationAllocation &&
+          informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary &&
+          informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.jobProfileGroup.jobProfileGroupPrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileGroup',
+              actualStateName: 'jobProfileGroupPrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileGroup',
+              actualStateName: 'jobProfileGroupPrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary &&
+          informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.jobProfileGroup.jobProfileGroupSecondary.map(
+            (ob) => ob.id
+          );
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileGroup',
+              actualStateName: 'jobProfileGroupSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileGroup',
+              actualStateName: 'jobProfileGroupSecondary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.jobProfileNode?.jobProfileNodePrimary &&
+          informationAllocation?.jobProfileNode?.jobProfileNodePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.jobProfileNode.jobProfileNodePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileNode',
+              actualStateName: 'jobProfileNodePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileNode',
+              actualStateName: 'jobProfileNodePrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.jobProfileNode?.jobProfileNodeSecondary &&
+          informationAllocation?.jobProfileNode?.jobProfileNodeSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.jobProfileNode.jobProfileNodeSecondary.map(
+            (ob) => ob.id
+          );
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileNode',
+              actualStateName: 'jobProfileNodeSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileNode',
+              actualStateName: 'jobProfileNodeSecondary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.jobProfileType?.jobProfileTypePrimary &&
+          informationAllocation?.jobProfileType?.jobProfileTypePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.jobProfileType.jobProfileTypePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileType',
+              actualStateName: 'jobProfileTypePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileType',
+              actualStateName: 'jobProfileTypePrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.jobProfileType?.jobProfileTypeSecondary &&
+          informationAllocation?.jobProfileType?.jobProfileTypeSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.jobProfileType.jobProfileTypeSecondary.map(
+            (ob) => ob.id
+          );
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileType',
+              actualStateName: 'jobProfileTypeSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_JOB_DYNAMIC_SINGLE_STATE,
+            payload: {
+              objectName: 'informationAllocation',
+              stateName: 'jobProfileType',
+              actualStateName: 'jobProfileTypeSecondary',
+              value: []
+            }
+          });
+        }
       }
     }
     console.log('loading end');

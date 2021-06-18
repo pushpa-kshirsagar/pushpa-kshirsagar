@@ -58,7 +58,7 @@ const JobProfileGroupJobProfileDistinctReviewList = (props) => {
         type: SET_MIDDLEPANE_STATE,
         payload: {
           middlePaneHeader: 'job Profiles',
-          middlePaneHeaderBadgeOne: 'groups',
+          middlePaneHeaderBadgeOne: 'group',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
@@ -239,7 +239,7 @@ const JobProfileGroupJobProfileDistinctReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'jobGroupJobRevise' && (
+      {FilterMode === 'jobProfileGroupJobProfileRevise' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}

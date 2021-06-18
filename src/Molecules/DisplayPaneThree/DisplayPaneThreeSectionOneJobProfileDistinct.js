@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA, GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA, INTERNAL_NODE_LIST_SAGA, LOADER_START, SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, SET_POPUP_VALUE } from '../../actionType';
+import { makeInternalNodeObj, makeJobProfileGroupObj, makeJobProfileTypeObj } from '../../Actions/GenericActions';
 // import {
 //   GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
 //   GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
@@ -24,11 +26,11 @@ import { Paper } from '@material-ui/core';
 
 const DisplayPaneThreeSectionOneJobProfileDistinct = () => {
   const [listExpand, setListExpand] = useState('');
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { responseObject, headerOneBadgeTwo, headerOneBadgeOne, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  // const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -114,153 +116,96 @@ const DisplayPaneThreeSectionOneJobProfileDistinct = () => {
     }
   ];
 
-  let jobProfileGroupListPrimary = [
-    {
-      id: 'associate1',
-      textOne: 'Simple Sample 01',
-      textTwo: 'Group',
-      status: 'active'
-    },
-    {
-      id: 'associate2',
-      textOne: 'Simple Sample 02',
-      textTwo: 'Group',
-      status: 'active'
-    },
-    {
-      id: 'associate3',
-      textOne: 'Simple Sample 03',
-      textTwo: 'Group',
-      status: 'active'
-    }
-  ];
-  // if (
-  //   informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary &&
-  //   informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary.length > 0
-  // ) {
-  //   const tempArr = informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary;
-  //   tempArr.forEach((ob) => {
-  //     jobProfileGroupListPrimary.push({
-  //       id: ob.id,
-  //       textOne: ob?.informationBasic?.jobProfileGroupName || '',
-  //       textTwo: ob?.informationBasic?.jobProfileGroupDescription || '',
-  //       status: ''
-  //     });
-  //   });
-  // }
+  let jobProfileGroupListPrimary = [];
+  if (
+    informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary &&
+    informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary;
+    tempArr.forEach((ob) => {
+      jobProfileGroupListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.jobProfileGroupName || '',
+        textTwo: ob?.informationBasic?.jobProfileGroupDescription || '',
+        status: ''
+      });
+    });
+  }
   let jobProfileGroupListSecondary = [];
-  // if (
-  //   informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary &&
-  //   informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary.length > 0
-  // ) {
-  //   const tempArr = informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary;
-  //   tempArr.forEach((ob) => {
-  //     jobProfileGroupListSecondary.push({
-  //       id: ob.id,
-  //       textOne: ob?.informationBasic?.jobProfileGroupName || '',
-  //       textTwo: ob?.informationBasic?.jobProfileGroupDescription || '',
-  //       status: ''
-  //     });
-  //   });
-  // }
-  let jobProfileNodeListPrimary = [
-    {
-      id: 'associate1',
-      textOne: 'Simple Sample 01',
-      textTwo: 'Node',
-      status: 'active'
-    },
-    {
-      id: 'associate2',
-      textOne: 'Simple Sample 02',
-      textTwo: 'Node',
-      status: 'active'
-    },
-    {
-      id: 'associate3',
-      textOne: 'Simple Sample 03',
-      textTwo: 'Node',
-      status: 'active'
-    }
-  ];
-  // if (
-  //   informationAllocation?.jobProfileNode?.jobProfileNodePrimary &&
-  //   informationAllocation?.jobProfileNode?.jobProfileNodePrimary.length > 0
-  // ) {
-  //   const tempArr = informationAllocation?.jobProfileNode?.jobProfileNodePrimary;
-  //   tempArr.forEach((ob) => {
-  //     jobProfileNodeListPrimary.push({
-  //       id: ob.id,
-  //       textOne: ob?.informationBasic?.associateNodeName || '',
-  //       textTwo: ob?.informationBasic?.associateNodeDescription || '',
-  //       status: ''
-  //     });
-  //   });
-  // }
+  if (
+    informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary &&
+    informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary;
+    tempArr.forEach((ob) => {
+      jobProfileGroupListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.jobProfileGroupName || '',
+        textTwo: ob?.informationBasic?.jobProfileGroupDescription || '',
+        status: ''
+      });
+    });
+  }
+  let jobProfileNodeListPrimary = [];
+  if (
+    informationAllocation?.jobProfileNode?.jobProfileNodePrimary &&
+    informationAllocation?.jobProfileNode?.jobProfileNodePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.jobProfileNode?.jobProfileNodePrimary;
+    tempArr.forEach((ob) => {
+      jobProfileNodeListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
   let jobProfileNodeListSecondary = [];
-  // if (
-  //   informationAllocation?.jobProfileNode?.jobProfileNodeSecondary &&
-  //   informationAllocation?.jobProfileNode?.jobProfileNodeSecondary.length > 0
-  // ) {
-  //   const tempArr = informationAllocation?.jobProfileNode?.jobProfileNodeSecondary;
-  //   tempArr.forEach((ob) => {
-  //     jobProfileNodeListSecondary.push({
-  //       id: ob.id,
-  //       textOne: ob?.informationBasic?.associateNodeName || '',
-  //       textTwo: ob?.informationBasic?.associateNodeDescription || '',
-  //       status: ''
-  //     });
-  //   });
-  // }
-  let jobProfileTypeListPrimary = [
-    {
-      id: 'associate1',
-      textOne: 'Simple Sample 01',
-      textTwo: 'Type',
-      status: 'active'
-    },
-    {
-      id: 'associate2',
-      textOne: 'Simple Sample 02',
-      textTwo: 'Type',
-      status: 'active'
-    },
-    {
-      id: 'associate3',
-      textOne: 'Simple Sample 03',
-      textTwo: 'Type',
-      status: 'active'
-    }
-  ];
-  // if (
-  //   informationAllocation?.jobProfileType?.jobProfileTypePrimary &&
-  //   informationAllocation?.jobProfileType?.jobProfileTypePrimary.length > 0
-  // ) {
-  //   const tempArr = informationAllocation?.jobProfileType?.jobProfileTypePrimary;
-  //   tempArr.forEach((ob) => {
-  //     jobProfileTypeListPrimary.push({
-  //       id: ob.id,
-  //       textOne: ob?.informationBasic?.jobProfileTypeName || '',
-  //       textTwo: ob?.informationBasic?.jobProfileTypeDescription || '',
-  //       status: ''
-  //     });
-  //   });
-  // }
+  if (
+    informationAllocation?.jobProfileNode?.jobProfileNodeSecondary &&
+    informationAllocation?.jobProfileNode?.jobProfileNodeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.jobProfileNode?.jobProfileNodeSecondary;
+    tempArr.forEach((ob) => {
+      jobProfileNodeListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.associateNodeName || '',
+        textTwo: ob?.informationBasic?.associateNodeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let jobProfileTypeListPrimary = [];
+  if (
+    informationAllocation?.jobProfileType?.jobProfileTypePrimary &&
+    informationAllocation?.jobProfileType?.jobProfileTypePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.jobProfileType?.jobProfileTypePrimary;
+    tempArr.forEach((ob) => {
+      jobProfileTypeListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.jobProfileTypeName || '',
+        textTwo: ob?.informationBasic?.jobProfileTypeDescription || '',
+        status: ''
+      });
+    });
+  }
   let jobProfileTypeListSecondary = [];
-  // if (
-  //   informationAllocation?.jobProfileType?.jobProfileTypeSecondary &&
-  //   informationAllocation?.jobProfileType?.jobProfileTypeSecondary.length > 0
-  // ) {
-  //   const tempArr = informationAllocation?.jobProfileType?.jobProfileTypeSecondary;
-  //   tempArr.forEach((ob) => {
-  //     jobProfileTypeListSecondary.push({
-  //       id: ob.id,
-  //       textOne: ob?.informationBasic?.jobProfileTypeName || '',
-  //       textTwo: ob?.informationBasic?.jobProfileTypeDescription || '',
-  //       status: ''
-  //     });
-  //   });
-  // }
+  if (
+    informationAllocation?.jobProfileType?.jobProfileTypeSecondary &&
+    informationAllocation?.jobProfileType?.jobProfileTypeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.jobProfileType?.jobProfileTypeSecondary;
+    tempArr.forEach((ob) => {
+      jobProfileTypeListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.jobProfileTypeName || '',
+        textTwo: ob?.informationBasic?.jobProfileTypeDescription || '',
+        status: ''
+      });
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -481,99 +426,99 @@ const DisplayPaneThreeSectionOneJobProfileDistinct = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'group') {
-      // dispatch({ type: LOADER_START });
-      // let requestObj = makeAssessmentGroupObj(selectedAssociateInfo, 'active', 0, -1);
-      // dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-      // dispatch({
-      //   type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
-      //   payload: {
-      //     request: requestObj,
-      //     BadgeOne: '',
-      //     BadgeTwo: '',
-      //     BadgeThree: '',
-      //     isMiddlePaneList: false
-      //   }
-      // });
+      dispatch({ type: LOADER_START });
+      let requestObj = makeJobProfileGroupObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({
+        type: GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
-        // dispatch({
-        //   type: SET_POPUP_VALUE,
-        //   payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'ASSESSMENTCREATE' }
-        // });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'JOBCREATE' }
+        });
       }
       if (selectedBadgeName === 'secondary') {
-        // dispatch({
-        //   type: SET_POPUP_VALUE,
-        //   payload: { isPopUpValue: 'GROUPSECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
-        // });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'GROUPSECONDARYPOPUP', popupMode: 'JOBCREATE' }
+        });
       }
     }
     if (labelName === 'manager') {
       if (selectedBadgeName === 'primary') {
-        // dispatch({
-        //   type: SET_POPUP_VALUE,
-        //   payload: { isPopUpValue: 'MANAGERPOPUP', popupMode: 'ASSESSMENTCREATE' }
-        // });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERPOPUP', popupMode: 'JOBCREATE' }
+        });
       }
       if (selectedBadgeName === 'secondary') {
-        // dispatch({
-        //   type: SET_POPUP_VALUE,
-        //   payload: { isPopUpValue: 'MANAGERSECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
-        // });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'MANAGERSECONDARYPOPUP', popupMode: 'JOBCREATE' }
+        });
       }
     }
     if (labelName === 'node') {
-      // dispatch({ type: LOADER_START });
-      // let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
-      // dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
-      // dispatch({
-      //   type: INTERNAL_NODE_LIST_SAGA,
-      //   payload: {
-      //     request: nodeRequestObj,
-      //     BadgeOne: '',
-      //     BadgeTwo: '',
-      //     BadgeThree: '',
-      //     nodeViewState: 'list',
-      //     isMiddlePaneList: false
-      //   }
-      // });
+      dispatch({ type: LOADER_START });
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          nodeViewState: 'list',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
-        // dispatch({
-        //   type: SET_POPUP_VALUE,
-        //   payload: { isPopUpValue: 'NODEPOPUP', popupMode: 'ASSESSMENTCREATE' }
-        // });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODEPOPUP', popupMode: 'JOBCREATE' }
+        });
       }
       if (selectedBadgeName === 'secondary') {
-        // dispatch({
-        //   type: SET_POPUP_VALUE,
-        //   payload: { isPopUpValue: 'NODESECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
-        // });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'NODESECONDARYPOPUP', popupMode: 'JOBCREATE' }
+        });
       }
     }
     if (labelName === 'type') {
-      // dispatch({ type: LOADER_START });
-      // let roleRequestObj = makeAssessmentTypeObj(selectedAssociateInfo, 'active', 0, -1);
-      // dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
-      // dispatch({
-      //   type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
-      //   payload: {
-      //     request: roleRequestObj,
-      //     BadgeOne: headerOneBadgeOne,
-      //     BadgeTwo: headerOneBadgeTwo,
-      //     BadgeThree: '',
-      //     isMiddlePaneList: false
-      //   }
-      // });
+      dispatch({ type: LOADER_START });
+      let roleRequestObj = makeJobProfileTypeObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+      dispatch({
+        type: GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: headerOneBadgeOne,
+          BadgeTwo: headerOneBadgeTwo,
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
-        // dispatch({
-        //   type: SET_POPUP_VALUE,
-        //   payload: { isPopUpValue: 'TYPEPOPUP', popupMode: 'ASSESSMENTCREATE' }
-        // });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPEPOPUP', popupMode: 'JOBCREATE' }
+        });
       }
       if (selectedBadgeName === 'secondary') {
-        // dispatch({
-        //   type: SET_POPUP_VALUE,
-        //   payload: { isPopUpValue: 'TYPESECONDARYPOPUP', popupMode: 'ASSESSMENTCREATE' }
-        // });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'TYPESECONDARYPOPUP', popupMode: 'JOBCREATE' }
+        });
       }
     }
   };
@@ -648,9 +593,18 @@ const DisplayPaneThreeSectionOneJobProfileDistinct = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseAllocation}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseAllocation}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );

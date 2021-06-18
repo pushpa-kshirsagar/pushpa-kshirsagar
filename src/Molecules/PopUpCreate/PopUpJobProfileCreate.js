@@ -70,6 +70,28 @@ const PopUpJobProfileCreate = (props) => {
     });
   };
   console.log('jobProfileInformation', jobProfileInformation);
+  let selectedPrimaryGroup =
+    jobProfileInformation?.informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary || [];
+  let selectedSecondaryGroup =
+    jobProfileInformation?.informationAllocation?.jobProfileGroup?.jobProfileGroupSecondary || [];
+  let filteredCoreGroupReviewListDataPrimary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for primary popup list
+      if (!selectedSecondaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataPrimary.push(group);
+    });
+  }
+  let filteredCoreGroupReviewListDataSecondary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for Secondary popup list
+      if (!selectedPrimaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataSecondary.push(group);
+    });
+  }
+
+
   return (
     <div>
       <PopUpTextField
@@ -114,7 +136,7 @@ const PopUpJobProfileCreate = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataPrimary}
         selectedList={
           jobProfileInformation.informationAllocation.jobProfileGroup.jobProfileGroupPrimary
         }
@@ -128,6 +150,28 @@ const PopUpJobProfileCreate = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'GROUPSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'MANAGERPOPUP'}
+        inputHeader={'group'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a group'}
+        ListData={filteredCoreGroupReviewListDataSecondary}
+        selectedList={
+          jobProfileInformation.informationAllocation.jobProfileGroup.jobProfileGroupSecondary
+        }
+        textOne={'jobProfileGroupName'}
+        textTwo={'jobProfileGroupDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'jobProfileGroup', 'jobProfileGroupSecondary');
+        }}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'MANAGERPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -135,6 +179,28 @@ const PopUpJobProfileCreate = (props) => {
         nextPopUpValue={'NODEPOPUP'}
         inputHeader={'manager'}
         inputHeaderBadge={'primary'}
+        infoMsg={'select a manager'}
+        ListData={[
+          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
+          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Manager' } },
+          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Manager' } }
+        ]}
+        selectedList={[]}
+        textOne={'name'}
+        textTwo={'description'}
+        onClickEvent={null}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'MANAGERSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'NODEPOPUP'}
+        inputHeader={'manager'}
+        inputHeaderBadge={'secondary'}
         infoMsg={'select a manager'}
         ListData={[
           { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Manager' } },
@@ -172,6 +238,28 @@ const PopUpJobProfileCreate = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
+        isActive={isPopUpValue === 'NODESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'TYPEPOPUP'}
+        inputHeader={'node'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a node'}
+        ListData={coreNodeReviewListData}
+        selectedList={
+          jobProfileInformation.informationAllocation.jobProfileNode.jobProfileNodeSecondary
+        }
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'jobProfileNode', 'jobProfileNodeSecondary');
+        }}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
         isActive={isPopUpValue === 'TYPEPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -188,6 +276,28 @@ const PopUpJobProfileCreate = (props) => {
         textTwo={'jobProfileTypeDescription'}
         onClickEvent={(e) => {
           updateAllocationObj(e, 'jobProfileType', 'jobProfileTypePrimary');
+        }}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPESECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'type'}
+        inputHeaderBadge={'secondary'}
+        infoMsg={'select a type'}
+        ListData={coreTypeReviewListData}
+        selectedList={
+          jobProfileInformation.informationAllocation.jobProfileType.jobProfileTypeSecondary
+        }
+        textOne={'jobProfileTypeName'}
+        textTwo={'jobProfileTypeDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'jobProfileType', 'jobProfileTypeSecondary');
         }}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}

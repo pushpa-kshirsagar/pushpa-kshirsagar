@@ -104,14 +104,16 @@ import DisplayPaneThreeSectionTwoItemGroup from '../../Molecules/DisplayPaneThre
 import DisplayPaneThreeSectionTwoItemType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoItemType';
 import DisplayPaneThreeSectionOneItemType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneItemType';
 import {
-  geCultureGroupCultureReqObj,
-  geCultureTypeCultureReqObj,
+  getCultureGroupCultureReqObj,
+  getCultureTypeCultureReqObj,
   getAssessmentGroupAssessmentReqObj,
   getAssessmentTypeAssessmentReqObj,
   getAssignmentGroupAssignmentReqObj,
   getAssignmentTypeAssignmentReqObj,
   getItemGroupItemReqObj,
-  getItemTypeItemReqObj
+  getItemTypeItemReqObj,
+  getJobProfileTypeJobProfileReqObj,
+  getJobProfileGroupJobProfileReqObj
 } from '../../Actions/GenericActions';
 import DisplayPaneThreeSectionOneCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneCultureProfileDistinct';
 import DisplayPaneThreeSectionTwoCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileDistinct';
@@ -912,7 +914,7 @@ export const DisplayPaneThree = () => {
         }
       };
       dispatch({ type: LOADER_START });
-      let cultureGroupCultureReqBody = geCultureGroupCultureReqObj(
+      let cultureGroupCultureReqBody = getCultureGroupCultureReqObj(
         selectedAssociateInfo,
         id,
         'active',
@@ -929,15 +931,28 @@ export const DisplayPaneThree = () => {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        jobProfileGroupJobProfile: {
+          jobProfileGroupJobProfileAllocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          jobProfileGroupJobProfileUnallocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         jobProfileGroup: {
           id,
           informationBasic: jobProfileGroup.informationBasic
         }
       };
       dispatch({ type: LOADER_START });
+      let jobGroupJobReqBody = getJobProfileGroupJobProfileReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: JOB_GROUP_REVISE_INFO_SAGA,
-        payload: { headerOne: 'job profiles', reqBody, createMode }
+        payload: { headerOne: 'job profiles', reqBody, jobGroupJobReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'items') {
       const { associateId, id } = responseObject;
@@ -1114,11 +1129,12 @@ export const DisplayPaneThree = () => {
         },
         cultureProfileType: {
           id,
-          informationBasic: cultureProfileType.informationBasic
+          informationBasic: cultureProfileType.informationBasic,
+          informationAllocation: cultureProfileType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });
-      let cultureTypeCultureReqBody = geCultureTypeCultureReqObj(
+      let cultureTypeCultureReqBody = getCultureTypeCultureReqObj(
         selectedAssociateInfo,
         id,
         'active',
@@ -1134,19 +1150,29 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
-        // jobProfileTypeJobProfile: {
-        //   jobProfileTypeJobProfileAllocate: assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
-        //   jobProfileTypeJobProfileUnallocate: assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
-        // },
+        jobProfileTypeJobProfile: {
+          jobProfileTypeJobProfileAllocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeAllocate || [],
+          jobProfileTypeJobProfileUnallocate:
+            assesseeGroupAssessee?.assesseeGroupAssesseeUnallocate || []
+        },
         jobProfileType: {
           id,
-          informationBasic: jobProfileType.informationBasic
+          informationBasic: jobProfileType.informationBasic,
+          informationAllocation: jobProfileType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });
+      let jobTypeJobReqBody = getJobProfileTypeJobProfileReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: JOB_TYPE_REVISE_INFO_SAGA,
-        payload: { headerOne: 'job profiles', reqBody, createMode }
+        payload: { headerOne: 'job profiles', reqBody, jobTypeJobReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'items') {
       const { associateId, id } = responseObject;
