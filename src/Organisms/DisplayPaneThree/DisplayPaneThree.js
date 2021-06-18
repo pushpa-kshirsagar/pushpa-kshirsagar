@@ -48,7 +48,9 @@ import {
   CULTURE_PROFILE_INFO_REVISE_SAGA,
   CULTURE_GROUP_REVISE_INFO_SAGA,
   CULTURE_TYPE_REVISE_INFO_SAGA,
-  JOB_TYPE_REVISE_INFO_SAGA
+  JOB_TYPE_REVISE_INFO_SAGA,
+  JOB_GROUP_REVISE_INFO_SAGA,
+  JOB_PROFILE_INFO_REVISE_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -584,6 +586,7 @@ export const DisplayPaneThree = () => {
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
+  const { jobProfileInformation } = useSelector((state) => state.JobProfileCreateReducer);
   const {
     assesseeGroup,
     assessmentGroup,
@@ -905,6 +908,22 @@ export const DisplayPaneThree = () => {
         type: CULTURE_GROUP_REVISE_INFO_SAGA,
         payload: { headerOne: 'culture profiles', reqBody, createMode }
       });
+    } else if (headerOneBadgeOne === 'group' && headerOne === 'job profiles') {
+      const { associateId, id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        jobProfileGroup: {
+          id,
+          informationBasic: jobProfileGroup.informationBasic
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: JOB_GROUP_REVISE_INFO_SAGA,
+        payload: { headerOne: 'job profiles', reqBody, createMode }
+      });
     } else if (headerOneBadgeOne === 'group' && headerOne === 'items') {
       const { associateId, id } = responseObject;
       const reqBody = {
@@ -1020,7 +1039,8 @@ export const DisplayPaneThree = () => {
         },
         assessmentType: {
           id,
-          informationBasic: assessmentType.informationBasic
+          informationBasic: assessmentType.informationBasic,
+          informationAllocation: assessmentType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });
@@ -1050,7 +1070,8 @@ export const DisplayPaneThree = () => {
         },
         assignmentType: {
           id,
-          informationBasic: assignmentType.informationBasic
+          informationBasic: assignmentType.informationBasic,
+          informationAllocation: assignmentType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });
@@ -1146,6 +1167,28 @@ export const DisplayPaneThree = () => {
       dispatch({
         type: ASSOCIATE_TYPE_INFO_REVISE_SAGA,
         payload: { headerOne: 'associates', reqBody, createMode }
+      });
+    } else if (headerOneBadgeOne === 'information' && headerOne === 'job profile') {
+      const { informationBasic, informationAllocation } = jobProfileInformation;
+      const { id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId: id,
+        jobProfile: {
+          id,
+          informationBasic,
+          informationAllocation
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: JOB_PROFILE_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'job profile',
+          reqBody,
+          createMode
+        }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'culture profile') {
       const { informationBasic, informationAllocation } = cultureProfileInformation;

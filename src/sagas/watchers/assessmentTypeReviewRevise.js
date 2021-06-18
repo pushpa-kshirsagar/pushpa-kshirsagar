@@ -7,7 +7,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_TYPE_GROUP_ALLOCATION
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_TYPE_URL, ASSESSMENT_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -62,6 +63,15 @@ function* workerReviewAssessmentTypeInfoSaga(data) {
         yield put({
           type: SET_ASSESSMENT_TYPE_REDUCER_STATE,
           payload: userResponse.responseObject.informationBasic
+        });
+        yield put({
+          type: SET_TYPE_GROUP_ALLOCATION,
+          payload: {
+            objectName: 'assessmentType',
+            stateName: 'assessmentTypeGroup',
+            value:
+              userResponse?.responseObject?.informationAllocation?.assessmentTypeGroup?.id || ''
+          }
         });
       }
     } else {
