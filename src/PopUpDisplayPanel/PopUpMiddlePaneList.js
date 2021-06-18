@@ -95,8 +95,14 @@ import {
   getAssignmnetTypeAssignmnetDistinctApiCall,
   getNodeRelatedAssignmentsDistinctApiCall
 } from '../Actions/AssignmentModuleAction';
-import { getCultureGroupCultureDistinctApiCall, getCultureTypeCultureDistinctApiCall } from '../Actions/ActionCultureProfile';
-import { getJobProfileGroupJobProfileDistinctApiCall, getJobProfileTypeJobProfileDistinctApiCall } from '../Actions/ActionJobProfile';
+import {
+  getCultureGroupCultureDistinctApiCall,
+  getCultureTypeCultureDistinctApiCall
+} from '../Actions/ActionCultureProfile';
+import {
+  getJobProfileGroupJobProfileDistinctApiCall,
+  getJobProfileTypeJobProfileDistinctApiCall
+} from '../Actions/ActionJobProfile';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -470,7 +476,11 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'jobProfilesDistinctReviewList') {
+      if (
+        typeOfMiddlePaneList === 'jobProfilesDistinctReviewList' ||
+        typeOfMiddlePaneList === 'jobProfileGroupJobProfileReviewList' ||
+        typeOfMiddlePaneList === 'jobProfileTypeJobProfileReviewList'
+      ) {
         dispatch({
           type: GET_JOB_PROFILE_INFO_SAGA,
           payload: {
@@ -503,7 +513,11 @@ const PopUpMiddlePaneList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'cultureProfilesDistinctReviewList') {
+      if (
+        typeOfMiddlePaneList === 'cultureProfilesDistinctReviewList' ||
+        typeOfMiddlePaneList === 'cultureProfileGroupCultureProfileReviewList' ||
+        typeOfMiddlePaneList === 'cultureProfileTypeCultureProfileReviewList'
+      ) {
         dispatch({
           type: GET_CULTURE_PROFILE_INFO_SAGA,
           payload: {
