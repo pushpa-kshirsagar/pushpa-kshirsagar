@@ -909,6 +909,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         popupHeaderOne === 'assessments' ||
         popupHeaderOne === 'items' ||
         popupHeaderOne === 'culture profiles' ||
+        popupHeaderOne === 'job profiles' ||
         popupHeaderOne === 'assessees') &&
       popupHeaderOneBadgeOne === 'types'
     ) {
@@ -965,6 +966,16 @@ const PopUpDisplayPanelAssociate = (props) => {
       }
       if (popupHeaderOne === 'culture profiles') {
         getCultureProfileTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          popupHeaderOne
+        );
+      }
+      if (popupHeaderOne === 'job profiles') {
+        getJobProfileTypeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,

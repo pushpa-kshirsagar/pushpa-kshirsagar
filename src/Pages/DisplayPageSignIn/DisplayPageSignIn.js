@@ -398,8 +398,8 @@ const DisplayPageSignIn = () => {
                 </div>
                 <FormControl style={{ width: '100%' }}>
                   <SelectField
-                    tag={'assesseeSignIn'}
-                    label={'credential'}
+                    tag={'assesseeSignInInformation'}
+                    label={'information'}
                     listSelect={['credential', 'password']}
                     errorMsg={credentialOptionError}
                     onChange={(e) => {
@@ -412,7 +412,7 @@ const DisplayPageSignIn = () => {
                   <InputField
                     id={'forgotCredential'}
                     value={forgotCredential}
-                    label={'credential'}
+                    label={'information'}
                     type="text"
                     errorMsg={forgotCredentialError}
                     onClick={(e) => {
@@ -422,7 +422,17 @@ const DisplayPageSignIn = () => {
                   />
                   <div className={'forgot-and-progress-flex'}>
                     <div>
-                      <Label text="" fontSize="1.2rem" colour="#0000008a" />
+                      <Label
+                        text={
+                          credentialOption === 'credential'
+                            ? 'email'
+                            : credentialOption === 'password'
+                            ? 'email, mobile telephone, tag'
+                            : ''
+                        }
+                        fontSize="1.2rem"
+                        colour="#0000008a"
+                      />
                     </div>
                     <div>
                       {isCredentialsInValid && (

@@ -29,6 +29,7 @@ import {
   GET_ITEM_GROUP_REVIEW_LIST_SAGA,
   GET_ITEM_REVIEW_LIST_SAGA,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+  GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
   GET_JOBPROFILE_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_CLOSE,
@@ -61,7 +62,8 @@ import {
   makeCultureProfileScanObj,
   makeCultureProfileGroupScanObj,
   makeCultureProfileTypeScanObj,
-  makeJobProfileScanObj
+  makeJobProfileScanObj,
+  makeJobProfileGroupScanObj
 } from '../Actions/GenericActions';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import {
@@ -132,6 +134,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: ASSESSEE_REVIEW_DISTINCT_SAGA,
           payload: {
@@ -170,6 +173,7 @@ const PopUpScan = (props) => {
         }
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
           payload: {
@@ -195,6 +199,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
           payload: {
@@ -218,6 +223,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
           payload: {
@@ -243,6 +249,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -268,6 +275,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -323,6 +331,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -348,6 +357,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
           payload: {
@@ -374,6 +384,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
           payload: {
@@ -400,6 +411,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ITEM_REVIEW_LIST_SAGA,
           payload: {
@@ -425,6 +437,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -450,6 +463,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
           payload: {
@@ -475,6 +489,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
           payload: {
@@ -500,6 +515,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
           payload: {
@@ -525,6 +541,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -548,6 +565,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
           payload: {
@@ -571,6 +589,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
           payload: {
@@ -594,8 +613,33 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_JOBPROFILE_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObect,
+            BadgeOne: middlePaneHeaderBadgeOne,
+            BadgeTwo: middlePaneHeaderBadgeTwo,
+            BadgeThree: middlePaneHeaderBadgeThree,
+            isMiddlePaneList: true
+          }
+        });
+        dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+        document.getElementById('middleComponentId').scrollTop = '0px';
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesGroupDistinctReviewList') {
+        let requestObect = makeJobProfileGroupScanObj(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          0,
+          countPage,
+          state.scanValue
+        );
+        dispatch({ type: LOADER_START });
+        dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+        dispatch({
+          type: GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
           payload: {
             request: requestObect,
             BadgeOne: middlePaneHeaderBadgeOne,
@@ -617,6 +661,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
           payload: {
@@ -640,6 +685,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
           payload: {
@@ -663,6 +709,7 @@ const PopUpScan = (props) => {
         );
         dispatch({ type: LOADER_START });
         dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+        dispatch({ type: SET_PAGE_COUNT, payload: 0 });
         dispatch({
           type: GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
           payload: {
@@ -890,6 +937,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'assignmentGroupAssignmentReviewList' ||
                 isPopUpValue === 'cultureProfilesGroupDistinctReviewList' ||
                 isPopUpValue === 'cultureProfilesTypeDistinctReviewList' ||
+                isPopUpValue === 'jobProfilesGroupDistinctReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}
