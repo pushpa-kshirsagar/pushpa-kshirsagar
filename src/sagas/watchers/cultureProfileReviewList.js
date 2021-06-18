@@ -10,12 +10,14 @@ import {
   CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
   CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA,
   SET_REVIEW_LIST_RELATE_DATA,
-  GET_ALLOCATE_CULTURE
+  GET_ALLOCATE_CULTURE,
+  GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import {
   CULTURE_GROUP_CULTURE_REVIEWLIST_URL,
   CULTURE_REVIEWLIST_URL,
-  CULTURE_TYPE_CULTURE_REVIEWLIST_URL
+  CULTURE_TYPE_CULTURE_REVIEWLIST_URL,
+  CULTURE_NODE_CULTURE_REVIEWLIST_URL
 } from '../../endpoints';
 
 const apiCallFunction = async (requestObj) => {
@@ -163,6 +165,52 @@ function* workeCultureTypeCultureReviewListSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workeCultureNodeCultureReviewListSaga(data) {
+  try {
+    const response = yield call(apiCallFunction, {
+      data: data.payload.request,
+      URL: CULTURE_NODE_CULTURE_REVIEWLIST_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({
+        type: RELATED_REVIEWLIST_DISTINCT_DATA,
+        payload: [response.responseObject]
+      });
+      yield put({
+        type: SET_REVIEW_LIST_RELATE_DATA,
+        payload: response.responseObject
+      });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: data.payload.HeaderOne,
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'cultureProfileNodeCultureProfileReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
 
 function* workerReviewListCultureProfileAllocateSaga(data) {
   try {
@@ -213,4 +261,8 @@ export default function* watchReviewListCultureProfileSaga() {
   yield takeLatest(CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA, workeCultureGroupCultureReviewListSaga);
   yield takeLatest(CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA, workeCultureTypeCultureReviewListSaga);
   yield takeLatest(GET_ALLOCATE_CULTURE, workerReviewListCultureProfileAllocateSaga);
+  yield takeLatest(
+    GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
+    workeCultureNodeCultureReviewListSaga
+  );
 }

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, CLEAR_ASSESSEE_INFO, SET_NEXT_POPUP, PREVIOUS_POPUP } from '../actionType';
 import '../Molecules/PopUp/PopUp.css';
 
-const PopUpConfirmation = (props) => {
+const PopUpConfirm = (props) => {
   const {
     isActive,
     headerPanelColour,
@@ -106,7 +106,7 @@ const PopUpConfirmation = (props) => {
   );
 };
 
-PopUpConfirmation.propTypes = {
+PopUpConfirm.propTypes = {
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
     'displayPaneCentre',
@@ -119,4 +119,4 @@ PopUpConfirmation.propTypes = {
   className: null,
   isActive: PropTypes.bool
 };
-export default PopUpConfirmation;
+export default PopUpConfirm;

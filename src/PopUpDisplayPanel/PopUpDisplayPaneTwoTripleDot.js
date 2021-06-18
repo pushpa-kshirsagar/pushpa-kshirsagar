@@ -51,7 +51,7 @@ import {
   getCultureProfilesDistinctApiCall,
   getCultureProfileTypeApiCall
 } from '../Actions/ActionCultureProfile';
-const PopUpMiddlePaneTrippleDot = (props) => {
+const PopUpDisplayPaneTwoTripleDot = (props) => {
   const {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
@@ -678,4 +678,4 @@ const PopUpMiddlePaneTrippleDot = (props) => {
   );
 };
 
-export default PopUpMiddlePaneTrippleDot;
+export default PopUpDisplayPaneTwoTripleDot;

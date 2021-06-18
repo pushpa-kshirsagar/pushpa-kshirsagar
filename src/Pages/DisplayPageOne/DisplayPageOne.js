@@ -36,7 +36,7 @@ import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 // import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 // import { AccountContext } from '../../Account';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
-import PopUpMiddlePaneList from '../../PopUpDisplayPanel/PopUpMiddlePaneList';
+import PopUpDisplayPaneTwoReviewList from '../../PopUpDisplayPanel/PopUpDisplayPaneTwoReviewList';
 import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
 import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
 import PopUpAssesseeRoleCreate from '../../Molecules/PopUpCreate/PopUpAssesseeRoleCreate';
@@ -49,9 +49,8 @@ import PopUpAssessmentCreate from '../../Molecules/PopUpCreate/PopUpAssessmentCr
 import PopUpMessageError from '../../PopUpGeneric/PopUpMessageError';
 import { useHistory } from 'react-router-dom';
 import PopUpNodeCreate from '../../Molecules/PopUpCreate/PopUpNodeCreate';
-import PopUpMiddlePaneTrippleDot from '../../PopUpDisplayPanel/PopUpMiddlePaneTrippleDot';
+import PopUpDisplayPaneTwoTripleDot from '../../PopUpDisplayPanel/PopUpDisplayPaneTwoTripleDot';
 import PopUpItemCreate from '../../Molecules/PopUpCreate/PopUpItemCreate';
-import PopUpDownloadUpload from '../../PopUpDisplayPanel/PopUpDownloadUpload';
 import PopUpJobProfileCreate from '../../Molecules/PopUpCreate/PopUpJobProfileCreate';
 
 // import { useHistory } from 'react-router-dom';
@@ -199,17 +198,17 @@ const DisplayPageOne = () => {
           </>
         )}
       </div>
-      <PopUpMiddlePaneList
+      <PopUpDisplayPaneTwoReviewList
         isActive={isPopUpValue === 'middlePaneListPopup'}
         typeOfMiddlePaneList={typeOfMiddlePaneList}
         popupAllClose={popupAllClose}
       />
-      <PopUpMiddlePaneTrippleDot
+      <PopUpDisplayPaneTwoTripleDot
         isActive={isPopUpValue === 'middlePaneTrippleDotPopup'}
         typeOfMiddlePaneList={typeOfMiddlePaneList}
         popupAllClose={popupAllClose}
       />
-      <PopUpMiddlePaneList
+      <PopUpDisplayPaneTwoReviewList
         isActive={isPopUpValue === 'leftPaneTrippleDotPopup'}
         typeOfMiddlePaneList={typeOfMiddlePaneList}
         popupAllClose={popupAllClose}
@@ -357,7 +356,6 @@ const DisplayPageOne = () => {
           allocationObj={'itemTypeGroup'}
           groupName={'itemTypeGroupName'}
           groupDescription={'itemTypeGroupDescription'}
-          PopUpAssessmentCreate
         />
       )}
       {popupMode === 'culture profilesTYPECREATE' && (
@@ -371,7 +369,6 @@ const DisplayPageOne = () => {
           allocationObj={'cultureProfileTypeGroup'}
           groupName={'cultureProfileTypeGroupName'}
           groupDescription={'cultureProfileTypeGroupDescription'}
-          PopUpAssessmentCreate
         />
       )}
       {popupMode === 'job profilesTYPECREATE' && (
@@ -385,7 +382,6 @@ const DisplayPageOne = () => {
           allocationObj={'jobProfileTypeGroup'}
           groupName={'jobProfileTypeGroupName'}
           groupDescription={'jobProfileTypeGroupDescription'}
-          PopUpAssessmentCreate
         />
       )}
       {popupMode === 'CULTURECREATE' && (
@@ -396,7 +392,6 @@ const DisplayPageOne = () => {
       {popupMode === 'ASSIGNMENTCREATE' && <PopUpAssignmentCreate headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <PopUpAssessmentCreate headerOne={'assessment'} />}
       {popupMode === 'ITEMCREATE' && <PopUpItemCreate />}
-      {popupMode === 'UPLOAD_DOWNLOAD_POPUP' && <PopUpDownloadUpload isActive />}
     </>
   );
 };

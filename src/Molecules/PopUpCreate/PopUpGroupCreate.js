@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
-import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
+import PopUpConfirm from '../../PopUpGeneric/PopUpConfirm';
 import {
   POPUP_CLOSE,
   CREATE_GROUP_SAGA,
@@ -303,7 +303,7 @@ const PopUpGroupCreate = (props) => {
         onClickEvent={null}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}
@@ -311,7 +311,7 @@ const PopUpGroupCreate = (props) => {
         mode={'cancel'}
         onClickYes={onClickCancelYes}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}

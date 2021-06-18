@@ -1,5 +1,5 @@
 import React from 'react';
-import PopUpConfirmationComponent from './PopUpConfirmation';
+import PopUpConfirmationComponent from './PopUpConfirm';
 import { Provider } from 'react-redux';
 import store from '../store';
 
@@ -11,8 +11,8 @@ export default {
 
 const Template = (args) => <PopUpConfirmationComponent {...args} />;
 
-export const PopUpConfirmation = Template.bind({});
-PopUpConfirmation.args = {
+export const PopUpConfirm = Template.bind({});
+PopUpConfirm.args = {
   className: null,
   headerPanelColour: 'genericOne',
   headerOne: 'assessees',

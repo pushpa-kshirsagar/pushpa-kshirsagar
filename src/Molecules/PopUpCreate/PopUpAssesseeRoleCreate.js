@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
-import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
+import PopUpConfirm from '../../PopUpGeneric/PopUpConfirm';
 import {
   CLEAR_ROLE_REDUCER_STATE,
   POPUP_CLOSE,
@@ -138,7 +138,7 @@ const PopUpAssesseeRoleCreate = () => {
         onClickEvent={updateRoleGroup}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}
@@ -146,7 +146,7 @@ const PopUpAssesseeRoleCreate = () => {
         mode={'cancel'}
         onClickYes={onClickCancelYes}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessees'}

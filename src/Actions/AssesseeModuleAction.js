@@ -1073,12 +1073,25 @@ export const getRoleGroupReviewListApi = (selectedAssociateInfo, dispatch, popup
 };
 export const getTypeGroupReviewListApi = (selectedAssociateInfo, dispatch, popupHeaderOne) => {
   dispatch({ type: LOADER_START });
+  let columnName = popupHeaderOne;
+  if (popupHeaderOne === 'culture profiles') {
+    columnName = 'cultureProfiles';
+  }
+  if (popupHeaderOne === 'job profiles') {
+    columnName = 'jobProfiles';
+  }
+  let columnby = columnName.substring(0, columnName.length - 1);
   let requestObj = {
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId')
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
+    filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.' + columnby + 'TypeGroupName',
+      order: 'asc'
+    }
   };
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
   dispatch({
@@ -1318,5 +1331,3 @@ export const getAssesseeTypeApiCall = (
     }
   });
 };
-
-

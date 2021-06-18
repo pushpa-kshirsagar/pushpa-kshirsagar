@@ -3,6 +3,7 @@ import Store from '../../store';
 import {
   GET_ALLOCATE_JOB,
   GET_JOBPROFILE_REVIEW_LIST_SAGA,
+  GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
   JOB_GROUP_JOB_REVIEWLIST_SAGA,
   JOB_TYPE_JOB_REVIEWLIST_SAGA,
   LOADER_STOP,
@@ -12,7 +13,12 @@ import {
   SET_POPUP_VALUE,
   SET_REVIEW_LIST_RELATE_DATA
 } from '../../actionType';
-import { JOB_GROUP_JOB_REVIEWLIST_URL, JOB_REVIEWLIST_URL, JOB_TYPE_JOB_REVIEWLIST_URL } from '../../endpoints';
+import {
+  JOB_GROUP_JOB_REVIEWLIST_URL,
+  JOB_NODE_JOB_REVIEWLIST_URL,
+  JOB_REVIEWLIST_URL,
+  JOB_TYPE_JOB_REVIEWLIST_URL
+} from '../../endpoints';
 
 const apiCallFunction = async (requestObj) => {
   const requestOptions = {
@@ -201,11 +207,57 @@ function* workerReviewListJobProfileAllocateSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workeJobNodeJobReviewListSaga(data) {
+  try {
+    const response = yield call(apiCallFunction, {
+      data: data.payload.request,
+      URL: JOB_NODE_JOB_REVIEWLIST_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({
+        type: RELATED_REVIEWLIST_DISTINCT_DATA,
+        payload: [response.responseObject]
+      });
+      yield put({
+        type: SET_REVIEW_LIST_RELATE_DATA,
+        payload: response.responseObject
+      });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: data.payload.HeaderOne,
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'jobProfileNodeJobProfileReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
 
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
 export default function* watchReviewListJobProfileSaga() {
   console.log('IN WATCH ====>');
   yield takeLatest(GET_JOBPROFILE_REVIEW_LIST_SAGA, workerJobProfileReviewListSaga);
   yield takeLatest(JOB_GROUP_JOB_REVIEWLIST_SAGA, workeJobGroupJobReviewListSaga);
   yield takeLatest(JOB_TYPE_JOB_REVIEWLIST_SAGA, workeJobTypeJobReviewListSaga);
   yield takeLatest(GET_ALLOCATE_JOB, workerReviewListJobProfileAllocateSaga);
+  yield takeLatest(GET_JOB_NODE_JOB_REVIEW_LIST_SAGA, workeJobNodeJobReviewListSaga);
 }

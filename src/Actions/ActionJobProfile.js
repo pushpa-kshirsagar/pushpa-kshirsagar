@@ -5,6 +5,7 @@ import {
   GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
   GET_JOBPROFILE_REVIEW_LIST_SAGA,
   GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
+  GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   JOB_GROUP_JOB_REVIEWLIST_SAGA,
   JOB_TYPE_JOB_REVIEWLIST_SAGA,
@@ -27,7 +28,9 @@ import {
   getJobProfileGroupJobProfileReqObj,
   getJobProfileGroupJobProfileScanReqObj,
   getJobProfileTypeJobProfileReqObj,
-  getJobProfileTypeJobProfileScanReqObj
+  getJobProfileTypeJobProfileScanReqObj,
+  getNodeJobProfileReqObj,
+  getNodeJobProfileScanReqObj
 } from './GenericActions';
 
 export const jobProfileCreatePopup = (
@@ -278,6 +281,55 @@ export const getJobProfileTypeJobProfileDistinctApiCall = (
     payload: {
       request: reqBody,
       HeaderOne: 'job profiles',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getJobProfileNodeJobProfileApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan,
+  middlePaneHeader
+) => {
+  let reqBody = getNodeJobProfileReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getNodeJobProfileScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: middlePaneHeader,
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

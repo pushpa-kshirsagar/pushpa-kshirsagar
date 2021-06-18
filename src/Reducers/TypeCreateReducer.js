@@ -92,15 +92,15 @@ const initialState = {
   },
   jobProfileType: {
     informationBasic: {
-      cultureProfileTypeName: '',
-      cultureProfileTypeNameVerification: false,
-      cultureProfileTypeDescription: '',
-      cultureProfileTypePicture: '',
-      cultureProfileTypePictureVerification: false,
-      cultureProfileTypeFlag: false
+      jobProfileTypeName: '',
+      jobProfileTypeNameVerification: false,
+      jobProfileTypeDescription: '',
+      jobProfileTypePicture: '',
+      jobProfileTypePictureVerification: false,
+      jobProfileTypeFlag: false
     },
     informationAllocation: {
-      cultureProfileTypeGroup: ''
+      jobProfileTypeGroup: ''
     }
   }
 };

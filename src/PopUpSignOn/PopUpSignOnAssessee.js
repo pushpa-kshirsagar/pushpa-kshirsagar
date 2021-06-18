@@ -6,7 +6,7 @@ import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
 import PopUpTextField from '../PopUpInformation/PopUpTextField';
 import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
 import PopUpDropList from '../PopUpInformation/PopUpDropList';
-import PopUpConfirmation from '../PopUpGeneric/PopUpConfirmation';
+import PopUpConfirm from '../PopUpGeneric/PopUpConfirm';
 import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
 import PopUpCheckbox from '../PopUpInformation/PopUpCheckbox';
 import {
@@ -844,7 +844,7 @@ const PopUpSignOnAssessee = (props) => {
         typeOfSetObject={UPDATE_ASSESSEE_SETUP_PRIMARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}
@@ -852,7 +852,7 @@ const PopUpSignOnAssessee = (props) => {
         mode={'cancel'}
         onClickYes={onClickCancelYes}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}

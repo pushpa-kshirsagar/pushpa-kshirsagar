@@ -306,10 +306,11 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload.keyValue === 'createKey' ||
         action.payload.keyValue === 'assesseeCreate' ||
         action.payload.keyValue === 'reviewDistinctKey' ||
+        action.payload.keyValue === 'cultureProfiles' ||
+        action.payload.keyValue === 'jobProfiles' ||
         action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
           : istate.secondaryPopUpOptions[action.payload.badgeValue];
-      console.log('istate.selectedTagStatus', istate.selectedTagStatus);
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
@@ -320,8 +321,6 @@ const PopUpReducer = (istate = initialState, action) => {
           action.payload.badgeValue === 'assessments' ||
           action.payload.badgeValue === 'assignments' ||
           action.payload.badgeValue === 'associates' ||
-          action.payload.badgeValue === 'cultureProfiles' ||
-          action.payload.badgeValue === 'jobProfiles' ||
           action.payload.badgeValue === 'reports'
         ) {
           return {

@@ -51,6 +51,8 @@ import JobProfileTypeReviewList from '../../ReviewListComponent/JobProfileTypeRe
 import AssessmentGroupAssessmentDistinctReviewList from '../../ReviewListComponent/AssessmentGroupAssessmentDistinctReviewList';
 import JobProfileGroupJobProfileDistinctReviewList from '../../ReviewListComponent/JobProfileGroupJobProfileDistinctReviewList';
 import JobProfileTypeJobProfileDistinctReviewList from '../../ReviewListComponent/JobProfileTypeJobProfileDistinctReviewList';
+import CultureProfileNodeCultureProfileDistinctReviewList from '../../ReviewListComponent/CultureProfileNodeCultureProfileDistinctReviewList';
+import JobProfileNodeJobProfileDistinctReviewList from '../../ReviewListComponent/JobProfileNodeJobProfileDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -224,6 +226,9 @@ export const DisplayPaneTwo = (props) => {
         {typeOfMiddlePaneList === 'cultureProfileTypeCultureProfileReviewList' && (
           <CultureProfileTypeCultureProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
+        {typeOfMiddlePaneList === 'cultureProfileNodeCultureProfileReviewList' && (
+          <CultureProfileNodeCultureProfileDistinctReviewList popupAllClose={popupAllClose} />
+        )}
         {typeOfMiddlePaneList === 'jobProfilesDistinctReviewList' && (
           <JobProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
@@ -238,6 +243,9 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'jobProfileTypeJobProfileReviewList' && (
           <JobProfileTypeJobProfileDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'jobProfileNodeJobProfileReviewList' && (
+          <JobProfileNodeJobProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
@@ -260,8 +268,6 @@ export const DisplayPaneTwo = (props) => {
         </div> */}
 
         {/* for middle pane review list popup */}
-
-        {/* <PopUpMiddlePaneList isActive={isPopUpValue === 'middlePaneListPopup'} /> */}
       </div>
     </div>
   );

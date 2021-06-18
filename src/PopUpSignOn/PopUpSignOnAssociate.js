@@ -8,7 +8,7 @@ import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
 import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
 import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
-import PopUpConfirmation from '../PopUpGeneric/PopUpConfirmation';
+import PopUpConfirm from '../PopUpGeneric/PopUpConfirm';
 import PopUpDropList from '../PopUpInformation/PopUpDropList';
 import {
   SET_NEXT_POPUP,
@@ -659,7 +659,7 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
 
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'ASSOCIATECONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
@@ -815,14 +815,14 @@ const PopUpSignOnAssociate = () => {
         basicInfo={assesseeInfo.informationPersonal}
         typeOfSetObject={UPDATE_ASSESSEE_PERSONAL_INFO}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'administrator'}
         headerOneBadgeOne={'create'}
         onClickYes={CreateApi}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}
