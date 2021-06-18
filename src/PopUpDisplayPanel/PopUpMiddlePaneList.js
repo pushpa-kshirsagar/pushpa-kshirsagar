@@ -95,6 +95,7 @@ import {
   getNodeRelatedAssignmentsDistinctApiCall
 } from '../Actions/AssignmentModuleAction';
 import { getCultureGroupCultureDistinctApiCall, getCultureTypeCultureDistinctApiCall } from '../Actions/ActionCultureProfile';
+import { getJobProfileGroupJobProfileDistinctApiCall, getJobProfileTypeJobProfileDistinctApiCall } from '../Actions/ActionJobProfile';
 const PopUpMiddlePaneList = (props) => {
   const {
     popupHeaderOne,
@@ -1384,6 +1385,42 @@ const PopUpMiddlePaneList = (props) => {
         dispatch({
           type: FILTERMODE,
           payload: { FilterMode: 'cultureTypeCultureDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesGroupDistinctReviewList') {
+        getJobProfileGroupJobProfileDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'jobProfileGroupJobProfileDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesTypeDistinctReviewList') {
+        getJobProfileTypeJobProfileDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'jobProfileTypeJobProfileDistinct' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });

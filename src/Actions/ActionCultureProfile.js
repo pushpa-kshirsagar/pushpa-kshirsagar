@@ -20,14 +20,14 @@ import {
   SET_RELATED_REQUEST_OBJECT
 } from '../actionType';
 import {
-  geCultureGroupCultureReqObj,
-  geCultureGroupCultureScanReqObj,
+  getCultureGroupCultureReqObj,
+  getCultureGroupCultureScanReqObj,
   makeCultureProfileGroupObj,
   makeCultureProfileObj,
   makeCultureProfileTypeObj,
   makeInternalNodeObj,
-  geCultureTypeCultureReqObj,
-  geCultureTypeCultureScanReqObj
+  getCultureTypeCultureReqObj,
+  getCultureTypeCultureScanReqObj
 } from './GenericActions';
 
 export const cultureProfileCreatePopup = (
@@ -200,7 +200,7 @@ export const getCultureGroupCultureDistinctApiCall = (
   searchStr,
   isScan
 ) => {
-  let reqBody = geCultureGroupCultureReqObj(
+  let reqBody = getCultureGroupCultureReqObj(
     selectedAssociateInfo,
     selectedTagValue,
     secondaryOptionCheckValue,
@@ -208,7 +208,7 @@ export const getCultureGroupCultureDistinctApiCall = (
     countPage
   );
   if (isScan) {
-    reqBody = geCultureGroupCultureScanReqObj(
+    reqBody = getCultureGroupCultureScanReqObj(
       selectedAssociateInfo,
       selectedTagValue,
       secondaryOptionCheckValue,
@@ -247,7 +247,7 @@ export const getCultureTypeCultureDistinctApiCall = (
   searchStr,
   isScan
 ) => {
-  let reqBody = geCultureTypeCultureReqObj(
+  let reqBody = getCultureTypeCultureReqObj(
     selectedAssociateInfo,
     selectedTagValue,
     secondaryOptionCheckValue,
@@ -255,7 +255,7 @@ export const getCultureTypeCultureDistinctApiCall = (
     countPage
   );
   if (isScan) {
-    reqBody = geCultureTypeCultureScanReqObj(
+    reqBody = getCultureTypeCultureScanReqObj(
       selectedAssociateInfo,
       selectedTagValue,
       secondaryOptionCheckValue,

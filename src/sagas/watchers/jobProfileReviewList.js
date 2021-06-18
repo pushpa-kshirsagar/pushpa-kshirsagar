@@ -11,7 +11,7 @@ import {
   SET_POPUP_VALUE,
   SET_REVIEW_LIST_RELATE_DATA
 } from '../../actionType';
-import { JOB_REVIEWLIST_URL, JOB_TYPE_JOB_REVIEWLIST_URL } from '../../endpoints';
+import { JOB_GROUP_JOB_REVIEWLIST_URL, JOB_REVIEWLIST_URL, JOB_TYPE_JOB_REVIEWLIST_URL } from '../../endpoints';
 
 const apiCallFumction = async (requestObj) => {
   const requestOptions = {
@@ -70,7 +70,7 @@ function* workeJobGroupJobReviewListSaga(data) {
   try {
     const response = yield call(apiCallFumction, {
       data: data.payload.request,
-      URL: JOB_TYPE_JOB_REVIEWLIST_URL
+      URL: JOB_GROUP_JOB_REVIEWLIST_URL
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
@@ -91,7 +91,7 @@ function* workeJobGroupJobReviewListSaga(data) {
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',
             middlePaneHeaderBadgeFour: '',
-            typeOfMiddlePaneList: 'jobGroupJobReviewList',
+            typeOfMiddlePaneList: 'jobProfileGroupJobProfileReviewList',
             scanCount: response && response.countTotal,
             showMiddlePaneState: true
           }
@@ -137,7 +137,7 @@ function* workeJobTypeJobReviewListSaga(data) {
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',
             middlePaneHeaderBadgeFour: '',
-            typeOfMiddlePaneList: 'jobTypeJobReviewList',
+            typeOfMiddlePaneList: 'jobProfileTypeJobProfileReviewList',
             scanCount: response && response.countTotal,
             showMiddlePaneState: true
           }

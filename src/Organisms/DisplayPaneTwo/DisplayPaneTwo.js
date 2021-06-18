@@ -49,6 +49,8 @@ import CultureProfileTypeCultureProfileDistinctReviewList from '../../ReviewList
 import JobProfileGroupReviewList from '../../ReviewListComponent/JobProfileGroupReviewList';
 import JobProfileTypeReviewList from '../../ReviewListComponent/JobProfileTypeReviewList';
 import AssessmentGroupAssessmentDistinctReviewList from '../../ReviewListComponent/AssessmentGroupAssessmentDistinctReviewList';
+import JobProfileGroupJobProfileDistinctReviewList from '../../ReviewListComponent/JobProfileGroupJobProfileDistinctReviewList';
+import JobProfileTypeJobProfileDistinctReviewList from '../../ReviewListComponent/JobProfileTypeJobProfileDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -230,6 +232,12 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'jobProfilesTypeDistinctReviewList' && (
           <JobProfileTypeReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'jobProfileGroupJobProfileReviewList' && (
+          <JobProfileGroupJobProfileDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'jobProfileTypeJobProfileReviewList' && (
+          <JobProfileTypeJobProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
