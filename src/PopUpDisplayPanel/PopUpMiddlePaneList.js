@@ -78,7 +78,9 @@ import {
   getNodeAssessmentsReqObj,
   getItemGroupItemReqObj,
   getItemTypeItemReqObj,
-  getAssignmentTypeAssignmentReqObj
+  getAssignmentTypeAssignmentReqObj,
+  geCultureGroupCultureReqObj,
+  geCultureTypeCultureReqObj
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -701,11 +703,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'cultureProfilesGroupDistinctReviewList') {
+        let cultureGroupCultureReqBody = geCultureGroupCultureReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_CULTURE_GROUP_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            cultureGroupCultureReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -734,6 +744,13 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'jobProfilesGroupDistinctReviewList') {
+        // let assessmentGroupAssessmentReqBody = getJobGroupJobReqObj(
+        //   selectedAssociateInfo,
+        //   selectedTagValue,
+        //   'active',
+        //   0,
+        //   countPage
+        // );
         dispatch({
           type: GET_JOB_GROUP_REVIEW_INFO_SAGA,
           payload: {
@@ -808,11 +825,19 @@ const PopUpMiddlePaneList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'cultureProfilesTypeDistinctReviewList') {
+        let cultureTypeCultureReqBody = geCultureTypeCultureReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_CULTURE_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            cultureTypeCultureReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

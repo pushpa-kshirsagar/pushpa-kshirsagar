@@ -9,7 +9,8 @@ import {
   SET_POPUP_VALUE,
   CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
   CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA,
-  SET_REVIEW_LIST_RELATE_DATA
+  SET_REVIEW_LIST_RELATE_DATA,
+  GET_ALLOCATE_CULTURE
 } from '../../actionType';
 import {
   CULTURE_GROUP_CULTURE_REVIEWLIST_URL,
@@ -17,7 +18,7 @@ import {
   CULTURE_TYPE_CULTURE_REVIEWLIST_URL
 } from '../../endpoints';
 
-const apiCallFumction = async (requestObj) => {
+const apiCallFunction = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -32,7 +33,7 @@ const apiCallFumction = async (requestObj) => {
 
 function* workerCultureProfileReviewListSaga(data) {
   try {
-    const response = yield call(apiCallFumction, {
+    const response = yield call(apiCallFunction, {
       data: data.payload.request,
       URL: CULTURE_REVIEWLIST_URL
     });
@@ -72,7 +73,7 @@ function* workerCultureProfileReviewListSaga(data) {
 }
 function* workeCultureGroupCultureReviewListSaga(data) {
   try {
-    const response = yield call(apiCallFumction, {
+    const response = yield call(apiCallFunction, {
       data: data.payload.request,
       URL: CULTURE_GROUP_CULTURE_REVIEWLIST_URL
     });
@@ -118,7 +119,7 @@ function* workeCultureGroupCultureReviewListSaga(data) {
 }
 function* workeCultureTypeCultureReviewListSaga(data) {
   try {
-    const response = yield call(apiCallFumction, {
+    const response = yield call(apiCallFunction, {
       data: data.payload.request,
       URL: CULTURE_TYPE_CULTURE_REVIEWLIST_URL
     });
@@ -163,9 +164,53 @@ function* workeCultureTypeCultureReviewListSaga(data) {
   }
 }
 
+function* workerReviewListCultureProfileAllocateSaga(data) {
+  try {
+    const userResponse = yield call(apiCallFunction, {
+      data: data.payload.request,
+      URL: CULTURE_REVIEWLIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      let responseObj = {
+        ...data.payload.revisedGroupObject,
+        cultureProfile: userResponse.responseObject
+      };
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.headerOne || 'culture profiles',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true,
+          isSelectActive: 'multiple',
+          selectedTagsArray: data.payload.existingCultureProfileId
+        }
+      });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    console.log('catch loading end');
+    yield put({ type: LOADER_STOP });
+  }
+}
+
 export default function* watchReviewListCultureProfileSaga() {
   console.log('IN WATCH ====>');
   yield takeLatest(GET_CULTUREPROFILE_REVIEW_LIST_SAGA, workerCultureProfileReviewListSaga);
   yield takeLatest(CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA, workeCultureGroupCultureReviewListSaga);
   yield takeLatest(CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA, workeCultureTypeCultureReviewListSaga);
+  yield takeLatest(GET_ALLOCATE_CULTURE, workerReviewListCultureProfileAllocateSaga);
 }

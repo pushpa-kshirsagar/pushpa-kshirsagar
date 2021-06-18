@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { makeCultureProfileObj } from '../../Actions/GenericActions';
+import { FILTERMODE, GET_ALLOCATE_CULTURE, LOADER_START, SET_DISPLAY_TWO_SINGLE_STATE, SET_MOBILE_PANE_STATE } from '../../actionType';
 // import {
 //   FILTERMODE,
 //   GET_ALLOCATE_ASSESSMENT,
@@ -30,25 +32,20 @@ const DisplayPaneThreeSectionTwoCultureProfileType = () => {
   //   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   // }
 
-  const onclickReviseCultureProfile = (e) => {
-    const labelName = e.currentTarget.getAttribute('data-value');
-    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-  };
-
-  // let assessmentList = [];
-  // if (relatedReviewListPaneThree) {
-  //   assessmentList = relatedReviewListPaneThree.assessment;
-  // }
-  // let assessmentArray = [];
-  // assessmentList.forEach((ob) => {
-  //   const { id, informationBasic } = ob;
-  //   assessmentArray.push({
-  //     id,
-  //     textOne: informationBasic?.assessmentName || '',
-  //     textTwo: informationBasic?.assessmentDescription || '',
-  //     status: ''
-  //   });
-  // });
+  let cultureProfileList = [];
+  if (relatedReviewListPaneThree) {
+    cultureProfileList = relatedReviewListPaneThree?.cultureProfile || [];
+  }
+  let cultureProfileArray = [];
+  cultureProfileList.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    cultureProfileArray.push({
+      id,
+      textOne: informationBasic?.cultureProfileName || '',
+      textTwo: informationBasic?.cultureProfileDescription || '',
+      status: ''
+    });
+  });
 
   const list2 = [
     {
@@ -61,13 +58,53 @@ const DisplayPaneThreeSectionTwoCultureProfileType = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: []
+          innerList: cultureProfileArray
         }
       ],
       innerInfo: 'No Information',
       isListCard: true
     }
   ];
+  const onclickReviseCultureProfile = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    if (labelName === 'culture profile' && selectedBadgeName === 'distinct') {
+      console.log('culture profile CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+      let requestObect = makeCultureProfileObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedTypeObject = {
+        id: responseObject.id,
+        cultureProfileTypeName: responseObject.informationBasic.cultureProfileTypeName,
+        cultureProfileTypeDescription:
+          responseObject.informationBasic.cultureProfileTypeDescription,
+        cultureProfileTypeStatus: responseObject.informationEngagement.cultureProfileTypeStatus
+      };
+      let existingCultureProfileId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree.cultureProfile.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'cultureProfileTypeCultureProfileRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_CULTURE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedTypeObject,
+          existingCultureProfileId: existingCultureProfileId,
+          typeOfMiddlePaneList: 'cultureProfileTypeCultureProfileReviewList'
+        }
+      });
+    }
+  };
 
   return (
     <div

@@ -70,6 +70,27 @@ const PopUpCultureProfileCreate = (props) => {
     });
   };
   console.log('cultureProfileInformation', cultureProfileInformation);
+  let selectedPrimaryGroup =
+    cultureProfileInformation?.informationAllocation?.cultureProfileGroup?.cultureProfileGroupPrimary || [];
+  let selectedSecondaryGroup =
+    cultureProfileInformation?.informationAllocation?.cultureProfileGroup?.cultureProfileGroupSecondary || [];
+  let filteredCoreGroupReviewListDataPrimary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for primary popup list
+      if (!selectedSecondaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataPrimary.push(group);
+    });
+  }
+  let filteredCoreGroupReviewListDataSecondary = [];
+  if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
+    coreGroupReviewListData.forEach((group) => {
+      // for Secondary popup list
+      if (!selectedPrimaryGroup.includes(group.id))
+        filteredCoreGroupReviewListDataSecondary.push(group);
+    });
+  }
+
   return (
     <div>
       <PopUpTextField
@@ -114,7 +135,7 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataPrimary}
         selectedList={
           cultureProfileInformation.informationAllocation.cultureProfileGroup
             .cultureProfileGroupPrimary
@@ -137,7 +158,7 @@ const PopUpCultureProfileCreate = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a group'}
-        ListData={coreGroupReviewListData}
+        ListData={filteredCoreGroupReviewListDataSecondary}
         selectedList={
           cultureProfileInformation.informationAllocation.cultureProfileGroup
             .cultureProfileGroupSecondary

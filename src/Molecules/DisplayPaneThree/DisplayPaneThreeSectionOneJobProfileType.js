@@ -2,30 +2,33 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { SET_POPUP_VALUE } from '../../actionType';
+import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionOneJobProfileType = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const dispatch = useDispatch();
   const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  let groupList = [];
-  // let jobProfileTypeGroupList = [];
-  // const tempTypeGroup = informationAllocation?.jobProfileTypeGroup;
-  // if (tempTypeGroup) {
-  //   jobProfileTypeGroupList.push({
-  //     id: tempTypeGroup?.id || '',
-  //     textOne: tempTypeGroup?.informationBasic?.jobProfileTypeGroupName || '',
-  //     textTwo: tempTypeGroup?.informationBasic?.jobProfileTypeGroupDescription || '',
-  //     status: ''
-  //   });
-  // }
+  let jobProfileTypeGroupList = [];
+  const tempTypeGroup = informationAllocation?.jobProfileTypeGroup;
+  if (tempTypeGroup) {
+    jobProfileTypeGroupList.push({
+      id: tempTypeGroup?.id || '',
+      textOne: tempTypeGroup?.informationBasic?.jobProfileTypeGroupName || '',
+      textTwo: tempTypeGroup?.informationBasic?.jobProfileTypeGroupDescription || '',
+      status: ''
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -37,7 +40,7 @@ const DisplayPaneThreeSectionOneJobProfileType = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: groupList
+          innerList: jobProfileTypeGroupList
         }
       ],
       innerInfo: 'No Information',
@@ -114,6 +117,18 @@ const DisplayPaneThreeSectionOneJobProfileType = () => {
     }
   ];
 
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'job profiles');
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'job profilesTYPECREATE' }
+      });
+    }
+  };
+
   return (
     <div
       style={{
@@ -128,9 +143,18 @@ const DisplayPaneThreeSectionOneJobProfileType = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseAllocation}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

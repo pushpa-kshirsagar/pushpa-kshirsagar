@@ -58,7 +58,7 @@ const CultureProfileGroupCultureProfileDistinctReviewList = (props) => {
         type: SET_MIDDLEPANE_STATE,
         payload: {
           middlePaneHeader: 'culture Profiles',
-          middlePaneHeaderBadgeOne: 'groups',
+          middlePaneHeaderBadgeOne: 'group',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
@@ -239,7 +239,7 @@ const CultureProfileGroupCultureProfileDistinctReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'cultureGroupCultureeRevise' && (
+      {FilterMode === 'cultureProfileGroupCultureProfileRevise' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}

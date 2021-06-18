@@ -2,30 +2,33 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
+import { SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneCultureProfileType = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const dispatch = useDispatch();
   const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  let groupList = [];
-  // let cultureProfileTypeGroupList = [];
-  // const tempTypeGroup = informationAllocation?.cultureProfileTypeGroup;
-  // if (tempTypeGroup) {
-  //   cultureProfileTypeGroupList.push({
-  //     id: tempTypeGroup?.id || '',
-  //     textOne: tempTypeGroup?.informationBasic?.cultureProfileTypeGroupName || '',
-  //     textTwo: tempTypeGroup?.informationBasic?.cultureProfileTypeGroupDescription || '',
-  //     status: ''
-  //   });
-  // }
+  let cultureProfileTypeGroupList = [];
+  const tempTypeGroup = informationAllocation?.cultureProfileTypeGroup;
+  if (tempTypeGroup) {
+    cultureProfileTypeGroupList.push({
+      id: tempTypeGroup?.id || '',
+      textOne: tempTypeGroup?.informationBasic?.cultureProfileTypeGroupName || '',
+      textTwo: tempTypeGroup?.informationBasic?.cultureProfileTypeGroupDescription || '',
+      status: ''
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -37,7 +40,7 @@ const DisplayPaneThreeSectionOneCultureProfileType = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: groupList
+          innerList: cultureProfileTypeGroupList
         }
       ],
       innerInfo: 'No Information',
@@ -115,6 +118,17 @@ const DisplayPaneThreeSectionOneCultureProfileType = () => {
       isListCard: false
     }
   ];
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'culture profiles');
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'culture profilesTYPECREATE' }
+      });
+    }
+  };
 
   return (
     <div
@@ -130,9 +144,18 @@ const DisplayPaneThreeSectionOneCultureProfileType = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseAllocation}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

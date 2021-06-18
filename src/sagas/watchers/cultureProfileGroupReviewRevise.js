@@ -6,7 +6,8 @@ import {
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_CULTURE_GROUP_REDUCER_STATE
+  SET_CULTURE_GROUP_REDUCER_STATE,
+  CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA
 } from '../../actionType';
 import { CULTURE_REVIEW_GROUP_URL, CULTURE_REVISE_GROUP_URL } from '../../endpoints';
 
@@ -33,17 +34,17 @@ function* workerReviewCultureProfileGroupInfoSaga(data) {
     if (userResponse.responseCode === '000') {
       const { isReviseMode = false, cultureGroupCultureReqBody = null } = data.payload;
       if (cultureGroupCultureReqBody !== null) {
-        // yield put({
-        //   type: GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
-        //   payload: {
-        //     request: cultureGroupCultureReqBody,
-        //     HeaderOne: 'culture profiles',
-        //     BadgeOne: '',
-        //     BadgeTwo: '',
-        //     BadgeThree: '',
-        //     isMiddlePaneList: false
-        //   }
-        // });
+        yield put({
+          type: CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
+          payload: {
+            request: cultureGroupCultureReqBody,
+            HeaderOne: 'culture profiles',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
       }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -65,7 +66,7 @@ function* workerReviewCultureProfileGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -96,17 +97,17 @@ function* workerReviseCultureProfileGroupInfoSaga(data) {
     if (userResponse.responseCode === '000') {
       const { createMode = '', cultureGroupCultureReqBody = null } = data.payload;
       if (cultureGroupCultureReqBody !== null) {
-        // yield put({
-        //   type: GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
-        //   payload: {
-        //     request: assessmentGroupAssessmentReqBody,
-        //     HeaderOne: 'culture profiles',
-        //     BadgeOne: '',
-        //     BadgeTwo: '',
-        //     BadgeThree: '',
-        //     isMiddlePaneList: false
-        //   }
-        // });
+        yield put({
+          type: CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
+          payload: {
+            request: cultureGroupCultureReqBody,
+            HeaderOne: 'culture profiles',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
       }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -127,7 +128,7 @@ function* workerReviseCultureProfileGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
