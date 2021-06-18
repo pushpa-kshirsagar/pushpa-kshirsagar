@@ -1039,7 +1039,8 @@ export const DisplayPaneThree = () => {
         },
         assessmentType: {
           id,
-          informationBasic: assessmentType.informationBasic
+          informationBasic: assessmentType.informationBasic,
+          informationAllocation: assessmentType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });
@@ -1069,7 +1070,8 @@ export const DisplayPaneThree = () => {
         },
         assignmentType: {
           id,
-          informationBasic: assignmentType.informationBasic
+          informationBasic: assignmentType.informationBasic,
+          informationAllocation: assignmentType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });

@@ -2,30 +2,34 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
+import { SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssessmentType = () => {
   // const [listExpand, setListExpand] = useState('');
+  const dispatch = useDispatch();
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  let groupList = [];
-  // let assessmentTypeGroupList = [];
-  // const tempTypeGroup = informationAllocation?.assessmentTypeGroup;
-  // if (tempTypeGroup) {
-  //   assessmentTypeGroupList.push({
-  //     id: tempTypeGroup?.id || '',
-  //     textOne: tempTypeGroup?.informationBasic?.assessmentTypeGroupName || '',
-  //     textTwo: tempTypeGroup?.informationBasic?.assessmentTypeGroupDescription || '',
-  //     status: ''
-  //   });
-  // }
+  // let groupList = [];
+  let assessmentTypeGroupList = [];
+  const tempTypeGroup = informationAllocation?.assessmentTypeGroup;
+  if (tempTypeGroup) {
+    assessmentTypeGroupList.push({
+      id: tempTypeGroup?.id || '',
+      textOne: tempTypeGroup?.informationBasic?.assessmentTypeGroupName || '',
+      textTwo: tempTypeGroup?.informationBasic?.assessmentTypeGroupDescription || '',
+      status: ''
+    });
+  }
   const allocationList = [
     {
       id: 'a1',
@@ -37,7 +41,7 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: groupList
+          innerList: assessmentTypeGroupList
         }
       ],
       innerInfo: 'No Information',
@@ -113,6 +117,17 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
       isListCard: false
     }
   ];
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'assessments');
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'assessmentsTYPECREATE' }
+      });
+    }
+  };
 
   return (
     <div
@@ -128,9 +143,18 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseAllocation}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

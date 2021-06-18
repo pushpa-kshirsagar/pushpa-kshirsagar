@@ -7,6 +7,7 @@ import {
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSIGNMENT_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_TYPE_GROUP_ALLOCATION,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSIGNMENT_REVIEW_TYPE_URL, ASSIGNMENT_REVISE_TYPE_URL } from '../../endpoints';
@@ -62,6 +63,15 @@ function* workerReviewAssignmentTypeInfoSaga(data) {
         yield put({
           type: SET_ASSIGNMENT_TYPE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_TYPE_GROUP_ALLOCATION,
+          payload: {
+            objectName: 'assignmentType',
+            stateName: 'assignmentTypeGroup',
+            value:
+              userResponse?.responseObject[0]?.informationAllocation?.assignmentTypeGroup?.id || ''
+          }
         });
       }
     } else {
