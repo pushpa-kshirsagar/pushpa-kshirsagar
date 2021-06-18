@@ -65,7 +65,7 @@ function* workerReviewJobProfileGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -126,7 +126,7 @@ function* workerReviseJobProfileGroupInfoSaga(data) {
     }
 
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
