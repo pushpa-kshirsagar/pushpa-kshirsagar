@@ -101,7 +101,12 @@ import {
   getCultureProfilesDistinctApiCall,
   getCultureProfileTypeApiCall
 } from '../Actions/ActionCultureProfile';
-import { getJobProfileGroupApiCall, getJobProfilesDistinctApiCall, getJobProfileTypeApiCall, jobProfileCreatePopup } from '../Actions/ActionJobProfile';
+import {
+  getJobProfileGroupApiCall,
+  getJobProfilesDistinctApiCall,
+  getJobProfileTypeApiCall,
+  jobProfileCreatePopup
+} from '../Actions/ActionJobProfile';
 const PopUpDisplayPanelAssociate = (props) => {
   const {
     popupHeaderOne,
@@ -1065,12 +1070,15 @@ const PopUpDisplayPanelAssociate = (props) => {
         popupHeaderOne === 'associates' ||
         popupHeaderOne === 'items' ||
         popupHeaderOne === 'assessments' ||
+        popupHeaderOne === 'culture profiles' ||
+        popupHeaderOne === 'job profiles' ||
         popupHeaderOne === 'assignments'
       ) {
         getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       } else {
         dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: '' });
       }
+      dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'TYPECREATE' }

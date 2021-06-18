@@ -256,10 +256,6 @@ const AssesseeDistinctReviewList = (props) => {
           secondaryIcon={flagSecondaryIcon}
         />
       )}
-      {/* <PopUpMiddlePaneList
-        isActive={isPopUpValue === 'middlePaneListPopup'}
-        onClickInformation={openAssesseeRightPaneInformation}
-      /> */}
     </div>
   );
 };

@@ -97,13 +97,15 @@ import {
 } from '../Actions/AssignmentModuleAction';
 import {
   getCultureGroupCultureDistinctApiCall,
+  getCultureProfileNodeCultureProfileApiCall,
   getCultureTypeCultureDistinctApiCall
 } from '../Actions/ActionCultureProfile';
 import {
   getJobProfileGroupJobProfileDistinctApiCall,
+  getJobProfileNodeJobProfileApiCall,
   getJobProfileTypeJobProfileDistinctApiCall
 } from '../Actions/ActionJobProfile';
-const PopUpMiddlePaneList = (props) => {
+const PopUpDisplayPaneTwoReviewList = (props) => {
   const {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
@@ -1232,7 +1234,43 @@ const PopUpMiddlePaneList = (props) => {
           );
           dispatch({
             type: FILTERMODE,
-            payload: { FilterMode: 'assessmentNodeAssessmentDistinct' + secondaryOptionCheckValue }
+            payload: { FilterMode: 'itemNodeItemDistinct' + secondaryOptionCheckValue }
+          });
+        }
+        if (popupHeaderOne === 'culture profiles') {
+          getCultureProfileNodeCultureProfileApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false,
+            middlePaneHeader
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: {
+              FilterMode: 'cultureProfileNodeCultureProfileDistinct' + secondaryOptionCheckValue
+            }
+          });
+        }
+        if (popupHeaderOne === 'job profiles') {
+          getJobProfileNodeJobProfileApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false,
+            middlePaneHeader
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'jobProfileNodeJobProfileDistinct' + secondaryOptionCheckValue }
           });
         }
 
@@ -1750,4 +1788,4 @@ const PopUpMiddlePaneList = (props) => {
   );
 };
 
-export default PopUpMiddlePaneList;
+export default PopUpDisplayPaneTwoReviewList;

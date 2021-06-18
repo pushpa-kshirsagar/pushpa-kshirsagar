@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
-import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
+import PopUpConfirm from '../../PopUpGeneric/PopUpConfirm';
 import {
   POPUP_CLOSE,
   CLEAR_TYPE_REDUCER_STATE,
@@ -193,7 +193,7 @@ const PopUpJobProfileCreate = (props) => {
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}
@@ -201,7 +201,7 @@ const PopUpJobProfileCreate = (props) => {
         mode={'cancel'}
         onClickYes={onClickCancelYes}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}

@@ -27,7 +27,9 @@ import {
   ITEM_TYPE_GROUP_URL,
   ASSIGNMENT_TYPE_GROUP_URL,
   CULTURE_TYPE_REVIEWLIST_URL,
-  JOB_TYPE_REVIEWLIST_URL
+  JOB_TYPE_REVIEWLIST_URL,
+  CULTURE_TYPE_GROUP_URL,
+  JOB_TYPE_GROUP_URL
 } from '../../endpoints';
 
 const TypesReviewListDistinctApi = async (requestObj) => {
@@ -362,6 +364,10 @@ function* workerReviewTypeGroupListSaga(data) {
   try {
     const userResponse = yield call(TypesReviewListDistinctApi, {
       data: data.payload.request,
+      idIdToken:
+        data.payload.typeGroup === 'culture profiles' || data.payload.typeGroup === 'job profiles'
+          ? true
+          : false,
       URL:
         data.payload.typeGroup === 'assessees'
           ? ASSESSEE_TYPE_GROUP_URL
@@ -373,6 +379,10 @@ function* workerReviewTypeGroupListSaga(data) {
           ? ITEM_TYPE_GROUP_URL
           : data.payload.typeGroup === 'assignments'
           ? ASSIGNMENT_TYPE_GROUP_URL
+          : data.payload.typeGroup === 'culture profiles'
+          ? CULTURE_TYPE_GROUP_URL
+          : data.payload.typeGroup === 'job profiles'
+          ? JOB_TYPE_GROUP_URL
           : ''
     });
     if (userResponse.responseCode === '000') {

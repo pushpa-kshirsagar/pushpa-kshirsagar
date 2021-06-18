@@ -6,6 +6,7 @@ import {
   GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
   CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
   CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA,
+  GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
   LOADER_START,
   SET_MOBILE_PANE_STATE,
   SET_REQUEST_OBJECT,
@@ -27,7 +28,9 @@ import {
   makeCultureProfileTypeObj,
   makeInternalNodeObj,
   getCultureTypeCultureReqObj,
-  getCultureTypeCultureScanReqObj
+  getCultureTypeCultureScanReqObj,
+  getNodeCultureProfileReqObj,
+  getNodeCultureProfileScanReqObj
 } from './GenericActions';
 
 export const cultureProfileCreatePopup = (
@@ -277,6 +280,56 @@ export const getCultureTypeCultureDistinctApiCall = (
     payload: {
       request: reqBody,
       HeaderOne: 'culture profiles',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+
+export const getCultureProfileNodeCultureProfileApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan,
+  middlePaneHeader
+) => {
+  let reqBody = getNodeCultureProfileReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getNodeCultureProfileScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: middlePaneHeader,
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

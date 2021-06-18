@@ -80,12 +80,19 @@ const AssociateNodeReviewList = (props) => {
       middlePaneHeader === 'assessees' ||
       middlePaneHeader === 'administrators' ||
       middlePaneHeader === 'managers' ||
+      middlePaneHeader === 'culture profiles' ||
+      middlePaneHeader === 'job profiles' ||
       middlePaneHeader === 'items'
     ) {
+      let reviseHeader = middlePaneHeader;
+      if (middlePaneHeader === 'culture profiles') {
+        reviseHeader = 'cultureProfiles';
+      }
+      if (middlePaneHeader === 'job profiles') {
+        reviseHeader = 'jobProfiles';
+      }
       let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
-        obj.data === 'assessees'
-          ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
-          : obj
+        obj.data === 'assessees' ? { ...obj, data: middlePaneHeader, dataValue: reviseHeader } : obj
       );
       optArr = popupContentArrValue;
     }

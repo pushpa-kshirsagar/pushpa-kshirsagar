@@ -5,12 +5,12 @@ import {
   FILTERMODE,
   FILTERMODE_ENABLE,
   POPUP_OPEN,
-  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -19,12 +19,13 @@ import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import { assesseeStatus } from '../Actions/StatusAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getJobProfileTypeJobProfileDistinctApiCall } from '../Actions/ActionJobProfile';
+import { getCultureProfileNodeCultureProfileApiCall } from '../Actions/ActionCultureProfile';
 
-const JobProfileTypeJobProfileDistinctReviewList = (props) => {
+const CultureProfileNodeCultureProfileDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -57,12 +58,12 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader: 'job Profiles',
-          middlePaneHeaderBadgeOne: 'types',
+          middlePaneHeader: 'culture profiles',
+          middlePaneHeaderBadgeOne: 'nodes',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'jobProfilesTypeDistinctReviewList',
+          typeOfMiddlePaneList: 'associateNodeDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
@@ -78,9 +79,9 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
+    dispatch({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     dispatch({
-      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+      type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
       payload: unselectedTagsArray
     });
   };
@@ -139,12 +140,12 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
     dispatch({
       type: SET_MIDDLEPANE_STATE,
       payload: {
-        middlePaneHeader: 'job profiles',
-        middlePaneHeaderBadgeOne: 'types',
+        middlePaneHeader: 'culture profiles',
+        middlePaneHeaderBadgeOne: 'nodes',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'jobProfilesTypeDistinctReviewList',
+        typeOfMiddlePaneList: 'associateNodeDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
@@ -154,7 +155,7 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
 
   const siftApiCall = (siftKey) => {
-    getJobProfileTypeJobProfileDistinctApiCall(
+    getCultureProfileNodeCultureProfileApiCall(
       selectedAssociateInfo,
       siftKey,
       countPage,
@@ -162,20 +163,31 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
       middlePaneHeaderBadgeOne,
       listDistinctData.id,
       '',
-      false
+      false,
+      'culture profiles'
     );
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    // if (
+    //   siftValue === 'suspended' ||
+    //   siftValue === 'terminated' ||
+    //   siftValue === 'disapproved' ||
+    //   siftValue === 'unapproved' ||
+    //   siftValue === 'unconfirmed'
+    // )
+    //   siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const secondaryIcon = [
+    { label: 'disapproved', onClick: onClickFooter, Icon: FilterList },
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
   ];
 
   const openListPopup = (e) => {
@@ -183,7 +195,7 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'job profile',
+        popupHeaderOne: 'culture profiles',
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -205,18 +217,19 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
     <div>
       {listDistinctData && (
         <Card
-          textOneOne={listDistinctData.jobProfileTypeName}
-          textTwoOne={listDistinctData.jobProfileTypeDescription}
+          textOneOne={listDistinctData.associateNodeName}
+          textTwoOne={listDistinctData.associateNodeDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'type'}
+          labelTwoTwo={'node'}
           onClickIconOne={closeRelatedList}
           isAlliance
           relatedCardFixed={true}
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&
-        listDistinctData.jobProfile.map((item, index) => {
+        listDistinctData.associate.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -224,10 +237,13 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.jobProfileStatus}
-                actualStatus={item.informationEngagement.jobProfileStatus}
-                textOne={item.informationBasic.jobProfileName}
-                textTwo={item.informationBasic.jobProfileDescription}
+                status={assesseeStatus(
+                  middlePaneHeaderBadgeTwo,
+                  item.informationEngagement.cultureProfileStatus
+                )}
+                actualStatus={item.informationEngagement.cultureProfileStatus}
+                textOne={item.informationBasic.cultureProfileName}
+                textTwo={item.informationBasic.cultureProfileDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
@@ -239,7 +255,7 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'jobTypeJobRevise' && (
+      {FilterMode === 'cultureProfileNodeCultureProfileRevise' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}
@@ -248,11 +264,11 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
           secondaryIcon={reviseSecondaryIcons}
         />
       )}
-      {FilterMode === 'jobTypeJobDistinctinactive' && (
+      {FilterMode === 'cultureProfileNodeCultureProfileDistinctinactive' && (
         <FooterIconTwo
-          FilterModeEnable={isShowReviseIcon}
+          FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
-          onClick={onClickRevise}
+          onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
         />
@@ -260,4 +276,4 @@ const JobProfileTypeJobProfileDistinctReviewList = (props) => {
     </div>
   );
 };
-export default JobProfileTypeJobProfileDistinctReviewList;
+export default CultureProfileNodeCultureProfileDistinctReviewList;

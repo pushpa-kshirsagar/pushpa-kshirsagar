@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
-import PopUpConfirmation from '../../PopUpGeneric/PopUpConfirmation';
+import PopUpConfirm from '../../PopUpGeneric/PopUpConfirm';
 import {
   POPUP_CLOSE,
   CREATE_TYPE_SAGA,
@@ -68,7 +68,7 @@ const PopUpTypeCreate = (props) => {
       }
     });
   };
-  console.log("CREATE TYPE===", reducerObeject);
+  console.log('CREATE TYPE===', reducerObeject);
   return (
     <div>
       <PopUpTextField
@@ -115,57 +115,23 @@ const PopUpTypeCreate = (props) => {
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         inputHeader={'group'}
-        isRequired={
-          headerOne === 'assessees' ||
-          headerOne === 'associates' ||
-          headerOne === 'items' || headerOne === 'assignments' ||
-          headerOne === 'assessments'
-            ? true
-            : false
-        }
+        isRequired={true}
         inputHeaderBadge={''}
         infoMsg={'select a group'}
-        ListData={
-          ((headerOne === 'assessees' ||
-            headerOne === 'associates' ||
-            headerOne === 'items' ||
-            headerOne === 'assessments'||
-            headerOne === 'assignments') &&
-            coreGroupReviewListData) || [
-            { id: '01', informationBasic: { name: 'Simple Sample 01', description: '' } },
-            { id: '02', informationBasic: { name: 'Simple Sample 02', description: '' } },
-            { id: '03', informationBasic: { name: 'Simple Sample 03', description: '' } }
-          ]
-        }
+        ListData={coreGroupReviewListData}
         selectedList={
           reducerObeject?.informationAllocation[allocationObj] === ''
             ? []
             : [reducerObeject?.informationAllocation[allocationObj]]
         }
-        textOne={
-          headerOne === 'assessees' ||
-          headerOne === 'associates' ||
-          headerOne === 'items' ||
-          headerOne === 'assessments'||
-          headerOne === 'assignments'
-            ? groupName
-            : 'name'
-        }
-        textTwo={
-          headerOne === 'assessees' ||
-          headerOne === 'associates' ||
-          headerOne === 'items' ||
-          headerOne === 'assessments'||
-          headerOne === 'assignments'
-            ? groupDescription
-            : 'description'
-        }
+        textOne={groupName}
+        textTwo={groupDescription}
         onClickEvent={updateGroup}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CANCELPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'cancel'}
@@ -173,7 +139,7 @@ const PopUpTypeCreate = (props) => {
         mode={'cancel'}
         onClickYes={onClickCancelYes}
       />
-      <PopUpConfirmation
+      <PopUpConfirm
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}

@@ -19,7 +19,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import { assesseeStatus } from '../Actions/StatusAction';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION, GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-import PopUpMiddlePaneList from '../PopUpDisplayPanel/PopUpMiddlePaneList';
+import PopUpDisplayPaneTwoReviewList from '../PopUpDisplayPanel/PopUpDisplayPaneTwoReviewList';
 const AssociateDistinctReviewList = (props) => {
   const { popupAllClose } = props;
   const dispatch = useDispatch();
@@ -228,7 +228,7 @@ const AssociateDistinctReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-      <PopUpMiddlePaneList
+      <PopUpDisplayPaneTwoReviewList
         isActive={isPopUpValue === 'middlePaneListPopup'}
         onClickInformation={openAssociateRightPaneInformation}
       />
