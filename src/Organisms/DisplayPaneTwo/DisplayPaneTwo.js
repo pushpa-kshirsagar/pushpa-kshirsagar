@@ -16,38 +16,39 @@ import AssessmentTypeReviewList from '../../ReviewListComponent/AssessmentTypeRe
 import AssignmentTypeReviewList from '../../ReviewListComponent/AssignmentTypeReviewList';
 import AssignmentDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctReviewList';
 import AssessmentDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctReviewList';
-import AssesseeGroupAssesseeReviewList from '../../ReviewListComponent/AssesseeGroupAssesseeReviewList';
-import AssociateGroupAssociateReviewList from '../../ReviewListComponent/AssociateGroupAssociateReviewList';
-import AssesseeRoleAssesseeReviewList from '../../ReviewListComponent/AssesseeRoleAssesseeReviewList';
-import AssociateRoleAssociateReviewList from '../../ReviewListComponent/AssociateRoleAssociateReviewList';
+import AssesseeGroupAssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeGroupAssesseeDistinctReviewList';
+import AssociateGroupAssociateDistinctReviewList from '../../ReviewListComponent/AssociateGroupAssociateDistinctReviewList';
+import AssesseeRoleAssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeRoleAssesseeDistinctReviewList';
+import AssociateRoleAssociateDistinctReviewList from '../../ReviewListComponent/AssociateRoleAssociateDistinctReviewList';
 import IguruNodeReviewList from '../../ReviewListComponent/IguruNodeReviewList';
 import AssociateNodeReviewList from '../../ReviewListComponent/AssociateNodeReviewList';
-import AssesseeNodeAssesseeReviewList from '../../ReviewListComponent/AssesseeNodeAssesseeReviewList';
+import AssesseeNodeAssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeNodeAssesseeDistinctReviewList';
 import AssesseeAssociateReviewList from '../../ReviewListComponent/AssesseeAssociateReviewList';
 import AssesseeTypeReviewList from '../../ReviewListComponent/AssesseeTypeReviewList';
 import AssociateTypeReviewList from '../../ReviewListComponent/AssociateTypeReviewList';
-import AssesseeTypeAssesseeReviewList from '../../ReviewListComponent/AssesseeTypeAssesseeReviewList';
-import AssociateTypeAssociateReviewList from '../../ReviewListComponent/AssociateTypeAssociateReviewList';
+import AssesseeTypeAssesseeDistinctReviewList from '../../ReviewListComponent/AssesseeTypeAssesseeDistinctReviewList';
+import AssociateTypeAssociateDistinctReviewList from '../../ReviewListComponent/AssociateTypeAssociateDistinctReviewList';
 import ItemReviewList from '../../ReviewListComponent/ItemReviewList';
 import ItemGroupReviewList from '../../ReviewListComponent/ItemGroupReviewList';
 import NodeRelatedAssociateReviewList from '../../ReviewListComponent/NodeRelatedAssociateReviewList';
 import ItemTypeReviewList from '../../ReviewListComponent/ItemTypeReviewList';
-import ItemGroupItemReviewList from '../../ReviewListComponent/ItemGroupItemReviewList';
-import ItemTypeItemReviewList from '../../ReviewListComponent/ItemTypeItemReviewList';
-import AssessmentGroupAssessmentReviewList from '../../ReviewListComponent/AssessmentGroupAssessmentReviewList';
-import AssessmentTypeAssessmentReviewList from '../../ReviewListComponent/AssessmentTypeAssessmentReviewList';
-import AssessmentNodeAssessmentReviewList from '../../ReviewListComponent/AssessmentNodeAssessmentReviewList';
-import ItemNodeItemReviewList from '../../ReviewListComponent/ItemNodeItemReviewList';
-import AssignmentTypeAssignmentReviewList from '../../ReviewListComponent/AssignmentTypeAssignmentReviewList';
-import AssignmentGroupAssignmentReviewList from '../../ReviewListComponent/AssignmentGroupAssignmentReviewList';
-import AssignmentNodeAssignmentReviewList from '../../ReviewListComponent/AssignmentNodeAssignmentReviewList';
+import ItemGroupItemDistinctReviewList from '../../ReviewListComponent/ItemGroupItemDistinctReviewList';
+import ItemTypeItemDistinctReviewList from '../../ReviewListComponent/ItemTypeItemDistinctReviewList';
+import AssessmentTypeAssessmentDistinctReviewList from '../../ReviewListComponent/AssessmentTypeAssessmentDistinctReviewList';
+import AssessmentNodeAssessmentDistinctReviewList from '../../ReviewListComponent/AssessmentNodeAssessmentDistinctReviewList';
+import ItemNodeItemDistinctReviewList from '../../ReviewListComponent/ItemNodeItemDistinctReviewList';
+import AssignmentTypeAssignmentDistinctReviewList from '../../ReviewListComponent/AssignmentTypeAssignmentDistinctReviewList';
+import AssignmentGroupAssignmentDistinctReviewList from '../../ReviewListComponent/AssignmentGroupAssignmentDistinctReviewList';
+import AssignmentNodeAssignmentDistinctReviewList from '../../ReviewListComponent/AssignmentNodeAssignmentDistinctReviewList';
 import CultureProfileDistinctReviewList from '../../ReviewListComponent/CultureProfileDistinctReviewList';
 import CultureProfileGroupReviewList from '../../ReviewListComponent/CultureProfileGroupReviewList';
 import CultureProfileTypeReviewList from '../../ReviewListComponent/CultureProfileTypeReviewList';
 import JobProfileDistinctReviewList from '../../ReviewListComponent/JobProfileDistinctReviewList';
-import CultureProfileGroupCultureProfileReviewList from '../../ReviewListComponent/CultureProfileGroupCultureProfileReviewList';
-import CultureProfileTypeCultureProfileReviewList from '../../ReviewListComponent/CultureProfileTypeCultureProfileReviewList';
+import CultureProfileGroupCultureProfileDistinctReviewList from '../../ReviewListComponent/CultureProfileGroupCultureProfileDistinctReviewList';
+import CultureProfileTypeCultureProfileDistinctReviewList from '../../ReviewListComponent/CultureProfileTypeCultureProfileDistinctReviewList';
 import JobProfileGroupReviewList from '../../ReviewListComponent/JobProfileGroupReviewList';
+import JobProfileTypeReviewList from '../../ReviewListComponent/JobProfileTypeReviewList';
+import AssessmentGroupAssessmentDistinctReviewList from '../../ReviewListComponent/AssessmentGroupAssessmentDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -122,6 +123,9 @@ export const DisplayPaneTwo = (props) => {
         {typeOfMiddlePaneList === 'assessmentsTypeDistinctReviewList' && (
           <AssessmentTypeReviewList popupAllClose={popupAllClose} />
         )}
+        {typeOfMiddlePaneList === 'assessmentGroupAssessmentReviewList' && (
+          <AssessmentGroupAssessmentDistinctReviewList popupAllClose={popupAllClose} />
+        )}
         {typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList' && (
           <AssignmentTypeReviewList popupAllClose={popupAllClose} />
         )}
@@ -129,43 +133,43 @@ export const DisplayPaneTwo = (props) => {
           <AssignmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assignmentGroupAssignmentReviewList' && (
-          <AssignmentGroupAssignmentReviewList popupAllClose={popupAllClose} />
+          <AssignmentGroupAssignmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assignmentTypeAssignmentReviewList' && (
-          <AssignmentTypeAssignmentReviewList popupAllClose={popupAllClose} />
+          <AssignmentTypeAssignmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assignmentNodeAssignmentReviewList' && (
-          <AssignmentNodeAssignmentReviewList popupAllClose={popupAllClose} />
+          <AssignmentNodeAssignmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assessmentDistinctReviewList' && (
           <AssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assessmentTypeAssessmentReviewList' && (
-          <AssessmentTypeAssessmentReviewList popupAllClose={popupAllClose} />
+          <AssessmentTypeAssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assessmentNodeAssessmentReviewList' && (
-          <AssessmentNodeAssessmentReviewList popupAllClose={popupAllClose} />
+          <AssessmentNodeAssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' && (
-          <AssesseeGroupAssesseeReviewList popupAllClose={popupAllClose} />
+          <AssesseeGroupAssesseeDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'associatesGroupAssociateReviewList' && (
-          <AssociateGroupAssociateReviewList popupAllClose={popupAllClose} />
+          <AssociateGroupAssociateDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesRoleAssesseeReviewList' && (
-          <AssesseeRoleAssesseeReviewList popupAllClose={popupAllClose} />
+          <AssesseeRoleAssesseeDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesTypeAssesseeReviewList' && (
-          <AssesseeTypeAssesseeReviewList popupAllClose={popupAllClose} />
+          <AssesseeTypeAssesseeDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'associatesRoleAssociateReviewList' && (
-          <AssociateRoleAssociateReviewList popupAllClose={popupAllClose} />
+          <AssociateRoleAssociateDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'nodeAssociatesReviewList' && (
           <NodeRelatedAssociateReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'associatesTypeAssociateReviewList' && (
-          <AssociateTypeAssociateReviewList popupAllClose={popupAllClose} />
+          <AssociateTypeAssociateDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'associatesNodeDistinctReviewList' && (
           <IguruNodeReviewList popupAllClose={popupAllClose} />
@@ -174,7 +178,7 @@ export const DisplayPaneTwo = (props) => {
           <AssociateNodeReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesNodeAssesseeReviewList' && (
-          <AssesseeNodeAssesseeReviewList popupAllClose={popupAllClose} />
+          <AssesseeNodeAssesseeDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseeassociatesReviewList' && (
           <AssesseeAssociateReviewList popupAllClose={popupAllClose} />
@@ -195,13 +199,13 @@ export const DisplayPaneTwo = (props) => {
           <ItemGroupReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemGroupItemReviewList' && (
-          <ItemGroupItemReviewList popupAllClose={popupAllClose} />
+          <ItemGroupItemDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemNodeItemReviewList' && (
-          <ItemNodeItemReviewList popupAllClose={popupAllClose} />
+          <ItemNodeItemDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'itemTypeItemReviewList' && (
-          <ItemTypeItemReviewList popupAllClose={popupAllClose} />
+          <ItemTypeItemDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'cultureProfilesDistinctReviewList' && (
           <CultureProfileDistinctReviewList popupAllClose={popupAllClose} />
@@ -213,16 +217,19 @@ export const DisplayPaneTwo = (props) => {
           <CultureProfileTypeReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'cultureProfileGroupCultureProfileReviewList' && (
-          <CultureProfileGroupCultureProfileReviewList popupAllClose={popupAllClose} />
+          <CultureProfileGroupCultureProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'cultureProfileTypeCultureProfileReviewList' && (
-          <CultureProfileTypeCultureProfileReviewList popupAllClose={popupAllClose} />
+          <CultureProfileTypeCultureProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'jobProfilesDistinctReviewList' && (
           <JobProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'jobProfilesGroupDistinctReviewList' && (
           <JobProfileGroupReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'jobProfilesTypeDistinctReviewList' && (
+          <JobProfileTypeReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
