@@ -291,5 +291,7 @@ export const JOB_GROUP_REVIEWLIST_URL =
 export const JOB_TYPE_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/job-profile-type/review-list';
 export const JOB_TYPE_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-type/create';
-export const JOB_TYPE_JOB_REVIEWLIST_URL = ANALYTICS +'';
-export const JOB_GROUP_JOB_REVIEWLIST_URL = ANALYTICS +'';
+export const JOB_TYPE_JOB_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-profile-type/job-profile/review-list';
+export const JOB_GROUP_JOB_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-profile-group/job-profie/review-list';

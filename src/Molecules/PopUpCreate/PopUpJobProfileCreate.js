@@ -19,9 +19,12 @@ const PopUpJobProfileCreate = (props) => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { jobProfileInformation } = useSelector((state) => state.JobProfileCreateReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { selectedAssociateInfo, coreNodeReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    coreNodeReviewListData,
+    coreGroupReviewListData,
+    coreTypeReviewListData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
 
@@ -111,15 +114,15 @@ const PopUpJobProfileCreate = (props) => {
         inputHeader={'group'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Group' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Group' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Group' } }
-        ]}
-        selectedList={[]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreGroupReviewListData}
+        selectedList={
+          jobProfileInformation.informationAllocation.jobProfileGroup.jobProfileGroupPrimary
+        }
+        textOne={'jobProfileGroupName'}
+        textTwo={'jobProfileGroupDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'jobProfileGroup', 'jobProfileGroupPrimary');
+        }}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -177,15 +180,15 @@ const PopUpJobProfileCreate = (props) => {
         inputHeader={'type'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a type'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
-        ]}
-        selectedList={[]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreTypeReviewListData}
+        selectedList={
+          jobProfileInformation.informationAllocation.jobProfileType.jobProfileTypePrimary
+        }
+        textOne={'jobProfileTypeName'}
+        textTwo={'jobProfileTypeDescription'}
+        onClickEvent={(e) => {
+          updateAllocationObj(e, 'jobProfileType', 'jobProfileTypePrimary');
+        }}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

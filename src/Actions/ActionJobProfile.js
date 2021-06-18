@@ -6,19 +6,28 @@ import {
   GET_JOBPROFILE_REVIEW_LIST_SAGA,
   GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
+  JOB_GROUP_JOB_REVIEWLIST_SAGA,
+  JOB_TYPE_JOB_REVIEWLIST_SAGA,
   LOADER_START,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_VALUE,
+  SET_RELATED_REQUEST_OBJECT,
   SET_REQUEST_OBJECT
 } from '../actionType';
 import {
   makeInternalNodeObj,
   makeJobProfileObj,
   makeJobProfileGroupObj,
-  makeJobProfileTypeObj
+  makeJobProfileTypeObj,
+  getJobProfileGroupJobProfileReqObj,
+  getJobProfileGroupJobProfileScanReqObj,
+  getJobProfileTypeJobProfileReqObj,
+  getJobProfileTypeJobProfileScanReqObj
 } from './GenericActions';
 
 export const jobProfileCreatePopup = (
@@ -28,6 +37,18 @@ export const jobProfileCreatePopup = (
 ) => {
   dispatch({ type: CLEAR_JOB_REDUCER_STATE });
   dispatch({ type: LOADER_START });
+  let requestObj = makeJobProfileGroupObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+  dispatch({
+    type: GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
   let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
   dispatch({
@@ -38,6 +59,18 @@ export const jobProfileCreatePopup = (
       BadgeTwo: '',
       BadgeThree: '',
       nodeViewState: 'list',
+      isMiddlePaneList: false
+    }
+  });
+  let typeRequestObj = makeJobProfileTypeObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typeRequestObj });
+  dispatch({
+    type: GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
+    payload: {
+      request: typeRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
       isMiddlePaneList: false
     }
   });
@@ -150,6 +183,101 @@ export const getJobProfileTypeApiCall = (
     payload: {
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+
+export const getJobProfileGroupJobProfileDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = getJobProfileGroupJobProfileReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getJobProfileGroupJobProfileScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: JOB_GROUP_JOB_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'job profiles',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getJobProfileTypeJobProfileDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = getJobProfileTypeJobProfileReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getJobProfileTypeJobProfileScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: JOB_TYPE_JOB_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'job profiles',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
