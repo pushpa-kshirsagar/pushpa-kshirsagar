@@ -245,7 +245,7 @@ function* workerReviseInfoCultureProfileSaga(data) {
           headerOne: 'culture profile',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject,
+          responseObject: userResponse.responseObject[0],
           createMode
         }
       });

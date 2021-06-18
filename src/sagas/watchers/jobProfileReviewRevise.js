@@ -245,7 +245,7 @@ function* workerReviseInfoJobProfileSaga(data) {
           headerOne: 'job profile',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject,
+          responseObject: userResponse.responseObject[0],
           createMode
         }
       });
