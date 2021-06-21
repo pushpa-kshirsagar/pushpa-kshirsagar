@@ -6,11 +6,13 @@ import {
   FILTERMODE_ENABLE,
   POPUP_OPEN,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -109,18 +111,12 @@ const AssessmentNodeAssessmentDistinctReviewList = (props) => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associates'
-              : 'assessees',
-          middlePaneHeaderBadgeOne: 'group',
+          middlePaneHeader: 'assessments',
+          middlePaneHeaderBadgeOne: 'node',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList:
-            typeOfMiddlePaneList === 'associatesGroupAssociateReviewList'
-              ? 'associatesGroupDistinctReviewList'
-              : 'assesseesGroupDistinctReviewList',
+          typeOfMiddlePaneList: 'associateNodeDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
@@ -136,9 +132,9 @@ const AssessmentNodeAssessmentDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
+    dispatch({ type: SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     dispatch({
-      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+      type: SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
       payload: unselectedTagsArray
     });
   };
@@ -267,7 +263,7 @@ const AssessmentNodeAssessmentDistinctReviewList = (props) => {
       )}
       {FilterMode === 'assessmentNodeAssessmentRevise' && (
         <FooterIconTwo
-          FilterModeEnable={FilterModeEnable}
+          FilterModeEnable={isShowReviseIcon}
           FilterMode={FilterMode}
           onClick={onClickFooter}
           primaryIcon={revisePrimaryIcon}

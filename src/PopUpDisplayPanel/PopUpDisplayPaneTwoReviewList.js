@@ -52,7 +52,9 @@ import {
   GET_JOB_TYPE_REVIEW_INFO_SAGA,
   GET_JOB_PROFILE_INFO_SAGA,
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
-  GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA
+  GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA,
+  GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
+  GET_JOB_NODE_JOB_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -375,6 +377,28 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           );
           isShowAllModule = false;
           sagaCall = GET_NODE_ITEMS_REVIEW_LIST_SAGA;
+        }
+        if (popupHeaderOne === 'culture profiles') {
+          associateNodeReqBody = getNodeItemsReqObj(
+            selectedAssociateInfo,
+            selectedTagValue,
+            'active',
+            0,
+            countPage
+          );
+          isShowAllModule = false;
+          sagaCall = GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA;
+        }
+        if (popupHeaderOne === 'job profiles') {
+          associateNodeReqBody = getNodeItemsReqObj(
+            selectedAssociateInfo,
+            selectedTagValue,
+            'active',
+            0,
+            countPage
+          );
+          isShowAllModule = false;
+          sagaCall = GET_JOB_NODE_JOB_REVIEW_LIST_SAGA;
         }
         dispatch({
           type: GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,

@@ -10,6 +10,9 @@ import {
   FILTERMODE,
   GET_ALLOCATE_ASSESSEE,
   GET_ALLOCATE_ASSESSMENT,
+  GET_ALLOCATE_ASSIGNMENT,
+  GET_ALLOCATE_CULTURE,
+  GET_ALLOCATE_ITEM,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
@@ -21,7 +24,10 @@ import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
 import {
   makeAssesseeReviewListRequestObject,
   makeAssessmentReviewListRequestObject,
-  makeInternalNodeObj
+  makeAssignmentReviewListRequestObject,
+  makeCultureProfileObj,
+  makeInternalNodeObj,
+  makeItemObj
 } from '../../Actions/GenericActions';
 import { getAssesseeNodeAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
 
@@ -159,6 +165,14 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   if (selectedModule === 'items' && relatedReviewListPaneThree) {
     item = relatedReviewListPaneThree?.item || [];
   }
+  let cultureProfile = [];
+  if (selectedModule === 'culture profiles' && relatedReviewListPaneThree) {
+    cultureProfile = relatedReviewListPaneThree?.cultureProfile || [];
+  }
+  let jobProfile = [];
+  if (selectedModule === 'job profiles' && relatedReviewListPaneThree) {
+    jobProfile = relatedReviewListPaneThree?.jobProfile || [];
+  }
 
   const assesseeNodeList = [];
   assessee.forEach((ob) => {
@@ -198,6 +212,26 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       id,
       textOne: informationBasic.itemName,
       textTwo: informationBasic.itemDescription || 'No Information',
+      status: ''
+    });
+  });
+  const cultureProfileNodeList = [];
+  cultureProfile.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    cultureProfileNodeList.push({
+      id,
+      textOne: informationBasic.cultureProfileName,
+      textTwo: informationBasic.cultureProfileDescription || 'No Information',
+      status: ''
+    });
+  });
+  const jobProfileNodeList = [];
+  jobProfile.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    jobProfileNodeList.push({
+      id,
+      textOne: informationBasic.jobProfileName,
+      textTwo: informationBasic.jobProfileDescription || 'No Information',
       status: ''
     });
   });
@@ -663,6 +697,140 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isMultiList: true
     }
   ];
+  const cultureProfileModuleList = [
+    {
+      id: 'a5',
+      labelTextOneOne: 'culture profile',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: cultureProfileNodeList
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a6',
+      labelTextOneOne: 'node',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: ascendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: ascendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: ascendantSecondary
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: descendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: descendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: descendantSecondary
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true,
+      isMultiList: true
+    }
+  ];
+  const jobProfileModuleList = [
+    {
+      id: 'a5',
+      labelTextOneOne: 'job profile',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: jobProfileNodeList
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a6',
+      labelTextOneOne: 'node',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: ascendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: ascendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: ascendantSecondary
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: descendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: descendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: descendantSecondary
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true,
+      isMultiList: true
+    }
+  ];
 
   let list = allModuleList;
   if (selectedModule === 'assessees') {
@@ -676,6 +844,12 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   }
   if (selectedModule === 'items') {
     list = itemModuleList;
+  }
+  if (selectedModule === 'culture profiles') {
+    list = cultureProfileModuleList;
+  }
+  if (selectedModule === 'job profiles') {
+    list = jobProfileModuleList;
   }
 
   const reviseNode = (e) => {
@@ -778,6 +952,116 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
           revisedGroupObject: revisedRoleObject,
           existingAssesseeId: existingAssessmentId,
           typeOfMiddlePaneList: 'assessmentNodeAssessmentReviewList'
+        }
+      });
+    }
+    if (labelName === 'assignments' && selectedBadgeName === 'distinct') {
+      let requestObect = makeAssignmentReviewListRequestObject(
+        selectedAssociateInfo,
+        'active',
+        0,
+        countPage
+      );
+      let revisedRoleObject = {
+        id: responseObject.id,
+        associateNodeName: responseObject.informationBasic.associateNodeName,
+        associateNodeDescription: responseObject.informationBasic.associateNodeDescription,
+        associateNodeStatus: responseObject.informationEngagement.associateNodeStatus
+      };
+      let existingAssignmentId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0]?.assignment &&
+        relatedReviewListPaneThree[0].assignment.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentNodeAssessmentRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSIGNMENT,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedRoleObject,
+          existingAssignmentId: existingAssignmentId,
+          typeOfMiddlePaneList: 'assignmentNodeAssignmentReviewList'
+        }
+      });
+    }
+    if (labelName === 'items' && selectedBadgeName === 'distinct') {
+      let requestObect = makeItemObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedRoleObject = {
+        id: responseObject.id,
+        associateNodeName: responseObject.informationBasic.associateNodeName,
+        associateNodeDescription: responseObject.informationBasic.associateNodeDescription,
+        associateNodeStatus: responseObject.informationEngagement.associateNodeStatus
+      };
+      let existingItemId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0]?.item &&
+        relatedReviewListPaneThree[0].item.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'itemNodeItemRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ITEM,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedRoleObject,
+          existingItemId: existingItemId,
+          typeOfMiddlePaneList: 'itemNodeItemReviewList'
+        }
+      });
+    }
+    if (labelName === 'culture profile' && selectedBadgeName === 'distinct') {
+      let requestObect = makeCultureProfileObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedRoleObject = {
+        id: responseObject.id,
+        associateNodeName: responseObject.informationBasic.associateNodeName,
+        associateNodeDescription: responseObject.informationBasic.associateNodeDescription,
+        associateNodeStatus: responseObject.informationEngagement.associateNodeStatus
+      };
+      let existingCultureProfileId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0]?.cultureProfile &&
+        relatedReviewListPaneThree[0].cultureProfile.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'cultureProfileNodeItemRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_CULTURE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedRoleObject,
+          existingItemId: existingCultureProfileId,
+          typeOfMiddlePaneList: 'cultureProfileNodeCultureProfileReviewList'
         }
       });
     }
