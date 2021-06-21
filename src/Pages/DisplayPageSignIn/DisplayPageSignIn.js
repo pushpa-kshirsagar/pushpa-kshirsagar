@@ -424,9 +424,9 @@ const DisplayPageSignIn = () => {
                       forgotCredentialError !== ''
                         ? forgotCredentialError
                         : credentialOption === 'credential'
-                        ? 'email'
+                        ? 'email address'
                         : credentialOption === 'password'
-                        ? 'email, mobile telephone, tag'
+                        ? 'email address, mobile telephone, tag'
                         : ''
                     }
                     isErrorMsg={
