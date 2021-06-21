@@ -1,6 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  CLEAR_ITEM_REDUCER_STATE,
   CREATE_ITEM_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,

@@ -1,7 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import Store from '../../store';
 import {
-  CLEAR_ASSIGNMENT_INFO,
   CREATE_ASSIGNMENT_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,

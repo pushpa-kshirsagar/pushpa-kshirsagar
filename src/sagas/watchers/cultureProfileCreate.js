@@ -7,7 +7,7 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { ASSESSEE_CREATE_URL, CULTURE_CREATE_URL } from '../../endpoints';
+import { CULTURE_CREATE_URL } from '../../endpoints';
 
 const createApiCall = async (requestObj) => {
   const requestOptions = {

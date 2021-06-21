@@ -16,12 +16,16 @@ import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentTypeObj } from '../Actions/GenericActions';
-import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import {
+  ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
 const AssesseeTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
   );
+  const { cardValue } = useSelector((state) => state.PopUpReducer);
   const {
     numberPage,
     scanCount,
@@ -115,7 +119,8 @@ const AssesseeTypeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: popupContentArrValue,
+        popupContentArrValue:
+          cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : popupContentArrValue,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -125,7 +130,7 @@ const AssesseeTypeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: popupContentArrValue
+        value: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : popupContentArrValue
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

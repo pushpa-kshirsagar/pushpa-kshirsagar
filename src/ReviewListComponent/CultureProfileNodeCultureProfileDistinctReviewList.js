@@ -229,7 +229,7 @@ const CultureProfileNodeCultureProfileDistinctReviewList = (props) => {
         />
       )}
       {listDistinctData &&
-        listDistinctData.associate.map((item, index) => {
+        listDistinctData.cultureProfile.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -237,10 +237,7 @@ const CultureProfileNodeCultureProfileDistinctReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={assesseeStatus(
-                  middlePaneHeaderBadgeTwo,
-                  item.informationEngagement.cultureProfileStatus
-                )}
+                status={item.informationEngagement.cultureProfileStatus}
                 actualStatus={item.informationEngagement.cultureProfileStatus}
                 textOne={item.informationBasic.cultureProfileName}
                 textTwo={item.informationBasic.cultureProfileDescription}

@@ -15,12 +15,16 @@ import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentGroupObj } from '../Actions/GenericActions';
-import { ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import {
+  ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
 const AssessmentGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
   );
+  const { cardValue } = useSelector((state) => state.PopUpReducer);
   const {
     numberPage,
     scanCount,
@@ -72,7 +76,7 @@ const AssessmentGroupReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssessmentGroupObj(selectedAssociateInfo,siftKey, 0, countPage);
+    let requestObect = makeAssessmentGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({
@@ -107,7 +111,10 @@ const AssessmentGroupReviewList = (props) => {
         popupHeaderOneBadgeTwo: 'group',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue:
+          cardValue === 'Card'
+            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            : ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }
@@ -116,7 +123,10 @@ const AssessmentGroupReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
+        value:
+          cardValue === 'Card'
+            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            : ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

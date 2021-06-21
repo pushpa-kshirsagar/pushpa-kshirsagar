@@ -14,6 +14,7 @@ import {
   ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
@@ -28,6 +29,7 @@ import Card from '../Molecules/Card/Card';
 const AssociateNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
+  const { cardValue } = useSelector((state) => state.PopUpReducer);
   const {
     reviewListDistinctData,
     middlePaneSelectedValue,
@@ -121,7 +123,7 @@ const AssociateNodeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: optArr,
+        popupContentArrValue: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: nodeId
       }
     });
@@ -129,13 +131,7 @@ const AssociateNodeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value:
-          (middlePaneHeader === 'assessees' && ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION) ||
-          (middlePaneHeader === 'assessments' &&
-            ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
-          (middlePaneHeader === 'assignments' &&
-            ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION) ||
-          GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
+        value: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

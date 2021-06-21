@@ -10,7 +10,7 @@ import {
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -34,13 +34,12 @@ const CultureProfileGroupCultureProfileDistinctReviewList = (props) => {
     selectedAssociateInfo,
     relatedReviewListDistinctData,
     middlePaneHeaderBadgeOne,
-    middlePaneHeaderBadgeTwo,
     selectedTagsArray,
     isSelectActive,
     unselectedTagsArray,
     typeOfMiddlePaneList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
+  const { FilterMode } = useSelector((state) => state.FilterReducer);
 
   const onClickRevise = () => {
     console.log('ON CLICK REVISE ICON');
