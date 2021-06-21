@@ -3242,7 +3242,10 @@ export const DisplayPaneThree = () => {
           headerOne === 'administrators' ||
           headerOne === 'managers' ||
           headerOne === 'assessments' ||
-          headerOne === 'assignments') &&
+          headerOne === 'assignments' ||
+          headerOne === 'culture profiles' ||
+          headerOne === 'job profiles' ||
+          headerOne === 'items') &&
         headerOneBadgeOne === 'node' && (
           <>
             <div style={{ padding: '2.5px' }}>

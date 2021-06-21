@@ -50,7 +50,9 @@ import {
   GET_JOB_GROUP_REVIEW_INFO_SAGA,
   GET_CULTURE_TYPE_REVIEW_INFO_SAGA,
   GET_JOB_TYPE_REVIEW_INFO_SAGA,
-  GET_JOB_PROFILE_INFO_SAGA
+  GET_JOB_PROFILE_INFO_SAGA,
+  GET_NODE_ITEMS_REVIEW_LIST_SAGA,
+  GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -82,7 +84,9 @@ import {
   getCultureGroupCultureReqObj,
   getCultureTypeCultureReqObj,
   getJobProfileGroupJobProfileReqObj,
-  getJobProfileTypeJobProfileReqObj
+  getJobProfileTypeJobProfileReqObj,
+  getNodeItemsReqObj,
+  getNodeAssignmentsReqObj
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -320,36 +324,66 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
+        // alert("here");
         dispatch({ type: LOADER_START });
-        let associateNodeAssesseeReqBody = '';
+        let associateNodeReqBody = '';
         let sagaCall = '';
+        let isShowAllModule = false;
         if (popupHeaderOne === 'assessees') {
-          associateNodeAssesseeReqBody = getAssesseeNodeAssesseeReqObj(
+          associateNodeReqBody = getAssesseeNodeAssesseeReqObj(
             selectedAssociateInfo,
             selectedTagValue,
             'active',
             0,
             countPage
           );
+          isShowAllModule = false;
           sagaCall = GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST;
         }
         if (popupHeaderOne === 'assessments') {
-          associateNodeAssesseeReqBody = getNodeAssessmentsReqObj(
+          associateNodeReqBody = getNodeAssessmentsReqObj(
             selectedAssociateInfo,
             selectedTagValue,
             'active',
             0,
             countPage
           );
+          isShowAllModule = false;
           sagaCall = GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA;
+        }
+        if (popupHeaderOne === 'assignments') {
+          associateNodeReqBody = getNodeAssignmentsReqObj(
+            selectedAssociateInfo,
+            selectedTagValue,
+            'active',
+            0,
+            countPage
+          );
+          isShowAllModule = false;
+          sagaCall = GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA;
+        }
+        if (popupHeaderOne === 'associate') {
+          isShowAllModule = true;
+        }
+        if (popupHeaderOne === 'items') {
+          associateNodeReqBody = getNodeItemsReqObj(
+            selectedAssociateInfo,
+            selectedTagValue,
+            'active',
+            0,
+            countPage
+          );
+          isShowAllModule = false;
+          sagaCall = GET_NODE_ITEMS_REVIEW_LIST_SAGA;
         }
         dispatch({
           type: GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
-            associateNodeAssesseeReqBody,
+            associateNodeReqBody: associateNodeReqBody,
             selectedModule: middlePaneHeader,
             getReviewListSaga: sagaCall,
+            isShowAllModule,
             isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,

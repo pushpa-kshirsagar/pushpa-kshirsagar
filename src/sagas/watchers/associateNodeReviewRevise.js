@@ -35,12 +35,19 @@ function* workerReviewAssociateNodeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN Node REVIEW+++++', userResponse);
-      const { isReviseMode = false, selectedModule, associateNodeAssesseeReqBody } = data.payload;
-      if (associateNodeAssesseeReqBody) {
+      const {
+        selectedModule,
+        associateNodeReqBody,
+        createMode,
+        getReviewListSaga,
+        isShowAllModule = false,
+        isReviseMode = false
+      } = data.payload;
+      if (associateNodeReqBody && !isShowAllModule) {
         yield put({
-          type: data.payload.getReviewListSaga,
+          type: getReviewListSaga,
           payload: {
-            request: associateNodeAssesseeReqBody,
+            request: associateNodeReqBody,
             HeaderOne: selectedModule,
             BadgeOne: '',
             BadgeTwo: '',
@@ -86,7 +93,9 @@ function* workerReviewAssociateNodeInfoSaga(data) {
       }
     }
     console.log('loading end');
-    // yield put({ type: LOADER_STOP });
+    if (data.payload.isShowAllModule) {
+      yield put({ type: LOADER_STOP });
+    }
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -116,20 +125,26 @@ function* workerReviseAssociateNodeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('INter Node revise+++++', userResponse);
-      const { selectedModule, associateNodeAssesseeReqBody, createMode } = data.payload;
-      if (associateNodeAssesseeReqBody) {
-        yield put({
-          type: GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
-          payload: {
-            request: associateNodeAssesseeReqBody,
-            HeaderOne: selectedModule,
-            BadgeOne: '',
-            BadgeTwo: '',
-            BadgeThree: '',
-            isMiddlePaneList: false
-          }
-        });
-      }
+      const {
+        selectedModule,
+        associateNodeReqBody,
+        createMode,
+        getReviewListSaga,
+        isShowAllModule = false
+      } = data.payload;
+      // if (associateNodeReqBody && !isShowAllModule) {
+      //   yield put({
+      //     type: getReviewListSaga,
+      //     payload: {
+      //       request: associateNodeReqBody,
+      //       HeaderOne: selectedModule,
+      //       BadgeOne: '',
+      //       BadgeTwo: '',
+      //       BadgeThree: '',
+      //       isMiddlePaneList: false
+      //     }
+      //   });
+      // }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -162,6 +177,9 @@ function* workerReviseAssociateNodeInfoSaga(data) {
         });
       }
     } else {
+      yield put({ type: LOADER_STOP });
+    }
+    if (data.payload.isShowAllModule) {
       yield put({ type: LOADER_STOP });
     }
     // console.log('loading end');

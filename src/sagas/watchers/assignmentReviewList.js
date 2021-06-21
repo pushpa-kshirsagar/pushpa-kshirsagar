@@ -161,19 +161,21 @@ function* workerAssignmentNodeAssignment(data) {
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
       yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
-      yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assignments',
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assignmentNodeAssignmentReviewList',
-          scanCount: response && response.countTotal,
-          showMiddlePaneState: true
-        }
-      });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assignments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assignmentNodeAssignmentReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
     } else {
       yield put({
         type: SET_POPUP_VALUE,
