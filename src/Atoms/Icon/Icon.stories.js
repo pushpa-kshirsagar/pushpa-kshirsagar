@@ -1,5 +1,5 @@
 import React from 'react';
-import AllIcons from './Icons';
+import AllIcons from './Icon';
 export default {
   title: 'Design System/Atoms/Icon',
   component: AllIcons

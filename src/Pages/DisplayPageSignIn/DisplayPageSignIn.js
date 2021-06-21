@@ -90,9 +90,13 @@ const DisplayPageSignIn = () => {
       setIsCredentialsInValid('');
     }
     if (assesseeSignInStatus === 'CREDENTIAL_SEND') {
-      setStage('credentialOptions');
-      dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
-      setIsCredentialsInValid('');
+      if (credentialOptionArr.length > 0) {
+        setStage('credentialOptions');
+        dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
+        setIsCredentialsInValid('');
+      } else {
+        setIsCredentialsInValid(INCORRECT_INFORMATION_ERROR_MESSAGE);
+      }
     }
     if (assesseeSignInStatus === 'CODE 400') {
       setCodeError(INCORRECT_INFORMATION_ERROR_MESSAGE);
@@ -158,11 +162,11 @@ const DisplayPageSignIn = () => {
     console.log('sendCode+++++++', forgotCredential, credentialOption);
     if (forgotCredential === '') {
       setForgotCredentialError(REQUIRED_ERROR_MESSAGE);
-      return;
+      // return;
     }
     if (credentialOption === '') {
       setCredentialOptionError(REQUIRED_ERROR_MESSAGE);
-      return;
+      // return;
     }
     if (credentialOption === 'password' && forgotCredential !== '' && credentialOption !== '') {
       // dispatch({ type: LOADER_START });
@@ -405,6 +409,8 @@ const DisplayPageSignIn = () => {
                     onChange={(e) => {
                       setCredentialOption(e.target.value);
                       setCredentialOptionError('');
+                      setForgotCredentialError('');
+                      setIsCredentialsInValid('')
                     }}
                     value={credentialOption}
                   />
@@ -414,36 +420,35 @@ const DisplayPageSignIn = () => {
                     value={forgotCredential}
                     label={'information'}
                     type="text"
-                    errorMsg={forgotCredentialError}
+                    errorMsg={
+                      forgotCredentialError !== ''
+                        ? forgotCredentialError
+                        : credentialOption === 'credential'
+                        ? 'email'
+                        : credentialOption === 'password'
+                        ? 'email, mobile telephone, tag'
+                        : ''
+                    }
+                    isErrorMsg={
+                      forgotCredentialError ? true : credentialOption !== '' ? false : false
+                    }
                     onClick={(e) => {
                       setForgotCredentialError('');
                       setForgotCredential(e.target.value);
                     }}
                   />
                   <div className={'forgot-and-progress-flex'}>
+                    <div></div>
                     <div>
+                      {/* {isCredentialsInValid && ( */}
                       <Label
-                        text={
-                          credentialOption === 'credential'
-                            ? 'email'
-                            : credentialOption === 'password'
-                            ? 'email, mobile telephone, tag'
-                            : ''
-                        }
+                        text={isCredentialsInValid}
                         fontSize="1.2rem"
-                        colour="#0000008a"
+                        colour={
+                          isCredentialsInValid === 'in progress' ? '#7DC832' : 'rgb(244, 67, 54)'
+                        }
                       />
-                    </div>
-                    <div>
-                      {isCredentialsInValid && (
-                        <Label
-                          text={isCredentialsInValid}
-                          fontSize="1.2rem"
-                          colour={
-                            isCredentialsInValid === 'in progress' ? '#7DC832' : 'rgb(244, 67, 54)'
-                          }
-                        />
-                      )}
+                      {/* )} */}
                     </div>
                   </div>
                 </FormControl>

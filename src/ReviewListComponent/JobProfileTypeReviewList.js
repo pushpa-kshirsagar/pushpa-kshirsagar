@@ -94,12 +94,6 @@ const JobProfileTypeReviewList = (props) => {
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let reviseHeader = middlePaneHeader;
-    if (middlePaneHeader === 'culture profiles') {
-      reviseHeader = 'cultureProfiles';
-    }
-    if (middlePaneHeader === 'job profiles') {
-      reviseHeader = 'jobProfiles';
-    }
     let optArr = [];
     let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
       obj.data === 'assessees' ? { ...obj, data: middlePaneHeader, dataValue: reviseHeader } : obj
@@ -142,12 +136,12 @@ const JobProfileTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.jobProfileTypeStatus}
                 textOne={item.informationBasic.jobProfileTypeName}
                 textTwo={item.informationBasic.jobProfileTypeDescription}
+                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                actualStatus={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-                // dataValue={item.informationAllocation.jobProfileType}
               />
             </div>
           );

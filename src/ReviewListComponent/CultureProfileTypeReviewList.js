@@ -94,12 +94,6 @@ const CultureProfileTypeReviewList = (props) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let optArr = [];
     let reviseHeader = middlePaneHeader;
-    if (middlePaneHeader === 'culture profiles') {
-      reviseHeader = 'cultureProfiles';
-    }
-    if (middlePaneHeader === 'job profiles') {
-      reviseHeader = 'jobProfiles';
-    }
     let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
       obj.data === 'assessees' ? { ...obj, data: middlePaneHeader, dataValue: reviseHeader } : obj
     );
@@ -127,7 +121,10 @@ const CultureProfileTypeReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log('FilterMode', FilterMode);
+  const associateSeftId =
+  selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
+
+
   return (
     <div>
       {reviewListDistinctData &&
@@ -139,9 +136,11 @@ const CultureProfileTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.cultureProfileTypeStatus}
+                // status={item.informationEngagement.cultureProfileTypeStatus}
                 textOne={item.informationBasic.cultureProfileTypeName}
                 textTwo={item.informationBasic.cultureProfileTypeDescription}
+                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                actualStatus={item.cultureProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 // dataValue={item.informationAllocation.cultureProfileType}

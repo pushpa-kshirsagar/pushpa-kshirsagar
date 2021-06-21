@@ -588,6 +588,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           dispatch,
           'groups'
         );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
         getCultureProfileTypeApiCall(
           selectedAssociateInfo,
@@ -597,6 +598,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'types',
           popupHeaderOne
         );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
         getInternalNodeApiCall(
           selectedAssociateInfo,
@@ -617,6 +619,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           dispatch,
           'groups'
         );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
         getCultureProfileTypeApiCall(
           selectedAssociateInfo,
@@ -626,6 +629,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'types',
           popupHeaderOne
         );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'nodes') {
         getInternalNodeApiCall(
           selectedAssociateInfo,
@@ -654,6 +658,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'groups',
           'job profiles'
         );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
         getJobProfileTypeApiCall(
           selectedAssociateInfo,
@@ -663,6 +668,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'types',
           'job profiles'
         );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
         getInternalNodeApiCall(
           selectedAssociateInfo,
@@ -696,6 +702,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'groups',
           'job profiles'
         );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
         getJobProfileTypeApiCall(
           selectedAssociateInfo,
@@ -705,6 +712,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'types',
           'job profiles'
         );
+        dispatch({ type: POPUP_CLOSE });
       } else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,

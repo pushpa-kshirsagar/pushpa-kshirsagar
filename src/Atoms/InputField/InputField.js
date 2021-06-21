@@ -14,7 +14,8 @@ export const InputField = (props) => {
     labelBadgeOne,
     isRequired = true,
     autoFocus = false,
-    classNames = ''
+    classNames = '',
+    isErrorMsg = true
   } = props;
   return (
     <div className="popup-form-box">
@@ -35,7 +36,9 @@ export const InputField = (props) => {
         />
       </FormControl>
       {isRequired && (
-        <FormHelperText className={['helperText', 'helptextmargin'].join(' ')}>
+        <FormHelperText
+          className={[isErrorMsg ? 'helperText' : 'helperTextDefault', 'helptextmargin'].join(' ')}
+        >
           <span>{errorMsg}</span>
         </FormHelperText>
       )}

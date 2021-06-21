@@ -99,8 +99,8 @@ const initialState = {
     assignments: ASSIGNMENT_DISTINCT_POPUP,
     associates: REVIEW_DISTINCT_POPUP_OPTION,
     items: REVIEW_DISTINCT_POPUP_OPTION,
-    cultureProfiles: REVIEW_DISTINCT_POPUP_OPTION,
-    jobProfiles: REVIEW_DISTINCT_POPUP_OPTION
+    cultureprofiles: REVIEW_DISTINCT_POPUP_OPTION,
+    jobprofiles: REVIEW_DISTINCT_POPUP_OPTION
   }
 };
 
@@ -299,6 +299,7 @@ const PopUpReducer = (istate = initialState, action) => {
         };
       }
     case SET_MIDDLEPANE_SECONDARY_OPTION: {
+      console.log('action.payload.keyValue.trim()', action.payload.badgeValue.split(' ').join(''));
       let arrVal =
         action.payload.keyValue === 'reviseKey' ||
         action.payload.keyValue === 'reviewKey' ||
@@ -306,11 +307,9 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload.keyValue === 'createKey' ||
         action.payload.keyValue === 'assesseeCreate' ||
         action.payload.keyValue === 'reviewDistinctKey' ||
-        action.payload.keyValue === 'cultureProfiles' ||
-        action.payload.keyValue === 'jobProfiles' ||
         action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
-          : istate.secondaryPopUpOptions[action.payload.badgeValue];
+          : istate.secondaryPopUpOptions[action.payload.badgeValue.split(' ').join('')];
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
@@ -321,6 +320,8 @@ const PopUpReducer = (istate = initialState, action) => {
           action.payload.badgeValue === 'assessments' ||
           action.payload.badgeValue === 'assignments' ||
           action.payload.badgeValue === 'associates' ||
+          action.payload.badgeValue === 'culture profiles' ||
+          action.payload.badgeValue === 'job profiles' ||
           action.payload.badgeValue === 'reports'
         ) {
           return {
