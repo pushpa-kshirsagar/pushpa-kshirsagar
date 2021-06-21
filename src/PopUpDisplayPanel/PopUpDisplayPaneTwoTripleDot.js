@@ -51,6 +51,11 @@ import {
   getCultureProfilesDistinctApiCall,
   getCultureProfileTypeApiCall
 } from '../Actions/ActionCultureProfile';
+import {
+  getJobProfileGroupApiCall,
+  getJobProfilesDistinctApiCall,
+  getJobProfileTypeApiCall
+} from '../Actions/ActionJobProfile';
 const PopUpDisplayPaneTwoTripleDot = (props) => {
   const {
     popupHeaderOne,
@@ -169,6 +174,14 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
         dispatch
       );
       dispatch({ type: POPUP_CLOSE });
+    } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'job profiles') {
+      getJobProfilesDistinctApiCall(
+        selectedAssociateInfo,
+        secondaryOptionCheckValue,
+        countPage,
+        'job profiles',
+        dispatch
+      );
     } else if (
       middlePaneHeader === 'assessees' ||
       middlePaneHeader === 'administrators' ||
@@ -584,6 +597,18 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'types',
           popupHeaderOne
         );
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          middlePaneHeader
+        );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'groups') {
         getCultureProfileGroupApiCall(
           selectedAssociateInfo,
@@ -600,6 +625,85 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           dispatch,
           'types',
           popupHeaderOne
+        );
+      } else if (keyVal === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          middlePaneHeader
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
+      }
+    } else if (middlePaneHeader === 'job profiles') {
+      if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'groups') {
+        getJobProfileGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups',
+          'job profiles'
+        );
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
+        getJobProfileTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          'job profiles'
+        );
+      } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          middlePaneHeader
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          middlePaneHeader
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'groups') {
+        getJobProfileGroupApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'groups',
+          'job profiles'
+        );
+      } else if (keyVal === 'types') {
+        getJobProfileTypeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'types',
+          'job profiles'
         );
       } else {
         dispatch({

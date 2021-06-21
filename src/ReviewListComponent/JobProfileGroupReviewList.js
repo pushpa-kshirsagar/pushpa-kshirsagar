@@ -13,13 +13,14 @@ import {
 import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION, ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import { getJobProfileGroupApiCall } from '../Actions/ActionJobProfile';
 const JobProfileGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
   );
+  const { cardValue } = useSelector((state) => state.PopUpReducer);
   const {
     numberPage,
     scanCount,
@@ -110,7 +111,7 @@ const JobProfileGroupReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: optArr,
+        popupContentArrValue: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -120,14 +121,12 @@ const JobProfileGroupReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: optArr
+        value: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   console.log('FilterMode', FilterMode);
-  const associateSeftId =
-    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
     <div>
       {reviewListDistinctData &&

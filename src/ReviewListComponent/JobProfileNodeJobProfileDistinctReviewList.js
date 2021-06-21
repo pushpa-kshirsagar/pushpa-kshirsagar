@@ -230,7 +230,7 @@ const JobProfileNodeJobProfileDistinctReviewList = (props) => {
         />
       )}
       {listDistinctData &&
-        listDistinctData.associate.map((item, index) => {
+        listDistinctData.jobProfile.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -238,10 +238,7 @@ const JobProfileNodeJobProfileDistinctReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={assesseeStatus(
-                  middlePaneHeaderBadgeTwo,
-                  item.informationEngagement.jobProfileStatus
-                )}
+                status={item.informationEngagement.jobProfileStatus}
                 actualStatus={item.informationEngagement.jobProfileStatus}
                 textOne={item.informationBasic.jobProfileName}
                 textTwo={item.informationBasic.jobProfileDescription}

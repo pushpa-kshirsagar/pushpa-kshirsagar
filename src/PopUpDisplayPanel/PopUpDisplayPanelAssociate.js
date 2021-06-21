@@ -793,6 +793,10 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'Card' }
+      });
       if (popupHeaderOne === 'assessees') {
         getAssesseeGroupDistinctApiCall(
           selectedAssociateInfo,
@@ -1129,6 +1133,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         showMiddlePaneState: false
       }
     });
+   
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const BackHandlerEvent = (e) => {

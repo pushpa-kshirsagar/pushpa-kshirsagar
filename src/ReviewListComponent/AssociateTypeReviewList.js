@@ -18,7 +18,8 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentTypeObj } from '../Actions/GenericActions';
 import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+  ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { getAssociatesTypeApiCall } from '../Actions/AssociateModuleAction';
 const AssociateTypeReviewList = (props) => {
@@ -36,7 +37,7 @@ const AssociateTypeReviewList = (props) => {
     middlePaneHeader
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
-  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, selectedTagValue, cardValue } = useSelector((state) => state.PopUpReducer);
   const [isFetching, setIsFetching] = useState(false);
   useEffect(() => {
     document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
@@ -112,7 +113,10 @@ const AssociateTypeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue:
+          cardValue === 'Card'
+            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            : ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -122,7 +126,10 @@ const AssociateTypeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+        value:
+          cardValue === 'Card'
+            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            : ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -153,7 +160,9 @@ const AssociateTypeReviewList = (props) => {
             </div>
           );
         })}
-      {(FilterMode === 'associatesTypeDistinctinactive' || FilterMode === 'associatesTypeDistinctsuspended'|| FilterMode === 'associatesTypeDistinctterminated') && (
+      {(FilterMode === 'associatesTypeDistinctinactive' ||
+        FilterMode === 'associatesTypeDistinctsuspended' ||
+        FilterMode === 'associatesTypeDistinctterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

@@ -1,6 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  CLEAR_ROLE_REDUCER_STATE,
   CREATE_ASSESSEE_ROLE_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,

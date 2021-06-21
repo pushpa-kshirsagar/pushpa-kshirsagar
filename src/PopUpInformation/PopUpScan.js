@@ -938,6 +938,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'cultureProfilesGroupDistinctReviewList' ||
                 isPopUpValue === 'cultureProfilesTypeDistinctReviewList' ||
                 isPopUpValue === 'jobProfilesGroupDistinctReviewList' ||
+                isPopUpValue === 'cultureProfileNodeCultureProfileReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}
@@ -945,8 +946,8 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'cultureProfilesDistinctReviewList' ||
                 isPopUpValue === 'jobProfilesDistinctReviewList' ||
                 isPopUpValue === 'assessmentDistinctReviewList') && (
-                  <span>name, description, tag.</span>
-                )}
+                <span>name, description, tag.</span>
+              )}
               {(isPopUpValue === 'assesseesDistinctReviewList' ||
                 isPopUpValue === 'administratorsDistinctReviewList' ||
                 isPopUpValue === 'assesseesGroupAssesseeReviewList' ||
