@@ -740,6 +740,9 @@ export const DisplayPaneThree = () => {
         headerOne === 'administrators' ||
         headerOne === 'managers' ||
         headerOne === 'assessees' ||
+        headerOne === 'items' ||
+        headerOne === 'culture profiles' ||
+        headerOne === 'job profiles' ||
         headerOne === 'assessments' ||
         headerOne === 'assignments')
     ) {
@@ -3242,7 +3245,10 @@ export const DisplayPaneThree = () => {
           headerOne === 'administrators' ||
           headerOne === 'managers' ||
           headerOne === 'assessments' ||
-          headerOne === 'assignments') &&
+          headerOne === 'assignments' ||
+          headerOne === 'culture profiles' ||
+          headerOne === 'job profiles' ||
+          headerOne === 'items') &&
         headerOneBadgeOne === 'node' && (
           <>
             <div style={{ padding: '2.5px' }}>
