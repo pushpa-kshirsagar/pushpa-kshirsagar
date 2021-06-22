@@ -721,7 +721,8 @@ export const getAssociateGroupDistinctApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeAssociateGroupObj(
     selectedAssociateInfo,
@@ -743,8 +744,8 @@ export const getAssociateGroupDistinctApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
@@ -805,7 +806,8 @@ export const getAssociatesTypeApiCall = (
   countPage,
   dispatch,
   targetValue,
-  middlePaneHeader = 'associates'
+  middlePaneHeader = 'associates',
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeAssociateTypeObj(
     selectedAssociateInfo,
@@ -829,8 +831,8 @@ export const getAssociatesTypeApiCall = (
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });

@@ -151,7 +151,8 @@ export const assignmentTypeApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeAssignmentTypeObj(
     selectedAssociateInfo,
@@ -172,8 +173,8 @@ export const assignmentTypeApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });

@@ -63,7 +63,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
     popupHeaderOneBadgeTwo,
     popupOpenType,
     secondaryOptionCheckValue,
-    selectedTagValue
+    selectedTagValue,
+    cardValue
   } = useSelector((state) => state.PopUpReducer);
   const {
     selectedAssociateInfo,
@@ -194,7 +195,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
             secondaryOptionCheckValue,
             countPage,
             dispatch,
-            'groups'
+            'groups',
+            cardValue
           );
         }
         dispatch({ type: POPUP_CLOSE });
@@ -217,7 +219,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
             secondaryOptionCheckValue,
             countPage,
             popupHeaderOne,
-            dispatch
+            dispatch,
+            cardValue
           );
         } else {
           getAssesseeRoleDistinctApiCall(
@@ -225,7 +228,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
             secondaryOptionCheckValue,
             countPage,
             'roles',
-            dispatch
+            dispatch,
+            cardValue
           );
         }
 
@@ -237,6 +241,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
+          cardValue,
           middlePaneHeader
         );
         dispatch({ type: POPUP_CLOSE });
@@ -247,7 +252,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
             secondaryOptionCheckValue,
             countPage,
             dispatch,
-            dataVal
+            dataVal,
+            cardValue
           );
         }
         dispatch({ type: POPUP_CLOSE });
@@ -258,7 +264,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
             secondaryOptionCheckValue,
             countPage,
             popupHeaderOne,
-            dispatch
+            dispatch,
+            cardValue
           );
         } else {
           getAssesseeRoleDistinctApiCall(
@@ -266,7 +273,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
             secondaryOptionCheckValue,
             countPage,
             'roles',
-            dispatch
+            dispatch,
+            cardValue
           );
         }
         dispatch({ type: POPUP_CLOSE });
@@ -289,6 +297,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
+          cardValue,
           middlePaneHeader
         );
         dispatch({ type: POPUP_CLOSE });
@@ -324,7 +333,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
@@ -354,7 +364,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
-          'associates'
+          'associates',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'groups') {
@@ -363,7 +374,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'roles') {
@@ -393,7 +405,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
-          'associates'
+          'associates',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else {
@@ -409,7 +422,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
@@ -419,15 +433,18 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
-          middlePaneHeader
+          middlePaneHeader,
+          cardValue
         );
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'groups') {
         getItemGroupDistinctApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
@@ -437,8 +454,10 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
-          middlePaneHeader
+          middlePaneHeader,
+          cardValue
         );
+        dispatch({ type: POPUP_CLOSE });
       } else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,
@@ -452,7 +471,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
@@ -461,7 +481,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'types'
+          'types',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
@@ -482,7 +503,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
@@ -491,7 +513,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'types'
+          'types',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'nodes') {
@@ -519,7 +542,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
@@ -528,7 +552,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'types'
+          'types',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
@@ -549,7 +574,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
@@ -558,7 +584,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'types'
+          'types',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'nodes') {
@@ -586,7 +613,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
@@ -596,7 +624,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
-          popupHeaderOne
+          popupHeaderOne,
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
@@ -617,7 +646,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
@@ -627,7 +657,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
-          popupHeaderOne
+          popupHeaderOne,
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'nodes') {
@@ -656,7 +687,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          'job profiles'
+          'job profiles',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
@@ -666,7 +698,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
-          'job profiles'
+          'job profiles',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
@@ -700,7 +733,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          'job profiles'
+          'job profiles',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
@@ -710,7 +744,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'types',
-          'job profiles'
+          'job profiles',
+          cardValue
         );
         dispatch({ type: POPUP_CLOSE });
       } else {

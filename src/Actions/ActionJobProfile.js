@@ -129,7 +129,8 @@ export const getJobProfileGroupApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  cardValue='noCard'
 ) => {
   let requestObj = makeJobProfileGroupObj(
     selectedAssociateInfo,
@@ -151,8 +152,8 @@ export const getJobProfileGroupApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
@@ -163,7 +164,8 @@ export const getJobProfileTypeApiCall = (
   countPage,
   dispatch,
   targetValue,
-  middlePaneHeader = 'job profiles'
+  middlePaneHeader = 'job profiles',
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeJobProfileTypeObj(
     selectedAssociateInfo,
@@ -187,8 +189,8 @@ export const getJobProfileTypeApiCall = (
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });

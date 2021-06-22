@@ -1720,6 +1720,36 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         };
         shareVal = 'assignmentType';
       }
+      if (typeOfMiddlePaneList === 'cultureProfilesTypeDistinctReviewList') {
+        reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          cultureProfileTypeShared: [
+            {
+              cultureProfileTypeId: selectedTagValue,
+              cultureProfileTypeGroupId: selectedTagGroupId
+            }
+          ]
+        };
+        shareVal = 'cultureProfileType';
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesTypeDistinctReviewList') {
+        reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          jobProfileTypeShared: [
+            {
+              jobProfileTypeId: selectedTagValue,
+              jobProfileTypeGroupId: selectedTagGroupId
+            }
+          ]
+        };
+        shareVal = 'jobProfileType';
+      }
       if (reqBody) {
         dispatch({ type: LOADER_START });
         dispatch({

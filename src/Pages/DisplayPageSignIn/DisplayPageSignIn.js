@@ -275,6 +275,8 @@ const DisplayPageSignIn = () => {
                     <IconButton
                       onClick={() => {
                         setStage('signIn');
+                        setIsUserNameValid('');
+                        setIsPasswordValid('');
                       }}
                       className="form-icon-style rotate-icon"
                     >
@@ -369,6 +371,8 @@ const DisplayPageSignIn = () => {
                     onClick={() => {
                       // setIsForgotPassword(true);
                       setStage('forgotPassword');
+                      setCredentialOptionError('');
+                      setForgotCredentialError('');
                     }}
                   >
                     <Label text="forgot information" fontSize="1.2rem" colour="#0000008a" />
@@ -392,7 +396,7 @@ const DisplayPageSignIn = () => {
                 <div className={'fitContent'}>
                   <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
                     <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
-                      <span>{'sign-in'}&nbsp;</span>
+                      <span>{'information'}&nbsp;</span>
                     </InputLabel>
                     {/* <div className={'infoSymbol'}></div>
               <div className={'infoSymbol'}>
@@ -401,24 +405,25 @@ const DisplayPageSignIn = () => {
                   </div>
                 </div>
                 <FormControl style={{ width: '100%' }}>
-                  <SelectField
-                    tag={'assesseeSignInInformation'}
-                    label={'information'}
-                    listSelect={['credential', 'password']}
-                    errorMsg={credentialOptionError}
-                    onChange={(e) => {
-                      setCredentialOption(e.target.value);
-                      setCredentialOptionError('');
-                      setForgotCredentialError('');
-                      setIsCredentialsInValid('')
-                    }}
-                    value={credentialOption}
-                  />
-
+                  <div style={{ height: '70.5px' }}>
+                    <SelectField
+                      tag={'assesseeSignInInformation'}
+                      label={'forgotten'}
+                      listSelect={['credential', 'password']}
+                      errorMsg={credentialOptionError}
+                      onChange={(e) => {
+                        setCredentialOption(e.target.value);
+                        setCredentialOptionError('');
+                        setForgotCredentialError('');
+                        setIsCredentialsInValid('');
+                      }}
+                      value={credentialOption}
+                    />
+                  </div>
                   <InputField
                     id={'forgotCredential'}
                     value={forgotCredential}
-                    label={'information'}
+                    label={'unforgotten'}
                     type="text"
                     errorMsg={
                       forgotCredentialError !== ''

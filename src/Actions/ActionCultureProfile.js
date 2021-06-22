@@ -129,7 +129,8 @@ export const getCultureProfileGroupApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeCultureProfileGroupObj(
     selectedAssociateInfo,
@@ -151,8 +152,8 @@ export const getCultureProfileGroupApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
@@ -163,7 +164,8 @@ export const getCultureProfileTypeApiCall = (
   countPage,
   dispatch,
   targetValue,
-  middlePaneHeader = 'culture profile'
+  middlePaneHeader = 'culture profile',
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeCultureProfileTypeObj(
     selectedAssociateInfo,
@@ -187,8 +189,8 @@ export const getCultureProfileTypeApiCall = (
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
