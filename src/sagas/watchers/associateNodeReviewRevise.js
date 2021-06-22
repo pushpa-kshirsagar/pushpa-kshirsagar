@@ -5,10 +5,12 @@ import {
   GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_STOP,
+  SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_NODE_DYNAMIC_SINGLE_STATE,
-  SET_NODE_REDUCER_STATE
+  SET_NODE_REDUCER_STATE,
+  SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import Store from '../../store';
 import { ASSOCIATE_NODE_REVIEW_URL, ASSOCIATE_NODE_REVISE_URL } from '../../endpoints';
@@ -127,24 +129,24 @@ function* workerReviseAssociateNodeInfoSaga(data) {
       console.log('INter Node revise+++++', userResponse);
       const {
         selectedModule,
-        associateNodeReqBody,
+        associateNodeReqBody = null,
         createMode,
         getReviewListSaga,
         isShowAllModule = false
       } = data.payload;
-      // if (associateNodeReqBody && !isShowAllModule) {
-      //   yield put({
-      //     type: getReviewListSaga,
-      //     payload: {
-      //       request: associateNodeReqBody,
-      //       HeaderOne: selectedModule,
-      //       BadgeOne: '',
-      //       BadgeTwo: '',
-      //       BadgeThree: '',
-      //       isMiddlePaneList: false
-      //     }
-      //   });
-      // }
+      if (associateNodeReqBody && !isShowAllModule) {
+        yield put({
+          type: getReviewListSaga,
+          payload: {
+            request: associateNodeReqBody,
+            HeaderOne: selectedModule,
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -179,6 +181,11 @@ function* workerReviseAssociateNodeInfoSaga(data) {
     } else {
       yield put({ type: LOADER_STOP });
     }
+    yield put({ type: SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST, payload: [] });
+    yield put({
+      type: SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
+      payload: []
+    });
     if (data.payload.isShowAllModule) {
       yield put({ type: LOADER_STOP });
     }

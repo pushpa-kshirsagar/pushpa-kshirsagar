@@ -6,11 +6,13 @@ import {
   FILTERMODE_ENABLE,
   POPUP_OPEN,
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+  SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
-  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+  SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -58,19 +60,19 @@ const ItemNodeItemDistinctReviewList = (props) => {
     console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray);
     setIsShowReviseIcon(true);
     if (typeOfMiddlePaneList !== '') {
-      // dispatch({
-      //   type: SET_MIDDLEPANE_STATE,
-      //   payload: {
-      //     middlePaneHeader: 'items',
-      //     middlePaneHeaderBadgeOne: 'group',
-      //     middlePaneHeaderBadgeTwo: 'active',
-      //     middlePaneHeaderBadgeThree: '',
-      //     middlePaneHeaderBadgeFour: '',
-      //     typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
-      //     scanCount: reviewListDistinctData.length,
-      //     showMiddlePaneState: true
-      //   }
-      // });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'items',
+          middlePaneHeaderBadgeOne: 'node',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'associateNodeDistinctReviewList',
+          scanCount: reviewListDistinctData.length,
+          showMiddlePaneState: true
+        }
+      });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: '' }
@@ -82,9 +84,9 @@ const ItemNodeItemDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: selectedTagsArray });
+    dispatch({ type: SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     dispatch({
-      type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+      type: SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
       payload: unselectedTagsArray
     });
   };
@@ -249,6 +251,15 @@ const ItemNodeItemDistinctReviewList = (props) => {
             </div>
           );
         })}
+      {FilterMode === 'itemNodeItemRevise' && (
+        <FooterIconTwo
+          FilterModeEnable={isShowReviseIcon}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={revisePrimaryIcon}
+          secondaryIcon={reviseSecondaryIcons}
+        />
+      )}
       {FilterMode === 'itemNodeItemDistinctinactive' && (
         <FooterIconTwo
           FilterModeEnable={isShowReviseIcon}

@@ -11,8 +11,10 @@ import {
   GET_ALLOCATE_ASSESSEE,
   GET_ALLOCATE_ASSESSMENT,
   GET_ALLOCATE_ASSIGNMENT,
+  GET_ALLOCATE_ASSOCIATE,
   GET_ALLOCATE_CULTURE,
   GET_ALLOCATE_ITEM,
+  GET_ALLOCATE_JOB,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
@@ -25,9 +27,11 @@ import {
   makeAssesseeReviewListRequestObject,
   makeAssessmentReviewListRequestObject,
   makeAssignmentReviewListRequestObject,
+  makeAssociateNodeObj,
   makeCultureProfileObj,
   makeInternalNodeObj,
-  makeItemObj
+  makeItemObj,
+  makeJobProfileObj
 } from '../../Actions/GenericActions';
 import { getAssesseeNodeAssesseeDistinctApiCall } from '../../Actions/AssesseeModuleAction';
 
@@ -173,6 +177,10 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   if (selectedModule === 'job profiles' && relatedReviewListPaneThree) {
     jobProfile = relatedReviewListPaneThree?.jobProfile || [];
   }
+  let associate = [];
+  if (selectedModule === 'associates' && relatedReviewListPaneThree) {
+    associate = relatedReviewListPaneThree[0]?.associate || [];
+  }
 
   const assesseeNodeList = [];
   assessee.forEach((ob) => {
@@ -232,6 +240,16 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       id,
       textOne: informationBasic.jobProfileName,
       textTwo: informationBasic.jobProfileDescription || 'No Information',
+      status: ''
+    });
+  });
+  const associateNodeList = [];
+  associate.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    associateNodeList.push({
+      id,
+      textOne: informationBasic.associateName,
+      textTwo: informationBasic.associateDescription || 'No Information',
       status: ''
     });
   });
@@ -831,6 +849,73 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isMultiList: true
     }
   ];
+  const associateModuleList = [
+    {
+      id: 'a5',
+      labelTextOneOne: 'associate',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: associateNodeList
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a6',
+      labelTextOneOne: 'node',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: ascendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: ascendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: ascendantSecondary
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: descendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: descendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: descendantSecondary
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true,
+      isMultiList: true
+    }
+  ];
 
   let list = allModuleList;
   if (selectedModule === 'assessees') {
@@ -850,6 +935,9 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   }
   if (selectedModule === 'job profiles') {
     list = jobProfileModuleList;
+  }
+  if (selectedModule === 'associates') {
+    list = associateModuleList;
   }
 
   const reviseNode = (e) => {
@@ -930,8 +1018,8 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       };
       let existingAssessmentId =
         relatedReviewListPaneThree &&
-        relatedReviewListPaneThree[0]?.assessment &&
-        relatedReviewListPaneThree[0].assessment.map((val) => {
+        relatedReviewListPaneThree?.assessment &&
+        relatedReviewListPaneThree.assessment.map((val) => {
           return val.id;
         });
       dispatch({
@@ -955,7 +1043,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         }
       });
     }
-    if (labelName === 'assignments' && selectedBadgeName === 'distinct') {
+    if (labelName === 'assignment' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssignmentReviewListRequestObject(
         selectedAssociateInfo,
         'active',
@@ -970,13 +1058,13 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       };
       let existingAssignmentId =
         relatedReviewListPaneThree &&
-        relatedReviewListPaneThree[0]?.assignment &&
-        relatedReviewListPaneThree[0].assignment.map((val) => {
+        relatedReviewListPaneThree?.assignment &&
+        relatedReviewListPaneThree.assignment.map((val) => {
           return val.id;
         });
       dispatch({
         type: FILTERMODE,
-        payload: { FilterMode: 'assignmentNodeAssessmentRevise' }
+        payload: { FilterMode: 'assignmentNodeAssignmentRevise' }
       });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -995,7 +1083,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         }
       });
     }
-    if (labelName === 'items' && selectedBadgeName === 'distinct') {
+    if (labelName === 'item' && selectedBadgeName === 'distinct') {
       let requestObect = makeItemObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedRoleObject = {
         id: responseObject.id,
@@ -1005,8 +1093,8 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       };
       let existingItemId =
         relatedReviewListPaneThree &&
-        relatedReviewListPaneThree[0]?.item &&
-        relatedReviewListPaneThree[0].item.map((val) => {
+        relatedReviewListPaneThree?.item &&
+        relatedReviewListPaneThree.item.map((val) => {
           return val.id;
         });
       dispatch({
@@ -1040,13 +1128,13 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       };
       let existingCultureProfileId =
         relatedReviewListPaneThree &&
-        relatedReviewListPaneThree[0]?.cultureProfile &&
-        relatedReviewListPaneThree[0].cultureProfile.map((val) => {
+        relatedReviewListPaneThree?.cultureProfile &&
+        relatedReviewListPaneThree.cultureProfile.map((val) => {
           return val.id;
         });
       dispatch({
         type: FILTERMODE,
-        payload: { FilterMode: 'cultureProfileNodeItemRevise' }
+        payload: { FilterMode: 'cultureProfileNodeCultureProfileRevise' }
       });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -1060,8 +1148,77 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         payload: {
           request: requestObect,
           revisedGroupObject: revisedRoleObject,
-          existingItemId: existingCultureProfileId,
+          existingCultureProfileId: existingCultureProfileId,
           typeOfMiddlePaneList: 'cultureProfileNodeCultureProfileReviewList'
+        }
+      });
+    }
+    if (labelName === 'job profile' && selectedBadgeName === 'distinct') {
+      let requestObect = makeJobProfileObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedRoleObject = {
+        id: responseObject.id,
+        associateNodeName: responseObject.informationBasic.associateNodeName,
+        associateNodeDescription: responseObject.informationBasic.associateNodeDescription,
+        associateNodeStatus: responseObject.informationEngagement.associateNodeStatus
+      };
+      let existingJobProfileId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree?.jobProfile &&
+        relatedReviewListPaneThree.jobProfile.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'jobProfileNodeJobProfileRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_JOB,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedRoleObject,
+          existingJobProfileId: existingJobProfileId,
+          typeOfMiddlePaneList: 'jobProfileNodeJobProfileReviewList'
+        }
+      });
+    }
+    if (labelName === 'associate' && selectedBadgeName === 'distinct') {
+      let requestObect = makeAssociateNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        associateNodeName: responseObject.informationBasic.associateNodeName,
+        associateNodeDescription: responseObject.informationBasic.associateNodeDescription,
+        associateNodeStatus: responseObject.informationEngagement.associateNodeStatus
+      };
+      let existingAssesseeId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0].associate.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'associateNodeAssociateRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSOCIATE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingAssesseeId: existingAssesseeId,
+          typeOfMiddlePaneList: 'nodeAssociatesReviewList'
         }
       });
     }
