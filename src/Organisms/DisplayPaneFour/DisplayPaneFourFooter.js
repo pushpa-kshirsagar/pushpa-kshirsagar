@@ -3,7 +3,7 @@ import { Keyboard, Description, InsertDriveFile, BusinessCenter } from '@materia
 import Communique from '@material-ui/icons/EventNote';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import IconButton from '../../Molecules/IconButton/IconButton';
-import '../../Molecules/FooterIconTwo/FooterIconTwo.css';
+import '../../Molecules/FooterIcon/FooterIconTwo.css';
 
 export const DisplayPaneFourFooter = () => {
   return (

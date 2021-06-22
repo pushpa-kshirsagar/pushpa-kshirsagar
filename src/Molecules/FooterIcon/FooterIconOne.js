@@ -1,7 +1,7 @@
 import React from 'react';
 import { Keyboard, Description, InsertDriveFile, BusinessCenter } from '@material-ui/icons';
 import IconButton from '../IconButton/IconButton';
-import '../FooterIconTwo/FooterIconTwo.css';
+import './FooterIconTwo.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SET_POPUP_STATE, SET_GRID_COLUMN_COUNT_VALUE } from '../../actionType';

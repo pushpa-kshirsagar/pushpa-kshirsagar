@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FILTERMODE_ENABLE, LOADER_START, RESET_ALL_REDUCER } from '../actionType';
-import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
+import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import 'react-sortable-tree/style.css';
 import Check from '@material-ui/icons/Check';

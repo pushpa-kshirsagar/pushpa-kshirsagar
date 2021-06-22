@@ -8,7 +8,7 @@ import ArrowLeft from '@material-ui/icons/ChevronLeft';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import './DisplayPaneFive.css';
 import { useSelector } from 'react-redux';
-import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
+import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import PopUpAssessmentNavigator from '../../PopUpInformation/PopUpAssessmentNavigator';
 
 export const DisplayPaneFive = () => {

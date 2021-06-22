@@ -13,7 +13,7 @@ import {
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT
 } from '../actionType';
-import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
+import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList, AccountTree } from '@material-ui/icons';
 import ListIcon from '@material-ui/icons/FormatListBulleted';
 import ReviewList from '../Molecules/ReviewList/ReviewList';

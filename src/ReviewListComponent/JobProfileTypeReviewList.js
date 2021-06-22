@@ -10,7 +10,7 @@ import {
   SET_PAGE_COUNT,
   SET_POPUP_STATE
 } from '../actionType';
-import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
+import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import {

@@ -6,7 +6,7 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_STATE
 } from '../actionType';
-import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
+import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList, AccountTree } from '@material-ui/icons';
 import ListIcon from '@material-ui/icons/FormatListBulleted';
 import {

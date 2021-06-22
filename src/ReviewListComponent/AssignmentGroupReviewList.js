@@ -11,7 +11,7 @@ import {
   SET_REQUEST_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE
 } from '../actionType';
-import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
+import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssignmentGroupObj } from '../Actions/GenericActions';

@@ -52,7 +52,7 @@ import {
   JOB_GROUP_REVISE_INFO_SAGA,
   JOB_PROFILE_INFO_REVISE_SAGA
 } from '../../actionType';
-import FooterIconTwo from '../../Molecules/FooterIconTwo/FooterIconTwo';
+import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';

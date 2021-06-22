@@ -14,7 +14,7 @@ import {
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST
 } from '../actionType';
-import FooterIconTwo from '../Molecules/FooterIconTwo/FooterIconTwo';
+import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';

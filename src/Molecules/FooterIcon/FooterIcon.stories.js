@@ -1,7 +1,7 @@
 import React from 'react';
 import store from '../../store';
 import { Provider } from 'react-redux';
-import FooterIconComponent from './FooterIconTwo';
+import FooterIconComponent from '../FooterIconTwo/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 
 export default {
