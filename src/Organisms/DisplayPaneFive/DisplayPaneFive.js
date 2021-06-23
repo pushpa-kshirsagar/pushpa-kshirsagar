@@ -5,7 +5,7 @@ import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
-import HeaderCard from '../../Molecules/Headers/HeaderCard';
+import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useSelector } from 'react-redux';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';

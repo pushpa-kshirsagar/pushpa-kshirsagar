@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderCard from '../../Molecules/Headers/HeaderCard';
+import HeaderCard from '../../Molecules/Header/HeaderCard';
 import { useSelector } from 'react-redux';
 import './DisplayPaneTwo.css';
 import AssesseeRelatedAssociateReviewList from '../../ReviewListComponent/AssesseeRelatedAssociateReviewList';

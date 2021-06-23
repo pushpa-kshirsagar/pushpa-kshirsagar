@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
-import Tooltip from 'material-ui/Tooltip';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const OneRowHeader = (props) => {
@@ -204,16 +204,16 @@ class CultureWeightageTableTemplate extends Component {
     // this.selecttarr=this.props.cls.weightselectedval;
   }
   saveselected(d, id) {
-    this.props.cls.culturedimensionselected.map((value) => {
+    this.props.culturedimensionselected.map((value) => {
       if (id === value.competencyId) {
         value['weightage'] = d;
       }
     });
     this.props.cls.setTemplateValue(
       'culturedimensionselected',
-      this.props.cls.culturedimensionselected
+      this.props.culturedimensionselected
     );
-    console.log(this.props.cls.culturedimensionselected);
+    console.log(this.props.culturedimensionselected);
   }
   render() {
     console.log(this.props.data);
@@ -231,7 +231,7 @@ class CultureWeightageTableTemplate extends Component {
           <FourRowHeader title={this.props.title} row1={this.props.row1} />
         ) : null}
 
-        {this.props.cls.culturedimensionselected.map((value, index) => {
+        {this.props.culturedimensionselected.map((value, index) => {
           return value.options != null
             ? value.options.map((valuesoptions) => {
                 return value.isNegative === valuesoptions.isNegative ? (
@@ -251,9 +251,7 @@ class CultureWeightageTableTemplate extends Component {
                               this.props.cls.setTemplateValue('culturetooltipstate', '');
                             }}
                             open={
-                              this.props.cls.culturetooltipstate === value.competencyId
-                                ? true
-                                : false
+                              this.props.culturetooltipstate === value.competencyId ? true : false
                             }
                             title={
                               <Typography
@@ -288,8 +286,8 @@ class CultureWeightageTableTemplate extends Component {
                         </ClickAwayListener>
 
                         <div className={'sifSecondtHeaderDivGray contentDatadivTopborderGray'}>
-                          {this.props.cls.cultureprofilemode === 'revise' ||
-                          this.props.cls.cultureprofilemode === 'create'
+                          {this.props.cultureprofilemode === 'revise' ||
+                          this.props.cultureprofilemode === 'create'
                             ? this.state.radioarray.map((lis, index) => {
                                 //   return <span className={"contentDatadiv"}><Radio
                                 //   checked={this.props.cls.weightselectedval[data]===(index+1).toString()?true:false}

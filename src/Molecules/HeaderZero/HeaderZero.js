@@ -3,7 +3,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isMobile } from 'react-device-detect';
-import Label from '../../Atoms/Labels/Label';
+import Label from '../../Atoms/Label/Label';
 import IconsButton from '../IconButton/IconButton';
 // import iGuruLogo from '../../images/iglogo1.png';
 // import prafulta from '../../images/prafulta.jpg';

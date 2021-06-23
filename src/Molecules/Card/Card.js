@@ -4,7 +4,7 @@ import IconsButton from '@material-ui/core/IconButton';
 import Notifications from '@material-ui/icons/NotificationsActive';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '../IconButton/IconButton';
-import Label from '../../Atoms/Labels/Label';
+import Label from '../../Atoms/Label/Label';
 import Avatar from '@material-ui/core/Avatar';
 import './Card.css';
 import { Input } from '@material-ui/core';

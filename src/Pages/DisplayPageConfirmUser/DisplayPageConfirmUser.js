@@ -27,7 +27,7 @@ import {
   SET_USER_STATE
 } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
-import Label from '../../Atoms/Labels/Label';
+import Label from '../../Atoms/Label/Label';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
 // import { AccountContext } from '../../Account';
 const DisplayPageConfirmUser = () => {

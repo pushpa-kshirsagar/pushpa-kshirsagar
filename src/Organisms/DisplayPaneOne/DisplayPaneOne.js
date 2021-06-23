@@ -3,7 +3,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import Card from '../../Molecules/Card/Card';
-import HeaderCard from '../../Molecules/Headers/HeaderCard';
+import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneOne.css';
 import Sections from '../../Molecules/Section/Section';
 import FooterIconOne from '../../Molecules/FooterIcon/FooterIconOne';
