@@ -32,7 +32,7 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
   // }
   let associate = [];
   if (relatedReviewListPaneThree && relatedReviewListPaneThree.length > 0) {
-    associate = relatedReviewListPaneThree[0].associate;
+    associate = relatedReviewListPaneThree[0]?.associate || [];
   }
   let associateArray = [];
   associate.forEach((ob) => {

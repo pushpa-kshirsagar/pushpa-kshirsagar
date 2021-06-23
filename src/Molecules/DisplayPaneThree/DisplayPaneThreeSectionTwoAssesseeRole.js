@@ -44,7 +44,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   // }
   let assessee = [];
   if (relatedReviewListPaneThree && relatedReviewListPaneThree.length > 0) {
-    assessee = relatedReviewListPaneThree[0].assessee;
+    assessee = relatedReviewListPaneThree[0]?.assessee || [];
   }
   let assesseeArray = [];
   assessee.forEach((ob) => {
@@ -105,11 +105,11 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
         assesseeRoleDescription: responseObject.informationBasic.assesseeRoleDescription,
         assesseeRoleStatus: responseObject.informationEngagement.assesseeRoleStatus
       };
-      let existingAssesseeId =
-        relatedReviewListPaneThree &&
-        relatedReviewListPaneThree[0].assessee.map((val) => {
-          return val.id;
-        });
+      let existingAssesseeId = [];
+      let tempAssessees = relatedReviewListPaneThree[0]?.assessee || [];
+      tempAssessees.map((val) => {
+        return val.id;
+      });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeRoleAssesseeRevise' }
@@ -118,7 +118,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'relatedReviewListDistinctData', value: [] }
       });
-      
+
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
       // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
