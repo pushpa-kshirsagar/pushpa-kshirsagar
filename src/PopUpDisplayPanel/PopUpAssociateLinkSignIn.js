@@ -5,7 +5,7 @@ import '../Molecules/PopUp/PopUp.css';
 import PopUpWhiteHeader from '../Molecules/PopUp/PopUpWhiteHeader';
 import { InputLabel } from '@material-ui/core';
 import InputField from '../Atoms/InputField/InputField';
-import Label from '../Atoms/Labels/Label';
+import Label from '../Atoms/Label/Label';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_DISPLAY_TWO_SINGLE_STATE, SET_SIGN_ON_SINGLE_STATE } from '../actionType';
 import { INCORRECT_INFORMATION_ERROR_MESSAGE } from '../errorMessage';

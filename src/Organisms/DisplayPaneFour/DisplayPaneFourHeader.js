@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import NextIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MoreVert from '@material-ui/icons/MoreVert';
-import '../../Molecules/Headers/HeaderCard.css';
+import '../../Molecules/Header/HeaderCard.css';
 import { SET_DISPLAY_PANE_FOUR_SHOW } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
-import Label from '../Atoms/Labels/Label';
+import Label from '../Atoms/Label/Label';
 import PropTypes from 'prop-types';
 import '../Molecules/PopUp/PopUp.css';
 

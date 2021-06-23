@@ -5,7 +5,7 @@ import iGuruLogo from '../../images/iglogo1.png';
 import './DisplayPageSignIn.css';
 import { FormControl, IconButton, InputLabel } from '@material-ui/core';
 import InputField from '../../Atoms/InputField/InputField';
-import Label from '../../Atoms/Labels/Label';
+import Label from '../../Atoms/Label/Label';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import Pool from '../../UserPool';
 import { AccountContext } from '../../Account';

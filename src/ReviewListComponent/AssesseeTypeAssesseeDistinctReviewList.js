@@ -155,11 +155,11 @@ const AssesseeTypeAssesseeDistinctReviewList = (props) => {
       type: SET_MIDDLEPANE_STATE,
       payload: {
         middlePaneHeader: middlePaneHeader,
-        middlePaneHeaderBadgeOne: 'role',
+        middlePaneHeaderBadgeOne: 'type',
         middlePaneHeaderBadgeTwo: 'active',
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assesseeRoleDistinctReviewList',
+        typeOfMiddlePaneList: 'assesseesTypeDistinctReviewList',
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }

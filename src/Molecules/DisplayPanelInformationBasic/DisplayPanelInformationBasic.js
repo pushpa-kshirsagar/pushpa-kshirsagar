@@ -8,7 +8,7 @@ import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
 import Unverified from '../../images/unverified.svg';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import FlagIcon from '@material-ui/icons/Flag';
-import Label from '../../Atoms/Labels/Label';
+import Label from '../../Atoms/Label/Label';
 import IconsButton from '../IconButton/IconButton';
 import './DisplayPanelInformationBasic.css';
 

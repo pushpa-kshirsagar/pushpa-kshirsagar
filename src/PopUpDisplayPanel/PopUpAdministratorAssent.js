@@ -3,7 +3,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import PopUpWhiteHeader from '../Molecules/PopUp/PopUpWhiteHeader';
-import Label from '../Atoms/Labels/Label';
+import Label from '../Atoms/Label/Label';
 
 const PopUpAdministratorAssent = (props) => {
   const {

@@ -61,11 +61,11 @@ const AssociateTypeAssociateDistinctReviewList = (props) => {
         type: SET_MIDDLEPANE_STATE,
         payload: {
           middlePaneHeader: 'associates',
-          middlePaneHeaderBadgeOne: 'role',
+          middlePaneHeaderBadgeOne: 'type',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'associateRoleDistinctReviewList',
+          typeOfMiddlePaneList: 'associatesTypeDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
