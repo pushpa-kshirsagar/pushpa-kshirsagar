@@ -1,11 +1,14 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSOCIATE_TYPE_INFO_REVISE_SAGA,
+  GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA,
   LOADER_STOP,
+  SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
-  SET_TYPE_GROUP_ALLOCATION
+  SET_TYPE_GROUP_ALLOCATION,
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_TYPE_URL, ASSOCIATE_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -30,7 +33,20 @@ function* workerReviewAssociateTypeInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, associateTypeAssociateReqBody = null } = data.payload;
+      if (associateTypeAssociateReqBody !== null) {
+        yield put({
+          type: GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA,
+          payload: {
+            request: associateTypeAssociateReqBody,
+            HeaderOne: 'associates',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -57,10 +73,11 @@ function* workerReviewAssociateTypeInfoSaga(data) {
           }
         });
       }
+    } else {
+      yield put({ type: LOADER_STOP });
     }
 
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');
@@ -88,7 +105,20 @@ function* workerReviseAssociateTypeInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      const { createMode } = data.payload;
+      const { createMode, associateTypeAssociateReqBody = null } = data.payload;
+      if (associateTypeAssociateReqBody !== null) {
+        yield put({
+          type: GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA,
+          payload: {
+            request: associateTypeAssociateReqBody,
+            HeaderOne: 'associates',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -100,10 +130,12 @@ function* workerReviseAssociateTypeInfoSaga(data) {
           createMode
         }
       });
+    } else {
+      yield put({ type: LOADER_STOP });
     }
-
+    yield put({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
+    yield put({ type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
     console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

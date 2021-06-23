@@ -126,7 +126,9 @@ import {
   getNodeAssociatesReqObj,
   getNodeItemsReqObj,
   getNodeCultureProfileReqObj,
-  getNodeJobProfileReqObj
+  getNodeJobProfileReqObj,
+  getAssociateTypeAssociateReqObj,
+  getAssesseeTypeAssesseeReqObj
 } from '../../Actions/GenericActions';
 import DisplayPaneThreeSectionOneCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneCultureProfileDistinct';
 import DisplayPaneThreeSectionTwoCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileDistinct';
@@ -1201,6 +1203,10 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
+        assesseeTypeAssessee: {
+          assesseeTypeAssesseeAllocate: assesseeRoleAssessee?.assesseeRoleAssesseeAllocate || [],
+          assesseeTypeAssesseeUnallocate: assesseeRoleAssessee?.assesseeRoleAssesseeUnallocate || []
+        },
         assesseeType: {
           id,
           informationBasic: assesseeType.informationBasic,
@@ -1208,9 +1214,16 @@ export const DisplayPaneThree = () => {
         }
       };
       dispatch({ type: LOADER_START });
+      let assesseeTypeAssesseeReqBody = getAssesseeTypeAssesseeReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSESSEE_TYPE_INFO_REVISE_SAGA,
-        payload: { headerOne: 'assessees', reqBody, createMode }
+        payload: { headerOne: 'assessees', reqBody, assesseeTypeAssesseeReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'type' && headerOne === 'assessments') {
       const { associateId, id } = responseObject;
@@ -1365,6 +1378,11 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
+        associateTypeAssociate: {
+          associateTypeAssociateAllocate: assesseeRoleAssessee?.assesseeRoleAssesseeAllocate || [],
+          associateTypeAssociateUnallocate:
+            assesseeRoleAssessee?.assesseeRoleAssesseeUnallocate || []
+        },
         associateType: {
           id,
           informationBasic: associateType.informationBasic,
@@ -1372,9 +1390,16 @@ export const DisplayPaneThree = () => {
         }
       };
       dispatch({ type: LOADER_START });
+      let associateTypeAssociateReqBody = getAssociateTypeAssociateReqObj(
+        selectedAssociateInfo,
+        id,
+        'active',
+        0,
+        countPage
+      );
       dispatch({
         type: ASSOCIATE_TYPE_INFO_REVISE_SAGA,
-        payload: { headerOne: 'associates', reqBody, createMode }
+        payload: { headerOne: 'associates', reqBody, associateTypeAssociateReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'job profile') {
       const { informationBasic, informationAllocation } = jobProfileInformation;

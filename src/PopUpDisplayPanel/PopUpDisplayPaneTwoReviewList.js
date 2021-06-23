@@ -92,7 +92,9 @@ import {
   getNodeAssignmentsReqObj,
   getNodeAssociatesReqObj,
   getNodeCultureProfileReqObj,
-  getNodeJobProfileReqObj
+  getNodeJobProfileReqObj,
+  getAssociateTypeAssociateReqObj,
+  getAssesseeTypeAssesseeReqObj
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -1123,10 +1125,18 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assesseesTypeDistinctReviewList') {
+        let assesseeTypeAssesseeReqBody = getAssesseeTypeAssesseeReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSESSEE_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
+            assesseeTypeAssesseeReqBody,
             isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1156,11 +1166,19 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'associatesTypeDistinctReviewList') {
+        let associateTypeAssociateReqBody = getAssociateTypeAssociateReqObj(
+          selectedAssociateInfo,
+          selectedTagValue,
+          'active',
+          0,
+          countPage
+        );
         dispatch({
           type: GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue: 'key',
             isReviseMode,
+            associateTypeAssociateReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
