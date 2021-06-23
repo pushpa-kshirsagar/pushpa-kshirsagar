@@ -141,6 +141,7 @@ const JobProfileTypeReviewList = (props) => {
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 actualStatus={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
+                dataValue={item.informationAllocation.jobProfileTypeGroup}
                 onClickEvent={openListPopup}
               />
             </div>

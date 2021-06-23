@@ -5,10 +5,12 @@ import {
   POPUP_CLOSE,
   SET_ASSESSEE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSESSEE_ROLE_CREATE_URL } from '../../endpoints';
+import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../../PopUpConfig';
 
 const createAssesseeRoleApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -46,6 +48,13 @@ function* workerCreateAssesseeRoleSaga(data) {
         payload: userResponse.responseObject[0].informationBasic
       });
       yield put({ type: POPUP_CLOSE });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'middlePaneListPopupOptions',
+          value: ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+        }
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

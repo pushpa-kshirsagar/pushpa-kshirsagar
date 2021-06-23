@@ -5,10 +5,12 @@ import {
   POPUP_CLOSE,
   SET_ASSOCIATE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSOCIATE_ROLE_CREATE_URL } from '../../endpoints';
+import { ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION } from '../../PopUpConfig';
 
 const createAssociateRoleApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -44,6 +46,13 @@ function* workerCreateAssociateRoleSaga(data) {
       yield put({
         type: SET_ASSOCIATE_ROLE_REDUCER_STATE,
         payload: userResponse.responseObject[0].informationBasic
+      });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'middlePaneListPopupOptions',
+          value: ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+        }
       });
       yield put({ type: POPUP_CLOSE });
     } else {

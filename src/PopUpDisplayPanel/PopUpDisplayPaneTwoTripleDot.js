@@ -88,7 +88,9 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(keyVal);
     console.log(dataVal);
-    if (dataVal === 'create') {
+    if (dataVal === 'information') {
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'create') {
       if (
         (middlePaneHeader === 'assessees' ||
           middlePaneHeader === 'administrators' ||
@@ -96,9 +98,17 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
         middlePaneHeaderBadgeOne === 'distinct'
       ) {
         keyVal = 'assesseeCreate';
-      }
-      if (middlePaneHeaderBadgeOne !== 'distinct') {
+      } else if (middlePaneHeaderBadgeOne !== 'distinct') {
         keyVal = 'createKey';
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
       }
     } else if (keyVal === 'distinctAPICall' && middlePaneHeader === 'assessees') {
       getAssesseeDistinctApiCall(

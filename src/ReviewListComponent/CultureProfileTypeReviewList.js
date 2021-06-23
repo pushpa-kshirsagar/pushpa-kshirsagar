@@ -143,7 +143,7 @@ const CultureProfileTypeReviewList = (props) => {
                 actualStatus={item.cultureProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-                // dataValue={item.informationAllocation.cultureProfileType}
+                dataValue={item.informationAllocation.cultureProfileTypeGroup}
               />
             </div>
           );
