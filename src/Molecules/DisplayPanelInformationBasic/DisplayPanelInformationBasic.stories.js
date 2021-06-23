@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicCard from './BasicCard';
+import BasicCard from './DisplayPanelInformationBasic';
 
 export default {
   title: 'Design System/Molecules/Display Panel',

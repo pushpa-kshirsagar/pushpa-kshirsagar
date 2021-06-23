@@ -54,7 +54,8 @@ import {
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
   GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA,
   GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
-  GET_JOB_NODE_JOB_REVIEW_LIST_SAGA
+  GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
+  GET_NODE_ASSOCIATE_REVIEW_LIST
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -88,7 +89,10 @@ import {
   getJobProfileGroupJobProfileReqObj,
   getJobProfileTypeJobProfileReqObj,
   getNodeItemsReqObj,
-  getNodeAssignmentsReqObj
+  getNodeAssignmentsReqObj,
+  getNodeAssociatesReqObj,
+  getNodeCultureProfileReqObj,
+  getNodeJobProfileReqObj
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -367,6 +371,17 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         if (popupHeaderOne === 'associate') {
           isShowAllModule = true;
         }
+        if (popupHeaderOne === 'associates') {
+          associateNodeReqBody = getNodeAssociatesReqObj(
+            selectedAssociateInfo,
+            selectedTagValue,
+            'active',
+            0,
+            countPage
+          );
+          isShowAllModule = false;
+          sagaCall = GET_NODE_ASSOCIATE_REVIEW_LIST;
+        }
         if (popupHeaderOne === 'items') {
           associateNodeReqBody = getNodeItemsReqObj(
             selectedAssociateInfo,
@@ -379,7 +394,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           sagaCall = GET_NODE_ITEMS_REVIEW_LIST_SAGA;
         }
         if (popupHeaderOne === 'culture profiles') {
-          associateNodeReqBody = getNodeItemsReqObj(
+          associateNodeReqBody = getNodeCultureProfileReqObj(
             selectedAssociateInfo,
             selectedTagValue,
             'active',
@@ -390,7 +405,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           sagaCall = GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA;
         }
         if (popupHeaderOne === 'job profiles') {
-          associateNodeReqBody = getNodeItemsReqObj(
+          associateNodeReqBody = getNodeJobProfileReqObj(
             selectedAssociateInfo,
             selectedTagValue,
             'active',

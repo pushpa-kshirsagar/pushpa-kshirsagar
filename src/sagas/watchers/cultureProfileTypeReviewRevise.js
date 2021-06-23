@@ -69,7 +69,7 @@ function* workerReviewCultureProfileTypeInfoSaga(data) {
             objectName: 'cultureProfileType',
             stateName: 'cultureProfileTypeGroup',
             value:
-              userResponse?.responseObject?.informationAllocation?.cultureProfileTypeGroup?.id || ''
+              userResponse?.responseObject[0]?.informationAllocation?.cultureProfileTypeGroup?.id || ''
           }
         });
       }

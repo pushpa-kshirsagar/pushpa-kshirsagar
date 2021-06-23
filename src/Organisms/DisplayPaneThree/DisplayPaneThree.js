@@ -4,7 +4,7 @@ import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
-import BasicCard from '../../Molecules/BasicCard/BasicCard';
+import BasicCard from '../../Molecules/DisplayPanelInformationBasic/DisplayPanelInformationBasic';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import Sections from '../../Molecules/Section/Section';
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,7 +50,14 @@ import {
   CULTURE_TYPE_REVISE_INFO_SAGA,
   JOB_TYPE_REVISE_INFO_SAGA,
   JOB_GROUP_REVISE_INFO_SAGA,
-  JOB_PROFILE_INFO_REVISE_SAGA
+  JOB_PROFILE_INFO_REVISE_SAGA,
+  GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
+  GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA,
+  GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA,
+  GET_NODE_ASSOCIATE_REVIEW_LIST,
+  GET_NODE_ITEMS_REVIEW_LIST_SAGA,
+  GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
+  GET_JOB_NODE_JOB_REVIEW_LIST_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -113,7 +120,13 @@ import {
   getItemGroupItemReqObj,
   getItemTypeItemReqObj,
   getJobProfileTypeJobProfileReqObj,
-  getJobProfileGroupJobProfileReqObj
+  getJobProfileGroupJobProfileReqObj,
+  getNodeAssessmentsReqObj,
+  getNodeAssignmentsReqObj,
+  getNodeAssociatesReqObj,
+  getNodeItemsReqObj,
+  getNodeCultureProfileReqObj,
+  getNodeJobProfileReqObj
 } from '../../Actions/GenericActions';
 import DisplayPaneThreeSectionOneCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneCultureProfileDistinct';
 import DisplayPaneThreeSectionTwoCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileDistinct';
@@ -740,6 +753,7 @@ export const DisplayPaneThree = () => {
         headerOne === 'administrators' ||
         headerOne === 'managers' ||
         headerOne === 'assessees' ||
+        headerOne === 'associates' ||
         headerOne === 'items' ||
         headerOne === 'culture profiles' ||
         headerOne === 'job profiles' ||
@@ -748,14 +762,9 @@ export const DisplayPaneThree = () => {
     ) {
       console.log('IN NODE REVISE');
       const { associateId, id } = responseObject;
-      const reqBody = {
+      let reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
-        associateNodeAssessee: {
-          associateNodeAssesseeAllocate: associateNodeAssessee?.associateNodeAssesseeAllocate || [],
-          associateNodeAssesseeUnallocate:
-            associateNodeAssessee?.associateNodeAssesseeUnallocate || []
-        },
         associateNode: {
           id,
           informationBasic: nodeInformation.informationBasic,
@@ -768,17 +777,163 @@ export const DisplayPaneThree = () => {
           }
         }
       };
+      let associateNodeReqBody = null;
+      let isShowAllModule = false;
+      let sagaCall = '';
+      if (headerOne === 'assessees') {
+        reqBody = {
+          ...reqBody,
+          associateNodeAssessee: {
+            associateNodeAssesseeAllocate:
+              associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+            associateNodeAssesseeUnallocate:
+              associateNodeAssessee?.associateNodeAssesseeUnallocate || []
+          }
+        };
+        associateNodeReqBody = getAssesseeNodeAssesseeReqObj(
+          selectedAssociateInfo,
+          id,
+          'active',
+          0,
+          countPage
+        );
+        isShowAllModule = false;
+        sagaCall = GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST;
+      }
+      if (headerOne === 'assessments') {
+        reqBody = {
+          ...reqBody,
+          associateNodeAssessment: {
+            associateNodeAssessmentAllocate:
+              associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+            associateNodeAssessmentUnallocate:
+              associateNodeAssessee?.associateNodeAssesseeUnallocate || []
+          }
+        };
+        associateNodeReqBody = getNodeAssessmentsReqObj(
+          selectedAssociateInfo,
+          id,
+          'active',
+          0,
+          countPage
+        );
+        isShowAllModule = false;
+        sagaCall = GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA;
+      }
+      if (headerOne === 'assignments') {
+        reqBody = {
+          ...reqBody,
+          associateNodeAssignment: {
+            associateNodeAssignmentAllocate:
+              associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+            associateNodeAssignmentUnallocate:
+              associateNodeAssessee?.associateNodeAssesseeUnallocate || []
+          }
+        };
+        associateNodeReqBody = getNodeAssignmentsReqObj(
+          selectedAssociateInfo,
+          id,
+          'active',
+          0,
+          countPage
+        );
+        isShowAllModule = false;
+        sagaCall = GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA;
+      }
+      if (headerOne === 'associate') {
+        isShowAllModule = true;
+      }
+      if (headerOne === 'associates') {
+        reqBody = {
+          ...reqBody,
+          associateNodeAssociate: {
+            associateNodeAssociateAllocate:
+              associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+            associateNodeAssociateUnallocate:
+              associateNodeAssessee?.associateNodeAssesseeUnallocate || []
+          }
+        };
+        associateNodeReqBody = getNodeAssociatesReqObj(
+          selectedAssociateInfo,
+          id,
+          'active',
+          0,
+          countPage
+        );
+        isShowAllModule = false;
+        sagaCall = GET_NODE_ASSOCIATE_REVIEW_LIST;
+      }
+      if (headerOne === 'culture profiles') {
+        reqBody = {
+          ...reqBody,
+          associateNodeCultureProfile: {
+            associateNodeCultureProfileAllocate:
+              associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+            associateNodeCultureProfileUnallocate:
+              associateNodeAssessee?.associateNodeAssesseeUnallocate || []
+          }
+        };
+        associateNodeReqBody = getNodeCultureProfileReqObj(
+          selectedAssociateInfo,
+          id,
+          'active',
+          0,
+          countPage
+        );
+        isShowAllModule = false;
+        sagaCall = GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA;
+      }
+      if (headerOne === 'job profiles') {
+        reqBody = {
+          ...reqBody,
+          associateNodeJobProfile: {
+            associateNodeJobProfileAllocate:
+              associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+            associateNodeJobProfileUnallocate:
+              associateNodeAssessee?.associateNodeAssesseeUnallocate || []
+          }
+        };
+        associateNodeReqBody = getNodeJobProfileReqObj(
+          selectedAssociateInfo,
+          id,
+          'active',
+          0,
+          countPage
+        );
+        isShowAllModule = false;
+        sagaCall = GET_JOB_NODE_JOB_REVIEW_LIST_SAGA;
+      }
+      if (headerOne === 'items') {
+        reqBody = {
+          ...reqBody,
+          associateNodeItem: {
+            associateNodeItemAllocate: associateNodeAssessee?.associateNodeAssesseeAllocate || [],
+            associateNodeItemUnallocate:
+              associateNodeAssessee?.associateNodeAssesseeUnallocate || []
+          }
+        };
+        associateNodeReqBody = getNodeItemsReqObj(
+          selectedAssociateInfo,
+          id,
+          'active',
+          0,
+          countPage
+        );
+        isShowAllModule = false;
+        sagaCall = GET_NODE_ITEMS_REVIEW_LIST_SAGA;
+      }
+
       dispatch({ type: LOADER_START });
-      let associateNodeAssesseeReqBody = getAssesseeNodeAssesseeReqObj(
-        selectedAssociateInfo,
-        id,
-        'active',
-        0,
-        countPage
-      );
       dispatch({
         type: ASSESSEE_NODE_INFO_REVISE_SAGA,
-        payload: { selectedModule: headerOne, reqBody, associateNodeAssesseeReqBody, createMode }
+        payload: {
+          selectedModule: headerOne,
+          getReviewListSaga: sagaCall,
+          isShowAllModule,
+          reqBody,
+          associateNodeReqBody,
+          createMode
+        }
       });
     } else if (
       headerOneBadgeOne === 'role' &&
@@ -3241,6 +3396,7 @@ export const DisplayPaneThree = () => {
       {isReviewRevise &&
         responseObject &&
         (headerOne === 'associate' ||
+          headerOne === 'associates' ||
           headerOne === 'assessees' ||
           headerOne === 'administrators' ||
           headerOne === 'managers' ||
