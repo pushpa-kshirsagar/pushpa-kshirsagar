@@ -10,7 +10,7 @@ import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import FlagIcon from '@material-ui/icons/Flag';
 import Label from '../../Atoms/Labels/Label';
 import IconsButton from '../IconButton/IconButton';
-import './BasicCard.css';
+import './DisplayPanelInformationBasic.css';
 
 const BasicCard = (props) => {
   const {

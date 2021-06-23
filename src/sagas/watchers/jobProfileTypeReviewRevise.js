@@ -69,7 +69,7 @@ function* workerReviewJobProfileTypeInfoSaga(data) {
             objectName: 'jobProfileType',
             stateName: 'jobProfileTypeGroup',
             value:
-              userResponse?.responseObject?.informationAllocation?.jobProfileTypeGroup?.id || ''
+              userResponse?.responseObject[0]?.informationAllocation?.jobProfileTypeGroup?.id || ''
           }
         });
       }

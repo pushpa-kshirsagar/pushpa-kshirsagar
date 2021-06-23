@@ -4,7 +4,7 @@ import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
-import BasicCard from '../../Molecules/BasicCard/BasicCard';
+import BasicCard from '../../Molecules/DisplayPanelInformationBasic/DisplayPanelInformationBasic';
 import HeaderCard from '../../Molecules/Headers/HeaderCard';
 import Sections from '../../Molecules/Section/Section';
 import { useDispatch, useSelector } from 'react-redux';
