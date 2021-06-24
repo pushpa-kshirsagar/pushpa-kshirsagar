@@ -14,7 +14,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+  GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { getCultureProfileGroupApiCall } from '../Actions/ActionCultureProfile';
 const CultureProfileGroupReviewList = (props) => {
@@ -106,7 +106,7 @@ const CultureProfileGroupReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : optArr,
+        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -116,7 +116,7 @@ const CultureProfileGroupReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : optArr
+        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
