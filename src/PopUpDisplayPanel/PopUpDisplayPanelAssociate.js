@@ -461,6 +461,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           }
         });
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       }
     }
     if (clickValue === 'items') {
