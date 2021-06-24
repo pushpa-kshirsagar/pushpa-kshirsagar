@@ -4,7 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-
+import '../Accordian/Accordian.css';
+{
+  /*}
 const OneRowHeader = (props) => {
   const { row1 = [] } = props;
   console.log("ONE", props);
@@ -96,10 +98,10 @@ const TwoRowHeader = (props) => {
     </div>
   );
 };
-
+*/
+}
 const ThreeRowHeader = (props) => {
   const { title } = props;
-  console.log("Three", props);
   return (
     <div className={'containerPadding'}>
       <Paper className={'assesseesContainerGray'} style={{ padding: '0px' }}>
@@ -115,7 +117,7 @@ const ThreeRowHeader = (props) => {
 
 const FourRowHeader = (props) => {
   const { title, row1 = [] } = props;
-  console.log("Four", props);
+  console.log('Four', props);
   return (
     <div className={'containerPadding'}>
       <Paper className={'assesseesContainerGreen'} style={{ padding: '0px' }}>
@@ -190,6 +192,7 @@ class CultureWeightageTableTemplate extends Component {
     super();
     this.state = {
       radioarray: [],
+      radioarraylist: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
       selectedval: {}
     };
     this.selecttarr = {};
@@ -220,12 +223,14 @@ class CultureWeightageTableTemplate extends Component {
     console.log(this.props.culturedimensionselected);
   }
   render() {
-    console.log("IN CULTURE +++++>",this.props);
+    console.log('IN CULTURE +++++>', this.props);
     var list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+    var listData = ['1', '2', '3'];
     // const {} = this.props;
     return (
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'userCardHeaderContainer'}>
-        {this.props.headerrowcount === 1 ? (
+        <ThreeRowHeader title={this.props.title} row1={this.props.row1} />
+        {/* {this.props.headerrowcount === 1 ? (
           <OneRowHeader title={this.props.title} row1={this.props.row1} />
         ) : this.props.headerrowcount === 2 ? (
           <TwoRowHeader title={this.props.title} row1={this.props.row1} />
@@ -233,9 +238,9 @@ class CultureWeightageTableTemplate extends Component {
           <ThreeRowHeader title={this.props.title} row1={this.props.row1} />
         ) : this.props.headerrowcount === 4 ? (
           <FourRowHeader title={this.props.title} row1={this.props.row1} />
-        ) : null}
+        ) : null} */}
 
-        {this.props.culturedimensionselected.map((value, index) => {
+        {/*this.props.culturedimensionselected.map((value, index) => {
           return value.options != null
             ? value.options.map((valuesoptions) => {
                 return value.isNegative === valuesoptions.isNegative ? (
@@ -369,6 +374,67 @@ class CultureWeightageTableTemplate extends Component {
                 ) : null;
               })
             : null;
+        }) */}
+
+        {listData.map((value) => {
+          return (
+            <div className={'containerPadding'}>
+              <Paper className={['contentMaindivGray'].join()}>
+                <div className={'siftComponentInnerDiv'}>
+                  <ClickAwayListener>
+                    <Tooltip
+                      id="tooltip-icon"
+                      open={'13' == '3' ? true : false}
+                      title={
+                        <Typography
+                          color="inherit"
+                          className={'tooltipWidth'}
+                          style={{ fontSize: '15px', textAlign: 'center' }}
+                        >
+                          <div style={{ display: 'block' }}>{'description'}</div>
+                        </Typography>
+                      }
+                      style={{ fontSize: '12px' }}
+                    >
+                      <div
+                        className={['siftheaderdivgray contentHeaderGray'].join()}
+                        style={{
+                          borderLeft: '1px solid #BFBFBF',
+                          borderRight: '1px solid #BFBFBF'
+                        }}
+                      >
+                        <span>{'name'}</span>
+                      </div>
+                    </Tooltip>
+                  </ClickAwayListener>
+
+                  <div className={['sifSecondtHeaderDivGray contentDatadivTopborderGray'].join()}>
+                    {'revise' == 'revise'
+                      ? this.state.radioarray.map((lis, index) => {
+                          return (
+                            <span
+                              className={['contentDatadivGray'].join()}
+                              onClick={null}
+                              style={{ cursor: 'pointer' }}
+                            >
+                              <span style={{ color: 'rgba(0, 0, 0, 0.87)' }}>
+                                {index + 1 == 1
+                                  ? 'low'
+                                  : index + 1 == 2
+                                  ? 'medium'
+                                  : index + 1 == 3
+                                  ? 'high'
+                                  : null}
+                              </span>
+                            </span>
+                          );
+                        })
+                      : null}
+                  </div>
+                </div>
+              </Paper>
+            </div>
+          );
         })}
       </Grid>
     );
