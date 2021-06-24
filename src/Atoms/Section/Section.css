@@ -3,7 +3,7 @@
 }
 .middleTabLabel {
   display: flex;
-  padding: 2.5px;
+  /* padding: 2.5px; */
 }
 .middleTabItem {
   flex: 1;

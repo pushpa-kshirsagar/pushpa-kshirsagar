@@ -175,3 +175,80 @@
 .keyCardBottomMargin {
   margin-bottom: 5px !important;
 }
+.assesseesContainerGray {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  background-color: #f2f2f2;
+  height: 50px;
+  border-radius: 0;
+}
+.cultureContainerGreen {
+  display: flex;
+  padding: 5px;
+  align-items: 'center';
+  background-color: solid Green;
+  height: 100px;
+  border-radius: 0;
+}
+.siftComponentInnerDiv {
+  cursor: default !important;
+  width: 100%;
+  height: 50px;
+}
+.contentMaindivGray {
+  padding: 0px;
+  background-color: white;
+  border-bottom: 1px solid #bfbfbf;
+  border-top: 1px solid #bfbfbf;
+  box-shadow: unset;
+}
+.userCardHeaderContainer {
+  flex: 11;
+}
+.tooltipwidth {
+  width: 300px !important;
+}
+.siftHeaderDiv {
+  height: 30px;
+  width: 100%;
+  font-size: 1.6 rem;
+  display: flex;
+  text-align: center;
+  color: white;
+  align-items: 'center';
+}
+.siftHeaderDiv span {
+  width: 100%;
+}
+.sifSecondtHeaderDiv span {
+  width: 100%;
+}
+.sifSecondtHeaderDivGray span {
+  width: 100%;
+}
+
+.sifSecondtHeaderDiv {
+  height: 20px;
+  width: 100%;
+  font-size: 12px;
+  color: white;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+.sifSecondtHeaderDivGray {
+  height: 20px;
+  width: 100%;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+.sifSecondHeaderInner {
+  height: 20px;
+  align-items: center;
+  border-left: 0.5px solid #bfbfbf;
+  border-right: 0.5px solid #bfbfbf;
+}
