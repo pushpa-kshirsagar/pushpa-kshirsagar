@@ -2102,6 +2102,8 @@ export const makeAssignmentTypeObj = (selectedAssociateInfo, filterKey, countPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assignmentTypeName, informationBasic.assignmentTypeDescription',
