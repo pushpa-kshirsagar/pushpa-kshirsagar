@@ -60,12 +60,12 @@
 }
 .flagiconmargin {
   margin-top: -5px;
-  font-size:1.7rem !important
+  font-size: 1.7rem !important;
 }
 .assesseeListCheckBoxSelctedOut svg {
   height: 1.6rem;
 }
-.reviewListBorder{
+.reviewListBorder {
   height: 50px !important;
 }
 .cardButtonwithouttextTransform {
@@ -82,15 +82,14 @@
   border-radius: 2px;
   position: relative;
   border-bottom: 1px solid #bfbfbf;
-
 }
 .cardButtonwithouttextTransform :hover {
   background-color: #f2f2f2;
 }
-.componentinnerdiv-iguru{
-  padding:0px 5px !important;
-  display:flex !important;
-  height:50px;
+.componentinnerdiv-iguru {
+  padding: 0px 5px !important;
+  display: flex !important;
+  height: 50px;
 }
 .measureBox {
   display: flex;

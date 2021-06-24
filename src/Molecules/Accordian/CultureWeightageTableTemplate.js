@@ -7,6 +7,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const OneRowHeader = (props) => {
   const { row1 = [] } = props;
+  console.log("ONE", props);
   return (
     <div className={'containerPadding'}>
       <Paper className={'assesseesContainerGreen'} style={{ padding: '0px' }}>
@@ -52,6 +53,7 @@ const OneRowHeader = (props) => {
 
 const TwoRowHeader = (props) => {
   const { row1 = [], title } = props;
+  console.log("Two", props);
   return (
     <div className={'containerPadding'}>
       <Paper className={'assesseesContainerGreen'} style={{ padding: '0px' }}>
@@ -97,6 +99,7 @@ const TwoRowHeader = (props) => {
 
 const ThreeRowHeader = (props) => {
   const { title } = props;
+  console.log("Three", props);
   return (
     <div className={'containerPadding'}>
       <Paper className={'assesseesContainerGray'} style={{ padding: '0px' }}>
@@ -112,6 +115,7 @@ const ThreeRowHeader = (props) => {
 
 const FourRowHeader = (props) => {
   const { title, row1 = [] } = props;
+  console.log("Four", props);
   return (
     <div className={'containerPadding'}>
       <Paper className={'assesseesContainerGreen'} style={{ padding: '0px' }}>
@@ -216,7 +220,7 @@ class CultureWeightageTableTemplate extends Component {
     console.log(this.props.culturedimensionselected);
   }
   render() {
-    console.log(this.props.data);
+    console.log("IN CULTURE +++++>",this.props);
     var list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
     // const {} = this.props;
     return (
@@ -240,15 +244,15 @@ class CultureWeightageTableTemplate extends Component {
                       <div className={'siftComponentInnerDiv'}>
                         <ClickAwayListener
                           onClickAway={(event) => {
-                            event.stopPropagation();
-                            this.props.cls.setTemplateValue('culturetooltipstate', '');
+                            // event.stopPropagation();
+                            // this.props.cls.setTemplateValue('culturetooltipstate', '');
                           }}
                         >
                           <Tooltip
                             id="tooltip-icon"
                             onClick={(event) => {
-                              event.stopPropagation();
-                              this.props.cls.setTemplateValue('culturetooltipstate', '');
+                              // event.stopPropagation();
+                              // this.props.cls.setTemplateValue('culturetooltipstate', '');
                             }}
                             open={
                               this.props.culturetooltipstate === value.competencyId ? true : false
@@ -273,10 +277,10 @@ class CultureWeightageTableTemplate extends Component {
                             >
                               <span
                                 onClick={() => {
-                                  this.props.cls.setTemplateValue(
-                                    'culturetooltipstate',
-                                    value.competencyId
-                                  );
+                                  // this.props.cls.setTemplateValue(
+                                  //   'culturetooltipstate',
+                                  //   value.competencyId
+                                  // );
                                 }}
                               >
                                 {valuesoptions.name}
