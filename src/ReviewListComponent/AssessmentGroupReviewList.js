@@ -17,7 +17,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentGroupObj } from '../Actions/GenericActions';
 import {
   ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+  GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 const AssessmentGroupReviewList = (props) => {
   const dispatch = useDispatch();
@@ -113,7 +113,7 @@ const AssessmentGroupReviewList = (props) => {
         popupOpenType: 'primary',
         popupContentArrValue:
           cardValue === 'Card'
-            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
@@ -125,7 +125,7 @@ const AssessmentGroupReviewList = (props) => {
         stateName: 'middlePaneListPopupOptions',
         value:
           cardValue === 'Card'
-            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });

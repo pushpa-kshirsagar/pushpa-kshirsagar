@@ -231,7 +231,7 @@ export const getAssessmentGroupApiCall = (
   countPage,
   dispatch,
   targetValue,
-  fromAssociateSelf = false
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeAssessmentGroupObj(
     selectedAssociateInfo,
@@ -252,8 +252,8 @@ export const getAssessmentGroupApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: fromAssociateSelf ? 'distinct' : secondaryOptionCheckValue,
-      BadgeThree: fromAssociateSelf ? secondaryOptionCheckValue : '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
@@ -263,7 +263,8 @@ export const getAssessmentTypeApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeAssessmentTypeObj(
     selectedAssociateInfo,
@@ -284,8 +285,8 @@ export const getAssessmentTypeApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });

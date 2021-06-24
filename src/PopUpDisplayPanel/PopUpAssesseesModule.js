@@ -12,36 +12,16 @@ import {
   SET_ASSESSEE_PREVIOUS_POPUP,
   SET_ASSESSEE_SECONDARY_OPTION_VALUE,
   SET_PREVIOUS_SECTION_POPUP,
-  ASSESSEE_REVIEW_DISTINCT_SAGA,
-  LOADER_START,
-  SET_REQUEST_OBJECT,
-  SET_PAGE_COUNT,
-  FILTERMODE,
-  SET_MOBILE_PANE_STATE,
-  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   CLEAR_DISPLAY_PANE_THREE,
-  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
-  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_MIDDLEPANE_STATE,
-  SET_POPUP_SINGLE_STATE,
-  SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
-  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
-  INTERNAL_NODE_LIST_SAGA
+  SET_POPUP_SINGLE_STATE
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import {
-  makeAssesseeGroupObj,
-  makeAssesseeRoleCreateObj,
-  makeAssesseeRoleObj,
-  makeInternalNodeObj
-} from '../Actions/GenericActions';
 import {
   assesseeCreateApiCalls,
   getAssesseeDistinctApiCall,
   getAssesseeGroupDistinctApiCall,
-  getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleDistinctApiCall,
   getAssesseeTypeApiCall
 } from '../Actions/AssesseeModuleAction';

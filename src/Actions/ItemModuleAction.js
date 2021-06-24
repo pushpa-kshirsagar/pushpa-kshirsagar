@@ -125,7 +125,8 @@ export const getItemGroupDistinctApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  cardValue='noCard'
 ) => {
   let requestObj = makeItemGroupObj(selectedAssociateInfo, secondaryOptionCheckValue, 0, countPage);
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -142,8 +143,8 @@ export const getItemGroupDistinctApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
@@ -154,7 +155,8 @@ export const getItemsTypeApiCall = (
   countPage,
   dispatch,
   targetValue,
-  middlePaneHeader = 'items'
+  middlePaneHeader = 'items',
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeItemsTypeObj(selectedAssociateInfo, secondaryOptionCheckValue, 0, countPage);
 
@@ -173,8 +175,8 @@ export const getItemsTypeApiCall = (
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });

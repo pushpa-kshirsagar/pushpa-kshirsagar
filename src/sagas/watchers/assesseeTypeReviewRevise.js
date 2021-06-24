@@ -9,6 +9,7 @@ import {
   SET_ASSESSEE_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_POPUP_VALUE,
   SET_TYPE_GROUP_ALLOCATION,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
@@ -79,6 +80,10 @@ function* workerReviewAssesseeTypeInfoSaga(data) {
       }
     } else {
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
 
     console.log('loading end');

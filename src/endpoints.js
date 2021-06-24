@@ -1,6 +1,7 @@
 export const SIGN_IN_URL = '/sign-in';
 export const MANAGER_ROLE_ID = ['609a207faeeea029d5b00c25', '6083d82a5c42683849ce14d0'];
 export const ADMIN_ROLE_ID = ['60952c7b1752c36c6936532b', '60952ca11752c36c69365331'];
+// export const ADMIN_ROLE_ID = ['Administrator (primary)', 'Administrator (secondary)'];
 export const ADMINISTRATOR_SECONDARY_ID = '60952cd11752c36c69365337';
 export const DEFAULT_ROLE_ID = '60952cd11752c36c69365337';
 // export const GET_USER_URL = 'https://run.mocky.io/v3/a8daa4c8-e6e5-4062-8d88-05f3ffdc324d';
@@ -286,6 +287,10 @@ export const CULTURE_TYPE_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-type/review-list';
 export const CULTURE_TYPE_GROUP_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-type-group/review-list';
+export const CULTURE_TYPE_SHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/culture-profile-type/share';
+export const CULTURE_TYPE_UNSHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/culture-profile-type/unshare';
 //job
 export const JOB_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/review-list';
 export const JOB_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/create';
@@ -303,3 +308,5 @@ export const JOB_TYPE_GROUP_URL =
   ANALYTICS + '/dev/insight-guru/api/job-profile-type-group/review-list';
 export const JOB_NODE_JOB_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/associate-node/job-profile/review-list';
+export const JOB_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/job-profile-type/share';
+export const JOB_TYPE_UNSHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/job-profile-type/unshare';

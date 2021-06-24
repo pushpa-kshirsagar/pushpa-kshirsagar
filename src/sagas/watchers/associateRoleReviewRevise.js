@@ -3,13 +3,16 @@ import {
   ASSOCIATE_ROLE_REVISE_INFO_SAGA,
   GET_ASSOCIATEROLE_ASSOCIATE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_ROLE_REVIEW_INFO_SAGA,
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
   LOADER_STOP,
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
   SET_ASSOCIATE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_ROLE_URL, ASSOCIATE_ROLE_INFO_REVISE_URL } from '../../endpoints';
+import Store from '../../store';
 
 const assesseeRoleReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -119,6 +122,22 @@ function* workerReviseAssociateRoleInfoSaga(data) {
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0],
           createMode
+        }
+      });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: 'associates',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
         }
       });
     } else {

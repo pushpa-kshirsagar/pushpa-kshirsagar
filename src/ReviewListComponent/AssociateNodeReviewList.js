@@ -14,7 +14,6 @@ import {
   ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import SortableTree from 'react-sortable-tree';
@@ -117,7 +116,7 @@ const AssociateNodeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : optArr,
+        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: nodeId
       }
     });
@@ -125,7 +124,7 @@ const AssociateNodeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: cardValue === 'Card' ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION : optArr
+        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

@@ -8,9 +8,12 @@ import {
   GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_TYPE_GROUP_ALLOCATION
+  SET_TYPE_GROUP_ALLOCATION,
+  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_TYPE_URL, ASSESSMENT_REVISE_TYPE_URL } from '../../endpoints';
+import Store from '../../store';
 
 const assessmentTypeReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -135,6 +138,22 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
         payload: []
+      });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: 'assessments',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
+        }
       });
     } else {
       console.log('loading end');

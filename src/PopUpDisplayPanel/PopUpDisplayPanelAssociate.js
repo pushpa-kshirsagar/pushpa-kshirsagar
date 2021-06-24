@@ -725,6 +725,10 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'assessees' &&
       popupHeaderOneBadgeOne === 'roles'
     ) {
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'Card' }
+      });
       let requestObj = makeAssesseeRoleObj(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
@@ -754,6 +758,10 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'associates' &&
       popupHeaderOneBadgeOne === 'roles'
     ) {
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'Card' }
+      });
       let requestObj = makeAssociateRoleObj(
         selectedAssociateInfo,
         secondaryOptionCheckValue,
@@ -803,7 +811,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          'Card'
         );
       }
       if (popupHeaderOne === 'associates') {
@@ -812,7 +821,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          'Card'
         );
       }
       if (popupHeaderOne === 'assessments') {
@@ -822,7 +832,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           countPage,
           dispatch,
           'groups',
-          true
+          'Card'
         );
       }
       if (popupHeaderOne === 'assignments') {
@@ -854,7 +864,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          'Card'
         );
       }
       if (popupHeaderOne === 'culture profiles') {
@@ -863,7 +874,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          'Card'
         );
       }
       if (popupHeaderOne === 'job profiles') {
@@ -872,7 +884,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'groups'
+          'groups',
+          'Card'
         );
       }
     }
@@ -926,13 +939,18 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: { stateName: 'cardValue', value: 'Card' }
+      });
       if (popupHeaderOne === 'assessments') {
         getAssessmentTypeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'types'
+          'types',
+          'Card'
         );
       }
       if (popupHeaderOne === 'assignments') {
@@ -941,7 +959,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'types'
+          'types',
+          'Card'
         );
       }
       if (popupHeaderOne === 'assessees') {
@@ -950,7 +969,9 @@ const PopUpDisplayPanelAssociate = (props) => {
           secondaryOptionCheckValue,
           countPage,
           dispatch,
-          'types'
+          'types',
+          'Card',
+          popupHeaderOne
         );
       }
       if (popupHeaderOne === 'associates') {
@@ -960,7 +981,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           countPage,
           dispatch,
           'types',
-          popupHeaderOne
+          popupHeaderOne,
+          'Card'
         );
       }
       if (popupHeaderOne === 'items') {
@@ -970,7 +992,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           countPage,
           dispatch,
           'types',
-          popupHeaderOne
+          popupHeaderOne,
+          'Card'
         );
       }
       if (popupHeaderOne === 'culture profiles') {
@@ -980,6 +1003,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           countPage,
           dispatch,
           'types',
+          'Card',
           popupHeaderOne
         );
       }
@@ -990,7 +1014,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           countPage,
           dispatch,
           'types',
-          popupHeaderOne
+          popupHeaderOne,
+          'Card'
         );
       }
     }
@@ -1005,6 +1030,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         countPage,
         dispatch,
         'types',
+        'Card',
         popupHeaderOne
       );
     }
@@ -1129,11 +1155,11 @@ const PopUpDisplayPanelAssociate = (props) => {
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
         typeOfMiddlePaneList: '',
-        scanCount: null,
+        scanCount: '',
         showMiddlePaneState: false
       }
     });
-   
+
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const BackHandlerEvent = (e) => {

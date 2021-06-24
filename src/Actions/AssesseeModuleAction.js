@@ -918,7 +918,8 @@ export const getAssesseeRoleDistinctApiCall = (
   secondaryOptionCheckValue,
   countPage,
   targetValue,
-  dispatch
+  dispatch,
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeAssesseeRoleObj(
     selectedAssociateInfo,
@@ -940,8 +941,8 @@ export const getAssesseeRoleDistinctApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
@@ -952,7 +953,8 @@ export const getAssesseeGroupDistinctApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeAssesseeGroupObj(
     selectedAssociateInfo,
@@ -975,8 +977,8 @@ export const getAssesseeGroupDistinctApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
@@ -1224,7 +1226,8 @@ export const getAdminManagerRoleApiCall = (
   secondaryOptionCheckValue,
   countPage,
   popupHeaderOne,
-  dispatch
+  dispatch,
+  cardValue='noCard'
 ) => {
   dispatch({ type: LOADER_START });
   let roleRequestObj =
@@ -1244,8 +1247,8 @@ export const getAdminManagerRoleApiCall = (
       request: roleRequestObj,
       middlePaneHeader: popupHeaderOne,
       BadgeOne: 'roles',
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });
@@ -1301,6 +1304,7 @@ export const getAssesseeTypeApiCall = (
   countPage,
   dispatch,
   targetValue,
+  cardValue = 'noCard',
   middlePaneHeader = 'assessees'
 ) => {
   let requestObj = makeAssesseeTypeObj(
@@ -1325,8 +1329,8 @@ export const getAssesseeTypeApiCall = (
       middlePaneHeader: middlePaneHeader,
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
     }
   });

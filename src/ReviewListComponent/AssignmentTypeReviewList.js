@@ -18,7 +18,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
 import {
   ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+  GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 const AssignmentTypeReviewList = (props) => {
   const dispatch = useDispatch();
@@ -119,7 +119,7 @@ const AssignmentTypeReviewList = (props) => {
         popupOpenType: 'primary',
         popupContentArrValue:
           cardValue === 'Card'
-            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
@@ -132,7 +132,7 @@ const AssignmentTypeReviewList = (props) => {
         stateName: 'middlePaneListPopupOptions',
         value:
           cardValue === 'Card'
-            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });

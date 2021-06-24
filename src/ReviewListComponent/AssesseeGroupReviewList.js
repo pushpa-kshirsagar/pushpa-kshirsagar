@@ -17,7 +17,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssesseeGroupObj } from '../Actions/GenericActions';
 import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+  GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssesseeGroupReviewList = (props) => {
@@ -116,7 +116,7 @@ const AssesseeGroupReviewList = (props) => {
         popupOpenType: 'primary',
         popupContentArrValue:
           cardValue === 'Card'
-            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag')
       }
@@ -127,13 +127,12 @@ const AssesseeGroupReviewList = (props) => {
         stateName: 'middlePaneListPopupOptions',
         value:
           cardValue === 'Card'
-            ? ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+            ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-console.log('cardValue',cardValue);
   return (
     <div>
       {reviewListDistinctData &&
