@@ -124,8 +124,8 @@ const PopUpSignOnAssociate = () => {
     };
     console.log('ONCLICK YES', requestObect);
     console.log('loading start');
-    // dispatch({ type: LOADER_START });
-    // dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
+    dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
   };
   const handleNextPopupValue = () => {
     // alert(isPopUpValue);

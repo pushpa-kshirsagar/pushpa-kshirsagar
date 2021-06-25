@@ -38,6 +38,14 @@ export const jobProfileCreatePopup = (
   secondaryOptionCheckValue,
   dispatch
 ) => {
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'responseStatus', value: '' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'responseObject', value: '' }
+  });
   dispatch({ type: CLEAR_JOB_REDUCER_STATE });
   dispatch({ type: LOADER_START });
   let requestObj = makeJobProfileGroupObj(selectedAssociateInfo, 'active', 0, -1);

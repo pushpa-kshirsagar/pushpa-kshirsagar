@@ -5,19 +5,27 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Label from '../Atoms/Label/Label';
 import PropTypes from 'prop-types';
 import '../Molecules/PopUp/PopUp.css';
+import { SET_NEXT_POPUP } from '../actionType';
+import { useDispatch } from 'react-redux';
 
 const PopUpMessageGeneric = (props) => {
   const {
     isActive,
+    nextPopUpValue='',
     headerPanelColour = 'genericOne',
     headerOne = 'culture profile',
     headerOneBadgeOne = 'information',
-    textOneOne = 'select',
-    textOneTwo = 'one or neither',
-    textOneThree = 'culture dimensions',
-    textOneFour = 'from the following twelve lists'
+    textOneOne = 'textOneOne',
+    textOneTwo = 'textOneTwo',
+    textOneThree = 'textOneThree',
+    textOneFour = 'textOneFour',
+    mode
   } = props;
-
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    /*according to creation mode popup sequence will change*/
+    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+  };
   return (
     <div>
       <Popup isActive={isActive}>
@@ -27,6 +35,8 @@ const PopUpMessageGeneric = (props) => {
           headerOneBadgeOne={headerOneBadgeOne}
           headerOneBadgeTwo={''}
           headerOneBadgeThree={''}
+          mode={mode}
+          onClick={handleClick}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}

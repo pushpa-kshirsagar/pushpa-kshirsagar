@@ -5,6 +5,7 @@ import {
   LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
 import { JOB_CREATE_URL } from '../../endpoints';
@@ -24,18 +25,12 @@ const createApiCall = async (requestObj) => {
 
 function* workerCreateJobProfileSaga(data) {
   try {
-    const response = yield call(createApiCall, { data: data.payload, URL: JOB_CREATE_URL });
+    // const response = yield call(createApiCall, { data: data.payload, URL: JOB_CREATE_URL });
+    const response = { responseCode: '000', responseObject: [{}] };
     if (response.responseCode === '000') {
       yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'job profile',
-          headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
-          responseObject: response.responseObject[0],
-          reviewMode: 'revise',
-          createMode: 'jobProfile'
-        }
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'responseObject', value: response.responseObject[0] }
       });
     } else {
       yield put({
@@ -43,7 +38,6 @@ function* workerCreateJobProfileSaga(data) {
         payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
-    yield put({ type: POPUP_CLOSE });
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);

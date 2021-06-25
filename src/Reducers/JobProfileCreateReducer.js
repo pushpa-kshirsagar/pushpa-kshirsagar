@@ -1,7 +1,8 @@
 import {
   SET_JOB_REDUCER_STATE,
   CLEAR_JOB_REDUCER_STATE,
-  SET_JOB_DYNAMIC_SINGLE_STATE
+  SET_JOB_DYNAMIC_SINGLE_STATE,
+  SET_JOB_DYNAMIC_ARRAY_STATE
 } from '../actionType';
 
 const initialState = {
@@ -30,6 +31,14 @@ const initialState = {
         jobProfileTypePrimary: [],
         jobProfileTypeSecondary: []
       }
+    },
+    informationFramework: {
+      jobProfileJobDomain: [],
+      jobProfileJobFunction: [],
+      jobProfileJobRole: [],
+      jobProfileJobCompetencyCore: [],
+      jobProfileJobCompetencyShortlisted: [],
+      jobProfileJobCompetencySifted: []
     }
   }
 };
@@ -57,6 +66,14 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
               [action.payload.actualStateName]: action.payload.value
             }
           }
+        }
+      };
+    case SET_JOB_DYNAMIC_ARRAY_STATE:
+      return {
+        ...istate,
+        [action.payload.objectName]: {
+          ...istate[action.payload.objectName],
+          [action.payload.stateName]: action.payload.value
         }
       };
     case CLEAR_JOB_REDUCER_STATE:

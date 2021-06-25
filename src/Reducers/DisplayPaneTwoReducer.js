@@ -67,7 +67,11 @@ const initialState = {
   isFlaged: false,
   flagedValue: '',
   errorResponse: '',
-  credentialOptionArr: []
+  responseObject: '',
+  credentialOptionArr: [],
+  jobProfileDomainReviewList: [],
+  jobProfileFunctionReviewList: [],
+  jobProfileRoleReviewList: []
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {
@@ -177,7 +181,7 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
       return {
         ...istate,
         reviewListReqObj: action.payload,
-        reviewListDistinctData: [],
+        reviewListDistinctData: []
       };
     case SET_RELATED_REQUEST_OBJECT:
       return {

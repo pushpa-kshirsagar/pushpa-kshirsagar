@@ -4,6 +4,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import { Clear, KeyboardTab } from '@material-ui/icons';
+import NextIcon from '@material-ui/icons/ArrowForward';
 import Check from '@material-ui/icons/Check';
 import Previous from '@material-ui/icons/ArrowBack';
 import './PopUp.css';
@@ -32,7 +33,7 @@ const PopupHeader = (props) => {
     mode = 'core',
     isNotRevised = false,
     onClosePopUpEvent = null,
-    setexchageMode=null
+    setexchageMode = null
   } = props;
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -102,7 +103,9 @@ const PopupHeader = (props) => {
                     className={['popupClose', 'previousToLast'].join(' ')}
                     onClick={onClick}
                   />
-                ) : mode === 'error' || mode === 'cancel' ? null : (
+                ) : mode === 'error' || mode === 'cancel' ? null : mode === 'next' ? (
+                  <NextIcon className={'popupClose'} onClick={onClick} />
+                ) : (
                   <Previous className={'popupClose'} onClick={onClick} />
                 )}
                 {/* {headerPanelColour === 'genericOne' ? (

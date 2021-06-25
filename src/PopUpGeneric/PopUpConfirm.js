@@ -16,6 +16,7 @@ const PopUpConfirm = (props) => {
     headerOneBadgeOne,
     headerOneBadgeTwo,
     onClickYes = null,
+    onClickNoFun = null,
     mode = 'confirm'
   } = props;
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const PopUpConfirm = (props) => {
     if (mode === 'cancel') {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: prevPopUpValue } });
     } else {
+      onClickNoFun();
       dispatch({ type: CLEAR_ASSESSEE_INFO });
       dispatch({ type: POPUP_CLOSE });
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
@@ -9,10 +9,21 @@ import {
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_JOB_REDUCER_STATE,
   SET_JOB_DYNAMIC_SINGLE_STATE,
+  SET_JOB_DYNAMIC_ARRAY_STATE,
   LOADER_START,
-  CREATE_JOB_SAGA
+  CREATE_JOB_SAGA,
+  SET_DISPLAY_PANE_THREE_STATE,
+  SET_NEXT_POPUP,
+  GET_JOBDOMAIN_REVIEW_LIST_SAGA,
+  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
+  GET_JOBFUNCTION_REVIEW_LIST_SAGA,
+  GET_JOBROLE_REVIEW_LIST_SAGA,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
 
 const PopUpJobProfileCreate = (props) => {
   const { headerOne, reducerObeject, allocationObj } = props;
@@ -23,7 +34,13 @@ const PopUpJobProfileCreate = (props) => {
     selectedAssociateInfo,
     coreNodeReviewListData,
     coreGroupReviewListData,
-    coreTypeReviewListData
+    coreRoleReviewListData,
+    jobProfileDomainReviewList,
+    jobProfileFunctionReviewList,
+    jobProfileRoleReviewList,
+    coreTypeReviewListData,
+    selectedInformationAllorKey,
+    responseObject
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
@@ -47,6 +64,11 @@ const PopUpJobProfileCreate = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_JOB_SAGA, payload: reqBody });
   };
+  useEffect(() => {
+    if (responseObject) {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCONTINUE' } });
+    }
+  }, [responseObject]);
   const updateAllocationObj = (e, stateName, actualStateName) => {
     let tagId = e.currentTarget.getAttribute('tag');
     let tagIdArr = jobProfileInformation.informationAllocation[stateName][actualStateName];
@@ -65,6 +87,27 @@ const PopUpJobProfileCreate = (props) => {
         objectName: 'informationAllocation',
         stateName: stateName,
         actualStateName: actualStateName,
+        value: tagIdArr
+      }
+    });
+  };
+  const updateFrameworkObj = (e, objectName, stateName) => {
+    let tagId = e.currentTarget.getAttribute('tag');
+    let tagIdArr = jobProfileInformation.informationFramework[stateName];
+    if (tagIdArr.includes(tagId)) {
+      document.getElementById(tagId).style.backgroundColor = 'white';
+      tagIdArr = tagIdArr.filter(function (number) {
+        return number !== tagId;
+      });
+    } else {
+      tagIdArr.push(tagId);
+      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_JOB_DYNAMIC_ARRAY_STATE,
+      payload: {
+        objectName: objectName,
+        stateName: stateName,
         value: tagIdArr
       }
     });
@@ -90,8 +133,70 @@ const PopUpJobProfileCreate = (props) => {
         filteredCoreGroupReviewListDataSecondary.push(group);
     });
   }
-
-
+  const onClickContinueNo = () => {
+    dispatch({
+      type: SET_DISPLAY_PANE_THREE_STATE,
+      payload: {
+        headerOne: 'job profile',
+        headerOneBadgeOne: 'information',
+        headerOneBadgeTwo: selectedInformationAllorKey,
+        responseObject: responseObject,
+        reviewMode: 'revise',
+        createMode: 'jobProfile'
+      }
+    });
+  };
+  const onClickContinueYes = () => {
+    let requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+    };
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'jobProfileDomainReviewList', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'jobProfileFunctionReviewList', value: [] }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'jobProfileRoleReviewList', value: [] }
+    });
+    dispatch({
+      type: GET_JOBDOMAIN_REVIEW_LIST_SAGA,
+      payload: {
+        request: requestObj,
+        BadgeOne: '',
+        BadgeTwo: '',
+        BadgeThree: '',
+        isMiddlePaneList: false
+      }
+    });
+    dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+    dispatch({
+      type: GET_JOBFUNCTION_REVIEW_LIST_SAGA,
+      payload: {
+        request: requestObj,
+        BadgeOne: '',
+        BadgeTwo: '',
+        BadgeThree: '',
+        isMiddlePaneList: false
+      }
+    });
+    dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+    dispatch({
+      type: GET_JOBROLE_REVIEW_LIST_SAGA,
+      payload: {
+        request: requestObj,
+        BadgeOne: '',
+        BadgeTwo: '',
+        BadgeThree: '',
+        isMiddlePaneList: false
+      }
+    });
+  };
   return (
     <div>
       <PopUpTextField
@@ -318,6 +423,126 @@ const PopUpJobProfileCreate = (props) => {
         headerOneBadgeOne={'create'}
         headerOneBadgeTwo={''}
         onClickYes={onClickYes}
+      />
+      <PopUpConfirm
+        isActive={isPopUpValue === 'POPUPCONTINUE'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'continue'}
+        headerOneBadgeTwo={''}
+        onClickYes={onClickContinueYes}
+        mode={'error'}
+        onClickNoFun={onClickContinueNo}
+      />
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPDOMAINMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPJOBDOMAIN'}
+        textOneOne={'select'}
+        textOneTwo={'one or more'}
+        textOneThree={'job domains'}
+        mode={'next'}
+        textOneFour={'from the following list'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'POPUPJOBDOMAIN'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPFUNCTIONMSG'}
+        prevPopUpValue={'POPUPDOMAINMSG'}
+        inputHeader={'job domain'}
+        inputHeaderBadge={''}
+        infoMsg={'select a job domain'}
+        isRequired={true}
+        minimumSelected={1}
+        ListData={jobProfileDomainReviewList}
+        onClickEvent={(e) => {
+          updateFrameworkObj(e, 'informationFramework', 'jobProfileJobDomain');
+        }}
+        selectedList={jobProfileInformation.informationFramework.jobProfileJobDomain}
+        textOne={'jobDomainName'}
+        // setErrorMsg={setRequiredErrorMsg}
+        // errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPFUNCTIONMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPJOBFUNCTION'}
+        textOneOne={'select'}
+        textOneTwo={'one or more'}
+        textOneThree={'job functions'}
+        mode={'next'}
+        textOneFour={'from the following list'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'POPUPJOBFUNCTION'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPROLEMSG'}
+        prevPopUpValue={'POPUPFUNCTIONMSG'}
+        inputHeader={'job function'}
+        inputHeaderBadge={''}
+        infoMsg={'select a job function'}
+        isRequired={true}
+        minimumSelected={1}
+        ListData={jobProfileFunctionReviewList}
+        onClickEvent={(e) => {
+          updateFrameworkObj(e, 'informationFramework', 'jobProfileJobFunction');
+        }}
+        selectedList={jobProfileInformation.informationFramework.jobProfileJobFunction}
+        textOne={'jobFunctionName'}
+        setErrorMsg={null}
+        errorMsg={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPROLEMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPJOBROLE'}
+        textOneOne={'select'}
+        textOneTwo={'one or more'}
+        textOneThree={'job roles'}
+        mode={'next'}
+        textOneFour={'from the following list'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'POPUPJOBROLE'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPCOMPEMSG'}
+        prevPopUpValue={'POPUPROLEMSG'}
+        inputHeader={'job role'}
+        inputHeaderBadge={''}
+        infoMsg={'select a job role'}
+        isRequired={true}
+        minimumSelected={1}
+        ListData={jobProfileRoleReviewList}
+        onClickEvent={(e) => {
+          updateFrameworkObj(e, 'informationFramework', 'jobProfileJobRole');
+        }}
+        selectedList={jobProfileInformation.informationFramework.jobProfileJobRole}
+        textOne={'jobRoleName'}
+        setErrorMsg={null}
+        errorMsg={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPCOMPEMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={''}
+        textOneOne={'shortlist'}
+        textOneTwo={'eight or more'}
+        textOneThree={'job competencies'}
+        textOneFour={'from the following twelve lists'}
+        mode={'next'}
       />
     </div>
   );

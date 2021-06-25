@@ -39,20 +39,24 @@ const PopUpReviewList = (props) => {
     onClickEvent = null,
     mode,
     isRequired = false,
-    selectedList = []
+    selectedList = [],
+    minimumSelected = -1,
+    prevPopUpValue = ''
   } = props;
 
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
     if (isRequired) {
-      if (selectedList.length > 0) {
+      if (selectedList.length >= minimumSelected) {
         if (reviewMode === 'revise') {
           dispatch({ type: POPUP_CLOSE });
         } else {
           dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
         }
       } else {
-        setErrorMsg(REQUIRED_ERROR_MESSAGE);
+        (minimumSelected !== -1 &&
+          dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: prevPopUpValue } })) ||
+          setErrorMsg(REQUIRED_ERROR_MESSAGE);
       }
     } else {
       if (reviewMode === 'revise') {
@@ -102,8 +106,12 @@ const PopUpReviewList = (props) => {
           {ListData.length > 0 &&
             ListData.map((index, option) => (
               <ReviewList
-                textOne={index?.informationBasic ? index.informationBasic[textOne] : null}
-                textTwo={index?.informationBasic && index.informationBasic[textTwo]}
+                textOne={
+                  (index?.informationBasic && index.informationBasic[textOne]) || index[textOne]
+                }
+                textTwo={
+                  (index?.informationBasic && index.informationBasic[textTwo]) || index[textTwo]
+                }
                 id={index.id}
                 tag={index.id}
                 isAlertActive={false}
