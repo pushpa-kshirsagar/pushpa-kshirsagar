@@ -10,18 +10,21 @@ import {
   ASSESSEE_SIGN_ON,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
   SET_AVAILABLE_SIGNIN_LIST,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_CURRENTLY_SIGNIN_CREDENTIAL,
   SET_STATUS_POPUP_VALUE
 } from '../../actionType';
 import {
   makeAssesseeGroupObj,
   makeAssesseeRoleObj,
+  makeAssesseeTypeObj,
   makeInternalNodeObj
 } from '../../Actions/GenericActions';
 
@@ -465,6 +468,36 @@ const DisplayPaneThreeSectionOne = () => {
       });
     });
   }
+  let assesseeTypeListPrimary = [];
+  if (
+    informationAllocation?.assesseeType?.assesseeTypePrimary &&
+    informationAllocation?.assesseeType?.assesseeTypePrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assesseeType?.assesseeTypePrimary || [];
+    tempArr.forEach((ob) => {
+      assesseeTypeListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.assesseeTypeName || '',
+        textTwo: ob?.informationBasic?.assesseeTypeDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assesseeTypeListSecondary = [];
+  if (
+    informationAllocation?.assesseeType?.assesseeTypeSecondary &&
+    informationAllocation?.assesseeType?.assesseeTypeSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assesseeType?.assesseeTypeSecondary || [];
+    tempArr.forEach((ob) => {
+      assesseeTypeListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.assesseeTypeName || '',
+        textTwo: ob?.informationBasic?.assesseeTypeDescription || '',
+        status: ''
+      });
+    });
+  }
 
   const allocationList1 = [
     {
@@ -576,30 +609,11 @@ const DisplayPaneThreeSectionOne = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'type',
-              status: ''
-            }
-          ]
+          innerList: assesseeTypeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assesseeTypeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -818,6 +832,34 @@ const DisplayPaneThreeSectionOne = () => {
         dispatch({
           type: ASSESSEE_SIGN_ON,
           payload: { isPopUpValue: 'ROLELISTSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+    }
+    if (labelName === 'type') {
+      let typeRequestObj = makeAssesseeTypeObj(selectedAssociateInfo, 'all', 0, -1);
+      dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typeRequestObj });
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          request: typeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false,
+          isReviseMode: true
+        }
+      });
+      if (selectedBadgeName === 'primary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TYPELISTPOPUP', popupMode: 'ASSESSEE_CREATE' }
+        });
+      }
+      if (selectedBadgeName === 'secondary') {
+        dispatch({
+          type: ASSESSEE_SIGN_ON,
+          payload: { isPopUpValue: 'TYPELISTSECONDARYPOPUP', popupMode: 'ASSESSEE_CREATE' }
         });
       }
     }

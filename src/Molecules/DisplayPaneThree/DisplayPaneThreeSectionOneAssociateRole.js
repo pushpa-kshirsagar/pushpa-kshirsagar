@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { SET_POPUP_VALUE } from '../../actionType';
+import { getRoleGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionOneAssociateRole = () => {
   // const [listExpand, setListExpand] = useState('');
+  const dispatch = useDispatch();
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -152,6 +156,17 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
       isReviewLink: true
     }
   ];
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, 'associates');
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ROLEGROUPPOPUP', popupMode: 'associatesROLECREATE' }
+      });
+    }
+  };
 
   return (
     <div
@@ -167,9 +182,18 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseAllocation}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

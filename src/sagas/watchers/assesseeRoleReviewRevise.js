@@ -71,7 +71,7 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
           userResponse.responseObject[0].informationAllocation.assesseeRoleGroup;
         let tempList = [];
         if (assesseeRoleGroupObj) {
-          tempList.push(assesseeRole.id);
+          tempList.push(assesseeRoleGroupObj.id);
         }
         yield put({
           type: SET_ROLE_DYNAMIC_STATE,
