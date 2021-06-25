@@ -5,6 +5,7 @@ import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
 import { useSelector } from 'react-redux';
 import CultureWeightageTableTemplate from './CultureWeightageTableTemplate';
+import JobRangeTableTemplate from './jobRangeTableTemplate';
 
 const AccordianListCard = (props) => {
   const { accordianObject, mode = '', onClickRevise, onClickReview = null } = props;
@@ -202,17 +203,38 @@ const AccordianListCard = (props) => {
         </div>
         {isListSelectExpanded && (
           <div>
-            {selectedBadge.labelTextOneOneBadge === 'weightage' ? (
+            {selectedBadge.labelTextOneOneBadge === 'weightage' ||
+            selectedBadge.labelTextOneOneBadge === 'range' ? (
               <div className={'containerPadding'}>
-                <CultureWeightageTableTemplate
-                  headerrowcount={3}
-                  title="weightage"
-                  radiocount={3}
-                  row1={['low', 'medium', 'high']}
-                  culturedimensionselected={cultureProfilerItems}
-                  culturetooltipstate=""
-                  cultureprofilemode="review"
-                />
+                {selectedBadge.labelTextOneOneBadge === 'weightage' && (
+                  <CultureWeightageTableTemplate
+                    headerrowcount={3}
+                    title="weightage"
+                    radiocount={3}
+                    row1={['low', 'medium', 'high']}
+                    culturedimensionselected={cultureProfilerItems}
+                    culturetooltipstate=""
+                    cultureprofilemode="review"
+                  />
+                )}
+                {selectedBadge.labelTextOneOneBadge === 'range' && (
+                  <JobRangeTableTemplate
+                    headerrowcount={4}
+                    title="percentile"
+                    radiocount={10}
+                    row1={['50 - 59', '60 - 69', '70 - 79', '80 - 89', '90 - 99']}
+                    rangeheadcolumnhead2={{
+                      '50 - 59': 'average',
+                      '60 - 69': 'average +',
+                      '70 - 79': 'effective',
+                      '80 - 89': 'strong',
+                      '90 - 99': 'exceptional'
+                    }}
+                    culturedimensionselected={cultureProfilerItems}
+                    culturetooltipstate=""
+                    cultureprofilemode="review"
+                  />
+                )}
               </div>
             ) : (
               <>

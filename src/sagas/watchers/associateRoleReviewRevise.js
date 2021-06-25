@@ -9,6 +9,7 @@ import {
   SET_ASSOCIATE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_ROLE_DYNAMIC_STATE,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_ROLE_URL, ASSOCIATE_ROLE_INFO_REVISE_URL } from '../../endpoints';
@@ -65,6 +66,21 @@ function* workerReviewAssociateRoleInfoSaga(data) {
         yield put({
           type: SET_ASSOCIATE_ROLE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        let associateRoleGroupObj =
+          userResponse.responseObject[0].informationAllocation.associateRoleGroup;
+        let tempList = [];
+        if (associateRoleGroupObj) {
+          tempList.push(associateRoleGroupObj.id);
+        }
+        yield put({
+          type: SET_ROLE_DYNAMIC_STATE,
+          payload: {
+            objectName: 'associateRole',
+            stateName: 'informationAllocation',
+            actualStateName: 'associateRoleGroup',
+            value: tempList
+          }
         });
       }
       console.log('loading end');

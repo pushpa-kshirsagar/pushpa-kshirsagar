@@ -974,6 +974,9 @@ export const DisplayPaneThree = () => {
     } else if (headerOneBadgeOne === 'role' && headerOne === 'associates') {
       console.log('ASS0CIATE ROLE REVISE');
       const { associateId, id } = responseObject;
+      let allocationObj = {
+        associateRoleGroup: associateRole.informationAllocation.associateRoleGroup[0]
+      };
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
@@ -984,7 +987,8 @@ export const DisplayPaneThree = () => {
         },
         associateRole: {
           id,
-          informationBasic: associateRole.informationBasic
+          informationBasic: associateRole.informationBasic,
+          informationAllocation: allocationObj
         }
       };
       dispatch({ type: LOADER_START });

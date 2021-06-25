@@ -118,6 +118,30 @@ function* workerReviewInfoAssesseeSaga(data) {
         }
         if (
           informationAllocation &&
+          informationAllocation?.assesseeType?.assesseeTypePrimary &&
+          informationAllocation?.assesseeType?.assesseeTypePrimary.length > 0
+        ) {
+          let tempArr = informationAllocation.assesseeType.assesseeTypePrimary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeType',
+              actualStateName: 'assesseeTypePrimary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeType',
+              actualStateName: 'assesseeTypePrimary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
           informationAllocation?.assesseeNode?.assesseeNodePrimary &&
           informationAllocation?.assesseeNode?.assesseeNodePrimary.length > 0
         ) {
@@ -212,6 +236,30 @@ function* workerReviewInfoAssesseeSaga(data) {
             payload: {
               stateName: 'assesseeRole',
               actualStateName: 'assesseeRoleSecondary',
+              value: []
+            }
+          });
+        }
+        if (
+          informationAllocation &&
+          informationAllocation?.assesseeType?.assesseeTypeSecondary &&
+          informationAllocation?.assesseeType?.assesseeTypeSecondary.length > 0
+        ) {
+          let tempArr = informationAllocation.assesseeType.assesseeTypeSecondary.map((ob) => ob.id);
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeType',
+              actualStateName: 'assesseeTypeSecondary',
+              value: tempArr
+            }
+          });
+        } else {
+          yield put({
+            type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'assesseeType',
+              actualStateName: 'assesseeTypeSecondary',
               value: []
             }
           });

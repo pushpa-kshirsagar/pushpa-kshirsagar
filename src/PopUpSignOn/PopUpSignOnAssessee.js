@@ -276,6 +276,29 @@ const PopUpSignOnAssessee = (props) => {
       type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
       payload: {
         stateName: 'assesseeType',
+        actualStateName: 'assesseeTypeSecondary',
+        value: typeArr
+      }
+    });
+  };
+  const updateTypeIdPrimaryObject = (e) => {
+    let typeid = e.currentTarget.getAttribute('tag');
+    let typeArr = assesseeInfo.informationAllocation.assesseeType.assesseeTypePrimary;
+    console.log(typeArr.includes(typeid));
+    setRoleSelectedError('');
+    if (typeArr.includes(typeid)) {
+      document.getElementById(typeid).style.backgroundColor = 'white';
+      typeArr = typeArr.filter(function (number) {
+        return number !== typeid;
+      });
+    } else {
+      typeArr.push(typeid);
+      document.getElementById(typeid).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_ASSESSEE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assesseeType',
         actualStateName: 'assesseeTypePrimary',
         value: typeArr
       }
@@ -623,6 +646,22 @@ const PopUpSignOnAssessee = (props) => {
         nextPopUpValue={'EMAILPOPUP'}
         inputHeader={'type'}
         inputHeaderBadge={'primary'}
+        infoMsg={'select a type'}
+        ListData={coreTypeReviewListData}
+        textOne={'assesseeTypeName'}
+        textTwo={'assesseeTypeDescription'}
+        onClickEvent={updateTypeIdPrimaryObject}
+        selectedList={assesseeInfo?.informationAllocation?.assesseeType.assesseeTypePrimary}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'TYPELISTSECONDARYPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'EMAILPOPUP'}
+        inputHeader={'type'}
+        inputHeaderBadge={'secondary'}
         infoMsg={'select a type'}
         ListData={coreTypeReviewListData}
         textOne={'assesseeTypeName'}
