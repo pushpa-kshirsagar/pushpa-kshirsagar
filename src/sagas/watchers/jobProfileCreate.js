@@ -25,8 +25,8 @@ const createApiCall = async (requestObj) => {
 
 function* workerCreateJobProfileSaga(data) {
   try {
-    // const response = yield call(createApiCall, { data: data.payload, URL: JOB_CREATE_URL });
-    const response = { responseCode: '000', responseObject: [{}] };
+    const response = yield call(createApiCall, { data: data.payload, URL: JOB_CREATE_URL });
+    // const response = { responseCode: '000', responseObject: [{}] };
     if (response.responseCode === '000') {
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
