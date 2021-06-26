@@ -1132,6 +1132,8 @@ export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, nu
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.itemTypeName, informationBasic.itemTypeDescription',
@@ -1827,7 +1829,8 @@ export const makeAssessmentGroupObj = (selectedAssociateInfo, filterKey, countPa
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assessmentGroupName, informationBasic.assessmentGroupDescription',
+      columnName:
+        'informationBasic.assessmentGroupName, informationBasic.assessmentGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1944,7 +1947,8 @@ export const makeAssignmentGroupObj = (selectedAssociateInfo, filterKey, countPa
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assignmentGroupName, informationBasic.assignmentGroupDescription',
+      columnName:
+        'informationBasic.assignmentGroupName, informationBasic.assignmentGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1993,7 +1997,8 @@ export const makeAssignmentGroupScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assignmentGroupName, informationBasic.assignmentGroupDescription',
+      columnName:
+        'informationBasic.assignmentGroupName, informationBasic.assignmentGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -2059,6 +2064,8 @@ export const makeAssessmentTypeObj = (selectedAssociateInfo, filterKey, countPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assessmentTypeName, informationBasic.assessmentTypeDescription',
@@ -4696,7 +4703,12 @@ export const makeCultureProfileScanObj = (
   };
   return requestObj;
 };
-export const makeCultureProfileGroupObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+export const makeCultureProfileGroupObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -4719,7 +4731,8 @@ export const makeCultureProfileGroupObj = (selectedAssociateInfo, filterKey, cou
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.cultureProfileGroupName, informationBasic.cultureProfileGroupDescription',
+      columnName:
+        'informationBasic.cultureProfileGroupName, informationBasic.cultureProfileGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -4768,7 +4781,8 @@ export const makeCultureProfileGroupScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.cultureProfileGroupName, informationBasic.cultureProfileGroupDescription',
+      columnName:
+        'informationBasic.cultureProfileGroupName, informationBasic.cultureProfileGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -4813,7 +4827,12 @@ export const makeCultureProfileGroupScanObj = (
   };
   return requestObj;
 };
-export const makeCultureProfileTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
+export const makeCultureProfileTypeObj = (
+  selectedAssociateInfo,
+  filterKey,
+  countPage,
+  numberPage
+) => {
   let searchObj = {
     condition: 'eq',
     value: {
@@ -4834,9 +4853,12 @@ export const makeCultureProfileTypeObj = (selectedAssociateInfo, filterKey, coun
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.cultureProfileTypeName, informationBasic.cultureProfileTypeDescription',
+      columnName:
+        'informationBasic.cultureProfileTypeName, informationBasic.cultureProfileTypeDescription',
       order: 'asc'
     },
     associateAscendantPrimary:
@@ -4887,7 +4909,8 @@ export const makeCultureProfileTypeScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.cultureProfileTypeName, informationBasic.cultureProfileTypeDescription',
+      columnName:
+        'informationBasic.cultureProfileTypeName, informationBasic.cultureProfileTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -5072,7 +5095,8 @@ export const makeJobProfileGroupObj = (selectedAssociateInfo, filterKey, countPa
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.jobProfileGroupName, informationBasic.jobProfileGroupDescription',
+      columnName:
+        'informationBasic.jobProfileGroupName, informationBasic.jobProfileGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -5121,7 +5145,8 @@ export const makeJobProfileGroupScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.jobProfileGroupName, informationBasic.jobProfileGroupDescription',
+      columnName:
+        'informationBasic.jobProfileGroupName, informationBasic.jobProfileGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -5187,6 +5212,8 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      associateAscendantPrimary:
+      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.jobProfileTypeName, informationBasic.jobProfileTypeDescription',
@@ -5660,7 +5687,8 @@ export const getJobGroupJobScanReqObj = (
           },
           {
             dataType: 'string',
-            conditionColumn: 'informationAllocation.cultureProfileGroup.cultureProfileGroupSecondary',
+            conditionColumn:
+              'informationAllocation.cultureProfileGroup.cultureProfileGroupSecondary',
             conditionValue: {
               condition: 'eq',
               value: {
@@ -6077,7 +6105,8 @@ export const getCultureGroupCultureReqObj = (
           },
           {
             dataType: 'string',
-            conditionColumn: 'informationAllocation.cultureProfileGroup.cultureProfileGroupSecondary',
+            conditionColumn:
+              'informationAllocation.cultureProfileGroup.cultureProfileGroupSecondary',
             conditionValue: {
               condition: 'eq',
               value: {
@@ -6149,7 +6178,8 @@ export const getCultureGroupCultureScanReqObj = (
           },
           {
             dataType: 'string',
-            conditionColumn: 'informationAllocation.cultureProfileGroup.cultureProfileGroupSecondary',
+            conditionColumn:
+              'informationAllocation.cultureProfileGroup.cultureProfileGroupSecondary',
             conditionValue: {
               condition: 'eq',
               value: {
