@@ -65,7 +65,10 @@ function* workerReviewListAssessmentSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -109,7 +112,10 @@ function* workerAssessmentGroupAssessment(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -149,7 +155,10 @@ function* workerAssessmentTypeAssessment(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -190,7 +199,10 @@ function* workerAssessmentNodeAssessment(data) {
     yield put({ type: CLEAR_ASSESSMENT_INFO });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -232,7 +244,10 @@ function* workerReviewListAssessmentAllocateSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

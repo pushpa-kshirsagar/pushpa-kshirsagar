@@ -68,6 +68,7 @@ const initialState = {
   selectedTagValue: '',
   selectedTagStatus: '',
   selectedTagGroupId: '',
+  selectedTagShared: '',
   currentPopUpOption: [],
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
@@ -172,6 +173,7 @@ const PopUpReducer = (istate = initialState, action) => {
         selectedTagValue: action.payload.selectedTagValue,
         selectedTagStatus: action.payload.selectedTagStatus,
         selectedTagGroupId: action.payload.selectedTagGroupId,
+        selectedTagShared: action.payload.selectedTagShared,
         currentPopUpOption: action.payload.currentPopUpOption,
         isFlaged: action.payload.isFlaged
       };
@@ -341,10 +343,13 @@ const PopUpReducer = (istate = initialState, action) => {
         } else {
           if (
             (action.payload.badgeValue === 'suspend' ||
-              action.payload.badgeValue === 'terminate') &&
+              action.payload.badgeValue === 'terminate' ||
+              action.payload.badgeValue === 'archive' ||
+              action.payload.badgeValue === 'delete') &&
             (istate.selectedTagStatus === 'CONFIRMED' ||
               istate.selectedTagStatus === 'UNCONFIRMED' ||
-              // istate.selectedTagStatus === 'SHARED' ||
+              istate.selectedTagStatus === 'SHARED' ||
+              istate.selectedTagStatus === 'UNSHARED' ||
               istate.selectedTagStatus === 'ACTIVE')
           ) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
@@ -362,10 +367,10 @@ const PopUpReducer = (istate = initialState, action) => {
           ) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
-          if (action.payload.badgeValue === 'share' && istate.selectedTagStatus === 'SHARED') {
+          if (action.payload.badgeValue === 'share' && istate.selectedTagShared === 'SHARED') {
             arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           }
-          if (action.payload.badgeValue === 'share' && istate.selectedTagStatus === 'UNSHARED') {
+          if (action.payload.badgeValue === 'share' && istate.selectedTagShared === 'UNSHARED') {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
           if (action.payload.keyValue === 'flag' && istate.isFlaged) {

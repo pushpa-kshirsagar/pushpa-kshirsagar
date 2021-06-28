@@ -70,7 +70,10 @@ function* workerReviewListAssesseeSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -112,7 +115,10 @@ function* workerReviewListAssesseSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -158,7 +164,10 @@ function* workerReviewListAssesseeGroupAssesseeSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -211,7 +220,10 @@ function* workerReviewListRoleAssesseeSaga(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -256,7 +268,10 @@ function* workerReviewListTypeAssesseeSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -307,7 +322,10 @@ function* workerReviewListNodeAssesseeSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

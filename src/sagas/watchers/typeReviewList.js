@@ -90,7 +90,10 @@ function* workerReviewAssesseeTypeListSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -134,7 +137,10 @@ function* workerReviewAssociateTypeListSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -178,7 +184,10 @@ function* workerReviewItemTypeListSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -223,7 +232,10 @@ function* workerReviewCultureProfileTypeListSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -268,7 +280,10 @@ function* workerReviewJobProfileTypeListSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -312,7 +327,10 @@ function* workerReviewAssessmentTypeListSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -356,7 +374,10 @@ function* workerReviewAssignmentTypeListSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -400,7 +421,10 @@ function* workerReviewTypeGroupListSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

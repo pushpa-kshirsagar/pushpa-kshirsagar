@@ -10,7 +10,8 @@ import {
   JOB_TYPE_JOB_REVIEWLIST_SAGA,
   SET_TYPE_GROUP_ALLOCATION,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA
+  GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { JOB_REVIEW_TYPE_URL, JOB_REVISE_TYPE_URL } from '../../endpoints';
 import Store from '../../store';
@@ -81,7 +82,10 @@ function* workerReviewJobProfileTypeInfoSaga(data) {
     console.log('loading end');
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -160,7 +164,10 @@ function* workerReviseJobProfileTypeInfoSaga(data) {
     // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

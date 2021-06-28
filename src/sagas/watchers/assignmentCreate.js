@@ -6,7 +6,8 @@ import {
   POPUP_CLOSE,
   SET_ASSIGNMENT_BASIC_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSIGNMENT_CREATE_URL } from '../../endpoints';
 
@@ -50,7 +51,10 @@ function* workerCreateAssignmentSaga(data) {
     yield put({ type: POPUP_CLOSE });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

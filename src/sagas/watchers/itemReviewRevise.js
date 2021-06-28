@@ -5,7 +5,8 @@ import {
   GET_ITEM_INFO_SAGA,
   ITEM_INFO_REVISE_SAGA,
   SET_TYPE_REDUCER_STATE,
-  SET_ITEM_DYNAMIC_SINGLE_STATE
+  SET_ITEM_DYNAMIC_SINGLE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ITEM_REVISE_URL, ITEM_REVIEW_URL } from '../../endpoints';
 
@@ -209,7 +210,10 @@ function* workerReviewInfoItemSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -248,7 +252,10 @@ function* workerReviseInfoItemSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

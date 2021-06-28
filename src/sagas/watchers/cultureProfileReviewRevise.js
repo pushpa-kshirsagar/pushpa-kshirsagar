@@ -5,7 +5,8 @@ import {
   SET_CULTURE_REDUCER_STATE,
   GET_CULTURE_PROFILE_INFO_SAGA,
   CULTURE_PROFILE_INFO_REVISE_SAGA,
-  SET_CULTURE_DYNAMIC_SINGLE_STATE
+  SET_CULTURE_DYNAMIC_SINGLE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { CULTURE_PROFILE_REVIEW_INFO_URL, CULTURE_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 
@@ -215,7 +216,10 @@ function* workerReviewInfoCultureProfileSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -254,7 +258,10 @@ function* workerReviseInfoCultureProfileSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

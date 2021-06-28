@@ -10,7 +10,8 @@ import {
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_TYPE_GROUP_ALLOCATION,
   GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_TYPE_URL, ASSESSMENT_REVISE_TYPE_URL } from '../../endpoints';
 import Store from '../../store';
@@ -83,7 +84,10 @@ function* workerReviewAssessmentTypeInfoSaga(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -161,7 +165,10 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

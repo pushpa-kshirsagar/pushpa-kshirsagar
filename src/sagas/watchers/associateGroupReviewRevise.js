@@ -7,7 +7,8 @@ import {
   SET_ASSOCIATE_GROUP_REDUCER_STATE,
   GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSOCIATE_GROUP_INFO_REVISE_URL, ASSOCIATE_REVIEW_GROUP_URL } from '../../endpoints';
 
@@ -69,7 +70,10 @@ function* workerReviewAssociateGroupInfoSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -131,7 +135,10 @@ function* workerReviseAssociateGroupInfoSaga(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

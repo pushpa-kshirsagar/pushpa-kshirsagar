@@ -126,7 +126,8 @@ const AssesseeRoleDistinctReviewList = (props) => {
             : popupContentArrValue,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
+        selectedTagShared: e.currentTarget.getAttribute('data-shared')
       }
     });
     dispatch({
@@ -159,7 +160,8 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 // status={item.informationEngagement.assesseeRoleStatus}
-                actualStatus={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
+                shared={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
+                actualStatus={item.informationEngagement.assesseeRoleStatus}
                 textOne={assesseeRole(item.informationBasic.assesseeRoleName)}
                 textTwo={item.informationBasic.assesseeRoleDescription}
                 isTooltipActive={false}

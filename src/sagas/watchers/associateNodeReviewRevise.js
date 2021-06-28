@@ -10,6 +10,7 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_NODE_DYNAMIC_SINGLE_STATE,
   SET_NODE_REDUCER_STATE,
+  SET_POPUP_VALUE,
   SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import Store from '../../store';
@@ -100,7 +101,10 @@ function* workerReviewAssociateNodeInfoSaga(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -192,7 +196,10 @@ function* workerReviseAssociateNodeInfoSaga(data) {
     // console.log('loading end');
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

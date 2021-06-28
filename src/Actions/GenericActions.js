@@ -117,7 +117,7 @@ export const makeAssesseeReviewListRequestObject = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.assesseeNameFirst, informationBasic.assesseeNameOther,  informationBasic.assesseeNameLast, informationBasic.assesseeAlias',
+        'informationBasic.assesseeNameFirst,informationBasic.assesseeNameOther,informationBasic.assesseeNameLast,informationBasic.assesseeAlias',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -162,7 +162,7 @@ export const makeAdministratorsReviewListRequestObject = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.assesseeNameFirst, informationBasic.assesseeNameOther,  informationBasic.assesseeNameLast, informationBasic.assesseeAlias',
+        'informationBasic.assesseeNameFirst,informationBasic.assesseeNameOther,informationBasic.assesseeNameLast,informationBasic.assesseeAlias',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -223,7 +223,7 @@ export const makeManagersReviewListRequestObject = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.assesseeNameFirst, informationBasic.assesseeNameOther,  informationBasic.assesseeNameLast, informationBasic.assesseeAlias',
+        'informationBasic.assesseeNameFirst,informationBasic.assesseeNameOther,informationBasic.assesseeNameLast,informationBasic.assesseeAlias',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -269,7 +269,7 @@ export const makeAssesseeScanRequestObject = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.assesseeNameFirst, informationBasic.assesseeNameOther,  informationBasic.assesseeNameLast, informationBasic.assesseeAlias',
+        'informationBasic.assesseeNameFirst,informationBasic.assesseeNameOther,informationBasic.assesseeNameLast,informationBasic.assesseeAlias',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -454,7 +454,7 @@ export const makeAssociateScanRequestObject = (
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.associateName, informationBasic.associateDescription',
+      columnName: 'informationBasic.associateName,informationBasic.associateDescription',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -521,7 +521,7 @@ export const makeAssesseeRoleCreateObj = (
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeRoleName, informationBasic.assesseeRoleDescription',
+      columnName: 'informationBasic.assesseeRoleName,informationBasic.assesseeRoleDescription',
       order: 'asc'
     },
     search: [
@@ -571,7 +571,7 @@ export const makeManagerRoleCreateObj = (
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeRoleName, informationBasic.assesseeRoleDescription',
+      columnName: 'informationBasic.assesseeRoleName,informationBasic.assesseeRoleDescription',
       order: 'asc'
     },
     searchCondition: 'and',
@@ -622,7 +622,7 @@ export const makeAdministratorRoleCreateObj = (
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeRoleName, informationBasic.assesseeRoleDescription',
+      columnName: 'informationBasic.assesseeRoleName,informationBasic.assesseeRoleDescription',
       order: 'asc'
     },
     searchCondition: 'and',
@@ -678,7 +678,7 @@ export const makeAssesseeRoleObj = (selectedAssociateInfo, filterKey, numberPage
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeRoleName, informationBasic.assesseeRoleDescription',
+      columnName: 'informationBasic.assesseeRoleName,informationBasic.assesseeRoleDescription',
       order: 'asc'
     },
     search: [
@@ -721,7 +721,7 @@ export const makeAssociateRoleObj = (selectedAssociateInfo, filterKey, numberPag
       localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.associateRoleName, informationBasic.associateRoleDescription',
+      columnName: 'informationBasic.associateRoleName,informationBasic.associateRoleDescription',
       order: 'asc'
     },
     numberPage: 0,
@@ -771,7 +771,7 @@ export const makeAssociateRoleScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.associateRoleName, informationBasic.associateRoleDescription',
+      columnName: 'informationBasic.associateRoleName,informationBasic.associateRoleDescription',
       order: 'asc'
     },
     numberPage: 0,
@@ -846,7 +846,7 @@ export const makeAssesseeRoleScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeRoleName, informationBasic.assesseeRoleDescription',
+      columnName: 'informationBasic.assesseeRoleName,informationBasic.assesseeRoleDescription',
       order: 'asc'
     },
     numberPage: 0,
@@ -922,7 +922,7 @@ export const makeAdminmManagerRoleScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeRoleName, informationBasic.assesseeRoleDescription',
+      columnName: 'informationBasic.assesseeRoleName,informationBasic.assesseeRoleDescription',
       order: 'asc'
     },
     numberPage: 0,
@@ -1001,7 +1001,7 @@ export const makeAssesseeGroupObj = (selectedAssociateInfo, filterKey, countPage
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeGroupName, informationBasic.assesseeGroupDescription',
+      columnName: 'informationBasic.assesseeGroupName,informationBasic.assesseeGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1044,7 +1044,7 @@ export const makeAssesseeTypeObj = (selectedAssociateInfo, filterKey, countPage,
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeTypeName, informationBasic.assesseeTypeDescription',
+      columnName: 'informationBasic.assesseeTypeName,informationBasic.assesseeTypeDescription',
       order: 'asc'
     },
     associateAscendantPrimary:
@@ -1089,7 +1089,7 @@ export const makeAssociateTypeObj = (selectedAssociateInfo, filterKey, countPage
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.associateTypeName, informationBasic.associateTypeDescription',
+      columnName: 'informationBasic.associateTypeName,informationBasic.associateTypeDescription',
       order: 'asc'
     },
     associateAscendantPrimary:
@@ -1136,7 +1136,7 @@ export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, nu
       localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.itemTypeName, informationBasic.itemTypeDescription',
+      columnName: 'informationBasic.itemTypeName,informationBasic.itemTypeDescription',
       order: 'asc'
     },
     associateAscendantPrimary:
@@ -1187,7 +1187,7 @@ export const makeAssesseeTypeScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeTypeName, informationBasic.assesseeTypeDescription',
+      columnName: 'informationBasic.assesseeTypeName,informationBasic.assesseeTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1261,7 +1261,7 @@ export const makeAssociateTypeScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.associateTypeName, informationBasic.associateTypeDescription',
+      columnName: 'informationBasic.associateTypeName,informationBasic.associateTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1335,7 +1335,7 @@ export const makeAssesseeGroupScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assesseeGroupName, informationBasic.assesseeGroupDescription',
+      columnName: 'informationBasic.assesseeGroupName,informationBasic.assesseeGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1403,7 +1403,7 @@ export const makeAssociateGroupObj = (selectedAssociateInfo, filterKey, countPag
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.associateGroupName, informationBasic.associateGroupDescription',
+      columnName: 'informationBasic.associateGroupName,informationBasic.associateGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1446,7 +1446,7 @@ export const makeItemObj = (selectedAssociateInfo, filterKey, countPage, numberP
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.itemName, informationBasic.itemDescription',
+      columnName: 'informationBasic.itemName,informationBasic.itemDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1495,7 +1495,7 @@ export const makeItemScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.itemName, informationBasic.itemDescription',
+      columnName: 'informationBasic.itemName,informationBasic.itemDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1563,7 +1563,7 @@ export const makeItemGroupObj = (selectedAssociateInfo, filterKey, countPage, nu
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.itemGroupName, informationBasic.itemGroupDescription',
+      columnName: 'informationBasic.itemGroupName,informationBasic.itemGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1612,7 +1612,7 @@ export const makeItemGroupScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.itemGroupName, informationBasic.itemGroupDescription',
+      columnName: 'informationBasic.itemGroupName,informationBasic.itemGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1686,7 +1686,7 @@ export const makeItemTypeScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.itemTypeName, informationBasic.itemTypeDescription',
+      columnName: 'informationBasic.itemTypeName,informationBasic.itemTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1761,7 +1761,7 @@ export const makeAssociateGroupScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.associateGroupName, informationBasic.associateGroupDescription',
+      columnName: 'informationBasic.associateGroupName,informationBasic.associateGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1830,7 +1830,7 @@ export const makeAssessmentGroupObj = (selectedAssociateInfo, filterKey, countPa
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.assessmentGroupName, informationBasic.assessmentGroupDescription',
+        'informationBasic.assessmentGroupName,informationBasic.assessmentGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1879,7 +1879,7 @@ export const makeAssessmentGroupScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assessmentGroupName, assessmentGroupDescription',
+      columnName: 'informationBasic.assessmentGroupName,assessmentGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1948,7 +1948,7 @@ export const makeAssignmentGroupObj = (selectedAssociateInfo, filterKey, countPa
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.assignmentGroupName, informationBasic.assignmentGroupDescription',
+        'informationBasic.assignmentGroupName,informationBasic.assignmentGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -1998,7 +1998,7 @@ export const makeAssignmentGroupScanRequestObject = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.assignmentGroupName, informationBasic.assignmentGroupDescription',
+        'informationBasic.assignmentGroupName,informationBasic.assignmentGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -2068,7 +2068,7 @@ export const makeAssessmentTypeObj = (selectedAssociateInfo, filterKey, countPag
       localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assessmentTypeName, informationBasic.assessmentTypeDescription',
+      columnName: 'informationBasic.assessmentTypeName,informationBasic.assessmentTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -2113,7 +2113,7 @@ export const makeAssignmentTypeObj = (selectedAssociateInfo, filterKey, countPag
       localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assignmentTypeName, informationBasic.assignmentTypeDescription',
+      columnName: 'informationBasic.assignmentTypeName,informationBasic.assignmentTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -2161,7 +2161,7 @@ export const makeAssignmentReviewListRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assignmentName, informationBasic.assignmentDescription',
+      columnName: 'informationBasic.assignmentName,informationBasic.assignmentDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -2209,7 +2209,7 @@ export const makeAssessmentReviewListRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assessmentName, informationBasic.assessmentDescription',
+      columnName: 'informationBasic.assessmentName,informationBasic.assessmentDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -2258,7 +2258,7 @@ export const makeAssignmentTypeScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assignmentTypeName, informationBasic.assignmentTypeDescription',
+      columnName: 'informationBasic.assignmentTypeName,informationBasic.assignmentTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -2332,7 +2332,7 @@ export const makeAssessmentTypeScanRequestObject = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assignmentTypeName, informationBasic.assignmentTypeDescription',
+      columnName: 'informationBasic.assignmentTypeName,informationBasic.assignmentTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -2408,7 +2408,7 @@ export const makeAssignmentScanRequestObject = (
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assignmentName, informationBasic.assignmentDescription',
+      columnName: 'informationBasic.assignmentName,informationBasic.assignmentDescription',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -2484,7 +2484,7 @@ export const makeAssessmentScanRequestObject = (
     numberPage: numberPage,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.assessmentName, informationBasic.assessmentDescription',
+      columnName: 'informationBasic.assessmentName,informationBasic.assessmentDescription',
       order: 'asc'
     },
     searchCondition: 'AND',
@@ -4609,7 +4609,7 @@ export const makeCultureProfileObj = (selectedAssociateInfo, filterKey, countPag
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.cultureProfileName, informationBasic.cultureProfileDescription',
+      columnName: 'informationBasic.cultureProfileName,informationBasic.cultureProfileDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -4658,7 +4658,7 @@ export const makeCultureProfileScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.cultureProfileName, informationBasic.cultureProfileDescription',
+      columnName: 'informationBasic.cultureProfileName,informationBasic.cultureProfileDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -4732,7 +4732,7 @@ export const makeCultureProfileGroupObj = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.cultureProfileGroupName, informationBasic.cultureProfileGroupDescription',
+        'informationBasic.cultureProfileGroupName,informationBasic.cultureProfileGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -4782,7 +4782,7 @@ export const makeCultureProfileGroupScanObj = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.cultureProfileGroupName, informationBasic.cultureProfileGroupDescription',
+        'informationBasic.cultureProfileGroupName,informationBasic.cultureProfileGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -4858,7 +4858,7 @@ export const makeCultureProfileTypeObj = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.cultureProfileTypeName, informationBasic.cultureProfileTypeDescription',
+        'informationBasic.cultureProfileTypeName,informationBasic.cultureProfileTypeDescription',
       order: 'asc'
     },
     associateAscendantPrimary:
@@ -4910,7 +4910,7 @@ export const makeCultureProfileTypeScanObj = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.cultureProfileTypeName, informationBasic.cultureProfileTypeDescription',
+        'informationBasic.cultureProfileTypeName,informationBasic.cultureProfileTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -4978,7 +4978,7 @@ export const makeJobProfileObj = (selectedAssociateInfo, filterKey, countPage, n
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.jobProfileName, informationBasic.jobProfileDescription',
+      columnName: 'informationBasic.jobProfileName,informationBasic.jobProfileDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -5027,7 +5027,7 @@ export const makeJobProfileScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.jobProfileName, informationBasic.jobProfileDescription',
+      columnName: 'informationBasic.jobProfileName,informationBasic.jobProfileDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -5096,7 +5096,7 @@ export const makeJobProfileGroupObj = (selectedAssociateInfo, filterKey, countPa
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.jobProfileGroupName, informationBasic.jobProfileGroupDescription',
+        'informationBasic.jobProfileGroupName,informationBasic.jobProfileGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -5146,7 +5146,7 @@ export const makeJobProfileGroupScanObj = (
     filter: 'true',
     orderBy: {
       columnName:
-        'informationBasic.jobProfileGroupName, informationBasic.jobProfileGroupDescription',
+        'informationBasic.jobProfileGroupName,informationBasic.jobProfileGroupDescription',
       order: 'asc'
     },
     numberPage: numberPage,
@@ -5216,7 +5216,7 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
       localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.jobProfileTypeName, informationBasic.jobProfileTypeDescription',
+      columnName: 'informationBasic.jobProfileTypeName,informationBasic.jobProfileTypeDescription',
       order: 'asc'
     },
     associateAscendantPrimary:
@@ -5267,7 +5267,7 @@ export const makeJobProfileTypeScanObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     filter: 'true',
     orderBy: {
-      columnName: 'informationBasic.jobProfileTypeName, informationBasic.jobProfileTypeDescription',
+      columnName: 'informationBasic.jobProfileTypeName,informationBasic.jobProfileTypeDescription',
       order: 'asc'
     },
     numberPage: numberPage,

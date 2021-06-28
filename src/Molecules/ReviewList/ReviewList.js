@@ -25,7 +25,8 @@ const ReviewList = (props) => {
     onClickAddFladed = null,
     isSelected = false,
     dataValue = '',
-    flagedValue = ''
+    flagedValue = '',
+    shared = ''
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
@@ -43,6 +44,7 @@ const ReviewList = (props) => {
               id={id}
               status={actualStatus}
               data-value={dataValue}
+              data-shared={shared}
               data-flag={isFlagActive}
               onClick={isSelectActive !== '' ? null : onClickEvent}
               style={{

@@ -55,7 +55,9 @@ import {
   GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA,
   GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
   GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
-  GET_NODE_ASSOCIATE_REVIEW_LIST
+  GET_NODE_ASSOCIATE_REVIEW_LIST,
+  ASSESSEE_GROUP_INFO_REVISE_SAGA,
+  ASSESSEE_ROLE_INFO_REVISE_SAGA
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -1847,6 +1849,53 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
         });
       }
+      if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assesseeGroup: {
+            id: selectedTagValue,
+            informationEngagement: {
+              assesseeGroupStatus: keyVal
+            }
+          }
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: ASSESSEE_GROUP_INFO_REVISE_SAGA,
+          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+        });
+      }
+      if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assesseeRole: {
+            id: selectedTagValue,
+            informationEngagement: {
+              assesseeRoleStatus:
+                keyVal === 'UNSUSPENDED' || keyVal === 'UNTERMINATED' || keyVal === 'UNARCHIVED'
+                  ? 'ACTIVE'
+                  : keyVal
+            }
+          }
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: ASSESSEE_ROLE_INFO_REVISE_SAGA,
+          payload: {
+            secondaryOptionCheckValue: '',
+            assesseeRoleAssesseeReqBody: null,
+            headerOne: '',
+            reqBody
+          }
+        });
+      }
+
       if (
         typeOfMiddlePaneList === 'associateDistinctReviewList' ||
         typeOfMiddlePaneList === 'associatesNodeDistinctReviewList'

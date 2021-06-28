@@ -5,7 +5,8 @@ import {
   GET_ASSESSMENT_INFO_SAGA,
   SET_ASSESSMENT_BASIC_REDUCER_STATE,
   ASSESSMENT_INFO_REVISE_SAGA,
-  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE
+  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_INFO_URL, ASSESSMENT_REVISE_INFO_URL } from '../../endpoints';
 
@@ -52,7 +53,9 @@ function* workerReviewInfoAssessmentSaga(data) {
           informationAllocation?.assessmentGroup?.assessmentGroupPrimary &&
           informationAllocation?.assessmentGroup?.assessmentGroupPrimary.length > 0
         ) {
-          let tempArr = informationAllocation.assessmentGroup.assessmentGroupPrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.assessmentGroup.assessmentGroupPrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -102,7 +105,9 @@ function* workerReviewInfoAssessmentSaga(data) {
           informationAllocation?.assessmentNode?.assessmentNodePrimary &&
           informationAllocation?.assessmentNode?.assessmentNodePrimary.length > 0
         ) {
-          let tempArr = informationAllocation.assessmentNode.assessmentNodePrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.assessmentNode.assessmentNodePrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -152,7 +157,9 @@ function* workerReviewInfoAssessmentSaga(data) {
           informationAllocation?.assessmentType?.assessmentTypePrimary &&
           informationAllocation?.assessmentType?.assessmentTypePrimary.length > 0
         ) {
-          let tempArr = informationAllocation.assessmentType.assessmentTypePrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.assessmentType.assessmentTypePrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -203,7 +210,10 @@ function* workerReviewInfoAssessmentSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -242,7 +252,10 @@ function* workerReviseInfoAssessmentSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

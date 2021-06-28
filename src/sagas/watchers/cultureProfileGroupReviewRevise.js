@@ -7,7 +7,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_CULTURE_GROUP_REDUCER_STATE,
-  CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA
+  CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { CULTURE_REVIEW_GROUP_URL, CULTURE_REVISE_GROUP_URL } from '../../endpoints';
 
@@ -69,7 +70,10 @@ function* workerReviewCultureProfileGroupInfoSaga(data) {
     // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -131,7 +135,10 @@ function* workerReviseCultureProfileGroupInfoSaga(data) {
     // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

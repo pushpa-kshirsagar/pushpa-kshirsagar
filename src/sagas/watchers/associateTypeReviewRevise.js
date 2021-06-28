@@ -9,6 +9,7 @@ import {
   SET_ASSOCIATE_TYPE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_POPUP_VALUE,
   SET_TYPE_GROUP_ALLOCATION,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
@@ -83,7 +84,10 @@ function* workerReviewAssociateTypeInfoSaga(data) {
     console.log('loading end');
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -157,7 +161,10 @@ function* workerReviseAssociateTypeInfoSaga(data) {
     console.log('loading end');
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

@@ -7,7 +7,8 @@ import {
   UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
   SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
   ASSOCIATE_INFO_REVISE_SAGA,
-  SET_DISPLAY_PANE_THREE_REVIEW_MODE
+  SET_DISPLAY_PANE_THREE_REVIEW_MODE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ASSOCIATE_INFO_REVISE_URL, ASSOCIATE_REVIEW_INFO_URL } from '../../endpoints';
 
@@ -72,7 +73,10 @@ function* workerReviewInfoAssociateSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -133,7 +137,10 @@ function* workerReviseInfoAssociateSaga(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

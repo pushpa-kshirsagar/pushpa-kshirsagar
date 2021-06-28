@@ -5,7 +5,8 @@ import {
   SET_JOB_REDUCER_STATE,
   GET_JOB_PROFILE_INFO_SAGA,
   JOB_PROFILE_INFO_REVISE_SAGA,
-  SET_JOB_DYNAMIC_SINGLE_STATE
+  SET_JOB_DYNAMIC_SINGLE_STATE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { JOB_PROFILE_REVIEW_INFO_URL, JOB_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 
@@ -215,7 +216,10 @@ function* workerReviewInfoJobProfileSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -254,7 +258,10 @@ function* workerReviseInfoJobProfileSaga(data) {
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

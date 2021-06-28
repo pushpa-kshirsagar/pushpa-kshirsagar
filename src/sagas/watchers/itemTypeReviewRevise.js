@@ -7,7 +7,8 @@ import {
   SET_ITEM_TYPE_REDUCER_STATE,
   GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { ITEM_REVIEW_TYPE_URL, ITEM_REVISE_TYPE_URL } from '../../endpoints';
 
@@ -70,7 +71,10 @@ function* workerReviewItemTypeInfoSaga(data) {
     // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -131,7 +135,10 @@ function* workerReviseItemTypeInfoSaga(data) {
     // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

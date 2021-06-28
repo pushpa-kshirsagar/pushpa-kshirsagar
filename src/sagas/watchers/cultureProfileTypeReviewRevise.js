@@ -10,7 +10,8 @@ import {
   CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA,
   SET_TYPE_GROUP_ALLOCATION,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA
+  GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import { CULTURE_REVIEW_TYPE_URL, CULTURE_REVISE_TYPE_URL } from '../../endpoints';
 import Store from '../../store';
@@ -82,7 +83,10 @@ function* workerReviewCultureProfileTypeInfoSaga(data) {
     // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -161,7 +165,10 @@ function* workerReviseCultureProfileTypeInfoSaga(data) {
     console.log('loading end');
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }

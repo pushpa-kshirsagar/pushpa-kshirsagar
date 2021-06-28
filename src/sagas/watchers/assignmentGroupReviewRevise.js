@@ -7,6 +7,7 @@ import {
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_POPUP_VALUE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSIGNMENT_REVIEW_GROUP_URL, ASSIGNMENT_REVISE_GROUP_URL } from '../../endpoints';
@@ -70,7 +71,10 @@ function* workerReviewAssignmentGroupInfoSaga(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -132,7 +136,10 @@ function* workerReviseAssignmentGroupInfoSaga(data) {
     }
   } catch (e) {
     console.log('ERROR==', e);
-    console.log('catch loading end');
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
