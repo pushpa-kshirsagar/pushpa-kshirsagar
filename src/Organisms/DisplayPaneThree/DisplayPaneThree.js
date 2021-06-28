@@ -1361,7 +1361,8 @@ export const DisplayPaneThree = () => {
         },
         itemType: {
           id,
-          informationBasic: itemType.informationBasic
+          informationBasic: itemType.informationBasic,
+          informationAllocation: itemType.informationAllocation
         }
       };
       dispatch({ type: LOADER_START });

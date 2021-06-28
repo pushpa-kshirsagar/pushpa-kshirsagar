@@ -7,9 +7,13 @@ import {
   SET_ITEM_TYPE_REDUCER_STATE,
   GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_TYPE_GROUP_ALLOCATION,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import { ITEM_REVIEW_TYPE_URL, ITEM_REVISE_TYPE_URL } from '../../endpoints';
+import Store from '../../store';
 
 const itemTypeReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -62,6 +66,14 @@ function* workerReviewItemTypeInfoSaga(data) {
         yield put({
           type: SET_ITEM_TYPE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_TYPE_GROUP_ALLOCATION,
+          payload: {
+            objectName: 'itemType',
+            stateName: 'itemTypeGroup',
+            value: userResponse?.responseObject[0]?.informationAllocation?.itemTypeGroup?.id || ''
+          }
         });
       }
     }
@@ -126,6 +138,22 @@ function* workerReviseItemTypeInfoSaga(data) {
     yield put({
       type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
       payload: []
+    });
+    yield put({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'reviewListDistinctData', value: [] }
+    });
+    yield put({
+      type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+      payload: {
+        HeaderOne: 'items',
+        request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+        BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+        BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+        BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+        middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+        isMiddlePaneList: true
+      }
     });
     console.log('loading end');
     // yield put({ type: LOADER_STOP });

@@ -5,9 +5,12 @@ import {
   SET_JOB_REDUCER_STATE,
   GET_JOB_PROFILE_INFO_SAGA,
   JOB_PROFILE_INFO_REVISE_SAGA,
-  SET_JOB_DYNAMIC_SINGLE_STATE
+  SET_JOB_DYNAMIC_SINGLE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  GET_JOBPROFILE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import { JOB_PROFILE_REVIEW_INFO_URL, JOB_PROFILE_REVISE_INFO_URL } from '../../endpoints';
+import Store from '../../store';
 
 const jobProfileReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -249,9 +252,26 @@ function* workerReviseInfoJobProfileSaga(data) {
           createMode
         }
       });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_JOBPROFILE_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: 'job profiles',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
+        }
+      });
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     console.log('catch loading end');

@@ -2,19 +2,35 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { Paper } from '@material-ui/core';
+import { SET_POPUP_VALUE } from '../../actionType';
+import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionOneItemType = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement } = responseObject;
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { informationEngagement, informationAllocation } = responseObject;
+  const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
+
+  let itemTypeGroupList = [];
+  const tempTypeGroup = informationAllocation?.itemTypeGroup;
+  if (tempTypeGroup) {
+    itemTypeGroupList.push({
+      id: tempTypeGroup?.id || '',
+      textOne: tempTypeGroup?.informationBasic?.itemTypeGroupName || '',
+      textTwo: tempTypeGroup?.informationBasic?.itemTypeGroupDescription || '',
+      status: ''
+    });
+  }
+
   const allocationList = [
     {
       id: 'a1',
@@ -26,7 +42,7 @@ const DisplayPaneThreeSectionOneItemType = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: itemTypeGroupList
         }
       ],
       innerInfo: 'No Information',
@@ -97,6 +113,17 @@ const DisplayPaneThreeSectionOneItemType = () => {
       isListCard: false
     }
   ];
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);
+    if (labelName === 'group') {
+      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'items');
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'itemsTYPECREATE' }
+      });
+    }
+  };
 
   return (
     <div
@@ -112,9 +139,18 @@ const DisplayPaneThreeSectionOneItemType = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <AccordianListCard
+                      onClickRevise={reviseAllocation}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <AccordianInfoCard
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );
