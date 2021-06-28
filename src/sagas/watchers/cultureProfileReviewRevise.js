@@ -6,9 +6,12 @@ import {
   GET_CULTURE_PROFILE_INFO_SAGA,
   CULTURE_PROFILE_INFO_REVISE_SAGA,
   SET_CULTURE_DYNAMIC_SINGLE_STATE,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  GET_CULTUREPROFILE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import { CULTURE_PROFILE_REVIEW_INFO_URL, CULTURE_PROFILE_REVISE_INFO_URL } from '../../endpoints';
+import Store from '../../store';
 
 const cultureProfileReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -253,9 +256,26 @@ function* workerReviseInfoCultureProfileSaga(data) {
           createMode
         }
       });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: 'culture profiles',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
+        }
+      });
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     yield put({

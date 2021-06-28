@@ -132,6 +132,23 @@ const PopUpDisplayPanelAssociate = (props) => {
   useEffect(() => {
     setexchageMode(false);
   }, []);
+
+  const clearMiddlePaneInfo = () => {
+    dispatch({
+      type: SET_MIDDLEPANE_STATE,
+      payload: {
+        middlePaneHeader: '',
+        middlePaneHeaderBadgeOne: '',
+        middlePaneHeaderBadgeTwo: '',
+        middlePaneHeaderBadgeThree: '',
+        middlePaneHeaderBadgeFour: '',
+        typeOfMiddlePaneList: '',
+        scanCount: '',
+        showMiddlePaneState: false
+      }
+    });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  };
   const setSecondaryOptionValue = (e) => {
     if (popupHeaderOne === 'roles') {
       if (
@@ -357,6 +374,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       valueArr = UPLOAD_DOWNLOAD_POPUP;
       reviseSecondaryOptionCheckValue = 'all';
       setexchageMode(true);
+      clearMiddlePaneInfo();
     }
     if (
       clickValue === 'information' &&
@@ -742,6 +760,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
@@ -775,6 +794,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
       dispatch({
         type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
@@ -905,6 +925,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         'hierarchy',
         'associate'
       );
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     }
     if (
       clickValue === 'nodes' &&
@@ -924,6 +945,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         'hierarchy',
         popupHeaderOne
       );
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     }
     if (
       clickValue === 'distinct' &&
@@ -1146,23 +1168,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       // setIsReviseMode(false);
     }
   };
-  const clearMiddlePaneInfo = () => {
-    dispatch({
-      type: SET_MIDDLEPANE_STATE,
-      payload: {
-        middlePaneHeader: '',
-        middlePaneHeaderBadgeOne: '',
-        middlePaneHeaderBadgeTwo: '',
-        middlePaneHeaderBadgeThree: '',
-        middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: '',
-        scanCount: '',
-        showMiddlePaneState: false
-      }
-    });
-
-    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
-  };
+ 
   const BackHandlerEvent = (e) => {
     let revisePopupHeaderOne = 'associate';
     let revisepopupHeaderOneBadgeOne = 'self';
@@ -1334,6 +1340,7 @@ const PopUpDisplayPanelAssociate = (props) => {
         reviseSecondryOpt = '';
         revisePopupType = 'secondary';
       }
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: SET_POPUP_STATE,
         payload: {

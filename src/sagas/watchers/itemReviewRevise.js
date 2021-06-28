@@ -6,9 +6,12 @@ import {
   ITEM_INFO_REVISE_SAGA,
   SET_TYPE_REDUCER_STATE,
   SET_ITEM_DYNAMIC_SINGLE_STATE,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  GET_ITEM_REVIEW_LIST_SAGA
 } from '../../actionType';
 import { ITEM_REVISE_URL, ITEM_REVIEW_URL } from '../../endpoints';
+import Store from '../../store';
 
 const itemReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -247,9 +250,26 @@ function* workerReviseInfoItemSaga(data) {
           createMode
         }
       });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ITEM_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: 'items',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
+        }
+      });
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
