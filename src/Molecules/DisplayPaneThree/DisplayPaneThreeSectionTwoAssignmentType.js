@@ -47,7 +47,7 @@ const DisplayPaneThreeSectionTwoAssignmentType = () => {
   const onclickReviseAssignment = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'assignment' && selectedBadgeName === 'distinct') {
+    if (labelName === 'assignments' && selectedBadgeName === 'distinct') {
       console.log('assignment CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeAssignmentReviewListRequestObject(
         selectedAssociateInfo,
@@ -94,7 +94,7 @@ const DisplayPaneThreeSectionTwoAssignmentType = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'assignment',
+      labelTextOneOne: 'assignments',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',

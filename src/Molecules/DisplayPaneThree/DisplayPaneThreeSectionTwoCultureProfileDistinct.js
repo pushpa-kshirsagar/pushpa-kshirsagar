@@ -115,7 +115,7 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
   const frameworkAll = [
     {
       id: 'a1',
-      labelTextOneOne: 'culture dimension',
+      labelTextOneOne: 'culture dimensions',
       isListCard: true,
       labelTextOneOneBadgeOne: 'core',
       labelTextOneOneBadgeTwo: 'weightage',

@@ -54,7 +54,7 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'assessee',
+      labelTextOneOne: 'assessees',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -74,7 +74,7 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
   const onclickReviewAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
-    if (labelName === 'assessee') {
+    if (labelName === 'assessees') {
       getAssesseeGroupAssesseeDistinctApiCall(
         selectedAssociateInfo,
         'active',
@@ -111,7 +111,7 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
   };
   const onclickReviseAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    if (labelName === 'assessee') {
+    if (labelName === 'assessees') {
       console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
@@ -125,11 +125,11 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
         assesseeGroupDescription: responseObject.informationBasic.assesseeGroupDescription,
         assesseeGroupStatus: responseObject.informationEngagement.assesseeGroupStatus
       };
-      let existingAssesseeId =
-        relatedReviewListPaneThree &&
-        relatedReviewListPaneThree[0].assessee.map((val) => {
-          return val.id;
-        });
+      let existingAssesseeId = [];
+      let tempArr = relatedReviewListPaneThree[0]?.assessee || [];
+      existingAssesseeId = tempArr.map((val) => {
+        return val.id;
+      });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeGroupAssesseeRevise' }

@@ -52,7 +52,7 @@ const DisplayPaneThreeSectionTwoCultureProfileGroup = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'culture profile',
+      labelTextOneOne: 'culture profiles',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -71,7 +71,7 @@ const DisplayPaneThreeSectionTwoCultureProfileGroup = () => {
   const onclickReviseCultureProfile = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'culture profile' && selectedBadgeName === 'distinct') {
+    if (labelName === 'culture profiles' && selectedBadgeName === 'distinct') {
       console.log('culture profile CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeCultureProfileObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedGroupObject = {

@@ -60,7 +60,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: headerOne.slice(0, -1),
+      labelTextOneOne: headerOne,
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -79,10 +79,10 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
 
   const onclickReviseAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    if (labelName === 'assessee' || labelName === 'administrator' || labelName === 'manager') {
+    if (labelName === 'assessees' || labelName === 'administrators' || labelName === 'managers') {
       console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let roleRequestObj =
-        labelName === 'administrator' || labelName === 'manager'
+        labelName === 'administrators' || labelName === 'managers'
           ? getAssesseeRoleAssesseeReqObj(
               selectedAssociateInfo,
               responseObject.id,
@@ -98,7 +98,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       //     ? makeManagersReviewListRequestObject(selectedAssociateInfo, 'active', 0, countPage)
       //     : makeAssesseeReviewListRequestObject(selectedAssociateInfo, 'active', 0, countPage);
 
-      console.log(labelName === 'administrator');
+      console.log(labelName === 'administrators');
       let revisedRoleObject = {
         id: responseObject.id,
         assesseeRoleName: responseObject.informationBasic.assesseeRoleName,
@@ -107,7 +107,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       };
       let existingAssesseeId = [];
       let tempAssessees = relatedReviewListPaneThree[0]?.assessee || [];
-      tempAssessees.map((val) => {
+      existingAssesseeId = tempAssessees.map((val) => {
         return val.id;
       });
       dispatch({
@@ -126,7 +126,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
         type: GET_ALLOCATE_ASSESSEE,
         payload: {
           request: roleRequestObj,
-          headerOne: `${labelName}s`,
+          headerOne: labelName,
           revisedGroupObject: revisedRoleObject,
           existingAssesseeId: existingAssesseeId,
           typeOfMiddlePaneList: 'assesseesRoleAssesseeReviewList'
@@ -138,7 +138,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName, assesseeArray);
     if (
-      (labelName === 'assessee' || labelName === 'administrator' || labelName === 'manager') &&
+      (labelName === 'assessees' || labelName === 'administrators' || labelName === 'managers') &&
       assesseeArray.length > 0
     ) {
       let result = assesseeArray.map((a) => a.id);
@@ -162,7 +162,7 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader: `${labelName}s`,
+          middlePaneHeader: labelName,
           middlePaneHeaderBadgeOne: 'distinct',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',

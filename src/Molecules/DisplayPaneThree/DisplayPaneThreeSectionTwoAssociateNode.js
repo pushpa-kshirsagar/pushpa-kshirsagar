@@ -257,7 +257,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   const allModuleList = [
     {
       id: 'a1-01',
-      labelTextOneOne: 'assessee',
+      labelTextOneOne: 'assessees',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -278,7 +278,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a2-02',
-      labelTextOneOne: 'assessment',
+      labelTextOneOne: 'assessments',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -299,7 +299,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a3-03',
-      labelTextOneOne: 'assignment',
+      labelTextOneOne: 'assignments',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -320,7 +320,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a4-04',
-      labelTextOneOne: 'associate',
+      labelTextOneOne: 'associates',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -362,7 +362,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a6-06',
-      labelTextOneOne: 'interview',
+      labelTextOneOne: 'interviews',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -383,7 +383,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a7-07',
-      labelTextOneOne: 'item',
+      labelTextOneOne: 'items',
       labelTextOneOneBadgeOne: 'group',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -404,7 +404,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a8-8',
-      labelTextOneOne: 'node',
+      labelTextOneOne: 'nodes',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -450,7 +450,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   const assesseeModuleList = [
     {
       id: 'a1',
-      labelTextOneOne: 'assessee',
+      labelTextOneOne: 'assessees',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -471,7 +471,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a2',
-      labelTextOneOne: 'node',
+      labelTextOneOne: 'nodes',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -517,7 +517,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   const assessmentModuleList = [
     {
       id: 'a3',
-      labelTextOneOne: 'assessment',
+      labelTextOneOne: 'assessments',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -538,7 +538,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a4',
-      labelTextOneOne: 'node',
+      labelTextOneOne: 'nodes',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -584,7 +584,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   const assignmentModuleList = [
     {
       id: 'a5',
-      labelTextOneOne: 'assignment',
+      labelTextOneOne: 'assignments',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -605,7 +605,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a6',
-      labelTextOneOne: 'node',
+      labelTextOneOne: 'nodes',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -651,7 +651,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   const itemModuleList = [
     {
       id: 'a5',
-      labelTextOneOne: 'item',
+      labelTextOneOne: 'items',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -672,7 +672,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a6',
-      labelTextOneOne: 'node',
+      labelTextOneOne: 'nodes',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -718,7 +718,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   const cultureProfileModuleList = [
     {
       id: 'a5',
-      labelTextOneOne: 'culture profile',
+      labelTextOneOne: 'culture profiles',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -739,7 +739,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a6',
-      labelTextOneOne: 'node',
+      labelTextOneOne: 'nodes',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -785,7 +785,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   const jobProfileModuleList = [
     {
       id: 'a5',
-      labelTextOneOne: 'job profile',
+      labelTextOneOne: 'job profiles',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -806,7 +806,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a6',
-      labelTextOneOne: 'node',
+      labelTextOneOne: 'nodes',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -852,7 +852,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
   const associateModuleList = [
     {
       id: 'a5',
-      labelTextOneOne: 'associate',
+      labelTextOneOne: 'associates',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -873,7 +873,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     },
     {
       id: 'a6',
-      labelTextOneOne: 'node',
+      labelTextOneOne: 'nodes',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -947,7 +947,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
 
     console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
     if (
-      labelName === 'node' &&
+      labelName === 'nodes' &&
       selectedBadgeName === 'ascendant' &&
       innerSelectedBadgeName === 'primary'
     ) {
@@ -963,7 +963,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         payload: { isPopUpValue: 'PARENTLISTPOPUP', popupMode: 'NODECREATE' }
       });
     }
-    if (labelName === 'assessee' && selectedBadgeName === 'distinct') {
+    if (labelName === 'assessees' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
         'active',
@@ -1003,7 +1003,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         }
       });
     }
-    if (labelName === 'assessment' && selectedBadgeName === 'distinct') {
+    if (labelName === 'assessments' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssessmentReviewListRequestObject(
         selectedAssociateInfo,
         'active',
@@ -1043,7 +1043,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         }
       });
     }
-    if (labelName === 'assignment' && selectedBadgeName === 'distinct') {
+    if (labelName === 'assignments' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssignmentReviewListRequestObject(
         selectedAssociateInfo,
         'active',
@@ -1083,7 +1083,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         }
       });
     }
-    if (labelName === 'item' && selectedBadgeName === 'distinct') {
+    if (labelName === 'items' && selectedBadgeName === 'distinct') {
       let requestObect = makeItemObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedRoleObject = {
         id: responseObject.id,
@@ -1118,7 +1118,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         }
       });
     }
-    if (labelName === 'culture profile' && selectedBadgeName === 'distinct') {
+    if (labelName === 'culture profiles' && selectedBadgeName === 'distinct') {
       let requestObect = makeCultureProfileObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedRoleObject = {
         id: responseObject.id,
@@ -1153,7 +1153,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         }
       });
     }
-    if (labelName === 'job profile' && selectedBadgeName === 'distinct') {
+    if (labelName === 'job profiles' && selectedBadgeName === 'distinct') {
       let requestObect = makeJobProfileObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedRoleObject = {
         id: responseObject.id,
@@ -1188,7 +1188,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
         }
       });
     }
-    if (labelName === 'associate' && selectedBadgeName === 'distinct') {
+    if (labelName === 'associates' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssociateNodeObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedGroupObject = {
         id: responseObject.id,
@@ -1228,7 +1228,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
     console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
-    if (labelName === 'assessee' && selectedBadgeName === 'distinct') {
+    if (labelName === 'assessees' && selectedBadgeName === 'distinct') {
       console.log('IN ASSSESSEE ');
       getAssesseeNodeAssesseeDistinctApiCall(
         selectedAssociateInfo,
