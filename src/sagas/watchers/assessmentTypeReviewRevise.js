@@ -126,18 +126,18 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
             isMiddlePaneList: false
           }
         });
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'type',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: userResponse.responseObject,
+            createMode
+          }
+        });
       }
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'assessments',
-          headerOneBadgeOne: 'type',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
-          createMode
-        }
-      });
       yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
@@ -161,6 +161,10 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
       });
     } else {
       console.log('loading end');
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
       yield put({ type: LOADER_STOP });
     }
   } catch (e) {

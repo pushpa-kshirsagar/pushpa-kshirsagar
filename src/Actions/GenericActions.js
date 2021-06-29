@@ -93,16 +93,7 @@ export const makeAssesseeReviewListRequestObject = (
         conditionValue: {
           condition: 'in',
           value: {
-            in: [
-              'CONFIRMED',
-              'DISAPPROVED',
-              'SUSPENDED',
-              'TERMINATED',
-              'UNAPPROVED',
-              'UNCONFIRMED',
-              'ARCHIVED',
-              'DELETED'
-            ]
+            in: ['CONFIRMED', 'DISAPPROVED', 'SUSPENDED', 'TERMINATED', 'UNAPPROVED', 'UNCONFIRMED']
           }
         }
       };
@@ -2574,8 +2565,7 @@ export const getAssesseeTypeAssesseeReqObj = (
             'TERMINATED',
             'UNAPPROVED',
             'UNCONFIRMED',
-            'ARCHIVED',
-            'DELETED'
+            'ARCHIVED'
           ]
         }
       };
@@ -2655,8 +2645,7 @@ export const getAssesseeTypeAssesseeScanReqObj = (
             'TERMINATED',
             'UNAPPROVED',
             'UNCONFIRMED',
-            'ARCHIVED',
-            'DELETED'
+            'ARCHIVED'
           ]
         }
       };
@@ -2776,8 +2765,7 @@ export const getAssociateTypeAssociateReqObj = (
             'TERMINATED',
             'UNAPPROVED',
             'UNCONFIRMED',
-            'ARCHIVED',
-            'DELETED'
+            'ARCHIVED'
           ]
         }
       };
@@ -2857,8 +2845,7 @@ export const getAssociateTypeAssociateScanReqObj = (
             'TERMINATED',
             'UNAPPROVED',
             'UNCONFIRMED',
-            'ARCHIVED',
-            'DELETED'
+            'ARCHIVED'
           ]
         }
       };
@@ -2957,8 +2944,7 @@ export const getNodeAssociatesReqObj = (
             'TERMINATED',
             'UNAPPROVED',
             'UNCONFIRMED',
-            'ARCHIVED',
-            'DELETED'
+            'ARCHIVED'
           ]
         }
       };
@@ -3038,8 +3024,7 @@ export const getNodeAssociatesScanReqObj = (
             'TERMINATED',
             'UNAPPROVED',
             'UNCONFIRMED',
-            'ARCHIVED',
-            'DELETED'
+            'ARCHIVED'
           ]
         }
       };
@@ -5212,7 +5197,7 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-      associateAscendantPrimary:
+    associateAscendantPrimary:
       localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {

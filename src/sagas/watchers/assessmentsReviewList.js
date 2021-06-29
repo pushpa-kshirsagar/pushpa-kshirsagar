@@ -41,7 +41,6 @@ function* workerReviewListAssessmentSaga(data) {
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
       yield put({
         type: SET_MIDDLEPANE_STATE,
         payload: {
@@ -55,6 +54,8 @@ function* workerReviewListAssessmentSaga(data) {
           showMiddlePaneState: true
         }
       });
+      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
+
     } else {
       yield put({
         type: SET_POPUP_VALUE,

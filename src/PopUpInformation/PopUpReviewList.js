@@ -54,9 +54,9 @@ const PopUpReviewList = (props) => {
           dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
         }
       } else {
-        (minimumSelected !== -1 &&
-          dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: prevPopUpValue } })) ||
-          setErrorMsg(REQUIRED_ERROR_MESSAGE);
+        prevPopUpValue !== ''
+          ? dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: prevPopUpValue } })
+          : setErrorMsg(REQUIRED_ERROR_MESSAGE);
       }
     } else {
       if (reviewMode === 'revise') {

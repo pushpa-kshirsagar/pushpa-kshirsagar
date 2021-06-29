@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
@@ -17,6 +17,7 @@ import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 const PopUpAssessmentCreate = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const [errorMsg, setErrorMsg] = useState('');
   const {
     selectedAssociateInfo,
     coreTypeReviewListData,
@@ -251,6 +252,10 @@ const PopUpAssessmentCreate = (props) => {
         infoMsg={'select a type'}
         ListData={coreTypeReviewListData}
         textOne={'assessmentTypeName'}
+        isRequired={true}
+        minimumSelected={1}
+        setErrorMsg={setErrorMsg}
+        errorMsg={errorMsg}
         textTwo={'assessmentTypeDescription'}
         onClickEvent={(e) => {
           updateAllocationObj(e, 'assessmentType', 'assessmentTypePrimary');

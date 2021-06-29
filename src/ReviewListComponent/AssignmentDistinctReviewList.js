@@ -17,6 +17,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssignmentReviewListRequestObject } from '../Actions/GenericActions';
 import { ASSIGNMENT_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { assignmentsDistinctApiCall } from '../Actions/AssignmentModuleAction';
 const AssignmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -73,31 +74,15 @@ const AssignmentDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssignmentReviewListRequestObject(
-      selectedAssociateInfo,
-      selectedAssociateInfo,
-      siftKey,
-      0,
-      countPage
-    );
-    dispatch({ type: LOADER_START });
-    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-    dispatch({
-      type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
-      payload: {
-        request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
-      }
-    });
+    assignmentsDistinctApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'distinct');
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
+    dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated' || siftValue === 'unpublished')
       siftApiCall(siftValue);
-    dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -117,7 +102,8 @@ const AssignmentDistinctReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSIGNMENT_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status')
       }
     });
     dispatch({
@@ -129,6 +115,7 @@ const AssignmentDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log(FilterMode);
   return (
     <div>
       {reviewListDistinctData &&
@@ -141,6 +128,7 @@ const AssignmentDistinctReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.assignmentStatus}
+                actualStatus={item.informationEngagement.assignmentStatus}
                 textOne={item.informationBasic.assignmentName}
                 textTwo={item.informationBasic.assignmentDescription}
                 isTooltipActive={false}
@@ -149,7 +137,10 @@ const AssignmentDistinctReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assignmentsDistinctinactive' && (
+      {(FilterMode === 'assignmentsDistinctinactive' ||
+        FilterMode === 'assignmentsDistinctsuspended' ||
+        FilterMode === 'assignmentsDistinctunpublished' ||
+        FilterMode === 'assignmentsDistinctterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

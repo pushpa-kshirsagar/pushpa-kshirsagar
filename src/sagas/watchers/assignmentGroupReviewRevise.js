@@ -3,14 +3,18 @@ import {
   ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
   GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
   GET_ASSIGNMENT_GROUP_REVIEW_INFO_SAGA,
+  GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
   LOADER_STOP,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSIGNMENT_REVIEW_GROUP_URL, ASSIGNMENT_REVISE_GROUP_URL } from '../../endpoints';
+import { EXCEPTION_ERROR_MESSAGE } from '../../errorMessage';
+import Store from '../../store';
 
 const assignmentGroupReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -113,32 +117,52 @@ function* workerReviseAssignmentGroupInfoSaga(data) {
             isMiddlePaneList: false
           }
         });
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assignments',
+            headerOneBadgeOne: 'group',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: userResponse.responseObject,
+            createMode
+          }
+        });
       }
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'assignments',
-          headerOneBadgeOne: 'group',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
-          createMode
-        }
-      });
       yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
         payload: []
       });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: 'assignments',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
+        }
+      });
     } else {
       console.log('loading end');
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
       yield put({ type: LOADER_STOP });
     }
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+      payload: { isPopUpValue: EXCEPTION_ERROR_MESSAGE, popupMode: 'responseErrorMsg' }
     });
     yield put({ type: LOADER_STOP });
   }

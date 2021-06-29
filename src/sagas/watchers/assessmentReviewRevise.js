@@ -240,16 +240,18 @@ function* workerReviseInfoAssessmentSaga(data) {
     const userResponse = yield call(assessmentReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
       const { createMode } = data.payload;
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'assessment',
-          headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject,
-          createMode
-        }
-      });
+      if (!data.payload.hideRightpane) {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessment',
+            headerOneBadgeOne: 'information',
+            headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+            responseObject: userResponse.responseObject,
+            createMode
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }
@@ -268,6 +270,10 @@ function* workerReviseInfoAssessmentSaga(data) {
       });
     } else {
       console.log('loading end');
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
       yield put({ type: LOADER_STOP });
     }
   } catch (e) {

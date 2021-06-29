@@ -31,7 +31,10 @@ const AssignmentGroupReviewList = (props) => {
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
-    selectedAssociateInfo
+    selectedAssociateInfo,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -83,8 +86,10 @@ const AssignmentGroupReviewList = (props) => {
       type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
       payload: {
         request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
@@ -115,7 +120,8 @@ const AssignmentGroupReviewList = (props) => {
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status')
       }
     });
     dispatch({
@@ -142,6 +148,7 @@ const AssignmentGroupReviewList = (props) => {
                 tag={item?.id}
                 isSelectedReviewList={middlePaneSelectedValue === item?.id}
                 status={item.informationEngagement.assignmentGroupStatus}
+                actualStatus={item.informationEngagement.assignmentGroupStatus}
                 textOne={item.informationBasic.assignmentGroupName}
                 textTwo={item.informationBasic.assignmentGroupDescription}
                 isTooltipActive={false}

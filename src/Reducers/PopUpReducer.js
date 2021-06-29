@@ -344,8 +344,7 @@ const PopUpReducer = (istate = initialState, action) => {
           if (
             (action.payload.badgeValue === 'suspend' ||
               action.payload.badgeValue === 'terminate' ||
-              action.payload.badgeValue === 'archive' ||
-              action.payload.badgeValue === 'delete') &&
+              action.payload.badgeValue === 'archive') &&
             (istate.selectedTagStatus === 'CONFIRMED' ||
               istate.selectedTagStatus === 'UNCONFIRMED' ||
               istate.selectedTagStatus === 'SHARED' ||

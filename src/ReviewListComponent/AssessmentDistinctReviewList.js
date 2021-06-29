@@ -52,7 +52,7 @@ const AssessmentDistinctReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+        type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',
@@ -118,7 +118,8 @@ const AssessmentDistinctReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: ASSESSMENT_REVIEW_LIST_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag')
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status')
       }
     });
     dispatch({
@@ -130,6 +131,7 @@ const AssessmentDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log(FilterMode);
   return (
     <div>
       {reviewListDistinctData &&
@@ -142,6 +144,7 @@ const AssessmentDistinctReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.assessmentStatus}
+                actualStatus={item.informationEngagement.assessmentStatus}
                 textOne={item.informationBasic.assessmentName}
                 textTwo={item.informationBasic.assessmentDescription}
                 isTooltipActive={false}

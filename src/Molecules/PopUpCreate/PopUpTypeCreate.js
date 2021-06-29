@@ -116,6 +116,7 @@ const PopUpTypeCreate = (props) => {
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         inputHeader={'group'}
         isRequired={true}
+        minimumSelected={1}
         inputHeaderBadge={''}
         infoMsg={'select a group'}
         ListData={coreGroupReviewListData}

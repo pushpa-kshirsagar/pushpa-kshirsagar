@@ -28,6 +28,8 @@ const AssesseeRoleDistinctReviewList = (props) => {
     numberPage,
     scanCount,
     middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree,
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
@@ -86,8 +88,8 @@ const AssesseeRoleDistinctReviewList = (props) => {
       payload: {
         request: requestObect,
         BadgeOne: middlePaneHeaderBadgeOne,
-        BadgeTwo: siftKey,
-        BadgeThree: '',
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
         isMiddlePaneList: true
       }
     });

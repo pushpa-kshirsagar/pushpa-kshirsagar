@@ -14,6 +14,7 @@ import {
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSIGNMENT_REVIEW_TYPE_URL, ASSIGNMENT_REVISE_TYPE_URL } from '../../endpoints';
+import { EXCEPTION_ERROR_MESSAGE } from '../../errorMessage';
 import Store from '../../store';
 
 const assignmentTypeReviewInfoApi = async (requestObj) => {
@@ -89,7 +90,7 @@ function* workerReviewAssignmentTypeInfoSaga(data) {
     console.log('ERROR==', e);
     yield put({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+      payload: { isPopUpValue: EXCEPTION_ERROR_MESSAGE, popupMode: 'responseErrorMsg' }
     });
     yield put({ type: LOADER_STOP });
   }
@@ -130,18 +131,18 @@ function* workerReviseAssignmentTypeInfoSaga(data) {
             isMiddlePaneList: false
           }
         });
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assignments',
+            headerOneBadgeOne: 'type',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: userResponse.responseObject,
+            createMode
+          }
+        });
       }
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'assignments',
-          headerOneBadgeOne: 'type',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
-          createMode
-        }
-      });
       yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,

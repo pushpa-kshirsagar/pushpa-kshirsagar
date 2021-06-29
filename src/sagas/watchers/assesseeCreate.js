@@ -13,6 +13,7 @@ import {
   UPDATE_ASSESSEE_PERSONAL_INFO
 } from '../../actionType';
 import { ASSESSEE_CREATE_URL } from '../../endpoints';
+import { EXCEPTION_ERROR_MESSAGE } from '../../errorMessage';
 
 const createAssesseeApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -71,7 +72,7 @@ function* workerCreateAssesseeSaga(data) {
     console.log('ERROR==', e);
     yield put({
       type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+      payload: { isPopUpValue: EXCEPTION_ERROR_MESSAGE, popupMode: 'responseErrorMsg' }
     });
     yield put({ type: LOADER_STOP });
   }

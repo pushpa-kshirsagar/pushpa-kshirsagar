@@ -4,6 +4,7 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
+  GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_OPEN,
@@ -15,7 +16,10 @@ import {
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssociateReviewListRequestObject } from '../Actions/GenericActions';
+import {
+  makeAssignmentTypeObj,
+  makeAssociateReviewListRequestObject
+} from '../Actions/GenericActions';
 import {
   ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
@@ -31,7 +35,10 @@ const AssignmentTypeReviewList = (props) => {
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
-    selectedAssociateInfo
+    selectedAssociateInfo,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue, cardValue } = useSelector((state) => state.PopUpReducer);
@@ -56,7 +63,7 @@ const AssignmentTypeReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+        type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',
@@ -77,20 +84,17 @@ const AssignmentTypeReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssociateReviewListRequestObject(
-      selectedAssociateInfo,
-      siftKey,
-      0,
-      countPage
-    );
+    let requestObect = makeAssignmentTypeObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({
-      type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
+      type: GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
       payload: {
         request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });

@@ -116,7 +116,8 @@ const AssociateRoleDistinctReviewList = (props) => {
             : ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
+        selectedTagShared: e.currentTarget.getAttribute('data-shared')
       }
     });
     dispatch({
@@ -147,7 +148,8 @@ const AssociateRoleDistinctReviewList = (props) => {
                 // status={item.informationEngagement.associateRoleStatus}
                 dataValue={item.informationAllocation.associateRoleGroup}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                actualStatus={item.associateRoleShared ? 'SHARED' : 'UNSHARED'}
+                shared={item.associateRoleShared ? 'SHARED' : 'UNSHARED'}
+                actualStatus={item.informationEngagement.associateRoleStatus}
                 textOne={item.informationBasic.associateRoleName}
                 textTwo={item.informationBasic.associateRoleDescription}
                 isTooltipActive={false}

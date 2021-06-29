@@ -41,7 +41,6 @@ function* workerReviewListAssignmentSaga(data) {
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
-      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
       yield put({
         type: SET_MIDDLEPANE_STATE,
         payload: {
@@ -55,6 +54,7 @@ function* workerReviewListAssignmentSaga(data) {
           showMiddlePaneState: true
         }
       });
+      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
       yield put({ type: CLEAR_ASSIGNMENT_INFO });
     } else {
       yield put({

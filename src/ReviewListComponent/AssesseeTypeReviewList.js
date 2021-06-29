@@ -4,6 +4,7 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
+  GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_OPEN,
@@ -15,7 +16,7 @@ import {
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssessmentTypeObj } from '../Actions/GenericActions';
+import { makeAssesseeTypeObj, makeAssessmentTypeObj } from '../Actions/GenericActions';
 import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
@@ -33,7 +34,10 @@ const AssesseeTypeReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
-    middlePaneHeader
+    middlePaneHeader,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -58,7 +62,7 @@ const AssesseeTypeReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+        type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',
@@ -79,15 +83,18 @@ const AssesseeTypeReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssessmentTypeObj(selectedAssociateInfo, siftKey, 0, countPage);
+    let requestObect = makeAssesseeTypeObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({
-      type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
+      type: GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
       payload: {
         request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
+        // BadgeOne: 'distinct',
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
@@ -125,7 +132,8 @@ const AssesseeTypeReviewList = (props) => {
             : popupContentArrValue,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
+        selectedTagShared: e.currentTarget.getAttribute('data-shared')
       }
     });
     dispatch({
@@ -155,9 +163,11 @@ const AssesseeTypeReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                actualStatus={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
+                // actualStatus={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
                 dataValue={item.informationAllocation.assesseeTypeGroup}
                 // status={item.informationEngagement.assesseeTypeStatus}
+                shared={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
+                actualStatus={item.informationEngagement.assesseeTypeStatus}
                 textOne={item.informationBasic.assesseeTypeName}
                 textTwo={item.informationBasic.assesseeTypeDescription}
                 isTooltipActive={false}

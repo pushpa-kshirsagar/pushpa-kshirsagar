@@ -4,6 +4,7 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE_ENABLE,
+  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
   POPUP_OPEN,
@@ -31,7 +32,10 @@ const AssessmentTypeReviewList = (props) => {
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
-    selectedAssociateInfo
+    selectedAssociateInfo,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { cardValue } = useSelector((state) => state.PopUpReducer);
@@ -81,11 +85,13 @@ const AssessmentTypeReviewList = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
     dispatch({
-      type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
+      type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
       payload: {
         request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });

@@ -46,7 +46,7 @@ function* workerReviewGroupListSaga(data) {
       data: data.payload.request,
       URL: ASSESSEE_GROUP_REVIEWLIST_URL
     });
-    console.log('00000000',data.payload);
+    // console.log('00000000',data.payload);
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       if (data.payload.isMiddlePaneList) {

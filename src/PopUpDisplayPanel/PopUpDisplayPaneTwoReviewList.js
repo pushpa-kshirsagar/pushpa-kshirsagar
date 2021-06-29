@@ -66,7 +66,11 @@ import {
   getAssesseeNodeAssesseeReqObj,
   getAssesseeRoleAssesseeDistinctApiCall,
   getAssesseeRoleAssesseeReqObj,
-  getAssesseeTypeAssesseeDistinctApiCall
+  getAssesseeTypeAssesseeDistinctApiCall,
+  updateAssesseeDistinctStatus,
+  updateAssesseeGroupStatus,
+  updateAssesseeRoleStatus,
+  updateAssesseeTypeStatus
 } from '../Actions/AssesseeModuleAction';
 import {
   associateCreatePopup,
@@ -106,12 +110,18 @@ import {
 import {
   getAssessmentGroupAssessmentDistinctApiCall,
   getAssessmentTypeAssessmentDistinctApiCall,
-  getNodeRelatedAssessmentsDistinctApiCall
+  getNodeRelatedAssessmentsDistinctApiCall,
+  updateAssessmentDistinctStatus,
+  updateAssessmentGroupStatus,
+  updateAssessmentTypeStatus
 } from '../Actions/AssessmentModuleAction';
 import {
   getAssignmnetGroupAssignmnetDistinctApiCall,
   getAssignmnetTypeAssignmnetDistinctApiCall,
-  getNodeRelatedAssignmentsDistinctApiCall
+  getNodeRelatedAssignmentsDistinctApiCall,
+  updateAssignmentDistinctStatus,
+  updateAssignmentGroupStatus,
+  updateAssignmentTypeStatus
 } from '../Actions/AssignmentModuleAction';
 import {
   getCultureGroupCultureDistinctApiCall,
@@ -1831,71 +1841,35 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       dataVal === 'unterminateApiCall'
     ) {
       if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
-        let reqBody = {
-          assesseeId: selectedAssociateInfo?.assesseeId,
-          associateId:
-            selectedAssociateInfo?.associate?.informationEngagement.associateTag
-              .associateTagPrimary,
-          assessee: {
-            id: selectedTagValue,
-            informationEngagement: {
-              assesseeStatus: keyVal
-            }
-          }
-        };
-        dispatch({ type: LOADER_START });
-        dispatch({
-          type: ASSESSEE_INFO_REVISE_SAGA,
-          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
-        });
+        updateAssesseeDistinctStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
       if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
-        let reqBody = {
-          assesseeId: selectedAssociateInfo?.assesseeId,
-          associateId:
-            selectedAssociateInfo?.associate?.informationEngagement.associateTag
-              .associateTagPrimary,
-          assesseeGroup: {
-            id: selectedTagValue,
-            informationEngagement: {
-              assesseeGroupStatus: keyVal
-            }
-          }
-        };
-        dispatch({ type: LOADER_START });
-        dispatch({
-          type: ASSESSEE_GROUP_INFO_REVISE_SAGA,
-          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
-        });
+        updateAssesseeGroupStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
-        let reqBody = {
-          assesseeId: selectedAssociateInfo?.assesseeId,
-          associateId:
-            selectedAssociateInfo?.associate?.informationEngagement.associateTag
-              .associateTagPrimary,
-          assesseeRole: {
-            id: selectedTagValue,
-            informationEngagement: {
-              assesseeRoleStatus:
-                keyVal === 'UNSUSPENDED' || keyVal === 'UNTERMINATED' || keyVal === 'UNARCHIVED'
-                  ? 'ACTIVE'
-                  : keyVal
-            }
-          }
-        };
-        dispatch({ type: LOADER_START });
-        dispatch({
-          type: ASSESSEE_ROLE_INFO_REVISE_SAGA,
-          payload: {
-            secondaryOptionCheckValue: '',
-            assesseeRoleAssesseeReqBody: null,
-            headerOne: '',
-            reqBody
-          }
-        });
+        updateAssesseeRoleStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
-
+      if (typeOfMiddlePaneList === 'assesseesTypeDistinctReviewList') {
+        updateAssesseeTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'assessmentDistinctReviewList') {
+        updateAssessmentDistinctStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
+        updateAssessmentGroupStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'assessmentsTypeDistinctReviewList') {
+        updateAssessmentTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'assignmentDistinctReviewList') {
+        updateAssignmentDistinctStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
+        updateAssignmentGroupStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
+        updateAssignmentTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
       if (
         typeOfMiddlePaneList === 'associateDistinctReviewList' ||
         typeOfMiddlePaneList === 'associatesNodeDistinctReviewList'

@@ -24,7 +24,11 @@ import {
   SET_PAGE_COUNT,
   SET_REQUEST_OBJECT,
   GET_TYPE_GROUP_REVIEW_LIST_SAGA,
-  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
+  ASSESSEE_INFO_REVISE_SAGA,
+  ASSESSEE_GROUP_INFO_REVISE_SAGA,
+  ASSESSEE_ROLE_INFO_REVISE_SAGA,
+  ASSESSEE_TYPE_INFO_REVISE_SAGA
 } from '../actionType';
 import {
   getAssesseeTypeAssesseeReqObj,
@@ -1227,7 +1231,7 @@ export const getAdminManagerRoleApiCall = (
   countPage,
   popupHeaderOne,
   dispatch,
-  cardValue='noCard'
+  cardValue = 'noCard'
 ) => {
   dispatch({ type: LOADER_START });
   let roleRequestObj =
@@ -1332,6 +1336,113 @@ export const getAssesseeTypeApiCall = (
       BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
       BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true
+    }
+  });
+};
+export const updateAssesseeDistinctStatus = (
+  selectedAssociateInfo,
+  assesseeId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assessee: {
+      id: assesseeId,
+      informationEngagement: {
+        assesseeStatus: reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSESSEE_INFO_REVISE_SAGA,
+    payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+  });
+};
+export const updateAssesseeGroupStatus = (
+  selectedAssociateInfo,
+  groupId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assesseeGroup: {
+      id: groupId,
+      informationEngagement: {
+        assesseeGroupStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSESSEE_GROUP_INFO_REVISE_SAGA,
+    payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+  });
+};
+export const updateAssesseeRoleStatus = (selectedAssociateInfo, roleId, dispatch, reviseStatus) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assesseeRole: {
+      id: roleId,
+      informationEngagement: {
+        assesseeRoleStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSESSEE_ROLE_INFO_REVISE_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      assesseeRoleAssesseeReqBody: null,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+export const updateAssesseeTypeStatus = (selectedAssociateInfo, typeId, dispatch, reviseStatus) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assesseeType: {
+      id: typeId,
+      informationEngagement: {
+        assesseeTypeStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSESSEE_TYPE_INFO_REVISE_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      assesseeTypeAssesseeReqBody: null,
+      headerOne: '',
+      reqBody
     }
   });
 };

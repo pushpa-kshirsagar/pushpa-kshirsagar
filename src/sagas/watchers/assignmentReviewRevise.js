@@ -243,16 +243,19 @@ function* workerReviseInfoAssignmentSaga(data) {
     if (userResponse.responseCode === '000') {
       console.log('ASSIGNMENT_REVIEW_INFO=======>', userResponse);
       const { createMode = '' } = data.payload;
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'assignment',
-          headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject[0],
-          createMode
-        }
-      });
+      if (!data.payload.hideRightPane) {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assignment',
+            headerOneBadgeOne: 'information',
+            headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+            responseObject: userResponse.responseObject[0],
+            createMode
+          }
+        });
+      }
+
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }

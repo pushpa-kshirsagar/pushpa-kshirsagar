@@ -127,6 +127,7 @@ const PopUpAssociateRoleCreate = () => {
         inputHeader={'group'}
         inputHeaderBadge={''}
         isRequired={true}
+        minimumSelected={1}
         selectedList={associateRole?.informationAllocation?.associateRoleGroup}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}

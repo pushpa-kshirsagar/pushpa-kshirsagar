@@ -128,6 +128,7 @@ const PopUpAssesseeRoleCreate = () => {
         inputHeader={'group'}
         inputHeaderBadge={''}
         isRequired={true}
+        minimumSelected={1}
         selectedList={assesseeRole?.informationAllocation?.assesseeRoleGroup}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}

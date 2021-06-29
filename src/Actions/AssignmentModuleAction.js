@@ -16,7 +16,10 @@ import {
   GET_ASSIGNMENTTYPE_ASSIGNMENT_REVIEWLIST_SAGA,
   GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
   GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA,
-  SET_PAGE_COUNT
+  SET_PAGE_COUNT,
+  ASSIGNMENT_INFO_REVISE_SAGA,
+  ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
+  ASSIGNMENT_TYPE_REVISE_INFO_SAGA
 } from '../actionType';
 import {
   getAssignmentGroupAssignmentReqObj,
@@ -319,6 +322,106 @@ export const getNodeRelatedAssignmentsDistinctApiCall = (
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
       isMiddlePaneList: true
+    }
+  });
+};
+export const updateAssignmentDistinctStatus = (
+  selectedAssociateInfo,
+  assignmentId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assignment: {
+      id: assignmentId,
+      informationEngagement: {
+        assignmentStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSIGNMENT_INFO_REVISE_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      hideRightPane: true,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+export const updateAssignmentGroupStatus = (
+  selectedAssociateInfo,
+  groupId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assignmentGroup: {
+      id: groupId,
+      informationEngagement: {
+        assignmentGroupStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      assignmentGroupAssignmentReqBody: null,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+
+export const updateAssignmentTypeStatus = (
+  selectedAssociateInfo,
+  typeId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assignmentType: {
+      id: typeId,
+      informationEngagement: {
+        assignmentTypeStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      assignmentTypeAssignmentReqBody: null,
+      headerOne: '',
+      reqBody
     }
   });
 };

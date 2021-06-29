@@ -19,7 +19,10 @@ import {
   INTERNAL_NODE_LIST_SAGA,
   CLEAR_ASSESSMENT_INFO,
   GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA,
-  SET_PAGE_COUNT
+  SET_PAGE_COUNT,
+  ASSESSMENT_INFO_REVISE_SAGA,
+  ASSESSMENT_GROUP_REVISE_INFO_SAGA,
+  ASSESSMENT_TYPE_REVISE_INFO_SAGA
 } from '../actionType';
 import {
   getAssessmentGroupAssessmentReqObj,
@@ -187,7 +190,7 @@ export const getAssessmentTypeAssessmentDistinctApiCall = (
     type: GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA,
     payload: {
       request: reqBody,
-      HeaderOne: 'items',
+      HeaderOne: 'assessments',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
@@ -338,6 +341,105 @@ export const getNodeRelatedAssessmentsDistinctApiCall = (
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
       isMiddlePaneList: true
+    }
+  });
+};
+export const updateAssessmentDistinctStatus = (
+  selectedAssociateInfo,
+  assessmentId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assessment: {
+      id: assessmentId,
+      informationEngagement: {
+        assessmentStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSESSMENT_INFO_REVISE_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      hideRightpane: true,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+export const updateAssessmentGroupStatus = (
+  selectedAssociateInfo,
+  groupId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assessmentGroup: {
+      id: groupId,
+      informationEngagement: {
+        assessmentGroupStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSESSMENT_GROUP_REVISE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      assessmentGroupAssessmentReqBody: null,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+export const updateAssessmentTypeStatus = (
+  selectedAssociateInfo,
+  typeId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assessmentType: {
+      id: typeId,
+      informationEngagement: {
+        assessmentTypeStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSESSMENT_TYPE_REVISE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      assessmentTypeAssessmentReqBody:null,
+      headerOne: '',
+      reqBody
     }
   });
 };

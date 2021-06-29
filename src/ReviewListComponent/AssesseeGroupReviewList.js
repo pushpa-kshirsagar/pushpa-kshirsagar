@@ -22,7 +22,7 @@ import {
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssesseeGroupReviewList = (props) => {
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue, countPage, selectedAssociateInfo } = useSelector(
+  const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
   );
   const { cardValue } = useSelector((state) => state.PopUpReducer);
@@ -34,7 +34,11 @@ const AssesseeGroupReviewList = (props) => {
     middlePaneSelectedValue,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    unselectedTagsArray,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -86,8 +90,10 @@ const AssesseeGroupReviewList = (props) => {
       type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
       payload: {
         request: requestObect,
-        BadgeOne: 'distinct',
-        BadgeTwo: siftKey
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
@@ -134,6 +140,7 @@ const AssesseeGroupReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log('reviewListDistinctData', reviewListDistinctData);
   return (
     <div>
       {reviewListDistinctData &&

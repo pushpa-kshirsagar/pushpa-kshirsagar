@@ -35,7 +35,7 @@ function* workerReviewAssesseeTypeInfoSaga(data) {
   try {
     const userResponse = yield call(assesseeTypeReviewInfoApi, {
       data: data.payload.reqBody
-  });
+    });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
       const { isReviseMode = false, assesseeTypeAssesseeReqBody = null } = data.payload;
@@ -90,9 +90,9 @@ function* workerReviewAssesseeTypeInfoSaga(data) {
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
-      });
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
@@ -118,7 +118,7 @@ function* workerReviseAssesseeTypeInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { createMode, assesseeTypeAssesseeReqBody=null } = data.payload;
+      const { createMode, assesseeTypeAssesseeReqBody = null } = data.payload;
       if (assesseeTypeAssesseeReqBody !== null) {
         yield put({
           type: GET_ASSESSEETYPE_ASSESSEE_REVIEW_LIST,
@@ -131,18 +131,18 @@ function* workerReviseAssesseeTypeInfoSaga(data) {
             isMiddlePaneList: false
           }
         });
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessees',
+            headerOneBadgeOne: 'type',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: userResponse.responseObject[0],
+            createMode
+          }
+        });
       }
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'assessees',
-          headerOneBadgeOne: 'type',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0],
-          createMode
-        }
-      });
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }
@@ -160,6 +160,10 @@ function* workerReviseAssesseeTypeInfoSaga(data) {
         }
       });
     } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
       yield put({ type: LOADER_STOP });
     }
     yield put({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
@@ -168,9 +172,9 @@ function* workerReviseAssesseeTypeInfoSaga(data) {
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
-      });
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
     yield put({ type: LOADER_STOP });
   }
 }
