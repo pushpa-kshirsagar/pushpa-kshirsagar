@@ -43,7 +43,7 @@ const DisplayPaneThreeSectionTwoAssesseeType = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'assessee',
+      labelTextOneOne: 'assessees',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -61,7 +61,7 @@ const DisplayPaneThreeSectionTwoAssesseeType = () => {
 
   const onclickReviseAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    if (labelName === 'assessee') {
+    if (labelName === 'assessees') {
       console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,

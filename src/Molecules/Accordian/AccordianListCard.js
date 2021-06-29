@@ -27,6 +27,7 @@ const AccordianListCard = (props) => {
     ) {
       setSelectedBadge(labelTextOneOneBadges[0]);
     }
+    setIsListSelectExpanded(false);
   }, [responseObject]);
 
   const cultureProfilerItems = [

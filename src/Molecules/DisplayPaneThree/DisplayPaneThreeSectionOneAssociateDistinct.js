@@ -364,7 +364,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   const setUpListAll = [
     {
       id: 'a1',
-      labelTextOneOne: 'assessee',
+      labelTextOneOne: 'assessees',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'create',
@@ -417,7 +417,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     },
     {
       id: 'a2',
-      labelTextOneOne: 'assessment',
+      labelTextOneOne: 'assessments',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'create',
@@ -466,7 +466,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     },
     {
       id: 'a3',
-      labelTextOneOne: 'assignment',
+      labelTextOneOne: 'assignments',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'create',
@@ -515,7 +515,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     },
     {
       id: 'a4',
-      labelTextOneOne: 'associate',
+      labelTextOneOne: 'associates',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'create',
@@ -776,7 +776,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     },
     {
       id: 'a9',
-      labelTextOneOne: 'item',
+      labelTextOneOne: 'items',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'create',

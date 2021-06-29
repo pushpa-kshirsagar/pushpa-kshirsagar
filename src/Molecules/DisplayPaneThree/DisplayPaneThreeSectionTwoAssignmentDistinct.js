@@ -1,25 +1,64 @@
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import { makeAssesseeReviewListRequestObject } from '../../Actions/GenericActions';
+import {
+  FILTERMODE,
+  LOADER_START,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MOBILE_PANE_STATE
+} from '../../actionType';
 
 const DisplayPaneThreeSectionTwoAssignment = () => {
   const [listExpand, setListExpand] = useState('');
-  const { headerOneBadgeTwo, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const dispatch = useDispatch();
+  const { headerOneBadgeTwo, reviewMode, relatedReviewListPaneThree, responseObject } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
+  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const frameworkList = [
     {
       id: 'a1',
-      labelTextOneOne: 'assessee',
+      labelTextOneOne: 'assessees',
       isListCard: true,
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'norm',
+          textOne: []
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      IconOne: null
+    },
+    {
+      id: 'a3',
+      labelTextOneOne: 'assessments',
+      isListCard: true,
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
           innerList: []
         }
       ],
@@ -28,29 +67,38 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       IconOne: null
     },
     {
-      id: 'a2',
-      labelTextOneOne: 'assessee',
-      isListCard: false,
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'norm',
-          textOne: ''
-        }
-      ],
-      labelTextOneOneBadgeTwo: '',
-      innerAssociateList: [],
-      innerInfo: '',
-      IconOne: null
-    },
-    {
-      id: 'a3',
-      labelTextOneOne: 'assessment',
+      id: 'CP-001',
+      labelTextOneOne: 'culture profiles',
       isListCard: true,
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      IconOne: null
+    },
+    {
+      id: 'JP-001',
+      labelTextOneOne: 'job profiles',
+      isListCard: true,
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'group',
           innerList: []
         }
       ],
@@ -69,7 +117,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'assessment',
+      innerInfo: 'No Information',
       IconOne: null
     }
   ];
@@ -94,6 +142,49 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       IconOne: null
     }
   ];
+  const onclickReviseFramework = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    if (labelName === 'assessee') {
+      console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+      let requestObect = makeAssesseeReviewListRequestObject(
+        selectedAssociateInfo,
+        'active',
+        0,
+        countPage
+      );
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assesseeGroupName: responseObject.informationBasic.assesseeGroupName,
+        assesseeGroupDescription: responseObject.informationBasic.assesseeGroupDescription,
+        assesseeGroupStatus: responseObject.informationEngagement.assesseeGroupStatus
+      };
+      let existingAssesseeId =
+        relatedReviewListPaneThree &&
+        relatedReviewListPaneThree[0].assessee.map((val) => {
+          return val.id;
+        });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeGroupAssesseeRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      // dispatch({
+      //   type: GET_ALLOCATE_ASSESSEE,
+      //   payload: {
+      //     request: requestObect,
+      //     revisedGroupObject: revisedGroupObject,
+      //     existingAssesseeId: existingAssesseeId,
+      //     typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList'
+      //   }
+      // });
+    }
+  };
 
   return (
     <div
@@ -111,6 +202,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
               setListExpand={setListExpand}
               list={frameworkList}
               mode={reviewMode}
+              onClickRevise={onclickReviseFramework}
             />
           </div>
           <div className="containerPadding">
@@ -131,9 +223,18 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={onclickReviseFramework}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={onclickReviseFramework}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );

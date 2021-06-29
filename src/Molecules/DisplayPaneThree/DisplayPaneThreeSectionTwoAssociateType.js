@@ -43,7 +43,7 @@ const DisplayPaneThreeSectionTwoAssociateType = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'associate',
+      labelTextOneOne: 'associates',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -62,7 +62,7 @@ const DisplayPaneThreeSectionTwoAssociateType = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('ASSESSEE CLICK :::::::>>>>>>>', labelName);
-    if (labelName === 'associate' && selectedBadgeName === 'distinct') {
+    if (labelName === 'associates' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssociateNodeObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedGroupObject = {
         id: responseObject.id,

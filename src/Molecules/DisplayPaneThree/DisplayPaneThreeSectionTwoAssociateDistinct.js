@@ -289,7 +289,7 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
   const list3 = [
     {
       id: 'a1',
-      labelTextOneOne: 'associate',
+      labelTextOneOne: 'associates',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -315,6 +315,42 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
               labelTextTwoBadge: 'all',
               innerList: descendantAll
             },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: descendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: descendantSecondary
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true,
+      isMultiList: true
+    },
+    {
+      id: 'AS-001',
+      labelTextOneOne: 'associates',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'assistant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: ascendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: ascendantSecondary
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'collaborator',
+          innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'primary',
               innerList: descendantPrimary
@@ -397,7 +433,7 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
     console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
     if (
-      labelName === 'associate' &&
+      labelName === 'associates' &&
       selectedBadgeName === 'ascendant' &&
       innerSelectedBadgeName === 'primary'
     ) {

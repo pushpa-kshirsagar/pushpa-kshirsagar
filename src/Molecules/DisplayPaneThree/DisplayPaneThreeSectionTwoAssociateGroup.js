@@ -53,7 +53,7 @@ const DisplayPaneThreeSectionTwoAssociateGroup = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'associate',
+      labelTextOneOne: 'associates',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -73,7 +73,7 @@ const DisplayPaneThreeSectionTwoAssociateGroup = () => {
   const onclickReviewAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('Associate review CLICK :::::::>>>>>>>', labelName);
-    if (labelName === 'associate') {
+    if (labelName === 'associates') {
       dispatch({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
         payload: relatedReviewListPaneThree
@@ -95,7 +95,7 @@ const DisplayPaneThreeSectionTwoAssociateGroup = () => {
   };
   const onclickReviseAssessee = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    if (labelName === 'associate') {
+    if (labelName === 'associates') {
       // getAssociateDistinctApiCall(selectedAssociateInfo, 'active', dispatch, countPage, 'distinct');
       console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeAssociateNodeObj(selectedAssociateInfo, 'active', 0, countPage);

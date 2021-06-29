@@ -33,7 +33,7 @@ const DisplayPaneThreeSectionTwoAssessmentType = () => {
   const onclickReviseAssessment = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'assessment' && selectedBadgeName === 'distinct') {
+    if (labelName === 'assessments' && selectedBadgeName === 'distinct') {
       console.log('assessment CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeAssessmentReviewListRequestObject(
         selectedAssociateInfo,
@@ -93,7 +93,7 @@ const DisplayPaneThreeSectionTwoAssessmentType = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'assessment',
+      labelTextOneOne: 'assessments',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',

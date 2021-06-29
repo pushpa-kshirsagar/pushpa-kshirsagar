@@ -47,7 +47,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'item',
+      labelTextOneOne: 'items',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
@@ -66,7 +66,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   const onclickReviseItem = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'item' && selectedBadgeName === 'distinct') {
+    if (labelName === 'items' && selectedBadgeName === 'distinct') {
       console.log('item CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeItemObj(selectedAssociateInfo, 'active', countPage, 0);
       let revisedGroupObject = {

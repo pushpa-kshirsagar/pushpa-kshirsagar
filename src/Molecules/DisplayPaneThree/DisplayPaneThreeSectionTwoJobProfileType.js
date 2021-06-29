@@ -52,7 +52,7 @@ const DisplayPaneThreeSectionTwoJobProfileType = () => {
   const onclickReviseJobProfile = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'job profile' && selectedBadgeName === 'distinct') {
+    if (labelName === 'job profiles' && selectedBadgeName === 'distinct') {
       console.log('job profile CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
       let requestObect = makeJobProfileObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedTypeObject = {
@@ -93,7 +93,7 @@ const DisplayPaneThreeSectionTwoJobProfileType = () => {
   const list2 = [
     {
       id: 'a1',
-      labelTextOneOne: 'job profile',
+      labelTextOneOne: 'job profiles',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',

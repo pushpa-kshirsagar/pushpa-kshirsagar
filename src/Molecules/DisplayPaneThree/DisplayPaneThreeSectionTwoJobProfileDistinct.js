@@ -37,7 +37,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
     },
     {
       id: 'job002',
-      labelTextOneOne: 'job competency',
+      labelTextOneOne: 'job competencies',
       isListCard: true,
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
