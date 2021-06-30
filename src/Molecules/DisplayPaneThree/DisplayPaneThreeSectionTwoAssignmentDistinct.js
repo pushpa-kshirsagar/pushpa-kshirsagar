@@ -5,12 +5,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
-import { makeAssesseeReviewListRequestObject } from '../../Actions/GenericActions';
+import {
+  makeAssesseeReviewListRequestObject,
+  makeAssessmentReviewListRequestObject,
+  makeCultureProfileObj,
+  makeJobProfileObj
+} from '../../Actions/GenericActions';
 import {
   FILTERMODE,
+  GET_ALLOCATE_ASSESSEE,
+  GET_ALLOCATE_ASSESSMENT,
+  GET_ALLOCATE_CULTURE,
+  GET_ALLOCATE_JOB,
   LOADER_START,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  SET_REQUEST_OBJECT
 } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoAssignment = () => {
@@ -144,8 +154,8 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
   ];
   const onclickReviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    if (labelName === 'assessee') {
-      console.log('ASSESSEE CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    if (labelName === 'assessees' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
         'active',
@@ -154,18 +164,18 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       );
       let revisedGroupObject = {
         id: responseObject.id,
-        assesseeGroupName: responseObject.informationBasic.assesseeGroupName,
-        assesseeGroupDescription: responseObject.informationBasic.assesseeGroupDescription,
-        assesseeGroupStatus: responseObject.informationEngagement.assesseeGroupStatus
+        assignmentName: responseObject.informationBasic.assignmentName,
+        assignmentDescription: responseObject.informationBasic.assignmentDescription,
+        assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingAssesseeId =
-        relatedReviewListPaneThree &&
-        relatedReviewListPaneThree[0].assessee.map((val) => {
-          return val.id;
-        });
+      let existingAssesseeId = [];
+      let tempArr = relatedReviewListPaneThree[0]?.assessee || [];
+      existingAssesseeId = tempArr.map((val) => {
+        return val.id;
+      });
       dispatch({
         type: FILTERMODE,
-        payload: { FilterMode: 'assesseeGroupAssesseeRevise' }
+        payload: { FilterMode: 'assignmentDistinctAssesseeRevise' }
       });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -173,16 +183,123 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
-      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-      // dispatch({
-      //   type: GET_ALLOCATE_ASSESSEE,
-      //   payload: {
-      //     request: requestObect,
-      //     revisedGroupObject: revisedGroupObject,
-      //     existingAssesseeId: existingAssesseeId,
-      //     typeOfMiddlePaneList: 'assesseesGroupAssesseeReviewList'
-      //   }
-      // });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSESSEE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingAssesseeId: existingAssesseeId,
+          typeOfMiddlePaneList: 'assignmentDistinctAssesseeReviewList'
+        }
+      });
+    }
+    if (labelName === 'assessments' && selectedBadgeName === 'distinct') {
+      let requestObect = makeAssessmentReviewListRequestObject(
+        selectedAssociateInfo,
+        'active',
+        0,
+        countPage
+      );
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assignmentName: responseObject.informationBasic.assignmentName,
+        assignmentDescription: responseObject.informationBasic.assignmentDescription,
+        assignmentStatus: responseObject.informationEngagement.assignmentStatus
+      };
+      let existingAssesseeId = [];
+      let tempArr = relatedReviewListPaneThree[0]?.assessment || [];
+      existingAssesseeId = tempArr.map((val) => {
+        return val.id;
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentDistinctAssessmentRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSESSMENT,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingAssessmentId: existingAssesseeId,
+          typeOfMiddlePaneList: 'assignmentDistinctAssessmentReviewList'
+        }
+      });
+    }
+    if (labelName === 'culture profiles' && selectedBadgeName === 'distinct') {
+      let requestObect = makeCultureProfileObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assignmentName: responseObject.informationBasic.assignmentName,
+        assignmentDescription: responseObject.informationBasic.assignmentDescription,
+        assignmentStatus: responseObject.informationEngagement.assignmentStatus
+      };
+      let existingCultureProfileId = [];
+      let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
+      existingCultureProfileId = tempArr.map((val) => {
+        return val.id;
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentDistinctCultureProfileRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_CULTURE,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingCultureProfileId: existingCultureProfileId,
+          typeOfMiddlePaneList: 'assignmentDistinctCultureProfileReviewList'
+        }
+      });
+    }
+    if (labelName === 'job profiles' && selectedBadgeName === 'distinct') {
+      let requestObect = makeJobProfileObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assignmentName: responseObject.informationBasic.assignmentName,
+        assignmentDescription: responseObject.informationBasic.assignmentDescription,
+        assignmentStatus: responseObject.informationEngagement.assignmentStatus
+      };
+      let existingJobProfileId = [];
+      let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
+      existingJobProfileId = tempArr.map((val) => {
+        return val.id;
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentDistinctJobProfileRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_JOB,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingJobProfileId: existingJobProfileId,
+          typeOfMiddlePaneList: 'assignmentDistinctJobProfileReviewList'
+        }
+      });
     }
   };
 

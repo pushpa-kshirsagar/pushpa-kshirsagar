@@ -233,7 +233,6 @@ function* workerReviewListCultureProfileAllocateSaga(data) {
         ...data.payload.revisedGroupObject,
         cultureProfile: userResponse.responseObject
       };
-      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
       yield put({
         type: SET_MIDDLEPANE_STATE,
         payload: {
@@ -249,6 +248,7 @@ function* workerReviewListCultureProfileAllocateSaga(data) {
           selectedTagsArray: data.payload.existingCultureProfileId
         }
       });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

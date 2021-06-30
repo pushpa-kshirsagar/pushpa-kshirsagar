@@ -53,6 +53,10 @@ import JobProfileGroupJobProfileDistinctReviewList from '../../ReviewListCompone
 import JobProfileTypeJobProfileDistinctReviewList from '../../ReviewListComponent/JobProfileTypeJobProfileDistinctReviewList';
 import CultureProfileNodeCultureProfileDistinctReviewList from '../../ReviewListComponent/CultureProfileNodeCultureProfileDistinctReviewList';
 import JobProfileNodeJobProfileDistinctReviewList from '../../ReviewListComponent/JobProfileNodeJobProfileDistinctReviewList';
+import AssignmentDistinctAssesseeDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctAssesseeDistinctReviewList';
+import AssignmentDistinctAssessmentDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctAssessmentDistinctReviewList';
+import AssignmentDistinctCultureProfileDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctCultureProfileDistinctReviewList';
+import AssignmentDistinctJobProfileDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctJobProfileDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -156,6 +160,18 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' && (
           <AssesseeGroupAssesseeDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assignmentDistinctAssesseeReviewList' && (
+          <AssignmentDistinctAssesseeDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assignmentDistinctAssessmentReviewList' && (
+          <AssignmentDistinctAssessmentDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assignmentDistinctCultureProfileReviewList' && (
+          <AssignmentDistinctCultureProfileDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assignmentDistinctJobProfileReviewList' && (
+          <AssignmentDistinctJobProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'associatesGroupAssociateReviewList' && (
           <AssociateGroupAssociateDistinctReviewList popupAllClose={popupAllClose} />
