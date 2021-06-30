@@ -89,7 +89,6 @@ function* workerReviewListAssesseSaga(data) {
         ...data.payload.revisedGroupObject,
         assessee: userResponse.responseObject
       };
-      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
       yield put({
         type: SET_MIDDLEPANE_STATE,
         payload: {
@@ -105,6 +104,7 @@ function* workerReviewListAssesseSaga(data) {
           selectedTagsArray: data.payload.existingAssesseeId
         }
       });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
