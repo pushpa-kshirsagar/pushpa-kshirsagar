@@ -106,10 +106,12 @@ const CultureProfileTypeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
+        popupContentArrValue:
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
+        selectedTagShared: e.currentTarget.getAttribute('data-shared')
       }
     });
     dispatch({
@@ -122,9 +124,7 @@ const CultureProfileTypeReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   const associateSeftId =
-  selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
-
-
+    selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary;
   return (
     <div>
       {reviewListDistinctData &&
@@ -140,7 +140,8 @@ const CultureProfileTypeReviewList = (props) => {
                 textOne={item.informationBasic.cultureProfileTypeName}
                 textTwo={item.informationBasic.cultureProfileTypeDescription}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                actualStatus={item.cultureProfileTypeShared ? 'SHARED' : 'UNSHARED'}
+                actualStatus={item.informationEngagement.cultureProfileTypeStatus}
+                shared={item.cultureProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 dataValue={item.informationAllocation.cultureProfileTypeGroup}
@@ -148,9 +149,9 @@ const CultureProfileTypeReviewList = (props) => {
             </div>
           );
         })}
-      {(FilterMode === 'cultureProfileTypeinactive' ||
-        FilterMode === 'cultureProfileTypesuspended' ||
-        FilterMode === 'cultureProfileTypeterminated') && (
+      {(FilterMode === 'cultureProfileTypeDistinctinactive' ||
+        FilterMode === 'cultureProfileTypeDistinctsuspended' ||
+        FilterMode === 'cultureProfileTypeDistinctterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

@@ -13,6 +13,7 @@ import {
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ITEM_REVISE_GROUP_URL, ITEM_REVIEW_GROUP_URL } from '../../endpoints';
+import Store from '../../store';
 
 const itemGroupReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -113,38 +114,41 @@ function* workerReviseItemGroupInfoSaga(data) {
             isMiddlePaneList: false
           }
         });
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'items',
+            headerOneBadgeOne: 'group',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: userResponse.responseObject,
+            createMode
+          }
+        });
       }
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'items',
-          headerOneBadgeOne: 'group',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
-          createMode
-        }
-      });
+
       yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
         payload: []
       });
       // if (createMode === '') {
-      // yield put({
-      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-      //   payload: { stateName: 'reviewListDistinctData', value: [] }
-      // });
-      // yield put({
-      //   type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
-      //   payload: {
-      //     request:  Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-      //     BadgeOne: targetValue,
-      //     BadgeTwo: secondaryOptionCheckValue,
-      //     BadgeThree: '',
-      //     isMiddlePaneList: true
-      //   }
-      // });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+        payload: {
+          HeaderOne: 'items',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
+        }
+      });
       // yield put({
       //   type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
       //   payload: {

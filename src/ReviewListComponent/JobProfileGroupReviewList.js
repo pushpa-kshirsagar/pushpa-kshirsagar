@@ -133,6 +133,7 @@ const JobProfileGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.jobProfileGroupStatus}
+                actualStatus={item.informationEngagement.jobProfileGroupStatus}
                 textOne={item.informationBasic.jobProfileGroupName}
                 textTwo={item.informationBasic.jobProfileGroupDescription}
                 isTooltipActive={false}

@@ -70,11 +70,15 @@ const AssociateNodeReviewList = (props) => {
   ];
 
   const openNodeListPopup = (node, event, target, canUpdate) => {
+    console.log(event);
+    console.log(node);
     let selectedGroup = {};
     let nodeId = node;
+    let nodeStatus = event.currentTarget.getAttribute('status');
     if (target === 'hirarchy') {
       console.log(node.node.id);
       nodeId = node.node.id;
+      nodeStatus = node.node.status;
     }
     let optArr = [...GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION];
     if (
@@ -117,7 +121,8 @@ const AssociateNodeReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
-        selectedTagValue: nodeId
+        selectedTagValue: nodeId,
+        selectedTagStatus: nodeStatus
       }
     });
     dispatch({
@@ -240,6 +245,7 @@ const AssociateNodeReviewList = (props) => {
                         tag={item.id}
                         isSelectedReviewList={middlePaneSelectedValue === item.id}
                         status={item.informationEngagement.associateNodeStatus}
+                        actualStatus={item.informationEngagement.associateNodeStatus}
                         textOne={item.informationBasic.associateNodeName}
                         textTwo={item.informationBasic.associateNodeDescription}
                         isTooltipActive={false}

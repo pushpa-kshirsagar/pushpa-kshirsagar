@@ -110,7 +110,8 @@ const JobProfileTypeReviewList = (props) => {
         popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
+        selectedTagShared: e.currentTarget.getAttribute('data-shared')
       }
     });
     dispatch({
@@ -139,7 +140,8 @@ const JobProfileTypeReviewList = (props) => {
                 textOne={item.informationBasic.jobProfileTypeName}
                 textTwo={item.informationBasic.jobProfileTypeDescription}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                actualStatus={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}
+                actualStatus={item.informationEngagement.jobProfileTypeStatus}
+                shared={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
                 dataValue={item.informationAllocation.jobProfileTypeGroup}
                 onClickEvent={openListPopup}
@@ -147,9 +149,9 @@ const JobProfileTypeReviewList = (props) => {
             </div>
           );
         })}
-      {(FilterMode === 'jobProfileTypeinactive' ||
-        FilterMode === 'jobProfileTypesuspended' ||
-        FilterMode === 'jobProfileTypeterminated') && (
+      {(FilterMode === 'jobProfileTypeDistinctinactive' ||
+        FilterMode === 'jobProfileTypeDistinctsuspended' ||
+        FilterMode === 'jobProfileTypeDistinctterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

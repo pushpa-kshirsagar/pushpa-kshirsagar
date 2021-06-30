@@ -23,7 +23,13 @@ import {
   SET_POPUP_SINGLE_STATE,
   SET_REQUEST_OBJECT,
   SET_SINGLE_ASSOCIATE_INFORMATION,
-  GET_NODE_ASSOCIATE_REVIEW_LIST
+  GET_NODE_ASSOCIATE_REVIEW_LIST,
+  ASSOCIATE_INFO_REVISE_SAGA,
+  ASSOCIATE_GROUP_REVISE_INFO_SAGA,
+  ASSOCIATE_TYPE_INFO_REVISE_SAGA,
+  ASSOCIATE_ROLE_REVISE_INFO_SAGA,
+  GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
+  ASSESSEE_NODE_INFO_REVISE_SAGA
 } from '../actionType';
 import {
   getAssociateTypeAssociateReqObj,
@@ -884,6 +890,169 @@ export const getNodeRelatedAssociateDistinctApiCall = (
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
       isMiddlePaneList: true
+    }
+  });
+};
+
+export const updateAssociateDistinctStatus = (
+  selectedAssociateInfo,
+  associatereviseId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associate: {
+      id: associatereviseId,
+      informationEngagement: {
+        associateStatus: reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSOCIATE_INFO_REVISE_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      secondaryOptionCheckValue: '',
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+
+export const updateAssociateGroupStatus = (
+  selectedAssociateInfo,
+  groupId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateGroup: {
+      id: groupId,
+      informationEngagement: {
+        associateGroupStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSOCIATE_GROUP_REVISE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      associateGroupAssociateReqBody: null,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+export const updateAssociateTypeStatus = (
+  selectedAssociateInfo,
+  typeId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateType: {
+      id: typeId,
+      informationEngagement: {
+        associateTypeStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSOCIATE_TYPE_INFO_REVISE_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      associateTypeAssociateReqBody: null,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+export const updateAssociateRoleStatus = (
+  selectedAssociateInfo,
+  roleId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateRole: {
+      id: roleId,
+      informationEngagement: {
+        associateRoleStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSOCIATE_ROLE_REVISE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      associateRoleAssociateReqBody: null,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+export const updateAssociateNodeStatus = (
+  selectedAssociateInfo,
+  nodeId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    associateNode: {
+      id: nodeId,
+      informationEngagement: {
+        associateNodeStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSESSEE_NODE_INFO_REVISE_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      associateNodeReqBody: null,
+      createMode: '',
+      headerOne: '',
+      reqBody
     }
   });
 };

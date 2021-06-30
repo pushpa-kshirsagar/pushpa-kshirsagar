@@ -136,7 +136,6 @@ const AssessmentGroupReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log(FilterMode);
   return (
     <div>
       {reviewListDistinctData &&

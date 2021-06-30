@@ -105,7 +105,6 @@ const AssessmentDistinctReviewList = (props) => {
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
     { label: 'unpublished', onClick: onClickFooter, Icon: FilterList }
   ];
-  console.log(FilterMode);
 
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
@@ -131,7 +130,6 @@ const AssessmentDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log(FilterMode);
   return (
     <div>
       {reviewListDistinctData &&

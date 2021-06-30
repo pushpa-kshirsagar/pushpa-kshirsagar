@@ -18,8 +18,12 @@ import {
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   SET_PAGE_COUNT,
-  SET_RELATED_REQUEST_OBJECT
+  SET_RELATED_REQUEST_OBJECT,
+  CULTURE_PROFILE_INFO_REVISE_SAGA,
+  CULTURE_GROUP_REVISE_INFO_SAGA,
+  CULTURE_TYPE_REVISE_INFO_SAGA
 } from '../actionType';
+import { CULTURE_PROFILE_REVISE_INFO_URL } from '../endpoints';
 import {
   getCultureGroupCultureReqObj,
   getCultureGroupCultureScanReqObj,
@@ -336,6 +340,101 @@ export const getCultureProfileNodeCultureProfileApiCall = (
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
       isMiddlePaneList: true
+    }
+  });
+};
+
+export const updateCultureProfileDistinctStatus = (
+  selectedAssociateInfo,
+  cultureProfileId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    cultureProfile: {
+      id: cultureProfileId,
+      informationEngagement: {
+        cultureProfileStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: CULTURE_PROFILE_INFO_REVISE_SAGA,
+    payload: { secondaryOptionCheckValue: '', isHideRightPane: true, headerOne: '', reqBody }
+  });
+};
+export const updateCultureProfileGroupStatus = (
+  selectedAssociateInfo,
+  groupId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    cultureProfileGroup: {
+      id: groupId,
+      informationEngagement: {
+        cultureProfileGroupStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: CULTURE_GROUP_REVISE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      cultureGroupCultureReqBody: null,
+      headerOne: '',
+      reqBody
+    }
+  });
+};
+export const updateCultureProfileTypeStatus = (
+  selectedAssociateInfo,
+  typeId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    cultureProfileType: {
+      id: typeId,
+      informationEngagement: {
+        cultureProfileTypeStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: CULTURE_TYPE_REVISE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      cultureTypeCultureReqBody: null,
+      headerOne: '',
+      reqBody
     }
   });
 };

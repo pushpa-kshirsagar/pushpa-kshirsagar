@@ -79,7 +79,12 @@ import {
   getAssociateRoleAssociateDistinctApiCall,
   getAssociateRoleAssociateReqObj,
   getAssociateTypeAssociateDistinctApiCall,
-  getNodeRelatedAssociateDistinctApiCall
+  getNodeRelatedAssociateDistinctApiCall,
+  updateAssociateDistinctStatus,
+  updateAssociateGroupStatus,
+  updateAssociateNodeStatus,
+  updateAssociateRoleStatus,
+  updateAssociateTypeStatus
 } from '../Actions/AssociateModuleAction';
 import {
   getAssessmentGroupAssessmentReqObj,
@@ -105,7 +110,10 @@ import {
 import {
   getItemGroupItemDistinctApiCall,
   getItemTypeItemDistinctApiCall,
-  getNodeRelatedItemsDistinctApiCall
+  getNodeRelatedItemsDistinctApiCall,
+  updateItemDistinctStatus,
+  updateItemGroupStatus,
+  updateItemTypeStatus
 } from '../Actions/ItemModuleAction';
 import {
   getAssessmentGroupAssessmentDistinctApiCall,
@@ -126,12 +134,18 @@ import {
 import {
   getCultureGroupCultureDistinctApiCall,
   getCultureProfileNodeCultureProfileApiCall,
-  getCultureTypeCultureDistinctApiCall
+  getCultureTypeCultureDistinctApiCall,
+  updateCultureProfileDistinctStatus,
+  updateCultureProfileGroupStatus,
+  updateCultureProfileTypeStatus
 } from '../Actions/ActionCultureProfile';
 import {
   getJobProfileGroupJobProfileDistinctApiCall,
   getJobProfileNodeJobProfileApiCall,
-  getJobProfileTypeJobProfileDistinctApiCall
+  getJobProfileTypeJobProfileDistinctApiCall,
+  updateJobProfileDistinctStatus,
+  updateJobProfileGroupStatus,
+  updateJobProfileTypeStatus
 } from '../Actions/ActionJobProfile';
 const PopUpDisplayPaneTwoReviewList = (props) => {
   const {
@@ -1870,29 +1884,53 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       if (typeOfMiddlePaneList === 'assignmentsTypeDistinctReviewList') {
         updateAssignmentTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
-      if (
-        typeOfMiddlePaneList === 'associateDistinctReviewList' ||
-        typeOfMiddlePaneList === 'associatesNodeDistinctReviewList'
-      ) {
-        let reqBody = {
-          assesseeId: selectedAssociateInfo?.assesseeId,
-          associateId:
-            selectedAssociateInfo?.associate?.informationEngagement.associateTag
-              .associateTagPrimary,
-          associate: {
-            id: selectedTagValue,
-            informationEngagement: {
-              associateStatus: keyVal
-            }
-          }
-        };
-        dispatch({ type: LOADER_START });
-        dispatch({
-          type: ASSOCIATE_INFO_REVISE_SAGA,
-          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
-        });
+      if (typeOfMiddlePaneList === 'associateDistinctReviewList') {
+        updateAssociateDistinctStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
-
+      if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
+        updateAssociateGroupStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'associatesTypeDistinctReviewList') {
+        updateAssociateTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
+        updateAssociateRoleStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
+        updateAssociateNodeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
+        updateItemDistinctStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'itemsGroupDistinctReviewList') {
+        updateItemGroupStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'itemsTypeDistinctReviewList') {
+        updateItemTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'cultureProfilesDistinctReviewList') {
+        updateCultureProfileDistinctStatus(
+          selectedAssociateInfo,
+          selectedTagValue,
+          dispatch,
+          keyVal
+        );
+      }
+      if (typeOfMiddlePaneList === 'cultureProfilesGroupDistinctReviewList') {
+        updateCultureProfileGroupStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'cultureProfilesTypeDistinctReviewList') {
+        updateCultureProfileTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesDistinctReviewList') {
+        updateJobProfileDistinctStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesGroupDistinctReviewList') {
+        updateJobProfileGroupStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesTypeDistinctReviewList') {
+        updateJobProfileTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
       dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'information' &&

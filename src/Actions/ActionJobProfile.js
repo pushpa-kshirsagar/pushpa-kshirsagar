@@ -8,7 +8,10 @@ import {
   GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   JOB_GROUP_JOB_REVIEWLIST_SAGA,
+  JOB_GROUP_REVISE_INFO_SAGA,
+  JOB_PROFILE_INFO_REVISE_SAGA,
   JOB_TYPE_JOB_REVIEWLIST_SAGA,
+  JOB_TYPE_REVISE_INFO_SAGA,
   LOADER_START,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
@@ -138,7 +141,7 @@ export const getJobProfileGroupApiCall = (
   countPage,
   dispatch,
   targetValue,
-  cardValue='noCard'
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeJobProfileGroupObj(
     selectedAssociateInfo,
@@ -345,5 +348,89 @@ export const getJobProfileNodeJobProfileApiCall = (
       BadgeThree: '',
       isMiddlePaneList: true
     }
+  });
+};
+export const updateJobProfileDistinctStatus = (
+  selectedAssociateInfo,
+  jobProfileId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    jobProfile: {
+      id: jobProfileId,
+      informationEngagement: {
+        jobProfileStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: JOB_PROFILE_INFO_REVISE_SAGA,
+    payload: { secondaryOptionCheckValue: '', isHideRightPane: true, headerOne: '', reqBody }
+  });
+};
+export const updateJobProfileGroupStatus = (
+  selectedAssociateInfo,
+  groupId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    jobProfileGroup: {
+      id: groupId,
+      informationEngagement: {
+        jobProfileGroupStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: JOB_GROUP_REVISE_INFO_SAGA,
+    payload: { secondaryOptionCheckValue: '', jobGroupJobReqBody: null, headerOne: '', reqBody }
+  });
+};
+export const updateJobProfileTypeStatus = (
+  selectedAssociateInfo,
+  typeId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    jobProfileType: {
+      id: typeId,
+      informationEngagement: {
+        jobProfileTypeStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: JOB_TYPE_REVISE_INFO_SAGA,
+    payload: { secondaryOptionCheckValue: '', jobTypeJobReqBody: null, headerOne: '', reqBody }
   });
 };

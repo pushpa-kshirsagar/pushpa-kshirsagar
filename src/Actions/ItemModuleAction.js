@@ -18,7 +18,10 @@ import {
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
-  SET_PAGE_COUNT
+  SET_PAGE_COUNT,
+  ITEM_INFO_REVISE_SAGA,
+  ITEM_GROUP_REVISE_INFO_SAGA,
+  ITEM_TYPE_REVISE_INFO_SAGA
 } from '../actionType';
 import {
   getItemGroupItemReqObj,
@@ -126,7 +129,7 @@ export const getItemGroupDistinctApiCall = (
   countPage,
   dispatch,
   targetValue,
-  cardValue='noCard'
+  cardValue = 'noCard'
 ) => {
   let requestObj = makeItemGroupObj(selectedAssociateInfo, secondaryOptionCheckValue, 0, countPage);
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -323,5 +326,74 @@ export const getNodeRelatedItemsDistinctApiCall = (
       BadgeThree: '',
       isMiddlePaneList: true
     }
+  });
+};
+export const updateItemDistinctStatus = (selectedAssociateInfo, itemId, dispatch, reviseStatus) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    item: {
+      id: itemId,
+      informationEngagement: {
+        itemStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ITEM_INFO_REVISE_SAGA,
+    payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+  });
+};
+export const updateItemGroupStatus = (selectedAssociateInfo, groupId, dispatch, reviseStatus) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    itemGroup: {
+      id: groupId,
+      informationEngagement: {
+        itemGroupStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ITEM_GROUP_REVISE_INFO_SAGA,
+    payload: { secondaryOptionCheckValue: '', itemGroupItemReqBody: null, headerOne: '', reqBody }
+  });
+};
+export const updateItemTypeStatus = (selectedAssociateInfo, typeId, dispatch, reviseStatus) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    itemType: {
+      id: typeId,
+      informationEngagement: {
+        itemTypeStatus:
+          reviseStatus === 'UNSUSPENDED' ||
+          reviseStatus === 'UNTERMINATED' ||
+          reviseStatus === 'UNARCHIVED'
+            ? 'ACTIVE'
+            : reviseStatus
+      }
+    }
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ITEM_TYPE_REVISE_INFO_SAGA,
+    payload: { secondaryOptionCheckValue: '', itemTypeItemReqBody: null, headerOne: '', reqBody }
   });
 };

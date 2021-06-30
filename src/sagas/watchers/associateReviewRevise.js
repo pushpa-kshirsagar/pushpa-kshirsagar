@@ -8,9 +8,12 @@ import {
   SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
   ASSOCIATE_INFO_REVISE_SAGA,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  ASSOCIATE_REVIEW_DISTINCT_SAGA
 } from '../../actionType';
 import { ASSOCIATE_INFO_REVISE_URL, ASSOCIATE_REVIEW_INFO_URL } from '../../endpoints';
+import Store from '../../store';
 
 const associateReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -114,21 +117,24 @@ function* workerReviseInfoAssociateSaga(data) {
           payload: 'review'
         });
       }
-      // if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
-      //   yield put({
-      //     type: SET_DISPLAY_TWO_SINGLE_STATE,
-      //     payload: { stateName: 'reviewListDistinctData', value: [] }
-      //   });
-      //   yield put({
-      //     type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
-      //     payload: {
-      //       HeaderOne: 'associates',
-      //       request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-      //       BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-      //       BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo
-      //     }
-      //   });
-      // }
+      if (Store.getState().PopUpReducer.cardValue === 'NoCard') {
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: ASSOCIATE_REVIEW_DISTINCT_SAGA,
+          payload: {
+            HeaderOne: 'associates',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
 
       console.log('loading end');
       yield put({ type: LOADER_STOP });

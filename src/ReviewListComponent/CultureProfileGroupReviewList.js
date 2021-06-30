@@ -134,6 +134,7 @@ const CultureProfileGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.cultureProfileGroupStatus}
+                actualStatus={item.informationEngagement.cultureProfileGroupStatus}
                 textOne={item.informationBasic.cultureProfileGroupName}
                 textTwo={item.informationBasic.cultureProfileGroupDescription}
                 isTooltipActive={false}

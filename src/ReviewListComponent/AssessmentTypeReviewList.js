@@ -124,7 +124,8 @@ const AssessmentTypeReviewList = (props) => {
             : ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
+        selectedTagShared: e.currentTarget.getAttribute('data-shared')
       }
     });
     dispatch({
@@ -157,7 +158,8 @@ const AssessmentTypeReviewList = (props) => {
                 textOne={item.informationBasic.assessmentTypeName}
                 textTwo={item.informationBasic.assessmentTypeDescription}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                actualStatus={item.assessmentTypeShared ? 'SHARED' : 'UNSHARED'}
+                actualStatus={item.informationEngagement.assessmentTypeStatus}
+                shared={item.assessmentTypeShared ? 'SHARED' : 'UNSHARED'}
                 dataValue={item.informationAllocation?.assessmentTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}

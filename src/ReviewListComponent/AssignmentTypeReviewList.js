@@ -127,7 +127,9 @@ const AssignmentTypeReviewList = (props) => {
             : ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
+        selectedTagShared: e.currentTarget.getAttribute('data-shared')
+
       }
     });
     dispatch({
@@ -159,7 +161,8 @@ const AssignmentTypeReviewList = (props) => {
                 textOne={item.informationBasic.assignmentTypeName}
                 textTwo={item.informationBasic.assignmentTypeDescription}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                actualStatus={item.assignmentTypeShared ? 'SHARED' : 'UNSHARED'}
+                actualStatus={item.informationEngagement.assignmentTypeStatus}
+                shared={item.assignmentTypeShared ? 'SHARED' : 'UNSHARED'}
                 dataValue={item.informationAllocation?.assignmentTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}

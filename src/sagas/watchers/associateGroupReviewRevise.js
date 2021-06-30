@@ -8,9 +8,12 @@ import {
   GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA
 } from '../../actionType';
 import { ASSOCIATE_GROUP_INFO_REVISE_URL, ASSOCIATE_REVIEW_GROUP_URL } from '../../endpoints';
+import Store from '../../store';
 
 const associateGroupReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -112,16 +115,32 @@ function* workerReviseAssociateGroupInfoSaga(data) {
             isMiddlePaneList: false
           }
         });
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'associates',
+            headerOneBadgeOne: 'group',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: userResponse.responseObject[0],
+            createMode
+          }
+        });
       }
       yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'reviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
         payload: {
-          headerOne: 'associates',
-          headerOneBadgeOne: 'group',
-          headerOneBadgeTwo: 'information',
-          headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject[0],
-          createMode
+          HeaderOne: 'associates',
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+          isMiddlePaneList: true
         }
       });
       yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });

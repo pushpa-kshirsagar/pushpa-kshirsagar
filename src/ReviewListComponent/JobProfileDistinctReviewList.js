@@ -132,6 +132,7 @@ const JobProfileDistinctReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={item.informationEngagement.jobProfileStatus}
+                actualStatus={item.informationEngagement.jobProfileStatus}
                 textOne={item.informationBasic.jobProfileName}
                 textTwo={item.informationBasic.jobProfileDescription}
                 isTooltipActive={false}

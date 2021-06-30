@@ -56,7 +56,9 @@ function* workerReviewInfoCultureProfileSaga(data) {
           informationAllocation?.cultureProfileGroup?.cultureProfileGroupPrimary &&
           informationAllocation?.cultureProfileGroup?.cultureProfileGroupPrimary.length > 0
         ) {
-          let tempArr = informationAllocation.cultureProfileGroup.cultureProfileGroupPrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.cultureProfileGroup.cultureProfileGroupPrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_CULTURE_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -110,7 +112,9 @@ function* workerReviewInfoCultureProfileSaga(data) {
           informationAllocation?.cultureProfileNode?.cultureProfileNodePrimary &&
           informationAllocation?.cultureProfileNode?.cultureProfileNodePrimary.length > 0
         ) {
-          let tempArr = informationAllocation.cultureProfileNode.cultureProfileNodePrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.cultureProfileNode.cultureProfileNodePrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_CULTURE_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -164,7 +168,9 @@ function* workerReviewInfoCultureProfileSaga(data) {
           informationAllocation?.cultureProfileType?.cultureProfileTypePrimary &&
           informationAllocation?.cultureProfileType?.cultureProfileTypePrimary.length > 0
         ) {
-          let tempArr = informationAllocation.cultureProfileType.cultureProfileTypePrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.cultureProfileType.cultureProfileTypePrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_CULTURE_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -245,17 +251,19 @@ function* workerReviseInfoCultureProfileSaga(data) {
   try {
     const userResponse = yield call(cultureProfileReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
-      const { createMode } = data.payload;
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'culture profile',
-          headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject[0],
-          createMode
-        }
-      });
+      const { createMode, isHideRightPane = false } = data.payload;
+      if (!isHideRightPane) {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'culture profile',
+            headerOneBadgeOne: 'information',
+            headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+            responseObject: userResponse.responseObject[0],
+            createMode
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }

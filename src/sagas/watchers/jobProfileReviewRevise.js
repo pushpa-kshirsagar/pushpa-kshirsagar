@@ -56,7 +56,9 @@ function* workerReviewInfoJobProfileSaga(data) {
           informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary &&
           informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary.length > 0
         ) {
-          let tempArr = informationAllocation.jobProfileGroup.jobProfileGroupPrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.jobProfileGroup.jobProfileGroupPrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_JOB_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -110,7 +112,9 @@ function* workerReviewInfoJobProfileSaga(data) {
           informationAllocation?.jobProfileNode?.jobProfileNodePrimary &&
           informationAllocation?.jobProfileNode?.jobProfileNodePrimary.length > 0
         ) {
-          let tempArr = informationAllocation.jobProfileNode.jobProfileNodePrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.jobProfileNode.jobProfileNodePrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_JOB_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -164,7 +168,9 @@ function* workerReviewInfoJobProfileSaga(data) {
           informationAllocation?.jobProfileType?.jobProfileTypePrimary &&
           informationAllocation?.jobProfileType?.jobProfileTypePrimary.length > 0
         ) {
-          let tempArr = informationAllocation.jobProfileType.jobProfileTypePrimary.map((ob) => ob.id);
+          let tempArr = informationAllocation.jobProfileType.jobProfileTypePrimary.map(
+            (ob) => ob.id
+          );
           yield put({
             type: SET_JOB_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -245,17 +251,20 @@ function* workerReviseInfoJobProfileSaga(data) {
   try {
     const userResponse = yield call(jobProfileReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
-      const { createMode } = data.payload;
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'job profile',
-          headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject[0],
-          createMode
-        }
-      });
+      const { createMode, isHideRightPane = false } = data.payload;
+      if (!isHideRightPane) {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'job profile',
+            headerOneBadgeOne: 'information',
+            headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+            responseObject: userResponse.responseObject[0],
+            createMode
+          }
+        });
+      }
+
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }

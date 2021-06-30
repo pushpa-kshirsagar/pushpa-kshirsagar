@@ -193,6 +193,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
         'job profiles',
         dispatch
       );
+      dispatch({ type: POPUP_CLOSE });
     } else if (
       middlePaneHeader === 'assessees' ||
       middlePaneHeader === 'administrators' ||

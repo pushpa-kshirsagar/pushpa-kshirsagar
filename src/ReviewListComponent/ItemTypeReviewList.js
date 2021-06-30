@@ -110,7 +110,8 @@ const ItemTypeReviewList = (props) => {
         popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
+        selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
+        selectedTagShared: e.currentTarget.getAttribute('data-shared')
       }
     });
     dispatch({
@@ -140,7 +141,8 @@ const ItemTypeReviewList = (props) => {
                 textOne={item.informationBasic.itemTypeName}
                 textTwo={item.informationBasic.itemTypeDescription}
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                actualStatus={item.itemTypeShared ? 'SHARED' : 'UNSHARED'}
+                actualStatus={item.informationEngagement.itemTypeStatus}
+                shared={item.itemTypeShared ? 'SHARED' : 'UNSHARED'}
                 dataValue={item.informationAllocation?.itemTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}

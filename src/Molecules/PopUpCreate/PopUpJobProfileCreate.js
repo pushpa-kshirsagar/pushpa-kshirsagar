@@ -541,7 +541,7 @@ const PopUpJobProfileCreate = (props) => {
         textOneOne={'shortlist'}
         textOneTwo={'eight or more'}
         textOneThree={'job competencies'}
-        textOneFour={'from the following twelve lists'}
+        textOneFour={'from the following eleven lists'}
         mode={'next'}
       />
     </div>
