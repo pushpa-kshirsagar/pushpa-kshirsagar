@@ -11,10 +11,18 @@ import {
   SET_REVIEW_LIST_RELATE_DATA,
   GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA,
   GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA,
-  GET_ALLOCATE_ASSIGNMENT
+  GET_ALLOCATE_ASSIGNMENT,
+  GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA
 } from '../../actionType';
 import {
   ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL,
+  ASSIGNMENT_DISTINCT_ASSESSEE_URL,
+  ASSIGNMENT_DISTINCT_ASSESSMENT_URL,
+  ASSIGNMENT_DISTINCT_CULTURE_PROFILE_URL,
+  ASSIGNMENT_DISTINCT_JOB_PROFILE_URL,
   ASSIGNMENT_GROUP_ASSIGNMENT_URL,
   ASSIGNMENT_REVIEW_LIST_URL,
   ASSIGNMENT_TYPE_ASSIGNMENT_URL
@@ -160,6 +168,179 @@ function* workeAssignmentGroupAssignment(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workeAssignmentDistictAssessees(data) {
+  try {
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSIGNMENT_DISTINCT_ASSESSEE_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assignments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assignmentDistinctAssesseeReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workeAssignmentDistictAssessment(data) {
+  try {
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSIGNMENT_DISTINCT_ASSESSMENT_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assignments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assignmentDistinctAssessmentReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workeAssignmentDistictCultureProfile(data) {
+  try {
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSIGNMENT_DISTINCT_CULTURE_PROFILE_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assignments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assignmentDistinctCultureProfileReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workeAssignmentDistictJobProfile(data) {
+  try {
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSIGNMENT_DISTINCT_JOB_PROFILE_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assignments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assignmentDistinctJobProfileReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+
 function* workerAssignmentNodeAssignment(data) {
   try {
     const response = yield call(apiCallFun, {
@@ -254,6 +435,22 @@ export default function* watchReviewListAssignmentSaga() {
   yield takeLatest(ASSIGNMENT_REVIEW_DISTINCT_SAGA, workerReviewListAssignmentSaga);
   yield takeLatest(GET_ASSIGNMENTTYPE_ASSIGNMENT_REVIEWLIST_SAGA, workeAssignmentTypeAssignment);
   yield takeLatest(GET_ASSIGNMENTGROUP_ASSIGNMENT_REVIEWLIST_SAGA, workeAssignmentGroupAssignment);
+  yield takeLatest(
+    GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+    workeAssignmentDistictAssessees
+  );
+  yield takeLatest(
+    GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+    workeAssignmentDistictAssessment
+  );
+  yield takeLatest(
+    GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
+    workeAssignmentDistictCultureProfile
+  );
+  yield takeLatest(
+    GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA,
+    workeAssignmentDistictJobProfile
+  );
   yield takeLatest(GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA, workerAssignmentNodeAssignment);
   yield takeLatest(GET_ALLOCATE_ASSIGNMENT, workerReviewListAssignmentAllocateSaga);
 }

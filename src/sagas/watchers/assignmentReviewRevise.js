@@ -8,7 +8,10 @@ import {
   SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  ASSIGNMENT_REVIEW_DISTINCT_SAGA
+  ASSIGNMENT_REVIEW_DISTINCT_SAGA,
+  SET_ASSIGNMENT_RELATED_LIST,
+  GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA
 } from '../../actionType';
 import { ASSIGNMENT_REVIEW_INFO_URL, ASSIGNMENT_REVISE_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -34,7 +37,31 @@ function* workerReviewInfoAssignmentSaga(data) {
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       console.log('ASSIGNMENT_REVIEW_INFO=======>', userResponse);
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, relatedReqObj = null } = data.payload;
+      if (relatedReqObj !== null) {
+        yield put({
+          type: GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+          payload: {
+            request: relatedReqObj,
+            HeaderOne: 'assignments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+        // yield put({
+        //   type: GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+        //   payload: {
+        //     request: relatedReqObj,
+        //     HeaderOne: 'assignments',
+        //     BadgeOne: '',
+        //     BadgeTwo: '',
+        //     BadgeThree: '',
+        //     isMiddlePaneList: false
+        //   }
+        // });
+      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -276,6 +303,22 @@ function* workerReviseInfoAssignmentSaga(data) {
       console.log('loading end');
       yield put({ type: LOADER_STOP });
     }
+    yield put({
+      type: SET_ASSIGNMENT_RELATED_LIST,
+      payload: { listName: 'assignmentAssesseeList', value: [] }
+    });
+    yield put({
+      type: SET_ASSIGNMENT_RELATED_LIST,
+      payload: { listName: 'assignmentAssessmentList', value: [] }
+    });
+    yield put({
+      type: SET_ASSIGNMENT_RELATED_LIST,
+      payload: { listName: 'assignmentCultureProfileList', value: [] }
+    });
+    yield put({
+      type: SET_ASSIGNMENT_RELATED_LIST,
+      payload: { listName: 'assignmentJobProfileList', value: [] }
+    });
   } catch (e) {
     console.log('ERROR==', e);
     yield put({

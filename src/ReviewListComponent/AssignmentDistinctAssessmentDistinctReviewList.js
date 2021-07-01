@@ -6,6 +6,7 @@ import {
   FILTERMODE_ENABLE,
   POPUP_OPEN,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_ASSIGNMENT_RELATED_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -18,7 +19,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import { onClickCheckBoxOneListSelection, onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -122,10 +123,9 @@ const AssignmentDistinctAssessmentDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     dispatch({
-      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-      payload: unselectedTagsArray
+      type: SET_ASSIGNMENT_RELATED_LIST,
+      payload: { listName: 'assignmentAssessmentList', value: selectedTagsArray }
     });
   };
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
@@ -234,7 +234,7 @@ const AssignmentDistinctAssessmentDistinctReviewList = (props) => {
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item.id)}
                 onClickCheckBox={(event) => {
-                  onClickCheckBoxSelection(selectedTagsArray, event, dispatch);
+                  onClickCheckBoxOneListSelection(selectedTagsArray, event, dispatch);
                 }}
               />
             </div>

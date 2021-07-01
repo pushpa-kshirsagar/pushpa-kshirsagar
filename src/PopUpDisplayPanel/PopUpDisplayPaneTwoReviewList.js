@@ -518,10 +518,18 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         // typeOfMiddlePaneList === 'assignmentNodeAssignmentReviewList' ||
         typeOfMiddlePaneList === 'assignmentGroupAssignmentReviewList'
       ) {
+        let relatedReqObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentId: selectedTagValue
+        };
         dispatch({
           type: GET_ASSIGNMENT_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
+            relatedReqObj,
             isReviseMode,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,

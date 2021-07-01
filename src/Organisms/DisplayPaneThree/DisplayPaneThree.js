@@ -156,7 +156,11 @@ export const DisplayPaneThree = () => {
     createMode,
     assesseeGroupAssessee,
     assesseeRoleAssessee,
-    associateNodeAssessee
+    associateNodeAssessee,
+    assignmentAssesseeList = [],
+    assignmentAssessmentList = [],
+    assignmentCultureProfileList = [],
+    assignmentJobProfileList = []
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { typeOfMiddlePaneList, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -1411,7 +1415,8 @@ export const DisplayPaneThree = () => {
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId: id,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         jobProfile: {
           id,
           informationBasic,
@@ -1496,15 +1501,21 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assignment') {
+      console.log('ASSIGNMENT REVISE+++++>', assignmentAssessmentList, assignmentAssesseeList);
       const { informationBasic, informationAllocation } = assignmentInfo;
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId: id,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         assignment: {
           id,
           informationBasic,
-          informationAllocation
+          informationAllocation,
+          informationFramework: {
+            assignmentAssessee: assignmentAssesseeList || [],
+            assignmentAssessment: assignmentAssessmentList || []
+          }
         }
       };
       dispatch({ type: LOADER_START });

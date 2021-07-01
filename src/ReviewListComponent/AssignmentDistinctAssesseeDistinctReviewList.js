@@ -10,7 +10,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_POPUP_STATE
+  SET_POPUP_STATE,
+  SET_ASSIGNMENT_RELATED_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -127,10 +128,9 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     dispatch({
-      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-      payload: unselectedTagsArray
+      type: SET_ASSIGNMENT_RELATED_LIST,
+      payload: { listName: 'assignmentAssesseeList', value: selectedTagsArray }
     });
   };
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];

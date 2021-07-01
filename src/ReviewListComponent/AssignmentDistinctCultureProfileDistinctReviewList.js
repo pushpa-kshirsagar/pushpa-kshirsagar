@@ -6,6 +6,7 @@ import {
   FILTERMODE_ENABLE,
   POPUP_OPEN,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_ASSIGNMENT_RELATED_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -77,10 +78,9 @@ const AssignmentDistinctCultureProfileDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     dispatch({
-      type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-      payload: unselectedTagsArray
+      type: SET_ASSIGNMENT_RELATED_LIST,
+      payload: { listName: 'assignmentCultureProfileList', value: selectedTagsArray }
     });
   };
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];

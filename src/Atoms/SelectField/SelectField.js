@@ -19,13 +19,15 @@ export const SelectField = (props) => {
     onChange,
     value,
     mappingValue,
-    dataValue = ''
+    dataValue = '',
+    labelBadgeOne = ''
   } = props;
   return (
     <Fragment>
       <FormControl className={'selectFormText'}>
         <InputLabel htmlFor={tag} style={{ marginBottom: 0, fontSize: '1.6rem' }}>
-          {label}
+          {label} &nbsp;
+          {labelBadgeOne ? <span className={'labelheaderBadge'}>{labelBadgeOne}</span> : null}
         </InputLabel>
         <Select
           id={tag}

@@ -10,12 +10,9 @@ import { ASSOCIATE_SIGN_ON, SET_STATUS_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
-  const {
-    responseObject,
-    headerOneBadgeTwo,
-    reviewMode,
-    administratorSecondary,
-  } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { responseObject, headerOneBadgeTwo, reviewMode, administratorSecondary } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const { middlePaneHeader = '' } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     informationEngagement,
@@ -27,7 +24,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  useEffect(()=>{},[administratorSecondary]);
+  useEffect(() => {}, [administratorSecondary]);
   const dispatch = useDispatch();
   let administratorPrimaryList = [];
   if (informationAlliance?.associateAdministratorPrimary) {
@@ -1051,7 +1048,79 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   };
   const reviseSetup = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('=====>', labelName);
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
+    console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
+    if (
+      labelName === 'assessees' &&
+      selectedBadgeName === 'create' &&
+      innerSelectedBadgeName === 'approval'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'ASSESSEECREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (
+      labelName === 'assessees' &&
+      selectedBadgeName === 'create' &&
+      innerSelectedBadgeName === 'fee'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'ASSESSEECREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (
+      labelName === 'assessees' &&
+      selectedBadgeName === 'information' &&
+      innerSelectedBadgeName === 'distinct'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'ASSESSEEINFODISTINCTPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (
+      labelName === 'assessees' &&
+      selectedBadgeName === 'information' &&
+      innerSelectedBadgeName === 'group'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'ASSESSEEINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (
+      labelName === 'assessees' &&
+      selectedBadgeName === 'information' &&
+      innerSelectedBadgeName === 'role'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'ASSESSEEINFOROLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (
+      labelName === 'assessees' &&
+      selectedBadgeName === 'information' &&
+      innerSelectedBadgeName === 'type'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'ASSESSEEINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (
+      labelName === 'assessees' &&
+      selectedBadgeName === '+' &&
+      innerSelectedBadgeName === 'name'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'PEOPLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
     if (labelName === 'date') {
       dispatch({
         type: ASSOCIATE_SIGN_ON,

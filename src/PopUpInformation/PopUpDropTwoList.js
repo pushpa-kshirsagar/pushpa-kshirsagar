@@ -8,10 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import SelectField from '../Atoms/SelectField/SelectField';
-import InputLabel from '@material-ui/core/InputLabel';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 
-const PopUpDropList = (props) => {
+const PopUpDropTwoList = (props) => {
   const dispatch = useDispatch();
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   //props
@@ -22,20 +21,20 @@ const PopUpDropList = (props) => {
     headerOneBadgeOne,
     headerOneBadgeTwo,
     listSelect,
+    listSelectTwo,
     isRequired = false,
     basicInfo,
     tag,
+    tagTwo,
     label,
-    labelBadgeOne = '',
+    labelTwo,
     typeOfSetObject,
     nextPopUpValue,
     mappingValue,
+    mappingValueTwo,
     handleNextPopupValue,
     mode,
-    isNotRevised = false,
-    inputHeader = '',
-    inputHeaderBadgeOne = '',
-    inputHeaderBadgeTwo = ''
+    isNotRevised = false
   } = props;
 
   //states
@@ -100,26 +99,6 @@ const PopUpDropList = (props) => {
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
-          {inputHeader !== '' && (
-            <div className={'fitContent'}>
-              <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
-                <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
-                  <>
-                    {inputHeader}&nbsp;
-                    {inputHeaderBadgeOne ? (
-                      <span className={'headerBadge'}>{inputHeaderBadgeOne}</span>
-                    ) : null}
-                    &nbsp;
-                    {inputHeaderBadgeTwo ? (
-                      <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
-                    ) : null}
-                  </>
-                </InputLabel>
-                <div className={'infoSymbol'}></div>
-                <div className={'infoSymbol'}>{/* <InfoToolTip message={infoMsg} /> */}</div>
-              </div>
-            </div>
-          )}
           <FormControl style={{ width: '100%' }}>
             <SelectField
               tag={tag}
@@ -129,7 +108,15 @@ const PopUpDropList = (props) => {
               onChange={handleChange}
               value={isNotRevised ? basicInfo : basicInfo && basicInfo[tag]}
               mappingValue={mappingValue}
-              labelBadgeOne={labelBadgeOne}
+            />
+            <SelectField
+              tag={tagTwo}
+              label={labelTwo}
+              listSelect={listSelectTwo}
+              errorMsg={state.isError}
+              onChange={handleChange}
+              value={isNotRevised ? basicInfo : basicInfo && basicInfo[tagTwo]}
+              mappingValue={mappingValueTwo}
             />
           </FormControl>
         </DialogContent>
@@ -137,7 +124,7 @@ const PopUpDropList = (props) => {
     </div>
   );
 };
-PopUpDropList.propTypes = {
+PopUpDropTwoList.propTypes = {
   className: PropTypes.string,
   headerPanelColour: PropTypes.oneOf([
     'displayPaneLeft',
@@ -152,4 +139,4 @@ PopUpDropList.propTypes = {
   headerOneBadgeThree: PropTypes.string,
   isActive: PropTypes.bool
 };
-export default PopUpDropList;
+export default PopUpDropTwoList;

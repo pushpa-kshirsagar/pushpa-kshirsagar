@@ -41,6 +41,7 @@ import {
 } from '../actionType';
 import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../endpoints';
+import PopUpDropTwoList from '../PopUpInformation/PopUpDropTwoList';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
@@ -617,6 +618,162 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSEECREATEAPPROVALPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'approval'}
+        listSelect={[
+          { id: 'y', name: 'Approval Not Required' },
+          { id: 'n', name: 'Approval Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessees'}
+        inputHeaderBadgeOne={'create'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ASSESSEECREATEFEEPOPUP'}
+        label={'fee'}
+        headerPanelColour={'genericOne'}
+        inputHeader={'assessees'}
+        inputHeaderBadgeOne={'create'}
+        type={'number'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'information'}
+        isRequired={false}
+        actualLableValue={'assesseeCreateFee'}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSEEINFODISTINCTPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'assessees'}
+        labelBadgeOne={'distinct'}
+        listSelect={[
+          { id: 'a', name: 'Unique Name & Alias Not Rquired' },
+          { id: 'b', name: 'Unique Name + Alias Required' },
+          { id: 'c', name: 'Unique Name Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessees'}
+        inputHeaderBadgeOne={'information'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSEEINFOGROUPPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'assessees'}
+        labelBadgeOne={'group'}
+        listSelect={[
+          { id: 'a', name: 'Unique Name & Description Not Rquired' },
+          { id: 'b', name: 'Unique Name + Alias Required' },
+          { id: 'c', name: 'Unique Name Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessees'}
+        inputHeaderBadgeOne={'information'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSEEINFOROLEPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'assessees'}
+        labelBadgeOne={'role'}
+        listSelect={[
+          { id: 'a', name: 'Unique Name & Description Not Rquired' },
+          { id: 'b', name: 'Unique Name + Alias Required' },
+          { id: 'c', name: 'Unique Name Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessees'}
+        inputHeaderBadgeOne={'information'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSEEINFOTYPEPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'assessees'}
+        labelBadgeOne={'type'}
+        listSelect={[
+          { id: 'a', name: 'Unique Name & Description Not Rquired' },
+          { id: 'b', name: 'Unique Name + Alias Required' },
+          { id: 'c', name: 'Unique Name Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessees'}
+        inputHeaderBadgeOne={'information'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      {/* <PopUpDropTwoList
+        isActive={isPopUpValue === 'ASSESSEEINFODISTINCTPOPUP'}
+        tag={'assesseeNameUnique'}
+        tagTwo={'assesseeNameAliasUnique'}
+        label={'name unique'}
+        labelTwo={'name alias unique'}
+        listSelect={[
+          { id: 'yes', name: 'YES' },
+          { id: 'no', name: 'NO' }
+        ]}
+        listSelectTwo={[
+          { id: 'yes', name: 'YES' },
+          { id: 'no', name: 'NO' }
+        ]}
+        mappingValue={'id'}
+        mappingValueTwo={'id'}
+        labelval={'people'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessees'}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
       <PopUpTextField
         isActive={isPopUpValue === 'WEBSITEADDRESSPOPUP'}
         label={'website address'}

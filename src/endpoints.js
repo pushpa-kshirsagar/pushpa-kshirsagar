@@ -244,6 +244,14 @@ export const ASSIGNMENT_TYPE_ASSIGNMENT_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/assignment/review-list';
 export const ASSIGNMENT_GROUP_ASSIGNMENT_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/assignment/review-list';
+export const ASSIGNMENT_DISTINCT_ASSESSEE_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/assessee/review-list';
+export const ASSIGNMENT_DISTINCT_ASSESSMENT_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/assessment/review-list';
+export const ASSIGNMENT_DISTINCT_CULTURE_PROFILE_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/culture-profile/review-list';
+export const ASSIGNMENT_DISTINCT_JOB_PROFILE_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/job-profile/review-list';
 export const ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/associate-node/assignment/review-list';
 export const SEND_AUTH_CODE_URL = PLATFORM_URL + '/dev/insight-guru/api/platform/forgot-password';

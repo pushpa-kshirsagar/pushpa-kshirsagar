@@ -5,6 +5,7 @@ import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 import Checkbox from '@material-ui/core/Checkbox';
+import InputLabel from '@material-ui/core/InputLabel';
 import '../Molecules/PopUp/PopUp.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
@@ -29,7 +30,11 @@ const PopUpTextField = (props) => {
     actualLableValue,
     labelBadgeOne = '',
     mode,
-    isNotRevised = false
+    type = 'text',
+    isNotRevised = false,
+    inputHeader = '',
+    inputHeaderBadgeOne = '',
+    inputHeaderBadgeTwo = ''
   } = props;
   let errorMessage = isNotRevised ? 'this information cannot be revised' : '';
   const [state, setState] = useState({
@@ -92,10 +97,31 @@ const PopUpTextField = (props) => {
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
+          {inputHeader !== '' && (
+            <div className={'fitContent'}>
+              <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
+                <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                  <>
+                    {inputHeader}&nbsp;
+                    {inputHeaderBadgeOne ? (
+                      <span className={'headerBadge'}>{inputHeaderBadgeOne}</span>
+                    ) : null}
+                    &nbsp;
+                    {inputHeaderBadgeTwo ? (
+                      <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
+                    ) : null}
+                  </>
+                </InputLabel>
+                <div className={'infoSymbol'}></div>
+                <div className={'infoSymbol'}>{/* <InfoToolTip message={infoMsg} /> */}</div>
+              </div>
+            </div>
+          )}
           <FormControl style={{ width: '100%' }}>
             <InputFeild
               id={actualLableValue}
               label={label}
+              type={type}
               value={basicInfo && isNotRevised ? basicInfo : localObject[actualLableValue]}
               onClick={handleChange}
               errorMsg={state.error}
