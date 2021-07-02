@@ -38,30 +38,6 @@ function* workerReviewInfoAssignmentSaga(data) {
     if (userResponse.responseCode === '000') {
       console.log('ASSIGNMENT_REVIEW_INFO=======>', userResponse);
       const { isReviseMode = false, relatedReqObj = null } = data.payload;
-      if (relatedReqObj !== null) {
-        yield put({
-          type: GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
-          payload: {
-            request: relatedReqObj,
-            HeaderOne: 'assignments',
-            BadgeOne: '',
-            BadgeTwo: '',
-            BadgeThree: '',
-            isMiddlePaneList: false
-          }
-        });
-        // yield put({
-        //   type: GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
-        //   payload: {
-        //     request: relatedReqObj,
-        //     HeaderOne: 'assignments',
-        //     BadgeOne: '',
-        //     BadgeTwo: '',
-        //     BadgeThree: '',
-        //     isMiddlePaneList: false
-        //   }
-        // });
-      }
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -235,6 +211,30 @@ function* workerReviewInfoAssignmentSaga(data) {
           });
         }
       }
+      // if (relatedReqObj !== null) {
+      //   yield put({
+      //     type: GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+      //     payload: {
+      //       request: relatedReqObj,
+      //       HeaderOne: 'assignments',
+      //       BadgeOne: '',
+      //       BadgeTwo: '',
+      //       BadgeThree: '',
+      //       isMiddlePaneList: false
+      //     }
+      //   });
+      //   yield put({
+      //     type: GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+      //     payload: {
+      //       request: relatedReqObj,
+      //       HeaderOne: 'assignments',
+      //       BadgeOne: '',
+      //       BadgeTwo: '',
+      //       BadgeThree: '',
+      //       isMiddlePaneList: false
+      //     }
+      //   });
+      // }
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });

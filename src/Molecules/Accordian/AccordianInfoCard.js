@@ -10,10 +10,6 @@ const AccordianInfoCard = (props) => {
   const {
     labelTextOneOne = '',
     labelTextOneOneBadges = [],
-    labelTextOneOneBadgeOne = '',
-    labelTextOneOneBadgeTwo = '',
-    labelTextOneOneBadgeThree,
-    labelTextOneOneBadgeFour = '',
     IconOne,
     IconTwo,
     textOneOne = '',

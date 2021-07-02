@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,8 @@ import {
   GET_ALLOCATE_ASSESSMENT,
   GET_ALLOCATE_CULTURE,
   GET_ALLOCATE_JOB,
+  GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
   LOADER_START,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -26,11 +28,42 @@ import {
 const DisplayPaneThreeSectionTwoAssignment = () => {
   const [listExpand, setListExpand] = useState('');
   const dispatch = useDispatch();
-  const { headerOneBadgeTwo, reviewMode, relatedReviewListPaneThree, responseObject } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
-  );
+  const {
+    headerOneBadgeTwo,
+    reviewMode,
+    relatedReviewListPaneThree,
+    responseObject,
+    assignmentRelatedReviewListPaneThree
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { informationFramework } = responseObject;
+  useEffect(() => {
+    // setListExpand('');
+  }, [assignmentRelatedReviewListPaneThree]);
+  let assessee = assignmentRelatedReviewListPaneThree?.assessee || [];
 
+  let assesseeArray = [];
+  assessee.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    assesseeArray.push({
+      id,
+      textOne: `${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`,
+      textTwo: informationBasic.assesseeAlias || 'No Information',
+      status: ''
+    });
+  });
+  let assessment = assignmentRelatedReviewListPaneThree?.assessment || [];
+
+  let assessmentArray = [];
+  assessment.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    assessmentArray.push({
+      id,
+      textOne: informationBasic.assessmentName,
+      textTwo: informationBasic.assessmentDescription || 'No Information',
+      status: ''
+    });
+  });
   const frameworkList = [
     {
       id: 'a1',
@@ -41,7 +74,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: []
+          innerList: assesseeArray
         },
         {
           labelTextOneOneBadge: 'group',
@@ -65,7 +98,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: []
+          innerList: assessmentArray
         },
         {
           labelTextOneOneBadge: 'group',
@@ -168,11 +201,11 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentDescription: responseObject.informationBasic.assignmentDescription,
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingAssesseeId = [];
-      let tempArr = relatedReviewListPaneThree[0]?.assessee || [];
-      existingAssesseeId = tempArr.map((val) => {
-        return val.id;
-      });
+      let existingAssesseeId = informationFramework?.assignmentAssessee || [];
+      // let tempArr = relatedReviewListPaneThree[0]?.assessee || [];
+      // existingAssesseeId = tempArr.map((val) => {
+      //   return val.id;
+      // });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assignmentDistinctAssesseeRevise' }
@@ -207,11 +240,11 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentDescription: responseObject.informationBasic.assignmentDescription,
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingAssesseeId = [];
-      let tempArr = relatedReviewListPaneThree[0]?.assessment || [];
-      existingAssesseeId = tempArr.map((val) => {
-        return val.id;
-      });
+      let existingAssesseeId = informationFramework?.assignmentAssessment || [];
+      // let tempArr = relatedReviewListPaneThree[0]?.assessment || [];
+      // existingAssesseeId = tempArr.map((val) => {
+      //   return val.id;
+      // });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assignmentDistinctAssessmentRevise' }
@@ -241,11 +274,11 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentDescription: responseObject.informationBasic.assignmentDescription,
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingCultureProfileId = [];
-      let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
-      existingCultureProfileId = tempArr.map((val) => {
-        return val.id;
-      });
+      let existingCultureProfileId = informationFramework?.assignmentCultureProfile || [];
+      // let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
+      // existingCultureProfileId = tempArr.map((val) => {
+      //   return val.id;
+      // });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assignmentDistinctCultureProfileRevise' }
@@ -275,11 +308,11 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentDescription: responseObject.informationBasic.assignmentDescription,
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingJobProfileId = [];
-      let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
-      existingJobProfileId = tempArr.map((val) => {
-        return val.id;
-      });
+      let existingJobProfileId = informationFramework?.assignmentJobProfile || [];
+      // let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
+      // existingJobProfileId = tempArr.map((val) => {
+      //   return val.id;
+      // });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assignmentDistinctJobProfileRevise' }
@@ -303,6 +336,58 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
     }
   };
 
+  const getRelatedReviewList = (labelTextOneOne, labelTextOneOneBadge) => {
+    console.log('Selected tag Object', labelTextOneOne, labelTextOneOneBadge);
+    if (labelTextOneOne === 'assessees' && labelTextOneOneBadge === 'distinct') {
+      if (!assignmentRelatedReviewListPaneThree.assessee) {
+        dispatch({ type: LOADER_START });
+        let relatedReqObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentId:
+            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || ''
+        };
+        dispatch({
+          type: GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+          payload: {
+            request: relatedReqObj,
+            HeaderOne: 'assignments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
+    }
+    if (labelTextOneOne === 'assessments' && labelTextOneOneBadge === 'distinct') {
+      if (!assignmentRelatedReviewListPaneThree.assessment) {
+        dispatch({ type: LOADER_START });
+        let relatedReqObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentId:
+            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || ''
+        };
+        dispatch({
+          type: GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+          payload: {
+            request: relatedReqObj,
+            HeaderOne: 'assignments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
+    }
+  };
+
   return (
     <div
       style={{
@@ -320,6 +405,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
               list={frameworkList}
               mode={reviewMode}
               onClickRevise={onclickReviseFramework}
+              getReviewList={getRelatedReviewList}
             />
           </div>
           <div className="containerPadding">
@@ -345,12 +431,14 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
                         className=""
                         accordianObject={ob}
                         mode={reviewMode}
+                        getReviewList={getRelatedReviewList}
                       />
                     ) : (
                       <AccordianInfoCard
                         onClickRevise={onclickReviseFramework}
                         accordianObject={ob}
                         mode={reviewMode}
+                        getReviewList={getRelatedReviewList}
                       />
                     )}
                   </div>

@@ -54,10 +54,10 @@ const PopUpTelephone = (props) => {
       settwoErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
-    if (basicInfo && basicInfo[objectKeys[3]] === '') {
-      setthreeErr(REQUIRED_ERROR_MESSAGE);
-      isValidate = false;
-    }
+    // if (basicInfo && basicInfo[objectKeys[3]] === '') {
+    //   setthreeErr(REQUIRED_ERROR_MESSAGE);
+    //   isValidate = false;
+    // }
     /* validation of moile number but still its not required
    let regex = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
     let mobilestr = basicInfo.mobileNumber;

@@ -15,7 +15,8 @@ import {
   GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
-  GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA
+  GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA,
+  SET_ASSIGNMENT_RELATED_REVIEW_LIST
 } from '../../actionType';
 import {
   ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL,
@@ -177,7 +178,10 @@ function* workeAssignmentDistictAssessees(data) {
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
-      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      yield put({
+        type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
+        payload: { assessee: response.responseObject }
+      });
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -220,7 +224,10 @@ function* workeAssignmentDistictAssessment(data) {
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
-      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      yield put({
+        type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
+        payload: { assessment: response.responseObject }
+      });
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,

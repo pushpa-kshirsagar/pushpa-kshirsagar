@@ -8,8 +8,8 @@ import CultureWeightageTableTemplate from './CultureWeightageTableTemplate';
 import JobRangeTableTemplate from './jobRangeTableTemplate';
 
 const AccordianListCard = (props) => {
-  const { accordianObject, mode = '', onClickRevise, onClickReview = null } = props;
-  const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { accordianObject, mode = '', onClickRevise, onClickReview = null, getReviewList } = props;
+  const { responseObject, assignmentRelatedReviewListPaneThree } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
     labelTextOneOne = '',
     innerInfo = 'No Information',
@@ -29,6 +29,11 @@ const AccordianListCard = (props) => {
     }
     setIsListSelectExpanded(false);
   }, [responseObject]);
+
+  useEffect(() => {
+    setIsListSelectExpanded(false);
+    setSelectedBadge('');
+  }, [assignmentRelatedReviewListPaneThree]);
 
   const cultureProfilerItems = [
     {
@@ -189,6 +194,9 @@ const AccordianListCard = (props) => {
             <div
               onClick={() => {
                 if (selectedBadge) {
+                  if (!isListSelectExpanded) {
+                    getReviewList(labelTextOneOne, selectedBadge?.labelTextOneOneBadge);
+                  }
                   setIsListSelectExpanded((state) => !state);
                 }
               }}

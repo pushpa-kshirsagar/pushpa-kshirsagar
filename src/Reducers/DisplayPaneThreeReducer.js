@@ -12,7 +12,8 @@ import {
   SET_UNSELECTED_ASSOCIATE_NODE_ASSESSEE_ID_LIST,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_ADMINISTRATOR_SECONDARY_LIST,
-  SET_ASSIGNMENT_RELATED_LIST
+  SET_ASSIGNMENT_RELATED_LIST,
+  SET_ASSIGNMENT_RELATED_REVIEW_LIST
 } from '../actionType';
 
 const initialState = {
@@ -43,6 +44,7 @@ const initialState = {
   assignmentAssessmentList: [],
   assignmentCultureProfileList: [],
   assignmentJobProfileList: [],
+  assignmentRelatedReviewListPaneThree: {},
   selectedModule: '',
   statusPopUpValue: ''
 };
@@ -140,6 +142,14 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
         ...istate,
         [action.payload.listName]: action.payload.value
       };
+    case SET_ASSIGNMENT_RELATED_REVIEW_LIST:
+      return {
+        ...istate,
+        assignmentRelatedReviewListPaneThree: {
+          ...istate.assignmentRelatedReviewListPaneThree,
+          ...action.payload
+        }
+      }
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;
     default:
