@@ -19,6 +19,8 @@ import {
   GET_ALLOCATE_JOB,
   GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA,
   LOADER_START,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -64,6 +66,31 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       status: ''
     });
   });
+
+  let cultureProfile = assignmentRelatedReviewListPaneThree?.cultureProfile || [];
+  let cultureProfileArray = [];
+  cultureProfile.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    cultureProfileArray.push({
+      id,
+      textOne: informationBasic.cultureProfileName,
+      textTwo: informationBasic.cultureProfileDescription || 'No Information',
+      status: ''
+    });
+  });
+
+  let jobProfile = assignmentRelatedReviewListPaneThree?.jobProfile || [];
+  let jobProfileArray = [];
+  jobProfile.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    jobProfileArray.push({
+      id,
+      textOne: informationBasic.jobProfileName,
+      textTwo: informationBasic.jobProfileDescription || 'No Information',
+      status: ''
+    });
+  });
+
   const frameworkList = [
     {
       id: 'a1',
@@ -118,7 +145,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: []
+          innerList: cultureProfileArray
         },
         {
           labelTextOneOneBadge: 'group',
@@ -138,7 +165,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: []
+          innerList: jobProfileArray
         },
         {
           labelTextOneOneBadge: 'group',
@@ -375,6 +402,54 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         };
         dispatch({
           type: GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+          payload: {
+            request: relatedReqObj,
+            HeaderOne: 'assignments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
+    }
+    if (labelTextOneOne === 'culture profiles' && labelTextOneOneBadge === 'distinct') {
+      if (!assignmentRelatedReviewListPaneThree.assessment) {
+        dispatch({ type: LOADER_START });
+        let relatedReqObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentId:
+            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || ''
+        };
+        dispatch({
+          type: GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
+          payload: {
+            request: relatedReqObj,
+            HeaderOne: 'assignments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
+    }
+    if (labelTextOneOne === 'job profiles' && labelTextOneOneBadge === 'distinct') {
+      if (!assignmentRelatedReviewListPaneThree.assessment) {
+        dispatch({ type: LOADER_START });
+        let relatedReqObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentId:
+            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || ''
+        };
+        dispatch({
+          type: GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA,
           payload: {
             request: relatedReqObj,
             HeaderOne: 'assignments',

@@ -75,10 +75,7 @@ const DisplayPaneThreeSectionTwoAssessmentType = () => {
     }
   };
 
-  let assessmentList = [];
-  if (relatedReviewListPaneThree) {
-    assessmentList = relatedReviewListPaneThree.assessment;
-  }
+  let assessmentList =  relatedReviewListPaneThree?.assessment || [];
   let assessmentArray = [];
   assessmentList.forEach((ob) => {
     const { id, informationBasic } = ob;
