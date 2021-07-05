@@ -1514,7 +1514,9 @@ export const DisplayPaneThree = () => {
           informationAllocation,
           informationFramework: {
             assignmentAssessee: assignmentAssesseeList || [],
-            assignmentAssessment: assignmentAssessmentList || []
+            assignmentAssessment: assignmentAssessmentList || [],
+            assignmentCultureProfile: assignmentCultureProfileList || [],
+            assignmentJobProfile: assignmentJobProfileList || []
           }
         }
       };

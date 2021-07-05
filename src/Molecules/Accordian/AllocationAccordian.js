@@ -14,7 +14,7 @@ export const AllocationAccordian = (props) => {
     mode = '',
     onClickRevise,
     onClickReview,
-    getReviewList = () => {}
+    getReviewList = null
   } = props;
 
   return (

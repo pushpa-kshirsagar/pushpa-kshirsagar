@@ -8,8 +8,16 @@ import CultureWeightageTableTemplate from './CultureWeightageTableTemplate';
 import JobRangeTableTemplate from './jobRangeTableTemplate';
 
 const AccordianListCard = (props) => {
-  const { accordianObject, mode = '', onClickRevise, onClickReview = null, getReviewList } = props;
-  const { responseObject, assignmentRelatedReviewListPaneThree } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const {
+    accordianObject,
+    mode = '',
+    onClickRevise,
+    onClickReview = null,
+    getReviewList = null
+  } = props;
+  const { responseObject, assignmentRelatedReviewListPaneThree } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const {
     labelTextOneOne = '',
     innerInfo = 'No Information',
@@ -32,7 +40,14 @@ const AccordianListCard = (props) => {
 
   useEffect(() => {
     setIsListSelectExpanded(false);
-    setSelectedBadge('');
+    if (
+      labelTextOneOneBadges[0].labelTextOneOneBadge === 'primary' ||
+      labelTextOneOneBadges[0].labelTextOneOneBadge === ''
+    ) {
+      setSelectedBadge(labelTextOneOneBadges[0]);
+    } else {
+      setSelectedBadge('');
+    }
   }, [assignmentRelatedReviewListPaneThree]);
 
   const cultureProfilerItems = [
@@ -193,10 +208,12 @@ const AccordianListCard = (props) => {
             <div className={'unitFlex'}></div>
             <div
               onClick={() => {
+                console.log("HI", selectedBadge);
                 if (selectedBadge) {
-                  if (!isListSelectExpanded) {
+                  if (!isListSelectExpanded && getReviewList) {
                     getReviewList(labelTextOneOne, selectedBadge?.labelTextOneOneBadge);
                   }
+                  console.log("HERE");
                   setIsListSelectExpanded((state) => !state);
                 }
               }}

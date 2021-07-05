@@ -11,7 +11,8 @@ import {
   ASSIGNMENT_REVIEW_DISTINCT_SAGA,
   SET_ASSIGNMENT_RELATED_LIST,
   GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
-  GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA
+  GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+  RESET_ASSIGNMENT_REVIEW_LIST_OBJECT
 } from '../../actionType';
 import { ASSIGNMENT_REVIEW_INFO_URL, ASSIGNMENT_REVISE_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -48,6 +49,7 @@ function* workerReviewInfoAssignmentSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
+      yield put({ type: RESET_ASSIGNMENT_REVIEW_LIST_OBJECT });
       if (isReviseMode) {
         const { informationAllocation, informationBasic } = userResponse.responseObject[0];
         yield put({
@@ -210,6 +212,30 @@ function* workerReviewInfoAssignmentSaga(data) {
             }
           });
         }
+        let assignmentAssessee =
+          userResponse.responseObject[0]?.informationFramework?.assignmentAssessee || [];
+        let assignmentAssessment =
+          userResponse.responseObject[0]?.informationFramework?.assignmentAssessment || [];
+        let assignmentCultureProfile =
+          userResponse.responseObject[0]?.informationFramework?.assignmentCultureProfile || [];
+        let assignmentJobProfile =
+          userResponse.responseObject[0]?.informationFramework?.assignmentJobProfile || [];
+        yield put({
+          type: SET_ASSIGNMENT_RELATED_LIST,
+          payload: { listName: 'assignmentAssesseeList', value: assignmentAssessee }
+        });
+        yield put({
+          type: SET_ASSIGNMENT_RELATED_LIST,
+          payload: { listName: 'assignmentAssessmentList', value: assignmentAssessment }
+        });
+        yield put({
+          type: SET_ASSIGNMENT_RELATED_LIST,
+          payload: { listName: 'assignmentCultureProfileList', value: assignmentCultureProfile }
+        });
+        yield put({
+          type: SET_ASSIGNMENT_RELATED_LIST,
+          payload: { listName: 'assignmentJobProfileList', value: assignmentJobProfile }
+        });
       }
       // if (relatedReqObj !== null) {
       //   yield put({

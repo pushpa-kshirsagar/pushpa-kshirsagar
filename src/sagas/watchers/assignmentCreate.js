@@ -5,6 +5,8 @@ import {
   LOADER_STOP,
   POPUP_CLOSE,
   SET_ASSIGNMENT_BASIC_REDUCER_STATE,
+  SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+  SET_ASSIGNMENT_RELATED_LIST,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
@@ -35,14 +37,195 @@ function* workerCreateAssignmentSaga(data) {
           headerOne: 'assignment',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
-          responseObject: apiResponse.responseObject,
+          responseObject: apiResponse.responseObject[0],
           reviewMode: 'revise',
           createMode: 'assignment'
         }
       });
+      const {informationAllocation, informationBasic} = apiResponse.responseObject[0];
       yield put({
         type: SET_ASSIGNMENT_BASIC_REDUCER_STATE,
-        payload: apiResponse.responseObject.informationBasic
+        payload: informationBasic
+      });
+      if (
+        informationAllocation &&
+        informationAllocation?.assignmentGroup?.assignmentGroupPrimary &&
+        informationAllocation?.assignmentGroup?.assignmentGroupPrimary.length > 0
+      ) {
+        let tempArr = informationAllocation.assignmentGroup.assignmentGroupPrimary.map(
+          (ob) => ob.id
+        );
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentGroup',
+            actualStateName: 'assignmentGroupPrimary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentGroup',
+            actualStateName: 'assignmentGroupPrimary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.assignmentGroup?.assignmentGroupSecondary &&
+        informationAllocation?.assignmentGroup?.assignmentGroupSecondary.length > 0
+      ) {
+        let tempArr = informationAllocation.assignmentGroup.assignmentGroupSecondary.map(
+          (ob) => ob.id
+        );
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentGroup',
+            actualStateName: 'assignmentGroupSecondary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentGroup',
+            actualStateName: 'assignmentGroupSecondary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.assignmentNode?.assignmentNodePrimary &&
+        informationAllocation?.assignmentNode?.assignmentNodePrimary.length > 0
+      ) {
+        let tempArr = informationAllocation.assignmentNode.assignmentNodePrimary.map(
+          (ob) => ob.id
+        );
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentNode',
+            actualStateName: 'assignmentNodePrimary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentNode',
+            actualStateName: 'assignmentNodePrimary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.assignmentNode?.assignmentNodeSecondary &&
+        informationAllocation?.assignmentNode?.assignmentNodeSecondary.length > 0
+      ) {
+        let tempArr = informationAllocation.assignmentNode.assignmentNodeSecondary.map(
+          (ob) => ob.id
+        );
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentNode',
+            actualStateName: 'assignmentNodeSecondary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentNode',
+            actualStateName: 'assignmentNodeSecondary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.assignmentType?.assignmentTypePrimary &&
+        informationAllocation?.assignmentType?.assignmentTypePrimary.length > 0
+      ) {
+        let tempArr = informationAllocation.assignmentType.assignmentTypePrimary.map(
+          (ob) => ob.id
+        );
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentType',
+            actualStateName: 'assignmentTypePrimary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentType',
+            actualStateName: 'assignmentTypePrimary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.assignmentType?.assignmentTypeSecondary &&
+        informationAllocation?.assignmentType?.assignmentTypeSecondary.length > 0
+      ) {
+        let tempArr = informationAllocation.assignmentType.assignmentTypeSecondary.map(
+          (ob) => ob.id
+        );
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentType',
+            actualStateName: 'assignmentTypeSecondary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assignmentType',
+            actualStateName: 'assignmentTypeSecondary',
+            value: []
+          }
+        });
+      }
+      let assignmentAssessee =
+        apiResponse.responseObject[0]?.informationFramework?.assignmentAssessee || [];
+      let assignmentAssessment =
+        apiResponse.responseObject[0]?.informationFramework?.assignmentAssessment || [];
+      let assignmentCultureProfile =
+        apiResponse.responseObject[0]?.informationFramework?.assignmentCultureProfile || [];
+      let assignmentJobProfile =
+        apiResponse.responseObject[0]?.informationFramework?.assignmentJobProfile || [];
+      yield put({
+        type: SET_ASSIGNMENT_RELATED_LIST,
+        payload: { listName: 'assignmentAssesseeList', value: assignmentAssessee }
+      });
+      yield put({
+        type: SET_ASSIGNMENT_RELATED_LIST,
+        payload: { listName: 'assignmentAssessmentList', value: assignmentAssessment }
+      });
+      yield put({
+        type: SET_ASSIGNMENT_RELATED_LIST,
+        payload: { listName: 'assignmentCultureProfileList', value: assignmentCultureProfile }
+      });
+      yield put({
+        type: SET_ASSIGNMENT_RELATED_LIST,
+        payload: { listName: 'assignmentJobProfileList', value: assignmentJobProfile }
       });
     }
     yield put({ type: LOADER_STOP });

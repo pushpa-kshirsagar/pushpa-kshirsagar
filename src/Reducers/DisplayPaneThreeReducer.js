@@ -13,7 +13,8 @@ import {
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_ADMINISTRATOR_SECONDARY_LIST,
   SET_ASSIGNMENT_RELATED_LIST,
-  SET_ASSIGNMENT_RELATED_REVIEW_LIST
+  SET_ASSIGNMENT_RELATED_REVIEW_LIST,
+  RESET_ASSIGNMENT_REVIEW_LIST_OBJECT
 } from '../actionType';
 
 const initialState = {
@@ -149,7 +150,12 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
           ...istate.assignmentRelatedReviewListPaneThree,
           ...action.payload
         }
-      }
+      };
+    case RESET_ASSIGNMENT_REVIEW_LIST_OBJECT:
+      return {
+        ...istate,
+        assignmentRelatedReviewListPaneThree: {}
+      };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;
     default:

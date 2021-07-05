@@ -13,7 +13,8 @@ const AccordianInfoCard = (props) => {
     IconOne,
     IconTwo,
     textOneOne = '',
-    multiline = false
+    multiline = false,
+    isMultiInfoCard = false
   } = accordianObject;
   const [selectedBadge, setSelectedBadge] = useState('');
   useEffect(() => {
@@ -26,163 +27,322 @@ const AccordianInfoCard = (props) => {
   }, [responseObject]);
 
   return (
-    <div className={'detailsContactContainer'}>
-      <div className={'detsailsPadding'}>
-        <div
-          style={{
-            height:
-              multiline &&
-              selectedBadge &&
-              selectedBadge.textOne &&
-              selectedBadge.textOne.length > 40
-                ? '105px'
-                : '50px'
-          }}
-          className={['FormBox', 'detailsHeight'].join(' ')}
-        >
-          <div className={['formControlReviewName', 'formControlRight'].join(' ')}>
-            <div style={{ width: '100%' }}>
-              <InputLabel
-                htmlFor="name-input"
-                className={['textForLabel', 'textForLabelRight', 'careerLabelRight'].join(' ')}
+    <>
+      {isMultiInfoCard ? (
+        <>
+          <div className={'detailsContactContainer'}>
+            <div className={'detsailsPadding'}>
+              <div
+                style={{
+                  height:
+                    multiline &&
+                    selectedBadge &&
+                    selectedBadge.textOne &&
+                    selectedBadge.textOne.length > 40
+                      ? '105px'
+                      : '50px'
+                }}
+                className={['FormBox', 'detailsHeight'].join(' ')}
               >
-                <span
-                  style={{
-                    marginBottom: labelTextOneOneBadges.length > 0 ? '0' : '5px',
-                    display: 'inline-block'
-                  }}
-                  className={mode === 'revise' ? 'linkText' : ''}
-                  onClick={mode === 'revise' ? onClickRevise : () => {}}
-                  data-value={labelTextOneOne}
-                  data-key={selectedBadge?.labelTextOneOneBadge || ''}
-                >
-                  {labelTextOneOne}
-                </span>
-                {labelTextOneOne === 'sign-in' && (
-                  <sup
-                    key={`badge-sign-in`}
-                    style={{
-                      backgroundColor: '#F2F2F2'
-                    }}
-                  >
-                    credential
-                  </sup>
-                )}
-                {labelTextOneOneBadges.map((ob, key) => {
-                  return (
-                    <>
-                      {ob.labelTextOneOneBadge !== '' ? (
+                <div className={['formControlReviewName', 'formControlRight'].join(' ')}>
+                  <div style={{ width: '100%' }}>
+                    <InputLabel
+                      htmlFor="name-input"
+                      className={['textForLabel', 'textForLabelRight', 'careerLabelRight'].join(
+                        ' '
+                      )}
+                    >
+                      <span
+                        style={{
+                          marginBottom: labelTextOneOneBadges.length > 0 ? '0' : '5px',
+                          display: 'inline-block'
+                        }}
+                        className={mode === 'revise' ? 'linkText' : ''}
+                        onClick={mode === 'revise' ? onClickRevise : () => {}}
+                        data-value={labelTextOneOne}
+                        data-key={selectedBadge?.labelTextOneOneBadge || ''}
+                      >
+                        {labelTextOneOne}
+                      </span>
+                      {labelTextOneOne === 'sign-in' && (
                         <sup
-                          key={`badge-${key}`}
+                          key={`badge-sign-in`}
                           style={{
-                            backgroundColor:
-                              selectedBadge &&
-                              selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
-                                ? '#F2F2F2'
-                                : '#ffffff'
-                          }}
-                          onClick={() => {
-                            setSelectedBadge(ob);
+                            backgroundColor: '#F2F2F2'
                           }}
                         >
-                          {ob.labelTextOneOneBadge}
+                          credential
                         </sup>
-                      ) : (
-                        <></>
+                      )}
+                      {labelTextOneOneBadges.map((ob, key) => {
+                        return (
+                          <>
+                            {ob.labelTextOneOneBadge !== '' ? (
+                              <sup
+                                key={`badge-${key}`}
+                                style={{
+                                  backgroundColor:
+                                    selectedBadge &&
+                                    selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
+                                      ? '#F2F2F2'
+                                      : '#ffffff'
+                                }}
+                                onClick={() => {
+                                  setSelectedBadge(ob);
+                                }}
+                              >
+                                {ob.labelTextOneOneBadge}
+                              </sup>
+                            ) : (
+                              <></>
+                            )}
+                          </>
+                        );
+                      })}
+                    </InputLabel>
+                    {textOneOne ||
+                      (selectedBadge && selectedBadge.textOne && (
+                        <Input
+                          multiline={
+                            multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                          }
+                          // row={multiline ? 2 : 1}
+                          row={2}
+                          rowsMax={
+                            multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                              ? 4
+                              : 1
+                          }
+                          className={'inputText'}
+                          id="name-dn-input"
+                          value={(selectedBadge && selectedBadge.textOne) || textOneOne}
+                          disableUnderline={true}
+                          readOnly
+                        />
+                      ))}
+                  </div>
+                </div>
+                <div className={'unitFlex'}></div>
+                <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+                  {selectedBadge?.IconOne ? (
+                    <>
+                      <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                        <IconButton
+                          onClick={
+                            mode === 'revise'
+                              ? () => {}
+                              : () => {
+                                  onClickReview(
+                                    labelTextOneOne,
+                                    selectedBadge?.labelTextOneOneBadge || ''
+                                  );
+                                }
+                          }
+                        >
+                          <selectedBadge.IconOne />
+                        </IconButton>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {IconOne && (
+                        <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                          <IconButton
+                            onClick={
+                              mode === 'revise'
+                                ? () => {}
+                                : () => {
+                                    onClickReview(
+                                      labelTextOneOne,
+                                      selectedBadge?.labelTextOneOneBadge || ''
+                                    );
+                                  }
+                            }
+                          >
+                            <IconOne />
+                          </IconButton>
+                        </div>
                       )}
                     </>
-                  );
-                })}
-                {/* {labelTextOneOneBadgeOne ? <sup>{labelTextOneOneBadgeOne}</sup> : null}
-                {labelTextOneOneBadgeTwo ? <sup>{labelTextOneOneBadgeTwo}</sup> : null}
-                {labelTextOneOneBadgeThree ? <sup>{labelTextOneOneBadgeThree}</sup> : null}
-                {labelTextOneOneBadgeFour ? <sup>{labelTextOneOneBadgeFour}</sup> : null} */}
-              </InputLabel>
-              {textOneOne ||
-                (selectedBadge && selectedBadge.textOne && (
-                  <Input
-                    multiline={
-                      multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
-                    }
-                    // row={multiline ? 2 : 1}
-                    row={2}
-                    rowsMax={
-                      multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
-                        ? 4
-                        : 1
-                    }
-                    className={'inputText'}
-                    id="name-dn-input"
-                    value={(selectedBadge && selectedBadge.textOne) || textOneOne}
-                    disableUnderline={true}
-                    readOnly
-                  />
-                ))}
+                  )}
+                  {selectedBadge.IconTwo ? (
+                    <>
+                      <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                        <IconButton>
+                          <selectedBadge.IconTwo />
+                        </IconButton>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {IconTwo && (
+                        <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                          <IconButton>
+                            <IconTwo />
+                          </IconButton>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-          <div className={'unitFlex'}></div>
-          <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-            {selectedBadge?.IconOne ? (
-              <>
-                <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
-                  <IconButton
-                    onClick={
-                      mode === 'revise'
-                        ? () => {}
-                        : () => {
-                            onClickReview(
-                              labelTextOneOne,
-                              selectedBadge?.labelTextOneOneBadge || ''
-                            );
-                          }
-                    }
+        </>
+      ) : (
+        <div className={'detailsContactContainer'}>
+          <div className={'detsailsPadding'}>
+            <div
+              style={{
+                height:
+                  multiline &&
+                  selectedBadge &&
+                  selectedBadge.textOne &&
+                  selectedBadge.textOne.length > 40
+                    ? '105px'
+                    : '50px'
+              }}
+              className={['FormBox', 'detailsHeight'].join(' ')}
+            >
+              <div className={['formControlReviewName', 'formControlRight'].join(' ')}>
+                <div style={{ width: '100%' }}>
+                  <InputLabel
+                    htmlFor="name-input"
+                    className={['textForLabel', 'textForLabelRight', 'careerLabelRight'].join(' ')}
                   >
-                    <selectedBadge.IconOne />
-                  </IconButton>
-                </div>
-              </>
-            ) : (
-              <>
-                {IconOne && (
-                  <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
-                    <IconButton
-                      onClick={
-                        mode === 'revise'
-                          ? () => {}
-                          : () => {
-                              onClickReview(
-                                labelTextOneOne,
-                                selectedBadge?.labelTextOneOneBadge || ''
-                              );
-                            }
-                      }
+                    <span
+                      style={{
+                        marginBottom: labelTextOneOneBadges.length > 0 ? '0' : '5px',
+                        display: 'inline-block'
+                      }}
+                      className={mode === 'revise' ? 'linkText' : ''}
+                      onClick={mode === 'revise' ? onClickRevise : () => {}}
+                      data-value={labelTextOneOne}
+                      data-key={selectedBadge?.labelTextOneOneBadge || ''}
                     >
-                      <IconOne />
-                    </IconButton>
-                  </div>
-                )}
-              </>
-            )}
-            {selectedBadge.IconTwo ? (
-              <>
-                <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
-                  <IconButton>
-                    <selectedBadge.IconTwo />
-                  </IconButton>
+                      {labelTextOneOne}
+                    </span>
+                    {labelTextOneOne === 'sign-in' && (
+                      <sup
+                        key={`badge-sign-in`}
+                        style={{
+                          backgroundColor: '#F2F2F2'
+                        }}
+                      >
+                        credential
+                      </sup>
+                    )}
+                    {labelTextOneOneBadges.map((ob, key) => {
+                      return (
+                        <>
+                          {ob.labelTextOneOneBadge !== '' ? (
+                            <sup
+                              key={`badge-${key}`}
+                              style={{
+                                backgroundColor:
+                                  selectedBadge &&
+                                  selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
+                                    ? '#F2F2F2'
+                                    : '#ffffff'
+                              }}
+                              onClick={() => {
+                                setSelectedBadge(ob);
+                              }}
+                            >
+                              {ob.labelTextOneOneBadge}
+                            </sup>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                      );
+                    })}
+                  </InputLabel>
+                  {textOneOne ||
+                    (selectedBadge && selectedBadge.textOne && (
+                      <Input
+                        multiline={
+                          multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                        }
+                        // row={multiline ? 2 : 1}
+                        row={2}
+                        rowsMax={
+                          multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                            ? 4
+                            : 1
+                        }
+                        className={'inputText'}
+                        id="name-dn-input"
+                        value={(selectedBadge && selectedBadge.textOne) || textOneOne}
+                        disableUnderline={true}
+                        readOnly
+                      />
+                    ))}
                 </div>
-              </>
-            ) : (
-              <>
-                {IconTwo && (
-                  <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
-                    <IconButton>
-                      <IconTwo />
-                    </IconButton>
-                  </div>
+              </div>
+              <div className={'unitFlex'}></div>
+              <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+                {selectedBadge?.IconOne ? (
+                  <>
+                    <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                      <IconButton
+                        onClick={
+                          mode === 'revise'
+                            ? () => {}
+                            : () => {
+                                onClickReview(
+                                  labelTextOneOne,
+                                  selectedBadge?.labelTextOneOneBadge || ''
+                                );
+                              }
+                        }
+                      >
+                        <selectedBadge.IconOne />
+                      </IconButton>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {IconOne && (
+                      <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                        <IconButton
+                          onClick={
+                            mode === 'revise'
+                              ? () => {}
+                              : () => {
+                                  onClickReview(
+                                    labelTextOneOne,
+                                    selectedBadge?.labelTextOneOneBadge || ''
+                                  );
+                                }
+                          }
+                        >
+                          <IconOne />
+                        </IconButton>
+                      </div>
+                    )}
+                  </>
                 )}
-              </>
-            )}
-            {/* {IconOne && (
+                {selectedBadge.IconTwo ? (
+                  <>
+                    <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                      <IconButton>
+                        <selectedBadge.IconTwo />
+                      </IconButton>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {IconTwo && (
+                      <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
+                        <IconButton>
+                          <IconTwo />
+                        </IconButton>
+                      </div>
+                    )}
+                  </>
+                )}
+                {/* {IconOne && (
               <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
                 <IconButton
                   onClick={
@@ -193,21 +353,24 @@ const AccordianInfoCard = (props) => {
                         }
                   }
                 >
-                  <IconOne />
+                  <IconOn
+                  e />
                 </IconButton>
               </div>
             )} */}
-            {/* {IconTwo && (
+                {/* {IconTwo && (
               <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
                 <IconButton>
                   <IconTwo />
                 </IconButton>
               </div>
             )} */}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

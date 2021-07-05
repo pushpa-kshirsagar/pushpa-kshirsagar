@@ -270,7 +270,10 @@ function* workeAssignmentDistictCultureProfile(data) {
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
-      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      yield put({
+        type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
+        payload: { cultureProfile: response.responseObject }
+      });
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -313,7 +316,10 @@ function* workeAssignmentDistictJobProfile(data) {
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
-      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      yield put({
+        type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
+        payload: { jobProfile: response.responseObject }
+      });
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
