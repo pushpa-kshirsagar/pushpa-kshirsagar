@@ -8,7 +8,7 @@ const Section = (props) => {
 
   return (
     <>
-      <div className={['tabsContainer', 'iguru-leftpanel'].join(' ')}>
+      <div className={['containerPadding'].join(' ')}>
         <div className={'middleTabLabel'}>
           <SectionLine />
           {listSections.map((section, index) => {

@@ -299,6 +299,8 @@ export const CULTURE_TYPE_SHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/culture-profile-type/share';
 export const CULTURE_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/culture-profile-type/unshare';
+export const CULTURE_DIAMENTION_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-dimension/review-list';
 //job
 export const JOB_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/review-list';
 export const JOB_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/create';
@@ -317,7 +319,9 @@ export const JOB_TYPE_GROUP_URL =
 export const JOB_NODE_JOB_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/associate-node/job-profile/review-list';
 export const JOB_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/job-profile-type/share';
-export const JOB_TYPE_UNSHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/job-profile-type/unshare';
+export const JOB_TYPE_UNSHARE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/job-profile-type/unshare';
 export const JOBDOMAIN_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-domain/review-list';
-export const JOBFUNCTION_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-function/review-list';
+export const JOBFUNCTION_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-function/review-list';
 export const JOBROLE_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-role/review-list';

@@ -21,7 +21,8 @@ import {
   SET_RELATED_REQUEST_OBJECT,
   CULTURE_PROFILE_INFO_REVISE_SAGA,
   CULTURE_GROUP_REVISE_INFO_SAGA,
-  CULTURE_TYPE_REVISE_INFO_SAGA
+  CULTURE_TYPE_REVISE_INFO_SAGA,
+  GET_CULTURE_DIAMENTION_SAGA
 } from '../actionType';
 import { CULTURE_PROFILE_REVISE_INFO_URL } from '../endpoints';
 import {
@@ -86,6 +87,13 @@ export const cultureProfileCreatePopup = (
     payload: {
       stateName: 'selectedInformationAllorKey',
       value: secondaryOptionCheckValue
+    }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: {
+      stateName: 'responseObject',
+      value: null
     }
   });
   dispatch({

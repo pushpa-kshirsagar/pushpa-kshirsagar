@@ -1,7 +1,8 @@
 import {
   SET_CULTURE_REDUCER_STATE,
   CLEAR_CULTURE_REDUCER_STATE,
-  SET_CULTURE_DYNAMIC_SINGLE_STATE
+  SET_CULTURE_DYNAMIC_SINGLE_STATE,
+  SET_CULTURE_DIMENTION_STATE
 } from '../actionType';
 
 const initialState = {
@@ -30,6 +31,10 @@ const initialState = {
         cultureProfileTypePrimary: [],
         cultureProfileTypeSecondary: []
       }
+    },
+    informationFramework: {
+      cultureProfileCultureDimensionCore: [],
+      cultureProfileCultureDimensionWeightage: []
     }
   }
 };
@@ -45,6 +50,14 @@ const ItemCreateReducer = (istate = initialState, action) => {
           informationBasic: action.payload
         }
       };
+    case SET_CULTURE_DIMENTION_STATE:
+      return {
+        ...istate,
+        cultureProfileInformation: {
+          ...istate.cultureProfileInformation,
+          informationFramework: action.payload
+        }
+      };
     case SET_CULTURE_DYNAMIC_SINGLE_STATE:
       return {
         ...istate,
@@ -53,7 +66,9 @@ const ItemCreateReducer = (istate = initialState, action) => {
           [action.payload.objectName]: {
             ...istate.cultureProfileInformation[action.payload.objectName],
             [action.payload.stateName]: {
-              ...istate.cultureProfileInformation[action.payload.objectName][action.payload.stateName],
+              ...istate.cultureProfileInformation[action.payload.objectName][
+                action.payload.stateName
+              ],
               [action.payload.actualStateName]: action.payload.value
             }
           }

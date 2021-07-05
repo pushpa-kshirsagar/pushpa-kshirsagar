@@ -105,7 +105,8 @@ import {
   getNodeCultureProfileReqObj,
   getNodeJobProfileReqObj,
   getAssociateTypeAssociateReqObj,
-  getAssesseeTypeAssesseeReqObj
+  getAssesseeTypeAssesseeReqObj,
+  makeAssesseeReviewListRequestObject
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -124,6 +125,8 @@ import {
   updateAssessmentTypeStatus
 } from '../Actions/AssessmentModuleAction';
 import {
+  getAssignmnetAssesseeDistinctApiCall,
+  getAssignmnetAssessmentDistinctApiCall,
   getAssignmnetGroupAssignmnetDistinctApiCall,
   getAssignmnetTypeAssignmnetDistinctApiCall,
   getNodeRelatedAssignmentsDistinctApiCall,
@@ -830,6 +833,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           }
         });
       }
+
       if (typeOfMiddlePaneList === 'cultureProfilesGroupDistinctReviewList') {
         let cultureGroupCultureReqBody = getCultureGroupCultureReqObj(
           selectedAssociateInfo,
@@ -1597,6 +1601,45 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           type: FILTERMODE,
           payload: { FilterMode: 'assignmnetGroupAssignment' + secondaryOptionCheckValue }
         });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assignmentDistinctReviewList') {
+        if (popupHeaderOne === 'assessees') {
+          getAssignmnetAssesseeDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: {
+              FilterMode: 'assignmentDistinctAssesseeDistinct' + secondaryOptionCheckValue
+            }
+          });
+        }
+        if (popupHeaderOne === 'assessments') {
+          getAssignmnetAssessmentDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'assignmentDistinctAssessment' + secondaryOptionCheckValue }
+          });
+        }
+
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
       }

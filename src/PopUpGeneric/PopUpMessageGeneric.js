@@ -11,20 +11,24 @@ import { useDispatch } from 'react-redux';
 const PopUpMessageGeneric = (props) => {
   const {
     isActive,
-    nextPopUpValue='',
+    nextPopUpValue = '',
     headerPanelColour = 'genericOne',
     headerOne = 'culture profile',
     headerOneBadgeOne = 'information',
-    textOneOne = 'textOneOne',
-    textOneTwo = 'textOneTwo',
-    textOneThree = 'textOneThree',
-    textOneFour = 'textOneFour',
-    mode
+    textOneOne = '',
+    textOneTwo = '',
+    textOneThree = '',
+    textOneFour = '',
+    mode,
+    handleClickFun = null
   } = props;
   const dispatch = useDispatch();
   const handleClick = () => {
     /*according to creation mode popup sequence will change*/
     dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
+    if (nextPopUpValue === 'onClickRevise') {
+      handleClickFun();
+    }
   };
   return (
     <div>

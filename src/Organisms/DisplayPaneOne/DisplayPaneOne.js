@@ -180,7 +180,7 @@ export const DisplayPaneOne = () => {
         </div>
 
         {selectedAssociateInfo && (
-          <>
+          <div>
             <Sections
               listSections={leftPaneSections}
               selectedSection={selectedSection}
@@ -188,7 +188,7 @@ export const DisplayPaneOne = () => {
             />
 
             <FooterIconOne />
-          </>
+          </div>
         )}
       </div>
       <PopUpDisplayPaneOneSectionTwo

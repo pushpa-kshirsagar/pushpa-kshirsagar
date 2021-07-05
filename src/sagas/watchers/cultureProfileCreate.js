@@ -5,6 +5,7 @@ import {
   LOADER_STOP,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
 import { CULTURE_CREATE_URL } from '../../endpoints';
@@ -27,16 +28,20 @@ function* workerCreateCultureProfileSaga(data) {
     const response = yield call(createApiCall, { data: data.payload, URL: CULTURE_CREATE_URL });
     if (response.responseCode === '000') {
       yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'culture profile',
-          headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
-          responseObject: response.responseObject[0],
-          reviewMode: 'revise',
-          createMode: 'cultureProfile'
-        }
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'responseObject', value: response.responseObject[0] }
       });
+      // yield put({
+      //   type: SET_DISPLAY_PANE_THREE_STATE,
+      //   payload: {
+      //     headerOne: 'culture profile',
+      //     headerOneBadgeOne: 'information',
+      //     headerOneBadgeTwo: Store.getState().DisplayPaneTwoReducer.selectedInformationAllorKey,
+      //     responseObject: response.responseObject[0],
+      //     reviewMode: 'revise',
+      //     createMode: 'cultureProfile'
+      //   }
+      // });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

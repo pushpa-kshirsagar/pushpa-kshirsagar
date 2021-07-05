@@ -71,7 +71,8 @@ const initialState = {
   credentialOptionArr: [],
   jobProfileDomainReviewList: [],
   jobProfileFunctionReviewList: [],
-  jobProfileRoleReviewList: []
+  jobProfileRoleReviewList: [],
+  cultureProfileDiamentionReviewList: []
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

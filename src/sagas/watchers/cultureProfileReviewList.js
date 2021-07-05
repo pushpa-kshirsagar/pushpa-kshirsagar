@@ -11,13 +11,17 @@ import {
   CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA,
   SET_REVIEW_LIST_RELATE_DATA,
   GET_ALLOCATE_CULTURE,
-  GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA
+  GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
+  GET_CULTURE_DIAMENTION_SAGA,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_NEXT_POPUP
 } from '../../actionType';
 import {
   CULTURE_GROUP_CULTURE_REVIEWLIST_URL,
   CULTURE_REVIEWLIST_URL,
   CULTURE_TYPE_CULTURE_REVIEWLIST_URL,
-  CULTURE_NODE_CULTURE_REVIEWLIST_URL
+  CULTURE_NODE_CULTURE_REVIEWLIST_URL,
+  CULTURE_DIAMENTION_URL
 } from '../../endpoints';
 
 const apiCallFunction = async (requestObj) => {
@@ -220,6 +224,37 @@ function* workeCultureNodeCultureReviewListSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerReviewListCultureDimentionSaga(data) {
+  try {
+    const response = yield call(apiCallFunction, {
+      data: data.payload.request,
+      URL: CULTURE_DIAMENTION_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'cultureProfileDiamentionReviewList', value: response.responseObject }
+      });
+      yield put({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPDIAMENTIONMSG' } });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 
 function* workerReviewListCultureProfileAllocateSaga(data) {
   try {
@@ -269,6 +304,7 @@ export default function* watchReviewListCultureProfileSaga() {
   yield takeLatest(CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA, workeCultureGroupCultureReviewListSaga);
   yield takeLatest(CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA, workeCultureTypeCultureReviewListSaga);
   yield takeLatest(GET_ALLOCATE_CULTURE, workerReviewListCultureProfileAllocateSaga);
+  yield takeLatest(GET_CULTURE_DIAMENTION_SAGA, workerReviewListCultureDimentionSaga);
   yield takeLatest(
     GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
     workeCultureNodeCultureReviewListSaga

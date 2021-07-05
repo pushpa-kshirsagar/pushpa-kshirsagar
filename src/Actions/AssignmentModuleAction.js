@@ -19,7 +19,9 @@ import {
   SET_PAGE_COUNT,
   ASSIGNMENT_INFO_REVISE_SAGA,
   ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
-  ASSIGNMENT_TYPE_REVISE_INFO_SAGA
+  ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
+  GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+  GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA
 } from '../actionType';
 import {
   getAssignmentGroupAssignmentReqObj,
@@ -422,6 +424,78 @@ export const updateAssignmentTypeStatus = (
       assignmentTypeAssignmentReqBody: null,
       headerOne: '',
       reqBody
+    }
+  });
+};
+export const getAssignmnetAssesseeDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assignmentId: selectedTagValue
+  };
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'assessees',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getAssignmnetAssessmentDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assignmentId: selectedTagValue
+  };
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'assessments',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
     }
   });
 };

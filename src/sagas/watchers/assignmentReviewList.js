@@ -186,7 +186,7 @@ function* workeAssignmentDistictAssessees(data) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: 'assignments',
+            middlePaneHeader: 'assessees',
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',
@@ -232,7 +232,7 @@ function* workeAssignmentDistictAssessment(data) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: 'assignments',
+            middlePaneHeader: 'assessments',
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
@@ -10,9 +10,15 @@ import {
   SET_CULTURE_REDUCER_STATE,
   SET_CULTURE_DYNAMIC_SINGLE_STATE,
   LOADER_START,
-  CREATE_CULTURE_SAGA
+  CREATE_CULTURE_SAGA,
+  SET_POPUP_VALUE,
+  SET_NEXT_POPUP,
+  SET_DISPLAY_PANE_THREE_STATE,
+  GET_CULTURE_DIAMENTION_SAGA,
+  SET_CULTURE_DIMENTION_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
 
 const PopUpCultureProfileCreate = (props) => {
   const { headerOne, reducerObeject, allocationObj } = props;
@@ -23,7 +29,10 @@ const PopUpCultureProfileCreate = (props) => {
     selectedAssociateInfo,
     coreNodeReviewListData,
     coreGroupReviewListData,
-    coreTypeReviewListData
+    coreTypeReviewListData,
+    responseObject,
+    selectedInformationAllorKey,
+    cultureProfileDiamentionReviewList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
@@ -36,6 +45,15 @@ const PopUpCultureProfileCreate = (props) => {
     dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
     dispatch({ type: POPUP_CLOSE });
   };
+  useEffect(() => {
+    console.log('responseObject', responseObject);
+    if (responseObject) {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'CULTURECREATE' }
+      });
+    }
+  }, [responseObject]);
   const onClickYes = () => {
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
@@ -71,9 +89,11 @@ const PopUpCultureProfileCreate = (props) => {
   };
   console.log('cultureProfileInformation', cultureProfileInformation);
   let selectedPrimaryGroup =
-    cultureProfileInformation?.informationAllocation?.cultureProfileGroup?.cultureProfileGroupPrimary || [];
+    cultureProfileInformation?.informationAllocation?.cultureProfileGroup
+      ?.cultureProfileGroupPrimary || [];
   let selectedSecondaryGroup =
-    cultureProfileInformation?.informationAllocation?.cultureProfileGroup?.cultureProfileGroupSecondary || [];
+    cultureProfileInformation?.informationAllocation?.cultureProfileGroup
+      ?.cultureProfileGroupSecondary || [];
   let filteredCoreGroupReviewListDataPrimary = [];
   if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
     coreGroupReviewListData.forEach((group) => {
@@ -90,7 +110,77 @@ const PopUpCultureProfileCreate = (props) => {
         filteredCoreGroupReviewListDataSecondary.push(group);
     });
   }
-
+  const onClickContinueNo = () => {
+    dispatch({
+      type: SET_DISPLAY_PANE_THREE_STATE,
+      payload: {
+        headerOne: 'culture profile',
+        headerOneBadgeOne: 'information',
+        headerOneBadgeTwo: selectedInformationAllorKey,
+        responseObject: responseObject,
+        reviewMode: 'revise',
+        createMode: 'cultureProfile'
+      }
+    });
+  };
+  const onClickContinueYes = () => {
+    dispatch({ type: LOADER_START });
+    let diamentionReqBody = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      countPage: 15,
+      numberPage: 0,
+      filter: 'true',
+      orderBy: {
+        columnName: 'cultureProfilerFrameworkSecondaryGroup',
+        order: 'asc'
+      }
+    };
+    dispatch({ type: GET_CULTURE_DIAMENTION_SAGA, payload: { request: diamentionReqBody } });
+  };
+  const onClickRevise = () => {
+    dispatch({
+      type: SET_DISPLAY_PANE_THREE_STATE,
+      payload: {
+        headerOne: 'culture profile',
+        headerOneBadgeOne: 'information',
+        headerOneBadgeTwo: selectedInformationAllorKey,
+        responseObject: responseObject,
+        reviewMode: 'revise',
+        createMode: 'cultureProfile'
+      }
+    });
+  };
+  const updateDimention = (e) => {
+    let tagId = e.currentTarget.getAttribute('tag');
+    let tagIdArr =
+      cultureProfileInformation.informationFramework.cultureProfileCultureDimensionCore;
+    if (tagIdArr.includes(tagId)) {
+      document.getElementById(tagId).style.backgroundColor = 'white';
+      tagIdArr = tagIdArr.filter(function (number) {
+        return number !== tagId;
+      });
+    } else {
+      var arr = [];
+      tagIdArr = [...arr];
+      tagIdArr.push(tagId);
+      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    }
+    // if (tagIdArr.includes(tagId)) {
+    //   document.getElementById(tagId).style.backgroundColor = 'white';
+    //   tagIdArr = tagIdArr.filter(function (number) {
+    //     return number !== tagId;
+    //   });
+    // } else {
+    //   tagIdArr.push(tagId);
+    //   document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    // }
+    dispatch({
+      type: SET_CULTURE_DIMENTION_STATE,
+      payload: { cultureProfileCultureDimensionCore: tagIdArr }
+    });
+  };
   return (
     <div>
       <PopUpTextField
@@ -323,6 +413,67 @@ const PopUpCultureProfileCreate = (props) => {
         headerOneBadgeOne={'create'}
         headerOneBadgeTwo={''}
         onClickYes={onClickYes}
+      />
+      <PopUpConfirm
+        isActive={isPopUpValue === 'POPUPCONTINUE'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'continue'}
+        headerOneBadgeTwo={''}
+        onClickYes={onClickContinueYes}
+        mode={'error'}
+        onClickNoFun={onClickContinueNo}
+      />
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPDIAMENTIONMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPDIAMENTION0'}
+        textOneOne={'select'}
+        textOneTwo={'one or neither'}
+        textOneThree={'culture dimensions'}
+        textOneFour={`from the following twelve lists`}
+        mode={'next'}
+      />
+      {cultureProfileDiamentionReviewList.map((value, index) => {
+        return (
+          <PopUpReviewList
+            isActive={isPopUpValue === `POPUPDIAMENTION${index}`}
+            headerPanelColour={'genericOne'}
+            headerOne={headerOne}
+            headerOneBadgeOne={'information'}
+            nextPopUpValue={
+              index < cultureProfileDiamentionReviewList.length - 1
+                ? `POPUPDIAMENTION${index + 1}`
+                : 'POPUPWEITAGENMSG'
+            }
+            inputHeader={'culture dimension'}
+            inputHeaderBadge={'core'}
+            infoMsg={'select a one neither culture dimension'}
+            ListData={value.cultureDimensions}
+            selectedList={
+              cultureProfileInformation.informationFramework.cultureProfileCultureDimensionCore
+            }
+            textOne={'cultureProfilerFrameworkSecondary'}
+            textTwo={'cultureDimensionFrameworkSecondaryDescriptionPrimary'}
+            onClickEvent={updateDimention}
+            setErrorMsg={setRequiredErrorMsg}
+            errorMsg={requiredErrorMsg}
+            mode={reviewMode === 'revise' ? 'revise' : 'core'}
+          />
+        );
+      })}
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPWEITAGENMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'onClickRevise'}
+        textOneOne={'weightage for'}
+        textOneTwo={''}
+        textOneThree={'core'}
+        textOneFour={`culture dimensions`}
+        mode={'next'}
+        handleClickFun={onClickRevise}
       />
     </div>
   );
