@@ -115,7 +115,7 @@ const PopUpDropList = (props) => {
                     ) : null}
                   </>
                 </InputLabel>
-                <div className={'infoSymbol'}></div>
+                {/* <div className={'infoSymbol'}></div> */}
                 <div className={'infoSymbol'}>{/* <InfoToolTip message={infoMsg} /> */}</div>
               </div>
             </div>
