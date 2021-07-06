@@ -17,6 +17,8 @@ const AccordianInfoCard = (props) => {
     isMultiInfoCard = false
   } = accordianObject;
   const [selectedBadge, setSelectedBadge] = useState('');
+  const [selectedBadgeArray, setSelectedBadgeArray] = useState([]);
+
   useEffect(() => {
     if (
       labelTextOneOneBadges[0]?.labelTextOneOneBadge === 'primary' ||
@@ -58,9 +60,15 @@ const AccordianInfoCard = (props) => {
                           display: 'inline-block'
                         }}
                         className={mode === 'revise' ? 'linkText' : ''}
-                        onClick={mode === 'revise' ? onClickRevise : () => {}}
+                        onClick={
+                          mode === 'revise'
+                            ? (e) => {
+                                onClickRevise(e, selectedBadgeArray);
+                              }
+                            : () => {}
+                        }
                         data-value={labelTextOneOne}
-                        data-key={selectedBadge?.labelTextOneOneBadge || ''}
+                        data-key={selectedBadge?.labelTextTwoBadge || ''}
                       >
                         {labelTextOneOne}
                       </span>
@@ -74,48 +82,117 @@ const AccordianInfoCard = (props) => {
                           credential
                         </sup>
                       )}
-                      {labelTextOneOneBadges.map((ob, key) => {
-                        return (
-                          <>
-                            {ob.labelTextOneOneBadge !== '' ? (
-                              <sup
-                                key={`badge-${key}`}
-                                style={{
-                                  backgroundColor:
-                                    selectedBadge &&
-                                    selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
-                                      ? '#F2F2F2'
-                                      : '#ffffff'
-                                }}
-                                onClick={() => {
-                                  setSelectedBadge(ob);
-                                }}
-                              >
-                                {ob.labelTextOneOneBadge}
-                              </sup>
-                            ) : (
-                              <></>
-                            )}
-                          </>
-                        );
-                      })}
+                      {selectedBadgeArray.length > 0 &&
+                        selectedBadgeArray.map((val) => {
+                          return (
+                            <sup
+                              key={`badge-sign-in`}
+                              style={{
+                                backgroundColor: '#F2F2F2'
+                              }}
+                              onClick={() => {
+                                setSelectedBadge('');
+                                let removeLastOb = selectedBadgeArray.slice(0, -1);
+                                setSelectedBadgeArray(removeLastOb);
+                              }}
+                            >
+                              {val.labelTextTwoBadge}
+                            </sup>
+                          );
+                        })}
+                      {selectedBadgeArray.length > 0 ? (
+                        <>
+                          {selectedBadgeArray[
+                            selectedBadgeArray.length - 1
+                          ].innerLabelBadgeList.map((ob, key) => {
+                            return (
+                              <>
+                                {ob.labelTextTwoBadge !== '' ? (
+                                  <sup
+                                    key={`badge-${key}`}
+                                    style={{
+                                      backgroundColor:
+                                        selectedBadge &&
+                                        selectedBadge.labelTextTwoBadge === ob.labelTextTwoBadge
+                                          ? '#F2F2F2'
+                                          : '#ffffff'
+                                    }}
+                                    onClick={() => {
+                                      if (Array.isArray(ob.innerLabelBadgeList)) {
+                                        setSelectedBadgeArray((state) => {
+                                          return [...state, ob];
+                                        });
+                                      } else {
+                                        setSelectedBadge(ob);
+                                      }
+                                    }}
+                                  >
+                                    {ob.labelTextTwoBadge}
+                                  </sup>
+                                ) : (
+                                  <></>
+                                )}
+                              </>
+                            );
+                          })}
+                        </>
+                      ) : (
+                        <>
+                          {labelTextOneOneBadges.map((ob, key) => {
+                            return (
+                              <>
+                                {ob.labelTextTwoBadge !== '' ? (
+                                  <sup
+                                    key={`badge-${key}`}
+                                    style={{
+                                      backgroundColor:
+                                        selectedBadge &&
+                                        selectedBadge.labelTextTwoBadge === ob.labelTextTwoBadge
+                                          ? '#F2F2F2'
+                                          : '#ffffff'
+                                    }}
+                                    onClick={() => {
+                                      console.log('HERE===', ob);
+                                      if (Array.isArray(ob.innerLabelBadgeList)) {
+                                        setSelectedBadgeArray((state) => {
+                                          return [...state, ob];
+                                        });
+                                      } else {
+                                        setSelectedBadge(ob);
+                                      }
+                                    }}
+                                  >
+                                    {ob.labelTextTwoBadge}
+                                  </sup>
+                                ) : (
+                                  <></>
+                                )}
+                              </>
+                            );
+                          })}
+                        </>
+                      )}
                     </InputLabel>
                     {textOneOne ||
-                      (selectedBadge && selectedBadge.textOne && (
+                      (selectedBadge && selectedBadge.innerLabelBadgeList && (
                         <Input
                           multiline={
-                            multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                            multiline &&
+                            selectedBadge.innerLabelBadgeList &&
+                            selectedBadge.innerLabelBadgeList.length > 40
                           }
                           // row={multiline ? 2 : 1}
                           row={2}
                           rowsMax={
-                            multiline && selectedBadge.textOne && selectedBadge.textOne.length > 40
+                            multiline &&
+                            selectedBadge.innerLabelBadgeList &&
+                            selectedBadge.innerLabelBadgeList.length > 40
                               ? 4
                               : 1
                           }
                           className={'inputText'}
                           id="name-dn-input"
-                          value={(selectedBadge && selectedBadge.textOne) || textOneOne}
+                          value={selectedBadge?.innerLabelBadgeList || 'No'}
                           disableUnderline={true}
                           readOnly
                         />
