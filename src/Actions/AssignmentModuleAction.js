@@ -441,7 +441,28 @@ export const getAssignmnetAssesseeDistinctApiCall = (
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    assignmentId: selectedTagValue
+    assignmentId: selectedTagValue,
+    numberPage: 0,
+    countPage: countPage,
+    searchCondition: 'AND',
+    filter: true,
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assesseeStatus',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: 'ACTIVE'
+              }
+            }
+          }
+        ]
+      }
+    ]
   };
   // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
@@ -477,7 +498,28 @@ export const getAssignmnetAssessmentDistinctApiCall = (
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    assignmentId: selectedTagValue
+    assignmentId: selectedTagValue,
+    numberPage: 0,
+    countPage: countPage,
+    searchCondition: 'AND',
+    filter: true,
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assessmentStatus',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: 'ACTIVE'
+              }
+            }
+          }
+        ]
+      }
+    ]
   };
   // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });

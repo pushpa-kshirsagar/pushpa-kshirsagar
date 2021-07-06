@@ -4,6 +4,7 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   FILTERMODE_ENABLE,
   GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
@@ -38,6 +39,7 @@ const ItemTypeReviewList = (props) => {
     document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
   }, []);
   const handleScroll = (event) => {
+    console.log('scorrll');
     var targetPt = event.target;
     if (
       Math.ceil(targetPt.scrollHeight - targetPt.scrollTop) !== targetPt.clientHeight ||
@@ -54,7 +56,7 @@ const ItemTypeReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+        type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',

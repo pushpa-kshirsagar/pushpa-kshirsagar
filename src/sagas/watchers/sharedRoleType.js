@@ -133,7 +133,7 @@ function* workerRoleTypeShareSaga(data) {
           request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
           BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
           BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: '',
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
           isMiddlePaneList: true
         }
       });

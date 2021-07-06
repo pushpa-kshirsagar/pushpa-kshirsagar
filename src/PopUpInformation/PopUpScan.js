@@ -939,6 +939,8 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'cultureProfilesTypeDistinctReviewList' ||
                 isPopUpValue === 'jobProfilesGroupDistinctReviewList' ||
                 isPopUpValue === 'cultureProfileNodeCultureProfileReviewList' ||
+                isPopUpValue === 'assignmentDistinctAssessmentReviewList' ||
+                isPopUpValue === 'assignmentDistinctAssesseeReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

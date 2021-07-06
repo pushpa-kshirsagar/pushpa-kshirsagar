@@ -243,7 +243,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
       dispatch({
         type: GET_ALLOCATE_ASSESSEE,
         payload: {
@@ -282,7 +282,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
       dispatch({ type: LOADER_START });
-      dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
       dispatch({
         type: GET_ALLOCATE_ASSESSMENT,
         payload: {
