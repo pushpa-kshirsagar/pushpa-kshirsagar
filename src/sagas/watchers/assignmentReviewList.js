@@ -33,7 +33,9 @@ const apiCallFun = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: localStorage.getItem('token')
+      Authorization: requestObj?.isIdToken
+        ? localStorage.getItem('idToken')
+        : localStorage.getItem('token')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -265,7 +267,8 @@ function* workeAssignmentDistictCultureProfile(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_DISTINCT_CULTURE_PROFILE_URL
+      URL: ASSIGNMENT_DISTINCT_CULTURE_PROFILE_URL,
+      isIdToken: true
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
@@ -278,7 +281,7 @@ function* workeAssignmentDistictCultureProfile(data) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: 'assignments',
+            middlePaneHeader: 'culture profiles',
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',
@@ -311,7 +314,8 @@ function* workeAssignmentDistictJobProfile(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_DISTINCT_JOB_PROFILE_URL
+      URL: ASSIGNMENT_DISTINCT_JOB_PROFILE_URL,
+      isIdToken: true
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
@@ -324,7 +328,7 @@ function* workeAssignmentDistictJobProfile(data) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: 'assignments',
+            middlePaneHeader: 'job profiles',
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',

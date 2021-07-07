@@ -36,6 +36,7 @@ const PopUpCultureProfileCreate = (props) => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
+  const [cultureDiamentionArr, setCultureDiamentionArr] = useState([]);
 
   const onClickCancelYes = () => {
     dispatch({
@@ -129,7 +130,7 @@ const PopUpCultureProfileCreate = (props) => {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-      countPage: 15,
+      countPage: 50,
       numberPage: 0,
       filter: 'true',
       orderBy: {
@@ -154,11 +155,10 @@ const PopUpCultureProfileCreate = (props) => {
   };
   const updateDimention = (e) => {
     let tagId = e.currentTarget.getAttribute('tag');
-    let tagIdArr =
-      cultureProfileInformation.informationFramework.cultureProfileCultureDimensionCore;
-    if (tagIdArr.includes(tagId)) {
+    let tagIdArr = [];
+    if (cultureDiamentionArr.includes(tagId)) {
       document.getElementById(tagId).style.backgroundColor = 'white';
-      tagIdArr = tagIdArr.filter(function (number) {
+      tagIdArr = cultureDiamentionArr.filter(function (number) {
         return number !== tagId;
       });
     } else {
@@ -167,6 +167,7 @@ const PopUpCultureProfileCreate = (props) => {
       tagIdArr.push(tagId);
       document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
     }
+    setCultureDiamentionArr(tagIdArr);
     // if (tagIdArr.includes(tagId)) {
     //   document.getElementById(tagId).style.backgroundColor = 'white';
     //   tagIdArr = tagIdArr.filter(function (number) {
@@ -176,10 +177,15 @@ const PopUpCultureProfileCreate = (props) => {
     //   tagIdArr.push(tagId);
     //   document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
     // }
+  };
+  const setDimentionStateReducer = () => {
+    let newtagIdArr =
+      cultureProfileInformation.informationFramework.cultureProfileCultureDimensionCore;
     dispatch({
       type: SET_CULTURE_DIMENTION_STATE,
-      payload: { cultureProfileCultureDimensionCore: tagIdArr }
+      payload: { cultureProfileCultureDimensionCore: [...cultureDiamentionArr, ...newtagIdArr] }
     });
+    setCultureDiamentionArr([]);
   };
   return (
     <div>
@@ -447,15 +453,16 @@ const PopUpCultureProfileCreate = (props) => {
                 ? `POPUPDIAMENTION${index + 1}`
                 : 'POPUPWEITAGENMSG'
             }
+            handleClickOnCorrect={setDimentionStateReducer}
             inputHeader={'culture dimension'}
             inputHeaderBadge={'core'}
             infoMsg={'select a one neither culture dimension'}
             ListData={value.cultureDimensions}
-            selectedList={
-              cultureProfileInformation.informationFramework.cultureProfileCultureDimensionCore
-            }
+            isTooltipActive={true}
+            selectedList={cultureDiamentionArr}
             textOne={'cultureProfilerFrameworkSecondary'}
             textTwo={'cultureDimensionFrameworkSecondaryDescriptionPrimary'}
+            tooltipActiveText={'cultureProfilerFrameworkSecondaryDescriptionSecondary'}
             onClickEvent={updateDimention}
             setErrorMsg={setRequiredErrorMsg}
             errorMsg={requiredErrorMsg}

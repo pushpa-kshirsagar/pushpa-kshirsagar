@@ -16,6 +16,7 @@ const ReviewList = (props) => {
     isFlagActive = false,
     isSelectActive = '',
     isTooltipActive = false,
+    tooltipActiveText = '',
     isSelectedReviewList = false,
     onClickEvent = null,
     tag = '',
@@ -80,7 +81,7 @@ const ReviewList = (props) => {
                       {isShowTooltip ? (
                         <div className="tooltip-container">
                           <p className="tooltip-text" style={{ margin: '0' }}>
-                            Click me, I will stay visible until you click outside.
+                            {tooltipActiveText}
                           </p>
                         </div>
                       ) : null}

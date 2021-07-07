@@ -456,7 +456,7 @@ export const getAssignmnetAssesseeDistinctApiCall = (
             conditionValue: {
               condition: 'eq',
               value: {
-                from: 'ACTIVE'
+                from: secondaryOptionCheckValue.toUpperCase()
               }
             }
           }
@@ -494,6 +494,28 @@ export const getAssignmnetAssessmentDistinctApiCall = (
   searchStr,
   isScan
 ) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: secondaryOptionCheckValue.toUpperCase()
+    }
+  };
+  if (secondaryOptionCheckValue === 'all') {
+    searchObj = {
+      condition: 'in',
+      value: {
+        in: [
+          'CONFIRMED',
+          'DISAPPROVED',
+          'SUSPENDED',
+          'TERMINATED',
+          'UNAPPROVED',
+          'UNCONFIRMED',
+          'ARCHIVED'
+        ]
+      }
+    };
+  }
   let reqBody = {
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
@@ -510,12 +532,7 @@ export const getAssignmnetAssessmentDistinctApiCall = (
           {
             dataType: 'string',
             conditionColumn: 'informationEngagement.assessmentStatus',
-            conditionValue: {
-              condition: 'eq',
-              value: {
-                from: 'ACTIVE'
-              }
-            }
+            conditionValue: searchObj
           }
         ]
       }

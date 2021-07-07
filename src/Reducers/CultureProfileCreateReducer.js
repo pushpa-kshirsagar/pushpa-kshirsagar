@@ -34,7 +34,8 @@ const initialState = {
     },
     informationFramework: {
       cultureProfileCultureDimensionCore: [],
-      cultureProfileCultureDimensionWeightage: []
+      cultureProfileCultureDimensionWeightage: [],
+      cultureProfileCultureDimensionReviseWeightage: []
     }
   }
 };

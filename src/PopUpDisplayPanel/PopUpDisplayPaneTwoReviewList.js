@@ -135,6 +135,7 @@ import {
   updateAssignmentTypeStatus
 } from '../Actions/AssignmentModuleAction';
 import {
+  getAssignmneCultureProfileDistinctApiCall,
   getCultureGroupCultureDistinctApiCall,
   getCultureProfileNodeCultureProfileApiCall,
   getCultureTypeCultureDistinctApiCall,
@@ -143,6 +144,7 @@ import {
   updateCultureProfileTypeStatus
 } from '../Actions/ActionCultureProfile';
 import {
+  getAssignmneJobProfileDistinctApiCall,
   getJobProfileGroupJobProfileDistinctApiCall,
   getJobProfileNodeJobProfileApiCall,
   getJobProfileTypeJobProfileDistinctApiCall,
@@ -1625,6 +1627,38 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         }
         if (popupHeaderOne === 'assessments') {
           getAssignmnetAssessmentDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'assignmentDistinctAssessment' + secondaryOptionCheckValue }
+          });
+        }
+        if (popupHeaderOne === 'culture profiles') {
+          getAssignmneCultureProfileDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'assignmentDistinctAssessment' + secondaryOptionCheckValue }
+          });
+        }
+        if (popupHeaderOne === 'job profiles') {
+          getAssignmneJobProfileDistinctApiCall(
             selectedAssociateInfo,
             secondaryOptionCheckValue,
             countPage,

@@ -20,6 +20,8 @@ const PopUpReviewList = (props) => {
     isActive,
     errorMsg = '',
     setErrorMsg = null,
+    isTooltipActive = false,
+    tooltipActiveText = '',
     headerOneBadgeTwo = '',
     inputHeaderBadge = 'primary',
     inputHeaderBadgeTwo,
@@ -37,6 +39,7 @@ const PopUpReviewList = (props) => {
     textTwo = 'description',
     nextPopUpValue,
     onClickEvent = null,
+    handleClickOnCorrect = null,
     mode,
     isRequired = false,
     selectedList = [],
@@ -65,6 +68,7 @@ const PopUpReviewList = (props) => {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
       }
     }
+    if (handleClickOnCorrect) handleClickOnCorrect();
   };
   // console.log('props', props);
   // console.log('inputHeader', inputHeader);
@@ -115,6 +119,8 @@ const PopUpReviewList = (props) => {
                 id={index.id}
                 tag={index.id}
                 isAlertActive={false}
+                isTooltipActive={isTooltipActive}
+                tooltipActiveText={index[tooltipActiveText]}
                 isFlagActive={false}
                 isSelectActive={''}
                 key={index.id}

@@ -1482,6 +1482,21 @@ export const ASSIGNMENT_REVIEW_LIST_POPUP_OPTION = [
     disabled: false
   },
   {
+    data: 'culture profiles',
+    dataValue: 'culture profiles',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'job profiles',
+    dataValue: 'job profiles',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
     data: 'notifications',
     dataValue: 'notifications',
     dataKey: 'review',

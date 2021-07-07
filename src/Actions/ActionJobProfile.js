@@ -2,6 +2,7 @@ import {
   CLEAR_DISPLAY_PANE_THREE,
   CLEAR_JOB_REDUCER_STATE,
   FILTERMODE,
+  GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA,
   GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
   GET_JOBPROFILE_REVIEW_LIST_SAGA,
   GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
@@ -432,5 +433,76 @@ export const updateJobProfileTypeStatus = (
   dispatch({
     type: JOB_TYPE_REVISE_INFO_SAGA,
     payload: { secondaryOptionCheckValue: '', jobTypeJobReqBody: null, headerOne: '', reqBody }
+  });
+};
+export const getAssignmneJobProfileDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: secondaryOptionCheckValue.toUpperCase()
+    }
+  };
+  if (secondaryOptionCheckValue === 'all') {
+    searchObj = {
+      condition: 'in',
+      value: {
+        in: [
+          'SUSPENDED',
+          'TERMINATED',
+          'ACTIVE',
+          'ARCHIVED'
+        ]
+      }
+    };
+  }
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assignmentId: selectedTagValue,
+    numberPage: 0,
+    countPage: countPage,
+    searchCondition: 'AND',
+    filter: true,
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.jobProfileStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'job profiles',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
   });
 };
