@@ -33,7 +33,10 @@ const apiCallFun = async (requestObj) => {
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
-      Authorization: localStorage.getItem('token')
+      Authorization:
+        requestObj.type === 'culture profile' || requestObj.type === 'job profile'
+          ? localStorage.getItem('idToken')
+          : localStorage.getItem('token')
     }),
     body: JSON.stringify(requestObj.data)
   };
@@ -46,7 +49,8 @@ function* workerReviewListAssignmentSaga(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_REVIEW_LIST_URL
+      URL: ASSIGNMENT_REVIEW_LIST_URL,
+      type: ''
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
@@ -87,7 +91,8 @@ function* workeAssignmentTypeAssignment(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_TYPE_ASSIGNMENT_URL
+      URL: ASSIGNMENT_TYPE_ASSIGNMENT_URL,
+      type: ''
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
@@ -130,7 +135,8 @@ function* workeAssignmentGroupAssignment(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_GROUP_ASSIGNMENT_URL
+      URL: ASSIGNMENT_GROUP_ASSIGNMENT_URL,
+      type: ''
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
@@ -173,14 +179,15 @@ function* workeAssignmentDistictAssessees(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_DISTINCT_ASSESSEE_URL
+      URL: ASSIGNMENT_DISTINCT_ASSESSEE_URL,
+      type: 'assessee'
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
       yield put({
         type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
-        payload: { assessee: response.responseObject }
+        payload: { assessee: response?.responseObject?.assessee || [] }
       });
       if (data.payload.isMiddlePaneList) {
         yield put({
@@ -219,14 +226,15 @@ function* workeAssignmentDistictAssessment(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_DISTINCT_ASSESSMENT_URL
+      URL: ASSIGNMENT_DISTINCT_ASSESSMENT_URL,
+      type: 'assessment'
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
       yield put({
         type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
-        payload: { assessment: response.responseObject }
+        payload: { assessment: response?.responseObject?.assessment || [] }
       });
       if (data.payload.isMiddlePaneList) {
         yield put({
@@ -265,14 +273,15 @@ function* workeAssignmentDistictCultureProfile(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_DISTINCT_CULTURE_PROFILE_URL
+      URL: ASSIGNMENT_DISTINCT_CULTURE_PROFILE_URL,
+      type: 'culture profile'
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
       yield put({
         type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
-        payload: { cultureProfile: response.responseObject }
+        payload: { cultureProfile: response?.responseObject?.cultureProfile || [] }
       });
       if (data.payload.isMiddlePaneList) {
         yield put({
@@ -311,14 +320,15 @@ function* workeAssignmentDistictJobProfile(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_DISTINCT_JOB_PROFILE_URL
+      URL: ASSIGNMENT_DISTINCT_JOB_PROFILE_URL,
+      type: 'job profile'
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
       yield put({
         type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
-        payload: { jobProfile: response.responseObject }
+        payload: { jobProfile: response?.responseObject?.jobProfile || [] }
       });
       if (data.payload.isMiddlePaneList) {
         yield put({
@@ -358,7 +368,8 @@ function* workerAssignmentNodeAssignment(data) {
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL
+      URL: ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL,
+      type: ''
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
@@ -402,7 +413,8 @@ function* workerReviewListAssignmentAllocateSaga(data) {
   try {
     const userResponse = yield call(apiCallFun, {
       data: data.payload.request,
-      URL: ASSIGNMENT_REVIEW_LIST_URL
+      URL: ASSIGNMENT_REVIEW_LIST_URL,
+      type: ''
     });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {

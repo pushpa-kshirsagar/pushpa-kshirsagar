@@ -47,8 +47,8 @@
 }
 .expandedPanel {
   background-color: #f2f2f2 !important;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-    0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12) !important;
 }
 .accordionDetails {
   padding: 0px !important;
@@ -87,7 +87,15 @@
   display: flex;
   /* align-items: center; */
   width: 100%;
+  overflow: hidden;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+.formControlRight::-webkit-scrollbar {
+  display: none;
+}
+
 .formControlRight label {
   color: rgba(0, 0, 0, 0.54) !important;
 }
@@ -192,8 +200,8 @@
   color: rgba(0, 0, 0, 0.87);
   align-items: center;
 }
-.siftheaderdivgray span{
-  width:100%;
+.siftheaderdivgray span {
+  width: 100%;
 }
 /* pushpa */
 .assesseesContainerWhite {
