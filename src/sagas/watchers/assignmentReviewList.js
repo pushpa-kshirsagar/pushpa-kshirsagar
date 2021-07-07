@@ -274,11 +274,7 @@ function* workeAssignmentDistictCultureProfile(data) {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
       URL: ASSIGNMENT_DISTINCT_CULTURE_PROFILE_URL,
-<<<<<<< HEAD
-      isIdToken: true
-=======
       type: 'culture profile'
->>>>>>> 64ecbf62b6a4807021ee07cc58e2bcdc40d02dd1
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
@@ -325,11 +321,7 @@ function* workeAssignmentDistictJobProfile(data) {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
       URL: ASSIGNMENT_DISTINCT_JOB_PROFILE_URL,
-<<<<<<< HEAD
-      isIdToken: true
-=======
       type: 'job profile'
->>>>>>> 64ecbf62b6a4807021ee07cc58e2bcdc40d02dd1
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
