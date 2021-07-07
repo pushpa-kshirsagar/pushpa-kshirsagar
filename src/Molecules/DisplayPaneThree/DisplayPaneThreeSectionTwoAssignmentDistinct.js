@@ -374,7 +374,28 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
           assignmentId:
-            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || ''
+            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || '',
+          numberPage: 0,
+          countPage: countPage,
+          searchCondition: 'AND',
+          filter: true,
+          search: [
+            {
+              condition: 'or',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'informationEngagement.assesseeStatus',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: 'ACTIVE'
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         };
         dispatch({
           type: GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
@@ -398,7 +419,28 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
           assignmentId:
-            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || ''
+            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || '',
+          numberPage: 0,
+          countPage: countPage,
+          searchCondition: 'AND',
+          filter: true,
+          search: [
+            {
+              condition: 'or',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'informationEngagement.assessmentStatus',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: 'ACTIVE'
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         };
         dispatch({
           type: GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
@@ -414,7 +456,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       }
     }
     if (labelTextOneOne === 'culture profiles' && labelTextOneOneBadge === 'distinct') {
-      if (!assignmentRelatedReviewListPaneThree.assessment) {
+      if (!assignmentRelatedReviewListPaneThree.cultureProfile) {
         dispatch({ type: LOADER_START });
         let relatedReqObj = {
           assesseeId: selectedAssociateInfo?.assesseeId,
@@ -422,7 +464,28 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
           assignmentId:
-            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || ''
+            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || '',
+          numberPage: 0,
+          countPage: countPage,
+          searchCondition: 'AND',
+          filter: true,
+          search: [
+            {
+              condition: 'or',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'informationEngagement.cultureProfileStatus',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: 'ACTIVE'
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         };
         dispatch({
           type: GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
@@ -438,7 +501,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       }
     }
     if (labelTextOneOne === 'job profiles' && labelTextOneOneBadge === 'distinct') {
-      if (!assignmentRelatedReviewListPaneThree.assessment) {
+      if (!assignmentRelatedReviewListPaneThree.jobProfile) {
         dispatch({ type: LOADER_START });
         let relatedReqObj = {
           assesseeId: selectedAssociateInfo?.assesseeId,
@@ -446,7 +509,28 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
           assignmentId:
-            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || ''
+            responseObject?.informationEngagement?.assignmentTag?.assignmentTagPrimary || '',
+          numberPage: 0,
+          countPage: countPage,
+          searchCondition: 'AND',
+          filter: true,
+          search: [
+            {
+              condition: 'or',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'informationEngagement.jobProfileStatus',
+                  conditionValue: {
+                    condition: 'eq',
+                    value: {
+                      from: 'ACTIVE'
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         };
         dispatch({
           type: GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA,
