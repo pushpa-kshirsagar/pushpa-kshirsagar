@@ -37,6 +37,7 @@ const PopUpReviewList = (props) => {
     ],
     textOne = 'name',
     textTwo = 'description',
+    dataValue = '',
     nextPopUpValue,
     onClickEvent = null,
     handleClickOnCorrect = null,
@@ -118,6 +119,7 @@ const PopUpReviewList = (props) => {
                 }
                 id={index.id}
                 tag={index.id}
+                dataValue={dataValue}
                 isAlertActive={false}
                 isTooltipActive={isTooltipActive}
                 tooltipActiveText={index[tooltipActiveText]}

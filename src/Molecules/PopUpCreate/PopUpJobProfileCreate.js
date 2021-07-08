@@ -35,7 +35,7 @@ const PopUpJobProfileCreate = (props) => {
     coreNodeReviewListData,
     coreGroupReviewListData,
     coreRoleReviewListData,
-    jobProfileDomainReviewList,
+    jobProfilerReviewList,
     jobProfileFunctionReviewList,
     jobProfileRoleReviewList,
     coreTypeReviewListData,
@@ -152,18 +152,18 @@ const PopUpJobProfileCreate = (props) => {
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
     };
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'jobProfileDomainReviewList', value: [] }
-    });
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'jobProfileFunctionReviewList', value: [] }
-    });
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'jobProfileRoleReviewList', value: [] }
-    });
+    // dispatch({
+    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+    //   payload: { stateName: 'jobProfileDomainReviewList', value: [] }
+    // });
+    // dispatch({
+    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+    //   payload: { stateName: 'jobProfileFunctionReviewList', value: [] }
+    // });
+    // dispatch({
+    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+    //   payload: { stateName: 'jobProfileRoleReviewList', value: [] }
+    // });
     dispatch({
       type: GET_JOBDOMAIN_REVIEW_LIST_SAGA,
       payload: {
@@ -174,28 +174,28 @@ const PopUpJobProfileCreate = (props) => {
         isMiddlePaneList: false
       }
     });
-    dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-    dispatch({
-      type: GET_JOBFUNCTION_REVIEW_LIST_SAGA,
-      payload: {
-        request: requestObj,
-        BadgeOne: '',
-        BadgeTwo: '',
-        BadgeThree: '',
-        isMiddlePaneList: false
-      }
-    });
-    dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-    dispatch({
-      type: GET_JOBROLE_REVIEW_LIST_SAGA,
-      payload: {
-        request: requestObj,
-        BadgeOne: '',
-        BadgeTwo: '',
-        BadgeThree: '',
-        isMiddlePaneList: false
-      }
-    });
+    //   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+    //   dispatch({
+    //     type: GET_JOBFUNCTION_REVIEW_LIST_SAGA,
+    //     payload: {
+    //       request: requestObj,
+    //       BadgeOne: '',
+    //       BadgeTwo: '',
+    //       BadgeThree: '',
+    //       isMiddlePaneList: false
+    //     }
+    //   });
+    //   dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+    //   dispatch({
+    //     type: GET_JOBROLE_REVIEW_LIST_SAGA,
+    //     payload: {
+    //       request: requestObj,
+    //       BadgeOne: '',
+    //       BadgeTwo: '',
+    //       BadgeThree: '',
+    //       isMiddlePaneList: false
+    //     }
+    //   });
   };
   return (
     <div>
@@ -457,12 +457,13 @@ const PopUpJobProfileCreate = (props) => {
         infoMsg={'select a job domain'}
         isRequired={true}
         minimumSelected={1}
-        ListData={jobProfileDomainReviewList}
+        ListData={jobProfilerReviewList.jobDomain}
         onClickEvent={(e) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobDomain');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobDomain}
-        textOne={'jobDomainName'}
+        textOne={'jobProfilerFrameworkSecondary'}
+        textTwo={'jobProfilerFrameworkSecondaryDescription'}
         // setErrorMsg={setRequiredErrorMsg}
         // errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

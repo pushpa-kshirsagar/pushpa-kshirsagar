@@ -322,6 +322,7 @@ export const JOB_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/job-pr
 export const JOB_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/job-profile-type/unshare';
 export const JOBDOMAIN_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-domain/review-list';
+export const JOBPROFILER_LIST_URL = ANALYTICS + '/dev/insight-guru/api/job-profiler/review-list';
 export const JOBFUNCTION_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/job-function/review-list';
 export const JOBROLE_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-role/review-list';
