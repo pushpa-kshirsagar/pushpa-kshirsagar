@@ -66,6 +66,7 @@
   height: 1.6rem;
 }
 .reviewListBorder {
+  max-width: 290px;
   height: 50px !important;
 }
 .cardButtonwithouttextTransform {

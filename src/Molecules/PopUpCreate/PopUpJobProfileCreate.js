@@ -93,6 +93,7 @@ const PopUpJobProfileCreate = (props) => {
   };
   const updateFrameworkObj = (e, objectName, stateName) => {
     let tagId = e.currentTarget.getAttribute('tag');
+    console.log(tagId);
     let tagIdArr = jobProfileInformation.informationFramework[stateName];
     if (tagIdArr.includes(tagId)) {
       document.getElementById(tagId).style.backgroundColor = 'white';
@@ -113,6 +114,7 @@ const PopUpJobProfileCreate = (props) => {
     });
   };
   console.log('jobProfileInformation', jobProfileInformation);
+  console.log('jobProfilerReviewList', jobProfilerReviewList);
   let selectedPrimaryGroup =
     jobProfileInformation?.informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary || [];
   let selectedSecondaryGroup =
@@ -457,13 +459,13 @@ const PopUpJobProfileCreate = (props) => {
         infoMsg={'select a job domain'}
         isRequired={true}
         minimumSelected={1}
-        ListData={jobProfilerReviewList.jobDomain}
+        ListData={jobProfilerReviewList?.jobDomain}
         onClickEvent={(e) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobDomain');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobDomain}
         textOne={'jobProfilerFrameworkSecondary'}
-        textTwo={'jobProfilerFrameworkSecondaryDescription'}
+        // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         // setErrorMsg={setRequiredErrorMsg}
         // errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -491,12 +493,13 @@ const PopUpJobProfileCreate = (props) => {
         infoMsg={'select a job function'}
         isRequired={true}
         minimumSelected={1}
-        ListData={jobProfileFunctionReviewList}
+        ListData={jobProfilerReviewList?.jobFunction||[]}
         onClickEvent={(e) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobFunction');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobFunction}
-        textOne={'jobFunctionName'}
+        textOne={'jobProfilerFrameworkSecondary'}
+        // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -524,12 +527,13 @@ const PopUpJobProfileCreate = (props) => {
         infoMsg={'select a job role'}
         isRequired={true}
         minimumSelected={1}
-        ListData={jobProfileRoleReviewList}
+        ListData={jobProfilerReviewList?.jobRole}
         onClickEvent={(e) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobRole');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobRole}
-        textOne={'jobRoleName'}
+        textOne={'jobProfilerFrameworkSecondary'}
+        // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -538,11 +542,83 @@ const PopUpJobProfileCreate = (props) => {
         isActive={isPopUpValue === 'POPUPCOMPEMSG'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
-        nextPopUpValue={''}
+        nextPopUpValue={'POPUPCOMPITANCY0'}
         textOneOne={'shortlist'}
         textOneTwo={'eight or more'}
         textOneThree={'job competencies'}
         textOneFour={'from the following eleven lists'}
+        mode={'next'}
+      />
+      {jobProfilerReviewList
+        ? jobProfilerReviewList.jobCompetency.map((value, index) => {
+            return (
+              <PopUpReviewList
+                isActive={isPopUpValue === `POPUPCOMPITANCY${index}`}
+                headerPanelColour={'genericOne'}
+                headerOne={headerOne}
+                headerOneBadgeOne={'information'}
+                inputHeader={'job competency'}
+                inputHeaderBadge={'short list'}
+                infoMsg={'eight or more job competencies'}
+                nextPopUpValue={
+                  index < jobProfilerReviewList.jobCompetency.length - 1
+                    ? `POPUPCOMPITANCY${index + 1}`
+                    : 'POPUPWEITAGENMSG'
+                }
+                // nextPopUpValue={`POPUPCOMPITANCY${index + 1}`}
+                ListData={value.jobCompetency}
+                selectedList={[]}
+                textOne={'jobProfilerFrameworkSecondary'}
+                textTwo={'jobDimensionFrameworkSecondaryDescriptionPrimary'}
+                tooltipActiveText={'jobProfilerFrameworkSecondaryDescriptionSecondary'}
+                dataValue={value.group}
+              />
+            );
+          })
+        : null}
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPWEITAGENMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPCORECOMPEMSG'}
+        textOneOne={'sift'}
+        textOneTwo={''}
+        textOneThree={'job competencies'}
+        textOneFour={''}
+        mode={'next'}
+      />
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPCORECOMPEMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPRANGEMSG'}
+        textOneOne={'select'}
+        textOneTwo={'minimum eight or maximum twelve'}
+        textOneThree={'core'}
+        textOneFour={'job competencies'}
+        mode={'next'}
+      />
+
+<PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPRANGEMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPCOMPITANCY0'}
+        textOneOne={'range'}
+        textOneTwo={'for'}
+        textOneThree={'core'}
+        textOneFour={'job competencies'}
+        mode={'next'}
+      />
+<PopUpMessageGeneric
+        isActive={isPopUpValue === 'POPUPWEIGHTEMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPCOMPITANCY0'}
+        textOneOne={'weightage'}
+        textOneTwo={'for'}
+        textOneThree={'core'}
+        textOneFour={'job competencies'}
         mode={'next'}
       />
     </div>

@@ -69,7 +69,7 @@ const initialState = {
   errorResponse: '',
   responseObject: '',
   credentialOptionArr: [],
-  jobProfilerReviewList: [],
+  jobProfilerReviewList: null,
   jobProfileFunctionReviewList: [],
   jobProfileRoleReviewList: [],
   cultureProfileDiamentionReviewList: []
