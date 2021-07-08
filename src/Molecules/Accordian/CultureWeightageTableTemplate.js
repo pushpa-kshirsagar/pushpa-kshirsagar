@@ -198,6 +198,7 @@ class CultureWeightageTableTemplate extends Component {
     this.selecttarr = {};
     this.arr = [];
     this.selected = {};
+    this.isShowTooltipId = false;
     this.saveselected = this.saveselected.bind(this);
   }
   componentDidMount() {
@@ -225,8 +226,8 @@ class CultureWeightageTableTemplate extends Component {
   render() {
     console.log('IN CULTURE +++++>', this.props);
     var list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-    var listData = ['1', '2', '3'];
-    // const {} = this.props;
+    const { listData = ['1', '2', '3'] } = this.props;
+    console.log('LIST DATA', listData);
     return (
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'userCardHeaderContainer'}>
         <ThreeRowHeader title={this.props.title} row1={this.props.row1} />
@@ -378,20 +379,31 @@ class CultureWeightageTableTemplate extends Component {
 
         {listData.map((value) => {
           return (
-            <div className={'containerPadding'}>
+            <div key={value.id} className={'containerPadding'}>
               <Paper className={['contentMaindivGray'].join()}>
                 <div className={'siftComponentInnerDiv'}>
-                  <ClickAwayListener>
+                  <ClickAwayListener
+                    onClickAway={(event) => {
+                      event.stopPropagation();
+                      this.setState({ ...this.state, isShowTooltipId: '' });
+                    }}
+                  >
                     <Tooltip
                       id="tooltip-icon"
-                      open={'13' == '3' ? true : false}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        this.setState({ ...this.state, isShowTooltipId: '' });
+                      }}
+                      open={value.id === this.state.isShowTooltipId ? true : false}
                       title={
                         <Typography
                           color="inherit"
                           className={'tooltipWidth'}
                           style={{ fontSize: '15px', textAlign: 'center' }}
                         >
-                          <div style={{ display: 'block' }}>{'description'}</div>
+                          <div style={{ display: 'block' }}>
+                            {value?.cultureProfilerFrameworkSecondaryDescriptionSecondary || ''}
+                          </div>
                         </Typography>
                       }
                       style={{ fontSize: '12px' }}
@@ -403,7 +415,16 @@ class CultureWeightageTableTemplate extends Component {
                           borderRight: '1px solid #BFBFBF'
                         }}
                       >
-                        <span>{'name'}</span>
+                        <span
+                          style={{ cursor: 'pointer' }}
+                          onClick={(event) => {
+                            console.log("++++++++++++",value.id);
+                            event.stopPropagation();
+                            this.setState({ ...this.state, isShowTooltipId: value.id });
+                          }}
+                        >
+                          {value?.cultureProfilerFrameworkSecondary || 'name'}
+                        </span>
                       </div>
                     </Tooltip>
                   </ClickAwayListener>

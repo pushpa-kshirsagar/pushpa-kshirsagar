@@ -20,6 +20,7 @@ const AccordianListCard = (props) => {
     assignmentRelatedReviewListPaneThree,
     isWeightageSelected = false
   } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
   const {
     labelTextOneOne = '',
     innerInfo = 'No Information',
@@ -220,12 +221,10 @@ const AccordianListCard = (props) => {
             <div className={'unitFlex'}></div>
             <div
               onClick={() => {
-                console.log('HI', selectedBadge);
                 if (selectedBadge) {
                   if (!isListSelectExpanded && getReviewList) {
                     getReviewList(labelTextOneOne, selectedBadge?.labelTextOneOneBadge);
                   }
-                  console.log('HERE');
                   setIsListSelectExpanded((state) => !state);
                 }
               }}
@@ -253,6 +252,10 @@ const AccordianListCard = (props) => {
                     culturedimensionselected={cultureProfilerItems}
                     culturetooltipstate=""
                     cultureprofilemode="review"
+                    listData={
+                      cultureProfileInformation?.informationFramework
+                        ?.cultureProfileCultureDimensionCoreObj || [1, 2, 3]
+                    }
                   />
                 )}
                 {selectedBadge.labelTextOneOneBadge === 'range' && (
