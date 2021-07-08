@@ -25,6 +25,7 @@ import {
 import {
   JOBDOMAIN_REVIEWLIST_URL,
   JOBFUNCTION_REVIEWLIST_URL,
+  JOBPROFILER_LIST_URL,
   JOBROLE_REVIEWLIST_URL,
   JOB_GROUP_JOB_REVIEWLIST_URL,
   JOB_NODE_JOB_REVIEWLIST_URL,
@@ -282,13 +283,13 @@ function* workeJobDomainReviewListSaga(data) {
     yield put({ type: LOADER_START });
     const response = yield call(apiCallFunction, {
       data: data.payload.request,
-      URL: JOBDOMAIN_REVIEWLIST_URL
+      URL: JOBPROFILER_LIST_URL
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'jobProfileDomainReviewList', value: response.responseObject }
+        payload: { stateName: 'jobProfilerReviewList', value: response.responseObject }
       });
       yield put({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPDOMAINMSG' } });
     } else {

@@ -34,6 +34,7 @@ const initialState = {
     },
     informationFramework: {
       cultureProfileCultureDimensionCore: [],
+      cultureProfileCultureDimensionCoreObj: [],
       cultureProfileCultureDimensionWeightage: [],
       cultureProfileCultureDimensionReviseWeightage: []
     }
