@@ -160,7 +160,8 @@ export const DisplayPaneThree = () => {
     assignmentAssesseeList = [],
     assignmentAssessmentList = [],
     assignmentCultureProfileList = [],
-    assignmentJobProfileList = []
+    assignmentJobProfileList = [],
+    isWeightageSelected = false
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { typeOfMiddlePaneList, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -591,7 +592,11 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateType(rightPaneSectionsAssociateType[0]);
     setSelectedSectionItemType(rightPaneSectionsItemType[0]);
     setSelectedSectionAssessment(rightPaneSectionsAssessment[0]);
-    setSelectedSectionCultureProfile(rightPaneSectionsCultureProfile[0]);
+    if(isWeightageSelected){
+      setSelectedSectionCultureProfile(rightPaneSectionsCultureProfile[1]);
+    } else {
+      setSelectedSectionCultureProfile(rightPaneSectionsCultureProfile[0]);
+    }
     setSelectedSectionJobProfile(rightPaneSectionsJobProfile[0]);
     setSelectedSectionAssignment(rightPaneSectionsAssignment[0]);
     setSelectedSectionAssociateRole(rightPaneSectionsAssociateRole[0]);

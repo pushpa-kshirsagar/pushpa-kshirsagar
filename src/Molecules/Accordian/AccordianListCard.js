@@ -15,9 +15,12 @@ const AccordianListCard = (props) => {
     onClickReview = null,
     getReviewList = null
   } = props;
-  const { responseObject, assignmentRelatedReviewListPaneThree } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
-  );
+  const {
+    responseObject,
+    assignmentRelatedReviewListPaneThree,
+    isWeightageSelected = false
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
   const {
     labelTextOneOne = '',
     innerInfo = 'No Information',
@@ -35,11 +38,15 @@ const AccordianListCard = (props) => {
     ) {
       setSelectedBadge(labelTextOneOneBadges[0]);
     }
-    setIsListSelectExpanded(false);
+    if (isWeightageSelected && labelTextOneOne === 'culture dimensions') {
+      setSelectedBadge(labelTextOneOneBadges[1]);
+      setIsListSelectExpanded(true);
+    } else {
+      setIsListSelectExpanded(false);
+    }
   }, [responseObject]);
 
   useEffect(() => {
-    setIsListSelectExpanded(false);
     if (
       labelTextOneOneBadges[0].labelTextOneOneBadge === 'primary' ||
       labelTextOneOneBadges[0].labelTextOneOneBadge === ''
@@ -47,6 +54,12 @@ const AccordianListCard = (props) => {
       setSelectedBadge(labelTextOneOneBadges[0]);
     } else {
       setSelectedBadge('');
+    }
+    if (isWeightageSelected && labelTextOneOne === 'culture dimensions') {
+      setSelectedBadge(labelTextOneOneBadges[1]);
+      setIsListSelectExpanded(true);
+    } else {
+      setIsListSelectExpanded(false);
     }
   }, [assignmentRelatedReviewListPaneThree]);
 
@@ -208,12 +221,10 @@ const AccordianListCard = (props) => {
             <div className={'unitFlex'}></div>
             <div
               onClick={() => {
-                console.log("HI", selectedBadge);
                 if (selectedBadge) {
                   if (!isListSelectExpanded && getReviewList) {
                     getReviewList(labelTextOneOne, selectedBadge?.labelTextOneOneBadge);
                   }
-                  console.log("HERE");
                   setIsListSelectExpanded((state) => !state);
                 }
               }}
@@ -241,6 +252,10 @@ const AccordianListCard = (props) => {
                     culturedimensionselected={cultureProfilerItems}
                     culturetooltipstate=""
                     cultureprofilemode="review"
+                    listData={
+                      cultureProfileInformation?.informationFramework
+                        ?.cultureProfileCultureDimensionCoreObj || [1, 2, 3]
+                    }
                   />
                 )}
                 {selectedBadge.labelTextOneOneBadge === 'range' && (

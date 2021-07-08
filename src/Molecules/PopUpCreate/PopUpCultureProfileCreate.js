@@ -15,7 +15,8 @@ import {
   SET_NEXT_POPUP,
   SET_DISPLAY_PANE_THREE_STATE,
   GET_CULTURE_DIAMENTION_SAGA,
-  SET_CULTURE_DIMENTION_STATE
+  SET_CULTURE_DIMENTION_STATE,
+  SET_WEIGHTAGE_SELECTED
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
@@ -152,6 +153,10 @@ const PopUpCultureProfileCreate = (props) => {
         reviewMode: 'revise',
         createMode: 'cultureProfile'
       }
+    });
+    dispatch({
+      type: SET_WEIGHTAGE_SELECTED,
+      payload: true
     });
   };
   const updateDimention = (e) => {

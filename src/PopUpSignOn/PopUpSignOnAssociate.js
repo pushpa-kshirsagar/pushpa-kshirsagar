@@ -733,6 +733,28 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
+        isActive={isPopUpValue === 'IGURUANALYTICSCREATEAPPROVALPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'approval'}
+        listSelect={[
+          { id: 'y', name: 'Approval Not Required' },
+          { id: 'n', name: 'Approval Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={'create'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATECREATEAPPROVALPOPUP'}
         tag={'assesseeCreateApproval'}
         label={'approval'}
@@ -843,6 +865,28 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
+        isActive={isPopUpValue === 'IGURUANALYTICSCREATEPERMISSIONPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'permission'}
+        listSelect={[
+          { id: 'y', name: 'No' },
+          { id: 'n', name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={'create'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATECREATEPERMISSIONPOPUP'}
         tag={'assesseeCreateApproval'}
         label={'permission'}
@@ -940,6 +984,28 @@ const PopUpSignOnAssociate = () => {
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
+        inputHeaderBadgeOne={'group'}
+        inputHeaderBadgeTwo={'create'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'permission'}
+        listSelect={[
+          { id: 'y', name: 'No' },
+          { id: 'n', name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
         inputHeaderBadgeOne={'group'}
         inputHeaderBadgeTwo={'create'}
         labelval={'time'}
@@ -1107,6 +1173,28 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
+        isActive={isPopUpValue === 'IGURUANALYTICSTYPECREATEPERMISSIONPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'permission'}
+        listSelect={[
+          { id: 'y', name: 'No' },
+          { id: 'n', name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
+        inputHeaderBadgeOne={'type'}
+        inputHeaderBadgeTwo={'create'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATETYPECREATEPERMISSIONPOPUP'}
         tag={'assesseeCreateApproval'}
         label={'permission'}
@@ -1206,6 +1294,23 @@ const PopUpSignOnAssociate = () => {
         label={'fee'}
         headerPanelColour={'genericOne'}
         inputHeader={'items'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={'create'}
+        type={'number'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={false}
+        actualLableValue={'assesseeCreateFee'}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'IGURUANALYTICSCREATEFEEPOPUP'}
+        label={'fee'}
+        headerPanelColour={'genericOne'}
+        inputHeader={'iGuru analytics'}
         inputHeaderBadgeOne={'distinct'}
         inputHeaderBadgeTwo={'create'}
         type={'number'}
@@ -1332,6 +1437,30 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
+        isActive={isPopUpValue === 'IGURUANALYTICSINFODISTINCTBASICPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'information'}
+        labelBadgeOne={'basic'}
+        listSelect={[
+          { id: 'a', name: 'Unique Name & Description Not Rquired' },
+          { id: 'b', name: 'Unique Name + Description Required' },
+          { id: 'c', name: 'Unique Name Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={'information'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEINFODISTINCTBASICPOPUP'}
         tag={'assesseeCreateApproval'}
         label={'information'}
@@ -1439,6 +1568,30 @@ const PopUpSignOnAssociate = () => {
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
+        inputHeaderBadgeOne={'group'}
+        inputHeaderBadgeTwo={'information'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'IGURUANALYTICSBASICINFOGROUPPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'information'}
+        labelBadgeOne={'basic'}
+        listSelect={[
+          { id: 'a', name: 'Unique Name & Description Not Rquired' },
+          { id: 'b', name: 'Unique Name + Description Required' },
+          { id: 'c', name: 'Unique Name Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
         inputHeaderBadgeOne={'group'}
         inputHeaderBadgeTwo={'information'}
         labelval={'time'}
@@ -1607,6 +1760,30 @@ const PopUpSignOnAssociate = () => {
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
+        inputHeaderBadgeOne={'type'}
+        inputHeaderBadgeTwo={'information'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'IGURUANALYTICSBASICINFOTYPEPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'information'}
+        labelBadgeOne={'basic'}
+        listSelect={[
+          { id: 'a', name: 'Unique Name & Description Not Rquired' },
+          { id: 'b', name: 'Unique Name + Description Required' },
+          { id: 'c', name: 'Unique Name Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
         inputHeaderBadgeOne={'type'}
         inputHeaderBadgeTwo={'information'}
         labelval={'time'}

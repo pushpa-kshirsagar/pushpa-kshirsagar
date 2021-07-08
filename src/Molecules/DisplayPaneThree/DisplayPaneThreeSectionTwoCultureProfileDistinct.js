@@ -8,8 +8,9 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import CultureWeightageTableTemplate from '../Accordian/CultureWeightageTableTemplate';
 
 const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
-  const [listExpand, setListExpand] = useState('');
-  const { headerOneBadgeTwo, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { headerOneBadgeTwo, reviewMode, isWeightageSelected = false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  let selectedList = isWeightageSelected ? 'framework' : '';
+  const [listExpand, setListExpand] = useState(selectedList);
   const cultureProfilerItems = [
     {
       competencyId: '5734116b04a3242643c2e636',
@@ -182,17 +183,6 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
               mode={reviewMode}
             />
           </div>
-          {/* <div className={'containerPadding'}>
-            <CultureWeightageTableTemplate
-              headerrowcount={3}
-              title="weightage"
-              selectrepeaterrow2col={3}
-              row1={['low', 'medium', 'high']}
-              culturedimensionselected={cultureProfilerItems}
-              culturetooltipstate=""
-              cultureprofilemode="review"
-            />
-          </div> */}
         </>
       ) : (
         <>

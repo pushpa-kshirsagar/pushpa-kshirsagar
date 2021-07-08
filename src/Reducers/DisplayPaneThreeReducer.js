@@ -14,7 +14,8 @@ import {
   SET_ADMINISTRATOR_SECONDARY_LIST,
   SET_ASSIGNMENT_RELATED_LIST,
   SET_ASSIGNMENT_RELATED_REVIEW_LIST,
-  RESET_ASSIGNMENT_REVIEW_LIST_OBJECT
+  RESET_ASSIGNMENT_REVIEW_LIST_OBJECT,
+  SET_WEIGHTAGE_SELECTED
 } from '../actionType';
 
 const initialState = {
@@ -46,6 +47,7 @@ const initialState = {
   assignmentCultureProfileList: [],
   assignmentJobProfileList: [],
   assignmentRelatedReviewListPaneThree: {},
+  isWeightageSelected: false,
   selectedModule: '',
   statusPopUpValue: ''
 };
@@ -155,6 +157,11 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
       return {
         ...istate,
         assignmentRelatedReviewListPaneThree: {}
+      };
+    case SET_WEIGHTAGE_SELECTED:
+      return {
+        ...istate,
+        isWeightageSelected: action.payload
       };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;
