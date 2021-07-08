@@ -528,7 +528,16 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'associate',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'node',
+                  innerLabelBadgeList: 'No'
+                }
+              ]
             }
           ]
         },
@@ -728,10 +737,6 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: 'No'
-                },
-                {
-                  labelTextTwoBadge: 'name',
                   innerLabelBadgeList: 'No'
                 }
               ]
@@ -1732,6 +1737,104 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       dispatch({
         type: ASSOCIATE_SIGN_ON,
         payload: { isPopUpValue: 'ITEMBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (
+      labelName === 'iGuru analytics' &&
+      badgeName === 'distinctcreate' &&
+      selectedBadgeName === 'approval'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: 'IGURUANALYTICSCREATEAPPROVALPOPUP',
+          popupMode: 'ASSOCIATE_CREATE'
+        }
+      });
+    }
+    if (
+      labelName === 'iGuru analytics' &&
+      badgeName === 'distinctcreate' &&
+      selectedBadgeName === 'fee'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'IGURUANALYTICSCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+      });
+    }
+    if (
+      labelName === 'iGuru analytics' &&
+      badgeName === 'distinctcreate' &&
+      selectedBadgeName === 'permission'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: 'IGURUANALYTICSCREATEPERMISSIONPOPUP',
+          popupMode: 'ASSOCIATE_CREATE'
+        }
+      });
+    }
+    if (
+      labelName === 'iGuru analytics' &&
+      badgeName === 'distinctinformation' &&
+      selectedBadgeName === 'basic'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: 'IGURUANALYTICSINFODISTINCTBASICPOPUP',
+          popupMode: 'ASSOCIATE_CREATE'
+        }
+      });
+    }
+    if (
+      labelName === 'iGuru analytics' &&
+      badgeName === 'groupcreate' &&
+      selectedBadgeName === 'permission'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: 'IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP',
+          popupMode: 'ASSOCIATE_CREATE'
+        }
+      });
+    }
+    if (
+      labelName === 'iGuru analytics' &&
+      badgeName === 'groupinformation' &&
+      selectedBadgeName === 'basic'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: 'IGURUANALYTICSBASICINFOGROUPPOPUP',
+          popupMode: 'ASSOCIATE_CREATE'
+        }
+      });
+    }
+    if (
+      labelName === 'iGuru analytics' &&
+      badgeName === 'typecreate' &&
+      selectedBadgeName === 'permission'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: 'IGURUANALYTICSTYPECREATEPERMISSIONPOPUP',
+          popupMode: 'ASSOCIATE_CREATE'
+        }
+      });
+    }
+    if (
+      labelName === 'iGuru analytics' &&
+      badgeName === 'typeinformation' &&
+      selectedBadgeName === 'basic'
+    ) {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: { isPopUpValue: 'IGURUANALYTICSBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
       });
     }
 

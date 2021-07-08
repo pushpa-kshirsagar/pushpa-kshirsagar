@@ -301,7 +301,7 @@
 .labelPopupBox label {
   margin: 0px;
   font-size: 1.2rem !important;
-  flex: 3;
+  flex: 4;
   text-align: left;
 }
 .PopupFormBox label {
