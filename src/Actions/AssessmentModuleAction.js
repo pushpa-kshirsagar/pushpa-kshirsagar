@@ -22,7 +22,8 @@ import {
   SET_PAGE_COUNT,
   ASSESSMENT_INFO_REVISE_SAGA,
   ASSESSMENT_GROUP_REVISE_INFO_SAGA,
-  ASSESSMENT_TYPE_REVISE_INFO_SAGA
+  ASSESSMENT_TYPE_REVISE_INFO_SAGA,
+  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   getAssessmentGroupAssessmentReqObj,
@@ -84,6 +85,38 @@ export const createAssessmentPopup = (
       BadgeTwo: '',
       BadgeThree: '',
       isMiddlePaneList: false
+    }
+  });
+  dispatch({
+    type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'assessmentGroup',
+      actualStateName: 'assessmentGroupPrimary',
+      value: []
+    }
+  });
+  dispatch({
+    type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'assessmentManager',
+      actualStateName: 'assessmentManagerPrimary',
+      value: []
+    }
+  });
+  dispatch({
+    type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'assessmentNode',
+      actualStateName: 'assessmentNodePrimary',
+      value: []
+    }
+  });
+  dispatch({
+    type: SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'assessmentType',
+      actualStateName: 'assessmentTypePrimary',
+      value: []
     }
   });
   dispatch({

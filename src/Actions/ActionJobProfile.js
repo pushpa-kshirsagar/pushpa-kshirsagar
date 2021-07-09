@@ -99,6 +99,7 @@ export const jobProfileCreatePopup = (
   dispatch({
     type: SET_POPUP_VALUE,
     payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'JOBCREATE' }
+    // payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'JOBCREATE' }
   });
 };
 export const getJobProfilesDistinctApiCall = (

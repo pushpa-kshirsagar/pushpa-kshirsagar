@@ -238,19 +238,28 @@ const PopUpJobProfileCreate = (props) => {
   };
   const setCompetancyCoreStateReducer = () => {
     let jobCompetancyCore = jobProfileInformation.informationFramework.jobProfileJobCompetencyCore;
-  return
-  
-    // let arrr = jobProfilerReviewList.jobCompetency
-    //   .map((obj) => {
-    //     let temp = '';
-    //     if (obj.group === jobCompetancyGroup) {
-    //       temp = obj.cultureDimensions.filter(function (ob) {
-    //         return ob.id === jobCompetancyArr[0];
-    //       });
-    //     }
-    //     return temp[0];
-    //   })
-    //   .filter((notUndefined) => notUndefined !== undefined);
+    console.log('jobCompetancyCore', jobCompetancyCore);
+    let arrr = jobProfilerReviewList.jobCompetency
+      .map((obj) => {
+        let temp = '';
+        // if (obj.group === jobCompetancyGroup) {
+        temp = obj.jobCompetency.filter(function (ob) {
+          if (jobCompetancyCore.includes(ob.id)) return ob;
+        });
+        // }
+        return temp[0];
+      })
+      .filter((notUndefined) => notUndefined !== undefined);
+    console.log('arrr', arrr);
+    dispatch({
+      type: SET_JOB_DYNAMIC_ARRAY_STATE,
+      payload: {
+        objectName: 'informationFramework',
+        stateName: 'jobProfileJobCompetencyCoreObj',
+        value: arrr
+      }
+    });
+    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCORECOMPEMSG' } });
 
   };
   return (

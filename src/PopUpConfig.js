@@ -2550,20 +2550,20 @@ export const SHARE_NEW_POPUP = [
     dataValue: 'share',
     dataKey: 'shareunshareTertiary',
     optionClass: 'optionPrimary',
-    disabled: true
+    disabled: false
   },
   {
     data: 'unshare',
     dataValue: 'unshare',
     dataKey: 'shareunshareTertiary',
     optionClass: 'optionPrimary',
-    disabled: true,
+    disabled: false,
     divider: 'dark'
   },
   {
-    data: 'marketplace',
-    dataValue: 'marketplace',
-    dataKey: 'marketplace',
+    data: 'associate',
+    dataValue: 'associate',
+    dataKey: 'associate',
     optionClass: 'optionSecondary',
     disabled: false
   },
@@ -2572,6 +2572,70 @@ export const SHARE_NEW_POPUP = [
     dataValue: 'node',
     dataKey: 'node',
     optionClass: 'optionSecondary',
+    disabled: false,
+    divider:'light'
+  },
+  {
+    data: 'all',
+    dataValue: 'all',
+    dataKey: 'all',
+    optionClass: 'optionTertiary',
+    disabled: false
+  },
+  {
+    data: 'distinct',
+    dataValue: 'distinct',
+    dataKey: 'distinct',
+    optionClass: 'optionTertiary',
+    disabled: false
+  },
+  {
+    data: 'primary',
+    dataValue: 'primary',
+    dataKey: 'primary',
+    optionClass: 'optionTertiary',
+    disabled: false
+  },
+  {
+    data: 'secondary',
+    dataValue: 'secondary',
+    dataKey: 'secondary',
+    optionClass: 'optionTertiary',
+    disabled: false
+  },
+  {
+    data: 'ascendant',
+    dataValue: 'ascendant',
+    dataKey: 'ascendant',
+    optionClass: 'optionTertiary',
+    disabled: false
+  },
+  {
+    data: 'descendant',
+    dataValue: 'descendant',
+    dataKey: 'descendant',
+    optionClass: 'optionTertiary',
+    disabled: false
+  },
+  {
+    data: 'peer',
+    dataValue: 'peer',
+    dataKey: 'peer',
+    optionClass: 'optionTertiary',
+    disabled: false
+  },
+  {
+    data: 'root',
+    dataValue: 'root',
+    dataKey: 'root',
+    optionClass: 'optionTertiary',
+    disabled: false
+  },
+  {
+    data: 'self',
+    dataValue: 'self',
+    dataKey: 'self',
+    optionClass: 'optionTertiary',
     disabled: false
   }
 ];
