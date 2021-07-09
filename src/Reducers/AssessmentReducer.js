@@ -66,7 +66,7 @@ const initialState = {
 };
 
 const AssessmentReducer = (istate = initialState, action) => {
-  console.log(action.type);
+  // console.log(action.type);
   switch (action.type) {
     case ASSESSMENT_POPUP_OPEN:
       return {

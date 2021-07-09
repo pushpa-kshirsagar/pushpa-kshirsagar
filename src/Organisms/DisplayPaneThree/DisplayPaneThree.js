@@ -592,7 +592,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateType(rightPaneSectionsAssociateType[0]);
     setSelectedSectionItemType(rightPaneSectionsItemType[0]);
     setSelectedSectionAssessment(rightPaneSectionsAssessment[0]);
-    if(isWeightageSelected){
+    if (isWeightageSelected) {
       setSelectedSectionCultureProfile(rightPaneSectionsCultureProfile[1]);
     } else {
       setSelectedSectionCultureProfile(rightPaneSectionsCultureProfile[0]);
@@ -1861,7 +1861,7 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     dispatch({
       type: SET_MOBILE_PANE_STATE,
-      payload: typeOfMiddlePaneList === '' ? 'displayPaneOne' : 'displayPaneTwo'
+      payload: typeOfMiddlePaneList ? 'displayPaneOne' : 'displayPaneTwo'
     });
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,

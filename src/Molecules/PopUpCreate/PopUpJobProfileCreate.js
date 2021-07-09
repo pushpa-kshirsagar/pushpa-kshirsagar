@@ -20,10 +20,12 @@ import {
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   GET_JOBFUNCTION_REVIEW_LIST_SAGA,
   GET_JOBROLE_REVIEW_LIST_SAGA,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_JOB_COMPETANCY_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
+import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 
 const PopUpJobProfileCreate = (props) => {
   const { headerOne, reducerObeject, allocationObj } = props;
@@ -44,6 +46,8 @@ const PopUpJobProfileCreate = (props) => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
+  const [jobCompetancyArr, setJobCompetancyArr] = useState('');
+  const [jobCompetancyGroup, setJobCompetancyGroup] = useState('');
 
   const onClickCancelYes = () => {
     dispatch({
@@ -93,7 +97,6 @@ const PopUpJobProfileCreate = (props) => {
   };
   const updateFrameworkObj = (e, objectName, stateName) => {
     let tagId = e.currentTarget.getAttribute('tag');
-    console.log(tagId);
     let tagIdArr = jobProfileInformation.informationFramework[stateName];
     if (tagIdArr.includes(tagId)) {
       document.getElementById(tagId).style.backgroundColor = 'white';
@@ -198,6 +201,57 @@ const PopUpJobProfileCreate = (props) => {
     //       isMiddlePaneList: false
     //     }
     //   });
+  };
+  const updateJobCompetancy = (e) => {
+    let tagId = e.currentTarget.getAttribute('tag');
+    let groupId = e.currentTarget.getAttribute('data-value');
+    let tagIdArr = jobProfileInformation.informationFramework.jobProfileJobCompetencyCore;
+    if (tagIdArr.includes(tagId)) {
+      document.getElementById(tagId).style.backgroundColor = 'white';
+      tagIdArr = tagIdArr.filter(function (number) {
+        return number !== tagId;
+      });
+    } else {
+      // var arr = [];
+      // tagIdArr = [...arr];
+      // tagIdArr.push(tagId);
+      tagIdArr.push(tagId);
+      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_JOB_DYNAMIC_ARRAY_STATE,
+      payload: {
+        objectName: 'informationFramework',
+        stateName: 'jobProfileJobCompetencyCore',
+        value: tagIdArr
+      }
+    });
+    // dispatch({
+    //   type: SET_JOB_COMPETANCY_STATE,
+    //   payload: {
+    //     jobProfileJobCompetencyCore: tagIdArr,
+    //     // jobProfileJobCompetencyCoreObj: [...existdiamentionObj, ...arrr]
+    //   }
+    // });
+    setJobCompetancyArr(tagIdArr);
+    setJobCompetancyGroup(groupId);
+  };
+  const setCompetancyCoreStateReducer = () => {
+    let jobCompetancyCore = jobProfileInformation.informationFramework.jobProfileJobCompetencyCore;
+  return
+  
+    // let arrr = jobProfilerReviewList.jobCompetency
+    //   .map((obj) => {
+    //     let temp = '';
+    //     if (obj.group === jobCompetancyGroup) {
+    //       temp = obj.cultureDimensions.filter(function (ob) {
+    //         return ob.id === jobCompetancyArr[0];
+    //       });
+    //     }
+    //     return temp[0];
+    //   })
+    //   .filter((notUndefined) => notUndefined !== undefined);
+
   };
   return (
     <div>
@@ -493,7 +547,7 @@ const PopUpJobProfileCreate = (props) => {
         infoMsg={'select a job function'}
         isRequired={true}
         minimumSelected={1}
-        ListData={jobProfilerReviewList?.jobFunction||[]}
+        ListData={jobProfilerReviewList?.jobFunction || []}
         onClickEvent={(e) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobFunction');
         }}
@@ -563,11 +617,16 @@ const PopUpJobProfileCreate = (props) => {
                 nextPopUpValue={
                   index < jobProfilerReviewList.jobCompetency.length - 1
                     ? `POPUPCOMPITANCY${index + 1}`
-                    : 'POPUPWEITAGENMSG'
+                    : 'POPUPSIFTMSG'
                 }
                 // nextPopUpValue={`POPUPCOMPITANCY${index + 1}`}
                 ListData={value.jobCompetency}
-                selectedList={[]}
+                // onClickEvent={updateJobCompetancy}
+                onClickEvent={(e) => {
+                  updateFrameworkObj(e, 'informationFramework', 'jobProfileJobCompetencyCore');
+                }}
+                handleClickOnCorrect={null}
+                selectedList={jobProfileInformation.informationFramework.jobpr}
                 textOne={'jobProfilerFrameworkSecondary'}
                 textTwo={'jobDimensionFrameworkSecondaryDescriptionPrimary'}
                 tooltipActiveText={'jobProfilerFrameworkSecondaryDescriptionSecondary'}
@@ -577,15 +636,24 @@ const PopUpJobProfileCreate = (props) => {
           })
         : null}
       <PopUpMessageGeneric
-        isActive={isPopUpValue === 'POPUPWEITAGENMSG'}
+        isActive={isPopUpValue === 'POPUPSIFTMSG'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
-        nextPopUpValue={'POPUPCORECOMPEMSG'}
+        nextPopUpValue={'onClickRevise'}
+        handleClickFun={setCompetancyCoreStateReducer}
         textOneOne={'sift'}
         textOneTwo={''}
         textOneThree={'job competencies'}
         textOneFour={''}
         mode={'next'}
+      />
+      <PopUpCheckbox
+        isActive={isPopUpValue === 'POPUPSIFTLIST'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        valueArr={['email address (primary)', 'email address (secondary)']}
+        nextPopUpValue={'POPUPCORECOMPEMSG'}
       />
       <PopUpMessageGeneric
         isActive={isPopUpValue === 'POPUPCORECOMPEMSG'}
@@ -599,7 +667,7 @@ const PopUpJobProfileCreate = (props) => {
         mode={'next'}
       />
 
-<PopUpMessageGeneric
+      <PopUpMessageGeneric
         isActive={isPopUpValue === 'POPUPRANGEMSG'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
@@ -610,7 +678,7 @@ const PopUpJobProfileCreate = (props) => {
         textOneFour={'job competencies'}
         mode={'next'}
       />
-<PopUpMessageGeneric
+      <PopUpMessageGeneric
         isActive={isPopUpValue === 'POPUPWEIGHTEMSG'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}

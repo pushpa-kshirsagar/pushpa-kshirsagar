@@ -157,6 +157,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
     popupHeaderOneBadgeTwo,
+    popupHeaderOneBadgeThree,
     popupOpenType,
     secondaryOptionCheckValue,
     selectedTagValue,
@@ -2076,6 +2077,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           headerOne={popupHeaderOne}
           headerOneBadgeOne={popupHeaderOneBadgeOne}
           headerOneBadgeTwo={popupHeaderOneBadgeTwo}
+          headerOneBadgeThree={popupHeaderOneBadgeThree}
           onClick={BackHandlerEvent}
           mode={''}
         />

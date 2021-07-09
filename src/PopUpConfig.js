@@ -1269,7 +1269,8 @@ export const ASSESSMENT_REVIEW_LIST_POPUP_OPTION = [
   },
   {
     data: 'share',
-    dataValue: 'share',
+    dataValue: 'shareNew',
+    dataKey: 'shareNew',
     optionClass: 'optionPrimary',
     disabled: false
   },
@@ -2541,5 +2542,101 @@ export const SELF_POPUP_OPTION = [
     disabled: false,
     permissionArr: 'assessee',
     permission: 'review'
+  }
+];
+export const SHARE_NEW_POPUP = [
+  {
+    data: 'share',
+    dataValue: 'share',
+    dataKey: 'shareunshareTertiary',
+    optionClass: 'optionPrimary',
+    disabled: true
+  },
+  {
+    data: 'unshare',
+    dataValue: 'unshare',
+    dataKey: 'shareunshareTertiary',
+    optionClass: 'optionPrimary',
+    disabled: true,
+    divider: 'dark'
+  },
+  {
+    data: 'marketplace',
+    dataValue: 'marketplace',
+    dataKey: 'marketplace',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'node',
+    dataValue: 'node',
+    dataKey: 'node',
+    optionClass: 'optionSecondary',
+    disabled: false
+  }
+];
+export const SHARE_UNSHARE_POPUP_OPTION = [
+  {
+    data: 'all',
+    dataValue: 'all',
+    dataKey: 'all',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'distinct',
+    dataValue: 'distinct',
+    dataKey: 'distinct',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'primary',
+    dataValue: 'primary',
+    dataKey: 'primary',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'secondary',
+    dataValue: 'secondary',
+    dataKey: 'secondary',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'ascendant',
+    dataValue: 'ascendant',
+    dataKey: 'ascendant',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'descendant',
+    dataValue: 'descendant',
+    dataKey: 'descendant',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'peer',
+    dataValue: 'peer',
+    dataKey: 'peer',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'root',
+    dataValue: 'root',
+    dataKey: 'root',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'self',
+    dataValue: 'self',
+    dataKey: 'self',
+    optionClass: 'optionPrimary',
+    disabled: false
   }
 ];

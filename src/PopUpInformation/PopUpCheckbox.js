@@ -96,7 +96,7 @@ const PopUpCheckbox = (props) => {
             assesseeAddressEmailCommunication: true
           }
         });
-      } else {
+      } else if (state.isChecked === 'email address (secondary)') {
         dispatch({
           type: typeOfSecondaSetObject,
           payload: {
@@ -104,6 +104,8 @@ const PopUpCheckbox = (props) => {
             assesseeAddressEmailCommunication: true
           }
         });
+      } else {
+        return;
       }
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }

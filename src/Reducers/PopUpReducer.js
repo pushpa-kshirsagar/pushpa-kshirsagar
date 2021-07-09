@@ -36,6 +36,8 @@ import {
   CREATE_INFORMATION_POPUP,
   PUBLISH_PUPUP,
   SHARE_POPUP,
+  SHARE_NEW_POPUP,
+  SHARE_UNSHARE_POPUP_OPTION,
   FLAG_OPTION_PUPUP,
   GROUP_TYPE_POPUP_OPTION,
   ANALYTICS_POPUP,
@@ -74,6 +76,7 @@ const initialState = {
     allocate: ALLOCATE_POPUP,
     archive: ARCHIVE_POPUP,
     share: SHARE_POPUP,
+    shareNew: SHARE_NEW_POPUP,
     delete: DELETE_POPUP,
     flag: FLAG_PUPUP,
     flaged: FLAG_OPTION_PUPUP,
@@ -101,12 +104,13 @@ const initialState = {
     associates: REVIEW_DISTINCT_POPUP_OPTION,
     items: REVIEW_DISTINCT_POPUP_OPTION,
     cultureprofiles: REVIEW_DISTINCT_POPUP_OPTION,
-    jobprofiles: REVIEW_DISTINCT_POPUP_OPTION
+    jobprofiles: REVIEW_DISTINCT_POPUP_OPTION,
+    shareunshareTertiary: SHARE_UNSHARE_POPUP_OPTION
   }
 };
 
 const PopUpReducer = (istate = initialState, action) => {
-  console.log(action.payload);
+  // console.log(action);
   switch (action.type) {
     case POPUP_OPEN:
       return {
@@ -183,10 +187,23 @@ const PopUpReducer = (istate = initialState, action) => {
         gridColumnCountValue: action.payload
       };
     case SET_SECONDARY_CREATE_OPTION_VALUE:
-      return {
-        ...istate,
-        secondaryOptionCheckValue: action.payload
-      };
+      if (action.payload === 'marketplace' || action.payload === 'node') {
+        let tempArr = [];
+        SHARE_NEW_POPUP.forEach((element) => {
+          tempArr.push({ ...element, disabled: false });
+        });
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload,
+          popupContentArrValue: tempArr
+        };
+      } else {
+        return {
+          ...istate,
+          secondaryOptionCheckValue: action.payload
+        };
+      }
+
     case SET_SECONDARY_OPTION_VALUE:
       // return {
       //   ...istate,
@@ -301,7 +318,6 @@ const PopUpReducer = (istate = initialState, action) => {
         };
       }
     case SET_MIDDLEPANE_SECONDARY_OPTION: {
-      console.log('action.payload.keyValue.trim()', action.payload.badgeValue.split(' ').join(''));
       let arrVal =
         action.payload.keyValue === 'reviseKey' ||
         action.payload.keyValue === 'reviewKey' ||
@@ -309,6 +325,7 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload.keyValue === 'createKey' ||
         action.payload.keyValue === 'assesseeCreate' ||
         action.payload.keyValue === 'reviewDistinctKey' ||
+        action.payload.keyValue === 'shareunshareTertiary' ||
         action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
           : istate.secondaryPopUpOptions[action.payload.badgeValue.split(' ').join('')];
@@ -332,6 +349,7 @@ const PopUpReducer = (istate = initialState, action) => {
             popupHeaderOne: action.payload.badgeValue,
             popupHeaderOneBadgeOne: action.payload.keyValue,
             popupHeaderOneBadgeTwo: '',
+            popupHeaderOneBadgeThree: '',
             popupOpenType: 'secondary',
             popupContentArrValue: arrVal,
             secondaryOptionCheckValue:
@@ -378,7 +396,6 @@ const PopUpReducer = (istate = initialState, action) => {
           if (action.payload.keyValue === 'flag' && !istate.isFlaged) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
-          console.log('arrVal', arrVal);
 
           // if (
           //   (action.payload.badgeValue === 'suspend' ||
@@ -394,6 +411,7 @@ const PopUpReducer = (istate = initialState, action) => {
             isPopUpOpen: true,
             popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,
             popupHeaderOneBadgeTwo: action.payload.badgeValue,
+            popupHeaderOneBadgeThree: '',
             popupOpenType: 'secondary',
             popupContentArrValue: arrVal,
             secondaryOptionCheckValue:
@@ -409,6 +427,18 @@ const PopUpReducer = (istate = initialState, action) => {
                 : 'all'
           };
         }
+      } else if (istate.popupOpenType === 'secondary') {
+        return {
+          ...istate,
+          popupHeaderOne: istate.popupHeaderOne,
+          isPopUpOpen: true,
+          popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,
+          popupHeaderOneBadgeTwo: istate.secondaryOptionCheckValue,
+          popupHeaderOneBadgeThree: action.payload.badgeValue,
+          popupOpenType: 'tertiary',
+          popupContentArrValue: arrVal
+          // secondaryOptionCheckValue: 'all'
+        };
       } else {
         return istate;
       }
@@ -428,7 +458,19 @@ const PopUpReducer = (istate = initialState, action) => {
           popupHeaderOne: istate.duplicateHeaderOne,
           popupHeaderOneBadgeOne: istate.duplicateBadgeOne,
           popupHeaderOneBadgeTwo: '',
+          popupHeaderOneBadgeThree: '',
           popupOpenType: 'primary'
+        };
+      } else if (istate.popupOpenType === 'tertiary') {
+        return {
+          ...istate,
+          popupContentArrValue: SHARE_NEW_POPUP,
+          popupHeaderOne: istate.duplicateHeaderOne,
+          popupHeaderOneBadgeOne: 'share',
+          secondaryOptionCheckValue: '',
+          popupHeaderOneBadgeTwo: '',
+          popupHeaderOneBadgeThree: '',
+          popupOpenType: 'secondary'
         };
       } else {
         return istate;
