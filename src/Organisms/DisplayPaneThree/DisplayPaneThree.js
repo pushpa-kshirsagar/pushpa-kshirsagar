@@ -592,7 +592,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociateType(rightPaneSectionsAssociateType[0]);
     setSelectedSectionItemType(rightPaneSectionsItemType[0]);
     setSelectedSectionAssessment(rightPaneSectionsAssessment[0]);
-    if(isWeightageSelected){
+    if (isWeightageSelected) {
       setSelectedSectionCultureProfile(rightPaneSectionsCultureProfile[1]);
     } else {
       setSelectedSectionCultureProfile(rightPaneSectionsCultureProfile[0]);
@@ -1439,15 +1439,32 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'culture profile') {
-      const { informationBasic, informationAllocation } = cultureProfileInformation;
+      const {
+        informationBasic,
+        informationAllocation,
+        informationFramework
+      } = cultureProfileInformation;
       const { id } = responseObject;
+      let cultureDimensionCore = informationFramework?.cultureProfileCultureDimensionCoreObj || [];
+      let tempArr = [];
+      cultureDimensionCore.forEach((element) => {
+        tempArr.push({
+          cultureProfileCultureDimensionTag: element.id,
+          cultureProfileCultureDimensionWeightage: element.cultureProfileCultureDimensionWeightage
+        });
+      });
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId: id,
         cultureProfile: {
           id,
           informationBasic,
-          informationAllocation
+          informationAllocation,
+          informationFramework: {
+            cultureProfileCultureDimensionCore:
+              informationFramework?.cultureProfileCultureDimensionCore || [],
+            cultureProfileCultureDimensionWeightage: tempArr
+          }
         }
       };
       dispatch({ type: LOADER_START });

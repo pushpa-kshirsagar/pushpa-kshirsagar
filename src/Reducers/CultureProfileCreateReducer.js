@@ -2,7 +2,8 @@ import {
   SET_CULTURE_REDUCER_STATE,
   CLEAR_CULTURE_REDUCER_STATE,
   SET_CULTURE_DYNAMIC_SINGLE_STATE,
-  SET_CULTURE_DIMENTION_STATE
+  SET_CULTURE_DIMENTION_STATE,
+  SET_WEIGHTAGE_CULTURE_PROFILE
 } from '../actionType';
 
 const initialState = {
@@ -73,6 +74,29 @@ const ItemCreateReducer = (istate = initialState, action) => {
               ],
               [action.payload.actualStateName]: action.payload.value
             }
+          }
+        }
+      };
+    case SET_WEIGHTAGE_CULTURE_PROFILE:
+      let tempArr =
+        istate?.cultureProfileInformation?.informationFramework
+          ?.cultureProfileCultureDimensionCoreObj || [];
+      tempArr.forEach((element) => {
+        if (
+          element.cultureProfileCultureDimensionTag ===
+          action.payload.cultureProfileCultureDimensionTag
+        ) {
+          element.cultureProfileCultureDimensionWeightage =
+            action.payload.cultureProfileCultureDimensionWeightage;
+        }
+      });
+      return {
+        ...istate,
+        cultureProfileInformation: {
+          ...istate.cultureProfileInformation,
+          informationFramework: {
+            ...istate.cultureProfileInformation.informationFramework,
+            cultureProfileCultureDimensionCoreObj: tempArr
           }
         }
       };

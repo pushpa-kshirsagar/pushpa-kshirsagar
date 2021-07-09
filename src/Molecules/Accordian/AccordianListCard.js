@@ -3,9 +3,10 @@ import ReviewList from '../ReviewList/ReviewList';
 import { FormControl, InputLabel } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
 import './Accordian.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CultureWeightageTableTemplate from './CultureWeightageTableTemplate';
 import JobRangeTableTemplate from './jobRangeTableTemplate';
+import { SET_WEIGHTAGE_CULTURE_PROFILE } from '../../actionType';
 
 const AccordianListCard = (props) => {
   const {
@@ -18,7 +19,8 @@ const AccordianListCard = (props) => {
   const {
     responseObject,
     assignmentRelatedReviewListPaneThree,
-    isWeightageSelected = false
+    isWeightageSelected = false,
+    reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
   const {
@@ -27,7 +29,7 @@ const AccordianListCard = (props) => {
     labelTextOneOneBadges,
     isReviewLink = false
   } = accordianObject;
-
+  const dispatch = useDispatch();
   const [isListSelectExpanded, setIsListSelectExpanded] = useState(false);
   const [selectedBadge, setSelectedBadge] = useState('');
   const reviewLabelClass = isReviewLink ? 'reviewLinkText' : '';
@@ -62,6 +64,14 @@ const AccordianListCard = (props) => {
       setIsListSelectExpanded(false);
     }
   }, [assignmentRelatedReviewListPaneThree]);
+  let tempListData =
+    cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
+
+  if (tempListData.length > 0 && reviewMode === 'revise') {
+    // tempListData = cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
+  } else {
+    tempListData = responseObject?.informationFramework?.cultureProfileCultureDimensionWeightage;
+  }
 
   const cultureProfilerItems = [
     {
@@ -249,13 +259,15 @@ const AccordianListCard = (props) => {
                     title="weightage"
                     radiocount={3}
                     row1={['low', 'medium', 'high']}
-                    culturedimensionselected={cultureProfilerItems}
+                    // culturedimensionselected={cultureProfilerItems}
                     culturetooltipstate=""
                     cultureprofilemode="review"
-                    listData={
-                      cultureProfileInformation?.informationFramework
-                        ?.cultureProfileCultureDimensionCoreObj || [1, 2, 3]
-                    }
+                    listData={tempListData}
+                    setWeightage={(ob) => {
+                      if (reviewMode === 'revise') {
+                        dispatch({ type: SET_WEIGHTAGE_CULTURE_PROFILE, payload: ob });
+                      }
+                    }}
                   />
                 )}
                 {selectedBadge.labelTextOneOneBadge === 'range' && (

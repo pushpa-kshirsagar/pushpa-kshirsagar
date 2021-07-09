@@ -226,7 +226,7 @@ class CultureWeightageTableTemplate extends Component {
   render() {
     console.log('IN CULTURE +++++>', this.props);
     var list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-    const { listData = ['1', '2', '3'] } = this.props;
+    const { listData = ['1', '2', '3'], setWeightage } = this.props;
     console.log('LIST DATA', listData);
     return (
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'userCardHeaderContainer'}>
@@ -418,7 +418,6 @@ class CultureWeightageTableTemplate extends Component {
                         <span
                           style={{ cursor: 'pointer' }}
                           onClick={(event) => {
-                            console.log("++++++++++++",value.id);
                             event.stopPropagation();
                             this.setState({ ...this.state, isShowTooltipId: value.id });
                           }}
@@ -434,8 +433,26 @@ class CultureWeightageTableTemplate extends Component {
                       ? this.state.radioarray.map((lis, index) => {
                           return (
                             <span
-                              className={['contentDatadivGray'].join()}
-                              onClick={null}
+                              // className={['contentDatadivGray'].join()}
+                              className={
+                                ('contentDatadivGray',
+                                value?.cultureProfileCultureDimensionWeightage === index + 1
+                                  ? index + 1 === 3
+                                    ? 'selectedG'
+                                    : index + 1 === 2
+                                    ? 'secondaryGSelected'
+                                    : index + 1 === 1
+                                    ? 'thirdGselected'
+                                    : null
+                                  : null)
+                              }
+                              onClick={(e) => {
+                                console.log('event++++++++++', index + 1, value);
+                                setWeightage({
+                                  ...value,
+                                  cultureProfileCultureDimensionWeightage: index + 1
+                                });
+                              }}
                               style={{ cursor: 'pointer' }}
                             >
                               <span style={{ color: 'rgba(0, 0, 0, 0.87)' }}>
