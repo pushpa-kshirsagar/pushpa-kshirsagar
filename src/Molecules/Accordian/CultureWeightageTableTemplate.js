@@ -394,7 +394,11 @@ class CultureWeightageTableTemplate extends Component {
                         event.stopPropagation();
                         this.setState({ ...this.state, isShowTooltipId: '' });
                       }}
-                      open={value.id === this.state.isShowTooltipId ? true : false}
+                      open={
+                        value.cultureProfileCultureDimensionTag === this.state.isShowTooltipId
+                          ? true
+                          : false
+                      }
                       title={
                         <Typography
                           color="inherit"
@@ -419,7 +423,10 @@ class CultureWeightageTableTemplate extends Component {
                           style={{ cursor: 'pointer' }}
                           onClick={(event) => {
                             event.stopPropagation();
-                            this.setState({ ...this.state, isShowTooltipId: value.id });
+                            this.setState({
+                              ...this.state,
+                              isShowTooltipId: value.cultureProfileCultureDimensionTag
+                            });
                           }}
                         >
                           {value?.cultureProfilerFrameworkSecondary || 'name'}
