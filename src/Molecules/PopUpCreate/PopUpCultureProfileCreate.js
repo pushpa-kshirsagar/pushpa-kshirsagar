@@ -197,13 +197,16 @@ const PopUpCultureProfileCreate = (props) => {
       cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
     console.log('newtagIdArr', newtagIdArr);
     console.log('cultureDiamentionArr', cultureDiamentionArr);
-    dispatch({
-      type: SET_CULTURE_DIMENTION_STATE,
-      payload: {
-        cultureProfileCultureDimensionCore: [...cultureDiamentionArr, ...newtagIdArr],
-        cultureProfileCultureDimensionCoreObj: [...existdiamentionObj, ...arrr]
-      }
-    });
+    if(arrr.length > 0){
+      let ob = { ...arrr[0], cultureProfileCultureDimensionTag: arrr[0].id };
+      dispatch({
+        type: SET_CULTURE_DIMENTION_STATE,
+        payload: {
+          cultureProfileCultureDimensionCore: [...cultureDiamentionArr, ...newtagIdArr],
+          cultureProfileCultureDimensionCoreObj: [...existdiamentionObj, ob]
+        }
+      });
+    }
     setCultureDiamentionArr([]);
     setCultureDiamentionGroup('');
   };
@@ -487,7 +490,7 @@ const PopUpCultureProfileCreate = (props) => {
             onClickEvent={updateDimention}
             setErrorMsg={setRequiredErrorMsg}
             errorMsg={requiredErrorMsg}
-            mode={reviewMode === 'revise' ? 'revise' : 'core'}
+            mode={'core'}
           />
         );
       })}

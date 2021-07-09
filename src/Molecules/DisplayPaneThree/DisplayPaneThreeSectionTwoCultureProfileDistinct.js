@@ -1,16 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import CultureWeightageTableTemplate from '../Accordian/CultureWeightageTableTemplate';
+import {
+  GET_CULTURE_DIAMENTION_SAGA,
+  LOADER_START,
+  SET_CULTURE_DIMENTION_STATE,
+  SET_POPUP_VALUE
+} from '../../actionType';
 
 const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
-  const { headerOneBadgeTwo, reviewMode, isWeightageSelected = false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const {
+    headerOneBadgeTwo,
+    reviewMode,
+    isWeightageSelected = false,
+    responseObject
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const dispatch = useDispatch();
   let selectedList = isWeightageSelected ? 'framework' : '';
   const [listExpand, setListExpand] = useState(selectedList);
+  const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
+  useEffect(() => {
+    // {
+    //   "cultureDimensionTag": "",
+    //   "weightage": 0
+    // },
+    // {
+    //   "cultureDimensionTag": "",
+    //   "weightage": 0
+    // }
+    // const cultureList =
+    //   cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
+    // let tempList = [];
+    // cultureList.forEach((element) => {
+    //   tempList.push({
+    //     cultureDimensionTag: element.id,
+    //     weightage: 0
+    //   });
+    // });
+    // dispatch({
+    //   type: SET_CULTURE_DIMENTION_STATE,
+    //   payload: {
+    //     ...cultureProfileInformation.informationFramework,
+    //     cultureProfileCultureDimensionWeightage: tempList
+    //   }
+    // });
+  }, [responseObject]);
+
   const cultureProfilerItems = [
     {
       competencyId: '5734116b04a3242643c2e636',
@@ -113,6 +154,21 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
       ]
     }
   ];
+
+  let cultureCoreList = [];
+  const tempCoreList =
+    responseObject?.informationFramework?.cultureProfileCultureDimensionWeightage || [];
+  if (tempCoreList) {
+    tempCoreList.forEach((ob) => {
+      cultureCoreList.push({
+        id: ob.cultureProfileCultureDimensionTag,
+        textOne: ob?.cultureProfilerFrameworkSecondary || '',
+        textTwo: '',
+        status: ''
+      });
+    });
+  }
+
   const frameworkAll = [
     {
       id: 'a1',
@@ -123,7 +179,7 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'core',
-          innerList: []
+          innerList: cultureCoreList
         },
         {
           labelTextOneOneBadge: 'weightage',
@@ -155,7 +211,31 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
       IconOne: null
     }
   ];
-
+  const reviseFramework = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    if (labelName === 'culture dimensions' && selectedBadgeName === 'core') {
+      dispatch({ type: LOADER_START });
+      let diamentionReqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        countPage: 50,
+        numberPage: 0,
+        filter: 'true',
+        orderBy: {
+          columnName: 'cultureProfilerFrameworkSecondaryGroup',
+          order: 'asc'
+        }
+      };
+      dispatch({ type: GET_CULTURE_DIAMENTION_SAGA, payload: { request: diamentionReqBody } });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'POPUPDIAMENTIONMSG', popupMode: 'CULTURECREATE' }
+      });
+    }
+  };
+  console.log('INFORMATION FRAMEWORK', cultureProfileInformation.informationFramework);
   return (
     <div
       style={{
@@ -170,6 +250,7 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
               headerOne="framework"
               isDisplayCardExpanded={listExpand === 'framework'}
               setListExpand={setListExpand}
+              onClickRevise={reviseFramework}
               list={frameworkAll}
               mode={reviewMode}
             />
@@ -192,9 +273,18 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseFramework}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseFramework}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );

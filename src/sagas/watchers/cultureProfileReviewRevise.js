@@ -8,7 +8,8 @@ import {
   SET_CULTURE_DYNAMIC_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_CULTUREPROFILE_REVIEW_LIST_SAGA
+  GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
+  SET_CULTURE_DIMENTION_STATE
 } from '../../actionType';
 import { CULTURE_PROFILE_REVIEW_INFO_URL, CULTURE_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -45,8 +46,16 @@ function* workerReviewInfoCultureProfileSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'responseObject', value: userResponse.responseObject[0] }
+      });
       if (isReviseMode) {
-        const { informationBasic, informationAllocation } = userResponse.responseObject[0];
+        const {
+          informationBasic,
+          informationAllocation,
+          informationFramework
+        } = userResponse.responseObject[0];
         yield put({
           type: SET_CULTURE_REDUCER_STATE,
           payload: informationBasic
@@ -219,6 +228,18 @@ function* workerReviewInfoCultureProfileSaga(data) {
             }
           });
         }
+        let cultureCorelist = informationFramework?.cultureProfileCultureDimensionCore || [];
+        let arr = cultureCorelist.map((ob) => ob.cultureProfileCultureDimensionTag);
+        yield put({
+          type: SET_CULTURE_DIMENTION_STATE,
+          payload: {
+            cultureProfileCultureDimensionCore: arr || [],
+            cultureProfileCultureDimensionCoreObj:
+              informationFramework?.cultureProfileCultureDimensionWeightage || [],
+            cultureProfileCultureDimensionWeightage: [],
+            cultureProfileCultureDimensionReviseWeightage: []
+          }
+        });
       }
     }
     console.log('loading end');
@@ -264,6 +285,15 @@ function* workerReviseInfoCultureProfileSaga(data) {
           }
         });
       }
+      yield put({
+        type: SET_CULTURE_DIMENTION_STATE,
+        payload: {
+          cultureProfileCultureDimensionCore: [],
+          cultureProfileCultureDimensionCoreObj: [],
+          cultureProfileCultureDimensionWeightage: [],
+          cultureProfileCultureDimensionReviseWeightage: []
+        }
+      });
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }

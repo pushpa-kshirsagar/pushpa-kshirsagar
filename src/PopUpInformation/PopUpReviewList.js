@@ -52,7 +52,7 @@ const PopUpReviewList = (props) => {
     /*according to creation mode popup sequence will change*/
     if (isRequired) {
       if (selectedList.length >= minimumSelected) {
-        if (reviewMode === 'revise') {
+        if (mode === 'revise') {
           dispatch({ type: POPUP_CLOSE });
         } else {
           dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
@@ -63,7 +63,7 @@ const PopUpReviewList = (props) => {
           : setErrorMsg(REQUIRED_ERROR_MESSAGE);
       }
     } else {
-      if (reviewMode === 'revise') {
+      if (mode === 'revise') {
         dispatch({ type: POPUP_CLOSE });
       } else {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
