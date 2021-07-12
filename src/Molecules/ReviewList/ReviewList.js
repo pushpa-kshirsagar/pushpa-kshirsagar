@@ -27,13 +27,18 @@ const ReviewList = (props) => {
     isSelected = false,
     dataValue = '',
     flagedValue = '',
-    shared = ''
+    shared = '',
+    className
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
   return (
     <div key={id}>
-      <div disableFocusRipple={true} disableRipple={true} className={'reviewListBorder'}>
+      <div
+        disableFocusRipple={true}
+        disableRipple={true}
+        className={'reviewListBorder' + ' ' + className}
+      >
         <div
           className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
           style={{ backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '' }}

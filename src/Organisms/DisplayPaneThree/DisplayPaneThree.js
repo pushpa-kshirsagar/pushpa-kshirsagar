@@ -1878,7 +1878,12 @@ export const DisplayPaneThree = () => {
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     dispatch({
       type: SET_MOBILE_PANE_STATE,
-      payload: typeOfMiddlePaneList ? 'displayPaneOne' : 'displayPaneTwo'
+      payload:
+        typeOfMiddlePaneList === '' ||
+        typeOfMiddlePaneList === 'assesseesSelfReview' ||
+        typeOfMiddlePaneList === 'associateSelfReview'
+          ? 'displayPaneOne'
+          : 'displayPaneTwo'
     });
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,

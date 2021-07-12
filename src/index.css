@@ -276,8 +276,8 @@ body {
 .checkedFontNew {
   font-size: 1.2rem;
   flex: 1;
-  text-align: right;
-  right: -9px;
+  /* text-align: right; */
+  /* right: -9px; */
   height: 25px;
 }
 .checkedFontNew span:hover {

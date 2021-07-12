@@ -21,7 +21,8 @@ import {
   GET_JOBFUNCTION_REVIEW_LIST_SAGA,
   GET_JOBROLE_REVIEW_LIST_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_JOB_COMPETANCY_STATE
+  SET_JOB_COMPETANCY_STATE,
+  SET_MOBILE_PANE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
@@ -48,7 +49,12 @@ const PopUpJobProfileCreate = (props) => {
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
   const [jobCompetancyArr, setJobCompetancyArr] = useState('');
   const [jobCompetancyGroup, setJobCompetancyGroup] = useState('');
-
+  const siftListData = {
+    indispensable: [],
+    desirable: [],
+    probable: [],
+    removable: []
+  };
   const onClickCancelYes = () => {
     dispatch({
       type: SET_DISPLAY_THREE_SINGLE_STATE,
@@ -202,42 +208,9 @@ const PopUpJobProfileCreate = (props) => {
     //     }
     //   });
   };
-  const updateJobCompetancy = (e) => {
-    let tagId = e.currentTarget.getAttribute('tag');
-    let groupId = e.currentTarget.getAttribute('data-value');
-    let tagIdArr = jobProfileInformation.informationFramework.jobProfileJobCompetencyCore;
-    if (tagIdArr.includes(tagId)) {
-      document.getElementById(tagId).style.backgroundColor = 'white';
-      tagIdArr = tagIdArr.filter(function (number) {
-        return number !== tagId;
-      });
-    } else {
-      // var arr = [];
-      // tagIdArr = [...arr];
-      // tagIdArr.push(tagId);
-      tagIdArr.push(tagId);
-      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
-    }
-    dispatch({
-      type: SET_JOB_DYNAMIC_ARRAY_STATE,
-      payload: {
-        objectName: 'informationFramework',
-        stateName: 'jobProfileJobCompetencyCore',
-        value: tagIdArr
-      }
-    });
-    // dispatch({
-    //   type: SET_JOB_COMPETANCY_STATE,
-    //   payload: {
-    //     jobProfileJobCompetencyCore: tagIdArr,
-    //     // jobProfileJobCompetencyCoreObj: [...existdiamentionObj, ...arrr]
-    //   }
-    // });
-    setJobCompetancyArr(tagIdArr);
-    setJobCompetancyGroup(groupId);
-  };
   const setCompetancyCoreStateReducer = () => {
-    let jobCompetancyCore = jobProfileInformation.informationFramework.jobProfileJobCompetencyCore;
+    let jobCompetancyCore =
+      jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreTags;
     console.log('jobCompetancyCore', jobCompetancyCore);
     let arrr = jobProfilerReviewList.jobCompetency
       .map((obj) => {
@@ -251,16 +224,48 @@ const PopUpJobProfileCreate = (props) => {
       })
       .filter((notUndefined) => notUndefined !== undefined);
     console.log('arrr', arrr);
+    // dispatch({
+    //   type: SET_JOB_DYNAMIC_ARRAY_STATE,
+    //   payload: {
+    //     objectName: 'informationFramework',
+    //     stateName: 'jobProfileJobCompetencyCoreObj',
+    //     value: arrr
+    //   }
+    // });
     dispatch({
-      type: SET_JOB_DYNAMIC_ARRAY_STATE,
+      type: SET_JOB_COMPETANCY_STATE,
+      payload: arrr
+    });
+    // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCORECOMPEMSG' } });
+  };
+  useEffect(() => {
+    console.log('useeffect');
+    if (jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length > 0) {
+      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPSIFTLIST0' } });
+    }
+  }, [jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj]);
+  const updateCompetencySiftList = (id, key) => {
+    console.log(id, key);
+    let siftList = jobProfileInformation.informationFramework.jobProfileJobCompetencySifted;
+    siftList[key].push(id);
+    console.log(siftList);
+  };
+  const openRightPaneForRange = () => {
+    dispatch({
+      type: SET_DISPLAY_PANE_THREE_STATE,
       payload: {
-        objectName: 'informationFramework',
-        stateName: 'jobProfileJobCompetencyCoreObj',
-        value: arrr
+        headerOne: 'job profile',
+        headerOneBadgeOne: 'information',
+        headerOneBadgeTwo: selectedInformationAllorKey,
+        responseObject: responseObject,
+        reviewMode: 'revise',
+        createMode: 'jobProfile'
       }
     });
-    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCORECOMPEMSG' } });
-
+    dispatch({
+      type: SET_MOBILE_PANE_STATE,
+      payload: 'displayPaneThree'
+    });
   };
   return (
     <div>
@@ -632,10 +637,12 @@ const PopUpJobProfileCreate = (props) => {
                 ListData={value.jobCompetency}
                 // onClickEvent={updateJobCompetancy}
                 onClickEvent={(e) => {
-                  updateFrameworkObj(e, 'informationFramework', 'jobProfileJobCompetencyCore');
+                  updateFrameworkObj(e, 'informationFramework', 'jobProfileJobCompetencyCoreTags');
                 }}
                 handleClickOnCorrect={null}
-                selectedList={jobProfileInformation.informationFramework.jobpr}
+                selectedList={
+                  jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreTags
+                }
                 textOne={'jobProfilerFrameworkSecondary'}
                 textTwo={'jobDimensionFrameworkSecondaryDescriptionPrimary'}
                 tooltipActiveText={'jobProfilerFrameworkSecondaryDescriptionSecondary'}
@@ -656,31 +663,77 @@ const PopUpJobProfileCreate = (props) => {
         textOneFour={''}
         mode={'next'}
       />
-      <PopUpCheckbox
-        isActive={isPopUpValue === 'POPUPSIFTLIST'}
-        headerPanelColour={'genericOne'}
-        headerOne={headerOne}
-        headerOneBadgeOne={'information'}
-        valueArr={['email address (primary)', 'email address (secondary)']}
-        nextPopUpValue={'POPUPCORECOMPEMSG'}
-      />
+      {jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj.map(
+        (value, index) => {
+          return (
+            <PopUpCheckbox
+              isActive={isPopUpValue === `POPUPSIFTLIST${index}`}
+              headerPanelColour={'genericOne'}
+              headerOne={headerOne}
+              headerOneBadgeOne={'information'}
+              inputHeader={'job competency'}
+              inputHeaderBadge={'sift list'}
+              infoMsg={''}
+              onClickNext={updateCompetencySiftList}
+              isJobProfileList={true}
+              id={value.id}
+              textOne={value.jobProfilerFrameworkSecondary}
+              textTwo={value.jobProfilerFrameworkSecondaryDescriptionPrimary}
+              valueArr={['indispensable', 'desirable', 'probable', 'removable']}
+              nextPopUpValue={
+                index <
+                jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length - 1
+                  ? `POPUPSIFTLIST${index + 1}`
+                  : 'POPUPCORECOMPEMSG'
+              }
+              // nextPopUpValue={'POPUPCORECOMPEMSG'}
+            />
+          );
+        }
+      )}
+
       <PopUpMessageGeneric
         isActive={isPopUpValue === 'POPUPCORECOMPEMSG'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
-        nextPopUpValue={'POPUPRANGEMSG'}
+        // nextPopUpValue={'POPUPRANGEMSG'}
+        nextPopUpValue={'POPUPCOMPETENCYLIST'}
         textOneOne={'select'}
         textOneTwo={'minimum eight or maximum twelve'}
         textOneThree={'core'}
         textOneFour={'job competencies'}
         mode={'next'}
       />
-
+      <PopUpReviewList
+        isActive={isPopUpValue === 'POPUPCOMPETENCYLIST'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={'POPUPRANGEMSG'}
+        // prevPopUpValue={'POPUPROLEMSG'}
+        inputHeader={'job competency'}
+        inputHeaderBadge={'core'}
+        infoMsg={'select a job competency'}
+        isRequired={true}
+        minimumSelected={1}
+        ListData={jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj}
+        onClickEvent={(e) => {
+          updateFrameworkObj(e, 'informationFramework', 'jobProfileJobCompetencyCore');
+        }}
+        selectedList={jobProfileInformation.informationFramework.jobProfileJobCompetencyCore}
+        textOne={'jobProfilerFrameworkSecondary'}
+        // textTwo={'jobProfilerFrameworkSecondaryDescription'}
+        setErrorMsg={null}
+        errorMsg={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
       <PopUpMessageGeneric
         isActive={isPopUpValue === 'POPUPRANGEMSG'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
-        nextPopUpValue={'POPUPCOMPITANCY0'}
+        // nextPopUpValue={'is'}
+        nextPopUpValue={'onClickRevise'}
+        handleClickFun={openRightPaneForRange}
         textOneOne={'range'}
         textOneTwo={'for'}
         textOneThree={'core'}

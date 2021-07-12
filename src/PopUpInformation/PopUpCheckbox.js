@@ -7,6 +7,9 @@ import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
+import { InputLabel } from '@material-ui/core';
+import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
+import ReviewList from '../Molecules/ReviewList/ReviewList';
 
 const PopUpCheckbox = (props) => {
   /*props*/
@@ -22,7 +25,16 @@ const PopUpCheckbox = (props) => {
     typeOfSecondaSetObject,
     nextPopUpValue,
     forceToSelect = '',
-    mode
+    mode,
+    inputHeader = '',
+    inputHeaderBadge = '',
+    inputHeaderBadgeTwo = '',
+    infoMsg = '',
+    isJobProfileList = false,
+    textOne = '',
+    textTwo = null,
+    onClickNext = null,
+    id
   } = props;
 
   const dispatch = useDispatch();
@@ -105,7 +117,8 @@ const PopUpCheckbox = (props) => {
           }
         });
       } else {
-        return;
+        onClickNext(id, state.isChecked);
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
       }
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
@@ -124,6 +137,56 @@ const PopUpCheckbox = (props) => {
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
         >
+          <div className={'fitContent'}>
+            <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
+              <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                <Fragment>
+                  {inputHeader}&nbsp;
+                  {inputHeaderBadge ? (
+                    <span className={'headerBadge'}>{inputHeaderBadge}</span>
+                  ) : null}
+                  &nbsp;
+                  {inputHeaderBadgeTwo ? (
+                    <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
+                  ) : null}
+                </Fragment>
+              </InputLabel>
+              <div className={'infoSymbol'}></div>
+              <div className={'infoSymbol'}>
+                <InfoToolTip message={infoMsg} />
+              </div>
+            </div>
+          </div>
+          {isJobProfileList && (
+            <div className={'containerPadding'}>
+              <div
+                disableFocusRipple={true}
+                disableRipple={true}
+                className={['cardButton', 'heightInherit','reviewListFixedWidth'].join(' ')}
+                style={{ borderBottom: '0px' }}
+              >
+                <div className={['measureBox', 'heightInherit', 'componentInnerDiv'].join(' ')}>
+                  <div
+                    className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}
+                    style={{ textTransform: 'none' }}
+                  >
+                    {/* <div className={'midPaneInformation'} style={{ height: '50px' }}> */}
+
+                    <div
+                      className={[
+                        'midPaneInformation',
+                        textTwo == null || textTwo === '' ? 'aliasmiddle' : null
+                      ].join(' ')}
+                    >
+                      <span>{textOne}</span>
+                    </div>
+                    {textTwo != null ? <div className={'midPaneLabel'}>{textTwo}</div> : null}
+                    {/* </div> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           {valueArr.map((item) => (
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
@@ -134,7 +197,9 @@ const PopUpCheckbox = (props) => {
                       color="default"
                       value={item}
                       name={item}
-                      disabled={!availableSignInCredentialList.includes(item)}
+                      disabled={
+                        isJobProfileList ? false : !availableSignInCredentialList.includes(item)
+                      }
                       checked={state.isChecked === item}
                       onChange={handleChange}
                     />

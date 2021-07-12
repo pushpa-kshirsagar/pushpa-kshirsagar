@@ -38,9 +38,15 @@ const initialState = {
       jobProfileJobFunction: [],
       jobProfileJobRole: [],
       jobProfileJobCompetencyCore: [],
+      jobProfileJobCompetencyCoreTags: [],
+      jobProfileJobCompetencyCoreObj: [],
       jobProfileJobCompetencyShortlisted: [],
-      jobProfileJobCompetencySifted: [],
-      jobProfileJobCompetencyCoreObj: []
+      jobProfileJobCompetencySifted: {
+        indispensable: [],
+        desirable: [],
+        probable: [],
+        removable: []
+      }
     }
   }
 };
@@ -71,6 +77,7 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
         }
       };
     case SET_JOB_DYNAMIC_ARRAY_STATE:
+      console.log('action.payload', action);
       return {
         ...istate,
         [action.payload.objectName]: {
@@ -78,14 +85,20 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
           [action.payload.stateName]: action.payload.value
         }
       };
-    // case SET_JOB_COMPETANCY_STATE:
-    //   return {
-    //     ...istate,
-    //     jobProfileInformation: {
-    //       ...istate.jobProfileInformation,
-    //       informationFramework: action.payload
-    //     }
-    //   };
+    case SET_JOB_COMPETANCY_STATE:
+      return {
+        ...istate,
+        jobProfileInformation: {
+          ...istate.jobProfileInformation,
+          informationFramework: {
+            ...istate.informationFramework,
+            jobProfileJobCompetencyCoreObj: action.payload,
+            jobProfileJobCompetencySifted:
+              istate.jobProfileInformation.informationFramework.jobProfileJobCompetencySifted,
+            jobProfileJobCompetencyCore: []
+          }
+        }
+      };
     case CLEAR_JOB_REDUCER_STATE:
       return initialState;
     default:

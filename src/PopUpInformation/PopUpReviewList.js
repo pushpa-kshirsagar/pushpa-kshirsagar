@@ -128,6 +128,7 @@ const PopUpReviewList = (props) => {
                 key={index.id}
                 isSelectedReviewList={selectedList.includes(index.id)}
                 onClickEvent={onClickEvent}
+                className={'reviewListFixedWidth'}
                 // isSelectedReviewList={selectedIdsArr.includes(index.id)}
               />
             ))}

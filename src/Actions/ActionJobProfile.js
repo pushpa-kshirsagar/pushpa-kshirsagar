@@ -51,44 +51,44 @@ export const jobProfileCreatePopup = (
     payload: { stateName: 'responseObject', value: '' }
   });
   dispatch({ type: CLEAR_JOB_REDUCER_STATE });
-  dispatch({ type: LOADER_START });
+  // dispatch({ type: LOADER_START });
   let requestObj = makeJobProfileGroupObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-  dispatch({
-    type: GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
-    payload: {
-      request: requestObj,
-      BadgeOne: '',
-      BadgeTwo: '',
-      BadgeThree: '',
-      isMiddlePaneList: false
-    }
-  });
+  // dispatch({
+  //   type: GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
+  //   payload: {
+  //     request: requestObj,
+  //     BadgeOne: '',
+  //     BadgeTwo: '',
+  //     BadgeThree: '',
+  //     isMiddlePaneList: false
+  //   }
+  // });
   let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
-  dispatch({
-    type: INTERNAL_NODE_LIST_SAGA,
-    payload: {
-      request: nodeRequestObj,
-      BadgeOne: '',
-      BadgeTwo: '',
-      BadgeThree: '',
-      nodeViewState: 'list',
-      isMiddlePaneList: false
-    }
-  });
+  // dispatch({
+  //   type: INTERNAL_NODE_LIST_SAGA,
+  //   payload: {
+  //     request: nodeRequestObj,
+  //     BadgeOne: '',
+  //     BadgeTwo: '',
+  //     BadgeThree: '',
+  //     nodeViewState: 'list',
+  //     isMiddlePaneList: false
+  //   }
+  // });
   let typeRequestObj = makeJobProfileTypeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typeRequestObj });
-  dispatch({
-    type: GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
-    payload: {
-      request: typeRequestObj,
-      BadgeOne: '',
-      BadgeTwo: '',
-      BadgeThree: '',
-      isMiddlePaneList: false
-    }
-  });
+  // dispatch({
+  //   type: GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
+  //   payload: {
+  //     request: typeRequestObj,
+  //     BadgeOne: '',
+  //     BadgeTwo: '',
+  //     BadgeThree: '',
+  //     isMiddlePaneList: false
+  //   }
+  // });
   dispatch({
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: {
@@ -98,8 +98,8 @@ export const jobProfileCreatePopup = (
   });
   dispatch({
     type: SET_POPUP_VALUE,
-    payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'JOBCREATE' }
-    // payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'JOBCREATE' }
+    // payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'JOBCREATE' }
+    payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'JOBCREATE' }
   });
 };
 export const getJobProfilesDistinctApiCall = (

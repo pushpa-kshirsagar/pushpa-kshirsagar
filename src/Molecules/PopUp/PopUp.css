@@ -307,6 +307,9 @@
   padding-left: 5px !important;
   padding-bottom: 5px !important;
 }
+.reviewListFixedWidth {
+  max-width: 290px;
+}
 .fitContent {
   height: fit-content;
 }
