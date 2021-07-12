@@ -1052,26 +1052,26 @@ export const UPLOAD_DOWNLOAD_POPUP = [
   {
     data: 'first-name other-name last-name',
     dataValue: 'first-name other-name last-name',
-    optionClass: 'optionSecondary',
+    optionClass: 'optionTertiary',
     disabled: false
   },
   {
     data: 'last-name first-name other-name',
     dataValue: 'last-name first-name other-name',
-    optionClass: 'optionSecondary',
+    optionClass: 'optionTertiary',
     divider: 'light',
     disabled: false
   },
   {
     data: 'template',
     dataValue: 'template',
-    optionClass: 'optionSecondary',
+    optionClass: 'optionForth',
     disabled: false
   },
   {
     data: 'worksheet',
     dataValue: 'worksheet',
-    optionClass: 'optionSecondary',
+    optionClass: 'optionForth',
     divider: 'light',
     disabled: false
   }
@@ -2573,7 +2573,7 @@ export const SHARE_NEW_POPUP = [
     dataKey: 'node',
     optionClass: 'optionSecondary',
     disabled: false,
-    divider:'light'
+    divider: 'light'
   },
   {
     data: 'all',
@@ -2601,41 +2601,42 @@ export const SHARE_NEW_POPUP = [
     dataValue: 'secondary',
     dataKey: 'secondary',
     optionClass: 'optionTertiary',
-    disabled: false
+    disabled: false,
+    divider: 'light'
   },
   {
     data: 'ascendant',
     dataValue: 'ascendant',
     dataKey: 'ascendant',
-    optionClass: 'optionTertiary',
+    optionClass: 'optionForth',
     disabled: false
   },
   {
     data: 'descendant',
     dataValue: 'descendant',
     dataKey: 'descendant',
-    optionClass: 'optionTertiary',
+    optionClass: 'optionForth',
     disabled: false
   },
   {
     data: 'peer',
     dataValue: 'peer',
     dataKey: 'peer',
-    optionClass: 'optionTertiary',
+    optionClass: 'optionForth',
     disabled: false
   },
   {
     data: 'root',
     dataValue: 'root',
     dataKey: 'root',
-    optionClass: 'optionTertiary',
+    optionClass: 'optionForth',
     disabled: false
   },
   {
     data: 'self',
     dataValue: 'self',
     dataKey: 'self',
-    optionClass: 'optionTertiary',
+    optionClass: 'optionForth',
     disabled: false
   }
 ];

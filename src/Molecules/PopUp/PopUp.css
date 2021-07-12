@@ -28,6 +28,19 @@
   text-transform: lowercase !important;
   padding: 2.5px 0px !important;
 }
+.optionForth {
+  color: rgba(0, 0, 0, 0.87) !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  height: 30px !important;
+  font-size: 1.2rem !important;
+  text-align: center !important;
+  min-height: inherit !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  text-transform: lowercase !important;
+  padding: 2.5px 0px !important;
+}
 .popup-icon-padd {
   padding: 2.5px 0px;
 }

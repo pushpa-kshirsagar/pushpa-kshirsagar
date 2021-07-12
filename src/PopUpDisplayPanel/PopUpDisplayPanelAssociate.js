@@ -115,6 +115,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     popupHeaderOneBadgeThree,
     popupOpenType,
     secondaryOptionCheckValue,
+    tertiaryOptionCheckValue,
+    forthOptionCheckValue,
     currentPopUpOption,
     popupContentArrValue
   } = useSelector((state) => state.PopUpReducer);
@@ -198,6 +200,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     let reviseisPopUpValue = '';
     let revisePopupType = 'primary';
     let reviseSecondaryOptionCheckValue = '';
+    let reviseThiredOptionCheckValue = '';
+    let reviseForthOptionCheckValue = '';
     let valueArr = [];
 
     if (
@@ -373,6 +377,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       revisePopupType = 'secondary';
       valueArr = UPLOAD_DOWNLOAD_POPUP;
       reviseSecondaryOptionCheckValue = 'all';
+      reviseThiredOptionCheckValue = 'first-name other-name last-name';
+      reviseForthOptionCheckValue = 'template';
       setexchageMode(true);
       clearMiddlePaneInfo();
     }
@@ -1161,6 +1167,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           isPopUpValue: reviseisPopUpValue,
           popupOpenType: revisePopupType,
           secondaryOptionCheckValue: reviseSecondaryOptionCheckValue,
+          tertiaryOptionCheckValue: reviseThiredOptionCheckValue,
+          forthOptionCheckValue: reviseForthOptionCheckValue,
           popupContentArrValue: valueArr,
           currentPopUpOption: []
         }
@@ -1168,7 +1176,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       // setIsReviseMode(false);
     }
   };
- 
+
   const BackHandlerEvent = (e) => {
     let revisePopupHeaderOne = 'associate';
     let revisepopupHeaderOneBadgeOne = 'self';
@@ -1177,6 +1185,8 @@ const PopUpDisplayPanelAssociate = (props) => {
     let reviseisPopUpValue = 'ASSOCIATE_CARD_POPUP';
     let revisePopupType = 'primary';
     let reviseSecondryOpt = '';
+    let reviseThiredOptionCheckValue = '';
+    let reviseForthOptionCheckValue = '';
     // let valueArr = setAssociateCardPermissionInJson(
     //   ASSOCIATE_CARD_POPUP_OPTION,
     //   assesseePermission
@@ -1348,6 +1358,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           popupHeaderOneBadgeOne: revisepopupHeaderOneBadgeOne,
           popupHeaderOneBadgeTwo: revisepopupHeaderOneBadgeTwo,
           popupHeaderOneBadgeThree: revisepopupHeaderOneBadgeThree,
+          tertiaryOptionCheckValue: reviseThiredOptionCheckValue,
+          forthOptionCheckValue: reviseForthOptionCheckValue,
           isPopUpValue: reviseisPopUpValue,
           popupOpenType: revisePopupType,
           secondaryOptionCheckValue: reviseSecondryOpt,
@@ -1360,6 +1372,24 @@ const PopUpDisplayPanelAssociate = (props) => {
   const onClosePopUpEvent = () => {
     dispatch({ type: POPUP_CLOSE });
     setexchageMode(false);
+  };
+  const setSecondaryOptionValueTwo = (e) => {
+    dispatch({
+      type: SET_POPUP_SINGLE_STATE,
+      payload: {
+        stateName: 'tertiaryOptionCheckValue',
+        value: e.currentTarget.getAttribute('data-value')
+      }
+    });
+  };
+  const setSecondaryOptionValueThree = (e) => {
+    dispatch({
+      type: SET_POPUP_SINGLE_STATE,
+      payload: {
+        stateName: 'forthOptionCheckValue',
+        value: e.currentTarget.getAttribute('data-value')
+      }
+    });
   };
   return (
     <div>
@@ -1377,8 +1407,12 @@ const PopUpDisplayPanelAssociate = (props) => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
+            setSecondaryOptionValueTwo={setSecondaryOptionValueTwo}
+            setSecondaryOptionValueThree={setSecondaryOptionValueThree}
             ChangeOptionPopup={ChangeOptionPopup}
             secondaryOptionCheckValue={secondaryOptionCheckValue}
+            tertiaryOptionCheckValue={tertiaryOptionCheckValue}
+            forthOptionCheckValue={forthOptionCheckValue}
             currentPopUpOption={currentPopUpOption}
           />
           {exchageMode && (

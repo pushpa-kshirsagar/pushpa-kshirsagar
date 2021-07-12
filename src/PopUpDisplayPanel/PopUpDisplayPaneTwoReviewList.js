@@ -58,7 +58,7 @@ import {
   GET_NODE_ASSOCIATE_REVIEW_LIST,
   ASSESSEE_GROUP_INFO_REVISE_SAGA,
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
-  SET_TERTIARY_CREATE_OPTION_VALUE
+  SET_POPUP_SINGLE_STATE
 } from '../actionType';
 import {
   getAssesseeGroupAssesseeDistinctApiCall,
@@ -162,6 +162,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     popupOpenType,
     secondaryOptionCheckValue,
     tertiaryOptionCheckValue = 'all',
+    forthOptionCheckValue,
     selectedTagValue,
     selectedTagGroupId
   } = useSelector((state) => state.PopUpReducer);
@@ -186,8 +187,20 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
   };
   const setSecondaryOptionValueTwo = (e) => {
     dispatch({
-      type: SET_TERTIARY_CREATE_OPTION_VALUE,
-      payload: e.currentTarget.getAttribute('data-value')
+      type: SET_POPUP_SINGLE_STATE,
+      payload: {
+        stateName: 'tertiaryOptionCheckValue',
+        value: e.currentTarget.getAttribute('data-value')
+      }
+    });
+  };
+  const setSecondaryOptionValueThree = (e) => {
+    dispatch({
+      type: SET_POPUP_SINGLE_STATE,
+      payload: {
+        stateName: 'forthOptionCheckValue',
+        value: e.currentTarget.getAttribute('data-value')
+      }
     });
   };
   const ChangeOptionPopup = (e) => {
@@ -2093,9 +2106,11 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             setSecondaryOptionValueTwo={setSecondaryOptionValueTwo}
+            setSecondaryOptionValueThree={setSecondaryOptionValueThree}
             ChangeOptionPopup={ChangeOptionPopup}
             secondaryOptionCheckValue={secondaryOptionCheckValue}
             tertiaryOptionCheckValue={tertiaryOptionCheckValue}
+            forthOptionCheckValue={forthOptionCheckValue}
           />
         </DialogContent>
       </Popup>

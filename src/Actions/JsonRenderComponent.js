@@ -11,7 +11,9 @@ const JsonRenderComponent = (props) => {
     currentPopUpOption = [],
     secondaryOptionCheckValue,
     tertiaryOptionCheckValue = 'all',
-    setSecondaryOptionValueTwo = null
+    forthOptionCheckValue = '',
+    setSecondaryOptionValueTwo = null,
+    setSecondaryOptionValueThree = null
   } = props;
   const { popupContentArrValue } = useSelector((state) => state.PopUpReducer);
   let popUpOption = currentPopUpOption.length > 0 ? currentPopUpOption : popupContentArrValue;
@@ -35,6 +37,8 @@ const JsonRenderComponent = (props) => {
                           ? setSecondaryOptionValue
                           : item.optionClass === 'optionTertiary'
                           ? setSecondaryOptionValueTwo
+                          : item.optionClass === 'optionForth'
+                          ? setSecondaryOptionValueThree
                           : ChangeOptionPopup
                       }
                       disabled={item.dataValue === 'switch' ? false : item.disabled}
@@ -48,6 +52,12 @@ const JsonRenderComponent = (props) => {
                       ) : null}
                       {item.optionClass === 'optionTertiary' &&
                       tertiaryOptionCheckValue === item.dataValue ? (
+                        <IconButton className={'tick'}>
+                          <Check className={'selectionIcon'} />
+                        </IconButton>
+                      ) : null}
+                      {item.optionClass === 'optionForth' &&
+                      forthOptionCheckValue === item.dataValue ? (
                         <IconButton className={'tick'}>
                           <Check className={'selectionIcon'} />
                         </IconButton>

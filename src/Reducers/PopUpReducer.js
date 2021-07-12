@@ -14,7 +14,6 @@ import {
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   CLEAR_POPUP_INFO,
   SET_POPUP_SINGLE_STATE,
-  SET_TERTIARY_CREATE_OPTION_VALUE
 } from '../actionType';
 import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
 import CalculatorIcon from '@material-ui/icons/Keyboard';
@@ -67,6 +66,7 @@ const initialState = {
   gridColumnCountValue: 0,
   secondaryOptionCheckValue: '',
   tertiaryOptionCheckValue: '',
+  forthOptionCheckValue: '',
   whichReviewList: '',
   selectedTagValue: '',
   selectedTagStatus: '',
@@ -190,11 +190,6 @@ const PopUpReducer = (istate = initialState, action) => {
       return {
         ...istate,
         secondaryOptionCheckValue: action.payload
-      };
-    case SET_TERTIARY_CREATE_OPTION_VALUE:
-      return {
-        ...istate,
-        tertiaryOptionCheckValue: action.payload
       };
     case SET_SECONDARY_OPTION_VALUE:
       // return {
@@ -405,6 +400,7 @@ const PopUpReducer = (istate = initialState, action) => {
             popupOpenType: 'secondary',
             popupContentArrValue: arrVal,
             tertiaryOptionCheckValue: action.payload.keyValue === 'shareNew' ? 'all' : '',
+            forthOptionCheckValue: action.payload.keyValue === 'shareNew' ? 'descendant' : '',
             secondaryOptionCheckValue:
               action.payload.keyValue === 'reviseKey' ||
               action.payload.keyValue === 'reviewKey' ||
