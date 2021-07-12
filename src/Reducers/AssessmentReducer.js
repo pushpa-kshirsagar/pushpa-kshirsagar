@@ -7,7 +7,11 @@ import {
   SET_DISPLAY_PANE_FOUR_SHOW,
   SET_ASSESSMENT_SECONDARY_POPUP,
   SET_ASSESSMENT_BASIC_REDUCER_STATE,
-  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE
+  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+  SET_ASSESSMENT_FRAMEWORK_STATE,
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+  SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SCORE_FRAMEWORK_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -62,6 +66,19 @@ const initialState = {
       assessmentTypePrimary: [],
       assessmentTypeSecondary: []
     }
+  },
+  informationFramework: {
+    assessmentCommunique: {
+      assessmentCommuniquePrimary: '',
+      assessmentCommuniqueSecondary: ''
+    },
+    assessmentItemTotal: '',
+    assessmentManuscript: '',
+    assessmentScore: {
+      assessmentScoreMaximum: 0,
+      assessmentScoreMinimum: 0
+    },
+    assessmentTime: 0
   }
 };
 
@@ -172,6 +189,35 @@ const AssessmentReducer = (istate = initialState, action) => {
             ...istate.informationAllocation[action.payload.stateName],
             [action.payload.actualStateName]: action.payload.value
           }
+        }
+      };
+    case SET_ASSESSMENT_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: action.payload
+      };
+    case SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          [action.payload.stateName]: action.payload
+        }
+      };
+    case SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assessmentCommunique: action.payload
+        }
+      };
+    case SET_ASSESSMENT_SCORE_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assessmentScore: action.payload
         }
       };
     case CLEAR_ASSESSMENT_INFO:

@@ -1060,11 +1060,37 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'brand',
-              innerLabelBadgeList: 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: 'No'
+                }
+              ]
             },
             {
               labelTextTwoBadge: 'theme',
-              innerLabelBadgeList: 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: 'No'
+                }
+              ]
             }
           ]
         }

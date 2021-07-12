@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { makeAssesseeReviewListRequestObject } from '../../Actions/GenericActions';
+import { SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoAssessment = () => {
   const [listExpand, setListExpand] = useState('');
-  const { headerOneBadgeTwo, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { headerOneBadgeTwo, reviewMode, responseObject } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
+  const { informationFramework } = responseObject;
+  const dispatch = useDispatch();
   const frameworkAll = [
     {
       id: 'a1',
@@ -20,11 +25,15 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: []
+          innerList:
+            informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary ||
+            'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList:
+            informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary ||
+            'No Information'
         }
       ],
       innerAssociateList: [],
@@ -68,15 +77,15 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'minimum',
-          textOne: ''
+          textOne: informationFramework?.assessmentScore?.assessmentScoreMinimum || ''
         },
         {
           labelTextOneOneBadge: 'maximum',
-          textOne: ''
+          textOne: informationFramework?.assessmentScore?.assessmentScoreMaximum || ''
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'assessment',
+      innerInfo: 'No Information',
       IconOne: null
     },
     {
@@ -97,7 +106,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       id: 'a6',
       labelTextOneOne: 'time',
       isListCard: false,
-      textOneOne: 'No Information',
+      textOneOne: informationFramework?.assessmentTime || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
@@ -169,6 +178,49 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     }
   ];
 
+  const reviseFramework = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    if (labelName === 'communiqué' && selectedBadgeName === 'primary') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP',
+          popupMode: 'ASSESSMENTCREATE'
+        }
+      });
+    }
+    if (labelName === 'communiqué' && selectedBadgeName === 'secondary') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ASSESSMENT_COMMUNIQUE_SECONDARY_TEXTSHEET_POPUP',
+          popupMode: 'ASSESSMENTCREATE'
+        }
+      });
+    }
+    if (labelName === 'manuscript') {
+    }
+    if (labelName === 'score' && selectedBadgeName === 'maximum') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SCOREMAXIMUMPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'score' && selectedBadgeName === 'minimum') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SCOREMINIMUMPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'time') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'TIMEASSESSMENTPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+  };
+
   return (
     <div
       style={{
@@ -185,6 +237,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
               setListExpand={setListExpand}
               list={frameworkAll}
               mode={reviewMode}
+              onClickRevise={reviseFramework}
             />
           </div>
         </>
@@ -196,9 +249,18 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseFramework}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseFramework}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );

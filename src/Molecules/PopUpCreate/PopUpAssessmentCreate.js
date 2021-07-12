@@ -10,8 +10,11 @@ import {
   CREATE_ASSESSMENT_SAGA,
   LOADER_START,
   SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  SET_ASSESSMENT_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SCORE_FRAMEWORK_STATE
 } from '../../actionType';
+import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 
 const PopUpAssessmentCreate = (props) => {
@@ -24,7 +27,7 @@ const PopUpAssessmentCreate = (props) => {
     coreGroupReviewListData,
     coreNodeReviewListData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationBasic, informationAllocation } = useSelector(
+  const { informationBasic, informationAllocation, informationFramework } = useSelector(
     (state) => state.AssessmentReducer
   );
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
@@ -73,9 +76,10 @@ const PopUpAssessmentCreate = (props) => {
       }
     });
   };
-  console.log(informationBasic, informationAllocation);
+  console.log('ASSESSMENT=====>', informationBasic, informationAllocation, informationFramework);
   let selectedPrimaryGroup = informationAllocation?.assessmentGroup.assessmentGroupPrimary || [];
-  let selectedSecondaryGroup = informationAllocation?.assessmentGroup.assessmentGroupSecondary || [];
+  let selectedSecondaryGroup =
+    informationAllocation?.assessmentGroup.assessmentGroupSecondary || [];
   let filteredCoreGroupReviewListDataPrimary = [];
   if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
     coreGroupReviewListData.forEach((group) => {
@@ -280,6 +284,66 @@ const PopUpAssessmentCreate = (props) => {
         }}
         selectedList={informationAllocation.assessmentType.assessmentTypeSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TIMEASSESSMENTPOPUP'}
+        label={'time'}
+        type={'number'}
+        actualLableValue={'assessmentTime'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={informationFramework}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'SCOREMINIMUMPOPUP'}
+        label={'score'}
+        labelBadgeOne={'minimum'}
+        type={'number'}
+        actualLableValue={'assessmentScoreMinimum'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={informationFramework.assessmentScore}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_ASSESSMENT_SCORE_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'SCOREMAXIMUMPOPUP'}
+        label={'score'}
+        labelBadgeOne={'maximum'}
+        type={'number'}
+        actualLableValue={'assessmentScoreMaximum'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={informationFramework.assessmentScore}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_ASSESSMENT_SCORE_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP'}
+        headerOne={'assessment'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'communiqué'}
+        inputHeaderBadge={'primary'}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_SECONDARY_TEXTSHEET_POPUP'}
+        headerOne={'assessment'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'communiqué'}
+        inputHeaderBadge={'secondary'}
       />
       <PopUpConfirm
         isActive={isPopUpValue === 'CANCELPOPUP'}

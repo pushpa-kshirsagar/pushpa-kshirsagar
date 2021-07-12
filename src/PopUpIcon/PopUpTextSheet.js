@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import ReactCKEditor from 'react-ckeditor-component';
+import InputLabel from '@material-ui/core/InputLabel';
 import PopUp from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
@@ -15,7 +16,13 @@ const PopUpTextSheet = (props) => {
   const {
     isActive = false,
     headerPanelColour = 'displayPaneLeft',
-    headerOne = 'textsheet'
+    headerOne = 'textsheet',
+    headerOneBadgeOne = '',
+    headerOneBadgeTwo = '',
+    headerOneBadgeThree = '',
+    inputHeader = '',
+    inputHeaderBadge = '',
+    inputHeaderBadgeTwo = ''
   } = props;
 
   // const [isPopUpOpen, setIsPopUpOpen] = useState(true);
@@ -47,6 +54,24 @@ const PopUpTextSheet = (props) => {
             >
               <div className={'textSheetTitleBox'}>
                 <span>{headerOne}</span>&nbsp;
+                {headerOneBadgeOne ? (
+                  <>
+                    <span className={'iguru-header-badge1_0'}>{headerOneBadgeOne}</span>
+                    &nbsp;
+                  </>
+                ) : null}
+                {headerOneBadgeTwo ? (
+                  <>
+                    <span className={'iguru-header-badge1_0'}>{headerOneBadgeTwo}</span>
+                    &nbsp;
+                  </>
+                ) : null}
+                {headerOneBadgeThree ? (
+                  <>
+                    <span className={'iguru-header-badge1_0'}>{headerOneBadgeThree}</span>
+                    &nbsp;
+                  </>
+                ) : null}
               </div>
               <div className={'backArrow'}>
                 <IconButton className="MuiIconButton-root-1602">
@@ -74,6 +99,29 @@ const PopUpTextSheet = (props) => {
           </Paper>
         </DialogTitle>
         <DialogContent className={['textsheetPopupContent', 'fixed10PadDim'].join(' ')}>
+          {inputHeader !== '' && (
+            <div className={'fitContent'}>
+              <div
+                style={{ padding: '0 0 0 5px' }}
+                className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}
+              >
+                <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
+                  <>
+                    {inputHeader}&nbsp;
+                    {inputHeaderBadge ? (
+                      <span className={'headerBadge'}>{inputHeaderBadge}</span>
+                    ) : null}
+                    &nbsp;
+                    {inputHeaderBadgeTwo ? (
+                      <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
+                    ) : null}
+                  </>
+                </InputLabel>
+                <div className={'infoSymbol'}></div>
+                <div className={'infoSymbol'}>{/* <InfoToolTip message={infoMsg} /> */}</div>
+              </div>
+            </div>
+          )}
           <ReactCKEditor
             activeClass="editor"
             content={innerContent}
