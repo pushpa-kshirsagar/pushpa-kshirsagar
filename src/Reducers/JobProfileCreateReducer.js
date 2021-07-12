@@ -93,9 +93,13 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
           informationFramework: {
             ...istate.informationFramework,
             jobProfileJobCompetencyCoreObj: action.payload,
-            jobProfileJobCompetencySifted:
-              istate.jobProfileInformation.informationFramework.jobProfileJobCompetencySifted,
-            jobProfileJobCompetencyCore: []
+            jobProfileJobCompetencyCore: [],
+            jobProfileJobCompetencySifted: {
+              indispensable: [],
+              desirable: [],
+              probable: [],
+              removable: []
+            }
           }
         }
       };
