@@ -291,34 +291,50 @@ const AccordianListCard = (props) => {
               </div>
             ) : (
               <>
-                {selectedBadge && selectedBadge.innerList.length > 0 ? (
+                {labelTextOneOne === 'communiqué' ? (
                   <>
-                    {selectedBadge &&
-                      selectedBadge.innerList.map((associate) => {
-                        return (
-                          <div style={{ padding: '2.5px 0' }}>
-                            <ReviewList
-                              className=""
-                              id={associate.id}
-                              status={associate.status}
-                              textOne={associate.textOne}
-                              textTwo={associate.textTwo}
-                            />
-                          </div>
-                        );
-                      })}
+                    <div
+                      style={{
+                        // height: '50px',
+                        padding: '2.5px 5px',
+                        alignItems: 'center',
+                        display: 'flex'
+                      }}
+                      dangerouslySetInnerHTML={{ __html: selectedBadge.innerList }}
+                    ></div>
                   </>
                 ) : (
-                  <div
-                    style={{
-                      height: '50px',
-                      padding: '2.5px 5px',
-                      alignItems: 'center',
-                      display: 'flex'
-                    }}
-                  >
-                    {innerInfo}
-                  </div>
+                  <>
+                    {selectedBadge && selectedBadge.innerList.length > 0 ? (
+                      <>
+                        {selectedBadge &&
+                          selectedBadge.innerList.map((associate) => {
+                            return (
+                              <div style={{ padding: '2.5px 0' }}>
+                                <ReviewList
+                                  className=""
+                                  id={associate.id}
+                                  status={associate.status}
+                                  textOne={associate.textOne}
+                                  textTwo={associate.textTwo}
+                                />
+                              </div>
+                            );
+                          })}
+                      </>
+                    ) : (
+                      <div
+                        style={{
+                          height: '50px',
+                          padding: '2.5px 5px',
+                          alignItems: 'center',
+                          display: 'flex'
+                        }}
+                      >
+                        {innerInfo}
+                      </div>
+                    )}
+                  </>
                 )}
               </>
             )}

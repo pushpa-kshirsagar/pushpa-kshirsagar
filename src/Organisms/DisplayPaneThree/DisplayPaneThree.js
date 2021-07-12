@@ -1500,7 +1500,7 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assessment') {
-      const { informationBasic, informationAllocation } = assessmentInfo;
+      const { informationBasic, informationAllocation, informationFramework } = assessmentInfo;
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1508,7 +1508,8 @@ export const DisplayPaneThree = () => {
         assessment: {
           id,
           informationBasic,
-          informationAllocation
+          informationAllocation,
+          informationFramework
         }
       };
       console.log('ASSESSMENT REVISE ===', reqBody);
