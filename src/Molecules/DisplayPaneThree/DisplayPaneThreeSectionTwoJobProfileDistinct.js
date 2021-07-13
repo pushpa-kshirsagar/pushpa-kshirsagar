@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import { GET_JOBDOMAIN_REVIEW_LIST_SAGA } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   const [listExpand, setListExpand] = useState('');
   const { headerOneBadgeTwo, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const dispatch = useDispatch();
 
   const frameworkAll = [
     {
@@ -111,6 +114,61 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
       IconOne: null
     }
   ];
+  const reviseFramework = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    if (labelName === 'culture dimensions' && selectedBadgeName === 'core') {
+      let requestObj = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+      };
+      // dispatch({
+      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //   payload: { stateName: 'jobProfileDomainReviewList', value: [] }
+      // });
+      // dispatch({
+      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //   payload: { stateName: 'jobProfileFunctionReviewList', value: [] }
+      // });
+      // dispatch({
+      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //   payload: { stateName: 'jobProfileRoleReviewList', value: [] }
+      // });
+      dispatch({
+        type: GET_JOBDOMAIN_REVIEW_LIST_SAGA,
+        payload: {
+          request: requestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
+      //   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      //   dispatch({
+      //     type: GET_JOBFUNCTION_REVIEW_LIST_SAGA,
+      //     payload: {
+      //       request: requestObj,
+      //       BadgeOne: '',
+      //       BadgeTwo: '',
+      //       BadgeThree: '',
+      //       isMiddlePaneList: false
+      //     }
+      //   });
+      //   dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      //   dispatch({
+      //     type: GET_JOBROLE_REVIEW_LIST_SAGA,
+      //     payload: {
+      //       request: requestObj,
+      //       BadgeOne: '',
+      //       BadgeTwo: '',
+      //       BadgeThree: '',
+      //       isMiddlePaneList: false
+      //     }
+      //   });
+    }
+  };
 
   return (
     <div
@@ -128,6 +186,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
               setListExpand={setListExpand}
               list={frameworkAll}
               mode={reviewMode}
+              onClickRevise={reviseFramework}
             />
           </div>
           <div className={'containerPadding'}>
@@ -148,9 +207,18 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <AccordianListCard
+                        onClickRevise={reviseFramework}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <AccordianInfoCard
+                        onClickRevise={reviseFramework}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     )}
                   </div>
                 );

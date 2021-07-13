@@ -3,7 +3,8 @@ import {
   CLEAR_JOB_REDUCER_STATE,
   SET_JOB_DYNAMIC_SINGLE_STATE,
   SET_JOB_DYNAMIC_ARRAY_STATE,
-  SET_JOB_SIFTLIST_STATE
+  SET_JOB_SIFTLIST_STATE,
+  SET_WEIGHTAGE_JOB_PROFILE
 } from '../actionType';
 
 const initialState = {
@@ -92,6 +93,25 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
         jobProfileInformation: {
           ...istate.jobProfileInformation,
           informationFramework: action.payload
+        }
+      };
+    case SET_WEIGHTAGE_JOB_PROFILE:
+      let tempArr =
+        istate?.jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj || [];
+      tempArr.forEach((element) => {
+        if (element.jobProfileJobCompetencyTag === action.payload.jobProfileJobCompetencyTag) {
+          element.jobProfileJobCompetencyWeightage =
+            action.payload.jobProfileJobCompetencyWeightage;
+        }
+      });
+      return {
+        ...istate,
+        jobProfileInformation: {
+          ...istate.jobProfileInformation,
+          informationFramework: {
+            ...istate.jobProfileInformation.informationFramework,
+            jobProfileJobCompetencyCoreObj: tempArr
+          }
         }
       };
     case CLEAR_JOB_REDUCER_STATE:
