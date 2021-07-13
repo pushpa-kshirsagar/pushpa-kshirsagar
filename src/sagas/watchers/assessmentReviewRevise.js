@@ -8,7 +8,10 @@ import {
   SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  ASSESSMENT_REVIEW_DISTINCT_SAGA
+  ASSESSMENT_REVIEW_DISTINCT_SAGA,
+  SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE
 } from '../../actionType';
 import { ASSESSMENT_REVIEW_INFO_URL, ASSESSMENT_REVISE_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -46,7 +49,7 @@ function* workerReviewInfoAssessmentSaga(data) {
         }
       });
       if (isReviseMode) {
-        const { informationAllocation } = userResponse.responseObject[0];
+        const { informationAllocation, informationFramework } = userResponse.responseObject[0];
         yield put({
           type: SET_ASSESSMENT_BASIC_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
@@ -207,6 +210,21 @@ function* workerReviewInfoAssessmentSaga(data) {
             }
           });
         }
+        const communiqueObject = informationFramework?.assessmentCommunique || {
+          assessmentCommuniquePrimary: '',
+          assessmentCommuniqueSecondary: ''
+        };
+        yield put({ type: SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE, payload: communiqueObject });
+        const scoreObject = informationFramework?.assessmentScore || {
+          assessmentScoreMaximum: 0,
+          assessmentScoreMinimum: 0
+        };
+        yield put({ type: SET_ASSESSMENT_SCORE_FRAMEWORK_STATE, payload: scoreObject });
+        const timeAssessment = informationFramework?.assessmentTime || 0;
+        yield put({
+          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          payload: { stateName: 'assessmentTime', value: timeAssessment }
+        });
       }
     } else {
       yield put({

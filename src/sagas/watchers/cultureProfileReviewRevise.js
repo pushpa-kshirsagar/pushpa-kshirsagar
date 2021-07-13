@@ -9,7 +9,8 @@ import {
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
-  SET_CULTURE_DIMENTION_STATE
+  SET_CULTURE_DIMENTION_STATE,
+  SET_WEIGHTAGE_SELECTED
 } from '../../actionType';
 import { CULTURE_PROFILE_REVIEW_INFO_URL, CULTURE_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -240,6 +241,10 @@ function* workerReviewInfoCultureProfileSaga(data) {
             cultureProfileCultureDimensionReviseWeightage: []
           }
         });
+        yield put({
+          type: SET_WEIGHTAGE_SELECTED,
+          payload: false
+        });
       }
     }
     console.log('loading end');
@@ -309,6 +314,10 @@ function* workerReviseInfoCultureProfileSaga(data) {
           middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
           isMiddlePaneList: true
         }
+      });
+      yield put({
+        type: SET_WEIGHTAGE_SELECTED,
+        payload: false
       });
     } else {
       console.log('loading end');

@@ -1449,7 +1449,7 @@ export const DisplayPaneThree = () => {
       let tempArr = [];
       cultureDimensionCore.forEach((element) => {
         tempArr.push({
-          cultureProfileCultureDimensionTag: element.id,
+          cultureProfileCultureDimensionTag: element.cultureProfileCultureDimensionTag,
           cultureProfileCultureDimensionWeightage: element.cultureProfileCultureDimensionWeightage
         });
       });

@@ -201,7 +201,7 @@ const AssessmentReducer = (istate = initialState, action) => {
         ...istate,
         informationFramework: {
           ...istate.informationFramework,
-          [action.payload.stateName]: action.payload
+          [action.payload.stateName]: action.payload.value
         }
       };
     case SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE:

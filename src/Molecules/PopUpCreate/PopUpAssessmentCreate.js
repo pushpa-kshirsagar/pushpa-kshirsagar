@@ -12,7 +12,8 @@ import {
   SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_ASSESSMENT_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SCORE_FRAMEWORK_STATE
+  SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE
 } from '../../actionType';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
@@ -333,17 +334,29 @@ const PopUpAssessmentCreate = (props) => {
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
-        headerOneBadgeOne={'information'}
-        inputHeader={'communiqué'}
-        inputHeaderBadge={'primary'}
+        headerOneBadgeOne={'communique'}
+        headerOneBadgeTwo={'primary'}
+        basicInfo={informationFramework.assessmentCommunique}
+        typeOfSetObject={SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE}
+        defaultSheetValue={
+          informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary || ''
+        }
+        actualLableValue={'assessmentCommuniquePrimary'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextSheet
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_SECONDARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
-        headerOneBadgeOne={'information'}
-        inputHeader={'communiqué'}
-        inputHeaderBadge={'secondary'}
+        headerOneBadgeOne={'communiqué'}
+        headerOneBadgeTwo={'secondary'}
+        basicInfo={informationFramework.assessmentCommunique}
+        typeOfSetObject={SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE}
+        defaultSheetValue={
+          informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary || ''
+        }
+        actualLableValue={'assessmentCommuniqueSecondary'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm
         isActive={isPopUpValue === 'CANCELPOPUP'}

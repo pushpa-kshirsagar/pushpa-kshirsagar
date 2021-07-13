@@ -20,15 +20,36 @@ const PopUpTextSheet = (props) => {
     headerOneBadgeOne = '',
     headerOneBadgeTwo = '',
     headerOneBadgeThree = '',
-    inputHeader = '',
-    inputHeaderBadge = '',
-    inputHeaderBadgeTwo = ''
+    basicInfo,
+    actualLableValue,
+    typeOfSetObject = '',
+    defaultSheetValue = '',
+    mode
   } = props;
 
   // const [isPopUpOpen, setIsPopUpOpen] = useState(true);
-  const [innerContent, setInnerContent] = useState('');
+  // let defaultSheetValue = basicInfo[actualLableValue] || '';
+  const [innerContent, setInnerContent] = useState(defaultSheetValue);
   const onChangeTextSheet = (evt) => {
     setInnerContent(evt.editor.getData());
+  };
+  const closePopup = () => {
+    console.log('ON CLOSE');
+    if (mode === 'revise') {
+      dispatch({ type: POPUP_CLOSE });
+    } else {
+      dispatch({ type: CLEAR_ASSESSEE_INFO });
+    }
+  };
+  const onClickYes = () => {
+    console.log(innerContent);
+    if (typeOfSetObject !== '') {
+      dispatch({
+        type: typeOfSetObject,
+        payload: { ...basicInfo, [actualLableValue]: innerContent }
+      });
+    }
+    dispatch({ type: POPUP_CLOSE });
   };
 
   return (
@@ -75,23 +96,11 @@ const PopUpTextSheet = (props) => {
               </div>
               <div className={'backArrow'}>
                 <IconButton className="MuiIconButton-root-1602">
-                  <Check
-                    className={'popupClose'}
-                    onClick={() => {
-                      console.log('ON SAVE');
-                    }}
-                  />
+                  <Check className={'popupClose'} onClick={onClickYes} />
                 </IconButton>
               </div>
               <div className={'backArrow'}>
-                <IconButton
-                  onClick={() => {
-                    console.log('ON CLOSE');
-                    dispatch({ type: CLEAR_ASSESSEE_INFO });
-                    dispatch({ type: POPUP_CLOSE });
-                  }}
-                  className="MuiIconButton-root-1602"
-                >
+                <IconButton onClick={closePopup} className="MuiIconButton-root-1602">
                   <Clear className={'popupClose'} />
                 </IconButton>
               </div>
@@ -99,29 +108,6 @@ const PopUpTextSheet = (props) => {
           </Paper>
         </DialogTitle>
         <DialogContent className={['textsheetPopupContent', 'fixed10PadDim'].join(' ')}>
-          {inputHeader !== '' && (
-            <div className={'fitContent'}>
-              <div
-                style={{ padding: '0 0 0 5px' }}
-                className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}
-              >
-                <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
-                  <>
-                    {inputHeader}&nbsp;
-                    {inputHeaderBadge ? (
-                      <span className={'headerBadge'}>{inputHeaderBadge}</span>
-                    ) : null}
-                    &nbsp;
-                    {inputHeaderBadgeTwo ? (
-                      <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
-                    ) : null}
-                  </>
-                </InputLabel>
-                <div className={'infoSymbol'}></div>
-                <div className={'infoSymbol'}>{/* <InfoToolTip message={infoMsg} /> */}</div>
-              </div>
-            </div>
-          )}
           <ReactCKEditor
             activeClass="editor"
             content={innerContent}

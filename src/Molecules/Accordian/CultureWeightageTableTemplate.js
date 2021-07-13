@@ -438,21 +438,20 @@ class CultureWeightageTableTemplate extends Component {
                   <div className={['sifSecondtHeaderDivGray contentDatadivTopborderGray'].join()}>
                     {'revise' == 'revise'
                       ? this.state.radioarray.map((lis, index) => {
+                          const temp =
+                            value?.cultureProfileCultureDimensionWeightage === index + 1
+                              ? index + 1 === 3
+                                ? 'selectedG'
+                                : index + 1 === 2
+                                ? 'secondaryGSelected'
+                                : index + 1 === 1
+                                ? 'thirdGselected'
+                                : ''
+                              : '';
                           return (
                             <span
-                              // className={['contentDatadivGray'].join()}
-                              className={
-                                ('contentDatadivGray',
-                                value?.cultureProfileCultureDimensionWeightage === index + 1
-                                  ? index + 1 === 3
-                                    ? 'selectedG'
-                                    : index + 1 === 2
-                                    ? 'secondaryGSelected'
-                                    : index + 1 === 1
-                                    ? 'thirdGselected'
-                                    : null
-                                  : null)
-                              }
+                              // className={classArr.join()}
+                              className={['contentDatadivGray', temp].join(' ')}
                               onClick={(e) => {
                                 console.log('event++++++++++', index + 1, value);
                                 setWeightage({

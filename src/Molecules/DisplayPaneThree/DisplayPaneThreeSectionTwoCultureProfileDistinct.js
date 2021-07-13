@@ -171,6 +171,21 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
 
   const frameworkAll = [
     {
+      id: 'CP-Assessment001',
+      labelTextOneOne: 'assessments',
+      isListCard: true,
+      labelTextOneOneBadgeOne: 'distinct',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      IconOne: null
+    },
+    {
       id: 'a1',
       labelTextOneOne: 'culture dimensions',
       isListCard: true,
