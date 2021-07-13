@@ -12,6 +12,21 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
 
   const frameworkAll = [
     {
+      id: 'JP-Assessment001',
+      labelTextOneOne: 'assessments',
+      isListCard: true,
+      labelTextOneOneBadgeOne: 'distinct',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      IconOne: null
+    },
+    {
       id: 'job001',
       labelTextOneOne: 'job',
       isListCard: true,

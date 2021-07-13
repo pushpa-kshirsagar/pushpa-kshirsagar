@@ -297,8 +297,8 @@ const AccordianListCard = (props) => {
                       style={{
                         // height: '50px',
                         padding: '2.5px 5px',
-                        alignItems: 'center',
-                        display: 'flex'
+                        alignItems: 'center'
+                        // display: 'flex'
                       }}
                       dangerouslySetInnerHTML={{ __html: selectedBadge.innerList }}
                     ></div>
