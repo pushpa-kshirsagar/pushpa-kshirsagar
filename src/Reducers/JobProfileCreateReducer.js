@@ -41,6 +41,7 @@ const initialState = {
       jobProfileJobCompetencyCoreTags: [],
       jobProfileJobCompetencyCoreObj: [],
       jobProfileJobCompetencyShortlisted: [],
+      jobProfileJobCompetencySiftList: [],
       jobProfileJobCompetencySifted: {
         indispensable: [],
         desirable: [],

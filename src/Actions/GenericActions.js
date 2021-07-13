@@ -3945,6 +3945,10 @@ export const getAssessmentGroupAssessmentReqObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
+    orderBy: {
+      columnName: 'informationBasic.assessmentName,informationBasic.assessmentDescription',
+      order: 'asc'
+    },
     groupId: groupId,
     filter: 'true',
     searchCondition: 'AND',
@@ -4016,6 +4020,10 @@ export const getAssignmentGroupAssignmentReqObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
+    orderBy: {
+      columnName: 'informationBasic.assignmentName,informationBasic.assignmentDescription',
+      order: 'asc'
+    },
     groupId: groupId,
     filter: 'true',
     searchCondition: 'AND',
@@ -4089,6 +4097,10 @@ export const getAssignmentGroupAssignmentScanReqObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
+    orderBy: {
+      columnName: 'informationBasic.assignmentName,informationBasic.assignmentDescription',
+      order: 'asc'
+    },
     groupId: groupId,
     filter: 'true',
     searchCondition: 'AND',
@@ -4182,6 +4194,10 @@ export const getAssessmentGroupAssessmentScanReqObj = (
     countPage: countPage,
     numberPage: numberPage,
     groupId: groupId,
+    orderBy: {
+      columnName: 'informationBasic.assessmentName,informationBasic.assessmentDescription',
+      order: 'asc'
+    },
     filter: 'true',
     searchCondition: 'AND',
     search: [
@@ -4274,6 +4290,10 @@ export const getAssessmentTypeAssessmentReqObj = (
     numberPage: numberPage,
     typeId: typeId,
     filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assessmentName,informationBasic.assessmentDescription',
+      order: 'asc'
+    },
     searchCondition: 'AND',
     search: [
       {
@@ -4346,6 +4366,10 @@ export const getAssessmentTypeAssessmentScanReqObj = (
     numberPage: numberPage,
     typeId: typeId,
     filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assessmentName,informationBasic.assessmentDescription',
+      order: 'asc'
+    },
     searchCondition: 'AND',
     search: [
       {
@@ -4436,6 +4460,10 @@ export const getAssignmentTypeAssignmentReqObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
+    orderBy: {
+      columnName: 'informationBasic.assignmentName,informationBasic.assignmentDescription',
+      order: 'asc'
+    },
     typeId: typeId,
     filter: 'true',
     searchCondition: 'AND',
@@ -4510,6 +4538,10 @@ export const getAssignmentTypeAssignmentScanReqObj = (
     numberPage: numberPage,
     typeId: typeId,
     filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.assignmentName,informationBasic.assignmentDescription',
+      order: 'asc'
+    },
     searchCondition: 'AND',
     search: [
       {
@@ -5326,6 +5358,10 @@ export const getJobProfileTypeJobProfileReqObj = (
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
     numberPage: numberPage,
+    orderBy: {
+      columnName: 'informationBasic.jobProfileName,informationBasic.jobProfileDescription',
+      order: 'asc'
+    },
     typeId: typeId,
     filter: 'true',
     searchCondition: 'AND',
@@ -5400,6 +5436,10 @@ export const getJobProfileTypeJobProfileScanReqObj = (
     numberPage: numberPage,
     typeId: typeId,
     filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileName,informationBasic.jobProfileDescription',
+      order: 'asc'
+    },
     searchCondition: 'AND',
     search: [
       {
@@ -5491,6 +5531,10 @@ export const getJobProfileGroupJobProfileReqObj = (
     numberPage: numberPage,
     groupId: groupId,
     filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileName,informationBasic.jobProfileDescription',
+      order: 'asc'
+    },
     searchCondition: 'AND',
     search: [
       {
@@ -5563,6 +5607,10 @@ export const getJobProfileGroupJobProfileScanReqObj = (
     numberPage: numberPage,
     groupId: groupId,
     filter: 'true',
+    orderBy: {
+      columnName: 'informationBasic.jobProfileName,informationBasic.jobProfileDescription',
+      order: 'asc'
+    },
     searchCondition: 'AND',
     search: [
       {
@@ -5654,6 +5702,10 @@ export const getJobGroupJobScanReqObj = (
     countPage: countPage,
     numberPage: numberPage,
     groupId: groupId,
+    orderBy: {
+      columnName: 'informationBasic.jobProfileName,informationBasic.jobProfileDescription',
+      order: 'asc'
+    },
     filter: 'true',
     searchCondition: 'AND',
     search: [

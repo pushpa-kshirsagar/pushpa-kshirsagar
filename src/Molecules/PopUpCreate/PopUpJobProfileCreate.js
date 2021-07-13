@@ -193,7 +193,7 @@ const PopUpJobProfileCreate = (props) => {
   };
   const setCompetancyCoreStateReducer = () => {
     let jobCompetancyCore =
-      jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreTags;
+      jobProfileInformation.informationFramework.jobProfileJobCompetencyShortlisted;
     console.log('jobCompetancyCore', jobCompetancyCore);
     let arrr = jobProfilerReviewList.jobCompetency
       .map((obj) => {
@@ -226,18 +226,21 @@ const PopUpJobProfileCreate = (props) => {
   const updateCompetencySiftList = (id, key) => {
     console.log(id, key);
     let siftList = jobProfileInformation.informationFramework.jobProfileJobCompetencySifted;
-    let jobProfileJobCompetencyCoreObj =
-      jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj;
-    siftList[key].push(id);
-    console.log(siftList);
-    let obj = {
-      ...jobProfileInformation.informationFramework,
-      jobProfileJobCompetencySifted: siftList
-    };
-    dispatch({
-      type: SET_JOB_SIFTLIST_STATE,
-      payload: obj
-    });
+    let siftListArr = jobProfileInformation.informationFramework.jobProfileJobCompetencySiftList;
+    if (key) {
+      siftList[key].push(id);
+      siftListArr.push(id);
+      console.log(siftList);
+      let obj = {
+        ...jobProfileInformation.informationFramework,
+        jobProfileJobCompetencySifted: siftList,
+        jobProfileJobCompetencySiftList: siftListArr
+      };
+      dispatch({
+        type: SET_JOB_SIFTLIST_STATE,
+        payload: obj
+      });
+    }
   };
   const openRightPaneForRange = () => {
     dispatch({
@@ -620,17 +623,24 @@ const PopUpJobProfileCreate = (props) => {
                 nextPopUpValue={
                   index < jobProfilerReviewList.jobCompetency.length - 1
                     ? `POPUPCOMPITANCY${index + 1}`
-                    : 'POPUPSIFTMSG'
+                    : jobProfileInformation.informationFramework.jobProfileJobCompetencyShortlisted
+                        .length > 8
+                    ? 'POPUPSIFTMSG'
+                    : 'POPUPCOMPEMSG'
                 }
                 // nextPopUpValue={`POPUPCOMPITANCY${index + 1}`}
                 ListData={value.jobCompetency}
                 // onClickEvent={updateJobCompetancy}
                 onClickEvent={(e) => {
-                  updateFrameworkObj(e, 'informationFramework', 'jobProfileJobCompetencyCoreTags');
+                  updateFrameworkObj(
+                    e,
+                    'informationFramework',
+                    'jobProfileJobCompetencyShortlisted'
+                  );
                 }}
                 handleClickOnCorrect={null}
                 selectedList={
-                  jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreTags
+                  jobProfileInformation.informationFramework.jobProfileJobCompetencyShortlisted
                 }
                 textOne={'jobProfilerFrameworkSecondary'}
                 textTwo={'jobDimensionFrameworkSecondaryDescriptionPrimary'}
@@ -673,7 +683,10 @@ const PopUpJobProfileCreate = (props) => {
                 index <
                 jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length - 1
                   ? `POPUPSIFTLIST${index + 1}`
-                  : 'POPUPCORECOMPEMSG'
+                  : jobProfileInformation.informationFramework.jobProfileJobCompetencySiftList
+                      .length > 8
+                  ? 'POPUPCORECOMPEMSG'
+                  : 'SIFTLISTMSG'
               }
               // nextPopUpValue={'POPUPCORECOMPEMSG'}
             />
@@ -691,6 +704,18 @@ const PopUpJobProfileCreate = (props) => {
         textOneTwo={'minimum eight or maximum twelve'}
         textOneThree={'core'}
         textOneFour={'job competencies'}
+        mode={'next'}
+      />
+      <PopUpMessageGeneric
+        isActive={isPopUpValue === 'SIFTLISTMSG'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        // nextPopUpValue={'POPUPRANGEMSG'}
+        nextPopUpValue={'POPUPSIFTLIST0'}
+        textOneOne={'sift'}
+        textOneTwo={'minimum eight'}
+        textOneThree={'job competencies'}
+        textOneFour={''}
         mode={'next'}
       />
       <PopUpReviewList
