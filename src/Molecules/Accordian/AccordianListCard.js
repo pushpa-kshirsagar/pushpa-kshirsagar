@@ -6,7 +6,8 @@ import './Accordian.css';
 import { useDispatch, useSelector } from 'react-redux';
 import CultureWeightageTableTemplate from './CultureWeightageTableTemplate';
 import JobRangeTableTemplate from './jobRangeTableTemplate';
-import { SET_WEIGHTAGE_CULTURE_PROFILE } from '../../actionType';
+import { SET_WEIGHTAGE_CULTURE_PROFILE, SET_WEIGHTAGE_JOB_PROFILE } from '../../actionType';
+import JobWeightageTableTemplate from './JobWeightageTableTemplate';
 
 const AccordianListCard = (props) => {
   const {
@@ -23,6 +24,7 @@ const AccordianListCard = (props) => {
     reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
+  const { jobProfileInformation } = useSelector((state) => state.JobProfileCreateReducer);
   const {
     labelTextOneOne = '',
     innerInfo = 'No Information',
@@ -72,6 +74,14 @@ const AccordianListCard = (props) => {
   } else {
     tempListData = responseObject?.informationFramework?.cultureProfileCultureDimensionWeightage;
   }
+  let tempJobListData =
+    jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj || [];
+
+  // if (tempJobListData.length > 0 && reviewMode === 'revise') {
+  //   // tempListData = cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
+  // } else {
+  //   tempListData = responseObject?.informationFramework?.cultureProfileCultureDimensionWeightage;
+  // }
 
   const cultureProfilerItems = [
     {
@@ -253,23 +263,42 @@ const AccordianListCard = (props) => {
             {selectedBadge.labelTextOneOneBadge === 'weightage' ||
             selectedBadge.labelTextOneOneBadge === 'range' ? (
               <div className={'containerPadding'}>
-                {selectedBadge.labelTextOneOneBadge === 'weightage' && (
-                  <CultureWeightageTableTemplate
-                    headerrowcount={3}
-                    title="weightage"
-                    radiocount={3}
-                    row1={['low', 'medium', 'high']}
-                    // culturedimensionselected={cultureProfilerItems}
-                    culturetooltipstate=""
-                    cultureprofilemode="review"
-                    listData={tempListData}
-                    setWeightage={(ob) => {
-                      if (reviewMode === 'revise') {
-                        dispatch({ type: SET_WEIGHTAGE_CULTURE_PROFILE, payload: ob });
-                      }
-                    }}
-                  />
-                )}
+                {selectedBadge.labelTextOneOneBadge === 'weightage' &&
+                  labelTextOneOne === 'culture dimensions' && (
+                    <CultureWeightageTableTemplate
+                      headerrowcount={3}
+                      title="weightage"
+                      radiocount={3}
+                      row1={['low', 'medium', 'high']}
+                      // culturedimensionselected={cultureProfilerItems}
+                      culturetooltipstate=""
+                      cultureprofilemode="review"
+                      listData={tempListData}
+                      setWeightage={(ob) => {
+                        if (reviewMode === 'revise') {
+                          dispatch({ type: SET_WEIGHTAGE_CULTURE_PROFILE, payload: ob });
+                        }
+                      }}
+                    />
+                  )}
+                {selectedBadge.labelTextOneOneBadge === 'weightage' &&
+                  labelTextOneOne === 'job competencies' && (
+                    <JobWeightageTableTemplate
+                      headerrowcount={3}
+                      title="weightage"
+                      radiocount={3}
+                      row1={['low', 'medium', 'high']}
+                      // culturedimensionselected={cultureProfilerItems}
+                      culturetooltipstate=""
+                      cultureprofilemode="review"
+                      listData={tempJobListData}
+                      setWeightage={(ob) => {
+                        if (reviewMode === 'revise') {
+                          dispatch({ type: SET_WEIGHTAGE_JOB_PROFILE, payload: ob });
+                        }
+                      }}
+                    />
+                  )}
                 {selectedBadge.labelTextOneOneBadge === 'range' && (
                   <JobRangeTableTemplate
                     headerrowcount={4}

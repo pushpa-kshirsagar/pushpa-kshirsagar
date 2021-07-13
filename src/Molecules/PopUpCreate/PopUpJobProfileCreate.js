@@ -16,7 +16,8 @@ import {
   SET_NEXT_POPUP,
   GET_JOBDOMAIN_REVIEW_LIST_SAGA,
   SET_MOBILE_PANE_STATE,
-  SET_JOB_SIFTLIST_STATE
+  SET_JOB_SIFTLIST_STATE,
+  SET_WEIGHTAGE_SELECTED
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
@@ -257,6 +258,10 @@ const PopUpJobProfileCreate = (props) => {
     dispatch({
       type: SET_MOBILE_PANE_STATE,
       payload: 'displayPaneThree'
+    });
+    dispatch({
+      type: SET_WEIGHTAGE_SELECTED,
+      payload: true
     });
   };
   return (

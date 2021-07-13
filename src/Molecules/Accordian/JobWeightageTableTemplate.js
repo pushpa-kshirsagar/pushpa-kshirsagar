@@ -5,101 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import '../Accordian/Accordian.css';
-{
-  /*}
-const OneRowHeader = (props) => {
-  const { row1 = [] } = props;
-  console.log("ONE", props);
-  return (
-    <div className={'containerPadding'}>
-      <Paper className={'assesseesContainerGreen'} style={{ padding: '0px' }}>
-        <div className={'siftComponentInnerDiv'}>
-          <div
-            className={'sifSecondtHeaderDiv'}
-            style={{ borderTop: '1px solid white', height: '50px' }}
-          >
-            {row1.map((lis, index) => {
-              return (
-                <span
-                  className={'sifSecondHeaderInner'}
-                  style={
-                    row1.length === index + 1
-                      ? {
-                          borderRight: '0px',
-                          display: 'flex',
-                          height: 'inherit',
-                          alignItems: 'center'
-                        }
-                      : index === '0'
-                      ? {
-                          borderLeft: '0px',
-                          display: 'flex',
-                          height: 'inherit',
-                          alignItems: 'center'
-                        }
-                      : { display: 'flex', height: 'inherit', alignItems: 'center' }
-                  }
-                >
-                  <span style={{ color: 'rgba(0, 0, 0, 0.87)', fontSize: '1.6rem' }}>
-                    <span>{lis}</span>
-                  </span>
-                </span>
-              );
-            })}
-          </div>
-        </div>
-      </Paper>
-    </div>
-  );
-};
 
-const TwoRowHeader = (props) => {
-  const { row1 = [], title } = props;
-  console.log("Two", props);
-  return (
-    <div className={'containerPadding'}>
-      <Paper className={'assesseesContainerGreen'} style={{ padding: '0px' }}>
-        <div className={'siftComponentInnerDiv'}>
-          <div className={'siftHeaderDiv'}>
-            <span style={{ color: 'rgba(0, 0, 0, 0.87)' }}>{title}</span>
-          </div>
-          <div className={'sifSecondtHeaderDiv'} style={{ borderTop: '1px solid white' }}>
-            {row1.map((lis, index) => {
-              return (
-                <span
-                  className={'sifSecondHeaderInner'}
-                  style={
-                    row1.length === index + 1
-                      ? {
-                          borderRight: '0px',
-                          display: 'flex',
-                          height: 'inherit',
-                          alignItems: 'center'
-                        }
-                      : index === '0'
-                      ? {
-                          borderLeft: '0px',
-                          display: 'flex',
-                          height: 'inherit',
-                          alignItems: 'center'
-                        }
-                      : { display: 'flex', height: 'inherit', alignItems: 'center' }
-                  }
-                >
-                  <span style={{ color: 'rgba(0, 0, 0, 0.87)', fontSize: '1.2rem' }}>
-                    <span>{lis}</span>
-                  </span>
-                </span>
-              );
-            })}
-          </div>
-        </div>
-      </Paper>
-    </div>
-  );
-};
-*/
-}
 const ThreeRowHeader = (props) => {
   const { title } = props;
   return (
@@ -187,7 +93,7 @@ const FourRowHeader = (props) => {
   );
 };
 
-class CultureWeightageTableTemplate extends Component {
+class JobWeightageTableTemplate extends Component {
   constructor() {
     super();
     this.state = {
@@ -339,4 +245,4 @@ class CultureWeightageTableTemplate extends Component {
   }
 }
 
-export default CultureWeightageTableTemplate;
+export default JobWeightageTableTemplate;
