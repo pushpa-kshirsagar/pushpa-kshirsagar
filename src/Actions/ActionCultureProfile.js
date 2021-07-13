@@ -22,7 +22,7 @@ import {
   CULTURE_PROFILE_INFO_REVISE_SAGA,
   CULTURE_GROUP_REVISE_INFO_SAGA,
   CULTURE_TYPE_REVISE_INFO_SAGA,
-  GET_CULTURE_DIAMENTION_SAGA,
+  CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA
 } from '../actionType';
 import { CULTURE_PROFILE_REVISE_INFO_URL } from '../endpoints';
@@ -467,12 +467,7 @@ export const getAssignmneCultureProfileDistinctApiCall = (
     searchObj = {
       condition: 'in',
       value: {
-        in: [
-          'SUSPENDED',
-          'TERMINATED',
-          'ACTIVE',
-          'ARCHIVED'
-        ]
+        in: ['SUSPENDED', 'TERMINATED', 'ACTIVE', 'ARCHIVED']
       }
     };
   }
@@ -511,6 +506,73 @@ export const getAssignmneCultureProfileDistinctApiCall = (
     payload: {
       request: reqBody,
       HeaderOne: 'culture profiles',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getCultureProfileAssessmentDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: secondaryOptionCheckValue.toUpperCase()
+    }
+  };
+  if (secondaryOptionCheckValue === 'all') {
+    searchObj = {
+      condition: 'in',
+      value: {
+        in: ['SUSPENDED', 'TERMINATED', 'ACTIVE', 'ARCHIVED']
+      }
+    };
+  }
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    numberPage: 0,
+    countPage: countPage,
+    searchCondition: 'AND',
+    cultureProfileId: selectedTagValue,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assessmentStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'assessments',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

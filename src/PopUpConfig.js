@@ -2630,7 +2630,7 @@ export const SHARE_NEW_POPUP = [
     dataValue: 'root',
     dataKey: 'root',
     optionClass: 'optionForth',
-    disabled: false
+    disabled: true
   },
   {
     data: 'self',

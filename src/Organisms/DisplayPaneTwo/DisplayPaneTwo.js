@@ -57,6 +57,8 @@ import AssignmentDistinctAssesseeDistinctReviewList from '../../ReviewListCompon
 import AssignmentDistinctAssessmentDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctAssessmentDistinctReviewList';
 import AssignmentDistinctCultureProfileDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctCultureProfileDistinctReviewList';
 import AssignmentDistinctJobProfileDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctJobProfileDistinctReviewList';
+import CultureProfileAssessmentDistinctReviewList from '../../ReviewListComponent/CultureProfileAssessmentDistinctReviewList';
+import JobProfileAssessmentDistinctReviewList from '../../ReviewListComponent/JobProfileAssessmentDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -245,6 +247,9 @@ export const DisplayPaneTwo = (props) => {
         {typeOfMiddlePaneList === 'cultureProfileNodeCultureProfileReviewList' && (
           <CultureProfileNodeCultureProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
+        {typeOfMiddlePaneList === 'cultureProfileAssessmentReviewList' && (
+          <CultureProfileAssessmentDistinctReviewList popupAllClose={popupAllClose} />
+        )}
         {typeOfMiddlePaneList === 'jobProfilesDistinctReviewList' && (
           <JobProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
@@ -262,6 +267,9 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'jobProfileNodeJobProfileReviewList' && (
           <JobProfileNodeJobProfileDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'jobProfileAssessmentReviewList' && (
+          <JobProfileAssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&

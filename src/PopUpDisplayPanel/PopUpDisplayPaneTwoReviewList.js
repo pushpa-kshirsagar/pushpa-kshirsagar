@@ -138,6 +138,7 @@ import {
 import {
   getAssignmneCultureProfileDistinctApiCall,
   getCultureGroupCultureDistinctApiCall,
+  getCultureProfileAssessmentDistinctApiCall,
   getCultureProfileNodeCultureProfileApiCall,
   getCultureTypeCultureDistinctApiCall,
   updateCultureProfileDistinctStatus,
@@ -146,6 +147,7 @@ import {
 } from '../Actions/ActionCultureProfile';
 import {
   getAssignmneJobProfileDistinctApiCall,
+  getJobProfileAssessmentDistinctApiCall,
   getJobProfileGroupJobProfileDistinctApiCall,
   getJobProfileNodeJobProfileApiCall,
   getJobProfileTypeJobProfileDistinctApiCall,
@@ -1731,6 +1733,43 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({
           type: FILTERMODE,
           payload: { FilterMode: 'cultureTypeCultureDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+
+      if (typeOfMiddlePaneList === 'cultureProfilesDistinctReviewList') {
+        getCultureProfileAssessmentDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'cultureProfileAssessmentDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'jobProfilesDistinctReviewList') {
+        getJobProfileAssessmentDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'jobProfileAssessmentDistinct' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });

@@ -1,12 +1,14 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import Store from '../../store';
 import {
+  CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
   GET_ALLOCATE_JOB,
   GET_JOBDOMAIN_REVIEW_LIST_SAGA,
   GET_JOBFUNCTION_REVIEW_LIST_SAGA,
   GET_JOBPROFILE_REVIEW_LIST_SAGA,
   GET_JOBROLE_REVIEW_LIST_SAGA,
   GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
+  JOB_ASSESSMENTS_REVIEWLIST_SAGA,
   JOB_GROUP_JOB_REVIEWLIST_SAGA,
   JOB_TYPE_JOB_REVIEWLIST_SAGA,
   LOADER_START,
@@ -23,10 +25,12 @@ import {
   SET_REVIEW_LIST_RELATE_DATA
 } from '../../actionType';
 import {
+  CULTURE_ASSESSMENT_REVIEWLIST_URL,
   JOBDOMAIN_REVIEWLIST_URL,
   JOBFUNCTION_REVIEWLIST_URL,
   JOBPROFILER_LIST_URL,
   JOBROLE_REVIEWLIST_URL,
+  JOB_ASSESSMENT_REVIEWLIST_URL,
   JOB_GROUP_JOB_REVIEWLIST_URL,
   JOB_NODE_JOB_REVIEWLIST_URL,
   JOB_REVIEWLIST_URL,
@@ -369,6 +373,92 @@ function* workeJobRoleReviewListSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerCultureProfileAssessment(data) {
+  try {
+    const response = yield call(apiCallFunction, {
+      data: data.payload.request,
+      URL: CULTURE_ASSESSMENT_REVIEWLIST_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assessments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'cultureProfileAssessmentReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerJobProfileAssessment(data) {
+  try {
+    const response = yield call(apiCallFunction, {
+      data: data.payload.request,
+      URL: JOB_ASSESSMENT_REVIEWLIST_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assessments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'jobProfilepAssessmentReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 export default function* watchReviewListJobProfileSaga() {
   console.log('IN WATCH ====>');
   yield takeLatest(GET_JOBPROFILE_REVIEW_LIST_SAGA, workerJobProfileReviewListSaga);
@@ -379,4 +469,6 @@ export default function* watchReviewListJobProfileSaga() {
   yield takeLatest(GET_JOBDOMAIN_REVIEW_LIST_SAGA, workeJobDomainReviewListSaga);
   yield takeLatest(GET_JOBFUNCTION_REVIEW_LIST_SAGA, workeJobFunctionReviewListSaga);
   yield takeLatest(GET_JOBROLE_REVIEW_LIST_SAGA, workeJobRoleReviewListSaga);
+  yield takeLatest(CULTURE_ASSESSMENTS_REVIEWLIST_SAGA, workerCultureProfileAssessment);
+  yield takeLatest(JOB_ASSESSMENTS_REVIEWLIST_SAGA, workerJobProfileAssessment);
 }

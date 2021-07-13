@@ -8,6 +8,7 @@ import {
   GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
   GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
   INTERNAL_NODE_LIST_SAGA,
+  JOB_ASSESSMENTS_REVIEWLIST_SAGA,
   JOB_GROUP_JOB_REVIEWLIST_SAGA,
   JOB_GROUP_REVISE_INFO_SAGA,
   JOB_PROFILE_INFO_REVISE_SAGA,
@@ -500,6 +501,73 @@ export const getAssignmneJobProfileDistinctApiCall = (
     payload: {
       request: reqBody,
       HeaderOne: 'job profiles',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getJobProfileAssessmentDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: secondaryOptionCheckValue.toUpperCase()
+    }
+  };
+  if (secondaryOptionCheckValue === 'all') {
+    searchObj = {
+      condition: 'in',
+      value: {
+        in: ['SUSPENDED', 'TERMINATED', 'ACTIVE', 'ARCHIVED']
+      }
+    };
+  }
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    numberPage: 0,
+    countPage: countPage,
+    searchCondition: 'AND',
+    jobProfileId: selectedTagValue,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assessmentStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({
+    type: JOB_ASSESSMENTS_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'assessments',
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',

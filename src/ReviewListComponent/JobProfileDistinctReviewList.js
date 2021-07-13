@@ -12,7 +12,7 @@ import {
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import { getJobProfilesDistinctApiCall } from '../Actions/ActionJobProfile';
 const JobProfileDistinctReviewList = (props) => {
   const dispatch = useDispatch();
@@ -103,7 +103,7 @@ const JobProfileDistinctReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -113,7 +113,7 @@ const JobProfileDistinctReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+        value: ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

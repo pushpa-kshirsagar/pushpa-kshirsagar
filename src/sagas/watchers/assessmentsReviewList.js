@@ -11,13 +11,17 @@ import {
   SET_POPUP_VALUE,
   SET_REVIEW_LIST_RELATE_DATA,
   GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA,
-  GET_ALLOCATE_ASSESSMENT
+  GET_ALLOCATE_ASSESSMENT,
+  CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
+  JOB_ASSESSMENTS_REVIEWLIST_SAGA
 } from '../../actionType';
 import {
   ASSESSMENT_REVIEW_LIST_URL,
   ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_URL,
   ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_URL,
-  ASSESSMENTNODE_ASSESSMENT_REVIEWLIST_URL
+  ASSESSMENTNODE_ASSESSMENT_REVIEWLIST_URL,
+  JOB_ASSESSMENT_REVIEWLIST_URL,
+  CULTURE_ASSESSMENT_REVIEWLIST_URL
 } from '../../endpoints';
 
 const apiCallMethod = async (requestObj) => {
@@ -163,6 +167,7 @@ function* workerAssessmentTypeAssessment(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+
 function* workerAssessmentNodeAssessment(data) {
   try {
     const response = yield call(apiCallMethod, {

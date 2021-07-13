@@ -301,6 +301,8 @@ export const CULTURE_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/culture-profile-type/unshare';
 export const CULTURE_DIAMENTION_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-dimension/review-list';
+export const CULTURE_ASSESSMENT_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile/assessment/review-list';
 //job
 export const JOB_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/review-list';
 export const JOB_CREATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/create';
@@ -326,3 +328,5 @@ export const JOBPROFILER_LIST_URL = ANALYTICS + '/dev/insight-guru/api/job-profi
 export const JOBFUNCTION_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/job-function/review-list';
 export const JOBROLE_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-role/review-list';
+export const JOB_ASSESSMENT_REVIEWLIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-profile/assessment/review-list';
