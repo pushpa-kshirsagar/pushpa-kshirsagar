@@ -3,7 +3,7 @@ import {
   CLEAR_JOB_REDUCER_STATE,
   SET_JOB_DYNAMIC_SINGLE_STATE,
   SET_JOB_DYNAMIC_ARRAY_STATE,
-  SET_JOB_COMPETANCY_STATE
+  SET_JOB_SIFTLIST_STATE
 } from '../actionType';
 
 const initialState = {
@@ -41,6 +41,7 @@ const initialState = {
       jobProfileJobCompetencyCoreTags: [],
       jobProfileJobCompetencyCoreObj: [],
       jobProfileJobCompetencyShortlisted: [],
+      jobProfileJobCompetencySiftList: [],
       jobProfileJobCompetencySifted: {
         indispensable: [],
         desirable: [],
@@ -85,22 +86,12 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
           [action.payload.stateName]: action.payload.value
         }
       };
-    case SET_JOB_COMPETANCY_STATE:
+    case SET_JOB_SIFTLIST_STATE:
       return {
         ...istate,
         jobProfileInformation: {
           ...istate.jobProfileInformation,
-          informationFramework: {
-            ...istate.informationFramework,
-            jobProfileJobCompetencyCoreObj: action.payload,
-            jobProfileJobCompetencyCore: [],
-            jobProfileJobCompetencySifted: {
-              indispensable: [],
-              desirable: [],
-              probable: [],
-              removable: []
-            }
-          }
+          informationFramework: action.payload
         }
       };
     case CLEAR_JOB_REDUCER_STATE:
