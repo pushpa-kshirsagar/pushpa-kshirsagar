@@ -34,16 +34,16 @@ const ReviewList = (props) => {
 
   return (
     <div key={id}>
-      <div
-        disableFocusRipple={true}
-        disableRipple={true}
-        className={'reviewListBorder' + ' ' + className}
-      >
+      <div disableFocusRipple={true} disableRipple={true} className={'reviewListBorder'}>
         <div
           className={['cardButtonwithouttextTransform', 'heightInherit'].join(' ')}
           style={{ backgroundColor: isSelectedReviewList ? 'rgb(240, 240, 240)' : '' }}
         >
-          <div className={['measureBox', 'heightInherit', 'componentinnerdiv-iguru'].join(' ')}>
+          <div
+            className={['measureBox', 'heightInherit', 'componentinnerdiv-iguru', className].join(
+              ' '
+            )}
+          >
             <div
               className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}
               tag={tag}

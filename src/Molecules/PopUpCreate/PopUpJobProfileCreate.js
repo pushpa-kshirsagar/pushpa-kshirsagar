@@ -15,14 +15,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   SET_NEXT_POPUP,
   GET_JOBDOMAIN_REVIEW_LIST_SAGA,
-  SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
-  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
-  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
-  GET_JOBFUNCTION_REVIEW_LIST_SAGA,
-  GET_JOBROLE_REVIEW_LIST_SAGA,
-  SET_DISPLAY_TWO_SINGLE_STATE,
-  SET_JOB_COMPETANCY_STATE,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  SET_JOB_SIFTLIST_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
@@ -37,24 +31,13 @@ const PopUpJobProfileCreate = (props) => {
     selectedAssociateInfo,
     coreNodeReviewListData,
     coreGroupReviewListData,
-    coreRoleReviewListData,
     jobProfilerReviewList,
-    jobProfileFunctionReviewList,
-    jobProfileRoleReviewList,
     coreTypeReviewListData,
     selectedInformationAllorKey,
     responseObject
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const [requiredErrorMsg, setRequiredErrorMsg] = useState('');
-  const [jobCompetancyArr, setJobCompetancyArr] = useState('');
-  const [jobCompetancyGroup, setJobCompetancyGroup] = useState('');
-  const siftListData = {
-    indispensable: [],
-    desirable: [],
-    probable: [],
-    removable: []
-  };
   const onClickCancelYes = () => {
     dispatch({
       type: SET_DISPLAY_THREE_SINGLE_STATE,
@@ -224,17 +207,13 @@ const PopUpJobProfileCreate = (props) => {
       })
       .filter((notUndefined) => notUndefined !== undefined);
     console.log('arrr', arrr);
-    // dispatch({
-    //   type: SET_JOB_DYNAMIC_ARRAY_STATE,
-    //   payload: {
-    //     objectName: 'informationFramework',
-    //     stateName: 'jobProfileJobCompetencyCoreObj',
-    //     value: arrr
-    //   }
-    // });
+    let obj = {
+      ...jobProfileInformation.informationFramework,
+      jobProfileJobCompetencyCoreObj: arrr
+    };
     dispatch({
-      type: SET_JOB_COMPETANCY_STATE,
-      payload: arrr
+      type: SET_JOB_SIFTLIST_STATE,
+      payload: obj
     });
     // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCORECOMPEMSG' } });
   };
@@ -247,8 +226,18 @@ const PopUpJobProfileCreate = (props) => {
   const updateCompetencySiftList = (id, key) => {
     console.log(id, key);
     let siftList = jobProfileInformation.informationFramework.jobProfileJobCompetencySifted;
+    let jobProfileJobCompetencyCoreObj =
+      jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj;
     siftList[key].push(id);
     console.log(siftList);
+    let obj = {
+      ...jobProfileInformation.informationFramework,
+      jobProfileJobCompetencySifted: siftList
+    };
+    dispatch({
+      type: SET_JOB_SIFTLIST_STATE,
+      payload: obj
+    });
   };
   const openRightPaneForRange = () => {
     dispatch({
@@ -710,12 +699,12 @@ const PopUpJobProfileCreate = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         nextPopUpValue={'POPUPRANGEMSG'}
-        // prevPopUpValue={'POPUPROLEMSG'}
+        prevPopUpValue={'POPUPCORECOMPEMSG'}
         inputHeader={'job competency'}
         inputHeaderBadge={'core'}
         infoMsg={'select a job competency'}
         isRequired={true}
-        minimumSelected={1}
+        minimumSelected={8}
         ListData={jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj}
         onClickEvent={(e) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobCompetencyCore');
