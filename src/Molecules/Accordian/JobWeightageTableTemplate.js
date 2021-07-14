@@ -155,7 +155,7 @@ class JobWeightageTableTemplate extends Component {
                         this.setState({ ...this.state, isShowTooltipId: '' });
                       }}
                       open={
-                        value.cultureProfileCultureDimensionTag === this.state.isShowTooltipId
+                        value.jobProfileJobCompetencyTag === this.state.isShowTooltipId
                           ? true
                           : false
                       }
@@ -166,7 +166,7 @@ class JobWeightageTableTemplate extends Component {
                           style={{ fontSize: '15px', textAlign: 'center' }}
                         >
                           <div style={{ display: 'block' }}>
-                            {value?.cultureProfilerFrameworkSecondaryDescriptionSecondary || ''}
+                            {value?.jobProfilerFrameworkSecondaryDescriptionPrimary || ''}
                           </div>
                         </Typography>
                       }
@@ -185,11 +185,11 @@ class JobWeightageTableTemplate extends Component {
                             event.stopPropagation();
                             this.setState({
                               ...this.state,
-                              isShowTooltipId: value.cultureProfileCultureDimensionTag
+                              isShowTooltipId: value.jobProfileJobCompetencyTag
                             });
                           }}
                         >
-                          {value?.cultureProfilerFrameworkSecondary || 'name'}
+                          {value?.jobProfilerFrameworkSecondary || 'name'}
                         </span>
                       </div>
                     </Tooltip>
@@ -199,7 +199,7 @@ class JobWeightageTableTemplate extends Component {
                     {'revise' == 'revise'
                       ? this.state.radioarray.map((lis, index) => {
                           const temp =
-                            value?.cultureProfileCultureDimensionWeightage === index + 1
+                            value?.jobProfileJobCompetencyWeightage === index + 1
                               ? index + 1 === 3
                                 ? 'selectedG'
                                 : index + 1 === 2
@@ -216,7 +216,7 @@ class JobWeightageTableTemplate extends Component {
                                 console.log('event++++++++++', index + 1, value);
                                 setWeightage({
                                   ...value,
-                                  cultureProfileCultureDimensionWeightage: index + 1
+                                  jobProfileJobCompetencyWeightage: index + 1
                                 });
                               }}
                               style={{ cursor: 'pointer' }}

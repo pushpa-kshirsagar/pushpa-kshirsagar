@@ -6,7 +6,11 @@ import './Accordian.css';
 import { useDispatch, useSelector } from 'react-redux';
 import CultureWeightageTableTemplate from './CultureWeightageTableTemplate';
 import JobRangeTableTemplate from './jobRangeTableTemplate';
-import { SET_WEIGHTAGE_CULTURE_PROFILE, SET_WEIGHTAGE_JOB_PROFILE } from '../../actionType';
+import {
+  SET_JOB_SIFTLIST_STATE,
+  SET_WEIGHTAGE_CULTURE_PROFILE,
+  SET_WEIGHTAGE_JOB_PROFILE
+} from '../../actionType';
 import JobWeightageTableTemplate from './JobWeightageTableTemplate';
 
 const AccordianListCard = (props) => {
@@ -75,13 +79,22 @@ const AccordianListCard = (props) => {
     tempListData = responseObject?.informationFramework?.cultureProfileCultureDimensionWeightage;
   }
   let tempJobListData =
-    jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj || [];
+    jobProfileInformation?.informationFramework?.jobProfileJobCompetencyWeightage || [];
 
-  // if (tempJobListData.length > 0 && reviewMode === 'revise') {
-  //   // tempListData = cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
-  // } else {
-  //   tempListData = responseObject?.informationFramework?.cultureProfileCultureDimensionWeightage;
-  // }
+  if (tempJobListData.length > 0 && reviewMode === 'revise') {
+    // tempListData = cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
+  } else {
+    tempListData = responseObject?.informationFramework?.jobProfileJobCompetencyWeightage;
+  }
+
+  let tempRangeListData =
+    jobProfileInformation?.informationFramework?.jobProfileJobCompetencyRange || [];
+
+  if (tempRangeListData.length > 0 && reviewMode === 'revise') {
+    // tempListData = cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
+  } else {
+    tempRangeListData = responseObject?.informationFramework?.jobProfileJobCompetencyRange || [];
+  }
 
   const cultureProfilerItems = [
     {
@@ -185,6 +198,38 @@ const AccordianListCard = (props) => {
       ]
     }
   ];
+
+  const setRangeData = (selectedIndex, id, max) => {
+    let ob = tempRangeListData.filter((ob) => ob.id === id)[0];
+    console.log('FILTRE', ob);
+    if (ob.jobProfileJobCompetencyRangeMinimum === 0) {
+      ob = { ...ob, jobProfileJobCompetencyRangeMinimum: selectedIndex };
+      // min set
+    } else if (ob.jobProfileJobCompetencyRangeMinimum > selectedIndex) {
+      ob = { ...ob, jobProfileJobCompetencyRangeMaximum: ob.jobProfileJobCompetencyRangeMinimum };
+      ob = { ...ob, jobProfileJobCompetencyRangeMinimum: selectedIndex };
+    } else if (ob.jobProfileJobCompetencyRangeMaximum > selectedIndex) {
+      ob = { ...ob, jobProfileJobCompetencyRangeMinimum: selectedIndex };
+    } else {
+      ob = { ...ob, jobProfileJobCompetencyRangeMaximum: selectedIndex };
+    }
+
+    tempRangeListData.forEach((element) => {
+      if (element.id === id) {
+        element.jobProfileJobCompetencyRangeMinimum = ob.jobProfileJobCompetencyRangeMinimum;
+        element.jobProfileJobCompetencyRangeMaximum = ob.jobProfileJobCompetencyRangeMaximum;
+      }
+    });
+    let obj = {
+      ...jobProfileInformation.informationFramework,
+      jobProfileJobCompetencyRange: tempRangeListData
+    };
+    dispatch({
+      type: SET_JOB_SIFTLIST_STATE,
+      payload: obj
+    });
+    console.log('AFTER SET', obj);
+  };
 
   return (
     <>
@@ -312,9 +357,11 @@ const AccordianListCard = (props) => {
                       '80 - 89': 'strong',
                       '90 - 99': 'exceptional'
                     }}
-                    culturedimensionselected={cultureProfilerItems}
+                    // culturedimensionselected={cultureProfilerItems}
+                    listData={tempRangeListData}
                     culturetooltipstate=""
                     cultureprofilemode="review"
+                    saveselected={reviewMode === 'revise' ? setRangeData : () => {}}
                   />
                 )}
               </div>

@@ -309,6 +309,7 @@ class JobRangeTableTemplate extends Component {
     this.selecttarr = {};
     this.arr = [];
     this.selected = {};
+    this.isShowTooltipId = false;
     this.saveselected = this.saveselected.bind(this);
   }
   componentDidMount() {
@@ -334,10 +335,9 @@ class JobRangeTableTemplate extends Component {
     console.log(this.props.culturedimensionselected);
   }
   render() {
-    console.log('IN CULTURE +++++>', this.props);
     var list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-    var listData = ['1', '2', '3'];
-    // const {} = this.props;
+    // var listData = ['1', '2', '3'];
+    const { listData = [], saveselected } = this.props;
     return (
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'userCardHeaderContainer'}>
         <FourRowHeader
@@ -496,10 +496,20 @@ class JobRangeTableTemplate extends Component {
             <div className={'containerPadding'}>
               <Paper className={['contentMaindivGray'].join()}>
                 <div className={'siftComponentInnerDiv'}>
-                  <ClickAwayListener>
+                  <ClickAwayListener
+                    onClickAway={(event) => {
+                      // event.stopPropagation();
+                      // this.setState({ ...this.state, isShowTooltipId: '' });
+                    }}
+                  >
                     <Tooltip
                       id="tooltip-icon"
-                      open={'13' == '3' ? true : false}
+                      onClick={(event) => {
+                        // event.stopPropagation();
+                        // this.setState({ ...this.state, isShowTooltipId: '' });
+                      }}
+                      open={false}
+                      // open={value.id === this.state.isShowTooltipId ? true : false}
                       title={
                         <Typography
                           color="inherit"
@@ -517,8 +527,15 @@ class JobRangeTableTemplate extends Component {
                           borderLeft: '1px solid #BFBFBF',
                           borderRight: '1px solid #BFBFBF'
                         }}
+                        onClick={(event) => {
+                          // event.stopPropagation();
+                          // this.setState({
+                          //   ...this.state,
+                          //   isShowTooltipId: value.id
+                          // });
+                        }}
                       >
-                        <span>{'name'}</span>
+                        <span>{value.jobProfilerFrameworkSecondary}</span>
                       </div>
                     </Tooltip>
                   </ClickAwayListener>
@@ -528,9 +545,28 @@ class JobRangeTableTemplate extends Component {
                       ? this.state.radioarraylist.map((lis, index) => {
                           return (
                             <span
-                              className={['contentDatadivGray'].join()}
-                              onClick={null}
-                              style={{ cursor: 'pointer' }}
+                              // className={'contentDatadivGray'}
+                              className={[
+                                'contentDatadivGray',
+                                value.id
+                                  ? value.jobProfileJobCompetencyRangeMinimum == index + 1
+                                    ? 'thirdGselected'
+                                    : value.jobProfileJobCompetencyRangeMaximum == index + 1
+                                    ? 'selectedG'
+                                    : value.jobProfileJobCompetencyRangeMinimum < index + 1 &&
+                                      value.jobProfileJobCompetencyRangeMaximum > index + 1
+                                    ? 'secondaryGSelected'
+                                    : null
+                                  : null
+                              ].join(' ')}
+                              onClick={() => {
+                                saveselected(index + 1, value.id, index + 1);
+                              }}
+                              style={{
+                                cursor: 'pointer',
+                                borderLeft: '1px solid #BFBFBF',
+                                borderRight: '1px solid #BFBFBF'
+                              }}
                             >
                               <span style={{ color: 'rgba(0, 0, 0, 0.87)' }}>{lis}</span>
                             </span>

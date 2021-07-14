@@ -1416,7 +1416,11 @@ export const DisplayPaneThree = () => {
         payload: { headerOne: 'associates', reqBody, associateTypeAssociateReqBody, createMode }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'job profile') {
-      const { informationBasic, informationAllocation } = jobProfileInformation;
+      const {
+        informationBasic,
+        informationAllocation,
+        informationFramework
+      } = jobProfileInformation;
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1425,7 +1429,21 @@ export const DisplayPaneThree = () => {
         jobProfile: {
           id,
           informationBasic,
-          informationAllocation
+          informationAllocation,
+          informationFramework: {
+            jobProfileJobDomain: informationFramework?.jobProfileJobDomain || [],
+            jobProfileJobFunction: informationFramework?.jobProfileJobFunction || [],
+            jobProfileJobRole: informationFramework?.jobProfileJobRole || [],
+            jobProfileJobCompetencyCore: informationFramework?.jobProfileJobCompetencyCore || [],
+            jobProfileJobCompetencyShortlisted:
+              informationFramework?.jobProfileJobCompetencyShortlisted || [],
+            jobProfileJobCompetencySifted:
+              informationFramework?.jobProfileJobCompetencySifted || [],
+            jobProfileJobCompetencyRange: informationFramework?.jobProfileJobCompetencyRange || [],
+            jobProfileJobCompetencyWeightage:
+              informationFramework?.jobProfileJobCompetencyWeightage || [],
+            jobProfileJobCompetencyCharacteristic: []
+          }
         }
       };
       dispatch({ type: LOADER_START });

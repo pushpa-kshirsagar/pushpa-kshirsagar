@@ -219,6 +219,7 @@ function* workerReviewInfoJobProfileSaga(data) {
             }
           });
         }
+        
       }
     }
     console.log('loading end');

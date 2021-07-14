@@ -295,7 +295,12 @@ function* workeJobDomainReviewListSaga(data) {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'jobProfilerReviewList', value: response.responseObject }
       });
-      yield put({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPDOMAINMSG' } });
+      // yield put({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPDOMAINMSG' } });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'POPUPDOMAINMSG', popupMode: 'JOBCREATE' }
+        // payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'JOBCREATE' }
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
