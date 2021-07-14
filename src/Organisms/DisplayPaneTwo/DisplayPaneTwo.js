@@ -268,7 +268,7 @@ export const DisplayPaneTwo = (props) => {
         {typeOfMiddlePaneList === 'jobProfileNodeJobProfileReviewList' && (
           <JobProfileNodeJobProfileDistinctReviewList popupAllClose={popupAllClose} />
         )}
-        {typeOfMiddlePaneList === 'jobProfileAssessmentReviewList' && (
+        {typeOfMiddlePaneList === 'jobProfilepAssessmentReviewList' && (
           <JobProfileAssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {/* {typeOfMiddlePaneList !== '' &&

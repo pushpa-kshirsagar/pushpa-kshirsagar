@@ -43,12 +43,7 @@ const initialState = {
       jobProfileJobCompetencyCoreObj: [],
       jobProfileJobCompetencyShortlisted: [],
       jobProfileJobCompetencySiftList: [],
-      jobProfileJobCompetencySifted: {
-        indispensable: [],
-        desirable: [],
-        probable: [],
-        removable: []
-      }
+      jobProfileJobCompetencySifted: []
     }
   }
 };
