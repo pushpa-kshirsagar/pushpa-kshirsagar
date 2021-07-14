@@ -7,12 +7,16 @@ import {
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
-  SET_POPUP_STATE,
+  SET_POPUP_STATE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import {
+  ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
+  ASSESSMENT_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
 import { getJobProfilesDistinctApiCall } from '../Actions/ActionJobProfile';
 const JobProfileDistinctReviewList = (props) => {
   const dispatch = useDispatch();
@@ -78,7 +82,13 @@ const JobProfileDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    getJobProfilesDistinctApiCall(selectedAssociateInfo, siftKey, countPage, 'job profiles', dispatch);
+    getJobProfilesDistinctApiCall(
+      selectedAssociateInfo,
+      siftKey,
+      countPage,
+      'job profiles',
+      dispatch
+    );
     dispatch({ type: FILTERMODE_ENABLE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
@@ -95,6 +105,9 @@ const JobProfileDistinctReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let popupContentArrValue = ASSESSMENT_REVIEW_LIST_POPUP_OPTION.map((obj) =>
+      obj.data === 'assignments' ? { ...obj, data: 'assessments', dataValue: 'assessments' } : obj
+    );
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -103,7 +116,7 @@ const JobProfileDistinctReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: popupContentArrValue,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -113,7 +126,7 @@ const JobProfileDistinctReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
+        value: popupContentArrValue
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

@@ -155,6 +155,7 @@ import {
   updateJobProfileGroupStatus,
   updateJobProfileTypeStatus
 } from '../Actions/ActionJobProfile';
+import { SHARE_NEW_POPUP } from '../PopUpConfig';
 const PopUpDisplayPaneTwoReviewList = (props) => {
   const {
     popupHeaderOne,
@@ -188,6 +189,52 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     });
   };
   const setSecondaryOptionValueTwo = (e) => {
+    let arr = [];
+    if (e.currentTarget.getAttribute('data-value') === 'distinct') {
+      SHARE_NEW_POPUP.forEach((element) => {
+        if (
+          element.data === 'ascendant' ||
+          element.data === 'peer' ||
+          element.data === 'descendant'
+        ) {
+          arr.push({ ...element, disabled: true });
+        } else {
+          arr.push({ ...element, disabled: false });
+        }
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: {
+          stateName: 'popupContentArrValue',
+          value: arr
+        }
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: {
+          stateName: 'forthOptionCheckValue',
+          value: ''
+        }
+      });
+    } else {
+      SHARE_NEW_POPUP.forEach((element) => {
+        arr.push({ ...element, disabled: false });
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: {
+          stateName: 'popupContentArrValue',
+          value: arr
+        }
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: {
+          stateName: 'forthOptionCheckValue',
+          value: 'descendant'
+        }
+      });
+    }
     dispatch({
       type: SET_POPUP_SINGLE_STATE,
       payload: {
@@ -197,6 +244,52 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     });
   };
   const setSecondaryOptionValueThree = (e) => {
+    let arr = [];
+    if (e.currentTarget.getAttribute('data-value') === 'peer') {
+      // if (popupHeaderOneBadgeOne === 'share') {
+      SHARE_NEW_POPUP.forEach((element) => {
+        if (
+          element.data === 'distinct' ||
+          element.data === 'primary' ||
+          element.data === 'secondary'
+        ) {
+          arr.push({ ...element, disabled: true });
+        } else {
+          arr.push({ ...element, disabled: false });
+        }
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: {
+          stateName: 'tertiaryOptionCheckValue',
+          value: 'all'
+        }
+      });
+      // }
+    } else {
+      SHARE_NEW_POPUP.forEach((element) => {
+        if (element.data === 'distinct') {
+          arr.push({ ...element, disabled: true });
+        } else {
+          arr.push({ ...element, disabled: false });
+        }
+      });
+      dispatch({
+        type: SET_POPUP_SINGLE_STATE,
+        payload: {
+          stateName: 'tertiaryOptionCheckValue',
+          value: 'all'
+        }
+      });
+    }
+    dispatch({
+      type: SET_POPUP_SINGLE_STATE,
+      payload: {
+        stateName: 'popupContentArrValue',
+        value: arr
+      }
+    });
+
     dispatch({
       type: SET_POPUP_SINGLE_STATE,
       payload: {

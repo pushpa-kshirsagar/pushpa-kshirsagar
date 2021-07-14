@@ -1269,8 +1269,8 @@ export const ASSESSMENT_REVIEW_LIST_POPUP_OPTION = [
   },
   {
     data: 'share',
-    dataValue: 'shareNew',
-    dataKey: 'shareNew',
+    dataValue: 'share',
+    dataKey: 'share',
     optionClass: 'optionPrimary',
     disabled: false
   },
@@ -2622,20 +2622,6 @@ export const SHARE_NEW_POPUP = [
     data: 'peer',
     dataValue: 'peer',
     dataKey: 'peer',
-    optionClass: 'optionForth',
-    disabled: false
-  },
-  {
-    data: 'root',
-    dataValue: 'root',
-    dataKey: 'root',
-    optionClass: 'optionForth',
-    disabled: true
-  },
-  {
-    data: 'self',
-    dataValue: 'self',
-    dataKey: 'self',
     optionClass: 'optionForth',
     disabled: false
   }

@@ -48,11 +48,27 @@ const PopUpJobProfileCreate = (props) => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
+    // jobProfileInformation
+    // let tempjobProfileJobCompetencySiftedOb =
+    //   jobProfileInformation?.informationFramework?.jobProfileJobCompetencySifted || {};
+    // const JobCompetencySiftedArray = [];
+    // if (tempjobProfileJobCompetencySiftedOb) {
+    //   for (const [key, value] of Object.entries(tempjobProfileJobCompetencySiftedOb)) {
+    //     JobCompetencySiftedArray.push({
+    //       jobProfileJobCompetencySift: key,
+    //       jobProfileJobCompetencyTag: value
+    //     });
+    //   }
+    // }
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-      jobProfile: jobProfileInformation
+      jobProfile: {
+        informationAllocation: jobProfileInformation.informationAllocation,
+        informationBasic: jobProfileInformation.informationBasic,
+        informationFramework: jobProfileInformation.informationFramework
+      }
     };
     console.log('CREATE api', reqBody);
     dispatch({ type: LOADER_START });
@@ -107,7 +123,7 @@ const PopUpJobProfileCreate = (props) => {
     });
   };
   console.log('jobProfileInformation', jobProfileInformation);
-  console.log('jobProfilerReviewList', jobProfilerReviewList);
+  // console.log('jobProfilerReviewList', jobProfilerReviewList);
   let selectedPrimaryGroup =
     jobProfileInformation?.informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary || [];
   let selectedSecondaryGroup =
@@ -147,18 +163,6 @@ const PopUpJobProfileCreate = (props) => {
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
     };
-    // dispatch({
-    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //   payload: { stateName: 'jobProfileDomainReviewList', value: [] }
-    // });
-    // dispatch({
-    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //   payload: { stateName: 'jobProfileFunctionReviewList', value: [] }
-    // });
-    // dispatch({
-    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //   payload: { stateName: 'jobProfileRoleReviewList', value: [] }
-    // });
     dispatch({
       type: GET_JOBDOMAIN_REVIEW_LIST_SAGA,
       payload: {
@@ -169,28 +173,6 @@ const PopUpJobProfileCreate = (props) => {
         isMiddlePaneList: false
       }
     });
-    //   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-    //   dispatch({
-    //     type: GET_JOBFUNCTION_REVIEW_LIST_SAGA,
-    //     payload: {
-    //       request: requestObj,
-    //       BadgeOne: '',
-    //       BadgeTwo: '',
-    //       BadgeThree: '',
-    //       isMiddlePaneList: false
-    //     }
-    //   });
-    //   dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-    //   dispatch({
-    //     type: GET_JOBROLE_REVIEW_LIST_SAGA,
-    //     payload: {
-    //       request: requestObj,
-    //       BadgeOne: '',
-    //       BadgeTwo: '',
-    //       BadgeThree: '',
-    //       isMiddlePaneList: false
-    //     }
-    //   });
   };
   const setCompetancyCoreStateReducer = () => {
     let jobCompetancyCore =
@@ -199,11 +181,13 @@ const PopUpJobProfileCreate = (props) => {
     let arrr = jobProfilerReviewList.jobCompetency
       .map((obj) => {
         let temp = '';
-        // if (obj.group === jobCompetancyGroup) {
         temp = obj.jobCompetency.filter(function (ob) {
-          if (jobCompetancyCore.includes(ob.id)) return ob;
+          let tt = [];
+          if (jobCompetancyCore.includes(ob.id)) {
+            tt.push(ob);
+          }
+          return tt;
         });
-        // }
         return temp[0];
       })
       .filter((notUndefined) => notUndefined !== undefined);
@@ -229,12 +213,28 @@ const PopUpJobProfileCreate = (props) => {
     let siftList = jobProfileInformation.informationFramework.jobProfileJobCompetencySifted;
     let siftListArr = jobProfileInformation.informationFramework.jobProfileJobCompetencySiftList;
     if (key) {
-      siftList[key].push(id);
+      const competenciesArray = siftList.map((ob) => {
+        if (ob.jobProfileJobCompetencySift === key) {
+          let newTemp = {
+            ...ob,
+            jobProfileJobCompetencyTag: [...ob.jobProfileJobCompetencyTag, id]
+          };
+          return newTemp;
+        } else {
+          return ob;
+        }
+      });
+      console.log('AFTER FILTER', competenciesArray);
+      // const ob = {
+      //   jobProfileJobCompetencySift: key,
+      //   jobProfileJobCompetencyTag: [...temp, id]
+      // };
+      // siftList[key].push(id);
       siftListArr.push(id);
       console.log(siftList);
       let obj = {
         ...jobProfileInformation.informationFramework,
-        jobProfileJobCompetencySifted: siftList,
+        jobProfileJobCompetencySifted: competenciesArray,
         jobProfileJobCompetencySiftList: siftListArr
       };
       dispatch({

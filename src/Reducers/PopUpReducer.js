@@ -13,7 +13,7 @@ import {
   SET_MIDDLEPANE_SECONDARY_OPTION,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   CLEAR_POPUP_INFO,
-  SET_POPUP_SINGLE_STATE,
+  SET_POPUP_SINGLE_STATE
 } from '../actionType';
 import CalculatorAdvancedIcon from '@material-ui/icons/KeyboardHide';
 import CalculatorIcon from '@material-ui/icons/Keyboard';
@@ -76,8 +76,8 @@ const initialState = {
   secondaryPopUpOptions: {
     allocate: ALLOCATE_POPUP,
     archive: ARCHIVE_POPUP,
-    share: SHARE_POPUP,
-    shareNew: SHARE_NEW_POPUP,
+    // share: SHARE_POPUP,
+    share: SHARE_NEW_POPUP,
     delete: DELETE_POPUP,
     flag: FLAG_PUPUP,
     flaged: FLAG_OPTION_PUPUP,
@@ -315,6 +315,7 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload.keyValue === 'reviewDistinct'
           ? istate.secondaryPopUpOptions[action.payload.keyValue]
           : istate.secondaryPopUpOptions[action.payload.badgeValue.split(' ').join('')];
+      console.log('arrVal', arrVal);
       if (istate.popupOpenType === 'primary') {
         if (
           action.payload.badgeValue === 'notifications' ||
@@ -399,8 +400,8 @@ const PopUpReducer = (istate = initialState, action) => {
             popupHeaderOneBadgeTwo: action.payload.badgeValue,
             popupOpenType: 'secondary',
             popupContentArrValue: arrVal,
-            tertiaryOptionCheckValue: action.payload.keyValue === 'shareNew' ? 'all' : '',
-            forthOptionCheckValue: action.payload.keyValue === 'shareNew' ? 'descendant' : '',
+            tertiaryOptionCheckValue: action.payload.keyValue === 'share' ? 'all' : '',
+            forthOptionCheckValue: action.payload.keyValue === 'share' ? 'descendant' : '',
             secondaryOptionCheckValue:
               action.payload.keyValue === 'reviseKey' ||
               action.payload.keyValue === 'reviewKey' ||
@@ -411,7 +412,7 @@ const PopUpReducer = (istate = initialState, action) => {
                 ? 'active'
                 : action.payload.keyValue === 'select' || action.payload.keyValue === 'flaged'
                 ? 'multiple'
-                : action.payload.keyValue === 'shareNew'
+                : action.payload.keyValue === 'share'
                 ? 'node'
                 : 'all'
           };
@@ -434,6 +435,8 @@ const PopUpReducer = (istate = initialState, action) => {
           popupContentArrValue: istate.primaryArrOprion,
           popupHeaderOne: istate.duplicateHeaderOne,
           popupHeaderOneBadgeOne: istate.duplicateBadgeOne,
+          tertiaryOptionCheckValue: 'all',
+          forthOptionCheckValue: 'ascendant',
           popupHeaderOneBadgeTwo: '',
           popupOpenType: 'primary'
         };

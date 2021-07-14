@@ -43,7 +43,24 @@ const initialState = {
       jobProfileJobCompetencyCoreObj: [],
       jobProfileJobCompetencyShortlisted: [],
       jobProfileJobCompetencySiftList: [],
-      jobProfileJobCompetencySifted: []
+      jobProfileJobCompetencySifted: [
+        {
+          jobProfileJobCompetencySift: 'indispensable',
+          jobProfileJobCompetencyTag: []
+        },
+        {
+          jobProfileJobCompetencySift: 'desirable',
+          jobProfileJobCompetencyTag: []
+        },
+        {
+          jobProfileJobCompetencySift: 'probable',
+          jobProfileJobCompetencyTag: []
+        },
+        {
+          jobProfileJobCompetencySift: 'removable',
+          jobProfileJobCompetencyTag: []
+        }
+      ]
     }
   }
 };
@@ -74,12 +91,14 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
         }
       };
     case SET_JOB_DYNAMIC_ARRAY_STATE:
-      console.log('action.payload', action);
       return {
         ...istate,
-        [action.payload.objectName]: {
-          ...istate[action.payload.objectName],
-          [action.payload.stateName]: action.payload.value
+        jobProfileInformation: {
+          ...istate.jobProfileInformation,
+          [action.payload.objectName]: {
+            ...istate.jobProfileInformation[action.payload.objectName],
+            [action.payload.stateName]: action.payload.value
+          }
         }
       };
     case SET_JOB_SIFTLIST_STATE:
