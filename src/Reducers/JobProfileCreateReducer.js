@@ -4,7 +4,9 @@ import {
   SET_JOB_DYNAMIC_SINGLE_STATE,
   SET_JOB_DYNAMIC_ARRAY_STATE,
   SET_JOB_SIFTLIST_STATE,
-  SET_WEIGHTAGE_JOB_PROFILE
+  SET_WEIGHTAGE_JOB_PROFILE,
+  SET_JOB_COMPETENCY_WEIGHTAGE_LIST,
+  SET_JOB_COMPETENCY_RANGE_LIST
 } from '../actionType';
 
 const initialState = {
@@ -43,6 +45,8 @@ const initialState = {
       jobProfileJobCompetencyCoreObj: [],
       jobProfileJobCompetencyShortlisted: [],
       jobProfileJobCompetencySiftList: [],
+      jobProfileJobCompetencyRange: [],
+      jobProfileJobCompetencyWeightage: [],
       jobProfileJobCompetencySifted: [
         {
           jobProfileJobCompetencySift: 'indispensable',
@@ -111,7 +115,7 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
       };
     case SET_WEIGHTAGE_JOB_PROFILE:
       let tempArr =
-        istate?.jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj || [];
+        istate?.jobProfileInformation?.informationFramework?.jobProfileJobCompetencyWeightage || [];
       tempArr.forEach((element) => {
         if (element.jobProfileJobCompetencyTag === action.payload.jobProfileJobCompetencyTag) {
           element.jobProfileJobCompetencyWeightage =
@@ -124,7 +128,29 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
           ...istate.jobProfileInformation,
           informationFramework: {
             ...istate.jobProfileInformation.informationFramework,
-            jobProfileJobCompetencyCoreObj: tempArr
+            jobProfileJobCompetencyWeightage: tempArr
+          }
+        }
+      };
+    case SET_JOB_COMPETENCY_WEIGHTAGE_LIST:
+      return {
+        ...istate,
+        jobProfileInformation: {
+          ...istate.jobProfileInformation,
+          informationFramework: {
+            ...istate.jobProfileInformation.informationFramework,
+            jobProfileJobCompetencyWeightage: action.payload
+          }
+        }
+      };
+    case SET_JOB_COMPETENCY_RANGE_LIST:
+      return {
+        ...istate,
+        jobProfileInformation: {
+          ...istate.jobProfileInformation,
+          informationFramework: {
+            ...istate.jobProfileInformation.informationFramework,
+            jobProfileJobCompetencyRange: action.payload
           }
         }
       };

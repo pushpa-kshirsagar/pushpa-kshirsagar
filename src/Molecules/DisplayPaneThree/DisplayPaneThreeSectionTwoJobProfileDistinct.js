@@ -117,7 +117,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'culture dimensions' && selectedBadgeName === 'core') {
+    if (labelName === 'job competencies' && selectedBadgeName === 'core') {
       let requestObj = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:

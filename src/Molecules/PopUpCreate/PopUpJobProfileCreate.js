@@ -17,7 +17,9 @@ import {
   GET_JOBDOMAIN_REVIEW_LIST_SAGA,
   SET_MOBILE_PANE_STATE,
   SET_JOB_SIFTLIST_STATE,
-  SET_WEIGHTAGE_SELECTED
+  SET_WEIGHTAGE_SELECTED,
+  SET_JOB_COMPETENCY_RANGE_LIST,
+  SET_JOB_COMPETENCY_WEIGHTAGE_LIST
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
@@ -244,6 +246,33 @@ const PopUpJobProfileCreate = (props) => {
     }
   };
   const openRightPaneForRange = () => {
+    let jobCoreWeightage = [];
+    let jobCoreRange = [];
+    let jobCompetencyCoreListObj =
+      jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj || [];
+    let jobCompetencyCoreList =
+      jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCore || [];
+    if (jobCompetencyCoreListObj) {
+      jobCompetencyCoreListObj.forEach((element) => {
+        if (jobCompetencyCoreList.includes(element.id)) {
+          jobCoreWeightage.push({
+            ...element,
+            jobProfileJobCompetencyTag: element.id,
+            jobProfileJobCompetencyWeightage: 0
+          });
+          jobCoreRange.push({
+            ...element,
+            jobProfileJobCompetencyTag: element.id,
+            jobProfileJobCompetencyRangeMaximum: 0,
+            jobProfileJobCompetencyRangeMinimum: 0
+          });
+        }
+      });
+    }
+
+    dispatch({ type: SET_JOB_COMPETENCY_RANGE_LIST, payload: jobCoreRange });
+    dispatch({ type: SET_JOB_COMPETENCY_WEIGHTAGE_LIST, payload: jobCoreWeightage });
+
     dispatch({
       type: SET_DISPLAY_PANE_THREE_STATE,
       payload: {
