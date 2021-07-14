@@ -48,11 +48,27 @@ const PopUpJobProfileCreate = (props) => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
+    // jobProfileInformation
+    // let tempjobProfileJobCompetencySiftedOb =
+    //   jobProfileInformation?.informationFramework?.jobProfileJobCompetencySifted || {};
+    // const JobCompetencySiftedArray = [];
+    // if (tempjobProfileJobCompetencySiftedOb) {
+    //   for (const [key, value] of Object.entries(tempjobProfileJobCompetencySiftedOb)) {
+    //     JobCompetencySiftedArray.push({
+    //       jobProfileJobCompetencySift: key,
+    //       jobProfileJobCompetencyTag: value
+    //     });
+    //   }
+    // }
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-      jobProfile: jobProfileInformation
+      jobProfile: {
+        informationAllocation: jobProfileInformation.informationAllocation,
+        informationBasic: jobProfileInformation.informationBasic,
+        informationFramework: jobProfileInformation.informationFramework
+      }
     };
     console.log('CREATE api', reqBody);
     dispatch({ type: LOADER_START });
@@ -229,12 +245,28 @@ const PopUpJobProfileCreate = (props) => {
     let siftList = jobProfileInformation.informationFramework.jobProfileJobCompetencySifted;
     let siftListArr = jobProfileInformation.informationFramework.jobProfileJobCompetencySiftList;
     if (key) {
-      siftList[key].push(id);
+      const competenciesArray = siftList.map((ob) => {
+        if (ob.jobProfileJobCompetencySift === key) {
+          let newTemp = {
+            ...ob,
+            jobProfileJobCompetencyTag: [...ob.jobProfileJobCompetencyTag, id]
+          };
+          return newTemp;
+        } else {
+          return ob;
+        }
+      });
+      console.log('AFTER FILTER', competenciesArray);
+      // const ob = {
+      //   jobProfileJobCompetencySift: key,
+      //   jobProfileJobCompetencyTag: [...temp, id]
+      // };
+      // siftList[key].push(id);
       siftListArr.push(id);
       console.log(siftList);
       let obj = {
         ...jobProfileInformation.informationFramework,
-        jobProfileJobCompetencySifted: siftList,
+        jobProfileJobCompetencySifted: competenciesArray,
         jobProfileJobCompetencySiftList: siftListArr
       };
       dispatch({

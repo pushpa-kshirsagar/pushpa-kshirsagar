@@ -43,12 +43,24 @@ const initialState = {
       jobProfileJobCompetencyCoreObj: [],
       jobProfileJobCompetencyShortlisted: [],
       jobProfileJobCompetencySiftList: [],
-      jobProfileJobCompetencySifted: {
-        indispensable: [],
-        desirable: [],
-        probable: [],
-        removable: []
-      }
+      jobProfileJobCompetencySifted: [
+        {
+          jobProfileJobCompetencySift: 'indispensable',
+          jobProfileJobCompetencyTag: []
+        },
+        {
+          jobProfileJobCompetencySift: 'desirable',
+          jobProfileJobCompetencyTag: []
+        },
+        {
+          jobProfileJobCompetencySift: 'probable',
+          jobProfileJobCompetencyTag: []
+        },
+        {
+          jobProfileJobCompetencySift: 'removable',
+          jobProfileJobCompetencyTag: []
+        }
+      ]
     }
   }
 };
