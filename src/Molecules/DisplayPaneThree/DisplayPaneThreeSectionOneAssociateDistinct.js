@@ -399,6 +399,23 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             {
               labelTextTwoBadge: 'share',
               innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'sign-on',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: 'No'
+                }
+              ]
             }
           ]
         },
@@ -744,6 +761,23 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             {
               labelTextTwoBadge: 'share',
               innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'sign-on',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: 'No'
+                }
+              ]
             }
           ]
         },
