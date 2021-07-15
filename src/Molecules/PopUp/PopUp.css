@@ -269,9 +269,15 @@
   color: #ffffff;
   font-weight: bold;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  /* text-overflow: ellipsis;
+  overflow: hidden; */
   line-height: 1.6 !important;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.textSheetTitleBox::-webkit-scrollbar {
+  display: none;
 }
 .backArrow {
   flex: 1;
