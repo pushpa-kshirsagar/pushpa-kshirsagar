@@ -141,9 +141,6 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
           }
         });
       }
-      if (labelName === 'job competencies' && selectedBadgeName === 'core') {
-      }
-
       if (labelName === 'job' && selectedBadgeName === 'domain') {
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: '' } });
         dispatch({
