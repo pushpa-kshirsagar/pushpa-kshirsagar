@@ -34,7 +34,9 @@ const PopUpCheckbox = (props) => {
     textOne = '',
     textTwo = null,
     onClickNext = null,
-    id
+    id,
+    isChecked = false,
+    availableSignInCredentialList = []
   } = props;
 
   const dispatch = useDispatch();
@@ -43,12 +45,12 @@ const PopUpCheckbox = (props) => {
     console.log(event.target.checked);
     setState({ isChecked: event.target.value });
   };
-  const { availableSignInCredentialList = [], currentlySignInCredential } = useSelector(
-    (state) => state.AssesseeCreateReducer
-  );
+  // const { availableSignInCredentialList = [], currentlySignInCredential } = useSelector(
+  //   (state) => state.AssesseeCreateReducer
+  // );
 
   const [state, setState] = useState({
-    isChecked: currentlySignInCredential
+    isChecked: isChecked
   });
 
   const createNameWithBadge = (name) => {
@@ -162,7 +164,7 @@ const PopUpCheckbox = (props) => {
               <div
                 disableFocusRipple={true}
                 disableRipple={true}
-                className={['cardButton', 'heightInherit','reviewListFixedWidth'].join(' ')}
+                className={['cardButton', 'heightInherit', 'reviewListFixedWidth'].join(' ')}
                 style={{ borderBottom: '0px' }}
               >
                 <div className={['measureBox', 'heightInherit', 'componentInnerDiv'].join(' ')}>
