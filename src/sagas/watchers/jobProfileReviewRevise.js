@@ -327,6 +327,9 @@ function* workerReviseInfoJobProfileSaga(data) {
             isMiddlePaneList: true
           }
         });
+      } else {
+        console.log('loading end');
+        yield put({ type: LOADER_STOP });
       }
       yield put({
         type: SET_RANGE_SELECTED,

@@ -91,7 +91,7 @@ const AccordianListCard = (props) => {
   if (tempJobListData.length > 0 && reviewMode === 'revise') {
     // tempListData = cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
   } else {
-    tempListData = responseObject?.informationFramework?.jobProfileJobCompetencyWeightage;
+    tempJobListData = responseObject?.informationFramework?.jobProfileJobCompetencyWeightage;
   }
 
   let tempRangeListData =

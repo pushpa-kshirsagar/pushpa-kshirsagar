@@ -609,7 +609,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
     setSelectedSectionItem(rightPaneSectionsItem[0]);
     setIsShowReviseIcon(true);
-  }, [responseObject]);
+  }, [responseObject, isWeightageSelected, isRangeSelected]);
 
   const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
   const onClickFooter = (e) => {
