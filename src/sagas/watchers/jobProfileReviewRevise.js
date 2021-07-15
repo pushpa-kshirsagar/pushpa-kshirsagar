@@ -225,13 +225,18 @@ function* workerReviewInfoJobProfileSaga(data) {
             }
           });
         }
+        const tempCoreArray = informationFramework?.jobProfileJobCompetencyCore || [];
+        const coreIdList = tempCoreArray.map((ob) => {
+          return ob.id;
+        });
         yield put({
           type: SET_JOB_SIFTLIST_STATE,
           payload: {
             jobProfileJobDomain: informationFramework?.jobProfileJobDomain || [],
             jobProfileJobFunction: informationFramework?.jobProfileJobFunction || [],
             jobProfileJobRole: informationFramework?.jobProfileJobRole || [],
-            jobProfileJobCompetencyCore: informationFramework?.jobProfileJobCompetencyCore || [],
+            jobProfileJobCompetencyCoreObj: informationFramework?.jobProfileJobCompetencyCore || [],
+            jobProfileJobCompetencyCore: coreIdList || [],
             jobProfileJobCompetencyShortlisted:
               informationFramework?.jobProfileJobCompetencyShortlisted || [],
             jobProfileJobCompetencySifted:
