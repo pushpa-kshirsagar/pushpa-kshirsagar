@@ -8,12 +8,26 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { GET_JOBDOMAIN_REVIEW_LIST_SAGA } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
-  const { headerOneBadgeTwo, reviewMode, isRangeSelected = false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { headerOneBadgeTwo, reviewMode, isRangeSelected = false, responseObject } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   let selectedList = isRangeSelected ? 'framework' : '';
   const [listExpand, setListExpand] = useState(selectedList);
   const dispatch = useDispatch();
 
+  let jobCoreList = [];
+  const tempCoreList = responseObject?.informationFramework?.jobProfileJobCompetencyCore || [];
+  if (tempCoreList) {
+    tempCoreList.forEach((ob) => {
+      jobCoreList.push({
+        id: ob.jobProfileJobCompetencyTag,
+        textOne: ob?.jobProfilerFrameworkSecondary || '',
+        textTwo: '',
+        status: ''
+      });
+    });
+  }
   const frameworkAll = [
     {
       id: 'JP-Assessment001',
@@ -63,7 +77,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'core',
-          innerList: []
+          innerList: jobCoreList
         },
         {
           labelTextOneOneBadge: 'range',

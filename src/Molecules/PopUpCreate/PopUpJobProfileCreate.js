@@ -187,7 +187,7 @@ const PopUpJobProfileCreate = (props) => {
         temp = obj.jobCompetency.filter(function (ob) {
           let tt = [];
           if (jobCompetancyCore.includes(ob.id)) {
-            tt.push(ob);
+            tt.push({ ...ob, jobProfileJobCompetencyTag: ob.id });
           }
           return tt;
         });
