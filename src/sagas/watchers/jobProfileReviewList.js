@@ -298,8 +298,12 @@ function* workeJobDomainReviewListSaga(data) {
       // yield put({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPDOMAINMSG' } });
       yield put({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'POPUPDOMAINMSG', popupMode: 'JOBCREATE' }
-        // payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'JOBCREATE' }
+        payload: {
+          isPopUpValue: data.payload.nextPopupValue
+            ? data.payload.nextPopupValue
+            : 'POPUPDOMAINMSG',
+          popupMode: 'JOBCREATE'
+        }
       });
     } else {
       yield put({
