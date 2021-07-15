@@ -24,7 +24,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   if (tempCoreList) {
     tempCoreList.forEach((ob) => {
       jobCoreList.push({
-        id: ob.jobProfileJobCompetencyTag,
+        id: ob.id,
         textOne: ob?.jobProfilerFrameworkSecondary || '',
         textTwo: '',
         status: ''
@@ -36,7 +36,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   if (tempDomainList) {
     tempDomainList.forEach((ob) => {
       jobDomainList.push({
-        id: ob.jobProfileJobCompetencyTag,
+        id: ob.id,
         textOne: ob?.jobProfilerFrameworkSecondary || '',
         textTwo: '',
         status: ''
@@ -48,7 +48,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   if (tempFunctionList) {
     tempFunctionList.forEach((ob) => {
       jobFunctionList.push({
-        id: ob.jobProfileJobCompetencyTag,
+        id: ob.id,
         textOne: ob?.jobProfilerFrameworkSecondary || '',
         textTwo: '',
         status: ''
@@ -60,7 +60,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   if (tempRoleList) {
     tempRoleList.forEach((ob) => {
       jobRoleList.push({
-        id: ob.jobProfileJobCompetencyTag,
+        id: ob.id,
         textOne: ob?.jobProfilerFrameworkSecondary || '',
         textTwo: '',
         status: ''
@@ -72,7 +72,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   if (tempShortList) {
     tempShortList.forEach((ob) => {
       jobShortList.push({
-        id: ob.jobProfileJobCompetencyTag,
+        id: ob.id,
         textOne: ob?.jobProfilerFrameworkSecondary || '',
         textTwo: '',
         status: ''

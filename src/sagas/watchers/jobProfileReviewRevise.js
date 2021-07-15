@@ -47,6 +47,10 @@ function* workerReviewInfoJobProfileSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'responseObject', value: userResponse.responseObject[0] }
+      });
       if (isReviseMode) {
         const {
           informationBasic,
@@ -227,19 +231,19 @@ function* workerReviewInfoJobProfileSaga(data) {
         }
         const tempCoreArray = informationFramework?.jobProfileJobCompetencyCore || [];
         const coreIdList = tempCoreArray.map((ob) => {
-          return ob.jobProfileJobCompetencyTag;
+          return ob.id;
         });
         const tempJobDomainArray = informationFramework?.jobProfileJobDomain || [];
         const jobDomainIdList = tempJobDomainArray.map((ob) => {
-          return ob.jobProfileJobCompetencyTag;
+          return ob.isMiddlePaneList;
         });
         const tempJobFunctionArray = informationFramework?.jobProfileJobFunction || [];
         const jobFunctionIdList = tempJobFunctionArray.map((ob) => {
-          return ob.jobProfileJobCompetencyTag;
+          return ob.id;
         });
         const tempJobRoleArray = informationFramework?.jobProfileJobRole || [];
         const jobRoleIdList = tempJobRoleArray.map((ob) => {
-          return ob.jobProfileJobCompetencyTag;
+          return ob.id;
         });
         yield put({
           type: SET_JOB_SIFTLIST_STATE,
@@ -257,49 +261,7 @@ function* workerReviewInfoJobProfileSaga(data) {
             jobProfileJobCompetencyRange: informationFramework?.jobProfileJobCompetencyRange || [],
             jobProfileJobCompetencyWeightage:
               informationFramework?.jobProfileJobCompetencyWeightage || [],
-            jobProfileJobCompetencyCharacteristic: [],
-            jobProfileJobCompetencySifted: [
-              {
-                jobProfileJobCompetencySift: 'indispensable',
-                jobProfileJobCompetencyTag: [
-                  '60ed794a592d3c2db0d624ca',
-                  '60ed794a592d3c2db0d6248d',
-                  '60ed794a592d3c2db0d6249e',
-                  '60ed794a592d3c2db0d624bf',
-                  '60ed794a592d3c2db0d624ca',
-                  '60ed794a592d3c2db0d6248d',
-                  '60ed794a592d3c2db0d6249e',
-                  '60ed794a592d3c2db0d624bf'
-                ]
-              },
-              {
-                jobProfileJobCompetencySift: 'desirable',
-                jobProfileJobCompetencyTag: [
-                  '60ed794a592d3c2db0d62481',
-                  '60ed794a592d3c2db0d62486',
-                  '60ed794a592d3c2db0d62492',
-                  '60ed794a592d3c2db0d624aa',
-                  '60ed794a592d3c2db0d62481',
-                  '60ed794a592d3c2db0d62486',
-                  '60ed794a592d3c2db0d62492',
-                  '60ed794a592d3c2db0d624aa'
-                ]
-              },
-              {
-                jobProfileJobCompetencySift: 'probable',
-                jobProfileJobCompetencyTag: [
-                  '60ed794a592d3c2db0d624cf',
-                  '60ed794a592d3c2db0d624a3',
-                  '60ed794a592d3c2db0d624cf',
-                  '60ed794a592d3c2db0d624a3',
-                  '60ed794a592d3c2db0d624b7'
-                ]
-              },
-              {
-                jobProfileJobCompetencySift: 'removable',
-                jobProfileJobCompetencyTag: []
-              }
-            ]
+            jobProfileJobCompetencyCharacteristic: []
           }
         });
         yield put({

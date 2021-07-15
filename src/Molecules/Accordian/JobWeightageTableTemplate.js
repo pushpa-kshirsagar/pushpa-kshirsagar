@@ -154,11 +154,7 @@ class JobWeightageTableTemplate extends Component {
                         event.stopPropagation();
                         this.setState({ ...this.state, isShowTooltipId: '' });
                       }}
-                      open={
-                        value.jobProfileJobCompetencyTag === this.state.isShowTooltipId
-                          ? true
-                          : false
-                      }
+                      open={value.id === this.state.isShowTooltipId ? true : false}
                       title={
                         <Typography
                           color="inherit"
@@ -185,7 +181,7 @@ class JobWeightageTableTemplate extends Component {
                             event.stopPropagation();
                             this.setState({
                               ...this.state,
-                              isShowTooltipId: value.jobProfileJobCompetencyTag
+                              isShowTooltipId: value.id
                             });
                           }}
                         >

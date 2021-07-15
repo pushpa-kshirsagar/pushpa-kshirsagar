@@ -548,7 +548,7 @@ class JobRangeTableTemplate extends Component {
                               // className={'contentDatadivGray'}
                               className={[
                                 'contentDatadivGray',
-                                value.jobProfileJobCompetencyTag
+                                value.id
                                   ? value.jobProfileJobCompetencyRangeMinimum == index + 1
                                     ? 'thirdGselected'
                                     : value.jobProfileJobCompetencyRangeMaximum == index + 1
@@ -560,7 +560,7 @@ class JobRangeTableTemplate extends Component {
                                   : null
                               ].join(' ')}
                               onClick={() => {
-                                saveselected(index + 1, value.jobProfileJobCompetencyTag, index + 1);
+                                saveselected(index + 1, value.id, index + 1);
                               }}
                               style={{
                                 cursor: 'pointer',

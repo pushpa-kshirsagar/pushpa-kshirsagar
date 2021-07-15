@@ -185,7 +185,7 @@ const PopUpJobProfileCreate = (props) => {
         temp = obj.jobCompetency.filter(function (ob) {
           let tt = [];
           if (jobCompetancyCore.includes(ob.id)) {
-            tt.push({ ...ob, jobProfileJobCompetencyTag: ob.id });
+            tt.push(ob);
           }
           return tt;
         });
@@ -204,10 +204,7 @@ const PopUpJobProfileCreate = (props) => {
     // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCORECOMPEMSG' } });
   };
   useEffect(() => {
-    if (
-      jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length > 0 &&
-      reviewMode !== 'revise'
-    ) {
+    if (jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length > 0) {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPSIFTLIST0' } });
     }
   }, [jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj]);
@@ -723,16 +720,13 @@ const PopUpJobProfileCreate = (props) => {
                   isChecked={
                     jobProfileSifted
                       .map((ob) => {
-                        if (
-                          ob.jobProfileJobCompetencyTag.includes(value.jobProfileJobCompetencyTag)
-                        )
-                          return ob.jobProfileJobCompetencySift;
+                        if (ob.jobProfileJobCompetencyTag.includes(value.id)) return ob.jobProfileJobCompetencySift;
                       })
                       .filter((notUndefined) => notUndefined !== undefined)[0]
                   }
                   onClickNext={updateCompetencySiftList}
                   isJobProfileList={true}
-                  id={value.jobProfileJobCompetencyTag}
+                  id={value.id}
                   textOne={value.jobProfilerFrameworkSecondary}
                   textTwo={value.jobProfilerFrameworkSecondaryDescriptionPrimary}
                   valueArr={['indispensable', 'desirable', 'probable', 'removable']}
@@ -799,7 +793,7 @@ const PopUpJobProfileCreate = (props) => {
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        mode={'core'}
       />
       <PopUpMessageGeneric
         isActive={isPopUpValue === 'POPUPRANGEMSG'}

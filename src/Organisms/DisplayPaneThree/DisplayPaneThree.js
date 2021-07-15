@@ -1427,6 +1427,15 @@ export const DisplayPaneThree = () => {
         informationFramework
       } = jobProfileInformation;
       const { id } = responseObject;
+      //jobProfileJobCompetencyTag
+      let rangeArr = informationFramework?.jobProfileJobCompetencyRange || [];
+      rangeArr.forEach((element) => {
+        element.jobProfileJobCompetencyTag = element.id;
+      });
+      let weightageArr = informationFramework?.jobProfileJobCompetencyWeightage || [];
+      weightageArr.forEach((element) => {
+        element.jobProfileJobCompetencyTag = element.id;
+      });
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
@@ -1444,9 +1453,8 @@ export const DisplayPaneThree = () => {
               informationFramework?.jobProfileJobCompetencyShortlisted || [],
             jobProfileJobCompetencySifted:
               informationFramework?.jobProfileJobCompetencySifted || [],
-            jobProfileJobCompetencyRange: informationFramework?.jobProfileJobCompetencyRange || [],
-            jobProfileJobCompetencyWeightage:
-              informationFramework?.jobProfileJobCompetencyWeightage || [],
+            jobProfileJobCompetencyRange: rangeArr,
+            jobProfileJobCompetencyWeightage: weightageArr,
             jobProfileJobCompetencyCharacteristic: []
           }
         }
