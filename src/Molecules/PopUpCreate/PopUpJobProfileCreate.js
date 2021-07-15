@@ -207,7 +207,10 @@ const PopUpJobProfileCreate = (props) => {
   };
   useEffect(() => {
     console.log('useeffect');
-    if (jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length > 0) {
+    if (
+      jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length > 0 &&
+      reviewMode !== 'revise'
+    ) {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPSIFTLIST0' } });
     }
   }, [jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj]);
@@ -298,6 +301,10 @@ const PopUpJobProfileCreate = (props) => {
     //   payload: true
     // });
   };
+  console.log(
+    'lenght',
+    jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length
+  );
   return (
     <div>
       <PopUpTextField
@@ -701,37 +708,42 @@ const PopUpJobProfileCreate = (props) => {
         textOneFour={''}
         mode={'next'}
       />
-      {jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj.map(
-        (value, index) => {
-          return (
-            <PopUpCheckbox
-              isActive={isPopUpValue === `POPUPSIFTLIST${index}`}
-              headerPanelColour={'genericOne'}
-              headerOne={headerOne}
-              headerOneBadgeOne={'information'}
-              inputHeader={'job competency'}
-              inputHeaderBadge={'sift list'}
-              infoMsg={''}
-              onClickNext={updateCompetencySiftList}
-              isJobProfileList={true}
-              id={value.id}
-              textOne={value.jobProfilerFrameworkSecondary}
-              textTwo={value.jobProfilerFrameworkSecondaryDescriptionPrimary}
-              valueArr={['indispensable', 'desirable', 'probable', 'removable']}
-              nextPopUpValue={
-                index <
-                jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length - 1
-                  ? `POPUPSIFTLIST${index + 1}`
-                  : jobProfileInformation.informationFramework.jobProfileJobCompetencySiftList
-                      .length > 8
-                  ? 'POPUPCORECOMPEMSG'
-                  : 'SIFTLISTMSG'
-              }
-              // nextPopUpValue={'POPUPCORECOMPEMSG'}
-            />
-          );
-        }
-      )}
+
+      {jobProfilerReviewList
+        ? jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj.map(
+            (value, index) => {
+              return (
+                <PopUpCheckbox
+                  isActive={isPopUpValue === `POPUPSIFTLIST${index}`}
+                  headerPanelColour={'genericOne'}
+                  headerOne={headerOne}
+                  headerOneBadgeOne={'information'}
+                  inputHeader={'job competency'}
+                  inputHeaderBadge={'sift list'}
+                  infoMsg={''}
+                  onClickNext={updateCompetencySiftList}
+                  isJobProfileList={true}
+                  id={value.jobProfileJobCompetencyTag}
+                  textOne={value.jobProfilerFrameworkSecondary}
+                  textTwo={value.jobProfilerFrameworkSecondaryDescriptionPrimary}
+                  valueArr={['indispensable', 'desirable', 'probable', 'removable']}
+                  nextPopUpValue={
+                    index <
+                    jobProfileInformation?.informationFramework?.jobProfileJobCompetencyCoreObj
+                      .length -
+                      1
+                      ? `POPUPSIFTLIST${index + 1}`
+                      : jobProfileInformation?.informationFramework?.jobProfileJobCompetencySiftList
+                          .length > 8
+                      ? 'POPUPCORECOMPEMSG'
+                      : 'SIFTLISTMSG'
+                  }
+                  // nextPopUpValue={'POPUPCORECOMPEMSG'}
+                />
+              );
+            }
+          )
+        : null}
 
       <PopUpMessageGeneric
         isActive={isPopUpValue === 'POPUPCORECOMPEMSG'}

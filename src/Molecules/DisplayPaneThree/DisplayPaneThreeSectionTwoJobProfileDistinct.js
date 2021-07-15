@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
-import { GET_JOBDOMAIN_REVIEW_LIST_SAGA } from '../../actionType';
+import { GET_JOBDOMAIN_REVIEW_LIST_SAGA, SET_NEXT_POPUP, SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   const { headerOneBadgeTwo, reviewMode, isRangeSelected = false, responseObject } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+
+  const { selectedAssociateInfo, jobProfilerReviewList } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   let selectedList = isRangeSelected ? 'framework' : '';
   const [listExpand, setListExpand] = useState(selectedList);
   const dispatch = useDispatch();
@@ -132,56 +135,49 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'job competencies' && selectedBadgeName === 'core') {
-      let requestObj = {
-        assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId:
-          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
-      };
-      // dispatch({
-      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-      //   payload: { stateName: 'jobProfileDomainReviewList', value: [] }
-      // });
-      // dispatch({
-      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-      //   payload: { stateName: 'jobProfileFunctionReviewList', value: [] }
-      // });
-      // dispatch({
-      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-      //   payload: { stateName: 'jobProfileRoleReviewList', value: [] }
-      // });
-      dispatch({
-        type: GET_JOBDOMAIN_REVIEW_LIST_SAGA,
-        payload: {
-          request: requestObj,
-          BadgeOne: '',
-          BadgeTwo: '',
-          BadgeThree: '',
-          isMiddlePaneList: false
-        }
-      });
-      //   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-      //   dispatch({
-      //     type: GET_JOBFUNCTION_REVIEW_LIST_SAGA,
-      //     payload: {
-      //       request: requestObj,
-      //       BadgeOne: '',
-      //       BadgeTwo: '',
-      //       BadgeThree: '',
-      //       isMiddlePaneList: false
-      //     }
-      //   });
-      //   dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-      //   dispatch({
-      //     type: GET_JOBROLE_REVIEW_LIST_SAGA,
-      //     payload: {
-      //       request: requestObj,
-      //       BadgeOne: '',
-      //       BadgeTwo: '',
-      //       BadgeThree: '',
-      //       isMiddlePaneList: false
-      //     }
-      //   });
+    console.log(labelName, selectedBadgeName);
+    if (labelName !== '' && selectedBadgeName !== '') {
+      if (jobProfilerReviewList === null) {
+        let requestObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+        };
+        dispatch({
+          type: GET_JOBDOMAIN_REVIEW_LIST_SAGA,
+          payload: {
+            request: requestObj,
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
+      if (labelName === 'job competencies' && selectedBadgeName === 'core') {
+      }
+
+      if (labelName === 'job' && selectedBadgeName === 'domain') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: '' } });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPDOMAINMSG', popupMode: 'JOBCREATE' }
+        });
+      }
+      if (labelName === 'job' && selectedBadgeName === 'function') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: '' } });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPFUNCTIONMSG', popupMode: 'JOBCREATE' }
+        });
+      }
+      if (labelName === 'job' && selectedBadgeName === 'role') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: '' } });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPROLEMSG', popupMode: 'JOBCREATE' }
+        });
+      }
     }
   };
 
