@@ -201,13 +201,13 @@ const PopUpJobProfileCreate = (props) => {
       type: SET_JOB_SIFTLIST_STATE,
       payload: obj
     });
-    // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCORECOMPEMSG' } });
+    dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPSIFTLIST0' } });
   };
-  useEffect(() => {
-    if (jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length > 0) {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPSIFTLIST0' } });
-    }
-  }, [jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj]);
+  // useEffect(() => {
+  //   if (jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length > 0) {
+  //     dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPSIFTLIST0' } });
+  //   }
+  // }, [jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj]);
   const updateCompetencySiftList = (id, key) => {
     let coreObj = jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj;
     let siftList = jobProfileInformation.informationFramework.jobProfileJobCompetencySifted;

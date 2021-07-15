@@ -235,7 +235,7 @@ function* workerReviewInfoJobProfileSaga(data) {
         });
         const tempJobDomainArray = informationFramework?.jobProfileJobDomain || [];
         const jobDomainIdList = tempJobDomainArray.map((ob) => {
-          return ob.isMiddlePaneList;
+          return ob.id;
         });
         const tempJobFunctionArray = informationFramework?.jobProfileJobFunction || [];
         const jobFunctionIdList = tempJobFunctionArray.map((ob) => {
@@ -243,6 +243,11 @@ function* workerReviewInfoJobProfileSaga(data) {
         });
         const tempJobRoleArray = informationFramework?.jobProfileJobRole || [];
         const jobRoleIdList = tempJobRoleArray.map((ob) => {
+          return ob.id;
+        });
+        const tempJobShortListArray =
+          informationFramework?.jobProfileJobCompetencyShortlisted || [];
+        const jobShortListIdList = tempJobShortListArray.map((ob) => {
           return ob.id;
         });
         yield put({
@@ -254,8 +259,7 @@ function* workerReviewInfoJobProfileSaga(data) {
             jobProfileJobCompetencyCoreObj: informationFramework?.jobProfileJobCompetencyCore || [],
             jobProfileJobCompetencyCore: coreIdList || [],
             jobProfileJobCompetencySiftList: [],
-            jobProfileJobCompetencyShortlisted:
-              informationFramework?.jobProfileJobCompetencyShortlisted || [],
+            jobProfileJobCompetencyShortlisted: jobShortListIdList || [],
             jobProfileJobCompetencySifted:
               informationFramework?.jobProfileJobCompetencySifted || [],
             jobProfileJobCompetencyRange: informationFramework?.jobProfileJobCompetencyRange || [],
