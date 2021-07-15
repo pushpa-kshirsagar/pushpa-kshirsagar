@@ -15,7 +15,8 @@ import {
   SET_ASSIGNMENT_RELATED_LIST,
   SET_ASSIGNMENT_RELATED_REVIEW_LIST,
   RESET_ASSIGNMENT_REVIEW_LIST_OBJECT,
-  SET_WEIGHTAGE_SELECTED
+  SET_WEIGHTAGE_SELECTED,
+  SET_RANGE_SELECTED
 } from '../actionType';
 
 const initialState = {
@@ -48,6 +49,7 @@ const initialState = {
   assignmentJobProfileList: [],
   assignmentRelatedReviewListPaneThree: {},
   isWeightageSelected: false,
+  isRangeSelected: false,
   selectedModule: '',
   statusPopUpValue: ''
 };
@@ -162,6 +164,11 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
       return {
         ...istate,
         isWeightageSelected: action.payload
+      };
+    case SET_RANGE_SELECTED:
+      return {
+        ...istate,
+        isRangeSelected: action.payload
       };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;

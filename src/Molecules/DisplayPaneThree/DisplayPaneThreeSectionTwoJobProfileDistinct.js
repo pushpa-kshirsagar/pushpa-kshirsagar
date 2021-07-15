@@ -8,9 +8,10 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { GET_JOBDOMAIN_REVIEW_LIST_SAGA } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
-  const [listExpand, setListExpand] = useState('');
-  const { headerOneBadgeTwo, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { headerOneBadgeTwo, reviewMode, isRangeSelected = false } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  let selectedList = isRangeSelected ? 'framework' : '';
+  const [listExpand, setListExpand] = useState(selectedList);
   const dispatch = useDispatch();
 
   const frameworkAll = [

@@ -19,7 +19,8 @@ import {
   SET_JOB_SIFTLIST_STATE,
   SET_WEIGHTAGE_SELECTED,
   SET_JOB_COMPETENCY_RANGE_LIST,
-  SET_JOB_COMPETENCY_WEIGHTAGE_LIST
+  SET_JOB_COMPETENCY_WEIGHTAGE_LIST,
+  SET_RANGE_SELECTED
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
@@ -289,9 +290,13 @@ const PopUpJobProfileCreate = (props) => {
       payload: 'displayPaneThree'
     });
     dispatch({
-      type: SET_WEIGHTAGE_SELECTED,
+      type: SET_RANGE_SELECTED,
       payload: true
     });
+    // dispatch({
+    //   type: SET_WEIGHTAGE_SELECTED,
+    //   payload: true
+    // });
   };
   return (
     <div>

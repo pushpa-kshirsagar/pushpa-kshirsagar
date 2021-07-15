@@ -8,7 +8,9 @@ import {
   SET_JOB_DYNAMIC_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_JOBPROFILE_REVIEW_LIST_SAGA
+  GET_JOBPROFILE_REVIEW_LIST_SAGA,
+  SET_JOB_SIFTLIST_STATE,
+  SET_RANGE_SELECTED
 } from '../../actionType';
 import { JOB_PROFILE_REVIEW_INFO_URL, JOB_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -46,7 +48,11 @@ function* workerReviewInfoJobProfileSaga(data) {
         }
       });
       if (isReviseMode) {
-        const { informationBasic, informationAllocation } = userResponse.responseObject[0];
+        const {
+          informationBasic,
+          informationAllocation,
+          informationFramework
+        } = userResponse.responseObject[0];
         yield put({
           type: SET_JOB_REDUCER_STATE,
           payload: informationBasic
@@ -219,7 +225,27 @@ function* workerReviewInfoJobProfileSaga(data) {
             }
           });
         }
-        
+        yield put({
+          type: SET_JOB_SIFTLIST_STATE,
+          payload: {
+            jobProfileJobDomain: informationFramework?.jobProfileJobDomain || [],
+            jobProfileJobFunction: informationFramework?.jobProfileJobFunction || [],
+            jobProfileJobRole: informationFramework?.jobProfileJobRole || [],
+            jobProfileJobCompetencyCore: informationFramework?.jobProfileJobCompetencyCore || [],
+            jobProfileJobCompetencyShortlisted:
+              informationFramework?.jobProfileJobCompetencyShortlisted || [],
+            jobProfileJobCompetencySifted:
+              informationFramework?.jobProfileJobCompetencySifted || [],
+            jobProfileJobCompetencyRange: informationFramework?.jobProfileJobCompetencyRange || [],
+            jobProfileJobCompetencyWeightage:
+              informationFramework?.jobProfileJobCompetencyWeightage || [],
+            jobProfileJobCompetencyCharacteristic: []
+          }
+        });
+        yield put({
+          type: SET_RANGE_SELECTED,
+          payload: false
+        });
       }
     }
     console.log('loading end');
@@ -270,17 +296,23 @@ function* workerReviseInfoJobProfileSaga(data) {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }
       });
+      if (createMode === '') {
+        yield put({
+          type: GET_JOBPROFILE_REVIEW_LIST_SAGA,
+          payload: {
+            HeaderOne: 'job profiles',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
       yield put({
-        type: GET_JOBPROFILE_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: 'job profiles',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
+        type: SET_RANGE_SELECTED,
+        payload: false
       });
     } else {
       console.log('loading end');

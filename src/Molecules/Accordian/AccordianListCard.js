@@ -25,6 +25,7 @@ const AccordianListCard = (props) => {
     responseObject,
     assignmentRelatedReviewListPaneThree,
     isWeightageSelected = false,
+    isRangeSelected = false,
     reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
@@ -49,6 +50,9 @@ const AccordianListCard = (props) => {
     if (isWeightageSelected && labelTextOneOne === 'culture dimensions') {
       setSelectedBadge(labelTextOneOneBadges[1]);
       setIsListSelectExpanded(true);
+    } else if (isRangeSelected && labelTextOneOne === 'job competencies') {
+      setSelectedBadge(labelTextOneOneBadges[1]);
+      setIsListSelectExpanded(true);
     } else {
       setIsListSelectExpanded(false);
     }
@@ -64,6 +68,9 @@ const AccordianListCard = (props) => {
       setSelectedBadge('');
     }
     if (isWeightageSelected && labelTextOneOne === 'culture dimensions') {
+      setSelectedBadge(labelTextOneOneBadges[1]);
+      setIsListSelectExpanded(true);
+    } else if (isRangeSelected && labelTextOneOne === 'job competencies') {
       setSelectedBadge(labelTextOneOneBadges[1]);
       setIsListSelectExpanded(true);
     } else {
