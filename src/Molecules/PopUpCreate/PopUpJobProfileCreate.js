@@ -78,7 +78,7 @@ const PopUpJobProfileCreate = (props) => {
     dispatch({ type: CREATE_JOB_SAGA, payload: reqBody });
   };
   useEffect(() => {
-    if (responseObject) {
+    if (responseObject && reviewMode !== 'revise') {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCONTINUE' } });
     }
   }, [responseObject]);
@@ -126,7 +126,6 @@ const PopUpJobProfileCreate = (props) => {
     });
   };
   console.log('jobProfileInformation', jobProfileInformation);
-  // console.log('jobProfilerReviewList', jobProfilerReviewList);
   let selectedPrimaryGroup =
     jobProfileInformation?.informationAllocation?.jobProfileGroup?.jobProfileGroupPrimary || [];
   let selectedSecondaryGroup =
@@ -180,7 +179,6 @@ const PopUpJobProfileCreate = (props) => {
   const setCompetancyCoreStateReducer = () => {
     let jobCompetancyCore =
       jobProfileInformation.informationFramework.jobProfileJobCompetencyShortlisted;
-    console.log('jobCompetancyCore', jobCompetancyCore);
     let arrr = jobProfilerReviewList.jobCompetency
       .map((obj) => {
         let temp = '';
@@ -206,7 +204,6 @@ const PopUpJobProfileCreate = (props) => {
     // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCORECOMPEMSG' } });
   };
   useEffect(() => {
-    console.log('useeffect');
     if (
       jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length > 0 &&
       reviewMode !== 'revise'
@@ -215,7 +212,7 @@ const PopUpJobProfileCreate = (props) => {
     }
   }, [jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj]);
   const updateCompetencySiftList = (id, key) => {
-    console.log(id, key);
+    let coreObj = jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj;
     let siftList = jobProfileInformation.informationFramework.jobProfileJobCompetencySifted;
     let siftListArr = jobProfileInformation.informationFramework.jobProfileJobCompetencySiftList;
     if (key) {
@@ -230,14 +227,18 @@ const PopUpJobProfileCreate = (props) => {
           return ob;
         }
       });
-      console.log('AFTER FILTER', competenciesArray);
-      // const ob = {
-      //   jobProfileJobCompetencySift: key,
-      //   jobProfileJobCompetencyTag: [...temp, id]
-      // };
-      // siftList[key].push(id);
+      const coreobject = coreObj.map((ob) => {
+        if (ob.id === key) {
+          let newTemp = {
+            ...ob,
+            jobProfileJobCompetencysifted: [...ob.jobProfileJobCompetencyTag, id]
+          };
+          return newTemp;
+        } else {
+          return ob;
+        }
+      });
       siftListArr.push(id);
-      console.log(siftList);
       let obj = {
         ...jobProfileInformation.informationFramework,
         jobProfileJobCompetencySifted: competenciesArray,
@@ -301,10 +302,8 @@ const PopUpJobProfileCreate = (props) => {
     //   payload: true
     // });
   };
-  console.log(
-    'lenght',
-    jobProfileInformation.informationFramework.jobProfileJobCompetencyCoreObj.length
-  );
+  const jobProfileSifted = jobProfileInformation.informationFramework.jobProfileJobCompetencySifted;
+
   return (
     <div>
       <PopUpTextField
@@ -721,6 +720,16 @@ const PopUpJobProfileCreate = (props) => {
                   inputHeader={'job competency'}
                   inputHeaderBadge={'sift list'}
                   infoMsg={''}
+                  isChecked={
+                    jobProfileSifted
+                      .map((ob) => {
+                        if (
+                          ob.jobProfileJobCompetencyTag.includes(value.jobProfileJobCompetencyTag)
+                        )
+                          return ob.jobProfileJobCompetencySift;
+                      })
+                      .filter((notUndefined) => notUndefined !== undefined)[0]
+                  }
                   onClickNext={updateCompetencySiftList}
                   isJobProfileList={true}
                   id={value.jobProfileJobCompetencyTag}

@@ -51,7 +51,7 @@ const AccordianListCard = (props) => {
       setSelectedBadge(labelTextOneOneBadges[1]);
       setIsListSelectExpanded(true);
     } else if (isRangeSelected && labelTextOneOne === 'job competencies') {
-      setSelectedBadge(labelTextOneOneBadges[1]);
+      setSelectedBadge(labelTextOneOneBadges[3]);
       setIsListSelectExpanded(true);
     } else {
       setIsListSelectExpanded(false);
