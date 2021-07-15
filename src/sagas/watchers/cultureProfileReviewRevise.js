@@ -303,18 +303,23 @@ function* workerReviseInfoCultureProfileSaga(data) {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }
       });
-      yield put({
-        type: GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: 'culture profiles',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
-      });
+      if (createMode === ''){
+        yield put({
+          type: GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
+          payload: {
+            HeaderOne: 'culture profiles',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      } else {
+        console.log('loading end');
+        yield put({ type: LOADER_STOP });
+      }
       yield put({
         type: SET_WEIGHTAGE_SELECTED,
         payload: false

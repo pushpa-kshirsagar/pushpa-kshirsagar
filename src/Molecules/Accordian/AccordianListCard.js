@@ -71,7 +71,7 @@ const AccordianListCard = (props) => {
       setSelectedBadge(labelTextOneOneBadges[1]);
       setIsListSelectExpanded(true);
     } else if (isRangeSelected && labelTextOneOne === 'job competencies') {
-      setSelectedBadge(labelTextOneOneBadges[1]);
+      setSelectedBadge(labelTextOneOneBadges[3]);
       setIsListSelectExpanded(true);
     } else {
       setIsListSelectExpanded(false);
@@ -91,7 +91,7 @@ const AccordianListCard = (props) => {
   if (tempJobListData.length > 0 && reviewMode === 'revise') {
     // tempListData = cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
   } else {
-    tempListData = responseObject?.informationFramework?.jobProfileJobCompetencyWeightage;
+    tempJobListData = responseObject?.informationFramework?.jobProfileJobCompetencyWeightage;
   }
 
   let tempRangeListData =

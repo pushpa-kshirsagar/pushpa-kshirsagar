@@ -117,7 +117,7 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
       let tempArr =
         istate?.jobProfileInformation?.informationFramework?.jobProfileJobCompetencyWeightage || [];
       tempArr.forEach((element) => {
-        if (element.jobProfileJobCompetencyTag === action.payload.jobProfileJobCompetencyTag) {
+        if (element.id === action.payload.id) {
           element.jobProfileJobCompetencyWeightage =
             action.payload.jobProfileJobCompetencyWeightage;
         }

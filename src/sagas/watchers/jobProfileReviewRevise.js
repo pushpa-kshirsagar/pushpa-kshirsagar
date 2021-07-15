@@ -47,6 +47,10 @@ function* workerReviewInfoJobProfileSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'responseObject', value: userResponse.responseObject[0] }
+      });
       if (isReviseMode) {
         const {
           informationBasic,
@@ -227,19 +231,19 @@ function* workerReviewInfoJobProfileSaga(data) {
         }
         const tempCoreArray = informationFramework?.jobProfileJobCompetencyCore || [];
         const coreIdList = tempCoreArray.map((ob) => {
-          return ob.jobProfileJobCompetencyTag;
+          return ob.id;
         });
         const tempJobDomainArray = informationFramework?.jobProfileJobDomain || [];
         const jobDomainIdList = tempJobDomainArray.map((ob) => {
-          return ob.jobProfileJobCompetencyTag;
+          return ob.isMiddlePaneList;
         });
         const tempJobFunctionArray = informationFramework?.jobProfileJobFunction || [];
         const jobFunctionIdList = tempJobFunctionArray.map((ob) => {
-          return ob.jobProfileJobCompetencyTag;
+          return ob.id;
         });
         const tempJobRoleArray = informationFramework?.jobProfileJobRole || [];
         const jobRoleIdList = tempJobRoleArray.map((ob) => {
-          return ob.jobProfileJobCompetencyTag;
+          return ob.id;
         });
         yield put({
           type: SET_JOB_SIFTLIST_STATE,
@@ -327,6 +331,9 @@ function* workerReviseInfoJobProfileSaga(data) {
             isMiddlePaneList: true
           }
         });
+      } else {
+        console.log('loading end');
+        yield put({ type: LOADER_STOP });
       }
       yield put({
         type: SET_RANGE_SELECTED,
