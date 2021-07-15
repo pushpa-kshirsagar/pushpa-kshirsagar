@@ -2217,13 +2217,15 @@ export const TERMINATE_PUPUP = [
 export const PUBLISH_PUPUP = [
   {
     data: 'publish',
-    dataValue: 'publish',
+    dataValue: 'publishApiCall',
+    dataKey: 'PUBLISHED',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'unpublish',
-    dataValue: 'unpublish',
+    dataValue: 'unpublishApiCall',
+    dataKey: 'UNPUBLISHED',
     optionClass: 'optionPrimary',
     disabled: false
   }

@@ -21,6 +21,7 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
+  SET_POPUP_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_RELATED_REQUEST_OBJECT,
   SET_REQUEST_OBJECT
@@ -37,7 +38,37 @@ import {
   getNodeJobProfileReqObj,
   getNodeJobProfileScanReqObj
 } from './GenericActions';
-
+const resetDataFunction = (dispatch) => {
+  dispatch({
+    type: SET_POPUP_SINGLE_STATE,
+    payload: { stateName: 'cardValue', value: 'NoCard' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'middlePaneSelectedValue', value: '' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedFlagedArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedFlagedArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedTagsArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedTagsArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'flagedValue', value: '' }
+  });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+};
 export const jobProfileCreatePopup = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,
@@ -51,6 +82,7 @@ export const jobProfileCreatePopup = (
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: { stateName: 'responseObject', value: '' }
   });
+  resetDataFunction(dispatch);
   dispatch({ type: CLEAR_JOB_REDUCER_STATE });
   dispatch({ type: LOADER_START });
   let requestObj = makeJobProfileGroupObj(selectedAssociateInfo, 'active', 0, -1);
@@ -122,6 +154,7 @@ export const getJobProfilesDistinctApiCall = (
     type: FILTERMODE,
     payload: { FilterMode: 'jobProfileDistinct' + secondaryOptionCheckValue }
   });
+  resetDataFunction(dispatch);
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
@@ -161,6 +194,7 @@ export const getJobProfileGroupApiCall = (
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  resetDataFunction(dispatch);
   dispatch({
     type: GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -197,6 +231,7 @@ export const getJobProfileTypeApiCall = (
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  resetDataFunction(dispatch);
   dispatch({
     type: GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
     payload: {
