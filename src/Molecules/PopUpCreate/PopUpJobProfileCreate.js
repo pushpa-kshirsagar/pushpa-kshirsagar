@@ -78,7 +78,7 @@ const PopUpJobProfileCreate = (props) => {
     dispatch({ type: CREATE_JOB_SAGA, payload: reqBody });
   };
   useEffect(() => {
-    if (responseObject) {
+    if (responseObject && reviewMode !== 'revise') {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCONTINUE' } });
     }
   }, [responseObject]);
@@ -721,6 +721,7 @@ const PopUpJobProfileCreate = (props) => {
                   inputHeader={'job competency'}
                   inputHeaderBadge={'sift list'}
                   infoMsg={''}
+                  isChecked={'indispensable'}
                   onClickNext={updateCompetencySiftList}
                   isJobProfileList={true}
                   id={value.jobProfileJobCompetencyTag}

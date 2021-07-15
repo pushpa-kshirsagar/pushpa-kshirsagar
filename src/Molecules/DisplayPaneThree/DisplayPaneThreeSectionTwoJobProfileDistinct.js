@@ -83,6 +83,14 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
           innerList: jobCoreList
         },
         {
+          labelTextOneOneBadge: 'short list',
+          innerList: []
+        },
+        {
+          labelTextOneOneBadge: 'sift list',
+          innerList: []
+        },
+        {
           labelTextOneOneBadge: 'range',
           innerList: []
         },
@@ -155,6 +163,24 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
         });
       }
       if (labelName === 'job competencies' && selectedBadgeName === 'core') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPCORECOMPEMSG', popupMode: 'JOBCREATE' }
+        });
+      }
+      if (labelName === 'job competencies' && selectedBadgeName === 'sift list') {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPSIFTMSG', popupMode: 'JOBCREATE' }
+        });
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPSIFTLIST0' } });
+      }
+      if (labelName === 'job competencies' && selectedBadgeName === 'short list') {
+        dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: '' } });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPCOMPEMSG', popupMode: 'JOBCREATE' }
+        });
       }
 
       if (labelName === 'job' && selectedBadgeName === 'domain') {

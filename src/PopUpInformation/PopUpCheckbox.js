@@ -35,7 +35,7 @@ const PopUpCheckbox = (props) => {
     textTwo = null,
     onClickNext = null,
     id,
-    isChecked = false,
+    isChecked = '',
     availableSignInCredentialList = []
   } = props;
 
