@@ -23,7 +23,8 @@ import {
   CULTURE_GROUP_REVISE_INFO_SAGA,
   CULTURE_TYPE_REVISE_INFO_SAGA,
   CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
-  GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA
+  GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
+  SET_POPUP_SINGLE_STATE
 } from '../actionType';
 import { CULTURE_PROFILE_REVISE_INFO_URL } from '../endpoints';
 import {
@@ -39,6 +40,37 @@ import {
   getNodeCultureProfileScanReqObj
 } from './GenericActions';
 
+const resetDataFunction = (dispatch) => {
+  dispatch({
+    type: SET_POPUP_SINGLE_STATE,
+    payload: { stateName: 'cardValue', value: 'NoCard' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'middlePaneSelectedValue', value: '' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedFlagedArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedFlagedArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedTagsArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedTagsArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'flagedValue', value: '' }
+  });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+};
 export const cultureProfileCreatePopup = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,
@@ -97,6 +129,7 @@ export const cultureProfileCreatePopup = (
       value: null
     }
   });
+  resetDataFunction(dispatch);
   dispatch({
     type: SET_POPUP_VALUE,
     payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CULTURECREATE' }
@@ -125,6 +158,7 @@ export const getCultureProfilesDistinctApiCall = (
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  resetDataFunction(dispatch);
   dispatch({
     type: GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
     payload: {
@@ -160,6 +194,7 @@ export const getCultureProfileGroupApiCall = (
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  resetDataFunction(dispatch);
   dispatch({
     type: GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -196,6 +231,7 @@ export const getCultureProfileTypeApiCall = (
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  resetDataFunction(dispatch);
   dispatch({
     type: GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
     payload: {
@@ -373,7 +409,8 @@ export const updateCultureProfileDistinctStatus = (
             ? 'ACTIVE'
             : reviseStatus
       }
-    }
+    },
+    createMode: ''
   };
   dispatch({ type: LOADER_START });
   dispatch({

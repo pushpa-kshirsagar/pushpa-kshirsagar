@@ -2089,6 +2089,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       dataVal === 'terminateApiCall' ||
       dataVal === 'unsuspendApiCall' ||
       dataVal === 'unarchiveApiCall' ||
+      dataVal === 'publishApiCall' ||
+      dataVal === 'unpublishApiCall' ||
       dataVal === 'archiveApiCall' ||
       dataVal === 'yesApiCall' ||
       dataVal === 'unterminateApiCall'

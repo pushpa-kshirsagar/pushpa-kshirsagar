@@ -257,49 +257,7 @@ function* workerReviewInfoJobProfileSaga(data) {
             jobProfileJobCompetencyRange: informationFramework?.jobProfileJobCompetencyRange || [],
             jobProfileJobCompetencyWeightage:
               informationFramework?.jobProfileJobCompetencyWeightage || [],
-            jobProfileJobCompetencyCharacteristic: [],
-            jobProfileJobCompetencySifted: [
-              {
-                jobProfileJobCompetencySift: 'indispensable',
-                jobProfileJobCompetencyTag: [
-                  '60ed794a592d3c2db0d624ca',
-                  '60ed794a592d3c2db0d6248d',
-                  '60ed794a592d3c2db0d6249e',
-                  '60ed794a592d3c2db0d624bf',
-                  '60ed794a592d3c2db0d624ca',
-                  '60ed794a592d3c2db0d6248d',
-                  '60ed794a592d3c2db0d6249e',
-                  '60ed794a592d3c2db0d624bf'
-                ]
-              },
-              {
-                jobProfileJobCompetencySift: 'desirable',
-                jobProfileJobCompetencyTag: [
-                  '60ed794a592d3c2db0d62481',
-                  '60ed794a592d3c2db0d62486',
-                  '60ed794a592d3c2db0d62492',
-                  '60ed794a592d3c2db0d624aa',
-                  '60ed794a592d3c2db0d62481',
-                  '60ed794a592d3c2db0d62486',
-                  '60ed794a592d3c2db0d62492',
-                  '60ed794a592d3c2db0d624aa'
-                ]
-              },
-              {
-                jobProfileJobCompetencySift: 'probable',
-                jobProfileJobCompetencyTag: [
-                  '60ed794a592d3c2db0d624cf',
-                  '60ed794a592d3c2db0d624a3',
-                  '60ed794a592d3c2db0d624cf',
-                  '60ed794a592d3c2db0d624a3',
-                  '60ed794a592d3c2db0d624b7'
-                ]
-              },
-              {
-                jobProfileJobCompetencySift: 'removable',
-                jobProfileJobCompetencyTag: []
-              }
-            ]
+            jobProfileJobCompetencyCharacteristic: []
           }
         });
         yield put({
