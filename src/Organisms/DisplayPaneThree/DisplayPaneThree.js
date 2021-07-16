@@ -57,7 +57,8 @@ import {
   GET_NODE_ASSOCIATE_REVIEW_LIST,
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
   GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
-  GET_JOB_NODE_JOB_REVIEW_LIST_SAGA
+  GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
+  LOADER_STOP
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -1430,10 +1431,30 @@ export const DisplayPaneThree = () => {
       //jobProfileJobCompetencyTag
       let rangeArr = informationFramework?.jobProfileJobCompetencyRange || [];
       rangeArr.forEach((element) => {
+        const rangeMax = element?.jobProfileJobCompetencyRangeMaximum || 0;
+        if (rangeMax < 1) {
+          setIsShowReviseIcon(true);
+          dispatch({ type: LOADER_STOP });
+          // dispatch({
+          //   type: SET_POPUP_VALUE,
+          //   payload: { isPopUpValue: 'POPUPRANGEMSG', popupMode: 'JOBCREATE' }
+          // });
+          return;
+        }
         element.jobProfileJobCompetencyTag = element.id;
       });
       let weightageArr = informationFramework?.jobProfileJobCompetencyWeightage || [];
       weightageArr.forEach((element) => {
+        const weightageCount = element?.jobProfileJobCompetencyWeightage || 0;
+        if (weightageCount < 1) {
+          setIsShowReviseIcon(true);
+          dispatch({ type: LOADER_STOP });
+          // dispatch({
+          //   type: SET_POPUP_VALUE,
+          //   payload: { isPopUpValue: 'POPUPWEIGHTEMSG', popupMode: 'JOBCREATE' }
+          // });
+          return;
+        }
         element.jobProfileJobCompetencyTag = element.id;
       });
       const reqBody = {
@@ -1478,12 +1499,26 @@ export const DisplayPaneThree = () => {
       const { id } = responseObject;
       let cultureDimensionCore = informationFramework?.cultureProfileCultureDimensionCoreObj || [];
       let tempArr = [];
+      let count = 0;
       cultureDimensionCore.forEach((element) => {
+        const num = element?.cultureProfileCultureDimensionWeightage || 0;
+        if (num < 1) {
+          count++;
+        }
         tempArr.push({
           cultureProfileCultureDimensionTag: element.cultureProfileCultureDimensionTag,
           cultureProfileCultureDimensionWeightage: element.cultureProfileCultureDimensionWeightage
         });
       });
+      if (count > 0) {
+        setIsShowReviseIcon(true);
+        dispatch({ type: LOADER_STOP });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPWEITAGENMSG', popupMode: 'CULTURECREATE' }
+        });
+        return;
+      }
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId: id,

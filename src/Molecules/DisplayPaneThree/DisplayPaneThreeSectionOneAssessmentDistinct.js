@@ -366,7 +366,44 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       isListCard: false
     }
   ];
-  const setupList = [];
+  const setupList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'share',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'associate',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    }
+  ];
   const engagementListKey = [
     {
       id: 'a2',
@@ -411,6 +448,42 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       isListCard: false
     }
   ];
+  const reviseSetup = (e, selectedBadgeArray) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log(labelName, '+++++', selectedBadgeArray, '=====', selectedBadgeName);
+    let badgeName = '';
+    if (selectedBadgeArray.length > 0) {
+      selectedBadgeArray.forEach((element) => {
+        badgeName = badgeName + element.labelTextTwoBadge;
+      });
+    }
+    console.log(badgeName);
+    if (labelName === 'share' && badgeName === 'associate' && selectedBadgeName === 'distinct') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ASSESSMENTINFODISTINCTBASICPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'share' && badgeName === 'associate' && selectedBadgeName === 'fee') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ASSOCIATECREATEFEEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'share' && badgeName === 'node' && selectedBadgeName === 'distinct') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ASSESSMENTINFODISTINCTBASICPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'share' && badgeName === 'node' && selectedBadgeName === 'fee') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ASSOCIATECREATEFEEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+  };
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -557,6 +630,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
               setListExpand={setListExpand}
               list={setupList}
               mode={reviewMode}
+              onClickRevise={reviseSetup}
             />
           </div>
         </>

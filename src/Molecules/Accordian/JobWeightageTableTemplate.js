@@ -176,7 +176,7 @@ class JobWeightageTableTemplate extends Component {
                         }}
                       >
                         <span
-                          style={{ cursor: 'pointer' }}
+                          style={{ cursor: 'pointer', fontSize: '1.2rem', margin: '1px 0 1px 0' }}
                           onClick={(event) => {
                             event.stopPropagation();
                             this.setState({
@@ -186,6 +186,9 @@ class JobWeightageTableTemplate extends Component {
                           }}
                         >
                           {value?.jobProfilerFrameworkSecondary || 'name'}
+                        </span>
+                        <span style={{ cursor: 'pointer', fontSize: '1rem' }}>
+                          {value?.jobProfilerFrameworkSecondaryDescriptionPrimary || 'description'}
                         </span>
                       </div>
                     </Tooltip>

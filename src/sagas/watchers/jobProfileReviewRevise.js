@@ -10,7 +10,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   GET_JOBPROFILE_REVIEW_LIST_SAGA,
   SET_JOB_SIFTLIST_STATE,
-  SET_RANGE_SELECTED
+  SET_RANGE_SELECTED,
+  JOB_ASSESSMENTS_REVIEWLIST_SAGA
 } from '../../actionType';
 import { JOB_PROFILE_REVIEW_INFO_URL, JOB_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -35,7 +36,7 @@ function* workerReviewInfoJobProfileSaga(data) {
     const userResponse = yield call(jobProfileReviewInfoApi, { data: data.payload.reqBody });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, jobProfileReqBody = null } = data.payload;
       console.log('jobProfile=======>', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -47,6 +48,19 @@ function* workerReviewInfoJobProfileSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
+      if (jobProfileReqBody !== null) {
+        yield put({
+          type: JOB_ASSESSMENTS_REVIEWLIST_SAGA,
+          payload: {
+            request: jobProfileReqBody,
+            HeaderOne: 'assessments',
+            BadgeOne: '',
+            BadgeTwo: '',
+            BadgeThree: '',
+            isMiddlePaneList: false
+          }
+        });
+      }
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'responseObject', value: userResponse.responseObject[0] }
@@ -273,9 +287,10 @@ function* workerReviewInfoJobProfileSaga(data) {
           payload: false
         });
       }
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     yield put({

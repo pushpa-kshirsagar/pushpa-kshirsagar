@@ -718,11 +718,49 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         typeOfMiddlePaneList === 'jobProfileGroupJobProfileReviewList' ||
         typeOfMiddlePaneList === 'jobProfileTypeJobProfileReviewList'
       ) {
+        let searchObj = {
+          condition: 'eq',
+          value: {
+            from: secondaryOptionCheckValue.toUpperCase()
+          }
+        };
+        if (secondaryOptionCheckValue === 'all') {
+          searchObj = {
+            condition: 'in',
+            value: {
+              in: ['SUSPENDED', 'TERMINATED', 'ACTIVE', 'ARCHIVED']
+            }
+          };
+        }
+        let jobProfileReqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+          filter: 'true',
+          numberPage: 0,
+          countPage: countPage,
+          searchCondition: 'AND',
+          jobProfileId: selectedTagValue,
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'informationEngagement.assessmentStatus',
+                  conditionValue: searchObj
+                }
+              ]
+            }
+          ]
+        };
+      
         dispatch({
           type: GET_JOB_PROFILE_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
             isReviseMode,
+            jobProfileReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:
@@ -755,11 +793,48 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         typeOfMiddlePaneList === 'cultureProfileGroupCultureProfileReviewList' ||
         typeOfMiddlePaneList === 'cultureProfileTypeCultureProfileReviewList'
       ) {
+        let searchObj = {
+          condition: 'eq',
+          value: {
+            from: secondaryOptionCheckValue.toUpperCase()
+          }
+        };
+        if (secondaryOptionCheckValue === 'all') {
+          searchObj = {
+            condition: 'in',
+            value: {
+              in: ['SUSPENDED', 'TERMINATED', 'ACTIVE', 'ARCHIVED']
+            }
+          };
+        }
+        const cultureAssessmentReqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+          filter: 'true',
+          numberPage: 0,
+          countPage: countPage,
+          searchCondition: 'AND',
+          cultureProfileId: selectedTagValue,
+          search: [
+            {
+              condition: 'and',
+              searchBy: [
+                {
+                  dataType: 'string',
+                  conditionColumn: 'informationEngagement.assessmentStatus',
+                  conditionValue: searchObj
+                }
+              ]
+            }
+          ]
+        };
         dispatch({
           type: GET_CULTURE_PROFILE_INFO_SAGA,
           payload: {
             secondaryOptionCheckValue,
             isReviseMode,
+            cultureAssessmentReqBody,
             reqBody: {
               assesseeId: selectedAssociateInfo?.assesseeId,
               associateId:

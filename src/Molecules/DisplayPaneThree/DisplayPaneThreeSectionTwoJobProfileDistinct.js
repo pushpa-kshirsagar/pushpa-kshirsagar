@@ -8,9 +8,13 @@ import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import { GET_JOBDOMAIN_REVIEW_LIST_SAGA, SET_NEXT_POPUP, SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
-  const { headerOneBadgeTwo, reviewMode, isRangeSelected = false, responseObject } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
-  );
+  const {
+    headerOneBadgeTwo,
+    reviewMode,
+    isRangeSelected = false,
+    responseObject,
+    relatedReviewListPaneThree
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
 
   const { selectedAssociateInfo, jobProfilerReviewList } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -68,7 +72,8 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
     });
   }
   let jobShortList = [];
-  const tempShortList = responseObject?.informationFramework?.jobProfileJobCompetencyShortlisted || [];
+  const tempShortList =
+    responseObject?.informationFramework?.jobProfileJobCompetencyShortlisted || [];
   if (tempShortList) {
     tempShortList.forEach((ob) => {
       jobShortList.push({
@@ -79,6 +84,17 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
       });
     });
   }
+  let assessmentList = relatedReviewListPaneThree?.assessment || [];
+  let assessmentArray = [];
+  assessmentList.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    assessmentArray.push({
+      id,
+      textOne: informationBasic?.assessmentName || '',
+      textTwo: informationBasic?.assessmentDescription || '',
+      status: ''
+    });
+  });
   const frameworkAll = [
     {
       id: 'JP-Assessment001',
@@ -88,7 +104,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: []
+          innerList: assessmentArray
         }
       ],
       innerAssociateList: [],
@@ -192,6 +208,9 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     let popupValue = '';
+    if (labelName === 'assessment'){
+      return;
+    }
     if (labelName !== '' && selectedBadgeName !== '') {
       popupValue = 'POPUPCORECOMPEMSG';
       if (labelName === 'job competencies' && selectedBadgeName === 'core') {

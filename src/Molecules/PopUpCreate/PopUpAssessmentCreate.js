@@ -13,10 +13,13 @@ import {
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_ASSESSMENT_FRAMEWORK_STATE,
   SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
-  SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE
+  SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
+  UPDATE_ASSOCIATE_BASIC_INFO,
+  UPDATE_ASSOCIATE_SETUP_INFO
 } from '../../actionType';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 
 const PopUpAssessmentCreate = (props) => {
   const { headerOne } = props;
@@ -356,6 +359,47 @@ const PopUpAssessmentCreate = (props) => {
           informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary || ''
         }
         actualLableValue={'assessmentCommuniqueSecondary'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ASSOCIATECREATEFEEPOPUP'}
+        label={'fee'}
+        headerPanelColour={'genericOne'}
+        inputHeader={'assessment'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={'create'}
+        type={'number'}
+        headerOne={'assessment'}
+        headerOneBadgeOne={'setup'}
+        isRequired={false}
+        actualLableValue={'assesseeCreateFee'}
+        basicInfo={{}}
+        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSMENTINFODISTINCTBASICPOPUP'}
+        tag={'assesseeCreateApproval'}
+        label={'information'}
+        labelBadgeOne={'basic'}
+        listSelect={[
+          { id: 'a', name: 'Unique Name & Description Not Rquired' },
+          { id: 'b', name: 'Unique Name + Description Required' },
+          { id: 'c', name: 'Unique Name Required' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessments'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={'information'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessment'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={{}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm

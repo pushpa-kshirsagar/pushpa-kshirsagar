@@ -56,7 +56,7 @@ const AccordianListCard = (props) => {
     } else {
       setIsListSelectExpanded(false);
     }
-  }, [responseObject]);
+  }, [responseObject, isWeightageSelected]);
 
   useEffect(() => {
     if (
@@ -76,7 +76,7 @@ const AccordianListCard = (props) => {
     } else {
       setIsListSelectExpanded(false);
     }
-  }, [assignmentRelatedReviewListPaneThree]);
+  }, [assignmentRelatedReviewListPaneThree, isWeightageSelected]);
   let tempListData =
     cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
 
@@ -325,7 +325,7 @@ const AccordianListCard = (props) => {
                       // culturedimensionselected={cultureProfilerItems}
                       culturetooltipstate=""
                       cultureprofilemode="review"
-                      listData={tempListData}
+                      listData={tempListData || []}
                       setWeightage={(ob) => {
                         if (reviewMode === 'revise') {
                           dispatch({ type: SET_WEIGHTAGE_CULTURE_PROFILE, payload: ob });
@@ -343,7 +343,7 @@ const AccordianListCard = (props) => {
                       // culturedimensionselected={cultureProfilerItems}
                       culturetooltipstate=""
                       cultureprofilemode="review"
-                      listData={tempJobListData}
+                      listData={tempJobListData || []}
                       setWeightage={(ob) => {
                         if (reviewMode === 'revise') {
                           dispatch({ type: SET_WEIGHTAGE_JOB_PROFILE, payload: ob });
@@ -354,7 +354,7 @@ const AccordianListCard = (props) => {
                 {selectedBadge.labelTextOneOneBadge === 'range' && (
                   <JobRangeTableTemplate
                     headerrowcount={4}
-                    title="percentile"
+                    title="range"
                     radiocount={10}
                     row1={['50 - 59', '60 - 69', '70 - 79', '80 - 89', '90 - 99']}
                     rangeheadcolumnhead2={{

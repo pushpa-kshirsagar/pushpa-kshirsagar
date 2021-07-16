@@ -4,6 +4,7 @@ import {
   CREATE_CULTURE_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
+  SET_CREATE_MODE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE
@@ -31,6 +32,11 @@ function* workerCreateCultureProfileSaga(data) {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'responseObject', value: response.responseObject[0] }
       });
+      yield put({ type: SET_CREATE_MODE, payload: 'cultureProfile' });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'CULTURECREATE' }
+      });
       // yield put({
       //   type: SET_DISPLAY_PANE_THREE_STATE,
       //   payload: {
@@ -48,7 +54,7 @@ function* workerCreateCultureProfileSaga(data) {
         payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
-    yield put({ type: POPUP_CLOSE });
+    // yield put({ type: POPUP_CLOSE });
     yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
