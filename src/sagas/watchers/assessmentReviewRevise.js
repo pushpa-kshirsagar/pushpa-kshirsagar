@@ -11,14 +11,19 @@ import {
   ASSESSMENT_REVIEW_DISTINCT_SAGA,
   SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
   SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
-  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+  ASSESSMENT_PUBLISH_SAGA
 } from '../../actionType';
-import { ASSESSMENT_REVIEW_INFO_URL, ASSESSMENT_REVISE_INFO_URL } from '../../endpoints';
+import {
+  ASSESSMENT_REVIEW_INFO_URL,
+  ASSESSMENT_REVISE_INFO_URL,
+  ASSESSMENT_PUBLISH_URL
+} from '../../endpoints';
 import Store from '../../store';
 
-const assessmentReviewInfoApi = async (requestObj) => {
+const assessmentInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSESSMENT_REVIEW_INFO_URL;
+  let URL = requestObj.URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -33,7 +38,10 @@ const assessmentReviewInfoApi = async (requestObj) => {
 
 function* workerReviewInfoAssessmentSaga(data) {
   try {
-    const userResponse = yield call(assessmentReviewInfoApi, { data: data.payload.reqBody });
+    const userResponse = yield call(assessmentInfoApi, {
+      data: data.payload.reqBody,
+      URL: ASSESSMENT_REVIEW_INFO_URL
+    });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       const { isReviseMode = false } = data.payload;
@@ -313,8 +321,54 @@ function* workerReviseInfoAssessmentSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerPublishAssessmentSaga(data) {
+  try {
+    const userResponse = yield call(assessmentInfoApi, {
+      data: data.payload.reqBody,
+      URL: ASSESSMENT_PUBLISH_URL
+    });
+    if (userResponse.responseCode === '000') {
+      const { createMode } = data.payload;
+      if (Store.getState().DisplayPaneTwoReducer.typeOfMiddlePaneList) {
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
+          payload: {
+            HeaderOne: 'assessments',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      } else {
+        yield put({ type: LOADER_STOP });
+      }
+    } else {
+      console.log('loading end');
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+      yield put({ type: LOADER_STOP });
+    }
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 
 export default function* watchReviewInfoAssessmentSaga() {
   yield takeLatest(GET_ASSESSMENT_INFO_SAGA, workerReviewInfoAssessmentSaga);
   yield takeLatest(ASSESSMENT_INFO_REVISE_SAGA, workerReviseInfoAssessmentSaga);
+  yield takeLatest(ASSESSMENT_PUBLISH_SAGA, workerPublishAssessmentSaga);
 }

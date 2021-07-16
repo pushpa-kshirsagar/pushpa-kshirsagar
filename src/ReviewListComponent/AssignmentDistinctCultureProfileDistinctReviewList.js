@@ -212,6 +212,7 @@ const AssignmentDistinctCultureProfileDistinctReviewList = (props) => {
           onClickIconOne={closeRelatedList}
           isAlliance
           relatedCardFixed={true}
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&

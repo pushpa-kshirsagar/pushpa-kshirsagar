@@ -23,7 +23,8 @@ import {
   ASSESSMENT_INFO_REVISE_SAGA,
   ASSESSMENT_GROUP_REVISE_INFO_SAGA,
   ASSESSMENT_TYPE_REVISE_INFO_SAGA,
-  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE
+  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+  ASSESSMENT_PUBLISH_SAGA
 } from '../actionType';
 import {
   getAssessmentGroupAssessmentReqObj,
@@ -383,32 +384,51 @@ export const updateAssessmentDistinctStatus = (
   dispatch,
   reviseStatus
 ) => {
-  let reqBody = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    assessment: {
-      id: assessmentId,
-      informationEngagement: {
-        assessmentStatus:
-          reviseStatus === 'UNSUSPENDED' ||
-          reviseStatus === 'UNTERMINATED' ||
-          reviseStatus === 'UNARCHIVED'
-            ? 'ACTIVE'
-            : reviseStatus
+  if (reviseStatus === 'PUBLISHED') {
+    let reqBody = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      assessmentId: assessmentId
+    };
+    dispatch({ type: LOADER_START });
+    dispatch({
+      type: ASSESSMENT_PUBLISH_SAGA,
+      payload: {
+        secondaryOptionCheckValue: '',
+        hideRightpane: true,
+        headerOne: '',
+        reqBody
       }
-    }
-  };
-  dispatch({ type: LOADER_START });
-  dispatch({
-    type: ASSESSMENT_INFO_REVISE_SAGA,
-    payload: {
-      secondaryOptionCheckValue: '',
-      hideRightpane: true,
-      headerOne: '',
-      reqBody
-    }
-  });
+    });
+  } else {
+    let reqBody = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      assessment: {
+        id: assessmentId,
+        informationEngagement: {
+          assessmentStatus:
+            reviseStatus === 'UNSUSPENDED' ||
+            reviseStatus === 'UNTERMINATED' ||
+            reviseStatus === 'UNARCHIVED'
+              ? 'ACTIVE'
+              : reviseStatus
+        }
+      }
+    };
+    dispatch({ type: LOADER_START });
+    dispatch({
+      type: ASSESSMENT_INFO_REVISE_SAGA,
+      payload: {
+        secondaryOptionCheckValue: '',
+        hideRightpane: true,
+        headerOne: '',
+        reqBody
+      }
+    });
+  }
 };
 export const updateAssessmentGroupStatus = (
   selectedAssociateInfo,
@@ -470,7 +490,7 @@ export const updateAssessmentTypeStatus = (
     type: ASSESSMENT_TYPE_REVISE_INFO_SAGA,
     payload: {
       secondaryOptionCheckValue: '',
-      assessmentTypeAssessmentReqBody:null,
+      assessmentTypeAssessmentReqBody: null,
       headerOne: '',
       reqBody
     }

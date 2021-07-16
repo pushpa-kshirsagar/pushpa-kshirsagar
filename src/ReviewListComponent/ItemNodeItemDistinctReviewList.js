@@ -224,7 +224,7 @@ const ItemNodeItemDistinctReviewList = (props) => {
           onClickIconOne={closeRelatedList}
           isAlliance
           relatedCardFixed={true}
-
+          className={'iguru-iconboxSVG'}
         />
       )}
       {listDistinctData &&

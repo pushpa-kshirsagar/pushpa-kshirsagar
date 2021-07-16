@@ -21,7 +21,8 @@ import {
   ASSIGNMENT_GROUP_REVISE_INFO_SAGA,
   ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
   GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
-  GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA
+  GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
+  ASSIGNMENT_PUBLISH_SAGA
 } from '../actionType';
 import {
   getAssignmentGroupAssignmentReqObj,
@@ -333,32 +334,51 @@ export const updateAssignmentDistinctStatus = (
   dispatch,
   reviseStatus
 ) => {
-  let reqBody = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    assignment: {
-      id: assignmentId,
-      informationEngagement: {
-        assignmentStatus:
-          reviseStatus === 'UNSUSPENDED' ||
-          reviseStatus === 'UNTERMINATED' ||
-          reviseStatus === 'UNARCHIVED'
-            ? 'ACTIVE'
-            : reviseStatus
+  if (reviseStatus === 'PUBLISHED') {
+    let reqBody = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      assignmentId: assignmentId
+    };
+    dispatch({ type: LOADER_START });
+    dispatch({
+      type: ASSIGNMENT_PUBLISH_SAGA,
+      payload: {
+        secondaryOptionCheckValue: '',
+        hideRightPane: true,
+        headerOne: '',
+        reqBody
       }
-    }
-  };
-  dispatch({ type: LOADER_START });
-  dispatch({
-    type: ASSIGNMENT_INFO_REVISE_SAGA,
-    payload: {
-      secondaryOptionCheckValue: '',
-      hideRightPane: true,
-      headerOne: '',
-      reqBody
-    }
-  });
+    });
+  } else {
+    let reqBody = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      assignment: {
+        id: assignmentId,
+        informationEngagement: {
+          assignmentStatus:
+            reviseStatus === 'UNSUSPENDED' ||
+            reviseStatus === 'UNTERMINATED' ||
+            reviseStatus === 'UNARCHIVED'
+              ? 'ACTIVE'
+              : reviseStatus
+        }
+      }
+    };
+    dispatch({ type: LOADER_START });
+    dispatch({
+      type: ASSIGNMENT_INFO_REVISE_SAGA,
+      payload: {
+        secondaryOptionCheckValue: '',
+        hideRightPane: true,
+        headerOne: '',
+        reqBody
+      }
+    });
+  }
 };
 export const updateAssignmentGroupStatus = (
   selectedAssociateInfo,

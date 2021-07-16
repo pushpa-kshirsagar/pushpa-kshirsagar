@@ -31,6 +31,7 @@ body {
   top: 0;
   z-index: 2;
   position: sticky;
+  padding: 2.5px;
 }
 .helperTextCore {
   height: 10px;
