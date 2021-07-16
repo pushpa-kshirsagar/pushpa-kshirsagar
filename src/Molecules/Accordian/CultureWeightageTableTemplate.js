@@ -274,7 +274,7 @@ class CultureWeightageTableTemplate extends Component {
                         }}
                       >
                         <span
-                          style={{ cursor: 'pointer' }}
+                          style={{ cursor: 'pointer', fontSize: '1.2rem', margin: '1px 0 1px 0' }}
                           onClick={(event) => {
                             event.stopPropagation();
                             this.setState({
@@ -284,6 +284,19 @@ class CultureWeightageTableTemplate extends Component {
                           }}
                         >
                           {value?.cultureProfilerFrameworkSecondary || 'name'}
+                        </span>
+                        <span
+                          style={{ cursor: 'pointer', fontSize: '1rem' }}
+                          onClick={(event) => {
+                            // event.stopPropagation();
+                            // this.setState({
+                            //   ...this.state,
+                            //   isShowTooltipId: value.cultureProfileCultureDimensionTag
+                            // });
+                          }}
+                        >
+                          {value?.cultureProfilerFrameworkSecondaryDescription
+                            ?.cultureProfilerFrameworkSecondaryDescriptionPrimary || 'description'}
                         </span>
                       </div>
                     </Tooltip>

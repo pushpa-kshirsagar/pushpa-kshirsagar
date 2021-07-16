@@ -10,7 +10,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
   SET_CULTURE_DIMENTION_STATE,
-  SET_WEIGHTAGE_SELECTED
+  SET_WEIGHTAGE_SELECTED,
+  CULTURE_ASSESSMENTS_REVIEWLIST_SAGA
 } from '../../actionType';
 import { CULTURE_PROFILE_REVIEW_INFO_URL, CULTURE_PROFILE_REVISE_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -35,7 +36,7 @@ function* workerReviewInfoCultureProfileSaga(data) {
     const userResponse = yield call(cultureProfileReviewInfoApi, { data: data.payload.reqBody });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
-      const { isReviseMode = false } = data.payload;
+      const { isReviseMode = false, cultureAssessmentReqBody } = data.payload;
       console.log('cultureProfile=======>', userResponse);
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -45,6 +46,17 @@ function* workerReviewInfoCultureProfileSaga(data) {
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
           responseObject: userResponse.responseObject[0],
           reviewMode: isReviseMode ? 'revise' : ''
+        }
+      });
+      yield put({
+        type: CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
+        payload: {
+          request: cultureAssessmentReqBody,
+          HeaderOne: 'assessments',
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
         }
       });
       yield put({
@@ -246,9 +258,10 @@ function* workerReviewInfoCultureProfileSaga(data) {
           payload: false
         });
       }
+    } else {
+      console.log('loading end');
+      yield put({ type: LOADER_STOP });
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
@@ -303,7 +316,7 @@ function* workerReviseInfoCultureProfileSaga(data) {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }
       });
-      if (createMode === ''){
+      if (createMode === '') {
         yield put({
           type: GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
           payload: {

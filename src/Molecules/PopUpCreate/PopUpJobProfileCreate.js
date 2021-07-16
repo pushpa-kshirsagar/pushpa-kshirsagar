@@ -30,7 +30,7 @@ const PopUpJobProfileCreate = (props) => {
   const { headerOne, reducerObeject, allocationObj } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { jobProfileInformation } = useSelector((state) => state.JobProfileCreateReducer);
-  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, headerOneBadgeTwo, createMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
     selectedAssociateInfo,
     coreNodeReviewListData,
@@ -79,7 +79,7 @@ const PopUpJobProfileCreate = (props) => {
   };
   useEffect(() => {
     if (responseObject && reviewMode !== 'revise') {
-      dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCONTINUE' } });
+      // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCONTINUE' } });
     }
   }, [responseObject]);
   const updateAllocationObj = (e, stateName, actualStateName) => {
@@ -152,10 +152,10 @@ const PopUpJobProfileCreate = (props) => {
       payload: {
         headerOne: 'job profile',
         headerOneBadgeOne: 'information',
-        headerOneBadgeTwo: selectedInformationAllorKey,
+        headerOneBadgeTwo: selectedInformationAllorKey || headerOneBadgeTwo,
         responseObject: responseObject,
         reviewMode: 'revise',
-        createMode: 'jobProfile'
+        createMode: createMode
       }
     });
   };
@@ -280,10 +280,10 @@ const PopUpJobProfileCreate = (props) => {
       payload: {
         headerOne: 'job profile',
         headerOneBadgeOne: 'information',
-        headerOneBadgeTwo: selectedInformationAllorKey,
+        headerOneBadgeTwo: selectedInformationAllorKey || headerOneBadgeTwo,
         responseObject: responseObject,
         reviewMode: 'revise',
-        createMode: 'jobProfile'
+        createMode: createMode
       }
     });
     dispatch({

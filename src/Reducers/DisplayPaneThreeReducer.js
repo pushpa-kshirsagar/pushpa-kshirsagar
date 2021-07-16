@@ -16,7 +16,8 @@ import {
   SET_ASSIGNMENT_RELATED_REVIEW_LIST,
   RESET_ASSIGNMENT_REVIEW_LIST_OBJECT,
   SET_WEIGHTAGE_SELECTED,
-  SET_RANGE_SELECTED
+  SET_RANGE_SELECTED,
+  SET_CREATE_MODE
 } from '../actionType';
 
 const initialState = {
@@ -91,6 +92,11 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
           ...istate.assesseeRoleAssessee,
           assesseeRoleAssesseeAllocate: action.payload
         }
+      };
+    case SET_CREATE_MODE:
+      return {
+        ...istate,
+        createMode: action.payload
       };
     case SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST:
       return {

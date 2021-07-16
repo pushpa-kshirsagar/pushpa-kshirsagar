@@ -366,7 +366,44 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       isListCard: false
     }
   ];
-  const setupList = [];
+  const setupList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'share',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'associate',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    }
+  ];
   const engagementListKey = [
     {
       id: 'a2',

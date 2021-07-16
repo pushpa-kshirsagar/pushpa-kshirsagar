@@ -4,8 +4,10 @@ import {
   CREATE_JOB_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
+  SET_CREATE_MODE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_NEXT_POPUP,
   SET_POPUP_VALUE
 } from '../../actionType';
 import { JOB_CREATE_URL } from '../../endpoints';
@@ -32,6 +34,8 @@ function* workerCreateJobProfileSaga(data) {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'responseObject', value: response.responseObject[0] }
       });
+      yield put({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'POPUPCONTINUE' } });
+      yield put({ type: SET_CREATE_MODE, payload: 'jobProfile' });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

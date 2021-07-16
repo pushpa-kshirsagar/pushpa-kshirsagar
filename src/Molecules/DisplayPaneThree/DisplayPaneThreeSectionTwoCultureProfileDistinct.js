@@ -18,14 +18,19 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
     headerOneBadgeTwo,
     reviewMode,
     isWeightageSelected = false,
-    responseObject
+    responseObject,
+    relatedReviewListPaneThree = []
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   let selectedList = isWeightageSelected ? 'framework' : '';
   const [listExpand, setListExpand] = useState(selectedList);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
+
   useEffect(() => {
+    if (isWeightageSelected) {
+      setListExpand('framework');
+    }
     // {
     //   "cultureDimensionTag": "",
     //   "weightage": 0
@@ -50,7 +55,7 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
     //     cultureProfileCultureDimensionWeightage: tempList
     //   }
     // });
-  }, [responseObject]);
+  }, [responseObject, isWeightageSelected]);
 
   const cultureProfilerItems = [
     {
@@ -155,6 +160,18 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
     }
   ];
 
+  let assessmentList = relatedReviewListPaneThree?.assessment || [];
+  let assessmentArray = [];
+  assessmentList.forEach((ob) => {
+    const { id, informationBasic } = ob;
+    assessmentArray.push({
+      id,
+      textOne: informationBasic?.assessmentName || '',
+      textTwo: informationBasic?.assessmentDescription || '',
+      status: ''
+    });
+  });
+
   let cultureCoreList = [];
   const tempCoreList =
     responseObject?.informationFramework?.cultureProfileCultureDimensionWeightage || [];
@@ -178,7 +195,7 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          innerList: []
+          innerList: assessmentArray
         }
       ],
       innerAssociateList: [],

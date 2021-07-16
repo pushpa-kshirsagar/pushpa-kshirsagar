@@ -17,7 +17,8 @@ import {
   GET_CULTURE_DIAMENTION_SAGA,
   SET_CULTURE_DIMENTION_STATE,
   SET_WEIGHTAGE_SELECTED,
-  SET_MOBILE_PANE_STATE
+  SET_MOBILE_PANE_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
@@ -26,7 +27,7 @@ const PopUpCultureProfileCreate = (props) => {
   const { headerOne, reducerObeject, allocationObj } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
-  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, headerOneBadgeTwo, createMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
     selectedAssociateInfo,
     coreNodeReviewListData,
@@ -52,10 +53,10 @@ const PopUpCultureProfileCreate = (props) => {
   useEffect(() => {
     console.log('responseObject', responseObject);
     if (responseObject) {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'CULTURECREATE' }
-      });
+      // dispatch({
+      //   type: SET_POPUP_VALUE,
+      //   payload: { isPopUpValue: 'POPUPCONTINUE', popupMode: 'CULTURECREATE' }
+      // });
     }
   }, [responseObject]);
   const onClickYes = () => {
@@ -120,12 +121,16 @@ const PopUpCultureProfileCreate = (props) => {
       payload: {
         headerOne: 'culture profile',
         headerOneBadgeOne: 'information',
-        headerOneBadgeTwo: selectedInformationAllorKey,
+        headerOneBadgeTwo: selectedInformationAllorKey || headerOneBadgeTwo,
         responseObject: responseObject,
         reviewMode: 'revise',
-        createMode: 'cultureProfile'
+        createMode: createMode
       }
     });
+    // dispatch({
+    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+    //   payload: { stateName: 'responseObject', value: null }
+    // });
     dispatch({
       type: SET_MOBILE_PANE_STATE,
       payload: 'displayPaneThree'
@@ -153,16 +158,20 @@ const PopUpCultureProfileCreate = (props) => {
       payload: {
         headerOne: 'culture profile',
         headerOneBadgeOne: 'information',
-        headerOneBadgeTwo: selectedInformationAllorKey,
+        headerOneBadgeTwo: selectedInformationAllorKey || headerOneBadgeTwo,
         responseObject: responseObject,
         reviewMode: 'revise',
-        createMode: 'cultureProfile'
+        createMode: createMode
       }
     });
     dispatch({
       type: SET_MOBILE_PANE_STATE,
       payload: 'displayPaneThree'
     });
+    // dispatch({
+    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+    //   payload: { stateName: 'responseObject', value: null }
+    // });
     dispatch({
       type: SET_WEIGHTAGE_SELECTED,
       payload: true

@@ -535,7 +535,14 @@ class JobRangeTableTemplate extends Component {
                           // });
                         }}
                       >
-                        <span>{value.jobProfilerFrameworkSecondary}</span>
+                        <span
+                          style={{ cursor: 'pointer', fontSize: '1.2rem', margin: '1px 0 1px 0' }}
+                        >
+                          {value.jobProfilerFrameworkSecondary}
+                        </span>
+                        <span style={{ cursor: 'pointer', fontSize: '1rem' }}>
+                          {value?.jobProfilerFrameworkSecondaryDescriptionPrimary || 'description'}
+                        </span>
                       </div>
                     </Tooltip>
                   </ClickAwayListener>
