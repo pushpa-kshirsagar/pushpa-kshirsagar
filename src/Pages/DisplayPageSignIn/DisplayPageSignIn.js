@@ -70,7 +70,7 @@ const DisplayPageSignIn = () => {
       setIsCredentialsInValid('');
       let path = `/dashboard`;
       history.push(path);
-      // window.location.reload();
+      window.location.reload();
       dispatch({ type: RESET_ALL_REDUCER });
       dispatch({ type: SET_SIGN_IN_STATUS, payload: '' });
     }
