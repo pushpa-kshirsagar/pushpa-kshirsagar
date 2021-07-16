@@ -41,8 +41,66 @@
   text-transform: lowercase !important;
   padding: 2.5px 0px !important;
 }
+.optionFifth {
+  color: rgba(0, 0, 0, 0.87) !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  height: 30px !important;
+  font-size: 1.2rem !important;
+  text-align: center !important;
+  min-height: inherit !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  text-transform: lowercase !important;
+  padding: 2.5px 0px !important;
+}
+.optionSixth {
+  color: rgba(0, 0, 0, 0.87) !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  height: 30px !important;
+  font-size: 1.2rem !important;
+  text-align: center !important;
+  min-height: inherit !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  text-transform: lowercase !important;
+  padding: 2.5px 0px !important;
+}
+.optionSeventh {
+  color: rgba(0, 0, 0, 0.87) !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  height: 30px !important;
+  font-size: 1.2rem !important;
+  text-align: center !important;
+  min-height: inherit !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  text-transform: lowercase !important;
+  padding: 2.5px 0px !important;
+}
+.optionEight {
+  color: rgba(0, 0, 0, 0.87) !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  height: 30px !important;
+  font-size: 1.2rem !important;
+  text-align: center !important;
+  min-height: inherit !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  text-transform: lowercase !important;
+  padding: 2.5px 0px !important;
+}
 .popup-icon-padd {
   padding: 2.5px 0px;
+}
+.optionSecondaryDisabled {
+  color: #0000008a !important;
+}
+.optionSecondaryDisabled :hover {
+  background-color: transparent;
 }
 .optionPrimary {
   text-align: center;

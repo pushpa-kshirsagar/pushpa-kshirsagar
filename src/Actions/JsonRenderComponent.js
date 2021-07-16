@@ -29,7 +29,10 @@ const JsonRenderComponent = (props) => {
                 return (
                   <div key={index}>
                     <Button
-                      className={item.optionClass}
+                      className={[
+                        item.optionClass,
+                        item.disabled ? 'optionSecondaryDisabled' : ''
+                      ].join(' ')}
                       data-value={item.dataValue}
                       data-key={item.dataKey ? item.dataKey : item.dataValue}
                       onClick={
