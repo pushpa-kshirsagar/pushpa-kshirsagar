@@ -74,6 +74,45 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       ],
       innerInfo: 'No Information',
       isListCard: true
+    },
+    {
+      id: 'a342',
+      labelTextOneOne: 'supervisor',
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'collaborator',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'collaborator',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'collaborator',
+              status: 'active'
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
     }
   ];
   let assignmentGroupListPrimary = [];
@@ -329,7 +368,44 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       isListCard: false
     }
   ];
-  const setupList = [];
+  const setupList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'share',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'associate',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    }
+  ];
   const engagementListKey = [
     {
       id: 'a2',

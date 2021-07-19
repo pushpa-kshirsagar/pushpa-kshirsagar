@@ -17,7 +17,8 @@ import {
   RESET_ASSIGNMENT_REVIEW_LIST_OBJECT,
   SET_WEIGHTAGE_SELECTED,
   SET_RANGE_SELECTED,
-  SET_CREATE_MODE
+  SET_CREATE_MODE,
+  SET_PANE_THREE_PREVIEW_MODE
 } from '../actionType';
 
 const initialState = {
@@ -26,6 +27,11 @@ const initialState = {
   headerOneBadgeOne: '',
   headerOneBadgeTwo: '',
   HeaderBadgeThree: '',
+  previewHeaderOne: '',
+  previewHeaderOneBadgeOne: '',
+  previewHeaderOneBadgeTwo: '',
+  previewHeaderBadgeThree: '',
+  previewInnerHTML: '',
   responseObject: {},
   reviewMode: 'review',
   createMode: '',
@@ -175,6 +181,16 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
       return {
         ...istate,
         isRangeSelected: action.payload
+      };
+    case SET_PANE_THREE_PREVIEW_MODE:
+      return {
+        ...istate,
+        isPreviewShow: action.payload.isPreviewShow,
+        previewHeaderOne: action.payload.previewHeaderOne,
+        previewHeaderOneBadgeOne: action.payload.previewHeaderOneBadgeOne,
+        previewHeaderOneBadgeTwo: action.payload.previewHeaderOneBadgeTwo,
+        previewHeaderOneBadgeThree: action.payload.previewHeaderOneBadgeThree,
+        previewInnerHTML: action.payload.previewInnerHTML
       };
     case CLEAR_DISPLAY_PANE_THREE:
       return initialState;

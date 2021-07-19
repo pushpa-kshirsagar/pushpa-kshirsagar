@@ -686,6 +686,42 @@ const DisplayPaneThreeSectionOne = () => {
   ];
   const setupList1 = [
     {
+      id: 'signOn',
+      labelTextOneOne: 'share',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'associate',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
       id: 'a1',
       labelTextOneOne: 'sign-in',
       textOneOne: '',

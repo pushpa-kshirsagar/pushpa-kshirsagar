@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import Manuscript from '@material-ui/icons/Description';
 import { makeAssesseeReviewListRequestObject } from '../../Actions/GenericActions';
-import { SET_POPUP_VALUE } from '../../actionType';
+import { SET_PANE_THREE_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoAssessment = () => {
   const [listExpand, setListExpand] = useState('');
@@ -16,29 +17,47 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   const { informationFramework } = responseObject;
   const dispatch = useDispatch();
   const frameworkAll = [
+    // {
+    //   id: 'a1',
+    //   labelTextOneOne: 'communiqué',
+    //   isListCard: true,
+    //   labelTextOneOneBadgeOne: 'primary',
+    //   labelTextOneOneBadgeTwo: 'secondary',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'primary',
+    //       innerList:
+    //         informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary ||
+    //         'No Information'
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'secondary',
+    //       innerList:
+    //         informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary ||
+    //         'No Information'
+    //     }
+    //   ],
+    //   innerAssociateList: [],
+    //   innerInfo: 'No Information',
+    //   IconOne: null
+    // },
     {
       id: 'a1',
       labelTextOneOne: 'communiqué',
-      isListCard: true,
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList:
-            informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary ||
-            'No Information'
+          textOne: ''
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList:
-            informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary ||
-            'No Information'
+          textOne: ''
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'No Information',
-      IconOne: null
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: Manuscript
     },
     {
       id: 'a2',
@@ -62,13 +81,35 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerInfo: 'assessment',
       IconOne: null
     },
+    // {
+    //   id: 'a1',
+    //   labelTextOneOne: 'manuscript',
+    //   isListCard: true,
+    //   labelTextOneOneBadgeOne: '',
+    //   labelTextOneOneBadgeTwo: '',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       innerList: informationFramework?.assessmentManuscript || 'No Information'
+    //     }
+    //   ],
+    //   innerAssociateList: [],
+    //   innerInfo: 'No Information',
+    //   IconOne: null
+    // },
     {
-      id: 'a3',
+      id: 'm1',
       labelTextOneOne: 'manuscript',
-      isListCard: false,
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
       innerAssociateList: [],
-      innerInfo: 'assessment',
-      IconOne: null
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: Manuscript
     },
     {
       id: 'a4',
@@ -177,7 +218,71 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       IconOne: null
     }
   ];
+  const frameworkPlusAll = [
+    {
+      id: 'a2',
+      labelTextOneOne: 'timeline',
+      isListCard: false,
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'start',
+          textOne: 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'end',
+          textOne: 'No Information'
+        }
+      ],
+      labelTextOneOneBadgeTwo: '',
+      innerAssociateList: [],
+      innerInfo: '',
+      IconOne: null
+    }
+  ];
 
+  const onClickReview = (headerOne, badgeOne) => {
+    if (headerOne === 'communiqué' && badgeOne === 'primary') {
+      dispatch({
+        type: SET_PANE_THREE_PREVIEW_MODE,
+        payload: {
+          isPreviewShow: true,
+          previewHeaderOne: 'assessment',
+          previewHeaderOneBadgeOne: 'communiqué',
+          previewHeaderOneBadgeTwo: 'primary',
+          previewHeaderOneBadgeThree: '',
+          previewInnerHTML:
+            informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary || ''
+        }
+      });
+    }
+    if (headerOne === 'communiqué' && badgeOne === 'secondary') {
+      dispatch({
+        type: SET_PANE_THREE_PREVIEW_MODE,
+        payload: {
+          isPreviewShow: true,
+          previewHeaderOne: 'assessment',
+          previewHeaderOneBadgeOne: 'communiqué',
+          previewHeaderOneBadgeTwo: 'secondary',
+          previewHeaderOneBadgeThree: '',
+          previewInnerHTML:
+            informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary || ''
+        }
+      });
+    }
+    if (headerOne === 'manuscript') {
+      dispatch({
+        type: SET_PANE_THREE_PREVIEW_MODE,
+        payload: {
+          isPreviewShow: true,
+          previewHeaderOne: 'assessment',
+          previewHeaderOneBadgeOne: 'manuscript',
+          previewHeaderOneBadgeTwo: '',
+          previewHeaderOneBadgeThree: '',
+          previewInnerHTML: informationFramework?.assessmentManuscript || ''
+        }
+      });
+    }
+  };
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -200,6 +305,13 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       });
     }
     if (labelName === 'manuscript') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ASSESSMENT_MANUSCRIPT_TEXTSHEET_POPUP',
+          popupMode: 'ASSESSMENTCREATE'
+        }
+      });
     }
     if (labelName === 'score' && selectedBadgeName === 'maximum') {
       dispatch({
@@ -217,6 +329,18 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'TIMEASSESSMENTPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'timeline' && selectedBadgeName === 'start') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'TIMELINESTARTPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'timeline' && selectedBadgeName === 'end') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'TIMELINEENDPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
   };
@@ -238,6 +362,17 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
               list={frameworkAll}
               mode={reviewMode}
               onClickRevise={reviseFramework}
+              onClickReview={onClickReview}
+            />
+          </div>
+          <div className={'containerPadding'}>
+            <AllocationAccordian
+              headerOne="framework+"
+              isDisplayCardExpanded={listExpand === 'framework+'}
+              setListExpand={setListExpand}
+              list={frameworkPlusAll}
+              mode={reviewMode}
+              onClickRevise={reviseFramework}
             />
           </div>
         </>
@@ -246,6 +381,27 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           <div className={'containerPadding'}>
             <Paper className={'dossierContainerTop'}>
               {frameworkKey.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard
+                        onClickRevise={reviseFramework}
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
+                    ) : (
+                      <AccordianInfoCard
+                        onClickRevise={reviseFramework}
+                        accordianObject={ob}
+                        mode={reviewMode}
+                        onClickReview={onClickReview}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+              {frameworkPlusAll.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (

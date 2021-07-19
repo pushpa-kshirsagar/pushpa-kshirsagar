@@ -233,6 +233,11 @@ function* workerReviewInfoAssessmentSaga(data) {
           type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
           payload: { stateName: 'assessmentTime', value: timeAssessment }
         });
+        const menuScriptAssessment = informationFramework?.assessmentManuscript || '';
+        yield put({
+          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }
+        });
       }
     } else {
       yield put({

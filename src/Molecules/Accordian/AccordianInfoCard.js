@@ -207,7 +207,12 @@ const AccordianInfoCard = (props) => {
                         <IconButton
                           onClick={
                             mode === 'revise'
-                              ? () => {}
+                              ? () => {
+                                  onClickReview(
+                                    labelTextOneOne,
+                                    selectedBadge?.labelTextOneOneBadge || ''
+                                  );
+                                }
                               : () => {
                                   onClickReview(
                                     labelTextOneOne,
@@ -227,7 +232,12 @@ const AccordianInfoCard = (props) => {
                           <IconButton
                             onClick={
                               mode === 'revise'
-                                ? () => {}
+                                ? () => {
+                                    onClickReview(
+                                      labelTextOneOne,
+                                      selectedBadge?.labelTextOneOneBadge || ''
+                                    );
+                                  }
                                 : () => {
                                     onClickReview(
                                       labelTextOneOne,
@@ -365,7 +375,12 @@ const AccordianInfoCard = (props) => {
                       <IconButton
                         onClick={
                           mode === 'revise'
-                            ? () => {}
+                            ? () => {
+                                onClickReview(
+                                  labelTextOneOne,
+                                  selectedBadge?.labelTextOneOneBadge || ''
+                                );
+                              }
                             : () => {
                                 onClickReview(
                                   labelTextOneOne,
@@ -385,7 +400,12 @@ const AccordianInfoCard = (props) => {
                         <IconButton
                           onClick={
                             mode === 'revise'
-                              ? () => {}
+                              ? () => {
+                                  onClickReview(
+                                    labelTextOneOne,
+                                    selectedBadge?.labelTextOneOneBadge || ''
+                                  );
+                                }
                               : () => {
                                   onClickReview(
                                     labelTextOneOne,
