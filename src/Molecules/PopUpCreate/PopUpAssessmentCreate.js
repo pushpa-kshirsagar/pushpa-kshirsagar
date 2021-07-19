@@ -20,6 +20,7 @@ import {
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
+import PopUpDatePicker from '../../PopUpInformation/PopUpDatePicker';
 
 const PopUpAssessmentCreate = (props) => {
   const { headerOne } = props;
@@ -345,6 +346,46 @@ const PopUpAssessmentCreate = (props) => {
           informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary || ''
         }
         actualLableValue={'assessmentCommuniquePrimary'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_TEXTSHEET_POPUP'}
+        headerOne={'assessment'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'manuscript'}
+        headerOneBadgeTwo={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
+        defaultSheetValue={informationFramework?.assessmentManuscript || ''}
+        actualLableValue={'assessmentManuscript'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TIMELINESTARTPOPUP'}
+        label={'timeline'}
+        labelBadgeOne={'start'}
+        actualLableValue={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={informationFramework?.assessmentTimelineStart || 'mm/dd/yyyy --:-- --'}
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TIMELINEENDPOPUP'}
+        label={'timeline'}
+        labelBadgeOne={'end'}
+        actualLableValue={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={informationFramework?.assessmentTimelineEnd || 'mm/dd/yyyy --:-- --'}
+        nextPopUpValue={''}
+        isNotRevised={true}
+        typeOfSetObject={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextSheet

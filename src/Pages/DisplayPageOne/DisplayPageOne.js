@@ -52,6 +52,7 @@ import PopUpNodeCreate from '../../Molecules/PopUpCreate/PopUpNodeCreate';
 import PopUpDisplayPaneTwoTripleDot from '../../PopUpDisplayPanel/PopUpDisplayPaneTwoTripleDot';
 import PopUpItemCreate from '../../Molecules/PopUpCreate/PopUpItemCreate';
 import PopUpJobProfileCreate from '../../Molecules/PopUpCreate/PopUpJobProfileCreate';
+import DisplayPanePreview from '../../Organisms/DisplayPanePreview/DisplayPanePreview';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -151,6 +152,7 @@ const DisplayPageOne = () => {
     dispatch({ type: CLEAR_IGAUGE_REDUCER });
   };
   const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { isPreviewShow = false } = useSelector((state) => state.DisplayPaneThreeReducer);
   console.log('popupMode', popupMode);
   return (
     <>
@@ -166,7 +168,17 @@ const DisplayPageOne = () => {
             {mobilePanestate === 'displayPaneTwo' && (
               <DisplayPaneTwo popupAllClose={popupAllClose} />
             )}
-            {mobilePanestate === 'displayPaneThree' && <DisplayPaneThree />}
+            {mobilePanestate === 'displayPaneThree' && (
+              <>
+                {isPreviewShow ? (
+                  <>
+                    <DisplayPanePreview />
+                  </>
+                ) : (
+                  <DisplayPaneThree />
+                )}
+              </>
+            )}
             {mobilePanestate === 'displayPaneFour' && <DisplayPaneFour />}
             {mobilePanestate === 'displayPaneFive' && <DisplayPaneFive />}
           </div>
@@ -191,7 +203,15 @@ const DisplayPageOne = () => {
                   <DisplayPaneTwo popupAllClose={popupAllClose} />
                 </div>
                 <div className="display-pane-container">
-                  <DisplayPaneThree />
+                  <>
+                    {isPreviewShow ? (
+                      <>
+                        <DisplayPanePreview />
+                      </>
+                    ) : (
+                      <DisplayPaneThree />
+                    )}
+                  </>
                 </div>
               </>
             )}

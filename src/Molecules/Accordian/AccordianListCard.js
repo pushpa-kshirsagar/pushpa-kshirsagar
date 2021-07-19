@@ -374,7 +374,7 @@ const AccordianListCard = (props) => {
               </div>
             ) : (
               <>
-                {labelTextOneOne === 'communiqué' ? (
+                {labelTextOneOne === 'communiqué' || labelTextOneOne === 'manuscript' ? (
                   <>
                     <div
                       style={{

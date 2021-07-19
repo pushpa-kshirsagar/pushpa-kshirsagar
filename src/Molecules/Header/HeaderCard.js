@@ -32,7 +32,8 @@ const HeaderCard = (props) => {
     scanCount,
     headerPanelColour,
     showMiddlePaneState,
-    onClickClearInfo = null
+    onClickClearInfo = null,
+    showClearIcon = false
   } = props;
   const dispatch = useDispatch();
   const {
@@ -188,7 +189,7 @@ const HeaderCard = (props) => {
                   <IconButton>
                     {!isMobile && <NextIcon className={'iguru-iconbardefault'} />}
                   </IconButton>
-                ) : displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '' ? (
+                ) : (displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '') || showClearIcon ? (
                   <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>
