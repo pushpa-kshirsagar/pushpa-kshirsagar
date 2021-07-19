@@ -76,7 +76,16 @@ const HeaderCard = (props) => {
         disabled: false
       };
       optArr.splice(10, 0, newObj);
-      console.log(optArr);
+    } else if (middlePaneHeader === 'assignments' && middlePaneHeaderBadgeOne === 'distinct') {
+      optArr = [...ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION];
+      let newObj = {
+        data: 'administer',
+        dataValue: 'administer',
+        dataKey: 'administer',
+        optionClass: 'optionPrimary',
+        disabled: false
+      };
+      optArr.splice(0, 0, newObj);
     } else {
       optArr = ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION;
     }

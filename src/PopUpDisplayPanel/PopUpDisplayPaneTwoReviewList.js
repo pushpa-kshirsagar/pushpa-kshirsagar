@@ -227,13 +227,15 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           value: arr
         }
       });
-      dispatch({
-        type: SET_POPUP_SINGLE_STATE,
-        payload: {
-          stateName: 'forthOptionCheckValue',
-          value: 'descendant'
-        }
-      });
+      if (forthOptionCheckValue === '') {
+        dispatch({
+          type: SET_POPUP_SINGLE_STATE,
+          payload: {
+            stateName: 'forthOptionCheckValue',
+            value: 'ascendant'
+          }
+        });
+      }
     }
     dispatch({
       type: SET_POPUP_SINGLE_STATE,
@@ -245,7 +247,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
   };
   const setSecondaryOptionValueThree = (e) => {
     let arr = [];
-    if (e.currentTarget.getAttribute('data-value') === 'peer') {
+    let valueThree = e.currentTarget.getAttribute('data-value');
+    if (valueThree === 'peer') {
       // if (popupHeaderOneBadgeOne === 'share') {
       SHARE_NEW_POPUP.forEach((element) => {
         if (
@@ -278,7 +281,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         type: SET_POPUP_SINGLE_STATE,
         payload: {
           stateName: 'tertiaryOptionCheckValue',
-          value: 'all'
+          value: 'primary'
         }
       });
     }
@@ -735,7 +738,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         let jobProfileReqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
-            selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
           filter: 'true',
           numberPage: 0,
           countPage: countPage,
@@ -754,7 +758,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             }
           ]
         };
-      
+
         dispatch({
           type: GET_JOB_PROFILE_INFO_SAGA,
           payload: {
@@ -810,7 +814,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         const cultureAssessmentReqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
-            selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
           filter: 'true',
           numberPage: 0,
           countPage: countPage,
@@ -1988,12 +1993,21 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     } else if (dataVal === 'shareApiCall' || dataVal === 'unshareApiCall') {
       let reqBody = null;
       let shareVal = '';
+      let typeShare =
+        secondaryOptionCheckValue.toUpperCase() +
+        '_' +
+        forthOptionCheckValue.toUpperCase() +
+        '_' +
+        tertiaryOptionCheckValue.toUpperCase();
+      console.log('typeShare', typeShare);
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
         reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          // assesseeRoleShare: typeShare,
+          // assesseeRoleShareInformation: [],
           assesseeRoleShared: [
             {
               assesseeRoleId: selectedTagValue,
@@ -2009,6 +2023,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          // associateRoleShare: typeShare,
+          // associateRoleShareInformation: [],
           associateRoleShared: [
             {
               associateRoleId: selectedTagValue,
@@ -2024,6 +2040,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          // associateRoleShare: typeShare,
+          // associateRoleShareInformation: [],
           associateTypeShared: [
             {
               associateTypeId: selectedTagValue,
@@ -2039,6 +2057,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          assesseeTypeShare: typeShare,
+          assesseeTypeShareInformation: [],
           assesseeTypeShared: [
             {
               assesseeTypeId: selectedTagValue,

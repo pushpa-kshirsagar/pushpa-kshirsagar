@@ -31,7 +31,9 @@ const JsonRenderComponent = (props) => {
                     <Button
                       className={[
                         item.optionClass,
-                        item.disabled ? 'optionSecondaryDisabled' : ''
+                        item.optionClass !== 'optionPrimary' && item.disabled
+                          ? 'optionSecondaryDisabled'
+                          : ''
                       ].join(' ')}
                       data-value={item.dataValue}
                       data-key={item.dataKey ? item.dataKey : item.dataValue}

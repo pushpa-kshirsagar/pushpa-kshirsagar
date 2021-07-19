@@ -41,7 +41,8 @@ import {
   ANALYTICS_POPUP,
   EXCHANGE_POPUP_OPTION,
   ROLE_POPUP_OPTION,
-  SHARE_NEW_POPUP
+  SHARE_NEW_POPUP,
+  ADMINISTER_POPUP
 } from '../PopUpConfig';
 
 const initialState = {
@@ -78,6 +79,7 @@ const initialState = {
     archive: ARCHIVE_POPUP,
     // share: SHARE_POPUP,
     share: SHARE_NEW_POPUP,
+    administer:ADMINISTER_POPUP,
     delete: DELETE_POPUP,
     flag: FLAG_PUPUP,
     flaged: FLAG_OPTION_PUPUP,
@@ -348,11 +350,14 @@ const PopUpReducer = (istate = initialState, action) => {
           if (
             (action.payload.badgeValue === 'suspend' ||
               action.payload.badgeValue === 'terminate' ||
+              action.payload.badgeValue === 'publish' ||
               action.payload.badgeValue === 'archive') &&
             (istate.selectedTagStatus === 'CONFIRMED' ||
               istate.selectedTagStatus === 'UNCONFIRMED' ||
-              istate.selectedTagStatus === 'SHARED' ||
-              istate.selectedTagStatus === 'UNSHARED' ||
+              // istate.selectedTagStatus === 'SHARED' ||
+              // istate.selectedTagStatus === 'UNSHARED' ||
+              istate.selectedTagStatus === 'UNPUBLISHED' ||
+              istate.selectedTagStatus === 'PUBLISHED' ||
               istate.selectedTagStatus === 'ACTIVE')
           ) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
@@ -365,7 +370,8 @@ const PopUpReducer = (istate = initialState, action) => {
           }
           if (
             (action.payload.badgeValue === 'publish' && istate.selectedTagStatus === 'PUBLISHED') ||
-            (action.payload.badgeValue === 'unpublish' && istate.selectedTagStatus === 'UNPUBLISHED')
+            (action.payload.badgeValue === 'unpublish' &&
+              istate.selectedTagStatus === 'UNPUBLISHED')
           ) {
             arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           }
@@ -376,12 +382,12 @@ const PopUpReducer = (istate = initialState, action) => {
           ) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
-          if (action.payload.badgeValue === 'share' && istate.selectedTagShared === 'SHARED') {
-            arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
-          }
-          if (action.payload.badgeValue === 'share' && istate.selectedTagShared === 'UNSHARED') {
-            arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
-          }
+          // if (action.payload.badgeValue === 'share' && istate.selectedTagShared === 'SHARED') {
+          //   arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
+          // }
+          // if (action.payload.badgeValue === 'share' && istate.selectedTagShared === 'UNSHARED') {
+          //   arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
+          // }
           if (action.payload.keyValue === 'flag' && istate.isFlaged) {
             arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           }
@@ -406,8 +412,8 @@ const PopUpReducer = (istate = initialState, action) => {
             popupHeaderOneBadgeTwo: action.payload.badgeValue,
             popupOpenType: 'secondary',
             popupContentArrValue: arrVal,
-            tertiaryOptionCheckValue: action.payload.keyValue === 'share' ? 'all' : '',
-            forthOptionCheckValue: action.payload.keyValue === 'share' ? 'descendant' : '',
+            tertiaryOptionCheckValue: action.payload.keyValue === 'share' ? 'primary' : '',
+            forthOptionCheckValue: action.payload.keyValue === 'share' ? 'ascendant' : '',
             secondaryOptionCheckValue:
               action.payload.keyValue === 'reviseKey' ||
               action.payload.keyValue === 'reviewKey' ||

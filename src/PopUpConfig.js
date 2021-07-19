@@ -1475,6 +1475,13 @@ export const ASSOCIATE_REVIEW_LIST_POPUP_OPTION = [
 ];
 export const ASSIGNMENT_REVIEW_LIST_POPUP_OPTION = [
   {
+    data: 'administer',
+    dataValue: 'administer',
+    dataKey: 'administer',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
     data: 'allocate',
     dataValue: 'allocate',
     dataKey: 'allocate',
@@ -2143,6 +2150,22 @@ export const SHARE_POPUP = [
     disabled: false
   }
 ];
+export const ADMINISTER_POPUP = [
+  {
+    data: 'administer',
+    dataValue: 'administer',
+    dataKey: 'administer',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'unadminister',
+    dataValue: 'unadminister',
+    dataKey: 'unadminister',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
 export const ARCHIVE_POPUP = [
   {
     data: 'archive',
@@ -2633,14 +2656,14 @@ export const SELF_POPUP_OPTION = [
 export const SHARE_NEW_POPUP = [
   {
     data: 'share',
-    dataValue: 'share',
+    dataValue: 'shareApiCall',
     dataKey: 'shareunshareTertiary',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'unshare',
-    dataValue: 'unshare',
+    dataValue: 'unshareApiCall',
     dataKey: 'shareunshareTertiary',
     optionClass: 'optionPrimary',
     disabled: false,
