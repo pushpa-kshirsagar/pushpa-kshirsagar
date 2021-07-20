@@ -655,6 +655,21 @@ const DisplayPaneThreeSectionOneAssignment = () => {
               })}
             </Paper>
           </div>
+          <div className="containerPadding">
+            <Paper className={'dossierContainerTop'}>
+              {setupList.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
         </>
       )}
       {isMobile && (

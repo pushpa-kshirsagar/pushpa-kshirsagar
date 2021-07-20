@@ -9,7 +9,7 @@ import '../../Molecules/Header/HeaderCard.css';
 import { SET_DISPLAY_PANE_FOUR_SHOW } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
 
-const DisplayPaneFourHeader = (props) => {
+const DisplayPaneFiveHeader = (props) => {
   const {
     headerOne = 'dashboard',
     headerOneBadgeOne = '',
@@ -123,4 +123,4 @@ const DisplayPaneFourHeader = (props) => {
   );
 };
 
-export default DisplayPaneFourHeader;
+export default DisplayPaneFiveHeader;

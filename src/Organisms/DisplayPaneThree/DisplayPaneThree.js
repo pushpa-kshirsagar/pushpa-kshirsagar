@@ -1429,34 +1429,42 @@ export const DisplayPaneThree = () => {
       } = jobProfileInformation;
       const { id } = responseObject;
       //jobProfileJobCompetencyTag
+      let rangeCount = 0;
+      let weightageCount = 0;
       let rangeArr = informationFramework?.jobProfileJobCompetencyRange || [];
       rangeArr.forEach((element) => {
         const rangeMax = element?.jobProfileJobCompetencyRangeMaximum || 0;
         if (rangeMax < 1) {
-          setIsShowReviseIcon(true);
-          dispatch({ type: LOADER_STOP });
-          // dispatch({
-          //   type: SET_POPUP_VALUE,
-          //   payload: { isPopUpValue: 'POPUPRANGEMSG', popupMode: 'JOBCREATE' }
-          // });
-          return;
+          rangeCount++;
         }
         element.jobProfileJobCompetencyTag = element.id;
       });
       let weightageArr = informationFramework?.jobProfileJobCompetencyWeightage || [];
       weightageArr.forEach((element) => {
-        const weightageCount = element?.jobProfileJobCompetencyWeightage || 0;
-        if (weightageCount < 1) {
-          setIsShowReviseIcon(true);
-          dispatch({ type: LOADER_STOP });
-          // dispatch({
-          //   type: SET_POPUP_VALUE,
-          //   payload: { isPopUpValue: 'POPUPWEIGHTEMSG', popupMode: 'JOBCREATE' }
-          // });
-          return;
+        const weightageNum = element?.jobProfileJobCompetencyWeightage || 0;
+        if (weightageNum < 1) {
+          weightageCount++;
         }
         element.jobProfileJobCompetencyTag = element.id;
       });
+      if (rangeCount > 0) {
+        setIsShowReviseIcon(true);
+        dispatch({ type: LOADER_STOP });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPRANGEMSG', popupMode: 'JOBCREATE' }
+        });
+        return;
+      }
+      if (weightageCount > 0) {
+        setIsShowReviseIcon(true);
+        dispatch({ type: LOADER_STOP });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: 'POPUPWEIGHTEMSG', popupMode: 'JOBCREATE' }
+        });
+        return;
+      }
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:

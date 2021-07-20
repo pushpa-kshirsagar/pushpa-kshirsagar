@@ -126,10 +126,6 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: assessmentArray
-        },
-        {
-          labelTextOneOneBadge: 'group',
-          innerList: []
         }
       ],
       innerAssociateList: [],
@@ -146,10 +142,6 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: cultureProfileArray
-        },
-        {
-          labelTextOneOneBadge: 'group',
-          innerList: []
         }
       ],
       innerAssociateList: [],
@@ -166,10 +158,6 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: jobProfileArray
-        },
-        {
-          labelTextOneOneBadge: 'group',
-          innerList: []
         }
       ],
       innerAssociateList: [],
@@ -182,7 +170,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       isListCard: false,
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'report',
+          labelTextOneOneBadge: '',
           textOne: ''
         }
       ],

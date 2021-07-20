@@ -11,7 +11,8 @@ import {
   SET_ASSESSMENT_FRAMEWORK_STATE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SCORE_FRAMEWORK_STATE
+  SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -21,7 +22,7 @@ import {
 } from '../PopUpConfig';
 
 const initialState = {
-  isDisplayPaneFourShow: true,
+  isDisplayPaneFiveShow: true,
   assessmentsHeaderOne: '',
   assessmentsPopUpType: 'primary',
   currentPopUpOption: '',
@@ -72,8 +73,11 @@ const initialState = {
       assessmentCommuniquePrimary: '',
       assessmentCommuniqueSecondary: ''
     },
+    assessmentManuscript: {
+      assessmentManuscriptPrimary: '',
+      assessmentManuscriptSecondary: ''
+    },
     assessmentItemTotal: '',
-    assessmentManuscript: '',
     assessmentScore: {
       assessmentScoreMaximum: 0,
       assessmentScoreMinimum: 0
@@ -178,7 +182,7 @@ const AssessmentReducer = (istate = initialState, action) => {
       };
     case SET_DISPLAY_PANE_FOUR_SHOW:
       return {
-        isDisplayPaneFourShow: action.payload
+        isDisplayPaneFiveShow: action.payload
       };
     case SET_ASSESSMENT_DYNAMIC_SINGLE_STATE:
       return {
@@ -210,6 +214,14 @@ const AssessmentReducer = (istate = initialState, action) => {
         informationFramework: {
           ...istate.informationFramework,
           assessmentCommunique: action.payload
+        }
+      };
+    case SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assessmentManuscript: action.payload
         }
       };
     case SET_ASSESSMENT_SCORE_FRAMEWORK_STATE:

@@ -102,7 +102,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOne: 'manuscript',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'primary',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
           textOne: ''
         }
       ],
@@ -269,16 +273,31 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         }
       });
     }
-    if (headerOne === 'manuscript') {
+    if (headerOne === 'manuscript' && badgeOne === 'primary') {
       dispatch({
         type: SET_PANE_THREE_PREVIEW_MODE,
         payload: {
           isPreviewShow: true,
           previewHeaderOne: 'assessment',
           previewHeaderOneBadgeOne: 'manuscript',
-          previewHeaderOneBadgeTwo: '',
+          previewHeaderOneBadgeTwo: 'primary',
           previewHeaderOneBadgeThree: '',
-          previewInnerHTML: informationFramework?.assessmentManuscript || ''
+          previewInnerHTML:
+            informationFramework?.assessmentManuscript?.assessmentManuscriptPrimary || ''
+        }
+      });
+    }
+    if (headerOne === 'manuscript' && badgeOne === 'secondary') {
+      dispatch({
+        type: SET_PANE_THREE_PREVIEW_MODE,
+        payload: {
+          isPreviewShow: true,
+          previewHeaderOne: 'assessment',
+          previewHeaderOneBadgeOne: 'manuscript',
+          previewHeaderOneBadgeTwo: 'secondary',
+          previewHeaderOneBadgeThree: '',
+          previewInnerHTML:
+            informationFramework?.assessmentManuscript?.assessmentManuscriptSecondary || ''
         }
       });
     }
@@ -304,11 +323,20 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         }
       });
     }
-    if (labelName === 'manuscript') {
+    if (labelName === 'manuscript' && selectedBadgeName === 'primary') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
-          isPopUpValue: 'ASSESSMENT_MANUSCRIPT_TEXTSHEET_POPUP',
+          isPopUpValue: 'ASSESSMENT_MANUSCRIPT_PRIMARY_TEXTSHEET_POPUP',
+          popupMode: 'ASSESSMENTCREATE'
+        }
+      });
+    }
+    if (labelName === 'manuscript' && selectedBadgeName === 'secondary') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ASSESSMENT_MANUSCRIPT_SECONDARY_TEXTSHEET_POPUP',
           popupMode: 'ASSESSMENTCREATE'
         }
       });
