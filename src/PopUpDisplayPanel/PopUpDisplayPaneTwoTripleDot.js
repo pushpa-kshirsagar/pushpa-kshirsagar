@@ -72,7 +72,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    reviewListDistinctData
+    reviewListDistinctData,
+    selectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
@@ -89,6 +90,43 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
     console.log(keyVal);
     console.log(dataVal);
     if (dataVal === 'information') {
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'select') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: secondaryOptionCheckValue }
+      });
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'unselect') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: '' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'selectedTagsArray', value: [] }
+      });
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'flaged') {
+      await setFlagedArray(reviewListDistinctData, 'assesseeFlag', dispatch);
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'flagedValue', value: secondaryOptionCheckValue + dataVal }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeFlag' }
+      });
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'unflaged') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'flagedValue', value: '' }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeDistinct' + middlePaneHeaderBadgeTwo }
+      });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'create') {
       if (
@@ -458,6 +496,20 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           cardValue
         );
         dispatch({ type: POPUP_CLOSE });
+        if (popupHeaderOneBadgeTwo === 'allocate') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'allocatedTagsArray', value: [...selectedTagsArray] }
+          });
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'itemAllocateToGroup' }
+          });
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'isSelectActive', value: 'multiple' }
+          });
+        }
       } else if (keyVal === 'types') {
         getItemsTypeApiCall(
           selectedAssociateInfo,
@@ -765,44 +817,6 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           payload: { badgeValue: dataVal, keyValue: keyVal }
         });
       }
-    } else if (dataVal === 'select') {
-      // console.log(secondaryOptionCheckValue)
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'isSelectActive', value: secondaryOptionCheckValue }
-      });
-      dispatch({ type: POPUP_CLOSE });
-    } else if (dataVal === 'unselect') {
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'isSelectActive', value: '' }
-      });
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'selectedTagsArray', value: [] }
-      });
-      dispatch({ type: POPUP_CLOSE });
-    } else if (dataVal === 'flaged') {
-      await setFlagedArray(reviewListDistinctData, 'assesseeFlag', dispatch);
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'flagedValue', value: secondaryOptionCheckValue + dataVal }
-      });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assesseeFlag' }
-      });
-      dispatch({ type: POPUP_CLOSE });
-    } else if (dataVal === 'unflaged') {
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'flagedValue', value: '' }
-      });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: 'assesseeDistinct' + middlePaneHeaderBadgeTwo }
-      });
-      dispatch({ type: POPUP_CLOSE });
     } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,

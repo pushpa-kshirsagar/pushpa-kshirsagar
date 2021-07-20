@@ -61,6 +61,7 @@ const initialState = {
   searchFocusIndex: 0,
   isSelectActive: '',
   selectedTagsArray: [],
+  allocatedTagsArray:[],
   unselectedTagsArray: [],
   selectedFlagedArray: [],
   unselectedFlagedArray: [],
@@ -95,7 +96,7 @@ const DisplayPaneTwoReducer = (istate = initialState, action) => {
         scanCount: action.payload.scanCount,
         showMiddlePaneState: action.payload.showMiddlePaneState,
         middlePaneSelectedValue: istate.middlePaneSelectedValue,
-        isSelectActive: action.payload.isSelectActive || '',
+        // isSelectActive: action.payload.isSelectActive || '',
         selectedTagsArray: action.payload.selectedTagsArray || [],
         unselectedTagsArray: action.payload.unselectedTagsArray || [],
         isFlaged: action.payload.isFlaged || false

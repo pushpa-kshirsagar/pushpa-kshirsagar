@@ -16,7 +16,9 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_POPUP_SINGLE_STATE,
   SET_POPUP_STATE,
-  SET_SECONDARY_OPTION_VALUE
+  SET_SECONDARY_OPTION_VALUE,
+  GET_ASSESSEE_ASSIGNMENT_SAGA,
+  FILTERMODE
 } from '../actionType';
 import {
   ASSIGNMENT_DISTINCT_POPUP,
@@ -40,12 +42,10 @@ const PopUpDisplayPanelAssessee = (props) => {
     secondaryOptionCheckValue
   } = useSelector((state) => state.PopUpReducer);
   const { assesseePermission } = useSelector((state) => state.UserReducer);
-  const { selectedAssociateInfo, leftPaneAssesseeInfo } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
-  const { signOut } = useContext(AccountContext);
+  // const { signOut } = useContext(AccountContext);
   const history = useHistory();
   const [isReviseMode, setIsReviseMode] = useState(false);
   const setSecondaryOptionValue = (e) => {
@@ -131,8 +131,8 @@ const PopUpDisplayPanelAssessee = (props) => {
           typeOfMiddlePaneList: '',
           scanCount: null,
           showMiddlePaneState: false,
-          selectedTagsArray:[],
-          unselectedTagsArray:[]
+          selectedTagsArray: [],
+          unselectedTagsArray: []
         }
       });
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -203,6 +203,50 @@ const PopUpDisplayPanelAssessee = (props) => {
         payload: { stateName: 'middlePaneSelectedValue', value: selectedAssociateInfo?.assesseeId }
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+    }
+    if (clickValue === 'distinct' && popupHeaderOne === 'assignments') {
+      let reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        countPage: countPage,
+        numberPage: 0,
+        filter: 'true',
+        orderBy: {
+          columnName: 'informationBasic.assesseeAssignmentName',
+          order: 'asc'
+        },
+        search: [
+          {
+            condition: 'and',
+            searchBy: [
+              {
+                dataType: 'string',
+                conditionColumn: 'assesseeAssignmentStatus',
+                conditionValue: {
+                  condition: 'eq',
+                  from: secondaryOptionCheckValue.toUpperCase()
+                }
+              }
+            ]
+          }
+        ]
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ASSESSEE_ASSIGNMENT_SAGA,
+        payload: {
+          request: reqBody,
+          BadgeOne: secondaryOptionCheckValue,
+          BadgeTwo: '',
+          BadgeThree: ''
+        }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assesseeAssignmentDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
     // dispatch({
     //   type: SET_DISPLAY_TWO_SINGLE_STATE,

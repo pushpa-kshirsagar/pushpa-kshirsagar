@@ -93,6 +93,8 @@ export const ASSIGNMENT_TYPE_REVIEWLIST_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/review-list';
 export const ASSIGNMENT_REVIEW_LIST_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/review-list';
+export const ASSESSEEASSIGNMENT_REVIEWLIST_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/assessee-distinct/assignment/review-list';
 export const ASSESSMENT_REVIEW_LIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/review-list';
 export const ASSESSMENT_CREATE_URL =

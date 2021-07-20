@@ -2,46 +2,45 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSOCIATE_POPUP_CLOSE,
-  FILTERMODE,
   FILTERMODE_ENABLE,
-  GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+  LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
-  SET_POPUP_STATE
+  SET_POPUP_STATE,
+  SET_REQUEST_OBJECT
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
+import { makeAssesseeGroupObj } from '../Actions/GenericActions';
 import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
-import { getItemGroupDistinctApiCall } from '../Actions/ItemModuleAction';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
-import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
-import Check from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-const ItemGroupReviewList = (props) => {
+const AssesseeAssignmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
   );
+  const { cardValue } = useSelector((state) => state.PopUpReducer);
   const {
     numberPage,
     scanCount,
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
-    selectedAssociateInfo,
-    middlePaneHeader,
-    allocatedTagsArray,
-    selectedTagsArray,
     isSelectActive,
-    unselectedTagsArray
+    selectedTagsArray,
+    unselectedTagsArray,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
-  const { cardValue } = useSelector((state) => state.PopUpReducer);
   const [isFetching, setIsFetching] = useState(false);
   useEffect(() => {
     document.getElementById('middleComponentId').addEventListener('scroll', handleScroll);
@@ -63,7 +62,7 @@ const ItemGroupReviewList = (props) => {
         numberPage: numberPage
       };
       dispatch({
-        type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
         payload: {
           request: obj,
           BadgeOne: 'distinct',
@@ -84,71 +83,45 @@ const ItemGroupReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    getItemGroupDistinctApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'groups');
+    let requestObect = makeAssesseeGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
+    dispatch({ type: LOADER_START });
+    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+    dispatch({
+      type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+      payload: {
+        request: requestObect,
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
+      }
+    });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
-    if (siftValue === 'finish') {
-      console.log('allocatedTagsArray', allocatedTagsArray);
-      console.log('selectedTagsArray', selectedTagsArray);
-      alert('dsad');
-    }
-    if (siftValue === 'cancle') {
-      dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'isSelectActive', value: '' }
-      });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: '' }
-      });
-    }
+    dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
-  const secondaryIcon = [
+  const secondaryIconOne = [
+    { label: 'started', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unstarted', onClick: onClickFooter, Icon: FilterList }
+  ];
+  const secondaryIconTwo = [
+    { label: 'aborted', onClick: onClickFooter, Icon: FilterList },
+    { label: 'finished', onClick: onClickFooter, Icon: FilterList },
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unfinished', onClick: onClickFooter, Icon: FilterList }
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
-    let optArr = [];
-    let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
-      obj.data === 'assessees'
-        ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
-        : obj
-    );
-    optArr = popupContentArrValue;
-    dispatch({
-      type: SET_POPUP_STATE,
-      payload: {
-        popupHeaderOne: middlePaneHeader,
-        popupHeaderOneBadgeOne: 'group',
-        popupHeaderOneBadgeTwo: '',
-        isPopUpValue: '',
-        popupOpenType: 'primary',
-        popupContentArrValue:
-          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
-        selectedTagValue: e.currentTarget.getAttribute('tag'),
-        selectedTagStatus: e.currentTarget.getAttribute('status'),
-        selectedTagGroupId: e.currentTarget.getAttribute('data-value')
-      }
-    });
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: {
-        stateName: 'middlePaneListPopupOptions',
-        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr
-      }
-    });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log('FilterMode', FilterMode);
-  console.log('isSelectActive', isSelectActive);
+  console.log('reviewListDistinctData', reviewListDistinctData);
   return (
     <div>
       {reviewListDistinctData &&
@@ -160,9 +133,10 @@ const ItemGroupReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.itemGroupStatus}
-                textOne={item.informationBasic.itemGroupName}
-                textTwo={item.informationBasic.itemGroupDescription}
+                status={item.assesseeAssignmentStatus}
+                actualStatus={item.assesseeAssignmentStatus}
+                textOne={item.assesseeAssignmentName}
+                textTwo={item.assesseeAssignmentDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
@@ -170,35 +144,25 @@ const ItemGroupReviewList = (props) => {
                 onClickCheckBox={(event) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
-                // dataValue={item.informationAllocation.itemGroup}
               />
             </div>
           );
         })}
-      {(FilterMode === 'itemGroupDistinctinactive' ||
-        FilterMode === 'itemGroupDistinctsuspended' ||
-        FilterMode === 'itemGroupDistinctterminated') && (
-        <FooterIconTwo
-          FilterModeEnable={FilterModeEnable}
-          FilterMode={FilterMode}
-          onClick={onClickFooter}
-          primaryIcon={primaryIcon}
-          secondaryIcon={secondaryIcon}
-        />
-      )}
-      {FilterMode === 'itemAllocateToGroup' && (
-        <FooterIconTwo
-          FilterModeEnable={FilterModeEnable}
-          FilterMode={FilterMode}
-          onClick={onClickFooter}
-          primaryIcon={[{ label: 'allocate', onClick: onClickFooter, Icon: ReviseIcon }]}
-          secondaryIcon={[
-            { label: 'cancle', onClick: onClickFooter, Icon: ClearIcon },
-            { label: 'finish', onClick: onClickFooter, Icon: Check }
-          ]}
-        />
-      )}
+      {FilterMode === 'assesseeAssignmentDistinctinactive' ||
+        (FilterMode === 'assesseeAssignmentDistinctactive' && (
+          <FooterIconTwo
+            FilterModeEnable={FilterModeEnable}
+            FilterMode={FilterMode}
+            onClick={onClickFooter}
+            primaryIcon={primaryIcon}
+            secondaryIcon={
+              FilterMode === 'assesseeAssignmentDistinctactive'
+                ? secondaryIconOne
+                : secondaryIconTwo
+            }
+          />
+        ))}
     </div>
   );
 };
-export default ItemGroupReviewList;
+export default AssesseeAssignmentDistinctReviewList;
