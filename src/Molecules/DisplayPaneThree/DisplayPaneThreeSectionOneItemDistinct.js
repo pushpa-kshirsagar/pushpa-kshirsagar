@@ -18,7 +18,11 @@ import {
   SET_POPUP_VALUE,
   SET_STATUS_POPUP_VALUE
 } from '../../actionType';
-import { makeInternalNodeObj, makeItemGroupObj, makeItemsTypeObj } from '../../Actions/GenericActions';
+import {
+  makeInternalNodeObj,
+  makeItemGroupObj,
+  makeItemsTypeObj
+} from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneItem = () => {
   const [listExpand, setListExpand] = useState('');
@@ -327,7 +331,44 @@ const DisplayPaneThreeSectionOneItem = () => {
       isListCard: false
     }
   ];
-  const setUpListAll = [];
+  const setUpListAll = [
+    {
+      id: 'setup-a1',
+      labelTextOneOne: 'share',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'associate',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    }
+  ];
   const engagementListKey = [
     {
       id: 'a2',
@@ -645,6 +686,21 @@ const DisplayPaneThreeSectionOneItem = () => {
                         accordianObject={ob}
                         mode={reviewMode}
                       />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
+          <div className="containerPadding">
+            <Paper className={'dossierContainerTop'}>
+              {setUpListAll.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );

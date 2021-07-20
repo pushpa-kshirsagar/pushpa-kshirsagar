@@ -40,43 +40,43 @@ const DisplayPaneThreeSectionOneCultureProfileDistinct = () => {
   }
 
   const allianceList = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'author',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      isListCard: true,
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'author',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'author',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'author',
-              status: ''
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'secondary',
-          innerList: []
-        }
-      ],
-      innerInfo: 'No Information'
-    },
+    // {
+    //   id: 'a1',
+    //   labelTextOneOne: 'author',
+    //   labelTextOneOneBadgeOne: 'primary',
+    //   labelTextOneOneBadgeTwo: 'secondary',
+    //   isListCard: true,
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'primary',
+    //       innerList: [
+    //         {
+    //           id: 'associate1',
+    //           textOne: 'Simple Sample 01',
+    //           textTwo: 'author',
+    //           status: ''
+    //         },
+    //         {
+    //           id: 'associate2',
+    //           textOne: 'Simple Sample 02',
+    //           textTwo: 'author',
+    //           status: ''
+    //         },
+    //         {
+    //           id: 'associate3',
+    //           textOne: 'Simple Sample 03',
+    //           textTwo: 'author',
+    //           status: ''
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'secondary',
+    //       innerList: []
+    //     }
+    //   ],
+    //   innerInfo: 'No Information'
+    // },
     {
       id: 'a2',
       labelTextOneOne: 'collaborator',
@@ -378,7 +378,44 @@ const DisplayPaneThreeSectionOneCultureProfileDistinct = () => {
       isListCard: false
     }
   ];
-  const setupList = [];
+  const setupList = [
+    {
+      id: 'setup-a1',
+      labelTextOneOne: 'share',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'associate',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'distinct',
+              innerLabelBadgeList: 'No'
+            },
+            {
+              labelTextTwoBadge: 'fee',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    }
+  ];
   const engagementListKey = [
     {
       id: 'a2',
@@ -624,6 +661,21 @@ const DisplayPaneThreeSectionOneCultureProfileDistinct = () => {
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
               {engagementListKey.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
+          <div className="containerPadding">
+            <Paper className={'dossierContainerTop'}>
+              {setupList.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (

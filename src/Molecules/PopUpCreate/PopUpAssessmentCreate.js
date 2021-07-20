@@ -15,7 +15,8 @@ import {
   SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
   SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
   UPDATE_ASSOCIATE_BASIC_INFO,
-  UPDATE_ASSOCIATE_SETUP_INFO
+  UPDATE_ASSOCIATE_SETUP_INFO,
+  SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE
 } from '../../actionType';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
@@ -349,15 +350,31 @@ const PopUpAssessmentCreate = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextSheet
-        isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_TEXTSHEET_POPUP'}
+        isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
         headerOneBadgeOne={'manuscript'}
-        headerOneBadgeTwo={''}
-        basicInfo={informationFramework}
-        typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
-        defaultSheetValue={informationFramework?.assessmentManuscript || ''}
-        actualLableValue={'assessmentManuscript'}
+        headerOneBadgeTwo={'primary'}
+        basicInfo={informationFramework?.assessmentManuscript}
+        typeOfSetObject={SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE}
+        defaultSheetValue={
+          informationFramework?.assessmentManuscript?.assessmentManuscriptPrimary || ''
+        }
+        actualLableValue={'assessmentManuscriptPrimary'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_SECONDARY_TEXTSHEET_POPUP'}
+        headerOne={'assessment'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'manuscript'}
+        headerOneBadgeTwo={'secondary'}
+        basicInfo={informationFramework?.assessmentManuscript}
+        typeOfSetObject={SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE}
+        defaultSheetValue={
+          informationFramework?.assessmentManuscript?.assessmentManuscriptSecondary || ''
+        }
+        actualLableValue={'assessmentManuscriptSecondary'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpTextField

@@ -72,46 +72,46 @@ const DisplayPaneThreeSectionOneAssessment = () => {
         }
       ],
       innerInfo: 'No Information'
-    },
-    {
-      id: 'a2',
-      labelTextOneOne: 'collaborator',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'secondary',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'collaborator',
-              status: 'active'
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'collaborator',
-              status: 'active'
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'collaborator',
-              status: 'active'
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'secondary',
-          innerList: []
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
     }
+    // {
+    //   id: 'a2',
+    //   labelTextOneOne: 'collaborator',
+    //   labelTextOneOneBadgeOne: 'primary',
+    //   labelTextOneOneBadgeTwo: 'secondary',
+    //   labelTextOneOneBadgeThree: '',
+    //   labelTextOneOneBadgeFour: '',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'primary',
+    //       innerList: [
+    //         {
+    //           id: 'associate1',
+    //           textOne: 'Simple Sample 01',
+    //           textTwo: 'collaborator',
+    //           status: 'active'
+    //         },
+    //         {
+    //           id: 'associate2',
+    //           textOne: 'Simple Sample 02',
+    //           textTwo: 'collaborator',
+    //           status: 'active'
+    //         },
+    //         {
+    //           id: 'associate3',
+    //           textOne: 'Simple Sample 03',
+    //           textTwo: 'collaborator',
+    //           status: 'active'
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'secondary',
+    //       innerList: []
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true
+    // }
   ];
   let assessmentGroupListPrimary = [];
   if (
@@ -669,6 +669,21 @@ const DisplayPaneThreeSectionOneAssessment = () => {
           <div className="containerPadding">
             <Paper className={'dossierContainerTop'}>
               {engagementListKey.map((ob) => {
+                return (
+                  <div key={ob.id}>
+                    {ob.isListCard ? (
+                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    ) : (
+                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    )}
+                  </div>
+                );
+              })}
+            </Paper>
+          </div>
+          <div className="containerPadding">
+            <Paper className={'dossierContainerTop'}>
+              {setupList.map((ob) => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
