@@ -30,6 +30,9 @@ const initialState = {
         itemTypePrimary: [],
         itemTypeSecondary: []
       }
+    },
+    informationFramework: {
+      fee: ''
     }
   }
 };

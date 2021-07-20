@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
 import Popup from '../Molecules/PopUp/PopUp';
@@ -156,6 +156,8 @@ import {
   updateJobProfileTypeStatus
 } from '../Actions/ActionJobProfile';
 import { SHARE_NEW_POPUP } from '../PopUpConfig';
+import PopUpTextField from '../PopUpInformation/PopUpTextField';
+import { Fragment } from 'react';
 const PopUpDisplayPaneTwoReviewList = (props) => {
   const {
     popupHeaderOne,
@@ -173,7 +175,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     (state) => state.DisplayPaneTwoReducer
   );
   const [isReviseMode, setIsReviseMode] = useState(false);
-
+  const [shareFee, setshareFee] = useState(false);
+  useEffect(() => {
+    setshareFee(false);
+  }, []);
   const dispatch = useDispatch();
   const {
     headerPanelColour = 'displayPaneCentre',
@@ -2156,7 +2161,12 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           }
         });
       }
-      dispatch({ type: POPUP_CLOSE });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SHAREFEE', popupMode: 'ITEMCREATE' }
+      });
+      // setshareFee(true);
+      // dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'flagedApiCall' || dataVal === 'unflagedApiCall') {
       let reqBody = null;
       if (typeOfMiddlePaneList === 'assesseesDistinctReviewList') {
@@ -2332,6 +2342,23 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           mode={''}
         />
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          {/* {shareFee ? (
+            <Fragment>
+              <PopUpTextField
+                isActive={true}
+                label={'fee'}
+                actualLableValue={'fee'}
+                headerPanelColour={'displayPaneCentre'}
+                headerOne={popupHeaderOne}
+                headerOneBadgeOne={popupHeaderOneBadgeOne}
+                headerOneBadgeTwo={'fee'}
+                basicInfo={0}
+                // nextPopUpValue={''}
+                // typeOfSetObject={SET_TYPE_REDUCER_STATE}
+                // mode={reviewMode === 'revise' ? 'revise' : 'core'}
+              />
+            </Fragment>
+          ) : ( */}
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             setSecondaryOptionValueTwo={setSecondaryOptionValueTwo}
@@ -2341,6 +2368,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             tertiaryOptionCheckValue={tertiaryOptionCheckValue}
             forthOptionCheckValue={forthOptionCheckValue}
           />
+          {/* )} */}
         </DialogContent>
       </Popup>
     </div>

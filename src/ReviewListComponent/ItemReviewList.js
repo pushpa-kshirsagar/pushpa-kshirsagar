@@ -19,6 +19,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentTypeObj } from '../Actions/GenericActions';
 import { ITEM_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import { getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const ItemReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -34,7 +35,10 @@ const ItemReviewList = (props) => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeThree
+    middlePaneHeaderBadgeThree,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -143,6 +147,11 @@ const ItemReviewList = (props) => {
                 textTwo={item.informationBasic.itemDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
                 // dataValue={item.informationAllocation.itemGroup}
               />
             </div>

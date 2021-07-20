@@ -105,9 +105,16 @@ const JobProfileDistinctReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
-    let popupContentArrValue = ASSESSMENT_REVIEW_LIST_POPUP_OPTION.map((obj) =>
-      obj.data === 'assignments' ? { ...obj, data: 'assessments', dataValue: 'assessments' } : obj
-    );
+    let popupContentArrValue = [...ASSESSMENT_REVIEW_LIST_POPUP_OPTION];
+    let newObj = {
+      data: 'assessments',
+      dataValue: 'assessments',
+      dataKey: 'review',
+      optionClass: 'optionPrimary',
+      divider: 'dark',
+      disabled: false
+    };
+    popupContentArrValue.splice(11, 0, newObj);
     dispatch({
       type: SET_POPUP_STATE,
       payload: {

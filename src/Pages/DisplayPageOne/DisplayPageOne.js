@@ -53,6 +53,7 @@ import PopUpDisplayPaneTwoTripleDot from '../../PopUpDisplayPanel/PopUpDisplayPa
 import PopUpItemCreate from '../../Molecules/PopUpCreate/PopUpItemCreate';
 import PopUpJobProfileCreate from '../../Molecules/PopUpCreate/PopUpJobProfileCreate';
 import DisplayPanePreview from '../../Organisms/DisplayPanePreview/DisplayPanePreview';
+import PopUpTextField from '../../PopUpInformation/PopUpTextField';
 
 // import { useHistory } from 'react-router-dom';
 

@@ -16,7 +16,7 @@ export const GET_ASSESSEE_PERMISSION_URL =
 // export const GET_ASSESSEE_PERMISSION_URL = 'https://run.mocky.io/v3/b4ff8c35-0445-4f0c-899b-68d8281b2bd8';// for assessee manager (secondary) role
 
 export const PLATFORM_URL = 'https://xzi74b5495.execute-api.ap-south-1.amazonaws.com';
-export const ASSESSEES_URL = 'https://3pbuyvo5wk.execute-api.ap-south-1.amazonaws.com';
+export const ASSESSEES_URL = 'https://ssftiqscpa.execute-api.ap-south-1.amazonaws.com';
 export const ASSOCIATES_URL = 'https://gfxqx4a5uc.execute-api.ap-south-1.amazonaws.com';
 export const ASSESSMENTS_URL = 'https://2hqmad6icc.execute-api.ap-south-1.amazonaws.com';
 export const ASSIGNMENTS_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com';
