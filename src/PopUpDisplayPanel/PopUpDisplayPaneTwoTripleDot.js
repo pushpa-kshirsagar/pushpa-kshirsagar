@@ -493,7 +493,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
         dispatch({ type: POPUP_CLOSE });
         if (popupHeaderOneBadgeTwo === 'allocate') {

@@ -129,7 +129,8 @@ export const getItemGroupDistinctApiCall = (
   countPage,
   dispatch,
   targetValue,
-  cardValue = 'noCard'
+  cardValue = 'noCard',
+  isSelectActive = ''
 ) => {
   let requestObj = makeItemGroupObj(selectedAssociateInfo, secondaryOptionCheckValue, 0, countPage);
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -148,7 +149,8 @@ export const getItemGroupDistinctApiCall = (
       BadgeOne: targetValue,
       BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
       BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
-      isMiddlePaneList: true
+      isMiddlePaneList: true,
+      isSelectActive: isSelectActive
     }
   });
 };

@@ -391,11 +391,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         assessmentStatus: responseObject.informationEngagement.assessmentStatus
       };
       console.log('relatedReviewListPaneThree', relatedReviewListPaneThree);
-      let existingItemId = [];
-      // relatedReviewListPaneThree &&
-      // relatedReviewListPaneThree.item.map((val) => {
-      //   return val.id;
-      // });
+      let existingItemId = responseObject.informationFramework.assessmentItem;
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assessmentItemRevise' }

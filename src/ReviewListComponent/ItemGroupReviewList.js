@@ -147,8 +147,6 @@ const ItemGroupReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log('FilterMode', FilterMode);
-  console.log('isSelectActive', isSelectActive);
   return (
     <div>
       {reviewListDistinctData &&
