@@ -1,42 +1,34 @@
 import React, { useState } from 'react';
-import CrossIcon from '@material-ui/icons/Clear';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import ArrowRight from '@material-ui/icons/ChevronRight';
+import ArrowLeft from '@material-ui/icons/ChevronLeft';
+import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
-import Card from '../../Molecules/Card/Card';
-import DisplayPaneFiveFooter from './DisplayPaneFiveFooter';
-import DisplayPaneFiveHeader from './DisplayPaneFiveHeader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_PANE_THREE_ITEM_PREVIEW_MODE } from '../../actionType';
+import Label from '../../Atoms/Label/Label';
 
 export const DisplayPaneFive = () => {
-  // const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
-  const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
+  const dispatch = useDispatch();
+  const closePreview = () => {
+    dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
+  };
+
   return (
     <>
       <div>
-        <DisplayPaneFiveHeader
+        <HeaderCard
           className=""
-          headerOne="dashboard"
+          displayPane=""
+          headerOne=""
           headerOneBadgeOne=""
           headerPanelColour="blue"
         />
       </div>
-      <div className="containerPadding">
-        {isDisplayPaneFourShow && (
-          <>
-            <div className="containerPadding">
-              <Card IconOne={CrossIcon} className="" isIcon textOneOne="--" textTwoOne="" />
-            </div>
-            <div className="containerPadding">
-              <div
-                style={{
-                  boxShadow:
-                    'rgb(0 0 0 / 20%) 0px 1px 5px 0px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 3px 1px -2px',
-                  height: 'calc(100vh - 232px)'
-                }}
-              ></div>
-            </div>
-            <DisplayPaneFiveFooter />
-          </>
-        )}
+      <div>
+        <button onClick={closePreview}>close</button>
+        <Label />
       </div>
     </>
   );

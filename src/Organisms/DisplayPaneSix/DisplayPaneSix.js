@@ -1,92 +1,42 @@
 import React, { useState } from 'react';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import IconButton from '@material-ui/core/IconButton';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import ArrowRight from '@material-ui/icons/ChevronRight';
-import ArrowLeft from '@material-ui/icons/ChevronLeft';
-import HeaderCard from '../../Molecules/Header/HeaderCard';
+import CrossIcon from '@material-ui/icons/Clear';
 import './DisplayPaneSix.css';
+import Card from '../../Molecules/Card/Card';
+import DisplayPaneSixFooter from './DisplayPaneSixFooter';
+import DisplayPaneSixHeader from './DisplayPaneSixHeader';
 import { useSelector } from 'react-redux';
-import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
-import PopUpAssessmentNavigator from '../../PopUpInformation/PopUpAssessmentNavigator';
 
 export const DisplayPaneSix = () => {
-  const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);
-  const { isDisplayPaneFiveShow } = useSelector((state) => state.AssessmentReducer);
-  const flagQuestion = () => {
-    setIsQuestionFlaged((state) => !state);
-  };
-  // const dispatch = useDispatch();
-  const { FilterMode } = useSelector((state) => state.FilterReducer);
-  const { isPopUpOpen } = useSelector((state) => state.PopUpReducer);
-  const onClickFooter = (e) => {
-    // dispatch({ type: NAVIGATOR_MODE });
-  };
-
-  const primaryIcon = [];
-  const secondaryIcon = [
-    { label: 'first', onClick: onClickFooter, Icon: FirstPage },
-    { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft },
-    { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
-    { label: 'last', onClick: onClickFooter, Icon: LastPage }
-  ];
-
+  // const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
+  const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
   return (
     <>
       <div>
-        <HeaderCard
+        <DisplayPaneSixHeader
           className=""
-          displayPane="five"
-          headerOne="Career Search"
+          headerOne="dashboard"
           headerOneBadgeOne=""
-          headerPanelColour="green"
+          headerPanelColour="blue"
         />
       </div>
-      <div className="containerPadding displayPaneFive-main-container">
-        <div className="containerPadding sticky-header">
-          <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
-            <div style={{ flex: '2' }} className="flex-center">
-              <span style={{ fontWeight: 'bold' }}> 1 / 60 </span>
+      <div className="containerPadding">
+        {isDisplayPaneSixShow && (
+          <>
+            <div className="containerPadding">
+              <Card IconOne={CrossIcon} className="" isIcon textOneOne="--" textTwoOne="" />
             </div>
-            <div style={{ flex: '1' }} className="flex-center">
-              <span style={{ fontWeight: 'bold' }}> 3 </span>
+            <div className="containerPadding">
+              <div
+                style={{
+                  boxShadow:
+                    'rgb(0 0 0 / 20%) 0px 1px 5px 0px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 3px 1px -2px',
+                  height: 'calc(100vh - 232px)'
+                }}
+              ></div>
             </div>
-            <div style={{ flex: '1' }} className="flex-center">
-              <IconButton>
-                <RefreshIcon style={{ width: '20px', height: '20px', color: 'black' }} />
-              </IconButton>
-            </div>
-            <div style={{ flex: '1' }} className="flex-center"></div>
-            <div style={{ flex: '1' }} className="flex-center">
-              <IconButton onClick={flagQuestion} className={'assessmentFlagButton'}>
-                {isQuestionFlaged ? (
-                  <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
-                ) : (
-                  <i className="far fa-flag"></i>
-                )}
-              </IconButton>
-            </div>
-          </div>
-          <hr
-            style={{
-              height: '1px',
-              margin: '0',
-              border: 'none',
-              flexShrink: '0',
-              backgroundColor: 'rgba(0, 0, 0, 0.12)'
-            }}
-          />
-        </div>
-        <FooterIconTwo
-          className={isDisplayPaneFiveShow ? 'widthDisplayPaneFive' : 'fullWidth'}
-          FilterModeEnable={false}
-          FilterMode={FilterMode}
-          onClick={onClickFooter}
-          primaryIcon={primaryIcon}
-          secondaryIcon={secondaryIcon}
-        />
-        <PopUpAssessmentNavigator isActive={isPopUpOpen} />
+            <DisplayPaneSixFooter />
+          </>
+        )}
       </div>
     </>
   );

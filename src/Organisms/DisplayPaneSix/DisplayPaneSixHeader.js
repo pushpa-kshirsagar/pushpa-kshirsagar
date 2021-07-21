@@ -9,7 +9,7 @@ import '../../Molecules/Header/HeaderCard.css';
 import { SET_DISPLAY_PANE_FOUR_SHOW } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
 
-const DisplayPaneFiveHeader = (props) => {
+const DisplayPaneSixHeader = (props) => {
   const {
     headerOne = 'dashboard',
     headerOneBadgeOne = '',
@@ -19,11 +19,11 @@ const DisplayPaneFiveHeader = (props) => {
     headerPanelColour
   } = props;
   const dispatch = useDispatch();
-  const { isDisplayPaneFourShow } = useSelector((state) => state.AssessmentReducer);
+  const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
 
   return (
     <>
-      {isDisplayPaneFourShow ? (
+      {isDisplayPaneSixShow ? (
         <div className={'iguru-leftpanel'}>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
             <Paper
@@ -123,4 +123,4 @@ const DisplayPaneFiveHeader = (props) => {
   );
 };
 
-export default DisplayPaneFiveHeader;
+export default DisplayPaneSixHeader;

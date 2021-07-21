@@ -31,8 +31,8 @@ import DisplayPaneOne from '../../Organisms/DisplayPaneOne/DisplayPaneOne';
 import DisplayPaneThree from '../../Organisms/DisplayPaneThree/DisplayPaneThree';
 import DisplayPaneTwo from '../../Organisms/DisplayPaneTwo/DisplayPaneTwo';
 import GridColumn from '../../Molecules/GridColumn/GridColumn';
-import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 import DisplayPaneSix from '../../Organisms/DisplayPaneSix/DisplayPaneSix';
+import DisplayPaneSeven from '../../Organisms/DisplayPaneSeven/DisplayPaneSeven';
 // import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 // import { AccountContext } from '../../Account';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
@@ -53,15 +53,17 @@ import PopUpDisplayPaneTwoTripleDot from '../../PopUpDisplayPanel/PopUpDisplayPa
 import PopUpItemCreate from '../../Molecules/PopUpCreate/PopUpItemCreate';
 import PopUpJobProfileCreate from '../../Molecules/PopUpCreate/PopUpJobProfileCreate';
 import DisplayPaneFour from '../../Organisms/DisplayPaneFour/DisplayPaneFour';
+import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 
 // import { useHistory } from 'react-router-dom';
 
 const DisplayPageOne = () => {
   const { loginUserName } = useSelector((state) => state.UserReducer);
   const { gridColumnCountValue } = useSelector((state) => state.PopUpReducer);
-  const { isDisplayPaneFiveShow } = useSelector((state) => state.AssessmentReducer);
+  const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { isItemPreviewShow = false } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { assesseeConfirmStatus } = useSelector((state) => state.UserReducer);
   const dispatch = useDispatch();
   const isExamMode = false;
@@ -179,18 +181,27 @@ const DisplayPageOne = () => {
                 )}
               </>
             )}
-            {mobilePanestate === 'DisplayPaneFive' && <DisplayPaneFive />}
-            {mobilePanestate === 'displayPaneSix' && <DisplayPaneSix />}
+            {mobilePanestate === 'DisplayPaneSix' && <DisplayPaneSix />}
+            {mobilePanestate === 'displayPaneSeven' && <DisplayPaneSeven />}
           </div>
         ) : (
           <>
             {isExamMode ? (
               <>
-                <div style={{ width: isDisplayPaneFiveShow ? '33.33%' : '4%' }}>
+                <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
+                  <DisplayPaneSix />
+                </div>
+                <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '95.5%' }}>
+                  <DisplayPaneSeven />
+                </div>
+              </>
+            ) : isItemPreviewShow ? (
+              <>
+                <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '95.5%' }}>
                   <DisplayPaneFive />
                 </div>
-                <div style={{ width: isDisplayPaneFiveShow ? '66.66%' : '95.5%' }}>
-                  <DisplayPaneSix />
+                <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
+                  <DisplayPaneThree />
                 </div>
               </>
             ) : (
