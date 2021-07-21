@@ -6,13 +6,24 @@ import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
 import Manuscript from '@material-ui/icons/Description';
-import { makeAssesseeReviewListRequestObject } from '../../Actions/GenericActions';
-import { SET_PANE_THREE_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
+import { makeAssesseeReviewListRequestObject, makeItemObj } from '../../Actions/GenericActions';
+import {
+  FILTERMODE,
+  GET_ALLOCATE_ITEM,
+  LOADER_START,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MOBILE_PANE_STATE,
+  SET_PANE_THREE_PREVIEW_MODE,
+  SET_POPUP_VALUE
+} from '../../actionType';
 
 const DisplayPaneThreeSectionTwoAssessment = () => {
   const [listExpand, setListExpand] = useState('');
-  const { headerOneBadgeTwo, reviewMode, responseObject } = useSelector(
+  const { headerOneBadgeTwo, reviewMode, responseObject, relatedReviewListPaneThree } = useSelector(
     (state) => state.DisplayPaneThreeReducer
+  );
+  const { selectedAssociateInfo, countPage, reviewListDistinctData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
   );
   const { informationFramework } = responseObject;
   const dispatch = useDispatch();
@@ -369,6 +380,41 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'TIMELINEENDPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'item') {
+      let requestObect = makeItemObj(selectedAssociateInfo, 'active', countPage, 0);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assessmentName: responseObject.informationBasic.assessmentName,
+        assessmentDescription: responseObject.informationBasic.assessmentDescription,
+        assessmentStatus: responseObject.informationEngagement.assessmentStatus
+      };
+      console.log('relatedReviewListPaneThree', relatedReviewListPaneThree);
+      let existingItemId = [];
+      // relatedReviewListPaneThree &&
+      // relatedReviewListPaneThree.item.map((val) => {
+      //   return val.id;
+      // });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assessmentItemRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ITEM,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingItemId: existingItemId,
+          typeOfMiddlePaneList: 'assessmentItemReviewList'
+        }
       });
     }
   };

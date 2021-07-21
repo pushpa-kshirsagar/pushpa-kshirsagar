@@ -83,19 +83,19 @@ const AssesseeAssignmentDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
-    let requestObect = makeAssesseeGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
-    dispatch({ type: LOADER_START });
-    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-    dispatch({
-      type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-      payload: {
-        request: requestObect,
-        BadgeOne: middlePaneHeaderBadgeOne,
-        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
-        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
-        isMiddlePaneList: true
-      }
-    });
+    // let requestObect = makeAssesseeGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
+    // dispatch({ type: LOADER_START });
+    // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+    // dispatch({
+    //   type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+    //   payload: {
+    //     request: requestObect,
+    //     BadgeOne: middlePaneHeaderBadgeOne,
+    //     BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+    //     BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+    //     isMiddlePaneList: true
+    //   }
+    // });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
@@ -121,7 +121,7 @@ const AssesseeAssignmentDistinctReviewList = (props) => {
     console.log(e.currentTarget.getAttribute('tag'));
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log('reviewListDistinctData', reviewListDistinctData);
+  console.log('FilterMode', FilterMode);
   return (
     <div>
       {reviewListDistinctData &&
@@ -148,20 +148,18 @@ const AssesseeAssignmentDistinctReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assesseeAssignmentDistinctinactive' ||
-        (FilterMode === 'assesseeAssignmentDistinctactive' && (
-          <FooterIconTwo
-            FilterModeEnable={FilterModeEnable}
-            FilterMode={FilterMode}
-            onClick={onClickFooter}
-            primaryIcon={primaryIcon}
-            secondaryIcon={
-              FilterMode === 'assesseeAssignmentDistinctactive'
-                ? secondaryIconOne
-                : secondaryIconTwo
-            }
-          />
-        ))}
+      {(FilterMode === 'assesseeAssignmentDistinctinactive' ||
+        FilterMode === 'assesseeAssignmentDistinctactive') && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={
+            FilterMode === 'assesseeAssignmentDistinctactive' ? secondaryIconOne : secondaryIconTwo
+          }
+        />
+      )}
     </div>
   );
 };

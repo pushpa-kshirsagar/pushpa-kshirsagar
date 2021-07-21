@@ -81,6 +81,7 @@ import {
 } from '../Actions/ItemModuleAction';
 import {
   getAssessmentGroupAssessmentDistinctApiCall,
+  getAssessmentItemDistinctApiCall,
   getAssessmentTypeAssessmentDistinctApiCall,
   getNodeRelatedAssessmentsDistinctApiCall
 } from '../Actions/AssessmentModuleAction';
@@ -771,6 +772,18 @@ const PopUpScan = (props) => {
           true
         );
       }
+      if (typeOfMiddlePaneList === 'assessmentItemReviewList') {
+        getAssessmentItemDistinctApiCall(
+          selectedAssociateInfo,
+          middlePaneHeaderBadgeTwo,
+          countPage,
+          dispatch,
+          'distinct',
+          selectedTagValue,
+          state.scanValue,
+          true
+        );
+      }
       if (typeOfMiddlePaneList === 'itemTypeItemReviewList') {
         getItemTypeItemDistinctApiCall(
           selectedAssociateInfo,
@@ -943,6 +956,7 @@ const PopUpScan = (props) => {
                 isPopUpValue === 'assignmentDistinctAssesseeReviewList' ||
                 isPopUpValue === 'cultureProfileAssessmentReviewList' ||
                 isPopUpValue === 'jobProfileAssessmentReviewList' ||
+                isPopUpValue === 'assessmentItemReviewList' ||
                 isPopUpValue === 'associateRoleDistinctReviewList') && (
                 <span>name, description.</span>
               )}

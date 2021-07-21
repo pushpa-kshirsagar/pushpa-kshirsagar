@@ -13,7 +13,8 @@ import {
   GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA,
   GET_ALLOCATE_ASSESSMENT,
   CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
-  JOB_ASSESSMENTS_REVIEWLIST_SAGA
+  JOB_ASSESSMENTS_REVIEWLIST_SAGA,
+  GET_ASSESSMENT_ITEM_REVIEW_LIST_SAGA
 } from '../../actionType';
 import {
   ASSESSMENT_REVIEW_LIST_URL,
@@ -21,7 +22,8 @@ import {
   ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_URL,
   ASSESSMENTNODE_ASSESSMENT_REVIEWLIST_URL,
   JOB_ASSESSMENT_REVIEWLIST_URL,
-  CULTURE_ASSESSMENT_REVIEWLIST_URL
+  CULTURE_ASSESSMENT_REVIEWLIST_URL,
+  ASSESSMENT_ITEM_REVIEWLIST_URL
 } from '../../endpoints';
 
 const apiCallMethod = async (requestObj) => {
@@ -212,6 +214,50 @@ function* workerAssessmentNodeAssessment(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerAssessmentItemReviewList(data) {
+  try {
+    const response = yield call(apiCallMethod, {
+      data: data.payload.request,
+      URL: ASSESSMENT_ITEM_REVIEWLIST_URL
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
+      if (data.payload.isMiddlePaneList) {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'items',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assessmentItemReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+      }
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+    yield put({ type: CLEAR_ASSESSMENT_INFO });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 function* workerReviewListAssessmentAllocateSaga(data) {
   try {
     const userResponse = yield call(apiCallMethod, {
@@ -262,5 +308,6 @@ export default function* watchReviewListAssessmentSaga() {
   yield takeLatest(GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA, workerAssessmentGroupAssessment);
   yield takeLatest(GET_ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_SAGA, workerAssessmentTypeAssessment);
   yield takeLatest(GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA, workerAssessmentNodeAssessment);
+  yield takeLatest(GET_ASSESSMENT_ITEM_REVIEW_LIST_SAGA, workerAssessmentItemReviewList);
   yield takeLatest(GET_ALLOCATE_ASSESSMENT, workerReviewListAssessmentAllocateSaga);
 }

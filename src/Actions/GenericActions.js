@@ -3991,6 +3991,223 @@ export const getAssessmentGroupAssessmentReqObj = (
     ]
   };
 };
+export const getAssessmentGroupAssessmentScanReqObj = (
+  selectedAssociateInfo,
+  groupId,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED']
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    groupId: groupId,
+    orderBy: {
+      columnName: 'informationBasic.assessmentName,informationBasic.assessmentDescription',
+      order: 'asc'
+    },
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'or',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assessmentGroup.assessmentGroupPrimary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: groupId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationAllocation.assessmentGroup.assessmentGroupSecondary',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: groupId
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assessmentGroupName',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          },
+          {
+            dataType: 'string',
+            conditionColumn: 'informationBasic.assessmentGroupDescription',
+            conditionValue: {
+              condition: 'ct',
+              value: {
+                from: searchStr
+              }
+            }
+          }
+        ]
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.assessmentGroupStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+export const getAssessmentItemReqObj = (
+  selectedAssociateInfo,
+  assessmentId,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED']
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    orderBy: {
+      columnName: 'informationBasic.itemName,informationBasic.itemDescription',
+      order: 'asc'
+    },
+    assessmentId: assessmentId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.itemStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
+export const getAssessmentItemScanReqObj = (
+  selectedAssociateInfo,
+  assessmentId,
+  filterKey,
+  numberPage,
+  countPage,
+  searchStr
+) => {
+  let searchObj = {
+    condition: 'eq',
+    value: {
+      from: filterKey.toUpperCase()
+    }
+  };
+  if (filterKey === 'all') {
+    {
+      searchObj = {
+        condition: 'in',
+        value: {
+          in: ['SUSPENDED', 'TERMINATED']
+        }
+      };
+    }
+  }
+  return {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: numberPage,
+    orderBy: {
+      columnName: 'informationBasic.itemName,informationBasic.itemDescription',
+      order: 'asc'
+    },
+    assessmentId: assessmentId,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        dataType: 'string',
+        conditionColumn: 'informationBasic.itemName',
+        conditionValue: {
+          condition: 'ct',
+          value: {
+            from: searchStr
+          }
+        }
+      },
+      {
+        dataType: 'string',
+        conditionColumn: 'informationBasic.itemDescription',
+        conditionValue: {
+          condition: 'ct',
+          value: {
+            from: searchStr
+          }
+        }
+      },
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'informationEngagement.itemStatus',
+            conditionValue: searchObj
+          }
+        ]
+      }
+    ]
+  };
+};
 export const getAssignmentGroupAssignmentReqObj = (
   selectedAssociateInfo,
   groupId,
@@ -4163,102 +4380,7 @@ export const getAssignmentGroupAssignmentScanReqObj = (
     ]
   };
 };
-export const getAssessmentGroupAssessmentScanReqObj = (
-  selectedAssociateInfo,
-  groupId,
-  filterKey,
-  numberPage,
-  countPage,
-  searchStr
-) => {
-  let searchObj = {
-    condition: 'eq',
-    value: {
-      from: filterKey.toUpperCase()
-    }
-  };
-  if (filterKey === 'all') {
-    {
-      searchObj = {
-        condition: 'in',
-        value: {
-          in: ['SUSPENDED', 'TERMINATED']
-        }
-      };
-    }
-  }
-  return {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    countPage: countPage,
-    numberPage: numberPage,
-    groupId: groupId,
-    orderBy: {
-      columnName: 'informationBasic.assessmentName,informationBasic.assessmentDescription',
-      order: 'asc'
-    },
-    filter: 'true',
-    searchCondition: 'AND',
-    search: [
-      {
-        condition: 'or',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationAllocation.assessmentGroup.assessmentGroupPrimary',
-            conditionValue: {
-              condition: 'eq',
-              value: {
-                from: groupId
-              }
-            }
-          },
-          {
-            dataType: 'string',
-            conditionColumn: 'informationAllocation.assessmentGroup.assessmentGroupSecondary',
-            conditionValue: {
-              condition: 'eq',
-              value: {
-                from: groupId
-              }
-            }
-          },
-          {
-            dataType: 'string',
-            conditionColumn: 'informationBasic.assessmentGroupName',
-            conditionValue: {
-              condition: 'ct',
-              value: {
-                from: searchStr
-              }
-            }
-          },
-          {
-            dataType: 'string',
-            conditionColumn: 'informationBasic.assessmentGroupDescription',
-            conditionValue: {
-              condition: 'ct',
-              value: {
-                from: searchStr
-              }
-            }
-          }
-        ]
-      },
-      {
-        condition: 'and',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationEngagement.assessmentGroupStatus',
-            conditionValue: searchObj
-          }
-        ]
-      }
-    ]
-  };
-};
+
 export const getAssessmentTypeAssessmentReqObj = (
   selectedAssociateInfo,
   typeId,

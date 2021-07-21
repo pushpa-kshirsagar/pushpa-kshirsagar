@@ -355,6 +355,7 @@
 }
 .fixed10PadDim {
   min-width: 255px;
+  max-width: 310px;
   box-sizing: border-box;
 }
 .fixed10PadDim-error {
@@ -372,7 +373,7 @@
   padding-bottom: 5px !important;
 }
 .reviewListFixedWidth {
-  max-width: 287px;
+  /* max-width: 287px; */
 }
 .fitContent {
   height: fit-content;

@@ -18,7 +18,9 @@ import {
   SET_POPUP_STATE,
   SET_SECONDARY_OPTION_VALUE,
   GET_ASSESSEE_ASSIGNMENT_SAGA,
-  FILTERMODE
+  FILTERMODE,
+  SET_REQUEST_OBJECT,
+  SET_PAGE_COUNT
 } from '../actionType';
 import {
   ASSIGNMENT_DISTINCT_POPUP,
@@ -213,25 +215,57 @@ const PopUpDisplayPanelAssessee = (props) => {
         numberPage: 0,
         filter: 'true',
         orderBy: {
-          columnName: 'informationBasic.assesseeAssignmentName',
+          columnName: '',
           order: 'asc'
         },
+        searchCondition: 'AND',
         search: [
           {
             condition: 'and',
             searchBy: [
               {
                 dataType: 'string',
-                conditionColumn: 'assesseeAssignmentStatus',
+                conditionColumn: 'status',
                 conditionValue: {
                   condition: 'eq',
-                  from: secondaryOptionCheckValue.toUpperCase()
+                  value: {
+                    from: secondaryOptionCheckValue.toUpperCase()
+                  }
                 }
               }
             ]
           }
         ]
       };
+      dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+      dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+      // let reqBody = {
+      //   assesseeId: selectedAssociateInfo?.assesseeId,
+      //   associateId:
+      //     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      //   countPage: countPage,
+      //   numberPage: 0,
+      //   filter: 'true',
+      //   orderBy: {
+      //     columnName: 'informationBasic.assesseeAssignmentName',
+      //     order: 'asc'
+      //   },
+      //   search: [
+      //     {
+      //       condition: 'and',
+      //       searchBy: [
+      //         {
+      //           dataType: 'string',
+      //           conditionColumn: 'assesseeAssignmentStatus',
+      //           conditionValue: {
+      //             condition: 'eq',
+      //             from: secondaryOptionCheckValue.toUpperCase()
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // };
       dispatch({ type: LOADER_START });
       dispatch({
         type: GET_ASSESSEE_ASSIGNMENT_SAGA,

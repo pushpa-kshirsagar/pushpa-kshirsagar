@@ -24,11 +24,14 @@ import {
   ASSESSMENT_GROUP_REVISE_INFO_SAGA,
   ASSESSMENT_TYPE_REVISE_INFO_SAGA,
   SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
-  ASSESSMENT_PUBLISH_SAGA
+  ASSESSMENT_PUBLISH_SAGA,
+  GET_ASSESSMENT_ITEM_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   getAssessmentGroupAssessmentReqObj,
   getAssessmentGroupAssessmentScanReqObj,
+  getAssessmentItemReqObj,
+  getAssessmentItemScanReqObj,
   getAssessmentTypeAssessmentReqObj,
   getAssessmentTypeAssessmentScanReqObj,
   getNodeAssessmentsReqObj,
@@ -175,6 +178,52 @@ export const getAssessmentGroupAssessmentDistinctApiCall = (
   // dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
   dispatch({
     type: GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA,
+    payload: {
+      request: reqBody,
+      HeaderOne: 'items',
+      BadgeOne: targetValue,
+      BadgeTwo: secondaryOptionCheckValue,
+      BadgeThree: '',
+      isMiddlePaneList: true
+    }
+  });
+};
+export const getAssessmentItemDistinctApiCall = (
+  selectedAssociateInfo,
+  secondaryOptionCheckValue,
+  countPage,
+  dispatch,
+  targetValue,
+  selectedTagValue,
+  searchStr,
+  isScan
+) => {
+  let reqBody = getAssessmentItemReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    secondaryOptionCheckValue,
+    0,
+    countPage
+  );
+  if (isScan) {
+    reqBody = getAssessmentItemScanReqObj(
+      selectedAssociateInfo,
+      selectedTagValue,
+      secondaryOptionCheckValue,
+      0,
+      countPage,
+      searchStr
+    );
+  }
+  // dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+  dispatch({
+    type: SET_RELATED_REQUEST_OBJECT,
+    payload: reqBody
+  });
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: GET_ASSESSMENT_ITEM_REVIEW_LIST_SAGA,
     payload: {
       request: reqBody,
       HeaderOne: 'items',
