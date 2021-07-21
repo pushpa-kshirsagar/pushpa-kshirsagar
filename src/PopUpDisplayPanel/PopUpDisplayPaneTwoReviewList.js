@@ -689,7 +689,11 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
+      if (
+        typeOfMiddlePaneList === 'itemsDistinctReviewList' ||
+        typeOfMiddlePaneList === 'assessmentItemReviewList'||
+        typeOfMiddlePaneList === 'itemGroupItemReviewList'
+      ) {
         dispatch({
           type: GET_ITEM_INFO_SAGA,
           payload: {

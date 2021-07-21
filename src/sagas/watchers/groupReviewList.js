@@ -246,7 +246,8 @@ function* workerReviewItemGroupListSaga(data) {
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'itemsGroupDistinctReviewList',
             scanCount: userResponse && userResponse.countTotal,
-            showMiddlePaneState: true
+            showMiddlePaneState: true,
+            isSelectActive: data.payload.isSelectActive
           }
         });
         console.log('loading end');

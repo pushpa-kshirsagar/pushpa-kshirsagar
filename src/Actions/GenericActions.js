@@ -4105,7 +4105,7 @@ export const getAssessmentItemReqObj = (
       searchObj = {
         condition: 'in',
         value: {
-          in: ['SUSPENDED', 'TERMINATED']
+          in: ['SUSPENDED', 'TERMINATED','UNPUBLISHED']
         }
       };
     }
