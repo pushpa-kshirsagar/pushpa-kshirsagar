@@ -76,7 +76,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       isListCard: false,
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'core',
+          labelTextOneOneBadge: 'distinct',
           textOne: 'No Information'
         },
         {
@@ -382,7 +382,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         payload: { isPopUpValue: 'TIMELINEENDPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
-    if (labelName === 'item') {
+    if (labelName === 'item' && selectedBadgeName === 'distinct') {
       let requestObect = makeItemObj(selectedAssociateInfo, 'active', countPage, 0);
       let revisedGroupObject = {
         id: responseObject.id,

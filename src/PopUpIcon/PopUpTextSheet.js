@@ -107,7 +107,7 @@ const PopUpTextSheet = (props) => {
             </div>
           </Paper>
         </DialogTitle>
-        <DialogContent className={['textsheetPopupContent', 'fixed10PadDim'].join(' ')}>
+        <DialogContent className={['textsheetPopupContent'].join(' ')}>
           <ReactCKEditor
             activeClass="editor"
             content={innerContent}

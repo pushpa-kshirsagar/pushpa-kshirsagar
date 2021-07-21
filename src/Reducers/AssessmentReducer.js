@@ -73,6 +73,7 @@ const initialState = {
       assessmentCommuniquePrimary: '',
       assessmentCommuniqueSecondary: ''
     },
+    assessmentItem: [],
     assessmentManuscript: {
       assessmentManuscriptPrimary: '',
       assessmentManuscriptSecondary: ''
