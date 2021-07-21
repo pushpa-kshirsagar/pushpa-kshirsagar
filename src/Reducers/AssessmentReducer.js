@@ -22,7 +22,7 @@ import {
 } from '../PopUpConfig';
 
 const initialState = {
-  isDisplayPaneFiveShow: true,
+  isDisplayPaneSixShow: true,
   assessmentsHeaderOne: '',
   assessmentsPopUpType: 'primary',
   currentPopUpOption: '',
@@ -182,7 +182,7 @@ const AssessmentReducer = (istate = initialState, action) => {
       };
     case SET_DISPLAY_PANE_FOUR_SHOW:
       return {
-        isDisplayPaneFiveShow: action.payload
+        isDisplayPaneSixShow: action.payload
       };
     case SET_ASSESSMENT_DYNAMIC_SINGLE_STATE:
       return {

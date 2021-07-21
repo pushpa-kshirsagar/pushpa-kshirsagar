@@ -12,7 +12,8 @@ import {
   SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
   SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-  ASSESSMENT_PUBLISH_SAGA
+  ASSESSMENT_PUBLISH_SAGA,
+  SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE
 } from '../../actionType';
 import {
   ASSESSMENT_REVIEW_INFO_URL,
@@ -233,11 +234,18 @@ function* workerReviewInfoAssessmentSaga(data) {
           type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
           payload: { stateName: 'assessmentTime', value: timeAssessment }
         });
-        const menuScriptAssessment = informationFramework?.assessmentManuscript || '';
+        const menuScriptAssessment = informationFramework?.assessmentManuscript || {
+          assessmentManuscriptPrimary: '',
+          assessmentManuscriptSecondary: ''
+        };
         yield put({
-          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-          payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }
+          type: SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
+          payload: menuScriptAssessment
         });
+        // yield put({
+        //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        //   payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }
+        // });
       }
     } else {
       yield put({

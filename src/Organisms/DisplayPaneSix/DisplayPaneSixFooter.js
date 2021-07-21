@@ -5,7 +5,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import IconButton from '../../Molecules/IconButton/IconButton';
 import '../../Molecules/FooterIcon/FooterIconTwo.css';
 
-export const DisplayPaneFourFooter = () => {
+export const DisplayPaneSixFooter = () => {
   return (
     <div className={'middleFooterD'}>
       <div style={{ flex: 1, textAlign: 'center' }}>
@@ -35,4 +35,4 @@ export const DisplayPaneFourFooter = () => {
   );
 };
 
-export default DisplayPaneFourFooter;
+export default DisplayPaneSixFooter;

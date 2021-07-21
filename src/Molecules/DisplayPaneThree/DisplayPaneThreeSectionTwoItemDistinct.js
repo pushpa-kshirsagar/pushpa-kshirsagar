@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import AccordianListCard from '../Accordian/AccordianListCard';
 import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import { SET_PANE_THREE_ITEM_PREVIEW_MODE } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoItem = () => {
   const [listExpand, setListExpand] = useState('');
@@ -14,12 +15,12 @@ const DisplayPaneThreeSectionTwoItem = () => {
   // const { countPage, selectedAssociateInfo, selectedTagValue } = useSelector(
   //   (state) => state.DisplayPaneTwoReducer
   // );
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const { informationContact, informationCredential, informationFramework } = responseObject;
 
   const frameworkList = [
     {
-      id: 'a1',
+      id: 'a1-score',
       labelTextOneOne: 'score',
       labelTextOneOneBadges: [
         {
@@ -38,7 +39,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconTwo: null
     },
     {
-      id: 'a1',
+      id: 'a1-time',
       labelTextOneOne: 'time',
       labelTextOneOneBadges: [
         {
@@ -51,14 +52,45 @@ const DisplayPaneThreeSectionTwoItem = () => {
       isListCard: false,
       IconOne: null,
       IconTwo: null
+    },
+    {
+      id: 'item-type',
+      labelTextOneOne: 'type',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
+    {
+      id: 'item-preview',
+      labelTextOneOne: 'items',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: []
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: true,
+      IconOne: null,
+      IconTwo: null
     }
   ];
 
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
-    console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
+    if (labelName === 'items' && selectedBadgeName === 'distinct') {
+      dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
+    }
   };
 
   return (
