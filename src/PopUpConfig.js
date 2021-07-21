@@ -1288,6 +1288,14 @@ export const ASSESSMENT_REVIEW_LIST_POPUP_OPTION = [
     disabled: false
   },
   {
+    data: 'items',
+    dataValue: 'items',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    divider: 'dark'
+  },
+  {
     data: 'notifications',
     dataValue: 'notifications',
     dataKey: 'review',

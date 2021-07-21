@@ -119,6 +119,7 @@ import {
 } from '../Actions/ItemModuleAction';
 import {
   getAssessmentGroupAssessmentDistinctApiCall,
+  getAssessmentItemDistinctApiCall,
   getAssessmentTypeAssessmentDistinctApiCall,
   getNodeRelatedAssessmentsDistinctApiCall,
   updateAssessmentDistinctStatus,
@@ -1732,6 +1733,24 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({
           type: FILTERMODE,
           payload: { FilterMode: 'itemTypeItemDistinct' + secondaryOptionCheckValue }
+        });
+        dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        dispatch({ type: POPUP_CLOSE });
+      }
+      if (typeOfMiddlePaneList === 'assessmentDistinctReviewList') {
+        getAssessmentItemDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          dataVal,
+          selectedTagValue,
+          '',
+          false
+        );
+        dispatch({
+          type: FILTERMODE,
+          payload: { FilterMode: 'assessmentItem' + secondaryOptionCheckValue }
         });
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
