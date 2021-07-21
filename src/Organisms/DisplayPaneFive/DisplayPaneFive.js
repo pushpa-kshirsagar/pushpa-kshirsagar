@@ -1,8 +1,4 @@
-import React, { useState } from 'react';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import ArrowRight from '@material-ui/icons/ChevronRight';
-import ArrowLeft from '@material-ui/icons/ChevronLeft';
+import React from 'react';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +24,7 @@ export const DisplayPaneFive = () => {
       </div>
       <div>
         <button onClick={closePreview}>close</button>
-        <Label />
+        {/* <Label /> */}
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFour.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_PANE_THREE_PREVIEW_MODE } from '../../actionType';
+import { SET_MOBILE_PANE_STATE, SET_PANE_THREE_PREVIEW_MODE } from '../../actionType';
 
 export const DisplayPaneFour = () => {
   const dispatch = useDispatch();
@@ -25,6 +25,7 @@ export const DisplayPaneFour = () => {
         previewInnerHTML: ''
       }
     });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
   };
 
   return (

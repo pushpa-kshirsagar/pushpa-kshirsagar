@@ -127,6 +127,24 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       IconOne: Manuscript
     },
     {
+      id: 'preview-assessment',
+      labelTextOneOne: 'preview',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: null
+    },
+    {
       id: 'a4',
       labelTextOneOne: 'score',
       isListCard: false,
@@ -269,6 +287,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
             informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary || ''
         }
       });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
     if (headerOne === 'communiqué' && badgeOne === 'secondary') {
       dispatch({
@@ -283,6 +302,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
             informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary || ''
         }
       });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
     if (headerOne === 'manuscript' && badgeOne === 'primary') {
       dispatch({
@@ -297,6 +317,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
             informationFramework?.assessmentManuscript?.assessmentManuscriptPrimary || ''
         }
       });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
     if (headerOne === 'manuscript' && badgeOne === 'secondary') {
       dispatch({
@@ -311,6 +332,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
             informationFramework?.assessmentManuscript?.assessmentManuscriptSecondary || ''
         }
       });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
   };
   const reviseFramework = (e) => {
@@ -391,7 +413,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         assessmentStatus: responseObject.informationEngagement.assessmentStatus
       };
       console.log('relatedReviewListPaneThree', relatedReviewListPaneThree);
-      let existingItemId = responseObject.informationFramework.assessmentItem;
+      let existingItemId = informationFramework?.assessmentItem || [];
+      // relatedReviewListPaneThree &&
+      // relatedReviewListPaneThree.item.map((val) => {
+      //   return val.id;
+      // });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assessmentItemRevise' }

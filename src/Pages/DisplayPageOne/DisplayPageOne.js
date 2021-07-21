@@ -168,18 +168,27 @@ const DisplayPageOne = () => {
           <div className="display-pane-container">
             {mobilePanestate === 'displayPaneOne' && <DisplayPaneOne />}
             {mobilePanestate === 'displayPaneTwo' && (
-              <DisplayPaneTwo popupAllClose={popupAllClose} />
-            )}
-            {mobilePanestate === 'displayPaneThree' && (
               <>
                 {isPreviewShow ? (
                   <>
                     <DisplayPaneFour />
                   </>
                 ) : (
-                  <DisplayPaneThree />
+                  <DisplayPaneTwo popupAllClose={popupAllClose} />
                 )}
               </>
+            )}
+            {mobilePanestate === 'displayPaneThree' && (
+              <DisplayPaneThree />
+              // <>
+              //   {isPreviewShow ? (
+              //     <>
+              //       <DisplayPaneFour />
+              //     </>
+              //   ) : (
+              //     <DisplayPaneThree />
+              //   )}
+              // </>
             )}
             {mobilePanestate === 'DisplayPaneSix' && <DisplayPaneSix />}
             {mobilePanestate === 'displayPaneSeven' && <DisplayPaneSeven />}
@@ -211,10 +220,19 @@ const DisplayPageOne = () => {
                   {/* <button onClick={changeUserName}>Change Username</button> */}
                 </div>
                 <div className="display-pane-container">
-                  <DisplayPaneTwo popupAllClose={popupAllClose} />
+                  <>
+                    {isPreviewShow ? (
+                      <>
+                        <DisplayPaneFour />
+                      </>
+                    ) : (
+                      <DisplayPaneTwo popupAllClose={popupAllClose} />
+                    )}
+                  </>
                 </div>
                 <div className="display-pane-container">
-                  <>
+                  <DisplayPaneThree />
+                  {/* <>
                     {isPreviewShow ? (
                       <>
                         <DisplayPaneFour />
@@ -222,7 +240,7 @@ const DisplayPageOne = () => {
                     ) : (
                       <DisplayPaneThree />
                     )}
-                  </>
+                  </> */}
                 </div>
               </>
             )}

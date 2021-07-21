@@ -234,6 +234,11 @@ function* workerReviewInfoAssessmentSaga(data) {
           type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
           payload: { stateName: 'assessmentTime', value: timeAssessment }
         });
+        const itemAssessment = informationFramework?.assessmentItem || [];
+        yield put({
+          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          payload: { stateName: 'assessmentItem', value: itemAssessment }
+        });
         const menuScriptAssessment = informationFramework?.assessmentManuscript || {
           assessmentManuscriptPrimary: '',
           assessmentManuscriptSecondary: ''
