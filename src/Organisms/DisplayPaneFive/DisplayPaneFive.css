@@ -13,3 +13,50 @@
   position: sticky;
   background-color: white;
 }
+.font-weight-bold {
+  color: #000 !important;
+  font-weight: bold;
+}
+.text-area {
+  margin: 0px;
+  width: 98%;
+  height: 105px !important;
+}
+.radio-button {
+  width: 48px !important;
+  height: 48px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.option-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  margin: 0;
+}
+.option-input {
+  margin: 0 !important;
+  width: 94% !important;
+}
+.option-input input {
+  font-size: 16px;
+}
+.icon-button-option {
+  display: flex;
+  border: 1px solid;
+  height: 15px !important;
+  width: 15px;
+  border-radius: 50%;
+  color: gray;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer !important;
+}
+
+.checkbox-lebel .MuiTypography-body1 {
+  font-size: 14px;
+  width: 100%;
+}

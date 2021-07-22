@@ -72,12 +72,12 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     },
     {
       id: 'a2',
-      labelTextOneOne: 'item',
+      labelTextOneOne: 'items',
       isListCard: false,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          textOne: 'No Information'
+          textOne: ''
         },
         {
           labelTextOneOneBadge: 'practice',
@@ -404,7 +404,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         payload: { isPopUpValue: 'TIMELINEENDPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
-    if (labelName === 'item' && selectedBadgeName === 'distinct') {
+    if (labelName === 'items' && selectedBadgeName === 'distinct') {
       let requestObect = makeItemObj(selectedAssociateInfo, 'active', countPage, 0);
       let revisedGroupObject = {
         id: responseObject.id,
