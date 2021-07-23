@@ -59,8 +59,8 @@ import AssignmentDistinctCultureProfileDistinctReviewList from '../../ReviewList
 import AssignmentDistinctJobProfileDistinctReviewList from '../../ReviewListComponent/AssignmentDistinctJobProfileDistinctReviewList';
 import CultureProfileAssessmentDistinctReviewList from '../../ReviewListComponent/CultureProfileAssessmentDistinctReviewList';
 import JobProfileAssessmentDistinctReviewList from '../../ReviewListComponent/JobProfileAssessmentDistinctReviewList';
-import AssesseeAssignmentDistinctReviewList from '../../ReviewListComponent/AssesseeAssignmentDistinctReviewList';
-import AssessmentItemDistinctReviewList from '../../ReviewListComponent/AssessmentItemDistinctReviewList';
+import AssesseeDistinctAssignmentDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctAssignmentDistinctReviewList';
+import AssessmentDistinctItemDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctItemDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -115,7 +115,7 @@ export const DisplayPaneTwo = (props) => {
           <AssociateDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList' && (
-          <AssesseeAssignmentDistinctReviewList popupAllClose={popupAllClose} />
+          <AssesseeDistinctAssignmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList' && (
           <AssesseeRoleDistinctReviewList popupAllClose={popupAllClose} />
@@ -166,7 +166,7 @@ export const DisplayPaneTwo = (props) => {
           <AssessmentNodeAssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assessmentItemReviewList' && (
-          <AssessmentItemDistinctReviewList popupAllClose={popupAllClose} />
+          <AssessmentDistinctItemDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' && (
           <AssesseeGroupAssesseeDistinctReviewList popupAllClose={popupAllClose} />

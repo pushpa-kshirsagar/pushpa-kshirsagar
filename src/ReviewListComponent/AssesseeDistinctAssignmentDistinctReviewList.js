@@ -20,7 +20,7 @@ import {
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
-const AssesseeAssignmentDistinctReviewList = (props) => {
+const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
     (state) => state.AssesseeCreateReducer
@@ -163,4 +163,4 @@ const AssesseeAssignmentDistinctReviewList = (props) => {
     </div>
   );
 };
-export default AssesseeAssignmentDistinctReviewList;
+export default AssesseeDistinctAssignmentDistinctReviewList;

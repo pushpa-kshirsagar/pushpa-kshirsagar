@@ -48,7 +48,7 @@ import PopUpBirthplace from '../PopUpInformation/PopUpBirthplace';
 import { DEFAULT_ROLE_ID, SIGN_IN_URL } from '../endpoints';
 import PopUpFingerprint from '../PopUpInformation/PopUpFingerprint';
 
-const PopUpSignOnAssessee = (props) => {
+const PopUpAssesseeCreateSignOn = (props) => {
   const { headerOne = 'assessee' } = props;
   const { associateTagPrimary } = useParams();
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
@@ -1042,4 +1042,4 @@ const PopUpSignOnAssessee = (props) => {
   );
 };
 
-export default PopUpSignOnAssessee;
+export default PopUpAssesseeCreateSignOn;

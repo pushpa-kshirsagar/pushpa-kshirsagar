@@ -49,7 +49,9 @@ export const DisplayPaneFour = () => {
             style={{
               // height: '50px',
               padding: '2.5px 5px',
-              alignItems: 'center'
+              alignItems: 'center',
+              height: 'calc(100vh - 190px)',
+              overflow: 'overlay'
               // display: 'flex'
             }}
             dangerouslySetInnerHTML={{ __html: previewInnerHTML }}

@@ -37,8 +37,8 @@ import DisplayPaneSeven from '../../Organisms/DisplayPaneSeven/DisplayPaneSeven'
 // import { AccountContext } from '../../Account';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
 import PopUpDisplayPaneTwoReviewList from '../../PopUpDisplayPanel/PopUpDisplayPaneTwoReviewList';
-import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
-import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
+import PopUpAssesseeCreateSignOn from '../../PopUpSignOn/PopUpAssesseeCreateSignOn';
+import PopUpAssociateCreateSignOn from '../../PopUpSignOn/PopUpAssociateCreateSignOn';
 import PopUpAssesseeRoleCreate from '../../Molecules/PopUpCreate/PopUpAssesseeRoleCreate';
 import PopUpAssociateRoleCreate from '../../Molecules/PopUpCreate/PopUpAssociateRoleCreate';
 import PopUpGroupCreate from '../../Molecules/PopUpCreate/PopUpGroupCreate';
@@ -263,10 +263,10 @@ const DisplayPageOne = () => {
         popupAllClose={popupAllClose}
         headerPanelColour={'displayPaneLeft'}
       />
-      {popupMode === 'ASSESSEE_CREATE' && <PopUpSignOnAssessee />}
-      {popupMode === 'ADMINISTRATOR_CREATE' && <PopUpSignOnAssessee headerOne={'administrator'} />}
-      {popupMode === 'MANAGER_CREATE' && <PopUpSignOnAssessee headerOne={'manager'} />}
-      {popupMode === 'ASSOCIATE_CREATE' && <PopUpSignOnAssociate />}
+      {popupMode === 'ASSESSEE_CREATE' && <PopUpAssesseeCreateSignOn />}
+      {popupMode === 'ADMINISTRATOR_CREATE' && <PopUpAssesseeCreateSignOn headerOne={'administrator'} />}
+      {popupMode === 'MANAGER_CREATE' && <PopUpAssesseeCreateSignOn headerOne={'manager'} />}
+      {popupMode === 'ASSOCIATE_CREATE' && <PopUpAssociateCreateSignOn />}
       {popupMode === 'assesseesROLECREATE' && <PopUpAssesseeRoleCreate />}
       {popupMode === 'associatesROLECREATE' && <PopUpAssociateRoleCreate />}
       {popupMode === 'responseErrorMsg' && (

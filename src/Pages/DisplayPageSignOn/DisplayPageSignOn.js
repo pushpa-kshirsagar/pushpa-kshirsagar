@@ -7,8 +7,8 @@ import IconButtonUI from '../../Molecules/IconButton/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import AssociateIcon from '@material-ui/icons/Camera';
 import { ASSESSEE_SIGN_ON, ASSOCIATE_SIGN_ON } from '../../actionType';
-import PopUpSignOnAssessee from '../../PopUpSignOn/PopUpSignOnAssessee';
-import PopUpSignOnAssociate from '../../PopUpSignOn/PopUpSignOnAssociate';
+import PopUpAssesseeCreateSignOn from '../../PopUpSignOn/PopUpAssesseeCreateSignOn';
+import PopUpAssociateCreateSignOn from '../../PopUpSignOn/PopUpAssociateCreateSignOn';
 import SendIcon from '@material-ui/icons/Send';
 import { IconButton } from '@material-ui/core';
 import { Fragment } from 'react';
@@ -99,8 +99,8 @@ const DisplayPageSignOn = () => {
           </div>
         )}
       </div>
-      {popupMode === 'ASSESSEE_SIGN_ON' && <PopUpSignOnAssessee />}
-      {popupMode === 'ASSOCIATE_SIGN_ON' && <PopUpSignOnAssociate />}
+      {popupMode === 'ASSESSEE_SIGN_ON' && <PopUpAssesseeCreateSignOn />}
+      {popupMode === 'ASSOCIATE_SIGN_ON' && <PopUpAssociateCreateSignOn />}
       <LoadingComponent isActive={isLoading} />
     </div>
   );

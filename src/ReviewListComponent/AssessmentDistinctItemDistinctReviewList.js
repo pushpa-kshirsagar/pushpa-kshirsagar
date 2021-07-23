@@ -25,7 +25,7 @@ import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import { getAssessmentItemDistinctApiCall } from '../Actions/AssessmentModuleAction';
 
-const AssessmentItemDistinctReviewList = (props) => {
+const AssessmentDistinctItemDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -265,4 +265,4 @@ const AssessmentItemDistinctReviewList = (props) => {
     </div>
   );
 };
-export default AssessmentItemDistinctReviewList;
+export default AssessmentDistinctItemDistinctReviewList;
