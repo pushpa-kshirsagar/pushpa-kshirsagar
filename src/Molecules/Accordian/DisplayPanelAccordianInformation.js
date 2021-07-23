@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FormControl, InputLabel, Input } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
-import './Accordian.css';
+import './DisplayPanelAccordian.css';
 import { useSelector } from 'react-redux';
 
-const AccordianInfoCard = (props) => {
+const DisplayPanelAccordianInformation = (props) => {
   const { mode = '', accordianObject, onClickRevise, onClickReview } = props;
   const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
@@ -471,4 +471,4 @@ const AccordianInfoCard = (props) => {
   );
 };
 
-export default AccordianInfoCard;
+export default DisplayPanelAccordianInformation;

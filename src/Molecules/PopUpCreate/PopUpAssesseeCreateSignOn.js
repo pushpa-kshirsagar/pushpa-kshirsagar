@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import PopUpPicture from '../PopUpInformation/PopUpPicture';
-import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
-import PopUpTextField from '../PopUpInformation/PopUpTextField';
-import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
-import PopUpDropList from '../PopUpInformation/PopUpDropList';
-import PopUpConfirm from '../PopUpGeneric/PopUpConfirm';
-import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
-import PopUpCheckbox from '../PopUpInformation/PopUpCheckbox';
+import PopUpPicture from '../../PopUpInformation/PopUpPicture';
+import PopUpAssesseeName from '../../PopUpInformation/PopUpAssesseeName';
+import PopUpTextField from '../../PopUpInformation/PopUpTextField';
+import PopUpAddressEmail from '../../PopUpInformation/PopUpAddressEmail';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
+import PopUpConfirm from '../../PopUpGeneric/PopUpConfirm';
+import PopUpTelephone from '../../PopUpInformation/PopUpTelephone';
+import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 import {
   CLEAR_ASSESSEE_INFO,
   POPUP_CLOSE,
@@ -37,16 +37,16 @@ import {
   UPDATE_ASSESSEE_TAG_STATUTORY_INFO,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_ASSESSEE_CREATE_SINGLE_STATE
-} from '../actionType';
-import PopUpTagPrimary from '../PopUpInformation/PopUpTagPrimary';
-import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
-import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
-import PopUpAddress from '../PopUpInformation/PopUpAddress';
-import PopUpDatePicker from '../PopUpInformation/PopUpDatePicker';
-import PopUpCommunity from '../PopUpInformation/PopUpCommunity';
-import PopUpBirthplace from '../PopUpInformation/PopUpBirthplace';
-import { DEFAULT_ROLE_ID, SIGN_IN_URL } from '../endpoints';
-import PopUpFingerprint from '../PopUpInformation/PopUpFingerprint';
+} from '../../actionType';
+import PopUpTagPrimary from '../../PopUpInformation/PopUpTagPrimary';
+import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
+import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpAddress from '../../PopUpInformation/PopUpAddress';
+import PopUpDatePicker from '../../PopUpInformation/PopUpDatePicker';
+import PopUpCommunity from '../../PopUpInformation/PopUpCommunity';
+import PopUpBirthplace from '../../PopUpInformation/PopUpBirthplace';
+import { DEFAULT_ROLE_ID, SIGN_IN_URL } from '../../endpoints';
+import PopUpFingerprint from '../../PopUpInformation/PopUpFingerprint';
 
 const PopUpAssesseeCreateSignOn = (props) => {
   const { headerOne = 'assessee' } = props;

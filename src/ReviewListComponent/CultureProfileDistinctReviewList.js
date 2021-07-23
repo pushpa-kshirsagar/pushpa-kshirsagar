@@ -18,6 +18,7 @@ import {
   ASSESSMENT_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { getCultureProfilesDistinctApiCall } from '../Actions/ActionCultureProfile';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const CultureProfileDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -33,7 +34,10 @@ const CultureProfileDistinctReviewList = (props) => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeThree
+    middlePaneHeaderBadgeThree,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -162,6 +166,11 @@ const CultureProfileDistinctReviewList = (props) => {
                 textTwo={item.informationBasic.cultureProfileDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
                 // dataValue={item.informationAllocation.cultureProfileGroup}
               />
             </div>

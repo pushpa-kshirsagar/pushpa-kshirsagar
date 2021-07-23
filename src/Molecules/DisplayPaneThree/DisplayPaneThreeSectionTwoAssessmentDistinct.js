@@ -3,8 +3,8 @@ import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
-import AccordianListCard from '../Accordian/AccordianListCard';
-import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
+import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import Manuscript from '@material-ui/icons/Description';
 import { makeAssesseeReviewListRequestObject, makeItemObj } from '../../Actions/GenericActions';
 import {
@@ -480,14 +480,14 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard
+                      <DisplayPanelAccordianReviewListOne
                         onClickRevise={reviseFramework}
                         className=""
                         accordianObject={ob}
                         mode={reviewMode}
                       />
                     ) : (
-                      <AccordianInfoCard
+                      <DisplayPanelAccordianInformation
                         onClickRevise={reviseFramework}
                         accordianObject={ob}
                         mode={reviewMode}
@@ -501,14 +501,14 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard
+                      <DisplayPanelAccordianReviewListOne
                         onClickRevise={reviseFramework}
                         className=""
                         accordianObject={ob}
                         mode={reviewMode}
                       />
                     ) : (
-                      <AccordianInfoCard
+                      <DisplayPanelAccordianInformation
                         onClickRevise={reviseFramework}
                         accordianObject={ob}
                         mode={reviewMode}

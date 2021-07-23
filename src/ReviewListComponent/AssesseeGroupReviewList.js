@@ -159,9 +159,7 @@ const AssesseeGroupReviewList = (props) => {
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
-                isSelected={selectedTagsArray.includes(
-                  item.informationEngagement.assesseeTag?.assesseeTagPrimary
-                )}
+                isSelected={selectedTagsArray.includes(item.id)}
                 onClickCheckBox={(event) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}

@@ -37,8 +37,8 @@ import DisplayPaneSeven from '../../Organisms/DisplayPaneSeven/DisplayPaneSeven'
 // import { AccountContext } from '../../Account';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
 import PopUpDisplayPaneTwoReviewList from '../../PopUpDisplayPanel/PopUpDisplayPaneTwoReviewList';
-import PopUpAssesseeCreateSignOn from '../../PopUpSignOn/PopUpAssesseeCreateSignOn';
-import PopUpAssociateCreateSignOn from '../../PopUpSignOn/PopUpAssociateCreateSignOn';
+import PopUpAssesseeCreateSignOn from '../../Molecules/PopUpCreate/PopUpAssesseeCreateSignOn';
+import PopUpAssociateCreateSignOn from '../../Molecules/PopUpCreate/PopUpAssociateCreateSignOn';
 import PopUpAssesseeRoleCreate from '../../Molecules/PopUpCreate/PopUpAssesseeRoleCreate';
 import PopUpAssociateRoleCreate from '../../Molecules/PopUpCreate/PopUpAssociateRoleCreate';
 import PopUpGroupCreate from '../../Molecules/PopUpCreate/PopUpGroupCreate';

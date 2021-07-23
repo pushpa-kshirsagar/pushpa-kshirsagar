@@ -3,8 +3,8 @@ import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
 import { useDispatch, useSelector } from 'react-redux';
-import AccordianListCard from '../Accordian/AccordianListCard';
-import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
+import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
 import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 import { SET_POPUP_VALUE } from '../../actionType';
@@ -142,14 +142,14 @@ const DisplayPaneThreeSectionOneAssesseeType = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard
+                    <DisplayPanelAccordianReviewListOne
                       onClickRevise={reviseAllocation}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}
                     />
                   ) : (
-                    <AccordianInfoCard
+                    <DisplayPanelAccordianInformation
                       onClickRevise={reviseAllocation}
                       accordianObject={ob}
                       mode={reviewMode}
@@ -166,9 +166,9 @@ const DisplayPaneThreeSectionOneAssesseeType = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
                   ) : (
-                    <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                   )}
                 </div>
               );

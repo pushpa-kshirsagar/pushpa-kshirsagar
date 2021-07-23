@@ -18,6 +18,7 @@ import {
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { getItemsTypeApiCall } from '../Actions/ItemModuleAction';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const ItemTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -30,7 +31,10 @@ const ItemTypeReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
-    middlePaneHeader
+    middlePaneHeader,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue, cardValue } = useSelector((state) => state.PopUpReducer);
@@ -148,6 +152,11 @@ const ItemTypeReviewList = (props) => {
                 dataValue={item.informationAllocation?.itemTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
                 // dataValue={item.informationAllocation.itemGroup}
               />
             </div>

@@ -9,8 +9,8 @@ import MailOutline from '@material-ui/icons/MailOutline';
 import MailIcon from '@material-ui/icons/Mail';
 import TelephoneVerified from '@material-ui/icons/Call';
 import { useDispatch, useSelector } from 'react-redux';
-import AccordianListCard from '../Accordian/AccordianListCard';
-import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
+import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
 import { ASSESSEE_SIGN_ON } from '../../actionType';
 
@@ -792,14 +792,14 @@ const DisplayPaneThreeSectionTwo = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard
+                      <DisplayPanelAccordianReviewListOne
                         onClickRevise={reviseContact}
                         className=""
                         accordianObject={ob}
                         mode={reviewMode}
                       />
                     ) : (
-                      <AccordianInfoCard
+                      <DisplayPanelAccordianInformation
                         onClickRevise={reviseContact}
                         accordianObject={ob}
                         mode={reviewMode}
@@ -816,14 +816,14 @@ const DisplayPaneThreeSectionTwo = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard
+                      <DisplayPanelAccordianReviewListOne
                         onClickRevise={revisePersonal}
                         className=""
                         accordianObject={ob}
                         mode={reviewMode}
                       />
                     ) : (
-                      <AccordianInfoCard
+                      <DisplayPanelAccordianInformation
                         onClickRevise={revisePersonal}
                         accordianObject={ob}
                         mode={reviewMode}

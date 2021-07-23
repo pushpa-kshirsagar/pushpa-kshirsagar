@@ -17,6 +17,7 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentReviewListRequestObject } from '../Actions/GenericActions';
 import { ASSESSMENT_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssessmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -28,7 +29,10 @@ const AssessmentDistinctReviewList = (props) => {
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
-    selectedAssociateInfo
+    selectedAssociateInfo,
+    selectedTagsArray,
+    unselectedTagsArray,
+    isSelectActive
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -147,6 +151,11 @@ const AssessmentDistinctReviewList = (props) => {
                 textTwo={item.informationBasic.assessmentDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

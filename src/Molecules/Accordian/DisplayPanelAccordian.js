@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { ExpansionPanel, IconButton } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
-import './Accordian.css';
+import './DisplayPanelAccordian.css';
 
 const Accordian = (props) => {
   const {

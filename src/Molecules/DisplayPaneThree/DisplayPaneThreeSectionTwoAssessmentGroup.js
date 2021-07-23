@@ -3,8 +3,8 @@ import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 // import Manuscript from '@material-ui/icons/Description';
 import { useDispatch, useSelector } from 'react-redux';
-import AccordianListCard from '../Accordian/AccordianListCard';
-import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
+import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
 import { makeAssessmentReviewListRequestObject } from '../../Actions/GenericActions';
 import {
@@ -122,14 +122,14 @@ const DisplayPaneThreeSectionTwoAssessmentGroup = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <AccordianListCard
+                    <DisplayPanelAccordianReviewListOne
                       onClickRevise={onclickReviseAssessment}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}
                     />
                   ) : (
-                    <AccordianInfoCard
+                    <DisplayPanelAccordianInformation
                       onClickRevise={onclickReviseAssessment}
                       accordianObject={ob}
                       mode={reviewMode}

@@ -3,8 +3,8 @@ import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 // import Manuscript from '@material-ui/icons/Description';
 import { useDispatch, useSelector } from 'react-redux';
-import AccordianListCard from '../Accordian/AccordianListCard';
-import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
+import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
 import {
   FILTERMODE,
@@ -22,7 +22,7 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
+import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 import {
   makeAssesseeReviewListRequestObject,
   makeAssessmentReviewListRequestObject,
@@ -1264,14 +1264,14 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
                   {ob.isListCard ? (
                     <>
                       {ob.isMultiList ? (
-                        <AccordianMultiListCard
+                        <DisplayPanelAccordianReviewListTwo
                           onClickReview={reviewNode}
                           onClickRevise={reviseNode}
                           accordianObject={ob}
                           mode={reviewMode}
                         />
                       ) : (
-                        <AccordianListCard
+                        <DisplayPanelAccordianReviewListOne
                           onClickReview={reviewNode}
                           onClickRevise={reviseNode}
                           className=""
@@ -1281,7 +1281,7 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
                       )}
                     </>
                   ) : (
-                    <AccordianInfoCard
+                    <DisplayPanelAccordianInformation
                       onClickReview={reviewNode}
                       onClickRevise={reviseNode}
                       accordianObject={ob}

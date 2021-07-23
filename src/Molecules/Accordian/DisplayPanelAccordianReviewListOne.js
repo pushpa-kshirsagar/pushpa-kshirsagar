@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReviewList from '../ReviewList/ReviewList';
 import { FormControl, InputLabel } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
-import './Accordian.css';
+import './DisplayPanelAccordian.css';
 import { useDispatch, useSelector } from 'react-redux';
 import CultureWeightageTableTemplate from './CultureWeightageTableTemplate';
 import JobRangeTableTemplate from './jobRangeTableTemplate';
@@ -13,7 +13,7 @@ import {
 } from '../../actionType';
 import JobWeightageTableTemplate from './JobWeightageTableTemplate';
 
-const AccordianListCard = (props) => {
+const DisplayPanelAccordianReviewListOne = (props) => {
   const {
     accordianObject,
     mode = '',
@@ -428,4 +428,4 @@ const AccordianListCard = (props) => {
   );
 };
 
-export default AccordianListCard;
+export default DisplayPanelAccordianReviewListOne;

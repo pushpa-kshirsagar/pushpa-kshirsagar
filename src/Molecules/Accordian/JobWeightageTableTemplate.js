@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import '../Accordian/Accordian.css';
+import '../Accordian/DisplayPanelAccordian.css';
 
 const ThreeRowHeader = (props) => {
   const { title } = props;

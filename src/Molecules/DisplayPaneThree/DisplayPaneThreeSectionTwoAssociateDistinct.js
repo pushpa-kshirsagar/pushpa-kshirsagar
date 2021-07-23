@@ -4,8 +4,8 @@ import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Unverified from '../../images/unverified.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
-import AccordianListCard from '../Accordian/AccordianListCard';
-import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
+import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import {
   ASSOCIATE_SIGN_ON,
   GET_ASSOCIATES_NODE_REVIEW_LIST_SAGA,
@@ -14,7 +14,7 @@ import {
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   SET_POPUP_VALUE
 } from '../../actionType';
-import AccordianMultiListCard from '../Accordian/AccordianMultiListCard';
+import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 import { makeAssociateNodeObj, makeInternalNodeObj } from '../../Actions/GenericActions';
 import { getAssociateNodeApiCall } from '../../Actions/AssociateModuleAction';
 import MailOutline from '@material-ui/icons/MailOutline';
@@ -499,14 +499,14 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard
+                      <DisplayPanelAccordianReviewListOne
                         onClickRevise={reviseContact}
                         className=""
                         accordianObject={ob}
                         mode={reviewMode}
                       />
                     ) : (
-                      <AccordianInfoCard
+                      <DisplayPanelAccordianInformation
                         onClickRevise={reviseContact}
                         accordianObject={ob}
                         mode={reviewMode}
@@ -523,14 +523,14 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard
+                      <DisplayPanelAccordianReviewListOne
                         onClickRevise={reviseCredential}
                         className=""
                         accordianObject={ob}
                         mode={reviewMode}
                       />
                     ) : (
-                      <AccordianInfoCard
+                      <DisplayPanelAccordianInformation
                         onClickRevise={reviseCredential}
                         accordianObject={ob}
                         mode={reviewMode}
@@ -549,17 +549,17 @@ const DisplayPaneThreeSectionTwoAssociate = () => {
                     {ob.isListCard ? (
                       <>
                         {ob.isMultiList ? (
-                          <AccordianMultiListCard
+                          <DisplayPanelAccordianReviewListTwo
                             onClickRevise={reviseFramework}
                             accordianObject={ob}
                             mode={reviewMode}
                           />
                         ) : (
-                          <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                          <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
                         )}
                       </>
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );

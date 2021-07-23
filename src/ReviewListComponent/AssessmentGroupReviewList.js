@@ -19,6 +19,7 @@ import {
   ASSESSMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssessmentGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -34,7 +35,10 @@ const AssessmentGroupReviewList = (props) => {
     selectedAssociateInfo,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeThree
+    middlePaneHeaderBadgeThree,
+    selectedTagsArray,
+    isSelectActive,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -153,6 +157,11 @@ const AssessmentGroupReviewList = (props) => {
                 textTwo={item.informationBasic.assessmentGroupDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

@@ -2,7 +2,7 @@ import React from 'react';
 import { ExpansionPanelDetails, ExpansionPanelSummary } from '@material-ui/core';
 import { ExpansionPanel } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
-import './Accordian.css';
+import './DisplayPanelAccordian.css';
 
 export const AccordianHeader = (props) => {
   const { isDisplayCardExpanded, headerOne, children, setListExpand } = props;

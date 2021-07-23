@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import ReviewList from '../ReviewList/ReviewList';
 import { FormControl, InputLabel } from '@material-ui/core';
 import { ExpandMore, ExpandLess } from '@material-ui/icons';
-import './Accordian.css';
+import './DisplayPanelAccordian.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_BRAND_LOGO_TYPE } from '../../actionType';
 
-const AccordianMultiListCard = (props) => {
+const DisplayPanelAccordianReviewListTwo = (props) => {
   const { accordianObject, mode = '', onClickRevise, onClickReview = null } = props;
   const {
     labelTextOneOne = '',
@@ -186,4 +186,4 @@ const AccordianMultiListCard = (props) => {
   );
 };
 
-export default AccordianMultiListCard;
+export default DisplayPanelAccordianReviewListTwo;

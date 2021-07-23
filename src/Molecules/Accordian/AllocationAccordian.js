@@ -1,9 +1,9 @@
 import React from 'react';
-import AccordianHeader from './AccordianHeader';
-import AccordianListCard from './AccordianListCard';
-import './Accordian.css';
-import AccordianInfoCard from './AccordianInfoCard';
-import AccordianMultiListCard from './AccordianMultiListCard';
+import DisplayPanelAccordianHeader from './DisplayPanelAccordianHeader';
+import DisplayPanelAccordianReviewListOne from './DisplayPanelAccordianReviewListOne';
+import './DisplayPanelAccordian.css';
+import DisplayPanelAccordianInformation from './DisplayPanelAccordianInformation';
+import DisplayPanelAccordianReviewListTwo from './DisplayPanelAccordianReviewListTwo';
 
 export const AllocationAccordian = (props) => {
   const {
@@ -18,7 +18,7 @@ export const AllocationAccordian = (props) => {
   } = props;
 
   return (
-    <AccordianHeader
+    <DisplayPanelAccordianHeader
       isDisplayCardExpanded={isDisplayCardExpanded}
       headerOne={headerOne}
       setListExpand={setListExpand}
@@ -29,14 +29,14 @@ export const AllocationAccordian = (props) => {
             {ob.isListCard ? (
               <>
                 {ob.isMultiList ? (
-                  <AccordianMultiListCard
+                  <DisplayPanelAccordianReviewListTwo
                     onClickRevise={onClickRevise}
                     accordianObject={ob}
                     mode={mode}
                     getReviewList={getReviewList}
                   />
                 ) : (
-                  <AccordianListCard
+                  <DisplayPanelAccordianReviewListOne
                     className=""
                     onClickRevise={onClickRevise}
                     accordianObject={ob}
@@ -46,7 +46,7 @@ export const AllocationAccordian = (props) => {
                 )}
               </>
             ) : (
-              <AccordianInfoCard
+              <DisplayPanelAccordianInformation
                 onClickReview={onClickReview}
                 onClickRevise={onClickRevise}
                 accordianObject={ob}
@@ -57,7 +57,7 @@ export const AllocationAccordian = (props) => {
           </div>
         );
       })}
-    </AccordianHeader>
+    </DisplayPanelAccordianHeader>
   );
 };
 

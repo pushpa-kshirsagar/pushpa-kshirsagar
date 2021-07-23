@@ -18,6 +18,7 @@ import {
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { getJobProfileGroupApiCall, getJobProfileTypeApiCall } from '../Actions/ActionJobProfile';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const JobProfileTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -30,7 +31,10 @@ const JobProfileTypeReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
-    middlePaneHeader
+    middlePaneHeader,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue, cardValue } = useSelector((state) => state.PopUpReducer);
@@ -145,6 +149,11 @@ const JobProfileTypeReviewList = (props) => {
                 isTooltipActive={false}
                 dataValue={item.informationAllocation.jobProfileTypeGroup}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

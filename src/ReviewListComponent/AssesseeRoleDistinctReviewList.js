@@ -19,7 +19,7 @@ import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
-import { assesseeRole } from '../Actions/AssesseeModuleAction';
+import { assesseeRole, onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssesseeRoleDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
@@ -35,7 +35,10 @@ const AssesseeRoleDistinctReviewList = (props) => {
     middlePaneSelectedValue,
     middlePaneHeader,
     selectedAssociateInfo,
-    countPage
+    countPage,
+    isSelectActive,
+    unselectedTagsArray,
+    selectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -168,6 +171,11 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 textTwo={item.informationBasic.assesseeRoleDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

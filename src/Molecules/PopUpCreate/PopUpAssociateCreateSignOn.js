@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import PopUpPicture from '../PopUpInformation/PopUpPicture';
-import PopUpTextField from '../PopUpInformation/PopUpTextField';
-import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
-import PopUpAddress from '../PopUpInformation/PopUpAddress';
-import PopUpReviewList from '../PopUpInformation/PopUpReviewList';
-import PopUpAssesseeName from '../PopUpInformation/PopUpAssesseeName';
-import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
-import PopUpConfirm from '../PopUpGeneric/PopUpConfirm';
-import PopUpDropList from '../PopUpInformation/PopUpDropList';
+import PopUpPicture from '../../PopUpInformation/PopUpPicture';
+import PopUpTextField from '../../PopUpInformation/PopUpTextField';
+import PopUpTelephone from '../../PopUpInformation/PopUpTelephone';
+import PopUpAddress from '../../PopUpInformation/PopUpAddress';
+import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpAssesseeName from '../../PopUpInformation/PopUpAssesseeName';
+import PopUpAddressEmail from '../../PopUpInformation/PopUpAddressEmail';
+import PopUpConfirm from '../../PopUpGeneric/PopUpConfirm';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 import {
   SET_NEXT_POPUP,
   CLEAR_ASSOCIATE_INFO,
@@ -38,10 +38,10 @@ import {
   UPDATE_ASSOCIATE_WEBSITE_PRIMARY_INFO,
   UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO,
   SET_DISPLAY_THREE_SINGLE_STATE
-} from '../actionType';
-import PopUpTagSecondary from '../PopUpInformation/PopUpTagSecondary';
-import { SIGN_IN_URL } from '../endpoints';
-import PopUpDropTwoList from '../PopUpInformation/PopUpDropTwoList';
+} from '../../actionType';
+import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
+import { SIGN_IN_URL } from '../../endpoints';
+import PopUpDropTwoList from '../../PopUpInformation/PopUpDropTwoList';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);

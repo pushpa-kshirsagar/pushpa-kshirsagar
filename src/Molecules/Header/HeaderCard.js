@@ -41,7 +41,8 @@ const HeaderCard = (props) => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneSelectedValue,
-    middlePaneListPopupOptions
+    middlePaneListPopupOptions,
+    selectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     headerOne: rightPaneHeaderOne,
@@ -90,7 +91,28 @@ const HeaderCard = (props) => {
     } else {
       optArr = ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION;
     }
-
+    console.log('optArr', optArr);
+    let tempArr = [];
+    optArr.forEach((element) => {
+      if (selectedTagsArray.length === 0) {
+        if (
+          element.data === 'allocate' ||
+          element.data === 'administer' ||
+          element.data === 'archive' ||
+          element.data === 'flag' ||
+          element.data === 'share' ||
+          element.data === 'suspend' ||
+          element.data === 'terminate' ||
+          element.data === 'delete'
+        ) {
+          tempArr.push({ ...element, disabled: true });
+        } else tempArr.push({ ...element, disabled: false });
+      } else if (selectedTagsArray.length > 0) {
+        if (element.data === 'create' || element.data === 'review' || element.data === 'select')
+          tempArr.push({ ...element, disabled: true });
+        else tempArr.push({ ...element, disabled: false });
+      } else tempArr.push({ ...element, disabled: false });
+    });
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -99,7 +121,7 @@ const HeaderCard = (props) => {
           middlePaneHeaderBadgeOne === 'distinct' ? '' : middlePaneHeaderBadgeOne,
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: optArr
+        popupContentArrValue: tempArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneTrippleDotPopup' });
@@ -189,7 +211,8 @@ const HeaderCard = (props) => {
                   <IconButton>
                     {!isMobile && <NextIcon className={'iguru-iconbardefault'} />}
                   </IconButton>
-                ) : (displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '') || showClearIcon ? (
+                ) : (displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '') ||
+                  showClearIcon ? (
                   <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>

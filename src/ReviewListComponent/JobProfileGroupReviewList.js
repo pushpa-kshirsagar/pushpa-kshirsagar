@@ -13,8 +13,12 @@ import {
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION, GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import {
+  ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
 import { getJobProfileGroupApiCall } from '../Actions/ActionJobProfile';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const JobProfileGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -28,7 +32,10 @@ const JobProfileGroupReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
-    middlePaneHeader
+    middlePaneHeader,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -105,7 +112,8 @@ const JobProfileGroupReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
+        popupContentArrValue:
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -138,6 +146,11 @@ const JobProfileGroupReviewList = (props) => {
                 textTwo={item.informationBasic.jobProfileGroupDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
                 // dataValue={item.informationAllocation.jobProfileGroup}
               />
             </div>

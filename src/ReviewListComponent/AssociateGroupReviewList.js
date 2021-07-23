@@ -20,6 +20,7 @@ import {
   ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssociateGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -34,7 +35,10 @@ const AssociateGroupReviewList = (props) => {
     selectedAssociateInfo,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeThree
+    middlePaneHeaderBadgeThree,
+    isSelectActive,
+    unselectedTagsArray,
+    selectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { cardValue } = useSelector((state) => state.PopUpReducer);
@@ -154,6 +158,11 @@ const AssociateGroupReviewList = (props) => {
                 textTwo={item.informationBasic.associateGroupDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

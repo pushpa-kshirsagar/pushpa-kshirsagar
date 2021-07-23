@@ -17,6 +17,7 @@ import {
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { getCultureProfileTypeApiCall } from '../Actions/ActionCultureProfile';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const CultureProfileTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -29,7 +30,10 @@ const CultureProfileTypeReviewList = (props) => {
     reviewListReqObj,
     middlePaneSelectedValue,
     selectedAssociateInfo,
-    middlePaneHeader
+    middlePaneHeader,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { cardValue } = useSelector((state) => state.PopUpReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
@@ -145,6 +149,11 @@ const CultureProfileTypeReviewList = (props) => {
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 dataValue={item.informationAllocation.cultureProfileTypeGroup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

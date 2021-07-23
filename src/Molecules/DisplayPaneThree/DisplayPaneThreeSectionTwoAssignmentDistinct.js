@@ -3,8 +3,8 @@ import { isMobile } from 'react-device-detect';
 import AllocationAccordian from '../Accordian/AllocationAccordian';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
-import AccordianListCard from '../Accordian/AccordianListCard';
-import AccordianInfoCard from '../Accordian/AccordianInfoCard';
+import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
+import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import {
   makeAssesseeReviewListRequestObject,
   makeAssessmentReviewListRequestObject,
@@ -573,7 +573,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard
+                      <DisplayPanelAccordianReviewListOne
                         onClickRevise={onclickReviseFramework}
                         className=""
                         accordianObject={ob}
@@ -581,7 +581,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
                         getReviewList={getRelatedReviewList}
                       />
                     ) : (
-                      <AccordianInfoCard
+                      <DisplayPanelAccordianInformation
                         onClickRevise={onclickReviseFramework}
                         accordianObject={ob}
                         mode={reviewMode}
@@ -599,9 +599,9 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <AccordianListCard className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
                     ) : (
-                      <AccordianInfoCard accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );

@@ -18,6 +18,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssignmentReviewListRequestObject } from '../Actions/GenericActions';
 import { ASSIGNMENT_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import { assignmentsDistinctApiCall } from '../Actions/AssignmentModuleAction';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssignmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -29,7 +30,10 @@ const AssignmentDistinctReviewList = (props) => {
     reviewListDistinctData,
     reviewListReqObj,
     middlePaneSelectedValue,
-    selectedAssociateInfo
+    selectedAssociateInfo,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -132,6 +136,11 @@ const AssignmentDistinctReviewList = (props) => {
                 textTwo={item.informationBasic.assignmentDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                }}
               />
             </div>
           );

@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Accordian from './Accordian';
+import DisplayPanelAccordian from './DisplayPanelAccordian';
 // import { Keyboard } from '@material-ui/icons';
 import TelephoneVerified from '@material-ui/icons/Call';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 export default {
   title: 'Design System/Molecules/Display Panel',
-  component: Accordian
+  component: DisplayPanelAccordian
 };
 
-const Template = (args) => <Accordian {...args} />;
+const Template = (args) => <DisplayPanelAccordian {...args} />;
 
 export const DisplayPanel5 = Template.bind({});
 DisplayPanel5.args = {

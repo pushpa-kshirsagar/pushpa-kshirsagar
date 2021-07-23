@@ -2124,13 +2124,6 @@ export const ALLOCATE_POPUP = [
     data: 'types',
     dataValue: 'types',
     optionClass: 'optionPrimary',
-    divider: 'dark',
-    disabled: false
-  },
-  {
-    data: 'marketplace',
-    dataValue: 'marketplace',
-    optionClass: 'optionPrimary',
     disabled: false
   }
 ];
