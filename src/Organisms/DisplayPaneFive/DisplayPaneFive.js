@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
+import Manuscript from '@material-ui/icons/Description';
+import ReactCKEditor from 'react-ckeditor-component';
+// import CKEditor from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { SET_PANE_THREE_ITEM_PREVIEW_MODE } from '../../actionType';
+import { SET_PANE_THREE_ITEM_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,6 +20,7 @@ import Label from '../../Atoms/Label/Label';
 import clsx from 'clsx';
 import { Divider, IconButton, Input } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
+import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 
 const useStyles = makeStyles({
   root: {
@@ -78,16 +83,25 @@ export const DisplayPaneFive = () => {
     dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
   const [questionOptionList, setQuestionOptionList] = useState([
-    { name: 'Option' },
-    { name: 'Option' },
-    { name: 'Option' },
-    { name: 'Option' }
+    { id: 'option-1', value: 'Option' },
+    { id: 'option-2', value: 'Option' },
+    { id: 'option-3', value: 'Option' },
+    { id: 'option-4', value: 'Option' }
   ]);
+  const [innerContent, setInnerContent] = useState('');
+  const [isPreviewMode, setPreviewMode] = useState(false);
+  const [optionPopupValue, setOptionPopupValue] = useState('');
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
 
   const addOption = () => {
-    setQuestionOptionList([...questionOptionList, { name: 'Option' }]);
+    setQuestionOptionList([
+      ...questionOptionList,
+      { id: `option-${questionOptionList.length + 1}`, value: 'Option' }
+    ]);
   };
-
+  const onChangeTextSheet = (evt) => {
+    setInnerContent(evt.editor.getData());
+  };
   const removeOption = () => {
     if (questionOptionList.length > 2) {
       let arr = questionOptionList;
@@ -132,7 +146,29 @@ export const DisplayPaneFive = () => {
                 </IconButton>
               </div>
             </div>
-            <div style={{ flex: '1' }} className="flex-center"></div>
+            <div style={{ flex: '1' }} className="flex-center">
+              <IconButton
+                onClick={async () => {
+                  setPreviewMode((st) => !st);
+                  // if (isPreviewMode) {
+                  //   const requestOptions = {
+                  //     method: 'POST',
+                  //     headers: new Headers({
+                  //       Authorization: localStorage.getItem('token')
+                  //     }),
+                  //     body: JSON.stringify({ file: innerContent })
+                  //   };
+                  //   const response = await fetch('https://5z33kqknpl.execute-api.ap-south-1.amazonaws.com/dev/file-upload-n', requestOptions);
+                  //   const json = await response.json();
+                  //   console.log(json);
+                  // }
+                  console.log('PREVIEW');
+                }}
+                className="MuiIconButton-root-1602"
+              >
+                <Manuscript className={''} />
+              </IconButton>
+            </div>
             <div style={{ flex: '1' }} className="flex-center">
               {/* <IconButton onClick={flagQuestion} className={'assessmentFlagButton'}>
                 {isQuestionFlaged ? (
@@ -152,14 +188,52 @@ export const DisplayPaneFive = () => {
               backgroundColor: 'rgba(0, 0, 0, 0.12)'
             }}
           />
+        </div>
+        <div
+          className="containerPadding"
+          style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}
+        >
           <div>
-            <TextareaAutosize
-              className={'text-area'}
-              maxRows={4}
-              aria-label="maximum height"
-              placeholder="Enter your question and select single answer from list"
-              defaultValue=""
-            />
+            {isPreviewMode ? (
+              <div
+                style={{
+                  padding: '2.5px 5px',
+                  alignItems: 'center',
+                  //  height: 'calc(100vh - 190px)',
+                  overflow: 'overlay'
+                  // display: 'flex'
+                }}
+                dangerouslySetInnerHTML={{ __html: innerContent }}
+              ></div>
+            ) : (
+              <ReactCKEditor
+                activeClass="editor"
+                content={innerContent}
+                // onInit={(editor) => {
+                //   editor.ui.view.editable.element.parentElement.insertBefore(
+                //     editor.ui.view.toolbar.element,
+                //     editor.ui.view.editable.element
+                //   );
+                // }}
+                events={{
+                  // blur: this.onBlur,
+                  // afterPaste: this.afterPaste,
+                  change: onChangeTextSheet
+                }}
+                contentEditable="true"
+                config={{
+                  isReadOnly: false,
+                  mediaEmbed: true
+                }}
+              />
+              // <TextareaAutosize
+              //   className={'text-area'}
+              //   maxRows={4}
+              //   aria-label="maximum height"
+              //   placeholder="Enter your question and select single answer from list"
+              //   defaultValue=""
+              // />
+            )}
           </div>
           <hr
             style={{
@@ -170,27 +244,67 @@ export const DisplayPaneFive = () => {
               backgroundColor: 'rgba(0, 0, 0, 0.12)'
             }}
           />
-        </div>
-        <div className="containerPadding">
           <FormControl component="fieldset">
             <div className={['containerPadding'].join(' ')}>
               <RadioGroup defaultValue="" aria-label="Options" name="customized-radios">
                 {questionOptionList.map((op, key) => {
                   return (
-                    <div className="option-container" key={`${op.name}-${key}`}>
+                    <div className="option-container" key={`${op.value}-${key}`}>
                       <FormControlLabel
                         className={'radio-button'}
-                        value={`${op.name} ${key + 1}`}
+                        value={`${op.value} ${key + 1}`}
                         control={<StyledRadio />}
                         label=""
                       />
-                      <Input
+                      <div
+                        style={{
+                          padding: '2.5px 5px',
+                          alignItems: 'center',
+                          //  height: 'calc(100vh - 190px)',
+                          overflow: 'overlay'
+                          // display: 'flex'
+                        }}
+                        onClick={() => {
+                          // setOptionPopupValue(`OPTION_${key}`);
+                          dispatch({
+                            type: SET_POPUP_VALUE,
+                            payload: {
+                              isPopUpValue: `OPTION_${key}`,
+                              popupMode: ''
+                            }
+                          });
+                        }}
+                        dangerouslySetInnerHTML={{ __html: op.value }}
+                      ></div>
+                      {/* <Input
                         type={'text'}
-                        id={`${op.name}-${key + 1}`}
-                        name={`${op.name}-${key + 1}`}
+                        id={op.id}
+                        name={op.id}
                         autoComplete="off"
-                        placeholder={`${op.name}-${key + 1}`}
+                        placeholder={op.id}
                         className={['option-input'].join(' ')}
+                      /> */}
+                      <PopUpTextSheet
+                        isActive={isPopUpValue === `OPTION_${key}`}
+                        headerOne={'item'}
+                        headerPanelColour={'genericOne'}
+                        headerOneBadgeOne={'option'}
+                        headerOneBadgeTwo={`${key + 1}`}
+                        basicInfo={{}}
+                        typeOfSetObject={''}
+                        defaultSheetValue={op.value}
+                        actualLableValue={'assessmentManuscriptSecondary'}
+                        mode={'revise'}
+                        onClickSave={(innerText) => {
+                          setQuestionOptionList((opArr) => {
+                            opArr.forEach((element) => {
+                              if (element.id === op.id) {
+                                element.value = innerText;
+                              }
+                            });
+                            return opArr;
+                          });
+                        }}
                       />
                     </div>
                   );

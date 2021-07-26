@@ -32,9 +32,9 @@
 }
 .option-container {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  height: 55px;
+  /* height: 55px; */
   margin: 0;
 }
 .option-input {
