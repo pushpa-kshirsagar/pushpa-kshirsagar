@@ -223,26 +223,6 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
       IconOne: null
     }
   ];
-  const frameworkPlus = [
-    {
-      id: 'fr_pl-001',
-      labelTextOneOne: 'timeline',
-      isListCard: false,
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'start',
-          textOne: 'No Information'
-        },
-        {
-          labelTextOneOneBadge: 'end',
-          textOne: 'No Information'
-        }
-      ],
-      innerAssociateList: [],
-      innerInfo: 'No Information',
-      IconOne: null
-    }
-  ];
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -287,15 +267,6 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
               mode={reviewMode}
             />
           </div>
-          <div className={'containerPadding'}>
-            <AllocationAccordian
-              headerOne="framework+"
-              isDisplayCardExpanded={listExpand === 'framework+'}
-              setListExpand={setListExpand}
-              list={frameworkPlus}
-              mode={reviewMode}
-            />
-          </div>
         </>
       ) : (
         <>
@@ -317,21 +288,6 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
                         accordianObject={ob}
                         mode={reviewMode}
                       />
-                    )}
-                  </div>
-                );
-              })}
-            </Paper>
-          </div>
-          <div className={'containerPadding'}>
-            <Paper className={'dossierContainerTop'}>
-              {frameworkPlus.map((ob) => {
-                return (
-                  <div key={ob.id}>
-                    {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
-                    ) : (
-                      <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}
                   </div>
                 );

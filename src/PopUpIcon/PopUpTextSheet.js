@@ -24,7 +24,8 @@ const PopUpTextSheet = (props) => {
     actualLableValue,
     typeOfSetObject = '',
     defaultSheetValue = '',
-    mode
+    mode,
+    onClickSave = null
   } = props;
 
   // const [isPopUpOpen, setIsPopUpOpen] = useState(true);
@@ -43,6 +44,9 @@ const PopUpTextSheet = (props) => {
   };
   const onClickYes = () => {
     console.log(innerContent);
+    if (onClickSave){
+      onClickSave(innerContent);
+    }
     if (typeOfSetObject !== '') {
       dispatch({
         type: typeOfSetObject,
