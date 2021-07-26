@@ -25,6 +25,7 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { Fragment } from 'react';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 import Card from '../Molecules/Card/Card';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssociateNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
@@ -39,7 +40,10 @@ const AssociateNodeReviewList = (props) => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeThree
+    middlePaneHeaderBadgeThree,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const onClickFooter = (e) => {
@@ -120,7 +124,8 @@ const AssociateNodeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
+        popupContentArrValue:
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: nodeId,
         selectedTagStatus: nodeStatus
       }
@@ -202,41 +207,33 @@ const AssociateNodeReviewList = (props) => {
           ) : (
             <Fragment>
               {reviewListDistinctData && (
-                <Card
-                  textOneOne={
-                    reviewListDistinctData[0].associateNodeRoot.informationBasic.associateNodeName
-                  }
-                  textTwoOne={
-                    reviewListDistinctData[0].associateNodeRoot.informationBasic
-                      .associateNodeDescription
-                  }
-                  isIcon={false}
-                  labelTwoTwo={''}
-                  onClickIconOne={null}
-                  onClick={(event) => {
-                    openNodeListPopup(
-                      reviewListDistinctData[0].associateNodeRoot.id,
-                      event,
-                      'list',
-                      true
-                    );
-                  }}
-                  isAlliance
-                />
+                <div className="containerPadding">
+                  <Card
+                    textOneOne={
+                      reviewListDistinctData[0].associateNodeRoot.informationBasic.associateNodeName
+                    }
+                    textTwoOne={
+                      reviewListDistinctData[0].associateNodeRoot.informationBasic
+                        .associateNodeDescription
+                    }
+                    isIcon={false}
+                    labelTwoTwo={''}
+                    onClickIconOne={null}
+                    onClick={(event) => {
+                      openNodeListPopup(
+                        reviewListDistinctData[0].associateNodeRoot.id,
+                        event,
+                        'list',
+                        true
+                      );
+                    }}
+                    isAlliance
+                    className={'iguru-iconboxSVG'}
+                  />
+                </div>
               )}
               {reviewListDistinctData &&
                 reviewListDistinctData[0].associateNodeDescendantAll.map((item, index) => {
-                  // if (index === 0) {
-                  //   <Card
-                  //     textOneOne={item.informationBasic.associateName}
-                  //     textTwoOne={item.informationBasic.associateDescription}
-                  //     IconOne={null}
-                  //     isIcon={false}
-                  //     labelTwoTwo={''}
-                  //     onClickIconOne={null}
-                  //     isAlliance
-                  //   />;
-                  // } else {
                   return (
                     <div className="containerPadding" key={index}>
                       <ReviewList
@@ -251,6 +248,16 @@ const AssociateNodeReviewList = (props) => {
                         isTooltipActive={false}
                         onClickEvent={(event) => {
                           openNodeListPopup(item.id, event, 'list', true);
+                        }}
+                        isSelectActive={isSelectActive}
+                        isSelected={selectedTagsArray.includes(item.id)}
+                        onClickCheckBox={(event) => {
+                          onClickCheckBoxSelection(
+                            selectedTagsArray,
+                            unselectedTagsArray,
+                            event,
+                            dispatch
+                          );
                         }}
                       />
                     </div>

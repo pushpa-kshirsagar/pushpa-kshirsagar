@@ -30,6 +30,7 @@ import { getAssociateNodeApiCall, sortingListInAsc } from '../Actions/AssociateM
 import { Fragment } from 'react';
 import Card from '../Molecules/Card/Card';
 import { assesseeStatus } from '../Actions/StatusAction';
+import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const IguruNodeReviewList = (props) => {
   const dispatch = useDispatch();
   const [renderComp, setRenderComp] = useState(false);
@@ -45,7 +46,10 @@ const IguruNodeReviewList = (props) => {
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
     scanString,
-    searchFocusIndex
+    searchFocusIndex,
+    isSelectActive,
+    selectedTagsArray,
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -207,6 +211,16 @@ const IguruNodeReviewList = (props) => {
                         isTooltipActive={false}
                         onClickEvent={(event) => {
                           openNodeListPopup(item.id, event, 'list', true);
+                        }}
+                        isSelectActive={isSelectActive}
+                        isSelected={selectedTagsArray.includes(item.id)}
+                        onClickCheckBox={(event) => {
+                          onClickCheckBoxSelection(
+                            selectedTagsArray,
+                            unselectedTagsArray,
+                            event,
+                            dispatch
+                          );
                         }}
                       />
                     </div>

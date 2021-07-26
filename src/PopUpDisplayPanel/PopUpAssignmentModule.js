@@ -16,6 +16,7 @@ import {
   SET_ASSIGNMENT_PREVIOUS_POPUP,
   SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_SINGLE_STATE,
@@ -94,6 +95,24 @@ const PopUpAssignmentModule = (props) => {
     if (targetValue === 'information') {
       resetDataFunction();
       createAssignmentPopupApiCall(selectedAssociateInfo, secondaryOptionCheckValue, dispatch);
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: '',
+          middlePaneHeaderBadgeOne: '',
+          middlePaneHeaderBadgeTwo: '',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: '',
+          scanCount: null,
+          showMiddlePaneState: false
+        }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneSelectedValue', value: '' }
+      });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
     } else if (targetValue === 'distinct') {
       assignmentsDistinctApiCall(
         selectedAssociateInfo,

@@ -9,7 +9,8 @@ import {
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  FILTERMODE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -20,6 +21,10 @@ import {
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import Check from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+
 const AssignmentGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -38,7 +43,8 @@ const AssignmentGroupReviewList = (props) => {
     middlePaneHeaderBadgeThree,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    unselectedTagsArray,
+    allocatedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -103,6 +109,20 @@ const AssignmentGroupReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
+    if (siftValue === 'finish') {
+      console.log('allocatedTagsArray', allocatedTagsArray);
+      console.log('selectedTagsArray', selectedTagsArray);
+    }
+    if (siftValue === 'cancle') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: '' }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: '' }
+      });
+    }
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -173,6 +193,18 @@ const AssignmentGroupReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'assignmentAllocateToGroup' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={[{ label: 'allocate', onClick: onClickFooter, Icon: ReviseIcon }]}
+          secondaryIcon={[
+            { label: 'cancle', onClick: onClickFooter, Icon: ClearIcon },
+            { label: 'finish', onClick: onClickFooter, Icon: Check }
+          ]}
         />
       )}
     </div>

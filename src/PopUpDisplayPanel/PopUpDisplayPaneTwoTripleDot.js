@@ -87,6 +87,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
   const ChangeOptionPopup = async (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
+    let filterModeKey = '';
     console.log(keyVal);
     console.log(dataVal);
     if (dataVal === 'information') {
@@ -302,9 +303,11 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
             countPage,
             dispatch,
             dataVal,
-            cardValue
+            cardValue,
+            popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
           );
         }
+        filterModeKey = 'assesseeAllocateToGroup';
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'roles') {
         if (middlePaneHeader === 'administrators' || middlePaneHeader === 'managers') {
@@ -424,8 +427,10 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
+        filterModeKey = 'associateAllocateToGroup';
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'roles') {
         getAssociateRoleDistinctApiCall(
@@ -496,21 +501,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           cardValue,
           popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
+        filterModeKey = 'itemAllocateToGroup';
         dispatch({ type: POPUP_CLOSE });
-        if (popupHeaderOneBadgeTwo === 'allocate') {
-          dispatch({
-            type: SET_DISPLAY_TWO_SINGLE_STATE,
-            payload: { stateName: 'allocatedTagsArray', value: [...selectedTagsArray] }
-          });
-          dispatch({
-            type: FILTERMODE,
-            payload: { FilterMode: 'itemAllocateToGroup' }
-          });
-          dispatch({
-            type: SET_DISPLAY_TWO_SINGLE_STATE,
-            payload: { stateName: 'isSelectActive', value: 'multiple' }
-          });
-        }
       } else if (keyVal === 'types') {
         getItemsTypeApiCall(
           selectedAssociateInfo,
@@ -536,7 +528,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
@@ -568,8 +561,10 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
+        filterModeKey = 'assessmentAllocateToGroup';
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
         getAssessmentTypeApiCall(
@@ -639,8 +634,10 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
+        filterModeKey = 'assignmentAllocateToGroup';
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
         assignmentTypeApiCall(
@@ -822,6 +819,21 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: { badgeValue: dataVal, keyValue: keyVal }
+      });
+    }
+    if (popupHeaderOneBadgeTwo === 'allocate') {
+      alert(filterModeKey);
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'allocatedTagsArray', value: [...selectedTagsArray] }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: filterModeKey }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: 'multiple' }
       });
     }
   };

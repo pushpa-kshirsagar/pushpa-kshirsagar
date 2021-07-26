@@ -28,7 +28,9 @@ import {
   ASSESSEE_INFO_REVISE_SAGA,
   ASSESSEE_GROUP_INFO_REVISE_SAGA,
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
-  ASSESSEE_TYPE_INFO_REVISE_SAGA
+  ASSESSEE_TYPE_INFO_REVISE_SAGA,
+  GET_ASSESSEE_INFO_SAGA,
+  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA
 } from '../actionType';
 import {
   getAssesseeTypeAssesseeReqObj,
@@ -958,7 +960,8 @@ export const getAssesseeGroupDistinctApiCall = (
   countPage,
   dispatch,
   targetValue,
-  cardValue = 'noCard'
+  cardValue = 'noCard',
+  isSelectActive = ''
 ) => {
   let requestObj = makeAssesseeGroupObj(
     selectedAssociateInfo,
@@ -983,7 +986,8 @@ export const getAssesseeGroupDistinctApiCall = (
       BadgeOne: targetValue,
       BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
       BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
-      isMiddlePaneList: true
+      isMiddlePaneList: true,
+      isSelectActive: isSelectActive
     }
   });
 };
@@ -1460,6 +1464,101 @@ export const updateAssesseeTypeStatus = (selectedAssociateInfo, typeId, dispatch
       assesseeTypeAssesseeReqBody: null,
       headerOne: '',
       reqBody
+    }
+  });
+};
+export const assesseeRoleReviewInformation = (
+  selectedAssociateInfo,
+  dispatch,
+  secondaryOptionCheckValue,
+  isReviseMode,
+  typeOfMiddlePaneList,
+  selectedTagValue,
+  countPage
+) => {
+  let assesseeRoleAssesseeReqBody = getAssesseeRoleAssesseeReqObj(
+    selectedAssociateInfo,
+    selectedTagValue,
+    'active',
+    0,
+    countPage
+  );
+  dispatch({
+    type: GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue,
+      assesseeRoleAssesseeReqBody,
+      isReviseMode,
+      reqBody: {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        filter: 'true',
+        searchCondition: 'AND',
+        search: [
+          {
+            condition: 'and',
+            searchBy: [
+              {
+                dataType: 'string',
+                conditionColumn: 'id',
+                conditionValue: {
+                  condition: 'eq',
+                  value: {
+                    from: selectedTagValue
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  });
+};
+export const assesseeReviewInformation = (
+  selectedAssociateInfo,
+  dispatch,
+  secondaryOptionCheckValue,
+  isReviseMode,
+  typeOfMiddlePaneList,
+  selectedTagValue
+) => {
+  dispatch({
+    type: GET_ASSESSEE_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue,
+      isReviseMode,
+      headerOne:
+        typeOfMiddlePaneList === 'administratorsDistinctReviewList'
+          ? 'administrator'
+          : typeOfMiddlePaneList === 'managersDistinctReviewList'
+          ? 'manager'
+          : 'assessee',
+      reqBody: {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        filter: 'true',
+        searchCondition: 'AND',
+        search: [
+          {
+            condition: 'and',
+            searchBy: [
+              {
+                dataType: 'string',
+                conditionColumn: 'id',
+                conditionValue: {
+                  condition: 'eq',
+                  value: {
+                    from: selectedTagValue
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
     }
   });
 };

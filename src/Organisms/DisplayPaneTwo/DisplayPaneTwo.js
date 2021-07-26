@@ -61,6 +61,7 @@ import CultureProfileAssessmentDistinctReviewList from '../../ReviewListComponen
 import JobProfileAssessmentDistinctReviewList from '../../ReviewListComponent/JobProfileAssessmentDistinctReviewList';
 import AssesseeDistinctAssignmentDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctAssignmentDistinctReviewList';
 import AssessmentDistinctItemDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctItemDistinctReviewList';
+import AssesseeDistinctAssessmentDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctAssessmentDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -116,6 +117,9 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList' && (
           <AssesseeDistinctAssignmentDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assesseesAssginmentAssessmentReviewList' && (
+          <AssesseeDistinctAssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList' && (
           <AssesseeRoleDistinctReviewList popupAllClose={popupAllClose} />

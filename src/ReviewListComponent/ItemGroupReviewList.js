@@ -95,7 +95,6 @@ const ItemGroupReviewList = (props) => {
     if (siftValue === 'finish') {
       console.log('allocatedTagsArray', allocatedTagsArray);
       console.log('selectedTagsArray', selectedTagsArray);
-      alert('dsad');
     }
     if (siftValue === 'cancle') {
       dispatch({

@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import FlagIcon from '@material-ui/icons/Flag';
 import './ReviewList.css';
-
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 const ReviewList = (props) => {
   const {
     textTwo = '',
@@ -24,7 +24,9 @@ const ReviewList = (props) => {
     actualStatus = '',
     onClickCheckBox = null,
     onClickAddFladed = null,
+    onClickArrow = null,
     isSelected = false,
+    isDelivery = false,
     dataValue = '',
     flagedValue = '',
     shared = '',
@@ -114,6 +116,16 @@ const ReviewList = (props) => {
             </div>
 
             <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+              {isDelivery && (
+                <IconButton
+                  onClick={onClickArrow}
+                  assignmentid={tag}
+                  index={id}
+                  className={'assesseeListiconSize'}
+                >
+                  <ArrowForwardIosIcon className={'flagiconmargin'} />
+                </IconButton>
+              )}
               {isFlagActive || flagedValue !== '' ? (
                 <div className={['unitFlex', 'iconsBarDefaultFlag'].join(' ')}>
                   <IconButton

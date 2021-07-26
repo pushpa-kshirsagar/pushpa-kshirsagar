@@ -728,7 +728,8 @@ export const getAssociateGroupDistinctApiCall = (
   countPage,
   dispatch,
   targetValue,
-  cardValue = 'noCard'
+  cardValue = 'noCard',
+  isSelectActive = ''
 ) => {
   let requestObj = makeAssociateGroupObj(
     selectedAssociateInfo,
@@ -752,7 +753,8 @@ export const getAssociateGroupDistinctApiCall = (
       BadgeOne: targetValue,
       BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
       BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
-      isMiddlePaneList: true
+      isMiddlePaneList: true,
+      isSelectActive: isSelectActive
     }
   });
 };

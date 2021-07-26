@@ -58,9 +58,13 @@ import {
   GET_NODE_ASSOCIATE_REVIEW_LIST,
   ASSESSEE_GROUP_INFO_REVISE_SAGA,
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
-  SET_POPUP_SINGLE_STATE
+  SET_POPUP_SINGLE_STATE,
+  SET_MIDDLEPANE_STATE,
+  RELATED_REVIEWLIST_DISTINCT_DATA
 } from '../actionType';
 import {
+  assesseeReviewInformation,
+  assesseeRoleReviewInformation,
   getAssesseeGroupAssesseeDistinctApiCall,
   getAssesseeGroupAssesseeReqObj,
   getAssesseeNodeAssesseeDistinctApiCall,
@@ -172,9 +176,12 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     selectedTagValue,
     selectedTagGroupId
   } = useSelector((state) => state.PopUpReducer);
-  const { selectedAssociateInfo, countPage, middlePaneHeader } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    countPage,
+    middlePaneHeader,
+    reviewListDistinctData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [isReviseMode, setIsReviseMode] = useState(false);
   const [shareFee, setshareFee] = useState(false);
   useEffect(() => {
@@ -326,86 +333,25 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         typeOfMiddlePaneList === 'assesseesNodeAssesseeReviewList' ||
         typeOfMiddlePaneList === 'managersDistinctReviewList'
       ) {
-        dispatch({
-          type: GET_ASSESSEE_INFO_SAGA,
-          payload: {
-            secondaryOptionCheckValue,
-            isReviseMode,
-            headerOne:
-              typeOfMiddlePaneList === 'administratorsDistinctReviewList'
-                ? 'administrator'
-                : typeOfMiddlePaneList === 'managersDistinctReviewList'
-                ? 'manager'
-                : 'assessee',
-            reqBody: {
-              assesseeId: selectedAssociateInfo?.assesseeId,
-              associateId:
-                selectedAssociateInfo?.associate?.informationEngagement.associateTag
-                  .associateTagPrimary,
-              filter: 'true',
-              searchCondition: 'AND',
-              search: [
-                {
-                  condition: 'and',
-                  searchBy: [
-                    {
-                      dataType: 'string',
-                      conditionColumn: 'id',
-                      conditionValue: {
-                        condition: 'eq',
-                        value: {
-                          from: selectedTagValue
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        });
+        assesseeReviewInformation(
+          selectedAssociateInfo,
+          dispatch,
+          secondaryOptionCheckValue,
+          isReviseMode,
+          typeOfMiddlePaneList,
+          selectedTagValue
+        );
       }
       if (typeOfMiddlePaneList === 'assesseeRoleDistinctReviewList') {
-        let assesseeRoleAssesseeReqBody = getAssesseeRoleAssesseeReqObj(
+        assesseeRoleReviewInformation(
           selectedAssociateInfo,
+          dispatch,
+          secondaryOptionCheckValue,
+          isReviseMode,
+          typeOfMiddlePaneList,
           selectedTagValue,
-          'active',
-          0,
           countPage
         );
-        dispatch({
-          type: GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
-          payload: {
-            secondaryOptionCheckValue,
-            assesseeRoleAssesseeReqBody,
-            isReviseMode,
-            reqBody: {
-              assesseeId: selectedAssociateInfo?.assesseeId,
-              associateId:
-                selectedAssociateInfo?.associate?.informationEngagement.associateTag
-                  .associateTagPrimary,
-              filter: 'true',
-              searchCondition: 'AND',
-              search: [
-                {
-                  condition: 'and',
-                  searchBy: [
-                    {
-                      dataType: 'string',
-                      conditionColumn: 'id',
-                      conditionValue: {
-                        condition: 'eq',
-                        value: {
-                          from: selectedTagValue
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        });
       }
       if (typeOfMiddlePaneList === 'associateRoleDistinctReviewList') {
         let associateRoleAssociateReqBody = getAssociateRoleAssociateReqObj(
@@ -691,7 +637,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       }
       if (
         typeOfMiddlePaneList === 'itemsDistinctReviewList' ||
-        typeOfMiddlePaneList === 'assessmentItemReviewList'||
+        typeOfMiddlePaneList === 'assessmentItemReviewList' ||
         typeOfMiddlePaneList === 'itemGroupItemReviewList'
       ) {
         dispatch({
@@ -2299,6 +2245,29 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       }
       if (typeOfMiddlePaneList === 'jobProfilesTypeDistinctReviewList') {
         updateJobProfileTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
+      if (typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList') {
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+        let assessmentList = reviewListDistinctData.filter((data) => {
+          return data.id === selectedTagValue;
+        });
+         dispatch({
+          type: RELATED_REVIEWLIST_DISTINCT_DATA,
+          payload: assessmentList
+        });
+        dispatch({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assessments',
+            middlePaneHeaderBadgeOne: 'active',
+            middlePaneHeaderBadgeTwo: '',
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assesseesAssginmentAssessmentReviewList',
+            scanCount: assessmentList[0].assesseeAssessment.length,
+            showMiddlePaneState: true
+          }
+        });
       }
       dispatch({ type: POPUP_CLOSE });
     } else if (

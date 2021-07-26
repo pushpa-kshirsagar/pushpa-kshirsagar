@@ -60,7 +60,8 @@ function* workerReviewGroupListSaga(data) {
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'assesseesGroupDistinctReviewList',
             scanCount: userResponse && userResponse.countTotal,
-            showMiddlePaneState: true
+            showMiddlePaneState: true,
+            isSelectActive: data.payload.isSelectActive
           }
         });
       }
@@ -106,7 +107,8 @@ function* workerReviewAssociateGroupListSaga(data) {
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'associatesGroupDistinctReviewList',
             scanCount: userResponse && userResponse.countTotal,
-            showMiddlePaneState: true
+            showMiddlePaneState: true,
+            isSelectActive: data.payload.isSelectActive
           }
         });
       }
@@ -152,7 +154,8 @@ function* workerReviewAssessmentGroupListSaga(data) {
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'assessmentsGroupDistinctReviewList',
             scanCount: userResponse && userResponse.countTotal,
-            showMiddlePaneState: true
+            showMiddlePaneState: true,
+            isSelectActive: data.payload.isSelectActive
           }
         });
       }
@@ -199,7 +202,8 @@ function* workerReviewAssignmentGroupListSaga(data) {
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'assignmentsGroupDistinctReviewList',
             scanCount: userResponse && userResponse.countTotal,
-            showMiddlePaneState: true
+            showMiddlePaneState: true,
+            isSelectActive: data.payload.isSelectActive
           }
         });
       }

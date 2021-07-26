@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSOCIATE_POPUP_CLOSE,
+  FILTERMODE,
   FILTERMODE_ENABLE,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
@@ -20,6 +21,10 @@ import {
   GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
 } from '../PopUpConfig';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import Check from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+
 const AssesseeGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -38,7 +43,8 @@ const AssesseeGroupReviewList = (props) => {
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
     middlePaneHeaderBadgeThree,
-    selectedAssociateInfo
+    selectedAssociateInfo,
+    allocatedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -103,6 +109,20 @@ const AssesseeGroupReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
+    if (siftValue === 'finish') {
+      console.log('allocatedTagsArray', allocatedTagsArray);
+      console.log('selectedTagsArray', selectedTagsArray);
+    }
+    if (siftValue === 'cancle') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: '' }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: '' }
+      });
+    }
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -174,6 +194,18 @@ const AssesseeGroupReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'assesseeAllocateToGroup' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={[{ label: 'allocate', onClick: onClickFooter, Icon: ReviseIcon }]}
+          secondaryIcon={[
+            { label: 'cancle', onClick: onClickFooter, Icon: ClearIcon },
+            { label: 'finish', onClick: onClickFooter, Icon: Check }
+          ]}
         />
       )}
     </div>

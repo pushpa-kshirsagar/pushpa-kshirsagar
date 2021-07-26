@@ -125,7 +125,8 @@ export const assignmentsGroupApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  isSelectActive = ''
 ) => {
   let requestObj = makeAssignmentGroupObj(
     selectedAssociateInfo,
@@ -148,7 +149,8 @@ export const assignmentsGroupApiCall = (
       BadgeOne: targetValue,
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
-      isMiddlePaneList: true
+      isMiddlePaneList: true,
+      isSelectActive: isSelectActive
     }
   });
 };

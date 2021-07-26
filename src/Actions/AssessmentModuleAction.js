@@ -317,7 +317,8 @@ export const getAssessmentGroupApiCall = (
   countPage,
   dispatch,
   targetValue,
-  cardValue = 'noCard'
+  cardValue = 'noCard',
+  isSelectActive = ''
 ) => {
   let requestObj = makeAssessmentGroupObj(
     selectedAssociateInfo,
@@ -340,7 +341,8 @@ export const getAssessmentGroupApiCall = (
       BadgeOne: targetValue,
       BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
       BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
-      isMiddlePaneList: true
+      isMiddlePaneList: true,
+      isSelectActive: isSelectActive
     }
   });
 };

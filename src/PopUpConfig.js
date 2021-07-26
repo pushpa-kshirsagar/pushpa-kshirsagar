@@ -2070,6 +2070,67 @@ export const GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION = [
     disabled: false
   }
 ];
+export const ASSESSEE_ASSIGNMENT_REVIEW_LIST_POPUP_OPTION = [
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    dataKey: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    dataKey: 'reviewKey',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const ASSESSEE_ASSIGNMENT_TRIPLE_POPUP_OPTION = [
+  {
+    data: 'flag',
+    dataValue: 'flag',
+    dataKey: 'flag',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    dataKey: 'reviewKey',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
 export const ALLOCATE_POPUP = [
   {
     data: 'assessees',
@@ -2728,67 +2789,18 @@ export const SHARE_NEW_POPUP = [
     disabled: false
   }
 ];
-export const SHARE_UNSHARE_POPUP_OPTION = [
+export const RES_START_POPUP_OPTION = [
   {
-    data: 'all',
-    dataValue: 'all',
-    dataKey: 'all',
+    data: 'resume',
+    dataValue: 'resume',
+    dataKey: 'resume',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
-    data: 'distinct',
-    dataValue: 'distinct',
-    dataKey: 'distinct',
-    optionClass: 'optionPrimary',
-    disabled: false
-  },
-  {
-    data: 'primary',
-    dataValue: 'primary',
-    dataKey: 'primary',
-    optionClass: 'optionPrimary',
-    disabled: false
-  },
-  {
-    data: 'secondary',
-    dataValue: 'secondary',
-    dataKey: 'secondary',
-    optionClass: 'optionPrimary',
-    disabled: false
-  },
-  {
-    data: 'ascendant',
-    dataValue: 'ascendant',
-    dataKey: 'ascendant',
-    optionClass: 'optionPrimary',
-    disabled: false
-  },
-  {
-    data: 'descendant',
-    dataValue: 'descendant',
-    dataKey: 'descendant',
-    optionClass: 'optionPrimary',
-    disabled: false
-  },
-  {
-    data: 'peer',
-    dataValue: 'peer',
-    dataKey: 'peer',
-    optionClass: 'optionPrimary',
-    disabled: false
-  },
-  {
-    data: 'root',
-    dataValue: 'root',
-    dataKey: 'root',
-    optionClass: 'optionPrimary',
-    disabled: false
-  },
-  {
-    data: 'self',
-    dataValue: 'self',
-    dataKey: 'self',
+    data: 'start',
+    dataValue: 'start',
+    dataKey: 'start',
     optionClass: 'optionPrimary',
     disabled: false
   }

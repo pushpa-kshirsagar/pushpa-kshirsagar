@@ -4,28 +4,24 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   FILTERMODE_ENABLE,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-  LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
-  SET_POPUP_STATE,
-  SET_REQUEST_OBJECT
+  SET_POPUP_STATE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssesseeGroupObj } from '../Actions/GenericActions';
-import {
-  ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
-  GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-} from '../PopUpConfig';
+
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import {
+  ASSESSEE_ASSIGNMENT_REVIEW_LIST_POPUP_OPTION,
+  ASSESSEE_ASSIGNMENT_TRIPLE_POPUP_OPTION,
+  RES_START_POPUP_OPTION
+} from '../PopUpConfig';
 const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
-  const { secondaryOptionCheckValue, countPage } = useSelector(
-    (state) => state.AssesseeCreateReducer
-  );
-  const { cardValue } = useSelector((state) => state.PopUpReducer);
+  const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
   const {
     numberPage,
     scanCount,
@@ -34,11 +30,7 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
     middlePaneSelectedValue,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray,
-    middlePaneHeaderBadgeOne,
-    middlePaneHeaderBadgeTwo,
-    middlePaneHeaderBadgeThree,
-    selectedAssociateInfo
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -73,7 +65,6 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
     }
   };
   useEffect(() => {
-    console.log(reviewListDistinctData);
     if (!isFetching) return;
     fetchMoreListItems();
   }, [isFetching]);
@@ -119,9 +110,52 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+    });
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        popupHeaderOne: 'assignment',
+        popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeTwo: '',
+        isPopUpValue: '',
+        popupOpenType: 'primary',
+        popupContentArrValue: ASSESSEE_ASSIGNMENT_REVIEW_LIST_POPUP_OPTION,
+        selectedTagValue: e.currentTarget.getAttribute('tag'),
+        selectedTagStatus: e.currentTarget.getAttribute('status')
+      }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: {
+        stateName: 'middlePaneListPopupOptions',
+        value: ASSESSEE_ASSIGNMENT_TRIPLE_POPUP_OPTION
+      }
+    });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log('FilterMode', FilterMode);
+  const startAssignment = (e) => {
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        popupHeaderOne: 'assignment',
+        popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeTwo: '',
+        isPopUpValue: '',
+        popupOpenType: 'primary',
+        popupContentArrValue: RES_START_POPUP_OPTION,
+        selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
+        selectedTagStatus: e.currentTarget.getAttribute('status')
+      }
+    });
+    dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+
+    // assignmentStart(e.currentTarget.getAttribute('index'));
+    // setAssessmentList(reviewListDistinctData[e.currentTarget.getAttribute('index')]);
+  };
+  console.log(reviewListDistinctData);
   return (
     <div>
       {reviewListDistinctData &&
@@ -141,6 +175,8 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item.id)}
+                isDelivery={true}
+                onClickArrow={startAssignment}
                 onClickCheckBox={(event) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
