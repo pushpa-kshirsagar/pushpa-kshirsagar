@@ -822,7 +822,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
       });
     }
     if (popupHeaderOneBadgeTwo === 'allocate') {
-      alert(filterModeKey);
+      // alert(filterModeKey);
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'allocatedTagsArray', value: [...selectedTagsArray] }

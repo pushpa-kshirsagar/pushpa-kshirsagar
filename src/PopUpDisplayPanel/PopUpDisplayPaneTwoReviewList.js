@@ -556,7 +556,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'assessmentDistinctReviewList') {
+      if (typeOfMiddlePaneList === 'assessmentDistinctReviewList'||typeOfMiddlePaneList === 'assignmentDistinctAssessmentReviewList') {
         dispatch({
           type: GET_ASSESSMENT_INFO_SAGA,
           payload: {
@@ -2248,9 +2248,11 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       }
       if (typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList') {
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+        alert(selectedTagValue)
         let assessmentList = reviewListDistinctData.filter((data) => {
           return data.id === selectedTagValue;
         });
+        console.log('assessmentList',assessmentList);
          dispatch({
           type: RELATED_REVIEWLIST_DISTINCT_DATA,
           payload: assessmentList
