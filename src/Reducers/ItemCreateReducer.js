@@ -32,7 +32,9 @@ const initialState = {
       }
     },
     informationFramework: {
-      fee: ''
+      fee: '',
+      itemFrameworkOneBlank: '',
+      itemFrameworkOneDifficulty: ''
     }
   }
 };

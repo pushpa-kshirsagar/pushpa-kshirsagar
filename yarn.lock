@@ -5348,6 +5348,11 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+autobind-decorator@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/autobind-decorator/-/autobind-decorator-2.4.0.tgz#ea9e1c98708cf3b5b356f7cf9f10f265ff18239c"
+  integrity sha512-OGYhWUO72V6DafbF8PM8rm3EPbfuyMZcJhtm5/n26IDwO18pohE4eNazLoCGhPiXOCD0gEGmrbU3849QvM8bbw==
+
 autoprefixer@^9.6.1, autoprefixer@^9.7.2:
   version "9.8.6"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.8.6.tgz"
@@ -6572,21 +6577,6 @@ cjs-module-lexer@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-0.6.0.tgz"
   integrity sha512-uc2Vix1frTfnuzxxu1Hp4ktSvM3QaI4oXl4ZUqL1wjTu/BGki9TrCWoqLTg/drR1KwAEarXuRFCG2Svr1GxPFw==
-
-ckeditor4-integrations-common@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/ckeditor4-integrations-common/-/ckeditor4-integrations-common-0.2.0.tgz#994a83f94e14161fa8ee15e7f0edc8735b12d8f8"
-  integrity sha512-KkHztF0bkGOnTcifWFd55j5Y9SCR3uk12SGgS6L1mZNnBeIJFCcgTwZWEHtG2aDJF7aZob7cex1CShL+SrNuow==
-  dependencies:
-    load-script "^1.0.0"
-
-ckeditor4-react@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/ckeditor4-react/-/ckeditor4-react-1.4.2.tgz#6fc9b350c2f0541fd7acf3b102450039f57d91d5"
-  integrity sha512-4H5ZRCLBWoAaOVN+u+3bMXGOaq0n+FlYvHiH7F4FAIbxDXPSyDweQiTdMS74au/neOJffGY8mLtqf2nIP9wr7g==
-  dependencies:
-    ckeditor4-integrations-common "^0.2.0"
-    prop-types "^15.6.2"
 
 ckeditor5@^29.0.0:
   version "29.0.0"
@@ -9847,7 +9837,7 @@ html-webpack-plugin@^4.2.1:
     tapable "^1.1.3"
     util.promisify "1.0.0"
 
-htmlparser2@^3.10.1:
+htmlparser2@^3.10.1, htmlparser2@^3.9.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.1.tgz"
   integrity sha512-IgieNijUMbkDovyoKObU1DUhm1iwNYE/fuifEoEHfd1oZKZDaONBSkal7Y01shxsM49R4XaMdGez3WnF9UfiCQ==
@@ -11201,6 +11191,20 @@ jest@26.6.0:
     "@jest/core" "^26.6.0"
     import-local "^3.0.2"
     jest-cli "^26.6.0"
+
+jodit-react@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.1.tgz#62cf86641cc1ddd9c0e3eedb06d436d2ef8954bd"
+  integrity sha512-Lr4THBOL/07oTJVXglMHY1xfiVys7PBGQl9eeVAcr6Ivaq2mGRfVPT1CaBsTBJUPJ2cTjXjzqU2B40d1VzSIlA==
+  dependencies:
+    jodit "^3.7.1"
+
+jodit@^3.7.1:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/jodit/-/jodit-3.7.2.tgz#c1d0c9b715bb7b847c219fb1ada3de77ec977dfe"
+  integrity sha512-Jn/3z3XvCgcnkZBrckaIQ/B4CLlQkrLraU94eqlP2H0zYAMJpPpyRQjutgXWLASKfquuLCykVkvIzFfz10mMEA==
+  dependencies:
+    autobind-decorator "^2.4.0"
 
 jquery@^2.1:
   version "2.2.4"
@@ -14330,6 +14334,13 @@ react-hotkeys@2.0.0:
   dependencies:
     prop-types "^15.6.1"
 
+react-html-parser@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-html-parser/-/react-html-parser-2.0.2.tgz#6dbe1ddd2cebc1b34ca15215158021db5fc5685e"
+  integrity sha512-XeerLwCVjTs3njZcgCOeDUqLgNIt/t+6Jgi5/qPsO/krUWl76kWKXMeVs2LhY2gwM6X378DkhLjur0zUQdpz0g==
+  dependencies:
+    htmlparser2 "^3.9.0"
+
 react-inspector@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-5.1.0.tgz"
@@ -16086,6 +16097,16 @@ stylehacks@^4.0.0:
     browserslist "^4.0.0"
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
+
+suneditor-react@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/suneditor-react/-/suneditor-react-3.3.0.tgz#06f6cef81c10a5a3e27af106eaea91068afad6c1"
+  integrity sha512-FB0C7/52MoXtAr96ACTJU3WUHAlSKTd0GnLGj8cKuXW8L8KtUOvxzXn7qGzhJS/hL9HcQCRYz1UHKUdtGIbwUg==
+
+suneditor@^2.41.3:
+  version "2.41.3"
+  resolved "https://registry.yarnpkg.com/suneditor/-/suneditor-2.41.3.tgz#2eb70d5c793ed50eab3ba2d282e984e076bb217e"
+  integrity sha512-V4Hz1PY2MhIhw2Lf1iInjEhuVp65B5EbqKb8GpBluZDfx3MnZnNm5v/+Ssr1rV9swTCUWOsl8Qo92KhLMZIllA==
 
 supports-color@^2.0.0:
   version "2.0.0"

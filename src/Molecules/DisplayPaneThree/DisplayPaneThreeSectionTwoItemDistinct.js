@@ -20,16 +20,121 @@ const DisplayPaneThreeSectionTwoItem = () => {
 
   const frameworkList = [
     {
+      id: 'a1-blank',
+      labelTextOneOne: 'blank',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
+    {
+      id: 'a1-difficulty',
+      labelTextOneOne: 'difficulty',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
+    {
+      id: 'a1-group',
+      labelTextOneOne: 'group',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
+    {
+      id: 'a1-media',
+      labelTextOneOne: 'media',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
+    {
+      id: 'a1-polarity',
+      labelTextOneOne: 'polarity',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
+    {
+      id: 'a1-response',
+      labelTextOneOne: 'response',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'attachment',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'correct',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
+    {
       id: 'a1-score',
       labelTextOneOne: 'score',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'maximum',
-          textOne: 'No Information'
-        },
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
+    {
+      id: 'a1-sequence',
+      labelTextOneOne: 'sequence',
+      labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'minimum',
-          textOne: 'No Information'
+          labelTextOneOneBadge: '',
+          textOne: ''
         }
       ],
       innerAssociateList: [],
@@ -44,7 +149,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          textOne: 'No Information'
+          textOne: ''
         }
       ],
       innerAssociateList: [],
@@ -69,17 +174,21 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconTwo: null
     },
     {
-      id: 'item-preview',
-      labelTextOneOne: 'items',
+      id: 'item-word',
+      labelTextOneOne: 'word',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'distinct',
-          innerList: []
+          labelTextOneOneBadge: 'maximun',
+          innerList: ''
+        },
+        {
+          labelTextOneOneBadge: 'minimum',
+          innerList: ''
         }
       ],
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: true,
+      isListCard: false,
       IconOne: null,
       IconTwo: null
     }
@@ -88,7 +197,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'items' && selectedBadgeName === 'distinct') {
+    if (labelName === 'media') {
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
     }
   };
