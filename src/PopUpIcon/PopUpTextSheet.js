@@ -4,6 +4,25 @@ import ReactCKEditor from 'react-ckeditor-component';
 import InputLabel from '@material-ui/core/InputLabel';
 import PopUp from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
+import SunEditor from 'suneditor-react';
+import {
+  align,
+  font,
+  fontColor,
+  fontSize,
+  formatBlock,
+  hiliteColor,
+  horizontalRule,
+  lineHeight,
+  list,
+  table,
+  textStyle,
+  image,
+  video,
+  link,
+  audio
+} from 'suneditor/src/plugins';
+import 'suneditor/dist/css/suneditor.min.css';
 import PropTypes from 'prop-types';
 import { Check, Clear } from '@material-ui/icons';
 import { DialogTitle, IconButton, Paper } from '@material-ui/core';
@@ -42,9 +61,13 @@ const PopUpTextSheet = (props) => {
       dispatch({ type: CLEAR_ASSESSEE_INFO });
     }
   };
+  const handleChange = (content) => {
+    console.log('EDITOR===>', content);
+    setInnerContent(content);
+  };
   const onClickYes = () => {
     console.log(innerContent);
-    if (onClickSave){
+    if (onClickSave) {
       onClickSave(innerContent);
     }
     if (typeOfSetObject !== '') {
@@ -112,7 +135,7 @@ const PopUpTextSheet = (props) => {
           </Paper>
         </DialogTitle>
         <DialogContent className={['textsheetPopupContent'].join(' ')}>
-          <ReactCKEditor
+          {/* <ReactCKEditor
             activeClass="editor"
             content={innerContent}
             // onInit={(editor) => {
@@ -130,6 +153,45 @@ const PopUpTextSheet = (props) => {
             config={{
               isReadOnly: true
             }}
+          /> */}
+          <SunEditor
+            setOptions={{
+              showPathLabel: false,
+              minHeight: '40vh',
+              maxHeight: '40vh',
+              placeholder: 'Enter your text here!!!',
+              plugins: [
+                align,
+                font,
+                fontColor,
+                fontSize,
+                formatBlock,
+                hiliteColor,
+                horizontalRule,
+                lineHeight,
+                list,
+                table,
+                textStyle,
+                image,
+                video,
+                link,
+                audio
+              ],
+              buttonList: [
+                ['undo', 'redo'],
+                ['font', 'fontSize', 'formatBlock'],
+                ['bold', 'underline', 'italic', 'strike'],
+                ['fontColor', 'hiliteColor'],
+                '/', // Line break
+                ['removeFormat', 'codeView', 'preview', 'outdent', 'indent'],
+                ['align', 'horizontalRule', 'list', 'lineHeight'],
+                ['table', 'link', 'image', 'video', 'audio']
+              ],
+              // formats: ['p', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+              font: ['Arial', 'Calibri', 'Times New Roman']
+            }}
+            setContents={innerContent}
+            onChange={handleChange}
           />
         </DialogContent>
       </PopUp>

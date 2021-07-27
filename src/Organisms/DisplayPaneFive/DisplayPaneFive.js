@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,31 @@ import Manuscript from '@material-ui/icons/Description';
 import ReactCKEditor from 'react-ckeditor-component';
 // import CKEditor from '@ckeditor/ckeditor5-react';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import JoditEditor from 'jodit-react';
+import ReactHTMLParser from 'react-html-parser';
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
+import {
+  align,
+  font,
+  fontColor,
+  fontSize,
+  formatBlock,
+  hiliteColor,
+  horizontalRule,
+  lineHeight,
+  list,
+  table,
+  textStyle,
+  image,
+  video,
+  link,
+  audio
+  // codeView,
+  // preview
+} from 'suneditor/src/plugins';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { SET_PANE_THREE_ITEM_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
@@ -92,15 +117,20 @@ export const DisplayPaneFive = () => {
   const [isPreviewMode, setPreviewMode] = useState(false);
   const [optionPopupValue, setOptionPopupValue] = useState('');
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-
+  const editor = useRef(null);
   const addOption = () => {
     setQuestionOptionList([
       ...questionOptionList,
       { id: `option-${questionOptionList.length + 1}`, value: 'Option' }
     ]);
   };
-  const onChangeTextSheet = (evt) => {
-    setInnerContent(evt.editor.getData());
+  const onChangeTextSheet = (event, editor) => {
+    console.log('EDITOR===>', event);
+    setInnerContent(editor.getData());
+  };
+  const handleChange = (content) => {
+    console.log('EDITOR===>', content);
+    setInnerContent(content);
   };
   const removeOption = () => {
     if (questionOptionList.length > 2) {
@@ -193,6 +223,7 @@ export const DisplayPaneFive = () => {
           className="containerPadding"
           style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}
         >
+          <Label className="" text={'media'} fontSize="1.6rem" colour="rgba(0, 0, 0, 0.87)" />
           <div>
             {isPreviewMode ? (
               <div
@@ -203,29 +234,101 @@ export const DisplayPaneFive = () => {
                   overflow: 'overlay'
                   // display: 'flex'
                 }}
-                dangerouslySetInnerHTML={{ __html: innerContent }}
-              ></div>
+                // dangerouslySetInnerHTML={{ __html: innerContent }}
+              >
+                {ReactHTMLParser(innerContent)}
+              </div>
             ) : (
-              <ReactCKEditor
-                activeClass="editor"
-                content={innerContent}
-                // onInit={(editor) => {
-                //   editor.ui.view.editable.element.parentElement.insertBefore(
-                //     editor.ui.view.toolbar.element,
-                //     editor.ui.view.editable.element
-                //   );
-                // }}
-                events={{
-                  // blur: this.onBlur,
-                  // afterPaste: this.afterPaste,
-                  change: onChangeTextSheet
+              <SunEditor
+                setOptions={{
+                  showPathLabel: false,
+                  minHeight: '50vh',
+                  maxHeight: '50vh',
+                  placeholder: 'Enter your text here!!!',
+                  plugins: [
+                    align,
+                    font,
+                    fontColor,
+                    fontSize,
+                    formatBlock,
+                    hiliteColor,
+                    horizontalRule,
+                    lineHeight,
+                    list,
+                    table,
+                    textStyle,
+                    image,
+                    video,
+                    link,
+                    audio
+                  ],
+                  buttonList: [
+                    ['undo', 'redo'],
+                    ['font', 'fontSize', 'formatBlock'],
+                    ['bold', 'underline', 'italic', 'strike'],
+                    ['fontColor', 'hiliteColor'],
+                    ['removeFormat', 'codeView', 'preview'],
+                    '/', // Line break
+                    ['outdent', 'indent'],
+                    ['align', 'horizontalRule', 'list', 'lineHeight'],
+                    ['table', 'link', 'image', 'video', 'audio']
+                  ],
+                  // formats: ['p', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+                  font: ['Arial', 'Calibri', 'Times New Roman']
                 }}
-                contentEditable="true"
-                config={{
-                  isReadOnly: false,
-                  mediaEmbed: true
-                }}
+                setContents={innerContent}
+                onChange={handleChange}
               />
+              // <JoditEditor
+              //   ref={editor}
+              //   value={innerContent}
+              //   config={{
+              //     readonly: false // all options from https://xdsoft.net/jodit/doc/
+              //   }}
+              //   tabIndex={1} // tabIndex of textarea
+              //   onBlur={(newContent) => setInnerContent(newContent)} // preferred to use only this option to update the content for performance reasons
+              //   onChange={(newContent) => {
+              //     setInnerContent(newContent);
+              //   }}
+              // />
+              // <CKEditor
+              //   editor={ClassicEditor}
+              //   data={innerContent}
+              //   // config={{
+              //   //   readonly: false
+              //   // }}
+              //   onReady={(editor) => {
+              //     // You can store the "editor" and use when it is needed.
+              //     console.log('Editor is ready to use!', editor);
+              //   }}
+              //   onChange={onChangeTextSheet}
+              //   onBlur={(event, editor) => {
+              //     console.log('Blur.', editor);
+              //   }}
+              //   onFocus={(event, editor) => {
+              //     console.log('Focus.', editor);
+              //   }}
+              // />
+              // <ReactCKEditor
+              //   activeClass="editor"
+              //   content={innerContent}
+              //   // onInit={(editor) => {
+              //   //   editor.ui.view.editable.element.parentElement.insertBefore(
+              //   //     editor.ui.view.toolbar.element,
+              //   //     editor.ui.view.editable.element
+              //   //   );
+              //   // }}
+              //   events={{
+              //     // blur: this.onBlur,
+              //     // afterPaste: this.afterPaste,
+              //     change: onChangeTextSheet
+              //   }}
+              //   contentEditable="true"
+              //   config={{
+              //     isReadOnly: false,
+              //     mediaEmbed: true
+              //   }}
+              // />
               // <TextareaAutosize
               //   className={'text-area'}
               //   maxRows={4}
