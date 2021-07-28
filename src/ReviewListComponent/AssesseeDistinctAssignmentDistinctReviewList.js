@@ -170,8 +170,8 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item.id}
-                isSelectedReviewList={middlePaneSelectedValue === item.id}
+                tag={item.assignmentId}
+                isSelectedReviewList={middlePaneSelectedValue === item.assignmentId}
                 status={item.assesseeAssignmentStatus}
                 actualStatus={item.assesseeAssignmentStatus}
                 textOne={item.assesseeAssignmentName}
@@ -179,7 +179,7 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
-                isSelected={selectedTagsArray.includes(item.id)}
+                isSelected={selectedTagsArray.includes(item.assignmentId)}
                 isDelivery={true}
                 onClickArrow={startAssignment}
                 onClickCheckBox={(event) => {

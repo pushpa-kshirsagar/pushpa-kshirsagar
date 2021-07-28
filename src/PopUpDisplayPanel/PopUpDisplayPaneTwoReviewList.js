@@ -2252,7 +2252,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       if (typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList') {
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
         let assessmentList = reviewListDistinctData.filter((data) => {
-          return data.id === selectedTagValue;
+          return data.assignmentId === selectedTagValue;
         });
         console.log('assessmentList', assessmentList);
         dispatch({

@@ -168,8 +168,8 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item.id}
-                isSelectedReviewList={middlePaneSelectedValue === item.id}
+                tag={item.assessmentId}
+                isSelectedReviewList={middlePaneSelectedValue === item.assessmentId}
                 status={item.assesseeAssessmentStatus}
                 actualStatus={item.assesseeAssessmentStatus}
                 textOne={item.assesseeAssessmentName}
@@ -177,7 +177,7 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
-                isSelected={selectedTagsArray.includes(item.id)}
+                isSelected={selectedTagsArray.includes(item.assessmentId)}
                 isDelivery={true}
                 onClickArrow={startAssessment}
               />
