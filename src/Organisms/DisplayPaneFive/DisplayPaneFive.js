@@ -792,7 +792,7 @@ export const DisplayPaneFive = () => {
         tag={'assesseeGender'}
         label={'difficulty'}
         listSelect={[
-          { id: 'Low', name: 'Female' },
+          { id: 'Low', name: 'Low' },
           { id: 'Medium', name: 'Medium' },
           { id: 'High', name: 'High' }
         ]}
