@@ -43,9 +43,19 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Label from '../../Atoms/Label/Label';
 import clsx from 'clsx';
-import { Divider, IconButton, Input } from '@material-ui/core';
+import { DialogContent, Divider, IconButton, Input } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
+import PopupHeader from '../../Molecules/PopUp/PopUpHeader';
+import Popup from '../../Molecules/PopUp/PopUp';
+import JsonRenderComponent from '../../Actions/JsonRenderComponent';
+import PopUpTextField from '../../PopUpInformation/PopUpTextField';
+import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import ArrowRight from '@material-ui/icons/ChevronRight';
+import ArrowLeft from '@material-ui/icons/ChevronLeft';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 
 const useStyles = makeStyles({
   root: {
@@ -107,23 +117,182 @@ export const DisplayPaneFive = () => {
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
+  const { FilterMode } = useSelector((state) => state.FilterReducer);
+  const { isPopUpOpen } = useSelector((state) => state.PopUpReducer);
+  const onClickFooter = (e) => {
+    // dispatch({ type: NAVIGATOR_MODE });
+  };
+
+  const primaryIcon = [];
+  const secondaryIcon = [
+    { label: 'first', onClick: onClickFooter, Icon: FirstPage },
+    { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft },
+    { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
+    { label: 'last', onClick: onClickFooter, Icon: LastPage }
+  ];
+  const optionLabel =
+    "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>option</span>&nbsp; <span class='iguru-header-badge1_0'>media</span>";
+  const itemLabel = "<span>item</span>&nbsp <span class='iguru-header-badge1_0'>media</span>";
   const [questionOptionList, setQuestionOptionList] = useState([
-    { id: 'option-1', value: 'Option' },
-    { id: 'option-2', value: 'Option' },
-    { id: 'option-3', value: 'Option' },
-    { id: 'option-4', value: 'Option' }
+    {
+      id: 'option-1',
+      value: optionLabel
+    },
+    { id: 'option-2', value: optionLabel },
+    { id: 'option-3', value: optionLabel },
+    { id: 'option-4', value: optionLabel }
   ]);
-  const [innerContent, setInnerContent] = useState('');
+  const [innerContent, setInnerContent] = useState(itemLabel);
   const [isPreviewMode, setPreviewMode] = useState(false);
   const [optionPopupValue, setOptionPopupValue] = useState('');
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const editor = useRef(null);
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const addOption = () => {
     setQuestionOptionList([
       ...questionOptionList,
-      { id: `option-${questionOptionList.length + 1}`, value: 'Option' }
+      { id: `option-${questionOptionList.length + 1}`, value: optionLabel }
     ]);
   };
+  const itemPopupOption = [
+    {
+      data: 'description',
+      dataValue: 'description',
+      dataKey: 'descriptionAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'label',
+      dataValue: 'label',
+      dataKey: 'labelAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'revise',
+      dataValue: 'revise',
+      dataKey: 'reviseAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'score',
+      dataValue: 'score',
+      dataKey: 'scoreAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'weightage',
+      dataValue: 'weightage',
+      dataKey: 'weightageAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    }
+  ];
+  const itemMediaPopupOption = [
+    {
+      data: 'blank',
+      dataValue: 'blank',
+      dataKey: 'blankAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'description',
+      dataValue: 'description',
+      dataKey: 'descriptionAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'difficulty',
+      dataValue: 'difficulty',
+      dataKey: 'difficultyAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'group',
+      dataValue: 'group',
+      dataKey: 'groupAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'label',
+      dataValue: 'label',
+      dataKey: 'labelAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'polarity',
+      dataValue: 'polarity',
+      dataKey: 'polarityAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'revise',
+      dataValue: 'revise',
+      dataKey: 'reviseAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'score',
+      dataValue: 'score',
+      dataKey: 'scoreAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'sequence',
+      dataValue: 'sequence',
+      dataKey: 'sequenceAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'time',
+      dataValue: 'time',
+      dataKey: 'timeAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'type',
+      dataValue: 'type',
+      dataKey: 'typeAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'word',
+      dataValue: 'word',
+      dataKey: 'wordAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    }
+  ];
+
   const onChangeTextSheet = (event, editor) => {
     console.log('EDITOR===>', event);
     setInnerContent(editor.getData());
@@ -139,7 +308,133 @@ export const DisplayPaneFive = () => {
       setQuestionOptionList(newArr);
     }
   };
+  const setSecondaryOptionValue = (e) => {
+    //TODO: set secondary option in assessments
+  };
 
+  const ChangeOptionPopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    console.log(targetValue);
+    if (targetValue === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'label') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'revise' && popupMode !== '') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: popupMode,
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'score') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_OPTION_SCORE_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'weightage') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_OPTION_WEIGHTAGE_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+  };
+  const ChangeItemOptionPopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    console.log(targetValue);
+    if (targetValue === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'label') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'score') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_OPTION_SCORE_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'blank') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_BLANK_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'difficulty') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_DIFFICULTY_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'difficulty') {
+    }
+    if (targetValue === 'group') {
+    }
+    if (targetValue === 'polarity') {
+    }
+    if (targetValue === 'sequence') {
+    }
+    if (targetValue === 'time') {
+    }
+    if (targetValue === 'type') {
+    }
+    if (targetValue === 'word') {
+    }
+  };
+
+  const BackHandlerEvent = (e) => {};
   return (
     <>
       <div>
@@ -177,27 +472,15 @@ export const DisplayPaneFive = () => {
               </div>
             </div>
             <div style={{ flex: '1' }} className="flex-center">
-              <IconButton
+              {/* <IconButton
                 onClick={async () => {
                   setPreviewMode((st) => !st);
-                  // if (isPreviewMode) {
-                  //   const requestOptions = {
-                  //     method: 'POST',
-                  //     headers: new Headers({
-                  //       Authorization: localStorage.getItem('token')
-                  //     }),
-                  //     body: JSON.stringify({ file: innerContent })
-                  //   };
-                  //   const response = await fetch('https://5z33kqknpl.execute-api.ap-south-1.amazonaws.com/dev/file-upload-n', requestOptions);
-                  //   const json = await response.json();
-                  //   console.log(json);
-                  // }
                   console.log('PREVIEW');
                 }}
                 className="MuiIconButton-root-1602"
               >
                 <Manuscript className={''} />
-              </IconButton>
+              </IconButton> */}
             </div>
             <div style={{ flex: '1' }} className="flex-center">
               {/* <IconButton onClick={flagQuestion} className={'assessmentFlagButton'}>
@@ -223,22 +506,31 @@ export const DisplayPaneFive = () => {
           className="containerPadding"
           style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}
         >
-          <Label className="" text={'media'} fontSize="1.6rem" colour="rgba(0, 0, 0, 0.87)" />
+          {/* <Label className="" text={'media'} fontSize="1.6rem" colour="rgba(0, 0, 0, 0.87)" /> */}
           <div>
-            {isPreviewMode ? (
-              <div
-                style={{
-                  padding: '2.5px 5px',
-                  alignItems: 'center',
-                  //  height: 'calc(100vh - 190px)',
-                  overflow: 'overlay'
-                  // display: 'flex'
-                }}
-                // dangerouslySetInnerHTML={{ __html: innerContent }}
-              >
-                {ReactHTMLParser(innerContent)}
-              </div>
-            ) : (
+            {/* {isPreviewMode ? ( */}
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                //  height: 'calc(100vh - 190px)',
+                overflow: 'overlay'
+                // display: 'flex'
+              }}
+              onClick={() => {
+                dispatch({
+                  type: SET_POPUP_VALUE,
+                  payload: {
+                    isPopUpValue: 'ITEM_PRIMARY_POPUP',
+                    popupMode: popupMode
+                  }
+                });
+              }}
+              // dangerouslySetInnerHTML={{ __html: innerContent }}
+            >
+              {ReactHTMLParser(innerContent)}
+            </div>
+            {/* ) : (
               <SunEditor
                 setOptions={{
                   showPathLabel: false,
@@ -279,64 +571,7 @@ export const DisplayPaneFive = () => {
                 setContents={innerContent}
                 onChange={handleChange}
               />
-              // <JoditEditor
-              //   ref={editor}
-              //   value={innerContent}
-              //   config={{
-              //     readonly: false // all options from https://xdsoft.net/jodit/doc/
-              //   }}
-              //   tabIndex={1} // tabIndex of textarea
-              //   onBlur={(newContent) => setInnerContent(newContent)} // preferred to use only this option to update the content for performance reasons
-              //   onChange={(newContent) => {
-              //     setInnerContent(newContent);
-              //   }}
-              // />
-              // <CKEditor
-              //   editor={ClassicEditor}
-              //   data={innerContent}
-              //   // config={{
-              //   //   readonly: false
-              //   // }}
-              //   onReady={(editor) => {
-              //     // You can store the "editor" and use when it is needed.
-              //     console.log('Editor is ready to use!', editor);
-              //   }}
-              //   onChange={onChangeTextSheet}
-              //   onBlur={(event, editor) => {
-              //     console.log('Blur.', editor);
-              //   }}
-              //   onFocus={(event, editor) => {
-              //     console.log('Focus.', editor);
-              //   }}
-              // />
-              // <ReactCKEditor
-              //   activeClass="editor"
-              //   content={innerContent}
-              //   // onInit={(editor) => {
-              //   //   editor.ui.view.editable.element.parentElement.insertBefore(
-              //   //     editor.ui.view.toolbar.element,
-              //   //     editor.ui.view.editable.element
-              //   //   );
-              //   // }}
-              //   events={{
-              //     // blur: this.onBlur,
-              //     // afterPaste: this.afterPaste,
-              //     change: onChangeTextSheet
-              //   }}
-              //   contentEditable="true"
-              //   config={{
-              //     isReadOnly: false,
-              //     mediaEmbed: true
-              //   }}
-              // />
-              // <TextareaAutosize
-              //   className={'text-area'}
-              //   maxRows={4}
-              //   aria-label="maximum height"
-              //   placeholder="Enter your question and select single answer from list"
-              //   defaultValue=""
-              // />
-            )}
+            )} */}
           </div>
           <hr
             style={{
@@ -369,15 +604,24 @@ export const DisplayPaneFive = () => {
                         }}
                         onClick={() => {
                           // setOptionPopupValue(`OPTION_${key}`);
+                          // dispatch({
+                          //   type: SET_POPUP_VALUE,
+                          //   payload: {
+                          //     isPopUpValue: `OPTION_${key}`,
+                          //     popupMode: ''
+                          //   }
+                          // });
                           dispatch({
                             type: SET_POPUP_VALUE,
                             payload: {
-                              isPopUpValue: `OPTION_${key}`,
-                              popupMode: ''
+                              isPopUpValue: 'ITEM_OPTION_PRIMARY_POPUP',
+                              popupMode: `OPTION_${key}`
                             }
                           });
                         }}
-                        dangerouslySetInnerHTML={{ __html: op.value }}
+                        dangerouslySetInnerHTML={{
+                          __html: op.value
+                        }}
                       ></div>
                       {/* <Input
                         type={'text'}
@@ -417,6 +661,159 @@ export const DisplayPaneFive = () => {
           </FormControl>
         </div>
       </div>
+      <Popup isActive={isPopUpValue === 'ITEM_OPTION_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'items'}
+          headerOneBadgeOne={''}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeOptionPopup}
+            currentPopUpOption={itemPopupOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      <Popup isActive={isPopUpValue === 'ITEM_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'items'}
+          headerOneBadgeOne={'media'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeItemOptionPopup}
+            currentPopUpOption={itemMediaPopupOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      <PopUpTextSheet
+        isActive={isPopUpValue === `ITEM_MEDIA_TEXT`}
+        headerOne={'item'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'media'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={innerContent}
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          setInnerContent(innerText);
+        }}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === `ITEM_LABEL_MEDIA_TEXT`}
+        headerOne={'item'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'label'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={''}
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {}}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === `ITEM_DESCRIPTION_MEDIA_TEXT`}
+        headerOne={'item'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'description'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={''}
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {}}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ITEM_OPTION_SCORE_POPUP'}
+        label={'score'}
+        headerPanelColour={'genericOne'}
+        inputHeader={''}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        type={'number'}
+        headerOne={'item'}
+        headerOneBadgeOne={'score'}
+        isRequired={false}
+        actualLableValue={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={'revise'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ITEM_OPTION_WEIGHTAGE_POPUP'}
+        label={'weightage'}
+        headerPanelColour={'genericOne'}
+        inputHeader={''}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        type={'number'}
+        headerOne={'item'}
+        headerOneBadgeOne={'weightage'}
+        isRequired={false}
+        actualLableValue={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={'revise'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ITEM_BLANK_POPUP'}
+        label={'blank'}
+        headerPanelColour={'genericOne'}
+        inputHeader={''}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        type={'number'}
+        headerOne={'item'}
+        headerOneBadgeOne={'blank'}
+        isRequired={false}
+        actualLableValue={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={'revise'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ITEM_DIFFICULTY_POPUP'}
+        tag={'assesseeGender'}
+        label={'difficulty'}
+        listSelect={[
+          { id: 'Low', name: 'Female' },
+          { id: 'Medium', name: 'Medium' },
+          { id: 'High', name: 'High' }
+        ]}
+        mappingValue={'id'}
+        labelval={'difficulty'}
+        headerPanelColour={'genericOne'}
+        headerOne={'item'}
+        headerOneBadgeOne={''}
+        isRequired={true}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        basicInfo={{}}
+        typeOfSetObject={''}
+      />
+      <FooterIconTwo
+        className={'widthDisplayPaneFive'}
+        FilterModeEnable={false}
+        FilterMode={FilterMode}
+        onClick={onClickFooter}
+        primaryIcon={primaryIcon}
+        secondaryIcon={secondaryIcon}
+      />
     </>
   );
 };

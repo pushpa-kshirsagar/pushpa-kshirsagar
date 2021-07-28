@@ -148,7 +148,7 @@
 }
 .textsheetPopupContent {
   padding: 0px 0px !important;
-  text-align: left;
+  /* text-align: center; */
   max-height: 450px;
   overflow: overlay;
   overflow: auto;
