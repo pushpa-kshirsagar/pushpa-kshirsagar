@@ -30,14 +30,12 @@ import {
   SET_SECONDARY_CREATE_OPTION_VALUE,
   FILTERMODE,
   CLEAR_DISPLAY_PANE_THREE,
-  LOADER_STOP,
   GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
   CLEAR_NODE_REDUCER_STATE,
   SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   INTERNAL_NODE_LIST_SAGA,
   SET_POPUP_VALUE,
   SET_NODE_DYNAMIC_SINGLE_STATE,
-  SET_SINGLE_ASSOCIATE_INFORMATION,
   GET_ASSESSEE_TYPE_REVIEW_INFO_SAGA,
   GET_ASSOCIATE_TYPE_REVIEW_INFO_SAGA,
   GET_ITEM_INFO_SAGA,
@@ -56,11 +54,11 @@ import {
   GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
   GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
   GET_NODE_ASSOCIATE_REVIEW_LIST,
-  ASSESSEE_GROUP_INFO_REVISE_SAGA,
-  ASSESSEE_ROLE_INFO_REVISE_SAGA,
   SET_POPUP_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
-  RELATED_REVIEWLIST_DISTINCT_DATA
+  RELATED_REVIEWLIST_DISTINCT_DATA,
+  ASSESSMENT_START_SAGA,
+  ASSIGNMENT_ADMINISTER_SAGA
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -136,6 +134,7 @@ import {
   getAssignmnetGroupAssignmnetDistinctApiCall,
   getAssignmnetTypeAssignmnetDistinctApiCall,
   getNodeRelatedAssignmentsDistinctApiCall,
+  updateAssignmentAdminister,
   updateAssignmentDistinctStatus,
   updateAssignmentGroupStatus,
   updateAssignmentTypeStatus
@@ -180,7 +179,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     selectedAssociateInfo,
     countPage,
     middlePaneHeader,
-    reviewListDistinctData
+    reviewListDistinctData,
+    relatedReviewListDistinctData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [isReviseMode, setIsReviseMode] = useState(false);
   const [shareFee, setshareFee] = useState(false);
@@ -556,7 +556,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           }
         });
       }
-      if (typeOfMiddlePaneList === 'assessmentDistinctReviewList'||typeOfMiddlePaneList === 'assignmentDistinctAssessmentReviewList') {
+      if (
+        typeOfMiddlePaneList === 'assessmentDistinctReviewList' ||
+        typeOfMiddlePaneList === 'assignmentDistinctAssessmentReviewList'
+      ) {
         dispatch({
           type: GET_ASSESSMENT_INFO_SAGA,
           payload: {
@@ -2248,12 +2251,11 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       }
       if (typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList') {
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-        alert(selectedTagValue)
         let assessmentList = reviewListDistinctData.filter((data) => {
           return data.id === selectedTagValue;
         });
-        console.log('assessmentList',assessmentList);
-         dispatch({
+        console.log('assessmentList', assessmentList);
+        dispatch({
           type: RELATED_REVIEWLIST_DISTINCT_DATA,
           payload: assessmentList
         });
@@ -2271,6 +2273,20 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           }
         });
       }
+      if (typeOfMiddlePaneList === 'assesseesAssginmentAssessmentReviewList') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentId: relatedReviewListDistinctData[0].id,
+          assessmentId: selectedTagValue
+        };
+        dispatch({ type: ASSESSMENT_START_SAGA, payload: { request: reqBody } });
+      }
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'administerApiCall') {
+      updateAssignmentAdminister(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       dispatch({ type: POPUP_CLOSE });
     } else if (
       dataVal === 'information' &&

@@ -10,7 +10,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_POPUP_STATE
+  SET_POPUP_STATE,
+  RELATED_REVIEWLIST_DISTINCT_DATA
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -63,6 +64,10 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
         scanCount: reviewListDistinctData.length,
         showMiddlePaneState: true
       }
+    });
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'relatedReviewListDistinctData', value: [] }
     });
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
@@ -118,6 +123,11 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   const startAssessment = (e) => {
+    let status = e.currentTarget.getAttribute('actualstatus');
+    let tempArr = RES_START_POPUP_OPTION;
+    if (status === 'UNSTARTED') {
+      tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
+    }
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -126,9 +136,9 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: RES_START_POPUP_OPTION,
-        selectedTagValue: e.currentTarget.getAttribute('tag'),
-        selectedTagStatus: e.currentTarget.getAttribute('status')
+        popupContentArrValue: tempArr,
+        selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
+        selectedTagStatus: status
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

@@ -280,6 +280,11 @@ const PopUpDisplayPanelAssessee = (props) => {
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeAssignmentDistinct' + secondaryOptionCheckValue }
       });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
     // dispatch({

@@ -120,6 +120,7 @@ const ReviewList = (props) => {
                 <IconButton
                   onClick={onClickArrow}
                   assignmentid={tag}
+                  actualstatus={actualStatus}
                   index={id}
                   className={'assesseeListiconSize'}
                 >

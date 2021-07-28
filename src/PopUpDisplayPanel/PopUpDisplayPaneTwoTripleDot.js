@@ -353,6 +353,17 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           middlePaneHeader
         );
         dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'assignments') {
+        assignmentsDistinctApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'distinct',
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
+        );
+        filterModeKey = 'assesseeAllocateToAssignment';
+        dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'information') {
         dispatch({ type: POPUP_CLOSE });
         if (

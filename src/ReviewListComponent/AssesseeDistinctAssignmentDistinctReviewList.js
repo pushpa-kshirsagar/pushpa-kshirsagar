@@ -137,6 +137,11 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   const startAssignment = (e) => {
+    let status = e.currentTarget.getAttribute('actualstatus');
+    let tempArr = RES_START_POPUP_OPTION;
+    if (status === 'UNSTARTED') {
+      tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
+    }
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -145,7 +150,7 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: RES_START_POPUP_OPTION,
+        popupContentArrValue: tempArr,
         selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }

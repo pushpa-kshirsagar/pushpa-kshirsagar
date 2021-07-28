@@ -128,6 +128,7 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+    alert(selectedTagsArray)
     dispatch({
       type: SET_ASSIGNMENT_RELATED_LIST,
       payload: { listName: 'assignmentAssesseeList', value: selectedTagsArray }
