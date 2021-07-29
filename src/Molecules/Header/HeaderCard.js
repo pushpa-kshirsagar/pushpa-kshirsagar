@@ -153,6 +153,15 @@ const HeaderCard = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  const openTripleDotPopup = () => {
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: {
+        isPopUpValue: 'ITEM_TRIPLE_DOT_PRIMARY_POPUP',
+        popupMode: ''
+      }
+    });
+  };
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
@@ -237,6 +246,10 @@ const HeaderCard = (props) => {
                   </IconButton>
                 ) : displayPane === 'right' && headerOne !== '' ? (
                   <IconButton onClick={openRightPaneTripleDotPopup}>
+                    <MoreVert className={'iguru-iconbardefault'} />
+                  </IconButton>
+                ) : displayPane === 'itemPreview' ? (
+                  <IconButton onClick={openTripleDotPopup}>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : null}

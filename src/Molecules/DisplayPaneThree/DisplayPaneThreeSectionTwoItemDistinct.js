@@ -19,21 +19,21 @@ const DisplayPaneThreeSectionTwoItem = () => {
   // const { informationContact, informationCredential, informationFramework } = responseObject;
 
   const frameworkList = [
-    {
-      id: 'a1-blank',
-      labelTextOneOne: 'blank',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
-      innerAssociateList: [],
-      innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
-    },
+    // {
+    //   id: 'a1-blank',
+    //   labelTextOneOne: 'blank',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       textOne: ''
+    //     }
+    //   ],
+    //   innerAssociateList: [],
+    //   innerInfo: 'No Information',
+    //   isListCard: false,
+    //   IconOne: null,
+    //   IconTwo: null
+    // },
     {
       id: 'a1-difficulty',
       labelTextOneOne: 'difficulty',
@@ -94,25 +94,25 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconOne: null,
       IconTwo: null
     },
-    {
-      id: 'a1-response',
-      labelTextOneOne: 'response',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'attachment',
-          textOne: ''
-        },
-        {
-          labelTextOneOneBadge: 'correct',
-          textOne: ''
-        }
-      ],
-      innerAssociateList: [],
-      innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
-    },
+    // {
+    //   id: 'a1-response',
+    //   labelTextOneOne: 'response',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'attachment',
+    //       textOne: ''
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'correct',
+    //       textOne: ''
+    //     }
+    //   ],
+    //   innerAssociateList: [],
+    //   innerInfo: 'No Information',
+    //   isListCard: false,
+    //   IconOne: null,
+    //   IconTwo: null
+    // },
     {
       id: 'a1-score',
       labelTextOneOne: 'score',
@@ -128,21 +128,21 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconOne: null,
       IconTwo: null
     },
-    {
-      id: 'a1-sequence',
-      labelTextOneOne: 'sequence',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
-      innerAssociateList: [],
-      innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
-    },
+    // {
+    //   id: 'a1-sequence',
+    //   labelTextOneOne: 'sequence',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       textOne: ''
+    //     }
+    //   ],
+    //   innerAssociateList: [],
+    //   innerInfo: 'No Information',
+    //   isListCard: false,
+    //   IconOne: null,
+    //   IconTwo: null
+    // },
     {
       id: 'a1-time',
       labelTextOneOne: 'time',
@@ -158,31 +158,27 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconOne: null,
       IconTwo: null
     },
+    // {
+    //   id: 'item-type',
+    //   labelTextOneOne: 'type',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       textOne: ''
+    //     }
+    //   ],
+    //   innerAssociateList: [],
+    //   innerInfo: 'No Information',
+    //   isListCard: false,
+    //   IconOne: null,
+    //   IconTwo: null
+    // },
     {
-      id: 'item-type',
-      labelTextOneOne: 'type',
+      id: 'item-word',
+      labelTextOneOne: 'weightage',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
-      innerAssociateList: [],
-      innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
-    },
-    {
-      id: 'item-word',
-      labelTextOneOne: 'word',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'maximun',
-          innerList: ''
-        },
-        {
-          labelTextOneOneBadge: 'minimum',
           innerList: ''
         }
       ],
