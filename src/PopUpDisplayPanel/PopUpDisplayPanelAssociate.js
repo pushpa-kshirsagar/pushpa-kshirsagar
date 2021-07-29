@@ -464,7 +464,6 @@ const PopUpDisplayPanelAssociate = (props) => {
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
     if (clickValue === 'associaterevise') {
-      // alert('IN');
       setIsReviseMode(true);
     } else {
       setIsReviseMode(false);

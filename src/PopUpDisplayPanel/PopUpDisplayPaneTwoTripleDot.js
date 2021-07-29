@@ -97,11 +97,20 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'isSelectActive', value: secondaryOptionCheckValue }
       });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'allocateStr', value: middlePaneHeader + middlePaneHeaderBadgeOne }
+      });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'unselect') {
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'isSelectActive', value: '' }
+      });
+
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'allocateStr', value: '' }
       });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -356,13 +365,13 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
       } else if (keyVal === 'assignments') {
         assignmentsDistinctApiCall(
           selectedAssociateInfo,
-          secondaryOptionCheckValue,
+          'active',
           countPage,
           dispatch,
           'distinct',
           popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
-        filterModeKey = 'assesseeAllocateToAssignment';
+        filterModeKey = 'allocateToAssignment';
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'information') {
         dispatch({ type: POPUP_CLOSE });
@@ -599,7 +608,18 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'assessments'
         );
         dispatch({ type: POPUP_CLOSE });
-      } else {
+      } else if (keyVal === 'assignments') {
+        assignmentsDistinctApiCall(
+          selectedAssociateInfo,
+          'active',
+          countPage,
+          dispatch,
+          'distinct',
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
+        );
+        filterModeKey = 'allocateToAssignment';
+        dispatch({ type: POPUP_CLOSE });
+      }else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,
           payload: { badgeValue: dataVal, keyValue: keyVal }
@@ -833,7 +853,6 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
       });
     }
     if (popupHeaderOneBadgeTwo === 'allocate') {
-      // alert(filterModeKey);
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'allocatedTagsArray', value: [...selectedTagsArray] }

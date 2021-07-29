@@ -61,7 +61,7 @@ const initialState = {
   searchFocusIndex: 0,
   isSelectActive: '',
   selectedTagsArray: [],
-  allocatedTagsArray:[],
+  allocatedTagsArray: [],
   unselectedTagsArray: [],
   selectedFlagedArray: [],
   unselectedFlagedArray: [],
@@ -73,7 +73,8 @@ const initialState = {
   jobProfilerReviewList: null,
   jobProfileFunctionReviewList: [],
   jobProfileRoleReviewList: [],
-  cultureProfileDiamentionReviewList: []
+  cultureProfileDiamentionReviewList: [],
+  allocateStr: ''
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

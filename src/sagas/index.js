@@ -51,6 +51,8 @@ import watchReviewJobProfileTypeInfoSaga from './watchers/jobProfileTypeReviewRe
 import watchCreateJobProfileSaga from './watchers/jobProfileCreate';
 import watchReviewListJobProfileSaga from './watchers/jobProfileReviewList';
 import watchAssesseeSelfSaga from './watchers/assesseeSelf';
+import watchAssesseeAllocateSaga from './watchers/assesseeAllocate';
+import watchAssessmentAllocateSaga from './watchers/assessmentAllocate';
 
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
@@ -106,6 +108,8 @@ export default function* root() {
     fork(watchReviewJobProfileTypeInfoSaga),
     fork(watchCreateJobProfileSaga),
     fork(watchReviewListJobProfileSaga),
-    fork(watchAssesseeSelfSaga)
+    fork(watchAssesseeSelfSaga),
+    fork(watchAssesseeAllocateSaga),
+    fork(watchAssessmentAllocateSaga)
   ]);
 }

@@ -168,7 +168,6 @@ const DisplayPageConfirmUser = () => {
         //     if (user) {
         //       user.changePassword(currentPassword, newPassword, (err, result) => {
         //         if (err) {
-        //           alert(err.message || JSON.stringify(err));
         //           //TODO: Show error
         //           return;
         //         }

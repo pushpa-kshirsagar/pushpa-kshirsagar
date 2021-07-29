@@ -19,7 +19,10 @@ export const DisplayPaneSeven = () => {
   };
   // const dispatch = useDispatch();
   const { FilterMode } = useSelector((state) => state.FilterReducer);
-  const { isPopUpOpen } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { assesseeAssessmentStartData } = useSelector(
+    (state) => state.AssesseeAssignmentAssessmentReducer
+  );
   const onClickFooter = (e) => {
     // dispatch({ type: NAVIGATOR_MODE });
   };
@@ -31,7 +34,8 @@ export const DisplayPaneSeven = () => {
     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
-
+  // const time = new Date();
+  // time.setSeconds(time.getSeconds() + 600);
   return (
     <>
       <div>
@@ -86,7 +90,7 @@ export const DisplayPaneSeven = () => {
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
         />
-        <PopUpAssessmentNavigator isActive={isPopUpOpen} />
+        <PopUpAssessmentNavigator isActive={isPopUpValue === 'NavigatorPOPUP'} />
       </div>
     </>
   );

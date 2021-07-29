@@ -22,7 +22,13 @@ export const ASSESSMENTS_URL = 'https://2hqmad6icc.execute-api.ap-south-1.amazon
 export const ASSIGNMENTS_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com';
 export const ANALYTICS = 'https://5kgxms9tld.execute-api.ap-south-1.amazonaws.com';
 export const ITEMS = 'https://5u6ip77xaf.execute-api.ap-south-1.amazonaws.com';
+//assessee self
 
+export const ASSESSEE_ASSESSMENT_START_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment/start';
+export const ASSESSMENT_START_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment/assessee/assessment';
+//end assessee self
 export const ASSESSEE_CREATE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/create';
 export const ASSOCIATE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-sign-on';
 export const ASSESSEE_REVIEW_LIST_URL =
@@ -66,8 +72,8 @@ export const ASSESSMENT_GROUP_REVIEWLIST_URL =
 export const ASSIGNMENT_GROUP_REVIEWLIST_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-group/review-list';
 export const ASSIGNMENT_PUBLISH_URL = ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment/publish';
-export const ASSIGNMENT_ADMINISTER_URL = ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment/assign';
-export const ASSESSMENT_START_URL = ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment/assessee/assessment';
+export const ASSIGNMENT_ADMINISTER_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment/assign';
 export const ASSESSMENT_PUBLISH_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/assessment/publish';
 export const ASSESSMENT_REVIEW_GROUP_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-group/review';
@@ -223,7 +229,9 @@ export const ASSOCIATE_TYPE_UNSHARE_URL =
 export const ASSESSEE_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/share';
 export const ASSESSEE_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/unshare';
-
+export const ASSESSEE_ALLOCATE = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/allocate';
+export const ASSESSEE_ALLOCATE_ASSIGNMENT =
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee/allocate/assignment';
 export const ASSOCIATE_NODE_ASSOCIATE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/associate/review-list';
 export const ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_URL =

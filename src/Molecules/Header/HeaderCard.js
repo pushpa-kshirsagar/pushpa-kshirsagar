@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import OpenWithIcon from '@material-ui/icons/OpenWith';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,11 +16,30 @@ import {
   SET_SCAN_POPUP_STATE
 } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTimer } from 'react-timer-hook';
 import {
   ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION,
   LEFT_TRIPPLE_DOT_POPUP_OPTION,
   TRIPPLE_DOT_POPUP_OPTION
 } from '../../PopUpConfig';
+
+const AssessmentTimer = ({ expiryTimestamp }) => {
+  const { seconds, minutes, hours } = useTimer({
+    expiryTimestamp,
+    onExpire: () => {
+      console.warn('onExpire called');
+      // window.location.reload();
+    }
+  });
+  return (
+    <div>
+      <span>{hours < 10 ? '0' + hours : hours}</span>:
+      <span>{minutes < 10 ? '0' + minutes : minutes}</span>:
+      <span>{seconds < 10 ? '0' + seconds : seconds}</span>
+    </div>
+  );
+};
+
 const HeaderCard = (props) => {
   const {
     headerOne = '',
@@ -50,6 +69,11 @@ const HeaderCard = (props) => {
     reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { primaryArrOprion } = useSelector((state) => state.PopUpReducer);
+  const { assesseeAssessmentStartData } = useSelector(
+    (state) => state.AssesseeAssignmentAssessmentReducer
+  );
+  const time = new Date();
+  const [timer, setTimer] = useState(time);
 
   const onClickScan = () => {
     dispatch({
@@ -153,6 +177,21 @@ const HeaderCard = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+
+  useEffect(() => {
+    const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;
+    // const sec = 600;
+    console.log('sec',sec);
+    let tt = new Date();
+    console.log('beftt', tt);
+    console.log('bef', tt.getSeconds());
+    tt.setSeconds(tt.getSeconds() + sec);
+    setTimer(tt);
+    console.log('after', tt.getSeconds());
+    console.log('aftertt', tt);
+  }, [assesseeAssessmentStartData]);
+
+  console.log('time', time);
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
@@ -198,7 +237,9 @@ const HeaderCard = (props) => {
               <div className={'iguru-iconbox'}>
                 {displayPane === 'five' ? (
                   <div>
-                    <span style={{ color: '#fff', fontWeight: 'bold' }}>00:19:26</span>
+                    <span style={{ color: '#fff', fontWeight: 'bold' }}>
+                      <AssessmentTimer expiryTimestamp={timer} key={timer} />
+                    </span>
                   </div>
                 ) : displayPane === 'centre' && showMiddlePaneState ? (
                   <IconButton onClick={onClickScan}>
@@ -222,7 +263,7 @@ const HeaderCard = (props) => {
                 {displayPane === 'five' ? (
                   <IconButton
                     onClick={() => {
-                      dispatch({ type: POPUP_OPEN, payload: '' });
+                      dispatch({ type: POPUP_OPEN, payload: 'NavigatorPOPUP' });
                     }}
                   >
                     <OpenWithIcon className={'iguru-iconbardefault'} />

@@ -58,7 +58,7 @@ import {
   SET_MIDDLEPANE_STATE,
   RELATED_REVIEWLIST_DISTINCT_DATA,
   ASSESSMENT_START_SAGA,
-  ASSIGNMENT_ADMINISTER_SAGA
+  ASSESSEE_ASSESSMENT_START_SAGA
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -182,6 +182,9 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     reviewListDistinctData,
     relatedReviewListDistinctData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { assesseeAssignmentAssessmentData } = useSelector(
+    (state) => state.AssesseeAssignmentAssessmentReducer
+  );
   const [isReviseMode, setIsReviseMode] = useState(false);
   const [shareFee, setshareFee] = useState(false);
   useEffect(() => {
@@ -435,7 +438,6 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
-        // alert("here");
         dispatch({ type: LOADER_START });
         let associateNodeReqBody = '';
         let sagaCall = '';
@@ -950,7 +952,6 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
-        // alert(selectedTagValue);
         let assignmentGroupAssignmentReqBody = getAssignmentGroupAssignmentReqObj(
           selectedAssociateInfo,
           selectedTagValue,
@@ -1961,7 +1962,6 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({ type: POPUP_CLOSE });
       }
     } else if (dataVal === 'revise') {
-      // alert("IN REVISE");
       setIsReviseMode(true);
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
@@ -2279,10 +2279,23 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
-          assignmentId: relatedReviewListDistinctData[0].id,
+          assignmentId: relatedReviewListDistinctData[0].assignmentId,
           assessmentId: selectedTagValue
         };
+        dispatch({ type: LOADER_START });
         dispatch({ type: ASSESSMENT_START_SAGA, payload: { request: reqBody } });
+      }
+      if (typeOfMiddlePaneList === 'acutalAssessmentStart') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentId: assesseeAssignmentAssessmentData.assignmentId,
+          assessmentId: assesseeAssignmentAssessmentData.assessmentId
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({ type: ASSESSEE_ASSESSMENT_START_SAGA, payload: { request: reqBody } });
       }
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'administerApiCall') {

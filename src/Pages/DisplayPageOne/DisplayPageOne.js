@@ -64,9 +64,8 @@ const DisplayPageOne = () => {
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isItemPreviewShow = false } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { assesseeConfirmStatus } = useSelector((state) => state.UserReducer);
+  const { isExamMode } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);
   const dispatch = useDispatch();
-  const isExamMode = false;
   const assesseeId = localStorage.getItem('assesseeId');
   const accessToken = localStorage.getItem('token');
   const {
@@ -76,7 +75,7 @@ const DisplayPageOne = () => {
     associateGroup,
     itemGroup,
     cultureProfileGroup,
-    jobProfileGroup
+    jobProfileGroup,
   } = useSelector((state) => state.GroupCreateReducer);
   const {
     assesseeType,
@@ -155,6 +154,9 @@ const DisplayPageOne = () => {
   };
   const { typeOfMiddlePaneList } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isPreviewShow = false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { assesseeAssessmentStartData } = useSelector(
+    (state) => state.AssesseeAssignmentAssessmentReducer
+  );
   console.log('popupMode', popupMode);
   return (
     <>
@@ -200,9 +202,11 @@ const DisplayPageOne = () => {
                 <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
                   <DisplayPaneSix />
                 </div>
+                {/* {assesseeAssessmentStartData &&  */}
                 <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '95.5%' }}>
                   <DisplayPaneSeven />
                 </div>
+                {/* } */}
               </>
             ) : isItemPreviewShow ? (
               <>

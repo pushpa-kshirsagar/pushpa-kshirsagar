@@ -2,16 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   CLEAR_DISPLAY_PANE_THREE,
-  FILTERMODE,
   FILTERMODE_ENABLE,
   POPUP_OPEN,
-  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
-  SET_MOBILE_PANE_STATE,
-  SET_POPUP_STATE,
-  RELATED_REVIEWLIST_DISTINCT_DATA
+  SET_POPUP_STATE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -19,19 +14,10 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import {
   ASSESSEE_ASSIGNMENT_REVIEW_LIST_POPUP_OPTION,
   ASSESSEE_ASSIGNMENT_TRIPLE_POPUP_OPTION,
-  ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
   RES_START_POPUP_OPTION
 } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import {
-  getAssesseeGroupAssesseeDistinctApiCall,
-  onClickCheckBoxSelection
-} from '../Actions/AssesseeModuleAction';
-import { assesseeStatus } from '../Actions/StatusAction';
-import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
-import Check from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
 
 const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();

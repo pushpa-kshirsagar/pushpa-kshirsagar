@@ -1,14 +1,21 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
+  ASSESSEE_ASSESSMENT_START_SAGA,
   ASSESSMENT_START_SAGA,
   CLEAR_ASSIGNMENT_INFO,
   GET_ASSESSEE_ASSIGNMENT_SAGA,
   LOADER_STOP,
   REVIEWLIST_DISTINCT_DATA,
+  SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { ASSESSEEASSIGNMENT_REVIEWLIST_URL, ASSESSMENT_START_URL } from '../../endpoints';
+import {
+  ASSESSEEASSIGNMENT_REVIEWLIST_URL,
+  ASSESSMENT_START_URL,
+  ASSESSEE_ASSESSMENT_START_URL
+} from '../../endpoints';
 import Store from '../../store';
 
 const apiCallFun = async (requestObj) => {
@@ -74,7 +81,57 @@ function* workerAssessmentStartSaga(data) {
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
-      console.log('response',response);
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'typeOfMiddlePaneList', value: 'acutalAssessmentStart' }
+      });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssignmentAssessmentData', value: response.responseObject }
+      });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isExamMode', value: true }
+      });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerAssesseeAssessmentStartSaga(data) {
+  try {
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSESSEE_ASSESSMENT_START_URL,
+      type: ''
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssessmentStartData', value: response.responseObject }
+      });
+      // yield put({
+      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //   payload: { stateName: 'typeOfMiddlePaneList', value: 'acutalAssessmentStart' }
+      // });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isExamMode', value: true }
+      });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -96,4 +153,5 @@ function* workerAssessmentStartSaga(data) {
 export default function* watchAssesseeSelfSaga() {
   yield takeLatest(GET_ASSESSEE_ASSIGNMENT_SAGA, workerAssesseeAssignmentListSaga);
   yield takeLatest(ASSESSMENT_START_SAGA, workerAssessmentStartSaga);
+  yield takeLatest(ASSESSEE_ASSESSMENT_START_SAGA, workerAssesseeAssessmentStartSaga);
 }
