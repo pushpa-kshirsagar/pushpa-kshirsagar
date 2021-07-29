@@ -56,6 +56,7 @@ import LastPage from '@material-ui/icons/LastPage';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
+import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
 
 const useStyles = makeStyles({
   root: {
@@ -130,9 +131,10 @@ export const DisplayPaneFive = () => {
     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
+
   const optionLabel =
-    "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>option</span>&nbsp; <span class='iguru-header-badge1_0'>media</span>";
-  const itemLabel = "<span>item</span>&nbsp <span class='iguru-header-badge1_0'>media</span>";
+    "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
+  const itemLabel = '<span>item</span>&nbsp';
   const [questionOptionList, setQuestionOptionList] = useState([
     {
       id: 'option-1',
@@ -189,6 +191,24 @@ export const DisplayPaneFive = () => {
       data: 'weightage',
       dataValue: 'weightage',
       dataKey: 'weightageAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    }
+  ];
+  const itemPrimaryPopupOption = [
+    {
+      data: 'framework',
+      dataValue: 'framework',
+      dataKey: 'frameworkAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    },
+    {
+      data: 'revise',
+      dataValue: 'revise',
+      dataKey: 'reviseAPICall',
       optionClass: 'optionPrimary',
       divider: '',
       disabled: false
@@ -315,11 +335,11 @@ export const DisplayPaneFive = () => {
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     console.log(targetValue);
-    if (targetValue === 'description') {
+    if (targetValue === 'framework') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
-          isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
+          isPopUpValue: 'ITEM_CHOICE_FRAMEWORK_POPUP',
           popupMode: ''
         }
       });
@@ -361,14 +381,15 @@ export const DisplayPaneFive = () => {
       });
     }
   };
+  const ChangeTripleDotOptionPopup = (e) => {};
   const ChangeItemOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     console.log(targetValue);
-    if (targetValue === 'description') {
+    if (targetValue === 'framework') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
-          isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
+          isPopUpValue: 'ITEM_FRAMEWORK_POPUP',
           popupMode: ''
         }
       });
@@ -440,10 +461,12 @@ export const DisplayPaneFive = () => {
       <div>
         <HeaderCard
           className=""
-          displayPane=""
+          displayPane="itemPreview"
+          showClearIcon
           headerOne=""
           headerOneBadgeOne=""
           headerPanelColour="blue"
+          onClickClearInfo={closePreview}
         />
       </div>
       <div className="containerPadding">
@@ -465,11 +488,11 @@ export const DisplayPaneFive = () => {
               <span style={{ fontWeight: 'bold' }}> </span>
             </div>
             <div style={{ flex: '1' }} className="flex-center">
-              <div className={'backArrow'}>
+              {/* <div className={'backArrow'}>
                 <IconButton onClick={closePreview} className="MuiIconButton-root-1602">
                   <Clear className={''} />
                 </IconButton>
-              </div>
+              </div> */}
             </div>
             <div style={{ flex: '1' }} className="flex-center">
               {/* <IconButton
@@ -514,7 +537,8 @@ export const DisplayPaneFive = () => {
                 padding: '2.5px 5px',
                 alignItems: 'center',
                 //  height: 'calc(100vh - 190px)',
-                overflow: 'overlay'
+                overflow: 'overlay',
+                color: 'rgba(0, 0, 0, 0.87)'
                 // display: 'flex'
               }}
               onClick={() => {
@@ -599,7 +623,8 @@ export const DisplayPaneFive = () => {
                           padding: '2.5px 5px',
                           alignItems: 'center',
                           //  height: 'calc(100vh - 190px)',
-                          overflow: 'overlay'
+                          overflow: 'overlay',
+                          color: 'rgba(0, 0, 0, 0.87)'
                           // display: 'flex'
                         }}
                         onClick={() => {
@@ -661,7 +686,7 @@ export const DisplayPaneFive = () => {
           </FormControl>
         </div>
       </div>
-      <Popup isActive={isPopUpValue === 'ITEM_OPTION_PRIMARY_POPUP'}>
+      <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
           headerOne={'items'}
@@ -672,8 +697,25 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeTripleDotOptionPopup}
+            currentPopUpOption={itemPrimaryPopupOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      <Popup isActive={isPopUpValue === 'ITEM_OPTION_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'items'}
+          headerOneBadgeOne={'choice'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeOptionPopup}
-            currentPopUpOption={itemPopupOption}
+            currentPopUpOption={itemPrimaryPopupOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -690,7 +732,7 @@ export const DisplayPaneFive = () => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeItemOptionPopup}
-            currentPopUpOption={itemMediaPopupOption}
+            currentPopUpOption={itemPrimaryPopupOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -805,6 +847,27 @@ export const DisplayPaneFive = () => {
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         basicInfo={{}}
         typeOfSetObject={''}
+      />
+      <PopUpItemFramework
+        isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'item'}
+        headerOneBadgeOne={''}
+        nextPopUpValue={''}
+        primaryheader={'media'}
+        inputHeader={'item'}
+        isItemFramework={true}
+        mode={'revise'}
+      />
+      <PopUpItemFramework
+        isActive={isPopUpValue === 'ITEM_CHOICE_FRAMEWORK_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'item'}
+        primaryheader={'choice'}
+        inputHeader={'item'}
+        headerOneBadgeOne={''}
+        nextPopUpValue={''}
+        mode={'revise'}
       />
       <FooterIconTwo
         className={'widthDisplayPaneFive'}

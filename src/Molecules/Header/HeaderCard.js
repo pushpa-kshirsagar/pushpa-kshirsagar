@@ -180,18 +180,20 @@ const HeaderCard = (props) => {
 
   useEffect(() => {
     const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;
-    // const sec = 600;
-    console.log('sec',sec);
     let tt = new Date();
-    console.log('beftt', tt);
-    console.log('bef', tt.getSeconds());
     tt.setSeconds(tt.getSeconds() + sec);
     setTimer(tt);
-    console.log('after', tt.getSeconds());
-    console.log('aftertt', tt);
   }, [assesseeAssessmentStartData]);
 
-  console.log('time', time);
+  const openTripleDotPopup = () => {
+    dispatch({
+      type: SET_POPUP_VALUE,
+      payload: {
+        isPopUpValue: 'ITEM_TRIPLE_DOT_PRIMARY_POPUP',
+        popupMode: ''
+      }
+    });
+  };
   return (
     <div className={'iguru-leftpanel'}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={'iguru-usercardcontainer'}>
@@ -278,6 +280,10 @@ const HeaderCard = (props) => {
                   </IconButton>
                 ) : displayPane === 'right' && headerOne !== '' ? (
                   <IconButton onClick={openRightPaneTripleDotPopup}>
+                    <MoreVert className={'iguru-iconbardefault'} />
+                  </IconButton>
+                ) : displayPane === 'itemPreview' ? (
+                  <IconButton onClick={openTripleDotPopup}>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
                 ) : null}
