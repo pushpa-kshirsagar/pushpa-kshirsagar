@@ -1,50 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
-import Manuscript from '@material-ui/icons/Description';
-import ReactCKEditor from 'react-ckeditor-component';
-// import CKEditor from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import JoditEditor from 'jodit-react';
 import ReactHTMLParser from 'react-html-parser';
-import SunEditor from 'suneditor-react';
-import 'suneditor/dist/css/suneditor.min.css';
-import {
-  align,
-  font,
-  fontColor,
-  fontSize,
-  formatBlock,
-  hiliteColor,
-  horizontalRule,
-  lineHeight,
-  list,
-  table,
-  textStyle,
-  image,
-  video,
-  link,
-  audio
-  // codeView,
-  // preview
-} from 'suneditor/src/plugins';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { SET_PANE_THREE_ITEM_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
-import InputFeild from '../../Atoms/InputField/InputField';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Label from '../../Atoms/Label/Label';
 import clsx from 'clsx';
-import { DialogContent, Divider, IconButton, Input } from '@material-ui/core';
-import { Clear } from '@material-ui/icons';
+import { DialogContent } from '@material-ui/core';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopupHeader from '../../Molecules/PopUp/PopUpHeader';
 import Popup from '../../Molecules/PopUp/PopUp';
@@ -57,6 +23,9 @@ import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import Check from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const useStyles = makeStyles({
   root: {
@@ -118,11 +87,16 @@ export const DisplayPaneFive = () => {
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
+  const { reviewMode } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpOpen } = useSelector((state) => state.PopUpReducer);
   const onClickFooter = (e) => {
     // dispatch({ type: NAVIGATOR_MODE });
   };
+
+  const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
 
   const primaryIcon = [];
   const secondaryIcon = [
@@ -131,22 +105,57 @@ export const DisplayPaneFive = () => {
     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
+  const onClickRevise = () => {
+    console.log('ON CLICK REVISE ICON');
+    setIsShowReviseIcon(false);
+  };
+  const onClickReviseCancel = () => {
+    console.log('ON CLICK cancel ICON');
+    setIsShowReviseIcon(true);
+  };
+  const onClickReviseFinish = () => {
+    console.log('ON CLICK finish ICON');
+    setIsShowReviseIcon(true);
+    dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
+  };
+  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
+
+  const reviseSecondaryIcons = [
+    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
+    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
+  ];
 
   const optionLabel =
     "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
   const itemLabel = '<span>item</span>&nbsp';
+  const itemLabelText =
+    "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
+  const responseLabel =
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
+  const itemDescription =
+    "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>description</span>&nbsp;";
+  const responseDescription =
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>description</span>&nbsp;";
+  const responseChoiceDescription =
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>description</span>&nbsp;";
   const [questionOptionList, setQuestionOptionList] = useState([
     {
       id: 'option-1',
-      value: optionLabel
+      value: optionLabel,
+      choiceDescription: responseChoiceDescription
     },
-    { id: 'option-2', value: optionLabel },
-    { id: 'option-3', value: optionLabel },
-    { id: 'option-4', value: optionLabel }
+    { id: 'option-2', value: optionLabel, choiceDescription: responseChoiceDescription },
+    { id: 'option-3', value: optionLabel, choiceDescription: responseChoiceDescription },
+    { id: 'option-4', value: optionLabel, choiceDescription: responseChoiceDescription }
   ]);
   const [innerContent, setInnerContent] = useState(itemLabel);
-  const [isPreviewMode, setPreviewMode] = useState(false);
-  const [optionPopupValue, setOptionPopupValue] = useState('');
+  const [labelText, setLabelText] = useState(itemLabelText);
+  const [responselabelText, setResponseLabelText] = useState(responseLabel);
+  const [itemDescriptionText, setItemDescriptionText] = useState(itemDescription);
+  const [responseDescriptionText, setResponseDescriptionText] = useState(responseDescription);
+  // const [responseChoiceDescriptionText, setResponseChoiceDescriptionText] = useState(
+  //   responseChoiceDescription
+  // );
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const addOption = () => {
     setQuestionOptionList([
@@ -198,9 +207,9 @@ export const DisplayPaneFive = () => {
   ];
   const itemPrimaryPopupOption = [
     {
-      data: 'framework',
-      dataValue: 'framework',
-      dataKey: 'frameworkAPICall',
+      data: 'configure',
+      dataValue: 'configure',
+      dataKey: 'configureAPICall',
       optionClass: 'optionPrimary',
       divider: '',
       disabled: false
@@ -313,14 +322,6 @@ export const DisplayPaneFive = () => {
     }
   ];
 
-  const onChangeTextSheet = (event, editor) => {
-    console.log('EDITOR===>', event);
-    setInnerContent(editor.getData());
-  };
-  const handleChange = (content) => {
-    console.log('EDITOR===>', content);
-    setInnerContent(content);
-  };
   const removeOption = () => {
     if (questionOptionList.length > 2) {
       let arr = questionOptionList;
@@ -335,20 +336,11 @@ export const DisplayPaneFive = () => {
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     console.log(targetValue);
-    if (targetValue === 'framework') {
+    if (targetValue === 'configure') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
           isPopUpValue: 'ITEM_CHOICE_FRAMEWORK_POPUP',
-          popupMode: ''
-        }
-      });
-    }
-    if (targetValue === 'label') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
           popupMode: ''
         }
       });
@@ -362,43 +354,16 @@ export const DisplayPaneFive = () => {
         }
       });
     }
-    if (targetValue === 'score') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_OPTION_SCORE_POPUP',
-          popupMode: ''
-        }
-      });
-    }
-    if (targetValue === 'weightage') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_OPTION_WEIGHTAGE_POPUP',
-          popupMode: ''
-        }
-      });
-    }
   };
   const ChangeTripleDotOptionPopup = (e) => {};
   const ChangeItemOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     console.log(targetValue);
-    if (targetValue === 'framework') {
+    if (targetValue === 'configure') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
           isPopUpValue: 'ITEM_FRAMEWORK_POPUP',
-          popupMode: ''
-        }
-      });
-    }
-    if (targetValue === 'label') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
           popupMode: ''
         }
       });
@@ -412,50 +377,10 @@ export const DisplayPaneFive = () => {
         }
       });
     }
-    if (targetValue === 'score') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_OPTION_SCORE_POPUP',
-          popupMode: ''
-        }
-      });
-    }
-    if (targetValue === 'blank') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_BLANK_POPUP',
-          popupMode: ''
-        }
-      });
-    }
-    if (targetValue === 'difficulty') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_DIFFICULTY_POPUP',
-          popupMode: ''
-        }
-      });
-    }
-    if (targetValue === 'difficulty') {
-    }
-    if (targetValue === 'group') {
-    }
-    if (targetValue === 'polarity') {
-    }
-    if (targetValue === 'sequence') {
-    }
-    if (targetValue === 'time') {
-    }
-    if (targetValue === 'type') {
-    }
-    if (targetValue === 'word') {
-    }
   };
 
   const BackHandlerEvent = (e) => {};
+
   return (
     <>
       <div>
@@ -463,8 +388,9 @@ export const DisplayPaneFive = () => {
           className=""
           displayPane="itemPreview"
           showClearIcon
-          headerOne=""
-          headerOneBadgeOne=""
+          headerOne="item"
+          headerOneBadgeOne="information"
+          headerOneBadgeTwo="media"
           headerPanelColour="blue"
           onClickClearInfo={closePreview}
         />
@@ -529,17 +455,32 @@ export const DisplayPaneFive = () => {
           className="containerPadding"
           style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}
         >
-          {/* <Label className="" text={'media'} fontSize="1.6rem" colour="rgba(0, 0, 0, 0.87)" /> */}
           <div>
-            {/* {isPreviewMode ? ( */}
             <div
               style={{
                 padding: '2.5px 5px',
                 alignItems: 'center',
-                //  height: 'calc(100vh - 190px)',
                 overflow: 'overlay',
                 color: 'rgba(0, 0, 0, 0.87)'
-                // display: 'flex'
+              }}
+              onClick={() => {
+                dispatch({
+                  type: SET_POPUP_VALUE,
+                  payload: {
+                    isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
+                    popupMode: popupMode
+                  }
+                });
+              }}
+            >
+              {ReactHTMLParser(labelText)}
+            </div>
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                overflow: 'overlay',
+                color: 'rgba(0, 0, 0, 0.87)'
               }}
               onClick={() => {
                 dispatch({
@@ -550,52 +491,9 @@ export const DisplayPaneFive = () => {
                   }
                 });
               }}
-              // dangerouslySetInnerHTML={{ __html: innerContent }}
             >
               {ReactHTMLParser(innerContent)}
             </div>
-            {/* ) : (
-              <SunEditor
-                setOptions={{
-                  showPathLabel: false,
-                  minHeight: '50vh',
-                  maxHeight: '50vh',
-                  placeholder: 'Enter your text here!!!',
-                  plugins: [
-                    align,
-                    font,
-                    fontColor,
-                    fontSize,
-                    formatBlock,
-                    hiliteColor,
-                    horizontalRule,
-                    lineHeight,
-                    list,
-                    table,
-                    textStyle,
-                    image,
-                    video,
-                    link,
-                    audio
-                  ],
-                  buttonList: [
-                    ['undo', 'redo'],
-                    ['font', 'fontSize', 'formatBlock'],
-                    ['bold', 'underline', 'italic', 'strike'],
-                    ['fontColor', 'hiliteColor'],
-                    ['removeFormat', 'codeView', 'preview'],
-                    '/', // Line break
-                    ['outdent', 'indent'],
-                    ['align', 'horizontalRule', 'list', 'lineHeight'],
-                    ['table', 'link', 'image', 'video', 'audio']
-                  ],
-                  // formats: ['p', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-                  font: ['Arial', 'Calibri', 'Times New Roman']
-                }}
-                setContents={innerContent}
-                onChange={handleChange}
-              />
-            )} */}
           </div>
           <hr
             style={{
@@ -606,84 +504,194 @@ export const DisplayPaneFive = () => {
               backgroundColor: 'rgba(0, 0, 0, 0.12)'
             }}
           />
+          <div>
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                overflow: 'overlay',
+                color: 'rgba(0, 0, 0, 0.87)'
+              }}
+              onClick={() => {
+                dispatch({
+                  type: SET_POPUP_VALUE,
+                  payload: {
+                    isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
+                    popupMode: popupMode
+                  }
+                });
+              }}
+            >
+              {ReactHTMLParser(itemDescriptionText)}
+            </div>
+          </div>
+          <hr
+            style={{
+              height: '1px',
+              margin: '0',
+              border: 'none',
+              flexShrink: '0',
+              backgroundColor: 'rgba(0, 0, 0, 0.12)'
+            }}
+          />
+          <div>
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                overflow: 'overlay',
+                color: 'rgba(0, 0, 0, 0.87)'
+              }}
+              onClick={() => {
+                dispatch({
+                  type: SET_POPUP_VALUE,
+                  payload: {
+                    isPopUpValue: 'RESPONSE_LABEL_MEDIA_TEXT',
+                    popupMode: popupMode
+                  }
+                });
+              }}
+            >
+              {ReactHTMLParser(responselabelText)}
+            </div>
+          </div>
           <FormControl component="fieldset">
             <div className={['containerPadding'].join(' ')}>
               <RadioGroup defaultValue="" aria-label="Options" name="customized-radios">
                 {questionOptionList.map((op, key) => {
                   return (
-                    <div className="option-container" key={`${op.value}-${key}`}>
-                      <FormControlLabel
-                        className={'radio-button'}
-                        value={`${op.value} ${key + 1}`}
-                        control={<StyledRadio />}
-                        label=""
-                      />
-                      <div
-                        style={{
-                          padding: '2.5px 5px',
-                          alignItems: 'center',
-                          //  height: 'calc(100vh - 190px)',
-                          overflow: 'overlay',
-                          color: 'rgba(0, 0, 0, 0.87)'
-                          // display: 'flex'
-                        }}
-                        onClick={() => {
-                          // setOptionPopupValue(`OPTION_${key}`);
-                          // dispatch({
-                          //   type: SET_POPUP_VALUE,
-                          //   payload: {
-                          //     isPopUpValue: `OPTION_${key}`,
-                          //     popupMode: ''
-                          //   }
-                          // });
-                          dispatch({
-                            type: SET_POPUP_VALUE,
-                            payload: {
-                              isPopUpValue: 'ITEM_OPTION_PRIMARY_POPUP',
-                              popupMode: `OPTION_${key}`
-                            }
-                          });
-                        }}
-                        dangerouslySetInnerHTML={{
-                          __html: op.value
-                        }}
-                      ></div>
-                      {/* <Input
-                        type={'text'}
-                        id={op.id}
-                        name={op.id}
-                        autoComplete="off"
-                        placeholder={op.id}
-                        className={['option-input'].join(' ')}
-                      /> */}
-                      <PopUpTextSheet
-                        isActive={isPopUpValue === `OPTION_${key}`}
-                        headerOne={'item'}
-                        headerPanelColour={'genericOne'}
-                        headerOneBadgeOne={'option'}
-                        headerOneBadgeTwo={`${key + 1}`}
-                        basicInfo={{}}
-                        typeOfSetObject={''}
-                        defaultSheetValue={op.value}
-                        actualLableValue={'assessmentManuscriptSecondary'}
-                        mode={'revise'}
-                        onClickSave={(innerText) => {
-                          setQuestionOptionList((opArr) => {
-                            opArr.forEach((element) => {
-                              if (element.id === op.id) {
-                                element.value = innerText;
+                    <>
+                      <div className="option-container" key={`${op.value}-${key}`}>
+                        <FormControlLabel
+                          className={'radio-button'}
+                          value={`${op.value} ${key + 1}`}
+                          control={<StyledRadio />}
+                          label=""
+                        />
+                        <div
+                          style={{
+                            padding: '2.5px 5px',
+                            alignItems: 'center',
+                            overflow: 'overlay',
+                            color: 'rgba(0, 0, 0, 0.87)'
+                          }}
+                          onClick={() => {
+                            dispatch({
+                              type: SET_POPUP_VALUE,
+                              payload: {
+                                isPopUpValue: 'ITEM_OPTION_PRIMARY_POPUP',
+                                popupMode: `OPTION_${key}`
                               }
                             });
-                            return opArr;
-                          });
-                        }}
-                      />
-                    </div>
+                          }}
+                          dangerouslySetInnerHTML={{
+                            __html: op.value
+                          }}
+                        ></div>
+                        <PopUpTextSheet
+                          isActive={isPopUpValue === `OPTION_${key}`}
+                          headerOne={'item'}
+                          headerPanelColour={'genericOne'}
+                          headerOneBadgeOne={'option'}
+                          headerOneBadgeTwo={`${key + 1}`}
+                          basicInfo={{}}
+                          typeOfSetObject={''}
+                          defaultSheetValue={op.value}
+                          actualLableValue={'assessmentManuscriptSecondary'}
+                          mode={'revise'}
+                          onClickSave={(innerText) => {
+                            setQuestionOptionList((opArr) => {
+                              opArr.forEach((element) => {
+                                if (element.id === op.id) {
+                                  element.value = innerText;
+                                }
+                              });
+                              return opArr;
+                            });
+                          }}
+                        />
+                        <PopUpTextSheet
+                          isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
+                          headerOne={'response'}
+                          headerPanelColour={'genericOne'}
+                          headerOneBadgeOne={'choice'}
+                          headerOneBadgeTwo={`description`}
+                          basicInfo={{}}
+                          typeOfSetObject={''}
+                          defaultSheetValue={op.choiceDescription}
+                          actualLableValue={'assessmentManuscriptSecondary'}
+                          mode={'revise'}
+                          onClickSave={(innerText) => {
+                            setQuestionOptionList((opArr) => {
+                              opArr.forEach((element) => {
+                                if (element.id === op.id) {
+                                  element.choiceDescription = innerText;
+                                }
+                              });
+                              return opArr;
+                            });
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            padding: '2.5px 5px',
+                            alignItems: 'center',
+                            overflow: 'overlay',
+                            margin: '0 0 0 12px',
+                            color: 'rgba(0, 0, 0, 0.87)'
+                          }}
+                          onClick={() => {
+                            dispatch({
+                              type: SET_POPUP_VALUE,
+                              payload: {
+                                isPopUpValue: `RESPONSE_CHOICE_DESCRIPTION_${key}`,
+                                popupMode: `OPTION_${key}`
+                              }
+                            });
+                          }}
+                        >
+                          {ReactHTMLParser(op.choiceDescription)}
+                        </div>
+                      </div>
+                    </>
                   );
                 })}
               </RadioGroup>
             </div>
           </FormControl>
+          <hr
+            style={{
+              height: '1px',
+              margin: '0',
+              border: 'none',
+              flexShrink: '0',
+              backgroundColor: 'rgba(0, 0, 0, 0.12)'
+            }}
+          />
+          <div>
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                overflow: 'overlay',
+                margin: '0 0 0 12px',
+                color: 'rgba(0, 0, 0, 0.87)'
+              }}
+              onClick={() => {
+                dispatch({
+                  type: SET_POPUP_VALUE,
+                  payload: {
+                    isPopUpValue: 'RESPONSE_DESCRIPTION_TEXT',
+                    popupMode: ``
+                  }
+                });
+              }}
+            >
+              {ReactHTMLParser(responseDescriptionText)}
+            </div>
+          </div>
         </div>
       </div>
       <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
@@ -703,10 +711,11 @@ export const DisplayPaneFive = () => {
           />
         </DialogContent>
       </Popup>
+
       <Popup isActive={isPopUpValue === 'ITEM_OPTION_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
-          headerOne={'items'}
+          headerOne={'response'}
           headerOneBadgeOne={'choice'}
           onClick={BackHandlerEvent}
           mode={''}
@@ -720,11 +729,12 @@ export const DisplayPaneFive = () => {
           />
         </DialogContent>
       </Popup>
+
       <Popup isActive={isPopUpValue === 'ITEM_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
-          headerOne={'items'}
-          headerOneBadgeOne={'media'}
+          headerOne={'item'}
+          headerOneBadgeOne={''}
           onClick={BackHandlerEvent}
           mode={''}
         />
@@ -737,6 +747,7 @@ export const DisplayPaneFive = () => {
           />
         </DialogContent>
       </Popup>
+
       <PopUpTextSheet
         isActive={isPopUpValue === `ITEM_MEDIA_TEXT`}
         headerOne={'item'}
@@ -760,10 +771,27 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={''}
+        defaultSheetValue={labelText}
         actualLableValue={''}
         mode={'revise'}
-        onClickSave={(innerText) => {}}
+        onClickSave={(innerText) => {
+          setLabelText(innerText);
+        }}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === `RESPONSE_LABEL_MEDIA_TEXT`}
+        headerOne={'response'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'label'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={responselabelText}
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          setResponseLabelText(innerText);
+        }}
       />
       <PopUpTextSheet
         isActive={isPopUpValue === `ITEM_DESCRIPTION_MEDIA_TEXT`}
@@ -773,110 +801,70 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={''}
+        defaultSheetValue={itemDescriptionText}
         actualLableValue={''}
         mode={'revise'}
-        onClickSave={(innerText) => {}}
+        onClickSave={(innerText) => {
+          setItemDescriptionText(innerText);
+        }}
       />
-      <PopUpTextField
-        isActive={isPopUpValue === 'ITEM_OPTION_SCORE_POPUP'}
-        label={'score'}
+      <PopUpTextSheet
+        isActive={isPopUpValue === `RESPONSE_DESCRIPTION_TEXT`}
+        headerOne={'response'}
         headerPanelColour={'genericOne'}
-        inputHeader={''}
-        inputHeaderBadgeOne={''}
-        inputHeaderBadgeTwo={''}
-        type={'number'}
-        headerOne={'item'}
-        headerOneBadgeOne={'score'}
-        isRequired={false}
+        headerOneBadgeOne={'description'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={responseDescriptionText}
         actualLableValue={''}
-        basicInfo={{}}
-        typeOfSetObject={''}
-        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={'revise'}
+        onClickSave={(innerText) => {
+          setResponseDescriptionText(innerText);
+        }}
       />
-      <PopUpTextField
-        isActive={isPopUpValue === 'ITEM_OPTION_WEIGHTAGE_POPUP'}
-        label={'weightage'}
-        headerPanelColour={'genericOne'}
-        inputHeader={''}
-        inputHeaderBadgeOne={''}
-        inputHeaderBadgeTwo={''}
-        type={'number'}
-        headerOne={'item'}
-        headerOneBadgeOne={'weightage'}
-        isRequired={false}
-        actualLableValue={''}
-        basicInfo={{}}
-        typeOfSetObject={''}
-        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
-        mode={'revise'}
-      />
-      <PopUpTextField
-        isActive={isPopUpValue === 'ITEM_BLANK_POPUP'}
-        label={'blank'}
-        headerPanelColour={'genericOne'}
-        inputHeader={''}
-        inputHeaderBadgeOne={''}
-        inputHeaderBadgeTwo={''}
-        type={'number'}
-        headerOne={'item'}
-        headerOneBadgeOne={'blank'}
-        isRequired={false}
-        actualLableValue={''}
-        basicInfo={{}}
-        typeOfSetObject={''}
-        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
-        mode={'revise'}
-      />
-      <PopUpDropList
-        isActive={isPopUpValue === 'ITEM_DIFFICULTY_POPUP'}
-        tag={'assesseeGender'}
-        label={'difficulty'}
-        listSelect={[
-          { id: 'Low', name: 'Low' },
-          { id: 'Medium', name: 'Medium' },
-          { id: 'High', name: 'High' }
-        ]}
-        mappingValue={'id'}
-        labelval={'difficulty'}
-        headerPanelColour={'genericOne'}
-        headerOne={'item'}
-        headerOneBadgeOne={''}
-        isRequired={true}
-        nextPopUpValue={'CONFIRMATIONPOPUP'}
-        basicInfo={{}}
-        typeOfSetObject={''}
-      />
+
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'item'}
-        headerOneBadgeOne={''}
+        headerOneBadgeOne={'information'}
         nextPopUpValue={''}
-        primaryheader={'media'}
         inputHeader={'item'}
+        primaryheader={'framework'}
         isItemFramework={true}
         mode={'revise'}
       />
+
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_CHOICE_FRAMEWORK_POPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'item'}
+        headerOneBadgeOne={'information'}
+        inputHeader={'response'}
         primaryheader={'choice'}
-        inputHeader={'item'}
-        headerOneBadgeOne={''}
         nextPopUpValue={''}
         mode={'revise'}
       />
-      <FooterIconTwo
-        className={'widthDisplayPaneFive'}
-        FilterModeEnable={false}
-        FilterMode={FilterMode}
-        onClick={onClickFooter}
-        primaryIcon={primaryIcon}
-        secondaryIcon={secondaryIcon}
-      />
+      {reviewMode === 'revise' ? (
+        <FooterIconTwo
+          className={'widthDisplayPaneFive'}
+          FilterModeEnable={isShowReviseIcon}
+          FilterMode={FilterMode}
+          onClick={onClickRevise}
+          primaryIcon={revisePrimaryIcon}
+          secondaryIcon={reviseSecondaryIcons}
+        />
+      ) : (
+        <FooterIconTwo
+          className={'widthDisplayPaneFive'}
+          FilterModeEnable={false}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryIcon}
+        />
+      )}
     </>
   );
 };
