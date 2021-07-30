@@ -32,9 +32,39 @@ const initialState = {
       }
     },
     informationFramework: {
-      fee: '',
       itemFrameworkOneBlank: '',
-      itemFrameworkOneDifficulty: ''
+      itemFrameworkOneDifficulty: '',
+      itemFrameworkOneGroup: [],
+      itemFrameworkOne: {
+        itemFrameworkOneBlank: '',
+        itemFrameworkOneDescription: '',
+        itemFrameworkOneDifficulty: '',
+        itemFrameworkOneGroup: [],
+        itemFrameworkOneMedia: '',
+        itemFrameworkOnePolarity: '',
+        itemFrameworkOneResponse: '',
+        itemFrameworkOneResponseCorrect: '',
+        itemFrameworkOneResponseOption: {
+          ColumnMatch: '',
+          itemFrameworkOneResponseOptionColumnMatch: '',
+          itemFrameworkOneResponseOptionDescription: '',
+          itemFrameworkOneResponseOptionMedia: '',
+          itemFrameworkOneResponseOptionWeightage: '',
+          itemFrameworkOneScore: '',
+          itemFrameworkOneSection: '',
+          itemFrameworkOneSequence: '',
+          itemFrameworkOneTime: '',
+          itemFrameworkOneType: '',
+          itemFrameworkOneWord: ''
+        }
+      },
+      itemFrameworkOnePolarity: '',
+      itemFrameworkOneResponseCorrect: '',
+      itemFrameworkOneScore: '',
+      itemFrameworkOneSequence: '',
+      itemFrameworkOneTime: '',
+      itemFrameworkOneType: '',
+      itemFrameworkOneWord: ''
     }
   }
 };

@@ -27,6 +27,13 @@ const PopUpItemFramework = (props) => {
     mode,
     isItemFramework = false
   } = props;
+  const [blank, setBlank] = useState('');
+  const [group, setgroup] = useState('');
+  const [level, setlevel] = useState('');
+  const [polarity, setpolarity] = useState('');
+  const [score, setscore] = useState('');
+  const [time, settime] = useState('');
+  const [weightage, setweightage] = useState('');
 
   const handleClick = () => {};
   return (
@@ -61,26 +68,12 @@ const PopUpItemFramework = (props) => {
               <InputFeild
                 id={'blank'}
                 label={'blank'}
-                value={''}
+                value={blank}
                 errorMsg={''}
                 type={'number'}
-                onClick={() => {}}
-              />
-            )}
-            {isItemFramework && (
-              <SelectField
-                tag={'difficulty'}
-                label={'difficulty'}
-                dataValue={'difficulty'}
-                listSelect={[
-                  { id: 'Low', name: 'Low' },
-                  { id: 'Medium', name: 'Medium' },
-                  { id: 'High', name: 'High' }
-                ]}
-                errorMsg={() => {}}
-                onChange={() => {}}
-                value={''}
-                mappingValue={'id'}
+                onClick={(e) => {
+                  setBlank(e.target.value);
+                }}
               />
             )}
             {isItemFramework && (
@@ -94,28 +87,77 @@ const PopUpItemFramework = (props) => {
                   { id: 'Simple-Sample3', name: 'Simple Sample' }
                 ]}
                 errorMsg={() => {}}
-                onChange={() => {}}
-                value={''}
+                onChange={(e) => {
+                  setgroup(e.target.value);
+                }}
+                value={group}
                 mappingValue={'id'}
               />
             )}
-            <InputFeild
-              id={'polarity'}
-              label={'polarity'}
-              value={''}
-              errorMsg={''}
-              onClick={() => {}}
-            />
-            <InputFeild id={'score'} label={'score'} value={''} errorMsg={''} onClick={() => {}} />
             {isItemFramework && (
-              <InputFeild id={'time'} label={'time'} value={''} errorMsg={''} onClick={() => {}} />
+              <SelectField
+                tag={'level'}
+                label={'level'}
+                dataValue={'level'}
+                listSelect={[
+                  { id: 'High-Level', name: 'High-Level' },
+                  { id: 'Low-Level', name: 'Low-Level' },
+                  { id: 'Mid-Level', name: 'Mid-Level' }
+                ]}
+                errorMsg={() => {}}
+                onChange={(e) => {
+                  setlevel(e.target.value);
+                }}
+                value={level}
+                mappingValue={'id'}
+              />
+            )}
+            <SelectField
+              tag={'polarity'}
+              label={'polarity'}
+              dataValue={'polarity'}
+              listSelect={[
+                { id: 'negativel', name: 'Negative' },
+                { id: 'positive', name: 'Positive' }
+              ]}
+              errorMsg={() => {}}
+              onChange={(e) => {
+                setpolarity(e.target.value);
+              }}
+              value={polarity}
+              mappingValue={'id'}
+            />
+            <InputFeild
+              id={'score'}
+              label={'score'}
+              value={score}
+              errorMsg={''}
+              type={'number'}
+              onClick={(e) => {
+                setscore(e.target.value);
+              }}
+            />
+            {isItemFramework && (
+              <InputFeild
+                id={'time'}
+                label={'time'}
+                value={time}
+                type={'number'}
+                errorMsg={''}
+                onClick={(e) => {
+                  settime(e.target.value);
+                }}
+              />
             )}
             <InputFeild
               id={'weightage'}
               label={'weightage'}
-              value={''}
+              value={weightage}
+              type={'number'}
               errorMsg={''}
-              onClick={() => {}}
+              onClick={(e) => {
+                setweightage(e.target.value);
+              }}
             />
           </FormControl>
         </DialogContent>
