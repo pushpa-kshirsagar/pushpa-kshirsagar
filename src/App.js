@@ -36,13 +36,10 @@ function App() {
     //   const { exp } = decode(refreshToken);
     //   console.log("EXP Time", exp);
     //   console.log("new Date().getTime() / 1000", new Date().getTime() / 1000);
-    //   alert(exp);
     //   if (exp < new Date().getTime() / 1000) {
     //     return false;
     //   }
-    //   alert("after===>");
     // } catch (e) {
-    //   alert("IN CATCH ");
     //   return false;
     // }
 

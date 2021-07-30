@@ -18,6 +18,7 @@ import NodeCreateReducer from './NodeCreateReducer';
 import ItemCreateReducer from './ItemCreateReducer';
 import CultureProfileCreateReducer from './CultureProfileCreateReducer';
 import JobProfileCreateReducer from './JobProfileCreateReducer';
+import AssesseeAssignmentAssessmentReducer from './AssesseeAssignmentAssessmentReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -38,5 +39,6 @@ export default combineReducers({
   NodeCreateReducer,
   ItemCreateReducer,
   CultureProfileCreateReducer,
-  JobProfileCreateReducer
+  JobProfileCreateReducer,
+  AssesseeAssignmentAssessmentReducer
 });

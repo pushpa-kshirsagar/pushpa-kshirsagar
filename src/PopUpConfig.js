@@ -2207,15 +2207,15 @@ export const SHARE_POPUP = [
 export const ADMINISTER_POPUP = [
   {
     data: 'administer',
-    dataValue: 'administer',
-    dataKey: 'administer',
+    dataValue: 'administerApiCall',
+    dataKey: 'administerApiCall',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
     data: 'unadminister',
-    dataValue: 'unadminister',
-    dataKey: 'unadminister',
+    dataValue: 'unadministerApiCall',
+    dataKey: 'unadministerApiCall',
     optionClass: 'optionPrimary',
     disabled: false
   }

@@ -75,7 +75,6 @@ const PopUpAssesseePassword = (props) => {
         //     if (user) {
         //       user.changePassword(currentPassword, revisedPassword, (err, result) => {
         //         if (err) {
-        //           alert(err.message || JSON.stringify(err));
         //           //TODO: Show error
         //           return;
         //         }

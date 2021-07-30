@@ -255,9 +255,13 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentDescription: responseObject.informationBasic.assignmentDescription,
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingAssesseeId = informationFramework?.assignmentAssessment || [];
+      // let existingAssesseeId = informationFramework?.assignmentAssessment || [];
+      let existingAssessmentId = informationFramework?.assignmentAssessment.map(
+        (ob) => ob.assessmentId
+      );
+      console.log('existingAssessmentId',existingAssessmentId);
       // let tempArr = relatedReviewListPaneThree[0]?.assessment || [];
-      // existingAssesseeId = tempArr.map((val) => {
+      // existingAssessmentId = tempArr.map((val) => {
       //   return val.id;
       // });
       dispatch({
@@ -276,7 +280,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         payload: {
           request: requestObect,
           revisedGroupObject: revisedGroupObject,
-          existingAssessmentId: existingAssesseeId,
+          existingAssessmentId: existingAssessmentId,
           typeOfMiddlePaneList: 'assignmentDistinctAssessmentReviewList'
         }
       });

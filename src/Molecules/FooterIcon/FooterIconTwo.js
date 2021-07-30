@@ -26,18 +26,20 @@ const IconTwoWithFlexSixColumn = (props) => {
         <CircleIcon
           label={data[0].label}
           Icon={data[0].Icon}
-          colour={'displayPaneCentre'}
+          colour={props.colour}
           onClick={data[0].onClick}
           dataValue={data[0].dataValue ? data[0].dataValue : data[0].label}
+          disabled={data[0]?.disabled}
         />
       </div>
       <div className={'mbPager'}>
         <CircleIcon
           label={data[1].label}
           Icon={data[1].Icon}
-          colour={'displayPaneCentre'}
+          colour={props.colour}
           onClick={data[1].onClick}
           dataValue={data[1].dataValue ? data[1].dataValue : data[1].label}
+          disabled={data[1]?.disabled}
         />
       </div>
       <div className={'mbPager'}></div>
@@ -179,7 +181,14 @@ const IconFiveWithFlexFiveColumn = (props) => {
   );
 };
 const FooterIconTwo = (props) => {
-  const { FilterModeEnable, primaryIcon, secondaryIcon, className = '' } = props;
+  const {
+    FilterModeEnable,
+    primaryIcon,
+    secondaryIcon,
+    className = '',
+    backColour = 'displayPaneCentre',
+    disabled = false
+  } = props;
   // console.log(primaryIcon);
   // console.log('primaryIcon');
   return (
@@ -191,10 +200,10 @@ const FooterIconTwo = (props) => {
               primaryIcon.length === 1 ? (
                 <SingleIconWithFlex data={primaryIcon} />
               ) : primaryIcon.length === 2 ? (
-                <IconTwoWithFlexSixColumn data={primaryIcon} />
+                <IconTwoWithFlexSixColumn data={primaryIcon} colour={backColour} />
               ) : null
             ) : secondaryIcon.length === 2 ? (
-              <IconTwoWithFlexSixColumn data={secondaryIcon} />
+              <IconTwoWithFlexSixColumn data={secondaryIcon} colour={backColour} />
             ) : secondaryIcon.length === 3 ? (
               <IconThreeWithFlexFiveColumn data={secondaryIcon} />
             ) : secondaryIcon.length === 4 ? (

@@ -22,7 +22,8 @@ import {
   ASSIGNMENT_TYPE_REVISE_INFO_SAGA,
   GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
-  ASSIGNMENT_PUBLISH_SAGA
+  ASSIGNMENT_PUBLISH_SAGA,
+  ASSIGNMENT_ADMINISTER_SAGA
 } from '../actionType';
 import {
   getAssignmentGroupAssignmentReqObj,
@@ -95,7 +96,8 @@ export const assignmentsDistinctApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  isSelectActive = ''
 ) => {
   let requestObect = makeAssignmentReviewListRequestObject(
     selectedAssociateInfo,
@@ -116,7 +118,8 @@ export const assignmentsDistinctApiCall = (
     payload: {
       request: requestObect,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue
+      BadgeTwo: secondaryOptionCheckValue,
+      isSelectActive: isSelectActive
     }
   });
 };
@@ -577,6 +580,29 @@ export const getAssignmnetAssessmentDistinctApiCall = (
       BadgeTwo: secondaryOptionCheckValue,
       BadgeThree: '',
       isMiddlePaneList: true
+    }
+  });
+};
+export const updateAssignmentAdminister = (
+  selectedAssociateInfo,
+  assignmentId,
+  dispatch,
+  reviseStatus
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    assignmentId: assignmentId
+  };
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: ASSIGNMENT_ADMINISTER_SAGA,
+    payload: {
+      secondaryOptionCheckValue: '',
+      hideRightPane: true,
+      headerOne: '',
+      reqBody
     }
   });
 };

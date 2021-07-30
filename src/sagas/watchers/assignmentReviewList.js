@@ -16,8 +16,7 @@ import {
   GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_JOB_PROFILE_REVIEWLIST_SAGA,
-  SET_ASSIGNMENT_RELATED_REVIEW_LIST,
-  GET_ASSESSEE_ASSIGNMENT_SAGA
+  SET_ASSIGNMENT_RELATED_REVIEW_LIST
 } from '../../actionType';
 import {
   ASSIGNMENTNODE_ASSESSMENT_REVIEWLIST_URL,
@@ -27,8 +26,7 @@ import {
   ASSIGNMENT_DISTINCT_JOB_PROFILE_URL,
   ASSIGNMENT_GROUP_ASSIGNMENT_URL,
   ASSIGNMENT_REVIEW_LIST_URL,
-  ASSIGNMENT_TYPE_ASSIGNMENT_URL,
-  ASSESSEEASSIGNMENT_REVIEWLIST_URL
+  ASSIGNMENT_TYPE_ASSIGNMENT_URL
 } from '../../endpoints';
 
 const apiCallFun = async (requestObj) => {
@@ -66,49 +64,8 @@ function* workerReviewListAssignmentSaga(data) {
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assignmentDistinctReviewList',
           scanCount: response && response.countTotal,
-          showMiddlePaneState: true
-        }
-      });
-      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
-      yield put({ type: CLEAR_ASSIGNMENT_INFO });
-    } else {
-      yield put({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
-      });
-    }
-
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
-  } catch (e) {
-    console.log('ERROR==', e);
-    yield put({
-      type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
-    });
-    yield put({ type: LOADER_STOP });
-  }
-}
-function* workerAssesseeAssignmentListSaga(data) {
-  try {
-    const response = yield call(apiCallFun, {
-      data: data.payload.request,
-      URL: ASSESSEEASSIGNMENT_REVIEWLIST_URL,
-      type: ''
-    });
-    // const response ={responseCode:'000',countTotal:30}
-    if (response.responseCode === '000') {
-      yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assignments',
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assesseeAssignmentDistinctReviewList',
-          scanCount: response && response.countTotal,
-          showMiddlePaneState: true
+          showMiddlePaneState: true,
+          isSelectActive: data.payload.isSelectActive
         }
       });
       yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
@@ -522,5 +479,4 @@ export default function* watchReviewListAssignmentSaga() {
   );
   yield takeLatest(GET_NODE_ASSIGNMENTS_REVIEW_LIST_SAGA, workerAssignmentNodeAssignment);
   yield takeLatest(GET_ALLOCATE_ASSIGNMENT, workerReviewListAssignmentAllocateSaga);
-  yield takeLatest(GET_ASSESSEE_ASSIGNMENT_SAGA, workerAssesseeAssignmentListSaga);
 }

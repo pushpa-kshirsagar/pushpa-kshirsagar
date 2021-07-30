@@ -129,7 +129,6 @@ const PopUpSignOnAssociate = () => {
     dispatch({ type: CREATE_ASSOCIATE_SAGA, payload: requestObect });
   };
   const handleNextPopupValue = () => {
-    // alert(isPopUpValue);
     let tempCommunication = assesseeInfo.tempCommunication;
     let secondemail = informationContact.assesseeAddressEmailSecondary.assesseeAddressEmail;
     if (isPopUpValue === 'EMAILPOPUP') {

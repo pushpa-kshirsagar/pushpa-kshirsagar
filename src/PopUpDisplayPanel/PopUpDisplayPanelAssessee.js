@@ -20,7 +20,8 @@ import {
   GET_ASSESSEE_ASSIGNMENT_SAGA,
   FILTERMODE,
   SET_REQUEST_OBJECT,
-  SET_PAGE_COUNT
+  SET_PAGE_COUNT,
+  SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE
 } from '../actionType';
 import {
   ASSIGNMENT_DISTINCT_POPUP,
@@ -279,6 +280,19 @@ const PopUpDisplayPanelAssessee = (props) => {
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeAssignmentDistinct' + secondaryOptionCheckValue }
+      });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssignmentAssessmentData', value: null }
+      });
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssessmentStartData', value: null }
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
