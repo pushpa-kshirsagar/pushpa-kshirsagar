@@ -13,23 +13,25 @@ import {
   POPUP_OPEN,
   SET_POPUP_VALUE,
   SET_POPUP_STATE,
-  SET_SCAN_POPUP_STATE
+  SET_SCAN_POPUP_STATE,
+  SET_MOBILE_PANE_STATE
 } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import {
   ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION,
   LEFT_TRIPPLE_DOT_POPUP_OPTION,
-  TRIPPLE_DOT_POPUP_OPTION
+  TRIPPLE_DOT_POPUP_OPTION,
+  ASSESSMENT_FINISH_POPUP_OPTION
 } from '../../PopUpConfig';
 
-const AssessmentTimer = ({ expiryTimestamp }) => {
+const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
   const { seconds, minutes, hours } = useTimer({
     expiryTimestamp,
-    onExpire: () => {
-      console.warn('onExpire called');
-      // window.location.reload();
-    }
+    onExpire: timerFinished
+    // onExpire: () => {
+    //   console.warn('onExpire called');
+    // }
   });
   return (
     <div>
@@ -177,7 +179,22 @@ const HeaderCard = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  const timerFinished = () => {
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        popupHeaderOne: 'assessment',
+        popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeTwo: '',
+        isPopUpValue: '',
+        popupOpenType: 'primary',
+        popupContentArrValue: ASSESSMENT_FINISH_POPUP_OPTION
+      }
+    });
+    dispatch({ type: POPUP_OPEN, payload: 'paneSevenPopup' });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSix' });
 
+  };
   useEffect(() => {
     const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;
     let tt = new Date();
@@ -239,9 +256,15 @@ const HeaderCard = (props) => {
               <div className={'iguru-iconbox'}>
                 {displayPane === 'five' ? (
                   <div>
-                    <span style={{ color: '#fff', fontWeight: 'bold' }}>
-                      <AssessmentTimer expiryTimestamp={timer} key={timer} />
-                    </span>
+                    {assesseeAssessmentStartData && (
+                      <span style={{ color: '#fff', fontWeight: 'bold' }}>
+                        <AssessmentTimer
+                          expiryTimestamp={timer}
+                          key={timer}
+                          timerFinished={timerFinished}
+                        />
+                      </span>
+                    )}
                   </div>
                 ) : displayPane === 'centre' && showMiddlePaneState ? (
                   <IconButton onClick={onClickScan}>
@@ -262,7 +285,7 @@ const HeaderCard = (props) => {
                 ) : null}
               </div>
               <div className={'iguru-iconbox'}>
-                {displayPane === 'five' ? (
+                {displayPane === 'five' && assesseeAssessmentStartData ? (
                   <IconButton
                     onClick={() => {
                       dispatch({ type: POPUP_OPEN, payload: 'NavigatorPOPUP' });

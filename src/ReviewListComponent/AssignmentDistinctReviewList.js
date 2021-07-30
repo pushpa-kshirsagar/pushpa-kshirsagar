@@ -95,13 +95,13 @@ const AssignmentDistinctReviewList = (props) => {
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
       let distinctAllocateStr =
-        allocateStr === 'assesseesgroups'
+        allocateStr === 'assesseesgroup'
           ? 'assesseeGroup'
           : allocateStr === 'assesseesdistinct'
           ? 'assesseeDistinct'
           : allocateStr === 'assessmentsdistinct'
           ? 'assessmentDistinct'
-          : allocateStr === 'assessmentsgroups'
+          : allocateStr === 'assessmentsgroup'
           ? 'assessmentGroup'
           : '';
       if (distinctAllocateStr !== '' && selectedTagsArray.length !== 0) {

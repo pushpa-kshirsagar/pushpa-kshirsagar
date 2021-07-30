@@ -5,10 +5,12 @@ import {
   CLEAR_ASSIGNMENT_INFO,
   GET_ASSESSEE_ASSIGNMENT_SAGA,
   LOADER_STOP,
+  RELATED_REVIEWLIST_DISTINCT_DATA,
   REVIEWLIST_DISTINCT_DATA,
   SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
+  SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
 import {
@@ -39,21 +41,49 @@ function* workerAssesseeAssignmentListSaga(data) {
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
-      yield put({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assignments',
-          middlePaneHeaderBadgeOne: data.payload.BadgeOne,
-          middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assesseeAssignmentDistinctReviewList',
-          scanCount: response && response.countTotal,
-          showMiddlePaneState: true
-        }
-      });
-      yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
-      yield put({ type: CLEAR_ASSIGNMENT_INFO });
+      if (data.payload.assessmentStarted) {
+        yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+        let assessmentList = response.responseObject.filter((list) => {
+          return list.assignmentId === data.payload.assignmentId;
+        });
+        yield put({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isExamMode', value: false }
+        });
+        yield put({
+          type: RELATED_REVIEWLIST_DISTINCT_DATA,
+          payload: assessmentList
+        });
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assessments',
+            middlePaneHeaderBadgeOne: 'active',
+            middlePaneHeaderBadgeTwo: '',
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assesseesAssginmentAssessmentReviewList',
+            scanCount: assessmentList[0].assesseeAssessment.length,
+            showMiddlePaneState: true
+          }
+        });
+      } else {
+        yield put({
+          type: SET_MIDDLEPANE_STATE,
+          payload: {
+            middlePaneHeader: 'assignments',
+            middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+            middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+            middlePaneHeaderBadgeThree: '',
+            middlePaneHeaderBadgeFour: '',
+            typeOfMiddlePaneList: 'assesseeAssignmentDistinctReviewList',
+            scanCount: response && response.countTotal,
+            showMiddlePaneState: true
+          }
+        });
+        yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
+        yield put({ type: CLEAR_ASSIGNMENT_INFO });
+      }
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -93,6 +123,11 @@ function* workerAssessmentStartSaga(data) {
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
         payload: { stateName: 'isExamMode', value: true }
       });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: 'START' }
+      });
+      yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSix' });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -124,14 +159,16 @@ function* workerAssesseeAssessmentStartSaga(data) {
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
         payload: { stateName: 'assesseeAssessmentStartData', value: response.responseObject }
       });
-      // yield put({
-      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-      //   payload: { stateName: 'typeOfMiddlePaneList', value: 'acutalAssessmentStart' }
-      // });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
+      });
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'isExamMode', value: true }
+        payload: { stateName: 'isExamMode', value: false }
       });
+      yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSeven' });
+
     } else {
       yield put({
         type: SET_POPUP_VALUE,

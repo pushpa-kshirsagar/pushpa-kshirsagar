@@ -10,7 +10,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
-  SET_REQUEST_OBJECT
+  SET_REQUEST_OBJECT,
+  ASSESSEE_ALLOCATE_GRP_SAGA
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -44,7 +45,8 @@ const AssesseeGroupReviewList = (props) => {
     middlePaneHeaderBadgeTwo,
     middlePaneHeaderBadgeThree,
     selectedAssociateInfo,
-    allocatedTagsArray
+    allocatedTagsArray,
+    allocateStr
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -110,8 +112,26 @@ const AssesseeGroupReviewList = (props) => {
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'finish') {
-      console.log('allocatedTagsArray', allocatedTagsArray);
-      console.log('selectedTagsArray', selectedTagsArray);
+      console.log('allocateStr', allocateStr);
+      let distinctAllocateStr = allocateStr === 'assesseesdistinct' ? 'assesseeDistinct' : '';
+      if (distinctAllocateStr !== '' && selectedTagsArray.length !== 0) {
+        if (distinctAllocateStr === 'assesseeDistinct') {
+          let request = {
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary,
+            assesseeDistinctAllocate: {
+              [distinctAllocateStr]: allocatedTagsArray
+            },
+            assesseeDistinctAllocateInformation: {
+              assesseeGroup: selectedTagsArray
+            }
+          };
+          dispatch({ type: LOADER_START });
+          dispatch({ type: ASSESSEE_ALLOCATE_GRP_SAGA, payload: { request: request } });
+        }
+      }
     }
     if (siftValue === 'cancle') {
       dispatch({

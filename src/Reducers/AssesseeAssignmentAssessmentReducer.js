@@ -6,7 +6,8 @@ import {
 const initialState = {
   assesseeAssignmentAssessmentData: null,
   assesseeAssessmentStartData: null,
-  isExamMode: false
+  isExamMode: false,
+  isAssessmentStart:''
 };
 
 const AssesseeAssignmentAssessmentReducer = (istate = initialState, action) => {

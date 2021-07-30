@@ -9,7 +9,7 @@ const SingleIconWithFlex = (props) => {
       <CircleIcon
         label={data[0].label}
         Icon={data[0].Icon}
-        colour={'displayPaneCentre'}
+        colour={props.colour}
         onClick={data[0].onClick}
         dataValue={data[0].label}
       />
@@ -198,7 +198,7 @@ const FooterIconTwo = (props) => {
           <BottomNavigation className={'MuiBottomNavigationCustom'}>
             {FilterModeEnable ? (
               primaryIcon.length === 1 ? (
-                <SingleIconWithFlex data={primaryIcon} />
+                <SingleIconWithFlex data={primaryIcon} colour={backColour} />
               ) : primaryIcon.length === 2 ? (
                 <IconTwoWithFlexSixColumn data={primaryIcon} colour={backColour} />
               ) : null

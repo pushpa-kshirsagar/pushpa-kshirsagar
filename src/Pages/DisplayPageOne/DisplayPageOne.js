@@ -54,6 +54,7 @@ import PopUpItemCreate from '../../Molecules/PopUpCreate/PopUpItemCreate';
 import PopUpJobProfileCreate from '../../Molecules/PopUpCreate/PopUpJobProfileCreate';
 import DisplayPaneFour from '../../Organisms/DisplayPaneFour/DisplayPaneFour';
 import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
+import PopUpDisplayPaneSeven from '../../PopUpDisplayPanel/PopUpDisplayPaneSeven';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -192,7 +193,7 @@ const DisplayPageOne = () => {
               //   )}
               // </>
             )}
-            {mobilePanestate === 'DisplayPaneSix' && <DisplayPaneSix />}
+            {mobilePanestate === 'displayPaneSix' && <DisplayPaneSix />}
             {mobilePanestate === 'displayPaneSeven' && <DisplayPaneSeven />}
           </div>
         ) : (
@@ -253,6 +254,11 @@ const DisplayPageOne = () => {
       </div>
       <PopUpDisplayPaneTwoReviewList
         isActive={isPopUpValue === 'middlePaneListPopup'}
+        typeOfMiddlePaneList={typeOfMiddlePaneList}
+        popupAllClose={popupAllClose}
+      />
+      <PopUpDisplayPaneSeven
+        isActive={isPopUpValue === 'paneSevenPopup'}
         typeOfMiddlePaneList={typeOfMiddlePaneList}
         popupAllClose={popupAllClose}
       />

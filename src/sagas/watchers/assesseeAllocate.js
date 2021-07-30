@@ -6,9 +6,10 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   ASSIGNMENT_REVIEW_DISTINCT_SAGA,
   SET_ASSIGNMENT_RELATED_LIST,
-  ASSESSEE_ALLOCATE_ASSIGNMENT_SAGA
+  ASSESSEE_ALLOCATE_ASSIGNMENT_SAGA,
+  ASSESSEE_ALLOCATE_GRP_SAGA
 } from '../../actionType';
-import { ASSESSEE_ALLOCATE_ASSIGNMENT } from '../../endpoints';
+import { ASSESSEE_ALLOCATE, ASSESSEE_ALLOCATE_ASSIGNMENT } from '../../endpoints';
 import Store from '../../store';
 const callInfoApi = async (requestObj) => {
   console.log(requestObj.data);
@@ -26,62 +27,70 @@ const callInfoApi = async (requestObj) => {
 };
 function* workerAssesseeAllocateAssignmentSaga(data) {
   try {
-    const userResponse = yield call(callInfoApi, {
+    const Response = yield call(callInfoApi, {
       data: data.payload.request,
       URL: ASSESSEE_ALLOCATE_ASSIGNMENT
     });
-    // const userResponse ={responseCode:'000',countTotal:30}
-    if (userResponse.responseCode === '000') {
-      const { createMode = '' } = data.payload;
-      if (!data.payload.hideRightPane) {
-        yield put({
-          type: SET_DISPLAY_PANE_THREE_STATE,
-          payload: {
-            headerOne: 'assignment',
-            headerOneBadgeOne: 'information',
-            headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-            responseObject: userResponse.responseObject[0],
-            createMode
-          }
-        });
-      }
+    // const Response ={responseCode:'000',countTotal:30}
+    if (Response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: '' }
+      });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'allocateStr', value: '' }
+      });
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'selectedTagsArray', value: [] }
+      });
+      yield put({ type: LOADER_STOP });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: Response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+      yield put({ type: LOADER_STOP });
+    }
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerAssesseeAllocateGrpSaga(data) {
+  try {
+    const Response = yield call(callInfoApi, {
+      data: data.payload.request,
+      URL: ASSESSEE_ALLOCATE
+    });
+    // const Response ={responseCode:'000',countTotal:30}
+    if (Response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: '' }
+      });
 
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'reviewListDistinctData', value: [] }
+        payload: { stateName: 'allocateStr', value: '' }
       });
       yield put({
-        type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
-        payload: {
-          HeaderOne: 'assignments',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'selectedTagsArray', value: [] }
       });
+      yield put({ type: LOADER_STOP });
     } else {
-      console.log('loading end');
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: Response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
       yield put({ type: LOADER_STOP });
     }
-    yield put({
-      type: SET_ASSIGNMENT_RELATED_LIST,
-      payload: { listName: 'assignmentAssesseeList', value: [] }
-    });
-    yield put({
-      type: SET_ASSIGNMENT_RELATED_LIST,
-      payload: { listName: 'assignmentAssessmentList', value: [] }
-    });
-    yield put({
-      type: SET_ASSIGNMENT_RELATED_LIST,
-      payload: { listName: 'assignmentCultureProfileList', value: [] }
-    });
-    yield put({
-      type: SET_ASSIGNMENT_RELATED_LIST,
-      payload: { listName: 'assignmentJobProfileList', value: [] }
-    });
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
@@ -94,4 +103,5 @@ function* workerAssesseeAllocateAssignmentSaga(data) {
 
 export default function* watchAssesseeAllocateSaga() {
   yield takeLatest(ASSESSEE_ALLOCATE_ASSIGNMENT_SAGA, workerAssesseeAllocateAssignmentSaga);
+  yield takeLatest(ASSESSEE_ALLOCATE_GRP_SAGA, workerAssesseeAllocateGrpSaga);
 }

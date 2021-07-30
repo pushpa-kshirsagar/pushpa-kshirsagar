@@ -10,7 +10,8 @@ import {
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  FILTERMODE
+  FILTERMODE,
+  ASSESSMENT_ALLOCATE_SAGA
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -44,7 +45,8 @@ const AssessmentGroupReviewList = (props) => {
     selectedTagsArray,
     isSelectActive,
     unselectedTagsArray,
-    allocatedTagsArray
+    allocatedTagsArray,
+    allocateStr
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -110,8 +112,26 @@ const AssessmentGroupReviewList = (props) => {
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'finish') {
-      console.log('allocatedTagsArray', allocatedTagsArray);
-      console.log('selectedTagsArray', selectedTagsArray);
+      console.log('allocateStr', allocateStr);
+      let distinctAllocateStr = allocateStr === 'assessmentsdistinct' ? 'assessmentDistinct' : '';
+      if (distinctAllocateStr !== '' && selectedTagsArray.length !== 0) {
+        if (distinctAllocateStr === 'assessmentDistinct') {
+          let request = {
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary,
+            assessmentDistinctAllocate: {
+              [distinctAllocateStr]: allocatedTagsArray
+            },
+            assessmentDistinctAllocateInformation: {
+              assessmentGroup: selectedTagsArray
+            }
+          };
+          dispatch({ type: LOADER_START });
+          dispatch({ type: ASSESSMENT_ALLOCATE_SAGA, payload: { request: request } });
+        }
+      }
     }
     if (siftValue === 'cancle') {
       dispatch({

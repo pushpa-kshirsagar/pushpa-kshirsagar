@@ -10,19 +10,25 @@ import { Paper } from '@material-ui/core';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
-import { POPUP_OPEN, SET_POPUP_STATE } from '../../actionType';
-import { RES_START_POPUP_OPTION } from '../../PopUpConfig';
+import {
+  POPUP_OPEN,
+  SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+  SET_POPUP_STATE
+} from '../../actionType';
+import { RES_START_POPUP_OPTION, ASSESSMENT_CLOSED_POPUP_OPTION } from '../../PopUpConfig';
+
 export const DisplayPaneSix = () => {
   // const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
-  const { assesseeAssignmentAssessmentData } = useSelector(
+  const { assesseeAssignmentAssessmentData, isAssessmentStart } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const dispatch = useDispatch();
 
   const onClickFooter = (e) => {
-    if (e.currentTarget.getAttribute('data-value') === 'next') {
+    let clickedval = e.currentTarget.getAttribute('data-value');
+    if (clickedval === 'next') {
       dispatch({
         type: SET_POPUP_STATE,
         payload: {
@@ -38,14 +44,42 @@ export const DisplayPaneSix = () => {
       });
       dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
     }
+    if (clickedval === 'close') {
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssessmentStartData', value: null }
+      });
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'assessment',
+          popupHeaderOneBadgeOne: 'close',
+          popupHeaderOneBadgeTwo: '',
+          isPopUpValue: '',
+          popupOpenType: 'primary',
+          secondaryOptionCheckValue: 'assignment',
+          popupContentArrValue: ASSESSMENT_CLOSED_POPUP_OPTION,
+          selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
+          selectedTagStatus: 'status'
+        }
+      });
+      dispatch({ type: POPUP_OPEN, payload: 'paneSevenPopup' });
+    }
   };
   return (
     <>
       <div>
         <DisplayPaneSixHeader
           className=""
-          headerOne="dashboard"
-          headerOneBadgeOne=""
+          headerOne={'assessment'}
+          headerOneBadgeOne={'communiqué'}
+          headerOneBadgeTwo={
+            isAssessmentStart === 'START'
+              ? 'primary'
+              : isAssessmentStart === 'FINISH'
+              ? 'secondary'
+              : ''
+          }
           headerPanelColour="blue"
         />
       </div>
@@ -60,29 +94,6 @@ export const DisplayPaneSix = () => {
                 textOneOne={assesseeRole('assessment (communiqué)')}
                 textTwoOne=""
               /> */}
-              <div className={'iguru-leftpanel'}>
-                <Paper
-                  style={{
-                    boxShadow:
-                      '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)'
-                  }}
-                  className={[`iguru-iconbox-dashboardcardtop`].join(' ')}
-                >
-                  <div className={['iguru-componentinnerdiv'].join(' ')}>
-                    <div className={'iguru-cardContentMidPanel'} style={{ flex: '4' }}>
-                      <div className={['midPaneInformation'].join(' ')}>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: assesseeRole('assessment (communiqué)')
-                          }}
-                        ></span>
-                      </div>
-                    </div>
-                    <div className={'iguru-iconbox'}></div>
-                    <div className={'iguru-iconbox'}></div>
-                  </div>
-                </Paper>
-              </div>
             </div>
             <div className="containerPadding">
               <div
@@ -96,22 +107,40 @@ export const DisplayPaneSix = () => {
                 }}
                 dangerouslySetInnerHTML={{
                   __html:
-                    assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
-                      .assessmentCommuniquePrimary
+                    isAssessmentStart === 'START'
+                      ? assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
+                          .assessmentCommuniquePrimary
+                      : isAssessmentStart === 'FINISH'
+                      ? assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
+                          .assessmentCommuniqueSecondary
+                      : ''
                 }}
               ></div>
             </div>
-            <FooterIconTwo
-              FilterModeEnable={false}
-              FilterMode={FilterMode}
-              onClick={onClickFooter}
-              backColour={'displayPaneLeft'}
-              primaryIcon={[]}
-              secondaryIcon={[
-                { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft, disabled: 'true' },
-                { label: 'next', onClick: onClickFooter, Icon: ArrowRight }
-              ]}
-            />
+
+            {isAssessmentStart === 'START' ? (
+              <FooterIconTwo
+                FilterModeEnable={false}
+                FilterMode={FilterMode}
+                onClick={onClickFooter}
+                backColour={'displayPaneLeft'}
+                primaryIcon={[]}
+                secondaryIcon={[
+                  { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft, disabled: 'true' },
+                  { label: 'next', onClick: onClickFooter, Icon: ArrowRight }
+                ]}
+              />
+            ) : isAssessmentStart === 'FINISH' ? (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickFooter}
+                backColour={'displayPaneLeft'}
+                primaryIcon={[{ label: 'close', onClick: onClickFooter, Icon: CrossIcon }]}
+                secondaryIcon={[]}
+              />
+            ) : null}
+
             {/* <DisplayPaneSixFooter /> */}
           </>
         )}

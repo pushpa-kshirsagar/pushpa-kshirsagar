@@ -2805,3 +2805,58 @@ export const RES_START_POPUP_OPTION = [
     disabled: false
   }
 ];
+export const ASSESSMENT_FINISH_POPUP_OPTION = [
+  {
+    data: 'finish',
+    dataValue: 'finish',
+    dataKey: 'finish',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  }
+];
+export const ASSESSMENT_CLOSED_POPUP_OPTION = [
+  {
+    data: 'no',
+    dataValue: 'no',
+    dataKey: 'no',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'yes',
+    dataValue: 'yes',
+    dataKey: 'yes',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false
+  },
+  {
+    data: 'assignment',
+    dataValue: 'assignment',
+    dataKey: 'assignment',
+    optionClass: 'optionSecondary',
+    disabled: false
+  },
+  {
+    data: 'dashboard',
+    dataValue: 'dashboard',
+    dataKey: 'dashboard',
+    optionClass: 'optionSecondary',
+    divider: 'light',
+    disabled: false
+  },
+  {
+    data: 'sign-out',
+    dataValue: 'sign-out',
+    dataKey: 'sign-out',
+    optionClass: 'optionSecondary',
+    disabled: false
+  }
+];
