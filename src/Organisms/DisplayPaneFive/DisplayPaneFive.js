@@ -4,7 +4,14 @@ import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactHTMLParser from 'react-html-parser';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { SET_PANE_THREE_ITEM_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
+import {
+  ITEM_INFO_REVISE_SAGA,
+  LOADER_START,
+  SET_DISPLAY_PANE_THREE_REVIEW_MODE,
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_PANE_THREE_ITEM_PREVIEW_MODE,
+  SET_POPUP_VALUE
+} from '../../actionType';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -87,9 +94,11 @@ export const DisplayPaneFive = () => {
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
-  const { reviewMode } = useSelector(
+  const { headerOneBadgeTwo, responseObject, reviewMode, createMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpOpen } = useSelector((state) => state.PopUpReducer);
   const onClickFooter = (e) => {
@@ -105,25 +114,6 @@ export const DisplayPaneFive = () => {
     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
-  const onClickRevise = () => {
-    console.log('ON CLICK REVISE ICON');
-    setIsShowReviseIcon(false);
-  };
-  const onClickReviseCancel = () => {
-    console.log('ON CLICK cancel ICON');
-    setIsShowReviseIcon(true);
-  };
-  const onClickReviseFinish = () => {
-    console.log('ON CLICK finish ICON');
-    setIsShowReviseIcon(true);
-    dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
-  };
-  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
-
-  const reviseSecondaryIcons = [
-    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
-    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
-  ];
 
   const optionLabel =
     "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
@@ -138,6 +128,9 @@ export const DisplayPaneFive = () => {
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>description</span>&nbsp;";
   const responseChoiceDescription =
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>description</span>&nbsp;";
+  const itemFrameworkOneResponseChoice =
+    itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
+  const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
   const [questionOptionList, setQuestionOptionList] = useState([
     {
       id: 'option-1',
@@ -158,53 +151,25 @@ export const DisplayPaneFive = () => {
   // );
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const addOption = () => {
-    setQuestionOptionList([
-      ...questionOptionList,
-      { id: `option-${questionOptionList.length + 1}`, value: optionLabel }
-    ]);
+    dispatch({
+      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'itemFrameworkOneResponseChoice',
+        value: [
+          ...itemFrameworkOneResponseChoice,
+          {
+            id: `${itemFrameworkOneResponseChoice.length + 1}`,
+            itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
+            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceWeightage: '',
+            itemFrameworkOneResponseChoiceScore: ''
+          }
+        ]
+      }
+    });
   };
-  const itemPopupOption = [
-    {
-      data: 'description',
-      dataValue: 'description',
-      dataKey: 'descriptionAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'label',
-      dataValue: 'label',
-      dataKey: 'labelAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'revise',
-      dataValue: 'revise',
-      dataKey: 'reviseAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'score',
-      dataValue: 'score',
-      dataKey: 'scoreAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'weightage',
-      dataValue: 'weightage',
-      dataKey: 'weightageAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    }
-  ];
+
   const itemPrimaryPopupOption = [
     {
       data: 'configure',
@@ -223,112 +188,65 @@ export const DisplayPaneFive = () => {
       disabled: false
     }
   ];
-  const itemMediaPopupOption = [
-    {
-      data: 'blank',
-      dataValue: 'blank',
-      dataKey: 'blankAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'description',
-      dataValue: 'description',
-      dataKey: 'descriptionAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'difficulty',
-      dataValue: 'difficulty',
-      dataKey: 'difficultyAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'group',
-      dataValue: 'group',
-      dataKey: 'groupAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'label',
-      dataValue: 'label',
-      dataKey: 'labelAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'polarity',
-      dataValue: 'polarity',
-      dataKey: 'polarityAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'revise',
-      dataValue: 'revise',
-      dataKey: 'reviseAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'score',
-      dataValue: 'score',
-      dataKey: 'scoreAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'sequence',
-      dataValue: 'sequence',
-      dataKey: 'sequenceAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'time',
-      dataValue: 'time',
-      dataKey: 'timeAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'type',
-      dataValue: 'type',
-      dataKey: 'typeAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    },
-    {
-      data: 'word',
-      dataValue: 'word',
-      dataKey: 'wordAPICall',
-      optionClass: 'optionPrimary',
-      divider: '',
-      disabled: false
-    }
+
+  const onClickReviseFinish = () => {
+    console.log('ON CLICK finish ICON');
+    setIsShowReviseIcon(true);
+    const { informationBasic, informationAllocation, informationFramework } = itemInformation;
+    const { id } = responseObject;
+    const reqBody = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId: id,
+      item: {
+        id,
+        informationBasic,
+        informationAllocation,
+        informationFramework
+      }
+    };
+    dispatch({ type: LOADER_START });
+    dispatch({
+      type: ITEM_INFO_REVISE_SAGA,
+      payload: {
+        secondaryOptionCheckValue: headerOneBadgeTwo,
+        headerOne: 'item',
+        reqBody,
+        createMode
+      }
+    });
+    dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
+  };
+  const onClickRevise = () => {
+    console.log('ON CLICK REVISE ICON');
+    setIsShowReviseIcon(false);
+  };
+  const onClickReviseCancel = () => {
+    console.log('ON CLICK cancel ICON');
+    setIsShowReviseIcon(true);
+  };
+
+  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
+
+  const reviseSecondaryIcons = [
+    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
+    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
   ];
 
   const removeOption = () => {
-    if (questionOptionList.length > 2) {
-      let arr = questionOptionList;
+    if (itemFrameworkOneResponseChoice.length > 2) {
+      let arr = itemFrameworkOneResponseChoice;
       let newArr = arr.slice(0, -1);
-      setQuestionOptionList(newArr);
+      // setQuestionOptionList(newArr);
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseChoice',
+          value: newArr
+        }
+      });
     }
   };
+
   const setSecondaryOptionValue = (e) => {
     //TODO: set secondary option in assessments
   };
@@ -355,7 +273,18 @@ export const DisplayPaneFive = () => {
       });
     }
   };
-  const ChangeTripleDotOptionPopup = (e) => {};
+
+  const ChangeTripleDotOptionPopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    console.log(targetValue);
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
+        payload: 'revise'
+      });
+    }
+  };
+
   const ChangeItemOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     console.log(targetValue);
@@ -380,7 +309,7 @@ export const DisplayPaneFive = () => {
   };
 
   const BackHandlerEvent = (e) => {};
-
+console.log("ITEM INFO", itemInformation);
   return (
     <>
       <div>
@@ -404,7 +333,7 @@ export const DisplayPaneFive = () => {
               </p>
               <span style={{ fontWeight: 'bold', margin: '0 5px 0 5px' }}>
                 {' '}
-                {questionOptionList.length}{' '}
+                {itemFrameworkOneResponseChoice.length}{' '}
               </span>
               <p onClick={addOption} className={'icon-button-option'}>
                 +
@@ -473,7 +402,7 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(labelText)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel)}
             </div>
             <div
               style={{
@@ -492,7 +421,7 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(innerContent)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneMedia)}
             </div>
           </div>
           <hr
@@ -522,7 +451,7 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(itemDescriptionText)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation)}
             </div>
           </div>
           <hr
@@ -552,19 +481,22 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(responselabelText)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel)}
             </div>
           </div>
           <FormControl component="fieldset">
             <div className={['containerPadding'].join(' ')}>
               <RadioGroup defaultValue="" aria-label="Options" name="customized-radios">
-                {questionOptionList.map((op, key) => {
+                {itemFrameworkOneResponseChoice.map((op, key) => {
                   return (
                     <>
-                      <div className="option-container" key={`${op.value}-${key}`}>
+                      <div
+                        className="option-container"
+                        key={`${op.itemFrameworkOneResponseChoiceMedia}-${key}`}
+                      >
                         <FormControlLabel
                           className={'radio-button'}
-                          value={`${op.value} ${key + 1}`}
+                          value={`${op.itemFrameworkOneResponseChoiceMedia} ${key + 1}`}
                           control={<StyledRadio />}
                           label=""
                         />
@@ -585,7 +517,7 @@ export const DisplayPaneFive = () => {
                             });
                           }}
                           dangerouslySetInnerHTML={{
-                            __html: op.value
+                            __html: op.itemFrameworkOneResponseChoiceMedia
                           }}
                         ></div>
                         <PopUpTextSheet
@@ -596,18 +528,25 @@ export const DisplayPaneFive = () => {
                           headerOneBadgeTwo={`${key + 1}`}
                           basicInfo={{}}
                           typeOfSetObject={''}
-                          defaultSheetValue={op.value}
+                          defaultSheetValue={op.itemFrameworkOneResponseChoiceMedia}
                           actualLableValue={'assessmentManuscriptSecondary'}
                           mode={'revise'}
                           onClickSave={(innerText) => {
-                            setQuestionOptionList((opArr) => {
-                              opArr.forEach((element) => {
-                                if (element.id === op.id) {
-                                  element.value = innerText;
-                                }
-                              });
-                              return opArr;
+                            let opArr = itemFrameworkOneResponseChoice;
+                            // setQuestionOptionList((opArr) => {
+                            opArr.forEach((element) => {
+                              if (element.itemFrameworkOneResponseChoice === op.itemFrameworkOneResponseChoice) {
+                                element.itemFrameworkOneResponseChoiceMedia = innerText;
+                              }
                             });
+                            dispatch({
+                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                              payload: {
+                                stateName: 'itemFrameworkOneResponseChoice',
+                                value: opArr
+                              }
+                            });
+                            // });
                           }}
                         />
                         <PopUpTextSheet
@@ -618,17 +557,22 @@ export const DisplayPaneFive = () => {
                           headerOneBadgeTwo={`description`}
                           basicInfo={{}}
                           typeOfSetObject={''}
-                          defaultSheetValue={op.choiceDescription}
+                          defaultSheetValue={op.itemFrameworkOneResponseChoiceExplanation}
                           actualLableValue={'assessmentManuscriptSecondary'}
                           mode={'revise'}
                           onClickSave={(innerText) => {
-                            setQuestionOptionList((opArr) => {
-                              opArr.forEach((element) => {
-                                if (element.id === op.id) {
-                                  element.choiceDescription = innerText;
-                                }
-                              });
-                              return opArr;
+                            let opArr = itemFrameworkOneResponseChoice;
+                            opArr.forEach((element) => {
+                              if (element.itemFrameworkOneResponseChoice === op.itemFrameworkOneResponseChoice) {
+                                element.itemFrameworkOneResponseChoiceExplanation = innerText;
+                              }
+                            });
+                            dispatch({
+                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                              payload: {
+                                stateName: 'itemFrameworkOneResponseChoice',
+                                value: opArr
+                              }
                             });
                           }}
                         />
@@ -647,12 +591,12 @@ export const DisplayPaneFive = () => {
                               type: SET_POPUP_VALUE,
                               payload: {
                                 isPopUpValue: `RESPONSE_CHOICE_DESCRIPTION_${key}`,
-                                popupMode: `OPTION_${key}`
+                                popupMode: op
                               }
                             });
                           }}
                         >
-                          {ReactHTMLParser(op.choiceDescription)}
+                          {ReactHTMLParser(op.itemFrameworkOneResponseChoiceExplanation)}
                         </div>
                       </div>
                     </>
@@ -689,7 +633,15 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(responseDescriptionText)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseExplanation)}
+            </div>
+          </div>
+          <div>
+            <div
+              style={{
+                height: '55px'
+              }}
+            >
             </div>
           </div>
         </div>
@@ -756,11 +708,18 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={innerContent}
+        defaultSheetValue={itemFrameworkOne?.itemFrameworkOneMedia || ''}
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
-          setInnerContent(innerText);
+          // setInnerContent(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneMedia',
+              value: innerText
+            }
+          });
         }}
       />
       <PopUpTextSheet
@@ -771,11 +730,18 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={labelText}
+        defaultSheetValue={itemFrameworkOne?.itemFrameworkOneLabel || ''}
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
-          setLabelText(innerText);
+          // setLabelText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneLabel',
+              value: innerText
+            }
+          });
         }}
       />
       <PopUpTextSheet
@@ -786,11 +752,18 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={responselabelText}
+        defaultSheetValue={itemInformation?.itemFrameworkOneResponseLabel || ''}
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
-          setResponseLabelText(innerText);
+          // setResponseLabelText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneResponseLabel',
+              value: innerText
+            }
+          });
         }}
       />
       <PopUpTextSheet
@@ -801,11 +774,18 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={itemDescriptionText}
+        defaultSheetValue={itemInformation?.itemFrameworkOneExplanation || ''}
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
-          setItemDescriptionText(innerText);
+          // setItemDescriptionText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneExplanation',
+              value: innerText
+            }
+          });
         }}
       />
       <PopUpTextSheet
@@ -816,11 +796,18 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={responseDescriptionText}
+        defaultSheetValue={itemInformation?.itemFrameworkOneResponseExplanation || ''}
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
-          setResponseDescriptionText(innerText);
+          // setResponseDescriptionText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneResponseExplanation',
+              value: innerText
+            }
+          });
         }}
       />
 
@@ -831,7 +818,7 @@ export const DisplayPaneFive = () => {
         headerOneBadgeOne={'information'}
         nextPopUpValue={''}
         inputHeader={'item'}
-        primaryheader={'framework'}
+        primaryheader={'configuration'}
         isItemFramework={true}
         mode={'revise'}
       />
@@ -841,6 +828,7 @@ export const DisplayPaneFive = () => {
         headerPanelColour={'genericOne'}
         headerOne={'item'}
         headerOneBadgeOne={'information'}
+        choiceOb={popupMode}
         inputHeader={'response'}
         primaryheader={'choice'}
         nextPopUpValue={''}

@@ -1,8 +1,23 @@
 import {
   SET_TYPE_REDUCER_STATE,
   CLEAR_ITEM_REDUCER_STATE,
-  SET_ITEM_DYNAMIC_SINGLE_STATE
+  SET_ITEM_DYNAMIC_SINGLE_STATE,
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  ADD_ITEM_OPTION_OBJECT,
+  REMOVE_ITEM_OPTION_OBJECT
 } from '../actionType';
+
+const optionLabel =
+  "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
+const responseChoiceDescription =
+  "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>description</span>&nbsp;";
+const itemLabel = '<span>item</span>&nbsp';
+const itemLabelText =
+  "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
+const itemDescription =
+  "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>description</span>&nbsp;";
+const responseDescription =
+  "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>description</span>&nbsp;";
 
 const initialState = {
   itemInformation: {
@@ -31,40 +46,123 @@ const initialState = {
         itemTypeSecondary: []
       }
     },
+    // informationFramework: {
+    //   itemFrameworkOne: {
+    //     itemFrameworkOneBlank: '',
+    //     itemFrameworkOneExplanation: itemDescription,
+    //     itemFrameworkOneLevel: '',
+    //     itemFrameworkOneLabel: itemLabelText,
+    //     itemFrameworkOneGroup: [],
+    //     itemFrameworkOneMedia: itemLabel,
+    //     itemFrameworkOnePolarity: '',
+    //     itemFrameworkOneResponse: '',
+    //     itemFrameworkOneResponseAttachment: '',
+    //     itemFrameworkOneResponseCorrect: '',
+    //     itemFrameworkOneResponseOption: [
+    //       {
+    //         id: 1,
+    //         itemFrameworkOneResponseChoiceColumnMatch: '',
+    //         itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
+    //         itemFrameworkOneResponseChoiceMedia: optionLabel,
+    //         itemFrameworkOneResponseChoiceWeightage: '',
+    //         itemFrameworkOneResponseChoiceScore: '',
+    //         itemFrameworkOneResponseChoicePolarity: ''
+    //       },
+    //       {
+    //         id: 2,
+    //         itemFrameworkOneResponseChoiceColumnMatch: '',
+    //         itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
+    //         itemFrameworkOneResponseChoiceMedia: optionLabel,
+    //         itemFrameworkOneResponseChoiceWeightage: '',
+    //         itemFrameworkOneResponseChoiceScore: '',
+    //         itemFrameworkOneResponseChoicePolarity: ''
+    //       },
+    //       {
+    //         id: 3,
+    //         itemFrameworkOneResponseChoiceColumnMatch: '',
+    //         itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
+    //         itemFrameworkOneResponseChoiceMedia: optionLabel,
+    //         itemFrameworkOneResponseChoiceWeightage: '',
+    //         itemFrameworkOneResponseChoiceScore: '',
+    //         itemFrameworkOneResponseChoicePolarity: ''
+    //       },
+    //       {
+    //         id: 4,
+    //         itemFrameworkOneResponseChoiceColumnMatch: '',
+    //         itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
+    //         itemFrameworkOneResponseChoiceMedia: optionLabel,
+    //         itemFrameworkOneResponseChoiceWeightage: '',
+    //         itemFrameworkOneResponseChoiceScore: '',
+    //         itemFrameworkOneResponseChoicePolarity: ''
+    //       }
+    //     ],
+    //     itemFrameworkOneResponseExplanation: responseDescription,
+    //     itemFrameworkOneResponseLabel: '',
+    //     itemFrameworkOneScore: '',
+    //     itemFrameworkOneSection: [],
+    //     itemFrameworkOneSequence: '',
+    //     itemFrameworkOneTime: '',
+    //     itemFrameworkOneType: '',
+    //     itemFrameworkOneWord: '',
+    //     itemFrameworkOneWeightage: ''
+    //   }
+    // },
     informationFramework: {
-      itemFrameworkOneBlank: '',
-      itemFrameworkOneDifficulty: '',
-      itemFrameworkOneGroup: [],
       itemFrameworkOne: {
         itemFrameworkOneBlank: '',
-        itemFrameworkOneDescription: '',
-        itemFrameworkOneDifficulty: '',
+        itemFrameworkOneLabel: itemLabelText,
         itemFrameworkOneGroup: [],
-        itemFrameworkOneMedia: '',
+        itemFrameworkOneMedia: itemLabel,
         itemFrameworkOnePolarity: '',
         itemFrameworkOneResponse: '',
-        itemFrameworkOneResponseCorrect: '',
-        itemFrameworkOneResponseOption: {
-          ColumnMatch: '',
-          itemFrameworkOneResponseOptionColumnMatch: '',
-          itemFrameworkOneResponseOptionDescription: '',
-          itemFrameworkOneResponseOptionMedia: '',
-          itemFrameworkOneResponseOptionWeightage: '',
-          itemFrameworkOneScore: '',
-          itemFrameworkOneSection: '',
-          itemFrameworkOneSequence: '',
-          itemFrameworkOneTime: '',
-          itemFrameworkOneType: '',
-          itemFrameworkOneWord: ''
-        }
-      },
-      itemFrameworkOnePolarity: '',
-      itemFrameworkOneResponseCorrect: '',
-      itemFrameworkOneScore: '',
-      itemFrameworkOneSequence: '',
-      itemFrameworkOneTime: '',
-      itemFrameworkOneType: '',
-      itemFrameworkOneWord: ''
+        itemFrameworkOneResponseAttachment: '',
+        itemFrameworkOneResponseCorrect: ['1'],
+        itemFrameworkOneResponseChoice: [
+          {
+            itemFrameworkOneResponseChoice: '1',
+            itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceWeightage: '',
+            itemFrameworkOneResponseChoiceScore: '',
+            itemFrameworkOneResponseChoicePolarity: ''
+          },
+          {
+            itemFrameworkOneResponseChoice: '2',
+            itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceWeightage: '',
+            itemFrameworkOneResponseChoiceScore: '',
+            itemFrameworkOneResponseChoicePolarity: ''
+          },
+          {
+            itemFrameworkOneResponseChoice: '3',
+            itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceWeightage: '',
+            itemFrameworkOneResponseChoiceScore: '',
+            itemFrameworkOneResponseChoicePolarity: ''
+          },
+          {
+            itemFrameworkOneResponseChoice: '4',
+            itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceWeightage: '',
+            itemFrameworkOneResponseChoiceScore: '',
+            itemFrameworkOneResponseChoicePolarity: ''
+          }
+        ],
+        itemFrameworkOneResponseLabel: '',
+        itemFrameworkOneScore: '',
+        itemFrameworkOneSection: [],
+        itemFrameworkOneSequence: '',
+        itemFrameworkOneTime: '',
+        itemFrameworkOneType: '',
+        itemFrameworkOneWord: {
+          itemFrameworkOneWordMaximum: '',
+          itemFrameworkOneWordMinimum: ''
+        },
+        itemFrameworkOneWeightage: ''
+      }
     }
   }
 };
@@ -90,6 +188,20 @@ const ItemCreateReducer = (istate = initialState, action) => {
             [action.payload.stateName]: {
               ...istate.itemInformation[action.payload.objectName][action.payload.stateName],
               [action.payload.actualStateName]: action.payload.value
+            }
+          }
+        }
+      };
+    case SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        itemInformation: {
+          ...istate.itemInformation,
+          informationFramework: {
+            ...istate.itemInformation.informationFramework,
+            itemFrameworkOne: {
+              ...istate.itemInformation.informationFramework.itemFrameworkOne,
+              [action.payload.stateName]: action.payload.value
             }
           }
         }
