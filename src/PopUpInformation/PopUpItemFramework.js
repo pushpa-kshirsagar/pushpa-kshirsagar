@@ -8,7 +8,11 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
+import {
+  POPUP_CLOSE,
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_NEXT_POPUP
+} from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 import { input } from 'aws-amplify';
@@ -16,6 +20,10 @@ import { input } from 'aws-amplify';
 const PopUpItemFramework = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
+  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+  const itemFrameworkOneResponseChoice =
+    itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
+
   const {
     isActive,
     primaryheader,
@@ -23,6 +31,7 @@ const PopUpItemFramework = (props) => {
     headerPanelColour,
     headerOne,
     headerOneBadgeOne,
+    choiceOb = null,
     basicInfo,
     mode,
     isItemFramework = false
@@ -34,8 +43,57 @@ const PopUpItemFramework = (props) => {
   const [score, setscore] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
+console.log("ITEM ", itemFrameworkOneResponseChoice);
+  const handleClick = () => {
+    console.log(blank, group, level, polarity, score, time, weightage, isItemFramework);
+    if (isItemFramework) {
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneBlank', value: blank }
+      });
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneLevel', value: level }
+      });
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOnePolarity', value: polarity }
+      });
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneScore', value: score }
+      });
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneTime', value: time }
+      });
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
+      });
+    } else {
+      if (choiceOb !== null) {
+        let tempArr = itemFrameworkOneResponseChoice;
+        tempArr.forEach((element) => {
+          if (element.id === choiceOb.id) {
+            element.itemFrameworkOneResponseChoiceScore = score;
+            element.itemFrameworkOneResponseChoiceWeightage = weightage;
+            element.itemFrameworkOneResponseChoice = weightage;
+            element.itemFrameworkOneResponseChoicePolarity = polarity;
+          }
+        });
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneResponseChoice',
+            value: tempArr
+          }
+        });
+      }
+    }
+    dispatch({ type: POPUP_CLOSE });
+  };
 
-  const handleClick = () => {};
   return (
     <div>
       <Popup isActive={isActive}>
@@ -100,9 +158,9 @@ const PopUpItemFramework = (props) => {
                 label={'level'}
                 dataValue={'level'}
                 listSelect={[
-                  { id: 'High-Level', name: 'High-Level' },
-                  { id: 'Low-Level', name: 'Low-Level' },
-                  { id: 'Mid-Level', name: 'Mid-Level' }
+                  { id: 'HIGH_LEVEL', name: 'High-Level' },
+                  { id: 'LOW_LEVEL', name: 'Low-Level' },
+                  { id: 'MEDIUM_LEVEL', name: 'Mid-Level' }
                 ]}
                 errorMsg={() => {}}
                 onChange={(e) => {
