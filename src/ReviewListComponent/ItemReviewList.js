@@ -107,9 +107,10 @@ const ItemReviewList = (props) => {
     let tempArr = [];
     let stats = e.currentTarget.getAttribute('status');
     ITEM_REVIEW_LIST_POPUP_OPTION.map((element) => {
-      if (stats === 'PUBLISHED' && element.data === 'revise')
-        tempArr.push({ ...element, disabled: true });
-      else tempArr.push(element);
+      // if (stats === 'PUBLISHED' && element.data === 'revise')
+      //   tempArr.push({ ...element, disabled: true });
+      // else tempArr.push(element);
+      tempArr.push(element);
     });
     dispatch({
       type: SET_POPUP_STATE,
