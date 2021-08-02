@@ -46,71 +46,11 @@ const initialState = {
         itemTypeSecondary: []
       }
     },
-    // informationFramework: {
-    //   itemFrameworkOne: {
-    //     itemFrameworkOneBlank: '',
-    //     itemFrameworkOneExplanation: itemDescription,
-    //     itemFrameworkOneLevel: '',
-    //     itemFrameworkOneLabel: itemLabelText,
-    //     itemFrameworkOneGroup: [],
-    //     itemFrameworkOneMedia: itemLabel,
-    //     itemFrameworkOnePolarity: '',
-    //     itemFrameworkOneResponse: '',
-    //     itemFrameworkOneResponseAttachment: '',
-    //     itemFrameworkOneResponseCorrect: '',
-    //     itemFrameworkOneResponseOption: [
-    //       {
-    //         id: 1,
-    //         itemFrameworkOneResponseChoiceColumnMatch: '',
-    //         itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
-    //         itemFrameworkOneResponseChoiceMedia: optionLabel,
-    //         itemFrameworkOneResponseChoiceWeightage: '',
-    //         itemFrameworkOneResponseChoiceScore: '',
-    //         itemFrameworkOneResponseChoicePolarity: ''
-    //       },
-    //       {
-    //         id: 2,
-    //         itemFrameworkOneResponseChoiceColumnMatch: '',
-    //         itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
-    //         itemFrameworkOneResponseChoiceMedia: optionLabel,
-    //         itemFrameworkOneResponseChoiceWeightage: '',
-    //         itemFrameworkOneResponseChoiceScore: '',
-    //         itemFrameworkOneResponseChoicePolarity: ''
-    //       },
-    //       {
-    //         id: 3,
-    //         itemFrameworkOneResponseChoiceColumnMatch: '',
-    //         itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
-    //         itemFrameworkOneResponseChoiceMedia: optionLabel,
-    //         itemFrameworkOneResponseChoiceWeightage: '',
-    //         itemFrameworkOneResponseChoiceScore: '',
-    //         itemFrameworkOneResponseChoicePolarity: ''
-    //       },
-    //       {
-    //         id: 4,
-    //         itemFrameworkOneResponseChoiceColumnMatch: '',
-    //         itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
-    //         itemFrameworkOneResponseChoiceMedia: optionLabel,
-    //         itemFrameworkOneResponseChoiceWeightage: '',
-    //         itemFrameworkOneResponseChoiceScore: '',
-    //         itemFrameworkOneResponseChoicePolarity: ''
-    //       }
-    //     ],
-    //     itemFrameworkOneResponseExplanation: responseDescription,
-    //     itemFrameworkOneResponseLabel: '',
-    //     itemFrameworkOneScore: '',
-    //     itemFrameworkOneSection: [],
-    //     itemFrameworkOneSequence: '',
-    //     itemFrameworkOneTime: '',
-    //     itemFrameworkOneType: '',
-    //     itemFrameworkOneWord: '',
-    //     itemFrameworkOneWeightage: ''
-    //   }
-    // },
     informationFramework: {
       itemFrameworkOne: {
         itemFrameworkOneBlank: '',
         itemFrameworkOneLabel: itemLabelText,
+        itemFrameworkOneExplanation: itemDescription,
         itemFrameworkOneGroup: [],
         itemFrameworkOneMedia: itemLabel,
         itemFrameworkOnePolarity: '',
@@ -121,6 +61,7 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '1',
             itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -129,6 +70,7 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '2',
             itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -137,6 +79,7 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '3',
             itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -145,6 +88,7 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '4',
             itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -152,6 +96,7 @@ const initialState = {
           }
         ],
         itemFrameworkOneResponseLabel: '',
+        itemFrameworkOneResponseExplanation: responseDescription,
         itemFrameworkOneScore: '',
         itemFrameworkOneSection: [],
         itemFrameworkOneSequence: '',

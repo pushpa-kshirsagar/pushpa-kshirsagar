@@ -8,7 +8,8 @@ import {
   SET_ITEM_DYNAMIC_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_ITEM_REVIEW_LIST_SAGA
+  GET_ITEM_REVIEW_LIST_SAGA,
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import { ITEM_REVISE_URL, ITEM_REVIEW_URL } from '../../endpoints';
 import Store from '../../store';
@@ -46,7 +47,11 @@ function* workerReviewInfoItemSaga(data) {
         }
       });
       if (isReviseMode) {
-        const { informationBasic, informationAllocation } = userResponse.responseObject[0];
+        const {
+          informationBasic,
+          informationAllocation,
+          informationFramework
+        } = userResponse.responseObject[0];
         yield put({
           type: SET_TYPE_REDUCER_STATE,
           payload: informationBasic
@@ -207,6 +212,91 @@ function* workerReviewInfoItemSaga(data) {
             }
           });
         }
+        const {
+          itemFrameworkOneBlank = '',
+          itemFrameworkOneExplanation = '',
+          itemFrameworkOneLabel = '',
+          itemFrameworkOneLevel = '',
+          itemFrameworkOneMedia = '',
+          itemFrameworkOnePolarity = '',
+          itemFrameworkOneResponseChoice = [],
+          itemFrameworkOneResponseCorrect = '',
+          itemFrameworkOneResponseExplanation = '',
+          itemFrameworkOneResponseLabel = '',
+          itemFrameworkOneScore = '',
+          itemFrameworkOneTime = '',
+          itemFrameworkOneType = '',
+          itemFrameworkOneWeightage = ''
+        } = informationFramework?.itemFrameworkOne;
+
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneBlank', value: itemFrameworkOneBlank }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneExplanation', value: itemFrameworkOneExplanation }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneLabel', value: itemFrameworkOneLabel }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneLevel', value: itemFrameworkOneLevel }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneMedia', value: itemFrameworkOneMedia }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOnePolarity', value: itemFrameworkOnePolarity }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneResponseChoice',
+            value: itemFrameworkOneResponseChoice
+          }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneResponseCorrect',
+            value: itemFrameworkOneResponseCorrect
+          }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneResponseExplanation',
+            value: itemFrameworkOneResponseExplanation
+          }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneResponseLabel',
+            value: itemFrameworkOneResponseLabel
+          }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneScore', value: itemFrameworkOneScore }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneTime', value: itemFrameworkOneTime }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneType', value: itemFrameworkOneType }
+        });
+        yield put({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneWeightage', value: itemFrameworkOneWeightage }
+        });
       }
     }
     console.log('loading end');

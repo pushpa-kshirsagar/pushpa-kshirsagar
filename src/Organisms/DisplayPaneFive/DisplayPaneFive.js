@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {
   ITEM_INFO_REVISE_SAGA,
   LOADER_START,
+  POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   SET_PANE_THREE_ITEM_PREVIEW_MODE,
@@ -214,7 +215,7 @@ export const DisplayPaneFive = () => {
         createMode
       }
     });
-    dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
+    // dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
   const onClickRevise = () => {
     console.log('ON CLICK REVISE ICON');
@@ -282,6 +283,7 @@ export const DisplayPaneFive = () => {
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
         payload: 'revise'
       });
+      dispatch({ type: POPUP_CLOSE });
     }
   };
 
@@ -309,7 +311,7 @@ export const DisplayPaneFive = () => {
   };
 
   const BackHandlerEvent = (e) => {};
-console.log("ITEM INFO", itemInformation);
+  console.log('ITEM INFO', itemInformation);
   return (
     <>
       <div>
@@ -535,7 +537,10 @@ console.log("ITEM INFO", itemInformation);
                             let opArr = itemFrameworkOneResponseChoice;
                             // setQuestionOptionList((opArr) => {
                             opArr.forEach((element) => {
-                              if (element.itemFrameworkOneResponseChoice === op.itemFrameworkOneResponseChoice) {
+                              if (
+                                element.itemFrameworkOneResponseChoice ===
+                                op.itemFrameworkOneResponseChoice
+                              ) {
                                 element.itemFrameworkOneResponseChoiceMedia = innerText;
                               }
                             });
@@ -563,7 +568,10 @@ console.log("ITEM INFO", itemInformation);
                           onClickSave={(innerText) => {
                             let opArr = itemFrameworkOneResponseChoice;
                             opArr.forEach((element) => {
-                              if (element.itemFrameworkOneResponseChoice === op.itemFrameworkOneResponseChoice) {
+                              if (
+                                element.itemFrameworkOneResponseChoice ===
+                                op.itemFrameworkOneResponseChoice
+                              ) {
                                 element.itemFrameworkOneResponseChoiceExplanation = innerText;
                               }
                             });
@@ -641,8 +649,7 @@ console.log("ITEM INFO", itemInformation);
               style={{
                 height: '55px'
               }}
-            >
-            </div>
+            ></div>
           </div>
         </div>
       </div>

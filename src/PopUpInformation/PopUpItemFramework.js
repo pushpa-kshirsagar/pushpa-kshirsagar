@@ -43,7 +43,7 @@ const PopUpItemFramework = (props) => {
   const [score, setscore] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
-console.log("ITEM ", itemFrameworkOneResponseChoice);
+console.log("ITEM ", itemFrameworkOneResponseChoice, choiceOb);
   const handleClick = () => {
     console.log(blank, group, level, polarity, score, time, weightage, isItemFramework);
     if (isItemFramework) {
