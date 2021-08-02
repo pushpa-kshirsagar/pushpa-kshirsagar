@@ -46,7 +46,7 @@ function* workerReviewListItemsSaga(data) {
         yield put({
           type: SET_MIDDLEPANE_STATE,
           payload: {
-            middlePaneHeader: data.payload.middlePaneHeader,
+            middlePaneHeader: 'items',
             middlePaneHeaderBadgeOne: data.payload.BadgeOne,
             middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
             middlePaneHeaderBadgeThree: '',

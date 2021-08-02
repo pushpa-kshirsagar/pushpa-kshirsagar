@@ -104,6 +104,13 @@ const ItemReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let tempArr = [];
+    let stats = e.currentTarget.getAttribute('status');
+    ITEM_REVIEW_LIST_POPUP_OPTION.map((element) => {
+      if (stats === 'PUBLISHED' && element.data === 'revise')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    });
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -112,9 +119,9 @@ const ItemReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ITEM_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: tempArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
-        selectedTagStatus: e.currentTarget.getAttribute('status'),
+        selectedTagStatus: stats,
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
       }
     });
