@@ -611,7 +611,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
       } else if (keyVal === 'assignments') {
         assignmentsDistinctApiCall(
           selectedAssociateInfo,
-          'active',
+          'inactive',
           countPage,
           dispatch,
           'distinct',
@@ -619,7 +619,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
         );
         filterModeKey = 'allocateToAssignment';
         dispatch({ type: POPUP_CLOSE });
-      }else {
+      } else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,
           payload: { badgeValue: dataVal, keyValue: keyVal }
@@ -692,6 +692,28 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'assignments'
         );
         dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'assessments' && middlePaneHeaderBadgeOne === 'distinct') {
+        getAssessmentDistinctApiCall(
+          selectedAssociateInfo,
+          'active',
+          countPage,
+          dispatch,
+          'distinct',
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
+        );
+        filterModeKey = 'allocateToAssessment';
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'assessees' && middlePaneHeaderBadgeOne === 'distinct') {
+        getAssesseeDistinctApiCall(
+          selectedAssociateInfo,
+          'active',
+          countPage,
+          dispatch,
+          dataVal,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
+        );
+        filterModeKey = 'allocateToAssessee';
+        dispatch({ type: POPUP_CLOSE });
       } else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,
@@ -708,6 +730,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'groups',
           cardValue
         );
+
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
         getCultureProfileTypeApiCall(
@@ -739,8 +762,10 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
+        filterModeKey = 'cultureProfileAllocateToGroup';
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
         getCultureProfileTypeApiCall(
@@ -764,6 +789,17 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'hierarchy',
           middlePaneHeader
         );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'assignments') {
+        assignmentsDistinctApiCall(
+          selectedAssociateInfo,
+          'active',
+          countPage,
+          dispatch,
+          'distinct',
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
+        );
+        filterModeKey = 'allocateToAssignment';
         dispatch({ type: POPUP_CLOSE });
       } else {
         dispatch({
@@ -826,8 +862,10 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           dispatch,
           'groups',
           'job profiles',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
+        filterModeKey = 'jobProfileAllocateToGroup';
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
         getJobProfileTypeApiCall(
@@ -839,6 +877,17 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'job profiles',
           cardValue
         );
+        dispatch({ type: POPUP_CLOSE });
+      } else if (keyVal === 'assignments') {
+        assignmentsDistinctApiCall(
+          selectedAssociateInfo,
+          'active',
+          countPage,
+          dispatch,
+          'distinct',
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
+        );
+        filterModeKey = 'allocateToAssignment';
         dispatch({ type: POPUP_CLOSE });
       } else {
         dispatch({

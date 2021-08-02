@@ -55,7 +55,8 @@ function* workerReviewListAssesseeSaga(data) {
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: data.payload.HeaderOne + 'DistinctReviewList',
           scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
+          showMiddlePaneState: true,
+          isSelectActive: data.payload.isSelectActive
         }
       });
       yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });

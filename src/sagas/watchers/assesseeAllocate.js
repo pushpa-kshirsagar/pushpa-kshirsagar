@@ -7,7 +7,8 @@ import {
   ASSIGNMENT_REVIEW_DISTINCT_SAGA,
   SET_ASSIGNMENT_RELATED_LIST,
   ASSESSEE_ALLOCATE_ASSIGNMENT_SAGA,
-  ASSESSEE_ALLOCATE_GRP_SAGA
+  ASSESSEE_ALLOCATE_GRP_SAGA,
+  FILTERMODE
 } from '../../actionType';
 import { ASSESSEE_ALLOCATE, ASSESSEE_ALLOCATE_ASSIGNMENT } from '../../endpoints';
 import Store from '../../store';
@@ -45,6 +46,7 @@ function* workerAssesseeAllocateAssignmentSaga(data) {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'selectedTagsArray', value: [] }
       });
+      yield put({ type: FILTERMODE, payload: { FilterMode: '' } });
       yield put({ type: LOADER_STOP });
     } else {
       yield put({
@@ -83,6 +85,7 @@ function* workerAssesseeAllocateGrpSaga(data) {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'selectedTagsArray', value: [] }
       });
+      yield put({ type: FILTERMODE, payload: { FilterMode: '' } });
       yield put({ type: LOADER_STOP });
     } else {
       yield put({

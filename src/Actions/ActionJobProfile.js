@@ -177,7 +177,8 @@ export const getJobProfileGroupApiCall = (
   countPage,
   dispatch,
   targetValue,
-  cardValue = 'noCard'
+  cardValue = 'noCard',
+  isSelectActive = ''
 ) => {
   let requestObj = makeJobProfileGroupObj(
     selectedAssociateInfo,
@@ -202,7 +203,8 @@ export const getJobProfileGroupApiCall = (
       BadgeOne: targetValue,
       BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
       BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
-      isMiddlePaneList: true
+      isMiddlePaneList: true,
+      isSelectActive: isSelectActive
     }
   });
 };
@@ -492,12 +494,7 @@ export const getAssignmneJobProfileDistinctApiCall = (
     searchObj = {
       condition: 'in',
       value: {
-        in: [
-          'SUSPENDED',
-          'TERMINATED',
-          'ACTIVE',
-          'ARCHIVED'
-        ]
+        in: ['SUSPENDED', 'TERMINATED', 'ACTIVE', 'ARCHIVED']
       }
     };
   }

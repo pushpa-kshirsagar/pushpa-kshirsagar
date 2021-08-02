@@ -52,7 +52,8 @@ export const getAssesseeDistinctApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  isSelectActive = ''
 ) => {
   let requestObect = makeAssesseeReviewListRequestObject(
     selectedAssociateInfo,
@@ -76,7 +77,8 @@ export const getAssesseeDistinctApiCall = (
       HeaderOne: 'assessees',
       request: requestObect,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue
+      BadgeTwo: secondaryOptionCheckValue,
+      isSelectActive: isSelectActive
     }
   });
 };

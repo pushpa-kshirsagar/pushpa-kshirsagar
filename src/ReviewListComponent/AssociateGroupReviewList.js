@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  ASSOCIATE_ALLOCATE_SAGA,
   ASSOCIATE_POPUP_CLOSE,
   ASSOCIATE_REVIEW_DISTINCT_SAGA,
   FILTERMODE,
@@ -44,7 +45,8 @@ const AssociateGroupReviewList = (props) => {
     isSelectActive,
     unselectedTagsArray,
     selectedTagsArray,
-    allocatedTagsArray
+    allocatedTagsArray,
+    allocateStr
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { cardValue } = useSelector((state) => state.PopUpReducer);
@@ -111,8 +113,23 @@ const AssociateGroupReviewList = (props) => {
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'finish') {
-      console.log('allocatedTagsArray', allocatedTagsArray);
-      console.log('selectedTagsArray', selectedTagsArray);
+      console.log('allocateStr', allocateStr);
+      // let distinctAllocateStr = allocateStr === 'assesseesdistinct' ? 'assesseeDistinct' : '';
+      // if (distinctAllocateStr !== '' && selectedTagsArray.length !== 0) {
+      // if (distinctAllocateStr === 'assesseeDistinct') {
+      let request = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        associateDistinctAllocate: allocatedTagsArray,
+        associateDistinctAllocateInformation: {
+          associateGroup: selectedTagsArray
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({ type: ASSOCIATE_ALLOCATE_SAGA, payload: { request: request } });
+      //   }
+      // }
     }
     if (siftValue === 'cancle') {
       dispatch({

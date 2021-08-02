@@ -302,7 +302,8 @@ function* workerReviewCulProfileGroupListSaga(data) {
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'cultureProfilesGroupDistinctReviewList',
             scanCount: userResponse && userResponse.countTotal,
-            showMiddlePaneState: true
+            showMiddlePaneState: true,
+            isSelectActive: data.payload.isSelectActive
           }
         });
         console.log('loading end');
@@ -353,7 +354,8 @@ function* workerReviewJobProfileGroupListSaga(data) {
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'jobProfilesGroupDistinctReviewList',
             scanCount: userResponse && userResponse.countTotal,
-            showMiddlePaneState: true
+            showMiddlePaneState: true,
+            isSelectActive: data.payload.isSelectActive
           }
         });
         console.log('loading end');

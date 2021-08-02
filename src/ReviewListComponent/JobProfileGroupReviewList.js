@@ -4,6 +4,7 @@ import {
   ASSOCIATE_POPUP_CLOSE,
   FILTERMODE_ENABLE,
   GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
+  JOBPROFILE_ALLOCATE_SAGA,
   LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -19,6 +20,10 @@ import {
 } from '../PopUpConfig';
 import { getJobProfileGroupApiCall } from '../Actions/ActionJobProfile';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import Check from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+
 const JobProfileGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -35,7 +40,9 @@ const JobProfileGroupReviewList = (props) => {
     middlePaneHeader,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    unselectedTagsArray,
+    allocateStr,
+    allocatedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -89,6 +96,25 @@ const JobProfileGroupReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (siftValue === 'finish') {
+      console.log('allocateStr', allocateStr);
+      // let distinctAllocateStr = allocateStr === 'assesseesdistinct' ? 'assesseeDistinct' : '';
+      // if (distinctAllocateStr !== '' && selectedTagsArray.length !== 0) {
+      // if (distinctAllocateStr === 'assesseeDistinct') {
+      let request = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        jobProfileDistinctAllocate: allocatedTagsArray,
+        jobProfileDistinctAllocateInformation: {
+          jobProfileGroup: selectedTagsArray
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({ type: JOBPROFILE_ALLOCATE_SAGA, payload: { request: request } });
+      //   }
+      // }
+    }
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -165,6 +191,18 @@ const JobProfileGroupReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'jobProfileAllocateToGroup' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={[{ label: 'allocate', onClick: onClickFooter, Icon: ReviseIcon }]}
+          secondaryIcon={[
+            { label: 'cancle', onClick: onClickFooter, Icon: ClearIcon },
+            { label: 'finish', onClick: onClickFooter, Icon: Check }
+          ]}
         />
       )}
     </div>

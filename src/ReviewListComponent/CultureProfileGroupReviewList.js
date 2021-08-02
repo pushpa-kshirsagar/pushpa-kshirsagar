@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ASSOCIATE_POPUP_CLOSE,
+  CULTUREPROFILE_ALLOCATE_SAGA,
   FILTERMODE_ENABLE,
   GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
+  LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
@@ -18,6 +20,10 @@ import {
 } from '../PopUpConfig';
 import { getCultureProfileGroupApiCall } from '../Actions/ActionCultureProfile';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import Check from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+
 const CultureProfileGroupReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -34,7 +40,9 @@ const CultureProfileGroupReviewList = (props) => {
     middlePaneHeader,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    unselectedTagsArray,
+    allocateStr,
+    allocatedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -87,6 +95,25 @@ const CultureProfileGroupReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (siftValue === 'finish') {
+      console.log('allocateStr', allocateStr);
+      // let distinctAllocateStr = allocateStr === 'assesseesdistinct' ? 'assesseeDistinct' : '';
+      // if (distinctAllocateStr !== '' && selectedTagsArray.length !== 0) {
+      // if (distinctAllocateStr === 'assesseeDistinct') {
+      let request = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        cultureProfileDistinctAllocate: allocatedTagsArray,
+        cultureProfileDistinctAllocateInformation: {
+          cultureProfileGroup: selectedTagsArray
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({ type: CULTUREPROFILE_ALLOCATE_SAGA, payload: { request: request } });
+      //   }
+      // }
+    }
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -110,7 +137,8 @@ const CultureProfileGroupReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
+        popupContentArrValue:
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -126,7 +154,7 @@ const CultureProfileGroupReviewList = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   console.log('FilterMode', FilterMode);
- return (
+  return (
     <div>
       {reviewListDistinctData &&
         reviewListDistinctData.map((item, index) => {
@@ -162,6 +190,18 @@ const CultureProfileGroupReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'cultureProfileAllocateToGroup' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={[{ label: 'allocate', onClick: onClickFooter, Icon: ReviseIcon }]}
+          secondaryIcon={[
+            { label: 'cancle', onClick: onClickFooter, Icon: ClearIcon },
+            { label: 'finish', onClick: onClickFooter, Icon: Check }
+          ]}
         />
       )}
     </div>

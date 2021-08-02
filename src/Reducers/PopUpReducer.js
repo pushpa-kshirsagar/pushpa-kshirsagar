@@ -384,6 +384,9 @@ const PopUpReducer = (istate = initialState, action) => {
           ) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
           }
+          if(istate.selectedTagStatus === 'PUBLISHED' && action.payload.badgeValue !=='assignments'){
+            console.log('revise disabled');
+          }
           // if (action.payload.badgeValue === 'share' && istate.selectedTagShared === 'SHARED') {
           //   arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           // }

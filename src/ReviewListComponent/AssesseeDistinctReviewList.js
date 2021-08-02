@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  ASSESSEE_ALLOCATE_ASSIGNMENT_SAGA,
   ASSESSEE_INFO_CREATE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
   FILTERMODE,
@@ -20,6 +21,7 @@ import { assesseeStatus } from '../Actions/StatusAction';
 import { ASSESSEE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import {
   onClickCheckBoxSelection,
   onClickFlagSelection,
@@ -45,7 +47,9 @@ const AssesseeDistinctReviewList = (props) => {
     unselectedTagsArray,
     selectedFlagedArray,
     unselectedFlagedArray,
-    flagedValue
+    allocatedTagsArray,
+    flagedValue,
+    allocateStr
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -117,6 +121,7 @@ const AssesseeDistinctReviewList = (props) => {
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
+    dispatch({ type: FILTERMODE_ENABLE });
     if (
       siftValue === 'suspended' ||
       siftValue === 'terminated' ||
@@ -125,7 +130,6 @@ const AssesseeDistinctReviewList = (props) => {
       siftValue === 'unconfirmed'
     ) {
       siftApiCall(siftValue);
-      dispatch({ type: FILTERMODE_ENABLE });
     } else if (siftValue === 'flagCancel') {
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -137,6 +141,24 @@ const AssesseeDistinctReviewList = (props) => {
       });
     } else if (siftValue === 'flagFinish') {
       console.log('api call for multiple flag assessee');
+    } else if (siftValue === 'finish') {
+      console.log('allocateStr', allocateStr);
+      if (FilterMode === 'allocateToAssessee') {
+        let request = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assesseeDistinctAllocate: {
+            assesseeDistinct: selectedTagsArray
+          },
+          assesseeDistinctAllocateInformation: {
+            assignment: allocatedTagsArray
+          }
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({ type: ASSESSEE_ALLOCATE_ASSIGNMENT_SAGA, payload: { request: request } });
+      }
     } else {
       dispatch({ type: FILTERMODE_ENABLE });
     }
@@ -254,6 +276,18 @@ const AssesseeDistinctReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={flagPrimaryIcon}
           secondaryIcon={flagSecondaryIcon}
+        />
+      )}
+      {FilterMode === 'allocateToAssessee' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={[{ label: 'allocate', onClick: onClickFooter, Icon: ReviseIcon }]}
+          secondaryIcon={[
+            { label: 'cancle', onClick: onClickFooter, Icon: ClearIcon },
+            { label: 'finish', onClick: onClickFooter, Icon: Check }
+          ]}
         />
       )}
     </div>

@@ -180,20 +180,21 @@ const HeaderCard = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
   const timerFinished = () => {
+    let tempArr = ASSESSMENT_FINISH_POPUP_OPTION;
+    tempArr = [tempArr[0], { ...tempArr[1], disabled: true }];
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
         popupHeaderOne: 'assessment',
-        popupHeaderOneBadgeOne: '',
+        popupHeaderOneBadgeOne: 'time-out',
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSESSMENT_FINISH_POPUP_OPTION
+        popupContentArrValue: tempArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'paneSevenPopup' });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSix' });
-
   };
   useEffect(() => {
     const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;

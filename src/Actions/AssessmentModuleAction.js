@@ -286,7 +286,8 @@ export const getAssessmentDistinctApiCall = (
   secondaryOptionCheckValue,
   countPage,
   dispatch,
-  targetValue
+  targetValue,
+  isSelectActive = ''
 ) => {
   let requestObect = makeAssessmentReviewListRequestObject(
     selectedAssociateInfo,
@@ -307,7 +308,8 @@ export const getAssessmentDistinctApiCall = (
     payload: {
       request: requestObect,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue
+      BadgeTwo: secondaryOptionCheckValue,
+      isSelectActive: isSelectActive
     }
   });
 };

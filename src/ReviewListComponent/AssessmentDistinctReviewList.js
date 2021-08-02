@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  ASSESSMENT_ALLOCATE_ASSIGNMENT_SAGA,
   ASSESSMENT_REVIEW_DISTINCT_SAGA,
   ASSOCIATE_POPUP_CLOSE,
+  FILTERMODE,
   FILTERMODE_ENABLE,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
   LOADER_START,
@@ -18,6 +20,9 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentReviewListRequestObject } from '../Actions/GenericActions';
 import { ASSESSMENT_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import Check from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 const AssessmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -32,7 +37,8 @@ const AssessmentDistinctReviewList = (props) => {
     selectedAssociateInfo,
     selectedTagsArray,
     unselectedTagsArray,
-    isSelectActive
+    isSelectActive,
+    allocatedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -94,12 +100,41 @@ const AssessmentDistinctReviewList = (props) => {
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated' || siftValue === 'unpublished')
       siftApiCall(siftValue);
+    if (siftValue === 'finish') {
+      if (FilterMode === 'allocateToAssessment') {
+        let request = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assessmentDistinctAllocate: {
+            assessmentDistinct: selectedTagsArray
+          },
+          assessmentDistinctAllocateInformation: {
+            assignment: allocatedTagsArray
+          }
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({ type: ASSESSMENT_ALLOCATE_ASSIGNMENT_SAGA, payload: { request: request } });
+      }
+    }
+    if (siftValue === 'cancle') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'isSelectActive', value: '' }
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: '' }
+      });
+    }
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
@@ -167,6 +202,18 @@ const AssessmentDistinctReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'allocateToAssessment' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={[{ label: 'allocate', onClick: onClickFooter, Icon: ReviseIcon }]}
+          secondaryIcon={[
+            { label: 'cancle', onClick: onClickFooter, Icon: ClearIcon },
+            { label: 'finish', onClick: onClickFooter, Icon: Check }
+          ]}
         />
       )}
     </div>

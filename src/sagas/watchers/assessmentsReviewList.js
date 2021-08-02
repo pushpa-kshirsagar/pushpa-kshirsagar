@@ -57,11 +57,11 @@ function* workerReviewListAssessmentSaga(data) {
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assessmentDistinctReviewList',
           scanCount: userResponse && userResponse.countTotal,
-          showMiddlePaneState: true
+          showMiddlePaneState: true,
+          isSelectActive: data.payload.isSelectActive
         }
       });
       yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: userResponse.responseObject });
-
     } else {
       yield put({
         type: SET_POPUP_VALUE,

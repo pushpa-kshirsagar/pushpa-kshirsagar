@@ -11,7 +11,9 @@ import {
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
   ASSESSEE_ALLOCATE_ASSIGNMENT_SAGA,
-  ASSESSMENT_ALLOCATE_ASSIGNMENT_SAGA
+  ASSESSMENT_ALLOCATE_ASSIGNMENT_SAGA,
+  JOBPROFILE_ALLOCATE_ASSIGNMENT_SAGA,
+  CULTUREPROFILE_ALLOCATE_ASSIGNMENT_SAGA
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -95,14 +97,22 @@ const AssignmentDistinctReviewList = (props) => {
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
       let distinctAllocateStr =
-        allocateStr === 'assesseesgroup'
+        allocateStr === 'assesseesgroups'
           ? 'assesseeGroup'
           : allocateStr === 'assesseesdistinct'
           ? 'assesseeDistinct'
           : allocateStr === 'assessmentsdistinct'
           ? 'assessmentDistinct'
-          : allocateStr === 'assessmentsgroup'
+          : allocateStr === 'assessmentsgroups'
           ? 'assessmentGroup'
+          : allocateStr === 'culture profilesdistinct'
+          ? 'cultureProfileDistinct'
+          : allocateStr === 'culture profilesgroups'
+          ? 'cultureProfileGroup'
+          : allocateStr === 'job profilesdistinct'
+          ? 'jobProfileDistinct'
+          : allocateStr === 'job profilesgroups'
+          ? 'jobProfileGroup'
           : '';
       if (distinctAllocateStr !== '' && selectedTagsArray.length !== 0) {
         if (distinctAllocateStr === 'assesseeGroup' || distinctAllocateStr === 'assesseeDistinct') {
@@ -139,6 +149,50 @@ const AssignmentDistinctReviewList = (props) => {
           };
           dispatch({ type: LOADER_START });
           dispatch({ type: ASSESSMENT_ALLOCATE_ASSIGNMENT_SAGA, payload: { request: request } });
+        }
+        if (
+          distinctAllocateStr === 'cultureProfileDistinct' ||
+          distinctAllocateStr === 'cultureProfileGroup'
+        ) {
+          let request = {
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary,
+            cultureProfileDistinctAllocate: {
+              [distinctAllocateStr]: allocatedTagsArray
+            },
+            cultureProfileDistinctAllocateInformation: {
+              assignment: selectedTagsArray
+            }
+          };
+          dispatch({ type: LOADER_START });
+          dispatch({
+            type: CULTUREPROFILE_ALLOCATE_ASSIGNMENT_SAGA,
+            payload: { request: request }
+          });
+        }
+        if (
+          distinctAllocateStr === 'jobProfileDistinct' ||
+          distinctAllocateStr === 'jobProfileGroup'
+        ) {
+          let request = {
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary,
+            jobProfileDistinctAllocate: {
+              [distinctAllocateStr]: allocatedTagsArray
+            },
+            jobProfileDistinctAllocateInformation: {
+              assignment: selectedTagsArray
+            }
+          };
+          dispatch({ type: LOADER_START });
+          dispatch({
+            type: JOBPROFILE_ALLOCATE_ASSIGNMENT_SAGA,
+            payload: { request: request }
+          });
         }
       }
     }

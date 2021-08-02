@@ -10,7 +10,8 @@ import {
   SET_POPUP_STATE,
   SET_REQUEST_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  FILTERMODE
+  FILTERMODE,
+  ASSIGNMENT_ALLOCATE_SAGA
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -44,7 +45,8 @@ const AssignmentGroupReviewList = (props) => {
     isSelectActive,
     selectedTagsArray,
     unselectedTagsArray,
-    allocatedTagsArray
+    allocatedTagsArray,
+    allocateStr
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -110,8 +112,23 @@ const AssignmentGroupReviewList = (props) => {
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'finish') {
-      console.log('allocatedTagsArray', allocatedTagsArray);
-      console.log('selectedTagsArray', selectedTagsArray);
+      console.log('allocateStr', allocateStr);
+      let strall = allocateStr === 'assignmentsdistinct' ? 'assignmentDistinct' : '';
+      // if (strall !== '' && selectedTagsArray.length !== 0) {
+      // if (strall === 'assignmentDistinct') {
+      let request = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assignmentDistinctAllocate: allocatedTagsArray,
+        assignmentDistinctAllocateInformation: {
+          assignmentGroup: selectedTagsArray
+        }
+      };
+      dispatch({ type: LOADER_START });
+      dispatch({ type: ASSIGNMENT_ALLOCATE_SAGA, payload: { request: request } });
+      //   }
+      // }
     }
     if (siftValue === 'cancle') {
       dispatch({
