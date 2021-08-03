@@ -1426,7 +1426,7 @@ export const makeItemObj = (selectedAssociateInfo, filterKey, countPage, numberP
       searchObj = {
         condition: 'in',
         value: {
-          in: ['SUSPENDED', 'TERMINATED', 'ACTIVE']
+          in: ['SUSPENDED', 'TERMINATED', 'UNPUBLISHED', 'PUBLISHED']
         }
       };
     }
@@ -4105,7 +4105,7 @@ export const getAssessmentItemReqObj = (
       searchObj = {
         condition: 'in',
         value: {
-          in: ['SUSPENDED', 'TERMINATED','UNPUBLISHED']
+          in: ['SUSPENDED', 'TERMINATED', 'UNPUBLISHED']
         }
       };
     }

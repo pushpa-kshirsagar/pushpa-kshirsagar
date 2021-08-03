@@ -23,6 +23,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 export const DisplayPaneSeven = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
+  const [currentQuestionChoice, setcurrentQuestionChoice] = useState(0);
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
   const flagQuestion = () => {
     setIsQuestionFlaged((state) => !state);
@@ -38,6 +39,7 @@ export const DisplayPaneSeven = () => {
     if (clickedval === 'next') {
       if (currentQuestionIndex < assesseeAssessmentStartData.assessmentItem.length - 1) {
         setcurrentQuestionIndex(currentQuestionIndex + 1);
+        setcurrentQuestionChoice(null);
       } else {
         dispatch({
           type: SET_POPUP_STATE,
@@ -74,6 +76,10 @@ export const DisplayPaneSeven = () => {
     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
+  const handleRadioButton = (e) =>{
+    console.log(e.target.value);
+    setcurrentQuestionChoice(e.target.value)
+  }
   console.log('currentQuestionIndex', currentQuestionIndex);
   return (
     <>
@@ -100,7 +106,13 @@ export const DisplayPaneSeven = () => {
                   </span>
                 </div>
                 <div style={{ flex: '1' }} className="flex-center">
-                  <span style={{ fontWeight: 'bold' }}> 3 </span>
+                  <span style={{ fontWeight: 'bold' }}>
+                    {' '}
+                    {
+                      assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
+                        .itemFrameworkOneScore
+                    }{' '}
+                  </span>
                 </div>
                 <div style={{ flex: '1' }} className="flex-center">
                   <IconButton>
@@ -144,8 +156,8 @@ export const DisplayPaneSeven = () => {
                 <RadioGroup
                   aria-label="gender"
                   name="gender1"
-                  value={'value'}
-                  // onChange={nacl}
+                  value={currentQuestionChoice}
+                  onChange={handleRadioButton}
                 >
                   {assesseeAssessmentStartData.assessmentItem[
                     currentQuestionIndex
@@ -155,7 +167,13 @@ export const DisplayPaneSeven = () => {
                         <FormControlLabel
                           value={item.itemFrameworkOneResponseChoice}
                           control={<Radio />}
-                          label={item.itemFrameworkOneResponseChoice}
+                          label={
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: item.itemFrameworkOneResponseChoiceMedia
+                              }}
+                            />
+                          }
                         />
                       </Fragment>
                     );
