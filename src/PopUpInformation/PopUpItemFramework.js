@@ -27,6 +27,7 @@ const PopUpItemFramework = (props) => {
   const {
     isActive,
     primaryheader,
+    primaryheaderTwo = '',
     inputHeader,
     headerPanelColour,
     headerOne,
@@ -119,6 +120,7 @@ const PopUpItemFramework = (props) => {
                 <Fragment>
                   {inputHeader}&nbsp;
                   {primaryheader ? <span className={'headerBadge'}>{primaryheader}</span> : null}
+                  {primaryheaderTwo ? <span className={'headerBadge'}>{primaryheaderTwo}</span> : null}
                 </Fragment>
               </InputLabel>
               <div className={'infoSymbol'}></div>
