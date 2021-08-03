@@ -130,7 +130,7 @@ const ItemReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ITEM_REVIEW_LIST_POPUP_OPTION
+        value: tempArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

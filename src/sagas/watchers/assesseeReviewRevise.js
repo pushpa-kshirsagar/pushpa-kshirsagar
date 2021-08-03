@@ -14,7 +14,8 @@ import {
   ASSESSEE_INFO_REVISE_SAGA,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   ASSESSEE_REVIEW_DISTINCT_SAGA,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  GET_SIGNED_ASSESEE_NOTIFICATION
 } from '../../actionType';
 import { ASSESSEE_INFO_REVISE_URL, ASSESSEE_REVIEW_INFO_URL } from '../../endpoints';
 import Store from '../../store';
@@ -35,6 +36,8 @@ const assesseesReviewInfoApi = async (requestObj) => {
 
 function* workerReviewInfoAssesseeSaga(data) {
   try {
+    let assesseeId = data.payload.reqBody.assesseeId;
+    let associateId = data.payload.reqBody.associateId;
     const userResponse = yield call(assesseesReviewInfoApi, { data: data.payload.reqBody });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
@@ -45,7 +48,16 @@ function* workerReviewInfoAssesseeSaga(data) {
           type: SET_DISPLAY_TWO_SINGLE_STATE,
           payload: {
             stateName: 'leftPaneAssesseeInfo',
-            value: userResponse?.responseObject[0]
+            value: { assessee: userResponse?.responseObject[0] }
+          }
+        });
+        yield put({
+          type: GET_SIGNED_ASSESEE_NOTIFICATION,
+          payload: {
+            reqBody: {
+              assesseeId: assesseeId,
+              associateId: associateId
+            }
           }
         });
       } else {
@@ -407,7 +419,7 @@ function* workerReviseInfoAssesseeSaga(data) {
           type: SET_DISPLAY_TWO_SINGLE_STATE,
           payload: {
             stateName: 'leftPaneAssesseeInfo',
-            value: userResponse?.responseObject[0]
+            value: { assessee: userResponse?.responseObject[0] }
           }
         });
         yield put({ type: LOADER_STOP });

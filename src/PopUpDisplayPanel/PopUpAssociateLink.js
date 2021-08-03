@@ -72,7 +72,7 @@ const PopUpAssociateLink = () => {
       payload: { stateName: 'errorResponse', value: '' }
     });
     let preferedUserNames = [];
-    let constactInfo = leftPaneAssesseeInfo.informationContact;
+    let constactInfo = leftPaneAssesseeInfo?.assessee?.informationContact;
     if (constactInfo) {
       if (constactInfo?.assesseeAddressEmailPrimary?.assesseeAddressEmail !== '')
         preferedUserNames.push(constactInfo?.assesseeAddressEmailPrimary?.assesseeAddressEmail);

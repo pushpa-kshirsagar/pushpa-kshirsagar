@@ -78,12 +78,12 @@ export const DisplayPaneOne = () => {
     : '';
   const assesseeAlias = '';
   const assesseeSignIN = localStorage.getItem('assesseeId');
-  const assesseeName = leftPaneAssesseeInfo
-    ? leftPaneAssesseeInfo.informationBasic.assesseeNameFirst.trim() +
+  const assesseeName = leftPaneAssesseeInfo.assessee
+    ? leftPaneAssesseeInfo.assessee.informationBasic.assesseeNameFirst.trim() +
       ' ' +
-      leftPaneAssesseeInfo.informationBasic.assesseeNameOther.trim() +
+      leftPaneAssesseeInfo.assessee.informationBasic.assesseeNameOther.trim() +
       ' ' +
-      leftPaneAssesseeInfo.informationBasic.assesseeNameLast.trim()
+      leftPaneAssesseeInfo.assessee.informationBasic.assesseeNameLast.trim()
     : assesseeSignIN;
   const openCardPopup = (e) => {
     let popupContentArrValue = [];
@@ -156,12 +156,14 @@ export const DisplayPaneOne = () => {
         />
       </div>
       <div className="containerPadding">
-        <div className="containerPadding">
+        <div className="containerPadding" key={leftPaneAssesseeInfo}>
           <Card
             ImageOne={selectedAssociateInfo ? PersonIcon : null}
             textOneOne={assesseeName}
             textTwoOne={assesseeAlias}
             onClick={openCardPopup}
+            leftPaneAssesseeInfo={leftPaneAssesseeInfo}
+            isAlertActive={leftPaneAssesseeInfo?.notifications?.alert}
             tag={selectedAssociateInfo ? 'assessee_card' : 'assessee'}
           />
         </div>

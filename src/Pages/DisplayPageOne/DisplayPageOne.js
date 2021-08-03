@@ -140,9 +140,9 @@ const DisplayPageOne = () => {
   // const userEmail =
   // selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
   const userName = leftPaneAssesseeInfo
-    ? leftPaneAssesseeInfo.informationBasic.assesseeNameFirst.trim() +
+    ? leftPaneAssesseeInfo?.assessee?.informationBasic.assesseeNameFirst.trim() +
       ' ' +
-      leftPaneAssesseeInfo.informationBasic.assesseeNameLast.trim()
+      leftPaneAssesseeInfo?.assessee?.informationBasic.assesseeNameLast.trim()
     : '';
   const userEmail = assesseeId || '';
   const popupAllClose = () => {

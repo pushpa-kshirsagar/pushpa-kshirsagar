@@ -17,13 +17,16 @@ import {
   SET_ASSESSEE_REVISE_PASSWORD,
   LOADER_STOP,
   POPUP_CLOSE,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  GET_SIGNED_ASSESEE_NOTIFICATION
 } from '../../actionType';
 import {
   ASSESSEE_SIGN_IN_URL,
   ASSESSEE_SIGN_IN_INFO_URL,
-  ASSESSEE_CHANGE_PASSWORD_URL
+  ASSESSEE_CHANGE_PASSWORD_URL,
+  SIGNED_ASSESSEE_NOTIFICATION_URL
 } from '../../endpoints';
+import Store from '../../store';
 
 const apiCallFunction = async (requestObj) => {
   console.log(requestObj.data);
@@ -214,6 +217,40 @@ function* workerSetPassword(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* getSignedAsseseeNotificationSaga(data) {
+  try {
+    yield put({ type: LOADER_START });
+    const response = yield call(revisePasswordApi, {
+      data: data.payload.reqBody,
+      URL: SIGNED_ASSESSEE_NOTIFICATION_URL
+    });
+    console.log('res', Store.getState().DisplayPaneTwoReducer.leftPaneAssesseeInfo);
+    let b = Store.getState().DisplayPaneTwoReducer.leftPaneAssesseeInfo;
+    console.log('BBB', b);
+
+    if (response.responseCode === '000') {
+      let newB = { ...b, notifications: response.responseObject };
+      console.log('newBbb', newB);
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'leftPaneAssesseeInfo',
+          value: newB
+        }
+      });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    yield put({ type: POPUP_CLOSE });
+    yield put({ type: LOADER_STOP });
+  } catch (error) {
+    yield put({ type: LOADER_STOP });
+  }
+}
 function* workerSignInAssesseeInfo(data) {
   try {
     const userResponse = yield call(assesseeSignInInfoApi, { data: data.payload });
@@ -314,4 +351,5 @@ export default function* watchSignInAssesseeSaga() {
   yield takeLatest(ASSESSEE_SIGN_IN_SAGA, workerSignInAssesseeSaga);
   yield takeLatest(GET_ASSESSEE_SIGN_IN_INFO, workerSignInAssesseeInfo);
   yield takeLatest(SET_ASSESSEE_REVISE_PASSWORD, workerSetPassword);
+  yield takeLatest(GET_SIGNED_ASSESEE_NOTIFICATION, getSignedAsseseeNotificationSaga);
 }

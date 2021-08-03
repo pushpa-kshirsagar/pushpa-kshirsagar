@@ -17,7 +17,9 @@ import {
   SET_POPUP_STATE
 } from '../../actionType';
 import { ASSESSMENT_FINISH_POPUP_OPTION } from '../../PopUpConfig';
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 export const DisplayPaneSeven = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
@@ -34,8 +36,8 @@ export const DisplayPaneSeven = () => {
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
     if (clickedval === 'next') {
-      if (currentQuestionIndex < assesseeAssessmentStartData.assessmentItem.length) {
-        setcurrentQuestionIndex(currentQuestionIndex++);
+      if (currentQuestionIndex < assesseeAssessmentStartData.assessmentItem.length - 1) {
+        setcurrentQuestionIndex(currentQuestionIndex + 1);
       } else {
         dispatch({
           type: SET_POPUP_STATE,
@@ -51,18 +53,19 @@ export const DisplayPaneSeven = () => {
             selectedTagStatus: 'status'
           }
         });
-         dispatch({
+        dispatch({
           type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
           payload: { stateName: 'assesseeAssessmentStartData', value: null }
         });
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSix' });
         dispatch({ type: POPUP_OPEN, payload: 'paneSevenPopup' });
+        setcurrentQuestionIndex(-1);
       }
     }
     // dispatch({ type: NAVIGATOR_MODE });
   };
   useEffect(() => {
-    setcurrentQuestionIndex(1);
+    // setcurrentQuestionIndex(1);
   }, [assesseeAssessmentStartData]);
   const primaryIcon = [];
   const secondaryIcon = [
@@ -71,6 +74,7 @@ export const DisplayPaneSeven = () => {
     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
+  console.log('currentQuestionIndex', currentQuestionIndex);
   return (
     <>
       <div>
@@ -89,7 +93,10 @@ export const DisplayPaneSeven = () => {
               <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
                 <div style={{ flex: '2' }} className="flex-center">
                   <span style={{ fontWeight: 'bold' }}>
-                    {currentQuestionIndex + '/' + assesseeAssessmentStartData.assessmentItem.length}{' '}
+                    {currentQuestionIndex +
+                      1 +
+                      '/' +
+                      assesseeAssessmentStartData.assessmentItem.length}{' '}
                   </span>
                 </div>
                 <div style={{ flex: '1' }} className="flex-center">
@@ -121,6 +128,40 @@ export const DisplayPaneSeven = () => {
                   backgroundColor: 'rgba(0, 0, 0, 0.12)'
                 }}
               />
+              <Fragment>
+                {currentQuestionIndex !== -1 && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
+                          .itemFrameworkOneMedia
+                    }}
+                  ></div>
+                )}
+              </Fragment>
+
+              <div>
+                <RadioGroup
+                  aria-label="gender"
+                  name="gender1"
+                  value={'value'}
+                  // onChange={nacl}
+                >
+                  {assesseeAssessmentStartData.assessmentItem[
+                    currentQuestionIndex
+                  ].itemFrameworkOneResponseChoice.map((item) => {
+                    return (
+                      <Fragment>
+                        <FormControlLabel
+                          value={item.itemFrameworkOneResponseChoice}
+                          control={<Radio />}
+                          label={item.itemFrameworkOneResponseChoice}
+                        />
+                      </Fragment>
+                    );
+                  })}
+                </RadioGroup>
+              </div>
             </div>
           </Fragment>
         )}

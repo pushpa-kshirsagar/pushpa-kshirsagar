@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Button, Divider, IconButton } from '@material-ui/core';
 import Check from '@material-ui/icons/Check';
 import InputField from '../Atoms/InputField/InputField';
+import Badge from '@material-ui/core/Badge';
+import Notifications from '@material-ui/icons/NotificationsActive';
 
 const JsonRenderComponent = (props) => {
   const {
@@ -13,7 +15,9 @@ const JsonRenderComponent = (props) => {
     tertiaryOptionCheckValue = 'all',
     forthOptionCheckValue = '',
     setSecondaryOptionValueTwo = null,
-    setSecondaryOptionValueThree = null
+    setSecondaryOptionValueThree = null,
+    isNotificationAlert = false,
+    assignmentBellIconCount = 0
   } = props;
   const { popupContentArrValue } = useSelector((state) => state.PopUpReducer);
   let popUpOption = currentPopUpOption.length > 0 ? currentPopUpOption : popupContentArrValue;
@@ -48,25 +52,38 @@ const JsonRenderComponent = (props) => {
                       }
                       disabled={item.dataValue === 'switch' ? false : item.disabled}
                     >
-                      {item.data}
-                      {item.optionClass === 'optionSecondary' &&
-                      secondaryOptionCheckValue === item.dataValue ? (
-                        <IconButton className={'tick'}>
-                          <Check className={'selectionIcon'} />
-                        </IconButton>
-                      ) : null}
-                      {item.optionClass === 'optionTertiary' &&
-                      tertiaryOptionCheckValue === item.dataValue ? (
-                        <IconButton className={'tick'}>
-                          <Check className={'selectionIcon'} />
-                        </IconButton>
-                      ) : null}
-                      {item.optionClass === 'optionForth' &&
-                      forthOptionCheckValue === item.dataValue ? (
-                        <IconButton className={'tick'}>
-                          <Check className={'selectionIcon'} />
-                        </IconButton>
-                      ) : null}
+                      <span>
+                        {item.data}
+                        {item.optionClass === 'optionSecondary' &&
+                        secondaryOptionCheckValue === item.dataValue ? (
+                          <IconButton className={'tick'}>
+                            <Check className={'selectionIcon'} />
+                          </IconButton>
+                        ) : null}
+                        {item.optionClass === 'optionTertiary' &&
+                        tertiaryOptionCheckValue === item.dataValue ? (
+                          <IconButton className={'tick'}>
+                            <Check className={'selectionIcon'} />
+                          </IconButton>
+                        ) : null}
+                        {item.optionClass === 'optionForth' &&
+                        forthOptionCheckValue === item.dataValue ? (
+                          <IconButton className={'tick'}>
+                            <Check className={'selectionIcon'} />
+                          </IconButton>
+                        ) : null}
+                        {isNotificationAlert && assignmentBellIconCount !== 0 && item.data ==='assignments' ? (
+                          <Badge
+                            className={'badgeBox'}
+                            style={{ position: 'inherit' }}
+                            badgeContent={assignmentBellIconCount}
+                          >
+                            <IconButton className={'notifyIcon'} style={{ width: '56px' }}>
+                              <Notifications style={{ right: '0px' }} className={'selectionIcon'} />
+                            </IconButton>
+                          </Badge>
+                        ) : null}
+                      </span>
                     </Button>
                     {item.divider && <Divider light={item.divider === 'light'} key={index} />}
                   </div>
