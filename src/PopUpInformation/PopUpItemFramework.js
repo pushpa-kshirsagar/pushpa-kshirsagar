@@ -43,7 +43,8 @@ const PopUpItemFramework = (props) => {
   const [score, setscore] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
-console.log("ITEM ", itemFrameworkOneResponseChoice, choiceOb);
+  console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
+  console.log('Choice ob ', choiceOb);
   const handleClick = () => {
     console.log(blank, group, level, polarity, score, time, weightage, isItemFramework);
     if (isItemFramework) {
@@ -75,10 +76,9 @@ console.log("ITEM ", itemFrameworkOneResponseChoice, choiceOb);
       if (choiceOb !== null) {
         let tempArr = itemFrameworkOneResponseChoice;
         tempArr.forEach((element) => {
-          if (element.id === choiceOb.id) {
+          if (element.itemFrameworkOneResponseChoice === choiceOb.itemFrameworkOneResponseChoice) {
             element.itemFrameworkOneResponseChoiceScore = score;
             element.itemFrameworkOneResponseChoiceWeightage = weightage;
-            element.itemFrameworkOneResponseChoice = weightage;
             element.itemFrameworkOneResponseChoicePolarity = polarity;
           }
         });
@@ -91,6 +91,12 @@ console.log("ITEM ", itemFrameworkOneResponseChoice, choiceOb);
         });
       }
     }
+    setBlank('');
+    setlevel('');
+    setweightage('');
+    setscore('');
+    settime('');
+    setpolarity('');
     dispatch({ type: POPUP_CLOSE });
   };
 

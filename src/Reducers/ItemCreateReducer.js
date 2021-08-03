@@ -49,20 +49,20 @@ const initialState = {
     informationFramework: {
       itemFrameworkOne: {
         itemFrameworkOneBlank: '',
-        itemFrameworkOneLabel: itemLabelText,
-        itemFrameworkOneExplanation: itemDescription,
+        itemFrameworkOneLabel: '', //itemLabelText,
+        itemFrameworkOneExplanation: '', //itemDescription,
         itemFrameworkOneGroup: [],
-        itemFrameworkOneMedia: itemLabel,
+        itemFrameworkOneMedia: '', //itemLabel,
         itemFrameworkOnePolarity: '',
         itemFrameworkOneResponse: '',
         itemFrameworkOneResponseAttachment: '',
-        itemFrameworkOneResponseCorrect: ['1'],
+        itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseChoice: [
           {
             itemFrameworkOneResponseChoice: '1',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
-            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoicePolarity: ''
@@ -70,8 +70,8 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '2',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
-            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoicePolarity: ''
@@ -79,8 +79,8 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '3',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
-            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoicePolarity: ''
@@ -88,15 +88,15 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '4',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
-            itemFrameworkOneResponseChoiceMedia: optionLabel,
+            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoicePolarity: ''
           }
         ],
         itemFrameworkOneResponseLabel: '',
-        itemFrameworkOneResponseExplanation: responseDescription,
+        itemFrameworkOneResponseExplanation: '', //responseDescription,
         itemFrameworkOneScore: '',
         itemFrameworkOneSection: [],
         itemFrameworkOneSequence: '',

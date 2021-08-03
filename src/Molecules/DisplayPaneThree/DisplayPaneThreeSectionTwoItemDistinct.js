@@ -77,7 +77,8 @@ const DisplayPaneThreeSectionTwoItem = () => {
       innerInfo: 'No Information',
       isListCard: false,
       IconOne: null,
-      IconTwo: null
+      IconTwo: null,
+      isReviewLink: true
     },
     {
       id: 'a1-polarity',
@@ -197,6 +198,13 @@ const DisplayPaneThreeSectionTwoItem = () => {
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
     }
   };
+  const reviewFramework = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    if (labelName === 'media') {
+      dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
+    }
+  };
 
   return (
     <div
@@ -215,6 +223,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
               list={frameworkList}
               mode={reviewMode}
               onClickRevise={reviseFramework}
+              onClickReview={reviewFramework}
             />
           </div>
         </>
@@ -231,12 +240,14 @@ const DisplayPaneThreeSectionTwoItem = () => {
                         className=""
                         accordianObject={ob}
                         mode={reviewMode}
+                        onClickReview={reviewFramework}
                       />
                     ) : (
                       <DisplayPanelAccordianInformation
                         onClickRevise={reviseFramework}
                         accordianObject={ob}
                         mode={reviewMode}
+                        onClickReview={reviewFramework}
                       />
                     )}
                   </div>

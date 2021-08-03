@@ -14,10 +14,12 @@ const DisplayPanelAccordianInformation = (props) => {
     IconTwo,
     textOneOne = '',
     multiline = false,
-    isMultiInfoCard = false
+    isMultiInfoCard = false,
+    isReviewLink = false
   } = accordianObject;
   const [selectedBadge, setSelectedBadge] = useState('');
   const [selectedBadgeArray, setSelectedBadgeArray] = useState([]);
+  const reviewLabelClass = isReviewLink ? 'reviewLinkText' : '';
 
   useEffect(() => {
     if (
@@ -59,13 +61,15 @@ const DisplayPanelAccordianInformation = (props) => {
                           marginBottom: labelTextOneOneBadges.length > 0 ? '0' : '5px',
                           display: 'inline-block'
                         }}
-                        className={mode === 'revise' ? 'linkText' : ''}
+                        className={mode === 'revise' ? 'linkText' : reviewLabelClass}
                         onClick={
                           mode === 'revise'
                             ? (e) => {
                                 onClickRevise(e, selectedBadgeArray);
                               }
-                            : () => {}
+                            : (e) => {
+                              onClickReview(e);
+                            }
                         }
                         data-value={labelTextOneOne}
                         data-key={selectedBadge?.labelTextTwoBadge || ''}
@@ -302,8 +306,8 @@ const DisplayPanelAccordianInformation = (props) => {
                         marginBottom: labelTextOneOneBadges.length > 0 ? '0' : '5px',
                         display: 'inline-block'
                       }}
-                      className={mode === 'revise' ? 'linkText' : ''}
-                      onClick={mode === 'revise' ? onClickRevise : () => {}}
+                      className={mode === 'revise' ? 'linkText' : reviewLabelClass}
+                      onClick={mode === 'revise' ? onClickRevise : onClickReview}
                       data-value={labelTextOneOne}
                       data-key={selectedBadge?.labelTextOneOneBadge || ''}
                     >
