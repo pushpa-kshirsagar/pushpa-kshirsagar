@@ -428,7 +428,7 @@ export const DisplayPaneFive = () => {
               {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneMedia || itemLabel)}
             </div>
           </div>
-          <hr
+          {/* <hr
             style={{
               height: '1px',
               margin: '0',
@@ -436,7 +436,7 @@ export const DisplayPaneFive = () => {
               flexShrink: '0',
               backgroundColor: 'rgba(0, 0, 0, 0.12)'
             }}
-          />
+          /> */}
           <div>
             <div
               style={{
@@ -458,7 +458,7 @@ export const DisplayPaneFive = () => {
               {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation || itemDescription)}
             </div>
           </div>
-          <hr
+          {/* <hr
             style={{
               height: '1px',
               margin: '0',
@@ -466,7 +466,7 @@ export const DisplayPaneFive = () => {
               flexShrink: '0',
               backgroundColor: 'rgba(0, 0, 0, 0.12)'
             }}
-          />
+          /> */}
           <div>
             <div
               style={{
@@ -485,7 +485,7 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel || responseLabel)}
             </div>
           </div>
           <FormControl component="fieldset">
@@ -503,7 +503,7 @@ export const DisplayPaneFive = () => {
                     <div key={`op-${key}`}>
                       <div className="option-container" key={`option-${key}`}>
                         <FormControlLabel
-                        key={`radio-${key}`}
+                          key={`radio-${key}`}
                           className={'radio-button'}
                           value={`${op.itemFrameworkOneResponseChoice}`}
                           control={<StyledRadio onClick={handleClick} />}
@@ -624,7 +624,7 @@ export const DisplayPaneFive = () => {
               </RadioGroup>
             </div>
           </FormControl>
-          <hr
+          {/* <hr
             style={{
               height: '1px',
               margin: '0',
@@ -632,7 +632,7 @@ export const DisplayPaneFive = () => {
               flexShrink: '0',
               backgroundColor: 'rgba(0, 0, 0, 0.12)'
             }}
-          />
+          /> */}
           <div>
             <div
               style={{
@@ -851,6 +851,7 @@ export const DisplayPaneFive = () => {
         choiceOb={selectedChoiceObject}
         inputHeader={'response'}
         primaryheader={'choice'}
+        primaryheaderTwo={'configuration'}
         nextPopUpValue={''}
         mode={'revise'}
       />

@@ -46,258 +46,258 @@ function* workerReviewInfoItemSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
-      if (isReviseMode) {
-        const {
-          informationBasic,
-          informationAllocation,
-          informationFramework
-        } = userResponse.responseObject[0];
+      // if (isReviseMode) {
+      const {
+        informationBasic,
+        informationAllocation,
+        informationFramework
+      } = userResponse.responseObject[0];
+      yield put({
+        type: SET_TYPE_REDUCER_STATE,
+        payload: informationBasic
+      });
+      if (
+        informationAllocation &&
+        informationAllocation?.itemGroup?.itemGroupPrimary &&
+        informationAllocation?.itemGroup?.itemGroupPrimary.length > 0
+      ) {
+        let tempArr = informationAllocation.itemGroup.itemGroupPrimary.map((ob) => ob.id);
         yield put({
-          type: SET_TYPE_REDUCER_STATE,
-          payload: informationBasic
-        });
-        if (
-          informationAllocation &&
-          informationAllocation?.itemGroup?.itemGroupPrimary &&
-          informationAllocation?.itemGroup?.itemGroupPrimary.length > 0
-        ) {
-          let tempArr = informationAllocation.itemGroup.itemGroupPrimary.map((ob) => ob.id);
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemGroup',
-              actualStateName: 'itemGroupPrimary',
-              value: tempArr
-            }
-          });
-        } else {
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemGroup',
-              actualStateName: 'itemGroupPrimary',
-              value: []
-            }
-          });
-        }
-        if (
-          informationAllocation &&
-          informationAllocation?.itemGroup?.itemGroupSecondary &&
-          informationAllocation?.itemGroup?.itemGroupSecondary.length > 0
-        ) {
-          let tempArr = informationAllocation.itemGroup.itemGroupSecondary.map((ob) => ob.id);
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemGroup',
-              actualStateName: 'itemGroupSecondary',
-              value: tempArr
-            }
-          });
-        } else {
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemGroup',
-              actualStateName: 'itemGroupSecondary',
-              value: []
-            }
-          });
-        }
-        if (
-          informationAllocation &&
-          informationAllocation?.itemNode?.itemNodePrimary &&
-          informationAllocation?.itemNode?.itemNodePrimary.length > 0
-        ) {
-          let tempArr = informationAllocation.itemNode.itemNodePrimary.map((ob) => ob.id);
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemNode',
-              actualStateName: 'itemNodePrimary',
-              value: tempArr
-            }
-          });
-        } else {
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemNode',
-              actualStateName: 'itemNodePrimary',
-              value: []
-            }
-          });
-        }
-        if (
-          informationAllocation &&
-          informationAllocation?.itemNode?.itemNodeSecondary &&
-          informationAllocation?.itemNode?.itemNodeSecondary.length > 0
-        ) {
-          let tempArr = informationAllocation.itemNode.itemNodeSecondary.map((ob) => ob.id);
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemNode',
-              actualStateName: 'itemNodeSecondary',
-              value: tempArr
-            }
-          });
-        } else {
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemNode',
-              actualStateName: 'itemNodeSecondary',
-              value: []
-            }
-          });
-        }
-        if (
-          informationAllocation &&
-          informationAllocation?.itemType?.itemTypePrimary &&
-          informationAllocation?.itemType?.itemTypePrimary.length > 0
-        ) {
-          let tempArr = informationAllocation.itemType.itemTypePrimary.map((ob) => ob.id);
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemType',
-              actualStateName: 'itemTypePrimary',
-              value: tempArr
-            }
-          });
-        } else {
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemType',
-              actualStateName: 'itemTypePrimary',
-              value: []
-            }
-          });
-        }
-        if (
-          informationAllocation &&
-          informationAllocation?.itemType?.itemTypeSecondary &&
-          informationAllocation?.itemType?.itemTypeSecondary.length > 0
-        ) {
-          let tempArr = informationAllocation.itemType.itemTypeSecondary.map((ob) => ob.id);
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemType',
-              actualStateName: 'itemTypeSecondary',
-              value: tempArr
-            }
-          });
-        } else {
-          yield put({
-            type: SET_ITEM_DYNAMIC_SINGLE_STATE,
-            payload: {
-              objectName: 'informationAllocation',
-              stateName: 'itemType',
-              actualStateName: 'itemTypeSecondary',
-              value: []
-            }
-          });
-        }
-        const {
-          itemFrameworkOneBlank = '',
-          itemFrameworkOneExplanation = '',
-          itemFrameworkOneLabel = '',
-          itemFrameworkOneLevel = '',
-          itemFrameworkOneMedia = '',
-          itemFrameworkOnePolarity = '',
-          itemFrameworkOneResponseChoice = [],
-          itemFrameworkOneResponseCorrect = '',
-          itemFrameworkOneResponseExplanation = '',
-          itemFrameworkOneResponseLabel = '',
-          itemFrameworkOneScore = '',
-          itemFrameworkOneTime = '',
-          itemFrameworkOneType = '',
-          itemFrameworkOneWeightage = ''
-        } = informationFramework?.itemFrameworkOne;
-
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneBlank', value: itemFrameworkOneBlank }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneExplanation', value: itemFrameworkOneExplanation }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneLabel', value: itemFrameworkOneLabel }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneLevel', value: itemFrameworkOneLevel }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneMedia', value: itemFrameworkOneMedia }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOnePolarity', value: itemFrameworkOnePolarity }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
           payload: {
-            stateName: 'itemFrameworkOneResponseChoice',
-            value: itemFrameworkOneResponseChoice
+            objectName: 'informationAllocation',
+            stateName: 'itemGroup',
+            actualStateName: 'itemGroupPrimary',
+            value: tempArr
           }
         });
+      } else {
         yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
           payload: {
-            stateName: 'itemFrameworkOneResponseCorrect',
-            value: itemFrameworkOneResponseCorrect
+            objectName: 'informationAllocation',
+            stateName: 'itemGroup',
+            actualStateName: 'itemGroupPrimary',
+            value: []
           }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: {
-            stateName: 'itemFrameworkOneResponseExplanation',
-            value: itemFrameworkOneResponseExplanation
-          }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: {
-            stateName: 'itemFrameworkOneResponseLabel',
-            value: itemFrameworkOneResponseLabel
-          }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneScore', value: itemFrameworkOneScore }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneTime', value: itemFrameworkOneTime }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneType', value: itemFrameworkOneType }
-        });
-        yield put({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: { stateName: 'itemFrameworkOneWeightage', value: itemFrameworkOneWeightage }
         });
       }
+      if (
+        informationAllocation &&
+        informationAllocation?.itemGroup?.itemGroupSecondary &&
+        informationAllocation?.itemGroup?.itemGroupSecondary.length > 0
+      ) {
+        let tempArr = informationAllocation.itemGroup.itemGroupSecondary.map((ob) => ob.id);
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemGroup',
+            actualStateName: 'itemGroupSecondary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemGroup',
+            actualStateName: 'itemGroupSecondary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.itemNode?.itemNodePrimary &&
+        informationAllocation?.itemNode?.itemNodePrimary.length > 0
+      ) {
+        let tempArr = informationAllocation.itemNode.itemNodePrimary.map((ob) => ob.id);
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemNode',
+            actualStateName: 'itemNodePrimary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemNode',
+            actualStateName: 'itemNodePrimary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.itemNode?.itemNodeSecondary &&
+        informationAllocation?.itemNode?.itemNodeSecondary.length > 0
+      ) {
+        let tempArr = informationAllocation.itemNode.itemNodeSecondary.map((ob) => ob.id);
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemNode',
+            actualStateName: 'itemNodeSecondary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemNode',
+            actualStateName: 'itemNodeSecondary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.itemType?.itemTypePrimary &&
+        informationAllocation?.itemType?.itemTypePrimary.length > 0
+      ) {
+        let tempArr = informationAllocation.itemType.itemTypePrimary.map((ob) => ob.id);
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemType',
+            actualStateName: 'itemTypePrimary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemType',
+            actualStateName: 'itemTypePrimary',
+            value: []
+          }
+        });
+      }
+      if (
+        informationAllocation &&
+        informationAllocation?.itemType?.itemTypeSecondary &&
+        informationAllocation?.itemType?.itemTypeSecondary.length > 0
+      ) {
+        let tempArr = informationAllocation.itemType.itemTypeSecondary.map((ob) => ob.id);
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemType',
+            actualStateName: 'itemTypeSecondary',
+            value: tempArr
+          }
+        });
+      } else {
+        yield put({
+          type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+          payload: {
+            objectName: 'informationAllocation',
+            stateName: 'itemType',
+            actualStateName: 'itemTypeSecondary',
+            value: []
+          }
+        });
+      }
+      const {
+        itemFrameworkOneBlank = '',
+        itemFrameworkOneExplanation = '',
+        itemFrameworkOneLabel = '',
+        itemFrameworkOneLevel = '',
+        itemFrameworkOneMedia = '',
+        itemFrameworkOnePolarity = '',
+        itemFrameworkOneResponseChoice = [],
+        itemFrameworkOneResponseCorrect = '',
+        itemFrameworkOneResponseExplanation = '',
+        itemFrameworkOneResponseLabel = '',
+        itemFrameworkOneScore = '',
+        itemFrameworkOneTime = '',
+        itemFrameworkOneType = '',
+        itemFrameworkOneWeightage = ''
+      } = informationFramework?.itemFrameworkOne;
+
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneBlank', value: itemFrameworkOneBlank }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneExplanation', value: itemFrameworkOneExplanation }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneLabel', value: itemFrameworkOneLabel }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneLevel', value: itemFrameworkOneLevel }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneMedia', value: itemFrameworkOneMedia }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOnePolarity', value: itemFrameworkOnePolarity }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseChoice',
+          value: itemFrameworkOneResponseChoice
+        }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseCorrect',
+          value: itemFrameworkOneResponseCorrect
+        }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseExplanation',
+          value: itemFrameworkOneResponseExplanation
+        }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseLabel',
+          value: itemFrameworkOneResponseLabel
+        }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneScore', value: itemFrameworkOneScore }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneTime', value: itemFrameworkOneTime }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneType', value: itemFrameworkOneType }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneWeightage', value: itemFrameworkOneWeightage }
+      });
+      // }
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });
