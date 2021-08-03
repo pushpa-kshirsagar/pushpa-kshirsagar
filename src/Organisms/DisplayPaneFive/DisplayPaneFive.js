@@ -132,21 +132,8 @@ export const DisplayPaneFive = () => {
   const itemFrameworkOneResponseChoice =
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
-  const [questionOptionList, setQuestionOptionList] = useState([
-    {
-      id: 'option-1',
-      value: optionLabel,
-      choiceDescription: responseChoiceDescription
-    },
-    { id: 'option-2', value: optionLabel, choiceDescription: responseChoiceDescription },
-    { id: 'option-3', value: optionLabel, choiceDescription: responseChoiceDescription },
-    { id: 'option-4', value: optionLabel, choiceDescription: responseChoiceDescription }
-  ]);
-  const [innerContent, setInnerContent] = useState(itemLabel);
-  const [labelText, setLabelText] = useState(itemLabelText);
-  const [responselabelText, setResponseLabelText] = useState(responseLabel);
-  const [itemDescriptionText, setItemDescriptionText] = useState(itemDescription);
-  const [responseDescriptionText, setResponseDescriptionText] = useState(responseDescription);
+  const [selectedChoiceObject, setSelectedChoiceObject] = useState('');
+
   // const [responseChoiceDescriptionText, setResponseChoiceDescriptionText] = useState(
   //   responseChoiceDescription
   // );
@@ -191,7 +178,6 @@ export const DisplayPaneFive = () => {
   ];
 
   const onClickReviseFinish = () => {
-    console.log('ON CLICK finish ICON');
     setIsShowReviseIcon(true);
     const { informationBasic, informationAllocation, informationFramework } = itemInformation;
     const { id } = responseObject;
@@ -218,11 +204,9 @@ export const DisplayPaneFive = () => {
     // dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
   const onClickRevise = () => {
-    console.log('ON CLICK REVISE ICON');
     setIsShowReviseIcon(false);
   };
   const onClickReviseCancel = () => {
-    console.log('ON CLICK cancel ICON');
     setIsShowReviseIcon(true);
   };
 
@@ -249,12 +233,11 @@ export const DisplayPaneFive = () => {
   };
 
   const setSecondaryOptionValue = (e) => {
-    //TODO: set secondary option in assessments
+    //TODO: set secondary option in item
   };
 
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    console.log(targetValue);
     if (targetValue === 'configure') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -277,7 +260,6 @@ export const DisplayPaneFive = () => {
 
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    console.log(targetValue);
     if (targetValue === 'revise') {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -289,7 +271,6 @@ export const DisplayPaneFive = () => {
 
   const ChangeItemOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    console.log(targetValue);
     if (targetValue === 'configure') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -311,7 +292,29 @@ export const DisplayPaneFive = () => {
   };
 
   const BackHandlerEvent = (e) => {};
+  const handleClick = (event) => {
+    console.log('ONCHANGE ', event.target.value);
+    if (itemFrameworkOne.itemFrameworkOneResponseCorrect[0] == event.target.value) {
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseCorrect',
+          value: []
+        }
+      });
+    } else {
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseCorrect',
+          value: [event.target.value]
+        }
+      });
+    }
+  };
+
   console.log('ITEM INFO', itemInformation);
+
   return (
     <>
       <div>
@@ -355,7 +358,6 @@ export const DisplayPaneFive = () => {
               {/* <IconButton
                 onClick={async () => {
                   setPreviewMode((st) => !st);
-                  console.log('PREVIEW');
                 }}
                 className="MuiIconButton-root-1602"
               >
@@ -404,7 +406,7 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel || itemLabelText)}
             </div>
             <div
               style={{
@@ -423,7 +425,7 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneMedia)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneMedia || itemLabel)}
             </div>
           </div>
           <hr
@@ -453,7 +455,7 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation)}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation || itemDescription)}
             </div>
           </div>
           <hr
@@ -488,18 +490,23 @@ export const DisplayPaneFive = () => {
           </div>
           <FormControl component="fieldset">
             <div className={['containerPadding'].join(' ')}>
-              <RadioGroup defaultValue="" aria-label="Options" name="customized-radios">
+              <RadioGroup
+                value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
+                // onChange={(event) => {}}
+                defaultValue=""
+                aria-label="Options"
+                name="option1"
+                // name="customized-radios"
+              >
                 {itemFrameworkOneResponseChoice.map((op, key) => {
                   return (
-                    <>
-                      <div
-                        className="option-container"
-                        key={`${op.itemFrameworkOneResponseChoiceMedia}-${key}`}
-                      >
+                    <div key={`op-${key}`}>
+                      <div className="option-container" key={`option-${key}`}>
                         <FormControlLabel
+                        key={`radio-${key}`}
                           className={'radio-button'}
-                          value={`${op.itemFrameworkOneResponseChoiceMedia} ${key + 1}`}
-                          control={<StyledRadio />}
+                          value={`${op.itemFrameworkOneResponseChoice}`}
+                          control={<StyledRadio onClick={handleClick} />}
                           label=""
                         />
                         <div
@@ -517,9 +524,10 @@ export const DisplayPaneFive = () => {
                                 popupMode: `OPTION_${key}`
                               }
                             });
+                            setSelectedChoiceObject(op);
                           }}
                           dangerouslySetInnerHTML={{
-                            __html: op.itemFrameworkOneResponseChoiceMedia
+                            __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel
                           }}
                         ></div>
                         <PopUpTextSheet
@@ -530,7 +538,7 @@ export const DisplayPaneFive = () => {
                           headerOneBadgeTwo={`${key + 1}`}
                           basicInfo={{}}
                           typeOfSetObject={''}
-                          defaultSheetValue={op.itemFrameworkOneResponseChoiceMedia}
+                          defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
                           actualLableValue={'assessmentManuscriptSecondary'}
                           mode={'revise'}
                           onClickSave={(innerText) => {
@@ -599,15 +607,18 @@ export const DisplayPaneFive = () => {
                               type: SET_POPUP_VALUE,
                               payload: {
                                 isPopUpValue: `RESPONSE_CHOICE_DESCRIPTION_${key}`,
-                                popupMode: op
+                                popupMode: ''
                               }
                             });
                           }}
                         >
-                          {ReactHTMLParser(op.itemFrameworkOneResponseChoiceExplanation)}
+                          {ReactHTMLParser(
+                            op.itemFrameworkOneResponseChoiceExplanation ||
+                              responseChoiceDescription
+                          )}
                         </div>
                       </div>
-                    </>
+                    </div>
                   );
                 })}
               </RadioGroup>
@@ -641,7 +652,9 @@ export const DisplayPaneFive = () => {
                 });
               }}
             >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseExplanation)}
+              {ReactHTMLParser(
+                itemFrameworkOne?.itemFrameworkOneResponseExplanation || responseDescription
+              )}
             </div>
           </div>
           <div>
@@ -835,7 +848,7 @@ export const DisplayPaneFive = () => {
         headerPanelColour={'genericOne'}
         headerOne={'item'}
         headerOneBadgeOne={'information'}
-        choiceOb={popupMode}
+        choiceOb={selectedChoiceObject}
         inputHeader={'response'}
         primaryheader={'choice'}
         nextPopUpValue={''}
