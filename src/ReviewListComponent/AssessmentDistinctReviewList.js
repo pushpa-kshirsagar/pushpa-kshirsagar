@@ -171,7 +171,7 @@ const AssessmentDistinctReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSESSMENT_REVIEW_LIST_POPUP_OPTION
+        value: tempArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

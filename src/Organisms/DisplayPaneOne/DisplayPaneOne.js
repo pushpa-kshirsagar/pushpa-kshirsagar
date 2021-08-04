@@ -156,7 +156,7 @@ export const DisplayPaneOne = () => {
         />
       </div>
       <div className="containerPadding">
-        <div className="containerPadding" key={leftPaneAssesseeInfo}>
+        <div className="containerPadding">
           <Card
             ImageOne={selectedAssociateInfo ? PersonIcon : null}
             textOneOne={assesseeName}

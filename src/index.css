@@ -15,8 +15,41 @@ body {
   display: flex !important;
   height: 50px;
 }
+/*assessment delevert*/
+.assessmentRadioQuestion {
+  min-height: 55px;
+  max-height: 110px;
+  overflow: hidden;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  padding: 2.5px;
+}
+.assessmentRadioQuestion span {
+  font-size: 1.6rem;
+}
+.assessmentRadioQuestion span svg {
+  width: 20px;
+  height: 20px;
+}
+/* .assessmentRadioQuestion span span p {
+  margin-bottom: 0rem;
+} */
+.assessmentRadioQuestion span span p img {
+  height: '105px !important';
+}
+.assessmentRadioQuestion input{
+  height: 20px;
+  width:20px;
 
-.badgeBox span{
+}
+.assessmentHeaderHr{
+  height: 1px;
+  margin: 0;
+  border: none;
+  flex-shrink: 0;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+.badgeBox span {
   top: 10px;
   font-size: 1rem !important;
   color: rgba(0, 0, 0, 0.87) !important;
@@ -37,6 +70,8 @@ body {
   height: 100%;
   color: #0000008a;
 }
+/*assessment delevert*/
+
 .iguru-componentinnerdiv-margin {
   /* margin: 0px 5px !important; */
   /* width: 100%; */

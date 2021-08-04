@@ -23,11 +23,17 @@ export const DisplayPaneSix = () => {
   const { assesseeAssignmentAssessmentData, isAssessmentStart } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
+  const { selectedTagStatus } = useSelector((state) => state.PopUpReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const dispatch = useDispatch();
 
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
+    let tempArr = RES_START_POPUP_OPTION;
+    // alert(selectedTagStatus)
+    if (selectedTagStatus === 'UNSTARTED') {
+      tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
+    }
     if (clickedval === 'next') {
       dispatch({
         type: SET_POPUP_STATE,
@@ -37,9 +43,9 @@ export const DisplayPaneSix = () => {
           popupHeaderOneBadgeTwo: '',
           isPopUpValue: '',
           popupOpenType: 'primary',
-          popupContentArrValue: RES_START_POPUP_OPTION,
-          selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
-          selectedTagStatus: 'status'
+          popupContentArrValue: tempArr,
+          selectedTagValue: e.currentTarget.getAttribute('assignmentid')
+          // selectedTagStatus: 'status'
         }
       });
       dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

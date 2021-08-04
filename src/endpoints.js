@@ -359,9 +359,9 @@ export const ASSIGNMENT_ALLOCATE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/allocate';
 export const ASSOCIATE_ALLOCATE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/allocate';
-export const JOBPROFILE_ALLOCATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/allocate';
+export const JOBPROFILE_ALLOCATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-distinct/allocate';
 export const CULTURE_PROFILE_ALLOCATE_URL =
-  ANALYTICS + '/dev/insight-guru/api/culture-profile/allocate';
+  ANALYTICS + '/dev/insight-guru/api/culture-profile-distinct/allocate';
 export const CULTURE_PROFILE_ALLOCATE_ASSIGNMENT_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile/allocate/assignment';
 export const JOB_PROFILE_ALLOCATE_ASSIGNMENT_URL =

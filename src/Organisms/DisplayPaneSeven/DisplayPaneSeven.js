@@ -20,6 +20,37 @@ import { ASSESSMENT_FINISH_POPUP_OPTION } from '../../PopUpConfig';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+
+const AssessmentHeader = (props) => {
+  return (
+    <Fragment>
+      <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
+        <div style={{ flex: '2' }} className="flex-center">
+          <span style={{ fontWeight: 'bold' }}>{props.qnumber + '/' + props.totalQuestion}</span>
+        </div>
+        <div style={{ flex: '1' }} className="flex-center">
+          <span style={{ fontWeight: 'bold' }}>{props.score}</span>
+        </div>
+        <div style={{ flex: '1' }} className="flex-center">
+          <IconButton>
+            <RefreshIcon style={{ width: '20px', height: '20px', color: 'black' }} />
+          </IconButton>
+        </div>
+        <div style={{ flex: '1' }} className="flex-center"></div>
+        <div style={{ flex: '1' }} className="flex-center">
+          <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
+            {props.isQuestionFlaged ? (
+              <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
+            ) : (
+              <i className="far fa-flag"></i>
+            )}
+          </IconButton>
+        </div>
+      </div>
+      <hr className={'assessmentHeaderHr'} />
+    </Fragment>
+  );
+};
 export const DisplayPaneSeven = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
@@ -36,6 +67,21 @@ export const DisplayPaneSeven = () => {
   );
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
+    let ans = localStorage.getItem('assessmentItem')
+      ? JSON.parse(localStorage.getItem('assessmentItem'))
+      : [];
+    let bj = {
+      assesseeAssignmentId: assesseeAssessmentStartData.assignmentId,
+      assesseeAssignmentAssessmentId: assesseeAssessmentStartData.assessmentId,
+      assesseeAssignmentAssessmentItemId: '',
+      assesseeAssignmentAssessmentItemResponseChoiceSelected: '',
+      assesseeAssignmentAssessmentItemTimeline: {
+        assesseeAssignmentAssessmentItemTimelineDateTimeStart: '',
+        assesseeAssignmentAssessmentItemTimelineDateTimeEnd: ''
+      }
+    };
+    // ans.push(bj);
+    localStorage.setItem('assessmentItem', JSON.stringify(ans));
     if (clickedval === 'next') {
       if (currentQuestionIndex < assesseeAssessmentStartData.assessmentItem.length - 1) {
         setcurrentQuestionIndex(currentQuestionIndex + 1);
@@ -76,10 +122,10 @@ export const DisplayPaneSeven = () => {
     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
-  const handleRadioButton = (e) =>{
+  const handleRadioButton = (e) => {
     console.log(e.target.value);
-    setcurrentQuestionChoice(e.target.value)
-  }
+    setcurrentQuestionChoice(e.target.value);
+  };
   console.log('currentQuestionIndex', currentQuestionIndex);
   return (
     <>
@@ -96,53 +142,21 @@ export const DisplayPaneSeven = () => {
         {assesseeAssessmentStartData && (
           <Fragment>
             <div className="containerPadding sticky-header">
-              <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
-                <div style={{ flex: '2' }} className="flex-center">
-                  <span style={{ fontWeight: 'bold' }}>
-                    {currentQuestionIndex +
-                      1 +
-                      '/' +
-                      assesseeAssessmentStartData.assessmentItem.length}{' '}
-                  </span>
-                </div>
-                <div style={{ flex: '1' }} className="flex-center">
-                  <span style={{ fontWeight: 'bold' }}>
-                    {' '}
-                    {
-                      assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
-                        .itemFrameworkOneScore
-                    }{' '}
-                  </span>
-                </div>
-                <div style={{ flex: '1' }} className="flex-center">
-                  <IconButton>
-                    <RefreshIcon style={{ width: '20px', height: '20px', color: 'black' }} />
-                  </IconButton>
-                </div>
-                <div style={{ flex: '1' }} className="flex-center"></div>
-                <div style={{ flex: '1' }} className="flex-center">
-                  <IconButton onClick={flagQuestion} className={'assessmentFlagButton'}>
-                    {isQuestionFlaged ? (
-                      <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
-                    ) : (
-                      <i className="far fa-flag"></i>
-                    )}
-                  </IconButton>
-                </div>
-              </div>
-
-              <hr
-                style={{
-                  height: '1px',
-                  margin: '0',
-                  border: 'none',
-                  flexShrink: '0',
-                  backgroundColor: 'rgba(0, 0, 0, 0.12)'
-                }}
+              <AssessmentHeader
+                qnumber={currentQuestionIndex + 1}
+                totalQuestion={assesseeAssessmentStartData.assessmentItem.length}
+                score={
+                  assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
+                    .itemFrameworkOneScore
+                }
+                onClickFlag={flagQuestion}
+                isQuestionFlaged={isQuestionFlaged}
               />
+
               <Fragment>
                 {currentQuestionIndex !== -1 && (
                   <div
+                    style={{ height: '55px' }}
                     dangerouslySetInnerHTML={{
                       __html:
                         assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
@@ -154,8 +168,7 @@ export const DisplayPaneSeven = () => {
 
               <div>
                 <RadioGroup
-                  aria-label="gender"
-                  name="gender1"
+                  name="option"
                   value={currentQuestionChoice}
                   onChange={handleRadioButton}
                 >
@@ -166,7 +179,8 @@ export const DisplayPaneSeven = () => {
                       <Fragment>
                         <FormControlLabel
                           value={item.itemFrameworkOneResponseChoice}
-                          control={<Radio />}
+                          className={'assessmentRadioQuestion'}
+                          control={<Radio color="black" />}
                           label={
                             <span
                               dangerouslySetInnerHTML={{
@@ -181,16 +195,17 @@ export const DisplayPaneSeven = () => {
                 </RadioGroup>
               </div>
             </div>
+            <FooterIconTwo
+              className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
+              FilterModeEnable={false}
+              FilterMode={FilterMode}
+              onClick={onClickFooter}
+              primaryIcon={primaryIcon}
+              secondaryIcon={secondaryIcon}
+            />
           </Fragment>
         )}
-        <FooterIconTwo
-          className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
-          FilterModeEnable={false}
-          FilterMode={FilterMode}
-          onClick={onClickFooter}
-          primaryIcon={primaryIcon}
-          secondaryIcon={secondaryIcon}
-        />
+
         <PopUpAssessmentNavigator isActive={isPopUpValue === 'NavigatorPOPUP'} />
       </div>
     </>

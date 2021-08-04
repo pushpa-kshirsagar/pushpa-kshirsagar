@@ -56,6 +56,8 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
     if (dataVal === 'finish') {
+      console.log(JSON.parse(localStorage.getItem('assessmentItem')));
+      localStorage.setItem('assessmentItem', null);
       dispatch({
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
         payload: { stateName: 'isAssessmentStart', value: 'FINISH' }

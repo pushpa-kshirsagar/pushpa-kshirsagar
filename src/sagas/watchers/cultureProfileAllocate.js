@@ -18,9 +18,12 @@ const callInfoApi = async (requestObj) => {
   let URL = requestObj.URL;
   const requestOptions = {
     method: 'POST',
-    headers: new Headers({
-      Authorization: localStorage.getItem('idToken')
-    }),
+    // headers: new Headers({
+    //   Authorization: requestObj.idToken
+    //     ? localStorage.getItem('idToken')
+    //     : localStorage.getItem('token')
+    // }),
+    headers: new Headers({ Authorization: localStorage.getItem('idToken') }),
     body: JSON.stringify(requestObj.data)
   };
   const response = await fetch(URL, requestOptions);
@@ -31,7 +34,8 @@ function* workerAllocateCultureProfileSaga(data) {
   try {
     const Response = yield call(callInfoApi, {
       data: data.payload.request,
-      URL: CULTURE_PROFILE_ALLOCATE_URL
+      URL: CULTURE_PROFILE_ALLOCATE_URL,
+      idToken: true
     });
     // const Response ={responseCode:'000',countTotal:30}
     if (Response.responseCode === '000') {
@@ -68,7 +72,8 @@ function* workerAllocateCultureProfileAssignmentSaga(data) {
   try {
     const Response = yield call(callInfoApi, {
       data: data.payload.request,
-      URL: CULTURE_PROFILE_ALLOCATE_ASSIGNMENT_URL
+      URL: CULTURE_PROFILE_ALLOCATE_ASSIGNMENT_URL,
+      idToken: false
     });
     // const Response ={responseCode:'000',countTotal:30}
     if (Response.responseCode === '000') {
