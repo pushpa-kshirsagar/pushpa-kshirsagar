@@ -34,8 +34,21 @@
   display: flex;
   /* justify-content: center; */
   align-items: center;
+  /* flex-direction: column; */
   /* height: 55px; */
   margin: 0;
+}
+.option-container-likert {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column-reverse;
+  /* height: 55px; */
+  margin: 0;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
 }
 .option-input {
   margin: 0 !important;
@@ -54,6 +67,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer !important;
+}
+
+.hr-setup {
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-direction: row !important;
 }
 
 .checkbox-lebel .MuiTypography-body1 {
