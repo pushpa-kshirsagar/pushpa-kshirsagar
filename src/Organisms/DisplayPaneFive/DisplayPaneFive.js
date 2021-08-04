@@ -312,7 +312,7 @@ export const DisplayPaneFive = () => {
       });
     }
   };
-
+  const isHrSetup = true;
   console.log('ITEM INFO', itemInformation);
 
   return (
@@ -489,13 +489,14 @@ export const DisplayPaneFive = () => {
             </div>
           </div>
           <FormControl component="fieldset">
-            <div className={['containerPadding'].join(' ')}>
+            <div className={'containerPadding'}>
               <RadioGroup
                 value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
                 // onChange={(event) => {}}
                 defaultValue=""
                 aria-label="Options"
                 name="option1"
+                className={isHrSetup ? 'containerPadding hr-setup' : ''}
                 // name="customized-radios"
               >
                 {itemFrameworkOneResponseChoice.map((op, key) => {

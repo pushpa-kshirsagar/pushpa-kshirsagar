@@ -56,6 +56,12 @@
   cursor: pointer !important;
 }
 
+.hr-setup {
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-direction: row !important;
+}
+
 .checkbox-lebel .MuiTypography-body1 {
   font-size: 14px;
   width: 100%;
