@@ -29,6 +29,8 @@ export const ASSESSEE_ASSESSMENT_START_URL =
 export const ASSESSMENT_START_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment/assessee/assessment';
 //end assessee self
+export const SIGNED_ASSESSEE_NOTIFICATION_URL =
+  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/assignment/count';
 export const ASSESSEE_CREATE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/create';
 export const ASSOCIATE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-sign-on';
 export const ASSESSEE_REVIEW_LIST_URL =
@@ -353,10 +355,14 @@ export const JOBROLE_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-rol
 export const JOB_ASSESSMENT_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/job-profile/assessment/review-list';
 ///
-export const ASSIGNMENT_ALLOCATE_URL = ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/allocate';
-export const ASSOCIATE_ALLOCATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/allocate';
+export const ASSIGNMENT_ALLOCATE_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/allocate';
+export const ASSOCIATE_ALLOCATE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/allocate';
 export const JOBPROFILE_ALLOCATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/allocate';
-export const CULTURE_PROFILE_ALLOCATE_URL = ANALYTICS + '/dev/insight-guru/api/culture-profile/allocate';
-export const CULTURE_PROFILE_ALLOCATE_ASSIGNMENT_URL = ANALYTICS + '/dev/insight-guru/api/culture-profile/allocate/assignment';
-export const JOB_PROFILE_ALLOCATE_ASSIGNMENT_URL = ANALYTICS + '/dev/insight-guru/api/job-profile/allocate/assignment';
-
+export const CULTURE_PROFILE_ALLOCATE_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile/allocate';
+export const CULTURE_PROFILE_ALLOCATE_ASSIGNMENT_URL =
+  ANALYTICS + '/dev/insight-guru/api/culture-profile/allocate/assignment';
+export const JOB_PROFILE_ALLOCATE_ASSIGNMENT_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-profile/allocate/assignment';

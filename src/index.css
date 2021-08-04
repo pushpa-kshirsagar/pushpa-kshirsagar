@@ -15,6 +15,28 @@ body {
   display: flex !important;
   height: 50px;
 }
+
+.badgeBox span{
+  top: 10px;
+  font-size: 1rem !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+  right: 22px !important;
+}
+.notifyIcon {
+  position: absolute !important;
+  font-size: 2rem !important;
+  right: 10px !important;
+  color: #0000008a !important;
+  top: 0px !important;
+  bottom: 0px !important;
+  z-index: 99 !important;
+  height: 30px !important;
+  line-height: 30px !important;
+}
+.notifyIcon button {
+  height: 100%;
+  color: #0000008a;
+}
 .iguru-componentinnerdiv-margin {
   /* margin: 0px 5px !important; */
   /* width: 100%; */

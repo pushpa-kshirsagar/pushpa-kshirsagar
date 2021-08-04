@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   GET_ASSESSEE_INFO_SAGA,
+  GET_SIGNED_ASSESEE_NOTIFICATION,
   LOADER_START,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -62,6 +63,7 @@ const AssesseeRelatedAssociateReviewList = (props) => {
       }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
+  
     // dispatch({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
     dispatch({
       type: SET_MIDDLEPANE_STATE,

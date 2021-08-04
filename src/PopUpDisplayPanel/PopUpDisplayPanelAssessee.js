@@ -45,7 +45,9 @@ const PopUpDisplayPanelAssessee = (props) => {
     secondaryOptionCheckValue
   } = useSelector((state) => state.PopUpReducer);
   const { assesseePermission } = useSelector((state) => state.UserReducer);
-  const { selectedAssociateInfo, countPage } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, countPage, leftPaneAssesseeInfo } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const dispatch = useDispatch();
   const { headerPanelColour = 'displayPaneLeft', isActive } = props;
   // const { signOut } = useContext(AccountContext);
@@ -226,7 +228,7 @@ const PopUpDisplayPanelAssessee = (props) => {
             searchBy: [
               {
                 dataType: 'string',
-                conditionColumn: 'status',
+                conditionColumn: 'assesseeAssignmentStatus',
                 conditionValue: {
                   condition: 'eq',
                   value: {
@@ -364,6 +366,8 @@ const PopUpDisplayPanelAssessee = (props) => {
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeOptionPopup}
             secondaryOptionCheckValue={secondaryOptionCheckValue}
+            assignmentBellIconCount={leftPaneAssesseeInfo?.notifications?.assignmentCount}
+            isNotificationAlert={leftPaneAssesseeInfo?.notifications?.alert}
           />
         </DialogContent>
       </Popup>

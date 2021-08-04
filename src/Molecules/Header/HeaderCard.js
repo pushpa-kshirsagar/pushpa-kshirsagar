@@ -197,7 +197,8 @@ const HeaderCard = (props) => {
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSix' });
   };
   useEffect(() => {
-    const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;
+    // const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;
+    const sec = assesseeAssessmentStartData?.assessmentTime+60000 / 1000;
     let tt = new Date();
     tt.setSeconds(tt.getSeconds() + sec);
     setTimer(tt);
