@@ -34,8 +34,21 @@
   display: flex;
   /* justify-content: center; */
   align-items: center;
+  /* flex-direction: column; */
   /* height: 55px; */
   margin: 0;
+}
+.option-container-likert {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column-reverse;
+  /* height: 55px; */
+  margin: 0;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
 }
 .option-input {
   margin: 0 !important;

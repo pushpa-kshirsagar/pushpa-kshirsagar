@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
-import ReactHTMLParser from 'react-html-parser';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {
   ITEM_INFO_REVISE_SAGA,
   LOADER_START,
@@ -15,25 +13,24 @@ import {
 } from '../../actionType';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
-import { DialogContent } from '@material-ui/core';
+import { DialogContent, IconButton } from '@material-ui/core';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopupHeader from '../../Molecules/PopUp/PopUpHeader';
 import Popup from '../../Molecules/PopUp/PopUp';
 import JsonRenderComponent from '../../Actions/JsonRenderComponent';
-import PopUpTextField from '../../PopUpInformation/PopUpTextField';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
-import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import DisplayPaneFiveRadioButton from './DisplayPaneFiveRadioButton';
+import DisplayPaneFiveLikertScale from './DisplayPaneFiveLikertScale';
+import Manuscript from '@material-ui/icons/Description';
 
 const useStyles = makeStyles({
   root: {
@@ -92,6 +89,7 @@ function StyledRadio(props) {
 
 export const DisplayPaneFive = () => {
   const dispatch = useDispatch();
+  const [typeMode, setTypeMode] = useState(false);
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
@@ -105,6 +103,7 @@ export const DisplayPaneFive = () => {
   const onClickFooter = (e) => {
     // dispatch({ type: NAVIGATOR_MODE });
   };
+  const [subItemList, setSubItemList] = useState(['item-1', 'item-2', 'item-3']);
 
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
 
@@ -124,11 +123,11 @@ export const DisplayPaneFive = () => {
   const responseLabel =
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
   const itemDescription =
-    "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>description</span>&nbsp;";
+    "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const responseDescription =
-    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>description</span>&nbsp;";
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const responseChoiceDescription =
-    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>description</span>&nbsp;";
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const itemFrameworkOneResponseChoice =
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
@@ -312,7 +311,7 @@ export const DisplayPaneFive = () => {
       });
     }
   };
-  const isHrSetup = true;
+  const isHrSetup = false;
   console.log('ITEM INFO', itemInformation);
 
   return (
@@ -345,7 +344,32 @@ export const DisplayPaneFive = () => {
               </p>
             </div>
             <div style={{ flex: '1' }} className="flex-center">
-              <span style={{ fontWeight: 'bold' }}> </span>
+              {!typeMode && (
+                <>
+                  <p
+                    onClick={() => {
+                      let arr = subItemList;
+                      let newArr = arr.slice(0, -1);
+                      setSubItemList(newArr);
+                    }}
+                    className={'icon-button-option'}
+                  >
+                    -
+                  </p>
+                  <span style={{ fontWeight: 'bold', margin: '0 5px 0 5px' }}>
+                    {' '}
+                    {subItemList.length}
+                  </span>
+                  <p
+                    onClick={() => {
+                      setSubItemList([...subItemList, `item-${subItemList.length + 1}`]);
+                    }}
+                    className={'icon-button-option'}
+                  >
+                    +
+                  </p>
+                </>
+              )}
             </div>
             <div style={{ flex: '1' }} className="flex-center">
               {/* <div className={'backArrow'}>
@@ -355,14 +379,14 @@ export const DisplayPaneFive = () => {
               </div> */}
             </div>
             <div style={{ flex: '1' }} className="flex-center">
-              {/* <IconButton
+              <IconButton
                 onClick={async () => {
-                  setPreviewMode((st) => !st);
+                  setTypeMode((st) => !st);
                 }}
                 className="MuiIconButton-root-1602"
               >
                 <Manuscript className={''} />
-              </IconButton> */}
+              </IconButton>
             </div>
             <div style={{ flex: '1' }} className="flex-center">
               {/* <IconButton onClick={flagQuestion} className={'assessmentFlagButton'}>
@@ -388,283 +412,18 @@ export const DisplayPaneFive = () => {
           className="containerPadding"
           style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}
         >
-          <div>
-            <div
-              style={{
-                padding: '2.5px 5px',
-                alignItems: 'center',
-                overflow: 'overlay',
-                color: 'rgba(0, 0, 0, 0.87)'
-              }}
-              onClick={() => {
-                dispatch({
-                  type: SET_POPUP_VALUE,
-                  payload: {
-                    isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
-                    popupMode: popupMode
-                  }
-                });
-              }}
-            >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel || itemLabelText)}
-            </div>
-            <div
-              style={{
-                padding: '2.5px 5px',
-                alignItems: 'center',
-                overflow: 'overlay',
-                color: 'rgba(0, 0, 0, 0.87)'
-              }}
-              onClick={() => {
-                dispatch({
-                  type: SET_POPUP_VALUE,
-                  payload: {
-                    isPopUpValue: 'ITEM_PRIMARY_POPUP',
-                    popupMode: popupMode
-                  }
-                });
-              }}
-            >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneMedia || itemLabel)}
-            </div>
-          </div>
-          {/* <hr
-            style={{
-              height: '1px',
-              margin: '0',
-              border: 'none',
-              flexShrink: '0',
-              backgroundColor: 'rgba(0, 0, 0, 0.12)'
-            }}
-          /> */}
-          <div>
-            <div
-              style={{
-                padding: '2.5px 5px',
-                alignItems: 'center',
-                overflow: 'overlay',
-                color: 'rgba(0, 0, 0, 0.87)'
-              }}
-              onClick={() => {
-                dispatch({
-                  type: SET_POPUP_VALUE,
-                  payload: {
-                    isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
-                    popupMode: popupMode
-                  }
-                });
-              }}
-            >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation || itemDescription)}
-            </div>
-          </div>
-          {/* <hr
-            style={{
-              height: '1px',
-              margin: '0',
-              border: 'none',
-              flexShrink: '0',
-              backgroundColor: 'rgba(0, 0, 0, 0.12)'
-            }}
-          /> */}
-          <div>
-            <div
-              style={{
-                padding: '2.5px 5px',
-                alignItems: 'center',
-                overflow: 'overlay',
-                color: 'rgba(0, 0, 0, 0.87)'
-              }}
-              onClick={() => {
-                dispatch({
-                  type: SET_POPUP_VALUE,
-                  payload: {
-                    isPopUpValue: 'RESPONSE_LABEL_MEDIA_TEXT',
-                    popupMode: popupMode
-                  }
-                });
-              }}
-            >
-              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel || responseLabel)}
-            </div>
-          </div>
-          <FormControl component="fieldset">
-            <div className={'containerPadding'}>
-              <RadioGroup
-                value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
-                // onChange={(event) => {}}
-                defaultValue=""
-                aria-label="Options"
-                name="option1"
-                className={isHrSetup ? 'containerPadding hr-setup' : ''}
-                // name="customized-radios"
-              >
-                {itemFrameworkOneResponseChoice.map((op, key) => {
-                  return (
-                    <div key={`op-${key}`}>
-                      <div className="option-container" key={`option-${key}`}>
-                        <FormControlLabel
-                          key={`radio-${key}`}
-                          className={'radio-button'}
-                          value={`${op.itemFrameworkOneResponseChoice}`}
-                          control={<StyledRadio onClick={handleClick} />}
-                          label=""
-                        />
-                        <div
-                          style={{
-                            padding: '2.5px 5px',
-                            alignItems: 'center',
-                            overflow: 'overlay',
-                            color: 'rgba(0, 0, 0, 0.87)'
-                          }}
-                          onClick={() => {
-                            dispatch({
-                              type: SET_POPUP_VALUE,
-                              payload: {
-                                isPopUpValue: 'ITEM_OPTION_PRIMARY_POPUP',
-                                popupMode: `OPTION_${key}`
-                              }
-                            });
-                            setSelectedChoiceObject(op);
-                          }}
-                          dangerouslySetInnerHTML={{
-                            __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel
-                          }}
-                        ></div>
-                        <PopUpTextSheet
-                          isActive={isPopUpValue === `OPTION_${key}`}
-                          headerOne={'item'}
-                          headerPanelColour={'genericOne'}
-                          headerOneBadgeOne={'option'}
-                          headerOneBadgeTwo={`${key + 1}`}
-                          basicInfo={{}}
-                          typeOfSetObject={''}
-                          defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
-                          actualLableValue={'assessmentManuscriptSecondary'}
-                          mode={'revise'}
-                          onClickSave={(innerText) => {
-                            let opArr = itemFrameworkOneResponseChoice;
-                            // setQuestionOptionList((opArr) => {
-                            opArr.forEach((element) => {
-                              if (
-                                element.itemFrameworkOneResponseChoice ===
-                                op.itemFrameworkOneResponseChoice
-                              ) {
-                                element.itemFrameworkOneResponseChoiceMedia = innerText;
-                              }
-                            });
-                            dispatch({
-                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                              payload: {
-                                stateName: 'itemFrameworkOneResponseChoice',
-                                value: opArr
-                              }
-                            });
-                            // });
-                          }}
-                        />
-                        <PopUpTextSheet
-                          isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
-                          headerOne={'response'}
-                          headerPanelColour={'genericOne'}
-                          headerOneBadgeOne={'choice'}
-                          headerOneBadgeTwo={`description`}
-                          basicInfo={{}}
-                          typeOfSetObject={''}
-                          defaultSheetValue={op.itemFrameworkOneResponseChoiceExplanation}
-                          actualLableValue={'assessmentManuscriptSecondary'}
-                          mode={'revise'}
-                          onClickSave={(innerText) => {
-                            let opArr = itemFrameworkOneResponseChoice;
-                            opArr.forEach((element) => {
-                              if (
-                                element.itemFrameworkOneResponseChoice ===
-                                op.itemFrameworkOneResponseChoice
-                              ) {
-                                element.itemFrameworkOneResponseChoiceExplanation = innerText;
-                              }
-                            });
-                            dispatch({
-                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                              payload: {
-                                stateName: 'itemFrameworkOneResponseChoice',
-                                value: opArr
-                              }
-                            });
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <div
-                          style={{
-                            padding: '2.5px 5px',
-                            alignItems: 'center',
-                            overflow: 'overlay',
-                            margin: '0 0 0 12px',
-                            color: 'rgba(0, 0, 0, 0.87)'
-                          }}
-                          onClick={() => {
-                            dispatch({
-                              type: SET_POPUP_VALUE,
-                              payload: {
-                                isPopUpValue: `RESPONSE_CHOICE_DESCRIPTION_${key}`,
-                                popupMode: ''
-                              }
-                            });
-                          }}
-                        >
-                          {ReactHTMLParser(
-                            op.itemFrameworkOneResponseChoiceExplanation ||
-                              responseChoiceDescription
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </RadioGroup>
-            </div>
-          </FormControl>
-          {/* <hr
-            style={{
-              height: '1px',
-              margin: '0',
-              border: 'none',
-              flexShrink: '0',
-              backgroundColor: 'rgba(0, 0, 0, 0.12)'
-            }}
-          /> */}
-          <div>
-            <div
-              style={{
-                padding: '2.5px 5px',
-                alignItems: 'center',
-                overflow: 'overlay',
-                margin: '0 0 0 12px',
-                color: 'rgba(0, 0, 0, 0.87)'
-              }}
-              onClick={() => {
-                dispatch({
-                  type: SET_POPUP_VALUE,
-                  payload: {
-                    isPopUpValue: 'RESPONSE_DESCRIPTION_TEXT',
-                    popupMode: ``
-                  }
-                });
-              }}
-            >
-              {ReactHTMLParser(
-                itemFrameworkOne?.itemFrameworkOneResponseExplanation || responseDescription
-              )}
-            </div>
-          </div>
-          <div>
-            <div
-              style={{
-                height: '55px'
-              }}
-            ></div>
-          </div>
+          {typeMode ? (
+            <>
+              <DisplayPaneFiveRadioButton setSelectedChoiceObject={setSelectedChoiceObject} />
+            </>
+          ) : (
+            <>
+              <DisplayPaneFiveLikertScale
+                subItemList={subItemList}
+                setSubItemList={setSubItemList}
+              />
+            </>
+          )}
         </div>
       </div>
       <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
@@ -791,7 +550,7 @@ export const DisplayPaneFive = () => {
         isActive={isPopUpValue === `ITEM_DESCRIPTION_MEDIA_TEXT`}
         headerOne={'item'}
         headerPanelColour={'genericOne'}
-        headerOneBadgeOne={'description'}
+        headerOneBadgeOne={'explanation'}
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
@@ -813,7 +572,7 @@ export const DisplayPaneFive = () => {
         isActive={isPopUpValue === `RESPONSE_DESCRIPTION_TEXT`}
         headerOne={'response'}
         headerPanelColour={'genericOne'}
-        headerOneBadgeOne={'description'}
+        headerOneBadgeOne={'explanation'}
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
