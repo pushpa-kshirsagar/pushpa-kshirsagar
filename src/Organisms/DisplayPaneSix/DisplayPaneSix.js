@@ -79,13 +79,7 @@ export const DisplayPaneSix = () => {
           className=""
           headerOne={'assessment'}
           headerOneBadgeOne={'communiqué'}
-          headerOneBadgeTwo={
-            isAssessmentStart === 'START'
-              ? 'primary'
-              : isAssessmentStart === 'FINISH'
-              ? 'secondary'
-              : ''
-          }
+          headerOneBadgeTwo={''}
           headerPanelColour="blue"
         />
       </div>

@@ -20,6 +20,7 @@ import { ASSESSMENT_FINISH_POPUP_OPTION } from '../../PopUpConfig';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { setAssesseeAssessmentItemSaveResCall } from '../../Actions/ActionAssesseeAssessment';
 
 const AssessmentHeader = (props) => {
   return (
@@ -55,7 +56,10 @@ export const DisplayPaneSeven = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState(false);
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
   const [currentQuestionChoice, setcurrentQuestionChoice] = useState(0);
+  const [itemTimeStart, setItemTimeStart] = useState(0);
+  const [itemTimeId, setItemTimeId] = useState('');
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const flagQuestion = () => {
     setIsQuestionFlaged((state) => !state);
   };
@@ -67,25 +71,21 @@ export const DisplayPaneSeven = () => {
   );
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
-    let ans = localStorage.getItem('assessmentItem')
-      ? JSON.parse(localStorage.getItem('assessmentItem'))
-      : [];
-    let bj = {
-      assesseeAssignmentId: assesseeAssessmentStartData.assignmentId,
-      assesseeAssignmentAssessmentId: assesseeAssessmentStartData.assessmentId,
-      assesseeAssignmentAssessmentItemId: '',
-      assesseeAssignmentAssessmentItemResponseChoiceSelected: '',
-      assesseeAssignmentAssessmentItemTimeline: {
-        assesseeAssignmentAssessmentItemTimelineDateTimeStart: '',
-        assesseeAssignmentAssessmentItemTimelineDateTimeEnd: ''
-      }
-    };
-    // ans.push(bj);
-    localStorage.setItem('assessmentItem', JSON.stringify(ans));
+    let itemId = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].itemId;
+
     if (clickedval === 'next') {
+      setAssesseeAssessmentItemSaveResCall(
+        selectedAssociateInfo,
+        dispatch,
+        assesseeAssessmentStartData,
+        itemId,
+        currentQuestionChoice,
+        itemTimeStart
+      );
       if (currentQuestionIndex < assesseeAssessmentStartData.assessmentItem.length - 1) {
         setcurrentQuestionIndex(currentQuestionIndex + 1);
         setcurrentQuestionChoice(null);
+        setItemTimeStart(new Date().getTime());
       } else {
         dispatch({
           type: SET_POPUP_STATE,
@@ -113,7 +113,7 @@ export const DisplayPaneSeven = () => {
     // dispatch({ type: NAVIGATOR_MODE });
   };
   useEffect(() => {
-    // setcurrentQuestionIndex(1);
+    setItemTimeStart(new Date().getTime());
   }, [assesseeAssessmentStartData]);
   const primaryIcon = [];
   const secondaryIcon = [

@@ -198,7 +198,7 @@ const HeaderCard = (props) => {
   };
   useEffect(() => {
     // const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;
-    const sec = assesseeAssessmentStartData?.assessmentTime+60000 / 1000;
+    const sec = assesseeAssessmentStartData?.assessmentTime / 1000;
     let tt = new Date();
     tt.setSeconds(tt.getSeconds() + sec);
     setTimer(tt);
