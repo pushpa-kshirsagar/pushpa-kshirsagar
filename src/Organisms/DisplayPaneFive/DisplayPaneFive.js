@@ -156,6 +156,16 @@ export const DisplayPaneFive = () => {
       }
     });
   };
+  const itemPopUpOption = [
+    {
+      data: 'revise',
+      dataValue: 'revise',
+      dataKey: 'reviseAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    }
+  ];
 
   const itemPrimaryPopupOption = [
     {
@@ -259,6 +269,8 @@ export const DisplayPaneFive = () => {
 
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
+    // add configure popup here
+
     if (targetValue === 'revise') {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -284,6 +296,42 @@ export const DisplayPaneFive = () => {
         type: SET_POPUP_VALUE,
         payload: {
           isPopUpValue: 'ITEM_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
+  const itemLabelPrimaryPopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
+  const responseLabelChoicePopUp = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'RESPONSE_LABEL_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
+  const itemExplanationPrimaryPopUp = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
           popupMode: ''
         }
       });
@@ -439,6 +487,77 @@ export const DisplayPaneFive = () => {
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeTripleDotOptionPopup}
             currentPopUpOption={itemPrimaryPopupOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+
+      <Popup isActive={isPopUpValue === 'ITEM_LABEL_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'items'}
+          headerOneBadgeOne={'label'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={itemLabelPrimaryPopup}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+
+      <Popup isActive={isPopUpValue === 'ITEM_CHOICE_LABEL_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={'label'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={responseLabelChoicePopUp}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+
+      <Popup isActive={isPopUpValue === 'ITEM_EXPLANATION_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'item'}
+          headerOneBadgeOne={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={itemExplanationPrimaryPopUp}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      <Popup isActive={isPopUpValue === 'ITEM_CHOICE_EXPLANATION_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={()=>{}}
+            currentPopUpOption={itemPopUpOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>

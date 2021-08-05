@@ -159,7 +159,7 @@ const PopUpTextSheet = (props) => {
               showPathLabel: false,
               minHeight: '40vh',
               maxHeight: '40vh',
-              placeholder: 'Enter your text here!!!',
+              placeholder: '',
               plugins: [
                 align,
                 font,
