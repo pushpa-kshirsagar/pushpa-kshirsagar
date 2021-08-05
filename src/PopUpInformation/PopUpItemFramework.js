@@ -119,8 +119,14 @@ const PopUpItemFramework = (props) => {
               <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
                 <Fragment>
                   {inputHeader}&nbsp;
-                  {primaryheader ? <span className={'headerBadge'}>{primaryheader}</span> : null}
-                  {primaryheaderTwo ? <span className={'headerBadge'}>{primaryheaderTwo}</span> : null}
+                  {primaryheader ? (
+                    <>
+                      <span className={'headerBadge'}>{primaryheader}</span>&nbsp;
+                    </>
+                  ) : null}
+                  {primaryheaderTwo ? (
+                    <span className={'headerBadge'}>{primaryheaderTwo}</span>
+                  ) : null}
                 </Fragment>
               </InputLabel>
               <div className={'infoSymbol'}></div>

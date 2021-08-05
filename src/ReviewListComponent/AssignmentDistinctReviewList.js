@@ -222,7 +222,6 @@ const AssignmentDistinctReviewList = (props) => {
       if (stats === 'PUBLISHED' && element.data === 'revise')
         tempArr.push({ ...element, disabled: true });
       else tempArr.push(element);
-      tempArr.push(element);
     });
     dispatch({
       type: SET_POPUP_STATE,
