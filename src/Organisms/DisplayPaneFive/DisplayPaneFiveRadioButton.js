@@ -14,6 +14,7 @@ const DisplayPaneFiveRadioButton = (props) => {
   const dispatch = useDispatch();
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const optionLabel =
     "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
   const itemLabel = '<span>item</span>&nbsp';
@@ -111,44 +112,71 @@ const DisplayPaneFiveRadioButton = (props) => {
   return (
     <>
       <div>
-        <div
-          style={{
-            padding: '2.5px 5px',
-            alignItems: 'center',
-            overflow: 'overlay',
-            color: 'rgba(0, 0, 0, 0.87)'
-          }}
-          onClick={() => {
-            dispatch({
-              type: SET_POPUP_VALUE,
-              payload: {
-                isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
-                popupMode: popupMode
-              }
-            });
-          }}
-        >
-          {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel || itemLabelText)}
-        </div>
-        <div
-          style={{
-            padding: '2.5px 5px',
-            alignItems: 'center',
-            overflow: 'overlay',
-            color: 'rgba(0, 0, 0, 0.87)'
-          }}
-          onClick={() => {
-            dispatch({
-              type: SET_POPUP_VALUE,
-              payload: {
-                isPopUpValue: 'ITEM_PRIMARY_POPUP',
-                popupMode: popupMode
-              }
-            });
-          }}
-        >
-          {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneMedia || itemLabel)}
-        </div>
+        {(itemFrameworkOne?.itemFrameworkOneLabel !== '' || reviewMode === 'revise') && (
+          <div
+            style={{
+              padding: '2.5px 5px',
+              alignItems: 'center',
+              overflow: 'overlay',
+              color: 'rgba(0, 0, 0, 0.87)'
+            }}
+            onClick={() => {
+              dispatch({
+                type: SET_POPUP_VALUE,
+                payload: {
+                  isPopUpValue: 'ITEM_LABEL_PRIMARY_POPUP',
+                  popupMode: popupMode
+                }
+              });
+            }}
+          >
+            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel || itemLabelText)}
+          </div>
+        )}
+        {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
+          <div
+            style={{
+              padding: '2.5px 5px',
+              alignItems: 'center',
+              overflow: 'overlay',
+              color: 'rgba(0, 0, 0, 0.87)'
+            }}
+            onClick={() => {
+              dispatch({
+                type: SET_POPUP_VALUE,
+                payload: {
+                  isPopUpValue: 'ITEM_PRIMARY_POPUP',
+                  popupMode: popupMode
+                }
+              });
+            }}
+          >
+            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneMedia || itemLabel)}
+          </div>
+        )}
+      </div>
+      <div>
+        {(itemFrameworkOne?.itemFrameworkOneExplanation !== '' || reviewMode === 'revise') && (
+          <div
+            style={{
+              padding: '2.5px 5px',
+              alignItems: 'center',
+              overflow: 'overlay',
+              color: 'rgba(0, 0, 0, 0.87)'
+            }}
+            onClick={() => {
+              dispatch({
+                type: SET_POPUP_VALUE,
+                payload: {
+                  isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
+                  popupMode: popupMode
+                }
+              });
+            }}
+          >
+            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation || itemDescription)}
+          </div>
+        )}
       </div>
       {/* <hr
             style={{
@@ -160,66 +188,36 @@ const DisplayPaneFiveRadioButton = (props) => {
             }}
           /> */}
       <div>
-        <div
-          style={{
-            padding: '2.5px 5px',
-            alignItems: 'center',
-            overflow: 'overlay',
-            color: 'rgba(0, 0, 0, 0.87)'
-          }}
-          onClick={() => {
-            dispatch({
-              type: SET_POPUP_VALUE,
-              payload: {
-                isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
-                popupMode: popupMode
-              }
-            });
-          }}
-        >
-          {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation || itemDescription)}
-        </div>
-      </div>
-      {/* <hr
+        {(itemFrameworkOne?.itemFrameworkOneResponseLabel !== '' || reviewMode === 'revise') && (
+          <div
             style={{
-              height: '1px',
-              margin: '0',
-              border: 'none',
-              flexShrink: '0',
-              backgroundColor: 'rgba(0, 0, 0, 0.12)'
+              padding: '2.5px 5px',
+              alignItems: 'center',
+              overflow: 'overlay',
+              color: 'rgba(0, 0, 0, 0.87)'
             }}
-          /> */}
-      <div>
-        <div
-          style={{
-            padding: '2.5px 5px',
-            alignItems: 'center',
-            overflow: 'overlay',
-            color: 'rgba(0, 0, 0, 0.87)'
-          }}
-          onClick={() => {
-            dispatch({
-              type: SET_POPUP_VALUE,
-              payload: {
-                isPopUpValue: 'RESPONSE_LABEL_MEDIA_TEXT',
-                popupMode: popupMode
-              }
-            });
-          }}
-        >
-          {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel || responseLabel)}
-        </div>
+            onClick={() => {
+              dispatch({
+                type: SET_POPUP_VALUE,
+                payload: {
+                  isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
+                  popupMode: popupMode
+                }
+              });
+            }}
+          >
+            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel || responseLabel)}
+          </div>
+        )}
       </div>
       <FormControl component="fieldset">
         <div className={'containerPadding'}>
           <RadioGroup
             value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
-            // onChange={(event) => {}}
             defaultValue=""
             aria-label="Options"
             name="option1"
             className={isHrSetup ? 'containerPadding hr-setup' : ''}
-            // name="customized-radios"
           >
             {itemFrameworkOneResponseChoice.map((op, key) => {
               return (
@@ -362,7 +360,6 @@ const DisplayPaneFiveRadioButton = (props) => {
             padding: '2.5px 5px',
             alignItems: 'center',
             overflow: 'overlay',
-            margin: '0 0 0 12px',
             color: 'rgba(0, 0, 0, 0.87)'
           }}
           onClick={() => {

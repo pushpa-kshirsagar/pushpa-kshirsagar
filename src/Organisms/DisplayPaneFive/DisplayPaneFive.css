@@ -23,8 +23,8 @@
   height: 105px !important;
 }
 .radio-button {
-  width: 48px !important;
-  height: 48px !important;
+  width: 16px !important;
+  height: 16px !important;
   margin: 0 !important;
   display: flex !important;
   align-items: center !important;
@@ -42,7 +42,7 @@
   display: flex;
   /* justify-content: center; */
   align-items: center;
-  flex-direction: column-reverse;
+  flex-direction: column;
   /* height: 55px; */
   margin: 0;
 }
