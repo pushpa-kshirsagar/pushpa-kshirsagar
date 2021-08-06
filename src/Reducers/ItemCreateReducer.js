@@ -48,20 +48,32 @@ const initialState = {
     },
     informationFramework: {
       itemFrameworkOne: {
+        itemFrameworkOneAlignment: '',
+        itemFrameworkOneClassification: [{
+          itemGroupClassificationLabel: '',
+          itemGroupClassificationPolarity: ''
+        }],
         itemFrameworkOneBlank: '',
-        itemFrameworkOneExplanation: { flag: false, explanation: '' }, //itemDescription,
-        itemFrameworkOneLabel: { flag: false, lable: '' },
+        itemFrameworkOneExplanation: {
+          itemFrameworkOneExplanationDisplay: false,
+          itemFrameworkOneExplanation: ''
+        }, //itemDescription,
+        itemFrameworkOneLabel: { itemFrameworkOneLabelDisplay: false, itemFrameworkOneLabel: '' },
         itemFrameworkOneGroup: [],
         itemFrameworkOneMedia: '', //itemLabel,
         itemFrameworkOnePolarity: '',
-        itemFrameworkOneResponse: { flag: false, response: '' },
+        itemFrameworkOneResponse: '',
+        itemFrameworkOneResponseAlignment:'',
         itemFrameworkOneResponseAttachment: '',
         itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseChoice: [
           {
             itemFrameworkOneResponseChoice: '1',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneReponseChoiceExplanation: '',
+              itemFrameworkOneReponseChoiceExplanationDisplay: false
+            }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -70,7 +82,10 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '2',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneReponseChoiceExplanation: '',
+              itemFrameworkOneReponseChoiceExplanationDisplay: false
+            }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -79,7 +94,10 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '3',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneReponseChoiceExplanation: '',
+              itemFrameworkOneReponseChoiceExplanationDisplay: false
+            }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -88,15 +106,29 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '4',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneReponseChoiceExplanation: '',
+              itemFrameworkOneReponseChoiceExplanationDisplay: false
+            }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoicePolarity: ''
           }
         ],
-        itemFrameworkOneResponseLabel: { flag: false, lable: '' },
-        itemFrameworkOneResponseExplanation: { flag: false, explanation: '' }, //responseDescription,
+        itemFrameworkOneResponseLabel: {
+          itemFrameworkOneReponseLabelDisplay: false,
+          itemFrameworkOneReponseLabel: ''
+        },
+        itemFrameworkOneResponseExplanation: {
+          itemFrameworkOneReponseExplanationDisplay: false,
+          itemFrameworkOneReponseExplanation: ''
+        }, //responseDescription,
+        itemFrameworkOneScale: [{
+          itemGroupScaleLabel: '',
+          itemGroupScaleScore: '',
+          itemGroupScaleWeightage: ''
+        }],
         itemFrameworkOneScore: '',
         itemFrameworkOneSection: [],
         itemFrameworkOneSequence: '',
