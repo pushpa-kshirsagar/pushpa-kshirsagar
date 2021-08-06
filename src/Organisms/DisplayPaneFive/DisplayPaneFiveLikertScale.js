@@ -327,7 +327,6 @@ const DisplayPaneFiveLikertScale = (props) => {
                             padding: '2.5px 5px',
                             alignItems: 'center',
                             overflow: 'overlay',
-                            margin: '0 0 0 12px',
                             color: 'rgba(0, 0, 0, 0.87)'
                           }}
                           onClick={() => {
