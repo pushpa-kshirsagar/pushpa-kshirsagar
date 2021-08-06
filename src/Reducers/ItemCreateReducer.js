@@ -49,10 +49,12 @@ const initialState = {
     informationFramework: {
       itemFrameworkOne: {
         itemFrameworkOneAlignment: '',
-        itemFrameworkOneClassification: [{
-          itemGroupClassificationLabel: '',
-          itemGroupClassificationPolarity: ''
-        }],
+        itemFrameworkOneClassification: [
+          {
+            itemGroupClassificationLabel: '',
+            itemGroupClassificationPolarity: ''
+          }
+        ],
         itemFrameworkOneBlank: '',
         itemFrameworkOneExplanation: {
           itemFrameworkOneExplanationDisplay: false,
@@ -63,7 +65,7 @@ const initialState = {
         itemFrameworkOneMedia: '', //itemLabel,
         itemFrameworkOnePolarity: '',
         itemFrameworkOneResponse: '',
-        itemFrameworkOneResponseAlignment:'',
+        itemFrameworkOneResponseAlignment: '',
         itemFrameworkOneResponseAttachment: '',
         itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseChoice: [
@@ -124,11 +126,13 @@ const initialState = {
           itemFrameworkOneReponseExplanationDisplay: false,
           itemFrameworkOneReponseExplanation: ''
         }, //responseDescription,
-        itemFrameworkOneScale: [{
-          itemGroupScaleLabel: '',
-          itemGroupScaleScore: '',
-          itemGroupScaleWeightage: ''
-        }],
+        itemFrameworkOneScale: [
+          {
+            itemGroupScaleLabel: '',
+            itemGroupScaleScore: '',
+            itemGroupScaleWeightage: ''
+          }
+        ],
         itemFrameworkOneScore: '',
         itemFrameworkOneSection: [],
         itemFrameworkOneSequence: '',

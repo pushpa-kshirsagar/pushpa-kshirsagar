@@ -112,7 +112,7 @@ const DisplayPaneFiveRadioButton = (props) => {
   return (
     <>
       <div>
-        {(itemFrameworkOne?.itemFrameworkOneLabel !== '' || reviewMode === 'revise') && (
+        {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' || reviewMode === 'revise') && (
           <div
             style={{
               padding: '2.5px 5px',
@@ -130,7 +130,7 @@ const DisplayPaneFiveRadioButton = (props) => {
               });
             }}
           >
-            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel || itemLabelText)}
+            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText)}
           </div>
         )}
         {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
@@ -156,7 +156,7 @@ const DisplayPaneFiveRadioButton = (props) => {
         )}
       </div>
       <div>
-        {(itemFrameworkOne?.itemFrameworkOneExplanation !== '' || reviewMode === 'revise') && (
+        {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' || reviewMode === 'revise') && (
           <div
             style={{
               padding: '2.5px 5px',
@@ -174,7 +174,7 @@ const DisplayPaneFiveRadioButton = (props) => {
               });
             }}
           >
-            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation || itemDescription)}
+            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation || itemDescription)}
           </div>
         )}
       </div>
@@ -188,7 +188,7 @@ const DisplayPaneFiveRadioButton = (props) => {
             }}
           /> */}
       <div>
-        {(itemFrameworkOne?.itemFrameworkOneResponseLabel !== '' || reviewMode === 'revise') && (
+        {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' || reviewMode === 'revise') && (
           <div
             style={{
               padding: '2.5px 5px',
@@ -206,7 +206,7 @@ const DisplayPaneFiveRadioButton = (props) => {
               });
             }}
           >
-            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel || responseLabel)}
+            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel || responseLabel)}
           </div>
         )}
       </div>
@@ -292,7 +292,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                       headerOneBadgeTwo={`explanation`}
                       basicInfo={{}}
                       typeOfSetObject={''}
-                      defaultSheetValue={op.itemFrameworkOneResponseChoiceExplanation}
+                      defaultSheetValue={op.itemFrameworkOneResponseChoiceExplanation?.itemFrameworkOneReponseChoiceExplanation}
                       actualLableValue={'assessmentManuscriptSecondary'}
                       mode={'revise'}
                       onClickSave={(innerText) => {
@@ -335,7 +335,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                       }}
                     >
                       {ReactHTMLParser(
-                        op.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
+                        op.itemFrameworkOneResponseChoiceExplanation?.itemFrameworkOneReponseChoiceExplanation || responseChoiceDescription
                       )}
                     </div>
                   </div>
@@ -373,7 +373,7 @@ const DisplayPaneFiveRadioButton = (props) => {
           }}
         >
           {ReactHTMLParser(
-            itemFrameworkOne?.itemFrameworkOneResponseExplanation || responseDescription
+            itemFrameworkOne?.itemFrameworkOneResponseExplanation?.itemFrameworkOneReponseExplanation || responseDescription
           )}
         </div>
       </div>
