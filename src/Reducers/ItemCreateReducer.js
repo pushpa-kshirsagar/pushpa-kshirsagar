@@ -49,12 +49,12 @@ const initialState = {
     informationFramework: {
       itemFrameworkOne: {
         itemFrameworkOneBlank: '',
-        itemFrameworkOneLabel: '', //itemLabelText,
-        itemFrameworkOneExplanation: '', //itemDescription,
+        itemFrameworkOneExplanation: { flag: false, explanation: '' }, //itemDescription,
+        itemFrameworkOneLabel: { flag: false, lable: '' },
         itemFrameworkOneGroup: [],
         itemFrameworkOneMedia: '', //itemLabel,
         itemFrameworkOnePolarity: '',
-        itemFrameworkOneResponse: '',
+        itemFrameworkOneResponse: { flag: false, response: '' },
         itemFrameworkOneResponseAttachment: '',
         itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseChoice: [
@@ -95,8 +95,8 @@ const initialState = {
             itemFrameworkOneResponseChoicePolarity: ''
           }
         ],
-        itemFrameworkOneResponseLabel: '',
-        itemFrameworkOneResponseExplanation: '', //responseDescription,
+        itemFrameworkOneResponseLabel: { flag: false, lable: '' },
+        itemFrameworkOneResponseExplanation: { flag: false, explanation: '' }, //responseDescription,
         itemFrameworkOneScore: '',
         itemFrameworkOneSection: [],
         itemFrameworkOneSequence: '',

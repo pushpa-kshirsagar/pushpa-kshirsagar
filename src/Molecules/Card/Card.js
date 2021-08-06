@@ -32,7 +32,7 @@ const Card = (props) => {
       <Paper
         style={{
           boxShadow:
-            '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)'
+            '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
         }}
         className={[`iguru-iconbox-dashboardcardtop`].join(' ')}
       >
@@ -46,9 +46,9 @@ const Card = (props) => {
             <div
               className={['midPaneInformation', textTwoOne !== '' ? null : 'aliasmiddle'].join(' ')}
             >
-              {/* {name} */}
+              {textOneOne}
               {/* <Label text={textOneOne} fontSize={'1.6rem'} /> */}
-              <Input
+              {/* <Input
                 multiline={false}
                 row={2}
                 rowsMax={1}
@@ -58,7 +58,7 @@ const Card = (props) => {
                 // dangerouslySetInnerHTML={{ __html: textOneOne }}
                 disableUnderline={true}
                 readOnly
-              />
+              /> */}
             </div>
             <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{textTwoOne}</div>
           </div>

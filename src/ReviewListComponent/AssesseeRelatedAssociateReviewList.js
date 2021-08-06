@@ -63,7 +63,15 @@ const AssesseeRelatedAssociateReviewList = (props) => {
       }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
-  
+    // dispatch({
+    //   type: GET_SIGNED_ASSESEE_NOTIFICATION,
+    //   payload: {
+    //     reqBody: {
+    //       assesseeId: selectedAsso?.assesseeId,
+    //       associateId: selectedAsso.associate.informationEngagement.associateTag.associateTagPrimary
+    //     }
+    //   }
+    // });
     // dispatch({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
     dispatch({
       type: SET_MIDDLEPANE_STATE,

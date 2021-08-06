@@ -21,7 +21,7 @@ export const setAssesseeAssessmentItemSaveResCall = (
   if (navigator.onLine) {
     console.log('Became online');
     let reqObj;
-    if (JSON.parse(localStorage.getItem('assessmentItem')).length === 0) {
+    if (JSON.parse(localStorage.getItem('assessmentItem'))?.length === 0) {
       reqObj = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:

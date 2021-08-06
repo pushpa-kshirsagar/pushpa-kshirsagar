@@ -366,10 +366,10 @@ function* workerReviewInfoAssesseeSaga(data) {
         yield put({ type: UPDATE_ASSESSEE_ENGAGEMENT_INFO, payload: informationEngagement });
         yield put({ type: UPDATE_ASSESSEE_CONTACT_INFO, payload: informationContact });
         yield put({ type: UPDATE_ASSESSEE_SETUP_PRIMARY_INFO, payload: informationSetup });
+        console.log('loading end');
+        yield put({ type: LOADER_STOP });
       }
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     yield put({

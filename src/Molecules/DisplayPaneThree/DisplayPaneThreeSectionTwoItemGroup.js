@@ -29,9 +29,9 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   //   if (!string) return '';
   //   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   // }
-  let itemList = [];
+    let itemList = [];
   if (relatedReviewListPaneThree) {
-    itemList = relatedReviewListPaneThree.item;
+    itemList = relatedReviewListPaneThree?.item || [];
   }
   let itemArray = [];
   itemList.forEach((ob) => {

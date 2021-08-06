@@ -232,6 +232,14 @@ function* workerAssesseeAssessmentFinishSaga(data) {
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
         payload: { stateName: 'isAssessmentStart', value: 'FINISH' }
       });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssessmentStartData', value: null }
+      });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssignmentAssessmentData', value: null }
+      });
       localStorage.setItem('assessmentItem', '[]');
     } else {
       yield put({

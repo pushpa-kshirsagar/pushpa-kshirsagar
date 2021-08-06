@@ -17,7 +17,6 @@ import {
   SET_MOBILE_PANE_STATE
 } from '../../actionType';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTimer } from 'react-timer-hook';
 import {
   ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION,
   LEFT_TRIPPLE_DOT_POPUP_OPTION,
@@ -25,22 +24,7 @@ import {
   ASSESSMENT_FINISH_POPUP_OPTION
 } from '../../PopUpConfig';
 
-const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
-  const { seconds, minutes, hours } = useTimer({
-    expiryTimestamp,
-    onExpire: timerFinished
-    // onExpire: () => {
-    //   console.warn('onExpire called');
-    // }
-  });
-  return (
-    <div>
-      <span>{hours < 10 ? '0' + hours : hours}</span>:
-      <span>{minutes < 10 ? '0' + minutes : minutes}</span>:
-      <span>{seconds < 10 ? '0' + seconds : seconds}</span>
-    </div>
-  );
-};
+
 
 const HeaderCard = (props) => {
   const {
@@ -74,9 +58,6 @@ const HeaderCard = (props) => {
   const { assesseeAssessmentStartData } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
-  const time = new Date();
-  const [timer, setTimer] = useState(time);
-
   const onClickScan = () => {
     dispatch({
       type: SET_SCAN_POPUP_STATE,
@@ -179,29 +160,10 @@ const HeaderCard = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  const timerFinished = () => {
-    let tempArr = ASSESSMENT_FINISH_POPUP_OPTION;
-    tempArr = [tempArr[0], { ...tempArr[1], disabled: true }];
-    dispatch({
-      type: SET_POPUP_STATE,
-      payload: {
-        popupHeaderOne: 'assessment',
-        popupHeaderOneBadgeOne: 'time-out',
-        popupHeaderOneBadgeTwo: '',
-        isPopUpValue: '',
-        popupOpenType: 'primary',
-        popupContentArrValue: tempArr
-      }
-    });
-    dispatch({ type: POPUP_OPEN, payload: 'paneSevenPopup' });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSix' });
-  };
+
   useEffect(() => {
     // const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;
-    const sec = assesseeAssessmentStartData?.assessmentTime / 1000;
-    let tt = new Date();
-    tt.setSeconds(tt.getSeconds() + sec);
-    setTimer(tt);
+   
   }, [assesseeAssessmentStartData]);
 
   const openTripleDotPopup = () => {
@@ -257,17 +219,7 @@ const HeaderCard = (props) => {
             <Fragment>
               <div className={'iguru-iconbox'}>
                 {displayPane === 'five' ? (
-                  <div>
-                    {assesseeAssessmentStartData && (
-                      <span style={{ color: '#fff', fontWeight: 'bold' }}>
-                        <AssessmentTimer
-                          expiryTimestamp={timer}
-                          key={timer}
-                          timerFinished={timerFinished}
-                        />
-                      </span>
-                    )}
-                  </div>
+                  <div></div>
                 ) : displayPane === 'centre' && showMiddlePaneState ? (
                   <IconButton onClick={onClickScan}>
                     <Fragment>

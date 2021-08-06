@@ -30,9 +30,9 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
   const { selectedAssociateInfo, relatedReviewListDistinctData, reviewListReqObj } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
-  const { assesseeAssessmentStartData } = useSelector(
-    (state) => state.AssesseeAssignmentAssessmentReducer
-  );
+  // const { assesseeAssessmentStartData } = useSelector(
+  //   (state) => state.AssesseeAssignmentAssessmentReducer
+  // );
   const { assesseeAssignmentAssessmentData } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
@@ -58,7 +58,7 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
     if (dataVal === 'finish') {
-      if (JSON.parse(localStorage.getItem('assessmentItem')).length > 0) {
+      if (JSON.parse(localStorage.getItem('assessmentItem'))?.length > 0) {
         dispatch({ type: LOADER_START });
         let reqObj = {
           assesseeId: selectedAssociateInfo?.assesseeId,
@@ -73,12 +73,13 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
           payload: { request: reqObj }
         });
       }
+      dispatch({ type: LOADER_START });
       let reqObject = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
           selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        assignmentId: assesseeAssessmentStartData.assignmentId,
-        assessmentId: assesseeAssessmentStartData.assessmentId,
+        assignmentId: assesseeAssignmentAssessmentData.assignmentId,
+        assessmentId: assesseeAssignmentAssessmentData.assessmentId,
         assesseeAssignmentAssessmentStatus:
           popupHeaderOneBadgeOne === 'time-out' ? 'UNFINISHED' : 'FINISHED',
         attemptEndTime: new Date().getTime()
@@ -90,6 +91,10 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
     }
     if (dataVal === 'yes' && secondaryOptionCheckValue === 'assignment') {
       dispatch({ type: LOADER_START });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
       dispatch({
         type: GET_ASSESSEE_ASSIGNMENT_SAGA,
         payload: {
