@@ -31,6 +31,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import DisplayPaneFiveRadioButton from './DisplayPaneFiveRadioButton';
 import DisplayPaneFiveLikertScale from './DisplayPaneFiveLikertScale';
 import Manuscript from '@material-ui/icons/Description';
+import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 
 const useStyles = makeStyles({
   root: {
@@ -259,6 +260,16 @@ export const DisplayPaneFive = () => {
 
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'configure') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_TRIPLEDOT_CONFIGURE_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+    console.log(targetValue);
     if (targetValue === 'revise') {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -290,7 +301,7 @@ export const DisplayPaneFive = () => {
     }
   };
 
-  const BackHandlerEvent = (e) => {};
+  const BackHandlerEvent = (e) => { };
   const handleClick = (event) => {
     console.log('ONCHANGE ', event.target.value);
     if (itemFrameworkOne.itemFrameworkOneResponseCorrect[0] == event.target.value) {
@@ -593,6 +604,18 @@ export const DisplayPaneFive = () => {
 
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'item'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={''}
+        inputHeader={'item'}
+        primaryheader={'configuration'}
+        isItemFramework={true}
+        mode={'revise'}
+      />
+
+      <PopUpItemConfig
+        isActive={isPopUpValue === 'ITEM_TRIPLEDOT_CONFIGURE_POPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'item'}
         headerOneBadgeOne={'information'}
