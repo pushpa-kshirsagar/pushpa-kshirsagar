@@ -477,7 +477,7 @@ export const DisplayPaneFive = () => {
       <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
-          headerOne={'items'}
+          headerOne={'item'}
           headerOneBadgeOne={''}
           onClick={BackHandlerEvent}
           mode={''}
@@ -495,7 +495,7 @@ export const DisplayPaneFive = () => {
       <Popup isActive={isPopUpValue === 'ITEM_LABEL_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
-          headerOne={'items'}
+          headerOne={'item'}
           headerOneBadgeOne={'label'}
           onClick={BackHandlerEvent}
           mode={''}
