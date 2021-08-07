@@ -3,6 +3,7 @@ import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   ITEM_INFO_REVISE_SAGA,
   LOADER_START,
   POPUP_CLOSE,
@@ -261,6 +262,17 @@ export const DisplayPaneFive = () => {
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
+      dispatch({ type: LOADER_START })
+      dispatch({
+        type: GET_ITEM_TYPE_REVIEW_LIST_SAGA, payload: {
+          request: {
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary
+          }
+        }
+      })
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {

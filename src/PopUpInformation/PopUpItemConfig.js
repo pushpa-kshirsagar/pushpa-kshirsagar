@@ -20,6 +20,11 @@ import { createNameWithBadge } from '../Actions/StatusAction';
 
 const PopUpItemConfig = (props) => {
 
+    const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+    const [item_Aligement, set_Item_Aligement] = useState('');
+    const [item_Type, set_Item_Type] = useState('');
+    const [response_Aligement, Set_Response_Aligement] = useState('');
+
     const dispatch = useDispatch();
     const {
         isActive,
@@ -38,6 +43,15 @@ const PopUpItemConfig = (props) => {
     const handleClick = () => {
         dispatch({ type: POPUP_CLOSE });
     };
+    const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
+    console.log("itemRoltype",itemTypeList)
+    const itemTypeListArr = itemTypeList.map((item) => {
+        return {
+            id: item.id,
+            name: item.itemFrameworkOneTypeName
+        }
+    })
+
 
     return (
         <div>
@@ -76,11 +90,9 @@ const PopUpItemConfig = (props) => {
                     <FormControl style={{ width: '100%' }}>
                         <SelectField
                             tag={'item_Aligement'}
-                            name={'item_Aligement'}
                             label={'item'}
                             dataValue={'item'}
                             labelBadgeOne={'alignment'}
-                            
                             listSelect={[
                                 { id: 'horizontal-bottom', name: 'horizontal-bottom' },
                                 { id: 'horizontal-top', name: 'horizontal-top' },
@@ -88,24 +100,29 @@ const PopUpItemConfig = (props) => {
                                 { id: 'vertical-top', name: 'vertical-top' }
                             ]}
                             errorMsg={() => { }}
-                            value={''}
+                            onChange={(e) => {
+                                set_Item_Aligement(e.target.value);
+                              }}
+                            value={item_Aligement}
                             mappingValue={'id'}
                         />
                         <SelectField
                             tag={'item_Type'}
                             label={'item'}
-                            name={'item_Type'}
                             dataValue={'item'}
                             labelBadgeOne={'type'}
                             errorMsg={() => { }}
-                            
+                            onChange={(e) => {
+                                set_Item_Type(e.target.value);
+                            }}
+                            value={item_Type}
                             mappingValue={'id'}
+                            listSelect={itemTypeListArr}
                         />
                         <SelectField
                             tag={'response_Aligement'}
                             label={'response'}
                             dataValue={'response'}
-                            name={'response_Aligement'}
                             labelBadgeOne={'alignment'}
                             listSelect={[
                                 { id: 'horizontal-bottom', name: 'horizontal-bottom' },
@@ -114,8 +131,10 @@ const PopUpItemConfig = (props) => {
                                 { id: 'vertical-top', name: 'vertical-top' }
                             ]}
                             errorMsg={() => { }}
-                            
-                           
+                            onChange={(e) => {
+                                Set_Response_Aligement(e.target.value);
+                              }}
+                            value={response_Aligement}
                             mappingValue={'id'}
                         />
                         <div className={'fitContent'}>

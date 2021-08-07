@@ -11,13 +11,16 @@ import {
   SET_REVIEW_LIST_RELATE_DATA,
   GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
-  GET_ALLOCATE_ITEM
+  GET_ALLOCATE_ITEM,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+  SET_ITEM_FRAMWORK_TYPE,
 } from '../../actionType';
 import {
   ITEM_REVIEWLIST_URL,
   ITEMGROUPITEM_REVIEWLIST_URL,
   ITEMNODEITEM_REVIEWLIST_URL,
-  ITEMTYPEPITEM_REVIEWLIST_URL
+  ITEMTYPEPITEM_REVIEWLIST_URL,
+  CONFIG_ITEM_URL
 } from '../../endpoints';
 import Store from '../../store';
 
@@ -275,10 +278,38 @@ function* workerItemAllocateReviewListSaga(data) {
   }
 }
 
+function* workerItemTypeReviewListSaga(data) {
+  try {
+    const userResponse = yield call(apiCall, {
+      data: data.payload.request,
+      URL: CONFIG_ITEM_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      yield put({
+        type: SET_ITEM_FRAMWORK_TYPE,
+          payload: userResponse?.responseObject || [] 
+      })
+    } else {
+     
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+
 export default function* watchItemReviewListSaga() {
   yield takeLatest(GET_ITEM_REVIEW_LIST_SAGA, workerReviewListItemsSaga);
   yield takeLatest(GET_ITEMGROUPITEM_REVIEW_LIST_SAGA, workeItemGroupItemReviewListSaga);
   yield takeLatest(GET_ITEMTYPEITEM_REVIEW_LIST_SAGA, workeItemTypeItemReviewListSaga);
   yield takeLatest(GET_NODE_ITEMS_REVIEW_LIST_SAGA, workeItemNodeItemReviewListSaga);
   yield takeLatest(GET_ALLOCATE_ITEM, workerItemAllocateReviewListSaga);
+  yield takeLatest(GET_ITEM_TYPE_REVIEW_LIST_SAGA, workerItemTypeReviewListSaga);
 }
