@@ -4,7 +4,8 @@ import {
   SET_ITEM_DYNAMIC_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   ADD_ITEM_OPTION_OBJECT,
-  REMOVE_ITEM_OPTION_OBJECT
+  REMOVE_ITEM_OPTION_OBJECT,
+  SET_ITEM_FRAMWORK_TYPE,
 } from '../actionType';
 
 const optionLabel =
@@ -143,7 +144,8 @@ const initialState = {
           itemFrameworkOneWordMinimum: ''
         },
         itemFrameworkOneWeightage: ''
-      }
+      },
+      itemTypeList: []
     }
   }
 };
@@ -184,6 +186,17 @@ const ItemCreateReducer = (istate = initialState, action) => {
               ...istate.itemInformation.informationFramework.itemFrameworkOne,
               [action.payload.stateName]: action.payload.value
             }
+          }
+        }
+      };
+    case SET_ITEM_FRAMWORK_TYPE:
+      return {
+        ...istate,
+        itemInformation: {
+          ...istate.itemInformation,
+          informationFramework: {
+            ...istate.itemInformation.informationFramework,
+            itemTypeList: action.payload 
           }
         }
       };

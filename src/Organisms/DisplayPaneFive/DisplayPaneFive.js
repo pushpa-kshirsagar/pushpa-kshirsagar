@@ -3,6 +3,7 @@ import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   ITEM_INFO_REVISE_SAGA,
   LOADER_START,
   POPUP_CLOSE,
@@ -31,6 +32,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import DisplayPaneFiveRadioButton from './DisplayPaneFiveRadioButton';
 import DisplayPaneFiveLikertScale from './DisplayPaneFiveLikertScale';
 import Manuscript from '@material-ui/icons/Description';
+import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 
 const useStyles = makeStyles({
   root: {
@@ -269,8 +271,28 @@ export const DisplayPaneFive = () => {
 
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    // add configure popup here
-
+    if (targetValue === 'configure') {
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+        payload: {
+          request: {
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary
+          }
+        }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_TRIPLEDOT_CONFIGURE_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+    console.log(targetValue);
     if (targetValue === 'revise') {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -556,7 +578,7 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={()=>{}}
+            ChangeOptionPopup={() => {}}
             currentPopUpOption={itemPopUpOption}
             secondaryOptionCheckValue={''}
           />
@@ -712,6 +734,18 @@ export const DisplayPaneFive = () => {
 
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'item'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={''}
+        inputHeader={'item'}
+        primaryheader={'configuration'}
+        isItemFramework={true}
+        mode={'revise'}
+      />
+
+      <PopUpItemConfig
+        isActive={isPopUpValue === 'ITEM_TRIPLEDOT_CONFIGURE_POPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'item'}
         headerOneBadgeOne={'information'}

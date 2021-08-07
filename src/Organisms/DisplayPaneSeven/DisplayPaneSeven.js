@@ -195,19 +195,21 @@ export const DisplayPaneSeven = () => {
         {assesseeAssessmentStartData && (
           <Fragment>
             <div className="containerPadding sticky-header">
-              <AssessmentHeader
-                qnumber={currentQuestionIndex + 1}
-                totalQuestion={assesseeAssessmentStartData.assessmentItem.length}
-                score={
-                  assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
-                    .itemFrameworkOneScore
-                }
-                assessmentName={assesseeAssessmentStartData?.assessmentName}
-                onClickFlag={flagQuestion}
-                isQuestionFlaged={isQuestionFlaged}
-                timerFinished={timerFinished}
-                timer={timer}
-              />
+              {assesseeAssessmentStartData?.assessmentItem?.length > 0 && (
+                <AssessmentHeader
+                  qnumber={currentQuestionIndex + 1}
+                  totalQuestion={assesseeAssessmentStartData?.assessmentItem?.length}
+                  score={
+                    assesseeAssessmentStartData?.assessmentItem[currentQuestionIndex]
+                      .itemFrameworkOneScore
+                  }
+                  assessmentName={assesseeAssessmentStartData?.assessmentName}
+                  onClickFlag={flagQuestion}
+                  isQuestionFlaged={isQuestionFlaged}
+                  timerFinished={timerFinished}
+                  timer={timer}
+                />
+              )}
 
               <Fragment>
                 {currentQuestionIndex !== -1 && (

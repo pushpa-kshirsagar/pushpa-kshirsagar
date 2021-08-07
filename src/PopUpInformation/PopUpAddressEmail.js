@@ -170,8 +170,7 @@ const PopUpAddressEmail = (props) => {
                     className={''}
                     color="default"
                     name={'assesseeAddressEmailCommunication'}
-                    value={checkboxValue}
-                    checked={tempCommunication === checkboxValue ? true : false}
+                    value={''}
                     onChange={
                       popupMode !== 'ASSESSEE_SIGN_ON' &&
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
