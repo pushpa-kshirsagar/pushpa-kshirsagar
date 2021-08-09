@@ -388,8 +388,8 @@ const DisplayPaneFiveRadioButton = (props) => {
             dispatch({
               type: SET_POPUP_VALUE,
               payload: {
-                isPopUpValue: 'RESPONSE_DESCRIPTION_TEXT',
-                popupMode: ``
+                isPopUpValue: 'ITEM_RESPONSE_EXPLANATION_POPUP',
+                popupMode: ''
               }
             });
           }}

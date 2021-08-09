@@ -348,6 +348,18 @@ export const DisplayPaneFive = () => {
       });
     }
   };
+  const responseLabelExplanationPopUp = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'RESPONSE_LABEL_EXPLANATION_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
   const itemExplanationPrimaryPopUp = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'revise') {
@@ -569,6 +581,24 @@ export const DisplayPaneFive = () => {
         </DialogContent>
       </Popup>
 
+      <Popup isActive={isPopUpValue === 'ITEM_RESPONSE_EXPLANATION_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={responseLabelExplanationPopUp}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+
       <Popup isActive={isPopUpValue === 'ITEM_EXPLANATION_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
@@ -689,6 +719,28 @@ export const DisplayPaneFive = () => {
         headerOne={'response'}
         headerPanelColour={'genericOne'}
         headerOneBadgeOne={'label'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={itemInformation?.itemFrameworkOneResponseLabel || ''}
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          // setResponseLabelText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneResponseLabel',
+              value: innerText
+            }
+          });
+        }}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === `RESPONSE_LABEL_EXPLANATION_TEXT`}
+        headerOne={'response'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'explanation'}
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
