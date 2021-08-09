@@ -268,7 +268,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                       headerOne={'item'}
                       headerPanelColour={'genericOne'}
                       headerOneBadgeOne={'choice'}
-                      headerOneBadgeTwo={`${key + 1}`}
+                      // headerOneBadgeTwo={`${key + 1}`}
                       basicInfo={{}}
                       typeOfSetObject={''}
                       defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
@@ -388,8 +388,8 @@ const DisplayPaneFiveRadioButton = (props) => {
             dispatch({
               type: SET_POPUP_VALUE,
               payload: {
-                isPopUpValue: 'RESPONSE_DESCRIPTION_TEXT',
-                popupMode: ``
+                isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
+                popupMode: 'RESPONSE_DESCRIPTION_TEXT'
               }
             });
           }}

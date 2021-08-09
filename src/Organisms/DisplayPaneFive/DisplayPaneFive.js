@@ -656,8 +656,8 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={itemLabelPrimaryPopup}
-            currentPopUpOption={() => {}}
+            ChangeOptionPopup={ChangeOptionPopup}
+            currentPopUpOption={itemPopUpOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -676,6 +676,23 @@ export const DisplayPaneFive = () => {
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeItemOptionPopup}
             currentPopUpOption={itemPrimaryPopupOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      <Popup isActive={isPopUpValue === 'RESPONSE_EXPLANATION_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeOptionPopup}
+            currentPopUpOption={itemPopUpOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -791,14 +808,6 @@ export const DisplayPaneFive = () => {
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
-          // setItemDescriptionText(innerText);
-          // dispatch({
-          //   type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          //   payload: {
-          //     stateName: 'itemFrameworkOneExplanation',
-          //     value: innerText
-          //   }
-          // });
           dispatch({
             type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
             payload: {
