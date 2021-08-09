@@ -6,13 +6,15 @@ import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
-  GET_ASSESSEE_ASSIGNMENT_REIEW_SAGA,
   GET_ASSESSEE_ASSIGNMENT_SAGA,
   POPUP_CLOSE,
   SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_PREVIOUS_POPUP,
-  SET_SECONDARY_CREATE_OPTION_VALUE
+  SET_SECONDARY_CREATE_OPTION_VALUE,
+  LOADER_START,
+  SET_ASSESSEE_ASSESSMENT_ITEM_RES_SAGA,
+  ASSESSEE_ASSESSMENT_FINISH_SAGA
 } from '../actionType';
 const PopUpDisplayPanelAssesseeAssessment = (props) => {
   const {
@@ -25,12 +27,12 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
     tertiaryOptionCheckValue = 'all',
     forthOptionCheckValue
   } = useSelector((state) => state.PopUpReducer);
-  const {
-    selectedAssociateInfo,
-    relatedReviewListDistinctData,
-    selectedTagValue,
-    reviewListReqObj
-  } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo, relatedReviewListDistinctData, reviewListReqObj } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
+  // const { assesseeAssessmentStartData } = useSelector(
+  //   (state) => state.AssesseeAssignmentAssessmentReducer
+  // );
   const { assesseeAssignmentAssessmentData } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
@@ -56,14 +58,43 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
     if (dataVal === 'finish') {
-      console.log(JSON.parse(localStorage.getItem('assessmentItem')));
-      localStorage.setItem('assessmentItem', null);
+      if (JSON.parse(localStorage.getItem('assessmentItem'))?.length > 0) {
+        dispatch({ type: LOADER_START });
+        let reqObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assessmentItem: JSON.parse(localStorage.getItem('assessmentItem'))
+        };
+        console.log(JSON.parse(localStorage.getItem('assessmentItem')));
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_ITEM_RES_SAGA,
+          payload: { request: reqObj }
+        });
+      }
+      dispatch({ type: LOADER_START });
+      let reqObject = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assignmentId: assesseeAssignmentAssessmentData.assignmentId,
+        assessmentId: assesseeAssignmentAssessmentData.assessmentId,
+        assesseeAssignmentAssessmentStatus:
+          popupHeaderOneBadgeOne === 'time-out' ? 'UNFINISHED' : 'FINISHED',
+        attemptEndTime: new Date().getTime()
+      };
       dispatch({
-        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-        payload: { stateName: 'isAssessmentStart', value: 'FINISH' }
+        type: ASSESSEE_ASSESSMENT_FINISH_SAGA,
+        payload: { request: reqObject }
       });
     }
     if (dataVal === 'yes' && secondaryOptionCheckValue === 'assignment') {
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
       dispatch({
         type: GET_ASSESSEE_ASSIGNMENT_SAGA,
         payload: {

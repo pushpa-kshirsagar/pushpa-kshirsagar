@@ -365,7 +365,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
       } else if (keyVal === 'assignments') {
         assignmentsDistinctApiCall(
           selectedAssociateInfo,
-          'active',
+          'inactive',
           countPage,
           dispatch,
           'distinct',
@@ -881,7 +881,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
       } else if (keyVal === 'assignments') {
         assignmentsDistinctApiCall(
           selectedAssociateInfo,
-          'active',
+          'inactive',
           countPage,
           dispatch,
           'distinct',

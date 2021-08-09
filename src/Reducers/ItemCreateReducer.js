@@ -49,20 +49,34 @@ const initialState = {
     },
     informationFramework: {
       itemFrameworkOne: {
+        itemFrameworkOneAlignment: '',
+        itemFrameworkOneClassification: [
+          {
+            itemGroupClassificationLabel: '',
+            itemGroupClassificationPolarity: ''
+          }
+        ],
         itemFrameworkOneBlank: '',
-        itemFrameworkOneLabel: '', //itemLabelText,
-        itemFrameworkOneExplanation: '', //itemDescription,
+        itemFrameworkOneExplanation: {
+          itemFrameworkOneExplanationDisplay: false,
+          itemFrameworkOneExplanation: ''
+        }, //itemDescription,
+        itemFrameworkOneLabel: { itemFrameworkOneLabelDisplay: false, itemFrameworkOneLabel: '' },
         itemFrameworkOneGroup: [],
         itemFrameworkOneMedia: '', //itemLabel,
         itemFrameworkOnePolarity: '',
         itemFrameworkOneResponse: '',
+        itemFrameworkOneResponseAlignment: '',
         itemFrameworkOneResponseAttachment: '',
         itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseChoice: [
           {
             itemFrameworkOneResponseChoice: '1',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneReponseChoiceExplanation: '',
+              itemFrameworkOneReponseChoiceExplanationDisplay: false
+            }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -71,7 +85,10 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '2',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneReponseChoiceExplanation: '',
+              itemFrameworkOneReponseChoiceExplanationDisplay: false
+            }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -80,7 +97,10 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '3',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneReponseChoiceExplanation: '',
+              itemFrameworkOneReponseChoiceExplanationDisplay: false
+            }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -89,15 +109,31 @@ const initialState = {
           {
             itemFrameworkOneResponseChoice: '4',
             itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: '', //responseChoiceDescription,
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneReponseChoiceExplanation: '',
+              itemFrameworkOneReponseChoiceExplanationDisplay: false
+            }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoicePolarity: ''
           }
         ],
-        itemFrameworkOneResponseLabel: '',
-        itemFrameworkOneResponseExplanation: '', //responseDescription,
+        itemFrameworkOneResponseLabel: {
+          itemFrameworkOneReponseLabelDisplay: false,
+          itemFrameworkOneReponseLabel: ''
+        },
+        itemFrameworkOneResponseExplanation: {
+          itemFrameworkOneReponseExplanationDisplay: false,
+          itemFrameworkOneReponseExplanation: ''
+        }, //responseDescription,
+        itemFrameworkOneScale: [
+          {
+            itemGroupScaleLabel: '',
+            itemGroupScaleScore: '',
+            itemGroupScaleWeightage: ''
+          }
+        ],
         itemFrameworkOneScore: '',
         itemFrameworkOneSection: [],
         itemFrameworkOneSequence: '',

@@ -113,6 +113,8 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
     let tempArr = RES_START_POPUP_OPTION;
     if (status === 'UNSTARTED') {
       tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
+    } else {
+      tempArr = [tempArr[0], { ...tempArr[1], disabled: true }];
     }
     dispatch({
       type: SET_POPUP_STATE,
@@ -132,8 +134,9 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
     // assignmentStart(e.currentTarget.getAttribute('index'));
     // setAssessmentList(reviewListDistinctData[e.currentTarget.getAttribute('index')]);
   };
+  console.log('listDistinctData',listDistinctData);
   return (
-    <div>
+    <div key={listDistinctData}>
       {listDistinctData && (
         <Card
           textOneOne={listDistinctData.assesseeAssignmentName}
@@ -165,7 +168,7 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item.assessmentId)}
                 isDelivery={true}
-                onClickArrow={startAssessment}
+                onClickArrow={item.assesseeAssessmentStatus === 'FINISHED' ? null : startAssessment}
               />
             </div>
           );

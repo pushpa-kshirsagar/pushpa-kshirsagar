@@ -359,7 +359,7 @@ const PopUpReducer = (istate = initialState, action) => {
               // istate.selectedTagStatus === 'SHARED' ||
               // istate.selectedTagStatus === 'UNSHARED' ||
               istate.selectedTagStatus === 'UNPUBLISHED' ||
-              istate.selectedTagStatus === 'PUBLISHED' ||
+              // istate.selectedTagStatus === 'PUBLISHED' ||
               istate.selectedTagStatus === 'ACTIVE')
           ) {
             arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
@@ -370,12 +370,8 @@ const PopUpReducer = (istate = initialState, action) => {
           ) {
             arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           }
-          if (
-            (action.payload.badgeValue === 'publish' && istate.selectedTagStatus === 'PUBLISHED') ||
-            (action.payload.badgeValue === 'unpublish' &&
-              istate.selectedTagStatus === 'UNPUBLISHED')
-          ) {
-            arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
+          if (action.payload.badgeValue === 'publish' && istate.selectedTagStatus === 'PUBLISHED') {
+            arrVal = [arrVal[0],{ ...arrVal[1], disabled: true }];
           }
           if (
             (action.payload.badgeValue === 'suspend' &&

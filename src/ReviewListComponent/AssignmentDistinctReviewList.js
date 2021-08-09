@@ -218,11 +218,11 @@ const AssignmentDistinctReviewList = (props) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let tempArr =[];
     let stats = e.currentTarget.getAttribute('status');
-    ASSIGNMENT_REVIEW_LIST_POPUP_OPTION.map((element) => {
-      if (stats === 'PUBLISHED' && element.data === 'revise')
-        tempArr.push({ ...element, disabled: true });
-      else tempArr.push(element);
-    });
+    // ASSIGNMENT_REVIEW_LIST_POPUP_OPTION.map((element) => {
+    //   if (stats === 'PUBLISHED' && element.data === 'revise')
+    //     tempArr.push({ ...element, disabled: true });
+    //   else tempArr.push(element);
+    // });
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -231,7 +231,7 @@ const AssignmentDistinctReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: tempArr,
+        popupContentArrValue: ASSIGNMENT_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }
@@ -240,7 +240,7 @@ const AssignmentDistinctReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: tempArr
+        value: ASSIGNMENT_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });

@@ -158,6 +158,16 @@ export const DisplayPaneFive = () => {
       }
     });
   };
+  const itemPopUpOption = [
+    {
+      data: 'revise',
+      dataValue: 'revise',
+      dataKey: 'reviseAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
+    }
+  ];
 
   const itemPrimaryPopupOption = [
     {
@@ -262,9 +272,10 @@ export const DisplayPaneFive = () => {
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
-      dispatch({ type: LOADER_START })
+      dispatch({ type: LOADER_START });
       dispatch({
-        type: GET_ITEM_TYPE_REVIEW_LIST_SAGA, payload: {
+        type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+        payload: {
           request: {
             assesseeId: selectedAssociateInfo?.assesseeId,
             associateId:
@@ -272,7 +283,7 @@ export const DisplayPaneFive = () => {
                 .associateTagPrimary
           }
         }
-      })
+      });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
@@ -312,8 +323,44 @@ export const DisplayPaneFive = () => {
       });
     }
   };
+  const itemLabelPrimaryPopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_LABEL_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
+  const responseLabelChoicePopUp = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'RESPONSE_LABEL_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
+  const itemExplanationPrimaryPopUp = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
 
-  const BackHandlerEvent = (e) => { };
+  const BackHandlerEvent = (e) => {};
   const handleClick = (event) => {
     console.log('ONCHANGE ', event.target.value);
     if (itemFrameworkOne.itemFrameworkOneResponseCorrect[0] == event.target.value) {
@@ -452,7 +499,7 @@ export const DisplayPaneFive = () => {
       <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
-          headerOne={'items'}
+          headerOne={'item'}
           headerOneBadgeOne={''}
           onClick={BackHandlerEvent}
           mode={''}
@@ -462,6 +509,77 @@ export const DisplayPaneFive = () => {
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeTripleDotOptionPopup}
             currentPopUpOption={itemPrimaryPopupOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+
+      <Popup isActive={isPopUpValue === 'ITEM_LABEL_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'item'}
+          headerOneBadgeOne={'label'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={itemLabelPrimaryPopup}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+
+      <Popup isActive={isPopUpValue === 'ITEM_CHOICE_LABEL_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={'label'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={responseLabelChoicePopUp}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+
+      <Popup isActive={isPopUpValue === 'ITEM_EXPLANATION_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'item'}
+          headerOneBadgeOne={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={itemExplanationPrimaryPopUp}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      <Popup isActive={isPopUpValue === 'ITEM_CHOICE_EXPLANATION_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={() => {}}
+            currentPopUpOption={itemPopUpOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>

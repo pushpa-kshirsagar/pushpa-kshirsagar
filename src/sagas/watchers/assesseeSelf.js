@@ -1,5 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
+  ASSESSEE_ASSESSMENT_FINISH_SAGA,
   ASSESSEE_ASSESSMENT_START_SAGA,
   ASSESSMENT_START_SAGA,
   CLEAR_ASSIGNMENT_INFO,
@@ -8,6 +9,7 @@ import {
   RELATED_REVIEWLIST_DISTINCT_DATA,
   REVIEWLIST_DISTINCT_DATA,
   SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+  SET_ASSESSEE_ASSESSMENT_ITEM_RES_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -16,7 +18,9 @@ import {
 import {
   ASSESSEEASSIGNMENT_REVIEWLIST_URL,
   ASSESSMENT_START_URL,
-  ASSESSEE_ASSESSMENT_START_URL
+  ASSESSEE_ASSESSMENT_START_URL,
+  ASSESSMENT_ITEM_REVISE_URL,
+  ASSESSEE_ASSESSMENT_FINISH_URL
 } from '../../endpoints';
 import Store from '../../store';
 
@@ -187,8 +191,77 @@ function* workerAssesseeAssessmentStartSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerAssesseeAssessmentItemFinishSaga(data) {
+  try {
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSESSMENT_ITEM_REVISE_URL,
+      type: ''
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+    
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerAssesseeAssessmentFinishSaga(data) {
+  try {
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSESSEE_ASSESSMENT_FINISH_URL,
+      type: ''
+    });
+    // const response ={responseCode:'000',countTotal:30}
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: 'FINISH' }
+      });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssessmentStartData', value: null }
+      });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'assesseeAssignmentAssessmentData', value: null }
+      });
+      localStorage.setItem('assessmentItem', '[]');
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 export default function* watchAssesseeSelfSaga() {
   yield takeLatest(GET_ASSESSEE_ASSIGNMENT_SAGA, workerAssesseeAssignmentListSaga);
   yield takeLatest(ASSESSMENT_START_SAGA, workerAssessmentStartSaga);
   yield takeLatest(ASSESSEE_ASSESSMENT_START_SAGA, workerAssesseeAssessmentStartSaga);
+  yield takeLatest(SET_ASSESSEE_ASSESSMENT_ITEM_RES_SAGA, workerAssesseeAssessmentItemFinishSaga);
+  yield takeLatest(ASSESSEE_ASSESSMENT_FINISH_SAGA, workerAssesseeAssessmentFinishSaga);
 }

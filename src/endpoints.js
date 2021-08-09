@@ -28,9 +28,13 @@ export const ASSESSEE_ASSESSMENT_START_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment/start';
 export const ASSESSMENT_START_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment/assessee/assessment';
+export const ASSESSMENT_ITEM_REVISE_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment-item/revise';
+export const ASSESSEE_ASSESSMENT_FINISH_URL =
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment/revise';
 //end assessee self
 export const SIGNED_ASSESSEE_NOTIFICATION_URL =
-  'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee-distinct/assignment/count';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assignment/count';
 export const ASSESSEE_CREATE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/create';
 export const ASSOCIATE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-sign-on';
 export const ASSESSEE_REVIEW_LIST_URL =
@@ -359,7 +363,8 @@ export const ASSIGNMENT_ALLOCATE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/allocate';
 export const ASSOCIATE_ALLOCATE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/allocate';
-export const JOBPROFILE_ALLOCATE_URL = ANALYTICS + '/dev/insight-guru/api/job-profile-distinct/allocate';
+export const JOBPROFILE_ALLOCATE_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-profile-distinct/allocate';
 export const CULTURE_PROFILE_ALLOCATE_URL =
   ANALYTICS + '/dev/insight-guru/api/culture-profile-distinct/allocate';
 export const CULTURE_PROFILE_ALLOCATE_ASSIGNMENT_URL =

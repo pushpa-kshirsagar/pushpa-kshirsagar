@@ -141,6 +141,8 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
     let tempArr = RES_START_POPUP_OPTION;
     if (status === 'UNSTARTED') {
       tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
+    } else {
+      tempArr = [tempArr[0], { ...tempArr[1], disabled: true }];
     }
     dispatch({
       type: SET_POPUP_STATE,
@@ -181,7 +183,7 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item.assignmentId)}
                 isDelivery={true}
-                onClickArrow={startAssignment}
+                onClickArrow={item.assesseeAssignmentStatus === 'FINISHED' ? null : startAssignment}
                 onClickCheckBox={(event) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}

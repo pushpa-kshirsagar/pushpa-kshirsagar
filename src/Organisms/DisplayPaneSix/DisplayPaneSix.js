@@ -20,9 +20,11 @@ import { RES_START_POPUP_OPTION, ASSESSMENT_CLOSED_POPUP_OPTION } from '../../Po
 export const DisplayPaneSix = () => {
   // const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
-  const { assesseeAssignmentAssessmentData, isAssessmentStart } = useSelector(
-    (state) => state.AssesseeAssignmentAssessmentReducer
-  );
+  const {
+    assesseeAssignmentAssessmentData,
+    assesseeAssessmentStartData,
+    isAssessmentStart
+  } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);  
   const { selectedTagStatus } = useSelector((state) => state.PopUpReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const dispatch = useDispatch();
@@ -35,20 +37,35 @@ export const DisplayPaneSix = () => {
       tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
     }
     if (clickedval === 'next') {
-      dispatch({
-        type: SET_POPUP_STATE,
-        payload: {
-          popupHeaderOne: 'assessment',
-          popupHeaderOneBadgeOne: '',
-          popupHeaderOneBadgeTwo: '',
-          isPopUpValue: '',
-          popupOpenType: 'primary',
-          popupContentArrValue: tempArr,
-          selectedTagValue: e.currentTarget.getAttribute('assignmentid')
-          // selectedTagStatus: 'status'
-        }
-      });
-      dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+      console.log('assesseeAssessmentStartData', assesseeAssessmentStartData);
+      if (
+        assesseeAssignmentAssessmentData.informationFramework.assessmentManuscript
+          .assessmentManuscriptPrimary
+      ) {
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'MANUSCRIPT' }
+        });
+      } else {
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: '' }
+        });
+        dispatch({
+          type: SET_POPUP_STATE,
+          payload: {
+            popupHeaderOne: 'assessment',
+            popupHeaderOneBadgeOne: '',
+            popupHeaderOneBadgeTwo: '',
+            isPopUpValue: '',
+            popupOpenType: 'primary',
+            popupContentArrValue: tempArr,
+            selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
+            selectedTagStatus: selectedTagStatus
+          }
+        });
+        dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
+      }
     }
     if (clickedval === 'close') {
       dispatch({
@@ -78,14 +95,8 @@ export const DisplayPaneSix = () => {
         <DisplayPaneSixHeader
           className=""
           headerOne={'assessment'}
-          headerOneBadgeOne={'communiqué'}
-          headerOneBadgeTwo={
-            isAssessmentStart === 'START'
-              ? 'primary'
-              : isAssessmentStart === 'FINISH'
-              ? 'secondary'
-              : ''
-          }
+          headerOneBadgeOne={isAssessmentStart === 'MANUSCRIPT' ? 'manuscript' : 'communiqué'}
+          headerOneBadgeTwo={''}
           headerPanelColour="blue"
         />
       </div>
