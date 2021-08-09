@@ -245,6 +245,7 @@ export const DisplayPaneFive = () => {
 
   const setSecondaryOptionValue = (e) => {
     //TODO: set secondary option in item
+    console.log();
   };
 
   const ChangeOptionPopup = (e) => {
@@ -578,8 +579,8 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={() => {}}
-            currentPopUpOption={itemPopUpOption}
+            ChangeOptionPopup={itemLabelPrimaryPopup}
+            currentPopUpOption={() => {}}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -596,8 +597,8 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={ChangeOptionPopup}
-            currentPopUpOption={itemPrimaryPopupOption}
+            ChangeOptionPopup={itemLabelPrimaryPopup}
+            currentPopUpOption={() => {}}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
