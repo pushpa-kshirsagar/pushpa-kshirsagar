@@ -1983,8 +1983,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
-          // assesseeRoleShare: typeShare,
-          // assesseeRoleShareInformation: [],
+          assesseeRoleShare: typeShare,
+          assesseeRoleShareInformation: [],
           assesseeRoleShared: [
             {
               assesseeRoleId: selectedTagValue,
@@ -2000,8 +2000,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
-          // associateRoleShare: typeShare,
-          // associateRoleShareInformation: [],
+          associateRoleShare: typeShare,
+          associateRoleShareInformation: [],
           associateRoleShared: [
             {
               associateRoleId: selectedTagValue,
@@ -2017,8 +2017,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
-          // associateRoleShare: typeShare,
-          // associateRoleShareInformation: [],
+          associateRoleShare: typeShare,
+          associateRoleShareInformation: [],
           associateTypeShared: [
             {
               associateTypeId: selectedTagValue,
@@ -2051,6 +2051,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          assessmentTypeShare: typeShare,
+          assessmentTypeShareInformation: [],
           assessmentTypeShared: [
             {
               assessmentTypeId: selectedTagValue,
@@ -2066,6 +2068,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          itemTypeShare: typeShare,
+          itemTypeShareInformation: [],
           itemTypeShared: [
             {
               itemTypeId: selectedTagValue,
@@ -2081,6 +2085,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          assignmentTypeShare: typeShare,
+          assignmentTypeShareInformation: [],
           assignmentTypeShared: [
             {
               assignmentTypeId: selectedTagValue,
@@ -2096,6 +2102,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          cultureProfileTypeShare: typeShare,
+          cultureProfileTypeShareInformation: [],
           cultureProfileTypeShared: [
             {
               cultureProfileTypeId: selectedTagValue,
@@ -2111,6 +2119,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
+          jobProfileTypeShare: typeShare,
+          jobProfileTypeShareInformation: [],
           jobProfileTypeShared: [
             {
               jobProfileTypeId: selectedTagValue,
