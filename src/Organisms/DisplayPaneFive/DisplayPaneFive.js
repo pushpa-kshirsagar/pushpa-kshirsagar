@@ -314,6 +314,7 @@ export const DisplayPaneFive = () => {
   };
 
   const ChangeItemOptionPopup = (e) => {
+    // console.log("config clicked");
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
       dispatch({
