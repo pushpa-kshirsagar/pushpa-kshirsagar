@@ -147,6 +147,7 @@ const PopUpItemConfig = (props) => {
                                     </div>
                                     <div className={'checkedFontNew'}>
                                         <Checkbox
+                                            style={{ float: 'right', margin: '0px' }}
                                             className={''}
                                             color="default"
                                             name={'assesseeAddressEmailCommunication'}
@@ -166,6 +167,7 @@ const PopUpItemConfig = (props) => {
                                     </div>
                                     <div className={'checkedFontNew'}>
                                         <Checkbox
+                                            style={{ float: 'right', margin: '0px' }}
                                             className={''}
                                             color="default"
                                             name={'assesseeAddressEmailCommunication'}
@@ -185,6 +187,7 @@ const PopUpItemConfig = (props) => {
                                     </div>
                                     <div className={'checkedFontNew'}>
                                         <Checkbox
+                                            style={{ float: 'right', margin: '0px' }}
                                             className={''}
                                             color="default"
                                             name={'assesseeAddressEmailCommunication'}
@@ -204,6 +207,7 @@ const PopUpItemConfig = (props) => {
                                     </div>
                                     <div className={'checkedFontNew'}>
                                         <Checkbox
+                                            style={{ float: 'right', margin: '0px' }}
                                             className={''}
                                             color="default"
                                             name={'assesseeAddressEmailCommunication'}
@@ -223,6 +227,7 @@ const PopUpItemConfig = (props) => {
                                     </div>
                                     <div className={'checkedFontNew'}>
                                         <Checkbox
+                                            style={{ float: 'right', margin: '0px' }}
                                             className={''}
                                             color="default"
                                             name={'assesseeAddressEmailCommunication'}

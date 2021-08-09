@@ -507,7 +507,7 @@ export const DisplayPaneFive = () => {
         isActive={isPopUpValue === `ITEM_MEDIA_TEXT`}
         headerOne={'item'}
         headerPanelColour={'genericOne'}
-        headerOneBadgeOne={'media'}
+        // headerOneBadgeOne={'media'}
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
