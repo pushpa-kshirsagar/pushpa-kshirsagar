@@ -8,7 +8,9 @@ import {
   LOADER_START,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
+  SET_ITEM_DYNAMIC_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
   SET_PANE_THREE_ITEM_PREVIEW_MODE,
   SET_POPUP_VALUE
 } from '../../actionType';
@@ -233,10 +235,18 @@ export const DisplayPaneFive = () => {
       let arr = itemFrameworkOneResponseChoice;
       let newArr = arr.slice(0, -1);
       // setQuestionOptionList(newArr);
+      // dispatch({
+      //   type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+      //   payload: {
+      //     stateName: 'itemFrameworkOneResponseChoice',
+      //     value: newArr
+      //   }
+      // });
       dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
         payload: {
-          stateName: 'itemFrameworkOneResponseChoice',
+          objectName: 'itemFrameworkOneResponseChoice',
+          actualStateName: 'itemFrameworkOneResponseChoice',
           value: newArr
         }
       });
@@ -669,15 +679,16 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={itemFrameworkOne?.itemFrameworkOneLabel || ''}
+        defaultSheetValue={itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || ''}
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
           // setLabelText(innerText);
           dispatch({
-            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
             payload: {
-              stateName: 'itemFrameworkOneLabel',
+              objectName: 'itemFrameworkOneLabel',
+              actualStateName: 'itemFrameworkOneLabel',
               value: innerText
             }
           });
@@ -691,15 +702,18 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={itemInformation?.itemFrameworkOneResponseLabel || ''}
+        defaultSheetValue={
+          itemInformation?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel || ''
+        }
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
           // setResponseLabelText(innerText);
           dispatch({
-            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
             payload: {
-              stateName: 'itemFrameworkOneResponseLabel',
+              objectName: 'itemFrameworkOneResponseLabel',
+              actualStateName: 'itemFrameworkOneResponseLabel',
               value: innerText
             }
           });
@@ -713,15 +727,25 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={itemInformation?.itemFrameworkOneExplanation || ''}
+        defaultSheetValue={
+          itemInformation?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation || ''
+        }
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
           // setItemDescriptionText(innerText);
+          // dispatch({
+          //   type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          //   payload: {
+          //     stateName: 'itemFrameworkOneExplanation',
+          //     value: innerText
+          //   }
+          // });
           dispatch({
-            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
             payload: {
-              stateName: 'itemFrameworkOneExplanation',
+              objectName: 'itemFrameworkOneExplanation',
+              actualStateName: 'itemFrameworkOneExplanation',
               value: innerText
             }
           });
@@ -735,15 +759,19 @@ export const DisplayPaneFive = () => {
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
-        defaultSheetValue={itemInformation?.itemFrameworkOneResponseExplanation || ''}
+        defaultSheetValue={
+          itemInformation?.itemFrameworkOneResponseExplanation
+            ?.itemFrameworkOneResponseExplanation || ''
+        }
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
           // setResponseDescriptionText(innerText);
           dispatch({
-            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
             payload: {
-              stateName: 'itemFrameworkOneResponseExplanation',
+              objectName: 'itemFrameworkOneResponseExplanation',
+              actualStateName: 'itemFrameworkOneResponseExplanation',
               value: innerText
             }
           });

@@ -1038,8 +1038,8 @@ export const makeAssesseeTypeObj = (selectedAssociateInfo, filterKey, countPage,
       columnName: 'informationBasic.assesseeTypeName,informationBasic.assesseeTypeDescription',
       order: 'asc'
     },
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
+    // associateAscendantPrimary:
+      // localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     numberPage: numberPage,
     countPage: countPage,
     search: [

@@ -6,6 +6,7 @@ import {
   ADD_ITEM_OPTION_OBJECT,
   REMOVE_ITEM_OPTION_OBJECT,
   SET_ITEM_FRAMWORK_TYPE,
+  SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE
 } from '../actionType';
 
 const optionLabel =
@@ -56,6 +57,7 @@ const initialState = {
             itemGroupClassificationPolarity: ''
           }
         ],
+        itemFrameworkOneLevel: null,
         itemFrameworkOneBlank: '',
         itemFrameworkOneExplanation: {
           itemFrameworkOneExplanationDisplay: false,
@@ -74,8 +76,8 @@ const initialState = {
             itemFrameworkOneResponseChoice: '1',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneReponseChoiceExplanation: '',
-              itemFrameworkOneReponseChoiceExplanationDisplay: false
+              itemFrameworkOneResponseChoiceExplanation: '',
+              itemFrameworkOneResponseChoiceExplanationDisplay: false
             }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
@@ -86,8 +88,8 @@ const initialState = {
             itemFrameworkOneResponseChoice: '2',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneReponseChoiceExplanation: '',
-              itemFrameworkOneReponseChoiceExplanationDisplay: false
+              itemFrameworkOneResponseChoiceExplanation: '',
+              itemFrameworkOneResponseChoiceExplanationDisplay: false
             }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
@@ -98,8 +100,8 @@ const initialState = {
             itemFrameworkOneResponseChoice: '3',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneReponseChoiceExplanation: '',
-              itemFrameworkOneReponseChoiceExplanationDisplay: false
+              itemFrameworkOneResponseChoiceExplanation: '',
+              itemFrameworkOneResponseChoiceExplanationDisplay: false
             }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
@@ -110,8 +112,8 @@ const initialState = {
             itemFrameworkOneResponseChoice: '4',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneReponseChoiceExplanation: '',
-              itemFrameworkOneReponseChoiceExplanationDisplay: false
+              itemFrameworkOneResponseChoiceExplanation: '',
+              itemFrameworkOneResponseChoiceExplanationDisplay: false
             }, //responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
             itemFrameworkOneResponseChoiceWeightage: '',
@@ -120,21 +122,21 @@ const initialState = {
           }
         ],
         itemFrameworkOneResponseLabel: {
-          itemFrameworkOneReponseLabelDisplay: false,
-          itemFrameworkOneReponseLabel: ''
+          itemFrameworkOneResponseLabelDisplay: false,
+          itemFrameworkOneResponseLabel: ''
         },
         itemFrameworkOneResponseExplanation: {
-          itemFrameworkOneReponseExplanationDisplay: false,
-          itemFrameworkOneReponseExplanation: ''
+          itemFrameworkOneResponseExplanationDisplay: false,
+          itemFrameworkOneResponseExplanation: ''
         }, //responseDescription,
         itemFrameworkOneScale: [
           {
             itemGroupScaleLabel: '',
-            itemGroupScaleScore: '',
-            itemGroupScaleWeightage: ''
+            itemGroupScaleScore: null,
+            itemGroupScaleWeightage: null
           }
         ],
-        itemFrameworkOneScore: '',
+        itemFrameworkOneScore: null,
         itemFrameworkOneSection: [],
         itemFrameworkOneSequence: '',
         itemFrameworkOneTime: '',
@@ -143,7 +145,7 @@ const initialState = {
           itemFrameworkOneWordMaximum: '',
           itemFrameworkOneWordMinimum: ''
         },
-        itemFrameworkOneWeightage: ''
+        itemFrameworkOneWeightage: null
       },
       itemTypeList: []
     }
@@ -189,6 +191,25 @@ const ItemCreateReducer = (istate = initialState, action) => {
           }
         }
       };
+    case SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE:
+      return {
+        ...istate,
+        itemInformation: {
+          ...istate.itemInformation,
+          informationFramework: {
+            ...istate.itemInformation.informationFramework,
+            itemFrameworkOne: {
+              ...istate.itemInformation.informationFramework.itemFrameworkOne,
+              [action.payload.objectName]: {
+                ...istate.itemInformation.informationFramework.itemFrameworkOne[
+                  action.payload.objectName
+                ],
+                [action.payload.actualStateName]: action.payload.value
+              }
+            }
+          }
+        }
+      };
     case SET_ITEM_FRAMWORK_TYPE:
       return {
         ...istate,
@@ -196,7 +217,7 @@ const ItemCreateReducer = (istate = initialState, action) => {
           ...istate.itemInformation,
           informationFramework: {
             ...istate.itemInformation.informationFramework,
-            itemTypeList: action.payload 
+            itemTypeList: action.payload
           }
         }
       };

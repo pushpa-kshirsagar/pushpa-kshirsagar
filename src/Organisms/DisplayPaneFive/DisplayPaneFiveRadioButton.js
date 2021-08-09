@@ -305,7 +305,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                       typeOfSetObject={''}
                       defaultSheetValue={
                         op.itemFrameworkOneResponseChoiceExplanation
-                          ?.itemFrameworkOneReponseChoiceExplanation
+                          ?.itemFrameworkOneResponseChoiceExplanation
                       }
                       actualLableValue={'assessmentManuscriptSecondary'}
                       mode={'revise'}
@@ -316,7 +316,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                             element.itemFrameworkOneResponseChoice ===
                             op.itemFrameworkOneResponseChoice
                           ) {
-                            element.itemFrameworkOneResponseChoiceExplanation = innerText;
+                            element.itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanation = innerText;
                           }
                         });
                         dispatch({
@@ -357,7 +357,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                     >
                       {ReactHTMLParser(
                         op.itemFrameworkOneResponseChoiceExplanation
-                          ?.itemFrameworkOneReponseChoiceExplanation || responseChoiceDescription
+                          ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
                       )}
                     </div>
                   </div>
@@ -396,7 +396,7 @@ const DisplayPaneFiveRadioButton = (props) => {
         >
           {ReactHTMLParser(
             itemFrameworkOne?.itemFrameworkOneResponseExplanation
-              ?.itemFrameworkOneReponseExplanation || responseDescription
+              ?.itemFrameworkOneResponseExplanation || responseDescription
           )}
         </div>
       </div>

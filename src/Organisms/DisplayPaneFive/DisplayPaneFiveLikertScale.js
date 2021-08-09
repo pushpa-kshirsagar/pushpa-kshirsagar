@@ -128,7 +128,7 @@ const DisplayPaneFiveLikertScale = (props) => {
             // });
           }}
         >
-          {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel || itemLabelText)}
+          {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText)}
         </div>
         <div
           style={{

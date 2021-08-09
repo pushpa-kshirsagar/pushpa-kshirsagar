@@ -216,7 +216,7 @@ function* workerReviewInfoItemSaga(data) {
         itemFrameworkOneBlank = '',
         itemFrameworkOneExplanation = '',
         itemFrameworkOneLabel = '',
-        itemFrameworkOneLevel = '',
+        itemFrameworkOneLevel = null,
         itemFrameworkOneMedia = '',
         itemFrameworkOnePolarity = '',
         itemFrameworkOneResponseChoice = [],

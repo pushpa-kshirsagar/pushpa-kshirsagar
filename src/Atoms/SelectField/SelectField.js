@@ -53,7 +53,10 @@ export const SelectField = (props) => {
               )
             : listSelect.map((option, index) => (
                 <MenuItem key={`${tag}-${index}`} value={option} className={'selectMenu'}>
-                  {option}
+                  {option.name}
+                  {option.description != null ? (
+                    <div className={'midPaneLabel'}>{option.description}</div>
+                  ) : null}
                 </MenuItem>
               ))}
         </Select>

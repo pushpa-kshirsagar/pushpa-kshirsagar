@@ -39,7 +39,7 @@ const PopUpItemFramework = (props) => {
   } = props;
   const [blank, setBlank] = useState('');
   const [group, setgroup] = useState('');
-  const [level, setlevel] = useState('');
+  const [level, setlevel] = useState(null);
   const [polarity, setpolarity] = useState('');
   const [score, setscore] = useState('');
   const [time, settime] = useState('');
@@ -63,7 +63,7 @@ const PopUpItemFramework = (props) => {
       });
       dispatch({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneScore', value: score }
+        payload: { stateName: 'itemFrameworkOneScore', value: parseInt(score) }
       });
       dispatch({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
@@ -78,7 +78,7 @@ const PopUpItemFramework = (props) => {
         let tempArr = itemFrameworkOneResponseChoice;
         tempArr.forEach((element) => {
           if (element.itemFrameworkOneResponseChoice === choiceOb.itemFrameworkOneResponseChoice) {
-            element.itemFrameworkOneResponseChoiceScore = score;
+            element.itemFrameworkOneResponseChoiceScore = parseInt(score);
             element.itemFrameworkOneResponseChoiceWeightage = weightage;
             element.itemFrameworkOneResponseChoicePolarity = polarity;
           }
