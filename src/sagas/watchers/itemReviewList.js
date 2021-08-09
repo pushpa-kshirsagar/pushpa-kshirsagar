@@ -13,7 +13,7 @@ import {
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
   GET_ALLOCATE_ITEM,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
-  SET_ITEM_FRAMWORK_TYPE,
+  SET_ITEM_FRAMWORK_TYPE
 } from '../../actionType';
 import {
   ITEM_REVIEWLIST_URL,
@@ -288,10 +288,9 @@ function* workerItemTypeReviewListSaga(data) {
     if (userResponse.responseCode === '000') {
       yield put({
         type: SET_ITEM_FRAMWORK_TYPE,
-          payload: userResponse?.responseObject || [] 
-      })
+        payload: userResponse?.responseObject || []
+      });
     } else {
-     
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });

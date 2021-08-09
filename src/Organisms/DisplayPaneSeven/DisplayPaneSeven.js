@@ -59,7 +59,7 @@ const AssessmentHeader = (props) => {
         </div> */}
         <div style={{ flex: '1' }} className="flex-center">
           {props.timer && (
-            <span style={{ color: '#fff', fontWeight: 'bold' }}>
+            <span style={{ fontWeight: 'bold' }}>
               <AssessmentTimer
                 expiryTimestamp={props.timer}
                 key={props.timer}
@@ -186,7 +186,7 @@ export const DisplayPaneSeven = () => {
         <HeaderCard
           className=""
           displayPane="five"
-          headerOne={'assessment'}
+          headerOne={assesseeAssessmentStartData ? 'assessment' : null}
           headerOneBadgeOne=""
           headerPanelColour="green"
         />

@@ -534,7 +534,18 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           cardValue
         );
         dispatch({ type: POPUP_CLOSE });
-      } else {
+      } else if (keyVal === 'assessments'){
+        getAssessmentDistinctApiCall(
+          selectedAssociateInfo,
+          'inactive',
+          countPage,
+          dispatch,
+          'distinct',
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
+        );
+        filterModeKey = 'itemAllocateToAssessment';
+        dispatch({ type: POPUP_CLOSE });
+      }else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,
           payload: { badgeValue: dataVal, keyValue: keyVal }

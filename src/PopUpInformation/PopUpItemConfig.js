@@ -142,6 +142,7 @@ const PopUpItemConfig = (props) => {
                   <div className={'f4'}>{createNameWithBadge('item (explanation)')}</div>
                   <div className={'checkedFontNew'}>
                     <Checkbox
+                      style={{ float: 'right', margin: '0px' }}
                       className={''}
                       color="default"
                       name={'assesseeAddressEmailCommunication'}
@@ -157,6 +158,7 @@ const PopUpItemConfig = (props) => {
                   <div className={'f4'}>{createNameWithBadge('item (label)')}</div>
                   <div className={'checkedFontNew'}>
                     <Checkbox
+                      style={{ float: 'right', margin: '0px' }}
                       className={''}
                       color="default"
                       name={'assesseeAddressEmailCommunication'}
@@ -174,6 +176,7 @@ const PopUpItemConfig = (props) => {
                   </div>
                   <div className={'checkedFontNew'}>
                     <Checkbox
+                      style={{ float: 'right', margin: '0px' }}
                       className={''}
                       color="default"
                       name={'assesseeAddressEmailCommunication'}
@@ -189,6 +192,7 @@ const PopUpItemConfig = (props) => {
                   <div className={'f4'}>{createNameWithBadge('response (explanation)')}</div>
                   <div className={'checkedFontNew'}>
                     <Checkbox
+                      style={{ float: 'right', margin: '0px' }}
                       className={''}
                       color="default"
                       name={'assesseeAddressEmailCommunication'}
@@ -204,6 +208,7 @@ const PopUpItemConfig = (props) => {
                   <div className={'f4'}>{createNameWithBadge('response (label)')}</div>
                   <div className={'checkedFontNew'}>
                     <Checkbox
+                      style={{ float: 'right', margin: '0px' }}
                       className={''}
                       color="default"
                       name={'assesseeAddressEmailCommunication'}

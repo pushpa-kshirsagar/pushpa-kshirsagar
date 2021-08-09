@@ -255,6 +255,7 @@ export const DisplayPaneFive = () => {
 
   const setSecondaryOptionValue = (e) => {
     //TODO: set secondary option in item
+    console.log();
   };
 
   const ChangeOptionPopup = (e) => {
@@ -352,6 +353,18 @@ export const DisplayPaneFive = () => {
         type: SET_POPUP_VALUE,
         payload: {
           isPopUpValue: 'RESPONSE_LABEL_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
+  const responseLabelExplanationPopUp = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'RESPONSE_LABEL_EXPLANATION_TEXT',
           popupMode: ''
         }
       });
@@ -578,6 +591,24 @@ export const DisplayPaneFive = () => {
         </DialogContent>
       </Popup>
 
+      <Popup isActive={isPopUpValue === 'ITEM_RESPONSE_EXPLANATION_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={responseLabelExplanationPopUp}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+
       <Popup isActive={isPopUpValue === 'ITEM_EXPLANATION_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
@@ -606,8 +637,8 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={() => {}}
-            currentPopUpOption={itemPopUpOption}
+            ChangeOptionPopup={itemLabelPrimaryPopup}
+            currentPopUpOption={() => {}}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -624,8 +655,8 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={ChangeOptionPopup}
-            currentPopUpOption={itemPrimaryPopupOption}
+            ChangeOptionPopup={itemLabelPrimaryPopup}
+            currentPopUpOption={() => {}}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -653,7 +684,7 @@ export const DisplayPaneFive = () => {
         isActive={isPopUpValue === `ITEM_MEDIA_TEXT`}
         headerOne={'item'}
         headerPanelColour={'genericOne'}
-        headerOneBadgeOne={'media'}
+        // headerOneBadgeOne={'media'}
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}
@@ -714,6 +745,32 @@ export const DisplayPaneFive = () => {
             payload: {
               objectName: 'itemFrameworkOneResponseLabel',
               actualStateName: 'itemFrameworkOneResponseLabel',
+              value: innerText
+            }
+          });
+        }}
+      />
+      <PopUpTextSheet
+        isActive={isPopUpValue === `RESPONSE_LABEL_EXPLANATION_TEXT`}
+        headerOne={'response'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'explanation'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={
+          itemInformation?.itemFrameworkOneResponseExplanation
+            ?.itemFrameworkOneResponseExplanation || ''
+        }
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          // setResponseLabelText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+            payload: {
+              objectName: 'itemFrameworkOneResponseExplanation',
+              actualStateName: 'itemFrameworkOneResponseExplanation',
               value: innerText
             }
           });

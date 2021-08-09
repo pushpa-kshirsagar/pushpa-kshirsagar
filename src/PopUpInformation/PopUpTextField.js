@@ -61,7 +61,7 @@ const PopUpTextField = (props) => {
   const handleChange = (event) => {
     if (!isNotRevised) {
       const { name, value } = event.target;
-      // dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+      dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
       setLocalObject({ ...basicInfo, [name]: value });
       setState((prevState) => ({
         ...prevState,

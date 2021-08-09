@@ -24,7 +24,7 @@ export const DisplayPaneSix = () => {
     assesseeAssignmentAssessmentData,
     assesseeAssessmentStartData,
     isAssessmentStart
-  } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);  
+  } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);
   const { selectedTagStatus } = useSelector((state) => state.PopUpReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const dispatch = useDispatch();
@@ -40,7 +40,8 @@ export const DisplayPaneSix = () => {
       console.log('assesseeAssessmentStartData', assesseeAssessmentStartData);
       if (
         assesseeAssignmentAssessmentData.informationFramework.assessmentManuscript
-          .assessmentManuscriptPrimary
+          .assessmentManuscriptPrimary &&
+        isAssessmentStart !== 'MANUSCRIPT'
       ) {
         dispatch({
           type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
@@ -130,12 +131,15 @@ export const DisplayPaneSix = () => {
                       : isAssessmentStart === 'FINISH'
                       ? assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
                           .assessmentCommuniqueSecondary
+                      : isAssessmentStart === 'MANUSCRIPT'
+                      ? assesseeAssignmentAssessmentData.informationFramework.assessmentManuscript
+                          .assessmentManuscriptPrimary
                       : ''
                 }}
               ></div>
             </div>
 
-            {isAssessmentStart === 'START' ? (
+            {isAssessmentStart === 'START' || isAssessmentStart === 'MANUSCRIPT' ? (
               <FooterIconTwo
                 FilterModeEnable={false}
                 FilterMode={FilterMode}
