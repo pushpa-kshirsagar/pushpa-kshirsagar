@@ -549,6 +549,24 @@ export const DisplayPaneFive = () => {
           />
         </DialogContent>
       </Popup>
+      <Popup isActive={isPopUpValue === 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={'choice'}
+          headerOneBadgeTwo={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeOptionPopup}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
 
       <Popup isActive={isPopUpValue === 'ITEM_EXPLANATION_PRIMARY_POPUP'}>
         <PopupHeader

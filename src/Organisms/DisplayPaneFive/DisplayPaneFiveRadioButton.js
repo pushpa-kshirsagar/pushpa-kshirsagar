@@ -112,7 +112,8 @@ const DisplayPaneFiveRadioButton = (props) => {
   return (
     <>
       <div>
-        {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' || reviewMode === 'revise') && (
+        {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' ||
+          reviewMode === 'revise') && (
           <div
             style={{
               padding: '2.5px 5px',
@@ -130,7 +131,9 @@ const DisplayPaneFiveRadioButton = (props) => {
               });
             }}
           >
-            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText)}
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText
+            )}
           </div>
         )}
         {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
@@ -156,7 +159,8 @@ const DisplayPaneFiveRadioButton = (props) => {
         )}
       </div>
       <div>
-        {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' || reviewMode === 'revise') && (
+        {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
+          reviewMode === 'revise') && (
           <div
             style={{
               padding: '2.5px 5px',
@@ -174,7 +178,10 @@ const DisplayPaneFiveRadioButton = (props) => {
               });
             }}
           >
-            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation || itemDescription)}
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation ||
+                itemDescription
+            )}
           </div>
         )}
       </div>
@@ -188,7 +195,8 @@ const DisplayPaneFiveRadioButton = (props) => {
             }}
           /> */}
       <div>
-        {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' || reviewMode === 'revise') && (
+        {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
+          reviewMode === 'revise') && (
           <div
             style={{
               padding: '2.5px 5px',
@@ -206,7 +214,10 @@ const DisplayPaneFiveRadioButton = (props) => {
               });
             }}
           >
-            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel || responseLabel)}
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel ||
+                responseLabel
+            )}
           </div>
         )}
       </div>
@@ -292,7 +303,10 @@ const DisplayPaneFiveRadioButton = (props) => {
                       headerOneBadgeTwo={`explanation`}
                       basicInfo={{}}
                       typeOfSetObject={''}
-                      defaultSheetValue={op.itemFrameworkOneResponseChoiceExplanation?.itemFrameworkOneReponseChoiceExplanation}
+                      defaultSheetValue={
+                        op.itemFrameworkOneResponseChoiceExplanation
+                          ?.itemFrameworkOneReponseChoiceExplanation
+                      }
                       actualLableValue={'assessmentManuscriptSecondary'}
                       mode={'revise'}
                       onClickSave={(innerText) => {
@@ -328,14 +342,22 @@ const DisplayPaneFiveRadioButton = (props) => {
                         dispatch({
                           type: SET_POPUP_VALUE,
                           payload: {
-                            isPopUpValue: `RESPONSE_CHOICE_DESCRIPTION_${key}`,
-                            popupMode: ''
+                            isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
+                            popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
                           }
                         });
+                        // dispatch({
+                        //   type: SET_POPUP_VALUE,
+                        //   payload: {
+                        //     isPopUpValue: `RESPONSE_CHOICE_DESCRIPTION_${key}`,
+                        //     popupMode: ''
+                        //   }
+                        // });
                       }}
                     >
                       {ReactHTMLParser(
-                        op.itemFrameworkOneResponseChoiceExplanation?.itemFrameworkOneReponseChoiceExplanation || responseChoiceDescription
+                        op.itemFrameworkOneResponseChoiceExplanation
+                          ?.itemFrameworkOneReponseChoiceExplanation || responseChoiceDescription
                       )}
                     </div>
                   </div>
@@ -373,7 +395,8 @@ const DisplayPaneFiveRadioButton = (props) => {
           }}
         >
           {ReactHTMLParser(
-            itemFrameworkOne?.itemFrameworkOneResponseExplanation?.itemFrameworkOneReponseExplanation || responseDescription
+            itemFrameworkOne?.itemFrameworkOneResponseExplanation
+              ?.itemFrameworkOneReponseExplanation || responseDescription
           )}
         </div>
       </div>
