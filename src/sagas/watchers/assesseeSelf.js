@@ -167,10 +167,10 @@ function* workerAssesseeAssessmentStartSaga(data) {
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
         payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
       });
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'isExamMode', value: false }
-      });
+      // yield put({
+      //   type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+      //   payload: { stateName: 'isExamMode', value: false }
+      // });
       yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSeven' });
 
     } else {

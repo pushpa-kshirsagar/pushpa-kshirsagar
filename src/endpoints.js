@@ -262,10 +262,9 @@ export const ASSIGNMENT_TYPE_SHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assignment-type/share';
 export const ASSIGNMENT_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assignment-type/unshare';
-export const ITEM_TYPE_GROUP_URL =
-  ASSESSMENTS_URL + '/dev/insight-guru/api/item-type-group/review-list';
+export const ITEM_TYPE_GROUP_URL = ITEMS + '/dev/insight-guru/api/item-type-group/review-list';
 export const ASSESSMENT_TYPE_GROUP_URL =
-  ITEMS + '/dev/insight-guru/api/assessment-type-group/review-list';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type-group/review-list';
 export const ASSIGNMENT_TYPE_GROUP_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type-group/review-list';
 export const ASSIGNMENT_TYPE_ASSIGNMENT_URL =
@@ -372,5 +371,6 @@ export const CULTURE_PROFILE_ALLOCATE_ASSIGNMENT_URL =
 export const JOB_PROFILE_ALLOCATE_ASSIGNMENT_URL =
   ANALYTICS + '/dev/insight-guru/api/job-profile/allocate/assignment';
 
-  //item_config - Item_TYPE
-  export const CONFIG_ITEM_URL = 'https://5u6ip77xaf.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/item-framework-one-type/review-list';
+//item_config - Item_TYPE
+export const CONFIG_ITEM_URL =
+  'https://5u6ip77xaf.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/item-framework-one-type/review-list';

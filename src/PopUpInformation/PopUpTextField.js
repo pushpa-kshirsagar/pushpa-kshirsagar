@@ -71,7 +71,7 @@ const PopUpTextField = (props) => {
     }
   };
   const handleClick = () => {
-    /*according to creation mode popup sequence will change*/
+    /*according to creation mode popup sequence will chanlocalObjectge*/
     if (validateFun() && !isNotRevised) {
       dispatch({ type: typeOfSetObject, payload: { ...localObject } });
       if (reviewMode === 'revise') {

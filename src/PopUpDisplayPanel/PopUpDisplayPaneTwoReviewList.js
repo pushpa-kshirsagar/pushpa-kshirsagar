@@ -2017,8 +2017,8 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
-          associateRoleShare: typeShare,
-          associateRoleShareInformation: [],
+          associateTypeShare: typeShare,
+          associateTypeShareInformation: [],
           associateTypeShared: [
             {
               associateTypeId: selectedTagValue,

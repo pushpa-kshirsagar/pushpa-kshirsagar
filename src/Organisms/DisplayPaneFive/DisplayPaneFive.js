@@ -78,7 +78,6 @@ const useStyles = makeStyles({
 });
 function StyledRadio(props) {
   const classes = useStyles();
-
   return (
     <Radio
       className={classes.root}
@@ -406,7 +405,8 @@ export const DisplayPaneFive = () => {
     }
   };
   const isHrSetup = false;
-  console.log('ITEM INFO', itemInformation);
+  // console.log('ITEM INFO', itemInformation);
+  console.log('itemInformation', itemInformation);
 
   return (
     <>
@@ -752,7 +752,7 @@ export const DisplayPaneFive = () => {
         basicInfo={{}}
         typeOfSetObject={''}
         defaultSheetValue={
-          itemInformation?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel || ''
+          itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel || ''
         }
         actualLableValue={''}
         mode={'revise'}
@@ -827,7 +827,7 @@ export const DisplayPaneFive = () => {
         basicInfo={{}}
         typeOfSetObject={''}
         defaultSheetValue={
-          itemInformation?.itemFrameworkOneResponseExplanation
+          itemFrameworkOne?.itemFrameworkOneResponseExplanation
             ?.itemFrameworkOneResponseExplanation || ''
         }
         actualLableValue={''}

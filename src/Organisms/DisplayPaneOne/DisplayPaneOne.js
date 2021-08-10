@@ -32,6 +32,7 @@ import PopUpAssignmentModule from '../../PopUpDisplayPanel/PopUpAssignmentModule
 import PopUpIgaugeModule from '../../PopUpDisplayPanel/PopUpIgaugeModule';
 // import PopUpScan from '../../PopUpInformation/PopUpScan';
 import PopUpAssociateLink from '../../PopUpDisplayPanel/PopUpAssociateLink';
+import DisplayPaneSixHeader from '../DisplayPaneSix/DisplayPaneSixHeader';
 
 export const DisplayPaneOne = () => {
   const leftPaneSections = [
@@ -67,6 +68,8 @@ export const DisplayPaneOne = () => {
   const { userData, assesseePermission = null, loginUserName } = useSelector(
     (state) => state.UserReducer
   );
+  const { isAssessmentStart } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);
+  const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
   const { selectedAssociateInfo, leftPaneAssesseeInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
@@ -147,14 +150,25 @@ export const DisplayPaneOne = () => {
   return (
     <>
       <div>
-        <HeaderCard
-          className=""
-          displayPane="left"
-          headerOne={selectedSection.displayPaneLeftHeaderText}
-          headerOneBadgeOne={selectedSection.displayPaneLeftBadgeText}
-          headerPanelColour="blue"
-        />
+        {isAssessmentStart === 'PROGRESS' ? (
+          <DisplayPaneSixHeader
+            className=""
+            headerOne={'dashboard'}
+            headerOneBadgeOne={''}
+            headerOneBadgeTwo={''}
+            headerPanelColour="blue"
+          />
+        ) : (
+          <HeaderCard
+            className=""
+            displayPane="left"
+            headerOne={selectedSection.displayPaneLeftHeaderText}
+            headerOneBadgeOne={selectedSection.displayPaneLeftBadgeText}
+            headerPanelColour="blue"
+          />
+        )}
       </div>
+      {isDisplayPaneSixShow &&
       <div className="containerPadding">
         <div className="containerPadding">
           <Card
@@ -193,7 +207,7 @@ export const DisplayPaneOne = () => {
           </div>
         )}
       </div>
-      <PopUpDisplayPaneOneSectionTwo
+     } <PopUpDisplayPaneOneSectionTwo
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}
       />
       <PopUpIgaugeModule />

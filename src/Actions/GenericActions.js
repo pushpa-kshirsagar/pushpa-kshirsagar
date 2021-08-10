@@ -708,8 +708,6 @@ export const makeAssociateRoleObj = (selectedAssociateInfo, filterKey, numberPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.associateRoleName,informationBasic.associateRoleDescription',
@@ -1038,8 +1036,6 @@ export const makeAssesseeTypeObj = (selectedAssociateInfo, filterKey, countPage,
       columnName: 'informationBasic.assesseeTypeName,informationBasic.assesseeTypeDescription',
       order: 'asc'
     },
-    // associateAscendantPrimary:
-      // localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     numberPage: numberPage,
     countPage: countPage,
     search: [
@@ -1083,8 +1079,6 @@ export const makeAssociateTypeObj = (selectedAssociateInfo, filterKey, countPage
       columnName: 'informationBasic.associateTypeName,informationBasic.associateTypeDescription',
       order: 'asc'
     },
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     numberPage: numberPage,
     countPage: countPage,
     search: [
@@ -1123,15 +1117,11 @@ export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, nu
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.itemTypeName,informationBasic.itemTypeDescription',
       order: 'asc'
     },
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     numberPage: numberPage,
     countPage: countPage,
     search: [
@@ -2055,8 +2045,6 @@ export const makeAssessmentTypeObj = (selectedAssociateInfo, filterKey, countPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assessmentTypeName,informationBasic.assessmentTypeDescription',
@@ -2100,8 +2088,6 @@ export const makeAssignmentTypeObj = (selectedAssociateInfo, filterKey, countPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.assignmentTypeName,informationBasic.assignmentTypeDescription',
@@ -4992,16 +4978,12 @@ export const makeCultureProfileTypeObj = (
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName:
         'informationBasic.cultureProfileTypeName,informationBasic.cultureProfileTypeDescription',
       order: 'asc'
     },
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     numberPage: numberPage,
     countPage: countPage,
     search: [
@@ -5351,15 +5333,11 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
     assesseeId: selectedAssociateInfo?.assesseeId,
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     filter: 'true',
     orderBy: {
       columnName: 'informationBasic.jobProfileTypeName,informationBasic.jobProfileTypeDescription',
       order: 'asc'
     },
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
     numberPage: numberPage,
     countPage: countPage,
     search: [

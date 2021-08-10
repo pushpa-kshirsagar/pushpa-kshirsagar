@@ -65,7 +65,9 @@ const DisplayPageOne = () => {
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isItemPreviewShow = false } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { isExamMode } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);
+  const { isExamMode, isAssessmentStart } = useSelector(
+    (state) => state.AssesseeAssignmentAssessmentReducer
+  );
   const dispatch = useDispatch();
   const assesseeId = localStorage.getItem('assesseeId');
   const accessToken = localStorage.getItem('token');
@@ -76,7 +78,7 @@ const DisplayPageOne = () => {
     associateGroup,
     itemGroup,
     cultureProfileGroup,
-    jobProfileGroup,
+    jobProfileGroup
   } = useSelector((state) => state.GroupCreateReducer);
   const {
     assesseeType,
@@ -158,7 +160,7 @@ const DisplayPageOne = () => {
   const { assesseeAssessmentStartData } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
-  console.log('popupMode', popupMode);
+  console.log('isExamMode', isExamMode);
   return (
     <>
       <HeaderZero userName={userName} userEmail={userEmail} />
@@ -200,9 +202,15 @@ const DisplayPageOne = () => {
           <>
             {isExamMode ? (
               <>
-                <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
-                  <DisplayPaneSix />
-                </div>
+                {(isAssessmentStart === 'PROGRESS' && (
+                  <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
+                    <DisplayPaneOne />
+                  </div>
+                )) || (
+                  <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
+                    <DisplayPaneSix />
+                  </div>
+                )}
                 {/* {assesseeAssessmentStartData &&  */}
                 <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '95.5%' }}>
                   <DisplayPaneSeven />
@@ -274,7 +282,9 @@ const DisplayPageOne = () => {
         headerPanelColour={'displayPaneLeft'}
       />
       {popupMode === 'ASSESSEE_CREATE' && <PopUpAssesseeCreateSignOn />}
-      {popupMode === 'ADMINISTRATOR_CREATE' && <PopUpAssesseeCreateSignOn headerOne={'administrator'} />}
+      {popupMode === 'ADMINISTRATOR_CREATE' && (
+        <PopUpAssesseeCreateSignOn headerOne={'administrator'} />
+      )}
       {popupMode === 'MANAGER_CREATE' && <PopUpAssesseeCreateSignOn headerOne={'manager'} />}
       {popupMode === 'ASSOCIATE_CREATE' && <PopUpAssociateCreateSignOn />}
       {popupMode === 'assesseesROLECREATE' && <PopUpAssesseeRoleCreate />}
