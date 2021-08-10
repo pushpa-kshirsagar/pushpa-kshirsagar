@@ -92,6 +92,18 @@ const PopUpItemConfig = (props) => {
             </div>
           </div>
           <FormControl style={{ width: '100%' }}>
+          <InputFeild
+              tag={'item'}
+              label={'item'}
+              dataValue={'item'}
+              // labelBadgeOne={'choice'}
+              value={''}
+              errorMsg={''}
+              type={'number'}
+              onClick={(e) => {
+                // setscore(e.target.value);
+              }}
+            />
             <SelectField
               tag={'item_Aligement'}
               dataValue={'item'}
@@ -151,23 +163,17 @@ const PopUpItemConfig = (props) => {
               value={response_Aligement}
               mappingValue={'id'}
             />
-            <SelectField
-              tag={'response_Choice'}
+             <InputFeild
+              tag={'response_choice'}
               label={'response'}
               dataValue={'response'}
               labelBadgeOne={'choice'}
-              listSelect={[
-                { id: 'horizontal-bottom', name: 'horizontal-bottom' },
-                { id: 'horizontal-top', name: 'horizontal-top' },
-                { id: 'vertical-bottom', name: 'vertical-bottom' },
-                { id: 'vertical-top', name: 'vertical-top' }
-              ]}
-              errorMsg={() => { }}
-              onChange={(e) => {
-                Set_Response_Choice(e.target.value);
+              value={''}
+              errorMsg={''}
+              type={'number'}
+              onClick={(e) => {
+                // setscore(e.target.value);
               }}
-              value={response_Choice}
-              mappingValue={'id'}
             />
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
