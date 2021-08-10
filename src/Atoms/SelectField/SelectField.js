@@ -22,6 +22,7 @@ export const SelectField = (props) => {
     dataValue = '',
     labelBadgeOne = ''
   } = props;
+
   return (
     <Fragment>
       <FormControl className={'selectFormText'}>

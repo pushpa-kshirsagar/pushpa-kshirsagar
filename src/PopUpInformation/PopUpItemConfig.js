@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -23,10 +23,12 @@ const PopUpItemConfig = (props) => {
   const [item_Aligement, set_Item_Aligement] = useState('');
   const [item_Type, set_Item_Type] = useState('');
   const [response_Aligement, Set_Response_Aligement] = useState('');
+  const [response_Choice, Set_Response_Choice] = useState('');
 
   const dispatch = useDispatch();
   const {
     isActive,
+    parentCallback = null,
     primaryheader,
     primaryheaderTwo = '',
     inputHeader,
@@ -52,15 +54,18 @@ const PopUpItemConfig = (props) => {
     };
   });
 
+
+
   return (
     <div>
       <Popup isActive={isActive}>
         <PopupHeader
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
-          headerOneBadgeOne={headerOneBadgeOne}
+          headerOneBadgeOne={primaryheader}
           onClick={handleClick}
           mode={mode}
+          value={item_Type}
         />
         <DialogContent
           className={['popupContent', 'fixed10PadDim', 'revisePopupContent'].join(' ')}
@@ -69,12 +74,12 @@ const PopUpItemConfig = (props) => {
             <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
               <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
                 <Fragment>
-                  {inputHeader}&nbsp;
-                  {primaryheader ? (
+                  {/* {inputHeader}&nbsp; */}
+                  {/* {primaryheader ? (
                     <>
                       <span className={'headerBadge'}>{primaryheader}</span>&nbsp;
                     </>
-                  ) : null}
+                  ) : null} */}
                   {primaryheaderTwo ? (
                     <span className={'headerBadge'}>{primaryheaderTwo}</span>
                   ) : null}
@@ -89,8 +94,8 @@ const PopUpItemConfig = (props) => {
           <FormControl style={{ width: '100%' }}>
             <SelectField
               tag={'item_Aligement'}
-              label={'item'}
               dataValue={'item'}
+              label={'item'}
               labelBadgeOne={'alignment'}
               listSelect={[
                 { id: 'horizontal-bottom', name: 'horizontal-bottom' },
@@ -98,7 +103,7 @@ const PopUpItemConfig = (props) => {
                 { id: 'vertical-bottom', name: 'vertical-bottom' },
                 { id: 'vertical-top', name: 'vertical-top' }
               ]}
-              errorMsg={() => {}}
+              errorMsg={() => { }}
               onChange={(e) => {
                 set_Item_Aligement(e.target.value);
               }}
@@ -110,9 +115,19 @@ const PopUpItemConfig = (props) => {
               label={'item'}
               dataValue={'item'}
               labelBadgeOne={'type'}
-              errorMsg={() => {}}
+              errorMsg={() => { }}
               onChange={(e) => {
+                console.log(e.target);
+                
+                dispatch({
+                  type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                  payload: {
+                    stateName: 'itemFrameworkOneType',
+                    value: e.target.value
+                  }
+                })
                 set_Item_Type(e.target.value);
+                // parentCallback(e.target.value);
               }}
               value={item_Type}
               mappingValue={'id'}
@@ -129,11 +144,29 @@ const PopUpItemConfig = (props) => {
                 { id: 'vertical-bottom', name: 'vertical-bottom' },
                 { id: 'vertical-top', name: 'vertical-top' }
               ]}
-              errorMsg={() => {}}
+              errorMsg={() => { }}
               onChange={(e) => {
                 Set_Response_Aligement(e.target.value);
               }}
               value={response_Aligement}
+              mappingValue={'id'}
+            />
+            <SelectField
+              tag={'response_Choice'}
+              label={'response'}
+              dataValue={'response'}
+              labelBadgeOne={'choice'}
+              listSelect={[
+                { id: 'horizontal-bottom', name: 'horizontal-bottom' },
+                { id: 'horizontal-top', name: 'horizontal-top' },
+                { id: 'vertical-bottom', name: 'vertical-bottom' },
+                { id: 'vertical-top', name: 'vertical-top' }
+              ]}
+              errorMsg={() => { }}
+              onChange={(e) => {
+                Set_Response_Choice(e.target.value);
+              }}
+              value={response_Choice}
               mappingValue={'id'}
             />
             <div className={'fitContent'}>
