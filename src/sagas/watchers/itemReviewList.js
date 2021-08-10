@@ -13,7 +13,8 @@ import {
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
   GET_ALLOCATE_ITEM,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
-  SET_ITEM_FRAMWORK_TYPE
+  SET_ITEM_FRAMWORK_TYPE,
+  GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import {
   ITEM_REVIEWLIST_URL,
@@ -310,5 +311,5 @@ export default function* watchItemReviewListSaga() {
   yield takeLatest(GET_ITEMTYPEITEM_REVIEW_LIST_SAGA, workeItemTypeItemReviewListSaga);
   yield takeLatest(GET_NODE_ITEMS_REVIEW_LIST_SAGA, workeItemNodeItemReviewListSaga);
   yield takeLatest(GET_ALLOCATE_ITEM, workerItemAllocateReviewListSaga);
-  yield takeLatest(GET_ITEM_TYPE_REVIEW_LIST_SAGA, workerItemTypeReviewListSaga);
+  yield takeLatest(GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA, workerItemTypeReviewListSaga);
 }

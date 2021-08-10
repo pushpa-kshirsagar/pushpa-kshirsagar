@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   ITEM_INFO_REVISE_SAGA,
   LOADER_START,
@@ -17,6 +18,7 @@ import {
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import '../../Molecules/ReviewList/ReviewList.css';
 import { DialogContent, IconButton } from '@material-ui/core';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopupHeader from '../../Molecules/PopUp/PopUpHeader';
@@ -94,6 +96,8 @@ function StyledRadio(props) {
 export const DisplayPaneFive = () => {
   const dispatch = useDispatch();
   const [typeMode, setTypeMode] = useState(false);
+  const [Item_Selected_Role_Type, set_Item_Selected_Role_Type] = useState('');
+  console.log("item selected role type ", Item_Selected_Role_Type);
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
@@ -285,7 +289,7 @@ export const DisplayPaneFive = () => {
     if (targetValue === 'configure') {
       dispatch({ type: LOADER_START });
       dispatch({
-        type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+        type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
         payload: {
           request: {
             assesseeId: selectedAssociateInfo?.assesseeId,
@@ -384,7 +388,7 @@ export const DisplayPaneFive = () => {
     }
   };
 
-  const BackHandlerEvent = (e) => {};
+  const BackHandlerEvent = (e) => { };
   const handleClick = (event) => {
     console.log('ONCHANGE ', event.target.value);
     if (itemFrameworkOne.itemFrameworkOneResponseCorrect[0] == event.target.value) {
@@ -407,6 +411,9 @@ export const DisplayPaneFive = () => {
   };
   const isHrSetup = false;
   console.log('ITEM INFO', itemInformation);
+  const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
+  const data = itemTypeList.find((item) => item.id === itemInformation.informationFramework.itemFrameworkOne.itemFrameworkOneType)
+  console.log("selected item role type, ", data?.itemFrameworkOneTypeName);
 
   return (
     <>
@@ -425,8 +432,18 @@ export const DisplayPaneFive = () => {
       <div className="containerPadding">
         <div className="containerPadding sticky-header">
           <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
-            <div style={{ flex: '2' }} className="flex-center">
-              <p onClick={removeOption} className={'icon-button-option'}>
+            <div style={{ flex: '4' }} className="flex-center">
+              <div
+                className={[
+                  'midPaneInformation',
+                  data?.itemFrameworkOneTypeDescription == null || data?.itemFrameworkOneTypeDescription === '' ? 'aliasmiddle' : null
+                ].join(' ')}
+              >
+                <span>{data?.itemFrameworkOneTypeName}</span>
+                {data?.itemFrameworkOneTypeDescription != null ? <div className={'midPaneLabel'}>{data?.itemFrameworkOneTypeDescription}</div> : null}
+
+              </div>
+              {/* <p onClick={removeOption} className={'icon-button-option'}>
                 -
               </p>
               <span style={{ fontWeight: 'bold', margin: '0 5px 0 5px' }}>
@@ -435,7 +452,7 @@ export const DisplayPaneFive = () => {
               </span>
               <p onClick={addOption} className={'icon-button-option'}>
                 +
-              </p>
+              </p> */}
             </div>
             <div style={{ flex: '1' }} className="flex-center">
               {!typeMode && (
@@ -466,13 +483,6 @@ export const DisplayPaneFive = () => {
               )}
             </div>
             <div style={{ flex: '1' }} className="flex-center">
-              {/* <div className={'backArrow'}>
-                <IconButton onClick={closePreview} className="MuiIconButton-root-1602">
-                  <Clear className={''} />
-                </IconButton>
-              </div> */}
-            </div>
-            <div style={{ flex: '1' }} className="flex-center">
               <IconButton
                 onClick={async () => {
                   setTypeMode((st) => !st);
@@ -481,15 +491,6 @@ export const DisplayPaneFive = () => {
               >
                 <Manuscript className={''} />
               </IconButton>
-            </div>
-            <div style={{ flex: '1' }} className="flex-center">
-              {/* <IconButton onClick={flagQuestion} className={'assessmentFlagButton'}>
-                {isQuestionFlaged ? (
-                  <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
-                ) : (
-                  <i className="far fa-flag"></i>
-                )}
-              </IconButton> */}
             </div>
           </div>
           <hr
@@ -639,7 +640,7 @@ export const DisplayPaneFive = () => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={itemLabelPrimaryPopup}
-            currentPopUpOption={() => {}}
+            currentPopUpOption={() => { }}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -849,10 +850,10 @@ export const DisplayPaneFive = () => {
         isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'item'}
-        headerOneBadgeOne={'information'}
+        headerOneBadgeOne={'configuration'}
         nextPopUpValue={''}
-        inputHeader={'item'}
-        primaryheader={'configuration'}
+        // inputHeader={'item'}
+        // primaryheader={'configuration'}
         isItemFramework={true}
         mode={'revise'}
       />
@@ -867,6 +868,7 @@ export const DisplayPaneFive = () => {
         primaryheader={'configuration'}
         isItemFramework={true}
         mode={'revise'}
+      // itemSelectedTypeName = {handleCallback}
       />
 
       <PopUpItemFramework

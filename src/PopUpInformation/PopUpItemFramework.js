@@ -47,6 +47,7 @@ const PopUpItemFramework = (props) => {
   console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
   console.log('Choice ob ', choiceOb);
   const handleClick = () => {
+    // alert(isItemFramework);
     console.log(blank, group, level, polarity, score, time, weightage, isItemFramework);
     if (isItemFramework) {
       dispatch({
@@ -92,12 +93,12 @@ const PopUpItemFramework = (props) => {
         });
       }
     }
-    setBlank('');
-    setlevel('');
-    setweightage('');
-    setscore('');
-    settime('');
-    setpolarity('');
+    setBlank(blank);
+    setlevel(level);
+    setweightage(weightage);
+    setscore(score);
+    settime(time);
+    setpolarity(polarity);
     dispatch({ type: POPUP_CLOSE });
   };
 

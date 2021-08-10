@@ -30,10 +30,11 @@ const PopupHeader = (props) => {
     headerOneBadgeTwo,
     headerOneBadgeThree,
     onClick,
+    itemRoleType,
     mode = 'core',
     isNotRevised = false,
     onClosePopUpEvent = null,
-    setexchageMode = null
+    setexchageMode = null,
   } = props;
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -97,11 +98,11 @@ const PopupHeader = (props) => {
             {!isNotRevised && (
               <IconButton className="MuiIconButton-root-1602">
                 {mode === 'core' || mode === 'search' || mode === 'revise' ? (
-                  <Check className={'popupClose'} onClick={onClick} />
+                  <Check className={'popupClose'} onClick={onClick}  />
                 ) : mode === 'confirm' ? (
                   <KeyboardTab
                     className={['popupClose', 'previousToLast'].join(' ')}
-                    onClick={onClick}
+                    onClick={onClick} 
                   />
                 ) : mode === 'error' || mode === 'cancel' ? null : mode === 'next' ? (
                   <NextIcon className={'popupClose'} onClick={onClick} />
