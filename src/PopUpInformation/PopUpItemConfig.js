@@ -20,18 +20,24 @@ import { createNameWithBadge } from '../Actions/StatusAction';
 
 const PopUpItemConfig = (props) => {
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const [item_Aligement, set_Item_Aligement] = useState('');
-  const [item_Type, set_Item_Type] = useState('');
-  const [response_Aligement, Set_Response_Aligement] = useState('');
-  const [response_Choice, Set_Response_Choice] = useState('');
-
+  const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
+  const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne.itemFrameworkOneAlignment);
+  const [item_Type, set_Item_Type] = useState(itemFrameworkOne.itemFrameworkOneType);
+  const [response_Aligement, Set_Response_Aligement] = useState(
+    itemFrameworkOne.itemFrameworkOneResponseAlignment
+  );
+  const [item, setItem] = useState(1);
+  const [response_Choice, set_Response_Choice] = useState(
+    itemFrameworkOne.itemFrameworkOneResponseChoice.length
+  );
+  useEffect(() => {
+    set_Response_Choice(itemFrameworkOne.itemFrameworkOneResponseChoice.length);
+  }, [itemFrameworkOne]);
   const dispatch = useDispatch();
   const {
     isActive,
-    parentCallback = null,
     primaryheader,
     primaryheaderTwo = '',
-    inputHeader,
     headerPanelColour,
     headerOne,
     headerOneBadgeOne,
@@ -40,12 +46,75 @@ const PopUpItemConfig = (props) => {
     mode,
     isItemFramework = false
   } = props;
-
+  const optionLabel =
+    "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
+  const responseChoiceDescription =
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const handleClick = () => {
+    let itemFrameworkOneResponseChoice = itemFrameworkOne.itemFrameworkOneResponseChoice;
+    dispatch({
+      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'itemFrameworkOneAlignment',
+        value: item_Aligement
+      }
+    });
+    dispatch({
+      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'itemFrameworkOneType',
+        value: item_Type
+      }
+    });
+    dispatch({
+      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'itemFrameworkOneResponseAlignment',
+        value: response_Aligement
+      }
+    });
+    if (response_Choice < itemFrameworkOne.itemFrameworkOneResponseChoice) {
+      let actlen = itemFrameworkOneResponseChoice.length - response_Choice;
+      let arr = itemFrameworkOne.itemFrameworkOneResponseChoice;
+      let newArr = arr.slice(0, -actlen);
+      if (newArr.length >= 3) {
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneResponseChoice',
+            value: newArr
+          }
+        });
+      }
+    }
+    if (response_Choice > itemFrameworkOneResponseChoice.length) {
+      let originobj = [...itemFrameworkOneResponseChoice];
+      let actlen = response_Choice - itemFrameworkOneResponseChoice.length;
+      let choice = itemFrameworkOneResponseChoice.length;
+      for (let i = 0; i < actlen; i++) {
+        originobj.push({
+          itemFrameworkOneResponseChoice: `${choice + i + 1}`,
+          itemFrameworkOneResponseChoiceColumnMatch: '',
+          itemFrameworkOneResponseChoiceExplanation: {
+            itemFrameworkOneResponseChoiceExplanation: '',
+            itemFrameworkOneResponseChoiceExplanationDisplay: false
+          },
+          itemFrameworkOneResponseChoiceMedia: optionLabel,
+          itemFrameworkOneResponseChoiceWeightage: '',
+          itemFrameworkOneResponseChoiceScore: ''
+        });
+      }
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseChoice',
+          value: originobj
+        }
+      });
+    }
     dispatch({ type: POPUP_CLOSE });
   };
   const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
-  console.log('itemRoltype', itemTypeList);
   const itemTypeListArr = itemTypeList.map((item) => {
     return {
       id: item.id,
@@ -53,9 +122,7 @@ const PopUpItemConfig = (props) => {
       description: item.itemFrameworkOneTypeDescription
     };
   });
-
-
-
+  console.log(itemFrameworkOne.itemFrameworkOneResponseChoice.length);
   return (
     <div>
       <Popup isActive={isActive}>
@@ -92,17 +159,21 @@ const PopUpItemConfig = (props) => {
             </div>
           </div>
           <FormControl style={{ width: '100%' }}>
-          <InputFeild
+            <InputFeild
               tag={'item'}
               label={'item'}
               dataValue={'item'}
               // labelBadgeOne={'choice'}
-              value={''}
+              value={item}
               errorMsg={''}
               type={'number'}
-              onClick={(e) => {
-                // setscore(e.target.value);
-              }}
+              onClick={
+                mode === 'revise'
+                  ? (e) => {
+                      setItem(e.target.value);
+                    }
+                  : null
+              }
             />
             <SelectField
               tag={'item_Aligement'}
@@ -115,10 +186,14 @@ const PopUpItemConfig = (props) => {
                 { id: 'vertical-bottom', name: 'vertical-bottom' },
                 { id: 'vertical-top', name: 'vertical-top' }
               ]}
-              errorMsg={() => { }}
-              onChange={(e) => {
-                set_Item_Aligement(e.target.value);
-              }}
+              errorMsg={() => {}}
+              onChange={
+                mode === 'revise'
+                  ? (e) => {
+                      set_Item_Aligement(e.target.value);
+                    }
+                  : null
+              }
               value={item_Aligement}
               mappingValue={'id'}
             />
@@ -127,20 +202,15 @@ const PopUpItemConfig = (props) => {
               label={'item'}
               dataValue={'item'}
               labelBadgeOne={'type'}
-              errorMsg={() => { }}
-              onChange={(e) => {
-                console.log(e.target);
-                
-                dispatch({
-                  type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                  payload: {
-                    stateName: 'itemFrameworkOneType',
-                    value: e.target.value
-                  }
-                })
-                set_Item_Type(e.target.value);
-                // parentCallback(e.target.value);
-              }}
+              errorMsg={() => {}}
+              onChange={
+                mode === 'revise'
+                  ? (e) => {
+                      set_Item_Type(e.target.value);
+                      // parentCallback(e.target.value);
+                    }
+                  : null
+              }
               value={item_Type}
               mappingValue={'id'}
               listSelect={itemTypeListArr}
@@ -156,24 +226,32 @@ const PopUpItemConfig = (props) => {
                 { id: 'vertical-bottom', name: 'vertical-bottom' },
                 { id: 'vertical-top', name: 'vertical-top' }
               ]}
-              errorMsg={() => { }}
-              onChange={(e) => {
-                Set_Response_Aligement(e.target.value);
-              }}
+              errorMsg={() => {}}
+              onChange={
+                mode === 'revise'
+                  ? (e) => {
+                      Set_Response_Aligement(e.target.value);
+                    }
+                  : null
+              }
               value={response_Aligement}
               mappingValue={'id'}
             />
-             <InputFeild
+            <InputFeild
               tag={'response_choice'}
               label={'response'}
               dataValue={'response'}
               labelBadgeOne={'choice'}
-              value={''}
+              value={response_Choice}
               errorMsg={''}
               type={'number'}
-              onClick={(e) => {
-                // setscore(e.target.value);
-              }}
+              onClick={
+                mode === 'revise'
+                  ? (e) => {
+                      set_Response_Choice(e.target.value);
+                    }
+                  : null
+              }
             />
             <div className={'fitContent'}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>

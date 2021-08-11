@@ -22,7 +22,8 @@ import {
   ITEM_INFO_REVISE_SAGA,
   ITEM_GROUP_REVISE_INFO_SAGA,
   ITEM_TYPE_REVISE_INFO_SAGA,
-  CONFIG_ITEM_ROLE_TYPE
+  CONFIG_ITEM_ROLE_TYPE,
+  SET_POPUP_SINGLE_STATE
 } from '../actionType';
 import {
   getItemGroupItemReqObj,
@@ -37,6 +38,38 @@ import {
   makeItemsTypeObj
 } from './GenericActions';
 
+const resetDataFunction = (dispatch) => {
+  dispatch({
+    type: SET_POPUP_SINGLE_STATE,
+    payload: { stateName: 'cardValue', value: 'NoCard' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'middlePaneSelectedValue', value: '' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedFlagedArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedFlagedArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedTagsArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedTagsArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'flagedValue', value: '' }
+  });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: CLEAR_ITEM_REDUCER_STATE });
+};
 export const createItemPopupApiCall = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,
@@ -101,7 +134,6 @@ export const getItemsDistinctApiCall = (
   dispatch
 ) => {
   let requestObj = makeItemObj(selectedAssociateInfo, secondaryOptionCheckValue, countPage, 0);
-
   dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   dispatch({
     type: FILTERMODE,
@@ -111,6 +143,7 @@ export const getItemsDistinctApiCall = (
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  resetDataFunction(dispatch);
   dispatch({
     type: GET_ITEM_REVIEW_LIST_SAGA,
     payload: {
@@ -143,6 +176,7 @@ export const getItemGroupDistinctApiCall = (
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  resetDataFunction(dispatch);
   dispatch({
     type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
     payload: {
@@ -175,6 +209,7 @@ export const getItemsTypeApiCall = (
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
   dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  resetDataFunction(dispatch);
   dispatch({
     type: GET_ITEM_TYPE_REVIEW_LIST_SAGA,
     payload: {

@@ -48,7 +48,18 @@ export const SelectField = (props) => {
                     value={option[mappingValue]}
                     className={'selectMenu'}
                   >
-                    {option.name}
+                    {/* <div
+                      className={[
+                        'midPaneInformation',
+                        option.description ? null : 'aliasmiddle'
+                      ].join(' ')}
+                    >
+                      {option.name}
+                    </div>
+                    <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+                      {option.description}
+                    </div> */}
+                    <div>{option.name}</div>
                   </MenuItem>
                 )
               )

@@ -35,8 +35,8 @@ const DisplayPaneThreeSectionTwoItem = () => {
     //   IconTwo: null
     // },
     {
-      id: 'a1-difficulty',
-      labelTextOneOne: 'difficulty',
+      id: 'a1-classification',
+      labelTextOneOne: 'classification',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
@@ -50,8 +50,8 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconTwo: null
     },
     {
-      id: 'a1-group',
-      labelTextOneOne: 'group',
+      id: 'a1-level',
+      labelTextOneOne: 'level',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
@@ -64,6 +64,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconOne: null,
       IconTwo: null
     },
+
     {
       id: 'a1-media',
       labelTextOneOne: 'media',
@@ -94,6 +95,22 @@ const DisplayPaneThreeSectionTwoItem = () => {
       isListCard: false,
       IconOne: null,
       IconTwo: null
+    },
+    {
+      id: 'a1-scale',
+      labelTextOneOne: 'scale',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null,
+      isReviewLink: true
     },
     // {
     //   id: 'a1-response',
@@ -159,21 +176,21 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconOne: null,
       IconTwo: null
     },
-    // {
-    //   id: 'item-type',
-    //   labelTextOneOne: 'type',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: '',
-    //       textOne: ''
-    //     }
-    //   ],
-    //   innerAssociateList: [],
-    //   innerInfo: 'No Information',
-    //   isListCard: false,
-    //   IconOne: null,
-    //   IconTwo: null
-    // },
+    {
+      id: 'item-type',
+      labelTextOneOne: 'type',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false,
+      IconOne: null,
+      IconTwo: null
+    },
     {
       id: 'item-word',
       labelTextOneOne: 'weightage',

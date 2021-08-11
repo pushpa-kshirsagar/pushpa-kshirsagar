@@ -107,18 +107,6 @@ const initialState = {
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoicePolarity: ''
-          },
-          {
-            itemFrameworkOneResponseChoice: '4',
-            itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanation: '',
-              itemFrameworkOneResponseChoiceExplanationDisplay: false
-            }, //responseChoiceDescription,
-            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
-            itemFrameworkOneResponseChoiceWeightage: '',
-            itemFrameworkOneResponseChoiceScore: '',
-            itemFrameworkOneResponseChoicePolarity: ''
           }
         ],
         itemFrameworkOneResponseLabel: {
@@ -147,7 +135,7 @@ const initialState = {
         },
         itemFrameworkOneWeightage: null
       },
-      itemTypeList: []
+      itemTypeList: null
     }
   }
 };

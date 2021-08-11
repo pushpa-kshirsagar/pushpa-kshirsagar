@@ -340,6 +340,7 @@ function* workerReviewAssignmentTypeListSaga(data) {
       data: data.payload.request,
       URL: ASSIGNMENT_TYPE_REVIEWLIST_URL
     });
+    console.log('isMiddlePaneList',data.payload.isMiddlePaneList);
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       if (data.payload.isMiddlePaneList) {

@@ -32,6 +32,7 @@ const PopUpItemFramework = (props) => {
     headerPanelColour,
     headerOne,
     headerOneBadgeOne,
+    headerOneBadgeTwo = '',
     choiceOb = null,
     basicInfo,
     mode,
@@ -109,6 +110,7 @@ const PopUpItemFramework = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           onClick={handleClick}
           mode={mode}
         />

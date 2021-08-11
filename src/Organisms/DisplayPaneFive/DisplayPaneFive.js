@@ -94,7 +94,7 @@ function StyledRadio(props) {
 
 export const DisplayPaneFive = () => {
   const dispatch = useDispatch();
-  const [typeMode, setTypeMode] = useState(false);
+  const [typeMode, setTypeMode] = useState(true);
   const [Item_Selected_Role_Type, set_Item_Selected_Role_Type] = useState('');
   console.log('item selected role type ', Item_Selected_Role_Type);
   const closePreview = () => {
@@ -152,7 +152,7 @@ export const DisplayPaneFive = () => {
         value: [
           ...itemFrameworkOneResponseChoice,
           {
-            id: `${itemFrameworkOneResponseChoice.length + 1}`,
+            itemFrameworkOneResponseChoice: `${itemFrameworkOneResponseChoice.length + 1}`,
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: responseChoiceDescription,
             itemFrameworkOneResponseChoiceMedia: optionLabel,
@@ -234,22 +234,13 @@ export const DisplayPaneFive = () => {
   ];
 
   const removeOption = () => {
-    if (itemFrameworkOneResponseChoice.length > 2) {
+    if (itemFrameworkOneResponseChoice.length > 3) {
       let arr = itemFrameworkOneResponseChoice;
       let newArr = arr.slice(0, -1);
-      // setQuestionOptionList(newArr);
-      // dispatch({
-      //   type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-      //   payload: {
-      //     stateName: 'itemFrameworkOneResponseChoice',
-      //     value: newArr
-      //   }
-      // });
       dispatch({
-        type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: {
-          objectName: 'itemFrameworkOneResponseChoice',
-          actualStateName: 'itemFrameworkOneResponseChoice',
+          stateName: 'itemFrameworkOneResponseChoice',
           value: newArr
         }
       });
@@ -286,18 +277,21 @@ export const DisplayPaneFive = () => {
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
-      dispatch({ type: LOADER_START });
-      dispatch({
-        type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
-        payload: {
-          request: {
-            assesseeId: selectedAssociateInfo?.assesseeId,
-            associateId:
-              selectedAssociateInfo?.associate?.informationEngagement.associateTag
-                .associateTagPrimary
+      if (!itemInformation?.informationFramework?.itemTypeList) {
+        dispatch({ type: LOADER_START });
+        dispatch({
+          type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary
+            }
           }
-        }
-      });
+        });
+      }
+
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
@@ -433,31 +427,24 @@ export const DisplayPaneFive = () => {
       <div className="containerPadding">
         <div className="containerPadding sticky-header">
           <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
-            <div style={{ flex: '4' }} className="flex-center">
+            <div style={{ flex: '4' }} className="">
               <div
                 className={[
                   'midPaneInformation',
-                  data?.itemFrameworkOneTypeDescription ? 'aliasmiddle' : null
+                  data?.itemFrameworkOneTypeDescription ? null : 'aliasmiddle'
                 ].join(' ')}
               >
                 {data?.itemFrameworkOneTypeName}
-                
               </div>
-              {/* {data?.itemFrameworkOneTypeDescription !== null ? (
-                  <div className={'midPaneLabel'}>{data?.itemFrameworkOneTypeDescription}</div>
-                ) : null} */}
-              {/* <p onClick={removeOption} className={'icon-button-option'}>
-                -
-              </p>
-              <span style={{ fontWeight: 'bold', margin: '0 5px 0 5px' }}>
-                {' '}
-                {itemFrameworkOneResponseChoice.length}{' '}
-              </span>
-              <p onClick={addOption} className={'icon-button-option'}>
-                +
-              </p> */}
+              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+                {data?.itemFrameworkOneTypeDescription}
+              </div>
+              
             </div>
-            <div style={{ flex: '1' }} className="flex-center">
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+              className="flex-center"
+            >
               {!typeMode && (
                 <>
                   <p
@@ -485,15 +472,18 @@ export const DisplayPaneFive = () => {
                 </>
               )}
             </div>
-            <div style={{ flex: '1' }} className="flex-center">
-              <IconButton
-                onClick={async () => {
-                  setTypeMode((st) => !st);
-                }}
-                className="MuiIconButton-root-1602"
-              >
-                <Manuscript className={''} />
-              </IconButton>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+              className="flex-center"
+            >
+              {/* <IconButton
+                  onClick={async () => {
+                    setTypeMode((st) => !st);
+                  }}
+                  className="MuiIconButton-root-1602"
+                >
+                  <Manuscript className={''} />
+                </IconButton> */}
             </div>
           </div>
           <hr
@@ -661,7 +651,7 @@ export const DisplayPaneFive = () => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeOptionPopup}
-            currentPopUpOption={itemPopUpOption}
+            currentPopUpOption={itemPrimaryPopupOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -807,7 +797,7 @@ export const DisplayPaneFive = () => {
         basicInfo={{}}
         typeOfSetObject={''}
         defaultSheetValue={
-          itemInformation?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation || ''
+          itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation || ''
         }
         actualLableValue={''}
         mode={'revise'}
@@ -870,19 +860,20 @@ export const DisplayPaneFive = () => {
         inputHeader={'item'}
         primaryheader={'configuration'}
         isItemFramework={true}
-        mode={'revise'}
+        mode={reviewMode}
         // itemSelectedTypeName = {handleCallback}
       />
 
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_CHOICE_FRAMEWORK_POPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'item'}
-        headerOneBadgeOne={'information'}
+        headerOne={'response'}
+        headerOneBadgeOne={'choice'}
+        headerOneBadgeTwo={'configuration'}
         choiceOb={selectedChoiceObject}
-        inputHeader={'response'}
-        primaryheader={'choice'}
-        primaryheaderTwo={'configuration'}
+        inputHeader={''}
+        primaryheader={''}
+        primaryheaderTwo={''}
         nextPopUpValue={''}
         mode={'revise'}
       />
