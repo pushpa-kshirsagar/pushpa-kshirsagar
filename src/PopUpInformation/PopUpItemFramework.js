@@ -39,17 +39,28 @@ const PopUpItemFramework = (props) => {
     isItemFramework = false
   } = props;
   const [blank, setBlank] = useState('');
-  const [group, setgroup] = useState('');
+  const [classification, setclassification] = useState('');
   const [level, setlevel] = useState(null);
   const [polarity, setpolarity] = useState('');
   const [score, setscore] = useState('');
+  const [scale, setscale] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
   console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
   console.log('Choice ob ', choiceOb);
   const handleClick = () => {
     // alert(isItemFramework);
-    console.log(blank, group, level, polarity, score, time, weightage, isItemFramework);
+    console.log(
+      blank,
+      classification,
+      level,
+      polarity,
+      score,
+      scale,
+      time,
+      weightage,
+      isItemFramework
+    );
     if (isItemFramework) {
       dispatch({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
@@ -98,6 +109,7 @@ const PopUpItemFramework = (props) => {
     setlevel(level);
     setweightage(weightage);
     setscore(score);
+    setscale(scale);
     settime(time);
     setpolarity(polarity);
     dispatch({ type: POPUP_CLOSE });
@@ -153,9 +165,9 @@ const PopUpItemFramework = (props) => {
             )}
             {isItemFramework && (
               <SelectField
-                tag={'group'}
-                label={'group'}
-                dataValue={'group'}
+                tag={'classification'}
+                label={'classification'}
+                dataValue={'classification'}
                 listSelect={[
                   { id: 'Simple-Sample1', name: 'Simple Sample' },
                   { id: 'Simple-Sample2', name: 'Simple Sample' },
@@ -163,9 +175,9 @@ const PopUpItemFramework = (props) => {
                 ]}
                 errorMsg={() => {}}
                 onChange={(e) => {
-                  setgroup(e.target.value);
+                  setclassification(e.target.value);
                 }}
-                value={group}
+                value={classification}
                 mappingValue={'id'}
               />
             )}
@@ -202,6 +214,24 @@ const PopUpItemFramework = (props) => {
               value={polarity}
               mappingValue={'id'}
             />
+             {isItemFramework && (
+              <SelectField
+                tag={'scale'}
+                label={'scale'}
+                dataValue={'scale'}
+                listSelect={[
+                  { id: 'Simple-Sample1', name: 'Simple Sample' },
+                  { id: 'Simple-Sample2', name: 'Simple Sample' },
+                  { id: 'Simple-Sample3', name: 'Simple Sample' }
+                ]}
+                errorMsg={() => {}}
+                onChange={(e) => {
+                  setscale(e.target.value);
+                }}
+                value={scale}
+                mappingValue={'id'}
+              />
+            )}
             <InputFeild
               id={'score'}
               label={'score'}
@@ -212,6 +242,7 @@ const PopUpItemFramework = (props) => {
                 setscore(e.target.value);
               }}
             />
+           
             {isItemFramework && (
               <InputFeild
                 id={'time'}

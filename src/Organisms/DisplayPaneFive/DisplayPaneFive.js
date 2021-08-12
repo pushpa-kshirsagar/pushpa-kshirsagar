@@ -192,6 +192,30 @@ export const DisplayPaneFive = () => {
       disabled: false
     }
   ];
+  const itemPrimaryTriplePopupOption = [
+    {
+      data: 'configure',
+      dataValue: 'configure',
+      dataKey: 'configureAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled:
+        responseObject?.informationEngagement?.itemStatus === 'PUBLISHED' || reviewMode === 'review'
+          ? true
+          : false
+    },
+    {
+      data: 'revise',
+      dataValue: 'revise',
+      dataKey: 'reviseAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled:
+        responseObject?.informationEngagement?.itemStatus === 'PUBLISHED' || reviewMode === 'revise'
+          ? true
+          : false
+    }
+  ];
 
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
@@ -273,25 +297,22 @@ export const DisplayPaneFive = () => {
       });
     }
   };
+  const ChangeResponsePopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'configure') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'RESPONSE_CONFIGURE_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+  };
 
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
-      if (!itemInformation?.informationFramework?.itemTypeList) {
-        dispatch({ type: LOADER_START });
-        dispatch({
-          type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
-          payload: {
-            request: {
-              assesseeId: selectedAssociateInfo?.assesseeId,
-              associateId:
-                selectedAssociateInfo?.associate?.informationEngagement.associateTag
-                  .associateTagPrimary
-            }
-          }
-        });
-      }
-
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
@@ -300,7 +321,6 @@ export const DisplayPaneFive = () => {
         }
       });
     }
-    console.log(targetValue);
     if (targetValue === 'revise') {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -439,7 +459,6 @@ export const DisplayPaneFive = () => {
               <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
                 {data?.itemFrameworkOneTypeDescription}
               </div>
-              
             </div>
             <div
               style={{ flex: '1', display: 'flex', alignItems: 'center' }}
@@ -526,7 +545,7 @@ export const DisplayPaneFive = () => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeTripleDotOptionPopup}
-            currentPopUpOption={itemPrimaryPopupOption}
+            currentPopUpOption={itemPrimaryTriplePopupOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -545,6 +564,32 @@ export const DisplayPaneFive = () => {
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={itemLabelPrimaryPopup}
             currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      <Popup isActive={isPopUpValue === 'RESPONSE_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={''}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeResponsePopup}
+            currentPopUpOption={[
+              {
+                data: 'configure',
+                dataValue: 'configure',
+                dataKey: 'configureAPICall',
+                optionClass: 'optionPrimary',
+                divider: '',
+                disabled: false
+              }
+            ]}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
@@ -860,6 +905,19 @@ export const DisplayPaneFive = () => {
         inputHeader={'item'}
         primaryheader={'configuration'}
         isItemFramework={true}
+        mode={reviewMode}
+        // itemSelectedTypeName = {handleCallback}
+      />
+
+      <PopUpItemConfig
+        isActive={isPopUpValue === 'RESPONSE_CONFIGURE_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'response'}
+        headerOneBadgeOne={''}
+        nextPopUpValue={''}
+        inputHeader={''}
+        primaryheader={'configuration'}
+        isItemFramework={false}
         mode={reviewMode}
         // itemSelectedTypeName = {handleCallback}
       />

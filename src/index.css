@@ -348,7 +348,22 @@ body {
           position: relative;
           right:2.8px; */
 }
+.likert-flex{
+  flex: 1;
+}
+.parent {
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.child {
+  flex: 1 0 15%; /* explanation below */
+  margin: 5px;
+  height: auto;
+}
+.likert-display{
+  display: flex;
+}
 .iguru-box-shadow {
   box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
     0px 3px 1px -2px rgb(0 0 0 / 12%) !important;
@@ -433,3 +448,33 @@ body {
 ::-webkit-scrollbar-corner {
   background-color: gray;
 } /* if */
+
+
+.ig-grid-header{
+  display: flex;
+}
+.ig-header-item{
+  width:100px;
+  text-align:center;
+}
+.ig-header-item:nth-child(1) {
+  width:180px;
+}
+.ig-grid-row {
+  margin-bottom: 1em
+}
+.ig-grid-row, .grid-header {
+  display:flex;
+}
+.flex-item {
+  display:flex;
+  width:100px;
+  justify-content: center;
+  align-items:center;
+  font-weight:normal;
+}
+.flex-item:nth-child(1) {
+  border:none;
+  width:180px;
+  justify-content: left;
+}

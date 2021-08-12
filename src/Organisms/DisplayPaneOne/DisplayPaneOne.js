@@ -168,46 +168,53 @@ export const DisplayPaneOne = () => {
           />
         )}
       </div>
-      {isDisplayPaneSixShow &&
-      <div className="containerPadding">
+      {isDisplayPaneSixShow && (
         <div className="containerPadding">
-          <Card
-            ImageOne={selectedAssociateInfo ? PersonIcon : null}
-            textOneOne={assesseeName}
-            textTwoOne={assesseeAlias}
-            onClick={openCardPopup}
-            leftPaneAssesseeInfo={leftPaneAssesseeInfo}
-            isAlertActive={leftPaneAssesseeInfo?.notifications?.alert}
-            tag={selectedAssociateInfo ? 'assessee_card' : 'assessee'}
-          />
-        </div>
-        <div className="containerPadding">
-          {selectedAssociateInfo ? (
+          <div className="containerPadding">
             <Card
-              ImageOne={AssociateIcon}
-              textOneOne={associateName}
-              textTwoOne={associateDescription}
+              ImageOne={selectedAssociateInfo ? PersonIcon : null}
+              textOneOne={assesseeName}
+              textTwoOne={assesseeAlias}
               onClick={openCardPopup}
-              tag={'associate_card'}
+              leftPaneAssesseeInfo={leftPaneAssesseeInfo}
+              isAlertActive={leftPaneAssesseeInfo?.notifications?.alert}
+              tag={selectedAssociateInfo ? 'assessee_card' : 'assessee'}
             />
-          ) : (
-            <Card isIcon IconOne={ArrowRight} textOneOne="associates" onClick={openCardPopup} />
+          </div>
+          <div className="containerPadding">
+            {selectedAssociateInfo ? (
+              <Card
+                ImageOne={AssociateIcon}
+                textOneOne={associateName}
+                textTwoOne={associateDescription}
+                onClick={openCardPopup}
+                tag={'associate_card'}
+              />
+            ) : (
+              <Card
+                isIcon
+                IconOne={ArrowRight}
+                textOneOne="associates"
+                onClick={openCardPopup}
+                onClickIconOne={openCardPopup}
+              />
+            )}
+          </div>
+
+          {selectedAssociateInfo && (
+            <div>
+              <Sections
+                listSections={leftPaneSections}
+                selectedSection={selectedSection}
+                setSelectedSection={setSelectedSection}
+              />
+
+              <FooterIconOne />
+            </div>
           )}
         </div>
-
-        {selectedAssociateInfo && (
-          <div>
-            <Sections
-              listSections={leftPaneSections}
-              selectedSection={selectedSection}
-              setSelectedSection={setSelectedSection}
-            />
-
-            <FooterIconOne />
-          </div>
-        )}
-      </div>
-     } <PopUpDisplayPaneOneSectionTwo
+      )}{' '}
+      <PopUpDisplayPaneOneSectionTwo
         isActive={isPopUpValue === 'DISPLAY_PANE_ONE_SECTION_TWO_POPUP'}
       />
       <PopUpIgaugeModule />

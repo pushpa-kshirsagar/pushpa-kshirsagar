@@ -5,31 +5,17 @@ import Popup from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import { DialogContent } from '@material-ui/core';
 import {
-  ASSIGNMENT_REVIEW_DISTINCT_SAGA,
   CLEAR_ASSIGNMENT_INFO,
   CLEAR_DISPLAY_PANE_THREE,
-  FILTERMODE,
-  GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
-  GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
-  LOADER_START,
   SET_ASSIGNMENT_NEXT_POPUP,
   SET_ASSIGNMENT_PREVIOUS_POPUP,
   SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
-  SET_MOBILE_PANE_STATE,
-  SET_PAGE_COUNT,
   SET_POPUP_SINGLE_STATE,
-  SET_POPUP_VALUE,
   SET_PREVIOUS_SECTION_POPUP,
-  SET_REQUEST_OBJECT
 } from '../actionType';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import {
-  makeAssignmentGroupObj,
-  makeAssignmentTypeObj,
-  makeAssignmentReviewListRequestObject
-} from '../Actions/GenericActions';
 import { getInternalNodeApiCall } from '../Actions/AssociateModuleAction';
 import {
   assignmentsDistinctApiCall,

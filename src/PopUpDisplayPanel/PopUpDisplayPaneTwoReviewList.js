@@ -58,7 +58,8 @@ import {
   SET_MIDDLEPANE_STATE,
   RELATED_REVIEWLIST_DISTINCT_DATA,
   ASSESSMENT_START_SAGA,
-  ASSESSEE_ASSESSMENT_START_SAGA
+  ASSESSEE_ASSESSMENT_START_SAGA,
+  GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -669,6 +670,17 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
                   ]
                 }
               ]
+            }
+          }
+        });
+        dispatch({
+          type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary
             }
           }
         });
@@ -2126,6 +2138,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         };
         shareVal = 'jobProfileType';
       }
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
+      });
       if (reqBody) {
         dispatch({ type: LOADER_START });
         dispatch({
@@ -2298,6 +2314,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({ type: LOADER_START });
         dispatch({ type: ASSESSEE_ASSESSMENT_START_SAGA, payload: { request: reqBody } });
       }
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
+      });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'administerApiCall') {
       updateAssignmentAdminister(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);

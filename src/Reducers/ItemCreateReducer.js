@@ -48,6 +48,11 @@ const initialState = {
         itemTypeSecondary: []
       }
     },
+    // informationEngagement: {
+    //   itemStatus: '',
+    //   itemTag: { itemTagPrimary: '', itemTagSecondary: '' },
+    //   itemTenure: { itemTenureDateTimeStart: '', itemTenureDateTimeEnd: '' }
+    // },
     informationFramework: {
       itemFrameworkOne: {
         itemFrameworkOneAlignment: '',
