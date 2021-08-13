@@ -226,9 +226,19 @@ function* workerReviewInfoItemSaga(data) {
         itemFrameworkOneScore = '',
         itemFrameworkOneTime = '',
         itemFrameworkOneType = '',
-        itemFrameworkOneWeightage = ''
+        itemFrameworkOneWeightage = '',
+        itemFrameworkOneSection = [],
+        itemFrameworkOneScale = []
       } = informationFramework?.itemFrameworkOne;
 
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneScale', value: itemFrameworkOneScale }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneSection', value: itemFrameworkOneSection }
+      });
       yield put({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: { stateName: 'itemFrameworkOneBlank', value: itemFrameworkOneBlank }
@@ -299,8 +309,13 @@ function* workerReviewInfoItemSaga(data) {
       });
       // }
     }
-    console.log('loading end');
-    yield put({ type: LOADER_STOP });
+    else{
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
@@ -357,8 +372,11 @@ function* workerReviseInfoItemSaga(data) {
         }
       });
     } else {
-      console.log('loading end');
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
   } catch (e) {
     console.log('ERROR==', e);

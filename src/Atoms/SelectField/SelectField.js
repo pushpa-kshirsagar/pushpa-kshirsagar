@@ -59,7 +59,9 @@ export const SelectField = (props) => {
                     <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
                       {option.description}
                     </div> */}
-                    <div>{option.name}</div>
+                    <div>{`${option.name} ${
+                      option.description ? `(${option.description})` : ''
+                    }`}</div>
                   </MenuItem>
                 )
               )

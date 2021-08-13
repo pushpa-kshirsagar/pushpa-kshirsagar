@@ -19,22 +19,6 @@ import { input } from 'aws-amplify';
 import { createNameWithBadge } from '../Actions/StatusAction';
 
 const PopUpItemConfig = (props) => {
-  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
-  const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne.itemFrameworkOneAlignment);
-  const [item_Type, set_Item_Type] = useState(itemFrameworkOne.itemFrameworkOneType);
-  const [response_word, set_Response_Word] = useState();
-  const [response_Aligement, Set_Response_Aligement] = useState(
-    itemFrameworkOne.itemFrameworkOneResponseAlignment
-  );
-  const [item, setItem] = useState(1);
-  const [response_Choice, set_Response_Choice] = useState(
-    itemFrameworkOne.itemFrameworkOneResponseChoice.length
-  );
-  useEffect(() => {
-    set_Response_Choice(itemFrameworkOne.itemFrameworkOneResponseChoice.length);
-  }, [itemFrameworkOne]);
-  const dispatch = useDispatch();
   const {
     isActive,
     primaryheader,
@@ -45,12 +29,37 @@ const PopUpItemConfig = (props) => {
     choiceOb = null,
     basicInfo,
     mode,
-    isItemFramework = false
+    isItemFramework = false,
+    setSubItemList,
+    subItemList
   } = props;
+  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+  const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
+  const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne.itemFrameworkOneAlignment);
+  const [item_Type, set_Item_Type] = useState(itemFrameworkOne.itemFrameworkOneType);
+  const [response_word, set_Response_Word] = useState();
+  const [response_Aligement, Set_Response_Aligement] = useState(
+    itemFrameworkOne.itemFrameworkOneResponseAlignment
+  );
+  const [sub_item, setSubItem] = useState(itemFrameworkOne?.itemFrameworkOneSection?.length);
+  const [response_Choice, set_Response_Choice] = useState(
+    itemFrameworkOne.itemFrameworkOneResponseChoice.length
+  );
+  useEffect(() => {
+    set_Response_Choice(itemFrameworkOne.itemFrameworkOneResponseChoice.length);
+    setSubItem(itemFrameworkOne?.itemFrameworkOneSection?.length);
+    set_Item_Aligement(itemFrameworkOne.itemFrameworkOneAlignment);
+    set_Item_Type(itemFrameworkOne.itemFrameworkOneType);
+    Set_Response_Aligement(itemFrameworkOne.itemFrameworkOneResponseAlignment);
+    set_Response_Word();
+  }, [itemFrameworkOne]);
+  const dispatch = useDispatch();
+
   const optionLabel =
-    "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
+    "<span>response</span>&nbsp <span class='iguru-header-badge1_1'>choice</span>&nbsp;";
+  const itemText = '<span>item</span>&nbsp;';
   const responseChoiceDescription =
-    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_1'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const handleClick = () => {
     let itemFrameworkOneResponseChoice = itemFrameworkOne.itemFrameworkOneResponseChoice;
     dispatch({
@@ -88,6 +97,27 @@ const PopUpItemConfig = (props) => {
         });
       }
     }
+    if (sub_item) {
+      let originobj = [];
+      for (let i = 0; i < sub_item; i++) {
+        originobj.push({
+          itemFrameworkOneSectionSequence: `${i + 1}`,
+          itemFrameworkOneSection: {
+            itemFrameworkOneMedia: itemText,
+            itemFrameworkOneScore: null,
+            itemFrameworkOneType: null,
+            itemFrameworkOneCorrect: null
+          }
+        });
+      }
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneSection',
+          value: originobj
+        }
+      });
+    }
     if (response_Choice > itemFrameworkOneResponseChoice.length) {
       let originobj = [...itemFrameworkOneResponseChoice];
       let actlen = response_Choice - itemFrameworkOneResponseChoice.length;
@@ -113,6 +143,25 @@ const PopUpItemConfig = (props) => {
         }
       });
     }
+    if (sub_item > subItemList?.length) {
+      let originobj = [...subItemList];
+      let actlen = response_Choice - subItemList.length;
+      let choice = subItemList.length;
+      console.log('originobj', originobj);
+      for (let i = 0; i < actlen; i++) {
+        originobj.push(`item-${choice + i + 1}`);
+        setSubItem(originobj);
+      }
+      console.log('originobjafert', originobj);
+    }
+    if (sub_item < subItemList?.length) {
+      let originobj = [...subItemList];
+      let actlen = subItemList.length - sub_item;
+      let arr = itemFrameworkOne.subItemList;
+      let newarr = arr.slice(0, -actlen);
+      setSubItem(newarr);
+    }
+
     dispatch({ type: POPUP_CLOSE });
   };
   const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
@@ -167,13 +216,13 @@ const PopUpItemConfig = (props) => {
                   label={'item'}
                   dataValue={'item'}
                   // labelBadgeOne={'choice'}
-                  value={item}
+                  value={sub_item}
                   errorMsg={''}
                   type={'number'}
                   onClick={
                     mode === 'revise'
                       ? (e) => {
-                          setItem(e.target.value);
+                          setSubItem(e.target.value);
                         }
                       : null
                   }
@@ -356,7 +405,7 @@ const PopUpItemConfig = (props) => {
               </Fragment>
             ) : (
               <Fragment>
-                 <InputFeild
+                <InputFeild
                   tag={'response_word'}
                   label={'word'}
                   dataValue={'word'}
@@ -372,7 +421,7 @@ const PopUpItemConfig = (props) => {
                       : null
                   }
                 />
-                 <div className={'fitContent'}>
+                <div className={'fitContent'}>
                   <div
                     className={['PopupFormBox', 'popupMinHei0'].join(' ')}
                     style={{ minHeight: 0 }}
@@ -391,7 +440,6 @@ const PopUpItemConfig = (props) => {
                     </div>
                   </div>
                 </div>
-               
               </Fragment>
             )}
           </FormControl>

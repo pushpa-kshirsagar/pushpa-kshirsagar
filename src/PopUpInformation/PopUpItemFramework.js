@@ -46,8 +46,8 @@ const PopUpItemFramework = (props) => {
   const [scale, setscale] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
-  console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
-  console.log('Choice ob ', choiceOb);
+  // console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
+  // console.log('Choice ob ', choiceOb);
   const handleClick = () => {
     // alert(isItemFramework);
     console.log(

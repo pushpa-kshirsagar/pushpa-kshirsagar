@@ -14,9 +14,11 @@ const DisplayPaneFiveRadioButton = (props) => {
   const dispatch = useDispatch();
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
-  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
   const optionLabel =
     "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
+  const optionLabel1 =
+    "<span>response</span>&nbsp <span class='iguru-header-badge1_1'>choice</span>&nbsp;";
   const itemLabel = '<span>item</span>&nbsp';
   const itemLabelText =
     "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
@@ -29,13 +31,15 @@ const DisplayPaneFiveRadioButton = (props) => {
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const responseChoiceDescription =
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
+  const responseChoiceDescription1 =
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_1'>choice</span>&nbsp; <span class='iguru-header-badge1_1'>explanation</span>&nbsp;";
   const itemFrameworkOneResponseChoice =
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
-  const { setSelectedChoiceObject } = props;
-  const [subItemList, setSubItemList] = useState(['item-1', 'item-2', 'item-3']);
+  const { setSelectedChoiceObject, itemType } = props;
+  // const [subItemList, setSubItemList] = useState(['item-1', 'item-2', 'item-3']);
   const [scaleList, setScaleList] = useState(['scale-1', 'scale-2', 'scale-3', 'scale-4']);
-
+  const [liketcorrect, setliketcorrect] = useState('');
   const useStyles = makeStyles({
     root: {
       '&:hover': {
@@ -110,41 +114,62 @@ const DisplayPaneFiveRadioButton = (props) => {
       });
     }
   };
+  const handleClickLikert = (event, seq) => {
+    console.log('ONCHANGE ', event.target.value);
+    console.log('seq ', seq);
+    setliketcorrect(event.target.value);
+    let opArr = itemFrameworkOne.itemFrameworkOneSection;
+    opArr.forEach((element) => {
+      if (element.itemFrameworkOneSectionSequence === seq) {
+        element.itemFrameworkOneSection.itemFrameworkOneResponseCorrect = event.target.value;
+      }
+    });
+    dispatch({
+      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'itemFrameworkOneSection',
+        value: opArr
+      }
+    });
+  };
   const isHrSetup = false;
-
+  console.log('responseObject', responseObject);
+  console.log('itemFrameworkOne', itemFrameworkOne);
   return (
     <>
       <div>
         {/* for lable */}
-        {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' ||
-          reviewMode === 'revise') && (
-          <div
-            style={{
-              padding: '2.5px 5px',
-              alignItems: 'center',
-              overflow: 'overlay',
-              color: 'rgba(0, 0, 0, 0.87)',
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'ITEM_LABEL_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {ReactHTMLParser(
-              itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText
-            )}
-          </div>
-        )}
+        {itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' &&
+          reviewMode === 'revise' && (
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                overflow: 'overlay',
+                color: 'rgba(0, 0, 0, 0.87)',
+                cursor: reviewMode === 'revise' ? 'pointer' : ''
+              }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: 'ITEM_LABEL_PRIMARY_POPUP',
+                          popupMode: popupMode
+                        }
+                      });
+                    }
+                  : null
+              }
+            >
+              {ReactHTMLParser(
+                itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText
+              )}
+            </div>
+          )}
+      </div>
+      <div>
         {/* for media item */}
         {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
           <div
@@ -174,46 +199,37 @@ const DisplayPaneFiveRadioButton = (props) => {
         )}
       </div>
       <div>
-        {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
-          reviewMode === 'revise') && (
-          <div
-            style={{
-              padding: '2.5px 5px',
-              alignItems: 'center',
-              overflow: 'overlay',
-              color: 'rgba(0, 0, 0, 0.87)',
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {ReactHTMLParser(
-              itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation ||
-                itemDescription
-            )}
-          </div>
-        )}
+        {itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' &&
+          reviewMode === 'revise' && (
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                overflow: 'overlay',
+                color: 'rgba(0, 0, 0, 0.87)',
+                cursor: reviewMode === 'revise' ? 'pointer' : ''
+              }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
+                          popupMode: popupMode
+                        }
+                      });
+                    }
+                  : null
+              }
+            >
+              {ReactHTMLParser(
+                itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation ||
+                  itemDescription
+              )}
+            </div>
+          )}
       </div>
-      {/* <hr
-            style={{
-              height: '1px',
-              margin: '0',
-              border: 'none',
-              flexShrink: '0',
-              backgroundColor: 'rgba(0, 0, 0, 0.12)'
-            }}
-          /> */}
       {/* for response */}
       <div>
         {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
@@ -245,170 +261,247 @@ const DisplayPaneFiveRadioButton = (props) => {
       </div>
       {/* for response label */}
       <div>
-        {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
-          reviewMode === 'revise') && (
-          <div
-            style={{
-              padding: '2.5px 5px',
-              alignItems: 'center',
-              overflow: 'overlay',
-              color: 'rgba(0, 0, 0, 0.87)',
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {ReactHTMLParser(
-              itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel ||
-                responseLabel
-            )}
-          </div>
-        )}
+        {itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' &&
+          reviewMode === 'revise' && (
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                overflow: 'overlay',
+                color: 'rgba(0, 0, 0, 0.87)',
+                cursor: reviewMode === 'revise' ? 'pointer' : ''
+              }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
+                          popupMode: popupMode
+                        }
+                      });
+                    }
+                  : null
+              }
+            >
+              {ReactHTMLParser(
+                itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel ||
+                  responseLabel
+              )}
+            </div>
+          )}
       </div>
 
       {/* for response choice */}
-      <FormControl component="fieldset">
-        <div className={'containerPadding'}>
-          <RadioGroup
-            value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
-            defaultValue=""
-            aria-label="Options"
-            name="option1"
-            className={isHrSetup ? 'containerPadding hr-setup' : ''}
-          >
-            {itemFrameworkOneResponseChoice.map((op, key) => {
-              return (
-                <div key={`op-${key}`}>
-                  <div className="option-container" key={`option-${key}`}>
-                    <FormControlLabel
-                      key={`radio-${key}`}
-                      className={'radio-button'}
-                      value={`${op.itemFrameworkOneResponseChoice}`}
-                      control={<StyledRadio onClick={handleClick} />}
-                      label=""
-                      labelPlacement="bottom"
-                    />
-                    <div
-                      style={{
-                        padding: '2.5px 5px',
-                        alignItems: 'center',
-                        overflow: 'overlay',
-                        color: 'rgba(0, 0, 0, 0.87)',
-                        cursor: reviewMode === 'revise' ? 'pointer' : ''
-                      }}
-                      onClick={
-                        reviewMode === 'revise'
-                          ? () => {
-                              dispatch({
-                                type: SET_POPUP_VALUE,
-                                payload: {
-                                  isPopUpValue: 'ITEM_OPTION_PRIMARY_POPUP',
-                                  popupMode: `OPTION_${key}`
-                                }
-                              });
-                              setSelectedChoiceObject(op);
+      {(itemType === '61090cace50cf61d5eb440ce' || itemType === '61161713f24e1fb765208e23') && (
+        <FormControl component="fieldset">
+          <div className={'containerPadding'}>
+            <RadioGroup
+              value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
+              defaultValue=""
+              aria-label="Options"
+              name="option1"
+              className={isHrSetup ? 'containerPadding hr-setup' : ''}
+            >
+              {itemFrameworkOneResponseChoice.map((op, key) => {
+                return (
+                  <div key={`op-${key}`}>
+                    <div className="option-container" key={`option-${key}`}>
+                      <FormControlLabel
+                        key={`radio-${key}`}
+                        className={'radio-button'}
+                        value={`${op.itemFrameworkOneResponseChoice}`}
+                        control={<StyledRadio onClick={handleClick} />}
+                        label=""
+                        labelPlacement="bottom"
+                      />
+                      <div
+                        style={{
+                          padding: '2.5px 5px',
+                          alignItems: 'center',
+                          overflow: 'overlay',
+                          color: 'rgba(0, 0, 0, 0.87)',
+                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                        }}
+                        onClick={
+                          reviewMode === 'revise'
+                            ? () => {
+                                dispatch({
+                                  type: SET_POPUP_VALUE,
+                                  payload: {
+                                    isPopUpValue: 'ITEM_OPTION_PRIMARY_POPUP',
+                                    popupMode: `OPTION_${key}`
+                                  }
+                                });
+                                setSelectedChoiceObject(op);
+                              }
+                            : null
+                        }
+                        dangerouslySetInnerHTML={{
+                          __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel
+                        }}
+                      ></div>
+                      <PopUpTextSheet
+                        isActive={isPopUpValue === `OPTION_${key}`}
+                        headerOne={'response'}
+                        headerPanelColour={'genericOne'}
+                        headerOneBadgeOne={'choice'}
+                        // headerOneBadgeTwo={`${key + 1}`}
+                        basicInfo={{}}
+                        typeOfSetObject={''}
+                        defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
+                        actualLableValue={'assessmentManuscriptSecondary'}
+                        mode={'revise'}
+                        onClickSave={(innerText) => {
+                          let opArr = itemFrameworkOneResponseChoice;
+                          // setQuestionOptionList((opArr) => {
+                          opArr.forEach((element) => {
+                            if (
+                              element.itemFrameworkOneResponseChoice ===
+                              op.itemFrameworkOneResponseChoice
+                            ) {
+                              element.itemFrameworkOneResponseChoiceMedia = innerText;
                             }
-                          : null
-                      }
-                      dangerouslySetInnerHTML={{
-                        __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel
-                      }}
-                    ></div>
-                    <PopUpTextSheet
-                      isActive={isPopUpValue === `OPTION_${key}`}
-                      headerOne={'response'}
-                      headerPanelColour={'genericOne'}
-                      headerOneBadgeOne={'choice'}
-                      // headerOneBadgeTwo={`${key + 1}`}
-                      basicInfo={{}}
-                      typeOfSetObject={''}
-                      defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
-                      actualLableValue={'assessmentManuscriptSecondary'}
-                      mode={'revise'}
-                      onClickSave={(innerText) => {
-                        let opArr = itemFrameworkOneResponseChoice;
-                        // setQuestionOptionList((opArr) => {
-                        opArr.forEach((element) => {
-                          if (
-                            element.itemFrameworkOneResponseChoice ===
-                            op.itemFrameworkOneResponseChoice
-                          ) {
-                            element.itemFrameworkOneResponseChoiceMedia = innerText;
-                          }
-                        });
-                        dispatch({
-                          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                          payload: {
-                            stateName: 'itemFrameworkOneResponseChoice',
-                            value: opArr
-                          }
-                        });
-                        // });
-                      }}
-                    />
-                    <PopUpTextSheet
-                      isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
-                      headerOne={'response'}
-                      headerPanelColour={'genericOne'}
-                      headerOneBadgeOne={'choice'}
-                      headerOneBadgeTwo={`explanation`}
-                      basicInfo={{}}
-                      typeOfSetObject={''}
-                      defaultSheetValue={
-                        op.itemFrameworkOneResponseChoiceExplanation
-                          ?.itemFrameworkOneResponseChoiceExplanation
-                      }
-                      actualLableValue={'assessmentManuscriptSecondary'}
-                      mode={'revise'}
-                      onClickSave={(innerText) => {
-                        let opArr = itemFrameworkOneResponseChoice;
-                        opArr.forEach((element) => {
-                          if (
-                            element.itemFrameworkOneResponseChoice ===
-                            op.itemFrameworkOneResponseChoice
-                          ) {
-                            element.itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanation = innerText;
-                          }
-                        });
-                        dispatch({
-                          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                          payload: {
-                            stateName: 'itemFrameworkOneResponseChoice',
-                            value: opArr
-                          }
-                        });
-                      }}
-                    />
+                          });
+                          dispatch({
+                            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                            payload: {
+                              stateName: 'itemFrameworkOneResponseChoice',
+                              value: opArr
+                            }
+                          });
+                          // });
+                        }}
+                      />
+                      <PopUpTextSheet
+                        isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
+                        headerOne={'response'}
+                        headerPanelColour={'genericOne'}
+                        headerOneBadgeOne={'choice'}
+                        headerOneBadgeTwo={`explanation`}
+                        basicInfo={{}}
+                        typeOfSetObject={''}
+                        defaultSheetValue={
+                          op.itemFrameworkOneResponseChoiceExplanation
+                            ?.itemFrameworkOneResponseChoiceExplanation
+                        }
+                        actualLableValue={'assessmentManuscriptSecondary'}
+                        mode={'revise'}
+                        onClickSave={(innerText) => {
+                          let opArr = itemFrameworkOneResponseChoice;
+                          opArr.forEach((element) => {
+                            if (
+                              element.itemFrameworkOneResponseChoice ===
+                              op.itemFrameworkOneResponseChoice
+                            ) {
+                              element.itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanation = innerText;
+                            }
+                          });
+                          dispatch({
+                            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                            payload: {
+                              stateName: 'itemFrameworkOneResponseChoice',
+                              value: opArr
+                            }
+                          });
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          padding: '2.5px 5px',
+                          alignItems: 'center',
+                          overflow: 'overlay',
+                          margin: '0 0 0 12px',
+                          color: 'rgba(0, 0, 0, 0.87)',
+                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                        }}
+                        onClick={
+                          reviewMode === 'revise'
+                            ? () => {
+                                dispatch({
+                                  type: SET_POPUP_VALUE,
+                                  payload: {
+                                    isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
+                                    popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
+                                  }
+                                });
+                              }
+                            : null
+                        }
+                      >
+                        {ReactHTMLParser(
+                          op.itemFrameworkOneResponseChoiceExplanation
+                            ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <div>
+                );
+              })}
+            </RadioGroup>
+          </div>
+        </FormControl>
+      )}
+
+      <div>
+        {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
+          ?.itemFrameworkOneResponseExplanation !== '' &&
+          reviewMode === 'revise') && (
+            <div
+              style={{
+                padding: '2.5px 5px',
+                alignItems: 'center',
+                overflow: 'overlay',
+                color: 'rgba(0, 0, 0, 0.87)',
+                cursor: reviewMode === 'revise' ? 'pointer' : ''
+              }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
+                          popupMode: 'RESPONSE_DESCRIPTION_TEXT'
+                        }
+                      });
+                    }
+                  : null
+              }
+            >
+              {ReactHTMLParser(
+                itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                  ?.itemFrameworkOneResponseExplanation || responseDescription
+              )}
+            </div>
+          )}
+      </div>
+      {(itemType === '61090cace50cf61d5eb440c9' || itemType === '61161713f24e1fb765208e23') && (
+        <FormControl component="fieldset" style={{ width: '100%' }}>
+          <div className={'containerPadding flex-center'} style={{ display: 'flex' }}>
+            <div style={{ flex: '2' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            {itemFrameworkOne?.itemFrameworkOneScale.map((ob, key) => {
+              return <div className={'likert_choice-sclae'}>{ob.itemFrameworkOneScaleLabel}</div>;
+            })}
+          </div>
+          <div className={'containerPadding'}>
+            {itemFrameworkOne?.itemFrameworkOneSection.map((ob, keys) => {
+              return (
+                <Fragment>
+                  <div style={{ display: 'flex' }}>
                     <div
-                      style={{
-                        padding: '2.5px 5px',
-                        alignItems: 'center',
-                        overflow: 'overlay',
-                        margin: '0 0 0 12px',
-                        color: 'rgba(0, 0, 0, 0.87)',
-                        cursor: reviewMode === 'revise' ? 'pointer' : ''
-                      }}
+                      style={{ flex: '2' }}
                       onClick={
                         reviewMode === 'revise'
                           ? () => {
                               dispatch({
                                 type: SET_POPUP_VALUE,
                                 payload: {
-                                  isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
-                                  popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
+                                  isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
+                                  popupMode: `ITEM_MEDIA_TEXT_${keys}`
                                 }
                               });
                             }
@@ -416,126 +509,48 @@ const DisplayPaneFiveRadioButton = (props) => {
                       }
                     >
                       {ReactHTMLParser(
-                        op.itemFrameworkOneResponseChoiceExplanation
-                          ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
+                        ob.itemFrameworkOneSection?.itemFrameworkOneMedia
+                          ? ob.itemFrameworkOneSection?.itemFrameworkOneMedia
+                          : '<span>item</span>&nbsp;' + keys
                       )}
                     </div>
-                  </div>
-                </div>
-              );
-            })}
-          </RadioGroup>
-        </div>
-      </FormControl>
-      {/* <hr
-            style={{
-              height: '1px',
-              margin: '0',
-              border: 'none',
-              flexShrink: '0',
-              backgroundColor: 'rgba(0, 0, 0, 0.12)'
-            }}
-          /> */}
-      <div>
-        <div
-          style={{
-            padding: '2.5px 5px',
-            alignItems: 'center',
-            overflow: 'overlay',
-            color: 'rgba(0, 0, 0, 0.87)',
-            cursor: reviewMode === 'revise' ? 'pointer' : ''
-          }}
-          onClick={
-            reviewMode === 'revise'
-              ? () => {
-                  dispatch({
-                    type: SET_POPUP_VALUE,
-                    payload: {
-                      isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
-                      popupMode: 'RESPONSE_DESCRIPTION_TEXT'
-                    }
-                  });
-                }
-              : null
-          }
-        >
-          {ReactHTMLParser(
-            itemFrameworkOne?.itemFrameworkOneResponseExplanation
-              ?.itemFrameworkOneResponseExplanation || responseDescription
-          )}
-        </div>
-      </div>
-      <FormControl component="fieldset">
-        <div className={'containerPadding flex-center'} style={{ display: 'flex' }}>
-          <div style={{ flex: '4' }}>{''}</div>
-          {itemFrameworkOneResponseChoice.map((ob, key) => {
-            return (
-              <div class="" style={{ flex: '1' }}>
-                scale{key}
-              </div>
-            );
-          })}
-        </div>
-        <div className={'containerPadding'}>
-          {/* <div>
-            <div class="ig-grid-row">
-              <div class="flex-item">item1</div>
-              <label class="flex-item">
-                <input type="radio" value="critical" name="priority" /> <span></span>
-              </label>
-              <label class="flex-item">
-                <input type="radio" value="high" name="priority" /> <span></span>
-              </label>
-              <label class="flex-item">
-                <input type="radio" value="medium" name="priority" /> <span></span>
-              </label>
-              <label class="flex-item">
-                <input type="radio" value="low" name="priority" /> <span></span>
-              </label>
-            </div>
-            <div class="ig-grid-header">
-              <div class="ig-header-item"></div>
-              <div class="ig-header-item">Critical</div>
-              <div class="ig-header-item">High</div>
-              <div class="ig-header-item">Medium</div>
-              <div class="ig-header-item">Low</div>
-            </div>
-          </div> */}
-          {subItemList.map((ob, key) => {
-            return (
-              <Fragment>
-                <div style={{ display: 'flex' }}>
-                  <div style={{ flex: '4' }}>{ob}</div>
-                  <div class="" style={{ flex: '1' }}>
+                    {/* <div class="" style={{ flex: '1' }}> */}
                     <RadioGroup
-                      value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
+                      value={ob.itemFrameworkOneResponseCorrect}
                       // onChange={(event) => {}}
+                      flexWrap
                       defaultValue=""
                       aria-label={`option1-${ob}`}
                       name={`option1-${ob}`}
                       className={'containerPadding hr-setup'}
-                      // name="customized-radios"
-                      style={{ flexWrap: 'unset' }}
+                      // style={{ flexWrap: 'unset' }}
                     >
                       {itemFrameworkOneResponseChoice.map((op, key) => {
                         return (
-                          <div key={`op-${key}`}>
+                          <div key={`op-${key}`} className={'likert_choice-sclae'}>
                             <div className="option-container-likert" key={`option-${key}`}>
                               <FormControlLabel
                                 key={`radio-${key}`}
                                 className={'radio-button'}
-                                value={`${op.itemFrameworkOneResponseChoice}-${ob}`}
-                                control={<StyledRadio onClick={handleClick} />}
+                                value={`${keys}-${key}`}
+                                control={
+                                  <StyledRadio
+                                    onClick={(e) => {
+                                      handleClickLikert(e, ob.itemFrameworkOneSectionSequence);
+                                    }}
+                                  />
+                                }
                                 label=""
                                 labelPlacement="bottom"
                               />
-                              <div
+                              {/* <div
                                 style={{
                                   padding: '2.5px 5px',
                                   alignItems: 'center',
                                   overflow: 'overlay',
                                   color: 'rgba(0, 0, 0, 0.87)',
-                                  cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                  cursor: reviewMode === 'revise' ? 'pointer' : '',
+                                  fontSize: '9px'
                                 }}
                                 onClick={
                                   reviewMode === 'revise'
@@ -552,196 +567,151 @@ const DisplayPaneFiveRadioButton = (props) => {
                                     : null
                                 }
                                 dangerouslySetInnerHTML={{
-                                  __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel
+                                  __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel1
                                 }}
                               ></div>
-                            </div>
-                            <div>
                               <div
                                 style={{
                                   padding: '2.5px 5px',
                                   alignItems: 'center',
                                   overflow: 'overlay',
                                   color: 'rgba(0, 0, 0, 0.87)',
-                                  cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                  cursor: reviewMode === 'revise' ? 'pointer' : '',
+                                  fontSize: '9px'
                                 }}
-                                onClick={() => {
-                                  // dispatch({
-                                  //   type: SET_POPUP_VALUE,
-                                  //   payload: {
-                                  //     isPopUpValue: `RESPONSE_CHOICE_DESCRIPTION_${key}`,
-                                  //     popupMode: ''
-                                  //   }
-                                  // });
-                                }}
+                                onClick={
+                                  reviewMode === 'revise'
+                                    ? () => {
+                                        dispatch({
+                                          type: SET_POPUP_VALUE,
+                                          payload: {
+                                            isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
+                                            popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
+                                          }
+                                        });
+                                      }
+                                    : null
+                                }
                               >
                                 {ReactHTMLParser(
                                   op.itemFrameworkOneResponseChoiceExplanation
                                     ?.itemFrameworkOneResponseChoiceExplanation ||
-                                    responseChoiceDescription
+                                    responseChoiceDescription1
                                 )}
                               </div>
+                            */}
                             </div>
+                            <PopUpTextSheet
+                              isActive={isPopUpValue === `ITEM_MEDIA_TEXT_${keys}`}
+                              headerOne={'item'}
+                              headerPanelColour={'genericOne'}
+                              // headerOneBadgeOne={'media'}
+                              headerOneBadgeTwo={''}
+                              basicInfo={{}}
+                              typeOfSetObject={''}
+                              defaultSheetValue={
+                                ob.itemFrameworkOneSection?.itemFrameworkOneMedia || ''
+                              }
+                              actualLableValue={''}
+                              mode={'revise'}
+                              onClickSave={(innerText) => {
+                                // setInnerContent(innerText);
+                                let opArr = itemFrameworkOne.itemFrameworkOneSection;
+                                console.log('opArr', opArr);
+                                opArr.forEach((element) => {
+                                  if (
+                                    element.itemFrameworkOneSectionSequence ===
+                                    ob.itemFrameworkOneSectionSequence
+                                  ) {
+                                    element.itemFrameworkOneSection.itemFrameworkOneMedia = innerText;
+                                  }
+                                });
+                                dispatch({
+                                  type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                                  payload: {
+                                    stateName: 'itemFrameworkOneSection',
+                                    value: opArr
+                                  }
+                                });
+                              }}
+                            />
+                            <PopUpTextSheet
+                              isActive={isPopUpValue === `OPTION_${keys}`}
+                              headerOne={'response'}
+                              headerPanelColour={'genericOne'}
+                              headerOneBadgeOne={'choice'}
+                              // headerOneBadgeTwo={`${key + 1}`}
+                              basicInfo={{}}
+                              typeOfSetObject={''}
+                              defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
+                              actualLableValue={'assessmentManuscriptSecondary'}
+                              mode={'revise'}
+                              onClickSave={(innerText) => {
+                                let opArr = itemFrameworkOneResponseChoice;
+                                // setQuestionOptionList((opArr) => {
+                                opArr.forEach((element) => {
+                                  if (
+                                    element.itemFrameworkOneResponseChoice ===
+                                    op.itemFrameworkOneResponseChoice
+                                  ) {
+                                    element.itemFrameworkOneResponseChoiceMedia = innerText;
+                                  }
+                                });
+                                dispatch({
+                                  type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                                  payload: {
+                                    stateName: 'itemFrameworkOneResponseChoice',
+                                    value: opArr
+                                  }
+                                });
+                                // });
+                              }}
+                            />
+                            <PopUpTextSheet
+                              isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${keys}`}
+                              headerOne={'response'}
+                              headerPanelColour={'genericOne'}
+                              headerOneBadgeOne={'choice'}
+                              headerOneBadgeTwo={`explanation`}
+                              basicInfo={{}}
+                              typeOfSetObject={''}
+                              defaultSheetValue={
+                                op.itemFrameworkOneResponseChoiceExplanation
+                                  ?.itemFrameworkOneResponseChoiceExplanation
+                              }
+                              actualLableValue={'assessmentManuscriptSecondary'}
+                              mode={'revise'}
+                              onClickSave={(innerText) => {
+                                let opArr = itemFrameworkOneResponseChoice;
+                                opArr.forEach((element) => {
+                                  if (
+                                    element.itemFrameworkOneResponseChoice ===
+                                    op.itemFrameworkOneResponseChoice
+                                  ) {
+                                    element.itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanation = innerText;
+                                  }
+                                });
+                                dispatch({
+                                  type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                                  payload: {
+                                    stateName: 'itemFrameworkOneResponseChoice',
+                                    value: opArr
+                                  }
+                                });
+                              }}
+                            />
                           </div>
                         );
                       })}
                     </RadioGroup>
+                    {/* </div> */}
                   </div>
-                </div>
-              </Fragment>
-            );
-          })}
-        </div>
-
-        {/* shivam code */}
-        {subItemList.map((ob, key) => {
-          return (
-            <div className={'containerPadding flex-center'}>
-              <div>{ob}</div>
-              <RadioGroup
-                value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
-                // onChange={(event) => {}}
-                defaultValue=""
-                aria-label={`option1-${ob}`}
-                name={`option1-${ob}`}
-                className={'containerPadding hr-setup'}
-                // name="customized-radios"
-              >
-                {itemFrameworkOneResponseChoice.map((op, key) => {
-                  return (
-                    <div key={`op-${key}`} style={{ maxWidth: '225px' }}>
-                      <div className="option-container-likert" key={`option-${key}`}>
-                        <FormControlLabel
-                          key={`radio-${key}`}
-                          className={'radio-button'}
-                          value={`${op.itemFrameworkOneResponseChoice}-${ob}`}
-                          control={<StyledRadio onClick={handleClick} />}
-                          label=""
-                          labelPlacement="bottom"
-                        />
-                        <div
-                          style={{
-                            padding: '2.5px 5px',
-                            alignItems: 'center',
-                            overflow: 'overlay',
-                            color: 'rgba(0, 0, 0, 0.87)',
-                            cursor: reviewMode === 'revise' ? 'pointer' : ''
-                          }}
-                          onClick={
-                            reviewMode === 'revise'
-                              ? () => {
-                                  dispatch({
-                                    type: SET_POPUP_VALUE,
-                                    payload: {
-                                      isPopUpValue: 'ITEM_OPTION_PRIMARY_POPUP',
-                                      popupMode: `OPTION_${key}`
-                                    }
-                                  });
-                                  setSelectedChoiceObject(op);
-                                }
-                              : null
-                          }
-                          dangerouslySetInnerHTML={{
-                            __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel
-                          }}
-                        ></div>
-                        <PopUpTextSheet
-                          isActive={isPopUpValue === `OPTION_${key}`}
-                          headerOne={'item'}
-                          headerPanelColour={'genericOne'}
-                          headerOneBadgeOne={'choice'}
-                          headerOneBadgeTwo={`${key + 1}`}
-                          basicInfo={{}}
-                          typeOfSetObject={''}
-                          defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
-                          actualLableValue={'assessmentManuscriptSecondary'}
-                          mode={'revise'}
-                          onClickSave={(innerText) => {
-                            let opArr = itemFrameworkOneResponseChoice;
-                            // setQuestionOptionList((opArr) => {
-                            opArr.forEach((element) => {
-                              if (
-                                element.itemFrameworkOneResponseChoice ===
-                                op.itemFrameworkOneResponseChoice
-                              ) {
-                                element.itemFrameworkOneResponseChoiceMedia = innerText;
-                              }
-                            });
-                            dispatch({
-                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                              payload: {
-                                stateName: 'itemFrameworkOneResponseChoice',
-                                value: opArr
-                              }
-                            });
-                            // });
-                          }}
-                        />
-                        <PopUpTextSheet
-                          isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
-                          headerOne={'response'}
-                          headerPanelColour={'genericOne'}
-                          headerOneBadgeOne={'choice'}
-                          headerOneBadgeTwo={`explanation`}
-                          basicInfo={{}}
-                          typeOfSetObject={''}
-                          defaultSheetValue={op.itemFrameworkOneResponseChoiceExplanation}
-                          actualLableValue={'assessmentManuscriptSecondary'}
-                          mode={'revise'}
-                          onClickSave={(innerText) => {
-                            let opArr = itemFrameworkOneResponseChoice;
-                            opArr.forEach((element) => {
-                              if (
-                                element.itemFrameworkOneResponseChoice ===
-                                op.itemFrameworkOneResponseChoice
-                              ) {
-                                element.itemFrameworkOneResponseChoiceExplanation = innerText;
-                              }
-                            });
-                            dispatch({
-                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                              payload: {
-                                stateName: 'itemFrameworkOneResponseChoice',
-                                value: opArr
-                              }
-                            });
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <div
-                          style={{
-                            padding: '2.5px 5px',
-                            alignItems: 'center',
-                            overflow: 'overlay',
-                            color: 'rgba(0, 0, 0, 0.87)',
-                            cursor: reviewMode === 'revise' ? 'pointer' : ''
-                          }}
-                          onClick={() => {
-                            // dispatch({
-                            //   type: SET_POPUP_VALUE,
-                            //   payload: {
-                            //     isPopUpValue: `RESPONSE_CHOICE_DESCRIPTION_${key}`,
-                            //     popupMode: ''
-                            //   }
-                            // });
-                          }}
-                        >
-                          {ReactHTMLParser(
-                            op.itemFrameworkOneResponseChoiceExplanation
-                              ?.itemFrameworkOneResponseChoiceExplanation ||
-                              responseChoiceDescription
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </RadioGroup>
-            </div>
-          );
-        })}
-      </FormControl>
+                </Fragment>
+              );
+            })}
+          </div>
+        </FormControl>
+      )}
 
       <div>
         <div

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
-import { SET_PANE_THREE_ITEM_PREVIEW_MODE } from '../../actionType';
+import { SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE, SET_PANE_THREE_ITEM_PREVIEW_MODE } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoItem = () => {
   const [listExpand, setListExpand] = useState('');
@@ -211,6 +211,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+   
     if (labelName === 'media') {
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
     }

@@ -124,7 +124,7 @@ const ReviewList = (props) => {
                   index={id}
                   className={'assesseeListiconSize'}
                 >
-                  <ArrowForwardIosIcon className={'flagiconmargin'} />
+                  <ArrowForwardIosIcon className={'arrowiconmargin'} />
                 </IconButton>
               )}
               {isFlagActive || flagedValue !== '' ? (

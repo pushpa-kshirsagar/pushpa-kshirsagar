@@ -110,7 +110,7 @@ export const DisplayPaneFive = () => {
   const onClickFooter = (e) => {
     // dispatch({ type: NAVIGATOR_MODE });
   };
-  const [subItemList, setSubItemList] = useState(['item-1', 'item-2', 'item-3']);
+  const [subItemList, setSubItemList] = useState(['item-1']);
 
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
 
@@ -248,6 +248,7 @@ export const DisplayPaneFive = () => {
   };
   const onClickReviseCancel = () => {
     setIsShowReviseIcon(true);
+    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
   };
 
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
@@ -521,7 +522,13 @@ export const DisplayPaneFive = () => {
         >
           {typeMode ? (
             <>
-              <DisplayPaneFiveRadioButton setSelectedChoiceObject={setSelectedChoiceObject} />
+              <DisplayPaneFiveRadioButton
+                setSelectedChoiceObject={setSelectedChoiceObject}
+                subItemList={subItemList}
+                setSubItemList={setSubItemList}
+                itemType={data?.id}
+                
+              />
             </>
           ) : (
             <>
@@ -702,7 +709,11 @@ export const DisplayPaneFive = () => {
         </DialogContent>
       </Popup>
 
-      <Popup isActive={isPopUpValue === 'ITEM_PRIMARY_POPUP'}>
+      <Popup
+        isActive={
+          isPopUpValue === 'ITEM_PRIMARY_POPUP' || isPopUpValue === 'SUB_ITEM_PRIMARY_POPUP'
+        }
+      >
         <PopupHeader
           headerPanelColour={'genericOne'}
           headerOne={'item'}
@@ -713,7 +724,9 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={ChangeItemOptionPopup}
+            ChangeOptionPopup={
+              isPopUpValue === 'SUB_ITEM_PRIMARY_POPUP' ? ChangeOptionPopup : ChangeItemOptionPopup
+            }
             currentPopUpOption={itemPrimaryPopupOption}
             secondaryOptionCheckValue={''}
           />
@@ -906,6 +919,8 @@ export const DisplayPaneFive = () => {
         primaryheader={'configuration'}
         isItemFramework={true}
         mode={reviewMode}
+        subItemList={subItemList}
+        setSubItemList={setSubItemList}
         // itemSelectedTypeName = {handleCallback}
       />
 

@@ -14,7 +14,8 @@ import {
   GET_ALLOCATE_ITEM,
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   SET_ITEM_FRAMWORK_TYPE,
-  GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA
+  GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
+  LOADER_START
 } from '../../actionType';
 import {
   ITEM_REVIEWLIST_URL,
@@ -286,12 +287,18 @@ function* workerItemTypeReviewListSaga(data) {
       URL: CONFIG_ITEM_URL
     });
     // const userResponse ={responseCode:'000',countTotal:30}
+    yield put({ type: LOADER_START });
     if (userResponse.responseCode === '000') {
       yield put({
         type: SET_ITEM_FRAMWORK_TYPE,
         payload: userResponse?.responseObject || []
       });
     } else {
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
     console.log('loading end');
     yield put({ type: LOADER_STOP });

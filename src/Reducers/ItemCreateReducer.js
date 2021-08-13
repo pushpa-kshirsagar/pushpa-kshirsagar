@@ -75,7 +75,6 @@ const initialState = {
         itemFrameworkOneResponse: '',
         itemFrameworkOneResponseAlignment: '',
         itemFrameworkOneResponseAttachment: '',
-        itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseChoice: [
           {
             itemFrameworkOneResponseChoice: '1',
@@ -100,20 +99,9 @@ const initialState = {
             itemFrameworkOneResponseChoiceWeightage: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoicePolarity: ''
-          },
-          {
-            itemFrameworkOneResponseChoice: '3',
-            itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanation: '',
-              itemFrameworkOneResponseChoiceExplanationDisplay: false
-            }, //responseChoiceDescription,
-            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
-            itemFrameworkOneResponseChoiceWeightage: '',
-            itemFrameworkOneResponseChoiceScore: '',
-            itemFrameworkOneResponseChoicePolarity: ''
           }
         ],
+        itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseLabel: {
           itemFrameworkOneResponseLabelDisplay: false,
           itemFrameworkOneResponseLabel: ''
@@ -130,7 +118,16 @@ const initialState = {
           }
         ],
         itemFrameworkOneScore: null,
-        itemFrameworkOneSection: [],
+        itemFrameworkOneSection: [
+          {
+            itemFrameworkOneSectionSequence: 1,
+            itemFrameworkOneSection: {
+              itemFrameworkOneMedia: '',
+              itemFrameworkOneScore: 1,
+              itemFrameworkOneType: ''
+            }
+          }
+        ],
         itemFrameworkOneSequence: '',
         itemFrameworkOneTime: '',
         itemFrameworkOneType: '',

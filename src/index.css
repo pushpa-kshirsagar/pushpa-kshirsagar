@@ -37,12 +37,11 @@ body {
 .assessmentRadioQuestion span span p img {
   height: '105px !important';
 }
-.assessmentRadioQuestion input{
+.assessmentRadioQuestion input {
   height: 20px;
-  width:20px;
-
+  width: 20px;
 }
-.assessmentHeaderHr{
+.assessmentHeaderHr {
   height: 1px;
   margin: 0;
   border: none;
@@ -294,6 +293,16 @@ body {
   font-weight: bold;
   bottom: 1px;
 }
+.iguru-header-badge1_1 {
+  display: inline-block;
+  border-radius: 16px;
+  border: 1px solid;
+  padding: 1px 5px;
+  position: relative;
+  font-size: 7px;
+  /* font-weight: bold; */
+  bottom: 1px;
+}
 .font-weight-bold {
   font-weight: bold !important;
 }
@@ -348,7 +357,7 @@ body {
           position: relative;
           right:2.8px; */
 }
-.likert-flex{
+.likert-flex {
   flex: 1;
 }
 .parent {
@@ -361,7 +370,7 @@ body {
   margin: 5px;
   height: auto;
 }
-.likert-display{
+.likert-display {
   display: flex;
 }
 .iguru-box-shadow {
@@ -449,32 +458,14 @@ body {
   background-color: gray;
 } /* if */
 
-
-.ig-grid-header{
-  display: flex;
+.likert_choice {
+  flex: 1;
+  width: 145px;
+  text-align: center;
 }
-.ig-header-item{
-  width:100px;
-  text-align:center;
-}
-.ig-header-item:nth-child(1) {
-  width:180px;
-}
-.ig-grid-row {
-  margin-bottom: 1em
-}
-.ig-grid-row, .grid-header {
-  display:flex;
-}
-.flex-item {
-  display:flex;
-  width:100px;
-  justify-content: center;
-  align-items:center;
-  font-weight:normal;
-}
-.flex-item:nth-child(1) {
-  border:none;
-  width:180px;
-  justify-content: left;
+.likert_choice-sclae {
+  width: 145px;
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
 }
