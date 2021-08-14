@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -38,26 +38,29 @@ const PopUpAddress = (props) => {
   const [zipcodeErr, setZipcodeErr] = useState('');
   const [cityErr, setCityErr] = useState('');
   const [addressErr, setAddressErr] = useState('');
-
+  const [localObject, setLocalObject] = useState(basicInfo);
+  useEffect(() => {
+    setLocalObject(basicInfo);
+  }, [basicInfo]);
   const validateFun = () => {
     let isValidate = true;
-    if (basicInfo && basicInfo[objectKeys[4]] === '') {
+    if (localObject && localObject[objectKeys[4]] === '') {
       setAddressErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
-    if (basicInfo && basicInfo[objectKeys[3]] === '') {
+    if (localObject && localObject[objectKeys[3]] === '') {
       setCityErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
-    if (basicInfo && basicInfo[objectKeys[0]] === '') {
+    if (localObject && localObject[objectKeys[0]] === '') {
       setCountryErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
-    if (basicInfo && basicInfo[objectKeys[2]] === '') {
+    if (localObject && localObject[objectKeys[2]] === '') {
       setZipcodeErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
-    if (basicInfo && basicInfo[objectKeys[1]] === '') {
+    if (localObject && localObject[objectKeys[1]] === '') {
       setStateErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
@@ -83,9 +86,16 @@ const PopUpAddress = (props) => {
     if (objectKeys.indexOf(e.target.name) === 4) {
       setAddressErr('');
     }
-    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+    // dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+    setLocalObject({ ...localObject, [name]: value });
   };
   const handleClick = () => {
+    Object.keys(localObject).map((k) =>
+      typeof localObject[k] === 'string'
+        ? (localObject[k] = localObject[k]?.trim())
+        : localObject[k]
+    );
+    dispatch({ type: typeOfSetObject, payload: { ...localObject } });
     if (mode === 'revise') {
       dispatch({ type: POPUP_CLOSE });
     } else {
@@ -137,7 +147,7 @@ const PopUpAddress = (props) => {
               ]}
               errorMsg={countryErr}
               onChange={handleChange}
-              value={basicInfo && basicInfo[objectKeys[0]]}
+              value={localObject && localObject[objectKeys[0]]}
               mappingValue={'countryCode'}
             />
             <SelectField
@@ -150,13 +160,13 @@ const PopUpAddress = (props) => {
               errorMsg={stateErr}
               onChange={handleChange}
               mappingValue={'stateCode'}
-              value={basicInfo && basicInfo[objectKeys[1]]}
+              value={localObject && localObject[objectKeys[1]]}
             />
 
             <InputFeild
               id={objectKeys[2]}
               label={'postcode'}
-              value={basicInfo && basicInfo[objectKeys[2]]}
+              value={localObject && localObject[objectKeys[2]]}
               errorMsg={zipcodeErr}
               onClick={handleChange}
             />
@@ -170,12 +180,12 @@ const PopUpAddress = (props) => {
               mappingValue={'cityCode'}
               errorMsg={cityErr}
               onChange={handleChange}
-              value={basicInfo && basicInfo[objectKeys[3]]}
+              value={localObject && localObject[objectKeys[3]]}
             />
             <InputFeild
               id={objectKeys[4]}
               label={'address'}
-              value={basicInfo && basicInfo[objectKeys[4]]}
+              value={localObject && localObject[objectKeys[4]]}
               errorMsg={addressErr}
               onClick={handleChange}
             />
