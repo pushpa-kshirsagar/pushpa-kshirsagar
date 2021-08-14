@@ -5,19 +5,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
-import { SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE, SET_PANE_THREE_ITEM_PREVIEW_MODE } from '../../actionType';
+import {
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_PANE_THREE_ITEM_PREVIEW_MODE,
+  SET_POPUP_VALUE
+} from '../../actionType';
 
 const DisplayPaneThreeSectionTwoItem = () => {
   const [listExpand, setListExpand] = useState('');
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const itemFrameworkOne = responseObject?.informationFramework?.itemFrameworkOne;
   // const { countPage, selectedAssociateInfo, selectedTagValue } = useSelector(
   //   (state) => state.DisplayPaneTwoReducer
   // );
   const dispatch = useDispatch();
   // const { informationContact, informationCredential, informationFramework } = responseObject;
-
+  const itemTypeList = responseObject?.informationFramework?.itemTypeList || [];
+  const datatypeItem = itemTypeList.find(
+    (item) => item.id === responseObject.informationFramework?.itemFrameworkOne.itemFrameworkOneType
+  );
   const frameworkList = [
     // {
     //   id: 'a1-blank',
@@ -35,36 +43,25 @@ const DisplayPaneThreeSectionTwoItem = () => {
     //   IconTwo: null
     // },
     {
-      id: 'a1-classification',
+      id: 'a-classification',
       labelTextOneOne: 'classification',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
+      isListCard: false,
+      textOneOne:
+        itemFrameworkOne?.itemFrameworkOneClassification.itemFrameworkOneClassificationLabel ||
+        'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
+      IconOne: null
     },
     {
-      id: 'a1-level',
+      id: 'a-level',
       labelTextOneOne: 'level',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
+      isListCard: false,
+      textOneOne: itemFrameworkOne?.itemFrameworkOneLevel || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
+      IconOne: null
     },
-
     {
       id: 'a1-media',
       labelTextOneOne: 'media',
@@ -82,35 +79,22 @@ const DisplayPaneThreeSectionTwoItem = () => {
       isReviewLink: true
     },
     {
-      id: 'a1-polarity',
+      id: 'a-polarity',
       labelTextOneOne: 'polarity',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
+      isListCard: false,
+      textOneOne: itemFrameworkOne?.itemFrameworkOnePolarity || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
+      IconOne: null
     },
     {
-      id: 'a1-scale',
+      id: 'a2',
       labelTextOneOne: 'scale',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
+      isListCard: false,
+      textOneOne: 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null,
-      isReviewLink: true
+      IconOne: null
     },
     // {
     //   id: 'a1-response',
@@ -131,20 +115,15 @@ const DisplayPaneThreeSectionTwoItem = () => {
     //   IconOne: null,
     //   IconTwo: null
     // },
+
     {
-      id: 'a1-score',
+      id: 'a3',
       labelTextOneOne: 'score',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
+      isListCard: false,
+      textOneOne: itemFrameworkOne?.itemFrameworkOneScore || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
+      IconOne: null
     },
     // {
     //   id: 'a1-sequence',
@@ -162,58 +141,57 @@ const DisplayPaneThreeSectionTwoItem = () => {
     //   IconTwo: null
     // },
     {
-      id: 'a1-time',
+      id: 'a4',
       labelTextOneOne: 'time',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
+      isListCard: false,
+      textOneOne: itemFrameworkOne?.itemFrameworkOneTime || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
+      IconOne: null
     },
     {
-      id: 'item-type',
+      id: 'a5',
       labelTextOneOne: 'type',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
+      isListCard: false,
+      textOneOne: datatypeItem?.itemFrameworkOneTypeNameReference || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
+      IconOne: null
     },
     {
-      id: 'item-word',
+      id: 'a6',
       labelTextOneOne: 'weightage',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: ''
-        }
-      ],
+      isListCard: false,
+      textOneOne: itemFrameworkOne?.itemFrameworkOneWeightage || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: false,
-      IconOne: null,
-      IconTwo: null
+      IconOne: null
     }
   ];
 
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-   
+    console.log(labelName);
     if (labelName === 'media') {
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
+    }
+    if (
+      labelName === 'weightage' ||
+      labelName === 'score' ||
+      labelName === 'classification' ||
+      labelName === 'level' ||
+      labelName === 'polarity' ||
+      labelName === 'scale' ||
+      labelName === 'time'
+    ) {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_FRAMEWORK_POPUP',
+          popupMode: ''
+        }
+      });
     }
   };
   const reviewFramework = (e) => {

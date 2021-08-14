@@ -61,7 +61,7 @@ const PopUpTextField = (props) => {
   const handleChange = (event) => {
     if (!isNotRevised) {
       const { name, value } = event.target;
-      dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value.trim() } });
+      dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
       setLocalObject({ ...basicInfo, [name]: value });
       setState((prevState) => ({
         ...prevState,
@@ -73,6 +73,11 @@ const PopUpTextField = (props) => {
   const handleClick = () => {
     /*according to creation mode popup sequence will chanlocalObjectge*/
     if (validateFun() && !isNotRevised) {
+      Object.keys(localObject).map((k) =>
+        typeof localObject[k] === 'string'
+          ? (localObject[k] = localObject[k]?.trim())
+          : localObject[k]
+      );
       dispatch({ type: typeOfSetObject, payload: { ...localObject } });
       if (reviewMode === 'revise') {
         dispatch({ type: POPUP_CLOSE });

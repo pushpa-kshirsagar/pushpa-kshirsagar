@@ -139,6 +139,7 @@ export const DisplayPaneFive = () => {
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
   const [selectedChoiceObject, setSelectedChoiceObject] = useState('');
+  const [subQuestionId, setSubQuestionId] = useState('');
 
   // const [responseChoiceDescriptionText, setResponseChoiceDescriptionText] = useState(
   //   responseChoiceDescription
@@ -279,6 +280,8 @@ export const DisplayPaneFive = () => {
 
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
+    // setSubQuestionId(e.currentTarget.getAttribute('subquestionid'))
+    setSubQuestionId(popupMode.split('_'));
     if (targetValue === 'configure') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -526,8 +529,7 @@ export const DisplayPaneFive = () => {
                 setSelectedChoiceObject={setSelectedChoiceObject}
                 subItemList={subItemList}
                 setSubItemList={setSubItemList}
-                itemType={data?.id}
-                
+                itemType={data?.itemFrameworkOneTypeNameReference}
               />
             </>
           ) : (
@@ -949,6 +951,10 @@ export const DisplayPaneFive = () => {
         primaryheaderTwo={''}
         nextPopUpValue={''}
         mode={'revise'}
+        subQuestionId={
+          data?.itemFrameworkOneTypeNameReference === 'Likert-Scale' &&
+          parseInt(subQuestionId[3]) + 1
+        }
       />
       {reviewMode === 'revise' ? (
         <FooterIconTwo

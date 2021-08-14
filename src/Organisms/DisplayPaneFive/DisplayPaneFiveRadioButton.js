@@ -9,6 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
+import { Checkbox } from '@material-ui/core';
+import { CheckBox } from '@material-ui/icons';
 
 const DisplayPaneFiveRadioButton = (props) => {
   const dispatch = useDispatch();
@@ -94,6 +96,20 @@ const DisplayPaneFiveRadioButton = (props) => {
       />
     );
   }
+  function StyledCheckbox(props) {
+    const classes = useStyles();
+
+    return (
+      <CheckBox
+        className={classes.root}
+        disableRipple
+        color="default"
+        checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+        icon={<span className={classes.icon} />}
+        {...props}
+      />
+    );
+  }
   const handleClick = (event) => {
     console.log('ONCHANGE ', event.target.value);
     if (itemFrameworkOne.itemFrameworkOneResponseCorrect[0] === event.target.value) {
@@ -139,35 +155,35 @@ const DisplayPaneFiveRadioButton = (props) => {
     <>
       <div>
         {/* for lable */}
-        {itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' &&
-          reviewMode === 'revise' && (
-            <div
-              style={{
-                padding: '2.5px 5px',
-                alignItems: 'center',
-                overflow: 'overlay',
-                color: 'rgba(0, 0, 0, 0.87)',
-                cursor: reviewMode === 'revise' ? 'pointer' : ''
-              }}
-              onClick={
-                reviewMode === 'revise'
-                  ? () => {
-                      dispatch({
-                        type: SET_POPUP_VALUE,
-                        payload: {
-                          isPopUpValue: 'ITEM_LABEL_PRIMARY_POPUP',
-                          popupMode: popupMode
-                        }
-                      });
-                    }
-                  : null
-              }
-            >
-              {ReactHTMLParser(
-                itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText
-              )}
-            </div>
-          )}
+        {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' ||
+          reviewMode === 'revise') && (
+          <div
+            style={{
+              padding: '2.5px 5px',
+              alignItems: 'center',
+              overflow: 'overlay',
+              color: 'rgba(0, 0, 0, 0.87)',
+              cursor: reviewMode === 'revise' ? 'pointer' : ''
+            }}
+            onClick={
+              reviewMode === 'revise'
+                ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'ITEM_LABEL_PRIMARY_POPUP',
+                        popupMode: popupMode
+                      }
+                    });
+                  }
+                : null
+            }
+          >
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText
+            )}
+          </div>
+        )}
       </div>
       <div>
         {/* for media item */}
@@ -199,40 +215,8 @@ const DisplayPaneFiveRadioButton = (props) => {
         )}
       </div>
       <div>
-        {itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' &&
-          reviewMode === 'revise' && (
-            <div
-              style={{
-                padding: '2.5px 5px',
-                alignItems: 'center',
-                overflow: 'overlay',
-                color: 'rgba(0, 0, 0, 0.87)',
-                cursor: reviewMode === 'revise' ? 'pointer' : ''
-              }}
-              onClick={
-                reviewMode === 'revise'
-                  ? () => {
-                      dispatch({
-                        type: SET_POPUP_VALUE,
-                        payload: {
-                          isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
-                          popupMode: popupMode
-                        }
-                      });
-                    }
-                  : null
-              }
-            >
-              {ReactHTMLParser(
-                itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation ||
-                  itemDescription
-              )}
-            </div>
-          )}
-      </div>
-      {/* for response */}
-      <div>
-        {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
+        {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
+          reviewMode === 'revise') && (
           <div
             style={{
               padding: '2.5px 5px',
@@ -247,22 +231,27 @@ const DisplayPaneFiveRadioButton = (props) => {
                     dispatch({
                       type: SET_POPUP_VALUE,
                       payload: {
-                        isPopUpValue: 'RESPONSE_PRIMARY_POPUP',
-                        popupMode: 'RESPONSE_SECONDARY_POPUP'
+                        isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
+                        popupMode: popupMode
                       }
                     });
                   }
                 : null
             }
           >
-            {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponse || response)}
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation ||
+                itemDescription
+            )}
           </div>
         )}
       </div>
-      {/* for response label */}
-      <div>
-        {itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' &&
-          reviewMode === 'revise' && (
+      {/* for response */}
+      {(itemType === 'Response (Long)' ||
+        itemType === 'Response (Short)' ||
+        itemType === 'Master-Framework') && (
+        <div>
+          {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
             <div
               style={{
                 padding: '2.5px 5px',
@@ -277,24 +266,58 @@ const DisplayPaneFiveRadioButton = (props) => {
                       dispatch({
                         type: SET_POPUP_VALUE,
                         payload: {
-                          isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
-                          popupMode: popupMode
+                          isPopUpValue: 'RESPONSE_PRIMARY_POPUP',
+                          popupMode: 'RESPONSE_SECONDARY_POPUP'
                         }
                       });
                     }
                   : null
               }
             >
-              {ReactHTMLParser(
-                itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel ||
-                  responseLabel
-              )}
+              {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponse || response)}
             </div>
           )}
+        </div>
+      )}
+      {/* for response label */}
+      <div>
+        {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
+          reviewMode === 'revise') && (
+          <div
+            style={{
+              padding: '2.5px 5px',
+              alignItems: 'center',
+              overflow: 'overlay',
+              color: 'rgba(0, 0, 0, 0.87)',
+              cursor: reviewMode === 'revise' ? 'pointer' : ''
+            }}
+            onClick={
+              reviewMode === 'revise'
+                ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
+                        popupMode: popupMode
+                      }
+                    });
+                  }
+                : null
+            }
+          >
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel ||
+                responseLabel
+            )}
+          </div>
+        )}
       </div>
 
       {/* for response choice */}
-      {(itemType === '61090cace50cf61d5eb440ce' || itemType === '61161713f24e1fb765208e23') && (
+      {(itemType === 'Response-Choice (Single-Select)' ||
+        itemType === 'Master-Framework' ||
+        itemType === 'False-True' ||
+        itemType === 'Fill-in-the-Blank (Response-Choice)') && (
         <FormControl component="fieldset">
           <div className={'containerPadding'}>
             <RadioGroup
@@ -446,40 +469,41 @@ const DisplayPaneFiveRadioButton = (props) => {
         </FormControl>
       )}
 
+      {/* for response explanation */}
       <div>
         {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-          ?.itemFrameworkOneResponseExplanation !== '' &&
+          ?.itemFrameworkOneResponseExplanation !== '' ||
           reviewMode === 'revise') && (
-            <div
-              style={{
-                padding: '2.5px 5px',
-                alignItems: 'center',
-                overflow: 'overlay',
-                color: 'rgba(0, 0, 0, 0.87)',
-                cursor: reviewMode === 'revise' ? 'pointer' : ''
-              }}
-              onClick={
-                reviewMode === 'revise'
-                  ? () => {
-                      dispatch({
-                        type: SET_POPUP_VALUE,
-                        payload: {
-                          isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
-                          popupMode: 'RESPONSE_DESCRIPTION_TEXT'
-                        }
-                      });
-                    }
-                  : null
-              }
-            >
-              {ReactHTMLParser(
-                itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                  ?.itemFrameworkOneResponseExplanation || responseDescription
-              )}
-            </div>
-          )}
+          <div
+            style={{
+              padding: '2.5px 5px',
+              alignItems: 'center',
+              overflow: 'overlay',
+              color: 'rgba(0, 0, 0, 0.87)',
+              cursor: reviewMode === 'revise' ? 'pointer' : ''
+            }}
+            onClick={
+              reviewMode === 'revise'
+                ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
+                        popupMode: 'RESPONSE_DESCRIPTION_TEXT'
+                      }
+                    });
+                  }
+                : null
+            }
+          >
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                ?.itemFrameworkOneResponseExplanation || responseDescription
+            )}
+          </div>
+        )}
       </div>
-      {(itemType === '61090cace50cf61d5eb440c9' || itemType === '61161713f24e1fb765208e23') && (
+      {(itemType === 'Likert-Scale' || itemType === 'Master-Framework') && (
         <FormControl component="fieldset" style={{ width: '100%' }}>
           <div className={'containerPadding flex-center'} style={{ display: 'flex' }}>
             <div style={{ flex: '2' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -494,6 +518,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                   <div style={{ display: 'flex' }}>
                     <div
                       style={{ flex: '2' }}
+                      subQuestionId={ob.itemFrameworkOneSectionSequence}
                       onClick={
                         reviewMode === 'revise'
                           ? () => {

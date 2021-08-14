@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -23,7 +23,7 @@ const PopUpItemFramework = (props) => {
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const itemFrameworkOneResponseChoice =
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
-
+  const itemFrameworkOne = itemInformation?.informationFramework.itemFrameworkOne;
   const {
     isActive,
     primaryheader,
@@ -36,20 +36,29 @@ const PopUpItemFramework = (props) => {
     choiceOb = null,
     basicInfo,
     mode,
-    isItemFramework = false
+    isItemFramework = false,
+    subQuestionId
   } = props;
   const [blank, setBlank] = useState('');
   const [classification, setclassification] = useState('');
   const [level, setlevel] = useState(null);
   const [polarity, setpolarity] = useState('');
-  const [score, setscore] = useState('');
+  const [score, setscore] = useState();
   const [scale, setscale] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
   // console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
   // console.log('Choice ob ', choiceOb);
+  useEffect(() =>{
+    if(subQuestionId){
+      let subques = itemFrameworkOne.itemFrameworkOneSection.filter(function (sub) {
+        return sub.itemFrameworkOneSectionSequence === subQuestionId;
+      });
+      setscore(subques[0]?.itemFrameworkOneSection?.itemFrameworkOneScore);
+    }
+  },[subQuestionId]);
   const handleClick = () => {
-    // alert(isItemFramework);
+    // alert(subQuestionId);
     console.log(
       blank,
       classification,
@@ -86,6 +95,22 @@ const PopUpItemFramework = (props) => {
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
       });
+    } else if (subQuestionId) {
+      let opArr = itemFrameworkOne?.itemFrameworkOneSection;
+      opArr.forEach((element) => {
+        if (element.itemFrameworkOneSectionSequence === subQuestionId) {
+          element.itemFrameworkOneSection.itemFrameworkOnePolarity = polarity;
+          element.itemFrameworkOneSection.itemFrameworkOneWeightage = weightage;
+          element.itemFrameworkOneSection.itemFrameworkOneScore = weightage;
+        }
+      });
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneSection',
+          value: opArr
+        }
+      });
     } else {
       if (choiceOb !== null) {
         let tempArr = itemFrameworkOneResponseChoice;
@@ -105,13 +130,13 @@ const PopUpItemFramework = (props) => {
         });
       }
     }
-    setBlank(blank);
-    setlevel(level);
-    setweightage(weightage);
-    setscore(score);
-    setscale(scale);
-    settime(time);
-    setpolarity(polarity);
+    // setBlank(blank);
+    // setlevel(level);
+    // setweightage(weightage);
+    // setscore(score);
+    // setscale(scale);
+    // settime(time);
+    // setpolarity(polarity);
     dispatch({ type: POPUP_CLOSE });
   };
 
@@ -214,7 +239,7 @@ const PopUpItemFramework = (props) => {
               value={polarity}
               mappingValue={'id'}
             />
-             {isItemFramework && (
+            {isItemFramework && (
               <SelectField
                 tag={'scale'}
                 label={'scale'}
@@ -242,7 +267,7 @@ const PopUpItemFramework = (props) => {
                 setscore(e.target.value);
               }}
             />
-           
+
             {isItemFramework && (
               <InputFeild
                 id={'time'}

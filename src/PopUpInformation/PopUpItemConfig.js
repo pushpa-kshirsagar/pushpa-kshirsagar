@@ -29,9 +29,7 @@ const PopUpItemConfig = (props) => {
     choiceOb = null,
     basicInfo,
     mode,
-    isItemFramework = false,
-    setSubItemList,
-    subItemList
+    isItemFramework = false
   } = props;
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
@@ -51,10 +49,10 @@ const PopUpItemConfig = (props) => {
     set_Item_Aligement(itemFrameworkOne.itemFrameworkOneAlignment);
     set_Item_Type(itemFrameworkOne.itemFrameworkOneType);
     Set_Response_Aligement(itemFrameworkOne.itemFrameworkOneResponseAlignment);
-    set_Response_Word();
+    set_Response_Word(itemFrameworkOne?.itemFrameworkOneWord?.itemFrameworkOneWordMaximum);
   }, [itemFrameworkOne]);
   const dispatch = useDispatch();
-
+  const subItemList = itemFrameworkOne?.itemFrameworkOneSection;
   const optionLabel =
     "<span>response</span>&nbsp <span class='iguru-header-badge1_1'>choice</span>&nbsp;";
   const itemText = '<span>item</span>&nbsp;';
@@ -62,6 +60,8 @@ const PopUpItemConfig = (props) => {
     "<span>response</span> &nbsp <span class='iguru-header-badge1_1'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const handleClick = () => {
     let itemFrameworkOneResponseChoice = itemFrameworkOne.itemFrameworkOneResponseChoice;
+    const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
+    const data = itemTypeList.find((item) => item.id === item_Type);
     dispatch({
       type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
       payload: {
@@ -81,6 +81,16 @@ const PopUpItemConfig = (props) => {
       payload: {
         stateName: 'itemFrameworkOneResponseAlignment',
         value: response_Aligement
+      }
+    });
+    dispatch({
+      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'itemFrameworkOneWord',
+        value: {
+          itemFrameworkOneWordMaximum: response_word,
+          itemFrameworkOneWordMinimum: response_word
+        }
       }
     });
     if (response_Choice < itemFrameworkOne.itemFrameworkOneResponseChoice) {
@@ -147,19 +157,49 @@ const PopUpItemConfig = (props) => {
       let originobj = [...subItemList];
       let actlen = response_Choice - subItemList.length;
       let choice = subItemList.length;
-      console.log('originobj', originobj);
-      for (let i = 0; i < actlen; i++) {
-        originobj.push(`item-${choice + i + 1}`);
-        setSubItem(originobj);
+      if (originobj) {
+        for (let i = 0; i < actlen; i++) {
+          originobj.push(`item-${choice + i + 1}`);
+          setSubItem(originobj);
+        }
       }
-      console.log('originobjafert', originobj);
     }
-    if (sub_item < subItemList?.length) {
+    if (sub_item < subItemList?.length && sub_item !== 0) {
       let originobj = [...subItemList];
-      let actlen = subItemList.length - sub_item;
-      let arr = itemFrameworkOne.subItemList;
+      let actlen = subItemList?.length - sub_item;
+      let arr = itemFrameworkOne?.subItemList;
       let newarr = arr.slice(0, -actlen);
       setSubItem(newarr);
+    }
+    if (item_Type) {
+      let choicelength = 3;
+      let newArr = [];
+      if (data?.id === item_Type && data?.itemFrameworkOneTypeNameReference === 'False-True') {
+        choicelength = 2;
+      }
+      for (let index = 1; index <= choicelength; index++) {
+        let ob = {
+          itemFrameworkOneResponseChoice: index,
+          itemFrameworkOneResponseChoiceColumnMatch: '',
+          itemFrameworkOneResponseChoiceExplanation: {
+            itemFrameworkOneResponseChoiceExplanation: '',
+            itemFrameworkOneResponseChoiceExplanationDisplay: false
+          },
+          itemFrameworkOneResponseChoiceMedia:
+            choicelength === 2 ? (index === 1 ? '<p>False</p>' : '<p>True</p>') : '',
+          itemFrameworkOneResponseChoicePolarity: '',
+          itemFrameworkOneResponseChoiceScore: null,
+          itemFrameworkOneResponseChoiceWeightage: null
+        };
+        newArr.push(ob);
+      }
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseChoice',
+          value: newArr
+        }
+      });
     }
 
     dispatch({ type: POPUP_CLOSE });

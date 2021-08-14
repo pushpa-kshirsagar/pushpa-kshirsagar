@@ -55,6 +55,8 @@ import PopUpJobProfileCreate from '../../Molecules/PopUpCreate/PopUpJobProfileCr
 import DisplayPaneFour from '../../Organisms/DisplayPaneFour/DisplayPaneFour';
 import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 import PopUpDisplayPanelAssesseeAssessment from '../../PopUpDisplayPanel/PopUpDisplayPanelAssesseeAssessment';
+import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
+import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -64,7 +66,10 @@ const DisplayPageOne = () => {
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isItemPreviewShow = false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { isItemPreviewShow = false, reviewMode } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
+
   const { isExamMode, isAssessmentStart } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
@@ -461,6 +466,17 @@ const DisplayPageOne = () => {
       {popupMode === 'ASSIGNMENTCREATE' && <PopUpAssignmentCreate headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <PopUpAssessmentCreate headerOne={'assessment'} />}
       {popupMode === 'ITEMCREATE' && <PopUpItemCreate />}
+      <PopUpItemFramework
+        isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'item'}
+        headerOneBadgeOne={'configuration'}
+        nextPopUpValue={''}
+        // inputHeader={'item'}
+        // primaryheader={'configuration'}
+        isItemFramework={true}
+        mode={'revise'}
+      />
     </>
   );
 };

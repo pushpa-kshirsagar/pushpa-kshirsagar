@@ -79,6 +79,11 @@ const PopUpAssesseeName = (props) => {
   const handleClick = () => {
     if (validate()) {
       /*according to creation mode popup sequence will change*/
+      Object.keys(localObject).map((k) =>
+        typeof localObject[k] === 'string'
+          ? (localObject[k] = localObject[k]?.trim())
+          : localObject[k]
+      );
       dispatch({ type: typeOfSetObject, payload: { ...localObject } });
       if (reviewMode === 'revise') {
         dispatch({ type: POPUP_CLOSE });
