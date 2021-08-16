@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -34,33 +34,39 @@ const PopUpTelephone = (props) => {
     tempTelephoneCommunication = ''
   } = props;
 
-  const objectKeys = Object.keys(basicInfo);
   const [ziroErr, setziroErr] = useState('');
   const [oneErr, setoneErr] = useState('');
   const [twoErr, settwoErr] = useState('');
   const [threeErr, setthreeErr] = useState('');
+  const [localObject, setLocalObject] = useState(basicInfo);
+  useEffect(() => {
+    setLocalObject(basicInfo);
+  }, [basicInfo]);
+  // const objectKeys = Object.keys(basicInfo);
+  const objectKeys = Object.keys(localObject);
+
   // console.log("TELEPHONE Object Key", objectKeys);
   const validate = () => {
     let isValidate = true;
-    if (basicInfo && basicInfo[objectKeys[0]] === '') {
+    if (localObject && localObject[objectKeys[0]] === '') {
       setziroErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
-    if (basicInfo && basicInfo[objectKeys[1]] === '') {
+    if (localObject && localObject[objectKeys[1]] === '') {
       setoneErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
-    if (basicInfo && basicInfo[objectKeys[2]] === '') {
+    if (localObject && localObject[objectKeys[2]] === '') {
       settwoErr(REQUIRED_ERROR_MESSAGE);
       isValidate = false;
     }
-    // if (basicInfo && basicInfo[objectKeys[3]] === '') {
+    // if (localObject && localObject[objectKeys[3]] === '') {
     //   setthreeErr(REQUIRED_ERROR_MESSAGE);
     //   isValidate = false;
     // }
     /* validation of moile number but still its not required
    let regex = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
-    let mobilestr = basicInfo.mobileNumber;
+    let mobilestr = localObject.mobileNumber;
     if (regex.test(mobilestr) === false && mobilestr !=='') {
       setState((prevState) => ({
         ...prevState,
@@ -84,9 +90,13 @@ const PopUpTelephone = (props) => {
     if (objectKeys.indexOf(event.target.name) === 3) {
       setthreeErr('');
     }
-    dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+    setLocalObject({ ...localObject, [name]: value });
+
+    // dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
   };
   const handleClick = () => {
+    dispatch({ type: typeOfSetObject, payload: { ...localObject } });
+
     if (reviewMode === 'revise') {
       dispatch({ type: POPUP_CLOSE });
     } else {
@@ -135,7 +145,7 @@ const PopUpTelephone = (props) => {
               mappingValue={'countryCode'}
               errorMsg={ziroErr}
               onChange={handleChange}
-              value={basicInfo && basicInfo[objectKeys[0]]}
+              value={localObject && localObject[objectKeys[0]]}
             />
 
             {isMobileState === false ? (
@@ -150,13 +160,13 @@ const PopUpTelephone = (props) => {
                   mappingValue={'cityCode'}
                   errorMsg={oneErr}
                   onChange={handleChange}
-                  value={basicInfo && basicInfo[objectKeys[1]]}
+                  value={localObject && localObject[objectKeys[1]]}
                 />
                 <InputFeild
                   type={'text'}
                   id={objectKeys[2]}
                   label={'telephone number'}
-                  value={basicInfo && basicInfo[objectKeys[2]]}
+                  value={localObject && localObject[objectKeys[2]]}
                   errorMsg={twoErr}
                   onClick={handleChange}
                 />
@@ -168,7 +178,9 @@ const PopUpTelephone = (props) => {
               id={isMobileState ? objectKeys[1] : objectKeys[3]}
               label={isMobileState ? 'mobile number' : 'extension number'}
               value={
-                basicInfo && isMobileState ? basicInfo[objectKeys[1]] : basicInfo[objectKeys[3]]
+                localObject && isMobileState
+                  ? localObject[objectKeys[1]]
+                  : localObject[objectKeys[3]]
               }
               errorMsg={isMobileState ? oneErr : threeErr}
               onClick={handleChange}

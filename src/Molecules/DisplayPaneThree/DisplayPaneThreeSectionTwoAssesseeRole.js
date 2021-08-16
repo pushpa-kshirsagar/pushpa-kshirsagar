@@ -15,7 +15,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_PAGE_COUNT
+  SET_PAGE_COUNT,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import {
   getAssesseeRoleAssesseeDistinctApiCall,
@@ -28,6 +29,7 @@ import {
   makeManagerRoleCreateObj,
   makeManagersReviewListRequestObject
 } from '../../Actions/GenericActions';
+import { createNameWithBadge } from '../../Actions/StatusAction';
 
 const DisplayPaneThreeSectionTwoAssesseeRole = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -56,6 +58,41 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
       status: ''
     });
   });
+  let permissionList = [
+    {
+      id: 'id1',
+      textOne:
+        "<span>assessees</span>&nbsp <span class='iguru-header-badge1_2'>distinct</span>&nbsp;",
+      textTwo: 'create, review' || 'No Information',
+      status: ''
+    },
+    {
+      id: 'id2',
+      textOne:
+        "<span>assessees</span>&nbsp <span class='iguru-header-badge1_2'>groups</span>&nbsp;",
+      textTwo: 'create' || 'No Information',
+      status: ''
+    },
+    {
+      id: 'id3',
+      textOne:
+        "<span>assessees</span>&nbsp <span class='iguru-header-badge1_2'>managers</span>&nbsp;",
+      textTwo: 'create' || 'No Information',
+      status: ''
+    },
+    {
+      id: 'id4',
+      textOne: "<span>assessees</span>&nbsp <span class='iguru-header-badge1_2'>roles</span>&nbsp;",
+      textTwo: 'create' || 'No Information',
+      status: ''
+    },
+    {
+      id: 'id4',
+      textOne: "<span>assessees</span>&nbsp <span class='iguru-header-badge1_2'>types</span>&nbsp;",
+      textTwo: 'create' || 'No Information',
+      status: ''
+    }
+  ];
 
   const list2 = [
     {
@@ -69,6 +106,23 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: assesseeArray
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true
+    },
+    {
+      id: 'a2',
+      labelTextOneOne: 'permission',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: permissionList
         }
       ],
       innerInfo: 'No Information',
@@ -131,6 +185,12 @@ const DisplayPaneThreeSectionTwoAssesseeRole = () => {
           existingAssesseeId: existingAssesseeId,
           typeOfMiddlePaneList: 'assesseesRoleAssesseeReviewList'
         }
+      });
+    }
+    if (labelName === 'permission') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PERMISSIONPOPUP', popupMode: 'assesseesROLECREATE' }
       });
     }
   };

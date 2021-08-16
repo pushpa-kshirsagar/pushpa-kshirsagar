@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -14,6 +14,7 @@ const PopUpAddressEmail = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+
   /*props*/
   const {
     isActive = false,
@@ -36,6 +37,10 @@ const PopUpAddressEmail = (props) => {
     // email: '',
     emailErr: ''
   });
+  const [localObject, setLocalObject] = useState(basicInfo);
+  useEffect(() => {
+    setLocalObject(basicInfo);
+  }, [basicInfo]);
   /*handling the onchange event*/
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -63,14 +68,15 @@ const PopUpAddressEmail = (props) => {
       }
     }
 
-    dispatch({
-      type: typeOfSetObject,
-      payload: {
-        ...basicInfo,
-        [name]: value
-        // assesseeAddressEmailCommunication: communication
-      }
-    });
+    setLocalObject({ ...localObject, [name]: value });
+
+    // dispatch({
+    //   type: typeOfSetObject,
+    //   payload: {
+    //     ...basicInfo,
+    //     [name]: value
+    //   }
+    // });
 
     setState((prevState) => ({
       ...prevState,
@@ -96,7 +102,7 @@ const PopUpAddressEmail = (props) => {
   /*this function for validate email address*/
   const validate = () => {
     let isValid = true;
-    let emailStr = basicInfo[tag];
+    let emailStr = localObject[tag];
     let exp = new RegExp(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
@@ -119,6 +125,7 @@ const PopUpAddressEmail = (props) => {
   //end
 
   const handleClick = () => {
+    dispatch({ type: typeOfSetObject, payload: { ...localObject } });
     if (validate()) {
       /*according to creation mode popup sequence will change*/
       // dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
@@ -148,7 +155,7 @@ const PopUpAddressEmail = (props) => {
               id={tag}
               label={primaryLabel}
               labelBadgeOne={primaryLabelBadge}
-              value={basicInfo && basicInfo[tag]}
+              value={localObject && localObject[tag]}
               errorMsg={state.emailErr}
               onClick={handleChange}
             />
@@ -160,7 +167,7 @@ const PopUpAddressEmail = (props) => {
                 <div
                   className={'f4'}
                   style={{
-                    color: basicInfo && basicInfo[tag] !== '' ? '' : 'dimgray'
+                    color: localObject && localObject[tag] !== '' ? '' : 'dimgray'
                   }}
                 >
                   communication
@@ -193,7 +200,7 @@ const PopUpAddressEmail = (props) => {
                   className={'f4'}
                   style={{
                     color:
-                      (basicInfo && basicInfo[tag] !== '') ||
+                      (localObject && localObject[tag] !== '') ||
                       (signInSetup && signInSetup.assesseeSignIn !== '')
                         ? ''
                         : 'dimgray'

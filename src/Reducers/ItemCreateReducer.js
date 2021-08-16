@@ -6,6 +6,7 @@ import {
   ADD_ITEM_OPTION_OBJECT,
   REMOVE_ITEM_OPTION_OBJECT,
   SET_ITEM_FRAMWORK_TYPE,
+  SET_ITEMFRAMEWORK_REDUCER_STATE,
   SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE
 } from '../actionType';
 
@@ -153,6 +154,18 @@ const ItemCreateReducer = (istate = initialState, action) => {
           informationBasic: action.payload
         }
       };
+    case SET_ITEMFRAMEWORK_REDUCER_STATE:
+      return {
+        ...istate,
+        itemInformation: {
+          ...istate.itemInformation,
+          informationFramework: {
+            ...istate.itemInformation.informationFramework,
+            itemFrameworkOne: action.payload,
+            itemTypeList: istate.itemTypeList
+          }
+        }
+      };
     case SET_ITEM_DYNAMIC_SINGLE_STATE:
       return {
         ...istate,
@@ -197,7 +210,8 @@ const ItemCreateReducer = (istate = initialState, action) => {
                 [action.payload.actualStateName]: action.payload.value
               }
             }
-          }
+          },
+          itemTypeList: istate.itemTypeList
         }
       };
     case SET_ITEM_FRAMWORK_TYPE:

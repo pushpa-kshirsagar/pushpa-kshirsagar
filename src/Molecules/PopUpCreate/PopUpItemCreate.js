@@ -11,15 +11,19 @@ import {
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_TYPE_GROUP_ALLOCATION,
   SET_TYPE_REDUCER_STATE,
-  SET_ITEM_DYNAMIC_SINGLE_STATE
+  SET_ITEM_DYNAMIC_SINGLE_STATE,
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_ITEMFRAMEWORK_REDUCER_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 
 const PopUpItemCreate = (props) => {
   const { headerOne = 'item' } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  console.log('itemInformation',itemInformation);
   const {
     selectedAssociateInfo,
     coreGroupReviewListData,
@@ -48,8 +52,10 @@ const PopUpItemCreate = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ITEM_SAGA, payload: reqBody });
   };
-  let selectedPrimaryGroup = itemInformation?.informationAllocation?.itemGroup.itemGroupPrimary || [];
-  let selectedSecondaryGroup = itemInformation?.informationAllocation?.itemGroup.itemGroupSecondary || [];
+  let selectedPrimaryGroup =
+    itemInformation?.informationAllocation?.itemGroup.itemGroupPrimary || [];
+  let selectedSecondaryGroup =
+    itemInformation?.informationAllocation?.itemGroup.itemGroupSecondary || [];
   let filteredCoreGroupReviewListDataPrimary = [];
   if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
     coreGroupReviewListData.forEach((group) => {
@@ -325,6 +331,122 @@ const PopUpItemCreate = (props) => {
         headerOneBadgeOne={''}
         mode={'cancel'}
         onClickYes={onClickCancelYes}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ITEMSCOREPOPUP'}
+        label={'score'}
+        actualLableValue={'itemFrameworkOneScore'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        basicInfo={itemInformation.informationFramework?.itemFrameworkOne || ''}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_ITEMFRAMEWORK_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ITEMTIMEPOPUP'}
+        label={'time'}
+        actualLableValue={'itemFrameworkOneTime'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        basicInfo={itemInformation.informationFramework?.itemFrameworkOne || ''}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_ITEMFRAMEWORK_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ITEMWEITAGEPOPUP'}
+        label={'weightage'}
+        actualLableValue={'itemFrameworkOneWeightage'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        basicInfo={itemInformation.informationFramework?.itemFrameworkOne || ''}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_ITEMFRAMEWORK_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ITEMLEVELPOPUP'}
+        tag={'itemFrameworkOneLevel'}
+        label={'level'}
+        listSelect={[
+          { id: 'High-Level', name: 'High-Level' },
+          { id: 'Low-Level', name: 'Low-Level' },
+          { id: 'Mid-Level', name: 'Mid-Level' }
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={false}
+        basicInfo={itemInformation.informationFramework?.itemFrameworkOne || ''}
+        typeOfSetObject={SET_ITEMFRAMEWORK_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ITEMPOLARITYPOPUP'}
+        tag={'itemFrameworkOnePolarity'}
+        label={'polarity'}
+        listSelect={[
+          { id: 'Negative', name: 'Negative' },
+          { id: 'Positive', name: 'Positive' }
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={false}
+        basicInfo={itemInformation.informationFramework?.itemFrameworkOne || ''}
+        typeOfSetObject={SET_ITEMFRAMEWORK_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'ITEMSCALEPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        inputHeader={'type'}
+        isRequired={false}
+        inputHeaderBadge={''}
+        infoMsg={'select a type'}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        ListData={itemInformation.informationFramework.itemFrameworkOne.itemFrameworkOneScale}
+        textOne={'itemFrameworkOneScaleLabel'}
+        textTwo={''}
+        // onClickEvent={(e) => {
+        //   updateGroup(e, 'itemType', 'itemTypeSecondary');
+        // }}
+        // selectedList={}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpReviewList
+        isActive={isPopUpValue === 'FRAMEWORKONETYPEPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        inputHeader={'type'}
+        isRequired={false}
+        inputHeaderBadge={''}
+        infoMsg={'select a type'}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
+        ListData={itemInformation.informationFramework.itemTypeList || []}
+        textOne={'itemFrameworkOneTypeName'}
+        textTwo={'itemFrameworkOneTypeDescription'}
+        // onClickEvent={(e) => {
+        //   updateGroup(e, 'itemType', 'itemTypeSecondary');
+        // }}
+        selectedList={[itemInformation.informationFramework.itemFrameworkOne.itemFrameworkOneType]}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm
         isActive={isPopUpValue === 'CONFIRMATIONPOPUP'}

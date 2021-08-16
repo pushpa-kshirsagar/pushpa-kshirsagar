@@ -32,8 +32,8 @@ const createAssesseeApi = async (requestObj) => {
 function* workerCreateAssesseeSaga(data) {
   try {
     const userResponse = yield call(createAssesseeApi, { data: data.payload });
-    console.log('IN WORKER ====>', userResponse);
-    console.log('IN WORKER ====>', JSON.stringify(userResponse));
+    // console.log('IN WORKER ====>', userResponse);
+    // console.log('IN WORKER ====>', JSON.stringify(userResponse));
     if (userResponse.responseCode === '000') {
       yield put({ type: SET_ASSESSEE_INFORMATION_DATA, payload: userResponse.responseObject[0] });
       console.log('loading end');

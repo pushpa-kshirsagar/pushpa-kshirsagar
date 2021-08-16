@@ -212,9 +212,9 @@ const PopUpItemFramework = (props) => {
                 label={'level'}
                 dataValue={'level'}
                 listSelect={[
-                  { id: 'HIGH_LEVEL', name: 'High-Level' },
-                  { id: 'LOW_LEVEL', name: 'Low-Level' },
-                  { id: 'MEDIUM_LEVEL', name: 'Mid-Level' }
+                  { id: 'High-Level', name: 'High-Level' },
+                  { id: 'Low-Level', name: 'Low-Level' },
+                  { id: 'Mid-Level', name: 'Mid-Level' }
                 ]}
                 errorMsg={() => {}}
                 onChange={(e) => {

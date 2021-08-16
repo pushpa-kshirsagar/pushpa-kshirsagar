@@ -11,6 +11,7 @@ import { InputLabel } from '@material-ui/core';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { createNameWithBadge } from '../Actions/StatusAction';
+import SelectField from '../Atoms/SelectField/SelectField';
 
 const PopUpCheckbox = (props) => {
   /*props*/
@@ -19,7 +20,8 @@ const PopUpCheckbox = (props) => {
     headerPanelColour = 'genericOne',
     headerOne = 'assessees',
     headerOneBadgeOne = 'information',
-    valueArr,
+    headerOneBadgeTwo = '',
+    valueArr = [],
     EmailPrimaryCommunication,
     EmailSecondaCommunication,
     typeOfPrimarySetObject,
@@ -37,14 +39,26 @@ const PopUpCheckbox = (props) => {
     onClickNext = null,
     id,
     isChecked = '',
-    availableSignInCredentialList = []
+    availableSignInCredentialList = [],
+    isRolePermission = false,
+    valueArrState = []
   } = props;
 
   const dispatch = useDispatch();
+  const [localObject, setLocalObject] = useState(valueArrState);
+
   /*handling the onchange event*/
   const handleChange = (event) => {
     console.log(event.target.checked);
     setState({ isChecked: event.target.value });
+  };
+  /*handling the onchange event*/
+  const handleSingleState = (event) => {
+    console.log(event.target.value);
+    setLocalObject({ ...localObject, [event.target.value]: event.target.checked });
+
+    console.log(localObject);
+    // setState({ isChecked: event.target.value });
   };
   // const { availableSignInCredentialList = [], currentlySignInCredential } = useSelector(
   //   (state) => state.AssesseeCreateReducer
@@ -78,6 +92,8 @@ const PopUpCheckbox = (props) => {
             assesseeAddressEmailCommunication: true
           }
         });
+      } else if (isRolePermission) {
+        
       } else {
         onClickNext(id, state.isChecked);
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
@@ -93,6 +109,7 @@ const PopUpCheckbox = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={headerOneBadgeOne}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           onClick={handleClick}
           mode={mode}
         />
@@ -132,8 +149,6 @@ const PopUpCheckbox = (props) => {
                     className={['iguru-cardContentMidPanel', 'heightInherit'].join(' ')}
                     style={{ textTransform: 'none' }}
                   >
-                    {/* <div className={'midPaneInformation'} style={{ height: '50px' }}> */}
-
                     <div
                       className={[
                         'midPaneInformation',
@@ -143,11 +158,25 @@ const PopUpCheckbox = (props) => {
                       <span>{textOne}</span>
                     </div>
                     {textTwo != null ? <div className={'midPaneLabel'}>{textTwo}</div> : null}
-                    {/* </div> */}
                   </div>
                 </div>
               </div>
             </div>
+          )}
+          {isRolePermission && (
+            <SelectField
+              tag={'information'}
+              label={'information'}
+              dataValue={'information'}
+              listSelect={[
+                { id: 'all', name: 'all' },
+                { id: 'key', name: 'key' }
+              ]}
+              errorMsg={() => {}}
+              onChange={null}
+              value={'all'}
+              mappingValue={'id'}
+            />
           )}
           {valueArr.map((item) => (
             <div className={'fitContent'}>
@@ -160,10 +189,12 @@ const PopUpCheckbox = (props) => {
                       value={item}
                       name={item}
                       disabled={
-                        isJobProfileList ? false : !availableSignInCredentialList.includes(item)
+                        isJobProfileList || isRolePermission
+                          ? false
+                          : !availableSignInCredentialList.includes(item)
                       }
-                      checked={state.isChecked === item}
-                      onChange={handleChange}
+                      checked={isRolePermission ? localObject[item] : state.isChecked === item}
+                      onChange={isRolePermission ? handleSingleState : handleChange}
                     />
                   </div>
                 </div>

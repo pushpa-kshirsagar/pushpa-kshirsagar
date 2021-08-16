@@ -113,7 +113,7 @@ const PopUpItemConfig = (props) => {
         originobj.push({
           itemFrameworkOneSectionSequence: `${i + 1}`,
           itemFrameworkOneSection: {
-            itemFrameworkOneMedia: itemText,
+            itemFrameworkOneMedia: '',
             itemFrameworkOneScore: null,
             itemFrameworkOneType: null,
             itemFrameworkOneCorrect: null
@@ -273,10 +273,10 @@ const PopUpItemConfig = (props) => {
                   label={'item'}
                   labelBadgeOne={'alignment'}
                   listSelect={[
-                    { id: 'horizontal-bottom', name: 'horizontal-bottom' },
-                    { id: 'horizontal-top', name: 'horizontal-top' },
-                    { id: 'vertical-bottom', name: 'vertical-bottom' },
-                    { id: 'vertical-top', name: 'vertical-top' }
+                    { id: 'horizontal (bottom)', name: 'horizontal (bottom)' },
+                    { id: 'horizontal (top)', name: 'horizontal (top)' },
+                    { id: 'vertical (bottom)', name: 'vertical (bottom)' },
+                    { id: 'vertical (top)', name: 'vertical (top)' }
                   ]}
                   errorMsg={() => {}}
                   onChange={
@@ -313,10 +313,10 @@ const PopUpItemConfig = (props) => {
                   dataValue={'response'}
                   labelBadgeOne={'alignment'}
                   listSelect={[
-                    { id: 'horizontal-bottom', name: 'horizontal-bottom' },
-                    { id: 'horizontal-top', name: 'horizontal-top' },
-                    { id: 'vertical-bottom', name: 'vertical-bottom' },
-                    { id: 'vertical-top', name: 'vertical-top' }
+                    { id: 'horizontal (bottom)', name: 'horizontal (bottom)' },
+                    { id: 'horizontal (top)', name: 'horizontal (top)' },
+                    { id: 'vertical (bottom)', name: 'vertical (bottom)' },
+                    { id: 'vertical (top)', name: 'vertical (top)' }
                   ]}
                   errorMsg={() => {}}
                   onChange={

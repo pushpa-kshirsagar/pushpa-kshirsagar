@@ -16,13 +16,14 @@ const DisplayPaneThreeSectionTwoItem = () => {
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const itemFrameworkOne = responseObject?.informationFramework?.itemFrameworkOne;
   // const { countPage, selectedAssociateInfo, selectedTagValue } = useSelector(
   //   (state) => state.DisplayPaneTwoReducer
   // );
   const dispatch = useDispatch();
   // const { informationContact, informationCredential, informationFramework } = responseObject;
-  const itemTypeList = responseObject?.informationFramework?.itemTypeList || [];
+  const itemTypeList = itemInformation?.informationFramework.itemTypeList || [];
   const datatypeItem = itemTypeList.find(
     (item) => item.id === responseObject.informationFramework?.itemFrameworkOne.itemFrameworkOneType
   );
@@ -176,21 +177,46 @@ const DisplayPaneThreeSectionTwoItem = () => {
     if (labelName === 'media') {
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
     }
-    if (
-      labelName === 'weightage' ||
-      labelName === 'score' ||
-      labelName === 'classification' ||
-      labelName === 'level' ||
-      labelName === 'polarity' ||
-      labelName === 'scale' ||
-      labelName === 'time'
-    ) {
+    if (labelName === 'score') {
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_FRAMEWORK_POPUP',
-          popupMode: ''
-        }
+        payload: { isPopUpValue: 'ITEMSCOREPOPUP', popupMode: 'ITEMCREATE' }
+      });
+    }
+    if (labelName === 'level') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ITEMLEVELPOPUP', popupMode: 'ITEMCREATE' }
+      });
+    }
+    if (labelName === 'time') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ITEMTIMEPOPUP', popupMode: 'ITEMCREATE' }
+      });
+    }
+    if (labelName === 'weightage') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ITEMWEITAGEPOPUP', popupMode: 'ITEMCREATE' }
+      });
+    }
+    if (labelName === 'polarity') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ITEMPOLARITYPOPUP', popupMode: 'ITEMCREATE' }
+      });
+    }
+    if (labelName === 'scale') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ITEMSCALEPOPUP', popupMode: 'ITEMCREATE' }
+      });
+    }
+    if (labelName === 'type') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'FRAMEWORKONETYPEPOPUP', popupMode: 'ITEMCREATE' }
       });
     }
   };

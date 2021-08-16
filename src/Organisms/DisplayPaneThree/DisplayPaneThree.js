@@ -1552,7 +1552,7 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'item') {
-      const { informationBasic, informationAllocation } = itemInformation;
+      const { informationBasic, informationAllocation, informationFramework } = itemInformation;
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1560,7 +1560,8 @@ export const DisplayPaneThree = () => {
         item: {
           id,
           informationBasic,
-          informationAllocation
+          informationAllocation,
+          informationFramework
         }
       };
       dispatch({ type: LOADER_START });

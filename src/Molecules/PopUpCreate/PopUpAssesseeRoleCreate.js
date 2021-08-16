@@ -17,6 +17,7 @@ import {
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
+import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 
 const PopUpAssesseeRoleCreate = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -24,7 +25,9 @@ const PopUpAssesseeRoleCreate = () => {
   const { selectedAssociateInfo, coreRoleReviewListData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
-  const { reviewMode, responseObject, statusPopUpValue } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, responseObject, statusPopUpValue } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
@@ -37,7 +40,7 @@ const PopUpAssesseeRoleCreate = () => {
   };
   const onClickYes = () => {
     let allocationObj = {
-        assesseeRoleGroup: assesseeRole.informationAllocation.assesseeRoleGroup[0]
+      assesseeRoleGroup: assesseeRole.informationAllocation.assesseeRoleGroup[0]
     };
     var requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
@@ -241,6 +244,23 @@ const PopUpAssesseeRoleCreate = () => {
         tagSecondary={assesseeRole?.informationEngagement || {}}
         signInSetup={assesseeRole?.informationSetup || {}}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={UPDATE_ASSESSEE_ENGAGEMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpCheckbox
+        isActive={isPopUpValue === 'PERMISSIONPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessees'}
+        headerOneBadgeOne={'role'}
+        headerOneBadgeTwo={'information'}
+        inputHeader={'assessees'}
+        inputHeaderBadge={'distinct'}
+        isRolePermission
+        valueArr={['create', 'delete', 'review', 'revise', 'share']}
+        valueArrState={{ create: false, delete: false, review: false, revise: false, share: false }}
+        tagSecondary={assesseeRole?.informationEngagement || {}}
+        signInSetup={assesseeRole?.informationSetup || {}}
+        nextPopUpValue={''}
         typeOfSetObject={UPDATE_ASSESSEE_ENGAGEMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

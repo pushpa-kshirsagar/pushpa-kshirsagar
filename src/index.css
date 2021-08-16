@@ -303,6 +303,17 @@ body {
   /* font-weight: bold; */
   bottom: 1px;
 }
+
+.iguru-header-badge1_2 {
+  display: inline-block;
+  border-radius: 16px;
+  border: 1px solid;
+  padding: 1px 5px;
+  position: relative;
+  font-size: 1rem;
+  font-weight: bold;
+  top: 3px;
+}
 .font-weight-bold {
   font-weight: bold !important;
 }
