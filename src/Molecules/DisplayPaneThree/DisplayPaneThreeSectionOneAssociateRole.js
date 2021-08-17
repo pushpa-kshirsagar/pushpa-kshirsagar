@@ -120,42 +120,357 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
   ];
   const setUpList = [
     {
-      id: 'a2',
-      labelTextOneOne: 'permission',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      id: 'a1',
+      labelTextOneOne: 'assessees',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
-          innerList: [
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
             {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: '',
-              status: 'active'
-            },
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
             {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: '',
-              status: 'active'
-            },
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
             {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: '',
-              status: 'active'
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'role',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
             }
           ]
         }
       ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-assessments',
+      labelTextOneOne: 'assessments',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-assignments',
+      labelTextOneOne: 'assignments',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+
+        {
+          labelTextTwoBadge: 'report',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-associates',
+      labelTextOneOne: 'associates',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'role',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-iGuru Analytics',
+      labelTextOneOne: 'iGuru Analytics',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-items',
+      labelTextOneOne: 'items',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
     }
   ];
+  // const setUpList = [
+  //   {
+  //     id: 'a2',
+  //     labelTextOneOne: 'permission',
+  //     labelTextOneOneBadgeOne: '',
+  //     labelTextOneOneBadgeTwo: '',
+  //     labelTextOneOneBadgeThree: '',
+  //     labelTextOneOneBadgeFour: '',
+  //     labelTextOneOneBadges: [
+  //       {
+  //         labelTextOneOneBadge: '',
+  //         innerList: [
+  //           {
+  //             id: 'associate1',
+  //             textOne: 'Simple Sample 01',
+  //             textTwo: '',
+  //             status: 'active'
+  //           },
+  //           {
+  //             id: 'associate2',
+  //             textOne: 'Simple Sample 02',
+  //             textTwo: '',
+  //             status: 'active'
+  //           },
+  //           {
+  //             id: 'associate3',
+  //             textOne: 'Simple Sample 03',
+  //             textTwo: '',
+  //             status: 'active'
+  //           }
+  //         ]
+  //       }
+  //     ],
+  //     innerInfo: 'No Information',
+  //     isListCard: true,
+  //     isReviewLink: true
+  //   }
+  // ];
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);

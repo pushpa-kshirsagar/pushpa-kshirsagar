@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -41,11 +41,23 @@ const PopUpCheckbox = (props) => {
     isChecked = '',
     availableSignInCredentialList = [],
     isRolePermission = false,
-    valueArrState = []
+    valueArrState = [],
+    informationArr = [],
+    informationValue = '',
+    typeOfSetObject,
+    typeOfStateObj = '',
+    objectName = '',
+    stateName = ''
   } = props;
 
   const dispatch = useDispatch();
   const [localObject, setLocalObject] = useState(valueArrState);
+  const [permissionInfo, setpermissionInfo] = useState('');
+
+  useEffect(() => {
+    setLocalObject(valueArrState);
+    setpermissionInfo(valueArrState[informationValue]);
+  }, [valueArrState]);
 
   /*handling the onchange event*/
   const handleChange = (event) => {
@@ -67,7 +79,9 @@ const PopUpCheckbox = (props) => {
   const [state, setState] = useState({
     isChecked: isChecked
   });
-
+  const handleDropDown = (e) => {
+    setpermissionInfo(e.target.value);
+  };
   const handleClick = () => {
     if (forceToSelect === 'signIn') {
       dispatch({
@@ -93,7 +107,15 @@ const PopUpCheckbox = (props) => {
           }
         });
       } else if (isRolePermission) {
-        
+        dispatch({
+          type: typeOfSetObject,
+          payload: {
+            objectName: objectName,
+            stateName: stateName,
+            actualStateName: typeOfStateObj,
+            value: { ...localObject, [informationValue]: permissionInfo }
+          }
+        });
       } else {
         onClickNext(id, state.isChecked);
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
@@ -168,18 +190,15 @@ const PopUpCheckbox = (props) => {
               tag={'information'}
               label={'information'}
               dataValue={'information'}
-              listSelect={[
-                { id: 'all', name: 'all' },
-                { id: 'key', name: 'key' }
-              ]}
+              listSelect={informationArr}
               errorMsg={() => {}}
-              onChange={null}
-              value={'all'}
+              onChange={handleDropDown}
+              value={permissionInfo}
               mappingValue={'id'}
             />
           )}
-          {valueArr.map((item) => (
-            <div className={'fitContent'}>
+          {valueArr.map((item, index) => (
+            <div className={'fitContent'} key={`check${index}`}>
               <div className={['PopupFormBox', 'popupMinHei0'].join(' ')} style={{ minHeight: 0 }}>
                 <div className={'contFlex'}>
                   <div className={'f4'}>{createNameWithBadge(item)}</div>

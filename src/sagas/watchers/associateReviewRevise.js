@@ -71,6 +71,8 @@ function* workerReviewInfoAssociateSaga(data) {
           value: ascendantPrimaryList
         }
       });
+      yield put({ type: LOADER_STOP });
+
     } else {
       yield put({ type: LOADER_STOP });
       yield put({

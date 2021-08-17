@@ -86,6 +86,12 @@ function* workerReviewAssociateRoleInfoSaga(data) {
       }
       console.log('loading end');
       yield put({ type: LOADER_STOP });
+    } else {
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
   } catch (e) {
     console.log('ERROR==', e);
@@ -162,8 +168,11 @@ function* workerReviseAssociateRoleInfoSaga(data) {
         }
       });
     } else {
-      console.log('loading end');
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
     yield put({ type: SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });
     yield put({ type: SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST, payload: [] });

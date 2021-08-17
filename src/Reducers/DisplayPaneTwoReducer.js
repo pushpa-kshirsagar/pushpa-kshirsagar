@@ -74,7 +74,10 @@ const initialState = {
   jobProfileFunctionReviewList: [],
   jobProfileRoleReviewList: [],
   cultureProfileDiamentionReviewList: [],
-  allocateStr: ''
+  allocateStr: '',
+  permissionStateOne: '',
+  permissionStateTwo: '',
+  permissionStateThree: ''
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

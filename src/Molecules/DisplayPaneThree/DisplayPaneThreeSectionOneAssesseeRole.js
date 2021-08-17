@@ -6,21 +6,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import { ASSESSEE_SIGN_ON, SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import {
+  ASSESSEE_SIGN_ON,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_POPUP_VALUE,
+  SET_STATUS_POPUP_VALUE
+} from '../../actionType';
 import { assesseeRole, getRoleGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionOneAssesseeRole = () => {
   // const [listExpand, setListExpand] = useState('');
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement, informationAllocation } = responseObject;
+  const { informationEngagement, informationAllocation, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   const dispatch = useDispatch();
+  const getPermissionStr = (permissionObj) => {
+    console.log('permissionObj', permissionObj);
+    let per = '';
+    if (permissionObj) {
+      Object.keys(permissionObj).map(function (key, val) {
+        if (typeof permissionObj[key] === 'boolean' && permissionObj[key] === true) {
+          per = per !== '' ? per + ', ' + key : key;
+        }
+      });
+    }
+    console.log('per', per);
+    // Object.keys()
+    //   .toString()
+    //   .replace(',assesseePermissionInformation', '')
+    return per;
+  };
   let assesseeRoleGroupList = [];
   const tempRoleGroup = informationAllocation?.assesseeRoleGroup;
+  const rolePermission = informationSetup?.assesseeRolePermission;
   if (tempRoleGroup) {
     assesseeRoleGroupList.push({
       id: tempRoleGroup?.id || '',
@@ -116,44 +138,397 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
       isListCard: false
     }
   ];
+  console.log('rolePermission', rolePermission);
+  let assesseeDistinct = '';
+  let assesseeDistinctPer = '';
+  let assesseeGroup = '';
+  let assesseeGroupPer = '';
+  let assesseeManager = '';
+  let assesseeManagerPer = '';
+  let assesseeRole = '';
+  let assesseeRolePer = '';
+  let assesseeType = '';
+  let assesseeTypePer = '';
+  if (rolePermission) {
+    assesseeDistinct = getPermissionStr(rolePermission?.assesseeAssesseeDistinctPermission);
+    assesseeDistinctPer =
+      rolePermission.assesseeAssesseeDistinctPermission.assesseePermissionInformation;
+    assesseeGroup = Object.keys(rolePermission?.assesseeAssesseeGroupPermission)
+      .toString()
+      .replace(',assesseePermissionInformation', '');
+    assesseeGroupPer = rolePermission.assesseeAssesseeGroupPermission.assesseePermissionInformation;
+    assesseeManager = Object.keys(rolePermission?.assesseeAssesseeManagerPermission)
+      .toString()
+      .replace(',assesseePermissionInformation', '');
+    assesseeManagerPer =
+      rolePermission.assesseeAssesseeManagerPermission.assesseePermissionInformation;
+    assesseeRole = Object.keys(rolePermission?.assesseeAssesseeRolePermission)
+      .toString()
+      .replace(',assesseePermissionInformation', '');
+    assesseeRolePer = rolePermission.assesseeAssesseeRolePermission.assesseePermissionInformation;
+    assesseeType = Object.keys(rolePermission?.assesseeAssesseeTypePermission)
+      .toString()
+      .replace(',assesseePermissionInformation', '');
+    assesseeTypePer = rolePermission.assesseeAssesseeTypePermission.assesseePermissionInformation;
+  }
+
   const setUpList = [
     {
-      id: 'a2',
-      labelTextOneOne: 'permission',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
+      id: 'a1',
+      labelTextOneOne: 'assessees',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
-          innerList: [
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
             {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: '',
-              status: 'active'
-            },
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: assesseeDistinct || 'No Information',
+              innerLabelInformation: assesseeDistinctPer
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
             {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: '',
-              status: 'active'
-            },
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: assesseeGroup || 'No Information',
+              innerLabelInformation: assesseeGroupPer
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
             {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: '',
-              status: 'active'
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: assesseeManager || 'No Information',
+              innerLabelInformation: assesseeManagerPer
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'role',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: assesseeRole || 'No Information',
+              innerLabelInformation: assesseeRolePer
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: assesseeType || 'No Information',
+              innerLabelInformation: assesseeTypePer
             }
           ]
         }
       ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-assessments',
+      labelTextOneOne: 'assessments',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-assignments',
+      labelTextOneOne: 'assignments',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'report',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-associates',
+      labelTextOneOne: 'associates',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'role',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-iGuru Analytics',
+      labelTextOneOne: 'iGuru Analytics',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-items',
+      labelTextOneOne: 'items',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'manager',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
     }
   ];
+  // const setUpList = [
+  //   {
+  //     id: 'a2',
+  //     labelTextOneOne: 'permission',
+  //     labelTextOneOneBadgeOne: '',
+  //     labelTextOneOneBadgeTwo: '',
+  //     labelTextOneOneBadgeThree: '',
+  //     labelTextOneOneBadgeFour: '',
+  //     labelTextOneOneBadges: [
+  //       {
+  //         labelTextOneOneBadge: '',
+  //         innerList: [
+  //           {
+  //             id: 'associate1',
+  //             textOne: 'Simple Sample 01',
+  //             textTwo: '',
+  //             status: 'active'
+  //           },
+  //           {
+  //             id: 'associate2',
+  //             textOne: 'Simple Sample 02',
+  //             textTwo: '',
+  //             status: 'active'
+  //           },
+  //           {
+  //             id: 'associate3',
+  //             textOne: 'Simple Sample 03',
+  //             textTwo: '',
+  //             status: 'active'
+  //           }
+  //         ]
+  //       }
+  //     ],
+  //     innerInfo: 'No Information',
+  //     isListCard: true,
+  //     isReviewLink: true
+  //   }
+  // ];
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -197,10 +572,57 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
       }
     }
   };
-  const reviseSetUp = (e) => {
+  function splitCamelCaseToString(s) {
+    return s
+      .split(/(?=[A-Z])/)
+      .map(function (p) {
+        return p.charAt(0).toUpperCase() + p.slice(1);
+      })
+      .join(' ');
+  }
+  const reviseSetUp = (e, data, selectedBadge) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('=====>', labelName);
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    let selected = data ? data[0] : null;
+    console.log('===data==>', data);
+    console.log('===selectedBadge==>', selectedBadge);
+    console.log('=====>', selectedBadgeName);
+    if (
+      labelName !== '' &&
+      (selected?.labelTextTwoBadge === 'distinct' ||
+        selected?.labelTextTwoBadge === 'group' ||
+        selected?.labelTextTwoBadge === 'manager' ||
+        selected?.labelTextTwoBadge === 'node' ||
+        selected?.labelTextTwoBadge === 'role' ||
+        selected?.labelTextTwoBadge === 'type') &&
+      selectedBadge?.labelTextTwoBadge === 'permission'
+    ) {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'permissionStateOne', value: labelName }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'permissionStateTwo', value: selected?.labelTextTwoBadge }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'permissionStateThree',
+          value:
+            'assessee' +
+            splitCamelCaseToString(labelName).slice(0, -1) +
+            splitCamelCaseToString(selected?.labelTextTwoBadge) +
+            'Permission'
+        }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PERMISSIONPOPUP', popupMode: 'assesseesROLECREATE' }
+      });
+    }
   };
+
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
@@ -277,7 +699,6 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
                   {ob.isListCard ? (
                     <DisplayPanelAccordianReviewListOne
                       onClickRevise={reviseSetUp}
-                      className=""
                       accordianObject={ob}
                       mode={reviewMode}
                     />
@@ -285,6 +706,7 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
                     <DisplayPanelAccordianInformation
                       onClickRevise={reviseSetUp}
                       accordianObject={ob}
+                      isPermission
                       mode={reviewMode}
                     />
                   )}

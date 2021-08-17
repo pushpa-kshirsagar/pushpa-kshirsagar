@@ -12,7 +12,8 @@ import {
   SET_ROLE_DYNAMIC_STATE,
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  SET_SETUP_PERMISSION
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
@@ -22,9 +23,13 @@ import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 const PopUpAssesseeRoleCreate = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { assesseeRole } = useSelector((state) => state.RoleCreateReducer);
-  const { selectedAssociateInfo, coreRoleReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    coreRoleReviewListData,
+    permissionStateOne,
+    permissionStateTwo,
+    permissionStateThree
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
@@ -253,15 +258,25 @@ const PopUpAssesseeRoleCreate = () => {
         headerOne={'assessees'}
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'information'}
-        inputHeader={'assessees'}
-        inputHeaderBadge={'distinct'}
+        inputHeader={permissionStateOne}
+        inputHeaderBadge={permissionStateTwo}
+        typeOfStateObj={permissionStateThree}
+        objectName={'assesseeRole'}
+        stateName={'assesseeRolePermission'}
+        informationArr={
+          permissionStateTwo === 'distinct'
+            ? [
+                { id: 'all', name: 'all' },
+                { id: 'key', name: 'key' }
+              ]
+            : [{ id: 'key', name: 'key' }]
+        }
+        informationValue={'assesseePermissionInformation'}
         isRolePermission
         valueArr={['create', 'delete', 'review', 'revise', 'share']}
-        valueArrState={{ create: false, delete: false, review: false, revise: false, share: false }}
-        tagSecondary={assesseeRole?.informationEngagement || {}}
-        signInSetup={assesseeRole?.informationSetup || {}}
+        valueArrState={assesseeRole.informationSetup.assesseeRolePermission[permissionStateThree]}
         nextPopUpValue={''}
-        typeOfSetObject={UPDATE_ASSESSEE_ENGAGEMENT_INFO}
+        typeOfSetObject={SET_SETUP_PERMISSION}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>

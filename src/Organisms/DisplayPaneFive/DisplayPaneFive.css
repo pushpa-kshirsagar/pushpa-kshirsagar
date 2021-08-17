@@ -79,3 +79,35 @@
   font-size: 14px;
   width: 100%;
 }
+
+/* new css */
+table .item{
+  min-width: 300px;
+}
+table th{
+  min-width: 80px;
+}
+
+.container {
+  width: 100%;
+  background-color: white;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  
+}
+
+/* try removing the "hack" below to see how the table overflows the .body */
+.hack1 {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.hack2 {
+  display: table-cell;
+  overflow-x: scroll;
+  width: 100%;
+}

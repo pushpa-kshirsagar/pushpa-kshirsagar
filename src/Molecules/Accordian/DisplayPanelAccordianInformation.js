@@ -5,7 +5,7 @@ import './DisplayPanelAccordian.css';
 import { useSelector } from 'react-redux';
 
 const DisplayPanelAccordianInformation = (props) => {
-  const { mode = '', accordianObject, onClickRevise, onClickReview } = props;
+  const { mode = '', accordianObject, onClickRevise, onClickReview, isPermission = false } = props;
   const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
   const {
     labelTextOneOne = '',
@@ -18,6 +18,7 @@ const DisplayPanelAccordianInformation = (props) => {
     isReviewLink = false
   } = accordianObject;
   const [selectedBadge, setSelectedBadge] = useState('');
+  const [information, setInformation] = useState('');
   const [selectedBadgeArray, setSelectedBadgeArray] = useState([]);
   const reviewLabelClass = isReviewLink ? 'reviewLinkText' : '';
 
@@ -65,11 +66,11 @@ const DisplayPanelAccordianInformation = (props) => {
                         onClick={
                           mode === 'revise'
                             ? (e) => {
-                                onClickRevise(e, selectedBadgeArray);
+                                onClickRevise(e, selectedBadgeArray, selectedBadge);
                               }
                             : (e) => {
-                              onClickReview(e);
-                            }
+                                onClickReview(e);
+                              }
                         }
                         data-value={labelTextOneOne}
                         data-key={selectedBadge?.labelTextTwoBadge || ''}
@@ -95,7 +96,9 @@ const DisplayPanelAccordianInformation = (props) => {
                                 backgroundColor: '#F2F2F2'
                               }}
                               onClick={() => {
+                                console.log('listtt');
                                 setSelectedBadge('');
+                                setInformation('');
                                 let removeLastOb = selectedBadgeArray.slice(0, -1);
                                 setSelectedBadgeArray(removeLastOb);
                               }}
@@ -121,13 +124,14 @@ const DisplayPanelAccordianInformation = (props) => {
                                           ? '#F2F2F2'
                                           : '#ffffff'
                                     }}
-                                    onClick={() => {
+                                    onClick={(e) => {
                                       if (Array.isArray(ob.innerLabelBadgeList)) {
                                         setSelectedBadgeArray((state) => {
                                           return [...state, ob];
                                         });
                                       } else {
                                         setSelectedBadge(ob);
+                                        setInformation(ob.innerLabelInformation);
                                       }
                                     }}
                                   >
@@ -162,6 +166,7 @@ const DisplayPanelAccordianInformation = (props) => {
                                           return [...state, ob];
                                         });
                                       } else {
+                                        console.log('LIST==', ob);
                                         setSelectedBadge(ob);
                                       }
                                     }}
@@ -203,7 +208,25 @@ const DisplayPanelAccordianInformation = (props) => {
                       ))}
                   </div>
                 </div>
-                <div className={'unitFlex'}></div>
+                <div className={'unitFlex'}>
+                  {isPermission && information ? (
+                    <span
+                      className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(
+                        ' '
+                      )}
+                      style={{ textAlign: 'center' }}
+                    >
+                      {information}
+                      <InputLabel
+                        className={['iconsFooterLabelDefault', 'AssesseeNotifyStatusLabel'].join(
+                          ' '
+                        )}
+                      >
+                        {'information'}
+                      </InputLabel>
+                    </span>
+                  ) : null}
+                </div>
                 <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
                   {selectedBadge?.IconOne ? (
                     <>
