@@ -971,8 +971,7 @@ export const DisplayPaneThree = () => {
         assesseeRole: {
           id,
           informationBasic: assesseeRole.informationBasic,
-          informationAllocation: allocationObj,
-          informationSetup: assesseeRole.informationSetup
+          informationAllocation: allocationObj
         }
       };
       dispatch({ type: LOADER_START });
@@ -1554,7 +1553,7 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'item') {
-      const { informationBasic, informationAllocation, informationFramework } = itemInformation;
+      const { informationBasic, informationAllocation } = itemInformation;
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1562,8 +1561,7 @@ export const DisplayPaneThree = () => {
         item: {
           id,
           informationBasic,
-          informationAllocation,
-          informationFramework
+          informationAllocation
         }
       };
       dispatch({ type: LOADER_START });

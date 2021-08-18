@@ -923,7 +923,7 @@ const DisplayPaneFiveRadioButton = (props) => {
         {/* for media item */}
         {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
           <div
-            className="mitem"
+            className="ex_container"
             style={{
               cursor: reviewMode === 'revise' ? 'pointer' : ''
             }}
@@ -949,7 +949,7 @@ const DisplayPaneFiveRadioButton = (props) => {
         {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
           reviewMode === 'revise') && (
           <div
-            className="revise"
+            className="ex_container"
             style={{
               cursor: reviewMode === 'revise' ? 'pointer' : ''
             }}
@@ -980,7 +980,7 @@ const DisplayPaneFiveRadioButton = (props) => {
         {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
           reviewMode === 'revise') && (
           <div
-            className="relabel"
+            className="ex_container"
             style={{
               cursor: reviewMode === 'revise' ? 'pointer' : ''
             }}
@@ -1014,6 +1014,7 @@ const DisplayPaneFiveRadioButton = (props) => {
           {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
             <p>
               <div
+                className="ex_container"
                 style={{
                   cursor: reviewMode === 'revise' ? 'pointer' : ''
                 }}
@@ -1038,13 +1039,14 @@ const DisplayPaneFiveRadioButton = (props) => {
         </div>
       )}
 
-      {/* for response choice */}
+      {/* for response choice
       {(itemType === 'Response-Choice (Single-Select)' ||
         itemType === 'Master-Framework' ||
         itemType === 'False-True' ||
         itemType === 'Fill-in-the-Blank (Response-Choice)') && (
-        <FormControl component="fieldset">
-          <div className={'containerPadding'}>
+
+        <div className={'containerPadding'}>
+          <FormControl component="fieldset">
             <RadioGroup
               value={itemFrameworkOne?.itemFrameworkOneResponseCorrect[0] || ''}
               defaultValue=""
@@ -1055,26 +1057,23 @@ const DisplayPaneFiveRadioButton = (props) => {
               {itemFrameworkOneResponseChoice.map((op, key) => {
                 return (
                   <div key={`op-${key}`}>
+                    
                     <div className="option-container" key={`option-${key}`}>
-                      <FormControlLabel
-                        key={`radio-${key}`}
-                        className={'radio-button'}
-                        value={`${op.itemFrameworkOneResponseChoice}`}
-                        control={<StyledRadio onClick={handleClick} />}
-                        label=""
-                        labelPlacement="bottom"
-                      />
+
+                      <div className="item1">
+                        <FormControlLabel
+                          key={`radio-${key}`}
+                          className={'radio-button'}
+                          value={`${op.itemFrameworkOneResponseChoice}`}
+                          control={<StyledRadio onClick={handleClick} />}
+                          label=""
+                          labelPlacement="bottom"
+                        />
+                      </div>
 
                       <div
+                        className="item"
                         style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          fontSize: '1.6rem',
-                          height: '50px',
-                          padding: '0px 5px',
-                          alignItems: 'center',
-                          overflow: 'overlay',
-                          color: 'rgba(0, 0, 0, 0.87)',
                           cursor: reviewMode === 'revise' ? 'pointer' : ''
                         }}
                         onClick={
@@ -1095,6 +1094,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                           __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel
                         }}
                       ></div>
+
                       <PopUpTextSheet
                         isActive={isPopUpValue === `OPTION_${key}`}
                         headerOne={'response'}
@@ -1164,16 +1164,8 @@ const DisplayPaneFiveRadioButton = (props) => {
 
                     <div>
                       <div
+                        className="respexplain"
                         style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          fontSize: '1.6rem',
-                          height: '50px',
-                          padding: '0px 5px',
-                          alignItems: 'center',
-                          overflow: 'overlay',
-                          margin: '0 0 0 12px',
-                          color: 'rgba(0, 0, 0, 0.87)',
                           cursor: reviewMode === 'revise' ? 'pointer' : ''
                         }}
                         onClick={
@@ -1196,12 +1188,155 @@ const DisplayPaneFiveRadioButton = (props) => {
                         )}
                       </div>
                     </div>
+
                   </div>
                 );
               })}
             </RadioGroup>
-          </div>
-        </FormControl>
+          </FormControl>
+        </div>
+      )} */}
+
+      {/* for response choice */}
+      {(itemType === 'Response-Choice (Single-Select)' ||
+        itemType === 'Master-Framework' ||
+        itemType === 'False-True' ||
+        itemType === 'Fill-in-the-Blank (Response-Choice)') && (
+        <div className={'likartscale'}>
+          {itemFrameworkOneResponseChoice.map((op, key) => {
+            return (
+              <div key={`op-${key}`}>
+                <div className="option-container" key={`option-${key}`}>
+                  <div className="item1">
+                    <input
+                      type="radio"
+                      name="option1"
+                      value={`${op.itemFrameworkOneResponseChoice}`}
+                      control={<StyledRadio onClick={handleClick} />}
+                    />
+                  </div>
+
+                  <div
+                    className="item"
+                    style={{
+                      cursor: reviewMode === 'revise' ? 'pointer' : ''
+                    }}
+                    onClick={
+                      reviewMode === 'revise'
+                        ? () => {
+                            dispatch({
+                              type: SET_POPUP_VALUE,
+                              payload: {
+                                isPopUpValue: 'ITEM_OPTION_PRIMARY_POPUP',
+                                popupMode: `OPTION_${key}`
+                              }
+                            });
+                            setSelectedChoiceObject(op);
+                          }
+                        : null
+                    }
+                    dangerouslySetInnerHTML={{
+                      __html: op?.itemFrameworkOneResponseChoiceMedia || optionLabel
+                    }}
+                  ></div>
+
+                  <PopUpTextSheet
+                    isActive={isPopUpValue === `OPTION_${key}`}
+                    headerOne={'response'}
+                    headerPanelColour={'genericOne'}
+                    headerOneBadgeOne={'choice'}
+                    // headerOneBadgeTwo={`${key + 1}`}
+                    basicInfo={{}}
+                    typeOfSetObject={''}
+                    defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
+                    actualLableValue={'assessmentManuscriptSecondary'}
+                    mode={'revise'}
+                    onClickSave={(innerText) => {
+                      let opArr = itemFrameworkOneResponseChoice;
+                      // setQuestionOptionList((opArr) => {
+                      opArr.forEach((element) => {
+                        if (
+                          element.itemFrameworkOneResponseChoice ===
+                          op.itemFrameworkOneResponseChoice
+                        ) {
+                          element.itemFrameworkOneResponseChoiceMedia = innerText;
+                        }
+                      });
+                      dispatch({
+                        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                        payload: {
+                          stateName: 'itemFrameworkOneResponseChoice',
+                          value: opArr
+                        }
+                      });
+                      // });
+                    }}
+                  />
+                  <PopUpTextSheet
+                    isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
+                    headerOne={'response'}
+                    headerPanelColour={'genericOne'}
+                    headerOneBadgeOne={'choice'}
+                    headerOneBadgeTwo={`explanation`}
+                    basicInfo={{}}
+                    typeOfSetObject={''}
+                    defaultSheetValue={
+                      op.itemFrameworkOneResponseChoiceExplanation
+                        ?.itemFrameworkOneResponseChoiceExplanation
+                    }
+                    actualLableValue={'assessmentManuscriptSecondary'}
+                    mode={'revise'}
+                    onClickSave={(innerText) => {
+                      let opArr = itemFrameworkOneResponseChoice;
+                      opArr.forEach((element) => {
+                        if (
+                          element.itemFrameworkOneResponseChoice ===
+                          op.itemFrameworkOneResponseChoice
+                        ) {
+                          element.itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanation = innerText;
+                        }
+                      });
+                      dispatch({
+                        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                        payload: {
+                          stateName: 'itemFrameworkOneResponseChoice',
+                          value: opArr
+                        }
+                      });
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <div
+                    className="ex_container"
+                    style={{
+                      cursor: reviewMode === 'revise' ? 'pointer' : ''
+                    }}
+                    onClick={
+                      reviewMode === 'revise'
+                        ? () => {
+                            dispatch({
+                              type: SET_POPUP_VALUE,
+                              payload: {
+                                isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
+                                popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
+                              }
+                            });
+                          }
+                        : null
+                    }
+                  >
+                    {ReactHTMLParser(
+                      op.itemFrameworkOneResponseChoiceExplanation
+                        ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       )}
 
       {/* for response explanation */}
@@ -1210,7 +1345,7 @@ const DisplayPaneFiveRadioButton = (props) => {
           ?.itemFrameworkOneResponseExplanation !== '' ||
           reviewMode === 'revise') && (
           <div
-            className="reexplain"
+            className="ex_container"
             style={{
               cursor: reviewMode === 'revise' ? 'pointer' : ''
             }}
@@ -1243,7 +1378,11 @@ const DisplayPaneFiveRadioButton = (props) => {
               <div class="item"></div>
 
               {itemFrameworkOne?.itemFrameworkOneScale.map((ob, key) => {
-                return <div className={'likert_choice-sclae'}>{ob.itemFrameworkOneScaleLabel}</div>;
+                return (
+                  <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
+                    {ob.itemFrameworkOneScaleLabel}
+                  </div>
+                );
               })}
             </div>
 
@@ -1275,7 +1414,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                       {ReactHTMLParser(
                         ob.itemFrameworkOneSection?.itemFrameworkOneMedia
                           ? ob.itemFrameworkOneSection?.itemFrameworkOneMedia
-                          : '<span>item</span>-' + keys
+                          : '<span>item</span>&nbsp;' + keys
                       )}
                     </div>
 
