@@ -170,7 +170,7 @@ export const DisplayPaneOne = () => {
       </div>
       {isDisplayPaneSixShow && (
         <div className="containerPadding">
-          <div className="containerPadding">
+          <div className="containerPadding" >
             <Card
               ImageOne={selectedAssociateInfo ? PersonIcon : null}
               textOneOne={assesseeName}

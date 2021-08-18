@@ -273,6 +273,7 @@ const PopUpItemConfig = (props) => {
                   label={'item'}
                   labelBadgeOne={'alignment'}
                   listSelect={[
+                    { id: ' ', name: ' ' },
                     { id: 'horizontal (bottom)', name: 'horizontal (bottom)' },
                     { id: 'horizontal (top)', name: 'horizontal (top)' },
                     { id: 'vertical (bottom)', name: 'vertical (bottom)' },
@@ -305,6 +306,7 @@ const PopUpItemConfig = (props) => {
                   }
                   value={item_Type}
                   mappingValue={'id'}
+                  // name={'itemFrameworkOneTypeNameReference'}
                   listSelect={itemTypeListArr}
                 />
                 <SelectField
@@ -313,6 +315,7 @@ const PopUpItemConfig = (props) => {
                   dataValue={'response'}
                   labelBadgeOne={'alignment'}
                   listSelect={[
+                    { id: '', name: '' },
                     { id: 'horizontal (bottom)', name: 'horizontal (bottom)' },
                     { id: 'horizontal (top)', name: 'horizontal (top)' },
                     { id: 'vertical (bottom)', name: 'vertical (bottom)' },

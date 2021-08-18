@@ -11,6 +11,7 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_ROLE_DYNAMIC_STATE,
+  SET_ROLE_REDUCER_STATE,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSOCIATE_REVIEW_ROLE_URL, ASSOCIATE_ROLE_INFO_REVISE_URL } from '../../endpoints';
@@ -61,6 +62,14 @@ function* workerReviewAssociateRoleInfoSaga(data) {
           headerOneBadgeThree: 'key',
           responseObject: userResponse.responseObject[0],
           reviewMode: isReviseMode ? 'revise' : ''
+        }
+      });
+      yield put({
+        type: SET_ROLE_REDUCER_STATE,
+        payload: {
+          objectName: 'associateRole',
+          stateName: 'informationSetup',
+          value: userResponse.responseObject[0].informationSetup
         }
       });
       if (isReviseMode) {

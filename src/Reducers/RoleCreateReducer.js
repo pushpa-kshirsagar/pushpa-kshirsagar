@@ -3,7 +3,8 @@ import {
   SET_ASSOCIATE_ROLE_REDUCER_STATE,
   CLEAR_ROLE_REDUCER_STATE,
   SET_ROLE_DYNAMIC_STATE,
-  SET_SETUP_PERMISSION
+  SET_SETUP_PERMISSION,
+  SET_ROLE_REDUCER_STATE
 } from '../actionType';
 
 const initialState = {
@@ -257,6 +258,52 @@ const initialState = {
     },
     informationAllocation: {
       associateRoleGroup: []
+    },
+    informationSetup: {
+      associateRolePermission: {
+        associateAssesseePermission: {
+          create: false,
+          delete: false,
+          review: false,
+          revise: false,
+          share: false
+        },
+        associateAssessmentPermission: {
+          create: false,
+          delete: false,
+          review: false,
+          revise: false,
+          share: false
+        },
+        associateAssignmentPermission: {
+          create: false,
+          delete: false,
+          review: false,
+          revise: false,
+          share: false
+        },
+        associateAssociatePermission: {
+          create: false,
+          delete: false,
+          review: false,
+          revise: false,
+          share: false
+        },
+        associateIguruAnalyticPermission: {
+          create: false,
+          delete: false,
+          review: false,
+          revise: false,
+          share: false
+        },
+        associateItemPermission: {
+          create: false,
+          delete: false,
+          review: false,
+          revise: false,
+          share: false
+        }
+      }
     }
   }
 };
@@ -277,6 +324,14 @@ const RoleCreateReducer = (istate = initialState, action) => {
         associateRole: {
           ...istate.associateRole,
           informationBasic: action.payload
+        }
+      };
+    case SET_ROLE_REDUCER_STATE:
+      return {
+        ...istate,
+        [action.payload.objectName]: {
+          ...istate[action.payload.objectName],
+          [action.payload.stateName]: action.payload.value
         }
       };
     case SET_SETUP_PERMISSION:

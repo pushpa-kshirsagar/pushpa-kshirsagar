@@ -30,14 +30,7 @@
   align-items: center !important;
   justify-content: center !important;
 }
-.option-container {
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  /* flex-direction: column; */
-  /* height: 55px; */
-  margin: 0;
-}
+
 .option-container-likert {
   display: flex;
   /* justify-content: center; */
@@ -81,33 +74,40 @@
 }
 
 /* new css */
-table .item{
-  min-width: 300px;
-}
-table th{
-  min-width: 80px;
-}
-
-.container {
-  width: 100%;
-  background-color: white;
-  margin-top: 20px;
+.label , .mitem , .relabel, .revise, .response , .reexplain , .respexplain{
+    display : flex;
+    align-items : center;
+    font-size : 1.6rem;
+    height : 50px;
+    padding: 0px 5px;
+    overflow: overlay;
+    color: rgba(0, 0, 0, 0.87);
 }
 
-table {
-  width: 100%;
-  
+
+.likartscale{
+  padding: 2.5px;
 }
 
-/* try removing the "hack" below to see how the table overflows the .body */
-.hack1 {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
+.likart ,.option-container {
+  display: flex;
+  padding: 0px 5px;
 }
 
-.hack2 {
-  display: table-cell;
-  overflow-x: scroll;
-  width: 100%;
+.likart .likert_choice-sclae {  
+  font-size: 1.2rem;
+  height: 50px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.likart .item{
+   flex: 3;
+   padding: 0px 2.5px;
+   font-size: 1.6rem;
+   height: 50px;
+   display: flex;
+   align-items: center;
 }

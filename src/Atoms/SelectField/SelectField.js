@@ -9,6 +9,7 @@ import {
   Select,
   FormHelperText
 } from '@material-ui/core';
+import { createNameWithBadge } from '../../Actions/StatusAction';
 
 export const SelectField = (props) => {
   const {
@@ -20,7 +21,8 @@ export const SelectField = (props) => {
     value,
     mappingValue,
     dataValue = '',
-    labelBadgeOne = ''
+    labelBadgeOne = '',
+    name = 'name'
   } = props;
 
   return (
@@ -48,17 +50,7 @@ export const SelectField = (props) => {
                     value={option[mappingValue]}
                     className={'selectMenu'}
                   >
-                    {/* <div
-                      className={[
-                        'midPaneInformation',
-                        option.description ? null : 'aliasmiddle'
-                      ].join(' ')}
-                    >
-                      {option.name}
-                    </div>
-                    <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
-                      {option.description}
-                    </div> */}
+                    {/* <div>{createNameWithBadge(option[name])}</div> */}
                     <div>{`${option.name} ${
                       option.description ? `(${option.description})` : ''
                     }`}</div>
@@ -67,6 +59,8 @@ export const SelectField = (props) => {
               )
             : listSelect.map((option, index) => (
                 <MenuItem key={`${tag}-${index}`} value={option} className={'selectMenu'}>
+                  {/* <div>{createNameWithBadge(option[name])}</div> */}
+
                   {option.name}
                   {option.description != null ? (
                     <div className={'midPaneLabel'}>{option.description}</div>

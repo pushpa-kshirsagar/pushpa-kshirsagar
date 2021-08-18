@@ -10,16 +10,22 @@ import {
   SET_ASSOCIATE_ROLE_REDUCER_STATE,
   LOADER_START,
   SET_ROLE_DYNAMIC_STATE,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  SET_SETUP_PERMISSION
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 
 const PopUpAssociateRoleCreate = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { associateRole } = useSelector((state) => state.RoleCreateReducer);
-  const { selectedAssociateInfo, coreRoleReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    coreRoleReviewListData,
+    permissionStateOne,
+    permissionStateTwo,
+    permissionStateThree
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const [roleSelectedError, setRoleSelectedError] = useState('');
 
@@ -77,7 +83,6 @@ const PopUpAssociateRoleCreate = () => {
     });
   };
   console.log('ROLE ASOCIATE POPUP>>>>>>>>>.', associateRole);
-
 
   return (
     <div>
@@ -153,6 +158,37 @@ const PopUpAssociateRoleCreate = () => {
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'create'}
         onClickYes={onClickYes}
+      />
+      <PopUpCheckbox
+        isActive={isPopUpValue === 'PERMISSIONPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'role'}
+        headerOneBadgeTwo={'information'}
+        inputHeader={permissionStateOne}
+        inputHeaderBadge={permissionStateTwo}
+        typeOfStateObj={permissionStateThree}
+        objectName={'associateRole'}
+        stateName={'associateRolePermission'}
+        informationArr={
+          permissionStateTwo === 'distinct'
+            ? [
+                { id: 'all', name: 'all' },
+                { id: 'key', name: 'key' }
+              ]
+            : [{ id: 'key', name: 'key' }]
+        }
+        informationValue={''}
+        isRolePermission
+        valueArr={['create', 'delete', 'review', 'revise', 'share']}
+        valueArrState={
+          associateRole?.informationSetup?.associateRolePermission
+            ? associateRole?.informationSetup?.associateRolePermission[permissionStateThree]
+            : ''
+        }
+        nextPopUpValue={''}
+        typeOfSetObject={SET_SETUP_PERMISSION}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
   );

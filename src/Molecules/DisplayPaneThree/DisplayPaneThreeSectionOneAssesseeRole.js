@@ -25,19 +25,14 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
   }
   const dispatch = useDispatch();
   const getPermissionStr = (permissionObj) => {
-    console.log('permissionObj', permissionObj);
     let per = '';
     if (permissionObj) {
       Object.keys(permissionObj).map(function (key, val) {
         if (typeof permissionObj[key] === 'boolean' && permissionObj[key] === true) {
-          per = per !== '' ? per + ', ' + key : key;
+          per = per !== '' ? per + ', ' + splitCamelCaseToString(key) : splitCamelCaseToString(key);
         }
       });
     }
-    console.log('per', per);
-    // Object.keys()
-    //   .toString()
-    //   .replace(',assesseePermissionInformation', '')
     return per;
   };
   let assesseeRoleGroupList = [];
@@ -138,7 +133,6 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
       isListCard: false
     }
   ];
-  console.log('rolePermission', rolePermission);
   let assesseeDistinct = '';
   let assesseeDistinctPer = '';
   let assesseeGroup = '';
@@ -149,27 +143,143 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
   let assesseeRolePer = '';
   let assesseeType = '';
   let assesseeTypePer = '';
+  //assessment
+  let assessmentDistinct,
+    assessmentDistinctPer,
+    assessmentGroup,
+    assessmentGroupPer,
+    assessmentManager,
+    assessmentManagerPer,
+    assessmentType,
+    assessmentTypePer = '';
+  //assignment
+  let assignmentDistinct,
+    assignmentDistinctPer,
+    assignmentGroup,
+    assignmentGroupPer,
+    assignmentManager,
+    assignmentManagerPer,
+    assignmentReport,
+    assignmentReportPer,
+    assignmentType,
+    assignmentTypePer = '';
+  //associate
+  let associateDistinct,
+    associateDistinctPer,
+    associateGroup,
+    associateGroupPer,
+    associateManager,
+    associateManagerPer,
+    associateNode,
+    associateNodePer,
+    associateRole,
+    associateRolePer,
+    associateType,
+    associateTypePer = '';
+  //iguruAnalytic
+  let iguruAnalyticDistinct,
+    iguruAnalyticDistinctPer,
+    iguruAnalyticGroup,
+    iguruAnalyticGroupPer,
+    iguruAnalyticManager,
+    iguruAnalyticManagerPer,
+    iguruAnalyticType,
+    iguruAnalyticTypePer = '';
+  //item
+  let itemDistinct,
+    itemDistinctPer,
+    itemGroup,
+    itemGroupPer,
+    itemManager,
+    itemManagerPer,
+    itemType,
+    itemTypePer = '';
   if (rolePermission) {
     assesseeDistinct = getPermissionStr(rolePermission?.assesseeAssesseeDistinctPermission);
     assesseeDistinctPer =
       rolePermission.assesseeAssesseeDistinctPermission.assesseePermissionInformation;
-    assesseeGroup = Object.keys(rolePermission?.assesseeAssesseeGroupPermission)
-      .toString()
-      .replace(',assesseePermissionInformation', '');
+    assesseeGroup = getPermissionStr(rolePermission?.assesseeAssesseeGroupPermission);
     assesseeGroupPer = rolePermission.assesseeAssesseeGroupPermission.assesseePermissionInformation;
-    assesseeManager = Object.keys(rolePermission?.assesseeAssesseeManagerPermission)
-      .toString()
-      .replace(',assesseePermissionInformation', '');
+    assesseeManager = getPermissionStr(rolePermission?.assesseeAssesseeManagerPermission);
     assesseeManagerPer =
       rolePermission.assesseeAssesseeManagerPermission.assesseePermissionInformation;
-    assesseeRole = Object.keys(rolePermission?.assesseeAssesseeRolePermission)
-      .toString()
-      .replace(',assesseePermissionInformation', '');
+    assesseeRole = getPermissionStr(rolePermission?.assesseeAssesseeRolePermission);
     assesseeRolePer = rolePermission.assesseeAssesseeRolePermission.assesseePermissionInformation;
-    assesseeType = Object.keys(rolePermission?.assesseeAssesseeTypePermission)
-      .toString()
-      .replace(',assesseePermissionInformation', '');
+    assesseeType = getPermissionStr(rolePermission?.assesseeAssesseeTypePermission);
     assesseeTypePer = rolePermission.assesseeAssesseeTypePermission.assesseePermissionInformation;
+    //assessments
+    assessmentDistinct = getPermissionStr(rolePermission?.assesseeAssessmentDistinctPermission);
+    assessmentDistinctPer =
+      rolePermission.assesseeAssessmentDistinctPermission.assesseePermissionInformation;
+    assessmentGroup = getPermissionStr(rolePermission?.assesseeAssessmentGroupPermission);
+    assessmentGroupPer =
+      rolePermission.assesseeAssessmentGroupPermission.assesseePermissionInformation;
+    assessmentManager = getPermissionStr(rolePermission?.assesseeAssessmentManagerPermission);
+    assessmentManagerPer =
+      rolePermission.assesseeAssessmentManagerPermission.assesseePermissionInformation;
+    assessmentType = getPermissionStr(rolePermission?.assesseeAssessmentTypePermission);
+    assessmentTypePer =
+      rolePermission.assesseeAssessmentTypePermission.assesseePermissionInformation;
+    //assignment
+
+    assignmentDistinct = getPermissionStr(rolePermission?.assesseeAssignmentDistinctPermission);
+    assignmentDistinctPer =
+      rolePermission.assesseeAssignmentDistinctPermission.assesseePermissionInformation;
+    assignmentGroup = getPermissionStr(rolePermission?.assesseeAssignmentGroupPermission);
+    assignmentGroupPer =
+      rolePermission.assesseeAssignmentGroupPermission.assesseePermissionInformation;
+    assignmentManager = getPermissionStr(rolePermission?.assesseeAssignmentManagerPermission);
+    assignmentManagerPer =
+      rolePermission.assesseeAssignmentManagerPermission.assesseePermissionInformation;
+    assignmentReport = getPermissionStr(rolePermission?.assesseeAssignmentReportPermission);
+    assignmentReportPer =
+      rolePermission.assesseeAssignmentReportPermission.assesseePermissionInformation;
+    assignmentType = getPermissionStr(rolePermission?.assesseeAssignmentTypePermission);
+    assignmentTypePer =
+      rolePermission.assesseeAssignmentTypePermission.assesseePermissionInformation;
+    //associate
+
+    associateDistinct = getPermissionStr(rolePermission?.assesseeAssociateDistinctPermission);
+    associateDistinctPer =
+      rolePermission.assesseeAssociateDistinctPermission.assesseePermissionInformation;
+    associateGroup = getPermissionStr(rolePermission?.assesseeAssociateGroupPermission);
+    associateGroupPer =
+      rolePermission.assesseeAssociateGroupPermission.assesseePermissionInformation;
+    associateManager = getPermissionStr(rolePermission?.assesseeAssociateManagerPermission);
+    associateManagerPer =
+      rolePermission.assesseeAssociateManagerPermission.assesseePermissionInformation;
+    associateNode = getPermissionStr(rolePermission?.assesseeAssociateNodePermission);
+    associateNodePer = rolePermission.assesseeAssociateNodePermission.assesseePermissionInformation;
+    associateRole = getPermissionStr(rolePermission?.assesseeAssociateRolePermission);
+    associateRolePer = rolePermission.assesseeAssociateRolePermission.assesseePermissionInformation;
+    associateType = getPermissionStr(rolePermission?.assesseeAssociateTypePermission);
+    associateTypePer = rolePermission.assesseeAssociateTypePermission.assesseePermissionInformation;
+    //iGuru Analytics
+
+    iguruAnalyticDistinct = getPermissionStr(
+      rolePermission?.assesseeIguruAnalyticDistinctPermission
+    );
+    iguruAnalyticDistinctPer =
+      rolePermission.assesseeIguruAnalyticDistinctPermission.assesseePermissionInformation;
+    iguruAnalyticGroup = getPermissionStr(rolePermission?.assesseeIguruAnalyticGroupPermission);
+    iguruAnalyticGroupPer =
+      rolePermission.assesseeIguruAnalyticGroupPermission.assesseePermissionInformation;
+    iguruAnalyticManager = getPermissionStr(rolePermission?.assesseeIguruAnalyticManagerPermission);
+    iguruAnalyticManagerPer =
+      rolePermission.assesseeIguruAnalyticManagerPermission.assesseePermissionInformation;
+    iguruAnalyticType = getPermissionStr(rolePermission?.assesseeIguruAnalyticTypePermission);
+    iguruAnalyticTypePer =
+      rolePermission.assesseeIguruAnalyticTypePermission.assesseePermissionInformation;
+    //Items
+
+    itemDistinct = getPermissionStr(rolePermission?.assesseeItemDistinctPermission);
+    itemDistinctPer = rolePermission.assesseeItemDistinctPermission.assesseePermissionInformation;
+    itemGroup = getPermissionStr(rolePermission?.assesseeItemGroupPermission);
+    itemGroupPer = rolePermission.assesseeItemGroupPermission.assesseePermissionInformation;
+    itemManager = getPermissionStr(rolePermission?.assesseeItemManagerPermission);
+    itemManagerPer = rolePermission.assesseeItemManagerPermission.assesseePermissionInformation;
+    itemType = getPermissionStr(rolePermission?.assesseeItemTypePermission);
+    itemTypePer = rolePermission.assesseeItemTypePermission.assesseePermissionInformation;
   }
 
   const setUpList = [
@@ -242,7 +352,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assessmentDistinct || 'No Information',
+              innerLabelInformation: assessmentDistinctPer
             }
           ]
         },
@@ -251,7 +362,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assessmentGroup || 'No Information',
+              innerLabelInformation: assessmentGroupPer
             }
           ]
         },
@@ -260,7 +372,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assessmentManager || 'No Information',
+              innerLabelInformation: assessmentManagerPer
             }
           ]
         },
@@ -269,7 +382,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assessmentType || 'No Information',
+              innerLabelInformation: assessmentTypePer
             }
           ]
         }
@@ -288,7 +402,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentDistinct || 'No Information',
+              innerLabelInformation: assignmentDistinctPer
             }
           ]
         },
@@ -297,7 +412,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentGroup || 'No Information',
+              innerLabelInformation: assignmentGroupPer
             }
           ]
         },
@@ -306,7 +422,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentManager || 'No Information',
+              innerLabelInformation: assignmentManagerPer
             }
           ]
         },
@@ -315,7 +432,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentReport || 'No Information',
+              innerLabelInformation: assignmentReportPer
             }
           ]
         },
@@ -324,7 +442,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentType || 'No Information',
+              innerLabelInformation: assignmentTypePer
             }
           ]
         }
@@ -343,7 +462,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associateDistinct || 'No Information',
+              innerLabelInformation: associateDistinctPer
             }
           ]
         },
@@ -352,7 +472,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associateGroup || 'No Information',
+              innerLabelInformation: associateGroupPer
             }
           ]
         },
@@ -361,7 +482,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associateNode || 'No Information',
+              innerLabelInformation: associateNodePer
             }
           ]
         },
@@ -370,7 +492,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associateManager || 'No Information',
+              innerLabelInformation: associateManagerPer
             }
           ]
         },
@@ -379,7 +502,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associateRole || 'No Information',
+              innerLabelInformation: associateRolePer
             }
           ]
         },
@@ -388,7 +512,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associateType || 'No Information',
+              innerLabelInformation: associateTypePer
             }
           ]
         }
@@ -407,7 +532,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: iguruAnalyticDistinct || 'No Information',
+              innerLabelInformation: iguruAnalyticDistinctPer
             }
           ]
         },
@@ -416,7 +542,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: iguruAnalyticGroup || 'No Information',
+              innerLabelInformation: iguruAnalyticGroupPer
             }
           ]
         },
@@ -425,7 +552,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: iguruAnalyticManager || 'No Information',
+              innerLabelInformation: iguruAnalyticManagerPer
             }
           ]
         },
@@ -434,7 +562,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: iguruAnalyticType || 'No Information',
+              innerLabelInformation: iguruAnalyticTypePer
             }
           ]
         }
@@ -453,7 +582,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: itemDistinct || 'No Information',
+              innerLabelInformation: itemDistinctPer
             }
           ]
         },
@@ -462,7 +592,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: itemGroup || 'No Information',
+              innerLabelInformation: itemGroupPer
             }
           ]
         },
@@ -471,7 +602,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: itemManager || 'No Information',
+              innerLabelInformation: itemManagerPer
             }
           ]
         },
@@ -480,7 +612,8 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: itemType || 'No Information',
+              innerLabelInformation: itemTypePer
             }
           ]
         }
@@ -584,9 +717,6 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     let selected = data ? data[0] : null;
-    console.log('===data==>', data);
-    console.log('===selectedBadge==>', selectedBadge);
-    console.log('=====>', selectedBadgeName);
     if (
       labelName !== '' &&
       (selected?.labelTextTwoBadge === 'distinct' ||

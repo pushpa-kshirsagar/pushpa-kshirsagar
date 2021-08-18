@@ -1,3 +1,4 @@
+import { yellow } from '@material-ui/core/colors';
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
@@ -10,14 +11,23 @@ import {
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  ASSOCIATE_REVIEW_DISTINCT_SAGA
+  ASSOCIATE_REVIEW_DISTINCT_SAGA,
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  ASSOCIATE_SETUP_SAGA,
+  ASSOCIATE_ITEM_SETUP_SAGA,
+  ASSOCIATE_ANALYTIC_SETUP_SAGA,
+  ASSOCIATE_ASSESSMENT_SETUP_SAGA
 } from '../../actionType';
-import { ASSOCIATE_INFO_REVISE_URL, ASSOCIATE_REVIEW_INFO_URL } from '../../endpoints';
+import {
+  ASS0CIATE_SETUP_1,
+  ASSOCIATE_INFO_REVISE_URL,
+  ASSOCIATE_REVIEW_INFO_URL
+} from '../../endpoints';
 import Store from '../../store';
 
 const associateReviewInfoApi = async (requestObj) => {
   console.log(requestObj.data);
-  let URL = ASSOCIATE_REVIEW_INFO_URL;
+  let URL = requestObj.URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -32,7 +42,10 @@ const associateReviewInfoApi = async (requestObj) => {
 
 function* workerReviewInfoAssociateSaga(data) {
   try {
-    const userResponse = yield call(associateReviewInfoApi, { data: data.payload.reqBody });
+    const userResponse = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: ASSOCIATE_REVIEW_INFO_URL
+    });
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       console.log('ASSESSEE_REVIEW_INFO=======>', userResponse);
@@ -72,7 +85,6 @@ function* workerReviewInfoAssociateSaga(data) {
         }
       });
       yield put({ type: LOADER_STOP });
-
     } else {
       yield put({ type: LOADER_STOP });
       yield put({
@@ -156,9 +168,92 @@ function* workerReviseInfoAssociateSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
-
+function* workerAssociateSetUpSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: data.payload.reqUrl
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'setUpAssociateModule', value: response.responseObject[0] }
+      });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
+function* workerAssociateAnalyticSetUpSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: data.payload.reqUrl
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'analyticSetUpModule', value: response.responseObject }
+      });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
+function* workerAssociateItemSetUpSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: data.payload.reqUrl
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'itemSetUpModule', value: response.responseObject }
+      });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
+function* workerAssociateAssessmentSetUpSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: data.payload.reqUrl
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'assessmentSetUpModule', value: response.responseObject }
+      });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
 export default function* watchReviewInfoAssociateSaga() {
   console.log('IN WATCH ====>');
   yield takeLatest(GET_ASSOCIATE_INFO_SAGA, workerReviewInfoAssociateSaga);
   yield takeLatest(ASSOCIATE_INFO_REVISE_SAGA, workerReviseInfoAssociateSaga);
+  yield takeLatest(ASSOCIATE_SETUP_SAGA, workerAssociateSetUpSaga);
+  yield takeLatest(ASSOCIATE_ANALYTIC_SETUP_SAGA, workerAssociateAnalyticSetUpSaga);
+  yield takeLatest(ASSOCIATE_ITEM_SETUP_SAGA, workerAssociateItemSetUpSaga);
+  yield takeLatest(ASSOCIATE_ASSESSMENT_SETUP_SAGA, workerAssociateAssessmentSetUpSaga);
 }

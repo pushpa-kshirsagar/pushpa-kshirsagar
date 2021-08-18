@@ -96,7 +96,7 @@ const DisplayPanelAccordianInformation = (props) => {
                                 backgroundColor: '#F2F2F2'
                               }}
                               onClick={() => {
-                                console.log('listtt');
+                                // console.log('listtt');
                                 setSelectedBadge('');
                                 setInformation('');
                                 let removeLastOb = selectedBadgeArray.slice(0, -1);
@@ -211,9 +211,11 @@ const DisplayPanelAccordianInformation = (props) => {
                 <div className={'unitFlex'}>
                   {isPermission && information ? (
                     <span
-                      className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(
-                        ' '
-                      )}
+                      className={[
+                        'unitFlex',
+                        'iconsFooterLabelDefault',
+                        'AssesseeNotifyStatus'
+                      ].join(' ')}
                       style={{ textAlign: 'center' }}
                     >
                       {information}

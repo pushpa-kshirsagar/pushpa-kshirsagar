@@ -56,7 +56,7 @@ const PopUpCheckbox = (props) => {
 
   useEffect(() => {
     setLocalObject(valueArrState);
-    setpermissionInfo(valueArrState[informationValue]);
+    informationValue !== '' && setpermissionInfo(valueArrState[informationValue]);
   }, [valueArrState]);
 
   /*handling the onchange event*/
@@ -107,13 +107,19 @@ const PopUpCheckbox = (props) => {
           }
         });
       } else if (isRolePermission) {
+        let reviseobj = null;
+        if (informationValue !== '' && headerOne === 'assessees') {
+          reviseobj = { ...localObject, [informationValue]: permissionInfo };
+        } else {
+          reviseobj = { ...localObject };
+        }
         dispatch({
           type: typeOfSetObject,
           payload: {
             objectName: objectName,
             stateName: stateName,
             actualStateName: typeOfStateObj,
-            value: { ...localObject, [informationValue]: permissionInfo }
+            value: reviseobj
           }
         });
       } else {
@@ -185,7 +191,7 @@ const PopUpCheckbox = (props) => {
               </div>
             </div>
           )}
-          {isRolePermission && (
+          {isRolePermission && headerOne === 'assessees' && (
             <SelectField
               tag={'information'}
               label={'information'}

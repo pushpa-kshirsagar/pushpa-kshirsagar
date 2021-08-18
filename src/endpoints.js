@@ -22,8 +22,14 @@ export const ASSESSMENTS_URL = 'https://2hqmad6icc.execute-api.ap-south-1.amazon
 export const ASSIGNMENTS_URL = 'https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com';
 export const ANALYTICS = 'https://5kgxms9tld.execute-api.ap-south-1.amazonaws.com';
 export const ITEMS = 'https://5u6ip77xaf.execute-api.ap-south-1.amazonaws.com';
-//assessee self
 
+//setup
+export const ASS0CIATE_SETUP_1 = ASSOCIATES_URL + '/dev/insight-guru/api/associate-setup/review';
+export const ITEM_SETUP = ITEMS + '/dev/insight-guru/api/item-associate-setup/review';
+export const ASSESSMENTS_SETUP = ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-associate-setup/review';
+export const ANALYTIC_SETUP =
+  ANALYTICS + '/dev/insight-guru/api/iguru-analytic-associate-setup/review';
+//assessee self
 export const ASSESSEE_ASSESSMENT_START_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment/start';
 export const ASSESSMENT_START_URL =

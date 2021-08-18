@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import { SET_POPUP_VALUE } from '../../actionType';
+import { SET_DISPLAY_TWO_SINGLE_STATE, SET_POPUP_VALUE } from '../../actionType';
 import { getRoleGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 
 const DisplayPaneThreeSectionOneAssociateRole = () => {
@@ -14,7 +14,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
   const dispatch = useDispatch();
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationEngagement, informationAllocation } = responseObject;
+  const { informationEngagement, informationAllocation, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -118,6 +118,36 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
       isListCard: false
     }
   ];
+  const getPermissionStr = (permissionObj) => {
+    console.log('permissionObj', permissionObj);
+    let per = '';
+    if (permissionObj) {
+      Object.keys(permissionObj).map(function (key, val) {
+        if (typeof permissionObj[key] === 'boolean' && permissionObj[key] === true) {
+          per = per !== '' ? per + ', ' + splitCamelCaseToString(key) : splitCamelCaseToString(key);
+        }
+      });
+    }
+    return per;
+  };
+  let assesseePermission = getPermissionStr(
+    informationSetup?.associateRolePermission?.associateAssesseePermission
+  );
+  let assessmentPermission = getPermissionStr(
+    informationSetup?.associateRolePermission?.associateAssessmentPermission
+  );
+  let assignmentPermission = getPermissionStr(
+    informationSetup?.associateRolePermission?.associateAssignmentPermission
+  );
+  let associatePermission = getPermissionStr(
+    informationSetup?.associateRolePermission?.associateAssociatePermission
+  );
+  let iguruAnalyticPermission = getPermissionStr(
+    informationSetup?.associateRolePermission?.associateIguruAnalyticPermission
+  );
+  let itemPermission = getPermissionStr(
+    informationSetup?.associateRolePermission?.associateItemPermission
+  );
   const setUpList = [
     {
       id: 'a1',
@@ -128,7 +158,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assesseePermission || 'No Information'
             }
           ]
         },
@@ -137,7 +167,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assesseePermission || 'No Information'
             }
           ]
         },
@@ -146,7 +176,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assesseePermission || 'No Information'
             }
           ]
         },
@@ -155,7 +185,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assesseePermission || 'No Information'
             }
           ]
         },
@@ -164,7 +194,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assesseePermission || 'No Information'
             }
           ]
         }
@@ -183,7 +213,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assessmentPermission || 'No Information'
             }
           ]
         },
@@ -192,7 +222,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assessmentPermission || 'No Information'
             }
           ]
         },
@@ -201,7 +231,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assessmentPermission || 'No Information'
             }
           ]
         },
@@ -210,7 +240,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assessmentPermission || 'No Information'
             }
           ]
         }
@@ -229,7 +259,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentPermission || 'No Information'
             }
           ]
         },
@@ -238,7 +268,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentPermission || 'No Information'
             }
           ]
         },
@@ -247,7 +277,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentPermission || 'No Information'
             }
           ]
         },
@@ -257,7 +287,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentPermission || 'No Information'
             }
           ]
         },
@@ -266,7 +296,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: assignmentPermission || 'No Information'
             }
           ]
         }
@@ -285,7 +315,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associatePermission || 'No Information'
             }
           ]
         },
@@ -294,7 +324,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associatePermission || 'No Information'
             }
           ]
         },
@@ -303,7 +333,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associatePermission || 'No Information'
             }
           ]
         },
@@ -312,7 +342,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associatePermission || 'No Information'
             }
           ]
         },
@@ -321,7 +351,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associatePermission || 'No Information'
             }
           ]
         },
@@ -330,7 +360,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: associatePermission || 'No Information'
             }
           ]
         }
@@ -349,7 +379,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: iguruAnalyticPermission || 'No Information'
             }
           ]
         },
@@ -358,7 +388,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: iguruAnalyticPermission || 'No Information'
             }
           ]
         },
@@ -367,7 +397,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: iguruAnalyticPermission || 'No Information'
             }
           ]
         },
@@ -376,7 +406,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: iguruAnalyticPermission || 'No Information'
             }
           ]
         }
@@ -395,7 +425,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: itemPermission || 'No Information'
             }
           ]
         },
@@ -404,7 +434,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: itemPermission || 'No Information'
             }
           ]
         },
@@ -413,7 +443,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: itemPermission || 'No Information'
             }
           ]
         },
@@ -422,7 +452,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: itemPermission || 'No Information'
             }
           ]
         }
@@ -471,6 +501,48 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
   //     isReviewLink: true
   //   }
   // ];
+  function splitCamelCaseToString(s) {
+    return s
+      .split(/(?=[A-Z])/)
+      .map(function (p) {
+        return p.charAt(0).toUpperCase() + p.slice(1);
+      })
+      .join(' ');
+  }
+  const reviseSetUp = (e, data, selectedBadge) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    let selected = data ? data[0] : null;
+    if (
+      labelName !== '' &&
+      (selected?.labelTextTwoBadge === 'distinct' ||
+        selected?.labelTextTwoBadge === 'group' ||
+        selected?.labelTextTwoBadge === 'manager' ||
+        selected?.labelTextTwoBadge === 'node' ||
+        selected?.labelTextTwoBadge === 'role' ||
+        selected?.labelTextTwoBadge === 'type') &&
+      selectedBadge?.labelTextTwoBadge === 'permission'
+    ) {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'permissionStateOne', value: labelName }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'permissionStateTwo', value: selected?.labelTextTwoBadge }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'permissionStateThree',
+          value: 'associate' + splitCamelCaseToString(labelName).slice(0, -1) + 'Permission'
+        }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PERMISSIONPOPUP', popupMode: 'associatesROLECREATE' }
+      });
+    }
+  };
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
@@ -521,7 +593,11 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianReviewListOne
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
                     <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                   )}
@@ -536,9 +612,18 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianReviewListOne
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                      onClickRevise={reviseSetUp}
+                    />
                   ) : (
-                    <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianInformation
+                      accordianObject={ob}
+                      mode={reviewMode}
+                      onClickRevise={reviseSetUp}
+                    />
                   )}
                 </div>
               );

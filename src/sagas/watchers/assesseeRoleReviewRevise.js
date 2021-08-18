@@ -12,6 +12,7 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_ROLE_DYNAMIC_STATE,
+  SET_ROLE_REDUCER_STATE,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';
 import { ASSESSEE_REVIEW_ROLE_URL, ASSESSEE_ROLE_INFO_REVISE_URL } from '../../endpoints';
@@ -83,6 +84,14 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
             value: tempList
           }
         });
+        yield put({
+          type: SET_ROLE_REDUCER_STATE,
+          payload: {
+            objectName: 'assesseeRole',
+            stateName: 'informationSetup',
+            value: userResponse.responseObject[0].informationSetup
+          }
+        });
       }
     } else {
       yield put({ type: LOADER_STOP });
@@ -116,7 +125,7 @@ const assesseeRoleReviseInfoApi = async (requestObj) => {
 };
 
 function* workerReviseAssesseeRoleInfoSaga(data) {
-  console.log("RoleRevise",data.payload);
+  console.log('RoleRevise', data.payload);
   try {
     const userResponse = yield call(assesseeRoleReviseInfoApi, {
       data: data.payload.reqBody

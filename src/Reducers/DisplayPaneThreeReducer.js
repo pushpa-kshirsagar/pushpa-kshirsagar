@@ -60,7 +60,11 @@ const initialState = {
   isWeightageSelected: false,
   isRangeSelected: false,
   selectedModule: '',
-  statusPopUpValue: ''
+  statusPopUpValue: '',
+  setUpAssociateModule:null,
+  analyticSetUpModule:null,
+  itemSetUpModule:null,
+  assessmentSetUpModule:null
 };
 
 const DisplayPaneThreeReducer = (istate = initialState, action) => {

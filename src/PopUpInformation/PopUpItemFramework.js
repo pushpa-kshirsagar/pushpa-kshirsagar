@@ -122,7 +122,7 @@ const PopUpItemFramework = (props) => {
           }
         });
         dispatch({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: {
             stateName: 'itemFrameworkOneResponseChoice',
             value: tempArr

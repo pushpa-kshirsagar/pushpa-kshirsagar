@@ -29,8 +29,13 @@ import {
   ASSOCIATE_TYPE_INFO_REVISE_SAGA,
   ASSOCIATE_ROLE_REVISE_INFO_SAGA,
   GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
-  ASSESSEE_NODE_INFO_REVISE_SAGA
+  ASSESSEE_NODE_INFO_REVISE_SAGA,
+  ASSOCIATE_SETUP_SAGA,
+  ASSOCIATE_ANALYTIC_SETUP_SAGA,
+  ASSOCIATE_ITEM_SETUP_SAGA,
+  ASSOCIATE_ASSESSMENT_SETUP_SAGA
 } from '../actionType';
+import { ANALYTIC_SETUP, ASS0CIATE_SETUP_1, ITEM_SETUP, ASSESSMENTS_SETUP } from '../endpoints';
 import {
   getAssociateTypeAssociateReqObj,
   getAssociateTypeAssociateScanReqObj,
@@ -1056,5 +1061,48 @@ export const updateAssociateNodeStatus = (
       headerOne: '',
       reqBody
     }
+  });
+};
+
+export const AssociateSetUpApiCalls = (selectedAssociateInfo, associateId, dispatch) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'associateId',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: associateId
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  dispatch({
+    type: ASSOCIATE_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ASS0CIATE_SETUP_1 }
+  });
+  dispatch({
+    type: ASSOCIATE_ANALYTIC_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ANALYTIC_SETUP }
+  });
+  dispatch({
+    type: ASSOCIATE_ITEM_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ITEM_SETUP }
+  });
+  dispatch({
+    type: ASSOCIATE_ASSESSMENT_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ASSESSMENTS_SETUP }
   });
 };
