@@ -85,10 +85,11 @@
 }
 
 .label{
-    min-height: 50px;
     display: flex;
+    min-height: 50px;
     font-size: 1.6rem;
     padding: 0px 5px;
+    align-items: center;
 }
 
 .likartscale{
