@@ -62,11 +62,11 @@
   cursor: pointer !important;
 }
 
-.hr-setup {
+/* .hr-setup {
   display: flex !important;
   justify-content: space-between !important;
   flex-direction: row !important;
-}
+} */
 
 .checkbox-lebel .MuiTypography-body1 {
   font-size: 14px;
@@ -74,7 +74,7 @@
 }
 
 /* new css */
-.label , .mitem , .relabel, .revise, .response , .reexplain , .respexplain{
+.ex_container{
     display : flex;
     align-items : center;
     font-size : 1.6rem;
@@ -84,6 +84,12 @@
     color: rgba(0, 0, 0, 0.87);
 }
 
+.label{
+    min-height: 50px;
+    display: flex;
+    font-size: 1.6rem;
+    padding: 0px 5px;
+}
 
 .likartscale{
   padding: 2.5px;
@@ -94,7 +100,7 @@
   padding: 0px 5px;
 }
 
-.likart .likert_choice-sclae {  
+.likart .likert_choice-sclae , .option-container .item1 {  
   font-size: 1.6rem;
   height: 50px;
   display: flex;
@@ -103,8 +109,17 @@
   justify-content: center;
 }
 
-.likart .item{
+.likart .item {
    flex: 3;
+   padding: 0px 2.5px;
+   font-size: 1.6rem;
+   height: 50px;
+   display: flex;
+   align-items: center;
+}
+
+.option-container .item{
+    flex: 14;
    padding: 0px 2.5px;
    font-size: 1.6rem;
    height: 50px;
