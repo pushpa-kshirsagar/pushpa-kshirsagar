@@ -570,6 +570,13 @@ export const ANALYTICS_POPUP = [
     data: 'job profiles',
     dataValue: 'job profiles',
     optionClass: 'optionSecondary',
+    disabled: false,
+    divider: 'light'
+  },
+  {
+    data: 'profiler',
+    dataValue: 'profiler',
+    optionClass: 'optionSecondary',
     disabled: false
   }
 ];

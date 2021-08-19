@@ -212,12 +212,12 @@ const DisplayPageOne = () => {
                     <DisplayPaneOne />
                   </div>
                 )) || (
-                  <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
+                  <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '' }}>
                     <DisplayPaneSix />
                   </div>
                 )}
                 {/* {assesseeAssessmentStartData &&  */}
-                <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '95.5%' }}>
+                <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '100%' }}>
                   <DisplayPaneSeven />
                 </div>
                 {/* } */}

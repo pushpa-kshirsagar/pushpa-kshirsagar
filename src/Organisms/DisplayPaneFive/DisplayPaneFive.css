@@ -75,11 +75,9 @@
 
 /* new css */
 .ex_container {
-  display: flex;
-  align-items: center;
   font-size: 1.6rem;
-  height: 50px;
-  padding: 0px 5px;
+  min-height: 50px;
+  padding: 6px 5px;
   /* overflow: overlay; */
   color: rgba(0, 0, 0, 0.87);
 }
@@ -87,7 +85,7 @@
 .label {
   min-height: 50px;
   font-size: 1.6rem;
-  padding: 0px 5px;
+  padding: 6px 5px;
 }
 
 .likartscale {
@@ -100,8 +98,7 @@
   padding: 0px 5px;
 }
 
-.likart .likert_choice-sclae,
-.option-container .item1 {
+.likart .likert_choice-sclae {
   font-size: 1.6rem;
   height: 50px;
   display: flex;
@@ -127,6 +124,9 @@
   display: flex;
   align-items: center;
 }
-.likert-choice-font{
+.likert-choice-font {
   font-size: 1rem;
+}
+input[type='radio'] {
+  margin: 0px !important;
 }

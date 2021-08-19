@@ -172,6 +172,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne === 'assessment centres' ||
       popupHeaderOne === 'culture profiles' ||
       popupHeaderOne === 'job profiles' ||
+      popupHeaderOne === 'profiler' ||
       popupHeaderOne === 'associate'
     ) {
       dispatch({
@@ -208,6 +209,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     if (
       (clickValue === 'administrators' || clickValue === 'managers') &&
       popupHeaderOne !== 'culture profiles' &&
+      popupHeaderOne !== 'profiler' &&
       popupHeaderOne !== 'job profiles'
     ) {
       revisePopupHeaderOne = clickValue;
@@ -254,6 +256,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne !== 'items' &&
       popupHeaderOne !== 'culture profiles' &&
       popupHeaderOne !== 'job profiles' &&
+      popupHeaderOne !== 'profiler' &&
       popupHeaderOne !== 'interviews' &&
       popupHeaderOne !== 'managers'
     ) {
@@ -271,7 +274,8 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne !== 'managers' &&
       popupHeaderOne !== 'assessees' &&
       popupHeaderOne !== 'assessments' &&
-      popupHeaderOne !== 'assessments' &&
+      popupHeaderOne !== 'assignments' &&
+      popupHeaderOne !== 'profiler' &&
       popupHeaderOne !== 'culture profiles' &&
       popupHeaderOne !== 'job profiles' &&
       popupHeaderOne !== 'items'
@@ -289,6 +293,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne !== 'managers' &&
       popupHeaderOne !== 'assessees' &&
       popupHeaderOne !== 'assessments' &&
+      popupHeaderOne !== 'profiler' &&
       popupHeaderOne !== 'culture profiles' &&
       popupHeaderOne !== 'job profiles' &&
       popupHeaderOne !== 'items'
@@ -305,6 +310,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       popupHeaderOne !== 'administrators' &&
       popupHeaderOne !== 'managers' &&
       popupHeaderOne !== 'assessees' &&
+      popupHeaderOne !== 'profiler' &&
       popupHeaderOne !== 'assessments' &&
       popupHeaderOne !== 'assessments' &&
       popupHeaderOne !== 'items'
@@ -1234,6 +1240,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           popupHeaderOne === 'culture profiles' ||
           popupHeaderOne === 'job profiles' ||
           popupHeaderOne === 'interviews' ||
+          popupHeaderOne === 'profiler' ||
           popupHeaderOne === 'items') &&
         (popupHeaderOneBadgeOne === 'types' || popupHeaderOneBadgeOne === 'type')
       ) {
@@ -1251,6 +1258,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           popupHeaderOne === 'assessment centres' ||
           popupHeaderOne === 'culture profiles' ||
           popupHeaderOne === 'job profiles' ||
+          popupHeaderOne === 'profiler' ||
           popupHeaderOne === 'interviews' ||
           popupHeaderOne === 'items') &&
         (popupHeaderOneBadgeOne === 'groups' || popupHeaderOneBadgeOne === 'group')
@@ -1326,6 +1334,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       if (
         (popupHeaderOne === 'assessment centres' ||
           popupHeaderOne === 'culture profiles' ||
+          popupHeaderOne === 'profiler' ||
           popupHeaderOne === 'job profiles') &&
         (popupHeaderOneBadgeOne === 'create' || popupHeaderOneBadgeOne === 'review')
       ) {

@@ -207,6 +207,7 @@ const PopUpReducer = (istate = initialState, action) => {
         action.payload !== 'associates' &&
         action.payload !== 'interviews' &&
         action.payload !== 'analytics' &&
+        action.payload !== 'profiler' &&
         action.payload !== 'assessment centres' &&
         action.payload !== 'culture profiles' &&
         action.payload !== 'job profiles' &&
@@ -285,6 +286,7 @@ const PopUpReducer = (istate = initialState, action) => {
         istate.popupHeaderOne === 'analytics' &&
         (action.payload === 'culture profiles' ||
           action.payload === 'job profiles' ||
+          action.payload === 'profiler' ||
           action.payload === 'assessment centres' ||
           action.payload === 'items')
       ) {
