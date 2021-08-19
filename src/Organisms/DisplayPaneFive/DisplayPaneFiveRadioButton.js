@@ -1207,7 +1207,7 @@ const DisplayPaneFiveRadioButton = (props) => {
             return (
               <div key={`op-${key}`}>
                 <div className="option-container ex_container" key={`option-${key}`}>
-                  <div className="bradio" style={{paddingRight : '2.5px'}}>
+                  <div style={{paddingRight : '2.5px'}}>
                     <input
                       type="radio"
                       name="option1"
@@ -1217,7 +1217,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                   </div>
 
                   <div
-                    className="btext"
+                    
                     style={{
                       paddingLeft : '2.5px',
                       cursor: reviewMode === 'revise' ? 'pointer' : ''
