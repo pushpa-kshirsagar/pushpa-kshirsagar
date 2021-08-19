@@ -61,10 +61,39 @@ const initialState = {
   isRangeSelected: false,
   selectedModule: '',
   statusPopUpValue: '',
-  setUpAssociateModule:null,
-  analyticSetUpModule:null,
-  itemSetUpModule:null,
-  assessmentSetUpModule:null
+  assesseeSetUpModule: {
+    assesseeDistinctCreateApproval: true,
+    assesseeDistinctCreateFee: null,
+    assesseeDistinctCreatePermission: true,
+    assesseeNameUnique: false,
+    assesseeNameAliasUnique: false,
+    assesseeNameFormat: null,
+    assesseeDistinctShare: false,
+    assesseeDistinctShared: false,
+    assesseeDistinctSignOnApproval: false,
+    assesseeDistinctSignOnFee: null,
+    assesseeDistinctSignOnPermission: false,
+    assesseeGroupCreatePermission: true,
+    assesseeGroupNameUnique: false,
+    assesseeGroupNameDescriptionUnique: false,
+    assesseeGroupShare: true,
+    assesseeGroupShared: true,
+    assesseeRoleCreatePermission: true,
+    assesseeRoleNameUnique: false,
+    assesseeRoleNameDescriptionUnique: false,
+    assesseeRoleShare: true,
+    assesseeRoleShared: true,
+    assesseeTypeCreatePermission: true,
+    assesseeTypeNameUnique: false,
+    assesseeTypeNameDescriptionUnique: false,
+    assesseeTypeShare: true,
+    assesseeTypeShared: true
+  },
+  assessmentSetUpModule: null,
+  assignmentSetUpModule: null,
+  setUpAssociateModule: null,
+  analyticSetUpModule: null,
+  itemSetUpModule: null
 };
 
 const DisplayPaneThreeReducer = (istate = initialState, action) => {

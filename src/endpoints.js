@@ -24,10 +24,14 @@ export const ANALYTICS = 'https://5kgxms9tld.execute-api.ap-south-1.amazonaws.co
 export const ITEMS = 'https://5u6ip77xaf.execute-api.ap-south-1.amazonaws.com';
 
 //setup
-export const ASS0CIATE_SETUP_1 = ASSOCIATES_URL + '/dev/insight-guru/api/associate-setup/review';
-export const ITEM_SETUP = ITEMS + '/dev/insight-guru/api/item-associate-setup/review';
-export const ASSESSMENTS_SETUP = ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-associate-setup/review';
-export const ANALYTIC_SETUP =
+export const ASS0CIATE_SETUP_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-setup/review';
+export const ITEM_SETUP_URL = ITEMS + '/dev/insight-guru/api/item-associate-setup/review';
+export const ASSIGNMENT_SETUP_URL = ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-associate-setup/review';
+export const ASSESSEES_SETUP_URL =
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-associate-setup/review';
+export const ASSESSMENTS_SETUP_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-associate-setup/review';
+export const ANALYTIC_SETUP_URL =
   ANALYTICS + '/dev/insight-guru/api/iguru-analytic-associate-setup/review';
 //assessee self
 export const ASSESSEE_ASSESSMENT_START_URL =

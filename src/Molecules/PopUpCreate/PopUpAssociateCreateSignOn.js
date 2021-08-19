@@ -37,7 +37,9 @@ import {
   UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
   UPDATE_ASSOCIATE_WEBSITE_PRIMARY_INFO,
   UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO
 } from '../../actionType';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../../endpoints';
@@ -46,7 +48,7 @@ const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
-  const { reviewMode, responseObject, statusPopUpValue } = useSelector(
+  const { reviewMode, responseObject, statusPopUpValue, assesseeSetUpModule } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
   const informationContact = assesseeInfo.informationContact;
@@ -244,6 +246,7 @@ const PopUpSignOnAssociate = () => {
     });
   };
   console.log('INFO+++++', coreNodeReviewListData);
+  alert(isPopUpValue)
   return (
     <div>
       <PopUpTextField
@@ -645,11 +648,11 @@ const PopUpSignOnAssociate = () => {
 
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEECREATEAPPROVALPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeDistinctCreateApproval'}
         label={'approval'}
         listSelect={[
-          { id: 'y', name: 'Approval Not Required' },
-          { id: 'n', name: 'Approval Required' }
+          { id: false, name: 'Approval Not Required' },
+          { id: true, name: 'Approval Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessees'}
@@ -667,11 +670,11 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTCREATEAPPROVALPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assessmentDistinctCreateApproval'}
         label={'approval'}
         listSelect={[
-          { id: 'y', name: 'Approval Not Required' },
-          { id: 'n', name: 'Approval Required' }
+          { id: false, name: 'Approval Not Required' },
+          { id: true, name: 'Approval Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessments'}
@@ -683,17 +686,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTCREATEAPPROVALPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assignmentDistinctCreateApproval'}
         label={'approval'}
         listSelect={[
-          { id: 'y', name: 'Approval Not Required' },
-          { id: 'n', name: 'Approval Required' }
+          { id: false, name: 'Approval Not Required' },
+          { id: true, name: 'Approval Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assignments'}
@@ -705,8 +708,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -714,8 +717,8 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeCreateApproval'}
         label={'approval'}
         listSelect={[
-          { id: 'y', name: 'Approval Not Required' },
-          { id: 'n', name: 'Approval Required' }
+          { id: false, name: 'Approval Not Required' },
+          { id: true, name: 'Approval Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
@@ -736,8 +739,8 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeCreateApproval'}
         label={'approval'}
         listSelect={[
-          { id: 'y', name: 'Approval Not Required' },
-          { id: 'n', name: 'Approval Required' }
+          { id: false, name: 'Approval Not Required' },
+          { id: true, name: 'Approval Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'iGuru analytics'}
@@ -755,11 +758,11 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATECREATEAPPROVALPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateDistinctCreateApproval'}
         label={'approval'}
         listSelect={[
-          { id: 'y', name: 'Approval Not Required' },
-          { id: 'n', name: 'Approval Required' }
+          { id: false, name: 'Approval Not Required' },
+          { id: false, name: 'Approval Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -771,17 +774,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeDistinctCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessees'}
@@ -799,11 +802,11 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assessmentDistinctCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessments'}
@@ -815,17 +818,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assignmentDistinctCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assignments'}
@@ -837,8 +840,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -846,8 +849,8 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeCreateApproval'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
@@ -868,8 +871,8 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeCreateApproval'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'iGuru analytics'}
@@ -887,11 +890,11 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateDistinctCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -903,17 +906,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEGROUPCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeGroupCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessees'}
@@ -926,16 +929,16 @@ const PopUpSignOnAssociate = () => {
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTGROUPCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assessmentGroupCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessments'}
@@ -947,17 +950,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTGROUPCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assignmentGroupCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assignments'}
@@ -969,8 +972,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -978,8 +981,8 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeCreateApproval'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
@@ -1000,8 +1003,8 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeCreateApproval'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'iGuru analytics'}
@@ -1019,11 +1022,11 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEGROUPCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateGroupCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -1035,17 +1038,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEROLECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeRoleCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessees'}
@@ -1058,16 +1061,16 @@ const PopUpSignOnAssociate = () => {
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEROLECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateRoleCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -1079,17 +1082,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEETYPECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeTypeCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessees'}
@@ -1102,16 +1105,16 @@ const PopUpSignOnAssociate = () => {
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTTYPECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assessmentTypeCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessments'}
@@ -1123,17 +1126,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTTYPECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assignmentTypeCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'assignments'}
@@ -1145,8 +1148,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -1154,8 +1157,8 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeCreateApproval'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
@@ -1176,8 +1179,8 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeCreateApproval'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'iGuru analytics'}
@@ -1195,11 +1198,11 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATETYPECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateTypeCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -1211,17 +1214,17 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATENODECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateNodeCreatePermission'}
         label={'permission'}
         listSelect={[
-          { id: 'y', name: 'No' },
-          { id: 'n', name: 'Yes' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -1233,7 +1236,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -1248,7 +1251,7 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         isRequired={false}
-        actualLableValue={'assesseeCreateFee'}
+        actualLableValue={'assesseeDistinctCreateFee'}
         basicInfo={associateInfo?.informationSetup?.assessee || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
@@ -1265,9 +1268,9 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         isRequired={false}
-        actualLableValue={'assesseeCreateFee'}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        actualLableValue={'assessmentDistinctCreateFee'}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -1282,9 +1285,9 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         isRequired={false}
-        actualLableValue={'assesseeCreateFee'}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        actualLableValue={'assignmentDistinctCreateFee'}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -1333,15 +1336,15 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         isRequired={false}
-        actualLableValue={'assesseeCreateFee'}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        actualLableValue={'associateDistinctCreateFee'}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEINFODISTINCTBASICPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1365,7 +1368,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTINFODISTINCTBASICPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assessmentNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1383,13 +1386,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTINFODISTINCTBASICPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assignmentNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1407,8 +1410,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -1461,7 +1464,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEINFODISTINCTBASICPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1479,13 +1482,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEBASICINFOGROUPPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeGroupNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1504,12 +1507,12 @@ const PopUpSignOnAssociate = () => {
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTBASICINFOGROUPPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assessmentGroupNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1527,13 +1530,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTBASICINFOGROUPPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assignmentGroupNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1551,8 +1554,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -1605,7 +1608,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFOGROUPPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateGroupNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1623,13 +1626,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEBASICINFOROLEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeRoleNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1653,7 +1656,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFOROLEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateRoleNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1671,13 +1674,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEBASICINFOTYPEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assesseeTypeNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1696,12 +1699,12 @@ const PopUpSignOnAssociate = () => {
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTBASICINFOTYPEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assessmentTypeNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1719,13 +1722,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTBASICINFOTYPEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'assignmentTypeNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1743,8 +1746,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -1797,7 +1800,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFOTYPEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateTypeNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1815,13 +1818,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFONODEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'associateNodeNameUnique'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1839,7 +1842,7 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

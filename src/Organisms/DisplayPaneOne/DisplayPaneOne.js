@@ -176,7 +176,6 @@ export const DisplayPaneOne = () => {
               textOneOne={assesseeName}
               textTwoOne={assesseeAlias}
               onClick={openCardPopup}
-              leftPaneAssesseeInfo={leftPaneAssesseeInfo}
               isAlertActive={leftPaneAssesseeInfo?.notifications?.alert}
               tag={selectedAssociateInfo ? 'assessee_card' : 'assessee'}
             />

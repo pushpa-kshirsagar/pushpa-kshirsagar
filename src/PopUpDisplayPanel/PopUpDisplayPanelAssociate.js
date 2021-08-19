@@ -408,11 +408,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           isAdministratorSecondary: true
         }
       });
-      AssociateSetUpApiCalls(
-        selectedAssociateInfo,
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        dispatch
-      );
+
       dispatch({
         type: GET_ASSOCIATE_INFO_SAGA,
         payload: {
@@ -446,7 +442,12 @@ const PopUpDisplayPanelAssociate = (props) => {
           }
         }
       });
-     
+      AssociateSetUpApiCalls(
+        selectedAssociateInfo,
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        dispatch
+      );
+
       clearMiddlePaneInfo();
       dispatch({
         type: SET_POPUP_SINGLE_STATE,

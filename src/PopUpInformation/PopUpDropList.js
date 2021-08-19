@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import PopupHeader from '../Molecules/PopUp/PopUpHeader';
@@ -42,23 +42,29 @@ const PopUpDropList = (props) => {
   let errorMessage = isNotRevised ? 'this information cannot be revised' : '';
   const [state, setState] = useState({ isError: errorMessage });
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const [localObject, setLocalObject] = useState(basicInfo);
+  useEffect(() => {
+    setLocalObject(basicInfo);
+  }, [basicInfo]);
   // handling the onchange event
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log('name, value',name, value);
     if (!isNotRevised) {
       setState((prevState) => ({
         ...prevState,
         [name]: value,
         isError: ''
       }));
-      dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+      // dispatch({ type: typeOfSetObject, payload: { ...basicInfo, [name]: value } });
+      setLocalObject({ ...localObject, [name]: value });
     }
   };
   //this function for validate
   const validate = () => {
     let isValidate = true;
     if (isRequired) {
-      if (basicInfo[tag] === '') {
+      if (localObject[tag] === '') {
         setState((prevState) => ({ ...prevState, isError: REQUIRED_ERROR_MESSAGE }));
         isValidate = false;
       }
@@ -70,6 +76,7 @@ const PopUpDropList = (props) => {
   //end
 
   const handleClick = () => {
+    dispatch({ type: typeOfSetObject, payload: { ...localObject } });
     if (validate()) {
       //according to creation mode popup sequence will change
       if (popupMode === 'ASSESSEE_CREATE') {
@@ -127,7 +134,7 @@ const PopUpDropList = (props) => {
               listSelect={listSelect}
               errorMsg={state.isError}
               onChange={handleChange}
-              value={isNotRevised ? basicInfo : basicInfo && basicInfo[tag]}
+              value={isNotRevised ? localObject : localObject && localObject[tag]}
               mappingValue={mappingValue}
               labelBadgeOne={labelBadgeOne}
             />

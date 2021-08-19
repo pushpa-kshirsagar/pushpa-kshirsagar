@@ -112,8 +112,6 @@ const PopUpItemConfig = (props) => {
       let originobj = [];
       let origin = itemFrameworkOne.itemFrameworkOneSection.length;
       let add = sub_item - origin;
-      // let newObjToPush = ;
-      alert(add);
       if (add > 0) {
         for (let i = 1; i <= add; i++) {
           originobj.push({
@@ -171,7 +169,8 @@ const PopUpItemConfig = (props) => {
             value: [...itemFrameworkOne.itemFrameworkOneSection, ...originobj]
           }
         });
-      } else {
+      }
+      if (add < 0) {
         let org = [...itemFrameworkOne.itemFrameworkOneSection];
         originobj = org.slice(0, add);
         dispatch({
@@ -182,8 +181,6 @@ const PopUpItemConfig = (props) => {
           }
         });
       }
-
-     
     }
     if (response_Choice > itemFrameworkOneResponseChoice.length) {
       let originobj = [...itemFrameworkOneResponseChoice];

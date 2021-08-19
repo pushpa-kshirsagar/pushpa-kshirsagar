@@ -25,7 +25,9 @@ import {
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
   SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
   SET_SINGLE_ASSOCIATE_INFORMATION,
-  SET_BRAND_LOGO_TYPE
+  SET_BRAND_LOGO_TYPE,
+  UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -405,20 +407,36 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         ...istate,
         informationBasic: action.payload
       };
-    case UPDATE_ASSOCIATE_SETUP_INFO:
-      return {
-        ...istate,
-        informationSetup: {
-          ...istate.informationSetup,
-          associate: action.payload
-        }
-      };
     case UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO:
       return {
         ...istate,
         informationSetup: {
           ...istate.informationSetup,
           assessee: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO:
+      return {
+        ...istate,
+        informationSetup: {
+          ...istate.informationSetup,
+          assessment: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO:
+      return {
+        ...istate,
+        informationSetup: {
+          ...istate.informationSetup,
+          assignment: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_SETUP_INFO:
+      return {
+        ...istate,
+        informationSetup: {
+          ...istate.informationSetup,
+          associate: action.payload
         }
       };
     case SET_ASSOCIATE_INFORMATION:

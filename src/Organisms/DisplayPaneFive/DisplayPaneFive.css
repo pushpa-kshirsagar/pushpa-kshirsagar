@@ -80,7 +80,7 @@
   font-size: 1.6rem;
   height: 50px;
   padding: 0px 5px;
-  overflow: overlay;
+  /* overflow: overlay; */
   color: rgba(0, 0, 0, 0.87);
 }
 

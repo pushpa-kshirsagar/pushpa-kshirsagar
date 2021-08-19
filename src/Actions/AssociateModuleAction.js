@@ -33,9 +33,18 @@ import {
   ASSOCIATE_SETUP_SAGA,
   ASSOCIATE_ANALYTIC_SETUP_SAGA,
   ASSOCIATE_ITEM_SETUP_SAGA,
-  ASSOCIATE_ASSESSMENT_SETUP_SAGA
+  ASSOCIATE_ASSESSMENT_SETUP_SAGA,
+  ASSOCIATE_ASSESSESS_SETUP_SAGA,
+  ASSOCIATE_ASSIGNMENT_SETUP_SAGA
 } from '../actionType';
-import { ANALYTIC_SETUP, ASS0CIATE_SETUP_1, ITEM_SETUP, ASSESSMENTS_SETUP } from '../endpoints';
+import {
+  ANALYTIC_SETUP_URL,
+  ASS0CIATE_SETUP_URL,
+  ITEM_SETUP_URL,
+  ASSESSMENTS_SETUP_URL,
+  ASSESSEES_SETUP_URL,
+  ASSIGNMENT_SETUP_URL
+} from '../endpoints';
 import {
   getAssociateTypeAssociateReqObj,
   getAssociateTypeAssociateScanReqObj,
@@ -1089,20 +1098,29 @@ export const AssociateSetUpApiCalls = (selectedAssociateInfo, associateId, dispa
       }
     ]
   };
+
   dispatch({
-    type: ASSOCIATE_SETUP_SAGA,
-    payload: { reqBody: reqBody, reqUrl: ASS0CIATE_SETUP_1 }
-  });
-  dispatch({
-    type: ASSOCIATE_ANALYTIC_SETUP_SAGA,
-    payload: { reqBody: reqBody, reqUrl: ANALYTIC_SETUP }
-  });
-  dispatch({
-    type: ASSOCIATE_ITEM_SETUP_SAGA,
-    payload: { reqBody: reqBody, reqUrl: ITEM_SETUP }
+    type: ASSOCIATE_ASSESSESS_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ASSESSEES_SETUP_URL }
   });
   dispatch({
     type: ASSOCIATE_ASSESSMENT_SETUP_SAGA,
-    payload: { reqBody: reqBody, reqUrl: ASSESSMENTS_SETUP }
+    payload: { reqBody: reqBody, reqUrl: ASSESSMENTS_SETUP_URL }
+  });
+  dispatch({
+    type: ASSOCIATE_ASSIGNMENT_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ASSIGNMENT_SETUP_URL }
+  });
+  dispatch({
+    type: ASSOCIATE_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ASS0CIATE_SETUP_URL }
+  });
+  dispatch({
+    type: ASSOCIATE_ANALYTIC_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ANALYTIC_SETUP_URL }
+  });
+  dispatch({
+    type: ASSOCIATE_ITEM_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: ITEM_SETUP_URL }
   });
 };

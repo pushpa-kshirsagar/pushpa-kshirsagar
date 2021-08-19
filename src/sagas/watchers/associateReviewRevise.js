@@ -1,5 +1,5 @@
 import { yellow } from '@material-ui/core/colors';
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, takeEvery } from 'redux-saga/effects';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
@@ -16,7 +16,10 @@ import {
   ASSOCIATE_SETUP_SAGA,
   ASSOCIATE_ITEM_SETUP_SAGA,
   ASSOCIATE_ANALYTIC_SETUP_SAGA,
-  ASSOCIATE_ASSESSMENT_SETUP_SAGA
+  ASSOCIATE_ASSESSMENT_SETUP_SAGA,
+  ASSOCIATE_ASSESSESS_SETUP_SAGA,
+  ASSOCIATE_ASSIGNMENT_SETUP_SAGA,
+  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO
 } from '../../actionType';
 import {
   ASS0CIATE_SETUP_1,
@@ -248,12 +251,58 @@ function* workerAssociateAssessmentSetUpSaga(data) {
     });
   }
 }
+function* workerAssociateAssesseeSetUpSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: data.payload.reqUrl
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'assesseeSetUpModule', value: response.responseObject[0] }
+      });
+      yield put({
+        type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+        payload: response.responseObject[0]
+      });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
+function* workerAssociateAssignmentSetUpSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: data.payload.reqUrl
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'assignmentSetUpModule', value: response.responseObject }
+      });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
 export default function* watchReviewInfoAssociateSaga() {
   console.log('IN WATCH ====>');
   yield takeLatest(GET_ASSOCIATE_INFO_SAGA, workerReviewInfoAssociateSaga);
   yield takeLatest(ASSOCIATE_INFO_REVISE_SAGA, workerReviseInfoAssociateSaga);
+  yield takeLatest(ASSOCIATE_ASSESSESS_SETUP_SAGA, workerAssociateAssesseeSetUpSaga);
+  yield takeLatest(ASSOCIATE_ASSESSMENT_SETUP_SAGA, workerAssociateAssessmentSetUpSaga);
+  yield takeLatest(ASSOCIATE_ASSIGNMENT_SETUP_SAGA, workerAssociateAssignmentSetUpSaga);
   yield takeLatest(ASSOCIATE_SETUP_SAGA, workerAssociateSetUpSaga);
   yield takeLatest(ASSOCIATE_ANALYTIC_SETUP_SAGA, workerAssociateAnalyticSetUpSaga);
   yield takeLatest(ASSOCIATE_ITEM_SETUP_SAGA, workerAssociateItemSetUpSaga);
-  yield takeLatest(ASSOCIATE_ASSESSMENT_SETUP_SAGA, workerAssociateAssessmentSetUpSaga);
 }
