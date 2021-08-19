@@ -194,6 +194,7 @@ const PopUpItemFramework = (props) => {
                 label={'classification'}
                 dataValue={'classification'}
                 listSelect={[
+                  { id: '', name: '' },
                   { id: 'Simple-Sample1', name: 'Simple Sample' },
                   { id: 'Simple-Sample2', name: 'Simple Sample' },
                   { id: 'Simple-Sample3', name: 'Simple Sample' }
@@ -212,6 +213,7 @@ const PopUpItemFramework = (props) => {
                 label={'level'}
                 dataValue={'level'}
                 listSelect={[
+                  { id: '', name: '' },
                   { id: 'High-Level', name: 'High-Level' },
                   { id: 'Low-Level', name: 'Low-Level' },
                   { id: 'Mid-Level', name: 'Mid-Level' }
@@ -229,8 +231,9 @@ const PopUpItemFramework = (props) => {
               label={'polarity'}
               dataValue={'polarity'}
               listSelect={[
-                { id: 'negativel', name: 'Negative' },
-                { id: 'positive', name: 'Positive' }
+                { id: '', name: '' },
+                { id: 'Negative', name: 'Negative' },
+                { id: 'Positive', name: 'Positive' }
               ]}
               errorMsg={() => {}}
               onChange={(e) => {
@@ -245,6 +248,7 @@ const PopUpItemFramework = (props) => {
                 label={'scale'}
                 dataValue={'scale'}
                 listSelect={[
+                  { id: '', name: '' },
                   { id: 'Simple-Sample1', name: 'Simple Sample' },
                   { id: 'Simple-Sample2', name: 'Simple Sample' },
                   { id: 'Simple-Sample3', name: 'Simple Sample' }

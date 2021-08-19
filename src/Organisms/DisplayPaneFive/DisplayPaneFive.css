@@ -127,3 +127,6 @@
   display: flex;
   align-items: center;
 }
+.likert-choice-font{
+  font-size: 1rem;
+}

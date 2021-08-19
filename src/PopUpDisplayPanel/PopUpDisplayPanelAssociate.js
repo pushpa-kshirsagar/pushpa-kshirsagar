@@ -1429,6 +1429,7 @@ const PopUpDisplayPanelAssociate = (props) => {
                   label={'location'}
                   // dataValue={'location'}
                   listSelect={[
+                    { id: '', name: '' },
                     { id: 'device', name: 'device' },
                     { id: 'google', name: 'google' },
                     { id: 'microsoft', name: 'microsoft' }

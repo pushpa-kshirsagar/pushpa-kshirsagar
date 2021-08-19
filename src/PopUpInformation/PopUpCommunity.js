@@ -78,6 +78,7 @@ const PopUpCommunity = (props) => {
               label={'country / region'}
               dataValue={'country'}
               listSelect={[
+                { countryCode: '', name: '' },
                 { countryCode: '91', name: 'India' },
                 { countryCode: '22', name: 'USA' }
               ]}
@@ -89,6 +90,7 @@ const PopUpCommunity = (props) => {
               tag={objectKeys[1]}
               label={`${primaryheader} community`}
               listSelect={[
+                { stateCode: '', name: '' },
                 { stateCode: '01', name: 'Other Backward Class' },
                 { stateCode: '02', name: 'Scheduled Class' },
                 { stateCode: '03', name: 'Scheduled Tribe' },

@@ -139,6 +139,7 @@ const PopUpTelephone = (props) => {
               tag={objectKeys[0]}
               label={'country / region'}
               listSelect={[
+                { countryCode: '', name: '' },
                 { countryCode: '91', name: 'India' },
                 { countryCode: '22', name: 'USA' }
               ]}
@@ -154,6 +155,7 @@ const PopUpTelephone = (props) => {
                   tag={objectKeys[1]}
                   label={'area / city'}
                   listSelect={[
+                    { cityCode: '', name: '' },
                     { cityCode: '345', name: 'Mumbai' },
                     { cityCode: '385', name: 'Pune' }
                   ]}

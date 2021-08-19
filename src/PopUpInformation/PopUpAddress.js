@@ -142,6 +142,7 @@ const PopUpAddress = (props) => {
               label={'country / region'}
               dataValue={'country'}
               listSelect={[
+                { countryCode: '', name: '' },
                 { countryCode: '91', name: 'India' },
                 { countryCode: '22', name: 'USA' }
               ]}
@@ -154,6 +155,7 @@ const PopUpAddress = (props) => {
               tag={objectKeys[1]}
               label={'province / state'}
               listSelect={[
+                { stateCode: '', name: '' },
                 { stateCode: '211', name: 'Maharashtra' },
                 { stateCode: '234', name: 'Karnataka' }
               ]}
@@ -174,6 +176,7 @@ const PopUpAddress = (props) => {
               tag={objectKeys[3]}
               label={'city'}
               listSelect={[
+                { cityCode: '', name: '' },
                 { cityCode: '345', name: 'Mumbai' },
                 { cityCode: '356', name: 'Pune' }
               ]}

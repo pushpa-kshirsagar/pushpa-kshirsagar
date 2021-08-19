@@ -125,7 +125,33 @@ const initialState = {
             itemFrameworkOneSection: {
               itemFrameworkOneMedia: '',
               itemFrameworkOneScore: 1,
-              itemFrameworkOneType: ''
+              itemFrameworkOneType: '',
+              itemFrameworkOneResponseChoice: [
+                {
+                  itemFrameworkOneResponseChoice: '1',
+                  itemFrameworkOneResponseChoiceColumnMatch: '',
+                  itemFrameworkOneResponseChoiceExplanation: {
+                    itemFrameworkOneResponseChoiceExplanation: '',
+                    itemFrameworkOneResponseChoiceExplanationDisplay: false
+                  }, //responseChoiceDescription,
+                  itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+                  itemFrameworkOneResponseChoiceWeightage: '',
+                  itemFrameworkOneResponseChoiceScore: '',
+                  itemFrameworkOneResponseChoicePolarity: ''
+                },
+                {
+                  itemFrameworkOneResponseChoice: '2',
+                  itemFrameworkOneResponseChoiceColumnMatch: '',
+                  itemFrameworkOneResponseChoiceExplanation: {
+                    itemFrameworkOneResponseChoiceExplanation: '',
+                    itemFrameworkOneResponseChoiceExplanationDisplay: false
+                  }, //responseChoiceDescription,
+                  itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+                  itemFrameworkOneResponseChoiceWeightage: '',
+                  itemFrameworkOneResponseChoiceScore: '',
+                  itemFrameworkOneResponseChoicePolarity: ''
+                }
+              ]
             }
           }
         ],

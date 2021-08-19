@@ -805,6 +805,7 @@ const PopUpAssesseeCreateSignOn = (props) => {
         tag={'assesseeGender'}
         label={'gender'}
         listSelect={[
+          { id: '', name: '' },
           { id: 'Female', name: 'Female' },
           { id: 'Male', name: 'Male' },
           { id: 'Unlisted', name: 'Unlisted' }

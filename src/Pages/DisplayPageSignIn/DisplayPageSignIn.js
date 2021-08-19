@@ -409,7 +409,7 @@ const DisplayPageSignIn = () => {
                     <SelectField
                       tag={'assesseeSignInInformation'}
                       label={'forgotten'}
-                      listSelect={['credential', 'password']}
+                      listSelect={['','credential', 'password']}
                       errorMsg={credentialOptionError}
                       onChange={(e) => {
                         setCredentialOption(e.target.value);
