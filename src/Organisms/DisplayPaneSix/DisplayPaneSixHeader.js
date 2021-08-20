@@ -83,7 +83,7 @@ const DisplayPaneSixHeader = (props) => {
           </Grid>
         </div>
       ) : (
-        <div className={'iguru-leftpanel'} style={{ width: '100%' }}>
+        <div className={'iguru-leftpanel'} style={{ width: '81%' }}>
           <Grid
             item
             xs={12}

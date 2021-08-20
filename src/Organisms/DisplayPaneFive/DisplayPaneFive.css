@@ -119,3 +119,7 @@
 input[type="radio"]{
   margin: 0px !important;
 }
+
+.innerpadding{
+  padding: 2.5px 2.5px;
+}

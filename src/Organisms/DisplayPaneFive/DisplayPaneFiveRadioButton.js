@@ -890,7 +890,7 @@ const DisplayPaneFiveRadioButton = (props) => {
   console.log('itemFrameworkOne', itemFrameworkOne);
   return (
     <>
-      <div>
+      <div className="innerpadding">
         {/* for label */}
         {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' ||
           reviewMode === 'revise') && (
@@ -919,7 +919,8 @@ const DisplayPaneFiveRadioButton = (props) => {
           </div>
         )}
       </div>
-      <div>
+
+      <div  className="innerpadding">
         {/* for media item */}
         {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
           <div
@@ -945,7 +946,8 @@ const DisplayPaneFiveRadioButton = (props) => {
           </div>
         )}
       </div>
-      <div>
+
+      <div  className="innerpadding">
         {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
           reviewMode === 'revise') && (
           <div
@@ -976,7 +978,7 @@ const DisplayPaneFiveRadioButton = (props) => {
       </div>
 
       {/* for response label */}
-      <div>
+      <div  className="innerpadding">
         {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
           reviewMode === 'revise') && (
           <div
@@ -1010,7 +1012,8 @@ const DisplayPaneFiveRadioButton = (props) => {
       {(itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
         itemType === 'Master-Framework') && (
-        <div className="relabel">
+        <div className="innerpadding">
+          <div className="relabel">
           {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
             <p>
               <div
@@ -1037,6 +1040,7 @@ const DisplayPaneFiveRadioButton = (props) => {
             </p>
           )}
         </div>
+      </div>
       )}
 
       {/* for response choice
@@ -1341,7 +1345,7 @@ const DisplayPaneFiveRadioButton = (props) => {
       )}
 
       {/* for response explanation */}
-      <div>
+      <div className="innerpadding">
         {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
           ?.itemFrameworkOneResponseExplanation !== '' ||
           reviewMode === 'revise') && (
