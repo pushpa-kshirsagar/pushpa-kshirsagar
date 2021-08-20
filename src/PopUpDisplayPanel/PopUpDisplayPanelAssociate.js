@@ -210,6 +210,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       (clickValue === 'administrators' || clickValue === 'managers') &&
       popupHeaderOne !== 'culture profiles' &&
       popupHeaderOne !== 'profiler' &&
+      popupHeaderOne !== 'items' &&
       popupHeaderOne !== 'job profiles'
     ) {
       revisePopupHeaderOne = clickValue;

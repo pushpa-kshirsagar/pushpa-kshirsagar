@@ -27,7 +27,7 @@ const DisplayPaneFiveRadioButton = (props) => {
     "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
   const responseLabel =
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
-  const response = '<span>response</span> &nbsp ';
+  const response = '<p><span>response</span></p> &nbsp ';
   const itemDescription =
     "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const responseDescription =
@@ -156,8 +156,8 @@ const DisplayPaneFiveRadioButton = (props) => {
   console.log('itemFrameworkOne', itemFrameworkOne);
   return (
     <>
-      <div>
-        {/* for item label */}
+      <div className="innerpadding">
+        {/* for label */}
         {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' ||
           reviewMode === 'revise') && (
           <div
@@ -185,8 +185,9 @@ const DisplayPaneFiveRadioButton = (props) => {
           </div>
         )}
       </div>
-      <div>
-        {/* for item media */}
+
+      <div className="innerpadding">
+        {/* for media item */}
         {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
           <div
             className="ex_container"
@@ -433,10 +434,10 @@ const DisplayPaneFiveRadioButton = (props) => {
         )}
       </div>
 
-      {/* for item explanation */}
-      <div>
-        {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
-          reviewMode === 'revise') && (
+      {/* item explanation */}
+      {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
+        reviewMode === 'revise') && (
+        <div className="innerpadding">
           <div
             className="ex_container"
             style={{
@@ -461,13 +462,13 @@ const DisplayPaneFiveRadioButton = (props) => {
                 itemDescription
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* for response label */}
-      <div>
-        {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
-          reviewMode === 'revise') && (
+      {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
+        reviewMode === 'revise') && (
+        <div className="innerpadding">
           <div
             className="ex_container"
             style={{
@@ -492,16 +493,17 @@ const DisplayPaneFiveRadioButton = (props) => {
                 responseLabel
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* for response */}
       {(itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
         itemType === 'Master-Framework') && (
-        <div className="relabel">
-          {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
-            <p>
+        <div className="innerpadding">
+          <div className="relabel">
+            {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
+              // <p>
               <div
                 className="ex_container"
                 style={{
@@ -523,8 +525,9 @@ const DisplayPaneFiveRadioButton = (props) => {
               >
                 {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponse || response)}
               </div>
-            </p>
-          )}
+              // </p>
+            )}
+          </div>
         </div>
       )}
 
@@ -538,7 +541,7 @@ const DisplayPaneFiveRadioButton = (props) => {
             return (
               <div key={`op-${key}`}>
                 <div className="option-container ex_container" key={`option-${key}`}>
-                  <div style={{paddingRight : '5px'}}>
+                  <div style={{ paddingRight: '5px', display: 'flex', alignItems: 'center' }}>
                     <input
                       type="radio"
                       name="option1"
@@ -548,9 +551,8 @@ const DisplayPaneFiveRadioButton = (props) => {
                   </div>
 
                   <div
-                    
                     style={{
-                      paddingLeft : '5px',
+                      paddingLeft: '5px',
                       cursor: reviewMode === 'revise' ? 'pointer' : ''
                     }}
                     onClick={
@@ -640,30 +642,34 @@ const DisplayPaneFiveRadioButton = (props) => {
                 </div>
 
                 <div>
-                  <div
-                    className="ex_container"
-                    style={{
-                      cursor: reviewMode === 'revise' ? 'pointer' : ''
-                    }}
-                    onClick={
-                      reviewMode === 'revise'
-                        ? () => {
-                            dispatch({
-                              type: SET_POPUP_VALUE,
-                              payload: {
-                                isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
-                                popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
+                  {op.itemFrameworkOneResponseChoiceExplanation
+                    ?.itemFrameworkOneResponseChoiceExplanation !== '' ||
+                    (reviewMode === 'revise' && (
+                      <div
+                        className="ex_container"
+                        style={{
+                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                        }}
+                        onClick={
+                          reviewMode === 'revise'
+                            ? () => {
+                                dispatch({
+                                  type: SET_POPUP_VALUE,
+                                  payload: {
+                                    isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
+                                    popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
+                                  }
+                                });
                               }
-                            });
-                          }
-                        : null
-                    }
-                  >
-                    {ReactHTMLParser(
-                      op.itemFrameworkOneResponseChoiceExplanation
-                        ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
-                    )}
-                  </div>
+                            : null
+                        }
+                      >
+                        {ReactHTMLParser(
+                          op.itemFrameworkOneResponseChoiceExplanation
+                            ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
+                        )}
+                      </div>
+                    ))}
                 </div>
               </div>
             );
@@ -672,7 +678,7 @@ const DisplayPaneFiveRadioButton = (props) => {
       )}
 
       {/* for response explanation */}
-      <div>
+      <div className="innerpadding">
         {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
           ?.itemFrameworkOneResponseExplanation !== '' ||
           reviewMode === 'revise') && (

@@ -77,15 +77,16 @@
 .ex_container {
   font-size: 1.6rem;
   min-height: 50px;
-  padding: 6px 5px;
+  padding: 0px 5px;
+  align-items:center;
   /* overflow: overlay; */
   color: rgba(0, 0, 0, 0.87);
 }
 
 .label {
-  min-height: 50px;
+  height: 50px;
   font-size: 1.6rem;
-  padding: 6px 5px;
+  padding: 0px 5px;
 }
 
 .likartscale {
@@ -109,7 +110,7 @@
 
 .likart .item {
   flex: 3;
-  padding: 0px 2.5px;
+  /* padding: 0px 2.5px; */
   font-size: 1.6rem;
   height: 50px;
   display: flex;
@@ -129,4 +130,12 @@
 }
 input[type='radio'] {
   margin: 0px !important;
+}
+p{
+  margin: 0px;
+  line-height: 15px;
+}
+.innerpadding{
+  padding:2.5px;
+  min-height: 50px;
 }

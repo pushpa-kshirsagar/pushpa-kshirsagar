@@ -182,49 +182,6 @@ const PopUpItemConfig = (props) => {
         });
       }
     }
-    if (response_Choice > itemFrameworkOneResponseChoice.length) {
-      let originobj = [...itemFrameworkOneResponseChoice];
-      let actlen = response_Choice - itemFrameworkOneResponseChoice.length;
-      let choice = itemFrameworkOneResponseChoice.length;
-      for (let i = 0; i < actlen; i++) {
-        originobj.push({
-          itemFrameworkOneResponseChoice: `${choice + i + 1}`,
-          itemFrameworkOneResponseChoiceColumnMatch: '',
-          itemFrameworkOneResponseChoiceExplanation: {
-            itemFrameworkOneResponseChoiceExplanation: '',
-            itemFrameworkOneResponseChoiceExplanationDisplay: false
-          },
-          itemFrameworkOneResponseChoiceMedia: optionLabel,
-          itemFrameworkOneResponseChoiceWeightage: '',
-          itemFrameworkOneResponseChoiceScore: ''
-        });
-      }
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: {
-          stateName: 'itemFrameworkOneResponseChoice',
-          value: originobj
-        }
-      });
-    }
-    // if (sub_item > subItemList?.length) {
-    //   let originobj = [...subItemList];
-    //   let actlen = response_Choice - subItemList.length;
-    //   let choice = subItemList.length;
-    //   if (originobj) {
-    //     for (let i = 0; i < actlen; i++) {
-    //       originobj.push(`item-${choice + i + 1}`);
-    //       setSubItem(originobj);
-    //     }
-    //   }
-    // }
-    // if (sub_item < subItemList?.length && sub_item !== 0) {
-    //   let originobj = [...subItemList];
-    //   let actlen = subItemList?.length - sub_item;
-    //   let arr = itemFrameworkOne?.subItemList;
-    //   let newarr = arr.slice(0, -actlen);
-    //   setSubItem(newarr);
-    // }
     if (item_Type) {
       let choicelength = 3;
       let newArr = [];
@@ -247,14 +204,62 @@ const PopUpItemConfig = (props) => {
         };
         newArr.push(ob);
       }
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: {
-          stateName: 'itemFrameworkOneResponseChoice',
-          value: newArr
-        }
-      });
+      // dispatch({
+      //   type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+      //   payload: {
+      //     stateName: 'itemFrameworkOneResponseChoice',
+      //     value: newArr
+      //   }
+      // });
     }
+    if (response_Choice > itemFrameworkOneResponseChoice.length) {
+      // let originobj = [...itemFrameworkOneResponseChoice];
+      let choice = itemFrameworkOneResponseChoice.length;
+      let newbj = [];
+      let actlen = response_Choice - choice;
+      if (actlen > 0) {
+        for (let i = 1; i <= actlen; i++) {
+          newbj.push({
+            itemFrameworkOneResponseChoice: `${choice + i}`,
+            itemFrameworkOneResponseChoiceColumnMatch: '',
+            itemFrameworkOneResponseChoiceExplanation: {
+              itemFrameworkOneResponseChoiceExplanation: '',
+              itemFrameworkOneResponseChoiceExplanationDisplay: false
+            },
+            itemFrameworkOneResponseChoiceMedia: '',
+            itemFrameworkOneResponseChoiceWeightage: '',
+            itemFrameworkOneResponseChoiceScore: ''
+          });
+        }
+        console.log('newbj', newbj);
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneResponseChoice',
+            value: [...itemFrameworkOneResponseChoice, ...newbj]
+          }
+        });
+      }
+    }
+    // if (sub_item > subItemList?.length) {
+    //   let originobj = [...subItemList];
+    //   let actlen = response_Choice - subItemList.length;
+    //   let choice = subItemList.length;
+    //   if (originobj) {
+    //     for (let i = 0; i < actlen; i++) {
+    //       originobj.push(`item-${choice + i + 1}`);
+    //       setSubItem(originobj);
+    //     }
+    //   }
+    // }
+    // if (sub_item < subItemList?.length && sub_item !== 0) {
+    //   let originobj = [...subItemList];
+    //   let actlen = subItemList?.length - sub_item;
+    //   let arr = itemFrameworkOne?.subItemList;
+    //   let newarr = arr.slice(0, -actlen);
+    //   setSubItem(newarr);
+    // }
+    
 
     dispatch({ type: POPUP_CLOSE });
   };

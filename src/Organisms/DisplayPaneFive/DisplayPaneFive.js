@@ -317,6 +317,19 @@ export const DisplayPaneFive = () => {
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
+      if (!itemInformation.informationFramework.itemTypeList) {
+        dispatch({
+          type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary
+            }
+          }
+        });
+      }
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
@@ -450,7 +463,7 @@ export const DisplayPaneFive = () => {
       </div>
       <div className="containerPadding">
         <div className="containerPadding sticky-header">
-          <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
+          <div style={{ height: '49px', padding: '0 5px', display: 'flex' }}>
             <div style={{ flex: '4' }} className="">
               <div
                 className={[
@@ -519,10 +532,7 @@ export const DisplayPaneFive = () => {
             }}
           />
         </div>
-        <div
-          className="containerPadding"
-          style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}
-        >
+        <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
           {typeMode ? (
             <>
               <DisplayPaneFiveRadioButton
