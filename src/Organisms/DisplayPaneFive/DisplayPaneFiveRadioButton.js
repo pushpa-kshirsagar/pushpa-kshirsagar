@@ -746,6 +746,7 @@ import clsx from 'clsx';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import { Checkbox } from '@material-ui/core';
 import { CheckBox } from '@material-ui/icons';
+import Paper from '@material-ui/core/Paper';
 import { label } from 'aws-amplify';
 
 const DisplayPaneFiveRadioButton = (props) => {
@@ -892,6 +893,12 @@ const DisplayPaneFiveRadioButton = (props) => {
     <>
       <div className="innerpadding">
         {/* for label */}
+        <Paper
+          className={[
+            `iguru-assesseescontainer`,
+            `iguru-assesseescontainer`
+          ].join(' ')}
+        >
         {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' ||
           reviewMode === 'revise') && (
           <div
@@ -918,9 +925,16 @@ const DisplayPaneFiveRadioButton = (props) => {
             )}
           </div>
         )}
+        </Paper>
       </div>
 
       <div  className="innerpadding">
+        <Paper
+          className={[
+            `iguru-assesseescontainer`,
+            `iguru-assesseescontainer`
+          ].join(' ')}
+        >
         {/* for media item */}
         {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
           <div
@@ -945,9 +959,16 @@ const DisplayPaneFiveRadioButton = (props) => {
             {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneMedia || itemLabel)}
           </div>
         )}
+        </Paper>
       </div>
 
       <div  className="innerpadding">
+        <Paper
+          className={[
+            `iguru-assesseescontainer`,
+            `iguru-assesseescontainer`
+          ].join(' ')}
+        >
         {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
           reviewMode === 'revise') && (
           <div
@@ -975,10 +996,17 @@ const DisplayPaneFiveRadioButton = (props) => {
             )}
           </div>
         )}
+      </Paper>
       </div>
 
       {/* for response label */}
       <div  className="innerpadding">
+        <Paper
+          className={[
+            `iguru-assesseescontainer`,
+            `iguru-assesseescontainer`
+          ].join(' ')}
+        >
         {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
           reviewMode === 'revise') && (
           <div
@@ -1006,6 +1034,7 @@ const DisplayPaneFiveRadioButton = (props) => {
             )}
           </div>
         )}
+        </Paper>
       </div>
 
       {/* for response */}
@@ -1013,6 +1042,12 @@ const DisplayPaneFiveRadioButton = (props) => {
         itemType === 'Response (Short)' ||
         itemType === 'Master-Framework') && (
         <div className="innerpadding">
+          <Paper
+            className={[
+              `iguru-assesseescontainer`,
+              `iguru-assesseescontainer`
+            ].join(' ')}
+          >
           <div className="relabel">
           {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
             // <p>
@@ -1040,6 +1075,7 @@ const DisplayPaneFiveRadioButton = (props) => {
             // </p>
           )}
         </div>
+        </Paper>
       </div>
       )}
 
@@ -1206,10 +1242,19 @@ const DisplayPaneFiveRadioButton = (props) => {
         itemType === 'Master-Framework' ||
         itemType === 'False-True' ||
         itemType === 'Fill-in-the-Blank (Response-Choice)') && (
+        
         <div className={'likartscale'}>
+          
           {itemFrameworkOneResponseChoice.map((op, key) => {
             return (
               <div key={`op-${key}`}>
+                <Paper
+                  className={[
+                    `iguru-assesseescontainer`,
+                    `iguru-assesseescontainer`
+                  ].join(' ')}
+                >
+                
                 <div className="option-container ex_container" key={`option-${key}`}>
                   <div style={{paddingRight : '5px' , display : 'flex', alignItems : 'center'}}>
                     <input
@@ -1311,8 +1356,15 @@ const DisplayPaneFiveRadioButton = (props) => {
                     }}
                   />
                 </div>
+                </Paper>
 
-                <div>
+                  <Paper
+                    className={[
+                      `iguru-assesseescontainer`,
+                      `iguru-assesseescontainer`
+                    ].join(' ')}
+                  >
+                  
                   <div
                     className="ex_container"
                     style={{
@@ -1337,15 +1389,22 @@ const DisplayPaneFiveRadioButton = (props) => {
                         ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
                     )}
                   </div>
-                </div>
+                </Paper>
               </div>
             );
           })}
+          
         </div>
       )}
 
       {/* for response explanation */}
       <div className="innerpadding">
+        <Paper
+          className={[
+            `iguru-assesseescontainer`,
+            `iguru-assesseescontainer`
+          ].join(' ')}
+        >
         {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
           ?.itemFrameworkOneResponseExplanation !== '' ||
           reviewMode === 'revise') && (
@@ -1374,11 +1433,14 @@ const DisplayPaneFiveRadioButton = (props) => {
             )}
           </div>
         )}
+        </Paper>
       </div>
 
       <div className="likartscale">
         {(itemType === 'Likert-Scale' || itemType === 'Master-Framework') && (
-          <FormControl component="fieldset" style={{ width: '100%' }}>
+
+          <FormControl component="fieldset" style={{ width: '100%' }}>  
+          
             <div className="likart">
               <div class="item"></div>
 
@@ -1395,6 +1457,7 @@ const DisplayPaneFiveRadioButton = (props) => {
               console.log({ ob });
               return (
                 <div className="likart">
+                  
                   <Fragment>
                     <div
                       className="item"
@@ -1537,6 +1600,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                       );
                     })}
                   </Fragment>
+                  
                 </div>
               );
             })}
