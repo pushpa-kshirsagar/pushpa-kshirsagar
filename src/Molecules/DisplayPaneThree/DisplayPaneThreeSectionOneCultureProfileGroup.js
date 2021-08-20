@@ -7,6 +7,16 @@ import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordi
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
 import { SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
+
+//ascendant 
+let ascendantAll = [];
+let ascendantPrimary = [];
+let ascendantSecondary = [];
+//decendent
+let descendantAll = [];
+let descendantPrimary = [];
+let descendantSecondary = [];
 
 const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -18,6 +28,50 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   const allocationList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'group',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: ascendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: ascendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: ascendantSecondary
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: descendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: descendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: descendantSecondary
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true,
+      isMultiList: true
+    },
     {
       id: 'a2',
       labelTextOneOne: 'manager',
@@ -314,6 +368,31 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
+                    <>
+                      {ob.isMultiList ? (
+                        <DisplayPanelAccordianReviewListTwo
+                          onClickReview={null}
+                          onClickRevise={null}
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
+                      ) : (
+                        <DisplayPanelAccordianReviewListOne
+                          onClickRevise={reviseAllocation}
+                          className=""
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
+                      )}
+                    </>
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={reviseAllocation}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  )}
+                  {/* {ob.isListCard ? (
                     <DisplayPanelAccordianReviewListOne
                       onClickRevise={reviseAllocation}
                       className=""
@@ -326,7 +405,7 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
                       accordianObject={ob}
                       mode={reviewMode}
                     />
-                  )}
+                  )} */}
                 </div>
               );
             })}

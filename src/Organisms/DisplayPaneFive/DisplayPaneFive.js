@@ -37,6 +37,7 @@ import DisplayPaneFiveRadioButton from './DisplayPaneFiveRadioButton';
 import DisplayPaneFiveLikertScale from './DisplayPaneFiveLikertScale';
 import Manuscript from '@material-ui/icons/Description';
 import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   root: {
@@ -462,58 +463,60 @@ export const DisplayPaneFive = () => {
           onClickClearInfo={closePreview}
         />
       </div>
+
       <div className="containerPadding">
-        <div className="containerPadding sticky-header">
-          <div style={{ height: '49px', padding: '0 5px', display: 'flex' }}>
-            <div style={{ flex: '4' }} className="">
+        <Paper className={'dossierContainerTop'}>
+          <div className="containerPadding sticky-header">
+            <div style={{ height: '49px', padding: '0 5px', display: 'flex' }}>
+              <div style={{ flex: '4' }} className="">
+                <div
+                  className={[
+                    'midPaneInformation',
+                    data?.itemFrameworkOneTypeDescription ? null : 'aliasmiddle'
+                  ].join(' ')}
+                >
+                  {data?.itemFrameworkOneTypeName}
+                </div>
+                <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+                  {data?.itemFrameworkOneTypeDescription}
+                </div>
+              </div>
               <div
-                className={[
-                  'midPaneInformation',
-                  data?.itemFrameworkOneTypeDescription ? null : 'aliasmiddle'
-                ].join(' ')}
+                style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+                className="flex-center"
               >
-                {data?.itemFrameworkOneTypeName}
+                {!typeMode && (
+                  <>
+                    <p
+                      onClick={() => {
+                        let arr = subItemList;
+                        let newArr = arr.slice(0, -1);
+                        setSubItemList(newArr);
+                      }}
+                      className={'icon-button-option'}
+                    >
+                      -
+                    </p>
+                    <span style={{ fontWeight: 'bold', margin: '0 5px 0 5px' }}>
+                      {' '}
+                      {subItemList.length}
+                    </span>
+                    <p
+                      onClick={() => {
+                        setSubItemList([...subItemList, `item-${subItemList.length + 1}`]);
+                      }}
+                      className={'icon-button-option'}
+                    >
+                      +
+                    </p>
+                  </>
+                )}
               </div>
-              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
-                {data?.itemFrameworkOneTypeDescription}
-              </div>
-            </div>
-            <div
-              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
-              className="flex-center"
-            >
-              {!typeMode && (
-                <>
-                  <p
-                    onClick={() => {
-                      let arr = subItemList;
-                      let newArr = arr.slice(0, -1);
-                      setSubItemList(newArr);
-                    }}
-                    className={'icon-button-option'}
-                  >
-                    -
-                  </p>
-                  <span style={{ fontWeight: 'bold', margin: '0 5px 0 5px' }}>
-                    {' '}
-                    {subItemList.length}
-                  </span>
-                  <p
-                    onClick={() => {
-                      setSubItemList([...subItemList, `item-${subItemList.length + 1}`]);
-                    }}
-                    className={'icon-button-option'}
-                  >
-                    +
-                  </p>
-                </>
-              )}
-            </div>
-            <div
-              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
-              className="flex-center"
-            >
-              {/* <IconButton
+              <div
+                style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+                className="flex-center"
+              >
+                {/* <IconButton
                   onClick={async () => {
                     setTypeMode((st) => !st);
                   }}
@@ -521,9 +524,9 @@ export const DisplayPaneFive = () => {
                 >
                   <Manuscript className={''} />
                 </IconButton> */}
+              </div>
             </div>
-          </div>
-          <hr
+            {/* <hr
             style={{
               height: '1px',
               margin: '0',
@@ -531,8 +534,9 @@ export const DisplayPaneFive = () => {
               flexShrink: '0',
               backgroundColor: 'rgba(0, 0, 0, 0.12)'
             }}
-          />
-        </div>
+          /> */}
+          </div>
+        </Paper>
         <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
           {typeMode ? (
             <>
@@ -553,6 +557,7 @@ export const DisplayPaneFive = () => {
           )}
         </div>
       </div>
+
       <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}

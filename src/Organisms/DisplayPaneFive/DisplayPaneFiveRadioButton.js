@@ -463,67 +463,78 @@ const DisplayPaneFiveRadioButton = (props) => {
       </div>
 
       {/* for response label */}
-      {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
-        reviewMode === 'revise') && (
-        <div className="innerpadding">
-          <div
-            className="ex_container"
-            style={{
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {ReactHTMLParser(
-              itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel ||
-                responseLabel
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* for response explanation */}
-      <div className="innerpadding">
-        {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-          ?.itemFrameworkOneResponseExplanation !== '' ||
+      {(itemType === 'Response-Choice (Single-Select)' ||
+        itemType === 'Master-Framework' ||
+        itemType === 'False-True' ||
+        itemType === 'Fill-in-the-Blank (Response-Choice)') &&
+        (itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
           reviewMode === 'revise') && (
-          <div
-            className="ex_container"
-            style={{
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
-                        popupMode: 'RESPONSE_DESCRIPTION_TEXT'
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {ReactHTMLParser(
-              itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                ?.itemFrameworkOneResponseExplanation || responseDescription
-            )}
+          <div className="innerpadding">
+            <div
+              className="ex_container"
+              style={{
+                cursor: reviewMode === 'revise' ? 'pointer' : ''
+              }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
+                          popupMode: popupMode
+                        }
+                      });
+                    }
+                  : null
+              }
+            >
+              {ReactHTMLParser(
+                itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel ||
+                  responseLabel
+              )}
+            </div>
           </div>
         )}
-      </div>
+
+      {/* for response explanation */}
+      {(itemType === 'Response-Choice (Single-Select)' ||
+        itemType === 'Master-Framework' ||
+        itemType === 'False-True' ||
+        itemType === 'Response (Long)' ||
+        itemType === 'Response (Short)' ||
+        itemType === 'Fill-in-the-Blank (Response-Choice)') && (
+        <div className="innerpadding">
+          {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
+            ?.itemFrameworkOneResponseExplanation !== '' ||
+            reviewMode === 'revise') && (
+            <div
+              className="ex_container"
+              style={{
+                cursor: reviewMode === 'revise' ? 'pointer' : ''
+              }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
+                          popupMode: 'RESPONSE_DESCRIPTION_TEXT'
+                        }
+                      });
+                    }
+                  : null
+              }
+            >
+              {ReactHTMLParser(
+                itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                  ?.itemFrameworkOneResponseExplanation || responseDescription
+              )}
+            </div>
+          )}
+        </div>
+      )}
       {/* for response */}
       {(itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
@@ -639,6 +650,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                       // });
                     }}
                   />
+
                   <PopUpTextSheet
                     isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
                     headerOne={'response'}

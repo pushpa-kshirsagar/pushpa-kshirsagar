@@ -7,12 +7,23 @@ import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordi
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
 import { ASSESSEE_SIGN_ON, SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 
 const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { informationEngagement } = responseObject;
   const dispatch = useDispatch();
+
+  //ascendant 
+  let ascendantAll = [];
+  let ascendantPrimary = [];
+  let ascendantSecondary = [];
+  //decendent
+  let descendantAll = [];
+  let descendantPrimary = [];
+  let descendantSecondary = [];
+
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -88,6 +99,50 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
     }
   ];
   const allocationList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'group',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: ascendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: ascendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: ascendantSecondary
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: descendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: descendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: descendantSecondary
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true,
+      isMultiList: true
+    },
     {
       id: 'a2',
       labelTextOneOne: 'manager',
@@ -311,12 +366,23 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      onClickRevise={reviseAllocation}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
+                    <>
+                      {ob.isMultiList ? (
+                        <DisplayPanelAccordianReviewListTwo
+                          onClickReview={null}
+                          onClickRevise={null}
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
+                      ) : (
+                        <DisplayPanelAccordianReviewListOne
+                          onClickRevise={reviseAllocation}
+                          className=""
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
+                      )}
+                    </>
                   ) : (
                     <DisplayPanelAccordianInformation
                       onClickRevise={reviseAllocation}
