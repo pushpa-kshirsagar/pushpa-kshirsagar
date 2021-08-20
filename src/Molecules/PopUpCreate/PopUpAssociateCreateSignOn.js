@@ -246,7 +246,7 @@ const PopUpSignOnAssociate = () => {
     });
   };
   console.log('INFO+++++', coreNodeReviewListData);
-  alert(isPopUpValue)
+  alert(isPopUpValue);
   return (
     <div>
       <PopUpTextField
@@ -1800,13 +1800,22 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFOTYPEPOPUP'}
-        tag={'associateTypeNameUnique'}
+        tag={
+          !associateInfo?.informationSetup?.associate.associateTypeNameUnique &&
+          !associateInfo?.informationSetup?.associate.associateNameDescriptionUnique
+            ? 'N&D'
+            : associateInfo?.informationSetup?.associate.associateTypeNameUnique
+            ? 'N'
+            : associateInfo?.informationSetup?.associate.associateNameDescriptionUnique
+            ? 'N+D'
+            : ''
+        }
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'a', name: 'Unique Name & Description Not Rquired' },
-          { id: 'b', name: 'Unique Name + Description Required' },
-          { id: 'c', name: 'Unique Name Required' }
+          { id: 'N&D', name: 'Unique Name & Description Not Rquired' },
+          { id: 'N+D', name: 'Unique Name + Description Required' },
+          { id: 'N', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}

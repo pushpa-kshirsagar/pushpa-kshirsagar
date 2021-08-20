@@ -245,7 +245,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                                 type: SET_POPUP_VALUE,
                                 payload: {
                                   isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
-                                  popupMode: `ITEM_MEDIA_TEXT_${keys}`
+                                  popupMode: `LIKERT_ITEM_MEDIA_TEXT_${keys}`
                                 }
                               });
                             }
@@ -258,7 +258,37 @@ const DisplayPaneFiveRadioButton = (props) => {
                           : '<span>item</span>-' + `${keys + 1}`
                       )}
                     </div>
-
+                    <PopUpTextSheet
+                      isActive={isPopUpValue === `LIKERT_ITEM_MEDIA_TEXT_${keys}`}
+                      headerOne={'item'}
+                      headerPanelColour={'genericOne'}
+                      // headerOneBadgeOne={'media'}
+                      headerOneBadgeTwo={''}
+                      basicInfo={{}}
+                      typeOfSetObject={''}
+                      defaultSheetValue={ob.itemFrameworkOneSection?.itemFrameworkOneMedia || ''}
+                      actualLableValue={''}
+                      mode={'revise'}
+                      onClickSave={(innerText) => {
+                        // setInnerContent(innerText);
+                        let opArr = itemFrameworkOne.itemFrameworkOneSection;
+                        opArr.forEach((element) => {
+                          if (
+                            element.itemFrameworkOneSectionSequence ===
+                            ob.itemFrameworkOneSectionSequence
+                          ) {
+                            element.itemFrameworkOneSection.itemFrameworkOneMedia = innerText;
+                          }
+                        });
+                        dispatch({
+                          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                          payload: {
+                            stateName: 'itemFrameworkOneSection',
+                            value: opArr
+                          }
+                        });
+                      }}
+                    />
                     {ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice &&
                       ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice.map((opt, key) => {
                         return (
@@ -316,40 +346,6 @@ const DisplayPaneFiveRadioButton = (props) => {
                                 }
                               ></div>
                             </div>
-
-                            <PopUpTextSheet
-                              isActive={isPopUpValue === `ITEM_MEDIA_TEXT_${keys}`}
-                              headerOne={'item'}
-                              headerPanelColour={'genericOne'}
-                              // headerOneBadgeOne={'media'}
-                              headerOneBadgeTwo={''}
-                              basicInfo={{}}
-                              typeOfSetObject={''}
-                              defaultSheetValue={
-                                ob.itemFrameworkOneSection?.itemFrameworkOneMedia || ''
-                              }
-                              actualLableValue={''}
-                              mode={'revise'}
-                              onClickSave={(innerText) => {
-                                // setInnerContent(innerText);
-                                let opArr = itemFrameworkOne.itemFrameworkOneSection;
-                                opArr.forEach((element) => {
-                                  if (
-                                    element.itemFrameworkOneSectionSequence ===
-                                    ob.itemFrameworkOneSectionSequence
-                                  ) {
-                                    element.itemFrameworkOneSection.itemFrameworkOneMedia = innerText;
-                                  }
-                                });
-                                dispatch({
-                                  type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                                  payload: {
-                                    stateName: 'itemFrameworkOneSection',
-                                    value: opArr
-                                  }
-                                });
-                              }}
-                            />
                             <PopUpTextSheet
                               isActive={isPopUpValue === `OPTION_LIKRT_${keys}_${key}`}
                               headerOne={'response'}
@@ -642,34 +638,34 @@ const DisplayPaneFiveRadioButton = (props) => {
                 </div>
 
                 <div>
-                  {op.itemFrameworkOneResponseChoiceExplanation
+                  {(op.itemFrameworkOneResponseChoiceExplanation
                     ?.itemFrameworkOneResponseChoiceExplanation !== '' ||
-                    (reviewMode === 'revise' && (
-                      <div
-                        className="ex_container"
-                        style={{
-                          cursor: reviewMode === 'revise' ? 'pointer' : ''
-                        }}
-                        onClick={
-                          reviewMode === 'revise'
-                            ? () => {
-                                dispatch({
-                                  type: SET_POPUP_VALUE,
-                                  payload: {
-                                    isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
-                                    popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
-                                  }
-                                });
-                              }
-                            : null
-                        }
-                      >
-                        {ReactHTMLParser(
-                          op.itemFrameworkOneResponseChoiceExplanation
-                            ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
-                        )}
-                      </div>
-                    ))}
+                    reviewMode === 'revise') && (
+                    <div
+                      className="ex_container"
+                      style={{
+                        cursor: reviewMode === 'revise' ? 'pointer' : ''
+                      }}
+                      onClick={
+                        reviewMode === 'revise'
+                          ? () => {
+                              dispatch({
+                                type: SET_POPUP_VALUE,
+                                payload: {
+                                  isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
+                                  popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
+                                }
+                              });
+                            }
+                          : null
+                      }
+                    >
+                      {ReactHTMLParser(
+                        op.itemFrameworkOneResponseChoiceExplanation
+                          ?.itemFrameworkOneResponseChoiceExplanation || responseChoiceDescription
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             );
