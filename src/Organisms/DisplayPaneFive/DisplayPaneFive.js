@@ -450,7 +450,7 @@ export const DisplayPaneFive = () => {
       </div>
       <div className="containerPadding">
         <div className="containerPadding sticky-header">
-          <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
+          <div style={{ height: '49px', padding: '0 5px', display: 'flex' }}>
             <div style={{ flex: '4' }} className="">
               <div
                 className={[

@@ -762,7 +762,7 @@ const DisplayPaneFiveRadioButton = (props) => {
     "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
   const responseLabel =
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
-  const response = '<span>response</span> &nbsp ';
+  const response = '<p><span>response</span></p> &nbsp ';
   const itemDescription =
     "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const responseDescription =
@@ -1015,7 +1015,7 @@ const DisplayPaneFiveRadioButton = (props) => {
         <div className="innerpadding">
           <div className="relabel">
           {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
-            <p>
+            // <p>
               <div
                 className="ex_container"
                 style={{
@@ -1037,7 +1037,7 @@ const DisplayPaneFiveRadioButton = (props) => {
               >
                 {ReactHTMLParser(itemFrameworkOne?.itemFrameworkOneResponse || response)}
               </div>
-            </p>
+            // </p>
           )}
         </div>
       </div>
@@ -1211,7 +1211,7 @@ const DisplayPaneFiveRadioButton = (props) => {
             return (
               <div key={`op-${key}`}>
                 <div className="option-container ex_container" key={`option-${key}`}>
-                  <div style={{paddingRight : '5px'}}>
+                  <div style={{paddingRight : '5px' , display : 'flex', alignItems : 'center'}}>
                     <input
                       type="radio"
                       name="option1"

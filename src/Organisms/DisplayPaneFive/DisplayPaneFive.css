@@ -77,15 +77,15 @@
 .ex_container {
   font-size: 1.6rem;
   min-height: 50px;
-  padding: 6px 5px;
+  padding: 0px 5px;
   overflow: overlay;
   color: rgba(0, 0, 0, 0.87);
 }
 
 .label {
-  min-height: 50px;
+  height: 50px;
   font-size: 1.6rem;
-  padding: 6px 5px;
+  padding: 0px 5px;
 }
 
 .likartscale {
@@ -121,5 +121,5 @@ input[type="radio"]{
 }
 
 .innerpadding{
-  padding: 2.5px 2.5px;
+  padding:2.5px;
 }
