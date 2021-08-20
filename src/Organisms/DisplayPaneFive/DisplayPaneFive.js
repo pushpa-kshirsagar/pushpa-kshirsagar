@@ -37,6 +37,7 @@ import DisplayPaneFiveRadioButton from './DisplayPaneFiveRadioButton';
 import DisplayPaneFiveLikertScale from './DisplayPaneFiveLikertScale';
 import Manuscript from '@material-ui/icons/Description';
 import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   root: {
@@ -317,6 +318,19 @@ export const DisplayPaneFive = () => {
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
+      if (!itemInformation.informationFramework.itemTypeList) {
+        dispatch({
+          type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary
+            }
+          }
+        });
+      }
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
@@ -448,9 +462,11 @@ export const DisplayPaneFive = () => {
           onClickClearInfo={closePreview}
         />
       </div>
+
       <div className="containerPadding">
+
         <div className="containerPadding sticky-header">
-          <div style={{ height: '48px', padding: '0 5px', display: 'flex' }}>
+          <div style={{ height: '49px', padding: '0 5px', display: 'flex' }}>
             <div style={{ flex: '4' }} className="">
               <div
                 className={[
@@ -519,10 +535,8 @@ export const DisplayPaneFive = () => {
             }}
           />
         </div>
-        <div
-          className="containerPadding"
-          style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}
-        >
+
+        <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
           {typeMode ? (
             <>
               <DisplayPaneFiveRadioButton
@@ -541,7 +555,9 @@ export const DisplayPaneFive = () => {
             </>
           )}
         </div>
+  
       </div>
+      
       <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
@@ -975,6 +991,7 @@ export const DisplayPaneFive = () => {
           secondaryIcon={secondaryIcon}
         />
       )}
+      
     </>
   );
 };
