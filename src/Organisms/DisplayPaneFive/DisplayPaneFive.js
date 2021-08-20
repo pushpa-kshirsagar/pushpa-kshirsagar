@@ -464,7 +464,7 @@ export const DisplayPaneFive = () => {
       </div>
 
       <div className="containerPadding">
-
+        <Paper className={'dossierContainerTop'}>
         <div className="containerPadding sticky-header">
           <div style={{ height: '49px', padding: '0 5px', display: 'flex' }}>
             <div style={{ flex: '4' }} className="">
@@ -525,7 +525,7 @@ export const DisplayPaneFive = () => {
                 </IconButton> */}
             </div>
           </div>
-          <hr
+          {/* <hr
             style={{
               height: '1px',
               margin: '0',
@@ -533,9 +533,9 @@ export const DisplayPaneFive = () => {
               flexShrink: '0',
               backgroundColor: 'rgba(0, 0, 0, 0.12)'
             }}
-          />
+          /> */}
         </div>
-
+        </Paper>
         <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
           {typeMode ? (
             <>
@@ -555,7 +555,7 @@ export const DisplayPaneFive = () => {
             </>
           )}
         </div>
-  
+        
       </div>
       
       <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
