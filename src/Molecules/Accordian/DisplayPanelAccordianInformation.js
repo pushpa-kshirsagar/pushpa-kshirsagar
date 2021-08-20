@@ -88,10 +88,10 @@ const DisplayPanelAccordianInformation = (props) => {
                         </sup>
                       )}
                       {selectedBadgeArray.length > 0 &&
-                        selectedBadgeArray.map((val) => {
+                        selectedBadgeArray.map((val,i) => {
                           return (
                             <sup
-                              key={`badge-sign-in`}
+                              key={`badge-sign-in${i}`}
                               style={{
                                 backgroundColor: '#F2F2F2'
                               }}

@@ -212,6 +212,37 @@ const DisplayPaneFiveRadioButton = (props) => {
           </div>
         )}
       </div>
+      {/* item explanation */}
+      {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
+        reviewMode === 'revise') && (
+        <div className="innerpadding">
+          <div
+            className="ex_container"
+            style={{
+              cursor: reviewMode === 'revise' ? 'pointer' : ''
+            }}
+            onClick={
+              reviewMode === 'revise'
+                ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
+                        popupMode: popupMode
+                      }
+                    });
+                  }
+                : null
+            }
+          >
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation ||
+                itemDescription
+            )}
+          </div>
+        </div>
+      )}
+
       {/* for sub item  */}
       <div className="likartscale">
         {(itemType === 'Likert-Scale' || itemType === 'Master-Framework') && (
@@ -302,6 +333,7 @@ const DisplayPaneFiveRadioButton = (props) => {
                                 type="radio"
                                 name={`option1-${ob.itemFrameworkOneSectionSequence}`}
                                 value={`${keys}-${key}`}
+                                // onChange={handleClick}
                               />
                               <div
                                 className={'likert-choice-font'}
@@ -430,37 +462,6 @@ const DisplayPaneFiveRadioButton = (props) => {
         )}
       </div>
 
-      {/* item explanation */}
-      {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation !== '' ||
-        reviewMode === 'revise') && (
-        <div className="innerpadding">
-          <div
-            className="ex_container"
-            style={{
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {ReactHTMLParser(
-              itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanation ||
-                itemDescription
-            )}
-          </div>
-        </div>
-      )}
-
       {/* for response label */}
       {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
         reviewMode === 'revise') && (
@@ -492,6 +493,37 @@ const DisplayPaneFiveRadioButton = (props) => {
         </div>
       )}
 
+      {/* for response explanation */}
+      <div className="innerpadding">
+        {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
+          ?.itemFrameworkOneResponseExplanation !== '' ||
+          reviewMode === 'revise') && (
+          <div
+            className="ex_container"
+            style={{
+              cursor: reviewMode === 'revise' ? 'pointer' : ''
+            }}
+            onClick={
+              reviewMode === 'revise'
+                ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
+                        popupMode: 'RESPONSE_DESCRIPTION_TEXT'
+                      }
+                    });
+                  }
+                : null
+            }
+          >
+            {ReactHTMLParser(
+              itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                ?.itemFrameworkOneResponseExplanation || responseDescription
+            )}
+          </div>
+        )}
+      </div>
       {/* for response */}
       {(itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
@@ -542,7 +574,12 @@ const DisplayPaneFiveRadioButton = (props) => {
                       type="radio"
                       name="option1"
                       value={`${op.itemFrameworkOneResponseChoice}`}
-                      control={<StyledRadio onClick={handleClick} />}
+                      onChange={handleClick}
+                      checked={
+                        op.itemFrameworkOneResponseChoice ===
+                        itemFrameworkOne.itemFrameworkOneResponseCorrect[0]
+                      }
+                      // control={<StyledRadio onChange={handleClick} />}
                     />
                   </div>
 
@@ -672,38 +709,6 @@ const DisplayPaneFiveRadioButton = (props) => {
           })}
         </div>
       )}
-
-      {/* for response explanation */}
-      <div className="innerpadding">
-        {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-          ?.itemFrameworkOneResponseExplanation !== '' ||
-          reviewMode === 'revise') && (
-          <div
-            className="ex_container"
-            style={{
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
-                        popupMode: 'RESPONSE_DESCRIPTION_TEXT'
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {ReactHTMLParser(
-              itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                ?.itemFrameworkOneResponseExplanation || responseDescription
-            )}
-          </div>
-        )}
-      </div>
 
       <div>
         <div

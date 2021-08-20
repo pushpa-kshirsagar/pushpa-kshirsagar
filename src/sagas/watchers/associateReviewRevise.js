@@ -19,10 +19,16 @@ import {
   ASSOCIATE_ASSESSMENT_SETUP_SAGA,
   ASSOCIATE_ASSESSESS_SETUP_SAGA,
   ASSOCIATE_ASSIGNMENT_SETUP_SAGA,
-  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO
+  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+  UPDATE_ASSOCIATE_INFO,
+  UPDATE_ASSOCIATE_SETUP_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+  ASSOCIATE_ASSESSEESETUP_REVISE_SAGA
 } from '../../actionType';
 import {
   ASS0CIATE_SETUP_1,
+  ASSESSEE_SETUP_REVISE_URL,
   ASSOCIATE_INFO_REVISE_URL,
   ASSOCIATE_REVIEW_INFO_URL
 } from '../../endpoints';
@@ -182,6 +188,10 @@ function* workerAssociateSetUpSaga(data) {
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'setUpAssociateModule', value: response.responseObject[0] }
       });
+      // yield put({
+      //   type: UPDATE_ASSOCIATE_SETUP_INFO,
+      //   payload: response.responseObject[0]
+      // });
     } else {
     }
   } catch (e) {
@@ -242,6 +252,10 @@ function* workerAssociateAssessmentSetUpSaga(data) {
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'assessmentSetUpModule', value: response.responseObject }
       });
+      // yield put({
+      //   type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+      //   payload: response.responseObject[0]
+      // });
     } else {
     }
   } catch (e) {
@@ -262,10 +276,10 @@ function* workerAssociateAssesseeSetUpSaga(data) {
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'assesseeSetUpModule', value: response.responseObject[0] }
       });
-      yield put({
-        type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
-        payload: response.responseObject[0]
-      });
+      // yield put({
+      //   type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+      //   payload: response.responseObject[0]
+      // });
     } else {
     }
   } catch (e) {
@@ -286,6 +300,31 @@ function* workerAssociateAssignmentSetUpSaga(data) {
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'assignmentSetUpModule', value: response.responseObject }
       });
+      // yield put({
+      //   type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+      //   payload: response.responseObject
+      // });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
+function* workerAssociateAssesseeSetUpReviseSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: ASSESSEE_SETUP_REVISE_URL
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+        payload: response.responseObject[0]
+      });
+      yield put({ type: LOADER_STOP });
     } else {
     }
   } catch (e) {
@@ -305,4 +344,5 @@ export default function* watchReviewInfoAssociateSaga() {
   yield takeLatest(ASSOCIATE_SETUP_SAGA, workerAssociateSetUpSaga);
   yield takeLatest(ASSOCIATE_ANALYTIC_SETUP_SAGA, workerAssociateAnalyticSetUpSaga);
   yield takeLatest(ASSOCIATE_ITEM_SETUP_SAGA, workerAssociateItemSetUpSaga);
+  yield takeLatest(ASSOCIATE_ASSESSEESETUP_REVISE_SAGA, workerAssociateAssesseeSetUpReviseSaga);
 }

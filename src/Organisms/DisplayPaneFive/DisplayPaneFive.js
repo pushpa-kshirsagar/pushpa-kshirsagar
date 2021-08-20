@@ -318,6 +318,7 @@ export const DisplayPaneFive = () => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
       if (!itemInformation.informationFramework.itemTypeList) {
+        dispatch({ type: LOADER_START });
         dispatch({
           type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
           payload: {

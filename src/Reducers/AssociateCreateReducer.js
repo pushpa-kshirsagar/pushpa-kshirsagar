@@ -123,23 +123,10 @@ const initialState = {
     }
   },
   informationSetup: {
-    assessee: {
-      assesseeNameFormat: '',
-      assesseeRoleCreate: false,
-      assesseeRoleShare: false,
-      assesseeRoleShared: true
-    },
+    assessee: null,
     assessment: null,
     assignment: null,
-    associate: {
-      associateDateFormat: '',
-      associateDictionary: '',
-      associateLanguage: '',
-      associateRoleCreate: false,
-      associateRoleShare: false,
-      associateRoleShared: true,
-      associateTimeFormat: ''
-    }
+    associate: null
   },
   informationFramework: {
     associateAscendant: {

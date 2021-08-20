@@ -14,6 +14,7 @@ import {
   ASSESSEE_SIGN_ON,
   ASSOCIATE_INFO_REVISE_SAGA,
   ASSOCIATE_SIGN_ON,
+  ASSOCIATE_ASSESSEESETUP_REVISE_SAGA,
   CLEAR_ASSESSMENT_INFO,
   CLEAR_ASSIGNMENT_INFO,
   CLEAR_DISPLAY_PANE_THREE,
@@ -1645,12 +1646,23 @@ export const DisplayPaneThree = () => {
           }
         }
       };
-      console.log(JSON.stringify(reqBody));
+      // console.log(JSON.stringify(reqBody));
       dispatch({ type: LOADER_START });
       dispatch({
         type: ASSOCIATE_INFO_REVISE_SAGA,
         payload: { secondaryOptionCheckValue: headerOneBadgeTwo, headerOne: 'associate', reqBody }
       });
+      if (informationSetup.assessee) {
+        let setupObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId: id,
+          assesseeAssociateSetup: informationSetup.assessee
+        };
+        dispatch({
+          type: ASSOCIATE_ASSESSEESETUP_REVISE_SAGA,
+          payload: { reqBody: setupObj }
+        });
+      }
     } else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
     }

@@ -21,6 +21,7 @@ const PopUpDropList = (props) => {
     headerOne,
     headerOneBadgeOne,
     headerOneBadgeTwo,
+    inputHeaderBadgeThree = null,
     listSelect,
     isRequired = false,
     basicInfo,
@@ -49,7 +50,7 @@ const PopUpDropList = (props) => {
   // handling the onchange event
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log('name, value',name, value);
+    console.log('name, value', name, value);
     if (!isNotRevised) {
       setState((prevState) => ({
         ...prevState,
@@ -119,6 +120,10 @@ const PopUpDropList = (props) => {
                     &nbsp;
                     {inputHeaderBadgeTwo ? (
                       <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
+                    ) : null}
+                    &nbsp;
+                    {inputHeaderBadgeThree ? (
+                      <span className={'headerBadge'}>{inputHeaderBadgeThree}</span>
                     ) : null}
                   </>
                 </InputLabel>

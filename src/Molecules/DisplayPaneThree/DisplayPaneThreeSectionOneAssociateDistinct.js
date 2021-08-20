@@ -6,7 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import { ASSOCIATE_SIGN_ON, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import {
+  ASSOCIATE_SIGN_ON,
+  SET_STATUS_POPUP_VALUE,
+  UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+  UPDATE_ASSOCIATE_SETUP_INFO
+} from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
@@ -671,7 +678,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'approval',
-                  innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreateApproval ? 'Yes' : 'No'
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreateApproval
+                    ? 'Yes'
+                    : 'No'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -679,7 +688,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 },
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreatePermission
+                    ? 'Yes'
+                    : 'No'
                 }
               ]
             },
@@ -706,7 +717,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupCreatePermission
+                    ? 'Yes'
+                    : 'No'
                 }
               ]
             },
@@ -715,7 +728,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupNameUnique ? 'Yes' : 'No'
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupNameUnique
+                    ? 'Yes'
+                    : 'No'
                 }
               ]
             },
@@ -733,7 +748,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: assignmentSetUpModule?.assignmentTypeCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentTypeCreatePermission
+                    ? 'Yes'
+                    : 'No'
                 }
               ]
             },
@@ -742,7 +759,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: assignmentSetUpModule?.assignmentTypeNameUnique ? 'Yes' : 'No'
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentTypeNameUnique
+                    ? 'Yes'
+                    : 'No'
                 }
               ]
             },
@@ -1506,629 +1525,519 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       });
     }
     console.log(badgeName);
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'approval'
-    ) {
+    if (labelName === 'assessees') {
       dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSEECREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+        payload: assesseeSetUpModule
       });
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEECREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEECREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEECREATEPERMISSIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEEINFODISTINCTBASICPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctinformation' && selectedBadgeName === 'name') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'PEOPLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinct' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEE_DIST_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctsign-on' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEE_SIGNON_APPROVAL_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctsign-on' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSEE_SIGNON_PERMISSION_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'group' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEE_GROUP_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'type' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEE_TYPE_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'role' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEE_ROLE_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'groupcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSEEGROUPCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEEBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'rolecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSEEROLECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'roleinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEEBASICINFOROLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'typecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSEETYPECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'typeinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEEBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'fee'
-    ) {
+    if (labelName === 'assessments') {
       dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSEECREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+        payload: assessmentSetUpModule
       });
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSMENTCREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSMENTCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSMENTCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'distinctinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSMENTINFODISTINCTBASICPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'distinctshare' && selectedBadgeName === 'associate') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSMENT_ASSOCIATE_SHARE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSMENTGROUPCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSMENTBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'typecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSMENTTYPECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'typeinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSMENTBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
+    if (labelName === 'assignments') {
       dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSEECREATEPERMISSIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+        payload: assignmentSetUpModule
       });
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSIGNMENTCREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSIGNMENTCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSIGNMENTCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'distinctinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSIGNMENTINFODISTINCTBASICPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSIGNMENTGROUPCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSIGNMENTBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'typecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSIGNMENTTYPECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'typeinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSIGNMENTBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'distinctinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSEEINFODISTINCTBASICPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'distinctinformation' &&
-      selectedBadgeName === 'name'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'PEOPLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'groupcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSESSEEGROUPCREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'groupinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSEEBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'rolecreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSESSEEROLECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'roleinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSEEBASICINFOROLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'typecreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSESSEETYPECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'assessees' &&
-      badgeName === 'typeinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSEEBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessments' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'approval'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSMENTCREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessments' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'fee'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSMENTCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessments' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSMENTCREATEPERMISSIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessments' &&
-      badgeName === 'distinctinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSMENTINFODISTINCTBASICPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessments' &&
-      badgeName === 'groupcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSESSMENTGROUPCREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'assessments' &&
-      badgeName === 'groupinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSMENTBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assessments' &&
-      badgeName === 'typecreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSESSMENTTYPECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'assessments' &&
-      badgeName === 'typeinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSESSMENTBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assignments' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'approval'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSIGNMENTCREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assignments' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'fee'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSIGNMENTCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assignments' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSIGNMENTCREATEPERMISSIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assignments' &&
-      badgeName === 'distinctinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSIGNMENTINFODISTINCTBASICPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assignments' &&
-      badgeName === 'groupcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSIGNMENTGROUPCREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'assignments' &&
-      badgeName === 'groupinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSIGNMENTBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'assignments' &&
-      badgeName === 'typecreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSIGNMENTTYPECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'assignments' &&
-      badgeName === 'typeinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSIGNMENTBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'items' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'approval'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ITEMCREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (labelName === 'items' && badgeName === 'distinctcreate' && selectedBadgeName === 'fee') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ITEMCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'items' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ITEMCREATEPERMISSIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'items' &&
-      badgeName === 'distinctinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ITEMINFODISTINCTBASICPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'items' &&
-      badgeName === 'groupcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ITEMGROUPCREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'items' &&
-      badgeName === 'groupinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ITEMBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (labelName === 'items' && badgeName === 'typecreate' && selectedBadgeName === 'permission') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ITEMTYPECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (labelName === 'items' && badgeName === 'typeinformation' && selectedBadgeName === 'basic') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ITEMBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'iGuru analytics' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'approval'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'IGURUANALYTICSCREATEAPPROVALPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'iGuru analytics' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'fee'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'IGURUANALYTICSCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'iGuru analytics' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'IGURUANALYTICSCREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'iGuru analytics' &&
-      badgeName === 'distinctinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'IGURUANALYTICSINFODISTINCTBASICPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'iGuru analytics' &&
-      badgeName === 'groupcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'iGuru analytics' &&
-      badgeName === 'groupinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'IGURUANALYTICSBASICINFOGROUPPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'iGuru analytics' &&
-      badgeName === 'typecreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'IGURUANALYTICSTYPECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'iGuru analytics' &&
-      badgeName === 'typeinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'IGURUANALYTICSBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
+    if (labelName === 'item') {
+      // dispatch({
+      //   type: UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+      //   payload: itemSetUpModule
+      // });
 
-    if (
-      labelName === 'associates' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'approval'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATECREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEMCREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEMCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEMCREATEPERMISSIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEMINFODISTINCTBASICPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'groupcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ITEMGROUPCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEMBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'typecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ITEMTYPECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'typeinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEMBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'fee'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATECREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
+    if (labelName === 'iGuru analytics') {
+      // dispatch({
+      //   type: UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
+      //   payload: iguruAnalyticSetUpModule
+      // });
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'IGURUANALYTICSCREATEAPPROVALPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'IGURUANALYTICSCREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'IGURUANALYTICSCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'distinctinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'IGURUANALYTICSINFODISTINCTBASICPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'IGURUANALYTICSBASICINFOGROUPPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'typecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'IGURUANALYTICSTYPECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'typeinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'IGURUANALYTICSBASICINFOTYPEPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
     }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'distinctcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
+    if (labelName === 'associates') {
       dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATECREATEPERMISSIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        type: UPDATE_ASSOCIATE_SETUP_INFO,
+        payload: setUpAssociateModule
       });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'distinctinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATEINFODISTINCTBASICPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'distinctinformation' &&
-      selectedBadgeName === 'name'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATEPEOPLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'groupcreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSOCIATEGROUPCREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'groupinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATEBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'rolecreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSOCIATEROLECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'roleinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATEBASICINFOROLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'typecreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSOCIATETYPECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'typeinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATEBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'nodecreate' &&
-      selectedBadgeName === 'permission'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: {
-          isPopUpValue: 'ASSOCIATENODECREATEPERMISSIONPOPUP',
-          popupMode: 'ASSOCIATE_CREATE'
-        }
-      });
-    }
-    if (
-      labelName === 'associates' &&
-      badgeName === 'nodeinformation' &&
-      selectedBadgeName === 'basic'
-    ) {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'ASSOCIATEBASICINFONODEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (labelName === 'associates' && badgeName === '+' && selectedBadgeName === 'date') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'DATEFORMATPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (labelName === 'associates' && badgeName === '+' && selectedBadgeName === 'language') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'LANGUAGEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
-    }
-    if (labelName === 'associates' && badgeName === '+' && selectedBadgeName === 'time') {
-      dispatch({
-        type: ASSOCIATE_SIGN_ON,
-        payload: { isPopUpValue: 'TIMEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-      });
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATECREATEAPPROVALPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATECREATEFEEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATECREATEPERMISSIONPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATEINFODISTINCTBASICPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'distinctinformation' && selectedBadgeName === 'name') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATEPEOPLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'groupcreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATEGROUPCREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'groupinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATEBASICINFOGROUPPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'rolecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATEROLECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'roleinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATEBASICINFOROLEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'typecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATETYPECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'typeinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATEBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'nodecreate' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATENODECREATEPERMISSIONPOPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'nodeinformation' && selectedBadgeName === 'basic') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATEBASICINFONODEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === '+' && selectedBadgeName === 'date') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'DATEFORMATPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === '+' && selectedBadgeName === 'language') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'LANGUAGEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === '+' && selectedBadgeName === 'time') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'TIMEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
 
     // if (labelName === 'dictionary') {
