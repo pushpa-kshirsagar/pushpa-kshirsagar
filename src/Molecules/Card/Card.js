@@ -80,7 +80,10 @@ const Card = (props) => {
               />
             ) : isIcon ? (
               <Fragment>
-                <IconOne className={className} onClick={onClickIconOne} data-value={tag} />
+                <IconsButton onClick={onClickIconOne}>
+                  <IconOne className={className} data-value={tag} />
+                </IconsButton>
+                {/* <IconOne className={className} onClick={onClickIconOne} data-value={tag} /> */}
               </Fragment>
             ) : ImageOne ? (
               <IconButton Icon={ImageOne} className={'imageNA'} />

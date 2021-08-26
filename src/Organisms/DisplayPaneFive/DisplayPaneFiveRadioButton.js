@@ -156,10 +156,10 @@ const DisplayPaneFiveRadioButton = (props) => {
   console.log('itemFrameworkOne', itemFrameworkOne);
   return (
     <>
-      <div className="innerpadding">
-        {/* for label */}
-        {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' ||
-          reviewMode === 'revise') && (
+      {/* for label */}
+      {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel !== '' ||
+        reviewMode === 'revise') && (
+        <div className="innerpadding">
           <div
             className="label"
             style={{
@@ -183,8 +183,8 @@ const DisplayPaneFiveRadioButton = (props) => {
               itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabel || itemLabelText
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="innerpadding">
         {/* for media item */}
@@ -503,11 +503,11 @@ const DisplayPaneFiveRadioButton = (props) => {
         itemType === 'False-True' ||
         itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
-        itemType === 'Fill-in-the-Blank (Response-Choice)') && (
-        <div className="innerpadding">
-          {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-            ?.itemFrameworkOneResponseExplanation !== '' ||
-            reviewMode === 'revise') && (
+        itemType === 'Fill-in-the-Blank (Response-Choice)') &&
+        (itemFrameworkOne?.itemFrameworkOneResponseExplanation
+          ?.itemFrameworkOneResponseExplanation !== '' ||
+          reviewMode === 'revise') && (
+          <div className="innerpadding">
             <div
               className="ex_container"
               style={{
@@ -532,9 +532,8 @@ const DisplayPaneFiveRadioButton = (props) => {
                   ?.itemFrameworkOneResponseExplanation || responseDescription
               )}
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
       {/* for response */}
       {(itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||

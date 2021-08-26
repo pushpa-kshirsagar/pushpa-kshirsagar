@@ -78,7 +78,7 @@
   font-size: 1.6rem;
   min-height: 50px;
   padding: 0px 5px;
-  align-items:center;
+  align-items: center;
   /* overflow: overlay; */
   color: rgba(0, 0, 0, 0.87);
 }
@@ -130,12 +130,15 @@
 }
 input[type='radio'] {
   margin: 0px !important;
+  height: 15px;
+  width: 15px;
 }
-p{
-  margin: 0px;
+p {
+  margin-top: 7px;
+  margin-bottom: 6px;
   line-height: 15px;
 }
-.innerpadding{
-  padding:2.5px;
+.innerpadding {
+  padding: 2.5px;
   min-height: 50px;
 }

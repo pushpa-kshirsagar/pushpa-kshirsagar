@@ -36,6 +36,8 @@ export const ANALYTIC_SETUP_URL =
   ANALYTICS + '/dev/insight-guru/api/iguru-analytic-associate-setup/review';
 export const ASSESSEE_SETUP_REVISE_URL =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee/associate-setup/revise';
+export const ASSOCIATE_SETUP_REVISE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/setup/revise';
 //assessee self
 export const ASSESSEE_ASSESSMENT_START_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment/start';

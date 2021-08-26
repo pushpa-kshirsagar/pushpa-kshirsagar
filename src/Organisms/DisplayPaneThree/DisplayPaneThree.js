@@ -59,7 +59,8 @@ import {
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
   GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
   GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
-  LOADER_STOP
+  LOADER_STOP,
+  ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -1660,6 +1661,17 @@ export const DisplayPaneThree = () => {
         };
         dispatch({
           type: ASSOCIATE_ASSESSEESETUP_REVISE_SAGA,
+          payload: { reqBody: setupObj }
+        });
+      }
+      if (informationSetup.associate) {
+        let setupObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId: id,
+          associateSetup: informationSetup.associate
+        };
+        dispatch({
+          type: ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA,
           payload: { reqBody: setupObj }
         });
       }

@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import ReactHTMLParser from 'react-html-parser';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import IconButton from '@material-ui/core/IconButton';
 import FirstPage from '@material-ui/icons/FirstPage';
@@ -7,6 +8,8 @@ import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneSeven.css';
+import '../DisplayPaneFive/DisplayPaneFive.css';
+import '../../Molecules/ReviewList/ReviewList.css';
 import { useDispatch, useSelector } from 'react-redux';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import PopUpAssessmentNavigator from '../../PopUpInformation/PopUpAssessmentNavigator';
@@ -22,6 +25,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { setAssesseeAssessmentItemSaveResCall } from '../../Actions/ActionAssesseeAssessment';
 import { useTimer } from 'react-timer-hook';
+import { Paper } from '@material-ui/core';
 
 const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
   const { seconds, minutes, hours } = useTimer({
@@ -42,42 +46,66 @@ const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
 const AssessmentHeader = (props) => {
   return (
     <Fragment>
-      <div style={{ height: '50px', padding: '0 5px', display: 'flex' }}>
-        <div style={{ flex: '2' }} className="flex-center">
-          <span style={{ fontWeight: 'bold' }}>{props.assessmentName}</span>
+      <Paper className={'dossierContainerTop'}>
+        <div className="containerPadding sticky-header">
+          <div
+            style={{ height: '49px', padding: '0 5px', display: 'flex', fontWeight: 'bold' }}
+            className={''}
+          >
+            <div style={{ display: 'inline-block', flex: '2' }}>
+              <div
+                className={[
+                  'midPaneInformation',
+                  props.assessmentDesc !== '' ? null : 'aliasmiddle'
+                ].join(' ')}
+              >
+                {props.assessmentName}
+              </div>
+              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+                {props.assessmentDesc}
+              </div>
+            </div>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+              className="flex-center"
+            >
+              {props.qnumber + '/' + props.totalQuestion}
+            </div>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+              className="flex-center"
+            >
+              {props.score}
+            </div>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+              className="flex-center"
+            >
+              {props.timer && (
+                <span style={{ fontWeight: 'bold' }}>
+                  <AssessmentTimer
+                    expiryTimestamp={props.timer}
+                    key={props.timer}
+                    timerFinished={props.timerFinished}
+                  />
+                </span>
+              )}
+            </div>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+              className="flex-center"
+            >
+              <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
+                {props.isQuestionFlaged ? (
+                  <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
+                ) : (
+                  <i className="far fa-flag"></i>
+                )}
+              </IconButton>
+            </div>
+          </div>
         </div>
-        <div style={{ flex: '1' }} className="flex-center">
-          <span style={{ fontWeight: 'bold' }}>{props.qnumber + '/' + props.totalQuestion}</span>
-        </div>
-        <div style={{ flex: '1' }} className="flex-center">
-          <span style={{ fontWeight: 'bold' }}>{props.score}</span>
-        </div>
-        {/* <div style={{ flex: '1' }} className="flex-center">
-          <IconButton>
-            <RefreshIcon style={{ width: '20px', height: '20px', color: 'black' }} />
-          </IconButton>
-        </div> */}
-        <div style={{ flex: '1' }} className="flex-center">
-          {props.timer && (
-            <span style={{ fontWeight: 'bold' }}>
-              <AssessmentTimer
-                expiryTimestamp={props.timer}
-                key={props.timer}
-                timerFinished={props.timerFinished}
-              />
-            </span>
-          )}
-        </div>
-        <div style={{ flex: '1' }} className="flex-center">
-          <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
-            {props.isQuestionFlaged ? (
-              <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
-            ) : (
-              <i className="far fa-flag"></i>
-            )}
-          </IconButton>
-        </div>
-      </div>
+      </Paper>
       <hr className={'assessmentHeaderHr'} />
     </Fragment>
   );
@@ -191,81 +219,105 @@ export const DisplayPaneSeven = () => {
           headerPanelColour="green"
         />
       </div>
+      {assesseeAssessmentStartData?.assessmentItem?.length > 0 && (
+        <AssessmentHeader
+          qnumber={currentQuestionIndex + 1}
+          totalQuestion={assesseeAssessmentStartData?.assessmentItem?.length}
+          score={
+            assesseeAssessmentStartData?.assessmentItem[currentQuestionIndex].itemFrameworkOneScore
+          }
+          assessmentName={assesseeAssessmentStartData?.assessmentName}
+          assessmentDesc={assesseeAssessmentStartData?.assessmentDescription}
+          onClickFlag={flagQuestion}
+          isQuestionFlaged={isQuestionFlaged}
+          timerFinished={timerFinished}
+          timer={timer}
+        />
+      )}
       <div className="containerPadding displayPaneFive-main-container">
         {assesseeAssessmentStartData && (
           <Fragment>
-            <div className="containerPadding sticky-header">
-              {assesseeAssessmentStartData?.assessmentItem?.length > 0 && (
-                <AssessmentHeader
-                  qnumber={currentQuestionIndex + 1}
-                  totalQuestion={assesseeAssessmentStartData?.assessmentItem?.length}
-                  score={
-                    assesseeAssessmentStartData?.assessmentItem[currentQuestionIndex]
-                      .itemFrameworkOneScore
-                  }
-                  assessmentName={assesseeAssessmentStartData?.assessmentName}
-                  onClickFlag={flagQuestion}
-                  isQuestionFlaged={isQuestionFlaged}
-                  timerFinished={timerFinished}
-                  timer={timer}
-                />
-              )}
+            {(assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
+              .itemFrameworkOneType === '61090cace50cf61d5eb440ce' ||
+              assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
+                .itemFrameworkOneType === 'Response-Choice (Single-Select)') && (
+              <div className="containerPadding sticky-header">
+                <Fragment>
+                  {currentQuestionIndex !== -1 && (
+                    <div
+                      style={{ minHeight: '55px' }}
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
+                            .itemFrameworkOneMedia
+                      }}
+                    ></div>
+                  )}
+                </Fragment>
 
-              <Fragment>
-                {currentQuestionIndex !== -1 && (
-                  <div
-                    style={{ height: '55px' }}
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
-                          .itemFrameworkOneMedia
-                    }}
-                  ></div>
-                )}
-              </Fragment>
-
-              <div>
-                <RadioGroup
-                  name="option"
-                  value={currentQuestionChoice}
-                  onChange={handleRadioButton}
-                >
+                <div>
                   {assesseeAssessmentStartData.assessmentItem[
                     currentQuestionIndex
-                  ].itemFrameworkOneResponseChoice.map((item) => {
+                  ].itemFrameworkOneResponseChoice.map((op, key) => {
                     return (
                       <Fragment>
-                        <FormControlLabel
-                          value={item.itemFrameworkOneResponseChoice}
-                          className={'assessmentRadioQuestion'}
-                          control={<Radio color="black" />}
-                          label={
-                            <span
-                              dangerouslySetInnerHTML={{
-                                __html: item.itemFrameworkOneResponseChoiceMedia
+                        <div key={`op-${key}`}>
+                          <div className="option-container ex_container" key={`option-${key}`}>
+                            <div
+                              style={{ paddingRight: '5px', display: 'flex', alignItems: 'center' }}
+                            >
+                              <input
+                                type="radio"
+                                name="option1"
+                                value={`${op.itemFrameworkOneResponseChoice}`}
+                                checked={
+                                  currentQuestionChoice === op.itemFrameworkOneResponseChoice
+                                }
+                                onChange={handleRadioButton}
+                                style={{ cursor: 'pointer' }}
+                              />
+                            </div>
+
+                            <div
+                              style={{
+                                paddingLeft: '5px'
                               }}
-                            />
-                          }
-                        />
+                              dangerouslySetInnerHTML={{
+                                __html: op?.itemFrameworkOneResponseChoiceMedia
+                              }}
+                            ></div>
+                          </div>
+
+                          <div>
+                            {op.itemFrameworkOneResponseChoiceExplanation
+                              ?.itemFrameworkOneResponseChoiceExplanation && (
+                              <div className="ex_container">
+                                {ReactHTMLParser(
+                                  op.itemFrameworkOneResponseChoiceExplanation
+                                    ?.itemFrameworkOneResponseChoiceExplanation
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </Fragment>
                     );
                   })}
-                </RadioGroup>
+                </div>
               </div>
-            </div>
-            <FooterIconTwo
-              className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
-              FilterModeEnable={false}
-              FilterMode={FilterMode}
-              onClick={onClickFooter}
-              primaryIcon={primaryIcon}
-              secondaryIcon={secondaryIcon}
-            />
+            )}
           </Fragment>
         )}
-
-        <PopUpAssessmentNavigator isActive={isPopUpValue === 'NavigatorPOPUP'} />
       </div>
+      <FooterIconTwo
+        className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
+        FilterModeEnable={false}
+        FilterMode={FilterMode}
+        onClick={onClickFooter}
+        primaryIcon={primaryIcon}
+        secondaryIcon={secondaryIcon}
+      />
+      <PopUpAssessmentNavigator isActive={isPopUpValue === 'NavigatorPOPUP'} />
     </>
   );
 };

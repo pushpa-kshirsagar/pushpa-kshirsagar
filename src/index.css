@@ -105,6 +105,9 @@ body {
     height:'50px'
   } */
 }
+.iguru-iconbox svg {
+  font-size: 2rem !important;
+}
 .iguru-iconboxSVG {
   flex: 1;
   color: #808080;

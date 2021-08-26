@@ -77,7 +77,19 @@ const initialState = {
   allocateStr: '',
   permissionStateOne: '',
   permissionStateTwo: '',
-  permissionStateThree: ''
+  permissionStateThree: '',
+  itemConfigStates: {
+    blankState: true,
+    classificationState: true,
+    levelState: true,
+    polarityState: true,
+    scaleState: true,
+    scoreState: true,
+    timeState: true,
+    weightageState: true,
+    noOfItemState: true,
+    noOfResponseState: true
+  }
 };
 
 const DisplayPaneTwoReducer = (istate = initialState, action) => {

@@ -1,5 +1,5 @@
 .displayPaneFive-main-container {
-  height: calc(100vh - 180px);
+  height: calc(100vh - 250px) !important;
   overflow: overlay;
 }
 .flex-center {

@@ -21,6 +21,7 @@ const PopUpItemFramework = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+  const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
   const itemFrameworkOneResponseChoice =
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   const itemFrameworkOne = itemInformation?.informationFramework.itemFrameworkOne;
@@ -49,14 +50,14 @@ const PopUpItemFramework = (props) => {
   const [weightage, setweightage] = useState('');
   // console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
   // console.log('Choice ob ', choiceOb);
-  useEffect(() =>{
-    if(subQuestionId){
+  useEffect(() => {
+    if (subQuestionId) {
       let subques = itemFrameworkOne.itemFrameworkOneSection.filter(function (sub) {
         return sub.itemFrameworkOneSectionSequence === subQuestionId;
       });
       setscore(subques[0]?.itemFrameworkOneSection?.itemFrameworkOneScore);
     }
-  },[subQuestionId]);
+  }, [subQuestionId]);
   const handleClick = () => {
     // alert(subQuestionId);
     console.log(
@@ -122,7 +123,7 @@ const PopUpItemFramework = (props) => {
           }
         });
         dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: {
             stateName: 'itemFrameworkOneResponseChoice',
             value: tempArr
@@ -176,7 +177,7 @@ const PopUpItemFramework = (props) => {
             </div>
           </div>
           <FormControl style={{ width: '100%' }}>
-            {isItemFramework && (
+            {isItemFramework && itemConfigStates.blankState && (
               <InputFeild
                 id={'blank'}
                 label={'blank'}
@@ -188,7 +189,7 @@ const PopUpItemFramework = (props) => {
                 }}
               />
             )}
-            {isItemFramework && (
+            {isItemFramework && itemConfigStates.classificationState && (
               <SelectField
                 tag={'classification'}
                 label={'classification'}
@@ -207,7 +208,7 @@ const PopUpItemFramework = (props) => {
                 mappingValue={'id'}
               />
             )}
-            {isItemFramework && (
+            {isItemFramework && itemConfigStates.levelState && (
               <SelectField
                 tag={'level'}
                 label={'level'}
@@ -226,23 +227,25 @@ const PopUpItemFramework = (props) => {
                 mappingValue={'id'}
               />
             )}
-            <SelectField
-              tag={'polarity'}
-              label={'polarity'}
-              dataValue={'polarity'}
-              listSelect={[
-                { id: '', name: '' },
-                { id: 'Negative', name: 'Negative' },
-                { id: 'Positive', name: 'Positive' }
-              ]}
-              errorMsg={() => {}}
-              onChange={(e) => {
-                setpolarity(e.target.value);
-              }}
-              value={polarity}
-              mappingValue={'id'}
-            />
-            {isItemFramework && (
+            {itemConfigStates.polarityState && (
+              <SelectField
+                tag={'polarity'}
+                label={'polarity'}
+                dataValue={'polarity'}
+                listSelect={[
+                  { id: '', name: '' },
+                  { id: 'Negative', name: 'Negative' },
+                  { id: 'Positive', name: 'Positive' }
+                ]}
+                errorMsg={() => {}}
+                onChange={(e) => {
+                  setpolarity(e.target.value);
+                }}
+                value={polarity}
+                mappingValue={'id'}
+              />
+            )}
+            {isItemFramework && itemConfigStates.scaleState && (
               <SelectField
                 tag={'scale'}
                 label={'scale'}
@@ -261,18 +264,20 @@ const PopUpItemFramework = (props) => {
                 mappingValue={'id'}
               />
             )}
-            <InputFeild
-              id={'score'}
-              label={'score'}
-              value={score}
-              errorMsg={''}
-              type={'number'}
-              onClick={(e) => {
-                setscore(e.target.value);
-              }}
-            />
+            {itemConfigStates.scoreState && (
+              <InputFeild
+                id={'score'}
+                label={'score'}
+                value={score}
+                errorMsg={''}
+                type={'number'}
+                onClick={(e) => {
+                  setscore(e.target.value);
+                }}
+              />
+            )}
 
-            {isItemFramework && (
+            {isItemFramework && itemConfigStates.timeState && (
               <InputFeild
                 id={'time'}
                 label={'time'}
@@ -284,16 +289,18 @@ const PopUpItemFramework = (props) => {
                 }}
               />
             )}
-            <InputFeild
-              id={'weightage'}
-              label={'weightage'}
-              value={weightage}
-              type={'number'}
-              errorMsg={''}
-              onClick={(e) => {
-                setweightage(e.target.value);
-              }}
-            />
+            {itemConfigStates.weightageState && (
+              <InputFeild
+                id={'weightage'}
+                label={'weightage'}
+                value={weightage}
+                type={'number'}
+                errorMsg={''}
+                onClick={(e) => {
+                  setweightage(e.target.value);
+                }}
+              />
+            )}
           </FormControl>
         </DialogContent>
       </Popup>

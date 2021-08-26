@@ -85,6 +85,11 @@ function* workerAssesseeAssignmentListSaga(data) {
             showMiddlePaneState: true
           }
         });
+        yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+        yield put({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isExamMode', value: false }
+        });
         yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
         yield put({ type: CLEAR_ASSIGNMENT_INFO });
       }
@@ -172,7 +177,6 @@ function* workerAssesseeAssessmentStartSaga(data) {
       //   payload: { stateName: 'isExamMode', value: false }
       // });
       yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSeven' });
-
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -200,7 +204,6 @@ function* workerAssesseeAssessmentItemFinishSaga(data) {
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
-    
     } else {
       yield put({
         type: SET_POPUP_VALUE,

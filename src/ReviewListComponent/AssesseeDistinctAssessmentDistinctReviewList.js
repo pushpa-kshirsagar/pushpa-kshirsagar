@@ -134,21 +134,33 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
     // assignmentStart(e.currentTarget.getAttribute('index'));
     // setAssessmentList(reviewListDistinctData[e.currentTarget.getAttribute('index')]);
   };
-  console.log('listDistinctData',listDistinctData);
+  console.log('listDistinctData', listDistinctData);
   return (
     <div key={listDistinctData}>
       {listDistinctData && (
-        <Card
-          textOneOne={listDistinctData.assesseeAssignmentName}
-          textTwoOne={listDistinctData.assesseeAssignmentDescription}
-          IconOne={CrossIcon}
-          isIcon={true}
-          labelTwoTwo={'assignment'}
-          onClickIconOne={closeRelatedList}
-          isAlliance
-          relatedCardFixed={true}
-          className={'iguru-iconboxSVG'}
-        />
+        <div className="containerPadding">
+          <Card
+            isIcon
+            IconOne={CrossIcon}
+            textOneOne={listDistinctData.assesseeAssignmentName}
+            textTwoOne={listDistinctData.assesseeAssignmentDescription}
+            labelTwoTwo={'assignment'}
+            isIcon
+            isAlliance
+            onClickIconOne={closeRelatedList}
+          />
+        </div>
+        // <Card
+        //   textOneOne={listDistinctData.assesseeAssignmentName}
+        //   textTwoOne={listDistinctData.assesseeAssignmentDescription}
+        //   IconOne={CrossIcon}
+        //   isIcon={true}
+        //   labelTwoTwo={'assignment'}
+        //   onClickIconOne={closeRelatedList}
+        //   isAlliance
+        //   relatedCardFixed={true}
+        //   className={'iguru-iconboxSVG'}
+        // />
       )}
       {listDistinctData &&
         listDistinctData.assesseeAssessment.map((item, index) => {

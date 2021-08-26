@@ -30,6 +30,7 @@ export const setAssesseeAssessmentItemSaveResCall = (
       };
     } else {
       let ans = JSON.parse(localStorage.getItem('assessmentItem'));
+      console.log('ans',ans);
       ans.push(ItemObj);
       reqObj = {
         assesseeId: selectedAssociateInfo?.assesseeId,

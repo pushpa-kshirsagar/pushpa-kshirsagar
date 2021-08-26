@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   POPUP_CLOSE,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   SET_NEXT_POPUP
 } from '../actionType';
@@ -32,6 +33,7 @@ const PopUpItemConfig = (props) => {
     isItemFramework = false
   } = props;
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+  const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
   const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
   const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne.itemFrameworkOneAlignment);
   const [item_Type, set_Item_Type] = useState(itemFrameworkOne.itemFrameworkOneType);
@@ -68,6 +70,82 @@ const PopUpItemConfig = (props) => {
         stateName: 'itemFrameworkOneAlignment',
         value: item_Aligement
       }
+    });
+    let reviseSetting = {
+      blankState: true,
+      classificationState: true,
+      levelState: true,
+      polarityState: true,
+      scaleState: true,
+      scoreState: true,
+      timeState: true,
+      weightageState: true,
+      noOfItemState: true,
+      noOfResponseState: true
+    };
+    if (item_Type === '61090cace50cf61d5eb440c9') {
+      // "Likert-Scale"
+      reviseSetting = {
+        blankState: false,
+        classificationState: true,
+        levelState: true,
+        polarityState: true,
+        scaleState: true,
+        scoreState: false,
+        timeState: true,
+        weightState: true,
+        noOfItemState: true,
+        noOfResponseState: false
+      };
+    }
+    if (item_Type === '61090cace50cf61d5eb440ce') {
+      //"Response-Choice (Single-Select)"
+      reviseSetting = {
+        blankState: false,
+        classificationState: false,
+        levelState: true,
+        polarityState: false,
+        scaleState: false,
+        scoreState: true,
+        timeState: true,
+        weightState: false,
+        noOfItemState: false,
+        noOfResponseState: true
+      };
+    }
+    if (item_Type === '61090cace50cf61d5eb440c4') {
+      //"Fill-in-the-Blank (Response-Choice)"
+      reviseSetting = {
+        blankState: true,
+        classificationState: false,
+        levelState: true,
+        polarityState: false,
+        scaleState: false,
+        scoreState: true,
+        timeState: true,
+        weightState: false,
+        noOfItemState: false,
+        noOfResponseState: true
+      };
+    }
+    if (item_Type === '61090cace50cf61d5eb440cc' || item_Type === '61090cace50cf61d5eb440cd') {
+      //"Response (Long)","Response (Short)"
+      reviseSetting = {
+        blankState: false,
+        classificationState: false,
+        levelState: true,
+        polarityState: false,
+        scaleState: false,
+        scoreState: true,
+        timeState: true,
+        weightState: false,
+        noOfItemState: false,
+        noOfResponseState: false
+      };
+    }
+    dispatch({
+      type: SET_DISPLAY_TWO_SINGLE_STATE,
+      payload: { stateName: 'itemConfigStates', value: reviseSetting }
     });
     dispatch({
       type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
@@ -259,7 +337,6 @@ const PopUpItemConfig = (props) => {
     //   let newarr = arr.slice(0, -actlen);
     //   setSubItem(newarr);
     // }
-    
 
     dispatch({ type: POPUP_CLOSE });
   };
@@ -310,22 +387,24 @@ const PopUpItemConfig = (props) => {
           <FormControl style={{ width: '100%' }}>
             {isItemFramework ? (
               <Fragment>
-                <InputFeild
-                  tag={'item'}
-                  label={'item'}
-                  dataValue={'item'}
-                  // labelBadgeOne={'choice'}
-                  value={sub_item}
-                  errorMsg={''}
-                  type={'number'}
-                  onClick={
-                    mode === 'revise'
-                      ? (e) => {
-                          setSubItem(e.target.value);
-                        }
-                      : null
-                  }
-                />
+                {itemConfigStates.noOfItemState && (
+                  <InputFeild
+                    tag={'item'}
+                    label={'item'}
+                    dataValue={'item'}
+                    // labelBadgeOne={'choice'}
+                    value={sub_item}
+                    errorMsg={''}
+                    type={'number'}
+                    onClick={
+                      mode === 'revise'
+                        ? (e) => {
+                            setSubItem(e.target.value);
+                          }
+                        : null
+                    }
+                  />
+                )}
                 <SelectField
                   tag={'item_Aligement'}
                   dataValue={'item'}
@@ -391,22 +470,24 @@ const PopUpItemConfig = (props) => {
                   value={response_Aligement}
                   mappingValue={'id'}
                 />
-                <InputFeild
-                  tag={'response_choice'}
-                  label={'response'}
-                  dataValue={'response'}
-                  labelBadgeOne={'choice'}
-                  value={response_Choice}
-                  errorMsg={''}
-                  type={'number'}
-                  onClick={
-                    mode === 'revise'
-                      ? (e) => {
-                          set_Response_Choice(e.target.value);
-                        }
-                      : null
-                  }
-                />
+                {itemConfigStates.noOfResponseState && (
+                  <InputFeild
+                    tag={'response_choice'}
+                    label={'response'}
+                    dataValue={'response'}
+                    labelBadgeOne={'choice'}
+                    value={response_Choice}
+                    errorMsg={''}
+                    type={'number'}
+                    onClick={
+                      mode === 'revise'
+                        ? (e) => {
+                            set_Response_Choice(e.target.value);
+                          }
+                        : null
+                    }
+                  />
+                )}
                 <div className={'fitContent'}>
                   <div
                     className={['PopupFormBox', 'popupMinHei0'].join(' ')}

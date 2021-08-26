@@ -167,6 +167,14 @@ export const DisplayPaneFive = () => {
   };
   const itemPopUpOption = [
     {
+      data: 'configure',
+      dataValue: 'configure',
+      dataKey: 'configureAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: true
+    },
+    {
       data: 'revise',
       dataValue: 'revise',
       dataKey: 'reviseAPICall',

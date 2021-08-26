@@ -1517,14 +1517,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   const reviseSetup = (e, selectedBadgeArray) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    console.log(labelName, '+++++', selectedBadgeArray, '=====', selectedBadgeName);
+    console.log(labelName, '+labelName+', selectedBadgeArray, '=Array=', selectedBadgeName);
     let badgeName = '';
     if (selectedBadgeArray.length > 0) {
       selectedBadgeArray.forEach((element) => {
         badgeName = badgeName + element.labelTextTwoBadge;
       });
     }
-    console.log(badgeName);
+    console.log(badgeName, 'badgeName');
     if (labelName === 'assessees') {
       dispatch({
         type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
@@ -2036,6 +2036,75 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
           payload: { isPopUpValue: 'TIMEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinct' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATE_DIST_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'distinctsign-on' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_SIGNON_APPROVAL_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'distinctsign-on' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_SIGNON_FEE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'distinctsign-on' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_SIGNON_PERMISSION_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'group' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_GROUP_SHARE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'node' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_NODE_SHARE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'role' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_ROLE_SHARE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'type' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_TYPE_SHARE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
         });
       }
     }
