@@ -39,7 +39,9 @@ import {
   UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO,
   SET_DISPLAY_THREE_SINGLE_STATE,
   UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
-  UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO
+  UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+  UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+  UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO
 } from '../../actionType';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../../endpoints';
@@ -713,8 +715,207 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
+        isActive={isPopUpValue === 'ASSIGNMENT_SHARE_POPUP'}
+        tag={'assignmentDistinctShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assignments'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSIGNMENT_GROUP_SHARE_POPUP'}
+        tag={'assignmentGroupShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assignments'}
+        inputHeaderBadgeOne={'group'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSIGNMENT_TYPE_SHARE_POPUP'}
+        tag={'assignmentTypeShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assignments'}
+        inputHeaderBadgeOne={'type'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assignment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpDropList
+        isActive={isPopUpValue === 'ITEM_SHARE_POPUP'}
+        tag={'itemDistinctShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'items'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ITEM_GROUP_SHARE_POPUP'}
+        tag={'itemGroupShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'items'}
+        inputHeaderBadgeOne={'group'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ITEM_TYPE_SHARE_POPUP'}
+        tag={'itemTypeShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'items'}
+        inputHeaderBadgeOne={'type'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+       <PopUpDropList
+        isActive={isPopUpValue === 'ANALYTIC_SHARE_POPUP'}
+        tag={'iGuruAnalyticDistinctShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ANALYTIC_GROUP_SHARE_POPUP'}
+        tag={'iGuruAnalyticGroupShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
+        inputHeaderBadgeOne={'group'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ANALYTIC_TYPE_SHARE_POPUP'}
+        tag={'iGuruAnalyticTypeShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'iGuru analytics'}
+        inputHeaderBadgeOne={'type'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
         isActive={isPopUpValue === 'ITEMCREATEAPPROVALPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'itemDistinctCreateApproval'}
         label={'approval'}
         listSelect={[
           { id: false, name: 'Approval Not Required' },
@@ -730,13 +931,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSCREATEAPPROVALPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'iGuruAnalyticDistinctCreateApproval'}
         label={'approval'}
         listSelect={[
           { id: false, name: 'Approval Not Required' },
@@ -752,8 +953,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -846,7 +1047,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ITEMCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'itemDistinctCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -862,13 +1063,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'iGuruAnalyticDistinctCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -884,8 +1085,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -978,7 +1179,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ITEMGROUPCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'itemGroupCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -994,13 +1195,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'iGuruAnalyticGroupCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1016,8 +1217,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -1154,7 +1355,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ITEMTYPECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'itemTypeCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1170,13 +1371,13 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSTYPECREATEPERMISSIONPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'iGuruAnalyticTypeCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1192,8 +1393,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -1319,9 +1520,9 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         isRequired={false}
-        actualLableValue={'assesseeCreateFee'}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        actualLableValue={'itemDistinctCreateFee'}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -1336,9 +1537,9 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         isRequired={false}
-        actualLableValue={'assesseeCreateFee'}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
+        actualLableValue={'iGuruAnalyticDistinctCreateFee'}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -2462,9 +2663,9 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
-        isActive={isPopUpValue === 'ASSESSMENT_ASSOCIATE_SHARE_POPUP'}
-        tag={'assessmentDistinctSharedAssociate'}
-        label={'share'}
+        isActive={isPopUpValue === 'ASSESSMENT_NODE_SHARE_POPUP'}
+        tag={'assessmentDistinctSharedNode'}
+        label={'node'}
         listSelect={[
           { id: false, name: 'No' },
           { id: true, name: 'Yes' }
@@ -2472,6 +2673,50 @@ const PopUpSignOnAssociate = () => {
         mappingValue={'id'}
         inputHeader={'assessments'}
         inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={'share'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSMENT_ASSOCIATE_SHARE_POPUP'}
+        tag={'assessmentDistinctSharedAssociate'}
+        label={'associate'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessments'}
+        inputHeaderBadgeOne={'distinct'}
+        inputHeaderBadgeTwo={'share'}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSMENT_GROUP_SHARE_POPUP'}
+        tag={'assessmentGroupShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessments'}
+        inputHeaderBadgeOne={'group'}
         inputHeaderBadgeTwo={''}
         labelval={'time'}
         headerPanelColour={'genericOne'}
@@ -2481,6 +2726,186 @@ const PopUpSignOnAssociate = () => {
         nextPopUpValue={''}
         basicInfo={associateInfo?.informationSetup?.assessment || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSESSMENT_TYPE_SHARE_POPUP'}
+        tag={'assessmentTypeShare'}
+        label={'share'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'assessments'}
+        inputHeaderBadgeOne={'type'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.assessment || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_BRAND_APPROVAL_POPUP'}
+        tag={'iguruPlatformBrandApproval'}
+        label={'approval'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'brand'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_BRAND_PERMISSION_POPUP'}
+        tag={'iguruPlatformBrandPermission'}
+        label={'permission'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'brand'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpTextField
+        isActive={isPopUpValue === 'ASSOCIATE_BRAND_FEE_POPUP'}
+        label={'fee'}
+        headerPanelColour={'genericOne'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'brand'}
+        inputHeaderBadgeTwo={''}
+        type={'number'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={false}
+        actualLableValue={'iguruPlatformBrandFee'}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ASSOCIATE_DOMAIN_PRIMARY_POPUP'}
+        label={'primary'}
+        headerPanelColour={'genericOne'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'domain'}
+        inputHeaderBadgeTwo={''}
+        type={'text'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={false}
+        actualLableValue={'associateDomainPrimary'}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ASSOCIATE_DOMAIN_SECONDARY_POPUP'}
+        label={'secondary'}
+        headerPanelColour={'genericOne'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'domain'}
+        inputHeaderBadgeTwo={''}
+        type={'text'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={false}
+        actualLableValue={'associateDomainSecondary'}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_THEME_APPROVAL_POPUP'}
+        tag={'iguruPlatformThemeApproval'}
+        label={'approval'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'theme'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_THEME_PERMISSION_POPUP'}
+        tag={'iguruPlatformThemePermission'}
+        label={'permission'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'theme'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpTextField
+        isActive={isPopUpValue === 'ASSOCIATE_THEME_FEE_POPUP'}
+        label={'fee'}
+        headerPanelColour={'genericOne'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'theme'}
+        inputHeaderBadgeTwo={''}
+        type={'number'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={false}
+        actualLableValue={'iguruPlatformThemeFee'}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>

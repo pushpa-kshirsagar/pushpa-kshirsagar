@@ -66,6 +66,7 @@ const DisplayPanelAccordianReviewListOne = (props) => {
       setSelectedBadge(labelTextOneOneBadges[0]);
     } else {
       setSelectedBadge('');
+      setIsListSelectExpanded(false);
     }
     if (isWeightageSelected && labelTextOneOne === 'culture dimensions') {
       setSelectedBadge(labelTextOneOneBadges[1]);

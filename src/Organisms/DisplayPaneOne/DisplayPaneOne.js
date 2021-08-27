@@ -200,7 +200,7 @@ export const DisplayPaneOne = () => {
             )}
           </div>
 
-          {selectedAssociateInfo && (
+          {selectedAssociateInfo && isAssessmentStart !== 'PROGRESS' && (
             <div>
               <Sections
                 listSections={leftPaneSections}

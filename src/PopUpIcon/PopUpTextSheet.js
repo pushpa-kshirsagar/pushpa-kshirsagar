@@ -157,8 +157,8 @@ const PopUpTextSheet = (props) => {
           <SunEditor
             setOptions={{
               showPathLabel: false,
-              minHeight: '40vh',
-              maxHeight: '40vh',
+              minHeight: '50vh',
+              maxHeight: '50vh',
               placeholder: '',
               plugins: [
                 align,
@@ -188,7 +188,7 @@ const PopUpTextSheet = (props) => {
                 ['table', 'link', 'image', 'video', 'audio']
               ],
               // formats: ['p', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-              font: ['Arial', 'Calibri', 'Times New Roman']
+              font: ['Arial', 'Calibri', 'Roboto', 'Times New Roman']
             }}
             setContents={innerContent}
             onChange={handleChange}

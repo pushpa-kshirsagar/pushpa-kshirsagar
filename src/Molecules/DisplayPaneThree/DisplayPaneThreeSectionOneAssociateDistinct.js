@@ -9,10 +9,12 @@ import { Paper } from '@material-ui/core';
 import {
   ASSOCIATE_SIGN_ON,
   SET_STATUS_POPUP_VALUE,
+  UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
-  UPDATE_ASSOCIATE_SETUP_INFO
+  UPDATE_ASSOCIATE_SETUP_INFO,
+  UPDATE_ASSOCIATE_SETUP_ITEM_INFO
 } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
@@ -30,6 +32,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     assignmentSetUpModule
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { middlePaneHeader = '' } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const {
     informationEngagement,
     informationSetup,
@@ -1517,19 +1520,23 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   const reviseSetup = (e, selectedBadgeArray) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    console.log(labelName, '+labelName+', selectedBadgeArray, '=Array=', selectedBadgeName);
+    console.log('labelName', labelName);
+    console.log('selectedBadgeName', selectedBadgeName);
+    // console.log(labelName, '+labelName+', selectedBadgeArray, '=Array=', selectedBadgeName);
     let badgeName = '';
     if (selectedBadgeArray.length > 0) {
       selectedBadgeArray.forEach((element) => {
         badgeName = badgeName + element.labelTextTwoBadge;
       });
     }
-    console.log(badgeName, 'badgeName');
+    console.log('badgeName', badgeName);
     if (labelName === 'assessees') {
-      dispatch({
-        type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
-        payload: assesseeSetUpModule
-      });
+      if (!associateInfo?.informationSetup.assessee) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+          payload: assesseeSetUpModule
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -1646,10 +1653,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       }
     }
     if (labelName === 'assessments') {
-      dispatch({
-        type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
-        payload: assessmentSetUpModule
-      });
+      if (!associateInfo?.informationSetup.assessment) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+          payload: assessmentSetUpModule
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -1680,11 +1689,38 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
+      if (badgeName === 'distinctshare' && selectedBadgeName === 'node') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSMENT_NODE_SHARE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
       if (badgeName === 'distinctshare' && selectedBadgeName === 'associate') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
           payload: {
             isPopUpValue: 'ASSESSMENT_ASSOCIATE_SHARE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'group' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSMENT_GROUP_SHARE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'type' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSESSMENT_TYPE_SHARE_POPUP',
             popupMode: 'ASSOCIATE_CREATE'
           }
         });
@@ -1721,10 +1757,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       }
     }
     if (labelName === 'assignments') {
-      dispatch({
-        type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
-        payload: assignmentSetUpModule
-      });
+      if (!associateInfo?.informationSetup.assignment) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+          payload: assignmentSetUpModule
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -1785,13 +1823,32 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           payload: { isPopUpValue: 'ASSIGNMENTBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
         });
       }
+      if (badgeName === 'distinct' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSIGNMENT_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'group' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSIGNMENT_GROUP_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'type' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSIGNMENT_TYPE_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
-    if (labelName === 'item') {
-      // dispatch({
-      //   type: UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
-      //   payload: itemSetUpModule
-      // });
-
+    if (labelName === 'items') {
+      if (!associateInfo?.informationSetup.item) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+          payload: itemSetUpModule
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -1846,12 +1903,33 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           payload: { isPopUpValue: 'ITEMBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
         });
       }
+
+      if (badgeName === 'distinct' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEM_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'group' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEM_GROUP_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'type' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEM_TYPE_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
     if (labelName === 'iGuru analytics') {
-      // dispatch({
-      //   type: UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
-      //   payload: iguruAnalyticSetUpModule
-      // });
+      if (!associateInfo?.informationSetup.analytic) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
+          payload: analyticSetUpModule
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -1921,12 +1999,32 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
+      if (badgeName === 'distinct' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ANALYTIC_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'group' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ANALYTIC_GROUP_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === 'type' && selectedBadgeName === 'share') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ANALYTIC_TYPE_SHARE_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
     }
     if (labelName === 'associates') {
-      dispatch({
-        type: UPDATE_ASSOCIATE_SETUP_INFO,
-        payload: setUpAssociateModule
-      });
+      if (!associateInfo?.informationSetup.associate) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_INFO,
+          payload: setUpAssociateModule
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -2107,14 +2205,79 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
+      if (badgeName === '+brand' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_BRAND_APPROVAL_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === '+brand' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_BRAND_FEE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === '+brand' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_BRAND_PERMISSION_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      // if (badgeName === '+domain' && selectedBadgeName === 'primary') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_DOMAIN_PRIMARY_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+domain' && selectedBadgeName === 'secondary') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_DOMAIN_SECONDARY_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      if (badgeName === '+theme' && selectedBadgeName === 'approval') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_THEME_APPROVAL_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === '+theme' && selectedBadgeName === 'fee') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_THEME_FEE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === '+theme' && selectedBadgeName === 'permission') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_THEME_PERMISSION_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
     }
-
-    // if (labelName === 'dictionary') {
-    //   dispatch({
-    //     type: ASSOCIATE_SIGN_ON,
-    //     payload: { isPopUpValue: 'DICTIONARYPOPUP', popupMode: 'ASSOCIATE_CREATE' }
-    //   });
-    // }
   };
 
   return (

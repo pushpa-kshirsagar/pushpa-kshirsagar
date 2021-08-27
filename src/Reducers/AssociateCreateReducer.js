@@ -27,7 +27,9 @@ import {
   SET_SINGLE_ASSOCIATE_INFORMATION,
   SET_BRAND_LOGO_TYPE,
   UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
-  UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO
+  UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+  UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+  UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -126,7 +128,9 @@ const initialState = {
     assessee: null,
     assessment: null,
     assignment: null,
-    associate: null
+    associate: null,
+    item: null,
+    analytic: null
   },
   informationFramework: {
     associateAscendant: {
@@ -424,6 +428,22 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         informationSetup: {
           ...istate.informationSetup,
           associate: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_SETUP_ITEM_INFO:
+      return {
+        ...istate,
+        informationSetup: {
+          ...istate.informationSetup,
+          item: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO:
+      return {
+        ...istate,
+        informationSetup: {
+          ...istate.informationSetup,
+          analytic: action.payload
         }
       };
     case SET_ASSOCIATE_INFORMATION:

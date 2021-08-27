@@ -621,6 +621,14 @@ export const DisplayPaneFive = () => {
                 optionClass: 'optionPrimary',
                 divider: '',
                 disabled: false
+              },
+              {
+                data: 'revise',
+                dataValue: 'revise',
+                dataKey: 'reviseAPICall',
+                optionClass: 'optionPrimary',
+                divider: '',
+                disabled: true
               }
             ]}
             secondaryOptionCheckValue={''}

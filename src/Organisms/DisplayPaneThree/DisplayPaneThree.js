@@ -60,7 +60,11 @@ import {
   GET_CULTURE_NODE_CULTURE_REVIEW_LIST_SAGA,
   GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
   LOADER_STOP,
-  ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA
+  ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA,
+  ASSOCIATE_ASSESSMENTSETUP_REVISE_SAGA,
+  ASSOCIATE_ITEMSETUP_REVISE_SAGA,
+  ASSOCIATE_ANALYTICSETUP_REVISE_SAGA,
+  ASSOCIATE_ASSIGNMENTSETUP_REVISE_SAGA
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -165,7 +169,13 @@ export const DisplayPaneThree = () => {
     assignmentCultureProfileList = [],
     assignmentJobProfileList = [],
     isWeightageSelected = false,
-    isRangeSelected = false
+    isRangeSelected = false,
+    setUpAssociateModule,
+    analyticSetUpModule,
+    itemSetUpModule,
+    assessmentSetUpModule,
+    assesseeSetUpModule,
+    assignmentSetUpModule
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { typeOfMiddlePaneList, countPage, selectedAssociateInfo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -612,7 +622,17 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssociate(rightPaneSectionsAssociate[0]);
     setSelectedSectionItem(rightPaneSectionsItem[0]);
     setIsShowReviseIcon(true);
-  }, [responseObject, isWeightageSelected, isRangeSelected]);
+  }, [
+    responseObject,
+    isWeightageSelected,
+    isRangeSelected,
+    setUpAssociateModule,
+    analyticSetUpModule,
+    itemSetUpModule,
+    assessmentSetUpModule,
+    assesseeSetUpModule,
+    assignmentSetUpModule
+  ]);
 
   const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
   const onClickFooter = (e) => {
@@ -1664,6 +1684,28 @@ export const DisplayPaneThree = () => {
           payload: { reqBody: setupObj }
         });
       }
+      if (informationSetup.assessment) {
+        let setupObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId: id,
+          assessmentAssociateSetup: informationSetup.assessment
+        };
+        dispatch({
+          type: ASSOCIATE_ASSESSMENTSETUP_REVISE_SAGA,
+          payload: { reqBody: setupObj }
+        });
+      }
+      if (informationSetup.assignment) {
+        let setupObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId: id,
+          assignmentAssociateSetup: informationSetup.assignment
+        };
+        dispatch({
+          type: ASSOCIATE_ASSIGNMENTSETUP_REVISE_SAGA,
+          payload: { reqBody: setupObj }
+        });
+      }
       if (informationSetup.associate) {
         let setupObj = {
           assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1672,6 +1714,28 @@ export const DisplayPaneThree = () => {
         };
         dispatch({
           type: ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA,
+          payload: { reqBody: setupObj }
+        });
+      }
+      if (informationSetup.item) {
+        let setupObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId: id,
+          itemAssociateSetup: informationSetup.item
+        };
+        dispatch({
+          type: ASSOCIATE_ITEMSETUP_REVISE_SAGA,
+          payload: { reqBody: setupObj }
+        });
+      }
+      if (informationSetup.iguruAnalytic) {
+        let setupObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId: id,
+          iguruAnalyticAssociateSetup: informationSetup.iguruAnalytic
+        };
+        dispatch({
+          type: ASSOCIATE_ANALYTICSETUP_REVISE_SAGA,
           payload: { reqBody: setupObj }
         });
       }

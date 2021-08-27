@@ -334,11 +334,17 @@ const DisplayPaneFiveRadioButton = (props) => {
                                 name={`option1-${ob.itemFrameworkOneSectionSequence}`}
                                 value={`${keys}-${key}`}
                                 // onChange={handleClick}
+                                style={{
+                                  cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                }}
                               />
                               <div
                                 className={'likert-choice-font'}
                                 dangerouslySetInnerHTML={{
                                   __html: opt?.itemFrameworkOneResponseChoiceMedia || optionLabel1
+                                }}
+                                style={{
+                                  cursor: reviewMode === 'revise' ? 'pointer' : ''
                                 }}
                                 onClick={
                                   reviewMode === 'revise'
@@ -362,6 +368,9 @@ const DisplayPaneFiveRadioButton = (props) => {
                                     opt?.itemFrameworkOneResponseChoiceExplanation
                                       .itemFrameworkOneResponseChoiceExplanation ||
                                     responseChoiceDescription1
+                                }}
+                                style={{
+                                  cursor: reviewMode === 'revise' ? 'pointer' : ''
                                 }}
                                 onClick={
                                   reviewMode === 'revise'

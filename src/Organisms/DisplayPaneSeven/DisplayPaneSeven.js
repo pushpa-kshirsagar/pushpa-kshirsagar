@@ -48,10 +48,7 @@ const AssessmentHeader = (props) => {
     <Fragment>
       <Paper className={'dossierContainerTop'}>
         <div className="containerPadding sticky-header">
-          <div
-            style={{ height: '49px', padding: '0 5px', display: 'flex', fontWeight: 'bold' }}
-            className={''}
-          >
+          <div style={{ height: '49px', padding: '0 5px', display: 'flex' }} className={''}>
             <div style={{ display: 'inline-block', flex: '2' }}>
               <div
                 className={[
@@ -66,23 +63,23 @@ const AssessmentHeader = (props) => {
               </div>
             </div>
             <div
-              style={{ flex: '1', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
               className="flex-center"
             >
               {props.qnumber + '/' + props.totalQuestion}
             </div>
             <div
-              style={{ flex: '1', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
               className="flex-center"
             >
               {props.score}
             </div>
             <div
-              style={{ flex: '1', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
               className="flex-center"
             >
               {props.timer && (
-                <span style={{ fontWeight: 'bold' }}>
+                <span style={{}}>
                   <AssessmentTimer
                     expiryTimestamp={props.timer}
                     key={props.timer}
@@ -92,7 +89,7 @@ const AssessmentHeader = (props) => {
               )}
             </div>
             <div
-              style={{ flex: '1', display: 'flex', alignItems: 'center', fontWeight: 'bold' }}
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
               className="flex-center"
             >
               <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
@@ -220,19 +217,22 @@ export const DisplayPaneSeven = () => {
         />
       </div>
       {assesseeAssessmentStartData?.assessmentItem?.length > 0 && (
-        <AssessmentHeader
-          qnumber={currentQuestionIndex + 1}
-          totalQuestion={assesseeAssessmentStartData?.assessmentItem?.length}
-          score={
-            assesseeAssessmentStartData?.assessmentItem[currentQuestionIndex].itemFrameworkOneScore
-          }
-          assessmentName={assesseeAssessmentStartData?.assessmentName}
-          assessmentDesc={assesseeAssessmentStartData?.assessmentDescription}
-          onClickFlag={flagQuestion}
-          isQuestionFlaged={isQuestionFlaged}
-          timerFinished={timerFinished}
-          timer={timer}
-        />
+        <div className={'containerPadding'}>
+          <AssessmentHeader
+            qnumber={currentQuestionIndex + 1}
+            totalQuestion={assesseeAssessmentStartData?.assessmentItem?.length}
+            score={
+              assesseeAssessmentStartData?.assessmentItem[currentQuestionIndex]
+                .itemFrameworkOneScore
+            }
+            assessmentName={assesseeAssessmentStartData?.assessmentName}
+            assessmentDesc={assesseeAssessmentStartData?.assessmentDescription}
+            onClickFlag={flagQuestion}
+            isQuestionFlaged={isQuestionFlaged}
+            timerFinished={timerFinished}
+            timer={timer}
+          />
+        </div>
       )}
       <div className="containerPadding displayPaneFive-main-container">
         {assesseeAssessmentStartData && (
@@ -306,17 +306,18 @@ export const DisplayPaneSeven = () => {
                 </div>
               </div>
             )}
+            <FooterIconTwo
+              className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
+              FilterModeEnable={false}
+              FilterMode={FilterMode}
+              onClick={onClickFooter}
+              primaryIcon={primaryIcon}
+              secondaryIcon={secondaryIcon}
+            />
           </Fragment>
         )}
       </div>
-      <FooterIconTwo
-        className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
-        FilterModeEnable={false}
-        FilterMode={FilterMode}
-        onClick={onClickFooter}
-        primaryIcon={primaryIcon}
-        secondaryIcon={secondaryIcon}
-      />
+
       <PopUpAssessmentNavigator isActive={isPopUpValue === 'NavigatorPOPUP'} />
     </>
   );
