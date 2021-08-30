@@ -13,6 +13,7 @@ import {
   SET_STATUS_POPUP_VALUE
 } from '../../actionType';
 import { assesseeRole, getRoleGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
+import { getPermissionStr } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssesseeRole = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -24,17 +25,7 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   const dispatch = useDispatch();
-  const getPermissionStr = (permissionObj) => {
-    let per = '';
-    if (permissionObj) {
-      Object.keys(permissionObj).map(function (key, val) {
-        if (typeof permissionObj[key] === 'boolean' && permissionObj[key] === true) {
-          per = per !== '' ? per + ', ' + splitCamelCaseToString(key) : splitCamelCaseToString(key);
-        }
-      });
-    }
-    return per;
-  };
+ 
   let assesseeRoleGroupList = [];
   const tempRoleGroup = informationAllocation?.assesseeRoleGroup;
   const rolePermission = informationSetup?.assesseeRolePermission;

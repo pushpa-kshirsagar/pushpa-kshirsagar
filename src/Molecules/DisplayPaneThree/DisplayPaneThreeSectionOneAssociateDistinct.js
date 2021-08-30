@@ -8,14 +8,18 @@ import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordian
 import { Paper } from '@material-ui/core';
 import {
   ASSOCIATE_SIGN_ON,
+  SET_DISPLAY_TWO_SINGLE_STATE,
   SET_STATUS_POPUP_VALUE,
   UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
   UPDATE_ASSOCIATE_SETUP_INFO,
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO
 } from '../../actionType';
+import { getPermissionStr } from '../../Actions/GenericActions';
+import { isDescendant } from 'react-sortable-tree';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
@@ -25,6 +29,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     reviewMode,
     administratorSecondary,
     setUpAssociateModule,
+    associateNodeSetUpModule,
     analyticSetUpModule,
     itemSetUpModule,
     assessmentSetUpModule,
@@ -897,6 +902,80 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: setUpAssociateModule?.associateNodeNameUnique ? 'Yes' : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'ascendant',
+                  innerLabelBadgeList: [
+                    {
+                      labelTextTwoBadge: 'all',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeAscendantAll
+                      )
+                    },
+                    {
+                      labelTextTwoBadge: 'primary',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeAscendantPrimary
+                      )
+                    },
+                    {
+                      labelTextTwoBadge: 'secondary',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeAscendantSecondary
+                      )
+                    }
+                  ]
+                },
+                {
+                  labelTextTwoBadge: 'descendant',
+                  innerLabelBadgeList: [
+                    {
+                      labelTextTwoBadge: 'all',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeDescendantAll
+                      )
+                    },
+                    {
+                      labelTextTwoBadge: 'primary',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeDescendantPrimary
+                      )
+                    },
+                    {
+                      labelTextTwoBadge: 'secondary',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeDescendantSecondary
+                      )
+                    }
+                  ]
+                },
+                {
+                  labelTextTwoBadge: 'peer',
+                  innerLabelBadgeList: [
+                    {
+                      labelTextTwoBadge: 'all',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodePeerAll
+                      )
+                    }
+                  ]
+                },
+                {
+                  labelTextTwoBadge: 'root',
+                  innerLabelBadgeList: getPermissionStr(
+                    associateNodeSetUpModule?.informationSetup?.associateNodeRoot
+                  )
+                },
+                {
+                  labelTextTwoBadge: 'self',
+                  innerLabelBadgeList: getPermissionStr(
+                    associateNodeSetUpModule?.informationSetup?.associateNodeSelf
+                  )
                 }
               ]
             },
@@ -2025,6 +2104,20 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           payload: setUpAssociateModule
         });
       }
+      if (
+        badgeName === 'nodepermissiondescendant' ||
+        badgeName === 'nodepermissionascendant' ||
+        badgeName === 'nodepermissionpeer' ||
+        badgeName === 'nodepermission'
+      ) {
+        if (!associateInfo?.informationSetup.associateNode) {
+          dispatch({
+            type: UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
+            payload: associateNodeSetUpModule
+          });
+        }
+      }
+
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -2277,9 +2370,149 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
+      if (badgeName === 'nodepermissiondescendant') {
+        if (selectedBadgeName === 'all') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: 'permissionStateThree',
+              value: 'associateNodeDescendantAll'
+            }
+          });
+        }
+        if (selectedBadgeName === 'primary') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: 'permissionStateThree',
+              value: 'associateNodeDescendantPrimary'
+            }
+          });
+        }
+        if (selectedBadgeName === 'secondary') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: 'permissionStateThree',
+              value: 'associateNodeDescendantSecondary'
+            }
+          });
+        }
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'permissionStateOne', value: 'descendant' }
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'permissionStateTwo', value: selectedBadgeName }
+        });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_NODE_PERMISSION_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'nodepermissionascendant') {
+        if (selectedBadgeName === 'all') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: 'permissionStateThree',
+              value: 'associateNodeAscendantAll'
+            }
+          });
+        }
+        if (selectedBadgeName === 'primary') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: 'permissionStateThree',
+              value: 'associateNodeAscendantPrimary'
+            }
+          });
+        }
+        if (selectedBadgeName === 'secondary') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: 'permissionStateThree',
+              value: 'associateNodeAscendantSecondary'
+            }
+          });
+        }
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'permissionStateOne', value: 'ascendant' }
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'permissionStateTwo', value: selectedBadgeName }
+        });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_NODE_PERMISSION_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'nodepermissionpeer') {
+        if (selectedBadgeName === 'all') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: 'permissionStateThree',
+              value: 'associateNodePeerAll'
+            }
+          });
+        }
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'permissionStateOne', value: 'peer' }
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'permissionStateTwo', value: selectedBadgeName }
+        });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_NODE_PERMISSION_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
+      if (badgeName === 'nodepermission') {
+        if (selectedBadgeName === 'root') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: 'permissionStateThree',
+              value: 'associateNodeRoot'
+            }
+          });
+        }
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'permissionStateOne', value: 'root' }
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'permissionStateTwo', value: selectedBadgeName }
+        });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_NODE_PERMISSION_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
+      }
     }
   };
-
+  console.log(associateNodeSetUpModule);
   return (
     <div
       style={{

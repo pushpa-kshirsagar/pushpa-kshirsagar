@@ -14,7 +14,25 @@ export const setAssesseeCardPermissionInJson = (popupValuArr, assesseePermission
   });
   return popupContentArrValue;
 };
-
+function splitCamelCaseToString(s) {
+  return s
+    .split(/(?=[A-Z])/)
+    .map(function (p) {
+      return p.charAt(0).toUpperCase() + p.slice(1);
+    })
+    .join(' ');
+}
+export const getPermissionStr = (permissionObj) => {
+  let per = '';
+  if (permissionObj) {
+    Object.keys(permissionObj).map(function (key, val) {
+      if (typeof permissionObj[key] === 'boolean' && permissionObj[key] === true) {
+        per = per !== '' ? per + ', ' + splitCamelCaseToString(key) : splitCamelCaseToString(key);
+      }
+    });
+  }
+  return per;
+};
 export const setAssociateCardEnableInJson = (popupValuArr) => {
   var isDisabled = true;
   let popupContentArrValue = popupValuArr.map(function (el) {

@@ -32,6 +32,7 @@ const PopUpCheckbox = (props) => {
     inputHeader = '',
     inputHeaderBadge = '',
     inputHeaderBadgeTwo = '',
+    inputHeaderBadgeThree = '',
     infoMsg = '',
     isJobProfileList = false,
     textOne = '',
@@ -113,6 +114,12 @@ const PopUpCheckbox = (props) => {
         } else {
           reviseobj = { ...localObject };
         }
+        // if (headerOne === 'associate') {
+        //   dispatch({
+        //     type: typeOfSetObject,
+        //     payload: reviseobj
+        //   });
+        // } else {
         dispatch({
           type: typeOfSetObject,
           payload: {
@@ -122,6 +129,7 @@ const PopUpCheckbox = (props) => {
             value: reviseobj
           }
         });
+        // }
       } else {
         onClickNext(id, state.isChecked);
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
@@ -155,6 +163,10 @@ const PopUpCheckbox = (props) => {
                   &nbsp;
                   {inputHeaderBadgeTwo ? (
                     <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
+                  ) : null}
+                  &nbsp;
+                  {inputHeaderBadgeThree ? (
+                    <span className={'headerBadge'}>{inputHeaderBadgeThree}</span>
                   ) : null}
                 </Fragment>
               </InputLabel>
@@ -212,6 +224,7 @@ const PopUpCheckbox = (props) => {
                     <Checkbox
                       color="default"
                       value={item}
+                      key={index}
                       name={item}
                       disabled={
                         isJobProfileList || isRolePermission

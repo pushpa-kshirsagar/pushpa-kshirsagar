@@ -29,7 +29,9 @@ import {
   UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
-  UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO
+  UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
+  UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
+  UPDATE_ASSOCIATE_ASSOCIATENODE_INFO
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -130,7 +132,8 @@ const initialState = {
     assignment: null,
     associate: null,
     item: null,
-    analytic: null
+    analytic: null,
+    associateNode: null
   },
   informationFramework: {
     associateAscendant: {
@@ -444,6 +447,29 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         informationSetup: {
           ...istate.informationSetup,
           analytic: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO:
+      return {
+        ...istate,
+        informationSetup: {
+          ...istate.informationSetup,
+          associateNode: action.payload
+        }
+      };
+    case UPDATE_ASSOCIATE_ASSOCIATENODE_INFO:
+      return {
+        ...istate,
+        informationSetup: {
+          ...istate.informationSetup,
+          [action.payload.objectName]: {
+            ...istate.informationSetup[action.payload.objectName],
+            [action.payload.stateName]: {
+              ...istate.informationSetup[action.payload.objectName][action.payload.stateName],
+              [action.payload.actualStateName]: action.payload.value
+            }
+          }
+          // associateNode: action.payload
         }
       };
     case SET_ASSOCIATE_INFORMATION:

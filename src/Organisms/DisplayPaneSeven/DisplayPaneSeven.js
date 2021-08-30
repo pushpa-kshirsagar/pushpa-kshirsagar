@@ -25,7 +25,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { setAssesseeAssessmentItemSaveResCall } from '../../Actions/ActionAssesseeAssessment';
 import { useTimer } from 'react-timer-hook';
-import { Paper } from '@material-ui/core';
+import { InputLabel, Paper } from '@material-ui/core';
 
 const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
   const { seconds, minutes, hours } = useTimer({
@@ -66,7 +66,21 @@ const AssessmentHeader = (props) => {
               style={{ flex: '1', display: 'flex', alignItems: 'center' }}
               className="flex-center"
             >
-              {props.qnumber + '/' + props.totalQuestion}
+              <span
+                className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(' ')}
+                style={{ textAlign: 'center' }}
+              >
+                <InputLabel
+                  className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
+                >
+                  {1 + '/' + 2}
+                </InputLabel>
+                <InputLabel
+                  className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
+                >
+                  {props.qnumber + '/' + props.totalQuestion}
+                </InputLabel>
+              </span>
             </div>
             <div
               style={{ flex: '1', display: 'flex', alignItems: 'center' }}

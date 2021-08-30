@@ -35,7 +35,8 @@ import {
   ASSOCIATE_ITEM_SETUP_SAGA,
   ASSOCIATE_ASSESSMENT_SETUP_SAGA,
   ASSOCIATE_ASSESSESS_SETUP_SAGA,
-  ASSOCIATE_ASSIGNMENT_SETUP_SAGA
+  ASSOCIATE_ASSIGNMENT_SETUP_SAGA,
+  ASSOCIATE_NODE_SETUP_SAGA
 } from '../actionType';
 import {
   ANALYTIC_SETUP_URL,
@@ -43,7 +44,8 @@ import {
   ITEM_SETUP_URL,
   ASSESSMENTS_SETUP_URL,
   ASSESSEES_SETUP_URL,
-  ASSIGNMENT_SETUP_URL
+  ASSIGNMENT_SETUP_URL,
+  NODE_SETUP_URL
 } from '../endpoints';
 import {
   getAssociateTypeAssociateReqObj,
@@ -1122,5 +1124,9 @@ export const AssociateSetUpApiCalls = (selectedAssociateInfo, associateId, dispa
   dispatch({
     type: ASSOCIATE_ITEM_SETUP_SAGA,
     payload: { reqBody: reqBody, reqUrl: ITEM_SETUP_URL }
+  });
+  dispatch({
+    type: ASSOCIATE_NODE_SETUP_SAGA,
+    payload: { reqBody: reqBody, reqUrl: NODE_SETUP_URL }
   });
 };

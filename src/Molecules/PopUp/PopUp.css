@@ -402,6 +402,9 @@
   font-size: 1.2rem !important;
   flex: 4;
   text-align: left;
+  overflow-x: scroll;
+  max-width: 180px;
+  white-space: nowrap;
 }
 .PopupFormBox label {
   font-size: 1.6rem;

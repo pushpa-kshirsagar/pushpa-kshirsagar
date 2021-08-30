@@ -31,7 +31,10 @@ import {
   ASSOCIATE_ASSESSMENTSETUP_REVISE_SAGA,
   ASSOCIATE_ASSIGNMENTSETUP_REVISE_SAGA,
   ASSOCIATE_ITEMSETUP_REVISE_SAGA,
-  ASSOCIATE_ANALYTICSETUP_REVISE_SAGA
+  ASSOCIATE_ANALYTICSETUP_REVISE_SAGA,
+  ASSOCIATE_NODE_SETUP_SAGA,
+  ASSOCIATE_ASSOCIATENODE_SETUP_REVISE_SAGA,
+  UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO
 } from '../../actionType';
 import {
   ASSESSEE_SETUP_REVISE_URL,
@@ -41,7 +44,8 @@ import {
   ASSOCIATE_SETUP_REVISE_URL,
   ITEM_SETUP_REVISE_URL,
   ASSESSMENT_SETUP_REVISE_URL,
-  ANALYTIC_SETUP_REVISE_URL
+  ANALYTIC_SETUP_REVISE_URL,
+  ASSOCIATENODE_SETUP_REVISE_URL
 } from '../../endpoints';
 import Store from '../../store';
 
@@ -212,6 +216,30 @@ function* workerAssociateSetUpSaga(data) {
     });
   }
 }
+function* workerAssociateNodeSetUpSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: data.payload.reqUrl
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'associateNodeSetUpModule', value: response.responseObject[0] }
+      });
+      // yield put({
+      //   type: UPDATE_ASSOCIATE_SETUP_INFO,
+      //   payload: response.responseObject[0]
+      // });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
 function* workerAssociateAnalyticSetUpSaga(data) {
   try {
     const response = yield call(associateReviewInfoApi, {
@@ -366,6 +394,27 @@ function* workerAssociateAnalyticSetUpReviseSaga(data) {
     });
   }
 }
+function* workerAssociateNodeSetUpReviseSaga(data) {
+  try {
+    const response = yield call(associateReviewInfoApi, {
+      data: data.payload.reqBody,
+      URL: ASSOCIATENODE_SETUP_REVISE_URL
+    });
+    if (response.responseCode === '000') {
+      yield put({
+        type: UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
+        payload: response.responseObject[0]
+      });
+      yield put({ type: LOADER_STOP });
+    } else {
+    }
+  } catch (e) {
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+  }
+}
 function* workerAssociateAssignmentSetUpReviseSaga(data) {
   try {
     const response = yield call(associateReviewInfoApi, {
@@ -458,6 +507,7 @@ export default function* watchReviewInfoAssociateSaga() {
   yield takeLatest(ASSOCIATE_ASSESSMENT_SETUP_SAGA, workerAssociateAssessmentSetUpSaga);
   yield takeLatest(ASSOCIATE_ASSIGNMENT_SETUP_SAGA, workerAssociateAssignmentSetUpSaga);
   yield takeLatest(ASSOCIATE_SETUP_SAGA, workerAssociateSetUpSaga);
+  yield takeLatest(ASSOCIATE_NODE_SETUP_SAGA, workerAssociateNodeSetUpSaga);
   yield takeLatest(ASSOCIATE_ANALYTIC_SETUP_SAGA, workerAssociateAnalyticSetUpSaga);
   yield takeLatest(ASSOCIATE_ITEM_SETUP_SAGA, workerAssociateItemSetUpSaga);
   yield takeLatest(ASSOCIATE_ASSESSEESETUP_REVISE_SAGA, workerAssociateAssesseeSetUpReviseSaga);
@@ -466,4 +516,5 @@ export default function* watchReviewInfoAssociateSaga() {
   yield takeLatest(ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA, workerAssociateAssociateSetUpReviseSaga);
   yield takeLatest(ASSOCIATE_ITEMSETUP_REVISE_SAGA, workerAssociateItemSetUpReviseSaga);
   yield takeLatest(ASSOCIATE_ANALYTICSETUP_REVISE_SAGA, workerAssociateAnalyticSetUpReviseSaga);
+  yield takeLatest(ASSOCIATE_ASSOCIATENODE_SETUP_REVISE_SAGA,workerAssociateNodeSetUpReviseSaga);
 }

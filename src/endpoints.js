@@ -26,6 +26,10 @@ export const ITEMS = 'https://5u6ip77xaf.execute-api.ap-south-1.amazonaws.com';
 //setup
 export const ASS0CIATE_SETUP_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-setup/review';
 export const ITEM_SETUP_URL = ITEMS + '/dev/insight-guru/api/item-associate-setup/review';
+export const NODE_SETUP_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node-permission/review';
+export const ASSOCIATENODE_SETUP_REVISE_URL =
+  ASSOCIATES_URL + '/dev/insight-guru/api/associate-node-permission/revise';
 export const ASSIGNMENT_SETUP_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-associate-setup/review';
 export const ASSESSEES_SETUP_URL =

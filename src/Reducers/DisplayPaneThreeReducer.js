@@ -93,7 +93,8 @@ const initialState = {
   assignmentSetUpModule: null,
   setUpAssociateModule: null,
   analyticSetUpModule: null,
-  itemSetUpModule: null
+  itemSetUpModule: null,
+  associateNodeSetUpModule: null
 };
 
 const DisplayPaneThreeReducer = (istate = initialState, action) => {

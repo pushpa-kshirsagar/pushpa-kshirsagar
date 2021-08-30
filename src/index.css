@@ -241,6 +241,11 @@ body {
   font-size: 1rem !important;
   padding: 6px 0 0 0 !important;
 }
+.iconsFooterLabelDefault1 {
+  color: rgba(0, 0, 0, 0.87) !important;
+  font-size: 1.6rem !important;
+  padding: 6px 0 0 0 !important;
+}
 .AssesseeNotifyStatusLabel {
   color: rgba(0, 0, 0, 0.54);
   text-transform: lowercase;

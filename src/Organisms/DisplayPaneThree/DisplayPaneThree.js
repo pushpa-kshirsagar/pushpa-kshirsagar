@@ -61,6 +61,7 @@ import {
   GET_JOB_NODE_JOB_REVIEW_LIST_SAGA,
   LOADER_STOP,
   ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA,
+  ASSOCIATE_ASSOCIATENODE_SETUP_REVISE_SAGA,
   ASSOCIATE_ASSESSMENTSETUP_REVISE_SAGA,
   ASSOCIATE_ITEMSETUP_REVISE_SAGA,
   ASSOCIATE_ANALYTICSETUP_REVISE_SAGA,
@@ -1714,6 +1715,17 @@ export const DisplayPaneThree = () => {
         };
         dispatch({
           type: ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA,
+          payload: { reqBody: setupObj }
+        });
+      }
+      if (informationSetup.associateNode) {
+        let setupObj = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId: id,
+          associateNodePermission: informationSetup.associateNode
+        };
+        dispatch({
+          type: ASSOCIATE_ASSOCIATENODE_SETUP_REVISE_SAGA,
           payload: { reqBody: setupObj }
         });
       }
