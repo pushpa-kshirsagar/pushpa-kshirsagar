@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import Popup from '../Molecules/PopUp/PopUp';
@@ -11,23 +11,49 @@ import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { POPUP_CLOSE, SET_NEXT_POPUP } from '../actionType';
+import { Avatar } from '@material-ui/core';
+import { imageUploadMethod } from '../Actions/GenericActions';
 
 const PopUpPicture = (props) => {
   const { popupMode } = useSelector((state) => state.PopUpReducer);
+  const [imageSelected, setimageSelected] = useState('');
   const dispatch = useDispatch();
+  const inputFile = useRef(null);
+
   const {
     isActive = false,
     headerPanelColour = 'genericOne',
     headerOne = 'assessee',
+    inputHeader = 'picture',
+    inputHeaderBadgeOne = '',
+    inputHeaderBadgeTwo = '',
     headerOneBadgeOne = '',
     headerOneBadgeTwo = '',
     nextPopUpValue,
     handleNextPopupValue,
-    mode
+    mode,
+    basicInfo = '',
+    actualLableValue = '',
+    typeOfSetObject
   } = props;
-
+  const onClickImageUpload = async (event) => {
+    var file = event.target.files[0];
+    console.log(file);
+    let imagePath = await imageUploadMethod(file);
+    console.log(imagePath);
+    setimageSelected(imagePath.file.url);
+  };
+  useEffect(() => {
+    setimageSelected(basicInfo[actualLableValue]);
+  }, [basicInfo]);
   const handleClick = async () => {
     //according to creation mode popup sequence will change
+    if (typeOfSetObject !== '' && basicInfo) {
+      dispatch({
+        type: typeOfSetObject,
+        payload: { ...basicInfo, [actualLableValue]: imageSelected }
+      });
+    }
     if (mode === 'revise') {
       dispatch({ type: POPUP_CLOSE });
     } else {
@@ -57,25 +83,53 @@ const PopUpPicture = (props) => {
             <div className={['PopupFormBox', 'labelPopupBox', 'popupMinHei'].join(' ')}>
               {headerOne !== 'signature' && (
                 <InputLabel htmlFor="name-input" className={'textForLabelPopup'}>
-                  picture &nbsp;
+                  <>
+                    {inputHeader}&nbsp;
+                    {inputHeaderBadgeOne ? (
+                      <span className={'headerBadge'}>{inputHeaderBadgeOne}</span>
+                    ) : null}
+                    &nbsp;
+                    {inputHeaderBadgeTwo ? (
+                      <span className={'headerBadge'}>{inputHeaderBadgeTwo}</span>
+                    ) : null}
+                  </>
                 </InputLabel>
               )}
             </div>
 
             <div className={['dashboardImage', 'popupMargin'].join(' ')}>
+              <input
+                type="file"
+                id="file"
+                ref={inputFile}
+                style={{ display: 'none' }}
+                onChange={onClickImageUpload}
+              />
               <Button
                 variant="fab"
-                disabled={true}
+                // disabled={true}
                 mini
                 className={[
                   'button',
                   'uploadImageWidthHeight',
                   'iconsFooterDefault',
                   'unAvailable',
-                  'imageNA'
+                  !imageSelected && 'imageNA'
                 ].join(' ')}
+                onClick={() => {
+                  inputFile.current.click();
+                }}
               >
-                <Person className={['svgRootSize', 'uploadImageWidthHeight'].join(' ')} />
+                {imageSelected ? (
+                  <Avatar
+                    className={['svgRootSize', 'uploadImageWidthHeight'].join(' ')}
+                    alt="Remy Sharp"
+                    src={imageSelected}
+                    style={{ backgroundColor: 'none' }}
+                  />
+                ) : (
+                  <Person className={['svgRootSize', 'uploadImageWidthHeight'].join(' ')} />
+                )}
               </Button>
             </div>
           </div>

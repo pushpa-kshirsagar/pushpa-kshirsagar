@@ -488,3 +488,31 @@ body {
   text-align: center;
   font-size: 12px;
 }
+.ce-block__content {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  -webkit-transition: background-color 0.15s ease;
+  transition: background-color 0.15s ease;
+}
+.ce-toolbar__content {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+.cdx-block {
+  padding: 0px 5px 5px 5px;
+}
+.codex-editor--narrow .ce-toolbar__plus {
+  left: 0px;
+}
+.ce-paragraph {
+  line-height: 1.6em;
+  outline: none;
+  padding-left: 30px;
+}
+@media (min-width: 651px) {
+  .codex-editor--narrow .ce-toolbar__actions {
+    right: 10px;
+  }
+}

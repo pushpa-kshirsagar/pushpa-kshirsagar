@@ -288,10 +288,13 @@ const PopUpSignOnAssociate = () => {
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
         headerOneBadgeOne={'information'}
-        basicInfo={associateInfo.basicInfo}
+        basicInfo={associateInfo.informationBasic}
+        actualLableValue={'associatePicture'}
+        typeOfSetObject={UPDATE_ASSOCIATE_BASIC_INFO}
         nextPopUpValue={popupMode === 'ASSOCIATE_SIGN_ON' ? 'WORKADDRESSPOPUP' : 'GROUPPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+
       <PopUpReviewList
         isActive={isPopUpValue === 'GROUPPOPUP'}
         headerPanelColour={'genericOne'}
@@ -592,7 +595,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'PEOPLEPOPUP'}
-        tag={'assesseeNameFormat'}
+        tag={'assesseeDistinctNameFormat'}
         label={'name'}
         listSelect={[
           { id: 'First-Name Other-Name Last-Name', name: 'First-Name Other-Name Last-Name' },
@@ -855,7 +858,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ANALYTIC_SHARE_POPUP'}
-        tag={'iGuruAnalyticDistinctShare'}
+        tag={'iguruAnalyticDistinctShare'}
         label={'share'}
         listSelect={[
           { id: false, name: 'No' },
@@ -877,7 +880,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ANALYTIC_GROUP_SHARE_POPUP'}
-        tag={'iGuruAnalyticGroupShare'}
+        tag={'iguruAnalyticGroupShare'}
         label={'share'}
         listSelect={[
           { id: false, name: 'No' },
@@ -899,7 +902,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ANALYTIC_TYPE_SHARE_POPUP'}
-        tag={'iGuruAnalyticTypeShare'}
+        tag={'iguruAnalyticTypeShare'}
         label={'share'}
         listSelect={[
           { id: false, name: 'No' },
@@ -943,7 +946,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSCREATEAPPROVALPOPUP'}
-        tag={'iGuruAnalyticDistinctCreateApproval'}
+        tag={'iguruAnalyticDistinctCreateApproval'}
         label={'approval'}
         listSelect={[
           { id: false, name: 'Approval Not Required' },
@@ -1075,7 +1078,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSCREATEPERMISSIONPOPUP'}
-        tag={'iGuruAnalyticDistinctCreatePermission'}
+        tag={'iguruAnalyticDistinctCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1207,7 +1210,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP'}
-        tag={'iGuruAnalyticGroupCreatePermission'}
+        tag={'iguruAnalyticGroupCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1383,7 +1386,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSTYPECREATEPERMISSIONPOPUP'}
-        tag={'iGuruAnalyticTypeCreatePermission'}
+        tag={'iguruAnalyticTypeCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1543,7 +1546,7 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         isRequired={false}
-        actualLableValue={'iGuruAnalyticDistinctCreateFee'}
+        actualLableValue={'iguruAnalyticDistinctCreateFee'}
         basicInfo={associateInfo?.informationSetup?.analytic || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
@@ -1587,18 +1590,18 @@ const PopUpSignOnAssociate = () => {
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTINFODISTINCTBASICPOPUP'}
-        tag={'assessmentNameUnique'}
+        tag={'assessmentDistinctInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessments'}
@@ -1616,13 +1619,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTINFODISTINCTBASICPOPUP'}
-        tag={'assignmentNameUnique'}
+        tag={'assignmentDistinctInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assignments'}
@@ -1640,13 +1643,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ITEMINFODISTINCTBASICPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'itemDistinctInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
@@ -1658,19 +1661,19 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.item || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSINFODISTINCTBASICPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'iguruAnalyticDistinctInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'iGuru analytics'}
@@ -1682,19 +1685,19 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEINFODISTINCTBASICPOPUP'}
-        tag={'associateNameUnique'}
+        tag={'associateDistinctInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -1712,13 +1715,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEBASICINFOGROUPPOPUP'}
-        tag={'assesseeGroupNameUnique'}
+        tag={'assesseeGroupInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessees'}
@@ -1736,13 +1739,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTBASICINFOGROUPPOPUP'}
-        tag={'assessmentGroupNameUnique'}
+        tag={'assessmentGroupInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessments'}
@@ -1760,13 +1763,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTBASICINFOGROUPPOPUP'}
-        tag={'assignmentGroupNameUnique'}
+        tag={'assignmentGroupInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assignments'}
@@ -1784,13 +1787,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ITEMBASICINFOGROUPPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'itemGroupInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
@@ -1808,13 +1811,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSBASICINFOGROUPPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'iguruAnalyticGroupInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'iGuru analytics'}
@@ -1826,19 +1829,19 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.informationSetup?.analytic || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFOGROUPPOPUP'}
-        tag={'associateGroupNameUnique'}
+        tag={'associateGroupInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -1856,13 +1859,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEBASICINFOROLEPOPUP'}
-        tag={'assesseeRoleNameUnique'}
+        tag={'assesseeRoleCreatePermission'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessees'}
@@ -1875,18 +1878,18 @@ const PopUpSignOnAssociate = () => {
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo?.informationSetup?.assessee || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFOROLEPOPUP'}
-        tag={'associateRoleNameUnique'}
+        tag={'associateRoleInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -1904,13 +1907,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEBASICINFOTYPEPOPUP'}
-        tag={'assesseeTypeNameUnique'}
+        tag={'assesseeTypeInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessees'}
@@ -1928,13 +1931,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSMENTBASICINFOTYPEPOPUP'}
-        tag={'assessmentTypeNameUnique'}
+        tag={'assessmentTypeInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assessments'}
@@ -1952,13 +1955,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSIGNMENTBASICINFOTYPEPOPUP'}
-        tag={'assignmentTypeNameUnique'}
+        tag={'assignmentTypeInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'assignments'}
@@ -1976,13 +1979,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ITEMBASICINFOTYPEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'itemTypeInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'items'}
@@ -2000,13 +2003,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSBASICINFOTYPEPOPUP'}
-        tag={'assesseeCreateApproval'}
+        tag={'iguruAnalyticTypeInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'iGuru analytics'}
@@ -2024,13 +2027,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFOTYPEPOPUP'}
-        tag={'associateTypeNameUnique'}
+        tag={'associateTypeInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -2048,13 +2051,13 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATEBASICINFONODEPOPUP'}
-        tag={'associateNodeNameUnique'}
+        tag={'associateNodeInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
           { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
-          { id: 'NAME_UNIQUE', name: 'Unique Name + Description Required' },
-          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name Required' }
+          { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
+          { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
         mappingValue={'id'}
         inputHeader={'associates'}
@@ -2800,7 +2803,42 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_BRAND_CHOICE_POPUP'}
+        tag={'iguruPlatformBrandChoice'}
+        label={'choice'}
+        listSelect={[
+          { id: 'Associate', name: 'Associate' },
+          { id: 'Associate & iGuru', name: 'Associate & iGuru' },
+          { id: 'iGuru', name: 'iGuru' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'brand'}
+        inputHeaderBadgeTwo={''}
+        labelval={'time'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpPicture
+        isActive={isPopUpValue === 'ASSOCIATE_BRAND_PICTURE_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'brand'}
+        basicInfo={associateInfo?.informationSetup?.associate || {}}
+        actualLableValue={'iguruPlatformBrandPicture'}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        nextPopUpValue={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
       <PopUpTextField
         isActive={isPopUpValue === 'ASSOCIATE_BRAND_FEE_POPUP'}
         label={'fee'}

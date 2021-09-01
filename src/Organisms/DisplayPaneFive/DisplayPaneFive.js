@@ -38,6 +38,7 @@ import DisplayPaneFiveLikertScale from './DisplayPaneFiveLikertScale';
 import Manuscript from '@material-ui/icons/Description';
 import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 import Paper from '@material-ui/core/Paper';
+import DisplayPaneFiveItemTemplate from './DisplayPaneFiveItemTemplate';
 
 const useStyles = makeStyles({
   root: {
@@ -554,6 +555,7 @@ export const DisplayPaneFive = () => {
                 setSubItemList={setSubItemList}
                 itemType={data?.itemFrameworkOneTypeNameReference}
               />
+              {/* <DisplayPaneFiveItemTemplate /> */}
             </>
           ) : (
             <>

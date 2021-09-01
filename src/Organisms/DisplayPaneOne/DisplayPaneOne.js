@@ -15,6 +15,7 @@ import {
   SELF_POPUP_OPTION
 } from '../../PopUpConfig';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
+import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 import PopUpWorkSheet from '../../PopUpIcon/PopUpWorkSheet';
 import PopUpAssesseePassword from '../../PopUpInformation/PopUpAssesseePassword';
 import PopUpDisplayPanelAssessee from '../../PopUpDisplayPanel/PopUpDisplayPanelAssessee';
@@ -223,7 +224,8 @@ export const DisplayPaneOne = () => {
       <PopupAssessmentsModule />
       <PopUpDisplayPanelAssessee isActive={isPopUpValue === 'ASSESSEE_CARD_POPUP'} />
       <PopUpDisplayPanelAssociate isActive={isPopUpValue === 'ASSOCIATE_CARD_POPUP'} />
-      <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
+      {/* <PopUpTextSheet isActive={isPopUpValue === 'TEXTSHEET_POPUP'} /> */}
+      <PopUpTextEditor isActive={isPopUpValue === 'TEXTSHEET_POPUP'} />
       <PopUpWorkSheet isActive={isPopUpValue === 'SPREADSHEET_POPUP'} />
       <PopUpAssesseePassword isActive={isPopUpValue === 'REVISE_PASSWORD_POPUP'} />
       <PopUpAssociateLink />

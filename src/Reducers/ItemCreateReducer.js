@@ -67,49 +67,58 @@ const initialState = {
         itemFrameworkOneBlank: '',
         itemFrameworkOneExplanation: {
           itemFrameworkOneExplanationDisplay: false,
-          itemFrameworkOneExplanation: ''
+          itemFrameworkOneExplanationMedia: ''
         }, //itemDescription,
-        itemFrameworkOneLabel: { itemFrameworkOneLabelDisplay: false, itemFrameworkOneLabel: '' },
+        itemFrameworkOneLabel: {
+          itemFrameworkOneLabelDisplay: false,
+          itemFrameworkOneLabelMedia: ''
+        },
         itemFrameworkOneGroup: [],
         itemFrameworkOneMedia: '', //itemLabel,
+        itemFrameworkOnePassage: {
+          itemFrameworkOnePassageDisplay: false,
+          itemFrameworkOnePassageMedia: ''
+        },
         itemFrameworkOnePolarity: '',
         itemFrameworkOneResponse: '',
         itemFrameworkOneResponseAlignment: '',
         itemFrameworkOneResponseAttachment: '',
         itemFrameworkOneResponseChoice: [
           {
-            itemFrameworkOneResponseChoice: '1',
+            itemFrameworkOneResponseChoiceAlignment: '',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanation: '',
+              itemFrameworkOneResponseChoiceExplanationMedia: '',
               itemFrameworkOneResponseChoiceExplanationDisplay: false
-            }, //responseChoiceDescription,
+            },
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
-            itemFrameworkOneResponseChoiceWeightage: '',
+            itemFrameworkOneResponseChoiceNumber: '1',
+            itemFrameworkOneResponseChoicePolarity: '',
             itemFrameworkOneResponseChoiceScore: '',
-            itemFrameworkOneResponseChoicePolarity: ''
+            itemFrameworkOneResponseChoiceWeightage: ''
           },
           {
-            itemFrameworkOneResponseChoice: '2',
+            itemFrameworkOneResponseChoiceAlignment: '',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanation: '',
+              itemFrameworkOneResponseChoiceExplanationMedia: '',
               itemFrameworkOneResponseChoiceExplanationDisplay: false
-            }, //responseChoiceDescription,
+            },
             itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
-            itemFrameworkOneResponseChoiceWeightage: '',
+            itemFrameworkOneResponseChoiceNumber: '2',
+            itemFrameworkOneResponseChoicePolarity: '',
             itemFrameworkOneResponseChoiceScore: '',
-            itemFrameworkOneResponseChoicePolarity: ''
-          }
+            itemFrameworkOneResponseChoiceWeightage: ''
+          },
         ],
         itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseLabel: {
           itemFrameworkOneResponseLabelDisplay: false,
-          itemFrameworkOneResponseLabel: ''
+          itemFrameworkOneResponseLabelMedia: ''
         },
         itemFrameworkOneResponseExplanation: {
           itemFrameworkOneResponseExplanationDisplay: false,
-          itemFrameworkOneResponseExplanation: ''
+          itemFrameworkOneResponseExplanationMedia: ''
         }, //responseDescription,
         itemFrameworkOneScale: [
           {
@@ -128,29 +137,31 @@ const initialState = {
               itemFrameworkOneType: '',
               itemFrameworkOneResponseChoice: [
                 {
-                  itemFrameworkOneResponseChoice: '1',
+                  itemFrameworkOneResponseChoiceAlignment: '',
                   itemFrameworkOneResponseChoiceColumnMatch: '',
                   itemFrameworkOneResponseChoiceExplanation: {
-                    itemFrameworkOneResponseChoiceExplanation: '',
+                    itemFrameworkOneResponseChoiceExplanationMedia: '',
                     itemFrameworkOneResponseChoiceExplanationDisplay: false
-                  }, //responseChoiceDescription,
-                  itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
-                  itemFrameworkOneResponseChoiceWeightage: '',
+                  },
+                  itemFrameworkOneResponseChoiceMedia: '',
+                  itemFrameworkOneResponseChoiceNumber: '1',
+                  itemFrameworkOneResponseChoicePolarity: '',
                   itemFrameworkOneResponseChoiceScore: '',
-                  itemFrameworkOneResponseChoicePolarity: ''
+                  itemFrameworkOneResponseChoiceWeightage: ''
                 },
                 {
-                  itemFrameworkOneResponseChoice: '2',
+                  itemFrameworkOneResponseChoiceAlignment: '',
                   itemFrameworkOneResponseChoiceColumnMatch: '',
                   itemFrameworkOneResponseChoiceExplanation: {
-                    itemFrameworkOneResponseChoiceExplanation: '',
+                    itemFrameworkOneResponseChoiceExplanationMedia: '',
                     itemFrameworkOneResponseChoiceExplanationDisplay: false
-                  }, //responseChoiceDescription,
+                  },
                   itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
-                  itemFrameworkOneResponseChoiceWeightage: '',
+                  itemFrameworkOneResponseChoiceNumber: '2',
+                  itemFrameworkOneResponseChoicePolarity: '',
                   itemFrameworkOneResponseChoiceScore: '',
-                  itemFrameworkOneResponseChoicePolarity: ''
-                }
+                  itemFrameworkOneResponseChoiceWeightage: ''
+                },
               ]
             }
           }

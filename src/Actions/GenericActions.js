@@ -1,6 +1,17 @@
 import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
+import S3 from 'react-aws-s3';
+import config from '../config.json';
 import UserPool from '../UserPool';
+const configObj = {
+  bucketName: config.aws.BUCKET_NAME,
+  dirName: config.aws.DIR_NAME /* optional */,
+  region: config.aws.REGION,
+  accessKeyId: config.aws.ACCESS_KEY,
+  secretAccessKey: config.aws.SECRET_ACCESS_KEY
+  // s3Url: 'https:/your-custom-s3-url.com/', /* optional */
+};
+const ReactS3Client = new S3(configObj);
 
 export const setAssesseeCardPermissionInJson = (popupValuArr, assesseePermission) => {
   let popupContentArrValue = popupValuArr.map(function (el) {
@@ -22,6 +33,11 @@ function splitCamelCaseToString(s) {
     })
     .join(' ');
 }
+export const imageUploadMethod = async (file) => {
+  let imgUploadData = await ReactS3Client.uploadFile(file, file.name);
+  let res = { success: 1, file: { url: imgUploadData.location } };
+  return res;
+};
 export const getPermissionStr = (permissionObj) => {
   let per = '';
   if (permissionObj) {

@@ -413,6 +413,18 @@ const PopUpAssesseeCreateSignOn = (props) => {
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+       <PopUpPicture
+        isActive={isPopUpValue === 'PICTUREPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={assesseeInfo.informationBasic}
+        actualLableValue={'assesseePicture'}
+        typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
+        // nextPopUpValue={popupMode === 'ASSESSEE_SIGN_ON' ? 'EMAILPOPUP' :'ROLELISTPOPUP'}
+        handleNextPopupValue={handleNextPopupValue}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
       <PopUpTextField
         isActive={isPopUpValue === 'TAGSTATUTORY'}
         label={'tag'}
@@ -474,15 +486,7 @@ const PopUpAssesseeCreateSignOn = (props) => {
         typeOfSetObject={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpPicture
-        isActive={isPopUpValue === 'PICTUREPOPUP'}
-        headerPanelColour={'genericOne'}
-        headerOne={headerOne}
-        headerOneBadgeOne={'information'}
-        // nextPopUpValue={popupMode === 'ASSESSEE_SIGN_ON' ? 'EMAILPOPUP' :'ROLELISTPOPUP'}
-        handleNextPopupValue={handleNextPopupValue}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
+     
       <PopUpPicture
         isActive={isPopUpValue === 'SIGNATUREPOPUP'}
         headerPanelColour={'genericOne'}

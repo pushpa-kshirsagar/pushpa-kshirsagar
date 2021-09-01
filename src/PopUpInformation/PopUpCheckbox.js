@@ -58,7 +58,7 @@ const PopUpCheckbox = (props) => {
   useEffect(() => {
     setLocalObject(valueArrState);
     informationValue !== '' && setpermissionInfo(valueArrState[informationValue]);
-  }, [valueArrState]);
+  }, [!valueArrState]);
 
   /*handling the onchange event*/
   const handleChange = (event) => {
@@ -114,12 +114,6 @@ const PopUpCheckbox = (props) => {
         } else {
           reviseobj = { ...localObject };
         }
-        // if (headerOne === 'associate') {
-        //   dispatch({
-        //     type: typeOfSetObject,
-        //     payload: reviseobj
-        //   });
-        // } else {
         dispatch({
           type: typeOfSetObject,
           payload: {
@@ -129,7 +123,6 @@ const PopUpCheckbox = (props) => {
             value: reviseobj
           }
         });
-        // }
       } else {
         onClickNext(id, state.isChecked);
         dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
