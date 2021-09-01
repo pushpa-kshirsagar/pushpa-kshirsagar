@@ -2675,6 +2675,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={informationBasic?.assesseeNameVerification || false}
                   isVerifiedActivePicture={informationBasic?.assesseePictureVerification || false}
                   mode={reviewMode}
+                  isImageActive={informationBasic.assesseePicture}
+                  imageOne={informationBasic.assesseePicture}
                   onClickRevise={reviseAssesseeBasicInformation}
                 />
               </div>
@@ -2723,6 +2725,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  isImageActive={informationBasic.assesseeRolePicture}
+                  imageOne={informationBasic.assesseeRolePicture}
                   onClickRevise={reviseAssesseeRoleBasicInformation}
                 />
               </div>
@@ -2770,6 +2774,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  isImageActive={informationBasic.assesseeGroupPicture}
+                  imageOne={informationBasic.assesseeGroupPicture}
                   onClickRevise={reviseAssesseeGroupBasicInformation}
                 />
               </div>
@@ -2817,6 +2823,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
+                  isImageActive={informationBasic.associateGroupPicture}
+                  imageOne={informationBasic.associateGroupPicture}
                   onClickRevise={reviseAssociateGroupBasicInformation}
                 />
               </div>
@@ -2865,6 +2873,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssessmentGroupBasicInformation}
+                  isImageActive={informationBasic.assessmentGroupPicture}
+                  imageOne={informationBasic.assessmentGroupPicture}
                 />
               </div>
               <Sections
@@ -2912,6 +2922,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseCultureProfileGroupBasicInformation}
+                  isImageActive={informationBasic.cultureProfileGroupPicture}
+                  imageOne={informationBasic.cultureProfileGroupPicture}
                 />
               </div>
               <Sections
@@ -2959,6 +2971,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseJobProfileGroupBasicInformation}
+                  isImageActive={informationBasic.jobProfileGroupPicture}
+                  imageOne={informationBasic.jobProfileGroupPicture}
                 />
               </div>
               <Sections
@@ -3006,6 +3020,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseCultureProfileTypeBasicInformation}
+                  isImageActive={informationBasic.cultureProfileTypePicture}
+                  imageOne={informationBasic.cultureProfileTypePicture}
                 />
               </div>
               <Sections
@@ -3053,6 +3069,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseJobProfileTypeBasicInformation}
+                  isImageActive={informationBasic.jobProfileTypePicture}
+                  imageOne={informationBasic.jobProfileTypePicture}
                 />
               </div>
               <Sections
@@ -3097,6 +3115,8 @@ export const DisplayPaneThree = () => {
                 isVerifiedActivePicture={false}
                 mode={reviewMode}
                 onClickRevise={reviseItemsGroupBasicInformation}
+                isImageActive={informationBasic.itemGroupPicture}
+                imageOne={informationBasic.itemGroupPicture}
               />
             </div>
             <Sections
@@ -3144,6 +3164,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssessmentBasicInformation}
+                  isImageActive={informationBasic.assessmentPicture}
+                  imageOne={informationBasic.assessmentPicture}
                 />
               </div>
               <Sections
@@ -3191,6 +3213,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseCultureProfileBasicInformation}
+                  isImageActive={informationBasic.cultureProfilePicture}
+                  imageOne={informationBasic.cultureProfilePicture}
                 />
               </div>
               <Sections
@@ -3238,6 +3262,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseJobProfileBasicInformation}
+                  isImageActive={informationBasic.jobProfilePicture}
+                  imageOne={informationBasic.jobProfilePicture}
                 />
               </div>
               <Sections
@@ -3285,6 +3311,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssignmentBasicInformation}
+                  isImageActive={informationBasic.assignmentPicture}
+                  imageOne={informationBasic.assignmentPicture}
                 />
               </div>
               <Sections
@@ -3332,6 +3360,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssignmentGroupBasicInformation}
+                  isImageActive={informationBasic.assignmentGroupPicture}
+                  imageOne={informationBasic.assignmentGroupPicture}
                 />
               </div>
               <Sections
@@ -3379,6 +3409,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssignmentTypeBasicInformation}
+                  isImageActive={informationBasic.assignmentTypePicture}
+                  imageOne={informationBasic.assignmentTypePicture}
                 />
               </div>
               <Sections
@@ -3426,6 +3458,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssessmentTypeBasicInformation}
+                  isImageActive={informationBasic.assessmentTypePicture}
+                  imageOne={informationBasic.assessmentTypePicture}
                 />
               </div>
               <Sections
@@ -3473,6 +3507,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssesseeTypeBasicInformation}
+                  isImageActive={informationBasic.assesseeTypePicture}
+                  imageOne={informationBasic.assesseeTypePicture}
                 />
               </div>
               <Sections
@@ -3520,6 +3556,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssociateTypeBasicInformation}
+                  isImageActive={informationBasic.associateTypePicture}
+                  imageOne={informationBasic.associateTypePicture}
                 />
               </div>
               <Sections
@@ -3564,6 +3602,8 @@ export const DisplayPaneThree = () => {
                 isVerifiedActivePicture={false}
                 mode={reviewMode}
                 onClickRevise={reviseItemTypeBasicInformation}
+                isImageActive={informationBasic.itemTypePicture}
+                imageOne={informationBasic.itemTypePicture}
               />
             </div>
             <Sections
@@ -3611,6 +3651,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssociateRoleBasicInformation}
+                  isImageActive={informationBasic.associateRolePicture}
+                  imageOne={informationBasic.associateRolePicture}
                 />
               </div>
               <Sections
@@ -3667,6 +3709,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssociateNodeBasicInformation}
+                  isImageActive={informationBasic.associateNodePicture}
+                  imageOne={informationBasic.associateNodePicture}
                 />
               </div>
               <Sections
@@ -3714,6 +3758,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssociateBasicInformation}
+                  isImageActive={informationBasic.associatePicture}
+                  imageOne={informationBasic.associatePicture}
                 />
               </div>
               <Sections
@@ -3761,6 +3807,8 @@ export const DisplayPaneThree = () => {
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseItemBasicInformation}
+                  isImageActive={informationBasic.itemPicture}
+                  imageOne={informationBasic.itemPicture}
                 />
               </div>
               <Sections

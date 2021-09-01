@@ -24,6 +24,7 @@ const Card = (props) => {
     relatedCardFixed = false,
     labelTwoTwo = 'label',
     onClickIconOne = null,
+    imageOneOne,
     tag = ''
   } = props;
 
@@ -32,7 +33,7 @@ const Card = (props) => {
       <Paper
         style={{
           boxShadow:
-            '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)',
+            '0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12)'
         }}
         className={[`iguru-iconbox-dashboardcardtop`].join(' ')}
       >
@@ -41,7 +42,7 @@ const Card = (props) => {
             className={'iguru-cardContentMidPanel'}
             onClick={onClick}
             data-value={tag}
-            style={{ flex: '4' , width : '20px'}}
+            style={{ flex: '4', width: '20px' }}
           >
             <div
               className={['midPaneInformation', textTwoOne !== '' ? null : 'aliasmiddle'].join(' ')}
@@ -73,11 +74,7 @@ const Card = (props) => {
           </div>
           <div className={'iguru-iconbox'}>
             {isImageActive ? (
-              <Avatar
-                alt=""
-                className={'svgRootSize'}
-                src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
-              />
+              <Avatar alt="" className={'svgRootSize'} src={imageOneOne} />
             ) : isIcon ? (
               <Fragment>
                 <IconsButton onClick={onClickIconOne}>

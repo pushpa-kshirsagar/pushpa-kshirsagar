@@ -201,40 +201,43 @@ const PopUpItemConfig = (props) => {
               itemFrameworkOneCorrect: null,
               itemFrameworkOneResponseChoice: [
                 {
-                  itemFrameworkOneResponseChoice: '1',
+                  itemFrameworkOneResponseChoiceAlignment: '',
                   itemFrameworkOneResponseChoiceColumnMatch: '',
                   itemFrameworkOneResponseChoiceExplanation: {
-                    itemFrameworkOneResponseChoiceExplanation: '',
-                    itemFrameworkOneResponseChoiceExplanationDisplay: false
-                  }, //responseChoiceDescription,
-                  itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
-                  itemFrameworkOneResponseChoiceWeightage: '',
-                  itemFrameworkOneResponseChoiceScore: '',
-                  itemFrameworkOneResponseChoicePolarity: ''
-                },
-                {
-                  itemFrameworkOneResponseChoice: '2',
-                  itemFrameworkOneResponseChoiceColumnMatch: '',
-                  itemFrameworkOneResponseChoiceExplanation: {
-                    itemFrameworkOneResponseChoiceExplanation: '',
+                    itemFrameworkOneResponseChoiceExplanationMedia: '',
                     itemFrameworkOneResponseChoiceExplanationDisplay: false
                   },
                   itemFrameworkOneResponseChoiceMedia: '',
-                  itemFrameworkOneResponseChoiceWeightage: '',
+                  itemFrameworkOneResponseChoiceNumber: '1',
+                  itemFrameworkOneResponseChoicePolarity: '',
                   itemFrameworkOneResponseChoiceScore: '',
-                  itemFrameworkOneResponseChoicePolarity: ''
+                  itemFrameworkOneResponseChoiceWeightage: ''
                 },
                 {
-                  itemFrameworkOneResponseChoice: '3',
+                  itemFrameworkOneResponseChoiceAlignment: '',
                   itemFrameworkOneResponseChoiceColumnMatch: '',
                   itemFrameworkOneResponseChoiceExplanation: {
-                    itemFrameworkOneResponseChoiceExplanation: '',
+                    itemFrameworkOneResponseChoiceExplanationMedia: '',
                     itemFrameworkOneResponseChoiceExplanationDisplay: false
                   },
                   itemFrameworkOneResponseChoiceMedia: '',
-                  itemFrameworkOneResponseChoiceWeightage: '',
+                  itemFrameworkOneResponseChoiceNumber: '2',
+                  itemFrameworkOneResponseChoicePolarity: '',
                   itemFrameworkOneResponseChoiceScore: '',
-                  itemFrameworkOneResponseChoicePolarity: ''
+                  itemFrameworkOneResponseChoiceWeightage: ''
+                },
+                {
+                  itemFrameworkOneResponseChoiceAlignment: '',
+                  itemFrameworkOneResponseChoiceColumnMatch: '',
+                  itemFrameworkOneResponseChoiceExplanation: {
+                    itemFrameworkOneResponseChoiceExplanationMedia: '',
+                    itemFrameworkOneResponseChoiceExplanationDisplay: false
+                  },
+                  itemFrameworkOneResponseChoiceMedia: '',
+                  itemFrameworkOneResponseChoiceNumber: '3',
+                  itemFrameworkOneResponseChoicePolarity: '',
+                  itemFrameworkOneResponseChoiceScore: '',
+                  itemFrameworkOneResponseChoiceWeightage: ''
                 }
               ]
             }
@@ -298,15 +301,17 @@ const PopUpItemConfig = (props) => {
       if (actlen > 0) {
         for (let i = 1; i <= actlen; i++) {
           newbj.push({
-            itemFrameworkOneResponseChoice: `${choice + i}`,
+            itemFrameworkOneResponseChoiceAlignment: '',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanation: '',
+              itemFrameworkOneResponseChoiceExplanationMedia: '',
               itemFrameworkOneResponseChoiceExplanationDisplay: false
             },
-            itemFrameworkOneResponseChoiceMedia: '',
-            itemFrameworkOneResponseChoiceWeightage: '',
-            itemFrameworkOneResponseChoiceScore: ''
+            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+            itemFrameworkOneResponseChoiceNumber: `${choice + i}`,
+            itemFrameworkOneResponseChoicePolarity: '',
+            itemFrameworkOneResponseChoiceScore: '',
+            itemFrameworkOneResponseChoiceWeightage: ''
           });
         }
         console.log('newbj', newbj);

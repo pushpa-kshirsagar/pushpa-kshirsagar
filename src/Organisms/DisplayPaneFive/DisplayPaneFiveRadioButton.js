@@ -245,7 +245,7 @@ const DisplayPaneFiveRadioButton = (props) => {
 
       {/* for sub item  */}
       <div className="likartscale">
-        {(itemType === 'Likert-Scale' || itemType === 'Master-Framework') && (
+        {(itemType === 'Likert-Scale' || itemType === 'Template') && (
           <FormControl component="fieldset" style={{ width: '100%' }}>
             <div className="likart">
               <div class="item"></div>
@@ -473,7 +473,7 @@ const DisplayPaneFiveRadioButton = (props) => {
 
       {/* for response label */}
       {(itemType === 'Response-Choice (Single-Select)' ||
-        itemType === 'Master-Framework' ||
+        itemType === 'Template' ||
         itemType === 'False-True' ||
         itemType === 'Fill-in-the-Blank (Response-Choice)') &&
         (itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabel !== '' ||
@@ -508,7 +508,7 @@ const DisplayPaneFiveRadioButton = (props) => {
 
       {/* for response explanation */}
       {(itemType === 'Response-Choice (Single-Select)' ||
-        itemType === 'Master-Framework' ||
+        itemType === 'Template' ||
         itemType === 'False-True' ||
         itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
@@ -546,7 +546,7 @@ const DisplayPaneFiveRadioButton = (props) => {
       {/* for response */}
       {(itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
-        itemType === 'Master-Framework') && (
+        itemType === 'Template') && (
         <div className="innerpadding">
           <div className="relabel">
             {(itemFrameworkOne?.itemFrameworkOneResponse !== '' || reviewMode === 'revise') && (
@@ -580,7 +580,7 @@ const DisplayPaneFiveRadioButton = (props) => {
 
       {/* for response choice */}
       {(itemType === 'Response-Choice (Single-Select)' ||
-        itemType === 'Master-Framework' ||
+        itemType === 'Template' ||
         itemType === 'False-True' ||
         itemType === 'Fill-in-the-Blank (Response-Choice)') && (
         <div className={'likartscale'}>

@@ -76,11 +76,15 @@ export const DisplayPaneOne = () => {
   );
   const associateName = selectedAssociateInfo
     ? selectedAssociateInfo?.associate.informationBasic.associateName
+    : 'associates'
+  const associatePicture = selectedAssociateInfo
+    ? selectedAssociateInfo?.associate.informationBasic?.associatePicture
     : 'associates';
   const associateDescription = selectedAssociateInfo
     ? selectedAssociateInfo?.associate.informationBasic.associateDescription
     : '';
-  const assesseeAlias = '';
+  const assesseeAlias = leftPaneAssesseeInfo.assessee.informationBasic.assesseeAlias;
+  const assesseePicture = leftPaneAssesseeInfo.assessee.informationBasic.assesseePicture;
   const assesseeSignIN = localStorage.getItem('assesseeId');
   const assesseeName = leftPaneAssesseeInfo.assessee
     ? leftPaneAssesseeInfo.assessee.informationBasic.assesseeNameFirst.trim() +
@@ -171,11 +175,13 @@ export const DisplayPaneOne = () => {
       </div>
       {isDisplayPaneSixShow && (
         <div className="containerPadding">
-          <div className="containerPadding" >
+          <div className="containerPadding">
             <Card
               ImageOne={selectedAssociateInfo ? PersonIcon : null}
               textOneOne={assesseeName}
               textTwoOne={assesseeAlias}
+              isImageActive={assesseePicture}
+              imageOneOne={assesseePicture}
               onClick={openCardPopup}
               isAlertActive={leftPaneAssesseeInfo?.notifications?.alert}
               tag={selectedAssociateInfo ? 'assessee_card' : 'assessee'}
@@ -188,6 +194,8 @@ export const DisplayPaneOne = () => {
                 textOneOne={associateName}
                 textTwoOne={associateDescription}
                 onClick={openCardPopup}
+                isImageActive={associatePicture}
+                imageOneOne={associatePicture}
                 tag={'associate_card'}
               />
             ) : (

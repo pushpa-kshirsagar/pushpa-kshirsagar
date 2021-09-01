@@ -19,6 +19,7 @@ const BasicCard = (props) => {
     textOneTwo = '',
     labelTextOneTwo = '',
     isImageActive = false,
+    imageOne,
     isVerifiedActiveName = false,
     isVerifiedActivePicture = false,
     isFlagActive = false,
@@ -70,7 +71,7 @@ const BasicCard = (props) => {
               className={'svgRootSize'}
               id="profile-icon"
               onClick={mode === 'revise' ? onClickRevise : null}
-              src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
+              src={imageOne}
             />
           ) : (
             <IconsButton

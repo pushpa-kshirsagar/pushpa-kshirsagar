@@ -39,6 +39,7 @@ import Manuscript from '@material-ui/icons/Description';
 import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 import Paper from '@material-ui/core/Paper';
 import DisplayPaneFiveItemTemplate from './DisplayPaneFiveItemTemplate';
+import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 
 const useStyles = makeStyles({
   root: {
@@ -392,6 +393,18 @@ export const DisplayPaneFive = () => {
       });
     }
   };
+  const passagePrimaryPopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'revise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'PASSAGE_MEDIA_TEXT',
+          popupMode: ''
+        }
+      });
+    }
+  };
   const responseLabelChoicePopUp = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'revise') {
@@ -549,13 +562,18 @@ export const DisplayPaneFive = () => {
         <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
           {typeMode ? (
             <>
-              <DisplayPaneFiveRadioButton
+              {/* <DisplayPaneFiveRadioButton
+                setSelectedChoiceObject={setSelectedChoiceObject}
+                subItemList={subItemList}
+                setSubItemList={setSubItemList}
+                itemType={data?.itemFrameworkOneTypeNameReference}
+              /> */}
+              <DisplayPaneFiveItemTemplate
                 setSelectedChoiceObject={setSelectedChoiceObject}
                 subItemList={subItemList}
                 setSubItemList={setSubItemList}
                 itemType={data?.itemFrameworkOneTypeNameReference}
               />
-              {/* <DisplayPaneFiveItemTemplate /> */}
             </>
           ) : (
             <>
@@ -598,6 +616,23 @@ export const DisplayPaneFive = () => {
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={itemLabelPrimaryPopup}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      <Popup isActive={isPopUpValue === 'PASSAGE_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'passage'}
+          headerOneBadgeOne={''}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={passagePrimaryPopup}
             currentPopUpOption={itemPopUpOption}
             secondaryOptionCheckValue={''}
           />
@@ -785,7 +820,7 @@ export const DisplayPaneFive = () => {
           />
         </DialogContent>
       </Popup>
-
+      {/* 
       <PopUpTextSheet
         isActive={isPopUpValue === `ITEM_MEDIA_TEXT`}
         headerOne={'item'}
@@ -807,8 +842,30 @@ export const DisplayPaneFive = () => {
             }
           });
         }}
+      /> */}
+      <PopUpTextEditor
+        isActive={isPopUpValue === `ITEM_MEDIA_TEXT`}
+        headerOne={'item'}
+        headerPanelColour={'genericOne'}
+        // headerOneBadgeOne={'media'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={itemFrameworkOne?.itemFrameworkOneMedia || ''}
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          // setInnerContent(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneMedia',
+              value: innerText
+            }
+          });
+        }}
       />
-      <PopUpTextSheet
+      {/* <PopUpTextSheet
         isActive={isPopUpValue === `ITEM_LABEL_MEDIA_TEXT`}
         headerOne={'item'}
         headerPanelColour={'genericOne'}
@@ -830,8 +887,58 @@ export const DisplayPaneFive = () => {
             }
           });
         }}
+      /> */}
+      <PopUpTextEditor
+        isActive={isPopUpValue === `ITEM_LABEL_MEDIA_TEXT`}
+        headerOne={'item'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'label'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={
+          itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia || ''
+        }
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          // setLabelText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+            payload: {
+              objectName: 'itemFrameworkOneLabel',
+              actualStateName: 'itemFrameworkOneLabelMedia',
+              value: innerText
+            }
+          });
+        }}
       />
-      <PopUpTextSheet
+      <PopUpTextEditor
+        isActive={isPopUpValue === `PASSAGE_MEDIA_TEXT`}
+        headerOne={'passage'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={
+          itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia || ''
+        }
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          // setLabelText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+            payload: {
+              objectName: 'itemFrameworkOnePassage',
+              actualStateName: 'itemFrameworkOnePassageMedia',
+              value: innerText
+            }
+          });
+        }}
+      />
+      {/* <PopUpTextSheet
         isActive={isPopUpValue === `RESPONSE_LABEL_MEDIA_TEXT`}
         headerOne={'response'}
         headerPanelColour={'genericOne'}
@@ -845,12 +952,35 @@ export const DisplayPaneFive = () => {
         actualLableValue={''}
         mode={'revise'}
         onClickSave={(innerText) => {
-          // setResponseLabelText(innerText);
           dispatch({
             type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
             payload: {
               objectName: 'itemFrameworkOneResponseLabel',
               actualStateName: 'itemFrameworkOneResponseLabel',
+              value: innerText
+            }
+          });
+        }}
+      /> */}
+      <PopUpTextEditor
+        isActive={isPopUpValue === `RESPONSE_LABEL_MEDIA_TEXT`}
+        headerOne={'response'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'label'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={
+          itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia || ''
+        }
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+            payload: {
+              objectName: 'itemFrameworkOneResponseLabel',
+              actualStateName: 'itemFrameworkOneResponseLabelMedia',
               value: innerText
             }
           });
@@ -882,7 +1012,7 @@ export const DisplayPaneFive = () => {
           });
         }}
       />
-      <PopUpTextSheet
+      {/* <PopUpTextSheet
         isActive={isPopUpValue === `ITEM_DESCRIPTION_MEDIA_TEXT`}
         headerOne={'item'}
         headerPanelColour={'genericOne'}
@@ -905,8 +1035,32 @@ export const DisplayPaneFive = () => {
             }
           });
         }}
+      /> */}
+      <PopUpTextEditor
+        isActive={isPopUpValue === `ITEM_DESCRIPTION_MEDIA_TEXT`}
+        headerOne={'item'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'explanation'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={
+          itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia || ''
+        }
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+            payload: {
+              objectName: 'itemFrameworkOneExplanation',
+              actualStateName: 'itemFrameworkOneExplanationMedia',
+              value: innerText
+            }
+          });
+        }}
       />
-      <PopUpTextSheet
+      {/* <PopUpTextSheet
         isActive={isPopUpValue === `RESPONSE_DESCRIPTION_TEXT`}
         headerOne={'response'}
         headerPanelColour={'genericOne'}
@@ -927,6 +1081,32 @@ export const DisplayPaneFive = () => {
             payload: {
               objectName: 'itemFrameworkOneResponseExplanation',
               actualStateName: 'itemFrameworkOneResponseExplanation',
+              value: innerText
+            }
+          });
+        }}
+      /> */}
+      <PopUpTextEditor
+        isActive={isPopUpValue === `RESPONSE_DESCRIPTION_TEXT`}
+        headerOne={'response'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'explanation'}
+        headerOneBadgeTwo={''}
+        basicInfo={{}}
+        typeOfSetObject={''}
+        defaultSheetValue={
+          itemFrameworkOne?.itemFrameworkOneResponseExplanation
+            ?.itemFrameworkOneResponseExplanationMedia || ''
+        }
+        actualLableValue={''}
+        mode={'revise'}
+        onClickSave={(innerText) => {
+          // setResponseDescriptionText(innerText);
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+            payload: {
+              objectName: 'itemFrameworkOneResponseExplanation',
+              actualStateName: 'itemFrameworkOneResponseExplanationMedia',
               value: innerText
             }
           });

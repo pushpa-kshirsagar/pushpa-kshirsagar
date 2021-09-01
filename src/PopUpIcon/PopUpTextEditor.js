@@ -1,31 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
-import ReactCKEditor from 'react-ckeditor-component';
-import InputLabel from '@material-ui/core/InputLabel';
 import PopUp from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
-import SunEditor from 'suneditor-react';
-import {
-  align,
-  font,
-  fontColor,
-  fontSize,
-  formatBlock,
-  hiliteColor,
-  horizontalRule,
-  lineHeight,
-  list,
-  table,
-  textStyle,
-  image,
-  video,
-  link,
-  audio
-} from 'suneditor/src/plugins';
 import EditorJs from 'react-editor-js';
 import CheckList from '@editorjs/checklist';
 import Image from '@editorjs/image';
-import S3 from 'react-aws-s3';
 import Table from '@editorjs/table';
 import Paragraph from '@editorjs/paragraph';
 import List from '@editorjs/list';
@@ -38,6 +17,7 @@ import PropTypes from 'prop-types';
 import { Check, Clear } from '@material-ui/icons';
 import { DialogTitle, IconButton, Paper } from '@material-ui/core';
 import { CLEAR_ASSESSEE_INFO, POPUP_CLOSE } from '../actionType';
+import { imageUploadMethod } from '../Actions/GenericActions';
 import { useDispatch } from 'react-redux';
 
 const PopUpTextEditor = (props) => {
@@ -71,12 +51,15 @@ const PopUpTextEditor = (props) => {
       dispatch({ type: CLEAR_ASSESSEE_INFO });
     }
   };
+  useEffect(() => {
+    setInnerContent(defaultSheetValue);
+  }, [defaultSheetValue]);
   const onClickYes = async () => {
     const savedData = await instanceRef.current.save();
     // onClickSave(JSON.stringify(savedData));
     console.log(JSON.stringify(savedData));
     if (onClickSave) {
-      onClickSave(JSON.stringify(savedData));
+      onClickSave(savedData);
     }
     if (typeOfSetObject !== '') {
       dispatch({
@@ -86,20 +69,12 @@ const PopUpTextEditor = (props) => {
     }
     dispatch({ type: POPUP_CLOSE });
   };
-  const config = {
-    bucketName: 'iguru-serverless-test',
-    dirName: 'media' /* optional */,
-    region: 'ap-south-1',
-    accessKeyId: 'AKIAXWYDRA6RGT2PQ35B',
-    secretAccessKey: 'XBSGKhg1s8q7QaAHMYxXwPAenJny1wCoTRdNEZny'
-    // s3Url: 'https:/your-custom-s3-url.com/', /* optional */
-  };
-  const ReactS3Client = new S3(config);
   const uploadImage = async (file) => {
-    console.log(file.name);
-    let imgUploadData = await ReactS3Client.uploadFile(file, file.name);
-    let res = { success: 1, file: { url: imgUploadData.location } };
-    return res;
+    return imageUploadMethod(file);
+    // console.log(file.name);
+    // let imgUploadData = await ReactS3Client.uploadFile(file, file.name);
+    // let res = { success: 1, file: { url: imgUploadData.location } };
+    // return res;
   };
 
   return (
