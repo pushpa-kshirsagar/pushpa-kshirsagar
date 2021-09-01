@@ -81,10 +81,10 @@ export const DisplayPaneOne = () => {
     ? selectedAssociateInfo?.associate.informationBasic?.associatePicture
     : 'associates';
   const associateDescription = selectedAssociateInfo
-    ? selectedAssociateInfo?.associate.informationBasic.associateDescription
+    ? selectedAssociateInfo?.associate?.informationBasic?.associateDescription
     : '';
-  const assesseeAlias = leftPaneAssesseeInfo.assessee.informationBasic.assesseeAlias;
-  const assesseePicture = leftPaneAssesseeInfo.assessee.informationBasic.assesseePicture;
+  const assesseeAlias = leftPaneAssesseeInfo?.assessee?.informationBasic?.assesseeAlias;
+  const assesseePicture = leftPaneAssesseeInfo?.assessee?.informationBasic?.assesseePicture;
   const assesseeSignIN = localStorage.getItem('assesseeId');
   const assesseeName = leftPaneAssesseeInfo.assessee
     ? leftPaneAssesseeInfo.assessee.informationBasic.assesseeNameFirst.trim() +
