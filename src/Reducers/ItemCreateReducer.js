@@ -74,7 +74,7 @@ const initialState = {
           itemFrameworkOneLabelMedia: ''
         },
         itemFrameworkOneGroup: [],
-        itemFrameworkOneMedia: '', //itemLabel,
+        itemFrameworkOneMedia: null, //itemLabel,
         itemFrameworkOnePassage: {
           itemFrameworkOnePassageDisplay: false,
           itemFrameworkOnePassageMedia: ''

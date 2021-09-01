@@ -57,7 +57,7 @@ const PopUpTextEditor = (props) => {
   const onClickYes = async () => {
     const savedData = await instanceRef.current.save();
     // onClickSave(JSON.stringify(savedData));
-    console.log(JSON.stringify(savedData));
+    console.log(savedData);
     if (onClickSave) {
       onClickSave(savedData);
     }

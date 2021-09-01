@@ -300,6 +300,7 @@ function* workerSignInAssesseeInfo(data) {
             }
           }
         });
+        yield put({ type: LOADER_STOP })
         yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
         // yield put({ type: GET_SIGNED_ASSESSEE_PERMISSION_SAGA });
       } else {

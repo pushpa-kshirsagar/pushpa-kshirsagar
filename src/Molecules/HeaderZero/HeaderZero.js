@@ -15,23 +15,36 @@ import { SET_MOBILE_PANE_STATE } from '../../actionType';
 export const HeaderZero = (props) => {
   // const insightGURULogo = require('../../images/prafulta.jpg');
   const { userName = '', userEmail = '', isImageActive = false } = props;
-  const { brandLogoType } = useSelector((state) => state.UserReducer);
+  // const { brandLogoType } = useSelector((state) => state.UserReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   // const isBespoke = false;
+  const brandLogoType =
+    selectedAssociateInfo?.associate?.informationSetup?.associateAssociateSetup
+      ?.iguruPlatformBrandChoice;
   const dispatch = useDispatch();
-  const iguruBrandLogo = './Image/logo-04.jpeg'; //'./Image/logo-03.jpeg'
+  let iguruBrandLogo = './Image/logo-04.jpeg'; //'./Image/logo-03.jpeg'
   let iguruMainLogo = './Image/main-logo.jpeg';
   // const iguruMainLogo = './Image/main-logo.jpeg';
   if (brandLogoType === 'iGuru') {
     iguruMainLogo = './Image/main-logo.jpeg';
   }
-  if (brandLogoType === 'Associate' || brandLogoType === 'Associate & iGuru') {
-    iguruMainLogo = './Image/client-logo.jpeg';
+  if (brandLogoType === 'Associate') {
+    iguruMainLogo =
+      selectedAssociateInfo?.associate?.informationSetup?.associateAssociateSetup
+        ?.iguruPlatformBrandPicture;
+    iguruBrandLogo = '';
+  }
+  if (brandLogoType === 'Associate & iGuru') {
+    iguruBrandLogo =
+      selectedAssociateInfo?.associate?.informationSetup?.associateAssociateSetup
+        ?.iguruPlatformBrandPicture;
+        iguruMainLogo = './Image/main-logo.jpeg';
   }
   const onClickLogo = () => {
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
   };
-  
-  console.log("IN HEADER ===>", iguruMainLogo, brandLogoType);
+
+  console.log('IN HEADER ===>', iguruMainLogo, brandLogoType);
 
   return (
     <div className="header-container">
