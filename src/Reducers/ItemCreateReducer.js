@@ -74,7 +74,7 @@ const initialState = {
           itemFrameworkOneLabelMedia: ''
         },
         itemFrameworkOneGroup: [],
-        itemFrameworkOneMedia: null, //itemLabel,
+        itemFrameworkOneMedia: '', //itemLabel,
         itemFrameworkOnePassage: {
           itemFrameworkOnePassageDisplay: false,
           itemFrameworkOnePassageMedia: ''
@@ -133,7 +133,7 @@ const initialState = {
             itemFrameworkOneSectionSequence: 1,
             itemFrameworkOneSection: {
               itemFrameworkOneMedia: '',
-              itemFrameworkOneScore: 1,
+              itemFrameworkOneScore: null,
               itemFrameworkOneType: '',
               itemFrameworkOneResponseChoice: [
                 {

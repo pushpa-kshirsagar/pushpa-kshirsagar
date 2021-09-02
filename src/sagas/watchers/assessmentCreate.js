@@ -45,11 +45,17 @@ function* workerCreateAssessmentSaga(data) {
         type: SET_ASSESSMENT_BASIC_REDUCER_STATE,
         payload: apiResponse.responseObject[0].informationBasic
       });
+      yield put({ type: LOADER_STOP });
+      yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+      yield put({ type: POPUP_CLOSE });
+    } else {
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: apiResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
-    yield put({ type: LOADER_STOP });
-    yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    // yield put({ type: CLEAR_ASSESSMENT_INFO });
-    yield put({ type: POPUP_CLOSE });
+   
   } catch (e) {
     console.log('ERROR==', e);
     yield put({

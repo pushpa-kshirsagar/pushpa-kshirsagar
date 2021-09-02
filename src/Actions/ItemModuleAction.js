@@ -23,7 +23,10 @@ import {
   ITEM_GROUP_REVISE_INFO_SAGA,
   ITEM_TYPE_REVISE_INFO_SAGA,
   CONFIG_ITEM_ROLE_TYPE,
-  SET_POPUP_SINGLE_STATE
+  SET_POPUP_SINGLE_STATE,
+  SET_ITEM_DYNAMIC_SINGLE_STATE,
+  SET_TYPE_REDUCER_STATE,
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   getItemGroupItemReqObj,
@@ -433,5 +436,263 @@ export const updateItemTypeStatus = (selectedAssociateInfo, typeId, dispatch, re
   dispatch({
     type: ITEM_TYPE_REVISE_INFO_SAGA,
     payload: { secondaryOptionCheckValue: '', itemTypeItemReqBody: null, headerOne: '', reqBody }
+  });
+};
+export const setResponseToReducerObj = (responseObject, dispatch) => {
+  const { informationBasic, informationAllocation, informationFramework } = responseObject;
+  dispatch({
+    type: SET_TYPE_REDUCER_STATE,
+    payload: informationBasic
+  });
+  if (
+    informationAllocation &&
+    informationAllocation?.itemGroup?.itemGroupPrimary &&
+    informationAllocation?.itemGroup?.itemGroupPrimary.length > 0
+  ) {
+    let tempArr = informationAllocation.itemGroup.itemGroupPrimary.map((ob) => ob.id);
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemGroup',
+        actualStateName: 'itemGroupPrimary',
+        value: tempArr
+      }
+    });
+  } else {
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemGroup',
+        actualStateName: 'itemGroupPrimary',
+        value: []
+      }
+    });
+  }
+  if (
+    informationAllocation &&
+    informationAllocation?.itemGroup?.itemGroupSecondary &&
+    informationAllocation?.itemGroup?.itemGroupSecondary.length > 0
+  ) {
+    let tempArr = informationAllocation.itemGroup.itemGroupSecondary.map((ob) => ob.id);
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemGroup',
+        actualStateName: 'itemGroupSecondary',
+        value: tempArr
+      }
+    });
+  } else {
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemGroup',
+        actualStateName: 'itemGroupSecondary',
+        value: []
+      }
+    });
+  }
+  if (
+    informationAllocation &&
+    informationAllocation?.itemNode?.itemNodePrimary &&
+    informationAllocation?.itemNode?.itemNodePrimary.length > 0
+  ) {
+    let tempArr = informationAllocation.itemNode.itemNodePrimary.map((ob) => ob.id);
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemNode',
+        actualStateName: 'itemNodePrimary',
+        value: tempArr
+      }
+    });
+  } else {
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemNode',
+        actualStateName: 'itemNodePrimary',
+        value: []
+      }
+    });
+  }
+  if (
+    informationAllocation &&
+    informationAllocation?.itemNode?.itemNodeSecondary &&
+    informationAllocation?.itemNode?.itemNodeSecondary.length > 0
+  ) {
+    let tempArr = informationAllocation.itemNode.itemNodeSecondary.map((ob) => ob.id);
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemNode',
+        actualStateName: 'itemNodeSecondary',
+        value: tempArr
+      }
+    });
+  } else {
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemNode',
+        actualStateName: 'itemNodeSecondary',
+        value: []
+      }
+    });
+  }
+  if (
+    informationAllocation &&
+    informationAllocation?.itemType?.itemTypePrimary &&
+    informationAllocation?.itemType?.itemTypePrimary.length > 0
+  ) {
+    let tempArr = informationAllocation.itemType.itemTypePrimary.map((ob) => ob.id);
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemType',
+        actualStateName: 'itemTypePrimary',
+        value: tempArr
+      }
+    });
+  } else {
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemType',
+        actualStateName: 'itemTypePrimary',
+        value: []
+      }
+    });
+  }
+  if (
+    informationAllocation &&
+    informationAllocation?.itemType?.itemTypeSecondary &&
+    informationAllocation?.itemType?.itemTypeSecondary.length > 0
+  ) {
+    let tempArr = informationAllocation.itemType.itemTypeSecondary.map((ob) => ob.id);
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemType',
+        actualStateName: 'itemTypeSecondary',
+        value: tempArr
+      }
+    });
+  } else {
+    dispatch({
+      type: SET_ITEM_DYNAMIC_SINGLE_STATE,
+      payload: {
+        objectName: 'informationAllocation',
+        stateName: 'itemType',
+        actualStateName: 'itemTypeSecondary',
+        value: []
+      }
+    });
+  }
+  const {
+    itemFrameworkOneBlank = '',
+    itemFrameworkOneExplanation = '',
+    itemFrameworkOneLabel = '',
+    itemFrameworkOneLevel = null,
+    itemFrameworkOneMedia = '',
+    itemFrameworkOnePolarity = '',
+    itemFrameworkOneResponseChoice = [],
+    itemFrameworkOneResponseCorrect = '',
+    itemFrameworkOneResponseExplanation = '',
+    itemFrameworkOneResponseLabel = '',
+    itemFrameworkOneScore = '',
+    itemFrameworkOneTime = '',
+    itemFrameworkOneType = '',
+    itemFrameworkOneWeightage = '',
+    itemFrameworkOneSection = [],
+    itemFrameworkOneScale = []
+  } = informationFramework?.itemFrameworkOne;
+
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneScale', value: itemFrameworkOneScale }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneSection', value: itemFrameworkOneSection }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneBlank', value: itemFrameworkOneBlank }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneExplanation', value: itemFrameworkOneExplanation }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneLabel', value: itemFrameworkOneLabel }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneLevel', value: itemFrameworkOneLevel }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneMedia', value: itemFrameworkOneMedia }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOnePolarity', value: itemFrameworkOnePolarity }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'itemFrameworkOneResponseChoice',
+      value: itemFrameworkOneResponseChoice
+    }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'itemFrameworkOneResponseCorrect',
+      value: itemFrameworkOneResponseCorrect
+    }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'itemFrameworkOneResponseExplanation',
+      value: itemFrameworkOneResponseExplanation
+    }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: {
+      stateName: 'itemFrameworkOneResponseLabel',
+      value: itemFrameworkOneResponseLabel
+    }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneScore', value: itemFrameworkOneScore }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneTime', value: itemFrameworkOneTime }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneType', value: itemFrameworkOneType }
+  });
+  dispatch({
+    type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+    payload: { stateName: 'itemFrameworkOneWeightage', value: itemFrameworkOneWeightage }
   });
 };

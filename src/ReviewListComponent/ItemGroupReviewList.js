@@ -5,6 +5,8 @@ import {
   FILTERMODE,
   FILTERMODE_ENABLE,
   GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+  ITEM_ALLOCATE_SAGA,
+  LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
@@ -38,7 +40,8 @@ const ItemGroupReviewList = (props) => {
     allocatedTagsArray,
     selectedTagsArray,
     isSelectActive,
-    unselectedTagsArray
+    unselectedTagsArray,
+    allocateStr
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { cardValue } = useSelector((state) => state.PopUpReducer);
@@ -93,8 +96,25 @@ const ItemGroupReviewList = (props) => {
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'finish') {
-      console.log('allocatedTagsArray', allocatedTagsArray);
-      console.log('selectedTagsArray', selectedTagsArray);
+      console.log('allocateStr', allocateStr);
+      let distinctAllocateStr = allocateStr === 'itemsdistinct' ? 'itemDistinct' : '';
+      if (distinctAllocateStr !== '' && selectedTagsArray.length !== 0) {
+        if (distinctAllocateStr === 'itemDistinct') {
+          let request = {
+            assesseeId: selectedAssociateInfo?.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary,
+            itemDistinctAllocate: allocatedTagsArray,
+            itemDistinctAllocateInformation: {
+              itemGroup: selectedTagsArray
+            }
+          };
+          console.log(request);
+          dispatch({ type: LOADER_START });
+          dispatch({ type: ITEM_ALLOCATE_SAGA, payload: { request: request } });
+        }
+      }
     }
     if (siftValue === 'cancle') {
       dispatch({

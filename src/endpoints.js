@@ -262,6 +262,8 @@ export const ASSOCIATE_TYPE_UNSHARE_URL =
 export const ASSESSEE_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/share';
 export const ASSESSEE_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/unshare';
+export const ITEM_ALLOCATE = ITEMS + '/dev/insight-guru/api/item-distinct/allocate';
+export const ITEM_ALLOCATE_ASSESSMENT = ITEMS + '/dev/insight-guru/api/item/allocate/assessment';
 export const ASSESSEE_ALLOCATE = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/allocate';
 export const ASSESSEE_ALLOCATE_ASSIGNMENT =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee/allocate/assignment';

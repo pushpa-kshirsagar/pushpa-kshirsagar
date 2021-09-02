@@ -13,6 +13,23 @@ const EditorTemplate = (props) => {
   const { jsonData, label } = props;
   console.log('jsonData', jsonData);
   console.log('label', label);
+  function checkExtension(file) {
+    var extension = file.substr(file.lastIndexOf('.') + 1);
+    console.log('extension', extension);
+    switch (extension) {
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'gif':
+        return 'image';
+      case 'mp4':
+      case 'mp3':
+      case 'ogg':
+        return 'video';
+      default:
+        return -1;
+    }
+  }
   return (
     <>
       {jsonData?.blocks &&
@@ -20,11 +37,31 @@ const EditorTemplate = (props) => {
           return (
             <div>
               {dd.type === 'paragraph' && <p id={dd.id}>{ReactHTMLParser(dd.data.text)}</p>}
+              {dd.type === 'embed' && (
+                <iframe title={dd.id} width="420" height="315" src={dd.data.embed}></iframe>
+              )}
               {dd.type === 'image' && (
                 <Fragment>
-                  <img id={dd.id} src={dd.data.file.url} alt={'img'} />
-                  <div>{dd.data.caption}</div>
+                  {checkExtension(dd.data.file.url) === 'image' && dd.type === 'image' && (
+                    <Fragment>
+                      <img id={dd.id} src={dd.data.file.url} alt={'img'} />
+                      <div>{dd.data.caption}</div>
+                    </Fragment>
+                  )}
+                  {checkExtension(dd.data.file.url) === 'video' && dd.type === 'image' && (
+                    <Fragment>
+                      <video width="320" height="240" controls>
+                        <source src={dd.data.file.url} type="video/mp4" />
+                      </video>
+                    </Fragment>
+                  )}
                 </Fragment>
+              )}
+
+              {dd.type === 'audio' && (
+                <audio controls>
+                  <source src={dd.data.url} type="audio/mpeg" />
+                </audio>
               )}
             </div>
           );

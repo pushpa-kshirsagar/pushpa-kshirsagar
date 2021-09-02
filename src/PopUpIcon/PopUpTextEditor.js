@@ -3,6 +3,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import PopUp from '../Molecules/PopUp/PopUp';
 import '../Molecules/PopUp/PopUp.css';
 import EditorJs from 'react-editor-js';
+import Audio from 'audio-editor-js';
 import CheckList from '@editorjs/checklist';
 import Image from '@editorjs/image';
 import Table from '@editorjs/table';
@@ -17,7 +18,7 @@ import PropTypes from 'prop-types';
 import { Check, Clear } from '@material-ui/icons';
 import { DialogTitle, IconButton, Paper } from '@material-ui/core';
 import { CLEAR_ASSESSEE_INFO, POPUP_CLOSE } from '../actionType';
-import { imageUploadMethod } from '../Actions/GenericActions';
+import { imageUploadMethod,audioUploadMethod } from '../Actions/GenericActions';
 import { useDispatch } from 'react-redux';
 
 const PopUpTextEditor = (props) => {
@@ -70,7 +71,9 @@ const PopUpTextEditor = (props) => {
     dispatch({ type: POPUP_CLOSE });
   };
   const uploadImage = async (file) => {
-    return imageUploadMethod(file);
+    let uploadData = await imageUploadMethod(file);
+    console.log('uploadData', uploadData);
+    return uploadData;
     // console.log(file.name);
     // let imgUploadData = await ReactS3Client.uploadFile(file, file.name);
     // let res = { success: 1, file: { url: imgUploadData.location } };
@@ -137,7 +140,15 @@ const PopUpTextEditor = (props) => {
             instanceRef={(instance) => (instanceRef.current = instance)}
             data={innerContent}
             tools={{
-              image: { class: Image, config: { uploader: { uploadByFile: uploadImage } } },
+              image: {
+                class: Image,
+                config: { uploader: { uploadByFile: uploadImage }, types: '*/*' }
+              },
+              audio: {
+                class: Audio,
+                config: { saveServer: audioUploadMethod }
+              },
+              // video: { class: Video, config: { uploader: { uploadByFile: uploadImage } } },
               table: { class: Table },
               paragraph: { class: Paragraph },
               list: { class: List },

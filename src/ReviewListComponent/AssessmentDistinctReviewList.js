@@ -7,6 +7,7 @@ import {
   FILTERMODE,
   FILTERMODE_ENABLE,
   GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+  ITEM_ALLOCATE_ASSESSMENT_SAGA,
   LOADER_START,
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -124,6 +125,20 @@ const AssessmentDistinctReviewList = (props) => {
         dispatch({ type: LOADER_START });
         dispatch({ type: ASSESSMENT_ALLOCATE_ASSIGNMENT_SAGA, payload: { request: request } });
       }
+      if (FilterMode === 'itemAllocateToAssessment') {
+        let request = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          itemDistinctAllocate: { itemDistinct: allocatedTagsArray },
+          itemDistinctAllocateInformation: {
+            assessment: selectedTagsArray
+          }
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({ type: ITEM_ALLOCATE_ASSESSMENT_SAGA, payload: { request: request } });
+      }
     }
     if (siftValue === 'cancle') {
       dispatch({
@@ -176,6 +191,7 @@ const AssessmentDistinctReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log('FilterMode', FilterMode);
   return (
     <div>
       {reviewListDistinctData &&
@@ -211,7 +227,7 @@ const AssessmentDistinctReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-      {FilterMode === 'allocateToAssessment' && (
+      {(FilterMode === 'allocateToAssessment' || FilterMode === 'itemAllocateToAssessment') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

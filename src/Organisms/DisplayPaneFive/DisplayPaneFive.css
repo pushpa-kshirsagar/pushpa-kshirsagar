@@ -75,14 +75,23 @@
 
 /* new css */
 .ex_container {
-  font-size: 1.6rem;
   min-height: 50px;
   padding: 0px 5px;
   align-items: center;
   /* overflow: overlay; */
   color: rgba(0, 0, 0, 0.87);
 }
-
+.ig-label {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.ig-explanation {
+  font-size: 1.2rem;
+  font-style: italic
+}
+.ig-itemGeneric{
+  font-size: 1.6rem;
+}
 .label {
   height: 50px;
   font-size: 1.6rem;

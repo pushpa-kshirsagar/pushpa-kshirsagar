@@ -516,3 +516,6 @@ body {
     right: 10px;
   }
 }
+.audio button{
+  display: none;
+}

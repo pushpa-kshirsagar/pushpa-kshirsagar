@@ -5402,6 +5402,13 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+audio-editor-js@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/audio-editor-js/-/audio-editor-js-1.1.1.tgz#f5c4ae9b01644d287cb123ae9d1c37ad98900b29"
+  integrity sha512-KOyWNzIbcqLUlmxAkTipq/BBlOVK6k84S0U7bpRbdtkNxVe6RROZprIPluNug6wFowUb38qbS91y6TayJGMkFQ==
+  dependencies:
+    axios "^0.21.1"
+
 autobind-decorator@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/autobind-decorator/-/autobind-decorator-2.4.0.tgz#ea9e1c98708cf3b5b356f7cf9f10f265ff18239c"

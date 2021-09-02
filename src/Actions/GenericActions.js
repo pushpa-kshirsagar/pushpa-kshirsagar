@@ -35,7 +35,20 @@ function splitCamelCaseToString(s) {
 }
 export const imageUploadMethod = async (file) => {
   let imgUploadData = await ReactS3Client.uploadFile(file, file.name);
+  console.log(imgUploadData);
   let res = { success: 1, file: { url: imgUploadData.location } };
+  return res;
+};
+export const audioUploadMethod = async (file) => {
+  let imgUploadData = await ReactS3Client.uploadFile(file, file.name);
+  console.log(imgUploadData);
+  let res = {
+    data: {
+      url: imgUploadData.location,
+      name: 'audio.webm',
+      id: '123'
+    }
+  };
   return res;
 };
 export const getPermissionStr = (permissionObj) => {

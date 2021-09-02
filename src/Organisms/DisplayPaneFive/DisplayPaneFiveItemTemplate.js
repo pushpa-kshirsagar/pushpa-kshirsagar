@@ -8,6 +8,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import EditorJs from 'react-editor-js';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import { Checkbox } from '@material-ui/core';
 import { CheckBox } from '@material-ui/icons';
@@ -134,7 +135,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
         {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia !== '' ||
           reviewMode === 'revise') && (
           <div
-            className={'ex_container'}
+            className={['ex_container', 'ig-label'].join(' ')}
             style={{ cursor: reviewMode === 'revise' && 'pointer' }}
             onClick={
               reviewMode === 'revise'
@@ -161,11 +162,42 @@ const DisplayPaneFiveItemTemplate = (props) => {
           </div>
         )}
       </div>
-      {/* Item */}
-      <div className={'innerpadding'}>
-        {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
+      {/* Passage */}
+      {(itemType === 'Comprehension' || itemType === 'Template') && (
+        <div className={'innerpadding'}>
           <div
-            className={'ex_container'}
+            className={['ex_container', 'ig-itemGeneric'].join(' ')}
+            style={{ cursor: reviewMode === 'revise' && 'pointer' }}
+            onClick={
+              reviewMode === 'revise'
+                ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'PASSAGE_PRIMARY_POPUP',
+                        popupMode: popupMode
+                      }
+                    });
+                  }
+                : null
+            }
+          >
+            {(itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia === '' &&
+              reviewMode === 'revise' &&
+              ReactHTMLParser(passageText)) || (
+              <EditorTemplate
+                jsonData={itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
+                label={'passage'}
+              />
+            )}
+          </div>
+        </div>
+      )}
+      {/* Item */}
+      {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
+        <div className={'innerpadding'}>
+          <div
+            className={['ex_container', 'ig-itemGeneric'].join(' ')}
             style={{ cursor: reviewMode === 'revise' && 'pointer' }}
             onClick={
               reviewMode === 'revise'
@@ -184,11 +216,12 @@ const DisplayPaneFiveItemTemplate = (props) => {
             {(itemFrameworkOne?.itemFrameworkOneMedia === '' &&
               reviewMode === 'revise' &&
               ReactHTMLParser(itemText)) || (
+              // <EditorJs data={itemFrameworkOne?.itemFrameworkOneMedia} readOnly={true} />
               <EditorTemplate label={'item'} jsonData={itemFrameworkOne?.itemFrameworkOneMedia} />
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
       {/* for sub item  */}
       {(itemType === 'Likert-Scale' || itemType === 'Template') && (
         <div className="likartscale">
@@ -317,7 +350,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                                 )}
                               </div>
                               <div
-                                className={'likert-choice-font'}
+                                className={['likert-choice-font','ig-explanation'].join(' ')}
                                 style={{
                                   cursor: reviewMode === 'revise' ? 'pointer' : ''
                                 }}
@@ -429,43 +462,12 @@ const DisplayPaneFiveItemTemplate = (props) => {
         </div>
       )}
 
-      {/* Passage */}
-      {(itemType === 'Comprehension' || itemType === 'Template') && (
+      {/* Item explanation */}
+      {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia !== '' ||
+        reviewMode === 'revise') && (
         <div className={'innerpadding'}>
           <div
-            className={'ex_container'}
-            style={{ cursor: reviewMode === 'revise' && 'pointer' }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'PASSAGE_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {(itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia === '' &&
-              reviewMode === 'revise' &&
-              ReactHTMLParser(passageText)) || (
-              <EditorTemplate
-                jsonData={itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
-                label={'passage'}
-              />
-            )}
-          </div>
-        </div>
-      )}
-      {/* Item explanation */}
-      <div className={'innerpadding'}>
-        {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia !== '' ||
-          reviewMode === 'revise') && (
-          <div
-            className={'ex_container'}
+            className={['ex_container', 'ig-explanation'].join(' ')}
             style={{ cursor: reviewMode === 'revise' && 'pointer' }}
             onClick={
               reviewMode === 'revise'
@@ -493,42 +495,48 @@ const DisplayPaneFiveItemTemplate = (props) => {
               />
             )}
           </div>
-        )}
-      </div>
-      {/* response label */}
-      <div className={'innerpadding'}>
-        <div
-          className="ex_container"
-          style={{
-            cursor: reviewMode === 'revise' ? 'pointer' : ''
-          }}
-          onClick={
-            reviewMode === 'revise'
-              ? () => {
-                  dispatch({
-                    type: SET_POPUP_VALUE,
-                    payload: {
-                      isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
-                      popupMode: popupMode
-                    }
-                  });
-                }
-              : null
-          }
-        >
-          {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia ===
-            '' &&
-            reviewMode === 'revise' &&
-            ReactHTMLParser(responseLabelText)) || (
-            <EditorTemplate
-              jsonData={
-                itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia
-              }
-              label={'itemFrameworkOneResponseLabelMedia'}
-            />
-          )}
         </div>
-      </div>
+      )}
+      {/* response label */}
+      {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia !==
+        '' ||
+        reviewMode === 'revise') && (
+        <div className={'innerpadding'}>
+          <div
+            className={['ex_container', 'ig-label'].join(' ')}
+            style={{
+              cursor: reviewMode === 'revise' ? 'pointer' : ''
+            }}
+            onClick={
+              reviewMode === 'revise'
+                ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'ITEM_CHOICE_LABEL_PRIMARY_POPUP',
+                        popupMode: popupMode
+                      }
+                    });
+                  }
+                : null
+            }
+          >
+            {(itemFrameworkOne?.itemFrameworkOneResponseLabel
+              ?.itemFrameworkOneResponseLabelMedia === '' &&
+              reviewMode === 'revise' &&
+              ReactHTMLParser(responseLabelText)) || (
+              <EditorTemplate
+                jsonData={
+                  itemFrameworkOne?.itemFrameworkOneResponseLabel
+                    ?.itemFrameworkOneResponseLabelMedia
+                }
+                label={'itemFrameworkOneResponseLabelMedia'}
+              />
+            )}
+          </div>
+        </div>
+      )}
+
       {/* response explanation */}
       {(itemType === 'Response-Choice (Single-Select)' ||
         itemType === 'Template' ||
@@ -536,42 +544,44 @@ const DisplayPaneFiveItemTemplate = (props) => {
         itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
         itemType === 'Fill-in-the-Blank (Response-Choice)') && (
-        <div className={'innerpadding'}>
+        <Fragment>
           {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
             ?.itemFrameworkOneResponseExplanationMedia !== '' ||
             reviewMode === 'revise') && (
-            <div
-              className={'ex_container'}
-              style={{ cursor: reviewMode === 'revise' && 'pointer' }}
-              onClick={
-                reviewMode === 'revise'
-                  ? () => {
-                      dispatch({
-                        type: SET_POPUP_VALUE,
-                        payload: {
-                          isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
-                          popupMode: 'RESPONSE_DESCRIPTION_TEXT'
-                        }
-                      });
+            <div className={'innerpadding'}>
+              <div
+                className={['ex_container','ig-explanation '].join(' ')}
+                style={{ cursor: reviewMode === 'revise' && 'pointer' }}
+                onClick={
+                  reviewMode === 'revise'
+                    ? () => {
+                        dispatch({
+                          type: SET_POPUP_VALUE,
+                          payload: {
+                            isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
+                            popupMode: 'RESPONSE_DESCRIPTION_TEXT'
+                          }
+                        });
+                      }
+                    : null
+                }
+              >
+                {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                  ?.itemFrameworkOneResponseExplanationMedia === '' &&
+                  reviewMode === 'revise' &&
+                  ReactHTMLParser(responseExplanationText)) || (
+                  <EditorTemplate
+                    jsonData={
+                      itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                        ?.itemFrameworkOneResponseExplanationMedia
                     }
-                  : null
-              }
-            >
-              {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                ?.itemFrameworkOneResponseExplanationMedia === '' &&
-                reviewMode === 'revise' &&
-                ReactHTMLParser(responseExplanationText)) || (
-                <EditorTemplate
-                  jsonData={
-                    itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                      ?.itemFrameworkOneResponseExplanationMedia
-                  }
-                  label={'itemFrameworkOneResponseExplanationMedia'}
-                />
-              )}
+                    label={'itemFrameworkOneResponseExplanationMedia'}
+                  />
+                )}
+              </div>
             </div>
           )}
-        </div>
+        </Fragment>
       )}
       {/* response */}
       {(itemType === 'Response (Long)' ||
@@ -625,6 +635,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                   </div>
 
                   <div
+                  className={['ig-itemGeneric '].join(' ')}
                     style={{
                       paddingLeft: '5px',
                       cursor: reviewMode === 'revise' ? 'pointer' : ''
@@ -727,7 +738,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                     ?.itemFrameworkOneResponseChoiceExplanationMedia !== '' ||
                     reviewMode === 'revise') && (
                     <div
-                      className="ex_container"
+                      className={['ex_container','ig-explanation '].join(' ')}
                       style={{
                         cursor: reviewMode === 'revise' ? 'pointer' : ''
                       }}

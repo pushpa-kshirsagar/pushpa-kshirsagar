@@ -40,6 +40,7 @@ import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 import Paper from '@material-ui/core/Paper';
 import DisplayPaneFiveItemTemplate from './DisplayPaneFiveItemTemplate';
 import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
+import { setResponseToReducerObj } from '../../Actions/ItemModuleAction';
 
 const useStyles = makeStyles({
   root: {
@@ -259,6 +260,7 @@ export const DisplayPaneFive = () => {
     setIsShowReviseIcon(false);
   };
   const onClickReviseCancel = () => {
+    setResponseToReducerObj(responseObject,dispatch);
     setIsShowReviseIcon(true);
     dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
   };
