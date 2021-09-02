@@ -10,23 +10,25 @@ const EditorTemplate = (props) => {
   const itemFrameworkOneResponseChoice =
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
-  const { jsonData } = props;
+  const { jsonData, label } = props;
   console.log('jsonData', jsonData);
+  console.log('label', label);
   return (
     <>
-      {jsonData?.blocks.map((dd, index) => {
-        return (
-          <div>
-            {dd.type === 'paragraph' && <p id={dd.id}>{ReactHTMLParser(dd.data.text)}</p>}
-            {dd.type === 'image' && (
-              <Fragment>
-                <img id={dd.id} src={dd.data.file.url} alt={'img'} />
-                <div>{dd.data.caption}</div>
-              </Fragment>
-            )}
-          </div>
-        );
-      })}
+      {jsonData?.blocks &&
+        jsonData?.blocks.map((dd, index) => {
+          return (
+            <div>
+              {dd.type === 'paragraph' && <p id={dd.id}>{ReactHTMLParser(dd.data.text)}</p>}
+              {dd.type === 'image' && (
+                <Fragment>
+                  <img id={dd.id} src={dd.data.file.url} alt={'img'} />
+                  <div>{dd.data.caption}</div>
+                </Fragment>
+              )}
+            </div>
+          );
+        })}
     </>
   );
 };

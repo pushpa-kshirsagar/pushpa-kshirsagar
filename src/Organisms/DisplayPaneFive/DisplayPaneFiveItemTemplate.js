@@ -154,6 +154,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
               reviewMode === 'revise' &&
               ReactHTMLParser(itemLabelText)) || (
               <EditorTemplate
+                label={'itemLabel'}
                 jsonData={itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia}
               />
             )}
@@ -183,7 +184,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
             {(itemFrameworkOne?.itemFrameworkOneMedia === '' &&
               reviewMode === 'revise' &&
               ReactHTMLParser(itemText)) || (
-              <EditorTemplate jsonData={itemFrameworkOne?.itemFrameworkOneMedia} />
+              <EditorTemplate label={'item'} jsonData={itemFrameworkOne?.itemFrameworkOneMedia} />
             )}
           </div>
         )}
@@ -232,6 +233,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                         reviewMode === 'revise' &&
                         ReactHTMLParser('<span>item</span>-' + `${keys + 1}`)) || (
                         <EditorTemplate
+                          label={'sub item'}
                           jsonData={ob.itemFrameworkOneSection?.itemFrameworkOneMedia}
                         />
                       )}
@@ -309,6 +311,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                                   reviewMode === 'revise' &&
                                   ReactHTMLParser(optionLabel1)) || (
                                   <EditorTemplate
+                                    label={'subitemchoice'}
                                     jsonData={opt.itemFrameworkOneResponseChoiceMedia}
                                   />
                                 )}
@@ -451,6 +454,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
               ReactHTMLParser(passageText)) || (
               <EditorTemplate
                 jsonData={itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
+                label={'passage'}
               />
             )}
           </div>
@@ -485,6 +489,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                 jsonData={
                   itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia
                 }
+                label={'itemFrameworkOneExplanationMedia'}
               />
             )}
           </div>
@@ -519,6 +524,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
               jsonData={
                 itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia
               }
+              label={'itemFrameworkOneResponseLabelMedia'}
             />
           )}
         </div>
@@ -560,6 +566,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                     itemFrameworkOne?.itemFrameworkOneResponseExplanation
                       ?.itemFrameworkOneResponseExplanationMedia
                   }
+                  label={'itemFrameworkOneResponseExplanationMedia'}
                 />
               )}
             </div>
@@ -640,7 +647,10 @@ const DisplayPaneFiveItemTemplate = (props) => {
                     {(op.itemFrameworkOneResponseChoiceMedia === '' &&
                       reviewMode === 'revise' &&
                       ReactHTMLParser(optionLabel)) || (
-                      <EditorTemplate jsonData={op.itemFrameworkOneResponseChoiceMedia} />
+                      <EditorTemplate
+                        jsonData={op.itemFrameworkOneResponseChoiceMedia}
+                        label={'itemFrameworkOneResponseChoiceMedia'}
+                      />
                     )}
                   </div>
 
@@ -744,6 +754,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                             op.itemFrameworkOneResponseChoiceExplanation
                               ?.itemFrameworkOneResponseChoiceExplanationMedia
                           }
+                          label={'itemFrameworkOneResponseChoiceExplanationMedia'}
                         />
                       )}
                     </div>
