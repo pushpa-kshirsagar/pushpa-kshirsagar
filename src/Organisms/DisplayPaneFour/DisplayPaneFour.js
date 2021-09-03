@@ -3,6 +3,7 @@ import HeaderCard from '../../Molecules/Header/HeaderCard';
 import './DisplayPaneFour.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_MOBILE_PANE_STATE, SET_PANE_THREE_PREVIEW_MODE } from '../../actionType';
+import EditorTemplate from '../DisplayPaneFive/EditorTemplate';
 
 export const DisplayPaneFour = () => {
   const dispatch = useDispatch();
@@ -54,8 +55,10 @@ export const DisplayPaneFour = () => {
               overflow: 'overlay'
               // display: 'flex'
             }}
-            dangerouslySetInnerHTML={{ __html: previewInnerHTML }}
-          ></div>
+            // dangerouslySetInnerHTML={{ __html: previewInnerHTML }}
+          >
+            <EditorTemplate label={previewHeaderOne} jsonData={previewInnerHTML} />
+          </div>
         </>
       </div>
     </>

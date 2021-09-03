@@ -5,14 +5,20 @@ export const setAssesseeAssessmentItemSaveResCall = (
   dispatch,
   assesseeAssessmentStartData,
   itemId,
+  id,
+  assesseeId,
   currentQuestionChoice,
   itemTimeStart
 ) => {
   let ItemObj = {
+    id: id,
+    assesseeId: assesseeId,
     assesseeAssignmentId: assesseeAssessmentStartData.assignmentId,
     assesseeAssignmentAssessmentId: assesseeAssessmentStartData.assessmentId,
     assesseeAssignmentAssessmentItemId: itemId,
+    assesseeAssignmentAssessmentItemExplanation: '',
     assesseeAssignmentAssessmentItemResponseChoiceSelected: currentQuestionChoice,
+    assesseeAssignmentAssessmentItemStatus: '',
     assesseeAssignmentAssessmentItemTimeline: {
       assesseeAssignmentAssessmentItemTimelineDateTimeStart: itemTimeStart,
       assesseeAssignmentAssessmentItemTimelineDateTimeEnd: new Date().getTime()
@@ -30,7 +36,7 @@ export const setAssesseeAssessmentItemSaveResCall = (
       };
     } else {
       let ans = JSON.parse(localStorage.getItem('assessmentItem'));
-      console.log('ans',ans);
+      console.log('ans', ans);
       ans.push(ItemObj);
       reqObj = {
         assesseeId: selectedAssociateInfo?.assesseeId,

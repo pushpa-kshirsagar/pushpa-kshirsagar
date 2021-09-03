@@ -618,7 +618,6 @@ export const setResponseToReducerObj = (responseObject, dispatch) => {
     itemFrameworkOneSection = [],
     itemFrameworkOneScale = []
   } = informationFramework?.itemFrameworkOne;
-
   dispatch({
     type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
     payload: { stateName: 'itemFrameworkOneScale', value: itemFrameworkOneScale }

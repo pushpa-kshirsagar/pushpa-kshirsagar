@@ -104,9 +104,13 @@ export const DisplayPaneFive = () => {
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
   };
-  const { headerOneBadgeTwo, responseObject, reviewMode, createMode } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
-  );
+  const {
+    headerOneBadgeTwo,
+    responseObject,
+    originResponseObj,
+    reviewMode,
+    createMode
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
@@ -260,7 +264,7 @@ export const DisplayPaneFive = () => {
     setIsShowReviseIcon(false);
   };
   const onClickReviseCancel = () => {
-    setResponseToReducerObj(responseObject,dispatch);
+    setResponseToReducerObj(JSON.parse(originResponseObj), dispatch);
     setIsShowReviseIcon(true);
     dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
   };

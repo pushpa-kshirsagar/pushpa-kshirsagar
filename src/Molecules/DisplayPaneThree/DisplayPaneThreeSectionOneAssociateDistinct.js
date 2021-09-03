@@ -49,8 +49,11 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   function informationBasicStr(string) {
-    return string==="NAME_UNIQUE"?'Unique Name Required':string==='NAME_DESCRIPTION_UNIQUE'?'Unique Name + Description Required': 'Unique Name & Description Not Rquired'
-   
+    return string === 'NAME_UNIQUE'
+      ? 'Unique Name Required'
+      : string === 'NAME_DESCRIPTION_UNIQUE'
+      ? 'Unique Name + Description Required'
+      : 'Unique Name & Description Not Rquired';
   }
   useEffect(() => {}, [administratorSecondary]);
 
@@ -421,7 +424,13 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctInformationBasic==="NAME_UNIQUE"?'Unique Name Required':assesseeSetUpModule?.assesseeDistinctInformationBasic==='NAME_DESCRIPTION_UNIQUE'?'Unique Name + Alias Required': 'Unique Name & Alias Not Rquired'
+                  innerLabelBadgeList:
+                    assesseeSetUpModule?.assesseeDistinctInformationBasic === 'NAME_UNIQUE'
+                      ? 'Unique Name Required'
+                      : assesseeSetUpModule?.assesseeDistinctInformationBasic ===
+                        'NAME_DESCRIPTION_UNIQUE'
+                      ? 'Unique Name + Alias Required'
+                      : 'Unique Name & Alias Not Rquired'
                 },
                 {
                   labelTextTwoBadge: 'name',
@@ -475,7 +484,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assesseeSetUpModule?.assesseeGroupInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assesseeSetUpModule?.assesseeGroupInformationBasic
+                  )
                 }
               ]
             },
@@ -504,7 +515,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assesseeSetUpModule?.assesseeRoleInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assesseeSetUpModule?.assesseeRoleInformationBasic
+                  )
                 }
               ]
             },
@@ -533,7 +546,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assesseeSetUpModule?.assesseeTypeInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assesseeSetUpModule?.assesseeTypeInformationBasic
+                  )
                 }
               ]
             },
@@ -586,7 +601,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assessmentSetUpModule?.assessmentDistinctInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assessmentSetUpModule?.assessmentDistinctInformationBasic
+                  )
                 }
               ]
             },
@@ -626,7 +643,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assessmentSetUpModule?.assessmentGroupInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assessmentSetUpModule?.assessmentGroupInformationBasic
+                  )
                 }
               ]
             },
@@ -655,7 +674,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assessmentSetUpModule?.assessmentTypeInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assessmentSetUpModule?.assessmentTypeInformationBasic
+                  )
                 }
               ]
             },
@@ -708,7 +729,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assignmentSetUpModule?.assignmentDistinctInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentDistinctInformationBasic
+                  )
                 }
               ]
             },
@@ -737,7 +760,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assignmentSetUpModule?.assignmentGroupInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentGroupInformationBasic
+                  )
                 }
               ]
             },
@@ -766,7 +791,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(assignmentSetUpModule?.assignmentTypeInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentTypeInformationBasic
+                  )
                 }
               ]
             },
@@ -819,7 +846,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(setUpAssociateModule?.associateDistinctInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateDistinctInformationBasic
+                  )
                 }
               ]
             },
@@ -869,7 +898,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(setUpAssociateModule?.associateGroupInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateGroupInformationBasic
+                  )
                 }
               ]
             },
@@ -898,7 +929,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(setUpAssociateModule?.associateNodeInformationBasic )
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateNodeInformationBasic
+                  )
                 }
               ]
             },
@@ -1001,7 +1034,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(setUpAssociateModule?.associateRoleInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateRoleInformationBasic
+                  )
                 }
               ]
             },
@@ -1030,7 +1065,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(setUpAssociateModule?.associateTypeInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateTypeInformationBasic
+                  )
                 }
               ]
             },
@@ -1073,6 +1110,43 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               ]
             },
             {
+              labelTextTwoBadge: 'country',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'flag',
+                  innerLabelBadgeList:
+                    setUpAssociateModule?.associateCountry?.associateCountryFlag || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'name',
+                  innerLabelBadgeList:
+                    setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'tag',
+                  innerLabelBadgeList:
+                    setUpAssociateModule?.associateCountry?.associateCountryTag || 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'currency',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'name',
+                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencyName || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'symbol',
+                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencySymbol || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'tag',
+                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencyTag || 'No'
+                }
+              ]
+            },
+            {
               labelTextTwoBadge: 'date',
               innerLabelBadgeList: setUpAssociateModule?.associateDateFormat || 'No'
             },
@@ -1095,7 +1169,17 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'language',
-              innerLabelBadgeList: setUpAssociateModule?.associateLanguage || 'No'
+              // innerLabelBadgeList: setUpAssociateModule?.associateLanguage || 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'name',
+                  innerLabelBadgeList: setUpAssociateModule?.associateLanguageName || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'tag',
+                  innerLabelBadgeList: setUpAssociateModule?.associateLanguageTag || 'No'
+                }
+              ]
             },
             {
               labelTextTwoBadge: 'service',
@@ -1113,6 +1197,10 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                   innerLabelBadgeList: setUpAssociateModule?.iguruPlatformThemeApproval
                     ? 'Yes'
                     : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'choice',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformThemeChoice || 'No'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -1171,7 +1259,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(analyticSetUpModule?.iguruAnalyticTypeInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    analyticSetUpModule?.iguruAnalyticTypeInformationBasic
+                  )
                 }
               ]
             },
@@ -1200,7 +1290,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(analyticSetUpModule?.iguruAnalyticGroupInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    analyticSetUpModule?.iguruAnalyticGroupInformationBasic
+                  )
                 }
               ]
             },
@@ -1229,7 +1321,10 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(analyticSetUpModule?.iGuruAnalyticTypeInformationBasic)                }
+                  innerLabelBadgeList: informationBasicStr(
+                    analyticSetUpModule?.iGuruAnalyticTypeInformationBasic
+                  )
+                }
               ]
             },
             {
@@ -1361,7 +1456,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(itemSetUpModule?.itemGroupInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    itemSetUpModule?.itemGroupInformationBasic
+                  )
                 }
               ]
             },
@@ -1388,7 +1485,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(itemSetUpModule?.itemTypeInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(
+                    itemSetUpModule?.itemTypeInformationBasic
+                  )
                 }
               ]
             },

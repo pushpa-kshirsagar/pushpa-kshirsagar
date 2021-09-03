@@ -34,6 +34,7 @@ const initialState = {
   previewHeaderBadgeThree: '',
   previewInnerHTML: '',
   isItemPreviewShow: false,
+  originResponseObj:null,
   responseObject: {},
   reviewMode: 'review',
   createMode: '',
@@ -112,7 +113,7 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
         headerOneBadgeOne: action.payload.headerOneBadgeOne,
         headerOneBadgeTwo: action.payload.headerOneBadgeTwo,
         headerOneBadgeThree: action.payload.headerOneBadgeThree,
-        responseObject: action.payload.responseObject,
+        responseObject: { ...action.payload.responseObject },
         reviewMode: action.payload.reviewMode || 'review',
         createMode: action.payload.createMode || '',
         selectedModule: action.payload.selectedModule || ''

@@ -26,6 +26,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { setAssesseeAssessmentItemSaveResCall } from '../../Actions/ActionAssesseeAssessment';
 import { useTimer } from 'react-timer-hook';
 import { InputLabel, Paper } from '@material-ui/core';
+import EditorTemplate from '../DisplayPaneFive/EditorTemplate';
 
 const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
   const { seconds, minutes, hours } = useTimer({
@@ -160,13 +161,16 @@ export const DisplayPaneSeven = () => {
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
     let itemId = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].itemId;
-
+    let id = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].id;
+    let assesseeId = assesseeAssessmentStartData.assesseeId;
     if (clickedval === 'next') {
       setAssesseeAssessmentItemSaveResCall(
         selectedAssociateInfo,
         dispatch,
         assesseeAssessmentStartData,
+        id,
         itemId,
+        assesseeId,
         currentQuestionChoice,
         itemTimeStart
       );
@@ -219,6 +223,8 @@ export const DisplayPaneSeven = () => {
     setcurrentQuestionChoice(e.target.value);
   };
   console.log('currentQuestionIndex', currentQuestionIndex);
+  let itemObect = assesseeAssessmentStartData?.assessmentItem[currentQuestionIndex];
+  console.log('itemObect', itemObect);
   return (
     <>
       <div>
@@ -249,6 +255,106 @@ export const DisplayPaneSeven = () => {
         </div>
       )}
       <div className="containerPadding displayPaneFive-main-container">
+        {assesseeAssessmentStartData && (
+          <Fragment>
+            {/* item label */}
+            {itemObect.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia !== '' && (
+              <div className={'innerpadding'}>
+                <div className={['ex_container', 'ig-label'].join(' ')}>
+                  <EditorTemplate
+                    label={'itemFrameworkOneLabel'}
+                    jsonData={itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia}
+                  />
+                </div>
+              </div>
+            )}
+            {/* item */}
+            {itemObect.itemFrameworkOneMedia !== '' && (
+              <div className={'innerpadding'}>
+                <div className={['ex_container', 'ig-label'].join(' ')}>
+                  <EditorTemplate
+                    label={'itemFrameworkOneMedia'}
+                    jsonData={itemObect?.itemFrameworkOneMedia}
+                  />
+                </div>
+              </div>
+            )}
+            {/* item explanation */}
+            {itemObect.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia !== '' && (
+              <div className={'innerpadding'}>
+                <div className={['ex_container', 'ig-label'].join(' ')}>
+                  <EditorTemplate
+                    label={'itemFrameworkOneExplanation'}
+                    jsonData={
+                      itemObect?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia
+                    }
+                  />
+                </div>
+              </div>
+            )}
+            {/* response label */}
+            {itemObect.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia !== '' && (
+              <div className={'innerpadding'}>
+                <div className={['ex_container', 'ig-label'].join(' ')}>
+                  <EditorTemplate
+                    label={'itemFrameworkOneResponseLabel'}
+                    jsonData={
+                      itemObect?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia
+                    }
+                  />
+                </div>
+              </div>
+            )}
+            {itemObect.itemFrameworkOneResponseChoice.map((op, key) => {
+              return (
+                <Fragment>
+                  {op.itemFrameworkOneResponseChoiceMedia !== '' && (
+                    <div key={`op-${key}`}>
+                      <div className="option-container ex_container" key={`option-${key}`}>
+                        <div style={{ paddingRight: '5px', display: 'flex', alignItems: 'center' }}>
+                          <input
+                            type="radio"
+                            name="option1"
+                            value={`${op.itemFrameworkOneResponseChoiceNumber}`}
+                            onChange={handleRadioButton}
+                            checked={currentQuestionChoice === op.itemFrameworkOneResponseChoice}
+                          />
+                        </div>
+
+                        <div
+                          className={['ig-itemGeneric '].join(' ')}
+                          style={{
+                            paddingLeft: '5px'
+                          }}
+                        >
+                          <EditorTemplate
+                            jsonData={op.itemFrameworkOneResponseChoiceMedia}
+                            label={'itemFrameworkOneResponseChoiceMedia'}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        {op.itemFrameworkOneResponseChoiceExplanation
+                          ?.itemFrameworkOneResponseChoiceExplanationMedia !== '' && (
+                          <div className={['ex_container', 'ig-explanation '].join(' ')}>
+                            <EditorTemplate
+                              jsonData={
+                                op.itemFrameworkOneResponseChoiceExplanation
+                                  ?.itemFrameworkOneResponseChoiceExplanationMedia
+                              }
+                              label={'itemFrameworkOneResponseChoiceExplanationMedia'}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </Fragment>
+              );
+            })}
+          </Fragment>
+        )}
         {assesseeAssessmentStartData && (
           <Fragment>
             {(assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]

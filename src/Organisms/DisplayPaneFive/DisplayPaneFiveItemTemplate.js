@@ -20,7 +20,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
   const dispatch = useDispatch();
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
-  const { reviewMode, responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const optionLabel =
     "<span>response</span>&nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp;";
   const optionLabel1 =

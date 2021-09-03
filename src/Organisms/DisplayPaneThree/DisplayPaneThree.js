@@ -150,6 +150,7 @@ import DisplayPaneThreeSectionOneCultureProfileType from '../../Molecules/Displa
 import DisplayPaneThreeSectionOneJobProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneJobProfileType';
 import DisplayPaneThreeSectionTwoCultureProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileType';
 import DisplayPaneThreeSectionTwoJobProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoJobProfileType';
+import { setResponseToReducerObj } from '../../Actions/ItemModuleAction';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -159,6 +160,7 @@ export const DisplayPaneThree = () => {
     headerOneBadgeOne,
     headerOneBadgeTwo,
     headerOneBadgeThree,
+    originResponseObj,
     responseObject,
     reviewMode,
     createMode,
@@ -677,6 +679,9 @@ export const DisplayPaneThree = () => {
   };
   const onClickReviseCancel = () => {
     console.log('ON CLICK CANCEL ICON');
+    if (headerOneBadgeOne === 'information' && headerOne === 'item') {
+      setResponseToReducerObj(JSON.parse(originResponseObj), dispatch);
+    }
     dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
     setIsShowReviseIcon(true);
   };
@@ -1602,7 +1607,8 @@ export const DisplayPaneThree = () => {
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId: id,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         assessment: {
           id,
           informationBasic,

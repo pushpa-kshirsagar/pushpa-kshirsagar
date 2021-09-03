@@ -70,15 +70,15 @@ const initialState = {
   },
   informationFramework: {
     assessmentCommunique: {
-      assessmentCommuniquePrimary: '',
-      assessmentCommuniqueSecondary: ''
+      assessmentCommuniquePrimary: null,
+      assessmentCommuniqueSecondary: null
     },
     assessmentItem: [],
     assessmentManuscript: {
-      assessmentManuscriptPrimary: '',
-      assessmentManuscriptSecondary: ''
+      assessmentManuscriptPrimary: null,
+      assessmentManuscriptSecondary: null
     },
-    assessmentItemTotal: '',
+    assessmentItemTotal: null,
     assessmentScore: {
       assessmentScoreMaximum: 0,
       assessmentScoreMinimum: 0

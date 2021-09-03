@@ -22,6 +22,7 @@ import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 import PopUpDatePicker from '../../PopUpInformation/PopUpDatePicker';
+import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 
 const PopUpAssessmentCreate = (props) => {
   const { headerOne } = props;
@@ -53,7 +54,8 @@ const PopUpAssessmentCreate = (props) => {
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       assessment: {
         informationBasic: informationBasic,
-        informationAllocation: informationAllocation
+        informationAllocation: informationAllocation,
+        informationFramework: informationFramework
       }
     };
 
@@ -335,7 +337,7 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_SCORE_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpTextSheet
+      <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
@@ -349,7 +351,7 @@ const PopUpAssessmentCreate = (props) => {
         actualLableValue={'assessmentCommuniquePrimary'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpTextSheet
+      <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
@@ -363,7 +365,7 @@ const PopUpAssessmentCreate = (props) => {
         actualLableValue={'assessmentManuscriptPrimary'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpTextSheet
+      <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_SECONDARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
@@ -405,7 +407,7 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpTextSheet
+      <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_SECONDARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}

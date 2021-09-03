@@ -16,6 +16,7 @@ import {
   SET_POPUP_STATE
 } from '../../actionType';
 import { RES_START_POPUP_OPTION, ASSESSMENT_CLOSED_POPUP_OPTION } from '../../PopUpConfig';
+import EditorTemplate from '../DisplayPaneFive/EditorTemplate';
 
 export const DisplayPaneSix = () => {
   // const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
@@ -123,8 +124,23 @@ export const DisplayPaneSix = () => {
                   overflow: 'overlay'
                   // display: 'flex'
                 }}
-                dangerouslySetInnerHTML={{
-                  __html:
+                // dangerouslySetInnerHTML={{
+                //   __html:
+                //     isAssessmentStart === 'START'
+                //       ? assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
+                //           .assessmentCommuniquePrimary
+                //       : isAssessmentStart === 'FINISH'
+                //       ? assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
+                //           .assessmentCommuniqueSecondary
+                //       : isAssessmentStart === 'MANUSCRIPT'
+                //       ? assesseeAssignmentAssessmentData.informationFramework.assessmentManuscript
+                //           .assessmentManuscriptPrimary
+                //       : ''
+                // }}
+              >
+                <EditorTemplate
+                  label={'itemLabel'}
+                  jsonData={
                     isAssessmentStart === 'START'
                       ? assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
                           .assessmentCommuniquePrimary
@@ -135,8 +151,9 @@ export const DisplayPaneSix = () => {
                       ? assesseeAssignmentAssessmentData.informationFramework.assessmentManuscript
                           .assessmentManuscriptPrimary
                       : ''
-                }}
-              ></div>
+                  }
+                />
+              </div>
             </div>
 
             {isAssessmentStart === 'START' || isAssessmentStart === 'MANUSCRIPT' ? (

@@ -9,7 +9,8 @@ import {
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   GET_ITEM_REVIEW_LIST_SAGA,
-  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_DISPLAY_THREE_SINGLE_STATE
 } from '../../actionType';
 import { ITEM_REVISE_URL, ITEM_REVIEW_URL } from '../../endpoints';
 import Store from '../../store';
@@ -36,22 +37,23 @@ function* workerReviewInfoItemSaga(data) {
     if (userResponse.responseCode === '000') {
       const { isReviseMode = false } = data.payload;
       console.log('Item Review=======>', userResponse);
+      let response = { ...userResponse.responseObject[0] };
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'originResponseObj', value: JSON.stringify(response) }
+      });
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
           headerOne: 'item',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject[0],
+          responseObject: response,
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
       // if (isReviseMode) {
-      const {
-        informationBasic,
-        informationAllocation,
-        informationFramework
-      } = userResponse.responseObject[0];
+      const { informationBasic, informationAllocation, informationFramework } = response;
       yield put({
         type: SET_TYPE_REDUCER_STATE,
         payload: informationBasic
@@ -308,8 +310,7 @@ function* workerReviewInfoItemSaga(data) {
         payload: { stateName: 'itemFrameworkOneWeightage', value: itemFrameworkOneWeightage }
       });
       // }
-    }
-    else{
+    } else {
       yield put({ type: LOADER_STOP });
       yield put({
         type: SET_POPUP_VALUE,
