@@ -9,6 +9,8 @@ import Avatar from '@material-ui/core/Avatar';
 import './Card.css';
 import { Input } from '@material-ui/core';
 import { Fragment } from 'react';
+import { SET_POPUP_VALUE } from '../../actionType';
+import { useDispatch } from 'react-redux';
 const Card = (props) => {
   const {
     textOneOne = '',
@@ -27,6 +29,7 @@ const Card = (props) => {
     imageOneOne,
     tag = ''
   } = props;
+  const dispatch = useDispatch();
 
   return (
     <div className={('iguru-leftpanel', relatedCardFixed && 'relatedCardFixed')}>
@@ -74,7 +77,20 @@ const Card = (props) => {
           </div>
           <div className={'iguru-iconbox'}>
             {isImageActive ? (
-              <Avatar alt="" className={'svgRootSize'} src={imageOneOne} />
+              <Avatar
+                alt=""
+                className={'svgRootSize'}
+                src={imageOneOne}
+                onClick={() => {
+                  dispatch({
+                    type: SET_POPUP_VALUE,
+                    payload: {
+                      isPopUpValue: imageOneOne,
+                      popupMode: `IMAGEPREVIEW`
+                    }
+                  });
+                }}
+              />
             ) : isIcon ? (
               <Fragment>
                 <IconsButton onClick={onClickIconOne}>

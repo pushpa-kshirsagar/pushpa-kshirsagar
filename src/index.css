@@ -516,6 +516,11 @@ body {
     right: 10px;
   }
 }
-.audio button{
+.audio button {
   display: none;
+}
+.rounded {
+  width: 30rem !important;
+  height: 30rem !important;
+  border-radius: 50% !important;
 }

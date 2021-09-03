@@ -36,6 +36,7 @@ import DisplayPaneSeven from '../../Organisms/DisplayPaneSeven/DisplayPaneSeven'
 // import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 // import { AccountContext } from '../../Account';
 import LoadingComponent from '../../PopUpInformation/LoadingComponent';
+import PicturePreview from '../../PopUpInformation/PicturePreview';
 import PopUpDisplayPaneTwoReviewList from '../../PopUpDisplayPanel/PopUpDisplayPaneTwoReviewList';
 import PopUpAssesseeCreateSignOn from '../../Molecules/PopUpCreate/PopUpAssesseeCreateSignOn';
 import PopUpAssociateCreateSignOn from '../../Molecules/PopUpCreate/PopUpAssociateCreateSignOn';
@@ -152,6 +153,7 @@ const DisplayPageOne = () => {
       leftPaneAssesseeInfo?.assessee?.informationBasic.assesseeNameLast.trim()
     : '';
   const userEmail = assesseeId || '';
+
   const popupAllClose = () => {
     dispatch({ type: CLEAR_ASSESSEE_INFO });
     dispatch({ type: CLEAR_ASSESSMENT_INFO });
@@ -165,11 +167,18 @@ const DisplayPageOne = () => {
   const { assesseeAssessmentStartData } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
+  const assesseePicture = leftPaneAssesseeInfo?.assessee?.informationBasic?.assesseePicture;
+
   console.log('isExamMode', isExamMode);
   return (
     <>
-      <HeaderZero userName={userName} userEmail={userEmail} />
-      <LoadingComponent isActive={isLoading} />
+      <HeaderZero
+        userName={userName}
+        userEmail={userEmail}
+        imageOne={assesseePicture}
+        isImageActive={assesseePicture}
+      />
+
       {gridColumnCountValue !== 0 ? (
         <GridColumn isExamMode={isExamMode} columnCount={gridColumnCountValue} />
       ) : null}
@@ -477,6 +486,10 @@ const DisplayPageOne = () => {
         isItemFramework={true}
         mode={'revise'}
       />
+      <LoadingComponent isActive={isLoading} />
+      {popupMode === 'IMAGEPREVIEW' && (
+        <PicturePreview isActive={true} imageOne={isPopUpValue} dispatch={dispatch} />
+      )}
     </>
   );
 };

@@ -162,6 +162,19 @@ const initialState = {
                   itemFrameworkOneResponseChoiceScore: '',
                   itemFrameworkOneResponseChoiceWeightage: ''
                 },
+                {
+                  itemFrameworkOneResponseChoiceAlignment: '',
+                  itemFrameworkOneResponseChoiceColumnMatch: '',
+                  itemFrameworkOneResponseChoiceExplanation: {
+                    itemFrameworkOneResponseChoiceExplanationMedia: '',
+                    itemFrameworkOneResponseChoiceExplanationDisplay: false
+                  },
+                  itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+                  itemFrameworkOneResponseChoiceNumber: '3',
+                  itemFrameworkOneResponseChoicePolarity: '',
+                  itemFrameworkOneResponseChoiceScore: '',
+                  itemFrameworkOneResponseChoiceWeightage: ''
+                },
               ]
             }
           }

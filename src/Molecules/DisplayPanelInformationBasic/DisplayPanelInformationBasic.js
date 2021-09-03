@@ -11,6 +11,8 @@ import FlagIcon from '@material-ui/icons/Flag';
 import Label from '../../Atoms/Label/Label';
 import IconsButton from '../IconButton/IconButton';
 import './DisplayPanelInformationBasic.css';
+import { useDispatch } from 'react-redux';
+import { SET_POPUP_VALUE } from '../../actionType';
 
 const BasicCard = (props) => {
   const {
@@ -27,6 +29,7 @@ const BasicCard = (props) => {
     onClickRevise,
     mode = ''
   } = props;
+  const dispatch = useDispatch();
 
   return (
     <Grid className="basic-card-container">
@@ -70,8 +73,22 @@ const BasicCard = (props) => {
               alt=""
               className={'svgRootSize'}
               id="profile-icon"
-              onClick={mode === 'revise' ? onClickRevise : null}
+              style={{ cursor: 'pointer' }}
+              // onClick={mode === 'revise' ? onClickRevise : null}
               src={imageOne}
+              onClick={
+                mode === 'revise'
+                  ? onClickRevise
+                  : () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: imageOne,
+                          popupMode: `IMAGEPREVIEW`
+                        }
+                      });
+                    }
+              }
             />
           ) : (
             <IconsButton
@@ -115,10 +132,10 @@ const BasicCard = (props) => {
             <IconButton className="icon-container">
               {/* {isFlagActive && <FlagIcon className="iguru-icons-wid-hei" />} */}
               {isFlagActive ? (
-                      <FlagIcon className={'iguru-icons-wid-hei'} />
-                    ) : (
-                      <FlagOutlinedIcon className={'iguru-icons-wid-hei'} />
-                    )}
+                <FlagIcon className={'iguru-icons-wid-hei'} />
+              ) : (
+                <FlagOutlinedIcon className={'iguru-icons-wid-hei'} />
+              )}
             </IconButton>
           </div>
           <div>

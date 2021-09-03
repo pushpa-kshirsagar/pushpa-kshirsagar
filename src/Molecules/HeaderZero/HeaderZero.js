@@ -10,11 +10,11 @@ import IconsButton from '../IconButton/IconButton';
 // import insightGURULogo from '../../images/prafulta.jpg';
 import './HeaderZero.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_MOBILE_PANE_STATE } from '../../actionType';
+import { SET_MOBILE_PANE_STATE, SET_POPUP_VALUE } from '../../actionType';
 
 export const HeaderZero = (props) => {
   // const insightGURULogo = require('../../images/prafulta.jpg');
-  const { userName = '', userEmail = '', isImageActive = false } = props;
+  const { userName = '', userEmail = '', isImageActive = false, imageOne = '' } = props;
   // const { brandLogoType } = useSelector((state) => state.UserReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   // const isBespoke = false;
@@ -38,7 +38,7 @@ export const HeaderZero = (props) => {
     iguruBrandLogo =
       selectedAssociateInfo?.associate?.informationSetup?.associateAssociateSetup
         ?.iguruPlatformBrandPicture;
-        iguruMainLogo = './Image/main-logo.jpeg';
+    iguruMainLogo = './Image/main-logo.jpeg';
   }
   const onClickLogo = () => {
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneOne' });
@@ -138,7 +138,17 @@ export const HeaderZero = (props) => {
                         <Avatar
                           alt=""
                           className="iguru-icon-container"
-                          src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
+                          src={imageOne}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => {
+                            dispatch({
+                              type: SET_POPUP_VALUE,
+                              payload: {
+                                isPopUpValue: imageOne,
+                                popupMode: `IMAGEPREVIEW`
+                              }
+                            });
+                          }}
                         />
                       ) : (
                         <IconsButton Icon={PersonIcon} className="imageNA iguru-icon-container" />
