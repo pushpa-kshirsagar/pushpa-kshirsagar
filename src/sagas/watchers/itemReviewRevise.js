@@ -309,6 +309,7 @@ function* workerReviewInfoItemSaga(data) {
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: { stateName: 'itemFrameworkOneWeightage', value: itemFrameworkOneWeightage }
       });
+      yield put({ type: LOADER_STOP });
       // }
     } else {
       yield put({ type: LOADER_STOP });

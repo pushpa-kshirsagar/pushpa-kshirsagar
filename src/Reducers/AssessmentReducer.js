@@ -73,7 +73,17 @@ const initialState = {
       assessmentCommuniquePrimary: null,
       assessmentCommuniqueSecondary: null
     },
+    assessmentCalculator: false,
+    assessmentSpreadsheet: false,
+    assessmentTextsheet: false,
     assessmentItem: [],
+    assessmentNavigation: {
+      first: true,
+      last: true,
+      next: true,
+      previous: true,
+      skip: true
+    },
     assessmentManuscript: {
       assessmentManuscriptPrimary: null,
       assessmentManuscriptSecondary: null

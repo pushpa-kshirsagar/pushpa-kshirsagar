@@ -3,6 +3,9 @@ import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import S3 from 'react-aws-s3';
 import config from '../config.json';
 import UserPool from '../UserPool';
+import { getItemReviewApiCall } from './ItemModuleAction';
+import { LOADER_START, SET_DISPLAY_TWO_SINGLE_STATE, SET_MOBILE_PANE_STATE } from '../actionType';
+import { useRef } from 'react';
 const configObj = {
   bucketName: config.aws.BUCKET_NAME,
   dirName: config.aws.DIR_NAME /* optional */,
@@ -38,6 +41,110 @@ export const imageUploadMethod = async (file) => {
   console.log(imgUploadData);
   let res = { success: 1, file: { url: imgUploadData.location } };
   return res;
+};
+
+export const onClickFirst = (
+  reviewListDistinctData,
+  id,
+  typeOfMiddlePaneList,
+  selectedAssociateInfo,
+  dispatch,
+  information
+) => {
+  console.log('first Record');
+  let firstIndex = 0;
+  callApiFunction(
+    selectedAssociateInfo,
+    reviewListDistinctData,
+    dispatch,
+    firstIndex,
+    typeOfMiddlePaneList
+  );
+};
+export const onClickLast = (
+  reviewListDistinctData,
+  id,
+  typeOfMiddlePaneList,
+  selectedAssociateInfo,
+  dispatch,
+  information
+) => {
+  console.log('last Record');
+  // let lastIndex =
+  // callApiFunction(
+  //   selectedAssociateInfo,
+  //   reviewListDistinctData,
+  //   dispatch,
+  //   nextIndex,
+  //   typeOfMiddlePaneList
+  // );
+};
+export const onClickNext = (
+  reviewListDistinctData,
+  id,
+  typeOfMiddlePaneList,
+  selectedAssociateInfo,
+  dispatch,
+  information
+) => {
+  if (reviewListDistinctData.length > 0 && dispatch) {
+    let index = reviewListDistinctData.findIndex((data) => data.id === id);
+    let nextIndex = index + 1;
+    if (nextIndex < reviewListDistinctData.length) {
+      callApiFunction(
+        selectedAssociateInfo,
+        reviewListDistinctData,
+        dispatch,
+        nextIndex,
+        typeOfMiddlePaneList
+      );
+    }
+  }
+};
+export const onClickPrevious = (
+  reviewListDistinctData,
+  id,
+  typeOfMiddlePaneList,
+  selectedAssociateInfo,
+  dispatch,
+  information
+) => {
+  console.log('prev Record');
+  if (reviewListDistinctData.length > 0 && dispatch) {
+    let index = reviewListDistinctData.findIndex((data) => data.id === id);
+    let prevIndex = index - 1;
+    if (prevIndex < reviewListDistinctData.length) {
+      callApiFunction(
+        selectedAssociateInfo,
+        reviewListDistinctData,
+        dispatch,
+        prevIndex,
+        typeOfMiddlePaneList
+      );
+    }
+  }
+};
+const callApiFunction = (
+  selectedAssociateInfo,
+  reviewListDistinctData,
+  dispatch,
+  index,
+  typeOfMiddlePaneList
+) => {
+  let nextId = reviewListDistinctData[index].id;
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'middlePaneSelectedValue', value: nextId }
+  });
+  if (
+    typeOfMiddlePaneList === 'itemsDistinctReviewList' ||
+    typeOfMiddlePaneList === 'assessmentItemReviewList' ||
+    typeOfMiddlePaneList === 'itemGroupItemReviewList'
+  ) {
+    getItemReviewApiCall(selectedAssociateInfo, dispatch, 'all', false, nextId);
+  }
 };
 export const audioUploadMethod = async (file) => {
   let imgUploadData = await ReactS3Client.uploadFile(file, file.name);

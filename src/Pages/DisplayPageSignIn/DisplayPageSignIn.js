@@ -66,6 +66,7 @@ const DisplayPageSignIn = () => {
   const { isLoading } = useSelector((state) => state.LoaderReducer);
 
   useEffect(() => {
+    console.log('assesseeSignInStatus',assesseeSignInStatus);
     if (assesseeSignInStatus === 'success') {
       setIsCredentialsInValid('');
       let path = `/dashboard`;
@@ -409,7 +410,12 @@ const DisplayPageSignIn = () => {
                     <SelectField
                       tag={'assesseeSignInInformation'}
                       label={'forgotten'}
-                      listSelect={['','credential', 'password']}
+                      listSelect={[
+                        { id: '', name: '' },
+                        { id: 'credential', name: 'credential' },
+                        { id: 'password', name: 'password' }
+                      ]}
+                      mappingValue={'id'}
                       errorMsg={credentialOptionError}
                       onChange={(e) => {
                         setCredentialOption(e.target.value);

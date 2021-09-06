@@ -26,7 +26,8 @@ import {
   SET_POPUP_SINGLE_STATE,
   SET_ITEM_DYNAMIC_SINGLE_STATE,
   SET_TYPE_REDUCER_STATE,
-  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  GET_ITEM_INFO_SAGA
 } from '../actionType';
 import {
   getItemGroupItemReqObj,
@@ -694,4 +695,44 @@ export const setResponseToReducerObj = (responseObject, dispatch) => {
     type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
     payload: { stateName: 'itemFrameworkOneWeightage', value: itemFrameworkOneWeightage }
   });
+};
+
+export const getItemReviewApiCall = (
+  selectedAssociateInfo,
+  dispatch,
+  secondaryOptionCheckValue,
+  isReviseMode,
+  selectedTagValue
+) => {
+  dispatch({
+    type: GET_ITEM_INFO_SAGA,
+    payload: {
+      secondaryOptionCheckValue,
+      isReviseMode,
+      reqBody: {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary, //605255729d3c823d3964e0ec
+        filter: true,
+        search: [
+          {
+            condition: 'and',
+            searchBy: [
+              {
+                dataType: 'String',
+                conditionColumn: 'id',
+                conditionValue: {
+                  condition: 'eq',
+                  value: {
+                    from: selectedTagValue
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  });
+ 
 };

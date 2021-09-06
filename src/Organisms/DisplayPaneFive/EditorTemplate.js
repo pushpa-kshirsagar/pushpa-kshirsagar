@@ -11,11 +11,8 @@ const EditorTemplate = (props) => {
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
   const { jsonData, label } = props;
-  console.log('jsonData', jsonData);
-  console.log('label', label);
   function checkExtension(file) {
     var extension = file.substr(file.lastIndexOf('.') + 1);
-    console.log('extension', extension);
     switch (extension) {
       case 'jpg':
       case 'jpeg':

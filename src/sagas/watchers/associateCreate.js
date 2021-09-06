@@ -13,6 +13,9 @@ import { ASSOCIATE_CREATE_URL } from '../../endpoints';
 
 const createAssociateApi = async (requestObj) => {
   console.log(requestObj.data);
+  // let URL = ASSOCIATE_CREATE_URL;
+  let URL =
+    'https://gfxqx4a5uc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-create-step';
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -20,7 +23,7 @@ const createAssociateApi = async (requestObj) => {
     }),
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(ASSOCIATE_CREATE_URL, requestOptions);
+  const response = await fetch(URL, requestOptions);
   const json = await response.json();
   // console.log(json, '&&&&&&&&')
   // if(json.responseCode === '000'){

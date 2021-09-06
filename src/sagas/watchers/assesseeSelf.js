@@ -224,16 +224,35 @@ function* workerAssesseeAssessmentItemFinishSaga(data) {
 }
 function* workerAssesseeAssessmentFinishSaga(data) {
   try {
-    const response = yield call(apiCallFun, {
-      data: data.payload.request,
-      URL: ASSESSEE_ASSESSMENT_FINISH_URL,
-      type: ''
-    });
-    // const response ={responseCode:'000',countTotal:30}
+    // const response = yield call(apiCallFun, {
+    //   data: data.payload.request,
+    //   URL: ASSESSEE_ASSESSMENT_FINISH_URL,
+    //   type: ''
+    // });
+    const response = { responseCode: '000', countTotal: 30 };
     if (response.responseCode === '000') {
       yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      yield put({
+        type: GET_ASSESSEE_ASSIGNMENT_SAGA,
+        payload: {
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: 'active',
+          BadgeTwo: '',
+          BadgeThree: '',
+          assessmentStarted: true,
+          assignmentId: data.payload.request.assignmentId
+        }
+      });
+      yield put({
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-        payload: { stateName: 'isAssessmentStart', value: 'FINISH' }
+        payload: { stateName: 'isExamMode', value: false }
+      });
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: '' }
       });
       yield put({
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,

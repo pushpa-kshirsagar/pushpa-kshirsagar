@@ -16,13 +16,15 @@ import {
   SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
   UPDATE_ASSOCIATE_BASIC_INFO,
   UPDATE_ASSOCIATE_SETUP_INFO,
-  SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE
+  SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE
 } from '../../actionType';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 import PopUpDatePicker from '../../PopUpInformation/PopUpDatePicker';
 import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
+import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 
 const PopUpAssessmentCreate = (props) => {
   const { headerOne } = props;
@@ -477,6 +479,108 @@ const PopUpAssessmentCreate = (props) => {
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={'create'}
         onClickYes={onClickYes}
+      />
+      <PopUpCheckbox
+        isActive={isPopUpValue === 'NAVIGATIONPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        inputHeader={'navigation'}
+        inputHeaderBadge={'item'}
+        typeOfStateObj={null}
+        objectName={'assesseeRole'}
+        stateName={'assessmentNavigation'}
+        valueArr={['first', 'last', 'next', 'previous', 'skip']}
+        nextPopUpValue={''}
+        isRolePermission
+        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        valueArrState={informationFramework?.assessmentNavigation}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'REVISIONPOPUP'}
+        tag={''}
+        label={'response'}
+        listSelect={[
+          { id: false, name: 'Enable' },
+          { id: true, name: 'Disable' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'revision'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={null}
+        // typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'AID_CAL_POPUP'}
+        tag={'assessmentCalculator'}
+        label={'calculator'}
+        listSelect={[
+          { id: true, name: 'Permitted' },
+          { id: false, name: 'Unpermitted' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'aid'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'AID_SHEET_POPUP'}
+        tag={'assessmentSpreadsheet'}
+        label={'spredsheet'}
+        listSelect={[
+          { id: true, name: 'Permitted' },
+          { id: false, name: 'Unpermitted' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'aid'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'AID_TEXT_POPUP'}
+        tag={'assessmentTextsheet'}
+        label={'textsheet'}
+        listSelect={[
+          { id: true, name: 'Permitted' },
+          { id: false, name: 'Unpermitted' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'aid'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
   );

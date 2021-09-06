@@ -8,6 +8,8 @@ import BasicCard from '../../Molecules/DisplayPanelInformationBasic/DisplayPanel
 import HeaderCard from '../../Molecules/Header/HeaderCard';
 import Sections from '../../Molecules/Section/Section';
 import { useDispatch, useSelector } from 'react-redux';
+import CircleIcon from '../../Molecules/IconButton/IconButton';
+
 import {
   ASSESSEE_INFO_CREATE,
   ASSESSEE_INFO_REVISE_SAGA,
@@ -136,7 +138,11 @@ import {
   getNodeCultureProfileReqObj,
   getNodeJobProfileReqObj,
   getAssociateTypeAssociateReqObj,
-  getAssesseeTypeAssesseeReqObj
+  getAssesseeTypeAssesseeReqObj,
+  onClickFirst,
+  onClickPrevious,
+  onClickLast,
+  onClickNext
 } from '../../Actions/GenericActions';
 import DisplayPaneThreeSectionOneCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneCultureProfileDistinct';
 import DisplayPaneThreeSectionTwoCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileDistinct';
@@ -151,6 +157,7 @@ import DisplayPaneThreeSectionOneJobProfileType from '../../Molecules/DisplayPan
 import DisplayPaneThreeSectionTwoCultureProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileType';
 import DisplayPaneThreeSectionTwoJobProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoJobProfileType';
 import { setResponseToReducerObj } from '../../Actions/ItemModuleAction';
+import { BottomNavigation, Grid } from '@material-ui/core';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -180,9 +187,12 @@ export const DisplayPaneThree = () => {
     assesseeSetUpModule,
     assignmentSetUpModule
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { typeOfMiddlePaneList, countPage, selectedAssociateInfo } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    typeOfMiddlePaneList,
+    countPage,
+    selectedAssociateInfo,
+    reviewListDistinctData
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
@@ -1984,6 +1994,13 @@ export const DisplayPaneThree = () => {
   const createAssesseePrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessee, Icon: AddIcon }
   ];
+  const reviewPrimaryIcon = [];
+  const reviewSecondaryIcon = [
+    { label: 'first', onClick: onClickFirst, Icon: FirstPage },
+    { label: 'previous', onClick: onClickPrevious, Icon: ArrowLeft },
+    { label: 'next', onClick: onClickNext(reviewListDistinctData), Icon: ArrowRight },
+    { label: 'last', onClick: onClickLast, Icon: LastPage }
+  ];
   const createItemPrimaryIcon = [{ label: 'create', onClick: onClickCreateItem, Icon: AddIcon }];
   const createAssessmentPrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessment, Icon: AddIcon }
@@ -2701,6 +2718,7 @@ export const DisplayPaneThree = () => {
                 secondaryIcon={reviseSecondaryIcons}
               />
             )}
+
             {createMode === 'assessee' && reviewMode !== 'revise' && (
               <FooterIconTwo
                 FilterModeEnable={true}
@@ -3832,6 +3850,7 @@ export const DisplayPaneThree = () => {
                 secondaryIcon={reviseSecondaryIcons}
               />
             )}
+
             {createMode === 'item' && reviewMode !== 'revise' && (
               <FooterIconTwo
                 FilterModeEnable={true}
@@ -3843,6 +3862,81 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
+      {reviewMode === 'review' && responseObject && headerOne !== '' && (
+        <div className={`middleFooterD`}>
+          <div className={'footerInner'}>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              <BottomNavigation className={'MuiBottomNavigationCustom'}>
+                <div className={'mbPager'}></div>
+                <div className={'mbPager'}>
+                  <CircleIcon
+                    label={'first'}
+                    Icon={FirstPage}
+                    colour={'displayPaneCentre'}
+                    onClick={() => {
+                      onClickFirst(
+                        reviewListDistinctData,
+                        responseObject.id,
+                        typeOfMiddlePaneList,
+                        selectedAssociateInfo,
+                        dispatch,
+                        headerOneBadgeTwo
+                      );
+                    }}
+                    dataValue={'first'}
+                  />
+                </div>
+                <div className={'mbPager'}>
+                  <CircleIcon
+                    label={'previous'}
+                    Icon={ArrowLeft}
+                    colour={'displayPaneCentre'}
+                    dataValue={'previous'}
+                    onClick={() => {
+                      onClickPrevious(
+                        reviewListDistinctData,
+                        responseObject.id,
+                        typeOfMiddlePaneList,
+                        selectedAssociateInfo,
+                        dispatch,
+                        headerOneBadgeTwo
+                      );
+                    }}
+                  />
+                </div>
+                <div className={'mbPager'}>
+                  <CircleIcon
+                    label={'next'}
+                    Icon={ArrowRight}
+                    colour={'displayPaneCentre'}
+                    onClick={() => {
+                      onClickNext(
+                        reviewListDistinctData,
+                        responseObject.id,
+                        typeOfMiddlePaneList,
+                        selectedAssociateInfo,
+                        dispatch,
+                        headerOneBadgeTwo
+                      );
+                    }}
+                    dataValue={'next'}
+                  />
+                </div>
+                <div className={'mbPager'}>
+                  <CircleIcon
+                    label={'last'}
+                    Icon={LastPage}
+                    colour={'displayPaneCentre'}
+                    // onClick={}
+                    dataValue={'last'}
+                  />
+                </div>
+                <div className={'mbPager'}></div>{' '}
+              </BottomNavigation>
+            </Grid>
+          </div>
+        </div>
+      )}
     </>
   );
 };

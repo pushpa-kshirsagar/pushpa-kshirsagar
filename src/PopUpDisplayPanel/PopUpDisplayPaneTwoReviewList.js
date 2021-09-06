@@ -115,6 +115,7 @@ import {
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
+  getItemReviewApiCall,
   getItemTypeItemDistinctApiCall,
   getNodeRelatedItemsDistinctApiCall,
   updateItemDistinctStatus,
@@ -644,37 +645,13 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         typeOfMiddlePaneList === 'assessmentItemReviewList' ||
         typeOfMiddlePaneList === 'itemGroupItemReviewList'
       ) {
-        dispatch({
-          type: GET_ITEM_INFO_SAGA,
-          payload: {
-            secondaryOptionCheckValue,
-            isReviseMode,
-            reqBody: {
-              assesseeId: selectedAssociateInfo?.assesseeId,
-              associateId:
-                selectedAssociateInfo?.associate?.informationEngagement.associateTag
-                  .associateTagPrimary, //605255729d3c823d3964e0ec
-              filter: true,
-              search: [
-                {
-                  condition: 'and',
-                  searchBy: [
-                    {
-                      dataType: 'String',
-                      conditionColumn: 'id',
-                      conditionValue: {
-                        condition: 'eq',
-                        value: {
-                          from: selectedTagValue
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        });
+        getItemReviewApiCall(
+          selectedAssociateInfo,
+          dispatch,
+          secondaryOptionCheckValue,
+          isReviseMode,
+          selectedTagValue
+        );
         dispatch({
           type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
           payload: {

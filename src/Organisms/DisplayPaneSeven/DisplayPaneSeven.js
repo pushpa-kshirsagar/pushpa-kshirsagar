@@ -258,7 +258,7 @@ export const DisplayPaneSeven = () => {
         {assesseeAssessmentStartData && (
           <Fragment>
             {/* item label */}
-            {itemObect.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia !== '' && (
+            {itemObect.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia && (
               <div className={'innerpadding'}>
                 <div className={['ex_container', 'ig-label'].join(' ')}>
                   <EditorTemplate
@@ -271,7 +271,7 @@ export const DisplayPaneSeven = () => {
             {/* item */}
             {itemObect.itemFrameworkOneMedia !== '' && (
               <div className={'innerpadding'}>
-                <div className={['ex_container', 'ig-label'].join(' ')}>
+                <div className={['ex_container'].join(' ')}>
                   <EditorTemplate
                     label={'itemFrameworkOneMedia'}
                     jsonData={itemObect?.itemFrameworkOneMedia}
@@ -280,7 +280,7 @@ export const DisplayPaneSeven = () => {
               </div>
             )}
             {/* item explanation */}
-            {itemObect.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia !== '' && (
+            {itemObect.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia && (
               <div className={'innerpadding'}>
                 <div className={['ex_container', 'ig-label'].join(' ')}>
                   <EditorTemplate
@@ -293,7 +293,7 @@ export const DisplayPaneSeven = () => {
               </div>
             )}
             {/* response label */}
-            {itemObect.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia !== '' && (
+            {itemObect.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia && (
               <div className={'innerpadding'}>
                 <div className={['ex_container', 'ig-label'].join(' ')}>
                   <EditorTemplate
@@ -305,6 +305,7 @@ export const DisplayPaneSeven = () => {
                 </div>
               </div>
             )}
+            {/* response choices */}
             {itemObect.itemFrameworkOneResponseChoice.map((op, key) => {
               return (
                 <Fragment>
@@ -315,9 +316,12 @@ export const DisplayPaneSeven = () => {
                           <input
                             type="radio"
                             name="option1"
+                            style={{ cursor: 'pointer' }}
                             value={`${op.itemFrameworkOneResponseChoiceNumber}`}
                             onChange={handleRadioButton}
-                            checked={currentQuestionChoice === op.itemFrameworkOneResponseChoice}
+                            checked={
+                              currentQuestionChoice === op.itemFrameworkOneResponseChoiceNumber
+                            }
                           />
                         </div>
 
@@ -336,7 +340,7 @@ export const DisplayPaneSeven = () => {
 
                       <div>
                         {op.itemFrameworkOneResponseChoiceExplanation
-                          ?.itemFrameworkOneResponseChoiceExplanationMedia !== '' && (
+                          ?.itemFrameworkOneResponseChoiceExplanationMedia && (
                           <div className={['ex_container', 'ig-explanation '].join(' ')}>
                             <EditorTemplate
                               jsonData={
@@ -353,9 +357,32 @@ export const DisplayPaneSeven = () => {
                 </Fragment>
               );
             })}
+            {/* item explanation */}
+            {itemObect?.itemFrameworkOneResponseExplanation
+              ?.itemFrameworkOneResponseExplanationMedia !== '' && (
+              <div className={'innerpadding'}>
+                <div className={['ex_container', 'ig-explanation '].join(' ')}>
+                  <EditorTemplate
+                    jsonData={
+                      itemObect?.itemFrameworkOneResponseExplanation
+                        ?.itemFrameworkOneResponseExplanationMedia
+                    }
+                    label={'itemFrameworkOneResponseExplanationMedia'}
+                  />
+                </div>
+              </div>
+            )}
+            <FooterIconTwo
+              className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
+              FilterModeEnable={false}
+              FilterMode={FilterMode}
+              onClick={onClickFooter}
+              primaryIcon={primaryIcon}
+              secondaryIcon={secondaryIcon}
+            />
           </Fragment>
         )}
-        {assesseeAssessmentStartData && (
+        {/* {assesseeAssessmentStartData && (
           <Fragment>
             {(assesseeAssessmentStartData.assessmentItem[currentQuestionIndex]
               .itemFrameworkOneType === '61090cace50cf61d5eb440ce' ||
@@ -426,16 +453,9 @@ export const DisplayPaneSeven = () => {
                 </div>
               </div>
             )}
-            <FooterIconTwo
-              className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
-              FilterModeEnable={false}
-              FilterMode={FilterMode}
-              onClick={onClickFooter}
-              primaryIcon={primaryIcon}
-              secondaryIcon={secondaryIcon}
-            />
+            
           </Fragment>
-        )}
+        )} */}
       </div>
 
       <PopUpAssessmentNavigator isActive={isPopUpValue === 'NavigatorPOPUP'} />

@@ -22,9 +22,12 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   const { headerOneBadgeTwo, reviewMode, responseObject, relatedReviewListPaneThree } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { selectedAssociateInfo, countPage, reviewListDistinctData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const {
+    selectedAssociateInfo,
+    countPage,
+    reviewListDistinctData,
+    typeOfMiddlePaneList
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationFramework } = responseObject;
   const dispatch = useDispatch();
   const frameworkAll = [
@@ -85,7 +88,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         {
           labelTextOneOneBadge: 'supervised',
           textOne: ''
-        },
+        }
       ],
       innerAssociateList: [],
       innerInfo: 'assessees',
@@ -203,7 +206,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         {
           labelTextOneOneBadge: 'revision',
           textOne: ''
-        },
+        }
       ],
       innerAssociateList: [],
       innerInfo: 'assessees',
@@ -253,7 +256,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         {
           labelTextOneOneBadge: 'secondary',
           textOne: ''
-        },
+        }
       ],
       innerAssociateList: [],
       innerInfo: 'assessees',
@@ -422,6 +425,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   const reviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log(labelName + '  ' + selectedBadgeName);
     if (labelName === 'communiqué' && selectedBadgeName === 'primary') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -523,6 +527,36 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         }
       });
     }
+    if (labelName === 'items' && selectedBadgeName === 'navigation') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAVIGATIONPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'response' && selectedBadgeName === 'revision') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'REVISIONPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'aid' && selectedBadgeName === 'calculator') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_CAL_POPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'aid' && selectedBadgeName === 'spredsheet') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_SHEET_POPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'aid' && selectedBadgeName === 'textsheet') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_TEXT_POPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
   };
 
   return (
@@ -545,16 +579,18 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
               onClickReview={onClickReview}
             />
           </div>
-          <div className={'containerPadding'}>
-            <AllocationAccordian
-              headerOne="framework+"
-              isDisplayCardExpanded={listExpand === 'framework+'}
-              setListExpand={setListExpand}
-              list={frameworkPlusAll}
-              mode={reviewMode}
-              onClickRevise={reviseFramework}
-            />
-          </div>
+          {typeOfMiddlePaneList !== 'assessmentDistinctReviewList' && (
+            <div className={'containerPadding'}>
+              <AllocationAccordian
+                headerOne="framework+"
+                isDisplayCardExpanded={listExpand === 'framework+'}
+                setListExpand={setListExpand}
+                list={frameworkPlusAll}
+                mode={reviewMode}
+                onClickRevise={reviseFramework}
+              />
+            </div>
+          )}
         </>
       ) : (
         <>

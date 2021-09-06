@@ -67,17 +67,17 @@ const initialState = {
         itemFrameworkOneBlank: '',
         itemFrameworkOneExplanation: {
           itemFrameworkOneExplanationDisplay: false,
-          itemFrameworkOneExplanationMedia: ''
+          itemFrameworkOneExplanationMedia: null
         }, //itemDescription,
         itemFrameworkOneLabel: {
           itemFrameworkOneLabelDisplay: false,
           itemFrameworkOneLabelMedia: ''
         },
         itemFrameworkOneGroup: [],
-        itemFrameworkOneMedia: '', //itemLabel,
+        itemFrameworkOneMedia: null, //itemLabel,
         itemFrameworkOnePassage: {
           itemFrameworkOnePassageDisplay: false,
-          itemFrameworkOnePassageMedia: ''
+          itemFrameworkOnePassageMedia: null
         },
         itemFrameworkOnePolarity: '',
         itemFrameworkOneResponse: '',
@@ -88,10 +88,10 @@ const initialState = {
             itemFrameworkOneResponseChoiceAlignment: '',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanationMedia: '',
+              itemFrameworkOneResponseChoiceExplanationMedia: null,
               itemFrameworkOneResponseChoiceExplanationDisplay: false
             },
-            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+            itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
             itemFrameworkOneResponseChoiceNumber: '1',
             itemFrameworkOneResponseChoicePolarity: '',
             itemFrameworkOneResponseChoiceScore: '',
@@ -101,24 +101,24 @@ const initialState = {
             itemFrameworkOneResponseChoiceAlignment: '',
             itemFrameworkOneResponseChoiceColumnMatch: '',
             itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanationMedia: '',
+              itemFrameworkOneResponseChoiceExplanationMedia: null,
               itemFrameworkOneResponseChoiceExplanationDisplay: false
             },
-            itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+            itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
             itemFrameworkOneResponseChoiceNumber: '2',
             itemFrameworkOneResponseChoicePolarity: '',
             itemFrameworkOneResponseChoiceScore: '',
             itemFrameworkOneResponseChoiceWeightage: ''
-          },
+          }
         ],
         itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseLabel: {
           itemFrameworkOneResponseLabelDisplay: false,
-          itemFrameworkOneResponseLabelMedia: ''
+          itemFrameworkOneResponseLabelMedia: null
         },
         itemFrameworkOneResponseExplanation: {
           itemFrameworkOneResponseExplanationDisplay: false,
-          itemFrameworkOneResponseExplanationMedia: ''
+          itemFrameworkOneResponseExplanationMedia: null
         }, //responseDescription,
         itemFrameworkOneScale: [
           {
@@ -132,7 +132,7 @@ const initialState = {
           {
             itemFrameworkOneSectionSequence: 1,
             itemFrameworkOneSection: {
-              itemFrameworkOneMedia: '',
+              itemFrameworkOneMedia: null,
               itemFrameworkOneScore: null,
               itemFrameworkOneType: '',
               itemFrameworkOneResponseChoice: [
@@ -140,7 +140,7 @@ const initialState = {
                   itemFrameworkOneResponseChoiceAlignment: '',
                   itemFrameworkOneResponseChoiceColumnMatch: '',
                   itemFrameworkOneResponseChoiceExplanation: {
-                    itemFrameworkOneResponseChoiceExplanationMedia: '',
+                    itemFrameworkOneResponseChoiceExplanationMedia: null,
                     itemFrameworkOneResponseChoiceExplanationDisplay: false
                   },
                   itemFrameworkOneResponseChoiceMedia: '',
@@ -153,10 +153,10 @@ const initialState = {
                   itemFrameworkOneResponseChoiceAlignment: '',
                   itemFrameworkOneResponseChoiceColumnMatch: '',
                   itemFrameworkOneResponseChoiceExplanation: {
-                    itemFrameworkOneResponseChoiceExplanationMedia: '',
+                    itemFrameworkOneResponseChoiceExplanationMedia: null,
                     itemFrameworkOneResponseChoiceExplanationDisplay: false
                   },
-                  itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+                  itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
                   itemFrameworkOneResponseChoiceNumber: '2',
                   itemFrameworkOneResponseChoicePolarity: '',
                   itemFrameworkOneResponseChoiceScore: '',
@@ -169,12 +169,12 @@ const initialState = {
                     itemFrameworkOneResponseChoiceExplanationMedia: '',
                     itemFrameworkOneResponseChoiceExplanationDisplay: false
                   },
-                  itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+                  itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
                   itemFrameworkOneResponseChoiceNumber: '3',
                   itemFrameworkOneResponseChoicePolarity: '',
                   itemFrameworkOneResponseChoiceScore: '',
                   itemFrameworkOneResponseChoiceWeightage: ''
-                },
+                }
               ]
             }
           }

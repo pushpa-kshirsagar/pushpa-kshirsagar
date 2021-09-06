@@ -58,8 +58,8 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
     if (dataVal === 'finish') {
+      // dispatch({ type: LOADER_START });
       if (JSON.parse(localStorage.getItem('assessmentItem'))?.length > 0) {
-        dispatch({ type: LOADER_START });
         let reqObj = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
@@ -73,7 +73,6 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
           payload: { request: reqObj }
         });
       }
-      dispatch({ type: LOADER_START });
       let reqObject = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
@@ -84,6 +83,7 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
           popupHeaderOneBadgeOne === 'time-out' ? 'UNFINISHED' : 'FINISHED',
         attemptEndTime: new Date().getTime()
       };
+      console.log('reqObject', reqObject);
       dispatch({
         type: ASSESSEE_ASSESSMENT_FINISH_SAGA,
         payload: { request: reqObject }

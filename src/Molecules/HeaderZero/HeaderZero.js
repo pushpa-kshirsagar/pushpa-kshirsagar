@@ -196,7 +196,17 @@ export const HeaderZero = (props) => {
                     <Avatar
                       alt=""
                       className="iguru-icon-container"
-                      src={'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'}
+                      src={imageOne}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        dispatch({
+                          type: SET_POPUP_VALUE,
+                          payload: {
+                            isPopUpValue: imageOne,
+                            popupMode: `IMAGEPREVIEW`
+                          }
+                        });
+                      }}
                     />
                   ) : (
                     <IconsButton Icon={PersonIcon} className="imageNA iguru-icon-container" />
