@@ -62,6 +62,7 @@ import JobProfileAssessmentDistinctReviewList from '../../ReviewListComponent/Jo
 import AssesseeDistinctAssignmentDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctAssignmentDistinctReviewList';
 import AssessmentDistinctItemDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctItemDistinctReviewList';
 import AssesseeDistinctAssessmentDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctAssessmentDistinctReviewList';
+import AssesseeDistinctReportDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReportDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -177,6 +178,9 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'assignmentDistinctAssesseeReviewList' && (
           <AssignmentDistinctAssesseeDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assesseesReportReviewList' && (
+          <AssesseeDistinctReportDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assignmentDistinctAssessmentReviewList' && (
           <AssignmentDistinctAssessmentDistinctReviewList popupAllClose={popupAllClose} />

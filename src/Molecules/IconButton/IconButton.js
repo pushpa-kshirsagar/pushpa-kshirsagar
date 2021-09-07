@@ -17,13 +17,14 @@ const IconButton = (props) => {
     onClick,
     dataValue,
     id,
-    disabled = false
+    disabled = false,
+    classNameOne = ''
   } = props;
   // const displayPane = primary ? 'icon-button-primary' : 'icon-button-secondary';
 
   return (
     <div>
-      <div className={'iconBoxFooter'}>
+      <div className={['iconBoxFooter', classNameOne].join(' ')}>
         <button
           className={[`icon-button`, `icon-button-${colour}`, className].join(' ')}
           onClick={onClick}

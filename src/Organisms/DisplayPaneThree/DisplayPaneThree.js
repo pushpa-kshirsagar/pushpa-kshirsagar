@@ -158,6 +158,7 @@ import DisplayPaneThreeSectionTwoCultureProfileType from '../../Molecules/Displa
 import DisplayPaneThreeSectionTwoJobProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoJobProfileType';
 import { setResponseToReducerObj } from '../../Actions/ItemModuleAction';
 import { BottomNavigation, Grid } from '@material-ui/core';
+import DisplayPaneThreeSectionOneAssesseeReport from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssesseeReport';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -397,6 +398,7 @@ export const DisplayPaneThree = () => {
     {
       id: 'section1',
       sectionComponent: DisplayPaneThreeSectionOneAssessmentType,
+      // sectionComponent: DisplayPaneThreeSectionOneAssesseeReport,
       displayPaneLeftHeaderText: '',
       displayPaneLeftBadgeText: ''
     },
@@ -2730,6 +2732,50 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
+      {isReviewRevise && headerOne === 'assessee' && headerOneBadgeOne === 'report' && (
+        <>
+          <div style={{ padding: '2.5px' }}>
+            <div style={{ padding: '2.5px' }}>
+              <BasicCard
+                isAlertActive
+                isFlagActive={false}
+                className=""
+                labelTextOneOne="name"
+                labelTextOneTwo="alias"
+                textOneOne={'mammmm'}
+                textOneTwo={'No Information'}
+                isVerifiedActiveName={false}
+                isVerifiedActivePicture={false}
+                mode={reviewMode}
+              />
+            </div>
+            <Sections
+                listSections={rightPaneSectionsAssessmentType}
+                selectedSection={selectedSectionAssessmentType}
+                setSelectedSection={setSelectedSectionAssessmentType}
+              />
+          </div>
+          {reviewMode === 'revise' && (
+            <FooterIconTwo
+              FilterModeEnable={isShowReviseIcon}
+              FilterMode={FilterMode}
+              onClick={onClickRevise}
+              primaryIcon={revisePrimaryIcon}
+              secondaryIcon={reviseSecondaryIcons}
+            />
+          )}
+
+          {createMode === 'assessee' && reviewMode !== 'revise' && (
+            <FooterIconTwo
+              FilterModeEnable={true}
+              FilterMode={FilterMode}
+              onClick={onClickCreateAssessee}
+              primaryIcon={createAssesseePrimaryIcon}
+              secondaryIcon={[]}
+            />
+          )}
+        </>
+      )}
       {isReviewRevise &&
         responseObject &&
         ((headerOne === 'assessees' && headerOneBadgeOne === 'role') ||

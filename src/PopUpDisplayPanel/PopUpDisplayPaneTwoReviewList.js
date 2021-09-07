@@ -7,10 +7,7 @@ import { DialogContent } from '@material-ui/core';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
 import {
   ASSESSEE_INFO_REVISE_SAGA,
-  ASSOCIATE_INFO_REVISE_SAGA,
   GET_ASSESSEE_GROUP_REVIEW_INFO_SAGA,
-  GET_ASSESSEE_INFO_SAGA,
-  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
   GET_ASSESSMENT_GROUP_REVIEW_INFO_SAGA,
   GET_ASSESSMENT_INFO_SAGA,
   GET_ASSESSMENT_TYPE_REVIEW_INFO_SAGA,
@@ -59,7 +56,10 @@ import {
   RELATED_REVIEWLIST_DISTINCT_DATA,
   ASSESSMENT_START_SAGA,
   ASSESSEE_ASSESSMENT_START_SAGA,
-  GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA
+  GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
+  LOADER_STOP,
+  SET_DISPLAY_PANE_THREE_STATE,
+  GET_ASSESSEE_REPORT_SAGA
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -1948,6 +1948,58 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
       }
+      if (
+        typeOfMiddlePaneList === 'assignmentDistinctAssesseeReviewList' &&
+        popupHeaderOne === 'reports'
+      ) {
+        dispatch({ type: LOADER_START });
+        let relatedData = relatedReviewListDistinctData[0];
+        let reportsData = [
+          {
+            id: 1,
+            reportName: 'Assessee Report',
+            reportDescription: 'Bespoke'
+          },
+          {
+            id: 2,
+            reportName: 'Assessee Report',
+            reportDescription: 'Generic'
+          }
+        ];
+        let assesseeData = relatedData.assessee.filter((dd) => {
+          return dd.id === selectedTagValue;
+        });
+        console.log('assesseeData', assesseeData);
+
+        let response = { ...relatedData, report: reportsData, assesseeReport: assesseeData[0] };
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'relatedReviewListDistinctData', value: [response] }
+        });
+        setTimeout(function () {
+          dispatch({
+            type: SET_MIDDLEPANE_STATE,
+            payload: {
+              middlePaneHeader: 'assessee',
+              middlePaneHeaderBadgeOne: 'reports',
+              middlePaneHeaderBadgeTwo: 'unread',
+              middlePaneHeaderBadgeThree: '',
+              middlePaneHeaderBadgeFour: '',
+              typeOfMiddlePaneList: 'assesseesReportReviewList',
+              scanCount: 2,
+              showMiddlePaneState: true
+            }
+          });
+          dispatch({ type: LOADER_STOP });
+          dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+          dispatch({ type: POPUP_CLOSE });
+        }, 3000);
+      }
+    } else if (dataVal === 'reviewReport') {
+      dispatch({ type: GET_ASSESSEE_REPORT_SAGA, reqBody: {} });
+      dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'reviseReport') {
+      alert('open textsheet');
     } else if (dataVal === 'revise') {
       setIsReviseMode(true);
       dispatch({

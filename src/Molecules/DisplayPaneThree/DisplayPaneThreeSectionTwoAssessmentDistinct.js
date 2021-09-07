@@ -56,44 +56,93 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     //   IconOne: null
     // },
     {
-      id: 'aid',
-      labelTextOneOne: 'aid',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'calculator',
-          textOne: ''
-        },
-        {
-          labelTextOneOneBadge: 'spredsheet',
-          textOne: ''
-        },
-        {
-          labelTextOneOneBadge: 'textsheet',
-          textOne: ''
-        }
-      ],
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false,
-      IconOne: Manuscript
-    },
-    {
       id: 'administration',
       labelTextOneOne: 'administration',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'proctored',
+          labelTextOneOneBadge: 'proctor',
           textOne: ''
         },
         {
-          labelTextOneOneBadge: 'supervised',
+          labelTextOneOneBadge: 'repeat',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'reset',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'shuffle',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'supervise',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'template',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: 'version',
           textOne: ''
         }
       ],
       innerAssociateList: [],
       innerInfo: 'assessees',
+      isListCard: false
+      // IconOne: Manuscript
+    },
+    {
+      id: 'aid',
+      labelTextOneOne: 'aid',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'calculator',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            },
+            {
+              labelTextTwoBadge: 'type',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'spredsheet',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            },
+            {
+              labelTextTwoBadge: 'type',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'textsheet',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: 'No Information'
+            },
+            {
+              labelTextTwoBadge: 'type',
+              innerLabelBadgeList: 'No Information'
+            }
+          ]
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
       isListCard: false,
-      IconOne: Manuscript
+      isReviewLink: false,
+      isMultiInfoCard: true
+      // IconOne: Manuscript
     },
     {
       id: 'a1',
@@ -114,6 +163,24 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       IconOne: Manuscript
     },
     {
+      id: 'evaluation-assessment',
+      labelTextOneOne: 'evaluation',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        },
+        {
+          labelTextOneOneBadge: '',
+          textOne: ''
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: null
+    },
+    {
       id: 'a4',
       labelTextOneOne: 'items',
       isListCard: false,
@@ -123,7 +190,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           textOne: ''
         },
         {
-          labelTextOneOneBadge: 'header',
+          labelTextOneOneBadge: 'label',
           textOne: ''
         },
         {
@@ -200,18 +267,17 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOne: 'response',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'header',
+          labelTextOneOneBadge: 'label',
           textOne: ''
         },
         {
-          labelTextOneOneBadge: 'revision',
+          labelTextOneOneBadge: 'revise',
           textOne: ''
         }
       ],
       innerAssociateList: [],
       innerInfo: 'assessees',
-      isListCard: false,
-      IconOne: Manuscript
+      isListCard: false
     },
     {
       id: 'a4',
@@ -262,6 +328,13 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: Manuscript
+    },
+    {
+      id: 'a6-template',
+      labelTextOneOne: 'template',
+      isListCard: false,
+      innerAssociateList: [],
+      IconOne: null
     },
     {
       id: 'a6',

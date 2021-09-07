@@ -195,7 +195,7 @@ export const HeaderZero = (props) => {
                   {isImageActive ? (
                     <Avatar
                       alt=""
-                      className="iguru-icon-container"
+                      className={["iguru-icon-container",'iguru-img-icon-left'].join(' ')}
                       src={imageOne}
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
@@ -209,7 +209,12 @@ export const HeaderZero = (props) => {
                       }}
                     />
                   ) : (
-                    <IconsButton Icon={PersonIcon} className="imageNA iguru-icon-container" />
+                    <IconsButton
+                      Icon={PersonIcon}
+                      classNameOne={'iguru-img-icon-left'}
+                      className="imageNA iguru-icon-container "
+                      style={{ alignItems: 'flex-end' }}
+                    />
                   )}
                 </div>
               </div>

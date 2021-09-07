@@ -5,6 +5,26 @@ import Worksheet from '@material-ui/icons/InsertDriveFile';
 import GaugeIcon from '@material-ui/icons/Dashboard';
 import TemplateIcon from '@material-ui/icons/BorderClear';
 
+export const ASSESSEE_REPORT_POPUP = [
+  {
+    data: 'publish',
+    dataValue: 'publish',
+    dataKey: 'publish',
+    optionClass: 'optionPrimary'
+  },
+  {
+    data: 'review',
+    dataValue: 'reviewReport',
+    dataKey: 'reviewReport',
+    optionClass: 'optionPrimary'
+  },
+  {
+    data: 'revise',
+    dataValue: 'reviseReport',
+    dataKey: 'reviseReport',
+    optionClass: 'optionPrimary'
+  }
+];
 export const ASSIGNMENT_DISTINCT_POPUP = [
   {
     data: 'distinct',

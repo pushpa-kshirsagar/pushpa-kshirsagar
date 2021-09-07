@@ -1,7 +1,9 @@
 .iguru-usercardcontainer {
   flex: 11;
 }
-
+.iguru-img-icon-left{
+  align-items: flex-end !important;
+}
 .iguru-assesseescontainer {
   display: flex;
   /* width: 100%; */

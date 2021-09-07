@@ -184,11 +184,11 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const secondaryIcon = [
-    { label: 'disapproved', onClick: onClickFooter, Icon: FilterList },
-    { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unapproved', onClick: onClickFooter, Icon: FilterList },
-    { label: 'unconfirmed', onClick: onClickFooter, Icon: FilterList }
+    { label: 'aborted', onClick: onClickFooter, Icon: FilterList },
+    { label: 'finished', onClick: onClickFooter, Icon: FilterList },
+    { label: 'started', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unfinished', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unstarted', onClick: onClickFooter, Icon: FilterList }
   ];
 
   const openListPopup = (e) => {
@@ -271,7 +271,7 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
           secondaryIcon={reviseSecondaryIcons}
         />
       )}
-      {FilterMode === 'assignmentDistinctAssesseeDistinctinactive' && (
+      {FilterMode === 'assignmentDistinctAssesseeDistinctactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
