@@ -1993,7 +1993,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           dispatch({ type: LOADER_STOP });
           dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
           dispatch({ type: POPUP_CLOSE });
-        }, 3000);
+        }, 2000);
       }
     } else if (dataVal === 'reviewReport') {
       dispatch({ type: GET_ASSESSEE_REPORT_SAGA, reqBody: {} });

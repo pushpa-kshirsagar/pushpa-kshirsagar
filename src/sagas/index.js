@@ -58,6 +58,7 @@ import watchAssociateAllocateSaga from './watchers/associateAllocate';
 import watchCultureProfileAllocateSaga from './watchers/cultureProfileAllocate';
 import watchJobProfileAllocateSaga from './watchers/jobProfileAllocate';
 import watchItemAllocateSaga from './watchers/itemAllocate';
+import watchAssesseReporteSaga from './watchers/assesseeReport';
 
 export default function* root() {
   // yield all([fork(watchGetUserSaga)]);
@@ -120,6 +121,7 @@ export default function* root() {
     fork(watchAssociateAllocateSaga),
     fork(watchCultureProfileAllocateSaga),
     fork(watchJobProfileAllocateSaga),
-    fork(watchItemAllocateSaga)
+    fork(watchItemAllocateSaga),
+    fork(watchAssesseReporteSaga)
   ]);
 }

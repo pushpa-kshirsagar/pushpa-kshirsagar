@@ -230,6 +230,7 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
         />
       )}
       {listDistinctData &&
+        listDistinctData.assignmentStatus === 'UNPUBLISHED' &&
         listDistinctData.assessee.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
@@ -255,6 +256,31 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
                 isSelected={selectedTagsArray.includes(
                   item.informationEngagement.assesseeTag?.assesseeTagPrimary
                 )}
+                onClickCheckBox={(event) => {
+                  onClickCheckBoxOneListSelection(selectedTagsArray, event, dispatch);
+                }}
+              />
+            </div>
+          );
+        })}
+      {listDistinctData &&
+        listDistinctData.assignmentStatus === 'PUBLISHED' &&
+        listDistinctData.assessee.map((item, index) => {
+          return (
+            <div className="containerPadding" key={index}>
+              <ReviewList
+                className=""
+                id={index}
+                tag={item.id}
+                isSelectedReviewList={middlePaneSelectedValue === item.id}
+                status={item.assesseeAssignmentStatus}
+                actualStatus={item.assesseeAssignmentStatus}
+                textOne={item.assesseeName}
+                textTwo={''}
+                isTooltipActive={false}
+                onClickEvent={openListPopup}
+                isSelectActive={isSelectActive}
+                isSelected={selectedTagsArray.includes(item.id)}
                 onClickCheckBox={(event) => {
                   onClickCheckBoxOneListSelection(selectedTagsArray, event, dispatch);
                 }}

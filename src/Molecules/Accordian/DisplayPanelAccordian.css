@@ -82,6 +82,12 @@
   margin-bottom: 0px;
   width: 100%;
 }
+.report-label{
+  height: 50px;
+    margin: auto;
+    align-items: center;
+    display: inline-flex;
+}
 .formControlRight {
   padding: 2px 0 0 0;
   transform: none !important;
@@ -162,6 +168,10 @@
   /* margin-left: 20px; */
 }
 .verifiedUser {
+  align-items: center;
+}
+.reports-center {
+  font-size: 1rem;
   align-items: center;
 }
 .verifiedUser img {

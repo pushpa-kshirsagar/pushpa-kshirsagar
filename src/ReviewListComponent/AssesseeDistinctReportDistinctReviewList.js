@@ -247,8 +247,8 @@ const AssesseeDistinctReportDistinctReviewList = (props) => {
             className={'iguru-iconboxSVG'}
           />
           <Card
-            textOneOne={`${listDistinctData?.assesseeReport.informationBasic.assesseeNameFirst} ${listDistinctData?.assesseeReport.informationBasic.assesseeNameOther} ${listDistinctData?.assesseeReport.informationBasic.assesseeNameLast}`}
-            textTwoOne={`${listDistinctData?.assesseeReport.informationBasic.assesseeAlias}`}
+            textOneOne={`${listDistinctData?.assesseeReport?.assesseeName}`}
+            textTwoOne={` `}
             IconOne={CrossIcon}
             isIcon={true}
             labelTwoTwo={'distinct'}

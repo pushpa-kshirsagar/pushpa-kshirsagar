@@ -409,6 +409,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssesseeReport = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssesseeReport,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionOneAssesseeReport,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssesseeType = [
     {
       id: 'section1',
@@ -572,6 +586,9 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssessmentType, setSelectedSectionAssessmentType] = useState(
     rightPaneSectionsAssessmentType[0]
   );
+  const [selectedSectionAssesseeReport, setSelectedSectionAssesseeReport] = useState(
+    rightPaneSectionsAssesseeReport[0]
+  );
   const [selectedSectionAssesseeType, setSelectedSectionAssesseeType] = useState(
     rightPaneSectionsAssesseeType[0]
   );
@@ -617,6 +634,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssignmentGroup(rightPaneSectionsAssignmentGroup[0]);
     setSelectedSectionAssignmentType(rightPaneSectionsAssignmentType[0]);
     setSelectedSectionAssessmentType(rightPaneSectionsAssessmentType[0]);
+    setSelectedSectionAssesseeReport(rightPaneSectionsAssesseeReport[0]);
     setSelectedSectionAssesseeType(rightPaneSectionsAssesseeType[0]);
     setSelectedSectionAssociateType(rightPaneSectionsAssociateType[0]);
     setSelectedSectionItemType(rightPaneSectionsItemType[0]);
@@ -2681,7 +2699,9 @@ export const DisplayPaneThree = () => {
       </div>
       {isReviewRevise &&
         responseObject &&
-        ((headerOne === 'assessee' && headerOneBadgeOne !== 'role') ||
+        ((headerOne === 'assessee' &&
+          headerOneBadgeOne !== 'role' &&
+          headerOneBadgeOne !== 'report') ||
           headerOne === 'administrator' ||
           headerOne === 'manager') && (
           <>
@@ -2694,8 +2714,8 @@ export const DisplayPaneThree = () => {
                   labelTextOneOne="name"
                   labelTextOneTwo="alias"
                   textOneOne={`${
-                    informationBasic.assesseeNamePrefix
-                  } ${informationBasic.assesseeNameFirst.trim()} ${informationBasic.assesseeNameOther.trim()} ${informationBasic.assesseeNameLast.trim()} ${informationBasic.assesseeNameSuffix.trim()}`.trim()}
+                    informationBasic?.assesseeNamePrefix
+                  } ${informationBasic?.assesseeNameFirst.trim()} ${informationBasic?.assesseeNameOther.trim()} ${informationBasic?.assesseeNameLast.trim()} ${informationBasic.assesseeNameSuffix.trim()}`.trim()}
                   textOneTwo={informationBasic.assesseeAlias || 'No Information'}
                   isVerifiedActiveName={informationBasic?.assesseeNameVerification || false}
                   isVerifiedActivePicture={informationBasic?.assesseePictureVerification || false}
@@ -2732,50 +2752,7 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
-      {isReviewRevise && headerOne === 'assessee' && headerOneBadgeOne === 'report' && (
-        <>
-          <div style={{ padding: '2.5px' }}>
-            <div style={{ padding: '2.5px' }}>
-              <BasicCard
-                isAlertActive
-                isFlagActive={false}
-                className=""
-                labelTextOneOne="name"
-                labelTextOneTwo="alias"
-                textOneOne={'mammmm'}
-                textOneTwo={'No Information'}
-                isVerifiedActiveName={false}
-                isVerifiedActivePicture={false}
-                mode={reviewMode}
-              />
-            </div>
-            <Sections
-                listSections={rightPaneSectionsAssessmentType}
-                selectedSection={selectedSectionAssessmentType}
-                setSelectedSection={setSelectedSectionAssessmentType}
-              />
-          </div>
-          {reviewMode === 'revise' && (
-            <FooterIconTwo
-              FilterModeEnable={isShowReviseIcon}
-              FilterMode={FilterMode}
-              onClick={onClickRevise}
-              primaryIcon={revisePrimaryIcon}
-              secondaryIcon={reviseSecondaryIcons}
-            />
-          )}
 
-          {createMode === 'assessee' && reviewMode !== 'revise' && (
-            <FooterIconTwo
-              FilterModeEnable={true}
-              FilterMode={FilterMode}
-              onClick={onClickCreateAssessee}
-              primaryIcon={createAssesseePrimaryIcon}
-              secondaryIcon={[]}
-            />
-          )}
-        </>
-      )}
       {isReviewRevise &&
         responseObject &&
         ((headerOne === 'assessees' && headerOneBadgeOne === 'role') ||
@@ -3558,6 +3535,32 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
+
+      {isReviewRevise && headerOne === 'assessee' && headerOneBadgeOne === 'report' && (
+        <>
+          <div style={{ padding: '2.5px' }}>
+            <div style={{ padding: '2.5px' }}>
+              <BasicCard
+                isAlertActive
+                isFlagActive={false}
+                className=""
+                labelTextOneOne="name"
+                labelTextOneTwo="alias"
+                textOneOne={'mammmm'}
+                textOneTwo={'No Information'}
+                isVerifiedActiveName={false}
+                isVerifiedActivePicture={false}
+                mode={reviewMode}
+              />
+            </div>
+            <Sections
+              listSections={rightPaneSectionsAssesseeReport}
+              selectedSection={selectedSectionAssesseeReport}
+              setSelectedSection={DisplayPaneThreeSectionOneAssesseeReport}
+            />
+          </div>
+        </>
+      )}
       {isReviewRevise &&
         responseObject &&
         headerOne === 'assessees' &&

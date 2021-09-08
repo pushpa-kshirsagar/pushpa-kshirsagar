@@ -40,7 +40,7 @@ function* workerGetAssesseeReportSaga(data) {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
-          headerOne: 'assessees',
+          headerOne: 'assessee',
           headerOneBadgeOne: 'report',
           headerOneBadgeTwo: '',
           headerOneBadgeThree: '',
