@@ -112,7 +112,7 @@ export const assignmentsDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
-  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   dispatch({
     type: ASSIGNMENT_REVIEW_DISTINCT_SAGA,
     payload: {

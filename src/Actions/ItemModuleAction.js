@@ -146,7 +146,7 @@ export const getItemsDistinctApiCall = (
   dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
   dispatch({ type: LOADER_START });
   dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  dispatch({ type: SET_PAGE_COUNT, payload: 1 });
   resetDataFunction(dispatch);
   dispatch({
     type: GET_ITEM_REVIEW_LIST_SAGA,

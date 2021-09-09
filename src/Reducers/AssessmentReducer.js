@@ -69,13 +69,28 @@ const initialState = {
     }
   },
   informationFramework: {
+    assessmentAdministrationProctor: false,
+    assessmentAdministrationRepeat: false,
+    assessmentAdministrationReset: false,
+    assessmentAdministrationShuffle: false,
+    assessmentAdministrationSupervise: false,
+    assessmentAdministrationTemplate: false,
+    assessmentAdministrationVersion: false,
+    assessmentAid: {
+      assessmentAidCalculatorPermission: false,
+      assessmentAidCalculatorType: '',
+      assessmentAidSpreadsheetPermission: false,
+      assessmentAidSpreadsheetType: '',
+      assessmentAidTextsheetPermission: false,
+      assessmentAidTextsheetType: ''
+    },
     assessmentCommunique: {
       assessmentCommuniquePrimary: null,
       assessmentCommuniqueSecondary: null
     },
-    assessmentCalculator: false,
-    assessmentSpreadsheet: false,
-    assessmentTextsheet: false,
+    assessmentEvaluation: {
+      assessmentEvaluationModel: ''
+    },
     assessmentItem: [],
     assessmentNavigation: {
       first: true,

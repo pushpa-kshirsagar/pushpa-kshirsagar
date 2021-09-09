@@ -45,6 +45,7 @@ function* workerAssesseeAssignmentListSaga(data) {
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
+      console.log('payload', data.payload);
       if (data.payload.assessmentStarted) {
         yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
         let assessmentList = response.responseObject.filter((list) => {
@@ -58,19 +59,43 @@ function* workerAssesseeAssignmentListSaga(data) {
           type: RELATED_REVIEWLIST_DISTINCT_DATA,
           payload: assessmentList
         });
-        yield put({
-          type: SET_MIDDLEPANE_STATE,
-          payload: {
-            middlePaneHeader: 'assessments',
-            middlePaneHeaderBadgeOne: 'active',
-            middlePaneHeaderBadgeTwo: '',
-            middlePaneHeaderBadgeThree: '',
-            middlePaneHeaderBadgeFour: '',
-            typeOfMiddlePaneList: 'assesseesAssginmentAssessmentReviewList',
-            scanCount: assessmentList[0].assesseeAssessment.length,
-            showMiddlePaneState: true
-          }
-        });
+        console.log('assessmentList', assessmentList);
+        if (assessmentList.length > 0) {
+          yield put({
+            type: SET_MIDDLEPANE_STATE,
+            payload: {
+              middlePaneHeader: 'assessments',
+              middlePaneHeaderBadgeOne: 'active',
+              middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+              middlePaneHeaderBadgeThree: '',
+              middlePaneHeaderBadgeFour: '',
+              typeOfMiddlePaneList: 'assesseesAssginmentAssessmentReviewList',
+              scanCount: assessmentList[0].assesseeAssessment.length,
+              showMiddlePaneState: true
+            }
+          });
+        } else {
+          yield put({
+            type: SET_MIDDLEPANE_STATE,
+            payload: {
+              middlePaneHeader: 'assignments',
+              middlePaneHeaderBadgeOne: data.payload.BadgeOne,
+              middlePaneHeaderBadgeTwo: data.payload.BadgeTwo,
+              middlePaneHeaderBadgeThree: '',
+              middlePaneHeaderBadgeFour: '',
+              typeOfMiddlePaneList: 'assesseeAssignmentDistinctReviewList',
+              scanCount: response && response.countTotal,
+              showMiddlePaneState: true
+            }
+          });
+          yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+          yield put({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'isExamMode', value: false }
+          });
+          yield put({ type: REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
+          yield put({ type: CLEAR_ASSIGNMENT_INFO });
+        }
       } else {
         yield put({
           type: SET_MIDDLEPANE_STATE,
@@ -224,12 +249,12 @@ function* workerAssesseeAssessmentItemFinishSaga(data) {
 }
 function* workerAssesseeAssessmentFinishSaga(data) {
   try {
-    // const response = yield call(apiCallFun, {
-    //   data: data.payload.request,
-    //   URL: ASSESSEE_ASSESSMENT_FINISH_URL,
-    //   type: ''
-    // });
-    const response = { responseCode: '000', countTotal: 30 };
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSESSEE_ASSESSMENT_FINISH_URL,
+      type: ''
+    });
+    // const response = { responseCode: '000', countTotal: 30 };
     if (response.responseCode === '000') {
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,

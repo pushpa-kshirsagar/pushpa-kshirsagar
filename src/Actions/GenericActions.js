@@ -4,7 +4,14 @@ import S3 from 'react-aws-s3';
 import config from '../config.json';
 import UserPool from '../UserPool';
 import { getItemReviewApiCall } from './ItemModuleAction';
-import { LOADER_START, SET_DISPLAY_TWO_SINGLE_STATE, SET_MOBILE_PANE_STATE } from '../actionType';
+import {
+  GET_ASSESSEE_ASSIGNMENT_SAGA,
+  LOADER_START,
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_MOBILE_PANE_STATE,
+  SET_PAGE_COUNT,
+  SET_REQUEST_OBJECT
+} from '../actionType';
 import { useRef } from 'react';
 const configObj = {
   bucketName: config.aws.BUCKET_NAME,
@@ -6675,4 +6682,56 @@ export const getNodeCultureProfileScanReqObj = (
       }
     ]
   };
+};
+
+export const getAssesseeSelfAssignmentList = (
+  selectedAssociateInfo,
+  countPage,
+  statusArr,
+  dispatch,
+  secondaryOptionCheckValue,
+  siftKey
+) => {
+  let reqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    countPage: countPage,
+    numberPage: 0,
+    filter: true,
+    orderBy: {
+      columnName: '',
+      order: 'asc'
+    },
+    searchCondition: 'AND',
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'assesseeAssignmentStatus',
+            conditionValue: {
+              condition: 'in',
+              value: {
+                in: statusArr
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
+  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+  dispatch({ type: LOADER_START });
+  dispatch({
+    type: GET_ASSESSEE_ASSIGNMENT_SAGA,
+    payload: {
+      request: reqBody,
+      BadgeOne: secondaryOptionCheckValue,
+      BadgeTwo: siftKey,
+      BadgeThree: ''
+    }
+  });
 };

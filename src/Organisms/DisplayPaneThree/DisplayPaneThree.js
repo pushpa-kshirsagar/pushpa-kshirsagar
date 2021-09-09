@@ -2682,7 +2682,7 @@ export const DisplayPaneThree = () => {
       });
     }
   };
-
+console.log('reviewMode',reviewMode);
   return (
     <>
       <div>
@@ -3911,7 +3911,7 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
-      {reviewMode === 'review' && responseObject && headerOne !== '' && (
+      {/* {reviewMode === 'review' && responseObject && headerOne !== '' && (
         <div className={`middleFooterD`}>
           <div className={'footerInner'}>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -3985,7 +3985,7 @@ export const DisplayPaneThree = () => {
             </Grid>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

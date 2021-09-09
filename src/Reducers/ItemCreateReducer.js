@@ -7,7 +7,8 @@ import {
   REMOVE_ITEM_OPTION_OBJECT,
   SET_ITEM_FRAMWORK_TYPE,
   SET_ITEMFRAMEWORK_REDUCER_STATE,
-  SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE
+  SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+  SET_ITEM_SINGLE_STATE
 } from '../actionType';
 
 const optionLabel =
@@ -196,6 +197,11 @@ const initialState = {
 const ItemCreateReducer = (istate = initialState, action) => {
   // console.log(action.type);
   switch (action.type) {
+    case SET_ITEM_SINGLE_STATE:
+      return {
+        ...istate,
+        [action.payload.stateName]: action.payload.value
+      };
     case SET_TYPE_REDUCER_STATE:
       return {
         ...istate,

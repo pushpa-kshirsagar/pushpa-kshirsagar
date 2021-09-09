@@ -132,7 +132,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
     <div>
       {/* Item Label */}
       <div className={'innerpadding'}>
-        {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia !== '' ||
+        {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia ||
           reviewMode === 'revise') && (
           <div
             className={['ex_container', 'ig-label'].join(' ')}
@@ -151,7 +151,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                 : null
             }
           >
-            {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia === '' &&
+            {(!itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia &&
               reviewMode === 'revise' &&
               ReactHTMLParser(itemLabelText)) || (
               <EditorTemplate
@@ -182,7 +182,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                 : null
             }
           >
-            {(itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia === '' &&
+            {(!itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia &&
               reviewMode === 'revise' &&
               ReactHTMLParser(passageText)) || (
               <EditorTemplate
@@ -194,7 +194,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
         </div>
       )}
       {/* Item */}
-      {(itemFrameworkOne?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
+      {(itemFrameworkOne?.itemFrameworkOneMedia || reviewMode === 'revise') && (
         <div className={'innerpadding'}>
           <div
             className={['ex_container', 'ig-itemGeneric'].join(' ')}
@@ -213,7 +213,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                 : null
             }
           >
-            {(itemFrameworkOne?.itemFrameworkOneMedia === '' &&
+            {(!itemFrameworkOne?.itemFrameworkOneMedia &&
               reviewMode === 'revise' &&
               ReactHTMLParser(itemText)) || (
               // <EditorJs data={itemFrameworkOne?.itemFrameworkOneMedia} readOnly={true} />
@@ -241,7 +241,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
             {itemFrameworkOneSection.map((ob, keys) => {
               return (
                 <Fragment>
-                  {(ob.itemFrameworkOneSection?.itemFrameworkOneMedia !== '' ||
+                  {(ob.itemFrameworkOneSection?.itemFrameworkOneMedia ||
                     reviewMode === 'revise') && (
                     <div className="likart">
                       <Fragment>
@@ -265,7 +265,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                               : null
                           }
                         >
-                          {(ob.itemFrameworkOneSection?.itemFrameworkOneMedia === '' &&
+                          {(!ob.itemFrameworkOneSection?.itemFrameworkOneMedia  &&
                             reviewMode === 'revise' &&
                             ReactHTMLParser('<span>item</span>-' + `${keys + 1}`)) || (
                             <EditorTemplate
@@ -346,7 +346,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                                           : null
                                       }
                                     >
-                                      {(opt.itemFrameworkOneResponseChoiceMedia === '' &&
+                                      {(!opt.itemFrameworkOneResponseChoiceMedia  &&
                                         reviewMode === 'revise' &&
                                         ReactHTMLParser(optionLabel1)) || (
                                         <EditorTemplate
@@ -375,8 +375,8 @@ const DisplayPaneFiveItemTemplate = (props) => {
                                           : null
                                       }
                                     >
-                                      {(opt.itemFrameworkOneResponseChoiceExplanation
-                                        ?.itemFrameworkOneResponseChoiceExplanationMedia === '' &&
+                                      {(!opt.itemFrameworkOneResponseChoiceExplanation
+                                        ?.itemFrameworkOneResponseChoiceExplanationMedia  &&
                                         reviewMode === 'revise' &&
                                         ReactHTMLParser(responseChoiceDescription1)) || (
                                         <EditorTemplate
@@ -476,7 +476,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
       )}
 
       {/* Item explanation */}
-      {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia !== '' ||
+      {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia  ||
         reviewMode === 'revise') && (
         <div className={'innerpadding'}>
           <div
@@ -496,8 +496,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                 : null
             }
           >
-            {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia ===
-              '' &&
+            {(!itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia &&
               reviewMode === 'revise' &&
               ReactHTMLParser(itemExplanationText)) || (
               <EditorTemplate
@@ -511,8 +510,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
         </div>
       )}
       {/* response label */}
-      {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia !==
-        '' ||
+      {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia  ||
         reviewMode === 'revise') && (
         <div className={'innerpadding'}>
           <div
@@ -534,8 +532,8 @@ const DisplayPaneFiveItemTemplate = (props) => {
                 : null
             }
           >
-            {(itemFrameworkOne?.itemFrameworkOneResponseLabel
-              ?.itemFrameworkOneResponseLabelMedia === '' &&
+            {(!itemFrameworkOne?.itemFrameworkOneResponseLabel
+              ?.itemFrameworkOneResponseLabelMedia &&
               reviewMode === 'revise' &&
               ReactHTMLParser(responseLabelText)) || (
               <EditorTemplate
@@ -587,7 +585,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
           {numberOfNoOptions.map((op, key) => {
             return (
               <Fragment>
-                {(op.itemFrameworkOneResponseChoiceMedia !== '' || reviewMode === 'revise') && (
+                {(op.itemFrameworkOneResponseChoiceMedia || reviewMode === 'revise') && (
                   <div key={`op-${key}`}>
                     <div className="option-container ex_container" key={`option-${key}`}>
                       <div style={{ paddingRight: '5px', display: 'flex', alignItems: 'center' }}>
@@ -624,7 +622,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                             : null
                         }
                       >
-                        {(op.itemFrameworkOneResponseChoiceMedia === '' &&
+                        {(!op.itemFrameworkOneResponseChoiceMedia &&
                           reviewMode === 'revise' &&
                           ReactHTMLParser(optionLabel)) || (
                           <EditorTemplate
@@ -704,7 +702,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
 
                     <div>
                       {(op.itemFrameworkOneResponseChoiceExplanation
-                        ?.itemFrameworkOneResponseChoiceExplanationMedia !== '' ||
+                        ?.itemFrameworkOneResponseChoiceExplanationMedia ||
                         reviewMode === 'revise') && (
                         <div
                           className={['ex_container', 'ig-explanation '].join(' ')}
@@ -725,8 +723,8 @@ const DisplayPaneFiveItemTemplate = (props) => {
                               : null
                           }
                         >
-                          {(op.itemFrameworkOneResponseChoiceExplanation
-                            ?.itemFrameworkOneResponseChoiceExplanationMedia === '' &&
+                          {(!op.itemFrameworkOneResponseChoiceExplanation
+                            ?.itemFrameworkOneResponseChoiceExplanationMedia  &&
                             reviewMode === 'revise' &&
                             ReactHTMLParser(responseChoiceDescription)) || (
                             <EditorTemplate
@@ -756,7 +754,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
         itemType === 'Fill-in-the-Blank (Response-Choice)') && (
         <Fragment>
           {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-            ?.itemFrameworkOneResponseExplanationMedia !== '' ||
+            ?.itemFrameworkOneResponseExplanationMedia  ||
             reviewMode === 'revise') && (
             <div className={'innerpadding'}>
               <div
@@ -776,8 +774,8 @@ const DisplayPaneFiveItemTemplate = (props) => {
                     : null
                 }
               >
-                {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                  ?.itemFrameworkOneResponseExplanationMedia === '' &&
+                {(!itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                  ?.itemFrameworkOneResponseExplanationMedia &&
                   reviewMode === 'revise' &&
                   ReactHTMLParser(responseExplanationText)) || (
                   <EditorTemplate

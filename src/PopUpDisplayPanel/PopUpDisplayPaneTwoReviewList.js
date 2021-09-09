@@ -1996,6 +1996,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         }, 2000);
       }
     } else if (dataVal === 'reviewReport') {
+      console.log('listDistinctData',relatedReviewListDistinctData);
       dispatch({ type: GET_ASSESSEE_REPORT_SAGA, reqBody: {} });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'reviseReport') {
@@ -2345,6 +2346,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({ type: LOADER_START });
         dispatch({ type: ASSESSEE_ASSESSMENT_START_SAGA, payload: { request: reqBody } });
       }
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }

@@ -248,7 +248,7 @@ const AssesseeDistinctReportDistinctReviewList = (props) => {
           />
           <Card
             textOneOne={`${listDistinctData?.assesseeReport?.assesseeName}`}
-            textTwoOne={` `}
+            textTwoOne={''}
             IconOne={CrossIcon}
             isIcon={true}
             labelTwoTwo={'distinct'}

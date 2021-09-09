@@ -32,7 +32,10 @@ import {
   SELF_POPUP
 } from '../PopUpConfig';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { setAssesseeCardPermissionInJson } from '../Actions/GenericActions';
+import {
+  getAssesseeSelfAssignmentList,
+  setAssesseeCardPermissionInJson
+} from '../Actions/GenericActions';
 import { AccountContext } from '../Account';
 import { useHistory } from 'react-router-dom';
 import { SIGN_IN_URL } from '../endpoints';
@@ -210,48 +213,28 @@ const PopUpDisplayPanelAssessee = (props) => {
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
     if (clickValue === 'distinct' && popupHeaderOne === 'assignments') {
-      let reqBody = {
-        assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId:
-          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        countPage: countPage,
-        numberPage: 0,
-        filter: 'true',
-        orderBy: {
-          columnName: '',
-          order: 'asc'
-        },
-        searchCondition: 'AND',
-        search: [
-          {
-            condition: 'and',
-            searchBy: [
-              {
-                dataType: 'string',
-                conditionColumn: 'assesseeAssignmentStatus',
-                conditionValue: {
-                  condition: 'eq',
-                  value: {
-                    from: secondaryOptionCheckValue.toUpperCase()
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      };
-      dispatch({ type: SET_REQUEST_OBJECT, payload: reqBody });
-      dispatch({ type: SET_PAGE_COUNT, payload: 0 });
-      dispatch({ type: LOADER_START });
-      dispatch({
-        type: GET_ASSESSEE_ASSIGNMENT_SAGA,
-        payload: {
-          request: reqBody,
-          BadgeOne: secondaryOptionCheckValue,
-          BadgeTwo: '',
-          BadgeThree: ''
-        }
-      });
+      let statusArr = [
+        'STARTED',
+        'UNSTARTED',
+        'ABORTED',
+        'FINISHED',
+        'UNFINISHED',
+        'SUSPENTED',
+        'TERMINATED'
+      ];
+      if (secondaryOptionCheckValue.toUpperCase() === 'ACTIVE') {
+        statusArr = ['STARTED', 'UNSTARTED'];
+      }
+      if (secondaryOptionCheckValue.toUpperCase() === 'INACTIVE') {
+        statusArr = ['ABORTED', 'FINISHED', 'UNFINISHED', 'SUSPENTED', 'TERMINATED'];
+      }
+      getAssesseeSelfAssignmentList(
+        selectedAssociateInfo,
+        countPage,
+        statusArr,
+        dispatch,
+        secondaryOptionCheckValue
+      );
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assesseeAssignmentDistinct' + secondaryOptionCheckValue }

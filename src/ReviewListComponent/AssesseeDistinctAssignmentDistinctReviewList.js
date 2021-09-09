@@ -19,6 +19,7 @@ import {
   ASSESSEE_ASSIGNMENT_TRIPLE_POPUP_OPTION,
   RES_START_POPUP_OPTION
 } from '../PopUpConfig';
+import { getAssesseeSelfAssignmentList } from '../Actions/GenericActions';
 const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue } = useSelector((state) => state.AssesseeCreateReducer);
@@ -30,7 +31,9 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
     middlePaneSelectedValue,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    unselectedTagsArray,
+    selectedAssociateInfo,
+    middlePaneHeaderBadgeOne
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -87,12 +90,29 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
     //     isMiddlePaneList: true
     //   }
     // });
+    getAssesseeSelfAssignmentList(
+      selectedAssociateInfo,
+      0,
+      [siftKey.toUpperCase()],
+      dispatch,
+      middlePaneHeaderBadgeOne,
+      siftKey
+    );
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (
+      siftValue === 'suspended' ||
+      siftValue === 'terminated' ||
+      siftValue === 'started' ||
+      siftValue === 'unstarted' ||
+      siftValue === 'aborted' ||
+      siftValue === 'finished' ||
+      siftValue === 'unfinished'
+    )
+      siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
