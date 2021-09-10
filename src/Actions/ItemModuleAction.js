@@ -734,5 +734,30 @@ export const getItemReviewApiCall = (
       }
     }
   });
- 
+};
+
+export const apiCallForItemDistinctPagination = (
+  dispatch,
+  reviewListReqObj,
+  numberPage,
+  middlePaneHeader,
+  middlePaneHeaderBadgeOne,
+  middlePaneHeaderBadgeTwo
+) => {
+  dispatch({ type: LOADER_START });
+  let obj = {
+    ...reviewListReqObj,
+    numberPage: numberPage
+  };
+  dispatch({
+    type: GET_ITEM_REVIEW_LIST_SAGA,
+    payload: {
+      request: obj,
+      middlePaneHeader: middlePaneHeader,
+      BadgeOne: middlePaneHeaderBadgeOne,
+      BadgeTwo: middlePaneHeaderBadgeTwo,
+      isMiddlePaneList: true
+    }
+  });
+  dispatch({ type: SET_PAGE_COUNT, payload: numberPage + 1 });
 };

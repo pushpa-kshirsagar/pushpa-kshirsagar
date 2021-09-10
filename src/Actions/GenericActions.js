@@ -3,7 +3,7 @@ import { ADMIN_ROLE_ID, MANAGER_ROLE_ID } from '../endpoints';
 import S3 from 'react-aws-s3';
 import config from '../config.json';
 import UserPool from '../UserPool';
-import { getItemReviewApiCall } from './ItemModuleAction';
+import { apiCallForItemDistinctPagination, getItemReviewApiCall } from './ItemModuleAction';
 import {
   GET_ASSESSEE_ASSIGNMENT_SAGA,
   LOADER_START,
@@ -70,21 +70,38 @@ export const onClickFirst = (
 };
 export const onClickLast = (
   reviewListDistinctData,
-  id,
   typeOfMiddlePaneList,
   selectedAssociateInfo,
   dispatch,
-  information
+  scanCount,
+  reviewListReqObj,
+  numberPage,
+  middlePaneHeader,
+  middlePaneHeaderBadgeOne,
+  middlePaneHeaderBadgeTwo
 ) => {
   console.log('last Record');
-  // let lastIndex =
-  // callApiFunction(
-  //   selectedAssociateInfo,
-  //   reviewListDistinctData,
-  //   dispatch,
-  //   nextIndex,
-  //   typeOfMiddlePaneList
-  // );
+
+  let lastIndex = reviewListDistinctData.length - 1;
+  if (scanCount > reviewListDistinctData.length) {
+    if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
+      apiCallForItemDistinctPagination(
+        dispatch,
+        reviewListReqObj,
+        numberPage,
+        middlePaneHeader,
+        middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo
+      );
+    }
+    callApiFunction(
+      selectedAssociateInfo,
+      reviewListDistinctData,
+      dispatch,
+      lastIndex,
+      typeOfMiddlePaneList
+    );
+  }
 };
 export const onClickNext = (
   reviewListDistinctData,
@@ -92,7 +109,12 @@ export const onClickNext = (
   typeOfMiddlePaneList,
   selectedAssociateInfo,
   dispatch,
-  information
+  information,
+  reviewListReqObj,
+  numberPage,
+  middlePaneHeader,
+  middlePaneHeaderBadgeOne,
+  middlePaneHeaderBadgeTwo
 ) => {
   if (reviewListDistinctData.length > 0 && dispatch) {
     let index = reviewListDistinctData.findIndex((data) => data.id === id);
@@ -105,6 +127,17 @@ export const onClickNext = (
         nextIndex,
         typeOfMiddlePaneList
       );
+    } else {
+      if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
+        apiCallForItemDistinctPagination(
+          dispatch,
+          reviewListReqObj,
+          numberPage,
+          middlePaneHeader,
+          middlePaneHeaderBadgeOne,
+          middlePaneHeaderBadgeTwo
+        );
+      }
     }
   }
 };

@@ -3,6 +3,7 @@
 }
 .iguru-img-icon-left{
   align-items: flex-end !important;
+  margin: auto !important;
 }
 .iguru-assesseescontainer {
   display: flex;

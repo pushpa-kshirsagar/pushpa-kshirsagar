@@ -34,7 +34,8 @@ import {
 import {
   getItemGroupDistinctApiCall,
   getItemsDistinctApiCall,
-  getItemsTypeApiCall
+  getItemsTypeApiCall,
+  updateItemDistinctStatus
 } from '../Actions/ItemModuleAction';
 import {
   getAssessmentDistinctApiCall,
@@ -73,7 +74,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
     reviewListDistinctData,
-    selectedTagsArray
+    selectedTagsArray,
+    typeOfMiddlePaneList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
@@ -92,6 +94,10 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
     console.log(dataVal);
     if (dataVal === 'information') {
       dispatch({ type: POPUP_CLOSE });
+    } else if (dataVal === 'publishApiCall') {
+      if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
+        // updateItemDistinctStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
+      }
     } else if (dataVal === 'select') {
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -534,7 +540,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           cardValue
         );
         dispatch({ type: POPUP_CLOSE });
-      } else if (keyVal === 'assessments'){
+      } else if (keyVal === 'assessments') {
         getAssessmentDistinctApiCall(
           selectedAssociateInfo,
           'inactive',
@@ -545,7 +551,7 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
         );
         filterModeKey = 'itemAllocateToAssessment';
         dispatch({ type: POPUP_CLOSE });
-      }else {
+      } else {
         dispatch({
           type: SET_MIDDLEPANE_SECONDARY_OPTION,
           payload: { badgeValue: dataVal, keyValue: keyVal }

@@ -18,6 +18,7 @@ import { EXCEPTION_ERROR_MESSAGE } from '../../errorMessage';
 
 const apiCall = async (requestObj) => {
   console.log(requestObj.data);
+  let url='https://ibmped2cm2.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/assessee/assignment/result';
   const requestOptions = {
     method: 'POST',
     headers: new Headers({
@@ -25,14 +26,14 @@ const apiCall = async (requestObj) => {
     }),
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(ASSESSEE_CREATE_URL, requestOptions);
+  const response = await fetch(url, requestOptions);
   const json = await response.json();
   return json;
 };
 
 function* workerGetAssesseeReportSaga(data) {
   try {
-    // const userResponse = yield call(apiCall, { data: data.payload });
+    const response = yield call(apiCall, { data: data.payload.request });
     // console.log('IN WORKER ====>', userResponse);
     // console.log('IN WORKER ====>', JSON.stringify(userResponse));
     let userResponse = { responseCode: '000' };

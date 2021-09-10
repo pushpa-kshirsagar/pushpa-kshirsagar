@@ -18,7 +18,10 @@ import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssessmentTypeObj } from '../Actions/GenericActions';
 import { ITEM_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
-import { getItemsDistinctApiCall } from '../Actions/ItemModuleAction';
+import {
+  apiCallForItemDistinctPagination,
+  getItemsDistinctApiCall
+} from '../Actions/ItemModuleAction';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const ItemReviewList = (props) => {
   const dispatch = useDispatch();
@@ -59,22 +62,14 @@ const ItemReviewList = (props) => {
   const fetchData = async () => {
     console.log(reviewListDistinctData.length);
     if (reviewListDistinctData.length < scanCount) {
-      dispatch({ type: LOADER_START });
-      let obj = {
-        ...reviewListReqObj,
-        numberPage: numberPage
-      };
-      dispatch({
-        type: GET_ITEM_REVIEW_LIST_SAGA,
-        payload: {
-          request: obj,
-          middlePaneHeader: middlePaneHeader,
-          BadgeOne: middlePaneHeaderBadgeOne,
-          BadgeTwo: middlePaneHeaderBadgeTwo,
-          isMiddlePaneList: true
-        }
-      });
-      dispatch({ type: SET_PAGE_COUNT, payload: numberPage + 1 });
+      apiCallForItemDistinctPagination(
+        dispatch,
+        reviewListReqObj,
+        numberPage,
+        middlePaneHeader,
+        middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo
+      );
     }
   };
   useEffect(() => {

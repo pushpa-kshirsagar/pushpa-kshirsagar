@@ -1996,8 +1996,20 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         }, 2000);
       }
     } else if (dataVal === 'reviewReport') {
-      console.log('listDistinctData',relatedReviewListDistinctData);
-      dispatch({ type: GET_ASSESSEE_REPORT_SAGA, reqBody: {} });
+      console.log('listDistinctData', relatedReviewListDistinctData);
+
+      dispatch({
+        type: GET_ASSESSEE_REPORT_SAGA,
+        payload: {
+          request: {
+            assignmentId: relatedReviewListDistinctData[0].id,
+            assesseeId: relatedReviewListDistinctData[0].assesseeReport.assesseeId,
+            associateId:
+              selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                .associateTagPrimary
+          }
+        }
+      });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'reviseReport') {
       alert('open textsheet');

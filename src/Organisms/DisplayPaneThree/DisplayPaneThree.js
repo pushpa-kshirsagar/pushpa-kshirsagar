@@ -67,7 +67,8 @@ import {
   ASSOCIATE_ASSESSMENTSETUP_REVISE_SAGA,
   ASSOCIATE_ITEMSETUP_REVISE_SAGA,
   ASSOCIATE_ANALYTICSETUP_REVISE_SAGA,
-  ASSOCIATE_ASSIGNMENTSETUP_REVISE_SAGA
+  ASSOCIATE_ASSIGNMENTSETUP_REVISE_SAGA,
+  FILTERMODE_ENABLE
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -192,7 +193,13 @@ export const DisplayPaneThree = () => {
     typeOfMiddlePaneList,
     countPage,
     selectedAssociateInfo,
-    reviewListDistinctData
+    reviewListDistinctData,
+    reviewListReqObj,
+    numberPage,
+    middlePaneHeader,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    scanCount
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
@@ -667,8 +674,61 @@ export const DisplayPaneThree = () => {
     assignmentSetUpModule
   ]);
 
-  const { navigatorIcon, FilterMode } = useSelector((state) => state.FilterReducer);
+  const { navigatorIcon, FilterMode, FilterModeEnable } = useSelector(
+    (state) => state.FilterReducer
+  );
   const onClickFooter = (e) => {
+    let siftValue = e.currentTarget.getAttribute('data-value');
+    console.log(siftValue);
+    if (siftValue === 'next') {
+      onClickNext(
+        reviewListDistinctData,
+        responseObject.id,
+        typeOfMiddlePaneList,
+        selectedAssociateInfo,
+        dispatch,
+        headerOneBadgeTwo,
+        reviewListReqObj,
+        numberPage,
+        middlePaneHeader,
+        middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo
+      );
+    }
+    if (siftValue === 'previous') {
+      onClickPrevious(
+        reviewListDistinctData,
+        responseObject.id,
+        typeOfMiddlePaneList,
+        selectedAssociateInfo,
+        dispatch,
+        headerOneBadgeTwo
+      );
+    }
+    if (siftValue === 'first') {
+      onClickFirst(
+        reviewListDistinctData,
+        responseObject.id,
+        typeOfMiddlePaneList,
+        selectedAssociateInfo,
+        dispatch,
+        headerOneBadgeTwo
+      );
+    }
+    if (siftValue === 'last') {
+      onClickLast(
+        reviewListDistinctData,
+        typeOfMiddlePaneList,
+        selectedAssociateInfo,
+        dispatch,
+        scanCount,
+        reviewListReqObj,
+        numberPage,
+        middlePaneHeader,
+        middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo
+      );
+    }
     dispatch({ type: NAVIGATOR_MODE });
   };
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
@@ -1792,7 +1852,6 @@ export const DisplayPaneThree = () => {
     }
     setIsShowReviseIcon(true);
   };
-
   const onClickCreateAssessee = () => {
     console.log('ON CLICK CREATE ASSESSEE');
     dispatch({ type: ASSESSEE_INFO_CREATE });
@@ -2013,13 +2072,6 @@ export const DisplayPaneThree = () => {
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
   const createAssesseePrimaryIcon = [
     { label: 'create', onClick: onClickCreateAssessee, Icon: AddIcon }
-  ];
-  const reviewPrimaryIcon = [];
-  const reviewSecondaryIcon = [
-    { label: 'first', onClick: onClickFirst, Icon: FirstPage },
-    { label: 'previous', onClick: onClickPrevious, Icon: ArrowLeft },
-    { label: 'next', onClick: onClickNext(reviewListDistinctData), Icon: ArrowRight },
-    { label: 'last', onClick: onClickLast, Icon: LastPage }
   ];
   const createItemPrimaryIcon = [{ label: 'create', onClick: onClickCreateItem, Icon: AddIcon }];
   const createAssessmentPrimaryIcon = [
@@ -2682,7 +2734,7 @@ export const DisplayPaneThree = () => {
       });
     }
   };
-console.log('reviewMode',reviewMode);
+  console.log('reviewMode', reviewMode);
   return (
     <>
       <div>
@@ -3911,81 +3963,88 @@ console.log('reviewMode',reviewMode);
             )}
           </>
         )}
-      {/* {reviewMode === 'review' && responseObject && headerOne !== '' && (
-        <div className={`middleFooterD`}>
-          <div className={'footerInner'}>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <BottomNavigation className={'MuiBottomNavigationCustom'}>
-                <div className={'mbPager'}></div>
-                <div className={'mbPager'}>
-                  <CircleIcon
-                    label={'first'}
-                    Icon={FirstPage}
-                    colour={'displayPaneCentre'}
-                    onClick={() => {
-                      onClickFirst(
-                        reviewListDistinctData,
-                        responseObject.id,
-                        typeOfMiddlePaneList,
-                        selectedAssociateInfo,
-                        dispatch,
-                        headerOneBadgeTwo
-                      );
-                    }}
-                    dataValue={'first'}
-                  />
-                </div>
-                <div className={'mbPager'}>
-                  <CircleIcon
-                    label={'previous'}
-                    Icon={ArrowLeft}
-                    colour={'displayPaneCentre'}
-                    dataValue={'previous'}
-                    onClick={() => {
-                      onClickPrevious(
-                        reviewListDistinctData,
-                        responseObject.id,
-                        typeOfMiddlePaneList,
-                        selectedAssociateInfo,
-                        dispatch,
-                        headerOneBadgeTwo
-                      );
-                    }}
-                  />
-                </div>
-                <div className={'mbPager'}>
-                  <CircleIcon
-                    label={'next'}
-                    Icon={ArrowRight}
-                    colour={'displayPaneCentre'}
-                    onClick={() => {
-                      onClickNext(
-                        reviewListDistinctData,
-                        responseObject.id,
-                        typeOfMiddlePaneList,
-                        selectedAssociateInfo,
-                        dispatch,
-                        headerOneBadgeTwo
-                      );
-                    }}
-                    dataValue={'next'}
-                  />
-                </div>
-                <div className={'mbPager'}>
-                  <CircleIcon
-                    label={'last'}
-                    Icon={LastPage}
-                    colour={'displayPaneCentre'}
-                    // onClick={}
-                    dataValue={'last'}
-                  />
-                </div>
-                <div className={'mbPager'}></div>{' '}
-              </BottomNavigation>
-            </Grid>
-          </div>
-        </div>
-      )} */}
+      {reviewMode === 'review' && responseObject && headerOne !== '' && createMode === '' && (
+        <FooterIconTwo
+          FilterModeEnable={navigatorIcon}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryIcon}
+        />
+        // <div className={`middleFooterD`}>
+        //   <div className={'footerInner'}>
+        //     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        //       <BottomNavigation className={'MuiBottomNavigationCustom'}>
+        //         <div className={'mbPager'}></div>
+        //         <div className={'mbPager'}>
+        //           <CircleIcon
+        //             label={'first'}
+        //             Icon={FirstPage}
+        //             colour={'displayPaneCentre'}
+        //             onClick={() => {
+        //               onClickFirst(
+        //                 reviewListDistinctData,
+        //                 responseObject.id,
+        //                 typeOfMiddlePaneList,
+        //                 selectedAssociateInfo,
+        //                 dispatch,
+        //                 headerOneBadgeTwo
+        //               );
+        //             }}
+        //             dataValue={'first'}
+        //           />
+        //         </div>
+        //         <div className={'mbPager'}>
+        //           <CircleIcon
+        //             label={'previous'}
+        //             Icon={ArrowLeft}
+        //             colour={'displayPaneCentre'}
+        //             dataValue={'previous'}
+        //             onClick={() => {
+        //               onClickPrevious(
+        //                 reviewListDistinctData,
+        //                 responseObject.id,
+        //                 typeOfMiddlePaneList,
+        //                 selectedAssociateInfo,
+        //                 dispatch,
+        //                 headerOneBadgeTwo
+        //               );
+        //             }}
+        //           />
+        //         </div>
+        //         <div className={'mbPager'}>
+        //           <CircleIcon
+        //             label={'next'}
+        //             Icon={ArrowRight}
+        //             colour={'displayPaneCentre'}
+        //             onClick={() => {
+        //               onClickNext(
+        //                 reviewListDistinctData,
+        //                 responseObject.id,
+        //                 typeOfMiddlePaneList,
+        //                 selectedAssociateInfo,
+        //                 dispatch,
+        //                 headerOneBadgeTwo
+        //               );
+        //             }}
+        //             dataValue={'next'}
+        //           />
+        //         </div>
+        //         <div className={'mbPager'}>
+        //           <CircleIcon
+        //             label={'last'}
+        //             Icon={LastPage}
+        //             colour={'displayPaneCentre'}
+        //             // onClick={}
+        //             dataValue={'last'}
+        //           />
+        //         </div>
+        //         <div className={'mbPager'}></div>{' '}
+        //       </BottomNavigation>
+        //     </Grid>
+        //   </div>
+        // </div>
+      )}
     </>
   );
 };

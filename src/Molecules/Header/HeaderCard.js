@@ -24,8 +24,6 @@ import {
   ASSESSMENT_FINISH_POPUP_OPTION
 } from '../../PopUpConfig';
 
-
-
 const HeaderCard = (props) => {
   const {
     headerOne = '',
@@ -94,7 +92,26 @@ const HeaderCard = (props) => {
         optionClass: 'optionPrimary',
         disabled: false
       };
+      let newObj1 = {
+        data: 'publish',
+        dataValue: 'publish',
+        dataKey: 'publish',
+        optionClass: 'optionPrimary',
+        disabled: false
+      };
       optArr.splice(0, 0, newObj);
+      optArr.splice(6, 0, newObj1);
+    } else if (middlePaneHeader === 'items' && middlePaneHeaderBadgeOne === 'distinct') {
+      optArr = [...ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION];
+      let newObj1 = {
+        data: 'publish',
+        dataValue: 'publish',
+        dataKey: 'publish',
+        optionClass: 'optionPrimary',
+        disabled: false
+      };
+      optArr.splice(5, 0, newObj1);
+
     } else {
       optArr = ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION;
     }
@@ -163,7 +180,6 @@ const HeaderCard = (props) => {
 
   useEffect(() => {
     // const sec = (assesseeAssessmentStartData?.assessmentTime % 60000) / 1000;
-   
   }, [assesseeAssessmentStartData]);
 
   const openTripleDotPopup = () => {

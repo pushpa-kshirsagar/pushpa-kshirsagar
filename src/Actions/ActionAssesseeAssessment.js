@@ -5,14 +5,12 @@ export const setAssesseeAssessmentItemSaveResCall = (
   dispatch,
   assesseeAssessmentStartData,
   itemId,
-  id,
   assesseeId,
   currentQuestionChoice,
   itemTimeStart
 ) => {
   let ItemObj = {
-    id: id,
-    assesseeId: assesseeId,
+    assesseeId: selectedAssociateInfo?.assesseeId,
     assesseeAssignmentId: assesseeAssessmentStartData.assignmentId,
     assesseeAssignmentAssessmentId: assesseeAssessmentStartData.assessmentId,
     assesseeAssignmentAssessmentItemId: itemId,

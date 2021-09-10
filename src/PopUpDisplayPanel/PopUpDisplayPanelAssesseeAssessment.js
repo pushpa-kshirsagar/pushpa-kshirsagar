@@ -58,7 +58,7 @@ const PopUpDisplayPanelAssesseeAssessment = (props) => {
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
     if (dataVal === 'finish') {
-      // dispatch({ type: LOADER_START });
+      dispatch({ type: LOADER_START });
       if (JSON.parse(localStorage.getItem('assessmentItem'))?.length > 0) {
         let reqObj = {
           assesseeId: selectedAssociateInfo?.assesseeId,

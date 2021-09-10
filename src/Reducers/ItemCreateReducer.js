@@ -85,32 +85,32 @@ const initialState = {
         itemFrameworkOneResponseAlignment: '',
         itemFrameworkOneResponseAttachment: '',
         itemFrameworkOneResponseChoice: [
-          {
-            itemFrameworkOneResponseChoiceAlignment: '',
-            itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanationMedia: null,
-              itemFrameworkOneResponseChoiceExplanationDisplay: false
-            },
-            itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
-            itemFrameworkOneResponseChoiceNumber: '1',
-            itemFrameworkOneResponseChoicePolarity: '',
-            itemFrameworkOneResponseChoiceScore: '',
-            itemFrameworkOneResponseChoiceWeightage: ''
-          },
-          {
-            itemFrameworkOneResponseChoiceAlignment: '',
-            itemFrameworkOneResponseChoiceColumnMatch: '',
-            itemFrameworkOneResponseChoiceExplanation: {
-              itemFrameworkOneResponseChoiceExplanationMedia: null,
-              itemFrameworkOneResponseChoiceExplanationDisplay: false
-            },
-            itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
-            itemFrameworkOneResponseChoiceNumber: '2',
-            itemFrameworkOneResponseChoicePolarity: '',
-            itemFrameworkOneResponseChoiceScore: '',
-            itemFrameworkOneResponseChoiceWeightage: ''
-          }
+          // {
+          //   itemFrameworkOneResponseChoiceAlignment: '',
+          //   itemFrameworkOneResponseChoiceColumnMatch: '',
+          //   itemFrameworkOneResponseChoiceExplanation: {
+          //     itemFrameworkOneResponseChoiceExplanationMedia: null,
+          //     itemFrameworkOneResponseChoiceExplanationDisplay: false
+          //   },
+          //   itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
+          //   itemFrameworkOneResponseChoiceNumber: '1',
+          //   itemFrameworkOneResponseChoicePolarity: '',
+          //   itemFrameworkOneResponseChoiceScore: '',
+          //   itemFrameworkOneResponseChoiceWeightage: ''
+          // },
+          // {
+          //   itemFrameworkOneResponseChoiceAlignment: '',
+          //   itemFrameworkOneResponseChoiceColumnMatch: '',
+          //   itemFrameworkOneResponseChoiceExplanation: {
+          //     itemFrameworkOneResponseChoiceExplanationMedia: null,
+          //     itemFrameworkOneResponseChoiceExplanationDisplay: false
+          //   },
+          //   itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
+          //   itemFrameworkOneResponseChoiceNumber: '2',
+          //   itemFrameworkOneResponseChoicePolarity: '',
+          //   itemFrameworkOneResponseChoiceScore: '',
+          //   itemFrameworkOneResponseChoiceWeightage: ''
+          // }
         ],
         itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseLabel: {
@@ -194,7 +194,7 @@ const initialState = {
   }
 };
 
-const ItemCreateReducer = (istate = initialState, action) => {
+const ItemCreateReducer = (istate = { ...initialState }, action) => {
   // console.log(action.type);
   switch (action.type) {
     case SET_ITEM_SINGLE_STATE:

@@ -88,7 +88,8 @@ function* workerSignInAssesseeSaga(data) {
             headerOne: '',
             setLeftPaneAssessee: true,
             reqBody: {
-              assesseeId: '0123456',
+              assesseeId: selectedAssociate.assesseeId,
+              setLeftPaneAssessee:true,
               associateId:
                 selectedAssociate.associate.informationEngagement.associateTag.associateTagPrimary,
               filter: 'true',
@@ -275,7 +276,7 @@ function* workerSignInAssesseeInfo(data) {
             headerOne: '',
             setLeftPaneAssessee: true,
             reqBody: {
-              assesseeId: '0123456',
+              assesseeId: selectedAssociate.assesseeId,
               associateId:
                 selectedAssociate.associate.informationEngagement.associateTag.associateTagPrimary,
               filter: 'true',

@@ -68,7 +68,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     if (labelName === 'items' && selectedBadgeName === 'distinct') {
       console.log('item CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
-      let requestObect = makeItemObj(selectedAssociateInfo, 'active', countPage, 0);
+      let requestObect = makeItemObj(selectedAssociateInfo, 'active', -1, -1);
       let revisedGroupObject = {
         id: responseObject.id,
         itemGroupName: responseObject.informationBasic.itemGroupName,

@@ -161,14 +161,14 @@ export const DisplayPaneSeven = () => {
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
     let itemId = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].itemId;
-    let id = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].id;
+    // let id = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].id;
     let assesseeId = assesseeAssessmentStartData.assesseeId;
     if (clickedval === 'next') {
+      alert(itemId)
       setAssesseeAssessmentItemSaveResCall(
         selectedAssociateInfo,
         dispatch,
         assesseeAssessmentStartData,
-        id,
         itemId,
         assesseeId,
         currentQuestionChoice,
