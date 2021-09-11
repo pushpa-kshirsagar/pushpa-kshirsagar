@@ -163,8 +163,19 @@ export const DisplayPaneSeven = () => {
     let itemId = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].itemId;
     // let id = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].id;
     let assesseeId = assesseeAssessmentStartData.assesseeId;
+    if (clickedval === 'previous') {
+      if (currentQuestionIndex !== 0) setcurrentQuestionIndex(currentQuestionIndex - 1);
+      // setcurrentQuestionChoice(null);
+    }
+    if (clickedval === 'first') {
+      setcurrentQuestionIndex(0);
+      // setcurrentQuestionChoice(null);
+    }
+    if (clickedval === 'last') {
+      setcurrentQuestionIndex(assesseeAssessmentStartData.assessmentItem.length - 1);
+      // setcurrentQuestionChoice(null);
+    }
     if (clickedval === 'next') {
-      alert(itemId)
       setAssesseeAssessmentItemSaveResCall(
         selectedAssociateInfo,
         dispatch,

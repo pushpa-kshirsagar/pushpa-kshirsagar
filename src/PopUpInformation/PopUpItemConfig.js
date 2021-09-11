@@ -46,8 +46,12 @@ const PopUpItemConfig = (props) => {
     itemFrameworkOne.itemFrameworkOneResponseChoice.length
   );
   useEffect(() => {
-    // set_Response_Choice(itemFrameworkOne.itemFrameworkOneResponseChoice.length);
-    set_Response_Choice(2);
+    set_Response_Choice(
+      itemFrameworkOne.itemFrameworkOneResponseChoice.length === 0
+        ? 2
+        : itemFrameworkOne.itemFrameworkOneResponseChoice.length
+    );
+    // set_Response_Choice(2);
     setSubItem(itemFrameworkOne?.itemFrameworkOneSection?.length);
     set_Item_Aligement(itemFrameworkOne.itemFrameworkOneAlignment);
     set_Item_Type(itemFrameworkOne.itemFrameworkOneType);
