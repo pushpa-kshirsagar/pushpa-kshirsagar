@@ -197,7 +197,7 @@ export const DisplayPaneThree = () => {
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const { informationBasic } = responseObject;
+  const { informationBasic,assessee } = responseObject;
   const rightPaneSectionsAssessee = [
     {
       id: 'section1',
@@ -3542,12 +3542,12 @@ export const DisplayPaneThree = () => {
             <div style={{ padding: '2.5px' }}>
               <BasicCard
                 isAlertActive
-                isFlagActive={false}
+                isFlagActive={assessee.assesseeFlag}
                 className=""
                 labelTextOneOne="name"
                 labelTextOneTwo="alias"
-                textOneOne={'mammmm'}
-                textOneTwo={'No Information'}
+                textOneOne={assessee.assesseeNameFirst + " " + assessee.assesseeNameLast}
+                textOneTwo={assessee.assesseeAlias}
                 isVerifiedActiveName={false}
                 isVerifiedActivePicture={false}
                 mode={reviewMode}

@@ -12,8 +12,9 @@ import {
   UPDATE_ASSESSEE_CONTACT_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   UPDATE_ASSESSEE_PERSONAL_INFO
+  
 } from '../../actionType';
-import { ASSESSEE_CREATE_URL } from '../../endpoints';
+import { ASSESSEE_CREATE_URL,ASSESSEE_ASSESSMENT_RESULT_URL } from '../../endpoints';
 import { EXCEPTION_ERROR_MESSAGE } from '../../errorMessage';
 
 const apiCall = async (requestObj) => {
@@ -25,7 +26,8 @@ const apiCall = async (requestObj) => {
     }),
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(ASSESSEE_CREATE_URL, requestOptions);
+  //const response = await fetch(ASSESSEE_CREATE_URL, requestOptions);
+  const response = await fetch(ASSESSEE_ASSESSMENT_RESULT_URL, requestOptions);
   const json = await response.json();
   return json;
 };
@@ -35,7 +37,11 @@ function* workerGetAssesseeReportSaga(data) {
     // const userResponse = yield call(apiCall, { data: data.payload });
     // console.log('IN WORKER ====>', userResponse);
     // console.log('IN WORKER ====>', JSON.stringify(userResponse));
-    let userResponse = { responseCode: '000' };
+
+     const userResponse = yield call(apiCall, { data: data.payload.request });
+     console.log('IN WORKER ====>', userResponse);
+     console.log('IN WORKER ====>', JSON.stringify(userResponse));
+    //let userResponse = { responseCode: '000' };
     if (userResponse.responseCode === '000') {
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
@@ -44,7 +50,7 @@ function* workerGetAssesseeReportSaga(data) {
           headerOneBadgeOne: 'report',
           headerOneBadgeTwo: '',
           headerOneBadgeThree: '',
-          responseObject: null,
+          responseObject: userResponse.responseObject,
           reviewMode: ''
         }
       });

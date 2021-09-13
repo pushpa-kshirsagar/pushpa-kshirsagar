@@ -315,7 +315,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         value: e.currentTarget.getAttribute('data-value')
       }
     });
-  };
+  };  
   const ChangeOptionPopup = (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
@@ -1996,7 +1996,20 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         }, 2000);
       }
     } else if (dataVal === 'reviewReport') {
-      dispatch({ type: GET_ASSESSEE_REPORT_SAGA, reqBody: {} });
+      // dispatch({ type: GET_ASSESSEE_REPORT_SAGA, reqBody: {
+
+      // } });
+      
+      dispatch({ type: GET_ASSESSEE_REPORT_SAGA, payload: {
+        request:{
+          assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,    
+        assignmentId:relatedReviewListDistinctData[0].id
+        }
+      } });
+
+
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'reviseReport') {
       alert('open textsheet');
