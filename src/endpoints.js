@@ -400,6 +400,9 @@ export const CULTURE_PROFILE_ALLOCATE_ASSIGNMENT_URL =
 export const JOB_PROFILE_ALLOCATE_ASSIGNMENT_URL =
   ANALYTICS + '/dev/insight-guru/api/job-profile/allocate/assignment';
 
+export const ASSESSEE_ASSESSMENT_RESULT_URL =
+ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee/assignment/result';
+
 //item_config - Item_TYPE
 export const CONFIG_ITEM_URL =
   'https://5u6ip77xaf.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/item-framework-one-type/review-list';
