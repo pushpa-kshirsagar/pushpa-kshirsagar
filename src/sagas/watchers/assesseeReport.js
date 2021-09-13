@@ -53,6 +53,7 @@ function* workerGetAssesseeReportSaga(data) {
           reviewMode: ''
         }
       });
+      yield put({ type: LOADER_STOP });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
