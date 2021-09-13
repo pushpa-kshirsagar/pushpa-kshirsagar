@@ -33,13 +33,7 @@ const apiCall = async (requestObj) => {
 
 function* workerGetAssesseeReportSaga(data) {
   try {
-    const response = yield call(apiCall, { data: data.payload.request });
-    // console.log('IN WORKER ====>', userResponse);
-    // console.log('IN WORKER ====>', JSON.stringify(userResponse));
-
     const userResponse = yield call(apiCall, { data: data.payload.request });
-    console.log('IN WORKER ====>', userResponse);
-    console.log('IN WORKER ====>', JSON.stringify(userResponse));
     //let userResponse = { responseCode: '000' };
     if (userResponse.responseCode === '000') {
       yield put({

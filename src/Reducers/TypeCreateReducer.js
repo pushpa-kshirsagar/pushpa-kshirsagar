@@ -23,6 +23,12 @@ const initialState = {
     },
     informationAllocation: {
       assesseeTypeGroup: ''
+    },
+    informationSetup: {
+      assesseeTypeClassification: {
+        assesseeTypeClassificationPrimary: [],
+        assesseeTypeClassificationSecondary: []
+      }
     }
   },
   assessmentType: {

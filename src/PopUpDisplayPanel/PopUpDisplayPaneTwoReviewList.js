@@ -333,6 +333,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesRoleAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesNodeAssesseeReviewList' ||
+        typeOfMiddlePaneList === 'assignmentDistinctAssesseeReviewList' ||
         typeOfMiddlePaneList === 'managersDistinctReviewList'
       ) {
         assesseeReviewInformation(
@@ -2008,7 +2009,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             associateId:
               selectedAssociateInfo?.associate?.informationEngagement.associateTag
                 .associateTagPrimary,
-            assignmentId: relatedReviewListDistinctData[0].id
+            assesseeResult: {
+              assesseeId: relatedReviewListDistinctData[0].assesseeReport.assesseeId,
+              assignmentId: relatedReviewListDistinctData[0].id
+            }
           }
         }
       });

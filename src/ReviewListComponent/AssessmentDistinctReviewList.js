@@ -131,7 +131,7 @@ const AssessmentDistinctReviewList = (props) => {
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
-          itemDistinctAllocate: { itemDistinct: allocatedTagsArray },
+          itemDistinctAllocate: { itemGroup: allocatedTagsArray },
           itemDistinctAllocateInformation: {
             assessment: selectedTagsArray
           }

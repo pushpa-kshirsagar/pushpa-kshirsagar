@@ -3797,6 +3797,10 @@ export const getItemGroupItemReqObj = (
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
+    orderBy: {
+      columnName: 'informationBasic.itemName,informationBasic.itemDescription',
+      order: 'asc'
+    },
     numberPage: numberPage,
     groupId: groupId,
     filter: 'true',

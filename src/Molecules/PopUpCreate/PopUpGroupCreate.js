@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
@@ -26,7 +26,8 @@ const PopUpGroupCreate = (props) => {
     objectName
   } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const [nodeSelectedError, setNodeSelectedError] = useState('');
+  const { selectedAssociateInfo,coreNodeReviewListData } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
     (state) => state.DisplayPaneThreeReducer
@@ -233,13 +234,13 @@ const PopUpGroupCreate = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
+        isRequired={true}
+        minimumSelected={1}
+        ListData={coreNodeReviewListData}
+        textOne={'associateNodeName'}
+        textTwo={'associateNodeDescription'}
+        setErrorMsg={setNodeSelectedError}
+        errorMsg={nodeSelectedError}
         onClickEvent={null}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
