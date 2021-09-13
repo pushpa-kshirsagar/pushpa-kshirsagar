@@ -1989,7 +1989,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
               typeOfMiddlePaneList: 'assesseesReportReviewList',
               scanCount: 2,
               showMiddlePaneState: true
-            }
+              }
           });
           dispatch({ type: LOADER_STOP });
           dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -2000,6 +2000,21 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       // dispatch({ type: GET_ASSESSEE_REPORT_SAGA, reqBody: {
 
       // } });
+
+      // dispatch({
+      //   type: GET_ASSESSEE_REPORT_SAGA,
+      //   payload: {
+      //     request: {
+      //       assesseeId: selectedAssociateInfo?.assesseeId,
+      //       associateId:
+      //         selectedAssociateInfo?.associate?.informationEngagement.associateTag
+      //           .associateTagPrimary,
+      //       assignmentId: relatedReviewListDistinctData[0].id
+      //     }
+      //   }
+      // });
+
+      dispatch({ type: LOADER_START });
 
       dispatch({
         type: GET_ASSESSEE_REPORT_SAGA,
@@ -2017,6 +2032,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         }
       });
 
+      //dispatch({ type: LOADER_STOP });
       dispatch({ type: POPUP_CLOSE });
     } else if (dataVal === 'reviseReport') {
       alert('open textsheet');

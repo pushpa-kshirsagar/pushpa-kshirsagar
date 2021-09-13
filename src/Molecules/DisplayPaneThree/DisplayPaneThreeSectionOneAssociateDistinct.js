@@ -1585,6 +1585,1124 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     }
   ];
 
+  const setUpPlusListAll = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'assessees',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctCreateApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctCreateFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList:
+                    assesseeSetUpModule?.assesseeDistinctInformationBasic === 'NAME_UNIQUE'
+                      ? 'Unique Name Required'
+                      : assesseeSetUpModule?.assesseeDistinctInformationBasic ===
+                        'NAME_DESCRIPTION_UNIQUE'
+                      ? 'Unique Name + Alias Required'
+                      : 'Unique Name & Alias Not Rquired'
+                },
+                {
+                  labelTextTwoBadge: 'name',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctNameFormat || 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctShare ? 'Yes' : 'No'
+            },
+            {
+              labelTextTwoBadge: 'sign-on',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctSignOnApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctSignOnFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctSignOnPermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assesseeSetUpModule?.assesseeGroupInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'role',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeRoleCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assesseeSetUpModule?.assesseeRoleInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assesseeSetUpModule?.assesseeRoleShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeTypeCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assesseeSetUpModule?.assesseeTypeInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assesseeSetUpModule?.assesseeTypeShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: '+',
+          innerLabelBadgeList: 'No'
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'a-112',
+      labelTextOneOne: 'assessments',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assessmentSetUpModule?.assessmentDistinctCreateApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: assessmentSetUpModule?.assessmentDistinctCreateFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assessmentSetUpModule?.assessmentDistinctCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assessmentSetUpModule?.assessmentDistinctInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'associate',
+                  innerLabelBadgeList: assessmentSetUpModule?.assessmentDistinctSharedAssociate
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'node',
+                  innerLabelBadgeList: assessmentSetUpModule?.assessmentDistinctShare ? 'Yes' : 'No'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assessmentSetUpModule?.assessmentGroupCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assessmentSetUpModule?.assessmentGroupInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assessmentSetUpModule?.assessmentGroupShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assessmentSetUpModule?.assessmentTypeCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assessmentSetUpModule?.assessmentTypeInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assessmentSetUpModule?.assessmentTypeShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: '+',
+          innerLabelBadgeList: 'No'
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'assignment-232',
+      labelTextOneOne: 'assignments',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreateApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreateFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentDistinctInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentGroupInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentTypeCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentTypeInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: assignmentSetUpModule?.assignmentTypeShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: '+',
+          innerLabelBadgeList: 'No'
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'associate-213',
+      labelTextOneOne: 'associates',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctCreateApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctCreateFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateDistinctInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: setUpAssociateModule?.associateDistinctShare ? 'Yes' : 'No'
+            },
+            {
+              labelTextTwoBadge: 'sign-on',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctSignOnApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctSignOnFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctSignOnPermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateGroupCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateGroupInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: setUpAssociateModule?.associateGroupShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'node',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateNodeCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateNodeInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'permission',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'ascendant',
+                  innerLabelBadgeList: [
+                    {
+                      labelTextTwoBadge: 'all',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeAscendantAll
+                      )
+                    },
+                    {
+                      labelTextTwoBadge: 'primary',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeAscendantPrimary
+                      )
+                    },
+                    {
+                      labelTextTwoBadge: 'secondary',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeAscendantSecondary
+                      )
+                    }
+                  ]
+                },
+                {
+                  labelTextTwoBadge: 'descendant',
+                  innerLabelBadgeList: [
+                    {
+                      labelTextTwoBadge: 'all',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeDescendantAll
+                      )
+                    },
+                    {
+                      labelTextTwoBadge: 'primary',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeDescendantPrimary
+                      )
+                    },
+                    {
+                      labelTextTwoBadge: 'secondary',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodeDescendantSecondary
+                      )
+                    }
+                  ]
+                },
+                {
+                  labelTextTwoBadge: 'peer',
+                  innerLabelBadgeList: [
+                    {
+                      labelTextTwoBadge: 'all',
+                      innerLabelBadgeList: getPermissionStr(
+                        associateNodeSetUpModule?.informationSetup?.associateNodePeerAll
+                      )
+                    }
+                  ]
+                },
+                {
+                  labelTextTwoBadge: 'root',
+                  innerLabelBadgeList: getPermissionStr(
+                    associateNodeSetUpModule?.informationSetup?.associateNodeRoot
+                  )
+                },
+                {
+                  labelTextTwoBadge: 'self',
+                  innerLabelBadgeList: getPermissionStr(
+                    associateNodeSetUpModule?.informationSetup?.associateNodeSelf
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'role',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateRoleCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateRoleInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: setUpAssociateModule?.associateRoleShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateTypeCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    setUpAssociateModule?.associateTypeInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: setUpAssociateModule?.associateTypeShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'brand',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformBrandApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'choice',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformBrandChoice || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformBrandFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformBrandPermission
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'picture',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformBrandPicture || 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'country',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'flag',
+                  innerLabelBadgeList:
+                    setUpAssociateModule?.associateCountry?.associateCountryFlag || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'name',
+                  innerLabelBadgeList:
+                    setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'tag',
+                  innerLabelBadgeList:
+                    setUpAssociateModule?.associateCountry?.associateCountryTag || 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'currency',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'name',
+                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencyName || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'symbol',
+                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencySymbol || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'tag',
+                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencyTag || 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'date',
+              innerLabelBadgeList: setUpAssociateModule?.associateDateFormat || 'No'
+            },
+            {
+              labelTextTwoBadge: 'domain',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'primary',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDomainPrimary || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'secondary',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDomainSecondary || 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: setUpAssociateModule?.associateInformation || 'No'
+            },
+            {
+              labelTextTwoBadge: 'language',
+              // innerLabelBadgeList: setUpAssociateModule?.associateLanguage || 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'name',
+                  innerLabelBadgeList: setUpAssociateModule?.associateLanguageName || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'tag',
+                  innerLabelBadgeList: setUpAssociateModule?.associateLanguageTag || 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'service',
+              innerLabelBadgeList: setUpAssociateModule?.associateService || 'No'
+            },
+            {
+              labelTextTwoBadge: 'rating',
+              innerLabelBadgeList: setUpAssociateModule?.associateRating || 'No'
+            },
+            {
+              labelTextTwoBadge: 'theme',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformThemeApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'choice',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformThemeChoice || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformThemeFee ? 'Yes' : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformThemePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'time',
+              innerLabelBadgeList: setUpAssociateModule?.associateTimeFormat || 'No'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'iguru-11',
+      labelTextOneOne: 'iGuru analytics',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctCreateApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctCreateFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    analyticSetUpModule?.iguruAnalyticTypeInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticGroupCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    analyticSetUpModule?.iguruAnalyticGroupInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticGroupShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticTypeCreatePermission
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    analyticSetUpModule?.iGuruAnalyticTypeInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticTypeShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: '+',
+          innerLabelBadgeList: 'No'
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'iguru-market-11',
+      labelTextOneOne: 'iGuru marketplace',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: 'No'
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: 'No'
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: 'No'
+        },
+        {
+          labelTextTwoBadge: '+',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'rating',
+              innerLabelBadgeList: 'No'
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'iguru-mine-11',
+      labelTextOneOne: 'iGuru mine',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: 'No'
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: 'No'
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: 'No'
+        },
+        {
+          labelTextTwoBadge: '+',
+          innerLabelBadgeList: 'No'
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    },
+    {
+      id: 'iguru-item-11',
+      labelTextOneOne: 'items',
+      labelTextOneOneBadges: [
+        {
+          labelTextTwoBadge: 'distinct',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreateApproval ? 'Yes' : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreateFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreatePermission ? 'Yes' : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(itemSetUpModule?.itemInformationBasic)
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: itemSetUpModule?.itemDistinctShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'group',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: itemSetUpModule?.itemGroupCreatePermission ? 'Yes' : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    itemSetUpModule?.itemGroupInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: itemSetUpModule?.itemGroupShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: 'type',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'create',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: itemSetUpModule?.itemTypeCreatePermission ? 'Yes' : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'information',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'basic',
+                  innerLabelBadgeList: informationBasicStr(
+                    itemSetUpModule?.itemTypeInformationBasic
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'share',
+              innerLabelBadgeList: itemSetUpModule?.itemTypeShare ? 'Yes' : 'No'
+            }
+          ]
+        },
+        {
+          labelTextTwoBadge: '+',
+          innerLabelBadgeList: 'No'
+        }
+      ],
+      innerInfo: 'No',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
+    }
+  ];
   const reviseAlliance = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
@@ -1694,6 +2812,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     }
   };
   const reviseSetup = (e, selectedBadgeArray) => {
+    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('labelName', labelName);
@@ -2673,6 +3792,16 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               isDisplayCardExpanded={listExpand === 'setup'}
               setListExpand={setListExpand}
               list={setUpListAll}
+              mode={reviewMode}
+              onClickRevise={reviseSetup}
+            />
+          </div>
+          <div className="containerPadding">
+            <AllocationAccordian
+              headerOne="setup+"
+              isDisplayCardExpanded={listExpand === 'setup+'}
+              setListExpand={setListExpand}
+              list={setUpPlusListAll}
               mode={reviewMode}
               onClickRevise={reviseSetup}
             />

@@ -8,6 +8,7 @@ import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordian
 import { IconButton, InputLabel, Paper } from '@material-ui/core';
 import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 import { SET_POPUP_VALUE } from '../../actionType';
+import {convertToLocalTime} from '../../Actions/GenericActions'
 
 const DisplayPaneThreeSectionOneAssesseeReport = () => {
   // const [listExpand, setListExpand] = useState('');
@@ -128,12 +129,15 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 <div className={['midPaneInformation'].join(' ')}>
                                   {assesseeAssignment.assesseeAssignmentName}
                                 </div>
+                                {
+                                assesseeAssignment.assesseeAssignmentDescription === "" ? null:
                                 <div
                                   style={{ textAlign: 'left' }}
                                   className={['midPaneLabel', 'textOverflow'].join(' ')}
                                 >
-                                  {'assessmentDesc'}
+                                  {assesseeAssignment.assesseeAssignmentDescription}
                                 </div>
+                                }                                
                               </div>
                               <div
                                 style={{ flex: '1', display: 'flex', alignItems: 'center' }}
@@ -224,7 +228,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 className={['unitFlex', 'midPaneInformation'].join(' ')}
                                 style={{ alignItems: 'flex-start', fontSize: '1rem' }}
                               >
-                                {assesmentResult.assesseeAssignmentAssessmentTimeline.assesseeAssignmentAssessmentTimeStart}
+                                {convertToLocalTime(assesmentResult.assesseeAssignmentAssessmentTimeline.assesseeAssignmentAssessmentTimeStart)}
                               </div>
                               <div className={['unitFlex', 'reports-center'].join(' ')}>start</div>
                             </div>
@@ -233,7 +237,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 className={['unitFlex', 'midPaneInformation'].join(' ')}
                                 style={{ alignItems: 'flex-start', fontSize: '1rem' }}
                               >
-                                {assesmentResult.assesseeAssignmentAssessmentTimeline.assesseeAssignmentAssessmentTimeEnd}
+                                {convertToLocalTime(assesmentResult.assesseeAssignmentAssessmentTimeline.assesseeAssignmentAssessmentTimeEnd)}
                               </div>
                               <div className={['unitFlex', 'reports-center'].join(' ')}>end</div>
                             </div>
@@ -253,7 +257,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                           ))
                           :
                           <div>
-                            No record 
+                             
                           </div>
                         }
                         </div>
@@ -278,14 +282,17 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                             >
                               <div style={{ flex: '4' }}>
                                 <div className={['midPaneInformation'].join(' ')}>
-                                  {'assessmentName'}
+                                  {assesseeAssignment.assesseeAssignmentName}
                                 </div>
-                                <div
+                                {
+                                  assesseeAssignment.assesseeAssignmentDescription===""?null:
+                                  <div 
                                   style={{ textAlign: 'left' }}
                                   className={['midPaneLabel', 'textOverflow'].join(' ')}
                                 >
-                                  {'assessmentDesc'}
+                                  {assesseeAssignment.assesseeAssignmentDescription}
                                 </div>
+                                }                                
                               </div>
                               <div
                                 style={{
@@ -307,7 +314,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 }}
                                 className="flex-center"
                               >
-                                1<span style={{ fontSize: '1rem' }}>sheet</span>
+                                -<span style={{ fontSize: '1rem' }}>sheet</span>
                               </div>
                             </div>
                           </div>
@@ -319,7 +326,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 className={['unitFlex', 'midPaneInformation'].join(' ')}
                                 style={{ alignItems: 'flex-start' }}
                               >
-                                100
+                                {assesseeAssignment.assesseeAssignmentMaximum}
                               </div>
                               <div className={['unitFlex', 'reports-center'].join(' ')}>
                                 maximum
@@ -330,7 +337,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 className={['unitFlex', 'midPaneInformation'].join(' ')}
                                 style={{ alignItems: 'flex-start' }}
                               >
-                                50
+                                {assesseeAssignment.assesseeAssignmentMinimum}
                               </div>
                               <div className={['unitFlex', 'reports-center'].join(' ')}>
                                 minimum
@@ -349,7 +356,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 className={['unitFlex', 'midPaneInformation'].join(' ')}
                                 style={{ alignItems: 'flex-start' }}
                               >
-                                50
+                                {assesseeAssignment.assesseeAssignmentPercentage}
                               </div>
                               <div className={['unitFlex', 'reports-center'].join(' ')}>
                                 percentage
@@ -360,7 +367,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 className={['unitFlex', 'midPaneInformation'].join(' ')}
                                 style={{ alignItems: 'flex-start' }}
                               >
-                                50
+                                {assesseeAssignment.assesseeAssignmentPercentile}
                               </div>
                               <div className={['unitFlex', 'reports-center'].join(' ')}>
                                 percentile
@@ -371,7 +378,7 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                 className={['unitFlex', 'midPaneInformation'].join(' ')}
                                 style={{ alignItems: 'flex-start' }}
                               >
-                                60
+                                {assesseeAssignment.assesseeAssignmentScore}
                               </div>
                               <div className={['unitFlex', 'reports-center'].join(' ')}>tally</div>
                             </div>

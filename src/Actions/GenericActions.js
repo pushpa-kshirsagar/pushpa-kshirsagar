@@ -6772,3 +6772,18 @@ export const getAssesseeSelfAssignmentList = (
     }
   });
 };
+
+export function convertToLocalTime(milisec)
+{
+	var dd=new Date(milisec);
+	var h =  dd.getHours(), m = dd.getMinutes();
+	var _time = (h > 12) ? (h-12 + ':' + ((m<10) ? '0'+ m : m) +' PM') : (h + ':' + ((m<10) ? '0'+ m : m) +' AM');
+	var finalformat=('0' + dd.getDate()).slice(-2) + '/' + ('0' + (dd.getMonth()+1)).slice(-2) + '/' + dd.getFullYear()+', '+_time;
+
+	// var dateconv = new Date(milisec);
+    // let newDateFormat = dateconv.toLocaleDateString();
+	// let finaltime =removeSecond(dateconv);
+	// let finalformat = newDateFormat+', '+finaltime;
+	return finalformat;
+	
+}
