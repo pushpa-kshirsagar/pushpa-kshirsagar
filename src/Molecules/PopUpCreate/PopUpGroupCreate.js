@@ -10,7 +10,9 @@ import {
   CLEAR_GROUP_REDUCER_STATE,
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  SET_GROUP_ALLOCATION_STATE,
+  SET_GROUP_SETUP_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
@@ -27,11 +29,68 @@ const PopUpGroupCreate = (props) => {
   } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const [nodeSelectedError, setNodeSelectedError] = useState('');
-  const { selectedAssociateInfo,coreNodeReviewListData } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const [roleSelectedError, setRoleSelectedError] = useState('');
+  const { selectedAssociateInfo, coreNodeReviewListData, coreRoleReviewListData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const dispatch = useDispatch();
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+
+  const updateAllocationObj = (e, stateName, actualStateName) => {
+    let tagId = e.currentTarget.getAttribute('tag');
+    console.log('tagId', tagId);
+    setNodeSelectedError('');
+    let groupArr = reducerObeject.informationAllocation[stateName][actualStateName];
+    if (groupArr.includes(tagId)) {
+      document.getElementById(tagId).style.backgroundColor = 'white';
+      groupArr = groupArr.filter(function (number) {
+        return number !== tagId;
+      });
+    } else {
+      groupArr.push(tagId);
+      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    }
+    dispatch({
+      type: SET_GROUP_ALLOCATION_STATE,
+      payload: {
+        objectName: objectName,
+        stateName: stateName,
+        actualStateName: actualStateName,
+        value: groupArr
+      }
+    });
+  };
+
+  const updateSetupObj = (e, stateName, actualStateName) => {
+    // -------------
+    console.log(e.currentTarget.getAttribute('tag'));
+    setRoleSelectedError('');
+    let tagId = e.currentTarget.getAttribute('tag');
+    let tagIdArr = reducerObeject.informationSetup[stateName][actualStateName];
+    if (tagIdArr.includes(tagId)) {
+      document.getElementById(tagId).style.backgroundColor = 'white';
+      tagIdArr = tagIdArr.filter(function (number) {
+        return number !== tagId;
+      });
+    } else {
+      var arr = [];
+      tagIdArr = [...arr];
+      tagIdArr.push(tagId);
+      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    }
+    // ------------
+    dispatch({
+      type: SET_GROUP_SETUP_STATE,
+      payload: {
+        objectName: objectName,
+        stateName: stateName,
+        actualStateName: actualStateName,
+        value: tagIdArr
+      }
+    });
+  };
   const onClickCancelYes = () => {
     dispatch({
       type: SET_DISPLAY_THREE_SINGLE_STATE,
@@ -106,6 +165,7 @@ const PopUpGroupCreate = (props) => {
       'mm/dd/yyyy --:-- --';
   }
   console.log('reducerObeject', reducerObeject);
+  console.log('coreRoleReviewListData', coreRoleReviewListData);
   return (
     <div>
       <PopUpTextField
@@ -241,7 +301,13 @@ const PopUpGroupCreate = (props) => {
         textTwo={'associateNodeDescription'}
         setErrorMsg={setNodeSelectedError}
         errorMsg={nodeSelectedError}
-        onClickEvent={null}
+        // onClickEvent={updateAllocationObj}
+        selectedList={
+          reducerObeject.informationAllocation[objectName + 'Node'][objectName + 'NodePrimary']
+        }
+        onClickEvent={(e) => {
+          updateAllocationObj(e, objectName + 'Node', objectName + 'NodePrimary');
+        }}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -270,7 +336,7 @@ const PopUpGroupCreate = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
-        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        nextPopUpValue={'CLASSIFICATIONLISTPOPUP'}
         inputHeader={'type'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
@@ -302,6 +368,31 @@ const PopUpGroupCreate = (props) => {
         textOne={'name'}
         textTwo={'description'}
         onClickEvent={null}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+       <PopUpReviewList
+        isActive={isPopUpValue === 'CLASSIFICATIONLISTPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        inputHeader={'classification'}
+        inputHeaderBadge={'primary'}
+        infoMsg={'select a group'}
+        ListData={coreRoleReviewListData}
+        textOne={'assesseeRoleGroupName'}
+        textTwo={'assesseeRoleGroupDescription'}
+        isRequired={true}
+        minimumSelected={1}
+        setErrorMsg={setRoleSelectedError}
+        errorMsg={roleSelectedError}
+        onClickEvent={(e) => {
+          updateSetupObj(e, objectName + 'Classification', objectName + 'ClassificationPrimary');
+        }}
+        selectedList={
+          reducerObeject.informationSetup[objectName + 'Classification'][objectName + 'ClassificationPrimary']
+        }
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm

@@ -35,9 +35,7 @@ import {
   CLEAR_GROUP_REDUCER_STATE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   CLEAR_TYPE_REDUCER_STATE,
-  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
-  CLEAR_CULTURE_REDUCER_STATE,
-  CLEAR_JOB_REDUCER_STATE
+  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -63,7 +61,7 @@ import {
   makeAssociateRoleObj,
   makeAssignmentGroupObj,
   makeAssessmentTypeObj,
-  makeAssignmentTypeObj,
+  makeAssesseeGroupClassificationObj,
   makeInternalNodeObj
 } from '../Actions/GenericActions';
 import {
@@ -79,6 +77,7 @@ import {
   getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeReqObj,
   getAssesseeTypeApiCall,
+  getClassificationReviewListApi,
   getRoleGroupReviewListApi,
   getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
@@ -1144,6 +1143,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           isMiddlePaneList: false
         }
       });
+      getClassificationReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }

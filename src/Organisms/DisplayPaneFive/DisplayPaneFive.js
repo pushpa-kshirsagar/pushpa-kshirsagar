@@ -7,6 +7,7 @@ import {
   GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   ITEM_INFO_REVISE_SAGA,
   LOADER_START,
+  NAVIGATOR_MODE,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   SET_ITEM_DYNAMIC_SINGLE_STATE,
@@ -26,6 +27,8 @@ import Popup from '../../Molecules/PopUp/PopUp';
 import CircleIcon from '../../Molecules/IconButton/IconButton';
 import JsonRenderComponent from '../../Actions/JsonRenderComponent';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
+import NavigatorIcon from '@material-ui/icons/OpenWith';
+
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import ArrowRight from '@material-ui/icons/ChevronRight';
@@ -42,7 +45,12 @@ import Paper from '@material-ui/core/Paper';
 import DisplayPaneFiveItemTemplate from './DisplayPaneFiveItemTemplate';
 import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 import { setResponseToReducerObj } from '../../Actions/ItemModuleAction';
-import { onClickFirst, onClickNext, onClickPrevious } from '../../Actions/GenericActions';
+import {
+  onClickFirst,
+  onClickLast,
+  onClickNext,
+  onClickPrevious
+} from '../../Actions/GenericActions';
 
 const useStyles = makeStyles({
   root: {
@@ -113,20 +121,82 @@ export const DisplayPaneFive = () => {
     reviewMode,
     createMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { typeOfMiddlePaneList, selectedAssociateInfo, reviewListDistinctData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
+  const { navigatorIcon, FilterMode, FilterModeEnable } = useSelector(
+    (state) => state.FilterReducer
   );
+  const {
+    typeOfMiddlePaneList,
+    selectedAssociateInfo,
+    reviewListDistinctData,
+    reviewListReqObj,
+    numberPage,
+    middlePaneHeader,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    scanCount
+  } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const { FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpOpen } = useSelector((state) => state.PopUpReducer);
   const onClickFooter = (e) => {
+    let siftValue = e.currentTarget.getAttribute('data-value');
+    console.log(siftValue);
+    dispatch({ type: NAVIGATOR_MODE });
+    if (siftValue === 'next') {
+      onClickNext(
+        reviewListDistinctData,
+        responseObject.id,
+        typeOfMiddlePaneList,
+        selectedAssociateInfo,
+        dispatch,
+        headerOneBadgeTwo,
+        reviewListReqObj,
+        numberPage,
+        middlePaneHeader,
+        middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo
+      );
+    }
+    if (siftValue === 'previous') {
+      onClickPrevious(
+        reviewListDistinctData,
+        responseObject.id,
+        typeOfMiddlePaneList,
+        selectedAssociateInfo,
+        dispatch,
+        headerOneBadgeTwo
+      );
+    }
+    if (siftValue === 'first') {
+      onClickFirst(
+        reviewListDistinctData,
+        responseObject.id,
+        typeOfMiddlePaneList,
+        selectedAssociateInfo,
+        dispatch,
+        headerOneBadgeTwo
+      );
+    }
+    if (siftValue === 'last') {
+      onClickLast(
+        reviewListDistinctData,
+        typeOfMiddlePaneList,
+        selectedAssociateInfo,
+        dispatch,
+        scanCount,
+        reviewListReqObj,
+        numberPage,
+        middlePaneHeader,
+        middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo
+      );
+    }
     // dispatch({ type: NAVIGATOR_MODE });
   };
   const [subItemList, setSubItemList] = useState(['item-1']);
 
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
 
-  const primaryIcon = [];
+  const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
     { label: 'first', onClick: onClickFooter, Icon: FirstPage },
     { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft },
@@ -1190,87 +1260,87 @@ export const DisplayPaneFive = () => {
           secondaryIcon={reviseSecondaryIcons}
         />
       ) : (
-        // <FooterIconTwo
-        //   className={'widthDisplayPaneFive'}
-        //   FilterModeEnable={false}
-        //   FilterMode={FilterMode}
-        //   onClick={onClickFooter}
-        //   primaryIcon={primaryIcon}
-        //   secondaryIcon={secondaryIcon}
-        // />
-        <div className={[`middleFooterD`,'widthDisplayPaneFive'].join(' ')}>
-          <div className={'footerInner'}>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              <BottomNavigation className={'MuiBottomNavigationCustom'}>
-                <div className={'mbPager'}></div>
-                <div className={'mbPager'}>
-                  <CircleIcon
-                    label={'first'}
-                    Icon={FirstPage}
-                    colour={'displayPaneCentre'}
-                    onClick={() => {
-                      onClickFirst(
-                        reviewListDistinctData,
-                        responseObject.id,
-                        typeOfMiddlePaneList,
-                        selectedAssociateInfo,
-                        dispatch,
-                        headerOneBadgeTwo
-                      );
-                    }}
-                    dataValue={'first'}
-                  />
-                </div>
-                <div className={'mbPager'}>
-                  <CircleIcon
-                    label={'previous'}
-                    Icon={ArrowLeft}
-                    colour={'displayPaneCentre'}
-                    dataValue={'previous'}
-                    onClick={() => {
-                      onClickPrevious(
-                        reviewListDistinctData,
-                        responseObject.id,
-                        typeOfMiddlePaneList,
-                        selectedAssociateInfo,
-                        dispatch,
-                        headerOneBadgeTwo
-                      );
-                    }}
-                  />
-                </div>
-                <div className={'mbPager'}>
-                  <CircleIcon
-                    label={'next'}
-                    Icon={ArrowRight}
-                    colour={'displayPaneCentre'}
-                    onClick={() => {
-                      onClickNext(
-                        reviewListDistinctData,
-                        responseObject.id,
-                        typeOfMiddlePaneList,
-                        selectedAssociateInfo,
-                        dispatch,
-                        headerOneBadgeTwo
-                      );
-                    }}
-                    dataValue={'next'}
-                  />
-                </div>
-                <div className={'mbPager'}>
-                  <CircleIcon
-                    label={'last'}
-                    Icon={LastPage}
-                    colour={'displayPaneCentre'}
-                    // onClick={}
-                    dataValue={'last'}
-                  />
-                </div>
-                <div className={'mbPager'}></div>
-              </BottomNavigation>
-            </Grid>
-          </div>
-        </div>
+        <FooterIconTwo
+          className={'widthDisplayPaneFive'}
+          FilterModeEnable={navigatorIcon}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryIcon}
+        />
+        // <div className={[`middleFooterD`,'widthDisplayPaneFive'].join(' ')}>
+        //   <div className={'footerInner'}>
+        //     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        //       <BottomNavigation className={'MuiBottomNavigationCustom'}>
+        //         <div className={'mbPager'}></div>
+        //         <div className={'mbPager'}>
+        //           <CircleIcon
+        //             label={'first'}
+        //             Icon={FirstPage}
+        //             colour={'displayPaneCentre'}
+        //             onClick={() => {
+        //               onClickFirst(
+        //                 reviewListDistinctData,
+        //                 responseObject.id,
+        //                 typeOfMiddlePaneList,
+        //                 selectedAssociateInfo,
+        //                 dispatch,
+        //                 headerOneBadgeTwo
+        //               );
+        //             }}
+        //             dataValue={'first'}
+        //           />
+        //         </div>
+        //         <div className={'mbPager'}>
+        //           <CircleIcon
+        //             label={'previous'}
+        //             Icon={ArrowLeft}
+        //             colour={'displayPaneCentre'}
+        //             dataValue={'previous'}
+        //             onClick={() => {
+        //               onClickPrevious(
+        //                 reviewListDistinctData,
+        //                 responseObject.id,
+        //                 typeOfMiddlePaneList,
+        //                 selectedAssociateInfo,
+        //                 dispatch,
+        //                 headerOneBadgeTwo
+        //               );
+        //             }}
+        //           />
+        //         </div>
+        //         <div className={'mbPager'}>
+        //           <CircleIcon
+        //             label={'next'}
+        //             Icon={ArrowRight}
+        //             colour={'displayPaneCentre'}
+        //             onClick={() => {
+        //               onClickNext(
+        //                 reviewListDistinctData,
+        //                 responseObject.id,
+        //                 typeOfMiddlePaneList,
+        //                 selectedAssociateInfo,
+        //                 dispatch,
+        //                 headerOneBadgeTwo
+        //               );
+        //             }}
+        //             dataValue={'next'}
+        //           />
+        //         </div>
+        //         <div className={'mbPager'}>
+        //           <CircleIcon
+        //             label={'last'}
+        //             Icon={LastPage}
+        //             colour={'displayPaneCentre'}
+        //             // onClick={}
+        //             dataValue={'last'}
+        //           />
+        //         </div>
+        //         <div className={'mbPager'}></div>
+        //       </BottomNavigation>
+        //     </Grid>
+        //   </div>
+        // </div>
       )}
     </>
   );

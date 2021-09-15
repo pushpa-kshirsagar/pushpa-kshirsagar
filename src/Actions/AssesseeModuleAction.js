@@ -30,13 +30,15 @@ import {
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
   ASSESSEE_TYPE_INFO_REVISE_SAGA,
   GET_ASSESSEE_INFO_SAGA,
-  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA
+  GET_ASSESSEE_ROLE_REVIEW_INFO_SAGA,
+  GROUP_CLASSIFICATION_LIST_SAGA
 } from '../actionType';
 import {
   getAssesseeTypeAssesseeReqObj,
   getAssesseeTypeAssesseeScanReqObj,
   makeAdministratorRoleCreateObj,
   makeAdministratorsReviewListRequestObject,
+  makeAssesseeGroupClassificationObj,
   makeAssesseeGroupObj,
   makeAssesseeReviewListRequestObject,
   makeAssesseeRoleCreateObj,
@@ -1098,6 +1100,22 @@ export const getRoleGroupReviewListApi = (selectedAssociateInfo, dispatch, popup
   dispatch({
     type: GET_ASSESSEE_ROLE_GROUP_REVIEW_LIST_SAGA,
     payload: { request: requestObj, typeGroup: popupHeaderOne }
+  });
+};
+export const getClassificationReviewListApi = (selectedAssociateInfo, dispatch, popupHeaderOne) => {
+  let classRequestObj = makeAssesseeGroupClassificationObj(selectedAssociateInfo);
+  dispatch({ type: LOADER_START });
+  dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: classRequestObj });
+  dispatch({
+    type: GROUP_CLASSIFICATION_LIST_SAGA,
+    payload: {
+      request: classRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      classificationType: popupHeaderOne,
+      isMiddlePaneList: false
+    }
   });
 };
 export const getTypeGroupReviewListApi = (selectedAssociateInfo, dispatch, popupHeaderOne) => {

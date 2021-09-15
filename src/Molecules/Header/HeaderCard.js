@@ -108,7 +108,7 @@ const HeaderCard = (props) => {
         dataValue: 'publish',
         dataKey: 'publish',
         optionClass: 'optionPrimary',
-        disabled: false
+        disabled: true
       };
       optArr.splice(5, 0, newObj1);
 
@@ -126,6 +126,7 @@ const HeaderCard = (props) => {
           element.data === 'flag' ||
           element.data === 'share' ||
           element.data === 'suspend' ||
+          element.data === 'publish' ||
           element.data === 'terminate' ||
           element.data === 'delete'
         ) {

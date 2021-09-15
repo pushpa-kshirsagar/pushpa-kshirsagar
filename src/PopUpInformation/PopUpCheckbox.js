@@ -130,6 +130,7 @@ const PopUpCheckbox = (props) => {
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
   };
+  console.log('props',props);
   // const valueArr = ['email address (primary)', 'email address (secondary)'];
   return (
     <div>

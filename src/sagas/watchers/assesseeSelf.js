@@ -288,6 +288,7 @@ function* workerAssesseeAssessmentFinishSaga(data) {
         payload: { stateName: 'assesseeAssignmentAssessmentData', value: null }
       });
       localStorage.setItem('assessmentItem', '[]');
+      localStorage.setItem('navigationItem', '[]');
     } else {
       yield put({
         type: SET_POPUP_VALUE,

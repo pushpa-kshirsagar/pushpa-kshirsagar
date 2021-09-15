@@ -154,6 +154,7 @@ const PopUpTextEditor = (props) => {
               list: { class: List },
               inlinecode: { class: InlineCode },
               marker: { class: Marker },
+              CheckList: { class: CheckList },
               embed: { class: Embed, config: { services: { youtube: true, coub: true } } }
             }}
           />

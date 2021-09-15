@@ -680,6 +680,7 @@ export const DisplayPaneThree = () => {
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     console.log(siftValue);
+    dispatch({ type: NAVIGATOR_MODE });
     if (siftValue === 'next') {
       onClickNext(
         reviewListDistinctData,
@@ -729,7 +730,6 @@ export const DisplayPaneThree = () => {
         middlePaneHeaderBadgeTwo
       );
     }
-    dispatch({ type: NAVIGATOR_MODE });
   };
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
