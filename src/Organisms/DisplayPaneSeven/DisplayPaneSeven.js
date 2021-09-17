@@ -350,7 +350,7 @@ export const DisplayPaneSeven = () => {
               return (
                 <Fragment>
                   {op.itemFrameworkOneResponseChoiceMedia !== '' && (
-                    <div key={`op-${key}`}>
+                    <div key={`op-${key}`} className={'innerpadding'}>
                       <div className="option-container ex_container" key={`option-${key}`}>
                         <div style={{ paddingRight: '5px', display: 'flex', alignItems: 'center' }}>
                           <input
@@ -498,7 +498,10 @@ export const DisplayPaneSeven = () => {
         )} */}
       </div>
 
-      <PopUpAssessmentNavigator isActive={isPopUpValue === 'NavigatorPOPUP'} />
+      <PopUpAssessmentNavigator
+        isActive={isPopUpValue === 'NavigatorPOPUP'}
+        itemData={assesseeAssessmentStartData.assessmentItem}
+      />
     </>
   );
 };

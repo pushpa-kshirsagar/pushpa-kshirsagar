@@ -13,7 +13,8 @@ const PopUpAssessmentNavigator = (props) => {
     isActive,
     headerPanelColour = 'displayPaneRight',
     headerOne = 'assessment',
-    headerOneBadgeOne = 'navigator'
+    headerOneBadgeOne = 'navigator',
+    itemData
   } = props;
 
   const handleClick = () => {
@@ -71,6 +72,7 @@ const PopUpAssessmentNavigator = (props) => {
     49,
     50
   ];
+  let itemArray = itemData;
   return (
     <div>
       <Popup isActive={isActive}>
@@ -97,7 +99,7 @@ const PopUpAssessmentNavigator = (props) => {
                 gridTemplateColumns: 'repeat(auto-fill, minmax(50px, 1fr))'
               }}
             >
-              {questionsArray.map((question) => {
+              {itemArray.map((question,index) => {
                 return (
                   <div key={question} style={{ padding: '5px', boxSizing: 'border-box' }}>
                     <div
@@ -124,7 +126,7 @@ const PopUpAssessmentNavigator = (props) => {
                         variant="fab"
                         mini
                       >
-                        {question}
+                        {index+1}
                       </Button>
                     </div>
                   </div>

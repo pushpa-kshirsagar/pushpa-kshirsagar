@@ -83,16 +83,16 @@ export const createItemPopupApiCall = (
   dispatch({ type: LOADER_START });
   let requestObj = makeItemGroupObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-  dispatch({
-    type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
-    payload: {
-      request: requestObj,
-      BadgeOne: '',
-      BadgeTwo: '',
-      BadgeThree: '',
-      isMiddlePaneList: false
-    }
-  });
+  // dispatch({
+  //   type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+  //   payload: {
+  //     request: requestObj,
+  //     BadgeOne: '',
+  //     BadgeTwo: '',
+  //     BadgeThree: '',
+  //     isMiddlePaneList: false
+  //   }
+  // });
   let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
   dispatch({

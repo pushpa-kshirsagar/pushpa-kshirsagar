@@ -185,10 +185,10 @@ class JobWeightageTableTemplate extends Component {
                             });
                           }}
                         >
-                          {value?.jobProfilerFrameworkSecondary || 'name'}
+                          {value?.iguruAnalyticFrameworkOneClusterSecondary || 'name'}
                         </span>
                         <span style={{ cursor: 'pointer', fontSize: '1rem' }}>
-                          {value?.jobProfilerFrameworkSecondaryDescriptionPrimary || 'description'}
+                          {/* {value?.jobProfilerFrameworkSecondaryDescriptionPrimary || 'description'} */}
                         </span>
                       </div>
                     </Tooltip>

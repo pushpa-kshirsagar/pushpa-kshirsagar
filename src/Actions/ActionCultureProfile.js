@@ -24,7 +24,8 @@ import {
   CULTURE_TYPE_REVISE_INFO_SAGA,
   CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
-  SET_POPUP_SINGLE_STATE
+  SET_POPUP_SINGLE_STATE,
+  GET_CULTURE_DIAMENTION_SAGA
 } from '../actionType';
 import { CULTURE_PROFILE_REVISE_INFO_URL } from '../endpoints';
 import {
@@ -618,4 +619,32 @@ export const getCultureProfileAssessmentDistinctApiCall = (
       isMiddlePaneList: true
     }
   });
+};
+export const getCultureProfileDiamentionList = (selectedAssociateInfo, dispatch) => {
+  dispatch({ type: LOADER_START });
+  let diamentionReqBody = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+    filter: 'true',
+    countPage: 0,
+    search: [
+      {
+        condition: 'and',
+        searchBy: [
+          {
+            dataType: 'string',
+            conditionColumn: 'iguruAnalyticFrameworkOneName',
+            conditionValue: {
+              condition: 'eq',
+              value: {
+                from: 'Culture Profiler'
+              }
+            }
+          }
+        ]
+      }
+    ]
+  };
+  dispatch({ type: GET_CULTURE_DIAMENTION_SAGA, payload: { request: diamentionReqBody } });
 };

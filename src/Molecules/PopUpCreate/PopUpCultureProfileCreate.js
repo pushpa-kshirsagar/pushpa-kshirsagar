@@ -22,12 +22,15 @@ import {
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpMessageGeneric from '../../PopUpGeneric/PopUpMessageGeneric';
+import { getCultureProfileDiamentionList } from '../../Actions/ActionCultureProfile';
 
 const PopUpCultureProfileCreate = (props) => {
   const { headerOne, reducerObeject, allocationObj } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { cultureProfileInformation } = useSelector((state) => state.CultureProfileCreateReducer);
-  const { reviewMode, headerOneBadgeTwo, createMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, headerOneBadgeTwo, createMode } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const {
     selectedAssociateInfo,
     coreNodeReviewListData,
@@ -137,20 +140,7 @@ const PopUpCultureProfileCreate = (props) => {
     });
   };
   const onClickContinueYes = () => {
-    dispatch({ type: LOADER_START });
-    let diamentionReqBody = {
-      assesseeId: selectedAssociateInfo?.assesseeId,
-      associateId:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-      countPage: 50,
-      numberPage: 0,
-      filter: 'true',
-      orderBy: {
-        columnName: 'cultureProfilerFrameworkSecondaryGroup',
-        order: 'asc'
-      }
-    };
-    dispatch({ type: GET_CULTURE_DIAMENTION_SAGA, payload: { request: diamentionReqBody } });
+    getCultureProfileDiamentionList(selectedAssociateInfo, dispatch);
   };
   const onClickRevise = () => {
     dispatch({
@@ -198,8 +188,9 @@ const PopUpCultureProfileCreate = (props) => {
   const setDimentionStateReducer = () => {
     let arrr = cultureProfileDiamentionReviewList
       .map((obj) => {
+        console.log('obj', obj.group);
         let temp = '';
-        if (obj.group === cultureDiamentionGroup) {
+        if (obj.group == cultureDiamentionGroup) {
           temp = obj.cultureDimensions.filter(function (ob) {
             return ob.id === cultureDiamentionArr[0];
           });
@@ -215,7 +206,7 @@ const PopUpCultureProfileCreate = (props) => {
       cultureProfileInformation?.informationFramework?.cultureProfileCultureDimensionCoreObj || [];
     console.log('newtagIdArr', newtagIdArr);
     console.log('cultureDiamentionArr', cultureDiamentionArr);
-    if(arrr.length > 0){
+    if (arrr.length > 0) {
       let ob = { ...arrr[0], cultureProfileCultureDimensionTag: arrr[0].id };
       dispatch({
         type: SET_CULTURE_DIMENTION_STATE,
@@ -501,9 +492,9 @@ const PopUpCultureProfileCreate = (props) => {
             ListData={value.cultureDimensions}
             isTooltipActive={true}
             selectedList={cultureDiamentionArr}
-            textOne={'cultureProfilerFrameworkSecondary'}
-            textTwo={'cultureDimensionFrameworkSecondaryDescriptionPrimary'}
-            tooltipActiveText={'cultureProfilerFrameworkSecondaryDescriptionSecondary'}
+            textOne={'iguruAnalyticFrameworkOneClusterSecondary'}
+            textTwo={''}
+            tooltipActiveText={'analyticFrameworkOneClusterSecondaryExplanationSecondary'}
             dataValue={value.group}
             onClickEvent={updateDimention}
             setErrorMsg={setRequiredErrorMsg}
