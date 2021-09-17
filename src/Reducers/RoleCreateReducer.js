@@ -4,7 +4,9 @@ import {
   CLEAR_ROLE_REDUCER_STATE,
   SET_ROLE_DYNAMIC_STATE,
   SET_SETUP_PERMISSION,
-  SET_ROLE_REDUCER_STATE
+  SET_ROLE_REDUCER_STATE,
+  SET_ASSESSEE_ROLE_CLASSIFICAION_STATE,
+  SET_ASSOCIATE_ROLE_CLASSIFICAION_STATE
 } from '../actionType';
 
 const initialState = {
@@ -245,6 +247,10 @@ const initialState = {
           share: false,
           assesseePermissionInformation: 'key'
         }
+      },
+      assesseeRoleClassification: {
+        assesseeRoleClassificationPrimary: [],
+        assesseeRoleClassificationSecondary: []
       }
     }
   },
@@ -303,6 +309,10 @@ const initialState = {
           revise: false,
           share: false
         }
+      },
+      associateRoleClassification: {
+        associateRoleClassificationPrimary: [],
+        associateRoleClassificationSecondary: []
       }
     }
   }
@@ -356,6 +366,28 @@ const RoleCreateReducer = (istate = initialState, action) => {
           [action.payload.stateName]: {
             ...istate[action.payload.objectName][action.payload.stateName],
             [action.payload.actualStateName]: action.payload.value
+          }
+        }
+      };
+    case SET_ASSESSEE_ROLE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        assesseeRole: {
+          ...istate.assesseeRole,
+          informationSetup: {
+            ...istate.assesseeRole.informationSetup,
+            assesseeRoleClassification: action.payload
+          }
+        }
+      };
+    case SET_ASSOCIATE_ROLE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        associateRole: {
+          ...istate.associateRole,
+          informationSetup: {
+            ...istate.associateRole.informationSetup,
+            associateRoleClassification: action.payload
           }
         }
       };

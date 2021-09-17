@@ -12,7 +12,14 @@ import {
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_GROUP_ALLOCATION_STATE,
-  SET_GROUP_SETUP_STATE
+  SET_GROUP_SETUP_STATE,
+  SET_ASSESSEE_CLASSIFICAION_STATE,
+  SET_ASSESSMENT_CLASSIFICAION_STATE,
+  SET_ASSIGNMENT_CLASSIFICAION_STATE,
+  SET_ASSOCIATE_CLASSIFICAION_STATE,
+  SET_CULTUREPROFILE_CLASSIFICAION_STATE,
+  SET_JOBPROFILE_CLASSIFICAION_STATE,
+  SET_ITEM_CLASSIFICAION_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
@@ -370,7 +377,7 @@ const PopUpGroupCreate = (props) => {
         onClickEvent={null}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpReviewList
+      {/* <PopUpReviewList
         isActive={isPopUpValue === 'CLASSIFICATIONLISTPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -381,8 +388,8 @@ const PopUpGroupCreate = (props) => {
         inputHeaderBadge={'primary'}
         infoMsg={'select a group'}
         ListData={coreRoleReviewListData}
-        textOne={'assesseeRoleGroupName'}
-        textTwo={'assesseeRoleGroupDescription'}
+        textOne={'assesseeGroupClassificationName'}
+        textTwo={'assesseeGroupClassificationDescription'}
         isRequired={true}
         minimumSelected={1}
         setErrorMsg={setRoleSelectedError}
@@ -392,6 +399,38 @@ const PopUpGroupCreate = (props) => {
         }}
         selectedList={
           reducerObeject.informationSetup[objectName + 'Classification'][objectName + 'ClassificationPrimary']
+        }
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
+
+      <PopUpDropList
+        isActive={isPopUpValue === 'CLASSIFICATIONLISTPOPUP'}
+        tag={objectName + 'ClassificationPrimary'}
+        label={'classification'}
+        listSelect={[
+          { id: 'Bespoke', name: 'Bespoke' },
+          { id: 'Generic', name: 'Generic' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'classification'}
+        inputHeaderBadgeOne={'primary'}
+        inputHeaderBadgeTwo={''}
+        labelval={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        isRequired={true}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        basicInfo={reducerObeject.informationSetup[objectName + 'Classification']}
+        typeOfSetObject={
+          (reducerObeject === 'assesseeGroup' && SET_ASSESSEE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'assessmentGroup' && SET_ASSESSMENT_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'assignmentGroup' && SET_ASSIGNMENT_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'associateGroup' && SET_ASSOCIATE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'cultureProfileGroup' && SET_CULTUREPROFILE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'jobProfileGroup' && SET_JOBPROFILE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'itemGroup' && SET_ITEM_CLASSIFICAION_STATE)
         }
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

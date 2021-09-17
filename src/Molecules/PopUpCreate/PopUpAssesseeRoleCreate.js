@@ -13,7 +13,8 @@ import {
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_DISPLAY_THREE_SINGLE_STATE,
-  SET_SETUP_PERMISSION
+  SET_SETUP_PERMISSION,
+  SET_ASSESSEE_ROLE_CLASSIFICAION_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
@@ -66,7 +67,8 @@ const PopUpAssesseeRoleCreate = () => {
     console.log(e.currentTarget.getAttribute('tag'));
     setRoleSelectedError('');
     let tagId = e.currentTarget.getAttribute('tag');
-    let tagIdArr = assesseeRole.informationAllocation.assesseeRoleGroup;
+    let tagIdArr =
+      assesseeRole.informationSetup.assesseeRoleClassification.assesseeRoleClassificationPrimary;
     if (tagIdArr.includes(tagId)) {
       document.getElementById(tagId).style.backgroundColor = 'white';
       tagIdArr = tagIdArr.filter(function (number) {
@@ -79,11 +81,11 @@ const PopUpAssesseeRoleCreate = () => {
       document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
     }
     dispatch({
-      type: SET_ROLE_DYNAMIC_STATE,
+      type: SET_SETUP_PERMISSION,
       payload: {
         objectName: 'assesseeRole',
-        stateName: 'informationAllocation',
-        actualStateName: 'assesseeRoleGroup',
+        stateName: 'assesseeRoleClassification',
+        actualStateName: 'assesseeRoleClassificationPrimary',
         value: tagIdArr
       }
     });
@@ -126,25 +128,48 @@ const PopUpAssesseeRoleCreate = () => {
         nextPopUpValue={'ROLEGROUPPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpReviewList
+      {/* <PopUpReviewList
         isActive={isPopUpValue === 'ROLEGROUPPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'assessees'}
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
-        inputHeader={'group'}
+        inputHeader={'classification'}
         inputHeaderBadge={''}
         isRequired={true}
         minimumSelected={1}
-        selectedList={assesseeRole?.informationAllocation?.assesseeRoleGroup}
+        selectedList={assesseeRole?.informationSetup?.assesseeRoleClassificationPrimary}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
-        infoMsg={'select a group'}
+        infoMsg={'select a classification'}
         ListData={coreRoleReviewListData}
-        textOne={'assesseeRoleGroupName'}
-        textTwo={'assesseeRoleGroupDescription'}
+        textOne={'assesseeRoleClassificationName'}
+        textTwo={'assesseeRoleClassificationDescription'}
         onClickEvent={updateRoleGroup}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
+      <PopUpDropList
+        isActive={isPopUpValue === 'ROLEGROUPPOPUP'}
+        tag={'assesseeRoleClassificationPrimary'}
+        label={'classification'}
+        listSelect={[
+          { id: 'Bespoke', name: 'Bespoke' },
+          { id: 'Generic', name: 'Generic' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'classification'}
+        inputHeaderBadgeOne={'primary'}
+        inputHeaderBadgeTwo={''}
+        labelval={''}
+        headerPanelColour={'genericOne'}
+        headerOne={'assessees'}
+        headerOneBadgeOne={'role'}
+        headerOneBadgeTwo={'information'}
+        isRequired={true}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        basicInfo={assesseeRole?.informationSetup?.assesseeRoleClassificationPrimary}
+        typeOfSetObject={SET_ASSESSEE_ROLE_CLASSIFICAION_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm

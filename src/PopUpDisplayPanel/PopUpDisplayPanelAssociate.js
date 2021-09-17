@@ -1103,7 +1103,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'roles') {
       dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
-      getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
+      // getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
@@ -1143,7 +1143,7 @@ const PopUpDisplayPanelAssociate = (props) => {
           isMiddlePaneList: false
         }
       });
-      getClassificationReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
+      // getClassificationReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }

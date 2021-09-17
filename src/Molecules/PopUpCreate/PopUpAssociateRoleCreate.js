@@ -11,10 +11,12 @@ import {
   LOADER_START,
   SET_ROLE_DYNAMIC_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
-  SET_SETUP_PERMISSION
+  SET_SETUP_PERMISSION,
+  SET_ASSOCIATE_ROLE_CLASSIFICAION_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 
 const PopUpAssociateRoleCreate = () => {
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -122,7 +124,7 @@ const PopUpAssociateRoleCreate = () => {
         nextPopUpValue={'ROLEGROUPPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpReviewList
+      {/* <PopUpReviewList
         isActive={isPopUpValue === 'ROLEGROUPPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={'associates'}
@@ -141,6 +143,29 @@ const PopUpAssociateRoleCreate = () => {
         textOne={'associateRoleGroupName'}
         textTwo={'associateRoleGroupDescription'}
         onClickEvent={updateRoleGroup}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
+      <PopUpDropList
+        isActive={isPopUpValue === 'ROLEGROUPPOPUP'}
+        tag={'assesseeRoleClassificationPrimary'}
+        label={'classification'}
+        listSelect={[
+          { id: 'Bespoke', name: 'Bespoke' },
+          { id: 'Generic', name: 'Generic' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'classification'}
+        inputHeaderBadgeOne={'primary'}
+        inputHeaderBadgeTwo={''}
+        labelval={''}
+        headerPanelColour={'genericOne'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'role'}
+        headerOneBadgeTwo={'information'}
+        isRequired={true}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        basicInfo={associateRole?.informationSetup?.associateRoleClassificationPrimary}
+        typeOfSetObject={SET_ASSOCIATE_ROLE_CLASSIFICAION_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm
