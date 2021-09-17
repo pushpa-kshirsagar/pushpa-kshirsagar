@@ -202,7 +202,14 @@ function* workerAssociateSetUpSaga(data) {
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'setUpAssociateModule', value: response.responseObject[0] }
+        //payload: { stateName: 'setUpAssociateModule', value: response.responseObject.Bespoke }
       });
+
+      // yield put({
+      //   type: SET_DISPLAY_THREE_SINGLE_STATE,
+      //   payload: { stateName: 'setUpAssociateModuleGeneric', value: response.responseObject.Generic }
+      // });
+      
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_INFO,
       //   payload: response.responseObject[0]
@@ -250,7 +257,14 @@ function* workerAssociateAnalyticSetUpSaga(data) {
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'analyticSetUpModule', value: response.responseObject }
+        //   payload: { stateName: 'analyticSetUpModule', value: response.responseObject.Bespoke }
       });
+
+      // yield put({
+      //   type: SET_DISPLAY_THREE_SINGLE_STATE,
+      //   payload: { stateName: 'analyticSetUpModuleGeneric', value: response.responseObject.Generic }
+      // });
+      
     } else {
     }
   } catch (e) {
@@ -270,7 +284,14 @@ function* workerAssociateItemSetUpSaga(data) {
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'itemSetUpModule', value: response.responseObject }
+        //   payload: { stateName: 'itemSetUpModule', value: response.responseObject.Bespoke }
       });
+
+      // yield put({
+      //   type: SET_DISPLAY_THREE_SINGLE_STATE,
+      //   payload: { stateName: 'itemSetUpModuleGeneric', value: response.responseObject.Generic }
+      // });
+
     } else {
     }
   } catch (e) {
@@ -287,9 +308,20 @@ function* workerAssociateAssessmentSetUpSaga(data) {
       URL: data.payload.reqUrl
     });
     if (response.responseCode === '000') {
+      console.log('assessment-associate-Object');
+      console.log(response.responseObject);
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'assessmentSetUpModule', value: response.responseObject }
+        payload: { stateName: 'assessmentSetUpModule', value: response.responseObject.Bespoke }
+      });
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'assessmentSetUpModuleBespoke', value: response.responseObject.Bespoke }
+      });
+
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'assessmentSetUpModuleGeneric', value: response.responseObject.Generic }
       });
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
@@ -310,10 +342,14 @@ function* workerAssociateAssesseeSetUpSaga(data) {
       data: data.payload.reqBody,
       URL: data.payload.reqUrl
     });
-    if (response.responseCode === '000') {
+    if (response.responseCode === '000') {      
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'assesseeSetUpModule', value: response.responseObject[0] }
+        payload: { stateName: 'assesseeSetUpModule', value: response.responseObject[0].Bespoke }
+      });
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'assesseeSetUpModuleGeneric', value: response.responseObject[0].Generic }
       });
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
@@ -335,10 +371,19 @@ function* workerAssociateAssignmentSetUpSaga(data) {
       URL: data.payload.reqUrl
     });
     if (response.responseCode === '000') {
+      console.log('responce object assignmentSetUpModule');
+      console.log(response.responseObject);
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'assignmentSetUpModule', value: response.responseObject }
+        //payload: { stateName: 'assignmentSetUpModule', value: response.responseObject.Bespoke?response.responseObject.Bespoke:{} }
       });
+
+      // yield put({
+      //   type: SET_DISPLAY_THREE_SINGLE_STATE,
+      //   payload: { stateName: 'assignmentSetUpModuleGeneric', value: response.responseObject.Generic?response.responseObject.Generic:{} }
+      // });
+
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
       //   payload: response.responseObject
