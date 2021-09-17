@@ -88,14 +88,16 @@ const ItemReviewList = (props) => {
   };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
-    if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (siftValue === 'suspended' || siftValue === 'terminated' || siftValue === 'unpublished')
+      siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
   const secondaryIcon = [
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
-    { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
+    { label: 'terminated', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unpublished', onClick: onClickFooter, Icon: FilterList }
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));

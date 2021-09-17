@@ -35,9 +35,7 @@ import {
   CLEAR_GROUP_REDUCER_STATE,
   SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT,
   CLEAR_TYPE_REDUCER_STATE,
-  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
-  CLEAR_CULTURE_REDUCER_STATE,
-  CLEAR_JOB_REDUCER_STATE
+  GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST
 } from '../actionType';
 import {
   NOTIFICATION_REPORT_POPUP,
@@ -63,7 +61,7 @@ import {
   makeAssociateRoleObj,
   makeAssignmentGroupObj,
   makeAssessmentTypeObj,
-  makeAssignmentTypeObj,
+  makeAssesseeGroupClassificationObj,
   makeInternalNodeObj
 } from '../Actions/GenericActions';
 import {
@@ -79,6 +77,7 @@ import {
   getAssesseeGroupDistinctApiCall,
   getAssesseeRoleAssesseeReqObj,
   getAssesseeTypeApiCall,
+  getClassificationReviewListApi,
   getRoleGroupReviewListApi,
   getTypeGroupReviewListApi
 } from '../Actions/AssesseeModuleAction';
@@ -1104,7 +1103,7 @@ const PopUpDisplayPanelAssociate = (props) => {
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'roles') {
       dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
-      getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
+      // getRoleGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'ROLECREATE' }
@@ -1131,6 +1130,20 @@ const PopUpDisplayPanelAssociate = (props) => {
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'groups') {
       dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          nodeViewState: 'list',
+          isMiddlePaneList: false
+        }
+      });
+      // getClassificationReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }

@@ -333,6 +333,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesRoleAssesseeReviewList' ||
         typeOfMiddlePaneList === 'assesseesNodeAssesseeReviewList' ||
+        typeOfMiddlePaneList === 'assignmentDistinctAssesseeReviewList' ||
         typeOfMiddlePaneList === 'managersDistinctReviewList'
       ) {
         assesseeReviewInformation(

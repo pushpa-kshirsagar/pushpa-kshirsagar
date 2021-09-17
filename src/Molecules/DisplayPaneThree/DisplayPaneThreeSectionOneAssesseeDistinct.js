@@ -947,6 +947,7 @@ const DisplayPaneThreeSectionOne = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    console.log('=informationContact=>', informationContact);
     if (labelName === 'sign-in') {
       let availableCredentialArray = [];
       if (informationContact?.assesseeAddressEmailPrimary?.assesseeAddressEmail) {

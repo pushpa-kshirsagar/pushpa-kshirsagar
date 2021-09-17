@@ -50,6 +50,7 @@ export const ITEM_SETUP_REVISE_URL =
   ITEMS + '/dev/insight-guru/api/item-distinct/associate-setup/revise';
 export const ANALYTIC_SETUP_REVISE_URL =
   ITEMS + '/dev/insight-guru/api/iguru-analytic-associate-setup/revise';
+export const UPDATE_ITEM_MULTI_STATUS_URL = ITEMS + '/dev/insight-guru/api/item/status/revise';
 //assessee self
 export const ASSESSEE_ASSESSMENT_START_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment/start';
@@ -68,6 +69,8 @@ export const ASSESSEE_REVIEW_LIST_URL =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/review-list';
 export const ASSESSEE_REVIEW_INFO_URL =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/review';
+export const ASSESSEE_GROUP_CLASSIFICATION_URL =
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee-group-classfication/review-list';
 export const ASSOCIATE_REVIEW_INFO_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-distinct/review';
 export const ASSESSEE_ROLE_REVIEW_LIST_URL =
@@ -401,7 +404,7 @@ export const JOB_PROFILE_ALLOCATE_ASSIGNMENT_URL =
   ANALYTICS + '/dev/insight-guru/api/job-profile/allocate/assignment';
 
 export const ASSESSEE_ASSESSMENT_RESULT_URL =
-ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee/assignment/result';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee/assignment/result';
 
 //item_config - Item_TYPE
 export const CONFIG_ITEM_URL =

@@ -2710,6 +2710,19 @@ export const makeInternalNodeObj = (selectedAssociateInfo, filterKey, numberPage
   };
   return requestObj;
 };
+export const makeAssesseeGroupClassificationObj = (
+  selectedAssociateInfo,
+  filterKey,
+  numberPage,
+  countPage
+) => {
+  let requestObj = {
+    assesseeId: selectedAssociateInfo?.assesseeId,
+    associateId:
+      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+  };
+  return requestObj;
+};
 export const makeAssociateNodeObj = (selectedAssociateInfo, filterKey, numberPage, countPage) => {
   let requestObj = {
     assesseeId: selectedAssociateInfo?.assesseeId,
@@ -3797,6 +3810,10 @@ export const getItemGroupItemReqObj = (
     associateId:
       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     countPage: countPage,
+    orderBy: {
+      columnName: 'informationBasic.itemName,informationBasic.itemDescription',
+      order: 'asc'
+    },
     numberPage: numberPage,
     groupId: groupId,
     filter: 'true',
@@ -6771,6 +6788,7 @@ export const getAssesseeSelfAssignmentList = (
 
 export function convertToLocalTime(milisec) {
   var dd = new Date(milisec);
+<<<<<<< HEAD
   var h = dd.getHours(), m = dd.getMinutes();
   var _time = (h > 12) ? (h - 12 + ':' + ((m < 10) ? '0' + m : m) + ' PM') : (h + ':' + ((m < 10) ? '0' + m : m) + ' AM');
   var finalformat = ('0' + dd.getDate()).slice(-2) + '/' + ('0' + (dd.getMonth() + 1)).slice(-2) + '/' + dd.getFullYear() + ', ' + _time;
@@ -6793,4 +6811,26 @@ export function calculateTime(milisec) {
 
   var duration = minutes + " Mins, " + seconds + " Secs";
   return duration;
+=======
+  var h = dd.getHours(),
+    m = dd.getMinutes();
+  var _time =
+    h > 12
+      ? h - 12 + ':' + (m < 10 ? '0' + m : m) + ' PM'
+      : h + ':' + (m < 10 ? '0' + m : m) + ' AM';
+  var finalformat =
+    ('0' + dd.getDate()).slice(-2) +
+    '/' +
+    ('0' + (dd.getMonth() + 1)).slice(-2) +
+    '/' +
+    dd.getFullYear() +
+    ', ' +
+    _time;
+
+  // var dateconv = new Date(milisec);
+  // let newDateFormat = dateconv.toLocaleDateString();
+  // let finaltime =removeSecond(dateconv);
+  // let finalformat = newDateFormat+', '+finaltime;
+  return finalformat;
+>>>>>>> 3fd9fc919194b3a3b53204bd01726d9f9552595e
 }

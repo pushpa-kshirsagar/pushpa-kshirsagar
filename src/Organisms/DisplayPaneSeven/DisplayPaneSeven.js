@@ -162,17 +162,46 @@ export const DisplayPaneSeven = () => {
     let clickedval = e.currentTarget.getAttribute('data-value');
     let itemId = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].itemId;
     // let id = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].id;
+    console.log('currentQuestionIndex', currentQuestionIndex);
+    console.log('itemId', itemId);
     let assesseeId = assesseeAssessmentStartData.assesseeId;
     if (clickedval === 'previous') {
-      if (currentQuestionIndex !== 0) setcurrentQuestionIndex(currentQuestionIndex - 1);
-      // setcurrentQuestionChoice(null);
+      let prevIndex = currentQuestionIndex - 1;
+      if (currentQuestionIndex !== 0) {
+        setcurrentQuestionIndex(prevIndex);
+        let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
+        let itemData = assesseeAssessmentStartData.assessmentItem[prevIndex];
+        let item = responseInLocal.filter(function (ii) {
+          return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+        });
+        console.log('item', item);
+        if (item.length > 0)
+          setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
+      }
     }
     if (clickedval === 'first') {
       setcurrentQuestionIndex(0);
+      let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
+      let itemData = assesseeAssessmentStartData.assessmentItem[0];
+      let item = responseInLocal.filter(function (ii) {
+        return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+      });
+      if (item.length > 0)
+        setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
       // setcurrentQuestionChoice(null);
     }
     if (clickedval === 'last') {
-      setcurrentQuestionIndex(assesseeAssessmentStartData.assessmentItem.length - 1);
+      let lastIndex = assesseeAssessmentStartData.assessmentItem.length - 1;
+      setcurrentQuestionIndex(lastIndex);
+      let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
+      let itemData = assesseeAssessmentStartData.assessmentItem[lastIndex];
+      let item = responseInLocal.filter(function (ii) {
+        return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+      });
+      if (item.length > 0)
+        setcurrentQuestionChoice(
+          item[lastIndex].assesseeAssignmentAssessmentItemResponseChoiceSelected
+        );
       // setcurrentQuestionChoice(null);
     }
     if (clickedval === 'next') {

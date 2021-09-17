@@ -8,7 +8,14 @@ import {
   SET_TYPE_GROUP_ALLOCATION,
   SET_ITEM_TYPE_REDUCER_STATE,
   SET_CULTURE_TYPE_REDUCER_STATE,
-  SET_JOB_TYPE_REDUCER_STATE
+  SET_JOB_TYPE_REDUCER_STATE,
+  SET_ASSESSEE_TYPE_CLASSIFICAION_STATE,
+  SET_ASSESSMENT_TYPE_CLASSIFICAION_STATE,
+  SET_ASSIGNMENT_TYPE_CLASSIFICAION_STATE,
+  SET_ASSOCIATE_TYPE_CLASSIFICAION_STATE,
+  SET_CULTUREPROFILE_TYPE_CLASSIFICAION_STATE,
+  SET_JOBPROFILE_TYPE_CLASSIFICAION_STATE,
+  SET_ITEM_TYPE_CLASSIFICAION_STATE
 } from '../actionType';
 
 const initialState = {
@@ -23,6 +30,12 @@ const initialState = {
     },
     informationAllocation: {
       assesseeTypeGroup: ''
+    },
+    informationSetup: {
+      assesseeTypeClassification: {
+        assesseeTypeClassificationPrimary: '',
+        assesseeTypeClassificationSecondary: ''
+      }
     }
   },
   assessmentType: {
@@ -36,6 +49,12 @@ const initialState = {
     },
     informationAllocation: {
       assessmentTypeGroup: ''
+    },
+    informationSetup: {
+      assessmentTypeClassification: {
+        assessmentTypeClassificationPrimary: '',
+        assessmentTypeClassificationSecondary: ''
+      }
     }
   },
   assignmentType: {
@@ -49,6 +68,12 @@ const initialState = {
     },
     informationAllocation: {
       assignmentTypeGroup: ''
+    },
+    informationSetup: {
+      assignmentTypeClassification: {
+        assignmentTypeClassificationPrimary: '',
+        assignmentTypeClassificationSecondary: ''
+      }
     }
   },
   associateType: {
@@ -62,6 +87,12 @@ const initialState = {
     },
     informationAllocation: {
       associateTypeGroup: ''
+    },
+    informationSetup: {
+      associateTypeClassification: {
+        associateTypeClassificationPrimary: '',
+        associateTypeClassificationSecondary: ''
+      }
     }
   },
   itemType: {
@@ -75,6 +106,12 @@ const initialState = {
     },
     informationAllocation: {
       itemTypeGroup: ''
+    },
+    informationSetup: {
+      itemTypeClassification: {
+        itemTypeClassificationPrimary: '',
+        itemTypeClassificationSecondary: ''
+      }
     }
   },
   cultureProfileType: {
@@ -88,6 +125,12 @@ const initialState = {
     },
     informationAllocation: {
       cultureProfileTypeGroup: ''
+    },
+    informationSetup: {
+      cultureProfileTypeClassification: {
+        cultureProfileTypeClassificationPrimary: '',
+        cultureProfileTypeClassificationSecondary: ''
+      }
     }
   },
   jobProfileType: {
@@ -101,6 +144,12 @@ const initialState = {
     },
     informationAllocation: {
       jobProfileTypeGroup: ''
+    },
+    informationSetup: {
+      jobProfileTypeClassification: {
+        jobProfileTypeClassificationPrimary: '',
+        jobProfileTypeClassificationSecondary: ''
+      }
     }
   }
 };
@@ -173,6 +222,83 @@ const TypeCreateReducer = (istate = initialState, action) => {
         jobProfileType: {
           ...istate.jobProfileType,
           informationBasic: action.payload
+        }
+      };
+      case SET_ASSESSEE_TYPE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        assesseeType: {
+          ...istate.assesseeType,
+          informationSetup: {
+            ...istate.assesseeType.informationSetup,
+            assesseeTypeClassification: action.payload
+          }
+        }
+      };
+    case SET_ASSESSMENT_TYPE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        assessmentType: {
+          ...istate.assessmentType,
+          informationSetup: {
+            ...istate.assessmentType.informationSetup,
+            assessmentTypeClassification: action.payload
+          }
+        }
+      };
+    case SET_ASSIGNMENT_TYPE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        assignmentType: {
+          ...istate.assignmentType,
+          informationSetup: {
+            ...istate.assignmentType.informationSetup,
+            assignmentTypeClassification: action.payload
+          }
+        }
+      };
+    case SET_ASSOCIATE_TYPE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        associateType: {
+          ...istate.associateType,
+          informationSetup: {
+            ...istate.associateType.informationSetup,
+            associateTypeClassification: action.payload
+          }
+        }
+      };
+    case SET_CULTUREPROFILE_TYPE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        cultureProfileType: {
+          ...istate.cultureProfileType,
+          informationSetup: {
+            ...istate.cultureProfileType.informationSetup,
+            cultureProfileTypeClassification: action.payload
+          }
+        }
+      };
+    case SET_JOBPROFILE_TYPE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        jobProfileType: {
+          ...istate.jobProfileType,
+          informationSetup: {
+            ...istate.jobProfileType.informationSetup,
+            jobProfileTypeClassification: action.payload
+          }
+        }
+      };
+    case SET_ITEM_TYPE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        itemType: {
+          ...istate.itemType,
+          informationSetup: {
+            ...istate.itemType.informationSetup,
+            itemTypeClassification: action.payload
+          }
         }
       };
     case CLEAR_TYPE_REDUCER_STATE:

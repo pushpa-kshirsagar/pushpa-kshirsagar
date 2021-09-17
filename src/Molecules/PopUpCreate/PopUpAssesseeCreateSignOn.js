@@ -884,6 +884,7 @@ const PopUpAssesseeCreateSignOn = (props) => {
           'tag (primary)',
           'tag (secondary)'
         ]}
+        availableSignInCredentialList={assesseeInfo.availableSignInCredentialList}
         forceToSelect="signIn"
         typeOfSetObject={UPDATE_ASSESSEE_SETUP_PRIMARY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

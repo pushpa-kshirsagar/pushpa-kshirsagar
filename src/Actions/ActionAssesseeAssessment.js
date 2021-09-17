@@ -54,4 +54,32 @@ export const setAssesseeAssessmentItemSaveResCall = (
     ans.push(ItemObj);
     localStorage.setItem('assessmentItem', JSON.stringify(ans));
   }
+  let responseSetInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
+  let isItemPresent = false;
+  console.log(responseSetInLocal);
+  if (responseSetInLocal.length > 0) {
+    let find = responseSetInLocal.find((v) => v.assesseeAssignmentAssessmentItemId === itemId);
+    find
+      ? (find.assesseeAssignmentAssessmentItemResponseChoiceSelected = currentQuestionChoice)
+      : responseSetInLocal.push(ItemObj);
+
+    console.log('find', find);
+  } else {
+    responseSetInLocal.push(ItemObj);
+  }
+  // if (responseSetInLocal.length > 0) {
+  //   responseSetInLocal.forEach((element, index) => {
+  //     if (element.assesseeAssignmentAssessmentItemId === itemId) {
+  //       responseSetInLocal[index] = ItemObj;
+  //       isItemPresent = false;
+  //     } else {
+  //       isItemPresent = true;
+  //     }
+  //   });
+  // } else {
+  //   responseSetInLocal.push(ItemObj);
+  // }
+  // isItemPresent && responseSetInLocal.push(ItemObj);
+
+  localStorage.setItem('navigationItem', JSON.stringify(responseSetInLocal));
 };

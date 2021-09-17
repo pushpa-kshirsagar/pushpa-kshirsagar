@@ -61,6 +61,7 @@ function* workerSignInAssesseeSaga(data) {
       );
       localStorage.setItem('assesseeId', data.payload.credential);
       localStorage.setItem('assessmentItem', '[]');
+      localStorage.setItem('navigationItem', '[]');
       localStorage.setItem(
         'refreshToken',
         userResponse?.responseObject?.cognitoResponse?.refreshToken

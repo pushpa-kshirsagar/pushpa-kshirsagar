@@ -244,7 +244,10 @@ const PopUpItemCreate = (props) => {
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'TYPEPOPUP'}
         inputHeader={'node'}
-        isRequired={false}
+        isRequired={true}
+        minimumSelected={1}
+        setErrorMsg={setRequiredErrorMsg}
+        errorMsg={requiredErrorMsg}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
         ListData={coreNodeReviewListData}
@@ -254,8 +257,6 @@ const PopUpItemCreate = (props) => {
           updateGroup(e, 'itemNode', 'itemNodePrimary');
         }}
         selectedList={itemInformation.informationAllocation.itemNode.itemNodePrimary}
-        setErrorMsg={setRequiredErrorMsg}
-        errorMsg={requiredErrorMsg}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList

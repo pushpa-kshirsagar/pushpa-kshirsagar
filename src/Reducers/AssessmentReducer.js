@@ -84,12 +84,22 @@ const initialState = {
       assessmentAidTextsheetPermission: false,
       assessmentAidTextsheetType: ''
     },
+    assessmentEvaluation: {
+      cutoffScore: false,
+      genericScore: false,
+      gradeScore: false,
+      percentageScore: false,
+      percentileScore: false,
+      rankOrder: false,
+      rawScore: false,
+      standardScore: false,
+      stenScore: false,
+      tScore: false,
+      zScore: false
+    },
     assessmentCommunique: {
       assessmentCommuniquePrimary: null,
       assessmentCommuniqueSecondary: null
-    },
-    assessmentEvaluation: {
-      assessmentEvaluationModel: ''
     },
     assessmentItem: [],
     assessmentNavigation: {

@@ -11,7 +11,8 @@ import {
   SET_MIDDLEPANE_PREVIOUS_POPUP,
   SET_MIDDLEPANE_SECONDARY_OPTION,
   SET_SECONDARY_CREATE_OPTION_VALUE,
-  FILTERMODE
+  FILTERMODE,
+  ITEM_MULTI_STATUS_REVISE_SAGA
 } from '../actionType';
 import {
   assesseeCreateApiCalls,
@@ -94,8 +95,27 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
     console.log(dataVal);
     if (dataVal === 'information') {
       dispatch({ type: POPUP_CLOSE });
-    } else if (dataVal === 'publishApiCall') {
+    } else if (
+      dataVal === 'publishApiCall' ||
+      dataVal === 'suspendApiCall' ||
+      dataVal === 'terminateApiCall' ||
+      dataVal === 'archiveApiCall' ||
+      dataVal === 'yesApiCall'
+    ) {
       if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
+        let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary, //'60520a349d66236bb84f8b1b',
+          itemDistinct: selectedTagsArray,
+          reviseStatus: keyVal
+        };
+        dispatch({
+          type: ITEM_MULTI_STATUS_REVISE_SAGA,
+          payload: { secondaryOptionCheckValue: '', headerOne: '', reqBody }
+        });
+        dispatch({ type: POPUP_CLOSE });
         // updateItemDistinctStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
     } else if (dataVal === 'select') {

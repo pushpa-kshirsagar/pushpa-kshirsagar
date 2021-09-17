@@ -325,7 +325,9 @@ const DisplayPaneThreeSectionOneAssessment = () => {
     },
     {
       id: 'a2',
-      textOneOne: capitalizeFirstLetter(informationEngagement.assessmentStatus) || 'No Information',
+      textOneOne:
+        (informationEngagement && capitalizeFirstLetter(informationEngagement?.assessmentStatus)) ||
+        'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -337,11 +339,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationEngagement.assessmentTag.assessmentTagPrimary || 'No Information'
+          textOne: informationEngagement?.assessmentTag.assessmentTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationEngagement.assessmentTag.assessmentTagSecondary || 'No Information'
+          textOne: informationEngagement?.assessmentTag.assessmentTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -354,11 +356,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement?.assessmentTenureDate || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement?.assessmentTenureDate || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -642,7 +644,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
                       <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}
@@ -657,7 +663,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
                       <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}
@@ -672,7 +682,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
                       <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}
@@ -687,7 +701,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
                       <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}

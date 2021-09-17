@@ -553,6 +553,12 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         payload: { isPopUpValue: 'TIMEASSESSMENTPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
+    if (labelName === 'evaluation') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'EVALUATIONPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
     if (labelName === 'timeline' && selectedBadgeName === 'start') {
       dispatch({
         type: SET_POPUP_VALUE,

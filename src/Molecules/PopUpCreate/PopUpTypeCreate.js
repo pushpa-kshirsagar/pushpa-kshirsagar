@@ -9,9 +9,17 @@ import {
   LOADER_START,
   CLEAR_TYPE_REDUCER_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
-  SET_TYPE_GROUP_ALLOCATION
+  SET_TYPE_GROUP_ALLOCATION,
+  SET_ASSESSEE_TYPE_CLASSIFICAION_STATE,
+  SET_ASSESSMENT_TYPE_CLASSIFICAION_STATE,
+  SET_ASSIGNMENT_TYPE_CLASSIFICAION_STATE,
+  SET_ASSOCIATE_TYPE_CLASSIFICAION_STATE,
+  SET_CULTUREPROFILE_TYPE_CLASSIFICAION_STATE,
+  SET_JOBPROFILE_TYPE_CLASSIFICAION_STATE,
+  SET_ITEM_TYPE_CLASSIFICAION_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 
 const PopUpTypeCreate = (props) => {
   const {
@@ -107,7 +115,7 @@ const PopUpTypeCreate = (props) => {
         nextPopUpValue={'GROUPPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpReviewList
+      {/* <PopUpReviewList
         isActive={isPopUpValue === 'GROUPPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -130,6 +138,37 @@ const PopUpTypeCreate = (props) => {
         onClickEvent={updateGroup}
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
+      <PopUpDropList
+        isActive={isPopUpValue === 'GROUPPOPUP'}
+        tag={objectName + 'ClassificationPrimary'}
+        label={'classification'}
+        listSelect={[
+          { id: 'Bespoke', name: 'Bespoke' },
+          { id: 'Generic', name: 'Generic' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={'classification'}
+        inputHeaderBadgeOne={'primary'}
+        inputHeaderBadgeTwo={''}
+        labelval={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'type'}
+        headerOneBadgeTwo={'information'}
+        isRequired={true}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        basicInfo={reducerObeject.informationSetup[objectName + 'Classification']}
+        typeOfSetObject={
+          (reducerObeject === 'assesseeType' && SET_ASSESSEE_TYPE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'assessmentType' && SET_ASSESSMENT_TYPE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'assignmentType' && SET_ASSIGNMENT_TYPE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'associateType' && SET_ASSOCIATE_TYPE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'cultureProfileType' && SET_CULTUREPROFILE_TYPE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'jobProfileType' && SET_JOBPROFILE_TYPE_CLASSIFICAION_STATE) ||
+          (reducerObeject === 'itemType' && SET_ITEM_TYPE_CLASSIFICAION_STATE)
+        }
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm

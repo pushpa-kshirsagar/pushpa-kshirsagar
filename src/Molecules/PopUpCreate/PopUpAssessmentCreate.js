@@ -582,6 +582,23 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+       {/* <PopUpCheckbox
+        isActive={isPopUpValue === 'EVALUATIONPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        valueArr={[
+          'email address (primary)',
+          'email address (secondary)',
+          'mobile telephone (primary)',
+          'mobile telephone (secondary)',
+          'tag (primary)',
+          'tag (secondary)'
+        ]}
+        forceToSelect="signIn"
+        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
     </div>
   );
 };
