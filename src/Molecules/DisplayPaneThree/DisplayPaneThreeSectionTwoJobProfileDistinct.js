@@ -29,7 +29,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
     tempCoreList.forEach((ob) => {
       jobCoreList.push({
         id: ob.id,
-        textOne: ob?.jobProfilerFrameworkSecondary || '',
+        textOne: ob?.iguruAnalyticFrameworkOneClusterSecondary || '',
         textTwo: '',
         status: ''
       });
@@ -41,7 +41,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
     tempDomainList.forEach((ob) => {
       jobDomainList.push({
         id: ob.id,
-        textOne: ob?.jobProfilerFrameworkSecondary || '',
+        textOne: ob?.iguruAnalyticFrameworkOneClusterSecondary || '',
         textTwo: '',
         status: ''
       });
@@ -53,7 +53,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
     tempFunctionList.forEach((ob) => {
       jobFunctionList.push({
         id: ob.id,
-        textOne: ob?.jobProfilerFrameworkSecondary || '',
+        textOne: ob?.iguruAnalyticFrameworkOneClusterSecondary || '',
         textTwo: '',
         status: ''
       });
@@ -65,7 +65,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
     tempRoleList.forEach((ob) => {
       jobRoleList.push({
         id: ob.id,
-        textOne: ob?.jobProfilerFrameworkSecondary || '',
+        textOne: ob?.iguruAnalyticFrameworkOneClusterSecondary || '',
         textTwo: '',
         status: ''
       });
@@ -78,7 +78,7 @@ const DisplayPaneThreeSectionTwoJobProfileDistinct = () => {
     tempShortList.forEach((ob) => {
       jobShortList.push({
         id: ob.id,
-        textOne: ob?.jobProfilerFrameworkSecondary || '',
+        textOne: ob?.iguruAnalyticFrameworkOneClusterSecondary || '',
         textTwo: '',
         status: ''
       });

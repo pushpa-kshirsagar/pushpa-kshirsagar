@@ -154,7 +154,13 @@ class JobWeightageTableTemplate extends Component {
                         event.stopPropagation();
                         this.setState({ ...this.state, isShowTooltipId: '' });
                       }}
-                      open={value.id === this.state.isShowTooltipId ? true : false}
+                      open={
+                        value.id === this.state.isShowTooltipId &&
+                        value?.iguruAnalyticFrameworkOneClusterSecondaryExplanation
+                          .iguruAnalyticFrameworkOneClusterSecondaryExplanationSecondary
+                          ? true
+                          : false
+                      }
                       title={
                         <Typography
                           color="inherit"
@@ -162,7 +168,10 @@ class JobWeightageTableTemplate extends Component {
                           style={{ fontSize: '15px', textAlign: 'center' }}
                         >
                           <div style={{ display: 'block' }}>
-                            {value?.jobProfilerFrameworkSecondaryDescriptionPrimary || ''}
+                            {
+                              value?.iguruAnalyticFrameworkOneClusterSecondaryExplanation
+                                .iguruAnalyticFrameworkOneClusterSecondaryExplanationSecondary
+                            }
                           </div>
                         </Typography>
                       }
@@ -188,7 +197,10 @@ class JobWeightageTableTemplate extends Component {
                           {value?.iguruAnalyticFrameworkOneClusterSecondary || 'name'}
                         </span>
                         <span style={{ cursor: 'pointer', fontSize: '1rem' }}>
-                          {/* {value?.jobProfilerFrameworkSecondaryDescriptionPrimary || 'description'} */}
+                          {
+                            value?.iguruAnalyticFrameworkOneClusterSecondaryExplanation
+                              .iguruAnalyticFrameworkOneClusterSecondaryExplanationPrimary
+                          }
                         </span>
                       </div>
                     </Tooltip>
