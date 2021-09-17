@@ -3599,7 +3599,7 @@ export const DisplayPaneThree = () => {
                 labelTextOneOne="name"
                 labelTextOneTwo="alias"
                 textOneOne={assessee.assesseeNameFirst + " " + assessee.assesseeNameLast}
-                textOneTwo={assessee.assesseeAlias}
+                textOneTwo={assessee.assesseeAlias !=""? assessee.assesseeAlias:"No Information"}
                 isVerifiedActiveName={false}
                 isVerifiedActivePicture={false}
                 mode={reviewMode}

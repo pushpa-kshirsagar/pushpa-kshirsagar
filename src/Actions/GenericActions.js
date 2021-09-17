@@ -6809,3 +6809,18 @@ export function convertToLocalTime(milisec) {
   // let finalformat = newDateFormat+', '+finaltime;
   return finalformat;
 }
+
+export function calculateTime(milisec){
+  var dd = new Date(milisec);
+  var seconds = dd.getSeconds();
+  var minutes = dd.getUTCMinutes();
+  var hours = dd.getUTCHours();
+
+  hours = (hours < 10) ? "0" + hours : hours;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
+  seconds = (seconds < 10) ? "0" + seconds : seconds;
+  
+  var duration =  minutes + " Mins, " + seconds+" Secs";
+  return duration;
+
+}
