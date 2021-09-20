@@ -349,7 +349,7 @@ function* workerAssociateAssesseeSetUpSaga(data) {
       });
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'assesseeSetUpModuleGeneric', value: response.responseObject[0].Generic }
+        payload: { stateName: 'assesseeSetUpModuleGeneric', value: response.responseObject[1].Generic }
       });
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,

@@ -48,8 +48,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     informationAlliance
   } = responseObject;
 
-  //console.log(assesseeSetUpModule);
-  //console.log(assesseeSetUpModuleGeneric);
+  console.log(assesseeSetUpModule);
+  console.log(assesseeSetUpModuleGeneric);
   //console.log(assessmentSetUpModuleBespoke);
   //console.log(assessmentSetUpModuleGeneric);
   function capitalizeFirstLetter(string) {

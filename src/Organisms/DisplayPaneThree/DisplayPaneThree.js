@@ -3015,14 +3015,14 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
-                  textOneOne={informationBasic.cultureProfileGroupName || 'No Information'}
-                  textOneTwo={informationBasic.cultureProfileGroupDescription || 'No Information'}
+                  textOneOne={informationBasic?.cultureProfileGroupName || 'No Information'}
+                  textOneTwo={informationBasic?.cultureProfileGroupDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseCultureProfileGroupBasicInformation}
-                  isImageActive={informationBasic.cultureProfileGroupPicture}
-                  imageOne={informationBasic.cultureProfileGroupPicture}
+                  isImageActive={informationBasic?.cultureProfileGroupPicture}
+                  imageOne={informationBasic?.cultureProfileGroupPicture}
                 />
               </div>
               <Sections

@@ -260,6 +260,23 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
     }
   ];
 
+  const list4=[   
+    {
+      id: 'a1',
+      labelTextOneOne: 'classification',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',      
+      labelTextOneOneBadges: [        
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    }   
+  ]
+
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -433,6 +450,32 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
             })}
           </Paper>
         </div>
+
+        <div className="containerPadding">
+          <Paper className={'dossierContainerTop'}>
+            {list4.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <DisplayPanelAccordianReviewListOne
+                      onClickRevise={reviseEngagement}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={reviseEngagement}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+        </div>
+        
       </>
       {isMobile && (
         <div className={'containerPadding'} style={{ height: '55px' }}>
