@@ -7,15 +7,12 @@ import PopUpAddressEmail from '../PopUpInformation/PopUpAddressEmail';
 import PopUpDropList from '../PopUpInformation/PopUpDropList';
 import PopUpConfirm from '../PopUpGeneric/PopUpConfirm';
 import PopUpTelephone from '../PopUpInformation/PopUpTelephone';
-import PopUpAddress from '../PopUpInformation/PopUpAddress';
 import {
   CLEAR_ASSESSEE_INFO,
   POPUP_CLOSE,
   UPDATE_ASSESSEE_PERSONAL_INFO,
   UPDATE_ASSESSEE_BASIC_INFO,
-  UPDATE_ASSESSEE_INFO,
   UPDATE_ASSESSEE_MOBILE_INFO,
-  UPDATE_ASSESSEE_HOMEADDRESS_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_PRIMARY_INFO,
   UPDATE_ASSESSEE_ADDRESS_EMAIL_SECONDARY_INFO
 } from '../actionType';

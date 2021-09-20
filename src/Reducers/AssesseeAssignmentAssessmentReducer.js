@@ -7,10 +7,13 @@ const initialState = {
   assesseeAssignmentAssessmentData: null,
   assesseeAssessmentStartData: null,
   isExamMode: false,
-  isAssessmentStart:''
+  isAssessmentStart: ''
 };
 
-const AssesseeAssignmentAssessmentReducer = (istate = initialState, action) => {
+const AssesseeAssignmentAssessmentReducer = (
+  istate = JSON.parse(JSON.stringify(initialState)),
+  action
+) => {
   // console.log(action.type);
   switch (action.type) {
     case SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE:
@@ -19,7 +22,7 @@ const AssesseeAssignmentAssessmentReducer = (istate = initialState, action) => {
         [action.payload.stateName]: action.payload.value
       };
     case CLEAR_ASSESSEE_ASSESSMENT_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

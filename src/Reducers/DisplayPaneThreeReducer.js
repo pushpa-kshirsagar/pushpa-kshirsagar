@@ -114,7 +114,7 @@ const initialState = {
   itemSetUpModuleGeneric: null,
 };
 
-const DisplayPaneThreeReducer = (istate = initialState, action) => {
+const DisplayPaneThreeReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   switch (action.type) {
     case SET_DISPLAY_THREE_SINGLE_STATE:
       return {
@@ -251,7 +251,7 @@ const DisplayPaneThreeReducer = (istate = initialState, action) => {
         isItemPreviewShow: action.payload
       };
     case CLEAR_DISPLAY_PANE_THREE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

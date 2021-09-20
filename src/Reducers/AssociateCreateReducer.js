@@ -207,7 +207,7 @@ const initialState = {
   signIn: ''
 };
 
-const AssociateCreateReducer = (istate = initialState, action) => {
+const AssociateCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   switch (action.type) {
     case ASSOCIATE_POPUP_OPEN:
       return {
@@ -497,7 +497,7 @@ const AssociateCreateReducer = (istate = initialState, action) => {
         // }
       };
     case CLEAR_ASSOCIATE_INFO:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

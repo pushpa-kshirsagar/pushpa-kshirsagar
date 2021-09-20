@@ -183,7 +183,7 @@ const initialState = {
           share: false,
           assesseePermissionInformation: 'key'
         },
-        assesseeIguruAnalyticDistinctPermission: {
+        assesseeiGuruAnalyticDistinctPermission: {
           create: false,
           delete: false,
           review: false,
@@ -191,7 +191,7 @@ const initialState = {
           share: false,
           assesseePermissionInformation: 'key'
         },
-        assesseeIguruAnalyticGroupPermission: {
+        assesseeiGuruAnalyticGroupPermission: {
           create: false,
           delete: false,
           review: false,
@@ -199,7 +199,7 @@ const initialState = {
           share: false,
           assesseePermissionInformation: 'key'
         },
-        assesseeIguruAnalyticManagerPermission: {
+        assesseeiGuruAnalyticManagerPermission: {
           create: false,
           delete: false,
           review: false,
@@ -207,7 +207,7 @@ const initialState = {
           share: false,
           assesseePermissionInformation: 'key'
         },
-        assesseeIguruAnalyticTypePermission: {
+        assesseeiGuruAnalyticTypePermission: {
           create: false,
           delete: false,
           review: false,
@@ -295,7 +295,7 @@ const initialState = {
           revise: false,
           share: false
         },
-        associateIguruAnalyticPermission: {
+        associateiGuruAnalyticPermission: {
           create: false,
           delete: false,
           review: false,
@@ -318,7 +318,7 @@ const initialState = {
   }
 };
 
-const RoleCreateReducer = (istate = initialState, action) => {
+const RoleCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   switch (action.type) {
     case SET_ASSESSEE_ROLE_REDUCER_STATE:
       return {
@@ -392,7 +392,7 @@ const RoleCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_ROLE_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

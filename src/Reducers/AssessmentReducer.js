@@ -122,7 +122,7 @@ const initialState = {
   }
 };
 
-const AssessmentReducer = (istate = initialState, action) => {
+const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action.type);
   switch (action.type) {
     case ASSESSMENT_POPUP_OPEN:
@@ -269,7 +269,7 @@ const AssessmentReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_ASSESSMENT_INFO:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

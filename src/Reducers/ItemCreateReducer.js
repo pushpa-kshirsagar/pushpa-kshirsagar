@@ -58,10 +58,10 @@ const initialState = {
     informationFramework: {
       itemFrameworkOne: {
         itemFrameworkOneAlignment: '',
-        itemFrameworkOneClassification: [
+        itemFrameworkOneCluster: [
           {
-            itemGroupClassificationLabel: '',
-            itemGroupClassificationPolarity: ''
+            itemFrameworkOneClusterPrimaryLabel: '',
+            itemFrameworkOneClusterPrimaryPolarity: ''
           }
         ],
         itemFrameworkOneLevel: null,
@@ -194,7 +194,7 @@ const initialState = {
   }
 };
 
-const ItemCreateReducer = (istate = { ...initialState }, action) => {
+const ItemCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action.type);
   switch (action.type) {
     case SET_ITEM_SINGLE_STATE:
@@ -282,7 +282,7 @@ const ItemCreateReducer = (istate = { ...initialState }, action) => {
         }
       };
     case CLEAR_ITEM_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

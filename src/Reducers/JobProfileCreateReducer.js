@@ -69,7 +69,7 @@ const initialState = {
   }
 };
 
-const JobProfileCreateReducer = (istate = initialState, action) => {
+const JobProfileCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action.type);
   switch (action.type) {
     case SET_JOB_REDUCER_STATE:
@@ -155,7 +155,7 @@ const JobProfileCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_JOB_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

@@ -64,7 +64,7 @@ const initialState = {
   }
 };
 
-const AssignmentReducer = (istate = initialState, action) => {
+const AssignmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   switch (action.type) {
     case ASSIGNMENT_POPUP_OPEN:
       return {
@@ -169,7 +169,7 @@ const AssignmentReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_ASSIGNMENT_INFO:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

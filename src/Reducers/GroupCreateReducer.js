@@ -219,7 +219,7 @@ const initialState = {
   }
 };
 
-const GroupCreateReducer = (istate = initialState, action) => {
+const GroupCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action);
   switch (action.type) {
     case SET_ASSESSEE_GROUP_REDUCER_STATE:
@@ -384,7 +384,7 @@ const GroupCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_GROUP_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

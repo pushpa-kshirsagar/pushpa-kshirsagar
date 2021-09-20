@@ -68,7 +68,7 @@ const IgaugeReducer = (istate = initialState, action) => {
         };
       }
     case CLEAR_IGAUGE_REDUCER:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

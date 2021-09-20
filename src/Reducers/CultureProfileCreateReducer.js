@@ -42,7 +42,7 @@ const initialState = {
   }
 };
 
-const ItemCreateReducer = (istate = initialState, action) => {
+const ItemCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action.type);
   switch (action.type) {
     case SET_CULTURE_REDUCER_STATE:
@@ -101,7 +101,7 @@ const ItemCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_CULTURE_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

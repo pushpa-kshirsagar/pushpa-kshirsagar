@@ -154,7 +154,7 @@ const initialState = {
   }
 };
 
-const TypeCreateReducer = (istate = initialState, action) => {
+const TypeCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action.type);
   switch (action.type) {
     case SET_TYPE_GROUP_ALLOCATION:
@@ -302,7 +302,7 @@ const TypeCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_TYPE_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

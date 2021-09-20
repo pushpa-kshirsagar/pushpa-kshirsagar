@@ -92,7 +92,7 @@ const initialState = {
   }
 };
 
-const DisplayPaneTwoReducer = (istate = initialState, action) => {
+const DisplayPaneTwoReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log('IN USER REDUCER====>', action);
   switch (action.type) {
     case SET_DISPLAY_TWO_SINGLE_STATE:

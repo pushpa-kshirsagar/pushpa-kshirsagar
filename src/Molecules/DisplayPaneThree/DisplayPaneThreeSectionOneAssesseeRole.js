@@ -25,7 +25,7 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   const dispatch = useDispatch();
- 
+
   let assesseeRoleGroupList = [];
   const tempRoleGroup = informationAllocation?.assesseeRoleGroup;
   const rolePermission = informationSetup?.assesseeRolePermission;
@@ -726,13 +726,17 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'permissionStateTwo', value: selected?.labelTextTwoBadge }
       });
+      let camelCaseStr =
+        labelName === 'iGuru Analytics'
+          ? 'iGuruAnalytic'
+          : splitCamelCaseToString(labelName).slice(0, -1);
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: {
           stateName: 'permissionStateThree',
           value:
             'assessee' +
-            splitCamelCaseToString(labelName).slice(0, -1) +
+            camelCaseStr +
             splitCamelCaseToString(selected?.labelTextTwoBadge) +
             'Permission'
         }
