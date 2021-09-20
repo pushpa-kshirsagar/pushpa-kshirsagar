@@ -375,14 +375,14 @@ function* workerAssociateAssignmentSetUpSaga(data) {
       console.log(response.responseObject);
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'assignmentSetUpModule', value: response.responseObject }
-        //payload: { stateName: 'assignmentSetUpModule', value: response.responseObject.Bespoke?response.responseObject.Bespoke:{} }
+        //payload: { stateName: 'assignmentSetUpModule', value: response.responseObject }
+        payload: { stateName: 'assignmentSetUpModule', value: response.responseObject.Bespoke?response.responseObject.Bespoke:{} }
       });
 
-      // yield put({
-      //   type: SET_DISPLAY_THREE_SINGLE_STATE,
-      //   payload: { stateName: 'assignmentSetUpModuleGeneric', value: response.responseObject.Generic?response.responseObject.Generic:{} }
-      // });
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'assignmentSetUpModuleGeneric', value: response.responseObject.Generic?response.responseObject.Generic:{} }
+      });
 
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
