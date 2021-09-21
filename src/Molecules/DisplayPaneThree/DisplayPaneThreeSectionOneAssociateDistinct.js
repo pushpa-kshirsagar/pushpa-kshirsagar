@@ -38,7 +38,10 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     assessmentSetUpModuleGeneric,
     assessmentSetUpModuleBespoke,
     assesseeSetUpModuleGeneric,
-    assignmentSetUpModuleGeneric
+    assignmentSetUpModuleGeneric,
+    itemSetUpModuleGeneric,
+    analyticSetUpModuleGeneric,
+    setUpAssociateModuleGeneric
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { middlePaneHeader = '' } = useSelector((state) => state.DisplayPaneTwoReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
@@ -56,8 +59,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   //console.log(assignmentSetUpModule);
   //console.log(assignmentSetUpModuleGeneric); 
   console.log(setUpAssociateModule); 
-  
-  
+  console.log(analyticSetUpModule);
+  console.log(itemSetUpModule);
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -418,8 +421,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctCreateApproval
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Required'
+                    : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -428,8 +431,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -454,7 +457,25 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: assesseeSetUpModule?.assesseeDistinctShare ? 'Yes' : 'No'
+              innerLabelBadgeList:[
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList:
+                  assesseeSetUpModule?.assesseeDistinctShareApproval? 'Yes':'No'
+                },
+                {
+                  labelTextTwoBadge: 'fees',
+                  innerLabelBadgeList:
+                  assesseeSetUpModule?.assesseeDistinctShareFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList:
+                  assesseeSetUpModule?.assesseeDistinctSharePermission? 'Yes'
+                  :'No' 
+                },
+
+              ]
             },
             {
               labelTextTwoBadge: 'sign-on',
@@ -476,7 +497,28 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                     : 'No'
                 }
               ]
-            }
+            },
+            {
+              labelTextTwoBadge: 'transfer',
+              innerLabelBadgeList:[
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList:
+                  assesseeSetUpModule?.assesseeDistinctTransferApproval	? 'Yes':'No'
+                },
+                {
+                  labelTextTwoBadge: 'fees',
+                  innerLabelBadgeList:
+                  assesseeSetUpModule?.assesseeDistinctTransferFee || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList:
+                  assesseeSetUpModule?.assesseeDistinctTransferPermission? 'Yes'
+                  :'No' 
+                },
+              ]
+            },
           ]
         },
         {
@@ -506,7 +548,43 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupShare ? 'Yes' : 'No'
+              //innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupShare ? 'Yes' : 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupShareApproval?'Yes':'No'
+                },
+                {
+                  labelTextTwoBadge: 'fees',
+                  innerLabelBadgeList: 
+                  assesseeSetUpModule?.assesseeGroupShareFee || 'No'	
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: 
+                    assesseeSetUpModule?.assesseeGroupSharePermission?'Yes':'No'	
+                },
+              ]
+            },
+            {
+              labelTextTwoBadge: 'transfer',              
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupTransferApproval?'Yes':'No'	
+                },
+                {
+                  labelTextTwoBadge: 'fees',
+                  innerLabelBadgeList: informationBasicStr(
+                    assesseeSetUpModule?.assesseeGroupTransferFee||'No'	
+                  )
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: 
+                    assesseeSetUpModule?.assesseeGroupTransferPermission?'Yes':'No'                  
+                },
+              ]
             }
           ]
         },
@@ -625,15 +703,38 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               labelTextTwoBadge: 'share',
               innerLabelBadgeList: [
                 {
-                  labelTextTwoBadge: 'associate',
-                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctSharedAssociate
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctShareApproval
                     ? 'Yes'
                     : 'No'
                 },
                 {
-                  labelTextTwoBadge: 'node',
-                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctShare ? 'Yes' : 'No'
-                }
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctShareFee	||'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctSharePermission?'Yes':'No'
+                },                
+              ]
+            },
+            {
+              labelTextTwoBadge: 'tranfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctTransferApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctTransferFee||'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctTransferPermission	?'Yes':'No'
+                },                
               ]
             }
           ]
@@ -665,7 +766,41 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentGroupShare ? 'Yes' : 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentGroupShareApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentGroupShareFee||'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentGroupSharePermission?'Yes':'No'
+                },                
+              ]
+            },
+            {
+              labelTextTwoBadge: 'tranfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentGroupTransferApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentGroupTransferFee	||'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentGroupTransferPermission?'Yes':'No'
+                },                
+              ]
             }
           ]
         },
@@ -751,8 +886,49 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctShare ? 'Yes' : 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList:
+                    assignmentSetUpModule?.assignmentDistinctShareApproval?'Yes':'No'                  
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentDistinctInformationBasic
+                  )
+                },                
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentDistinctSharePermission?'Yes':'No'
+                  )
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'transfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList:
+                    assignmentSetUpModule?.assignmentDistinctShareApproval?'Yes':'No'                  
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentDistinctShareFee	||'No'
+                  )
+                },                
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: informationBasicStr(
+                    assignmentSetUpModule?.assignmentDistinctInformationBasic
+                  )
+                }
+              ]
             }
+
           ]
         },
         {
@@ -2034,17 +2210,17 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'approval',
-                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctCreateApproval
+                  innerLabelBadgeList: setUpAssociateModuleGeneric?.associateDistinctCreateApproval
                     ? 'Yes'
                     : 'No'
                 },
                 {
                   labelTextTwoBadge: 'fee',
-                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctCreateFee || 'No'
+                  innerLabelBadgeList: setUpAssociateModuleGeneric?.associateDistinctCreateFee || 'No'
                 },
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctCreatePermission
+                  innerLabelBadgeList: setUpAssociateModuleGeneric?.associateDistinctCreatePermission
                     ? 'Yes'
                     : 'No'
                 }
@@ -2056,31 +2232,31 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: informationBasicStr(
-                    setUpAssociateModule?.associateDistinctInformationBasic
+                    setUpAssociateModuleGeneric?.associateDistinctInformationBasic
                   )
                 }
               ]
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: setUpAssociateModule?.associateDistinctShare ? 'Yes' : 'No'
+              innerLabelBadgeList: setUpAssociateModuleGeneric?.associateDistinctShare ? 'Yes' : 'No'
             },
             {
               labelTextTwoBadge: 'sign-on',
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'approval',
-                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctSignOnApproval
+                  innerLabelBadgeList: setUpAssociateModuleGeneric?.associateDistinctSignOnApproval
                     ? 'Yes'
                     : 'No'
                 },
                 {
                   labelTextTwoBadge: 'fee',
-                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctSignOnFee || 'No'
+                  innerLabelBadgeList: setUpAssociateModuleGeneric?.associateDistinctSignOnFee || 'No'
                 },
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctSignOnPermission
+                  innerLabelBadgeList: setUpAssociateModuleGeneric?.associateDistinctSignOnPermission
                     ? 'Yes'
                     : 'No'
                 }
@@ -2096,7 +2272,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: setUpAssociateModule?.associateGroupCreatePermission
+                  innerLabelBadgeList: setUpAssociateModuleGeneric?.associateGroupCreatePermission
                     ? 'Yes'
                     : 'No'
                 }
@@ -2108,14 +2284,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: informationBasicStr(
-                    setUpAssociateModule?.associateGroupInformationBasic
+                    setUpAssociateModuleGeneric?.associateGroupInformationBasic
                   )
                 }
               ]
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: setUpAssociateModule?.associateGroupShare ? 'Yes' : 'No'
+              innerLabelBadgeList: setUpAssociateModuleGeneric?.associateGroupShare ? 'Yes' : 'No'
             }
           ]
         },
@@ -2127,7 +2303,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: setUpAssociateModule?.associateNodeCreatePermission
+                  innerLabelBadgeList: setUpAssociateModuleGeneric?.associateNodeCreatePermission
                     ? 'Yes'
                     : 'No'
                 }
@@ -2139,7 +2315,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: informationBasicStr(
-                    setUpAssociateModule?.associateNodeInformationBasic
+                    setUpAssociateModuleGeneric?.associateNodeInformationBasic
                   )
                 }
               ]
@@ -2447,17 +2623,17 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'approval',
-                  innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctCreateApproval
+                  innerLabelBadgeList: analyticSetUpModuleGeneric?.iguruAnalyticDistinctCreateApproval
                     ? 'Yes'
                     : 'No'
                 },
                 {
                   labelTextTwoBadge: 'fee',
-                  innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctCreateFee || 'No'
+                  innerLabelBadgeList: analyticSetUpModuleGeneric?.iguruAnalyticDistinctCreateFee || 'No'
                 },
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctCreatePermission
+                  innerLabelBadgeList: analyticSetUpModuleGeneric?.iguruAnalyticDistinctCreatePermission
                     ? 'Yes'
                     : 'No'
                 }
@@ -2469,14 +2645,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: informationBasicStr(
-                    analyticSetUpModule?.iguruAnalyticTypeInformationBasic
+                    analyticSetUpModuleGeneric?.iguruAnalyticTypeInformationBasic
                   )
                 }
               ]
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctShare ? 'Yes' : 'No'
+              innerLabelBadgeList: analyticSetUpModuleGeneric?.iguruAnalyticDistinctShare ? 'Yes' : 'No'
             }
           ]
         },
@@ -2488,7 +2664,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticGroupCreatePermission
+                  innerLabelBadgeList: analyticSetUpModuleGeneric?.iguruAnalyticGroupCreatePermission
                     ? 'Yes'
                     : 'No'
                 }
@@ -2500,14 +2676,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: informationBasicStr(
-                    analyticSetUpModule?.iguruAnalyticGroupInformationBasic
+                    analyticSetUpModuleGeneric?.iguruAnalyticGroupInformationBasic
                   )
                 }
               ]
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticGroupShare ? 'Yes' : 'No'
+              innerLabelBadgeList: analyticSetUpModuleGeneric?.iguruAnalyticGroupShare ? 'Yes' : 'No'
             }
           ]
         },
@@ -2519,7 +2695,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticTypeCreatePermission
+                  innerLabelBadgeList: analyticSetUpModuleGeneric?.iGuruAnalyticTypeCreatePermission
                     ? 'Yes'
                     : 'No'
                 }
@@ -2531,14 +2707,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: informationBasicStr(
-                    analyticSetUpModule?.iGuruAnalyticTypeInformationBasic
+                    analyticSetUpModuleGeneric?.iGuruAnalyticTypeInformationBasic
                   )
                 }
               ]
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticTypeShare ? 'Yes' : 'No'
+              innerLabelBadgeList: analyticSetUpModuleGeneric?.iGuruAnalyticTypeShare ? 'Yes' : 'No'
             }
           ]
         },
@@ -2621,15 +2797,15 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'approval',
-                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreateApproval ? 'Yes' : 'No'
+                  innerLabelBadgeList: itemSetUpModuleGeneric?.itemDistinctCreateApproval ? 'Yes' : 'No'
                 },
                 {
                   labelTextTwoBadge: 'fee',
-                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreateFee || 'No'
+                  innerLabelBadgeList: itemSetUpModuleGeneric?.itemDistinctCreateFee || 'No'
                 },
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: itemSetUpModuleGeneric?.itemDistinctCreatePermission ? 'Yes' : 'No'
                 }
               ]
             },
@@ -2638,13 +2814,13 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'basic',
-                  innerLabelBadgeList: informationBasicStr(itemSetUpModule?.itemInformationBasic)
+                  innerLabelBadgeList: informationBasicStr(itemSetUpModuleGeneric?.itemInformationBasic)
                 }
               ]
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: itemSetUpModule?.itemDistinctShare ? 'Yes' : 'No'
+              innerLabelBadgeList: itemSetUpModuleGeneric?.itemDistinctShare ? 'Yes' : 'No'
             }
           ]
         },
@@ -2656,7 +2832,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: itemSetUpModule?.itemGroupCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: itemSetUpModuleGeneric?.itemGroupCreatePermission ? 'Yes' : 'No'
                 }
               ]
             },
@@ -2666,14 +2842,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: informationBasicStr(
-                    itemSetUpModule?.itemGroupInformationBasic
+                    itemSetUpModuleGeneric?.itemGroupInformationBasic
                   )
                 }
               ]
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: itemSetUpModule?.itemGroupShare ? 'Yes' : 'No'
+              innerLabelBadgeList: itemSetUpModuleGeneric?.itemGroupShare ? 'Yes' : 'No'
             }
           ]
         },
@@ -2685,7 +2861,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: itemSetUpModule?.itemTypeCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: itemSetUpModuleGeneric?.itemTypeCreatePermission ? 'Yes' : 'No'
                 }
               ]
             },
@@ -2695,14 +2871,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'basic',
                   innerLabelBadgeList: informationBasicStr(
-                    itemSetUpModule?.itemTypeInformationBasic
+                    itemSetUpModuleGeneric?.itemTypeInformationBasic
                   )
                 }
               ]
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: itemSetUpModule?.itemTypeShare ? 'Yes' : 'No'
+              innerLabelBadgeList: itemSetUpModuleGeneric?.itemTypeShare ? 'Yes' : 'No'
             }
           ]
         },
