@@ -30,24 +30,24 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
       status: ''
     });
   }
-  const allocationList = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'group',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: assessmentTypeGroupList
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    }
-  ];
+  // const allocationList = [
+  //   {
+  //     id: 'a1',
+  //     labelTextOneOne: 'group',
+  //     labelTextOneOneBadgeOne: '',
+  //     labelTextOneOneBadgeTwo: '',
+  //     labelTextOneOneBadgeThree: '',
+  //     labelTextOneOneBadgeFour: '',
+  //     labelTextOneOneBadges: [
+  //       {
+  //         labelTextOneOneBadge: '',
+  //         innerList: assessmentTypeGroupList
+  //       }
+  //     ],
+  //     innerInfo: 'No Information',
+  //     isListCard: true
+  //   }
+  // ];
   const list3 = [
     {
       id: 'a1',
@@ -117,16 +117,28 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
       isListCard: false
     }
   ];
-  const reviseAllocation = (e) => {
-    const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('=====>', labelName);
-    if (labelName === 'group') {
-      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'assessments');
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'assessmentsTYPECREATE' }
-      });
+  const classificationList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'classification',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
     }
+  ];
+  
+  const reviseClassification = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    console.log('=====>', labelName);   
   };
 
   return (
@@ -137,30 +149,6 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
       }}
     >
       <>
-        <div className={'containerPadding'}>
-          <Paper className={'dossierContainerTop'}>
-            {allocationList.map((ob) => {
-              return (
-                <div key={ob.id}>
-                  {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      onClickRevise={reviseAllocation}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  ) : (
-                    <DisplayPanelAccordianInformation
-                      onClickRevise={reviseAllocation}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </Paper>
-        </div>
         <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list3.map((ob) => {
@@ -176,6 +164,31 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
             })}
           </Paper>
         </div>
+        <div className={'containerPadding'}>
+          <Paper className={'dossierContainerTop'}>
+            {classificationList.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <DisplayPanelAccordianReviewListOne
+                      onClickRevise={reviseClassification}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={reviseClassification}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+        </div>
+
       </>
       {isMobile && (
         <div className={'containerPadding'} style={{ height: '55px' }}>

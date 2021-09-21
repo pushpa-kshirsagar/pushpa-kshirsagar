@@ -149,8 +149,8 @@ const PopUpTypeCreate = (props) => {
           { id: 'Generic', name: 'Generic' }
         ]}
         mappingValue={'id'}
-        inputHeader={'classification'}
-        inputHeaderBadgeOne={'primary'}
+        inputHeader={''}
+        inputHeaderBadgeOne={''}
         inputHeaderBadgeTwo={''}
         labelval={''}
         headerPanelColour={'genericOne'}

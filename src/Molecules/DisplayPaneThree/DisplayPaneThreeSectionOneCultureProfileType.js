@@ -29,24 +29,24 @@ const DisplayPaneThreeSectionOneCultureProfileType = () => {
       status: ''
     });
   }
-  const allocationList = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'group',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: cultureProfileTypeGroupList
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    }
-  ];
+  // const allocationList = [
+  //   {
+  //     id: 'a1',
+  //     labelTextOneOne: 'group',
+  //     labelTextOneOneBadgeOne: '',
+  //     labelTextOneOneBadgeTwo: '',
+  //     labelTextOneOneBadgeThree: '',
+  //     labelTextOneOneBadgeFour: '',
+  //     labelTextOneOneBadges: [
+  //       {
+  //         labelTextOneOneBadge: '',
+  //         innerList: cultureProfileTypeGroupList
+  //       }
+  //     ],
+  //     innerInfo: 'No Information',
+  //     isListCard: true
+  //   }
+  // ];
   const list3 = [
     {
       id: 'a1',
@@ -118,16 +118,29 @@ const DisplayPaneThreeSectionOneCultureProfileType = () => {
       isListCard: false
     }
   ];
-  const reviseAllocation = (e) => {
+
+  const classificationList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'classification',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    }
+  ];
+  const reviseCLassification = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
-    if (labelName === 'group') {
-      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'culture profiles');
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'culture profilesTYPECREATE' }
-      });
-    }
+    
   };
 
   return (
@@ -137,31 +150,7 @@ const DisplayPaneThreeSectionOneCultureProfileType = () => {
         overflow: 'overlay'
       }}
     >
-      <>
-        <div className={'containerPadding'}>
-          <Paper className={'dossierContainerTop'}>
-            {allocationList.map((ob) => {
-              return (
-                <div key={ob.id}>
-                  {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      onClickRevise={reviseAllocation}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  ) : (
-                    <DisplayPanelAccordianInformation
-                      onClickRevise={reviseAllocation}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </Paper>
-        </div>
+      <>        
         <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list3.map((ob) => {
@@ -171,6 +160,30 @@ const DisplayPaneThreeSectionOneCultureProfileType = () => {
                     <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
                   ) : (
                     <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+        </div>
+        <div className={'containerPadding'}>
+          <Paper className={'dossierContainerTop'}>
+            {classificationList.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <DisplayPanelAccordianReviewListOne
+                      onClickRevise={reviseCLassification}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={reviseCLassification}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

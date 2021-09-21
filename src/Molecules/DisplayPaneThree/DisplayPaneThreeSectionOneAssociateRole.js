@@ -31,24 +31,24 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
     });
   }
 
-  const allocationList = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'group',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: associateRoleGroupList
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    }
-  ];
+  // const allocationList = [
+  //   {
+  //     id: 'a1',
+  //     labelTextOneOne: 'group',
+  //     labelTextOneOneBadgeOne: '',
+  //     labelTextOneOneBadgeTwo: '',
+  //     labelTextOneOneBadgeThree: '',
+  //     labelTextOneOneBadgeFour: '',
+  //     labelTextOneOneBadges: [
+  //       {
+  //         labelTextOneOneBadge: '',
+  //         innerList: associateRoleGroupList
+  //       }
+  //     ],
+  //     innerInfo: 'No Information',
+  //     isListCard: true
+  //   }
+  // ];
   const list3 = [
     {
       id: 'a1',
@@ -371,6 +371,22 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
       isMultiInfoCard: true
     },
     {
+      id: 'a-classification',
+      labelTextOneOne: 'classification',
+      labelTextOneOneBadgeOne: '',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    },
+    {
       id: 'a-iGuru Analytics',
       labelTextOneOne: 'iGuru Analytics',
       labelTextOneOneBadges: [
@@ -563,30 +579,6 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
       }}
     >
       <>
-        <div className={'containerPadding'}>
-          <Paper className={'dossierContainerTop'}>
-            {allocationList.map((ob) => {
-              return (
-                <div key={ob.id}>
-                  {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      onClickRevise={reviseAllocation}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  ) : (
-                    <DisplayPanelAccordianInformation
-                      onClickRevise={reviseAllocation}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </Paper>
-        </div>
         <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list3.map((ob) => {
