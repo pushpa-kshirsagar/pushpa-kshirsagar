@@ -890,19 +890,17 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList:
-                    assignmentSetUpModule?.assignmentDistinctShareApproval?'Yes':'No'                  
+                    assignmentSetUpModule?.assignmentDistinctShareApproval	?'Yes':'No'                  
                 },
                 {
                   labelTextTwoBadge: 'fee',
-                  innerLabelBadgeList: informationBasicStr(
-                    assignmentSetUpModule?.assignmentDistinctInformationBasic
-                  )
+                  innerLabelBadgeList: 
+                    assignmentSetUpModule?.assignmentDistinctShareFee	||'No'                  
                 },                
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: informationBasicStr(
+                  innerLabelBadgeList:
                     assignmentSetUpModule?.assignmentDistinctSharePermission?'Yes':'No'
-                  )
                 }
               ]
             },
@@ -912,19 +910,18 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList:
-                    assignmentSetUpModule?.assignmentDistinctShareApproval?'Yes':'No'                  
+                    assignmentSetUpModule?.assignmentDistinctTransferApproval	?'Yes':'No'                  
                 },
                 {
                   labelTextTwoBadge: 'fee',
-                  innerLabelBadgeList: informationBasicStr(
-                    assignmentSetUpModule?.assignmentDistinctShareFee	||'No'
-                  )
+                  innerLabelBadgeList:
+                    assignmentSetUpModule?.assignmentDistinctTransferFee	
+                    ||'No'
                 },                
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: informationBasicStr(
-                    assignmentSetUpModule?.assignmentDistinctInformationBasic
-                  )
+                  innerLabelBadgeList:
+                    assignmentSetUpModule?.assignmentDistinctTransferPermission	
                 }
               ]
             }
@@ -958,7 +955,44 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupShare ? 'Yes' : 'No'
+              innerLabelBadgeList:[
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupShareApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fees',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupShareFee	||'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupSharePermission? 'Yes'
+                    : 'No'
+                },
+              ]
+            },
+            {
+              labelTextTwoBadge: 'tranfer',
+              innerLabelBadgeList:[
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupTransferApproval
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fees',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupTransferFee|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupTransferPermission	
+                    ? 'Yes'
+                    : 'No'
+                },
+              ]
             }
           ]
         },
@@ -1044,7 +1078,44 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: setUpAssociateModule?.associateDistinctShare ? 'Yes' : 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctShareApproval	? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctShareFee|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctSharePermission	
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'transfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctTransferApproval	
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctTransferFee	|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateDistinctTransferPermission	
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
             },
             {
               labelTextTwoBadge: 'sign-on',
@@ -1096,8 +1167,45 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: setUpAssociateModule?.associateGroupShare ? 'Yes' : 'No'
-            }
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: setUpAssociateModule?.associateGroupShareApproval? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: setUpAssociateModule?.associateGroupShareFee	|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateGroupSharePermission	
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'transfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: setUpAssociateModule?.associateGroupTransferApproval		
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: setUpAssociateModule?.associateGroupTransferFee|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: setUpAssociateModule?.associateGroupTransferPermission		
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
           ]
         },
         {
@@ -1457,7 +1565,45 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctShare ? 'Yes' : 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticDistinctShareApproval	
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticDistinctShareFee	|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticDistinctSharePermission	
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'transfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticDistinctTransferApproval	
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticDistinctTransferFee|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticDistinctTransferPermission	
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
             }
           ]
         },
@@ -1488,7 +1634,45 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticGroupShare ? 'Yes' : 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticGroupShareApproval		
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticGroupShareFee|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticGroupSharePermission		
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'transfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticGroupTransferApproval		
+                    ? 'Yes'
+                    : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticGroupTransferFee	|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticGroupTransferPermission		
+                    ? 'Yes'
+                    : 'No'
+                }
+              ]
             }
           ]
         },
@@ -1625,7 +1809,38 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: itemSetUpModule?.itemDistinctShare ? 'Yes' : 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctShareApproval	? 'Yes' : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctShareFee	|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctSharePermission	? 'Yes' : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'transfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctTransferApproval	? 'Yes' : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctTransferFee	|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctTransferPermission	
+                  ? 'Yes' : 'No'
+                }
+              ]
             }
           ]
         },
@@ -1654,7 +1869,40 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'share',
-              innerLabelBadgeList: itemSetUpModule?.itemGroupShare ? 'Yes' : 'No'
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: itemSetUpModule?.itemGroupShareApproval	? 'Yes' : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: itemSetUpModule?.itemGroupShareFee	
+                  || 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: itemSetUpModule?.itemGroupSharePermission	
+                  ? 'Yes' : 'No'
+                }
+              ]
+            },
+            {
+              labelTextTwoBadge: 'transfer',
+              innerLabelBadgeList: [
+                {
+                  labelTextTwoBadge: 'approval',
+                  innerLabelBadgeList: itemSetUpModule?.itemGroupTransferApproval	? 'Yes' : 'No'
+                },
+                {
+                  labelTextTwoBadge: 'fee',
+                  innerLabelBadgeList: itemSetUpModule?.itemGroupTransferFee	|| 'No'
+                },
+                {
+                  labelTextTwoBadge: 'permission',
+                  innerLabelBadgeList: itemSetUpModule?.itemGroupTransferPermission		
+                  ? 'Yes' : 'No'
+                }
+              ]
             }
           ]
         },
