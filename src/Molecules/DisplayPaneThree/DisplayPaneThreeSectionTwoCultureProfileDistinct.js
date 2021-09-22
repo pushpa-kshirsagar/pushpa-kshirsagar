@@ -180,7 +180,7 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
     tempCoreList.forEach((ob) => {
       cultureCoreList.push({
         id: ob.cultureProfileCultureDimensionTag,
-        textOne: ob?.iguruAnalyticFrameworkOneClusterSecondary || '',
+        textOne: ob?.iGuruAnalyticFrameworkOneClusterSecondary || '',
         textTwo: '',
         status: ''
       });

@@ -85,11 +85,12 @@ const PopUpSignOnAssociate = () => {
     }
   }, [assesseeInfo.assesseeInformationData, history]);
 
-  // console.log("NODE LIST", coreNodeReviewListData);
+  console.log("NODE LIST", coreNodeReviewListData);
   const coreNodeReviewListDataRemoveSelf = [];
   if (coreNodeReviewListData.length > 0) {
-    const { associateDescendantAll, associateRoot } = coreNodeReviewListData[0];
-    let tempArr = [...associateDescendantAll, associateRoot];
+    // const { associateDescendantAll, associateRoot } = coreNodeReviewListData[0];
+    // let tempArr = [...associateDescendantAll, associateRoot];
+    let tempArr = [...coreNodeReviewListData]
     tempArr.forEach((ob) => {
       if (responseObject.id !== ob.id) {
         coreNodeReviewListDataRemoveSelf.push(ob);
@@ -858,7 +859,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ANALYTIC_SHARE_POPUP'}
-        tag={'iguruAnalyticDistinctShare'}
+        tag={'iGuruAnalyticDistinctShare'}
         label={'share'}
         listSelect={[
           { id: false, name: 'No' },
@@ -880,7 +881,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ANALYTIC_GROUP_SHARE_POPUP'}
-        tag={'iguruAnalyticGroupShare'}
+        tag={'iGuruAnalyticGroupShare'}
         label={'share'}
         listSelect={[
           { id: false, name: 'No' },
@@ -902,7 +903,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ANALYTIC_TYPE_SHARE_POPUP'}
-        tag={'iguruAnalyticTypeShare'}
+        tag={'iGuruAnalyticTypeShare'}
         label={'share'}
         listSelect={[
           { id: false, name: 'No' },
@@ -946,7 +947,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSCREATEAPPROVALPOPUP'}
-        tag={'iguruAnalyticDistinctCreateApproval'}
+        tag={'iGuruAnalyticDistinctCreateApproval'}
         label={'approval'}
         listSelect={[
           { id: false, name: 'Approval Not Required' },
@@ -1078,7 +1079,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSCREATEPERMISSIONPOPUP'}
-        tag={'iguruAnalyticDistinctCreatePermission'}
+        tag={'iGuruAnalyticDistinctCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1210,7 +1211,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP'}
-        tag={'iguruAnalyticGroupCreatePermission'}
+        tag={'iGuruAnalyticGroupCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1386,7 +1387,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSTYPECREATEPERMISSIONPOPUP'}
-        tag={'iguruAnalyticTypeCreatePermission'}
+        tag={'iGuruAnalyticTypeCreatePermission'}
         label={'permission'}
         listSelect={[
           { id: false, name: 'No' },
@@ -1546,7 +1547,7 @@ const PopUpSignOnAssociate = () => {
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         isRequired={false}
-        actualLableValue={'iguruAnalyticDistinctCreateFee'}
+        actualLableValue={'iGuruAnalyticDistinctCreateFee'}
         basicInfo={associateInfo?.informationSetup?.analytic || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
@@ -1667,7 +1668,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSINFODISTINCTBASICPOPUP'}
-        tag={'iguruAnalyticDistinctInformationBasic'}
+        tag={'iGuruAnalyticDistinctInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -1811,7 +1812,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSBASICINFOGROUPPOPUP'}
-        tag={'iguruAnalyticGroupInformationBasic'}
+        tag={'iGuruAnalyticGroupInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
@@ -2003,7 +2004,7 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'IGURUANALYTICSBASICINFOTYPEPOPUP'}
-        tag={'iguruAnalyticTypeInformationBasic'}
+        tag={'iGuruAnalyticTypeInformationBasic'}
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[

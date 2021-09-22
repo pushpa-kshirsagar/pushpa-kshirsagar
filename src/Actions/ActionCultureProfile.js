@@ -634,7 +634,7 @@ export const getCultureProfileDiamentionList = (selectedAssociateInfo, dispatch)
         searchBy: [
           {
             dataType: 'string',
-            conditionColumn: 'iguruAnalyticFrameworkOneName',
+            conditionColumn: 'iGuruAnalyticFrameworkOneName',
             conditionValue: {
               condition: 'eq',
               value: {

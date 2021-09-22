@@ -156,8 +156,8 @@ class JobWeightageTableTemplate extends Component {
                       }}
                       open={
                         value.id === this.state.isShowTooltipId &&
-                        value?.iguruAnalyticFrameworkOneClusterSecondaryExplanation
-                          .iguruAnalyticFrameworkOneClusterSecondaryExplanationSecondary
+                        value?.iGuruAnalyticFrameworkOneClusterSecondaryExplanation
+                          .iGuruAnalyticFrameworkOneClusterSecondaryExplanationSecondary
                           ? true
                           : false
                       }
@@ -169,8 +169,8 @@ class JobWeightageTableTemplate extends Component {
                         >
                           <div style={{ display: 'block' }}>
                             {
-                              value?.iguruAnalyticFrameworkOneClusterSecondaryExplanation
-                                .iguruAnalyticFrameworkOneClusterSecondaryExplanationSecondary
+                              value?.iGuruAnalyticFrameworkOneClusterSecondaryExplanation
+                                .iGuruAnalyticFrameworkOneClusterSecondaryExplanationSecondary
                             }
                           </div>
                         </Typography>

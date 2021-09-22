@@ -492,7 +492,7 @@ const PopUpCultureProfileCreate = (props) => {
             ListData={value.cultureDimensions}
             isTooltipActive={true}
             selectedList={cultureDiamentionArr}
-            textOne={'iguruAnalyticFrameworkOneClusterSecondary'}
+            textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
             textTwo={''}
             tooltipActiveText={'analyticFrameworkOneClusterSecondaryExplanationSecondary'}
             dataValue={value.group}

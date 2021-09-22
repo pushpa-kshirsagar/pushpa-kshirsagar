@@ -283,7 +283,7 @@ class CultureWeightageTableTemplate extends Component {
                             });
                           }}
                         >
-                          {value?.iguruAnalyticFrameworkOneClusterSecondary || 'name'}
+                          {value?.iGuruAnalyticFrameworkOneClusterSecondary || 'name'}
                         </span>
                         <span
                           style={{ cursor: 'pointer', fontSize: '1rem' }}

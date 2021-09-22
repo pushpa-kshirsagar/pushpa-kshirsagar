@@ -34,15 +34,16 @@ const DisplayPaneThreeSectionTwoAssignmentGroup = () => {
     assignmentList = relatedReviewListPaneThree?.assignment || [];
   }
   let assignmentArray = [];
-  assignmentList.forEach((ob) => {
-    const { id, informationBasic } = ob;
-    assignmentArray.push({
-      id,
-      textOne: informationBasic?.assignmentName || '',
-      textTwo: informationBasic?.assignmentDescription || '',
-      status: ''
+  assignmentList &&
+    assignmentList.forEach((ob) => {
+      const { id, informationBasic } = ob;
+      assignmentArray.push({
+        id,
+        textOne: informationBasic?.assignmentName || '',
+        textTwo: informationBasic?.assignmentDescription || '',
+        status: ''
+      });
     });
-  });
 
   const list2 = [
     {

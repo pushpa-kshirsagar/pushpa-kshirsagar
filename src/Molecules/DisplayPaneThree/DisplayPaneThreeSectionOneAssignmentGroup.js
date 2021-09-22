@@ -9,7 +9,7 @@ import { Paper } from '@material-ui/core';
 import { SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 
-//ascendant 
+//ascendant
 let ascendantAll = [];
 let ascendantPrimary = [];
 let ascendantSecondary = [];
@@ -21,7 +21,7 @@ let descendantSecondary = [];
 const DisplayPaneThreeSectionOneAssignmentGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationSetup } = responseObject;
   const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -266,11 +266,20 @@ const DisplayPaneThreeSectionOneAssignmentGroup = () => {
       id: 'a1',
       labelTextOneOne: 'classification',
       labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',      
-      labelTextOneOneBadges: [        
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: [
+            {
+              id: '001',
+              textOne:
+                informationSetup?.assignmentGroupClassification
+                  ?.assignmentGroupClassificationPrimary,
+              textTwo: '',
+              status: ''
+            }
+          ]
         }
       ],
       innerInfo: 'No Information',

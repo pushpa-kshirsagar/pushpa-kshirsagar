@@ -248,29 +248,29 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
     //iGuru Analytics
 
     iguruAnalyticDistinct = getPermissionStr(
-      rolePermission?.assesseeIguruAnalyticDistinctPermission
+      rolePermission?.assesseeiGuruAnalyticDistinctPermission
     );
     iguruAnalyticDistinctPer =
-      rolePermission.assesseeIguruAnalyticDistinctPermission.assesseePermissionInformation;
-    iguruAnalyticGroup = getPermissionStr(rolePermission?.assesseeIguruAnalyticGroupPermission);
+      rolePermission?.assesseeiGuruAnalyticDistinctPermission?.assesseePermissionInformation;
+    iguruAnalyticGroup = getPermissionStr(rolePermission?.assesseeiGuruAnalyticGroupPermission);
     iguruAnalyticGroupPer =
-      rolePermission.assesseeIguruAnalyticGroupPermission.assesseePermissionInformation;
-    iguruAnalyticManager = getPermissionStr(rolePermission?.assesseeIguruAnalyticManagerPermission);
+      rolePermission?.assesseeiGuruAnalyticGroupPermission?.assesseePermissionInformation;
+    iguruAnalyticManager = getPermissionStr(rolePermission?.assesseeiGuruAnalyticManagerPermission);
     iguruAnalyticManagerPer =
-      rolePermission.assesseeIguruAnalyticManagerPermission.assesseePermissionInformation;
-    iguruAnalyticType = getPermissionStr(rolePermission?.assesseeIguruAnalyticTypePermission);
+      rolePermission?.assesseeiGuruAnalyticManagerPermission.assesseePermissionInformation;
+    iguruAnalyticType = getPermissionStr(rolePermission?.assesseeiGuruAnalyticTypePermission);
     iguruAnalyticTypePer =
-      rolePermission.assesseeIguruAnalyticTypePermission.assesseePermissionInformation;
+      rolePermission?.assesseeiGuruAnalyticTypePermission.assesseePermissionInformation;
     //Items
 
     itemDistinct = getPermissionStr(rolePermission?.assesseeItemDistinctPermission);
-    itemDistinctPer = rolePermission.assesseeItemDistinctPermission.assesseePermissionInformation;
+    itemDistinctPer = rolePermission?.assesseeItemDistinctPermission.assesseePermissionInformation;
     itemGroup = getPermissionStr(rolePermission?.assesseeItemGroupPermission);
-    itemGroupPer = rolePermission.assesseeItemGroupPermission.assesseePermissionInformation;
+    itemGroupPer = rolePermission?.assesseeItemGroupPermission.assesseePermissionInformation;
     itemManager = getPermissionStr(rolePermission?.assesseeItemManagerPermission);
-    itemManagerPer = rolePermission.assesseeItemManagerPermission.assesseePermissionInformation;
+    itemManagerPer = rolePermission?.assesseeItemManagerPermission.assesseePermissionInformation;
     itemType = getPermissionStr(rolePermission?.assesseeItemTypePermission);
-    itemTypePer = rolePermission.assesseeItemTypePermission.assesseePermissionInformation;
+    itemTypePer = rolePermission?.assesseeItemTypePermission.assesseePermissionInformation;
   }
 
   const setUpList = [

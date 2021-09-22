@@ -179,7 +179,7 @@ const PopUpJobProfileCreate = (props) => {
           searchBy: [
             {
               dataType: 'string',
-              conditionColumn: 'iguruAnalyticFrameworkOneName',
+              conditionColumn: 'iGuruAnalyticFrameworkOneName',
               conditionValue: {
                 condition: 'eq',
                 value: {
@@ -592,7 +592,7 @@ const PopUpJobProfileCreate = (props) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobDomain');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobDomain}
-        textOne={'iguruAnalyticFrameworkOneClusterSecondary'}
+        textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         // setErrorMsg={setRequiredErrorMsg}
         // errorMsg={requiredErrorMsg}
@@ -626,7 +626,7 @@ const PopUpJobProfileCreate = (props) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobFunction');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobFunction}
-        textOne={'iguruAnalyticFrameworkOneClusterSecondary'}
+        textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}
@@ -660,7 +660,7 @@ const PopUpJobProfileCreate = (props) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobRole');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobRole}
-        textOne={'iguruAnalyticFrameworkOneClusterSecondary'}
+        textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}
@@ -710,7 +710,7 @@ const PopUpJobProfileCreate = (props) => {
                 selectedList={
                   jobProfileInformation.informationFramework.jobProfileJobCompetencyShortlisted
                 }
-                textOne={'iguruAnalyticFrameworkOneClusterSecondary'}
+                textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
                 textTwo={''}
                 tooltipActiveText={''}
                 dataValue={value.group}
@@ -754,7 +754,7 @@ const PopUpJobProfileCreate = (props) => {
                   onClickNext={updateCompetencySiftList}
                   isJobProfileList={true}
                   id={value.id}
-                  textOne={value.iguruAnalyticFrameworkOneClusterSecondary}
+                  textOne={value.iGuruAnalyticFrameworkOneClusterSecondary}
                   // textTwo={value.jobProfilerFrameworkSecondaryDescriptionPrimary}
                   valueArr={['indispensable', 'desirable', 'probable', 'removable']}
                   nextPopUpValue={
@@ -816,7 +816,7 @@ const PopUpJobProfileCreate = (props) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobCompetencyCore');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobCompetencyCore}
-        textOne={'iguruAnalyticFrameworkOneClusterSecondary'}
+        textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}

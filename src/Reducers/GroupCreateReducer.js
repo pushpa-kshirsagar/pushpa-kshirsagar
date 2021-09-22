@@ -51,7 +51,7 @@ const initialState = {
     informationSetup: {
       assesseeGroupClassification: {
         assesseeGroupClassificationPrimary: '',
-        assesseeGroupClassificationSecondary: ''
+        // assesseeGroupClassificationSecondary: ''
       }
     }
   },
@@ -65,7 +65,7 @@ const initialState = {
     },
     informationAllocation: {
       assessmentGroupManager: {
-        assessmentGroupManagerPrimary: []
+        assessmentGroupManagerPrimary: ['60ab6eea45fbc840ff3f4140']
       },
       assessmentGroupNode: {
         assessmentGroupNodePrimary: [],
@@ -78,7 +78,7 @@ const initialState = {
     informationSetup: {
       assessmentGroupClassification: {
         assessmentGroupClassificationPrimary: '',
-        assessmentGroupClassificationSecondary: ''
+        // assessmentGroupClassificationSecondary: ''
       }
     }
   },
@@ -92,7 +92,7 @@ const initialState = {
     },
     informationAllocation: {
       assignmentGroupManager: {
-        assignmentGroupManagerPrimary: []
+        assignmentGroupManagerPrimary: ['60ab6eea45fbc840ff3f4140']
       },
       assignmentGroupNode: {
         assignmentGroupNodePrimary: [],
@@ -105,7 +105,7 @@ const initialState = {
     informationSetup: {
       assignmentGroupClassification: {
         assignmentGroupClassificationPrimary: '',
-        assignmentGroupClassificationSecondary: ''
+        // assignmentGroupClassificationSecondary: ''
       }
     }
   },
@@ -132,7 +132,7 @@ const initialState = {
     informationSetup: {
       associateGroupClassification: {
         associateGroupClassificationPrimary: '',
-        associateGroupClassificationSecondary: ''
+        // associateGroupClassificationSecondary: ''
       }
     }
   },
@@ -159,7 +159,7 @@ const initialState = {
     informationSetup: {
       itemGroupClassification: {
         itemGroupClassificationPrimary: '',
-        itemGroupClassificationSecondary: ''
+        // itemGroupClassificationSecondary: ''
       }
     }
   },
@@ -186,7 +186,6 @@ const initialState = {
     informationSetup: {
       cultureProfileGroupClassification: {
         cultureProfileGroupClassificationPrimary: '',
-        cultureProfileGroupClassificationSecondary: ''
       }
     }
   },
@@ -213,7 +212,7 @@ const initialState = {
     informationSetup: {
       jobProfileGroupClassification: {
         jobProfileGroupClassificationPrimary: '',
-        jobProfileGroupClassificationSecondary: ''
+        // jobProfileGroupClassificationSecondary: ''
       }
     }
   }
