@@ -12,10 +12,10 @@ import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordi
 const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationSetup } = responseObject;
   const dispatch = useDispatch();
 
-  //ascendant 
+  //ascendant
   let ascendantAll = [];
   let ascendantPrimary = [];
   let ascendantSecondary = [];
@@ -266,11 +266,19 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
       id: 'a1',
       labelTextOneOne: 'classification',
       labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',      
-      labelTextOneOneBadges: [        
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: [
+            {
+              id: '001',
+              textOne:
+                informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary,
+              textTwo: '',
+              status: ''
+            }
+          ]
         }
       ],
       innerInfo: 'No Information',
@@ -371,7 +379,7 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   const reviseClassification = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    console.log('=====>', labelName);    
+    console.log('=====>', labelName);
   };
 
   return (

@@ -41,15 +41,16 @@ const DisplayPaneThreeSectionTwoAssesseeGroup = () => {
     assessee = relatedReviewListPaneThree[0].assessee;
   }
   let assesseeArray = [];
-  assessee.forEach((ob) => {
-    const { id, informationBasic } = ob;
-    assesseeArray.push({
-      id,
-      textOne: `${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`,
-      textTwo: informationBasic.assesseeAlias || 'No Information',
-      status: ''
+  assessee &&
+    assessee.forEach((ob) => {
+      const { id, informationBasic } = ob;
+      assesseeArray.push({
+        id,
+        textOne: `${informationBasic.assesseeNamePrefix} ${informationBasic.assesseeNameFirst} ${informationBasic.assesseeNameOther} ${informationBasic.assesseeNameLast} ${informationBasic.assesseeNameSuffix}`,
+        textTwo: informationBasic.assesseeAlias || 'No Information',
+        status: ''
+      });
     });
-  });
 
   const list2 = [
     {

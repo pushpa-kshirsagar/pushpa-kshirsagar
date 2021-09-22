@@ -84,14 +84,16 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
             value: tempList
           }
         });
-        // yield put({
-        //   type: SET_ROLE_REDUCER_STATE,
-        //   payload: {
-        //     objectName: 'assesseeRole',
-        //     stateName: 'informationSetup',
-        //     value: userResponse.responseObject[0].informationSetup
-        //   }
-        // });
+        if (userResponse.responseObject[0].informationSetup) {
+          yield put({
+            type: SET_ROLE_REDUCER_STATE,
+            payload: {
+              objectName: 'assesseeRole',
+              stateName: 'informationSetup',
+              value: userResponse.responseObject[0].informationSetup
+            }
+          });
+        }
       }
     } else {
       yield put({ type: LOADER_STOP });

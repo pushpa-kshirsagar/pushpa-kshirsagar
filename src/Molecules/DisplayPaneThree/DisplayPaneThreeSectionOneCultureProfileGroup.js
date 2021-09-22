@@ -275,8 +275,8 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
             {
               id: '001',
               textOne:
-                informationSetup.cultureProfileGroupClassification
-                  .cultureProfileGroupClassificationPrimary,
+                informationSetup?.cultureProfileGroupClassification
+                  ?.cultureProfileGroupClassificationPrimary,
               textTwo: '',
               status: ''
             }
