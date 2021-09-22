@@ -20,7 +20,7 @@ let descendantSecondary = [];
 
 const DisplayPaneThreeSectionOneItemGroup = () => {
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement,informationSetup } = responseObject;
   const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -255,19 +255,29 @@ const DisplayPaneThreeSectionOneItemGroup = () => {
   ];
 
   const classificationList = [
+    // {
+    //   id: 'a1',
+    //   labelTextOneOne: 'classification',
+    //   labelTextOneOneBadgeOne: '',
+    //   labelTextOneOneBadgeTwo: '',      
+    //   labelTextOneOneBadges: [        
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       innerList: []
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true
+    // }
     {
       id: 'a1',
+      textOneOne:
+        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
+          .cultureProfileGroupClassificationPrimary) || 'No Information',
       labelTextOneOne: 'classification',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',      
-      labelTextOneOneBadges: [        
-        {
-          labelTextOneOneBadge: '',
-          innerList: []
-        }
-      ],
+      innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: true
+      isListCard: false
     }
   ];
 

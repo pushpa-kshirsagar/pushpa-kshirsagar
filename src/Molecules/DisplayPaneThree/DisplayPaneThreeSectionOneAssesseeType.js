@@ -13,7 +13,7 @@ const DisplayPaneThreeSectionOneAssesseeType = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationEngagement, informationAllocation } = responseObject;
+  const { informationEngagement, informationAllocation,informationSetup } = responseObject;
   const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -120,19 +120,13 @@ const DisplayPaneThreeSectionOneAssesseeType = () => {
   const classificaionList = [
     {
       id: 'a1',
+      textOneOne:
+        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
+          .cultureProfileGroupClassificationPrimary) || 'No Information',
       labelTextOneOne: 'classification',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: assesseeTypeGroupList
-        }
-      ],
+      innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: true
+      isListCard: false
     }
   ];
   const reviseClassification = (e) => {

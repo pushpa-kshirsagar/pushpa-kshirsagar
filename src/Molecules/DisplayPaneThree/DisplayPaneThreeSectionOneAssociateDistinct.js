@@ -465,7 +465,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                   assesseeSetUpModule?.assesseeDistinctShareApproval? 'Yes':'No'
                 },
                 {
-                  labelTextTwoBadge: 'fees',
+                  labelTextTwoBadge: 'fee',
                   innerLabelBadgeList:
                   assesseeSetUpModule?.assesseeDistinctShareFee || 'No'
                 },
@@ -508,7 +508,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                   assesseeSetUpModule?.assesseeDistinctTransferApproval	? 'Yes':'No'
                 },
                 {
-                  labelTextTwoBadge: 'fees',
+                  labelTextTwoBadge: 'fee',
                   innerLabelBadgeList:
                   assesseeSetUpModule?.assesseeDistinctTransferFee || 'No'
                 },
@@ -556,7 +556,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                   innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupShareApproval?'Yes':'No'
                 },
                 {
-                  labelTextTwoBadge: 'fees',
+                  labelTextTwoBadge: 'fee',
                   innerLabelBadgeList: 
                   assesseeSetUpModule?.assesseeGroupShareFee || 'No'	
                 },
@@ -575,7 +575,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                   innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupTransferApproval?'Yes':'No'	
                 },
                 {
-                  labelTextTwoBadge: 'fees',
+                  labelTextTwoBadge: 'fee',
                   innerLabelBadgeList: informationBasicStr(
                     assesseeSetUpModule?.assesseeGroupTransferFee||'No'	
                   )
@@ -966,7 +966,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                     : 'No'
                 },
                 {
-                  labelTextTwoBadge: 'fees',
+                  labelTextTwoBadge: 'fee',
                   innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupShareFee	||'No'
                 },
                 {
@@ -986,7 +986,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                     : 'No'
                 },
                 {
-                  labelTextTwoBadge: 'fees',
+                  labelTextTwoBadge: 'fee',
                   innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupTransferFee|| 'No'
                 },
                 {

@@ -265,27 +265,37 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
   const classificationList = [
     {
       id: 'a1',
+      textOneOne:
+        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
+          .cultureProfileGroupClassificationPrimary) || 'No Information',
       labelTextOneOne: 'classification',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: [
-            {
-              id: '001',
-              textOne:
-                informationSetup.cultureProfileGroupClassification
-                  .cultureProfileGroupClassificationPrimary,
-              textTwo: '',
-              status: ''
-            }
-          ]
-        }
-      ],
+      innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: true
-    }
+      isListCard: false
+    },
+    // {
+    //   id: 'a2',
+    //   labelTextOneOne: 'classification',
+    //   labelTextOneOneBadgeOne: '',
+    //   labelTextOneOneBadgeTwo: '',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       innerList: [
+    //         {
+    //           id: '001',
+    //           textOne:
+    //             informationSetup?.cultureProfileGroupClassification
+    //               .cultureProfileGroupClassificationPrimary,
+    //           textTwo: '',
+    //           status: ''
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true
+    // }
   ];
 
   const reviseAllocation = (e) => {

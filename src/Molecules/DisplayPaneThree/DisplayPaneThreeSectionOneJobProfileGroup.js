@@ -22,7 +22,7 @@ const DisplayPaneThreeSectionOneJobProfileGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const dispatch = useDispatch();
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -260,6 +260,42 @@ const DisplayPaneThreeSectionOneJobProfileGroup = () => {
       isListCard: false
     }
   ];
+
+  const classificationList = [
+    {
+      id: 'a1',
+      textOneOne:
+        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
+          .cultureProfileGroupClassificationPrimary) || 'No Information',
+      labelTextOneOne: 'classification',
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false
+    },
+    // {
+    //   id: 'a2',
+    //   labelTextOneOne: 'classification',
+    //   labelTextOneOneBadgeOne: '',
+    //   labelTextOneOneBadgeTwo: '',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       innerList: [
+    //         {
+    //           id: '001',
+    //           textOne:
+    //             informationSetup?.cultureProfileGroupClassification
+    //               .cultureProfileGroupClassificationPrimary,
+    //           textTwo: '',
+    //           status: ''
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true
+    // }
+  ];
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -354,6 +390,12 @@ const DisplayPaneThreeSectionOneJobProfileGroup = () => {
     }
   };
 
+  const reviseClassification = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName); 
+  };
+
   return (
     <div
       style={{
@@ -426,6 +468,30 @@ const DisplayPaneThreeSectionOneJobProfileGroup = () => {
                   ) : (
                     <DisplayPanelAccordianInformation
                       onClickRevise={reviseEngagement}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+        </div>
+        <div className="containerPadding">
+          <Paper className={'dossierContainerTop'}>
+            {classificationList.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <DisplayPanelAccordianReviewListOne
+                      onClickRevise={reviseClassification}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={reviseClassification}
                       accordianObject={ob}
                       mode={reviewMode}
                     />
