@@ -35,19 +35,21 @@ const DisplayPaneThreeSectionTwoCultureProfileGroup = () => {
   }
 
   let cultureProfileList = [];
+  console.log('relatedReviewListPaneThree', relatedReviewListPaneThree);
   if (relatedReviewListPaneThree) {
     cultureProfileList = relatedReviewListPaneThree.cultureProfile;
   }
   let cultureProfileArray = [];
-  cultureProfileList.forEach((ob) => {
-    const { id, informationBasic } = ob;
-    cultureProfileArray.push({
-      id,
-      textOne: informationBasic?.cultureProfileName || '',
-      textTwo: informationBasic?.cultureProfileDescription || '',
-      status: ''
+  cultureProfileList &&
+    cultureProfileList.forEach((ob) => {
+      const { id, informationBasic } = ob;
+      cultureProfileArray.push({
+        id,
+        textOne: informationBasic?.cultureProfileName || '',
+        textTwo: informationBasic?.cultureProfileDescription || '',
+        status: ''
+      });
     });
-  });
 
   const list2 = [
     {

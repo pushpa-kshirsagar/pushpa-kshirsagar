@@ -143,7 +143,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
     informationSetup?.associateRolePermission?.associateAssociatePermission
   );
   let iguruAnalyticPermission = getPermissionStr(
-    informationSetup?.associateRolePermission?.associateIguruAnalyticPermission
+    informationSetup?.associateRolePermission?.associateiGuruAnalyticPermission
   );
   let itemPermission = getPermissionStr(
     informationSetup?.associateRolePermission?.associateItemPermission
@@ -546,11 +546,15 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'permissionStateTwo', value: selected?.labelTextTwoBadge }
       });
+      let camelCaseStr =
+        labelName === 'iGuru Analytics'
+          ? 'iGuruAnalytic'
+          : splitCamelCaseToString(labelName).slice(0, -1);
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: {
           stateName: 'permissionStateThree',
-          value: 'associate' + splitCamelCaseToString(labelName).slice(0, -1) + 'Permission'
+          value: 'associate' + camelCaseStr + 'Permission'
         }
       });
       dispatch({

@@ -155,10 +155,20 @@ const PopUpAssesseeCreateSignOn = (props) => {
     if (tempCommunication === 'email address (secondary)') {
       informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
+    // add default root node in allocation if node not selected
+    if (informationAllocation.assesseeNode.assesseeNodePrimary.length === 0) {
+      let rootNode = coreNodeReviewListData.filter((node) => {
+        return node.informationFramework.associateNodeAscendantPrimary === null;
+      });
+      let rootNodeId = rootNode[0].id;
+      informationAllocation.assesseeNode.assesseeNodePrimary = [
+        ...informationAllocation.assesseeNode.assesseeNodePrimary,
+        rootNodeId
+      ];
+    }
 
-    //6083d82a5c42683849ce14d0 parent associate id
     let requestObect = {
-      assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
+      assesseeId: selectedAssociateInfo?.assesseeId || '',
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary ||
         associateTagPrimary,
@@ -172,7 +182,7 @@ const PopUpAssesseeCreateSignOn = (props) => {
       }
     };
     console.log('ONCLICK assessee Create Yes', requestObect);
-    console.log('loading start');
+    // console.log('loading start');
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSEE_SAGA, payload: requestObect });
   };
@@ -372,6 +382,7 @@ const PopUpAssesseeCreateSignOn = (props) => {
     });
   };
   console.log('assesseeInfo', assesseeInfo);
+  console.log('coreNodeReviewListData', coreNodeReviewListData);
   const onClickCheckbox = (e, inputHeader, primaryheader) => {
     console.log('onClickCheckbox', e.target.checked);
     let val = inputHeader + ' ' + primaryheader;
@@ -413,7 +424,7 @@ const PopUpAssesseeCreateSignOn = (props) => {
         typeOfSetObject={UPDATE_ASSESSEE_BASIC_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpPicture
+      <PopUpPicture
         isActive={isPopUpValue === 'PICTUREPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -486,7 +497,7 @@ const PopUpAssesseeCreateSignOn = (props) => {
         typeOfSetObject={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-     
+
       <PopUpPicture
         isActive={isPopUpValue === 'SIGNATUREPOPUP'}
         headerPanelColour={'genericOne'}
@@ -593,7 +604,7 @@ const PopUpAssesseeCreateSignOn = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'secondary'}
         infoMsg={'select a node'}
-        isRequired={true}
+        isRequired={false}
         selectedList={assesseeInfo?.informationAllocation?.assesseeNode.assesseeNodePrimary}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}

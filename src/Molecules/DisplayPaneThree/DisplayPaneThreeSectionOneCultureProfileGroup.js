@@ -9,7 +9,7 @@ import { Paper } from '@material-ui/core';
 import { SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 
-//ascendant 
+//ascendant
 let ascendantAll = [];
 let ascendantPrimary = [];
 let ascendantSecondary = [];
@@ -22,7 +22,7 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const dispatch = useDispatch();
-  const { informationEngagement } = responseObject;
+  const { informationEngagement, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -225,7 +225,8 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
         {
           labelTextOneOneBadge: 'primary',
           textOne:
-            informationEngagement?.cultureProfileGroupTag?.cultureProfileGroupTagPrimary || 'No Information'
+            informationEngagement?.cultureProfileGroupTag?.cultureProfileGroupTagPrimary ||
+            'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
@@ -245,14 +246,14 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
         {
           labelTextOneOneBadge: 'start',
           textOne:
-            informationEngagement?.cultureProfileGroupTenure?.cultureProfileGroupTenureDateTimeStart ||
-            'No Information'
+            informationEngagement?.cultureProfileGroupTenure
+              ?.cultureProfileGroupTenureDateTimeStart || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
           textOne:
-            informationEngagement?.cultureProfileGroupTenure?.cultureProfileGroupTenureDateTimeEnd ||
-            'No Information'
+            informationEngagement?.cultureProfileGroupTenure
+              ?.cultureProfileGroupTenureDateTimeEnd || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -266,11 +267,20 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
       id: 'a1',
       labelTextOneOne: 'classification',
       labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',      
-      labelTextOneOneBadges: [        
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
-          innerList: []
+          innerList: [
+            {
+              id: '001',
+              textOne:
+                informationSetup.cultureProfileGroupClassification
+                  .cultureProfileGroupClassificationPrimary,
+              textTwo: '',
+              status: ''
+            }
+          ]
         }
       ],
       innerInfo: 'No Information',
@@ -376,7 +386,6 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
-    
   };
   return (
     <div

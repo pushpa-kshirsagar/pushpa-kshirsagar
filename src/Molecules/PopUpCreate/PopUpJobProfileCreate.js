@@ -30,7 +30,9 @@ const PopUpJobProfileCreate = (props) => {
   const { headerOne, reducerObeject, allocationObj } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const { jobProfileInformation } = useSelector((state) => state.JobProfileCreateReducer);
-  const { reviewMode, headerOneBadgeTwo, createMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { reviewMode, headerOneBadgeTwo, createMode } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const {
     selectedAssociateInfo,
     coreNodeReviewListData,
@@ -160,10 +162,34 @@ const PopUpJobProfileCreate = (props) => {
     });
   };
   const onClickContinueYes = () => {
+    // let requestObj = {
+    //   assesseeId: selectedAssociateInfo?.assesseeId,
+    //   associateId:
+    //     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+    // };
     let requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      countPage: 0,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'iGuruAnalyticFrameworkOneName',
+              conditionValue: {
+                condition: 'eq',
+                value: {
+                  from: 'Job Profiler'
+                }
+              }
+            }
+          ]
+        }
+      ]
     };
     dispatch({
       type: GET_JOBDOMAIN_REVIEW_LIST_SAGA,
@@ -566,7 +592,7 @@ const PopUpJobProfileCreate = (props) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobDomain');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobDomain}
-        textOne={'jobProfilerFrameworkSecondary'}
+        textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         // setErrorMsg={setRequiredErrorMsg}
         // errorMsg={requiredErrorMsg}
@@ -600,7 +626,7 @@ const PopUpJobProfileCreate = (props) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobFunction');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobFunction}
-        textOne={'jobProfilerFrameworkSecondary'}
+        textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}
@@ -634,7 +660,7 @@ const PopUpJobProfileCreate = (props) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobRole');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobRole}
-        textOne={'jobProfilerFrameworkSecondary'}
+        textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}
@@ -684,9 +710,9 @@ const PopUpJobProfileCreate = (props) => {
                 selectedList={
                   jobProfileInformation.informationFramework.jobProfileJobCompetencyShortlisted
                 }
-                textOne={'jobProfilerFrameworkSecondary'}
-                textTwo={'jobDimensionFrameworkSecondaryDescriptionPrimary'}
-                tooltipActiveText={'jobProfilerFrameworkSecondaryDescriptionSecondary'}
+                textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
+                textTwo={''}
+                tooltipActiveText={''}
                 dataValue={value.group}
               />
             );
@@ -720,15 +746,16 @@ const PopUpJobProfileCreate = (props) => {
                   isChecked={
                     jobProfileSifted
                       .map((ob) => {
-                        if (ob.jobProfileJobCompetencyTag.includes(value.id)) return ob.jobProfileJobCompetencySift;
+                        if (ob.jobProfileJobCompetencyTag.includes(value.id))
+                          return ob.jobProfileJobCompetencySift;
                       })
                       .filter((notUndefined) => notUndefined !== undefined)[0]
                   }
                   onClickNext={updateCompetencySiftList}
                   isJobProfileList={true}
                   id={value.id}
-                  textOne={value.jobProfilerFrameworkSecondary}
-                  textTwo={value.jobProfilerFrameworkSecondaryDescriptionPrimary}
+                  textOne={value.iGuruAnalyticFrameworkOneClusterSecondary}
+                  // textTwo={value.jobProfilerFrameworkSecondaryDescriptionPrimary}
                   valueArr={['indispensable', 'desirable', 'probable', 'removable']}
                   nextPopUpValue={
                     index <
@@ -789,7 +816,7 @@ const PopUpJobProfileCreate = (props) => {
           updateFrameworkObj(e, 'informationFramework', 'jobProfileJobCompetencyCore');
         }}
         selectedList={jobProfileInformation.informationFramework.jobProfileJobCompetencyCore}
-        textOne={'jobProfilerFrameworkSecondary'}
+        textOne={'iGuruAnalyticFrameworkOneClusterSecondary'}
         // textTwo={'jobProfilerFrameworkSecondaryDescription'}
         setErrorMsg={null}
         errorMsg={''}

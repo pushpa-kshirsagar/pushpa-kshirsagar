@@ -1089,7 +1089,8 @@ export const DisplayPaneThree = () => {
         assesseeRole: {
           id,
           informationBasic: assesseeRole.informationBasic,
-          informationAllocation: allocationObj
+          informationAllocation: allocationObj,
+          informationSetup: assesseeRole.informationSetup
         }
       };
       dispatch({ type: LOADER_START });

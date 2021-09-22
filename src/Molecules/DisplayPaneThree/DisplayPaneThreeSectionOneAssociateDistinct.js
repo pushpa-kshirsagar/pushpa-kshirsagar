@@ -3692,7 +3692,6 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     }
   };
   const reviseSetup = (e, selectedBadgeArray) => {
-    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('labelName', labelName);

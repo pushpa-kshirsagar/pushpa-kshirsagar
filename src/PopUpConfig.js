@@ -581,13 +581,13 @@ export const ANALYTICS_POPUP = [
     disabled: false
   },
   {
-    data: 'culture profiles',
+    data: 'culture-profiles',
     dataValue: 'culture profiles',
     optionClass: 'optionSecondary',
     disabled: false
   },
   {
-    data: 'job profiles',
+    data: 'job-profiles',
     dataValue: 'job profiles',
     optionClass: 'optionSecondary',
     disabled: false,
@@ -730,13 +730,13 @@ export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
     disabled: false
   },
   {
-    data: 'culture profiles',
+    data: 'culture-profiles',
     dataValue: 'culture profiles',
     optionClass: 'optionSecondary',
     disabled: false
   },
   {
-    data: 'job profiles',
+    data: 'job-profiles',
     dataValue: 'job profiles',
     optionClass: 'optionSecondary',
     divider: 'light',
@@ -806,13 +806,13 @@ export const GROUP_TYPE_POPUP_OPTION = [
     disabled: false
   },
   {
-    data: 'culture profiles',
+    data: 'culture-profiles',
     dataValue: 'culture profiles',
     optionClass: 'optionSecondary',
     disabled: false
   },
   {
-    data: 'job profiles',
+    data: 'job-profiles',
     dataValue: 'job profiles',
     optionClass: 'optionSecondary',
     divider: 'light',
@@ -882,13 +882,13 @@ export const ROLE_POPUP_OPTION = [
     disabled: true
   },
   {
-    data: 'culture profiles',
+    data: 'culture-profiles',
     dataValue: 'culture profiles',
     optionClass: 'optionSecondary',
     disabled: true
   },
   {
-    data: 'job profiles',
+    data: 'job-profiles',
     dataValue: 'job profiles',
     optionClass: 'optionSecondary',
     divider: 'light',
@@ -958,13 +958,13 @@ export const NODE_POPUP_OPTION = [
     disabled: true
   },
   {
-    data: 'culture profiles',
+    data: 'culture-profiles',
     dataValue: 'culture profiles',
     optionClass: 'optionSecondary',
     disabled: true
   },
   {
-    data: 'job profiles',
+    data: 'job-profiles',
     dataValue: 'job profiles',
     optionClass: 'optionSecondary',
     divider: 'light',
@@ -1021,13 +1021,13 @@ export const EXCHANGE_POPUP_OPTION = [
     disabled: false
   },
   {
-    data: 'culture profiles',
+    data: 'culture-profiles',
     dataValue: 'culture profiles',
     optionClass: 'optionSecondary',
     disabled: false
   },
   {
-    data: 'job profiles',
+    data: 'job-profiles',
     dataValue: 'job profiles',
     divider: 'light',
     optionClass: 'optionSecondary',
@@ -1601,14 +1601,14 @@ export const ASSIGNMENT_REVIEW_LIST_POPUP_OPTION = [
     disabled: false
   },
   {
-    data: 'culture profiles',
+    data: 'culture-profiles',
     dataValue: 'culture profiles',
     dataKey: 'review',
     optionClass: 'optionPrimary',
     disabled: false
   },
   {
-    data: 'job profiles',
+    data: 'job-profiles',
     dataValue: 'job profiles',
     dataKey: 'review',
     optionClass: 'optionPrimary',

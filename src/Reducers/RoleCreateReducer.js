@@ -24,234 +24,231 @@ const initialState = {
     informationSetup: {
       assesseeRolePermission: {
         assesseeAssesseeDistinctPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'all'
         },
         assesseeAssesseeGroupPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssesseeManagerPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssesseeRolePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssesseeTypePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssessmentDistinctPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssessmentGroupPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssessmentManagerPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssessmentTypePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssignmentDistinctPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssignmentGroupPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssignmentManagerPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssignmentReportPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssignmentTypePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssociateDistinctPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssociateGroupPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssociateManagerPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssociateNodePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssociateRolePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeAssociateTypePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
-        assesseeIguruAnalyticDistinctPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+        assesseeiGuruAnalyticDistinctPermission: {
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
-        assesseeIguruAnalyticGroupPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+        assesseeiGuruAnalyticGroupPermission: {
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
-        assesseeIguruAnalyticManagerPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+        assesseeiGuruAnalyticManagerPermission: {
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
-        assesseeIguruAnalyticTypePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+        assesseeiGuruAnalyticTypePermission: {
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeItemDistinctPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeItemGroupPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeItemManagerPermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         },
         assesseeItemTypePermission: {
-          create: false,
-          delete: false,
-          review: false,
-          revise: false,
-          share: false,
+          create: true,
+          delete: true,
+          review: true,
+          revise: true,
+          share: true,
           assesseePermissionInformation: 'key'
         }
       },
-      assesseeRoleClassification: {
-        assesseeRoleClassificationPrimary: [],
-        assesseeRoleClassificationSecondary: []
-      }
+    
     }
   },
   associateRole: {
@@ -295,7 +292,7 @@ const initialState = {
           revise: false,
           share: false
         },
-        associateIguruAnalyticPermission: {
+        associateiGuruAnalyticPermission: {
           create: false,
           delete: false,
           review: false,
@@ -318,7 +315,7 @@ const initialState = {
   }
 };
 
-const RoleCreateReducer = (istate = initialState, action) => {
+const RoleCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   switch (action.type) {
     case SET_ASSESSEE_ROLE_REDUCER_STATE:
       return {
@@ -392,7 +389,7 @@ const RoleCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_ROLE_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

@@ -260,7 +260,7 @@ class CultureWeightageTableTemplate extends Component {
                           style={{ fontSize: '15px', textAlign: 'center' }}
                         >
                           <div style={{ display: 'block' }}>
-                            {value?.cultureProfilerFrameworkSecondaryDescriptionSecondary || ''}
+                            {value?.analyticFrameworkOneClusterSecondaryExplanationSecondary || ''}
                           </div>
                         </Typography>
                       }
@@ -283,7 +283,7 @@ class CultureWeightageTableTemplate extends Component {
                             });
                           }}
                         >
-                          {value?.cultureProfilerFrameworkSecondary || 'name'}
+                          {value?.iGuruAnalyticFrameworkOneClusterSecondary || 'name'}
                         </span>
                         <span
                           style={{ cursor: 'pointer', fontSize: '1rem' }}
@@ -295,8 +295,7 @@ class CultureWeightageTableTemplate extends Component {
                             // });
                           }}
                         >
-                          {value?.cultureProfilerFrameworkSecondaryDescription
-                            ?.cultureProfilerFrameworkSecondaryDescriptionPrimary || 'description'}
+                          {value?.analyticFrameworkOneClusterSecondaryExplanationPrimary}
                         </span>
                       </div>
                     </Tooltip>

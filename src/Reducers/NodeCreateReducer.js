@@ -41,7 +41,7 @@ const initialState = {
   }
 };
 
-const NodeCreateReducer = (istate = initialState, action) => {
+const NodeCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action.type);
   switch (action.type) {
     case SET_NODE_REDUCER_STATE:
@@ -67,7 +67,7 @@ const NodeCreateReducer = (istate = initialState, action) => {
         }
       };
     case CLEAR_NODE_REDUCER_STATE:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

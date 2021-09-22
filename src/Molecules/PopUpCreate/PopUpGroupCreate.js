@@ -107,6 +107,20 @@ const PopUpGroupCreate = (props) => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
+    // add default root node in allocation if node not selected
+    if (
+      reducerObeject.informationAllocation[objectName + 'Node'][objectName + 'NodePrimary']
+        .length === 0
+    ) {
+      let rootNode = coreNodeReviewListData.filter((node) => {
+        return node.informationFramework.associateNodeAscendantPrimary === null;
+      });
+      let rootNodeId = rootNode[0].id;
+      reducerObeject.informationAllocation[objectName + 'Node'][objectName + 'NodePrimary'] = [
+        ...reducerObeject.informationAllocation[objectName + 'Node'][objectName + 'NodePrimary'],
+        rootNodeId
+      ];
+    }
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -301,7 +315,7 @@ const PopUpGroupCreate = (props) => {
         inputHeader={'node'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
-        isRequired={true}
+        isRequired={false}
         minimumSelected={1}
         ListData={coreNodeReviewListData}
         textOne={'associateNodeName'}
@@ -424,13 +438,21 @@ const PopUpGroupCreate = (props) => {
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         basicInfo={reducerObeject.informationSetup[objectName + 'Classification']}
         typeOfSetObject={
-          (reducerObeject === 'assesseeGroup' && SET_ASSESSEE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'assessmentGroup' && SET_ASSESSMENT_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'assignmentGroup' && SET_ASSIGNMENT_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'associateGroup' && SET_ASSOCIATE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'cultureProfileGroup' && SET_CULTUREPROFILE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'jobProfileGroup' && SET_JOBPROFILE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'itemGroup' && SET_ITEM_CLASSIFICAION_STATE)
+          objectName === 'assesseeGroup'
+            ? SET_ASSESSEE_CLASSIFICAION_STATE
+            : objectName === 'assesseeGroup'
+            ? SET_ASSESSEE_CLASSIFICAION_STATE
+            : objectName === 'assignmentGroup'
+            ? SET_ASSIGNMENT_CLASSIFICAION_STATE
+            : objectName === 'associateGroup'
+            ? SET_ASSOCIATE_CLASSIFICAION_STATE
+            : objectName === 'cultureProfileGroup'
+            ? SET_CULTUREPROFILE_CLASSIFICAION_STATE
+            : objectName === 'jobProfileGroup'
+            ? SET_JOBPROFILE_CLASSIFICAION_STATE
+            : objectName === 'itemGroup'
+            ? SET_ITEM_CLASSIFICAION_STATE
+            : null
         }
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

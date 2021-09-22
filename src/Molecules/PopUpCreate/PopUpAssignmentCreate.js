@@ -37,6 +37,17 @@ const PopUpAssignmentCreate = (props) => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
+    // add default root node in allocation if node not selected
+    if (informationAllocation.assignmentNode.assignmentNodePrimary.length === 0) {
+      let rootNode = coreNodeReviewListData.filter((node) => {
+        return node.informationFramework.associateNodeAscendantPrimary === null;
+      });
+      let rootNodeId = rootNode[0].id;
+      informationAllocation.assignmentNode.assignmentNodePrimary = [
+        ...informationAllocation.assignmentNode.assignmentNodePrimary,
+        rootNodeId
+      ];
+    }
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:

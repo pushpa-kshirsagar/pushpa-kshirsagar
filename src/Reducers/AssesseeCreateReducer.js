@@ -69,8 +69,8 @@ const initialState = {
   assesseeCreateInfo: '',
   currentPopUpOption: [],
   tempCommunication: '',
-  tempAddressCommunication:'',
-  tempTelephoneCommunication:'',
+  tempAddressCommunication: '',
+  tempTelephoneCommunication: '',
   assesseeInformationData: null,
   assesseeReviewListDistinctData: [],
   secondaryPopUpOptions: {
@@ -231,7 +231,7 @@ const initialState = {
   }
 };
 
-const AssesseeCreateReducer = (istate = initialState, action) => {
+const AssesseeCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action.type);
   // console.log(action.payload);
   switch (action.type) {
@@ -536,7 +536,7 @@ const AssesseeCreateReducer = (istate = initialState, action) => {
         [action.payload.stateName]: action.payload.value
       };
     case CLEAR_ASSESSEE_INFO:
-      return initialState;
+      return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
   }

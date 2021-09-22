@@ -12,6 +12,7 @@ import {
   SET_CULTURE_DIMENTION_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
+import { getCultureProfileDiamentionList } from '../../Actions/ActionCultureProfile';
 
 const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
   const {
@@ -179,7 +180,7 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
     tempCoreList.forEach((ob) => {
       cultureCoreList.push({
         id: ob.cultureProfileCultureDimensionTag,
-        textOne: ob?.cultureProfilerFrameworkSecondary || '',
+        textOne: ob?.iGuruAnalyticFrameworkOneClusterSecondary || '',
         textTwo: '',
         status: ''
       });
@@ -227,20 +228,7 @@ const DisplayPaneThreeSectionTwoCultureProfileDistinct = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     if (labelName === 'culture dimensions' && selectedBadgeName === 'core') {
-      dispatch({ type: LOADER_START });
-      let diamentionReqBody = {
-        assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId:
-          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-        countPage: 50,
-        numberPage: 0,
-        filter: 'true',
-        orderBy: {
-          columnName: 'cultureProfilerFrameworkSecondaryGroup',
-          order: 'asc'
-        }
-      };
-      dispatch({ type: GET_CULTURE_DIAMENTION_SAGA, payload: { request: diamentionReqBody } });
+      getCultureProfileDiamentionList(selectedAssociateInfo, dispatch);
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'POPUPDIAMENTIONMSG', popupMode: 'CULTURECREATE' }

@@ -27,6 +27,7 @@ const createApiCall = async (requestObj) => {
 function* workerCreateCultureProfileSaga(data) {
   try {
     const response = yield call(createApiCall, { data: data.payload, URL: CULTURE_CREATE_URL });
+    // const response = { responseCode: '000', responseObject: [{}] };
     if (response.responseCode === '000') {
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,

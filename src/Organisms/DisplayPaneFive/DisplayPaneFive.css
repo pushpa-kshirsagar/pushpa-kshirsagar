@@ -75,7 +75,7 @@
 
 /* new css */
 .ex_container {
-  min-height: 50px;
+  /* min-height: 50px; */
   padding: 0px 5px;
   align-items: center;
   /* overflow: overlay; */
