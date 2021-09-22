@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
+import Fingerprint from '@material-ui/icons/Fingerprint';
 import {
   ASSOCIATE_SIGN_ON,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -530,8 +531,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assesseeSetUpModule?.assesseeGroupCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -597,8 +598,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assesseeSetUpModule?.assesseeRoleCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -628,8 +629,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assesseeSetUpModule?.assesseeTypeCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -658,7 +659,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       innerInfo: 'No',
       isListCard: false,
       isReviewLink: false,
-      isMultiInfoCard: true
+      isMultiInfoCard: true,
+      IconOne: Fingerprint
     },
     {
       id: 'a-112',
@@ -673,8 +675,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctCreateApproval
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Required'
+                    : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -683,8 +685,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentDistinctCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -748,8 +750,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentGroupCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -813,8 +815,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assessmentSetUpModuleBespoke?.assessmentTypeCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -843,7 +845,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       innerInfo: 'No',
       isListCard: false,
       isReviewLink: false,
-      isMultiInfoCard: true
+      isMultiInfoCard: true,
+      IconOne: Fingerprint
     },
     {
       id: 'assignment-232',
@@ -858,8 +861,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreateApproval
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Required'
+                    : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -868,8 +871,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assignmentSetUpModule?.assignmentDistinctCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -937,8 +940,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assignmentSetUpModule?.assignmentGroupCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1005,8 +1008,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: assignmentSetUpModule?.assignmentTypeCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1035,7 +1038,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       innerInfo: 'No',
       isListCard: false,
       isReviewLink: false,
-      isMultiInfoCard: true
+      isMultiInfoCard: true,
+      IconOne: Fingerprint
     },
     {
       id: 'associate-213',
@@ -1050,8 +1054,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList: setUpAssociateModule?.associateDistinctCreateApproval
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Required'
+                    : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -1060,8 +1064,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: setUpAssociateModule?.associateDistinctCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1123,8 +1127,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList: setUpAssociateModule?.associateDistinctSignOnApproval
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Required'
+                    : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -1133,8 +1137,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: setUpAssociateModule?.associateDistinctSignOnPermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             }
@@ -1149,8 +1153,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: setUpAssociateModule?.associateGroupCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1217,8 +1221,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: setUpAssociateModule?.associateNodeCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1322,8 +1326,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: setUpAssociateModule?.associateRoleCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1353,8 +1357,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: setUpAssociateModule?.associateTypeCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1384,8 +1388,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList: setUpAssociateModule?.iguruPlatformBrandApproval
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Required'
+                    : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'choice',
@@ -1493,8 +1497,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList: setUpAssociateModule?.iguruPlatformThemeApproval
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Required'
+                    : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'choice',
@@ -1522,7 +1526,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       innerInfo: 'No',
       isListCard: false,
       isReviewLink: false,
-      isMultiInfoCard: true
+      isMultiInfoCard: true,
+      IconOne: Fingerprint
     },
     {
       id: 'iguru-11',
@@ -1537,8 +1542,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'approval',
                   innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctCreateApproval
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Required'
+                    : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -1547,8 +1552,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticDistinctCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1616,8 +1621,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: analyticSetUpModule?.iguruAnalyticGroupCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1685,8 +1690,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 {
                   labelTextTwoBadge: 'permission',
                   innerLabelBadgeList: analyticSetUpModule?.iGuruAnalyticTypeCreatePermission
-                    ? 'Yes'
-                    : 'No'
+                    ? 'Permitted'
+                    : 'Unpermitted'
                 }
               ]
             },
@@ -1715,7 +1720,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       innerInfo: 'No',
       isListCard: false,
       isReviewLink: false,
-      isMultiInfoCard: true
+      isMultiInfoCard: true,
+      IconOne: Fingerprint
     },
     {
       id: 'iguru-market-11',
@@ -1746,7 +1752,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       innerInfo: 'No',
       isListCard: false,
       isReviewLink: false,
-      isMultiInfoCard: true
+      isMultiInfoCard: true,
+      IconOne: Fingerprint
     },
     {
       id: 'iguru-mine-11',
@@ -1772,7 +1779,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       innerInfo: 'No',
       isListCard: false,
       isReviewLink: false,
-      isMultiInfoCard: true
+      isMultiInfoCard: true,
+      IconOne: Fingerprint
     },
     {
       id: 'iguru-item-11',
@@ -1786,7 +1794,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'approval',
-                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreateApproval ? 'Yes' : 'No'
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreateApproval ? 'Required' : 'Unrequired'
                 },
                 {
                   labelTextTwoBadge: 'fee',
@@ -1794,7 +1802,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 },
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: itemSetUpModule?.itemDistinctCreatePermission ? 'Permitted' : 'Unpermitted'
                 }
               ]
             },
@@ -1852,7 +1860,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: itemSetUpModule?.itemGroupCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: itemSetUpModule?.itemGroupCreatePermission ? 'Permitted' : 'Unpermitted'
                 }
               ]
             },
@@ -1914,7 +1922,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               innerLabelBadgeList: [
                 {
                   labelTextTwoBadge: 'permission',
-                  innerLabelBadgeList: itemSetUpModule?.itemTypeCreatePermission ? 'Yes' : 'No'
+                  innerLabelBadgeList: itemSetUpModule?.itemTypeCreatePermission ? 'Permitted' : 'Unpermitted'
                 }
               ]
             },
@@ -1943,7 +1951,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       innerInfo: 'No',
       isListCard: false,
       isReviewLink: false,
-      isMultiInfoCard: true
+      isMultiInfoCard: true,
+      IconOne: Fingerprint
     }
   ];
   const allianceListKey = [
