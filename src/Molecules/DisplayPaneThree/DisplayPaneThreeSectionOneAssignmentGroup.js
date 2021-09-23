@@ -262,28 +262,38 @@ const DisplayPaneThreeSectionOneAssignmentGroup = () => {
   ];
 
   const classificationList = [
+    // {
+    //   id: 'a1',
+    //   labelTextOneOne: 'classification',
+    //   labelTextOneOneBadgeOne: '',
+    //   labelTextOneOneBadgeTwo: '',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       innerList: [
+    //         {
+    //           id: '001',
+    //           textOne:
+    //             informationSetup?.assignmentGroupClassification
+    //               ?.assignmentGroupClassificationPrimary,
+    //           textTwo: '',
+    //           status: ''
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true
+    // }
     {
       id: 'a1',
+      textOneOne:
+        informationSetup?.assignmentGroupClassification?.assignmentGroupClassificationPrimary ||
+        'No Information',
       labelTextOneOne: 'classification',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: [
-            {
-              id: '001',
-              textOne:
-                informationSetup?.assignmentGroupClassification
-                  ?.assignmentGroupClassificationPrimary,
-              textTwo: '',
-              status: ''
-            }
-          ]
-        }
-      ],
+      innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: true
+      isListCard: false
     }
   ];
 

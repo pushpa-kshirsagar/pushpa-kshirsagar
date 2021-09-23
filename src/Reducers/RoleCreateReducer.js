@@ -18,9 +18,6 @@ const initialState = {
       assesseeRolePicture: '',
       assesseeRolePictureVerification: false
     },
-    informationAllocation: {
-      assesseeRoleGroup: []
-    },
     informationSetup: {
       assesseeRolePermission: {
         assesseeAssesseeDistinctPermission: {
@@ -249,8 +246,7 @@ const initialState = {
         }
       },
       assesseeRoleClassification: {
-        assesseeRoleClassificationPrimary: [],
-        assesseeRoleClassificationSecondary: []
+        assesseeRoleClassificationPrimary: ''
       }
     }
   },
@@ -261,9 +257,6 @@ const initialState = {
       associateRoleDescription: '',
       associateRolePicture: '',
       associateRolePictureVerification: false
-    },
-    informationAllocation: {
-      associateRoleGroup: []
     },
     informationSetup: {
       associateRolePermission: {
@@ -311,8 +304,7 @@ const initialState = {
         }
       },
       associateRoleClassification: {
-        associateRoleClassificationPrimary: [],
-        associateRoleClassificationSecondary: []
+        associateRoleClassificationPrimary: ''
       }
     }
   }

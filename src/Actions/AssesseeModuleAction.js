@@ -23,7 +23,6 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
   SET_REQUEST_OBJECT,
-  GET_TYPE_GROUP_REVIEW_LIST_SAGA,
   SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
   ASSESSEE_INFO_REVISE_SAGA,
   ASSESSEE_GROUP_INFO_REVISE_SAGA,
@@ -1116,34 +1115,6 @@ export const getClassificationReviewListApi = (selectedAssociateInfo, dispatch, 
       classificationType: popupHeaderOne,
       isMiddlePaneList: false
     }
-  });
-};
-export const getTypeGroupReviewListApi = (selectedAssociateInfo, dispatch, popupHeaderOne) => {
-  dispatch({ type: LOADER_START });
-  let columnName = popupHeaderOne;
-  if (popupHeaderOne === 'culture profiles') {
-    columnName = 'cultureProfiles';
-  }
-  if (popupHeaderOne === 'job profiles') {
-    columnName = 'jobProfiles';
-  }
-  let columnby = columnName.substring(0, columnName.length - 1);
-  let requestObj = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    associateAscendantPrimary:
-      localStorage.getItem('parentId') === 'null' ? null : localStorage.getItem('parentId'),
-    filter: 'true',
-    orderBy: {
-      columnName: 'informationBasic.' + columnby + 'TypeGroupName',
-      order: 'asc'
-    }
-  };
-  dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-  dispatch({
-    type: GET_TYPE_GROUP_REVIEW_LIST_SAGA,
-    payload: { request: requestObj, typeGroup: popupHeaderOne }
   });
 };
 

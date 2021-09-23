@@ -199,16 +199,18 @@ function* workerAssociateSetUpSaga(data) {
       URL: data.payload.reqUrl
     });
     if (response.responseCode === '000') {
+      console.log('response.responseObject setUpAssociateModule');
+      console.log(response.responseObject);
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'setUpAssociateModule', value: response.responseObject[0] }
-        //payload: { stateName: 'setUpAssociateModule', value: response.responseObject.Bespoke }
+        //payload: { stateName: 'setUpAssociateModule', value: response.responseObject }
+        payload: { stateName: 'setUpAssociateModule', value: response.responseObject.Bespoke }
       });
 
-      // yield put({
-      //   type: SET_DISPLAY_THREE_SINGLE_STATE,
-      //   payload: { stateName: 'setUpAssociateModuleGeneric', value: response.responseObject.Generic }
-      // });
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'setUpAssociateModuleGeneric', value: response.responseObject.Generic }
+      });
       
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_INFO,
@@ -230,6 +232,8 @@ function* workerAssociateNodeSetUpSaga(data) {
       URL: data.payload.reqUrl
     });
     if (response.responseCode === '000') {
+      console.log('responce associateNodeSetUpModule');
+      console.log(response.responseObject);
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'associateNodeSetUpModule', value: response.responseObject[0] }
@@ -254,16 +258,19 @@ function* workerAssociateAnalyticSetUpSaga(data) {
       URL: data.payload.reqUrl
     });
     if (response.responseCode === '000') {
+      console.log('reponce object analyticSetUpModule');
+      console.log(response.responseObject);
+      
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'analyticSetUpModule', value: response.responseObject }
-        //   payload: { stateName: 'analyticSetUpModule', value: response.responseObject.Bespoke }
+        //payload: { stateName: 'analyticSetUpModule', value: response.responseObject }
+        payload: { stateName: 'analyticSetUpModule', value: response.responseObject.Bespoke }
       });
 
-      // yield put({
-      //   type: SET_DISPLAY_THREE_SINGLE_STATE,
-      //   payload: { stateName: 'analyticSetUpModuleGeneric', value: response.responseObject.Generic }
-      // });
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'analyticSetUpModuleGeneric', value: response.responseObject.Generic }
+      });
       
     } else {
     }
@@ -281,16 +288,18 @@ function* workerAssociateItemSetUpSaga(data) {
       URL: data.payload.reqUrl
     });
     if (response.responseCode === '000') {
+      console.log('responce itemSetUpModule');
+      console.log(response.responseObject);
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'itemSetUpModule', value: response.responseObject }
-        //   payload: { stateName: 'itemSetUpModule', value: response.responseObject.Bespoke }
+        //payload: { stateName: 'itemSetUpModule', value: response.responseObject }
+        payload: { stateName: 'itemSetUpModule', value: response.responseObject.Bespoke }
       });
 
-      // yield put({
-      //   type: SET_DISPLAY_THREE_SINGLE_STATE,
-      //   payload: { stateName: 'itemSetUpModuleGeneric', value: response.responseObject.Generic }
-      // });
+      yield put({
+        type: SET_DISPLAY_THREE_SINGLE_STATE,
+        payload: { stateName: 'itemSetUpModuleGeneric', value: response.responseObject.Generic }
+      });
 
     } else {
     }

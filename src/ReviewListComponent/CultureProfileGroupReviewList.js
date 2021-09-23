@@ -121,6 +121,10 @@ const CultureProfileGroupReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let reviseHeader = middlePaneHeader;
@@ -190,6 +194,15 @@ const CultureProfileGroupReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'cultureProfileGroupactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
       {FilterMode === 'cultureProfileAllocateToGroup' && (

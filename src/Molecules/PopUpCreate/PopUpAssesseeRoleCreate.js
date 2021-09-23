@@ -45,16 +45,13 @@ const PopUpAssesseeRoleCreate = () => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
-    let allocationObj = {
-      assesseeRoleGroup: assesseeRole.informationAllocation.assesseeRoleGroup[0]
-    };
     var requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       assesseeRole: {
         informationBasic: assesseeRole.informationBasic,
-        informationAllocation: allocationObj
+        informationSetup: assesseeRole.informationSetup
       }
     };
 
@@ -158,8 +155,8 @@ const PopUpAssesseeRoleCreate = () => {
           { id: 'Generic', name: 'Generic' }
         ]}
         mappingValue={'id'}
-        inputHeader={'classification'}
-        inputHeaderBadgeOne={'primary'}
+        inputHeader={''}
+        inputHeaderBadgeOne={''}
         inputHeaderBadgeTwo={''}
         labelval={''}
         headerPanelColour={'genericOne'}

@@ -3627,14 +3627,14 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
-                  textOneOne={informationBasic.assesseeTypeName || 'No Information'}
-                  textOneTwo={informationBasic.assesseeTypeDescription || 'No Information'}
+                  textOneOne={informationBasic?.assesseeTypeName || 'No Information'}
+                  textOneTwo={informationBasic?.assesseeTypeDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssesseeTypeBasicInformation}
-                  isImageActive={informationBasic.assesseeTypePicture}
-                  imageOne={informationBasic.assesseeTypePicture}
+                  isImageActive={informationBasic?.assesseeTypePicture}
+                  imageOne={informationBasic?.assesseeTypePicture}
                 />
               </div>
               <Sections

@@ -94,6 +94,10 @@ const CultureProfileTypeReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let optArr = [];
@@ -148,7 +152,7 @@ const CultureProfileTypeReviewList = (props) => {
                 shared={item.cultureProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-                dataValue={item.informationAllocation.cultureProfileTypeGroup}
+                // dataValue={item.informationAllocation.cultureProfileTypeGroup}
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item.id)}
                 onClickCheckBox={(event) => {
@@ -167,6 +171,15 @@ const CultureProfileTypeReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'cultureProfileTypeDistinctactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
     </div>

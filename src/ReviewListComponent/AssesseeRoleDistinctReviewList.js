@@ -110,6 +110,10 @@ const AssesseeRoleDistinctReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
@@ -161,10 +165,10 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 className=""
                 id={index}
                 tag={item.id}
-                dataValue={item.informationAllocation.assesseeRoleGroup}
+                // dataValue={item.informationAllocation.assesseeRoleGroup}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                // status={item.informationEngagement.assesseeRoleStatus}
+                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationEngagement.assesseeRoleStatus}
                 shared={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
                 actualStatus={item.informationEngagement.assesseeRoleStatus}
                 textOne={assesseeRole(item.informationBasic.assesseeRoleName)}
@@ -187,6 +191,15 @@ const AssesseeRoleDistinctReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'assesseeRoleDistinctactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
     </div>

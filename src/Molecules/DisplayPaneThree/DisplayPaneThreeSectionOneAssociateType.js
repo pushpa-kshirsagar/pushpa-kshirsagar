@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 import { SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssociateType = () => {
@@ -14,7 +13,7 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
-  const { informationEngagement, informationAllocation } = responseObject;
+  const { informationEngagement, informationAllocation,informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -29,24 +28,24 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
       status: ''
     });
   }
-  const allocationList = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'group',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: associateTypeGroupList
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    }
-  ];
+  // const allocationList = [
+  //   {
+  //     id: 'a1',
+  //     labelTextOneOne: 'group',
+  //     labelTextOneOneBadgeOne: '',
+  //     labelTextOneOneBadgeTwo: '',
+  //     labelTextOneOneBadgeThree: '',
+  //     labelTextOneOneBadgeFour: '',
+  //     labelTextOneOneBadges: [
+  //       {
+  //         labelTextOneOneBadge: '',
+  //         innerList: associateTypeGroupList
+  //       }
+  //     ],
+  //     innerInfo: 'No Information',
+  //     isListCard: true
+  //   }
+  // ];
   const list3 = [
     {
       id: 'a1',
@@ -116,16 +115,38 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
       isListCard: false
     }
   ];
-  const reviseAllocation = (e) => {
+  
+   const classificationList = [
+    // {
+    //   id: 'a-classification',
+    //   labelTextOneOne: 'classification',
+    //   labelTextOneOneBadgeOne: '',
+    //   labelTextOneOneBadgeTwo: '',
+    //   labelTextOneOneBadgeThree: '',
+    //   labelTextOneOneBadgeFour: '',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: '',
+    //       innerList: []
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true
+    // }
+    {
+      id: 'a1',
+      textOneOne:
+        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
+          .cultureProfileGroupClassificationPrimary) || 'No Information',
+      labelTextOneOne: 'classification',
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false
+    }
+  ];
+  const reviseClassification = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
-    if (labelName === 'group') {
-      getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, 'associates');
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'associatesTYPECREATE' }
-      });
-    }
   };
 
   return (
@@ -135,31 +156,7 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
         overflow: 'overlay'
       }}
     >
-      <>
-        <div className={'containerPadding'}>
-          <Paper className={'dossierContainerTop'}>
-            {allocationList.map((ob) => {
-              return (
-                <div key={ob.id}>
-                  {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      onClickRevise={reviseAllocation}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  ) : (
-                    <DisplayPanelAccordianInformation
-                      onClickRevise={reviseAllocation}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </Paper>
-        </div>
+      <>        
         <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list3.map((ob) => {
@@ -169,6 +166,30 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
                     <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
                   ) : (
                     <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+        </div>
+        <div className={'containerPadding'}>
+          <Paper className={'dossierContainerTop'}>
+            {classificationList.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <DisplayPanelAccordianReviewListOne
+                      onClickRevise={reviseClassification}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={reviseClassification}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   )}
                 </div>
               );

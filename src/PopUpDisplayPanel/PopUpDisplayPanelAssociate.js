@@ -1143,27 +1143,12 @@ const PopUpDisplayPanelAssociate = (props) => {
           isMiddlePaneList: false
         }
       });
-      // getClassificationReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: popupHeaderOne + 'GROUPCREATE' }
       });
       clearMiddlePaneInfo();
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'types') {
-      dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
-      if (
-        popupHeaderOne === 'assessees' ||
-        popupHeaderOne === 'associates' ||
-        popupHeaderOne === 'items' ||
-        popupHeaderOne === 'assessments' ||
-        popupHeaderOne === 'culture profiles' ||
-        popupHeaderOne === 'job profiles' ||
-        popupHeaderOne === 'assignments'
-      ) {
-        getTypeGroupReviewListApi(selectedAssociateInfo, dispatch, popupHeaderOne);
-      } else {
-        dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: '' });
-      }
       dispatch({ type: CLEAR_TYPE_REDUCER_STATE });
       dispatch({
         type: SET_POPUP_VALUE,

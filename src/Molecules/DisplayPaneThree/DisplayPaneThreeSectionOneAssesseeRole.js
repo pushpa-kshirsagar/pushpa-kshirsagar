@@ -37,24 +37,24 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
       status: ''
     });
   }
-  const allocationList = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'group',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: assesseeRoleGroupList
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    }
-  ];
+  // const allocationList = [
+  //   {
+  //     id: 'a1',
+  //     labelTextOneOne: 'group',
+  //     labelTextOneOneBadgeOne: '',
+  //     labelTextOneOneBadgeTwo: '',
+  //     labelTextOneOneBadgeThree: '',
+  //     labelTextOneOneBadgeFour: '',
+  //     labelTextOneOneBadges: [
+  //       {
+  //         labelTextOneOneBadge: '',
+  //         innerList: assesseeRoleGroupList
+  //       }
+  //     ],
+  //     innerInfo: 'No Information',
+  //     isListCard: true
+  //   }
+  // ];
   const engagementList = [
     {
       id: 'a1',
@@ -515,6 +515,16 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
       isMultiInfoCard: true
     },
     {
+      id: 'a-classification',
+      textOneOne:
+        informationSetup?.assesseeRoleClassification.assesseeRoleClassificationPrimary ||
+        'No Information',
+      labelTextOneOne: 'classification',
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false
+    },
+    {
       id: 'a-iGuru Analytics',
       labelTextOneOne: 'iGuru Analytics',
       labelTextOneOneBadges: [
@@ -768,30 +778,6 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
       }}
     >
       <>
-        <div className={'containerPadding'}>
-          <Paper className={'dossierContainerTop'}>
-            {allocationList.map((ob) => {
-              return (
-                <div key={ob.id}>
-                  {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      className=""
-                      onClickRevise={reviseAllocation}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  ) : (
-                    <DisplayPanelAccordianInformation
-                      onClickRevise={reviseAllocation}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </Paper>
-        </div>
         <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {engagementList.map((ob) => {

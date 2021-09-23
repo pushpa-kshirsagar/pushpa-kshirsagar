@@ -133,6 +133,10 @@ const ItemGroupReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let optArr = [];
@@ -201,6 +205,15 @@ const ItemGroupReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'itemGroupDistinctactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
       {FilterMode === 'itemAllocateToGroup' && (

@@ -115,6 +115,10 @@ const AssignmentTypeReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     dispatch({
@@ -133,7 +137,6 @@ const AssignmentTypeReviewList = (props) => {
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
         selectedTagShared: e.currentTarget.getAttribute('data-shared')
-
       }
     });
     dispatch({
@@ -167,7 +170,7 @@ const AssignmentTypeReviewList = (props) => {
                 status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 actualStatus={item.informationEngagement.assignmentTypeStatus}
                 shared={item.assignmentTypeShared ? 'SHARED' : 'UNSHARED'}
-                dataValue={item.informationAllocation?.assignmentTypeGroup}
+                // dataValue={item.informationAllocation?.assignmentTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
@@ -186,6 +189,15 @@ const AssignmentTypeReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'assignmentsTypeDistinctactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
     </div>

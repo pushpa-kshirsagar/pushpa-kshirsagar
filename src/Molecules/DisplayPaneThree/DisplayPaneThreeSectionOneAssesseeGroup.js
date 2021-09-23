@@ -264,25 +264,11 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   const classificationList = [
     {
       id: 'a1',
+      textOneOne: informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary,
       labelTextOneOne: 'classification',
-      labelTextOneOneBadgeOne: '',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          innerList: [
-            {
-              id: '001',
-              textOne:
-                informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary,
-              textTwo: '',
-              status: ''
-            }
-          ]
-        }
-      ],
+      innerAssociateList: [],
       innerInfo: 'No Information',
-      isListCard: true
+      isListCard: false
     }
   ];
   const reviseAllocation = (e) => {

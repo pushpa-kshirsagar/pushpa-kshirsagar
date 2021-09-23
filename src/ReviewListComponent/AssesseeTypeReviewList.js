@@ -115,6 +115,10 @@ const AssesseeTypeReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
@@ -166,12 +170,12 @@ const AssesseeTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 // actualStatus={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
-                dataValue={item.informationAllocation.assesseeTypeGroup}
-                // status={item.informationEngagement.assesseeTypeStatus}
+                // dataValue={item.informationAllocation.assesseeTypeGroup}
+                status={item.informationEngagement.assesseeTypeStatus}
                 shared={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
-                actualStatus={item.informationEngagement.assesseeTypeStatus}
+                // actualStatus={item.informationEngagement.assesseeTypeStatus}
                 textOne={item.informationBasic.assesseeTypeName}
                 textTwo={item.informationBasic.assesseeTypeDescription}
                 isTooltipActive={false}
@@ -192,6 +196,15 @@ const AssesseeTypeReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'assesseesTypeDistinctactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
     </div>

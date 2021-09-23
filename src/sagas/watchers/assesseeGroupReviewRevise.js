@@ -75,6 +75,12 @@ function* workerReviewAssesseeGroupInfoSaga(data) {
           payload: userResponse.responseObject[0].informationBasic
         });
       }
+    } else {
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
 
     console.log('loading end');

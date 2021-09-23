@@ -95,6 +95,10 @@ const JobProfileTypeReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let reviseHeader = middlePaneHeader;
@@ -111,7 +115,8 @@ const JobProfileTypeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
+        popupContentArrValue:
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
@@ -143,11 +148,12 @@ const JobProfileTypeReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 textOne={item.informationBasic.jobProfileTypeName}
                 textTwo={item.informationBasic.jobProfileTypeDescription}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationEngagement.jobProfileTypeStatus}
+                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 actualStatus={item.informationEngagement.jobProfileTypeStatus}
                 shared={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
-                dataValue={item.informationAllocation.jobProfileTypeGroup}
+                // dataValue={item.informationAllocation.jobProfileTypeGroup}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item.id)}
@@ -167,6 +173,15 @@ const JobProfileTypeReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'jobProfileTypeDistinctactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
     </div>

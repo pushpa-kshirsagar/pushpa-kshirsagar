@@ -149,8 +149,8 @@ const PopUpTypeCreate = (props) => {
           { id: 'Generic', name: 'Generic' }
         ]}
         mappingValue={'id'}
-        inputHeader={'classification'}
-        inputHeaderBadgeOne={'primary'}
+        inputHeader={''}
+        inputHeaderBadgeOne={''}
         inputHeaderBadgeTwo={''}
         labelval={''}
         headerPanelColour={'genericOne'}
@@ -161,13 +161,13 @@ const PopUpTypeCreate = (props) => {
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         basicInfo={reducerObeject.informationSetup[objectName + 'Classification']}
         typeOfSetObject={
-          (reducerObeject === 'assesseeType' && SET_ASSESSEE_TYPE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'assessmentType' && SET_ASSESSMENT_TYPE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'assignmentType' && SET_ASSIGNMENT_TYPE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'associateType' && SET_ASSOCIATE_TYPE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'cultureProfileType' && SET_CULTUREPROFILE_TYPE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'jobProfileType' && SET_JOBPROFILE_TYPE_CLASSIFICAION_STATE) ||
-          (reducerObeject === 'itemType' && SET_ITEM_TYPE_CLASSIFICAION_STATE)
+          (objectName === 'assesseeType' && SET_ASSESSEE_TYPE_CLASSIFICAION_STATE) ||
+          (objectName === 'assessmentType' && SET_ASSESSMENT_TYPE_CLASSIFICAION_STATE) ||
+          (objectName === 'assignmentType' && SET_ASSIGNMENT_TYPE_CLASSIFICAION_STATE) ||
+          (objectName === 'associateType' && SET_ASSOCIATE_TYPE_CLASSIFICAION_STATE) ||
+          (objectName === 'cultureProfileType' && SET_CULTUREPROFILE_TYPE_CLASSIFICAION_STATE) ||
+          (objectName === 'jobProfileType' && SET_JOBPROFILE_TYPE_CLASSIFICAION_STATE) ||
+          (objectName === 'itemType' && SET_ITEM_TYPE_CLASSIFICAION_STATE)
         }
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

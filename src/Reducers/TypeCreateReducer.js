@@ -28,13 +28,9 @@ const initialState = {
       assesseeTypePictureVerification: false,
       assesseeTypeFlag: false
     },
-    informationAllocation: {
-      assesseeTypeGroup: ''
-    },
     informationSetup: {
       assesseeTypeClassification: {
-        assesseeTypeClassificationPrimary: '',
-        assesseeTypeClassificationSecondary: ''
+        assesseeTypeClassificationPrimary: ''
       }
     }
   },
@@ -47,13 +43,9 @@ const initialState = {
       assessmentTypePictureVerification: false,
       assessmentTypeFlag: false
     },
-    informationAllocation: {
-      assessmentTypeGroup: ''
-    },
     informationSetup: {
       assessmentTypeClassification: {
-        assessmentTypeClassificationPrimary: '',
-        assessmentTypeClassificationSecondary: ''
+        assessmentTypeClassificationPrimary: ''
       }
     }
   },
@@ -66,13 +58,9 @@ const initialState = {
       assignmentTypePictureVerification: false,
       assignmentTypeFlag: false
     },
-    informationAllocation: {
-      assignmentTypeGroup: ''
-    },
     informationSetup: {
       assignmentTypeClassification: {
-        assignmentTypeClassificationPrimary: '',
-        assignmentTypeClassificationSecondary: ''
+        assignmentTypeClassificationPrimary: ''
       }
     }
   },
@@ -85,13 +73,9 @@ const initialState = {
       associateTypePictureVerification: false,
       associateTypeFlag: false
     },
-    informationAllocation: {
-      associateTypeGroup: ''
-    },
     informationSetup: {
       associateTypeClassification: {
-        associateTypeClassificationPrimary: '',
-        associateTypeClassificationSecondary: ''
+        associateTypeClassificationPrimary: ''
       }
     }
   },
@@ -104,13 +88,9 @@ const initialState = {
       itemTypePictureVerification: false,
       itemTypeFlag: false
     },
-    informationAllocation: {
-      itemTypeGroup: ''
-    },
     informationSetup: {
       itemTypeClassification: {
-        itemTypeClassificationPrimary: '',
-        itemTypeClassificationSecondary: ''
+        itemTypeClassificationPrimary: ''
       }
     }
   },
@@ -123,13 +103,9 @@ const initialState = {
       cultureProfileTypePictureVerification: false,
       cultureProfileTypeFlag: false
     },
-    informationAllocation: {
-      cultureProfileTypeGroup: ''
-    },
     informationSetup: {
       cultureProfileTypeClassification: {
-        cultureProfileTypeClassificationPrimary: '',
-        cultureProfileTypeClassificationSecondary: ''
+        cultureProfileTypeClassificationPrimary: ''
       }
     }
   },
@@ -142,13 +118,9 @@ const initialState = {
       jobProfileTypePictureVerification: false,
       jobProfileTypeFlag: false
     },
-    informationAllocation: {
-      jobProfileTypeGroup: ''
-    },
     informationSetup: {
       jobProfileTypeClassification: {
-        jobProfileTypeClassificationPrimary: '',
-        jobProfileTypeClassificationSecondary: ''
+        jobProfileTypeClassificationPrimary: ''
       }
     }
   }
@@ -224,7 +196,7 @@ const TypeCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
           informationBasic: action.payload
         }
       };
-      case SET_ASSESSEE_TYPE_CLASSIFICAION_STATE:
+    case SET_ASSESSEE_TYPE_CLASSIFICAION_STATE:
       return {
         ...istate,
         assesseeType: {
