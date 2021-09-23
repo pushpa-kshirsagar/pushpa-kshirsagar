@@ -288,8 +288,11 @@ function* workerReviewInfoJobProfileSaga(data) {
         });
       }
     } else {
-      console.log('loading end');
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
   } catch (e) {
     console.log('ERROR==', e);
@@ -359,8 +362,11 @@ function* workerReviseInfoJobProfileSaga(data) {
         payload: false
       });
     } else {
-      console.log('loading end');
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
   } catch (e) {
     console.log('ERROR==', e);

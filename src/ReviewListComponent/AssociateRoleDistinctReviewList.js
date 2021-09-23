@@ -15,7 +15,10 @@ import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { makeAssociateRoleObj } from '../Actions/GenericActions';
-import { ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION, GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import {
+  ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+  GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
+} from '../PopUpConfig';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 const AssociateRoleDistinctReviewList = (props) => {
   const dispatch = useDispatch();
@@ -104,6 +107,10 @@ const AssociateRoleDistinctReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     dispatch({
@@ -149,9 +156,9 @@ const AssociateRoleDistinctReviewList = (props) => {
                 id={index}
                 tag={item.informationEngagement.associateRoleTag}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                // status={item.informationEngagement.associateRoleStatus}
-                dataValue={item.informationAllocation.associateRoleGroup}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationEngagement.associateRoleStatus}
+                // dataValue={item.informationAllocation.associateRoleGroup}
+                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 shared={item.associateRoleShared ? 'SHARED' : 'UNSHARED'}
                 actualStatus={item.informationEngagement.associateRoleStatus}
                 textOne={item.informationBasic.associateRoleName}
@@ -174,6 +181,15 @@ const AssociateRoleDistinctReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {FilterMode === 'associateRoleDistinctactive' && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
     </div>

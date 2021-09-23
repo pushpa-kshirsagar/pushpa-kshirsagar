@@ -59,14 +59,14 @@ function* workerReviewAssignmentGroupInfoSaga(data) {
           headerOneBadgeOne: 'group',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
+          responseObject: userResponse.responseObject[0],
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
       if (isReviseMode) {
         yield put({
           type: SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
-          payload: userResponse.responseObject.informationBasic
+          payload: userResponse.responseObject[0].informationBasic
         });
       }
     } else {

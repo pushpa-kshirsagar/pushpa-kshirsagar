@@ -73,14 +73,18 @@ function* workerReviewCultureProfileTypeInfoSaga(data) {
             objectName: 'cultureProfileType',
             stateName: 'cultureProfileTypeGroup',
             value:
-              userResponse?.responseObject[0]?.informationAllocation?.cultureProfileTypeGroup?.id || ''
+              userResponse?.responseObject[0]?.informationAllocation?.cultureProfileTypeGroup?.id ||
+              ''
           }
         });
       }
+    } else {
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
-
-    console.log('loading end');
-    // yield put({ type: LOADER_STOP });
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
@@ -136,7 +140,7 @@ function* workerReviseCultureProfileTypeInfoSaga(data) {
             createMode
           }
         });
-      }  
+      }
       yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
@@ -160,9 +164,11 @@ function* workerReviseCultureProfileTypeInfoSaga(data) {
       });
     } else {
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
-
-    console.log('loading end');
   } catch (e) {
     console.log('ERROR==', e);
     yield put({

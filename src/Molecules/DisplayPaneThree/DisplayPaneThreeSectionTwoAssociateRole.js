@@ -35,15 +35,16 @@ const DisplayPaneThreeSectionTwoAssociateRole = () => {
     associate = relatedReviewListPaneThree[0]?.associate || [];
   }
   let associateArray = [];
-  associate.forEach((ob) => {
-    const { id, informationBasic } = ob;
-    associateArray.push({
-      id,
-      textOne: informationBasic?.associateName || '',
-      textTwo: informationBasic?.associateDescription || 'No Information',
-      status: ''
+  associate &&
+    associate.forEach((ob) => {
+      const { id, informationBasic } = ob;
+      associateArray.push({
+        id,
+        textOne: informationBasic?.associateName || '',
+        textTwo: informationBasic?.associateDescription || 'No Information',
+        status: ''
+      });
     });
-  });
 
   const onclickReviewAssociate = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');

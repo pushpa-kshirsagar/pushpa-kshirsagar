@@ -41,16 +41,13 @@ const PopUpAssociateRoleCreate = () => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
-    let allocationObj = {
-      associateRoleGroup: associateRole.informationAllocation.associateRoleGroup[0]
-    };
     var requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       associateRole: {
         informationBasic: associateRole.informationBasic,
-        informationAllocation: allocationObj
+        informationSetup: associateRole.informationSetup
       }
     };
 
@@ -147,7 +144,7 @@ const PopUpAssociateRoleCreate = () => {
       /> */}
       <PopUpDropList
         isActive={isPopUpValue === 'ROLEGROUPPOPUP'}
-        tag={'assesseeRoleClassificationPrimary'}
+        tag={'associateRoleClassificationPrimary'}
         label={'classification'}
         listSelect={[
           { id: 'Bespoke', name: 'Bespoke' },

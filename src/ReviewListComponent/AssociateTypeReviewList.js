@@ -107,6 +107,10 @@ const AssociateTypeReviewList = (props) => {
     { label: 'suspended', onClick: onClickFooter, Icon: FilterList },
     { label: 'terminated', onClick: onClickFooter, Icon: FilterList }
   ];
+  const secondaryOneIcon = [
+    { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+  ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     dispatch({
@@ -153,8 +157,8 @@ const AssociateTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                // status={item.informationEngagement.associateTypeStatus}
+                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationEngagement.associateTypeStatus}
                 actualStatus={item.informationEngagement.associateTypeStatus}
                 shared={item.associateTypeShared ? 'SHARED' : 'UNSHARED'}
                 textOne={item.informationBasic.associateTypeName}
@@ -180,6 +184,15 @@ const AssociateTypeReviewList = (props) => {
           onClick={onClickFooter}
           primaryIcon={primaryIcon}
           secondaryIcon={secondaryIcon}
+        />
+      )}
+      {(FilterMode === 'associatesTypeDistinctactive') && (
+        <FooterIconTwo
+          FilterModeEnable={FilterModeEnable}
+          FilterMode={FilterMode}
+          onClick={onClickFooter}
+          primaryIcon={primaryIcon}
+          secondaryIcon={secondaryOneIcon}
         />
       )}
     </div>

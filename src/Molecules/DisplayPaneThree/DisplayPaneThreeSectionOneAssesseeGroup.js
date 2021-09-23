@@ -264,7 +264,9 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   const classificationList = [
     {
       id: 'a1',
-      textOneOne: informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary,
+      textOneOne:
+        informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary ||
+        'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',

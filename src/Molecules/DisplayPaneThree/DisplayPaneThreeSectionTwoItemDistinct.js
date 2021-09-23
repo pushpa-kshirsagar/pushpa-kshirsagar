@@ -48,7 +48,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
       labelTextOneOne: 'classification',
       isListCard: false,
       textOneOne:
-        itemFrameworkOne?.itemFrameworkOneClassification.itemFrameworkOneClassificationLabel ||
+        itemFrameworkOne?.itemFrameworkOneCluster?.itemFrameworkOneClusterPrimaryLabel ||
         'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',

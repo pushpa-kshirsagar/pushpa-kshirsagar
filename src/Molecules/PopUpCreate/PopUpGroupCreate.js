@@ -440,8 +440,8 @@ const PopUpGroupCreate = (props) => {
         typeOfSetObject={
           objectName === 'assesseeGroup'
             ? SET_ASSESSEE_CLASSIFICAION_STATE
-            : objectName === 'assesseeGroup'
-            ? SET_ASSESSEE_CLASSIFICAION_STATE
+            : objectName === 'assessmentGroup'
+            ? SET_ASSESSMENT_CLASSIFICAION_STATE
             : objectName === 'assignmentGroup'
             ? SET_ASSIGNMENT_CLASSIFICAION_STATE
             : objectName === 'associateGroup'

@@ -369,12 +369,12 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true
-    },    
+    },
     {
       id: 'a-classification',
       textOneOne:
-        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
-          ?.cultureProfileGroupClassificationPrimary) || 'No Information',
+        informationSetup?.associateRoleClassification?.associateRoleClassificationPrimary ||
+        'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',

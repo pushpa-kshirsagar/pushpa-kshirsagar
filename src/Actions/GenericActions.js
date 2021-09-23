@@ -81,7 +81,6 @@ export const onClickLast = (
   middlePaneHeaderBadgeTwo
 ) => {
   console.log('last Record');
-
   let lastIndex = reviewListDistinctData.length - 1;
   if (scanCount > reviewListDistinctData.length) {
     if (typeOfMiddlePaneList === 'itemsDistinctReviewList') {
@@ -94,14 +93,14 @@ export const onClickLast = (
         middlePaneHeaderBadgeTwo
       );
     }
-    callApiFunction(
-      selectedAssociateInfo,
-      reviewListDistinctData,
-      dispatch,
-      lastIndex,
-      typeOfMiddlePaneList
-    );
   }
+  callApiFunction(
+    selectedAssociateInfo,
+    reviewListDistinctData,
+    dispatch,
+    lastIndex,
+    typeOfMiddlePaneList
+  );
 };
 export const onClickNext = (
   reviewListDistinctData,
@@ -6810,17 +6809,16 @@ export function convertToLocalTime(milisec) {
   return finalformat;
 }
 
-export function calculateTime(milisec){
+export function calculateTime(milisec) {
   var dd = new Date(milisec);
   var seconds = dd.getSeconds();
   var minutes = dd.getUTCMinutes();
   var hours = dd.getUTCHours();
 
-  hours = (hours < 10) ? "0" + hours : hours;
-  minutes = (minutes < 10) ? "0" + minutes : minutes;
-  seconds = (seconds < 10) ? "0" + seconds : seconds;
-  
-  var duration =  minutes + " Mins, " + seconds+" Secs";
-  return duration;
+  hours = hours < 10 ? '0' + hours : hours;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
 
+  var duration = minutes + ' Mins, ' + seconds + ' Secs';
+  return duration;
 }
