@@ -134,8 +134,7 @@ const DisplayPaneThreeSectionOneItemType = () => {
     {
       id: 'a1',
       textOneOne:
-        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
-          .cultureProfileGroupClassificationPrimary) || 'No Information',
+        capitalizeFirstLetter(informationSetup?.itemTypeClassification?.itemTypeClassificationPrimary) || 'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -145,6 +144,12 @@ const DisplayPaneThreeSectionOneItemType = () => {
   const reviseClassification = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);    
+    if(labelName==='classification'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'itemsTYPECREATE' }
+      });
+    }
   };
 
   return (

@@ -145,8 +145,15 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
     }
   ];
   const reviseClassification = (e) => {
+    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
+    if(labelName==='classification'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'associatesTYPECREATE' }
+      });
+    }    
   };
 
   return (

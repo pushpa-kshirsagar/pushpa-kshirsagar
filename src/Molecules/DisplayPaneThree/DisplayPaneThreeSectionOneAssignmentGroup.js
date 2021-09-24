@@ -395,6 +395,13 @@ const DisplayPaneThreeSectionOneAssignmentGroup = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    if (labelName === 'classification') {
+      
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'assignmentsGROUPCREATE' }
+      });
+    }
   };
 
   return (

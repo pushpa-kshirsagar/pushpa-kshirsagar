@@ -264,7 +264,7 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
   const classificationList = [
     {
       id: 'a1',
-      textOneOne: informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary,
+      textOneOne: informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary||'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -366,6 +366,14 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    console.log(reviewMode);
+    if (labelName === 'classification') {
+      
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'assesseesGROUPCREATE' }
+      });
+    }
   };
 
   return (

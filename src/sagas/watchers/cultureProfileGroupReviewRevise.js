@@ -122,7 +122,7 @@ function* workerReviseCultureProfileGroupInfoSaga(data) {
             headerOneBadgeOne: 'group',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
-            responseObject: userResponse.responseObject,
+            responseObject: userResponse.responseObject[0],
             createMode
           }
         });

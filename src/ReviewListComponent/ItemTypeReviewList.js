@@ -89,6 +89,8 @@ const ItemTypeReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
+
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];

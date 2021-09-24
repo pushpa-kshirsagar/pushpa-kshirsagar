@@ -393,9 +393,17 @@ const DisplayPaneThreeSectionOneCultureProfileGroup = () => {
   };
 
   const reviseClassification = (e) => {
+    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    if (labelName === 'classification') {
+      
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'culture profilesGROUPCREATE' }
+      });
+    }
   };
   return (
     <div

@@ -158,7 +158,7 @@ const PopUpTypeCreate = (props) => {
         headerOneBadgeOne={'type'}
         headerOneBadgeTwo={'information'}
         isRequired={true}
-        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        nextPopUpValue={reviewMode === 'revise' ?'':'CONFIRMATIONPOPUP'}
         basicInfo={reducerObeject.informationSetup[objectName + 'Classification']}
         typeOfSetObject={
           (objectName === 'assesseeType' && SET_ASSESSEE_TYPE_CLASSIFICAION_STATE) ||

@@ -164,7 +164,7 @@ const PopUpAssesseeRoleCreate = () => {
         headerOneBadgeOne={'role'}
         headerOneBadgeTwo={'information'}
         isRequired={true}
-        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        nextPopUpValue={reviewMode === 'revise' ?'':'CONFIRMATIONPOPUP'}
         basicInfo={assesseeRole?.informationSetup?.assesseeRoleClassificationPrimary}
         typeOfSetObject={SET_ASSESSEE_ROLE_CLASSIFICAION_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}

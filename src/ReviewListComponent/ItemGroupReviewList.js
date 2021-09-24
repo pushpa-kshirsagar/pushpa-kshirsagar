@@ -95,6 +95,8 @@ const ItemGroupReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
+    
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
       let distinctAllocateStr = allocateStr === 'itemsdistinct' ? 'itemDistinct' : '';
