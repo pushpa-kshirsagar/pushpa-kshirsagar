@@ -272,8 +272,8 @@ const DisplayPaneThreeSectionOneItemGroup = () => {
     {
       id: 'a1',
       textOneOne:
-        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
-          .cultureProfileGroupClassificationPrimary) || 'No Information',
+        capitalizeFirstLetter(informationSetup?.itemGroupClassification
+          .itemGroupClassificationPrimary) || 'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -380,6 +380,12 @@ const DisplayPaneThreeSectionOneItemGroup = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    if (labelName === 'classification') {      
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'itemsGROUPCREATE' }
+      });
+    }
   };
   return (
     <div

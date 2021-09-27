@@ -144,6 +144,12 @@ const DisplayPaneThreeSectionOneItemType = () => {
   const reviseClassification = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     console.log('=====>', labelName);
+    if (labelName === 'classification') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'itemsTYPECREATE' }
+      });
+    }
   };
 
   return (

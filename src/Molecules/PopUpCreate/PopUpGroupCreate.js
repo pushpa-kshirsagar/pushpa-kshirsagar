@@ -187,6 +187,7 @@ const PopUpGroupCreate = (props) => {
   }
   console.log('reducerObeject', reducerObeject);
   console.log('coreRoleReviewListData', coreRoleReviewListData);
+  console.log('reviewMode', reviewMode);
   return (
     <div>
       <PopUpTextField
@@ -435,7 +436,7 @@ const PopUpGroupCreate = (props) => {
         headerOneBadgeOne={'group'}
         headerOneBadgeTwo={'information'}
         isRequired={true}
-        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        nextPopUpValue={reviewMode === 'revise' ? '' : 'CONFIRMATIONPOPUP'}
         basicInfo={reducerObeject.informationSetup[objectName + 'Classification']}
         typeOfSetObject={
           objectName === 'assesseeGroup'

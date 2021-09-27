@@ -278,8 +278,8 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
     {
       id: 'a1',
       textOneOne:
-        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
-          .cultureProfileGroupClassificationPrimary) || 'No Information',
+        capitalizeFirstLetter(informationSetup?.associateGroupClassification
+          .associateProfileGroupClassificationPrimary) || 'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -379,6 +379,19 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
     }
   };
 
+  const reviseCLassification = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName);
+    if (labelName === 'classification') {
+      
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'associatesGROUPCREATE' }
+      });
+    }
+  };
+
   return (
     <div
       style={{
@@ -468,14 +481,14 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
                 <div key={ob.id}>
                   {ob.isListCard ? (
                     <DisplayPanelAccordianReviewListOne
-                      onClickRevise={reviseEngagement}
+                      onClickRevise={reviseCLassification}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}
                     />
                   ) : (
                     <DisplayPanelAccordianInformation
-                      onClickRevise={reviseEngagement}
+                      onClickRevise={reviseCLassification}
                       accordianObject={ob}
                       mode={reviewMode}
                     />

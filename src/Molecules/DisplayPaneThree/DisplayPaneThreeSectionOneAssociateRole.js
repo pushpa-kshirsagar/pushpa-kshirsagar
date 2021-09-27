@@ -556,6 +556,12 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
         payload: { isPopUpValue: 'PERMISSIONPOPUP', popupMode: 'associatesROLECREATE' }
       });
     }
+    else if(labelName==='classification'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ROLEGROUPPOPUP', popupMode: 'associatesROLECREATE' }
+      });
+    }
   };
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');

@@ -756,6 +756,13 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
         payload: { isPopUpValue: 'PERMISSIONPOPUP', popupMode: 'assesseesROLECREATE' }
       });
     }
+    else if(labelName==='classification'){
+      
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ROLEGROUPPOPUP', popupMode: 'assesseesROLECREATE' }
+      });
+    }
   };
 
   const reviseAllocation = (e) => {

@@ -1128,16 +1128,16 @@ export const assesseeCreateApiCalls = (
   dispatch({ type: CLEAR_ASSESSEE_INFO });
   dispatch({ type: LOADER_START });
   let requestObj = makeAssesseeGroupObj(selectedAssociateInfo, 'active', 0, -1);
-  // dispatch({
-  //   type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-  //   payload: {
-  //     request: requestObj,
-  //     BadgeOne: '',
-  //     BadgeTwo: '',
-  //     BadgeThree: '',
-  //     isMiddlePaneList: false
-  //   }
-  // });
+  dispatch({
+    type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+    payload: {
+      request: requestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
   let roleRequestObj = makeAssesseeRoleCreateObj(selectedAssociateInfo, 'active', 0, -1);
   if (typeOfAssesseeCreate === 'administrator')

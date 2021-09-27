@@ -136,7 +136,7 @@ function* workerReviseCultureProfileTypeInfoSaga(data) {
             headerOneBadgeOne: 'type',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
-            responseObject: userResponse.responseObject,
+            responseObject: userResponse.responseObject[0],
             createMode
           }
         });

@@ -368,6 +368,14 @@ const DisplayPaneThreeSectionOneAssesseeGroup = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    console.log(reviewMode);
+    if (labelName === 'classification') {
+      
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'assesseesGROUPCREATE' }
+      });
+    }
   };
 
   return (

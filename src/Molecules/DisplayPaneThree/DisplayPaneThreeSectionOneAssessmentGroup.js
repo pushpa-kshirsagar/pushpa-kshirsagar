@@ -395,6 +395,17 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
+    if (labelName === 'classification') {
+      dispatch({
+        type: SET_STATUS_POPUP_VALUE,
+        payload: capitalizeFirstLetter(informationSetup?.assessmentGroupClassification
+          .assessmentGroupClassificationPrimary)
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'assessmentsGROUPCREATE' }
+      });
+    }
   };
 
   return (
