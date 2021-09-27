@@ -169,7 +169,8 @@ const AssignmentTypeReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 textOne={item.informationBasic.assignmentTypeName}
                 textTwo={item.informationBasic.assignmentTypeDescription}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationSetup.assignmentTypeClassification.assignmentTypeClassificationPrimary}
                 actualStatus={item.informationEngagement.assignmentTypeStatus}
                 shared={item.assignmentTypeShared ? 'SHARED' : 'UNSHARED'}
                 // dataValue={item.informationAllocation?.assignmentTypeGroup}

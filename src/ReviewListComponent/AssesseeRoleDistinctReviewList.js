@@ -83,6 +83,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
     setIsFetching(false);
   };
   const siftApiCall = (siftKey) => {
+    debugger;
     let requestObect = makeAssesseeRoleObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
@@ -100,6 +101,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
+    debugger;
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
@@ -169,7 +171,8 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 // dataValue={item.informationAllocation.assesseeRoleGroup}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                status={item.informationEngagement.assesseeRoleStatus}
+                //status={item.informationEngagement.assesseeRoleStatus}
+                status={item.informationSetup.assesseeRoleClassification.assesseeRoleClassificationPrimary}
                 shared={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
                 actualStatus={item.informationEngagement.assesseeRoleStatus}
                 textOne={assesseeRole(item.informationBasic.assesseeRoleName)}

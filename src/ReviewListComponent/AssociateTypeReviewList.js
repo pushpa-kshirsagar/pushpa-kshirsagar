@@ -159,8 +159,9 @@ const AssociateTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                status={item.informationEngagement.associateTypeStatus}
+                //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationSetup.associateTypeClassification.associateTypeClassificationPrimary}
+                // status={item.informationEngagement.associateTypeStatus}
                 actualStatus={item.informationEngagement.associateTypeStatus}
                 shared={item.associateTypeShared ? 'SHARED' : 'UNSHARED'}
                 textOne={item.informationBasic.associateTypeName}

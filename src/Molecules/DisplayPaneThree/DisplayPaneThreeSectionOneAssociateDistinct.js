@@ -3827,6 +3827,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           payload: { isPopUpValue: 'ASSESSEEBASICINFOTYPEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
         });
       }
+      if(labelName==='assessees' && selectedBadgeName === 'reset'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSEERESETPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }    
     }
     if (labelName === 'assessments') {
       if (!associateInfo?.informationSetup.assessment) {
@@ -3834,6 +3840,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
           payload: assessmentSetUpModule
         });
+      }
+
+      if(labelName==='assessments' && selectedBadgeName === 'reset'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSESSMENTRESETPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+
       }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
@@ -3939,6 +3953,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           payload: assignmentSetUpModule
         });
       }
+      if(labelName==='assignments' && selectedBadgeName === 'reset'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSIGNMENTRESETPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -4025,6 +4045,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           payload: itemSetUpModule
         });
       }
+      if(labelName==='items' && selectedBadgeName === 'reset'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ITEMRESETPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -4104,6 +4130,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         dispatch({
           type: UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
           payload: analyticSetUpModule
+        });
+      }
+      if(labelName==='iGuru analytics' && selectedBadgeName === 'reset'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'IGURUANALYTICSRESETPOPUP', popupMode: 'ASSOCIATE_CREATE' }
         });
       }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
@@ -4215,6 +4247,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         }
       }
 
+      if(labelName==='associates' && selectedBadgeName === 'reset'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATERESETPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
       if (badgeName === 'distinctcreate' && selectedBadgeName === 'approval') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,

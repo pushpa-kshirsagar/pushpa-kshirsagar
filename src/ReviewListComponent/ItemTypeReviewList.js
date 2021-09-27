@@ -152,7 +152,8 @@ const ItemTypeReviewList = (props) => {
                 status={item.informationEngagement.itemTypeStatus}
                 textOne={item.informationBasic.itemTypeName}
                 textTwo={item.informationBasic.itemTypeDescription}
-                // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationSetup.itemTypeClassification.itemTypeClassificationPrimary}
                 actualStatus={item.informationEngagement.itemTypeStatus}
                 shared={item.itemTypeShared ? 'SHARED' : 'UNSHARED'}
                 dataValue={item.informationAllocation?.itemTypeGroup}

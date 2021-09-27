@@ -259,13 +259,15 @@ const DisplayPanelAccordianInformation = (props) => {
                       {IconOne && (
                         <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
                           <IconButton
+                          data-key={'reset'}
+                          data-value={labelTextOneOne}
                             onClick={
                               mode === 'revise'
-                                ? () => {
-                                    onClickReview(
-                                      labelTextOneOne,
-                                      selectedBadge?.labelTextOneOneBadge || ''
-                                    );
+                                ? (e) => {                                  
+                                  onClickRevise(e,'',
+                                    //selectedBadge?.labelTextOneOneBadge || ''
+                                    )
+                                    //onClickReview(e);
                                   }
                                 : () => {
                                     onClickReview(
