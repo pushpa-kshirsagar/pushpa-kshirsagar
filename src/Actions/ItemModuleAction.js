@@ -749,6 +749,14 @@ export const apiCallForItemDistinctPagination = (
     ...reviewListReqObj,
     numberPage: numberPage
   };
+  if (numberPage === -1) {
+    obj = {
+      ...reviewListReqObj,
+      numberPage: numberPage,
+      countPage: 0
+    };
+  }
+
   dispatch({
     type: GET_ITEM_REVIEW_LIST_SAGA,
     payload: {

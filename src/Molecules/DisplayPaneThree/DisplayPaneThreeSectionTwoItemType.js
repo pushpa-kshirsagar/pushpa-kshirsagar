@@ -34,15 +34,16 @@ const DisplayPaneThreeSectionTwoItemType = () => {
     itemList = relatedReviewListPaneThree.item;
   }
   let itemArray = [];
-  itemList.forEach((ob) => {
-    const { id, informationBasic } = ob;
-    itemArray.push({
-      id,
-      textOne: informationBasic?.itemName || '',
-      textTwo: informationBasic?.itemDescription || '',
-      status: ''
+  itemList &&
+    itemList.forEach((ob) => {
+      const { id, informationBasic } = ob;
+      itemArray.push({
+        id,
+        textOne: informationBasic?.itemName || '',
+        textTwo: informationBasic?.itemDescription || '',
+        status: ''
+      });
     });
-  });
   const list2 = [
     {
       id: 'a1',

@@ -157,7 +157,11 @@ import DisplayPaneThreeSectionOneCultureProfileType from '../../Molecules/Displa
 import DisplayPaneThreeSectionOneJobProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneJobProfileType';
 import DisplayPaneThreeSectionTwoCultureProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileType';
 import DisplayPaneThreeSectionTwoJobProfileType from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoJobProfileType';
-import { setResponseToReducerObj } from '../../Actions/ItemModuleAction';
+import {
+  apiCallForItemDistinctPagination,
+  setResponseToReducerObj
+} from '../../Actions/ItemModuleAction';
+import { callApiFunction } from '../../Actions/GenericActions';
 import { BottomNavigation, Grid } from '@material-ui/core';
 import DisplayPaneThreeSectionOneAssesseeReport from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssesseeReport';
 
@@ -204,7 +208,7 @@ export const DisplayPaneThree = () => {
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const { informationBasic,assessee } = responseObject;
+  const { informationBasic, assessee } = responseObject;
   const rightPaneSectionsAssessee = [
     {
       id: 'section1',
@@ -1089,7 +1093,7 @@ export const DisplayPaneThree = () => {
         assesseeRole: {
           id,
           informationBasic: assesseeRole.informationBasic,
-          informationAllocation: allocationObj,
+          // informationAllocation: allocationObj,
           informationSetup: assesseeRole.informationSetup
         }
       };
@@ -1122,7 +1126,7 @@ export const DisplayPaneThree = () => {
         associateRole: {
           id,
           informationBasic: associateRole.informationBasic,
-          informationAllocation: allocationObj,
+          // informationAllocation: allocationObj,
           informationSetup: associateRole.informationSetup
           
         }
@@ -3624,8 +3628,10 @@ export const DisplayPaneThree = () => {
                 className=""
                 labelTextOneOne="name"
                 labelTextOneTwo="alias"
-                textOneOne={assessee.assesseeNameFirst + " " + assessee.assesseeNameLast}
-                textOneTwo={assessee.assesseeAlias !=""? assessee.assesseeAlias:"No Information"}
+                textOneOne={assessee.assesseeNameFirst + ' ' + assessee.assesseeNameLast}
+                textOneTwo={
+                  assessee.assesseeAlias != '' ? assessee.assesseeAlias : 'No Information'
+                }
                 isVerifiedActiveName={false}
                 isVerifiedActivePicture={false}
                 mode={reviewMode}

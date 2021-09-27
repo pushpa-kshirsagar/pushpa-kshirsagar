@@ -14,7 +14,7 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
   const dispatch = useDispatch();
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationEngagement, informationAllocation,informationSetup } = responseObject;
+  const { informationEngagement, informationAllocation, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -137,25 +137,24 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
     {
       id: 'a1',
       textOneOne:
-        capitalizeFirstLetter(informationSetup?.assessmentTypeClassification
-          .assessmentTypeClassificationPrimary) || 'No Information',
+        informationSetup?.assessmentTypeClassification.assessmentTypeClassificationPrimary ||
+        'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',
       isListCard: false
     }
   ];
-  
+
   const reviseClassification = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
-    console.log('=====>', labelName);  
-    if(labelName === 'classification'){
+    console.log('=====>', labelName);
+    if (labelName === 'classification') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'GROUPPOPUP', popupMode: 'assessmentsTYPECREATE' }
       });
     }
-     
   };
 
   return (
@@ -172,7 +171,11 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianReviewListOne
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
                     <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                   )}
@@ -205,7 +208,6 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
             })}
           </Paper>
         </div>
-
       </>
       {isMobile && (
         <div className={'containerPadding'} style={{ height: '55px' }}>

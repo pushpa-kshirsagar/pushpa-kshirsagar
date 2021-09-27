@@ -288,8 +288,8 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
     {
       id: 'a1',
       textOneOne:
-        capitalizeFirstLetter(informationSetup?.assessmentGroupClassification
-          ?.assessmentGroupClassificationPrimary) || 'No Information',
+        informationSetup?.assessmentGroupClassification.assessmentGroupClassificationPrimary ||
+        'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',

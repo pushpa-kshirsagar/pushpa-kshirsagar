@@ -65,7 +65,7 @@ const initialState = {
     },
     informationAllocation: {
       assessmentGroupManager: {
-        assessmentGroupManagerPrimary: ['60ab6eea45fbc840ff3f4140']
+        assessmentGroupManagerPrimary: []
       },
       assessmentGroupNode: {
         assessmentGroupNodePrimary: [],
@@ -92,7 +92,7 @@ const initialState = {
     },
     informationAllocation: {
       assignmentGroupManager: {
-        assignmentGroupManagerPrimary: ['60ab6eea45fbc840ff3f4140']
+        assignmentGroupManagerPrimary: []
       },
       assignmentGroupNode: {
         assignmentGroupNodePrimary: [],

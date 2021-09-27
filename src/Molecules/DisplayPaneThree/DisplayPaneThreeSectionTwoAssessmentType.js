@@ -75,17 +75,18 @@ const DisplayPaneThreeSectionTwoAssessmentType = () => {
     }
   };
 
-  let assessmentList =  relatedReviewListPaneThree?.assessment || [];
+  let assessmentList = relatedReviewListPaneThree?.assessment || [];
   let assessmentArray = [];
-  assessmentList.forEach((ob) => {
-    const { id, informationBasic } = ob;
-    assessmentArray.push({
-      id,
-      textOne: informationBasic?.assessmentName || '',
-      textTwo: informationBasic?.assessmentDescription || '',
-      status: ''
+  assessmentList &&
+    assessmentList.forEach((ob) => {
+      const { id, informationBasic } = ob;
+      assessmentArray.push({
+        id,
+        textOne: informationBasic?.assessmentName || '',
+        textTwo: informationBasic?.assessmentDescription || '',
+        status: ''
+      });
     });
-  });
 
   const list2 = [
     {

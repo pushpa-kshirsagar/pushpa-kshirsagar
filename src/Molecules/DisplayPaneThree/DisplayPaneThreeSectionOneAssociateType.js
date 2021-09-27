@@ -13,7 +13,7 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
-  const { informationEngagement, informationAllocation,informationSetup } = responseObject;
+  const { informationEngagement, informationAllocation, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -115,8 +115,8 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
       isListCard: false
     }
   ];
-  
-   const classificationList = [
+
+  const classificationList = [
     // {
     //   id: 'a-classification',
     //   labelTextOneOne: 'classification',
@@ -136,8 +136,8 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
     {
       id: 'a1',
       textOneOne:
-        capitalizeFirstLetter(informationSetup?.cultureProfileGroupClassification
-          .cultureProfileGroupClassificationPrimary) || 'No Information',
+        informationSetup?.associateTypeClassification.associateTypeClassificationPrimary ||
+        'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -163,14 +163,18 @@ const DisplayPaneThreeSectionOneAssociateType = () => {
         overflow: 'overlay'
       }}
     >
-      <>        
+      <>
         <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {list3.map((ob) => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianReviewListOne
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
                   ) : (
                     <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                   )}

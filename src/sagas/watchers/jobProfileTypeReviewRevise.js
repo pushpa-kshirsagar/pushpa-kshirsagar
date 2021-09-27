@@ -77,9 +77,13 @@ function* workerReviewJobProfileTypeInfoSaga(data) {
           }
         });
       }
+    } else {
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
-
-    console.log('loading end');
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
@@ -158,6 +162,10 @@ function* workerReviseJobProfileTypeInfoSaga(data) {
       });
     } else {
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
 
     console.log('loading end');
