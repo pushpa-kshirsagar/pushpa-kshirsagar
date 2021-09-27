@@ -932,17 +932,7 @@ export const makeAssociateRoleObj = (selectedAssociateInfo, filterKey, numberPag
     value: {
       from: filterKey.toUpperCase()
     }
-  };
-  if(filterKey==="bespoke" || filterKey==="generic"){
-    {
-      searchObj = {
-        condition: 'in',
-        value: {
-          in: filterKey === 'bespoke' ? 'Bespoke':'Generic'
-        }
-      };
-    } 
-  }
+  };  
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -953,36 +943,76 @@ export const makeAssociateRoleObj = (selectedAssociateInfo, filterKey, numberPag
       };
     }
   }
-  let requestObj = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    filter: 'true',
-    orderBy: {
-      columnName: 'informationBasic.associateRoleName,informationBasic.associateRoleDescription',
-      order: 'asc'
-    },
-    numberPage: 0,
-    countPage: 25,
-    searchCondition: 'AND',
-    search: [
-      {
-        condition: 'or',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationEngagement.associateRoleStatus',
-            conditionValue: searchObj
-          },
-          // {
-          //   dataType: 'string',
-          //   conditionColumn: 'informationSetup.associateRoleClassification.associateRoleClassificationPrimary',
-          //   conditionValue: searchObj
-        // } 
-        ]
-      }
-    ]
-  };
+  let requestObj={}
+  if(filterKey==="bespoke"||filterKey==="generic"){
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.associateRoleName,informationBasic.associateRoleDescription',
+        order: 'asc'
+      },
+      numberPage: 0,
+      countPage: 25,
+      searchCondition: 'AND',
+      search: [
+        {
+          condition: 'or',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.associateRoleStatus',
+              conditionValue: {
+                condition: 'eq',
+                value: {
+                from: "ACTIVE"
+                }
+              }
+            },
+            {
+              dataType: 'string',
+              conditionColumn: 'informationSetup.associateRoleClassification.associateRoleClassificationPrimary',
+              conditionValue: {
+                condition: 'in',
+                value: {
+                in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                }
+              }
+          } 
+          ]
+        }
+      ]
+    };
+  }else{
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.associateRoleName,informationBasic.associateRoleDescription',
+        order: 'asc'
+      },
+      numberPage: 0,
+      countPage: 25,
+      searchCondition: 'AND',
+      search: [
+        {
+          condition: 'or',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.associateRoleStatus',
+              conditionValue: searchObj
+            }
+          ]
+        }
+      ]
+    };
+  }
+  
   return requestObj;
 };
 export const makeAssociateRoleScanRequestObject = (
@@ -1228,14 +1258,6 @@ export const makeAssesseeGroupObj = (selectedAssociateInfo, filterKey, countPage
       from: filterKey.toUpperCase()
     }
   };
-  // if(filterKey==="bespoke"||filterKey==="generic"){
-  //   searchObj={         
-  //     condition: 'in',
-  //         value: {
-  //             in: filterKey.toUpperCase()
-  //         }
-  //   }
-  // }  
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -1278,8 +1300,8 @@ export const makeAssesseeGroupObj = (selectedAssociateInfo, filterKey, countPage
               conditionColumn: "informationSetup.assesseeGroupClassification.assesseeGroupClassificationPrimary",
               conditionValue: {         
                 condition: 'in',
-                  value: {
-                      in: [filterKey==="bespoke"?"Generic":"Bespoke"]
+                  value: {                      
+                      in: [filterKey==="bespoke"?"Bespoke":"Generic"]
                   }
                 }
             }
@@ -1314,8 +1336,7 @@ export const makeAssesseeGroupObj = (selectedAssociateInfo, filterKey, countPage
       ]
     };
 
-  }
-  
+  }  
   return requestObj;
 };
 export const makeAssesseeTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
@@ -1412,16 +1433,6 @@ export const makeAssociateTypeObj = (selectedAssociateInfo, filterKey, countPage
       from: filterKey.toUpperCase()
     }
   };
-  if(filterKey==="bespoke" || filterKey==="generic"){
-    {
-      searchObj = {
-        condition: 'in',
-        value: {
-          in: filterKey==='bespoke'?'Bespoke':'Generic'
-        }
-      };
-    } 
-  }
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -1432,35 +1443,74 @@ export const makeAssociateTypeObj = (selectedAssociateInfo, filterKey, countPage
       };
     }
   }
-  let requestObj = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    filter: 'true',
-    orderBy: {
-      columnName: 'informationBasic.associateTypeName,informationBasic.associateTypeDescription',
-      order: 'asc'
-    },
-    numberPage: numberPage,
-    countPage: countPage,
-    search: [
-      {
-        condition: 'and',
-        searchBy: [
-          {
+  let requestObj={}
+  if(filterKey==="bespoke" || filterKey==="generic"){
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.associateTypeName,informationBasic.associateTypeDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.associateTypeStatus',
+              conditionValue: {
+                condition: 'eq',
+                value: {
+                from: "ACTIVE"
+                }
+              }
+            },
+            {
             dataType: 'string',
-            conditionColumn: 'informationEngagement.associateTypeStatus',
-            conditionValue: searchObj
-          },
-          // {
-  //   dataType: 'string',
-  //   conditionColumn: 'informationSetup.associateTypeClassification.associateTypeClassificationPrimary',
-  //   conditionValue: searchObj
-  // }  
-        ]
-      }
-    ]
-  };
+            conditionColumn: 'informationSetup.associateTypeClassification.associateTypeClassificationPrimary',
+            conditionValue: {
+              condition: 'in',
+              value: {
+              in: [filterKey==='bespoke'?'Bespoke':'Generic']
+              }
+            }
+          }  
+          ]
+        }
+      ]
+    };
+  }
+  else{
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.associateTypeName,informationBasic.associateTypeDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.associateTypeStatus',
+              conditionValue: searchObj
+            }
+          ]
+        }
+      ]
+    };
+  }  
   return requestObj;
 };
 export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
@@ -1750,17 +1800,6 @@ export const makeAssociateGroupObj = (selectedAssociateInfo, filterKey, countPag
       from: filterKey.toUpperCase()
     }
   };
-  if(filterKey==="bespoke" || filterKey==="generic"){
-    {
-      searchObj = {
-        condition: 'in',
-        value: {
-          in: filterKey==='bespoke'?'Bespoke':'Generic'
-        }
-      };
-    } 
-  }
-  
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -1771,35 +1810,79 @@ export const makeAssociateGroupObj = (selectedAssociateInfo, filterKey, countPag
       };
     }
   }
-  let requestObj = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    filter: 'true',
-    orderBy: {
-      columnName: 'informationBasic.associateGroupName,informationBasic.associateGroupDescription',
-      order: 'asc'
-    },
-    numberPage: numberPage,
-    countPage: countPage,
-    search: [
-      {
-        condition: 'and',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationEngagement.associateGroupStatus',
-            conditionValue: searchObj
-          }
-          // {
-  //   dataType: 'string',
-  //   conditionColumn: 'informationSetup.associateGroupClassification.associateGroupClassificationPrimary',
-  //   conditionValue: searchObj
-  // } 
-        ]
-      }
-    ]
-  };
+  let requestObj={}
+  if(filterKey==="bespoke" || filterKey==="generic"){
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.associateGroupName,informationBasic.associateGroupDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.associateGroupStatus',
+              conditionValue: {
+                condition: 'eq',
+                value: {
+                from: "ACTIVE"
+                }
+              }
+            },
+            {
+              dataType: 'string',
+              conditionColumn: 'informationSetup.associateGroupClassification.associateGroupClassificationPrimary',
+              conditionValue: {
+              condition: 'in',
+              value: {
+                in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                }
+              }
+            } 
+          ]
+        }
+      ]
+    };
+  }
+  else{
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.associateGroupName,informationBasic.associateGroupDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.associateGroupStatus',
+              conditionValue: searchObj
+            }
+            // {
+    //   dataType: 'string',
+    //   conditionColumn: 'informationSetup.associateGroupClassification.associateGroupClassificationPrimary',
+    //   conditionValue: searchObj
+    // } 
+          ]
+        }
+      ]
+    };
+  }  
   return requestObj;
 };
 export const makeItemObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
@@ -2206,17 +2289,7 @@ export const makeAssessmentGroupObj = (selectedAssociateInfo, filterKey, countPa
     value: {
       from: filterKey.toUpperCase()
     }
-  };
-  if(filterKey==="bespoke" || filterKey==="generic"){
-    {
-      searchObj = {
-        condition: 'in',
-        value: {
-          in: filterKey==='bespoke'?'Bespoke':'Generic'
-        }
-      };
-    } 
-  }
+  };  
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -2227,36 +2300,77 @@ export const makeAssessmentGroupObj = (selectedAssociateInfo, filterKey, countPa
       };
     }
   }
-  let requestObj = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    filter: 'true',
-    orderBy: {
-      columnName:
-        'informationBasic.assessmentGroupName,informationBasic.assessmentGroupDescription',
-      order: 'asc'
-    },
-    numberPage: numberPage,
-    countPage: countPage,
-    search: [
-      {
-        condition: 'and',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationEngagement.assessmentGroupStatus',
-            conditionValue: searchObj
-          }
-          // {
-          //   dataType: 'string',
-          //   conditionColumn: 'informationSetup.assessmentGroupClassification.assessmentGroupClassificationPrimary',
-          //   conditionValue: searchObj
-        // }
-        ]
-      }
-    ]
-  };
+  let requestObj={}
+  if(filterKey==="bespoke" || filterKey==="generic"){
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName:
+          'informationBasic.assessmentGroupName,informationBasic.assessmentGroupDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.assessmentGroupStatus',
+              conditionValue: {
+                condition: 'eq',
+                value: {
+                  from: "ACTIVE"
+                }
+              }
+            },
+            {
+              dataType: 'string',
+              conditionColumn: 'informationSetup.assessmentGroupClassification.assessmentGroupClassificationPrimary',
+              conditionValue: {
+                condition: 'in',
+                value: {
+                  in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                }
+              }
+            }
+          ]
+        }
+      ]
+    };
+  }
+  else{
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName:
+          'informationBasic.assessmentGroupName,informationBasic.assessmentGroupDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.assessmentGroupStatus',
+              conditionValue: searchObj
+            }
+          ]
+        }
+      ]
+    };
+  }
+  
   return requestObj;
 };
 export const makeAssessmentGroupScanRequestObject = (
@@ -2339,17 +2453,7 @@ export const makeAssignmentGroupObj = (selectedAssociateInfo, filterKey, countPa
     value: {
       from: filterKey.toUpperCase()
     }
-  };
-  if(filterKey==="bespoke" || filterKey==="generic"){
-    {
-      searchObj = {
-        condition: 'in',
-        value: {
-          in: filterKey==='bespoke'?'Bespoke':'Generic'
-        }
-      };
-    } 
-  }
+  };  
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -2360,36 +2464,78 @@ export const makeAssignmentGroupObj = (selectedAssociateInfo, filterKey, countPa
       };
     }
   }
-  let requestObj = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    filter: 'true',
-    orderBy: {
-      columnName:
-        'informationBasic.assignmentGroupName,informationBasic.assignmentGroupDescription',
-      order: 'asc'
-    },
-    numberPage: numberPage,
-    countPage: countPage,
-    search: [
-      {
-        condition: 'and',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationEngagement.assignmentGroupStatus',
-            conditionValue: searchObj
-          }
-            // {
-  //   dataType: 'string',
-  //   conditionColumn: 'informationSetup.assignmentGroupClassification.assignmentGroupClassificationPrimary',
-  //   conditionValue: searchObj
-  // }      
-        ]
-      }
-    ]
-  };
+  let requestObj={}
+  if(filterKey==="bespoke" || filterKey==="generic"){
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName:
+          'informationBasic.assignmentGroupName,informationBasic.assignmentGroupDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.assignmentGroupStatus',
+              conditionValue: {
+                condition: 'eq',
+                value: {
+                  from: "ACTIVE"
+                }
+              }
+            },              
+            {      
+              dataType: 'string',      
+              conditionColumn: 'informationSetup.assignmentGroupClassification.assignmentGroupClassificationPrimary',      
+              conditionValue: {      
+                condition: 'in',      
+                value: {      
+                  in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                }      
+              }    
+            }      
+          ]
+        }
+      ]
+    };
+  }
+  else{
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName:
+          'informationBasic.assignmentGroupName,informationBasic.assignmentGroupDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.assignmentGroupStatus',
+              conditionValue: searchObj
+            }   
+          ]
+        }
+      ]
+    };
+
+  }
+  
   return requestObj;
 };
 export const makeAssignmentGroupScanRequestObject = (
@@ -2484,30 +2630,75 @@ export const makeAssessmentTypeObj = (selectedAssociateInfo, filterKey, countPag
       };
     }
   }
-  let requestObj = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    filter: 'true',
-    orderBy: {
-      columnName: 'informationBasic.assessmentTypeName,informationBasic.assessmentTypeDescription',
-      order: 'asc'
-    },
-    numberPage: numberPage,
-    countPage: countPage,
-    search: [
-      {
-        condition: 'and',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationEngagement.assessmentTypeStatus',
-            conditionValue: searchObj
-          }
-        ]
-      }
-    ]
-  };
+  let requestObj={}
+  if(filterKey==="bespoke"||filterKey==="generic"){
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.assessmentTypeName,informationBasic.assessmentTypeDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.assessmentTypeStatus',
+              conditionValue: {
+                condition: 'eq',
+                value: {
+                  from: "ACTIVE"
+                }
+              }
+            },
+            {
+              dataType: "string",
+              conditionColumn: "informationSetup.assessmentTypeClassification.assessmentTypeClassificationPrimary",
+              conditionValue: {
+                condition: "in",
+                value: {                  
+                    in: [ filterKey==="bespoke"? "Bespoke":"Generic"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    };
+  }
+  else{
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.assessmentTypeName,informationBasic.assessmentTypeDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.assessmentTypeStatus',
+              conditionValue: searchObj
+            }
+          ]
+        }
+      ]
+    };
+  }
+  
   return requestObj;
 };
 export const makeAssignmentTypeObj = (selectedAssociateInfo, filterKey, countPage, numberPage) => {
@@ -2516,18 +2707,7 @@ export const makeAssignmentTypeObj = (selectedAssociateInfo, filterKey, countPag
     value: {
       from: filterKey.toUpperCase()
     }
-  };
-  if(filterKey==="bespoke" || filterKey==="generic"){
-    {
-      searchObj = {
-        condition: 'in',
-        value: {
-          in: filterKey==='bespoke'?'Bespoke':'Generic'
-        }
-      };
-    } 
-  } 
-       
+  };      
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -2538,35 +2718,75 @@ export const makeAssignmentTypeObj = (selectedAssociateInfo, filterKey, countPag
       };
     }
   }
-  let requestObj = {
-    assesseeId: selectedAssociateInfo?.assesseeId,
-    associateId:
-      selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    filter: 'true',
-    orderBy: {
-      columnName: 'informationBasic.assignmentTypeName,informationBasic.assignmentTypeDescription',
-      order: 'asc'
-    },
-    numberPage: numberPage,
-    countPage: countPage,
-    search: [
-      {
-        condition: 'and',
-        searchBy: [
-          {
-            dataType: 'string',
-            conditionColumn: 'informationEngagement.assignmentTypeStatus',
-            conditionValue: searchObj
-          }
-          // {
-  //   dataType: 'string',
-  //   conditionColumn: 'informationSetup.assignmentTypeClassification.assignmentTypeClassificationPrimary',
-  //   conditionValue: searchObj
-  // } 
-        ]
-      }
-    ]
-  };
+  let requestObj = {}
+  if(filterKey==="bespoke" || filterKey==="generic"){
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.assignmentTypeName,informationBasic.assignmentTypeDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.assignmentTypeStatus',
+              conditionValue: {
+                condition: 'eq',
+                value: {
+                  from: "ACTIVE"
+                }
+              }
+            },
+            {    
+              dataType: 'string',    
+              conditionColumn: 'informationSetup.assignmentTypeClassification.assignmentTypeClassificationPrimary',
+              conditionValue: {
+                condition: 'in',
+                value: {
+                  in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                }
+              }
+            }
+          ]
+        }
+      ]
+    };
+  }
+  else{
+    requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      filter: 'true',
+      orderBy: {
+        columnName: 'informationBasic.assignmentTypeName,informationBasic.assignmentTypeDescription',
+        order: 'asc'
+      },
+      numberPage: numberPage,
+      countPage: countPage,
+      search: [
+        {
+          condition: 'and',
+          searchBy: [
+            {
+              dataType: 'string',
+              conditionColumn: 'informationEngagement.assignmentTypeStatus',
+              conditionValue: searchObj
+            }
+          ]
+        }
+      ]
+    };
+  }
+  
   return requestObj;
 };
 export const makeAssignmentReviewListRequestObject = (

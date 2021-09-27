@@ -104,6 +104,8 @@ const AssessmentTypeReviewList = (props) => {
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
+    
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */

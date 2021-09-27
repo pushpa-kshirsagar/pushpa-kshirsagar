@@ -2976,6 +2976,64 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_ASSOCIATENODE_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+      <PopUpConfirm
+        isActive={isPopUpValue === 'ASSESSEERESETPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'reset'}
+        headerOneBadgeOne={''}
+        mode={'reset'}
+        onClickYes={onClickCancelYes}/>
+
+      <PopUpConfirm
+        isActive={isPopUpValue === 'ASSESSMENTRESETPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'reset'}
+        headerOneBadgeOne={''}
+        mode={'reset'}
+        onClickYes={onClickCancelYes}/>
+
+       <PopUpConfirm
+        isActive={isPopUpValue === 'ASSIGNMENTRESETPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'reset'}
+        headerOneBadgeOne={''}
+        mode={'reset'}
+        onClickYes={onClickCancelYes}/>
+
+      <PopUpConfirm
+        isActive={isPopUpValue === 'ASSIGNMENTRESETPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'reset'}
+        headerOneBadgeOne={''}
+        mode={'reset'}
+        onClickYes={onClickCancelYes}/>
+        
+        <PopUpConfirm
+        isActive={isPopUpValue === 'ITEMRESETPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'reset'}
+        headerOneBadgeOne={''}
+        mode={'reset'}
+        onClickYes={onClickCancelYes}/>
+
+        <PopUpConfirm
+        isActive={isPopUpValue === 'ASSOCIATE'}
+        headerPanelColour={'genericOne'}
+        headerOne={'reset'}
+        headerOneBadgeOne={''}
+        mode={'reset'}
+        onClickYes={onClickCancelYes}/>
+
+        <PopUpConfirm
+        isActive={isPopUpValue === 'IGURUANALYTICS'}
+        headerPanelColour={'genericOne'}
+        headerOne={'reset'}
+        headerOneBadgeOne={''}
+        mode={'reset'}
+        onClickYes={onClickCancelYes}/>
+
+
+     
     </div>
   );
 };
