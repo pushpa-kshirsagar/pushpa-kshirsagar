@@ -1395,9 +1395,7 @@ export const DisplayPaneThree = () => {
         assessmentType: {
           id,
           informationBasic: assessmentType.informationBasic,
-          informationAllocation: assessmentType.informationAllocation,
           informationSetup: assessmentType.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });

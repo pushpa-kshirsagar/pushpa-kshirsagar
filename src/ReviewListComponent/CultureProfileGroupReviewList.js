@@ -96,7 +96,7 @@ const CultureProfileGroupReviewList = (props) => {
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
-    
+
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
       // let distinctAllocateStr = allocateStr === 'assesseesdistinct' ? 'assesseeDistinct' : '';
@@ -172,7 +172,10 @@ const CultureProfileGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.cultureProfileGroupStatus}
-                status={item.informationSetup.cultureProfileGroupClassification.cultureProfileGroupClassificationPrimary}
+                status={
+                  item.informationSetup?.cultureProfileGroupClassification
+                    ?.cultureProfileGroupClassificationPrimary
+                }
                 actualStatus={item.informationEngagement.cultureProfileGroupStatus}
                 textOne={item.informationBasic.cultureProfileGroupName}
                 textTwo={item.informationBasic.cultureProfileGroupDescription}

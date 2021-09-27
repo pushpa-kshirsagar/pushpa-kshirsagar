@@ -82,6 +82,7 @@ function* workerSignInAssesseeSaga(data) {
           type: SET_SELECTED_ASSOCIATE,
           payload: selectedAssociate
         });
+        yield put({ type: LOADER_START });
         yield put({
           type: GET_ASSESSEE_INFO_SAGA,
           payload: {
@@ -270,6 +271,7 @@ function* workerSignInAssesseeInfo(data) {
           type: SET_SELECTED_ASSOCIATE,
           payload: selectedAssociate
         });
+        yield put({ type: LOADER_START });
         yield put({
           type: GET_ASSESSEE_INFO_SAGA,
           payload: {

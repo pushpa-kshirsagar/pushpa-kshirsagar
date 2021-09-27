@@ -1131,6 +1131,7 @@ const PopUpDisplayPanelAssociate = (props) => {
     } else if (clickValue === 'information' && popupHeaderOneBadgeOne === 'groups') {
       dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
       let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: LOADER_START });
       dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
       dispatch({
         type: INTERNAL_NODE_LIST_SAGA,

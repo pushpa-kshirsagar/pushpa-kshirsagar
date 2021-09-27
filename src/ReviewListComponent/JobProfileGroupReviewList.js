@@ -97,7 +97,7 @@ const JobProfileGroupReviewList = (props) => {
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
-    
+
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
       // let distinctAllocateStr = allocateStr === 'assesseesdistinct' ? 'assesseeDistinct' : '';
@@ -173,7 +173,10 @@ const JobProfileGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.jobProfileGroupStatus}
-                status={item.informationSetup.jobProfileGroupClassification.jobProfileGroupClassificationPrimary}
+                status={
+                  item.informationSetup?.jobProfileGroupClassification
+                    ?.jobProfileGroupClassificationPrimary
+                }
                 actualStatus={item.informationEngagement.jobProfileGroupStatus}
                 textOne={item.informationBasic.jobProfileGroupName}
                 textTwo={item.informationBasic.jobProfileGroupDescription}

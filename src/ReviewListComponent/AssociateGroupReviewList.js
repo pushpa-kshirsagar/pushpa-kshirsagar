@@ -112,7 +112,7 @@ const AssociateGroupReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
-    
+
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
@@ -196,7 +196,10 @@ const AssociateGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.associateGroupStatus}
-                status={item.informationSetup.associateGroupClassification.associateGroupClassificationPrimary}
+                status={
+                  item.informationSetup?.associateGroupClassification
+                    ?.associateGroupClassificationPrimary
+                }
                 actualStatus={item.informationEngagement.associateGroupStatus}
                 textOne={item.informationBasic.associateGroupName}
                 textTwo={item.informationBasic.associateGroupDescription}

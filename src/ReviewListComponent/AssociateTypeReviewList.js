@@ -101,7 +101,6 @@ const AssociateTypeReviewList = (props) => {
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'terminated') siftApiCall(siftValue);
-  
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -160,7 +159,10 @@ const AssociateTypeReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                status={item.informationSetup.associateTypeClassification.associateTypeClassificationPrimary}
+                status={
+                  item.informationSetup?.associateTypeClassification
+                    .associateTypeClassificationPrimary
+                }
                 // status={item.informationEngagement.associateTypeStatus}
                 actualStatus={item.informationEngagement.associateTypeStatus}
                 shared={item.associateTypeShared ? 'SHARED' : 'UNSHARED'}
@@ -189,7 +191,7 @@ const AssociateTypeReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-      {(FilterMode === 'associatesTypeDistinctactive') && (
+      {FilterMode === 'associatesTypeDistinctactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

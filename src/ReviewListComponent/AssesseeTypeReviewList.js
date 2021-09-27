@@ -177,7 +177,9 @@ const AssesseeTypeReviewList = (props) => {
                 // actualStatus={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
                 // dataValue={item.informationAllocation.assesseeTypeGroup}
                 //status={item.informationEngagement.assesseeTypeStatus}
-                status={item.informationSetup.assesseeTypeClassification.assesseeTypeClassificationPrimary}
+                status={
+                  item.informationSetup.assesseeTypeClassification.assesseeTypeClassificationPrimary
+                }
                 shared={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
                 // actualStatus={item.informationEngagement.assesseeTypeStatus}
                 textOne={item.informationBasic.assesseeTypeName}
@@ -193,7 +195,7 @@ const AssesseeTypeReviewList = (props) => {
             </div>
           );
         })}
-      {FilterMode === 'assesseesTypeDistinctinactive' && (
+      {FilterMode === 'assesseesTypeDistinctinainactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}
