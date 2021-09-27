@@ -150,7 +150,8 @@ const JobProfileTypeReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 textOne={item.informationBasic.jobProfileTypeName}
                 textTwo={item.informationBasic.jobProfileTypeDescription}
-                status={item.informationEngagement.jobProfileTypeStatus}
+                //status={item.informationEngagement.jobProfileTypeStatus}
+                status={item.informationSetup.jobProfileTypeClassification.jobProfileTypeClassificationPrimary}
                 // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 actualStatus={item.informationEngagement.jobProfileTypeStatus}
                 shared={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}

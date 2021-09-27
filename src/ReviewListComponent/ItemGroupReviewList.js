@@ -183,7 +183,8 @@ const ItemGroupReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.itemGroupStatus}
+                //status={item.informationEngagement.itemGroupStatus}
+                status={item.informationSetup.itemGroupClassification.itemGroupClassificationPrimary}
                 textOne={item.informationBasic.itemGroupName}
                 textTwo={item.informationBasic.itemGroupDescription}
                 isTooltipActive={false}

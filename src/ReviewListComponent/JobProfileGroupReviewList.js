@@ -172,7 +172,8 @@ const JobProfileGroupReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.jobProfileGroupStatus}
+                //status={item.informationEngagement.jobProfileGroupStatus}
+                status={item.informationSetup.jobProfileGroupClassification.jobProfileGroupClassificationPrimary}
                 actualStatus={item.informationEngagement.jobProfileGroupStatus}
                 textOne={item.informationBasic.jobProfileGroupName}
                 textTwo={item.informationBasic.jobProfileGroupDescription}

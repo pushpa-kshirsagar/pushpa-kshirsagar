@@ -153,7 +153,8 @@ const AssociateRoleDistinctReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 // status={item.informationEngagement.associateRoleStatus}
                 dataValue={item.informationAllocation.associateRoleGroup}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationSetup.associateRoleClassification.associateRoleClassificationPrimary}
                 shared={item.associateRoleShared ? 'SHARED' : 'UNSHARED'}
                 actualStatus={item.informationEngagement.associateRoleStatus}
                 textOne={item.informationBasic.associateRoleName}

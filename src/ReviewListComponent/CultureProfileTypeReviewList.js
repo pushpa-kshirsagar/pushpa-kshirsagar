@@ -149,7 +149,8 @@ const CultureProfileTypeReviewList = (props) => {
                 // status={item.informationEngagement.cultureProfileTypeStatus}
                 textOne={item.informationBasic.cultureProfileTypeName}
                 textTwo={item.informationBasic.cultureProfileTypeDescription}
-                status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
+                status={item.informationSetup.cultureProfileTypeClassification.cultureProfileTypeClassificationPrimary}
                 actualStatus={item.informationEngagement.cultureProfileTypeStatus}
                 shared={item.cultureProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
