@@ -161,7 +161,7 @@ const PopUpAssociateRoleCreate = () => {
         headerOneBadgeTwo={'information'}
         isRequired={true}
         nextPopUpValue={reviewMode === 'revise' ?'':'CONFIRMATIONPOPUP'}
-        basicInfo={associateRole?.informationSetup?.associateRoleClassificationPrimary}
+        basicInfo={associateRole?.informationSetup?.associateRoleClassification}
         typeOfSetObject={SET_ASSOCIATE_ROLE_CLASSIFICAION_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

@@ -9,7 +9,6 @@ import {
   LOADER_START,
   CLEAR_TYPE_REDUCER_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
-  SET_TYPE_GROUP_ALLOCATION,
   SET_TYPE_REDUCER_STATE,
   SET_ITEM_DYNAMIC_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
@@ -72,20 +71,6 @@ const PopUpItemCreate = (props) => {
         filteredCoreGroupReviewListDataSecondary.push(group);
     });
   }
-  // const updateGroup = (e) => {
-  //   console.log(e.currentTarget.getAttribute('tag'));
-  //   setRequiredErrorMsg('');
-  //   let tagId = e.currentTarget.getAttribute('tag');
-  //   let tagIdArr = itemInformation?.informationAllocation.itemGroup.itemGroupPrimary;
-  //   dispatch({
-  //     type: SET_TYPE_GROUP_ALLOCATION,
-  //     payload: {
-  //       objectName: objectName,
-  //       stateName: allocationObj,
-  //       value: tagId
-  //     }
-  //   });
-  // };
   const updateGroup = (e, stateName, actualStateName) => {
     let groupid = e.currentTarget.getAttribute('tag');
     let groupArr = itemInformation.informationAllocation[stateName][actualStateName];

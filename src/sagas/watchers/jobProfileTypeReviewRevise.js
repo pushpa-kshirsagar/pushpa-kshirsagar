@@ -71,9 +71,7 @@ function* workerReviewJobProfileTypeInfoSaga(data) {
           type: SET_TYPE_GROUP_ALLOCATION,
           payload: {
             objectName: 'jobProfileType',
-            stateName: 'jobProfileTypeGroup',
-            value:
-              userResponse?.responseObject[0]?.informationAllocation?.jobProfileTypeGroup?.id || ''
+            value: userResponse?.responseObject[0]?.informationSetup
           }
         });
       }

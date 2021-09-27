@@ -77,21 +77,6 @@ function* workerReviewAssociateRoleInfoSaga(data) {
           type: SET_ASSOCIATE_ROLE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
         });
-        let associateRoleGroupObj =
-          userResponse.responseObject[0].informationAllocation.associateRoleGroup;
-        let tempList = [];
-        if (associateRoleGroupObj) {
-          tempList.push(associateRoleGroupObj.id);
-        }
-        yield put({
-          type: SET_ROLE_DYNAMIC_STATE,
-          payload: {
-            objectName: 'associateRole',
-            stateName: 'informationAllocation',
-            actualStateName: 'associateRoleGroup',
-            value: tempList
-          }
-        });
       }
       console.log('loading end');
       yield put({ type: LOADER_STOP });

@@ -72,9 +72,7 @@ function* workerReviewAssesseeTypeInfoSaga(data) {
           type: SET_TYPE_GROUP_ALLOCATION,
           payload: {
             objectName: 'assesseeType',
-            stateName: 'assesseeTypeGroup',
-            value:
-              userResponse?.responseObject[0]?.informationAllocation?.assesseeTypeGroup?.id || ''
+            value: userResponse?.responseObject[0]?.informationSetup
           }
         });
       }

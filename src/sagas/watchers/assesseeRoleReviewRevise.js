@@ -7,6 +7,7 @@ import {
   GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
   LOADER_STOP,
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+  SET_ASSESSEE_ROLE_CLASSIFICAION_STATE,
   SET_ASSESSEE_ROLE_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -69,22 +70,13 @@ function* workerReviewAssesseeRoleInfoSaga(data) {
           type: SET_ASSESSEE_ROLE_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
         });
-        let assesseeRoleGroupObj =
-          userResponse.responseObject[0].informationAllocation.assesseeRoleGroup;
-        let tempList = [];
-        if (assesseeRoleGroupObj) {
-          tempList.push(assesseeRoleGroupObj.id);
+        if (userResponse.responseObject[0].informationSetup.assesseeRoleClassification) {
+          yield put({
+            type: SET_ASSESSEE_ROLE_CLASSIFICAION_STATE,
+            payload: userResponse.responseObject[0].informationSetup.assesseeRoleClassification
+          });
         }
-        yield put({
-          type: SET_ROLE_DYNAMIC_STATE,
-          payload: {
-            objectName: 'assesseeRole',
-            stateName: 'informationAllocation',
-            actualStateName: 'assesseeRoleGroup',
-            value: tempList
-          }
-        });
-        if (userResponse.responseObject[0].informationSetup) {
+        if (userResponse.responseObject[0].informationSetup.assesseeRolePermission) {
           yield put({
             type: SET_ROLE_REDUCER_STATE,
             payload: {

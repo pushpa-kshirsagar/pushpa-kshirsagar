@@ -9,7 +9,6 @@ import {
   LOADER_START,
   CLEAR_TYPE_REDUCER_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
-  SET_TYPE_GROUP_ALLOCATION,
   SET_ASSESSEE_TYPE_CLASSIFICAION_STATE,
   SET_ASSESSMENT_TYPE_CLASSIFICAION_STATE,
   SET_ASSIGNMENT_TYPE_CLASSIFICAION_STATE,
@@ -61,20 +60,6 @@ const PopUpTypeCreate = (props) => {
     console.log('CREATE type api', reqBody);
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_TYPE_SAGA, payload: reqBody });
-  };
-  const updateGroup = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    setRequiredErrorMsg('');
-    let tagId = e.currentTarget.getAttribute('tag');
-    let tagIdArr = reducerObeject?.informationAllocation[allocationObj];
-    dispatch({
-      type: SET_TYPE_GROUP_ALLOCATION,
-      payload: {
-        objectName: objectName,
-        stateName: allocationObj,
-        value: tagId
-      }
-    });
   };
   console.log('CREATE TYPE===', reducerObeject);
   return (

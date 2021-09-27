@@ -73,9 +73,7 @@ function* workerReviewAssignmentTypeInfoSaga(data) {
           type: SET_TYPE_GROUP_ALLOCATION,
           payload: {
             objectName: 'assignmentType',
-            stateName: 'assignmentTypeGroup',
-            value:
-              userResponse?.responseObject[0]?.informationAllocation?.assignmentTypeGroup?.id || ''
+            value: userResponse?.responseObject[0]?.informationSetup
           }
         });
       }

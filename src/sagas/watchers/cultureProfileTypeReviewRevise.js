@@ -71,10 +71,7 @@ function* workerReviewCultureProfileTypeInfoSaga(data) {
           type: SET_TYPE_GROUP_ALLOCATION,
           payload: {
             objectName: 'cultureProfileType',
-            stateName: 'cultureProfileTypeGroup',
-            value:
-              userResponse?.responseObject[0]?.informationAllocation?.cultureProfileTypeGroup?.id ||
-              ''
+            value: userResponse?.responseObject[0]?.informationSetup
           }
         });
       }

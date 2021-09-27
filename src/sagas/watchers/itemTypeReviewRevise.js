@@ -72,8 +72,7 @@ function* workerReviewItemTypeInfoSaga(data) {
           type: SET_TYPE_GROUP_ALLOCATION,
           payload: {
             objectName: 'itemType',
-            stateName: 'itemTypeGroup',
-            value: userResponse?.responseObject[0]?.informationAllocation?.itemTypeGroup?.id || ''
+            value: userResponse?.responseObject[0]?.informationSetup
           }
         });
       }

@@ -1241,11 +1241,11 @@ export const makeAssesseeGroupObj = (selectedAssociateInfo, filterKey, countPage
             conditionColumn: 'informationEngagement.assesseeGroupStatus',
             conditionValue: searchObj
           },
-          {
-            dataType: 'string',
-            conditionColumn: "informationSetup.assesseeGroupClassification.assesseeGroupClassificationPrimary",
-            conditionValue: searchObj
-          }
+          // {
+          //   dataType: 'string',
+          //   conditionColumn: "informationSetup.assesseeGroupClassification.assesseeGroupClassificationPrimary",
+          //   conditionValue: searchObj
+          // }
         ]
       }
     ]

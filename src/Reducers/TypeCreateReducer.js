@@ -134,10 +134,7 @@ const TypeCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
         ...istate,
         [action.payload.objectName]: {
           ...istate[action.payload.objectName],
-          informationAllocation: {
-            ...istate[action.payload.objectName].informationAllocation,
-            [action.payload.stateName]: action.payload.value
-          }
+          informationSetup: action.payload.value
         }
       };
     case SET_ASSESSEE_TYPE_REDUCER_STATE:

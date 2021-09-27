@@ -12,7 +12,6 @@ import {
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_GROUP_ALLOCATION_STATE,
-  SET_GROUP_SETUP_STATE,
   SET_ASSESSEE_CLASSIFICAION_STATE,
   SET_ASSESSMENT_CLASSIFICAION_STATE,
   SET_ASSIGNMENT_CLASSIFICAION_STATE,
@@ -66,35 +65,6 @@ const PopUpGroupCreate = (props) => {
         stateName: stateName,
         actualStateName: actualStateName,
         value: groupArr
-      }
-    });
-  };
-
-  const updateSetupObj = (e, stateName, actualStateName) => {
-    // -------------
-    console.log(e.currentTarget.getAttribute('tag'));
-    setRoleSelectedError('');
-    let tagId = e.currentTarget.getAttribute('tag');
-    let tagIdArr = reducerObeject.informationSetup[stateName][actualStateName];
-    if (tagIdArr.includes(tagId)) {
-      document.getElementById(tagId).style.backgroundColor = 'white';
-      tagIdArr = tagIdArr.filter(function (number) {
-        return number !== tagId;
-      });
-    } else {
-      var arr = [];
-      tagIdArr = [...arr];
-      tagIdArr.push(tagId);
-      document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
-    }
-    // ------------
-    dispatch({
-      type: SET_GROUP_SETUP_STATE,
-      payload: {
-        objectName: objectName,
-        stateName: stateName,
-        actualStateName: actualStateName,
-        value: tagIdArr
       }
     });
   };

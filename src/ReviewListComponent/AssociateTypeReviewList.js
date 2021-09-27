@@ -167,7 +167,7 @@ const AssociateTypeReviewList = (props) => {
                 textTwo={item.informationBasic.associateTypeDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
-                dataValue={item.informationAllocation.associateTypeGroup}
+                // dataValue={item.informationAllocation.associateTypeGroup}
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item.id)}
                 onClickCheckBox={(event) => {

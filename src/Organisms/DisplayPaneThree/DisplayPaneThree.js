@@ -1080,9 +1080,6 @@ export const DisplayPaneThree = () => {
     ) {
       console.log('ASSESSEES ROLE REVISE');
       const { associateId, id } = responseObject;
-      let allocationObj = {
-        assesseeRoleGroup: assesseeRole.informationAllocation.assesseeRoleGroup[0]
-      };
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
@@ -1093,7 +1090,6 @@ export const DisplayPaneThree = () => {
         assesseeRole: {
           id,
           informationBasic: assesseeRole.informationBasic,
-          // informationAllocation: allocationObj,
           informationSetup: assesseeRole.informationSetup
         }
       };

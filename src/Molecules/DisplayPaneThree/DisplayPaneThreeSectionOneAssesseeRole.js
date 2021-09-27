@@ -718,6 +718,12 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     let selected = data ? data[0] : null;
+    if (labelName === 'classification') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ROLEGROUPPOPUP', popupMode: 'assesseesROLECREATE' }
+      });
+    }
     if (
       labelName !== '' &&
       (selected?.labelTextTwoBadge === 'distinct' ||
@@ -756,13 +762,7 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
         payload: { isPopUpValue: 'PERMISSIONPOPUP', popupMode: 'assesseesROLECREATE' }
       });
     }
-    else if(labelName==='classification'){
-      
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ROLEGROUPPOPUP', popupMode: 'assesseesROLECREATE' }
-      });
-    }
+    
   };
 
   const reviseAllocation = (e) => {

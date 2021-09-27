@@ -8,6 +8,7 @@ import {
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_GROUP_SETUP_STATE,
   SET_ITEM_GROUP_REDUCER_STATE,
   SET_POPUP_VALUE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
@@ -65,6 +66,13 @@ function* workerReviewItemGroupInfoSaga(data) {
         yield put({
           type: SET_ITEM_GROUP_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_GROUP_SETUP_STATE,
+          payload: {
+            objectName: 'itemGroup',
+            value: userResponse.responseObject[0].informationSetup
+          }
         });
       }
     }

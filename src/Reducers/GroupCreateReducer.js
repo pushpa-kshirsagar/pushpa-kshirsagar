@@ -50,7 +50,7 @@ const initialState = {
     },
     informationSetup: {
       assesseeGroupClassification: {
-        assesseeGroupClassificationPrimary: '',
+        assesseeGroupClassificationPrimary: ''
         // assesseeGroupClassificationSecondary: ''
       }
     }
@@ -77,7 +77,7 @@ const initialState = {
     },
     informationSetup: {
       assessmentGroupClassification: {
-        assessmentGroupClassificationPrimary: '',
+        assessmentGroupClassificationPrimary: ''
         // assessmentGroupClassificationSecondary: ''
       }
     }
@@ -104,7 +104,7 @@ const initialState = {
     },
     informationSetup: {
       assignmentGroupClassification: {
-        assignmentGroupClassificationPrimary: '',
+        assignmentGroupClassificationPrimary: ''
         // assignmentGroupClassificationSecondary: ''
       }
     }
@@ -131,7 +131,7 @@ const initialState = {
     },
     informationSetup: {
       associateGroupClassification: {
-        associateGroupClassificationPrimary: '',
+        associateGroupClassificationPrimary: ''
         // associateGroupClassificationSecondary: ''
       }
     }
@@ -158,7 +158,7 @@ const initialState = {
     },
     informationSetup: {
       itemGroupClassification: {
-        itemGroupClassificationPrimary: '',
+        itemGroupClassificationPrimary: ''
         // itemGroupClassificationSecondary: ''
       }
     }
@@ -185,7 +185,7 @@ const initialState = {
     },
     informationSetup: {
       cultureProfileGroupClassification: {
-        cultureProfileGroupClassificationPrimary: '',
+        cultureProfileGroupClassificationPrimary: ''
       }
     }
   },
@@ -211,7 +211,7 @@ const initialState = {
     },
     informationSetup: {
       jobProfileGroupClassification: {
-        jobProfileGroupClassificationPrimary: '',
+        jobProfileGroupClassificationPrimary: ''
         // jobProfileGroupClassificationSecondary: ''
       }
     }
@@ -296,13 +296,7 @@ const GroupCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), a
         ...istate,
         [action.payload.objectName]: {
           ...istate[action.payload.objectName],
-          informationSetup: {
-            ...istate[action.payload.objectName].informationSetup,
-            [action.payload.stateName]: {
-              ...istate[action.payload.objectName].informationSetup[action.payload.stateName],
-              [action.payload.actualStateName]: action.payload.value
-            }
-          }
+          informationSetup: action.payload.value
         }
       };
     case SET_ASSESSEE_CLASSIFICAION_STATE:

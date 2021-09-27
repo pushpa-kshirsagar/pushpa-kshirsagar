@@ -12,7 +12,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_GROUP_SETUP_STATE
 } from '../../actionType';
 import {
   ASSESSEE_GROUP_CLASSIFICATION_URL,
@@ -73,6 +74,13 @@ function* workerReviewAssesseeGroupInfoSaga(data) {
         yield put({
           type: SET_ASSESSEE_GROUP_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_GROUP_SETUP_STATE,
+          payload: {
+            objectName: 'assesseeGroup',
+            value: userResponse.responseObject[0].informationSetup
+          }
         });
       }
     } else {

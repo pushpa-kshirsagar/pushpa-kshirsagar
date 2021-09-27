@@ -10,7 +10,8 @@ import {
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA
+  GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+  SET_GROUP_SETUP_STATE
 } from '../../actionType';
 import { ASSOCIATE_GROUP_INFO_REVISE_URL, ASSOCIATE_REVIEW_GROUP_URL } from '../../endpoints';
 import Store from '../../store';
@@ -66,6 +67,13 @@ function* workerReviewAssociateGroupInfoSaga(data) {
         yield put({
           type: SET_ASSOCIATE_GROUP_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_GROUP_SETUP_STATE,
+          payload: {
+            objectName: 'associateGroup',
+            value: userResponse.responseObject[0].informationSetup
+          }
         });
       }
     }

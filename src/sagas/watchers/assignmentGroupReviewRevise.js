@@ -9,6 +9,7 @@ import {
   SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_GROUP_SETUP_STATE,
   SET_POPUP_VALUE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../../actionType';
@@ -67,6 +68,13 @@ function* workerReviewAssignmentGroupInfoSaga(data) {
         yield put({
           type: SET_ASSIGNMEMT_GROUP_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_GROUP_SETUP_STATE,
+          payload: {
+            objectName: 'assignmentGroup',
+            value: userResponse.responseObject[0].informationSetup
+          }
         });
       }
     } else {
@@ -127,7 +135,7 @@ function* workerReviseAssignmentGroupInfoSaga(data) {
             headerOneBadgeOne: 'group',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
-            responseObject: userResponse.responseObject,
+            responseObject: userResponse.responseObject[0],
             createMode
           }
         });

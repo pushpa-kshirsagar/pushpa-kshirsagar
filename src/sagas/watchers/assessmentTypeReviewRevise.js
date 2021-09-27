@@ -59,22 +59,20 @@ function* workerReviewAssessmentTypeInfoSaga(data) {
           headerOneBadgeOne: 'type',
           headerOneBadgeTwo: 'information',
           headerOneBadgeThree: 'key',
-          responseObject: userResponse.responseObject,
+          responseObject: userResponse.responseObject[0],
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
       if (isReviseMode) {
         yield put({
           type: SET_ASSESSMENT_TYPE_REDUCER_STATE,
-          payload: userResponse.responseObject.informationBasic
+          payload: userResponse.responseObject[0].informationBasic
         });
         yield put({
           type: SET_TYPE_GROUP_ALLOCATION,
           payload: {
             objectName: 'assessmentType',
-            stateName: 'assessmentTypeGroup',
-            value:
-              userResponse?.responseObject?.informationAllocation?.assessmentTypeGroup?.id || ''
+            value: userResponse?.responseObject[0].informationSetup
           }
         });
       }

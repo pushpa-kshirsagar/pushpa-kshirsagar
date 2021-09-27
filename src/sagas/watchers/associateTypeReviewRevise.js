@@ -71,9 +71,7 @@ function* workerReviewAssociateTypeInfoSaga(data) {
           type: SET_TYPE_GROUP_ALLOCATION,
           payload: {
             objectName: 'associateType',
-            stateName: 'associateTypeGroup',
-            value:
-              userResponse?.responseObject[0]?.informationAllocation?.associateTypeGroup?.id || ''
+            value: userResponse?.responseObject[0]?.informationSetup
           }
         });
       }

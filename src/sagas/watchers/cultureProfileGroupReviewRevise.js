@@ -10,7 +10,8 @@ import {
   CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA
+  GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
+  SET_GROUP_SETUP_STATE
 } from '../../actionType';
 import { CULTURE_REVIEW_GROUP_URL, CULTURE_REVISE_GROUP_URL } from '../../endpoints';
 import Store from '../../store';
@@ -65,6 +66,13 @@ function* workerReviewCultureProfileGroupInfoSaga(data) {
         yield put({
           type: SET_CULTURE_GROUP_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_GROUP_SETUP_STATE,
+          payload: {
+            objectName: 'cultureProfileGroup',
+            value: userResponse.responseObject[0].informationSetup
+          }
         });
       }
     } else {

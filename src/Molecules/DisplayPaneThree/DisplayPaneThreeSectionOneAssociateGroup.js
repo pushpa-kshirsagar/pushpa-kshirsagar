@@ -9,7 +9,7 @@ import { Paper } from '@material-ui/core';
 import { SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
 import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 
-//ascendant 
+//ascendant
 let ascendantAll = [];
 let ascendantPrimary = [];
 let ascendantSecondary = [];
@@ -21,7 +21,7 @@ let descendantSecondary = [];
 const DisplayPaneThreeSectionOneAssociateGroup = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement,informationSetup } = responseObject;
+  const { informationEngagement, informationSetup } = responseObject;
   const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -260,13 +260,13 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
     }
   ];
 
-  const list4=[   
+  const list4 = [
     // {
     //   id: 'a1',
     //   labelTextOneOne: 'classification',
     //   labelTextOneOneBadgeOne: '',
-    //   labelTextOneOneBadgeTwo: '',      
-    //   labelTextOneOneBadges: [        
+    //   labelTextOneOneBadgeTwo: '',
+    //   labelTextOneOneBadges: [
     //     {
     //       labelTextOneOneBadge: '',
     //       innerList: []
@@ -278,14 +278,14 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
     {
       id: 'a1',
       textOneOne:
-        capitalizeFirstLetter(informationSetup?.associateGroupClassification
-          .associateProfileGroupClassificationPrimary) || 'No Information',
+        informationSetup?.associateGroupClassification.associateGroupClassificationPrimary ||
+        'No Information',
       labelTextOneOne: 'classification',
       innerAssociateList: [],
       innerInfo: 'No Information',
       isListCard: false
-    }   
-  ]
+    }
+  ];
 
   const reviseAllocation = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
@@ -384,7 +384,6 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
     if (labelName === 'classification') {
-      
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'associatesGROUPCREATE' }
@@ -498,7 +497,6 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
             })}
           </Paper>
         </div>
-        
       </>
       {isMobile && (
         <div className={'containerPadding'} style={{ height: '55px' }}>

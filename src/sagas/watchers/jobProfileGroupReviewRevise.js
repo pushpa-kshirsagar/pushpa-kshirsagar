@@ -10,7 +10,8 @@ import {
   JOB_GROUP_JOB_REVIEWLIST_SAGA,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA
+  GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
+  SET_GROUP_SETUP_STATE
 } from '../../actionType';
 import { JOB_REVIEW_GROUP_URL, JOB_REVISE_GROUP_URL } from '../../endpoints';
 import Store from '../../store';
@@ -65,6 +66,13 @@ function* workerReviewJobProfileGroupInfoSaga(data) {
         yield put({
           type: SET_JOB_GROUP_REDUCER_STATE,
           payload: userResponse.responseObject[0].informationBasic
+        });
+        yield put({
+          type: SET_GROUP_SETUP_STATE,
+          payload: {
+            objectName: 'jobProfileGroup',
+            value: userResponse.responseObject[0].informationSetup
+          }
         });
       }
     } else {
