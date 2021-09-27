@@ -168,7 +168,9 @@ const AssessmentTypeReviewList = (props) => {
                 textOne={item.informationBasic.assessmentTypeName}
                 textTwo={item.informationBasic.assessmentTypeDescription}
                 //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                status={item.informationSetup.assessmentTypeClassification.assessmentTypeClassificationPrimary}
+                status={FilterMode === 'assessmentsTypeDistinctactive'?
+                item.informationSetup?.assessmentTypeClassification?.assessmentTypeClassificationPrimary:
+                item.informationEngagement.assessmentTypeStatus}
                 actualStatus={item.informationEngagement.assessmentTypeStatus}
                 shared={item.assessmentTypeShared ? 'SHARED' : 'UNSHARED'}
                 dataValue={item.informationAllocation?.assessmentTypeGroup}

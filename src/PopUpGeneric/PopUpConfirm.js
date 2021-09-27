@@ -28,7 +28,7 @@ const PopUpConfirm = (props) => {
     } else {
       dispatch({ type: CLEAR_ASSESSEE_INFO });
       dispatch({ type: POPUP_CLOSE });
-      onClickNoFun();
+      //onClickNoFun();
     }
   };
   const handleBack = () => {

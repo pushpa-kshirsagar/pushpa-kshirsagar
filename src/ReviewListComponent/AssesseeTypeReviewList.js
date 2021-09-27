@@ -105,7 +105,6 @@ const AssesseeTypeReviewList = (props) => {
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const onClickFooter = (e) => {
-    debugger;
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
@@ -177,7 +176,9 @@ const AssesseeTypeReviewList = (props) => {
                 // actualStatus={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
                 // dataValue={item.informationAllocation.assesseeTypeGroup}
                 //status={item.informationEngagement.assesseeTypeStatus}
-                status={item.informationSetup.assesseeTypeClassification.assesseeTypeClassificationPrimary}
+                status={FilterMode === 'assesseesTypeDistinctactive'? item.informationSetup?.assesseeTypeClassification?.assesseeTypeClassificationPrimary
+                : item.informationEngagement.assesseeTypeStatus
+              }
                 shared={item.assesseeTypeShared ? 'SHARED' : 'UNSHARED'}
                 // actualStatus={item.informationEngagement.assesseeTypeStatus}
                 textOne={item.informationBasic.assesseeTypeName}

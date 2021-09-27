@@ -195,7 +195,9 @@ const AssignmentGroupReviewList = (props) => {
                 tag={item?.id}
                 isSelectedReviewList={middlePaneSelectedValue === item?.id}
                 //status={item.informationEngagement.assignmentGroupStatus}
-                status={item.informationSetup.assignmentGroupClassification.assignmentGroupClassificationPrimary}
+                status={FilterMode === 'assignmentsGroupDistinctactive'?
+                item.informationSetup?.assignmentGroupClassification?.assignmentGroupClassificationPrimary:
+                item.informationEngagement.assignmentGroupStatus}
                 actualStatus={item.informationEngagement.assignmentGroupStatus}
                 textOne={item.informationBasic.assignmentGroupName}
                 textTwo={item.informationBasic.assignmentGroupDescription}

@@ -8,7 +8,9 @@ import {
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
-  SET_POPUP_STATE
+  SET_POPUP_STATE,
+  SET_REQUEST_OBJECT,
+  GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -19,6 +21,7 @@ import {
 } from '../PopUpConfig';
 import { getJobProfileGroupApiCall, getJobProfileTypeApiCall } from '../Actions/ActionJobProfile';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import {makeJobProfileTypeObj} from '../Actions/GenericActions';
 const JobProfileTypeReviewList = (props) => {
   const dispatch = useDispatch();
   const { secondaryOptionCheckValue, countPage } = useSelector(
@@ -34,7 +37,10 @@ const JobProfileTypeReviewList = (props) => {
     middlePaneHeader,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    unselectedTagsArray,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue, cardValue } = useSelector((state) => state.PopUpReducer);
@@ -84,11 +90,37 @@ const JobProfileTypeReviewList = (props) => {
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
+
+  const siftApiFilterCall = (siftKey) => {
+    let requestObj = makeJobProfileTypeObj(
+      selectedAssociateInfo,
+      siftKey,
+      0,
+      countPage
+    );
+    dispatch({ type: LOADER_START });
+    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+    dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+
+    dispatch({
+      type: GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA,
+      payload: {
+        middlePaneHeader: middlePaneHeader,
+        request: requestObj,
+        BadgeOne: middlePaneHeaderBadgeOne,        
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
+      }
+    });
+    dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+    document.getElementById('middleComponentId').scrollTop = '0px';
+  };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
-    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
+    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiFilterCall(siftValue);
 
   };
   /* for middle pane */
@@ -151,7 +183,9 @@ const JobProfileTypeReviewList = (props) => {
                 textOne={item.informationBasic.jobProfileTypeName}
                 textTwo={item.informationBasic.jobProfileTypeDescription}
                 //status={item.informationEngagement.jobProfileTypeStatus}
-                status={item.informationSetup.jobProfileTypeClassification.jobProfileTypeClassificationPrimary}
+                status={FilterMode === 'jobProfileTypeDistinctactive'?
+                item.informationSetup?.jobProfileTypeClassification?.jobProfileTypeClassificationPrimary:
+                item.informationEngagement.jobProfileTypeStatus}
                 // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 actualStatus={item.informationEngagement.jobProfileTypeStatus}
                 shared={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}

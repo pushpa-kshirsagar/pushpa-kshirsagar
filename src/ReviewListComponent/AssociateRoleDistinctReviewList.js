@@ -161,7 +161,9 @@ const AssociateRoleDistinctReviewList = (props) => {
                 // status={item.informationEngagement.associateRoleStatus}
                 dataValue={item.informationAllocation.associateRoleGroup}
                 //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                status={item.informationSetup.associateRoleClassification.associateRoleClassificationPrimary}
+                status={FilterMode === 'associateRoleDistinctactive'?
+                item.informationSetup?.associateRoleClassification?.associateRoleClassificationPrimary:
+                item.informationEngagement.associateRoleStatus}
                 shared={item.associateRoleShared ? 'SHARED' : 'UNSHARED'}
                 actualStatus={item.informationEngagement.associateRoleStatus}
                 textOne={item.informationBasic.associateRoleName}
