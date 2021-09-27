@@ -9,7 +9,8 @@ import {
   POPUP_OPEN,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
-  SET_POPUP_STATE
+  SET_POPUP_STATE,
+  SET_REQUEST_OBJECT
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -23,6 +24,7 @@ import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import { makeCultureProfileGroupObj } from '../Actions/GenericActions';
 
 const CultureProfileGroupReviewList = (props) => {
   const dispatch = useDispatch();
@@ -42,7 +44,10 @@ const CultureProfileGroupReviewList = (props) => {
     selectedTagsArray,
     unselectedTagsArray,
     allocateStr,
-    allocatedTagsArray
+    allocatedTagsArray,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const [isFetching, setIsFetching] = useState(false);
@@ -91,11 +96,32 @@ const CultureProfileGroupReviewList = (props) => {
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
+
+  const siftApiFilterCall = (siftKey) => {
+    //getCultureProfileGroupApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'groups');
+    let requestObj = makeCultureProfileGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
+    dispatch({ type: LOADER_START });
+    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+    dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+    dispatch({
+      type: GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
+      payload: {
+        request: requestObj,
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
+      }
+    });
+
+    dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+    document.getElementById('middleComponentId').scrollTop = '0px';
+  };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
-    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
+    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiFilterCall(siftValue);
 
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
@@ -173,8 +199,10 @@ const CultureProfileGroupReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.cultureProfileGroupStatus}
                 status={
-                  item.informationSetup?.cultureProfileGroupClassification
-                    ?.cultureProfileGroupClassificationPrimary
+                  FilterMode === 'cultureProfileGroupactive'
+                    ? item.informationSetup?.cultureProfileGroupClassification
+                        ?.cultureProfileGroupClassificationPrimary
+                    : item.informationEngagement.cultureProfileGroupStatus
                 }
                 actualStatus={item.informationEngagement.cultureProfileGroupStatus}
                 textOne={item.informationBasic.cultureProfileGroupName}

@@ -10,12 +10,13 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_PAGE_COUNT,
   SET_POPUP_STATE,
-  SET_REQUEST_OBJECT
+  SET_REQUEST_OBJECT,
+  GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { makeAssessmentTypeObj } from '../Actions/GenericActions';
+import { makeAssociateTypeObj } from '../Actions/GenericActions';
 import {
   ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
   ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
@@ -38,7 +39,10 @@ const AssociateTypeReviewList = (props) => {
     middlePaneHeader,
     isSelectActive,
     selectedTagsArray,
-    unselectedTagsArray
+    unselectedTagsArray,
+    middlePaneHeaderBadgeTwo,
+    middlePaneHeaderBadgeOne,
+    middlePaneHeaderBadgeThree
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, selectedTagValue, cardValue } = useSelector((state) => state.PopUpReducer);
@@ -96,11 +100,41 @@ const AssociateTypeReviewList = (props) => {
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
+  const siftApiFilterCall = (siftKey) => {
+    debugger;
+    // getAssociatesTypeApiCall(
+    //   selectedAssociateInfo,
+    //   siftKey,
+    //   countPage,
+    //   dispatch,
+    //   'types',
+    //   'associates'
+    // );
+    let requestObj = makeAssociateTypeObj(selectedAssociateInfo, siftKey, 0, countPage);
+    dispatch({ type: LOADER_START });
+    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+    dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+    dispatch({
+      type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+      payload: {
+        middlePaneHeader: middlePaneHeader,
+        request: requestObj,
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+
+        isMiddlePaneList: true
+      }
+    });
+
+    dispatch({ type: ASSOCIATE_POPUP_CLOSE });
+    document.getElementById('middleComponentId').scrollTop = '0px';
+  };
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
-    if (siftValue === 'bespoke' || siftValue === 'terminated') siftApiCall(siftValue);
+    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiFilterCall(siftValue);
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -160,8 +194,10 @@ const AssociateTypeReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 status={
-                  item.informationSetup?.associateTypeClassification
-                    .associateTypeClassificationPrimary
+                  FilterMode === 'associatesTypeDistinctactive'
+                    ? item.informationSetup?.associateTypeClassification
+                        ?.associateTypeClassificationPrimary
+                    : item.informationEngagement.associateTypeStatus
                 }
                 // status={item.informationEngagement.associateTypeStatus}
                 actualStatus={item.informationEngagement.associateTypeStatus}

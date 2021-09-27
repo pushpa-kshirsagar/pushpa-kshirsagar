@@ -197,8 +197,10 @@ const AssociateGroupReviewList = (props) => {
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.associateGroupStatus}
                 status={
-                  item.informationSetup?.associateGroupClassification
-                    ?.associateGroupClassificationPrimary
+                  FilterMode === 'associateGroupDistinctactive'
+                    ? item.informationSetup?.associateGroupClassification
+                        ?.associateGroupClassificationPrimary
+                    : item.informationEngagement.associateGroupStatus
                 }
                 actualStatus={item.informationEngagement.associateGroupStatus}
                 textOne={item.informationBasic.associateGroupName}

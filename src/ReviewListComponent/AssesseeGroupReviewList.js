@@ -198,7 +198,8 @@ const AssesseeGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.assesseeGroupStatus}
-                status={item.informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary}
+                status={FilterMode === 'assesseesGroupDistinctactive'?item.informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary:
+                item.informationEngagement.assesseeGroupStatus}
                 actualStatus={item.informationEngagement.assesseeGroupStatus}
                 textOne={item.informationBasic.assesseeGroupName}
                 textTwo={item.informationBasic.assesseeGroupDescription}

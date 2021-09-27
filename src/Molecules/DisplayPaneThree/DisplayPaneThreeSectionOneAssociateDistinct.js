@@ -4664,6 +4664,23 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         });
       }
     }
+    if(labelName === 'iGuru marketplace'){
+      if(labelName==='iGuru marketplace' && selectedBadgeName === 'reset'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'IGURUMARKETPLACERESETPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+    }
+    if(labelName === 'iGuru mine'){
+      if(labelName ==='iGuru mine' && selectedBadgeName === 'reset'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'IGURUMINERESETPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+    }
+    
   };
   console.log(associateNodeSetUpModule);
   return (
