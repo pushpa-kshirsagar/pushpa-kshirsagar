@@ -6233,7 +6233,7 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
     }
   }
   let requestObj={}
-  if(filterKey==='Bespoke'||filterKey==='generic'){
+  if(filterKey==='bespoke'||filterKey==='generic'){
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:

@@ -94,7 +94,7 @@ const CultureProfileTypeReviewList = (props) => {
     //getCultureProfileTypeApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'types');
     let requestObj = makeCultureProfileTypeObj(
       selectedAssociateInfo,
-      secondaryOptionCheckValue,
+      siftKey,
       0,
       countPage
     );
