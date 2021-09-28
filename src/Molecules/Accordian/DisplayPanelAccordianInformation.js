@@ -259,6 +259,7 @@ const DisplayPanelAccordianInformation = (props) => {
                       {IconOne && (
                         <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
                           <IconButton
+                          style={{display: mode === 'revise'? 'block' : 'none'}}
                           data-key={'reset'}
                           data-value={labelTextOneOne}
                             onClick={

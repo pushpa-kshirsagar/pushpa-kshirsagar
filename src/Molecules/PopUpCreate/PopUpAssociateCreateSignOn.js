@@ -3050,6 +3050,137 @@ const PopUpSignOnAssociate = () => {
         mode={'cancel'}
         onClickYes={onClickCancelYes}
       />
+
+      <PopUpPicture
+        isActive={isPopUpValue === 'ASSOCIATE_COUNTRY_PICTURE_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}        
+        headerOneBadgeOne={'setup'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'country'}
+        basicInfo={associateInfo.informationBasic}
+        actualLableValue={'associateCountryFlagPicture'}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        nextPopUpValue={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_COUNTRY_NAME_POPUP'}
+        tag={'associateCountryName'}
+        label={'country'}
+        // listSelect={associateInfo.informationSetup.countryName}
+        listSelect={[{id:'Afghanistan',name:'Afghanistan'},
+        { id: 'India', name: 'India' }]}        
+        mappingValue={'id'}
+        labelval={'country'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_COUNTRY_TAG_POPUP'}
+        tag={'associateCountryTag'}
+        label={'tag'}
+        listSelect={[{ id: 'ISO-3166-356', name: 'ISO-3166-356' }]}
+        mappingValue={'id'}
+        labelval={'tag'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_NAME_POPUP'}
+        tag={'associateCurrencyName'}
+        label={'name'}
+        listSelect={[{ id: 'Indian Rupee', name: 'Indian Rupee' }]}
+        mappingValue={'id'}
+        labelval={'name'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_SYMBOL_POPUP'}
+        tag={'associateCurrencySymbol'}
+        label={'symbol'}
+        listSelect={[{ id: 'INR', name: 'INR' }]}
+        mappingValue={'id'}
+        labelval={'symbol'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_TAG_POPUP'}
+        tag={'associateCurrencyTag'}
+        label={'tag'}
+        listSelect={[{ id: 'ISO-4217-356', name: 'ISO-4217-356' }]}
+        mappingValue={'id'}
+        labelval={'tag'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_LANGUAGE_NAME_POPUP'}
+        tag={'associateLanguageName'}
+        label={'name'}
+        listSelect={[{ id: 'English', name: 'English' }]}
+        mappingValue={'id'}
+        labelval={'name'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ASSOCIATE_LANGUAGE_TAG_POPUP'}
+        tag={'associateLanguageTag'}
+        label={'tag'}
+        listSelect={[{ id: 'ISO-639-EN-1', name: 'ISO-639-EN-1' }]}
+        mappingValue={'id'}
+        labelval={'tag'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={associateInfo.informationSetup.associate || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+	  
     </div>
   );
 };
