@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';

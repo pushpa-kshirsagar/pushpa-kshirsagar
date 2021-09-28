@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
@@ -7,12 +7,11 @@ import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordi
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
 import {
-  ASSESSEE_SIGN_ON,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE,
   SET_STATUS_POPUP_VALUE
 } from '../../actionType';
-import { assesseeRole, getRoleGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
+import { getRoleGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 import { getPermissionStr } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssesseeRole = () => {
@@ -37,24 +36,6 @@ const DisplayPaneThreeSectionOneAssesseeRole = () => {
       status: ''
     });
   }
-  // const allocationList = [
-  //   {
-  //     id: 'a1',
-  //     labelTextOneOne: 'group',
-  //     labelTextOneOneBadgeOne: '',
-  //     labelTextOneOneBadgeTwo: '',
-  //     labelTextOneOneBadgeThree: '',
-  //     labelTextOneOneBadgeFour: '',
-  //     labelTextOneOneBadges: [
-  //       {
-  //         labelTextOneOneBadge: '',
-  //         innerList: assesseeRoleGroupList
-  //       }
-  //     ],
-  //     innerInfo: 'No Information',
-  //     isListCard: true
-  //   }
-  // ];
   const engagementList = [
     {
       id: 'a1',

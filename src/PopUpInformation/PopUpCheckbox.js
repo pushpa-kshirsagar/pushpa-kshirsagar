@@ -129,8 +129,9 @@ const PopUpCheckbox = (props) => {
       }
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: nextPopUpValue } });
     }
+    setLocalObject(JSON.parse(JSON.stringify(valueArrState)));
   };
-  console.log('props',props);
+  console.log('typeOfStateObj', typeOfStateObj);
   // const valueArr = ['email address (primary)', 'email address (secondary)'];
   return (
     <div>

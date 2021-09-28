@@ -1,19 +1,15 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
-// import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
 import { SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssessmentType = () => {
-  // const [listExpand, setListExpand] = useState('');
   const dispatch = useDispatch();
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationEngagement, informationAllocation, informationSetup } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';
@@ -118,22 +114,6 @@ const DisplayPaneThreeSectionOneAssessmentType = () => {
     }
   ];
   const classificationList = [
-    // {
-    //   id: 'a1',
-    //   labelTextOneOne: 'classification',
-    //   labelTextOneOneBadgeOne: '',
-    //   labelTextOneOneBadgeTwo: '',
-    //   labelTextOneOneBadgeThree: '',
-    //   labelTextOneOneBadgeFour: '',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: '',
-    //       innerList: []
-    //     }
-    //   ],
-    //   innerInfo: 'No Information',
-    //   isListCard: true
-    // }
     {
       id: 'a1',
       textOneOne:

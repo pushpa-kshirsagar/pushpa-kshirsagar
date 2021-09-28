@@ -295,7 +295,7 @@ const PopUpAssesseeRoleCreate = () => {
         }
         informationValue={'assesseePermissionInformation'}
         isRolePermission
-        valueArr={['create', 'delete', 'review', 'revise', 'share']}
+        valueArr={['create', 'delete', 'review', 'revise', 'sell', 'share']}
         valueArrState={assesseeRole.informationSetup?.assesseeRolePermission[permissionStateThree]}
         nextPopUpValue={''}
         typeOfSetObject={SET_SETUP_PERMISSION}

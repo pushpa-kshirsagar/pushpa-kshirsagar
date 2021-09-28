@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
-// import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
@@ -262,29 +261,6 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
   ];
 
   const classificationList = [
-    // {
-    //   id: 'a1',
-    //   labelTextOneOne: 'classification',
-    //   labelTextOneOneBadgeOne: '',
-    //   labelTextOneOneBadgeTwo: '',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: '',
-    //       innerList: [
-    //         {
-    //           id: '001',
-    //           textOne:
-    //             informationSetup?.assessmentGroupClassification
-    //               ?.assessmentGroupClassificationPrimary,
-    //           textTwo: '',
-    //           status: ''
-    //         }
-    //       ]
-    //     }
-    //   ],
-    //   innerInfo: 'No Information',
-    //   isListCard: true
-    // }
     {
       id: 'a1',
       textOneOne:
