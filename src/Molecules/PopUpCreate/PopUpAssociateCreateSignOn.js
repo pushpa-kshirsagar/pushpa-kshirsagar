@@ -2979,64 +2979,72 @@ const PopUpSignOnAssociate = () => {
       <PopUpConfirm
         isActive={isPopUpValue === 'ASSESSEERESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'assessees'}
+        headerOne={'assessees'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}        
         mode={'cancel'}
         onClickYes={onClickCancelYes}/>
 
       <PopUpConfirm
         isActive={isPopUpValue === 'ASSESSMENTRESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'assessments'}
+        headerOne={'assessments'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
         onClickYes={onClickCancelYes}/>
 
        <PopUpConfirm
         isActive={isPopUpValue === 'ASSIGNMENTRESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'assignments'}
+        headerOne={'assignments'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
         onClickYes={onClickCancelYes}/>
         
         <PopUpConfirm
         isActive={isPopUpValue === 'ITEMRESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'items'}
+        headerOne={'items'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
         onClickYes={onClickCancelYes}/>
 
         <PopUpConfirm
-        isActive={isPopUpValue === 'ASSOCIATE'}
+        isActive={isPopUpValue === 'ASSOCIATERESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'associates'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
         onClickYes={onClickCancelYes}/>
 
         <PopUpConfirm
-        isActive={isPopUpValue === 'IGURUANALYTICS'}
+        isActive={isPopUpValue === 'IGURUANALYTICSRESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'iGuru analytics'}
+        headerOne={'iGuru analytics'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
         onClickYes={onClickCancelYes}/>
 
         <PopUpConfirm
         isActive={isPopUpValue === 'IGURUMARKETPLACERESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'iGuru marketplace'}
+        headerOne={'iGuru marketplace'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
         onClickYes={onClickCancelYes}/>
 
       <PopUpConfirm
         isActive={isPopUpValue === 'IGURUMINERESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'iGuru mine'}
+        headerOne={'iGuru mine'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
         onClickYes={onClickCancelYes}/>     
     </div>
