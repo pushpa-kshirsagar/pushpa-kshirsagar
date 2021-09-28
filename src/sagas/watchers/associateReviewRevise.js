@@ -1,5 +1,4 @@
-import { yellow } from '@material-ui/core/colors';
-import { put, takeLatest, call, takeEvery } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
@@ -20,7 +19,6 @@ import {
   ASSOCIATE_ASSESSESS_SETUP_SAGA,
   ASSOCIATE_ASSIGNMENT_SETUP_SAGA,
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
-  UPDATE_ASSOCIATE_INFO,
   UPDATE_ASSOCIATE_SETUP_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
@@ -87,7 +85,6 @@ function* workerReviewInfoAssociateSaga(data) {
       const {
         informationBasic,
         informationContact,
-        informationSetup,
         informationFramework
       } = userResponse.responseObject[0];
       yield put({ type: UPDATE_ASSOCIATE_BASIC_INFO, payload: informationBasic });
@@ -209,9 +206,12 @@ function* workerAssociateSetUpSaga(data) {
 
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'setUpAssociateModuleGeneric', value: response.responseObject.Generic }
+        payload: {
+          stateName: 'setUpAssociateModuleGeneric',
+          value: response.responseObject.Generic
+        }
       });
-      
+
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_INFO,
       //   payload: response.responseObject[0]
@@ -260,7 +260,7 @@ function* workerAssociateAnalyticSetUpSaga(data) {
     if (response.responseCode === '000') {
       console.log('reponce object analyticSetUpModule');
       console.log(response.responseObject);
-      
+
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         //payload: { stateName: 'analyticSetUpModule', value: response.responseObject }
@@ -271,7 +271,6 @@ function* workerAssociateAnalyticSetUpSaga(data) {
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'analyticSetUpModuleGeneric', value: response.responseObject.Generic }
       });
-      
     } else {
     }
   } catch (e) {
@@ -300,7 +299,6 @@ function* workerAssociateItemSetUpSaga(data) {
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'itemSetUpModuleGeneric', value: response.responseObject.Generic }
       });
-
     } else {
     }
   } catch (e) {
@@ -325,12 +323,18 @@ function* workerAssociateAssessmentSetUpSaga(data) {
       });
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'assessmentSetUpModuleBespoke', value: response.responseObject.Bespoke }
+        payload: {
+          stateName: 'assessmentSetUpModuleBespoke',
+          value: response.responseObject.Bespoke
+        }
       });
 
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'assessmentSetUpModuleGeneric', value: response.responseObject.Generic }
+        payload: {
+          stateName: 'assessmentSetUpModuleGeneric',
+          value: response.responseObject.Generic
+        }
       });
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
@@ -351,14 +355,17 @@ function* workerAssociateAssesseeSetUpSaga(data) {
       data: data.payload.reqBody,
       URL: data.payload.reqUrl
     });
-    if (response.responseCode === '000') {      
+    if (response.responseCode === '000') {
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: { stateName: 'assesseeSetUpModule', value: response.responseObject[0].Bespoke }
       });
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'assesseeSetUpModuleGeneric', value: response.responseObject[1].Generic }
+        payload: {
+          stateName: 'assesseeSetUpModuleGeneric',
+          value: response.responseObject[1].Generic
+        }
       });
       // yield put({
       //   type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
@@ -385,12 +392,18 @@ function* workerAssociateAssignmentSetUpSaga(data) {
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         //payload: { stateName: 'assignmentSetUpModule', value: response.responseObject }
-        payload: { stateName: 'assignmentSetUpModule', value: response.responseObject.Bespoke?response.responseObject.Bespoke:{} }
+        payload: {
+          stateName: 'assignmentSetUpModule',
+          value: response.responseObject.Bespoke ? response.responseObject.Bespoke : {}
+        }
       });
 
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        payload: { stateName: 'assignmentSetUpModuleGeneric', value: response.responseObject.Generic?response.responseObject.Generic:{} }
+        payload: {
+          stateName: 'assignmentSetUpModuleGeneric',
+          value: response.responseObject.Generic ? response.responseObject.Generic : {}
+        }
       });
 
       // yield put({
@@ -570,5 +583,5 @@ export default function* watchReviewInfoAssociateSaga() {
   yield takeLatest(ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA, workerAssociateAssociateSetUpReviseSaga);
   yield takeLatest(ASSOCIATE_ITEMSETUP_REVISE_SAGA, workerAssociateItemSetUpReviseSaga);
   yield takeLatest(ASSOCIATE_ANALYTICSETUP_REVISE_SAGA, workerAssociateAnalyticSetUpReviseSaga);
-  yield takeLatest(ASSOCIATE_ASSOCIATENODE_SETUP_REVISE_SAGA,workerAssociateNodeSetUpReviseSaga);
+  yield takeLatest(ASSOCIATE_ASSOCIATENODE_SETUP_REVISE_SAGA, workerAssociateNodeSetUpReviseSaga);
 }

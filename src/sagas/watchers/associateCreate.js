@@ -13,9 +13,7 @@ import { ASSOCIATE_CREATE_URL } from '../../endpoints';
 
 const createAssociateApi = async (requestObj) => {
   console.log(requestObj.data);
-  // let URL = ASSOCIATE_CREATE_URL;
-  let URL =
-    'https://gfxqx4a5uc.execute-api.ap-south-1.amazonaws.com/dev/insight-guru/api/associate-create-step';
+  let URL = ASSOCIATE_CREATE_URL;
   const requestOptions = {
     method: 'POST',
     headers: new Headers({

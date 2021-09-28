@@ -6,7 +6,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { POPUP_CLOSE, UPDATE_ASSESSEE_COMMUNICATION, UPDATE_ASSESSEE_SETUP_PRIMARY_INFO } from '../actionType';
+import {
+  POPUP_CLOSE,
+  UPDATE_ASSESSEE_COMMUNICATION,
+  UPDATE_ASSESSEE_SETUP_PRIMARY_INFO
+} from '../actionType';
 import FormControl from '@material-ui/core/FormControl';
 import InputFeild from '../Atoms/InputField/InputField';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
@@ -54,6 +58,7 @@ const PopUpAddressEmail = (props) => {
         payload: { assesseeSignIn: '' }
       });
     } else {
+      console.log('tempCommunication', tempCommunication);
       if (tempCommunication === '') {
         dispatch({
           type: UPDATE_ASSESSEE_COMMUNICATION,
@@ -83,7 +88,7 @@ const PopUpAddressEmail = (props) => {
       emailErr: ''
     }));
   };
-
+  console.log('checkboxValue', checkboxValue);
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
     if (name === 'assesseeAddressEmailCommunication') {
@@ -132,7 +137,7 @@ const PopUpAddressEmail = (props) => {
       if (reviewMode === 'revise') {
         dispatch({ type: POPUP_CLOSE });
       } else {
-      handleNextPopupValue();
+        handleNextPopupValue();
       }
     }
   };
@@ -177,7 +182,7 @@ const PopUpAddressEmail = (props) => {
                     className={''}
                     color="default"
                     name={'assesseeAddressEmailCommunication'}
-                    value={''}
+                    value={tempCommunication}
                     onChange={
                       popupMode !== 'ASSESSEE_SIGN_ON' &&
                       popupMode !== 'ASSOCIATE_SIGN_ON' &&
@@ -188,6 +193,7 @@ const PopUpAddressEmail = (props) => {
                         ? true
                         : false
                     }
+                    checked={tempCommunication === checkboxValue}
                   />
                 </div>
               </div>

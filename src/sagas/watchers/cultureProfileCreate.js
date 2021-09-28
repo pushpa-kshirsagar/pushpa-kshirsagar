@@ -1,11 +1,8 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import Store from '../../store';
 import {
   CREATE_CULTURE_SAGA,
   LOADER_STOP,
-  POPUP_CLOSE,
   SET_CREATE_MODE,
-  SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';

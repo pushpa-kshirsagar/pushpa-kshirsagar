@@ -12,7 +12,7 @@ import {
   SET_ASSIGNMENT_RELATED_LIST,
   RESET_ASSIGNMENT_REVIEW_LIST_OBJECT,
   ASSIGNMENT_PUBLISH_SAGA,
-  ASSIGNMENT_ADMINISTER_SAGA,
+  ASSIGNMENT_ADMINISTER_SAGA
 } from '../../actionType';
 import {
   ASSIGNMENT_PUBLISH_URL,
@@ -43,7 +43,7 @@ function* workerReviewInfoAssignmentSaga(data) {
     // const userResponse ={responseCode:'000',countTotal:30}
     if (userResponse.responseCode === '000') {
       console.log('ASSIGNMENT_REVIEW_INFO=======>', userResponse);
-      const { isReviseMode = false, relatedReqObj = null } = data.payload;
+      const { isReviseMode = false } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -511,4 +511,4 @@ export default function* watchReviewInfoAssignmentSaga() {
   yield takeLatest(ASSIGNMENT_INFO_REVISE_SAGA, workerReviseInfoAssignmentSaga);
   yield takeLatest(ASSIGNMENT_PUBLISH_SAGA, workerAssignmentPublishSaga);
   yield takeLatest(ASSIGNMENT_ADMINISTER_SAGA, workerAssignmentAdministerSaga);
-  }
+}

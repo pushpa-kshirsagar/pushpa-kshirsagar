@@ -399,7 +399,7 @@ function* workerReviseMultuStatusSaga(data) {
       URL: UPDATE_ITEM_MULTI_STATUS_URL
     });
     if (userResponse.responseCode === '000') {
-      const { createMode } = data.payload;
+      // const { createMode } = data.payload;
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'isSelectActive', value: '' }
