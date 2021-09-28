@@ -24,17 +24,14 @@ import {
   UPDATE_ASSESSEE_PERSONAL_INFO,
   CREATE_ASSOCIATE_SAGA,
   LOADER_START,
-  CLEAR_ASSESSEE_INFO,
   SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
   UPDATE_ASSOCIATE_SETUP_INFO,
-  UPDATE_ASSOCIATE_WEBSITE_INFO,
   UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO,
   UPDATE_ASSOCIATE_WORKADDRESS_SECONDARY_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
   UPDATE_ASSESSEE_ENGAGEMENT_INFO,
   SET_IGURU_NODE_DYNAMIC_SINGLE_STATE,
   RESET_ALL_REDUCER,
-  UPDATE_ASSOCIATE_INFO_CONTACT_INFO,
   UPDATE_ASSOCIATE_WEBSITE_PRIMARY_INFO,
   UPDATE_ASSOCIATE_WEBSITE_SECONDARY_INFO,
   SET_DISPLAY_THREE_SINGLE_STATE,
@@ -42,18 +39,16 @@ import {
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
   UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
-  UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
   UPDATE_ASSOCIATE_ASSOCIATENODE_INFO
 } from '../../actionType';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../../endpoints';
-import PopUpDropTwoList from '../../PopUpInformation/PopUpDropTwoList';
 import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 const PopUpSignOnAssociate = () => {
   const { popupMode, isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
   const assesseeInfo = useSelector((state) => state.AssesseeCreateReducer);
-  const { reviewMode, responseObject, statusPopUpValue, assesseeSetUpModule } = useSelector(
+  const { reviewMode, responseObject, statusPopUpValue } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
   const informationContact = assesseeInfo.informationContact;
@@ -2979,66 +2974,82 @@ const PopUpSignOnAssociate = () => {
       <PopUpConfirm
         isActive={isPopUpValue === 'ASSESSEERESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'assessees'}
+        headerOne={'assessees'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
-        onClickYes={onClickCancelYes}/>
+        onClickYes={onClickCancelYes}
+      />
 
       <PopUpConfirm
         isActive={isPopUpValue === 'ASSESSMENTRESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'assessments'}
+        headerOne={'assessments'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
-        onClickYes={onClickCancelYes}/>
+        onClickYes={onClickCancelYes}
+      />
 
       <PopUpConfirm
         isActive={isPopUpValue === 'ASSIGNMENTRESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'assignments'}
+        headerOne={'assignments'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
-        onClickYes={onClickCancelYes}/>
-        
-        <PopUpConfirm
+        onClickYes={onClickCancelYes}
+      />
+
+      <PopUpConfirm
         isActive={isPopUpValue === 'ITEMRESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'items'}
+        headerOne={'items'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
-        onClickYes={onClickCancelYes}/>
+        onClickYes={onClickCancelYes}
+      />
 
       <PopUpConfirm
-        isActive={isPopUpValue === 'ASSOCIATE'}
+        isActive={isPopUpValue === 'ASSOCIATERESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'associates'}
+        headerOne={'associates'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
-        onClickYes={onClickCancelYes}/>
+        onClickYes={onClickCancelYes}
+      />
 
       <PopUpConfirm
-        isActive={isPopUpValue === 'IGURUANALYTICS'}
+        isActive={isPopUpValue === 'IGURUANALYTICSRESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'iGuru analytics'}
+        headerOne={'iGuru analytics'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
-        onClickYes={onClickCancelYes}/>
+        onClickYes={onClickCancelYes}
+      />
 
-        <PopUpConfirm
+      <PopUpConfirm
         isActive={isPopUpValue === 'IGURUMARKETPLACERESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'iGuru marketplace'}
+        headerOne={'iGuru marketplace'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
-        onClickYes={onClickCancelYes}/>
+        onClickYes={onClickCancelYes}
+      />
 
       <PopUpConfirm
         isActive={isPopUpValue === 'IGURUMINERESETPOPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'reset'}
-        headerOneBadgeOne={'iGuru mine'}
+        headerOne={'iGuru mine'}
+        headerOneBadgeOne={'setup'}
+        headerOneBadgeTwo={'reset'}
         mode={'cancel'}
-        onClickYes={onClickCancelYes}/>     
+        onClickYes={onClickCancelYes}
+      />
     </div>
   );
 };

@@ -959,7 +959,7 @@ export const makeAssociateRoleObj = (selectedAssociateInfo, filterKey, numberPag
       searchCondition: 'AND',
       search: [
         {
-          condition: 'or',
+          condition: 'and',
           searchBy: [
             {
               dataType: 'string',

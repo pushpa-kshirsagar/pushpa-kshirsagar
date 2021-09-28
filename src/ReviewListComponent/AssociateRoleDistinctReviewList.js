@@ -159,7 +159,6 @@ const AssociateRoleDistinctReviewList = (props) => {
                 tag={item.informationEngagement.associateRoleTag}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 // status={item.informationEngagement.associateRoleStatus}
-                // dataValue={item.informationAllocation.associateRoleGroup}
                 //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 status={
                   FilterMode === 'associateRoleDistinctactive'

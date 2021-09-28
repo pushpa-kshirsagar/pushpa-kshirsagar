@@ -407,7 +407,7 @@ const PopUpGroupCreate = (props) => {
         headerOneBadgeTwo={'information'}
         isRequired={true}
         nextPopUpValue={reviewMode === 'revise' ? '' : 'CONFIRMATIONPOPUP'}
-        basicInfo={reducerObeject.informationSetup[objectName + 'Classification']}
+        basicInfo={reducerObeject?.informationSetup[objectName + 'Classification']}
         typeOfSetObject={
           objectName === 'assesseeGroup'
             ? SET_ASSESSEE_CLASSIFICAION_STATE

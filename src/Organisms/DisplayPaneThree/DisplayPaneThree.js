@@ -3233,14 +3233,14 @@ export const DisplayPaneThree = () => {
                 className=""
                 labelTextOneOne="name"
                 labelTextOneTwo="description"
-                textOneOne={informationBasic.itemGroupName || 'No Information'}
-                textOneTwo={informationBasic.itemGroupDescription || 'No Information'}
+                textOneOne={informationBasic?.itemGroupName || 'No Information'}
+                textOneTwo={informationBasic?.itemGroupDescription || 'No Information'}
                 isVerifiedActiveName={false}
                 isVerifiedActivePicture={false}
                 mode={reviewMode}
                 onClickRevise={reviseItemsGroupBasicInformation}
-                isImageActive={informationBasic.itemGroupPicture}
-                imageOne={informationBasic.itemGroupPicture}
+                isImageActive={informationBasic?.itemGroupPicture}
+                imageOne={informationBasic?.itemGroupPicture}
               />
             </div>
             <Sections
@@ -3576,14 +3576,14 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
-                  textOneOne={informationBasic.assessmentTypeName || 'No Information'}
-                  textOneTwo={informationBasic.assessmentTypeDescription || 'No Information'}
+                  textOneOne={informationBasic?.assessmentTypeName || 'No Information'}
+                  textOneTwo={informationBasic?.assessmentTypeDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssessmentTypeBasicInformation}
-                  isImageActive={informationBasic.assessmentTypePicture}
-                  imageOne={informationBasic.assessmentTypePicture}
+                  isImageActive={informationBasic?.assessmentTypePicture}
+                  imageOne={informationBasic?.assessmentTypePicture}
                 />
               </div>
               <Sections
