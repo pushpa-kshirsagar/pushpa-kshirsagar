@@ -133,7 +133,10 @@ const initialState = {
     associate: null,
     item: null,
     analytic: null,
-    associateNode: null
+    associateNode: null,
+    countryName:[
+      {id:'Afghanistan',name:'Afghanistan'},
+      { id: 'India', name: 'India' }]    
   },
   informationFramework: {
     associateAscendant: {
