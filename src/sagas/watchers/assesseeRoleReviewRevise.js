@@ -1,5 +1,4 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { assesseeRole } from '../../Actions/AssesseeModuleAction';
 import {
   ASSESSEE_ROLE_INFO_REVISE_SAGA,
   GET_ASSESSEEROLE_ASSESSEE_REVIEW_LIST,
@@ -12,7 +11,6 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_POPUP_VALUE,
-  SET_ROLE_DYNAMIC_STATE,
   SET_ROLE_REDUCER_STATE,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
 } from '../../actionType';

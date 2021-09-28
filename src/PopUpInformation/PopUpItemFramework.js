@@ -191,9 +191,9 @@ const PopUpItemFramework = (props) => {
             )}
             {isItemFramework && itemConfigStates.classificationState && (
               <SelectField
-                tag={'classification'}
-                label={'classification'}
-                dataValue={'classification'}
+                tag={'cluster'}
+                label={'cluster'}
+                dataValue={'cluster'}
                 listSelect={[
                   { id: '', name: '' },
                   { id: 'Simple-Sample1', name: 'Simple Sample' },

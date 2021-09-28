@@ -24,7 +24,7 @@ import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import {makeCultureProfileGroupObj} from '../Actions/GenericActions';
+import { makeCultureProfileGroupObj } from '../Actions/GenericActions';
 
 const CultureProfileGroupReviewList = (props) => {
   const dispatch = useDispatch();
@@ -99,26 +99,21 @@ const CultureProfileGroupReviewList = (props) => {
 
   const siftApiFilterCall = (siftKey) => {
     //getCultureProfileGroupApiCall(selectedAssociateInfo, siftKey, countPage, dispatch, 'groups');
-    let requestObj = makeCultureProfileGroupObj(
-      selectedAssociateInfo,
-      siftKey,
-      0,
-      countPage
-    );
+    let requestObj = makeCultureProfileGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
-  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
-  dispatch({
-    type: GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
-    payload: {
-      request: requestObj,
-      BadgeOne: middlePaneHeaderBadgeOne,        
-      BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
-      BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
-      isMiddlePaneList: true
-    }
-  });
-  
+    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+    dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+    dispatch({
+      type: GET_CULTUREPROFILE_GROUP_REVIEW_LIST_SAGA,
+      payload: {
+        request: requestObj,
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
+      }
+    });
+
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
@@ -127,7 +122,7 @@ const CultureProfileGroupReviewList = (props) => {
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiFilterCall(siftValue);
-    
+
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
       // let distinctAllocateStr = allocateStr === 'assesseesdistinct' ? 'assesseeDistinct' : '';
@@ -203,9 +198,12 @@ const CultureProfileGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.cultureProfileGroupStatus}
-                status={FilterMode === 'cultureProfileGroupactive'?
-                item.informationSetup?.cultureProfileGroupClassification?.cultureProfileGroupClassificationPrimary:
-                item.informationEngagement.cultureProfileGroupStatus}
+                status={
+                  FilterMode === 'cultureProfileGroupactive'
+                    ? item.informationSetup?.cultureProfileGroupClassification
+                        ?.cultureProfileGroupClassificationPrimary
+                    : item.informationEngagement.cultureProfileGroupStatus
+                }
                 actualStatus={item.informationEngagement.cultureProfileGroupStatus}
                 textOne={item.informationBasic.cultureProfileGroupName}
                 textTwo={item.informationBasic.cultureProfileGroupDescription}

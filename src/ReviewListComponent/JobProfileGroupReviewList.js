@@ -24,7 +24,7 @@ import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import {makeJobProfileGroupObj} from '../Actions/GenericActions';
+import { makeJobProfileGroupObj } from '../Actions/GenericActions';
 
 const JobProfileGroupReviewList = (props) => {
   const dispatch = useDispatch();
@@ -98,12 +98,7 @@ const JobProfileGroupReviewList = (props) => {
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const siftApiFilterCall = (siftKey) => {
-    let requestObj = makeJobProfileGroupObj(
-      selectedAssociateInfo,
-      siftKey,
-      0,
-      countPage
-    );
+    let requestObj = makeJobProfileGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
     dispatch({ type: SET_PAGE_COUNT, payload: 0 });
@@ -112,10 +107,10 @@ const JobProfileGroupReviewList = (props) => {
       type: GET_JOBPROFILE_GROUP_REVIEW_LIST_SAGA,
       payload: {
         request: requestObj,
-        BadgeOne: middlePaneHeaderBadgeOne,        
-      BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
-      BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
-      isMiddlePaneList: true        
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+        isMiddlePaneList: true
       }
     });
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
@@ -126,7 +121,7 @@ const JobProfileGroupReviewList = (props) => {
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiFilterCall(siftValue);
-    
+
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
       // let distinctAllocateStr = allocateStr === 'assesseesdistinct' ? 'assesseeDistinct' : '';
@@ -202,9 +197,12 @@ const JobProfileGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.jobProfileGroupStatus}
-                status={FilterMode === 'jobProfileGroupactive'?
-                item.informationSetup?.jobProfileGroupClassification?.jobProfileGroupClassificationPrimary:
-                item.informationEngagement.jobProfileGroupStatus}
+                status={
+                  FilterMode === 'jobProfileGroupactive'
+                    ? item.informationSetup?.jobProfileGroupClassification
+                        ?.jobProfileGroupClassificationPrimary
+                    : item.informationEngagement.jobProfileGroupStatus
+                }
                 actualStatus={item.informationEngagement.jobProfileGroupStatus}
                 textOne={item.informationBasic.jobProfileGroupName}
                 textTwo={item.informationBasic.jobProfileGroupDescription}

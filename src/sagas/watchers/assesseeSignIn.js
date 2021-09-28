@@ -13,7 +13,6 @@ import {
   SET_MOBILE_PANE_STATE,
   LOADER_START,
   GET_ASSESSEE_INFO_SAGA,
-  GET_SIGNED_ASSESSEE_PERMISSION_SAGA,
   SET_ASSESSEE_REVISE_PASSWORD,
   LOADER_STOP,
   POPUP_CLOSE,
@@ -82,6 +81,7 @@ function* workerSignInAssesseeSaga(data) {
           type: SET_SELECTED_ASSOCIATE,
           payload: selectedAssociate
         });
+        yield put({ type: LOADER_START });
         yield put({
           type: GET_ASSESSEE_INFO_SAGA,
           payload: {
@@ -270,6 +270,7 @@ function* workerSignInAssesseeInfo(data) {
           type: SET_SELECTED_ASSOCIATE,
           payload: selectedAssociate
         });
+        yield put({ type: LOADER_START });
         yield put({
           type: GET_ASSESSEE_INFO_SAGA,
           payload: {

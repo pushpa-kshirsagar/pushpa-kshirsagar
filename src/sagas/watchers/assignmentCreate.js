@@ -42,7 +42,7 @@ function* workerCreateAssignmentSaga(data) {
           createMode: 'assignment'
         }
       });
-      const {informationAllocation, informationBasic} = apiResponse.responseObject[0];
+      const { informationAllocation, informationBasic } = apiResponse.responseObject[0];
       yield put({
         type: SET_ASSIGNMENT_BASIC_REDUCER_STATE,
         payload: informationBasic
@@ -104,9 +104,7 @@ function* workerCreateAssignmentSaga(data) {
         informationAllocation?.assignmentNode?.assignmentNodePrimary &&
         informationAllocation?.assignmentNode?.assignmentNodePrimary.length > 0
       ) {
-        let tempArr = informationAllocation.assignmentNode.assignmentNodePrimary.map(
-          (ob) => ob.id
-        );
+        let tempArr = informationAllocation.assignmentNode.assignmentNodePrimary.map((ob) => ob.id);
         yield put({
           type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
           payload: {
@@ -156,9 +154,7 @@ function* workerCreateAssignmentSaga(data) {
         informationAllocation?.assignmentType?.assignmentTypePrimary &&
         informationAllocation?.assignmentType?.assignmentTypePrimary.length > 0
       ) {
-        let tempArr = informationAllocation.assignmentType.assignmentTypePrimary.map(
-          (ob) => ob.id
-        );
+        let tempArr = informationAllocation.assignmentType.assignmentTypePrimary.map((ob) => ob.id);
         yield put({
           type: SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
           payload: {

@@ -100,7 +100,7 @@ const AssociateRoleDistinctReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
-    
+
     dispatch({ type: FILTERMODE_ENABLE });
   };
   /* for middle pane */
@@ -159,11 +159,13 @@ const AssociateRoleDistinctReviewList = (props) => {
                 tag={item.informationEngagement.associateRoleTag}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 // status={item.informationEngagement.associateRoleStatus}
-                dataValue={item?.informationAllocation?.associateRoleGroup}
                 //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                status={FilterMode === 'associateRoleDistinctactive'?
-                item.informationSetup?.associateRoleClassification?.associateRoleClassificationPrimary:
-                item.informationEngagement.associateRoleStatus}
+                status={
+                  FilterMode === 'associateRoleDistinctactive'
+                    ? item.informationSetup?.associateRoleClassification
+                        ?.associateRoleClassificationPrimary
+                    : item.informationEngagement.associateRoleStatus
+                }
                 shared={item.associateRoleShared ? 'SHARED' : 'UNSHARED'}
                 actualStatus={item.informationEngagement.associateRoleStatus}
                 textOne={item.informationBasic.associateRoleName}

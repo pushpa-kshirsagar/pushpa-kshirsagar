@@ -7,7 +7,6 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE
 } from '../../actionType';
 import { ASSESSMENT_ALLOCATE, ASSESSMENT_ALLOCATE_ASSIGNMENT } from '../../endpoints';
-import Store from '../../store';
 const callInfoApi = async (requestObj) => {
   console.log(requestObj.data);
   let URL = requestObj.URL;

@@ -64,7 +64,8 @@ export const ASSESSEE_ASSESSMENT_FINISH_URL =
 export const SIGNED_ASSESSEE_NOTIFICATION_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assignment/count';
 export const ASSESSEE_CREATE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/create';
-export const ASSOCIATE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-sign-on';
+// export const ASSOCIATE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-sign-on';
+export const ASSOCIATE_CREATE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/associate-create-step';
 export const ASSESSEE_REVIEW_LIST_URL =
   ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/review-list';
 export const ASSESSEE_REVIEW_INFO_URL =

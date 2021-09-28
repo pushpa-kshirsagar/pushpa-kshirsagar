@@ -1,15 +1,12 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
-  ASSIGNMENT_ALLOCATE_SAGA,
   JOBPROFILE_ALLOCATE_SAGA,
   JOBPROFILE_ALLOCATE_ASSIGNMENT_SAGA
 } from '../../actionType';
 import { JOBPROFILE_ALLOCATE_URL, JOB_PROFILE_ALLOCATE_ASSIGNMENT_URL } from '../../endpoints';
-import Store from '../../store';
 const callInfoApi = async (requestObj) => {
   console.log(requestObj.data);
   let URL = requestObj.URL;

@@ -1,5 +1,4 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import Store from '../../store';
 import {
   GET_CULTUREPROFILE_REVIEW_LIST_SAGA,
   LOADER_STOP,

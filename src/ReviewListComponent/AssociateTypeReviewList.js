@@ -110,22 +110,22 @@ const AssociateTypeReviewList = (props) => {
     //   'types',
     //   'associates'
     // );
-    let requestObj = makeAssociateTypeObj(selectedAssociateInfo,siftKey,0,countPage);
+    let requestObj = makeAssociateTypeObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
-  dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
-  dispatch({ type: SET_PAGE_COUNT, payload: 0 });
-  dispatch({
-    type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
-    payload: {
-      middlePaneHeader: middlePaneHeader,
-      request: requestObj,
-      BadgeOne: middlePaneHeaderBadgeOne,        
-      BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
-      BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
-        
-      isMiddlePaneList: true
-    }
-  });
+    dispatch({ type: SET_REQUEST_OBJECT, payload: requestObj });
+    dispatch({ type: SET_PAGE_COUNT, payload: 0 });
+    dispatch({
+      type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+      payload: {
+        middlePaneHeader: middlePaneHeader,
+        request: requestObj,
+        BadgeOne: middlePaneHeaderBadgeOne,
+        BadgeTwo: middlePaneHeaderBadgeTwo === 'distinct' ? middlePaneHeaderBadgeTwo : siftKey,
+        BadgeThree: middlePaneHeaderBadgeTwo === 'distinct' ? siftKey : middlePaneHeaderBadgeThree,
+
+        isMiddlePaneList: true
+      }
+    });
 
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
@@ -135,7 +135,6 @@ const AssociateTypeReviewList = (props) => {
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiFilterCall(siftValue);
-  
   };
   /* for middle pane */
   const primaryIcon = [{ label: 'sift', onClick: onClickFooter, Icon: FilterList }];
@@ -194,9 +193,12 @@ const AssociateTypeReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
-                status={FilterMode === 'associatesTypeDistinctactive'?
-                item.informationSetup?.associateTypeClassification?.associateTypeClassificationPrimary:
-                item.informationEngagement.associateTypeStatus}
+                status={
+                  FilterMode === 'associatesTypeDistinctactive'
+                    ? item.informationSetup?.associateTypeClassification
+                        ?.associateTypeClassificationPrimary
+                    : item.informationEngagement.associateTypeStatus
+                }
                 // status={item.informationEngagement.associateTypeStatus}
                 actualStatus={item.informationEngagement.associateTypeStatus}
                 shared={item.associateTypeShared ? 'SHARED' : 'UNSHARED'}
@@ -225,7 +227,7 @@ const AssociateTypeReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-      {(FilterMode === 'associatesTypeDistinctactive') && (
+      {FilterMode === 'associatesTypeDistinctactive' && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

@@ -1,6 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
-  SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -8,8 +7,7 @@ import {
   ITEM_ALLOCATE_SAGA,
   ITEM_ALLOCATE_ASSESSMENT_SAGA
 } from '../../actionType';
-import { ASSESSEE_ALLOCATE, ASSESSEE_ALLOCATE_ASSIGNMENT, ITEM_ALLOCATE, ITEM_ALLOCATE_ASSESSMENT } from '../../endpoints';
-import Store from '../../store';
+import { ITEM_ALLOCATE, ITEM_ALLOCATE_ASSESSMENT } from '../../endpoints';
 const callInfoApi = async (requestObj) => {
   console.log(requestObj.data);
   let URL = requestObj.URL;

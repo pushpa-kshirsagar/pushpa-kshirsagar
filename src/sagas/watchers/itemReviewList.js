@@ -12,7 +12,6 @@ import {
   GET_ITEMTYPEITEM_REVIEW_LIST_SAGA,
   GET_NODE_ITEMS_REVIEW_LIST_SAGA,
   GET_ALLOCATE_ITEM,
-  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   SET_ITEM_FRAMWORK_TYPE,
   GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
   LOADER_START
@@ -24,7 +23,6 @@ import {
   ITEMTYPEPITEM_REVIEWLIST_URL,
   CONFIG_ITEM_URL
 } from '../../endpoints';
-import Store from '../../store';
 
 const apiCall = async (requestObj) => {
   const requestOptions = {

@@ -1,7 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   ASSESSEE_NODE_INFO_REVISE_SAGA,
-  GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   GET_ASSOCIATE_NODE_REVIEW_INFO_SAGA,
   INTERNAL_NODE_LIST_SAGA,
   LOADER_STOP,
@@ -41,7 +40,7 @@ function* workerReviewAssociateNodeInfoSaga(data) {
       const {
         selectedModule,
         associateNodeReqBody,
-        createMode,
+        // createMode,
         getReviewListSaga,
         isShowAllModule = false,
         isReviseMode = false
@@ -94,6 +93,12 @@ function* workerReviewAssociateNodeInfoSaga(data) {
           }
         });
       }
+    } else {
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
     console.log('loading end');
     if (data.payload.isShowAllModule) {
@@ -184,6 +189,10 @@ function* workerReviseAssociateNodeInfoSaga(data) {
       }
     } else {
       yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
     yield put({ type: SET_ASSOCIATE_NODE_ASSESSEE_ID_LIST, payload: [] });
     yield put({
