@@ -39,7 +39,11 @@ import {
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
   UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
-  UPDATE_ASSOCIATE_ASSOCIATENODE_INFO
+  UPDATE_ASSOCIATE_ASSOCIATENODE_INFO,
+  UPDATE_ASSOCIATE_COUNTRY_INFO,
+  UPDATE_ASSOCIATE_LANGUAGE_INFO,
+  UPDATE_ASSOCIATE_CURRENCY_INFO
+
 } from '../../actionType';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../../endpoints';
@@ -61,9 +65,9 @@ const PopUpSignOnAssociate = () => {
     permissionStateOne,
     permissionStateTwo,
     permissionStateThree,
-    countryName,
-    languages,
-    currencyMaster
+    associateCountryName,
+    associateLanguages,
+    associateCurrencyMaster
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const history = useHistory();
@@ -578,10 +582,11 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'LANGUAGEPOPUP'}
-        tag={'associateLanguage'}
+        //tag={'associateLanguage'}
+        tag={'associateLanguageTag'}
         label={'language'}
         //listSelect={[{ id: 'English (India)', name: 'English (India)' }]}
-        listSelect={languages}        
+        listSelect={associateLanguages}        
         mappingValue={'id'}
         labelval={'language'}
         headerPanelColour={'genericOne'}
@@ -589,8 +594,11 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup.associate || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        //basicInfo={associateInfo.informationSetup.associate || {}}
+        basicInfo={associateInfo?.associateLanguage || {}}
+        associateLanguage
+        //typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_LANGUAGE_INFO}        
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
@@ -3070,9 +3078,9 @@ const PopUpSignOnAssociate = () => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_COUNTRY_NAME_POPUP'}
-        tag={'associateCountryName'}
+        tag={'associateCountryTag'}
         label={'country'}
-        listSelect={countryName}
+        listSelect={associateCountryName}
         // listSelect={[{id:'Afghanistan',name:'Afghanistan'},
         // { id: 'India', name: 'India' }]}        
         mappingValue={'id'}
@@ -3082,15 +3090,15 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup.associate || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.associateCountry}
+        typeOfSetObject={UPDATE_ASSOCIATE_COUNTRY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />    
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_SETUPPLUS_COUNTRY_NAME_POPUP'}
         tag={'associateCountryName'}
         label={'country'}
-        listSelect={countryName}
+        listSelect={associateCountryName}
         mappingValue={'id'}
         labelval={'country'}
         headerPanelColour={'genericOne'}
@@ -3105,9 +3113,9 @@ const PopUpSignOnAssociate = () => {
 
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_NAME_POPUP'}
-        tag={'associateCurrencyName'}
+        tag={'associateCurrencyTag'}
         label={'currency'}        
-        listSelect={currencyMaster}
+        listSelect={associateCurrencyMaster}
         //listSelect={[{ id: 'Indian Rupee', name: 'Indian Rupee' }]}
         mappingValue={'id'}
         labelval={'currency'}
@@ -3116,15 +3124,15 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup.associate || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        basicInfo={associateInfo?.associateCurrency || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_CURRENCY_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_SETUPPLUS_CURRENCY_NAME_POPUP'}
         tag={'associateCurrencyName'}
         label={'currency'}
-        listSelect={currencyMaster}
+        listSelect={associateCurrencyMaster}
         mappingValue={'id'}
         labelval={'currency'}
         headerPanelColour={'genericOne'}
@@ -3142,7 +3150,7 @@ const PopUpSignOnAssociate = () => {
         tag={'associateLanguage'}
         label={'language'}
         //listSelect={[{ id: 'English (India)', name: 'English (India)' }]}
-        listSelect={languages}        
+        listSelect={associateLanguages}        
         mappingValue={'id'}
         labelval={'language'}
         headerPanelColour={'genericOne'}

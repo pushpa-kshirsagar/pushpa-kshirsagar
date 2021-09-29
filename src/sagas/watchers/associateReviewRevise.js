@@ -200,15 +200,15 @@ function* workerAssociateSetUpSaga(data) {
       console.log(response.responseObject);
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
-        //payload: { stateName: 'setUpAssociateModule', value: response.responseObject }
-        payload: { stateName: 'setUpAssociateModule', value: response.responseObject.Bespoke }
+        payload: { stateName: 'setUpAssociateModule', value: response.responseObject[0].Bespoke }
+        //payload: { stateName: 'setUpAssociateModule', value: response.responseObject.Bespoke }
       });
 
       yield put({
         type: SET_DISPLAY_THREE_SINGLE_STATE,
         payload: {
           stateName: 'setUpAssociateModuleGeneric',
-          value: response.responseObject.Generic
+          value: response.responseObject[0].Generic
         }
       });
 

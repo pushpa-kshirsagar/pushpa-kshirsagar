@@ -90,13 +90,13 @@ const initialState = {
     noOfItemState: true,
     noOfResponseState: true
   },
-  countryName:[
+  associateCountryName:[
     {id:'ISO-3166-356',name:'India'}
   ],
-  languages:[
+  associateLanguages:[
     {id:'ISO-639-EN-GB',name:'English (United Kingdom)'}
   ],
-  currencyMaster:[
+  associateCurrencyMaster:[
     {id:'ISO-4217-356',name:'Indian Rupee'}
   ]
 };
