@@ -6,8 +6,7 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   CLEAR_ASSOCIATE_INFO,
   POPUP_CLOSE,
-  SET_MOBILE_PANE_STATE,
-  SET_POPUP_VALUE
+  SET_MOBILE_PANE_STATE
 } from '../../actionType';
 import { ASSOCIATE_CREATE_URL } from '../../endpoints';
 
@@ -130,10 +129,10 @@ function* workerCreateAssociateSaga(data) {
     yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
   } catch (e) {
     console.log('ERROR==', e);
-    yield put({
-      type: SET_POPUP_VALUE,
-      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
-    });
+    // yield put({
+    //   type: SET_POPUP_VALUE,
+    //   payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    // });
     yield put({ type: LOADER_STOP });
   }
 }

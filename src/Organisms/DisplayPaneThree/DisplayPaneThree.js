@@ -1764,7 +1764,7 @@ export const DisplayPaneThree = () => {
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId: id,
+        associateId:  selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         associate: {
           id,
           informationBasic,
