@@ -1413,40 +1413,42 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'country',
-              innerLabelBadgeList: [
-                {
-                  labelTextTwoBadge: 'flag',
-                  innerLabelBadgeList:
-                    setUpAssociateModule?.associateCountry?.associateCountryFlag || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'name',
-                  innerLabelBadgeList:
-                    setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'tag',
-                  innerLabelBadgeList:
-                    setUpAssociateModule?.associateCountry?.associateCountryTag || 'No'
-                }
-              ]
+              // innerLabelBadgeList: [
+              //   // {
+              //   //   labelTextTwoBadge: 'flag',
+              //   //   innerLabelBadgeList:
+              //   //     setUpAssociateModule?.associateCountry?.associateCountryFlag || 'No'
+              //   // },
+              //   // {
+              //   //   labelTextTwoBadge: 'name',
+              //   //   innerLabelBadgeList:
+              //   //     setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
+              //   // },
+              //   // {
+              //   //   labelTextTwoBadge: 'tag',
+              //   //   innerLabelBadgeList:
+              //   //     setUpAssociateModule?.associateCountry?.associateCountryTag || 'No'
+              //   // }
+              // ]
+              innerLabelBadgeList: setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
             },
             {
               labelTextTwoBadge: 'currency',
-              innerLabelBadgeList: [
-                {
-                  labelTextTwoBadge: 'name',
-                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencyName || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'symbol',
-                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencySymbol || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'tag',
-                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencyTag || 'No'
-                }
-              ]
+              innerLabelBadgeList: setUpAssociateModule?.associateCurrencyName || 'No'
+              // innerLabelBadgeList: [
+              //   // {
+              //   //   labelTextTwoBadge: 'name',
+              //   //   innerLabelBadgeList: setUpAssociateModule?.associateCurrencyName || 'No'
+              //   // },
+              //   // {
+              //   //   labelTextTwoBadge: 'symbol',
+              //   //   innerLabelBadgeList: setUpAssociateModule?.associateCurrencySymbol || 'No'
+              //   // },
+              //   // {
+              //   //   labelTextTwoBadge: 'tag',
+              //   //   innerLabelBadgeList: setUpAssociateModule?.associateCurrencyTag || 'No'
+              //   // }
+              // ]
             },
             {
               labelTextTwoBadge: 'date',
@@ -1471,17 +1473,17 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'language',
-              // innerLabelBadgeList: setUpAssociateModule?.associateLanguage || 'No'
-              innerLabelBadgeList: [
-                {
-                  labelTextTwoBadge: 'name',
-                  innerLabelBadgeList: setUpAssociateModule?.associateLanguageName || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'tag',
-                  innerLabelBadgeList: setUpAssociateModule?.associateLanguageTag || 'No'
-                }
-              ]
+              innerLabelBadgeList: setUpAssociateModule?.associateLanguage || 'No'
+              // innerLabelBadgeList: [
+              //   {
+              //     labelTextTwoBadge: 'name',
+              //     innerLabelBadgeList: setUpAssociateModule?.associateLanguageName || 'No'
+              //   },
+              //   {
+              //     labelTextTwoBadge: 'tag',
+              //     innerLabelBadgeList: setUpAssociateModule?.associateLanguageTag || 'No'
+              //   }
+              // ]
             },
             {
               labelTextTwoBadge: 'service',
@@ -3046,40 +3048,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'country',
-              innerLabelBadgeList: [
-                {
-                  labelTextTwoBadge: 'flag',
-                  innerLabelBadgeList:
-                    setUpAssociateModule?.associateCountry?.associateCountryFlag || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'name',
-                  innerLabelBadgeList:
-                    setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'tag',
-                  innerLabelBadgeList:
-                    setUpAssociateModule?.associateCountry?.associateCountryTag || 'No'
-                }
-              ]
+              innerLabelBadgeList:
+              setUpAssociateModuleGeneric?.associateCountry?.associateCountryName || 'No'              
             },
             {
               labelTextTwoBadge: 'currency',
-              innerLabelBadgeList: [
-                {
-                  labelTextTwoBadge: 'name',
-                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencyName || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'symbol',
-                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencySymbol || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'tag',
-                  innerLabelBadgeList: setUpAssociateModule?.associateCurrencyTag || 'No'
-                }
-              ]
+              innerLabelBadgeList: setUpAssociateModuleGeneric?.associateCurrencyName || 'No'              
             },
             {
               labelTextTwoBadge: 'date',
@@ -3104,17 +3078,17 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'language',
-              // innerLabelBadgeList: setUpAssociateModule?.associateLanguage || 'No'
-              innerLabelBadgeList: [
-                {
-                  labelTextTwoBadge: 'name',
-                  innerLabelBadgeList: setUpAssociateModule?.associateLanguageName || 'No'
-                },
-                {
-                  labelTextTwoBadge: 'tag',
-                  innerLabelBadgeList: setUpAssociateModule?.associateLanguageTag || 'No'
-                }
-              ]
+              innerLabelBadgeList: setUpAssociateModuleGeneric?.associateLanguage || 'No'
+              // innerLabelBadgeList: [
+              //   {
+              //     labelTextTwoBadge: 'name',
+              //     innerLabelBadgeList: setUpAssociateModule?.associateLanguageName || 'No'
+              //   },
+              //   {
+              //     labelTextTwoBadge: 'tag',
+              //     innerLabelBadgeList: setUpAssociateModule?.associateLanguageTag || 'No'
+              //   }
+              // ]
             },
             {
               labelTextTwoBadge: 'service',
@@ -3694,6 +3668,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     }
   };
   const reviseSetup = (e, selectedBadgeArray) => {
+    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('labelName', labelName);
@@ -4663,17 +4638,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
-
-      if (badgeName === '+country' && selectedBadgeName === 'flag') {
-        dispatch({
-          type: ASSOCIATE_SIGN_ON,
-          payload: {
-            isPopUpValue: 'ASSOCIATE_COUNTRY_PICTURE_POPUP',
-            popupMode: 'ASSOCIATE_CREATE'
-          }
-        });
-      }
-      if (badgeName === '+country' && selectedBadgeName === 'name') {
+      if (badgeName === '+' && selectedBadgeName === 'country') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
           payload: {
@@ -4682,16 +4647,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
-      if (badgeName === '+country' && selectedBadgeName === 'tag') {
-        dispatch({
-          type: ASSOCIATE_SIGN_ON,
-          payload: {
-            isPopUpValue: 'ASSOCIATE_COUNTRY_TAG_POPUP',
-            popupMode: 'ASSOCIATE_CREATE'
-          }
-        });
-      }
-      if (badgeName === '+currency' && selectedBadgeName === 'name') {
+      if (badgeName === '+' && selectedBadgeName === 'currency') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
           payload: {
@@ -4700,42 +4656,79 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
-      if (badgeName === '+currency' && selectedBadgeName === 'symbol') {
-        dispatch({
-          type: ASSOCIATE_SIGN_ON,
-          payload: {
-            isPopUpValue: 'ASSOCIATE_CURRENCY_SYMBOL_POPUP',
-            popupMode: 'ASSOCIATE_CREATE'
-          }
-        });
-      }
-      if (badgeName === '+currency' && selectedBadgeName === 'tag') {
-        dispatch({
-          type: ASSOCIATE_SIGN_ON,
-          payload: {
-            isPopUpValue: 'ASSOCIATE_CURRENCY_TAG_POPUP',
-            popupMode: 'ASSOCIATE_CREATE'
-          }
-        });
-      }
-      if (badgeName === '+language' && selectedBadgeName === 'name') {
-        dispatch({
-          type: ASSOCIATE_SIGN_ON,
-          payload: {
-            isPopUpValue: 'ASSOCIATE_LANGUAGE_NAME_POPUP',
-            popupMode: 'ASSOCIATE_CREATE'
-          }
-        });
-      }
-      if (badgeName === '+language' && selectedBadgeName === 'tag') {
-        dispatch({
-          type: ASSOCIATE_SIGN_ON,
-          payload: {
-            isPopUpValue: 'ASSOCIATE_LANGUAGE_TAG_POPUP',
-            popupMode: 'ASSOCIATE_CREATE'
-          }
-        });
-      }
+
+      // if (badgeName === '+country' && selectedBadgeName === 'flag') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_COUNTRY_PICTURE_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+country' && selectedBadgeName === 'name') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_COUNTRY_NAME_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+country' && selectedBadgeName === 'tag') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_COUNTRY_TAG_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+currency' && selectedBadgeName === 'name') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_CURRENCY_NAME_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+currency' && selectedBadgeName === 'symbol') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_CURRENCY_SYMBOL_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+currency' && selectedBadgeName === 'tag') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_CURRENCY_TAG_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+language' && selectedBadgeName === 'name') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_LANGUAGE_NAME_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+language' && selectedBadgeName === 'tag') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_LANGUAGE_TAG_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
     }
     if(labelName === 'iGuru marketplace'){
       if(labelName==='iGuru marketplace' && selectedBadgeName === 'reset'){
@@ -4757,6 +4750,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
   };
 
   const reviseSetupPlus = (e, selectedBadgeArray) => {
+    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('labelName', labelName);
@@ -5418,7 +5412,19 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       if (badgeName === '+' && selectedBadgeName === 'language') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
-          payload: { isPopUpValue: 'LANGUAGEPOPUP', popupMode: 'ASSOCIATE_CREATE' }
+          payload: { isPopUpValue: 'LANGUAGE_SETUP_PLUS_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === '+' && selectedBadgeName === 'country') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATE_SETUPPLUS_COUNTRY_NAME_POPUP', popupMode: 'ASSOCIATE_CREATE' }
+        });
+      }
+      if (badgeName === '+' && selectedBadgeName === 'currency') {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: 'ASSOCIATE_SETUPPLUS_CURRENCY_NAME_POPUP', popupMode: 'ASSOCIATE_CREATE' }
         });
       }
       if (badgeName === '+' && selectedBadgeName === 'time') {

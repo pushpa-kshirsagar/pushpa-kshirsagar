@@ -278,7 +278,7 @@ const DisplayPanelAccordianInformation = (props) => {
                                   }
                             }
                           >
-                            <IconOne />
+                            <IconOne className={mode === 'revise' ? 'linkText' : reviewLabelClass} />
                           </IconButton>
                         </div>
                       )}

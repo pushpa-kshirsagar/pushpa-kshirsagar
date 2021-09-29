@@ -60,7 +60,10 @@ const PopUpSignOnAssociate = () => {
     coreNodeReviewListData,
     permissionStateOne,
     permissionStateTwo,
-    permissionStateThree
+    permissionStateThree,
+    countryName,
+    languages,
+    currencyMaster
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const history = useHistory();
@@ -578,7 +581,8 @@ const PopUpSignOnAssociate = () => {
         isActive={isPopUpValue === 'LANGUAGEPOPUP'}
         tag={'associateLanguage'}
         label={'language'}
-        listSelect={[{ id: 'English (India)', name: 'English (India)' }]}
+        //listSelect={[{ id: 'English (India)', name: 'English (India)' }]}
+        listSelect={languages}        
         mappingValue={'id'}
         labelval={'language'}
         headerPanelColour={'genericOne'}
@@ -3069,9 +3073,9 @@ const PopUpSignOnAssociate = () => {
         isActive={isPopUpValue === 'ASSOCIATE_COUNTRY_NAME_POPUP'}
         tag={'associateCountryName'}
         label={'country'}
-        // listSelect={associateInfo.informationSetup.countryName}
-        listSelect={[{id:'Afghanistan',name:'Afghanistan'},
-        { id: 'India', name: 'India' }]}        
+        listSelect={countryName}
+        // listSelect={[{id:'Afghanistan',name:'Afghanistan'},
+        // { id: 'India', name: 'India' }]}        
         mappingValue={'id'}
         labelval={'country'}
         headerPanelColour={'genericOne'}
@@ -3082,32 +3086,32 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      
+      />    
       <PopUpDropList
-        isActive={isPopUpValue === 'ASSOCIATE_COUNTRY_TAG_POPUP'}
-        tag={'associateCountryTag'}
-        label={'tag'}
-        listSelect={[{ id: 'ISO-3166-356', name: 'ISO-3166-356' }]}
+        isActive={isPopUpValue === 'ASSOCIATE_SETUPPLUS_COUNTRY_NAME_POPUP'}
+        tag={'associateCountryName'}
+        label={'country'}
+        listSelect={countryName}
         mappingValue={'id'}
-        labelval={'tag'}
+        labelval={'country'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
-        headerOneBadgeOne={'setup'}
+        headerOneBadgeOne={'setup+'}
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
+      />   
 
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_NAME_POPUP'}
         tag={'associateCurrencyName'}
-        label={'name'}
-        listSelect={[{ id: 'Indian Rupee', name: 'Indian Rupee' }]}
+        label={'currency'}        
+        listSelect={currencyMaster}
+        //listSelect={[{ id: 'Indian Rupee', name: 'Indian Rupee' }]}
         mappingValue={'id'}
-        labelval={'name'}
+        labelval={'currency'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}
@@ -3118,60 +3122,30 @@ const PopUpSignOnAssociate = () => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
-        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_SYMBOL_POPUP'}
-        tag={'associateCurrencySymbol'}
-        label={'symbol'}
-        listSelect={[{ id: 'INR', name: 'INR' }]}
+        isActive={isPopUpValue === 'ASSOCIATE_SETUPPLUS_CURRENCY_NAME_POPUP'}
+        tag={'associateCurrencyName'}
+        label={'currency'}
+        listSelect={currencyMaster}
         mappingValue={'id'}
-        labelval={'symbol'}
+        labelval={'currency'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
-        headerOneBadgeOne={'setup'}
+        headerOneBadgeOne={'setup+'}
         isRequired={true}
         nextPopUpValue={''}
         basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
+      />  
+
       <PopUpDropList
-        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_TAG_POPUP'}
-        tag={'associateCurrencyTag'}
-        label={'tag'}
-        listSelect={[{ id: 'ISO-4217-356', name: 'ISO-4217-356' }]}
+        isActive={isPopUpValue === 'LANGUAGE_SETUP_PLUS_POPUP'}
+        tag={'associateLanguage'}
+        label={'language'}
+        //listSelect={[{ id: 'English (India)', name: 'English (India)' }]}
+        listSelect={languages}        
         mappingValue={'id'}
-        labelval={'tag'}
-        headerPanelColour={'genericOne'}
-        headerOne={'associate'}
-        headerOneBadgeOne={'setup'}
-        isRequired={true}
-        nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup.associate || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpDropList
-        isActive={isPopUpValue === 'ASSOCIATE_LANGUAGE_NAME_POPUP'}
-        tag={'associateLanguageName'}
-        label={'name'}
-        listSelect={[{ id: 'English', name: 'English' }]}
-        mappingValue={'id'}
-        labelval={'name'}
-        headerPanelColour={'genericOne'}
-        headerOne={'associate'}
-        headerOneBadgeOne={'setup'}
-        isRequired={true}
-        nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup.associate || {}}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpDropList
-        isActive={isPopUpValue === 'ASSOCIATE_LANGUAGE_TAG_POPUP'}
-        tag={'associateLanguageTag'}
-        label={'tag'}
-        listSelect={[{ id: 'ISO-639-EN-1', name: 'ISO-639-EN-1' }]}
-        mappingValue={'id'}
-        labelval={'tag'}
+        labelval={'language'}
         headerPanelColour={'genericOne'}
         headerOne={'associate'}
         headerOneBadgeOne={'setup'}

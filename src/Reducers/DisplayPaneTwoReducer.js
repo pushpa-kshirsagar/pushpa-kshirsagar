@@ -89,7 +89,16 @@ const initialState = {
     weightageState: true,
     noOfItemState: true,
     noOfResponseState: true
-  }
+  },
+  countryName:[
+    {id:'ISO-3166-356',name:'India'}
+  ],
+  languages:[
+    {id:'ISO-639-EN-GB',name:'English (United Kingdom)'}
+  ],
+  currencyMaster:[
+    {id:'ISO-4217-356',name:'Indian Rupee'}
+  ]
 };
 
 const DisplayPaneTwoReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
