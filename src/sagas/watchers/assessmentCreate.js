@@ -54,7 +54,6 @@ function* workerCreateAssessmentSaga(data) {
         payload: { isPopUpValue: apiResponse.responseMessage, popupMode: 'responseErrorMsg' }
       });
     }
-   
   } catch (e) {
     console.log('ERROR==', e);
     yield put({
@@ -66,6 +65,5 @@ function* workerCreateAssessmentSaga(data) {
 }
 
 export default function* watchCreateAssessmentSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_ASSESSMENT_SAGA, workerCreateAssessmentSaga);
 }

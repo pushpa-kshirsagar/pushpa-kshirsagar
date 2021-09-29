@@ -79,6 +79,5 @@ function* workerCreateAssesseeSaga(data) {
 }
 
 export default function* watchcreateAssesseeSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_ASSESSEE_SAGA, workerCreateAssesseeSaga);
 }

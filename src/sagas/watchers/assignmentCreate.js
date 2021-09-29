@@ -239,6 +239,5 @@ function* workerCreateAssignmentSaga(data) {
 }
 
 export default function* watchCreateAssignmentSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_ASSIGNMENT_SAGA, workerCreateAssignmentSaga);
 }

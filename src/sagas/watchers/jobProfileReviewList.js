@@ -463,7 +463,6 @@ function* workerJobProfileAssessment(data) {
   }
 }
 export default function* watchReviewListJobProfileSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(GET_JOBPROFILE_REVIEW_LIST_SAGA, workerJobProfileReviewListSaga);
   yield takeLatest(JOB_GROUP_JOB_REVIEWLIST_SAGA, workeJobGroupJobReviewListSaga);
   yield takeLatest(JOB_TYPE_JOB_REVIEWLIST_SAGA, workeJobTypeJobReviewListSaga);

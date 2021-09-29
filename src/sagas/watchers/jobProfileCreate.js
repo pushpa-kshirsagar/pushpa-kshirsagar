@@ -47,6 +47,5 @@ function* workerCreateJobProfileSaga(data) {
 }
 
 export default function* watchCreateJobProfileSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_JOB_SAGA, workerCreateJobProfileSaga);
 }

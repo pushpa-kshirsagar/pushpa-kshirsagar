@@ -138,6 +138,5 @@ function* workerCreateAssociateSaga(data) {
 }
 
 export default function* watchcreateAssociateSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_ASSOCIATE_SAGA, workerCreateAssociateSaga);
 }

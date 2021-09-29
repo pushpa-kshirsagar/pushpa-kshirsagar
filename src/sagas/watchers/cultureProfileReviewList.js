@@ -298,7 +298,6 @@ function* workerReviewListCultureProfileAllocateSaga(data) {
 }
 
 export default function* watchReviewListCultureProfileSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(GET_CULTUREPROFILE_REVIEW_LIST_SAGA, workerCultureProfileReviewListSaga);
   yield takeLatest(CULTURE_GROUP_CULTURE_REVIEWLIST_SAGA, workeCultureGroupCultureReviewListSaga);
   yield takeLatest(CULTURE_TYPE_CULTURE_REVIEWLIST_SAGA, workeCultureTypeCultureReviewListSaga);

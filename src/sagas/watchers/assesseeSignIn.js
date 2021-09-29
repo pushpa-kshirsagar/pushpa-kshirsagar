@@ -352,7 +352,6 @@ function* workerSignInAssesseeInfo(data) {
 }
 
 export default function* watchSignInAssesseeSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(ASSESSEE_SIGN_IN_SAGA, workerSignInAssesseeSaga);
   yield takeLatest(GET_ASSESSEE_SIGN_IN_INFO, workerSignInAssesseeInfo);
   yield takeLatest(SET_ASSESSEE_REVISE_PASSWORD, workerSetPassword);

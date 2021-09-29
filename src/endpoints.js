@@ -234,9 +234,12 @@ export const ASSOCIATE_NODE_REVIEW_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/review';
 export const ASSOCIATE_NODE_REVISE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-node/revise';
-export const ASSESSEE_ROLE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-role/share';
+// export const ASSESSEE_ROLE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-role/share';
+export const ASSESSEE_ROLE_SHARE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee/share/role';
+// export const ASSESSEE_ROLE_UNSHARE_URL =
+// ASSOCIATES_URL + '/dev/insight-guru/api/assessee-role/unshare';
 export const ASSESSEE_ROLE_UNSHARE_URL =
-  ASSOCIATES_URL + '/dev/insight-guru/api/assessee-role/unshare';
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee/unshare/role';
 export const ASSOCIATE_ROLE_SHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-role/share';
 export const ASSOCIATE_ROLE_UNSHARE_URL =
@@ -263,9 +266,11 @@ export const ASSOCIATE_TYPE_SHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/share';
 export const ASSOCIATE_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/associate-type/unshare';
-export const ASSESSEE_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/share';
-export const ASSESSEE_TYPE_UNSHARE_URL =
-  ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/unshare';
+// export const ASSESSEE_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/share';
+export const ASSESSEE_TYPE_SHARE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee/share/type';
+// export const ASSESSEE_TYPE_UNSHARE_URL =
+  // ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/unshare';
+export const ASSESSEE_TYPE_UNSHARE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee/unshare/type';
 export const ITEM_ALLOCATE = ITEMS + '/dev/insight-guru/api/item-distinct/allocate';
 export const ITEM_ALLOCATE_ASSESSMENT = ITEMS + '/dev/insight-guru/api/item/allocate/assessment';
 export const ASSESSEE_ALLOCATE = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/allocate';
@@ -386,7 +391,8 @@ export const JOB_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/job-profile-type/unshare';
 export const JOBDOMAIN_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-domain/review-list';
 // export const JOBPROFILER_LIST_URL = ANALYTICS + '/dev/insight-guru/api/job-profiler/review-list';
-export const JOBPROFILER_LIST_URL = ANALYTICS + '/dev/insight-guru/api/job-profiler/competency/review-list';
+export const JOBPROFILER_LIST_URL =
+  ANALYTICS + '/dev/insight-guru/api/job-profiler/competency/review-list';
 export const JOBFUNCTION_REVIEWLIST_URL =
   ANALYTICS + '/dev/insight-guru/api/job-function/review-list';
 export const JOBROLE_REVIEWLIST_URL = ANALYTICS + '/dev/insight-guru/api/job-role/review-list';

@@ -36,7 +36,8 @@ import {
   ASSOCIATE_ASSESSMENT_SETUP_SAGA,
   ASSOCIATE_ASSESSESS_SETUP_SAGA,
   ASSOCIATE_ASSIGNMENT_SETUP_SAGA,
-  ASSOCIATE_NODE_SETUP_SAGA
+  ASSOCIATE_NODE_SETUP_SAGA,
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import {
   ANALYTIC_SETUP_URL,
@@ -784,6 +785,7 @@ export const associateCreatePopup = (
 ) => {
   dispatch({ type: CLEAR_ASSOCIATE_INFO });
   dispatch({ type: CLEAR_ASSESSEE_INFO });
+  dispatch({ type: LOADER_START });
   dispatch({
     type: SET_POPUP_SINGLE_STATE,
     payload: { stateName: 'cardValue', value: 'Create' }
@@ -799,6 +801,18 @@ export const associateCreatePopup = (
       isMiddlePaneList: false
     }
   });
+  let typerequestObj = makeAssociateTypeObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({
+    type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+    payload: {
+      request: typerequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      isMiddlePaneList: false
+    }
+  });
+  dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typerequestObj });
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
   let roleRequestObj = makeAssociateRoleObj(selectedAssociateInfo, 'active', 0, -1);
   dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });

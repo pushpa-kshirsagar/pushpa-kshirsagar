@@ -39,7 +39,8 @@ import {
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
   UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
-  UPDATE_ASSOCIATE_ASSOCIATENODE_INFO
+  UPDATE_ASSOCIATE_ASSOCIATENODE_INFO,
+  SET_SINGLE_ASSOCIATE_INFORMATION
 } from '../../actionType';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../../endpoints';
@@ -61,11 +62,13 @@ const PopUpSignOnAssociate = () => {
     permissionStateOne,
     permissionStateTwo,
     permissionStateThree,
+    coreTypeReviewListData,
     countryName,
     languages,
     currencyMaster
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [roleSelectedError, setRoleSelectedError] = useState('');
+  const [typeSelectedError, setTypeSelectedError] = useState('');
   const history = useHistory();
   console.log(associateInfo);
   console.log('==================');
@@ -179,52 +182,47 @@ const PopUpSignOnAssociate = () => {
       });
     }
   };
-  const updateAssociateGroups = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(associateInfo.informationAllocation.associateGroup.associateGroupPrimary);
-    let groupid = e.currentTarget.getAttribute('tag');
-    let groupArr = associateInfo.informationAllocation.associateGroup.associateGroupPrimary;
-    if (groupArr.includes(groupid)) {
-      document.getElementById(groupid).style.backgroundColor = 'white';
-      groupArr = groupArr.filter(function (number) {
-        return number !== groupid;
+  const updateAssociateAllocation = (e, stateName, actualStateName) => {
+    setRoleSelectedError('');
+    setTypeSelectedError('');
+    let id = e.currentTarget.getAttribute('tag');
+    let arr = associateInfo.informationAllocation[stateName][actualStateName];
+    if (arr.includes(id)) {
+      document.getElementById(id).style.backgroundColor = 'white';
+      arr = arr.filter(function (number) {
+        return number !== id;
       });
     } else {
-      groupArr.push(groupid);
-      document.getElementById(groupid).style.backgroundColor = '#F0F0F0';
+      arr.push(id);
+      document.getElementById(id).style.backgroundColor = '#F0F0F0';
     }
     dispatch({
       type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
       payload: {
-        stateName: 'associateGroup',
-        actualStateName: 'associateGroupPrimary',
-        value: groupArr
+        stateName: stateName,
+        actualStateName: actualStateName,
+        value: arr
       }
     });
   };
-  const updateAssociateRoles = (e) => {
-    console.log(e.currentTarget.getAttribute('tag'));
-    console.log(associateInfo.informationAllocation.associateRole.associateRolePrimary);
-    let roleid = e.currentTarget.getAttribute('tag');
-    let roleArr = associateInfo.informationAllocation.associateRole.associateRolePrimary;
-    setRoleSelectedError('');
-    if (roleArr.includes(roleid)) {
-      document.getElementById(roleid).style.backgroundColor = 'white';
-      roleArr = roleArr.filter(function (number) {
-        return number !== roleid;
+  const onClickCheckbox = (e, inputHeader, primaryheader) => {
+    console.log('onClickCheckbox', e.target.checked);
+    let val = inputHeader + ' ' + primaryheader;
+    console.log('val', val);
+    if (val === 'work address primary') {
+      associateInfo.informationContact.associateAddressWorkPrimary.associateAddressCommunication = true;
+      dispatch({
+        type: SET_SINGLE_ASSOCIATE_INFORMATION,
+        payload: { stateName: 'tempAssociateCommunication', value: e.target.checked && val }
       });
-    } else {
-      roleArr.push(roleid);
-      document.getElementById(roleid).style.backgroundColor = '#F0F0F0';
     }
-    dispatch({
-      type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
-      payload: {
-        stateName: 'associateRole',
-        actualStateName: 'associateRolePrimary',
-        value: roleArr
-      }
-    });
+    if (val === 'work telephone primary') {
+      associateInfo.informationContact.associateAddressWorkPrimary.associateAddressCommunication = true;
+      dispatch({
+        type: SET_SINGLE_ASSOCIATE_INFORMATION,
+        payload: { stateName: 'tempAssociateTeleCommunication', value: e.target.checked && val }
+      });
+    }
   };
   const updateParentNode = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
@@ -306,7 +304,11 @@ const PopUpSignOnAssociate = () => {
         ListData={coreGroupReviewListData}
         textOne={'associateGroupName'}
         textTwo={'associateGroupDescription'}
-        onClickEvent={updateAssociateGroups}
+        selectedList={associateInfo?.informationAllocation?.associateGroup.associateGroupPrimary}
+        // onClickEvent={updateAssociateGroups}
+        onClickEvent={(e) => {
+          updateAssociateAllocation(e, 'associateGroup', 'associateGroupPrimary');
+        }}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -321,7 +323,11 @@ const PopUpSignOnAssociate = () => {
         ListData={coreGroupReviewListData}
         textOne={'associateGroupName'}
         textTwo={'associateGroupDescription'}
-        onClickEvent={updateAssociateGroups}
+        selectedList={associateInfo?.informationAllocation?.associateGroup.associateGroupPrimary}
+        // onClickEvent={updateAssociateGroups}
+        onClickEvent={(e) => {
+          updateAssociateAllocation(e, 'associateGroup', 'associateGroupPrimary');
+        }}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -371,14 +377,13 @@ const PopUpSignOnAssociate = () => {
         inputHeader={'node'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Node' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Node' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Node' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreNodeReviewListData}
+        textOne={'associateNodename'}
+        textTwo={'associateNodeDescription'}
+        onClickEvent={(e) => {
+          updateAssociateAllocation(e, 'associateNode', 'associateNodePrimary');
+        }}
+        selectedList={associateInfo?.informationAllocation?.associateNode.associateNodePrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -412,7 +417,10 @@ const PopUpSignOnAssociate = () => {
         ListData={coreRoleReviewListData}
         textOne={'associateRoleName'}
         textTwo={'associateRoleDescription'}
-        onClickEvent={updateAssociateRoles}
+        // onClickEvent={updateAssociateRoles}
+        onClickEvent={(e) => {
+          updateAssociateAllocation(e, 'associateRole', 'associateRolePrimary');
+        }}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
         isRequired={true}
@@ -432,11 +440,14 @@ const PopUpSignOnAssociate = () => {
         ListData={coreRoleReviewListData}
         textOne={'associateRoleName'}
         textTwo={'associateRoleDescription'}
-        onClickEvent={updateAssociateRoles}
+        // onClickEvent={updateAssociateRoles}
+        onClickEvent={(e) => {
+          updateAssociateAllocation(e, 'associateRole', 'associateRoleSecondary');
+        }}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
         isRequired={true}
-        selectedList={associateInfo?.informationAllocation?.associateRole.associateRolePrimary}
+        selectedList={associateInfo?.informationAllocation?.associateRole.associateRoleSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -448,14 +459,17 @@ const PopUpSignOnAssociate = () => {
         inputHeader={'type'}
         inputHeaderBadge={'primary'}
         infoMsg={'select a type'}
-        ListData={[
-          { id: '01', informationBasic: { name: 'Simple Sample 01', description: 'Type' } },
-          { id: '02', informationBasic: { name: 'Simple Sample 02', description: 'Type' } },
-          { id: '03', informationBasic: { name: 'Simple Sample 03', description: 'Type' } }
-        ]}
-        textOne={'name'}
-        textTwo={'description'}
-        onClickEvent={null}
+        ListData={coreTypeReviewListData}
+        textOne={'associateTypeName'}
+        textTwo={'associateTypeDescription'}
+        onClickEvent={(e) => {
+          updateAssociateAllocation(e, 'associateType', 'associateTypePrimary');
+        }}
+        setErrorMsg={setTypeSelectedError}
+        errorMsg={typeSelectedError}
+        isRequired={true}
+        minimumSelected={1}
+        selectedList={associateInfo?.informationAllocation?.associateType.associateTypePrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpReviewList
@@ -489,6 +503,8 @@ const PopUpSignOnAssociate = () => {
         primaryheader={'primary'}
         nextPopUpValue={'WORKTELEPHONE'}
         isRequired={true}
+        onClickCheckbox={onClickCheckbox}
+        addressCommunication={associateInfo.tempAssociateCommunication}
         basicInfo={associateInfo.informationContact.associateAddressWorkPrimary}
         countryCode={'associateTelephoneCountryRegion'}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKADDRESS_INFO}
@@ -502,6 +518,8 @@ const PopUpSignOnAssociate = () => {
         inputHeader={'work address'}
         primaryheader={'secondary'}
         nextPopUpValue={''}
+        onClickCheckbox={onClickCheckbox}
+        addressCommunication={associateInfo.tempAssociateCommunication}
         isRequired={true}
         basicInfo={associateInfo.informationContact.associateAddressWorkSecondary}
         countryCode={'associateAddressWorkSecondary'}
@@ -515,6 +533,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         inputHeader={'work telephone'}
         primaryheader={'primary'}
+        onClickCheckbox={onClickCheckbox}
+        tempTelephoneCommunication={associateInfo.tempAssociateTeleCommunication}
         basicInfo={associateInfo.informationContact.associateTelephoneWorkPrimary}
         isMobileState={false}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_INFO}
@@ -529,6 +549,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'information'}
         inputHeader={'work telephone'}
         primaryheader={'secondary'}
+        onClickCheckbox={onClickCheckbox}
+        tempTelephoneCommunication={associateInfo.tempAssociateTeleCommunication}
         basicInfo={associateInfo.informationContact.associateTelephoneWorkSecondary}
         isMobileState={false}
         typeOfSetObject={UPDATE_ASSOCIATE_WORKTELEPHONE_SECONDARY_INFO}
@@ -582,7 +604,7 @@ const PopUpSignOnAssociate = () => {
         tag={'associateLanguage'}
         label={'language'}
         //listSelect={[{ id: 'English (India)', name: 'English (India)' }]}
-        listSelect={languages}        
+        listSelect={languages}
         mappingValue={'id'}
         labelval={'language'}
         headerPanelColour={'genericOne'}
@@ -3059,7 +3081,7 @@ const PopUpSignOnAssociate = () => {
       <PopUpPicture
         isActive={isPopUpValue === 'ASSOCIATE_COUNTRY_PICTURE_POPUP'}
         headerPanelColour={'genericOne'}
-        headerOne={'associate'}        
+        headerOne={'associate'}
         headerOneBadgeOne={'setup'}
         inputHeader={'associates'}
         inputHeaderBadgeOne={'country'}
@@ -3075,7 +3097,7 @@ const PopUpSignOnAssociate = () => {
         label={'country'}
         listSelect={countryName}
         // listSelect={[{id:'Afghanistan',name:'Afghanistan'},
-        // { id: 'India', name: 'India' }]}        
+        // { id: 'India', name: 'India' }]}
         mappingValue={'id'}
         labelval={'country'}
         headerPanelColour={'genericOne'}
@@ -3083,10 +3105,10 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={associateInfo.informationSetup.associate || {}}
+        basicInfo={associateInfo.informationSetup.associate?.associateCountry || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />    
+      />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_SETUPPLUS_COUNTRY_NAME_POPUP'}
         tag={'associateCountryName'}
@@ -3102,12 +3124,12 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />   
+      />
 
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_NAME_POPUP'}
         tag={'associateCurrencyName'}
-        label={'currency'}        
+        label={'currency'}
         listSelect={currencyMaster}
         //listSelect={[{ id: 'Indian Rupee', name: 'Indian Rupee' }]}
         mappingValue={'id'}
@@ -3136,14 +3158,14 @@ const PopUpSignOnAssociate = () => {
         basicInfo={associateInfo.informationSetup.associate || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />  
+      />
 
       <PopUpDropList
         isActive={isPopUpValue === 'LANGUAGE_SETUP_PLUS_POPUP'}
         tag={'associateLanguage'}
         label={'language'}
         //listSelect={[{ id: 'English (India)', name: 'English (India)' }]}
-        listSelect={languages}        
+        listSelect={languages}
         mappingValue={'id'}
         labelval={'language'}
         headerPanelColour={'genericOne'}
@@ -3155,7 +3177,6 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-	  
     </div>
   );
 };
