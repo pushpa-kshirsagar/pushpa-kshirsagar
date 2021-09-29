@@ -1760,7 +1760,8 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'associate') {
-      const { informationBasic, informationContact, informationSetup } = associateInfo;
+      const { informationBasic, informationContact, informationSetup,associateCountry,associateCurrency,associateLanguage } = associateInfo;
+      const updatedinformationSetup = {...informationSetup.associate,associateCountry,associateCurrency,associateLanguage}
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1819,7 +1820,9 @@ export const DisplayPaneThree = () => {
         let setupObj = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId: id,
-          associateSetup: informationSetup.associate
+          //associateSetup: informationSetup.associate
+          associateSetup: updatedinformationSetup
+          
         };
         dispatch({
           type: ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA,

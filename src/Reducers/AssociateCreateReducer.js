@@ -31,7 +31,10 @@ import {
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
   UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
-  UPDATE_ASSOCIATE_ASSOCIATENODE_INFO
+  UPDATE_ASSOCIATE_ASSOCIATENODE_INFO,
+  UPDATE_ASSOCIATE_COUNTRY_INFO,
+  UPDATE_ASSOCIATE_CURRENCY_INFO,
+  UPDATE_ASSOCIATE_LANGUAGE_INFO
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -210,7 +213,21 @@ const initialState = {
   },
   emailAddressPrimary: '',
   communication: '',
-  signIn: ''
+  signIn: '',
+  associateCountry:{
+    associateCountryTag:'',
+    associateCountryName:'',
+    associateCountryFlag:''
+  },
+  associateCurrency:{
+    associateCurrencyName: '',
+    associateCurrencySymbol: '',
+    associateCurrencyTag: ''
+  },
+  associateLanguage:{
+    associateLanguageName:'',
+    associateLanguageTag:''
+  }
 };
 
 const AssociateCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
@@ -504,6 +521,21 @@ const AssociateCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)
       };
     case CLEAR_ASSOCIATE_INFO:
       return JSON.parse(JSON.stringify(initialState));
+    case UPDATE_ASSOCIATE_COUNTRY_INFO: 
+    return{
+      ...istate,      
+      associateCountry:action.payload
+    }
+    case UPDATE_ASSOCIATE_CURRENCY_INFO: 
+    return{
+      ...istate,      
+      associateCurrency:action.payload
+    }
+    case UPDATE_ASSOCIATE_LANGUAGE_INFO: 
+    return{
+      ...istate,      
+      associateLanguage:action.payload
+    }
     default:
       return istate;
   }
