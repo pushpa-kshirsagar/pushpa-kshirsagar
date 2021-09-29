@@ -105,7 +105,8 @@ import DisplayPaneThreeSectionTwoAssociateNode from '../../Molecules/DisplayPane
 import {
   getAssesseeGroupAssesseeReqObj,
   getAssesseeNodeAssesseeReqObj,
-  getAssesseeRoleAssesseeReqObj
+  getAssesseeRoleAssesseeReqObj,
+  setPermissionToDefault
 } from '../../Actions/AssesseeModuleAction';
 import {
   getAssociateGroupAssociateReqObj,
@@ -1080,6 +1081,7 @@ export const DisplayPaneThree = () => {
     ) {
       console.log('ASSESSEES ROLE REVISE');
       const { associateId, id } = responseObject;
+      let reviseSetupObj = setPermissionToDefault(assesseeRole.informationSetup);
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId,
@@ -1090,7 +1092,7 @@ export const DisplayPaneThree = () => {
         assesseeRole: {
           id,
           informationBasic: assesseeRole.informationBasic,
-          informationSetup: assesseeRole.informationSetup
+          informationSetup: reviseSetupObj
         }
       };
       dispatch({ type: LOADER_START });
@@ -1119,7 +1121,7 @@ export const DisplayPaneThree = () => {
         associateRole: {
           id,
           informationBasic: associateRole.informationBasic,
-          informationSetup: associateRole.informationSetup  
+          informationSetup: associateRole.informationSetup
         }
       };
       dispatch({ type: LOADER_START });
@@ -1149,7 +1151,6 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic: associateGroup.informationBasic,
           informationSetup: associateGroup.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1180,7 +1181,6 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic: assessmentGroup.informationBasic,
           informationSetup: assessmentGroup.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1211,7 +1211,6 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic: cultureProfileGroup.informationBasic,
           informationSetup: cultureProfileGroup.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1242,7 +1241,6 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic: jobProfileGroup.informationBasic,
           informationSetup: jobProfileGroup.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1271,7 +1269,6 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic: itemGroup.informationBasic,
           informationSetup: itemGroup.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1302,7 +1299,6 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic: assignmentGroup.informationBasic,
           informationSetup: assignmentGroup.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1359,7 +1355,7 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic: assesseeType.informationBasic,
           informationAllocation: assesseeType.informationAllocation,
-          informationSetup: assesseeType.informationSetup          
+          informationSetup: assesseeType.informationSetup
         }
       };
       dispatch({ type: LOADER_START });
@@ -1392,7 +1388,6 @@ export const DisplayPaneThree = () => {
           informationBasic: assessmentType.informationBasic,
           informationAllocation: assessmentType.informationAllocation,
           informationSetup: assessmentType.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1425,7 +1420,6 @@ export const DisplayPaneThree = () => {
           informationBasic: assignmentType.informationBasic,
           informationAllocation: assignmentType.informationAllocation,
           informationSetup: assignmentType.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1456,7 +1450,6 @@ export const DisplayPaneThree = () => {
           informationBasic: cultureProfileType.informationBasic,
           informationAllocation: cultureProfileType.informationAllocation,
           informationSetup: cultureProfileType.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1487,7 +1480,6 @@ export const DisplayPaneThree = () => {
           informationBasic: jobProfileType.informationBasic,
           informationAllocation: jobProfileType.informationAllocation,
           informationSetup: jobProfileType.informationSetup
-
         }
       };
       dispatch({ type: LOADER_START });
@@ -1514,9 +1506,8 @@ export const DisplayPaneThree = () => {
         },
         itemType: {
           id,
-          informationBasic: itemType.informationBasic,          
+          informationBasic: itemType.informationBasic,
           informationSetup: itemType.informationSetup
-          
         }
       };
       dispatch({ type: LOADER_START });
@@ -1774,7 +1765,7 @@ export const DisplayPaneThree = () => {
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId: id,
+        associateId:  selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         associate: {
           id,
           informationBasic,

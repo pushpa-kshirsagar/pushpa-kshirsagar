@@ -28,7 +28,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
   const { responseObject, headerOneBadgeTwo, headerOneBadgeOne, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationEngagement, informationAllocation } = responseObject;
   function capitalizeFirstLetter(string) {
     if (!string) return '';

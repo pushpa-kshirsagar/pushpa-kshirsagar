@@ -156,7 +156,10 @@ const PopUpAssesseeCreateSignOn = (props) => {
       informationContact.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
     // add default root node in allocation if node not selected
-    if (informationAllocation.assesseeNode.assesseeNodePrimary.length === 0) {
+    if (
+      informationAllocation.assesseeNode.assesseeNodePrimary.length === 0 &&
+      coreNodeReviewListData.length !== 0
+    ) {
       let rootNode = coreNodeReviewListData.filter((node) => {
         return node.informationFramework.associateNodeAscendantPrimary === null;
       });

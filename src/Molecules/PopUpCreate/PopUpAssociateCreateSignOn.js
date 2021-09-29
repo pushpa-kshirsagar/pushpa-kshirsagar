@@ -420,6 +420,7 @@ const PopUpSignOnAssociate = () => {
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
         isRequired={true}
+        minimumSelected={1}
         selectedList={associateInfo?.informationAllocation?.associateRole.associateRolePrimary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

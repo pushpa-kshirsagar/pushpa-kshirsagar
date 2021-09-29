@@ -1521,3 +1521,43 @@ export const assesseeReviewInformation = (
     }
   });
 };
+export const setPermissionToDefault = (roleObj) => {
+  if (roleObj.assesseeRolePermission.assesseeAssesseeDistinctPermission.create) {
+    roleObj.assesseeRolePermission.assesseeAssesseeGroupPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssesseeManagerPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssesseeRolePermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssesseeTypePermission.review = true;
+  }
+  if (roleObj.assesseeRolePermission.assesseeAssessmentDistinctPermission.create) {
+    roleObj.assesseeRolePermission.assesseeAssessmentGroupPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssessmentManagerPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssessmentTypePermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssociateNodePermission.review = true;
+  }
+  if (roleObj.assesseeRolePermission.assesseeAssignmentDistinctPermission.create) {
+    roleObj.assesseeRolePermission.assesseeAssignmentGroupPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssignmentManagerPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssignmentTypePermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssociateNodePermission.review = true;
+  }
+  if (roleObj.assesseeRolePermission.assesseeAssociateDistinctPermission.create) {
+    roleObj.assesseeRolePermission.assesseeAssociateGroupPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssociateManagerPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssociateRolePermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssociateTypePermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssociateNodePermission.review = true;
+  }
+  if (roleObj.assesseeRolePermission.assesseeiGuruAnalyticDistinctPermission.create) {
+    roleObj.assesseeRolePermission.assesseeiGuruAnalyticGroupPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeiGuruAnalyticManagerPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeiGuruAnalyticTypePermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssociateNodePermission.review = true;
+  }
+  if (roleObj.assesseeRolePermission.assesseeItemDistinctPermission.create) {
+    roleObj.assesseeRolePermission.assesseeItemGroupPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeItemManagerPermission.review = true;
+    roleObj.assesseeRolePermission.assesseeItemTypePermission.review = true;
+    roleObj.assesseeRolePermission.assesseeAssociateNodePermission.review = true;
+  }
+  return roleObj;
+};

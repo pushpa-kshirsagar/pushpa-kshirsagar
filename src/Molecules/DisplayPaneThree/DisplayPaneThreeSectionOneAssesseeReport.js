@@ -2,60 +2,15 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 // import AllocationAccordian from '../Accordian/AllocationAccordian';
 import Manuscript from '@material-ui/icons/Description';
-import { useDispatch, useSelector } from 'react-redux';
-import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
-import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
+import { useSelector } from 'react-redux';
 import { IconButton, InputLabel, Paper } from '@material-ui/core';
-import { getTypeGroupReviewListApi } from '../../Actions/AssesseeModuleAction';
-import { SET_POPUP_VALUE } from '../../actionType';
-import { convertToLocalTime,calculateTime } from '../../Actions/GenericActions'
+import { convertToLocalTime, calculateTime } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssesseeReport = () => {
   // const [listExpand, setListExpand] = useState('');
   const [selectedBadge, setSelectedBadge] = useState('analytic');
-  const dispatch = useDispatch();
-  const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationEngagement, informationAllocation, assesseeAssignment } = responseObject;
-  function capitalizeFirstLetter(string) {
-    if (!string) return '';
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  }
-  // let groupList = [];
-  let assessmentTypeGroupList = [];
-  const tempTypeGroup = informationAllocation?.assessmentTypeGroup;
-  if (tempTypeGroup) {
-    assessmentTypeGroupList.push({
-      id: tempTypeGroup?.id || '',
-      textOne: tempTypeGroup?.informationBasic?.assessmentTypeGroupName || '',
-      textTwo: tempTypeGroup?.informationBasic?.assessmentTypeGroupDescription || '',
-      status: ''
-    });
-  }
-  const allocationList = [
-    {
-      id: 'assessments',
-      labelTextOneOne: 'assessments',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'analytic',
-          textOne: ''
-        },
-        {
-          labelTextOneOneBadge: 'evaluation',
-          textOne: ''
-        }
-      ],
-      innerAssociateList: [],
-      innerInfo: '',
-      isListCard: false
-      // IconOne: Manuscript
-    }
-  ];
-  //console.log('responce Object');
-  //console.log(assesseeAssignment);
-  //console.log(assesseeAssignment.assesseeAssignmentAssessment);
-  //console.log(assesseeAssignment.assesseeAssignmentAssessment.length);
+  const { responseObject } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { assesseeAssignment } = responseObject;
   return (
     <div
       style={{
@@ -114,9 +69,9 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                     </div>
                     {selectedBadge === 'analytic' && (
                       <div>
-                        {
-                          assesseeAssignment.assesseeAssignmentAssessment.length > 0 ?
-                            assesseeAssignment.assesseeAssignmentAssessment.map((assesmentResult, index) => (
+                        {assesseeAssignment.assesseeAssignmentAssessment.length > 0 ? (
+                          assesseeAssignment.assesseeAssignmentAssessment.map(
+                            (assesmentResult, index) => (
                               <div key={index}>
                                 <div>
                                   <div
@@ -133,15 +88,17 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                         <div className={['midPaneInformation'].join(' ')}>
                                           {assesmentResult.assesseeAssignmentAssessmentName}
                                         </div>
-                                        {
-                                          assesseeAssignment.assesseeAssignmentAssessmentDescription === "" ? null :
-                                            <div
-                                              style={{ textAlign: 'left' }}
-                                              className={['midPaneLabel', 'textOverflow'].join(' ')}
-                                            >
-                                              {assesseeAssignment.assesseeAssignmentAssessmentDescription}
-                                            </div>
-                                        }
+                                        {assesseeAssignment.assesseeAssignmentAssessmentDescription ===
+                                        '' ? null : (
+                                          <div
+                                            style={{ textAlign: 'left' }}
+                                            className={['midPaneLabel', 'textOverflow'].join(' ')}
+                                          >
+                                            {
+                                              assesseeAssignment.assesseeAssignmentAssessmentDescription
+                                            }
+                                          </div>
+                                        )}
                                       </div>
                                       <div
                                         style={{ flex: '1', display: 'flex', alignItems: 'center' }}
@@ -168,8 +125,10 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                   <div>
                                     <div style={{ display: 'flex' }}>
                                       <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                                        <div className={['unitFlex', 'midPaneInformation'].join(' ')}
-                                          style={{ alignItems: 'flex-start' }}>
+                                        <div
+                                          className={['unitFlex', 'midPaneInformation'].join(' ')}
+                                          style={{ alignItems: 'flex-start' }}
+                                        >
                                           {assesmentResult.assesseeAssignmentAssessmentAttempted}
                                         </div>
                                         <div className={['unitFlex', 'reports-center'].join(' ')}>
@@ -181,7 +140,9 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                           className={['unitFlex', 'midPaneInformation'].join(' ')}
                                           style={{ alignItems: 'flex-start' }}
                                         >
-                                          {assesmentResult.assesseeAssignmentAssessmentItemResponseCorrect}
+                                          {
+                                            assesmentResult.assesseeAssignmentAssessmentItemResponseCorrect
+                                          }
                                         </div>
                                         <div className={['unitFlex', 'reports-center'].join(' ')}>
                                           correct
@@ -192,9 +153,13 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                           className={['unitFlex', 'midPaneInformation'].join(' ')}
                                           style={{ alignItems: 'flex-start' }}
                                         >
-                                          {assesmentResult.assesseeAssignmentAssessmentItemResponseTotal}
+                                          {
+                                            assesmentResult.assesseeAssignmentAssessmentItemResponseTotal
+                                          }
                                         </div>
-                                        <div className={['unitFlex', 'reports-center'].join(' ')}>total</div>
+                                        <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                          total
+                                        </div>
                                       </div>
 
                                       <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
@@ -202,72 +167,92 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                           className={['unitFlex', 'midPaneInformation'].join(' ')}
                                           style={{ alignItems: 'flex-start' }}
                                         ></div>
-                                        <div className={['unitFlex', 'reports-center'].join(' ')}></div>
+                                        <div
+                                          className={['unitFlex', 'reports-center'].join(' ')}
+                                        ></div>
                                       </div>
                                       <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
                                         <div
                                           className={['unitFlex', 'midPaneInformation'].join(' ')}
                                           style={{ alignItems: 'flex-start' }}
                                         ></div>
-                                        <div className={['unitFlex', 'reports-center'].join(' ')}></div>
+                                        <div
+                                          className={['unitFlex', 'reports-center'].join(' ')}
+                                        ></div>
                                       </div>
                                       <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
                                         <div
                                           className={['unitFlex', 'midPaneInformation'].join(' ')}
                                           style={{ alignItems: 'flex-start' }}
                                         ></div>
-                                        <div className={['unitFlex', 'reports-center'].join(' ')}></div>
+                                        <div
+                                          className={['unitFlex', 'reports-center'].join(' ')}
+                                        ></div>
                                       </div>
                                     </div>
                                     <div style={{ display: 'flex' }}>
                                       <div
                                         className={['measureBox', 'heightInherit'].join(' ')}
-                                        style={{ cursor: 'default' }}>
+                                        style={{ cursor: 'default' }}
+                                      >
                                         <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
                                           <div
                                             className={['unitFlex', 'midPaneInformation'].join(' ')}
                                             style={{ alignItems: 'flex-start', fontSize: '1rem' }}
                                           >
-                                            {convertToLocalTime(assesmentResult.assesseeAssignmentAssessmentTimeline.assesseeAssignmentAssessmentTimeStart)}
+                                            {convertToLocalTime(
+                                              assesmentResult.assesseeAssignmentAssessmentTimeline
+                                                .assesseeAssignmentAssessmentTimeStart
+                                            )}
                                           </div>
-                                          <div className={['unitFlex', 'reports-center'].join(' ')}>start</div>
+                                          <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                            start
+                                          </div>
                                         </div>
                                         <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
                                           <div
                                             className={['unitFlex', 'midPaneInformation'].join(' ')}
                                             style={{ alignItems: 'flex-start', fontSize: '1rem' }}
                                           >
-                                            {convertToLocalTime(assesmentResult.assesseeAssignmentAssessmentTimeline.assesseeAssignmentAssessmentTimeEnd)}
+                                            {convertToLocalTime(
+                                              assesmentResult.assesseeAssignmentAssessmentTimeline
+                                                .assesseeAssignmentAssessmentTimeEnd
+                                            )}
                                           </div>
-                                          <div className={['unitFlex', 'reports-center'].join(' ')}>end</div>
+                                          <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                            end
+                                          </div>
                                         </div>
                                         <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
                                           <div
                                             className={['unitFlex', 'midPaneInformation'].join(' ')}
                                             style={{ alignItems: 'flex-start', fontSize: '1rem' }}
                                           >
-                                            {calculateTime(assesmentResult.assesseeAssignmentAssessmentTime)}
+                                            {calculateTime(
+                                              assesmentResult.assesseeAssignmentAssessmentTime
+                                            )}
                                           </div>
-                                          <div className={['unitFlex', 'reports-center'].join(' ')}>time</div>
+                                          <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                            time
+                                          </div>
                                         </div>
                                       </div>
-
                                     </div>
                                   </div>
                                 </div>
-
                               </div>
-                            )) :
-                            <div>
-                            </div>
-                        }
+                            )
+                          )
+                        ) : (
+                          <div></div>
+                        )}
                       </div>
                     )}
                     {selectedBadge === 'evaluation' && (
                       <div>
-                        {
-                          assesseeAssignment.assesseeAssignmentAssessment.length > 0 ?
-                            assesseeAssignment.assesseeAssignmentAssessment.map((assesmentResult, index) => (
+                        {assesseeAssignment.assesseeAssignmentAssessment.length > 0 ? (
+                          assesseeAssignment.assesseeAssignmentAssessment.map(
+                            (assesmentResult, index) => (
                               <div key={index}>
                                 <div>
                                   <div
@@ -284,15 +269,17 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                         <div className={['midPaneInformation'].join(' ')}>
                                           {assesmentResult.assesseeAssignmentAssessmentName}
                                         </div>
-                                        {
-                                          assesmentResult.assesseeAssignmentAssessmentDescription === "" ? null :
-                                            <div
-                                              style={{ textAlign: 'left' }}
-                                              className={['midPaneLabel', 'textOverflow'].join(' ')}
-                                            >
-                                              {assesmentResult.assesseeAssignmentAssessmentDescription}
-                                            </div>
-                                        }
+                                        {assesmentResult.assesseeAssignmentAssessmentDescription ===
+                                        '' ? null : (
+                                          <div
+                                            style={{ textAlign: 'left' }}
+                                            className={['midPaneLabel', 'textOverflow'].join(' ')}
+                                          >
+                                            {
+                                              assesmentResult.assesseeAssignmentAssessmentDescription
+                                            }
+                                          </div>
+                                        )}
                                       </div>
                                       <div
                                         style={{
@@ -320,103 +307,86 @@ const DisplayPaneThreeSectionOneAssesseeReport = () => {
                                   </div>
                                 </div>
                                 <div className={'containerPadding'}>
-                          <div style={{ display: 'flex' }}>
-                            <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                              <div
-                                className={['unitFlex', 'midPaneInformation'].join(' ')}
-                                style={{ alignItems: 'flex-start' }}
-                              >
-                                {assesmentResult.assessmentScore.assessmentScoreMaximum}
-                              </div>
-                              <div className={['unitFlex', 'reports-center'].join(' ')}>
-                                maximum
-                              </div>
-                            </div>
-                            <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                              <div
-                                className={['unitFlex', 'midPaneInformation'].join(' ')}
-                                style={{ alignItems: 'flex-start' }}
-                              >
-                                {assesmentResult.assessmentScore.assessmentScoreMinimum}
-                              </div>
-                              <div className={['unitFlex', 'reports-center'].join(' ')}>
-                                minimum
-                              </div>
-                            </div>
-                            <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                              <div
-                                className={['unitFlex', 'midPaneInformation'].join(' ')}
-                                style={{ alignItems: 'flex-start' }}
-                              ></div>
-                              <div className={['unitFlex', 'reports-center'].join(' ')}></div>
-                            </div>
+                                  <div style={{ display: 'flex' }}>
+                                    <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+                                      <div
+                                        className={['unitFlex', 'midPaneInformation'].join(' ')}
+                                        style={{ alignItems: 'flex-start' }}
+                                      >
+                                        {assesmentResult.assessmentScore.assessmentScoreMaximum}
+                                      </div>
+                                      <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                        maximum
+                                      </div>
+                                    </div>
+                                    <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+                                      <div
+                                        className={['unitFlex', 'midPaneInformation'].join(' ')}
+                                        style={{ alignItems: 'flex-start' }}
+                                      >
+                                        {assesmentResult.assessmentScore.assessmentScoreMinimum}
+                                      </div>
+                                      <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                        minimum
+                                      </div>
+                                    </div>
+                                    <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+                                      <div
+                                        className={['unitFlex', 'midPaneInformation'].join(' ')}
+                                        style={{ alignItems: 'flex-start' }}
+                                      ></div>
+                                      <div
+                                        className={['unitFlex', 'reports-center'].join(' ')}
+                                      ></div>
+                                    </div>
 
-                            <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                              <div
-                                className={['unitFlex', 'midPaneInformation'].join(' ')}
-                                style={{ alignItems: 'flex-start' }}
-                              >
-                                {assesmentResult.assesseeAssignmentAssessmentPercentage}
+                                    <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+                                      <div
+                                        className={['unitFlex', 'midPaneInformation'].join(' ')}
+                                        style={{ alignItems: 'flex-start' }}
+                                      >
+                                        {assesmentResult.assesseeAssignmentAssessmentPercentage}
+                                      </div>
+                                      <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                        percentage
+                                      </div>
+                                    </div>
+                                    <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+                                      <div
+                                        className={['unitFlex', 'midPaneInformation'].join(' ')}
+                                        style={{ alignItems: 'flex-start' }}
+                                      >
+                                        {assesmentResult.assesseeAssignmentPercentile}
+                                      </div>
+                                      <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                        percentile
+                                      </div>
+                                    </div>
+                                    <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
+                                      <div
+                                        className={['unitFlex', 'midPaneInformation'].join(' ')}
+                                        style={{ alignItems: 'flex-start' }}
+                                      >
+                                        {assesmentResult.assesseeAssignmentAssessmentScore}
+                                      </div>
+                                      <div className={['unitFlex', 'reports-center'].join(' ')}>
+                                        tally
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                              <div className={['unitFlex', 'reports-center'].join(' ')}>
-                                percentage
-                              </div>
-                            </div>
-                            <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                              <div
-                                className={['unitFlex', 'midPaneInformation'].join(' ')}
-                                style={{ alignItems: 'flex-start' }}
-                              >
-                                {assesmentResult.assesseeAssignmentPercentile}
-                              </div>
-                              <div className={['unitFlex', 'reports-center'].join(' ')}>
-                                percentile
-                              </div>
-                            </div>
-                            <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
-                              <div
-                                className={['unitFlex', 'midPaneInformation'].join(' ')}
-                                style={{ alignItems: 'flex-start' }}
-                              >
-                                {assesmentResult.assesseeAssignmentAssessmentScore}
-                              </div>
-                              <div className={['unitFlex', 'reports-center'].join(' ')}>tally</div>
-                            </div>
-                          </div>
-                        </div>
-                              </div>
-                            ))
-                            :
-                            <div>
-                            </div>
-                        }
+                            )
+                          )
+                        ) : (
+                          <div></div>
+                        )}
                       </div>
                     )}
                   </div>
                 </div>
               </div>
             </div>
-            {/* {allocationList.map((ob) => {
-              return (
-                <div key={ob.id}>
-                  {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      //   onClickRevise={reviseAllocation}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  ) : (
-                    // <DisplayPanelAccordianInformation
-                    //   //   onClickRevise={reviseAllocation}
-                    //   accordianObject={ob}
-                    //   mode={reviewMode}
-                    // />
-                    
-                  )}
-                </div>
-              );
-            })} */}
           </Paper>
         </div>
       </>
