@@ -58,15 +58,21 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     informationAllocation,
     informationAlliance
   } = responseObject;
-  const country = associateCountryName.filter(
-    (x) => x.id === setUpAssociateModule?.associateCountry?.associateCountryTag
-  )[0].name;
-  const language = associateLanguages.filter(
-    (x) => x.id === setUpAssociateModule?.associateLanguage?.associateLanguageTag
-  )[0].name;
-  const currency = associateCurrencyMaster.filter(
-    (x) => x.id === setUpAssociateModule?.associateCurrency?.associateCurrencyTag
-  )[0].name;
+  const country =
+    setUpAssociateModule?.associateCountry?.associateCountryTag &&
+    associateCountryName.filter(
+      (x) => x.id === setUpAssociateModule?.associateCountry?.associateCountryTag
+    )[0].name;
+  const language =
+    setUpAssociateModule?.associateLanguage?.associateLanguageTag &&
+    associateLanguages.filter(
+      (x) => x.id === setUpAssociateModule?.associateLanguage?.associateLanguageTag
+    )[0].name;
+  const currency =
+    setUpAssociateModule?.associateCurrency?.associateCurrencyTag &&
+    associateCurrencyMaster.filter(
+      (x) => x.id === setUpAssociateModule?.associateCurrency?.associateCurrencyTag
+    )[0].name;
 
   //console.log(setUpAssociateModule);
 

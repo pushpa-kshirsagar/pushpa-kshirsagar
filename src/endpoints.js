@@ -269,8 +269,9 @@ export const ASSOCIATE_TYPE_UNSHARE_URL =
 // export const ASSESSEE_TYPE_SHARE_URL = ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/share';
 export const ASSESSEE_TYPE_SHARE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee/share/type';
 // export const ASSESSEE_TYPE_UNSHARE_URL =
-  // ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/unshare';
-export const ASSESSEE_TYPE_UNSHARE_URL = ASSESSEES_URL + '/dev/insight-guru/api/assessee/unshare/type';
+// ASSOCIATES_URL + '/dev/insight-guru/api/assessee-type/unshare';
+export const ASSESSEE_TYPE_UNSHARE_URL =
+  ASSESSEES_URL + '/dev/insight-guru/api/assessee/unshare/type';
 export const ITEM_ALLOCATE = ITEMS + '/dev/insight-guru/api/item-distinct/allocate';
 export const ITEM_ALLOCATE_ASSESSMENT = ITEMS + '/dev/insight-guru/api/item/allocate/assessment';
 export const ASSESSEE_ALLOCATE = ASSESSEES_URL + '/dev/insight-guru/api/assessee-distinct/allocate';
@@ -293,13 +294,13 @@ export const ITEM_TYPE_SHARE_URL =
 export const ITEM_TYPE_UNSHARE_URL =
   ASSOCIATES_URL + '/dev/insight-guru/api/assessment-item-types/unshare';
 export const ASSESSMENT_TYPE_SHARE_URL =
-  ASSOCIATES_URL + '/dev/insight-guru/api/assessment-type/share';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/share';
 export const ASSESSMENT_TYPE_UNSHARE_URL =
-  ASSOCIATES_URL + '/dev/insight-guru/api/assessment-type/unshare';
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type/unshare';
 export const ASSIGNMENT_TYPE_SHARE_URL =
-  ASSOCIATES_URL + '/dev/insight-guru/api/assignment-type/share';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/share';
 export const ASSIGNMENT_TYPE_UNSHARE_URL =
-  ASSOCIATES_URL + '/dev/insight-guru/api/assignment-type/unshare';
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-type/unshare';
 export const ITEM_TYPE_GROUP_URL = ITEMS + '/dev/insight-guru/api/item-type-group/review-list';
 export const ASSESSMENT_TYPE_GROUP_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-type-group/review-list';
