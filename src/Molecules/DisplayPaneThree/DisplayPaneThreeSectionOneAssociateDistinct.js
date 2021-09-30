@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import DisplayPanelAccordianReviewListOne from "../Accordian/DisplayPanelAccordianReviewListOne";
 import DisplayPanelAccordianInformation from "../Accordian/DisplayPanelAccordianInformation";
 import { Paper } from "@material-ui/core";
-import Fingerprint from "@material-ui/icons/Fingerprint";
-import SyncIcon from "@material-ui/icons/Sync";
+import FlipCameraAndroidIcon from "@material-ui/icons/FlipCameraAndroid";
+import BlurOnIcon from '@material-ui/icons/BlurOn';
 import {
   ASSOCIATE_SIGN_ON,
   SET_DISPLAY_TWO_SINGLE_STATE,
@@ -692,7 +692,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true,
-      IconOne: SyncIcon,
+      //IconOne: SyncIcon,
+      isResetIcon:true,
+      IconReset: FlipCameraAndroidIcon,
     },
     {
       id: "a-112",
@@ -898,7 +900,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true,
-      IconOne: SyncIcon,
+      //IconOne: SyncIcon,
+      isResetIcon:true,
+      IconReset: FlipCameraAndroidIcon,
     },
     {
       id: "assignment-232",
@@ -1099,7 +1103,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true,
-      IconOne: SyncIcon,
+      //IconOne: SyncIcon,
+      isResetIcon:true,
+      IconReset: FlipCameraAndroidIcon,
     },
     {
       id: "associate-213",
@@ -1496,45 +1502,16 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               ],
             },
             {
-              labelTextTwoBadge: "country",
-              // innerLabelBadgeList: [
-              //   // {
-              //   //   labelTextTwoBadge: 'flag',
-              //   //   innerLabelBadgeList:
-              //   //     setUpAssociateModule?.associateCountry?.associateCountryFlag || 'No'
-              //   // },
-              //   // {
-              //   //   labelTextTwoBadge: 'name',
-              //   //   innerLabelBadgeList:
-              //   //     setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
-              //   // },
-              //   // {
-              //   //   labelTextTwoBadge: 'tag',
-              //   //   innerLabelBadgeList:
-              //   //     setUpAssociateModule?.associateCountry?.associateCountryTag || 'No'
-              //   // }
-              // ]
+              labelTextTwoBadge: "country",              
               innerLabelBadgeList: country || "No",
+              //innerLabelreset: "country",
+              IconOne: BlurOnIcon
               //setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
             },
             {
               labelTextTwoBadge: "currency",
               innerLabelBadgeList: currency || "No",
-              // setUpAssociateModule?.associateCurrencyName || 'No'
-              // innerLabelBadgeList: [
-              //   // {
-              //   //   labelTextTwoBadge: 'name',
-              //   //   innerLabelBadgeList: setUpAssociateModule?.associateCurrencyName || 'No'
-              //   // },
-              //   // {
-              //   //   labelTextTwoBadge: 'symbol',
-              //   //   innerLabelBadgeList: setUpAssociateModule?.associateCurrencySymbol || 'No'
-              //   // },
-              //   // {
-              //   //   labelTextTwoBadge: 'tag',
-              //   //   innerLabelBadgeList: setUpAssociateModule?.associateCurrencyTag || 'No'
-              //   // }
-              // ]
+              IconOne: BlurOnIcon
             },
             {
               labelTextTwoBadge: "date",
@@ -1563,18 +1540,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: "language",
-              innerLabelBadgeList: language || "No",
-              //setUpAssociateModule?.associateLanguage?.associateLanguageName || 'No'
-              // innerLabelBadgeList: [
-              //   {
-              //     labelTextTwoBadge: 'name',
-              //     innerLabelBadgeList: setUpAssociateModule?.associateLanguageName || 'No'
-              //   },
-              //   {
-              //     labelTextTwoBadge: 'tag',
-              //     innerLabelBadgeList: setUpAssociateModule?.associateLanguageTag || 'No'
-              //   }
-              // ]
+              innerLabelBadgeList: language || "No",              
             },
             {
               labelTextTwoBadge: "service",
@@ -1626,7 +1592,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true,
-      IconOne: SyncIcon,
+      isResetIcon:true,
+      IconReset: FlipCameraAndroidIcon,
     },
     {
       id: "iguru-11",
@@ -1828,7 +1795,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true,
-      IconOne: SyncIcon,
+      //IconOne: SyncIcon,
+      isResetIcon:true,
+      IconReset: FlipCameraAndroidIcon,
     },
     {
       id: "iguru-market-11",
@@ -1860,7 +1829,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true,
-      IconOne: SyncIcon,
+      //IconOne: SyncIcon,
+      isResetIcon:true,
+      IconReset: FlipCameraAndroidIcon,
     },
     {
       id: "iguru-mine-11",
@@ -1887,7 +1858,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true,
-      IconOne: SyncIcon,
+      //IconOne: SyncIcon,
+      isResetIcon:true,
+      IconReset: FlipCameraAndroidIcon,
     },
     {
       id: "iguru-item-11",
@@ -2088,7 +2061,9 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       isListCard: false,
       isReviewLink: false,
       isMultiInfoCard: true,
-      IconOne: SyncIcon,
+      //IconOne: SyncIcon,
+      isResetIcon:true,
+      IconReset: FlipCameraAndroidIcon
     },
   ];
   const allianceListKey = [
@@ -5163,7 +5138,1321 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             popupMode: "ASSOCIATE_CREATE",
           },
         });
-      }     
+      }
+      if (badgeName === "associates" && selectedBadgeName === "country") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_COUNTRY_PICTURE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }    
+    }
+  };
+
+  const reviewSetup = (labelName, selectedBadgeName) => {
+    debugger;
+    console.log('=====>', labelName);
+    if(labelName==='assessees'){
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: "ASSESSEERESETPOPUP",
+          popupMode: "ASSOCIATE_CREATE",
+        },
+      });
+    }
+    if(labelName==='assessments'){      
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: "ASSESSMENTRESETPOPUP",
+          popupMode: "ASSOCIATE_CREATE",
+        },
+      });
+    }
+    if(labelName==='assignments'){      
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: "ASSIGNMENTRESETPOPUP",
+          popupMode: "ASSOCIATE_CREATE",
+        },
+      });
+    }
+    if (labelName === 'associates') {
+      if(labelName==='associates' && selectedBadgeName===''){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATERESETPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if(labelName==='associates' && selectedBadgeName==='country'){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_COUNTRY_PICTURE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });  
+      }
+      if(labelName==='associates' && selectedBadgeName==='currency'){
+        // dispatch({
+        //   type: ASSOCIATE_SIGN_ON,
+        //   payload: {
+        //     isPopUpValue: "ASSOCIATE_COUNTRY_PICTURE_POPUP",
+        //     popupMode: "ASSOCIATE_CREATE",
+        //   },
+        // });  
+      }           
+    }
+    
+    if (labelName === 'items') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: "ITEMRESETPOPUP",
+          popupMode: "ASSOCIATE_CREATE",
+        },
+      });
+    }
+    if (labelName === 'iGuru analytics') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: "IGURUANALYTICSRESETPOPUP",
+          popupMode: "ASSOCIATE_CREATE",
+        },
+      });
+    }
+    if (labelName === 'iGuru marketplace') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: "IGURUMARKETPLACERESETPOPUP",
+          popupMode: "ASSOCIATE_CREATE",
+        },
+      });
+    }
+    if (labelName === 'iGuru mine') {
+      dispatch({
+        type: ASSOCIATE_SIGN_ON,
+        payload: {
+          isPopUpValue: "IGURUMINERESETPOPUP",
+          popupMode: "ASSOCIATE_CREATE",
+        },
+      });
+    }
+   
+  };
+  const reviseSetupPlus = (e, selectedBadgeArray) => {
+    debugger;
+    const labelName = e.currentTarget.getAttribute("data-value");
+    const selectedBadgeName = e.currentTarget.getAttribute("data-key");
+    console.log("labelName", labelName);
+    console.log("selectedBadgeName", selectedBadgeName);
+    // console.log(labelName, '+labelName+', selectedBadgeArray, '=Array=', selectedBadgeName);
+    let badgeName = "";
+    if (selectedBadgeArray.length > 0) {
+      selectedBadgeArray.forEach((element) => {
+        badgeName = badgeName + element.labelTextTwoBadge;
+      });
+    }
+    console.log("badgeName", badgeName);
+    if (labelName === "assessees") {
+      if (!associateInfo?.informationSetup.assessee) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+          payload: assesseeSetUpModule,
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEECREATEAPPROVALPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEECREATEFEEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctcreate" &&
+        selectedBadgeName === "permission"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctinformation" &&
+        selectedBadgeName === "basic"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEEINFODISTINCTBASICPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctinformation" && selectedBadgeName === "name") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "PEOPLEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinct" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEE_DIST_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctsign-on" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEE_SIGNON_APPROVAL_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctsign-on" &&
+        selectedBadgeName === "permission"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEE_SIGNON_PERMISSION_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "group" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEE_GROUP_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "type" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEE_TYPE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "role" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEE_ROLE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEEGROUPCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEEBASICINFOGROUPPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "rolecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEEROLECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "roleinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEEBASICINFOROLEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEETYPECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEEBASICINFOTYPEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (labelName === "assessees" && selectedBadgeName === "reset") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSEERESETPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+    }
+    if (labelName === "assessments") {
+      if (!associateInfo?.informationSetup.assessment) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+          payload: assessmentSetUpModule,
+        });
+      }
+
+      if (labelName === "assessments" && selectedBadgeName === "reset") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTRESETPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTCREATEAPPROVALPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTCREATEFEEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctcreate" &&
+        selectedBadgeName === "permission"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctinformation" &&
+        selectedBadgeName === "basic"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTINFODISTINCTBASICPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctshare" && selectedBadgeName === "node") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENT_NODE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctshare" && selectedBadgeName === "associate") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENT_ASSOCIATE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "group" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENT_GROUP_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "type" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENT_TYPE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTGROUPCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTBASICINFOGROUPPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTTYPECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSESSMENTBASICINFOTYPEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+    }
+    if (labelName === "assignments") {
+      if (!associateInfo?.informationSetup.assignment) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+          payload: assignmentSetUpModule,
+        });
+      }
+      if (labelName === "assignments" && selectedBadgeName === "reset") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTRESETPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTCREATEAPPROVALPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTCREATEFEEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctcreate" &&
+        selectedBadgeName === "permission"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctinformation" &&
+        selectedBadgeName === "basic"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTINFODISTINCTBASICPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTGROUPCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTBASICINFOGROUPPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTTYPECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENTBASICINFOTYPEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinct" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENT_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "group" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENT_GROUP_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "type" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSIGNMENT_TYPE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+    }
+    if (labelName === "items") {
+      if (!associateInfo?.informationSetup.item) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+          payload: itemSetUpModule,
+        });
+      }
+      if (labelName === "items" && selectedBadgeName === "reset") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMRESETPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMCREATEAPPROVALPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMCREATEFEEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctcreate" &&
+        selectedBadgeName === "permission"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctinformation" &&
+        selectedBadgeName === "basic"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMINFODISTINCTBASICPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMGROUPCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMBASICINFOGROUPPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMTYPECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEMBASICINFOTYPEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+
+      if (badgeName === "distinct" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEM_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "group" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEM_GROUP_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "type" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ITEM_TYPE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+    }
+    if (labelName === "iGuru analytics") {
+      if (!associateInfo?.informationSetup.analytic) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
+          payload: analyticSetUpModule,
+        });
+      }
+      if (labelName === "iGuru analytics" && selectedBadgeName === "reset") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSRESETPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSCREATEAPPROVALPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSCREATEFEEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctcreate" &&
+        selectedBadgeName === "permission"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctinformation" &&
+        selectedBadgeName === "basic"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSINFODISTINCTBASICPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSBASICINFOGROUPPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSTYPECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "IGURUANALYTICSBASICINFOTYPEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinct" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ANALYTIC_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "group" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ANALYTIC_GROUP_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "type" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ANALYTIC_TYPE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+    }
+    if (labelName === "associates") {
+      if (!associateInfo?.informationSetup.associate) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_INFO,
+          payload: setUpAssociateModuleGeneric,
+        });
+      }
+      if (
+        badgeName === "nodepermissiondescendant" ||
+        badgeName === "nodepermissionascendant" ||
+        badgeName === "nodepermissionpeer" ||
+        badgeName === "nodepermission"
+      ) {
+        if (!associateInfo?.informationSetup.associateNode) {
+          dispatch({
+            type: UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
+            payload: associateNodeSetUpModule,
+          });
+        }
+      }
+
+      if (labelName === "associates" && selectedBadgeName === "reset") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATERESETPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATECREATEAPPROVALPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATECREATEFEEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctcreate" &&
+        selectedBadgeName === "permission"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctinformation" &&
+        selectedBadgeName === "basic"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATEINFODISTINCTBASICPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctinformation" && selectedBadgeName === "name") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATEPEOPLEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATEGROUPCREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATEBASICINFOGROUPPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "rolecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATEROLECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "roleinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATEBASICINFOROLEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATETYPECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATEBASICINFOTYPEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "nodecreate" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATENODECREATEPERMISSIONPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "nodeinformation" && selectedBadgeName === "basic") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATEBASICINFONODEPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+" && selectedBadgeName === "date") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "DATEFORMATPOPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+" && selectedBadgeName === "language") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "LANGUAGE_SETUP_PLUS_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+" && selectedBadgeName === "country") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_SETUPPLUS_COUNTRY_NAME_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+" && selectedBadgeName === "currency") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_SETUPPLUS_CURRENCY_NAME_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+" && selectedBadgeName === "time") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: { isPopUpValue: "TIMEPOPUP", popupMode: "ASSOCIATE_CREATE" },
+        });
+      }
+      if (badgeName === "distinct" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_DIST_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctsign-on" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_SIGNON_APPROVAL_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "distinctsign-on" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_SIGNON_FEE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (
+        badgeName === "distinctsign-on" &&
+        selectedBadgeName === "permission"
+      ) {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_SIGNON_PERMISSION_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "group" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_GROUP_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "node" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_NODE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "role" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_ROLE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "type" && selectedBadgeName === "share") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_TYPE_SHARE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+brand" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_BRAND_APPROVAL_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+brand" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_BRAND_FEE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+brand" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_BRAND_PERMISSION_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+brand" && selectedBadgeName === "choice") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_BRAND_CHOICE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+brand" && selectedBadgeName === "picture") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_BRAND_PICTURE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      // if (badgeName === '+domain' && selectedBadgeName === 'primary') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_DOMAIN_PRIMARY_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      // if (badgeName === '+domain' && selectedBadgeName === 'secondary') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_DOMAIN_SECONDARY_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
+      if (badgeName === "+theme" && selectedBadgeName === "approval") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_THEME_APPROVAL_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+theme" && selectedBadgeName === "fee") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_THEME_FEE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "+theme" && selectedBadgeName === "permission") {
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_THEME_PERMISSION_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "nodepermissiondescendant") {
+        if (selectedBadgeName === "all") {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: "permissionStateThree",
+              value: "associateNodeDescendantAll",
+            },
+          });
+        }
+        if (selectedBadgeName === "primary") {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: "permissionStateThree",
+              value: "associateNodeDescendantPrimary",
+            },
+          });
+        }
+        if (selectedBadgeName === "secondary") {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: "permissionStateThree",
+              value: "associateNodeDescendantSecondary",
+            },
+          });
+        }
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: "permissionStateOne", value: "descendant" },
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: {
+            stateName: "permissionStateTwo",
+            value: selectedBadgeName,
+          },
+        });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_NODE_PERMISSION_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "nodepermissionascendant") {
+        if (selectedBadgeName === "all") {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: "permissionStateThree",
+              value: "associateNodeAscendantAll",
+            },
+          });
+        }
+        if (selectedBadgeName === "primary") {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: "permissionStateThree",
+              value: "associateNodeAscendantPrimary",
+            },
+          });
+        }
+        if (selectedBadgeName === "secondary") {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: "permissionStateThree",
+              value: "associateNodeAscendantSecondary",
+            },
+          });
+        }
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: "permissionStateOne", value: "ascendant" },
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: {
+            stateName: "permissionStateTwo",
+            value: selectedBadgeName,
+          },
+        });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_NODE_PERMISSION_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "nodepermissionpeer") {
+        if (selectedBadgeName === "all") {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: "permissionStateThree",
+              value: "associateNodePeerAll",
+            },
+          });
+        }
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: "permissionStateOne", value: "peer" },
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: {
+            stateName: "permissionStateTwo",
+            value: selectedBadgeName,
+          },
+        });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_NODE_PERMISSION_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if (badgeName === "nodepermission") {
+        if (selectedBadgeName === "root") {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: {
+              stateName: "permissionStateThree",
+              value: "associateNodeRoot",
+            },
+          });
+        }
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: "permissionStateOne", value: "root" },
+        });
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: {
+            stateName: "permissionStateTwo",
+            value: selectedBadgeName,
+          },
+        });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_NODE_PERMISSION_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
     }
     if (labelName === "iGuru marketplace") {
       if (labelName === "iGuru marketplace" && selectedBadgeName === "reset") {
@@ -5187,1235 +6476,6 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         });
       }
     }
-  };
-
-  const reviseSetupPlus = (e, selectedBadgeArray) => {
-    debugger;
-    const labelName = e.currentTarget.getAttribute("data-value");
-    const selectedBadgeName = e.currentTarget.getAttribute("data-key");
-    console.log("labelName", labelName);
-    console.log("selectedBadgeName", selectedBadgeName);
-    // console.log(labelName, '+labelName+', selectedBadgeArray, '=Array=', selectedBadgeName);
-    let badgeName = "";
-    if (selectedBadgeArray.length > 0) {
-      selectedBadgeArray.forEach((element) => {
-        badgeName = badgeName + element.labelTextTwoBadge;
-      });
-    }
-    console.log("badgeName", badgeName);
-    // if (labelName === "assessees") {
-    //   if (!associateInfo?.informationSetup.assessee) {
-    //     dispatch({
-    //       type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
-    //       payload: assesseeSetUpModule,
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEECREATEAPPROVALPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEECREATEFEEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctcreate" &&
-    //     selectedBadgeName === "permission"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctinformation" &&
-    //     selectedBadgeName === "basic"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEEINFODISTINCTBASICPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctinformation" && selectedBadgeName === "name") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "PEOPLEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinct" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEE_DIST_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctsign-on" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEE_SIGNON_APPROVAL_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctsign-on" &&
-    //     selectedBadgeName === "permission"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEE_SIGNON_PERMISSION_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "group" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEE_GROUP_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "type" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEE_TYPE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "role" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEE_ROLE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEEGROUPCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEEBASICINFOGROUPPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "rolecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEEROLECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "roleinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEEBASICINFOROLEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEETYPECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEEBASICINFOTYPEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (labelName === "assessees" && selectedBadgeName === "reset") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSEERESETPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    // }
-    // if (labelName === "assessments") {
-    //   if (!associateInfo?.informationSetup.assessment) {
-    //     dispatch({
-    //       type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
-    //       payload: assessmentSetUpModule,
-    //     });
-    //   }
-
-    //   if (labelName === "assessments" && selectedBadgeName === "reset") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTRESETPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTCREATEAPPROVALPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTCREATEFEEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctcreate" &&
-    //     selectedBadgeName === "permission"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctinformation" &&
-    //     selectedBadgeName === "basic"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTINFODISTINCTBASICPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctshare" && selectedBadgeName === "node") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENT_NODE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctshare" && selectedBadgeName === "associate") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENT_ASSOCIATE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "group" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENT_GROUP_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "type" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENT_TYPE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTGROUPCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTBASICINFOGROUPPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTTYPECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSESSMENTBASICINFOTYPEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    // }
-    // if (labelName === "assignments") {
-    //   if (!associateInfo?.informationSetup.assignment) {
-    //     dispatch({
-    //       type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
-    //       payload: assignmentSetUpModule,
-    //     });
-    //   }
-    //   if (labelName === "assignments" && selectedBadgeName === "reset") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTRESETPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTCREATEAPPROVALPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTCREATEFEEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctcreate" &&
-    //     selectedBadgeName === "permission"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctinformation" &&
-    //     selectedBadgeName === "basic"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTINFODISTINCTBASICPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTGROUPCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTBASICINFOGROUPPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTTYPECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENTBASICINFOTYPEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinct" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENT_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "group" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENT_GROUP_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "type" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSIGNMENT_TYPE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    // }
-    // if (labelName === "items") {
-    //   if (!associateInfo?.informationSetup.item) {
-    //     dispatch({
-    //       type: UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
-    //       payload: itemSetUpModule,
-    //     });
-    //   }
-    //   if (labelName === "items" && selectedBadgeName === "reset") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMRESETPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMCREATEAPPROVALPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMCREATEFEEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctcreate" &&
-    //     selectedBadgeName === "permission"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctinformation" &&
-    //     selectedBadgeName === "basic"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMINFODISTINCTBASICPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMGROUPCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMBASICINFOGROUPPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMTYPECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEMBASICINFOTYPEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-
-    //   if (badgeName === "distinct" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEM_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "group" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEM_GROUP_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "type" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ITEM_TYPE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    // }
-    // if (labelName === "iGuru analytics") {
-    //   if (!associateInfo?.informationSetup.analytic) {
-    //     dispatch({
-    //       type: UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
-    //       payload: analyticSetUpModule,
-    //     });
-    //   }
-    //   if (labelName === "iGuru analytics" && selectedBadgeName === "reset") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSRESETPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSCREATEAPPROVALPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSCREATEFEEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctcreate" &&
-    //     selectedBadgeName === "permission"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctinformation" &&
-    //     selectedBadgeName === "basic"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSINFODISTINCTBASICPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSGROUPCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSBASICINFOGROUPPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSTYPECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUANALYTICSBASICINFOTYPEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinct" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ANALYTIC_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "group" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ANALYTIC_GROUP_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "type" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ANALYTIC_TYPE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    // }
-    // if (labelName === "associates") {
-    //   if (!associateInfo?.informationSetup.associate) {
-    //     dispatch({
-    //       type: UPDATE_ASSOCIATE_SETUP_INFO,
-    //       payload: setUpAssociateModule,
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "nodepermissiondescendant" ||
-    //     badgeName === "nodepermissionascendant" ||
-    //     badgeName === "nodepermissionpeer" ||
-    //     badgeName === "nodepermission"
-    //   ) {
-    //     if (!associateInfo?.informationSetup.associateNode) {
-    //       dispatch({
-    //         type: UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
-    //         payload: associateNodeSetUpModule,
-    //       });
-    //     }
-    //   }
-
-    //   if (labelName === "associates" && selectedBadgeName === "reset") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATERESETPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATECREATEAPPROVALPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctcreate" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATECREATEFEEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctcreate" &&
-    //     selectedBadgeName === "permission"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctinformation" &&
-    //     selectedBadgeName === "basic"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATEINFODISTINCTBASICPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctinformation" && selectedBadgeName === "name") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATEPEOPLEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupcreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATEGROUPCREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "groupinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATEBASICINFOGROUPPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "rolecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATEROLECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "roleinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATEBASICINFOROLEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATETYPECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "typeinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATEBASICINFOTYPEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "nodecreate" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATENODECREATEPERMISSIONPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "nodeinformation" && selectedBadgeName === "basic") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATEBASICINFONODEPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+" && selectedBadgeName === "date") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "DATEFORMATPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+" && selectedBadgeName === "language") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "LANGUAGE_SETUP_PLUS_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+" && selectedBadgeName === "country") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_SETUPPLUS_COUNTRY_NAME_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+" && selectedBadgeName === "currency") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_SETUPPLUS_CURRENCY_NAME_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+" && selectedBadgeName === "time") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: { isPopUpValue: "TIMEPOPUP", popupMode: "ASSOCIATE_CREATE" },
-    //     });
-    //   }
-    //   if (badgeName === "distinct" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_DIST_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctsign-on" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_SIGNON_APPROVAL_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "distinctsign-on" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_SIGNON_FEE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (
-    //     badgeName === "distinctsign-on" &&
-    //     selectedBadgeName === "permission"
-    //   ) {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_SIGNON_PERMISSION_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "group" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_GROUP_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "node" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_NODE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "role" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_ROLE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "type" && selectedBadgeName === "share") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_TYPE_SHARE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+brand" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_BRAND_APPROVAL_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+brand" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_BRAND_FEE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+brand" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_BRAND_PERMISSION_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+brand" && selectedBadgeName === "choice") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_BRAND_CHOICE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+brand" && selectedBadgeName === "picture") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_BRAND_PICTURE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   // if (badgeName === '+domain' && selectedBadgeName === 'primary') {
-    //   //   dispatch({
-    //   //     type: ASSOCIATE_SIGN_ON,
-    //   //     payload: {
-    //   //       isPopUpValue: 'ASSOCIATE_DOMAIN_PRIMARY_POPUP',
-    //   //       popupMode: 'ASSOCIATE_CREATE'
-    //   //     }
-    //   //   });
-    //   // }
-    //   // if (badgeName === '+domain' && selectedBadgeName === 'secondary') {
-    //   //   dispatch({
-    //   //     type: ASSOCIATE_SIGN_ON,
-    //   //     payload: {
-    //   //       isPopUpValue: 'ASSOCIATE_DOMAIN_SECONDARY_POPUP',
-    //   //       popupMode: 'ASSOCIATE_CREATE'
-    //   //     }
-    //   //   });
-    //   // }
-    //   if (badgeName === "+theme" && selectedBadgeName === "approval") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_THEME_APPROVAL_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+theme" && selectedBadgeName === "fee") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_THEME_FEE_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "+theme" && selectedBadgeName === "permission") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_THEME_PERMISSION_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "nodepermissiondescendant") {
-    //     if (selectedBadgeName === "all") {
-    //       dispatch({
-    //         type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //         payload: {
-    //           stateName: "permissionStateThree",
-    //           value: "associateNodeDescendantAll",
-    //         },
-    //       });
-    //     }
-    //     if (selectedBadgeName === "primary") {
-    //       dispatch({
-    //         type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //         payload: {
-    //           stateName: "permissionStateThree",
-    //           value: "associateNodeDescendantPrimary",
-    //         },
-    //       });
-    //     }
-    //     if (selectedBadgeName === "secondary") {
-    //       dispatch({
-    //         type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //         payload: {
-    //           stateName: "permissionStateThree",
-    //           value: "associateNodeDescendantSecondary",
-    //         },
-    //       });
-    //     }
-    //     dispatch({
-    //       type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //       payload: { stateName: "permissionStateOne", value: "descendant" },
-    //     });
-    //     dispatch({
-    //       type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //       payload: {
-    //         stateName: "permissionStateTwo",
-    //         value: selectedBadgeName,
-    //       },
-    //     });
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_NODE_PERMISSION_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "nodepermissionascendant") {
-    //     if (selectedBadgeName === "all") {
-    //       dispatch({
-    //         type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //         payload: {
-    //           stateName: "permissionStateThree",
-    //           value: "associateNodeAscendantAll",
-    //         },
-    //       });
-    //     }
-    //     if (selectedBadgeName === "primary") {
-    //       dispatch({
-    //         type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //         payload: {
-    //           stateName: "permissionStateThree",
-    //           value: "associateNodeAscendantPrimary",
-    //         },
-    //       });
-    //     }
-    //     if (selectedBadgeName === "secondary") {
-    //       dispatch({
-    //         type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //         payload: {
-    //           stateName: "permissionStateThree",
-    //           value: "associateNodeAscendantSecondary",
-    //         },
-    //       });
-    //     }
-    //     dispatch({
-    //       type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //       payload: { stateName: "permissionStateOne", value: "ascendant" },
-    //     });
-    //     dispatch({
-    //       type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //       payload: {
-    //         stateName: "permissionStateTwo",
-    //         value: selectedBadgeName,
-    //       },
-    //     });
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_NODE_PERMISSION_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "nodepermissionpeer") {
-    //     if (selectedBadgeName === "all") {
-    //       dispatch({
-    //         type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //         payload: {
-    //           stateName: "permissionStateThree",
-    //           value: "associateNodePeerAll",
-    //         },
-    //       });
-    //     }
-    //     dispatch({
-    //       type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //       payload: { stateName: "permissionStateOne", value: "peer" },
-    //     });
-    //     dispatch({
-    //       type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //       payload: {
-    //         stateName: "permissionStateTwo",
-    //         value: selectedBadgeName,
-    //       },
-    //     });
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_NODE_PERMISSION_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    //   if (badgeName === "nodepermission") {
-    //     if (selectedBadgeName === "root") {
-    //       dispatch({
-    //         type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //         payload: {
-    //           stateName: "permissionStateThree",
-    //           value: "associateNodeRoot",
-    //         },
-    //       });
-    //     }
-    //     dispatch({
-    //       type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //       payload: { stateName: "permissionStateOne", value: "root" },
-    //     });
-    //     dispatch({
-    //       type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //       payload: {
-    //         stateName: "permissionStateTwo",
-    //         value: selectedBadgeName,
-    //       },
-    //     });
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "ASSOCIATE_NODE_PERMISSION_POPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    // }
-    // if (labelName === "iGuru marketplace") {
-    //   if (labelName === "iGuru marketplace" && selectedBadgeName === "reset") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUMARKETPLACERESETPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    // }
-    // if (labelName === "iGuru mine") {
-    //   if (labelName === "iGuru mine" && selectedBadgeName === "reset") {
-    //     dispatch({
-    //       type: ASSOCIATE_SIGN_ON,
-    //       payload: {
-    //         isPopUpValue: "IGURUMINERESETPOPUP",
-    //         popupMode: "ASSOCIATE_CREATE",
-    //       },
-    //     });
-    //   }
-    // }
   };
   console.log(associateNodeSetUpModule);
   return (
@@ -6465,6 +6525,7 @@ const DisplayPaneThreeSectionOneAssociate = () => {
               list={setUpListAll}
               mode={reviewMode}
               onClickRevise={reviseSetup}
+              onClickReview={reviewSetup}
             />
           </div>
           <div className="containerPadding">

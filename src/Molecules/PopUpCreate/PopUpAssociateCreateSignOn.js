@@ -3070,8 +3070,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         inputHeader={'associates'}
         inputHeaderBadgeOne={'country'}
-        basicInfo={associateInfo.informationBasic}
-        actualLableValue={'associateCountryFlagPicture'}
+        basicInfo={associateInfo?.informationBasic}
+        actualLableValue={'associateCountryFlag'}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
