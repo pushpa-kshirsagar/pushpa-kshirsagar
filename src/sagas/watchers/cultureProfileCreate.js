@@ -61,6 +61,5 @@ function* workerCreateCultureProfileSaga(data) {
 }
 
 export default function* watchcreateCultureProfileSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_CULTURE_SAGA, workerCreateCultureProfileSaga);
 }

@@ -109,6 +109,7 @@ const PopUpAddress = (props) => {
       }
     }
   };
+  console.log('props',props);
   return (
     <div>
       <Popup isActive={isActive}>

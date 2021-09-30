@@ -90,7 +90,7 @@ const DisplayPanelAccordianInformation = (props) => {
                         </sup>
                       )}
                       {selectedBadgeArray.length > 0 &&
-                        selectedBadgeArray.map((val,i) => {
+                        selectedBadgeArray.map((val, i) => {
                           return (
                             <sup
                               key={`badge-sign-in${i}`}
@@ -310,7 +310,9 @@ const DisplayPanelAccordianInformation = (props) => {
                                   }
                             }
                           >
-                            <IconOne className={mode === 'revise' ? 'linkText' : reviewLabelClass} />
+                            <IconOne
+                              className={mode === 'revise' ? 'linkText' : reviewLabelClass}
+                            />
                           </IconButton>
                         </div>
                       )}

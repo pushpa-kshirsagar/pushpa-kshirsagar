@@ -131,6 +131,5 @@ function* workerCreateTypeSaga(data) {
 }
 
 export default function* watchcreateTypeSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_TYPE_SAGA, workerCreateTypeSaga);
 }

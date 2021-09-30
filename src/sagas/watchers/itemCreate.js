@@ -60,6 +60,5 @@ function* workerCreateItemSaga(data) {
 }
 
 export default function* watchcreateItemSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_ITEM_SAGA, workerCreateItemSaga);
 }

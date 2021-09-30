@@ -74,6 +74,5 @@ function* workerCreateAssociateRoleSaga(data) {
 }
 
 export default function* watchcreateAssociateRoleSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_ASSOCIATE_ROLE_SAGA, workerCreateAssociateRoleSaga);
 }

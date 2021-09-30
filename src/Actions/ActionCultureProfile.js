@@ -27,7 +27,6 @@ import {
   SET_POPUP_SINGLE_STATE,
   GET_CULTURE_DIAMENTION_SAGA
 } from '../actionType';
-import { CULTURE_PROFILE_REVISE_INFO_URL } from '../endpoints';
 import {
   getCultureGroupCultureReqObj,
   getCultureGroupCultureScanReqObj,

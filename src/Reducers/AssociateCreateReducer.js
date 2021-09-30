@@ -52,6 +52,8 @@ const initialState = {
   associatesHeaderOneBadgeOne: '',
   primaryPopUpOptions: MODULE_POPUP_OPTION,
   associateInfomationData: '',
+  tempAssociateCommunication: '',
+  tempAssociateTeleCommunication: '',
   currentPopUpOption: [],
   secondaryPopUpOptions: {
     create: REVIEW_REVISE_POPUP,
@@ -83,6 +85,10 @@ const initialState = {
     associateRole: {
       associateRolePrimary: [],
       associateRoleSecondary: []
+    },
+    associateType: {
+      associateTypePrimary: [],
+      associateTypeSecondary: []
     }
   },
   informationContact: {

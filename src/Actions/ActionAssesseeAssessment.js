@@ -55,7 +55,6 @@ export const setAssesseeAssessmentItemSaveResCall = (
     localStorage.setItem('assessmentItem', JSON.stringify(ans));
   }
   let responseSetInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
-  let isItemPresent = false;
   console.log(responseSetInLocal);
   if (responseSetInLocal.length > 0) {
     let find = responseSetInLocal.find((v) => v.assesseeAssignmentAssessmentItemId === itemId);

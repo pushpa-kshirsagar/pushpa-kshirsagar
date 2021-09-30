@@ -107,6 +107,5 @@ function* workerCreateGroupSaga(data) {
 }
 
 export default function* watchcreateGroupSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(CREATE_GROUP_SAGA, workerCreateGroupSaga);
 }

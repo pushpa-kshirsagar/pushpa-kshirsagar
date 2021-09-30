@@ -506,7 +506,6 @@ function* workerAssignmentAdministerSaga(data) {
 }
 
 export default function* watchReviewInfoAssignmentSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(GET_ASSIGNMENT_INFO_SAGA, workerReviewInfoAssignmentSaga);
   yield takeLatest(ASSIGNMENT_INFO_REVISE_SAGA, workerReviseInfoAssignmentSaga);
   yield takeLatest(ASSIGNMENT_PUBLISH_SAGA, workerAssignmentPublishSaga);

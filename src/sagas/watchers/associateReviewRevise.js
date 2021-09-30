@@ -567,7 +567,6 @@ function* workerAssociateAssesseeSetUpReviseSaga(data) {
   }
 }
 export default function* watchReviewInfoAssociateSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(GET_ASSOCIATE_INFO_SAGA, workerReviewInfoAssociateSaga);
   yield takeLatest(ASSOCIATE_INFO_REVISE_SAGA, workerReviseInfoAssociateSaga);
   yield takeLatest(ASSOCIATE_ASSESSESS_SETUP_SAGA, workerAssociateAssesseeSetUpSaga);

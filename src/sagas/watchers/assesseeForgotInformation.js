@@ -84,7 +84,6 @@ function* workerFotgotCredentialSaga(data) {
 }
 
 export default function* watchForgotCredentialSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(SEND_AUTH_CODE_FORGOT_PASS, workerSendAuthCodeSaga);
   yield takeLatest(FORGOT_PASSWORD_SAGA, workerFotgotPasswordSaga);
   yield takeLatest(SEND_FORGOT_CREDENTIAL_SAGA, workerFotgotCredentialSaga);

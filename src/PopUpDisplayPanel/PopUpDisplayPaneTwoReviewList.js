@@ -2063,7 +2063,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           assesseeRoleShared: [
             {
               assesseeRoleId: selectedTagValue,
-              assesseeRoleGroupId: selectedTagGroupId
+              // assesseeRoleGroupId: selectedTagGroupId
             }
           ]
         };
@@ -2080,7 +2080,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateRoleShared: [
             {
               associateRoleId: selectedTagValue,
-              associateRoleGroupId: selectedTagGroupId
+              // associateRoleGroupId: selectedTagGroupId
             }
           ]
         };
@@ -2097,7 +2097,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateTypeShared: [
             {
               associateTypeId: selectedTagValue,
-              associateTypeGroupId: selectedTagGroupId
+              // associateTypeGroupId: selectedTagGroupId
             }
           ]
         };
@@ -2114,7 +2114,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           assesseeTypeShared: [
             {
               assesseeTypeId: selectedTagValue,
-              assesseeTypeGroupId: selectedTagGroupId
+              // assesseeTypeGroupId: selectedTagGroupId
             }
           ]
         };
@@ -2131,7 +2131,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           assessmentTypeShared: [
             {
               assessmentTypeId: selectedTagValue,
-              assessmentTypeGroupId: selectedTagGroupId
+              // assessmentTypeGroupId: selectedTagGroupId
             }
           ]
         };
@@ -2148,7 +2148,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           itemTypeShared: [
             {
               itemTypeId: selectedTagValue,
-              itemTypeGroupId: selectedTagGroupId
+              // itemTypeGroupId: selectedTagGroupId
             }
           ]
         };
@@ -2165,7 +2165,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           assignmentTypeShared: [
             {
               assignmentTypeId: selectedTagValue,
-              assignmentTypeGroupId: selectedTagGroupId
+              // assignmentTypeGroupId: selectedTagGroupId
             }
           ]
         };
@@ -2182,7 +2182,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           cultureProfileTypeShared: [
             {
               cultureProfileTypeId: selectedTagValue,
-              cultureProfileTypeGroupId: selectedTagGroupId
+              // cultureProfileTypeGroupId: selectedTagGroupId
             }
           ]
         };
@@ -2199,7 +2199,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           jobProfileTypeShared: [
             {
               jobProfileTypeId: selectedTagValue,
-              jobProfileTypeGroupId: selectedTagGroupId
+              // jobProfileTypeGroupId: selectedTagGroupId
             }
           ]
         };

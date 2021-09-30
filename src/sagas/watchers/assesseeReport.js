@@ -1,19 +1,11 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import Store from '../../store';
 import {
-  CREATE_ASSESSEE_SAGA,
   GET_ASSESSEE_REPORT_SAGA,
   LOADER_STOP,
-  SET_ASSESSEE_INFORMATION_DATA,
   SET_DISPLAY_PANE_THREE_STATE,
-  SET_MOBILE_PANE_STATE,
-  SET_POPUP_VALUE,
-  UPDATE_ASSESSEE_BASIC_INFO,
-  UPDATE_ASSESSEE_CONTACT_INFO,
-  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
-  UPDATE_ASSESSEE_PERSONAL_INFO
+  SET_POPUP_VALUE
 } from '../../actionType';
-import { ASSESSEE_CREATE_URL, ASSESSEE_ASSESSMENT_RESULT_URL } from '../../endpoints';
+import { ASSESSEE_ASSESSMENT_RESULT_URL } from '../../endpoints';
 import { EXCEPTION_ERROR_MESSAGE } from '../../errorMessage';
 
 const apiCall = async (requestObj) => {
@@ -25,7 +17,6 @@ const apiCall = async (requestObj) => {
     }),
     body: JSON.stringify(requestObj.data)
   };
-  //const response = await fetch(ASSESSEE_CREATE_URL, requestOptions);
   const response = await fetch(ASSESSEE_ASSESSMENT_RESULT_URL, requestOptions);
   const json = await response.json();
   return json;
@@ -66,6 +57,5 @@ function* workerGetAssesseeReportSaga(data) {
 }
 
 export default function* watchAssesseReporteSaga() {
-  console.log('IN WATCH ====>');
   yield takeLatest(GET_ASSESSEE_REPORT_SAGA, workerGetAssesseeReportSaga);
 }
