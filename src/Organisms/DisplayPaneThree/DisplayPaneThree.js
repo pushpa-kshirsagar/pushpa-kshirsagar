@@ -1760,17 +1760,31 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'associate') {
-      const { informationBasic, informationContact, informationSetup,associateCountry,associateCurrency,associateLanguage } = associateInfo;
-      const updatedinformationSetup = {...informationSetup.associate,associateCountry,associateCurrency,associateLanguage}
+      const {
+        informationBasic,
+        informationAllocation,
+        informationContact,
+        informationSetup,
+        associateCountry,
+        associateCurrency,
+        associateLanguage
+      } = associateInfo;
+      const updatedinformationSetup = {
+        ...informationSetup.associate,
+        associateCountry,
+        associateCurrency,
+        associateLanguage
+      };
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId:  selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         associate: {
           id,
           informationBasic,
+          informationAllocation,
           informationContact,
-          // informationSetup,
           informationFramework: {
             associateAscendantPrimary:
               associateInfo.informationFramework.associateAscendant.associateAscendantPrimary[0]
@@ -1822,7 +1836,6 @@ export const DisplayPaneThree = () => {
           associateId: id,
           //associateSetup: informationSetup.associate
           associateSetup: updatedinformationSetup
-          
         };
         dispatch({
           type: ASSOCIATE_ASSOCIATESETUP_REVISE_SAGA,
@@ -3894,14 +3907,14 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
-                  textOneOne={informationBasic.associateName || 'No Information'}
-                  textOneTwo={informationBasic.associateDescription || 'No Information'}
+                  textOneOne={informationBasic?.associateName || 'No Information'}
+                  textOneTwo={informationBasic?.associateDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseAssociateBasicInformation}
-                  isImageActive={informationBasic.associatePicture}
-                  imageOne={informationBasic.associatePicture}
+                  isImageActive={informationBasic?.associatePicture}
+                  imageOne={informationBasic?.associatePicture}
                 />
               </div>
               <Sections

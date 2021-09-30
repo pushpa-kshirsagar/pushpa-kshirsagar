@@ -37,7 +37,8 @@ import {
   ASSOCIATE_ASSESSESS_SETUP_SAGA,
   ASSOCIATE_ASSIGNMENT_SETUP_SAGA,
   ASSOCIATE_NODE_SETUP_SAGA,
-  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT
+  SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT
 } from '../actionType';
 import {
   ANALYTIC_SETUP_URL,
@@ -812,6 +813,19 @@ export const associateCreatePopup = (
       isMiddlePaneList: false
     }
   });
+  let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
+  dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+  dispatch({
+    type: INTERNAL_NODE_LIST_SAGA,
+    payload: {
+      request: nodeRequestObj,
+      BadgeOne: '',
+      BadgeTwo: '',
+      BadgeThree: '',
+      nodeViewState: 'list',
+      isMiddlePaneList: false
+    }
+  });
   dispatch({ type: SET_CORE_TYPE_REVIEW_LIST_REQ_OBJECT, payload: typerequestObj });
   dispatch({ type: SET_CORE_GROUP_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
   let roleRequestObj = makeAssociateRoleObj(selectedAssociateInfo, 'active', 0, -1);
@@ -831,8 +845,8 @@ export const associateCreatePopup = (
     type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
     payload: {
       request: roleRequestObj,
-      BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
+      BadgeOne: '',
+      BadgeTwo: '',
       BadgeThree: '',
       isMiddlePaneList: false
     }

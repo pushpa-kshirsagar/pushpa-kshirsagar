@@ -10,6 +10,9 @@ import FlipCameraAndroidIcon from '@material-ui/icons/FlipCameraAndroid';
 import BlurOnIcon from '@material-ui/icons/BlurOn';
 import {
   ASSOCIATE_SIGN_ON,
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+  LOADER_START,
+  SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_STATUS_POPUP_VALUE,
   UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
@@ -20,7 +23,7 @@ import {
   UPDATE_ASSOCIATE_SETUP_INFO,
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO
 } from '../../actionType';
-import { getPermissionStr } from '../../Actions/GenericActions';
+import { getPermissionStr, makeAssociateRoleObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
@@ -48,14 +51,11 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     middlePaneHeader = '',
     associateCountryName,
     associateLanguages,
-    associateCurrencyMaster
+    associateCurrencyMaster,
+    selectedAssociateInfo
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const associateInfo = useSelector((state) => state.AssociateCreateReducer);
-  const {
-    informationEngagement,
-    informationAllocation,
-    informationAlliance
-  } = responseObject;
+  const { informationEngagement, informationAllocation, informationAlliance } = responseObject;
   const country =
     setUpAssociateModule?.associateCountry?.associateCountryTag &&
     associateCountryName.filter(
@@ -3678,6 +3678,19 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       }
     }
     if (labelName === 'role') {
+      let roleRequestObj = makeAssociateRoleObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT, payload: roleRequestObj });
+      dispatch({
+        type: GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+        payload: {
+          request: roleRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,

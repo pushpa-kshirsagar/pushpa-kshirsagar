@@ -32,7 +32,8 @@ import {
   ASSOCIATE_ANALYTICSETUP_REVISE_SAGA,
   ASSOCIATE_NODE_SETUP_SAGA,
   ASSOCIATE_ASSOCIATENODE_SETUP_REVISE_SAGA,
-  UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO
+  UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
+  SET_ASSOCIATE_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import {
   ASSESSEE_SETUP_REVISE_URL,
@@ -85,11 +86,92 @@ function* workerReviewInfoAssociateSaga(data) {
       const {
         informationBasic,
         informationContact,
+        informationAllocation,
         informationFramework
       } = userResponse.responseObject[0];
       yield put({ type: UPDATE_ASSOCIATE_BASIC_INFO, payload: informationBasic });
       yield put({ type: UPDATE_ASSOCIATE_INFO_CONTACT_INFO, payload: informationContact });
-      // yield put({ type: UPDATE_ASSOCIATE_SETUP_INFO, payload: informationSetup });
+      let groupPrimary =
+        informationAllocation?.associateGroup?.associateGroupPrimary.map((ob) => ob.id) || [];
+      yield put({
+        type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'associateGroup',
+          actualStateName: 'associateGroupPrimary',
+          value: groupPrimary
+        }
+      });
+      let grpSecond =
+        informationAllocation?.associateGroup?.associateGroupSecondary.map((ob) => ob.id) || [];
+      yield put({
+        type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'associateGroup',
+          actualStateName: 'associateGroupSecondary',
+          value: grpSecond
+        }
+      });
+      let ndpri =
+        informationAllocation?.associateNode?.associateNodePrimary.map((ob) => ob.id) || [];
+      yield put({
+        type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'associateNode',
+          actualStateName: 'associateNodePrimary',
+          value: ndpri
+        }
+      });
+      let ndSecond =
+        informationAllocation?.associateNode?.associateNodeSecondary.map((ob) => ob.id) || [];
+      yield put({
+        type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'associateNode',
+          actualStateName: 'associateNodeSecondary',
+          value: ndSecond
+        }
+      });
+      let tyPri =
+        informationAllocation?.associateType?.associateTypePrimary.map((ob) => ob.id) || [];
+      yield put({
+        type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'associateType',
+          actualStateName: 'associateTypePrimary',
+          value: tyPri
+        }
+      });
+      let typeSecond =
+        informationAllocation?.associateType?.associateTypeSecondary.map((ob) => ob.id) || [];
+      yield put({
+        type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'associateType',
+          actualStateName: 'associateTypeSecondary',
+          value: typeSecond
+        }
+      });
+      let rolePri =
+        informationAllocation?.associateRole?.associateRolePrimary.map((ob) => ob.id) || [];
+      yield put({
+        type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'associateRole',
+          actualStateName: 'associateRolePrimary',
+          value: rolePri
+        }
+      });
+      let roleSecond =
+        informationAllocation?.associateRole?.associateRoleSecondary.map((ob) => ob.id) || [];
+      yield put({
+        type: SET_ASSOCIATE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'associateRole',
+          actualStateName: 'associateRoleSecondary',
+          value: roleSecond
+        }
+      });
+      //end allocation obj
       let ascendantPrimaryList = [];
       if (informationFramework?.associateAscendant?.associateAscendantPrimary) {
         let ascendantPrimaryId =

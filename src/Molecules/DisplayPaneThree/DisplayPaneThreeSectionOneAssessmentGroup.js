@@ -374,8 +374,9 @@ const DisplayPaneThreeSectionOneAssessmentGroup = () => {
     if (labelName === 'classification') {
       dispatch({
         type: SET_STATUS_POPUP_VALUE,
-        payload: capitalizeFirstLetter(informationSetup?.assessmentGroupClassification
-          .assessmentGroupClassificationPrimary)
+        payload: capitalizeFirstLetter(
+          informationSetup?.assessmentGroupClassification.assessmentGroupClassificationPrimary
+        )
       });
       dispatch({
         type: SET_POPUP_VALUE,

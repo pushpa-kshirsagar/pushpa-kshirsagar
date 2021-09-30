@@ -58,7 +58,6 @@ const PopUpAddressEmail = (props) => {
         payload: { assesseeSignIn: '' }
       });
     } else {
-      console.log('tempCommunication', tempCommunication);
       if (tempCommunication === '') {
         dispatch({
           type: UPDATE_ASSESSEE_COMMUNICATION,
@@ -88,7 +87,6 @@ const PopUpAddressEmail = (props) => {
       emailErr: ''
     }));
   };
-  console.log('checkboxValue', checkboxValue);
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
     if (name === 'assesseeAddressEmailCommunication') {

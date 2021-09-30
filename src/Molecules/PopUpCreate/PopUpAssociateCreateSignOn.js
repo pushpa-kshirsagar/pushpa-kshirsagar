@@ -117,6 +117,21 @@ const PopUpSignOnAssociate = () => {
     if (tempCommunication === 'email address (secondary)') {
       assesseeContactObj.assesseeAddressEmailSecondary.assesseeAddressEmailCommunication = true;
     }
+    // add default root node in allocation if node not selected
+    if (
+      associateInfo.informationAllocation.associateNode.associateNodePrimary.length === 0 &&
+      coreNodeReviewListData.length !== 0
+    ) {
+      let rootNode = coreNodeReviewListData.filter((node) => {
+        return node.informationFramework.associateNodeAscendantPrimary === null;
+      });
+      let rootNodeId = rootNode[0].id;
+      associateInfo.informationAllocation.associateNode.associateNodePrimary = [
+        ...associateInfo.informationAllocation.associateNode.associateNodePrimary,
+        rootNodeId
+      ];
+    }
+
     let requestObect = {
       assesseeId: selectedAssociateInfo?.assesseeId || '0123456',
       associateId:
@@ -381,7 +396,7 @@ const PopUpSignOnAssociate = () => {
         inputHeaderBadge={'primary'}
         infoMsg={'select a node'}
         ListData={coreNodeReviewListData}
-        textOne={'associateNodename'}
+        textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}
         onClickEvent={(e) => {
           updateAssociateAllocation(e, 'associateNode', 'associateNodePrimary');
