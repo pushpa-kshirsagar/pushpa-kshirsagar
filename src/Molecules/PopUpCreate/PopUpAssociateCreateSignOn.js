@@ -40,10 +40,10 @@ import {
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
   UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
   UPDATE_ASSOCIATE_ASSOCIATENODE_INFO,
-  SET_SINGLE_ASSOCIATE_INFORMATION,
   UPDATE_ASSOCIATE_COUNTRY_INFO,
   UPDATE_ASSOCIATE_LANGUAGE_INFO,
-  UPDATE_ASSOCIATE_CURRENCY_INFO
+  UPDATE_ASSOCIATE_CURRENCY_INFO,
+  SET_SINGLE_ASSOCIATE_INFORMATION
 } from '../../actionType';
 import PopUpTagSecondary from '../../PopUpInformation/PopUpTagSecondary';
 import { SIGN_IN_URL } from '../../endpoints';
@@ -65,13 +65,10 @@ const PopUpSignOnAssociate = () => {
     permissionStateOne,
     permissionStateTwo,
     permissionStateThree,
-    coreTypeReviewListData,
-    countryName,
-    languages,
-    currencyMaster,
     associateCountryName,
     associateLanguages,
-    associateCurrencyMaster
+    associateCurrencyMaster,
+    coreTypeReviewListData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [roleSelectedError, setRoleSelectedError] = useState('');
   const [typeSelectedError, setTypeSelectedError] = useState('');
@@ -3094,8 +3091,8 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         inputHeader={'associates'}
         inputHeaderBadgeOne={'country'}
-        basicInfo={associateInfo.informationBasic}
-        actualLableValue={'associateCountryFlagPicture'}
+        basicInfo={associateInfo?.informationBasic}
+        actualLableValue={'associateCountryFlag'}
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
