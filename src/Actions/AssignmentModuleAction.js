@@ -23,7 +23,10 @@ import {
   GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
   ASSIGNMENT_PUBLISH_SAGA,
-  ASSIGNMENT_ADMINISTER_SAGA
+  ASSIGNMENT_ADMINISTER_SAGA,
+  SET_POPUP_SINGLE_STATE,
+  CLEAR_DISPLAY_PANE_THREE,
+  CLEAR_ASSIGNMENT_INFO
 } from '../actionType';
 import {
   getAssignmentGroupAssignmentReqObj,
@@ -37,7 +40,43 @@ import {
   getNodeAssignmentsReqObj,
   getNodeAssignmentsScanReqObj
 } from './GenericActions';
-
+function resetAssignmentDataFunction(dispatch) {
+  console.log('resetttttttttt');
+  dispatch({
+    type: SET_POPUP_SINGLE_STATE,
+    payload: { stateName: 'cardValue', value: 'NoCard' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'middlePaneSelectedValue', value: '' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedFlagedArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedFlagedArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'selectedTagsArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'unselectedTagsArray', value: [] }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'flagedValue', value: '' }
+  });
+  dispatch({
+    type: SET_DISPLAY_TWO_SINGLE_STATE,
+    payload: { stateName: 'isSelectActive', value: '' }
+  });
+  dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+  dispatch({ type: CLEAR_ASSIGNMENT_INFO });
+}
 export const createAssignmentPopupApiCall = (
   selectedAssociateInfo,
   secondaryOptionCheckValue,
@@ -90,6 +129,7 @@ export const createAssignmentPopupApiCall = (
     type: SET_POPUP_VALUE,
     payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
   });
+  resetAssignmentDataFunction(dispatch);
 };
 export const assignmentsDistinctApiCall = (
   selectedAssociateInfo,
@@ -122,6 +162,7 @@ export const assignmentsDistinctApiCall = (
       isSelectActive: isSelectActive
     }
   });
+  resetAssignmentDataFunction(dispatch);
 };
 export const assignmentsGroupApiCall = (
   selectedAssociateInfo,
@@ -129,8 +170,10 @@ export const assignmentsGroupApiCall = (
   countPage,
   dispatch,
   targetValue,
+  cardValue = 'noCard',
   isSelectActive = ''
 ) => {
+  resetAssignmentDataFunction(dispatch);
   let requestObj = makeAssignmentGroupObj(
     selectedAssociateInfo,
     secondaryOptionCheckValue,
@@ -150,8 +193,8 @@ export const assignmentsGroupApiCall = (
     payload: {
       request: requestObj,
       BadgeOne: targetValue,
-      BadgeTwo: secondaryOptionCheckValue,
-      BadgeThree: '',
+      BadgeTwo: cardValue === 'Card' ? 'distinct' : secondaryOptionCheckValue,
+      BadgeThree: cardValue === 'Card' ? secondaryOptionCheckValue : '',
       isMiddlePaneList: true,
       isSelectActive: isSelectActive
     }
@@ -189,6 +232,7 @@ export const assignmentTypeApiCall = (
       isMiddlePaneList: true
     }
   });
+  resetAssignmentDataFunction(dispatch);
 };
 export const getAssignmnetTypeAssignmnetDistinctApiCall = (
   selectedAssociateInfo,

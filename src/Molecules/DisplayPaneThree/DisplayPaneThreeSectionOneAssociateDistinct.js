@@ -11,7 +11,9 @@ import BlurOnIcon from '@material-ui/icons/BlurOn';
 import {
   ASSOCIATE_SIGN_ON,
   GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+  INTERNAL_NODE_LIST_SAGA,
   LOADER_START,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
   SET_CORE_ROLE_REVIEW_LIST_REQ_OBJECT,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_STATUS_POPUP_VALUE,
@@ -23,7 +25,7 @@ import {
   UPDATE_ASSOCIATE_SETUP_INFO,
   UPDATE_ASSOCIATE_SETUP_ITEM_INFO
 } from '../../actionType';
-import { getPermissionStr, makeAssociateRoleObj } from '../../Actions/GenericActions';
+import { getPermissionStr, makeAssociateRoleObj, makeInternalNodeObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssociate = () => {
   const [listExpand, setListExpand] = useState('');
@@ -3662,6 +3664,19 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       }
     }
     if (labelName === 'node') {
+      let nodeRequestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, -1);
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: nodeRequestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: {
+          request: nodeRequestObj,
+          BadgeOne: '',
+          BadgeTwo: '',
+          BadgeThree: '',
+          nodeViewState: 'list',
+          isMiddlePaneList: false
+        }
+      });
       if (selectedBadgeName === 'primary') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -4986,12 +5001,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
           payload: {
-            isPopUpValue: "ASSOCIATE_CURRENCY_PICTURE_POPUP",
-            popupMode: "ASSOCIATE_CREATE",
-          },
+            isPopUpValue: 'ASSOCIATE_CURRENCY_PICTURE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
         });
       }
-      if(labelName === "associates" &&selectedBadgeName==="picture"){
+      if (labelName === 'associates' && selectedBadgeName === 'picture') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
           payload: {

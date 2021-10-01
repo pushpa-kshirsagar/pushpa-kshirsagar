@@ -78,7 +78,6 @@ import {
 } from '../Actions/AssesseeModuleAction';
 import {
   associateCreatePopup,
-  AssociateSetUpApiCalls,
   getAssociateGroupAssociateDistinctApiCall,
   getAssociateGroupAssociateReqObj,
   getAssociateRoleAssociateDistinctApiCall,
@@ -436,7 +435,6 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             }
           }
         });
-        AssociateSetUpApiCalls(selectedAssociateInfo, selectedTagValue, dispatch);
       }
       if (typeOfMiddlePaneList === 'associateNodeDistinctReviewList') {
         dispatch({ type: LOADER_START });

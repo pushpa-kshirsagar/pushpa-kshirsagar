@@ -436,14 +436,15 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
-        getAssociateNodeApiCall(
+        getInternalNodeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,
           dispatch,
           'nodes',
-          'distinct',
-          'hierarchy'
+          '',
+          'hierarchy',
+          'associates'
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'roles') {
@@ -488,14 +489,15 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'nodes') {
-        getAssociateNodeApiCall(
+        getInternalNodeApiCall(
           selectedAssociateInfo,
           secondaryOptionCheckValue,
           countPage,
           dispatch,
           'nodes',
-          'distinct',
-          'hierarchy'
+          '',
+          'hierarchy',
+          'associates'
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'types') {
@@ -670,7 +672,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
@@ -852,8 +855,8 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          'job profiles',
-          cardValue
+          cardValue,
+          popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
         dispatch({ type: POPUP_CLOSE });
       } else if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'types') {
@@ -898,7 +901,6 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           countPage,
           dispatch,
           'groups',
-          'job profiles',
           cardValue,
           popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );

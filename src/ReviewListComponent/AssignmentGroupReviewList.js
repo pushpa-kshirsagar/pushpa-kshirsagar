@@ -111,7 +111,7 @@ const AssignmentGroupReviewList = (props) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
-    
+
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
@@ -183,6 +183,7 @@ const AssignmentGroupReviewList = (props) => {
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
+  console.log('isSelectActive',isSelectActive);
   return (
     <div>
       {reviewListDistinctData &&
@@ -195,9 +196,12 @@ const AssignmentGroupReviewList = (props) => {
                 tag={item?.id}
                 isSelectedReviewList={middlePaneSelectedValue === item?.id}
                 //status={item.informationEngagement.assignmentGroupStatus}
-                status={FilterMode === 'assignmentsGroupDistinctactive'?
-                item.informationSetup?.assignmentGroupClassification?.assignmentGroupClassificationPrimary:
-                item.informationEngagement.assignmentGroupStatus}
+                status={
+                  FilterMode === 'assignmentsGroupDistinctactive'
+                    ? item.informationSetup?.assignmentGroupClassification
+                        ?.assignmentGroupClassificationPrimary
+                    : item.informationEngagement.assignmentGroupStatus
+                }
                 actualStatus={item.informationEngagement.assignmentGroupStatus}
                 textOne={item.informationBasic.assignmentGroupName}
                 textTwo={item.informationBasic.assignmentGroupDescription}
