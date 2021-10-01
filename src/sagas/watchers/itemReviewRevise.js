@@ -356,7 +356,7 @@ function* workerReviseInfoItemSaga(data) {
           headerOne: 'item',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject,
+          responseObject: userResponse.responseObject[0],
           createMode
         }
       });
@@ -378,6 +378,7 @@ function* workerReviseInfoItemSaga(data) {
           }
         });
       }
+      yield put({ type: LOADER_STOP });
     } else {
       yield put({ type: LOADER_STOP });
       yield put({

@@ -1045,8 +1045,8 @@ const PopUpDisplayPanelAssociate = (props) => {
           countPage,
           dispatch,
           'types',
-          'Card',
-          popupHeaderOne
+          popupHeaderOne,
+          'Card'          
         );
       }
       if (popupHeaderOne === 'job profiles') {
