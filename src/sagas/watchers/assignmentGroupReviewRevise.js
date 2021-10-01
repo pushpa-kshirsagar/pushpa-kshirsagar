@@ -140,27 +140,29 @@ function* workerReviseAssignmentGroupInfoSaga(data) {
           }
         });
       }
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
-      yield put({
-        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-        payload: []
-      });
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'reviewListDistinctData', value: [] }
-      });
-      yield put({
-        type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: 'assignments',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
-      });
+      if(createMode===''){
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });      
+        yield put({      
+          type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,      
+          payload: []      
+        });
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: GET_ASSIGNMENT_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            HeaderOne: 'assignments',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
     } else {
       console.log('loading end');
       yield put({

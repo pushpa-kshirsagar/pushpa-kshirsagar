@@ -1442,7 +1442,8 @@ const DisplayPaneThreeSectionOneAssociate = () => {
                 },
                 {
                   labelTextTwoBadge: 'picture',
-                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformBrandPicture || 'No'
+                  innerLabelBadgeList: setUpAssociateModule?.iguruPlatformBrandPicture || 'No',
+                  IconOne: BlurOnIcon
                 }
               ]
             },
@@ -3764,7 +3765,6 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     }
   };
   const reviseSetup = (e, selectedBadgeArray) => {
-    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('labelName', labelName);
@@ -4925,20 +4925,10 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
-      if (badgeName === 'associates' && selectedBadgeName === 'country') {
-        dispatch({
-          type: ASSOCIATE_SIGN_ON,
-          payload: {
-            isPopUpValue: 'ASSOCIATE_COUNTRY_PICTURE_POPUP',
-            popupMode: 'ASSOCIATE_CREATE'
-          }
-        });
-      }
     }
   };
 
   const reviewSetup = (labelName, selectedBadgeName) => {
-    debugger;
     console.log('=====>', labelName);
     if (labelName === 'assessees') {
       dispatch({
@@ -4968,6 +4958,12 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       });
     }
     if (labelName === 'associates') {
+      if (!associateInfo?.informationSetup.associate) {
+        dispatch({
+          type: UPDATE_ASSOCIATE_SETUP_INFO,
+          payload: setUpAssociateModule
+        });
+      }
       if (labelName === 'associates' && selectedBadgeName === '') {
         dispatch({
           type: ASSOCIATE_SIGN_ON,
@@ -4987,13 +4983,22 @@ const DisplayPaneThreeSectionOneAssociate = () => {
         });
       }
       if (labelName === 'associates' && selectedBadgeName === 'currency') {
-        // dispatch({
-        //   type: ASSOCIATE_SIGN_ON,
-        //   payload: {
-        //     isPopUpValue: "ASSOCIATE_COUNTRY_PICTURE_POPUP",
-        //     popupMode: "ASSOCIATE_CREATE",
-        //   },
-        // });
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: "ASSOCIATE_CURRENCY_PICTURE_POPUP",
+            popupMode: "ASSOCIATE_CREATE",
+          },
+        });
+      }
+      if(labelName === "associates" &&selectedBadgeName==="picture"){
+        dispatch({
+          type: ASSOCIATE_SIGN_ON,
+          payload: {
+            isPopUpValue: 'ASSOCIATE_BRAND_PICTURE_POPUP',
+            popupMode: 'ASSOCIATE_CREATE'
+          }
+        });
       }
     }
 
@@ -5035,7 +5040,6 @@ const DisplayPaneThreeSectionOneAssociate = () => {
     }
   };
   const reviseSetupPlus = (e, selectedBadgeArray) => {
-    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('labelName', labelName);
@@ -5990,15 +5994,15 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           }
         });
       }
-      if (badgeName === '+brand' && selectedBadgeName === 'picture') {
-        dispatch({
-          type: ASSOCIATE_SIGN_ON,
-          payload: {
-            isPopUpValue: 'ASSOCIATE_BRAND_PICTURE_POPUP',
-            popupMode: 'ASSOCIATE_CREATE'
-          }
-        });
-      }
+      // if (badgeName === '+brand' && selectedBadgeName === 'picture') {
+      //   dispatch({
+      //     type: ASSOCIATE_SIGN_ON,
+      //     payload: {
+      //       isPopUpValue: 'ASSOCIATE_BRAND_PICTURE_POPUP',
+      //       popupMode: 'ASSOCIATE_CREATE'
+      //     }
+      //   });
+      // }
       // if (badgeName === '+domain' && selectedBadgeName === 'primary') {
       //   dispatch({
       //     type: ASSOCIATE_SIGN_ON,

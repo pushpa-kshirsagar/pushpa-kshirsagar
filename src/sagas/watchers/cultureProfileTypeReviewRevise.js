@@ -138,8 +138,9 @@ function* workerReviseCultureProfileTypeInfoSaga(data) {
           }
         });
       }
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
-      yield put({
+      if(createMode===''){
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });      
+        yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
         payload: []
       });
@@ -159,7 +160,8 @@ function* workerReviseCultureProfileTypeInfoSaga(data) {
           isMiddlePaneList: true
         }
       });
-    } else {
+    }
+  } else {
       yield put({ type: LOADER_STOP });
       yield put({
         type: SET_POPUP_VALUE,

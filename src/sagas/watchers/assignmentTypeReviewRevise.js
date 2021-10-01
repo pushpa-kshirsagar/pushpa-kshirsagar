@@ -141,7 +141,8 @@ function* workerReviseAssignmentTypeInfoSaga(data) {
           }
         });
       }
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      if(createMode===''){
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
         payload: []
@@ -161,12 +162,12 @@ function* workerReviseAssignmentTypeInfoSaga(data) {
           middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
           isMiddlePaneList: true
         }
-      });
-    } else {
+      });      
+    }  
+  } else {
       console.log('loading end');
       yield put({ type: LOADER_STOP });
     }
-
     console.log('loading end');
     // yield put({ type: LOADER_STOP });
   } catch (e) {
