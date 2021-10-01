@@ -12,7 +12,9 @@ import {
   SET_NODE_DYNAMIC_SINGLE_STATE,
   SET_DISPLAY_THREE_SINGLE_STATE,
   UPDATE_ASSESSEE_PERSONAL_INFO,
-  UPDATE_ASSESSEE_ENGAGEMENT_INFO
+  UPDATE_ASSESSEE_ENGAGEMENT_INFO,
+  SET_ASSOCIATE_NODE_PARENT_STATE,
+  SET_ASSOCIATE_NODE_CLASSIFICAION_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList';
@@ -40,14 +42,6 @@ const PopUpNodeCreate = (props) => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
-    let framworkObj = {
-      associateNodeAscendant: {
-        associateNodeAscendantPrimary:
-          nodeInformation.informationFramework.associateNodeAscendant
-            .associateNodeAscendantPrimary[0],
-        associateNodeAscendantSecondary: []
-      }
-    };
     let reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -55,7 +49,8 @@ const PopUpNodeCreate = (props) => {
       associateNode: {
         informationBasic: nodeInformation.informationBasic,
         informationAllocation: nodeInformation.informationAllocation,
-        informationFramework: framworkObj
+        informationFramework: nodeInformation.informationFramework,
+        informationSetup: nodeInformation.informationSetup
       }
     };
     console.log('CREATE group api', reqBody);
@@ -65,29 +60,24 @@ const PopUpNodeCreate = (props) => {
   const updateParentNode = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let tagId = e.currentTarget.getAttribute('tag');
-    // document.getElementById(tagId).style.backgroundColor = 'white';
-    let tagIdArr =
-      nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary;
-    if (tagIdArr.includes(tagId)) {
-      setRoleSelectedError('');
-      // document.getElementById(tagId).style.backgroundColor = 'white';
-      tagIdArr = tagIdArr.filter(function (number) {
-        return number !== tagId;
-      });
-    } else {
-      var arr = [];
-      tagIdArr = [...arr];
-      tagIdArr.push(tagId);
-      // document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
-    }
+    document.getElementById(tagId).style.backgroundColor = 'white';
+    // let tagIdArr =
+    //   nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary;
+    // if (tagIdArr.includes(tagId)) {
+    //   setRoleSelectedError('');
+    //   // document.getElementById(tagId).style.backgroundColor = 'white';
+    //   tagIdArr = tagIdArr.filter(function (number) {
+    //     return number !== tagId;
+    //   });
+    // } else {
+    //   var arr = [];
+    //   tagIdArr = [...arr];
+    //   tagIdArr.push(tagId);
+    //   // document.getElementById(tagId).style.backgroundColor = '#F0F0F0';
+    // }
     dispatch({
-      type: SET_NODE_DYNAMIC_SINGLE_STATE,
-      payload: {
-        objectName: 'informationFramework',
-        stateName: 'associateNodeAscendant',
-        actualStateName: 'associateNodeAscendantPrimary',
-        value: tagIdArr
-      }
+      type: SET_ASSOCIATE_NODE_PARENT_STATE,
+      payload: tagId
     });
   };
   return (
@@ -152,21 +142,42 @@ const PopUpNodeCreate = (props) => {
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
-        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        nextPopUpValue={'CLASSIFICATIONLISTPOPUP'}
         inputHeader={'node'}
         inputHeaderBadge={'ascendant'}
         inputHeaderBadgeTwo={'primary'}
         infoMsg={'select a node'}
         ListData={coreNodeReviewListData}
         isRequired={true}
-        selectedList={
-          nodeInformation.informationFramework.associateNodeAscendant.associateNodeAscendantPrimary
-        }
+        selectedList={[nodeInformation.informationFramework.associateNodeAscendantPrimary]}
         setErrorMsg={setRoleSelectedError}
         errorMsg={roleSelectedError}
         textOne={'associateNodeName'}
         textTwo={'associateNodeDescription'}
         onClickEvent={updateParentNode}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'CLASSIFICATIONLISTPOPUP'}
+        tag={'associateNodeClassificationPrimary'}
+        label={'classification'}
+        listSelect={[
+          { id: 'Bespoke', name: 'Bespoke' },
+          { id: 'Generic', name: 'Generic' }
+        ]}
+        mappingValue={'id'}
+        inputHeader={''}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        labelval={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'group'}
+        headerOneBadgeTwo={'information'}
+        isRequired={true}
+        nextPopUpValue={reviewMode === 'revise' ? '' : 'CONFIRMATIONPOPUP'}
+        basicInfo={nodeInformation.informationSetup.associateNodeClassification}
+        typeOfSetObject={SET_ASSOCIATE_NODE_CLASSIFICAION_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm

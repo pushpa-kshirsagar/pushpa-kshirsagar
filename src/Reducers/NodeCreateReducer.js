@@ -1,7 +1,9 @@
 import {
   SET_NODE_REDUCER_STATE,
   CLEAR_NODE_REDUCER_STATE,
-  SET_NODE_DYNAMIC_SINGLE_STATE
+  SET_NODE_DYNAMIC_SINGLE_STATE,
+  SET_ASSOCIATE_NODE_CLASSIFICAION_STATE,
+  SET_ASSOCIATE_NODE_PARENT_STATE
 } from '../actionType';
 
 const initialState = {
@@ -21,21 +23,12 @@ const initialState = {
         associateNodeManagerSecondary: []
       }
     },
-    informationEngagement: {
-      associateNodeStatus: '',
-      associateNodeTag: {
-        associateNodeTagPrimary: '',
-        associateNodeTagSecondary: ''
-      },
-      associateNodeTenure: {
-        associateNodeTenureDateTimeStart: '',
-        associateNodeTenureDateTimeEnd: ''
-      }
-    },
     informationFramework: {
-      associateNodeAscendant: {
-        associateNodeAscendantPrimary: [],
-        associateNodeAscendantSecondary: []
+      associateNodeAscendantPrimary: ''
+    },
+    informationSetup: {
+      associateNodeClassification: {
+        associateNodeClassificationPrimary: ''
       }
     }
   }
@@ -55,7 +48,7 @@ const NodeCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
     case SET_NODE_DYNAMIC_SINGLE_STATE:
       return {
         ...istate,
-        nodeInformation:{
+        nodeInformation: {
           ...istate.nodeInformation,
           [action.payload.objectName]: {
             ...istate.nodeInformation[action.payload.objectName],
@@ -63,6 +56,28 @@ const NodeCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
               ...istate.nodeInformation[action.payload.objectName][action.payload.stateName],
               [action.payload.actualStateName]: action.payload.value
             }
+          }
+        }
+      };
+    case SET_ASSOCIATE_NODE_CLASSIFICAION_STATE:
+      return {
+        ...istate,
+        nodeInformation: {
+          ...istate.nodeInformation,
+          informationSetup: {
+            ...istate.nodeInformation.informationSetup,
+            associateNodeClassification: action.payload
+          }
+        }
+      };
+    case SET_ASSOCIATE_NODE_PARENT_STATE:
+      return {
+        ...istate,
+        nodeInformation: {
+          ...istate.nodeInformation,
+          informationFramework: {
+            ...istate.nodeInformation.informationFramework,
+            associateNodeAscendantPrimary: action.payload
           }
         }
       };

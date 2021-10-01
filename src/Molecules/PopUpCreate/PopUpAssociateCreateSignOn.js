@@ -1619,7 +1619,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Alias Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Alias Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Alias Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1643,7 +1643,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1667,7 +1667,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1691,7 +1691,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1715,7 +1715,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1739,7 +1739,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1763,7 +1763,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1787,7 +1787,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1811,7 +1811,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1835,7 +1835,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1859,7 +1859,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1883,7 +1883,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1907,7 +1907,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1931,7 +1931,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1955,7 +1955,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -1979,7 +1979,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -2003,7 +2003,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -2027,7 +2027,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -2051,7 +2051,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -2075,7 +2075,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -2099,7 +2099,7 @@ const PopUpSignOnAssociate = () => {
         label={'information'}
         labelBadgeOne={'basic'}
         listSelect={[
-          { id: 'Not_Required', name: 'Unique Name & Description Not Rquired' },
+          { id: 'NOT_REQUIRED', name: 'Unique Name & Description Not Rquired' },
           { id: 'NAME_DESCRIPTION_UNIQUE', name: 'Unique Name + Description Required' },
           { id: 'NAME_UNIQUE', name: 'Unique Name Required' }
         ]}
@@ -2301,7 +2301,7 @@ const PopUpSignOnAssociate = () => {
         tag={'assesseeGender'}
         label={'gender'}
         listSelect={[
-          { id: 'Not_Required', name: '' },
+          { id: 'NOT_REQUIRED', name: '' },
           { id: 'Female', name: 'Female' },
           { id: 'Male', name: 'Male' },
           { id: 'Unlisted', name: 'Unlisted' }
