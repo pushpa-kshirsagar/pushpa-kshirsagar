@@ -110,7 +110,7 @@ function* workerReviseAssesseeGroupInfoSaga(data) {
       URL: ASSESSEE_GROUP_INFO_REVISE_URL
     });
     if (userResponse.responseCode === '000') {
-      const { assesseeGroupAssesseeReqBody = null, createMode } = data.payload;
+      const { assesseeGroupAssesseeReqBody = null, createMode='' } = data.payload;
       if (assesseeGroupAssesseeReqBody !== null) {
         yield put({
           type: GET_ASSESSEEGROUP_ASSESSEE_REVIEW_LIST,
@@ -138,28 +138,29 @@ function* workerReviseAssesseeGroupInfoSaga(data) {
       } else {
         yield put({ type: LOADER_STOP });
       }
-
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
-      yield put({
-        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-        payload: []
-      });
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'reviewListDistinctData', value: [] }
-      });
-      yield put({
-        type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: 'assessees',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
-      });
+      if(createMode===''){
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });      
+        yield put({      
+          type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,      
+          payload: []      
+        });
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: GET_ASSESSEE_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            HeaderOne: 'assessees',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      }      
     } else {
       yield put({
         type: SET_POPUP_VALUE,

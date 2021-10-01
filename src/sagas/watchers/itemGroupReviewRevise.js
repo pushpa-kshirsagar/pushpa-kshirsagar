@@ -134,13 +134,12 @@ function* workerReviseItemGroupInfoSaga(data) {
           }
         });
       }
-
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      if(createMode===''){
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
         payload: []
       });
-      // if (createMode === '') {
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'reviewListDistinctData', value: [] }
@@ -156,7 +155,10 @@ function* workerReviseItemGroupInfoSaga(data) {
           middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
           isMiddlePaneList: true
         }
-      });
+      });      
+    }      
+      // if (createMode === '') {
+     
       // yield put({
       //   type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
       //   payload: {

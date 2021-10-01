@@ -137,7 +137,8 @@ function* workerReviseJobProfileTypeInfoSaga(data) {
           }
         });
       }
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      if(createMode===''){
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
       yield put({
         type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
         payload: []
@@ -157,8 +158,9 @@ function* workerReviseJobProfileTypeInfoSaga(data) {
           middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
           isMiddlePaneList: true
         }
-      });
-    } else {
+      });      
+    }
+  } else {
       yield put({ type: LOADER_STOP });
       yield put({
         type: SET_POPUP_VALUE,

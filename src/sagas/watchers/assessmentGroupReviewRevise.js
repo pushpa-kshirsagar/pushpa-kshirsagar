@@ -139,27 +139,29 @@ function* workerReviseAssessmentGroupInfoSaga(data) {
       } else {
         yield put({ type: LOADER_STOP });
       }
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
-      yield put({
-        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-        payload: []
-      });
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'reviewListDistinctData', value: [] }
-      });
-      yield put({
-        type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          middlePaneHeader: 'assessees',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
-      });
+      if(createMode===''){
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });      
+        yield put({      
+          type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,      
+          payload: []      
+        });
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: GET_ASSESSMENT_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            middlePaneHeader: 'assessees',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
     } else {
       yield put({
         type: SET_POPUP_VALUE,

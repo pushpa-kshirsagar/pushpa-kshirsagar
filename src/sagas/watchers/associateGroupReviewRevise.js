@@ -110,7 +110,7 @@ function* workerReviseAssociateGroupInfoSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       console.log('IN GROUP REVIEW+++++', userResponse);
-      const { associateGroupAssociateReqBody = null, createMode } = data.payload;
+      const { associateGroupAssociateReqBody = null, createMode='' } = data.payload;
       if (associateGroupAssociateReqBody !== null) {
         yield put({
           type: GET_ASSOCIATEGROUP_ASSOCIATE_REVIEW_LIST_SAGA,
@@ -135,27 +135,30 @@ function* workerReviseAssociateGroupInfoSaga(data) {
           }
         });
       }
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'reviewListDistinctData', value: [] }
-      });
-      yield put({
-        type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: 'associates',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
-      });
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
-      yield put({
-        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-        payload: []
-      });
+      if(createMode===''){
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: GET_ASSOCIATE_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            HeaderOne: 'associates',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+      
+        yield put({      
+          type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,      
+          payload: []      
+        });
+      }
     } else {
       console.log('loading end');
       yield put({ type: LOADER_STOP });

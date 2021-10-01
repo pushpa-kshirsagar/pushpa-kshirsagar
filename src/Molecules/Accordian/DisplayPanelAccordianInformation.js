@@ -281,7 +281,7 @@ const DisplayPanelAccordianInformation = (props) => {
                                 }
                           }
                         >
-                          <selectedBadge.IconOne className="iconOne" />
+                          <selectedBadge.IconOne className={mode === 'revise' ? ['linkText','iconOne'].join(' ') : reviewLabelClass}/>
                         </IconButton>
                       </div>
                     </>

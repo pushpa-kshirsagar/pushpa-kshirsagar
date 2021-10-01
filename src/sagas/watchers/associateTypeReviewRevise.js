@@ -110,7 +110,7 @@ function* workerReviseAssociateTypeInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      const { createMode, associateTypeAssociateReqBody = null } = data.payload;
+      const { createMode='', associateTypeAssociateReqBody = null } = data.payload;
       if (associateTypeAssociateReqBody !== null) {
         yield put({
           type: GET_ASSOCIATETYPE_ASSOCIATE_REVIEW_LIST_SAGA,
@@ -135,23 +135,24 @@ function* workerReviseAssociateTypeInfoSaga(data) {
           }
         });
       }
-
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'reviewListDistinctData', value: [] }
-      });
-      yield put({
-        type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: 'associates',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
-      });
+      if(createMode===''){
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            HeaderOne: 'associates',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
     } else {
       yield put({ type: LOADER_STOP });
     }
