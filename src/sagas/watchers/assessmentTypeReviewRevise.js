@@ -110,7 +110,6 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
       data: data.payload.reqBody
     });
     if (userResponse.responseCode === '000') {
-      console.log('IN GROUP REVIEW+++++', userResponse);
       const { createMode = '', assessmentTypeAssessmentReqBody = null } = data.payload;
       if (assessmentTypeAssessmentReqBody !== null) {
         yield put({
@@ -136,27 +135,29 @@ function* workerReviseAssessmentTypeInfoSaga(data) {
           }
         });
       }
-      yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
-      yield put({
-        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-        payload: []
-      });
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'reviewListDistinctData', value: [] }
-      });
-      yield put({
-        type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: 'assessments',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
-      });
+      if (createMode === '') {
+        yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
+        yield put({
+          type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+          payload: []
+        });
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            HeaderOne: 'assessments',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
     } else {
       console.log('loading end');
       yield put({
