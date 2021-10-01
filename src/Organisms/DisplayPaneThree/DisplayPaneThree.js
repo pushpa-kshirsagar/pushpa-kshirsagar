@@ -1687,7 +1687,8 @@ export const DisplayPaneThree = () => {
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
-        associateId: id,
+        //associateId: id,
+        associateId:selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         item: {
           id,
           informationBasic,
@@ -3956,14 +3957,14 @@ export const DisplayPaneThree = () => {
                   className=""
                   labelTextOneOne="name"
                   labelTextOneTwo="description"
-                  textOneOne={informationBasic.itemName || 'No Information'}
-                  textOneTwo={informationBasic.itemDescription || 'No Information'}
+                  textOneOne={informationBasic?.itemName || 'No Information'}
+                  textOneTwo={informationBasic?.itemDescription || 'No Information'}
                   isVerifiedActiveName={false}
                   isVerifiedActivePicture={false}
                   mode={reviewMode}
                   onClickRevise={reviseItemBasicInformation}
-                  isImageActive={informationBasic.itemPicture}
-                  imageOne={informationBasic.itemPicture}
+                  isImageActive={informationBasic?.itemPicture}
+                  imageOne={informationBasic?.itemPicture}
                 />
               </div>
               <Sections
