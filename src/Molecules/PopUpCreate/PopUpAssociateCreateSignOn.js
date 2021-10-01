@@ -3091,9 +3091,23 @@ const PopUpSignOnAssociate = () => {
         headerOneBadgeOne={'setup'}
         inputHeader={'associates'}
         inputHeaderBadgeOne={'country'}
-        basicInfo={associateInfo?.informationBasic}
+        basicInfo={associateInfo?.associateCountry}
         actualLableValue={'associateCountryFlag'}
-        typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
+        typeOfSetObject={UPDATE_ASSOCIATE_COUNTRY_INFO}
+        nextPopUpValue={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpPicture
+        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_PICTURE_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'currency'}
+        basicInfo={associateInfo?.associateCurrency}
+        actualLableValue={'associateCurrencySymbol'}
+        typeOfSetObject={UPDATE_ASSOCIATE_CURRENCY_INFO}
         nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

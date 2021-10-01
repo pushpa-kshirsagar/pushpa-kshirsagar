@@ -281,7 +281,7 @@ const DisplayPanelAccordianInformation = (props) => {
                                 }
                           }
                         >
-                          <selectedBadge.IconOne />
+                          <selectedBadge.IconOne className="iconOne" />
                         </IconButton>
                       </div>
                     </>
@@ -311,7 +311,7 @@ const DisplayPanelAccordianInformation = (props) => {
                             }
                           >
                             <IconOne
-                              className={mode === 'revise' ? 'linkText' : reviewLabelClass}
+                              //className={mode === 'revise' ? 'linkText' : reviewLabelClass}
                             />
                           </IconButton>
                         </div>
