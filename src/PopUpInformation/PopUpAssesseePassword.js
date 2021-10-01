@@ -48,7 +48,7 @@ const PopUpAssesseePassword = (props) => {
     setRevisedPasswordError('');
     setCurrentPasswordError('');
     const passwordRegExp = new RegExp(
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!{~:<-?>}@#$%^&*])(?=.{8,})'
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!{~:.<-?>}@#$%^&*])(?=.{8,})'
     );
     if (currentPassword !== '' && revisedPassword !== '' && confirmRevisedPassword !== '') {
       if (!passwordRegExp.test(revisedPassword)) {

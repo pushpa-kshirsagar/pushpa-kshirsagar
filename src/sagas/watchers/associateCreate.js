@@ -108,14 +108,17 @@ function* workerCreateAssociateSaga(data) {
     console.log(userResponse);
     console.log('userResponse');
     if (userResponse.responseCode === '000') {
-      yield put({ type: SET_ASSOCIATE_INFORMATION, payload: userResponse.associate });
+      yield put({
+        type: SET_ASSOCIATE_INFORMATION,
+        payload: userResponse.responseObject[0].associate
+      });
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
           headerOne: 'associate',
           headerOneBadgeOne: 'information',
           headerOneBadgeTwo: 'all',
-          responseObject: userResponse.associate,
+          responseObject: userResponse.responseObject[0].associate,
           createMode: 'associate',
           reviewMode: 'revise'
         }
