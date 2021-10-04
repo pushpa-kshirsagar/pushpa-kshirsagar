@@ -94,7 +94,7 @@ function* workeItemGroupItemReviewListSaga(data) {
     if (response.responseCode === '000') {
       yield put({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
-        payload: [response.responseObject]
+        payload: response.responseObject
       });
       yield put({
         type: SET_REVIEW_LIST_RELATE_DATA,

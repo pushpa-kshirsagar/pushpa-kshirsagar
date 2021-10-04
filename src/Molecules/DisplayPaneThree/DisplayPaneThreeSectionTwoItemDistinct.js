@@ -44,8 +44,8 @@ const DisplayPaneThreeSectionTwoItem = () => {
     //   IconTwo: null
     // },
     {
-      id: 'a-classification',
-      labelTextOneOne: 'classification',
+      id: 'a-cluster',
+      labelTextOneOne: 'cluster',
       isListCard: false,
       textOneOne:
         itemFrameworkOne?.itemFrameworkOneCluster?.itemFrameworkOneClusterPrimaryLabel ||
