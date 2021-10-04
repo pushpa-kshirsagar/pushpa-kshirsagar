@@ -261,6 +261,7 @@ const AssociateNodeReviewList = (props) => {
                             dispatch
                           );
                         }}
+                        isShared={item?.associateNode}
                       />
                     </div>
                   );

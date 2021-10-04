@@ -122,7 +122,8 @@ const PopUpNodeCreate = (props) => {
         isActive={isPopUpValue === 'MANAGERLISTPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
-        headerOneBadgeOne={'information'}
+        headerOneBadgeOne={'node'}
+        headerOneBadgeTwo={'information'}
         nextPopUpValue={'PARENTLISTPOPUP'}
         inputHeader={'manager'}
         inputHeaderBadge={'primary'}
@@ -141,7 +142,8 @@ const PopUpNodeCreate = (props) => {
         isActive={isPopUpValue === 'PARENTLISTPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
-        headerOneBadgeOne={'information'}
+        headerOneBadgeOne={'node'}
+        headerOneBadgeTwo={'information'}
         nextPopUpValue={'CLASSIFICATIONLISTPOPUP'}
         inputHeader={'node'}
         inputHeaderBadge={'ascendant'}
@@ -172,7 +174,7 @@ const PopUpNodeCreate = (props) => {
         labelval={''}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
-        headerOneBadgeOne={'group'}
+        headerOneBadgeOne={'node'}
         headerOneBadgeTwo={'information'}
         isRequired={true}
         nextPopUpValue={reviewMode === 'revise' ? '' : 'CONFIRMATIONPOPUP'}
