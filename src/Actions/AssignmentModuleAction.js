@@ -41,7 +41,6 @@ import {
   getNodeAssignmentsScanReqObj
 } from './GenericActions';
 function resetAssignmentDataFunction(dispatch) {
-  console.log('resetttttttttt');
   dispatch({
     type: SET_POPUP_SINGLE_STATE,
     payload: { stateName: 'cardValue', value: 'NoCard' }

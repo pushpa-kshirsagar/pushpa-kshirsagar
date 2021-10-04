@@ -49,7 +49,7 @@ const PopUpItemFramework = (props) => {
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
   // console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
-  // console.log('Choice ob ', choiceOb);
+  console.log('itemInformation ', itemInformation);
   useEffect(() => {
     if (subQuestionId) {
       let subques = itemFrameworkOne.itemFrameworkOneSection.filter(function (sub) {
@@ -72,6 +72,16 @@ const PopUpItemFramework = (props) => {
       isItemFramework
     );
     if (isItemFramework) {
+      let reviseCluster = [];
+      if (classification) {
+        reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
+          return clust.itemFrameworkOneClusterPrimaryLabel === classification;
+        });
+      }
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneCluster', value: reviseCluster }
+      });
       dispatch({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: { stateName: 'itemFrameworkOneBlank', value: blank }
@@ -194,18 +204,13 @@ const PopUpItemFramework = (props) => {
                 tag={'cluster'}
                 label={'cluster'}
                 dataValue={'cluster'}
-                listSelect={[
-                  { id: '', name: '' },
-                  { id: 'Simple-Sample1', name: 'Simple Sample' },
-                  { id: 'Simple-Sample2', name: 'Simple Sample' },
-                  { id: 'Simple-Sample3', name: 'Simple Sample' }
-                ]}
+                listSelect={itemFrameworkOne.itemFrameworkOneGroupCluster}
                 errorMsg={() => {}}
                 onChange={(e) => {
                   setclassification(e.target.value);
                 }}
                 value={classification}
-                mappingValue={'id'}
+                mappingValue={'itemFrameworkOneClusterPrimaryLabel'}
               />
             )}
             {isItemFramework && itemConfigStates.levelState && (

@@ -203,7 +203,8 @@ const ItemGroupItemDistinctReviewList = (props) => {
         value: ASSOCIATE_REVIEW_LIST_POPUP_OPTION
       }
     });
-  };console.log('listDistinctData',listDistinctData);
+  };
+  console.log('listDistinctData',listDistinctData);
   return (
     <div>
       {listDistinctData && (

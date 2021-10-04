@@ -143,6 +143,18 @@ function* workerReviseAssociateNodeInfoSaga(data) {
         getReviewListSaga,
         isShowAllModule = false
       } = data.payload;
+      yield put({
+        type: SET_DISPLAY_PANE_THREE_STATE,
+        payload: {
+          headerOne: selectedModule,
+          headerOneBadgeOne: 'node',
+          headerOneBadgeTwo: 'information',
+          headerOneBadgeThree: 'key',
+          responseObject: userResponse.responseObject[0],
+          selectedModule: selectedModule,
+          createMode
+        }
+      });
       if (associateNodeReqBody && !isShowAllModule) {
         yield put({
           type: getReviewListSaga,
@@ -153,18 +165,6 @@ function* workerReviseAssociateNodeInfoSaga(data) {
             BadgeTwo: '',
             BadgeThree: '',
             isMiddlePaneList: false
-          }
-        });
-        yield put({
-          type: SET_DISPLAY_PANE_THREE_STATE,
-          payload: {
-            headerOne: selectedModule,
-            headerOneBadgeOne: 'node',
-            headerOneBadgeTwo: 'information',
-            headerOneBadgeThree: 'key',
-            responseObject: userResponse.responseObject[0],
-            selectedModule: selectedModule,
-            createMode
           }
         });
       }

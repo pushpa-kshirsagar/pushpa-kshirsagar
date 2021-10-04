@@ -53,19 +53,58 @@ const DisplayPaneThreeSectionOneItem = () => {
               id: 'associate1',
               textOne: 'Simple Sample 01',
               textTwo: '',
-              status: 'active'
+              status: ''
             },
             {
               id: 'associate2',
               textOne: 'Simple Sample 02',
               textTwo: '',
-              status: 'active'
+              status: ''
             },
             {
               id: 'associate3',
               textOne: 'Simple Sample 03',
               textTwo: '',
-              status: 'active'
+              status: ''
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    },
+    {
+      id: 'a2',
+      labelTextOneOne: 'collaborator',
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: '',
+              status: ''
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: '',
+              status: ''
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: '',
+              status: ''
             }
           ]
         },

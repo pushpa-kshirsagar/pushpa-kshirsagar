@@ -946,23 +946,6 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
 
     console.log(labelName, '+++++', selectedBadgeName, '+++++', innerSelectedBadgeName);
-    if (
-      labelName === 'nodes' &&
-      selectedBadgeName === 'ascendant' &&
-      innerSelectedBadgeName === 'primary'
-    ) {
-      let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
-      dispatch({ type: LOADER_START });
-      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
-      dispatch({
-        type: INTERNAL_NODE_LIST_SAGA,
-        payload: { request: requestObj, nodeViewState: 'list', isMiddlePaneList: false }
-      });
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'PARENTLISTPOPUP', popupMode: 'NODECREATE' }
-      });
-    }
     if (labelName === 'assessees' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,

@@ -7,21 +7,30 @@ import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordi
 import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import { ASSESSEE_SIGN_ON, SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
+import {
+  ASSESSEE_SIGN_ON,
+  INTERNAL_NODE_LIST_SAGA,
+  LOADER_START,
+  SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT,
+  SET_POPUP_VALUE,
+  SET_STATUS_POPUP_VALUE
+} from '../../actionType';
+import { makeInternalNodeObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement,informationFramework,informationSetup } = responseObject;
+  const { countPage, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { informationEngagement, informationFramework, informationSetup } = responseObject;
   const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  console.log('informationFramework',informationFramework);
-  
-  console.log('informationSetup',informationSetup);
-  
+  console.log('informationFramework', informationFramework);
+
+  console.log('informationSetup', informationSetup);
+
   let ascendantAll = [];
   let ascendantPrimary = [];
   let ascendantSecondary = [];
@@ -71,7 +80,7 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
         });
       });
     }
-  }  
+  }
   let descendantAll = [];
   let descendantPrimary = [];
   let descendantSecondary = [];
@@ -274,7 +283,7 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
       isListCard: false
     }
   ];
-  
+
   const classificationList = [
     {
       id: 'a1',
@@ -285,9 +294,30 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
       innerAssociateList: [],
       innerInfo: 'No Information',
       isListCard: false
-      
     }
   ];
+  const reviseAllocation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
+    if (
+      labelName === 'nodes' &&
+      selectedBadgeName === 'ascendant' &&
+      innerSelectedBadgeName === 'primary'
+    ) {
+      let requestObj = makeInternalNodeObj(selectedAssociateInfo, 'active', 0, countPage);
+      dispatch({ type: LOADER_START });
+      dispatch({ type: SET_CORE_NODE_REVIEW_LIST_REQ_OBJECT, payload: requestObj });
+      dispatch({
+        type: INTERNAL_NODE_LIST_SAGA,
+        payload: { request: requestObj, nodeViewState: 'list', isMiddlePaneList: false }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'PARENTLISTPOPUP', popupMode: 'NODECREATE' }
+      });
+    }
+  };
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -332,17 +362,17 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
     }
   };
 
-  const reviseClassification=(e)=>{
+  const reviseClassification = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log('=====>', labelName);
-    if (labelName === 'classification') {      
+    if (labelName === 'classification') {
       dispatch({
         type: ASSESSEE_SIGN_ON,
         payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'NODECREATE' }
       });
     }
-  }
+  };
 
   return (
     <div
@@ -358,18 +388,21 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
-                    <>{
-                      ob.isMultiList?(
+                    <>
+                      {ob.isMultiList ? (
                         <DisplayPanelAccordianReviewListTwo
                           //onClickReview={reviewNode}
-                          //onClickRevise={reviseNode}
+                          onClickRevise={reviseAllocation}
                           accordianObject={ob}
                           mode={reviewMode}
                         />
-                      ):(                        
-                    <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
-                      )
-                    }
+                      ) : (
+                        <DisplayPanelAccordianReviewListOne
+                          className=""
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
+                      )}
                     </>
                   ) : (
                     <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
