@@ -150,7 +150,9 @@ const JobProfileGroupReviewList = (props) => {
   ];
   const secondaryOneIcon = [
     { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
-    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList },
+    { label: 'shared', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unshared', onClick: onClickFooter, Icon: FilterList }
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
@@ -214,6 +216,8 @@ const JobProfileGroupReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 // dataValue={item.informationAllocation.jobProfileGroup}
+                isShared={item?.jobProfileGroupShared}
+                shared={item.jobProfileGroupShared ? 'SHARED' : 'UNSHARED'}                
               />
             </div>
           );

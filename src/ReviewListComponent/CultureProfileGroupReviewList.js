@@ -151,7 +151,9 @@ const CultureProfileGroupReviewList = (props) => {
   ];
   const secondaryOneIcon = [
     { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
-    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList },
+    { label: 'shared', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unshared', onClick: onClickFooter, Icon: FilterList }
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
@@ -215,6 +217,8 @@ const CultureProfileGroupReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 // dataValue={item.informationAllocation.cultureProfileGroup}
+                isShared={item?.cultureProfileGroupShared}
+                shared={item.cultureProfileGroupShared ? 'SHARED' : 'UNSHARED'}
               />
             </div>
           );

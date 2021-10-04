@@ -4,6 +4,7 @@ import { isMobile } from 'react-device-detect';
 import Manuscript from '@material-ui/icons/Description';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
+import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
 import { ASSESSEE_SIGN_ON, SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../../actionType';
@@ -11,11 +12,113 @@ import { ASSESSEE_SIGN_ON, SET_POPUP_VALUE, SET_STATUS_POPUP_VALUE } from '../..
 const DisplayPaneThreeSectionOneAssociateNode = () => {
   // const [listExpand, setListExpand] = useState('');
   const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationEngagement } = responseObject;
+  const { informationEngagement,informationFramework,informationSetup } = responseObject;
   const dispatch = useDispatch();
   function capitalizeFirstLetter(string) {
     if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+  console.log('informationFramework',informationFramework);
+  
+  console.log('informationSetup',informationSetup);
+  
+  let ascendantAll = [];
+  let ascendantPrimary = [];
+  let ascendantSecondary = [];
+  if (informationFramework && informationFramework.associateNodeAscendant) {
+    if (
+      informationFramework.associateNodeAscendant.associateNodeAscendantAll &&
+      informationFramework.associateNodeAscendant.associateNodeAscendantAll.length > 0
+    ) {
+      informationFramework.associateNodeAscendant.associateNodeAscendantAll.forEach((ob) => {
+        ascendantAll.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (informationFramework.associateNodeAscendant.associateNodeAscendantPrimary) {
+      let p1 = informationFramework.associateNodeAscendant.associateNodeAscendantPrimary;
+      if (Array.isArray(p1)) {
+        ascendantPrimary.push({
+          id: p1[0].id,
+          textOne: p1[0]?.informationBasic?.associateNodeName || '',
+          textTwo: p1[0]?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+        ascendantPrimary.push(p1[0]);
+      } else {
+        ascendantPrimary.push({
+          id: p1.id,
+          textOne: p1?.informationBasic?.associateNodeName || '',
+          textTwo: p1?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      }
+    }
+    if (
+      informationFramework.associateNodeAscendant.associateNodeAscendantSecondary &&
+      informationFramework.associateNodeAscendant.associateNodeAscendantSecondary.length > 0
+    ) {
+      informationFramework.associateNodeAscendant.associateNodeAscendantSecondary.forEach((ob) => {
+        ascendantSecondary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+  }  
+  let descendantAll = [];
+  let descendantPrimary = [];
+  let descendantSecondary = [];
+  if (informationFramework && informationFramework.associateNodeDescendant) {
+    if (
+      informationFramework.associateNodeDescendant.associateNodeDescendantAll &&
+      informationFramework.associateNodeDescendant.associateNodeDescendantAll.length > 0
+    ) {
+      informationFramework.associateNodeDescendant.associateNodeDescendantAll.forEach((ob) => {
+        descendantAll.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateNodeDescendant.associateNodeDescendantPrimary &&
+      typeof informationFramework.associateNodeDescendant.associateNodeDescendantPrimary !==
+        'string' &&
+      informationFramework.associateNodeDescendant.associateNodeDescendantPrimary.length > 0
+    ) {
+      informationFramework.associateNodeDescendant.associateNodeDescendantPrimary.forEach((ob) => {
+        descendantPrimary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateNodeName || '',
+          textTwo: ob?.informationBasic?.associateNodeDescription || '',
+          status: ''
+        });
+      });
+    }
+    if (
+      informationFramework.associateNodeDescendant.associateNodeDescendantSecondary &&
+      informationFramework.associateNodeDescendant.associateNodeDescendantSecondary.length > 0
+    ) {
+      informationFramework.associateNodeDescendant.associateNodeDescendantSecondary.forEach(
+        (ob) => {
+          descendantSecondary.push({
+            id: ob.id,
+            textOne: ob?.informationBasic?.associateNodeName || '',
+            textTwo: ob?.informationBasic?.associateNodeDescription || '',
+            status: ''
+          });
+        }
+      );
+    }
   }
   const list2 = [
     {
@@ -56,6 +159,50 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
       ],
       innerInfo: 'No Information',
       isListCard: true
+    },
+    {
+      id: 'a6',
+      labelTextOneOne: 'nodes',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'ascendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: ascendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: ascendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: ascendantSecondary
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'descendant',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'all',
+              innerList: descendantAll
+            },
+            {
+              labelTextTwoBadge: 'primary',
+              innerList: descendantPrimary
+            },
+            {
+              labelTextTwoBadge: 'secondary',
+              innerList: descendantSecondary
+            }
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true,
+      isReviewLink: true,
+      isMultiList: true
     }
   ];
   const list3 = [
@@ -127,6 +274,20 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
       isListCard: false
     }
   ];
+  
+  const classificationList = [
+    {
+      id: 'a1',
+      textOneOne:
+        informationSetup?.associateNodeClassification?.associateNodeClassificationPrimary ||
+        'No Information',
+      labelTextOneOne: 'classification',
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false
+      
+    }
+  ];
   const reviseEngagement = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -171,6 +332,18 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
     }
   };
 
+  const reviseClassification=(e)=>{
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('=====>', labelName);
+    if (labelName === 'classification') {      
+      dispatch({
+        type: ASSESSEE_SIGN_ON,
+        payload: { isPopUpValue: 'CLASSIFICATIONLISTPOPUP', popupMode: 'NODECREATE' }
+      });
+    }
+  }
+
   return (
     <div
       style={{
@@ -185,7 +358,19 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
               return (
                 <div key={ob.id}>
                   {ob.isListCard ? (
+                    <>{
+                      ob.isMultiList?(
+                        <DisplayPanelAccordianReviewListTwo
+                          //onClickReview={reviewNode}
+                          //onClickRevise={reviseNode}
+                          accordianObject={ob}
+                          mode={reviewMode}
+                        />
+                      ):(                        
                     <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      )
+                    }
+                    </>
                   ) : (
                     <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                   )}
@@ -209,6 +394,30 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
                   ) : (
                     <DisplayPanelAccordianInformation
                       onClickRevise={reviseEngagement}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+        </div>
+        <div className={'containerPadding'}>
+          <Paper className={'dossierContainerTop'}>
+            {classificationList.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <DisplayPanelAccordianReviewListOne
+                      onClickRevise={reviseClassification}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={reviseClassification}
                       accordianObject={ob}
                       mode={reviewMode}
                     />

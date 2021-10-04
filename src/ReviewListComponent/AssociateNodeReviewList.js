@@ -241,7 +241,9 @@ const AssociateNodeReviewList = (props) => {
                         id={index}
                         tag={item.id}
                         isSelectedReviewList={middlePaneSelectedValue === item.id}
-                        status={item.informationEngagement.associateNodeStatus}
+                        //status={item.informationEngagement.associateNodeStatus}
+                        status={FilterMode==='associateNodeDistinctactive'?item?.informationSetup?.associateNodeClassification?.associateNodeClassificationPrimary:
+                          item.informationEngagement.associateNodeStatus}
                         actualStatus={item.informationEngagement.associateNodeStatus}
                         textOne={item.informationBasic.associateNodeName}
                         textTwo={item.informationBasic.associateNodeDescription}

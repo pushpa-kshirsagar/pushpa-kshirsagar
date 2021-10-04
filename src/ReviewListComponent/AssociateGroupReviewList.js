@@ -152,7 +152,9 @@ const AssociateGroupReviewList = (props) => {
   ];
   const secondaryOneIcon = [
     { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
-    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList },
+    { label: 'shared', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unshared', onClick: onClickFooter, Icon: FilterList }
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
@@ -212,6 +214,8 @@ const AssociateGroupReviewList = (props) => {
                 onClickCheckBox={(event) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
+                isShared={item?.associateGroupShared}
+                shared={item?.associateGroupShared ? 'SHARED' : 'UNSHARED'}
               />
             </div>
           );

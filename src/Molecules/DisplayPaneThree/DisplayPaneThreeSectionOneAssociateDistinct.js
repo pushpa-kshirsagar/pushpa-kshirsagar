@@ -1451,14 +1451,14 @@ const DisplayPaneThreeSectionOneAssociate = () => {
             },
             {
               labelTextTwoBadge: 'country',
-              innerLabelBadgeList: country || 'No',
+              innerLabelBadgeList: country || 'No Information',
               //innerLabelreset: "country",
               IconOne: BlurOnIcon
               //setUpAssociateModule?.associateCountry?.associateCountryName || 'No'
             },
             {
               labelTextTwoBadge: 'currency',
-              innerLabelBadgeList: currency || 'No',
+              innerLabelBadgeList: currency || 'No Information',
               IconOne: BlurOnIcon
             },
             {

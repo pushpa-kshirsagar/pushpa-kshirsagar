@@ -7,6 +7,8 @@ import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
 import FlagIcon from '@material-ui/icons/Flag';
 import './ReviewList.css';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import IosShareIcon from '@material-ui/icons/Share';
+import ShareIcon from '../../images/ios_share_black_24dp.svg';
 const ReviewList = (props) => {
   const {
     textTwo = '',
@@ -30,7 +32,8 @@ const ReviewList = (props) => {
     dataValue = '',
     flagedValue = '',
     shared = '',
-    className
+    className,
+    isShared = false
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
@@ -107,6 +110,16 @@ const ReviewList = (props) => {
                 style={{ textAlign: 'center' }}
               >
                 {isAlertActive ? <Notifications className={'selectionIcon'} /> : null}
+
+                {/* {isShared ? <IosShareIcon className={'selectionIcon'} /> : null} */}
+                {isShared ? (
+                  <img
+                    alt={'shared'}
+                    src={ShareIcon}
+                    className={'selectionIcon'}
+                    style={{ height: '12px', width: '12pu ' }}
+                  />
+                ) : null}
                 <InputLabel
                   className={['iconsFooterLabelDefault', 'AssesseeNotifyStatusLabel'].join(' ')}
                 >

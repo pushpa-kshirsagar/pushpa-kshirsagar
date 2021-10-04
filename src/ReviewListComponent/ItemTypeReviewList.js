@@ -125,7 +125,9 @@ const ItemTypeReviewList = (props) => {
   ];
   const secondaryOneIcon = [
     { label: 'bespoke', onClick: onClickFooter, Icon: FilterList },
-    { label: 'generic', onClick: onClickFooter, Icon: FilterList }
+    { label: 'generic', onClick: onClickFooter, Icon: FilterList },
+    { label: 'shared', onClick: onClickFooter, Icon: FilterList },
+    { label: 'unshared', onClick: onClickFooter, Icon: FilterList }
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
@@ -192,6 +194,7 @@ const ItemTypeReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 // dataValue={item.informationAllocation.itemGroup}
+                isShared={item?.itemTypeShared}
               />
             </div>
           );
