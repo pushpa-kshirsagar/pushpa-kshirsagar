@@ -133,32 +133,38 @@ function* workerReviseItemGroupInfoSaga(data) {
             createMode
           }
         });
+      } else {
+        yield put({
+          type: SET_POPUP_VALUE,
+          payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+        });
+        yield put({ type: LOADER_STOP });
       }
-      if(createMode===''){
+      if (createMode === '') {
         yield put({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: [] });
-      yield put({
-        type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-        payload: []
-      });
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'reviewListDistinctData', value: [] }
-      });
-      yield put({
-        type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
-        payload: {
-          HeaderOne: 'items',
-          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-          middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-          isMiddlePaneList: true
-        }
-      });      
-    }      
+        yield put({
+          type: SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+          payload: []
+        });
+        yield put({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'reviewListDistinctData', value: [] }
+        });
+        yield put({
+          type: GET_ITEM_GROUP_REVIEW_LIST_SAGA,
+          payload: {
+            HeaderOne: 'items',
+            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
+            isMiddlePaneList: true
+          }
+        });
+      }
       // if (createMode === '') {
-     
+
       // yield put({
       //   type: GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
       //   payload: {

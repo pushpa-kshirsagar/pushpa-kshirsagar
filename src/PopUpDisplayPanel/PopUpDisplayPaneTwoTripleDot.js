@@ -934,6 +934,25 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           payload: { badgeValue: dataVal, keyValue: keyVal }
         });
       }
+    } else if (middlePaneHeader === 'associate') {
+      if (keyVal === 'distinct' && popupHeaderOneBadgeOne === 'nodes') {
+        getInternalNodeApiCall(
+          selectedAssociateInfo,
+          secondaryOptionCheckValue,
+          countPage,
+          dispatch,
+          'nodes',
+          '',
+          'hierarchy',
+          'associate'
+        );
+        dispatch({ type: POPUP_CLOSE });
+      } else {
+        dispatch({
+          type: SET_MIDDLEPANE_SECONDARY_OPTION,
+          payload: { badgeValue: dataVal, keyValue: keyVal }
+        });
+      }
     } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,

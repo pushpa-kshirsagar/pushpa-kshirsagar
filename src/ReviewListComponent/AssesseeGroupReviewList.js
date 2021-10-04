@@ -204,6 +204,7 @@ const AssesseeGroupReviewList = (props) => {
                 textOne={item.informationBasic.assesseeGroupName}
                 textTwo={item.informationBasic.assesseeGroupDescription}
                 isTooltipActive={false}
+                isAlertActive={true}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item.id)}
