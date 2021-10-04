@@ -29,6 +29,8 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   //   if (!string) return '';
   //   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   // }
+
+  const {informationFramework}=responseObject;
     let itemList = [];
   if (relatedReviewListPaneThree) {
     itemList = relatedReviewListPaneThree?.item || [];
@@ -56,10 +58,40 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: itemArray
+        },
+        {
+          labelTextOneOneBadge:'label',
+          innerList:[]
+        },
+        {
+          labelTextOneOneBadge:'template',
+          innerList:[]
         }
       ],
       innerInfo: 'No Information',
       isListCard: true
+    }
+  ];
+
+  const clusterList = [
+    {
+      id: 'a1',
+      textOneOne :informationFramework?.itemGroupitemFrameworkOneCluster?.itemGroupitemFrameworkOneClusterPrimaryLabel || 'No Information',
+      labelTextOneOne: 'cluster',
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false
+    }
+  ];
+
+  const scaleList = [
+    {
+      id: 'a1',
+      textOneOne :informationFramework?.itemGroupitemFrameworkOneScale?.itemGroupitemFrameworkOneScaleLabel || 'No Information',      
+      labelTextOneOne: 'scale',
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      isListCard: false
     }
   ];
 
@@ -103,6 +135,17 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
     }
   };
 
+  const onClickReviseCluster=(e)=>{
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+  }
+
+  
+  const onClickReviseScale=(e)=>{
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+  }
+
   return (
     <div
       style={{
@@ -111,7 +154,29 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
       }}
     >
       <>
-        <div className={'containerPadding'}>
+        <div className={'containerPadding'}>          
+          <Paper className={'dossierContainerTop'}>
+            {clusterList.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <DisplayPanelAccordianReviewListOne
+                      onClickRevise={onClickReviseCluster}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={onClickReviseCluster}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
           <Paper className={'dossierContainerTop'}>
             {list2.map((ob) => {
               return (
@@ -126,6 +191,28 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
                   ) : (
                     <DisplayPanelAccordianInformation
                       onClickRevise={onclickReviseItem}
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </Paper>
+          <Paper className={'dossierContainerTop'}>
+            {scaleList.map((ob) => {
+              return (
+                <div key={ob.id}>
+                  {ob.isListCard ? (
+                    <DisplayPanelAccordianReviewListOne
+                      onClickRevise={onClickReviseScale}
+                      className=""
+                      accordianObject={ob}
+                      mode={reviewMode}
+                    />
+                  ) : (
+                    <DisplayPanelAccordianInformation
+                      onClickRevise={onClickReviseScale}
                       accordianObject={ob}
                       mode={reviewMode}
                     />
