@@ -58,12 +58,7 @@ const initialState = {
     informationFramework: {
       itemFrameworkOne: {
         itemFrameworkOneAlignment: '',
-        itemFrameworkOneCluster: [
-          {
-            itemFrameworkOneClusterPrimaryLabel: '',
-            itemFrameworkOneClusterPrimaryPolarity: ''
-          }
-        ],
+        itemFrameworkOneCluster:[],
         itemFrameworkOneLevel: null,
         itemFrameworkOneBlank: '',
         itemFrameworkOneExplanation: {

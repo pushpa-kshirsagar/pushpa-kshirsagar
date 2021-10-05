@@ -36,7 +36,7 @@ const PopUpItemFramework = (props) => {
   const [classification, setclassification] = useState([]);
   const [level, setlevel] = useState(null);
   const [polarity, setpolarity] = useState('');
-  const [score, setscore] = useState();
+  const [score, setscore] = useState(null);
   const [scale, setscale] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
@@ -49,10 +49,19 @@ const PopUpItemFramework = (props) => {
       });
       setscore(subques[0]?.itemFrameworkOneSection?.itemFrameworkOneScore);
     }
-  }, [subQuestionId]);
+    if (itemFrameworkOne.itemFrameworkOneCluster.length > 0) {
+      let cluster = [];
+      itemFrameworkOne.itemFrameworkOneCluster.map((cc) => {
+        cluster.push(cc.itemFrameworkOneClusterPrimaryLabel);
+      });
+      setclassification(cluster);
+    }
+    setlevel(itemFrameworkOne.itemFrameworkOneLevel);
+    setpolarity(itemFrameworkOne.itemFrameworkOnePolarity);
+    settime(itemFrameworkOne.itemFrameworkOneTime);
+  }, [subQuestionId, itemFrameworkOne.itemFrameworkOneCluster]);
   const onChangeCluster = (event) => {
     const { value } = event.target;
-    console.log('typeof value', typeof value);
     setclassification(typeof value === 'string' ? value.split(',') : value);
   };
   const handleClick = () => {
