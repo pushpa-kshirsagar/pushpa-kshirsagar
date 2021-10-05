@@ -3112,20 +3112,6 @@ const PopUpSignOnAssociate = () => {
         nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-
-      <PopUpPicture
-        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_PICTURE_POPUP'}
-        headerPanelColour={'genericOne'}
-        headerOne={'associate'}
-        headerOneBadgeOne={'setup'}
-        inputHeader={'associates'}
-        inputHeaderBadgeOne={'currency'}
-        basicInfo={associateInfo?.associateCurrency}
-        actualLableValue={'associateCurrencySymbol'}
-        typeOfSetObject={UPDATE_ASSOCIATE_CURRENCY_INFO}
-        nextPopUpValue={''}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_COUNTRY_NAME_POPUP'}
         tag={'associateCountryTag'}
@@ -3210,6 +3196,38 @@ const PopUpSignOnAssociate = () => {
         nextPopUpValue={''}
         basicInfo={associateInfo?.associateLanguage || {}}
         typeOfSetObject={UPDATE_ASSOCIATE_LANGUAGE_INFO}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      
+      {/* <PopUpPicture
+        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_PICTURE_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'currency'}
+        basicInfo={associateInfo?.associateCurrency}
+        actualLableValue={'associateCurrencySymbol'}
+        typeOfSetObject={UPDATE_ASSOCIATE_CURRENCY_INFO}
+        nextPopUpValue={''}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
+
+      <PopUpTextField
+        isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_PICTURE_POPUP'}
+        //label={'primary'}
+        headerPanelColour={'genericOne'}
+        inputHeader={'associates'}
+        inputHeaderBadgeOne={'currency'}
+        inputHeaderBadgeTwo={''}
+        type={'text'}
+        headerOne={'associate'}
+        headerOneBadgeOne={'setup'}
+        isRequired={false}
+        actualLableValue={'associateCurrencySymbol'}
+        basicInfo={associateInfo?.associateCurrency || {}}
+        typeOfSetObject={UPDATE_ASSOCIATE_CURRENCY_INFO}
+        nextPopUpValue={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
