@@ -124,6 +124,14 @@ const AssesseeRoleDistinctReviewList = (props) => {
         ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
         : obj
     );
+    let tempArr = [];
+    let classification = e.currentTarget.getAttribute('data-shared');
+   
+    popupContentArrValue.map((element)=>{
+      if (classification === 'Bespoke' && element.data === 'share')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    })
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -135,7 +143,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
         popupContentArrValue:
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : popupContentArrValue,
+            : tempArr,//popupContentArrValue,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
@@ -149,7 +157,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
         value:
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : popupContentArrValue
+            : tempArr//popupContentArrValue
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -174,7 +182,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
                 //status={item.informationEngagement.assesseeRoleStatus}
                 status={FilterMode === 'assesseeRoleDistinctactive' ? item.informationSetup?.assesseeRoleClassification?.assesseeRoleClassificationPrimary:
                 item.informationEngagement.assesseeRoleStatus}
-                shared={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
+                //shared={item.assesseeRoleShared ? 'SHARED' : 'UNSHARED'}
                 actualStatus={item.informationEngagement.assesseeRoleStatus}
                 textOne={assesseeRole(item.informationBasic.assesseeRoleName)}
                 textTwo={item.informationBasic.assesseeRoleDescription}
@@ -186,6 +194,7 @@ const AssesseeRoleDistinctReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 isShared={item?.assesseeRoleShared}
+                shared={item.informationSetup?.assesseeRoleClassification?.assesseeRoleClassificationPrimary}
               />
             </div>
           );

@@ -167,13 +167,20 @@ const ItemGroupReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let classification = e.currentTarget.getAttribute('data-shared');
     let optArr = [];
+    let tempArr = [];    
     let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
       obj.data === 'assessees'
         ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
         : obj
     );
     optArr = popupContentArrValue;
+    optArr.map((element)=>{
+      if (classification === 'Bespoke' && element.data === 'share')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    })
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -183,7 +190,7 @@ const ItemGroupReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue:
-          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr,//optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -193,7 +200,7 @@ const ItemGroupReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr
+        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr//optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -225,7 +232,8 @@ const ItemGroupReviewList = (props) => {
                 }}
                 // dataValue={item.informationAllocation.itemGroup}
                 isShared={item?.itemGroupShared}
-                shared={item.itemGroupShared ? 'SHARED' : 'UNSHARED'}
+                //shared={item.itemGroupShared ? 'SHARED' : 'UNSHARED'}
+                shared={item?.informationSetup?.itemGroupClassification?.itemGroupClassificationPrimary}
               />
             </div>
           );

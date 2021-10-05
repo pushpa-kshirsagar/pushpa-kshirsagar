@@ -158,6 +158,13 @@ const AssociateGroupReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let tempArr = [];
+    let classification = e.currentTarget.getAttribute('data-shared');   
+    ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((element)=>{
+      if (classification === 'Bespoke' && element.data === 'share')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    })
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -169,7 +176,7 @@ const AssociateGroupReviewList = (props) => {
         popupContentArrValue:
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+            : tempArr,//ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }
@@ -181,7 +188,7 @@ const AssociateGroupReviewList = (props) => {
         value:
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+            : tempArr//ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -215,8 +222,10 @@ const AssociateGroupReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 isShared={item?.associateGroupShared}
-                shared={item?.associateGroupShared ? 'SHARED' : 'UNSHARED'}
-              />
+                //shared={item?.associateGroupShared ? 'SHARED' : 'UNSHARED'}
+                shared={item?.informationSetup?.associateGroupClassification
+                  ?.associateGroupClassificationPrimary}
+                />
             </div>
           );
         })}

@@ -2203,6 +2203,125 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         };
         shareVal = 'jobProfileType';
       }
+      // if (typeOfMiddlePaneList === 'assesseesGroupDistinctReviewList') {
+      //   reqBody = {
+      //         assesseeId: selectedAssociateInfo?.assesseeId,
+      //         associateId:
+      //           selectedAssociateInfo?.associate?.informationEngagement.associateTag
+      //             .associateTagPrimary,
+      //         assesseeGroupShare: typeShare,
+      //         assesseeGroupShareInformation: [],
+      //         assesseeGroupShared: [
+      //           {
+      //             assesseeGroupId: selectedTagValue,
+      //             // assesseeRoleGroupId: selectedTagGroupId
+      //           }
+      //         ]
+      //       };
+      //       shareVal = 'assesseeGroup';        
+      // }
+      // if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
+      //     reqBody = {
+      //           assesseeId: selectedAssociateInfo?.assesseeId,
+      //           associateId:
+      //             selectedAssociateInfo?.associate?.informationEngagement.associateTag
+      //               .associateTagPrimary,
+      //           assessmentGroupShare: typeShare,
+      //             assessmentGroupShareInformation: [],
+      //             assessmentGroupShared: [
+      //             {
+      //               assessmentGroupId: selectedTagValue,
+      //               // assesseeRoleGroupId: selectedTagGroupId
+      //             }
+      //           ]
+      //         };
+      //         shareVal = 'assessmentGroup';
+      // }
+      // if (typeOfMiddlePaneList === 'assignmentsGroupDistinctReviewList') {
+      //   reqBody = {
+      //         assesseeId: selectedAssociateInfo?.assesseeId,
+      //         associateId:
+      //           selectedAssociateInfo?.associate?.informationEngagement.associateTag
+      //             .associateTagPrimary,
+      //             assignmentGroupShare: typeShare,
+      //             assignmentGroupShareInformation: [],
+      //             assignmentGroupShared: [
+      //           {
+      //             assignmentGroupId: selectedTagValue,
+      //             // assesseeRoleGroupId: selectedTagGroupId
+      //           }
+      //         ]
+      //       };
+      //       shareVal = 'assignmentGroup';
+      // }
+      // if (typeOfMiddlePaneList === 'associatesGroupDistinctReviewList') {
+      //   reqBody = {
+      //         assesseeId: selectedAssociateInfo?.assesseeId,
+      //         associateId:
+      //           selectedAssociateInfo?.associate?.informationEngagement.associateTag
+      //             .associateTagPrimary,
+      //             associateGroupShare: typeShare,
+      //             associateGroupShareInformation: [],
+      //             associateGroupShared: [
+      //           {
+      //             associateGroupId: selectedTagValue,
+      //             // assesseeRoleGroupId: selectedTagGroupId
+      //           }
+      //         ]
+      //       };
+      //       shareVal = 'associateGroup';
+      // }
+      // if (typeOfMiddlePaneList === 'cultureProfilesGroupDistinctReviewList') {
+      //   reqBody = {
+      //         assesseeId: selectedAssociateInfo?.assesseeId,
+      //         associateId:
+      //           selectedAssociateInfo?.associate?.informationEngagement.associateTag
+      //             .associateTagPrimary,
+      //             cultureProfileGroupShare: typeShare,
+      //             cultureProfileGroupShareInformation: [],
+      //             cultureProfileGroupShared: [
+      //           {
+      //             cultureProfileGroupId: selectedTagValue,
+      //             // assesseeRoleGroupId: selectedTagGroupId
+      //           }
+      //         ]
+      //       };
+      //       shareVal = 'cultureProfileGroup';
+      // }
+      // if (typeOfMiddlePaneList === 'jobProfilesGroupDistinctReviewList') {
+      //   reqBody = {
+      //         assesseeId: selectedAssociateInfo?.assesseeId,
+      //         associateId:
+      //           selectedAssociateInfo?.associate?.informationEngagement.associateTag
+      //             .associateTagPrimary,
+      //             jobProfileGroupShare: typeShare,
+      //             jobProfileGroupShareInformation: [],
+      //             jobProfileGroupShared: [
+      //           {
+      //             jobProfileGroupId: selectedTagValue,
+      //             // assesseeRoleGroupId: selectedTagGroupId
+      //           }
+      //         ]
+      //       };
+      //       shareVal = 'jobProfileGroup';
+      // }
+      // if (typeOfMiddlePaneList === 'itemsGroupDistinctReviewList') {
+      //   reqBody = {
+      //         assesseeId: selectedAssociateInfo?.assesseeId,
+      //         associateId:
+      //           selectedAssociateInfo?.associate?.informationEngagement.associateTag
+      //             .associateTagPrimary,
+      //             itemGroupShare: typeShare,
+      //             itemGroupShareInformation: [],
+      //             itemGroupShared: [
+      //           {
+      //             itemGroupId: selectedTagValue,
+      //             // assesseeRoleGroupId: selectedTagGroupId
+      //           }
+      //         ]
+      //       };
+      //       shareVal = 'itemGroup';
+      // }
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'middlePaneSelectedValue', value: selectedTagValue }
