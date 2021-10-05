@@ -51,7 +51,7 @@ export const SelectField = (props) => {
                     className={'selectMenu'}
                   >
                     {/* <div>{createNameWithBadge(option[name])}</div> */}
-                    <div>{`${option.name} ${
+                    <div>{`${(option.name && option.name) || option[mappingValue]} ${
                       option.description ? `(${option.description})` : ''
                     }`}</div>
                   </MenuItem>

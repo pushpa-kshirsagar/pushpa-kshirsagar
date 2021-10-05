@@ -233,9 +233,94 @@ function* workerReviewInfoItemSaga(data) {
         itemFrameworkOneType = '',
         itemFrameworkOneWeightage = '',
         itemFrameworkOneSection = [],
-        itemFrameworkOneScale = []
+        itemFrameworkOneScale = [],
+        itemFrameworkOneCluster = [],
+        itemFrameworkOneGroupCluster = [],
       } = informationFramework?.itemFrameworkOne;
-
+      let reviseSetting = {
+        blankState: true,
+        classificationState: true,
+        levelState: true,
+        polarityState: true,
+        scaleState: true,
+        scoreState: true,
+        timeState: true,
+        weightageState: true,
+        noOfItemState: true,
+        noOfResponseState: true
+      };
+      if (itemFrameworkOneType === '61090cace50cf61d5eb440c9') {
+        // "Likert-Scale"
+        reviseSetting = {
+          blankState: false,
+          classificationState: true,
+          levelState: true,
+          polarityState: true,
+          scaleState: true,
+          scoreState: false,
+          timeState: true,
+          weightState: true,
+          noOfItemState: true,
+          noOfResponseState: false
+        };
+      }
+      if (itemFrameworkOneType === '61090cace50cf61d5eb440ce') {
+        //"Response-Choice (Single-Select)"
+        reviseSetting = {
+          blankState: false,
+          classificationState: false,
+          levelState: true,
+          polarityState: false,
+          scaleState: false,
+          scoreState: true,
+          timeState: true,
+          weightState: false,
+          noOfItemState: false,
+          noOfResponseState: true
+        };
+      }
+      if (itemFrameworkOneType === '61090cace50cf61d5eb440c4') {
+        //"Fill-in-the-Blank (Response-Choice)"
+        reviseSetting = {
+          blankState: true,
+          classificationState: false,
+          levelState: true,
+          polarityState: false,
+          scaleState: false,
+          scoreState: true,
+          timeState: true,
+          weightState: false,
+          noOfItemState: false,
+          noOfResponseState: true
+        };
+      }
+      if (itemFrameworkOneType === '61090cace50cf61d5eb440cc' || itemFrameworkOneType === '61090cace50cf61d5eb440cd') {
+        //"Response (Long)","Response (Short)"
+        reviseSetting = {
+          blankState: false,
+          classificationState: false,
+          levelState: true,
+          polarityState: false,
+          scaleState: false,
+          scoreState: true,
+          timeState: true,
+          weightState: false,
+          noOfItemState: false,
+          noOfResponseState: false
+        };
+      }
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'itemConfigStates', value: reviseSetting }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneGroupCluster', value: itemFrameworkOneGroupCluster }
+      });
+      yield put({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: { stateName: 'itemFrameworkOneCluster', value: itemFrameworkOneCluster }
+      });
       yield put({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: { stateName: 'itemFrameworkOneScale', value: itemFrameworkOneScale }
@@ -349,7 +434,7 @@ function* workerReviseInfoItemSaga(data) {
   try {
     const userResponse = yield call(itemReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
-      const { createMode='' } = data.payload;
+      const { createMode = '' } = data.payload;
       yield put({
         type: SET_DISPLAY_PANE_THREE_STATE,
         payload: {
@@ -360,7 +445,7 @@ function* workerReviseInfoItemSaga(data) {
           createMode
         }
       });
-      if(createMode===''){
+      if (createMode === '') {
         yield put({
           type: SET_DISPLAY_TWO_SINGLE_STATE,
           payload: { stateName: 'reviewListDistinctData', value: [] }

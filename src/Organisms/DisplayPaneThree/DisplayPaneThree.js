@@ -908,13 +908,15 @@ export const DisplayPaneThree = () => {
         associateNode: {
           id,
           informationBasic: nodeInformation.informationBasic,
-          informationFramework: {
-            associateNodeAscendant: {
-              associateNodeAscendantPrimary:
-                nodeInformation.informationFramework.associateNodeAscendant
-                  .associateNodeAscendantPrimary[0]
-            }
-          }
+          // informationFramework: {
+          //   associateNodeAscendant: {
+          //     associateNodeAscendantPrimary:
+          //       nodeInformation.informationFramework.associateNodeAscendant
+          //         .associateNodeAscendantPrimary.id
+          //   }
+          // }
+          informationFramework: nodeInformation.informationFramework,
+          informationSetup: nodeInformation.informationSetup
         }
       };
       let associateNodeReqBody = null;
@@ -1688,7 +1690,8 @@ export const DisplayPaneThree = () => {
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         //associateId: id,
-        associateId:selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
         item: {
           id,
           informationBasic,
@@ -1899,6 +1902,7 @@ export const DisplayPaneThree = () => {
         value: 'assessee'
       }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssessment = () => {
     console.log('ON CLICK CREATE ASSESSMENT');
@@ -1911,6 +1915,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
 
   const onClickCreateCultureProfile = () => {
@@ -1924,6 +1929,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CULTURECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateJobProfile = () => {
     console.log('ON CLICK CREATE CultureProfile');
@@ -1936,6 +1942,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSESSMENTCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
 
   const onClickCreateAssignment = () => {
@@ -1949,6 +1956,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
 
   const onClickCreateAssesseeGroup = () => {
@@ -1958,6 +1966,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesGROUPCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssociateGroup = () => {
     console.log('ON CLICK CREATE ASSOCIATE GROUP');
@@ -1966,6 +1975,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesGROUPCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssessmentGroup = () => {
     console.log('ON CLICK CREATE ASSESSMENT GROUP');
@@ -1974,6 +1984,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assessmentsGROUPCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateCultureProfileGroup = () => {
     dispatch({ type: CLEAR_GROUP_REDUCER_STATE });
@@ -1981,6 +1992,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture profilesGROUPCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateJobProfileGroup = () => {
     console.log('ON CLICK CREATE Job GROUP');
@@ -1989,6 +2001,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesTYPECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateCultureProfileType = () => {
     console.log('ON CLICK CREATE Culture Type');
@@ -1997,6 +2010,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'culture profilesTYPECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateJobProfileType = () => {
     console.log('ON CLICK CREATE Job Type');
@@ -2005,6 +2019,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'job profilesTYPECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
 
   const onClickCreateItemGroup = () => {
@@ -2014,6 +2029,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'itemsGROUPCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
 
   const onClickCreateAssignmentGroup = () => {
@@ -2023,6 +2039,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assignmentsGROUPCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssignmentType = () => {
     console.log('ON CLICK CREATE ASSIGNMENT TYPE');
@@ -2031,6 +2048,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assignmentsTYPECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssessmentType = () => {
     console.log('ON CLICK CREATE ASSESSMENT TYPE');
@@ -2039,6 +2057,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assessmentsTYPECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssesseeType = () => {
     console.log('ON CLICK CREATE ASSESSEE TYPE');
@@ -2047,6 +2066,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesTYPECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssociateType = () => {
     console.log('ON CLICK CREATE ASSOCIATE TYPE');
@@ -2055,6 +2075,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesTYPECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateItemType = () => {
     console.log('ON CLICK CREATE ASSOCIATE TYPE');
@@ -2063,6 +2084,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'itemsTYPECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
 
   const onClickCreateAssesseeRole = () => {
@@ -2072,6 +2094,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'assesseesROLECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateItem = () => {
     console.log('ON CLICK CREATE ITEM');
@@ -2080,6 +2103,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'ITEMCREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssociateRole = () => {
     console.log('ON CLICK CREATE ASSOCIATE ROLE');
@@ -2088,6 +2112,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'associatesROLECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const onClickCreateAssociateNode = () => {
     console.log('ON CLICK CREATE ASSOCIATE Node');
@@ -2096,6 +2121,7 @@ export const DisplayPaneThree = () => {
       type: SET_POPUP_VALUE,
       payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'NODECREATE' }
     });
+    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
 
   const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
