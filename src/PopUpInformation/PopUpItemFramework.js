@@ -8,17 +8,10 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  POPUP_CLOSE,
-  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-  SET_NEXT_POPUP
-} from '../actionType';
+import { POPUP_CLOSE, SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
-import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
-import { input } from 'aws-amplify';
 
 const PopUpItemFramework = (props) => {
-  const { popupMode } = useSelector((state) => state.PopUpReducer);
   const dispatch = useDispatch();
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
@@ -35,13 +28,12 @@ const PopUpItemFramework = (props) => {
     headerOneBadgeOne,
     headerOneBadgeTwo = '',
     choiceOb = null,
-    basicInfo,
     mode,
     isItemFramework = false,
     subQuestionId
   } = props;
   const [blank, setBlank] = useState('');
-  const [classification, setclassification] = useState('');
+  const [classification, setclassification] = useState([]);
   const [level, setlevel] = useState(null);
   const [polarity, setpolarity] = useState('');
   const [score, setscore] = useState();
@@ -58,6 +50,11 @@ const PopUpItemFramework = (props) => {
       setscore(subques[0]?.itemFrameworkOneSection?.itemFrameworkOneScore);
     }
   }, [subQuestionId]);
+  const onChangeCluster = (event) => {
+    const { value } = event.target;
+    console.log('typeof value', typeof value);
+    setclassification(typeof value === 'string' ? value.split(',') : value);
+  };
   const handleClick = () => {
     // alert(subQuestionId);
     console.log(
@@ -73,9 +70,9 @@ const PopUpItemFramework = (props) => {
     );
     if (isItemFramework) {
       let reviseCluster = [];
-      if (classification) {
+      if (classification.length > 0) {
         reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
-          return clust.itemFrameworkOneClusterPrimaryLabel === classification;
+          return classification.includes(clust.itemFrameworkOneClusterPrimaryLabel);
         });
       }
       dispatch({
@@ -206,9 +203,8 @@ const PopUpItemFramework = (props) => {
                 dataValue={'cluster'}
                 listSelect={itemFrameworkOne.itemFrameworkOneGroupCluster}
                 errorMsg={() => {}}
-                onChange={(e) => {
-                  setclassification(e.target.value);
-                }}
+                onChange={onChangeCluster}
+                isMultiSelect={true}
                 value={classification}
                 mappingValue={'itemFrameworkOneClusterPrimaryLabel'}
               />
@@ -247,25 +243,6 @@ const PopUpItemFramework = (props) => {
                   setpolarity(e.target.value);
                 }}
                 value={polarity}
-                mappingValue={'id'}
-              />
-            )}
-            {isItemFramework && itemConfigStates.scaleState && (
-              <SelectField
-                tag={'scale'}
-                label={'scale'}
-                dataValue={'scale'}
-                listSelect={[
-                  { id: '', name: '' },
-                  { id: 'Simple-Sample1', name: 'Simple Sample' },
-                  { id: 'Simple-Sample2', name: 'Simple Sample' },
-                  { id: 'Simple-Sample3', name: 'Simple Sample' }
-                ]}
-                errorMsg={() => {}}
-                onChange={(e) => {
-                  setscale(e.target.value);
-                }}
-                value={scale}
                 mappingValue={'id'}
               />
             )}

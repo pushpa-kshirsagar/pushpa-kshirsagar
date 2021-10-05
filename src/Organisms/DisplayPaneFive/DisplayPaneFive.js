@@ -314,7 +314,8 @@ export const DisplayPaneFive = () => {
     const { id } = responseObject;
     const reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,
-      associateId: selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       item: {
         id,
         informationBasic,
@@ -377,7 +378,7 @@ export const DisplayPaneFive = () => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
-          isPopUpValue: 'ITEM_CHOICE_FRAMEWORK_POPUP',
+          isPopUpValue: 'SUB_ITEM_FRAMEWORK_POPUP',
           popupMode: ''
         }
       });
@@ -704,8 +705,8 @@ export const DisplayPaneFive = () => {
       <Popup isActive={isPopUpValue === 'PASSAGE_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
-          headerOne={'passage'}
-          headerOneBadgeOne={''}
+          headerOne={'item'}
+          headerOneBadgeOne={'passage'}
           onClick={BackHandlerEvent}
           mode={''}
         />
@@ -1238,6 +1239,23 @@ export const DisplayPaneFive = () => {
         headerPanelColour={'genericOne'}
         headerOne={'response'}
         headerOneBadgeOne={'choice'}
+        headerOneBadgeTwo={'configuration'}
+        choiceOb={selectedChoiceObject}
+        inputHeader={''}
+        primaryheader={''}
+        primaryheaderTwo={''}
+        nextPopUpValue={''}
+        mode={'revise'}
+        subQuestionId={
+          data?.itemFrameworkOneTypeNameReference === 'Likert-Scale' &&
+          parseInt(subQuestionId[3]) + 1
+        }
+      />
+      <PopUpItemFramework
+        isActive={isPopUpValue === 'SUB_ITEM_FRAMEWORK_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'item'}
+        headerOneBadgeOne={''}
         headerOneBadgeTwo={'configuration'}
         choiceOb={selectedChoiceObject}
         inputHeader={''}

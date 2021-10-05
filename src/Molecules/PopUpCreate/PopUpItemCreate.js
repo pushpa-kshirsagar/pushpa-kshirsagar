@@ -74,6 +74,7 @@ const PopUpItemCreate = (props) => {
   const updateGroup = (e, stateName, actualStateName) => {
     let groupid = e.currentTarget.getAttribute('tag');
     let groupArr = itemInformation.informationAllocation[stateName][actualStateName];
+    setRequiredErrorMsg('');
     if (groupArr.includes(groupid)) {
       document.getElementById(groupid).style.backgroundColor = 'white';
       groupArr = groupArr.filter(function (number) {

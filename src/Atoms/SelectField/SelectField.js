@@ -7,9 +7,9 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  FormHelperText
+  FormHelperText,
+  Input
 } from '@material-ui/core';
-import { createNameWithBadge } from '../../Actions/StatusAction';
 
 export const SelectField = (props) => {
   const {
@@ -22,9 +22,10 @@ export const SelectField = (props) => {
     mappingValue,
     dataValue = '',
     labelBadgeOne = '',
+    isMultiSelect = false,
     name = 'name'
   } = props;
-
+  console.log('value', value && value.toString());
   return (
     <Fragment>
       <FormControl className={'selectFormText'}>
@@ -38,6 +39,9 @@ export const SelectField = (props) => {
           value={value}
           onChange={onChange}
           data-value={dataValue}
+          multiple={isMultiSelect}
+          renderValue={(selected) => selected.join(', ')}
+          input={<Input />}
           className={'selectFontAlign'}
         >
           {mappingValue
