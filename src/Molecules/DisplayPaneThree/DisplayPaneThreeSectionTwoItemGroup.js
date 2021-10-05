@@ -30,8 +30,8 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   //   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   // }
 
-  const {informationFramework}=responseObject;
-    let itemList = [];
+  const { informationFramework } = responseObject;
+  let itemList = [];
   if (relatedReviewListPaneThree) {
     itemList = relatedReviewListPaneThree?.item || [];
   }
@@ -45,53 +45,105 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
       status: ''
     });
   });
+  let clusterObj = [];
+  if (informationFramework) {
+    clusterObj = informationFramework?.itemGroupitemFrameworkOneCluster || [];
+  }
+  let clusterArray = [];
+  clusterObj.forEach((ob) => {
+    clusterArray.push({
+      textOne: ob.itemGroupitemFrameworkOneClusterPrimaryLabel || '',
+      textTwo: '',
+      status: ob.clusterQuestionCount || 0
+    });
+  });
 
-  const list2 = [
+  let polarityObj = [];
+  if (informationFramework) {
+    polarityObj = informationFramework?.itemGroupitemFrameworkOneCluster || [];
+  }
+  let polarityArray = [];
+  polarityObj.forEach((ob) => {
+    polarityArray.push({
+      textOne: ob.itemGroupitemFrameworkOneClusterPrimaryLabel || '',
+      textTwo: '',
+      status: ob.clusterQuestionCount || 0
+    });
+  });
+  console.log(polarityArray);
+  const clusterList = [
+    {
+      id: 'a1',
+      labelTextOneOne: 'cluster',
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: 'polarity',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: clusterArray
+        },
+        {
+          labelTextOneOneBadge: 'polarity',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'positive',
+              textTwo: '',
+              status: '20'
+            },
+            {
+              id: 'associate1',
+              textOne: 'negative',
+              textTwo: '',
+              status: '20'
+            },
+          ]
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    },
     {
       id: 'a1',
       labelTextOneOne: 'items',
       labelTextOneOneBadgeOne: '',
       labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
           innerList: itemArray
         },
         {
-          labelTextOneOneBadge:'label',
-          innerList:[]
+          labelTextOneOneBadge: 'label',
+          innerList: []
         },
         {
-          labelTextOneOneBadge:'template',
-          innerList:[]
+          labelTextOneOneBadge: 'template',
+          innerList: []
         }
       ],
       innerInfo: 'No Information',
       isListCard: true
-    }
-  ];
-
-  const clusterList = [
+    },
     {
       id: 'a1',
-      textOneOne :informationFramework?.itemGroupitemFrameworkOneCluster?.itemGroupitemFrameworkOneClusterPrimaryLabel || 'No Information',
-      labelTextOneOne: 'cluster',
-      innerAssociateList: [],
-      innerInfo: 'No Information',
-      isListCard: false
-    }
-  ];
-
-  const scaleList = [
-    {
-      id: 'a1',
-      textOneOne :informationFramework?.itemGroupitemFrameworkOneScale?.itemGroupitemFrameworkOneScaleLabel || 'No Information',      
       labelTextOneOne: 'scale',
-      innerAssociateList: [],
+      labelTextOneOneBadgeOne: 'distinct',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: polarityArray
+        },
+        {
+          labelTextOneOneBadge: '',
+          innerList: []
+        }
+      ],
       innerInfo: 'No Information',
-      isListCard: false
+      isListCard: true
     }
   ];
 
@@ -135,16 +187,15 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
     }
   };
 
-  const onClickReviseCluster=(e)=>{
+  const onClickReviseCluster = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-  }
+  };
 
-  
-  const onClickReviseScale=(e)=>{
+  const onClickReviseScale = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-  }
+  };
 
   return (
     <div
@@ -154,7 +205,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
       }}
     >
       <>
-        <div className={'containerPadding'}>          
+        <div className={'containerPadding'}>
           <Paper className={'dossierContainerTop'}>
             {clusterList.map((ob) => {
               return (
@@ -169,50 +220,6 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
                   ) : (
                     <DisplayPanelAccordianInformation
                       onClickRevise={onClickReviseCluster}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </Paper>
-          <Paper className={'dossierContainerTop'}>
-            {list2.map((ob) => {
-              return (
-                <div key={ob.id}>
-                  {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      onClickRevise={onclickReviseItem}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  ) : (
-                    <DisplayPanelAccordianInformation
-                      onClickRevise={onclickReviseItem}
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </Paper>
-          <Paper className={'dossierContainerTop'}>
-            {scaleList.map((ob) => {
-              return (
-                <div key={ob.id}>
-                  {ob.isListCard ? (
-                    <DisplayPanelAccordianReviewListOne
-                      onClickRevise={onClickReviseScale}
-                      className=""
-                      accordianObject={ob}
-                      mode={reviewMode}
-                    />
-                  ) : (
-                    <DisplayPanelAccordianInformation
-                      onClickRevise={onClickReviseScale}
                       accordianObject={ob}
                       mode={reviewMode}
                     />

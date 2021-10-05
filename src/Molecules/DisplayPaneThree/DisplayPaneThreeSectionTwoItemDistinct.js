@@ -27,32 +27,44 @@ const DisplayPaneThreeSectionTwoItem = () => {
   const datatypeItem = itemTypeList.find(
     (item) => item.id === responseObject.informationFramework?.itemFrameworkOne.itemFrameworkOneType
   );
+  let clusterObj = [];
+  if (itemFrameworkOne) {
+    const tempArr = itemFrameworkOne.itemFrameworkOneCluster;
+    tempArr.forEach((ob) => {
+      clusterObj.push({
+        textOne: ob.itemFrameworkOneClusterPrimaryLabel || '',
+        textTwo: '',
+        status: ''
+      });
+    });
+  }
+  let scaleObj = [];
+  if (itemFrameworkOne) {
+    const tempArr = itemFrameworkOne.itemFrameworkOneScale;
+    tempArr.forEach((ob) => {
+      scaleObj.push({
+        textOne: ob.itemFrameworkOneScaleLabel || '',
+        textTwo: '',
+        status: ''
+      });
+    });
+  }
   const frameworkList = [
-    // {
-    //   id: 'a1-blank',
-    //   labelTextOneOne: 'blank',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: '',
-    //       textOne: ''
-    //     }
-    //   ],
-    //   innerAssociateList: [],
-    //   innerInfo: 'No Information',
-    //   isListCard: false,
-    //   IconOne: null,
-    //   IconTwo: null
-    // },
     {
-      id: 'a-cluster',
+      id: 'a2',
       labelTextOneOne: 'cluster',
-      isListCard: false,
-      textOneOne:
-        itemFrameworkOne?.itemFrameworkOneCluster?.itemFrameworkOneClusterPrimaryLabel ||
-        'No Information',
-      innerAssociateList: [],
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: clusterObj
+        }
+      ],
       innerInfo: 'No Information',
-      IconOne: null
+      isListCard: true
     },
     {
       id: 'a-level',
@@ -91,32 +103,19 @@ const DisplayPaneThreeSectionTwoItem = () => {
     {
       id: 'a2',
       labelTextOneOne: 'scale',
-      isListCard: false,
-      textOneOne: 'No Information',
-      innerAssociateList: [],
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: '',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: scaleObj
+        }
+      ],
       innerInfo: 'No Information',
-      IconOne: null
+      isListCard: true
     },
-    // {
-    //   id: 'a1-response',
-    //   labelTextOneOne: 'response',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: 'attachment',
-    //       textOne: ''
-    //     },
-    //     {
-    //       labelTextOneOneBadge: 'correct',
-    //       textOne: ''
-    //     }
-    //   ],
-    //   innerAssociateList: [],
-    //   innerInfo: 'No Information',
-    //   isListCard: false,
-    //   IconOne: null,
-    //   IconTwo: null
-    // },
-
     {
       id: 'a3',
       labelTextOneOne: 'score',
@@ -126,21 +125,6 @@ const DisplayPaneThreeSectionTwoItem = () => {
       innerInfo: 'No Information',
       IconOne: null
     },
-    // {
-    //   id: 'a1-sequence',
-    //   labelTextOneOne: 'sequence',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: '',
-    //       textOne: ''
-    //     }
-    //   ],
-    //   innerAssociateList: [],
-    //   innerInfo: 'No Information',
-    //   isListCard: false,
-    //   IconOne: null,
-    //   IconTwo: null
-    // },
     {
       id: 'a4',
       labelTextOneOne: 'time',
