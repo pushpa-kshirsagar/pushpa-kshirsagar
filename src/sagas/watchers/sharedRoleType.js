@@ -3,7 +3,17 @@ import {
   SHARE_ROLES_TYPES_SAGA,
   LOADER_STOP,
   SET_POPUP_VALUE,
-  POPUP_CLOSE
+  POPUP_CLOSE,
+  SET_REQUEST_OBJECT,
+  GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA,
+  GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA,
+  GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA,
+  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
+  GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA,
+  GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA,
+  GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA,
+  GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA
 } from '../../actionType';
 import {
   ASSESSEE_ROLE_SHARE_URL,
@@ -95,39 +105,39 @@ function* workerRoleTypeShareSaga(data) {
       URL: APIURL
     });
     if (userResponse.responseCode === '000') {
-      // yield put({
-      //   type: SET_REQUEST_OBJECT,
-      //   payload: Store.getState().DisplayPaneTwoReducer.reviewListReqObj
-      // });
-      // yield put({
-      //   type:
-      //     data.payload.shareValue === 'assesseeRole'
-      //       ? GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA
-      //       : data.payload.shareValue === 'associateRole'
-      //       ? GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
-      //       : data.payload.shareValue === 'assesseeType'
-      //       ? GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA
-      //       : data.payload.shareValue === 'associateType'
-      //       ? GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA
-      //       : data.payload.shareValue === 'itemType'
-      //       ? GET_ITEM_TYPE_REVIEW_LIST_SAGA
-      //       : data.payload.shareValue === 'assessmentType'
-      //       ? GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA
-      //       : data.payload.shareValue === 'assignmentType'
-      //       ? GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA
-      //       : data.payload.shareValue === 'cultureProfileType'
-      //       ? GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA
-      //       : data.payload.shareValue === 'jobProfileType'
-      //       ? GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA
-      //       : null,
-      //   payload: {
-      //     request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-      //     BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-      //     BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-      //     BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-      //     isMiddlePaneList: true
-      //   }
-      // });
+      yield put({
+        type: SET_REQUEST_OBJECT,
+        payload: Store.getState().DisplayPaneTwoReducer.reviewListReqObj
+      });
+      yield put({
+        type:
+          data.payload.shareValue === 'assesseeRole'
+            ? GET_ASSESSEE_ROLE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'associateRole'
+            ? GET_ASSOCIATE_ROLE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'assesseeType'
+            ? GET_ASSESSEE_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'associateType'
+            ? GET_ASSOCIATE_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'itemType'
+            ? GET_ITEM_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'assessmentType'
+            ? GET_ASSESSMENT_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'assignmentType'
+            ? GET_ASSIGNMENT_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'cultureProfileType'
+            ? GET_CULTUREPROFILE_TYPE_REVIEW_LIST_SAGA
+            : data.payload.shareValue === 'jobProfileType'
+            ? GET_JOBPROFILE_TYPE_REVIEW_LIST_SAGA
+            : null,
+        payload: {
+          request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+          BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+          BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+          BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+          isMiddlePaneList: true
+        }
+      });
       yield put({ type: POPUP_CLOSE });
     } else {
       yield put({
