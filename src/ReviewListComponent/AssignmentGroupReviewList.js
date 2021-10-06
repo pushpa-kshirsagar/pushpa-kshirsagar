@@ -157,6 +157,14 @@ const AssignmentGroupReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let tempArr = [];
+    let classification = e.currentTarget.getAttribute('data-shared');
+    ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION.map((element)=>{
+      if (classification === 'Bespoke' && element.data === 'share')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    })
+   
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -168,7 +176,7 @@ const AssignmentGroupReviewList = (props) => {
         popupContentArrValue:
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
+            :tempArr, //ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }
@@ -180,7 +188,7 @@ const AssignmentGroupReviewList = (props) => {
         value:
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
+            : tempArr,//ASSIGNMENT_GROUP_NODE_TYPE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -215,7 +223,8 @@ const AssignmentGroupReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 isShared={item?.assignmentGroupShared}						
-                shared={item.assignmentGroupShared ? 'SHARED' : 'UNSHARED'}
+                //shared={item.assignmentGroupShared ? 'SHARED' : 'UNSHARED'}
+                shared={item.informationSetup?.assignmentGroupClassification?.assignmentGroupClassificationPrimary}
               />
             </div>
           );

@@ -72,46 +72,44 @@ const DisplayPaneThreeSectionOneAssessment = () => {
         }
       ],
       innerInfo: 'No Information'
+    },
+    {
+      id: 'a2',
+      labelTextOneOne: 'collaborator',
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: 'secondary',      
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'collaborator',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'collaborator',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'collaborator',
+              status: 'active'
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
     }
-    // {
-    //   id: 'a2',
-    //   labelTextOneOne: 'collaborator',
-    //   labelTextOneOneBadgeOne: 'primary',
-    //   labelTextOneOneBadgeTwo: 'secondary',
-    //   labelTextOneOneBadgeThree: '',
-    //   labelTextOneOneBadgeFour: '',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: 'primary',
-    //       innerList: [
-    //         {
-    //           id: 'associate1',
-    //           textOne: 'Simple Sample 01',
-    //           textTwo: 'collaborator',
-    //           status: 'active'
-    //         },
-    //         {
-    //           id: 'associate2',
-    //           textOne: 'Simple Sample 02',
-    //           textTwo: 'collaborator',
-    //           status: 'active'
-    //         },
-    //         {
-    //           id: 'associate3',
-    //           textOne: 'Simple Sample 03',
-    //           textTwo: 'collaborator',
-    //           status: 'active'
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       labelTextOneOneBadge: 'secondary',
-    //       innerList: []
-    //     }
-    //   ],
-    //   innerInfo: 'No Information',
-    //   isListCard: true
-    // }
   ];
   let assessmentGroupListPrimary = [];
   if (
@@ -143,6 +141,39 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       });
     });
   }
+
+  let assessmentManagerListPrimary = [];
+  if (
+    informationAllocation?.assessmentManager?.assessmentManagerPrimary &&
+    informationAllocation?.assessmentManager?.assessmentManagerPrimary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assessmentManager?.assessmentManagerPrimary;
+    tempArr.forEach((ob) => {
+      assessmentManagerListPrimary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.assessmentManagerName || '',
+        textTwo: ob?.informationBasic?.assessmentManagerDescription || '',
+        status: ''
+      });
+    });
+  }
+  let assessmentManagerListSecondary = [];
+  if (
+    informationAllocation?.assessmentManager?.assessmentManagerSecondary &&
+    informationAllocation?.assessmentManager?.assessmentManagerSecondary.length > 0
+  ) {
+    const tempArr = informationAllocation?.assessmentManager?.assessmentManagerSecondary;
+    tempArr.forEach((ob) => {
+      assessmentManagerListSecondary.push({
+        id: ob.id,
+        textOne: ob?.informationBasic?.assessmentManagerName || '',
+        textTwo: ob?.informationBasic?.assessmentManagerDescription || '',
+        status: ''
+      });
+    });
+  }
+
+
   let assessmentNodeListPrimary = [];
   if (
     informationAllocation?.assessmentNode?.assessmentNodePrimary &&
@@ -234,30 +265,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Manager',
-              status: 'active'
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Manager',
-              status: 'active'
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Manager',
-              status: 'active'
-            }
-          ]
+          innerList: assessmentManagerListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: assessmentManagerListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -356,11 +368,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement?.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement?.assessmentTenure?.assessmentTenureDateTimeStart || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement?.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement?.assessmentTenure?.assessmentTenureDateTimeEnd || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -409,7 +421,7 @@ const DisplayPaneThreeSectionOneAssessment = () => {
   const engagementListKey = [
     {
       id: 'a2',
-      textOneOne: capitalizeFirstLetter(informationEngagement.assessmentStatus) || 'No Information',
+      textOneOne: capitalizeFirstLetter(informationEngagement?.assessmentStatus) || 'No Information',
       labelTextOneOne: 'status',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -421,11 +433,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: informationEngagement.assessmentTag.assessmentTagPrimary || 'No Information'
+          textOne: informationEngagement?.assessmentTag.assessmentTagPrimary || 'No Information'
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: informationEngagement.assessmentTag.assessmentTagSecondary || 'No Information'
+          textOne: informationEngagement?.assessmentTag.assessmentTagSecondary || 'No Information'
         }
       ],
       innerAssociateList: [],
@@ -438,11 +450,11 @@ const DisplayPaneThreeSectionOneAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'start',
-          textOne: informationEngagement.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement?.assessmentTenureDate || 'No Information'
         },
         {
           labelTextOneOneBadge: 'end',
-          textOne: informationEngagement.assessmentTenureDate || 'No Information'
+          textOne: informationEngagement?.assessmentTenureDate || 'No Information'
         }
       ],
       innerAssociateList: [],

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './InputField.css';
 import { Input, InputLabel, FormControl, FormHelperText } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 export const InputField = (props) => {
   const {
@@ -15,7 +16,8 @@ export const InputField = (props) => {
     isRequired = true,
     autoFocus = false,
     classNames = '',
-    isErrorMsg = true
+    isErrorMsg = true,
+    currencySymbol=''
   } = props;
   return (
     <div className="popup-form-box">
@@ -33,6 +35,7 @@ export const InputField = (props) => {
           autoComplete="off"
           autoFocus={autoFocus}
           className={['inputFields', classNames].join(' ')}
+          startAdornment={<InputAdornment className={'inputFieldsAdorment'} position="start">{currencySymbol}</InputAdornment>}
         />
       </FormControl>
       {isRequired && (

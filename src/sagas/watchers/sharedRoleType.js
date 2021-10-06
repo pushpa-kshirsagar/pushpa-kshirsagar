@@ -100,6 +100,27 @@ function* workerRoleTypeShareSaga(data) {
     if (data.payload.shareValue === 'jobProfileType') {
       APIURL = data.payload.apiCall === 'shareApiCall' ? JOB_TYPE_SHARE_URL : JOB_TYPE_UNSHARE_URL;
     }
+    // if (data.payload.shareValue === 'assesseeGroup') {
+    //   APIURL = data.payload.apiCall === 'shareApiCall' ? ASSESSSEE_GROUP_SHARE_URL : ASSESSSEE_GROUP_UNSHARE_URL;
+    // }
+    // if (data.payload.shareValue === 'assessementGroup') {
+    //   APIURL = data.payload.apiCall === 'shareApiCall' ? ASSESSMENT_GROUP_SHARE_URL : ASSESSMENT_GROUP_UNSHARE_URL;
+    // }
+    // if (data.payload.shareValue === 'assignmentGroup') {
+    //   APIURL = data.payload.apiCall === 'shareApiCall' ? ASSIGNMENT_GROUP_SHARE_URL : ASSIGNMENT_GROUP_UNSHARE_URL;
+    // }
+    // if (data.payload.shareValue === 'associateGroup') {
+    //   APIURL = data.payload.apiCall === 'shareApiCall' ? ASSOCIATE_GROUP_SHARE_URL : ASSOCIATE_GROUP_UNSHARE_URL;
+    // }
+    // if (data.payload.shareValue === 'cultureProfileGroup') {
+    //   APIURL = data.payload.apiCall === 'shareApiCall' ? CULTUREPROFILE_GROUP_SHARE_URL : CULTUREPROFILE_GROUP_UNSHARE_URL;
+    // }
+    // if (data.payload.shareValue === 'jobProfileGroup') {
+    //   APIURL = data.payload.apiCall === 'shareApiCall' ? JOB_TYPE_SHARE_URL : JOB_TYPE_UNSHARE_URL;
+    // }
+    // if (data.payload.shareValue === 'itemGroup') {
+    //   APIURL = data.payload.apiCall === 'shareApiCall' ? ITEM_GROUP_SHARE_URL : ITEM_GROUP_UNSHARE_URL;
+    // }
     const userResponse = yield call(sharedApiCall, {
       data: data.payload.request,
       URL: APIURL

@@ -35,6 +35,7 @@ const PopUpTextField = (props) => {
     inputHeader = '',
     inputHeaderBadgeOne = '',
     inputHeaderBadgeTwo = ''
+    ,currencySymbol=''
   } = props;
   let errorMessage = isNotRevised ? 'this information cannot be revised' : '';
   const [state, setState] = useState({
@@ -131,6 +132,7 @@ const PopUpTextField = (props) => {
               onClick={handleChange}
               errorMsg={state.error}
               labelBadgeOne={labelBadgeOne}
+              currencySymbol={currencySymbol}
             />
           </FormControl>
           {(label === 'name' || labelBadgeOne === 'statutory' || label === 'website address') && (

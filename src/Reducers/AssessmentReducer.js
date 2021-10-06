@@ -12,7 +12,9 @@ import {
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
   SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
-  SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE
+  SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
+  SET_ASSESSMENT_AID_FRAMEWORK_STATE,
+  SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -85,17 +87,17 @@ const initialState = {
       assessmentAidTextsheetType: ''
     },
     assessmentEvaluation: {
-      cutoffScore: false,
-      genericScore: false,
-      gradeScore: false,
-      percentageScore: false,
-      percentileScore: false,
-      rankOrder: false,
-      rawScore: false,
-      standardScore: false,
-      stenScore: false,
-      tScore: false,
-      zScore: false
+      assessmentEvaluationScoreCutoff: false,
+      assessmentEvaluationScoreGeneric: false,
+      assessmentEvaluationScoreGrade: false,
+      assessmentEvaluationScorePercentage: false,
+      assessmentEvaluationScorePercentile: false,
+      assessmentEvaluationScoreRank: false,
+      assessmentEvaluationScoreRaw: false,
+      assessmentEvaluationScoreStandard: false,
+      assessmentEvaluationScoreSten: false,
+      assessmentEvaluationScoreT: false,
+      assessmentEvaluationScoreZ: false
     },
     assessmentCommunique: {
       assessmentCommuniquePrimary: null,
@@ -268,6 +270,23 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
           assessmentScore: action.payload
         }
       };
+
+      case SET_ASSESSMENT_AID_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assessmentAid: action.payload
+        }
+      };
+      case SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE:
+        return {
+          ...istate,
+          informationFramework: {
+            ...istate.informationFramework,
+            assessmentEvaluation: action.payload
+          }
+        };      
     case CLEAR_ASSESSMENT_INFO:
       return JSON.parse(JSON.stringify(initialState));
     default:

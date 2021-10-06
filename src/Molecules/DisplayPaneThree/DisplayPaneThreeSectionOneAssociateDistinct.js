@@ -23,7 +23,10 @@ import {
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
   UPDATE_ASSOCIATE_SETUP_INFO,
-  UPDATE_ASSOCIATE_SETUP_ITEM_INFO
+  UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+  UPDATE_ASSOCIATE_COUNTRY_INFO,
+  UPDATE_ASSOCIATE_CURRENCY_INFO,
+  UPDATE_ASSOCIATE_LANGUAGE_INFO
 } from '../../actionType';
 import {
   getPermissionStr,
@@ -189,6 +192,116 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       });
     });
   }
+  let associateGroupListPrimary=[];
+  if(informationAllocation?.associateGroup?.associateGroupPrimary &&
+    informationAllocation?.associateGroup?.associateGroupPrimary.length>0){
+      const tempArr=informationAllocation?.associateGroup?.associateGroupPrimary;
+      tempArr.forEach((ob) => {
+        associateGroupListPrimary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateGroupName || '',
+          textTwo: ob?.informationBasic?.associateGroupDescription || '',
+          status: ''
+        });
+      });
+    }
+    let associateGroupListSecondary=[];
+  if(informationAllocation?.associateGroup?.associateGroupSecondary &&
+    informationAllocation?.associateGroup?.associateGroupSecondary.length>0){
+      const tempArr=informationAllocation?.associateGroup?.associateGroupSecondary;
+      tempArr.forEach((ob) => {
+        associateGroupListSecondary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateGroupName || '',
+          textTwo: ob?.informationBasic?.associateGroupDescription || '',
+          status: ''
+        });
+      });
+    }
+    let associateManagerListPrimary=[];
+  if(informationAllocation?.associateManager?.associateManagerPrimary &&
+    informationAllocation?.associateManager?.associateManagerPrimary.length>0){
+      const tempArr=informationAllocation?.associateManager?.associateManagerPrimary;
+      tempArr.forEach((ob) => {
+        associateManagerListPrimary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateManagerName || '',
+          textTwo: ob?.informationBasic?.associateManagerDescription || '',
+          status: ''
+        });
+      });
+    }
+    let associateManagerListSecondary=[];
+  if(informationAllocation?.associateManager?.associateManagerSecondary &&
+    informationAllocation?.associateManager?.associateManagerSecondary.length>0){
+      const tempArr=informationAllocation?.associateManager?.associateManagerSecondary;
+      tempArr.forEach((ob) => {
+        associateManagerListSecondary.push({
+          id: ob.id,
+          textOne: ob?.informationBasic?.associateManagerName || '',
+          textTwo: ob?.informationBasic?.associateManagerDescription || '',
+          status: ''
+        });
+      });
+    }
+
+    let associateNodeListPrimary=[];
+    if(informationAllocation?.associateNode?.associateNodePrimary &&
+      informationAllocation?.associateNode?.associateNodePrimary.length>0){
+        const tempArr=informationAllocation?.associateNode?.associateNodePrimary;
+        tempArr.forEach((ob) => {
+          associateNodeListPrimary.push({
+            id: ob.id,
+            textOne: ob?.informationBasic?.associateNodeName || '',
+            textTwo: ob?.informationBasic?.associateNodeDescription || '',
+            status: ''
+          });
+        });
+      }
+
+      let associateNodeListSecondary=[];
+      if(informationAllocation?.associateNode?.associateNodeSecondary &&
+        informationAllocation?.associateNode?.associateNodeSecondary.length>0){
+          const tempArr=informationAllocation?.associateNode?.associateNodeSecondary;
+          tempArr.forEach((ob) => {
+            associateNodeListSecondary.push({
+              id: ob.id,
+              textOne: ob?.informationBasic?.associateNodeName || '',
+              textTwo: ob?.informationBasic?.associateNodeDescription || '',
+              status: ''
+            });
+          });
+        }
+
+        let associateTypeListPrimary=[];
+      if(informationAllocation?.associateType?.associateTypePrimary &&
+        informationAllocation?.associateType?.associateTypePrimary.length>0){
+          const tempArr=informationAllocation?.associateType?.associateTypePrimary;
+          tempArr.forEach((ob) => {
+            associateTypeListPrimary.push({
+              id: ob.id,
+              textOne: ob?.informationBasic?.associateTypeName || '',
+              textTwo: ob?.informationBasic?.associateTypeDescription || '',
+              status: ''
+            });
+          });
+        }
+
+        let associateTypeListSecondary=[];
+        if(informationAllocation?.associateType?.associateTypeSecondary &&
+          informationAllocation?.associateType?.associateTypeSecondary.length>0){
+            const tempArr=informationAllocation?.associateType?.associateTypeSecondary;
+            tempArr.forEach((ob) => {
+              associateTypeListSecondary.push({
+                id: ob.id,
+                textOne: ob?.informationBasic?.associateTypeName || '',
+                textTwo: ob?.informationBasic?.associateTypeDescription || '',
+                status: ''
+              });
+            });
+          }
+
+      
   const allocationList = [
     {
       id: 'a1',
@@ -200,30 +313,11 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Group',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Group',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Group',
-              status: ''
-            }
-          ]
+          innerList: associateGroupListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: associateGroupListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -239,30 +333,11 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Manager',
-              status: 'active'
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Manager',
-              status: 'active'
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Manager',
-              status: 'active'
-            }
-          ]
+          innerList: associateManagerListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: associateManagerListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -278,30 +353,11 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'Node',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'Node',
-              status: ''
-            }
-          ]
+          innerList: associateNodeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: associateNodeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -337,30 +393,11 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'Simple Sample 01',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate2',
-              textOne: 'Simple Sample 02',
-              textTwo: 'type',
-              status: ''
-            },
-            {
-              id: 'associate3',
-              textOne: 'Simple Sample 03',
-              textTwo: 'type',
-              status: ''
-            }
-          ]
+          innerList: associateTypeListPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          innerList: []
+          innerList: associateTypeListSecondary
         }
       ],
       innerInfo: 'No Information',
@@ -3842,6 +3879,56 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       });
     }
     console.log('badgeName', badgeName);
+    if (!associateInfo?.informationSetup.assessee) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+        payload: assesseeSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.assessment) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+        payload: assessmentSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.assignment) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+        payload: assignmentSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.item) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+        payload: itemSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.analytic) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
+        payload: analyticSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.associate) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_INFO,
+        payload: setUpAssociateModule
+      });
+
+      dispatch({
+        type:UPDATE_ASSOCIATE_COUNTRY_INFO,
+        payload:setUpAssociateModule?.associateCountry
+      })
+
+      dispatch({
+        type:UPDATE_ASSOCIATE_CURRENCY_INFO,
+        payload:setUpAssociateModule?.associateCurrency
+      })
+      dispatch({
+        type:UPDATE_ASSOCIATE_LANGUAGE_INFO,
+        payload:setUpAssociateModule?.associateLanguage
+      })
+    }
     if (labelName === 'assessees') {
       if (!associateInfo?.informationSetup.assessee) {
         dispatch({
@@ -4493,6 +4580,20 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           type: UPDATE_ASSOCIATE_SETUP_INFO,
           payload: setUpAssociateModule
         });
+
+        dispatch({
+          type:UPDATE_ASSOCIATE_COUNTRY_INFO,
+          payload:setUpAssociateModule?.associateCountry
+        })
+
+        dispatch({
+          type:UPDATE_ASSOCIATE_CURRENCY_INFO,
+          payload:setUpAssociateModule?.associateCurrency
+        })
+        dispatch({
+          type:UPDATE_ASSOCIATE_LANGUAGE_INFO,
+          payload:setUpAssociateModule?.associateLanguage
+        })
       }
       if (
         badgeName === 'nodepermissiondescendant' ||
@@ -5028,6 +5129,20 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           type: UPDATE_ASSOCIATE_SETUP_INFO,
           payload: setUpAssociateModule
         });
+
+        dispatch({
+          type:UPDATE_ASSOCIATE_COUNTRY_INFO,
+          payload:setUpAssociateModule?.associateCountry
+        })
+
+        dispatch({
+          type:UPDATE_ASSOCIATE_CURRENCY_INFO,
+          payload:setUpAssociateModule?.associateCurrency
+        })
+        dispatch({
+          type:UPDATE_ASSOCIATE_LANGUAGE_INFO,
+          payload:setUpAssociateModule?.associateLanguage
+        })
       }
       if (labelName === 'associates' && selectedBadgeName === '') {
         dispatch({

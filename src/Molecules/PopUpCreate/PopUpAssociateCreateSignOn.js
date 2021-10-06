@@ -1510,6 +1510,7 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        currencySymbol={associateInfo?.associateCurrency?.associateCurrencySymbol||''}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ASSESSEE_SIGNON_FEE_POPUP'}
@@ -1544,6 +1545,7 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        currencySymbol={associateInfo?.associateCurrency?.associateCurrencySymbol||''}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ASSIGNMENTCREATEFEEPOPUP'}
@@ -1561,6 +1563,7 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        currencySymbol={associateInfo?.associateCurrency?.associateCurrencySymbol||''}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ITEMCREATEFEEPOPUP'}
@@ -1578,6 +1581,7 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ITEM_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        currencySymbol={associateInfo?.associateCurrency?.associateCurrencySymbol||''}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'IGURUANALYTICSCREATEFEEPOPUP'}
@@ -1595,6 +1599,7 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        currencySymbol={associateInfo?.associateCurrency?.associateCurrencySymbol||''}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ASSOCIATECREATEFEEPOPUP'}
@@ -1612,6 +1617,7 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        currencySymbol={associateInfo?.associateCurrency?.associateCurrencySymbol||''}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSESSEEINFODISTINCTBASICPOPUP'}
@@ -2516,6 +2522,7 @@ const PopUpSignOnAssociate = () => {
         typeOfSetObject={UPDATE_ASSOCIATE_SETUP_INFO}
         nextPopUpValue={'ASSOCIATEPICTUREPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        currencySymbol={associateInfo?.associateCurrency?.associateCurrencySymbol||''}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ASSOCIATE_SIGNON_PERMISSION_POPUP'}

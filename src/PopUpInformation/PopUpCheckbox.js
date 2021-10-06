@@ -90,7 +90,15 @@ const PopUpCheckbox = (props) => {
         payload: { assesseeSignInCredential: state.isChecked }
       });
       dispatch({ type: POPUP_CLOSE });
-    } else {
+    }
+    else if(forceToSelect==='assessmentRevise'){
+      dispatch({
+        type: typeOfSetObject,
+        payload: { ...localObject }
+      });
+      dispatch({ type: POPUP_CLOSE });
+    }
+     else {
       if (state.isChecked === 'email address (primary)') {
         dispatch({
           type: typeOfPrimarySetObject,

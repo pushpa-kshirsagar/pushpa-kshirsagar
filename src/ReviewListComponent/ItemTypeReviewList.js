@@ -138,6 +138,14 @@ const ItemTypeReviewList = (props) => {
         : obj
     );
     optArr = popupContentArrValue;
+    let tempArr = [];
+    let classification = e.currentTarget.getAttribute('data-shared');
+   
+    optArr.map((element)=>{
+      if (classification === 'Bespoke' && element.data === 'share')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    })
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -146,7 +154,7 @@ const ItemTypeReviewList = (props) => {
         popupHeaderOneBadgeTwo: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
+        popupContentArrValue: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr,//optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
@@ -157,7 +165,7 @@ const ItemTypeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr
+        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr//optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -176,7 +184,7 @@ const ItemTypeReviewList = (props) => {
                 id={index}
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.itemTypeStatus}
+                //status={item.informationEngagement.itemTypeStatus}
                 textOne={item.informationBasic.itemTypeName}
                 textTwo={item.informationBasic.itemTypeDescription}
                 //status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
@@ -184,7 +192,7 @@ const ItemTypeReviewList = (props) => {
                 item.informationSetup?.itemTypeClassification?.itemTypeClassificationPrimary:
                 item.informationEngagement.itemTypeStatus}
                 actualStatus={item.informationEngagement.itemTypeStatus}
-                shared={item.itemTypeShared ? 'SHARED' : 'UNSHARED'}
+                //shared={item.itemTypeShared ? 'SHARED' : 'UNSHARED'}
                 dataValue={item.informationAllocation?.itemTypeGroup}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
@@ -195,6 +203,7 @@ const ItemTypeReviewList = (props) => {
                 }}
                 // dataValue={item.informationAllocation.itemGroup}
                 isShared={item?.itemTypeShared}
+                shared={item.informationSetup?.itemTypeClassification?.itemTypeClassificationPrimary}
               />
             </div>
           );

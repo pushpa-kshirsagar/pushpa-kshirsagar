@@ -150,6 +150,14 @@ const AssociateTypeReviewList = (props) => {
   ];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let tempArr = [];
+    let classification = e.currentTarget.getAttribute('data-shared');
+   
+    ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((element)=>{
+      if (classification === 'Bespoke' && element.data === 'share')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    })
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -161,7 +169,7 @@ const AssociateTypeReviewList = (props) => {
         popupContentArrValue:
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+            : tempArr,//ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
@@ -175,7 +183,7 @@ const AssociateTypeReviewList = (props) => {
         value:
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+            : tempArr//ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -203,7 +211,7 @@ const AssociateTypeReviewList = (props) => {
                 }
                 // status={item.informationEngagement.associateTypeStatus}
                 actualStatus={item.informationEngagement.associateTypeStatus}
-                shared={item.associateTypeShared ? 'SHARED' : 'UNSHARED'}
+                //shared={item.associateTypeShared ? 'SHARED' : 'UNSHARED'}
                 textOne={item.informationBasic.associateTypeName}
                 textTwo={item.informationBasic.associateTypeDescription}
                 isTooltipActive={false}
@@ -215,6 +223,8 @@ const AssociateTypeReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 isShared={item?.associateTypeShared}
+                shared={item.informationSetup?.associateTypeClassification
+                  ?.associateTypeClassificationPrimary}
               />
             </div>
           );

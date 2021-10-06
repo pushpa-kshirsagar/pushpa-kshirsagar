@@ -143,6 +143,14 @@ const JobProfileTypeReviewList = (props) => {
       obj.data === 'assessees' ? { ...obj, data: middlePaneHeader, dataValue: reviseHeader } : obj
     );
     optArr = popupContentArrValue;
+    let tempArr = [];
+    let classification = e.currentTarget.getAttribute('data-shared');
+   
+    optArr.map((element)=>{
+      if (classification === 'Bespoke' && element.data === 'share')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    })
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -152,7 +160,7 @@ const JobProfileTypeReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue:
-          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr,
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr,//optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
@@ -163,7 +171,7 @@ const JobProfileTypeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : optArr
+        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr//optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -190,7 +198,7 @@ const JobProfileTypeReviewList = (props) => {
                 item.informationEngagement.jobProfileTypeStatus}
                 // status={associateSeftId === item.associateId ? 'bespoke' : 'generic'}
                 actualStatus={item.informationEngagement.jobProfileTypeStatus}
-                shared={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}
+                //shared={item.jobProfileTypeShared ? 'SHARED' : 'UNSHARED'}
                 isTooltipActive={false}
                 // dataValue={item.informationAllocation.jobProfileTypeGroup}
                 onClickEvent={openListPopup}
@@ -200,6 +208,7 @@ const JobProfileTypeReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 isShared={item?.jobProfileTypeShared}
+                shared={item.informationSetup?.jobProfileTypeClassification?.jobProfileTypeClassificationPrimary}
               />
             </div>
           );

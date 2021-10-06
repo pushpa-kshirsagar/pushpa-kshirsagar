@@ -17,7 +17,9 @@ import {
   UPDATE_ASSOCIATE_BASIC_INFO,
   UPDATE_ASSOCIATE_SETUP_INFO,
   SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
-  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+  SET_ASSESSMENT_AID_FRAMEWORK_STATE,
+  SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE
 } from '../../actionType';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
@@ -532,14 +534,13 @@ const PopUpAssessmentCreate = (props) => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'AID_CAL_POPUP'}
-        tag={'assessmentCalculator'}
+        tag={'assessmentAidCalculatorPermission'}
         label={'calculator'}
         listSelect={[
           { id: true, name: 'Permitted' },
           { id: false, name: 'Unpermitted' }
         ]}
         mappingValue={'id'}
-        inputHeader={'aid'}
         inputHeaderBadgeOne={''}
         inputHeaderBadgeTwo={''}
         headerPanelColour={'genericOne'}
@@ -547,20 +548,19 @@ const PopUpAssessmentCreate = (props) => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={informationFramework}
-        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        basicInfo={informationFramework?.assessmentAid}
+        typeOfSetObject={SET_ASSESSMENT_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'AID_SHEET_POPUP'}
-        tag={'assessmentSpreadsheet'}
+        tag={'assessmentAidSpreadsheetPermission'}
         label={'spredsheet'}
         listSelect={[
           { id: true, name: 'Permitted' },
           { id: false, name: 'Unpermitted' }
         ]}
         mappingValue={'id'}
-        inputHeader={'aid'}
         inputHeaderBadgeOne={''}
         inputHeaderBadgeTwo={''}
         headerPanelColour={'genericOne'}
@@ -568,48 +568,111 @@ const PopUpAssessmentCreate = (props) => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={informationFramework}
-        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        basicInfo={informationFramework?.assessmentAid}
+        typeOfSetObject={SET_ASSESSMENT_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'AID_TEXT_POPUP'}
-        tag={'assessmentTextsheet'}
+        tag={'assessmentAidTextsheetPermission'}
         label={'textsheet'}
         listSelect={[
           { id: true, name: 'Permitted' },
           { id: false, name: 'Unpermitted' }
         ]}
         mappingValue={'id'}
-        inputHeader={'aid'}
-        inputHeaderBadgeOne={''}
-        inputHeaderBadgeTwo={''}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={informationFramework}
-        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        basicInfo={informationFramework?.assessmentAid}
+        typeOfSetObject={SET_ASSESSMENT_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       {/* <PopUpCheckbox
+      <PopUpDropList
+        isActive={isPopUpValue === 'AID_CALCULATOR_TYPE_POPUP'}
+        tag={'assessmentAidCalculatorType'}
+        label={'type'}
+        listSelect={[
+          { id: 'basic', name: 'basic' },
+          { id: 'business', name: 'business' },
+          { id: 'financial', name: 'financial' },
+          { id: 'scientific', name: 'scientific' }
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework?.assessmentAid}
+        typeOfSetObject={SET_ASSESSMENT_AID_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'AID_SPREADSHEET_TYPE_POPUP'}
+        tag={'assessmentAidSpreadsheetType'}
+        label={'type'}
+        listSelect={[
+          { id: 'goole', name: 'goole' },
+          { id: 'microsoft', name: 'microsoft' },
+          { id: 'spreadsheet', name: 'spreadsheet' }          
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework?.assessmentAid}
+        typeOfSetObject={SET_ASSESSMENT_AID_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+       <PopUpDropList
+        isActive={isPopUpValue === 'AID_TEXTSHEET_TYPE_POPUP'}
+        tag={'assessmentAidTextsheetType'}
+        label={'type'}
+        listSelect={[
+          { id: 'goole', name: 'goole' },
+          { id: 'microsoft', name: 'microsoft' },
+          { id: 'textsheet', name: 'textsheet' }          
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework?.assessmentAid}
+        typeOfSetObject={SET_ASSESSMENT_AID_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+       <PopUpCheckbox
         isActive={isPopUpValue === 'EVALUATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         valueArr={[
-          'email address (primary)',
-          'email address (secondary)',
-          'mobile telephone (primary)',
-          'mobile telephone (secondary)',
-          'tag (primary)',
-          'tag (secondary)'
+          'assessmentEvaluationScoreCutoff',    
+          'assessmentEvaluationScoreGeneric',
+          'assessmentEvaluationScoreGrade',
+          'assessmentEvaluationScorePercentage',
+          'assessmentEvaluationScorePercentile',
+          'assessmentEvaluationScoreRank',
+          'assessmentEvaluationScoreRaw',
+          'assessmentEvaluationScoreStandard',
+          'assessmentEvaluationScoreSten',
+          'assessmentEvaluationScoreT',
+          'assessmentEvaluationScoreZ'
         ]}
-        forceToSelect="signIn"
-        typeOfSetObject={SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE}
+        //forceToSelect="signIn"
+        typeOfSetObject={SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE}
+        valueArrState={informationFramework?.assessmentEvaluation}
+        isRolePermission
+        forceToSelect="assessmentRevise"
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      /> */}
+      />
     </div>
   );
 };
