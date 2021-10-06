@@ -61,31 +61,31 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'proctor',
-          textOne: ''
+          textOne: informationFramework?.assessmentAdministrationProctor?'Yes':'No'
         },
         {
           labelTextOneOneBadge: 'repeat',
-          textOne: ''
+          textOne: informationFramework?.assessmentAdministrationRepeat?'Yes':'No'
         },
         {
           labelTextOneOneBadge: 'reset',
-          textOne: ''
+          textOne: informationFramework?.assessmentAdministrationReset?'Yes':'No'
         },
         {
           labelTextOneOneBadge: 'shuffle',
-          textOne: ''
+          textOne: informationFramework?.assessmentAdministrationShuffle?'Yes':'No'
         },
         {
           labelTextOneOneBadge: 'supervise',
-          textOne: ''
+          textOne: informationFramework?.assessmentAdministrationSupervise?'Yes':'No'
         },
         {
           labelTextOneOneBadge: 'template',
-          textOne: ''
+          textOne: informationFramework?.assessmentAdministrationTemplate
         },
         {
           labelTextOneOneBadge: 'version',
-          textOne: ''
+          textOne: informationFramework?.assessmentAdministrationVersion
         }
       ],
       innerAssociateList: [],
@@ -102,11 +102,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidCalculatorPermission?'Yes':'No'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidCalculatorType||'No Information'
             }
           ]
         },
@@ -115,11 +115,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidSpreadsheetPermission?'Yes':'No'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidSpreadsheetType||'No Information'
             }
           ]
         },
@@ -128,11 +128,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidTextsheetPermission?'Yes':'No'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidTextsheetType||'No Information'
             }
           ]
         }
@@ -167,7 +167,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOne: 'evaluation',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: 'model',
           textOne: ''
         },
         {
@@ -187,15 +187,19 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'distinct',
-          textOne: ''
+          textOne: informationFramework?.assessmentItemDistinct
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          textOne: informationFramework?.assessmentItemDistinct
         },
         {
           labelTextOneOneBadge: 'label',
-          textOne: ''
+          textOne: informationFramework?.assessmentItemFrameworkOneLabel
         },
         {
           labelTextOneOneBadge: 'navigation',
-          textOne: ''
+          textOne: 'No Information'
         },
         {
           labelTextOneOneBadge: 'practice',
@@ -232,11 +236,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'primary',
-          textOne: ''
+          textOne: informationFramework?.assessmentManuscript?.assessmentManuscriptPrimary
         },
         {
           labelTextOneOneBadge: 'secondary',
-          textOne: ''
+          textOne: informationFramework?.assessmentManuscript?.assessmentManuscriptSecondary
         }
       ],
       innerAssociateList: [],
@@ -268,11 +272,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'label',
-          textOne: ''
+          textOne: informationFramework?.assessmentItemFrameworkOneResponseLabel ||'No Information'
         },
         {
           labelTextOneOneBadge: 'revise',
-          textOne: ''
+          textOne: informationFramework?.assessmentItemFrameworkOneResponseRevise?'Yes':'No'
         }
       ],
       innerAssociateList: [],
@@ -304,7 +308,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '1',
-          textOne: ''
+          textOne: informationFramework?.assessmentSection
         }
       ],
       innerAssociateList: [],
@@ -424,6 +428,10 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         {
           labelTextOneOneBadge: 'end',
           textOne: 'No Information'
+        },
+        {
+          labelTextOneOneBadge: '+',
+          innerLabelBadgeList: 'No'
         }
       ],
       labelTextOneOneBadgeTwo: '',
@@ -495,9 +503,19 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
   };
-  const reviseFramework = (e) => {
+  const reviseFramework = (e,selectedBadgeArray) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+
+    //console.log(selectedBadgeArray);
+    let badgeName='';if(selectedBadgeArray){
+      if (selectedBadgeArray.length > 0) {
+        selectedBadgeArray.forEach((element) => {
+          badgeName = badgeName + element.labelTextTwoBadge;
+        });
+      }
+    }    
+    console.log(badgeName);
     console.log(labelName + '  ' + selectedBadgeName);
     if (labelName === 'communiqué' && selectedBadgeName === 'primary') {
       dispatch({
@@ -553,7 +571,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         payload: { isPopUpValue: 'TIMEASSESSMENTPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
-    if (labelName === 'evaluation') {
+    if (labelName === 'evaluation' && selectedBadgeName==='model') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'EVALUATIONPOPUP', popupMode: 'ASSESSMENTCREATE' }
@@ -618,22 +636,40 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         payload: { isPopUpValue: 'REVISIONPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
-    if (labelName === 'aid' && selectedBadgeName === 'calculator') {
+    if (badgeName === 'calculator' && selectedBadgeName === 'permission') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'AID_CAL_POPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
-    if (labelName === 'aid' && selectedBadgeName === 'spredsheet') {
+    if (badgeName === 'calculator' && selectedBadgeName === 'type') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_CALCULATOR_TYPE_POPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }    
+    if (badgeName === 'spredsheet' && selectedBadgeName === 'permission') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'AID_SHEET_POPUP', popupMode: 'ASSESSMENTCREATE' }
       });
-    }
-    if (labelName === 'aid' && selectedBadgeName === 'textsheet') {
+    }     
+    if (badgeName === 'spredsheet' && selectedBadgeName === 'type') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_SPREADSHEET_TYPE_POPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }    
+    if (badgeName === 'textsheet' && selectedBadgeName === 'permission') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'AID_TEXT_POPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (badgeName === 'textsheet' && selectedBadgeName === 'type') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_TEXTSHEET_TYPE_POPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
   };
