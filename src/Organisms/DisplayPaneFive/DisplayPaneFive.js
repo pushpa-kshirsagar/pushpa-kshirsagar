@@ -13,6 +13,7 @@ import {
   SET_ITEM_DYNAMIC_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
+  SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_ITEM_PREVIEW_MODE,
   SET_POPUP_VALUE
 } from '../../actionType';
@@ -113,6 +114,7 @@ export const DisplayPaneFive = () => {
   console.log('item selected role type ', Item_Selected_Role_Type);
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
   };
   const {
     headerOneBadgeTwo,

@@ -197,18 +197,9 @@ const DisplayPageOne = () => {
                 )}
               </>
             )}
-            {mobilePanestate === 'displayPaneThree' && (
-              <DisplayPaneThree />
-              // <>
-              //   {isPreviewShow ? (
-              //     <>
-              //       <DisplayPaneFour />
-              //     </>
-              //   ) : (
-              //     <DisplayPaneThree />
-              //   )}
-              // </>
-            )}
+            {mobilePanestate === 'displayPaneThree' && <DisplayPaneThree />}
+            {mobilePanestate === 'displayPaneFour' && <DisplayPaneFour />}
+            {mobilePanestate === 'displayPaneFive' && <DisplayPaneFive />}
             {mobilePanestate === 'displayPaneSix' && <DisplayPaneSix />}
             {mobilePanestate === 'displayPaneSeven' && <DisplayPaneSeven />}
           </div>
