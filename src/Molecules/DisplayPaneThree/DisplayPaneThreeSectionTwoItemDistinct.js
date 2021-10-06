@@ -7,6 +7,7 @@ import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordi
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import {
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_ITEM_PREVIEW_MODE,
   SET_POPUP_VALUE
 } from '../../actionType';
@@ -160,6 +161,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
     console.log(labelName);
     if (labelName === 'media') {
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }
     if (labelName === 'score') {
       dispatch({

@@ -3215,10 +3215,10 @@ const PopUpSignOnAssociate = () => {
 
       <PopUpTextField
         isActive={isPopUpValue === 'ASSOCIATE_CURRENCY_PICTURE_POPUP'}
-        //label={'primary'}
+        label={'currency'}
         headerPanelColour={'genericOne'}
-        inputHeader={'associates'}
-        inputHeaderBadgeOne={'currency'}
+        inputHeader={''}
+        inputHeaderBadgeOne={''}
         inputHeaderBadgeTwo={''}
         type={'text'}
         headerOne={'associate'}

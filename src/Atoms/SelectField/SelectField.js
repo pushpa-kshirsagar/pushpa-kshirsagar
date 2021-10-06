@@ -40,7 +40,7 @@ export const SelectField = (props) => {
           onChange={onChange}
           data-value={dataValue}
           multiple={isMultiSelect}
-          renderValue={(selected) => selected.join(', ')}
+          renderValue={isMultiSelect ? (selected) => selected.join(', ') : null}
           input={<Input />}
           className={'selectFontAlign'}
         >

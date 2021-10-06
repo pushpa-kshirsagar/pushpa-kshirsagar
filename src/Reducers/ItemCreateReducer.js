@@ -58,12 +58,7 @@ const initialState = {
     informationFramework: {
       itemFrameworkOne: {
         itemFrameworkOneAlignment: '',
-        itemFrameworkOneCluster: [
-          {
-            itemFrameworkOneClusterPrimaryLabel: '',
-            itemFrameworkOneClusterPrimaryPolarity: ''
-          }
-        ],
+        itemFrameworkOneCluster: [],
         itemFrameworkOneLevel: null,
         itemFrameworkOneBlank: '',
         itemFrameworkOneExplanation: {
@@ -121,13 +116,7 @@ const initialState = {
           itemFrameworkOneResponseExplanationDisplay: false,
           itemFrameworkOneResponseExplanationMedia: null
         }, //responseDescription,
-        itemFrameworkOneScale: [
-          {
-            itemGroupScaleLabel: '',
-            itemGroupScaleScore: null,
-            itemGroupScaleWeightage: null
-          }
-        ],
+        itemFrameworkOneScale: [],
         itemFrameworkOneScore: null,
         itemFrameworkOneSection: [
           {
