@@ -511,7 +511,7 @@ body {
   outline: none;
   padding-left: 30px;
 }
-@media (min-width: 651px) {
+@media (min-width: 650px) {
   .codex-editor--narrow .ce-toolbar__actions {
     right: 10px;
   }
@@ -519,6 +519,7 @@ body {
 .audio button {
   display: none;
 }
+
 .rounded {
   width: 30rem !important;
   height: 30rem !important;

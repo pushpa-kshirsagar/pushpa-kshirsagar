@@ -33,7 +33,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
     const tempArr = itemFrameworkOne.itemFrameworkOneCluster;
     tempArr.forEach((ob) => {
       clusterObj.push({
-        textOne: ob.itemFrameworkOneClusterPrimaryLabel || '',
+        textOne: ob.itemFrameworkOneClusterPrimary || '',
         textTwo: '',
         status: ''
       });
@@ -44,9 +44,9 @@ const DisplayPaneThreeSectionTwoItem = () => {
     const tempArr = itemFrameworkOne.itemFrameworkOneScale;
     tempArr.forEach((ob) => {
       scaleObj.push({
-        textOne: ob.itemFrameworkOneScaleLabel || '',
+        textOne: ob.itemFrameworkOneScale || '',
         textTwo: '',
-        status: ''
+        status: ob.itemFrameworkOneScaleWeightage
       });
     });
   }
@@ -54,13 +54,13 @@ const DisplayPaneThreeSectionTwoItem = () => {
     {
       id: 'a2',
       labelTextOneOne: 'cluster',
-      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeOne: 'distinct',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'primary',
+          labelTextOneOneBadge: 'distinct',
           innerList: clusterObj
         }
       ],
@@ -104,13 +104,13 @@ const DisplayPaneThreeSectionTwoItem = () => {
     {
       id: 'a2',
       labelTextOneOne: 'scale',
-      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeOne: 'distinct',
       labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadgeThree: '',
       labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'primary',
+          labelTextOneOneBadge: 'distinct',
           innerList: scaleObj
         }
       ],
@@ -159,6 +159,9 @@ const DisplayPaneThreeSectionTwoItem = () => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     console.log(labelName);
+    console.log(selectedBadgeName);
+    if (labelName === 'cluster' && selectedBadgeName === 'distinct') {
+    }
     if (labelName === 'media') {
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });

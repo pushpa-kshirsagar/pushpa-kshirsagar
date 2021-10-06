@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import { Check, Clear } from '@material-ui/icons';
 import { DialogTitle, IconButton, Paper } from '@material-ui/core';
 import { CLEAR_ASSESSEE_INFO, POPUP_CLOSE } from '../actionType';
-import { imageUploadMethod,audioUploadMethod } from '../Actions/GenericActions';
+import { imageUploadMethod, audioUploadMethod } from '../Actions/GenericActions';
 import { useDispatch } from 'react-redux';
 
 const PopUpTextEditor = (props) => {
@@ -56,11 +56,15 @@ const PopUpTextEditor = (props) => {
     setInnerContent(defaultSheetValue);
   }, [defaultSheetValue]);
   const onClickYes = async () => {
-    const savedData = await instanceRef.current.save();
+    let savedData = await instanceRef.current.save();
+    let editorData = '';
     // onClickSave(JSON.stringify(savedData));
     console.log(savedData);
+    if (savedData.blocks.length > 0) {
+      editorData = { ...savedData };
+    }
     if (onClickSave) {
-      onClickSave(savedData);
+      onClickSave(editorData);
     }
     if (typeOfSetObject !== '') {
       dispatch({
@@ -84,23 +88,8 @@ const PopUpTextEditor = (props) => {
     <div>
       <PopUp isActive={isActive}>
         <DialogTitle id="dialog-title" className={'popupHeaderTitle'}>
-          <Paper
-            style={{
-              maxWidth: '600px',
-              alignItems: 'center',
-              padding: '5px',
-              display: 'flex'
-            }}
-            className={[`titleSolid-${headerPanelColour}`].join(' ')}
-          >
-            <div
-              style={{
-                width: '100%',
-                alignItems: 'center',
-                padding: '5px',
-                display: 'flex'
-              }}
-            >
+          <Paper className={[`editor-popup-header titleSolid-${headerPanelColour}`].join(' ')}>
+            <div className={'editor-popup-div'}>
               <div className={'textSheetTitleBox'}>
                 <span>{headerOne}</span>&nbsp;
                 {headerOneBadgeOne ? (
@@ -135,7 +124,7 @@ const PopUpTextEditor = (props) => {
             </div>
           </Paper>
         </DialogTitle>
-        <DialogContent className={['textsheetPopupContent'].join(' ')} style={{ width: '600px' }}>
+        <DialogContent className={['editor-popup-content','textsheetPopupContent'].join(' ')}>
           <EditorJs
             instanceRef={(instance) => (instanceRef.current = instance)}
             data={innerContent}

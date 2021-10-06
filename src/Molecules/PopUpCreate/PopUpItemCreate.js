@@ -406,7 +406,7 @@ const PopUpItemCreate = (props) => {
         setErrorMsg={setRequiredErrorMsg}
         errorMsg={requiredErrorMsg}
         ListData={itemInformation.informationFramework.itemFrameworkOne.itemFrameworkOneScale}
-        textOne={'itemFrameworkOneScaleLabel'}
+        textOne={'itemFrameworkOneScale'}
         textTwo={''}
         // onClickEvent={(e) => {
         //   updateGroup(e, 'itemType', 'itemTypeSecondary');

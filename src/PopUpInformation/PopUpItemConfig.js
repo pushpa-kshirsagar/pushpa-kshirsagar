@@ -38,6 +38,7 @@ const PopUpItemConfig = (props) => {
   const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne.itemFrameworkOneAlignment);
   const [item_Type, set_Item_Type] = useState(itemFrameworkOne.itemFrameworkOneType);
   const [response_word, set_Response_Word] = useState();
+  const [response_Choice_Aligement, set_Choice_Response_Word] = useState();
   const [response_Aligement, Set_Response_Aligement] = useState(
     itemFrameworkOne.itemFrameworkOneResponseAlignment
   );
@@ -422,10 +423,8 @@ const PopUpItemConfig = (props) => {
                   labelBadgeOne={'alignment'}
                   listSelect={[
                     { id: ' ', name: ' ' },
-                    { id: 'horizontal (bottom)', name: 'horizontal (bottom)' },
-                    { id: 'horizontal (top)', name: 'horizontal (top)' },
-                    { id: 'vertical (bottom)', name: 'vertical (bottom)' },
-                    { id: 'vertical (top)', name: 'vertical (top)' }
+                    { id: 'horizontal', name: 'horizontal' },
+                    { id: 'vertical', name: 'vertical' }
                   ]}
                   errorMsg={() => {}}
                   onChange={
@@ -464,10 +463,8 @@ const PopUpItemConfig = (props) => {
                   labelBadgeOne={'alignment'}
                   listSelect={[
                     { id: '', name: '' },
-                    { id: 'horizontal (bottom)', name: 'horizontal (bottom)' },
-                    { id: 'horizontal (top)', name: 'horizontal (top)' },
-                    { id: 'vertical (bottom)', name: 'vertical (bottom)' },
-                    { id: 'vertical (top)', name: 'vertical (top)' }
+                    { id: 'horizontal', name: 'horizontal' },
+                    { id: 'vertical', name: 'vertical' }
                   ]}
                   errorMsg={() => {}}
                   onChange={
@@ -498,103 +495,28 @@ const PopUpItemConfig = (props) => {
                     }
                   />
                 )}
-                <div className={'fitContent'}>
-                  <div
-                    className={['PopupFormBox', 'popupMinHei0'].join(' ')}
-                    style={{ minHeight: 0 }}
-                  >
-                    <div className={'contFlex'}>
-                      <div className={'f4'}>{createNameWithBadge('item (explanation)')}</div>
-                      <div className={'checkedFontNew'}>
-                        <Checkbox
-                          style={{ float: 'right', margin: '0px' }}
-                          className={''}
-                          color="default"
-                          name={'assesseeAddressEmailCommunication'}
-                          value={''}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={'fitContent'}>
-                  <div
-                    className={['PopupFormBox', 'popupMinHei0'].join(' ')}
-                    style={{ minHeight: 0 }}
-                  >
-                    <div className={'contFlex'}>
-                      <div className={'f4'}>{createNameWithBadge('item (label)')}</div>
-                      <div className={'checkedFontNew'}>
-                        <Checkbox
-                          style={{ float: 'right', margin: '0px' }}
-                          className={''}
-                          color="default"
-                          name={'assesseeAddressEmailCommunication'}
-                          value={''}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={'fitContent'}>
-                  <div
-                    className={['PopupFormBox', 'popupMinHei0'].join(' ')}
-                    style={{ minHeight: 0 }}
-                  >
-                    <div className={'contFlex'}>
-                      <div className={'f4'}>
-                        {createNameWithBadge('response (choice) (explanation)')}
-                      </div>
-                      <div className={'checkedFontNew'}>
-                        <Checkbox
-                          style={{ float: 'right', margin: '0px' }}
-                          className={''}
-                          color="default"
-                          name={'assesseeAddressEmailCommunication'}
-                          value={''}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={'fitContent'}>
-                  <div
-                    className={['PopupFormBox', 'popupMinHei0'].join(' ')}
-                    style={{ minHeight: 0 }}
-                  >
-                    <div className={'contFlex'}>
-                      <div className={'f4'}>{createNameWithBadge('response (explanation)')}</div>
-                      <div className={'checkedFontNew'}>
-                        <Checkbox
-                          style={{ float: 'right', margin: '0px' }}
-                          className={''}
-                          color="default"
-                          name={'assesseeAddressEmailCommunication'}
-                          value={''}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className={'fitContent'}>
-                  <div
-                    className={['PopupFormBox', 'popupMinHei0'].join(' ')}
-                    style={{ minHeight: 0 }}
-                  >
-                    <div className={'contFlex'}>
-                      <div className={'f4'}>{createNameWithBadge('response (label)')}</div>
-                      <div className={'checkedFontNew'}>
-                        <Checkbox
-                          style={{ float: 'right', margin: '0px' }}
-                          className={''}
-                          color="default"
-                          name={'assesseeAddressEmailCommunication'}
-                          value={''}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <SelectField
+                  tag={'response_choice_Aligement'}
+                  label={'response'}
+                  dataValue={'response'}
+                  labelBadgeOne={'choice'}
+                  labelBadgeTwo={'alignment'}
+                  listSelect={[
+                    { id: '', name: '' },
+                    { id: 'horizontal', name: 'horizontal' },
+                    { id: 'vertical', name: 'vertical' }
+                  ]}
+                  errorMsg={() => {}}
+                  onChange={
+                    mode === 'revise'
+                      ? (e) => {
+                          set_Choice_Response_Word(e.target.value);
+                        }
+                      : null
+                  }
+                  value={response_Choice_Aligement}
+                  mappingValue={'id'}
+                />
               </Fragment>
             ) : (
               <Fragment>

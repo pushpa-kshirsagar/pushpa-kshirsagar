@@ -79,34 +79,8 @@ const initialState = {
         itemFrameworkOneResponse: '',
         itemFrameworkOneResponseAlignment: '',
         itemFrameworkOneResponseAttachment: '',
-        itemFrameworkOneResponseChoice: [
-          // {
-          //   itemFrameworkOneResponseChoiceAlignment: '',
-          //   itemFrameworkOneResponseChoiceColumnMatch: '',
-          //   itemFrameworkOneResponseChoiceExplanation: {
-          //     itemFrameworkOneResponseChoiceExplanationMedia: null,
-          //     itemFrameworkOneResponseChoiceExplanationDisplay: false
-          //   },
-          //   itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
-          //   itemFrameworkOneResponseChoiceNumber: '1',
-          //   itemFrameworkOneResponseChoicePolarity: '',
-          //   itemFrameworkOneResponseChoiceScore: '',
-          //   itemFrameworkOneResponseChoiceWeightage: ''
-          // },
-          // {
-          //   itemFrameworkOneResponseChoiceAlignment: '',
-          //   itemFrameworkOneResponseChoiceColumnMatch: '',
-          //   itemFrameworkOneResponseChoiceExplanation: {
-          //     itemFrameworkOneResponseChoiceExplanationMedia: null,
-          //     itemFrameworkOneResponseChoiceExplanationDisplay: false
-          //   },
-          //   itemFrameworkOneResponseChoiceMedia: null, //optionLabel,
-          //   itemFrameworkOneResponseChoiceNumber: '2',
-          //   itemFrameworkOneResponseChoicePolarity: '',
-          //   itemFrameworkOneResponseChoiceScore: '',
-          //   itemFrameworkOneResponseChoiceWeightage: ''
-          // }
-        ],
+        itemFrameworkOneResponseChoice: [],
+        itemFrameworkOneResponseChoiceAlignment: '',
         itemFrameworkOneResponseCorrect: [],
         itemFrameworkOneResponseLabel: {
           itemFrameworkOneResponseLabelDisplay: false,
@@ -115,7 +89,7 @@ const initialState = {
         itemFrameworkOneResponseExplanation: {
           itemFrameworkOneResponseExplanationDisplay: false,
           itemFrameworkOneResponseExplanationMedia: null
-        }, //responseDescription,
+        },
         itemFrameworkOneScale: [],
         itemFrameworkOneScore: null,
         itemFrameworkOneSection: [
