@@ -23,7 +23,10 @@ import {
   UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
   UPDATE_ASSOCIATE_SETUP_ASSOCIATENODE_INFO,
   UPDATE_ASSOCIATE_SETUP_INFO,
-  UPDATE_ASSOCIATE_SETUP_ITEM_INFO
+  UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+  UPDATE_ASSOCIATE_COUNTRY_INFO,
+  UPDATE_ASSOCIATE_CURRENCY_INFO,
+  UPDATE_ASSOCIATE_LANGUAGE_INFO
 } from '../../actionType';
 import {
   getPermissionStr,
@@ -3842,6 +3845,56 @@ const DisplayPaneThreeSectionOneAssociate = () => {
       });
     }
     console.log('badgeName', badgeName);
+    if (!associateInfo?.informationSetup.assessee) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ASSESSEE_INFO,
+        payload: assesseeSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.assessment) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ASSESSMENT_INFO,
+        payload: assessmentSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.assignment) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ASSIGNMENT_INFO,
+        payload: assignmentSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.item) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ITEM_INFO,
+        payload: itemSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.analytic) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_ANALYTIC_INFO,
+        payload: analyticSetUpModule
+      });
+    }
+    if (!associateInfo?.informationSetup.associate) {
+      dispatch({
+        type: UPDATE_ASSOCIATE_SETUP_INFO,
+        payload: setUpAssociateModule
+      });
+
+      dispatch({
+        type:UPDATE_ASSOCIATE_COUNTRY_INFO,
+        payload:setUpAssociateModule?.associateCountry
+      })
+
+      dispatch({
+        type:UPDATE_ASSOCIATE_CURRENCY_INFO,
+        payload:setUpAssociateModule?.associateCurrency
+      })
+      dispatch({
+        type:UPDATE_ASSOCIATE_LANGUAGE_INFO,
+        payload:setUpAssociateModule?.associateLanguage
+      })
+    }
     if (labelName === 'assessees') {
       if (!associateInfo?.informationSetup.assessee) {
         dispatch({
@@ -4493,6 +4546,20 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           type: UPDATE_ASSOCIATE_SETUP_INFO,
           payload: setUpAssociateModule
         });
+
+        dispatch({
+          type:UPDATE_ASSOCIATE_COUNTRY_INFO,
+          payload:setUpAssociateModule?.associateCountry
+        })
+
+        dispatch({
+          type:UPDATE_ASSOCIATE_CURRENCY_INFO,
+          payload:setUpAssociateModule?.associateCurrency
+        })
+        dispatch({
+          type:UPDATE_ASSOCIATE_LANGUAGE_INFO,
+          payload:setUpAssociateModule?.associateLanguage
+        })
       }
       if (
         badgeName === 'nodepermissiondescendant' ||
@@ -5028,6 +5095,20 @@ const DisplayPaneThreeSectionOneAssociate = () => {
           type: UPDATE_ASSOCIATE_SETUP_INFO,
           payload: setUpAssociateModule
         });
+
+        dispatch({
+          type:UPDATE_ASSOCIATE_COUNTRY_INFO,
+          payload:setUpAssociateModule?.associateCountry
+        })
+
+        dispatch({
+          type:UPDATE_ASSOCIATE_CURRENCY_INFO,
+          payload:setUpAssociateModule?.associateCurrency
+        })
+        dispatch({
+          type:UPDATE_ASSOCIATE_LANGUAGE_INFO,
+          payload:setUpAssociateModule?.associateLanguage
+        })
       }
       if (labelName === 'associates' && selectedBadgeName === '') {
         dispatch({
