@@ -49,7 +49,7 @@ const PopUpItemConfig = (props) => {
   useEffect(() => {
     set_Response_Choice(
       itemFrameworkOne.itemFrameworkOneResponseChoice.length === 0
-        ? 2
+        ? 3
         : itemFrameworkOne.itemFrameworkOneResponseChoice.length
     );
     // set_Response_Choice(2);
@@ -181,7 +181,7 @@ const PopUpItemConfig = (props) => {
       let actlen = itemFrameworkOneResponseChoice.length - response_Choice;
       let arr = itemFrameworkOne.itemFrameworkOneResponseChoice;
       let newArr = arr.slice(0, -actlen);
-      if (newArr.length >= 2) {
+      if (newArr.length >= 3) {
         dispatch({
           type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: {

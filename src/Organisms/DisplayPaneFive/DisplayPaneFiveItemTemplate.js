@@ -227,17 +227,19 @@ const DisplayPaneFiveItemTemplate = (props) => {
       {(itemType === 'Likert-Scale' || itemType === 'Template') && (
         <div className="likartscale">
           <FormControl component="fieldset" style={{ width: '100%' }}>
-            <div className="likart">
-              <div class="item"></div>
+            {itemFrameworkOne?.itemFrameworkOneScale.length > 0 && (
+              <div className="likart">
+                <div class="item"></div>
 
-              {itemFrameworkOne?.itemFrameworkOneScale.map((ob, key) => {
-                return (
-                  <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
-                    {ob.itemFrameworkOneScale}
-                  </div>
-                );
-              })}
-            </div>
+                {itemFrameworkOne?.itemFrameworkOneScale.map((ob, key) => {
+                  return (
+                    <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
+                      {ob.itemFrameworkOneScale}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
             {itemFrameworkOneSection.map((ob, keys) => {
               return (
@@ -754,51 +756,46 @@ const DisplayPaneFiveItemTemplate = (props) => {
         </div>
       )}
       {/* response explanation */}
-      {(itemType === 'Response-Choice (Single-Select)' ||
-        itemType === 'Template' ||
-        itemType === 'False-True' ||
-        itemType === 'Response (Long)' ||
-        itemType === 'Response (Short)' ||
-        itemType === 'Fill-in-the-Blank (Response-Choice)') && (
-        <Fragment>
-          {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-            ?.itemFrameworkOneResponseExplanationMedia ||
-            reviewMode === 'revise') && (
-            <div className={'innerpadding'}>
-              <div
-                className={['ex_container', 'ig-explanation '].join(' ')}
-                style={{ cursor: reviewMode === 'revise' && 'pointer' }}
-                onClick={
-                  reviewMode === 'revise'
-                    ? () => {
-                        dispatch({
-                          type: SET_POPUP_VALUE,
-                          payload: {
-                            isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
-                            popupMode: 'RESPONSE_DESCRIPTION_TEXT'
-                          }
-                        });
-                      }
-                    : null
-                }
-              >
-                {(!itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                  ?.itemFrameworkOneResponseExplanationMedia &&
-                  reviewMode === 'revise' &&
-                  ReactHTMLParser(responseExplanationText)) || (
-                  <EditorTemplate
-                    jsonData={
-                      itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                        ?.itemFrameworkOneResponseExplanationMedia
+
+      <Fragment>
+        {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
+          ?.itemFrameworkOneResponseExplanationMedia ||
+          reviewMode === 'revise') && (
+          <div className={'innerpadding'}>
+            <div
+              className={['ex_container', 'ig-explanation '].join(' ')}
+              style={{ cursor: reviewMode === 'revise' && 'pointer' }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
+                          popupMode: 'RESPONSE_DESCRIPTION_TEXT'
+                        }
+                      });
                     }
-                    label={'itemFrameworkOneResponseExplanationMedia'}
-                  />
-                )}
-              </div>
+                  : null
+              }
+            >
+              {(!itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                ?.itemFrameworkOneResponseExplanationMedia &&
+                reviewMode === 'revise' &&
+                ReactHTMLParser(responseExplanationText)) || (
+                <EditorTemplate
+                  jsonData={
+                    itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                      ?.itemFrameworkOneResponseExplanationMedia
+                  }
+                  label={'itemFrameworkOneResponseExplanationMedia'}
+                />
+              )}
             </div>
-          )}
-        </Fragment>
-      )}
+          </div>
+        )}
+      </Fragment>
+
       <div>
         <div
           style={{

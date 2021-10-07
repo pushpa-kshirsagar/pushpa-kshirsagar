@@ -211,7 +211,7 @@ const PopUpItemFramework = (props) => {
                 label={'cluster'}
                 dataValue={'cluster'}
                 labelBadgeOne={'distinct'}
-                listSelect={itemFrameworkOne.itemFrameworkOneGroupCluster}
+                listSelect={itemFrameworkOne.itemFrameworkOneGroupCluster || []}
                 errorMsg={() => {}}
                 onChange={onChangeCluster}
                 isMultiSelect={true}

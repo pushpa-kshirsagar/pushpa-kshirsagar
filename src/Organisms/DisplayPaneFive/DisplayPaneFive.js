@@ -390,6 +390,29 @@ export const DisplayPaneFive = () => {
       });
     }
   };
+  const ChangeChoiceOptionPopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    // setSubQuestionId(e.currentTarget.getAttribute('subquestionid'))
+    setSubQuestionId(popupMode.split('_'));
+    if (targetValue === 'configure') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_CHOICE_FRAMEWORK_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'revise' && popupMode !== '') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: popupMode,
+          popupMode: ''
+        }
+      });
+    }
+  };
   const ChangeResponsePopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
@@ -851,7 +874,7 @@ export const DisplayPaneFive = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={ChangeOptionPopup}
+            ChangeOptionPopup={ChangeChoiceOptionPopup}
             currentPopUpOption={itemPrimaryPopupOption}
             secondaryOptionCheckValue={''}
           />
