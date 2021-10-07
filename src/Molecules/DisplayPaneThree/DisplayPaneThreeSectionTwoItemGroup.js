@@ -52,7 +52,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   let clusterArray = [];
   clusterObj.forEach((ob) => {
     clusterArray.push({
-      textOne: ob.itemGroupitemFrameworkOneClusterPrimaryLabel || '',
+      textOne: ob.itemGroupitemFrameworkOneClusterPrimary || '',
       textTwo: '',
       status: ob.clusterQuestionCount || 0
     });
@@ -65,7 +65,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   let polarityArray = [];
   polarityObj.forEach((ob) => {
     polarityArray.push({
-      textOne: ob.itemGroupitemFrameworkOneClusterPrimaryLabel || '',
+      textOne: ob.itemGroupitemFrameworkOneClusterPrimary || '',
       textTwo: '',
       status: ob.clusterQuestionCount || 0
     });

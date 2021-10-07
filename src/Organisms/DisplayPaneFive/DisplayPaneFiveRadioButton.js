@@ -253,7 +253,7 @@ const DisplayPaneFiveRadioButton = (props) => {
               {itemFrameworkOne?.itemFrameworkOneScale.map((ob, key) => {
                 return (
                   <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
-                    {ob.itemFrameworkOneScaleLabel}
+                    {ob.itemFrameworkOneScale}
                   </div>
                 );
               })}

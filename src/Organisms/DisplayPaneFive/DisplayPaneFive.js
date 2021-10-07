@@ -4,13 +4,11 @@ import './DisplayPaneFive.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
-  GET_ITEM_TYPE_REVIEW_LIST_SAGA,
   ITEM_INFO_REVISE_SAGA,
   LOADER_START,
   NAVIGATOR_MODE,
   POPUP_CLOSE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
-  SET_ITEM_DYNAMIC_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_INNER_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -21,11 +19,10 @@ import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import '../../Molecules/ReviewList/ReviewList.css';
-import { BottomNavigation, DialogContent, Grid, IconButton } from '@material-ui/core';
+import { DialogContent } from '@material-ui/core';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopupHeader from '../../Molecules/PopUp/PopUpHeader';
 import Popup from '../../Molecules/PopUp/PopUp';
-import CircleIcon from '../../Molecules/IconButton/IconButton';
 import JsonRenderComponent from '../../Actions/JsonRenderComponent';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import NavigatorIcon from '@material-ui/icons/OpenWith';
@@ -38,9 +35,7 @@ import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import DisplayPaneFiveRadioButton from './DisplayPaneFiveRadioButton';
 import DisplayPaneFiveLikertScale from './DisplayPaneFiveLikertScale';
-import Manuscript from '@material-ui/icons/Description';
 import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 import Paper from '@material-ui/core/Paper';
 import DisplayPaneFiveItemTemplate from './DisplayPaneFiveItemTemplate';
@@ -572,7 +567,7 @@ export const DisplayPaneFive = () => {
       <div className="containerPadding">
         <Paper className={'dossierContainerTop'}>
           <div className="containerPadding sticky-header">
-            <div style={{ height: '49px', padding: '0 5px', display: 'flex' }}>
+            <div style={{ height: '49px', padding: '0 5px', display: 'flex',cursor:'default' }}>
               <div style={{ flex: '4' }} className="">
                 <div
                   className={[
@@ -998,9 +993,9 @@ export const DisplayPaneFive = () => {
       />
       <PopUpTextEditor
         isActive={isPopUpValue === `PASSAGE_MEDIA_TEXT`}
-        headerOne={'passage'}
+        headerOne={'item'}
         headerPanelColour={'genericOne'}
-        headerOneBadgeOne={''}
+        headerOneBadgeOne={'passage'}
         headerOneBadgeTwo={''}
         basicInfo={{}}
         typeOfSetObject={''}

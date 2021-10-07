@@ -52,7 +52,7 @@ const PopUpItemFramework = (props) => {
     if (itemFrameworkOne.itemFrameworkOneCluster.length > 0) {
       let cluster = [];
       itemFrameworkOne.itemFrameworkOneCluster.map((cc) => {
-        cluster.push(cc.itemFrameworkOneClusterPrimaryLabel);
+        cluster.push(cc.itemFrameworkOneClusterPrimary);
       });
       setclassification(cluster);
     }
@@ -81,7 +81,7 @@ const PopUpItemFramework = (props) => {
       let reviseCluster = [];
       if (classification.length > 0) {
         reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
-          return classification.includes(clust.itemFrameworkOneClusterPrimaryLabel);
+          return classification.includes(clust.itemFrameworkOneClusterPrimary);
         });
       }
       dispatch({
@@ -210,12 +210,13 @@ const PopUpItemFramework = (props) => {
                 tag={'cluster'}
                 label={'cluster'}
                 dataValue={'cluster'}
+                labelBadgeOne={'distinct'}
                 listSelect={itemFrameworkOne.itemFrameworkOneGroupCluster}
                 errorMsg={() => {}}
                 onChange={onChangeCluster}
                 isMultiSelect={true}
                 value={classification}
-                mappingValue={'itemFrameworkOneClusterPrimaryLabel'}
+                mappingValue={'itemFrameworkOneClusterPrimary'}
               />
             )}
             {isItemFramework && itemConfigStates.levelState && (

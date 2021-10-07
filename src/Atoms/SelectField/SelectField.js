@@ -22,16 +22,18 @@ export const SelectField = (props) => {
     mappingValue,
     dataValue = '',
     labelBadgeOne = '',
+    labelBadgeTwo = '',
     isMultiSelect = false,
     name = 'name'
   } = props;
-  console.log('value', value && value.toString());
+  console.log('props', props);
   return (
     <Fragment>
       <FormControl className={'selectFormText'}>
         <InputLabel htmlFor={tag} style={{ marginBottom: 0, fontSize: '1.6rem' }}>
           {label} &nbsp;
-          {labelBadgeOne ? <span className={'labelheaderBadge'}>{labelBadgeOne}</span> : null}
+          {labelBadgeOne ? <span className={'labelheaderBadge'}>{labelBadgeOne}</span> : null}&nbsp;
+          {labelBadgeTwo ? <span className={'labelheaderBadge'}>{labelBadgeTwo}</span> : null}
         </InputLabel>
         <Select
           id={tag}
@@ -39,8 +41,8 @@ export const SelectField = (props) => {
           value={value}
           onChange={onChange}
           data-value={dataValue}
-          multiple={isMultiSelect}
-          renderValue={isMultiSelect ? (selected) => selected.join(', ') : null}
+          // multiple={isMultiSelect}
+          // renderValue={isMultiSelect ? (selected) => selected.join(', ') : null}
           input={<Input />}
           className={'selectFontAlign'}
         >

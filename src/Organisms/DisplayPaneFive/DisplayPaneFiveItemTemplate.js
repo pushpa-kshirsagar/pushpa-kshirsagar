@@ -28,7 +28,8 @@ const DisplayPaneFiveItemTemplate = (props) => {
   const itemLabelText =
     "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>label</span>&nbsp;";
   const itemText = '<span>item</span>&nbsp';
-  const passageText = '<span>passage</span>&nbsp';
+  const passageText =
+    "<span>item</span>&nbsp<span class='iguru-header-badge1_0'>passage</span>&nbsp;";
   const itemExplanationText =
     "<span>item</span> &nbsp <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const responseLabelText =
@@ -232,7 +233,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
               {itemFrameworkOne?.itemFrameworkOneScale.map((ob, key) => {
                 return (
                   <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
-                    {ob.itemFrameworkOneScaleLabel}
+                    {ob.itemFrameworkOneScale}
                   </div>
                 );
               })}
@@ -707,7 +708,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                       />
                     </div>
 
-                    <div style={{ paddingLeft: '25px',display:'inline-block' }}>
+                    <div style={{ paddingLeft: '25px', display: 'inline-block' }}>
                       {(op.itemFrameworkOneResponseChoiceExplanation
                         ?.itemFrameworkOneResponseChoiceExplanationMedia ||
                         reviewMode === 'revise') && (
