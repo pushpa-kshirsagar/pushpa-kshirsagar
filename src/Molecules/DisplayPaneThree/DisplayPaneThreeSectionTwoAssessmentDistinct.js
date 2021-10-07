@@ -102,7 +102,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidCalculatorPermission?'Yes':'No'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidCalculatorPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
@@ -115,7 +115,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidSpreadsheetPermission?'Yes':'No'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidSpreadsheetPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
@@ -128,7 +128,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidTextsheetPermission?'Yes':'No'
+              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidTextsheetPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
