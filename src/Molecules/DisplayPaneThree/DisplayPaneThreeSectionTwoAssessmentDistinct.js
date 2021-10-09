@@ -14,7 +14,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_PREVIEW_MODE,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE
 } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoAssessment = () => {
@@ -264,7 +265,8 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
-      IconOne: null
+      IconOne: null,
+      isReviewLink: true,
     },
     {
       id: 'response',
@@ -441,7 +443,10 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     }
   ];
 
-  const onClickReview = (headerOne, badgeOne) => {
+  const onClickReview = (e) => {
+    const headerOne = e.currentTarget.getAttribute('data-value');
+    const badgeOne = e.currentTarget.getAttribute('data-key');
+    
     if (headerOne === 'communiqué' && badgeOne === 'primary') {
       dispatch({
         type: SET_PANE_THREE_PREVIEW_MODE,
@@ -501,6 +506,10 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         }
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+    }
+    if(headerOne==='preview'){
+      dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }
   };
   const reviseFramework = (e,selectedBadgeArray) => {
@@ -671,6 +680,10 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'AID_TEXTSHEET_TYPE_POPUP', popupMode: 'ASSESSMENTCREATE' }
       });
+    }
+    if(labelName==='preview'){
+      dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }
   };
 

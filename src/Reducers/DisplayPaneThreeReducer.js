@@ -19,7 +19,8 @@ import {
   SET_RANGE_SELECTED,
   SET_CREATE_MODE,
   SET_PANE_THREE_PREVIEW_MODE,
-  SET_PANE_THREE_ITEM_PREVIEW_MODE
+  SET_PANE_THREE_ITEM_PREVIEW_MODE,
+  SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE
 } from '../actionType';
 
 const initialState = {
@@ -112,6 +113,7 @@ const initialState = {
   setUpAssociateModuleGeneric: null,
   analyticSetUpModuleGeneric: null,
   itemSetUpModuleGeneric: null,
+  isAssessmentPreviewShow: false,
 };
 
 const DisplayPaneThreeReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
@@ -250,6 +252,12 @@ const DisplayPaneThreeReducer = (istate = JSON.parse(JSON.stringify(initialState
         ...istate,
         isItemPreviewShow: action.payload
       };
+      case SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE:
+        return{
+          ...istate,
+          isAssessmentPreviewShow:action.payload
+        }
+
     case CLEAR_DISPLAY_PANE_THREE:
       return JSON.parse(JSON.stringify(initialState));
     default:

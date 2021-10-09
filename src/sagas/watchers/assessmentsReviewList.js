@@ -218,7 +218,7 @@ function* workerAssessmentItemReviewList(data) {
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
-      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
       yield put({ type: SET_REVIEW_LIST_RELATE_DATA, payload: response.responseObject });
       if (data.payload.isMiddlePaneList) {
         yield put({

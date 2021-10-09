@@ -67,7 +67,7 @@ const DisplayPageOne = () => {
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isItemPreviewShow = false, reviewMode } = useSelector(
+  const { isItemPreviewShow = false, reviewMode,isAssessmentPreviewShow = false } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
 
@@ -231,7 +231,17 @@ const DisplayPageOne = () => {
                   <DisplayPaneThree />
                 </div>
               </>
-            ) : (
+            ) : isAssessmentPreviewShow?(
+              <>
+                <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '95.5%' }}>
+                  <DisplayPaneFive />
+                </div>
+                <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
+                  <DisplayPaneThree />
+                </div>
+              </>
+            ):
+             (
               <>
                 <div className="display-pane-container">
                   <DisplayPaneOne />
