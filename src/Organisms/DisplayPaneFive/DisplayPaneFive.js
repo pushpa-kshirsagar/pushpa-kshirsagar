@@ -108,47 +108,45 @@ function StyledRadio(props) {
 export const DisplayPaneFive = () => {
   const dispatch = useDispatch();
   const [currentItemIndex, setcurrentItemIndex] = useState(0);
-  const {    
-    middlePaneHeader,
-    middlePaneHeaderBadgeOne,
-    middlePaneHeaderBadgeTwo,
-  } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { middlePaneHeader, middlePaneHeaderBadgeOne, middlePaneHeaderBadgeTwo } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const {
     headerOne,
-    headerOneBadgeOne,   
-    isAssessmentPreviewShow=false,
-    isItemPreviewShow = false 
+    headerOneBadgeOne,
+    isAssessmentPreviewShow = false,
+    isItemPreviewShow = false
   } = useSelector((state) => state.DisplayPaneThreeReducer);
-  const { informationFramework,isDisplayPaneSixShow } = useSelector(
+  const { informationFramework, isDisplayPaneSixShow } = useSelector(
     (state) => state.AssessmentReducer
   );
-  const { FilterMode,navigatorIcon } = useSelector((state) => state.FilterReducer);
-  console.log(FilterMode,navigatorIcon);
-  console.log("AssessmentInformation", informationFramework);
+  const { FilterMode, navigatorIcon } = useSelector((state) => state.FilterReducer);
+  console.log(FilterMode, navigatorIcon);
+  console.log('AssessmentInformation', informationFramework);
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: false });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: "displayPaneThree" });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
   };
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
     dispatch({ type: NAVIGATOR_MODE });
     if (clickedval === 'previous') {
-        let prevIndex=currentItemIndex-1;
-        if(currentItemIndex!==0){
-            setcurrentItemIndex(prevIndex);
-        }
+      let prevIndex = currentItemIndex - 1;
+      if (currentItemIndex !== 0) {
+        setcurrentItemIndex(prevIndex);
+      }
     }
     if (clickedval === 'first') {
-        setcurrentItemIndex(0);        
+      setcurrentItemIndex(0);
     }
     if (clickedval === 'next') {
-        if(currentItemIndex<informationFramework.assessmentItem.length-1){
-            setcurrentItemIndex(currentItemIndex+1);
-        }
+      if (currentItemIndex < informationFramework.assessmentItem.length - 1) {
+        setcurrentItemIndex(currentItemIndex + 1);
+      }
     }
     if (clickedval === 'last') {
-        let lastIndex=informationFramework.assessmentItem.length-1;
-        setcurrentItemIndex(lastIndex);        
+      let lastIndex = informationFramework.assessmentItem.length - 1;
+      setcurrentItemIndex(lastIndex);
     }
   };
   // const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
@@ -163,56 +161,51 @@ export const DisplayPaneFive = () => {
     { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
   const data = {
-    id: "61090cace50cf61d5eb440ce",
-    itemFrameworkOneTypeDescription: "Single-Select",
-    itemFrameworkOneTypeName: "Response-Choice",
-    itemFrameworkOneTypeNameReference: "Response-Choice (Single-Select)"
+    id: '61090cace50cf61d5eb440ce',
+    itemFrameworkOneTypeDescription: 'Single-Select',
+    itemFrameworkOneTypeName: 'Response-Choice',
+    itemFrameworkOneTypeNameReference: 'Response-Choice (Single-Select)'
   };
 
   //let itemObect = informationFramework?.informationFramework?.itemFrameworkOne?.assessmentItem[currentItemIndex];
   let itemObect =
-    informationFramework?.assessmentItem[currentItemIndex].informationFramework
-      ?.itemFrameworkOne;
+    informationFramework?.assessmentItem[currentItemIndex].informationFramework?.itemFrameworkOne;
   //console.log("itemObect", itemObect);
-  
-  
+
   // const isHrSetup = false;
   // console.log('ITEM INFO', itemInformation);
   // const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
   // const data = itemTypeList.find(
   //   (item) => item.id === informationFramework?.assessmentItemassessmentItem[currentItemIndex].informationFramework?.itemFrameworkOne
   // );
-  
+
   // console.log('selected item role type, ', data);
 
-return(
-  <>
-  <div>
-    {
-      isAssessmentPreviewShow?(
-        <DisplayPaneFiveAssessment
-        headerOne={headerOne}
-        headerOneBadgeOne={headerOneBadgeOne}
-        data={data}
-        itemObect={itemObect}
-        closePreview={closePreview}
-        primaryIcon={primaryIcon}
-        secondaryIcon={secondaryIcon}
-        navigatorIcon={navigatorIcon}
-        FilterMode={FilterMode}
-        isDisplayPaneSixShow={isDisplayPaneSixShow}
-        onClickFooter={onClickFooter}
-        informationFramework={informationFramework}
-        currentItemIndex={currentItemIndex}
-        />
-      ):
-      isItemPreviewShow?(
-        <DisplayPaneFiveItem/>
-      ):null
-    }
-  </div>
-  </>
-)
+  return (
+    <>
+      <div>
+        {isAssessmentPreviewShow ? (
+          <DisplayPaneFiveAssessment
+            headerOne={headerOne}
+            headerOneBadgeOne={headerOneBadgeOne}
+            data={data}
+            itemObect={itemObect}
+            closePreview={closePreview}
+            primaryIcon={primaryIcon}
+            secondaryIcon={secondaryIcon}
+            navigatorIcon={navigatorIcon}
+            FilterMode={FilterMode}
+            isDisplayPaneSixShow={isDisplayPaneSixShow}
+            onClickFooter={onClickFooter}
+            informationFramework={informationFramework}
+            currentItemIndex={currentItemIndex}
+          />
+        ) : isItemPreviewShow ? (
+          <DisplayPaneFiveItem />
+        ) : null}
+      </div>
+    </>
+  );
 };
 
 export default DisplayPaneFive;

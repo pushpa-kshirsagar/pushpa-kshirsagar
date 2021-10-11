@@ -1,39 +1,32 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./InputField.css";
-import {
-  Input,
-  InputLabel,
-  FormControl,
-  FormHelperText,
-} from "@material-ui/core";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './InputField.css';
+import { Input, InputLabel, FormControl, FormHelperText } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 export const InputField = (props) => {
   const {
     id,
     label,
-    type = "text",
-    errorMsg = "",
+    type = 'text',
+    errorMsg = '',
     onClick,
     value,
     labelBadgeOne,
     isRequired = true,
     autoFocus = false,
-    classNames = "",
+    classNames = '',
     isErrorMsg = true,
-    currencySymbol = "",
+    currencySymbol = ''
   } = props;
   return (
     <div className="popup-form-box">
-      <FormControl style={{ width: "100%" }}>
-        <InputLabel htmlFor={id} style={{ fontSize: "1.6rem" }}>
+      <FormControl style={{ width: '100%' }}>
+        <InputLabel htmlFor={id} style={{ fontSize: '1.6rem' }}>
           {label} &nbsp;
-          {labelBadgeOne ? (
-            <span className={"labelheaderBadge"}>{labelBadgeOne}</span>
-          ) : null}
+          {labelBadgeOne ? <span className={'labelheaderBadge'}>{labelBadgeOne}</span> : null}
         </InputLabel>
-        {currencySymbol === "" ? (
+        {currencySymbol === '' ? (
           <Input
             type={type}
             id={id}
@@ -42,7 +35,7 @@ export const InputField = (props) => {
             onChange={onClick}
             autoComplete="off"
             autoFocus={autoFocus}
-            className={["inputFields", classNames].join(" ")}            
+            className={['inputFields', classNames].join(' ')}
           />
         ) : (
           <Input
@@ -53,10 +46,11 @@ export const InputField = (props) => {
             onChange={onClick}
             autoComplete="off"
             autoFocus={autoFocus}
-            className={["inputFields", classNames].join(" ")}
+            className={['inputFields', classNames].join(' ')}
             startAdornment={
               <InputAdornment
-                style={{ fontSize: "1.6rem", paddingRight: "5px" }}
+                style={{ paddingRight: '5px' }}
+                className={'inputFieldsAdorment'}
                 position="start"
               >
                 {currencySymbol}
@@ -67,10 +61,7 @@ export const InputField = (props) => {
       </FormControl>
       {isRequired && (
         <FormHelperText
-          className={[
-            isErrorMsg ? "helperText" : "helperTextDefault",
-            "helptextmargin",
-          ].join(" ")}
+          className={[isErrorMsg ? 'helperText' : 'helperTextDefault', 'helptextmargin'].join(' ')}
         >
           <span>{errorMsg}</span>
         </FormHelperText>
@@ -82,7 +73,7 @@ export const InputField = (props) => {
 InputField.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
-  type: PropTypes.oneOf(["text", "password", "datetime-local", "date"]),
+  type: PropTypes.oneOf(['text', 'password', 'datetime-local', 'date'])
 };
 
 export default InputField;
