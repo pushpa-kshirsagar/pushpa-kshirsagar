@@ -13,9 +13,106 @@ import {
   SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
 } from "../../actionType";
 
-import Paper from "@material-ui/core/Paper";
+//import Paper from "@material-ui/core/Paper";
+import { InputLabel, Paper,IconButton } from '@material-ui/core';
 import EditorTemplate from "./EditorTemplate";
 import FooterIconTwo from "../../Molecules/FooterIcon/FooterIconTwo";
+import { useTimer } from 'react-timer-hook';
+
+const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
+  const { seconds, minutes, hours } = useTimer({
+    expiryTimestamp,
+    onExpire: timerFinished
+    // onExpire: () => {
+    //   console.warn('onExpire called');
+    // }
+  });
+  return (
+    <div>
+      <span>{hours < 10 ? '0' + hours : hours}</span>:
+      <span>{minutes < 10 ? '0' + minutes : minutes}</span>:
+      <span>{seconds < 10 ? '0' + seconds : seconds}</span>
+    </div>
+  );
+};
+const AssessmentHeader = (props) => {
+  return (
+    <Fragment>
+      <Paper className={'dossierContainerTop'}>
+        <div className="containerPadding sticky-header">
+          <div style={{ height: '49px', padding: '0 5px', display: 'flex' }} className={''}>
+            <div style={{ display: 'inline-block', flex: '2' }}>
+              <div
+                className={[
+                  'midPaneInformation',
+                  props.assessmentDesc !== '' ? null : 'aliasmiddle'
+                ].join(' ')}
+              >
+                {props.assessmentName}
+              </div>
+              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+                {props.assessmentDesc}
+              </div>
+            </div>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+              className="flex-center"
+            >
+              <span
+                className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(' ')}
+                style={{ textAlign: 'center' }}
+              >
+                {/* <InputLabel
+                  className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
+                >
+                  {1 + '/' + 2}
+                </InputLabel> */}
+                <InputLabel
+                  className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
+                >
+                  {props.qnumber + '/' + props.totalQuestion}
+                </InputLabel>
+              </span>
+            </div>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+              className="flex-center"
+            >
+              {props.score}
+            </div>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+              className="flex-center"
+            >
+              {props.timer && (
+                <span style={{}}>
+                  <AssessmentTimer
+                    expiryTimestamp={props.timer}
+                    key={props.timer}
+                    timerFinished={props.timerFinished}
+                  />
+                </span>
+              )}
+            </div>
+            <div
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+              className="flex-center"
+            >
+              <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
+                {props.isQuestionFlaged ? (
+                  <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
+                ) : (
+                  <i className="far fa-flag"></i>
+                )}
+              </IconButton>
+            </div>
+          </div>
+        </div>
+      </Paper>
+      <hr className={'assessmentHeaderHr'} />
+    </Fragment>
+  );
+};
 
 export const DisplayPaneFiveAssessment = (props) => {
     const{
@@ -30,7 +127,11 @@ export const DisplayPaneFiveAssessment = (props) => {
         isDisplayPaneSixShow,
         onClickFooter,
         data,
-        typeMode=true
+        typeMode=true,
+        informationFramework,
+        currentItemIndex,
+        flagQuestion,
+        isQuestionFlaged
     } =props;
 //   const [currentItemIndex, setcurrentItemIndex] = useState(0);
 
@@ -121,6 +222,7 @@ export const DisplayPaneFiveAssessment = (props) => {
         />
       </div>
       <div className="containerPadding">
+        <div style={{display:'none'}}>
         <Paper className={"dossierContainerTop"}>
           <div className="containerPadding sticky-header">
             <div
@@ -187,6 +289,23 @@ export const DisplayPaneFiveAssessment = (props) => {
             </div>
           </div>
         </Paper>
+        </div>
+        
+        <AssessmentHeader
+        qnumber={currentItemIndex + 1}
+        totalQuestion={informationFramework?.assessmentItem?.length}
+        score={
+          informationFramework?.assessmentItem[currentItemIndex]
+            .itemFrameworkOneScore
+        }
+        assessmentName={informationFramework?.assessmentName}
+        assessmentDesc={informationFramework?.assessmentDescription}
+        onClickFlag={flagQuestion}
+        isQuestionFlaged={isQuestionFlaged}
+        timerFinished={''}
+        timer={'timer'}/>
+
+        
         <div
           className=""
           style={{ height: "calc(100vh - 200px)", overflow: "overlay" }}

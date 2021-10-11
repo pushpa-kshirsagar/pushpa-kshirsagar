@@ -680,6 +680,44 @@ export const MODULE_POPUP_OPTION = [
     permission: 'review'
   }
 ];
+export const CLUSTER_SCALE_POPUP_OPTION = [
+  {
+    data: 'create',
+    dataValue: 'create',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    //permissionArr: 'assessee',
+    permission: 'create',
+    dataKey:'clusterscalecreate'
+
+  },
+  {
+    data: 'review',
+    dataValue: 'review',
+    optionClass: 'optionPrimary',
+    divider: 'dark',
+    disabled: false,
+    //permissionArr: 'assessee',
+    permission: 'review',
+    dataKey:'clusterscalereview'
+  },
+  {
+    data: 'notifications',
+    dataValue: 'notifications',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  },
+  {
+    data: 'reports',
+    dataValue: 'reports',
+    optionClass: 'optionPrimary',
+    disabled: false,
+    permissionArr: 'assessee',
+    permission: 'review'
+  }
+];
 export const GROUP_NODE_ROLE_TYPE_POPUP_OPTION = [
   { data: 'create', dataValue: 'create', optionClass: 'optionPrimary', disabled: true },
   {
@@ -1313,6 +1351,21 @@ export const ASSESSMENT_REVIEW_LIST_POPUP_OPTION = [
     optionClass: 'optionPrimary',
     divider: 'dark',
     disabled: false
+  },
+  {
+    data:'clusters',    
+    dataValue:'clusters',    
+    //dataKey: 'review',    
+    optionClass: 'optionPrimary',    
+    disabled: false,
+  },
+  {
+    data:'scales',    
+    dataValue:'scales',    
+    //dataKey: 'review',    
+    optionClass: 'optionPrimary',    
+    disabled: false,
+    divider: 'dark'
   },
   {
     data: 'items',

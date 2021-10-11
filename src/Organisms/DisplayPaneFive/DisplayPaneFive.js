@@ -125,7 +125,6 @@ export const DisplayPaneFive = () => {
   const { FilterMode,navigatorIcon } = useSelector((state) => state.FilterReducer);
   console.log(FilterMode,navigatorIcon);
   console.log("AssessmentInformation", informationFramework);
-  const [subItemList, setSubItemList] = useState(["item-1"]);
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: false });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: "displayPaneThree" });
@@ -203,6 +202,8 @@ return(
         FilterMode={FilterMode}
         isDisplayPaneSixShow={isDisplayPaneSixShow}
         onClickFooter={onClickFooter}
+        informationFramework={informationFramework}
+        currentItemIndex={currentItemIndex}
         />
       ):
       isItemPreviewShow?(

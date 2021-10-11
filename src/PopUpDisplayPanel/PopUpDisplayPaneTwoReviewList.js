@@ -2548,7 +2548,23 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dataVal,
         selectedTagValue
       );
-    } else {
+    }else if(dataVal === 'information' &&
+    popupHeaderOneBadgeTwo === 'create' &&
+    popupHeaderOne === 'clusters'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    else if(dataVal === 'information' &&
+    popupHeaderOneBadgeTwo === 'create' &&
+    popupHeaderOne === 'scales'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SCALECREATE' }
+      });
+    }    
+     else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: { badgeValue: dataVal, keyValue: keyVal }

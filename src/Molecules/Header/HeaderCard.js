@@ -165,6 +165,33 @@ const HeaderCard = (props) => {
     dispatch({ type: POPUP_OPEN, payload: 'leftPaneTrippleDotPopup' });
   };
   const openRightPaneTripleDotPopup = () => {
+    // let popupClustersObject={
+    //   data:'clusters',    
+    //   dataValue:'clusters',    
+    //   dataKey: 'review',    
+    //   optionClass: 'optionPrimary',    
+    //   disabled: false,
+    // }
+    // let popupScalesObject={
+    //   data:'scales',    
+    //   dataValue:'scales',    
+    //   dataKey: 'review',    
+    //   optionClass: 'optionPrimary',    
+    //   disabled: false,
+    //   divider: 'dark'
+    // }
+    // let tempArr = [];
+    // // middlePaneListPopupOptions.map((element)=>{
+    // //   if(element.data === 'cluster')
+    // //   tempArr.push(element);
+    // //   else
+    // //   tempArr.push(element);
+    // // })
+    // let isCluster = middlePaneListPopupOptions.filter((element)=>element.data==='clusters')
+    // console.log(isCluster);
+    // if(isCluster.length===0){
+    //   middlePaneListPopupOptions.splice(11, 0, popupClustersObject,popupScalesObject);
+    // }
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
