@@ -42,7 +42,8 @@ import {
   EXCHANGE_POPUP_OPTION,
   ROLE_POPUP_OPTION,
   SHARE_NEW_POPUP,
-  ADMINISTER_POPUP
+  ADMINISTER_POPUP,
+  CLUSTER_SCALE_POPUP_OPTION
 } from '../PopUpConfig';
 
 const initialState = {
@@ -109,7 +110,9 @@ const initialState = {
     associates: REVIEW_DISTINCT_POPUP_OPTION,
     items: REVIEW_DISTINCT_POPUP_OPTION,
     cultureprofiles: REVIEW_DISTINCT_POPUP_OPTION,
-    jobprofiles: REVIEW_DISTINCT_POPUP_OPTION
+    jobprofiles: REVIEW_DISTINCT_POPUP_OPTION,
+    clusters:CLUSTER_SCALE_POPUP_OPTION,
+    scales:CLUSTER_SCALE_POPUP_OPTION
   }
 };
 
@@ -334,7 +337,9 @@ const PopUpReducer = (istate = initialState, action) => {
           action.payload.badgeValue === 'associates' ||
           action.payload.badgeValue === 'culture profiles' ||
           action.payload.badgeValue === 'job profiles' ||
-          action.payload.badgeValue === 'reports'
+          action.payload.badgeValue === 'reports'||
+          action.payload.badgeValue === 'clusters'||
+          action.payload.badgeValue === 'scales'
         ) {
           return {
             ...istate,
@@ -429,7 +434,34 @@ const PopUpReducer = (istate = initialState, action) => {
                 : 'all'
           };
         }
-      } else {
+      }else if(istate.popupOpenType=='secondary'){
+        return {
+          ...istate,
+          popupHeaderOne: istate.popupHeaderOne,
+          isPopUpOpen: true,
+          popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,
+          popupHeaderOneBadgeTwo: action.payload.badgeValue,
+          popupOpenType: 'secondary',
+          popupContentArrValue: arrVal,
+          tertiaryOptionCheckValue: action.payload.keyValue === 'share' ? 'primary' : '',
+          forthOptionCheckValue: action.payload.keyValue === 'share' ? 'ascendant' : '',
+          secondaryOptionCheckValue:
+            action.payload.keyValue === 'reviseKey' ||
+            action.payload.keyValue === 'reviewKey' ||
+            action.payload.keyValue === 'createKey'
+              ? 'key'
+              : action.payload.keyValue === 'reviewDistinct' ||
+                action.payload.keyValue === 'reviewDistinctKey'
+              ? 'active'
+              : action.payload.keyValue === 'select' || action.payload.keyValue === 'flaged'
+              ? 'multiple'
+              : action.payload.keyValue === 'share'
+              ? 'node'
+              : 'all'
+        };
+
+      }
+       else {
         return istate;
       }
     }

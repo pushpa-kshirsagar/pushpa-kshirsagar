@@ -19,6 +19,8 @@ import ItemCreateReducer from './ItemCreateReducer';
 import CultureProfileCreateReducer from './CultureProfileCreateReducer';
 import JobProfileCreateReducer from './JobProfileCreateReducer';
 import AssesseeAssignmentAssessmentReducer from './AssesseeAssignmentAssessmentReducer';
+import ClusterCreateReducer from './ClusterCreateReducer';
+import ScaleCreateReducer from './ScaleCreateReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -40,5 +42,7 @@ export default combineReducers({
   ItemCreateReducer,
   CultureProfileCreateReducer,
   JobProfileCreateReducer,
-  AssesseeAssignmentAssessmentReducer
+  AssesseeAssignmentAssessmentReducer,
+  ClusterCreateReducer,
+  ScaleCreateReducer
 });

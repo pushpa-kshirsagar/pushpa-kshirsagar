@@ -58,6 +58,9 @@ import DisplayPaneFive from '../../Organisms/DisplayPaneFive/DisplayPaneFive';
 import PopUpDisplayPanelAssesseeAssessment from '../../PopUpDisplayPanel/PopUpDisplayPanelAssesseeAssessment';
 import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
+import PopUpClusterCreate from '../../Molecules/PopUpCreate/PopUpClusterCreate';
+import PopUpScaleCreate from '../../Molecules/PopUpCreate/PopUpScaleCreate';
+
 
 // import { useHistory } from 'react-router-dom';
 
@@ -476,6 +479,8 @@ const DisplayPageOne = () => {
       {popupMode === 'ASSIGNMENTCREATE' && <PopUpAssignmentCreate headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <PopUpAssessmentCreate headerOne={'assessment'} />}
       {popupMode === 'ITEMCREATE' && <PopUpItemCreate />}
+      {popupMode==='CLUSTERCREATE' && <PopUpClusterCreate headerOne={'clusters'} />}
+      {popupMode==='SCALECREATE' && <PopUpScaleCreate headerOne={'scales'} />}
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
         headerPanelColour={'genericOne'}
