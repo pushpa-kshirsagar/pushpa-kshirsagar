@@ -90,9 +90,9 @@ const initialState = {
     noOfItemState: true,
     noOfResponseState: true
   },
-  associateCountryName: [{ id: 'ISO-3166-356', name: 'India' }],
-  associateLanguages: [{ id: 'ISO-639-EN-GB', name: 'English (United Kingdom)' }],
-  associateCurrencyMaster: [{ id: 'ISO-4217-356', name: 'Indian Rupee' }]
+  associateCountryName: [{ id: 'ISO-3166-356', name: 'India' },{id:'ISO-3166-124',name:'Canada'}],
+  associateLanguages: [{ id: 'ISO-639-EN-GB', name: 'English (United Kingdom)'},{id:'ISO-639-EN-CA',name:'English (Canada)'}],
+  associateCurrencyMaster: [{ id: 'ISO-4217-356', name: 'Indian Rupee' },{id:'ISO-4217-124',name:'Canadian Dollar'}]
 };
 
 const DisplayPaneTwoReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
