@@ -24,7 +24,6 @@ const PopUpClusterCreate = (props) => {
       (state) => state.DisplayPaneTwoReducer
     );
     
-    const [roleSelectedError, setRoleSelectedError] = useState('');
     const dispatch = useDispatch();
     const onClickCancelYes = () => {
       dispatch({
@@ -40,16 +39,16 @@ const PopUpClusterCreate = (props) => {
     //     assesseeId: selectedAssociateInfo?.assesseeId,
     //     associateId:
     //       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    //     associateNode: {
-    //       informationBasic: nodeInformation.informationBasic,
-    //       informationAllocation: nodeInformation.informationAllocation,
-    //       informationFramework: nodeInformation.informationFramework,
-    //       informationSetup: nodeInformation.informationSetup
+    //     assessmentCluster: {
+    //       informationBasic: clusterInformation.informationBasic,
+    //       informationAllocation: clusterInformation.informationAllocation,
+    //       informationFramework: clusterInformation.informationFramework,
+    //       informationSetup: clusterInformation.informationSetup
     //     }
     //   };
     //   console.log('CREATE group api', reqBody);
     //   dispatch({ type: LOADER_START });
-    //   dispatch({ type: CREATE_NODE_SAGA, payload: reqBody });
+    //   dispatch({ type: CREATE_CLUSTER_SAGA, payload: reqBody });
     };
     return (
       <div>
