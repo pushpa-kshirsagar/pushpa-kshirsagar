@@ -121,28 +121,28 @@ const initialState = {
         assessmentSectionEvaluation: false,
         assessmentSectionItemCluster: [],
         assessmentSectionItemDistinct: [],
-        assessmentNavigation: {
+        assessmentSectionNavigation: {
           assessmentSectionItemNavigationFirst: true,
           assessmentSectionItemNavigationLast: true,
           assessmentSectionItemNavigationNext: true,
           assessmentSectionItemNavigationPrevious: true,
           assessmentSectionItemNavigationSkip: true
         },
-        assessmentSectionItemPractice: [],
+        assessmentSectionItemPractice: false,
         assessmentSectionItemTotal: 0,
         assessmentSectionManuscript: [],
         assessmentSectionItemFrameworkOneResponseExtremum: {
-          assessmentSectionItemFrameworkOneResponseExtremumMaximum: 0,
-          assessmentSectionItemFrameworkOneResponseExtremumMinimum: 0
+          assessmentSectionItemFrameworkOneResponseExtremumMaximum: null,
+          assessmentSectionItemFrameworkOneResponseExtremumMinimum: null
         },
         assessmentSectionItemFrameworkOneResponseRevise: false,
         assessmentSectionScale: [],
         assessmentSectionScoreExtremum: {
-          assessmentSectionScoreExtremumMaximum: '',
-          assessmentSectionScoreExtremumMinimum: ''
+          assessmentSectionScoreExtremumMaximum: null,
+          assessmentSectionScoreExtremumMinimum: null
         },
         assessmentSectionSynopsis: [],
-        assessmentSectionTime: ''
+        assessmentSectionTime: null
       }
     ],
     assessmentSectionItemDistinctRevise:null
