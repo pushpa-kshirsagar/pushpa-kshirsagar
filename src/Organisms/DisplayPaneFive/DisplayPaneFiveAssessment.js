@@ -85,7 +85,12 @@ const AssessmentHeader = (props) => {
                     "AssesseeNotifyStatusLabel",
                   ].join(" ")}
                 >
-                  {props.assessmentSection + "/" + props.assessmentSectionDesc}
+                  {
+                   props.assessmentSectionName &&(
+                    props.assessmentSectionName + "/" + props.assessmentSectionDescription
+                   ) 
+                  }
+                  {/* {props.assessmentSectionName + "/" + props.assessmentSectionDescription} */}
                 </InputLabel>
               </span>
             </div>
@@ -574,8 +579,8 @@ export const DisplayPaneFiveAssessment = (props) => {
           isQuestionFlaged={false}
           timerFinished={""}
           timer={"timer"}
-          assessmentSection={''}
-          assessmentSectionDesc={''}
+          assessmentSectionName={informationFramework?.assessmentSection[0].assessmentSectionName}
+          assessmentSectionDescription={informationFramework?.assessmentSection[0].assessmentSectionDescription}
         />
 
         <div
@@ -741,9 +746,9 @@ export const DisplayPaneFiveAssessment = (props) => {
             );
           })}
 
-          {/* item explanation */}
+          {/* responce explanation */}
           
-{itemObect?.itemFrameworkOneResponseExplanation
+          {itemObect?.itemFrameworkOneResponseExplanation
                 ?.itemFrameworkOneResponseExplanationMedia !== "" && (
                 <div className={"innerpadding"}>
                   <div
@@ -760,23 +765,6 @@ export const DisplayPaneFiveAssessment = (props) => {
                 </div>
               )}
         </div>
-        {/* {reviewMode === 'revise' ? (
-          <FooterIconTwo
-            className={'widthDisplayPaneFive'}
-            FilterModeEnable={isShowReviseIcon}
-            FilterMode={FilterMode}
-            onClick={onClickRevise}
-            primaryIcon={revisePrimaryIcon}
-            secondaryIcon={reviseSecondaryIcons}
-          />
-        ):(<FooterIconTwo
-          className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
-          FilterModeEnable={navigatorIcon}
-          FilterMode={FilterMode}
-          onClick={onClickFooter}
-          primaryIcon={primaryIcon}
-          secondaryIcon={secondaryIcon}
-        />)} */}
       </div>
 
       <Popup isActive={isPopUpValue === "ITEM_TRIPLE_DOT_PRIMARY_POPUP"}>
@@ -842,7 +830,7 @@ export const DisplayPaneFiveAssessment = (props) => {
             headerOne={'response'}
             headerOneBadgeOne={'choice'}
             onClick={BackHandlerEvent}
-            mode={''}
+            mode={'revise'}
           />
           <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
             <JsonRenderComponent
