@@ -428,10 +428,20 @@ const PopUpReducer = (istate = initialState, action) => {
           // }
           return {
             ...istate,
-            popupHeaderOne: istate.popupHeaderOne,
+            popupHeaderOne:
+              action.payload.keyValue === "clusters"
+                ? action.payload.keyValue
+                : action.payload.keyValue === "scales"
+                ? action.payload.keyValue
+                : istate.popupHeaderOne,
             isPopUpOpen: true,
             popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,
-            popupHeaderOneBadgeTwo: action.payload.badgeValue,
+            popupHeaderOneBadgeTwo:
+              action.payload.keyValue === "clusters"
+                ? ""
+                : action.payload.keyValue === "scales"
+                ? ""
+                : action.payload.badgeValue,
             popupOpenType: "secondary",
             popupContentArrValue: arrVal,
             tertiaryOptionCheckValue:
@@ -465,11 +475,11 @@ const PopUpReducer = (istate = initialState, action) => {
               : istate.popupHeaderOne,
           isPopUpOpen: true,
           popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,
-            // istate.popupHeaderOneBadgeTwo === "clusters"
-            //   ? "clusters"
-            //   : istate.popupHeaderOneBadgeTwo === "scales"
-            //   ? "scales"
-            //   : istate.popupHeaderOneBadgeOne,
+          // istate.popupHeaderOneBadgeTwo === "clusters"
+          //   ? "clusters"
+          //   : istate.popupHeaderOneBadgeTwo === "scales"
+          //   ? "scales"
+          //   : istate.popupHeaderOneBadgeOne,
           popupHeaderOneBadgeTwo: action.payload.badgeValue,
           popupOpenType: "secondary",
           popupContentArrValue: arrVal,

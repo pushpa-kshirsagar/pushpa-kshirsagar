@@ -14,7 +14,10 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_ITEM_PREVIEW_MODE,
   SET_POPUP_VALUE,
-  SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE
+  SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+  SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
+  SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE
 } from '../../actionType';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
@@ -108,6 +111,7 @@ function StyledRadio(props) {
 export const DisplayPaneFive = () => {
   const dispatch = useDispatch();
   const [currentItemIndex, setcurrentItemIndex] = useState(0);
+  const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { middlePaneHeader, middlePaneHeaderBadgeOne, middlePaneHeaderBadgeTwo } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
@@ -115,11 +119,14 @@ export const DisplayPaneFive = () => {
     headerOne,
     headerOneBadgeOne,
     isAssessmentPreviewShow = false,
-    isItemPreviewShow = false
+    isItemPreviewShow = false,
+    reviewMode
   } = useSelector((state) => state.DisplayPaneThreeReducer);
+
   const { informationFramework, isDisplayPaneSixShow } = useSelector(
     (state) => state.AssessmentReducer
   );
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { FilterMode, navigatorIcon } = useSelector((state) => state.FilterReducer);
   console.log(FilterMode, navigatorIcon);
   console.log('AssessmentInformation', informationFramework);
@@ -134,25 +141,102 @@ export const DisplayPaneFive = () => {
       let prevIndex = currentItemIndex - 1;
       if (currentItemIndex !== 0) {
         setcurrentItemIndex(prevIndex);
+        dispatch({
+          //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assessmentSectionItemDistinctRevise',
+            actualStateName:'itemFrameworkOne',
+            value: informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne
+            //value: informationFramework?.assessmentItem[currentItemIndex].informationFramework
+          }
+        })
       }
     }
     if (clickedval === 'first') {
       setcurrentItemIndex(0);
+      dispatch({
+        //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'assessmentSectionItemDistinctRevise',
+          actualStateName:'itemFrameworkOne',
+          value: informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne
+          //value: informationFramework?.assessmentItem[currentItemIndex].informationFramework
+        }
+      })
     }
     if (clickedval === 'next') {
-      if (currentItemIndex < informationFramework.assessmentItem.length - 1) {
+      //informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne
+      //if (currentItemIndex < informationFramework.assessmentItem.length - 1) {
+      if (currentItemIndex < informationFramework.assessmentSection[0]?.assessmentSectionItemDistinct.length - 1) {
         setcurrentItemIndex(currentItemIndex + 1);
+        dispatch({
+          //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'assessmentSectionItemDistinctRevise',
+            actualStateName:'itemFrameworkOne',
+            value: informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne
+            //value: informationFramework?.assessmentItem[currentItemIndex].informationFramework
+          }
+        })
       }
     }
     if (clickedval === 'last') {
-      let lastIndex = informationFramework.assessmentItem.length - 1;
+      //let lastIndex = informationFramework.assessmentItem.length - 1;
+      let lastIndex = informationFramework.assessmentSection[0]?.assessmentSectionItemDistinct.length - 1;
       setcurrentItemIndex(lastIndex);
+      dispatch({
+        //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'assessmentSectionItemDistinctRevise',
+          actualStateName:'itemFrameworkOne',
+          value: informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne
+          //value: informationFramework?.assessmentItem[currentItemIndex].informationFramework
+        }
+      })
     }
   };
-  // const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
-  // const data = itemTypeList.find(
-  //   (item) => item.id === itemInformation.informationFramework.itemFrameworkOne.itemFrameworkOneType
-  // );
+  const onClickReviseFinish = () => {
+    debugger;
+    setIsShowReviseIcon(true);
+    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+    //const { informationBasic, informationAllocation, informationFramework } = assessmentInfo;
+      //const { id } = responseObject;
+      // const reqBody = {
+      //   assesseeId: selectedAssociateInfo?.assesseeId,
+      //   associateId:
+      //     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      // // };
+      // console.log('ASSESSMENT REVISE ===', reqBody);
+      // dispatch({ type: LOADER_START });
+      // dispatch({
+      //   type: ASSESSMENT_INFO_REVISE_SAGA,
+      //   payload: {
+      //     secondaryOptionCheckValue: headerOneBadgeTwo,
+      //     headerOne: 'assessment',
+      //     reqBody,
+      //     createMode
+      //   }
+      // });
+  };
+  const onClickRevise = () => {
+    setIsShowReviseIcon(false);
+  };
+  const onClickReviseCancel = () => {
+    //setResponseToReducerObj(JSON.parse(originResponseObj), dispatch);
+    setIsShowReviseIcon(true);
+    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+  };
+
+  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
+
+  const reviseSecondaryIcons = [
+    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
+    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
+  ];
   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
     { label: 'first', onClick: onClickFooter, Icon: FirstPage },
@@ -168,23 +252,29 @@ export const DisplayPaneFive = () => {
   };
 
   //let itemObect = informationFramework?.informationFramework?.itemFrameworkOne?.assessmentItem[currentItemIndex];
-  let itemObect =
-    informationFramework?.assessmentItem[currentItemIndex].informationFramework?.itemFrameworkOne;
-  //console.log("itemObect", itemObect);
+  let itemObect =informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne;
+    //informationFramework?.assessmentItem[currentItemIndex].informationFramework?.itemFrameworkOne;
+  console.log("itemObect", itemObect);
+  //const itemInformation=informationFramework?.assessmentSection[currentItemIndex]?.assessmentSectionItemDistinct[currentItemIndex]
 
-  // const isHrSetup = false;
-  // console.log('ITEM INFO', itemInformation);
-  // const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
-  // const data = itemTypeList.find(
-  //   (item) => item.id === informationFramework?.assessmentItemassessmentItem[currentItemIndex].informationFramework?.itemFrameworkOne
-  // );
-
-  // console.log('selected item role type, ', data);
-
+  if (!informationFramework?.assessmentSectionItemDistinctRevise) {
+    debugger;
+    dispatch({
+      //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+      type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assessmentSectionItemDistinctRevise',
+        actualStateName:'itemFrameworkOne',
+        value: informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne
+        //value: informationFramework?.assessmentItem[currentItemIndex].informationFramework
+      }
+    })
+  }
   return (
     <>
       <div>
         {isAssessmentPreviewShow ? (
+          <>
           <DisplayPaneFiveAssessment
             headerOne={headerOne}
             headerOneBadgeOne={headerOneBadgeOne}
@@ -200,9 +290,41 @@ export const DisplayPaneFive = () => {
             informationFramework={informationFramework}
             currentItemIndex={currentItemIndex}
           />
+          {reviewMode === 'revise' ? (
+            <FooterIconTwo
+              className={'widthDisplayPaneFive'}
+              FilterModeEnable={isShowReviseIcon}
+              FilterMode={FilterMode}
+              onClick={onClickRevise}
+              primaryIcon={revisePrimaryIcon}
+              secondaryIcon={reviseSecondaryIcons}
+            />
+          ):(<FooterIconTwo
+            className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
+            FilterModeEnable={navigatorIcon}
+            FilterMode={FilterMode}
+            onClick={onClickFooter}
+            primaryIcon={primaryIcon}
+            secondaryIcon={secondaryIcon}
+          />)}
+          </>
+
         ) : isItemPreviewShow ? (
           <DisplayPaneFiveItem />
         ) : null}
+
+        {/* <PopUpItemFramework
+          isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
+          headerPanelColour={'genericOne'}
+          headerOne={'item'}
+          headerOneBadgeOne={'configuration'}
+          nextPopUpValue={''}
+          // inputHeader={'item'}
+          // primaryheader={'configuration'}
+          isItemFramework={true}
+          mode={'revise'}
+          itemObect={itemObect}
+        /> */}
       </div>
     </>
   );

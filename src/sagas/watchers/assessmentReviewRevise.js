@@ -235,10 +235,10 @@ function* workerReviewInfoAssessmentSaga(data) {
           payload: { stateName: 'assessmentTime', value: timeAssessment }
         });
         const itemAssessment = informationFramework?.assessmentItem || [];
-        yield put({
-          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-          payload: { stateName: 'assessmentItem', value: itemAssessment }
-        });
+        // yield put({
+        //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        //   payload: { stateName: 'assessmentItem', value: itemAssessment }
+        // });
         const menuScriptAssessment = informationFramework?.assessmentManuscript || {
           assessmentManuscriptPrimary: '',
           assessmentManuscriptSecondary: ''
@@ -247,6 +247,12 @@ function* workerReviewInfoAssessmentSaga(data) {
           type: SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
           payload: menuScriptAssessment
         });
+        const assessmentSection = informationFramework?.assessmentSection || [];
+        yield put({
+          type:SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          payload:{stateName:'assessmentSection',value:assessmentSection}
+        })
+
         // yield put({
         //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         //   payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }

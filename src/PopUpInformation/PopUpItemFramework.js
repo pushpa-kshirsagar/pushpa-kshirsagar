@@ -8,16 +8,11 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { POPUP_CLOSE, SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE } from '../actionType';
+import { POPUP_CLOSE, SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE
+ } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 
 const PopUpItemFramework = (props) => {
-  const dispatch = useDispatch();
-  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const itemFrameworkOneResponseChoice =
-    itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
-  const itemFrameworkOne = itemInformation?.informationFramework.itemFrameworkOne;
   const {
     isActive,
     primaryheader,
@@ -30,8 +25,35 @@ const PopUpItemFramework = (props) => {
     choiceOb = null,
     mode,
     isItemFramework = false,
-    subQuestionId
+    subQuestionId,
+    //isAssessmentPreviewShow,
+    itemFrameworkOne,
+    itemFrameworkOneResponseChoice
   } = props;
+  const dispatch = useDispatch();
+  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+  const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { isAssessmentPreviewShow=false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  
+  const { informationFramework } = useSelector(
+    (state) => state.AssessmentReducer
+  );
+  // // if(isAssessmentPreviewShow){
+  //   const itemFrameworkOneResponseChoice =isAssessmentPreviewShow?informationFramework?.assessmentSection[currentItemIndex]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne:
+  //   itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
+  // const itemFrameworkOne = isAssessmentPreviewShow?informationFramework?.assessmentSection[currentItemIndex]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne:
+  // itemInformation?.informationFramework.itemFrameworkOne;
+  console.log(itemFrameworkOneResponseChoice)
+  console.log(itemFrameworkOne);
+
+  // }else
+  // {
+    // const itemFrameworkOneResponseChoice =
+    // itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
+  //const itemFrameworkOne = itemInformation?.informationFramework.itemFrameworkOne;
+  // }
+  
+  
   const [blank, setBlank] = useState('');
   const [classification, setclassification] = useState([]);
   const [level, setlevel] = useState(null);
@@ -40,8 +62,9 @@ const PopUpItemFramework = (props) => {
   const [scale, setscale] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
-  // console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
+  console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
   console.log('itemInformation ', itemInformation);
+  console.log('itemConfigStates',itemConfigStates);
   useEffect(() => {
     if (subQuestionId) {
       let subques = itemFrameworkOne.itemFrameworkOneSection.filter(function (sub) {
@@ -49,17 +72,17 @@ const PopUpItemFramework = (props) => {
       });
       setscore(subques[0]?.itemFrameworkOneSection?.itemFrameworkOneScore);
     }
-    if (itemFrameworkOne.itemFrameworkOneCluster.length > 0) {
+    if (itemFrameworkOne?.itemFrameworkOneCluster.length > 0) {
       let cluster = [];
-      itemFrameworkOne.itemFrameworkOneCluster.map((cc) => {
+      itemFrameworkOne?.itemFrameworkOneCluster.map((cc) => {
         cluster.push(cc.itemFrameworkOneClusterPrimary);
       });
       setclassification(cluster);
     }
-    setlevel(itemFrameworkOne.itemFrameworkOneLevel);
-    setpolarity(itemFrameworkOne.itemFrameworkOnePolarity);
-    settime(itemFrameworkOne.itemFrameworkOneTime);
-  }, [subQuestionId, itemFrameworkOne.itemFrameworkOneCluster]);
+    setlevel(itemFrameworkOne?.itemFrameworkOneLevel);
+    setpolarity(itemFrameworkOne?.itemFrameworkOnePolarity);
+    settime(itemFrameworkOne?.itemFrameworkOneTime);
+  }, [subQuestionId, itemFrameworkOne?.itemFrameworkOneCluster]);
   const onChangeCluster = (event) => {
     const { value } = event.target;
     setclassification(typeof value === 'string' ? value.split(',') : value);
@@ -78,40 +101,79 @@ const PopUpItemFramework = (props) => {
       isItemFramework
     );
     if (isItemFramework) {
-      let reviseCluster = [];
-      if (classification.length > 0) {
-        reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
-          return classification.includes(clust.itemFrameworkOneClusterPrimary);
+      if(isAssessmentPreviewShow){
+        let reviseCluster = [];
+        if (classification.length > 0) {
+          reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
+            return classification.includes(clust.itemFrameworkOneClusterPrimary);
+          });
+        }
+        dispatch({
+          type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneCluster', value: reviseCluster }
         });
-      }
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneCluster', value: reviseCluster }
-      });
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneBlank', value: blank }
-      });
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneLevel', value: level }
-      });
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOnePolarity', value: polarity }
-      });
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneScore', value: parseInt(score) }
-      });
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneTime', value: time }
-      });
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
-      });
+        dispatch({
+          type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneBlank', value: blank }
+        });
+        dispatch({
+          type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneLevel', value: level }
+        });
+        dispatch({
+          type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOnePolarity', value: polarity }
+        });
+        dispatch({
+          type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneScore', value: parseInt(score) }
+        });
+        dispatch({
+          type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneTime', value: time }
+        });
+        dispatch({
+          type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
+        });
+
+      }else{
+        let reviseCluster = [];
+        if (classification.length > 0) {
+          reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
+            return classification.includes(clust.itemFrameworkOneClusterPrimary);
+          });
+        }
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneCluster', value: reviseCluster }
+        });
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneBlank', value: blank }
+        });
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneLevel', value: level }
+        });
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOnePolarity', value: polarity }
+        });
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneScore', value: parseInt(score) }
+        });
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneTime', value: time }
+        });
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
+        });
+
+      }     
     } else if (subQuestionId) {
       let opArr = itemFrameworkOne?.itemFrameworkOneSection;
       opArr.forEach((element) => {
@@ -121,13 +183,26 @@ const PopUpItemFramework = (props) => {
           element.itemFrameworkOneSection.itemFrameworkOneScore = weightage;
         }
       });
-      dispatch({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: {
-          stateName: 'itemFrameworkOneSection',
-          value: opArr
-        }
-      });
+      if(isAssessmentPreviewShow){
+        dispatch({
+          type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneSection',
+            value: opArr
+          }
+        });
+
+      }else{
+        dispatch({
+          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          payload: {
+            stateName: 'itemFrameworkOneSection',
+            value: opArr
+          }
+        });
+
+      }
+      
     } else {
       if (choiceOb !== null) {
         let tempArr = itemFrameworkOneResponseChoice;
@@ -138,13 +213,25 @@ const PopUpItemFramework = (props) => {
             element.itemFrameworkOneResponseChoicePolarity = polarity;
           }
         });
-        dispatch({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: {
-            stateName: 'itemFrameworkOneResponseChoice',
-            value: tempArr
-          }
-        });
+        if(isAssessmentPreviewShow){
+          dispatch({
+            type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneResponseChoice',
+              value: tempArr
+            }
+          });
+        }
+        else{
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneResponseChoice',
+              value: tempArr
+            }
+          });
+        }
+        
       }
     }
     // setBlank(blank);
@@ -205,20 +292,20 @@ const PopUpItemFramework = (props) => {
                 }}
               />
             )}
-            {isItemFramework && itemConfigStates.classificationState && (
+            {/* {isItemFramework && itemConfigStates.classificationState && (
               <SelectField
                 tag={'cluster'}
                 label={'cluster'}
                 dataValue={'cluster'}
                 labelBadgeOne={'distinct'}
-                listSelect={itemFrameworkOne.itemFrameworkOneGroupCluster || []}
+                listSelect={itemFrameworkOne?.itemFrameworkOneGroupCluster || []}
                 errorMsg={() => {}}
                 onChange={onChangeCluster}
                 isMultiSelect={true}
                 value={classification}
                 mappingValue={'itemFrameworkOneClusterPrimary'}
               />
-            )}
+            )} */}
             {isItemFramework && itemConfigStates.levelState && (
               <SelectField
                 tag={'level'}
