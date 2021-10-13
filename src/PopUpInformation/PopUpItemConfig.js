@@ -416,7 +416,7 @@ const PopUpItemConfig = (props) => {
                     }
                   />
                 )}
-                <SelectField
+                {/* <SelectField
                   tag={'item_Aligement'}
                   dataValue={'item'}
                   label={'item'}
@@ -436,7 +436,7 @@ const PopUpItemConfig = (props) => {
                   }
                   value={item_Aligement}
                   mappingValue={'id'}
-                />
+                /> */}
                 <SelectField
                   tag={'item_Type'}
                   label={'item'}
@@ -456,7 +456,7 @@ const PopUpItemConfig = (props) => {
                   // name={'itemFrameworkOneTypeNameReference'}
                   listSelect={itemTypeListArr}
                 />
-                <SelectField
+                {/* <SelectField
                   tag={'response_Aligement'}
                   label={'response'}
                   dataValue={'response'}
@@ -476,7 +476,7 @@ const PopUpItemConfig = (props) => {
                   }
                   value={response_Aligement}
                   mappingValue={'id'}
-                />
+                /> */}
                 {itemConfigStates.noOfResponseState && (
                   <InputFeild
                     tag={'response_choice'}
@@ -495,7 +495,7 @@ const PopUpItemConfig = (props) => {
                     }
                   />
                 )}
-                <SelectField
+                {/* <SelectField
                   tag={'response_choice_Aligement'}
                   label={'response'}
                   dataValue={'response'}
@@ -516,7 +516,7 @@ const PopUpItemConfig = (props) => {
                   }
                   value={response_Choice_Aligement}
                   mappingValue={'id'}
-                />
+                /> */}
               </Fragment>
             ) : (
               <Fragment>

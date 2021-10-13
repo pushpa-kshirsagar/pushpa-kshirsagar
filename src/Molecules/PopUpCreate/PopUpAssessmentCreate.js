@@ -308,7 +308,7 @@ const PopUpAssessmentCreate = (props) => {
         selectedList={informationAllocation.assessmentType.assessmentTypeSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpTextField
+      {/* <PopUpTextField
         isActive={isPopUpValue === 'TIMEASSESSMENTPOPUP'}
         label={'time'}
         type={'number'}
@@ -321,8 +321,8 @@ const PopUpAssessmentCreate = (props) => {
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpTextField
+      /> */}
+      {/* <PopUpTextField
         isActive={isPopUpValue === 'SCOREMINIMUMPOPUP'}
         label={'score'}
         labelBadgeOne={'minimum'}
@@ -336,8 +336,8 @@ const PopUpAssessmentCreate = (props) => {
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_SCORE_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpTextField
+      /> */}
+      {/* <PopUpTextField
         isActive={isPopUpValue === 'SCOREMAXIMUMPOPUP'}
         label={'score'}
         labelBadgeOne={'maximum'}
@@ -351,8 +351,8 @@ const PopUpAssessmentCreate = (props) => {
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_SCORE_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpTextEditor
+      /> */}
+      {/* <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
@@ -365,8 +365,8 @@ const PopUpAssessmentCreate = (props) => {
         }
         actualLableValue={'assessmentCommuniquePrimary'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpTextEditor
+      /> */}
+      {/* <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
@@ -379,8 +379,8 @@ const PopUpAssessmentCreate = (props) => {
         }
         actualLableValue={'assessmentManuscriptPrimary'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpTextEditor
+      /> */}
+      {/* <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_SECONDARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
@@ -393,8 +393,8 @@ const PopUpAssessmentCreate = (props) => {
         }
         actualLableValue={'assessmentManuscriptSecondary'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpTextField
+      /> */}
+      {/* <PopUpTextField
         isActive={isPopUpValue === 'TIMELINESTARTPOPUP'}
         label={'timeline'}
         labelBadgeOne={'start'}
@@ -407,8 +407,8 @@ const PopUpAssessmentCreate = (props) => {
         isNotRevised={true}
         typeOfSetObject={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpTextField
+      /> */}
+      {/* <PopUpTextField
         isActive={isPopUpValue === 'TIMELINEENDPOPUP'}
         label={'timeline'}
         labelBadgeOne={'end'}
@@ -421,7 +421,7 @@ const PopUpAssessmentCreate = (props) => {
         isNotRevised={true}
         typeOfSetObject={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
+      /> */}
       <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_SECONDARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}

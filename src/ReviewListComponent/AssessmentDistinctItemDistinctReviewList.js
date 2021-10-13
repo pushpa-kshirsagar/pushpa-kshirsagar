@@ -5,13 +5,11 @@ import {
   FILTERMODE,
   FILTERMODE_ENABLE,
   POPUP_OPEN,
-  SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_POPUP_STATE,
-  SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
+  SET_POPUP_STATE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -29,6 +27,9 @@ const AssessmentDistinctItemDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
+  const { informationFramework } = useSelector(
+    (state) => state.AssessmentReducer
+  );
   const {
     middlePaneSelectedValue,
     reviewListDistinctData,
@@ -78,9 +79,16 @@ const AssessmentDistinctItemDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+    console.log('dasasdasdasdas',informationFramework);
+    console.log(informationFramework.assessmentSection[0].assessmentSectionItemDistinct);
+    let sectionZeroItem = {
+      ...informationFramework.assessmentSection[0],
+      assessmentSectionItemDistinct: selectedTagsArray
+    };
+    console.log('sectionZeroItem', sectionZeroItem);
     dispatch({
       type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-      payload: { stateName: 'assessmentItem', value: selectedTagsArray }
+      payload: { stateName: 'assessmentSection', value: sectionZeroItem }
     });
     // dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     // dispatch({
