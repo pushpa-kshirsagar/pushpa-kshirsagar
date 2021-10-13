@@ -79,16 +79,13 @@ const AssessmentDistinctItemDistinctReviewList = (props) => {
       payload: { stateName: 'isSelectActive', value: '' }
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
-    console.log('dasasdasdasdas',informationFramework);
-    console.log(informationFramework.assessmentSection[0].assessmentSectionItemDistinct);
     let sectionZeroItem = {
       ...informationFramework.assessmentSection[0],
       assessmentSectionItemDistinct: selectedTagsArray
     };
-    console.log('sectionZeroItem', sectionZeroItem);
     dispatch({
       type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-      payload: { stateName: 'assessmentSection', value: sectionZeroItem }
+      payload: { stateName: 'assessmentSection', value: [sectionZeroItem] }
     });
     // dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     // dispatch({

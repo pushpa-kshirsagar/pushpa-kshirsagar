@@ -14,7 +14,10 @@ import {
   SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
   SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
   SET_ASSESSMENT_AID_FRAMEWORK_STATE,
-  SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE
+  SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE,
+  SET_ASSESSMENT_FRAMEWORK_INNER_SINGLE_STATE,
+  SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -141,8 +144,9 @@ const initialState = {
         assessmentSectionSynopsis: [],
         assessmentSectionTime: null
       }
-    ]
-  }
+    ],
+    assessmentSectionItemDistinctRevise:null
+  },  
 };
 
 const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
@@ -306,6 +310,51 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
         informationFramework: {
           ...istate.informationFramework,
           assessmentEvaluation: action.payload
+        }
+      };
+      case SET_ASSESSMENT_FRAMEWORK_INNER_SINGLE_STATE:
+        debugger;
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assessmentSectionItemDistinctRevise: {
+            ...istate.informationFramework.assessmentSectionItemDistinctRevise,
+            itemFrameworkOne:{
+              ...istate.informationFramework.assessmentSectionItemDistinctRevise.itemFrameworkOne,
+              [action.payload.objectName]: {
+                ...istate.informationFramework.assessmentSectionItemDistinctRevise.itemFrameworkOne[
+                  action.payload.objectName
+                ],
+                [action.payload.actualStateName]: action.payload.value
+              }
+            }            
+          }
+        },
+      };
+      case SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assessmentSectionItemDistinctRevise: {
+            ...istate.informationFramework.assessmentSectionItemDistinctRevise,
+            itemFrameworkOne: {
+              ...istate.informationFramework.assessmentSectionItemDistinctRevise.itemFrameworkOne,
+              [action.payload.stateName]: action.payload.value
+            }
+          }
+        }
+      };
+      case SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          [action.payload.stateName]: {
+            ...istate.informationFramework[action.payload.stateName],
+            [action.payload.actualStateName]: action.payload.value
+          }
         }
       };
     case CLEAR_ASSESSMENT_INFO:

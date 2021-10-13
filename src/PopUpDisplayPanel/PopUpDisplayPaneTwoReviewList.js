@@ -1987,7 +1987,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
               typeOfMiddlePaneList: 'assesseesReportReviewList',
               scanCount: 2,
               showMiddlePaneState: true
-              }
+            }
           });
           dispatch({ type: LOADER_STOP });
           dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
@@ -2060,7 +2060,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           assesseeRoleShareInformation: [],
           assesseeRoleShared: [
             {
-              assesseeRoleId: selectedTagValue,
+              assesseeRoleId: selectedTagValue
               // assesseeRoleGroupId: selectedTagGroupId
             }
           ]
@@ -2077,7 +2077,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateRoleShareInformation: [],
           associateRoleShared: [
             {
-              associateRoleId: selectedTagValue,
+              associateRoleId: selectedTagValue
               // associateRoleGroupId: selectedTagGroupId
             }
           ]
@@ -2094,7 +2094,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           associateTypeShareInformation: [],
           associateTypeShared: [
             {
-              associateTypeId: selectedTagValue,
+              associateTypeId: selectedTagValue
               // associateTypeGroupId: selectedTagGroupId
             }
           ]
@@ -2111,7 +2111,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           assesseeTypeShareInformation: [],
           assesseeTypeShared: [
             {
-              assesseeTypeId: selectedTagValue,
+              assesseeTypeId: selectedTagValue
               // assesseeTypeGroupId: selectedTagGroupId
             }
           ]
@@ -2128,7 +2128,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           assessmentTypeShareInformation: [],
           assessmentTypeShared: [
             {
-              assessmentTypeId: selectedTagValue,
+              assessmentTypeId: selectedTagValue
               // assessmentTypeGroupId: selectedTagGroupId
             }
           ]
@@ -2145,7 +2145,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           itemTypeShareInformation: [],
           itemTypeShared: [
             {
-              itemTypeId: selectedTagValue,
+              itemTypeId: selectedTagValue
               // itemTypeGroupId: selectedTagGroupId
             }
           ]
@@ -2162,7 +2162,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           assignmentTypeShareInformation: [],
           assignmentTypeShared: [
             {
-              assignmentTypeId: selectedTagValue,
+              assignmentTypeId: selectedTagValue
               // assignmentTypeGroupId: selectedTagGroupId
             }
           ]
@@ -2179,7 +2179,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           cultureProfileTypeShareInformation: [],
           cultureProfileTypeShared: [
             {
-              cultureProfileTypeId: selectedTagValue,
+              cultureProfileTypeId: selectedTagValue
               // cultureProfileTypeGroupId: selectedTagGroupId
             }
           ]
@@ -2196,7 +2196,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           jobProfileTypeShareInformation: [],
           jobProfileTypeShared: [
             {
-              jobProfileTypeId: selectedTagValue,
+              jobProfileTypeId: selectedTagValue
               // jobProfileTypeGroupId: selectedTagGroupId
             }
           ]
@@ -2218,7 +2218,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       //           }
       //         ]
       //       };
-      //       shareVal = 'assesseeGroup';        
+      //       shareVal = 'assesseeGroup';
       // }
       // if (typeOfMiddlePaneList === 'assessmentsGroupDistinctReviewList') {
       //     reqBody = {
@@ -2548,23 +2548,34 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dataVal,
         selectedTagValue
       );
-    }else if(dataVal === 'information' &&
-    popupHeaderOneBadgeTwo === 'create' &&
-    popupHeaderOne === 'clusters'){
+    } else if (
+      dataVal === 'information' &&
+      popupHeaderOneBadgeTwo === 'create' &&
+      popupHeaderOne === 'sections'
+    ) {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SECTIONCREATE' }
+      });
+    } else if (
+      dataVal === 'information' &&
+      popupHeaderOneBadgeTwo === 'create' &&
+      popupHeaderOne === 'clusters'
+    ) {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CLUSTERCREATE' }
       });
-    }
-    else if(dataVal === 'information' &&
-    popupHeaderOneBadgeTwo === 'create' &&
-    popupHeaderOne === 'scales'){
+    } else if (
+      dataVal === 'information' &&
+      popupHeaderOneBadgeTwo === 'create' &&
+      popupHeaderOne === 'scales'
+    ) {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SCALECREATE' }
       });
-    }    
-     else {
+    } else {
       dispatch({
         type: SET_MIDDLEPANE_SECONDARY_OPTION,
         payload: { badgeValue: dataVal, keyValue: keyVal }

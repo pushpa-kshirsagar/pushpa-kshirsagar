@@ -7,15 +7,15 @@ import {
   POPUP_CLOSE,
   LOADER_START,
   SET_DISPLAY_THREE_SINGLE_STATE,
-  SET_CLUSTER_REDUCER_STATE,
+  SET_SECTION_REDUCER_STATE,
   CLEAR_CLUSTER_REDUCER_STATE
 } from '../../actionType';
 
-const PopUpClusterCreate = (props) => {
+const PopUpSectionCreate = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { clusterInformation } = useSelector((state) => state.ClusterCreateReducer);
-  console.log(clusterInformation);
+  const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
+  console.log(sectionInformation);
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
@@ -39,10 +39,10 @@ const PopUpClusterCreate = (props) => {
     //     associateId:
     //       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
     //     assessmentCluster: {
-    //       informationBasic: clusterInformation.informationBasic,
-    //       informationAllocation: clusterInformation.informationAllocation,
-    //       informationFramework: clusterInformation.informationFramework,
-    //       informationSetup: clusterInformation.informationSetup
+    //       informationBasic: sectionInformation.informationBasic,
+    //       informationAllocation: sectionInformation.informationAllocation,
+    //       informationFramework: sectionInformation.informationFramework,
+    //       informationSetup: sectionInformation.informationSetup
     //     }
     //   };
     //   console.log('CREATE group api', reqBody);
@@ -60,8 +60,8 @@ const PopUpClusterCreate = (props) => {
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={clusterInformation?.informationBasic}
-        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        basicInfo={sectionInformation?.informationBasic}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
         isRequired={true}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -73,9 +73,9 @@ const PopUpClusterCreate = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
-        basicInfo={clusterInformation.informationBasic}
+        basicInfo={sectionInformation.informationBasic}
         nextPopUpValue={'PICTUREPOPUP'}
-        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpPicture
@@ -107,4 +107,4 @@ const PopUpClusterCreate = (props) => {
   );
 };
 
-export default PopUpClusterCreate;
+export default PopUpSectionCreate;

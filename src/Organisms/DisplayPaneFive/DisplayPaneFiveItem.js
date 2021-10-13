@@ -1152,6 +1152,8 @@ export const DisplayPaneFiveItem = () => {
           // primaryheader={'configuration'}
           isItemFramework={true}
           mode={'revise'}
+          itemFrameworkOneResponseChoice={itemFrameworkOneResponseChoice||[]}
+          itemFrameworkOne={itemFrameworkOne}
         />
   
         <PopUpItemConfig
@@ -1198,6 +1200,8 @@ export const DisplayPaneFiveItem = () => {
             data?.itemFrameworkOneTypeNameReference === 'Likert-Scale' &&
             parseInt(subQuestionId[3]) + 1
           }
+          itemFrameworkOneResponseChoice={itemFrameworkOneResponseChoice||[]}
+          itemFrameworkOne={itemFrameworkOne}
         />
         <PopUpItemFramework
           isActive={isPopUpValue === 'SUB_ITEM_FRAMEWORK_POPUP'}
@@ -1215,6 +1219,8 @@ export const DisplayPaneFiveItem = () => {
             data?.itemFrameworkOneTypeNameReference === 'Likert-Scale' &&
             parseInt(subQuestionId[3]) + 1
           }
+          itemFrameworkOneResponseChoice={itemFrameworkOneResponseChoice||[]}
+          itemFrameworkOne={itemFrameworkOne}
         />
         {reviewMode === 'revise' ? (
           <FooterIconTwo
