@@ -233,9 +233,7 @@ function* workerReviewInfoItemSaga(data) {
         itemFrameworkOneType = '',
         itemFrameworkOneWeightage = '',
         itemFrameworkOneSection = [],
-        itemFrameworkOneScale = [],
-        itemFrameworkOneCluster = [],
-        itemFrameworkOneGroupCluster = [],
+        itemFrameworkOnePassage = ''
       } = informationFramework?.itemFrameworkOne;
       let reviseSetting = {
         blankState: true,
@@ -294,7 +292,10 @@ function* workerReviewInfoItemSaga(data) {
           noOfResponseState: true
         };
       }
-      if (itemFrameworkOneType === '61090cace50cf61d5eb440cc' || itemFrameworkOneType === '61090cace50cf61d5eb440cd') {
+      if (
+        itemFrameworkOneType === '61090cace50cf61d5eb440cc' ||
+        itemFrameworkOneType === '61090cace50cf61d5eb440cd'
+      ) {
         //"Response (Long)","Response (Short)"
         reviseSetting = {
           blankState: false,
@@ -315,15 +316,7 @@ function* workerReviewInfoItemSaga(data) {
       });
       yield put({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneGroupCluster', value: itemFrameworkOneGroupCluster }
-      });
-      yield put({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneCluster', value: itemFrameworkOneCluster }
-      });
-      yield put({
-        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-        payload: { stateName: 'itemFrameworkOneScale', value: itemFrameworkOneScale }
+        payload: { stateName: 'itemFrameworkOnePassage', value: itemFrameworkOnePassage }
       });
       yield put({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
