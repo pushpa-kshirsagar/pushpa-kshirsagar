@@ -13,7 +13,7 @@ import {
 
 const PopUpSectionCreate = (props) => {
   const { headerOne } = props;
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
   console.log(sectionInformation);
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
@@ -33,34 +33,26 @@ const PopUpSectionCreate = (props) => {
     dispatch({ type: POPUP_CLOSE });
   };
   const onClickYes = () => {
+    let requestObj = {
+      assessmentId: selectedTagValue,
+      assessmentSection: sectionInformation
+    };
+    console.log('requestObj', requestObj);
     dispatch({ type: POPUP_CLOSE });
-    //   let reqBody = {
-    //     assesseeId: selectedAssociateInfo?.assesseeId,
-    //     associateId:
-    //       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    //     assessmentCluster: {
-    //       informationBasic: sectionInformation.informationBasic,
-    //       informationAllocation: sectionInformation.informationAllocation,
-    //       informationFramework: sectionInformation.informationFramework,
-    //       informationSetup: sectionInformation.informationSetup
-    //     }
-    //   };
-    //   console.log('CREATE group api', reqBody);
-    //   dispatch({ type: LOADER_START });
-    //   dispatch({ type: CREATE_CLUSTER_SAGA, payload: reqBody });
   };
+  console.log('sectionInformation', sectionInformation);
   return (
     <div>
       <PopUpTextField
         isActive={isPopUpValue === 'NAMEPOPUP'}
         label={'name'}
-        actualLableValue={'assessmentClusterName'}
+        actualLableValue={'assessmentSectionName'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={sectionInformation?.informationBasic}
+        basicInfo={sectionInformation}
         typeOfSetObject={SET_SECTION_REDUCER_STATE}
         isRequired={true}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -68,23 +60,14 @@ const PopUpSectionCreate = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'description'}
-        actualLableValue={'assessmentClusterDescription'}
+        actualLableValue={'assessmentSectionDescription'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
-        basicInfo={sectionInformation.informationBasic}
-        nextPopUpValue={'PICTUREPOPUP'}
-        typeOfSetObject={SET_SECTION_REDUCER_STATE}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpPicture
-        isActive={isPopUpValue === 'PICTUREPOPUP'}
-        headerPanelColour={'genericOne'}
-        headerOne={headerOne}
-        headerOneBadgeOne={''}
-        headerOneBadgeTwo={'information'}
+        basicInfo={sectionInformation}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm

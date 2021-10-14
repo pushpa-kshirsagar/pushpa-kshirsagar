@@ -18,67 +18,57 @@ import {
   SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
 } from "../../actionType";
 
-import { InputLabel, Paper, IconButton } from "@material-ui/core";
-import EditorTemplate from "./EditorTemplate";
-import FooterIconTwo from "../../Molecules/FooterIcon/FooterIconTwo";
-import { useTimer } from "react-timer-hook";
-import PopUpItemConfig from "../../PopUpInformation/PopUpItemConfig";
+import { InputLabel, Paper, IconButton } from '@material-ui/core';
+import EditorTemplate from './EditorTemplate';
+import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
+import { useTimer } from 'react-timer-hook';
+import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 
 const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
   const { seconds, minutes, hours } = useTimer({
     expiryTimestamp,
-    onExpire: timerFinished,
+    onExpire: timerFinished
     // onExpire: () => {
     //   console.warn('onExpire called');
     // }
   });
   return (
     <div>
-      <span>{hours < 10 ? "0" + hours : hours}</span>:
-      <span>{minutes < 10 ? "0" + minutes : minutes}</span>:
-      <span>{seconds < 10 ? "0" + seconds : seconds}</span>
+      <span>{hours < 10 ? '0' + hours : hours}</span>:
+      <span>{minutes < 10 ? '0' + minutes : minutes}</span>:
+      <span>{seconds < 10 ? '0' + seconds : seconds}</span>
     </div>
   );
 };
 const AssessmentHeader = (props) => {
   return (
     <Fragment>
-      <Paper className={""}>
+      <Paper className={''}>
         <div className="containerPadding sticky-header">
-          <div
-            style={{ height: "49px", padding: "0 5px", display: "flex" }}
-            className={""}
-          >
-            <div style={{ display: "inline-block", flex: "2" }}>
+          <div style={{ height: '49px', padding: '0 5px', display: 'flex' }} className={''}>
+            <div style={{ display: 'inline-block', flex: '2' }}>
               <div
                 className={[
-                  "midPaneInformation",
-                  props.assessmentDesc !== "" ? null : "aliasmiddle",
-                ].join(" ")}
+                  'midPaneInformation',
+                  props.assessmentDesc !== '' ? null : 'aliasmiddle'
+                ].join(' ')}
               >
                 {props.assessmentName}
               </div>
-              <div className={["midPaneLabel", "textOverflow"].join(" ")}>
+              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
                 {props.assessmentDesc}
               </div>
             </div>
             <div
-              style={{ flex: "1", display: "flex", alignItems: "center" }}
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
               className="flex-center"
             >
               <span
-                className={[
-                  "unitFlex",
-                  "assessmenetStatusText",
-                  "AssesseeNotifyStatus",
-                ].join(" ")}
-                style={{ textAlign: "center" }}
+                className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(' ')}
+                style={{ textAlign: 'center' }}
               >
                 <InputLabel
-                  className={[
-                    "iconsFooterLabelDefault1",
-                    "AssesseeNotifyStatusLabel",
-                  ].join(" ")}
+                  className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
                 >
                   {/* {1 + "/" + 2} */}
                   {props.currentQuestion + "/" + props.totalQuestion}
@@ -86,13 +76,13 @@ const AssessmentHeader = (props) => {
               </span>
             </div>
             <div
-              style={{ flex: "1", display: "flex", alignItems: "center" }}
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
               className="flex-center"
             >
               {props.score}
             </div>
             <div
-              style={{ flex: "1", display: "flex", alignItems: "center" }}
+              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
               className="flex-center"
             >
               {props.timer && (
@@ -114,12 +104,9 @@ const AssessmentHeader = (props) => {
               }}
               className="flex-center"
             >
-              <IconButton
-                onClick={props.onClickFlag}
-                className={"assessmentFlagButton"}
-              >
+              <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
                 {props.isQuestionFlaged ? (
-                  <i className="fa fa-flag" style={{ color: "#ff6464" }}></i>
+                  <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
                 ) : (
                   <i className="far fa-flag"></i>
                 )}
@@ -128,7 +115,7 @@ const AssessmentHeader = (props) => {
           </div>
         </div>
       </Paper>
-      <hr className={"assessmentHeaderHr"} />
+      <hr className={'assessmentHeaderHr'} />
     </Fragment>
   );
 };
@@ -150,7 +137,7 @@ export const DisplayPaneFiveAssessment = (props) => {
     informationFramework,
     currentItemIndex,
     flagQuestion,
-    isQuestionFlaged,
+    isQuestionFlaged
   } = props;
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
@@ -221,16 +208,14 @@ export const DisplayPaneFiveAssessment = (props) => {
   const onClickReviseCancel = () => {
     //setResponseToReducerObj(JSON.parse(originResponseObj), dispatch);
     setIsShowReviseIcon(true);
-    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: "review" });
+    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
   };
 
-  const revisePrimaryIcon = [
-    { label: "revise", onClick: onClickRevise, Icon: ReviseIcon },
-  ];
+  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
 
   const reviseSecondaryIcons = [
-    { label: "cancel", onClick: onClickReviseCancel, Icon: ClearIcon },
-    { label: "finish", onClick: onClickReviseFinish, Icon: Check },
+    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
+    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
   ];
   //   const [currentItemIndex, setcurrentItemIndex] = useState(0);
 
@@ -254,7 +239,7 @@ export const DisplayPaneFiveAssessment = (props) => {
   //   console.log(FilterMode,navigatorIcon);
   //   console.log("AssessmentInformation", informationFramework);
 
-  const [subItemList, setSubItemList] = useState(["item-1"]);
+  const [subItemList, setSubItemList] = useState(['item-1']);
 
   //   const closePreview = () => {
   //       debugger;
@@ -344,34 +329,34 @@ export const DisplayPaneFiveAssessment = (props) => {
   // ];
   const itemPrimaryPopupOption = [
     {
-      data: "configure",
-      dataValue: "configure",
-      dataKey: "configureAPICall",
-      optionClass: "optionPrimary",
-      divider: "",
-      disabled: false,
+      data: 'configure',
+      dataValue: 'configure',
+      dataKey: 'configureAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
     },
     {
-      data: "revise",
-      dataValue: "revise",
-      dataKey: "reviseAPICall",
-      optionClass: "optionPrimary",
-      divider: "",
-      disabled: true,
-    },
+      data: 'revise',
+      dataValue: 'revise',
+      dataKey: 'reviseAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: true
+    }
   ];
 
   const ChangeOptionPopup = (e) => {
-    let targetValue = e.currentTarget.getAttribute("data-value");
+    let targetValue = e.currentTarget.getAttribute('data-value');
     // setSubQuestionId(e.currentTarget.getAttribute('subquestionid'))
     setSubQuestionId(popupMode.split("_"));
     if (targetValue === "configure") {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
-          isPopUpValue: "SUB_ITEM_FRAMEWORK_POPUP",
-          popupMode: "",
-        },
+          isPopUpValue: 'SUB_ITEM_FRAMEWORK_POPUP',
+          popupMode: ''
+        }
       });
     }
   };
@@ -381,9 +366,9 @@ export const DisplayPaneFiveAssessment = (props) => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
-          isPopUpValue: "ITEM_FRAMEWORK_POPUP",
-          popupMode: "",
-        },
+          isPopUpValue: 'ITEM_FRAMEWORK_POPUP',
+          popupMode: ''
+        }
       });
     }
   };
@@ -392,26 +377,26 @@ export const DisplayPaneFiveAssessment = (props) => {
     if (targetValue === "revise") {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
-        payload: "revise",
+        payload: 'revise'
       });
       dispatch({ type: POPUP_CLOSE });
     }
-    if (targetValue === "review") {
+    if (targetValue === 'review') {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
-        payload: "review",
+        payload: 'review'
       });
       dispatch({ type: POPUP_CLOSE });
     }
   };
   const itemPrimaryTriplePopupOption = [
     {
-      data: "configure",
-      dataValue: "configure",
-      dataKey: "configureAPICall",
-      optionClass: "optionPrimary",
-      divider: "",
-      disabled: true,
+      data: 'configure',
+      dataValue: 'configure',
+      dataKey: 'configureAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: true
       // responseObject?.informationEngagement?.itemStatus === 'PUBLISHED' || reviewMode === 'review'
       //   ? true
       //   : false
@@ -426,16 +411,24 @@ export const DisplayPaneFiveAssessment = (props) => {
       //disabled: reviewMode === 'review'? true:false
     },
     {
-      data: "revise",
-      dataValue: "revise",
-      dataKey: "reviseAPICall",
-      optionClass: "optionPrimary",
-      divider: "",
-      disabled: false,
+      data: 'review',
+      dataValue: 'review',
+      dataKey: 'reviewAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: reviewMode === 'review' ? true : false
+    },
+    {
+      data: 'revise',
+      dataValue: 'revise',
+      dataKey: 'reviseAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled: false
       // responseObject?.informationEngagement?.itemStatus === 'PUBLISHED' || reviewMode === 'revise'
       //   ? true
       //   : false
-    },
+    }
   ];
   const ChangeResponsePopup = (e) => {
     let targetValue = e.currentTarget.getAttribute("data-value");
@@ -458,41 +451,39 @@ export const DisplayPaneFiveAssessment = (props) => {
           displayPane="itemPreview"
           showClearIcon
           headerOne={headerOne}
-          headerOneBadgeOne={""}
+          headerOneBadgeOne={''}
           headerOneBadgeTwo="preview"
           headerPanelColour="blue"
           onClickClearInfo={closePreview}
         />
       </div>
       <div className="containerPadding">
-        <div style={{ display: "none" }}>
-          <Paper className={"dossierContainerTop"}>
+        <div style={{ display: 'none' }}>
+          <Paper className={'dossierContainerTop'}>
             <div className="containerPadding sticky-header">
               <div
                 style={{
-                  height: "49px",
-                  padding: "0 5px",
-                  display: "flex",
-                  cursor: "default",
+                  height: '49px',
+                  padding: '0 5px',
+                  display: 'flex',
+                  cursor: 'default'
                 }}
               >
-                <div style={{ flex: "4" }} className="">
+                <div style={{ flex: '4' }} className="">
                   <div
                     className={[
-                      "midPaneInformation",
-                      data?.itemFrameworkOneTypeDescription
-                        ? null
-                        : "aliasmiddle",
-                    ].join(" ")}
+                      'midPaneInformation',
+                      data?.itemFrameworkOneTypeDescription ? null : 'aliasmiddle'
+                    ].join(' ')}
                   >
                     {data?.itemFrameworkOneTypeName}
                   </div>
-                  <div className={["midPaneLabel", "textOverflow"].join(" ")}>
+                  <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
                     {data?.itemFrameworkOneTypeDescription}
                   </div>
                 </div>
                 <div
-                  style={{ flex: "1", display: "flex", alignItems: "center" }}
+                  style={{ flex: '1', display: 'flex', alignItems: 'center' }}
                   className="flex-center"
                 >
                   {!typeMode && (
@@ -503,24 +494,19 @@ export const DisplayPaneFiveAssessment = (props) => {
                           let newArr = arr.slice(0, -1);
                           setSubItemList(newArr);
                         }}
-                        className={"icon-button-option"}
+                        className={'icon-button-option'}
                       >
                         -
                       </p>
-                      <span
-                        style={{ fontWeight: "bold", margin: "0 5px 0 5px" }}
-                      >
-                        {" "}
+                      <span style={{ fontWeight: 'bold', margin: '0 5px 0 5px' }}>
+                        {' '}
                         {subItemList.length}
                       </span>
                       <p
                         onClick={() => {
-                          setSubItemList([
-                            ...subItemList,
-                            `item-${subItemList.length + 1}`,
-                          ]);
+                          setSubItemList([...subItemList, `item-${subItemList.length + 1}`]);
                         }}
-                        className={"icon-button-option"}
+                        className={'icon-button-option'}
                       >
                         +
                       </p>
@@ -528,7 +514,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                   )}
                 </div>
                 <div
-                  style={{ flex: "1", display: "flex", alignItems: "center" }}
+                  style={{ flex: '1', display: 'flex', alignItems: 'center' }}
                   className="flex-center"
                 ></div>
               </div>
@@ -556,10 +542,7 @@ export const DisplayPaneFiveAssessment = (props) => {
           //assessmentSectionDescription={informationFramework?.assessmentSection[0].assessmentSectionDescription}
         />
 
-        <div
-          className=""
-          style={{ height: "calc(100vh - 200px)", overflow: "overlay" }}
-        >
+        <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
           {/* item label */}
           {itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia && (
             <div className={"innerpadding"}>
@@ -575,29 +558,29 @@ export const DisplayPaneFiveAssessment = (props) => {
           )}
 
           {/* item */}
-          {(itemObect?.itemFrameworkOneMedia || reviewMode === "revise") && (
+          {(itemObect?.itemFrameworkOneMedia || reviewMode === 'revise') && (
             <div
               className={["ex_container", "ig-itemGeneric"].join(" ")}
               style={{ cursor: reviewMode === "revise" ? "pointer" : "" }}
               onClick={
-                reviewMode === "revise"
+                reviewMode === 'revise'
                   ? () => {
                       dispatch({
                         type: SET_POPUP_VALUE,
                         payload: {
-                          isPopUpValue: "ITEM_PRIMARY_POPUP",
-                          popupMode: popupMode,
-                        },
+                          isPopUpValue: 'ITEM_PRIMARY_POPUP',
+                          popupMode: popupMode
+                        }
                       });
                     }
                   : null
               }
             >
-              {itemObect?.itemFrameworkOneMedia !== "" && (
-                <div className={"innerpadding"}>
-                  <div className={["ex_container"].join(" ")}>
+              {itemObect?.itemFrameworkOneMedia !== '' && (
+                <div className={'innerpadding'}>
+                  <div className={['ex_container'].join(' ')}>
                     <EditorTemplate
-                      label={"itemFrameworkOneMedia"}
+                      label={'itemFrameworkOneMedia'}
                       jsonData={itemObect?.itemFrameworkOneMedia}
                     />
                   </div>
@@ -669,23 +652,20 @@ export const DisplayPaneFiveAssessment = (props) => {
           {itemObect?.itemFrameworkOneResponseChoice.map((op, key) => {
             return (
               <Fragment>
-                {op.itemFrameworkOneResponseChoiceMedia !== "" && (
-                  <div key={`op-${key}`} className={"innerpadding"}>
-                    <div
-                      className="option-container ex_container"
-                      key={`option-${key}`}
-                    >
+                {op.itemFrameworkOneResponseChoiceMedia !== '' && (
+                  <div key={`op-${key}`} className={'innerpadding'}>
+                    <div className="option-container ex_container" key={`option-${key}`}>
                       <div
                         style={{
-                          paddingRight: "5px",
-                          display: "flex",
-                          alignItems: "center",
+                          paddingRight: '5px',
+                          display: 'flex',
+                          alignItems: 'center'
                         }}
                       >
                         <input
                           type="radio"
                           name="option1"
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: 'pointer' }}
                           value={`${op.itemFrameworkOneResponseChoiceNumber}`}
                           //onChange={handleRadioButton}
                           // checked={
@@ -695,7 +675,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                       </div>
 
                       <div
-                        className={["ig-itemGeneric "].join(" ")}
+                        className={['ig-itemGeneric '].join(' ')}
                         style={{
                           paddingLeft: "5px",
                           cursor: reviewMode === "revise" ? "pointer" : "",
@@ -717,7 +697,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                       >
                         <EditorTemplate
                           jsonData={op.itemFrameworkOneResponseChoiceMedia}
-                          label={"itemFrameworkOneResponseChoiceMedia"}
+                          label={'itemFrameworkOneResponseChoiceMedia'}
                         />
                       </div>
                     </div>
@@ -725,19 +705,13 @@ export const DisplayPaneFiveAssessment = (props) => {
                     <div>
                       {op.itemFrameworkOneResponseChoiceExplanation
                         ?.itemFrameworkOneResponseChoiceExplanationMedia && (
-                        <div
-                          className={["ex_container", "ig-explanation "].join(
-                            " "
-                          )}
-                        >
+                        <div className={['ex_container', 'ig-explanation '].join(' ')}>
                           <EditorTemplate
                             jsonData={
                               op.itemFrameworkOneResponseChoiceExplanation
                                 ?.itemFrameworkOneResponseChoiceExplanationMedia
                             }
-                            label={
-                              "itemFrameworkOneResponseChoiceExplanationMedia"
-                            }
+                            label={'itemFrameworkOneResponseChoiceExplanationMedia'}
                           />
                         </div>
                       )}
@@ -767,46 +741,43 @@ export const DisplayPaneFiveAssessment = (props) => {
         </div>
       </div>
 
-      <Popup isActive={isPopUpValue === "ITEM_TRIPLE_DOT_PRIMARY_POPUP"}>
+      <Popup isActive={isPopUpValue === 'ITEM_TRIPLE_DOT_PRIMARY_POPUP'}>
         <PopupHeader
-          headerPanelColour={"genericOne"}
-          headerOne={"item"}
-          headerOneBadgeOne={""}
+          headerPanelColour={'genericOne'}
+          headerOne={'item'}
+          headerOneBadgeOne={''}
           onClick={BackHandlerEvent}
-          mode={""}
+          mode={''}
         />
-        <DialogContent className={["popupContent", "fixed05PadDim"].join(" ")}>
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={ChangeTripleDotOptionPopup}
             currentPopUpOption={itemPrimaryTriplePopupOption}
-            secondaryOptionCheckValue={""}
+            secondaryOptionCheckValue={''}
           />
         </DialogContent>
       </Popup>
       <Popup
         isActive={
-          isPopUpValue === "ITEM_PRIMARY_POPUP" ||
-          isPopUpValue === "SUB_ITEM_PRIMARY_POPUP"
+          isPopUpValue === 'ITEM_PRIMARY_POPUP' || isPopUpValue === 'SUB_ITEM_PRIMARY_POPUP'
         }
       >
         <PopupHeader
-          headerPanelColour={"genericOne"}
-          headerOne={"item"}
-          headerOneBadgeOne={""}
+          headerPanelColour={'genericOne'}
+          headerOne={'item'}
+          headerOneBadgeOne={''}
           onClick={BackHandlerEvent}
-          mode={""}
+          mode={''}
         />
-        <DialogContent className={["popupContent", "fixed05PadDim"].join(" ")}>
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
             ChangeOptionPopup={
-              isPopUpValue === "SUB_ITEM_PRIMARY_POPUP"
-                ? ChangeOptionPopup
-                : ChangeItemOptionPopup
+              isPopUpValue === 'SUB_ITEM_PRIMARY_POPUP' ? ChangeOptionPopup : ChangeItemOptionPopup
             }
             currentPopUpOption={itemPrimaryPopupOption}
-            secondaryOptionCheckValue={""}
+            secondaryOptionCheckValue={''}
           />
         </DialogContent>
       </Popup>
