@@ -1,4 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
+import { setItemTypeConfigState } from '../../Actions/GenericActions';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
@@ -235,85 +236,87 @@ function* workerReviewInfoItemSaga(data) {
         itemFrameworkOneSection = [],
         itemFrameworkOnePassage = ''
       } = informationFramework?.itemFrameworkOne;
-      let reviseSetting = {
-        blankState: true,
-        classificationState: true,
-        levelState: true,
-        polarityState: true,
-        scaleState: true,
-        scoreState: true,
-        timeState: true,
-        weightageState: true,
-        noOfItemState: true,
-        noOfResponseState: true
-      };
-      if (itemFrameworkOneType === '61090cace50cf61d5eb440c9') {
-        // "Likert-Scale"
-        reviseSetting = {
-          blankState: false,
-          classificationState: true,
-          levelState: true,
-          polarityState: true,
-          scaleState: true,
-          scoreState: false,
-          timeState: true,
-          weightState: true,
-          noOfItemState: true,
-          noOfResponseState: false
-        };
-      }
-      if (itemFrameworkOneType === '61090cace50cf61d5eb440ce') {
-        //"Response-Choice (Single-Select)"
-        reviseSetting = {
-          blankState: false,
-          classificationState: false,
-          levelState: true,
-          polarityState: false,
-          scaleState: false,
-          scoreState: true,
-          timeState: true,
-          weightState: false,
-          noOfItemState: false,
-          noOfResponseState: true
-        };
-      }
-      if (itemFrameworkOneType === '61090cace50cf61d5eb440c4') {
-        //"Fill-in-the-Blank (Response-Choice)"
-        reviseSetting = {
-          blankState: true,
-          classificationState: false,
-          levelState: true,
-          polarityState: false,
-          scaleState: false,
-          scoreState: true,
-          timeState: true,
-          weightState: false,
-          noOfItemState: false,
-          noOfResponseState: true
-        };
-      }
-      if (
-        itemFrameworkOneType === '61090cace50cf61d5eb440cc' ||
-        itemFrameworkOneType === '61090cace50cf61d5eb440cd'
-      ) {
-        //"Response (Long)","Response (Short)"
-        reviseSetting = {
-          blankState: false,
-          classificationState: false,
-          levelState: true,
-          polarityState: false,
-          scaleState: false,
-          scoreState: true,
-          timeState: true,
-          weightState: false,
-          noOfItemState: false,
-          noOfResponseState: false
-        };
-      }
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'itemConfigStates', value: reviseSetting }
-      });
+
+      setItemTypeConfigState(itemFrameworkOneType,yield put);
+      // let reviseSetting = {
+      //   blankState: true,
+      //   classificationState: true,
+      //   levelState: true,
+      //   polarityState: true,
+      //   scaleState: true,
+      //   scoreState: true,
+      //   timeState: true,
+      //   weightageState: true,
+      //   noOfItemState: true,
+      //   noOfResponseState: true
+      // };
+      // if (itemFrameworkOneType === '61090cace50cf61d5eb440c9') {
+      //   // "Likert-Scale"
+      //   reviseSetting = {
+      //     blankState: false,
+      //     classificationState: true,
+      //     levelState: true,
+      //     polarityState: true,
+      //     scaleState: true,
+      //     scoreState: false,
+      //     timeState: true,
+      //     weightState: true,
+      //     noOfItemState: true,
+      //     noOfResponseState: false
+      //   };
+      // }
+      // if (itemFrameworkOneType === '61090cace50cf61d5eb440ce') {
+      //   //"Response-Choice (Single-Select)"
+      //   reviseSetting = {
+      //     blankState: false,
+      //     classificationState: false,
+      //     levelState: true,
+      //     polarityState: false,
+      //     scaleState: false,
+      //     scoreState: true,
+      //     timeState: true,
+      //     weightState: false,
+      //     noOfItemState: false,
+      //     noOfResponseState: true
+      //   };
+      // }
+      // if (itemFrameworkOneType === '61090cace50cf61d5eb440c4') {
+      //   //"Fill-in-the-Blank (Response-Choice)"
+      //   reviseSetting = {
+      //     blankState: true,
+      //     classificationState: false,
+      //     levelState: true,
+      //     polarityState: false,
+      //     scaleState: false,
+      //     scoreState: true,
+      //     timeState: true,
+      //     weightState: false,
+      //     noOfItemState: false,
+      //     noOfResponseState: true
+      //   };
+      // }
+      // if (
+      //   itemFrameworkOneType === '61090cace50cf61d5eb440cc' ||
+      //   itemFrameworkOneType === '61090cace50cf61d5eb440cd'
+      // ) {
+      //   //"Response (Long)","Response (Short)"
+      //   reviseSetting = {
+      //     blankState: false,
+      //     classificationState: false,
+      //     levelState: true,
+      //     polarityState: false,
+      //     scaleState: false,
+      //     scoreState: true,
+      //     timeState: true,
+      //     weightState: false,
+      //     noOfItemState: false,
+      //     noOfResponseState: false
+      //   };
+      // }
+      // yield put({
+      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //   payload: { stateName: 'itemConfigStates', value: reviseSetting }
+      // });
       yield put({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: { stateName: 'itemFrameworkOnePassage', value: itemFrameworkOnePassage }

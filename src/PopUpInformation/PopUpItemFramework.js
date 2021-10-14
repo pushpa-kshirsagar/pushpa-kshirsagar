@@ -292,7 +292,7 @@ const PopUpItemFramework = (props) => {
                 }}
               />
             )}
-            {/* {isItemFramework && itemConfigStates.classificationState && (
+             {isItemFramework && itemConfigStates.classificationState && (
               <SelectField
                 tag={'cluster'}
                 label={'cluster'}
@@ -305,7 +305,7 @@ const PopUpItemFramework = (props) => {
                 value={classification}
                 mappingValue={'itemFrameworkOneClusterPrimary'}
               />
-            )} */}
+            )} 
             {isItemFramework && itemConfigStates.levelState && (
               <SelectField
                 tag={'level'}
