@@ -698,7 +698,7 @@ export const CLUSTER_SCALE_POPUP_OPTION = [
     disabled: false,
     //permissionArr: 'assessee',
     permission: 'review',
-    dataKey: 'clusterscalereview'
+    dataKey: 'reviewDistinctKey'
   },
   {
     data: 'notifications',

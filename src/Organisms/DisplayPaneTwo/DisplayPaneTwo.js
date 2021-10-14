@@ -61,6 +61,7 @@ import CultureProfileAssessmentDistinctReviewList from '../../ReviewListComponen
 import JobProfileAssessmentDistinctReviewList from '../../ReviewListComponent/JobProfileAssessmentDistinctReviewList';
 import AssesseeDistinctAssignmentDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctAssignmentDistinctReviewList';
 import AssessmentDistinctItemDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctItemDistinctReviewList';
+import AssessmentDistinctScaleDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctScaleDistinctReviewList';
 import AssesseeDistinctAssessmentDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctAssessmentDistinctReviewList';
 import AssesseeDistinctReportDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReportDistinctReviewList';
 
@@ -172,6 +173,9 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'assessmentItemReviewList' && (
           <AssessmentDistinctItemDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assessmentscalesReviewList' && (
+          <AssessmentDistinctScaleDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' && (
           <AssesseeGroupAssesseeDistinctReviewList popupAllClose={popupAllClose} />

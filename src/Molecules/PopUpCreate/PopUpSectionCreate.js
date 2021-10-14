@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PopUpPicture from '../../PopUpInformation/PopUpPicture';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
 import PopUpConfirm from '../../PopUpGeneric/PopUpConfirm';
 import {
@@ -8,20 +7,16 @@ import {
   LOADER_START,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_SECTION_REDUCER_STATE,
-  CLEAR_CLUSTER_REDUCER_STATE
+  CLEAR_CLUSTER_REDUCER_STATE,
+  CREATE_ASSESSMENT_SECTION_SAGA
 } from '../../actionType';
 
 const PopUpSectionCreate = (props) => {
   const { headerOne } = props;
   const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
-  console.log(sectionInformation);
-  const { reviewMode, responseObject, statusPopUpValue } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
-  );
-  const { selectedAssociateInfo, coreNodeReviewListData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
@@ -34,11 +29,16 @@ const PopUpSectionCreate = (props) => {
   };
   const onClickYes = () => {
     let requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       assessmentId: selectedTagValue,
       assessmentSection: sectionInformation
     };
     console.log('requestObj', requestObj);
     dispatch({ type: POPUP_CLOSE });
+    // dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSESSMENT_SECTION_SAGA, payload: requestObj });
   };
   console.log('sectionInformation', sectionInformation);
   return (

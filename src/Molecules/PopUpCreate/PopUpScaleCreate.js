@@ -8,12 +8,13 @@ import {
   LOADER_START,
   SET_DISPLAY_THREE_SINGLE_STATE,
   CLEAR_SCALE_REDUCER_STATE,
-  SET_SCALE_REDUCER_STATE
+  SET_SCALE_REDUCER_STATE,
+  CREATE_ASSESSMENT_SECTION_SAGA
 } from '../../actionType';
 
 const PopUpScaleCreate = (props) => {
   const { headerOne } = props;
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue,selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const { scaleInformation } = useSelector((state) => state.ScaleCreateReducer);
   console.log(scaleInformation);
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
@@ -34,33 +35,30 @@ const PopUpScaleCreate = (props) => {
   };
   const onClickYes = () => {
     dispatch({ type: POPUP_CLOSE });
-    //   let reqBody = {
-    //     assesseeId: selectedAssociateInfo?.assesseeId,
-    //     associateId:
-    //       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    //     assessmentScale: {
-    //       informationBasic: scaleInformation.informationBasic,
-    //       informationAllocation: scaleInformation.informationAllocation,
-    //       informationFramework: scaleInformation.informationFramework,
-    //       informationSetup: scaleInformation.informationSetup
-    //     }
-    //   };
-    //   console.log('CREATE group api', reqBody);
-    //   dispatch({ type: LOADER_START });
-    //   dispatch({ type: CREATE_SCALE_SAGA, payload: reqBody });
+    let requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      assessmentId: selectedTagValue,
+      assessmentScale: scaleInformation
+    };
+    console.log('requestObj', requestObj);
+    dispatch({ type: POPUP_CLOSE });
+    // dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSESSMENT_SECTION_SAGA, payload: requestObj });
   };
   return (
     <div>
       <PopUpTextField
         isActive={isPopUpValue === 'NAMEPOPUP'}
         label={'name'}
-        actualLableValue={'assessmentScaleName'}
+        actualLableValue={'assessmentScaleOneName'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={scaleInformation?.informationBasic}
+        basicInfo={scaleInformation}
         typeOfSetObject={SET_SCALE_REDUCER_STATE}
         isRequired={true}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -68,23 +66,29 @@ const PopUpScaleCreate = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'description'}
-        actualLableValue={'assessmentScaleDescription'}
+        actualLableValue={'assessmentScaleOneDescription'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
-        basicInfo={scaleInformation.informationBasic}
-        nextPopUpValue={'PICTUREPOPUP'}
+        basicInfo={scaleInformation}
+        nextPopUpValue={'WEIGTAGEPOPUP'}
         typeOfSetObject={SET_SCALE_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      <PopUpPicture
-        isActive={isPopUpValue === 'PICTUREPOPUP'}
+      <PopUpTextField
+        isActive={isPopUpValue === 'WEIGTAGEPOPUP'}
+        label={'weightage'}
+        labelBadgeOne={''}
+        type={'number'}
+        actualLableValue={'assessmentScaleOneWeightage'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
-        headerOneBadgeOne={''}
-        headerOneBadgeTwo={'information'}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={scaleInformation}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={SET_SCALE_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm

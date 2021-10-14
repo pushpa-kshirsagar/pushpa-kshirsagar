@@ -8,14 +8,14 @@ import {
   LOADER_START,
   SET_DISPLAY_THREE_SINGLE_STATE,
   SET_CLUSTER_REDUCER_STATE,
-  CLEAR_CLUSTER_REDUCER_STATE
+  CLEAR_CLUSTER_REDUCER_STATE,
+  CREATE_ASSESSMENT_SECTION_SAGA
 } from '../../actionType';
 
 const PopUpClusterCreate = (props) => {
   const { headerOne } = props;
-  const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue,selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const { clusterInformation } = useSelector((state) => state.ClusterCreateReducer);
-  console.log(clusterInformation);
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
@@ -34,33 +34,30 @@ const PopUpClusterCreate = (props) => {
   };
   const onClickYes = () => {
     dispatch({ type: POPUP_CLOSE });
-    //   let reqBody = {
-    //     assesseeId: selectedAssociateInfo?.assesseeId,
-    //     associateId:
-    //       selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    //     assessmentCluster: {
-    //       informationBasic: clusterInformation.informationBasic,
-    //       informationAllocation: clusterInformation.informationAllocation,
-    //       informationFramework: clusterInformation.informationFramework,
-    //       informationSetup: clusterInformation.informationSetup
-    //     }
-    //   };
-    //   console.log('CREATE group api', reqBody);
-    //   dispatch({ type: LOADER_START });
-    //   dispatch({ type: CREATE_CLUSTER_SAGA, payload: reqBody });
+    let requestObj = {
+      assesseeId: selectedAssociateInfo?.assesseeId,
+      associateId:
+        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+      assessmentId: selectedTagValue,
+      assessmentCluster: clusterInformation
+    };
+    console.log('requestObj', requestObj);
+    dispatch({ type: POPUP_CLOSE });
+    // dispatch({ type: LOADER_START });
+    dispatch({ type: CREATE_ASSESSMENT_SECTION_SAGA, payload: requestObj });
   };
   return (
     <div>
       <PopUpTextField
         isActive={isPopUpValue === 'NAMEPOPUP'}
         label={'name'}
-        actualLableValue={'assessmentClusterName'}
+        actualLableValue={'assessmentClusterOneName'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
         nextPopUpValue={'ALIASPOPUP'}
-        basicInfo={clusterInformation?.informationBasic}
+        basicInfo={clusterInformation}
         typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
         isRequired={true}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -68,23 +65,14 @@ const PopUpClusterCreate = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'ALIASPOPUP'}
         label={'description'}
-        actualLableValue={'assessmentClusterDescription'}
+        actualLableValue={'assessmentClusterOneDescription'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
-        basicInfo={clusterInformation.informationBasic}
+        basicInfo={clusterInformation}
         nextPopUpValue={'PICTUREPOPUP'}
         typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpPicture
-        isActive={isPopUpValue === 'PICTUREPOPUP'}
-        headerPanelColour={'genericOne'}
-        headerOne={headerOne}
-        headerOneBadgeOne={''}
-        headerOneBadgeTwo={'information'}
-        nextPopUpValue={'CONFIRMATIONPOPUP'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpConfirm

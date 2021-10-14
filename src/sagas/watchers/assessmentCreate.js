@@ -2,6 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import Store from '../../store';
 import {
   CREATE_ASSESSMENT_SAGA,
+  CREATE_ASSESSMENT_SECTION_SAGA,
   LOADER_STOP,
   POPUP_CLOSE,
   SET_ASSESSMENT_BASIC_REDUCER_STATE,
@@ -19,14 +20,31 @@ const createAssessmentApi = async (requestObj) => {
     }),
     body: JSON.stringify(requestObj.data)
   };
-  const response = await fetch(ASSESSMENT_CREATE_URL, requestOptions);
+  const response = await fetch(requestObj.URL, requestOptions);
   const json = await response.json();
   return json;
 };
-
+function* workerCreateAssessmentSectionSaga(data) {
+  try {
+    const apiResponse = yield call(createAssessmentApi, { data: data.payload, URL: '' });
+    if (apiResponse.responseCode === '000') {
+      yield put({ type: LOADER_STOP });
+    }
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 function* workerCreateAssessmentSaga(data) {
   try {
-    const apiResponse = yield call(createAssessmentApi, { data: data.payload });
+    const apiResponse = yield call(createAssessmentApi, {
+      data: data.payload,
+      URL: ASSESSMENT_CREATE_URL
+    });
     if (apiResponse.responseCode === '000') {
       console.log('loading end', data.payload.whichTypeCreate);
       yield put({
@@ -66,4 +84,5 @@ function* workerCreateAssessmentSaga(data) {
 
 export default function* watchCreateAssessmentSaga() {
   yield takeLatest(CREATE_ASSESSMENT_SAGA, workerCreateAssessmentSaga);
+  yield takeLatest(CREATE_ASSESSMENT_SECTION_SAGA, workerCreateAssessmentSectionSaga);
 }

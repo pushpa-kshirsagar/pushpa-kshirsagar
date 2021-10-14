@@ -33,7 +33,9 @@ const ReviewList = (props) => {
     flagedValue = '',
     shared = '',
     className,
-    isShared = false
+    isShared = false,
+    isInformation = false,
+    isInformationValue = ''
   } = props;
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
@@ -110,8 +112,7 @@ const ReviewList = (props) => {
                 style={{ textAlign: 'center' }}
               >
                 {isAlertActive ? <Notifications className={'selectionIcon'} /> : null}
-
-                {/* {isShared ? <IosShareIcon className={'selectionIcon'} /> : null} */}
+                {isInformation ? isInformationValue : null}
                 {isShared ? (
                   <img
                     alt={'shared'}

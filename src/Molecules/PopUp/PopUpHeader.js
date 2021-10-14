@@ -51,7 +51,7 @@ const PopupHeader = (props) => {
       } else {
         dispatch({ type: CLEAR_POPUP_INFO });
         dispatch({ type: CLEAR_ASSESSEE_INFO });
-        //dispatch({ type: CLEAR_ASSESSMENT_INFO });
+        dispatch({ type: CLEAR_ASSESSMENT_INFO });
         dispatch({ type: POPUP_CLOSE });
         dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
         dispatch({ type: CLEAR_ASSOCIATE_INFO });

@@ -59,7 +59,9 @@ import {
   GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
   LOADER_STOP,
   SET_DISPLAY_PANE_THREE_STATE,
-  GET_ASSESSEE_REPORT_SAGA
+  GET_ASSESSEE_REPORT_SAGA,
+  GET_ASSESSMENT_SEC_INFO_SAGA,
+  SET_RELATED_REQUEST_OBJECT
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -1678,20 +1680,60 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({ type: POPUP_CLOSE });
       }
       if (typeOfMiddlePaneList === 'assessmentDistinctReviewList') {
-        getAssessmentItemDistinctApiCall(
-          selectedAssociateInfo,
-          secondaryOptionCheckValue,
-          countPage,
-          dispatch,
-          dataVal,
-          selectedTagValue,
-          '',
-          false
-        );
-        dispatch({
-          type: FILTERMODE,
-          payload: { FilterMode: 'assessmentItem' + secondaryOptionCheckValue }
-        });
+        if (popupHeaderOne === 'items') {
+          getAssessmentItemDistinctApiCall(
+            selectedAssociateInfo,
+            secondaryOptionCheckValue,
+            countPage,
+            dispatch,
+            dataVal,
+            selectedTagValue,
+            '',
+            false
+          );
+          dispatch({
+            type: FILTERMODE,
+            payload: { FilterMode: 'assessmentItem' + secondaryOptionCheckValue }
+          });
+        }
+        if (popupHeaderOne === 'scales') {
+          dispatch({ type: LOADER_START });
+          dispatch({
+            type: SET_RELATED_REQUEST_OBJECT,
+            payload: ''
+          });
+          dispatch({
+            type: GET_ASSESSMENT_SEC_INFO_SAGA,
+            payload: {
+              reqBody: {
+                assesseeId: selectedAssociateInfo?.assesseeId,
+                associateId:
+                  selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                    .associateTagPrimary, //605255729d3c823d3964e0ec
+                filter: true,
+                search: [
+                  {
+                    condition: 'and',
+                    searchBy: [
+                      {
+                        dataType: 'String',
+                        conditionColumn: 'id',
+                        conditionValue: {
+                          condition: 'eq',
+                          value: {
+                            from: selectedTagValue
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              typeOfMiddlePaneList: 'assessment' + popupHeaderOne + 'ReviewList'
+            }
+          });
+        }
+
         dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
         dispatch({ type: POPUP_CLOSE });
       }
