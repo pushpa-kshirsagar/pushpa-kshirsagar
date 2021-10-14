@@ -57,7 +57,7 @@ function* workerReviewInfoAssessmentSaga(data) {
           reviewMode: isReviseMode ? 'revise' : ''
         }
       });
-      if (isReviseMode) {
+      // if (isReviseMode) {
         const { informationAllocation, informationFramework } = userResponse.responseObject[0];
         yield put({
           type: SET_ASSESSMENT_BASIC_REDUCER_STATE,
@@ -257,7 +257,13 @@ function* workerReviewInfoAssessmentSaga(data) {
         //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         //   payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }
         // });
-      }
+      //}
+      // const assessmentSection = userResponse.responseObject[0].informationFramework?.assessmentSection || [];
+      //   yield put({
+      //     type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+      //     payload: { stateName: 'assessmentSection', value: assessmentSection }
+      //   });
+
     } else {
       yield put({
         type: SET_POPUP_VALUE,

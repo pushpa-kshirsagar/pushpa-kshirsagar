@@ -1168,6 +1168,7 @@ export const DisplayPaneFiveItem = () => {
           mode={reviewMode}
           subItemList={subItemList}
           setSubItemList={setSubItemList}
+          itemFrameworkOne={itemInformation?.informationFramework?.itemFrameworkOne||[]}
           // itemSelectedTypeName = {handleCallback}
         />
   
@@ -1181,6 +1182,7 @@ export const DisplayPaneFiveItem = () => {
           primaryheader={'configuration'}
           isItemFramework={false}
           mode={reviewMode}
+          itemFrameworkOne={itemInformation?.informationFramework?.itemFrameworkOne||[]}
           // itemSelectedTypeName = {handleCallback}
         />
   
