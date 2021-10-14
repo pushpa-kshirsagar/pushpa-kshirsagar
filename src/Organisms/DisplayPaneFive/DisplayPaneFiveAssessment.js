@@ -10,16 +10,19 @@ import ClearIcon from "@material-ui/icons/Clear";
 import ReviseIcon from "@material-ui/icons/RadioButtonChecked";
 import Check from "@material-ui/icons/Check";
 import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
+import ReactHTMLParser from 'react-html-parser';
 import {
   SET_POPUP_VALUE,
   SET_DISPLAY_PANE_THREE_REVIEW_MODE,
   POPUP_CLOSE,
+  SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE
 } from "../../actionType";
 
 import { InputLabel, Paper, IconButton } from "@material-ui/core";
 import EditorTemplate from "./EditorTemplate";
 import FooterIconTwo from "../../Molecules/FooterIcon/FooterIconTwo";
 import { useTimer } from "react-timer-hook";
+import PopUpItemConfig from "../../PopUpInformation/PopUpItemConfig";
 
 const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
   const { seconds, minutes, hours } = useTimer({
@@ -40,7 +43,7 @@ const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
 const AssessmentHeader = (props) => {
   return (
     <Fragment>
-      <Paper className={"dossierContainerTop"}>
+      <Paper className={""}>
         <div className="containerPadding sticky-header">
           <div
             style={{ height: "49px", padding: "0 5px", display: "flex" }}
@@ -71,14 +74,14 @@ const AssessmentHeader = (props) => {
                 ].join(" ")}
                 style={{ textAlign: "center" }}
               >
-                {/* <InputLabel
+                <InputLabel
                   className={[
                     "iconsFooterLabelDefault1",
                     "AssesseeNotifyStatusLabel",
                   ].join(" ")}
                 >
                   {1 + "/" + 2}
-                </InputLabel> */}
+                </InputLabel> 
                 <InputLabel
                   className={[
                     "iconsFooterLabelDefault1",
@@ -115,7 +118,7 @@ const AssessmentHeader = (props) => {
               )}
             </div>
             <div
-              style={{ flex: "1", display: "flex", alignItems: "center" }}
+              style={{ flex: "1", display: "flex", alignItems: "center",cursor:"pointer" }}
               className="flex-center"
             >
               <IconButton
@@ -142,7 +145,7 @@ export const DisplayPaneFiveAssessment = (props) => {
     headerOne,
     headerOneBadgeOne,
     closePreview,
-    itemObect,
+    //itemObect,
     primaryIcon,
     secondaryIcon,
     navigatorIcon,
@@ -161,12 +164,31 @@ export const DisplayPaneFiveAssessment = (props) => {
   const { isPopUpValue, popupMode } = useSelector(
     (state) => state.PopUpReducer
   );
+    const { informationBasic } = useSelector(
+      (state) => state.AssessmentReducer
+    );
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const [selectedChoiceObject, setSelectedChoiceObject] = useState('');
   const [subQuestionId, setSubQuestionId] = useState('');
   console.log("reviewMode", reviewMode);
+  const responseText = '<p><span>response</span></p>';
+  let itemObect =informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne;
+  if (!informationFramework?.assessmentSectionItemDistinctRevise) {
+    debugger;
+    dispatch({
+      //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+      type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
+      payload: {
+        stateName: 'assessmentSectionItemDistinctRevise',
+        actualStateName:'itemFrameworkOne',
+        value: informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne
+        //value: informationFramework?.assessmentItem[currentItemIndex].informationFramework
+      }
+    })
+  }
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
+    
     // const { informationBasic, informationAllocation, informationFramework } = itemInformation;
     // const { id } = responseObject;
     // const reqBody = {
@@ -482,6 +504,18 @@ export const DisplayPaneFiveAssessment = (props) => {
       //   : false
     },
   ];
+  const ChangeResponsePopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'configure') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'RESPONSE_CONFIGURE_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+  };
 
   return (
     <>
@@ -573,8 +607,8 @@ export const DisplayPaneFiveAssessment = (props) => {
           qnumber={currentItemIndex + 1}
           totalQuestion={20}
           score={1}
-          assessmentName={"name"}
-          assessmentDesc={"description"}
+          assessmentName={informationBasic?.assessmentName||''}
+          assessmentDesc={informationBasic?.assessmentDescription||''}
           onClickFlag={null}
           isQuestionFlaged={false}
           timerFinished={""}
@@ -603,11 +637,10 @@ export const DisplayPaneFiveAssessment = (props) => {
               )}
 
           {/* item */}
-
           {(itemObect?.itemFrameworkOneMedia || reviewMode === "revise") && (
             <div
               className={["ex_container", "ig-itemGeneric"].join(" ")}
-              style={{ cursor: reviewMode === "revise" && "pointer" }}
+              style={{ cursor: reviewMode === 'revise' ? 'pointer' : '' }}
               onClick={
                 reviewMode === "revise"
                   ? () => {
@@ -662,6 +695,33 @@ export const DisplayPaneFiveAssessment = (props) => {
               </div>
             </div>
           )}
+
+           {/* response */}
+      {(
+        <div className={'innerpadding'}>
+          <div
+            className={'ex_container'}
+            style={{
+              cursor: reviewMode === 'revise' ? 'pointer' : ''
+            }}
+            onClick={
+              reviewMode === 'revise'
+                ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'RESPONSE_PRIMARY_POPUP',
+                        popupMode: 'RESPONSE_SECONDARY_POPUP'
+                      }
+                    });
+                  }
+                : null
+            }
+          >
+            {ReactHTMLParser(responseText)}
+          </div>
+        </div>
+      )}
 
           {/* response choices */}
           {itemObect?.itemFrameworkOneResponseChoice.map((op, key) => {
@@ -859,6 +919,53 @@ export const DisplayPaneFiveAssessment = (props) => {
           }
           itemFrameworkOneResponseChoice={itemObect?.itemFrameworkOneResponseChoice||[]}
           itemFrameworkOne={itemObect}
+        />
+        <Popup isActive={isPopUpValue === 'RESPONSE_PRIMARY_POPUP'}>
+          <PopupHeader
+            headerPanelColour={'genericOne'}
+            headerOne={'response'}
+            headerOneBadgeOne={''}
+            onClick={BackHandlerEvent}
+            mode={''}
+          />
+          <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+            <JsonRenderComponent
+              setSecondaryOptionValue={setSecondaryOptionValue}
+              ChangeOptionPopup={ChangeResponsePopup}
+              currentPopUpOption={[
+                {
+                  data: 'configure',
+                  dataValue: 'configure',
+                  dataKey: 'configureAPICall',
+                  optionClass: 'optionPrimary',
+                  divider: '',
+                  disabled: false
+                },
+                {
+                  data: 'revise',
+                  dataValue: 'revise',
+                  dataKey: 'reviseAPICall',
+                  optionClass: 'optionPrimary',
+                  divider: '',
+                  disabled: true
+                }
+              ]}
+              secondaryOptionCheckValue={''}
+            />
+          </DialogContent>
+        </Popup>
+        <PopUpItemConfig
+          isActive={isPopUpValue === 'RESPONSE_CONFIGURE_POPUP'}
+          headerPanelColour={'genericOne'}
+          headerOne={'response'}
+          headerOneBadgeOne={''}
+          nextPopUpValue={''}
+          inputHeader={''}
+          primaryheader={'configuration'}
+          isItemFramework={false}
+          mode={reviewMode}
+          itemFrameworkOne={itemObect}
+          // itemSelectedTypeName = {handleCallback}
         />
       </>
   );

@@ -12,7 +12,8 @@ import {
   POPUP_CLOSE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-  SET_NEXT_POPUP
+  SET_NEXT_POPUP,
+  SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
@@ -30,11 +31,14 @@ const PopUpItemConfig = (props) => {
     choiceOb = null,
     basicInfo,
     mode,
-    isItemFramework = false
+    isItemFramework = false,
+    itemFrameworkOne
   } = props;
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
+  const { isAssessmentPreviewShow=false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  //const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
+
   const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne.itemFrameworkOneAlignment);
   const [item_Type, set_Item_Type] = useState(itemFrameworkOne.itemFrameworkOneType);
   const [response_word, set_Response_Word] = useState();
@@ -153,30 +157,58 @@ const PopUpItemConfig = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: { stateName: 'itemConfigStates', value: reviseSetting }
     });
-    dispatch({
-      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-      payload: {
-        stateName: 'itemFrameworkOneType',
-        value: item_Type
-      }
-    });
-    dispatch({
-      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-      payload: {
-        stateName: 'itemFrameworkOneResponseAlignment',
-        value: response_Aligement
-      }
-    });
-    dispatch({
-      type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-      payload: {
-        stateName: 'itemFrameworkOneWord',
-        value: {
-          itemFrameworkOneWordMaximum: response_word,
-          itemFrameworkOneWordMinimum: response_word
+    if(isAssessmentPreviewShow){
+      dispatch({
+        type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneType',
+          value: item_Type
         }
-      }
-    });
+      });
+      dispatch({
+        type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseAlignment',
+          value: response_Aligement
+        }
+      });
+      dispatch({
+        type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneWord',
+          value: {
+            itemFrameworkOneWordMaximum: response_word,
+            itemFrameworkOneWordMinimum: response_word
+          }
+        }
+      });
+
+    }else{
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneType',
+          value: item_Type
+        }
+      });
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseAlignment',
+          value: response_Aligement
+        }
+      });
+      dispatch({
+        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneWord',
+          value: {
+            itemFrameworkOneWordMaximum: response_word,
+            itemFrameworkOneWordMinimum: response_word
+          }
+        }
+      });
+    }
     if (response_Choice < itemFrameworkOne.itemFrameworkOneResponseChoice) {
       let actlen = itemFrameworkOneResponseChoice.length - response_Choice;
       let arr = itemFrameworkOne.itemFrameworkOneResponseChoice;
@@ -321,13 +353,24 @@ const PopUpItemConfig = (props) => {
           });
         }
         console.log('newbj', newbj);
-        dispatch({
-          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-          payload: {
-            stateName: 'itemFrameworkOneResponseChoice',
-            value: [...itemFrameworkOneResponseChoice, ...newbj]
-          }
-        });
+        if(isAssessmentPreviewShow){
+          dispatch({
+            type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneResponseChoice',
+              value: [...itemFrameworkOneResponseChoice, ...newbj]
+            }
+          });
+        }else{
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneResponseChoice',
+              value: [...itemFrameworkOneResponseChoice, ...newbj]
+            }
+          });
+        }
+        
       }
     }
     // if (sub_item > subItemList?.length) {
