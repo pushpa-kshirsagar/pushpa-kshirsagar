@@ -143,8 +143,7 @@ export const DisplayPaneFiveAssessment = (props) => {
   console.log('assessmentinformationFramework', informationFramework);
   const responseText = '<p><span>response</span></p>';
   let itemObect =
-    informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]
-      .itemFrameworkOne;
+    informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne;
   if (!informationFramework?.assessmentSectionItemDistinctRevise) {
     dispatch({
       //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
@@ -153,9 +152,7 @@ export const DisplayPaneFiveAssessment = (props) => {
         stateName: 'assessmentSectionItemDistinctRevise',
         actualStateName: 'itemFrameworkOne',
         value:
-          informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
-            currentItemIndex
-          ].itemFrameworkOne
+          informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
         //value: informationFramework?.assessmentItem[currentItemIndex].informationFramework
       }
     });
@@ -371,7 +368,7 @@ export const DisplayPaneFiveAssessment = (props) => {
 
           {itemObect?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia && (
             <div className={'innerpadding'}>
-              <div className={['ex_container', 'ig-label'].join(' ')}>
+              <div className={['ex_container', 'ig-itemGeneric'].join(' ')}>
                 <EditorTemplate
                   jsonData={itemObect?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
                   label={'passage'}
@@ -382,8 +379,7 @@ export const DisplayPaneFiveAssessment = (props) => {
 
           {/* item */}
           {(itemObect?.itemFrameworkOneMedia || reviewMode === 'revise') && (
-            <div
-              className={['ex_container', 'ig-itemGeneric'].join(' ')}
+            <div className={'innerpadding'}
               style={{ cursor: reviewMode === 'revise' ? 'pointer' : '' }}
               onClick={
                 reviewMode === 'revise'
@@ -400,8 +396,8 @@ export const DisplayPaneFiveAssessment = (props) => {
               }
             >
               {itemObect?.itemFrameworkOneMedia !== '' && (
-                <div className={'innerpadding'}>
-                  <div className={['ex_container'].join(' ')}>
+                <div className={['ex_container', 'ig-itemGeneric'].join(' ')}>
+                  <div>
                     <EditorTemplate
                       label={'itemFrameworkOneMedia'}
                       jsonData={itemObect?.itemFrameworkOneMedia}
@@ -456,6 +452,19 @@ export const DisplayPaneFiveAssessment = (props) => {
                               style={{
                                 cursor: reviewMode === 'revise' ? 'pointer' : ''
                               }}
+                              onClick={
+                                reviewMode === 'revise'
+                                  ? () => {
+                                      dispatch({
+                                        type: SET_POPUP_VALUE,
+                                        payload: {
+                                          isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
+                                          popupMode: `LIKERT_ITEM_MEDIA_TEXT_${keys}`
+                                        }
+                                      });
+                                    }
+                                  : null
+                              }
                             >
                               {/* {ob?.itemFrameworkOneSection?.itemFrameworkOneMedia || ( */}
                               <EditorTemplate
@@ -531,7 +540,7 @@ export const DisplayPaneFiveAssessment = (props) => {
           {/* item explanation */}
           {itemObect.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia && (
             <div className={'innerpadding'}>
-              <div className={['ex_container', 'ig-label'].join(' ')}>
+              <div className={['ex_container', 'ig-explanation'].join(' ')}>
                 <EditorTemplate
                   label={'itemFrameworkOneExplanation'}
                   jsonData={
@@ -641,6 +650,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                     <div>
                       {op.itemFrameworkOneResponseChoiceExplanation
                         ?.itemFrameworkOneResponseChoiceExplanationMedia && (
+                          <div style={{ paddingLeft: '25px', display: 'inline-block' }}>
                         <div className={['ex_container', 'ig-explanation '].join(' ')}>
                           <EditorTemplate
                             jsonData={
@@ -649,6 +659,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                             }
                             label={'itemFrameworkOneResponseChoiceExplanationMedia'}
                           />
+                        </div>
                         </div>
                       )}
                     </div>
@@ -683,7 +694,7 @@ export const DisplayPaneFiveAssessment = (props) => {
           headerOne={'item'}
           headerOneBadgeOne={''}
           onClick={BackHandlerEvent}
-          mode={''}
+          mode={'reivse'}
         />
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
@@ -704,7 +715,7 @@ export const DisplayPaneFiveAssessment = (props) => {
           headerOne={'item'}
           headerOneBadgeOne={''}
           onClick={BackHandlerEvent}
-          mode={''}
+          mode={'revise'}
         />
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
@@ -773,7 +784,7 @@ export const DisplayPaneFiveAssessment = (props) => {
           headerOne={'response'}
           headerOneBadgeOne={''}
           onClick={BackHandlerEvent}
-          mode={''}
+          mode={'revise'}
         />
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent

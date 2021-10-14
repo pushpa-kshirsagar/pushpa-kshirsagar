@@ -45,10 +45,21 @@ export const DisplayPaneFive = () => {
   const dispatch = useDispatch();
   const [currentItemIndex, setcurrentItemIndex] = useState(0);
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
+  // const {
+  //   middlePaneHeader,
+  //   middlePaneHeaderBadgeOne,
+  //   middlePaneHeaderBadgeTwo,
+  // } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
+    typeOfMiddlePaneList,
+    selectedAssociateInfo,
+    reviewListDistinctData,
+    reviewListReqObj,
+    numberPage,
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
+    scanCount,
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     headerOne,
