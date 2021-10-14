@@ -21,6 +21,7 @@ import JobProfileCreateReducer from './JobProfileCreateReducer';
 import AssesseeAssignmentAssessmentReducer from './AssesseeAssignmentAssessmentReducer';
 import ClusterCreateReducer from './ClusterCreateReducer';
 import ScaleCreateReducer from './ScaleCreateReducer';
+import SectionCreateReducer from './SectionCreateReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -44,5 +45,6 @@ export default combineReducers({
   JobProfileCreateReducer,
   AssesseeAssignmentAssessmentReducer,
   ClusterCreateReducer,
-  ScaleCreateReducer
+  ScaleCreateReducer,
+  SectionCreateReducer
 });

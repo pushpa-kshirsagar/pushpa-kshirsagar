@@ -688,8 +688,7 @@ export const CLUSTER_SCALE_POPUP_OPTION = [
     disabled: false,
     //permissionArr: 'assessee',
     permission: 'create',
-    dataKey:'clusterscalecreate'
-
+    dataKey: 'clusterscalecreate'
   },
   {
     data: 'review',
@@ -699,7 +698,7 @@ export const CLUSTER_SCALE_POPUP_OPTION = [
     disabled: false,
     //permissionArr: 'assessee',
     permission: 'review',
-    dataKey:'clusterscalereview'
+    dataKey: 'clusterscalereview'
   },
   {
     data: 'notifications',
@@ -1353,17 +1352,24 @@ export const ASSESSMENT_REVIEW_LIST_POPUP_OPTION = [
     disabled: false
   },
   {
-    data:'clusters',    
-    dataValue:'clusters',    
-    //dataKey: 'review',    
-    optionClass: 'optionPrimary',    
-    disabled: false,
+    data: 'clusters',
+    dataValue: 'clusters',
+    //dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
   },
   {
-    data:'scales',    
-    dataValue:'scales',    
-    //dataKey: 'review',    
-    optionClass: 'optionPrimary',    
+    data: 'scales',
+    dataValue: 'scales',
+    //dataKey: 'review',
+    optionClass: 'optionPrimary',
+    disabled: false
+  },
+  {
+    data: 'sections',
+    dataValue: 'sections',
+    //dataKey: 'review',
+    optionClass: 'optionPrimary',
     disabled: false,
     divider: 'dark'
   },

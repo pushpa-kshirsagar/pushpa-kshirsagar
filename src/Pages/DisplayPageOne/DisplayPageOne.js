@@ -60,7 +60,7 @@ import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
 import PopUpClusterCreate from '../../Molecules/PopUpCreate/PopUpClusterCreate';
 import PopUpScaleCreate from '../../Molecules/PopUpCreate/PopUpScaleCreate';
-
+import PopUpSectionCreate from '../../Molecules/PopUpCreate/PopUpSectionCreate';
 
 // import { useHistory } from 'react-router-dom';
 
@@ -70,7 +70,7 @@ const DisplayPageOne = () => {
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
   const { isLoading } = useSelector((state) => state.LoaderReducer);
   const { mobilePanestate } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isItemPreviewShow = false, reviewMode,isAssessmentPreviewShow = false } = useSelector(
+  const { isItemPreviewShow = false, reviewMode, isAssessmentPreviewShow = false } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
 
@@ -234,7 +234,7 @@ const DisplayPageOne = () => {
                   <DisplayPaneThree />
                 </div>
               </>
-            ) : isAssessmentPreviewShow?(
+            ) : isAssessmentPreviewShow ? (
               <>
                 <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '95.5%' }}>
                   <DisplayPaneFive />
@@ -243,8 +243,7 @@ const DisplayPageOne = () => {
                   <DisplayPaneThree />
                 </div>
               </>
-            ):
-             (
+            ) : (
               <>
                 <div className="display-pane-container">
                   <DisplayPaneOne />
@@ -479,8 +478,9 @@ const DisplayPageOne = () => {
       {popupMode === 'ASSIGNMENTCREATE' && <PopUpAssignmentCreate headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <PopUpAssessmentCreate headerOne={'assessment'} />}
       {popupMode === 'ITEMCREATE' && <PopUpItemCreate />}
-      {popupMode==='CLUSTERCREATE' && <PopUpClusterCreate headerOne={'clusters'} />}
-      {popupMode==='SCALECREATE' && <PopUpScaleCreate headerOne={'scales'} />}
+      {popupMode === 'CLUSTERCREATE' && <PopUpClusterCreate headerOne={'clusters'} />}
+      {popupMode === 'SECTIONCREATE' && <PopUpSectionCreate headerOne={'sections'} />}
+      {popupMode === 'SCALECREATE' && <PopUpScaleCreate headerOne={'scales'} />}
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
         headerPanelColour={'genericOne'}

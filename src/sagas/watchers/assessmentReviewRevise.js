@@ -249,9 +249,9 @@ function* workerReviewInfoAssessmentSaga(data) {
         });
         const assessmentSection = informationFramework?.assessmentSection || [];
         yield put({
-          type:SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-          payload:{stateName:'assessmentSection',value:assessmentSection}
-        })
+          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          payload: { stateName: 'assessmentSection', value: assessmentSection }
+        });
 
         // yield put({
         //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
