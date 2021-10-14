@@ -74,13 +74,11 @@ const initialState = {
     }
   },
   informationFramework: {
-    assessmentSectionAdministrationProctor: false,
-    assessmentSectionAdministrationSupervise: false,
-    assessmentSectionAdministrationTemplate: false,
-    assessmentSectionAdministrationVersion: false,
-    assessmentSectionItemFrameworkOneLabel: '',
-    assessmentSectionItemFrameworkOneTemplate: '',
-    assessmentSectionItemFrameworkOneResponseLabel: '',
+    assessmentAdministrationProctor: false,
+    assessmentAdministrationSupervise: false,
+    assessmentAdministrationTemplate: false,
+    assessmentAdministrationVersion: false,
+    assessmentCommunique: [],
     assessmentEvaluation: {
       assessmentEvaluationScoreCutoff: false,
       assessmentEvaluationScoreGeneric: false,
@@ -94,8 +92,10 @@ const initialState = {
       assessmentEvaluationScoreT: false,
       assessmentEvaluationScoreZ: false
     },
-    assessmentCommunique: [],
+    assessmentSectionItemFrameworkOneTemplate: '',
+    assessmentItemTotal: null,
     assessmentManuscript: [],
+    assessmentScale: null,
     assessmentScoreExtremum: {
       assessmentScoreExtremumMaximum: 0,
       assessmentScoreExtremumMinimum: 0
@@ -105,7 +105,8 @@ const initialState = {
     assessmentTemplate: [],
     assessmentSection: [
       {
-        assessmentSectionSequence: 0,
+        assessmentSectionName: null,
+        assessmentSectionDescription: null,
         assessmentSectionAdministrationRepeat: false,
         assessmentSectionAdministrationReset: false,
         assessmentSectionAdministrationShuffle: false,
@@ -119,9 +120,9 @@ const initialState = {
         },
         assessmentSectionCommunique: [],
         assessmentSectionEvaluation: false,
-        assessmentSectionItemCluster: [],
         assessmentSectionItemDistinct: [],
-        assessmentSectionNavigation: {
+        assessmentSectionItemFrameworkOneLabel: '',
+        assessmentSectionItemNavigation: {
           assessmentSectionItemNavigationFirst: true,
           assessmentSectionItemNavigationLast: true,
           assessmentSectionItemNavigationNext: true,
@@ -131,22 +132,23 @@ const initialState = {
         assessmentSectionItemPractice: false,
         assessmentSectionItemTotal: 0,
         assessmentSectionManuscript: [],
-        assessmentSectionItemFrameworkOneResponseExtremum: {
-          assessmentSectionItemFrameworkOneResponseExtremumMaximum: null,
-          assessmentSectionItemFrameworkOneResponseExtremumMinimum: null
+        assessmentSectionResponseExtremum: {
+          assessmentSectionResponseExtremumMaximum: null,
+          assessmentSectionResponseExtremumMinimum: null
         },
+        assessmentSectionItemFrameworkOneResponseLabel: '',
         assessmentSectionItemFrameworkOneResponseRevise: false,
-        assessmentSectionScale: [],
         assessmentSectionScoreExtremum: {
           assessmentSectionScoreExtremumMaximum: null,
           assessmentSectionScoreExtremumMinimum: null
         },
+        assessmentSectionSequence: 0,
         assessmentSectionSynopsis: [],
         assessmentSectionTime: null
       }
     ],
-    assessmentSectionItemDistinctRevise:null
-  },  
+    assessmentSectionItemDistinctRevise: null
+  }
 };
 
 const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
@@ -312,15 +314,15 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
           assessmentEvaluation: action.payload
         }
       };
-      case SET_ASSESSMENT_FRAMEWORK_INNER_SINGLE_STATE:
-        debugger;
+    case SET_ASSESSMENT_FRAMEWORK_INNER_SINGLE_STATE:
+      debugger;
       return {
         ...istate,
         informationFramework: {
           ...istate.informationFramework,
           assessmentSectionItemDistinctRevise: {
             ...istate.informationFramework.assessmentSectionItemDistinctRevise,
-            itemFrameworkOne:{
+            itemFrameworkOne: {
               ...istate.informationFramework.assessmentSectionItemDistinctRevise.itemFrameworkOne,
               [action.payload.objectName]: {
                 ...istate.informationFramework.assessmentSectionItemDistinctRevise.itemFrameworkOne[
@@ -328,11 +330,11 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
                 ],
                 [action.payload.actualStateName]: action.payload.value
               }
-            }            
+            }
           }
-        },
+        }
       };
-      case SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE:
+    case SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE:
       return {
         ...istate,
         informationFramework: {
@@ -346,7 +348,7 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
           }
         }
       };
-      case SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE:
+    case SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE:
       return {
         ...istate,
         informationFramework: {

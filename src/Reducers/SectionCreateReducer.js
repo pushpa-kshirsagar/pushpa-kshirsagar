@@ -1,15 +1,46 @@
 import { SET_SECTION_REDUCER_STATE, CLEAR_SECTION_REDUCER_STATE } from '../actionType';
 const initialState = {
   sectionInformation: {
-    informationBasic: {
-      assessmentSectionName: '',
-      assessmentSectionNameVerification: false,
-      assessmentSectionDescription: '',
-      assessmentSectionPicture: '',
-      assessmentSectionPictureVerification: false,
-      assessmentSectionFlag: false,
-      assessmentSectionReference: ''
-    }
+    assessmentSectionName: null,
+    assessmentSectionDescription: null,
+    assessmentSectionAdministrationRepeat: false,
+    assessmentSectionAdministrationReset: false,
+    assessmentSectionAdministrationShuffle: false,
+    assessmentSectionAid: {
+      assessmentSectionAidCalculatorPermission: false,
+      assessmentSectionAidCalculatorType: '',
+      assessmentSectionAidSpreadsheetPermission: false,
+      assessmentSectionAidSpreadsheetType: '',
+      assessmentSectionAidTextsheetPermission: false,
+      assessmentSectionAidTextsheetType: ''
+    },
+    assessmentSectionCommunique: [],
+    assessmentSectionEvaluation: false,
+    assessmentSectionItemDistinct: [],
+    assessmentSectionItemFrameworkOneLabel: '',
+    assessmentSectionItemNavigation: {
+      assessmentSectionItemNavigationFirst: true,
+      assessmentSectionItemNavigationLast: true,
+      assessmentSectionItemNavigationNext: true,
+      assessmentSectionItemNavigationPrevious: true,
+      assessmentSectionItemNavigationSkip: true
+    },
+    assessmentSectionItemPractice: false,
+    assessmentSectionItemTotal: 0,
+    assessmentSectionManuscript: [],
+    assessmentSectionResponseExtremum: {
+      assessmentSectionResponseExtremumMaximum: null,
+      assessmentSectionResponseExtremumMinimum: null
+    },
+    assessmentSectionItemFrameworkOneResponseLabel: '',
+    assessmentSectionItemFrameworkOneResponseRevise: false,
+    assessmentSectionScoreExtremum: {
+      assessmentSectionScoreExtremumMaximum: null,
+      assessmentSectionScoreExtremumMinimum: null
+    },
+    assessmentSectionSequence: 0,
+    assessmentSectionSynopsis: [],
+    assessmentSectionTime: null
   }
 };
 
@@ -18,10 +49,7 @@ const SectionCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)),
     case SET_SECTION_REDUCER_STATE:
       return {
         ...istate,
-        sectionInformation: {
-          ...istate.sectionInformation,
-          informationBasic: action.payload
-        }
+        sectionInformation: action.payload
       };
     case CLEAR_SECTION_REDUCER_STATE:
       return JSON.parse(JSON.stringify(initialState));
