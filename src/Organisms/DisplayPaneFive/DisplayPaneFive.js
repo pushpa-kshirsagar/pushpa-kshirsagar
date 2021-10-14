@@ -38,6 +38,7 @@ import {
   onClickLast,
   onClickNext,
   onClickPrevious,
+  setItemTypeConfigState,
 } from "../../Actions/GenericActions";
 
 export const DisplayPaneFive = () => {
@@ -80,6 +81,9 @@ export const DisplayPaneFive = () => {
       let prevIndex = currentItemIndex - 1;
       if (currentItemIndex !== 0) {
         setcurrentItemIndex(prevIndex);
+        setItemTypeConfigState(informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
+          prevIndex
+        ].itemFrameworkOne.itemFrameworkOneType,dispatch);
         dispatch({
           //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
           type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
@@ -97,6 +101,9 @@ export const DisplayPaneFive = () => {
     }
     if (clickedval === "first") {
       setcurrentItemIndex(0);
+      setItemTypeConfigState(informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
+        0
+      ].itemFrameworkOne.itemFrameworkOneType,dispatch);
       dispatch({
         //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
@@ -121,6 +128,9 @@ export const DisplayPaneFive = () => {
           1
       ) {
         setcurrentItemIndex(currentItemIndex + 1);
+        setItemTypeConfigState(informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
+          currentItemIndex + 1
+        ].itemFrameworkOne.itemFrameworkOneType,dispatch);
         dispatch({
           //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
           type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
@@ -142,6 +152,9 @@ export const DisplayPaneFive = () => {
         informationFramework.assessmentSection[0]?.assessmentSectionItemDistinct
           .length - 1;
       setcurrentItemIndex(lastIndex);
+      setItemTypeConfigState(informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
+        lastIndex
+      ].itemFrameworkOne.itemFrameworkOneType,dispatch);      
       dispatch({
         //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
@@ -226,16 +239,7 @@ export const DisplayPaneFive = () => {
           <>
             <DisplayPaneFiveAssessment
               headerOne={headerOne}
-              headerOneBadgeOne={headerOneBadgeOne}
-              data={data}
-              //itemObect={itemObect}
               closePreview={closePreview}
-              primaryIcon={primaryIcon}
-              secondaryIcon={secondaryIcon}
-              navigatorIcon={navigatorIcon}
-              FilterMode={FilterMode}
-              isDisplayPaneSixShow={isDisplayPaneSixShow}
-              onClickFooter={onClickFooter}
               informationFramework={informationFramework}
               currentItemIndex={currentItemIndex}
             />

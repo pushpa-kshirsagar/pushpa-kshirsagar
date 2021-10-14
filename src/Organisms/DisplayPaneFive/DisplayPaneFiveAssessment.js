@@ -23,6 +23,7 @@ import EditorTemplate from './EditorTemplate';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import { useTimer } from 'react-timer-hook';
 import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
+import { setItemTypeConfigState } from "../../Actions/GenericActions";
 
 const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
   const { seconds, minutes, hours } = useTimer({
@@ -123,15 +124,8 @@ const AssessmentHeader = (props) => {
 export const DisplayPaneFiveAssessment = (props) => {
   const {
     headerOne,
-    headerOneBadgeOne,
     closePreview,
     //itemObect,
-    primaryIcon,
-    secondaryIcon,
-    navigatorIcon,
-    FilterMode,
-    isDisplayPaneSixShow,
-    onClickFooter,
     data,
     typeMode = true,
     informationFramework,
@@ -166,52 +160,7 @@ export const DisplayPaneFiveAssessment = (props) => {
       }
     });
   }
-  const onClickReviseFinish = () => {
-    setIsShowReviseIcon(true);
 
-    // const { informationBasic, informationAllocation, informationFramework } = itemInformation;
-    // const { id } = responseObject;
-    // const reqBody = {
-    //   assesseeId: selectedAssociateInfo?.assesseeId,
-    //   associateId:
-    //     selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-    //   item: {
-    //     id,
-    //     informationBasic,
-    //     informationAllocation,
-    //     informationFramework
-    //   }
-    // };
-    // dispatch({ type: LOADER_START });
-    // dispatch({
-    //   type: ITEM_INFO_REVISE_SAGA,
-    //   payload: {
-    //     secondaryOptionCheckValue: headerOneBadgeTwo,
-    //     headerOne: 'item',
-    //     reqBody,
-    //     createMode
-    //   }
-    // });
-    // dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: false });
-  };
-  const onClickRevise = () => {
-    setIsShowReviseIcon(false);
-  };
-  const onClickReviseCancel = () => {
-    //setResponseToReducerObj(JSON.parse(originResponseObj), dispatch);
-    setIsShowReviseIcon(true);
-    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
-  };
-
-  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
-
-  const reviseSecondaryIcons = [
-    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
-    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
-  ];
-  //   const [currentItemIndex, setcurrentItemIndex] = useState(0);
-
-  //   const dispatch = useDispatch();
 
   //   const {
   //     middlePaneHeader,
@@ -226,62 +175,6 @@ export const DisplayPaneFiveAssessment = (props) => {
 
   //   const { informationFramework,isDisplayPaneSixShow } = useSelector(
   //     (state) => state.AssessmentReducer
-  //   );
-  //   const { FilterMode,navigatorIcon } = useSelector((state) => state.FilterReducer);
-  //   console.log(FilterMode,navigatorIcon);
-  //   console.log("AssessmentInformation", informationFramework);
-
-  const [subItemList, setSubItemList] = useState(['item-1']);
-
-  //   const closePreview = () => {
-  //       debugger;
-  //     dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: false });
-  //     dispatch({ type: SET_MOBILE_PANE_STATE, payload: "displayPaneThree" });
-  //   };
-
-  //   const onClickFooter = (e) => {
-  //       debugger;
-  //     let clickedval = e.currentTarget.getAttribute('data-value');
-  //     dispatch({ type: NAVIGATOR_MODE });
-  //     if (clickedval === 'previous') {
-  //         let prevIndex=currentItemIndex-1;
-  //         if(currentItemIndex!==0){
-  //             setcurrentItemIndex(prevIndex);
-  //         }
-  //     }
-  //     if (clickedval === 'first') {
-  //         setcurrentItemIndex(0);
-  //     }
-  //     if (clickedval === 'next') {
-  //         if(currentItemIndex<informationFramework.assessmentItem.length-1){
-  //             setcurrentItemIndex(currentItemIndex+1);
-  //         }
-  //     }
-  //     if (clickedval === 'last') {
-  //         let lastIndex=informationFramework.assessmentItem.length-1;
-  //         setcurrentItemIndex(lastIndex);
-  //     }
-  //   };
-  //   // const itemTypeList = itemInformation?.informationFramework?.itemTypeList || [];
-  //   // const data = itemTypeList.find(
-  //   //   (item) => item.id === itemInformation.informationFramework.itemFrameworkOne.itemFrameworkOneType
-  //   // );
-  //   const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
-  //   const secondaryIcon = [
-  //     { label: 'first', onClick: onClickFooter, Icon: FirstPage },
-  //     { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft },
-  //     { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
-  //     { label: 'last', onClick: onClickFooter, Icon: LastPage }
-  //   ];
-  //   const data = {
-  //     itemFrameworkOneTypeName: "Responce Choise(Single Select)",
-  //   };
-
-  //   //let itemObect = informationFramework?.informationFramework?.itemFrameworkOne?.assessmentItem[currentItemIndex];
-  //   let itemObect =
-  //     informationFramework?.assessmentItem[currentItemIndex].informationFramework
-  //       ?.itemFrameworkOne;
-  //   //console.log("itemObect", itemObect);
 
   const BackHandlerEvent = (e) => {};
   const setSecondaryOptionValue = (e) => {
@@ -442,70 +335,6 @@ export const DisplayPaneFiveAssessment = (props) => {
         />
       </div>
       <div className="containerPadding">
-        <div style={{ display: 'none' }}>
-          <Paper className={'dossierContainerTop'}>
-            <div className="containerPadding sticky-header">
-              <div
-                style={{
-                  height: '49px',
-                  padding: '0 5px',
-                  display: 'flex',
-                  cursor: 'default'
-                }}
-              >
-                <div style={{ flex: '4' }} className="">
-                  <div
-                    className={[
-                      'midPaneInformation',
-                      data?.itemFrameworkOneTypeDescription ? null : 'aliasmiddle'
-                    ].join(' ')}
-                  >
-                    {data?.itemFrameworkOneTypeName}
-                  </div>
-                  <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
-                    {data?.itemFrameworkOneTypeDescription}
-                  </div>
-                </div>
-                <div
-                  style={{ flex: '1', display: 'flex', alignItems: 'center' }}
-                  className="flex-center"
-                >
-                  {!typeMode && (
-                    <>
-                      <p
-                        onClick={() => {
-                          let arr = subItemList;
-                          let newArr = arr.slice(0, -1);
-                          setSubItemList(newArr);
-                        }}
-                        className={'icon-button-option'}
-                      >
-                        -
-                      </p>
-                      <span style={{ fontWeight: 'bold', margin: '0 5px 0 5px' }}>
-                        {' '}
-                        {subItemList.length}
-                      </span>
-                      <p
-                        onClick={() => {
-                          setSubItemList([...subItemList, `item-${subItemList.length + 1}`]);
-                        }}
-                        className={'icon-button-option'}
-                      >
-                        +
-                      </p>
-                    </>
-                  )}
-                </div>
-                <div
-                  style={{ flex: '1', display: 'flex', alignItems: 'center' }}
-                  className="flex-center"
-                ></div>
-              </div>
-            </div>
-          </Paper>
-        </div>
-
         <AssessmentHeader
           qnumber={currentItemIndex + 1}
           //totalQuestion={20}
