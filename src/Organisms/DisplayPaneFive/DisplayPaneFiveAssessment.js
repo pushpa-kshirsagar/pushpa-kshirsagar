@@ -5,7 +5,7 @@ import './DisplayPaneFive.css';
 import PopupHeader from '../../Molecules/PopUp/PopUpHeader';
 import Popup from '../../Molecules/PopUp/PopUp';
 import JsonRenderComponent from '../../Actions/JsonRenderComponent';
-import { DialogContent } from '@material-ui/core';
+import { DialogContent, FormControl } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
@@ -70,14 +70,8 @@ const AssessmentHeader = (props) => {
                 <InputLabel
                   className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
                 >
-                  {1 + '/' + 2}
-                </InputLabel>
-                <InputLabel
-                  className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
-                >
-                  {props.assessmentSectionName &&
-                    props.assessmentSectionName + '/' + props.assessmentSectionDescription}
-                  {/* {props.assessmentSectionName + "/" + props.assessmentSectionDescription} */}
+                  {/* {1 + "/" + 2} */}
+                  {props.currentQuestion + '/' + props.totalQuestion}
                 </InputLabel>
               </span>
             </div>
@@ -102,7 +96,12 @@ const AssessmentHeader = (props) => {
               )}
             </div>
             <div
-              style={{ flex: '1', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              style={{
+                flex: '1',
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer'
+              }}
               className="flex-center"
             >
               <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
@@ -147,13 +146,12 @@ export const DisplayPaneFiveAssessment = (props) => {
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const [selectedChoiceObject, setSelectedChoiceObject] = useState('');
   const [subQuestionId, setSubQuestionId] = useState('');
-  console.log('reviewMode', reviewMode);
+  console.log('assessmentinformationFramework', informationFramework);
   const responseText = '<p><span>response</span></p>';
   let itemObect =
     informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]
       .itemFrameworkOne;
   if (!informationFramework?.assessmentSectionItemDistinctRevise) {
-    debugger;
     dispatch({
       //type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
       type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
@@ -353,18 +351,8 @@ export const DisplayPaneFiveAssessment = (props) => {
         }
       });
     }
-    // if (targetValue === "revise" && popupMode !== "") {
-    //   dispatch({
-    //     type: SET_POPUP_VALUE,
-    //     payload: {
-    //       isPopUpValue: popupMode,
-    //       popupMode: "",
-    //     },
-    //   });
-    // }
   };
   const ChangeItemOptionPopup = (e) => {
-    // console.log("config clicked");
     let targetValue = e.currentTarget.getAttribute('data-value');
     if (targetValue === 'configure') {
       dispatch({
@@ -375,68 +363,9 @@ export const DisplayPaneFiveAssessment = (props) => {
         }
       });
     }
-    if (targetValue === 'revise') {
-      // dispatch({
-      //   type: SET_POPUP_VALUE,
-      //   payload: {
-      //     isPopUpValue: "ITEM_MEDIA_TEXT",
-      //     popupMode: "",
-      //   },
-      // });
-    }
   };
-
-  const itemExplanationPrimaryPopUp = (e) => {
-    let targetValue = e.currentTarget.getAttribute('data-value');
-    if (targetValue === 'revise') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_DESCRIPTION_MEDIA_TEXT',
-          popupMode: ''
-        }
-      });
-    }
-  };
-
-  const responseLabelChoicePopUp = (e) => {
-    let targetValue = e.currentTarget.getAttribute('data-value');
-    if (targetValue === 'revise') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'RESPONSE_LABEL_MEDIA_TEXT',
-          popupMode: ''
-        }
-      });
-    }
-  };
-
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    if (targetValue === 'configure') {
-      // if (!itemInformation.informationFramework.itemTypeList) {
-      //   dispatch({ type: LOADER_START });
-      //   dispatch({
-      //     type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
-      //     payload: {
-      //       request: {
-      //         assesseeId: selectedAssociateInfo?.assesseeId,
-      //         associateId:
-      //           selectedAssociateInfo?.associate?.informationEngagement.associateTag
-      //             .associateTagPrimary
-      //       }
-      //     }
-      //   });
-      // }
-      // dispatch({
-      //   type: SET_POPUP_VALUE,
-      //   payload: {
-      //     isPopUpValue: "ITEM_TRIPLEDOT_CONFIGURE_POPUP",
-      //     popupMode: "",
-      //   },
-      // });
-    }
     if (targetValue === 'revise') {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -470,7 +399,8 @@ export const DisplayPaneFiveAssessment = (props) => {
       dataKey: 'reviewAPICall',
       optionClass: 'optionPrimary',
       divider: '',
-      disabled: reviewMode === 'review' ? true : false
+      disabled: false
+      //disabled: reviewMode === 'review'? true:false
     },
     {
       data: 'revise',
@@ -496,7 +426,7 @@ export const DisplayPaneFiveAssessment = (props) => {
       });
     }
   };
-
+  console.log('itemObectitemObect', itemObect);
   return (
     <>
       <div>
@@ -578,7 +508,7 @@ export const DisplayPaneFiveAssessment = (props) => {
 
         <AssessmentHeader
           qnumber={currentItemIndex + 1}
-          totalQuestion={20}
+          //totalQuestion={20}
           score={1}
           assessmentName={informationBasic?.assessmentName || ''}
           assessmentDesc={informationBasic?.assessmentDescription || ''}
@@ -586,10 +516,13 @@ export const DisplayPaneFiveAssessment = (props) => {
           isQuestionFlaged={false}
           timerFinished={''}
           timer={'timer'}
-          assessmentSectionName={informationFramework?.assessmentSection[0].assessmentSectionName}
-          assessmentSectionDescription={
-            informationFramework?.assessmentSection[0].assessmentSectionDescription
+          totalQuestion={
+            informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct.length
           }
+          currentQuestion={currentItemIndex + 1}
+
+          //assessmentSectionName={informationFramework?.assessmentSection[0].assessmentSectionName}
+          //assessmentSectionDescription={informationFramework?.assessmentSection[0].assessmentSectionDescription}
         />
 
         <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
@@ -600,6 +533,19 @@ export const DisplayPaneFiveAssessment = (props) => {
                 <EditorTemplate
                   label={'itemFrameworkOneLabel'}
                   jsonData={itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Passage */}
+
+          {itemObect?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia && (
+            <div className={'innerpadding'}>
+              <div className={['ex_container', 'ig-label'].join(' ')}>
+                <EditorTemplate
+                  jsonData={itemObect?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
+                  label={'passage'}
                 />
               </div>
             </div>
@@ -634,6 +580,122 @@ export const DisplayPaneFiveAssessment = (props) => {
                   </div>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* for sub item  */}
+          {(itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440c9' ||
+            itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23') && (
+            <div className="likartscale">
+              <FormControl component="fieldset" style={{ width: '100%' }}>
+                {informationFramework?.assessmentScale.length > 0 && (
+                  <div className="likart">
+                    <div class="item"></div>
+
+                    {informationFramework?.assessmentScale.map((ob, key) => {
+                      return (
+                        <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
+                          {/* {ob.assessmentScaleOneName} */}
+                          <div style={{ display: 'inline-block' }}>
+                            <div
+                              className={[
+                                'midPaneInformationScale',
+                                ob.assessmentScaleOneDescription !== '' ? null : 'aliasmiddle'
+                              ].join(' ')}
+                            >
+                              {ob.assessmentScaleOneName}
+                            </div>
+                            <div className={['midPaneLabelScale', 'textOverflow'].join(' ')}>
+                              {ob.assessmentScaleOneDescription}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                {itemObect?.itemFrameworkOneSection.map((ob, keys) => {
+                  return (
+                    <Fragment>
+                      {(ob.itemFrameworkOneSection?.itemFrameworkOneMedia ||
+                        reviewMode === 'revise') && (
+                        <div className="likart">
+                          <Fragment>
+                            <div
+                              className="item"
+                              subQuestionId={ob.itemFrameworkOneSectionSequence}
+                              style={{
+                                cursor: reviewMode === 'revise' ? 'pointer' : ''
+                              }}
+                            >
+                              {/* {ob?.itemFrameworkOneSection?.itemFrameworkOneMedia || ( */}
+                              <EditorTemplate
+                                label={'sub item'}
+                                jsonData={ob.itemFrameworkOneSection?.itemFrameworkOneMedia}
+                              />
+                              {/* )} */}
+                            </div>
+                            {ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice.map(
+                              (opt, key) => {
+                                return (
+                                  <>
+                                    <div
+                                      key={`op-${key}`}
+                                      className={'likert_choice-sclae'}
+                                      style={{ display: 'inline-table' }}
+                                    >
+                                      <input
+                                        type="radio"
+                                        name={`option1-${ob.itemFrameworkOneSectionSequence}`}
+                                        value={`${keys}-${key}`}
+                                        // onChange={handleClick}
+                                        style={{
+                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                        }}
+                                      />
+                                      <div
+                                        className={'likert-choice-font'}
+                                        style={{
+                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                        }}
+                                      >
+                                        {/* {opt.itemFrameworkOneResponseChoiceMedia || ( */}
+                                        <EditorTemplate
+                                          label={'subitemchoice'}
+                                          jsonData={opt.itemFrameworkOneResponseChoiceMedia}
+                                        />
+                                        {/* )} */}
+                                      </div>
+                                      <div
+                                        className={['likert-choice-font', 'ig-explanation'].join(
+                                          ' '
+                                        )}
+                                        style={{
+                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                        }}
+                                      >
+                                        {/* {opt.itemFrameworkOneResponseChoiceExplanation
+                                          ?.itemFrameworkOneResponseChoiceExplanationMedia || ( */}
+                                        <EditorTemplate
+                                          jsonData={
+                                            opt.itemFrameworkOneResponseChoiceExplanation
+                                              ?.itemFrameworkOneResponseChoiceExplanationMedia
+                                          }
+                                        />
+                                        {/* )} */}
+                                      </div>
+                                    </div>
+                                  </>
+                                );
+                              }
+                            )}
+                          </Fragment>
+                        </div>
+                      )}
+                    </Fragment>
+                  );
+                })}
+              </FormControl>
             </div>
           )}
 
@@ -712,9 +774,10 @@ export const DisplayPaneFiveAssessment = (props) => {
                           style={{ cursor: 'pointer' }}
                           value={`${op.itemFrameworkOneResponseChoiceNumber}`}
                           //onChange={handleRadioButton}
-                          // checked={
-                          //   currentQuestionChoice === op.itemFrameworkOneResponseChoiceNumber
-                          // }
+                          checked={
+                            op.itemFrameworkOneResponseChoiceNumber ===
+                            itemObect.itemFrameworkOneResponseCorrect[0]
+                          }
                         />
                       </div>
 

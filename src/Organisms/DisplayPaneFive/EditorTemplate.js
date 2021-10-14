@@ -27,6 +27,7 @@ const EditorTemplate = (props) => {
         return -1;
     }
   }
+  console.log('jsonData',jsonData);
   return (
     <>
       {jsonData?.blocks &&

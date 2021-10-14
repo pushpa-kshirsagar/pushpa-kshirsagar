@@ -251,6 +251,11 @@ function* workerReviewInfoAssessmentSaga(data) {
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentSection', value: assessmentSection }
       });
+      const assessmentScale = informationFramework?.assessmentScale || [];
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: { stateName: 'assessmentScale', value: assessmentScale }
+      });
 
       // yield put({
       //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,

@@ -73,7 +73,7 @@ export const DisplayPaneFive = () => {
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: "displayPaneThree" });
   };
   const onClickFooter = (e) => {
-    debugger;
+    
     let clickedval = e.currentTarget.getAttribute("data-value");
     dispatch({ type: NAVIGATOR_MODE });
     if (clickedval === "previous") {
