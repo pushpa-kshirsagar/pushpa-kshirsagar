@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.ba35ac8b.chunk.css",
-    "main.js": "/static/js/main.836e235f.chunk.js",
-    "main.js.map": "/static/js/main.836e235f.chunk.js.map",
+    "main.js": "/static/js/main.d7950f5a.chunk.js",
+    "main.js.map": "/static/js/main.d7950f5a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.3091a9fe.js",
     "runtime-main.js.map": "/static/js/runtime-main.3091a9fe.js.map",
     "static/css/2.c8997bf7.chunk.css": "/static/css/2.c8997bf7.chunk.css",
-    "static/js/2.357d7daf.chunk.js": "/static/js/2.357d7daf.chunk.js",
-    "static/js/2.357d7daf.chunk.js.map": "/static/js/2.357d7daf.chunk.js.map",
+    "static/js/2.cb2b95ba.chunk.js": "/static/js/2.cb2b95ba.chunk.js",
+    "static/js/2.cb2b95ba.chunk.js.map": "/static/js/2.cb2b95ba.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.c8997bf7.chunk.css.map": "/static/css/2.c8997bf7.chunk.css.map",
     "static/css/main.ba35ac8b.chunk.css.map": "/static/css/main.ba35ac8b.chunk.css.map",
-    "static/js/2.357d7daf.chunk.js.LICENSE.txt": "/static/js/2.357d7daf.chunk.js.LICENSE.txt",
+    "static/js/2.cb2b95ba.chunk.js.LICENSE.txt": "/static/js/2.cb2b95ba.chunk.js.LICENSE.txt",
     "static/media/iglogo1.84212b34.png": "/static/media/iglogo1.84212b34.png",
     "static/media/ios_share_black_24dp.32f1d748.svg": "/static/media/ios_share_black_24dp.32f1d748.svg",
     "static/media/unverified.075fc2d1.svg": "/static/media/unverified.075fc2d1.svg"
@@ -19,8 +19,8 @@
   "entrypoints": [
     "static/js/runtime-main.3091a9fe.js",
     "static/css/2.c8997bf7.chunk.css",
-    "static/js/2.357d7daf.chunk.js",
+    "static/js/2.cb2b95ba.chunk.js",
     "static/css/main.ba35ac8b.chunk.css",
-    "static/js/main.836e235f.chunk.js"
+    "static/js/main.d7950f5a.chunk.js"
   ]
 }
