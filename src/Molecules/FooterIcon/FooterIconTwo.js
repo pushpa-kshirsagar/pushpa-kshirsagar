@@ -180,6 +180,59 @@ const IconFiveWithFlexFiveColumn = (props) => {
     </React.Fragment>
   );
 };
+
+const IconFourWithFlexSixColumnAssessment=(props)=>{
+  const data = props.data;
+  return (
+    <React.Fragment>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[0].label}
+          Icon={data[0].Icon}
+          colour={'displayPaneCentre'}
+          onClick={data[0].onClick}
+          dataValue={data[0].label}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[1].label}
+          Icon={data[1].Icon}
+          colour={'displayPaneCentre'}
+          onClick={data[1].onClick}
+          dataValue={data[1].label}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[2].label}
+          Icon={data[2].Icon}
+          colour={'displayPaneCentre'}
+          onClick={data[2].onClick}
+          dataValue={data[2].label}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[3].label}
+          Icon={data[3].Icon}
+          colour={'displayPaneCentre'}
+          onClick={data[3].onClick}
+          dataValue={data[3].label}
+        />
+      </div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+    </React.Fragment>
+  );
+
+}
 const FooterIconTwo = (props) => {
   const {
     FilterModeEnable,
@@ -187,7 +240,8 @@ const FooterIconTwo = (props) => {
     secondaryIcon,
     className = '',
     backColour = 'displayPaneCentre',
-    disabled = false
+    disabled = false,
+    isAssessmentPreviewShow=false
   } = props;
   // console.log(primaryIcon);
   // console.log('primaryIcon');
@@ -202,7 +256,12 @@ const FooterIconTwo = (props) => {
               ) : primaryIcon.length === 2 ? (
                 <IconTwoWithFlexSixColumn data={primaryIcon} colour={backColour} />
               ) : null
-            ) : secondaryIcon.length === 2 ? (
+            ) :
+            isAssessmentPreviewShow?(
+              secondaryIcon.length === 4?
+              (<IconFourWithFlexSixColumnAssessment data={secondaryIcon}/>):null)
+            :
+             secondaryIcon.length === 2 ? (
               <IconTwoWithFlexSixColumn data={secondaryIcon} colour={backColour} />
             ) : secondaryIcon.length === 3 ? (
               <IconThreeWithFlexFiveColumn data={secondaryIcon} />
