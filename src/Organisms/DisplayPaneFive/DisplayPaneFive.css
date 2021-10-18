@@ -87,7 +87,7 @@
 }
 .ig-explanation {
   font-size: 1.2rem;
-  /* font-style: italic */
+  color: rgba(0, 0, 0, 0.87)
 }
 .ig-itemGeneric{
   font-size: 1.6rem;

@@ -315,7 +315,6 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
         }
       };
     case SET_ASSESSMENT_FRAMEWORK_INNER_SINGLE_STATE:
-      debugger;
       return {
         ...istate,
         informationFramework: {

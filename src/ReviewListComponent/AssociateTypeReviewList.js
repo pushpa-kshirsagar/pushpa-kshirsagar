@@ -101,7 +101,6 @@ const AssociateTypeReviewList = (props) => {
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
   const siftApiFilterCall = (siftKey) => {
-    debugger;
     // getAssociatesTypeApiCall(
     //   selectedAssociateInfo,
     //   siftKey,
@@ -152,12 +151,12 @@ const AssociateTypeReviewList = (props) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let tempArr = [];
     let classification = e.currentTarget.getAttribute('data-shared');
-   
-    ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((element)=>{
+
+    ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((element) => {
       if (classification === 'Bespoke' && element.data === 'share')
         tempArr.push({ ...element, disabled: true });
       else tempArr.push(element);
-    })
+    });
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -167,9 +166,7 @@ const AssociateTypeReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue:
-          cardValue === 'Card'
-            ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : tempArr,//ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr, //ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value'),
@@ -180,10 +177,7 @@ const AssociateTypeReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value:
-          cardValue === 'Card'
-            ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
-            : tempArr//ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
+        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr //ASSOCIATE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -223,8 +217,10 @@ const AssociateTypeReviewList = (props) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
                 isShared={item?.associateTypeShared}
-                shared={item.informationSetup?.associateTypeClassification
-                  ?.associateTypeClassificationPrimary}
+                shared={
+                  item.informationSetup?.associateTypeClassification
+                    ?.associateTypeClassificationPrimary
+                }
               />
             </div>
           );

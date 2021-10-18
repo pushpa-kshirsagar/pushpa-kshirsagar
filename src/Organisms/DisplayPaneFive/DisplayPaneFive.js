@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import "./DisplayPaneFive.css";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import './DisplayPaneFive.css';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
   ITEM_INFO_REVISE_SAGA,
@@ -17,28 +17,28 @@ import {
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_ASSESSMENT_DYNAMIC_SINGLE_STATE,
   SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
-  ASSESSMENT_INFO_PREVIEW_SAGA,
-} from "../../actionType";
-import "../../Molecules/ReviewList/ReviewList.css";
-import FooterIconTwo from "../../Molecules/FooterIcon/FooterIconTwo";
-import NavigatorIcon from "@material-ui/icons/OpenWith";
-import FirstPage from "@material-ui/icons/FirstPage";
-import LastPage from "@material-ui/icons/LastPage";
-import ArrowRight from "@material-ui/icons/ChevronRight";
-import ArrowLeft from "@material-ui/icons/ChevronLeft";
-import ReviseIcon from "@material-ui/icons/RadioButtonChecked";
-import Check from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
-import DisplayPaneFiveItem from "../../Organisms/DisplayPaneFive/DisplayPaneFiveItem";
-import DisplayPaneFiveAssessment from "../../Organisms/DisplayPaneFive/DisplayPaneFiveAssessment";
+  ASSESSMENT_INFO_PREVIEW_SAGA
+} from '../../actionType';
+import '../../Molecules/ReviewList/ReviewList.css';
+import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
+import NavigatorIcon from '@material-ui/icons/OpenWith';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import ArrowRight from '@material-ui/icons/ChevronRight';
+import ArrowLeft from '@material-ui/icons/ChevronLeft';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import Check from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import DisplayPaneFiveItem from '../../Organisms/DisplayPaneFive/DisplayPaneFiveItem';
+import DisplayPaneFiveAssessment from '../../Organisms/DisplayPaneFive/DisplayPaneFiveAssessment';
 import {
   onClickFirst,
   onClickLast,
   onClickNext,
   onClickPrevious,
-  setItemTypeConfigState,
-} from "../../Actions/GenericActions";
-import { ASSESSMENT_INFO_PREVIEW_REVISE } from "../../endpoints";
+  setItemTypeConfigState
+} from '../../Actions/GenericActions';
+import { ASSESSMENT_INFO_PREVIEW_REVISE } from '../../endpoints';
 
 export const DisplayPaneFive = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ export const DisplayPaneFive = () => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
-    scanCount,
+    scanCount
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     headerOne,
@@ -71,27 +71,25 @@ export const DisplayPaneFive = () => {
   const { informationFramework, isDisplayPaneSixShow } = useSelector(
     (state) => state.AssessmentReducer
   );
-  const { isPopUpValue, popupMode } = useSelector(
-    (state) => state.PopUpReducer
-  );
-  const { FilterMode, navigatorIcon } = useSelector(
-    (state) => state.FilterReducer
-  );
+  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
+  const { FilterMode, navigatorIcon } = useSelector((state) => state.FilterReducer);
 
   const closePreview = () => {
     dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: false });
-    dispatch({ type: SET_MOBILE_PANE_STATE, payload: "displayPaneThree" });
+    dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
   };
   const onClickFooter = (e) => {
-    let clickedval = e.currentTarget.getAttribute("data-value");
+    let clickedval = e.currentTarget.getAttribute('data-value');
     dispatch({ type: NAVIGATOR_MODE });
-    if (clickedval === "previous") {
+    if (clickedval === 'previous') {
       let prevIndex = currentItemIndex - 1;
       if (currentItemIndex !== 0) {
         setcurrentItemIndex(prevIndex);
-        setItemTypeConfigState(informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
-          prevIndex
-        ].itemFrameworkOne.itemFrameworkOneType, dispatch);
+        setItemTypeConfigState(
+          informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[prevIndex]
+            .itemFrameworkOne.itemFrameworkOneType,
+          dispatch
+        );
         // dispatch({
         //   type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
         //   payload: {
@@ -106,20 +104,21 @@ export const DisplayPaneFive = () => {
         dispatch({
           type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
           payload: {
-            stateName: "assessmentSectionItemDistinctRevise",
+            stateName: 'assessmentSectionItemDistinctRevise',
             value:
-              informationFramework?.assessmentSection[0]
-                ?.assessmentSectionItemDistinct[prevIndex],
-          },
-        })
+              informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[prevIndex]
+          }
+        });
       }
     }
-    if (clickedval === "first") {
+    if (clickedval === 'first') {
       setcurrentItemIndex(0);
-      setItemTypeConfigState(informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
-        0
-      ].itemFrameworkOne.itemFrameworkOneType, dispatch);
-      // dispatch({      
+      setItemTypeConfigState(
+        informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[0]
+          .itemFrameworkOne.itemFrameworkOneType,
+        dispatch
+      );
+      // dispatch({
       //   type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
       //   payload: {
       //     stateName: "assessmentSectionItemDistinctRevise",
@@ -134,27 +133,26 @@ export const DisplayPaneFive = () => {
       dispatch({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: {
-          stateName: "assessmentSectionItemDistinctRevise",
-          value:
-            informationFramework?.assessmentSection[0]
-              ?.assessmentSectionItemDistinct[0],
-        },
+          stateName: 'assessmentSectionItemDistinctRevise',
+          value: informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[0]
+        }
       });
     }
-    if (clickedval === "next") {
+    if (clickedval === 'next') {
       //informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne
       //if (currentItemIndex < informationFramework.assessmentItem.length - 1) {
       if (
         currentItemIndex <
-        informationFramework.assessmentSection[0]?.assessmentSectionItemDistinct
-          .length -
-        1
+        informationFramework.assessmentSection[0]?.assessmentSectionItemDistinct.length - 1
       ) {
         setcurrentItemIndex(currentItemIndex + 1);
-        setItemTypeConfigState(informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
-          currentItemIndex + 1
-        ].itemFrameworkOne.itemFrameworkOneType, dispatch);
-        // dispatch({        
+        setItemTypeConfigState(
+          informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
+            currentItemIndex + 1
+          ].itemFrameworkOne.itemFrameworkOneType,
+          dispatch
+        );
+        // dispatch({
         //   type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
         //   payload: {
         //     stateName: "assessmentSectionItemDistinctRevise",
@@ -169,43 +167,43 @@ export const DisplayPaneFive = () => {
         dispatch({
           type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
           payload: {
-            stateName: "assessmentSectionItemDistinctRevise",
+            stateName: 'assessmentSectionItemDistinctRevise',
             value:
-              informationFramework?.assessmentSection[0]
-                ?.assessmentSectionItemDistinct[currentItemIndex + 1],
-          },
+              informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
+                currentItemIndex + 1
+              ]
+          }
         });
       }
     }
-    if (clickedval === "last") {
-      debugger;
+    if (clickedval === 'last') {
       //let lastIndex = informationFramework.assessmentItem.length - 1;
       let lastIndex =
-        informationFramework.assessmentSection[0]?.assessmentSectionItemDistinct
-          .length - 1;
+        informationFramework.assessmentSection[0]?.assessmentSectionItemDistinct.length - 1;
       setcurrentItemIndex(lastIndex);
-      setItemTypeConfigState(informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
-        lastIndex
-      ].itemFrameworkOne.itemFrameworkOneType, dispatch);
+      setItemTypeConfigState(
+        informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[lastIndex]
+          .itemFrameworkOne.itemFrameworkOneType,
+        dispatch
+      );
       dispatch({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         //type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
         payload: {
-          stateName: "assessmentSectionItemDistinctRevise",
+          stateName: 'assessmentSectionItemDistinctRevise',
           //actualStateName: "itemFrameworkOne",
-          value: informationFramework?.assessmentSection[0]
-            ?.assessmentSectionItemDistinct[lastIndex],
+          value:
+            informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[lastIndex]
           // informationFramework?.assessmentSection[0]
           //   ?.assessmentSectionItemDistinct[lastIndex]
           //   .itemFrameworkOne,
-        },
+        }
       });
     }
   };
   const onClickReviseFinish = () => {
-    debugger;
     setIsShowReviseIcon(true);
-    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: "review" });
+    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
     //const { informationFramework } = informationFramework;
     const { id } = responseObject;
     const reqBody = {
@@ -215,12 +213,14 @@ export const DisplayPaneFive = () => {
       assessment: {
         id: id,
         informationFramework: {
-          assessmentSection: [{
-            sectionIndex: 0,
-            assessmentSectionItemFrameworkOneDistinct: [
-              informationFramework?.assessmentSectionItemDistinctRevise
-            ]
-          }]
+          assessmentSection: [
+            {
+              sectionIndex: 0,
+              assessmentSectionItemFrameworkOneDistinct: [
+                informationFramework?.assessmentSectionItemDistinctRevise
+              ]
+            }
+          ]
         }
       }
     };
@@ -243,31 +243,27 @@ export const DisplayPaneFive = () => {
   const onClickReviseCancel = () => {
     //setResponseToReducerObj(JSON.parse(originResponseObj), dispatch);
     setIsShowReviseIcon(true);
-    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: "review" });
+    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
   };
 
-  const revisePrimaryIcon = [
-    { label: "revise", onClick: onClickRevise, Icon: ReviseIcon },
-  ];
+  const revisePrimaryIcon = [{ label: 'revise', onClick: onClickRevise, Icon: ReviseIcon }];
 
   const reviseSecondaryIcons = [
-    { label: "cancel", onClick: onClickReviseCancel, Icon: ClearIcon },
-    { label: "finish", onClick: onClickReviseFinish, Icon: Check },
+    { label: 'cancel', onClick: onClickReviseCancel, Icon: ClearIcon },
+    { label: 'finish', onClick: onClickReviseFinish, Icon: Check }
   ];
-  const primaryIcon = [
-    { label: "navigator", onClick: onClickFooter, Icon: NavigatorIcon },
-  ];
+  const primaryIcon = [{ label: 'navigator', onClick: onClickFooter, Icon: NavigatorIcon }];
   const secondaryIcon = [
-    { label: "first", onClick: onClickFooter, Icon: FirstPage },
-    { label: "previous", onClick: onClickFooter, Icon: ArrowLeft },
-    { label: "next", onClick: onClickFooter, Icon: ArrowRight },
-    { label: "last", onClick: onClickFooter, Icon: LastPage },
+    { label: 'first', onClick: onClickFooter, Icon: FirstPage },
+    { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft },
+    { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
+    { label: 'last', onClick: onClickFooter, Icon: LastPage }
   ];
   const data = {
-    id: "61090cace50cf61d5eb440ce",
-    itemFrameworkOneTypeDescription: "Single-Select",
-    itemFrameworkOneTypeName: "Response-Choice",
-    itemFrameworkOneTypeNameReference: "Response-Choice (Single-Select)",
+    id: '61090cace50cf61d5eb440ce',
+    itemFrameworkOneTypeDescription: 'Single-Select',
+    itemFrameworkOneTypeName: 'Response-Choice',
+    itemFrameworkOneTypeNameReference: 'Response-Choice (Single-Select)'
   };
 
   //let itemObect = informationFramework?.informationFramework?.itemFrameworkOne?.assessmentItem[currentItemIndex];
@@ -287,9 +283,9 @@ export const DisplayPaneFive = () => {
               informationFramework={informationFramework}
               currentItemIndex={currentItemIndex}
             />
-            {reviewMode === "revise" ? (
+            {reviewMode === 'revise' ? (
               <FooterIconTwo
-                className={"widthDisplayPaneFive"}
+                className={'widthDisplayPaneFive'}
                 FilterModeEnable={isShowReviseIcon}
                 FilterMode={FilterMode}
                 onClick={onClickRevise}
@@ -298,9 +294,7 @@ export const DisplayPaneFive = () => {
               />
             ) : (
               <FooterIconTwo
-                className={
-                  isDisplayPaneSixShow ? "widthDisplayPaneFive" : "fullWidth"
-                }
+                className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
                 FilterModeEnable={navigatorIcon}
                 FilterMode={FilterMode}
                 onClick={onClickFooter}
