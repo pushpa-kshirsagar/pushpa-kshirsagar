@@ -97,6 +97,7 @@ const initialState = {
             itemFrameworkOneSectionSequence: 1,
             itemFrameworkOneSection: {
               itemFrameworkOneMedia: null,
+              itemFrameworkOneExplanation:null,
               itemFrameworkOneScore: null,
               itemFrameworkOneType: '',
               itemFrameworkOneResponseChoice: [

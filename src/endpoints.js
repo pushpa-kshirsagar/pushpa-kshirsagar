@@ -417,3 +417,5 @@ export const ASSESSEE_ASSESSMENT_RESULT_URL =
 
 //item_config - Item_TYPE
 export const CONFIG_ITEM_URL = ITEMS + '/dev/insight-guru/api/item-framework-one-type/review-list';
+//assessment preivew -revise
+export const ASSESSMENT_INFO_PREVIEW_REVISE_URL = ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/section/item/revise';

@@ -146,6 +146,16 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       // IconOne: Manuscript
     },
     {
+      id:'cluster',
+      labelTextOneOne:'cluster',
+      labelTextOneOneBadges:[
+        {
+          labelTextOneOneBadge:'distinct',
+          textOne:''
+        }
+      ]
+    },
+    {
       id: 'a1',
       labelTextOneOne: 'communiqué',
       labelTextOneOneBadges: [

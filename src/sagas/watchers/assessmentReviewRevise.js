@@ -16,12 +16,14 @@ import {
   ASSESSMENT_PUBLISH_SAGA,
   SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
   SET_MIDDLEPANE_STATE,
-  RELATED_REVIEWLIST_DISTINCT_DATA
+  RELATED_REVIEWLIST_DISTINCT_DATA,
+  ASSESSMENT_INFO_PREVIEW_SAGA
 } from '../../actionType';
 import {
   ASSESSMENT_REVIEW_INFO_URL,
   ASSESSMENT_REVISE_INFO_URL,
-  ASSESSMENT_PUBLISH_URL
+  ASSESSMENT_PUBLISH_URL,
+  ASSESSMENT_INFO_PREVIEW_REVISE_URL
 } from '../../endpoints';
 import Store from '../../store';
 
@@ -481,10 +483,56 @@ function* workerPublishAssessmentSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerPreviewAssessmentSaga(data) {
+  try {
+    const userResponse = yield call(assessmentInfoApi, {
+      data: data.payload.reqBody,
+      URL: ASSESSMENT_INFO_PREVIEW_REVISE_URL
+    });
+    console.log('assessmentpreviewResponce',userResponse);
+    if (userResponse.responseCode === '000') {
+      const { createMode } = data.payload;
+      yield put({
+        type: SET_DISPLAY_PANE_THREE_STATE,
+        payload: {
+          headerOne: 'assessment',
+          headerOneBadgeOne: 'information',
+          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+          responseObject: userResponse.responseObject[0],
+          createMode
+        }
+      });
+      const { informationFramework } = userResponse.responseObject[0];
+      
+      const assessmentSection = informationFramework?.assessmentSection || [];
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: { stateName: 'assessmentSection', value: assessmentSection }
+      });
+
+      yield put({ type: LOADER_STOP });
+    } else {
+      console.log('loading end');
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+      yield put({ type: LOADER_STOP });
+    }
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 
 export default function* watchReviewInfoAssessmentSaga() {
   yield takeLatest(GET_ASSESSMENT_INFO_SAGA, workerReviewInfoAssessmentSaga);
   yield takeLatest(GET_ASSESSMENT_SEC_INFO_SAGA, workerReviewInfoAssessmentSecSaga);
   yield takeLatest(ASSESSMENT_INFO_REVISE_SAGA, workerReviseInfoAssessmentSaga);
   yield takeLatest(ASSESSMENT_PUBLISH_SAGA, workerPublishAssessmentSaga);
+  yield takeLatest(ASSESSMENT_INFO_PREVIEW_SAGA, workerPreviewAssessmentSaga);
 }

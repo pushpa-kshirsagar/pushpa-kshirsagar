@@ -41,6 +41,8 @@ const DisplayPaneFiveItemTemplate = (props) => {
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const responseChoiceDescription1 =
     "<span>response</span> &nbsp <span class='iguru-header-badge1_1'>choice</span>&nbsp; <span class='iguru-header-badge1_1'>explanation</span>&nbsp;";
+  const itemExplain =
+    "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const numberOfNoOptions =
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
@@ -135,12 +137,12 @@ const DisplayPaneFiveItemTemplate = (props) => {
       <div className={'innerpadding'}>
         {(itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia ||
           reviewMode === 'revise') && (
-          <div
-            className={['ex_container', 'ig-label'].join(' ')}
-            style={{ cursor: reviewMode === 'revise' && 'pointer' }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
+            <div
+              className={['ex_container', 'ig-label'].join(' ')}
+              style={{ cursor: reviewMode === 'revise' && 'pointer' }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
                     dispatch({
                       type: SET_POPUP_VALUE,
                       payload: {
@@ -149,19 +151,19 @@ const DisplayPaneFiveItemTemplate = (props) => {
                       }
                     });
                   }
-                : null
-            }
-          >
-            {(!itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia &&
-              reviewMode === 'revise' &&
-              ReactHTMLParser(itemLabelText)) || (
-              <EditorTemplate
-                label={'itemLabel'}
-                jsonData={itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia}
-              />
-            )}
-          </div>
-        )}
+                  : null
+              }
+            >
+              {(!itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia &&
+                reviewMode === 'revise' &&
+                ReactHTMLParser(itemLabelText)) || (
+                  <EditorTemplate
+                    label={'itemLabel'}
+                    jsonData={itemFrameworkOne?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia}
+                  />
+                )}
+            </div>
+          )}
       </div>
       {/* Passage */}
       {(itemType === 'Comprehension' || itemType === 'Template') && (
@@ -172,25 +174,25 @@ const DisplayPaneFiveItemTemplate = (props) => {
             onClick={
               reviewMode === 'revise'
                 ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'PASSAGE_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
+                  dispatch({
+                    type: SET_POPUP_VALUE,
+                    payload: {
+                      isPopUpValue: 'PASSAGE_PRIMARY_POPUP',
+                      popupMode: popupMode
+                    }
+                  });
+                }
                 : null
             }
           >
             {(!itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia &&
               reviewMode === 'revise' &&
               ReactHTMLParser(passageText)) || (
-              <EditorTemplate
-                jsonData={itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
-                label={'passage'}
-              />
-            )}
+                <EditorTemplate
+                  jsonData={itemFrameworkOne?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
+                  label={'passage'}
+                />
+              )}
           </div>
         </div>
       )}
@@ -203,26 +205,60 @@ const DisplayPaneFiveItemTemplate = (props) => {
             onClick={
               reviewMode === 'revise'
                 ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'ITEM_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
+                  dispatch({
+                    type: SET_POPUP_VALUE,
+                    payload: {
+                      isPopUpValue: 'ITEM_PRIMARY_POPUP',
+                      popupMode: popupMode
+                    }
+                  });
+                }
                 : null
             }
           >
             {(!itemFrameworkOne?.itemFrameworkOneMedia &&
               reviewMode === 'revise' &&
               ReactHTMLParser(itemText)) || (
-              // <EditorJs data={itemFrameworkOne?.itemFrameworkOneMedia} readOnly={true} />
-              <EditorTemplate label={'item'} jsonData={itemFrameworkOne?.itemFrameworkOneMedia} />
-            )}
+                // <EditorJs data={itemFrameworkOne?.itemFrameworkOneMedia} readOnly={true} />
+                <EditorTemplate label={'item'} jsonData={itemFrameworkOne?.itemFrameworkOneMedia} />
+              )}
           </div>
         </div>
       )}
+      {/* Item explanation */}
+      {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia ||
+        reviewMode === 'revise') && (
+          <div className={'innerpadding'}>
+            <div
+              className={['ex_container', 'ig-explanation'].join(' ')}
+              style={{ cursor: reviewMode === 'revise' && 'pointer' }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
+                    dispatch({
+                      type: SET_POPUP_VALUE,
+                      payload: {
+                        isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
+                        popupMode: popupMode
+                      }
+                    });
+                  }
+                  : null
+              }
+            >
+              {(!itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia &&
+                reviewMode === 'revise' &&
+                ReactHTMLParser(itemExplanationText)) || (
+                  <EditorTemplate
+                    jsonData={
+                      itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia
+                    }
+                    label={'itemFrameworkOneExplanationMedia'}
+                  />
+                )}
+            </div>
+          </div>
+        )}
       {/* for sub item  */}
       {(itemType === 'Likert-Scale' || itemType === 'Template') && (
         <div className="likartscale">
@@ -246,97 +282,162 @@ const DisplayPaneFiveItemTemplate = (props) => {
                 <Fragment>
                   {(ob.itemFrameworkOneSection?.itemFrameworkOneMedia ||
                     reviewMode === 'revise') && (
-                    <div className="likart">
-                      <Fragment>
-                        <div
-                          className="item"
-                          subQuestionId={ob.itemFrameworkOneSectionSequence}
-                          style={{
-                            cursor: reviewMode === 'revise' ? 'pointer' : ''
-                          }}
-                          onClick={
-                            reviewMode === 'revise'
-                              ? () => {
-                                  dispatch({
-                                    type: SET_POPUP_VALUE,
-                                    payload: {
-                                      isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
-                                      popupMode: `LIKERT_ITEM_MEDIA_TEXT_${keys}`
-                                    }
-                                  });
+                      <div className="likart">
+                        <Fragment>
+                          <div >
+                            <div
+                              className="item"
+                              subQuestionId={ob.itemFrameworkOneSectionSequence}
+                              style={{
+                                cursor: reviewMode === 'revise' ? 'pointer' : ''
+                              }}
+                              onClick={
+                                reviewMode === 'revise'
+                                  ? () => {
+                                    dispatch({
+                                      type: SET_POPUP_VALUE,
+                                      payload: {
+                                        isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
+                                        popupMode: `LIKERT_ITEM_MEDIA_TEXT_${keys}`
+                                      }
+                                    });
+                                  }
+                                  : null
+                              }
+                            >
+                              {(!ob.itemFrameworkOneSection?.itemFrameworkOneMedia &&
+                                reviewMode === 'revise' &&
+                                ReactHTMLParser('<span>item</span>-' + `${keys + 1}`)) || (
+                                  <EditorTemplate
+                                    label={'sub item'}
+                                    jsonData={ob.itemFrameworkOneSection?.itemFrameworkOneMedia}
+                                  />
+                                )}
+
+                            </div>
+                            <div subQuestionId={ob.itemFrameworkOneSectionSequence}
+                              style={{
+                                cursor: reviewMode === 'revise' ? 'pointer' : ''
+                              }}
+                              className={'ig-explanation'}
+                              onClick={
+                                reviewMode === 'revise'
+                                  ? () => {
+                                    dispatch({
+                                      type: SET_POPUP_VALUE,
+                                      payload: {
+                                        isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
+                                        popupMode: `LIKERT_ITEM_EXPLANATION_MEDIA_TEXT_${keys}`
+                                      }
+                                    });
+                                  }
+                                  : null
+                              }>
+                              {(!ob.itemFrameworkOneSection?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia &&
+                                reviewMode === 'revise' &&
+                                //"<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
+                                ReactHTMLParser('<span>item</span>-' + `${keys + 1}` + "<span class='iguru-header-badge1_0'>explanation</span>")) || (
+                                  <EditorTemplate
+                                    label={'sub item'}
+                                    jsonData={ob.itemFrameworkOneSection?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia}
+                                  />
+                                )}
+                            </div>
+                          </div>
+
+                          <PopUpTextEditor
+                            isActive={isPopUpValue === `LIKERT_ITEM_MEDIA_TEXT_${keys}`}
+                            headerOne={'item'}
+                            headerPanelColour={'genericOne'}
+                            // headerOneBadgeOne={'media'}
+                            headerOneBadgeTwo={''}
+                            basicInfo={{}}
+                            typeOfSetObject={''}
+                            defaultSheetValue={
+                              ob.itemFrameworkOneSection?.itemFrameworkOneMedia || ''
+                            }
+                            actualLableValue={''}
+                            mode={'revise'}
+                            onClickSave={(innerText) => {
+                              // setInnerContent(innerText);
+                              let opArr = itemFrameworkOne.itemFrameworkOneSection;
+                              opArr.forEach((element) => {
+                                if (
+                                  element.itemFrameworkOneSectionSequence ===
+                                  ob.itemFrameworkOneSectionSequence
+                                ) {
+                                  element.itemFrameworkOneSection.itemFrameworkOneMedia = innerText;
                                 }
-                              : null
-                          }
-                        >
-                          {(!ob.itemFrameworkOneSection?.itemFrameworkOneMedia &&
-                            reviewMode === 'revise' &&
-                            ReactHTMLParser('<span>item</span>-' + `${keys + 1}`)) || (
-                            <EditorTemplate
-                              label={'sub item'}
-                              jsonData={ob.itemFrameworkOneSection?.itemFrameworkOneMedia}
-                            />
-                          )}
-                        </div>
-                        <PopUpTextEditor
-                          isActive={isPopUpValue === `LIKERT_ITEM_MEDIA_TEXT_${keys}`}
-                          headerOne={'item'}
-                          headerPanelColour={'genericOne'}
-                          // headerOneBadgeOne={'media'}
-                          headerOneBadgeTwo={''}
-                          basicInfo={{}}
-                          typeOfSetObject={''}
-                          defaultSheetValue={
-                            ob.itemFrameworkOneSection?.itemFrameworkOneMedia || ''
-                          }
-                          actualLableValue={''}
-                          mode={'revise'}
-                          onClickSave={(innerText) => {
-                            // setInnerContent(innerText);
-                            let opArr = itemFrameworkOne.itemFrameworkOneSection;
-                            opArr.forEach((element) => {
-                              if (
-                                element.itemFrameworkOneSectionSequence ===
-                                ob.itemFrameworkOneSectionSequence
-                              ) {
-                                element.itemFrameworkOneSection.itemFrameworkOneMedia = innerText;
-                              }
-                            });
-                            dispatch({
-                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                              payload: {
-                                stateName: 'itemFrameworkOneSection',
-                                value: opArr
-                              }
-                            });
-                          }}
-                        />
-                        {ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice &&
-                          ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice.map(
-                            (opt, key) => {
-                              return (
-                                <>
-                                  <div
-                                    key={`op-${key}`}
-                                    className={'likert_choice-sclae'}
-                                    style={{ display: 'inline-table' }}
-                                  >
-                                    <input
-                                      type="radio"
-                                      name={`option1-${ob.itemFrameworkOneSectionSequence}`}
-                                      value={`${keys}-${key}`}
-                                      // onChange={handleClick}
-                                      style={{
-                                        cursor: reviewMode === 'revise' ? 'pointer' : ''
-                                      }}
-                                    />
+                              });
+                              dispatch({
+                                type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                                payload: {
+                                  stateName: 'itemFrameworkOneSection',
+                                  value: opArr
+                                }
+                              });
+                            }}
+                          />
+                          <PopUpTextEditor
+                            isActive={isPopUpValue === `LIKERT_ITEM_EXPLANATION_MEDIA_TEXT_${keys}`}
+                            headerOne={'item'}
+                            headerPanelColour={'genericOne'}
+                            // headerOneBadgeOne={'media'}
+                            headerOneBadgeTwo={''}
+                            basicInfo={{}}
+                            typeOfSetObject={''}
+                            defaultSheetValue={
+                              ob.itemFrameworkOneSection?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia || ''
+                            }
+                            actualLableValue={''}
+                            mode={'revise'}
+                            onClickSave={(innerText) => {
+                              // setInnerContent(innerText);
+                              let opArr = itemFrameworkOne.itemFrameworkOneSection;
+                              opArr.forEach((element) => {
+                                if (
+                                  element.itemFrameworkOneSectionSequence ===
+                                  ob.itemFrameworkOneSectionSequence
+                                ) {
+                                  element.itemFrameworkOneSection.itemFrameworkOneExplanation.itemFrameworkOneExplanationMedia = innerText;
+                                }
+                              });
+                              dispatch({
+                                type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                                payload: {
+                                  stateName: 'itemFrameworkOneSection',
+                                  value: opArr
+                                }
+                              });
+                            }}
+                          />
+                          {ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice &&
+                            ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice.map(
+                              (opt, key) => {
+                                return (
+                                  <>
                                     <div
-                                      className={'likert-choice-font'}
-                                      style={{
-                                        cursor: reviewMode === 'revise' ? 'pointer' : ''
-                                      }}
-                                      onClick={
-                                        reviewMode === 'revise'
-                                          ? () => {
+                                      key={`op-${key}`}
+                                      className={'likert_choice-sclae'}
+                                      style={{ display: 'inline-table' }}
+                                    >
+                                      <input
+                                        type="radio"
+                                        name={`option1-${ob.itemFrameworkOneSectionSequence}`}
+                                        value={`${keys}-${key}`}
+                                        // onChange={handleClick}
+                                        style={{
+                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                        }}
+                                      />
+                                      <div
+                                        className={'likert-choice-font'}
+                                        style={{
+                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                        }}
+                                        onClick={
+                                          reviewMode === 'revise'
+                                            ? () => {
                                               dispatch({
                                                 type: SET_POPUP_VALUE,
                                                 payload: {
@@ -346,26 +447,26 @@ const DisplayPaneFiveItemTemplate = (props) => {
                                               });
                                               setSelectedChoiceObject(opt);
                                             }
-                                          : null
-                                      }
-                                    >
-                                      {(!opt.itemFrameworkOneResponseChoiceMedia &&
-                                        reviewMode === 'revise' &&
-                                        ReactHTMLParser(optionLabel1)) || (
-                                        <EditorTemplate
-                                          label={'subitemchoice'}
-                                          jsonData={opt.itemFrameworkOneResponseChoiceMedia}
-                                        />
-                                      )}
-                                    </div>
-                                    <div
-                                      className={['likert-choice-font', 'ig-explanation'].join(' ')}
-                                      style={{
-                                        cursor: reviewMode === 'revise' ? 'pointer' : ''
-                                      }}
-                                      onClick={
-                                        reviewMode === 'revise'
-                                          ? () => {
+                                            : null
+                                        }
+                                      >
+                                        {(!opt.itemFrameworkOneResponseChoiceMedia &&
+                                          reviewMode === 'revise' &&
+                                          ReactHTMLParser(optionLabel1)) || (
+                                            <EditorTemplate
+                                              label={'subitemchoice'}
+                                              jsonData={opt.itemFrameworkOneResponseChoiceMedia}
+                                            />
+                                          )}
+                                      </div>
+                                      <div
+                                        className={['likert-choice-font', 'ig-explanation'].join(' ')}
+                                        style={{
+                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                        }}
+                                        onClick={
+                                          reviewMode === 'revise'
+                                            ? () => {
                                               dispatch({
                                                 type: SET_POPUP_VALUE,
                                                 payload: {
@@ -375,102 +476,102 @@ const DisplayPaneFiveItemTemplate = (props) => {
                                                 }
                                               });
                                             }
-                                          : null
-                                      }
-                                    >
-                                      {(!opt.itemFrameworkOneResponseChoiceExplanation
-                                        ?.itemFrameworkOneResponseChoiceExplanationMedia &&
-                                        reviewMode === 'revise' &&
-                                        ReactHTMLParser(responseChoiceDescription1)) || (
-                                        <EditorTemplate
-                                          jsonData={
-                                            opt.itemFrameworkOneResponseChoiceExplanation
-                                              ?.itemFrameworkOneResponseChoiceExplanationMedia
-                                          }
-                                        />
-                                      )}
+                                            : null
+                                        }
+                                      >
+                                        {(!opt.itemFrameworkOneResponseChoiceExplanation
+                                          ?.itemFrameworkOneResponseChoiceExplanationMedia &&
+                                          reviewMode === 'revise' &&
+                                          ReactHTMLParser(responseChoiceDescription1)) || (
+                                            <EditorTemplate
+                                              jsonData={
+                                                opt.itemFrameworkOneResponseChoiceExplanation
+                                                  ?.itemFrameworkOneResponseChoiceExplanationMedia
+                                              }
+                                            />
+                                          )}
+                                      </div>
                                     </div>
-                                  </div>
-                                  <PopUpTextEditor
-                                    isActive={isPopUpValue === `OPTION_LIKRT_${keys}_${key}`}
-                                    headerOne={'response'}
-                                    headerPanelColour={'genericOne'}
-                                    headerOneBadgeOne={'choice'}
-                                    // headerOneBadgeTwo={`${key + 1}`}
-                                    basicInfo={{}}
-                                    typeOfSetObject={''}
-                                    defaultSheetValue={
-                                      opt?.itemFrameworkOneResponseChoiceMedia || ''
-                                    }
-                                    actualLableValue={'assessmentManuscriptSecondary'}
-                                    mode={'revise'}
-                                    onClickSave={(innerText) => {
-                                      let opArr = itemFrameworkOne.itemFrameworkOneSection;
-                                      opArr.forEach((element, index) => {
-                                        if (index === keys) {
-                                          element.itemFrameworkOneSection.itemFrameworkOneResponseChoice[
-                                            key
-                                          ].itemFrameworkOneResponseChoiceMedia = innerText;
-                                        }
-                                      });
-                                      // temp.itemFrameworkOneResponseChoiceMedia = innerText;
-                                      dispatch({
-                                        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                                        payload: {
-                                          stateName: 'itemFrameworkOneSection',
-                                          value: opArr
-                                        }
-                                      });
-                                    }}
-                                  />
-                                  <PopUpTextEditor
-                                    isActive={
-                                      isPopUpValue ===
-                                      `LIKERT_RESPONSE_CHOICE_DESCRIPTION_${keys}_${key}`
-                                    }
-                                    headerOne={'response'}
-                                    headerPanelColour={'genericOne'}
-                                    headerOneBadgeOne={'choice'}
-                                    headerOneBadgeTwo={`explanation`}
-                                    basicInfo={{}}
-                                    typeOfSetObject={''}
-                                    defaultSheetValue={
-                                      opt.itemFrameworkOneResponseChoiceExplanation
-                                        .itemFrameworkOneResponseChoiceExplanationMedia
-                                    }
-                                    actualLableValue={'assessmentManuscriptSecondary'}
-                                    mode={'revise'}
-                                    onClickSave={(innerText) => {
-                                      let opArr = itemFrameworkOne.itemFrameworkOneSection;
-                                      opArr.forEach((element, index) => {
-                                        if (
-                                          element.itemFrameworkOneSection
-                                            .itemFrameworkOneSectionSequence ===
-                                          opt.itemFrameworkOneSectionSequence
-                                        ) {
+                                    <PopUpTextEditor
+                                      isActive={isPopUpValue === `OPTION_LIKRT_${keys}_${key}`}
+                                      headerOne={'response'}
+                                      headerPanelColour={'genericOne'}
+                                      headerOneBadgeOne={'choice'}
+                                      // headerOneBadgeTwo={`${key + 1}`}
+                                      basicInfo={{}}
+                                      typeOfSetObject={''}
+                                      defaultSheetValue={
+                                        opt?.itemFrameworkOneResponseChoiceMedia || ''
+                                      }
+                                      actualLableValue={'assessmentManuscriptSecondary'}
+                                      mode={'revise'}
+                                      onClickSave={(innerText) => {
+                                        let opArr = itemFrameworkOne.itemFrameworkOneSection;
+                                        opArr.forEach((element, index) => {
                                           if (index === keys) {
                                             element.itemFrameworkOneSection.itemFrameworkOneResponseChoice[
                                               key
-                                            ].itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanationMedia = innerText;
+                                            ].itemFrameworkOneResponseChoiceMedia = innerText;
                                           }
-                                        }
-                                      });
-                                      dispatch({
-                                        type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                                        payload: {
-                                          stateName: 'itemFrameworkOneSection',
-                                          value: opArr
-                                        }
-                                      });
-                                    }}
-                                  />
-                                </>
-                              );
-                            }
-                          )}
-                      </Fragment>
-                    </div>
-                  )}
+                                        });
+                                        // temp.itemFrameworkOneResponseChoiceMedia = innerText;
+                                        dispatch({
+                                          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                                          payload: {
+                                            stateName: 'itemFrameworkOneSection',
+                                            value: opArr
+                                          }
+                                        });
+                                      }}
+                                    />
+                                    <PopUpTextEditor
+                                      isActive={
+                                        isPopUpValue ===
+                                        `LIKERT_RESPONSE_CHOICE_DESCRIPTION_${keys}_${key}`
+                                      }
+                                      headerOne={'response'}
+                                      headerPanelColour={'genericOne'}
+                                      headerOneBadgeOne={'choice'}
+                                      headerOneBadgeTwo={`explanation`}
+                                      basicInfo={{}}
+                                      typeOfSetObject={''}
+                                      defaultSheetValue={
+                                        opt.itemFrameworkOneResponseChoiceExplanation
+                                          .itemFrameworkOneResponseChoiceExplanationMedia
+                                      }
+                                      actualLableValue={'assessmentManuscriptSecondary'}
+                                      mode={'revise'}
+                                      onClickSave={(innerText) => {
+                                        let opArr = itemFrameworkOne.itemFrameworkOneSection;
+                                        opArr.forEach((element, index) => {
+                                          if (
+                                            element.itemFrameworkOneSection
+                                              .itemFrameworkOneSectionSequence ===
+                                            opt.itemFrameworkOneSectionSequence
+                                          ) {
+                                            if (index === keys) {
+                                              element.itemFrameworkOneSection.itemFrameworkOneResponseChoice[
+                                                key
+                                              ].itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanationMedia = innerText;
+                                            }
+                                          }
+                                        });
+                                        dispatch({
+                                          type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                                          payload: {
+                                            stateName: 'itemFrameworkOneSection',
+                                            value: opArr
+                                          }
+                                        });
+                                      }}
+                                    />
+                                  </>
+                                );
+                              }
+                            )}
+                        </Fragment>
+                      </div>
+                    )}
                 </Fragment>
               );
             })}
@@ -478,52 +579,19 @@ const DisplayPaneFiveItemTemplate = (props) => {
         </div>
       )}
 
-      {/* Item explanation */}
-      {(itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia ||
-        reviewMode === 'revise') && (
-        <div className={'innerpadding'}>
-          <div
-            className={['ex_container', 'ig-explanation'].join(' ')}
-            style={{ cursor: reviewMode === 'revise' && 'pointer' }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
-                    dispatch({
-                      type: SET_POPUP_VALUE,
-                      payload: {
-                        isPopUpValue: 'ITEM_EXPLANATION_PRIMARY_POPUP',
-                        popupMode: popupMode
-                      }
-                    });
-                  }
-                : null
-            }
-          >
-            {(!itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia &&
-              reviewMode === 'revise' &&
-              ReactHTMLParser(itemExplanationText)) || (
-              <EditorTemplate
-                jsonData={
-                  itemFrameworkOne?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia
-                }
-                label={'itemFrameworkOneExplanationMedia'}
-              />
-            )}
-          </div>
-        </div>
-      )}
+
       {/* response label */}
       {(itemFrameworkOne?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia ||
         reviewMode === 'revise') && (
-        <div className={'innerpadding'}>
-          <div
-            className={['ex_container', 'ig-label'].join(' ')}
-            style={{
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
+          <div className={'innerpadding'}>
+            <div
+              className={['ex_container', 'ig-label'].join(' ')}
+              style={{
+                cursor: reviewMode === 'revise' ? 'pointer' : ''
+              }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
                     dispatch({
                       type: SET_POPUP_VALUE,
                       payload: {
@@ -532,38 +600,38 @@ const DisplayPaneFiveItemTemplate = (props) => {
                       }
                     });
                   }
-                : null
-            }
-          >
-            {(!itemFrameworkOne?.itemFrameworkOneResponseLabel
-              ?.itemFrameworkOneResponseLabelMedia &&
-              reviewMode === 'revise' &&
-              ReactHTMLParser(responseLabelText)) || (
-              <EditorTemplate
-                jsonData={
-                  itemFrameworkOne?.itemFrameworkOneResponseLabel
-                    ?.itemFrameworkOneResponseLabelMedia
-                }
-                label={'itemFrameworkOneResponseLabelMedia'}
-              />
-            )}
+                  : null
+              }
+            >
+              {(!itemFrameworkOne?.itemFrameworkOneResponseLabel
+                ?.itemFrameworkOneResponseLabelMedia &&
+                reviewMode === 'revise' &&
+                ReactHTMLParser(responseLabelText)) || (
+                  <EditorTemplate
+                    jsonData={
+                      itemFrameworkOne?.itemFrameworkOneResponseLabel
+                        ?.itemFrameworkOneResponseLabelMedia
+                    }
+                    label={'itemFrameworkOneResponseLabelMedia'}
+                  />
+                )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       {/* response */}
       {(itemType === 'Response (Long)' ||
         itemType === 'Response (Short)' ||
         itemType === 'Template') && (
-        <div className={'innerpadding'}>
-          <div
-            className={'ex_container'}
-            style={{
-              cursor: reviewMode === 'revise' ? 'pointer' : ''
-            }}
-            onClick={
-              reviewMode === 'revise'
-                ? () => {
+          <div className={'innerpadding'}>
+            <div
+              className={'ex_container'}
+              style={{
+                cursor: reviewMode === 'revise' ? 'pointer' : ''
+              }}
+              onClick={
+                reviewMode === 'revise'
+                  ? () => {
                     dispatch({
                       type: SET_POPUP_VALUE,
                       payload: {
@@ -572,54 +640,96 @@ const DisplayPaneFiveItemTemplate = (props) => {
                       }
                     });
                   }
-                : null
-            }
-          >
-            {ReactHTMLParser(responseText)}
+                  : null
+              }
+            >
+              {ReactHTMLParser(responseText)}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      {/* response explanation */}
+
+      <Fragment>
+        {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
+          ?.itemFrameworkOneResponseExplanationMedia ||
+          reviewMode === 'revise') && (
+            <div className={'innerpadding'}>
+              <div
+                className={['ex_container', 'ig-explanation '].join(' ')}
+                style={{ cursor: reviewMode === 'revise' && 'pointer' }}
+                onClick={
+                  reviewMode === 'revise'
+                    ? () => {
+                      dispatch({
+                        type: SET_POPUP_VALUE,
+                        payload: {
+                          isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
+                          popupMode: 'RESPONSE_DESCRIPTION_TEXT'
+                        }
+                      });
+                    }
+                    : null
+                }
+              >
+                {(!itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                  ?.itemFrameworkOneResponseExplanationMedia &&
+                  reviewMode === 'revise' &&
+                  ReactHTMLParser(responseExplanationText)) || (
+                    <EditorTemplate
+                      jsonData={
+                        itemFrameworkOne?.itemFrameworkOneResponseExplanation
+                          ?.itemFrameworkOneResponseExplanationMedia
+                      }
+                      label={'itemFrameworkOneResponseExplanationMedia'}
+                    />
+                  )}
+              </div>
+            </div>
+          )}
+      </Fragment>
+
+
       {/* for response choice */}
       {(itemType === 'Response-Choice (Single-Select)' ||
         itemType === 'Template' ||
         itemType === 'False-True' ||
         itemType === 'Fill-in-the-Blank (Response-Choice)') && (
-        <div className={'likartscale'}>
-          {numberOfNoOptions.map((op, key) => {
-            return (
-              <Fragment>
-                {(op.itemFrameworkOneResponseChoiceMedia || reviewMode === 'revise') && (
-                  <div key={`op-${key}`} className={'innerpadding'}>
-                    <div className="option-container ex_container" key={`option-${key}`}>
-                      <div
-                        style={{
-                          paddingRight: '5px',
-                          height: '20px',
-                          display: 'flex',
-                          alignItems: 'center'
-                        }}
-                      >
-                        <input
-                          type="radio"
-                          name="option1"
-                          value={`${op.itemFrameworkOneResponseChoiceNumber}`}
-                          onChange={handleClick}
-                          checked={
-                            op.itemFrameworkOneResponseChoiceNumber ===
-                            itemFrameworkOne.itemFrameworkOneResponseCorrect[0]
-                          }
-                        />
-                      </div>
+          <div className={'likartscale'}>
+            {numberOfNoOptions.map((op, key) => {
+              return (
+                <Fragment>
+                  {(op.itemFrameworkOneResponseChoiceMedia || reviewMode === 'revise') && (
+                    <div key={`op-${key}`} className={'innerpadding'}>
+                      <div className="option-container ex_container" key={`option-${key}`}>
+                        <div
+                          style={{
+                            paddingRight: '5px',
+                            height: '20px',
+                            display: 'flex',
+                            alignItems: 'center'
+                          }}
+                        >
+                          <input
+                            type="radio"
+                            name="option1"
+                            value={`${op.itemFrameworkOneResponseChoiceNumber}`}
+                            onChange={handleClick}
+                            checked={
+                              op.itemFrameworkOneResponseChoiceNumber ===
+                              itemFrameworkOne.itemFrameworkOneResponseCorrect[0]
+                            }
+                          />
+                        </div>
 
-                      <div
-                        className={['ig-itemGeneric '].join(' ')}
-                        style={{
-                          paddingLeft: '5px',
-                          cursor: reviewMode === 'revise' ? 'pointer' : ''
-                        }}
-                        onClick={
-                          reviewMode === 'revise'
-                            ? () => {
+                        <div
+                          className={['ig-itemGeneric '].join(' ')}
+                          style={{
+                            paddingLeft: '5px',
+                            cursor: reviewMode === 'revise' ? 'pointer' : ''
+                          }}
+                          onClick={
+                            reviewMode === 'revise'
+                              ? () => {
                                 dispatch({
                                   type: SET_POPUP_VALUE,
                                   payload: {
@@ -629,173 +739,132 @@ const DisplayPaneFiveItemTemplate = (props) => {
                                 });
                                 setSelectedChoiceObject(op);
                               }
-                            : null
-                        }
-                      >
-                        {(!op.itemFrameworkOneResponseChoiceMedia &&
-                          reviewMode === 'revise' &&
-                          ReactHTMLParser(optionLabel)) || (
-                          <EditorTemplate
-                            jsonData={op.itemFrameworkOneResponseChoiceMedia}
-                            label={'itemFrameworkOneResponseChoiceMedia'}
-                          />
-                        )}
-                      </div>
-
-                      <PopUpTextEditor
-                        isActive={isPopUpValue === `OPTION_${key}`}
-                        headerOne={'response'}
-                        headerPanelColour={'genericOne'}
-                        headerOneBadgeOne={'choice'}
-                        // headerOneBadgeTwo={`${key + 1}`}
-                        basicInfo={{}}
-                        typeOfSetObject={''}
-                        defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
-                        actualLableValue={'assessmentManuscriptSecondary'}
-                        mode={'revise'}
-                        onClickSave={(innerText) => {
-                          let opArr = numberOfNoOptions;
-                          // setQuestionOptionList((opArr) => {
-                          opArr.forEach((element) => {
-                            if (
-                              element.itemFrameworkOneResponseChoiceNumber ===
-                              op.itemFrameworkOneResponseChoiceNumber
-                            ) {
-                              element.itemFrameworkOneResponseChoiceMedia = innerText;
-                            }
-                          });
-                          dispatch({
-                            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                            payload: {
-                              stateName: 'itemFrameworkOneResponseChoice',
-                              value: opArr
-                            }
-                          });
-                          // });
-                        }}
-                      />
-
-                      <PopUpTextEditor
-                        isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
-                        headerOne={'response'}
-                        headerPanelColour={'genericOne'}
-                        headerOneBadgeOne={'choice'}
-                        headerOneBadgeTwo={`explanation`}
-                        basicInfo={{}}
-                        typeOfSetObject={''}
-                        defaultSheetValue={
-                          op.itemFrameworkOneResponseChoiceExplanation
-                            ?.itemFrameworkOneResponseChoiceExplanationMedia
-                        }
-                        actualLableValue={'assessmentManuscriptSecondary'}
-                        mode={'revise'}
-                        onClickSave={(innerText) => {
-                          let opArr = numberOfNoOptions;
-                          opArr.forEach((element) => {
-                            if (
-                              element.itemFrameworkOneResponseChoiceNumber ===
-                              op.itemFrameworkOneResponseChoiceNumber
-                            ) {
-                              element.itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanationMedia = innerText;
-                            }
-                          });
-                          dispatch({
-                            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-                            payload: {
-                              stateName: 'itemFrameworkOneResponseChoice',
-                              value: opArr
-                            }
-                          });
-                        }}
-                      />
-                    </div>
-
-                    <div style={{ paddingLeft: '25px', display: 'inline-block' }}>
-                      {(op.itemFrameworkOneResponseChoiceExplanation
-                        ?.itemFrameworkOneResponseChoiceExplanationMedia ||
-                        reviewMode === 'revise') && (
-                        <div
-                          className={['ex_container', 'ig-explanation '].join(' ')}
-                          style={{
-                            cursor: reviewMode === 'revise' ? 'pointer' : ''
-                          }}
-                          onClick={
-                            reviewMode === 'revise'
-                              ? () => {
-                                  dispatch({
-                                    type: SET_POPUP_VALUE,
-                                    payload: {
-                                      isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
-                                      popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
-                                    }
-                                  });
-                                }
                               : null
                           }
                         >
-                          {(!op.itemFrameworkOneResponseChoiceExplanation
-                            ?.itemFrameworkOneResponseChoiceExplanationMedia &&
+                          {(!op.itemFrameworkOneResponseChoiceMedia &&
                             reviewMode === 'revise' &&
-                            ReactHTMLParser(responseChoiceDescription)) || (
-                            <EditorTemplate
-                              jsonData={
-                                op.itemFrameworkOneResponseChoiceExplanation
-                                  ?.itemFrameworkOneResponseChoiceExplanationMedia
-                              }
-                              label={'itemFrameworkOneResponseChoiceExplanationMedia'}
-                            />
-                          )}
+                            ReactHTMLParser(optionLabel)) || (
+                              <EditorTemplate
+                                jsonData={op.itemFrameworkOneResponseChoiceMedia}
+                                label={'itemFrameworkOneResponseChoiceMedia'}
+                              />
+                            )}
                         </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </Fragment>
-            );
-          })}
-        </div>
-      )}
-      {/* response explanation */}
 
-      <Fragment>
-        {(itemFrameworkOne?.itemFrameworkOneResponseExplanation
-          ?.itemFrameworkOneResponseExplanationMedia ||
-          reviewMode === 'revise') && (
-          <div className={'innerpadding'}>
-            <div
-              className={['ex_container', 'ig-explanation '].join(' ')}
-              style={{ cursor: reviewMode === 'revise' && 'pointer' }}
-              onClick={
-                reviewMode === 'revise'
-                  ? () => {
-                      dispatch({
-                        type: SET_POPUP_VALUE,
-                        payload: {
-                          isPopUpValue: 'RESPONSE_EXPLANATION_POPUP',
-                          popupMode: 'RESPONSE_DESCRIPTION_TEXT'
-                        }
-                      });
-                    }
-                  : null
-              }
-            >
-              {(!itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                ?.itemFrameworkOneResponseExplanationMedia &&
-                reviewMode === 'revise' &&
-                ReactHTMLParser(responseExplanationText)) || (
-                <EditorTemplate
-                  jsonData={
-                    itemFrameworkOne?.itemFrameworkOneResponseExplanation
-                      ?.itemFrameworkOneResponseExplanationMedia
-                  }
-                  label={'itemFrameworkOneResponseExplanationMedia'}
-                />
-              )}
-            </div>
+                        <PopUpTextEditor
+                          isActive={isPopUpValue === `OPTION_${key}`}
+                          headerOne={'response'}
+                          headerPanelColour={'genericOne'}
+                          headerOneBadgeOne={'choice'}
+                          // headerOneBadgeTwo={`${key + 1}`}
+                          basicInfo={{}}
+                          typeOfSetObject={''}
+                          defaultSheetValue={op?.itemFrameworkOneResponseChoiceMedia || ''}
+                          actualLableValue={'assessmentManuscriptSecondary'}
+                          mode={'revise'}
+                          onClickSave={(innerText) => {
+                            let opArr = numberOfNoOptions;
+                            // setQuestionOptionList((opArr) => {
+                            opArr.forEach((element) => {
+                              if (
+                                element.itemFrameworkOneResponseChoiceNumber ===
+                                op.itemFrameworkOneResponseChoiceNumber
+                              ) {
+                                element.itemFrameworkOneResponseChoiceMedia = innerText;
+                              }
+                            });
+                            dispatch({
+                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                              payload: {
+                                stateName: 'itemFrameworkOneResponseChoice',
+                                value: opArr
+                              }
+                            });
+                            // });
+                          }}
+                        />
+
+                        <PopUpTextEditor
+                          isActive={isPopUpValue === `RESPONSE_CHOICE_DESCRIPTION_${key}`}
+                          headerOne={'response'}
+                          headerPanelColour={'genericOne'}
+                          headerOneBadgeOne={'choice'}
+                          headerOneBadgeTwo={`explanation`}
+                          basicInfo={{}}
+                          typeOfSetObject={''}
+                          defaultSheetValue={
+                            op.itemFrameworkOneResponseChoiceExplanation
+                              ?.itemFrameworkOneResponseChoiceExplanationMedia
+                          }
+                          actualLableValue={'assessmentManuscriptSecondary'}
+                          mode={'revise'}
+                          onClickSave={(innerText) => {
+                            let opArr = numberOfNoOptions;
+                            opArr.forEach((element) => {
+                              if (
+                                element.itemFrameworkOneResponseChoiceNumber ===
+                                op.itemFrameworkOneResponseChoiceNumber
+                              ) {
+                                element.itemFrameworkOneResponseChoiceExplanation.itemFrameworkOneResponseChoiceExplanationMedia = innerText;
+                              }
+                            });
+                            dispatch({
+                              type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+                              payload: {
+                                stateName: 'itemFrameworkOneResponseChoice',
+                                value: opArr
+                              }
+                            });
+                          }}
+                        />
+                      </div>
+
+                      <div style={{ paddingLeft: '25px', display: 'inline-block' }}>
+                        {(op.itemFrameworkOneResponseChoiceExplanation
+                          ?.itemFrameworkOneResponseChoiceExplanationMedia ||
+                          reviewMode === 'revise') && (
+                            <div
+                              className={['ex_container', 'ig-explanation '].join(' ')}
+                              style={{
+                                cursor: reviewMode === 'revise' ? 'pointer' : ''
+                              }}
+                              onClick={
+                                reviewMode === 'revise'
+                                  ? () => {
+                                    dispatch({
+                                      type: SET_POPUP_VALUE,
+                                      payload: {
+                                        isPopUpValue: 'ITEM_RESPONSE_CHOICE_EXPLANATION_POPUP',
+                                        popupMode: `RESPONSE_CHOICE_DESCRIPTION_${key}`
+                                      }
+                                    });
+                                  }
+                                  : null
+                              }
+                            >
+                              {(!op.itemFrameworkOneResponseChoiceExplanation
+                                ?.itemFrameworkOneResponseChoiceExplanationMedia &&
+                                reviewMode === 'revise' &&
+                                ReactHTMLParser(responseChoiceDescription)) || (
+                                  <EditorTemplate
+                                    jsonData={
+                                      op.itemFrameworkOneResponseChoiceExplanation
+                                        ?.itemFrameworkOneResponseChoiceExplanationMedia
+                                    }
+                                    label={'itemFrameworkOneResponseChoiceExplanationMedia'}
+                                  />
+                                )}
+                            </div>
+                          )}
+                      </div>
+                    </div>
+                  )}
+                </Fragment>
+              );
+            })}
           </div>
         )}
-      </Fragment>
-
       <div>
         <div
           style={{
