@@ -165,6 +165,7 @@ import {
 import { callApiFunction } from '../../Actions/GenericActions';
 import { BottomNavigation, Grid } from '@material-ui/core';
 import DisplayPaneThreeSectionOneAssesseeReport from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssesseeReport';
+import DisplayPaneThreeSectionOneAssessmentSection from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentSection';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -421,6 +422,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssessmentSection = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentSection,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentSection,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssesseeReport = [
     {
       id: 'section1',
@@ -597,6 +612,9 @@ export const DisplayPaneThree = () => {
   );
   const [selectedSectionAssessmentType, setSelectedSectionAssessmentType] = useState(
     rightPaneSectionsAssessmentType[0]
+  );
+  const [selectedSectionAssessmentSection, setSelectedSectionAssessmentSection] = useState(
+    rightPaneSectionsAssessmentSection[0]
   );
   const [selectedSectionAssesseeReport, setSelectedSectionAssesseeReport] = useState(
     rightPaneSectionsAssesseeReport[0]
@@ -3588,6 +3606,55 @@ export const DisplayPaneThree = () => {
                 FilterMode={FilterMode}
                 onClick={onClickCreateAssignmentType}
                 primaryIcon={createAssignmentTypePrimaryIcon}
+                secondaryIcon={[]}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assessments' &&
+        headerOneBadgeOne === 'section' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={responseObject?.assessmentSectionFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={responseObject?.assessmentSectionName || 'No Information'}
+                  textOneTwo={responseObject?.assessmentSectionDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  // onClickRevise={reviseAssessmentSectionBasicInformation}
+                  isImageActive={responseObject?.assessmentSectionPicture}
+                  imageOne={responseObject?.assessmentSectionPicture}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssessmentSection}
+                selectedSection={selectedSectionAssessmentSection}
+                setSelectedSection={setSelectedSectionAssessmentSection}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+            {createMode === 'assessmentsType' && reviewMode !== 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={true}
+                FilterMode={FilterMode}
+                onClick={onClickCreateAssessmentType}
+                primaryIcon={createAssessmentTypePrimaryIcon}
                 secondaryIcon={[]}
               />
             )}

@@ -64,6 +64,8 @@ import AssessmentDistinctItemDistinctReviewList from '../../ReviewListComponent/
 import AssessmentDistinctScaleDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctScaleDistinctReviewList';
 import AssesseeDistinctAssessmentDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctAssessmentDistinctReviewList';
 import AssesseeDistinctReportDistinctReviewList from '../../ReviewListComponent/AssesseeDistinctReportDistinctReviewList';
+import AssessmentDistinctSectionDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctSectionDistinctReviewList';
+import AssessmentDistinctClusterDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctClusterDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -176,6 +178,12 @@ export const DisplayPaneTwo = (props) => {
         )}
         {typeOfMiddlePaneList === 'assessmentscalesReviewList' && (
           <AssessmentDistinctScaleDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assessmentsectionsReviewList' && (
+          <AssessmentDistinctSectionDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assessmentclustersReviewList' && (
+          <AssessmentDistinctClusterDistinctReviewList popupAllClose={popupAllClose} />
         )}
         {typeOfMiddlePaneList === 'assesseesGroupAssesseeReviewList' && (
           <AssesseeGroupAssesseeDistinctReviewList popupAllClose={popupAllClose} />

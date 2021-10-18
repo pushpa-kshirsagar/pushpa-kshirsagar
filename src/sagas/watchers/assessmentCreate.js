@@ -10,7 +10,7 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { ASSESSMENT_CREATE_URL } from '../../endpoints';
+import { ASSESSMENT_CREATE_URL, ASSESSMENT_SECTION_CREATE_URL } from '../../endpoints';
 
 const createAssessmentApi = async (requestObj) => {
   const requestOptions = {
@@ -26,9 +26,18 @@ const createAssessmentApi = async (requestObj) => {
 };
 function* workerCreateAssessmentSectionSaga(data) {
   try {
-    const apiResponse = yield call(createAssessmentApi, { data: data.payload, URL: '' });
+    const apiResponse = yield call(createAssessmentApi, {
+      data: data.payload,
+      URL: ASSESSMENT_SECTION_CREATE_URL
+    });
     if (apiResponse.responseCode === '000') {
       yield put({ type: LOADER_STOP });
+    } else {
+      yield put({ type: LOADER_STOP });
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: apiResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
     }
   } catch (e) {
     console.log('ERROR==', e);

@@ -111,7 +111,6 @@ const HeaderCard = (props) => {
         disabled: true
       };
       optArr.splice(5, 0, newObj1);
-
     } else {
       optArr = ASSESSEE_ASSOCIATE_TRIPPLE_DOT_POPUP_OPTION;
     }
@@ -166,17 +165,17 @@ const HeaderCard = (props) => {
   };
   const openRightPaneTripleDotPopup = () => {
     // let popupClustersObject={
-    //   data:'clusters',    
-    //   dataValue:'clusters',    
-    //   dataKey: 'review',    
-    //   optionClass: 'optionPrimary',    
+    //   data:'clusters',
+    //   dataValue:'clusters',
+    //   dataKey: 'review',
+    //   optionClass: 'optionPrimary',
     //   disabled: false,
     // }
     // let popupScalesObject={
-    //   data:'scales',    
-    //   dataValue:'scales',    
-    //   dataKey: 'review',    
-    //   optionClass: 'optionPrimary',    
+    //   data:'scales',
+    //   dataValue:'scales',
+    //   dataKey: 'review',
+    //   optionClass: 'optionPrimary',
     //   disabled: false,
     //   divider: 'dark'
     // }
@@ -259,57 +258,70 @@ const HeaderCard = (props) => {
                 ) : null}
               </div>
             </div>
-
-            <Fragment>
-              <div className={'iguru-iconbox'}>
-                {displayPane === 'five' ? (
-                  <div></div>
-                ) : displayPane === 'centre' && showMiddlePaneState ? (
-                  <IconButton onClick={onClickScan}>
-                    <Fragment>
-                      <SearchIcon className={'iguru-iconbardefault'} />
-                      <span className={'iguru-headerbadge'}>{scanCount}</span>
-                    </Fragment>
-                  </IconButton>
-                ) : displayPane === 'left' ? (
-                  <IconButton>
-                    {!isMobile && <NextIcon className={'iguru-iconbardefault'} />}
-                  </IconButton>
-                ) : (displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '') ||
-                  showClearIcon ? (
+            {(displayPane === 'itemPreview' && (
+              <Fragment>
+                <div className={'iguru-moretextpanelheader'}></div>
+                <div className={'iguru-iconbox'}></div>
+                <div className={'iguru-iconbox'}></div>
+                <div className={'iguru-iconbox'}>
                   <IconButton onClick={onClickClearInfo}>
                     <Clear className={'iguru-iconbardefault'} />
                   </IconButton>
-                ) : null}
-              </div>
-              <div className={'iguru-iconbox'}>
-                {displayPane === 'five' && assesseeAssessmentStartData ? (
-                  <IconButton
-                    onClick={() => {
-                      dispatch({ type: POPUP_OPEN, payload: 'NavigatorPOPUP' });
-                    }}
-                  >
-                    <OpenWithIcon className={'iguru-iconbardefault'} />
-                  </IconButton>
-                ) : displayPane === 'centre' && showMiddlePaneState ? (
-                  <IconButton onClick={openMiddlePaneTripleDotPopup}>
-                    <MoreVert className={'iguru-iconbardefault'} />
-                  </IconButton>
-                ) : displayPane === 'left' ? (
-                  <IconButton onClick={openLeftPaneTripleDotPopup}>
-                    <MoreVert className={'iguru-iconbardefault'} />
-                  </IconButton>
-                ) : displayPane === 'right' && headerOne !== '' ? (
-                  <IconButton onClick={openRightPaneTripleDotPopup}>
-                    <MoreVert className={'iguru-iconbardefault'} />
-                  </IconButton>
-                ) : displayPane === 'itemPreview' ? (
+                </div>
+                <div className={'iguru-iconbox'}>
                   <IconButton onClick={openTripleDotPopup}>
                     <MoreVert className={'iguru-iconbardefault'} />
                   </IconButton>
-                ) : null}
-              </div>
-            </Fragment>
+                </div>
+              </Fragment>
+            )) || (
+              <Fragment>
+                <div className={'iguru-iconbox'}>
+                  {displayPane === 'five' ? (
+                    <div></div>
+                  ) : displayPane === 'centre' && showMiddlePaneState ? (
+                    <IconButton onClick={onClickScan}>
+                      <Fragment>
+                        <SearchIcon className={'iguru-iconbardefault'} />
+                        <span className={'iguru-headerbadge'}>{scanCount}</span>
+                      </Fragment>
+                    </IconButton>
+                  ) : displayPane === 'left' ? (
+                    <IconButton>
+                      {!isMobile && <NextIcon className={'iguru-iconbardefault'} />}
+                    </IconButton>
+                  ) : (displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '') ||
+                    showClearIcon ? (
+                    <IconButton onClick={onClickClearInfo}>
+                      <Clear className={'iguru-iconbardefault'} />
+                    </IconButton>
+                  ) : null}
+                </div>
+                <div className={'iguru-iconbox'}>
+                  {displayPane === 'five' && assesseeAssessmentStartData ? (
+                    <IconButton
+                      onClick={() => {
+                        dispatch({ type: POPUP_OPEN, payload: 'NavigatorPOPUP' });
+                      }}
+                    >
+                      <OpenWithIcon className={'iguru-iconbardefault'} />
+                    </IconButton>
+                  ) : displayPane === 'centre' && showMiddlePaneState ? (
+                    <IconButton onClick={openMiddlePaneTripleDotPopup}>
+                      <MoreVert className={'iguru-iconbardefault'} />
+                    </IconButton>
+                  ) : displayPane === 'left' ? (
+                    <IconButton onClick={openLeftPaneTripleDotPopup}>
+                      <MoreVert className={'iguru-iconbardefault'} />
+                    </IconButton>
+                  ) : displayPane === 'right' && headerOne !== '' ? (
+                    <IconButton onClick={openRightPaneTripleDotPopup}>
+                      <MoreVert className={'iguru-iconbardefault'} />
+                    </IconButton>
+                  ) : null}
+                </div>
+              </Fragment>
+            )}
           </div>
         </Paper>
       </Grid>

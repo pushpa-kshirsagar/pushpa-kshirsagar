@@ -286,22 +286,28 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       isListCard: false
     },
     {
-      id: 'a4',
+      id: 'score',
       labelTextOneOne: 'score',
-      isListCard: false,
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'minimum',
-          textOne: informationFramework?.assessmentScore?.assessmentScoreMinimum || ''
-        },
-        {
-          labelTextOneOneBadge: 'maximum',
-          textOne: informationFramework?.assessmentScore?.assessmentScoreMaximum || ''
+          labelTextTwoBadge: 'extremum',
+          innerLabelBadgeList: [
+            {
+              labelTextTwoBadge: 'maximum',
+              innerLabelBadgeList: 'No Information'
+            },
+            {
+              labelTextTwoBadge: 'manimum',
+              innerLabelBadgeList: informationFramework?.assessmentScore?.assessmentScoreMinimum ||'No Information'
+            }
+          ]
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'No Information',
-      IconOne: null
+      innerInfo: 'assessees',
+      isListCard: false,
+      isReviewLink: false,
+      isMultiInfoCard: true
     },
     {
       id: 'a5',

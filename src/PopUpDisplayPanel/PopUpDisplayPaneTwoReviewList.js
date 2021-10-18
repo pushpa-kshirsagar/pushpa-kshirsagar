@@ -1391,6 +1391,20 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           }
         });
       }
+      if (typeOfMiddlePaneList === 'assessmentsectionsReviewList') {
+        dispatch({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'section',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: relatedReviewListDistinctData[0].sections[0],
+            reviewMode: isReviseMode ? 'revise' : ''
+          }
+        });
+        dispatch({ type: LOADER_STOP });
+      }
       // if (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList') {
       //   dispatch({ type: LOADER_STOP });
       // }
@@ -1696,7 +1710,11 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             payload: { FilterMode: 'assessmentItem' + secondaryOptionCheckValue }
           });
         }
-        if (popupHeaderOne === 'scales') {
+        if (
+          popupHeaderOne === 'scales' ||
+          popupHeaderOne === 'sections' ||
+          popupHeaderOne === 'clusters'
+        ) {
           dispatch({ type: LOADER_START });
           dispatch({
             type: SET_RELATED_REQUEST_OBJECT,

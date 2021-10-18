@@ -318,6 +318,36 @@ function* workerReviewInfoAssessmentSecSaga(data) {
           }
         ]
       };
+      if (data.payload.typeOfMiddlePaneList === 'assessmentsectionsReviewList') {
+        let array = assessmentInfo?.informationFramework?.assessmentSection.splice(1);
+        reviseResponseObj = {
+          countTotal: array.length || 0,
+          responseObject: [
+            {
+              sections: array || [],
+              assessmentName: assessmentInfo.informationBasic.assessmentName,
+              assessmentDescription: assessmentInfo.informationBasic.assessmentDescription,
+              assessmentStatus: assessmentInfo.informationEngagement.assessmentStatus,
+              id: assessmentInfo.id
+            }
+          ]
+        };
+      }
+      if (data.payload.typeOfMiddlePaneList === 'assessmentclustersReviewList') {
+        reviseResponseObj = {
+          countTotal: assessmentInfo?.informationFramework?.assessmentCluster?.length || 0,
+          responseObject: [
+            {
+              clusters: assessmentInfo?.informationFramework?.assessmentCluster || [],
+              assessmentName: assessmentInfo.informationBasic.assessmentName,
+              assessmentDescription: assessmentInfo.informationBasic.assessmentDescription,
+              assessmentStatus: assessmentInfo.informationEngagement.assessmentStatus,
+              id: assessmentInfo.id
+            }
+          ]
+        };
+      }
+
       yield put({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
         payload: reviseResponseObj.responseObject

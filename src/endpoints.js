@@ -144,6 +144,8 @@ export const ASSESSMENT_REVIEW_LIST_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/review-list';
 export const ASSESSMENT_CREATE_URL =
   ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/create';
+export const ASSESSMENT_SECTION_CREATE_URL =
+  ASSESSMENTS_URL + '/dev/insight-guru/api/assessment-distinct/section-cluster-scale/create';
 export const ASSIGNMENT_CREATE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assignment-distinct/create';
 export const ASSIGNMENT_REVIEW_TYPE_URL =

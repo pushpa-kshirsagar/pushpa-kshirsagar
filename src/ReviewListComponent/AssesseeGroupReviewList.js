@@ -110,7 +110,7 @@ const AssesseeGroupReviewList = (props) => {
   const onClickFooter = (e) => {
     let siftValue = e.currentTarget.getAttribute('data-value');
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
-    if(siftValue==='bespoke'||siftValue==='generic') siftApiCall(siftValue);
+    if (siftValue === 'bespoke' || siftValue === 'generic') siftApiCall(siftValue);
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
@@ -165,7 +165,7 @@ const AssesseeGroupReviewList = (props) => {
       if (classification === 'Bespoke' && element.data === 'share')
         tempArr.push({ ...element, disabled: true });
       else tempArr.push(element);
-    })
+    });
 
     dispatch({
       type: SET_POPUP_STATE,
@@ -179,7 +179,7 @@ const AssesseeGroupReviewList = (props) => {
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : //ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
-            tempArr,
+              tempArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }
@@ -192,7 +192,7 @@ const AssesseeGroupReviewList = (props) => {
           cardValue === 'Card'
             ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION
             : //ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION
-            tempArr
+              tempArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -210,8 +210,12 @@ const AssesseeGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.assesseeGroupStatus}
-                status={FilterMode === 'assesseesGroupDistinctactive'?item.informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary:
-                item.informationEngagement.assesseeGroupStatus}
+                status={
+                  FilterMode === 'assesseesGroupDistinctactive'
+                    ? item.informationSetup?.assesseeGroupClassification
+                        ?.assesseeGroupClassificationPrimary
+                    : item.informationEngagement.assesseeGroupStatus
+                }
                 actualStatus={item.informationEngagement.assesseeGroupStatus}
                 textOne={item.informationBasic.assesseeGroupName}
                 textTwo={item.informationBasic.assesseeGroupDescription}
@@ -225,7 +229,10 @@ const AssesseeGroupReviewList = (props) => {
                 }}
                 isShared={item?.assesseeGroupShared}
                 //shared={item?.assesseeGroupShared ? 'SHARED' : 'UNSHARED'}
-                shared={item?.informationSetup?.assesseeGroupClassification?.assesseeGroupClassificationPrimary}
+                shared={
+                  item?.informationSetup?.assesseeGroupClassification
+                    ?.assesseeGroupClassificationPrimary
+                }
               />
             </div>
           );

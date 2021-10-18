@@ -44,7 +44,7 @@ const PopUpScaleCreate = (props) => {
     };
     console.log('requestObj', requestObj);
     dispatch({ type: POPUP_CLOSE });
-    // dispatch({ type: LOADER_START });
+    dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSMENT_SECTION_SAGA, payload: requestObj });
   };
   return (

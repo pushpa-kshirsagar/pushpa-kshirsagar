@@ -43,7 +43,7 @@ const PopUpClusterCreate = (props) => {
     };
     console.log('requestObj', requestObj);
     dispatch({ type: POPUP_CLOSE });
-    // dispatch({ type: LOADER_START });
+    dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSMENT_SECTION_SAGA, payload: requestObj });
   };
   return (
@@ -71,7 +71,7 @@ const PopUpClusterCreate = (props) => {
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
         basicInfo={clusterInformation}
-        nextPopUpValue={'PICTUREPOPUP'}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
         typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
