@@ -147,7 +147,7 @@ const AssessmentDistinctScaleDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item?.id}
+                tag={index}
                 // isSelectedReviewList={middlePaneSelectedValue === item.id}
                 isInformationValue={item.assessmentScaleOneWeightage}
                 status={'weightage'}

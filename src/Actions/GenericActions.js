@@ -7597,7 +7597,7 @@ export const setItemTypeConfigState =(itemFrameworkOneType,dispatch )=>{
       timeState: true,
       weightState: true,
       noOfItemState: true,
-      noOfResponseState: false
+      noOfResponseState: true
     };
   }
   if (itemFrameworkOneType === '61090cace50cf61d5eb440ce') {

@@ -363,6 +363,7 @@ function* workerReviewInfoAssessmentSecSaga(data) {
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
+          middlePaneSelectedValue: assessmentInfo.id,
           scanCount: reviseResponseObj && reviseResponseObj.countTotal,
           showMiddlePaneState: true
         }
@@ -489,7 +490,7 @@ function* workerPreviewAssessmentSaga(data) {
       data: data.payload.reqBody,
       URL: ASSESSMENT_INFO_PREVIEW_REVISE_URL
     });
-    console.log('assessmentpreviewResponce',userResponse);
+    console.log('assessmentpreviewResponce', userResponse);
     if (userResponse.responseCode === '000') {
       const { createMode } = data.payload;
       yield put({
@@ -503,7 +504,7 @@ function* workerPreviewAssessmentSaga(data) {
         }
       });
       const { informationFramework } = userResponse.responseObject[0];
-      
+
       const assessmentSection = informationFramework?.assessmentSection || [];
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,

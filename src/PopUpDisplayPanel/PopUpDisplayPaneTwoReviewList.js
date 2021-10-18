@@ -1399,7 +1399,35 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             headerOneBadgeOne: 'section',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
-            responseObject: relatedReviewListDistinctData[0].sections[0],
+            responseObject: relatedReviewListDistinctData[0].sections[selectedTagValue],
+            reviewMode: isReviseMode ? 'revise' : ''
+          }
+        });
+        dispatch({ type: LOADER_STOP });
+      }
+      if (typeOfMiddlePaneList === 'assessmentscalesReviewList') {
+        dispatch({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'scale',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: relatedReviewListDistinctData[0].scales[selectedTagValue],
+            reviewMode: isReviseMode ? 'revise' : ''
+          }
+        });
+        dispatch({ type: LOADER_STOP });
+      }
+      if (typeOfMiddlePaneList === 'assessmentclustersReviewList') {
+        dispatch({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'cluster',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: relatedReviewListDistinctData[0].clusters[selectedTagValue],
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });

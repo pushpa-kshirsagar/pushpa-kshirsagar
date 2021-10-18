@@ -107,7 +107,7 @@ const AssessmentDistinctClusterDistinctReviewList = (props) => {
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'clusterOne',
+        popupHeaderOne: 'cluster',
         popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
@@ -147,7 +147,7 @@ const AssessmentDistinctClusterDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item?.id}
+                tag={index}
                 // isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={''}
                 // actualStatus={item.informationEngagement.itemStatus}

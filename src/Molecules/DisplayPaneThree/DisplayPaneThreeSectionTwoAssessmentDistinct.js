@@ -32,53 +32,17 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   const { informationFramework } = responseObject;
   const dispatch = useDispatch();
   const frameworkAll = [
-    // {
-    //   id: 'a1',
-    //   labelTextOneOne: 'communiqué',
-    //   isListCard: true,
-    //   labelTextOneOneBadgeOne: 'primary',
-    //   labelTextOneOneBadgeTwo: 'secondary',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: 'primary',
-    //       innerList:
-    //         informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary ||
-    //         'No Information'
-    //     },
-    //     {
-    //       labelTextOneOneBadge: 'secondary',
-    //       innerList:
-    //         informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary ||
-    //         'No Information'
-    //     }
-    //   ],
-    //   innerAssociateList: [],
-    //   innerInfo: 'No Information',
-    //   IconOne: null
-    // },
     {
       id: 'administration',
       labelTextOneOne: 'administration',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'proctor',
-          textOne: informationFramework?.assessmentAdministrationProctor?'Yes':'No'
-        },
-        {
-          labelTextOneOneBadge: 'repeat',
-          textOne: informationFramework?.assessmentAdministrationRepeat?'Yes':'No'
-        },
-        {
-          labelTextOneOneBadge: 'reset',
-          textOne: informationFramework?.assessmentAdministrationReset?'Yes':'No'
-        },
-        {
-          labelTextOneOneBadge: 'shuffle',
-          textOne: informationFramework?.assessmentAdministrationShuffle?'Yes':'No'
+          textOne: informationFramework?.assessmentAdministrationProctor ? 'Yes' : 'No'
         },
         {
           labelTextOneOneBadge: 'supervise',
-          textOne: informationFramework?.assessmentAdministrationSupervise?'Yes':'No'
+          textOne: informationFramework?.assessmentAdministrationSupervise ? 'Yes' : 'No'
         },
         {
           labelTextOneOneBadge: 'template',
@@ -95,76 +59,52 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       // IconOne: Manuscript
     },
     {
-      id: 'aid',
-      labelTextOneOne: 'aid',
+      id: 'a1',
+      labelTextOneOne: 'cluster',
+      labelTextOneOneBadgeOne: 'distinct',
+      labelTextOneOneBadgeTwo: 'polarity',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
       labelTextOneOneBadges: [
         {
-          labelTextTwoBadge: 'calculator',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidCalculatorPermission?'Permitted':'Unpermitted'
-            },
-            {
-              labelTextTwoBadge: 'type',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidCalculatorType||'No Information'
-            }
+          labelTextOneOneBadge: 'distinct',
+          innerList: [
+            { id: '01', textOne: 'Simple Sample 01', textTwo: '', status: '' },
+            { id: '02', textOne: 'Simple Sample 02', textTwo: '', status: '' },
+            { id: '03', textOne: 'Simple Sample 03', textTwo: '', status: '' }
           ]
         },
         {
-          labelTextTwoBadge: 'spredsheet',
-          innerLabelBadgeList: [
+          labelTextOneOneBadge: 'polarity',
+          innerList: [
             {
-              labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidSpreadsheetPermission?'Permitted':'Unpermitted'
+              id: 'associate1',
+              textOne: 'positive',
+              textTwo: '',
+              status: '20'
             },
             {
-              labelTextTwoBadge: 'type',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidSpreadsheetType||'No Information'
-            }
-          ]
-        },
-        {
-          labelTextTwoBadge: 'textsheet',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidTextsheetPermission?'Permitted':'Unpermitted'
-            },
-            {
-              labelTextTwoBadge: 'type',
-              innerLabelBadgeList: informationFramework?.assessmentAid?.assessmentAidTextsheetType||'No Information'
+              id: 'associate1',
+              textOne: 'negative',
+              textTwo: '',
+              status: '20'
             }
           ]
         }
       ],
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false,
-      isReviewLink: false,
-      isMultiInfoCard: true
-      // IconOne: Manuscript
-    },
-    {
-      id:'cluster',
-      labelTextOneOne:'cluster',
-      labelTextOneOneBadges:[
-        {
-          labelTextOneOneBadge:'distinct',
-          textOne:''
-        }
-      ]
+      innerInfo: 'No Information',
+      isListCard: true
     },
     {
       id: 'a1',
       labelTextOneOne: 'communiqué',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'primary',
+          labelTextOneOneBadge: '',
           textOne: ''
         },
         {
-          labelTextOneOneBadge: 'secondary',
+          labelTextOneOneBadge: '',
           textOne: ''
         }
       ],
@@ -182,7 +122,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           textOne: ''
         },
         {
-          labelTextOneOneBadge: '',
+          labelTextOneOneBadge: '+',
           textOne: ''
         }
       ],
@@ -197,26 +137,6 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       isListCard: false,
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'distinct',
-          textOne: informationFramework?.assessmentItemDistinct
-        },
-        {
-          labelTextOneOneBadge: 'group',
-          textOne: informationFramework?.assessmentItemDistinct
-        },
-        {
-          labelTextOneOneBadge: 'label',
-          textOne: informationFramework?.assessmentItemFrameworkOneLabel
-        },
-        {
-          labelTextOneOneBadge: 'navigation',
-          textOne: 'No Information'
-        },
-        {
-          labelTextOneOneBadge: 'practice',
-          textOne: 'No Information'
-        },
-        {
           labelTextOneOneBadge: 'total',
           textOne: 'No Information'
         }
@@ -225,33 +145,15 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerInfo: 'assessment',
       IconOne: null
     },
-    // {
-    //   id: 'a1',
-    //   labelTextOneOne: 'manuscript',
-    //   isListCard: true,
-    //   labelTextOneOneBadgeOne: '',
-    //   labelTextOneOneBadgeTwo: '',
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: '',
-    //       innerList: informationFramework?.assessmentManuscript || 'No Information'
-    //     }
-    //   ],
-    //   innerAssociateList: [],
-    //   innerInfo: 'No Information',
-    //   IconOne: null
-    // },
     {
       id: 'm1',
       labelTextOneOne: 'manuscript',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'primary',
-          textOne: informationFramework?.assessmentManuscript?.assessmentManuscriptPrimary
+          labelTextOneOneBadge: ''
         },
         {
-          labelTextOneOneBadge: 'secondary',
-          textOne: informationFramework?.assessmentManuscript?.assessmentManuscriptSecondary
+          labelTextOneOneBadge: ''
         }
       ],
       innerAssociateList: [],
@@ -276,24 +178,28 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: null,
-      isReviewLink: true,
+      isReviewLink: true
     },
     {
-      id: 'response',
-      labelTextOneOne: 'response',
+      id: 'a1',
+      labelTextOneOne: 'scale',
+      labelTextOneOneBadgeTwo: '',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'label',
-          textOne: informationFramework?.assessmentItemFrameworkOneResponseLabel ||'No Information'
+          labelTextOneOneBadge: 'distinct',
+          innerList: [
+            { id: '01', textOne: 'Simple Sample 01', textTwo: '', status: '' },
+            { id: '02', textOne: 'Simple Sample 02', textTwo: '', status: '' },
+            { id: '03', textOne: 'Simple Sample 03', textTwo: '', status: '' }
+          ]
         },
         {
-          labelTextOneOneBadge: 'revise',
-          textOne: informationFramework?.assessmentItemFrameworkOneResponseRevise?'Yes':'No'
+          labelTextOneOneBadge: '',
+          innerList: []
         }
       ],
-      innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false
+      innerInfo: 'No Information',
+      isListCard: true
     },
     {
       id: 'score',
@@ -308,7 +214,8 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
             },
             {
               labelTextTwoBadge: 'manimum',
-              innerLabelBadgeList: informationFramework?.assessmentScore?.assessmentScoreMinimum ||'No Information'
+              innerLabelBadgeList:
+                informationFramework?.assessmentScore?.assessmentScoreMinimum || 'No Information'
             }
           ]
         }
@@ -338,11 +245,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOne: 'synopsis',
       labelTextOneOneBadges: [
         {
-          labelTextOneOneBadge: 'primary',
+          labelTextOneOneBadge: '',
           textOne: ''
         },
         {
-          labelTextOneOneBadge: 'secondary',
+          labelTextOneOneBadge: '',
           textOne: ''
         }
       ],
@@ -462,7 +369,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   const onClickReview = (e) => {
     const headerOne = e.currentTarget.getAttribute('data-value');
     const badgeOne = e.currentTarget.getAttribute('data-key');
-    
+
     if (headerOne === 'communiqué' && badgeOne === 'primary') {
       dispatch({
         type: SET_PANE_THREE_PREVIEW_MODE,
@@ -523,23 +430,24 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
     }
-    if(headerOne==='preview'){
+    if (headerOne === 'preview') {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }
   };
-  const reviseFramework = (e,selectedBadgeArray) => {
+  const reviseFramework = (e, selectedBadgeArray) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
 
     //console.log(selectedBadgeArray);
-    let badgeName='';if(selectedBadgeArray){
+    let badgeName = '';
+    if (selectedBadgeArray) {
       if (selectedBadgeArray.length > 0) {
         selectedBadgeArray.forEach((element) => {
           badgeName = badgeName + element.labelTextTwoBadge;
         });
       }
-    }    
+    }
     console.log(badgeName);
     console.log(labelName + '  ' + selectedBadgeName);
     if (labelName === 'communiqué' && selectedBadgeName === 'primary') {
@@ -596,7 +504,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         payload: { isPopUpValue: 'TIMEASSESSMENTPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
-    if (labelName === 'evaluation' && selectedBadgeName==='model') {
+    if (labelName === 'evaluation' && selectedBadgeName === 'model') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'EVALUATIONPOPUP', popupMode: 'ASSESSMENTCREATE' }
@@ -672,19 +580,19 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'AID_CALCULATOR_TYPE_POPUP', popupMode: 'ASSESSMENTCREATE' }
       });
-    }    
+    }
     if (badgeName === 'spredsheet' && selectedBadgeName === 'permission') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'AID_SHEET_POPUP', popupMode: 'ASSESSMENTCREATE' }
       });
-    }     
+    }
     if (badgeName === 'spredsheet' && selectedBadgeName === 'type') {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'AID_SPREADSHEET_TYPE_POPUP', popupMode: 'ASSESSMENTCREATE' }
       });
-    }    
+    }
     if (badgeName === 'textsheet' && selectedBadgeName === 'permission') {
       dispatch({
         type: SET_POPUP_VALUE,
@@ -697,7 +605,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         payload: { isPopUpValue: 'AID_TEXTSHEET_TYPE_POPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
-    if(labelName==='preview'){
+    if (labelName === 'preview') {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }

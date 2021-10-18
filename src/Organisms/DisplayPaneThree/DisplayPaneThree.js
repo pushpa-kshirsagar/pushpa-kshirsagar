@@ -166,6 +166,8 @@ import { callApiFunction } from '../../Actions/GenericActions';
 import { BottomNavigation, Grid } from '@material-ui/core';
 import DisplayPaneThreeSectionOneAssesseeReport from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssesseeReport';
 import DisplayPaneThreeSectionOneAssessmentSection from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentSection';
+import DisplayPaneThreeSectionOneAssessmentScale from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentScale';
+import DisplayPaneThreeSectionOneAssessmentCluster from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentCluster';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -422,6 +424,34 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssessmentScales = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentScale,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentScale,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
+  const rightPaneSectionsAssessmentCluster = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentCluster,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentCluster,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssessmentSection = [
     {
       id: 'section1',
@@ -615,6 +645,12 @@ export const DisplayPaneThree = () => {
   );
   const [selectedSectionAssessmentSection, setSelectedSectionAssessmentSection] = useState(
     rightPaneSectionsAssessmentSection[0]
+  );
+  const [selectedSectionAssessmentScale, setSelectedSectionAssessmentScale] = useState(
+    rightPaneSectionsAssessmentScales[0]
+  );
+  const [selectedSectionAssessmentCluster, setSelectedSectionAssessmentCluster] = useState(
+    rightPaneSectionsAssessmentCluster[0]
   );
   const [selectedSectionAssesseeReport, setSelectedSectionAssesseeReport] = useState(
     rightPaneSectionsAssesseeReport[0]
@@ -3614,6 +3650,84 @@ export const DisplayPaneThree = () => {
       {isReviewRevise &&
         responseObject &&
         headerOne === 'assessments' &&
+        headerOneBadgeOne === 'cluster' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={responseObject?.assessmentClusterOneFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={responseObject?.assessmentClusterOneName || 'No Information'}
+                  textOneTwo={responseObject?.assessmentClusterOneDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  isImageActive={responseObject?.assessmentClusterOnePicture}
+                  imageOne={responseObject?.assessmentClusterOnePicture}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssessmentCluster}
+                selectedSection={selectedSectionAssessmentCluster}
+                setSelectedSection={setSelectedSectionAssessmentCluster}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assessments' &&
+        headerOneBadgeOne === 'scale' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={responseObject?.assessmentScaleOneFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={responseObject?.assessmentScaleOneName || 'No Information'}
+                  textOneTwo={responseObject?.assessmentScaleOneDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  isImageActive={responseObject?.assessmentScaleOnePicture}
+                  imageOne={responseObject?.assessmentScaleOnePicture}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssessmentScales}
+                selectedSection={selectedSectionAssessmentScale}
+                setSelectedSection={setSelectedSectionAssessmentScale}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+          </>
+        )}
+      {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assessments' &&
         headerOneBadgeOne === 'section' && (
           <>
             <div style={{ padding: '2.5px' }}>
@@ -3647,15 +3761,6 @@ export const DisplayPaneThree = () => {
                 onClick={onClickRevise}
                 primaryIcon={revisePrimaryIcon}
                 secondaryIcon={reviseSecondaryIcons}
-              />
-            )}
-            {createMode === 'assessmentsType' && reviewMode !== 'revise' && (
-              <FooterIconTwo
-                FilterModeEnable={true}
-                FilterMode={FilterMode}
-                onClick={onClickCreateAssessmentType}
-                primaryIcon={createAssessmentTypePrimaryIcon}
-                secondaryIcon={[]}
               />
             )}
           </>

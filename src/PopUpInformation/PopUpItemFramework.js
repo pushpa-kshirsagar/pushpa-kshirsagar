@@ -8,8 +8,11 @@ import SelectField from '../Atoms/SelectField/SelectField';
 import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { POPUP_CLOSE, SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE
- } from '../actionType';
+import {
+  POPUP_CLOSE,
+  SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE
+} from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 
 const PopUpItemFramework = (props) => {
@@ -33,27 +36,24 @@ const PopUpItemFramework = (props) => {
   const dispatch = useDispatch();
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isAssessmentPreviewShow=false } = useSelector((state) => state.DisplayPaneThreeReducer);
-  
-  const { informationFramework } = useSelector(
-    (state) => state.AssessmentReducer
-  );
+  const { isAssessmentPreviewShow = false } = useSelector((state) => state.DisplayPaneThreeReducer);
+
+  const { informationFramework } = useSelector((state) => state.AssessmentReducer);
   // // if(isAssessmentPreviewShow){
   //   const itemFrameworkOneResponseChoice =isAssessmentPreviewShow?informationFramework?.assessmentSection[currentItemIndex]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne:
   //   itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   // const itemFrameworkOne = isAssessmentPreviewShow?informationFramework?.assessmentSection[currentItemIndex]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne:
   // itemInformation?.informationFramework.itemFrameworkOne;
-  console.log(itemFrameworkOneResponseChoice)
+  console.log(itemFrameworkOneResponseChoice);
   console.log(itemFrameworkOne);
 
   // }else
   // {
-    // const itemFrameworkOneResponseChoice =
-    // itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
+  // const itemFrameworkOneResponseChoice =
+  // itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   //const itemFrameworkOne = itemInformation?.informationFramework.itemFrameworkOne;
   // }
-  
-  
+
   const [blank, setBlank] = useState('');
   const [classification, setclassification] = useState([]);
   const [level, setlevel] = useState(null);
@@ -64,7 +64,7 @@ const PopUpItemFramework = (props) => {
   const [weightage, setweightage] = useState('');
   console.log('ITEM ', itemFrameworkOneResponseChoice, choiceOb);
   console.log('itemInformation ', itemInformation);
-  console.log('itemConfigStates',itemConfigStates);
+  console.log('itemConfigStates', itemConfigStates);
   useEffect(() => {
     if (subQuestionId) {
       let subques = itemFrameworkOne.itemFrameworkOneSection.filter(function (sub) {
@@ -101,7 +101,7 @@ const PopUpItemFramework = (props) => {
       isItemFramework
     );
     if (isItemFramework) {
-      if(isAssessmentPreviewShow){
+      if (isAssessmentPreviewShow) {
         let reviseCluster = [];
         if (classification.length > 0) {
           reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
@@ -136,8 +136,7 @@ const PopUpItemFramework = (props) => {
           type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
         });
-
-      }else{
+      } else {
         let reviseCluster = [];
         if (classification.length > 0) {
           reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
@@ -172,8 +171,7 @@ const PopUpItemFramework = (props) => {
           type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
         });
-
-      }     
+      }
     } else if (subQuestionId) {
       let opArr = itemFrameworkOne?.itemFrameworkOneSection;
       opArr.forEach((element) => {
@@ -183,7 +181,7 @@ const PopUpItemFramework = (props) => {
           element.itemFrameworkOneSection.itemFrameworkOneScore = weightage;
         }
       });
-      if(isAssessmentPreviewShow){
+      if (isAssessmentPreviewShow) {
         dispatch({
           type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: {
@@ -191,8 +189,7 @@ const PopUpItemFramework = (props) => {
             value: opArr
           }
         });
-
-      }else{
+      } else {
         dispatch({
           type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: {
@@ -200,9 +197,7 @@ const PopUpItemFramework = (props) => {
             value: opArr
           }
         });
-
       }
-      
     } else {
       if (choiceOb !== null) {
         let tempArr = itemFrameworkOneResponseChoice;
@@ -213,7 +208,7 @@ const PopUpItemFramework = (props) => {
             element.itemFrameworkOneResponseChoicePolarity = polarity;
           }
         });
-        if(isAssessmentPreviewShow){
+        if (isAssessmentPreviewShow) {
           dispatch({
             type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -221,8 +216,7 @@ const PopUpItemFramework = (props) => {
               value: tempArr
             }
           });
-        }
-        else{
+        } else {
           dispatch({
             type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -231,7 +225,6 @@ const PopUpItemFramework = (props) => {
             }
           });
         }
-        
       }
     }
     // setBlank(blank);
@@ -292,7 +285,7 @@ const PopUpItemFramework = (props) => {
                 }}
               />
             )}
-             {isItemFramework && itemConfigStates.classificationState && (
+            {isItemFramework && itemConfigStates.classificationState && (
               <SelectField
                 tag={'cluster'}
                 label={'cluster'}
@@ -305,7 +298,7 @@ const PopUpItemFramework = (props) => {
                 value={classification}
                 mappingValue={'itemFrameworkOneClusterPrimary'}
               />
-            )} 
+            )}
             {isItemFramework && itemConfigStates.levelState && (
               <SelectField
                 tag={'level'}

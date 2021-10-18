@@ -129,7 +129,7 @@ const AssessmentDistinctSectionDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item?.id}
+                tag={index}
                 // isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={''}
                 // actualStatus={item.informationEngagement.itemStatus}
