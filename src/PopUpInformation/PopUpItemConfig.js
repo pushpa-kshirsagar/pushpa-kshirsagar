@@ -39,28 +39,28 @@ const PopUpItemConfig = (props) => {
   const { isAssessmentPreviewShow=false } = useSelector((state) => state.DisplayPaneThreeReducer);
   //const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
 
-  const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne.itemFrameworkOneAlignment);
-  const [item_Type, set_Item_Type] = useState(itemFrameworkOne.itemFrameworkOneType);
+  const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne?.itemFrameworkOneAlignment);
+  const [item_Type, set_Item_Type] = useState(itemFrameworkOne?.itemFrameworkOneType);
   const [response_word, set_Response_Word] = useState();
   const [response_Choice_Aligement, set_Choice_Response_Word] = useState();
   const [response_Aligement, Set_Response_Aligement] = useState(
-    itemFrameworkOne.itemFrameworkOneResponseAlignment
+    itemFrameworkOne?.itemFrameworkOneResponseAlignment
   );
   const [sub_item, setSubItem] = useState(itemFrameworkOne?.itemFrameworkOneSection?.length);
   const [response_Choice, set_Response_Choice] = useState(
-    itemFrameworkOne.itemFrameworkOneResponseChoice.length
+    itemFrameworkOne?.itemFrameworkOneResponseChoice.length
   );
   useEffect(() => {
     set_Response_Choice(
-      itemFrameworkOne.itemFrameworkOneResponseChoice.length === 0
+      itemFrameworkOne?.itemFrameworkOneResponseChoice.length === 0
         ? 3
-        : itemFrameworkOne.itemFrameworkOneResponseChoice.length
+        : itemFrameworkOne?.itemFrameworkOneResponseChoice.length
     );
     // set_Response_Choice(2);
     setSubItem(itemFrameworkOne?.itemFrameworkOneSection?.length);
-    set_Item_Aligement(itemFrameworkOne.itemFrameworkOneAlignment);
-    set_Item_Type(itemFrameworkOne.itemFrameworkOneType);
-    Set_Response_Aligement(itemFrameworkOne.itemFrameworkOneResponseAlignment);
+    set_Item_Aligement(itemFrameworkOne?.itemFrameworkOneAlignment);
+    set_Item_Type(itemFrameworkOne?.itemFrameworkOneType);
+    Set_Response_Aligement(itemFrameworkOne?.itemFrameworkOneResponseAlignment);
     set_Response_Word(itemFrameworkOne?.itemFrameworkOneWord?.itemFrameworkOneWordMaximum);
   }, [itemFrameworkOne]);
   const dispatch = useDispatch();
@@ -402,7 +402,7 @@ const PopUpItemConfig = (props) => {
       description: item.itemFrameworkOneTypeDescription
     };
   });
-  console.log(itemFrameworkOne.itemFrameworkOneResponseChoice.length);
+  console.log(itemFrameworkOne?.itemFrameworkOneResponseChoice.length);
   return (
     <div>
       <Popup isActive={isActive}>

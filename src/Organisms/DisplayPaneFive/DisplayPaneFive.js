@@ -291,6 +291,7 @@ export const DisplayPaneFive = () => {
                 onClick={onClickRevise}
                 primaryIcon={revisePrimaryIcon}
                 secondaryIcon={reviseSecondaryIcons}
+                isAssessmentPreviewShow={isAssessmentPreviewShow}
               />
             ) : (
               <FooterIconTwo
