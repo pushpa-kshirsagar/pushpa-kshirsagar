@@ -233,6 +233,44 @@ const IconFourWithFlexSixColumnAssessment=(props)=>{
   );
 
 }
+const IconTwoWithFlexSixColumnAssessment = (props) => {
+  const data = props.data;
+  return (
+    <React.Fragment>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[0].label}
+          Icon={data[0].Icon}
+          colour={props.colour}
+          onClick={data[0].onClick}
+          dataValue={data[0].dataValue ? data[0].dataValue : data[0].label}
+          disabled={data[0]?.disabled}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[1].label}
+          Icon={data[1].Icon}
+          colour={props.colour}
+          onClick={data[1].onClick}
+          dataValue={data[1].dataValue ? data[1].dataValue : data[1].label}
+          disabled={data[1]?.disabled}
+        />
+      </div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+      <div className={'mbPager'}></div>
+    </React.Fragment>
+  );
+};
 const FooterIconTwo = (props) => {
   const {
     FilterModeEnable,
@@ -258,8 +296,12 @@ const FooterIconTwo = (props) => {
               ) : null
             ) :
             isAssessmentPreviewShow?(
-              secondaryIcon.length === 4?
-              (<IconFourWithFlexSixColumnAssessment data={secondaryIcon}/>):null)
+              secondaryIcon.length === 4?(
+              <IconFourWithFlexSixColumnAssessment data={secondaryIcon}/>
+              ):secondaryIcon.length===2?(
+                <IconTwoWithFlexSixColumnAssessment data={secondaryIcon} colour={backColour}/>
+              ):
+              null)
             :
              secondaryIcon.length === 2 ? (
               <IconTwoWithFlexSixColumn data={secondaryIcon} colour={backColour} />

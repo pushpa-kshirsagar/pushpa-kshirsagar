@@ -160,11 +160,14 @@ export const DisplayPaneFiveAssessment = (props) => {
       dispatch
     );
   }, [informationFramework]);
-
   let itemObect =
     informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]
       ?.itemFrameworkOne;
-  console.log('itemObect', itemObect);
+      
+  // let itemObect =
+  //   informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]
+  //     ?.itemFrameworkOne;
+  //console.log('itemObect', itemObect);
   if (!informationFramework?.assessmentSectionItemDistinctRevise) {
     dispatch({
       type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
