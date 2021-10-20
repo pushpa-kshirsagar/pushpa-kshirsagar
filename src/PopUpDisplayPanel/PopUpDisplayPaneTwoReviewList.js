@@ -61,7 +61,8 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   GET_ASSESSEE_REPORT_SAGA,
   GET_ASSESSMENT_SEC_INFO_SAGA,
-  SET_RELATED_REQUEST_OBJECT
+  SET_RELATED_REQUEST_OBJECT,
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -1403,6 +1404,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });
+        dispatch({
+          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          payload: { stateName: 'assessmentSectionItemDistinctRevise', value: relatedReviewListDistinctData[0].sections[selectedTagValue] }
+        })
         dispatch({ type: LOADER_STOP });
       }
       if (typeOfMiddlePaneList === 'assessmentscalesReviewList') {

@@ -21,7 +21,6 @@ import EditorTemplate from './EditorTemplate';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import { useTimer } from 'react-timer-hook';
 import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
-import { setItemTypeConfigState } from '../../Actions/GenericActions';
 
 const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
   const { seconds, minutes, hours } = useTimer({
@@ -136,54 +135,30 @@ export const DisplayPaneFiveAssessment = (props) => {
   const {
     headerOne,
     closePreview,
-    //itemObect,
     data,
     typeMode = true,
     informationFramework,
     currentItemIndex,
     flagQuestion,
-    isQuestionFlaged
+    isQuestionFlaged,
+    currentSectionIndex,
+    itemObect
   } = props;
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { informationBasic } = useSelector((state) => state.AssessmentReducer);
+  const {
+    isAssessmentPreviewShow = false,   
+    isAssessmentSectionShow=false
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const [selectedChoiceObject, setSelectedChoiceObject] = useState('');
   const [subQuestionId, setSubQuestionId] = useState('');
   console.log('assessmentinformationFramework', informationFramework);
   const responseText = '<p><span>response</span></p>';
-  useEffect(() => {
-    setItemTypeConfigState(
-      informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]
-        ?.itemFrameworkOne?.itemFrameworkOneType,
-      dispatch
-    );
-  }, [informationFramework]);
-  let itemObect =
-    informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]
-      ?.itemFrameworkOne;
-      
-  // let itemObect =
-  //   informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]
-  //     ?.itemFrameworkOne;
-  //console.log('itemObect', itemObect);
-  if (!informationFramework?.assessmentSectionItemDistinctRevise) {
-    dispatch({
-      type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-      //type: SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
-      payload: {
-        stateName: 'assessmentSectionItemDistinctRevise',
-        //actualStateName: 'itemFrameworkOne',
-        value:
-          informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[
-            currentItemIndex
-          ]
-        //informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
-        //value: informationFramework?.assessmentItem[currentItemIndex].informationFramework
-      }
-    });
-  }
+  const assessmentScale=informationFramework?.assessmentScale||[];
+  
   const BackHandlerEvent = (e) => {};
   const setSecondaryOptionValue = (e) => {
     //TODO: set secondary option in item
@@ -296,7 +271,6 @@ export const DisplayPaneFiveAssessment = (props) => {
       });
     }
   };
-  //console.log('itemObectitemObect', itemObect);
   return (
     <>
       <div>
@@ -322,13 +296,12 @@ export const DisplayPaneFiveAssessment = (props) => {
           isQuestionFlaged={false}
           timerFinished={''}
           timer={'timer'}
-          totalQuestion={
-            informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct.length
-          }
+          totalQuestion={isAssessmentSectionShow?
+            informationFramework?.assessmentSectionItemDistinct.length:informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length          }
           currentQuestion={currentItemIndex + 1}
-          assessmentSectionName={informationFramework?.assessmentSection[0].assessmentSectionName}
-          assessmentSectionDescription={
-            informationFramework?.assessmentSection[0].assessmentSectionDescription
+          assessmentSectionName={isAssessmentSectionShow?informationFramework?.assessmentSectionName:informationFramework?.assessmentSection[currentSectionIndex].assessmentSectionName||''}
+          assessmentSectionDescription={isAssessmentSectionShow?informationFramework?.assessmentSectionDescription:
+            informationFramework?.assessmentSection[currentSectionIndex].assessmentSectionDescription||''
           }
         />
 
@@ -409,11 +382,11 @@ export const DisplayPaneFiveAssessment = (props) => {
             itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23') && (
             <div className="likartscale">
               <FormControl component="fieldset" style={{ width: '100%' }}>
-                {informationFramework?.assessmentScale.length > 0 && (
+                {assessmentScale.length > 0 && (
                   <div className="likart">
                     <div class="item"></div>
 
-                    {informationFramework?.assessmentScale.map((ob, key) => {
+                    {assessmentScale.map((ob, key) => {
                       return (
                         <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
                           {/* {ob.assessmentScaleOneName} */}

@@ -1,4 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
+import { setItemTypeConfigState } from '../../Actions/GenericActions';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
@@ -258,6 +259,11 @@ function* workerReviewInfoAssessmentSaga(data) {
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentScale', value: assessmentScale }
       });
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: { stateName: 'assessmentSectionItemDistinctRevise', value: assessmentSection[0].assessmentSectionItemDistinct[0] }
+      });
+      setItemTypeConfigState(assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne?.itemFrameworkOneType,yield put);
 
       // yield put({
       //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,

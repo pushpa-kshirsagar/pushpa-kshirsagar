@@ -105,7 +105,7 @@ const PopUpItemConfig = (props) => {
         timeState: true,
         weightState: true,
         noOfItemState: true,
-        noOfResponseState: false
+        noOfResponseState: true
       };
     }
     if (item_Type === '61090cace50cf61d5eb440ce') {
@@ -369,8 +369,85 @@ const PopUpItemConfig = (props) => {
               value: [...itemFrameworkOneResponseChoice, ...newbj]
             }
           });
+          // if(item_Type === '61090cace50cf61d5eb440c9'){
+          //   let opArr = itemFrameworkOne.itemFrameworkOneSection;
+          //   opArr.forEach((element)=>{
+          //     element.itemFrameworkOneSection.itemFrameworkOneResponseChoice=[...itemFrameworkOneResponseChoice, ...newbj];
+          //   })
+          //   dispatch({
+          //     type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          //     payload: {
+          //       stateName: 'itemFrameworkOneSection',                
+          //       value: opArr
+          //     }
+          //   });
+
+          // }else{
+          //   dispatch({
+          //     type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          //     payload: {
+          //       stateName: 'itemFrameworkOneResponseChoice',
+          //       value: [...itemFrameworkOneResponseChoice, ...newbj]
+          //     }
+          //   });
+          // }        
         }
         
+      }
+    }
+    if(item_Type === '61090cace50cf61d5eb440c9'){
+      let section= itemFrameworkOne.itemFrameworkOneSection[0].itemFrameworkOneSection;
+      if(response_Choice>section.itemFrameworkOneResponseChoice.length){
+        let choice = section.itemFrameworkOneResponseChoice.length;
+        let newbj = [];
+        let actlen = response_Choice - choice;
+        if (actlen > 0) {
+          for (let i = 1; i <= actlen; i++) {
+            newbj.push({
+              itemFrameworkOneResponseChoiceAlignment: '',
+              itemFrameworkOneResponseChoiceColumnMatch: '',
+              itemFrameworkOneResponseChoiceExplanation: {
+                itemFrameworkOneResponseChoiceExplanationMedia: '',
+                itemFrameworkOneResponseChoiceExplanationDisplay: false
+              },
+              itemFrameworkOneResponseChoiceMedia: '', //optionLabel,
+              itemFrameworkOneResponseChoiceNumber: `${choice + i}`,
+              itemFrameworkOneResponseChoicePolarity: '',
+              itemFrameworkOneResponseChoiceScore: '',
+              itemFrameworkOneResponseChoiceWeightage: ''
+            });
+          }
+          console.log('newbj', newbj);
+          let opArr = itemFrameworkOne.itemFrameworkOneSection;
+          opArr.forEach((element)=>{
+            element.itemFrameworkOneSection.itemFrameworkOneResponseChoice=[...section.itemFrameworkOneResponseChoice, ...newbj];
+          })
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneSection',                
+              value: opArr
+            }
+          });
+        }
+      }
+      if (response_Choice < section.itemFrameworkOneResponseChoice.length) {
+        let actlen = section.itemFrameworkOneResponseChoice.length - response_Choice;
+        let arr = section.itemFrameworkOneResponseChoice;
+        let newArr = arr.slice(0, -actlen);
+        if (newArr.length >= 3) {
+          let opArr = itemFrameworkOne.itemFrameworkOneSection;
+          opArr.forEach((element)=>{
+            element.itemFrameworkOneSection.itemFrameworkOneResponseChoice=[...newArr];
+          })
+          dispatch({
+            type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+            payload: {
+              stateName: 'itemFrameworkOneSection',                
+              value: opArr
+            }
+          });          
+        }
       }
     }
     // if (sub_item > subItemList?.length) {
