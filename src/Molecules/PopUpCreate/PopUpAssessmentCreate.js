@@ -31,6 +31,7 @@ import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 const PopUpAssessmentCreate = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const { indexPointer } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [errorMsg, setErrorMsg] = useState('');
   const {
     selectedAssociateInfo,
@@ -352,20 +353,25 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_SCORE_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       /> */}
-      {/* <PopUpTextEditor
+      <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
         headerOneBadgeOne={'communique'}
         headerOneBadgeTwo={'primary'}
-        basicInfo={informationFramework.assessmentCommunique}
-        typeOfSetObject={SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE}
+        basicInfo={informationFramework.assessmentCommunique[indexPointer]}
+        // typeOfSetObject={SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE}
         defaultSheetValue={
-          informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary || ''
+          (informationFramework?.assessmentCommunique.length > 0 &&
+            informationFramework?.assessmentCommunique[indexPointer]) ||
+          ''
         }
+        onClickSave={(data) => {
+          dispatch({ type: SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE, payload: data });
+        }}
         actualLableValue={'assessmentCommuniquePrimary'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      /> */}
+      />
       {/* <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
@@ -617,7 +623,7 @@ const PopUpAssessmentCreate = (props) => {
         listSelect={[
           { id: 'goole', name: 'goole' },
           { id: 'microsoft', name: 'microsoft' },
-          { id: 'spreadsheet', name: 'spreadsheet' }          
+          { id: 'spreadsheet', name: 'spreadsheet' }
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}
@@ -629,14 +635,14 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpDropList
+      <PopUpDropList
         isActive={isPopUpValue === 'AID_TEXTSHEET_TYPE_POPUP'}
         tag={'assessmentAidTextsheetType'}
         label={'type'}
         listSelect={[
           { id: 'goole', name: 'goole' },
           { id: 'microsoft', name: 'microsoft' },
-          { id: 'textsheet', name: 'textsheet' }          
+          { id: 'textsheet', name: 'textsheet' }
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}
@@ -648,13 +654,13 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpCheckbox
+      <PopUpCheckbox
         isActive={isPopUpValue === 'EVALUATIONPOPUP'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         valueArr={[
-          'assessmentEvaluationScoreCutoff',    
+          'assessmentEvaluationScoreCutoff',
           'assessmentEvaluationScoreGeneric',
           'assessmentEvaluationScoreGrade',
           'assessmentEvaluationScorePercentage',

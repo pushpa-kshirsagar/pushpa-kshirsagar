@@ -215,6 +215,7 @@ export const DisplayPaneThree = () => {
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const scaleInfo = useSelector((state) => state.ScaleCreateReducer);
+  const clusterInfo = useSelector((state) => state.ClusterCreateReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const aseessmentSection=useSelector((state)=>state.SectionCreateReducer);
@@ -1964,8 +1965,36 @@ export const DisplayPaneThree = () => {
           headerOne: 'assessment',
           reqBody,
           createMode,
-          assessmentSector:'scale',
-          selectedSector:selectedTagValue
+          assessmentSector: 'scale',
+          selectedSector: selectedTagValue
+        }
+      });
+    } else if (headerOneBadgeOne === 'cluster' && headerOne === 'assessments') {
+      let clusterObj = assessmentInfo.informationFramework.assessmentCluster;
+      clusterObj[selectedTagValue] = clusterInfo.clusterInformation;
+      let id = relatedReviewListDistinctData[0].id;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessment: {
+          id,
+          informationFramework: {
+            assessmentCluster: clusterObj
+          }
+        }
+      };
+      console.log('ASSESSMENT REVISE ===', reqBody);
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assessment',
+          reqBody,
+          createMode,
+          assessmentSector: 'cluster',
+          selectedSector: selectedTagValue
         }
       });
     }
@@ -2926,7 +2955,21 @@ export const DisplayPaneThree = () => {
       });
     }
   };
-  console.log('reviewMode', reviewMode);
+  const reviseAssessmentClusterBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+  };
   return (
     <>
       <div>
@@ -3750,6 +3793,7 @@ export const DisplayPaneThree = () => {
                   mode={reviewMode}
                   isImageActive={responseObject?.assessmentClusterOnePicture}
                   imageOne={responseObject?.assessmentClusterOnePicture}
+                  onClickRevise={reviseAssessmentClusterBasicInformation}
                 />
               </div>
               <Sections

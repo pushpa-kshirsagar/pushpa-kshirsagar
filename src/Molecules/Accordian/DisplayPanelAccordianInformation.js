@@ -229,49 +229,46 @@ const DisplayPanelAccordianInformation = (props) => {
                         {'information'}
                       </InputLabel>
                     </span>
-                  ) : null
-                  }
-                  {
-                    isResetIcon &&IconReset?(
-                      <IconButton
-                          style={{display: mode === 'revise'? 'block' : 'none'}}                          
-                            onClick={
-                              mode === 'revise'
-                                ? () => {                                  
-                                  // onClickRevise(e,'',
-                                  //   //selectedBadge?.labelTextOneOneBadge || ''
-                                  //   )
-                                  onClickReview(
-                                    labelTextOneOne,
-                                    selectedBadge?.labelTextOneOneBadge || ''
-                                  );
-                                  }
-                                : () => {
-                                    onClickReview(
-                                      labelTextOneOne,
-                                      selectedBadge?.labelTextOneOneBadge || ''
-                                    );
-                                  }
+                  ) : null}
+                  {isResetIcon && IconReset ? (
+                    <IconButton
+                      style={{ display: mode === 'revise' ? 'block' : 'none' }}
+                      onClick={
+                        mode === 'revise'
+                          ? () => {
+                              // onClickRevise(e,'',
+                              //   //selectedBadge?.labelTextOneOneBadge || ''
+                              //   )
+                              onClickReview(
+                                labelTextOneOne,
+                                selectedBadge?.labelTextOneOneBadge || ''
+                              );
                             }
-                          >
-                            <IconReset className={mode === 'revise' ? 'linkText' : reviewLabelClass} />
-                          </IconButton>
-                    ):null
-                  }
+                          : () => {
+                              onClickReview(
+                                labelTextOneOne,
+                                selectedBadge?.labelTextOneOneBadge || ''
+                              );
+                            }
+                      }
+                    >
+                      <IconReset className={mode === 'revise' ? 'linkText' : reviewLabelClass} />
+                    </IconButton>
+                  ) : null}
                 </div>
                 <div className={['unitFlex', 'unitFlexTop'].join(' ')}>
                   {selectedBadge?.IconOne ? (
                     <>
                       <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
                         <IconButton
-                        style={{display: mode === 'revise'? 'block' : 'none'}}
+                          style={{ display: mode === 'revise' ? 'block' : 'none' }}
                           onClick={
                             mode === 'revise'
                               ? () => {
                                   onClickReview(
                                     labelTextOneOne,
                                     selectedBadge?.labelTextTwoBadge || ''
-                                    );
+                                  );
                                 }
                               : () => {
                                   onClickReview(
@@ -281,7 +278,13 @@ const DisplayPanelAccordianInformation = (props) => {
                                 }
                           }
                         >
-                          <selectedBadge.IconOne className={mode === 'revise' ? ['linkText','iconOne'].join(' ') : reviewLabelClass}/>
+                          <selectedBadge.IconOne
+                            className={
+                              mode === 'revise'
+                                ? ['linkText', 'iconOne'].join(' ')
+                                : reviewLabelClass
+                            }
+                          />
                         </IconButton>
                       </div>
                     </>
@@ -290,17 +293,17 @@ const DisplayPanelAccordianInformation = (props) => {
                       {IconOne && (
                         <div className={['unitFlex', 'verifiedUser', 'verifiedUserTop'].join(' ')}>
                           <IconButton
-                          style={{display: mode === 'revise'? 'block' : 'none'}}                          
+                            style={{ display: mode === 'revise' ? 'block' : 'none' }}
                             onClick={
                               mode === 'revise'
-                                ? () => {                                  
-                                  // onClickRevise(e,'',
-                                  //   //selectedBadge?.labelTextOneOneBadge || ''
-                                  //   )
-                                  onClickReview(
-                                    labelTextOneOne,
-                                    selectedBadge?.labelTextOneOneBadge || ''
-                                  );
+                                ? () => {
+                                    // onClickRevise(e,'',
+                                    //   //selectedBadge?.labelTextOneOneBadge || ''
+                                    //   )
+                                    onClickReview(
+                                      labelTextOneOne,
+                                      selectedBadge?.labelTextOneOneBadge || ''
+                                    );
                                   }
                                 : () => {
                                     onClickReview(
@@ -311,7 +314,7 @@ const DisplayPanelAccordianInformation = (props) => {
                             }
                           >
                             <IconOne
-                              //className={mode === 'revise' ? 'linkText' : reviewLabelClass}
+                            //className={mode === 'revise' ? 'linkText' : reviewLabelClass}
                             />
                           </IconButton>
                         </div>

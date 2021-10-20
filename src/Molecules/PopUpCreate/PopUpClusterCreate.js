@@ -11,10 +11,12 @@ import {
   CLEAR_CLUSTER_REDUCER_STATE,
   CREATE_ASSESSMENT_SECTION_SAGA
 } from '../../actionType';
+import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
 
 const PopUpClusterCreate = (props) => {
   const { headerOne } = props;
-  const { isPopUpValue,selectedTagValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const { clusterInformation } = useSelector((state) => state.ClusterCreateReducer);
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
     (state) => state.DisplayPaneThreeReducer
@@ -46,6 +48,8 @@ const PopUpClusterCreate = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSMENT_SECTION_SAGA, payload: requestObj });
   };
+  console.log('clusterInformation', clusterInformation);
+
   return (
     <div>
       <PopUpTextField
@@ -72,6 +76,139 @@ const PopUpClusterCreate = (props) => {
         headerOneBadgeTwo={'information'}
         basicInfo={clusterInformation}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ONEONELABELPOPUP'}
+        label={'label'}
+        actualLableValue={'assessmentClusterOneOneLabel'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={clusterInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ONETWOLABELPOPUP'}
+        label={'label'}
+        actualLableValue={'assessmentClusterOneTwoLabel'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={clusterInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ONEONEDESCPOPUP'}
+        label={'description'}
+        actualLableValue={'assessmentClusterOneOneDescription'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={clusterInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ONETWODESCPOPUP'}
+        label={'description'}
+        actualLableValue={'assessmentClusterOneTwoDescription'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={clusterInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      {/* <PopUpTextEditor
+        isActive={isPopUpValue === 'ONEONEEXPLANATION'}
+        headerOne={headerOne}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'explanation'}
+        headerOneBadgeTwo={'information'}
+        basicInfo={clusterInformation}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        defaultSheetValue={clusterInformation.assessmentClusterOneOneExplanation}
+        actualLableValue={'assessmentClusterOneOneExplanation'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
+       <PopUpTextField
+        isActive={isPopUpValue === 'ONEONEEXPLANATION'}
+        label={'explanation'}
+        actualLableValue={'assessmentClusterOneOneExplanation'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={clusterInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ONETWOEXPLANATION'}
+        label={'explanation'}
+        actualLableValue={'assessmentClusterOneTwoExplanation'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        basicInfo={clusterInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      {/* <PopUpTextEditor
+        isActive={isPopUpValue === 'ONETWOEXPLANATION'}
+        headerOne={headerOne}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'explanation'}
+        headerOneBadgeTwo={'information'}
+        basicInfo={clusterInformation}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        defaultSheetValue={clusterInformation.assessmentClusterOneTwoExplanation}
+        actualLableValue={'assessmentClusterOneTwoExplanation'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
+      <PopUpDropList
+        isActive={isPopUpValue === 'ONEONEPOLARITY'}
+        tag={'assessmentClusterOneOnePolarity'}
+        label={'polarity'}
+        listSelect={[
+          { id: 'Bespoke', name: 'Bespoke' },
+          { id: 'Generic', name: 'Generic' }
+        ]}
+        mappingValue={'id'}
+        labelval={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={false}
+        nextPopUpValue={''}
+        basicInfo={clusterInformation}
+        typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ONETWOPOLARITY'}
+        tag={'assessmentClusterOneTwoPolarity'}
+        label={'polarity'}
+        listSelect={[
+          { id: 'Bespoke', name: 'Bespoke' },
+          { id: 'Generic', name: 'Generic' }
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={false}
+        nextPopUpValue={''}
+        basicInfo={clusterInformation}
         typeOfSetObject={SET_CLUSTER_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />

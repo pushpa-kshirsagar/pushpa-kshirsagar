@@ -1411,8 +1411,11 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
         dispatch({
           type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-          payload: { stateName: 'assessmentSectionItemDistinctRevise', value: relatedReviewListDistinctData[0].sections[selectedTagValue] }
-        })
+          payload: {
+            stateName: 'assessmentSectionItemDistinctRevise',
+            value: relatedReviewListDistinctData[0].sections[selectedTagValue]
+          }
+        });
         dispatch({ type: LOADER_STOP });
       }
       if (typeOfMiddlePaneList === 'assessmentscalesReviewList') {

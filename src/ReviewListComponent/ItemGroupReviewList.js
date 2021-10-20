@@ -97,7 +97,7 @@ const ItemGroupReviewList = (props) => {
     dispatch({ type: ASSOCIATE_POPUP_CLOSE });
     document.getElementById('middleComponentId').scrollTop = '0px';
   };
-  const siftApiFilterCall = (siftKey) => {   
+  const siftApiFilterCall = (siftKey) => {
     let requestObect = makeItemGroupObj(selectedAssociateInfo, siftKey, 0, countPage);
     dispatch({ type: LOADER_START });
     dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
@@ -120,7 +120,7 @@ const ItemGroupReviewList = (props) => {
     dispatch({ type: FILTERMODE_ENABLE });
     if (siftValue === 'suspended' || siftValue === 'terminated') siftApiCall(siftValue);
     if (siftValue === 'bespoke' || siftValue === 'generic') siftApiFilterCall(siftValue);
-    
+
     if (siftValue === 'finish') {
       console.log('allocateStr', allocateStr);
       let distinctAllocateStr = allocateStr === 'itemsdistinct' ? 'itemDistinct' : '';
@@ -169,18 +169,18 @@ const ItemGroupReviewList = (props) => {
     console.log(e.currentTarget.getAttribute('tag'));
     let classification = e.currentTarget.getAttribute('data-shared');
     let optArr = [];
-    let tempArr = [];    
+    let tempArr = [];
     let popupContentArrValue = ASSESSEE_GROUP_NODE_ROLE_REVIEW_LIST_POPUP_OPTION.map((obj) =>
       obj.data === 'assessees'
         ? { ...obj, data: middlePaneHeader, dataValue: middlePaneHeader }
         : obj
     );
     optArr = popupContentArrValue;
-    optArr.map((element)=>{
+    optArr.map((element) => {
       if (classification === 'Bespoke' && element.data === 'share')
         tempArr.push({ ...element, disabled: true });
       else tempArr.push(element);
-    })
+    });
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
@@ -190,7 +190,7 @@ const ItemGroupReviewList = (props) => {
         isPopUpValue: '',
         popupOpenType: 'primary',
         popupContentArrValue:
-          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr,//optArr,
+          cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr, //optArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status'),
         selectedTagGroupId: e.currentTarget.getAttribute('data-value')
@@ -200,12 +200,12 @@ const ItemGroupReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr//optArr
+        value: cardValue === 'Card' ? GROUP_NODE_ROLE_TYPE_REVIEW_LIST_POPUP_OPTION : tempArr //optArr
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
   };
-  console.log('FilterMode',FilterMode);
+  console.log('FilterMode', FilterMode);
   return (
     <div>
       {reviewListDistinctData &&
@@ -218,9 +218,11 @@ const ItemGroupReviewList = (props) => {
                 tag={item.id}
                 isSelectedReviewList={middlePaneSelectedValue === item.id}
                 //status={item.informationEngagement.itemGroupStatus}
-                status={FilterMode === 'itemGroupDistinctactive'?
-                item.informationSetup?.itemGroupClassification?.itemGroupClassificationPrimary:
-                item.informationEngagement.itemGroupStatus}
+                status={
+                  FilterMode === 'itemGroupDistinctactive'
+                    ? item.informationSetup?.itemGroupClassification?.itemGroupClassificationPrimary
+                    : item.informationEngagement.itemGroupStatus
+                }
                 textOne={item.informationBasic.itemGroupName}
                 textTwo={item.informationBasic.itemGroupDescription}
                 isTooltipActive={false}
@@ -233,7 +235,9 @@ const ItemGroupReviewList = (props) => {
                 // dataValue={item.informationAllocation.itemGroup}
                 isShared={item?.itemGroupShared}
                 //shared={item.itemGroupShared ? 'SHARED' : 'UNSHARED'}
-                shared={item?.informationSetup?.itemGroupClassification?.itemGroupClassificationPrimary}
+                shared={
+                  item?.informationSetup?.itemGroupClassification?.itemGroupClassificationPrimary
+                }
               />
             </div>
           );

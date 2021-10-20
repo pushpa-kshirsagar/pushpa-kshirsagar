@@ -1529,7 +1529,7 @@ export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, nu
     value: {
       from: filterKey.toUpperCase()
     }
-  };  
+  };
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -1540,7 +1540,7 @@ export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, nu
       };
     }
   }
-  let requestObj = {}
+  let requestObj = {};
   if (filterKey === 'bespoke' || filterKey === 'generic') {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1563,17 +1563,18 @@ export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, nu
               conditionValue: {
                 condition: 'eq',
                 value: {
-                  from: "ACTIVE"
+                  from: 'ACTIVE'
                 }
               }
             },
             {
               dataType: 'string',
-              conditionColumn: 'informationSetup.itemTypeClassification.itemTypeClassificationPrimary',
+              conditionColumn:
+                'informationSetup.itemTypeClassification.itemTypeClassificationPrimary',
               conditionValue: {
                 condition: 'in',
                 value: {
-                in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                  in: [filterKey === 'bespoke' ? 'Bespoke' : 'Generic']
                 }
               }
             }
@@ -1581,8 +1582,7 @@ export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, nu
         }
       ]
     };
-  }
-  else{
+  } else {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -1608,7 +1608,7 @@ export const makeItemsTypeObj = (selectedAssociateInfo, filterKey, countPage, nu
       ]
     };
   }
-  
+
   return requestObj;
 };
 export const makeAssesseeTypeScanRequestObject = (
@@ -2061,8 +2061,8 @@ export const makeItemGroupObj = (selectedAssociateInfo, filterKey, countPage, nu
       };
     }
   }
-  let requestObj={}
-  if(filterKey==="bespoke"||filterKey==="generic"){
+  let requestObj = {};
+  if (filterKey === 'bespoke' || filterKey === 'generic') {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -2084,17 +2084,18 @@ export const makeItemGroupObj = (selectedAssociateInfo, filterKey, countPage, nu
               conditionValue: {
                 condition: 'eq',
                 value: {
-                  from: "ACTIVE"
+                  from: 'ACTIVE'
                 }
               }
             },
             {
               dataType: 'string',
-              conditionColumn: 'informationSetup.itemGroupClassification.itemGroupClassificationPrimary',
+              conditionColumn:
+                'informationSetup.itemGroupClassification.itemGroupClassificationPrimary',
               conditionValue: {
                 condition: 'in',
                 value: {
-                in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                  in: [filterKey === 'bespoke' ? 'Bespoke' : 'Generic']
                 }
               }
             }
@@ -2102,8 +2103,7 @@ export const makeItemGroupObj = (selectedAssociateInfo, filterKey, countPage, nu
         }
       ]
     };
-  }
-  else{
+  } else {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -2128,8 +2128,7 @@ export const makeItemGroupObj = (selectedAssociateInfo, filterKey, countPage, nu
         }
       ]
     };
-
-  } 
+  }
   return requestObj;
 };
 export const makeItemGroupScanObj = (
@@ -5622,8 +5621,8 @@ export const makeCultureProfileGroupObj = (
     }
   }
 
-  let requestObj={}
-  if(filterKey === 'bespoke' || filterKey === 'generic'){
+  let requestObj = {};
+  if (filterKey === 'bespoke' || filterKey === 'generic') {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -5646,17 +5645,18 @@ export const makeCultureProfileGroupObj = (
               conditionValue: {
                 condition: 'eq',
                 value: {
-                  from: "ACTIVE"
+                  from: 'ACTIVE'
                 }
               }
             },
             {
               dataType: 'string',
-              conditionColumn: 'informationSetup.cultureProfileGroupClassification.cultureProfileGroupClassificationPrimary',
+              conditionColumn:
+                'informationSetup.cultureProfileGroupClassification.cultureProfileGroupClassificationPrimary',
               conditionValue: {
                 condition: 'in',
                 value: {
-                in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                  in: [filterKey === 'bespoke' ? 'Bespoke' : 'Generic']
                 }
               }
             }
@@ -5664,9 +5664,7 @@ export const makeCultureProfileGroupObj = (
         }
       ]
     };
-
-  }
-  else{
+  } else {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -5692,9 +5690,8 @@ export const makeCultureProfileGroupObj = (
         }
       ]
     };
-
   }
-  
+
   return requestObj;
 };
 export const makeCultureProfileGroupScanObj = (
@@ -5784,7 +5781,7 @@ export const makeCultureProfileTypeObj = (
       from: filterKey.toUpperCase()
     }
   };
-  
+
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -5795,7 +5792,7 @@ export const makeCultureProfileTypeObj = (
       };
     }
   }
-  let requestObj = {}
+  let requestObj = {};
   if (filterKey === 'bespoke' || filterKey === 'generic') {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
@@ -5819,17 +5816,18 @@ export const makeCultureProfileTypeObj = (
               conditionValue: {
                 condition: 'eq',
                 value: {
-                  from: "ACTIVE"
+                  from: 'ACTIVE'
                 }
               }
             },
             {
               dataType: 'string',
-              conditionColumn: 'informationSetup.cultureProfileTypeClassification.cultureProfileTypeClassificationPrimary',
+              conditionColumn:
+                'informationSetup.cultureProfileTypeClassification.cultureProfileTypeClassificationPrimary',
               conditionValue: {
                 condition: 'in',
                 value: {
-                in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                  in: [filterKey === 'bespoke' ? 'Bespoke' : 'Generic']
                 }
               }
             }
@@ -5837,8 +5835,7 @@ export const makeCultureProfileTypeObj = (
         }
       ]
     };
-  }
-  else{
+  } else {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -5864,7 +5861,7 @@ export const makeCultureProfileTypeObj = (
         }
       ]
     };
-  }  
+  }
   return requestObj;
 };
 export const makeCultureProfileTypeScanObj = (
@@ -6076,7 +6073,7 @@ export const makeJobProfileGroupObj = (selectedAssociateInfo, filterKey, countPa
       };
     }
   }
-  let requestObj={}
+  let requestObj = {};
   if (filterKey === 'bespoke' || filterKey === 'generic') {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
@@ -6100,27 +6097,26 @@ export const makeJobProfileGroupObj = (selectedAssociateInfo, filterKey, countPa
               conditionValue: {
                 condition: 'eq',
                 value: {
-                from: "ACTIVE"
+                  from: 'ACTIVE'
                 }
               }
             },
             {
               dataType: 'string',
-              conditionColumn: 'informationSetup.jobProfileGroupClassification.jobProfileGroupClassificationPrimary',
+              conditionColumn:
+                'informationSetup.jobProfileGroupClassification.jobProfileGroupClassificationPrimary',
               conditionValue: {
                 condition: 'in',
                 value: {
-                in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                  in: [filterKey === 'bespoke' ? 'Bespoke' : 'Generic']
                 }
               }
-              
             }
           ]
         }
       ]
     };
-  }
-  else{
+  } else {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
@@ -6231,7 +6227,7 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
     value: {
       from: filterKey.toUpperCase()
     }
-  };  
+  };
   if (filterKey === 'all') {
     {
       searchObj = {
@@ -6242,15 +6238,16 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
       };
     }
   }
-  let requestObj={}
-  if(filterKey==='bespoke'||filterKey==='generic'){
+  let requestObj = {};
+  if (filterKey === 'bespoke' || filterKey === 'generic') {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       filter: 'true',
       orderBy: {
-        columnName: 'informationBasic.jobProfileTypeName,informationBasic.jobProfileTypeDescription',
+        columnName:
+          'informationBasic.jobProfileTypeName,informationBasic.jobProfileTypeDescription',
         order: 'asc'
       },
       numberPage: numberPage,
@@ -6265,33 +6262,34 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
               conditionValue: {
                 condition: 'eq',
                 value: {
-                from: "ACTIVE"
+                  from: 'ACTIVE'
                 }
               }
             },
             {
               dataType: 'string',
-              conditionColumn: 'informationSetup.jobProfileTypeClassification.jobProfileTypeClassificationPrimary',
+              conditionColumn:
+                'informationSetup.jobProfileTypeClassification.jobProfileTypeClassificationPrimary',
               conditionValue: {
                 condition: 'in',
                 value: {
-                in: [filterKey==='bespoke'?'Bespoke':'Generic']
+                  in: [filterKey === 'bespoke' ? 'Bespoke' : 'Generic']
                 }
-              }              
+              }
             }
           ]
         }
       ]
     };
-  }
-  else{
+  } else {
     requestObj = {
       assesseeId: selectedAssociateInfo?.assesseeId,
       associateId:
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       filter: 'true',
       orderBy: {
-        columnName: 'informationBasic.jobProfileTypeName,informationBasic.jobProfileTypeDescription',
+        columnName:
+          'informationBasic.jobProfileTypeName,informationBasic.jobProfileTypeDescription',
         order: 'asc'
       },
       numberPage: numberPage,
@@ -6309,7 +6307,7 @@ export const makeJobProfileTypeObj = (selectedAssociateInfo, filterKey, countPag
         }
       ]
     };
-  } 
+  }
   return requestObj;
 };
 export const makeJobProfileTypeScanObj = (
@@ -7570,9 +7568,90 @@ export function calculateTime(milisec) {
   return duration;
 }
 
-export const setItemTypeConfigState =(itemFrameworkOneType,dispatch )=>{
+export function convertNumberToName(amount) {
+  var words = new Array();
+  words[0] = '';
+  words[1] = 'one';
+  words[2] = 'two';
+  words[3] = 'three';
+  words[4] = 'four';
+  words[5] = 'five';
+  words[6] = 'six';
+  words[7] = 'seven';
+  words[8] = 'eight';
+  words[9] = 'nine';
+  words[10] = 'ten';
+  words[11] = 'eleven';
+  words[12] = 'twelve';
+  words[13] = 'thirteen';
+  words[14] = 'fourteen';
+  words[15] = 'fifteen';
+  words[16] = 'sixteen';
+  words[17] = 'seventeen';
+  words[18] = 'eighteen';
+  words[19] = 'nineteen';
+  words[20] = 'twenty';
+  words[30] = 'thirty';
+  words[40] = 'forty';
+  words[50] = 'fifty';
+  words[60] = 'sixty';
+  words[70] = 'seventy';
+  words[80] = 'eighty';
+  words[90] = 'ninety';
+  amount = amount.toString();
+  var atemp = amount.split('.');
+  var number = atemp[0].split(',').join('');
+  var n_length = number.length;
+  var words_string = '';
+  if (n_length <= 9) {
+    var n_array = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
+    var received_n_array = new Array();
+    for (var i = 0; i < n_length; i++) {
+      received_n_array[i] = number.substr(i, 1);
+    }
+    for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
+      n_array[i] = received_n_array[j];
+    }
+    for (var i = 0, j = 1; i < 9; i++, j++) {
+      if (i == 0 || i == 2 || i == 4 || i == 7) {
+        if (n_array[i] == 1) {
+          n_array[j] = 10 + parseInt(n_array[j]);
+          n_array[i] = 0;
+        }
+      }
+    }
+    var value = '';
+    for (var i = 0; i < 9; i++) {
+      if (i == 0 || i == 2 || i == 4 || i == 7) {
+        value = n_array[i] * 10;
+      } else {
+        value = n_array[i];
+      }
+      if (value != 0) {
+        words_string += words[value] + ' ';
+      }
+      if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
+        words_string += 'Crores ';
+      }
+      if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
+        words_string += 'Lakhs ';
+      }
+      if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
+        words_string += 'Thousand ';
+      }
+      if (i == 6 && value != 0 && n_array[i + 1] != 0 && n_array[i + 2] != 0) {
+        words_string += 'Hundred and ';
+      } else if (i == 6 && value != 0) {
+        words_string += 'Hundred ';
+      }
+    }
+    words_string = words_string.split('  ').join(' ');
+  }
+  return words_string;
+}
+export const setItemTypeConfigState = (itemFrameworkOneType, dispatch) => {
   console.log('setItemTypeConfigState');
-  console.log('itemFrameworkOneType',itemFrameworkOneType);
+  console.log('itemFrameworkOneType', itemFrameworkOneType);
   let reviseSetting = {
     blankState: true,
     classificationState: true,
@@ -7652,5 +7731,4 @@ export const setItemTypeConfigState =(itemFrameworkOneType,dispatch )=>{
     type: SET_DISPLAY_TWO_SINGLE_STATE,
     payload: { stateName: 'itemConfigStates', value: reviseSetting }
   });
-
-}
+};

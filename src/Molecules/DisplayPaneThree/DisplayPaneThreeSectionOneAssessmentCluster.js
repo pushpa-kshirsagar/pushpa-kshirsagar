@@ -65,7 +65,69 @@ const DisplayPaneThreeSectionOneAssessmentCluster = () => {
       isMultiInfoCard: true
     }
   ];
-
+  const onClickReview = (e) => {};
+  const onClickRevise = (e, selectedBadgeArray) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    let badgeName = '';
+    if (selectedBadgeArray) {
+      if (selectedBadgeArray.length > 0) {
+        selectedBadgeArray.forEach((element) => {
+          badgeName = badgeName + element.labelTextTwoBadge;
+        });
+      }
+    }
+    console.log(badgeName);
+    console.log(labelName + '  ' + selectedBadgeName);
+    if (labelName === 'cluster' && badgeName === 'one' && selectedBadgeName === 'label') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ONEONELABELPOPUP', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    if (labelName === 'cluster' && badgeName === 'two' && selectedBadgeName === 'label') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ONETWOLABELPOPUP', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    if (labelName === 'cluster' && badgeName === 'one' && selectedBadgeName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ONEONEDESCPOPUP', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    if (labelName === 'cluster' && badgeName === 'two' && selectedBadgeName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ONETWODESCPOPUP', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    if (labelName === 'cluster' && badgeName === 'one' && selectedBadgeName === 'explanation') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ONEONEEXPLANATION', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    if (labelName === 'cluster' && badgeName === 'two' && selectedBadgeName === 'explanation') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ONETWOEXPLANATION', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    if (labelName === 'cluster' && badgeName === 'one' && selectedBadgeName === 'polarity') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ONEONEPOLARITY', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+    if (labelName === 'cluster' && badgeName === 'two' && selectedBadgeName === 'polarity') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ONETWOPOLARITY', popupMode: 'CLUSTERCREATE' }
+      });
+    }
+  };
   return (
     <div
       style={{
@@ -84,9 +146,16 @@ const DisplayPaneThreeSectionOneAssessmentCluster = () => {
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}
+                      onClickRevise={onClickRevise}
+                      onClickReview={onClickReview}
                     />
                   ) : (
-                    <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianInformation
+                      accordianObject={ob}
+                      mode={reviewMode}
+                      onClickRevise={onClickRevise}
+                      onClickReview={onClickReview}
+                    />
                   )}
                 </div>
               );
