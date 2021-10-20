@@ -242,7 +242,6 @@ function* workerReviewInfoAssessmentSaga(data) {
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentTime', value: timeAssessment }
       });
-      const itemAssessment = informationFramework?.assessmentItem || [];
       const menuScriptAssessment = informationFramework?.assessmentManuscript || {
         assessmentManuscriptPrimary: '',
         assessmentManuscriptSecondary: ''
@@ -251,11 +250,24 @@ function* workerReviewInfoAssessmentSaga(data) {
         type: SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
         payload: menuScriptAssessment
       });
-      const assessmentSection = informationFramework?.assessmentSection || [];
+      let sectionArr = [];
+      informationFramework?.assessmentSection.map((sec) => {
+        let tempArr = [];
+        // let tempArr = sec.assessmentSectionItemDistinct.map((ob) => ob.itemId))
+        for (let i = 0; i < sec.assessmentSectionItemDistinct.length; i++) {
+          tempArr.push(sec.assessmentSectionItemDistinct[i].itemId);
+        }
+        console.log('tempArr', tempArr);
+        let reviseObj = { ...sec, assessmentSectionItemDistinct: tempArr };
+        console.log('reviseObj', reviseObj);
+        sectionArr.push(reviseObj);
+      });
+      console.log('sectionArr', sectionArr);
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-        payload: { stateName: 'assessmentSection', value: assessmentSection }
+        payload: { stateName: 'assessmentSection', value: sectionArr }
       });
+      const assessmentSection = informationFramework?.assessmentSection || [];
       const assessmentScale = informationFramework?.assessmentScale || [];
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
@@ -263,9 +275,16 @@ function* workerReviewInfoAssessmentSaga(data) {
       });
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-        payload: { stateName: 'assessmentSectionItemDistinctRevise', value: assessmentSection[0].assessmentSectionItemDistinct[0] }
+        payload: {
+          stateName: 'assessmentSectionItemDistinctRevise',
+          value: assessmentSection[0].assessmentSectionItemDistinct[0]
+        }
       });
-      setItemTypeConfigState(assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne?.itemFrameworkOneType,yield put);
+      setItemTypeConfigState(
+        assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne
+          ?.itemFrameworkOneType,
+        yield put
+      );
 
       // yield put({
       //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
@@ -421,7 +440,35 @@ function* workerReviseInfoAssessmentSaga(data) {
     const userResponse = yield call(assessmentReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
       const { createMode, assessmentSector = '', selectedSector = '' } = data.payload;
-      if (assessmentSector != '') {
+      if (assessmentSector === 'scale') {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'scale',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject:
+              userResponse.responseObject[0].informationFramework.assessmentScale[selectedSector],
+            reviewMode: createMode
+          }
+        });
+        yield put({ type: LOADER_STOP });
+      } else if (assessmentSector === 'cluster') {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'cluster',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject:
+              userResponse.responseObject[0].informationFramework.assessmentCluster[selectedSector],
+            reviewMode: createMode
+          }
+        });
+        yield put({ type: LOADER_STOP });
+      } else {
         if (!data.payload.hideRightpane) {
           yield put({
             type: SET_DISPLAY_PANE_THREE_STATE,
@@ -454,21 +501,6 @@ function* workerReviseInfoAssessmentSaga(data) {
           });
         } else {
           yield put({ type: LOADER_STOP });
-        }
-      } else {
-        if (assessmentSector === 'scale') {
-          yield put({
-            type: SET_DISPLAY_PANE_THREE_STATE,
-            payload: {
-              headerOne: 'assessments',
-              headerOneBadgeOne: 'scale',
-              headerOneBadgeTwo: 'information',
-              headerOneBadgeThree: 'key',
-              responseObject:
-                userResponse.responseObject[0].informationFramework.assessmentScale[selectedSector],
-              reviewMode: createMode
-            }
-          });
         }
       }
     } else {

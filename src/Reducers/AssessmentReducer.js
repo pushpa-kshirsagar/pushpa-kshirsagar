@@ -279,7 +279,10 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
         ...istate,
         informationFramework: {
           ...istate.informationFramework,
-          assessmentCommunique: action.payload
+          assessmentCommunique: [
+            ...istate.informationFramework.assessmentCommunique,
+            action.payload
+          ]
         }
       };
     case SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE:

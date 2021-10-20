@@ -487,9 +487,9 @@ const DisplayPageOne = () => {
       {popupMode === 'ASSIGNMENTCREATE' && <PopUpAssignmentCreate headerOne={'assignment'} />}
       {popupMode === 'ASSESSMENTCREATE' && <PopUpAssessmentCreate headerOne={'assessment'} />}
       {popupMode === 'ITEMCREATE' && <PopUpItemCreate />}
-      {popupMode === 'CLUSTERCREATE' && <PopUpClusterCreate headerOne={'clusters'} />}
-      {popupMode === 'SECTIONCREATE' && <PopUpSectionCreate headerOne={'sections'} />}
-      {popupMode === 'SCALECREATE' && <PopUpScaleCreate headerOne={'scales'} />}
+      {popupMode === 'CLUSTERCREATE' && <PopUpClusterCreate headerOne={'cluster'} />}
+      {popupMode === 'SECTIONCREATE' && <PopUpSectionCreate headerOne={'section'} />}
+      {popupMode === 'SCALECREATE' && <PopUpScaleCreate headerOne={'scale'} />}
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
         headerPanelColour={'genericOne'}

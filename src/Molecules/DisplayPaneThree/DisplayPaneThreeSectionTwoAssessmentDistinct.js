@@ -6,7 +6,12 @@ import { Paper } from '@material-ui/core';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import Manuscript from '@material-ui/icons/Description';
-import { makeAssesseeReviewListRequestObject, makeItemObj } from '../../Actions/GenericActions';
+import AddIcon from '@material-ui/icons/Add';
+import {
+  convertNumberToName,
+  makeAssesseeReviewListRequestObject,
+  makeItemObj
+} from '../../Actions/GenericActions';
 import {
   FILTERMODE,
   GET_ALLOCATE_ITEM,
@@ -31,6 +36,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationFramework } = responseObject;
   const dispatch = useDispatch();
+  let communiqueArr = [];
+  informationFramework.assessmentCommunique.map((comm, index) => {
+    // communiqueArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
+    communiqueArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
+  });
   const frameworkAll = [
     {
       id: 'administration',
@@ -98,20 +108,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     {
       id: 'a1',
       labelTextOneOne: 'communiqué',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        },
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
+      labelTextOneOneBadges: communiqueArr,
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
-      IconOne: Manuscript
+      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript
     },
     {
       id: 'evaluation-assessment',
@@ -366,73 +367,90 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     }
   ];
 
-  const onClickReview = (e) => {
-    const headerOne = e.currentTarget.getAttribute('data-value');
-    const badgeOne = e.currentTarget.getAttribute('data-key');
+  const onClickReview = (e,badge) => {
+    console.log(e);
+    console.log(badge);
+    if (typeof e === 'object') {
+      const headerOne = e.currentTarget.getAttribute('data-value');
+      const badgeOne = e.currentTarget.getAttribute('data-key');
 
-    if (headerOne === 'communiqué' && badgeOne === 'primary') {
-      dispatch({
-        type: SET_PANE_THREE_PREVIEW_MODE,
-        payload: {
-          isPreviewShow: true,
-          previewHeaderOne: 'assessment',
-          previewHeaderOneBadgeOne: 'communiqué',
-          previewHeaderOneBadgeTwo: 'primary',
-          previewHeaderOneBadgeThree: '',
-          previewInnerHTML:
-            informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary || ''
-        }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      if (headerOne === 'communiqué' && badgeOne === 'primary') {
+       
+      }
+      if (headerOne === 'communiqué' && badgeOne === 'secondary') {
+        dispatch({
+          type: SET_PANE_THREE_PREVIEW_MODE,
+          payload: {
+            isPreviewShow: true,
+            previewHeaderOne: 'assessment',
+            previewHeaderOneBadgeOne: 'communiqué',
+            previewHeaderOneBadgeTwo: 'secondary',
+            previewHeaderOneBadgeThree: '',
+            previewInnerHTML:
+              informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary || ''
+          }
+        });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      }
+      if (headerOne === 'manuscript' && badgeOne === 'primary') {
+        dispatch({
+          type: SET_PANE_THREE_PREVIEW_MODE,
+          payload: {
+            isPreviewShow: true,
+            previewHeaderOne: 'assessment',
+            previewHeaderOneBadgeOne: 'manuscript',
+            previewHeaderOneBadgeTwo: 'primary',
+            previewHeaderOneBadgeThree: '',
+            previewInnerHTML:
+              informationFramework?.assessmentManuscript?.assessmentManuscriptPrimary || ''
+          }
+        });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      }
+      if (headerOne === 'manuscript' && badgeOne === 'secondary') {
+        dispatch({
+          type: SET_PANE_THREE_PREVIEW_MODE,
+          payload: {
+            isPreviewShow: true,
+            previewHeaderOne: 'assessment',
+            previewHeaderOneBadgeOne: 'manuscript',
+            previewHeaderOneBadgeTwo: 'secondary',
+            previewHeaderOneBadgeThree: '',
+            previewInnerHTML:
+              informationFramework?.assessmentManuscript?.assessmentManuscriptSecondary || ''
+          }
+        });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      }
+      if (headerOne === 'preview') {
+        dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
+      }
     }
-    if (headerOne === 'communiqué' && badgeOne === 'secondary') {
-      dispatch({
-        type: SET_PANE_THREE_PREVIEW_MODE,
-        payload: {
-          isPreviewShow: true,
-          previewHeaderOne: 'assessment',
-          previewHeaderOneBadgeOne: 'communiqué',
-          previewHeaderOneBadgeTwo: 'secondary',
-          previewHeaderOneBadgeThree: '',
-          previewInnerHTML:
-            informationFramework?.assessmentCommunique?.assessmentCommuniqueSecondary || ''
-        }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-    }
-    if (headerOne === 'manuscript' && badgeOne === 'primary') {
-      dispatch({
-        type: SET_PANE_THREE_PREVIEW_MODE,
-        payload: {
-          isPreviewShow: true,
-          previewHeaderOne: 'assessment',
-          previewHeaderOneBadgeOne: 'manuscript',
-          previewHeaderOneBadgeTwo: 'primary',
-          previewHeaderOneBadgeThree: '',
-          previewInnerHTML:
-            informationFramework?.assessmentManuscript?.assessmentManuscriptPrimary || ''
-        }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-    }
-    if (headerOne === 'manuscript' && badgeOne === 'secondary') {
-      dispatch({
-        type: SET_PANE_THREE_PREVIEW_MODE,
-        payload: {
-          isPreviewShow: true,
-          previewHeaderOne: 'assessment',
-          previewHeaderOneBadgeOne: 'manuscript',
-          previewHeaderOneBadgeTwo: 'secondary',
-          previewHeaderOneBadgeThree: '',
-          previewInnerHTML:
-            informationFramework?.assessmentManuscript?.assessmentManuscriptSecondary || ''
-        }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-    }
-    if (headerOne === 'preview') {
-      dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
+    if (e === 'communiqué') {
+      if (reviewMode === 'review') {
+        dispatch({
+          type: SET_PANE_THREE_PREVIEW_MODE,
+          payload: {
+            isPreviewShow: true,
+            previewHeaderOne: 'assessment',
+            previewHeaderOneBadgeOne: 'communiqué',
+            previewHeaderOneBadgeTwo: 'primary',
+            previewHeaderOneBadgeThree: '',
+            previewInnerHTML:
+              informationFramework?.assessmentCommunique?.assessmentCommuniquePrimary || ''
+          }
+        });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      } else {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: {
+            isPopUpValue: 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP',
+            popupMode: 'ASSESSMENTCREATE'
+          }
+        });
+      }
     }
   };
   const reviseFramework = (e, selectedBadgeArray) => {
@@ -450,7 +468,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     }
     console.log(badgeName);
     console.log(labelName + '  ' + selectedBadgeName);
-    if (labelName === 'communiqué' && selectedBadgeName === 'primary') {
+    if (labelName === 'communiqué' && selectedBadgeName !== '') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'indexPointer', value: selectedBadgeName }
+      });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: {
