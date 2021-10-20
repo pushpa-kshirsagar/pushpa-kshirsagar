@@ -98,7 +98,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
               textOne: 'negative',
               textTwo: '',
               status: '20'
-            }
+            },
           ]
         }
       ],
@@ -146,6 +146,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
       isListCard: true
     }
   ];
+
 
   const onClickRevise = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');

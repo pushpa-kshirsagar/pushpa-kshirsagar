@@ -76,13 +76,13 @@ const PopUpTextEditor = (props) => {
   };
   const uploadImage = async (file) => {
     let uploadData = await imageUploadMethod(file);
-    console.log('uploadData', uploadData);
     return uploadData;
     // console.log(file.name);
     // let imgUploadData = await ReactS3Client.uploadFile(file, file.name);
     // let res = { success: 1, file: { url: imgUploadData.location } };
     // return res;
   };
+  console.log('props', props);
 
   return (
     <div>

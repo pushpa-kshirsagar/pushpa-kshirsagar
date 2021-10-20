@@ -19,7 +19,8 @@ import {
   SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_ASSESSMENT_AID_FRAMEWORK_STATE,
-  SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE
+  SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE
 } from '../../actionType';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
@@ -309,7 +310,7 @@ const PopUpAssessmentCreate = (props) => {
         selectedList={informationAllocation.assessmentType.assessmentTypeSecondary}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      {/* <PopUpTextField
+      <PopUpTextField
         isActive={isPopUpValue === 'TIMEASSESSMENTPOPUP'}
         label={'time'}
         type={'number'}
@@ -322,8 +323,8 @@ const PopUpAssessmentCreate = (props) => {
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      /> */}
-      {/* <PopUpTextField
+      />
+      <PopUpTextField
         isActive={isPopUpValue === 'SCOREMINIMUMPOPUP'}
         label={'score'}
         labelBadgeOne={'minimum'}
@@ -333,12 +334,12 @@ const PopUpAssessmentCreate = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={''}
-        basicInfo={informationFramework.assessmentScore}
+        basicInfo={informationFramework.assessmentScoreExtremum}
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_SCORE_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      /> */}
-      {/* <PopUpTextField
+      />
+      <PopUpTextField
         isActive={isPopUpValue === 'SCOREMAXIMUMPOPUP'}
         label={'score'}
         labelBadgeOne={'maximum'}
@@ -348,44 +349,50 @@ const PopUpAssessmentCreate = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={''}
-        basicInfo={informationFramework.assessmentScore}
+        basicInfo={informationFramework.assessmentScoreExtremum}
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_SCORE_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      /> */}
+      />
       <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
         headerOneBadgeOne={'communique'}
-        headerOneBadgeTwo={'primary'}
-        basicInfo={informationFramework.assessmentCommunique[indexPointer]}
-        // typeOfSetObject={SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE}
-        defaultSheetValue={
-          (informationFramework?.assessmentCommunique.length > 0 &&
-            informationFramework?.assessmentCommunique[indexPointer]) ||
-          ''
-        }
+        headerOneBadgeTwo={indexPointer}
+        defaultSheetValue={informationFramework.assessmentCommunique[indexPointer - 1]}
         onClickSave={(data) => {
           dispatch({ type: SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE, payload: data });
         }}
-        actualLableValue={'assessmentCommuniquePrimary'}
+        actualLableValue={indexPointer - 1}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-      {/* <PopUpTextEditor
+      <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
         headerOneBadgeOne={'manuscript'}
-        headerOneBadgeTwo={'primary'}
-        basicInfo={informationFramework?.assessmentManuscript}
-        typeOfSetObject={SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE}
-        defaultSheetValue={
-          informationFramework?.assessmentManuscript?.assessmentManuscriptPrimary || ''
-        }
-        actualLableValue={'assessmentManuscriptPrimary'}
+        headerOneBadgeTwo={indexPointer}
+        defaultSheetValue={informationFramework?.assessmentManuscript[indexPointer - 1] || ''}
+        actualLableValue={indexPointer - 1}
+        onClickSave={(data) => {
+          dispatch({ type: SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE, payload: data });
+        }}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      /> */}
+      />
+      <PopUpTextEditor
+        isActive={isPopUpValue === 'ASSESSMENT_SYNOPSIS_TEXTSHEET_POPUP'}
+        headerOne={'assessment'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'synopsis'}
+        headerOneBadgeTwo={indexPointer}
+        defaultSheetValue={informationFramework?.assessmentSynopsis[indexPointer - 1] || ''}
+        actualLableValue={indexPointer - 1}
+        onClickSave={(data) => {
+          dispatch({ type: SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE, payload: data });
+        }}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
       {/* <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_SECONDARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
@@ -428,7 +435,7 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={''}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       /> */}
-      <PopUpTextEditor
+      {/* <PopUpTextEditor
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_SECONDARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
@@ -441,7 +448,7 @@ const PopUpAssessmentCreate = (props) => {
         }
         actualLableValue={'assessmentCommuniqueSecondary'}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
+      /> */}
       <PopUpTextField
         isActive={isPopUpValue === 'ASSOCIATECREATEFEEPOPUP'}
         label={'fee'}
@@ -677,6 +684,86 @@ const PopUpAssessmentCreate = (props) => {
         valueArrState={informationFramework?.assessmentEvaluation}
         isRolePermission
         forceToSelect="assessmentRevise"
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+       <PopUpDropList
+        isActive={isPopUpValue === 'ADMINPROCTORPOPUP'}
+        tag={'assessmentAdministrationProctor'}
+        label={'proctor'}
+        listSelect={[
+          { id: true, name: 'Permitted' },
+          { id: false, name: 'Unpermitted' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+       <PopUpDropList
+        isActive={isPopUpValue === 'ADMINSUPERVISEPOPUP'}
+        tag={'assessmentAdministrationSupervise'}
+        label={'supervise'}
+        listSelect={[
+          { id: true, name: 'Permitted' },
+          { id: false, name: 'Unpermitted' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+       <PopUpDropList
+        isActive={isPopUpValue === 'ADMINTEMPLATEPOPUP'}
+        tag={'assessmentAdministrationTemplate'}
+        label={'template'}
+        listSelect={[
+          { id: true, name: 'Permitted' },
+          { id: false, name: 'Unpermitted' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+       <PopUpDropList
+        isActive={isPopUpValue === 'ADMINVERSIONPOPUP'}
+        tag={'assessmentAdministrationVersion'}
+        label={'version'}
+        listSelect={[
+          { id: 'Fixed', name: 'Fixed' },
+          { id: 'Random', name: 'Random' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>

@@ -17,7 +17,8 @@ import {
   SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE,
   SET_ASSESSMENT_FRAMEWORK_INNER_SINGLE_STATE,
   SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
-  SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE
+  SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
+  SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -290,7 +291,18 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
         ...istate,
         informationFramework: {
           ...istate.informationFramework,
-          assessmentManuscript: action.payload
+          assessmentManuscript: [
+            ...istate.informationFramework.assessmentManuscript,
+            action.payload
+          ]
+        }
+      };
+    case SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assessmentSynopsis: [...istate.informationFramework.assessmentSynopsis, action.payload]
         }
       };
     case SET_ASSESSMENT_SCORE_FRAMEWORK_STATE:

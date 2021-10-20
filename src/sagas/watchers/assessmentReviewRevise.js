@@ -12,15 +12,12 @@ import {
   SET_POPUP_VALUE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   ASSESSMENT_REVIEW_DISTINCT_SAGA,
-  SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SCORE_FRAMEWORK_STATE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   ASSESSMENT_PUBLISH_SAGA,
-  SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
   SET_MIDDLEPANE_STATE,
   RELATED_REVIEWLIST_DISTINCT_DATA,
   ASSESSMENT_INFO_PREVIEW_SAGA,
-  SET_ASSESSMENT_FRAMEWORK_STATE
+  SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE
 } from '../../actionType';
 import {
   ASSESSMENT_REVIEW_INFO_URL,
@@ -227,11 +224,11 @@ function* workerReviewInfoAssessmentSaga(data) {
           }
         });
       }
-      // const communiqueObject = informationFramework?.assessmentCommunique || {
-      //   assessmentCommuniquePrimary: '',
-      //   assessmentCommuniqueSecondary: ''
-      // };
-      // yield put({ type: SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE, payload: communiqueObject });
+      const communiqueObject = informationFramework?.assessmentCommunique || [];
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: { stateName: 'assessmentCommunique', value: communiqueObject }
+      });
       // const scoreObject = informationFramework?.assessmentScore || {
       //   assessmentScoreMaximum: 0,
       //   assessmentScoreMinimum: 0
@@ -242,14 +239,18 @@ function* workerReviewInfoAssessmentSaga(data) {
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentTime', value: timeAssessment }
       });
-      const menuScriptAssessment = informationFramework?.assessmentManuscript || {
-        assessmentManuscriptPrimary: '',
-        assessmentManuscriptSecondary: ''
-      };
+      const menuScriptAssessment = informationFramework?.assessmentManuscript || [];
       yield put({
-        type: SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
-        payload: menuScriptAssessment
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }
       });
+
+      const assessmentSynopsis = informationFramework?.assessmentSynopsis || [];
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: { stateName: 'assessmentSynopsis', value: assessmentSynopsis }
+      });
+
       let sectionArr = [];
       informationFramework?.assessmentSection.map((sec) => {
         let tempArr = [];
@@ -285,12 +286,6 @@ function* workerReviewInfoAssessmentSaga(data) {
           ?.itemFrameworkOneType,
         yield put
       );
-
-      // yield put({
-      //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-      //   payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }
-      // });
-      //}
       // const assessmentSection = userResponse.responseObject[0].informationFramework?.assessmentSection || [];
       //   yield put({
       //     type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,

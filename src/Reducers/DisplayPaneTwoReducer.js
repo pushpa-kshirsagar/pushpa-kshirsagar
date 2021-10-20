@@ -90,7 +90,7 @@ const initialState = {
     noOfItemState: true,
     noOfResponseState: true
   },
-  indexPointer: 0, //used for communiquwe,manyscript
+  indexPointer: 1, //used for communiquwe,manyscript
   associateCountryName: [
     { id: 'ISO-3166-356', name: 'India' },
     { id: 'ISO-3166-124', name: 'Canada' }
