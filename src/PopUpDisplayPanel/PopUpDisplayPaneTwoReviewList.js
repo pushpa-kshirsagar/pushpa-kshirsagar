@@ -67,7 +67,8 @@ import {
   CLEAR_SCALE_REDUCER_STATE,
   CLEAR_CLUSTER_REDUCER_STATE,
   CLEAR_SECTION_REDUCER_STATE,
-  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+  SET_SECTION_REDUCER_STATE
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -1409,6 +1410,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });
+        dispatch({
+          type:SET_SECTION_REDUCER_STATE,
+          payload:relatedReviewListDistinctData[0].sections[selectedTagValue]
+        })
         dispatch({
           type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
           payload: {

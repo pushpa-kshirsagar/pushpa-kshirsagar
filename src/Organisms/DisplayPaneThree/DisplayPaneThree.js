@@ -2970,6 +2970,21 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseAssessmentSectionBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+  };
   return (
     <>
       <div>
@@ -3874,6 +3889,7 @@ export const DisplayPaneThree = () => {
                   // onClickRevise={reviseAssessmentSectionBasicInformation}
                   isImageActive={responseObject?.assessmentSectionPicture}
                   imageOne={responseObject?.assessmentSectionPicture}
+                  onClickRevise={reviseAssessmentSectionBasicInformation}
                 />
               </div>
               <Sections

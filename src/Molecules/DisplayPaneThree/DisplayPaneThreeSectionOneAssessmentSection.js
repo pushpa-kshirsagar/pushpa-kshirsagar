@@ -12,12 +12,12 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
   const dispatch = useDispatch();
   const { responseObject, reviewMode,relatedReviewListPaneThree } = useSelector((state) => state.DisplayPaneThreeReducer);
   
-  const { selectedAssociateInfo, countPage, reviewListDistinctData } = useSelector(
+  const { selectedAssociateInfo, countPage, reviewListDistinctData,relatedReviewListDistinctData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
   );
   const { informationEngagement, informationAllocation, informationSetup } = responseObject;
-  const assessmentSectionInfo=useSelector((state)=>state.SectionCreateReducer);
-const{relatedReviewListDistinctData} = useSelector((state) => state.DisplayPaneTwoReducer);
+  const {sectionInformation} = useSelector((state)=>state.SectionCreateReducer);
+
   const frameworkAll = [
     {
       id: 'administration',
@@ -282,7 +282,7 @@ const{relatedReviewListDistinctData} = useSelector((state) => state.DisplayPaneT
     if (labelName === 'items' && selectedBadgeName === 'distinct') {
 
       console.log('item CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
-      // console.log('assessmentSectionInfo',assessmentSectionInfo);
+      console.log('assessmentSectionInfo',sectionInformation);
       // console.log('relatedReviewListDistinctData',relatedReviewListDistinctData);
       let requestObect = makeItemObj(selectedAssociateInfo, 'active', -1, -1);
       let revisedGroupObject = {
@@ -292,10 +292,10 @@ const{relatedReviewListDistinctData} = useSelector((state) => state.DisplayPaneT
         };
         
       let existingItemId =[]
-        // relatedReviewListPaneThree &&
-        // relatedReviewListPaneThree[0].item.map((val) => {
-        //   return val.id;
-        // });
+      // relatedReviewListDistinctData &&
+      // relatedReviewListDistinctData.section[sele].item.map((val) => {
+      //      return val.id;
+      //    });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assessmentSectionItemRevise' }
@@ -320,11 +320,84 @@ const{relatedReviewListDistinctData} = useSelector((state) => state.DisplayPaneT
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }
+    if (badgeName === 'calculator' && selectedBadgeName === 'permission') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_CAL_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (badgeName === 'calculator' && selectedBadgeName === 'type') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_CALCULATOR_TYPE_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (badgeName === 'spredsheet' && selectedBadgeName === 'permission') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_SHEET_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (badgeName === 'spredsheet' && selectedBadgeName === 'type') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_SPREADSHEET_TYPE_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (badgeName === 'textsheet' && selectedBadgeName === 'permission') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_TEXT_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (badgeName === 'textsheet' && selectedBadgeName === 'type') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'AID_TEXTSHEET_TYPE_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if(labelName==='evaluation'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'EVALUATION_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if(labelName==='administration' && selectedBadgeName==='repeat'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SECTION_REPEAT_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if(labelName==='administration' && selectedBadgeName==='reset'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SECTION_RESET_POPUP', popupMode: 'SECTIONCREATE' }
+      });      
+    }
+    if(labelName==='administration' && selectedBadgeName==='shuffle'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SECTION_SHUFFLE_POPUP', popupMode: 'SECTIONCREATE' }
+      });      
+    }
+    if(labelName==='score'&&selectedBadgeName==='maximum'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SCOREMAXIMUMPOPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if(labelName==='score'&&selectedBadgeName==='minimum'){
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SCOREMINIMUMPOPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
   };
   
   const onClickReview = (e) => {
     const headerOne = e.currentTarget.getAttribute('data-value');
     const badgeOne = e.currentTarget.getAttribute('data-key');
+    
     if (headerOne === 'preview') {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
