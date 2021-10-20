@@ -337,13 +337,33 @@ function* workerReviewInfoAssessmentSecSaga(data) {
           value: assessmentInfo.informationFramework.assessmentScale
         }
       });
+      let sectionArr = [];
+      assessmentInfo?.informationFramework?.assessmentSection.map((sec) => {
+        let tempArr = [];
+        // let tempArr = sec.assessmentSectionItemDistinct.map((ob) => ob.itemId))
+        for (let i = 0; i < sec.assessmentSectionItemDistinct.length; i++) {
+          tempArr.push(sec.assessmentSectionItemDistinct[i].itemId);
+        }
+        console.log('tempArr', tempArr);
+        let reviseObj = { ...sec, assessmentSectionItemDistinct: tempArr };
+        console.log('reviseObj', reviseObj);
+        sectionArr.push(reviseObj);
+      });
+      console.log('sectionArr', sectionArr);
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: { stateName: 'assessmentSection', value: sectionArr }
+      });
+
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: {
           stateName: 'assessmentSection',
-          value: assessmentInfo.informationFramework.assessmentSection
+          value: sectionArr
+          //value: assessmentInfo.informationFramework.assessmentSection
         }
       });
+
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: {

@@ -208,7 +208,9 @@ export const DisplayPaneThree = () => {
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
     relatedReviewListDistinctData,
-    scanCount
+    scanCount,
+    selectedTagsArray,
+    unselectedTagsArray,isSelectActive
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
@@ -216,6 +218,7 @@ export const DisplayPaneThree = () => {
   const clusterInfo = useSelector((state) => state.ClusterCreateReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+  const aseessmentSection=useSelector((state)=>state.SectionCreateReducer);
   const { informationBasic, assessee } = responseObject;
   const rightPaneSectionsAssessee = [
     {
@@ -1993,7 +1996,40 @@ export const DisplayPaneThree = () => {
           selectedSector: selectedTagValue
         }
       });
-    } else {
+    }
+    else if(headerOneBadgeOne==='section'&&headerOne==='assessments'){
+      // console.log('selectedTagsArray',selectedTagsArray);
+      // console.log('isSelectActive',isSelectActive);
+      // console.log('unselectedTagsArray',unselectedTagsArray);      
+      let assessemntItemDistinct=aseessmentSection.sectionInformation.assessmentSectionItemDistinct;
+      assessemntItemDistinct=[...assessemntItemDistinct,...selectedTagsArray];
+      let id = relatedReviewListDistinctData[0].id;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessment: {
+          id,
+          informationFramework: {
+            assessmentSectionItemDistinct:  assessemntItemDistinct
+          }
+        }
+      };
+      console.log('ASSESSMENT REVISE ===', reqBody);
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assessment',
+          reqBody,
+          createMode,
+          assessmentSector:'section',
+          //selectedSector:selectedTagValue
+        }
+      });
+    }
+     else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
     }
     setIsShowReviseIcon(true);
@@ -2933,6 +2969,21 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseAssessmentSectionBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+  };
   return (
     <>
       <div>
@@ -3837,6 +3888,7 @@ export const DisplayPaneThree = () => {
                   // onClickRevise={reviseAssessmentSectionBasicInformation}
                   isImageActive={responseObject?.assessmentSectionPicture}
                   imageOne={responseObject?.assessmentSectionPicture}
+                  onClickRevise={reviseAssessmentSectionBasicInformation}
                 />
               </div>
               <Sections

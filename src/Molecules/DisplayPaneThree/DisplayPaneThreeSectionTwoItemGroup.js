@@ -98,7 +98,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
               textOne: 'negative',
               textTwo: '',
               status: '20'
-            },
+            }
           ]
         }
       ],
@@ -147,7 +147,6 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
     }
   ];
 
-
   const onClickRevise = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
@@ -162,12 +161,12 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
       };
       let existingItemId =
         relatedReviewListPaneThree &&
-        relatedReviewListPaneThree.item.map((val) => {
+        relatedReviewListPaneThree[0].item.map((val) => {
           return val.id;
         });
       dispatch({
         type: FILTERMODE,
-        payload: { FilterMode: 'itemGroupItemeRevise' }
+        payload: { FilterMode: 'assessmentSectionItemRevise' }
       });
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
