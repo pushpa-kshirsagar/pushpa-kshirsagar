@@ -207,9 +207,12 @@ export const DisplayPaneThree = () => {
     middlePaneHeader,
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
+    relatedReviewListDistinctData,
     scanCount
   } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
+  const scaleInfo = useSelector((state) => state.ScaleCreateReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { informationBasic, assessee } = responseObject;
@@ -835,7 +838,7 @@ export const DisplayPaneThree = () => {
     setIsShowReviseIcon(true);
   };
   const onClickReviseFinish = () => {
-    console.log('ON CLICK FINISH ICON', assesseeInfo.informationBasic);
+    console.log('ON CLICK FINISH ICON');
     if (
       headerOneBadgeOne === 'information' &&
       (headerOne === 'assessee' || headerOne === 'administrator' || headerOne === 'manager')
@@ -1933,6 +1936,34 @@ export const DisplayPaneThree = () => {
           payload: { reqBody: setupObj }
         });
       }
+    } else if (headerOneBadgeOne === 'scale' && headerOne === 'assessments') {
+      let scaleObj = assessmentInfo.informationFramework.assessmentScale;
+      scaleObj[selectedTagValue] = scaleInfo.scaleInformation;
+      let id = relatedReviewListDistinctData[0].id;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessment: {
+          id,
+          informationFramework: {
+            assessmentScale: scaleObj
+          }
+        }
+      };
+      console.log('ASSESSMENT REVISE ===', reqBody);
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assessment',
+          reqBody,
+          createMode,
+          assessmentSector:'scale',
+          selectedSector:selectedTagValue
+        }
+      });
     } else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
     }
@@ -2843,6 +2874,21 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseAssessmentScaleBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SCALECREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'SCALECREATE' }
+      });
+    }
+  };
   console.log('reviewMode', reviewMode);
   return (
     <>
@@ -3706,6 +3752,7 @@ export const DisplayPaneThree = () => {
                   mode={reviewMode}
                   isImageActive={responseObject?.assessmentScaleOnePicture}
                   imageOne={responseObject?.assessmentScaleOnePicture}
+                  onClickRevise={reviseAssessmentScaleBasicInformation}
                 />
               </div>
               <Sections

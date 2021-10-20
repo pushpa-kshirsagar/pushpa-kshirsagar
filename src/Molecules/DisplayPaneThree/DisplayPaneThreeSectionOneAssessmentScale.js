@@ -31,6 +31,24 @@ const DisplayPaneThreeSectionOneAssessmentScale = () => {
     }
   ];
 
+  const onClickRevise = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('labelName', labelName);
+    console.log('selectedBadgeName', selectedBadgeName);
+    if (labelName === 'weightage') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'WEIGTAGEPOPUP', popupMode: 'SCALECREATE' }
+      });
+    }
+    if (labelName === 'score') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'SCOREPOPUP', popupMode: 'SCALECREATE' }
+      });
+    }
+  };
   return (
     <div
       style={{
@@ -51,7 +69,11 @@ const DisplayPaneThreeSectionOneAssessmentScale = () => {
                       mode={reviewMode}
                     />
                   ) : (
-                    <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianInformation
+                      accordianObject={ob}
+                      mode={reviewMode}
+                      onClickRevise={onClickRevise}
+                    />
                   )}
                 </div>
               );

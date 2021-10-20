@@ -105,8 +105,9 @@ const initialState = {
     assessmentTemplate: [],
     assessmentSection: [
       {
-        assessmentSectionName: null,
-        assessmentSectionDescription: null,
+        assessmentSectionName: 'Section',
+        assessmentSectionVerification: false,
+        assessmentSectionDescription: 'Generic',
         assessmentSectionAdministrationRepeat: false,
         assessmentSectionAdministrationReset: false,
         assessmentSectionAdministrationShuffle: false,

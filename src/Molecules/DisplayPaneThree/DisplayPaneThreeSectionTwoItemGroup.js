@@ -98,7 +98,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
               textOne: 'negative',
               textTwo: '',
               status: '20'
-            },
+            }
           ]
         }
       ],
@@ -147,7 +147,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
     }
   ];
 
-  const onclickReviseItem = (e) => {
+  const onClickRevise = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     if (labelName === 'items' && selectedBadgeName === 'distinct') {
@@ -187,16 +187,6 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
     }
   };
 
-  const onClickReviseCluster = (e) => {
-    const labelName = e.currentTarget.getAttribute('data-value');
-    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-  };
-
-  const onClickReviseScale = (e) => {
-    const labelName = e.currentTarget.getAttribute('data-value');
-    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-  };
-
   return (
     <div
       style={{
@@ -212,14 +202,14 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
                 <div key={ob.id}>
                   {ob.isListCard ? (
                     <DisplayPanelAccordianReviewListOne
-                      onClickRevise={onClickReviseCluster}
+                      onClickRevise={onClickRevise}
                       className=""
                       accordianObject={ob}
                       mode={reviewMode}
                     />
                   ) : (
                     <DisplayPanelAccordianInformation
-                      onClickRevise={onClickReviseCluster}
+                      onClickRevise={onClickRevise}
                       accordianObject={ob}
                       mode={reviewMode}
                     />

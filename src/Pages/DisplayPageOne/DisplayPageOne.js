@@ -159,7 +159,7 @@ const DisplayPageOne = () => {
 
   const popupAllClose = () => {
     dispatch({ type: CLEAR_ASSESSEE_INFO });
-    dispatch({ type: CLEAR_ASSESSMENT_INFO });
+    // dispatch({ type: CLEAR_ASSESSMENT_INFO });
     dispatch({ type: POPUP_CLOSE });
     dispatch({ type: CLEAR_ASSOCIATE_INFO });
     dispatch({ type: CLEAR_ASSIGNMENT_INFO });

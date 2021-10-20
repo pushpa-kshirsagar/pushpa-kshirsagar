@@ -14,7 +14,7 @@ import {
 
 const PopUpScaleCreate = (props) => {
   const { headerOne } = props;
-  const { isPopUpValue,selectedTagValue } = useSelector((state) => state.PopUpReducer);
+  const { isPopUpValue, selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const { scaleInformation } = useSelector((state) => state.ScaleCreateReducer);
   console.log(scaleInformation);
   const { reviewMode, responseObject, statusPopUpValue } = useSelector(
@@ -72,21 +72,6 @@ const PopUpScaleCreate = (props) => {
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'information'}
         basicInfo={scaleInformation}
-        nextPopUpValue={'WEIGTAGEPOPUP'}
-        typeOfSetObject={SET_SCALE_REDUCER_STATE}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
-      <PopUpTextField
-        isActive={isPopUpValue === 'WEIGTAGEPOPUP'}
-        label={'weightage'}
-        labelBadgeOne={''}
-        type={'number'}
-        actualLableValue={'assessmentScaleOneWeightage'}
-        headerPanelColour={'genericOne'}
-        headerOne={headerOne}
-        headerOneBadgeOne={'information'}
-        headerOneBadgeTwo={''}
-        basicInfo={scaleInformation}
         nextPopUpValue={'CONFIRMATIONPOPUP'}
         typeOfSetObject={SET_SCALE_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -106,6 +91,36 @@ const PopUpScaleCreate = (props) => {
         headerOneBadgeOne={''}
         headerOneBadgeTwo={'create'}
         onClickYes={onClickYes}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'WEIGTAGEPOPUP'}
+        label={'weightage'}
+        labelBadgeOne={''}
+        type={'number'}
+        actualLableValue={'assessmentScaleOneWeightage'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={scaleInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_SCALE_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'SCOREPOPUP'}
+        label={'score'}
+        labelBadgeOne={''}
+        type={'number'}
+        actualLableValue={'assessmentScaleOneScore'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={scaleInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_SCALE_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
   );

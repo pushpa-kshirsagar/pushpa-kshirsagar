@@ -61,7 +61,12 @@ import {
   SET_DISPLAY_PANE_THREE_STATE,
   GET_ASSESSEE_REPORT_SAGA,
   GET_ASSESSMENT_SEC_INFO_SAGA,
-  SET_RELATED_REQUEST_OBJECT
+  SET_RELATED_REQUEST_OBJECT,
+  SET_SCALE_REDUCER_STATE,
+  SET_CLUSTER_REDUCER_STATE,
+  CLEAR_SCALE_REDUCER_STATE,
+  CLEAR_CLUSTER_REDUCER_STATE,
+  CLEAR_SECTION_REDUCER_STATE
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -1417,6 +1422,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });
+        dispatch({
+          type: SET_SCALE_REDUCER_STATE,
+          payload: relatedReviewListDistinctData[0].scales[selectedTagValue]
+        });
         dispatch({ type: LOADER_STOP });
       }
       if (typeOfMiddlePaneList === 'assessmentclustersReviewList') {
@@ -1430,6 +1439,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             responseObject: relatedReviewListDistinctData[0].clusters[selectedTagValue],
             reviewMode: isReviseMode ? 'revise' : ''
           }
+        });
+        dispatch({
+          type: SET_CLUSTER_REDUCER_STATE,
+          payload: relatedReviewListDistinctData[0].clusters[selectedTagValue]
         });
         dispatch({ type: LOADER_STOP });
       }
@@ -2641,6 +2654,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       popupHeaderOneBadgeTwo === 'create' &&
       popupHeaderOne === 'sections'
     ) {
+      dispatch({ type: CLEAR_SECTION_REDUCER_STATE });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SECTIONCREATE' }
@@ -2650,6 +2664,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       popupHeaderOneBadgeTwo === 'create' &&
       popupHeaderOne === 'clusters'
     ) {
+      dispatch({ type: CLEAR_CLUSTER_REDUCER_STATE });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'CLUSTERCREATE' }
@@ -2659,6 +2674,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       popupHeaderOneBadgeTwo === 'create' &&
       popupHeaderOne === 'scales'
     ) {
+      dispatch({ type: CLEAR_SCALE_REDUCER_STATE });
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SCALECREATE' }

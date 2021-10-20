@@ -44,8 +44,8 @@ const PopUpItemFramework = (props) => {
   //   itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
   // const itemFrameworkOne = isAssessmentPreviewShow?informationFramework?.assessmentSection[currentItemIndex]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne:
   // itemInformation?.informationFramework.itemFrameworkOne;
-  console.log(itemFrameworkOneResponseChoice);
-  console.log(itemFrameworkOne);
+  // console.log(itemFrameworkOneResponseChoice);
+  // console.log(itemFrameworkOne);
 
   // }else
   // {

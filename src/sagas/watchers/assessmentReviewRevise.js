@@ -1,4 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
+import { setAssessmentResponseToReducerObj } from '../../Actions/AssessmentModuleAction';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
@@ -17,7 +18,8 @@ import {
   SET_ASSESSMENT_MANUSCRIPT_FRAMEWORK_STATE,
   SET_MIDDLEPANE_STATE,
   RELATED_REVIEWLIST_DISTINCT_DATA,
-  ASSESSMENT_INFO_PREVIEW_SAGA
+  ASSESSMENT_INFO_PREVIEW_SAGA,
+  SET_ASSESSMENT_FRAMEWORK_STATE
 } from '../../actionType';
 import {
   ASSESSMENT_REVIEW_INFO_URL,
@@ -63,10 +65,14 @@ function* workerReviewInfoAssessmentSaga(data) {
         }
       });
       // if (isReviseMode) {
-      const { informationAllocation, informationFramework } = userResponse.responseObject[0];
+      const {
+        informationBasic,
+        informationAllocation,
+        informationFramework
+      } = userResponse.responseObject[0];
       yield put({
         type: SET_ASSESSMENT_BASIC_REDUCER_STATE,
-        payload: userResponse.responseObject[0].informationBasic
+        payload: informationBasic
       });
       if (
         informationAllocation &&
@@ -220,26 +226,22 @@ function* workerReviewInfoAssessmentSaga(data) {
           }
         });
       }
-      const communiqueObject = informationFramework?.assessmentCommunique || {
-        assessmentCommuniquePrimary: '',
-        assessmentCommuniqueSecondary: ''
-      };
-      yield put({ type: SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE, payload: communiqueObject });
-      const scoreObject = informationFramework?.assessmentScore || {
-        assessmentScoreMaximum: 0,
-        assessmentScoreMinimum: 0
-      };
-      yield put({ type: SET_ASSESSMENT_SCORE_FRAMEWORK_STATE, payload: scoreObject });
+      // const communiqueObject = informationFramework?.assessmentCommunique || {
+      //   assessmentCommuniquePrimary: '',
+      //   assessmentCommuniqueSecondary: ''
+      // };
+      // yield put({ type: SET_ASSESSMENT_COMMUNIQUE_FRAMEWORK_STATE, payload: communiqueObject });
+      // const scoreObject = informationFramework?.assessmentScore || {
+      //   assessmentScoreMaximum: 0,
+      //   assessmentScoreMinimum: 0
+      // };
+      // yield put({ type: SET_ASSESSMENT_SCORE_FRAMEWORK_STATE, payload: scoreObject });
       const timeAssessment = informationFramework?.assessmentTime || 0;
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentTime', value: timeAssessment }
       });
       const itemAssessment = informationFramework?.assessmentItem || [];
-      // yield put({
-      //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-      //   payload: { stateName: 'assessmentItem', value: itemAssessment }
-      // });
       const menuScriptAssessment = informationFramework?.assessmentManuscript || {
         assessmentManuscriptPrimary: '',
         assessmentManuscriptSecondary: ''
@@ -258,17 +260,6 @@ function* workerReviewInfoAssessmentSaga(data) {
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentScale', value: assessmentScale }
       });
-
-      // yield put({
-      //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-      //   payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }
-      // });
-      //}
-      // const assessmentSection = userResponse.responseObject[0].informationFramework?.assessmentSection || [];
-      //   yield put({
-      //     type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-      //     payload: { stateName: 'assessmentSection', value: assessmentSection }
-      //   });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
@@ -308,6 +299,28 @@ function* workerReviewInfoAssessmentSecSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       let assessmentInfo = userResponse.responseObject[0];
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: {
+          stateName: 'assessmentScale',
+          value: assessmentInfo.informationFramework.assessmentScale
+        }
+      });
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: {
+          stateName: 'assessmentSection',
+          value: assessmentInfo.informationFramework.assessmentSection
+        }
+      });
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: {
+          stateName: 'assessmentCluster',
+          value: assessmentInfo.informationFramework.assessmentCluster
+        }
+      });
+      let BadgeOne = 'scales';
       let reviseResponseObj = {
         countTotal: assessmentInfo?.informationFramework?.assessmentScale?.length || 0,
         responseObject: [
@@ -321,9 +334,10 @@ function* workerReviewInfoAssessmentSecSaga(data) {
         ]
       };
       if (data.payload.typeOfMiddlePaneList === 'assessmentsectionsReviewList') {
-        let array = assessmentInfo?.informationFramework?.assessmentSection.splice(1);
+        let array = assessmentInfo?.informationFramework?.assessmentSection || [];
+        BadgeOne = 'sections';
         reviseResponseObj = {
-          countTotal: array.length || 0,
+          countTotal: array?.length || 0,
           responseObject: [
             {
               sections: array || [],
@@ -336,6 +350,7 @@ function* workerReviewInfoAssessmentSecSaga(data) {
         };
       }
       if (data.payload.typeOfMiddlePaneList === 'assessmentclustersReviewList') {
+        BadgeOne = 'clusters';
         reviseResponseObj = {
           countTotal: assessmentInfo?.informationFramework?.assessmentCluster?.length || 0,
           responseObject: [
@@ -349,7 +364,6 @@ function* workerReviewInfoAssessmentSecSaga(data) {
           ]
         };
       }
-
       yield put({
         type: RELATED_REVIEWLIST_DISTINCT_DATA,
         payload: reviseResponseObj.responseObject
@@ -358,7 +372,7 @@ function* workerReviewInfoAssessmentSecSaga(data) {
         type: SET_MIDDLEPANE_STATE,
         payload: {
           middlePaneHeader: 'assessment',
-          middlePaneHeaderBadgeOne: 'scales',
+          middlePaneHeaderBadgeOne: BadgeOne,
           middlePaneHeaderBadgeTwo: 'distinct',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
@@ -389,38 +403,56 @@ function* workerReviseInfoAssessmentSaga(data) {
   try {
     const userResponse = yield call(assessmentReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
-      const { createMode } = data.payload;
-      if (!data.payload.hideRightpane) {
-        yield put({
-          type: SET_DISPLAY_PANE_THREE_STATE,
-          payload: {
-            headerOne: 'assessment',
-            headerOneBadgeOne: 'information',
-            headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-            responseObject: userResponse.responseObject[0],
-            createMode
-          }
-        });
-      }
-      if (Store.getState().DisplayPaneTwoReducer.typeOfMiddlePaneList) {
-        yield put({
-          type: SET_DISPLAY_TWO_SINGLE_STATE,
-          payload: { stateName: 'reviewListDistinctData', value: [] }
-        });
-        yield put({
-          type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
-          payload: {
-            HeaderOne: 'assessments',
-            request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
-            BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
-            BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
-            BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
-            middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer.middlePaneSelectedValue,
-            isMiddlePaneList: true
-          }
-        });
+      const { createMode, assessmentSector = '', selectedSector = '' } = data.payload;
+      if (assessmentSector != '') {
+        if (!data.payload.hideRightpane) {
+          yield put({
+            type: SET_DISPLAY_PANE_THREE_STATE,
+            payload: {
+              headerOne: 'assessment',
+              headerOneBadgeOne: 'information',
+              headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+              responseObject: userResponse.responseObject[0],
+              createMode
+            }
+          });
+        }
+        if (Store.getState().DisplayPaneTwoReducer.typeOfMiddlePaneList) {
+          yield put({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'reviewListDistinctData', value: [] }
+          });
+          yield put({
+            type: ASSESSMENT_REVIEW_DISTINCT_SAGA,
+            payload: {
+              HeaderOne: 'assessments',
+              request: Store.getState().DisplayPaneTwoReducer.reviewListReqObj,
+              BadgeOne: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeOne,
+              BadgeTwo: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeTwo,
+              BadgeThree: Store.getState().DisplayPaneTwoReducer.middlePaneHeaderBadgeThree,
+              middlePaneSelectedValue: Store.getState().DisplayPaneTwoReducer
+                .middlePaneSelectedValue,
+              isMiddlePaneList: true
+            }
+          });
+        } else {
+          yield put({ type: LOADER_STOP });
+        }
       } else {
-        yield put({ type: LOADER_STOP });
+        if (assessmentSector === 'scale') {
+          yield put({
+            type: SET_DISPLAY_PANE_THREE_STATE,
+            payload: {
+              headerOne: 'assessments',
+              headerOneBadgeOne: 'scale',
+              headerOneBadgeTwo: 'information',
+              headerOneBadgeThree: 'key',
+              responseObject:
+                userResponse.responseObject[0].informationFramework.assessmentScale[selectedSector],
+              reviewMode: createMode
+            }
+          });
+        }
       }
     } else {
       console.log('loading end');
