@@ -5,12 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import { SET_MOBILE_PANE_STATE, SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
+import { FILTERMODE, GET_ALLOCATE_ITEM, LOADER_START, SET_DISPLAY_TWO_SINGLE_STATE, SET_MOBILE_PANE_STATE, SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
+import { makeItemObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssessmentSection = () => {
   const dispatch = useDispatch();
-  const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { responseObject, reviewMode,relatedReviewListPaneThree } = useSelector((state) => state.DisplayPaneThreeReducer);
+  
+  const { selectedAssociateInfo, countPage, reviewListDistinctData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const { informationEngagement, informationAllocation, informationSetup } = responseObject;
+  const assessmentSectionInfo=useSelector((state)=>state.SectionCreateReducer);
   const frameworkAll = [
     {
       id: 'administration',
@@ -259,6 +265,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
     }
   ];
   const reviseFramework = (e, selectedBadgeArray) => {
+    debugger;
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
 
@@ -270,6 +277,40 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           badgeName = badgeName + element.labelTextTwoBadge;
         });
       }
+    }
+    if (labelName === 'items' && selectedBadgeName === 'distinct') {
+      console.log('item CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+      let requestObect = makeItemObj(selectedAssociateInfo, 'active', -1, -1);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assessmentSectionName: responseObject.assessmentSectionName,
+        assessmentSectionDescription: responseObject.assessmentSectionDescription,
+        //itemGroupStatus: responseObject.informationEngagement.itemGroupStatus
+      };
+      let existingItemId =[]
+        // relatedReviewListPaneThree &&
+        // relatedReviewListPaneThree[0].item.map((val) => {
+        //   return val.id;
+        // });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assessmentSectionItemRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ALLOCATE_ITEM,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingItemId: existingItemId,
+          typeOfMiddlePaneList: 'assessmentSectionItemDistinctReviewList'
+        }
+      });
     }
     if (labelName === 'preview') {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });

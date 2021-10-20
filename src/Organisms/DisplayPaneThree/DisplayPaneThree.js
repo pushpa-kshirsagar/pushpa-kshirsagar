@@ -215,6 +215,7 @@ export const DisplayPaneThree = () => {
   const scaleInfo = useSelector((state) => state.ScaleCreateReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+  const aseessmentSection=useSelector((state)=>state.ScaleCreateReducer)
   const { informationBasic, assessee } = responseObject;
   const rightPaneSectionsAssessee = [
     {
@@ -838,6 +839,7 @@ export const DisplayPaneThree = () => {
     setIsShowReviseIcon(true);
   };
   const onClickReviseFinish = () => {
+    debugger;
     console.log('ON CLICK FINISH ICON');
     if (
       headerOneBadgeOne === 'information' &&
@@ -1964,7 +1966,39 @@ export const DisplayPaneThree = () => {
           selectedSector:selectedTagValue
         }
       });
-    } else {
+    }
+    else if(headerOneBadgeOne==='section'&&headerOne==='aseeseement'){
+      let scaleObj = assessmentInfo.informationFramework.assessmentScale;
+      let assessemntItemDistinct=aseessmentSection?.
+      scaleObj[selectedTagValue] = scaleInfo.scaleInformation;
+      let id = relatedReviewListDistinctData[0].id;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessment: {
+          id,
+          informationFramework: {
+            assessmentScale: scaleObj
+          }
+        }
+      };
+      console.log('ASSESSMENT REVISE ===', reqBody);
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assessment',
+          reqBody,
+          createMode,
+          assessmentSector:'scale',
+          selectedSector:selectedTagValue
+        }
+      });
+
+    }
+     else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
     }
     setIsShowReviseIcon(true);

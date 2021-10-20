@@ -161,7 +161,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
       };
       let existingItemId =
         relatedReviewListPaneThree &&
-        relatedReviewListPaneThree.item.map((val) => {
+        relatedReviewListPaneThree[0].item.map((val) => {
           return val.id;
         });
       dispatch({
