@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import { SET_POPUP_VALUE } from '../../actionType';
+import { SET_MOBILE_PANE_STATE, SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, SET_POPUP_VALUE } from '../../actionType';
 
 const DisplayPaneThreeSectionOneAssessmentSection = () => {
   const dispatch = useDispatch();
@@ -258,6 +258,33 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       IconOne: null
     }
   ];
+  const reviseFramework = (e, selectedBadgeArray) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+
+    //console.log(selectedBadgeArray);
+    let badgeName = '';
+    if (selectedBadgeArray) {
+      if (selectedBadgeArray.length > 0) {
+        selectedBadgeArray.forEach((element) => {
+          badgeName = badgeName + element.labelTextTwoBadge;
+        });
+      }
+    }
+    if (labelName === 'preview') {
+      dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
+    }
+  };
+  
+  const onClickReview = (e) => {
+    const headerOne = e.currentTarget.getAttribute('data-value');
+    const badgeOne = e.currentTarget.getAttribute('data-key');
+    if (headerOne === 'preview') {
+      dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
+    }
+  };
 
   return (
     <div
@@ -279,7 +306,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
                       mode={reviewMode}
                     />
                   ) : (
-                    <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
+                    <DisplayPanelAccordianInformation
+                     accordianObject={ob}
+                      mode={reviewMode}
+                      onClickReview={onClickReview}
+                      onClickRevise={reviseFramework} />
                   )}
                 </div>
               );

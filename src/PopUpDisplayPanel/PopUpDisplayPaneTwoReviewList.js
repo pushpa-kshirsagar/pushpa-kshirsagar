@@ -62,11 +62,15 @@ import {
   GET_ASSESSEE_REPORT_SAGA,
   GET_ASSESSMENT_SEC_INFO_SAGA,
   SET_RELATED_REQUEST_OBJECT,
+<<<<<<< HEAD
   SET_SCALE_REDUCER_STATE,
   SET_CLUSTER_REDUCER_STATE,
   CLEAR_SCALE_REDUCER_STATE,
   CLEAR_CLUSTER_REDUCER_STATE,
   CLEAR_SECTION_REDUCER_STATE
+=======
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE
+>>>>>>> 579051754be7d43f695a1bb5c2ce1de0498e20c6
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -1408,6 +1412,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });
+        dispatch({
+          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          payload: { stateName: 'assessmentSectionItemDistinctRevise', value: relatedReviewListDistinctData[0].sections[selectedTagValue] }
+        })
         dispatch({ type: LOADER_STOP });
       }
       if (typeOfMiddlePaneList === 'assessmentscalesReviewList') {

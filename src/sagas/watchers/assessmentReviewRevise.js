@@ -1,5 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { setAssessmentResponseToReducerObj } from '../../Actions/AssessmentModuleAction';
+import { setItemTypeConfigState } from '../../Actions/GenericActions';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
@@ -260,6 +261,22 @@ function* workerReviewInfoAssessmentSaga(data) {
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentScale', value: assessmentScale }
       });
+      yield put({
+        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+        payload: { stateName: 'assessmentSectionItemDistinctRevise', value: assessmentSection[0].assessmentSectionItemDistinct[0] }
+      });
+      setItemTypeConfigState(assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne?.itemFrameworkOneType,yield put);
+
+      // yield put({
+      //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+      //   payload: { stateName: 'assessmentManuscript', value: menuScriptAssessment }
+      // });
+      //}
+      // const assessmentSection = userResponse.responseObject[0].informationFramework?.assessmentSection || [];
+      //   yield put({
+      //     type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+      //     payload: { stateName: 'assessmentSection', value: assessmentSection }
+      //   });
     } else {
       yield put({
         type: SET_POPUP_VALUE,
