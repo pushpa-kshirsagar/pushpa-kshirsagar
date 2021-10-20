@@ -208,14 +208,16 @@ export const DisplayPaneThree = () => {
     middlePaneHeaderBadgeOne,
     middlePaneHeaderBadgeTwo,
     relatedReviewListDistinctData,
-    scanCount
+    scanCount,
+    selectedTagsArray,
+    unselectedTagsArray,isSelectActive
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const scaleInfo = useSelector((state) => state.ScaleCreateReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const aseessmentSection=useSelector((state)=>state.ScaleCreateReducer)
+  const aseessmentSection=useSelector((state)=>state.SectionCreateReducer);
   const { informationBasic, assessee } = responseObject;
   const rightPaneSectionsAssessee = [
     {
@@ -1967,10 +1969,12 @@ export const DisplayPaneThree = () => {
         }
       });
     }
-    else if(headerOneBadgeOne==='section'&&headerOne==='aseeseement'){
-      let scaleObj = assessmentInfo.informationFramework.assessmentScale;
-      let assessemntItemDistinct=aseessmentSection?.
-      scaleObj[selectedTagValue] = scaleInfo.scaleInformation;
+    else if(headerOneBadgeOne==='section'&&headerOne==='assessments'){
+      // console.log('selectedTagsArray',selectedTagsArray);
+      // console.log('isSelectActive',isSelectActive);
+      // console.log('unselectedTagsArray',unselectedTagsArray);      
+      let assessemntItemDistinct=aseessmentSection.sectionInformation.assessmentSectionItemDistinct;
+      assessemntItemDistinct=[...assessemntItemDistinct,...selectedTagsArray];
       let id = relatedReviewListDistinctData[0].id;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -1979,7 +1983,7 @@ export const DisplayPaneThree = () => {
         assessment: {
           id,
           informationFramework: {
-            assessmentScale: scaleObj
+            assessmentSectionItemDistinct:  assessemntItemDistinct
           }
         }
       };
@@ -1992,11 +1996,10 @@ export const DisplayPaneThree = () => {
           headerOne: 'assessment',
           reqBody,
           createMode,
-          assessmentSector:'scale',
-          selectedSector:selectedTagValue
+          assessmentSector:'section',
+          //selectedSector:selectedTagValue
         }
       });
-
     }
      else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });

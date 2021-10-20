@@ -17,6 +17,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
   );
   const { informationEngagement, informationAllocation, informationSetup } = responseObject;
   const assessmentSectionInfo=useSelector((state)=>state.SectionCreateReducer);
+const{relatedReviewListDistinctData} = useSelector((state) => state.DisplayPaneTwoReducer);
   const frameworkAll = [
     {
       id: 'administration',
@@ -279,14 +280,17 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       }
     }
     if (labelName === 'items' && selectedBadgeName === 'distinct') {
+
       console.log('item CLICK :::::::>>>>>>>', relatedReviewListPaneThree);
+      // console.log('assessmentSectionInfo',assessmentSectionInfo);
+      // console.log('relatedReviewListDistinctData',relatedReviewListDistinctData);
       let requestObect = makeItemObj(selectedAssociateInfo, 'active', -1, -1);
       let revisedGroupObject = {
-        id: responseObject.id,
+        id: relatedReviewListDistinctData[0].id,
         assessmentSectionName: responseObject.assessmentSectionName,
         assessmentSectionDescription: responseObject.assessmentSectionDescription,
-        //itemGroupStatus: responseObject.informationEngagement.itemGroupStatus
-      };
+        };
+        
       let existingItemId =[]
         // relatedReviewListPaneThree &&
         // relatedReviewListPaneThree[0].item.map((val) => {

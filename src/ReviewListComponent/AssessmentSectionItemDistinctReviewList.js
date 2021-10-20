@@ -97,19 +97,19 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
 
   const closeRelatedList = () => {
     dispatch({
-      type: SET_MIDDLEPANE_STATE,
-      payload: {
-        middlePaneHeader: 'items',
-        middlePaneHeaderBadgeOne: 'group',
-        middlePaneHeaderBadgeTwo: 'active',
-        middlePaneHeaderBadgeThree: '',
-        middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'itemsGroupDistinctReviewList',
-        scanCount: reviewListDistinctData.length,
-        showMiddlePaneState: true
-      }
-    });
-    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'assessments',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assessmentDistinctReviewList',
+          scanCount: reviewListDistinctData.length,
+          showMiddlePaneState: true
+        }
+      });
+      dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const listDistinctData = relatedReviewListDistinctData[0];
 
