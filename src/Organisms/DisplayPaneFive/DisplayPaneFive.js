@@ -334,8 +334,9 @@ if(isAssessmentPreviewShow){
 
 
   var itemObect = isAssessmentSectionShow ? responseObject?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne :
+  isAssessmentPreviewShow?
     responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[currentItemIndex]
-      ?.itemFrameworkOne;
+      ?.itemFrameworkOne:'';
   console.log('itemObect', itemObect);
 
   return (
