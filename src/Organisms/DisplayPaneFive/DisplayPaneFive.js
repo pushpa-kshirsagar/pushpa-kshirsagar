@@ -346,8 +346,10 @@ export const DisplayPaneFive = () => {
 
   var itemObect = isAssessmentSectionShow
     ? responseObject?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
-    : responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-        ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne;
+    : isAssessmentPreviewShow
+    ? responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
+        ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
+    : '';
   console.log('itemObect', itemObect);
 
   return (
