@@ -82,7 +82,6 @@ const PopUpTextEditor = (props) => {
     // let res = { success: 1, file: { url: imgUploadData.location } };
     // return res;
   };
-  console.log('props', props);
 
   return (
     <div>

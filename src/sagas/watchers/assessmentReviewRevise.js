@@ -483,6 +483,20 @@ function* workerReviseInfoAssessmentSaga(data) {
           }
         });
         yield put({ type: LOADER_STOP });
+      } else if (assessmentSector === 'section') {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'section',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject:
+              userResponse.responseObject[0].informationFramework.assessmentSection[selectedSector],
+            reviewMode: createMode
+          }
+        });
+        yield put({ type: LOADER_STOP });
       } else {
         if (!data.payload.hideRightpane) {
           yield put({

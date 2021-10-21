@@ -210,7 +210,8 @@ export const DisplayPaneThree = () => {
     relatedReviewListDistinctData,
     scanCount,
     selectedTagsArray,
-    unselectedTagsArray,isSelectActive
+    unselectedTagsArray,
+    isSelectActive
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
@@ -218,7 +219,7 @@ export const DisplayPaneThree = () => {
   const clusterInfo = useSelector((state) => state.ClusterCreateReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const aseessmentSection=useSelector((state)=>state.SectionCreateReducer);
+  const aseessmentSection = useSelector((state) => state.SectionCreateReducer);
   const { informationBasic, assessee } = responseObject;
   const rightPaneSectionsAssessee = [
     {
@@ -1996,13 +1997,13 @@ export const DisplayPaneThree = () => {
           selectedSector: selectedTagValue
         }
       });
-    }
-    else if(headerOneBadgeOne==='section'&&headerOne==='assessments'){
-      // console.log('selectedTagsArray',selectedTagsArray);
-      // console.log('isSelectActive',isSelectActive);
-      // console.log('unselectedTagsArray',unselectedTagsArray);      
-      let assessemntItemDistinct=aseessmentSection.sectionInformation.assessmentSectionItemDistinct;
-      assessemntItemDistinct=[...assessemntItemDistinct,...selectedTagsArray];
+    } else if (headerOneBadgeOne === 'section' && headerOne === 'assessments') {
+      let sectionObj = assessmentInfo.informationFramework.assessmentSection;
+      sectionObj[selectedTagValue] = aseessmentSection.sectionInformation;
+      //let sectionInformation=aseessmentSection.sectionInformation;
+      //let assessemntItemDistinct=aseessmentSection.sectionInformation.assessmentSectionItemDistinct;
+      // assessemntItemDistinct=[...assessemntItemDistinct,...selectedTagsArray];
+
       let id = relatedReviewListDistinctData[0].id;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -2011,7 +2012,7 @@ export const DisplayPaneThree = () => {
         assessment: {
           id,
           informationFramework: {
-            assessmentSectionItemDistinct:  assessemntItemDistinct
+            aseessmentSection: sectionObj
           }
         }
       };
@@ -2024,12 +2025,11 @@ export const DisplayPaneThree = () => {
           headerOne: 'assessment',
           reqBody,
           createMode,
-          assessmentSector:'section',
-          //selectedSector:selectedTagValue
+          assessmentSector: 'section',
+          selectedSector: selectedTagValue
         }
       });
-    }
-     else {
+    } else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
     }
     setIsShowReviseIcon(true);

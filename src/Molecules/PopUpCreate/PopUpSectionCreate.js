@@ -11,8 +11,14 @@ import {
   CLEAR_CLUSTER_REDUCER_STATE,
   CREATE_ASSESSMENT_SECTION_SAGA,
   SET_ASSESSMENT_SECTION_AID_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SECTION_SCORE_FRAMEWORK_STATE
+  SET_ASSESSMENT_SECTION_SCORE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_RESPONCE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_COMMUNIQUE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_MANUSCRIPT_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE
+  
 } from '../../actionType';
+import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 
 const PopUpSectionCreate = (props) => {
   const { headerOne } = props;
@@ -20,6 +26,7 @@ const PopUpSectionCreate = (props) => {
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { indexPointer } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
@@ -211,8 +218,8 @@ const PopUpSectionCreate = (props) => {
         tag={'assessmentSectionEvaluation'}
         label={'evaluation'}
         listSelect={[
-          { id: true, name: 'Permitted' },
-          { id: false, name: 'Unpermitted' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}
@@ -279,7 +286,7 @@ const PopUpSectionCreate = (props) => {
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
 
-      {/* <PopUpTextField
+      <PopUpTextField
         isActive={isPopUpValue === 'SCOREMINIMUMPOPUP'}
         label={'score'}
         labelBadgeOne={'minimum'}
@@ -289,7 +296,7 @@ const PopUpSectionCreate = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={''}
-        basicInfo={sectionInformation?.assessmentSectionScoreExtremumMinimum}        
+        basicInfo={sectionInformation?.assessmentSectionScoreExtremum}
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_SECTION_SCORE_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
@@ -304,11 +311,133 @@ const PopUpSectionCreate = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={''}
-        basicInfo={sectionInformation?.assessmentSectionScoreExtremumMaximum}
+        basicInfo={sectionInformation?.assessmentSectionScoreExtremum}
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_SECTION_SCORE_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      /> */}
+      />
+
+      <PopUpTextField
+        isActive={isPopUpValue === 'RESPONCE_EXTREEMINIMUMPOPUP'}
+        label={'responce'}
+        labelBadgeOne={'minimum'}
+        type={'number'}
+        actualLableValue={'assessmentSectionResponseExtremumMinimum'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={sectionInformation?.assessmentSectionResponseExtremum}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_ASSESSMENT_SECTION_RESPONCE_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpTextField
+        isActive={isPopUpValue === 'RESPONCE_EXTREEMAXIMUMPOPUP'}
+        label={'responce'}
+        labelBadgeOne={'maximum'}
+        type={'number'}
+        actualLableValue={'assessmentSectionResponseExtremumMaximum'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={sectionInformation?.assessmentSectionResponseExtremum}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_ASSESSMENT_SECTION_RESPONCE_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpTextField
+        isActive={isPopUpValue === 'RESPONSELABEL'}
+        label={'response'}
+        labelBadgeOne={'label'}
+        actualLableValue={'assessmentSectionItemFrameworkOneResponseLabel'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        basicInfo={sectionInformation}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'RESPONSE_REVISE_POPUP'}
+        tag={'assessmentSectionItemFrameworkOneResponseRevise'}
+        label={'response'}
+        labelBadgeOne={'revise'}
+        listSelect={[
+          { id: true, name: 'Yes' },
+          { id: false, name: 'No' }
+        ]}
+        mappingValue={'id'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={sectionInformation}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpTextField
+        isActive={isPopUpValue === 'SEQUENCE_POPUP'}
+        label={'sequence'}
+        actualLableValue={'assessmentSectionSequence'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        basicInfo={sectionInformation}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpTextEditor
+        isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP'}
+        headerOne={'section'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'communique'}
+        headerOneBadgeTwo={indexPointer}
+        defaultSheetValue={sectionInformation.assessmentSectionCommunique[indexPointer - 1]}
+        onClickSave={(data) => {
+          dispatch({ type: SET_ASSESSMENT_SECTION_COMMUNIQUE_FRAMEWORK_STATE, payload: data });
+        }}
+        actualLableValue={indexPointer - 1}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpTextEditor
+        isActive={isPopUpValue === 'ASSESSMENT_MANUSCRIPT_PRIMARY_TEXTSHEET_POPUP'}
+        headerOne={'section'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'manuscript'}
+        headerOneBadgeTwo={indexPointer}
+        defaultSheetValue={sectionInformation?.assessmentSectionManuscript[indexPointer - 1] || ''}
+        actualLableValue={indexPointer - 1}
+        onClickSave={(data) => {
+          dispatch({ type: SET_ASSESSMENT_SECTION_MANUSCRIPT_FRAMEWORK_STATE, payload: data });
+        }}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+
+      <PopUpTextEditor
+        isActive={isPopUpValue === 'ASSESSMENT_SYNOPSIS_TEXTSHEET_POPUP'}
+        headerOne={'section'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'synopsis'}
+        headerOneBadgeTwo={indexPointer}
+        defaultSheetValue={sectionInformation?.assessmentSectionSynopsis[indexPointer - 1] || ''}
+        actualLableValue={indexPointer - 1}
+        onClickSave={(data) => {
+          dispatch({ type: SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE, payload: data });
+        }}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
     </div>
   );
 };
