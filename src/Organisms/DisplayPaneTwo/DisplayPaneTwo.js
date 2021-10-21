@@ -67,6 +67,7 @@ import AssesseeDistinctReportDistinctReviewList from '../../ReviewListComponent/
 import AssessmentDistinctSectionDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctSectionDistinctReviewList';
 import AssessmentDistinctClusterDistinctReviewList from '../../ReviewListComponent/AssessmentDistinctClusterDistinctReviewList';
 import AssessmentSectionItemDistinctReviewList from '../../ReviewListComponent/AssessmentSectionItemDistinctReviewList';
+import AssessmentSectionItemGroupDistinctReviewList from '../../ReviewListComponent/AssessmentSectionItemGroupDistinctReviewList';
 
 export const DisplayPaneTwo = (props) => {
   const { popupAllClose } = props;
@@ -82,7 +83,7 @@ export const DisplayPaneTwo = (props) => {
     scanCount,
     showMiddlePaneState
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  console.log(typeOfMiddlePaneList,"typeOfMiddlePaneList");
+  console.log(typeOfMiddlePaneList, 'typeOfMiddlePaneList');
   return (
     <div>
       <div>
@@ -300,11 +301,12 @@ export const DisplayPaneTwo = (props) => {
         {typeOfMiddlePaneList === 'jobProfilepAssessmentReviewList' && (
           <JobProfileAssessmentDistinctReviewList popupAllClose={popupAllClose} />
         )}
-        {
-          typeOfMiddlePaneList==='assessmentSectionItemDistinctReviewList'&&(
-            <AssessmentSectionItemDistinctReviewList popupAllClose={popupAllClose}/>
-          )
-        }
+        {typeOfMiddlePaneList === 'assessmentSectionItemDistinctReviewList' && (
+          <AssessmentSectionItemDistinctReviewList popupAllClose={popupAllClose} />
+        )}
+        {typeOfMiddlePaneList === 'assessmentSectionItemGroupDistinctReviewList' && (
+          <AssessmentSectionItemGroupDistinctReviewList popupAllClose={popupAllClose} />
+        )}
         {/* {typeOfMiddlePaneList !== '' &&
           typeOfMiddlePaneList !== 'assesseeRelatedAssociate' &&
           tempAssociateList.map((associate, index) => {

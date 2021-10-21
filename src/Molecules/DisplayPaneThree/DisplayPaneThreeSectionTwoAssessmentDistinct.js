@@ -7,7 +7,7 @@ import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordi
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import Manuscript from '@material-ui/icons/Description';
 import AddIcon from '@material-ui/icons/Add';
-import { makeItemObj } from '../../Actions/GenericActions';
+import { getEvaluationStr, makeItemObj } from '../../Actions/GenericActions';
 import {
   FILTERMODE,
   GET_ALLOCATE_ITEM,
@@ -143,10 +143,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     {
       id: 'evaluation-assessment',
       labelTextOneOne: 'evaluation',
+      isListCard: false,
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'model',
-          textOne: ''
+          textOne: getEvaluationStr(informationFramework?.assessmentEvaluation) || 'No Information'
         },
         {
           labelTextOneOneBadge: '+',
@@ -154,8 +155,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         }
       ],
       innerAssociateList: [],
-      innerInfo: 'assessees',
-      isListCard: false,
+      innerInfo: 'assessment',
       IconOne: null
     },
     {
@@ -267,13 +267,6 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: reviewMode === 'revise' ? AddIcon : Manuscript
-    },
-    {
-      id: 'a6-template',
-      labelTextOneOne: 'template',
-      isListCard: false,
-      innerAssociateList: [],
-      IconOne: null
     },
     {
       id: 'a6',

@@ -14,14 +14,16 @@ import {
   GET_ALLOCATE_ITEM,
   SET_ITEM_FRAMWORK_TYPE,
   GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
-  LOADER_START
+  LOADER_START,
+  GET_ALLOCATE_ITEM_GROUP
 } from '../../actionType';
 import {
   ITEM_REVIEWLIST_URL,
   ITEMGROUPITEM_REVIEWLIST_URL,
   ITEMNODEITEM_REVIEWLIST_URL,
   ITEMTYPEPITEM_REVIEWLIST_URL,
-  CONFIG_ITEM_URL
+  CONFIG_ITEM_URL,
+  ITEM_GROUP_REVIEWLIST_URL
 } from '../../endpoints';
 
 const apiCall = async (requestObj) => {
@@ -232,6 +234,51 @@ function* workeItemNodeItemReviewListSaga(data) {
   }
 }
 
+function* workerItemGroupAllocateReviewListSaga(data) {
+  try {
+    const userResponse = yield call(apiCall, {
+      data: data.payload.request,
+      URL: ITEM_GROUP_REVIEWLIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      let responseObj = {
+        ...data.payload.revisedGroupObject,
+        itemGroup: userResponse.responseObject
+      };
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.headerOne || 'items',
+          middlePaneHeaderBadgeOne: 'group',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true,
+          isSelectActive: 'multiple',
+          selectedTagsArray: data.payload.existingItemId
+        }
+      });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 function* workerItemAllocateReviewListSaga(data) {
   try {
     const userResponse = yield call(apiCall, {
@@ -316,5 +363,6 @@ export default function* watchItemReviewListSaga() {
   yield takeLatest(GET_ITEMTYPEITEM_REVIEW_LIST_SAGA, workeItemTypeItemReviewListSaga);
   yield takeLatest(GET_NODE_ITEMS_REVIEW_LIST_SAGA, workeItemNodeItemReviewListSaga);
   yield takeLatest(GET_ALLOCATE_ITEM, workerItemAllocateReviewListSaga);
+  yield takeLatest(GET_ALLOCATE_ITEM_GROUP, workerItemGroupAllocateReviewListSaga);
   yield takeLatest(GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA, workerItemTypeReviewListSaga);
 }

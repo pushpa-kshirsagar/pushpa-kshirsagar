@@ -691,8 +691,8 @@ const PopUpAssessmentCreate = (props) => {
         tag={'assessmentAdministrationProctor'}
         label={'proctor'}
         listSelect={[
-          { id: true, name: 'Permitted' },
-          { id: false, name: 'Unpermitted' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeaderBadgeOne={''}
@@ -711,8 +711,8 @@ const PopUpAssessmentCreate = (props) => {
         tag={'assessmentAdministrationSupervise'}
         label={'supervise'}
         listSelect={[
-          { id: true, name: 'Permitted' },
-          { id: false, name: 'Unpermitted' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         inputHeaderBadgeOne={''}

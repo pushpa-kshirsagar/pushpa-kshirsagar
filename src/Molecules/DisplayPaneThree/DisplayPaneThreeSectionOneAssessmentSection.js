@@ -8,13 +8,14 @@ import { Paper } from '@material-ui/core';
 import {
   FILTERMODE,
   GET_ALLOCATE_ITEM,
+  GET_ALLOCATE_ITEM_GROUP,
   LOADER_START,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { makeItemObj } from '../../Actions/GenericActions';
+import { makeItemGroupObj, makeItemObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssessmentSection = () => {
   const dispatch = useDispatch();
@@ -153,7 +154,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
         {
           labelTextOneOneBadge: 'total',
           textOne: 'No Information'
-        }
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          textOne: 'No Information'
+        },
       ],
       innerAssociateList: [],
       innerInfo: 'assessment',
@@ -292,6 +297,37 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           badgeName = badgeName + element.labelTextTwoBadge;
         });
       }
+    }
+    if (labelName === 'items' && selectedBadgeName === 'group') {
+      console.log('assessmentSectionInfo', sectionInformation);
+      console.log('relatedReviewListDistinctData', relatedReviewListDistinctData);
+      console.log('assessmentInfo', assessmentInfo);
+      let requestObect = makeItemGroupObj(selectedAssociateInfo, 'active', -1, -1);
+      let revisedGroupObject = {
+        id: relatedReviewListDistinctData[0].id,
+        assessmentSectionName: responseObject.assessmentSectionName,
+        assessmentSectionDescription: responseObject.assessmentSectionDescription
+      };
+      let existingItemId=[];
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assessmentSectionItemGroupRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ALLOCATE_ITEM_GROUP,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingItemId: existingItemId,
+          typeOfMiddlePaneList: 'assessmentSectionItemGroupDistinctReviewList'
+        }
+      });
     }
     if (labelName === 'items' && selectedBadgeName === 'distinct') {
       console.log('item CLICK :::::::>>>>>>>', relatedReviewListPaneThree);

@@ -208,6 +208,30 @@ export const getPermissionStr = (permissionObj) => {
   }
   return per;
 };
+export const getEvaluationStr = (evalObj) => {
+  let per = '';
+  if (evalObj) {
+    Object.keys(evalObj).map(function (key, val) {
+      if (typeof evalObj[key] === 'boolean' && evalObj[key] === true) {
+        if (key === 'assessmentEvaluationScoreCutoff') key = 'Cutoff';
+        if (key === 'assessmentEvaluationScoreGeneric') key = 'Generic';
+        if (key === 'assessmentEvaluationScoreGrade') key = 'Grade';
+        if (key === 'assessmentEvaluationScoreMaximum') key = 'Maximum';
+        if (key === 'assessmentEvaluationScoreMinimum') key = 'Minimum';
+        if (key === 'assessmentEvaluationScorePercentage') key = 'Percentage';
+        if (key === 'assessmentEvaluationScorePercentile') key = 'Percentile';
+        if (key === 'assessmentEvaluationScoreRank') key = 'Rank';
+        if (key === 'assessmentEvaluationScoreRaw') key = 'Raw';
+        if (key === 'assessmentEvaluationScoreStandard') key = 'Standard';
+        if (key === 'assessmentEvaluationScoreSten') key = 'Sten';
+        if (key === 'assessmentEvaluationScoreT') key = 'T';
+        if (key === 'assessmentEvaluationScoreZ') key = 'Z';
+        per = per !== '' ? per + ', ' + splitCamelCaseToString(key) : splitCamelCaseToString(key);
+      }
+    });
+  }
+  return per;
+};
 export const setAssociateCardEnableInJson = (popupValuArr) => {
   var isDisabled = true;
   let popupContentArrValue = popupValuArr.map(function (el) {
