@@ -1998,11 +1998,12 @@ export const DisplayPaneThree = () => {
       });
     }
     else if(headerOneBadgeOne==='section'&&headerOne==='assessments'){
-      // console.log('selectedTagsArray',selectedTagsArray);
-      // console.log('isSelectActive',isSelectActive);
-      // console.log('unselectedTagsArray',unselectedTagsArray);      
-      let assessemntItemDistinct=aseessmentSection.sectionInformation.assessmentSectionItemDistinct;
-      assessemntItemDistinct=[...assessemntItemDistinct,...selectedTagsArray];
+      let sectionObj = assessmentInfo.informationFramework.assessmentSection;
+      sectionObj[selectedTagValue] = aseessmentSection.sectionInformation;
+      //let sectionInformation=aseessmentSection.sectionInformation;    
+      //let assessemntItemDistinct=aseessmentSection.sectionInformation.assessmentSectionItemDistinct;
+      // assessemntItemDistinct=[...assessemntItemDistinct,...selectedTagsArray];
+
       let id = relatedReviewListDistinctData[0].id;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -2011,7 +2012,7 @@ export const DisplayPaneThree = () => {
         assessment: {
           id,
           informationFramework: {
-            assessmentSectionItemDistinct:  assessemntItemDistinct
+            aseessmentSection: sectionObj
           }
         }
       };

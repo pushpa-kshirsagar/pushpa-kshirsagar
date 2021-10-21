@@ -1,5 +1,9 @@
 import { SET_SECTION_REDUCER_STATE, CLEAR_SECTION_REDUCER_STATE,SET_ASSESSMENT_SECTION_AID_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SECTION_SCORE_FRAMEWORK_STATE } from '../actionType';
+  SET_ASSESSMENT_SECTION_SCORE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_RESPONCE_FRAMEWORK_STATE, 
+  SET_ASSESSMENT_SECTION_MANUSCRIPT_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_COMMUNIQUE_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE} from '../actionType';
 const initialState = {
   sectionInformation: {
     assessmentSectionName: null,
@@ -56,7 +60,7 @@ const SectionCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)),
         return {
           ...istate,
           sectionInformation: {
-            ...istate.informationFramework,
+            ...istate.sectionInformation,
             assessmentSectionAid: action.payload
           }
         };
@@ -64,10 +68,48 @@ const SectionCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)),
           return {
             ...istate,
             sectionInformation: {
-              ...istate.informationFramework,
+              ...istate.sectionInformation,
               assessmentSectionScoreExtremum: action.payload
             }
           };
+          case SET_ASSESSMENT_SECTION_RESPONCE_FRAMEWORK_STATE:
+          return {
+            ...istate,
+            sectionInformation: {
+              ...istate.sectionInformation,
+              assessmentSectionResponseExtremum: action.payload
+            }
+          };
+        case SET_ASSESSMENT_SECTION_MANUSCRIPT_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        sectionInformation: {
+          ...istate.sectionInformation,
+          assessmentSectionManuscript: [
+            ...istate.sectionInformation.assessmentSectionManuscript,
+            action.payload
+          ]
+        }
+      };
+      case SET_ASSESSMENT_SECTION_COMMUNIQUE_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        sectionInformation: {
+          ...istate.sectionInformation,
+          assessmentSectionCommunique: [
+            ...istate.sectionInformation.assessmentSectionCommunique,
+            action.payload
+          ]
+        }
+      };
+      case SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE:
+        return {
+          ...istate,
+          sectionInformation: {
+            ...istate.sectionInformation,
+            assessmentSynopsis: [...istate.sectionInformation.assessmentSectionSynopsis, action.payload]
+          }
+        };
     case CLEAR_SECTION_REDUCER_STATE:
       return JSON.parse(JSON.stringify(initialState));
     default:
