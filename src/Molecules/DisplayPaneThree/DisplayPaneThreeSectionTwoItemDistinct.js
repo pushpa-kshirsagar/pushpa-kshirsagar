@@ -51,22 +51,22 @@ const DisplayPaneThreeSectionTwoItem = () => {
     });
   }
   const frameworkList = [
-    {
-      id: 'a2',
-      labelTextOneOne: 'cluster',
-      labelTextOneOneBadgeOne: 'distinct',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'distinct',
-          innerList: clusterObj
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    },
+    // {
+    //   id: 'a2',
+    //   labelTextOneOne: 'cluster',
+    //   labelTextOneOneBadgeOne: 'distinct',
+    //   labelTextOneOneBadgeTwo: '',
+    //   labelTextOneOneBadgeThree: '',
+    //   labelTextOneOneBadgeFour: '',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'distinct',
+    //       innerList: clusterObj
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true
+    // },
     {
       id: 'a-level',
       labelTextOneOne: 'level',
@@ -77,8 +77,8 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconOne: null
     },
     {
-      id: 'a1-media',
-      labelTextOneOne: 'media',
+      id: 'a1-preview',
+      labelTextOneOne: 'preview',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: '',
@@ -92,31 +92,31 @@ const DisplayPaneThreeSectionTwoItem = () => {
       IconTwo: null,
       isReviewLink: true
     },
-    {
-      id: 'a-polarity',
-      labelTextOneOne: 'polarity',
-      isListCard: false,
-      textOneOne: itemFrameworkOne?.itemFrameworkOnePolarity || 'No Information',
-      innerAssociateList: [],
-      innerInfo: 'No Information',
-      IconOne: null
-    },
-    {
-      id: 'a2',
-      labelTextOneOne: 'scale',
-      labelTextOneOneBadgeOne: 'distinct',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'distinct',
-          innerList: scaleObj
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    },
+    // {
+    //   id: 'a-polarity',
+    //   labelTextOneOne: 'polarity',
+    //   isListCard: false,
+    //   textOneOne: itemFrameworkOne?.itemFrameworkOnePolarity || 'No Information',
+    //   innerAssociateList: [],
+    //   innerInfo: 'No Information',
+    //   IconOne: null
+    // },
+    // {
+    //   id: 'a2',
+    //   labelTextOneOne: 'scale',
+    //   labelTextOneOneBadgeOne: 'distinct',
+    //   labelTextOneOneBadgeTwo: '',
+    //   labelTextOneOneBadgeThree: '',
+    //   labelTextOneOneBadgeFour: '',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'distinct',
+    //       innerList: scaleObj
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true
+    // },
     {
       id: 'a3',
       labelTextOneOne: 'score',
@@ -162,7 +162,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
     console.log(selectedBadgeName);
     if (labelName === 'cluster' && selectedBadgeName === 'distinct') {
     }
-    if (labelName === 'media') {
+    if (labelName === 'preview') {
       if (!responseObject?.itemFrameworkOne?.itemFrameworkOneType) {
         dispatch({
           type: SET_POPUP_VALUE,
@@ -222,7 +222,7 @@ const DisplayPaneThreeSectionTwoItem = () => {
   const reviewFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-    if (labelName === 'media') {
+    if (labelName === 'preview') {
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
     }
   };

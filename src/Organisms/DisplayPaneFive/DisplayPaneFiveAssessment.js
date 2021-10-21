@@ -148,17 +148,16 @@ export const DisplayPaneFiveAssessment = (props) => {
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { informationBasic } = useSelector((state) => state.AssessmentReducer);
-  const {
-    isAssessmentPreviewShow = false,   
-    isAssessmentSectionShow=false
-  } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { isAssessmentPreviewShow = false, isAssessmentSectionShow = false } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const [selectedChoiceObject, setSelectedChoiceObject] = useState('');
   const [subQuestionId, setSubQuestionId] = useState('');
   console.log('assessmentinformationFramework', informationFramework);
   const responseText = '<p><span>response</span></p>';
-  const assessmentScale=informationFramework?.assessmentScale||[];
-  
+  const assessmentScale = informationFramework?.assessmentScale || [];
+
   const BackHandlerEvent = (e) => {};
   const setSecondaryOptionValue = (e) => {
     //TODO: set secondary option in item
@@ -296,12 +295,24 @@ export const DisplayPaneFiveAssessment = (props) => {
           isQuestionFlaged={false}
           timerFinished={''}
           timer={'timer'}
-          totalQuestion={isAssessmentSectionShow?
-            informationFramework?.assessmentSectionItemDistinct.length:informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length          }
+          totalQuestion={
+            isAssessmentSectionShow
+              ? informationFramework?.assessmentSectionItemDistinct.length
+              : informationFramework?.assessmentSection[currentSectionIndex]
+                  ?.assessmentSectionItemDistinct.length
+          }
           currentQuestion={currentItemIndex + 1}
-          assessmentSectionName={isAssessmentSectionShow?informationFramework?.assessmentSectionName:informationFramework?.assessmentSection[currentSectionIndex].assessmentSectionName||''}
-          assessmentSectionDescription={isAssessmentSectionShow?informationFramework?.assessmentSectionDescription:
-            informationFramework?.assessmentSection[currentSectionIndex].assessmentSectionDescription||''
+          assessmentSectionName={
+            isAssessmentSectionShow
+              ? informationFramework?.assessmentSectionName
+              : informationFramework?.assessmentSection[currentSectionIndex]
+                  .assessmentSectionName || ''
+          }
+          assessmentSectionDescription={
+            isAssessmentSectionShow
+              ? informationFramework?.assessmentSectionDescription
+              : informationFramework?.assessmentSection[currentSectionIndex]
+                  .assessmentSectionDescription || ''
           }
         />
 

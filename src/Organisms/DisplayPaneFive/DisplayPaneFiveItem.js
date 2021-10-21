@@ -244,6 +244,17 @@ export const DisplayPaneFiveItem = () => {
           : false
     },
     {
+      data: 'review',
+      dataValue: 'review',
+      dataKey: 'reviewAPICall',
+      optionClass: 'optionPrimary',
+      divider: '',
+      disabled:
+        responseObject?.informationEngagement?.itemStatus === 'PUBLISHED' || reviewMode === 'review'
+          ? true
+          : false
+    },
+    {
       data: 'revise',
       dataValue: 'revise',
       dataKey: 'reviseAPICall',
@@ -386,6 +397,13 @@ export const DisplayPaneFiveItem = () => {
       });
       dispatch({ type: POPUP_CLOSE });
     }
+    if (targetValue === 'review') {
+      dispatch({
+        type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
+        payload: 'review'
+      });
+      dispatch({ type: POPUP_CLOSE });
+    }
   };
 
   const ChangeItemOptionPopup = (e) => {
@@ -508,8 +526,8 @@ export const DisplayPaneFiveItem = () => {
           displayPane="itemPreview"
           showClearIcon
           headerOne="item"
-          headerOneBadgeOne="information"
-          headerOneBadgeTwo="media"
+          headerOneBadgeOne=""
+          headerOneBadgeTwo="preview"
           headerPanelColour="blue"
           onClickClearInfo={closePreview}
         />

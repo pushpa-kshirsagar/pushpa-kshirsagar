@@ -1,7 +1,5 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
-// import AllocationAccordian from '../Accordian/AllocationAccordian';
-// import Manuscript from '@material-ui/icons/Description';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
@@ -20,9 +18,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   const { reviewMode, relatedReviewListPaneThree, responseObject } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
-  const { selectedAssociateInfo, countPage, reviewListDistinctData } = useSelector(
-    (state) => state.DisplayPaneTwoReducer
-  );
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const dispatch = useDispatch();
   // const { informationEngagement, informationSetup } = responseObject;
   // function capitalizeFirstLetter(string) {
@@ -30,7 +26,6 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
   //   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   // }
 
-  const { informationFramework } = responseObject;
   let itemList = [];
   if (relatedReviewListPaneThree) {
     itemList = relatedReviewListPaneThree?.item || [];
@@ -45,66 +40,7 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
       status: ''
     });
   });
-  let clusterObj = [];
-  if (informationFramework) {
-    clusterObj = informationFramework?.itemGroupitemFrameworkOneCluster || [];
-  }
-  let clusterArray = [];
-  clusterObj.forEach((ob) => {
-    clusterArray.push({
-      textOne: ob.itemGroupitemFrameworkOneClusterPrimary || '',
-      textTwo: '',
-      status: ob.clusterQuestionCount || 0
-    });
-  });
-
-  let polarityObj = [];
-  if (informationFramework) {
-    polarityObj = informationFramework?.itemGroupitemFrameworkOneCluster || [];
-  }
-  let polarityArray = [];
-  polarityObj.forEach((ob) => {
-    polarityArray.push({
-      textOne: ob.itemGroupitemFrameworkOneClusterPrimary || '',
-      textTwo: '',
-      status: ob.clusterQuestionCount || 0
-    });
-  });
-  console.log(polarityArray);
   const clusterList = [
-    {
-      id: 'a1',
-      labelTextOneOne: 'cluster',
-      labelTextOneOneBadgeOne: 'primary',
-      labelTextOneOneBadgeTwo: 'polarity',
-      labelTextOneOneBadgeThree: '',
-      labelTextOneOneBadgeFour: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'primary',
-          innerList: clusterArray
-        },
-        {
-          labelTextOneOneBadge: 'polarity',
-          innerList: [
-            {
-              id: 'associate1',
-              textOne: 'positive',
-              textTwo: '',
-              status: '20'
-            },
-            {
-              id: 'associate1',
-              textOne: 'negative',
-              textTwo: '',
-              status: '20'
-            }
-          ]
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    },
     {
       id: 'a1',
       labelTextOneOne: 'items',
@@ -114,32 +50,6 @@ const DisplayPaneThreeSectionTwoItemGroup = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: itemArray
-        },
-        {
-          labelTextOneOneBadge: 'label',
-          innerList: []
-        },
-        {
-          labelTextOneOneBadge: 'template',
-          innerList: []
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true
-    },
-    {
-      id: 'a1',
-      labelTextOneOne: 'scale',
-      labelTextOneOneBadgeOne: 'distinct',
-      labelTextOneOneBadgeTwo: '',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'distinct',
-          innerList: polarityArray
-        },
-        {
-          labelTextOneOneBadge: '',
-          innerList: []
         }
       ],
       innerInfo: 'No Information',
