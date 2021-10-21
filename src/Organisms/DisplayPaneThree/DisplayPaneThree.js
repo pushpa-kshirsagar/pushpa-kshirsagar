@@ -1999,7 +1999,12 @@ export const DisplayPaneThree = () => {
       });
     } else if (headerOneBadgeOne === 'section' && headerOne === 'assessments') {
       let sectionObj = assessmentInfo.informationFramework.assessmentSection;
+      let existingItemId = aseessmentSection.sectionInformation.assessmentSectionItemDistinct.map((val) => {
+        return val.itemId;
+      });
+      aseessmentSection.sectionInformation.assessmentSectionItemDistinct=[...existingItemId];
       sectionObj[selectedTagValue] = aseessmentSection.sectionInformation;
+
       //let sectionInformation=aseessmentSection.sectionInformation;
       //let assessemntItemDistinct=aseessmentSection.sectionInformation.assessmentSectionItemDistinct;
       // assessemntItemDistinct=[...assessemntItemDistinct,...selectedTagsArray];
@@ -2012,7 +2017,7 @@ export const DisplayPaneThree = () => {
         assessment: {
           id,
           informationFramework: {
-            aseessmentSection: sectionObj
+            assessmentSection: sectionObj
           }
         }
       };

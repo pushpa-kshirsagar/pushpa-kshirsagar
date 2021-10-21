@@ -68,7 +68,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
       const unique = unique1.concat(unique2);
 
       console.log('unique1',unique);
-      sectionInformation.assessmentSectionItemDistinct=[...sectionInformation.assessmentSectionItemDistinct,...unique];
+      sectionInformation.assessmentSectionItemDistinct=[...existingItemId,...unique];
       dispatch({
         type:SET_SECTION_REDUCER_STATE,
         payload:sectionInformation
@@ -81,7 +81,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
       let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
       const unique = unique1.concat(unique2);
       console.log('unique1',unique);
-      sectionInformation.assessmentSectionItemTrial=[...sectionInformation.assessmentSectionItemTrial,...unique];
+      sectionInformation.assessmentSectionItemTrial=[...existingItemId,...unique];
       dispatch({
         type:SET_SECTION_REDUCER_STATE,
         payload:sectionInformation
@@ -132,7 +132,6 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
         payload: { FilterMode: '' }
       });
     }
-
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: { stateName: 'isSelectActive', value: '' }

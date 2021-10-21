@@ -55,15 +55,15 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'repeat',
-          textOne: 'No Information'
+          textOne: responseObject?.assessmentSectionAdministrationRepeat?'Yes':'No'
         },
         {
           labelTextOneOneBadge: 'reset',
-          textOne: 'No Information'
+          textOne: responseObject?.assessmentSectionAdministrationReset?'Yes':'No'
         },
         {
           labelTextOneOneBadge: 'shuffle',
-          textOne: 'No Information'
+          textOne: responseObject?.assessmentSectionAdministrationShuffle?'Yes':'No'
         }
       ],
       innerAssociateList: [],
@@ -80,11 +80,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAidCalculatorPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAidCalculatorType||'No Information'
             }
           ]
         },
@@ -93,11 +93,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAidSpreadsheetPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAidSpreadsheetType||'No Information'
             }
           ]
         },
@@ -106,11 +106,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAidTextsheetPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAidTextsheetType||'No Information'
             }
           ]
         }
@@ -130,12 +130,13 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
-      isAddIcon: true
+      isAddIcon: reviewMode === 'revise' ?true:false
     },
     {
       id: 'a2',
       textOneOne: 'No Information',
       labelTextOneOne: 'evaluation',
+      textOne:responseObject?.assessmentSectionEvaluation ?'Yes':'No',
       innerAssociateList: [],
       innerInfo: 'No Information',
       isListCard: false
@@ -182,7 +183,8 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       innerInfo: 'assessees',
       isListCard: false,
       //IconOne: Manuscript
-      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript
+      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
+      isAddIcon: reviewMode === 'revise' ?true:false
     },
     {
       id: 'preview-assessment',
@@ -212,21 +214,21 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'maximum',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionResponseExtremum?.assessmentSectionResponseExtremumMaximum||'No Information'
             },
             {
               labelTextTwoBadge: 'minimum',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionResponseExtremum?.assessmentSectionResponseExtremumMinimum||'No Information'
             }
           ]
         },
         {
           labelTextTwoBadge: 'label',
-          innerLabelBadgeList: 'No Information'
+          innerLabelBadgeList: responseObject?.assessmentSectionItemFrameworkOneResponseLabel||'No Information'
         },
         {
           labelTextTwoBadge: 'revise',
-          innerLabelBadgeList: 'No Information'
+          innerLabelBadgeList: responseObject?.assessmentSectionItemFrameworkOneResponseRevise?'Yes':'No'
         }
       ],
       innerAssociateList: [],
@@ -244,11 +246,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'maximum',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionScoreExtremum?.assessmentSectionScoreExtremumMaximum|| 'No Information'
             },
             {
               labelTextTwoBadge: 'minimum',
-              innerLabelBadgeList: 'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionScoreExtremum?.assessmentSectionScoreExtremumMinimum||'No Information'
             }
           ]
         }
@@ -274,13 +276,14 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
-      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript
+      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
+      isAddIcon: reviewMode === 'revise' ?true:false
     },
     {
       id: 'a6',
       labelTextOneOne: 'time',
       isListCard: false,
-      textOneOne: responseObject?.assessmentTime || 'No Information',
+      textOneOne: responseObject?.assessmentSectionTime || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
@@ -289,8 +292,6 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
   const reviseFramework = (e, selectedBadgeArray) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
-
-    //console.log(selectedBadgeArray);
     let badgeName = '';
     if (selectedBadgeArray) {
       if (selectedBadgeArray.length > 0) {
@@ -533,6 +534,12 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           isPopUpValue: 'ASSESSMENT_MANUSCRIPT_PRIMARY_TEXTSHEET_POPUP',
           popupMode: 'SECTIONCREATE'
         }
+      });
+    }
+    if (labelName === 'time') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'TIMEASSESSMENT_SECTION_POPUP', popupMode: 'SECTIONCREATE' }
       });
     }
   };

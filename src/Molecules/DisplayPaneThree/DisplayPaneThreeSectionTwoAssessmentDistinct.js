@@ -138,7 +138,8 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
-      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript
+      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
+      isAddIcon: reviewMode === 'revise' ?true:false
     },
     {
       id: 'evaluation-assessment',
@@ -179,7 +180,8 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
-      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript
+      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
+      isAddIcon: reviewMode === 'revise' ?true:false
     },
     {
       id: 'preview-assessment',
@@ -266,7 +268,8 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
-      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript
+      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
+      isAddIcon: reviewMode === 'revise' ?true:false
     },
     {
       id: 'a6',

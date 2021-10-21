@@ -7,6 +7,7 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_SECTION_REDUCER_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
@@ -31,6 +32,8 @@ const AssessmentSectionItemGroupDistinctReviewList = (props) => {
     typeOfMiddlePaneList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
+  const {sectionInformation}=useSelector((state) => state.SectionCreateReducer);
+
 
   const onClickRevise = () => {
     console.log('ON CLICK REVISE ICON');
@@ -43,16 +46,41 @@ const AssessmentSectionItemGroupDistinctReviewList = (props) => {
   const onClickReviseFinish = () => {
     console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray);
     setIsShowReviseIcon(true);
+    let existingItemId = sectionInformation?.assessmentSectionItemGroup.map((val) => {
+      return val.itemId;
+    });
+    let unique1 = existingItemId.filter((o) => selectedTagsArray.indexOf(o) === -1);
+    let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
+    const selectedSectionGroup = unique1.concat(unique2);
+    console.log('selectedSectionGroup',selectedSectionGroup);
+    sectionInformation.assessmentSectionItemGroup=[...existingItemId,...selectedSectionGroup];
+    dispatch({
+      type:SET_SECTION_REDUCER_STATE,
+      payload:sectionInformation
+    })
     if (typeOfMiddlePaneList !== '') {
+      // dispatch({
+      //   type: SET_MIDDLEPANE_STATE,
+      //   payload: {
+      //     middlePaneHeader: 'items',
+      //     middlePaneHeaderBadgeOne: 'group',
+      //     middlePaneHeaderBadgeTwo: 'active',
+      //     middlePaneHeaderBadgeThree: '',
+      //     middlePaneHeaderBadgeFour: '',
+      //     typeOfMiddlePaneList: 'itemsGroupDistinctReviewList',
+      //     scanCount: reviewListDistinctData.length,
+      //     showMiddlePaneState: true
+      //   }
+      // });
       dispatch({
         type: SET_MIDDLEPANE_STATE,
         payload: {
-          middlePaneHeader: 'items',
-          middlePaneHeaderBadgeOne: 'group',
+          middlePaneHeader: 'assessments',
+          middlePaneHeaderBadgeOne: 'distinct',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'itemsGroupDistinctReviewList',
+          typeOfMiddlePaneList: 'assessmentDistinctReviewList',
           scanCount: reviewListDistinctData.length,
           showMiddlePaneState: true
         }
@@ -62,7 +90,6 @@ const AssessmentSectionItemGroupDistinctReviewList = (props) => {
         payload: { FilterMode: '' }
       });
     }
-
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: { stateName: 'isSelectActive', value: '' }
@@ -95,6 +122,19 @@ const AssessmentSectionItemGroupDistinctReviewList = (props) => {
     //     showMiddlePaneState: true
     //   }
     // });
+    dispatch({
+      type: SET_MIDDLEPANE_STATE,
+      payload: {
+        middlePaneHeader: 'assessments',
+        middlePaneHeaderBadgeOne: 'distinct',
+        middlePaneHeaderBadgeTwo: 'active',
+        middlePaneHeaderBadgeThree: '',
+        middlePaneHeaderBadgeFour: '',
+        typeOfMiddlePaneList: 'assessmentDistinctReviewList',
+        scanCount: reviewListDistinctData.length,
+        showMiddlePaneState: true
+      }
+    });
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
   };
   const listDistinctData = relatedReviewListDistinctData[0];

@@ -49,7 +49,8 @@ const initialState = {
     },
     assessmentSectionSequence: 0,
     assessmentSectionSynopsis: [],
-    assessmentSectionTime: null
+    assessmentSectionTime: null,
+    assessmentSectionItemGroup:[],
   }
 };
 

@@ -438,6 +438,20 @@ const PopUpSectionCreate = (props) => {
         }}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+       <PopUpTextField
+        isActive={isPopUpValue === 'TIMEASSESSMENT_SECTION_POPUP'}
+        label={'time'}
+        type={'number'}
+        actualLableValue={'assessmentSectionTime'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={sectionInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
     </div>
   );
 };

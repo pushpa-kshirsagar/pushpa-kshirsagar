@@ -17,7 +17,8 @@ const DisplayPanelAccordianInformation = (props) => {
     isMultiInfoCard = false,
     isReviewLink = false,
     isResetIcon,
-    IconReset
+    IconReset,
+    isAddIcon
   } = accordianObject;
   const [selectedBadge, setSelectedBadge] = useState('');
   const [information, setInformation] = useState('');
@@ -487,6 +488,12 @@ const DisplayPanelAccordianInformation = (props) => {
                         </IconButton>
                       </div>
                     )}
+                    {
+                          isAddIcon?(
+                          <InputLabel  htmlFor="name-input"
+                          className={['textForLabel', 'textForLabelRight'].join(' ')}>create</InputLabel>
+                          ):null
+                      }
                   </>
                 )}
                 {selectedBadge.IconTwo ? (
