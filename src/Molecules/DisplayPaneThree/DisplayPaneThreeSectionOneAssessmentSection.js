@@ -11,6 +11,7 @@ import {
   GET_ALLOCATE_ITEM,
   GET_ALLOCATE_ITEM_GROUP,
   LOADER_START,
+  SET_ASSESSMENT_SINGLE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
@@ -27,13 +28,9 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
   const { assessmentInfo } = useSelector((state) => state.AssessmentReducer);
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
 
-  const {
-    selectedAssociateInfo,
-    countPage,
-    reviewListDistinctData,
-    relatedReviewListDistinctData
-  } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationEngagement, informationAllocation, informationSetup } = responseObject;
+  const { selectedAssociateInfo, relatedReviewListDistinctData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
   let communiqueArr = [];
   responseObject?.assessmentSectionCommunique?.map((comm, index) => {
@@ -47,7 +44,16 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
   responseObject?.assessmentSectionSynopsis?.map((comm, index) => {
     synopsisArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
   });
-
+  let adminSequenseArr = [];
+  responseObject?.assessmentSectionCommunique.map((comm, ind) => {
+    adminSequenseArr.push(`communiqué ${ind + 1}`);
+  });
+  responseObject?.assessmentSectionCommunique.map((com, ind) => {
+    adminSequenseArr.push(`manuscript ${ind + 1}`);
+  });
+  responseObject?.assessmentSectionCommunique.map((com, ind) => {
+    adminSequenseArr.push(`synopsis ${ind + 1}`);
+  });
   const frameworkAll = [
     {
       id: 'administration',
@@ -63,6 +69,10 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
         },
         {
           labelTextOneOneBadge: 'shuffle',
+          textOne: 'No Information'
+        },
+        {
+          labelTextOneOneBadge: 'sequence',
           textOne: 'No Information'
         }
       ],
@@ -465,6 +475,16 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'SECTION_SHUFFLE_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'sequence') {
+      dispatch({
+        type: SET_ASSESSMENT_SINGLE_STATE,
+        payload: { stateName: 'assessmentAdminSequence', value: adminSequenseArr }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINSEWUENCEPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
     if (labelName === 'score' && selectedBadgeName === 'maximum') {

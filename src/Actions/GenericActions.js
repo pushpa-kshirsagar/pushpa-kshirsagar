@@ -7673,12 +7673,12 @@ export function convertNumberToName(amount) {
   }
   return words_string;
 }
-export const setItemTypeConfigState = (itemFrameworkOneType, dispatch) => {
-  console.log('setItemTypeConfigState');
+export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemModule = false) => {
   console.log('itemFrameworkOneType', itemFrameworkOneType);
+  console.log('isItemModule', isItemModule);
   let reviseSetting = {
     blankState: true,
-    classificationState: true,
+    classificationState: !isItemModule,
     levelState: true,
     polarityState: true,
     scaleState: true,
@@ -7692,7 +7692,7 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch) => {
     // "Likert-Scale"
     reviseSetting = {
       blankState: false,
-      classificationState: true,
+      classificationState: !isItemModule,
       levelState: true,
       polarityState: true,
       scaleState: true,

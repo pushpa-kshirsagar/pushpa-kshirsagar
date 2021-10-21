@@ -40,9 +40,12 @@ const PopUpAssessmentCreate = (props) => {
     coreGroupReviewListData,
     coreNodeReviewListData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { informationBasic, informationAllocation, informationFramework } = useSelector(
-    (state) => state.AssessmentReducer
-  );
+  const {
+    informationBasic,
+    informationAllocation,
+    informationFramework,
+    assessmentAdminSequence
+  } = useSelector((state) => state.AssessmentReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
@@ -121,7 +124,7 @@ const PopUpAssessmentCreate = (props) => {
         filteredCoreGroupReviewListDataSecondary.push(group);
     });
   }
-
+  console.log('assessmentAdminSequence', assessmentAdminSequence);
   return (
     <div>
       <PopUpTextField
@@ -358,7 +361,7 @@ const PopUpAssessmentCreate = (props) => {
         isActive={isPopUpValue === 'ASSESSMENT_COMMUNIQUE_PRIMARY_TEXTSHEET_POPUP'}
         headerOne={'assessment'}
         headerPanelColour={'genericOne'}
-        headerOneBadgeOne={'communique'}
+        headerOneBadgeOne={'communiqué'}
         headerOneBadgeTwo={indexPointer}
         defaultSheetValue={informationFramework.assessmentCommunique[indexPointer - 1]}
         onClickSave={(data) => {
@@ -686,7 +689,7 @@ const PopUpAssessmentCreate = (props) => {
         forceToSelect="assessmentRevise"
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpDropList
+      <PopUpDropList
         isActive={isPopUpValue === 'ADMINPROCTORPOPUP'}
         tag={'assessmentAdministrationProctor'}
         label={'proctor'}
@@ -706,7 +709,7 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpDropList
+      <PopUpDropList
         isActive={isPopUpValue === 'ADMINSUPERVISEPOPUP'}
         tag={'assessmentAdministrationSupervise'}
         label={'supervise'}
@@ -726,7 +729,7 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpDropList
+      <PopUpDropList
         isActive={isPopUpValue === 'ADMINTEMPLATEPOPUP'}
         tag={'assessmentAdministrationTemplate'}
         label={'template'}
@@ -746,7 +749,7 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
-       <PopUpDropList
+      <PopUpDropList
         isActive={isPopUpValue === 'ADMINVERSIONPOPUP'}
         tag={'assessmentAdministrationVersion'}
         label={'version'}
@@ -761,6 +764,22 @@ const PopUpAssessmentCreate = (props) => {
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
         isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ADMINSEWUENCEPOPUP'}
+        tag={'assessmentAdministrationSequence'}
+        label={'sequence'}
+        listSelect={assessmentAdminSequence}
+        isMultiSelect={true}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
         nextPopUpValue={''}
         basicInfo={informationFramework}
         typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}

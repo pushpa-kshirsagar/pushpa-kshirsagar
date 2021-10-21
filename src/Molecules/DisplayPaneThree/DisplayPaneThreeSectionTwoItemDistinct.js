@@ -163,13 +163,16 @@ const DisplayPaneThreeSectionTwoItem = () => {
     if (labelName === 'cluster' && selectedBadgeName === 'distinct') {
     }
     if (labelName === 'media') {
-      dispatch({
-        type: SET_POPUP_VALUE,
-        payload: {
-          isPopUpValue: 'ITEM_TRIPLEDOT_CONFIGURE_POPUP',
-          popupMode: ''
-        }
-      });
+      if (!responseObject?.itemFrameworkOne?.itemFrameworkOneType) {
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: {
+            isPopUpValue: 'ITEM_TRIPLEDOT_CONFIGURE_POPUP',
+            popupMode: ''
+          }
+        });
+      }
+
       dispatch({ type: SET_PANE_THREE_ITEM_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }

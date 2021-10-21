@@ -15,6 +15,7 @@ const initialState = {
     assessmentSectionAdministrationRepeat: false,
     assessmentSectionAdministrationReset: false,
     assessmentSectionAdministrationShuffle: false,
+    assessmentSectionAdministrationSequence:[],
     assessmentSectionAid: {
       assessmentSectionAidCalculatorPermission: false,
       assessmentSectionAidCalculatorType: '',

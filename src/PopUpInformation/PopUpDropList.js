@@ -36,7 +36,8 @@ const PopUpDropList = (props) => {
     isNotRevised = false,
     inputHeader = '',
     inputHeaderBadgeOne = '',
-    inputHeaderBadgeTwo = ''
+    inputHeaderBadgeTwo = '',
+    isMultiSelect=false
   } = props;
 
   //states
@@ -142,6 +143,7 @@ const PopUpDropList = (props) => {
               value={isNotRevised ? localObject : localObject && localObject[tag]}
               mappingValue={mappingValue}
               labelBadgeOne={labelBadgeOne}
+              isMultiSelect={isMultiSelect}
             />
           </FormControl>
         </DialogContent>

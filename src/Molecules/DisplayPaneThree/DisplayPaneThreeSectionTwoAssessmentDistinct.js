@@ -16,7 +16,8 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_PREVIEW_MODE,
   SET_POPUP_VALUE,
-  SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE
+  SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
+  SET_ASSESSMENT_SINGLE_STATE
 } from '../../actionType';
 
 const DisplayPaneThreeSectionTwoAssessment = () => {
@@ -32,6 +33,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationFramework } = responseObject;
   const dispatch = useDispatch();
+
   let communiqueArr = [];
   informationFramework?.assessmentCommunique.map((comm, index) => {
     // communiqueArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
@@ -46,6 +48,16 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   informationFramework?.assessmentSynopsis.map((comm, index) => {
     // synopsisArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
     synopsisArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
+  });
+  let adminSequenseArr = [];
+  informationFramework?.assessmentCommunique.map((comm, ind) => {
+    adminSequenseArr.push(`communiqué ${ind + 1}`);
+  });
+  informationFramework?.assessmentManuscript.map((com, ind) => {
+    adminSequenseArr.push(`manuscript ${ind + 1}`);
+  });
+  informationFramework?.assessmentSynopsis.map((com, ind) => {
+    adminSequenseArr.push(`synopsis ${ind + 1}`);
   });
   let clusterObj = [];
   if (informationFramework) {
@@ -79,6 +91,10 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         {
           labelTextOneOneBadge: 'proctor',
           textOne: informationFramework?.assessmentAdministrationProctor ? 'Yes' : 'No'
+        },
+        {
+          labelTextOneOneBadge: 'sequence',
+          textOne: informationFramework?.assessmentAdministrationSequence || ''
         },
         {
           labelTextOneOneBadge: 'supervise',
@@ -372,11 +388,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   const onClickReview = (e, badge) => {
     // console.log(e);
     // console.log(badge);
-    {
-      /*if (typeof e === 'object') {
+    if (typeof e === 'object') {
       const headerOne = e.currentTarget.getAttribute('data-value');
       const badgeOne = e.currentTarget.getAttribute('data-key');
-
+      {
+        /*
       if (headerOne === 'communiqué' && badgeOne === 'primary') {
       }
       if (headerOne === 'communiqué' && badgeOne === 'secondary') {
@@ -423,12 +439,12 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
           }
         });
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      }*/
       }
       if (headerOne === 'preview') {
         dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
       }
-    }*/
     }
     if (reviewMode === 'review') {
       if (e === 'communiqué' && badge !== '') {
@@ -572,6 +588,16 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'ADMINTEMPLATEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'sequence') {
+      dispatch({
+        type: SET_ASSESSMENT_SINGLE_STATE,
+        payload: { stateName: 'assessmentAdminSequence', value: adminSequenseArr }
+      });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINSEWUENCEPOPUP', popupMode: 'ASSESSMENTCREATE' }
       });
     }
     if (labelName === 'administration' && selectedBadgeName === 'version') {

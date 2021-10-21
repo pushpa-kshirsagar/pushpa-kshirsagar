@@ -18,7 +18,8 @@ import {
   SET_ASSESSMENT_FRAMEWORK_INNER_SINGLE_STATE,
   SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
-  SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE
+  SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SINGLE_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -41,6 +42,7 @@ const initialState = {
     notifications: NOTIFICATION_REPORT_POPUP,
     reports: NOTIFICATION_REPORT_POPUP
   },
+  assessmentAdminSequence: [],
   secondaryOptionCheckValue: '',
   informationBasic: {
     assessmentName: '',
@@ -77,6 +79,7 @@ const initialState = {
   informationFramework: {
     assessmentAdministrationProctor: false,
     assessmentAdministrationSupervise: false,
+    assessmentAdministrationSequence: [],
     assessmentAdministrationTemplate: false,
     assessmentAdministrationVersion: false,
     assessmentCommunique: [],
@@ -156,6 +159,11 @@ const initialState = {
 const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
   // console.log(action.type);
   switch (action.type) {
+    case SET_ASSESSMENT_SINGLE_STATE:
+      return {
+        ...istate,
+        [action.payload.stateName]: action.payload.value
+      };
     case ASSESSMENT_POPUP_OPEN:
       return {
         ...istate,

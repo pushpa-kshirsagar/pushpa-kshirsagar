@@ -19,6 +19,7 @@ import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
 import { input } from 'aws-amplify';
 import { createNameWithBadge } from '../Actions/StatusAction';
+import { setItemTypeConfigState } from '../Actions/GenericActions';
 
 const PopUpItemConfig = (props) => {
   const {
@@ -36,10 +37,12 @@ const PopUpItemConfig = (props) => {
   } = props;
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isAssessmentPreviewShow=false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { isAssessmentPreviewShow = false } = useSelector((state) => state.DisplayPaneThreeReducer);
   //const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
 
-  const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne?.itemFrameworkOneAlignment);
+  const [item_Aligement, set_Item_Aligement] = useState(
+    itemFrameworkOne?.itemFrameworkOneAlignment
+  );
   const [item_Type, set_Item_Type] = useState(itemFrameworkOne?.itemFrameworkOneType);
   const [response_word, set_Response_Word] = useState();
   const [response_Choice_Aligement, set_Choice_Response_Word] = useState();
@@ -81,83 +84,84 @@ const PopUpItemConfig = (props) => {
         value: item_Aligement
       }
     });
-    let reviseSetting = {
-      blankState: true,
-      classificationState: true,
-      levelState: true,
-      polarityState: true,
-      scaleState: true,
-      scoreState: true,
-      timeState: true,
-      weightageState: true,
-      noOfItemState: true,
-      noOfResponseState: true
-    };
-    if (item_Type === '61090cace50cf61d5eb440c9') {
-      // "Likert-Scale"
-      reviseSetting = {
-        blankState: false,
-        classificationState: true,
-        levelState: true,
-        polarityState: true,
-        scaleState: true,
-        scoreState: false,
-        timeState: true,
-        weightState: true,
-        noOfItemState: true,
-        noOfResponseState: true
-      };
-    }
-    if (item_Type === '61090cace50cf61d5eb440ce') {
-      //"Response-Choice (Single-Select)"
-      reviseSetting = {
-        blankState: false,
-        classificationState: false,
-        levelState: true,
-        polarityState: false,
-        scaleState: false,
-        scoreState: true,
-        timeState: true,
-        weightState: false,
-        noOfItemState: false,
-        noOfResponseState: true
-      };
-    }
-    if (item_Type === '61090cace50cf61d5eb440c4') {
-      //"Fill-in-the-Blank (Response-Choice)"
-      reviseSetting = {
-        blankState: true,
-        classificationState: false,
-        levelState: true,
-        polarityState: false,
-        scaleState: false,
-        scoreState: true,
-        timeState: true,
-        weightState: false,
-        noOfItemState: false,
-        noOfResponseState: true
-      };
-    }
-    if (item_Type === '61090cace50cf61d5eb440cc' || item_Type === '61090cace50cf61d5eb440cd') {
-      //"Response (Long)","Response (Short)"
-      reviseSetting = {
-        blankState: false,
-        classificationState: false,
-        levelState: true,
-        polarityState: false,
-        scaleState: false,
-        scoreState: true,
-        timeState: true,
-        weightState: false,
-        noOfItemState: false,
-        noOfResponseState: false
-      };
-    }
-    dispatch({
-      type: SET_DISPLAY_TWO_SINGLE_STATE,
-      payload: { stateName: 'itemConfigStates', value: reviseSetting }
-    });
-    if(isAssessmentPreviewShow){
+    setItemTypeConfigState(item_Type, dispatch, true);
+    // let reviseSetting = {
+    //   blankState: true,
+    //   classificationState: false,
+    //   levelState: true,
+    //   polarityState: true,
+    //   scaleState: true,
+    //   scoreState: true,
+    //   timeState: true,
+    //   weightageState: true,
+    //   noOfItemState: true,
+    //   noOfResponseState: true
+    // };
+    // if (item_Type === '61090cace50cf61d5eb440c9') {
+    //   // "Likert-Scale"
+    //   reviseSetting = {
+    //     blankState: false,
+    //     classificationState: false,
+    //     levelState: true,
+    //     polarityState: true,
+    //     scaleState: true,
+    //     scoreState: false,
+    //     timeState: true,
+    //     weightState: true,
+    //     noOfItemState: true,
+    //     noOfResponseState: true
+    //   };
+    // }
+    // if (item_Type === '61090cace50cf61d5eb440ce') {
+    //   //"Response-Choice (Single-Select)"
+    //   reviseSetting = {
+    //     blankState: false,
+    //     classificationState: false,
+    //     levelState: true,
+    //     polarityState: false,
+    //     scaleState: false,
+    //     scoreState: true,
+    //     timeState: true,
+    //     weightState: false,
+    //     noOfItemState: false,
+    //     noOfResponseState: true
+    //   };
+    // }
+    // if (item_Type === '61090cace50cf61d5eb440c4') {
+    //   //"Fill-in-the-Blank (Response-Choice)"
+    //   reviseSetting = {
+    //     blankState: true,
+    //     classificationState: false,
+    //     levelState: true,
+    //     polarityState: false,
+    //     scaleState: false,
+    //     scoreState: true,
+    //     timeState: true,
+    //     weightState: false,
+    //     noOfItemState: false,
+    //     noOfResponseState: true
+    //   };
+    // }
+    // if (item_Type === '61090cace50cf61d5eb440cc' || item_Type === '61090cace50cf61d5eb440cd') {
+    //   //"Response (Long)","Response (Short)"
+    //   reviseSetting = {
+    //     blankState: false,
+    //     classificationState: false,
+    //     levelState: true,
+    //     polarityState: false,
+    //     scaleState: false,
+    //     scoreState: true,
+    //     timeState: true,
+    //     weightState: false,
+    //     noOfItemState: false,
+    //     noOfResponseState: false
+    //   };
+    // }
+    // dispatch({
+    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+    //   payload: { stateName: 'itemConfigStates', value: reviseSetting }
+    // });
+    if (isAssessmentPreviewShow) {
       dispatch({
         type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: {
@@ -182,8 +186,7 @@ const PopUpItemConfig = (props) => {
           }
         }
       });
-
-    }else{
+    } else {
       dispatch({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: {
@@ -353,7 +356,7 @@ const PopUpItemConfig = (props) => {
           });
         }
         console.log('newbj', newbj);
-        if(isAssessmentPreviewShow){
+        if (isAssessmentPreviewShow) {
           dispatch({
             type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -361,7 +364,7 @@ const PopUpItemConfig = (props) => {
               value: [...itemFrameworkOneResponseChoice, ...newbj]
             }
           });
-        }else{
+        } else {
           dispatch({
             type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -377,7 +380,7 @@ const PopUpItemConfig = (props) => {
           //   dispatch({
           //     type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           //     payload: {
-          //       stateName: 'itemFrameworkOneSection',                
+          //       stateName: 'itemFrameworkOneSection',
           //       value: opArr
           //     }
           //   });
@@ -390,14 +393,13 @@ const PopUpItemConfig = (props) => {
           //       value: [...itemFrameworkOneResponseChoice, ...newbj]
           //     }
           //   });
-          // }        
+          // }
         }
-        
       }
     }
-    if(item_Type === '61090cace50cf61d5eb440c9'){
-      let section= itemFrameworkOne.itemFrameworkOneSection[0].itemFrameworkOneSection;
-      if(response_Choice>section.itemFrameworkOneResponseChoice.length){
+    if (item_Type === '61090cace50cf61d5eb440c9') {
+      let section = itemFrameworkOne.itemFrameworkOneSection[0].itemFrameworkOneSection;
+      if (response_Choice > section.itemFrameworkOneResponseChoice.length) {
         let choice = section.itemFrameworkOneResponseChoice.length;
         let newbj = [];
         let actlen = response_Choice - choice;
@@ -419,13 +421,16 @@ const PopUpItemConfig = (props) => {
           }
           console.log('newbj', newbj);
           let opArr = itemFrameworkOne.itemFrameworkOneSection;
-          opArr.forEach((element)=>{
-            element.itemFrameworkOneSection.itemFrameworkOneResponseChoice=[...section.itemFrameworkOneResponseChoice, ...newbj];
-          })
+          opArr.forEach((element) => {
+            element.itemFrameworkOneSection.itemFrameworkOneResponseChoice = [
+              ...section.itemFrameworkOneResponseChoice,
+              ...newbj
+            ];
+          });
           dispatch({
             type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
             payload: {
-              stateName: 'itemFrameworkOneSection',                
+              stateName: 'itemFrameworkOneSection',
               value: opArr
             }
           });
@@ -437,16 +442,16 @@ const PopUpItemConfig = (props) => {
         let newArr = arr.slice(0, -actlen);
         if (newArr.length >= 3) {
           let opArr = itemFrameworkOne.itemFrameworkOneSection;
-          opArr.forEach((element)=>{
-            element.itemFrameworkOneSection.itemFrameworkOneResponseChoice=[...newArr];
-          })
+          opArr.forEach((element) => {
+            element.itemFrameworkOneSection.itemFrameworkOneResponseChoice = [...newArr];
+          });
           dispatch({
             type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
             payload: {
-              stateName: 'itemFrameworkOneSection',                
+              stateName: 'itemFrameworkOneSection',
               value: opArr
             }
-          });          
+          });
         }
       }
     }

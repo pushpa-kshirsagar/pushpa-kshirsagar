@@ -27,6 +27,7 @@ const PopUpSectionCreate = (props) => {
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { indexPointer } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { assessmentAdminSequence } = useSelector((state) => state.AssessmentReducer);
 
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
@@ -436,6 +437,22 @@ const PopUpSectionCreate = (props) => {
         onClickSave={(data) => {
           dispatch({ type: SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE, payload: data });
         }}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ADMINSEWUENCEPOPUP'}
+        tag={'assessmentSectionAdministrationSequence'}
+        label={'sequence'}
+        listSelect={assessmentAdminSequence}
+        isMultiSelect={true}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={'section'}
+        headerOneBadgeOne={'information'}
+        nextPopUpValue={''}
+        basicInfo={sectionInformation}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
