@@ -16,7 +16,6 @@ import {
   SET_ASSESSMENT_SECTION_COMMUNIQUE_FRAMEWORK_STATE,
   SET_ASSESSMENT_SECTION_MANUSCRIPT_FRAMEWORK_STATE,
   SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE
-  
 } from '../../actionType';
 import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 
@@ -437,6 +436,20 @@ const PopUpSectionCreate = (props) => {
         onClickSave={(data) => {
           dispatch({ type: SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE, payload: data });
         }}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'TIMEASSESSMENT_SECTION_POPUP'}
+        label={'time'}
+        type={'number'}
+        actualLableValue={'assessmentSectionTime'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={sectionInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
       <PopUpDropList

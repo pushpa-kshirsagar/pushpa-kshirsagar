@@ -74,7 +74,7 @@ export const DisplayPaneFive = () => {
         if (currentItemIndex !== 0) {
           setcurrentItemIndex(prevIndex);
           setItemTypeConfigState(
-            informationFramework?.assessmentSection[currentSectionIndex]
+            responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
               ?.assessmentSectionItemDistinct[prevIndex].itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
@@ -83,7 +83,7 @@ export const DisplayPaneFive = () => {
             payload: {
               stateName: 'assessmentSectionItemDistinctRevise',
               value:
-                informationFramework?.assessmentSection[currentSectionIndex]
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
                   ?.assessmentSectionItemDistinct[prevIndex]
             }
           });
@@ -91,13 +91,13 @@ export const DisplayPaneFive = () => {
           if (currentSectionIndex !== 0) {
             setcurrentSectionIndex(currentSectionIndex - 1);
             setcurrentItemIndex(
-              informationFramework.assessmentSection[currentSectionIndex - 1]
+              responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                 ?.assessmentSectionItemDistinct.length - 1
             );
             setItemTypeConfigState(
-              informationFramework?.assessmentSection[currentSectionIndex - 1]
+              responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                 ?.assessmentSectionItemDistinct[
-                informationFramework.assessmentSection[currentSectionIndex - 1]
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                   ?.assessmentSectionItemDistinct.length - 1
               ].itemFrameworkOne.itemFrameworkOneType,
               dispatch
@@ -107,9 +107,9 @@ export const DisplayPaneFive = () => {
               payload: {
                 stateName: 'assessmentSectionItemDistinctRevise',
                 value:
-                  informationFramework?.assessmentSection[currentSectionIndex - 1]
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                     ?.assessmentSectionItemDistinct[
-                    informationFramework.assessmentSection[currentSectionIndex - 1]
+                    responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                       ?.assessmentSectionItemDistinct.length - 1
                   ]
               }
@@ -127,7 +127,7 @@ export const DisplayPaneFive = () => {
           setcurrentSectionIndex(currentSectionIndex);
           setcurrentItemIndex(0);
           setItemTypeConfigState(
-            informationFramework?.assessmentSection[currentSectionIndex]
+            responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
               ?.assessmentSectionItemDistinct[0].itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
@@ -136,7 +136,7 @@ export const DisplayPaneFive = () => {
             payload: {
               stateName: 'assessmentSectionItemDistinctRevise',
               value:
-                informationFramework?.assessmentSection[currentSectionIndex]
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
                   ?.assessmentSectionItemDistinct[0]
             }
           });
@@ -145,7 +145,7 @@ export const DisplayPaneFive = () => {
             setcurrentSectionIndex(currentSectionIndex - 1);
             setcurrentItemIndex(0);
             setItemTypeConfigState(
-              informationFramework?.assessmentSection[currentSectionIndex - 1]
+              responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                 ?.assessmentSectionItemDistinct[0].itemFrameworkOne.itemFrameworkOneType,
               dispatch
             );
@@ -154,7 +154,7 @@ export const DisplayPaneFive = () => {
               payload: {
                 stateName: 'assessmentSectionItemDistinctRevise',
                 value:
-                  informationFramework?.assessmentSection[currentSectionIndex - 1]
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                     ?.assessmentSectionItemDistinct[0]
               }
             });
@@ -164,13 +164,13 @@ export const DisplayPaneFive = () => {
       if (clickedval === 'next') {
         if (
           currentItemIndex <
-          informationFramework.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct
-            .length -
+          responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
+            ?.assessmentSectionItemDistinct.length -
             1
         ) {
           setcurrentItemIndex(currentItemIndex + 1);
           setItemTypeConfigState(
-            informationFramework?.assessmentSection[currentSectionIndex]
+            responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
               ?.assessmentSectionItemDistinct[currentItemIndex + 1].itemFrameworkOne
               .itemFrameworkOneType,
             dispatch
@@ -181,12 +181,15 @@ export const DisplayPaneFive = () => {
             payload: {
               stateName: 'assessmentSectionItemDistinctRevise',
               value:
-                informationFramework?.assessmentSection[currentSectionIndex]
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
                   ?.assessmentSectionItemDistinct[currentItemIndex + 1]
             }
           });
         } else {
-          if (currentSectionIndex < informationFramework?.assessmentSection.length - 1) {
+          if (
+            currentSectionIndex <
+            responseObject?.informationFramework?.assessmentSection.length - 1
+          ) {
             setcurrentSectionIndex(currentSectionIndex + 1);
             setcurrentItemIndex(0);
             dispatch({
@@ -194,7 +197,7 @@ export const DisplayPaneFive = () => {
               payload: {
                 stateName: 'assessmentSectionItemDistinctRevise',
                 value:
-                  informationFramework?.assessmentSection[currentSectionIndex + 1]
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex + 1]
                     ?.assessmentSectionItemDistinct[0]
               }
             });
@@ -204,16 +207,16 @@ export const DisplayPaneFive = () => {
       if (clickedval === 'last') {
         if (
           currentItemIndex <
-          informationFramework.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct
-            .length -
+          responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
+            ?.assessmentSectionItemDistinct.length -
             1
         ) {
           let lastIndex =
-            informationFramework.assessmentSection[currentSectionIndex]
+            responseObject?.informationFramework.assessmentSection[currentSectionIndex]
               ?.assessmentSectionItemDistinct.length - 1;
           setcurrentItemIndex(lastIndex);
           setItemTypeConfigState(
-            informationFramework?.assessmentSection[currentSectionIndex]
+            responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
               ?.assessmentSectionItemDistinct[lastIndex].itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
@@ -222,19 +225,22 @@ export const DisplayPaneFive = () => {
             payload: {
               stateName: 'assessmentSectionItemDistinctRevise',
               value:
-                informationFramework?.assessmentSection[currentSectionIndex]
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
                   ?.assessmentSectionItemDistinct[lastIndex]
             }
           });
         } else {
-          if (currentSectionIndex < informationFramework?.assessmentSection.length - 1) {
+          if (
+            currentSectionIndex <
+            responseObject?.informationFramework?.assessmentSection.length - 1
+          ) {
             setcurrentSectionIndex(currentSectionIndex + 1);
             let lastIndex =
-              informationFramework.assessmentSection[currentSectionIndex + 1]
+              responseObject?.informationFramework.assessmentSection[currentSectionIndex + 1]
                 ?.assessmentSectionItemDistinct.length - 1;
             setcurrentItemIndex(lastIndex);
             setItemTypeConfigState(
-              informationFramework?.assessmentSection[currentSectionIndex]
+              responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
                 ?.assessmentSectionItemDistinct[lastIndex].itemFrameworkOne.itemFrameworkOneType,
               dispatch
             );
@@ -243,7 +249,7 @@ export const DisplayPaneFive = () => {
               payload: {
                 stateName: 'assessmentSectionItemDistinctRevise',
                 value:
-                  informationFramework?.assessmentSection[currentSectionIndex + 1]
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex + 1]
                     ?.assessmentSectionItemDistinct[lastIndex]
               }
             });
@@ -275,38 +281,42 @@ export const DisplayPaneFive = () => {
   };
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
-    dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
-    //const { informationFramework } = informationFramework;
-    const { id } = responseObject;
-    const reqBody = {
-      assesseeId: selectedAssociateInfo?.assesseeId,
-      associateId:
-        selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
-      assessment: {
-        id: id,
-        informationFramework: {
-          assessmentSection: [
-            {
-              sectionIndex: 0,
-              assessmentSectionItemFrameworkOneDistinct: [
-                informationFramework?.assessmentSectionItemDistinctRevise
-              ]
-            }
-          ]
+    if (isAssessmentSectionShow) {
+      dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+    } else {
+      dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+      //const { informationFramework } = informationFramework;
+      const { id } = responseObject;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessment: {
+          id: id,
+          informationFramework: {
+            assessmentSection: [
+              {
+                sectionIndex: currentSectionIndex,
+                assessmentSectionItemFrameworkOneDistinct: [
+                  informationFramework?.assessmentSectionItemDistinctRevise
+                ]
+              }
+            ]
+          }
         }
-      }
-    };
-    console.log('ASSESSMENT REVISE ===', reqBody);
-    dispatch({ type: LOADER_START });
-    dispatch({
-      type: ASSESSMENT_INFO_PREVIEW_SAGA,
-      payload: {
-        secondaryOptionCheckValue: headerOneBadgeTwo,
-        headerOne: 'assessment',
-        reqBody,
-        createMode
-      }
-    });
+      };
+      console.log('ASSESSMENT REVISE ===', reqBody);
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_INFO_PREVIEW_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assessment',
+          reqBody,
+          createMode
+        }
+      });
+    }
   };
   const onClickRevise = () => {
     setIsShowReviseIcon(false);
@@ -336,9 +346,8 @@ export const DisplayPaneFive = () => {
 
   var itemObect = isAssessmentSectionShow
     ? responseObject?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
-    : informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[
-        currentItemIndex
-      ]?.itemFrameworkOne;
+    : responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
+        ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne;
   console.log('itemObect', itemObect);
 
   return (
@@ -349,7 +358,7 @@ export const DisplayPaneFive = () => {
             <DisplayPaneFiveAssessment
               headerOne={headerOne}
               closePreview={closePreview}
-              informationFramework={informationFramework}
+              informationFramework={responseObject?.informationFramework}
               currentItemIndex={currentItemIndex}
               currentSectionIndex={currentSectionIndex}
               itemObect={itemObect}
