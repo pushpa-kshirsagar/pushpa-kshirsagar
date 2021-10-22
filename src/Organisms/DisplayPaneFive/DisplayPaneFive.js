@@ -9,7 +9,8 @@ import {
   SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   ASSESSMENT_INFO_PREVIEW_SAGA,
-  SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE
+  SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
+  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE
 } from '../../actionType';
 import '../../Molecules/ReviewList/ReviewList.css';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
@@ -58,6 +59,8 @@ export const DisplayPaneFive = () => {
   );
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { FilterMode, navigatorIcon } = useSelector((state) => state.FilterReducer);
+  const {sectionInformation}=useSelector((state) => state.SectionCreateReducer);
+  console.log('sectionInformationReducerObejct',sectionInformation);
   const closePreview = () => {
     if (isAssessmentSectionShow) {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: false });
@@ -72,206 +75,262 @@ export const DisplayPaneFive = () => {
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
     dispatch({ type: NAVIGATOR_MODE });
-if(isAssessmentPreviewShow){
-  if (clickedval === 'previous') {
-    let prevIndex = currentItemIndex - 1;
-    if (currentItemIndex !== 0) {
-      setcurrentItemIndex(prevIndex);
-      setItemTypeConfigState(
-        responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[prevIndex]
-          .itemFrameworkOne.itemFrameworkOneType,
-        dispatch
-      );
-      dispatch({
-        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-        payload: {
-          stateName: 'assessmentSectionItemDistinctRevise',
-          value:
-          responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[prevIndex]
-        }
-      });
-    } else {
-      if(currentSectionIndex!==0){
-        setcurrentSectionIndex(currentSectionIndex - 1);
-        setcurrentItemIndex(responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct.length - 1);
-        setItemTypeConfigState(
-          responseObject?.informationFramework?.assessmentSection[currentSectionIndex-1]?.assessmentSectionItemDistinct[
-            responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct.length - 1
-          ]
-            .itemFrameworkOne.itemFrameworkOneType,
-          dispatch
-        );
-        dispatch({
-          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-          payload: {
-            stateName: 'assessmentSectionItemDistinctRevise',
-            value:
-            responseObject?.informationFramework?.assessmentSection[currentSectionIndex-1]?.assessmentSectionItemDistinct[
-              responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct.length - 1
+    if (isAssessmentPreviewShow) {
+      if (clickedval === 'previous') {
+        let prevIndex = currentItemIndex - 1;
+        if (currentItemIndex !== 0) {
+          setcurrentItemIndex(prevIndex);
+          setItemTypeConfigState(
+            responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[prevIndex]
+              .itemFrameworkOne.itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctRevise',
+              value:
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[prevIndex]
+            }
+          });
+        } else {
+          if (currentSectionIndex !== 0) {
+            setcurrentSectionIndex(currentSectionIndex - 1);
+            setcurrentItemIndex(responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct.length - 1);
+            setItemTypeConfigState(
+              responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct[
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct.length - 1
               ]
+                .itemFrameworkOne.itemFrameworkOneType,
+              dispatch
+            );
+            dispatch({
+              type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+              payload: {
+                stateName: 'assessmentSectionItemDistinctRevise',
+                value:
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct[
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct.length - 1
+                  ]
+              }
+            });
           }
-        });
-      }
-      // if (currentSectionIndex === informationFramework?.assessmentSection.length - 1) {
-      //   setcurrentSectionIndex(currentSectionIndex - 1);
-      //   setcurrentItemIndex(informationFramework.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct.length - 1);
-      //   //informationFramework.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length - 1
-      // }
-    }
-  }
-  if (clickedval === 'first') {
-    if (currentItemIndex !== 0) {
-      setcurrentSectionIndex(currentSectionIndex);
-      setcurrentItemIndex(0);
-      setItemTypeConfigState(
-        responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[0]
-          .itemFrameworkOne.itemFrameworkOneType,
-        dispatch
-      );
-      dispatch({
-        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-        payload: {
-          stateName: 'assessmentSectionItemDistinctRevise',
-          value: responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[0]
+          // if (currentSectionIndex === informationFramework?.assessmentSection.length - 1) {
+          //   setcurrentSectionIndex(currentSectionIndex - 1);
+          //   setcurrentItemIndex(informationFramework.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct.length - 1);
+          //   //informationFramework.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length - 1
+          // }
         }
-      })
-    } else {
-      if (currentSectionIndex !== 0) {
-        setcurrentSectionIndex(currentSectionIndex - 1);
+      }
+      if (clickedval === 'first') {
+        if (currentItemIndex !== 0) {
+          setcurrentSectionIndex(currentSectionIndex);
+          setcurrentItemIndex(0);
+          setItemTypeConfigState(
+            responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[0]
+              .itemFrameworkOne.itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctRevise',
+              value: responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[0]
+            }
+          })
+        } else {
+          if (currentSectionIndex !== 0) {
+            setcurrentSectionIndex(currentSectionIndex - 1);
+            setcurrentItemIndex(0);
+            setItemTypeConfigState(
+              responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct[0]
+                .itemFrameworkOne.itemFrameworkOneType,
+              dispatch
+            );
+            dispatch({
+              type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+              payload: {
+                stateName: 'assessmentSectionItemDistinctRevise',
+                value: responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct[0]
+              }
+            })
+          }
+        }
+      }
+      if (clickedval === 'next') {
+        if (
+          currentItemIndex <
+          responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length - 1
+        ) {
+          setcurrentItemIndex(currentItemIndex + 1);
+          setItemTypeConfigState(
+            responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[
+              currentItemIndex + 1
+            ].itemFrameworkOne.itemFrameworkOneType,
+            dispatch
+          );
+
+          dispatch({
+            type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctRevise',
+              value:
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[
+                currentItemIndex + 1
+                ]
+            }
+          });
+        } else {
+          if (currentSectionIndex < responseObject?.informationFramework?.assessmentSection.length - 1) {
+            setcurrentSectionIndex(currentSectionIndex + 1);
+            setcurrentItemIndex(0);
+            dispatch({
+              type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+              payload: {
+                stateName: 'assessmentSectionItemDistinctRevise',
+                value:
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex + 1]?.assessmentSectionItemDistinct[
+                  0
+                  ]
+              }
+            });
+          }
+        }
+      }
+      if (clickedval === 'last') {
+        if (
+          currentItemIndex <
+          responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length - 1
+        ) {
+          let lastIndex =
+            responseObject?.informationFramework.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length - 1;
+          setcurrentItemIndex(lastIndex);
+          setItemTypeConfigState(
+            responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[lastIndex]
+              .itemFrameworkOne.itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctRevise',
+              value:
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[lastIndex]
+            }
+          });
+        } else {
+          if (currentSectionIndex < responseObject?.informationFramework?.assessmentSection.length - 1) {
+            setcurrentSectionIndex(currentSectionIndex + 1);
+            let lastIndex = responseObject?.informationFramework.assessmentSection[currentSectionIndex + 1]?.assessmentSectionItemDistinct.length - 1;
+            setcurrentItemIndex(lastIndex);
+            setItemTypeConfigState(
+              responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[lastIndex]
+                .itemFrameworkOne.itemFrameworkOneType,
+              dispatch
+            );
+            dispatch({
+              type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+              payload: {
+                stateName: 'assessmentSectionItemDistinctRevise',
+                value:
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex + 1]?.assessmentSectionItemDistinct[lastIndex]
+              }
+            });
+          }
+        }
+      }
+    }
+    else if (isAssessmentSectionShow) {
+      if (clickedval === 'first') {
         setcurrentItemIndex(0);
         setItemTypeConfigState(
-          responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct[0]
-            .itemFrameworkOne.itemFrameworkOneType,
+          responseObject?.assessmentSectionItemDistinct[0]?.itemFrameworkOne.itemFrameworkOneType,
           dispatch
         );
         dispatch({
-          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
           payload: {
-            stateName: 'assessmentSectionItemDistinctRevise',
-            value: responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]?.assessmentSectionItemDistinct[0]
-          }
-        })
-      }
-    }
-  }
-  if (clickedval === 'next') {
-    if (
-      currentItemIndex <
-      responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length - 1
-    ) {
-      setcurrentItemIndex(currentItemIndex + 1);
-      setItemTypeConfigState(
-        responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[
-          currentItemIndex + 1
-        ].itemFrameworkOne.itemFrameworkOneType,
-        dispatch
-      );
-
-      dispatch({
-        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-        payload: {
-          stateName: 'assessmentSectionItemDistinctRevise',
-          value:
-          responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[
-            currentItemIndex + 1
-            ]
-        }
-      });
-    } else {
-      if (currentSectionIndex < responseObject?.informationFramework?.assessmentSection.length - 1) {
-        setcurrentSectionIndex(currentSectionIndex + 1);
-        setcurrentItemIndex(0);
-        dispatch({
-          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-          payload: {
-            stateName: 'assessmentSectionItemDistinctRevise',
-            value:
-            responseObject?.informationFramework?.assessmentSection[currentSectionIndex + 1]?.assessmentSectionItemDistinct[
-              0
-              ]
+            stateName: 'assessmentSectionItemDistinctReviseObject',
+            value: responseObject?.assessmentSectionItemDistinct[0]
           }
         });
       }
-    }
-  }
-  if (clickedval === 'last') {
-    if (
-      currentItemIndex <
-      responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length - 1
-    ) {
-      let lastIndex =
-      responseObject?.informationFramework.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct.length - 1;
-      setcurrentItemIndex(lastIndex);
-      setItemTypeConfigState(
-        responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[lastIndex]
-          .itemFrameworkOne.itemFrameworkOneType,
-        dispatch
-      );
-      dispatch({
-        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-        payload: {
-          stateName: 'assessmentSectionItemDistinctRevise',
-          value:
-          responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[lastIndex]
+      if (clickedval === 'previous') {
+        let prevIndex = currentItemIndex - 1;
+        if (currentItemIndex != 0) {
+          setcurrentItemIndex(prevIndex);
+          setItemTypeConfigState(
+            responseObject?.assessmentSectionItemDistinct[prevIndex]?.itemFrameworkOne.itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctReviseObject',
+              value: responseObject?.assessmentSectionItemDistinct[prevIndex]
+            }
+          });
         }
-      });
-    } else {
-      if (currentSectionIndex < responseObject?.informationFramework?.assessmentSection.length - 1) {
-        setcurrentSectionIndex(currentSectionIndex + 1);
-        let lastIndex = responseObject?.informationFramework.assessmentSection[currentSectionIndex + 1]?.assessmentSectionItemDistinct.length - 1;
-        setcurrentItemIndex(lastIndex);
-        setItemTypeConfigState(
-          responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[lastIndex]
-            .itemFrameworkOne.itemFrameworkOneType,
-          dispatch
-        );
-        dispatch({
-          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-          payload: {
-            stateName: 'assessmentSectionItemDistinctRevise',
-            value:
-            responseObject?.informationFramework?.assessmentSection[currentSectionIndex + 1]?.assessmentSectionItemDistinct[lastIndex]
-          }
-        });
+      }
+      if (clickedval === 'next') {
+        if (
+          currentItemIndex <
+          responseObject.assessmentSectionItemDistinct.length - 1
+        ) {
+          setcurrentItemIndex(currentItemIndex + 1);
+          setItemTypeConfigState(
+            responseObject?.assessmentSectionItemDistinct[currentItemIndex + 1]?.itemFrameworkOne.itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctReviseObject',
+              value: responseObject?.assessmentSectionItemDistinct[currentItemIndex + 1]
+            }
+          });
+        }
+      }
+      if (clickedval === 'last') {
+        if (
+          currentItemIndex <
+          responseObject.assessmentSectionItemDistinct.length - 1
+        ) {
+          let lastIndex =
+            responseObject.assessmentSectionItemDistinct.length - 1;
+          setcurrentItemIndex(lastIndex);
+          setItemTypeConfigState(
+            responseObject?.assessmentSectionItemDistinct[lastIndex]?.itemFrameworkOne.itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctReviseObject',
+              value: responseObject?.assessmentSectionItemDistinct[lastIndex]
+            }
+          });
+        }
       }
     }
-  }
-}else{
-  if(clickedval==='first'){
-    setcurrentItemIndex(0);
-  }
-  if(clickedval==='previous'){
-    let prevIndex = currentItemIndex - 1;
-    if(currentItemIndex!=0){
-      setcurrentItemIndex(prevIndex);
+    else {
     }
-  }
-  if(clickedval==='next'){
-    if (
-      currentItemIndex <
-      responseObject.assessmentSectionItemDistinct.length - 1
-    ) {
-      setcurrentItemIndex(currentItemIndex + 1);
-    }
-  }
-  if(clickedval==='last'){
-    if (
-      currentItemIndex <
-      responseObject.assessmentSectionItemDistinct.length - 1
-    ) {
-      let lastIndex =
-      responseObject.assessmentSectionItemDistinct.length - 1;
-      setcurrentItemIndex(lastIndex);
-    }
-
-  }
-}
   };
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
-    if(isAssessmentSectionShow){
-      dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
-    }else{
+    if (isAssessmentSectionShow) {
+      //dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+      let itemDistinctReviseObj=sectionInformation?.assessmentSectionItemFrameworkOneDistinct;
+      itemDistinctReviseObj[currentItemIndex].itemFrameworkOne=sectionInformation?.assessmentSectionItemDistinctReviseObject?.itemFrameworkOne;
+      dispatch({
+        type:SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+        payload:{
+          stateName: 'assessmentSectionItemFrameworkOneDistinct',
+          value: itemDistinctReviseObj
+        }
+      })
+
+    } else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
       //const { informationFramework } = informationFramework;
       const { id } = responseObject;
@@ -334,9 +393,9 @@ if(isAssessmentPreviewShow){
 
 
   var itemObect = isAssessmentSectionShow ? responseObject?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne :
-  isAssessmentPreviewShow?
-    responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[currentItemIndex]
-      ?.itemFrameworkOne:'';
+    isAssessmentPreviewShow ?
+      responseObject?.informationFramework?.assessmentSection[currentSectionIndex]?.assessmentSectionItemDistinct[currentItemIndex]
+        ?.itemFrameworkOne : '';
   console.log('itemObect', itemObect);
 
   return (

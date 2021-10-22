@@ -68,7 +68,8 @@ import {
   CLEAR_CLUSTER_REDUCER_STATE,
   CLEAR_SECTION_REDUCER_STATE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-  SET_SECTION_REDUCER_STATE
+  SET_SECTION_REDUCER_STATE,
+  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -119,7 +120,8 @@ import {
   getNodeJobProfileReqObj,
   getAssociateTypeAssociateReqObj,
   getAssesseeTypeAssesseeReqObj,
-  makeAssesseeReviewListRequestObject
+  makeAssesseeReviewListRequestObject,
+  setItemTypeConfigState
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -1415,10 +1417,21 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           payload:relatedReviewListDistinctData[0].sections[selectedTagValue]
         })
         dispatch({
-          type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+          type:SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+          payload:{
+            stateName: 'assessmentSectionItemFrameworkOneDistinct',
+            value: relatedReviewListDistinctData[0].sections[selectedTagValue].assessmentSectionItemDistinct
+          }
+        })
+        setItemTypeConfigState(
+          relatedReviewListDistinctData[0].sections[selectedTagValue].assessmentSectionItemDistinct[0].itemFrameworkOne.itemFrameworkOneType,
+          dispatch
+        );
+        dispatch({
+          type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
           payload: {
-            stateName: 'assessmentSectionItemDistinctRevise',
-            value: relatedReviewListDistinctData[0].sections[selectedTagValue]
+            stateName: 'assessmentSectionItemDistinctReviseObject',
+            value: relatedReviewListDistinctData[0].sections[selectedTagValue].assessmentSectionItemDistinct[0]
           }
         });
         dispatch({ type: LOADER_STOP });

@@ -165,6 +165,10 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       isListCard: false,
       labelTextOneOneBadges: [
         {
+          labelTextOneOneBadge: 'template',
+          textOne: informationFramework?.assessmentItemFrameworkOneTemplate || 'No Information'
+        }
+        ,{
           labelTextOneOneBadge: 'total',
           textOne: informationFramework?.assessmentItemTotal || 'No Information'
         }

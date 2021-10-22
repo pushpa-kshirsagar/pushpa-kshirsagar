@@ -44,9 +44,9 @@ const DisplayPanelAccordianInformation = (props) => {
                 style={{
                   height:
                     multiline &&
-                    selectedBadge &&
-                    selectedBadge.textOne &&
-                    selectedBadge.textOne.length > 40
+                      selectedBadge &&
+                      selectedBadge.textOne &&
+                      selectedBadge.textOne.length > 40
                       ? '105px'
                       : '50px'
                 }}
@@ -69,11 +69,11 @@ const DisplayPanelAccordianInformation = (props) => {
                         onClick={
                           mode === 'revise'
                             ? (e) => {
-                                onClickRevise(e, selectedBadgeArray, selectedBadge);
-                              }
+                              onClickRevise(e, selectedBadgeArray, selectedBadge);
+                            }
                             : (e) => {
-                                onClickReview(e);
-                              }
+                              onClickReview(e);
+                            }
                         }
                         data-value={labelTextOneOne}
                         data-key={selectedBadge?.labelTextTwoBadge || ''}
@@ -123,7 +123,7 @@ const DisplayPanelAccordianInformation = (props) => {
                                     style={{
                                       backgroundColor:
                                         selectedBadge &&
-                                        selectedBadge.labelTextTwoBadge === ob.labelTextTwoBadge
+                                          selectedBadge.labelTextTwoBadge === ob.labelTextTwoBadge
                                           ? '#F2F2F2'
                                           : '#ffffff'
                                     }}
@@ -158,7 +158,7 @@ const DisplayPanelAccordianInformation = (props) => {
                                     style={{
                                       backgroundColor:
                                         selectedBadge &&
-                                        selectedBadge.labelTextTwoBadge === ob.labelTextTwoBadge
+                                          selectedBadge.labelTextTwoBadge === ob.labelTextTwoBadge
                                           ? '#F2F2F2'
                                           : '#ffffff'
                                     }}
@@ -197,8 +197,8 @@ const DisplayPanelAccordianInformation = (props) => {
                           row={2}
                           rowsMax={
                             multiline &&
-                            selectedBadge.innerLabelBadgeList &&
-                            selectedBadge.innerLabelBadgeList.length > 40
+                              selectedBadge.innerLabelBadgeList &&
+                              selectedBadge.innerLabelBadgeList.length > 40
                               ? 4
                               : 1
                           }
@@ -237,20 +237,20 @@ const DisplayPanelAccordianInformation = (props) => {
                       onClick={
                         mode === 'revise'
                           ? () => {
-                              // onClickRevise(e,'',
-                              //   //selectedBadge?.labelTextOneOneBadge || ''
-                              //   )
-                              onClickReview(
-                                labelTextOneOne,
-                                selectedBadge?.labelTextOneOneBadge || ''
-                              );
-                            }
+                            // onClickRevise(e,'',
+                            //   //selectedBadge?.labelTextOneOneBadge || ''
+                            //   )
+                            onClickReview(
+                              labelTextOneOne,
+                              selectedBadge?.labelTextOneOneBadge || ''
+                            );
+                          }
                           : () => {
-                              onClickReview(
-                                labelTextOneOne,
-                                selectedBadge?.labelTextOneOneBadge || ''
-                              );
-                            }
+                            onClickReview(
+                              labelTextOneOne,
+                              selectedBadge?.labelTextOneOneBadge || ''
+                            );
+                          }
                       }
                     >
                       <IconReset className={mode === 'revise' ? 'linkText' : reviewLabelClass} />
@@ -266,17 +266,17 @@ const DisplayPanelAccordianInformation = (props) => {
                           onClick={
                             mode === 'revise'
                               ? () => {
-                                  onClickReview(
-                                    labelTextOneOne,
-                                    selectedBadge?.labelTextTwoBadge || ''
-                                  );
-                                }
+                                onClickReview(
+                                  labelTextOneOne,
+                                  selectedBadge?.labelTextTwoBadge || ''
+                                );
+                              }
                               : () => {
-                                  onClickReview(
-                                    labelTextOneOne,
-                                    selectedBadge?.labelTextOneOneBadge || ''
-                                  );
-                                }
+                                onClickReview(
+                                  labelTextOneOne,
+                                  selectedBadge?.labelTextOneOneBadge || ''
+                                );
+                              }
                           }
                         >
                           <selectedBadge.IconOne
@@ -298,20 +298,20 @@ const DisplayPanelAccordianInformation = (props) => {
                             onClick={
                               mode === 'revise'
                                 ? () => {
-                                    // onClickRevise(e,'',
-                                    //   //selectedBadge?.labelTextOneOneBadge || ''
-                                    //   )
-                                    onClickReview(
-                                      labelTextOneOne,
-                                      selectedBadge?.labelTextOneOneBadge || ''
-                                    );
-                                  }
+                                  // onClickRevise(e,'',
+                                  //   //selectedBadge?.labelTextOneOneBadge || ''
+                                  //   )
+                                  onClickReview(
+                                    labelTextOneOne,
+                                    selectedBadge?.labelTextOneOneBadge || ''
+                                  );
+                                }
                                 : () => {
-                                    onClickReview(
-                                      labelTextOneOne,
-                                      selectedBadge?.labelTextOneOneBadge || ''
-                                    );
-                                  }
+                                  onClickReview(
+                                    labelTextOneOne,
+                                    selectedBadge?.labelTextOneOneBadge || ''
+                                  );
+                                }
                             }
                           >
                             <IconOne
@@ -353,9 +353,9 @@ const DisplayPanelAccordianInformation = (props) => {
               style={{
                 height:
                   multiline &&
-                  selectedBadge &&
-                  selectedBadge.textOne &&
-                  selectedBadge.textOne.length > 40
+                    selectedBadge &&
+                    selectedBadge.textOne &&
+                    selectedBadge.textOne.length > 40
                     ? '105px'
                     : '50px'
               }}
@@ -398,7 +398,7 @@ const DisplayPanelAccordianInformation = (props) => {
                               style={{
                                 backgroundColor:
                                   selectedBadge &&
-                                  selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
+                                    selectedBadge.labelTextOneOneBadge === ob.labelTextOneOneBadge
                                     ? '#F2F2F2'
                                     : '#ffffff'
                               }}
@@ -446,17 +446,17 @@ const DisplayPanelAccordianInformation = (props) => {
                         onClick={
                           mode === 'revise'
                             ? () => {
-                                onClickReview(
-                                  labelTextOneOne,
-                                  selectedBadge?.labelTextOneOneBadge || ''
-                                );
-                              }
+                              onClickReview(
+                                labelTextOneOne,
+                                selectedBadge?.labelTextOneOneBadge || ''
+                              );
+                            }
                             : () => {
-                                onClickReview(
-                                  labelTextOneOne,
-                                  selectedBadge?.labelTextOneOneBadge || ''
-                                );
-                              }
+                              onClickReview(
+                                labelTextOneOne,
+                                selectedBadge?.labelTextOneOneBadge || ''
+                              );
+                            }
                         }
                       >
                         <selectedBadge.IconOne />
@@ -471,29 +471,29 @@ const DisplayPanelAccordianInformation = (props) => {
                           onClick={
                             mode === 'revise'
                               ? () => {
-                                  onClickReview(
-                                    labelTextOneOne,
-                                    selectedBadge?.labelTextOneOneBadge || ''
-                                  );
-                                }
+                                onClickReview(
+                                  labelTextOneOne,
+                                  selectedBadge?.labelTextOneOneBadge || ''
+                                );
+                              }
                               : () => {
-                                  onClickReview(
-                                    labelTextOneOne,
-                                    selectedBadge?.labelTextOneOneBadge || ''
-                                  );
-                                }
+                                onClickReview(
+                                  labelTextOneOne,
+                                  selectedBadge?.labelTextOneOneBadge || ''
+                                );
+                              }
                           }
                         >
                           <IconOne />
                         </IconButton>
                       </div>
                     )}
-                    {
-                          isAddIcon?(
-                          <InputLabel  htmlFor="name-input"
-                          className={['textForLabel', 'textForLabelRight'].join(' ')}>create</InputLabel>
-                          ):null
-                      }
+                    {isAddIcon &&(
+                      <div className={['unitFlex', 'verifiedUser', ''].join(' ')}>
+                        <InputLabel htmlFor="name-input"
+                          className={[''].join(' ')}>create</InputLabel>
+                      </div>
+                    )}
                   </>
                 )}
                 {selectedBadge.IconTwo ? (

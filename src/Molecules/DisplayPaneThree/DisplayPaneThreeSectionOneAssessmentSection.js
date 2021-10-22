@@ -80,11 +80,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: responseObject?.assessmentSectionAidCalculatorPermission?'Permitted':'Unpermitted'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidCalculatorPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: responseObject?.assessmentSectionAidCalculatorType||'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidCalculatorType||'No Information'
             }
           ]
         },
@@ -93,11 +93,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: responseObject?.assessmentSectionAidSpreadsheetPermission?'Permitted':'Unpermitted'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidSpreadsheetPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: responseObject?.assessmentSectionAidSpreadsheetType||'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidSpreadsheetType||'No Information'
             }
           ]
         },
@@ -106,11 +106,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: responseObject?.assessmentSectionAidTextsheetPermission?'Permitted':'Unpermitted'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidTextsheetPermission?'Permitted':'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: responseObject?.assessmentSectionAidTextsheetType||'No Information'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidTextsheetType||'No Information'
             }
           ]
         }
@@ -134,9 +134,9 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
     },
     {
       id: 'a2',
-      textOneOne: 'No Information',
+      //textOneOne: 'No Information',
       labelTextOneOne: 'evaluation',
-      textOne:responseObject?.assessmentSectionEvaluation ?'Yes':'No',
+      textOneOne:responseObject?.assessmentSectionEvaluation ?'Yes':'No',
       innerAssociateList: [],
       innerInfo: 'No Information',
       isListCard: false
@@ -159,9 +159,13 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           textOne: 'No Information'
         },
         {
-          labelTextOneOneBadge: 'practice',
+          labelTextOneOneBadge: 'navigation',
           textOne: 'No Information'
         },
+        // {
+        //   labelTextOneOneBadge: 'practice',
+        //   textOne: 'No Information'
+        // },
         {
           labelTextOneOneBadge: 'total',
           textOne: 'No Information'
@@ -263,7 +267,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
     },
     {
       id: 'a2',
-      textOneOne: 'No Information',
+      textOneOne:responseObject?.assessmentSectionSequence|| 'No Information',
       labelTextOneOne: 'sequence',
       innerAssociateList: [],
       innerInfo: 'No Information',

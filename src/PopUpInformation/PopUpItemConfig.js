@@ -13,7 +13,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   SET_NEXT_POPUP,
-  SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE
+  SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE
 } from '../actionType';
 import InfoToolTip from '../Atoms/InfoToolTip/InfoToolTip';
 import { REQUIRED_ERROR_MESSAGE } from '../errorMessage';
@@ -36,7 +37,7 @@ const PopUpItemConfig = (props) => {
   } = props;
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isAssessmentPreviewShow=false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { isAssessmentPreviewShow=false,isAssessmentSectionShow=false } = useSelector((state) => state.DisplayPaneThreeReducer);
   //const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
 
   const [item_Aligement, set_Item_Aligement] = useState(itemFrameworkOne?.itemFrameworkOneAlignment);
@@ -183,7 +184,33 @@ const PopUpItemConfig = (props) => {
         }
       });
 
-    }else{
+    }else if(isAssessmentSectionShow){
+      dispatch({
+        type: SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneType',
+          value: item_Type
+        }
+      });
+      dispatch({
+        type: SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneResponseAlignment',
+          value: response_Aligement
+        }
+      });
+      dispatch({
+        type: SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+        payload: {
+          stateName: 'itemFrameworkOneWord',
+          value: {
+            itemFrameworkOneWordMaximum: response_word,
+            itemFrameworkOneWordMinimum: response_word
+          }
+        }
+      });
+    }
+    else{
       dispatch({
         type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
         payload: {
@@ -369,6 +396,19 @@ const PopUpItemConfig = (props) => {
               value: [...itemFrameworkOneResponseChoice, ...newbj]
             }
           });
+          // if(item_Type=== '61161713f24e1fb765208e23'){
+          //          let opArr = itemFrameworkOne.itemFrameworkOneSection;
+          //   opArr.forEach((element)=>{
+          //     element.itemFrameworkOneSection.itemFrameworkOneResponseChoice=[...itemFrameworkOneResponseChoice, ...newbj];
+          //   })
+          //   dispatch({
+          //     type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+          //     payload: {
+          //       stateName: 'itemFrameworkOneSection',                
+          //       value: opArr
+          //     }
+          //   });
+          // }
           // if(item_Type === '61090cace50cf61d5eb440c9'){
           //   let opArr = itemFrameworkOne.itemFrameworkOneSection;
           //   opArr.forEach((element)=>{
@@ -395,7 +435,7 @@ const PopUpItemConfig = (props) => {
         
       }
     }
-    if(item_Type === '61090cace50cf61d5eb440c9'){
+    if(item_Type === '61090cace50cf61d5eb440c9'||item_Type=== '61161713f24e1fb765208e23'){
       let section= itemFrameworkOne.itemFrameworkOneSection[0].itemFrameworkOneSection;
       if(response_Choice>section.itemFrameworkOneResponseChoice.length){
         let choice = section.itemFrameworkOneResponseChoice.length;
