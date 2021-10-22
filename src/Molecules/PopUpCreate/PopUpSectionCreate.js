@@ -29,7 +29,6 @@ const PopUpSectionCreate = (props) => {
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { indexPointer } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { assessmentAdminSequence } = useSelector((state) => state.AssessmentReducer);
-console.log('assessmentAdminSequence',assessmentAdminSequence);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({
@@ -102,6 +101,7 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
         isActive={isPopUpValue === 'AID_CAL_POPUP'}
         tag={'assessmentSectionAidCalculatorPermission'}
         label={'calculator'}
+        labelBadgeOne={'permission'}
         listSelect={[
           { id: true, name: 'Permitted' },
           { id: false, name: 'Unpermitted' }
@@ -122,6 +122,7 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
         isActive={isPopUpValue === 'AID_SHEET_POPUP'}
         tag={'assessmentSectionAidSpreadsheetPermission'}
         label={'spredsheet'}
+        labelBadgeOne={'permission'}
         listSelect={[
           { id: true, name: 'Permitted' },
           { id: false, name: 'Unpermitted' }
@@ -142,6 +143,7 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
         isActive={isPopUpValue === 'AID_TEXT_POPUP'}
         tag={'assessmentSectionAidTextsheetPermission'}
         label={'textsheet'}
+        labelBadgeOne={'permission'}
         listSelect={[
           { id: true, name: 'Permitted' },
           { id: false, name: 'Unpermitted' }
@@ -159,7 +161,8 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
       <PopUpDropList
         isActive={isPopUpValue === 'AID_CALCULATOR_TYPE_POPUP'}
         tag={'assessmentSectionAidCalculatorType'}
-        label={'type'}
+        label={'calculator'}
+        labelBadgeOne={'type'}
         listSelect={[
           { id: 'basic', name: 'basic' },
           { id: 'business', name: 'business' },
@@ -180,7 +183,8 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
       <PopUpDropList
         isActive={isPopUpValue === 'AID_SPREADSHEET_TYPE_POPUP'}
         tag={'assessmentSectionAidSpreadsheetType'}
-        label={'type'}
+        label={'spreadsheet'}
+        labelBadgeOne={'type'}
         listSelect={[
           { id: 'goole', name: 'goole' },
           { id: 'microsoft', name: 'microsoft' },
@@ -199,7 +203,8 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
       <PopUpDropList
         isActive={isPopUpValue === 'AID_TEXTSHEET_TYPE_POPUP'}
         tag={'assessmentSectionAidTextsheetType'}
-        label={'type'}
+        label={'textsheet'}
+        labelBadgeOne={'type'}
         listSelect={[
           { id: 'goole', name: 'goole' },
           { id: 'microsoft', name: 'microsoft' },
@@ -351,20 +356,6 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
 
-      <PopUpTextField
-        isActive={isPopUpValue === 'RESPONSELABEL'}
-        label={'response'}
-        labelBadgeOne={'label'}
-        actualLableValue={'assessmentSectionItemFrameworkOneResponseLabel'}
-        headerPanelColour={'genericOne'}
-        headerOne={headerOne}
-        headerOneBadgeOne={''}
-        headerOneBadgeTwo={'information'}
-        basicInfo={sectionInformation}
-        nextPopUpValue={'CONFIRMATIONPOPUP'}
-        typeOfSetObject={SET_SECTION_REDUCER_STATE}
-        mode={reviewMode === 'revise' ? 'revise' : 'core'}
-      />
       <PopUpDropList
         isActive={isPopUpValue === 'RESPONSE_REVISE_POPUP'}
         tag={'assessmentSectionItemFrameworkOneResponseRevise'}
@@ -405,7 +396,7 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
         headerPanelColour={'genericOne'}
         headerOneBadgeOne={'communique'}
         headerOneBadgeTwo={indexPointer}
-        defaultSheetValue={sectionInformation.assessmentSectionCommunique[indexPointer - 1]}
+        defaultSheetValue={sectionInformation?.assessmentSectionCommunique[indexPointer - 1] || ''}
         onClickSave={(data) => {
           dispatch({ type: SET_ASSESSMENT_SECTION_COMMUNIQUE_FRAMEWORK_STATE, payload: data });
         }}
@@ -493,6 +484,66 @@ console.log('assessmentAdminSequence',assessmentAdminSequence);
         valueArrState={sectionInformation?.assessmentSectionItemNavigation}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+      <PopUpTextEditor
+        isActive={isPopUpValue === 'ASSESSMENT_SECTION_ITEM_LABEL_POPUP'}
+        headerOne={'section'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        label={'item'}
+        labelBadgeOne={'label'}
+        basicInfo={sectionInformation}
+        defaultSheetValue={sectionInformation?.assessmentSectionItemFrameworkOneLabel || ''}
+        // onClickSave={(data) => {
+        //   dispatch({ type: SET_SECTION_REDUCER_STATE, payload: data });
+        // }}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        actualLableValue={'assessmentSectionItemFrameworkOneLabel'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextField
+        isActive={isPopUpValue === 'ITEM_TOTAL_POPUP'}
+        label={'item'}
+        labelBadgeOne={'total'}
+        type={'number'}
+        actualLableValue={'assessmentSectionItemTotal'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        basicInfo={sectionInformation}
+        nextPopUpValue={''}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextEditor
+        isActive={isPopUpValue === 'RESPONSELABEL'}
+        headerOne={'section'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={'label'}
+        label={'response'}
+        labelBadgeOne={'label'}
+        basicInfo={sectionInformation}
+        defaultSheetValue={sectionInformation?.assessmentSectionItemFrameworkOneResponseLabel || ''}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        actualLableValue={'assessmentSectionItemFrameworkOneResponseLabel'}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      {/* <PopUpTextField
+        isActive={isPopUpValue === 'RESPONSELABEL'}
+        label={'response'}
+        labelBadgeOne={'label'}
+        actualLableValue={'assessmentSectionItemFrameworkOneResponseLabel'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={''}
+        headerOneBadgeTwo={'information'}
+        basicInfo={sectionInformation}
+        nextPopUpValue={'CONFIRMATIONPOPUP'}
+        typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
     </div>
   );
 };
