@@ -669,7 +669,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       }*/
       }
       if (headerOne === 'preview') {
-        dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
+        dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
       }
     }
