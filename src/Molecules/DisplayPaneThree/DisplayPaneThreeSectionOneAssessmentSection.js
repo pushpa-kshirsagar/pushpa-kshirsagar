@@ -14,6 +14,7 @@ import {
   SET_ASSESSMENT_SINGLE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
   SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
   SET_PANE_THREE_PREVIEW_MODE,
   SET_POPUP_VALUE
@@ -90,11 +91,16 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidCalculatorPermission?'Permitted':'Unpermitted'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid
+                ?.assessmentSectionAidCalculatorPermission
+                ? 'Permitted'
+                : 'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidCalculatorType||'No Information'
+              innerLabelBadgeList:
+                responseObject?.assessmentSectionAid?.assessmentSectionAidCalculatorType ||
+                'No Information'
             }
           ]
         },
@@ -103,11 +109,16 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidSpreadsheetPermission?'Permitted':'Unpermitted'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid
+                ?.assessmentSectionAidSpreadsheetPermission
+                ? 'Permitted'
+                : 'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidSpreadsheetType||'No Information'
+              innerLabelBadgeList:
+                responseObject?.assessmentSectionAid?.assessmentSectionAidSpreadsheetType ||
+                'No Information'
             }
           ]
         },
@@ -116,11 +127,16 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
-              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidTextsheetPermission?'Permitted':'Unpermitted'
+              innerLabelBadgeList: responseObject?.assessmentSectionAid
+                ?.assessmentSectionAidTextsheetPermission
+                ? 'Permitted'
+                : 'Unpermitted'
             },
             {
               labelTextTwoBadge: 'type',
-              innerLabelBadgeList: responseObject?.assessmentSectionAid?.assessmentSectionAidTextsheetType||'No Information'
+              innerLabelBadgeList:
+                responseObject?.assessmentSectionAid?.assessmentSectionAidTextsheetType ||
+                'No Information'
             }
           ]
         }
@@ -146,7 +162,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       id: 'a2',
       //textOneOne: 'No Information',
       labelTextOneOne: 'evaluation',
-      textOneOne:responseObject?.assessmentSectionEvaluation ?'Yes':'No',
+      textOneOne: responseObject?.assessmentSectionEvaluation ? 'Yes' : 'No',
       innerAssociateList: [],
       innerInfo: 'No Information',
       isListCard: false
@@ -288,7 +304,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
     },
     {
       id: 'a2',
-      textOneOne:responseObject?.assessmentSectionSequence|| 'No Information',
+      textOneOne: responseObject?.assessmentSectionSequence || 'No Information',
       labelTextOneOne: 'sequence',
       innerAssociateList: [],
       innerInfo: 'No Information',
@@ -593,11 +609,11 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
   const onClickReview = (e, badge) => {
     // console.log(e);
     // console.log(badge);
-    {
-      /*if (typeof e === 'object') {
+    if (typeof e === 'object') {
       const headerOne = e.currentTarget.getAttribute('data-value');
       const badgeOne = e.currentTarget.getAttribute('data-key');
-
+      {
+        /*
       if (headerOne === 'communiqué' && badgeOne === 'primary') {
       }
       if (headerOne === 'communiqué' && badgeOne === 'secondary') {
@@ -644,12 +660,12 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
           }
         });
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      }*/
       }
       if (headerOne === 'preview') {
         dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
       }
-    }*/
     }
     if (reviewMode === 'review') {
       if (e === 'communiqué' && badge !== '') {

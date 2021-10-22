@@ -1413,27 +1413,37 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           }
         });
         dispatch({
-          type:SET_SECTION_REDUCER_STATE,
-          payload:relatedReviewListDistinctData[0].sections[selectedTagValue]
-        })
-        dispatch({
-          type:SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
-          payload:{
-            stateName: 'assessmentSectionItemFrameworkOneDistinct',
-            value: relatedReviewListDistinctData[0].sections[selectedTagValue].assessmentSectionItemDistinct
-          }
-        })
-        setItemTypeConfigState(
-          relatedReviewListDistinctData[0].sections[selectedTagValue].assessmentSectionItemDistinct[0].itemFrameworkOne.itemFrameworkOneType,
-          dispatch
-        );
+          type: SET_SECTION_REDUCER_STATE,
+          payload: relatedReviewListDistinctData[0].sections[selectedTagValue]
+        });
         dispatch({
           type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
           payload: {
-            stateName: 'assessmentSectionItemDistinctReviseObject',
-            value: relatedReviewListDistinctData[0].sections[selectedTagValue].assessmentSectionItemDistinct[0]
+            stateName: 'assessmentSectionItemFrameworkOneDistinct',
+            value:
+              relatedReviewListDistinctData[0].sections[selectedTagValue]
+                .assessmentSectionItemDistinct
           }
         });
+        if (
+          relatedReviewListDistinctData[0].sections[selectedTagValue].assessmentSectionItemDistinct
+        ) {
+          setItemTypeConfigState(
+            relatedReviewListDistinctData[0].sections[selectedTagValue]
+              .assessmentSectionItemDistinct[0].itemFrameworkOne.itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctReviseObject',
+              value:
+                relatedReviewListDistinctData[0].sections[selectedTagValue]
+                  .assessmentSectionItemDistinct[0]
+            }
+          });
+        }
+
         dispatch({ type: LOADER_STOP });
       }
       if (typeOfMiddlePaneList === 'assessmentscalesReviewList') {

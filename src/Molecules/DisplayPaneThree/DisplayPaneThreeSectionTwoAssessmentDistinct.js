@@ -155,7 +155,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
-      isAddIcon: reviewMode === 'revise' ?true:false
+      isAddIcon: reviewMode === 'revise' ? true : false
     },
     {
       id: 'evaluation-assessment',
@@ -183,8 +183,8 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         {
           labelTextOneOneBadge: 'template',
           textOne: informationFramework?.assessmentItemFrameworkOneTemplate || 'No Information'
-        }
-        ,{
+        },
+        {
           labelTextOneOneBadge: 'total',
           textOne: informationFramework?.assessmentItemTotal || 'No Information'
         }
@@ -201,7 +201,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
-      isAddIcon: reviewMode === 'revise' ?true:false
+      isAddIcon: reviewMode === 'revise' ? true : false
     },
     {
       id: 'preview-assessment',
@@ -289,7 +289,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerInfo: 'assessees',
       isListCard: false,
       IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
-      isAddIcon: reviewMode === 'revise' ?true:false
+      isAddIcon: reviewMode === 'revise' ? true : false
     },
     {
       id: 'a6',
