@@ -45,7 +45,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
     typeOfMiddlePaneList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
-  const {sectionInformation}=useSelector((state) => state.SectionCreateReducer);
+  const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
 
   const onClickRevise = () => {
     console.log('ON CLICK REVISE ICON');
@@ -56,36 +56,46 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
     setIsShowReviseIcon(true);
   };
   const onClickReviseFinish = () => {
-    console.log('ON CLICK finish ICON', selectedTagsArray, unselectedTagsArray,reviewListDistinctData);
+    console.log(
+      'ON CLICK finish ICON',
+      selectedTagsArray,
+      unselectedTagsArray,
+      reviewListDistinctData
+    );
     setIsShowReviseIcon(true);
-    let middlepaneName=relatedReviewListDistinctData[0].typeOfMiddlePaneList;
-    if(middlepaneName==='assessmentSectionItemDistinctReviewList'){
-      let existingItemId = sectionInformation.assessmentSectionItemDistinct.map((val) => {
-        return val.itemId;
-      });
-      let unique1 = existingItemId.filter((o) => selectedTagsArray.indexOf(o) === -1);
-      let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
-      const unique = unique1.concat(unique2);
+    let existingItemId = [];
+    let middlepaneName = relatedReviewListDistinctData[0].typeOfMiddlePaneList;
+    if (middlepaneName === 'assessmentSectionItemDistinctReviewList') {
+      // if (sectionInformation.assessmentSectionItemDistinct) {
+      //   existingItemId = sectionInformation.assessmentSectionItemDistinct.map((val) => {
+      //     return val.itemId;
+      //   });
+      // }
+      // console.log(existingItemId, 'existingItemId');
+      // let unique1 = existingItemId.filter((o) => selectedTagsArray.indexOf(o) === -1);
+      // let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
+      // const unique = unique1.concat(unique2);
 
-      console.log('unique1',unique);
-      sectionInformation.assessmentSectionItemDistinct=[...existingItemId,...unique];
+      // console.log('unique1', unique);
+      sectionInformation.assessmentSectionItemDistinct = selectedTagsArray;
       dispatch({
-        type:SET_SECTION_REDUCER_STATE,
-        payload:sectionInformation
-      })
-    }else if(middlepaneName==='assessmentSectionTrialDistinctReviewList'){
-      let existingItemId = sectionInformation.assessmentSectionItemTrial.map((val) => {
-        return val.itemId;
+        type: SET_SECTION_REDUCER_STATE,
+        payload: sectionInformation
       });
-      let unique1 = existingItemId.filter((o) => selectedTagsArray.indexOf(o) === -1);
-      let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
-      const unique = unique1.concat(unique2);
-      console.log('unique1',unique);
-      sectionInformation.assessmentSectionItemTrial=[...existingItemId,...unique];
+    } else if (middlepaneName === 'assessmentSectionTrialDistinctReviewList') {
+      // let existingItemId = sectionInformation.assessmentSectionItemTrial.map((val) => {
+      //   return val.itemId;
+      // });
+      // let unique1 = existingItemId.filter((o) => selectedTagsArray.indexOf(o) === -1);
+      // let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
+      // const unique = unique1.concat(unique2);
+      // console.log('unique1', unique);
+      // sectionInformation.assessmentSectionItemTrial = [...existingItemId, ...unique];
+      sectionInformation.assessmentSectionItemTrial = selectedTagsArray;
       dispatch({
-        type:SET_SECTION_REDUCER_STATE,
-        payload:sectionInformation
-      })
+        type: SET_SECTION_REDUCER_STATE,
+        payload: sectionInformation
+      });
     }
     if (typeOfMiddlePaneList !== '') {
       // dispatch({

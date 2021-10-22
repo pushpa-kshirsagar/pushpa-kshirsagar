@@ -341,7 +341,7 @@ function* workerReviewInfoAssessmentSecSaga(data) {
       assessmentInfo?.informationFramework?.assessmentSection.map((sec) => {
         let tempArr = [];
         // let tempArr = sec.assessmentSectionItemDistinct.map((ob) => ob.itemId))
-        for (let i = 0; i < sec.assessmentSectionItemDistinct.length; i++) {
+        for (let i = 0; i < sec.assessmentSectionItemDistinct?.length; i++) {
           tempArr.push(sec.assessmentSectionItemDistinct[i].itemId);
         }
         console.log('tempArr', tempArr);
