@@ -708,6 +708,9 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssignmentGroup(rightPaneSectionsAssignmentGroup[0]);
     setSelectedSectionAssignmentType(rightPaneSectionsAssignmentType[0]);
     setSelectedSectionAssessmentType(rightPaneSectionsAssessmentType[0]);
+    setSelectedSectionAssessmentSection(rightPaneSectionsAssessmentSection[0]);
+    setSelectedSectionAssessmentScale(rightPaneSectionsAssessmentScales[0]);
+    setSelectedSectionAssessmentCluster(rightPaneSectionsAssessmentCluster[0]);
     setSelectedSectionAssesseeReport(rightPaneSectionsAssesseeReport[0]);
     setSelectedSectionAssesseeType(rightPaneSectionsAssesseeType[0]);
     setSelectedSectionAssociateType(rightPaneSectionsAssociateType[0]);

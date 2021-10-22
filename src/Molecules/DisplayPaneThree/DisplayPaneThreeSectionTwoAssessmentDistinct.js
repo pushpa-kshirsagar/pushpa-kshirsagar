@@ -249,13 +249,13 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
             {
               labelTextTwoBadge: 'maximum',
               innerLabelBadgeList:
-                informationFramework?.assessmentScoreExtremum?.assessmentScoreMaximum ||
+                informationFramework?.assessmentScoreExtremum?.assessmentScoreExtremumMaximum ||
                 'No Information'
             },
             {
               labelTextTwoBadge: 'minimum',
               innerLabelBadgeList:
-                informationFramework?.assessmentScoreExtremum?.assessmentScoreMinimum ||
+                informationFramework?.assessmentScoreExtremum?.assessmentScoreExtremumMinimum ||
                 'No Information'
             }
           ]

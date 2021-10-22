@@ -324,7 +324,7 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
         ...istate,
         informationFramework: {
           ...istate.informationFramework,
-          assessmentScore: action.payload
+          assessmentScoreExtremum: action.payload
         }
       };
 

@@ -333,7 +333,7 @@ const PopUpAssessmentCreate = (props) => {
         label={'score'}
         labelBadgeOne={'minimum'}
         type={'number'}
-        actualLableValue={'assessmentScoreMinimum'}
+        actualLableValue={'assessmentScoreExtremumMinimum'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
@@ -348,7 +348,7 @@ const PopUpAssessmentCreate = (props) => {
         label={'score'}
         labelBadgeOne={'maximum'}
         type={'number'}
-        actualLableValue={'assessmentScoreMaximum'}
+        actualLableValue={'assessmentScoreExtremumMaximum'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
         headerOneBadgeOne={'information'}
