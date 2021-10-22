@@ -6,6 +6,7 @@ import { Paper } from '@material-ui/core';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import {
+  GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
   SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_ITEM_PREVIEW_MODE,
@@ -17,11 +18,9 @@ const DisplayPaneThreeSectionTwoItem = () => {
   const { responseObject, headerOneBadgeTwo, reviewMode } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const itemFrameworkOne = responseObject?.informationFramework?.itemFrameworkOne;
-  // const { countPage, selectedAssociateInfo, selectedTagValue } = useSelector(
-  //   (state) => state.DisplayPaneTwoReducer
-  // );
   const dispatch = useDispatch();
   // const { informationContact, informationCredential, informationFramework } = responseObject;
   const itemTypeList = itemInformation?.informationFramework.itemTypeList || [];
@@ -164,6 +163,20 @@ const DisplayPaneThreeSectionTwoItem = () => {
     }
     if (labelName === 'preview') {
       if (!responseObject?.itemFrameworkOne?.itemFrameworkOneType) {
+        console.log('reviewMode', reviewMode);
+        // if(reviewMode==='create'){
+        dispatch({
+          type: GET_FRAMWORK_TYPE_REVIEW_LIST_SAGA,
+          payload: {
+            request: {
+              assesseeId: selectedAssociateInfo?.assesseeId,
+              associateId:
+                selectedAssociateInfo?.associate?.informationEngagement.associateTag
+                  .associateTagPrimary
+            }
+          }
+        });
+        // }
         dispatch({
           type: SET_POPUP_VALUE,
           payload: {

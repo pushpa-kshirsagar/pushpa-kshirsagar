@@ -247,7 +247,11 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
                 textOne={
                   item.informationBasic.assesseeNameFirst +
                   ' ' +
-                  item.informationBasic.assesseeNameLast
+                  item.informationBasic.assesseeNameOther +
+                  ' ' +
+                  item.informationBasic.assesseeNameLast +
+                  ' ' +
+                  item.informationBasic.assesseeNameSuffix
                 }
                 textTwo={item.informationBasic.assesseeAlias}
                 isTooltipActive={false}

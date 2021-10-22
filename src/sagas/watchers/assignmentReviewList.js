@@ -185,7 +185,7 @@ function* workeAssignmentDistictAssessees(data) {
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
-      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
       yield put({
         type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
         payload: { assessee: response?.responseObject?.assessee || [] }
@@ -232,11 +232,11 @@ function* workeAssignmentDistictAssessment(data) {
     });
     // const response ={responseCode:'000',countTotal:30}
     if (response.responseCode === '000') {
-      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [response.responseObject] });
       yield put({
         type: SET_ASSIGNMENT_RELATED_REVIEW_LIST,
         payload: { assessment: response?.responseObject?.assessment || [] }
       });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: response.responseObject });
       if (data.payload.isMiddlePaneList) {
         yield put({
           type: SET_MIDDLEPANE_STATE,

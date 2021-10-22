@@ -430,17 +430,20 @@ function* workerReviseInfoItemSaga(data) {
   try {
     const userResponse = yield call(itemReviseInfoApi, { data: data.payload.reqBody });
     if (userResponse.responseCode === '000') {
-      const { createMode = '' } = data.payload;
-      yield put({
-        type: SET_DISPLAY_PANE_THREE_STATE,
-        payload: {
-          headerOne: 'item',
-          headerOneBadgeOne: 'information',
-          headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
-          responseObject: userResponse.responseObject[0],
-          createMode
-        }
-      });
+      const { createMode = '', secondaryOptionCheckValue = '' } = data.payload;
+      if (secondaryOptionCheckValue !== '') {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'item',
+            headerOneBadgeOne: 'information',
+            headerOneBadgeTwo: data.payload.secondaryOptionCheckValue,
+            responseObject: userResponse.responseObject[0],
+            createMode
+          }
+        });
+      }
+
       if (createMode === '') {
         yield put({
           type: SET_DISPLAY_TWO_SINGLE_STATE,
