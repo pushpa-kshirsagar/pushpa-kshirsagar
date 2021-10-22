@@ -20,7 +20,8 @@ import {
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_ASSESSMENT_AID_FRAMEWORK_STATE,
   SET_ASSESSMENT_EVALUATION_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE
+  SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE,
+  SET_ASSESSMENT_TEMPLATE_FRAMEWORK_STATE
 } from '../../actionType';
 import PopUpTextSheet from '../../PopUpIcon/PopUpTextSheet';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
@@ -785,6 +786,24 @@ const PopUpAssessmentCreate = (props) => {
         typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
+      {/* templatepopup */}
+      {/* <PopUpCheckbox
+        isActive={isPopUpValue === 'TEMPLATEPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        valueArr={[
+          'fontFamily',
+          'fontSize',
+          'fontWeight',
+        ]}
+        //forceToSelect="signIn"
+        typeOfSetObject={SET_ASSESSMENT_TEMPLATE_FRAMEWORK_STATE}
+        valueArrState={informationFramework?.assessmentItemFrameworkOneTemplate}
+        isRolePermission
+        forceToSelect="assessmentRevise"
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      /> */}
     </div>
   );
 };

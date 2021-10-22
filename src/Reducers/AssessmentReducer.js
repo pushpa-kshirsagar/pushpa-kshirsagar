@@ -19,7 +19,8 @@ import {
   SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
   SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
   SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SINGLE_STATE
+  SET_ASSESSMENT_SINGLE_STATE,
+  SET_ASSESSMENT_TEMPLATE_FRAMEWORK_STATE
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -152,7 +153,12 @@ const initialState = {
         assessmentSectionTime: null
       }
     ],
-    assessmentSectionItemDistinctRevise: null
+    assessmentSectionItemDistinctRevise: null,
+    assessmentItemFrameworkOneTemplate: {
+      fontFamily: '',
+      fontSize: '',
+      fontWeight: ''
+    }
   }
 };
 
@@ -380,6 +386,15 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
             ...istate.informationFramework[action.payload.stateName],
             [action.payload.actualStateName]: action.payload.value
           }
+        }
+      };
+
+    case SET_ASSESSMENT_TEMPLATE_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assessmentEvaluation: action.payload
         }
       };
     case CLEAR_ASSESSMENT_INFO:

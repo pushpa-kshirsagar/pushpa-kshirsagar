@@ -112,7 +112,7 @@ const PopUpSectionCreate = (props) => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={sectionInformation?.assessmentAid}
+        basicInfo={sectionInformation?.assessmentSectionAid}
         typeOfSetObject={SET_ASSESSMENT_SECTION_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -132,7 +132,7 @@ const PopUpSectionCreate = (props) => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={sectionInformation?.assessmentAid}
+        basicInfo={sectionInformation?.assessmentSectionAid}
         typeOfSetObject={SET_ASSESSMENT_SECTION_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -150,7 +150,7 @@ const PopUpSectionCreate = (props) => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={sectionInformation?.assessmentAid}
+        basicInfo={sectionInformation?.assessmentSectionAid}
         typeOfSetObject={SET_ASSESSMENT_SECTION_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -170,7 +170,7 @@ const PopUpSectionCreate = (props) => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={sectionInformation?.assessmentAid}
+        basicInfo={sectionInformation?.assessmentSectionAid}
         typeOfSetObject={SET_ASSESSMENT_SECTION_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -190,7 +190,7 @@ const PopUpSectionCreate = (props) => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={sectionInformation?.assessmentAid}
+        basicInfo={sectionInformation?.assessmentSectionAid}
         typeOfSetObject={SET_ASSESSMENT_SECTION_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -209,7 +209,7 @@ const PopUpSectionCreate = (props) => {
         headerOneBadgeOne={'information'}
         isRequired={true}
         nextPopUpValue={''}
-        basicInfo={sectionInformation?.assessmentAid}
+        basicInfo={sectionInformation?.assessmentSectionAid}
         typeOfSetObject={SET_ASSESSMENT_SECTION_AID_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
@@ -233,7 +233,7 @@ const PopUpSectionCreate = (props) => {
       />
       <PopUpDropList
         isActive={isPopUpValue === 'SECTION_RESET_POPUP'}
-        tag={'assessmentSectionAdministrationRepeat'}
+        tag={'assessmentSectionAdministrationReset'}
         label={'reset'}
         listSelect={[
           { id: true, name: 'Yes' },

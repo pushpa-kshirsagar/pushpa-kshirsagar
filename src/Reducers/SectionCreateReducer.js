@@ -6,7 +6,9 @@ import {
   SET_ASSESSMENT_SECTION_RESPONCE_FRAMEWORK_STATE,
   SET_ASSESSMENT_SECTION_MANUSCRIPT_FRAMEWORK_STATE,
   SET_ASSESSMENT_SECTION_COMMUNIQUE_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE
+  SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE,
+  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE
 } from '../actionType';
 const initialState = {
   sectionInformation: {
@@ -52,6 +54,9 @@ const initialState = {
     assessmentSectionSynopsis: [],
     assessmentSectionTime: null,
     assessmentSectionItemGroup:[],
+    assessmentSectionItemDistinctRevise: [],
+    assessmentSectionItemDistinctReviseObject: null,
+    assessmentSectionItemFrameworkOneDistinct:[]
   }
 };
 
@@ -113,13 +118,35 @@ const SectionCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)),
         ...istate,
         sectionInformation: {
           ...istate.sectionInformation,
-          assessmentSynopsis: [
+          assessmentSectionSynopsis: [
             ...istate.sectionInformation.assessmentSectionSynopsis,
             action.payload
           ]
         }
       };
-    case CLEAR_SECTION_REDUCER_STATE:
+      case SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE:
+        return {
+          ...istate,
+          sectionInformation: {
+            ...istate.sectionInformation,
+            assessmentSectionItemDistinctReviseObject: {
+              ...istate.sectionInformation.assessmentSectionItemDistinctReviseObject,
+              itemFrameworkOne: {
+                ...istate.sectionInformation.assessmentSectionItemDistinctReviseObject.itemFrameworkOne,
+                [action.payload.stateName]: action.payload.value
+              }
+            }
+          }
+        };
+        case SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        sectionInformation: {
+          ...istate.sectionInformation,
+          [action.payload.stateName]: action.payload.value
+        }
+      };
+      case CLEAR_SECTION_REDUCER_STATE:
       return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;

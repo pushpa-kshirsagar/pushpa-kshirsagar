@@ -9,7 +9,8 @@ import {
   SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   ASSESSMENT_INFO_PREVIEW_SAGA,
-  SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE
+  SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
+  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE
 } from '../../actionType';
 import '../../Molecules/ReviewList/ReviewList.css';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
@@ -56,6 +57,8 @@ export const DisplayPaneFive = () => {
   );
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { FilterMode, navigatorIcon } = useSelector((state) => state.FilterReducer);
+  const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
+  console.log('sectionInformationReducerObejct', sectionInformation);
   const closePreview = () => {
     if (isAssessmentSectionShow) {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: false });
@@ -256,33 +259,91 @@ export const DisplayPaneFive = () => {
           }
         }
       }
-    } else {
+    } else if (isAssessmentSectionShow) {
       if (clickedval === 'first') {
         setcurrentItemIndex(0);
+        setItemTypeConfigState(
+          responseObject?.assessmentSectionItemDistinct[0]?.itemFrameworkOne.itemFrameworkOneType,
+          dispatch
+        );
+        dispatch({
+          type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+          payload: {
+            stateName: 'assessmentSectionItemDistinctReviseObject',
+            value: responseObject?.assessmentSectionItemDistinct[0]
+          }
+        });
       }
       if (clickedval === 'previous') {
         let prevIndex = currentItemIndex - 1;
         if (currentItemIndex != 0) {
           setcurrentItemIndex(prevIndex);
+          setItemTypeConfigState(
+            responseObject?.assessmentSectionItemDistinct[prevIndex]?.itemFrameworkOne
+              .itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctReviseObject',
+              value: responseObject?.assessmentSectionItemDistinct[prevIndex]
+            }
+          });
         }
       }
       if (clickedval === 'next') {
         if (currentItemIndex < responseObject.assessmentSectionItemDistinct.length - 1) {
           setcurrentItemIndex(currentItemIndex + 1);
+          setItemTypeConfigState(
+            responseObject?.assessmentSectionItemDistinct[currentItemIndex + 1]?.itemFrameworkOne
+              .itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctReviseObject',
+              value: responseObject?.assessmentSectionItemDistinct[currentItemIndex + 1]
+            }
+          });
         }
       }
       if (clickedval === 'last') {
         if (currentItemIndex < responseObject.assessmentSectionItemDistinct.length - 1) {
           let lastIndex = responseObject.assessmentSectionItemDistinct.length - 1;
           setcurrentItemIndex(lastIndex);
+          setItemTypeConfigState(
+            responseObject?.assessmentSectionItemDistinct[lastIndex]?.itemFrameworkOne
+              .itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctReviseObject',
+              value: responseObject?.assessmentSectionItemDistinct[lastIndex]
+            }
+          });
         }
       }
+    } else {
     }
   };
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
     if (isAssessmentSectionShow) {
-      dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+      //dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
+      let itemDistinctReviseObj = sectionInformation?.assessmentSectionItemFrameworkOneDistinct;
+      itemDistinctReviseObj[currentItemIndex].itemFrameworkOne =
+        sectionInformation?.assessmentSectionItemDistinctReviseObject?.itemFrameworkOne;
+      dispatch({
+        type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+        payload: {
+          stateName: 'assessmentSectionItemFrameworkOneDistinct',
+          value: itemDistinctReviseObj
+        }
+      });
     } else {
       dispatch({ type: SET_DISPLAY_PANE_THREE_REVIEW_MODE, payload: 'review' });
       //const { informationFramework } = informationFramework;
