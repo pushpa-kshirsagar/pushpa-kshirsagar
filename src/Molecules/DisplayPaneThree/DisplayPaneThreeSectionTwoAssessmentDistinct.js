@@ -51,13 +51,13 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   });
   let adminSequenseArr = [];
   informationFramework?.assessmentCommunique.map((comm, ind) => {
-    adminSequenseArr.push(`communiqué ${ind + 1}`);
+    adminSequenseArr.push(`assessment communiqué ${ind + 1}`);
   });
   informationFramework?.assessmentManuscript.map((com, ind) => {
-    adminSequenseArr.push(`manuscript ${ind + 1}`);
+    adminSequenseArr.push(`assessment manuscript ${ind + 1}`);
   });
   informationFramework?.assessmentSynopsis.map((com, ind) => {
-    adminSequenseArr.push(`synopsis ${ind + 1}`);
+    adminSequenseArr.push(`assessment synopsis ${ind + 1}`);
   });
   let clusterObj = [];
   if (informationFramework) {

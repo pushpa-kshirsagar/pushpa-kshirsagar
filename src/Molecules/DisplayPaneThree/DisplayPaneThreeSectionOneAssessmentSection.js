@@ -47,13 +47,13 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
   });
   let adminSequenseArr = [];
   responseObject?.assessmentSectionCommunique.map((comm, ind) => {
-    adminSequenseArr.push(`communiqué ${ind + 1}`);
+    adminSequenseArr.push(`section communiqué ${ind + 1}`);
   });
   responseObject?.assessmentSectionCommunique.map((com, ind) => {
-    adminSequenseArr.push(`manuscript ${ind + 1}`);
+    adminSequenseArr.push(`section manuscript ${ind + 1}`);
   });
   responseObject?.assessmentSectionCommunique.map((com, ind) => {
-    adminSequenseArr.push(`synopsis ${ind + 1}`);
+    adminSequenseArr.push(`section synopsis ${ind + 1}`);
   });
   const frameworkAll = [
     {
@@ -445,6 +445,12 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
         }
       });
     }
+    if (labelName === 'items' && selectedBadgeName === 'navigation') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAVIGATIONPOPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
     if (labelName === 'preview') {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
@@ -663,7 +669,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       }*/
       }
       if (headerOne === 'preview') {
-        dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
+        dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
       }
     }

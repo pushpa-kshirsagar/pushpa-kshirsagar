@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PopUpTextField from '../../PopUpInformation/PopUpTextField';
 import PopUpConfirm from '../../PopUpGeneric/PopUpConfirm';
 import PopUpDropList from '../../PopUpInformation/PopUpDropList'; //'../../PopUpInformation/PopUpDropList';
+import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 import {
   POPUP_CLOSE,
   LOADER_START,
@@ -15,7 +16,8 @@ import {
   SET_ASSESSMENT_SECTION_RESPONCE_FRAMEWORK_STATE,
   SET_ASSESSMENT_SECTION_COMMUNIQUE_FRAMEWORK_STATE,
   SET_ASSESSMENT_SECTION_MANUSCRIPT_FRAMEWORK_STATE,
-  SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE
+  SET_ASSESSMENT_SECTION_SYNOPSIS_FRAMEWORK_STATE,
+  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE
 } from '../../actionType';
 import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 
@@ -27,7 +29,7 @@ const PopUpSectionCreate = (props) => {
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { indexPointer } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { assessmentAdminSequence } = useSelector((state) => state.AssessmentReducer);
-
+console.log('assessmentAdminSequence',assessmentAdminSequence);
   const dispatch = useDispatch();
   const onClickCancelYes = () => {
     dispatch({
@@ -466,6 +468,29 @@ const PopUpSectionCreate = (props) => {
         nextPopUpValue={''}
         basicInfo={sectionInformation}
         typeOfSetObject={SET_SECTION_REDUCER_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpCheckbox
+        isActive={isPopUpValue === 'NAVIGATIONPOPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        headerOneBadgeTwo={''}
+        inputHeader={'navigation'}
+        inputHeaderBadge={'item'}
+        typeOfStateObj={null}
+        objectName={'assesseeRole'}
+        stateName={'assessmentSectionItemNavigation'}
+        valueArr={[
+          'assessmentSectionItemNavigationFirst',
+          'assessmentSectionItemNavigationLast',
+          'assessmentSectionItemNavigationNext',
+          'assessmentSectionItemNavigationPrevious',
+          'assessmentSectionItemNavigationSkip']}
+        nextPopUpValue={''}
+        isRolePermission
+        typeOfSetObject={SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE}
+        valueArrState={sectionInformation?.assessmentSectionItemNavigation}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
