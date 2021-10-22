@@ -516,7 +516,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       });
       dispatch({
         type: SET_POPUP_VALUE,
-        payload: { isPopUpValue: 'ADMINSEWUENCEPOPUP', popupMode: 'ASSESSMENTCREATE' }
+        payload: { isPopUpValue: 'ADMINSEWUENCEPOPUP', popupMode: 'SECTIONCREATE' }
       });
     }
     if (labelName === 'score' && selectedBadgeName === 'maximum') {

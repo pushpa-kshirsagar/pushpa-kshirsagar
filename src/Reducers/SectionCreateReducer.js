@@ -17,7 +17,7 @@ const initialState = {
     assessmentSectionAdministrationRepeat: false,
     assessmentSectionAdministrationReset: false,
     assessmentSectionAdministrationShuffle: false,
-    assessmentSectionAdministrationSequence:[],
+    assessmentSectionAdministrationSequence: [],
     assessmentSectionAid: {
       assessmentSectionAidCalculatorPermission: false,
       assessmentSectionAidCalculatorType: '',
@@ -53,10 +53,10 @@ const initialState = {
     assessmentSectionSequence: 0,
     assessmentSectionSynopsis: [],
     assessmentSectionTime: null,
-    assessmentSectionItemGroup:[],
+    assessmentSectionItemGroup: [],
     assessmentSectionItemDistinctRevise: [],
     assessmentSectionItemDistinctReviseObject: null,
-    assessmentSectionItemFrameworkOneDistinct:[]
+    assessmentSectionItemFrameworkOneDistinct: []
   }
 };
 
@@ -124,21 +124,22 @@ const SectionCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)),
           ]
         }
       };
-      case SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE:
-        return {
-          ...istate,
-          sectionInformation: {
-            ...istate.sectionInformation,
-            assessmentSectionItemDistinctReviseObject: {
-              ...istate.sectionInformation.assessmentSectionItemDistinctReviseObject,
-              itemFrameworkOne: {
-                ...istate.sectionInformation.assessmentSectionItemDistinctReviseObject.itemFrameworkOne,
-                [action.payload.stateName]: action.payload.value
-              }
+    case SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE:
+      return {
+        ...istate,
+        sectionInformation: {
+          ...istate.sectionInformation,
+          assessmentSectionItemDistinctReviseObject: {
+            ...istate.sectionInformation.assessmentSectionItemDistinctReviseObject,
+            itemFrameworkOne: {
+              ...istate.sectionInformation.assessmentSectionItemDistinctReviseObject
+                .itemFrameworkOne,
+              [action.payload.stateName]: action.payload.value
             }
           }
-        };
-        case SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE:
+        }
+      };
+    case SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE:
       return {
         ...istate,
         sectionInformation: {
@@ -146,7 +147,7 @@ const SectionCreateReducer = (istate = JSON.parse(JSON.stringify(initialState)),
           [action.payload.stateName]: action.payload.value
         }
       };
-      case CLEAR_SECTION_REDUCER_STATE:
+    case CLEAR_SECTION_REDUCER_STATE:
       return JSON.parse(JSON.stringify(initialState));
     default:
       return istate;
