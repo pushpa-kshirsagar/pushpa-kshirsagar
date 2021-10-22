@@ -451,6 +451,19 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
         payload: { isPopUpValue: 'NAVIGATIONPOPUP', popupMode: 'SECTIONCREATE' }
       });
     }
+    if (labelName === 'items' && selectedBadgeName === 'label') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ASSESSMENT_SECTION_ITEM_LABEL_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    if (labelName === 'items' && selectedBadgeName === 'total') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ITEM_TOTAL_POPUP', popupMode: 'SECTIONCREATE' }
+      });
+    }
+    
     if (labelName === 'preview') {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });

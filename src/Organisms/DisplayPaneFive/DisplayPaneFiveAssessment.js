@@ -550,8 +550,11 @@ export const DisplayPaneFiveAssessment = (props) => {
           )}
 
           {/* response */}
-          {
-            <div className={'innerpadding'}>
+          {(itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cd' ||
+            itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cc'||
+            itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23'
+            )&&(
+              <div className={'innerpadding'}>
               <div
                 className={'ex_container'}
                 style={{
@@ -574,6 +577,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                 {ReactHTMLParser(responseText)}
               </div>
             </div>
+            )
           }
 
           {/* responce explanation */}

@@ -551,7 +551,12 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       }
     }
   };
-
+  const reviseEngagement = (e) => {
+    
+  };
+  const reviseSetup = (e) => {
+    
+  };
   return (
     <div
       style={{
@@ -587,6 +592,8 @@ const DisplayPaneThreeSectionOneAssignment = () => {
               setListExpand={setListExpand}
               list={engagementListAll}
               mode={reviewMode}
+              onClickRevise={reviseEngagement}
+              onClickReview={reviseEngagement}
             />
           </div>
           <div className="containerPadding">
@@ -596,6 +603,8 @@ const DisplayPaneThreeSectionOneAssignment = () => {
               setListExpand={setListExpand}
               list={setupList}
               mode={reviewMode}
+              onClickRevise={reviseSetup}
+              onClickReview={reviseSetup}
             />
           </div>
         </>
@@ -646,9 +655,12 @@ const DisplayPaneThreeSectionOneAssignment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne className="" 
+                      accordianObject={ob} mode={reviewMode}
+                      onClickReview={reviseEngagement} />
                     ) : (
-                      <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} 
+                      onClickReview={reviseEngagement}/>
                     )}
                   </div>
                 );
