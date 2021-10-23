@@ -12,14 +12,16 @@ import {
   GET_ASSESSEENODE_ASSESSEE_REVIEW_LIST,
   SET_POPUP_VALUE,
   GET_ASSESSEETYPE_ASSESSEE_REVIEW_LIST,
-  SET_ADMINISTRATOR_SECONDARY_LIST
+  SET_ADMINISTRATOR_SECONDARY_LIST,
+  GET_ALLOCATE_ASSESSEE_GROUP
 } from '../../actionType';
 import {
   ASSESSEE_REVIEW_LIST_URL,
   ASSESSEE_GROUP_ASSESSEE_URL,
   ASSESSEE_ROLE_ASSESSEE_URL,
   ASSESSEE_NODE_ASSESSEE_URL,
-  ASSESSEE_TYPE_ASSESSEE_URL
+  ASSESSEE_TYPE_ASSESSEE_URL,
+  ASSESSEE_GROUP_REVIEWLIST_URL
 } from '../../endpoints';
 
 const reviewListDistinctApi = async (requestObj) => {
@@ -67,6 +69,51 @@ function* workerReviewListAssesseeSaga(data) {
       });
     }
 
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerReviewListAssesseGroupSaga(data) {
+  try {
+    const userResponse = yield call(reviewListDistinctApi, {
+      data: data.payload.request,
+      URL: ASSESSEE_GROUP_REVIEWLIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      let responseObj = {
+        ...data.payload.revisedGroupObject,
+        assesseeGroup: userResponse.responseObject
+      };
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.headerOne || 'assessees',
+          middlePaneHeaderBadgeOne: 'group',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true,
+          isSelectActive: 'multiple',
+          selectedTagsArray: data.payload.existingAssesseeId
+        }
+      });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
     console.log('loading end');
     yield put({ type: LOADER_STOP });
   } catch (e) {
@@ -341,4 +388,5 @@ export default function* watchReviewListAssesseeSaga() {
     workerReviewListAssesseeGroupAssesseeSaga
   );
   yield takeLatest(GET_ALLOCATE_ASSESSEE, workerReviewListAssesseSaga);
+  yield takeLatest(GET_ALLOCATE_ASSESSEE_GROUP, workerReviewListAssesseGroupSaga);
 }

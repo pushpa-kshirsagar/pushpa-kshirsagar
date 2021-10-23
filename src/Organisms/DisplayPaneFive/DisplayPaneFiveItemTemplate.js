@@ -326,7 +326,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                                     dispatch({
                                       type: SET_POPUP_VALUE,
                                       payload: {
-                                        isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
+                                        isPopUpValue: 'SUB_ITEM_EXP_PRIMARY_POPUP',
                                         popupMode: `LIKERT_ITEM_EXPLANATION_MEDIA_TEXT_${keys}`
                                       }
                                     });
@@ -391,7 +391,7 @@ const DisplayPaneFiveItemTemplate = (props) => {
                           isActive={isPopUpValue === `LIKERT_ITEM_EXPLANATION_MEDIA_TEXT_${keys}`}
                           headerOne={'item'}
                           headerPanelColour={'genericOne'}
-                          // headerOneBadgeOne={'media'}
+                          headerOneBadgeOne={'explanation'}
                           headerOneBadgeTwo={''}
                           basicInfo={{}}
                           typeOfSetObject={''}

@@ -206,16 +206,6 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     {
       id: 'preview-assessment',
       labelTextOneOne: 'preview',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        },
-        {
-          labelTextOneOneBadge: '',
-          textOne: ''
-        }
-      ],
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,

@@ -19,7 +19,10 @@ import ReviewList from '../Molecules/ReviewList/ReviewList';
 import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
-import { onClickCheckBoxOneListSelection, onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
+import {
+  onClickCheckBoxOneListSelection,
+  onClickCheckBoxSelection
+} from '../Actions/AssesseeModuleAction';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
 import Check from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -92,6 +95,19 @@ const AssignmentDistinctAssessmentDistinctReviewList = (props) => {
     setIsShowReviseIcon(false);
   };
   const onClickReviseCancel = () => {
+    dispatch({
+      type: SET_MIDDLEPANE_STATE,
+      payload: {
+        middlePaneHeader: 'assignments',
+        middlePaneHeaderBadgeOne: middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo: middlePaneHeaderBadgeTwo,
+        middlePaneHeaderBadgeThree: '',
+        middlePaneHeaderBadgeFour: '',
+        typeOfMiddlePaneList: 'assignmentDistinctReviewList',
+        scanCount: reviewListDistinctData.length,
+        showMiddlePaneState: true
+      }
+    });
     console.log('ON CLICK cancel ICON');
     setIsShowReviseIcon(true);
   };
@@ -103,8 +119,8 @@ const AssignmentDistinctAssessmentDistinctReviewList = (props) => {
         type: SET_MIDDLEPANE_STATE,
         payload: {
           middlePaneHeader: 'assignments',
-          middlePaneHeaderBadgeOne: 'distinct',
-          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeOne: middlePaneHeaderBadgeOne,
+          middlePaneHeaderBadgeTwo: middlePaneHeaderBadgeTwo,
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assignmentDistinctReviewList',

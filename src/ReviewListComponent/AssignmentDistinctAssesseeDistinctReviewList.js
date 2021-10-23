@@ -108,8 +108,8 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
         type: SET_MIDDLEPANE_STATE,
         payload: {
           middlePaneHeader: 'assignments',
-          middlePaneHeaderBadgeOne: 'distinct',
-          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeOne: middlePaneHeaderBadgeOne,
+          middlePaneHeaderBadgeTwo: middlePaneHeaderBadgeTwo,
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
           typeOfMiddlePaneList: 'assignmentDistinctReviewList',
@@ -145,8 +145,8 @@ const AssignmentDistinctAssesseeDistinctReviewList = (props) => {
       type: SET_MIDDLEPANE_STATE,
       payload: {
         middlePaneHeader: 'assignments',
-        middlePaneHeaderBadgeOne: 'distinct',
-        middlePaneHeaderBadgeTwo: 'active',
+        middlePaneHeaderBadgeOne: middlePaneHeaderBadgeOne,
+        middlePaneHeaderBadgeTwo: middlePaneHeaderBadgeTwo,
         middlePaneHeaderBadgeThree: '',
         middlePaneHeaderBadgeFour: '',
         typeOfMiddlePaneList: 'assignmentDistinctReviewList',

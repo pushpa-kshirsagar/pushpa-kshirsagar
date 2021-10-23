@@ -2,7 +2,10 @@ import {
   ASSIGNMENT_POPUP_OPEN,
   CLEAR_ASSIGNMENT_INFO,
   SET_ASSIGNMENT_BASIC_REDUCER_STATE,
+  SET_ASSIGNMENT_COMMUNIQUE_FRAMEWORK_STATE,
+  SET_ASSIGNMENT_SYNOPSIS_FRAMEWORK_STATE,
   SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
+  SET_ASSIGNMENT_FRAMEWORK_STATE,
   SET_ASSIGNMENT_NEXT_POPUP,
   SET_ASSIGNMENT_PREVIOUS_POPUP,
   SET_ASSIGNMENT_SECONDARY_OPTION_VALUE,
@@ -60,6 +63,33 @@ const initialState = {
     assignmentType: {
       assignmentTypePrimary: [],
       assignmentTypeSecondary: []
+    }
+  },
+  informationFramework: {
+    assignmentAdministrationProctor: false,
+    assignmentAdministrationRepeat: false,
+    assignmentAdministrationReset: false,
+    assignmentAdministrationShuffle: false,
+    assignmentAdministrationSupervise: false,
+    assignmentAdministrationTemplate: null,
+    assignmentAdministrationVersion: '',
+    assignmentAssesseeDistinct: [],
+    assignmentAssesseeGroup: [],
+    assignmentAssesseeNorm: [],
+    assignmentAssessmentDistinct: [],
+    assignmentAssessmentGroup: [],
+    assignmentCommunique: [],
+    assignmentCultureProfileDistinct: [],
+    assignmentCultureProfileGroup: [],
+    assignmentJobProfileDistinct: [],
+    assignmentJobProfileGroup: [],
+    assignmentReport: [],
+    assignmentSynopsis: []
+  },
+  informationFrameworkPlus: {
+    assignmentTimeline: {
+      assignmentTimelineDateTimeStart: null,
+      assignmentTimelineDateTimeEnd: null
     }
   }
 };
@@ -166,6 +196,30 @@ const AssignmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
             ...istate.informationAllocation[action.payload.stateName],
             [action.payload.actualStateName]: action.payload.value
           }
+        }
+      };
+    case SET_ASSIGNMENT_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: action.payload
+      };
+    case SET_ASSIGNMENT_COMMUNIQUE_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assignmentCommunique: [
+            ...istate.informationFramework.assignmentCommunique,
+            action.payload
+          ]
+        }
+      };
+    case SET_ASSIGNMENT_SYNOPSIS_FRAMEWORK_STATE:
+      return {
+        ...istate,
+        informationFramework: {
+          ...istate.informationFramework,
+          assignmentSynopsis: [...istate.informationFramework.assignmentSynopsis, action.payload]
         }
       };
     case CLEAR_ASSIGNMENT_INFO:

@@ -33,13 +33,13 @@ import PopUpCheckbox from '../../PopUpInformation/PopUpCheckbox';
 const PopUpAssessmentCreate = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { indexPointer } = useSelector((state) => state.DisplayPaneTwoReducer);
   const [errorMsg, setErrorMsg] = useState('');
   const {
     selectedAssociateInfo,
     coreTypeReviewListData,
     coreGroupReviewListData,
-    coreNodeReviewListData
+    coreNodeReviewListData,
+    indexPointer
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     informationBasic,

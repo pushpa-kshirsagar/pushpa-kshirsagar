@@ -12,14 +12,16 @@ import {
   SET_REVIEW_LIST_RELATE_DATA,
   GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA,
   GET_ALLOCATE_ASSESSMENT,
-  GET_ASSESSMENT_ITEM_REVIEW_LIST_SAGA
+  GET_ASSESSMENT_ITEM_REVIEW_LIST_SAGA,
+  GET_ALLOCATE_ASSESSMENT_GROUP
 } from '../../actionType';
 import {
   ASSESSMENT_REVIEW_LIST_URL,
   ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_URL,
   ASSESSMENTTYPE_ASSESSMENT_REVIEWLIST_URL,
   ASSESSMENTNODE_ASSESSMENT_REVIEWLIST_URL,
-  ASSESSMENT_ITEM_REVIEWLIST_URL
+  ASSESSMENT_ITEM_REVIEWLIST_URL,
+  ASSESSMENT_GROUP_REVIEWLIST_URL
 } from '../../endpoints';
 
 const apiCallMethod = async (requestObj) => {
@@ -299,6 +301,51 @@ function* workerReviewListAssessmentAllocateSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerReviewListAssessmentGroupAllocateSaga(data) {
+  try {
+    const userResponse = yield call(apiCallMethod, {
+      data: data.payload.request,
+      URL: ASSESSMENT_GROUP_REVIEWLIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      let responseObj = {
+        ...data.payload.revisedGroupObject,
+        assessmentGroup: userResponse.responseObject
+      };
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.headerOne || 'assessments',
+          middlePaneHeaderBadgeOne: 'group',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true,
+          isSelectActive: 'multiple',
+          selectedTagsArray: data.payload.existingAssessmentId
+        }
+      });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
 export default function* watchReviewListAssessmentSaga() {
   yield takeLatest(ASSESSMENT_REVIEW_DISTINCT_SAGA, workerReviewListAssessmentSaga);
   yield takeLatest(GET_ASSESSMENTGROUP_ASSESSMENT_REVIEWLIST_SAGA, workerAssessmentGroupAssessment);
@@ -306,4 +353,5 @@ export default function* watchReviewListAssessmentSaga() {
   yield takeLatest(GET_NODE_ASSESSMENTS_REVIEW_LIST_SAGA, workerAssessmentNodeAssessment);
   yield takeLatest(GET_ASSESSMENT_ITEM_REVIEW_LIST_SAGA, workerAssessmentItemReviewList);
   yield takeLatest(GET_ALLOCATE_ASSESSMENT, workerReviewListAssessmentAllocateSaga);
+  yield takeLatest(GET_ALLOCATE_ASSESSMENT_GROUP, workerReviewListAssessmentGroupAllocateSaga);
 }

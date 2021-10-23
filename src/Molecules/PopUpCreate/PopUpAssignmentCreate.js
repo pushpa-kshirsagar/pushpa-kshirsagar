@@ -10,21 +10,27 @@ import {
   CREATE_ASSIGNMENT_SAGA,
   LOADER_START,
   SET_ASSIGNMENT_DYNAMIC_SINGLE_STATE,
-  SET_DISPLAY_THREE_SINGLE_STATE
+  SET_DISPLAY_THREE_SINGLE_STATE,
+  SET_ASSIGNMENT_FRAMEWORK_STATE,
+  SET_ASSIGNMENT_COMMUNIQUE_FRAMEWORK_STATE,
+  SET_ASSIGNMENT_SYNOPSIS_FRAMEWORK_STATE
 } from '../../actionType';
 import PopUpReviewList from '../../PopUpInformation/PopUpReviewList';
+import PopUpDropList from '../../PopUpInformation/PopUpDropList';
+import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 
 const PopUpAssignmentCreate = (props) => {
   const { headerOne } = props;
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { informationBasic, informationAllocation } = useSelector(
+  const { informationBasic, informationAllocation, informationFramework } = useSelector(
     (state) => state.AssignmentReducer
   );
   const {
     selectedAssociateInfo,
     coreTypeReviewListData,
     coreGroupReviewListData,
-    coreNodeReviewListData
+    coreNodeReviewListData,
+    indexPointer
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const dispatch = useDispatch();
@@ -63,7 +69,8 @@ const PopUpAssignmentCreate = (props) => {
     dispatch({ type: CREATE_ASSIGNMENT_SAGA, payload: reqBody });
   };
   let selectedPrimaryGroup = informationAllocation?.assignmentGroup.assignmentGroupPrimary || [];
-  let selectedSecondaryGroup = informationAllocation?.assignmentGroup.assignmentGroupSecondary || [];
+  let selectedSecondaryGroup =
+    informationAllocation?.assignmentGroup.assignmentGroupSecondary || [];
   let filteredCoreGroupReviewListDataPrimary = [];
   if (coreGroupReviewListData && coreGroupReviewListData.length > 0) {
     coreGroupReviewListData.forEach((group) => {
@@ -301,6 +308,152 @@ const PopUpAssignmentCreate = (props) => {
         headerOneBadgeOne={'information'}
         headerOneBadgeTwo={'create'}
         onClickYes={onClickYes}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ADMINPROCTORPOPUP'}
+        tag={'assignmentAdministrationProctor'}
+        label={'proctor'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSIGNMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ADMINREPEATPOPUP'}
+        tag={'assignmentAdministrationRepeat'}
+        label={'repeat'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSIGNMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ADMINRESETPOPUP'}
+        tag={'assignmentAdministrationReset'}
+        label={'reset'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSIGNMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ADMINSHUFFLEPOPUP'}
+        tag={'assignmentAdministrationShuffle'}
+        label={'shuffle'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSIGNMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ADMINSUPERVISEPOPUP'}
+        tag={'assignmentAdministrationSupervise'}
+        label={'supervise'}
+        listSelect={[
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSIGNMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpDropList
+        isActive={isPopUpValue === 'ADMINVERSONPOPUP'}
+        tag={'assignmentAdministrationVersion'}
+        label={'version'}
+        listSelect={[
+          { id: 'Fixed', name: 'Fixed' },
+          { id: 'Random', name: 'Random' }
+        ]}
+        mappingValue={'id'}
+        inputHeaderBadgeOne={''}
+        inputHeaderBadgeTwo={''}
+        headerPanelColour={'genericOne'}
+        headerOne={headerOne}
+        headerOneBadgeOne={'information'}
+        isRequired={true}
+        nextPopUpValue={''}
+        basicInfo={informationFramework}
+        typeOfSetObject={SET_ASSIGNMENT_FRAMEWORK_STATE}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextEditor
+        isActive={isPopUpValue === 'COMMUNIQUE_TEXTSHEET_POPUP'}
+        headerOne={'assignment'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'communiqué'}
+        headerOneBadgeTwo={indexPointer}
+        defaultSheetValue={informationFramework.assignmentCommunique[indexPointer - 1]}
+        onClickSave={(data) => {
+          dispatch({ type: SET_ASSIGNMENT_COMMUNIQUE_FRAMEWORK_STATE, payload: data });
+        }}
+        actualLableValue={indexPointer - 1}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
+      />
+      <PopUpTextEditor
+        isActive={isPopUpValue === 'SYNOPSIS_TEXTSHEET_POPUP'}
+        headerOne={'assignment'}
+        headerPanelColour={'genericOne'}
+        headerOneBadgeOne={'synopsis'}
+        headerOneBadgeTwo={indexPointer}
+        defaultSheetValue={informationFramework.assignmentSynopsis[indexPointer - 1]}
+        onClickSave={(data) => {
+          dispatch({ type: SET_ASSIGNMENT_SYNOPSIS_FRAMEWORK_STATE, payload: data });
+        }}
+        actualLableValue={indexPointer - 1}
+        mode={reviewMode === 'revise' ? 'revise' : 'core'}
       />
     </div>
   );

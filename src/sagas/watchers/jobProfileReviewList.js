@@ -2,6 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   CULTURE_ASSESSMENTS_REVIEWLIST_SAGA,
   GET_ALLOCATE_JOB,
+  GET_ALLOCATE_JOB_GROUP,
   GET_JOBDOMAIN_REVIEW_LIST_SAGA,
   GET_JOBFUNCTION_REVIEW_LIST_SAGA,
   GET_JOBPROFILE_REVIEW_LIST_SAGA,
@@ -26,6 +27,7 @@ import {
   JOBROLE_REVIEWLIST_URL,
   JOB_ASSESSMENT_REVIEWLIST_URL,
   JOB_GROUP_JOB_REVIEWLIST_URL,
+  JOB_GROUP_REVIEWLIST_URL,
   JOB_NODE_JOB_REVIEWLIST_URL,
   JOB_REVIEWLIST_URL,
   JOB_TYPE_JOB_REVIEWLIST_URL
@@ -199,6 +201,51 @@ function* workerReviewListJobProfileAllocateSaga(data) {
         payload: {
           middlePaneHeader: data.payload.headerOne || 'job profiles',
           middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: data.payload.typeOfMiddlePaneList,
+          scanCount: userResponse && userResponse.countTotal,
+          showMiddlePaneState: true,
+          isSelectActive: 'multiple',
+          selectedTagsArray: data.payload.existingJobProfileId
+        }
+      });
+      yield put({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [responseObj] });
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: userResponse.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+}
+function* workerReviewListJobProfileGroupAllocateSaga(data) {
+  try {
+    const userResponse = yield call(apiCallFunction, {
+      data: data.payload.request,
+      URL: JOB_GROUP_REVIEWLIST_URL
+    });
+    // const userResponse ={responseCode:'000',countTotal:30}
+    if (userResponse.responseCode === '000') {
+      let responseObj = {
+        ...data.payload.revisedGroupObject,
+        jobProfileGroup: userResponse.responseObject
+      };
+      yield put({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: data.payload.headerOne || 'job profiles',
+          middlePaneHeaderBadgeOne: 'group',
           middlePaneHeaderBadgeTwo: 'active',
           middlePaneHeaderBadgeThree: '',
           middlePaneHeaderBadgeFour: '',
@@ -467,6 +514,7 @@ export default function* watchReviewListJobProfileSaga() {
   yield takeLatest(JOB_GROUP_JOB_REVIEWLIST_SAGA, workeJobGroupJobReviewListSaga);
   yield takeLatest(JOB_TYPE_JOB_REVIEWLIST_SAGA, workeJobTypeJobReviewListSaga);
   yield takeLatest(GET_ALLOCATE_JOB, workerReviewListJobProfileAllocateSaga);
+  yield takeLatest(GET_ALLOCATE_JOB_GROUP, workerReviewListJobProfileGroupAllocateSaga);
   yield takeLatest(GET_JOB_NODE_JOB_REVIEW_LIST_SAGA, workeJobNodeJobReviewListSaga);
   yield takeLatest(GET_JOBDOMAIN_REVIEW_LIST_SAGA, workeJobDomainReviewListSaga);
   yield takeLatest(GET_JOBFUNCTION_REVIEW_LIST_SAGA, workeJobFunctionReviewListSaga);

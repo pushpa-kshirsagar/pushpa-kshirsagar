@@ -6,17 +6,27 @@ import { Paper } from '@material-ui/core';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import {
+  makeAssesseeGroupObj,
   makeAssesseeReviewListRequestObject,
+  makeAssessmentGroupObj,
   makeAssessmentReviewListRequestObject,
+  makeCultureProfileGroupObj,
   makeCultureProfileObj,
+  makeJobProfileGroupObj,
   makeJobProfileObj
 } from '../../Actions/GenericActions';
+import Manuscript from '@material-ui/icons/Description';
+import AddIcon from '@material-ui/icons/Add';
 import {
   FILTERMODE,
   GET_ALLOCATE_ASSESSEE,
+  GET_ALLOCATE_ASSESSEE_GROUP,
   GET_ALLOCATE_ASSESSMENT,
+  GET_ALLOCATE_ASSESSMENT_GROUP,
   GET_ALLOCATE_CULTURE,
+  GET_ALLOCATE_CULTURE_GROUP,
   GET_ALLOCATE_JOB,
+  GET_ALLOCATE_JOB_GROUP,
   GET_ASSIGNMENTDISTINCT_ASSESSEES_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_ASSESSMENT_REVIEWLIST_SAGA,
   GET_ASSIGNMENTDISTINCT_CULTURE_PROFILE_REVIEWLIST_SAGA,
@@ -24,6 +34,8 @@ import {
   LOADER_START,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_PANE_THREE_PREVIEW_MODE,
+  SET_POPUP_VALUE,
   SET_REQUEST_OBJECT
 } from '../../actionType';
 
@@ -93,6 +105,48 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
 
   const frameworkList = [
     {
+      id: 'administration',
+      labelTextOneOne: 'administration',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'proctor',
+          textOne: informationFramework?.assignmentAdministrationRepeat ? 'Yes' : 'No'
+        },
+        {
+          labelTextOneOneBadge: 'repeat',
+          textOne: informationFramework?.assignmentAdministrationRepeat ? 'Yes' : 'No'
+        },
+        {
+          labelTextOneOneBadge: 'reset',
+          textOne: informationFramework?.assignmentAdministrationReset ? 'Yes' : 'No'
+        },
+        {
+          labelTextOneOneBadge: 'sequence',
+          textOne: informationFramework?.assignmentAdministrationSequence ? 'Yes' : 'No'
+        },
+        {
+          labelTextOneOneBadge: 'shuffle',
+          textOne: informationFramework?.assignmentAdministrationShuffle ? 'Yes' : 'No'
+        },
+        {
+          labelTextOneOneBadge: 'supervise',
+          textOne: informationFramework?.assignmentAdministrationSupervise ? 'Yes' : 'No'
+        },
+        {
+          labelTextOneOneBadge: 'template',
+          textOne: informationFramework?.assignmentAdministrationTemplate ? 'Yes' : 'No'
+        },
+        {
+          labelTextOneOneBadge: 'version',
+          textOne: informationFramework?.assignmentAdministrationVersion ? 'Yes' : 'No'
+        }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false
+      // IconOne: Manuscript
+    },
+    {
       id: 'a1',
       labelTextOneOne: 'assessees',
       isListCard: true,
@@ -126,11 +180,25 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: assessmentArray
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
         }
       ],
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'communiqué',
+      labelTextOneOneBadges: [],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
+      isAddIcon: reviewMode === 'revise' ? true : false
     },
     {
       id: 'CP-001',
@@ -142,6 +210,10 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: cultureProfileArray
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
         }
       ],
       innerAssociateList: [],
@@ -158,11 +230,24 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         {
           labelTextOneOneBadge: 'distinct',
           innerList: jobProfileArray
+        },
+        {
+          labelTextOneOneBadge: 'group',
+          innerList: []
         }
       ],
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
+    },
+    {
+      id: 'preview-assignment',
+      labelTextOneOne: 'preview',
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: null,
+      isReviewLink: true
     },
     {
       id: 'a4',
@@ -177,6 +262,16 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
+    },
+    {
+      id: 'synopsis',
+      labelTextOneOne: 'synopsis',
+      labelTextOneOneBadges: [],
+      innerAssociateList: [],
+      innerInfo: 'assessees',
+      isListCard: false,
+      IconOne: reviewMode === 'revise' ? AddIcon : Manuscript,
+      isAddIcon: reviewMode === 'revise' ? true : false
     }
   ];
   const frameworkPlusAll = [
@@ -200,9 +295,80 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       IconOne: null
     }
   ];
+  const onclickReviewFramework = (e, badge) => {
+    console.log(e);
+    if (typeof e === 'object') {
+      const headerOne = e.currentTarget.getAttribute('data-value');
+      const badgeOne = e.currentTarget.getAttribute('data-key');
+      if (headerOne === 'preview') {
+        // dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: true });
+        // dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
+      }
+    }
+    if (reviewMode === 'review') {
+      if (e === 'communiqué' && badge !== '') {
+        dispatch({
+          type: SET_PANE_THREE_PREVIEW_MODE,
+          payload: {
+            isPreviewShow: true,
+            previewHeaderOne: 'assignment',
+            previewHeaderOneBadgeOne: 'communiqué',
+            previewHeaderOneBadgeTwo: badge,
+            previewHeaderOneBadgeThree: '',
+            previewInnerHTML: informationFramework?.assignmentCommunique[badge - 1] || ''
+          }
+        });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      }
+      if (e === 'synopsis' && badge !== '') {
+        dispatch({
+          type: SET_PANE_THREE_PREVIEW_MODE,
+          payload: {
+            isPreviewShow: true,
+            previewHeaderOne: 'assignment',
+            previewHeaderOneBadgeOne: 'synopsis',
+            previewHeaderOneBadgeTwo: badge,
+            previewHeaderOneBadgeThree: '',
+            previewInnerHTML: informationFramework?.assignmentSynopsis[badge - 1] || ''
+          }
+        });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      }
+    }
+    if (reviewMode === 'revise') {
+      if (e === 'communiqué' && badge === '') {
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'indexPointer', value: 0 }
+        });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: {
+            isPopUpValue: 'COMMUNIQUE_TEXTSHEET_POPUP',
+            popupMode: 'ASSIGNMENTCREATE'
+          }
+        });
+      }
+      if (e === 'synopsis' && badge === '') {
+        dispatch({
+          type: SET_DISPLAY_TWO_SINGLE_STATE,
+          payload: { stateName: 'indexPointer', value: 0 }
+        });
+        dispatch({
+          type: SET_POPUP_VALUE,
+          payload: {
+            isPopUpValue: 'SYNOPSIS_TEXTSHEET_POPUP',
+            popupMode: 'ASSIGNMENTCREATE'
+          }
+        });
+      }
+    }
+  };
   const onclickReviseFramework = (e) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
+    console.log('labelName', labelName);
+    console.log('selectedBadgeName', selectedBadgeName);
     if (labelName === 'assessees' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssesseeReviewListRequestObject(
         selectedAssociateInfo,
@@ -242,6 +408,37 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         }
       });
     }
+    if (labelName === 'assessees' && selectedBadgeName === 'group') {
+      let requestObect = makeAssesseeGroupObj(selectedAssociateInfo, 'active', 0, countPage);
+
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assignmentName: responseObject.informationBasic.assignmentName,
+        assignmentDescription: responseObject.informationBasic.assignmentDescription,
+        assignmentStatus: responseObject.informationEngagement.assignmentStatus
+      };
+      let existingAssesseeId = [];
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentDistinctAssesseeGroupRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSESSEE_GROUP,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingAssesseeId: existingAssesseeId,
+          typeOfMiddlePaneList: 'assignmentDistinctAssesseeGroupReviewList'
+        }
+      });
+    }
     if (labelName === 'assessments' && selectedBadgeName === 'distinct') {
       let requestObect = makeAssessmentReviewListRequestObject(
         selectedAssociateInfo,
@@ -259,7 +456,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
       let existingAssessmentId = informationFramework?.assignmentAssessment.map(
         (ob) => ob.assessmentId
       );
-      console.log('existingAssessmentId',existingAssessmentId);
+      console.log('existingAssessmentId', existingAssessmentId);
       // let tempArr = relatedReviewListPaneThree[0]?.assessment || [];
       // existingAssessmentId = tempArr.map((val) => {
       //   return val.id;
@@ -282,6 +479,36 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
           revisedGroupObject: revisedGroupObject,
           existingAssessmentId: existingAssessmentId,
           typeOfMiddlePaneList: 'assignmentDistinctAssessmentReviewList'
+        }
+      });
+    }
+    if (labelName === 'assessments' && selectedBadgeName === 'group') {
+      let requestObect = makeAssessmentGroupObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assignmentName: responseObject.informationBasic.assignmentName,
+        assignmentDescription: responseObject.informationBasic.assignmentDescription,
+        assignmentStatus: responseObject.informationEngagement.assignmentStatus
+      };
+      let existingAssessmentId = []
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentDistinctAssessmentGroupRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_ASSESSMENT_GROUP,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingAssessmentId: existingAssessmentId,
+          typeOfMiddlePaneList: 'assignmentDistinctAssessmentGroupReviewList'
         }
       });
     }
@@ -319,6 +546,35 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         }
       });
     }
+    if (labelName === 'culture profiles' && selectedBadgeName === 'group') {
+      let requestObect = makeCultureProfileGroupObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assignmentName: responseObject.informationBasic.assignmentName,
+        assignmentDescription: responseObject.informationBasic.assignmentDescription,
+        assignmentStatus: responseObject.informationEngagement.assignmentStatus
+      };
+      let existingCultureProfileId = [];
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentDistinctCultureProfileGroupRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: GET_ALLOCATE_CULTURE_GROUP,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingCultureProfileId: existingCultureProfileId,
+          typeOfMiddlePaneList: 'assignmentDistinctCultureProfileGroupReviewList'
+        }
+      });
+    }
     if (labelName === 'job profiles' && selectedBadgeName === 'distinct') {
       let requestObect = makeJobProfileObj(selectedAssociateInfo, 'active', 0, countPage);
       let revisedGroupObject = {
@@ -351,6 +607,82 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
           existingJobProfileId: existingJobProfileId,
           typeOfMiddlePaneList: 'assignmentDistinctJobProfileReviewList'
         }
+      });
+    }
+    if (labelName === 'job profiles' && selectedBadgeName === 'group') {
+      let requestObect = makeJobProfileGroupObj(selectedAssociateInfo, 'active', 0, countPage);
+      let revisedGroupObject = {
+        id: responseObject.id,
+        assignmentName: responseObject.informationBasic.assignmentName,
+        assignmentDescription: responseObject.informationBasic.assignmentDescription,
+        assignmentStatus: responseObject.informationEngagement.assignmentStatus
+      };
+      let existingJobProfileId = [];
+      // let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
+      // existingJobProfileId = tempArr.map((val) => {
+      //   return val.id;
+      // });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: 'assignmentDistinctJobProfileGroupRevise' }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
+      dispatch({ type: LOADER_START });
+      // dispatch({ type: SET_REQUEST_OBJECT, payload: requestObect });
+      dispatch({
+        type: GET_ALLOCATE_JOB_GROUP,
+        payload: {
+          request: requestObect,
+          revisedGroupObject: revisedGroupObject,
+          existingJobProfileId: existingJobProfileId,
+          typeOfMiddlePaneList: 'assignmentDistinctJobProfileGroupReviewList'
+        }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'proctor') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINPROCTORPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'proctor') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINPROCTORPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'repeat') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINREPEATPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'reset') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINRESETPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'shuffle') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINSHUFFLEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'supervise') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINSUPERVISEPOPUP', popupMode: 'ASSIGNMENTCREATE' }
+      });
+    }
+    if (labelName === 'administration' && selectedBadgeName === 'version') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ADMINVERSONPOPUP', popupMode: 'ASSIGNMENTCREATE' }
       });
     }
   };
@@ -556,6 +888,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
               list={frameworkList}
               mode={reviewMode}
               onClickRevise={onclickReviseFramework}
+              onClickReview={onclickReviewFramework}
               getReviewList={getRelatedReviewList}
             />
           </div>
@@ -603,7 +936,11 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
                       <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}

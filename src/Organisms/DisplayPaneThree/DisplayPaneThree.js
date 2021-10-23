@@ -188,6 +188,10 @@ export const DisplayPaneThree = () => {
     assignmentAssessmentList = [],
     assignmentCultureProfileList = [],
     assignmentJobProfileList = [],
+    assignmentAssesseeGroupList = [],
+    assignmentAssessmentGroupList = [],
+    assignmentCultureProfileGroupList = [],
+    assignmentJobProfileGroupList = [],
     isWeightageSelected = false,
     isRangeSelected = false,
     setUpAssociateModule,
@@ -1814,7 +1818,11 @@ export const DisplayPaneThree = () => {
             assignmentAssessee: assignmentAssesseeList || [],
             assignmentAssessment: assignmentAssessmentList || [],
             assignmentCultureProfile: assignmentCultureProfileList || [],
-            assignmentJobProfile: assignmentJobProfileList || []
+            assignmentJobProfile: assignmentJobProfileList || [],
+            assignmentAssesseeGroup: assignmentAssesseeGroupList || [],
+            assignmentAssessmentGroup: assignmentAssessmentGroupList || [],
+            assignmentCultureProfileGroup: assignmentCultureProfileGroupList || [],
+            assignmentJobProfileGroup: assignmentJobProfileGroupList || []
           }
         }
       };
@@ -2002,11 +2010,15 @@ export const DisplayPaneThree = () => {
       });
     } else if (headerOneBadgeOne === 'section' && headerOne === 'assessments') {
       let sectionObj = assessmentInfo.informationFramework.assessmentSection;
-      if(aseessmentSection.sectionInformation.assessmentSectionItemDistinct[0].itemId!==undefined){
-        let existingItemId = aseessmentSection.sectionInformation.assessmentSectionItemDistinct.map((val) => {
-          return val.itemId;
-        });
-        aseessmentSection.sectionInformation.assessmentSectionItemDistinct=[...existingItemId];
+      if (
+        aseessmentSection.sectionInformation.assessmentSectionItemDistinct[0].itemId !== undefined
+      ) {
+        let existingItemId = aseessmentSection.sectionInformation.assessmentSectionItemDistinct.map(
+          (val) => {
+            return val.itemId;
+          }
+        );
+        aseessmentSection.sectionInformation.assessmentSectionItemDistinct = [...existingItemId];
       }
       sectionObj[selectedTagValue] = aseessmentSection.sectionInformation;
 

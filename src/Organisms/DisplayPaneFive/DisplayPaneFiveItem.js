@@ -329,6 +329,29 @@ export const DisplayPaneFiveItem = () => {
     console.log();
   };
 
+  const ChangeOptionChoicePopup = (e) => {
+    let targetValue = e.currentTarget.getAttribute('data-value');
+    // setSubQuestionId(e.currentTarget.getAttribute('subquestionid'))
+    setSubQuestionId(popupMode.split('_'));
+    if (targetValue === 'configure') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ITEM_CHOICE_FRAMEWORK_POPUP',
+          popupMode: ''
+        }
+      });
+    }
+    if (targetValue === 'revise' && popupMode !== '') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: popupMode,
+          popupMode: ''
+        }
+      });
+    }
+  };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
     // setSubQuestionId(e.currentTarget.getAttribute('subquestionid'))
@@ -820,13 +843,31 @@ export const DisplayPaneFiveItem = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={ChangeOptionPopup}
+            // ChangeOptionPopup={ChangeOptionPopup}
+            ChangeOptionPopup={ChangeOptionChoicePopup}
             currentPopUpOption={itemPrimaryPopupOption}
             secondaryOptionCheckValue={''}
           />
         </DialogContent>
       </Popup>
 
+      <Popup isActive={isPopUpValue === 'SUB_ITEM_EXP_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'item'}
+          headerOneBadgeOne={'explanation'}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeOptionPopup}
+            currentPopUpOption={itemPopUpOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
       <Popup
         isActive={
           isPopUpValue === 'ITEM_PRIMARY_POPUP' || isPopUpValue === 'SUB_ITEM_PRIMARY_POPUP'
@@ -1167,7 +1208,6 @@ export const DisplayPaneFiveItem = () => {
         headerOneBadgeOne={'configuration'}
         nextPopUpValue={''}
         // inputHeader={'item'}
-        // primaryheader={'configuration'}
         isItemFramework={true}
         mode={'revise'}
         itemFrameworkOneResponseChoice={itemFrameworkOneResponseChoice || []}
