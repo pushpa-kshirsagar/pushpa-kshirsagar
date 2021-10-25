@@ -158,6 +158,7 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
   };
   const startAssignment = (e) => {
     let status = e.currentTarget.getAttribute('actualstatus');
+    console.log('selectedTagValue',e.currentTarget.getAttribute('assignmentid'));
     let tempArr = RES_START_POPUP_OPTION;
     if (status === 'UNSTARTED') {
       tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
@@ -192,8 +193,8 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item.assignmentId}
-                isSelectedReviewList={middlePaneSelectedValue === item.assignmentId}
+                tag={item.assesseeAssignmentId}
+                isSelectedReviewList={middlePaneSelectedValue === item.assesseeAssignmentId}
                 status={item.assesseeAssignmentStatus}
                 actualStatus={item.assesseeAssignmentStatus}
                 textOne={item.assesseeAssignmentName}
@@ -201,7 +202,7 @@ const AssesseeDistinctAssignmentDistinctReviewList = (props) => {
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
-                isSelected={selectedTagsArray.includes(item.assignmentId)}
+                isSelected={selectedTagsArray.includes(item.assesseeAssignmentId)}
                 isDelivery={true}
                 onClickArrow={item.assesseeAssignmentStatus === 'FINISHED' ? null : startAssignment}
                 onClickCheckBox={(event) => {

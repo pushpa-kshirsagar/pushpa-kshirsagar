@@ -385,7 +385,7 @@ const PopUpReducer = (istate = initialState, action) => {
             arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           }
           if (action.payload.badgeValue === 'publish' && istate.selectedTagStatus === 'PUBLISHED') {
-            arrVal = [arrVal[0], { ...arrVal[1], disabled: true }];
+            arrVal = [{ ...arrVal[0], disabled: true },arrVal[1]];
           }
           if (
             (action.payload.badgeValue === 'suspend' &&

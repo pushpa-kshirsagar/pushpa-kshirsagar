@@ -12,7 +12,8 @@ import {
   SET_ASSIGNMENT_RELATED_LIST,
   RESET_ASSIGNMENT_REVIEW_LIST_OBJECT,
   ASSIGNMENT_PUBLISH_SAGA,
-  ASSIGNMENT_ADMINISTER_SAGA
+  ASSIGNMENT_ADMINISTER_SAGA,
+  SET_ASSIGNMENT_FRAMEWORK_STATE
 } from '../../actionType';
 import {
   ASSIGNMENT_PUBLISH_URL,
@@ -219,16 +220,17 @@ function* workerReviewInfoAssignmentSaga(data) {
         }
 
         let assignmentAssessee =
-          userResponse.responseObject[0]?.informationFramework?.assignmentAssessee || [];
+          userResponse.responseObject[0]?.informationFramework?.assignmentAssesseeDistinct || [];
         // let assignmentAssessment =
         // userResponse.responseObject[0]?.informationFramework?.assignmentAssessment || [];
-        let assignmentAssessment = userResponse.responseObject[0]?.informationFramework?.assignmentAssessment.map(
+        let assignmentAssessment = userResponse.responseObject[0]?.informationFramework?.assignmentAssessmentDistinct?.map(
           (ob) => ob.assessmentId
         );
         let assignmentCultureProfile =
-          userResponse.responseObject[0]?.informationFramework?.assignmentCultureProfile || [];
+          userResponse.responseObject[0]?.informationFramework?.assignmentCultureProfileDistinct ||
+          [];
         let assignmentJobProfile =
-          userResponse.responseObject[0]?.informationFramework?.assignmentJobProfile || [];
+          userResponse.responseObject[0]?.informationFramework?.assignmentJobProfileDistinct || [];
         yield put({
           type: SET_ASSIGNMENT_RELATED_LIST,
           payload: { listName: 'assignmentAssesseeList', value: assignmentAssessee }
@@ -244,6 +246,10 @@ function* workerReviewInfoAssignmentSaga(data) {
         yield put({
           type: SET_ASSIGNMENT_RELATED_LIST,
           payload: { listName: 'assignmentJobProfileList', value: assignmentJobProfile }
+        });
+        yield put({
+          type: SET_ASSIGNMENT_FRAMEWORK_STATE,
+          payload: userResponse.responseObject[0]?.informationFramework
         });
       }
       // if (relatedReqObj !== null) {

@@ -1804,8 +1804,19 @@ export const DisplayPaneThree = () => {
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assignment') {
       console.log('ASSIGNMENT REVISE+++++>', assignmentAssessmentList, assignmentAssesseeList);
-      const { informationBasic, informationAllocation } = assignmentInfo;
+      const { informationBasic, informationAllocation, informationFramework } = assignmentInfo;
       const { id } = responseObject;
+      let frameworkObj = {
+        ...informationFramework,
+        assignmentAssesseeDistinct: assignmentAssesseeList || [],
+        assignmentAssessmentDistinct: assignmentAssessmentList || [],
+        assignmentCultureProfileDistinct: assignmentCultureProfileList || [],
+        assignmentJobProfileDistinct: assignmentJobProfileList || [],
+        assignmentAssesseeGroup: assignmentAssesseeGroupList || [],
+        assignmentAssessmentGroup: assignmentAssessmentGroupList || [],
+        assignmentCultureProfileGroup: assignmentCultureProfileGroupList || [],
+        assignmentJobProfileGroup: assignmentJobProfileGroupList || []
+      };
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
         associateId:
@@ -1814,16 +1825,7 @@ export const DisplayPaneThree = () => {
           id,
           informationBasic,
           informationAllocation,
-          informationFramework: {
-            assignmentAssessee: assignmentAssesseeList || [],
-            assignmentAssessment: assignmentAssessmentList || [],
-            assignmentCultureProfile: assignmentCultureProfileList || [],
-            assignmentJobProfile: assignmentJobProfileList || [],
-            assignmentAssesseeGroup: assignmentAssesseeGroupList || [],
-            assignmentAssessmentGroup: assignmentAssessmentGroupList || [],
-            assignmentCultureProfileGroup: assignmentCultureProfileGroupList || [],
-            assignmentJobProfileGroup: assignmentJobProfileGroupList || []
-          }
+          informationFramework: frameworkObj
         }
       };
       dispatch({ type: LOADER_START });

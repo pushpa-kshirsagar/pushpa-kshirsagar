@@ -2588,11 +2588,11 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         updateJobProfileTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
       if (typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList') {
+        console.log('selectedTagValue',selectedTagValue);
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
         let assessmentList = reviewListDistinctData.filter((data) => {
-          return data.assignmentId === selectedTagValue;
+          return data.assesseeAssignmentId === selectedTagValue;
         });
-        console.log('assessmentList', assessmentList);
         dispatch({
           type: RELATED_REVIEWLIST_DISTINCT_DATA,
           payload: assessmentList
@@ -2606,18 +2606,19 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             middlePaneHeaderBadgeThree: '',
             middlePaneHeaderBadgeFour: '',
             typeOfMiddlePaneList: 'assesseesAssginmentAssessmentReviewList',
-            scanCount: assessmentList[0].assesseeAssessment.length,
+            scanCount: assessmentList[0].assesseeAssignmentAssessmentDistinct.length,
             showMiddlePaneState: true
           }
         });
       }
       if (typeOfMiddlePaneList === 'assesseesAssginmentAssessmentReviewList') {
+        console.log('relatedReviewListDistinctData',relatedReviewListDistinctData);
         let reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
-          assignmentId: relatedReviewListDistinctData[0].assignmentId,
+          assignmentId: relatedReviewListDistinctData[0].assesseeAssignmentId,
           assessmentId: selectedTagValue
         };
         dispatch({ type: LOADER_START });

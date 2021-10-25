@@ -91,6 +91,7 @@ export const DisplayPaneSix = () => {
       dispatch({ type: POPUP_OPEN, payload: 'paneSevenPopup' });
     }
   };
+  console.log('assesseeAssignmentAssessmentData', assesseeAssignmentAssessmentData);
   return (
     <>
       <div>
@@ -142,14 +143,14 @@ export const DisplayPaneSix = () => {
                   label={'itemLabel'}
                   jsonData={
                     isAssessmentStart === 'START'
-                      ? assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
-                          .assessmentCommuniquePrimary
+                      ? assesseeAssignmentAssessmentData.informationFramework
+                          .assessmentCommunique[0]
                       : isAssessmentStart === 'FINISH'
-                      ? assesseeAssignmentAssessmentData.informationFramework.assessmentCommunique
-                          .assessmentCommuniqueSecondary
+                      ? assesseeAssignmentAssessmentData.informationFramework
+                          .assessmentCommunique[0]
                       : isAssessmentStart === 'MANUSCRIPT'
-                      ? assesseeAssignmentAssessmentData.informationFramework.assessmentManuscript
-                          .assessmentManuscriptPrimary
+                      ? assesseeAssignmentAssessmentData.informationFramework
+                          .assessmentManuscript[0]
                       : ''
                   }
                 />

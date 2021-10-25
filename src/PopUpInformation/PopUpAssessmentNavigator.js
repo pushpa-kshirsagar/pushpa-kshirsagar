@@ -99,39 +99,40 @@ const PopUpAssessmentNavigator = (props) => {
                 gridTemplateColumns: 'repeat(auto-fill, minmax(50px, 1fr))'
               }}
             >
-              {itemArray.map((question,index) => {
-                return (
-                  <div key={question} style={{ padding: '5px', boxSizing: 'border-box' }}>
-                    <div
-                      style={{
-                        flex: '1',
-                        display: 'flex',
-                        paddingTop: '0px',
-                        alignItems: 'center',
-                        flexDirection: 'column',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <Button
+              {itemArray &&
+                itemArray.map((question, index) => {
+                  return (
+                    <div key={question} style={{ padding: '5px', boxSizing: 'border-box' }}>
+                      <div
                         style={{
-                          fontSize: '1.6rem',
-                          width: '40px',
-                          height: '40px',
-                          padding: '0',
-                          minWidth: '0',
-                          boxShadow:
-                            '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%)',
-                          borderRadius: '50%'
+                          flex: '1',
+                          display: 'flex',
+                          paddingTop: '0px',
+                          alignItems: 'center',
+                          flexDirection: 'column',
+                          justifyContent: 'center'
                         }}
-                        variant="fab"
-                        mini
                       >
-                        {index+1}
-                      </Button>
+                        <Button
+                          style={{
+                            fontSize: '1.6rem',
+                            width: '40px',
+                            height: '40px',
+                            padding: '0',
+                            minWidth: '0',
+                            boxShadow:
+                              '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%)',
+                            borderRadius: '50%'
+                          }}
+                          variant="fab"
+                          mini
+                        >
+                          {index + 1}
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
           <div>

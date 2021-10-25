@@ -160,8 +160,11 @@ export const DisplayPaneSeven = () => {
   };
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
-    let itemId = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].itemId;
-    // let id = assesseeAssessmentStartData.assessmentItem[currentQuestionIndex].id;
+    let itemId =
+      assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct[
+        currentQuestionIndex
+      ].itemId;
+    // let id = assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct[currentQuestionIndex].id;
     console.log('currentQuestionIndex', currentQuestionIndex);
     console.log('itemId', itemId);
     let assesseeId = assesseeAssessmentStartData.assesseeId;
@@ -170,7 +173,10 @@ export const DisplayPaneSeven = () => {
       if (currentQuestionIndex !== 0) {
         setcurrentQuestionIndex(prevIndex);
         let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
-        let itemData = assesseeAssessmentStartData.assessmentItem[prevIndex];
+        let itemData =
+          assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct[
+            prevIndex
+          ];
         let item = responseInLocal.filter(function (ii) {
           return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
         });
@@ -182,7 +188,8 @@ export const DisplayPaneSeven = () => {
     if (clickedval === 'first') {
       setcurrentQuestionIndex(0);
       let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
-      let itemData = assesseeAssessmentStartData.assessmentItem[0];
+      let itemData =
+        assesseeAssessmentStartData.assessmentSection[0].assessmentSectionItemDistinct[0];
       let item = responseInLocal.filter(function (ii) {
         return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
       });
@@ -191,10 +198,12 @@ export const DisplayPaneSeven = () => {
       // setcurrentQuestionChoice(null);
     }
     if (clickedval === 'last') {
-      let lastIndex = assesseeAssessmentStartData.assessmentItem.length - 1;
+      let lastIndex =
+        assesseeAssessmentStartData.assessmentSection[0].assessmentSectionItemDistinct.length - 1;
       setcurrentQuestionIndex(lastIndex);
       let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
-      let itemData = assesseeAssessmentStartData.assessmentItem[lastIndex];
+      let itemData =
+        assesseeAssessmentStartData.assessmentSection[0].assessmentSectionItemDistinct[lastIndex];
       let item = responseInLocal.filter(function (ii) {
         return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
       });
@@ -214,7 +223,10 @@ export const DisplayPaneSeven = () => {
         currentQuestionChoice,
         itemTimeStart
       );
-      if (currentQuestionIndex < assesseeAssessmentStartData.assessmentItem.length - 1) {
+      if (
+        currentQuestionIndex <
+        assesseeAssessmentStartData.assessmentSection[0].assessmentSectionItemDistinct.length - 1
+      ) {
         setcurrentQuestionIndex(currentQuestionIndex + 1);
         setcurrentQuestionChoice(null);
         setItemTimeStart(new Date().getTime());
@@ -246,7 +258,7 @@ export const DisplayPaneSeven = () => {
   };
   useEffect(() => {
     setItemTimeStart(new Date().getTime());
-    const sec = assesseeAssessmentStartData?.assessmentTime / 1000;
+    const sec = assesseeAssessmentStartData.assessmentSection[0]?.assessmentTime / 1000;
     let tt = new Date();
     tt.setSeconds(tt.getSeconds() + sec);
     setTimer(tt);
@@ -263,7 +275,10 @@ export const DisplayPaneSeven = () => {
     setcurrentQuestionChoice(e.target.value);
   };
   console.log('currentQuestionIndex', currentQuestionIndex);
-  let itemObect = assesseeAssessmentStartData?.assessmentItem[currentQuestionIndex];
+  let itemObect =
+    assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct[
+      currentQuestionIndex
+    ];
   console.log('itemObect', itemObect);
   return (
     <>
@@ -276,13 +291,13 @@ export const DisplayPaneSeven = () => {
           headerPanelColour="green"
         />
       </div>
-      {assesseeAssessmentStartData?.assessmentItem?.length > 0 && (
+      {assesseeAssessmentStartData?.assessmentSectionItemDistinct?.length > 0 && (
         <div className={'containerPadding'}>
           <AssessmentHeader
             qnumber={currentQuestionIndex + 1}
-            totalQuestion={assesseeAssessmentStartData?.assessmentItem?.length}
+            totalQuestion={assesseeAssessmentStartData?.assessmentSectionItemDistinct?.length}
             score={
-              assesseeAssessmentStartData?.assessmentItem[currentQuestionIndex]
+              assesseeAssessmentStartData?.assessmentSectionItemDistinct[currentQuestionIndex]
                 .itemFrameworkOneScore
             }
             assessmentName={assesseeAssessmentStartData?.assessmentName}
@@ -500,7 +515,7 @@ export const DisplayPaneSeven = () => {
 
       <PopUpAssessmentNavigator
         isActive={isPopUpValue === 'NavigatorPOPUP'}
-        itemData={assesseeAssessmentStartData.assessmentItem}
+        itemData={assesseeAssessmentStartData?.assessmentSectionItemDistinct}
       />
     </>
   );

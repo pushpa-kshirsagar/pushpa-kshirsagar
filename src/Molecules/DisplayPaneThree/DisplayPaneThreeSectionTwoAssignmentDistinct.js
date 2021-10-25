@@ -382,7 +382,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentDescription: responseObject.informationBasic.assignmentDescription,
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingAssesseeId = informationFramework?.assignmentAssessee || [];
+      let existingAssesseeId = informationFramework?.assignmentAssesseeDistinct || [];
       // let tempArr = relatedReviewListPaneThree[0]?.assessee || [];
       // existingAssesseeId = tempArr.map((val) => {
       //   return val.id;
@@ -453,7 +453,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
       // let existingAssesseeId = informationFramework?.assignmentAssessment || [];
-      let existingAssessmentId = informationFramework?.assignmentAssessment.map(
+      let existingAssessmentId = informationFramework?.assignmentAssessmentDistinct.map(
         (ob) => ob.assessmentId
       );
       console.log('existingAssessmentId', existingAssessmentId);
@@ -520,7 +520,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentDescription: responseObject.informationBasic.assignmentDescription,
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingCultureProfileId = informationFramework?.assignmentCultureProfile || [];
+      let existingCultureProfileId = informationFramework?.assignmentCultureProfileDistinct || [];
       // let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
       // existingCultureProfileId = tempArr.map((val) => {
       //   return val.id;
@@ -583,7 +583,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
         assignmentDescription: responseObject.informationBasic.assignmentDescription,
         assignmentStatus: responseObject.informationEngagement.assignmentStatus
       };
-      let existingJobProfileId = informationFramework?.assignmentJobProfile || [];
+      let existingJobProfileId = informationFramework?.assignmentJobProfileDistinct || [];
       // let tempArr = relatedReviewListPaneThree[0]?.cultureProfile || [];
       // existingJobProfileId = tempArr.map((val) => {
       //   return val.id;

@@ -163,24 +163,28 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
         // />
       )}
       {listDistinctData &&
-        listDistinctData.assesseeAssessment.map((item, index) => {
+        listDistinctData.assesseeAssignmentAssessmentDistinct.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
                 className=""
                 id={index}
-                tag={item.assessmentId}
-                isSelectedReviewList={middlePaneSelectedValue === item.assessmentId}
-                status={item.assesseeAssessmentStatus}
-                actualStatus={item.assesseeAssessmentStatus}
-                textOne={item.assesseeAssessmentName}
-                textTwo={item.assesseeAssessmentDescription}
+                tag={item.assesseeAssignmentAssessmentId}
+                isSelectedReviewList={
+                  middlePaneSelectedValue === item.assesseeAssignmentAssessmentId
+                }
+                status={item.assesseeAssignmentAssessmentStatus}
+                actualStatus={item.assesseeAssignmentAssessmentStatus}
+                textOne={item.assesseeAssignmentAssessmentName}
+                textTwo={item.assesseeAssignmentAssessmentDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
-                isSelected={selectedTagsArray.includes(item.assessmentId)}
+                isSelected={selectedTagsArray.includes(item.assesseeAssignmentAssessmentId)}
                 isDelivery={true}
-                onClickArrow={item.assesseeAssessmentStatus === 'FINISHED' ? null : startAssessment}
+                onClickArrow={
+                  item.assesseeAssignmentAssessmentStatus === 'FINISHED' ? null : startAssessment
+                }
               />
             </div>
           );

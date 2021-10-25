@@ -60,7 +60,8 @@ const PopUpAssignmentCreate = (props) => {
         selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
       assignment: {
         informationBasic: informationBasic,
-        informationAllocation: informationAllocation
+        informationAllocation: informationAllocation,
+        informationFramework: informationFramework
       }
     };
 
@@ -108,6 +109,7 @@ const PopUpAssignmentCreate = (props) => {
       }
     });
   };
+  console.log('assignment', informationFramework);
   return (
     <div>
       <PopUpTextField

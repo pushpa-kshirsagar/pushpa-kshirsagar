@@ -151,7 +151,7 @@ function* workerAssessmentStartSaga(data) {
       });
       yield put({
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-        payload: { stateName: 'assesseeAssignmentAssessmentData', value: response.responseObject }
+        payload: { stateName: 'assesseeAssignmentAssessmentData', value: response.responseObject[0] }
       });
       yield put({
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
