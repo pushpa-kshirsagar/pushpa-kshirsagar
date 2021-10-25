@@ -258,7 +258,7 @@ export const DisplayPaneSeven = () => {
   };
   useEffect(() => {
     setItemTimeStart(new Date().getTime());
-    const sec = assesseeAssessmentStartData.assessmentSection[0]?.assessmentTime / 1000;
+    const sec = assesseeAssessmentStartData?.assessmentSection[0]?.assessmentTime / 1000;
     let tt = new Date();
     tt.setSeconds(tt.getSeconds() + sec);
     setTimer(tt);
@@ -284,6 +284,7 @@ export const DisplayPaneSeven = () => {
     <>
       <div>
         <HeaderCard
+          // displayPane="itemPreview"
           className=""
           displayPane="five"
           headerOne={assesseeAssessmentStartData ? 'assessment' : null}
@@ -291,14 +292,19 @@ export const DisplayPaneSeven = () => {
           headerPanelColour="green"
         />
       </div>
-      {assesseeAssessmentStartData?.assessmentSectionItemDistinct?.length > 0 && (
+      {assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct?.length >
+        0 && (
         <div className={'containerPadding'}>
           <AssessmentHeader
             qnumber={currentQuestionIndex + 1}
-            totalQuestion={assesseeAssessmentStartData?.assessmentSectionItemDistinct?.length}
+            totalQuestion={
+              assesseeAssessmentStartData?.assessmentSection[0]?.assessmentSectionItemDistinct
+                ?.length
+            }
             score={
-              assesseeAssessmentStartData?.assessmentSectionItemDistinct[currentQuestionIndex]
-                .itemFrameworkOneScore
+              assesseeAssessmentStartData?.assessmentSection[0]?.assessmentSectionItemDistinct[
+                currentQuestionIndex
+              ].itemFrameworkOneScore
             }
             assessmentName={assesseeAssessmentStartData?.assessmentName}
             assessmentDesc={assesseeAssessmentStartData?.assessmentDescription}
@@ -515,7 +521,7 @@ export const DisplayPaneSeven = () => {
 
       <PopUpAssessmentNavigator
         isActive={isPopUpValue === 'NavigatorPOPUP'}
-        itemData={assesseeAssessmentStartData?.assessmentSectionItemDistinct}
+        itemData={assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct}
       />
     </>
   );
