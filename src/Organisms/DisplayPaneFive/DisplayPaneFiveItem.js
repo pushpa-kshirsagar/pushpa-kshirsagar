@@ -42,6 +42,7 @@ import DisplayPaneFiveItemTemplate from './DisplayPaneFiveItemTemplate';
 import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 import { setResponseToReducerObj } from '../../Actions/ItemModuleAction';
 import {
+  converTimeToMiliseconds,
   onClickFirst,
   onClickLast,
   onClickNext,
@@ -270,6 +271,11 @@ export const DisplayPaneFiveItem = () => {
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
     const { informationBasic, informationAllocation, informationFramework } = itemInformation;
+    if(informationFramework?.itemFrameworkOne?.itemFrameworkOneTime!==null){
+      let itemTimeMillisec=converTimeToMiliseconds(informationFramework?.itemFrameworkOne?.itemFrameworkOneTime);
+      console.log('itemTimeMillisec',itemTimeMillisec);
+      informationFramework.itemFrameworkOne.itemFrameworkOneTime = itemTimeMillisec;
+    }
     const { id } = responseObject;
     const reqBody = {
       assesseeId: selectedAssociateInfo?.assesseeId,

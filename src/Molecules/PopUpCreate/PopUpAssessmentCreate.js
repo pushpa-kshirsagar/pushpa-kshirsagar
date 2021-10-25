@@ -317,7 +317,7 @@ const PopUpAssessmentCreate = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'TIMEASSESSMENTPOPUP'}
         label={'time'}
-        type={'number'}
+        type={'time'}
         actualLableValue={'assessmentTime'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -327,6 +327,7 @@ const PopUpAssessmentCreate = (props) => {
         nextPopUpValue={''}
         typeOfSetObject={SET_ASSESSMENT_FRAMEWORK_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        issetTime={true}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'SCOREMINIMUMPOPUP'}

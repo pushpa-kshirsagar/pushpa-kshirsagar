@@ -144,7 +144,8 @@ import {
   onClickFirst,
   onClickPrevious,
   onClickLast,
-  onClickNext
+  onClickNext,
+  converTimeToMiliseconds
 } from '../../Actions/GenericActions';
 import DisplayPaneThreeSectionOneCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneCultureProfileDistinct';
 import DisplayPaneThreeSectionTwoCultureProfileDistinct from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionTwoCultureProfileDistinct';
@@ -1779,6 +1780,14 @@ export const DisplayPaneThree = () => {
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assessment') {
       const { informationBasic, informationAllocation, informationFramework } = assessmentInfo;
+      if(informationFramework?.assessmentTime!==0){
+        // let assessmentTimeConvesion=informationFramework?.assessmentTime.split(':');
+        // let assessmentTimeMillisec=(Number(assessmentTimeConvesion[0])*60*60 +Number(assessmentTimeConvesion[1])*60)*1000;
+        let assessmentTimeMillisec=converTimeToMiliseconds(informationFramework?.assessmentTime);
+        console.log('assessmentTimeMillisec',assessmentTimeMillisec);
+        informationFramework.assessmentTime = assessmentTimeMillisec;
+      }
+      console.log('informationFramework',informationFramework);
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -2021,6 +2030,11 @@ export const DisplayPaneThree = () => {
           }
         );
         aseessmentSection.sectionInformation.assessmentSectionItemDistinct = [...existingItemId];
+      }
+      if(aseessmentSection?.sectionInformation?.assessmentSectionTime!==0){
+        let assessmentSectionTimeMillisec=converTimeToMiliseconds(aseessmentSection?.sectionInformation?.assessmentSectionTime);
+        console.log('assessmentSectionTimeMillisec',assessmentSectionTimeMillisec);
+        aseessmentSection.sectionInformation.assessmentSectionTime = assessmentSectionTimeMillisec;
       }
       sectionObj[selectedTagValue] = aseessmentSection.sectionInformation;
 

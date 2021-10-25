@@ -17,7 +17,8 @@ export const InputField = (props) => {
     autoFocus = false,
     classNames = '',
     isErrorMsg = true,
-    currencySymbol = ''
+    currencySymbol = '',
+    issetTime = false
   } = props;
   return (
     <div className="popup-form-box">
@@ -26,18 +27,42 @@ export const InputField = (props) => {
           {label} &nbsp;
           {labelBadgeOne ? <span className={'labelheaderBadge'}>{labelBadgeOne}</span> : null}
         </InputLabel>
-        {currencySymbol === '' ? (
-          <Input
-            type={type}
-            id={id}
-            name={id}
-            value={value}
-            onChange={onClick}
-            autoComplete="off"
-            autoFocus={autoFocus}
-            className={['inputFields', classNames].join(' ')}
-          />
-        ) : (
+
+        {currencySymbol === '' ?
+          (
+            <Input
+              type={type}
+              id={id}
+              name={id}
+              value={issetTime ? value === 0 ? "01:00:00" : value : value}
+              onChange={onClick}
+              autoComplete="off"
+              autoFocus={autoFocus}
+              className={['inputFields', classNames].join(' ')}
+            />
+          ) : (
+            <Input
+              type={type}
+              id={id}
+              name={id}
+              value={value}
+              onChange={onClick}
+              autoComplete="off"
+              autoFocus={autoFocus}
+              className={['inputFields', classNames].join(' ')}
+              startAdornment={
+                <InputAdornment
+                  style={{ paddingRight: '5px' }}
+                  className={'inputFieldsAdorment'}
+                  position="start"
+                >
+                  {currencySymbol}
+                </InputAdornment>
+              }
+            />
+          )}
+
+        {/* {currencySymbol !== '' ? (
           <Input
             type={type}
             id={id}
@@ -57,7 +82,78 @@ export const InputField = (props) => {
               </InputAdornment>
             }
           />
-        )}
+        ) :
+          time ? (
+            <Input
+              type={type}
+              id={id}
+              name={id}
+              value={value === 0 ? "00:00:00" : ''}
+              onChange={onClick}
+              autoComplete="off"
+              autoFocus={autoFocus}
+              className={['inputFields', classNames].join(' ')}
+            //inputComponent={TextMaskCustom}
+            />
+          ) : (
+            <Input
+              type={type}
+              id={id}
+              name={id}
+              value={value}
+              onChange={onClick}
+              autoComplete="off"
+              autoFocus={autoFocus}
+              className={['inputFields', classNames].join(' ')}
+            />
+          )} */}
+        {/*         
+        {currencySymbol === '' ? (
+          <Input
+            type={type}
+            id={id}
+            name={id}
+            value={"00:00:00"}
+            onChange={onClick}
+            autoComplete="off"
+            autoFocus={autoFocus}
+            className={['inputFields', classNames].join(' ')}
+          />
+        ) : 
+        time ? (
+          <Input
+          type={type}
+          id={id}
+          name={id}
+          value={"07:00:00"}
+          onChange={onClick}
+          autoComplete="off"
+          autoFocus={autoFocus}
+          className={['inputFields', classNames].join(' ')}
+          //inputComponent={TextMaskCustom}
+        />
+        ):
+          (
+            <Input
+              type={type}
+              id={id}
+              name={id}
+              value={value}
+              onChange={onClick}
+              autoComplete="off"
+              autoFocus={autoFocus}
+              className={['inputFields', classNames].join(' ')}
+              startAdornment={
+                <InputAdornment
+                  style={{ paddingRight: '5px' }}
+                  className={'inputFieldsAdorment'}
+                  position="start"
+                >
+                  {currencySymbol}
+                </InputAdornment>
+              }
+            />
+          )} */}
       </FormControl>
       {isRequired && (
         <FormHelperText
