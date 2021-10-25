@@ -7758,7 +7758,10 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemMod
 };
 
 export function converTimeToMiliseconds(time) {
-  let timeConvesion = time.split(':');
-  let milisec = (Number(timeConvesion[0]) * 60 * 60 + Number(timeConvesion[1]) * 60) * 1000;
-  return milisec;
+  console.log('time', time);
+  if (time) {
+    let timeConvesion = time.split(':');
+    let milisec = (Number(timeConvesion[0]) * 60 * 60 + Number(timeConvesion[1]) * 60) * 1000;
+    return milisec;
+  }
 }
