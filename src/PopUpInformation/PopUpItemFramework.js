@@ -400,8 +400,9 @@ const PopUpItemFramework = (props) => {
                 id={'time'}
                 label={'time'}
                 value={time}
-                type={'number'}
+                type={'time'}
                 errorMsg={''}
+                issetTime={true}
                 onClick={(e) => {
                   settime(e.target.value);
                 }}

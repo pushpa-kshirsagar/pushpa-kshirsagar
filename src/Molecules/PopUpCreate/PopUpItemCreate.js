@@ -335,6 +335,7 @@ const PopUpItemCreate = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'ITEMTIMEPOPUP'}
         label={'time'}
+        type={'time'}
         actualLableValue={'itemFrameworkOneTime'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -344,6 +345,7 @@ const PopUpItemCreate = (props) => {
         nextPopUpValue={''}
         typeOfSetObject={SET_ITEMFRAMEWORK_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        issetTime={true}
       />
       <PopUpTextField
         isActive={isPopUpValue === 'ITEMWEITAGEPOPUP'}

@@ -46,3 +46,10 @@
 .inputFieldsAdorment p{
   font-size: 1.6rem !important;
 }
+/* AM/PM */
+ input[type=time]::-webkit-datetime-edit-ampm-field {
+  visibility:hidden;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  visibility:hidden;
+} 

@@ -52,7 +52,7 @@ const initialState = {
     },
     assessmentSectionSequence: 0,
     assessmentSectionSynopsis: [],
-    assessmentSectionTime: null,
+    assessmentSectionTime: 0,
     assessmentSectionItemGroup: [],
     assessmentSectionItemDistinctRevise: [],
     assessmentSectionItemDistinctReviseObject: null,

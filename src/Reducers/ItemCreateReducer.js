@@ -145,7 +145,7 @@ const initialState = {
           }
         ],
         itemFrameworkOneSequence: '',
-        itemFrameworkOneTime: '',
+        itemFrameworkOneTime: 0,
         itemFrameworkOneType: '',
         itemFrameworkOneWord: {
           itemFrameworkOneWordMaximum: '',

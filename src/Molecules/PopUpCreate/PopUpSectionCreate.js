@@ -434,7 +434,7 @@ const PopUpSectionCreate = (props) => {
       <PopUpTextField
         isActive={isPopUpValue === 'TIMEASSESSMENT_SECTION_POPUP'}
         label={'time'}
-        type={'number'}
+        type={'time'}
         actualLableValue={'assessmentSectionTime'}
         headerPanelColour={'genericOne'}
         headerOne={headerOne}
@@ -444,6 +444,7 @@ const PopUpSectionCreate = (props) => {
         nextPopUpValue={''}
         typeOfSetObject={SET_SECTION_REDUCER_STATE}
         mode={reviewMode === 'revise' ? 'revise' : 'core'}
+        issetTime={true}
       />
       <PopUpDropList
         isActive={isPopUpValue === 'ADMINSEWUENCEPOPUP'}

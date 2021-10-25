@@ -7680,7 +7680,7 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemMod
     blankState: true,
     classificationState: !isItemModule,
     levelState: true,
-    polarityState:  !isItemModule,
+    polarityState: !isItemModule,
     scaleState: true,
     scoreState: true,
     timeState: true,
@@ -7694,7 +7694,7 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemMod
       blankState: false,
       classificationState: !isItemModule,
       levelState: true,
-      polarityState:  !isItemModule,
+      polarityState: !isItemModule,
       scaleState: true,
       scoreState: false,
       timeState: true,
@@ -7756,3 +7756,9 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemMod
     payload: { stateName: 'itemConfigStates', value: reviseSetting }
   });
 };
+
+export function converTimeToMiliseconds(time) {
+  let timeConvesion = time.split(':');
+  let milisec = (Number(timeConvesion[0]) * 60 * 60 + Number(timeConvesion[1]) * 60) * 1000;
+  return milisec;
+}
