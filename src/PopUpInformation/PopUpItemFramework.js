@@ -49,6 +49,7 @@ const PopUpItemFramework = (props) => {
   // itemInformation?.informationFramework.itemFrameworkOne;
   // console.log(itemFrameworkOneResponseChoice);
   // console.log(itemFramework
+  const itemFrameworkOneCluster = itemFrameworkOne?.itemFrameworkOneCluster || [];
 
   const [blank, setBlank] = useState('');
   const [classification, setclassification] = useState([]);
@@ -65,9 +66,9 @@ const PopUpItemFramework = (props) => {
       });
       setscore(subques[0]?.itemFrameworkOneSection?.itemFrameworkOneScore);
     }
-    if (itemFrameworkOne?.itemFrameworkOneCluster.length > 0) {
+    if (itemFrameworkOneCluster.length > 0) {
       let cluster = [];
-      itemFrameworkOne?.itemFrameworkOneCluster.map((cc) => {
+      itemFrameworkOneCluster.map((cc) => {
         cluster.push(cc.itemFrameworkOneClusterPrimary);
       });
       setclassification(cluster);

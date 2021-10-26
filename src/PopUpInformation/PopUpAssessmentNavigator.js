@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import Popup from '../Molecules/PopUp/PopUp';
 import CircleIcon from '../Molecules/IconButton/IconButton';
@@ -7,6 +7,11 @@ import '../Molecules/PopUp/PopUp.css';
 import PropTypes from 'prop-types';
 import { Button, Divider, IconButton, InputLabel } from '@material-ui/core';
 import { Check, Dashboard } from '@material-ui/icons';
+import JsonRenderComponent from '../Actions/JsonRenderComponent';
+import { POPUP_CLOSE, POPUP_OPEN, SET_POPUP_STATE, SET_POPUP_VALUE } from '../actionType';
+import { useDispatch, useSelector } from 'react-redux';
+import { ASSESSMENT_CLOSED_POPUP_OPTION } from '../PopUpConfig';
+import { fontSize } from 'suneditor/src/plugins';
 
 const PopUpAssessmentNavigator = (props) => {
   const {
@@ -14,12 +19,90 @@ const PopUpAssessmentNavigator = (props) => {
     headerPanelColour = 'displayPaneRight',
     headerOne = 'assessment',
     headerOneBadgeOne = 'navigator',
-    itemData
+    itemData,
+    isQuestionFlaged,
+    defaultCheckVal
   } = props;
-
+  const dispatch = useDispatch();
+  // const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
+  const {
+    popupHeaderOne,
+    popupHeaderOneBadgeOne,
+    popupHeaderOneBadgeTwo,
+    popupHeaderOneBadgeThree,
+    popupOpenType,
+    secondaryOptionCheckValue,
+    tertiaryOptionCheckValue = 'all',
+    forthOptionCheckValue,
+    popupContentArrValue,
+    isPopUpValue
+  } = useSelector((state) => state.PopUpReducer);
+  const [itemNavigatorData, setNavigatorData] = useState(itemData);
   const handleClick = () => {
+    console.log('cancelled call');
+    setNavigatorData(itemData);
     /*according to creation mode popup sequence will change*/
   };
+  useEffect(() => {
+    setNavigatorData(itemData);
+  }, [itemData, isQuestionFlaged]);
+  let itemArray = itemData;
+  console.log('itemData', itemData);
+  console.log("isQuestionFlaged", isQuestionFlaged);
+  console.log('tertiaryOptionCheckValue', tertiaryOptionCheckValue)
+  const handleOnClickFilter = (value) => {
+    console.log('handle Click', value);
+    if (value === 'all') {
+      itemArray = itemData;
+      setNavigatorData([...itemData]);
+    } else if (value === 'flaged') {
+      let flagedData = itemData.filter(x => x.isFlagged === true);
+      itemArray = flagedData;
+      setNavigatorData([...flagedData]);
+    } else if (value === 'finish') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'assessment',
+          popupHeaderOneBadgeOne: 'finish',
+          popupHeaderOneBadgeTwo: '',
+          isPopUpValue: '',
+          popupOpenType: 'primary',
+          secondaryOptionCheckValue: 'assignment',
+          popupContentArrValue: ASSESSMENT_CLOSED_POPUP_OPTION,
+          //selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
+          //selectedTagStatus: 'status'
+        }
+      });
+      dispatch({ type: POPUP_OPEN, payload: 'POPUP_TERMINATE_SUSPEND' });
+      // dispatch({
+      //   type: SET_POPUP_VALUE,
+      //   payload: {
+      //     isPopUpValue: 'POPUP_TERMINATE_SUSPEND',
+      //     popupMode: ''
+      //   }
+      // });
+    } else if (value === 'terminate') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'assessment',
+          popupHeaderOneBadgeOne: 'terminate',
+          popupHeaderOneBadgeTwo: '',
+          isPopUpValue: '',
+          popupOpenType: 'primary',
+          secondaryOptionCheckValue: 'assignment',
+          popupContentArrValue: ASSESSMENT_CLOSED_POPUP_OPTION,
+          //selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
+          //selectedTagStatus: 'status'
+        }
+      });
+      dispatch({ type: POPUP_OPEN, payload: 'POPUP_TERMINATE_SUSPEND' });
+    } else {
+
+    }
+  }
+  console.log('itemData', itemArray);
   const questionsArray = [
     1,
     2,
@@ -72,7 +155,26 @@ const PopUpAssessmentNavigator = (props) => {
     49,
     50
   ];
-  let itemArray = itemData;
+  const ChangeOptionPopup = (e) => {
+    let keyVal = e.currentTarget.getAttribute('data-key');
+    let dataVal = e.currentTarget.getAttribute('data-value');
+    console.log(dataVal);
+    if (dataVal === 'yes' && secondaryOptionCheckValue === 'assignment') {
+    }
+    if (dataVal === 'yes' && secondaryOptionCheckValue === 'sign-out') {
+    }
+    if (dataVal === 'yes' && secondaryOptionCheckValue === 'dashboard') {
+    }
+    dispatch({ type: POPUP_CLOSE });
+  };
+  const BackHandlerEvent = (e) => { };
+  const setSecondaryOptionValue = (e) => {
+    //TODO: set secondary option in item
+    var dataVal = e.currentTarget.getAttribute('data-value')
+
+    console.log(dataVal, 'dataVal');
+  };
+
   return (
     <div>
       <Popup isActive={isActive}>
@@ -99,8 +201,9 @@ const PopUpAssessmentNavigator = (props) => {
                 gridTemplateColumns: 'repeat(auto-fill, minmax(50px, 1fr))'
               }}
             >
-              {itemArray &&
-                itemArray.map((question, index) => {
+              {itemNavigatorData &&
+                itemNavigatorData.map((question, index) => {
+                  //const isQuestionFlaged = question.isFlagged
                   return (
                     <div key={question} style={{ padding: '5px', boxSizing: 'border-box' }}>
                       <div
@@ -129,6 +232,18 @@ const PopUpAssessmentNavigator = (props) => {
                         >
                           {index + 1}
                         </Button>
+                        {question.isFlagged ? (
+                          <i className={['fa fa-flag', 'jss13409'].join(' ')} ></i>
+                        ) : (
+                          < i></i>
+                        )}
+                        {/* <IconButton className={'assessmentFlagButton'}>
+                          {question.isFlagged ? (
+                            <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
+                          ) : (
+                            < i></i>
+                          )}
+                        </IconButton> */}
                       </div>
                     </div>
                   );
@@ -137,9 +252,9 @@ const PopUpAssessmentNavigator = (props) => {
           </div>
           <div>
             <Divider dark style={{ marginTop: '5px' }} />
-            <Button className="optionPrimary" data-value="create">
+            <Button className="optionPrimary" data-value="create" onClick={() => { handleOnClickFilter('all') }}>
               <span style={{ fontSize: '1.2rem' }}>all</span>
-              {false ? (
+              {secondaryOptionCheckValue === 'all' ? (
                 <IconButton className="tick" style={{ right: '10px' }}>
                   <Check
                     style={{
@@ -154,9 +269,10 @@ const PopUpAssessmentNavigator = (props) => {
             </Button>
           </div>
           <div>
-            <Button className="optionPrimary" data-value="create">
+            <Button className="optionPrimary" data-value="create" onClick={() => { handleOnClickFilter('flaged') }}
+            >
               <span style={{ fontSize: '1.2rem' }}>flaged</span>
-              {false ? (
+              {secondaryOptionCheckValue === 'flaged' ? (
                 <IconButton className="tick" style={{ right: '10px' }}>
                   <Check
                     style={{
@@ -211,7 +327,7 @@ const PopUpAssessmentNavigator = (props) => {
 
           <div>
             <Divider dark />
-            <Button className="optionPrimary">
+            <Button className="optionPrimary" onClick={() => { handleOnClickFilter('finish') }}>
               <span style={{ fontSize: '1.2rem' }}>finish</span>
             </Button>
           </div>
@@ -223,10 +339,28 @@ const PopUpAssessmentNavigator = (props) => {
             </Button>
           </div>
           <div>
-            <Button className="optionPrimary">
+            <Button className="optionPrimary" onClick={() => { handleOnClickFilter('terminate') }}>
               <span style={{ fontSize: '1.2rem' }}>terminate</span>
             </Button>
           </div>
+        </DialogContent>
+      </Popup>
+      <Popup isActive={isPopUpValue === 'POPUP_TERMINATE_SUSPEND'}>
+        <PopupHeader
+          headerPanelColour={headerPanelColour}
+          headerOne={headerOne}
+          headerOneBadgeOne={popupHeaderOneBadgeOne}
+          onClick={BackHandlerEvent}
+          mode='error'
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeOptionPopup}
+            //currentPopUpOption={popupContentArrValue}
+            secondaryOptionCheckValue={secondaryOptionCheckValue}
+          //tertiaryOptionCheckValue={tertiaryOptionCheckValue}
+          />
         </DialogContent>
       </Popup>
     </div>

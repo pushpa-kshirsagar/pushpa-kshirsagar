@@ -115,7 +115,12 @@ const AssessmentHeader = (props) => {
               }}
               className="flex-center"
             >
-              <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
+              <IconButton
+                onClick={(e) => {
+                  props.onClickFlag(props.id);
+                }}
+                className={'assessmentFlagButton'}
+              >
                 {props.isQuestionFlaged ? (
                   <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
                 ) : (
@@ -142,7 +147,11 @@ export const DisplayPaneFiveAssessment = (props) => {
     flagQuestion,
     isQuestionFlaged,
     currentSectionIndex,
-    itemObect
+    itemObect,
+    timerFinished,
+    timer,
+    handleRadioButton,
+    currentQuestionChoice
   } = props;
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
@@ -156,6 +165,7 @@ export const DisplayPaneFiveAssessment = (props) => {
   const [selectedChoiceObject, setSelectedChoiceObject] = useState('');
   const [subQuestionId, setSubQuestionId] = useState('');
   console.log('assessmentinformationFramework', informationFramework);
+  console.log('timerFinished', timer);
   const responseText = '<p><span>response</span></p>';
   const assessmentScale = informationFramework?.assessmentScale || [];
 
@@ -274,7 +284,7 @@ export const DisplayPaneFiveAssessment = (props) => {
   return (
     <>
       <div>
-        <HeaderCard
+        {/* <HeaderCard
           className=""
           displayPane="itemPreview"
           showClearIcon
@@ -283,19 +293,45 @@ export const DisplayPaneFiveAssessment = (props) => {
           headerOneBadgeTwo="preview"
           headerPanelColour="blue"
           onClickClearInfo={closePreview}
-        />
+        /> */}
       </div>
       <div className="containerPadding">
         <AssessmentHeader
-          qnumber={currentItemIndex + 1}
-          //totalQuestion={20}
-          score={1}
-          assessmentName={informationBasic?.assessmentName || ''}
-          assessmentDesc={informationBasic?.assessmentDescription || ''}
-          onClickFlag={null}
-          isQuestionFlaged={false}
-          timerFinished={''}
-          timer={'timer'}
+          score={
+            isAssessmentSectionShow
+              ? informationFramework?.assessmentSectionItemDistinct[currentItemIndex]
+                  ?.itemFrameworkOneScore
+              : informationFramework?.assessmentSection[currentSectionIndex]
+                  ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOneScore
+          }
+          // assessmentName={informationBasic?.assessmentName || ''}
+          // assessmentDesc={informationBasic?.assessmentDescription || ''}
+          assessmentName={
+            isAssessmentSectionShow
+              ? informationBasic?.assessmentName
+              : isAssessmentPreviewShow
+              ? informationBasic?.assessmentName
+              : informationFramework?.assessmentName
+          }
+          assessmentDesc={
+            isAssessmentSectionShow
+              ? informationBasic?.assessmentDescription
+              : isAssessmentPreviewShow
+              ? informationBasic?.assessmentDescription
+              : informationFramework?.assessmentDescription || ''
+          }
+          id={
+            informationFramework?.assessmentSection[currentSectionIndex]
+              ?.assessmentSectionItemDistinct[currentItemIndex]?.itemId
+          }
+          //isQuestionFlaged={isQuestionFlaged}
+          onClickFlag={flagQuestion}
+          isQuestionFlaged={
+            informationFramework?.assessmentSection[currentSectionIndex]
+              ?.assessmentSectionItemDistinct[currentItemIndex]?.isFlagged
+          }
+          timerFinished={timerFinished}
+          timer={timer}
           totalQuestion={
             isAssessmentSectionShow
               ? informationFramework?.assessmentSectionItemDistinct.length
@@ -319,7 +355,7 @@ export const DisplayPaneFiveAssessment = (props) => {
 
         <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
           {/* item label */}
-          {itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia && (
+          {itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia !== '' && (
             <div className={'innerpadding'}>
               <div className={['ex_container', 'ig-label'].join(' ')}>
                 <EditorTemplate
@@ -614,10 +650,16 @@ export const DisplayPaneFiveAssessment = (props) => {
                           name="option1"
                           style={{ cursor: 'pointer' }}
                           value={`${op.itemFrameworkOneResponseChoiceNumber}`}
-                          //onChange={handleRadioButton}
+                          onChange={
+                            isAssessmentPreviewShow || isAssessmentSectionShow
+                              ? null
+                              : handleRadioButton
+                          }
                           checked={
-                            op.itemFrameworkOneResponseChoiceNumber ===
-                            itemObect.itemFrameworkOneResponseCorrect[0]
+                            isAssessmentPreviewShow || isAssessmentSectionShow
+                              ? op.itemFrameworkOneResponseChoiceNumber ===
+                                itemObect?.itemFrameworkOneResponseCorrect[0]
+                              : currentQuestionChoice === op.itemFrameworkOneResponseChoiceNumber
                           }
                         />
                       </div>
