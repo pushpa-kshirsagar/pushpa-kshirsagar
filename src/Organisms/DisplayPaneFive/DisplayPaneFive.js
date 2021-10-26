@@ -25,6 +25,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import DisplayPaneFiveItem from '../../Organisms/DisplayPaneFive/DisplayPaneFiveItem';
 import DisplayPaneFiveAssessment from '../../Organisms/DisplayPaneFive/DisplayPaneFiveAssessment';
 import { setItemTypeConfigState } from '../../Actions/GenericActions';
+import HeaderCard from '../../Molecules/Header/HeaderCard';
 export const DisplayPaneFive = () => {
   const dispatch = useDispatch();
   const [currentItemIndex, setcurrentItemIndex] = useState(0);
@@ -112,8 +113,8 @@ export const DisplayPaneFive = () => {
                 value:
                   responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                     ?.assessmentSectionItemDistinct[
-                    responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                      ?.assessmentSectionItemDistinct.length - 1
+                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
+                    ?.assessmentSectionItemDistinct.length - 1
                   ]
               }
             });
@@ -169,7 +170,7 @@ export const DisplayPaneFive = () => {
           currentItemIndex <
           responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
             ?.assessmentSectionItemDistinct.length -
-            1
+          1
         ) {
           setcurrentItemIndex(currentItemIndex + 1);
           setItemTypeConfigState(
@@ -212,7 +213,7 @@ export const DisplayPaneFive = () => {
           currentItemIndex <
           responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
             ?.assessmentSectionItemDistinct.length -
-            1
+          1
         ) {
           let lastIndex =
             responseObject?.informationFramework.assessmentSection[currentSectionIndex]
@@ -408,9 +409,9 @@ export const DisplayPaneFive = () => {
   var itemObect = isAssessmentSectionShow
     ? responseObject?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
     : isAssessmentPreviewShow
-    ? responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
+      ? responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
         ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
-    : '';
+      : '';
   console.log('itemObect', itemObect);
 
   return (
@@ -418,9 +419,19 @@ export const DisplayPaneFive = () => {
       <div>
         {isAssessmentPreviewShow ? (
           <>
+            <HeaderCard
+              className=""
+              displayPane="itemPreview"
+              showClearIcon
+              headerOne={headerOne}
+              headerOneBadgeOne={''}
+              headerOneBadgeTwo="preview"
+              headerPanelColour="blue"
+              onClickClearInfo={closePreview}
+            />
             <DisplayPaneFiveAssessment
               headerOne={headerOne}
-              closePreview={closePreview}
+              //closePreview={closePreview}
               informationFramework={responseObject?.informationFramework}
               currentItemIndex={currentItemIndex}
               currentSectionIndex={currentSectionIndex}
@@ -450,9 +461,19 @@ export const DisplayPaneFive = () => {
           </>
         ) : isAssessmentSectionShow ? (
           <>
+            <HeaderCard
+              className=""
+              displayPane="itemPreview"
+              showClearIcon
+              headerOne={headerOne}
+              headerOneBadgeOne={''}
+              headerOneBadgeTwo="preview"
+              headerPanelColour="blue"
+              onClickClearInfo={closePreview}
+            />
             <DisplayPaneFiveAssessment
               headerOne={headerOne}
-              closePreview={closePreview}
+              //closePreview={closePreview}
               informationFramework={responseObject}
               currentItemIndex={currentItemIndex}
               currentSectionIndex={currentSectionIndex}

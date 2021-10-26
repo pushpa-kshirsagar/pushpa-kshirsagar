@@ -264,64 +264,86 @@ const HeaderCard = (props) => {
                 <div className={'iguru-iconbox'}></div>
                 <div className={'iguru-iconbox'}></div>
                 <div className={'iguru-iconbox'}>
-                  <IconButton onClick={onClickClearInfo}>
-                    <Clear className={'iguru-iconbardefault'} />
-                  </IconButton>
-                </div>
-                <div className={'iguru-iconbox'}>
-                  <IconButton onClick={openTripleDotPopup}>
-                    <MoreVert className={'iguru-iconbardefault'} />
-                  </IconButton>
-                </div>
-              </Fragment>
-            )) || (
-              <Fragment>
-                <div className={'iguru-iconbox'}>
-                  {displayPane === 'five' ? (
-                    <div></div>
-                  ) : displayPane === 'centre' && showMiddlePaneState ? (
-                    <IconButton onClick={onClickScan}>
-                      <Fragment>
-                        <SearchIcon className={'iguru-iconbardefault'} />
-                        <span className={'iguru-headerbadge'}>{scanCount}</span>
-                      </Fragment>
-                    </IconButton>
-                  ) : displayPane === 'left' ? (
-                    <IconButton>
-                      {!isMobile && <NextIcon className={'iguru-iconbardefault'} />}
-                    </IconButton>
-                  ) : (displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '') ||
-                    showClearIcon ? (
+                  {displayPane === 'itemPreview' && assesseeAssessmentStartData ? (
+                    <></>
+                  ) : (
                     <IconButton onClick={onClickClearInfo}>
                       <Clear className={'iguru-iconbardefault'} />
                     </IconButton>
-                  ) : null}
+                  )}
                 </div>
                 <div className={'iguru-iconbox'}>
-                  {displayPane === 'five' && assesseeAssessmentStartData ? (
+                  {displayPane === 'itemPreview' && assesseeAssessmentStartData ? (
                     <IconButton
                       onClick={() => {
+                        dispatch({
+                          type: SET_POPUP_STATE,
+                          payload: {
+                            secondaryOptionCheckValue: 'all'
+                          }
+                        }); 
                         dispatch({ type: POPUP_OPEN, payload: 'NavigatorPOPUP' });
                       }}
                     >
                       <OpenWithIcon className={'iguru-iconbardefault'} />
                     </IconButton>
-                  ) : displayPane === 'centre' && showMiddlePaneState ? (
-                    <IconButton onClick={openMiddlePaneTripleDotPopup}>
+                  ) : (
+                    <IconButton onClick={openTripleDotPopup}>
                       <MoreVert className={'iguru-iconbardefault'} />
                     </IconButton>
-                  ) : displayPane === 'left' ? (
-                    <IconButton onClick={openLeftPaneTripleDotPopup}>
-                      <MoreVert className={'iguru-iconbardefault'} />
-                    </IconButton>
-                  ) : displayPane === 'right' && headerOne !== '' ? (
-                    <IconButton onClick={openRightPaneTripleDotPopup}>
-                      <MoreVert className={'iguru-iconbardefault'} />
-                    </IconButton>
-                  ) : null}
+                  )}
+
                 </div>
               </Fragment>
-            )}
+            )) || (
+                <Fragment>
+                  <div className={'iguru-iconbox'}>
+                    {displayPane === 'five' ? (
+                      <div></div>
+                    ) : displayPane === 'centre' && showMiddlePaneState ? (
+                      <IconButton onClick={onClickScan}>
+                        <Fragment>
+                          <SearchIcon className={'iguru-iconbardefault'} />
+                          <span className={'iguru-headerbadge'}>{scanCount}</span>
+                        </Fragment>
+                      </IconButton>
+                    ) : displayPane === 'left' ? (
+                      <IconButton>
+                        {!isMobile && <NextIcon className={'iguru-iconbardefault'} />}
+                      </IconButton>
+                    ) : (displayPane === 'right' && reviewMode !== 'revise' && headerOne !== '') ||
+                      showClearIcon ? (
+                      <IconButton onClick={onClickClearInfo}>
+                        <Clear className={'iguru-iconbardefault'} />
+                      </IconButton>
+                    ) : null}
+                  </div>
+                  <div className={'iguru-iconbox'}>
+                    {displayPane === 'five' && assesseeAssessmentStartData ? (
+                      <IconButton
+                        onClick={() => {
+                          dispatch({ type: POPUP_OPEN, payload: 'NavigatorPOPUP' });
+                        }}
+                      >
+                        <OpenWithIcon className={'iguru-iconbardefault'} />
+                      </IconButton>
+                    ) :
+                      displayPane === 'centre' && showMiddlePaneState ? (
+                        <IconButton onClick={openMiddlePaneTripleDotPopup}>
+                          <MoreVert className={'iguru-iconbardefault'} />
+                        </IconButton>
+                      ) : displayPane === 'left' ? (
+                        <IconButton onClick={openLeftPaneTripleDotPopup}>
+                          <MoreVert className={'iguru-iconbardefault'} />
+                        </IconButton>
+                      ) : displayPane === 'right' && headerOne !== '' ? (
+                        <IconButton onClick={openRightPaneTripleDotPopup}>
+                          <MoreVert className={'iguru-iconbardefault'} />
+                        </IconButton>
+                      ) : null}
+                  </div>
+                </Fragment>
+              )}
           </div>
         </Paper>
       </Grid>

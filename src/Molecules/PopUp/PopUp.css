@@ -586,3 +586,9 @@
     transform: translate(-50%, -50%);
   }
 }
+.jss13409 {
+  color: #ff6464;
+  z-index: -1;
+  font-size: 2rem;
+  margin-top: -30px;
+}
