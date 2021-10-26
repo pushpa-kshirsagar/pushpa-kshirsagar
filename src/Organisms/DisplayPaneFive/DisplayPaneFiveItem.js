@@ -271,9 +271,11 @@ export const DisplayPaneFiveItem = () => {
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
     const { informationBasic, informationAllocation, informationFramework } = itemInformation;
-    if(informationFramework?.itemFrameworkOne?.itemFrameworkOneTime!==null){
-      let itemTimeMillisec=converTimeToMiliseconds(informationFramework?.itemFrameworkOne?.itemFrameworkOneTime);
-      console.log('itemTimeMillisec',itemTimeMillisec);
+    if (informationFramework?.itemFrameworkOne?.itemFrameworkOneTime !== null) {
+      let itemTimeMillisec = converTimeToMiliseconds(
+        informationFramework?.itemFrameworkOne?.itemFrameworkOneTime
+      );
+      console.log('itemTimeMillisec', itemTimeMillisec);
       informationFramework.itemFrameworkOne.itemFrameworkOneTime = itemTimeMillisec;
     }
     const { id } = responseObject;
@@ -337,7 +339,6 @@ export const DisplayPaneFiveItem = () => {
 
   const ChangeOptionChoicePopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    // setSubQuestionId(e.currentTarget.getAttribute('subquestionid'))
     setSubQuestionId(popupMode.split('_'));
     if (targetValue === 'configure') {
       dispatch({
@@ -360,7 +361,8 @@ export const DisplayPaneFiveItem = () => {
   };
   const ChangeOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
-    // setSubQuestionId(e.currentTarget.getAttribute('subquestionid'))
+    console.log('popupMode',popupMode)
+
     setSubQuestionId(popupMode.split('_'));
     if (targetValue === 'configure') {
       dispatch({
@@ -874,11 +876,8 @@ export const DisplayPaneFiveItem = () => {
           />
         </DialogContent>
       </Popup>
-      <Popup
-        isActive={
-          isPopUpValue === 'ITEM_PRIMARY_POPUP' || isPopUpValue === 'SUB_ITEM_PRIMARY_POPUP'
-        }
-      >
+      {/*  */}
+      <Popup isActive={isPopUpValue === 'SUB_ITEM_PRIMARY_POPUP'}>
         <PopupHeader
           headerPanelColour={'genericOne'}
           headerOne={'item'}
@@ -889,9 +888,25 @@ export const DisplayPaneFiveItem = () => {
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
             setSecondaryOptionValue={setSecondaryOptionValue}
-            ChangeOptionPopup={
-              isPopUpValue === 'SUB_ITEM_PRIMARY_POPUP' ? ChangeOptionPopup : ChangeItemOptionPopup
-            }
+            ChangeOptionPopup={ChangeOptionPopup}
+            currentPopUpOption={itemPrimaryPopupOption}
+            secondaryOptionCheckValue={''}
+          />
+        </DialogContent>
+      </Popup>
+      {/*  */}
+      <Popup isActive={isPopUpValue === 'ITEM_PRIMARY_POPUP'}>
+        <PopupHeader
+          headerPanelColour={'genericOne'}
+          headerOne={'item'}
+          headerOneBadgeOne={''}
+          onClick={BackHandlerEvent}
+          mode={''}
+        />
+        <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
+          <JsonRenderComponent
+            setSecondaryOptionValue={setSecondaryOptionValue}
+            ChangeOptionPopup={ChangeItemOptionPopup}
             currentPopUpOption={itemPrimaryPopupOption}
             secondaryOptionCheckValue={''}
           />
@@ -1283,8 +1298,10 @@ export const DisplayPaneFiveItem = () => {
         mode={'revise'}
         subQuestionId={
           data?.itemFrameworkOneTypeNameReference === 'Likert-Scale' &&
-          parseInt(subQuestionId[3]) + 1
+          parseInt(subQuestionId[4]) + 1
         }
+        isItemFramework={true}
+        // subQuestionId={data?.id}
         itemFrameworkOneResponseChoice={itemFrameworkOneResponseChoice || []}
         itemFrameworkOne={itemFrameworkOne}
       />

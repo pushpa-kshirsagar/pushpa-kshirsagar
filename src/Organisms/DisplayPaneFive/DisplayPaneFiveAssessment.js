@@ -146,6 +146,7 @@ export const DisplayPaneFiveAssessment = (props) => {
   } = props;
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { informationBasic } = useSelector((state) => state.AssessmentReducer);
   const { isAssessmentPreviewShow = false, isAssessmentSectionShow = false } = useSelector(
@@ -343,7 +344,7 @@ export const DisplayPaneFiveAssessment = (props) => {
           )}
 
           {/* item */}
-          {(itemObect?.itemFrameworkOneMedia || reviewMode === 'revise') && (
+          {(itemObect?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
             <div
               className={'innerpadding'}
               style={{ cursor: reviewMode === 'revise' ? 'pointer' : '' }}
@@ -551,10 +552,9 @@ export const DisplayPaneFiveAssessment = (props) => {
 
           {/* response */}
           {(itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cd' ||
-            itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cc'||
-            itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23'
-            )&&(
-              <div className={'innerpadding'}>
+            itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cc' ||
+            itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23') && (
+            <div className={'innerpadding'}>
               <div
                 className={'ex_container'}
                 style={{
@@ -577,8 +577,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                 {ReactHTMLParser(responseText)}
               </div>
             </div>
-            )
-          }
+          )}
 
           {/* responce explanation */}
           {itemObect?.itemFrameworkOneResponseExplanation
@@ -768,8 +767,10 @@ export const DisplayPaneFiveAssessment = (props) => {
         mode={'revise'}
         subQuestionId={
           data?.itemFrameworkOneTypeNameReference === 'Likert-Scale' &&
-          parseInt(subQuestionId[3]) + 1
+          parseInt(subQuestionId[4]) + 1
         }
+        isItemFramework={true}
+        itemConfigStates={itemConfigStates}
         itemFrameworkOneResponseChoice={itemObect?.itemFrameworkOneResponseChoice || []}
         itemFrameworkOne={itemObect}
       />

@@ -152,7 +152,7 @@ const DisplayPaneThreeSectionOneAssociateGroup = () => {
     },
     {
       id: 'a4',
-      labelTextOneOne: 'role',
+      labelTextOneOne: 'type',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',

@@ -261,8 +261,8 @@ const PopUpSectionCreate = (props) => {
         tag={'assessmentSectionAdministrationRepeat'}
         label={'repeat'}
         listSelect={[
+          { id: false, name: 'No' },
           { id: true, name: 'Yes' },
-          { id: false, name: 'No' }
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}
@@ -279,8 +279,8 @@ const PopUpSectionCreate = (props) => {
         tag={'assessmentSectionAdministrationShuffle'}
         label={'shuffle'}
         listSelect={[
-          { id: true, name: 'Yes' },
-          { id: false, name: 'No' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}
@@ -362,8 +362,8 @@ const PopUpSectionCreate = (props) => {
         label={'response'}
         labelBadgeOne={'revise'}
         listSelect={[
-          { id: true, name: 'Yes' },
-          { id: false, name: 'No' }
+          { id: false, name: 'No' },
+          { id: true, name: 'Yes' }
         ]}
         mappingValue={'id'}
         headerPanelColour={'genericOne'}

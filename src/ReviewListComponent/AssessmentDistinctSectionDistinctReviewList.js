@@ -107,6 +107,7 @@ const AssessmentDistinctSectionDistinctReviewList = (props) => {
       }
     });
   };
+  console.log('relatedReviewListDistinctData',relatedReviewListDistinctData);
   return (
     <div>
       {listDistinctData && (

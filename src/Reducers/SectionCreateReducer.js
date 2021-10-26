@@ -27,7 +27,7 @@ const initialState = {
       assessmentSectionAidTextsheetType: ''
     },
     assessmentSectionCommunique: [],
-    assessmentSectionEvaluation: false,
+    assessmentSectionEvaluation: true,
     assessmentSectionItemDistinct: [],
     assessmentSectionItemFrameworkOneLabel: '',
     assessmentSectionItemNavigation: {

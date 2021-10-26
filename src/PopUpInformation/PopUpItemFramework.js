@@ -37,7 +37,9 @@ const PopUpItemFramework = (props) => {
   const dispatch = useDispatch();
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isAssessmentPreviewShow = false,isAssessmentSectionShow=false } = useSelector((state) => state.DisplayPaneThreeReducer);
+  const { isAssessmentPreviewShow = false, isAssessmentSectionShow = false } = useSelector(
+    (state) => state.DisplayPaneThreeReducer
+  );
 
   const { informationFramework } = useSelector((state) => state.AssessmentReducer);
   // // if(isAssessmentPreviewShow){
@@ -127,8 +129,7 @@ const PopUpItemFramework = (props) => {
           type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
         });
-      }
-      else if(isAssessmentSectionShow){
+      } else if (isAssessmentSectionShow) {
         let reviseCluster = [];
         if (classification.length > 0) {
           reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
@@ -163,8 +164,7 @@ const PopUpItemFramework = (props) => {
           type: SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: { stateName: 'itemFrameworkOneWeightage', value: weightage }
         });
-      }
-       else {
+      } else {
         let reviseCluster = [];
         if (classification.length > 0) {
           reviseCluster = itemFrameworkOne.itemFrameworkOneGroupCluster.filter((clust) => {
@@ -206,7 +206,7 @@ const PopUpItemFramework = (props) => {
         if (element.itemFrameworkOneSectionSequence === subQuestionId) {
           element.itemFrameworkOneSection.itemFrameworkOnePolarity = polarity;
           element.itemFrameworkOneSection.itemFrameworkOneWeightage = weightage;
-          element.itemFrameworkOneSection.itemFrameworkOneScore = weightage;
+          element.itemFrameworkOneSection.itemFrameworkOneScore = score;
         }
       });
       if (isAssessmentPreviewShow) {
@@ -217,7 +217,7 @@ const PopUpItemFramework = (props) => {
             value: opArr
           }
         });
-      }else if(isAssessmentSectionShow){
+      } else if (isAssessmentSectionShow) {
         dispatch({
           type: SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: {
@@ -225,8 +225,7 @@ const PopUpItemFramework = (props) => {
             value: opArr
           }
         });
-      }
-       else {
+      } else {
         dispatch({
           type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
           payload: {
@@ -253,7 +252,7 @@ const PopUpItemFramework = (props) => {
               value: tempArr
             }
           });
-        }else if(isAssessmentSectionShow){
+        } else if (isAssessmentSectionShow) {
           dispatch({
             type: SET_ASSESSMENT_SECTION_FRAMEWORK_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -261,8 +260,7 @@ const PopUpItemFramework = (props) => {
               value: tempArr
             }
           });
-        }
-         else {
+        } else {
           dispatch({
             type: SET_ITEM_FRAMEWORK_DYNAMIC_SINGLE_STATE,
             payload: {
@@ -282,7 +280,8 @@ const PopUpItemFramework = (props) => {
     // setpolarity(polarity);
     dispatch({ type: POPUP_CLOSE });
   };
-
+console.log('itemConfigStates',itemConfigStates);
+console.log('props',props);
   return (
     <div>
       <Popup isActive={isActive}>

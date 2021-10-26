@@ -4,13 +4,18 @@ import {
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
   FILTERMODE_ENABLE,
+  LOADER_START,
+  LOADER_STOP,
   POPUP_OPEN,
+  RELATED_REVIEWLIST_DISTINCT_DATA,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE,
+  SET_RELATED_REQUEST_OBJECT,
   SET_SECTION_REDUCER_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
@@ -42,17 +47,63 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
     selectedTagsArray,
     isSelectActive,
     unselectedTagsArray,
-    typeOfMiddlePaneList
+    typeOfMiddlePaneList,
+    assessmentResponseObject,
+    relatedReviewListReqObj
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
 
+  const setPrevList = () => {
+    dispatch({ type: LOADER_START });
+    let array = assessmentResponseObject?.informationFramework?.assessmentSection || [];
+    let reviseResponseObj = {
+      countTotal: array?.length || 0,
+      responseObject: [
+        {
+          sections: array || [],
+          assessmentName: assessmentResponseObject?.informationBasic.assessmentName,
+          assessmentDescription: assessmentResponseObject?.informationBasic.assessmentDescription,
+          assessmentStatus: assessmentResponseObject?.informationEngagement.assessmentStatus,
+          id: assessmentResponseObject?.id
+        }
+      ]
+    };
+    setTimeout(function () {
+      dispatch({
+        type: SET_RELATED_REQUEST_OBJECT,
+        payload: relatedReviewListReqObj
+      });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'assessments',
+          middlePaneHeaderBadgeOne: 'sections',
+          middlePaneHeaderBadgeTwo: 'distinct',
+          middlePaneHeaderBadgeThree: 'active',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assessmentsectionsReviewList',
+          scanCount: reviseResponseObj.length,
+          showMiddlePaneState: true
+        }
+      });
+      dispatch({
+        type: RELATED_REVIEWLIST_DISTINCT_DATA,
+        payload: reviseResponseObj.responseObject
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: '' }
+      });
+    }, 2000);
+    dispatch({ type: LOADER_STOP });
+  };
   const onClickRevise = () => {
     console.log('ON CLICK REVISE ICON');
     setIsShowReviseIcon(false);
   };
   const onClickReviseCancel = () => {
-    console.log('ON CLICK cancel ICON');
+    setPrevList();
     setIsShowReviseIcon(true);
   };
   const onClickReviseFinish = () => {
@@ -66,31 +117,12 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
     let existingItemId = [];
     let middlepaneName = relatedReviewListDistinctData[0].typeOfMiddlePaneList;
     if (middlepaneName === 'assessmentSectionItemDistinctReviewList') {
-      // if (sectionInformation.assessmentSectionItemDistinct) {
-      //   existingItemId = sectionInformation.assessmentSectionItemDistinct.map((val) => {
-      //     return val.itemId;
-      //   });
-      // }
-      // console.log(existingItemId, 'existingItemId');
-      // let unique1 = existingItemId.filter((o) => selectedTagsArray.indexOf(o) === -1);
-      // let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
-      // const unique = unique1.concat(unique2);
-
-      // console.log('unique1', unique);
       sectionInformation.assessmentSectionItemDistinct = selectedTagsArray;
       dispatch({
         type: SET_SECTION_REDUCER_STATE,
         payload: sectionInformation
       });
     } else if (middlepaneName === 'assessmentSectionTrialDistinctReviewList') {
-      // let existingItemId = sectionInformation.assessmentSectionItemTrial.map((val) => {
-      //   return val.itemId;
-      // });
-      // let unique1 = existingItemId.filter((o) => selectedTagsArray.indexOf(o) === -1);
-      // let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
-      // const unique = unique1.concat(unique2);
-      // console.log('unique1', unique);
-      // sectionInformation.assessmentSectionItemTrial = [...existingItemId, ...unique];
       sectionInformation.assessmentSectionItemTrial = selectedTagsArray;
       dispatch({
         type: SET_SECTION_REDUCER_STATE,
@@ -98,49 +130,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
       });
     }
     if (typeOfMiddlePaneList !== '') {
-      // dispatch({
-      //   type: SET_MIDDLEPANE_STATE,
-      //   payload: {
-      //     middlePaneHeader: 'items',
-      //     middlePaneHeaderBadgeOne: 'group',
-      //     middlePaneHeaderBadgeTwo: 'active',
-      //     middlePaneHeaderBadgeThree: '',
-      //     middlePaneHeaderBadgeFour: '',
-      //     typeOfMiddlePaneList: 'itemsGroupDistinctReviewList',
-      //     scanCount: reviewListDistinctData.length,
-      //     showMiddlePaneState: true
-      //   }
-      // });
-      // dispatch({
-      //   type: SET_MIDDLEPANE_STATE,
-      //   payload: {
-      //     middlePaneHeader: 'assessments',
-      //     middlePaneHeaderBadgeOne: 'sections',
-      //     middlePaneHeaderBadgeTwo: 'active',
-      //     middlePaneHeaderBadgeThree: '',
-      //     middlePaneHeaderBadgeFour: '',
-      //     typeOfMiddlePaneList: 'assessmentDistinctReviewList',
-      //     scanCount: reviewListDistinctData.length,
-      //     showMiddlePaneState: true
-      //   }
-      // });
-      dispatch({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assessments',
-          middlePaneHeaderBadgeOne: 'distinct',
-          middlePaneHeaderBadgeTwo: 'active',
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assessmentDistinctReviewList',
-          scanCount: reviewListDistinctData.length,
-          showMiddlePaneState: true
-        }
-      });
-      dispatch({
-        type: FILTERMODE,
-        payload: { FilterMode: '' }
-      });
+      setPrevList();
     }
     dispatch({
       type: SET_DISPLAY_TWO_SINGLE_STATE,
@@ -161,33 +151,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
   ];
 
   const closeRelatedList = () => {
-    // dispatch({
-    //   type: SET_MIDDLEPANE_STATE,
-    //   payload: {
-    //     middlePaneHeader: 'assessments',
-    //     middlePaneHeaderBadgeOne: 'sections',
-    //     middlePaneHeaderBadgeTwo: 'active',
-    //     middlePaneHeaderBadgeThree: '',
-    //     middlePaneHeaderBadgeFour: '',
-    //     typeOfMiddlePaneList: 'assessmentsectionsReviewList',
-    //     scanCount: reviewListDistinctData.length,
-    //     showMiddlePaneState: true
-    //   }
-    // });
-    dispatch({
-      type: SET_MIDDLEPANE_STATE,
-      payload: {
-        middlePaneHeader: 'assessments',
-        middlePaneHeaderBadgeOne: 'distinct',
-        middlePaneHeaderBadgeTwo: 'active',
-        middlePaneHeaderBadgeThree: '',
-        middlePaneHeaderBadgeFour: '',
-        typeOfMiddlePaneList: 'assessmentDistinctReviewList',
-        scanCount: reviewListDistinctData.length,
-        showMiddlePaneState: true
-      }
-    });
-    dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+    setPrevList();
   };
   const listDistinctData = relatedReviewListDistinctData[0];
 

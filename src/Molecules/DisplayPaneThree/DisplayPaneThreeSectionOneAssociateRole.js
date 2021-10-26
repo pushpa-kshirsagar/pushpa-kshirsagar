@@ -329,7 +329,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           ]
         },
         {
-          labelTextTwoBadge: 'node',
+          labelTextTwoBadge: 'manager',
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',
@@ -338,7 +338,7 @@ const DisplayPaneThreeSectionOneAssociateRole = () => {
           ]
         },
         {
-          labelTextTwoBadge: 'manager',
+          labelTextTwoBadge: 'node',
           innerLabelBadgeList: [
             {
               labelTextTwoBadge: 'permission',

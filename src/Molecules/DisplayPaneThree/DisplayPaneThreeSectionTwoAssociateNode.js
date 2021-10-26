@@ -469,50 +469,50 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isListCard: true,
       isReviewLink: true
     },
-    {
-      id: 'a2',
-      labelTextOneOne: 'nodes',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'ascendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: ascendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: ascendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: ascendantSecondary
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'descendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: descendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: descendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: descendantSecondary
-            }
-          ]
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true,
-      isMultiList: true
-    }
+    // {
+    //   id: 'a2',
+    //   labelTextOneOne: 'nodes',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'ascendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: ascendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: ascendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: ascendantSecondary
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'descendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: descendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: descendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: descendantSecondary
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true,
+    //   isReviewLink: true,
+    //   isMultiList: true
+    // }
   ];
   const assessmentModuleList = [
     {
@@ -536,50 +536,50 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isListCard: true,
       isReviewLink: true
     },
-    {
-      id: 'a4',
-      labelTextOneOne: 'nodes',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'ascendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: ascendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: ascendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: ascendantSecondary
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'descendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: descendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: descendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: descendantSecondary
-            }
-          ]
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true,
-      isMultiList: true
-    }
+    // {
+    //   id: 'a4',
+    //   labelTextOneOne: 'nodes',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'ascendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: ascendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: ascendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: ascendantSecondary
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'descendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: descendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: descendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: descendantSecondary
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true,
+    //   isReviewLink: true,
+    //   isMultiList: true
+    // }
   ];
   const assignmentModuleList = [
     {
@@ -603,50 +603,50 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isListCard: true,
       isReviewLink: true
     },
-    {
-      id: 'a6',
-      labelTextOneOne: 'nodes',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'ascendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: ascendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: ascendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: ascendantSecondary
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'descendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: descendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: descendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: descendantSecondary
-            }
-          ]
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true,
-      isMultiList: true
-    }
+    // {
+    //   id: 'a6',
+    //   labelTextOneOne: 'nodes',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'ascendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: ascendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: ascendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: ascendantSecondary
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'descendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: descendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: descendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: descendantSecondary
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true,
+    //   isReviewLink: true,
+    //   isMultiList: true
+    // }
   ];
   const itemModuleList = [
     {
@@ -670,50 +670,50 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isListCard: true,
       isReviewLink: true
     },
-    {
-      id: 'a6',
-      labelTextOneOne: 'nodes',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'ascendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: ascendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: ascendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: ascendantSecondary
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'descendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: descendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: descendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: descendantSecondary
-            }
-          ]
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true,
-      isMultiList: true
-    }
+    // {
+    //   id: 'a6',
+    //   labelTextOneOne: 'nodes',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'ascendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: ascendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: ascendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: ascendantSecondary
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'descendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: descendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: descendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: descendantSecondary
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true,
+    //   isReviewLink: true,
+    //   isMultiList: true
+    // }
   ];
   const cultureProfileModuleList = [
     {
@@ -737,50 +737,50 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isListCard: true,
       isReviewLink: true
     },
-    {
-      id: 'a6',
-      labelTextOneOne: 'nodes',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'ascendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: ascendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: ascendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: ascendantSecondary
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'descendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: descendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: descendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: descendantSecondary
-            }
-          ]
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true,
-      isMultiList: true
-    }
+    // {
+    //   id: 'a6',
+    //   labelTextOneOne: 'nodes',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'ascendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: ascendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: ascendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: ascendantSecondary
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'descendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: descendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: descendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: descendantSecondary
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true,
+    //   isReviewLink: true,
+    //   isMultiList: true
+    // }
   ];
   const jobProfileModuleList = [
     {
@@ -804,50 +804,50 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isListCard: true,
       isReviewLink: true
     },
-    {
-      id: 'a6',
-      labelTextOneOne: 'nodes',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'ascendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: ascendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: ascendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: ascendantSecondary
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'descendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: descendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: descendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: descendantSecondary
-            }
-          ]
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true,
-      isMultiList: true
-    }
+    // {
+    //   id: 'a6',
+    //   labelTextOneOne: 'nodes',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'ascendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: ascendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: ascendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: ascendantSecondary
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'descendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: descendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: descendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: descendantSecondary
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true,
+    //   isReviewLink: true,
+    //   isMultiList: true
+    // }
   ];
   const associateModuleList = [
     {
@@ -871,50 +871,50 @@ const DisplayPaneThreeSectionTwoAssociateNode = () => {
       isListCard: true,
       isReviewLink: true
     },
-    {
-      id: 'a6',
-      labelTextOneOne: 'nodes',
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'ascendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: ascendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: ascendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: ascendantSecondary
-            }
-          ]
-        },
-        {
-          labelTextOneOneBadge: 'descendant',
-          innerLabelBadgeList: [
-            {
-              labelTextTwoBadge: 'all',
-              innerList: descendantAll
-            },
-            {
-              labelTextTwoBadge: 'primary',
-              innerList: descendantPrimary
-            },
-            {
-              labelTextTwoBadge: 'secondary',
-              innerList: descendantSecondary
-            }
-          ]
-        }
-      ],
-      innerInfo: 'No Information',
-      isListCard: true,
-      isReviewLink: true,
-      isMultiList: true
-    }
+    // {
+    //   id: 'a6',
+    //   labelTextOneOne: 'nodes',
+    //   labelTextOneOneBadges: [
+    //     {
+    //       labelTextOneOneBadge: 'ascendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: ascendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: ascendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: ascendantSecondary
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       labelTextOneOneBadge: 'descendant',
+    //       innerLabelBadgeList: [
+    //         {
+    //           labelTextTwoBadge: 'all',
+    //           innerList: descendantAll
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'primary',
+    //           innerList: descendantPrimary
+    //         },
+    //         {
+    //           labelTextTwoBadge: 'secondary',
+    //           innerList: descendantSecondary
+    //         }
+    //       ]
+    //     }
+    //   ],
+    //   innerInfo: 'No Information',
+    //   isListCard: true,
+    //   isReviewLink: true,
+    //   isMultiList: true
+    // }
   ];
 
   let list = allModuleList;

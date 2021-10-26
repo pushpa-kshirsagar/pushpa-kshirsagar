@@ -258,9 +258,9 @@ function* workerReviewInfoItemSaga(data) {
           levelState: true,
           polarityState: true,
           scaleState: true,
-          scoreState: false,
+          scoreState: true,
           timeState: true,
-          weightState: true,
+          weightageState: false,
           noOfItemState: true,
           noOfResponseState: false
         };
@@ -275,7 +275,7 @@ function* workerReviewInfoItemSaga(data) {
           scaleState: false,
           scoreState: true,
           timeState: true,
-          weightState: false,
+          weightageState: false,
           noOfItemState: false,
           noOfResponseState: true
         };
@@ -290,7 +290,7 @@ function* workerReviewInfoItemSaga(data) {
           scaleState: false,
           scoreState: true,
           timeState: true,
-          weightState: false,
+          weightageState: false,
           noOfItemState: false,
           noOfResponseState: true
         };
@@ -308,7 +308,7 @@ function* workerReviewInfoItemSaga(data) {
           scaleState: false,
           scoreState: true,
           timeState: true,
-          weightState: false,
+          weightageState: false,
           noOfItemState: false,
           noOfResponseState: false
         };

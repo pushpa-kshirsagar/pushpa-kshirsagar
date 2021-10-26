@@ -125,13 +125,27 @@ const AssessmentDistinctReviewList = (props) => {
         dispatch({ type: LOADER_START });
         dispatch({ type: ASSESSMENT_ALLOCATE_ASSIGNMENT_SAGA, payload: { request: request } });
       }
-      if (FilterMode === 'itemAllocateToAssessment') {
+      if (FilterMode === 'itemGroupAllocateToAssessment') {
         let request = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
             selectedAssociateInfo?.associate?.informationEngagement.associateTag
               .associateTagPrimary,
           itemDistinctAllocate: { itemGroup: allocatedTagsArray },
+          itemDistinctAllocateInformation: {
+            assessment: selectedTagsArray
+          }
+        };
+        dispatch({ type: LOADER_START });
+        dispatch({ type: ITEM_ALLOCATE_ASSESSMENT_SAGA, payload: { request: request } });
+      }
+      if (FilterMode === 'itemAllocateToAssessment') {
+        let request = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          itemDistinctAllocate: { itemDistinct: allocatedTagsArray },
           itemDistinctAllocateInformation: {
             assessment: selectedTagsArray
           }
@@ -227,7 +241,9 @@ const AssessmentDistinctReviewList = (props) => {
           secondaryIcon={secondaryIcon}
         />
       )}
-      {(FilterMode === 'allocateToAssessment' || FilterMode === 'itemAllocateToAssessment') && (
+      {(FilterMode === 'allocateToAssessment' ||
+        FilterMode === 'itemGroupAllocateToAssessment' ||
+        FilterMode === 'itemAllocateToAssessment') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}
           FilterMode={FilterMode}

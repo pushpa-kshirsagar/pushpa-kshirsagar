@@ -63,6 +63,9 @@ const PopUpConfirm = (props) => {
       popupMode === 'NODECREATE' ||
       popupMode === 'CULTURECREATE' ||
       popupMode === 'JOBCREATE' ||
+      popupMode === 'SCALECREATE' ||
+      popupMode === 'CLUSTERCREATE' ||
+      popupMode === 'SECTIONCREATE' ||
       popupMode === 'ITEMCREATE'
     ) {
       dispatch({

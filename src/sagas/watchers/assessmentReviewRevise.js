@@ -331,6 +331,10 @@ function* workerReviewInfoAssessmentSecSaga(data) {
     if (userResponse.responseCode === '000') {
       let assessmentInfo = userResponse.responseObject[0];
       yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'assessmentResponseObject', value: assessmentInfo }
+      });
+      yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: {
           stateName: 'assessmentScale',
@@ -344,24 +348,12 @@ function* workerReviewInfoAssessmentSecSaga(data) {
         for (let i = 0; i < sec.assessmentSectionItemDistinct?.length; i++) {
           tempArr.push(sec.assessmentSectionItemDistinct[i].itemId);
         }
-        console.log('tempArr', tempArr);
         let reviseObj = { ...sec, assessmentSectionItemDistinct: tempArr };
-        console.log('reviseObj', reviseObj);
         sectionArr.push(reviseObj);
       });
-      console.log('sectionArr', sectionArr);
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentSection', value: sectionArr }
-      });
-
-      yield put({
-        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-        payload: {
-          stateName: 'assessmentSection',
-          value: sectionArr
-          //value: assessmentInfo.informationFramework.assessmentSection
-        }
       });
 
       yield put({

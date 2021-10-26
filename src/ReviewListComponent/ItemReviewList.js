@@ -164,6 +164,7 @@ const ItemReviewList = (props) => {
         })}
       {(FilterMode === 'itemDistinctinactive' ||
         FilterMode === 'itemDistinctsuspended' ||
+        FilterMode === 'itemDistinctunpublished' ||
         FilterMode === 'itemDistinctterminated') && (
         <FooterIconTwo
           FilterModeEnable={FilterModeEnable}

@@ -69,6 +69,7 @@ const initialState = {
   flagedValue: '',
   errorResponse: '',
   responseObject: '',
+  assessmentResponseObject: '',
   credentialOptionArr: [],
   jobProfilerReviewList: null,
   jobProfileFunctionReviewList: [],

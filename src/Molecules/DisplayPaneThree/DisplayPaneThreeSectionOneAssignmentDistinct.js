@@ -37,8 +37,8 @@ const DisplayPaneThreeSectionOneAssignment = () => {
 
   const allianceList = [
     {
-      id: 'a2',
-      labelTextOneOne: 'collaborator',
+      id: 'a342',
+      labelTextOneOne: 'assessor',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',
@@ -50,19 +50,19 @@ const DisplayPaneThreeSectionOneAssignment = () => {
             {
               id: 'associate1',
               textOne: 'Simple Sample 01',
-              textTwo: 'collaborator',
+              textTwo: 'assessor',
               status: 'active'
             },
             {
               id: 'associate2',
               textOne: 'Simple Sample 02',
-              textTwo: 'collaborator',
+              textTwo: 'assessor',
               status: 'active'
             },
             {
               id: 'associate3',
               textOne: 'Simple Sample 03',
-              textTwo: 'collaborator',
+              textTwo: 'assessor',
               status: 'active'
             }
           ]
@@ -76,8 +76,8 @@ const DisplayPaneThreeSectionOneAssignment = () => {
       isListCard: true
     },
     {
-      id: 'a342',
-      labelTextOneOne: 'supervisor',
+      id: 'a2',
+      labelTextOneOne: 'collaborator',
       labelTextOneOneBadgeOne: 'primary',
       labelTextOneOneBadgeTwo: 'secondary',
       labelTextOneOneBadgeThree: '',

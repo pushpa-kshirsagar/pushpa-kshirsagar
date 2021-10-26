@@ -7693,12 +7693,12 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemMod
     reviseSetting = {
       blankState: false,
       classificationState: !isItemModule,
-      levelState: true,
+      levelState: false,
       polarityState: !isItemModule,
       scaleState: true,
-      scoreState: false,
+      scoreState: true,
       timeState: true,
-      weightState: true,
+      weightageState: false,
       noOfItemState: true,
       noOfResponseState: true
     };
@@ -7713,7 +7713,7 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemMod
       scaleState: false,
       scoreState: true,
       timeState: true,
-      weightState: false,
+      weightageState: false,
       noOfItemState: false,
       noOfResponseState: true
     };
@@ -7728,7 +7728,7 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemMod
       scaleState: false,
       scoreState: true,
       timeState: true,
-      weightState: false,
+      weightageState: false,
       noOfItemState: false,
       noOfResponseState: true
     };
@@ -7746,7 +7746,7 @@ export const setItemTypeConfigState = (itemFrameworkOneType, dispatch, isItemMod
       scaleState: false,
       scoreState: true,
       timeState: true,
-      weightState: false,
+      weightageState: false,
       noOfItemState: false,
       noOfResponseState: false
     };

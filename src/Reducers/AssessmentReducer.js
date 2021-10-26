@@ -20,7 +20,8 @@ import {
   SET_ASSESSMENT_REVISE_DYNAMIC_SINGLE_STATE,
   SET_ASSESSMENT_SYNOPSIS_FRAMEWORK_STATE,
   SET_ASSESSMENT_SINGLE_STATE,
-  SET_ASSESSMENT_TEMPLATE_FRAMEWORK_STATE
+  SET_ASSESSMENT_TEMPLATE_FRAMEWORK_STATE,
+  CLOSE_ASSESSMENT_POPUP_OPEN
 } from '../actionType';
 import {
   MODULE_POPUP_OPTION,
@@ -125,7 +126,7 @@ const initialState = {
           assessmentSectionAidTextsheetType: ''
         },
         assessmentSectionCommunique: [],
-        assessmentSectionEvaluation: false,
+        assessmentSectionEvaluation: true,
         assessmentSectionItemDistinct: [],
         assessmentSectionItemFrameworkOneLabel: '',
         assessmentSectionItemNavigation: {
@@ -177,6 +178,11 @@ const AssessmentReducer = (istate = JSON.parse(JSON.stringify(initialState)), ac
         assessmentsPopUpType: 'primary',
         currentPopUpOption: istate.primaryPopUpOptions,
         assessmentsPopUpActive: true
+      };
+    case CLOSE_ASSESSMENT_POPUP_OPEN:
+      return {
+        ...istate,
+        assessmentsPopUpActive: false
       };
     case SET_ASSESSMENT_NEXT_POPUP:
       if (istate.assessmentsPopUpType === 'primary') {

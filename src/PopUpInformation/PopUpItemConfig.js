@@ -110,7 +110,7 @@ const PopUpItemConfig = (props) => {
     //     scaleState: true,
     //     scoreState: false,
     //     timeState: true,
-    //     weightState: true,
+    //     weightageState: true,
     //     noOfItemState: true,
     //     noOfResponseState: true
     //   };
@@ -125,7 +125,7 @@ const PopUpItemConfig = (props) => {
     //     scaleState: false,
     //     scoreState: true,
     //     timeState: true,
-    //     weightState: false,
+    //     weightageState: false,
     //     noOfItemState: false,
     //     noOfResponseState: true
     //   };
@@ -140,7 +140,7 @@ const PopUpItemConfig = (props) => {
     //     scaleState: false,
     //     scoreState: true,
     //     timeState: true,
-    //     weightState: false,
+    //     weightageState: false,
     //     noOfItemState: false,
     //     noOfResponseState: true
     //   };
@@ -155,7 +155,7 @@ const PopUpItemConfig = (props) => {
     //     scaleState: false,
     //     scoreState: true,
     //     timeState: true,
-    //     weightState: false,
+    //     weightageState: false,
     //     noOfItemState: false,
     //     noOfResponseState: false
     //   };

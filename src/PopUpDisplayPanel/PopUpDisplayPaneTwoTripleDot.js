@@ -571,7 +571,10 @@ const PopUpDisplayPaneTwoTripleDot = (props) => {
           'distinct',
           popupHeaderOneBadgeTwo === 'allocate' ? 'multiple' : ''
         );
-        filterModeKey = 'itemAllocateToAssessment';
+        filterModeKey =
+          typeOfMiddlePaneList === 'itemsGroupDistinctReviewList'
+            ? 'itemGroupAllocateToAssessment'
+            : 'itemAllocateToAssessment';
         dispatch({ type: POPUP_CLOSE });
       } else {
         dispatch({

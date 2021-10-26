@@ -40,43 +40,45 @@ const DisplayPaneThreeSectionOneCultureProfileDistinct = () => {
   }
 
   const allianceList = [
-    // {
-    //   id: 'a1',
-    //   labelTextOneOne: 'author',
-    //   labelTextOneOneBadgeOne: 'primary',
-    //   labelTextOneOneBadgeTwo: 'secondary',
-    //   isListCard: true,
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: 'primary',
-    //       innerList: [
-    //         {
-    //           id: 'associate1',
-    //           textOne: 'Simple Sample 01',
-    //           textTwo: 'author',
-    //           status: ''
-    //         },
-    //         {
-    //           id: 'associate2',
-    //           textOne: 'Simple Sample 02',
-    //           textTwo: 'author',
-    //           status: ''
-    //         },
-    //         {
-    //           id: 'associate3',
-    //           textOne: 'Simple Sample 03',
-    //           textTwo: 'author',
-    //           status: ''
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       labelTextOneOneBadge: 'secondary',
-    //       innerList: []
-    //     }
-    //   ],
-    //   innerInfo: 'No Information'
-    // },
+    {
+      id: 'a342',
+      labelTextOneOne: 'assessor',
+      labelTextOneOneBadgeOne: 'primary',
+      labelTextOneOneBadgeTwo: 'secondary',
+      labelTextOneOneBadgeThree: '',
+      labelTextOneOneBadgeFour: '',
+      labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'primary',
+          innerList: [
+            {
+              id: 'associate1',
+              textOne: 'Simple Sample 01',
+              textTwo: 'assessor',
+              status: 'active'
+            },
+            {
+              id: 'associate2',
+              textOne: 'Simple Sample 02',
+              textTwo: 'assessor',
+              status: 'active'
+            },
+            {
+              id: 'associate3',
+              textOne: 'Simple Sample 03',
+              textTwo: 'assessor',
+              status: 'active'
+            }
+          ]
+        },
+        {
+          labelTextOneOneBadge: 'secondary',
+          innerList: []
+        }
+      ],
+      innerInfo: 'No Information',
+      isListCard: true
+    },
     {
       id: 'a2',
       labelTextOneOne: 'collaborator',
@@ -625,7 +627,11 @@ const DisplayPaneThreeSectionOneCultureProfileDistinct = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
                       <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}
@@ -664,7 +670,11 @@ const DisplayPaneThreeSectionOneCultureProfileDistinct = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
                       <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}
@@ -679,7 +689,11 @@ const DisplayPaneThreeSectionOneCultureProfileDistinct = () => {
                 return (
                   <div key={ob.id}>
                     {ob.isListCard ? (
-                      <DisplayPanelAccordianReviewListOne className="" accordianObject={ob} mode={reviewMode} />
+                      <DisplayPanelAccordianReviewListOne
+                        className=""
+                        accordianObject={ob}
+                        mode={reviewMode}
+                      />
                     ) : (
                       <DisplayPanelAccordianInformation accordianObject={ob} mode={reviewMode} />
                     )}

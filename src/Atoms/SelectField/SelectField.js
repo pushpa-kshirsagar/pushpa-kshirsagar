@@ -26,7 +26,6 @@ export const SelectField = (props) => {
     isMultiSelect = false,
     name = 'name'
   } = props;
-  console.log('props', props);
   return (
     <Fragment>
       <FormControl className={'selectFormText'}>

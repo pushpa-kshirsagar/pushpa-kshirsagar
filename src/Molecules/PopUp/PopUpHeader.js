@@ -19,7 +19,8 @@ import {
   CLEAR_ASSIGNMENT_INFO,
   CLEAR_IGAUGE_REDUCER,
   CLEAR_POPUP_INFO,
-  CLEAR_ROLE_REDUCER_STATE
+  CLEAR_ROLE_REDUCER_STATE,
+  CLOSE_ASSESSMENT_POPUP_OPEN
 } from '../../actionType';
 
 const PopupHeader = (props) => {
@@ -34,7 +35,7 @@ const PopupHeader = (props) => {
     mode = 'core',
     isNotRevised = false,
     onClosePopUpEvent = null,
-    setexchageMode = null,
+    setexchageMode = null
   } = props;
   const dispatch = useDispatch();
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
@@ -51,7 +52,7 @@ const PopupHeader = (props) => {
       } else {
         dispatch({ type: CLEAR_POPUP_INFO });
         dispatch({ type: CLEAR_ASSESSEE_INFO });
-        // dispatch({ type: CLEAR_ASSESSMENT_INFO });
+        dispatch({ type: CLOSE_ASSESSMENT_POPUP_OPEN });
         dispatch({ type: POPUP_CLOSE });
         dispatch({ type: CLEAR_ROLE_REDUCER_STATE });
         dispatch({ type: CLEAR_ASSOCIATE_INFO });
@@ -98,11 +99,11 @@ const PopupHeader = (props) => {
             {!isNotRevised && (
               <IconButton className="MuiIconButton-root-1602">
                 {mode === 'core' || mode === 'search' || mode === 'revise' ? (
-                  <Check className={'popupClose'} onClick={onClick}  />
+                  <Check className={'popupClose'} onClick={onClick} />
                 ) : mode === 'confirm' ? (
                   <KeyboardTab
                     className={['popupClose', 'previousToLast'].join(' ')}
-                    onClick={onClick} 
+                    onClick={onClick}
                   />
                 ) : mode === 'error' || mode === 'cancel' ? null : mode === 'next' ? (
                   <NextIcon className={'popupClose'} onClick={onClick} />

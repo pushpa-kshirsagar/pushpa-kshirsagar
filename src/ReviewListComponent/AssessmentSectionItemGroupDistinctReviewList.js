@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE,
+  LOADER_START,
+  LOADER_STOP,
+  RELATED_REVIEWLIST_DISTINCT_DATA,
   SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
+  SET_RELATED_REQUEST_OBJECT,
   SET_SECTION_REDUCER_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST
 } from '../actionType';
@@ -29,18 +33,63 @@ const AssessmentSectionItemGroupDistinctReviewList = (props) => {
     selectedTagsArray,
     isSelectActive,
     unselectedTagsArray,
-    typeOfMiddlePaneList
+    typeOfMiddlePaneList,
+    relatedReviewListReqObj,
+    assessmentResponseObject
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
-  const {sectionInformation}=useSelector((state) => state.SectionCreateReducer);
-
-
+  const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
+  const setPrevList = () => {
+    dispatch({ type: LOADER_START });
+    let array = assessmentResponseObject?.informationFramework?.assessmentSection || [];
+    let reviseResponseObj = {
+      countTotal: array?.length || 0,
+      responseObject: [
+        {
+          sections: array || [],
+          assessmentName: assessmentResponseObject?.informationBasic.assessmentName,
+          assessmentDescription: assessmentResponseObject?.informationBasic.assessmentDescription,
+          assessmentStatus: assessmentResponseObject?.informationEngagement.assessmentStatus,
+          id: assessmentResponseObject?.id
+        }
+      ]
+    };
+    setTimeout(function () {
+      dispatch({
+        type: SET_RELATED_REQUEST_OBJECT,
+        payload: relatedReviewListReqObj
+      });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'assessments',
+          middlePaneHeaderBadgeOne: 'sections',
+          middlePaneHeaderBadgeTwo: 'distinct',
+          middlePaneHeaderBadgeThree: 'active',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assessmentsectionsReviewList',
+          scanCount: reviseResponseObj.length,
+          showMiddlePaneState: true
+        }
+      });
+      dispatch({
+        type: RELATED_REVIEWLIST_DISTINCT_DATA,
+        payload: reviseResponseObj.responseObject
+      });
+      dispatch({
+        type: FILTERMODE,
+        payload: { FilterMode: '' }
+      });
+    }, 2000);
+    dispatch({ type: LOADER_STOP });
+  };
   const onClickRevise = () => {
     console.log('ON CLICK REVISE ICON');
     setIsShowReviseIcon(false);
   };
   const onClickReviseCancel = () => {
     console.log('ON CLICK cancel ICON');
+    setPrevList();
     setIsShowReviseIcon(true);
   };
   const onClickReviseFinish = () => {
@@ -52,39 +101,14 @@ const AssessmentSectionItemGroupDistinctReviewList = (props) => {
     let unique1 = existingItemId.filter((o) => selectedTagsArray.indexOf(o) === -1);
     let unique2 = selectedTagsArray.filter((o) => existingItemId.indexOf(o) === -1);
     const selectedSectionGroup = unique1.concat(unique2);
-    console.log('selectedSectionGroup',selectedSectionGroup);
-    sectionInformation.assessmentSectionItemGroup=[...existingItemId,...selectedSectionGroup];
+    console.log('selectedSectionGroup', selectedSectionGroup);
+    sectionInformation.assessmentSectionItemGroup = [...existingItemId, ...selectedSectionGroup];
     dispatch({
-      type:SET_SECTION_REDUCER_STATE,
-      payload:sectionInformation
-    })
+      type: SET_SECTION_REDUCER_STATE,
+      payload: sectionInformation
+    });
     if (typeOfMiddlePaneList !== '') {
-      // dispatch({
-      //   type: SET_MIDDLEPANE_STATE,
-      //   payload: {
-      //     middlePaneHeader: 'items',
-      //     middlePaneHeaderBadgeOne: 'group',
-      //     middlePaneHeaderBadgeTwo: 'active',
-      //     middlePaneHeaderBadgeThree: '',
-      //     middlePaneHeaderBadgeFour: '',
-      //     typeOfMiddlePaneList: 'itemsGroupDistinctReviewList',
-      //     scanCount: reviewListDistinctData.length,
-      //     showMiddlePaneState: true
-      //   }
-      // });
-      dispatch({
-        type: SET_MIDDLEPANE_STATE,
-        payload: {
-          middlePaneHeader: 'assessments',
-          middlePaneHeaderBadgeOne: 'distinct',
-          middlePaneHeaderBadgeTwo: 'active',
-          middlePaneHeaderBadgeThree: '',
-          middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assessmentDistinctReviewList',
-          scanCount: reviewListDistinctData.length,
-          showMiddlePaneState: true
-        }
-      });
+      setPrevList();
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: '' }
