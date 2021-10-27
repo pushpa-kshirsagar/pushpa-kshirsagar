@@ -7,7 +7,8 @@ export const setAssesseeAssessmentItemSaveResCall = (
   itemId,
   assesseeId,
   currentQuestionChoice,
-  itemTimeStart
+  itemTimeStart,
+  itemFlaged
 ) => {
   let ItemObj = {
     assesseeId: selectedAssociateInfo?.assesseeId,
@@ -20,7 +21,8 @@ export const setAssesseeAssessmentItemSaveResCall = (
     assesseeAssignmentAssessmentItemTimeline: {
       assesseeAssignmentAssessmentItemTimelineDateTimeStart: itemTimeStart,
       assesseeAssignmentAssessmentItemTimelineDateTimeEnd: new Date().getTime()
-    }
+    },
+    assesseeAssignmentAssessmentItemFlagged:itemFlaged
   };
   if (navigator.onLine) {
     console.log('Became online');

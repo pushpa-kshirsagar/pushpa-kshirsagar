@@ -1,7 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import ReactHTMLParser from 'react-html-parser';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import IconButton from '@material-ui/core/IconButton';
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
 import ArrowRight from '@material-ui/icons/ChevronRight';
@@ -20,13 +17,7 @@ import {
   SET_POPUP_STATE
 } from '../../actionType';
 import { ASSESSMENT_FINISH_POPUP_OPTION } from '../../PopUpConfig';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { setAssesseeAssessmentItemSaveResCall } from '../../Actions/ActionAssesseeAssessment';
-import { useTimer } from 'react-timer-hook';
-import { InputLabel, Paper } from '@material-ui/core';
-import EditorTemplate from '../DisplayPaneFive/EditorTemplate';
 import DisplayPaneFiveAssessment from '../DisplayPaneFive/DisplayPaneFiveAssessment';
 
 // const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
@@ -160,12 +151,15 @@ export const DisplayPaneSeven = () => {
   };
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
-    let itemId =
+    let item =
       assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
-        currentQuestionIndex
-      ].itemId;
+      currentQuestionIndex
+      ];
+      console.log('item', item);
+    let itemId = item.itemId
+    let itemFlaged = item?.assesseeAssignmentAssessmentItemFlagged;
     // let id = assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct[currentQuestionIndex].id;
-    console.log('currentQuestionIndex', currentQuestionIndex);
+    //console.log('currentQuestionIndex', currentQuestionIndex);
     console.log('itemId', itemId);
     let assesseeId = assesseeAssessmentStartData.assesseeId;
     if (clickedval === 'previous') {
@@ -184,7 +178,7 @@ export const DisplayPaneSeven = () => {
         if (item.length > 0)
           setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
       } else {
-        let prevSec=currentSectionIndex - 1;
+        let prevSec = currentSectionIndex - 1;
         if (currentSectionIndex != 0) {
           setcurrentSectionIndex(prevSec);
           setcurrentQuestionIndex(
@@ -192,16 +186,16 @@ export const DisplayPaneSeven = () => {
               ?.assessmentSectionItemDistinct.length - 1
           );
           let itemData =
-          assesseeAssessmentStartData?.assessmentSection[prevSec].assessmentSectionItemDistinct[
+            assesseeAssessmentStartData?.assessmentSection[prevSec].assessmentSectionItemDistinct[
             assesseeAssessmentStartData?.assessmentSection[prevSec]
-            ?.assessmentSectionItemDistinct.length - 1
-          ];
-        let item = responseInLocal.filter(function (ii) {
-          return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
-        });
-        console.log('item', item);
-        if (item.length > 0)
-          setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
+              ?.assessmentSectionItemDistinct.length - 1
+            ];
+          let item = responseInLocal.filter(function (ii) {
+            return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+          });
+          console.log('item', item);
+          if (item.length > 0)
+            setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
         }
       }
     }
@@ -210,29 +204,26 @@ export const DisplayPaneSeven = () => {
       if (currentQuestionIndex !== 0) {
         setcurrentQuestionIndex(0);
         let itemData =
-        assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[0];
-      let item = responseInLocal.filter(function (ii) {
-        return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
-      });
-      if (item.length > 0)
-        setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
+          assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[0];
+        let item = responseInLocal.filter(function (ii) {
+          return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+        });
+        if (item.length > 0)
+          setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
       } else {
         if (currentSectionIndex !== 0) {
           setcurrentSectionIndex(currentSectionIndex - 1);
           setcurrentQuestionIndex(0);
           let itemData =
-        assesseeAssessmentStartData.assessmentSection[currentSectionIndex - 1].assessmentSectionItemDistinct[0];
-      let item = responseInLocal.filter(function (ii) {
-        return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
-      });
-      if (item.length > 0)
-        setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
+            assesseeAssessmentStartData.assessmentSection[currentSectionIndex - 1].assessmentSectionItemDistinct[0];
+          let item = responseInLocal.filter(function (ii) {
+            return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+          });
+          if (item.length > 0)
+            setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
         }
       }
       // if(currentQuestionChoice!==0){
-
-      // }
-      
       // setcurrentQuestionChoice(null);
     }
     if (clickedval === 'last') {
@@ -286,7 +277,7 @@ export const DisplayPaneSeven = () => {
         assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct.length - 1
       ) {
         setcurrentQuestionIndex(currentQuestionIndex + 1);
-        setcurrentQuestionChoice(null);
+        //setcurrentQuestionChoice(null);
         //setItemTimeStart(new Date().getTime());
       } else {
         if (currentSectionIndex < assesseeAssessmentStartData.assessmentSection.length - 1) {
@@ -319,7 +310,7 @@ export const DisplayPaneSeven = () => {
         }
       }
     }
-    if (currentQuestionChoice !== 0) {
+    if (currentQuestionChoice !== 0 || itemFlaged) {
       setAssesseeAssessmentItemSaveResCall(
         selectedAssociateInfo,
         dispatch,
@@ -327,7 +318,8 @@ export const DisplayPaneSeven = () => {
         itemId,
         assesseeId,
         currentQuestionChoice,
-        itemTimeStart
+        itemTimeStart,
+        itemFlaged
       );
       setcurrentQuestionChoice(0);
       setItemTimeStart(new Date().getTime());
@@ -354,28 +346,33 @@ export const DisplayPaneSeven = () => {
     setcurrentQuestionChoice(e.target.value);
   };
   const flagQuestion = (itemId) => {
-    const isSelected=isQuestionFlaged.includes(itemId);
+    const isSelected = isQuestionFlaged.includes(itemId);
     let flaggedArr = isQuestionFlaged;
     let currentQuestion = assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
       currentQuestionIndex
     ];
-    if(isSelected){
-      setIsQuestionFlaged(isQuestionFlaged.filter(selectedId=>selectedId!==itemId));
-      currentQuestion['isFlagged'] = false;
+    // if (isSelected) {
+    //   setIsQuestionFlaged(isQuestionFlaged.filter(selectedId => selectedId !== itemId));
+    //   currentQuestion['assesseeAssignmentAssessmentItemFlagged'] = false;
+    // } else {
+    //   currentQuestion['assesseeAssignmentAssessmentItemFlagged'] = true;
+    //   flaggedArr.push(itemId);
+    //   setIsQuestionFlaged([...flaggedArr]);
+    // }
+
+    if(currentQuestion?.assesseeAssignmentAssessmentItemFlagged){
+      currentQuestion.assesseeAssignmentAssessmentItemFlagged = false;
+      setIsQuestionFlaged(isQuestionFlaged.filter(selectedId => selectedId !== itemId));
     }else{
-      currentQuestion['isFlagged']=true;
+      currentQuestion.assesseeAssignmentAssessmentItemFlagged = true;
       flaggedArr.push(itemId);
-    setIsQuestionFlaged([...flaggedArr]);
+      setIsQuestionFlaged([...flaggedArr]);
     }
     assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
       currentQuestionIndex
-    ] = currentQuestion;    
-    // flaggedArr.push(itemId);
+    ] = currentQuestion;
     // //setIsQuestionFlaged((state) => !state);
-    // setIsQuestionFlaged(flaggedArr);
   };
-
-  console.log('currentQuestionIndex', currentQuestionIndex);
   let itemObect =
     assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
     currentQuestionIndex
@@ -406,8 +403,7 @@ export const DisplayPaneSeven = () => {
               timer={timer}
               handleRadioButton={handleRadioButton}
               currentQuestionChoice={currentQuestionChoice}
-              flagQuestion={flagQuestion}
-              isQuestionFlaged={isQuestionFlaged}
+              flagQuestion={flagQuestion}              
             />
             <FooterIconTwo
               className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
@@ -423,8 +419,6 @@ export const DisplayPaneSeven = () => {
       <PopUpAssessmentNavigator
         isActive={isPopUpValue === 'NavigatorPOPUP'}
         itemData={assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct}
-        isQuestionFlaged={isQuestionFlaged}
-        defaultCheckVal='all'
       />
     </>
   );
