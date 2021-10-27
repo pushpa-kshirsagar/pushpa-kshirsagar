@@ -262,7 +262,7 @@ const PopUpItemConfig = (props) => {
       if (add > 0) {
         for (let i = 1; i <= add; i++) {
           originobj.push({
-            itemFrameworkOneSectionSequence: `${origin + i}`,
+            itemFrameworkOneSectionSequence: origin + i,
             itemFrameworkOneSection: {
               itemFrameworkOneMedia: '',
               itemFrameworkOneScore: null,

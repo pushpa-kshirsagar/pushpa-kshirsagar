@@ -7,7 +7,7 @@ import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordi
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import Manuscript from '@material-ui/icons/Description';
 import AddIcon from '@material-ui/icons/Add';
-import { getEvaluationStr, makeItemObj } from '../../Actions/GenericActions';
+import { convertSecondsToHMmSs, getEvaluationStr, makeItemObj } from '../../Actions/GenericActions';
 import {
   FILTERMODE,
   GET_ALLOCATE_ITEM,
@@ -285,7 +285,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       id: 'a6',
       labelTextOneOne: 'time',
       isListCard: false,
-      textOneOne: informationFramework?.assessmentTime || 'No Information',
+      textOneOne: convertSecondsToHMmSs(informationFramework?.assessmentTime) || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null

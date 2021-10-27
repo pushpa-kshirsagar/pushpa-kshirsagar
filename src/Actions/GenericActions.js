@@ -43,6 +43,24 @@ function splitCamelCaseToString(s) {
     })
     .join(' ');
 }
+export const convertSecondsToHMmSs = (ms) => {
+  // 1- Convert to seconds:
+  let seconds = '';
+  let hours = '';
+  let minutes = '';
+  if (ms !== null && ms !== '') {
+    seconds = ms / 1000;
+    hours = parseInt(seconds / 3600); // 3,600 seconds in 1 hour
+    seconds = seconds % 3600; // seconds remaining after extracting hours
+    minutes = parseInt(seconds / 60); // 60 seconds in 1 minute
+    seconds = seconds % 60;
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+  }
+
+  return hours + ':' + minutes + ':' + seconds;
+};
 export const imageUploadMethod = async (file) => {
   let imgUploadData = await ReactS3Client.uploadFile(file, file.name);
   console.log(imgUploadData);

@@ -19,7 +19,7 @@ import {
   SET_PANE_THREE_PREVIEW_MODE,
   SET_POPUP_VALUE
 } from '../../actionType';
-import { makeItemGroupObj, makeItemObj } from '../../Actions/GenericActions';
+import { convertSecondsToHMmSs, makeItemGroupObj, makeItemObj } from '../../Actions/GenericActions';
 
 const DisplayPaneThreeSectionOneAssessmentSection = () => {
   const dispatch = useDispatch();
@@ -324,7 +324,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       id: 'a6',
       labelTextOneOne: 'time',
       isListCard: false,
-      textOneOne: responseObject?.assessmentSectionTime || 'No Information',
+      textOneOne: convertSecondsToHMmSs(responseObject?.assessmentSectionTime) || 'No Information',
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null

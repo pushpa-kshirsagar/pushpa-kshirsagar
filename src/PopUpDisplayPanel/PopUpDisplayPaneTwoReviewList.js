@@ -121,7 +121,8 @@ import {
   getAssociateTypeAssociateReqObj,
   getAssesseeTypeAssesseeReqObj,
   makeAssesseeReviewListRequestObject,
-  setItemTypeConfigState
+  setItemTypeConfigState,
+  convertSecondsToHMmSs
 } from '../Actions/GenericActions';
 import {
   getItemGroupItemDistinctApiCall,
@@ -1401,6 +1402,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assessmentsectionsReviewList') {
+        let sectionResponseData = relatedReviewListDistinctData[0].sections[selectedTagValue];
         dispatch({
           type: SET_DISPLAY_PANE_THREE_STATE,
           payload: {
@@ -1408,38 +1410,38 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             headerOneBadgeOne: 'section',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
-            responseObject: relatedReviewListDistinctData[0].sections[selectedTagValue],
+            responseObject: sectionResponseData,
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });
+        if (sectionResponseData.assessmentSectionTime) {
+          sectionResponseData = {
+            ...sectionResponseData,
+            assessmentSectionTime: convertSecondsToHMmSs(sectionResponseData.assessmentSectionTime)
+          };
+        }
         dispatch({
           type: SET_SECTION_REDUCER_STATE,
-          payload: relatedReviewListDistinctData[0].sections[selectedTagValue]
+          payload: sectionResponseData
         });
         dispatch({
           type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
           payload: {
             stateName: 'assessmentSectionItemFrameworkOneDistinct',
-            value:
-              relatedReviewListDistinctData[0].sections[selectedTagValue]
-                .assessmentSectionItemDistinct
+            value: sectionResponseData.assessmentSectionItemDistinct
           }
         });
-        if (
-          relatedReviewListDistinctData[0].sections[selectedTagValue].assessmentSectionItemDistinct
-        ) {
+        if (sectionResponseData.assessmentSectionItemDistinct) {
           setItemTypeConfigState(
-            relatedReviewListDistinctData[0].sections[selectedTagValue]
-              .assessmentSectionItemDistinct[0].itemFrameworkOne.itemFrameworkOneType,
+            sectionResponseData.assessmentSectionItemDistinct[0].itemFrameworkOne
+              .itemFrameworkOneType,
             dispatch
           );
           dispatch({
             type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
             payload: {
               stateName: 'assessmentSectionItemDistinctReviseObject',
-              value:
-                relatedReviewListDistinctData[0].sections[selectedTagValue]
-                  .assessmentSectionItemDistinct[0]
+              value: sectionResponseData.assessmentSectionItemDistinct[0]
             }
           });
         }
@@ -2588,7 +2590,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         updateJobProfileTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
       if (typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList') {
-        console.log('selectedTagValue',selectedTagValue);
+        console.log('selectedTagValue', selectedTagValue);
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
         let assessmentList = reviewListDistinctData.filter((data) => {
           return data.assesseeAssignmentId === selectedTagValue;
@@ -2612,7 +2614,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assesseesAssginmentAssessmentReviewList') {
-        console.log('relatedReviewListDistinctData',relatedReviewListDistinctData);
+        console.log('relatedReviewListDistinctData', relatedReviewListDistinctData);
         let reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:

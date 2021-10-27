@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { setAssessmentResponseToReducerObj } from '../../Actions/AssessmentModuleAction';
-import { setItemTypeConfigState } from '../../Actions/GenericActions';
+import { convertSecondsToHMmSs, setItemTypeConfigState } from '../../Actions/GenericActions';
 import {
   SET_DISPLAY_PANE_THREE_STATE,
   LOADER_STOP,
@@ -234,7 +234,7 @@ function* workerReviewInfoAssessmentSaga(data) {
       //   assessmentScoreMinimum: 0
       // };
       // yield put({ type: SET_ASSESSMENT_SCORE_FRAMEWORK_STATE, payload: scoreObject });
-      const timeAssessment = informationFramework?.assessmentTime || 0;
+      const timeAssessment = convertSecondsToHMmSs(informationFramework?.assessmentTime) || 0;
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentTime', value: timeAssessment }
