@@ -8,10 +8,9 @@ import PropTypes from 'prop-types';
 import { Button, Divider, IconButton, InputLabel } from '@material-ui/core';
 import { Check, Dashboard } from '@material-ui/icons';
 import JsonRenderComponent from '../Actions/JsonRenderComponent';
-import { POPUP_CLOSE, POPUP_OPEN, SET_POPUP_STATE, SET_POPUP_VALUE } from '../actionType';
+import { GET_ASSESSEE_ASSIGNMENT_SAGA, LOADER_START, POPUP_CLOSE, POPUP_OPEN, SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE, SET_DISPLAY_TWO_SINGLE_STATE, SET_POPUP_STATE, SET_POPUP_VALUE, SET_SECONDARY_CREATE_OPTION_VALUE } from '../actionType';
 import { useDispatch, useSelector } from 'react-redux';
 import { ASSESSMENT_CLOSED_POPUP_OPTION } from '../PopUpConfig';
-import { fontSize } from 'suneditor/src/plugins';
 
 const PopUpAssessmentNavigator = (props) => {
   const {
@@ -20,11 +19,8 @@ const PopUpAssessmentNavigator = (props) => {
     headerOne = 'assessment',
     headerOneBadgeOne = 'navigator',
     itemData,
-    isQuestionFlaged,
-    defaultCheckVal
   } = props;
   const dispatch = useDispatch();
-  // const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
   const {
     popupHeaderOne,
     popupHeaderOneBadgeOne,
@@ -37,144 +33,111 @@ const PopUpAssessmentNavigator = (props) => {
     popupContentArrValue,
     isPopUpValue
   } = useSelector((state) => state.PopUpReducer);
+  const { selectedAssociateInfo, relatedReviewListDistinctData, reviewListReqObj } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
+  );
+  console.log('relatedReviewListDistinctData',relatedReviewListDistinctData);
   const [itemNavigatorData, setNavigatorData] = useState(itemData);
+  const [flagedCheck, setFlagCheck] = useState(false);
   const handleClick = () => {
     console.log('cancelled call');
     setNavigatorData(itemData);
     /*according to creation mode popup sequence will change*/
   };
-  useEffect(() => {
-    setNavigatorData(itemData);
-  }, [itemData, isQuestionFlaged]);
+  // useEffect(() => {
+  //   setNavigatorData(itemData);
+  // }, [itemData, isQuestionFlaged]);
   let itemArray = itemData;
-  console.log('itemData', itemData);
-  console.log("isQuestionFlaged", isQuestionFlaged);
-  console.log('tertiaryOptionCheckValue', tertiaryOptionCheckValue)
   const handleOnClickFilter = (value) => {
-    console.log('handle Click', value);
     if (value === 'all') {
-      itemArray = itemData;
-      setNavigatorData([...itemData]);
+      //itemArray = itemData;
+      //setNavigatorData([...itemData]);
+      setFlagCheck(false);
+      dispatch({
+        type: SET_SECONDARY_CREATE_OPTION_VALUE,
+        payload: value
+      });
     } else if (value === 'flaged') {
-      let flagedData = itemData.filter(x => x.isFlagged === true);
-      itemArray = flagedData;
-      setNavigatorData([...flagedData]);
-    } else if (value === 'finish') {
+      setFlagCheck(true);
+      dispatch({
+        type: SET_SECONDARY_CREATE_OPTION_VALUE,
+        payload: value
+      });
+      //let flagedData = itemData.filter(x => x.isFlagged === true);
+      //itemArray = flagedData;
+      //setNavigatorData([...flagedData]);
+    } else if (value === 'finish' || value === 'terminate') {
       dispatch({
         type: SET_POPUP_STATE,
         payload: {
           popupHeaderOne: 'assessment',
-          popupHeaderOneBadgeOne: 'finish',
+          popupHeaderOneBadgeOne: value === 'finish' ? 'finish' : 'terminate',
           popupHeaderOneBadgeTwo: '',
           isPopUpValue: '',
           popupOpenType: 'primary',
           secondaryOptionCheckValue: 'assignment',
           popupContentArrValue: ASSESSMENT_CLOSED_POPUP_OPTION,
-          //selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
-          //selectedTagStatus: 'status'
         }
       });
       dispatch({ type: POPUP_OPEN, payload: 'POPUP_TERMINATE_SUSPEND' });
-      // dispatch({
-      //   type: SET_POPUP_VALUE,
-      //   payload: {
-      //     isPopUpValue: 'POPUP_TERMINATE_SUSPEND',
-      //     popupMode: ''
-      //   }
-      // });
-    } else if (value === 'terminate') {
-      dispatch({
-        type: SET_POPUP_STATE,
-        payload: {
-          popupHeaderOne: 'assessment',
-          popupHeaderOneBadgeOne: 'terminate',
-          popupHeaderOneBadgeTwo: '',
-          isPopUpValue: '',
-          popupOpenType: 'primary',
-          secondaryOptionCheckValue: 'assignment',
-          popupContentArrValue: ASSESSMENT_CLOSED_POPUP_OPTION,
-          //selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
-          //selectedTagStatus: 'status'
-        }
-      });
-      dispatch({ type: POPUP_OPEN, payload: 'POPUP_TERMINATE_SUSPEND' });
-    } else {
-
     }
+    else { }
+    
   }
-  console.log('itemData', itemArray);
-  const questionsArray = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    40,
-    41,
-    42,
-    43,
-    44,
-    45,
-    46,
-    47,
-    48,
-    49,
-    50
-  ];
   const ChangeOptionPopup = (e) => {
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
     if (dataVal === 'yes' && secondaryOptionCheckValue === 'assignment') {
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({
+        type: GET_ASSESSEE_ASSIGNMENT_SAGA,
+        payload: {
+          request: reviewListReqObj,
+          BadgeOne: 'active',
+          BadgeTwo: '',
+          BadgeThree: '',
+          assessmentStarted: true,
+          assignmentId: relatedReviewListDistinctData[0].assignmentId
+        }
+      });
     }
     if (dataVal === 'yes' && secondaryOptionCheckValue === 'sign-out') {
     }
     if (dataVal === 'yes' && secondaryOptionCheckValue === 'dashboard') {
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isExamMode', value: false }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'typeOfMiddlePaneList', value: '' }
+      });
     }
     dispatch({ type: POPUP_CLOSE });
   };
-  const BackHandlerEvent = (e) => { };
+  const BackHandlerEvent = (e) => { 
+    dispatch({
+      type: SET_POPUP_STATE,
+      payload: {
+        secondaryOptionCheckValue: 'all'
+      }
+    }); 
+    dispatch({ type: POPUP_OPEN, payload: 'NavigatorPOPUP' });
+  };
   const setSecondaryOptionValue = (e) => {
     //TODO: set secondary option in item
     var dataVal = e.currentTarget.getAttribute('data-value')
-
     console.log(dataVal, 'dataVal');
+    dispatch({
+      type: SET_SECONDARY_CREATE_OPTION_VALUE,
+      payload: dataVal
+    });
   };
-
   return (
     <div>
       <Popup isActive={isActive}>
@@ -201,11 +164,15 @@ const PopUpAssessmentNavigator = (props) => {
                 gridTemplateColumns: 'repeat(auto-fill, minmax(50px, 1fr))'
               }}
             >
-              {itemNavigatorData &&
-                itemNavigatorData.map((question, index) => {
-                  //const isQuestionFlaged = question.isFlagged
+              {itemArray &&
+                itemArray.map((question, index) => {
                   return (
-                    <div key={question} style={{ padding: '5px', boxSizing: 'border-box' }}>
+                    <div
+                      key={question}
+                      style={{
+                        padding: '5px', boxSizing: 'border-box',
+                        display: flagedCheck ? question.assesseeAssignmentAssessmentItemFlagged === true ? 'block' : 'none' : 'block'
+                      }}>
                       <div
                         style={{
                           flex: '1',
@@ -232,7 +199,7 @@ const PopUpAssessmentNavigator = (props) => {
                         >
                           {index + 1}
                         </Button>
-                        {question.isFlagged ? (
+                        {question.assesseeAssignmentAssessmentItemFlagged ? (
                           <i className={['fa fa-flag', 'jss13409'].join(' ')} ></i>
                         ) : (
                           < i></i>
@@ -351,7 +318,8 @@ const PopUpAssessmentNavigator = (props) => {
           headerOne={headerOne}
           headerOneBadgeOne={popupHeaderOneBadgeOne}
           onClick={BackHandlerEvent}
-          mode='error'
+          mode=''
+          isNotRevised={false}
         />
         <DialogContent className={['popupContent', 'fixed05PadDim'].join(' ')}>
           <JsonRenderComponent
