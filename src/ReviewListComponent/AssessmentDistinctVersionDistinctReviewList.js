@@ -2,44 +2,26 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   CLEAR_DISPLAY_PANE_THREE,
-  FILTERMODE,
-  FILTERMODE_ENABLE,
   POPUP_OPEN,
-  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
-  SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE
 } from '../actionType';
-import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
-import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION, SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
+import { SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
-import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
-import Check from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-import { getAssessmentItemDistinctApiCall } from '../Actions/AssessmentModuleAction';
 
-const AssessmentDistinctScaleDistinctReviewList = (props) => {
+const AssessmentDistinctVersionDistinctReviewList = (props) => {
   const dispatch = useDispatch();
-  const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
-  const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
-  const { informationFramework } = useSelector((state) => state.AssessmentReducer);
   const {
-    middlePaneSelectedValue,
     reviewListDistinctData,
-    selectedAssociateInfo,
     relatedReviewListDistinctData,
-    middlePaneHeaderBadgeOne,
     selectedTagsArray,
     isSelectActive,
     unselectedTagsArray,
-    typeOfMiddlePaneList
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   // {
   /** no need for pagination 
   const [isFetching, setIsFetching] = useState(false);
@@ -104,21 +86,14 @@ const AssessmentDistinctScaleDistinctReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
-    let tempArr = [];
-    let stats = e.currentTarget.getAttribute('status');
-    SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION.map((element) => {
-      if (stats === 'PUBLISHED' && element.data === 'revise')
-        tempArr.push({ ...element, disabled: true });
-      else tempArr.push(element);
-    });
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'assessment',
-        popupHeaderOneBadgeOne: 'scale',
+        popupHeaderOne: 'version',
+        popupHeaderOneBadgeOne: '',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: tempArr,
+        popupContentArrValue: SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }
@@ -128,10 +103,11 @@ const AssessmentDistinctScaleDistinctReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: tempArr
+        value: SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION
       }
     });
   };
+  console.log('relatedReviewListDistinctData',relatedReviewListDistinctData);
   return (
     <div>
       {listDistinctData && (
@@ -148,7 +124,7 @@ const AssessmentDistinctScaleDistinctReviewList = (props) => {
         />
       )}
       {listDistinctData &&
-        listDistinctData.scales.map((item, index) => {
+        listDistinctData.versions.map((item, index) => {
           return (
             <div className="containerPadding" key={index}>
               <ReviewList
@@ -156,12 +132,10 @@ const AssessmentDistinctScaleDistinctReviewList = (props) => {
                 id={index}
                 tag={index}
                 // isSelectedReviewList={middlePaneSelectedValue === item.id}
-                isInformationValue={item.assessmentScaleOneWeightage}
-                status={'weightage'}
-                isInformation
-                actualStatus={listDistinctData.assessmentStatus}
-                textOne={item.assessmentScaleOneName}
-                textTwo={item.assessmentScaleOneDescription}
+                status={''}
+                // actualStatus={item.informationEngagement.itemStatus}
+                textOne={item.assessmentVersionName}
+                textTwo={item.assessmentVersionDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
@@ -176,4 +150,4 @@ const AssessmentDistinctScaleDistinctReviewList = (props) => {
     </div>
   );
 };
-export default AssessmentDistinctScaleDistinctReviewList;
+export default AssessmentDistinctVersionDistinctReviewList;

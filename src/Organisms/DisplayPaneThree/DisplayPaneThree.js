@@ -169,6 +169,7 @@ import DisplayPaneThreeSectionOneAssesseeReport from '../../Molecules/DisplayPan
 import DisplayPaneThreeSectionOneAssessmentSection from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentSection';
 import DisplayPaneThreeSectionOneAssessmentScale from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentScale';
 import DisplayPaneThreeSectionOneAssessmentCluster from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentCluster';
+import DisplayPaneThreeSectionOneAssessmentVersion from '../../Molecules/DisplayPaneThree/DisplayPaneThreeSectionOneAssessmentVersion';
 
 export const DisplayPaneThree = () => {
   const dispatch = useDispatch();
@@ -222,6 +223,7 @@ export const DisplayPaneThree = () => {
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const scaleInfo = useSelector((state) => state.ScaleCreateReducer);
   const clusterInfo = useSelector((state) => state.ClusterCreateReducer);
+  const versionInfo = useSelector((state) => state.VerCreateReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const aseessmentSection = useSelector((state) => state.SectionCreateReducer);
@@ -479,6 +481,20 @@ export const DisplayPaneThree = () => {
       displayPaneLeftBadgeText: ''
     }
   ];
+  const rightPaneSectionsAssessmentVersion = [
+    {
+      id: 'section1',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentVersion,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    },
+    {
+      id: 'section2',
+      sectionComponent: DisplayPaneThreeSectionOneAssessmentVersion,
+      displayPaneLeftHeaderText: '',
+      displayPaneLeftBadgeText: ''
+    }
+  ];
   const rightPaneSectionsAssesseeReport = [
     {
       id: 'section1',
@@ -659,6 +675,9 @@ export const DisplayPaneThree = () => {
   const [selectedSectionAssessmentSection, setSelectedSectionAssessmentSection] = useState(
     rightPaneSectionsAssessmentSection[0]
   );
+  const [selectedSectionAssessmentVersion, setSelectedSectionAssessmentVersion] = useState(
+    rightPaneSectionsAssessmentVersion[0]
+  );
   const [selectedSectionAssessmentScale, setSelectedSectionAssessmentScale] = useState(
     rightPaneSectionsAssessmentScales[0]
   );
@@ -714,6 +733,7 @@ export const DisplayPaneThree = () => {
     setSelectedSectionAssignmentType(rightPaneSectionsAssignmentType[0]);
     setSelectedSectionAssessmentType(rightPaneSectionsAssessmentType[0]);
     setSelectedSectionAssessmentSection(rightPaneSectionsAssessmentSection[0]);
+    setSelectedSectionAssessmentVersion(rightPaneSectionsAssessmentVersion[0]);
     setSelectedSectionAssessmentScale(rightPaneSectionsAssessmentScales[0]);
     setSelectedSectionAssessmentCluster(rightPaneSectionsAssessmentCluster[0]);
     setSelectedSectionAssesseeReport(rightPaneSectionsAssesseeReport[0]);
@@ -2019,6 +2039,34 @@ export const DisplayPaneThree = () => {
           selectedSector: selectedTagValue
         }
       });
+    } else if (headerOneBadgeOne === 'version' && headerOne === 'assessments') {
+      let versionObj = assessmentInfo.informationFramework.assessmentSection;
+      versionObj[selectedTagValue] = versionInfo.versionInformation;
+      let id = relatedReviewListDistinctData[0].id;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessment: {
+          id,
+          informationFramework: {
+            assessmentSection: versionObj
+          }
+        }
+      };
+      console.log('ASSESSMENT REVISE ===', reqBody);
+      // dispatch({ type: LOADER_START });
+      // dispatch({
+      //   type: ASSESSMENT_INFO_REVISE_SAGA,
+      //   payload: {
+      //     secondaryOptionCheckValue: headerOneBadgeTwo,
+      //     headerOne: 'assessment',
+      //     reqBody,
+      //     createMode,
+      //     assessmentSector: 'cluster',
+      //     selectedSector: selectedTagValue
+      //   }
+      // });
     } else if (headerOneBadgeOne === 'section' && headerOne === 'assessments') {
       let sectionObj = assessmentInfo.informationFramework.assessmentSection;
       if (
@@ -3022,6 +3070,21 @@ export const DisplayPaneThree = () => {
       });
     }
   };
+  const reviseAssessmentVersionBasicInformation = (e) => {
+    const labelName = e.currentTarget.getAttribute('data-value');
+    if (labelName === 'name') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'VERSIONCREATE' }
+      });
+    }
+    if (labelName === 'description') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'ALIASPOPUP', popupMode: 'VERSIONCREATE' }
+      });
+    }
+  };
   return (
     <>
       <div>
@@ -3933,6 +3996,46 @@ export const DisplayPaneThree = () => {
                 listSections={rightPaneSectionsAssessmentSection}
                 selectedSection={selectedSectionAssessmentSection}
                 setSelectedSection={setSelectedSectionAssessmentSection}
+              />
+            </div>
+            {reviewMode === 'revise' && (
+              <FooterIconTwo
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+              />
+            )}
+          </>
+        )}
+        {isReviewRevise &&
+        responseObject &&
+        headerOne === 'assessments' &&
+        headerOneBadgeOne === 'version' && (
+          <>
+            <div style={{ padding: '2.5px' }}>
+              <div style={{ padding: '2.5px' }}>
+                <BasicCard
+                  isAlertActive
+                  isFlagActive={responseObject?.assessmentVersionFlag || false}
+                  className=""
+                  labelTextOneOne="name"
+                  labelTextOneTwo="description"
+                  textOneOne={responseObject?.assessmentVersionName || 'No Information'}
+                  textOneTwo={responseObject?.assessmentVersionDescription || 'No Information'}
+                  isVerifiedActiveName={false}
+                  isVerifiedActivePicture={false}
+                  mode={reviewMode}
+                  isImageActive={responseObject?.assessmentVersionPicture}
+                  imageOne={responseObject?.assessmentVersionPicture}
+                  onClickRevise={reviseAssessmentVersionBasicInformation}
+                />
+              </div>
+              <Sections
+                listSections={rightPaneSectionsAssessmentVersion}
+                selectedSection={selectedSectionAssessmentVersion}
+                setSelectedSection={setSelectedSectionAssessmentVersion}
               />
             </div>
             {reviewMode === 'revise' && (

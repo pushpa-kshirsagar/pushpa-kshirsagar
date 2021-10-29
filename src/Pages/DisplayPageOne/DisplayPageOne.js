@@ -60,6 +60,7 @@ import PopUpItemConfig from '../../PopUpInformation/PopUpItemConfig';
 import PopUpItemFramework from '../../PopUpInformation/PopUpItemFramework';
 import PopUpClusterCreate from '../../Molecules/PopUpCreate/PopUpClusterCreate';
 import PopUpScaleCreate from '../../Molecules/PopUpCreate/PopUpScaleCreate';
+import PopUpVersionCreate from '../../Molecules/PopUpCreate/PopUpVersionCreate';
 import PopUpSectionCreate from '../../Molecules/PopUpCreate/PopUpSectionCreate';
 
 // import { useHistory } from 'react-router-dom';
@@ -490,6 +491,7 @@ const DisplayPageOne = () => {
       {popupMode === 'CLUSTERCREATE' && <PopUpClusterCreate headerOne={'cluster'} />}
       {popupMode === 'SECTIONCREATE' && <PopUpSectionCreate headerOne={'section'} />}
       {popupMode === 'SCALECREATE' && <PopUpScaleCreate headerOne={'scale'} />}
+      {popupMode === 'VERSIONCREATE' && <PopUpVersionCreate headerOne={'version'} />}
       <PopUpItemFramework
         isActive={isPopUpValue === 'ITEM_FRAMEWORK_POPUP'}
         headerPanelColour={'genericOne'}

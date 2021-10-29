@@ -69,7 +69,9 @@ import {
   CLEAR_SECTION_REDUCER_STATE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_SECTION_REDUCER_STATE,
-  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE
+  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+  SET_VERSION_REDUCER_STATE,
+  CLEAR_VERSION_REDUCER_STATE
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -1484,6 +1486,24 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
         dispatch({ type: LOADER_STOP });
       }
+      if (typeOfMiddlePaneList === 'assessmentversionsReviewList') {
+        dispatch({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'version',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject: relatedReviewListDistinctData[0].versions[selectedTagValue],
+            reviewMode: isReviseMode ? 'revise' : ''
+          }
+        });
+        dispatch({
+          type: SET_VERSION_REDUCER_STATE,
+          payload: relatedReviewListDistinctData[0].versions[selectedTagValue]
+        });
+        dispatch({ type: LOADER_STOP });
+      }
       // if (typeOfMiddlePaneList === 'associatesNodeDistinctReviewList') {
       //   dispatch({ type: LOADER_STOP });
       // }
@@ -1792,6 +1812,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         if (
           popupHeaderOne === 'scales' ||
           popupHeaderOne === 'sections' ||
+          popupHeaderOne === 'versions' ||
           popupHeaderOne === 'clusters'
         ) {
           dispatch({ type: LOADER_START });
@@ -2717,6 +2738,16 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
       dispatch({
         type: SET_POPUP_VALUE,
         payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'SCALECREATE' }
+      });
+    } else if (
+      dataVal === 'information' &&
+      popupHeaderOneBadgeTwo === 'create' &&
+      popupHeaderOne === 'versions'
+    ) {
+      dispatch({ type: CLEAR_VERSION_REDUCER_STATE });
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: 'NAMEPOPUP', popupMode: 'VERSIONCREATE' }
       });
     } else {
       dispatch({

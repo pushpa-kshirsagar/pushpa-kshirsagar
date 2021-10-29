@@ -22,6 +22,7 @@ import AssesseeAssignmentAssessmentReducer from './AssesseeAssignmentAssessmentR
 import ClusterCreateReducer from './ClusterCreateReducer';
 import ScaleCreateReducer from './ScaleCreateReducer';
 import SectionCreateReducer from './SectionCreateReducer';
+import VersionCreateReducer from './VersionCreateReducer';
 
 export default combineReducers({
   PopUpReducer,
@@ -46,5 +47,6 @@ export default combineReducers({
   AssesseeAssignmentAssessmentReducer,
   ClusterCreateReducer,
   ScaleCreateReducer,
-  SectionCreateReducer
+  SectionCreateReducer,
+  VersionCreateReducer
 });

@@ -287,7 +287,9 @@ function* workerReviewInfoAssessmentSaga(data) {
       //     ?.itemFrameworkOneType,
       //   yield put
       // );
-      const itemFrameworkOneType =assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne?.itemFrameworkOneType
+      const itemFrameworkOneType =
+        assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne
+          ?.itemFrameworkOneType;
       let reviseSetting = {
         blankState: true,
         classificationState: false,
@@ -480,6 +482,24 @@ function* workerReviewInfoAssessmentSecSaga(data) {
           responseObject: [
             {
               clusters: assessmentInfo?.informationFramework?.assessmentCluster || [],
+              assessmentName: assessmentInfo.informationBasic.assessmentName,
+              assessmentDescription: assessmentInfo.informationBasic.assessmentDescription,
+              assessmentStatus: assessmentInfo.informationEngagement.assessmentStatus,
+              id: assessmentInfo.id
+            }
+          ]
+        };
+      }
+      if (data.payload.typeOfMiddlePaneList === 'assessmentversionsReviewList') {
+        BadgeOne = 'versions';
+        reviseResponseObj = {
+          countTotal:
+            assessmentInfo?.informationFramework?.assessmentSection[0].assessmentVersion?.length ||
+            0,
+          responseObject: [
+            {
+              versions:
+                assessmentInfo?.informationFramework?.assessmentSection[0]?.assessmentVersion || [],
               assessmentName: assessmentInfo.informationBasic.assessmentName,
               assessmentDescription: assessmentInfo.informationBasic.assessmentDescription,
               assessmentStatus: assessmentInfo.informationEngagement.assessmentStatus,

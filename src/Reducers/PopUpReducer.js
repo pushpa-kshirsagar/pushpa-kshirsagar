@@ -121,7 +121,8 @@ const initialState = {
     jobprofiles: REVIEW_DISTINCT_POPUP_OPTION,
     clusters: CLUSTER_SCALE_POPUP_OPTION,
     scales: CLUSTER_SCALE_POPUP_OPTION,
-    sections: CLUSTER_SCALE_POPUP_OPTION
+    sections: CLUSTER_SCALE_POPUP_OPTION,
+    versions: CLUSTER_SCALE_POPUP_OPTION
   }
 };
 
@@ -385,7 +386,7 @@ const PopUpReducer = (istate = initialState, action) => {
             arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           }
           if (action.payload.badgeValue === 'publish' && istate.selectedTagStatus === 'PUBLISHED') {
-            arrVal = [{ ...arrVal[0], disabled: true },arrVal[1]];
+            arrVal = [{ ...arrVal[0], disabled: true }, arrVal[1]];
           }
           if (
             (action.payload.badgeValue === 'suspend' &&
@@ -425,6 +426,8 @@ const PopUpReducer = (istate = initialState, action) => {
                 ? action.payload.keyValue
                 : action.payload.keyValue === 'scales'
                 ? action.payload.keyValue
+                : action.payload.keyValue === 'versions'
+                ? action.payload.keyValue
                 : istate.popupHeaderOne,
             isPopUpOpen: true,
             popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,
@@ -434,6 +437,8 @@ const PopUpReducer = (istate = initialState, action) => {
                 : action.payload.keyValue === 'sections'
                 ? ''
                 : action.payload.keyValue === 'scales'
+                ? ''
+                : action.payload.keyValue === 'versions'
                 ? ''
                 : action.payload.badgeValue,
             popupOpenType: 'secondary',
@@ -455,7 +460,7 @@ const PopUpReducer = (istate = initialState, action) => {
                 : 'all'
           };
         }
-      } else if (istate.popupOpenType == 'secondary') {
+      } else if (istate.popupOpenType === 'secondary') {
         return {
           ...istate,
           popupHeaderOne:
@@ -465,6 +470,8 @@ const PopUpReducer = (istate = initialState, action) => {
               ? 'scales'
               : istate.popupHeaderOneBadgeTwo === 'sections'
               ? 'sections'
+              : istate.popupHeaderOneBadgeTwo === 'versions'
+              ? 'versions'
               : istate.popupHeaderOne,
           isPopUpOpen: true,
           popupHeaderOneBadgeOne: istate.popupHeaderOneBadgeOne,

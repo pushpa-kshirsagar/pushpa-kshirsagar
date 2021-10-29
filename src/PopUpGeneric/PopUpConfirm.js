@@ -33,6 +33,7 @@ const PopUpConfirm = (props) => {
   };
   const handleBack = () => {
     /*according manage back state*/
+    console.log('popupMode',popupMode);
     if (popupMode === 'ASSESSEE_SIGN_ON' || popupMode === 'ASSESSEE_CREATE') {
       dispatch({ type: PREVIOUS_POPUP, payload: { prevPopUpValue: isPopUpValue } });
       dispatch({ type: SET_NEXT_POPUP, payload: { isPopUpValue: 'ASSESSEENAMEPOPUP' } });
@@ -66,6 +67,7 @@ const PopUpConfirm = (props) => {
       popupMode === 'SCALECREATE' ||
       popupMode === 'CLUSTERCREATE' ||
       popupMode === 'SECTIONCREATE' ||
+      popupMode === 'VERSIONCREATE' ||
       popupMode === 'ITEMCREATE'
     ) {
       dispatch({

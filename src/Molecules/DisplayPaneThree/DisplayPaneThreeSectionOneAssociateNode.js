@@ -171,7 +171,7 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
     },
     {
       id: 'a6',
-      labelTextOneOne: 'nodes',
+      labelTextOneOne: 'node',
       labelTextOneOneBadges: [
         {
           labelTextOneOneBadge: 'ascendant',
@@ -301,7 +301,7 @@ const DisplayPaneThreeSectionOneAssociateNode = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
     if (
-      labelName === 'nodes' &&
+      labelName === 'node' &&
       selectedBadgeName === 'ascendant' &&
       innerSelectedBadgeName === 'primary'
     ) {

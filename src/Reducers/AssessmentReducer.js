@@ -151,7 +151,16 @@ const initialState = {
         },
         assessmentSectionSequence: 0,
         assessmentSectionSynopsis: [],
-        assessmentSectionTime: null
+        assessmentSectionTime: null,
+        assessmentVersion: [
+          {
+            assessmentVersionName: 'Version',
+            assessmentVersionVerification: false,
+            assessmentVersionDescription: 'Generic',
+            assessmentSectionVersion: 0,
+            assessmentSectionVersionItemDistinct: []
+          }
+        ]
       }
     ],
     assessmentSectionItemDistinctRevise: null,

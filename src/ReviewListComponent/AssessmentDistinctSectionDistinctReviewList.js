@@ -21,6 +21,7 @@ const AssessmentDistinctSectionDistinctReviewList = (props) => {
     selectedTagsArray,
     isSelectActive,
     unselectedTagsArray,
+    middlePaneSelectedValue
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   // {
   /** no need for pagination 
@@ -86,16 +87,23 @@ const AssessmentDistinctSectionDistinctReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let tempArr = [];
+    let stats = e.currentTarget.getAttribute('status');
+    SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION.map((element) => {
+      if (stats === 'PUBLISHED' && element.data === 'revise')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    });
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'section',
-        popupHeaderOneBadgeOne: '',
+        popupHeaderOne: 'assessment',
+        popupHeaderOneBadgeOne: 'section',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: tempArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
-        selectedTagStatus: e.currentTarget.getAttribute('status')
+        selectedTagStatus: stats
       }
     });
     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
@@ -131,9 +139,9 @@ const AssessmentDistinctSectionDistinctReviewList = (props) => {
                 className=""
                 id={index}
                 tag={index}
-                // isSelectedReviewList={middlePaneSelectedValue === item.id}
+                isSelectedReviewList={middlePaneSelectedValue === index}
                 status={''}
-                // actualStatus={item.informationEngagement.itemStatus}
+                actualStatus={listDistinctData.assessmentStatus}
                 textOne={item.assessmentSectionName}
                 textTwo={item.assessmentSectionDescription}
                 isTooltipActive={false}

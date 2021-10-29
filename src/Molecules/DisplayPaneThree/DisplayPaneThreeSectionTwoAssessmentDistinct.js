@@ -49,6 +49,11 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
     // synopsisArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
     synopsisArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
   });
+  let sectionArr = [];
+  informationFramework?.assessmentSection.map((comm, index) => {
+    // sectionArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
+    sectionArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
+  });
   let adminSequenseArr = [];
   informationFramework?.assessmentCommunique.map((comm, ind) => {
     adminSequenseArr.push(`assessment communiqué ${ind + 1}`);
@@ -261,12 +266,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       id: 'a5',
       labelTextOneOne: 'section',
       isListCard: false,
-      labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: '1',
-          textOne: informationFramework?.assessmentSection
-        }
-      ],
+      labelTextOneOneBadges: sectionArr,
       innerAssociateList: [],
       innerInfo: 'assessment',
       IconOne: null

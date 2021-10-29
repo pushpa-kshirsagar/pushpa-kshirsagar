@@ -1,45 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   CLEAR_DISPLAY_PANE_THREE,
-  FILTERMODE,
-  FILTERMODE_ENABLE,
   POPUP_OPEN,
-  SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
-  SET_MOBILE_PANE_STATE,
   SET_POPUP_STATE
 } from '../actionType';
-import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
-import { FilterList } from '@material-ui/icons';
 import ReviewList from '../Molecules/ReviewList/ReviewList';
-import { ASSOCIATE_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 import Card from '../Molecules/Card/Card';
 import CrossIcon from '@material-ui/icons/Clear';
 import { onClickCheckBoxSelection } from '../Actions/AssesseeModuleAction';
-import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
-import Check from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-import { getAssessmentItemDistinctApiCall } from '../Actions/AssessmentModuleAction';
+import { SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION } from '../PopUpConfig';
 
 const AssessmentDistinctClusterDistinctReviewList = (props) => {
   const dispatch = useDispatch();
-  const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
-  const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
-  const { informationFramework } = useSelector((state) => state.AssessmentReducer);
   const {
-    middlePaneSelectedValue,
     reviewListDistinctData,
-    selectedAssociateInfo,
     relatedReviewListDistinctData,
-    middlePaneHeaderBadgeOne,
     selectedTagsArray,
     isSelectActive,
-    unselectedTagsArray,
-    typeOfMiddlePaneList
+    unselectedTagsArray
   } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   // {
   /** no need for pagination 
   const [isFetching, setIsFetching] = useState(false);
@@ -104,14 +86,21 @@ const AssessmentDistinctClusterDistinctReviewList = (props) => {
   const listDistinctData = relatedReviewListDistinctData[0];
   const openListPopup = (e) => {
     console.log(e.currentTarget.getAttribute('tag'));
+    let tempArr = [];
+    let stats = e.currentTarget.getAttribute('status');
+    SECTION_SCALE_CLUSTER_REVIEW_LIST_POPUP_OPTION.map((element) => {
+      if (stats === 'PUBLISHED' && element.data === 'revise')
+        tempArr.push({ ...element, disabled: true });
+      else tempArr.push(element);
+    });
     dispatch({
       type: SET_POPUP_STATE,
       payload: {
-        popupHeaderOne: 'cluster',
-        popupHeaderOneBadgeOne: '',
+        popupHeaderOne: 'assessment',
+        popupHeaderOneBadgeOne: 'cluster',
         isPopUpValue: '',
         popupOpenType: 'primary',
-        popupContentArrValue: ASSOCIATE_REVIEW_LIST_POPUP_OPTION,
+        popupContentArrValue: tempArr,
         selectedTagValue: e.currentTarget.getAttribute('tag'),
         selectedTagStatus: e.currentTarget.getAttribute('status')
       }
@@ -121,7 +110,7 @@ const AssessmentDistinctClusterDistinctReviewList = (props) => {
       type: SET_DISPLAY_TWO_SINGLE_STATE,
       payload: {
         stateName: 'middlePaneListPopupOptions',
-        value: ASSOCIATE_REVIEW_LIST_POPUP_OPTION
+        value: tempArr
       }
     });
   };
@@ -150,7 +139,7 @@ const AssessmentDistinctClusterDistinctReviewList = (props) => {
                 tag={index}
                 // isSelectedReviewList={middlePaneSelectedValue === item.id}
                 status={''}
-                // actualStatus={item.informationEngagement.itemStatus}
+                actualStatus={listDistinctData.assessmentStatus}
                 textOne={item.assessmentClusterOneName}
                 textTwo={item.assessmentClusterOneDescription}
                 isTooltipActive={false}

@@ -67,7 +67,14 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
     });
   });
   let assessment = assignmentRelatedReviewListPaneThree?.assessment || [];
-
+  let communiqueArr = [];
+  informationFramework?.assignmentCommunique?.map((comm, index) => {
+    communiqueArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
+  });
+  let synopsisArr = [];
+  informationFramework?.assignmentSynopsis?.map((comm, index) => {
+    synopsisArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
+  });
   let assessmentArray = [];
   assessment.forEach((ob) => {
     const { id, informationBasic } = ob;
@@ -193,7 +200,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
     {
       id: 'a1',
       labelTextOneOne: 'communiqué',
-      labelTextOneOneBadges: [],
+      labelTextOneOneBadges: communiqueArr,
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
@@ -266,7 +273,7 @@ const DisplayPaneThreeSectionTwoAssignment = () => {
     {
       id: 'synopsis',
       labelTextOneOne: 'synopsis',
-      labelTextOneOneBadges: [],
+      labelTextOneOneBadges: synopsisArr,
       innerAssociateList: [],
       innerInfo: 'assessees',
       isListCard: false,
