@@ -68,7 +68,8 @@ import {
   ASSOCIATE_ITEMSETUP_REVISE_SAGA,
   ASSOCIATE_ANALYTICSETUP_REVISE_SAGA,
   ASSOCIATE_ASSIGNMENTSETUP_REVISE_SAGA,
-  FILTERMODE_ENABLE
+  FILTERMODE_ENABLE,
+  CLEAR_VERSION_REDUCER_STATE
 } from '../../actionType';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
@@ -215,15 +216,14 @@ export const DisplayPaneThree = () => {
     middlePaneHeaderBadgeTwo,
     relatedReviewListDistinctData,
     scanCount,
-    selectedTagsArray,
-    unselectedTagsArray,
-    isSelectActive
+    assessmentSelecedSection,
+    assessmentResponseObject
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const scaleInfo = useSelector((state) => state.ScaleCreateReducer);
   const clusterInfo = useSelector((state) => state.ClusterCreateReducer);
-  const versionInfo = useSelector((state) => state.VerCreateReducer);
+  const versionInfo = useSelector((state) => state.VersionCreateReducer);
   const assignmentInfo = useSelector((state) => state.AssignmentReducer);
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const aseessmentSection = useSelector((state) => state.SectionCreateReducer);
@@ -1800,14 +1800,14 @@ export const DisplayPaneThree = () => {
       });
     } else if (headerOneBadgeOne === 'information' && headerOne === 'assessment') {
       const { informationBasic, informationAllocation, informationFramework } = assessmentInfo;
-      if(informationFramework?.assessmentTime!==0){
+      if (informationFramework?.assessmentTime !== 0) {
         // let assessmentTimeConvesion=informationFramework?.assessmentTime.split(':');
         // let assessmentTimeMillisec=(Number(assessmentTimeConvesion[0])*60*60 +Number(assessmentTimeConvesion[1])*60)*1000;
-        let assessmentTimeMillisec=converTimeToMiliseconds(informationFramework?.assessmentTime);
-        console.log('assessmentTimeMillisec',assessmentTimeMillisec);
+        let assessmentTimeMillisec = converTimeToMiliseconds(informationFramework?.assessmentTime);
+        console.log('assessmentTimeMillisec', assessmentTimeMillisec);
         informationFramework.assessmentTime = assessmentTimeMillisec;
       }
-      console.log('informationFramework',informationFramework);
+      console.log('informationFramework', informationFramework);
       const { id } = responseObject;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -2040,8 +2040,9 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'version' && headerOne === 'assessments') {
-      let versionObj = assessmentInfo.informationFramework.assessmentSection;
-      versionObj[selectedTagValue] = versionInfo.versionInformation;
+      let sectionObj = assessmentResponseObject.informationFramework.assessmentSection;
+      sectionObj[assessmentSelecedSection].assessmentVersion[selectedTagValue] =
+        versionInfo.versionInformation;
       let id = relatedReviewListDistinctData[0].id;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,
@@ -2050,23 +2051,24 @@ export const DisplayPaneThree = () => {
         assessment: {
           id,
           informationFramework: {
-            assessmentSection: versionObj
+            assessmentSection: sectionObj
           }
         }
       };
       console.log('ASSESSMENT REVISE ===', reqBody);
-      // dispatch({ type: LOADER_START });
-      // dispatch({
-      //   type: ASSESSMENT_INFO_REVISE_SAGA,
-      //   payload: {
-      //     secondaryOptionCheckValue: headerOneBadgeTwo,
-      //     headerOne: 'assessment',
-      //     reqBody,
-      //     createMode,
-      //     assessmentSector: 'cluster',
-      //     selectedSector: selectedTagValue
-      //   }
-      // });
+      dispatch({ type: LOADER_START });
+      dispatch({ type: CLEAR_VERSION_REDUCER_STATE });
+      dispatch({
+        type: ASSESSMENT_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assessment',
+          reqBody,
+          createMode,
+          assessmentSector: 'version',
+          selectedSector: selectedTagValue
+        }
+      });
     } else if (headerOneBadgeOne === 'section' && headerOne === 'assessments') {
       let sectionObj = assessmentInfo.informationFramework.assessmentSection;
       if (
@@ -2079,9 +2081,11 @@ export const DisplayPaneThree = () => {
         );
         aseessmentSection.sectionInformation.assessmentSectionItemDistinct = [...existingItemId];
       }
-      if(aseessmentSection?.sectionInformation?.assessmentSectionTime!==0){
-        let assessmentSectionTimeMillisec=converTimeToMiliseconds(aseessmentSection?.sectionInformation?.assessmentSectionTime);
-        console.log('assessmentSectionTimeMillisec',assessmentSectionTimeMillisec);
+      if (aseessmentSection?.sectionInformation?.assessmentSectionTime !== 0) {
+        let assessmentSectionTimeMillisec = converTimeToMiliseconds(
+          aseessmentSection?.sectionInformation?.assessmentSectionTime
+        );
+        console.log('assessmentSectionTimeMillisec', assessmentSectionTimeMillisec);
         aseessmentSection.sectionInformation.assessmentSectionTime = assessmentSectionTimeMillisec;
       }
       sectionObj[selectedTagValue] = aseessmentSection.sectionInformation;
@@ -4009,7 +4013,7 @@ export const DisplayPaneThree = () => {
             )}
           </>
         )}
-        {isReviewRevise &&
+      {isReviewRevise &&
         responseObject &&
         headerOne === 'assessments' &&
         headerOneBadgeOne === 'version' && (

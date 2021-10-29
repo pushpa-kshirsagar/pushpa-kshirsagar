@@ -494,7 +494,7 @@ function* workerReviewInfoAssessmentSecSaga(data) {
         BadgeOne = 'versions';
         reviseResponseObj = {
           countTotal:
-            assessmentInfo?.informationFramework?.assessmentSection[0].assessmentVersion?.length ||
+            assessmentInfo?.informationFramework?.assessmentSection[0].assessmentVersion.length ||
             0,
           responseObject: [
             {
@@ -586,6 +586,20 @@ function* workerReviseInfoAssessmentSaga(data) {
             headerOneBadgeThree: 'key',
             responseObject:
               userResponse.responseObject[0].informationFramework.assessmentSection[selectedSector],
+            reviewMode: createMode
+          }
+        });
+        yield put({ type: LOADER_STOP });
+      } else if (assessmentSector === 'version') {
+        yield put({
+          type: SET_DISPLAY_PANE_THREE_STATE,
+          payload: {
+            headerOne: 'assessments',
+            headerOneBadgeOne: 'version',
+            headerOneBadgeTwo: 'information',
+            headerOneBadgeThree: 'key',
+            responseObject:
+              userResponse.responseObject[0].informationFramework.assessmentSection[0].assessmentVersion[selectedSector],
             reviewMode: createMode
           }
         });

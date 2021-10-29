@@ -43,6 +43,8 @@ const PopUpVersionCreate = (props) => {
     dispatch({ type: LOADER_START });
     dispatch({ type: CREATE_ASSESSMENT_SECTION_SAGA, payload: requestObj });
   };
+  console.log('versionInformation', versionInformation);
+
   return (
     <div>
       <PopUpTextField

@@ -53,15 +53,19 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
+  const { versionInformation } = useSelector((state) => state.VersionCreateReducer);
 
   const setPrevList = () => {
     dispatch({ type: LOADER_START });
-    let array = assessmentResponseObject?.informationFramework?.assessmentSection || [];
+    let array =
+      assessmentResponseObject?.informationFramework?.assessmentSection[0].assessmentVersion || [];
+    // let array = assessmentResponseObject?.informationFramework?.assessmentSection || [];
     let reviseResponseObj = {
-      countTotal: array?.length || 0,
+      countTotal: array.length || 0,
       responseObject: [
         {
-          sections: array || [],
+          // sections: array || [],
+          versions: array || [],
           assessmentName: assessmentResponseObject?.informationBasic.assessmentName,
           assessmentDescription: assessmentResponseObject?.informationBasic.assessmentDescription,
           assessmentStatus: assessmentResponseObject?.informationEngagement.assessmentStatus,
@@ -78,12 +82,13 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
         type: SET_MIDDLEPANE_STATE,
         payload: {
           middlePaneHeader: 'assessments',
-          middlePaneHeaderBadgeOne: 'sections',
+          middlePaneHeaderBadgeOne: 'version',
           middlePaneHeaderBadgeTwo: 'distinct',
           middlePaneHeaderBadgeThree: 'active',
           middlePaneHeaderBadgeFour: '',
-          typeOfMiddlePaneList: 'assessmentsectionsReviewList',
-          scanCount: reviseResponseObj.length,
+          // typeOfMiddlePaneList: 'assessmentsectionsReviewList',
+          typeOfMiddlePaneList: 'assessmentversionsReviewList',
+          scanCount: reviseResponseObj.countTotal,
           showMiddlePaneState: true
         }
       });
@@ -117,10 +122,15 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
     let existingItemId = [];
     let middlepaneName = relatedReviewListDistinctData[0].typeOfMiddlePaneList;
     if (middlepaneName === 'assessmentSectionItemDistinctReviewList') {
-      sectionInformation.assessmentSectionItemDistinct = selectedTagsArray;
+      // sectionInformation.assessmentSectionItemDistinct = selectedTagsArray;
+      // dispatch({
+      //   type: SET_SECTION_REDUCER_STATE,
+      //   payload: sectionInformation
+      // });
+      versionInformation.assessmentVersionItemDistinct = selectedTagsArray;
       dispatch({
         type: SET_SECTION_REDUCER_STATE,
-        payload: sectionInformation
+        payload: versionInformation
       });
     } else if (middlepaneName === 'assessmentSectionTrialDistinctReviewList') {
       sectionInformation.assessmentSectionItemTrial = selectedTagsArray;
@@ -212,7 +222,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
           textTwoOne={listDistinctData.assessmentSectionDescription}
           IconOne={CrossIcon}
           isIcon={true}
-          labelTwoTwo={'section'}
+          labelTwoTwo={'version'}
           onClickIconOne={closeRelatedList}
           isAlliance
           relatedCardFixed={true}
@@ -226,12 +236,12 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item.id}
-                isSelectedReviewList={middlePaneSelectedValue === item.id}
-                status={item.informationEngagement.itemStatus}
-                actualStatus={item.informationEngagement.itemStatus}
-                textOne={item.informationBasic.itemName}
-                textTwo={item.informationBasic.itemDescription}
+                tag={item?.id}
+                isSelectedReviewList={middlePaneSelectedValue === item?.id}
+                status={item.informationEngagement?.itemStatus || 'published'}
+                actualStatus={item.informationEngagement?.itemStatus}
+                textOne={item.informationBasic?.itemName}
+                textTwo={item.informationBasic?.itemDescription}
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}

@@ -70,6 +70,7 @@ const initialState = {
   errorResponse: '',
   responseObject: '',
   assessmentResponseObject: '',
+  assessmentSelecedSection: '',
   credentialOptionArr: [],
   jobProfilerReviewList: null,
   jobProfileFunctionReviewList: [],

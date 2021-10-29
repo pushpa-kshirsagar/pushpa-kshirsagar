@@ -281,8 +281,8 @@ const PopUpItemFramework = (props) => {
     // setpolarity(polarity);
     dispatch({ type: POPUP_CLOSE });
   };
-console.log('itemConfigStates',itemConfigStates);
-console.log('props',props);
+// console.log('itemConfigStates',itemConfigStates);
+// console.log('props',props);
   return (
     <div>
       <Popup isActive={isActive}>
