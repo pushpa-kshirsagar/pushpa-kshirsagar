@@ -55,16 +55,19 @@ const PopUpItemFramework = (props) => {
   const [classification, setclassification] = useState([]);
   const [level, setlevel] = useState(null);
   const [polarity, setpolarity] = useState('');
-  const [score, setscore] = useState(null);
+  const [score, setscore] = useState(itemFrameworkOne?.itemFrameworkOneScore);
   const [scale, setscale] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
+  console.log('props', props);
   useEffect(() => {
     if (subQuestionId) {
       let subques = itemFrameworkOne.itemFrameworkOneSection.filter(function (sub) {
         return sub.itemFrameworkOneSectionSequence === subQuestionId;
       });
       setscore(subques[0]?.itemFrameworkOneSection?.itemFrameworkOneScore);
+    } else {
+      setscore(itemFrameworkOne?.itemFrameworkOneScore);
     }
     if (itemFrameworkOneCluster.length > 0) {
       let cluster = [];
@@ -281,8 +284,8 @@ const PopUpItemFramework = (props) => {
     // setpolarity(polarity);
     dispatch({ type: POPUP_CLOSE });
   };
-// console.log('itemConfigStates',itemConfigStates);
-// console.log('props',props);
+  // console.log('itemConfigStates',itemConfigStates);
+  // console.log('props',props);
   return (
     <div>
       <Popup isActive={isActive}>

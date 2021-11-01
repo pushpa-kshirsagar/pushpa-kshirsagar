@@ -21,7 +21,8 @@ import {
   SET_PANE_THREE_PREVIEW_MODE,
   SET_PANE_THREE_ITEM_PREVIEW_MODE,
   SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
-  SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE
+  SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
+  SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE
 } from '../actionType';
 
 const initialState = {
@@ -36,7 +37,7 @@ const initialState = {
   previewHeaderBadgeThree: '',
   previewInnerHTML: '',
   isItemPreviewShow: false,
-  originResponseObj:null,
+  originResponseObj: null,
   responseObject: {},
   reviewMode: 'review',
   createMode: '',
@@ -97,29 +98,30 @@ const initialState = {
   //   assesseeTypeShared: true
   // },
 
-  assesseeSetUpModule:null,
+  assesseeSetUpModule: null,
   assessmentSetUpModule: null,
   assignmentSetUpModule: null,
   setUpAssociateModule: null,
   analyticSetUpModule: null,
   itemSetUpModule: null,
   associateNodeSetUpModule: null,
-  
-  assesseeSetUpModule:null,
+
+  assesseeSetUpModule: null,
   assessmentSetUpModuleBespoke: null,
   assignmentSetUpModuleBespoke: null,
   setUpAssociateModuleBespoke: null,
   analyticSetUpModuleBespoke: null,
   itemSetUpModuleBespoke: null,
 
-  assesseeSetUpModuleGeneric:null,
+  assesseeSetUpModuleGeneric: null,
   assessmentSetUpModuleGeneric: null,
   assignmentSetUpModuleGeneric: null,
   setUpAssociateModuleGeneric: null,
   analyticSetUpModuleGeneric: null,
   itemSetUpModuleGeneric: null,
   isAssessmentPreviewShow: false,
-  isAssessmentSectionShow:false
+  isAssessmentSectionShow: false,
+  isAssessmentVersionShow: false
 };
 
 const DisplayPaneThreeReducer = (istate = JSON.parse(JSON.stringify(initialState)), action) => {
@@ -258,17 +260,22 @@ const DisplayPaneThreeReducer = (istate = JSON.parse(JSON.stringify(initialState
         ...istate,
         isItemPreviewShow: action.payload
       };
-      case SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE:
-        return{
-          ...istate,
-          isAssessmentPreviewShow:action.payload
-        }
+    case SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE:
+      return {
+        ...istate,
+        isAssessmentPreviewShow: action.payload
+      };
 
-        case SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE:
-        return{
-          ...istate,
-          isAssessmentSectionShow:action.payload
-        }
+    case SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE:
+      return {
+        ...istate,
+        isAssessmentSectionShow: action.payload
+      };
+    case SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE:
+      return {
+        ...istate,
+        isAssessmentVersionShow: action.payload
+      };
 
     case CLEAR_DISPLAY_PANE_THREE:
       return JSON.parse(JSON.stringify(initialState));

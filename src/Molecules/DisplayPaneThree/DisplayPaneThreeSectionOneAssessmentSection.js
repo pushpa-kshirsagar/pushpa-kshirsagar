@@ -33,6 +33,10 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
     (state) => state.DisplayPaneTwoReducer
   );
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
+  let versionArr = [];
+  responseObject?.assessmentVersion?.map((comm, index) => {
+    versionArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
+  });
   let communiqueArr = [];
   responseObject?.assessmentSectionCommunique?.map((comm, index) => {
     communiqueArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
@@ -328,6 +332,14 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'version',
+      labelTextOneOneBadges: versionArr,
+      innerAssociateList: [],
+      innerInfo: '',
+      isListCard: false
     }
   ];
   const reviseFramework = (e, selectedBadgeArray) => {
@@ -463,7 +475,6 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
         payload: { isPopUpValue: 'ITEM_TOTAL_POPUP', popupMode: 'SECTIONCREATE' }
       });
     }
-    
     if (labelName === 'preview') {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE, payload: true });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });

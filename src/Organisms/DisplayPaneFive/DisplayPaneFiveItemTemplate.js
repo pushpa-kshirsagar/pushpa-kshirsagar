@@ -18,7 +18,8 @@ import PopUpTextEditor from '../../PopUpIcon/PopUpTextEditor';
 
 const DisplayPaneFiveItemTemplate = (props) => {
   const dispatch = useDispatch();
-  const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
+  const { setSelectedChoiceObject, itemType, itemFrameworkOne, itemInformation } = props;
+  // const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
   const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const optionLabel =
@@ -45,67 +46,17 @@ const DisplayPaneFiveItemTemplate = (props) => {
     "<span>response</span> &nbsp <span class='iguru-header-badge1_0'>choice</span>&nbsp; <span class='iguru-header-badge1_0'>explanation</span>&nbsp;";
   const numberOfNoOptions =
     itemInformation?.informationFramework?.itemFrameworkOne?.itemFrameworkOneResponseChoice || [];
-  const itemFrameworkOne = itemInformation?.informationFramework?.itemFrameworkOne;
+
   const itemFrameworkOneSection = itemFrameworkOne.itemFrameworkOneSection;
-  const { setSelectedChoiceObject, itemType } = props;
+
   // const [subItemList, setSubItemList] = useState(['item-1', 'item-2', 'item-3']);
   const [scaleList, setScaleList] = useState(['scale-1', 'scale-2', 'scale-3']);
   const [liketcorrect, setliketcorrect] = useState('');
   const [lab, setLabel] = useState(true);
-  const useStyles = makeStyles({
-    root: {
-      '&:hover': {
-        backgroundColor: 'transparent'
-      }
-    },
-    icon: {
-      borderRadius: '50%',
-      width: 16,
-      height: 16,
-      boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
-      backgroundColor: '#f5f8fa',
-      backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
-      '$root.Mui-focusVisible &': {
-        outline: '2px auto rgba(19,124,189,.6)',
-        outlineOffset: 2
-      },
-      'input:hover ~ &': {
-        backgroundColor: '#ebf1f5'
-      },
-      'input:disabled ~ &': {
-        boxShadow: 'none',
-        background: 'rgba(206,217,224,.5)'
-      }
-    },
-    checkedIcon: {
-      backgroundColor: '#137cbd',
-      backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
-      '&:before': {
-        display: 'block',
-        width: 16,
-        height: 16,
-        backgroundImage: 'radial-gradient(#fff,#fff 28%,transparent 32%)',
-        content: '""'
-      },
-      'input:hover ~ &': {
-        backgroundColor: '#106ba3'
-      }
+  const onClickPopupLabel = (clickedLabel) => {
+    if (clickedLabel === 'item-label') {
     }
-  });
-  function StyledRadio(props) {
-    const classes = useStyles();
-
-    return (
-      <Radio
-        className={classes.root}
-        disableRipple
-        color="default"
-        checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
-        icon={<span className={classes.icon} />}
-        {...props}
-      />
-    );
-  }
+  };
 
   const handleClick = (event) => {
     console.log('ONCHANGE ', event.target.value);

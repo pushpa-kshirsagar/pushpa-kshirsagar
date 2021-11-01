@@ -18,6 +18,7 @@ import {
   SET_MOBILE_PANE_STATE,
   SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
   SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
+  SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE,
   SET_PANE_THREE_PREVIEW_MODE,
   SET_POPUP_VALUE
 } from '../../actionType';
@@ -73,12 +74,21 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
       labelTextOneOne: 'section',
       labelTextOneOneBadges: sectionArr,
       innerAssociateList: [],
-      innerInfo: 'assessment',
+      innerInfo: 'No Information',
       IconOne: null,
       isMultiList: true,
       isListCard: true,
       isReviewLink: true
-    }
+    },
+    {
+      id: 'preview-section',
+      labelTextOneOne: 'preview',
+      innerAssociateList: [],
+      innerInfo: '',
+      isListCard: false,
+      IconOne: null,
+      isReviewLink: true
+    },
   ];
   const reviseFramework = (e, selectedBadgeArray) => {
     const labelName = e.currentTarget.getAttribute('data-value');
@@ -147,6 +157,10 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
           typeOfMiddlePaneList: 'assessmentSectionItemDistinctReviewList'
         }
       });
+    }
+    if (labelName === 'preview') {
+      dispatch({ type: SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE, payload: true });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }
   };
 
@@ -223,6 +237,10 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
           showMiddlePaneState: true
         }
       });
+    }
+    if (labelName === 'preview') {
+      dispatch({ type: SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE, payload: true });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
     }
   };
   return (

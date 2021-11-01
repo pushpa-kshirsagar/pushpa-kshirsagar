@@ -34,24 +34,24 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   const { informationFramework } = responseObject;
   const dispatch = useDispatch();
 
+  let versionArr = [];
+  informationFramework?.assessmentSection[0].assessmentVersion.map((comm, index) => {
+    versionArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
+  });
   let communiqueArr = [];
   informationFramework?.assessmentCommunique.map((comm, index) => {
-    // communiqueArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
     communiqueArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
   });
   let manuscriptArr = [];
   informationFramework?.assessmentManuscript.map((comm, index) => {
-    // manuscriptArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
     manuscriptArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
   });
   let synopsisArr = [];
   informationFramework?.assessmentSynopsis.map((comm, index) => {
-    // synopsisArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
     synopsisArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
   });
   let sectionArr = [];
   informationFramework?.assessmentSection.map((comm, index) => {
-    // sectionArr.push({ labelTextOneOneBadge: convertNumberToName(index + 1), textOne: '' });
     sectionArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
   });
   let adminSequenseArr = [];
@@ -289,6 +289,14 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       innerAssociateList: [],
       innerInfo: 'No Information',
       IconOne: null
+    },
+    {
+      id: 'a1',
+      labelTextOneOne: 'version',
+      labelTextOneOneBadges: versionArr,
+      innerAssociateList: [],
+      innerInfo: '',
+      isListCard: false
     }
   ];
   const frameworkKey = [

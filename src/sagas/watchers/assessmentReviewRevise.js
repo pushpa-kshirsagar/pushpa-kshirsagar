@@ -253,122 +253,126 @@ function* workerReviewInfoAssessmentSaga(data) {
 
       let sectionArr = [];
       informationFramework?.assessmentSection.map((sec) => {
-        let tempArr = [];
-        // let tempArr = sec.assessmentSectionItemDistinct.map((ob) => ob.itemId))
-        for (let i = 0; i < sec.assessmentSectionItemDistinct.length; i++) {
-          tempArr.push(sec.assessmentSectionItemDistinct[i].itemId);
-        }
-        console.log('tempArr', tempArr);
-        let reviseObj = { ...sec, assessmentSectionItemDistinct: tempArr };
-        console.log('reviseObj', reviseObj);
-        sectionArr.push(reviseObj);
+        let versionArr = [];
+        sec.assessmentVersion.map((ver) => {
+          let tempArr = [];
+          if (ver.assessmentVersionItemDistinct) {
+            for (let i = 0; i < ver.assessmentVersionItemDistinct?.length; i++) {
+              tempArr.push(ver.assessmentVersionItemDistinct[i].itemId);
+            }
+          }
+          let reviseObj = { ...ver, assessmentVersionItemDistinct: tempArr };
+          versionArr.push(reviseObj);
+        });
+        let reviseObj2 = { ...sec, assessmentVersion: versionArr };
+        sectionArr.push(reviseObj2);
       });
       console.log('sectionArr', sectionArr);
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentSection', value: sectionArr }
       });
-      const assessmentSection = informationFramework?.assessmentSection || [];
       const assessmentScale = informationFramework?.assessmentScale || [];
+
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentScale', value: assessmentScale }
       });
-      yield put({
-        type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-        payload: {
-          stateName: 'assessmentSectionItemDistinctRevise',
-          value: assessmentSection[0].assessmentSectionItemDistinct[0]
-        }
-      });
+      // yield put({
+      //   type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+      //   payload: {
+      //     stateName: 'assessmentSectionItemDistinctRevise',
+      //     value: assessmentSection[0].assessmentSectionItemDistinct[0]
+      //   }
+      // });
 
       // setItemTypeConfigState(
       //   assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne
       //     ?.itemFrameworkOneType,
       //   yield put
       // );
-      const itemFrameworkOneType =
-        assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne
-          ?.itemFrameworkOneType;
-      let reviseSetting = {
-        blankState: true,
-        classificationState: false,
-        levelState: true,
-        polarityState: true,
-        scaleState: true,
-        scoreState: true,
-        timeState: true,
-        weightageState: true,
-        noOfItemState: true,
-        noOfResponseState: true
-      };
-      if (itemFrameworkOneType === '61090cace50cf61d5eb440c9') {
-        // "Likert-Scale"
-        reviseSetting = {
-          blankState: false,
-          classificationState: false,
-          levelState: true,
-          polarityState: true,
-          scaleState: true,
-          scoreState: true,
-          timeState: true,
-          weightageState: false,
-          noOfItemState: true,
-          noOfResponseState: false
-        };
-      }
-      if (itemFrameworkOneType === '61090cace50cf61d5eb440ce') {
-        //"Response-Choice (Single-Select)"
-        reviseSetting = {
-          blankState: false,
-          classificationState: false,
-          levelState: true,
-          polarityState: false,
-          scaleState: false,
-          scoreState: true,
-          timeState: true,
-          weightageState: false,
-          noOfItemState: false,
-          noOfResponseState: true
-        };
-      }
-      if (itemFrameworkOneType === '61090cace50cf61d5eb440c4') {
-        //"Fill-in-the-Blank (Response-Choice)"
-        reviseSetting = {
-          blankState: true,
-          classificationState: false,
-          levelState: true,
-          polarityState: false,
-          scaleState: false,
-          scoreState: true,
-          timeState: true,
-          weightageState: false,
-          noOfItemState: false,
-          noOfResponseState: true
-        };
-      }
-      if (
-        itemFrameworkOneType === '61090cace50cf61d5eb440cc' ||
-        itemFrameworkOneType === '61090cace50cf61d5eb440cd'
-      ) {
-        //"Response (Long)","Response (Short)"
-        reviseSetting = {
-          blankState: false,
-          classificationState: false,
-          levelState: true,
-          polarityState: false,
-          scaleState: false,
-          scoreState: true,
-          timeState: true,
-          weightageState: false,
-          noOfItemState: false,
-          noOfResponseState: false
-        };
-      }
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'itemConfigStates', value: reviseSetting }
-      });
+      // const itemFrameworkOneType =
+      //   assessmentSection[0].assessmentSectionItemDistinct[0].itemFrameworkOne
+      //     ?.itemFrameworkOneType;
+      // let reviseSetting = {
+      //   blankState: true,
+      //   classificationState: false,
+      //   levelState: true,
+      //   polarityState: true,
+      //   scaleState: true,
+      //   scoreState: true,
+      //   timeState: true,
+      //   weightageState: true,
+      //   noOfItemState: true,
+      //   noOfResponseState: true
+      // };
+      // if (itemFrameworkOneType === '61090cace50cf61d5eb440c9') {
+      //   // "Likert-Scale"
+      //   reviseSetting = {
+      //     blankState: false,
+      //     classificationState: false,
+      //     levelState: true,
+      //     polarityState: true,
+      //     scaleState: true,
+      //     scoreState: true,
+      //     timeState: true,
+      //     weightageState: false,
+      //     noOfItemState: true,
+      //     noOfResponseState: false
+      //   };
+      // }
+      // if (itemFrameworkOneType === '61090cace50cf61d5eb440ce') {
+      //   //"Response-Choice (Single-Select)"
+      //   reviseSetting = {
+      //     blankState: false,
+      //     classificationState: false,
+      //     levelState: true,
+      //     polarityState: false,
+      //     scaleState: false,
+      //     scoreState: true,
+      //     timeState: true,
+      //     weightageState: false,
+      //     noOfItemState: false,
+      //     noOfResponseState: true
+      //   };
+      // }
+      // if (itemFrameworkOneType === '61090cace50cf61d5eb440c4') {
+      //   //"Fill-in-the-Blank (Response-Choice)"
+      //   reviseSetting = {
+      //     blankState: true,
+      //     classificationState: false,
+      //     levelState: true,
+      //     polarityState: false,
+      //     scaleState: false,
+      //     scoreState: true,
+      //     timeState: true,
+      //     weightageState: false,
+      //     noOfItemState: false,
+      //     noOfResponseState: true
+      //   };
+      // }
+      // if (
+      //   itemFrameworkOneType === '61090cace50cf61d5eb440cc' ||
+      //   itemFrameworkOneType === '61090cace50cf61d5eb440cd'
+      // ) {
+      //   //"Response (Long)","Response (Short)"
+      //   reviseSetting = {
+      //     blankState: false,
+      //     classificationState: false,
+      //     levelState: true,
+      //     polarityState: false,
+      //     scaleState: false,
+      //     scoreState: true,
+      //     timeState: true,
+      //     weightageState: false,
+      //     noOfItemState: false,
+      //     noOfResponseState: false
+      //   };
+      // }
+      // yield put({
+      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //   payload: { stateName: 'itemConfigStates', value: reviseSetting }
+      // });
       // const assessmentSection = userResponse.responseObject[0].informationFramework?.assessmentSection || [];
       //   yield put({
       //     type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
@@ -413,10 +417,7 @@ function* workerReviewInfoAssessmentSecSaga(data) {
     });
     if (userResponse.responseCode === '000') {
       let assessmentInfo = userResponse.responseObject[0];
-      yield put({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'assessmentResponseObject', value: assessmentInfo }
-      });
+
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: {
@@ -425,20 +426,36 @@ function* workerReviewInfoAssessmentSecSaga(data) {
         }
       });
       let sectionArr = [];
-      assessmentInfo?.informationFramework?.assessmentSection.map((sec) => {
-        let tempArr = [];
-        // let tempArr = sec.assessmentSectionItemDistinct.map((ob) => ob.itemId))
-        for (let i = 0; i < sec.assessmentSectionItemDistinct?.length; i++) {
-          tempArr.push(sec.assessmentSectionItemDistinct[i].itemId);
-        }
-        let reviseObj = { ...sec, assessmentSectionItemDistinct: tempArr };
-        sectionArr.push(reviseObj);
+      assessmentInfo.informationFramework?.assessmentSection.map((sec) => {
+        let versionArr = [];
+        sec.assessmentVersion.map((ver) => {
+          let tempArr = [];
+          if (ver.assessmentVersionItemDistinct) {
+            for (let i = 0; i < ver.assessmentVersionItemDistinct?.length; i++) {
+              tempArr.push(ver.assessmentVersionItemDistinct[i].itemId);
+            }
+          }
+          let reviseObj = { ...ver, assessmentVersionItemDistinct: tempArr };
+          versionArr.push(reviseObj);
+        });
+        let reviseObj2 = { ...sec, assessmentVersion: versionArr };
+        sectionArr.push(reviseObj2);
       });
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: { stateName: 'assessmentSection', value: sectionArr }
       });
-
+      let reviseFramewrkobj = {
+        ...assessmentInfo.informationFramework,
+        assessmentSection: sectionArr
+      };
+      yield put({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'assessmentResponseObject',
+          value: { ...assessmentInfo, informationFramework: reviseFramewrkobj }
+        }
+      });
       yield put({
         type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
         payload: {
@@ -599,7 +616,8 @@ function* workerReviseInfoAssessmentSaga(data) {
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
             responseObject:
-              userResponse.responseObject[0].informationFramework.assessmentSection[0].assessmentVersion[selectedSector],
+              userResponse.responseObject[0].informationFramework.assessmentSection[0]
+                .assessmentVersion[selectedSector],
             reviewMode: createMode
           }
         });

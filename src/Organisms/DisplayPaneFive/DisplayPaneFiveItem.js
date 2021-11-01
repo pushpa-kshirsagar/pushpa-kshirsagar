@@ -651,6 +651,8 @@ export const DisplayPaneFiveItem = () => {
                 subItemList={subItemList}
                 setSubItemList={setSubItemList}
                 itemType={data?.itemFrameworkOneTypeNameReference}
+                itemFrameworkOne={itemFrameworkOne}
+                itemInformation={itemInformation}
               />
             </>
           ) : (

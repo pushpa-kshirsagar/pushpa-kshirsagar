@@ -10,7 +10,8 @@ import {
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   ASSESSMENT_INFO_PREVIEW_SAGA,
   SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
-  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE
+  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+  SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE
 } from '../../actionType';
 import '../../Molecules/ReviewList/ReviewList.css';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
@@ -31,6 +32,7 @@ export const DisplayPaneFive = () => {
   const [currentItemIndex, setcurrentItemIndex] = useState(0);
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const [currentSectionIndex, setcurrentSectionIndex] = useState(0);
+  const [currentVersionIndex, setcurrentVersionIndex] = useState(0);
   const {
     typeOfMiddlePaneList,
     selectedAssociateInfo,
@@ -51,7 +53,8 @@ export const DisplayPaneFive = () => {
     createMode,
     headerOneBadgeTwo,
     responseObject,
-    isAssessmentSectionShow = false
+    isAssessmentSectionShow = false,
+    isAssessmentVersionShow = false
   } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { informationFramework, isDisplayPaneSixShow } = useSelector(
     (state) => state.AssessmentReducer
@@ -66,6 +69,9 @@ export const DisplayPaneFive = () => {
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     } else if (isAssessmentPreviewShow) {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE, payload: false });
+      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
+    } else if (isAssessmentVersionShow) {
+      dispatch({ type: SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE, payload: false });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
   };
@@ -113,8 +119,8 @@ export const DisplayPaneFive = () => {
                 value:
                   responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
                     ?.assessmentSectionItemDistinct[
-                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                    ?.assessmentSectionItemDistinct.length - 1
+                    responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
+                      ?.assessmentSectionItemDistinct.length - 1
                   ]
               }
             });
@@ -170,7 +176,7 @@ export const DisplayPaneFive = () => {
           currentItemIndex <
           responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
             ?.assessmentSectionItemDistinct.length -
-          1
+            1
         ) {
           setcurrentItemIndex(currentItemIndex + 1);
           setItemTypeConfigState(
@@ -213,7 +219,7 @@ export const DisplayPaneFive = () => {
           currentItemIndex <
           responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
             ?.assessmentSectionItemDistinct.length -
-          1
+            1
         ) {
           let lastIndex =
             responseObject?.informationFramework.assessmentSection[currentSectionIndex]
@@ -264,50 +270,65 @@ export const DisplayPaneFive = () => {
       if (clickedval === 'first') {
         setcurrentItemIndex(0);
         setItemTypeConfigState(
-          responseObject?.assessmentSectionItemDistinct[0]?.itemFrameworkOne.itemFrameworkOneType,
+          responseObject?.assessmentVersion[currentVersionIndex]?.assessmentVersionItemDistinct[0]
+            ?.itemFrameworkOne.itemFrameworkOneType,
           dispatch
         );
-        dispatch({
-          type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
-          payload: {
-            stateName: 'assessmentSectionItemDistinctReviseObject',
-            value: responseObject?.assessmentSectionItemDistinct[0]
-          }
-        });
+        // dispatch({
+        //   type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+        //   payload: {
+        //     stateName: 'assessmentSectionItemDistinctReviseObject',
+        //     value: responseObject?.assessmentSectionItemDistinct[0]
+        //   }
+        // });
       }
       if (clickedval === 'previous') {
         let prevIndex = currentItemIndex - 1;
         if (currentItemIndex != 0) {
           setcurrentItemIndex(prevIndex);
           setItemTypeConfigState(
-            responseObject?.assessmentSectionItemDistinct[prevIndex]?.itemFrameworkOne
-              .itemFrameworkOneType,
+            responseObject?.assessmentVersion[currentVersionIndex]?.assessmentVersionItemDistinct[
+              prevIndex
+            ]?.itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
-          dispatch({
-            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
-            payload: {
-              stateName: 'assessmentSectionItemDistinctReviseObject',
-              value: responseObject?.assessmentSectionItemDistinct[prevIndex]
-            }
-          });
+          // dispatch({
+          //   type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+          //   payload: {
+          //     stateName: 'assessmentSectionItemDistinctReviseObject',
+          //     value: responseObject?.assessmentSectionItemDistinct[prevIndex]
+          //   }
+          // });
         }
       }
       if (clickedval === 'next') {
-        if (currentItemIndex < responseObject.assessmentSectionItemDistinct.length - 1) {
+        console.log('currentVersionIndex', currentVersionIndex);
+        console.log('lenght', responseObject.assessmentVersion.length);
+        if (
+          currentItemIndex <
+          responseObject.assessmentVersion[currentVersionIndex]?.assessmentVersionItemDistinct
+            .length -
+            1
+        ) {
           setcurrentItemIndex(currentItemIndex + 1);
           setItemTypeConfigState(
-            responseObject?.assessmentSectionItemDistinct[currentItemIndex + 1]?.itemFrameworkOne
-              .itemFrameworkOneType,
+            responseObject?.assessmentVersion[currentVersionIndex]?.assessmentVersionItemDistinct[
+              currentItemIndex + 1
+            ]?.itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
-          dispatch({
-            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
-            payload: {
-              stateName: 'assessmentSectionItemDistinctReviseObject',
-              value: responseObject?.assessmentSectionItemDistinct[currentItemIndex + 1]
-            }
-          });
+          // dispatch({
+          //   type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+          //   payload: {
+          //     stateName: 'assessmentSectionItemDistinctReviseObject',
+          //     value: responseObject?.assessmentSectionItemDistinct[currentItemIndex + 1]
+          //   }
+          // });
+        } else {
+          if (currentVersionIndex < responseObject?.assessmentVersion.length - 1) {
+            setcurrentVersionIndex(currentVersionIndex + 1);
+            setcurrentItemIndex(0);
+          }
         }
       }
       if (clickedval === 'last') {
@@ -319,11 +340,79 @@ export const DisplayPaneFive = () => {
               .itemFrameworkOneType,
             dispatch
           );
+          // dispatch({
+          //   type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+          //   payload: {
+          //     stateName: 'assessmentSectionItemDistinctReviseObject',
+          //     value: responseObject?.assessmentSectionItemDistinct[lastIndex]
+          //   }
+          // });
+        }
+      }
+    } else if (isAssessmentVersionShow) {
+      if (clickedval === 'first') {
+        setcurrentItemIndex(0);
+        setItemTypeConfigState(
+          responseObject?.assessmentVersionItemDistinct[0]?.itemFrameworkOne.itemFrameworkOneType,
+          dispatch
+        );
+        dispatch({
+          type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+          payload: {
+            stateName: 'assessmentVersionItemDistinctReviseObject',
+            value: responseObject?.assessmentVersionItemDistinct[0]
+          }
+        });
+      }
+      if (clickedval === 'previous') {
+        let prevIndex = currentItemIndex - 1;
+        if (currentItemIndex != 0) {
+          setcurrentItemIndex(prevIndex);
+          setItemTypeConfigState(
+            responseObject?.assessmentVersionItemDistinct[prevIndex]?.itemFrameworkOne
+              .itemFrameworkOneType,
+            dispatch
+          );
           dispatch({
             type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
             payload: {
-              stateName: 'assessmentSectionItemDistinctReviseObject',
-              value: responseObject?.assessmentSectionItemDistinct[lastIndex]
+              stateName: 'assessmentVersionItemDistinctReviseObject',
+              value: responseObject?.assessmentVersionItemDistinct[prevIndex]
+            }
+          });
+        }
+      }
+      if (clickedval === 'next') {
+        if (currentItemIndex < responseObject.assessmentVersionItemDistinct.length - 1) {
+          setcurrentItemIndex(currentItemIndex + 1);
+          setItemTypeConfigState(
+            responseObject?.assessmentVersionItemDistinct[currentItemIndex + 1]?.itemFrameworkOne
+              .itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentVersionItemDistinctReviseObject',
+              value: responseObject?.assessmentVersionItemDistinct[currentItemIndex + 1]
+            }
+          });
+        }
+      }
+      if (clickedval === 'last') {
+        if (currentItemIndex < responseObject.assessmentVersionItemDistinct.length - 1) {
+          let lastIndex = responseObject.assessmentVersionItemDistinct.length - 1;
+          setcurrentItemIndex(lastIndex);
+          setItemTypeConfigState(
+            responseObject?.assessmentVersionItemDistinct[lastIndex]?.itemFrameworkOne
+              .itemFrameworkOneType,
+            dispatch
+          );
+          dispatch({
+            type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentVersionItemDistinctReviseObject',
+              value: responseObject?.assessmentVersionItemDistinct[lastIndex]
             }
           });
         }
@@ -403,15 +492,19 @@ export const DisplayPaneFive = () => {
   //let itemObect = informationFramework?.informationFramework?.itemFrameworkOne?.assessmentItem[currentItemIndex];
   //  let itemObect =informationFramework?.assessmentSection[0]?.assessmentSectionItemDistinct[currentItemIndex].itemFrameworkOne;
   //informationFramework?.assessmentItem[currentItemIndex].informationFramework?.itemFrameworkOne;
-  //console.log("itemObect", itemObect);
-  //const itemInformation=informationFramework?.assessmentSection[currentItemIndex]?.assessmentSectionItemDistinct[currentItemIndex]
-
-  var itemObect = isAssessmentSectionShow
-    ? responseObject?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
-    : isAssessmentPreviewShow
-      ? responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-        ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne
-      : '';
+  console.log('responseObject', responseObject);
+  console.log('isAssessmentPreviewShow', isAssessmentPreviewShow);
+  var itemObect =
+    (isAssessmentSectionShow &&
+      responseObject?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[
+        currentItemIndex
+      ]?.itemFrameworkOne) ||
+    (isAssessmentPreviewShow &&
+      responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
+        ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne) ||
+    (isAssessmentVersionShow &&
+      responseObject?.assessmentVersionItemDistinct[currentItemIndex]?.itemFrameworkOne) ||
+    '';
   console.log('itemObect', itemObect);
 
   return (
@@ -424,7 +517,7 @@ export const DisplayPaneFive = () => {
               displayPane="itemPreview"
               showClearIcon
               headerOne={headerOne}
-              headerOneBadgeOne={''}
+              headerOneBadgeOne={'as'}
               headerOneBadgeTwo="preview"
               headerPanelColour="blue"
               onClickClearInfo={closePreview}
@@ -435,6 +528,7 @@ export const DisplayPaneFive = () => {
               informationFramework={responseObject?.informationFramework}
               currentItemIndex={currentItemIndex}
               currentSectionIndex={currentSectionIndex}
+              currentVersionIndex={currentVersionIndex}
               itemObect={itemObect}
             />
             {reviewMode === 'revise' ? (
@@ -477,6 +571,7 @@ export const DisplayPaneFive = () => {
               informationFramework={responseObject}
               currentItemIndex={currentItemIndex}
               currentSectionIndex={currentSectionIndex}
+              currentVersionIndex={currentVersionIndex}
               itemObect={itemObect}
             />
             {reviewMode === 'revise' ? (
@@ -503,6 +598,48 @@ export const DisplayPaneFive = () => {
           </>
         ) : isItemPreviewShow ? (
           <DisplayPaneFiveItem />
+        ) : isAssessmentVersionShow ? (
+          <>
+            <HeaderCard
+              className=""
+              displayPane="itemPreview"
+              showClearIcon
+              headerOne={headerOne}
+              headerOneBadgeOne={''}
+              headerOneBadgeTwo="preview"
+              headerPanelColour="blue"
+              onClickClearInfo={closePreview}
+            />
+            <DisplayPaneFiveAssessment
+              headerOne={headerOne}
+              //closePreview={closePreview}
+              informationFramework={responseObject}
+              currentItemIndex={currentItemIndex}
+              currentSectionIndex={currentSectionIndex}
+              itemObect={itemObect}
+            />
+            {reviewMode === 'revise' ? (
+              <FooterIconTwo
+                className={'widthDisplayPaneFive'}
+                FilterModeEnable={isShowReviseIcon}
+                FilterMode={FilterMode}
+                onClick={onClickRevise}
+                primaryIcon={revisePrimaryIcon}
+                secondaryIcon={reviseSecondaryIcons}
+                isAssessmentPreviewShow={isAssessmentPreviewShow}
+              />
+            ) : (
+              <FooterIconTwo
+                className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
+                FilterModeEnable={navigatorIcon}
+                FilterMode={FilterMode}
+                onClick={onClickFooter}
+                primaryIcon={primaryIcon}
+                secondaryIcon={secondaryIcon}
+                isAssessmentPreviewShow={isAssessmentPreviewShow}
+              />
+            )}
+          </>
         ) : null}
       </div>
     </>
