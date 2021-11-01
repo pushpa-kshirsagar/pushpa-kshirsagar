@@ -9,6 +9,7 @@ import {
   RELATED_REVIEWLIST_DISTINCT_DATA,
   REVIEWLIST_DISTINCT_DATA,
   SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+  SET_ASSESSEE_ASSESSMENT_ISASSESSMENTSTART_STATE,
   SET_ASSESSEE_ASSESSMENT_ITEM_RES_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
@@ -151,7 +152,7 @@ function* workerAssessmentStartSaga(data) {
       });
       yield put({
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-        payload: { stateName: 'assesseeAssignmentAssessmentData', value: response.responseObject[0] }
+        payload: { stateName: 'assesseeAssignmentAssessmentData', value: response.responseObject }
       });
       yield put({
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
@@ -181,6 +182,7 @@ function* workerAssessmentStartSaga(data) {
   }
 }
 function* workerAssesseeAssessmentStartSaga(data) {
+  debugger;
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,
@@ -197,11 +199,22 @@ function* workerAssesseeAssessmentStartSaga(data) {
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
         payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
       });
+
+      yield put({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'asssignmentStarted', value: 'PROGRESS' }
+      });
+      
+
+      // yield put({
+      //   type: SET_ASSESSEE_ASSESSMENT_ISASSESSMENTSTART_STATE,
+      //   payload: 'PROGRESS'
+      // });
       // yield put({
       //   type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
       //   payload: { stateName: 'isExamMode', value: false }
       // });
-      yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSeven' });
+      yield put({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSix' });
     } else {
       yield put({
         type: SET_POPUP_VALUE,

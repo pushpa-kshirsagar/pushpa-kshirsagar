@@ -56,7 +56,7 @@ const IconThreeWithFlexFiveColumn = (props) => {
         <CircleIcon
           label={data[0].label}
           Icon={data[0].Icon}
-          colour={'displayPaneCentre'}
+          colour={props.colour?props.colour:'displayPaneCentre'}
           onClick={data[0].onClick}
           dataValue={data[0].label}
         />
@@ -65,7 +65,7 @@ const IconThreeWithFlexFiveColumn = (props) => {
         <CircleIcon
           label={data[1].label}
           Icon={data[1].Icon}
-          colour={'displayPaneCentre'}
+          colour={props.colour?props.colour:'displayPaneCentre'}
           onClick={data[1].onClick}
           dataValue={data[1].label}
         />
@@ -74,7 +74,7 @@ const IconThreeWithFlexFiveColumn = (props) => {
         <CircleIcon
           label={data[2].label}
           Icon={data[2].Icon}
-          colour={'displayPaneCentre'}
+          colour={props.colour?props.colour:'displayPaneCentre'}
           onClick={data[2].onClick}
           dataValue={data[2].label}
         />
@@ -92,7 +92,7 @@ const IconFourWithFlexSixColumn = (props) => {
         <CircleIcon
           label={data[0].label}
           Icon={data[0].Icon}
-          colour={'displayPaneCentre'}
+          colour={data[0].colour ? data[0].colour : 'displayPaneCentre'}
           onClick={data[0].onClick}
           dataValue={data[0].label}
         />
@@ -101,7 +101,7 @@ const IconFourWithFlexSixColumn = (props) => {
         <CircleIcon
           label={data[1].label}
           Icon={data[1].Icon}
-          colour={'displayPaneCentre'}
+          colour={data[1].colour ? data[1].colour : 'displayPaneCentre'}
           onClick={data[1].onClick}
           dataValue={data[1].label}
         />
@@ -110,7 +110,7 @@ const IconFourWithFlexSixColumn = (props) => {
         <CircleIcon
           label={data[2].label}
           Icon={data[2].Icon}
-          colour={'displayPaneCentre'}
+          colour={data[2].colour ? data[0].colour : 'displayPaneCentre'}
           onClick={data[2].onClick}
           dataValue={data[2].label}
         />
@@ -119,7 +119,7 @@ const IconFourWithFlexSixColumn = (props) => {
         <CircleIcon
           label={data[3].label}
           Icon={data[3].Icon}
-          colour={'displayPaneCentre'}
+          colour={data[3].colour ? data[3].colour : 'displayPaneCentre'}
           onClick={data[3].onClick}
           dataValue={data[3].label}
         />
@@ -180,8 +180,70 @@ const IconFiveWithFlexFiveColumn = (props) => {
     </React.Fragment>
   );
 };
+const IconFiveWithFlexSixColumn = (props) => {
+  const data = props.data;
+  return (
+    <React.Fragment>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[0].label}
+          Icon={data[0].Icon}
+          colour={data[0].colour ? data[0].colour : 'displayPaneCentre'}
+          onClick={data[0].onClick}
+          dataValue={data[0].label}
+          disabled={data[0].disabled}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[1].label}
+          Icon={data[1].Icon}
+          colour={data[0].colour ? data[0].colour : 'displayPaneCentre'}
+          onClick={data[1].onClick}
+          dataValue={data[1].label}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[2].label}
+          Icon={data[2].Icon}
+          colour={data[0].colour ? data[0].colour : 'displayPaneCentre'}
+          onClick={data[2].onClick}
+          dataValue={data[2].label}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[3].label}
+          Icon={data[3].Icon}
+          colour={data[0].colour ? data[0].colour : 'displayPaneCentre'}
+          onClick={data[3].onClick}
+          dataValue={data[3].label}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[4].label}
+          Icon={data[4].Icon}
+          colour={data[0].colour ? data[0].colour : 'displayPaneCentre'}
+          onClick={data[4].onClick}
+          dataValue={data[4].label}
+        />
+      </div>
+      <div className={'mbPager'}>
+        <CircleIcon
+          label={data[5].label}
+          Icon={data[5].Icon}
+          colour={data[0].colour ? data[0].colour : 'displayPaneCentre'}
+          onClick={data[5].onClick}
+          dataValue={data[5].label}
+        />
+      </div>
+    </React.Fragment>
+  );
+};
 
-const IconFourWithFlexSixColumnAssessment=(props)=>{
+const IconFourWithFlexSixColumnAssessment = (props) => {
   const data = props.data;
   return (
     <React.Fragment>
@@ -279,10 +341,10 @@ const FooterIconTwo = (props) => {
     className = '',
     backColour = 'displayPaneCentre',
     disabled = false,
-    isAssessmentPreviewShow=false
+    isAssessmentPreviewShow = false
   } = props;
-  // console.log(primaryIcon);
-  // console.log('primaryIcon');
+  //console.log(secondaryIcon);
+  //console.log('secondaryIcon');
   return (
     <div className={`middleFooterD  ${className}`}>
       <div className={'footerInner'}>
@@ -295,23 +357,25 @@ const FooterIconTwo = (props) => {
                 <IconTwoWithFlexSixColumn data={primaryIcon} colour={backColour} />
               ) : null
             ) :
-            isAssessmentPreviewShow?(
-              secondaryIcon.length === 4?(
-              <IconFourWithFlexSixColumnAssessment data={secondaryIcon}/>
-              ):secondaryIcon.length===2?(
-                <IconTwoWithFlexSixColumnAssessment data={secondaryIcon} colour={backColour}/>
-              ):
-              null)
-            :
-             secondaryIcon.length === 2 ? (
-              <IconTwoWithFlexSixColumn data={secondaryIcon} colour={backColour} />
-            ) : secondaryIcon.length === 3 ? (
-              <IconThreeWithFlexFiveColumn data={secondaryIcon} />
-            ) : secondaryIcon.length === 4 ? (
-              <IconFourWithFlexSixColumn data={secondaryIcon} />
-            ) : secondaryIcon.length === 5 ? (
-              <IconFiveWithFlexFiveColumn data={secondaryIcon} />
-            ) : null}
+              isAssessmentPreviewShow ? (
+                secondaryIcon.length === 4 ? (
+                  <IconFourWithFlexSixColumnAssessment data={secondaryIcon} />
+                ) : secondaryIcon.length === 2 ? (
+                  <IconTwoWithFlexSixColumnAssessment data={secondaryIcon} colour={backColour} />
+                ) :
+                  null)
+                :
+                secondaryIcon.length === 2 ? (
+                  <IconTwoWithFlexSixColumn data={secondaryIcon} colour={backColour} />
+                ) : secondaryIcon.length === 3 ? (
+                  <IconThreeWithFlexFiveColumn data={secondaryIcon}colour={backColour} />
+                ) : secondaryIcon.length === 4 ? (
+                  <IconFourWithFlexSixColumn data={secondaryIcon} />
+                ) : secondaryIcon.length === 5 ? (
+                  <IconFiveWithFlexFiveColumn data={secondaryIcon} />
+                ) : secondaryIcon.length === 6 ? (
+                  <IconFiveWithFlexSixColumn data={secondaryIcon} />
+                ) : null}
 
             {/* */}
           </BottomNavigation>

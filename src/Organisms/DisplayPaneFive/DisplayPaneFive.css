@@ -151,3 +151,14 @@ p {
   padding: 2.5px;
   min-height: 50px;
 }
+
+.assessmentheader {
+  color: rgba(0, 0, 0, 0.54);
+  padding: 0;
+  overflow: hidden;
+  font-size: 1.2rem;
+  transform: translate(0, 0.5px) scale(1);
+  line-height: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

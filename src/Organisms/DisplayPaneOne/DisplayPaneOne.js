@@ -219,7 +219,15 @@ export const DisplayPaneOne = () => {
 
               <FooterIconOne />
             </div>
-          )}
+          )}{
+            isAssessmentStart === 'PROGRESS'?(
+              <div>
+                {/* <DisplayPaneSixFooter /> */}
+                <FooterIconOne/>
+              </div>
+            ):null
+          }
+          
         </div>
       )}{' '}
       <PopUpDisplayPaneOneSectionTwo

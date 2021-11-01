@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Keyboard, Description, InsertDriveFile, BusinessCenter } from '@material-ui/icons';
 import IconButton from '../IconButton/IconButton';
 import './FooterIconTwo.css';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { SET_POPUP_STATE, SET_GRID_COLUMN_COUNT_VALUE } from '../../actionType';
+import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import { SET_POPUP_STATE, SET_GRID_COLUMN_COUNT_VALUE, SET_DISPLAY_TWO_SINGLE_STATE, SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE } from '../../actionType';
 import PopUpIcon from '../../PopUpIcon/PopUpIcon';
 import {
   CALCULATOR_POPUP_ARR,
@@ -16,14 +16,29 @@ import {
   TEMPLATE_POPUP_ARR,
   ALIGNMENT_POPUP_ARR
 } from '../../PopUpConfig';
+import FooterIconTwo from './FooterIconTwo';
 export const FooterIconOne = (props) => {
+  const [isDisplayPaneShow, setIsDisplayPaneShow] = useState(true);
+  const { FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue, popupHeaderOne, popupHeaderOneBadgeOne } = useSelector(
     (state) => state.PopUpReducer
   );
+  const {
+    assesseeAssignmentAssessmentData,
+    assesseeAssessmentStartData,
+    isAssessmentStart,
+    asssignmentStarted,
+    currentSectionIndexValue
+  } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   debugger;
+  //   setSeondary();
+  // }, [currentSectionIndexValue])
   const openFooterIconPopup = (e) => {
     console.log(e.currentTarget.getAttribute('data-value'));
     let clickedValue = e.currentTarget.getAttribute('data-value');
+    setIsDisplayPaneShow(true);
     if (clickedValue === 'worksheet') {
       dispatch({
         type: SET_POPUP_STATE,
@@ -164,8 +179,29 @@ export const FooterIconOne = (props) => {
         payload: countval
       });
     }
-  };
+    if(clickedValue==='communiqué'){
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'indexPointer', value: 0 }
+      });
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: 'COMMUNIQUE' }
+      });
+      
 
+    }
+    if(clickedValue==='synopsis'){
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'indexPointer', value: 0 }
+      });
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: 'SYNOPSIS' }
+      });      
+    }
+  };
   const BackHandlerEvent = () => {
     let revisePopupHeaderOne = '';
     let valueArr = [];
@@ -206,57 +242,108 @@ export const FooterIconOne = (props) => {
       }
     });
   };
+  // let aid = assesseeAssessmentStartData?.assessmentSection[currentSectionIndexValue]?.assessmentSectionAid;
+  // console.log('current aid setting', aid);
+  const reviseSecondaryIcons = [
+    {
+      label: 'calculator', onClick: openFooterIconPopup, Icon: Keyboard, colour: "displayPaneLeft", 
+      //disabled: aid?.assessmentSectionAidCalculatorPermission ? false : true
+    },
+    { label: 'communiqué', onClick: openFooterIconPopup, Icon: Description, colour: "displayPaneLeft", },
+    { label: 'manuscript', onClick: openFooterIconPopup, Icon: Description, colour: "displayPaneLeft" },
+    { label: 'synopsis', onClick: openFooterIconPopup, Icon: Description, colour: "displayPaneLeft" },
+    { label: 'toolkit', onClick: openFooterIconPopup, Icon: BusinessCenter, colour: "displayPaneLeft" },
+    { label: 'worksheet', onClick: openFooterIconPopup, Icon: InsertDriveFile, colour: "displayPaneLeft" }
+  ];
+
+  const reviseSecondaryIconsDashboard = [
+    { label: 'calculator', onClick: openFooterIconPopup, Icon: Keyboard, colour: "displayPaneLeft" },
+    { label: 'communiqué', onClick: openFooterIconPopup, Icon: Description, colour: "displayPaneLeft" },
+    { label: 'toolkit', onClick: openFooterIconPopup, Icon: BusinessCenter, colour: "displayPaneLeft" },
+    { label: 'worksheet', onClick: openFooterIconPopup, Icon: InsertDriveFile, colour: "displayPaneLeft" }
+  ];
+  const onClickRevise = () => {
+    setIsDisplayPaneShow(false);
+  }
+  const revisePrimaryIcon = [{ label: 'click', onClick: onClickRevise, Icon: ReviseIcon, colour: "displayPaneLeft" }];
+  //console.log('secondaryIcon', reviseSecondaryIcons)
   return (
-    <div className={'middleFooterD'}>
-      <div style={{ flex: 1, textAlign: 'center' }}></div>
-      <div style={{ flex: 1, textAlign: 'center' }}>
-        <IconButton
-          Icon={Keyboard}
-          className=""
-          colour="displayPaneLeft"
-          label="calculator"
-          dataValue="calculator"
-          onClick={openFooterIconPopup}
-        />
-      </div>
-      <div style={{ flex: 1, textAlign: 'center' }}>
-        <IconButton
-          Icon={Description}
-          className=""
-          colour="displayPaneLeft"
-          label="manuscript"
-          dataValue="manuscript"
-          onClick={openFooterIconPopup}
-        />
-      </div>
-      <div style={{ flex: 1, textAlign: 'center' }}>
-        <IconButton
-          Icon={BusinessCenter}
-          className=""
-          colour="displayPaneLeft"
-          label="toolkit"
-          dataValue="toolkit"
-          onClick={openFooterIconPopup}
-        />
-      </div>
-      <div style={{ flex: 1, textAlign: 'center' }}>
-        <IconButton
-          Icon={InsertDriveFile}
-          className=""
-          colour="displayPaneLeft"
-          label="worksheet"
-          dataValue="worksheet"
-          onClick={openFooterIconPopup}
-        />
-      </div>
-      <div style={{ flex: 1, textAlign: 'center' }}></div>
+    <>
+      {
+        isAssessmentStart === 'PROGRESS' ? (
+          <FooterIconTwo
+            //className={'widthDisplayPaneFive'}
+            FilterModeEnable={isDisplayPaneShow}
+            FilterMode={FilterMode}
+            onClick={onClickRevise}
+            primaryIcon={revisePrimaryIcon}
+            secondaryIcon={reviseSecondaryIcons}
+            backColour="displayPaneLeft"
+          />
+        ) : (
+          <FooterIconTwo
+            //className={'widthDisplayPaneFive'}
+            FilterModeEnable={isDisplayPaneShow}
+            FilterMode={FilterMode}
+            onClick={onClickRevise}
+            primaryIcon={revisePrimaryIcon}
+            secondaryIcon={reviseSecondaryIconsDashboard}
+            backColour="displayPaneLeft"
+          />
+        )
+      }
+      {/* <div className={'middleFooterD'}>
+        <div style={{ flex: 1, textAlign: 'center' }}></div>
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <IconButton
+            Icon={Keyboard}
+            className=""
+            colour="displayPaneLeft"
+            label="calculator"
+            dataValue="calculator"
+            onClick={openFooterIconPopup}
+          />
+        </div>
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <IconButton
+            Icon={Description}
+            className=""
+            colour="displayPaneLeft"
+            label="manuscript"
+            dataValue="manuscript"
+            onClick={openFooterIconPopup}
+          />
+        </div>
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <IconButton
+            Icon={BusinessCenter}
+            className=""
+            colour="displayPaneLeft"
+            label="toolkit"
+            dataValue="toolkit"
+            onClick={openFooterIconPopup}
+          />
+        </div>
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <IconButton
+            Icon={InsertDriveFile}
+            className=""
+            colour="displayPaneLeft"
+            label="worksheet"
+            dataValue="worksheet"
+            onClick={openFooterIconPopup}
+          />
+        </div>
+        <div style={{ flex: 1, textAlign: 'center' }}></div>
+        
+      </div> */}
       <PopUpIcon
         isActive={isPopUpValue === 'LEFTFOOTER'}
         headerPanelColour="displayPaneLeft"
         BackHandlerEvent={BackHandlerEvent}
         onClickEvent={openFooterIconPopup}
       />
-    </div>
+    </>
   );
 };
 

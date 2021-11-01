@@ -58,17 +58,22 @@ const AssessmentHeader = (props) => {
               </div>
             </div>
             <div style={{ display: 'inline-block', flex: '4' }}>
-              <div
-                className={[
-                  'midPaneInformation',
-                  props.assessmentSectionDescription !== '' ? null : 'aliasmiddle'
-                ].join(' ')}
-              >
-                {props.assessmentSectionName}
-              </div>
-              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
-                {props.assessmentSectionDescription}
-              </div>
+              {
+                props.assessmentSectionName + props.assessmentSectionDescription !== 'SectionGeneric' ?
+                  <div>
+                    <div
+                      className={[
+                        'midPaneInformation',
+                        props.assessmentSectionDescription !== '' ? null : 'aliasmiddle'
+                      ].join(' ')}
+                    >
+                      {props.assessmentSectionName}
+                    </div>
+                    <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+                      {props.assessmentSectionDescription}
+                    </div>
+                  </div> : null
+              }
             </div>
             <div
               style={{ flex: '1', display: 'flex', alignItems: 'center' }}
@@ -91,15 +96,14 @@ const AssessmentHeader = (props) => {
             >
               <div
                 className={[
-                  'midPaneInformation', ''
-                  //props.assessmentSectionDescription !== '' ? null : 'aliasmiddle'
+                  'midPaneInformation', 'unitFlex', 'AssesseeNotifyStatus'
                 ].join(' ')}
               >
                 {props.score}
               </div>
 
-              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
-                {'Score'}
+              <div className={['assessmentheader', 'textOverflow','unitFlex', 'AssesseeNotifyStatus'].join(' ')}>
+                {'score'}
               </div>
             </div>
             <div
@@ -122,7 +126,7 @@ const AssessmentHeader = (props) => {
                   </span>
                 )}
               </div>
-              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+              <div className={['assessmentheader', 'textOverflow','unitFlex', 'AssesseeNotifyStatus'].join(' ')}>
                 {'section'}
               </div>
 
@@ -172,7 +176,9 @@ export const DisplayPaneFiveAssessment = (props) => {
     timerFinished,
     timer,
     handleRadioButton,
-    currentQuestionChoice
+    currentQuestionChoice,
+    assessmentName,
+    assessmentDescription
   } = props;
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
@@ -318,37 +324,37 @@ export const DisplayPaneFiveAssessment = (props) => {
       </div>
       <div className="containerPadding">
         <AssessmentHeader
-        assessmentName={
-          isAssessmentSectionShow
-            ? informationBasic?.assessmentName
-            : isAssessmentPreviewShow
+          assessmentName={
+            isAssessmentSectionShow
               ? informationBasic?.assessmentName
-              : informationFramework?.assessmentName
-        }
-        assessmentDesc={
-          isAssessmentSectionShow
-            ? informationBasic?.assessmentDescription
-            : isAssessmentPreviewShow
+              : isAssessmentPreviewShow
+                ? informationBasic?.assessmentName
+                : assessmentName
+          }
+          assessmentDesc={
+            isAssessmentSectionShow
               ? informationBasic?.assessmentDescription
-              : informationFramework?.assessmentDescription || ''
-        }
-        assessmentSectionName={
-          isAssessmentSectionShow
-            ? informationFramework?.assessmentSectionName
-            : informationFramework?.assessmentSection[currentSectionIndex]
-              .assessmentSectionName || ''
-        }
-        assessmentSectionDescription={
-          isAssessmentSectionShow
-            ? informationFramework?.assessmentSectionDescription
-            : informationFramework?.assessmentSection[currentSectionIndex]
-              .assessmentSectionDescription || ''
-        }
-        id={isAssessmentSectionShow
-          ? informationFramework?.assessmentSectionItemDistinct[currentItemIndex]?.itemId:
-          informationFramework?.assessmentSection[currentSectionIndex]
-            ?.assessmentSectionItemDistinct[currentItemIndex]?.itemId
-        }
+              : isAssessmentPreviewShow
+                ? informationBasic?.assessmentDescription
+                : assessmentDescription || ''
+          }
+          assessmentSectionName={
+            isAssessmentSectionShow
+              ? informationFramework?.assessmentSectionName
+              : informationFramework?.assessmentSection[currentSectionIndex]
+                .assessmentSectionName || ''
+          }
+          assessmentSectionDescription={
+            isAssessmentSectionShow
+              ? informationFramework?.assessmentSectionDescription
+              : informationFramework?.assessmentSection[currentSectionIndex]
+                .assessmentSectionDescription || ''
+          }
+          id={isAssessmentSectionShow
+            ? informationFramework?.assessmentSectionItemDistinct[currentItemIndex]?.itemId :
+            informationFramework?.assessmentSection[currentSectionIndex]
+              ?.assessmentSectionItemDistinct[currentItemIndex]?.itemId
+          }
           score={
             isAssessmentSectionShow
               ? informationFramework?.assessmentSectionItemDistinct[currentItemIndex]
@@ -356,8 +362,8 @@ export const DisplayPaneFiveAssessment = (props) => {
               : informationFramework?.assessmentSection[currentSectionIndex]
                 ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOneScore
           }
-          
-         
+
+
           //isQuestionFlaged={isQuestionFlaged}
           onClickFlag={flagQuestion}
           isQuestionFlaged={
@@ -373,7 +379,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                 ?.assessmentSectionItemDistinct.length
           }
           currentQuestion={currentItemIndex + 1}
-          
+
         />
 
         <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>

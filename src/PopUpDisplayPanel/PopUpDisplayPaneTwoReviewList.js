@@ -69,7 +69,8 @@ import {
   CLEAR_SECTION_REDUCER_STATE,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
   SET_SECTION_REDUCER_STATE,
-  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE
+  SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
+  SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -327,6 +328,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
+    debugger;
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
@@ -2588,7 +2590,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         updateJobProfileTypeStatus(selectedAssociateInfo, selectedTagValue, dispatch, keyVal);
       }
       if (typeOfMiddlePaneList === 'assesseeAssignmentDistinctReviewList') {
-        console.log('selectedTagValue',selectedTagValue);
+        console.log('selectedTagValue', selectedTagValue);
         dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
         let assessmentList = reviewListDistinctData.filter((data) => {
           return data.assesseeAssignmentId === selectedTagValue;
@@ -2612,7 +2614,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         });
       }
       if (typeOfMiddlePaneList === 'assesseesAssginmentAssessmentReviewList') {
-        console.log('relatedReviewListDistinctData',relatedReviewListDistinctData);
+        console.log('relatedReviewListDistinctData', relatedReviewListDistinctData);
         let reqBody = {
           assesseeId: selectedAssociateInfo?.assesseeId,
           associateId:
@@ -2625,16 +2627,32 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({ type: ASSESSMENT_START_SAGA, payload: { request: reqBody } });
       }
       if (typeOfMiddlePaneList === 'acutalAssessmentStart') {
-        let reqBody = {
-          assesseeId: selectedAssociateInfo?.assesseeId,
-          associateId:
-            selectedAssociateInfo?.associate?.informationEngagement.associateTag
-              .associateTagPrimary,
-          assignmentId: assesseeAssignmentAssessmentData.assignmentId,
-          assessmentId: assesseeAssignmentAssessmentData.assessmentId
-        };
-        dispatch({ type: LOADER_START });
-        dispatch({ type: ASSESSEE_ASSESSMENT_START_SAGA, payload: { request: reqBody } });
+        debugger;
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'assesseeAssessmentStartData', 
+          value: assesseeAssignmentAssessmentData?.informationFramework
+          //value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[selectedTagValue] 
+        }
+        })
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
+        });
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'asssignmentStarted', value: 'PROGRESS' }
+        });
+        // let reqBody = {
+        //   assesseeId: selectedAssociateInfo?.assesseeId,
+        //   associateId:
+        //     selectedAssociateInfo?.associate?.informationEngagement.associateTag
+        //       .associateTagPrimary,
+        //   assignmentId: assesseeAssignmentAssessmentData.assignmentId,
+        //   assessmentId: assesseeAssignmentAssessmentData.assessmentId
+        // };
+        // dispatch({ type: LOADER_START });
+        // dispatch({ type: ASSESSEE_ASSESSMENT_START_SAGA, payload: { request: reqBody } });
       }
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
