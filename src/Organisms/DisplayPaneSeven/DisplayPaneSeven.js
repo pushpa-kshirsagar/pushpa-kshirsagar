@@ -20,100 +20,6 @@ import { ASSESSMENT_FINISH_POPUP_OPTION } from '../../PopUpConfig';
 import { setAssesseeAssessmentItemSaveResCall } from '../../Actions/ActionAssesseeAssessment';
 import DisplayPaneFiveAssessment from '../DisplayPaneFive/DisplayPaneFiveAssessment';
 
-// const AssessmentTimer = ({ expiryTimestamp, timerFinished }) => {
-//   const { seconds, minutes, hours } = useTimer({
-//     expiryTimestamp,
-//     onExpire: timerFinished
-//     // onExpire: () => {
-//     //   console.warn('onExpire called');
-//     // }
-//   });
-//   return (
-//     <div>
-//       <span>{hours < 10 ? '0' + hours : hours}</span>:
-//       <span>{minutes < 10 ? '0' + minutes : minutes}</span>:
-//       <span>{seconds < 10 ? '0' + seconds : seconds}</span>
-//     </div>
-//   );
-// };
-// const AssessmentHeader = (props) => {
-//   return (
-//     <Fragment>
-//       <Paper className={'dossierContainerTop'}>
-//         <div className="containerPadding sticky-header">
-//           <div style={{ height: '49px', padding: '0 5px', display: 'flex' }} className={''}>
-//             <div style={{ display: 'inline-block', flex: '2' }}>
-//               <div
-//                 className={[
-//                   'midPaneInformation',
-//                   props.assessmentDesc !== '' ? null : 'aliasmiddle'
-//                 ].join(' ')}
-//               >
-//                 {props.assessmentName}
-//               </div>
-//               <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
-//                 {props.assessmentDesc}
-//               </div>
-//             </div>
-//             <div
-//               style={{ flex: '1', display: 'flex', alignItems: 'center' }}
-//               className="flex-center"
-//             >
-//               <span
-//                 className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(' ')}
-//                 style={{ textAlign: 'center' }}
-//               >
-//                 <InputLabel
-//                   className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
-//                 >
-//                   {1 + '/' + 2}
-//                 </InputLabel>
-//                 <InputLabel
-//                   className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
-//                 >
-//                   {props.qnumber + '/' + props.totalQuestion}
-//                 </InputLabel>
-//               </span>
-//             </div>
-//             <div
-//               style={{ flex: '1', display: 'flex', alignItems: 'center' }}
-//               className="flex-center"
-//             >
-//               {props.score}
-//             </div>
-//             <div
-//               style={{ flex: '1', display: 'flex', alignItems: 'center' }}
-//               className="flex-center"
-//             >
-//               {props.timer && (
-//                 <span style={{}}>
-//                   <AssessmentTimer
-//                     expiryTimestamp={props.timer}
-//                     key={props.timer}
-//                     timerFinished={props.timerFinished}
-//                   />
-//                 </span>
-//               )}
-//             </div>
-//             <div
-//               style={{ flex: '1', display: 'flex', alignItems: 'center' }}
-//               className="flex-center"
-//             >
-//               <IconButton onClick={props.onClickFlag} className={'assessmentFlagButton'}>
-//                 {props.isQuestionFlaged ? (
-//                   <i className="fa fa-flag" style={{ color: '#ff6464' }}></i>
-//                 ) : (
-//                   <i className="far fa-flag"></i>
-//                 )}
-//               </IconButton>
-//             </div>
-//           </div>
-//         </div>
-//       </Paper>
-//       <hr className={'assessmentHeaderHr'} />
-//     </Fragment>
-//   );
-// };
 export const DisplayPaneSeven = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState([]);
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
@@ -127,9 +33,11 @@ export const DisplayPaneSeven = () => {
   const dispatch = useDispatch();
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { assesseeAssessmentStartData } = useSelector(
+  const { assesseeAssessmentStartData, currentSequenceIndex, assesseeAssignmentAssessmentData, menuscript, synopsis, communique} = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
+  console.log('menuscript,synopsis,communiqué');
+  console.log(menuscript, synopsis, communique);
   const time = new Date();
   const [timer, setTimer] = useState(time);
   const timerFinished = () => {
@@ -155,7 +63,7 @@ export const DisplayPaneSeven = () => {
       assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
       currentQuestionIndex
       ];
-      console.log('item', item);
+    console.log('item', item);
     let itemId = item.itemId
     let itemFlaged = item?.assesseeAssignmentAssessmentItemFlagged;
     // let id = assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct[currentQuestionIndex].id;
@@ -282,9 +190,27 @@ export const DisplayPaneSeven = () => {
       } else {
         if (currentSectionIndex < assesseeAssessmentStartData.assessmentSection.length - 1) {
           setcurrentSectionIndex(currentSectionIndex + 1);
+
           setcurrentQuestionIndex(0);
           setcurrentQuestionChoice(0);
-          //setItemTimeStart(new Date().getTime());
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'currentSequenceIndex', value: currentSequenceIndex + 1 }
+          })
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'isAssessmentStart', value: 'STOP' }
+          })
+
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'assesseeAssessmentStartData', value: null }
+          })
+          // dispatch({
+          //   type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          //   payload: { stateName: 'isAssessmentStart', value: 'PENDING' }
+          // })
+
         } else {
           dispatch({
             type: SET_POPUP_STATE,
@@ -328,12 +254,12 @@ export const DisplayPaneSeven = () => {
   };
   useEffect(() => {
     setItemTimeStart(new Date().getTime());
-    //const sec = assesseeAssessmentStartData?.assessmentSection[0]?.assessmentTime / 1000;
-    const sec = assesseeAssessmentStartData?.assessmentTime / 1000;
+    const sec = assesseeAssessmentStartData?.assessmentSection[currentSectionIndex]?.assessmentSectionTime / 1000;
+    //const sec = assesseeAssessmentStartData?.assessmentTime / 1000;
     let tt = new Date();
     tt.setSeconds(tt.getSeconds() + sec);
     setTimer(tt);
-  }, [assesseeAssessmentStartData]);
+  }, [assesseeAssessmentStartData, currentSectionIndex]);
   const primaryIcon = [];
   const secondaryIcon = [
     { label: 'first', onClick: onClickFooter, Icon: FirstPage },
@@ -360,10 +286,10 @@ export const DisplayPaneSeven = () => {
     //   setIsQuestionFlaged([...flaggedArr]);
     // }
 
-    if(currentQuestion?.assesseeAssignmentAssessmentItemFlagged){
+    if (currentQuestion?.assesseeAssignmentAssessmentItemFlagged) {
       currentQuestion.assesseeAssignmentAssessmentItemFlagged = false;
       setIsQuestionFlaged(isQuestionFlaged.filter(selectedId => selectedId !== itemId));
-    }else{
+    } else {
       currentQuestion.assesseeAssignmentAssessmentItemFlagged = true;
       flaggedArr.push(itemId);
       setIsQuestionFlaged([...flaggedArr]);
@@ -403,7 +329,9 @@ export const DisplayPaneSeven = () => {
               timer={timer}
               handleRadioButton={handleRadioButton}
               currentQuestionChoice={currentQuestionChoice}
-              flagQuestion={flagQuestion}              
+              flagQuestion={flagQuestion}
+              assessmentDescription={assesseeAssignmentAssessmentData?.assessmentDescription}
+              assessmentName={assesseeAssignmentAssessmentData?.assessmentName}
             />
             <FooterIconTwo
               className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}

@@ -58,17 +58,22 @@ const AssessmentHeader = (props) => {
               </div>
             </div>
             <div style={{ display: 'inline-block', flex: '4' }}>
-              <div
-                className={[
-                  'midPaneInformation',
-                  props.assessmentSectionDescription !== '' ? null : 'aliasmiddle'
-                ].join(' ')}
-              >
-                {props.assessmentSectionName}
-              </div>
-              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
-                {props.assessmentSectionDescription}
-              </div>
+              {props.assessmentSectionName + props.assessmentSectionDescription !==
+              'SectionGeneric' ? (
+                <div>
+                  <div
+                    className={[
+                      'midPaneInformation',
+                      props.assessmentSectionDescription !== '' ? null : 'aliasmiddle'
+                    ].join(' ')}
+                  >
+                    {props.assessmentSectionName}
+                  </div>
+                  <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+                    {props.assessmentSectionDescription}
+                  </div>
+                </div>
+              ) : null}
             </div>
             <div
               style={{ flex: '1', display: 'flex', alignItems: 'center' }}
@@ -172,7 +177,9 @@ export const DisplayPaneFiveAssessment = (props) => {
     timerFinished,
     timer,
     handleRadioButton,
-    currentQuestionChoice
+    currentQuestionChoice,
+    assessmentName,
+    assessmentDescription
   } = props;
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);

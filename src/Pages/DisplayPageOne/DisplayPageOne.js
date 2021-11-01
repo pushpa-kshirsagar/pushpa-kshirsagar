@@ -79,7 +79,7 @@ const DisplayPageOne = () => {
     isAssessmentVersionShow = false
   } = useSelector((state) => state.DisplayPaneThreeReducer);
 
-  const { isExamMode, isAssessmentStart } = useSelector(
+  const { isExamMode, isAssessmentStart,asssignmentStarted } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
   const dispatch = useDispatch();
@@ -178,6 +178,10 @@ const DisplayPageOne = () => {
   const assesseePicture = leftPaneAssesseeInfo?.assessee?.informationBasic?.assesseePicture;
 
   console.log('isExamMode', isExamMode);
+  console.log('isMobile Mode',isMobile);
+  console.log('asssignmentStarted',asssignmentStarted);
+  console.log('print inside PageOne isAssessmentStart',isAssessmentStart);
+  
   return (
     <>
       <HeaderZero
@@ -215,7 +219,8 @@ const DisplayPageOne = () => {
           <>
             {isExamMode ? (
               <>
-                {(isAssessmentStart === 'PROGRESS' && (
+              {/* {(asssignmentStarted === 'PROGRESS' && ( */}
+                {(isAssessmentStart === 'PROGRESS' && (                
                   <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
                     <DisplayPaneOne />
                   </div>

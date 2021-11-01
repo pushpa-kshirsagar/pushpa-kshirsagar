@@ -71,7 +71,8 @@ import {
   SET_SECTION_REDUCER_STATE,
   SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
   SET_VERSION_REDUCER_STATE,
-  CLEAR_VERSION_REDUCER_STATE
+  CLEAR_VERSION_REDUCER_STATE,
+  SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE
 } from '../actionType';
 import {
   assesseeReviewInformation,
@@ -330,6 +331,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
+    debugger;
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
@@ -2648,16 +2650,32 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({ type: ASSESSMENT_START_SAGA, payload: { request: reqBody } });
       }
       if (typeOfMiddlePaneList === 'acutalAssessmentStart') {
-        let reqBody = {
-          assesseeId: selectedAssociateInfo?.assesseeId,
-          associateId:
-            selectedAssociateInfo?.associate?.informationEngagement.associateTag
-              .associateTagPrimary,
-          assignmentId: assesseeAssignmentAssessmentData.assignmentId,
-          assessmentId: assesseeAssignmentAssessmentData.assessmentId
-        };
-        dispatch({ type: LOADER_START });
-        dispatch({ type: ASSESSEE_ASSESSMENT_START_SAGA, payload: { request: reqBody } });
+        debugger;
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'assesseeAssessmentStartData', 
+          value: assesseeAssignmentAssessmentData?.informationFramework
+          //value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[selectedTagValue] 
+        }
+        })
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
+        });
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'asssignmentStarted', value: 'PROGRESS' }
+        });
+        // let reqBody = {
+        //   assesseeId: selectedAssociateInfo?.assesseeId,
+        //   associateId:
+        //     selectedAssociateInfo?.associate?.informationEngagement.associateTag
+        //       .associateTagPrimary,
+        //   assignmentId: assesseeAssignmentAssessmentData.assignmentId,
+        //   assessmentId: assesseeAssignmentAssessmentData.assessmentId
+        // };
+        // dispatch({ type: LOADER_START });
+        // dispatch({ type: ASSESSEE_ASSESSMENT_START_SAGA, payload: { request: reqBody } });
       }
       dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
       dispatch({
