@@ -2654,7 +2654,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({
           type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
           payload: { stateName: 'assesseeAssessmentStartData', 
-          value: assesseeAssignmentAssessmentData?.informationFramework
+          value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[selectedTagValue]
           //value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[selectedTagValue] 
         }
         })
