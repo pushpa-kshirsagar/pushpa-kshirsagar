@@ -182,7 +182,6 @@ function* workerAssessmentStartSaga(data) {
   }
 }
 function* workerAssesseeAssessmentStartSaga(data) {
-  debugger;
   try {
     const response = yield call(apiCallFun, {
       data: data.payload.request,

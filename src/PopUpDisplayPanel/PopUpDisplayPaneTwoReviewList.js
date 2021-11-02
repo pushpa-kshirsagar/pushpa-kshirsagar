@@ -331,7 +331,6 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     });
   };
   const ChangeOptionPopup = (e) => {
-    debugger;
     let keyVal = e.currentTarget.getAttribute('data-key');
     let dataVal = e.currentTarget.getAttribute('data-value');
     console.log(dataVal);
@@ -2650,14 +2649,14 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
         dispatch({ type: ASSESSMENT_START_SAGA, payload: { request: reqBody } });
       }
       if (typeOfMiddlePaneList === 'acutalAssessmentStart') {
-        debugger;
         dispatch({
           type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-          payload: { stateName: 'assesseeAssessmentStartData', 
-          value: assesseeAssignmentAssessmentData?.informationFramework
-          //value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[selectedTagValue] 
-        }
-        })
+          payload: {
+            stateName: 'assesseeAssessmentStartData',
+            value: assesseeAssignmentAssessmentData?.informationFramework
+            //value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[selectedTagValue]
+          }
+        });
         dispatch({
           type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
           payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
