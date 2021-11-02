@@ -422,16 +422,29 @@ export const DisplayPaneSix = () => {
                   popupOpenType: 'primary',
                   popupContentArrValue: tempArr,
                   selectedTagStatus: selectedTagStatus,
-                  selectedTagValue: lastIndexValue
+                  selectedTagValue: lastIndexValue - 1
                 }
               });
               dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
             } else {
               dispatch({
+                type: SET_POPUP_STATE,
+                payload: {
+                  popupHeaderOne: 'assessment',
+                  popupHeaderOneBadgeOne: '',
+                  popupHeaderOneBadgeTwo: '',
+                  isPopUpValue: '',
+                  popupOpenType: 'primary',
+                  popupContentArrValue: tempArr,
+                  selectedTagStatus: selectedTagStatus,
+                  selectedTagValue: lastIndexValue - 1
+                }
+              });
+              dispatch({
                 type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
                 payload: {
                   stateName: 'assesseeAssessmentStartData',
-                  value: assesseeAssignmentAssessmentData?.informationFramework
+                  value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[lastIndexValue - 1]
                 }
               })
               dispatch({
@@ -506,12 +519,23 @@ export const DisplayPaneSix = () => {
           headerOne={'assessment'}
           //headerOneBadgeOne={isAssessmentStart === 'MANUSCRIPT' ? 'manuscript' : 'communiqué'}
           //headerOneBadgeOne={headerValue}
-          headerOneBadgeOne={isAssessmentStart === 'START' || isAssessmentStart === 'STOP' ? assessmentsequenceObject[currentSequenceIndex]?.name :
+          headerOneBadgeOne={isAssessmentStart === 'START' || isAssessmentStart === 'STOP' ?
+            assessmentsequenceObject[currentSequenceIndex]?.name === 'assessment communiqué' ? 'communiqué' :
+              assessmentsequenceObject[currentSequenceIndex]?.name === 'assessment manuscript' ? 'manuscript' :
+                assessmentsequenceObject[currentSequenceIndex]?.name === 'assessment synopsis' ? 'synopsis' :
+                  assessmentsequenceObject[currentSequenceIndex]?.name === 'section communiqué' ? 'section' :
+                    assessmentsequenceObject[currentSequenceIndex]?.name === 'section manuscript' ? 'section' :
+                      assessmentsequenceObject[currentSequenceIndex]?.name === 'section synopsis' ? 'section' : ''
+            :
             isAssessmentStart === 'COMMUNIQUE' ? 'communique' :
               isAssessmentStart === 'SYNOPSIS' ? 'synopsis' :
                 isAssessmentStart === 'MENUSCRIPT' ? 'menuscript'
                   : ''}
-          headerOneBadgeTwo={''}
+          headerOneBadgeTwo={
+            assessmentsequenceObject[currentSequenceIndex]?.name === 'section communiqué' ? 'communiqué' :
+              assessmentsequenceObject[currentSequenceIndex]?.name === 'section manuscript' ? 'menuscript' :
+                assessmentsequenceObject[currentSequenceIndex]?.name === 'section synopsis' ? 'synopsis' : ''
+          }
           headerPanelColour="blue"
         />
       </div>

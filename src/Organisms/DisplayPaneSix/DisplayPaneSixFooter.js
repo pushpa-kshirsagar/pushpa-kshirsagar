@@ -26,7 +26,6 @@ export const DisplayPaneSixFooter = () => {
     (state) => state.PopUpReducer
   );
   const openFooterIconPopup = (e) => {
-    debugger;
     let clickedval = e.currentTarget.getAttribute('data-value');
     if (clickedval === 'calculator') {
       dispatch({

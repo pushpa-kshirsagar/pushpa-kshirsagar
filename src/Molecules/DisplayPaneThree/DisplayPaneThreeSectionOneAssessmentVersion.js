@@ -30,6 +30,7 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
   const { responseObject, reviewMode, relatedReviewListPaneThree } = useSelector(
     (state) => state.DisplayPaneThreeReducer
   );
+  const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const { assessmentResponseObject } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedAssociateInfo, relatedReviewListDistinctData } = useSelector(
     (state) => state.DisplayPaneTwoReducer
@@ -127,14 +128,20 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'assessmentSelecedSection', value: selectedBadgeName - 1 }
       });
-      let requestObect = makeItemObj(selectedAssociateInfo, 'active', -1, -1);
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'assessmentSelecedVersion', value: selectedTagValue }
+      });
       let revisedGroupObject = {
-        id: relatedReviewListDistinctData[0].id,
+        id: assessmentResponseObject.id,
         assessmentSectionName: responseObject.assessmentVersionName,
         assessmentSectionDescription: responseObject.assessmentVersionDescription,
-        typeOfMiddlePaneList: 'assessmentSectionItemDistinctReviewList'
+        item: assessmentResponseObject?.informationFramework?.assessmentItemDistinct
       };
-      // let existingItemId = [];
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
       let existingItemId =
         responseObject?.assessmentVersionItemDistinct &&
         responseObject?.assessmentVersionItemDistinct?.map((val) => {
@@ -145,20 +152,21 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
         payload: { FilterMode: 'assessmentSectionItemRevise' }
       });
       dispatch({
-        type: SET_DISPLAY_TWO_SINGLE_STATE,
-        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
-      });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneTwo' });
-      dispatch({ type: LOADER_START });
-      dispatch({
-        type: GET_ALLOCATE_ITEM,
+        type: SET_MIDDLEPANE_STATE,
         payload: {
-          request: requestObect,
-          revisedGroupObject: revisedGroupObject,
-          existingItemId: existingItemId,
-          typeOfMiddlePaneList: 'assessmentSectionItemDistinctReviewList'
+          middlePaneHeader: 'items',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assessmentSectionItemDistinctReviewList',
+          scanCount: assessmentResponseObject.informationFramework?.assessmentItemDistinct.length,
+          showMiddlePaneState: true,
+          isSelectActive: 'multiple',
+          selectedTagsArray: existingItemId
         }
       });
+      dispatch({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [revisedGroupObject] });
     }
     if (labelName === 'preview') {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE, payload: true });

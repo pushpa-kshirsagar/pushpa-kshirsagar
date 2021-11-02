@@ -217,6 +217,7 @@ export const DisplayPaneThree = () => {
     relatedReviewListDistinctData,
     scanCount,
     assessmentSelecedSection,
+    assessmentSelecedVersion,
     assessmentResponseObject
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
@@ -2040,8 +2041,8 @@ export const DisplayPaneThree = () => {
         }
       });
     } else if (headerOneBadgeOne === 'version' && headerOne === 'assessments') {
-      let sectionObj = assessmentResponseObject.informationFramework.assessmentSection;
-      sectionObj[assessmentSelecedSection].assessmentVersion[selectedTagValue] =
+      let sectionObj = assessmentInfo.informationFramework.assessmentSection;
+      sectionObj[assessmentSelecedSection].assessmentVersion[assessmentSelecedVersion] =
         versionInfo.versionInformation;
       let id = relatedReviewListDistinctData[0].id;
       const reqBody = {

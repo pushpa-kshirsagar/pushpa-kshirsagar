@@ -71,6 +71,7 @@ const initialState = {
   responseObject: '',
   assessmentResponseObject: '',
   assessmentSelecedSection: '',
+  assessmentSelecedVersion: '',
   credentialOptionArr: [],
   jobProfilerReviewList: null,
   jobProfileFunctionReviewList: [],

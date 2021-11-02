@@ -6,6 +6,7 @@ import {
   FILTERMODE_ENABLE,
   POPUP_OPEN,
   SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+  SET_ASSESSMENT_FRAMEWORK_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
@@ -27,9 +28,7 @@ const AssessmentDistinctItemDistinctReviewList = (props) => {
   const dispatch = useDispatch();
   const [isShowReviseIcon, setIsShowReviseIcon] = useState(true);
   const { countPage } = useSelector((state) => state.AssesseeCreateReducer);
-  const { informationFramework } = useSelector(
-    (state) => state.AssessmentReducer
-  );
+  const { informationFramework } = useSelector((state) => state.AssessmentReducer);
   const {
     middlePaneSelectedValue,
     reviewListDistinctData,
@@ -80,12 +79,12 @@ const AssessmentDistinctItemDistinctReviewList = (props) => {
     });
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     let sectionZeroItem = {
-      ...informationFramework.assessmentSection[0],
-      assessmentSectionItemDistinct: selectedTagsArray
+      ...informationFramework,
+      assessmentItemDistinct: selectedTagsArray
     };
     dispatch({
-      type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-      payload: { stateName: 'assessmentSection', value: [sectionZeroItem] }
+      type: SET_ASSESSMENT_FRAMEWORK_STATE,
+      payload: sectionZeroItem
     });
     // dispatch({ type: SET_ASSESSEE_GROUP_ASSESSEE_ID_LIST, payload: selectedTagsArray });
     // dispatch({

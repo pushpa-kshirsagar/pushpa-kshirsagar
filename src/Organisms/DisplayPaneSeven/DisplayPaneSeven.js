@@ -4,6 +4,7 @@ import LastPage from '@material-ui/icons/LastPage';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
 import HeaderCard from '../../Molecules/Header/HeaderCard';
+import NavigatorIcon from '@material-ui/icons/OpenWith';
 import './DisplayPaneSeven.css';
 import '../DisplayPaneFive/DisplayPaneFive.css';
 import '../../Molecules/ReviewList/ReviewList.css';
@@ -27,17 +28,24 @@ export const DisplayPaneSeven = () => {
   const [itemTimeStart, setItemTimeStart] = useState(0);
   const [currentSectionIndex, setcurrentSectionIndex] = useState(0);
   const [itemTimeId, setItemTimeId] = useState('');
+  const [isShowReviewIcon, setisShowReviewIcon] = useState(true);
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
   const { selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
 
   const dispatch = useDispatch();
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { assesseeAssessmentStartData, currentSequenceIndex, assesseeAssignmentAssessmentData, menuscript, synopsis, communique} = useSelector(
+  const { assesseeAssessmentStartData, currentSequenceIndex, assesseeAssignmentAssessmentData, menuscript, synopsis, communique } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
+  const {
+  selectedTagValue
+  } = useSelector((state) => state.PopUpReducer);
+  console.log('selectedTagValue',selectedTagValue);
   console.log('menuscript,synopsis,communiqué');
   console.log(menuscript, synopsis, communique);
+  console.log('pane sevenassesseeAssessmentStartData');
+  console.log(assesseeAssessmentStartData);
   const time = new Date();
   const [timer, setTimer] = useState(time);
   const timerFinished = () => {
@@ -58,13 +66,12 @@ export const DisplayPaneSeven = () => {
     dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneSix' });
   };
   const onClickFooter = (e) => {
+    debugger;
     let clickedval = e.currentTarget.getAttribute('data-value');
     let item =
-      assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
-      currentQuestionIndex
-      ];
+      assesseeAssessmentStartData?.assessmentSectionItemDistinct[currentQuestionIndex];
     console.log('item', item);
-    let itemId = item.itemId
+    let itemId = item?.itemId
     let itemFlaged = item?.assesseeAssignmentAssessmentItemFlagged;
     // let id = assesseeAssessmentStartData?.assessmentSection[0].assessmentSectionItemDistinct[currentQuestionIndex].id;
     //console.log('currentQuestionIndex', currentQuestionIndex);
@@ -76,9 +83,7 @@ export const DisplayPaneSeven = () => {
       if (currentQuestionIndex !== 0) {
         setcurrentQuestionIndex(prevIndex);
         let itemData =
-          assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
-          prevIndex
-          ];
+          assesseeAssessmentStartData?.assessmentSectionItemDistinct[prevIndex];
         let item = responseInLocal.filter(function (ii) {
           return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
         });
@@ -86,25 +91,25 @@ export const DisplayPaneSeven = () => {
         if (item.length > 0)
           setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
       } else {
-        let prevSec = currentSectionIndex - 1;
-        if (currentSectionIndex != 0) {
-          setcurrentSectionIndex(prevSec);
-          setcurrentQuestionIndex(
-            assesseeAssessmentStartData?.assessmentSection[prevSec]
-              ?.assessmentSectionItemDistinct.length - 1
-          );
-          let itemData =
-            assesseeAssessmentStartData?.assessmentSection[prevSec].assessmentSectionItemDistinct[
-            assesseeAssessmentStartData?.assessmentSection[prevSec]
-              ?.assessmentSectionItemDistinct.length - 1
-            ];
-          let item = responseInLocal.filter(function (ii) {
-            return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
-          });
-          console.log('item', item);
-          if (item.length > 0)
-            setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
-        }
+        // let prevSec = currentSectionIndex - 1;
+        // if (currentSectionIndex != 0) {
+        //   setcurrentSectionIndex(prevSec);
+        //   setcurrentQuestionIndex(
+        //     assesseeAssessmentStartData?.assessmentSection[prevSec]
+        //       ?.assessmentSectionItemDistinct.length - 1
+        //   );
+        //   let itemData =
+        //     assesseeAssessmentStartData?.assessmentSection[prevSec].assessmentSectionItemDistinct[
+        //     assesseeAssessmentStartData?.assessmentSection[prevSec]
+        //       ?.assessmentSectionItemDistinct.length - 1
+        //     ];
+        //   let item = responseInLocal.filter(function (ii) {
+        //     return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+        //   });
+        //   console.log('item', item);
+        //   if (item.length > 0)
+        //     setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
+        // }
       }
     }
     if (clickedval === 'first') {
@@ -112,37 +117,34 @@ export const DisplayPaneSeven = () => {
       if (currentQuestionIndex !== 0) {
         setcurrentQuestionIndex(0);
         let itemData =
-          assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[0];
+          assesseeAssessmentStartData.assessmentSectionItemDistinct[0];
         let item = responseInLocal.filter(function (ii) {
           return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
         });
         if (item.length > 0)
           setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
       } else {
-        if (currentSectionIndex !== 0) {
-          setcurrentSectionIndex(currentSectionIndex - 1);
-          setcurrentQuestionIndex(0);
-          let itemData =
-            assesseeAssessmentStartData.assessmentSection[currentSectionIndex - 1].assessmentSectionItemDistinct[0];
-          let item = responseInLocal.filter(function (ii) {
-            return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
-          });
-          if (item.length > 0)
-            setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
-        }
+        // if (currentSectionIndex !== 0) {
+        //   setcurrentSectionIndex(currentSectionIndex - 1);
+        //   setcurrentQuestionIndex(0);
+        //   let itemData =
+        //     assesseeAssessmentStartData.assessmentSection[currentSectionIndex - 1].assessmentSectionItemDistinct[0];
+        //   let item = responseInLocal.filter(function (ii) {
+        //     return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+        //   });
+        //   if (item.length > 0)
+        //     setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
+        // }
       }
-      // if(currentQuestionChoice!==0){
-      // setcurrentQuestionChoice(null);
     }
     if (clickedval === 'last') {
       let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
-      if (currentQuestionIndex < assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct.length - 1) {
+      if (currentQuestionIndex < assesseeAssessmentStartData.assessmentSectionItemDistinct.length - 1) {
         let lastIndex =
-          assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct.length - 1;
+          assesseeAssessmentStartData.assessmentSectionItemDistinct.length - 1;
         setcurrentQuestionIndex(lastIndex);
-        //let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
         let itemData =
-          assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[lastIndex];
+          assesseeAssessmentStartData.assessmentSectionItemDistinct[lastIndex];
         let item = responseInLocal.filter(function (ii) {
           return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
         });
@@ -150,49 +152,36 @@ export const DisplayPaneSeven = () => {
           setcurrentQuestionChoice(
             item[lastIndex].assesseeAssignmentAssessmentItemResponseChoiceSelected
           );
-      } else {
-        if (currentSectionIndex < assesseeAssessmentStartData.assessmentSection.length - 1) {
-          setcurrentSectionIndex(currentSectionIndex + 1);
-          let lastIndex =
-            assesseeAssessmentStartData.assessmentSection[currentSectionIndex + 1].assessmentSectionItemDistinct.length - 1;
-          setcurrentQuestionIndex(lastIndex);
-          //let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
-          let itemData =
-            assesseeAssessmentStartData.assessmentSection[currentSectionIndex + 1].assessmentSectionItemDistinct[lastIndex];
-          let item = responseInLocal.filter(function (ii) {
-            return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
-          });
-          if (item.length > 0)
-            setcurrentQuestionChoice(
-              item[lastIndex].assesseeAssignmentAssessmentItemResponseChoiceSelected
-            );
-        }
       }
-      // setcurrentQuestionChoice(null);
+      // } else {
+      //   if (currentSectionIndex < assesseeAssessmentStartData.assessmentSection.length - 1) {
+      //     setcurrentSectionIndex(currentSectionIndex + 1);
+      //     let lastIndex =
+      //       assesseeAssessmentStartData.assessmentSection[currentSectionIndex + 1].assessmentSectionItemDistinct.length - 1;
+      //     setcurrentQuestionIndex(lastIndex);
+      //     //let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
+      //     let itemData =
+      //       assesseeAssessmentStartData.assessmentSection[currentSectionIndex + 1].assessmentSectionItemDistinct[lastIndex];
+      //     let item = responseInLocal.filter(function (ii) {
+      //       return ii.assesseeAssignmentAssessmentItemId === itemData.itemId;
+      //     });
+      //     if (item.length > 0)
+      //       setcurrentQuestionChoice(
+      //         item[lastIndex].assesseeAssignmentAssessmentItemResponseChoiceSelected
+      //       );
+      //   }
+      // }
     }
     if (clickedval === 'next') {
-      // setAssesseeAssessmentItemSaveResCall(
-      //   selectedAssociateInfo,
-      //   dispatch,
-      //   assesseeAssessmentStartData,
-      //   itemId,
-      //   assesseeId,
-      //   currentQuestionChoice,
-      //   itemTimeStart
-      // );
       if (
         currentQuestionIndex <
-        assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct.length - 1
+        assesseeAssessmentStartData?.assessmentSectionItemDistinct.length - 1
       ) {
         setcurrentQuestionIndex(currentQuestionIndex + 1);
         //setcurrentQuestionChoice(null);
         //setItemTimeStart(new Date().getTime());
       } else {
-        if (currentSectionIndex < assesseeAssessmentStartData.assessmentSection.length - 1) {
-          setcurrentSectionIndex(currentSectionIndex + 1);
-
-          setcurrentQuestionIndex(0);
-          setcurrentQuestionChoice(0);
+        if (selectedTagValue < assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection.length - 1) {
           dispatch({
             type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
             payload: { stateName: 'currentSequenceIndex', value: currentSequenceIndex + 1 }
@@ -201,17 +190,13 @@ export const DisplayPaneSeven = () => {
             type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
             payload: { stateName: 'isAssessmentStart', value: 'STOP' }
           })
-
+           
           dispatch({
             type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
             payload: { stateName: 'assesseeAssessmentStartData', value: null }
           })
-          // dispatch({
-          //   type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-          //   payload: { stateName: 'isAssessmentStart', value: 'PENDING' }
-          // })
-
-        } else {
+        }
+        else {
           dispatch({
             type: SET_POPUP_STATE,
             payload: {
@@ -234,6 +219,11 @@ export const DisplayPaneSeven = () => {
           dispatch({ type: POPUP_OPEN, payload: 'paneSevenPopup' });
           setcurrentQuestionIndex(-1);
         }
+        // if (currentSectionIndex < assesseeAssessmentStartData.assessmentSection.length - 1) {
+        //   setcurrentSectionIndex(currentSectionIndex + 1);
+        //   setcurrentQuestionIndex(0);
+        //   setcurrentQuestionChoice(0);
+        // } 
       }
     }
     if (currentQuestionChoice !== 0 || itemFlaged) {
@@ -251,16 +241,25 @@ export const DisplayPaneSeven = () => {
       setItemTimeStart(new Date().getTime());
     }
     // dispatch({ type: NAVIGATOR_MODE });
+    setisShowReviewIcon(true);
+  };
+  const onClickReview = () => {
+    setisShowReviewIcon(false);
   };
   useEffect(() => {
+    debugger;
     setItemTimeStart(new Date().getTime());
-    const sec = assesseeAssessmentStartData?.assessmentSection[currentSectionIndex]?.assessmentSectionTime / 1000;
+
+    const sec = assesseeAssessmentStartData?.assessmentSectionTime / 1000;
+    //const sec = assesseeAssessmentStartData?.assessmentSection[currentSectionIndex]?.assessmentSectionTime / 1000;
+
     //const sec = assesseeAssessmentStartData?.assessmentTime / 1000;
     let tt = new Date();
     tt.setSeconds(tt.getSeconds() + sec);
     setTimer(tt);
-  }, [assesseeAssessmentStartData, currentSectionIndex]);
-  const primaryIcon = [];
+    setcurrentQuestionIndex(0);
+  }, [assesseeAssessmentStartData]);
+  const primaryIcon = [{ label: 'navigator', onClick: onClickReview, Icon: NavigatorIcon }];
   const secondaryIcon = [
     { label: 'first', onClick: onClickFooter, Icon: FirstPage },
     { label: 'previous', onClick: onClickFooter, Icon: ArrowLeft },
@@ -272,9 +271,10 @@ export const DisplayPaneSeven = () => {
     setcurrentQuestionChoice(e.target.value);
   };
   const flagQuestion = (itemId) => {
+    debugger;
     const isSelected = isQuestionFlaged.includes(itemId);
     let flaggedArr = isQuestionFlaged;
-    let currentQuestion = assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
+    let currentQuestion = assesseeAssessmentStartData?.assessmentSectionItemDistinct[
       currentQuestionIndex
     ];
     // if (isSelected) {
@@ -294,16 +294,19 @@ export const DisplayPaneSeven = () => {
       flaggedArr.push(itemId);
       setIsQuestionFlaged([...flaggedArr]);
     }
-    assesseeAssessmentStartData.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
+    assesseeAssessmentStartData.assessmentSectionItemDistinct[
       currentQuestionIndex
     ] = currentQuestion;
     // //setIsQuestionFlaged((state) => !state);
   };
   let itemObect =
-    assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
-    currentQuestionIndex
-    ];
+    assesseeAssessmentStartData?.assessmentSectionItemDistinct[currentQuestionIndex];
   console.log('itemObect', itemObect);
+  // let itemObect =
+  //   assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct[
+  //   currentQuestionIndex
+  //   ];
+  //console.log('itemObect', itemObect);
   return (
     <>
       <div>
@@ -335,9 +338,10 @@ export const DisplayPaneSeven = () => {
             />
             <FooterIconTwo
               className={isDisplayPaneSixShow ? 'widthDisplayPaneFive' : 'fullWidth'}
-              FilterModeEnable={false}
+              FilterModeEnable={isShowReviewIcon}
               FilterMode={FilterMode}
-              onClick={onClickFooter}
+              //onClick={onClickFooter}
+              onClick={onClickReview}
               primaryIcon={primaryIcon}
               secondaryIcon={secondaryIcon}
               isAssessmentPreviewShow={true}
@@ -346,7 +350,7 @@ export const DisplayPaneSeven = () => {
         )}
       <PopUpAssessmentNavigator
         isActive={isPopUpValue === 'NavigatorPOPUP'}
-        itemData={assesseeAssessmentStartData?.assessmentSection[currentSectionIndex].assessmentSectionItemDistinct}
+        itemData={assesseeAssessmentStartData?.assessmentSectionItemDistinct}
       />
     </>
   );

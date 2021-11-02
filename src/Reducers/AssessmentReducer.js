@@ -98,6 +98,7 @@ const initialState = {
       assessmentEvaluationScoreT: false,
       assessmentEvaluationScoreZ: false
     },
+    assessmentItemDistinct: [],
     assessmentSectionItemFrameworkOneTemplate: '',
     assessmentItemTotal: null,
     assessmentManuscript: [],

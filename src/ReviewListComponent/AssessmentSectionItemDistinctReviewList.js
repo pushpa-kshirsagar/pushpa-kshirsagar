@@ -18,7 +18,8 @@ import {
   SET_RELATED_REQUEST_OBJECT,
   SET_SECTION_REDUCER_STATE,
   SET_UNSELECTED_ASSESSEE_GROUP_ASSESSEE_ID_LIST,
-  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST
+  SET_UNSELECTED_ASSESSEE_ROLE_ASSESSEE_ID_LIST,
+  SET_VERSION_REDUCER_STATE
 } from '../actionType';
 import FooterIconTwo from '../Molecules/FooterIcon/FooterIconTwo';
 import { FilterList } from '@material-ui/icons';
@@ -119,17 +120,17 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
       reviewListDistinctData
     );
     setIsShowReviseIcon(true);
-    let existingItemId = [];
-    let middlepaneName = relatedReviewListDistinctData[0].typeOfMiddlePaneList;
+    let middlepaneName = typeOfMiddlePaneList;
     if (middlepaneName === 'assessmentSectionItemDistinctReviewList') {
       // sectionInformation.assessmentSectionItemDistinct = selectedTagsArray;
       // dispatch({
       //   type: SET_SECTION_REDUCER_STATE,
       //   payload: sectionInformation
       // });
+      console.log('selectedTagsArray',selectedTagsArray);
       versionInformation.assessmentVersionItemDistinct = selectedTagsArray;
       dispatch({
-        type: SET_SECTION_REDUCER_STATE,
+        type: SET_VERSION_REDUCER_STATE,
         payload: versionInformation
       });
     } else if (middlepaneName === 'assessmentSectionTrialDistinctReviewList') {
@@ -236,7 +237,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item?.id}
+                tag={item?.id || item?.itemId}
                 isSelectedReviewList={middlePaneSelectedValue === item?.id}
                 status={item.informationEngagement?.itemStatus || 'published'}
                 actualStatus={item.informationEngagement?.itemStatus}
@@ -245,7 +246,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
-                isSelected={selectedTagsArray.includes(item.id)}
+                isSelected={selectedTagsArray.includes(item?.id || item?.itemId)}
                 onClickCheckBox={(event) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}

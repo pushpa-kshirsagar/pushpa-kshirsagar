@@ -76,43 +76,59 @@ const AssessmentHeader = (props) => {
               ) : null}
             </div>
             <div
-              style={{ flex: '1', display: 'flex', alignItems: 'center' }}
+              style={{
+                flex: '1',
+                alignItems: 'center',
+                display: 'inline-block',
+                cursor: props.isItemSequenceLabel && 'pointer'
+              }}
               className="flex-center"
+              onClick={props.onClickFlexThree}
             >
-              <span
-                className={['unitFlex', 'assessmenetStatusText', 'AssesseeNotifyStatus'].join(' ')}
-                style={{ textAlign: 'center' }}
+              <div
+                style={{ display: 'block !important' }}
+                className={[
+                  'midPaneInformationMergeHeader',
+                  props.isItemSequenceLabel ? null : 'descriptionMiddle'
+                ].join(' ')}
               >
-                <InputLabel
-                  className={['iconsFooterLabelDefault1', 'AssesseeNotifyStatusLabel'].join(' ')}
-                >
-                  {props.currentQuestion + '/' + props.totalQuestion}
-                </InputLabel>
-              </span>
+                {props.currentQuestion + '/' + props.totalQuestion}
+              </div>
+
+              <div className={['assessmentheader', 'textOverflow'].join(' ')}>
+                {props.isItemSequenceLabel}
+              </div>
             </div>
             <div
-              style={{ flex: '1', display: 'inline-block', alignItems: 'center' }}
+              style={{
+                flex: '1',
+                display: 'inline-block',
+                // alignItems: 'center',
+                textAlign: 'center'
+              }}
               className="flex-center"
             >
               <div
-                className={[
-                  'midPaneInformation',
-                  ''
-                  //props.assessmentSectionDescription !== '' ? null : 'aliasmiddle'
-                ].join(' ')}
+                style={{ display: 'block !important' }}
+                className={['midPaneInformationMergeHeader'].join(' ')}
               >
                 {props.score}
               </div>
 
-              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>{'Score'}</div>
+              <div className={['assessmentheader', 'textOverflow'].join(' ')}>{'score'}</div>
             </div>
             <div
-              style={{ flex: '1', display: 'inline-block', alignItems: 'center' }}
+              style={{
+                flex: '1',
+                display: 'inline-block',
+                textAlign: 'center'
+                // alignItems: 'center'
+              }}
               className="flex-center"
             >
               <div
                 className={[
-                  'midPaneInformation',
+                  'midPaneInformationMergeHeader',
                   ''
                   //props.assessmentSectionDescription !== '' ? null : 'aliasmiddle'
                 ].join(' ')}
@@ -127,7 +143,7 @@ const AssessmentHeader = (props) => {
                   </span>
                 )}
               </div>
-              <div className={['midPaneLabel', 'textOverflow'].join(' ')}>
+              <div className={['assessmentheader', 'textOverflow'].join(' ')}>
                 {props.timer && 'section'}
               </div>
             </div>
@@ -179,7 +195,8 @@ export const DisplayPaneFiveAssessment = (props) => {
     handleRadioButton,
     currentQuestionChoice,
     assessmentName,
-    assessmentDescription
+    assessmentDescription,
+    onClickSequenceUpdate = null
   } = props;
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
@@ -346,19 +363,20 @@ export const DisplayPaneFiveAssessment = (props) => {
             (isAssessmentSectionShow && informationBasic?.assessmentName) ||
             (isAssessmentPreviewShow && informationBasic?.assessmentName) ||
             (isAssessmentVersionShow && informationFramework?.assessmentVersionName) ||
-            informationFramework?.assessmentName
+            assessmentName
           }
           assessmentDesc={
             (isAssessmentSectionShow && informationBasic?.assessmentDescription) ||
             (isAssessmentPreviewShow && informationBasic?.assessmentDescription) ||
             (isAssessmentVersionShow && informationFramework?.assessmentVersionDescription) ||
-            informationFramework?.assessmentDescription ||
+            assessmentDescription ||
             ''
           }
           assessmentSectionName={
             (isAssessmentSectionShow && informationFramework?.assessmentSectionName) ||
             (isAssessmentPreviewShow &&
               informationFramework?.assessmentSection[currentSectionIndex].assessmentSectionName) ||
+            informationFramework?.assessmentSectionName ||
             ''
           }
           assessmentSectionDescription={
@@ -366,6 +384,7 @@ export const DisplayPaneFiveAssessment = (props) => {
             (isAssessmentPreviewShow &&
               informationFramework?.assessmentSection[currentSectionIndex]
                 .assessmentSectionDescription) ||
+            informationFramework?.assessmentSectionDescription ||
             ''
           }
           id={
@@ -378,6 +397,7 @@ export const DisplayPaneFiveAssessment = (props) => {
               ].assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
             (isAssessmentVersionShow &&
               informationFramework?.assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
+            informationFramework?.assessmentSectionItemDistinct[currentItemIndex]?.itemId ||
             ''
           }
           score={
@@ -389,6 +409,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                 currentVersionIndex
               ].assessmentVersionItemDistinct[currentItemIndex]?.itemFrameworkOneScore) ||
             (isAssessmentVersionShow && itemObect?.itemFrameworkOneScore) ||
+            itemObect?.itemFrameworkOneScore ||
             ''
           }
           //isQuestionFlaged={isQuestionFlaged}
@@ -398,6 +419,7 @@ export const DisplayPaneFiveAssessment = (props) => {
               informationFramework?.assessmentVersion[currentVersionIndex]
                 ?.assessmentVersionItemDistinct[currentItemIndex]
                 ?.assesseeAssignmentAssessmentItemFlagged) ||
+            itemObect?.assesseeAssignmentAssessmentItemFlagged ||
             false
           }
           timerFinished={timerFinished}
@@ -412,8 +434,11 @@ export const DisplayPaneFiveAssessment = (props) => {
               ].assessmentVersionItemDistinct.length) ||
             (isAssessmentVersionShow &&
               informationFramework?.assessmentVersionItemDistinct.length) ||
+            informationFramework?.assessmentSectionItemDistinct.length ||
             0
           }
+          isItemSequenceLabel={isAssessmentVersionShow && 'sequence'}
+          onClickFlexThree={isAssessmentVersionShow && onClickSequenceUpdate}
           currentQuestion={currentItemIndex + 1}
         />
 

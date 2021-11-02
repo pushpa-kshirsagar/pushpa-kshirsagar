@@ -192,6 +192,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
     selectedTagValue,
     selectedTagGroupId
   } = useSelector((state) => state.PopUpReducer);
+  const assessmentInfo = useSelector((state) => state.AssessmentReducer);
   const {
     selectedAssociateInfo,
     countPage,
@@ -1499,9 +1500,22 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             reviewMode: isReviseMode ? 'revise' : ''
           }
         });
+        let objectData = JSON.parse(
+          JSON.stringify(
+            relatedReviewListDistinctData[0].versions[selectedTagValue]
+              .assessmentVersionItemDistinct
+          )
+        );
+        let itemIds = objectData.map((v) => {
+          return v.itemId;
+        });
+        let reducerObj = {
+          ...relatedReviewListDistinctData[0].versions[selectedTagValue],
+          assessmentVersionItemDistinct: itemIds
+        };
         dispatch({
           type: SET_VERSION_REDUCER_STATE,
-          payload: relatedReviewListDistinctData[0].versions[selectedTagValue]
+          payload: reducerObj
         });
         dispatch({ type: LOADER_STOP });
       }
@@ -2653,7 +2667,10 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
           payload: {
             stateName: 'assesseeAssessmentStartData',
-            value: assesseeAssignmentAssessmentData?.informationFramework
+            value:
+              assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[
+                selectedTagValue
+              ]
             //value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[selectedTagValue]
           }
         });

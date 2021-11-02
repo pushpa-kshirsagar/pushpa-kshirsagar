@@ -11,7 +11,8 @@ import {
   ASSESSMENT_INFO_PREVIEW_SAGA,
   SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
   SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
-  SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE
+  SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE,
+  SET_POPUP_VALUE
 } from '../../actionType';
 import '../../Molecules/ReviewList/ReviewList.css';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
@@ -74,6 +75,16 @@ export const DisplayPaneFive = () => {
       dispatch({ type: SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE, payload: false });
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
+  };
+  const onClickSequenceUpdate = () => {
+    console.log('currentItemIndex',currentItemIndex);
+    // dispatch({
+    //   type: SET_POPUP_VALUE,
+    //   payload: {
+    //     isPopUpValue: 'ITEM_PRIMARY_POPUP',
+    //     popupMode: popupMode
+    //   }
+    // });
   };
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
@@ -637,6 +648,7 @@ export const DisplayPaneFive = () => {
               currentItemIndex={currentItemIndex}
               currentSectionIndex={currentSectionIndex}
               itemObect={itemObect}
+              onClickSequenceUpdate={onClickSequenceUpdate}
             />
             {reviewMode === 'revise' ? (
               <FooterIconTwo
