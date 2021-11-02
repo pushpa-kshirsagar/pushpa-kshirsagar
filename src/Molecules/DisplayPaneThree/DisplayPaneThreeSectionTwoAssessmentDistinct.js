@@ -33,7 +33,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { informationFramework } = responseObject;
   const dispatch = useDispatch();
-
+  let assessmentItemArr = [];
   let versionArr = [];
   informationFramework?.assessmentSection[0].assessmentVersion.map((comm, index) => {
     versionArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
@@ -185,6 +185,10 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       labelTextOneOne: 'items',
       isListCard: false,
       labelTextOneOneBadges: [
+        {
+          labelTextOneOneBadge: 'distinct',
+          innerList: assessmentItemArr
+        },
         {
           labelTextOneOneBadge: 'template',
           textOne: informationFramework?.assessmentItemFrameworkOneTemplate || 'No Information'

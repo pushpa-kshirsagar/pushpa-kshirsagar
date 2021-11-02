@@ -373,8 +373,9 @@ export const DisplayPaneFiveAssessment = (props) => {
               informationFramework?.assessmentVersion[currentVersionIndex]
                 ?.assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
             (isAssessmentPreviewShow &&
-              informationFramework?.assessmentSection[currentSectionIndex]
-                ?.assessmentSectionItemDistinct[currentItemIndex]?.itemId) ||
+              informationFramework?.assessmentSection[currentSectionIndex]?.assessmentVersion[
+                currentVersionIndex
+              ].assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
             (isAssessmentVersionShow &&
               informationFramework?.assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
             ''
@@ -384,8 +385,9 @@ export const DisplayPaneFiveAssessment = (props) => {
               informationFramework?.assessmentVersion[currentVersionIndex]
                 ?.assessmentVersionItemDistinct[currentItemIndex]?.itemFrameworkOneScore) ||
             (isAssessmentPreviewShow &&
-              informationFramework?.assessmentSection[currentSectionIndex]
-                ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOneScore) ||
+              informationFramework?.assessmentSection[currentSectionIndex]?.assessmentVersion[
+                currentVersionIndex
+              ].assessmentVersionItemDistinct[currentItemIndex]?.itemFrameworkOneScore) ||
             (isAssessmentVersionShow && itemObect?.itemFrameworkOneScore) ||
             ''
           }
@@ -405,8 +407,9 @@ export const DisplayPaneFiveAssessment = (props) => {
               informationFramework?.assessmentVersion[currentVersionIndex]
                 ?.assessmentVersionItemDistinct.length) ||
             (isAssessmentPreviewShow &&
-              informationFramework?.assessmentSection[currentSectionIndex]
-                ?.assessmentSectionItemDistinct.length) ||
+              informationFramework?.assessmentSection[currentSectionIndex]?.assessmentVersion[
+                currentVersionIndex
+              ].assessmentVersionItemDistinct.length) ||
             (isAssessmentVersionShow &&
               informationFramework?.assessmentVersionItemDistinct.length) ||
             0

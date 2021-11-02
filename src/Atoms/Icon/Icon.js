@@ -43,7 +43,7 @@ import MobileUnverified from '../../images/mobile_unverified.svg';
 import HierarchyIcon from '../../images/account_tree.svg';
 import ListIcon from '../../images/view_list.svg';
 import insights from '../../images/insights-black-18dp.svg';
-import './Icons.css';
+import './Icon.css';
 const Icons = (props) => {
   return (
     <div>

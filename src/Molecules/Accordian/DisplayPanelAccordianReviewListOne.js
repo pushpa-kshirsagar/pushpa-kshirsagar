@@ -389,7 +389,7 @@ const DisplayPanelAccordianReviewListOne = (props) => {
                   </>
                 ) : (
                   <>
-                    {selectedBadge && selectedBadge.innerList.length > 0 ? (
+                    {selectedBadge && selectedBadge?.innerList.length > 0 ? (
                       <>
                         {selectedBadge &&
                           selectedBadge.innerList.map((associate) => {

@@ -85,7 +85,8 @@ export const DisplayPaneFive = () => {
           setcurrentItemIndex(prevIndex);
           setItemTypeConfigState(
             responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-              ?.assessmentSectionItemDistinct[prevIndex].itemFrameworkOne.itemFrameworkOneType,
+              ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[prevIndex]
+              .itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
           dispatch({
@@ -94,7 +95,7 @@ export const DisplayPaneFive = () => {
               stateName: 'assessmentSectionItemDistinctRevise',
               value:
                 responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-                  ?.assessmentSectionItemDistinct[prevIndex]
+                  ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[prevIndex]
             }
           });
         } else {
@@ -102,13 +103,13 @@ export const DisplayPaneFive = () => {
             setcurrentSectionIndex(currentSectionIndex - 1);
             setcurrentItemIndex(
               responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                ?.assessmentSectionItemDistinct.length - 1
+                ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct.length - 1
             );
             setItemTypeConfigState(
               responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                ?.assessmentSectionItemDistinct[
+                ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[
                 responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                  ?.assessmentSectionItemDistinct.length - 1
+                  ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct.length - 1
               ].itemFrameworkOne.itemFrameworkOneType,
               dispatch
             );
@@ -118,12 +119,19 @@ export const DisplayPaneFive = () => {
                 stateName: 'assessmentSectionItemDistinctRevise',
                 value:
                   responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                    ?.assessmentSectionItemDistinct[
+                    ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[
                     responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                      ?.assessmentSectionItemDistinct.length - 1
+                      ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct
+                      .length - 1
                   ]
               }
             });
+          } else if (currentVersionIndex !== 0) {
+            setcurrentVersionIndex(currentVersionIndex - 1);
+            setcurrentItemIndex(
+              responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
+                ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct.length - 1
+            );
           }
           // if (currentSectionIndex === informationFramework?.assessmentSection.length - 1) {
           //   setcurrentSectionIndex(currentSectionIndex - 1);
@@ -138,7 +146,8 @@ export const DisplayPaneFive = () => {
           setcurrentItemIndex(0);
           setItemTypeConfigState(
             responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-              ?.assessmentSectionItemDistinct[0].itemFrameworkOne.itemFrameworkOneType,
+              ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[0]
+              .itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
           dispatch({
@@ -147,7 +156,7 @@ export const DisplayPaneFive = () => {
               stateName: 'assessmentSectionItemDistinctRevise',
               value:
                 responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-                  ?.assessmentSectionItemDistinct[0]
+                  ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[0]
             }
           });
         } else {
@@ -156,7 +165,8 @@ export const DisplayPaneFive = () => {
             setcurrentItemIndex(0);
             setItemTypeConfigState(
               responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                ?.assessmentSectionItemDistinct[0].itemFrameworkOne.itemFrameworkOneType,
+                ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[0]
+                .itemFrameworkOne.itemFrameworkOneType,
               dispatch
             );
             dispatch({
@@ -165,7 +175,7 @@ export const DisplayPaneFive = () => {
                 stateName: 'assessmentSectionItemDistinctRevise',
                 value:
                   responseObject?.informationFramework?.assessmentSection[currentSectionIndex - 1]
-                    ?.assessmentSectionItemDistinct[0]
+                    ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[0]
               }
             });
           }
@@ -175,14 +185,15 @@ export const DisplayPaneFive = () => {
         if (
           currentItemIndex <
           responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-            ?.assessmentSectionItemDistinct.length -
+            ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct.length -
             1
         ) {
           setcurrentItemIndex(currentItemIndex + 1);
           setItemTypeConfigState(
             responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-              ?.assessmentSectionItemDistinct[currentItemIndex + 1].itemFrameworkOne
-              .itemFrameworkOneType,
+              ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[
+              currentItemIndex + 1
+            ].itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
 
@@ -192,26 +203,34 @@ export const DisplayPaneFive = () => {
               stateName: 'assessmentSectionItemDistinctRevise',
               value:
                 responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-                  ?.assessmentSectionItemDistinct[currentItemIndex + 1]
+                  ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[
+                  currentItemIndex + 1
+                ]
             }
           });
-        } else {
-          if (
-            currentSectionIndex <
-            responseObject?.informationFramework?.assessmentSection.length - 1
-          ) {
-            setcurrentSectionIndex(currentSectionIndex + 1);
-            setcurrentItemIndex(0);
-            dispatch({
-              type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
-              payload: {
-                stateName: 'assessmentSectionItemDistinctRevise',
-                value:
-                  responseObject?.informationFramework?.assessmentSection[currentSectionIndex + 1]
-                    ?.assessmentSectionItemDistinct[0]
-              }
-            });
-          }
+        } else if (
+          currentSectionIndex <
+          responseObject?.informationFramework?.assessmentSection.length - 1
+        ) {
+          setcurrentSectionIndex(currentSectionIndex + 1);
+          setcurrentItemIndex(0);
+          dispatch({
+            type: SET_ASSESSMENT_DYNAMIC_FRAMEWORK_STATE,
+            payload: {
+              stateName: 'assessmentSectionItemDistinctRevise',
+              value:
+                responseObject?.informationFramework?.assessmentSection[currentSectionIndex + 1]
+                  ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[0]
+            }
+          });
+        } else if (
+          currentVersionIndex <
+          responseObject.informationFramework?.assessmentSection[currentSectionIndex]
+            ?.assessmentVersion.length -
+            +11
+        ) {
+          setcurrentVersionIndex(currentVersionIndex + 1);
+          setcurrentItemIndex(0);
         }
       }
       if (clickedval === 'last') {
@@ -501,7 +520,8 @@ export const DisplayPaneFive = () => {
       ]?.itemFrameworkOne) ||
     (isAssessmentPreviewShow &&
       responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-        ?.assessmentSectionItemDistinct[currentItemIndex]?.itemFrameworkOne) ||
+        ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[currentItemIndex]
+        ?.itemFrameworkOne) ||
     (isAssessmentVersionShow &&
       responseObject?.assessmentVersionItemDistinct[currentItemIndex]?.itemFrameworkOne) ||
     '';

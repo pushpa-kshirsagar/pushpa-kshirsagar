@@ -88,7 +88,7 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
       isListCard: false,
       IconOne: null,
       isReviewLink: true
-    },
+    }
   ];
   const reviseFramework = (e, selectedBadgeArray) => {
     const labelName = e.currentTarget.getAttribute('data-value');
@@ -135,9 +135,11 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
         typeOfMiddlePaneList: 'assessmentSectionItemDistinctReviewList'
       };
       // let existingItemId = [];
-      let existingItemId = responseObject?.assessmentVersionItemDistinct?.map((val) => {
-        return val.itemId;
-      });
+      let existingItemId =
+        responseObject?.assessmentVersionItemDistinct &&
+        responseObject?.assessmentVersionItemDistinct?.map((val) => {
+          return val.itemId;
+        });
       dispatch({
         type: FILTERMODE,
         payload: { FilterMode: 'assessmentSectionItemRevise' }
