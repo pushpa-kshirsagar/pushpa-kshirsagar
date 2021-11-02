@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CrossIcon from '@material-ui/icons/Clear';
 import './DisplayPaneSix.css';
-import Card from '../../Molecules/Card/Card';
-import DisplayPaneSixFooter from './DisplayPaneSixFooter';
 import DisplayPaneSixHeader from './DisplayPaneSixHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import { assesseeRole } from '../../Actions/AssesseeModuleAction';
-import { Keyboard, Description, InsertDriveFile, BusinessCenter, IndeterminateCheckBox } from '@material-ui/icons';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
 import ArrowRight from '@material-ui/icons/ChevronRight';
 import ArrowLeft from '@material-ui/icons/ChevronLeft';
@@ -17,12 +13,14 @@ import {
   SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE,
   SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE,
   SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE,
-  SET_DISPLAY_TWO_SINGLE_STATE
+  SET_DISPLAY_TWO_SINGLE_STATE,
+  SET_ASSESSEE_ASSESSMENT_SECTION_COMMUNIQUE_STATE,
+  SET_ASSESSEE_ASSESSMENT_SECTION_MENUSCRIPT_STATE,
+  SET_ASSESSEE_ASSESSMENT_SECTION_SYNOPSIS_STATE
 } from '../../actionType';
 import { RES_START_POPUP_OPTION, ASSESSMENT_CLOSED_POPUP_OPTION } from '../../PopUpConfig';
 import EditorTemplate from '../DisplayPaneFive/EditorTemplate';
-import FooterIconOne from '../../Molecules/FooterIcon/FooterIconOne';
-
+import { callApiFunctionLastAttempted } from '../../Actions/GenericActions';
 
 export const DisplayPaneSix = () => {
   const { isDisplayPaneSixShow } = useSelector((state) => state.AssessmentReducer);
@@ -34,11 +32,14 @@ export const DisplayPaneSix = () => {
     currentSequenceIndex,
     currentAssessmentSectionSequenceIndex,
     assessmentsequenceObject,
-    synopsis, communique, menuscript
-
+    sectionMenuscript,
+    sectionSynopsis,
+    sectionCommunique,
+    assessmentCommunique,
+    assessmentMenuscript,
+    assessmentSynopsis,
   } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);
-  const { indexPointer
-  } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { indexPointer, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedTagStatus } = useSelector((state) => state.PopUpReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const dispatch = useDispatch();
@@ -46,6 +47,31 @@ export const DisplayPaneSix = () => {
   const [headerValue, setHeader] = useState('');
   const [sequenceObject, setSequenceObject] = useState([]);
   const [currentSequenceIndexLocal, setCurrentSequenceIndexLocal] = useState(0);
+  let communique = [];
+  let menuscript = [];
+  let synopsis = [];
+  if (assessmentCommunique && assessmentCommunique.length > 0) {
+    if (sectionCommunique && sectionCommunique.length > 0) {
+      communique = [...assessmentCommunique, ...sectionCommunique];
+    } else {
+      communique = [...assessmentCommunique];
+    }
+  }
+  if (assessmentMenuscript && assessmentMenuscript.length > 0) {
+    if (sectionMenuscript && sectionMenuscript.length > 0) {
+      menuscript = [...assessmentMenuscript, ...sectionMenuscript];
+    } else {
+      menuscript = [...assessmentMenuscript];
+    }
+  }
+  if (assessmentSynopsis && assessmentSynopsis.length > 0) {
+    if (sectionSynopsis && sectionSynopsis.length > 0) {
+      synopsis = [...assessmentSynopsis, ...sectionSynopsis];
+    }
+    else {
+      synopsis = [...assessmentSynopsis];
+    }
+  }
 
   useEffect(() => {
     debugger;
@@ -55,49 +81,17 @@ export const DisplayPaneSix = () => {
     handleSequenceArrange();
   }, [assesseeAssignmentAssessmentData]);
 
-  // useEffect(() => {
-  //   setNextSequenceValues('');
-  // }, [currentSequenceIndex])
-  //working code
-
-
-  // useEffect(() => {
-  //   debugger;
-  //   setNextSequenceValues();
-  // }, [currentSequenceIndex])
-  // const setSequence = () => {
-  //   debugger;
-  //   let assessmentAdministrationSequence = assesseeAssignmentAssessmentData?.informationFramework?.assessmentAdministrationSequence || [];
-  //   let setSequenceObject = [];
-  //   // if (assessmentAdministrationSequence.length > 0) {
-  //   //   setSequenceObject.push(...assessmentAdministrationSequence);
-  //   //   //setSequenceObject(setSequenceObject)
-  //   // }
-  //   let informationFramework = assesseeAssignmentAssessmentData?.informationFramework;
-  //   for (let i = 0; i < assessmentAdministrationSequence.length; i++) {
-  //     let currentValue = informationFramework?.assessmentAdministrationSequence[i];
-  //     let lastIndexValue = parseInt(currentValue.substring(currentValue.length - 1));
-  //     let matchValue = currentValue;
-  //     matchValue = matchValue.substring(0, matchValue.length - 1);
-  //     if (matchValue.trim() === 'assessment section') {
-  //       let assessmentSection = informationFramework?.assessmentSection || [];
-  //       let sectionObj = assessmentSection[lastIndexValue - 1];
-  //       if (sectionObj?.assessmentSectionAdministrationSequence.length > 0) {
-  //         for (let j = 0; j < sectionObj?.assessmentSectionAdministrationSequence.length; j++) {
-  //           let currentSectionSequenceValue = sectionObj?.assessmentSectionAdministrationSequence[j];
-  //           setSequenceObject.push(currentSectionSequenceValue);
-  //         }
-  //         setSequenceObject.push(sectionObj?.assessmentSectionItemDistinct);
-  //       } else {
-  //         setSequenceObject.push(sectionObj?.assessmentSectionItemDistinct)
-  //       }
-  //     } else {
-  //       setSequenceObject.push(currentValue);
-  //     }
-  //   }
-  //   console.log(setSequenceObject);
-  //   setSequenceObject(setSequenceObject);
-  // }
+  useEffect(()=>{
+    let assesseeAssignmentAssessmentItemLastAttempted = assesseeAssignmentAssessmentData?.assesseeAssignmentAssessmentItemLastAttempted;
+    if(assessmentsequenceObject.length>0){
+      let indexValue = assessmentsequenceObject.findIndex(obj => obj.originalValue === assesseeAssignmentAssessmentItemLastAttempted);
+      console.log('lastAttempted Value',indexValue);
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'currentSequenceIndex', value: indexValue }
+      })
+    }    
+  },[assessmentsequenceObject]);
 
   const handleSequenceArrange = () => {
     debugger;
@@ -159,103 +153,6 @@ export const DisplayPaneSix = () => {
       type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
       payload: { stateName: 'assessmentsequenceObject', value: sequenceArr }
     })
-  }
-
-  const setNextSequenceValues = (value) => {
-    debugger;
-    let sequenceObject = assessmentsequenceObject;
-    if (isAssessmentStart === 'COMMUNIQUE') {
-      if (indexPointer < communique.length) {
-        setCurrentSequenceValue(communique[indexPointer]);
-      }
-    }
-    if (isAssessmentStart === 'MENUSCRIPT') {
-      if (indexPointer < menuscript.length) {
-        setCurrentSequenceValue(menuscript[indexPointer]);
-      }
-    }
-    if (isAssessmentStart === 'SYNOPSIS') {
-      if (indexPointer < synopsis.length) {
-        setCurrentSequenceValue(synopsis[indexPointer]);
-      }
-    }
-    if (isAssessmentStart === 'START' || isAssessmentStart === 'STOP') {
-      if (sequenceObject.length > 0) {
-        if (currentSequenceIndex < sequenceObject.length) {
-          let currentValue = sequenceObject[currentSequenceIndex]?.originalValue;
-          let lastIndexValue = parseInt(currentValue.substring(currentValue.length - 1));
-          if (sequenceObject[currentSequenceIndex]?.name === 'assessment section') {
-            let tempArr = RES_START_POPUP_OPTION;
-            if (isAssessmentStart === 'START') {
-              dispatch({
-                type: SET_POPUP_STATE,
-                payload: {
-                  popupHeaderOne: 'assessment',
-                  popupHeaderOneBadgeOne: '',
-                  popupHeaderOneBadgeTwo: '',
-                  isPopUpValue: '',
-                  popupOpenType: 'primary',
-                  popupContentArrValue: tempArr,
-                  selectedTagStatus: selectedTagStatus,
-                  selectedTagValue: lastIndexValue
-                }
-              });
-              dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
-            } else {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-                payload: {
-                  stateName: 'assesseeAssessmentStartData',
-                  value: assesseeAssignmentAssessmentData?.informationFramework
-                }
-              })
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-                payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
-              });
-            }
-          } else {
-            if (sequenceObject[currentSequenceIndex]?.name === 'assessment communiqué') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE,
-                payload: sequenceObject[currentSequenceIndex]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex]?.name === 'assessment synopsis') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE,
-                payload: sequenceObject[currentSequenceIndex]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex]?.name === 'assessment manuscript') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE,
-                payload: sequenceObject[currentSequenceIndex]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex]?.name === 'section communiqué') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE,
-                payload: sequenceObject[currentSequenceIndex]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex]?.name === 'section synopsis') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE,
-                payload: sequenceObject[currentSequenceIndex]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex]?.name === 'section manuscript') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE,
-                payload: sequenceObject[currentSequenceIndex]?.value
-              })
-            }
-          }
-        }
-      }
-    }
-
   }
   const onClickFooter = (e) => {
     debugger;
@@ -343,39 +240,6 @@ export const DisplayPaneSix = () => {
     if (selectedTagStatus === 'UNSTARTED') {
       tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
     }
-    // if (clickedval === 'next') {
-
-    //   console.log('assesseeAssessmentStartData', assesseeAssessmentStartData);
-    //   if (
-    //     assesseeAssignmentAssessmentData.informationFramework.assessmentManuscript
-    //       .assessmentManuscriptPrimary &&
-    //     isAssessmentStart !== 'MANUSCRIPT'
-    //   ) {
-    //     dispatch({
-    //       type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-    //       payload: { stateName: 'isAssessmentStart', value: 'MANUSCRIPT' }
-    //     });
-    //   } else {
-    //     // dispatch({
-    //     //   type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-    //     //   payload: { stateName: 'isAssessmentStart', value: '' }
-    //     // });
-    //     dispatch({
-    //       type: SET_POPUP_STATE,
-    //       payload: {
-    //         popupHeaderOne: 'assessment',
-    //         popupHeaderOneBadgeOne: '',
-    //         popupHeaderOneBadgeTwo: '',
-    //         isPopUpValue: '',
-    //         popupOpenType: 'primary',
-    //         popupContentArrValue: tempArr,
-    //         selectedTagValue: e.currentTarget.getAttribute('assignmentid'),
-    //         selectedTagStatus: selectedTagStatus
-    //       }
-    //     });
-    //     dispatch({ type: POPUP_OPEN, payload: 'middlePaneListPopup' });
-    //   }
-    // }
     if (isAssessmentStart === 'FINISH') {
       if (clickedval === 'close') {
         dispatch({
@@ -399,7 +263,6 @@ export const DisplayPaneSix = () => {
         dispatch({ type: POPUP_OPEN, payload: 'paneSevenPopup' });
       }
     }
-
     if (isAssessmentStart === 'START' || isAssessmentStart === 'STOP') {
       if (clickedval === 'next') {
         dispatch({
@@ -452,44 +315,53 @@ export const DisplayPaneSix = () => {
                 payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
               });
             }
-          } else {
-            if (sequenceObject[currentSequenceIndex + 1]?.name === 'assessment communiqué') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE,
-                payload: sequenceObject[currentSequenceIndex + 1]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex + 1]?.name === 'assessment synopsis') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE,
-                payload: sequenceObject[currentSequenceIndex + 1]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex + 1]?.name === 'assessment manuscript') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE,
-                payload: sequenceObject[currentSequenceIndex + 1]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex + 1]?.name === 'section communiqué') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE,
-                payload: sequenceObject[currentSequenceIndex + 1]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex + 1]?.name === 'section synopsis') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE,
-                payload: sequenceObject[currentSequenceIndex + 1]?.value
-              })
-            }
-            if (sequenceObject[currentSequenceIndex + 1]?.name === 'section manuscript') {
-              dispatch({
-                type: SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE,
-                payload: sequenceObject[currentSequenceIndex + 1]?.value
-              })
-            }
           }
+        }
+        if (currentSequenceIndex < sequenceObject.length) {
+          if (sequenceObject[currentSequenceIndex]?.name === 'assessment section') {
+          }
+          if (sequenceObject[currentSequenceIndex]?.name === 'assessment communiqué') {
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE,
+              payload: sequenceObject[currentSequenceIndex]?.value
+            })
+          }
+          if (sequenceObject[currentSequenceIndex]?.name === 'assessment synopsis') {
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE,
+              payload: sequenceObject[currentSequenceIndex]?.value
+            })
+          }
+          if (sequenceObject[currentSequenceIndex]?.name === 'assessment manuscript') {
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE,
+              payload: sequenceObject[currentSequenceIndex]?.value
+            })
+          }
+          if (sequenceObject[currentSequenceIndex]?.name === 'section communiqué') {
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_SECTION_COMMUNIQUE_STATE,
+              payload: sequenceObject[currentSequenceIndex]?.value
+            })
+          }
+          if (sequenceObject[currentSequenceIndex]?.name === 'section synopsis') {
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_SECTION_SYNOPSIS_STATE,
+              payload: sequenceObject[currentSequenceIndex]?.value
+            })
+          }
+          if (sequenceObject[currentSequenceIndex]?.name === 'section manuscript') {
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_SECTION_MENUSCRIPT_STATE,
+              payload: sequenceObject[currentSequenceIndex]?.value
+            })
+          }
+          callApiFunctionLastAttempted(
+            selectedAssociateInfo,
+            assesseeAssignmentAssessmentData,
+            dispatch,
+            sequenceObject[currentSequenceIndex]?.originalValue
+          )
         }
       }
       if (clickedval === 'previous') {
@@ -506,9 +378,6 @@ export const DisplayPaneSix = () => {
   console.log('assesseeAssignmentAssessmentData', assesseeAssignmentAssessmentData);
   console.log('current isAssessmentStart value', isAssessmentStart);
 
-
-  //let initialValue = assessmentsequenceObject[currentSequenceIndex]?.name !== 'assessment section' ? assessmentsequenceObject[currentSequenceIndex]?.value : '';
-  //console.log('current Value', initialValue);
   let headerNew = assessmentsequenceObject[currentSequenceIndex]?.name;
   console.log('current Value', headerNew);
   return (

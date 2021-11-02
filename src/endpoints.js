@@ -60,6 +60,8 @@ export const ASSESSMENT_ITEM_REVISE_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment-item/revise';
 export const ASSESSEE_ASSESSMENT_FINISH_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment/revise';
+  export const ASSESSMENT_ITEM_LAST_ATTEMPT_URL=
+  ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assessment-item-last-attempted';
 //end assessee self
 export const SIGNED_ASSESSEE_NOTIFICATION_URL =
   ASSIGNMENTS_URL + '/dev/insight-guru/api/assessee-distinct/assignment/count';

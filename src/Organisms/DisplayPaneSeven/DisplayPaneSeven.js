@@ -39,9 +39,9 @@ export const DisplayPaneSeven = () => {
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
   const {
-  selectedTagValue
+    selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
-  console.log('selectedTagValue',selectedTagValue);
+  console.log('selectedTagValue', selectedTagValue);
   console.log('menuscript,synopsis,communiqué');
   console.log(menuscript, synopsis, communique);
   console.log('pane sevenassesseeAssessmentStartData');
@@ -77,6 +77,7 @@ export const DisplayPaneSeven = () => {
     //console.log('currentQuestionIndex', currentQuestionIndex);
     console.log('itemId', itemId);
     let assesseeId = assesseeAssessmentStartData.assesseeId;
+
     if (clickedval === 'previous') {
       let prevIndex = currentQuestionIndex - 1;
       let responseInLocal = JSON.parse(localStorage.getItem('navigationItem')) || [];
@@ -91,6 +92,16 @@ export const DisplayPaneSeven = () => {
         if (item.length > 0)
           setcurrentQuestionChoice(item[0].assesseeAssignmentAssessmentItemResponseChoiceSelected);
       } else {
+        let prevIndex = selectedTagValue - 1;
+        if (selectedTagValue !== 0 && selectedTagValue) {
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: {
+              stateName: 'assesseeAssessmentStartData',
+              value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[prevIndex]
+            }
+          })
+        }
         // let prevSec = currentSectionIndex - 1;
         // if (currentSectionIndex != 0) {
         //   setcurrentSectionIndex(prevSec);
@@ -190,10 +201,22 @@ export const DisplayPaneSeven = () => {
             type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
             payload: { stateName: 'isAssessmentStart', value: 'STOP' }
           })
-           
+
           dispatch({
             type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
             payload: { stateName: 'assesseeAssessmentStartData', value: null }
+          })
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'sectionSynopsis', value: null }
+          })
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'sectionCommunique', value: null }
+          })
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'sectionMenuscript', value: null }
           })
         }
         else {

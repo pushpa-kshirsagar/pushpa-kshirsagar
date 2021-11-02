@@ -4,6 +4,8 @@ import IconButton from '../IconButton/IconButton';
 import './FooterIconTwo.css';
 import { useDispatch, useSelector } from 'react-redux';
 import ReviseIcon from '@material-ui/icons/RadioButtonChecked';
+import AppsIcon from '@material-ui/icons/Apps';
+//import AppsIcon from '@mui/icons-material/Apps';
 import { SET_POPUP_STATE, SET_GRID_COLUMN_COUNT_VALUE, SET_DISPLAY_TWO_SINGLE_STATE, SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE } from '../../actionType';
 import PopUpIcon from '../../PopUpIcon/PopUpIcon';
 import {
@@ -244,16 +246,179 @@ export const FooterIconOne = (props) => {
   };
   // let aid = assesseeAssessmentStartData?.assessmentSection[currentSectionIndexValue]?.assessmentSectionAid;
   // console.log('current aid setting', aid);
+  const openFooterIconPopupAssessment = (e) => {
+    console.log(e.currentTarget.getAttribute('data-value'));
+    let clickedValue = e.currentTarget.getAttribute('data-value');
+    setIsDisplayPaneShow(true);
+    if (clickedValue === 'worksheet') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'worksheet',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'LEFTFOOTER',
+          popupOpenType: 'primary',
+          popupContentArrValue: WORKSHEET_POPUP_ARR
+        }
+      });
+    }
+    if (clickedValue === 'toolkit') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'toolkit',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'LEFTFOOTER',
+          popupOpenType: 'primary',
+          popupContentArrValue: TOOLKIT_POPUP_ARR
+        }
+      });
+    }
+    if (clickedValue === 'manuscript') {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'indexPointer', value: 0 }
+      });
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: 'MENUSCRIPT' }
+      });
+    }
+    if (clickedValue === 'calculator') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'calculator',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'LEFTFOOTER',
+          popupOpenType: 'primary',
+          popupContentArrValue: CALCULATOR_POPUP_ARR
+        }
+      });
+    }
+    if (clickedValue === 'template') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'template',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'LEFTFOOTER',
+          popupOpenType: 'secondary',
+          popupContentArrValue: TEMPLATE_POPUP_ARR
+        }
+      });
+    }
+    if (clickedValue === 'alignment') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'template',
+          popupHeaderOneBadgeOne: 'alignment',
+          isPopUpValue: 'LEFTFOOTER',
+          popupOpenType: 'tertiary',
+          popupContentArrValue: ALIGNMENT_POPUP_ARR
+        }
+      });
+    }
+    if (clickedValue === 'gauge') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'gauge',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'LEFTFOOTER',
+          popupOpenType: 'secondary',
+          popupContentArrValue: GAUGE_POPUP_ARR
+        }
+      });
+    }
+    if (clickedValue === 'internet') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'gauge',
+          popupHeaderOneBadgeOne: 'internet',
+          isPopUpValue: 'LEFTFOOTER',
+          popupOpenType: 'tertiary',
+          popupContentArrValue: INTERNET_POPUP_ARR
+        }
+      });
+    }
+    if (clickedValue === 'textsheet') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'textsheet',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'TEXTSHEET_POPUP',
+          popupOpenType: 'secondary',
+          popupContentArrValue: []
+        }
+      });
+    }
+    if (clickedValue === 'spreadsheet') {
+      dispatch({
+        type: SET_POPUP_STATE,
+        payload: {
+          popupHeaderOne: 'spreadsheet',
+          popupHeaderOneBadgeOne: '',
+          isPopUpValue: 'SPREADSHEET_POPUP',
+          popupOpenType: 'secondary',
+          popupContentArrValue: []
+        }
+      });
+    }
+    if (
+      clickedValue === 'oneColumn' ||
+      clickedValue === 'twoColumn' ||
+      clickedValue === 'threeColumn' ||
+      clickedValue === 'fourColumn' ||
+      clickedValue === 'fiveColumn' ||
+      clickedValue === 'sixColumn'
+    ) {
+      let countval =
+        (clickedValue === 'oneColumn' && 1) ||
+        (clickedValue === 'twoColumn' && 2) ||
+        (clickedValue === 'threeColumn' && 3) ||
+        (clickedValue === 'fourColumn' && 4) ||
+        (clickedValue === 'fiveColumn' && 5) ||
+        (clickedValue === 'sixColumn' && 6);
+      dispatch({
+        type: SET_GRID_COLUMN_COUNT_VALUE,
+        payload: countval
+      });
+    }
+    if(clickedValue==='communiqué'){
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'indexPointer', value: 0 }
+      });
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: 'COMMUNIQUE' }
+      });
+    }
+    if(clickedValue==='synopsis'){
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'indexPointer', value: 0 }
+      });
+      dispatch({
+        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+        payload: { stateName: 'isAssessmentStart', value: 'SYNOPSIS' }
+      });      
+    }
+  };
   const reviseSecondaryIcons = [
     {
-      label: 'calculator', onClick: openFooterIconPopup, Icon: Keyboard, colour: "displayPaneLeft", 
+      label: 'calculator', onClick: openFooterIconPopupAssessment, Icon: Keyboard, colour: "displayPaneLeft", 
       //disabled: aid?.assessmentSectionAidCalculatorPermission ? false : true
     },
-    { label: 'communiqué', onClick: openFooterIconPopup, Icon: Description, colour: "displayPaneLeft", },
-    { label: 'manuscript', onClick: openFooterIconPopup, Icon: Description, colour: "displayPaneLeft" },
-    { label: 'synopsis', onClick: openFooterIconPopup, Icon: Description, colour: "displayPaneLeft" },
-    { label: 'toolkit', onClick: openFooterIconPopup, Icon: BusinessCenter, colour: "displayPaneLeft" },
-    { label: 'worksheet', onClick: openFooterIconPopup, Icon: InsertDriveFile, colour: "displayPaneLeft" }
+    { label: 'communiqué', onClick: openFooterIconPopupAssessment, Icon: Description, colour: "displayPaneLeft", },
+    { label: 'manuscript', onClick: openFooterIconPopupAssessment, Icon: Description, colour: "displayPaneLeft" },
+    { label: 'synopsis', onClick: openFooterIconPopupAssessment, Icon: Description, colour: "displayPaneLeft" },
+    { label: 'toolkit', onClick: openFooterIconPopupAssessment, Icon: BusinessCenter, colour: "displayPaneLeft" },
+    { label: 'worksheet', onClick: openFooterIconPopupAssessment, Icon: InsertDriveFile, colour: "displayPaneLeft" }
   ];
 
   const reviseSecondaryIconsDashboard = [
@@ -265,8 +430,8 @@ export const FooterIconOne = (props) => {
   const onClickRevise = () => {
     setIsDisplayPaneShow(false);
   }
-  const revisePrimaryIcon = [{ label: 'click', onClick: onClickRevise, Icon: ReviseIcon, colour: "displayPaneLeft" }];
-  //console.log('secondaryIcon', reviseSecondaryIcons)
+  const revisePrimaryIcon = [{ label: 'assistant', onClick: onClickRevise, Icon: AppsIcon, colour: "displayPaneLeft" }];
+
   return (
     <>
       {

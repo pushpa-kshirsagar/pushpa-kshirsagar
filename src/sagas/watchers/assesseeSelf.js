@@ -14,14 +14,16 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_POPUP_VALUE
+  SET_POPUP_VALUE,
+  SET_ASSESSEE_ASSESSMENT_ITEM_LAST_ATTEMPT_SAGA
 } from '../../actionType';
 import {
   ASSESSEEASSIGNMENT_REVIEWLIST_URL,
   ASSESSMENT_START_URL,
   ASSESSEE_ASSESSMENT_START_URL,
   ASSESSMENT_ITEM_REVISE_URL,
-  ASSESSEE_ASSESSMENT_FINISH_URL
+  ASSESSEE_ASSESSMENT_FINISH_URL,
+  ASSESSMENT_ITEM_LAST_ATTEMPT_URL
 } from '../../endpoints';
 import Store from '../../store';
 
@@ -319,10 +321,39 @@ function* workerAssesseeAssessmentFinishSaga(data) {
     yield put({ type: LOADER_STOP });
   }
 }
+function* workerAssesseeAssessmentLastAttemptItem(data){
+  debugger;
+  try {
+    const response = yield call(apiCallFun, {
+      data: data.payload.request,
+      URL: ASSESSMENT_ITEM_LAST_ATTEMPT_URL,
+      type: ''
+    });
+    if (response.responseCode === '000') {
+    } else {
+      yield put({
+        type: SET_POPUP_VALUE,
+        payload: { isPopUpValue: response.responseMessage, popupMode: 'responseErrorMsg' }
+      });
+    }
+
+    console.log('loading end');
+    yield put({ type: LOADER_STOP });
+  } catch (e) {
+    console.log('ERROR==', e);
+    yield put({
+      type: SET_POPUP_VALUE,
+      payload: { isPopUpValue: 'somthing went wrong', popupMode: 'responseErrorMsg' }
+    });
+    yield put({ type: LOADER_STOP });
+  }
+
+}
 export default function* watchAssesseeSelfSaga() {
   yield takeLatest(GET_ASSESSEE_ASSIGNMENT_SAGA, workerAssesseeAssignmentListSaga);
   yield takeLatest(ASSESSMENT_START_SAGA, workerAssessmentStartSaga);
   yield takeLatest(ASSESSEE_ASSESSMENT_START_SAGA, workerAssesseeAssessmentStartSaga);
   yield takeLatest(SET_ASSESSEE_ASSESSMENT_ITEM_RES_SAGA, workerAssesseeAssessmentItemFinishSaga);
   yield takeLatest(ASSESSEE_ASSESSMENT_FINISH_SAGA, workerAssesseeAssessmentFinishSaga);
+  yield takeLatest(SET_ASSESSEE_ASSESSMENT_ITEM_LAST_ATTEMPT_SAGA,workerAssesseeAssessmentLastAttemptItem);
 }
