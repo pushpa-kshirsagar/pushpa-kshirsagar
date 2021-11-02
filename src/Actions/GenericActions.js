@@ -7,6 +7,7 @@ import { apiCallForItemDistinctPagination, getItemReviewApiCall } from './ItemMo
 import {
   GET_ASSESSEE_ASSIGNMENT_SAGA,
   LOADER_START,
+  SET_ASSESSEE_ASSESSMENT_ITEM_LAST_ATTEMPT_SAGA,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MOBILE_PANE_STATE,
   SET_PAGE_COUNT,
@@ -7701,3 +7702,23 @@ export function converTimeToMiliseconds(time) {
     return milisec;
   }
 }
+export const callApiFunctionLastAttempted = (
+  selectedAssociateInfo,
+  assesseeAssignmentAssessmentData,
+  dispatch,
+  lastAttempted
+) => {
+  let reqBody = {
+          assesseeId: selectedAssociateInfo?.assesseeId,
+          associateId:
+            selectedAssociateInfo?.associate?.informationEngagement.associateTag
+              .associateTagPrimary,
+          assignmentId: assesseeAssignmentAssessmentData.assignmentId,
+          assessmentId: assesseeAssignmentAssessmentData.assessmentId,
+          assesseeAssignmentAssessmentItemLastAttempted:lastAttempted
+        };
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_ITEM_LAST_ATTEMPT_SAGA,
+          payload: { request: reqBody }
+        });
+};

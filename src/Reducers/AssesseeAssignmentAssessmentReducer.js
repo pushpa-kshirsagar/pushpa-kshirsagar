@@ -4,8 +4,10 @@ import {
   SET_ASSESSEE_ASSESSMENT_ISASSESSMENTSTART_STATE,
   SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE,
   SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE,
-  SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE
-
+  SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE,
+  SET_ASSESSEE_ASSESSMENT_SECTION_COMMUNIQUE_STATE,
+  SET_ASSESSEE_ASSESSMENT_SECTION_MENUSCRIPT_STATE,
+  SET_ASSESSEE_ASSESSMENT_SECTION_SYNOPSIS_STATE
 } from '../actionType';
 
 const initialState = {
@@ -18,9 +20,12 @@ const initialState = {
   currentSequenceIndex: 0,
   currentAssessmentSectionSequenceIndex: 0,
   assessmentsequenceObject: [],
-  menuscript: [],
-  synopsis: [],
-  communique: [],
+  sectionMenuscript: [],
+  sectionSynopsis: [],
+  sectionCommunique: [],
+  assessmentCommunique: [],
+  assessmentMenuscript: [],
+  assessmentSynopsis: [],
   //indexPointer:0// for communique,menuscriptm
 };
 
@@ -37,30 +42,55 @@ const AssesseeAssignmentAssessmentReducer = (istate = JSON.parse(JSON.stringify(
         ...istate,
         isAssessmentStart: action.payload
       };
-      case SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE:
+    case SET_ASSESSEE_ASSESSMENT_COMMUNIQUE_STATE:
       return {
         ...istate,
-        communique:[
-          ...istate.communique,
+        assessmentCommunique: [
+          ...istate.assessmentCommunique,
           action.payload
         ]
       };
-      case SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE:
-        return {
-          ...istate,
-          menuscript:[
-            ...istate.menuscript,
-            action.payload
-          ]
-        };
-        case SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE:
+    case SET_ASSESSEE_ASSESSMENT_MENUSCRIPT_STATE:
       return {
         ...istate,
-        synopsis:[
-          ...istate.synopsis,
+        assessmentMenuscript: [
+          ...istate.assessmentMenuscript,
           action.payload
         ]
       };
+    case SET_ASSESSEE_ASSESSMENT_SYNOPSIS_STATE:
+      return {
+        ...istate,
+        assessmentSynopsis: [
+          ...istate.assessmentSynopsis,
+          action.payload
+        ]
+      };
+    case SET_ASSESSEE_ASSESSMENT_SECTION_COMMUNIQUE_STATE:
+      return {
+        ...istate,
+        sectionCommunique: [
+          ...istate.sectionCommunique,
+          action.payload
+        ]
+      };
+    case SET_ASSESSEE_ASSESSMENT_SECTION_MENUSCRIPT_STATE:
+      return {
+        ...istate,
+        sectionMenuscript: [
+          ...istate.sectionMenuscript,
+          action.payload
+        ]
+      };
+    case SET_ASSESSEE_ASSESSMENT_SECTION_SYNOPSIS_STATE:
+      return {
+        ...istate,
+        sectionSynopsis: [
+          ...istate.sectionSynopsis,
+          action.payload
+        ]
+      };
+
     case CLEAR_ASSESSEE_ASSESSMENT_REDUCER_STATE:
       return JSON.parse(JSON.stringify(initialState));
     default:
