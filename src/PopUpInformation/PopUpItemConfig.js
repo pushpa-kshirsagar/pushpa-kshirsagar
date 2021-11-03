@@ -34,20 +34,29 @@ const PopUpItemConfig = (props) => {
     basicInfo,
     mode,
     isItemFramework = false,
-    itemFrameworkOne
+    itemFrameworkOne,
+    headerOneBadgeTwo = '',
+    assessmentItemSequence = false,
+    currentItemSequence
   } = props;
   const { itemInformation } = useSelector((state) => state.ItemCreateReducer);
-  const { itemConfigStates } = useSelector((state) => state.DisplayPaneTwoReducer);
-  const { isAssessmentPreviewShow = false, isAssessmentSectionShow = false } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
+  const { itemConfigStates, assessmentSelecedSectionVersionData } = useSelector(
+    (state) => state.DisplayPaneTwoReducer
   );
+  const {
+    isAssessmentPreviewShow = false,
+    isAssessmentSectionShow = false,
+    isAssessmentVersionShow = false
+  } = useSelector((state) => state.DisplayPaneThreeReducer);
   //const itemFrameworkOne = itemInformation.informationFramework.itemFrameworkOne;
-
+  const assessmentInfo = useSelector((state) => state.AssessmentReducer);
+  const versionInfo = useSelector((state) => state.VersionCreateReducer);
   const [item_Aligement, set_Item_Aligement] = useState(
     itemFrameworkOne?.itemFrameworkOneAlignment
   );
   const [item_Type, set_Item_Type] = useState(itemFrameworkOne?.itemFrameworkOneType);
   const [response_word, set_Response_Word] = useState();
+  const [item_sequence, set_item_sequence] = useState();
   const [response_Choice_Aligement, set_Choice_Response_Word] = useState();
   const [response_Aligement, Set_Response_Aligement] = useState(
     itemFrameworkOne?.itemFrameworkOneResponseAlignment
@@ -68,6 +77,7 @@ const PopUpItemConfig = (props) => {
     set_Item_Type(itemFrameworkOne?.itemFrameworkOneType);
     Set_Response_Aligement(itemFrameworkOne?.itemFrameworkOneResponseAlignment);
     set_Response_Word(itemFrameworkOne?.itemFrameworkOneWord?.itemFrameworkOneWordMaximum);
+    set_item_sequence(currentItemSequence);
   }, [itemFrameworkOne]);
   const dispatch = useDispatch();
   const subItemList = itemFrameworkOne?.itemFrameworkOneSection;
@@ -88,82 +98,6 @@ const PopUpItemConfig = (props) => {
       }
     });
     setItemTypeConfigState(item_Type, dispatch, true);
-    // let reviseSetting = {
-    //   blankState: true,
-    //   classificationState: false,
-    //   levelState: true,
-    //   polarityState: true,
-    //   scaleState: true,
-    //   scoreState: true,
-    //   timeState: true,
-    //   weightageState: true,
-    //   noOfItemState: true,
-    //   noOfResponseState: true
-    // };
-    // if (item_Type === '61090cace50cf61d5eb440c9') {
-    //   // "Likert-Scale"
-    //   reviseSetting = {
-    //     blankState: false,
-    //     classificationState: false,
-    //     levelState: true,
-    //     polarityState: true,
-    //     scaleState: true,
-    //     scoreState: false,
-    //     timeState: true,
-    //     weightageState: true,
-    //     noOfItemState: true,
-    //     noOfResponseState: true
-    //   };
-    // }
-    // if (item_Type === '61090cace50cf61d5eb440ce') {
-    //   //"Response-Choice (Single-Select)"
-    //   reviseSetting = {
-    //     blankState: false,
-    //     classificationState: false,
-    //     levelState: true,
-    //     polarityState: false,
-    //     scaleState: false,
-    //     scoreState: true,
-    //     timeState: true,
-    //     weightageState: false,
-    //     noOfItemState: false,
-    //     noOfResponseState: true
-    //   };
-    // }
-    // if (item_Type === '61090cace50cf61d5eb440c4') {
-    //   //"Fill-in-the-Blank (Response-Choice)"
-    //   reviseSetting = {
-    //     blankState: true,
-    //     classificationState: false,
-    //     levelState: true,
-    //     polarityState: false,
-    //     scaleState: false,
-    //     scoreState: true,
-    //     timeState: true,
-    //     weightageState: false,
-    //     noOfItemState: false,
-    //     noOfResponseState: true
-    //   };
-    // }
-    // if (item_Type === '61090cace50cf61d5eb440cc' || item_Type === '61090cace50cf61d5eb440cd') {
-    //   //"Response (Long)","Response (Short)"
-    //   reviseSetting = {
-    //     blankState: false,
-    //     classificationState: false,
-    //     levelState: true,
-    //     polarityState: false,
-    //     scaleState: false,
-    //     scoreState: true,
-    //     timeState: true,
-    //     weightageState: false,
-    //     noOfItemState: false,
-    //     noOfResponseState: false
-    //   };
-    // }
-    // dispatch({
-    //   type: SET_DISPLAY_TWO_SINGLE_STATE,
-    //   payload: { stateName: 'itemConfigStates', value: reviseSetting }
-    // });
     if (isAssessmentPreviewShow) {
       dispatch({
         type: SET_ASSESSMENT_FRAMEWORK_DYNAMIC_SINGLE_STATE,
@@ -211,6 +145,36 @@ const PopUpItemConfig = (props) => {
           value: {
             itemFrameworkOneWordMaximum: response_word,
             itemFrameworkOneWordMinimum: response_word
+          }
+        }
+      });
+    } else if (isAssessmentVersionShow) {
+      console.log('currentItemSequence', currentItemSequence);
+      console.log('item_sequence', item_sequence);
+      let array =
+        JSON.parse(
+          JSON.stringify(assessmentSelecedSectionVersionData.assessmentVersionItemDistinct)
+        ) || [];
+      let itemSequenceArr = [];
+      for (let index = 0; index < array.length; index++) {
+        let reviseItem = JSON.parse(JSON.stringify(array[index]));
+        if (reviseItem.itemSequence === parseInt(currentItemSequence)) {
+          reviseItem = { ...reviseItem, itemSequence: parseInt(item_sequence) };
+          itemSequenceArr.push(reviseItem);
+        } else if (reviseItem.itemSequence === parseInt(item_sequence)) {
+          reviseItem = { ...reviseItem, itemSequence: parseInt(currentItemSequence) };
+          itemSequenceArr.push(reviseItem);
+        } else {
+          itemSequenceArr.push(reviseItem);
+        }
+      }
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'assessmentSelecedSectionVersionData',
+          value: {
+            ...assessmentSelecedSectionVersionData,
+            assessmentVersionItemDistinct: itemSequenceArr
           }
         }
       });
@@ -525,7 +489,7 @@ const PopUpItemConfig = (props) => {
       description: item.itemFrameworkOneTypeDescription
     };
   });
-  console.log(itemFrameworkOne?.itemFrameworkOneResponseChoice.length);
+  console.log('props', props);
   return (
     <div>
       <Popup isActive={isActive}>
@@ -533,6 +497,7 @@ const PopUpItemConfig = (props) => {
           headerPanelColour={headerPanelColour}
           headerOne={headerOne}
           headerOneBadgeOne={primaryheader}
+          headerOneBadgeTwo={headerOneBadgeTwo}
           onClick={handleClick}
           mode={mode}
           value={item_Type}
@@ -562,7 +527,7 @@ const PopUpItemConfig = (props) => {
             </div>
           </div>
           <FormControl style={{ width: '100%' }}>
-            {isItemFramework ? (
+            {isItemFramework === 'itemConfig' ? (
               <Fragment>
                 {itemConfigStates.noOfItemState && (
                   <InputFeild
@@ -684,7 +649,7 @@ const PopUpItemConfig = (props) => {
                   mappingValue={'id'}
                 /> */}
               </Fragment>
-            ) : (
+            ) : isItemFramework === 'responseConfig' ? (
               <Fragment>
                 <InputFeild
                   tag={'response_word'}
@@ -722,7 +687,26 @@ const PopUpItemConfig = (props) => {
                   </div>
                 </div>
               </Fragment>
-            )}
+            ) : isItemFramework === 'sequenceConfig' ? (
+              <Fragment>
+                <InputFeild
+                  tag={'item_sequence'}
+                  label={'sequence'}
+                  dataValue={'sequence'}
+                  labelBadgeOne={''}
+                  value={item_sequence}
+                  errorMsg={''}
+                  type={'number'}
+                  onClick={
+                    mode === 'revise'
+                      ? (e) => {
+                          set_item_sequence(e.target.value);
+                        }
+                      : null
+                  }
+                />
+              </Fragment>
+            ) : null}
           </FormControl>
         </DialogContent>
       </Popup>

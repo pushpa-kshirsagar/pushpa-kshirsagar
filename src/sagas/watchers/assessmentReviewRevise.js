@@ -258,7 +258,10 @@ function* workerReviewInfoAssessmentSaga(data) {
           let tempArr = [];
           if (ver.assessmentVersionItemDistinct) {
             for (let i = 0; i < ver.assessmentVersionItemDistinct?.length; i++) {
-              tempArr.push(ver.assessmentVersionItemDistinct[i].itemId);
+              tempArr.push({
+                itemTagPrimary: ver.assessmentVersionItemDistinct[i].itemTagPrimary,
+                itemSequence: ver.assessmentVersionItemDistinct[i].itemSequence
+              });
             }
           }
           let reviseObj = { ...ver, assessmentVersionItemDistinct: tempArr };
@@ -432,7 +435,10 @@ function* workerReviewInfoAssessmentSecSaga(data) {
           let tempArr = [];
           if (ver.assessmentVersionItemDistinct) {
             for (let i = 0; i < ver.assessmentVersionItemDistinct?.length; i++) {
-              tempArr.push(ver.assessmentVersionItemDistinct[i].itemId);
+              tempArr.push({
+                itemTagPrimary: ver.assessmentVersionItemDistinct[i].itemTagPrimary,
+                itemSequence: ver.assessmentVersionItemDistinct[i].itemSequence
+              });
             }
           }
           let reviseObj = { ...ver, assessmentVersionItemDistinct: tempArr };
@@ -449,11 +455,18 @@ function* workerReviewInfoAssessmentSecSaga(data) {
         ...assessmentInfo.informationFramework,
         assessmentSection: sectionArr
       };
+      // yield put({
+      //   type: SET_DISPLAY_TWO_SINGLE_STATE,
+      //   payload: {
+      //     stateName: 'assessmentResponseObject',
+      //     value: { ...assessmentInfo, informationFramework: reviseFramewrkobj }
+      //   }
+      // });
       yield put({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: {
           stateName: 'assessmentResponseObject',
-          value: { ...assessmentInfo, informationFramework: reviseFramewrkobj }
+          value: assessmentInfo
         }
       });
       yield put({

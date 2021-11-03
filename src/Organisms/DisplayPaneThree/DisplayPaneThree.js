@@ -218,7 +218,7 @@ export const DisplayPaneThree = () => {
     scanCount,
     assessmentSelecedSection,
     assessmentSelecedVersion,
-    assessmentResponseObject
+    assessmentSelecedSectionVersionData
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const assessmentInfo = useSelector((state) => state.AssessmentReducer);
@@ -2042,8 +2042,19 @@ export const DisplayPaneThree = () => {
       });
     } else if (headerOneBadgeOne === 'version' && headerOne === 'assessments') {
       let sectionObj = assessmentInfo.informationFramework.assessmentSection;
-      sectionObj[assessmentSelecedSection].assessmentVersion[assessmentSelecedVersion] =
-        versionInfo.versionInformation;
+      let itemArr = [];
+      assessmentSelecedSectionVersionData.map((dd) => {
+        itemArr.push({ itemSequence: dd.itemSequence, itemTagPrimary: dd.itemTagPrimary });
+      });
+      let dddd = {
+        assessmentVersionName: versionInfo.versionInformation.assessmentVersionName,
+        assessmentVersionVerification: versionInfo.versionInformation.assessmentVersionVerification,
+        assessmentVersionDescription: versionInfo.versionInformation.assessmentVersionDescription,
+        assessmentVersionItemDistinct: itemArr
+      };
+      // sectionObj[assessmentSelecedSection].assessmentVersion[assessmentSelecedVersion] =
+      //   versionInfo.versionInformation;
+      sectionObj[assessmentSelecedSection].assessmentVersion[assessmentSelecedVersion] = dddd;
       let id = relatedReviewListDistinctData[0].id;
       const reqBody = {
         assesseeId: selectedAssociateInfo?.assesseeId,

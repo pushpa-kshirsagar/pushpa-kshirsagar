@@ -12,7 +12,7 @@ import {
   SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
   SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
   SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE,
-  SET_POPUP_VALUE
+  ASSESSMENT_INFO_REVISE_SAGA
 } from '../../actionType';
 import '../../Molecules/ReviewList/ReviewList.css';
 import FooterIconTwo from '../../Molecules/FooterIcon/FooterIconTwo';
@@ -35,15 +35,11 @@ export const DisplayPaneFive = () => {
   const [currentSectionIndex, setcurrentSectionIndex] = useState(0);
   const [currentVersionIndex, setcurrentVersionIndex] = useState(0);
   const {
-    typeOfMiddlePaneList,
     selectedAssociateInfo,
-    reviewListDistinctData,
-    reviewListReqObj,
-    numberPage,
-    middlePaneHeader,
-    middlePaneHeaderBadgeOne,
-    middlePaneHeaderBadgeTwo,
-    scanCount
+    relatedReviewListDistinctData,
+    assessmentSelecedSectionVersionData,
+    assessmentSelecedSection,
+    assessmentSelecedVersion
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const {
     headerOne,
@@ -60,7 +56,9 @@ export const DisplayPaneFive = () => {
   const { informationFramework, isDisplayPaneSixShow } = useSelector(
     (state) => state.AssessmentReducer
   );
-  const { isPopUpValue, popupMode } = useSelector((state) => state.PopUpReducer);
+  const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
+  const assessmentInfo = useSelector((state) => state.AssessmentReducer);
+  const versionInfo = useSelector((state) => state.VersionCreateReducer);
   const { FilterMode, navigatorIcon } = useSelector((state) => state.FilterReducer);
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
   console.log('sectionInformationReducerObejct', sectionInformation);
@@ -76,16 +74,7 @@ export const DisplayPaneFive = () => {
       dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneThree' });
     }
   };
-  const onClickSequenceUpdate = () => {
-    console.log('currentItemIndex',currentItemIndex);
-    // dispatch({
-    //   type: SET_POPUP_VALUE,
-    //   payload: {
-    //     isPopUpValue: 'ITEM_PRIMARY_POPUP',
-    //     popupMode: popupMode
-    //   }
-    // });
-  };
+  const onClickSequenceUpdate = () => {};
   const onClickFooter = (e) => {
     let clickedval = e.currentTarget.getAttribute('data-value');
     dispatch({ type: NAVIGATOR_MODE });
@@ -450,6 +439,7 @@ export const DisplayPaneFive = () => {
     } else {
     }
   };
+  console.log('assessmentSelecedSectionVersionData',assessmentSelecedSectionVersionData);
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
     if (isAssessmentSectionShow) {
@@ -462,6 +452,46 @@ export const DisplayPaneFive = () => {
         payload: {
           stateName: 'assessmentSectionItemFrameworkOneDistinct',
           value: itemDistinctReviseObj
+        }
+      });
+    } else if (isAssessmentVersionShow) {
+      let sectionObj = assessmentInfo.informationFramework.assessmentSection;
+      let itemArr = [];
+      assessmentSelecedSectionVersionData.assessmentVersionItemDistinct.map((dd) => {
+        itemArr.push({ itemSequence: dd.itemSequence, itemTagPrimary: dd.itemTagPrimary });
+      });
+      let dddd = {
+        assessmentVersionName: versionInfo.versionInformation.assessmentVersionName,
+        assessmentVersionVerification: versionInfo.versionInformation.assessmentVersionVerification,
+        assessmentVersionDescription: versionInfo.versionInformation.assessmentVersionDescription,
+        assessmentVersionItemDistinct: itemArr
+      };
+      // sectionObj[assessmentSelecedSection].assessmentVersion[assessmentSelecedVersion] =
+      //   versionInfo.versionInformation;
+      sectionObj[assessmentSelecedSection].assessmentVersion[assessmentSelecedVersion] = dddd;
+      let id = relatedReviewListDistinctData[0].id;
+      const reqBody = {
+        assesseeId: selectedAssociateInfo?.assesseeId,
+        associateId:
+          selectedAssociateInfo?.associate?.informationEngagement.associateTag.associateTagPrimary,
+        assessment: {
+          id,
+          informationFramework: {
+            assessmentSection: sectionObj
+          }
+        }
+      };
+      console.log('ASSESSMENT REVISE ===', reqBody);
+      dispatch({ type: LOADER_START });
+      dispatch({
+        type: ASSESSMENT_INFO_REVISE_SAGA,
+        payload: {
+          secondaryOptionCheckValue: headerOneBadgeTwo,
+          headerOne: 'assessment',
+          reqBody,
+          createMode,
+          assessmentSector: 'version',
+          selectedSector: selectedTagValue
         }
       });
     } else {
@@ -524,18 +554,16 @@ export const DisplayPaneFive = () => {
   //informationFramework?.assessmentItem[currentItemIndex].informationFramework?.itemFrameworkOne;
   console.log('responseObject', responseObject);
   console.log('isAssessmentPreviewShow', isAssessmentPreviewShow);
-  var itemObect =
+  var itemListArray =
     (isAssessmentSectionShow &&
-      responseObject?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[
-        currentItemIndex
-      ]?.itemFrameworkOne) ||
+      responseObject?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct) ||
     (isAssessmentPreviewShow &&
       responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
-        ?.assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct[currentItemIndex]
-        ?.itemFrameworkOne) ||
-    (isAssessmentVersionShow &&
-      responseObject?.assessmentVersionItemDistinct[currentItemIndex]?.itemFrameworkOne) ||
-    '';
+        .assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct) ||
+    (isAssessmentVersionShow && responseObject?.assessmentVersionItemDistinct);
+  console.log('itemListArray', itemListArray);
+  var itemObect =
+    (itemListArray.length > 0 && itemListArray[currentItemIndex].itemFrameworkOne) || '';
   console.log('itemObect', itemObect);
 
   return (
@@ -636,7 +664,7 @@ export const DisplayPaneFive = () => {
               displayPane="itemPreview"
               showClearIcon
               headerOne={headerOne}
-              headerOneBadgeOne={''}
+              headerOneBadgeOne={'version'}
               headerOneBadgeTwo="preview"
               headerPanelColour="blue"
               onClickClearInfo={closePreview}
@@ -644,11 +672,11 @@ export const DisplayPaneFive = () => {
             <DisplayPaneFiveAssessment
               headerOne={headerOne}
               //closePreview={closePreview}
-              informationFramework={responseObject}
+              informationFramework={assessmentSelecedSectionVersionData}
               currentItemIndex={currentItemIndex}
               currentSectionIndex={currentSectionIndex}
+              currentItemResponse={itemListArray[currentItemIndex]}
               itemObect={itemObect}
-              onClickSequenceUpdate={onClickSequenceUpdate}
             />
             {reviewMode === 'revise' ? (
               <FooterIconTwo

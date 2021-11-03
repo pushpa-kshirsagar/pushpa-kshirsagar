@@ -652,7 +652,7 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
       });
     }
     if (labelName === 'items' && selectedBadgeName === 'distinct') {
-      let requestObect = makeItemObj(selectedAssociateInfo, 'active', countPage, 0);
+      let requestObect = makeItemObj(selectedAssociateInfo, 'active', countPage, -1);
       let revisedGroupObject = {
         id: responseObject.id,
         assessmentName: responseObject.informationBasic.assessmentName,

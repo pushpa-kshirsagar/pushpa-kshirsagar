@@ -1,35 +1,25 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
-import Manuscript from '@material-ui/icons/Description';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayPanelAccordianReviewListOne from '../Accordian/DisplayPanelAccordianReviewListOne';
 import DisplayPanelAccordianInformation from '../Accordian/DisplayPanelAccordianInformation';
 import { Paper } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import {
   FILTERMODE,
-  GET_ALLOCATE_ITEM,
   GET_ALLOCATE_ITEM_GROUP,
   LOADER_START,
   RELATED_REVIEWLIST_DISTINCT_DATA,
-  SET_ASSESSMENT_SINGLE_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_MOBILE_PANE_STATE,
-  SET_PANE_THREE_ASSESSMENT_PREVIEW_MODE,
-  SET_PANE_THREE_ASSESSMENT_SECTION_PREVIEW_MODE,
-  SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE,
-  SET_PANE_THREE_PREVIEW_MODE,
-  SET_POPUP_VALUE
+  SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE
 } from '../../actionType';
-import { convertSecondsToHMmSs, makeItemGroupObj, makeItemObj } from '../../Actions/GenericActions';
+import { makeItemGroupObj } from '../../Actions/GenericActions';
 import DisplayPanelAccordianReviewListTwo from '../Accordian/DisplayPanelAccordianReviewListTwo';
 
 const DisplayPaneThreeSectionOneAssessmentVersion = () => {
   const dispatch = useDispatch();
-  const { responseObject, reviewMode, relatedReviewListPaneThree } = useSelector(
-    (state) => state.DisplayPaneThreeReducer
-  );
+  const { responseObject, reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
   const { selectedTagValue } = useSelector((state) => state.PopUpReducer);
   const { assessmentResponseObject } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedAssociateInfo, relatedReviewListDistinctData } = useSelector(
@@ -45,31 +35,33 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
           innerList: []
         },
         {
-          labelTextTwoBadge: 'group',
+          labelTextTwoBadge: 'preview',
           innerList: []
         }
       ]
     });
   });
+  let sectionPreviewArr = [];
+  assessmentResponseObject?.informationFramework?.assessmentSection.map((comm, index) => {
+    sectionPreviewArr.push({
+      labelTextTwoBadge: index + 1,
+      innerLabelBadgeList: []
+    });
+  });
   const frameworkAll = [
-    // {
-    //   id: 'a4',
-    //   labelTextOneOne: 'items',
-    //   isListCard: true,
-    //   labelTextOneOneBadges: [
-    //     {
-    //       labelTextOneOneBadge: 'distinct',
-    //       innerList: []
-    //     },
-    //     {
-    //       labelTextOneOneBadge: 'group',
-    //       innerList: []
-    //     }
-    //   ],
-    //   innerAssociateList: [],
-    //   innerInfo: 'No Information',
-    //   IconOne: null
-    // },
+    {
+      id: 'preview-section',
+      labelTextOneOne: 'preview',
+      labelTextOneOneBadges: [
+        { labelTextOneOneBadge: 'sections', innerLabelBadgeList: sectionPreviewArr }
+      ],
+      innerAssociateList: [],
+      innerInfo: 'No Information',
+      IconOne: null,
+      isMultiList: true,
+      isListCard: true,
+      isReviewLink: true
+    },
     {
       id: 'a4',
       labelTextOneOne: 'section',
@@ -80,21 +72,14 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
       isMultiList: true,
       isListCard: true,
       isReviewLink: true
-    },
-    {
-      id: 'preview-section',
-      labelTextOneOne: 'preview',
-      innerAssociateList: [],
-      innerInfo: '',
-      isListCard: false,
-      IconOne: null,
-      isReviewLink: true
     }
   ];
   const reviseFramework = (e, selectedBadgeArray) => {
     const labelName = e.currentTarget.getAttribute('data-value');
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
+    console.log('selectedBadgeName', selectedBadgeName);
+    console.log('innerSelectedBadgeName', innerSelectedBadgeName);
     if (labelName === 'section' && selectedBadgeName !== '' && innerSelectedBadgeName === 'group') {
       let requestObect = makeItemGroupObj(selectedAssociateInfo, 'active', -1, -1);
       let revisedGroupObject = {
@@ -145,7 +130,7 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
       let existingItemId =
         responseObject?.assessmentVersionItemDistinct &&
         responseObject?.assessmentVersionItemDistinct?.map((val) => {
-          return val.itemId;
+          return val.itemTagPrimary;
         });
       dispatch({
         type: FILTERMODE,
@@ -168,9 +153,61 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
       });
       dispatch({ type: RELATED_REVIEWLIST_DISTINCT_DATA, payload: [revisedGroupObject] });
     }
-    if (labelName === 'preview') {
-      dispatch({ type: SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE, payload: true });
-      dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
+    if (
+      labelName === 'preview' &&
+      selectedBadgeName === 'sections' &&
+      innerSelectedBadgeName !== ''
+    ) {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'assessmentSelecedSection', value: innerSelectedBadgeName - 1 }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'assessmentSelecedVersion', value: selectedTagValue }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'assessmentSelecedSectionVersionData',
+          value:
+            assessmentResponseObject.informationFramework.assessmentSection[
+              innerSelectedBadgeName - 1
+            ].assessmentVersion[selectedTagValue]
+        }
+      });
+      setTimeout(function () {
+        dispatch({ type: SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE, payload: true });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
+      }, 1000);
+    }
+    if (
+      labelName === 'section' &&
+      selectedBadgeName !== '' &&
+      innerSelectedBadgeName === 'preview'
+    ) {
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'assessmentSelecedSection', value: selectedBadgeName - 1 }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'assessmentSelecedVersion', value: selectedTagValue }
+      });
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: {
+          stateName: 'assessmentSelecedSectionVersionData',
+          value:
+            assessmentResponseObject.informationFramework.assessmentSection[
+              innerSelectedBadgeName - 1
+            ].assessmentVersion[selectedTagValue]
+        }
+      });
+      setTimeout(function () {
+        dispatch({ type: SET_PANE_THREE_ASSESSMENT_VERSION_PREVIEW_MODE, payload: true });
+        dispatch({ type: SET_MOBILE_PANE_STATE, payload: 'displayPaneFive' });
+      }, 1000);
     }
   };
 
@@ -179,6 +216,45 @@ const DisplayPaneThreeSectionOneAssessmentVersion = () => {
     const selectedBadgeName = e.currentTarget.getAttribute('data-key');
     const innerSelectedBadgeName = e.currentTarget.getAttribute('id');
     if (labelName === 'section' && selectedBadgeName !== '' && innerSelectedBadgeName === 'item') {
+      let reviseResponseObj = {
+        countTotal: responseObject?.assessmentVersionItemDistinct.length || 0,
+        responseObject: [
+          {
+            item: responseObject?.assessmentVersionItemDistinct || [],
+            id: relatedReviewListDistinctData[0].id,
+            assessmentSectionName: responseObject.assessmentVersionName,
+            assessmentSectionDescription: responseObject.assessmentVersionDescription
+          }
+        ]
+      };
+      dispatch({
+        type: SET_DISPLAY_TWO_SINGLE_STATE,
+        payload: { stateName: 'relatedReviewListDistinctData', value: [] }
+      });
+      dispatch({
+        type: RELATED_REVIEWLIST_DISTINCT_DATA,
+        payload: reviseResponseObj.responseObject
+      });
+      dispatch({
+        type: SET_MIDDLEPANE_STATE,
+        payload: {
+          middlePaneHeader: 'item',
+          middlePaneHeaderBadgeOne: 'distinct',
+          middlePaneHeaderBadgeTwo: 'active',
+          middlePaneHeaderBadgeThree: '',
+          middlePaneHeaderBadgeFour: '',
+          typeOfMiddlePaneList: 'assessmentSectionItemDistinctReviewList',
+          middlePaneSelectedValue: '',
+          scanCount: reviseResponseObj && reviseResponseObj.countTotal,
+          showMiddlePaneState: true
+        }
+      });
+    }
+    if (
+      labelName === 'preview' &&
+      selectedBadgeName === 'sections' &&
+      innerSelectedBadgeName !== ''
+    ) {
       let reviseResponseObj = {
         countTotal: responseObject?.assessmentVersionItemDistinct.length || 0,
         responseObject: [

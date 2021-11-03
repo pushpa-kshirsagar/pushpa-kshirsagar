@@ -79,11 +79,9 @@ const AssessmentHeader = (props) => {
               style={{
                 flex: '1',
                 alignItems: 'center',
-                display: 'inline-block',
-                cursor: props.isItemSequenceLabel && 'pointer'
+                display: 'inline-block'
               }}
               className="flex-center"
-              onClick={props.onClickFlexThree}
             >
               <div
                 style={{ display: 'block !important' }}
@@ -188,7 +186,7 @@ export const DisplayPaneFiveAssessment = (props) => {
     flagQuestion,
     isQuestionFlaged,
     currentSectionIndex,
-    currentVersionIndex,
+    currentVersionIndex = 0,
     itemObect,
     timerFinished,
     timer,
@@ -196,7 +194,7 @@ export const DisplayPaneFiveAssessment = (props) => {
     currentQuestionChoice,
     assessmentName,
     assessmentDescription,
-    onClickSequenceUpdate = null
+    currentItemResponse
   } = props;
   const dispatch = useDispatch();
   const { reviewMode } = useSelector((state) => state.DisplayPaneThreeReducer);
@@ -221,7 +219,7 @@ export const DisplayPaneFiveAssessment = (props) => {
     //TODO: set secondary option in item
     console.log();
   };
-
+  const reviewReviseMode = isAssessmentVersionShow ? 'review' : reviewMode;
   const itemPrimaryPopupOption = [
     {
       data: 'configure',
@@ -282,6 +280,15 @@ export const DisplayPaneFiveAssessment = (props) => {
   };
   const ChangeTripleDotOptionPopup = (e) => {
     let targetValue = e.currentTarget.getAttribute('data-value');
+    if (targetValue === 'configure') {
+      dispatch({
+        type: SET_POPUP_VALUE,
+        payload: {
+          isPopUpValue: 'ASSESSMENT_CONFIGURE_POPUP',
+          popupMode: ''
+        }
+      });
+    }
     if (targetValue === 'revise') {
       dispatch({
         type: SET_DISPLAY_PANE_THREE_REVIEW_MODE,
@@ -304,10 +311,8 @@ export const DisplayPaneFiveAssessment = (props) => {
       dataKey: 'configureAPICall',
       optionClass: 'optionPrimary',
       divider: '',
-      disabled: true
-      // responseObject?.informationEngagement?.itemStatus === 'PUBLISHED' || reviewMode === 'review'
-      //   ? true
-      //   : false
+      // disabled: isAssessmentVersionShow && reviewMode === 'revise' ? false : true
+      disabled: isAssessmentVersionShow && reviewMode === 'revise' ? false : true
     },
     {
       data: 'review',
@@ -316,7 +321,6 @@ export const DisplayPaneFiveAssessment = (props) => {
       optionClass: 'optionPrimary',
       divider: '',
       disabled: false
-      //disabled: reviewMode === 'review'? true:false
     },
     {
       data: 'revise',
@@ -325,9 +329,6 @@ export const DisplayPaneFiveAssessment = (props) => {
       optionClass: 'optionPrimary',
       divider: '',
       disabled: false
-      // responseObject?.informationEngagement?.itemStatus === 'PUBLISHED' || reviewMode === 'revise'
-      //   ? true
-      //   : false
     }
   ];
   const ChangeResponsePopup = (e) => {
@@ -396,7 +397,8 @@ export const DisplayPaneFiveAssessment = (props) => {
                 currentVersionIndex
               ].assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
             (isAssessmentVersionShow &&
-              informationFramework?.assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
+              informationFramework?.assessmentVersionItemDistinct[currentItemIndex]
+                ?.itemTagPrimary) ||
             informationFramework?.assessmentSectionItemDistinct[currentItemIndex]?.itemId ||
             ''
           }
@@ -438,8 +440,11 @@ export const DisplayPaneFiveAssessment = (props) => {
             0
           }
           isItemSequenceLabel={isAssessmentVersionShow && 'sequence'}
-          onClickFlexThree={isAssessmentVersionShow && onClickSequenceUpdate}
-          currentQuestion={currentItemIndex + 1}
+          currentQuestion={
+            (isAssessmentVersionShow &&
+              informationFramework?.assessmentVersionItemDistinct[currentItemIndex].itemSequence) ||
+            currentItemIndex + 1
+          }
         />
 
         <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
@@ -469,12 +474,12 @@ export const DisplayPaneFiveAssessment = (props) => {
           )}
 
           {/* item */}
-          {(itemObect?.itemFrameworkOneMedia !== '' || reviewMode === 'revise') && (
+          {(itemObect?.itemFrameworkOneMedia !== '' || reviewReviseMode === 'revise') && (
             <div
               className={'innerpadding'}
-              style={{ cursor: reviewMode === 'revise' ? 'pointer' : '' }}
+              style={{ cursor: reviewReviseMode === 'revise' ? 'pointer' : '' }}
               onClick={
-                reviewMode === 'revise'
+                reviewReviseMode === 'revise'
                   ? () => {
                       dispatch({
                         type: SET_POPUP_VALUE,
@@ -549,7 +554,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                   return (
                     <Fragment>
                       {(ob.itemFrameworkOneSection?.itemFrameworkOneMedia ||
-                        reviewMode === 'revise') && (
+                        reviewReviseMode === 'revise') && (
                         <div className="likart">
                           <Fragment>
                             <div style={{ flex: '3' }}>
@@ -557,10 +562,10 @@ export const DisplayPaneFiveAssessment = (props) => {
                                 className={['item'].join(' ')}
                                 subQuestionId={ob.itemFrameworkOneSectionSequence}
                                 style={{
-                                  cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                  cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
                                 }}
                                 onClick={
-                                  reviewMode === 'revise'
+                                  reviewReviseMode === 'revise'
                                     ? () => {
                                         dispatch({
                                           type: SET_POPUP_VALUE,
@@ -612,13 +617,13 @@ export const DisplayPaneFiveAssessment = (props) => {
                                         value={`${keys}-${key}`}
                                         // onChange={handleClick}
                                         style={{
-                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                          cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
                                         }}
                                       />
                                       <div
                                         className={'likert-choice-font'}
                                         style={{
-                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                          cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
                                         }}
                                       >
                                         {/* {opt.itemFrameworkOneResponseChoiceMedia || ( */}
@@ -633,7 +638,7 @@ export const DisplayPaneFiveAssessment = (props) => {
                                           ' '
                                         )}
                                         style={{
-                                          cursor: reviewMode === 'revise' ? 'pointer' : ''
+                                          cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
                                         }}
                                       >
                                         {/* {opt.itemFrameworkOneResponseChoiceExplanation
@@ -683,10 +688,10 @@ export const DisplayPaneFiveAssessment = (props) => {
               <div
                 className={'ex_container'}
                 style={{
-                  cursor: reviewMode === 'revise' ? 'pointer' : ''
+                  cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
                 }}
                 onClick={
-                  reviewMode === 'revise'
+                  reviewReviseMode === 'revise'
                     ? () => {
                         dispatch({
                           type: SET_POPUP_VALUE,
@@ -760,10 +765,10 @@ export const DisplayPaneFiveAssessment = (props) => {
                           className={['ig-itemGeneric '].join(' ')}
                           style={{
                             paddingLeft: '5px',
-                            cursor: reviewMode === 'revise' ? 'pointer' : ''
+                            cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
                           }}
                           onClick={
-                            reviewMode === 'revise'
+                            reviewReviseMode === 'revise'
                               ? () => {
                                   dispatch({
                                     type: SET_POPUP_VALUE,
@@ -971,10 +976,25 @@ export const DisplayPaneFiveAssessment = (props) => {
         nextPopUpValue={''}
         inputHeader={''}
         primaryheader={'configuration'}
-        isItemFramework={false}
+        isItemFramework={'responseConfig'}
         mode={reviewMode}
         itemFrameworkOne={itemObect}
         // itemSelectedTypeName = {handleCallback}
+      />
+      <PopUpItemConfig
+        isActive={isPopUpValue === 'ASSESSMENT_CONFIGURE_POPUP'}
+        headerPanelColour={'genericOne'}
+        headerOne={'item'}
+        inputHeader={''}
+        primaryheader={'configuration'}
+        headerOneBadgeOne={''}
+        isItemFramework={'sequenceConfig'}
+        assessmentItemSequence={true}
+        mode={reviewMode}
+        itemFrameworkOne={itemObect}
+        currentItemIndex={currentItemIndex}
+        currentVersionIndex={currentVersionIndex}
+        currentItemSequence={currentItemResponse.itemSequence}
       />
     </>
   );

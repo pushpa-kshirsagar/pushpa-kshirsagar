@@ -1245,7 +1245,7 @@ export const DisplayPaneFiveItem = () => {
         nextPopUpValue={''}
         inputHeader={'item'}
         primaryheader={'configuration'}
-        isItemFramework={true}
+        isItemFramework={'itemConfig'}
         mode={reviewMode}
         subItemList={subItemList}
         setSubItemList={setSubItemList}
@@ -1261,7 +1261,7 @@ export const DisplayPaneFiveItem = () => {
         nextPopUpValue={''}
         inputHeader={''}
         primaryheader={'configuration'}
-        isItemFramework={false}
+        isItemFramework={'responseConfig'}
         mode={reviewMode}
         itemFrameworkOne={itemInformation?.informationFramework?.itemFrameworkOne || []}
         // itemSelectedTypeName = {handleCallback}

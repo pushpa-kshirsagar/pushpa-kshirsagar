@@ -127,8 +127,14 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
       //   type: SET_SECTION_REDUCER_STATE,
       //   payload: sectionInformation
       // });
-      console.log('selectedTagsArray',selectedTagsArray);
-      versionInformation.assessmentVersionItemDistinct = selectedTagsArray;
+      let reviseArray = [];
+      selectedTagsArray.map((it, ind) => {
+        reviseArray.push({
+          itemSequence: ind + 1,
+          itemTagPrimary: it
+        });
+      });
+      versionInformation.assessmentVersionItemDistinct = reviseArray;
       dispatch({
         type: SET_VERSION_REDUCER_STATE,
         payload: versionInformation
@@ -237,7 +243,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
               <ReviewList
                 className=""
                 id={index}
-                tag={item?.id || item?.itemId}
+                tag={item?.id || item?.itemTagPrimary}
                 isSelectedReviewList={middlePaneSelectedValue === item?.id}
                 status={item.informationEngagement?.itemStatus || 'published'}
                 actualStatus={item.informationEngagement?.itemStatus}
@@ -246,7 +252,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
                 isTooltipActive={false}
                 onClickEvent={openListPopup}
                 isSelectActive={isSelectActive}
-                isSelected={selectedTagsArray.includes(item?.id || item?.itemId)}
+                isSelected={selectedTagsArray.includes(item?.id || item?.itemTagPrimary)}
                 onClickCheckBox={(event) => {
                   onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
                 }}
