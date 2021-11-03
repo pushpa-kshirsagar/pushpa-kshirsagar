@@ -16,7 +16,8 @@ import {
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_ASSESSEE_ASSESSMENT_SECTION_COMMUNIQUE_STATE,
   SET_ASSESSEE_ASSESSMENT_SECTION_MENUSCRIPT_STATE,
-  SET_ASSESSEE_ASSESSMENT_SECTION_SYNOPSIS_STATE
+  SET_ASSESSEE_ASSESSMENT_SECTION_SYNOPSIS_STATE,
+  SET_MIDDLEPANE_STATE
 } from '../../actionType';
 import { RES_START_POPUP_OPTION, ASSESSMENT_CLOSED_POPUP_OPTION } from '../../PopUpConfig';
 import EditorTemplate from '../DisplayPaneFive/EditorTemplate';
@@ -38,8 +39,12 @@ export const DisplayPaneSix = () => {
     assessmentCommunique,
     assessmentMenuscript,
     assessmentSynopsis,
+    assignmentsequenceObject,
+    assignmentCommunique,
+    assignmentManuscript,
+    assignmentSynopsis
   } = useSelector((state) => state.AssesseeAssignmentAssessmentReducer);
-  const { indexPointer, selectedAssociateInfo } = useSelector((state) => state.DisplayPaneTwoReducer);
+  const { indexPointer, selectedAssociateInfo, relatedReviewListDistinctData } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { selectedTagStatus } = useSelector((state) => state.PopUpReducer);
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const dispatch = useDispatch();
@@ -47,6 +52,8 @@ export const DisplayPaneSix = () => {
   const [headerValue, setHeader] = useState('');
   const [sequenceObject, setSequenceObject] = useState([]);
   const [currentSequenceIndexLocal, setCurrentSequenceIndexLocal] = useState(0);
+  console.log('assignmentCommunique,assignmentManuscript,assignmentSynopsis');
+  console.log(assignmentCommunique, assignmentManuscript, assignmentSynopsis);
   let communique = [];
   let menuscript = [];
   let synopsis = [];
@@ -74,27 +81,73 @@ export const DisplayPaneSix = () => {
   }
 
   useEffect(() => {
-    debugger;
     console.log('asssignmentStarted print', asssignmentStarted);
     //setCurrentSequenceIndexLocal(currentSequenceIndex);
     //setInitialSequenceDetails();
     handleSequenceArrange();
   }, [assesseeAssignmentAssessmentData]);
 
-  useEffect(()=>{
+  useEffect(() => {
     let assesseeAssignmentAssessmentItemLastAttempted = assesseeAssignmentAssessmentData?.assesseeAssignmentAssessmentItemLastAttempted;
-    if(assessmentsequenceObject.length>0){
+    if (assessmentsequenceObject.length > 0) {
       let indexValue = assessmentsequenceObject.findIndex(obj => obj.originalValue === assesseeAssignmentAssessmentItemLastAttempted);
-      console.log('lastAttempted Value',indexValue);
+      console.log('lastAttempted Value', indexValue);
       dispatch({
         type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
         payload: { stateName: 'currentSequenceIndex', value: indexValue }
       })
-    }    
-  },[assessmentsequenceObject]);
+    }
+  }, [assessmentsequenceObject]);
+
+  useEffect(() => {
+    if (relatedReviewListDistinctData.length > 0) {
+      let assignmentAdministrationSequence = relatedReviewListDistinctData[0]?.assignmentAdministrationSequence || [];
+      let assignmentCommunique = relatedReviewListDistinctData[0]?.assignmentCommunique || [];
+      let assignmentSynopsis = relatedReviewListDistinctData[0]?.assignmentSynopsis || [];
+      let assignmentManuscript = relatedReviewListDistinctData[0]?.assignmentManuscript || [];
+      let sequenceArr = [];
+      let assignmentSynArr = [];
+      let assignmentComArr = [];
+      let assignmentManArr = [];
+      if (assignmentAdministrationSequence.length > 0) {
+        for (let i = 0; i < assignmentAdministrationSequence.length; i++) {
+          let currentValue = assignmentAdministrationSequence[i];
+          let lastIndexValue = parseInt(currentValue.substring(currentValue.length - 1));
+          let matchValue = currentValue;
+          matchValue = matchValue.substring(0, matchValue.length - 1);
+          if (matchValue.trim() === 'assignment synopsis') {
+            sequenceArr.push({ name: matchValue.trim(), value: assignmentSynopsis[lastIndexValue - 1], originalValue: currentValue })
+            assignmentSynArr.push(assignmentSynopsis[lastIndexValue - 1]);
+          } else if (matchValue.trim() === 'assignment communique') {
+            assignmentComArr.push(assignmentCommunique[lastIndexValue - 1]);
+            sequenceArr.push({ name: matchValue.trim(), value: assignmentCommunique[lastIndexValue - 1], originalValue: currentValue })
+          } else if (matchValue.trim() === 'assignment manuscript') {
+            assignmentManArr.push(assignmentManuscript[lastIndexValue - 1]);
+            sequenceArr.push({ name: matchValue.trim(), value: assignmentManuscript[lastIndexValue - 1], originalValue: currentValue })
+          }
+        }
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'assignmentsequenceObject', value: sequenceArr }
+        })
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'assignmentCommunique', value: assignmentComArr }
+        })
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'assignmentManuscript', value: assignmentManArr }
+        })
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'assignmentSynopsis', value: assignmentSynArr }
+        })
+      }
+
+    }
+  }, [relatedReviewListDistinctData])
 
   const handleSequenceArrange = () => {
-    debugger;
     let assessmentAdministrationSequence = assesseeAssignmentAssessmentData?.informationFramework?.assessmentAdministrationSequence || [];
     let sequenceArr = [];
     let informationFramework = assesseeAssignmentAssessmentData?.informationFramework;
@@ -155,7 +208,6 @@ export const DisplayPaneSix = () => {
     })
   }
   const onClickFooter = (e) => {
-    debugger;
     let clickedval = e.currentTarget.getAttribute('data-value');
     let tempArr = RES_START_POPUP_OPTION;
     if (isAssessmentStart === 'COMMUNIQUE') {
@@ -182,7 +234,6 @@ export const DisplayPaneSix = () => {
           type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
           payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
         });
-
       }
     }
     if (isAssessmentStart === 'SYNOPSIS') {
@@ -236,6 +287,81 @@ export const DisplayPaneSix = () => {
           payload: { stateName: 'isAssessmentStart', value: 'PROGRESS' }
         });
       }
+    }
+    if (isAssessmentStart === 'ASSIGNMENTCOMMUNIQUE') {
+      if (clickedval === 'next') {
+        if (indexPointer < assignmentCommunique.length - 1) {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: indexPointer + 1 }
+          });
+        }
+      }
+      if (clickedval === 'previous') {
+        if (indexPointer != 0) {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: indexPointer - 1 }
+          });
+        }
+      }
+      if (clickedval === 'close') {
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'ReviewListResume' }
+        });
+      }
+
+    }
+    if (isAssessmentStart === 'ASSIGNMENTMENUSCRIPT') {
+      if (clickedval === 'next') {
+        if (indexPointer < assignmentManuscript.length - 1) {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: indexPointer + 1 }
+          });
+        }
+      }
+      if (clickedval === 'previous') {
+        if (indexPointer != 0) {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: indexPointer - 1 }
+          });
+        }
+      }
+      if (clickedval === 'close') {
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'ReviewListResume' }
+        });
+      }
+
+    }
+    if (isAssessmentStart === 'ASSIGNMENTSYNOPSIS') {
+      if (clickedval === 'next') {
+        if (indexPointer < assignmentSynopsis.length - 1) {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: indexPointer + 1 }
+          });
+        }
+      }
+      if (clickedval === 'previous') {
+        if (indexPointer != 0) {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: indexPointer - 1 }
+          });
+        }
+      }
+      if (clickedval === 'close') {
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'ReviewListResume' }
+        });
+      }
+
     }
     if (selectedTagStatus === 'UNSTARTED') {
       tempArr = [{ ...tempArr[0], disabled: true }, tempArr[1]];
@@ -373,20 +499,60 @@ export const DisplayPaneSix = () => {
         }
       }
     }
+    if (isAssessmentStart === 'ReviewListStart') {
+      if (clickedval === 'next') {
+        if (indexPointer < assignmentsequenceObject.length - 1) {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: indexPointer + 1 }
+          });
+        } else {
+          dispatch({
+            type: SET_MIDDLEPANE_STATE,
+            payload: {
+              middlePaneHeader: 'assessments',
+              middlePaneHeaderBadgeOne: 'active',
+              middlePaneHeaderBadgeTwo: '',
+              middlePaneHeaderBadgeThree: '',
+              middlePaneHeaderBadgeFour: '',
+              typeOfMiddlePaneList: 'assesseesAssginmentAssessmentReviewList',
+              //scanCount: assessmentList[0].assesseeAssignmentAssessmentDistinct.length,
+              showMiddlePaneState: true
+            }
+          });
+
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'isAssessmentStart', value: 'ReviewListResume' }
+          });
+        }
+      }
+      if (clickedval === 'previous') {
+        if (indexPointer != 0) {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: indexPointer - 1 }
+          });
+        }
+      }
+    }
   };
   console.log('sequenceObject', assessmentsequenceObject);
   console.log('assesseeAssignmentAssessmentData', assesseeAssignmentAssessmentData);
   console.log('current isAssessmentStart value', isAssessmentStart);
 
-  let headerNew = assessmentsequenceObject[currentSequenceIndex]?.name;
-  console.log('current Value', headerNew);
+  //let headerNew = assessmentsequenceObject[currentSequenceIndex]?.name;
+  //console.log('current Value', headerNew);
   return (
     <>
       <div>
         <DisplayPaneSixHeader
           className=""
-          headerOne={'assessment'}
-          //headerOneBadgeOne={isAssessmentStart === 'MANUSCRIPT' ? 'manuscript' : 'communiqué'}
+          headerOne={isAssessmentStart === 'ReviewListStart' ||
+            isAssessmentStart === 'ASSIGNMENTCOMMUNIQUE' ||
+            isAssessmentStart === 'ASSIGNMENTSYNOPSIS' ||
+            isAssessmentStart === 'ASSIGNMENTMENUSCRIPT'
+            ? 'assignment' : 'assessment'}
           //headerOneBadgeOne={headerValue}
           headerOneBadgeOne={isAssessmentStart === 'START' || isAssessmentStart === 'STOP' ?
             assessmentsequenceObject[currentSequenceIndex]?.name === 'assessment communiqué' ? 'communiqué' :
@@ -421,22 +587,30 @@ export const DisplayPaneSix = () => {
                   height: 'calc(100vh - 190px)',
                   overflow: 'overlay'
                 }}
-              >
+              >{isAssessmentStart === 'ReviewListStart' ? (
+                <DisplayPaneSixAssignment assignmentsequenceObject={assignmentsequenceObject.length > 0 ? assignmentsequenceObject[indexPointer].value : []} />
+              ) : (
                 <EditorTemplate
                   label={'itemLabel'}
                   jsonData={
                     isAssessmentStart === 'START' || isAssessmentStart === 'STOP' ?
-                      assessmentsequenceObject[currentSequenceIndex]?.value
+                      assessmentsequenceObject && assessmentsequenceObject[currentSequenceIndex]?.value
                       // currentSequenceValue === '' ?
                       // assessmentsequenceObject[currentSequenceIndex]?.name !== 'assessment section' ?
                       //   assessmentsequenceObject[currentSequenceIndex]?.value : '' : '' 
                       :
                       isAssessmentStart === 'SYNOPSIS' ? synopsis[indexPointer] :
                         isAssessmentStart === 'COMMUNIQUE' ? communique[indexPointer] :
-                          isAssessmentStart === 'MENUSCRIPT' ? menuscript[indexPointer]
-                            : ''
+                          isAssessmentStart === 'MENUSCRIPT' ? menuscript[indexPointer] :
+                            isAssessmentStart === 'ASSIGNMENTSYNOPSIS' ? assignmentSynopsis[indexPointer] :
+                              isAssessmentStart === 'ASSIGNMENTCOMMUNIQUE' ? assignmentCommunique[indexPointer] :
+                                isAssessmentStart === 'ASSIGNMENTMENUSCRIPT' ? assignmentManuscript[indexPointer] :
+
+                                  ''
                   }
                 />
+              )}
+
                 {/* <EditorTemplate
                 //   label={'itemLabel'}
                 //   jsonData={initialValue
@@ -457,41 +631,43 @@ export const DisplayPaneSix = () => {
             </div>
 
             {
-              isAssessmentStart === 'COMMUNIQUE' || isAssessmentStart === 'SYNOPSIS' || isAssessmentStart === 'MENUSCRIPT' ? (
-                <FooterIconTwo
-                  FilterModeEnable={false}
-                  FilterMode={FilterMode}
-                  onClick={onClickFooter}
-                  backColour={'displayPaneLeft'}
-                  primaryIcon={[]}
-                  secondaryIcon={[
-                    {
-                      label: 'previous', onClick: onClickFooter, Icon: ArrowLeft,
-                      // disabled: 'true'
-                    },
-                    { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
-                    { label: 'close', onClick: onClickFooter, Icon: CrossIcon }
-                  ]}
-                />
+              isAssessmentStart === 'COMMUNIQUE' || isAssessmentStart === 'SYNOPSIS' || isAssessmentStart === 'MENUSCRIPT' ||
+                isAssessmentStart === 'ASSIGNMENTCOMMUNIQUE' || isAssessmentStart === 'ASSIGNMENTSYNOPSIS' || isAssessmentStart === 'ASSIGNMENTMENUSCRIPT'
+                ? (
+                  <FooterIconTwo
+                    FilterModeEnable={false}
+                    FilterMode={FilterMode}
+                    onClick={onClickFooter}
+                    backColour={'displayPaneLeft'}
+                    primaryIcon={[]}
+                    secondaryIcon={[
+                      {
+                        label: 'previous', onClick: onClickFooter, Icon: ArrowLeft,
+                        // disabled: 'true'
+                      },
+                      { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
+                      { label: 'close', onClick: onClickFooter, Icon: CrossIcon }
+                    ]}
+                  />
 
-              ) : (
-                <FooterIconTwo
-                  FilterModeEnable={false}
-                  FilterMode={FilterMode}
-                  onClick={onClickFooter}
-                  backColour={'displayPaneLeft'}
-                  primaryIcon={[]}
-                  secondaryIcon={[
-                    {
-                      label: 'previous', onClick: onClickFooter, Icon: ArrowLeft,
-                      // disabled: 'true'
-                    },
-                    { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
+                ) : (
+                  <FooterIconTwo
+                    FilterModeEnable={false}
+                    FilterMode={FilterMode}
+                    onClick={onClickFooter}
+                    backColour={'displayPaneLeft'}
+                    primaryIcon={[]}
+                    secondaryIcon={[
+                      {
+                        label: 'previous', onClick: onClickFooter, Icon: ArrowLeft,
+                        // disabled: 'true'
+                      },
+                      { label: 'next', onClick: onClickFooter, Icon: ArrowRight },
 
-                  ]}
-                />
+                    ]}
+                  />
 
-              )
+                )
 
             }
 
@@ -532,5 +708,17 @@ export const DisplayPaneSix = () => {
     </>
   );
 };
+
+export const DisplayPaneSixAssignment = (props) => {
+  const { assignmentsequenceObject } = props;
+  return (
+    <>
+      <EditorTemplate
+        label={'itemLabel'}
+        jsonData={assignmentsequenceObject && assignmentsequenceObject || ''}
+      />
+    </>
+  )
+}
 
 export default DisplayPaneSix;

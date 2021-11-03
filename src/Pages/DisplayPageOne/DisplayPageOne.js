@@ -79,7 +79,7 @@ const DisplayPageOne = () => {
     isAssessmentVersionShow = false
   } = useSelector((state) => state.DisplayPaneThreeReducer);
 
-  const { isExamMode, isAssessmentStart,asssignmentStarted } = useSelector(
+  const { isExamMode, isAssessmentStart, asssignmentStarted } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
   const dispatch = useDispatch();
@@ -157,8 +157,8 @@ const DisplayPageOne = () => {
   // selectedAssociateInfo && selectedAssociateInfo.assesseeInformation.assesseeEmail;
   const userName = leftPaneAssesseeInfo
     ? leftPaneAssesseeInfo?.assessee?.informationBasic.assesseeNameFirst.trim() +
-      ' ' +
-      leftPaneAssesseeInfo?.assessee?.informationBasic.assesseeNameLast.trim()
+    ' ' +
+    leftPaneAssesseeInfo?.assessee?.informationBasic.assesseeNameLast.trim()
     : '';
   const userEmail = assesseeId || '';
 
@@ -178,10 +178,10 @@ const DisplayPageOne = () => {
   const assesseePicture = leftPaneAssesseeInfo?.assessee?.informationBasic?.assesseePicture;
 
   console.log('isExamMode', isExamMode);
-  console.log('isMobile Mode',isMobile);
-  console.log('asssignmentStarted',asssignmentStarted);
-  console.log('print inside PageOne isAssessmentStart',isAssessmentStart);
-  
+  console.log('isMobile Mode', isMobile);
+  console.log('asssignmentStarted', asssignmentStarted);
+  console.log('print inside PageOne isAssessmentStart', isAssessmentStart);
+
   return (
     <>
       <HeaderZero
@@ -219,16 +219,16 @@ const DisplayPageOne = () => {
           <>
             {isExamMode ? (
               <>
-              {/* {(asssignmentStarted === 'PROGRESS' && ( */}
-                {(isAssessmentStart === 'PROGRESS' && (                
+                {/* {(asssignmentStarted === 'PROGRESS' && ( */}
+                {(isAssessmentStart === 'PROGRESS' && (
                   <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '4%' }}>
                     <DisplayPaneOne />
                   </div>
                 )) || (
-                  <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '' }}>
-                    <DisplayPaneSix />
-                  </div>
-                )}
+                    <div style={{ width: isDisplayPaneSixShow ? '33.33%' : '' }}>
+                      <DisplayPaneSix />
+                    </div>
+                  )}
                 {/* {assesseeAssessmentStartData &&  */}
                 <div style={{ width: isDisplayPaneSixShow ? '66.66%' : '100%' }}>
                   <DisplayPaneSeven />
@@ -250,7 +250,16 @@ const DisplayPageOne = () => {
             ) : (
               <>
                 <div className="display-pane-container">
-                  <DisplayPaneOne />
+                  {/* <DisplayPaneOne /> */}                  
+                  {isAssessmentStart === '' || isAssessmentStart === 'ReviewListResume' ? (
+                    <div>
+                      <DisplayPaneOne />
+                    </div>
+                  ) : (
+                    <div>
+                      <DisplayPaneSix />
+                    </div>
+                  )}
                   {/* <button onClick={changeUserName}>Change Username</button> */}
                 </div>
                 <div className="display-pane-container">

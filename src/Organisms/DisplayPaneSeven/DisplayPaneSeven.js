@@ -20,6 +20,7 @@ import {
 import { ASSESSMENT_FINISH_POPUP_OPTION } from '../../PopUpConfig';
 import { setAssesseeAssessmentItemSaveResCall } from '../../Actions/ActionAssesseeAssessment';
 import DisplayPaneFiveAssessment from '../DisplayPaneFive/DisplayPaneFiveAssessment';
+import { callApiFunctionLastAttempted } from '../../Actions/GenericActions';
 
 export const DisplayPaneSeven = () => {
   const [isQuestionFlaged, setIsQuestionFlaged] = useState([]);
@@ -35,15 +36,13 @@ export const DisplayPaneSeven = () => {
   const dispatch = useDispatch();
   const { FilterMode } = useSelector((state) => state.FilterReducer);
   const { isPopUpValue } = useSelector((state) => state.PopUpReducer);
-  const { assesseeAssessmentStartData, currentSequenceIndex, assesseeAssignmentAssessmentData, menuscript, synopsis, communique } = useSelector(
+  const { assesseeAssessmentStartData, currentSequenceIndex, assesseeAssignmentAssessmentData,assessmentsequenceObject } = useSelector(
     (state) => state.AssesseeAssignmentAssessmentReducer
   );
   const {
     selectedTagValue
   } = useSelector((state) => state.PopUpReducer);
   console.log('selectedTagValue', selectedTagValue);
-  console.log('menuscript,synopsis,communiqué');
-  console.log(menuscript, synopsis, communique);
   console.log('pane sevenassesseeAssessmentStartData');
   console.log(assesseeAssessmentStartData);
   const time = new Date();
@@ -260,6 +259,14 @@ export const DisplayPaneSeven = () => {
         itemTimeStart,
         itemFlaged
       );
+      // let lastAttempted=assessmentsequenceObject[currentSequenceIndex]?.originalValue;
+      
+      // callApiFunctionLastAttempted(
+      //   selectedAssociateInfo,
+      //   assesseeAssignmentAssessmentData,
+      //   dispatch,
+      //   lastAttempted
+      // )
       setcurrentQuestionChoice(0);
       setItemTimeStart(new Date().getTime());
     }

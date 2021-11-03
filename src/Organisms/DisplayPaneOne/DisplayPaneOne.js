@@ -209,7 +209,7 @@ export const DisplayPaneOne = () => {
             )}
           </div>
 
-          {selectedAssociateInfo && isAssessmentStart !== 'PROGRESS' && (
+          {selectedAssociateInfo && isAssessmentStart !== 'PROGRESS' &&isAssessmentStart !=='ReviewListResume' && (
             <div>
               <Sections
                 listSections={leftPaneSections}
@@ -219,13 +219,16 @@ export const DisplayPaneOne = () => {
 
               <FooterIconOne />
             </div>
-          )}{
-            isAssessmentStart === 'PROGRESS'?(
+          )}{isAssessmentStart === 'PROGRESS'?(
               <div>
                 {/* <DisplayPaneSixFooter /> */}
                 <FooterIconOne/>
               </div>
-            ):null
+            ):
+            isAssessmentStart==='ReviewListResume'?(
+              <FooterIconOne/>
+            )
+            :null
           }
           
         </div>
