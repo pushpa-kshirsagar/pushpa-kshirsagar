@@ -2635,19 +2635,57 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
           type: RELATED_REVIEWLIST_DISTINCT_DATA,
           payload: assessmentList
         });
-        dispatch({
-          type: SET_MIDDLEPANE_STATE,
-          payload: {
-            middlePaneHeader: 'assessments',
-            middlePaneHeaderBadgeOne: 'active',
-            middlePaneHeaderBadgeTwo: '',
-            middlePaneHeaderBadgeThree: '',
-            middlePaneHeaderBadgeFour: '',
-            typeOfMiddlePaneList: 'assesseesAssginmentAssessmentReviewList',
-            scanCount: assessmentList[0].assesseeAssignmentAssessmentDistinct.length,
-            showMiddlePaneState: true
+        if (popupHeaderOneBadgeTwo === 'resume') {
+          if (assessmentList.length > 0) {
+            let assignmentCommunique = assessmentList[0]?.assignmentCommunique || [];
+            let assignmentSynopsis = assessmentList[0]?.assignmentSynopsis || [];
+            let assignmentManuscript = assessmentList[0]?.assignmentManuscript || [];
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+              payload: { stateName: 'assignmentCommunique', value: assignmentCommunique }
+            })
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+              payload: { stateName: 'assignmentManuscript', value: assignmentManuscript }
+            })
+            dispatch({
+              type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+              payload: { stateName: 'assignmentSynopsis', value: assignmentSynopsis }
+            })
           }
-        });
+          dispatch({
+            type: SET_MIDDLEPANE_STATE,
+            payload: {
+              middlePaneHeader: 'assessments',
+              middlePaneHeaderBadgeOne: 'active',
+              middlePaneHeaderBadgeTwo: '',
+              middlePaneHeaderBadgeThree: '',
+              middlePaneHeaderBadgeFour: '',
+              typeOfMiddlePaneList: 'assesseesAssginmentAssessmentReviewList',
+              scanCount: assessmentList[0].assesseeAssignmentAssessmentDistinct.length,
+              showMiddlePaneState: true
+            }
+          });
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: 0 }
+          });
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'isAssessmentStart', value: 'ReviewListResume' }
+          });
+        }
+        if (popupHeaderOneBadgeTwo === 'start') {
+          dispatch({
+            type: SET_DISPLAY_TWO_SINGLE_STATE,
+            payload: { stateName: 'indexPointer', value: 0 }
+          });
+
+          dispatch({
+            type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+            payload: { stateName: 'isAssessmentStart', value: 'ReviewListStart' }
+          });
+        }
       }
       if (typeOfMiddlePaneList === 'assesseesAssginmentAssessmentReviewList') {
         console.log('relatedReviewListDistinctData', relatedReviewListDistinctData);
@@ -2669,7 +2707,7 @@ const PopUpDisplayPaneTwoReviewList = (props) => {
             stateName: 'assesseeAssessmentStartData',
             value:
               assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[
-                selectedTagValue
+              selectedTagValue
               ]
             //value: assesseeAssignmentAssessmentData?.informationFramework?.assessmentSection[selectedTagValue]
           }

@@ -4,6 +4,7 @@ import {
   CLEAR_DISPLAY_PANE_THREE,
   FILTERMODE_ENABLE,
   POPUP_OPEN,
+  SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
   SET_DISPLAY_TWO_SINGLE_STATE,
   SET_MIDDLEPANE_STATE,
   SET_POPUP_STATE
@@ -56,6 +57,10 @@ const AssesseeDistinctAssessmentDistinctReviewList = (props) => {
       payload: { stateName: 'relatedReviewListDistinctData', value: [] }
     });
     dispatch({ type: CLEAR_DISPLAY_PANE_THREE });
+    dispatch({
+      type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+      payload: { stateName: 'isAssessmentStart', value: '' }
+    });
   };
   const listDistinctData = relatedReviewListDistinctData[0];
 

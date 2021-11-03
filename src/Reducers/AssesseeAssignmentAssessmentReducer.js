@@ -26,6 +26,10 @@ const initialState = {
   assessmentCommunique: [],
   assessmentMenuscript: [],
   assessmentSynopsis: [],
+  assignmentsequenceObject:[],
+  assignmentCommunique:[],
+  assignmentManuscript:[],
+  assignmentSynopsis:[]
   //indexPointer:0// for communique,menuscriptm
 };
 

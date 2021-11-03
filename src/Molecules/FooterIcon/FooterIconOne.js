@@ -279,10 +279,17 @@ export const FooterIconOne = (props) => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'indexPointer', value: 0 }
       });
-      dispatch({
-        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-        payload: { stateName: 'isAssessmentStart', value: 'MENUSCRIPT' }
-      });
+      if(isAssessmentStart==='ReviewListResume'){
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'ASSIGNMENTMENUSCRIPT' }
+        });
+      }else{
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'MENUSCRIPT' }
+        });
+      }      
     }
     if (clickedValue === 'calculator') {
       dispatch({
@@ -393,20 +400,35 @@ export const FooterIconOne = (props) => {
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'indexPointer', value: 0 }
       });
-      dispatch({
-        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-        payload: { stateName: 'isAssessmentStart', value: 'COMMUNIQUE' }
-      });
+      if(isAssessmentStart==='ReviewListResume'){
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'ASSIGNMENTCOMMUNIQUE' }
+        });
+      }else{
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'COMMUNIQUE' }
+        });
+      }
     }
     if(clickedValue==='synopsis'){
       dispatch({
         type: SET_DISPLAY_TWO_SINGLE_STATE,
         payload: { stateName: 'indexPointer', value: 0 }
       });
-      dispatch({
-        type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
-        payload: { stateName: 'isAssessmentStart', value: 'SYNOPSIS' }
-      });      
+      if(isAssessmentStart==='ReviewListResume'){
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'ASSIGNMENTSYNOPSIS' }
+        });
+      }else{
+        dispatch({
+          type: SET_ASSESSEE_ASSESSMENT_DYNAMIC_STATE,
+          payload: { stateName: 'isAssessmentStart', value: 'SYNOPSIS' }
+        });      
+      }
+      
     }
   };
   const reviseSecondaryIcons = [
@@ -421,6 +443,12 @@ export const FooterIconOne = (props) => {
     { label: 'worksheet', onClick: openFooterIconPopupAssessment, Icon: InsertDriveFile, colour: "displayPaneLeft" }
   ];
 
+  const reviseSecondaryIconsAssignment = [    
+    { label: 'communiqué', onClick: openFooterIconPopupAssessment, Icon: Description, colour: "displayPaneLeft", },
+    { label: 'manuscript', onClick: openFooterIconPopupAssessment, Icon: Description, colour: "displayPaneLeft" },
+    { label: 'synopsis', onClick: openFooterIconPopupAssessment, Icon: Description, colour: "displayPaneLeft" }
+  ];
+
   const reviseSecondaryIconsDashboard = [
     { label: 'calculator', onClick: openFooterIconPopup, Icon: Keyboard, colour: "displayPaneLeft" },
     { label: 'communiqué', onClick: openFooterIconPopup, Icon: Description, colour: "displayPaneLeft" },
@@ -430,7 +458,7 @@ export const FooterIconOne = (props) => {
   const onClickRevise = () => {
     setIsDisplayPaneShow(false);
   }
-  const revisePrimaryIcon = [{ label: 'assistant', onClick: onClickRevise, Icon: AppsIcon, colour: "displayPaneLeft" }];
+  const revisePrimaryIcon = [{ label: 'assistance', onClick: onClickRevise, Icon: AppsIcon, colour: "displayPaneLeft" }];
 
   return (
     <>
@@ -445,8 +473,20 @@ export const FooterIconOne = (props) => {
             secondaryIcon={reviseSecondaryIcons}
             backColour="displayPaneLeft"
           />
-        ) : (
+        ) :
+        isAssessmentStart==='ReviewListResume'? (
           <FooterIconTwo
+            //className={'widthDisplayPaneFive'}
+            FilterModeEnable={isDisplayPaneShow}
+            FilterMode={FilterMode}
+            onClick={onClickRevise}
+            primaryIcon={revisePrimaryIcon}
+            secondaryIcon={reviseSecondaryIcons}
+            backColour="displayPaneLeft"
+            />
+        ):
+          (
+            <FooterIconTwo
             //className={'widthDisplayPaneFive'}
             FilterModeEnable={isDisplayPaneShow}
             FilterMode={FilterMode}
