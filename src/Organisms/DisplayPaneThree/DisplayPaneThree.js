@@ -1984,7 +1984,7 @@ export const DisplayPaneThree = () => {
           payload: { reqBody: setupObj }
         });
       }
-    } else if (headerOneBadgeOne === 'scale' && headerOne === 'assessments') {
+    } else if (headerOneBadgeOne === 'scale' && headerOne === 'assessment') {
       let scaleObj = assessmentInfo.informationFramework.assessmentScale;
       scaleObj[selectedTagValue] = scaleInfo.scaleInformation;
       let id = relatedReviewListDistinctData[0].id;
@@ -2012,7 +2012,7 @@ export const DisplayPaneThree = () => {
           selectedSector: selectedTagValue
         }
       });
-    } else if (headerOneBadgeOne === 'cluster' && headerOne === 'assessments') {
+    } else if (headerOneBadgeOne === 'cluster' && headerOne === 'assessment') {
       let clusterObj = assessmentInfo.informationFramework.assessmentCluster;
       clusterObj[selectedTagValue] = clusterInfo.clusterInformation;
       let id = relatedReviewListDistinctData[0].id;
@@ -2040,17 +2040,22 @@ export const DisplayPaneThree = () => {
           selectedSector: selectedTagValue
         }
       });
-    } else if (headerOneBadgeOne === 'version' && headerOne === 'assessments') {
+    } else if (headerOneBadgeOne === 'version' && headerOne === 'assessment') {
       let sectionObj = assessmentInfo.informationFramework.assessmentSection;
+      console.log('assessmentSelecedSectionVersionData', assessmentSelecedSectionVersionData);
       let itemArr = [];
-      assessmentSelecedSectionVersionData.map((dd) => {
-        itemArr.push({ itemSequence: dd.itemSequence, itemTagPrimary: dd.itemTagPrimary });
-      });
+      assessmentSelecedSectionVersionData &&
+        assessmentSelecedSectionVersionData.map((dd) => {
+          itemArr.push({ itemSequence: dd.itemSequence, itemTagPrimary: dd.itemTagPrimary });
+        });
       let dddd = {
         assessmentVersionName: versionInfo.versionInformation.assessmentVersionName,
         assessmentVersionVerification: versionInfo.versionInformation.assessmentVersionVerification,
         assessmentVersionDescription: versionInfo.versionInformation.assessmentVersionDescription,
-        assessmentVersionItemDistinct: itemArr
+        assessmentVersionItemDistinct:
+          itemArr.length === 0
+            ? versionInfo.versionInformation.assessmentVersionItemDistinct
+            : itemArr
       };
       // sectionObj[assessmentSelecedSection].assessmentVersion[assessmentSelecedVersion] =
       //   versionInfo.versionInformation;
@@ -2081,18 +2086,18 @@ export const DisplayPaneThree = () => {
           selectedSector: selectedTagValue
         }
       });
-    } else if (headerOneBadgeOne === 'section' && headerOne === 'assessments') {
+    } else if (headerOneBadgeOne === 'section' && headerOne === 'assessment') {
       let sectionObj = assessmentInfo.informationFramework.assessmentSection;
-      if (
-        aseessmentSection.sectionInformation.assessmentSectionItemDistinct[0].itemId !== undefined
-      ) {
-        let existingItemId = aseessmentSection.sectionInformation.assessmentSectionItemDistinct.map(
-          (val) => {
-            return val.itemId;
-          }
-        );
-        aseessmentSection.sectionInformation.assessmentSectionItemDistinct = [...existingItemId];
-      }
+      // if (
+      //   aseessmentSection.sectionInformation.assessmentSectionItemDistinct[0].itemId !== undefined
+      // ) {
+      //   let existingItemId = aseessmentSection.sectionInformation.assessmentSectionItemDistinct.map(
+      //     (val) => {
+      //       return val.itemId;
+      //     }
+      //   );
+      //   aseessmentSection.sectionInformation.assessmentSectionItemDistinct = [...existingItemId];
+      // }
       if (aseessmentSection?.sectionInformation?.assessmentSectionTime !== 0) {
         let assessmentSectionTimeMillisec = converTimeToMiliseconds(
           aseessmentSection?.sectionInformation?.assessmentSectionTime
@@ -3906,7 +3911,7 @@ export const DisplayPaneThree = () => {
         )}
       {isReviewRevise &&
         responseObject &&
-        headerOne === 'assessments' &&
+        headerOne === 'assessment' &&
         headerOneBadgeOne === 'cluster' && (
           <>
             <div style={{ padding: '2.5px' }}>
@@ -3946,7 +3951,7 @@ export const DisplayPaneThree = () => {
         )}
       {isReviewRevise &&
         responseObject &&
-        headerOne === 'assessments' &&
+        headerOne === 'assessment' &&
         headerOneBadgeOne === 'scale' && (
           <>
             <div style={{ padding: '2.5px' }}>
@@ -3986,7 +3991,7 @@ export const DisplayPaneThree = () => {
         )}
       {isReviewRevise &&
         responseObject &&
-        headerOne === 'assessments' &&
+        headerOne === 'assessment' &&
         headerOneBadgeOne === 'section' && (
           <>
             <div style={{ padding: '2.5px' }}>
@@ -4027,7 +4032,7 @@ export const DisplayPaneThree = () => {
         )}
       {isReviewRevise &&
         responseObject &&
-        headerOne === 'assessments' &&
+        headerOne === 'assessment' &&
         headerOneBadgeOne === 'version' && (
           <>
             <div style={{ padding: '2.5px' }}>

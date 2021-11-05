@@ -49,7 +49,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
   responseObject?.assessmentSectionSynopsis?.map((comm, index) => {
     synopsisArr.push({ labelTextOneOneBadge: index + 1, textOne: '' });
   });
-  let adminSequenseArr = [];
+  let adminSequenseArr = ['item distinct'];
   responseObject?.assessmentSectionCommunique.map((comm, ind) => {
     adminSequenseArr.push(`section communiqué ${ind + 1}`);
   });
@@ -176,14 +176,14 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
       labelTextOneOne: 'items',
       isListCard: false,
       labelTextOneOneBadges: [
-        {
-          labelTextOneOneBadge: 'distinct',
-          textOne: 'No Information'
-        },
-        {
-          labelTextOneOneBadge: 'group',
-          textOne: 'No Information'
-        },
+        // {
+        //   labelTextOneOneBadge: 'distinct',
+        //   textOne: 'No Information'
+        // },
+        // {
+        //   labelTextOneOneBadge: 'group',
+        //   textOne: 'No Information'
+        // },
         {
           labelTextOneOneBadge: 'label',
           textOne: 'No Information'
@@ -198,7 +198,7 @@ const DisplayPaneThreeSectionOneAssessmentSection = () => {
         // },
         {
           labelTextOneOneBadge: 'total',
-          textOne: 'No Information'
+          textOne: responseObject?.assessmentSectionItemTotal || 'No Information'
         },
         {
           labelTextOneOneBadge: 'trial',

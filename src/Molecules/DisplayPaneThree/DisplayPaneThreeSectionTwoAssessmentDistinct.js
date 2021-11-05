@@ -660,7 +660,10 @@ const DisplayPaneThreeSectionTwoAssessment = () => {
         assessmentStatus: responseObject.informationEngagement.assessmentStatus
       };
       console.log('relatedReviewListPaneThree', relatedReviewListPaneThree);
-      let existingItemId = informationFramework?.assessmentItem || [];
+      // let existingItemId = [];
+      let existingItemId = informationFramework?.assessmentItemDistinct?.map((val) => {
+        return val.itemTagPrimary;
+      });
       // relatedReviewListPaneThree &&
       // relatedReviewListPaneThree.item.map((val) => {
       //   return val.id;

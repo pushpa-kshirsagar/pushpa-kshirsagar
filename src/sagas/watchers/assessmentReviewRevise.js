@@ -582,7 +582,7 @@ function* workerReviseInfoAssessmentSaga(data) {
         yield put({
           type: SET_DISPLAY_PANE_THREE_STATE,
           payload: {
-            headerOne: 'assessments',
+            headerOne: 'assessment',
             headerOneBadgeOne: 'scale',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
@@ -596,7 +596,7 @@ function* workerReviseInfoAssessmentSaga(data) {
         yield put({
           type: SET_DISPLAY_PANE_THREE_STATE,
           payload: {
-            headerOne: 'assessments',
+            headerOne: 'assessment',
             headerOneBadgeOne: 'cluster',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
@@ -610,7 +610,7 @@ function* workerReviseInfoAssessmentSaga(data) {
         yield put({
           type: SET_DISPLAY_PANE_THREE_STATE,
           payload: {
-            headerOne: 'assessments',
+            headerOne: 'assessment',
             headerOneBadgeOne: 'section',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',
@@ -624,7 +624,7 @@ function* workerReviseInfoAssessmentSaga(data) {
         yield put({
           type: SET_DISPLAY_PANE_THREE_STATE,
           payload: {
-            headerOne: 'assessments',
+            headerOne: 'assessment',
             headerOneBadgeOne: 'version',
             headerOneBadgeTwo: 'information',
             headerOneBadgeThree: 'key',

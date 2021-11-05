@@ -402,18 +402,24 @@ export const DisplayPaneFive = () => {
         }
       }
       if (clickedval === 'next') {
-        if (currentItemIndex < responseObject.assessmentVersionItemDistinct.length - 1) {
+        if (
+          currentItemIndex <
+          assessmentSelecedSectionVersionData.assessmentVersionItemDistinct.length - 1
+        ) {
           setcurrentItemIndex(currentItemIndex + 1);
           setItemTypeConfigState(
-            responseObject?.assessmentVersionItemDistinct[currentItemIndex + 1]?.itemFrameworkOne
-              .itemFrameworkOneType,
+            assessmentSelecedSectionVersionData?.assessmentVersionItemDistinct[currentItemIndex + 1]
+              ?.itemFrameworkOne.itemFrameworkOneType,
             dispatch
           );
           dispatch({
             type: SET_ASSESSMENT_SECTION_DYNAMIC_FRAMEWORK_STATE,
             payload: {
               stateName: 'assessmentVersionItemDistinctReviseObject',
-              value: responseObject?.assessmentVersionItemDistinct[currentItemIndex + 1]
+              value:
+                assessmentSelecedSectionVersionData?.assessmentVersionItemDistinct[
+                  currentItemIndex + 1
+                ]
             }
           });
         }
@@ -439,7 +445,7 @@ export const DisplayPaneFive = () => {
     } else {
     }
   };
-  console.log('assessmentSelecedSectionVersionData',assessmentSelecedSectionVersionData);
+  console.log('assessmentSelecedSectionVersionData', assessmentSelecedSectionVersionData);
   const onClickReviseFinish = () => {
     setIsShowReviseIcon(true);
     if (isAssessmentSectionShow) {
@@ -560,11 +566,8 @@ export const DisplayPaneFive = () => {
     (isAssessmentPreviewShow &&
       responseObject?.informationFramework?.assessmentSection[currentSectionIndex]
         .assessmentVersion[currentVersionIndex].assessmentVersionItemDistinct) ||
-    (isAssessmentVersionShow && responseObject?.assessmentVersionItemDistinct);
-  console.log('itemListArray', itemListArray);
-  var itemObect =
-    (itemListArray.length > 0 && itemListArray[currentItemIndex].itemFrameworkOne) || '';
-  console.log('itemObect', itemObect);
+    (isAssessmentVersionShow && assessmentSelecedSectionVersionData?.assessmentVersionItemDistinct);
+  var itemObect = itemListArray.length > 0 && itemListArray[currentItemIndex].itemFrameworkOne;
 
   return (
     <>
@@ -663,19 +666,19 @@ export const DisplayPaneFive = () => {
               className=""
               displayPane="itemPreview"
               showClearIcon
-              headerOne={headerOne}
+              headerOne={'assessment'}
               headerOneBadgeOne={'version'}
               headerOneBadgeTwo="preview"
               headerPanelColour="blue"
               onClickClearInfo={closePreview}
             />
             <DisplayPaneFiveAssessment
-              headerOne={headerOne}
+              headerOne={'assessment'}
               //closePreview={closePreview}
               informationFramework={assessmentSelecedSectionVersionData}
               currentItemIndex={currentItemIndex}
               currentSectionIndex={currentSectionIndex}
-              currentItemResponse={itemListArray[currentItemIndex]}
+              currentItemResponse={itemListArray.length > 0 && itemListArray[currentItemIndex]}
               itemObect={itemObect}
             />
             {reviewMode === 'revise' ? (

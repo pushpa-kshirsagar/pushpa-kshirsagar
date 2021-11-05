@@ -59,7 +59,7 @@ const PopUpItemFramework = (props) => {
   const [scale, setscale] = useState('');
   const [time, settime] = useState('');
   const [weightage, setweightage] = useState('');
-  console.log('props', props);
+  // console.log('props', props);
   useEffect(() => {
     if (subQuestionId) {
       let subques = itemFrameworkOne.itemFrameworkOneSection.filter(function (sub) {

@@ -343,7 +343,17 @@ export const DisplayPaneFiveAssessment = (props) => {
       });
     }
   };
-  console.log('itemObect', itemObect);
+  const informationFrameworkObj =
+    (isAssessmentSectionShow &&
+      informationFramework?.assessmentVersion[currentVersionIndex]
+        ?.assessmentVersionItemDistinct) ||
+    (isAssessmentPreviewShow &&
+      informationFramework?.assessmentSection[currentSectionIndex]?.assessmentVersion[
+        currentVersionIndex
+      ].assessmentVersionItemDistinct) ||
+    (isAssessmentVersionShow && informationFramework?.assessmentVersionItemDistinct) ||
+    informationFramework?.assessmentSectionItemDistinct;
+  console.log('informationFrameworkObj', informationFrameworkObj);
   return (
     <>
       <div>
@@ -359,465 +369,449 @@ export const DisplayPaneFiveAssessment = (props) => {
         /> */}
       </div>
       <div className="containerPadding">
-        <AssessmentHeader
-          assessmentName={
-            (isAssessmentSectionShow && informationBasic?.assessmentName) ||
-            (isAssessmentPreviewShow && informationBasic?.assessmentName) ||
-            (isAssessmentVersionShow && informationFramework?.assessmentVersionName) ||
-            assessmentName
-          }
-          assessmentDesc={
-            (isAssessmentSectionShow && informationBasic?.assessmentDescription) ||
-            (isAssessmentPreviewShow && informationBasic?.assessmentDescription) ||
-            (isAssessmentVersionShow && informationFramework?.assessmentVersionDescription) ||
-            assessmentDescription ||
-            ''
-          }
-          assessmentSectionName={
-            (isAssessmentSectionShow && informationFramework?.assessmentSectionName) ||
-            (isAssessmentPreviewShow &&
-              informationFramework?.assessmentSection[currentSectionIndex].assessmentSectionName) ||
-            informationFramework?.assessmentSectionName ||
-            ''
-          }
-          assessmentSectionDescription={
-            (isAssessmentSectionShow && informationFramework?.assessmentSectionDescription) ||
-            (isAssessmentPreviewShow &&
-              informationFramework?.assessmentSection[currentSectionIndex]
-                .assessmentSectionDescription) ||
-            informationFramework?.assessmentSectionDescription ||
-            ''
-          }
-          id={
-            (isAssessmentSectionShow &&
-              informationFramework?.assessmentVersion[currentVersionIndex]
-                ?.assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
-            (isAssessmentPreviewShow &&
-              informationFramework?.assessmentSection[currentSectionIndex]?.assessmentVersion[
-                currentVersionIndex
-              ].assessmentVersionItemDistinct[currentItemIndex]?.itemId) ||
-            (isAssessmentVersionShow &&
-              informationFramework?.assessmentVersionItemDistinct[currentItemIndex]
-                ?.itemTagPrimary) ||
-            informationFramework?.assessmentSectionItemDistinct[currentItemIndex]?.itemId ||
-            ''
-          }
-          score={
-            (isAssessmentSectionShow &&
-              informationFramework?.assessmentVersion[currentVersionIndex]
-                ?.assessmentVersionItemDistinct[currentItemIndex]?.itemFrameworkOneScore) ||
-            (isAssessmentPreviewShow &&
-              informationFramework?.assessmentSection[currentSectionIndex]?.assessmentVersion[
-                currentVersionIndex
-              ].assessmentVersionItemDistinct[currentItemIndex]?.itemFrameworkOneScore) ||
-            (isAssessmentVersionShow && itemObect?.itemFrameworkOneScore) ||
-            itemObect?.itemFrameworkOneScore ||
-            ''
-          }
-          //isQuestionFlaged={isQuestionFlaged}
-          onClickFlag={flagQuestion}
-          isQuestionFlaged={
-            (isAssessmentSectionShow &&
-              informationFramework?.assessmentVersion[currentVersionIndex]
-                ?.assessmentVersionItemDistinct[currentItemIndex]
-                ?.assesseeAssignmentAssessmentItemFlagged) ||
-            itemObect?.assesseeAssignmentAssessmentItemFlagged ||
-            false
-          }
-          timerFinished={timerFinished}
-          timer={timer}
-          totalQuestion={
-            (isAssessmentSectionShow &&
-              informationFramework?.assessmentVersion[currentVersionIndex]
-                ?.assessmentVersionItemDistinct.length) ||
-            (isAssessmentPreviewShow &&
-              informationFramework?.assessmentSection[currentSectionIndex]?.assessmentVersion[
-                currentVersionIndex
-              ].assessmentVersionItemDistinct.length) ||
-            (isAssessmentVersionShow &&
-              informationFramework?.assessmentVersionItemDistinct.length) ||
-            informationFramework?.assessmentSectionItemDistinct.length ||
-            0
-          }
-          isItemSequenceLabel={isAssessmentVersionShow && 'sequence'}
-          currentQuestion={
-            (isAssessmentVersionShow &&
-              informationFramework?.assessmentVersionItemDistinct[currentItemIndex].itemSequence) ||
-            currentItemIndex + 1
-          }
-        />
+        {itemObect && (
+          <AssessmentHeader
+            assessmentName={
+              (isAssessmentSectionShow && informationBasic?.assessmentName) ||
+              (isAssessmentPreviewShow && informationBasic?.assessmentName) ||
+              (isAssessmentVersionShow && informationFramework?.assessmentVersionName) ||
+              assessmentName
+            }
+            assessmentDesc={
+              (isAssessmentSectionShow && informationBasic?.assessmentDescription) ||
+              (isAssessmentPreviewShow && informationBasic?.assessmentDescription) ||
+              (isAssessmentVersionShow && informationFramework?.assessmentVersionDescription) ||
+              assessmentDescription ||
+              ''
+            }
+            assessmentSectionName={
+              (isAssessmentSectionShow && informationFramework?.assessmentSectionName) ||
+              (isAssessmentPreviewShow &&
+                informationFramework?.assessmentSection[currentSectionIndex]
+                  .assessmentSectionName) ||
+              informationFramework?.assessmentSectionName ||
+              ''
+            }
+            assessmentSectionDescription={
+              (isAssessmentSectionShow && informationFramework?.assessmentSectionDescription) ||
+              (isAssessmentPreviewShow &&
+                informationFramework?.assessmentSection[currentSectionIndex]
+                  .assessmentSectionDescription) ||
+              informationFramework?.assessmentSectionDescription ||
+              ''
+            }
+            id={
+              (informationFrameworkObj.length > 0 &&
+                informationFrameworkObj[currentItemIndex]?.itemId) ||
+              informationFrameworkObj[currentItemIndex]?.itemTagPrimary ||
+              ''
+            }
+            score={
+              (informationFrameworkObj.length > 0 &&
+                informationFrameworkObj[currentItemIndex]?.itemFrameworkOne
+                  ?.itemFrameworkOneScore) ||
+              ''
+            }
+            //isQuestionFlaged={isQuestionFlaged}
+            onClickFlag={flagQuestion}
+            isQuestionFlaged={
+              (informationFrameworkObj.length > 0 &&
+                informationFrameworkObj[currentItemIndex]
+                  ?.assesseeAssignmentAssessmentItemFlagged) ||
+              false
+            }
+            timerFinished={timerFinished}
+            timer={timer}
+            totalQuestion={informationFrameworkObj.length}
+            isItemSequenceLabel={isAssessmentVersionShow && 'sequence'}
+            currentQuestion={
+              isAssessmentVersionShow
+                ? informationFrameworkObj.length > 0 &&
+                  informationFrameworkObj[currentItemIndex].itemSequence
+                : currentItemIndex + 1
+            }
+          />
+        )}
 
         <div className="" style={{ height: 'calc(100vh - 200px)', overflow: 'overlay' }}>
-          {/* item label */}
-          {itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia !== '' && (
-            <div className={'innerpadding'}>
-              <div className={['ex_container', 'ig-label'].join(' ')}>
-                <EditorTemplate
-                  label={'itemFrameworkOneLabel'}
-                  jsonData={itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Passage */}
-
-          {itemObect?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia && (
-            <div className={'innerpadding'}>
-              <div className={['ex_container', 'ig-itemGeneric'].join(' ')}>
-                <EditorTemplate
-                  jsonData={itemObect?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
-                  label={'passage'}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* item */}
-          {(itemObect?.itemFrameworkOneMedia !== '' || reviewReviseMode === 'revise') && (
-            <div
-              className={'innerpadding'}
-              style={{ cursor: reviewReviseMode === 'revise' ? 'pointer' : '' }}
-              onClick={
-                reviewReviseMode === 'revise'
-                  ? () => {
-                      dispatch({
-                        type: SET_POPUP_VALUE,
-                        payload: {
-                          isPopUpValue: 'ITEM_PRIMARY_POPUP',
-                          popupMode: popupMode
-                        }
-                      });
-                    }
-                  : null
-              }
-            >
-              {itemObect?.itemFrameworkOneMedia !== '' && (
-                <div className={['ex_container', 'ig-itemGeneric'].join(' ')}>
-                  <div>
+          {(itemObect && (
+            <Fragment>
+              {/* item label */}
+              {itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia !== '' && (
+                <div className={'innerpadding'}>
+                  <div className={['ex_container', 'ig-label'].join(' ')}>
                     <EditorTemplate
-                      label={'itemFrameworkOneMedia'}
-                      jsonData={itemObect?.itemFrameworkOneMedia}
+                      label={'itemFrameworkOneLabel'}
+                      jsonData={itemObect?.itemFrameworkOneLabel?.itemFrameworkOneLabelMedia}
                     />
                   </div>
                 </div>
               )}
-            </div>
-          )}
 
-          {/* item explanation */}
-          {itemObect?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia && (
-            <div className={'innerpadding'}>
-              <div className={['ex_container', 'ig-explanation'].join(' ')}>
-                <EditorTemplate
-                  label={'itemFrameworkOneExplanation'}
-                  jsonData={
-                    itemObect?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia
+              {/* Passage */}
+
+              {itemObect?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia && (
+                <div className={'innerpadding'}>
+                  <div className={['ex_container', 'ig-itemGeneric'].join(' ')}>
+                    <EditorTemplate
+                      jsonData={itemObect?.itemFrameworkOnePassage?.itemFrameworkOnePassageMedia}
+                      label={'passage'}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* item */}
+              {(itemObect?.itemFrameworkOneMedia !== '' || reviewReviseMode === 'revise') && (
+                <div
+                  className={'innerpadding'}
+                  style={{ cursor: reviewReviseMode === 'revise' ? 'pointer' : '' }}
+                  onClick={
+                    reviewReviseMode === 'revise'
+                      ? () => {
+                          dispatch({
+                            type: SET_POPUP_VALUE,
+                            payload: {
+                              isPopUpValue: 'ITEM_PRIMARY_POPUP',
+                              popupMode: popupMode
+                            }
+                          });
+                        }
+                      : null
                   }
-                />
-              </div>
-            </div>
-          )}
+                >
+                  {itemObect?.itemFrameworkOneMedia !== '' && (
+                    <div className={['ex_container', 'ig-itemGeneric'].join(' ')}>
+                      <div>
+                        <EditorTemplate
+                          label={'itemFrameworkOneMedia'}
+                          jsonData={itemObect?.itemFrameworkOneMedia}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
 
-          {/* for sub item  */}
-          {(itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440c9' ||
-            itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23') && (
-            <div className="likartscale">
-              <FormControl component="fieldset" style={{ width: '100%' }}>
-                {assessmentScale.length > 0 && (
-                  <div className="likart">
-                    <div class="item"></div>
+              {/* item explanation */}
+              {itemObect?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia && (
+                <div className={'innerpadding'}>
+                  <div className={['ex_container', 'ig-explanation'].join(' ')}>
+                    <EditorTemplate
+                      label={'itemFrameworkOneExplanation'}
+                      jsonData={
+                        itemObect?.itemFrameworkOneExplanation?.itemFrameworkOneExplanationMedia
+                      }
+                    />
+                  </div>
+                </div>
+              )}
 
-                    {assessmentScale.map((ob, key) => {
+              {/* for sub item  */}
+              {(itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440c9' ||
+                itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23') && (
+                <div className="likartscale">
+                  <FormControl component="fieldset" style={{ width: '100%' }}>
+                    {assessmentScale.length > 0 && (
+                      <div className="likart">
+                        <div class="item"></div>
+
+                        {assessmentScale.map((ob, key) => {
+                          return (
+                            <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
+                              {/* {ob.assessmentScaleOneName} */}
+                              <div style={{ display: 'inline-block' }}>
+                                <div
+                                  className={[
+                                    'midPaneInformationScale',
+                                    ob.assessmentScaleOneDescription !== '' ? null : 'aliasmiddle'
+                                  ].join(' ')}
+                                >
+                                  {ob.assessmentScaleOneName}
+                                </div>
+                                <div className={['midPaneLabelScale', 'textOverflow'].join(' ')}>
+                                  {ob.assessmentScaleOneDescription}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                    {itemObect?.itemFrameworkOneSection.map((ob, keys) => {
                       return (
-                        <div className={'likert_choice-sclae'} style={{ fontSize: '1.2rem' }}>
-                          {/* {ob.assessmentScaleOneName} */}
-                          <div style={{ display: 'inline-block' }}>
-                            <div
-                              className={[
-                                'midPaneInformationScale',
-                                ob.assessmentScaleOneDescription !== '' ? null : 'aliasmiddle'
-                              ].join(' ')}
-                            >
-                              {ob.assessmentScaleOneName}
+                        <Fragment>
+                          {(ob.itemFrameworkOneSection?.itemFrameworkOneMedia ||
+                            reviewReviseMode === 'revise') && (
+                            <div className="likart">
+                              <Fragment>
+                                <div style={{ flex: '3' }}>
+                                  <div
+                                    className={['item'].join(' ')}
+                                    subQuestionId={ob.itemFrameworkOneSectionSequence}
+                                    style={{
+                                      cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
+                                    }}
+                                    onClick={
+                                      reviewReviseMode === 'revise'
+                                        ? () => {
+                                            dispatch({
+                                              type: SET_POPUP_VALUE,
+                                              payload: {
+                                                isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
+                                                popupMode: `LIKERT_ITEM_MEDIA_TEXT_${keys}`
+                                              }
+                                            });
+                                          }
+                                        : null
+                                    }
+                                  >
+                                    {/* {ob?.itemFrameworkOneSection?.itemFrameworkOneMedia || ( */}
+                                    <EditorTemplate
+                                      label={'sub item'}
+                                      jsonData={ob.itemFrameworkOneSection?.itemFrameworkOneMedia}
+                                    />
+                                    {/* )} */}
+                                  </div>
+                                  <div>
+                                    {ob.itemFrameworkOneSection?.itemFrameworkOneExplanation
+                                      ?.itemFrameworkOneExplanationMedia && (
+                                      <div>
+                                        <div className={['ig-explanation '].join(' ')}>
+                                          <EditorTemplate
+                                            jsonData={
+                                              ob.itemFrameworkOneSection
+                                                ?.itemFrameworkOneExplanation
+                                                ?.itemFrameworkOneExplanationMedia
+                                            }
+                                            label={'itemFrameworkOneExplanationMedia'}
+                                          />
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                {ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice.map(
+                                  (opt, key) => {
+                                    return (
+                                      <>
+                                        <div
+                                          key={`op-${key}`}
+                                          className={'likert_choice-sclae'}
+                                          style={{ display: 'inline-table' }}
+                                        >
+                                          <input
+                                            type="radio"
+                                            name={`option1-${ob.itemFrameworkOneSectionSequence}`}
+                                            value={`${keys}-${key}`}
+                                            // onChange={handleClick}
+                                            style={{
+                                              cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
+                                            }}
+                                          />
+                                          <div
+                                            className={'likert-choice-font'}
+                                            style={{
+                                              cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
+                                            }}
+                                          >
+                                            {/* {opt.itemFrameworkOneResponseChoiceMedia || ( */}
+                                            <EditorTemplate
+                                              label={'subitemchoice'}
+                                              jsonData={opt.itemFrameworkOneResponseChoiceMedia}
+                                            />
+                                            {/* )} */}
+                                          </div>
+                                          <div
+                                            className={[
+                                              'likert-choice-font',
+                                              'ig-explanation'
+                                            ].join(' ')}
+                                            style={{
+                                              cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
+                                            }}
+                                          >
+                                            {/* {opt.itemFrameworkOneResponseChoiceExplanation
+                                          ?.itemFrameworkOneResponseChoiceExplanationMedia || ( */}
+                                            <EditorTemplate
+                                              jsonData={
+                                                opt.itemFrameworkOneResponseChoiceExplanation
+                                                  ?.itemFrameworkOneResponseChoiceExplanationMedia
+                                              }
+                                            />
+                                            {/* )} */}
+                                          </div>
+                                        </div>
+                                      </>
+                                    );
+                                  }
+                                )}
+                              </Fragment>
                             </div>
-                            <div className={['midPaneLabelScale', 'textOverflow'].join(' ')}>
-                              {ob.assessmentScaleOneDescription}
-                            </div>
-                          </div>
-                        </div>
+                          )}
+                        </Fragment>
                       );
                     })}
+                  </FormControl>
+                </div>
+              )}
+
+              {/* response label */}
+              {itemObect?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia && (
+                <div className={'innerpadding'}>
+                  <div className={['ex_container', 'ig-label'].join(' ')}>
+                    <EditorTemplate
+                      label={'itemFrameworkOneResponseLabel'}
+                      jsonData={
+                        itemObect?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia
+                      }
+                    />
                   </div>
-                )}
-                {itemObect?.itemFrameworkOneSection.map((ob, keys) => {
+                </div>
+              )}
+
+              {/* response */}
+              {(itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cd' ||
+                itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cc' ||
+                itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23') && (
+                <div className={'innerpadding'}>
+                  <div
+                    className={'ex_container'}
+                    style={{
+                      cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
+                    }}
+                    onClick={
+                      reviewReviseMode === 'revise'
+                        ? () => {
+                            dispatch({
+                              type: SET_POPUP_VALUE,
+                              payload: {
+                                isPopUpValue: 'RESPONSE_PRIMARY_POPUP',
+                                popupMode: 'RESPONSE_SECONDARY_POPUP'
+                              }
+                            });
+                          }
+                        : null
+                    }
+                  >
+                    {ReactHTMLParser(responseText)}
+                  </div>
+                </div>
+              )}
+
+              {/* responce explanation */}
+              {itemObect?.itemFrameworkOneResponseExplanation
+                ?.itemFrameworkOneResponseExplanationMedia && (
+                <div className={'innerpadding'}>
+                  <div className={['ex_container', 'ig-explanation '].join(' ')}>
+                    <EditorTemplate
+                      jsonData={
+                        itemObect?.itemFrameworkOneResponseExplanation
+                          ?.itemFrameworkOneResponseExplanationMedia
+                      }
+                      label={'itemFrameworkOneResponseExplanationMedia'}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* response choices */}
+              {itemObect?.itemFrameworkOneResponseChoice &&
+                itemObect?.itemFrameworkOneResponseChoice.map((op, key) => {
                   return (
                     <Fragment>
-                      {(ob.itemFrameworkOneSection?.itemFrameworkOneMedia ||
-                        reviewReviseMode === 'revise') && (
-                        <div className="likart">
-                          <Fragment>
-                            <div style={{ flex: '3' }}>
-                              <div
-                                className={['item'].join(' ')}
-                                subQuestionId={ob.itemFrameworkOneSectionSequence}
-                                style={{
-                                  cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
-                                }}
-                                onClick={
-                                  reviewReviseMode === 'revise'
-                                    ? () => {
-                                        dispatch({
-                                          type: SET_POPUP_VALUE,
-                                          payload: {
-                                            isPopUpValue: 'SUB_ITEM_PRIMARY_POPUP',
-                                            popupMode: `LIKERT_ITEM_MEDIA_TEXT_${keys}`
-                                          }
-                                        });
-                                      }
-                                    : null
+                      {op.itemFrameworkOneResponseChoiceMedia !== '' && (
+                        <div key={`op-${key}`} className={'innerpadding'}>
+                          <div className="option-container ex_container" key={`option-${key}`}>
+                            <div
+                              style={{
+                                paddingRight: '5px',
+                                display: 'flex',
+                                alignItems: 'center'
+                              }}
+                            >
+                              <input
+                                type="radio"
+                                name="option1"
+                                style={{ cursor: 'pointer' }}
+                                value={`${op.itemFrameworkOneResponseChoiceNumber}`}
+                                onChange={
+                                  isAssessmentPreviewShow || isAssessmentSectionShow
+                                    ? null
+                                    : handleRadioButton
                                 }
-                              >
-                                {/* {ob?.itemFrameworkOneSection?.itemFrameworkOneMedia || ( */}
-                                <EditorTemplate
-                                  label={'sub item'}
-                                  jsonData={ob.itemFrameworkOneSection?.itemFrameworkOneMedia}
-                                />
-                                {/* )} */}
-                              </div>
-                              <div>
-                                {ob.itemFrameworkOneSection?.itemFrameworkOneExplanation
-                                  ?.itemFrameworkOneExplanationMedia && (
-                                  <div>
-                                    <div className={['ig-explanation '].join(' ')}>
-                                      <EditorTemplate
-                                        jsonData={
-                                          ob.itemFrameworkOneSection?.itemFrameworkOneExplanation
-                                            ?.itemFrameworkOneExplanationMedia
-                                        }
-                                        label={'itemFrameworkOneExplanationMedia'}
-                                      />
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
+                                checked={
+                                  isAssessmentPreviewShow ||
+                                  isAssessmentSectionShow ||
+                                  isAssessmentVersionShow
+                                    ? op.itemFrameworkOneResponseChoiceNumber ===
+                                      itemObect?.itemFrameworkOneResponseCorrect[0]
+                                    : currentQuestionChoice ===
+                                      op.itemFrameworkOneResponseChoiceNumber
+                                }
+                              />
                             </div>
-                            {ob.itemFrameworkOneSection?.itemFrameworkOneResponseChoice.map(
-                              (opt, key) => {
-                                return (
-                                  <>
-                                    <div
-                                      key={`op-${key}`}
-                                      className={'likert_choice-sclae'}
-                                      style={{ display: 'inline-table' }}
-                                    >
-                                      <input
-                                        type="radio"
-                                        name={`option1-${ob.itemFrameworkOneSectionSequence}`}
-                                        value={`${keys}-${key}`}
-                                        // onChange={handleClick}
-                                        style={{
-                                          cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
-                                        }}
-                                      />
-                                      <div
-                                        className={'likert-choice-font'}
-                                        style={{
-                                          cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
-                                        }}
-                                      >
-                                        {/* {opt.itemFrameworkOneResponseChoiceMedia || ( */}
-                                        <EditorTemplate
-                                          label={'subitemchoice'}
-                                          jsonData={opt.itemFrameworkOneResponseChoiceMedia}
-                                        />
-                                        {/* )} */}
-                                      </div>
-                                      <div
-                                        className={['likert-choice-font', 'ig-explanation'].join(
-                                          ' '
-                                        )}
-                                        style={{
-                                          cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
-                                        }}
-                                      >
-                                        {/* {opt.itemFrameworkOneResponseChoiceExplanation
-                                          ?.itemFrameworkOneResponseChoiceExplanationMedia || ( */}
-                                        <EditorTemplate
-                                          jsonData={
-                                            opt.itemFrameworkOneResponseChoiceExplanation
-                                              ?.itemFrameworkOneResponseChoiceExplanationMedia
-                                          }
-                                        />
-                                        {/* )} */}
-                                      </div>
-                                    </div>
-                                  </>
-                                );
+
+                            <div
+                              className={['ig-itemGeneric '].join(' ')}
+                              style={{
+                                paddingLeft: '5px',
+                                cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
+                              }}
+                              onClick={
+                                reviewReviseMode === 'revise'
+                                  ? () => {
+                                      dispatch({
+                                        type: SET_POPUP_VALUE,
+                                        payload: {
+                                          isPopUpValue: 'ASSESSMENTITEM_OPTION_PRIMARY_POPUP',
+                                          popupMode: `OPTION_${key}`
+                                        }
+                                      });
+                                      setSelectedChoiceObject(op);
+                                    }
+                                  : null
                               }
+                            >
+                              <EditorTemplate
+                                jsonData={op.itemFrameworkOneResponseChoiceMedia}
+                                label={'itemFrameworkOneResponseChoiceMedia'}
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            {op.itemFrameworkOneResponseChoiceExplanation
+                              ?.itemFrameworkOneResponseChoiceExplanationMedia && (
+                              <div style={{ paddingLeft: '25px', display: 'inline-block' }}>
+                                <div className={['ex_container', 'ig-explanation '].join(' ')}>
+                                  <EditorTemplate
+                                    jsonData={
+                                      op.itemFrameworkOneResponseChoiceExplanation
+                                        ?.itemFrameworkOneResponseChoiceExplanationMedia
+                                    }
+                                    label={'itemFrameworkOneResponseChoiceExplanationMedia'}
+                                  />
+                                </div>
+                              </div>
                             )}
-                          </Fragment>
+                          </div>
                         </div>
                       )}
                     </Fragment>
                   );
                 })}
-              </FormControl>
-            </div>
-          )}
 
-          {/* response label */}
-          {itemObect?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia && (
-            <div className={'innerpadding'}>
-              <div className={['ex_container', 'ig-label'].join(' ')}>
-                <EditorTemplate
-                  label={'itemFrameworkOneResponseLabel'}
-                  jsonData={
-                    itemObect?.itemFrameworkOneResponseLabel?.itemFrameworkOneResponseLabelMedia
-                  }
-                />
+              <div>
+                <div
+                  style={{
+                    height: '55px'
+                  }}
+                ></div>
               </div>
-            </div>
-          )}
-
-          {/* response */}
-          {(itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cd' ||
-            itemObect?.itemFrameworkOneType === '61090cace50cf61d5eb440cc' ||
-            itemObect?.itemFrameworkOneType === '61161713f24e1fb765208e23') && (
-            <div className={'innerpadding'}>
-              <div
-                className={'ex_container'}
-                style={{
-                  cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
-                }}
-                onClick={
-                  reviewReviseMode === 'revise'
-                    ? () => {
-                        dispatch({
-                          type: SET_POPUP_VALUE,
-                          payload: {
-                            isPopUpValue: 'RESPONSE_PRIMARY_POPUP',
-                            popupMode: 'RESPONSE_SECONDARY_POPUP'
-                          }
-                        });
-                      }
-                    : null
-                }
-              >
-                {ReactHTMLParser(responseText)}
-              </div>
-            </div>
-          )}
-
-          {/* responce explanation */}
-          {itemObect?.itemFrameworkOneResponseExplanation
-            ?.itemFrameworkOneResponseExplanationMedia && (
-            <div className={'innerpadding'}>
-              <div className={['ex_container', 'ig-explanation '].join(' ')}>
-                <EditorTemplate
-                  jsonData={
-                    itemObect?.itemFrameworkOneResponseExplanation
-                      ?.itemFrameworkOneResponseExplanationMedia
-                  }
-                  label={'itemFrameworkOneResponseExplanationMedia'}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* response choices */}
-          {itemObect?.itemFrameworkOneResponseChoice &&
-            itemObect?.itemFrameworkOneResponseChoice.map((op, key) => {
-              return (
-                <Fragment>
-                  {op.itemFrameworkOneResponseChoiceMedia !== '' && (
-                    <div key={`op-${key}`} className={'innerpadding'}>
-                      <div className="option-container ex_container" key={`option-${key}`}>
-                        <div
-                          style={{
-                            paddingRight: '5px',
-                            display: 'flex',
-                            alignItems: 'center'
-                          }}
-                        >
-                          <input
-                            type="radio"
-                            name="option1"
-                            style={{ cursor: 'pointer' }}
-                            value={`${op.itemFrameworkOneResponseChoiceNumber}`}
-                            onChange={
-                              isAssessmentPreviewShow || isAssessmentSectionShow
-                                ? null
-                                : handleRadioButton
-                            }
-                            checked={
-                              isAssessmentPreviewShow ||
-                              isAssessmentSectionShow ||
-                              isAssessmentVersionShow
-                                ? op.itemFrameworkOneResponseChoiceNumber ===
-                                  itemObect?.itemFrameworkOneResponseCorrect[0]
-                                : currentQuestionChoice === op.itemFrameworkOneResponseChoiceNumber
-                            }
-                          />
-                        </div>
-
-                        <div
-                          className={['ig-itemGeneric '].join(' ')}
-                          style={{
-                            paddingLeft: '5px',
-                            cursor: reviewReviseMode === 'revise' ? 'pointer' : ''
-                          }}
-                          onClick={
-                            reviewReviseMode === 'revise'
-                              ? () => {
-                                  dispatch({
-                                    type: SET_POPUP_VALUE,
-                                    payload: {
-                                      isPopUpValue: 'ASSESSMENTITEM_OPTION_PRIMARY_POPUP',
-                                      popupMode: `OPTION_${key}`
-                                    }
-                                  });
-                                  setSelectedChoiceObject(op);
-                                }
-                              : null
-                          }
-                        >
-                          <EditorTemplate
-                            jsonData={op.itemFrameworkOneResponseChoiceMedia}
-                            label={'itemFrameworkOneResponseChoiceMedia'}
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        {op.itemFrameworkOneResponseChoiceExplanation
-                          ?.itemFrameworkOneResponseChoiceExplanationMedia && (
-                          <div style={{ paddingLeft: '25px', display: 'inline-block' }}>
-                            <div className={['ex_container', 'ig-explanation '].join(' ')}>
-                              <EditorTemplate
-                                jsonData={
-                                  op.itemFrameworkOneResponseChoiceExplanation
-                                    ?.itemFrameworkOneResponseChoiceExplanationMedia
-                                }
-                                label={'itemFrameworkOneResponseChoiceExplanationMedia'}
-                              />
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </Fragment>
-              );
-            })}
-
-          <div>
-            <div
-              style={{
-                height: '55px'
-              }}
-            ></div>
-          </div>
+            </Fragment>
+          )) ||
+            'No Information'}
         </div>
       </div>
 
@@ -994,7 +988,7 @@ export const DisplayPaneFiveAssessment = (props) => {
         itemFrameworkOne={itemObect}
         currentItemIndex={currentItemIndex}
         currentVersionIndex={currentVersionIndex}
-        currentItemSequence={currentItemResponse.itemSequence}
+        currentItemSequence={(currentItemResponse && currentItemResponse?.itemSequence) || 0}
       />
     </>
   );

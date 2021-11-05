@@ -34,7 +34,7 @@ const PopUpItemConfig = (props) => {
     basicInfo,
     mode,
     isItemFramework = false,
-    itemFrameworkOne,
+    itemFrameworkOne = '',
     headerOneBadgeTwo = '',
     assessmentItemSequence = false,
     currentItemSequence
@@ -61,23 +61,23 @@ const PopUpItemConfig = (props) => {
   const [response_Aligement, Set_Response_Aligement] = useState(
     itemFrameworkOne?.itemFrameworkOneResponseAlignment
   );
-  const [sub_item, setSubItem] = useState(itemFrameworkOne?.itemFrameworkOneSection?.length);
-  const [response_Choice, set_Response_Choice] = useState(
-    itemFrameworkOne?.itemFrameworkOneResponseChoice.length
-  );
+  const [sub_item, setSubItem] = useState();
+  const [response_Choice, set_Response_Choice] = useState();
   useEffect(() => {
-    set_Response_Choice(
-      itemFrameworkOne?.itemFrameworkOneResponseChoice.length === 0
-        ? 3
-        : itemFrameworkOne?.itemFrameworkOneResponseChoice.length
-    );
-    // set_Response_Choice(2);
-    setSubItem(itemFrameworkOne?.itemFrameworkOneSection?.length);
-    set_Item_Aligement(itemFrameworkOne?.itemFrameworkOneAlignment);
-    set_Item_Type(itemFrameworkOne?.itemFrameworkOneType);
-    Set_Response_Aligement(itemFrameworkOne?.itemFrameworkOneResponseAlignment);
-    set_Response_Word(itemFrameworkOne?.itemFrameworkOneWord?.itemFrameworkOneWordMaximum);
-    set_item_sequence(currentItemSequence);
+    if (itemFrameworkOne) {
+      set_Response_Choice(
+        itemFrameworkOne?.itemFrameworkOneResponseChoice.length === 0
+          ? 3
+          : itemFrameworkOne?.itemFrameworkOneResponseChoice.length
+      );
+      // set_Response_Choice(2);
+      setSubItem(itemFrameworkOne?.itemFrameworkOneSection?.length);
+      set_Item_Aligement(itemFrameworkOne?.itemFrameworkOneAlignment);
+      set_Item_Type(itemFrameworkOne?.itemFrameworkOneType);
+      Set_Response_Aligement(itemFrameworkOne?.itemFrameworkOneResponseAlignment);
+      set_Response_Word(itemFrameworkOne?.itemFrameworkOneWord?.itemFrameworkOneWordMaximum);
+      set_item_sequence(currentItemSequence);
+    }
   }, [itemFrameworkOne]);
   const dispatch = useDispatch();
   const subItemList = itemFrameworkOne?.itemFrameworkOneSection;
@@ -149,8 +149,6 @@ const PopUpItemConfig = (props) => {
         }
       });
     } else if (isAssessmentVersionShow) {
-      console.log('currentItemSequence', currentItemSequence);
-      console.log('item_sequence', item_sequence);
       let array =
         JSON.parse(
           JSON.stringify(assessmentSelecedSectionVersionData.assessmentVersionItemDistinct)

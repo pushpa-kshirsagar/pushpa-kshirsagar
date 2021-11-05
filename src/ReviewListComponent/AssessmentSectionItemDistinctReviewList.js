@@ -50,7 +50,8 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
     unselectedTagsArray,
     typeOfMiddlePaneList,
     assessmentResponseObject,
-    relatedReviewListReqObj
+    relatedReviewListReqObj,
+    assessmentSelecedSection
   } = useSelector((state) => state.DisplayPaneTwoReducer);
   const { FilterModeEnable, FilterMode } = useSelector((state) => state.FilterReducer);
   const { sectionInformation } = useSelector((state) => state.SectionCreateReducer);
@@ -130,6 +131,7 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
       let reviseArray = [];
       selectedTagsArray.map((it, ind) => {
         reviseArray.push({
+          // itemSequence: 0,
           itemSequence: ind + 1,
           itemTagPrimary: it
         });
@@ -220,7 +222,8 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
       }
     });
   };
-  console.log('listDistinctData', listDistinctData);
+  const itemTotalForVer =
+    assessmentResponseObject.informationFramework?.assessmentSection[assessmentSelecedSection];
   return (
     <div>
       {listDistinctData && (
@@ -254,7 +257,20 @@ const AssessmentSectionItemDistinctReviewList = (props) => {
                 isSelectActive={isSelectActive}
                 isSelected={selectedTagsArray.includes(item?.id || item?.itemTagPrimary)}
                 onClickCheckBox={(event) => {
-                  onClickCheckBoxSelection(selectedTagsArray, unselectedTagsArray, event, dispatch);
+                  itemTotalForVer?.assessmentSectionItemTotal
+                    ? selectedTagsArray.length < itemTotalForVer?.assessmentSectionItemTotal &&
+                      onClickCheckBoxSelection(
+                        selectedTagsArray,
+                        unselectedTagsArray,
+                        event,
+                        dispatch
+                      )
+                    : onClickCheckBoxSelection(
+                        selectedTagsArray,
+                        unselectedTagsArray,
+                        event,
+                        dispatch
+                      );
                 }}
               />
             </div>
